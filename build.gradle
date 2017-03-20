@@ -1,0 +1,45 @@
+buildscript {
+    repositories { mavenCentral() }
+    dependencies { classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.1.RELEASE") }
+}
+
+apply plugin: 'groovy'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'eclipse'
+
+tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
+tasks.withType(GroovyCompile) { options.encoding = 'UTF-8' }
+
+group = 'com.blackducksoftware.integration'
+version = '0.0.1-SNAPSHOT'
+description = ''
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+springBoot { mainClass = 'com.blackducksoftware.integration.hub.linux.Application' }
+
+task produceFinalZip(type: Zip, dependsOn: build) {
+    from("${buildDir}/libs") { include '*.jar' }
+    from("${projectDir}/src/main/resources") {
+        include 'application.properties'
+        into 'config'
+    }
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    compile 'com.blackducksoftware.integration:hub-common:8.3.0'
+
+    compile 'org.apache.commons:commons-lang3:3.5'
+    compile 'commons-io:commons-io:2.5'
+
+    compile 'org.springframework.boot:spring-boot-starter'
+    compile 'org.codehaus.groovy:groovy-all:2.4.8'
+
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+}

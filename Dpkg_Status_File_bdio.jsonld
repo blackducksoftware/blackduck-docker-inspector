@@ -1,0 +1,1094 @@
+[
+  {
+    "specVersion": "1.1.0",
+    "@id": "uuid:ee359adf-e50d-45c8-a373-9c0fe25e67e7",
+    "@type": "BillOfMaterials",
+    "name": "DpkgStatusFile Black Duck I/O Export",
+    "relationship": []
+  },
+  {
+    "revision": "1",
+    "@id": "uuid:bf2d75ea-7b51-4a2a-92ab-7b60e9a4c0d8",
+    "@type": "Project",
+    "name": "DpkgStatusFile",
+    "relationship": []
+  },
+  {
+    "revision": "1.1.8-3.2ubuntu2",
+    "@id": "uuid:bcd34c8b-1b7a-4c04-95a8-838cbe63e961",
+    "@type": "Component",
+    "name": "libpam-runtime",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libpam-runtime/1.1.8-3.2ubuntu2/all"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "6.0+20160213-1ubuntu1",
+    "@id": "uuid:8a05ef75-5e4d-48f1-bef0-c8a9801373f7",
+    "@type": "Component",
+    "name": "libncurses5",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libncurses5/6.0+20160213-1ubuntu1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1.2.18",
+    "@id": "uuid:6ab6f1e9-38fd-46ea-98ed-a50066d3dbf4",
+    "@type": "Component",
+    "name": "libapt-pkg5.0",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libapt-pkg5.0/1.2.18/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1:2.4.5-1ubuntu2",
+    "@id": "uuid:77c1ad7e-6b1c-40ea-981e-cfbbe81eae0b",
+    "@type": "Component",
+    "name": "libaudit1",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libaudit1/1:2.4.5-1ubuntu2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "6.3-8ubuntu2",
+    "@id": "uuid:df1360bf-282b-4565-b3c0-8e015c90b32f",
+    "@type": "Component",
+    "name": "readline-common",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "readline-common/6.3-8ubuntu2/all"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2.3.1-93ubuntu1",
+    "@id": "uuid:7d393720-0937-4cd8-83fe-227f3ad160dc",
+    "@type": "Component",
+    "name": "makedev",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "makedev/2.3.1-93ubuntu1/all"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "6.0+20160213-1ubuntu1",
+    "@id": "uuid:44aed07b-b57d-4dd7-9dea-6c086d2465bd",
+    "@type": "Component",
+    "name": "libtinfo5",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libtinfo5/6.0+20160213-1ubuntu1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "5.22.1-9",
+    "@id": "uuid:82bffff2-bd57-4585-930f-f73a6554e166",
+    "@type": "Component",
+    "name": "perl-base",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "perl-base/5.22.1-9/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "229-4ubuntu13",
+    "@id": "uuid:117c77d9-7749-4d20-8017-46cae73e3616",
+    "@type": "Component",
+    "name": "libudev1",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libudev1/229-4ubuntu13/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1:2.4.47-2",
+    "@id": "uuid:e0432e3c-cfbb-4ba6-aa5e-1e22899f6024",
+    "@type": "Component",
+    "name": "libattr1",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libattr1/1:2.4.47-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1.42.13-1ubuntu1",
+    "@id": "uuid:aa60b29d-bbc6-4475-8e1d-0cf8baf80ceb",
+    "@type": "Component",
+    "name": "libss2",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libss2/1.42.13-1ubuntu1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "5.1.1alpha+20120614-2ubuntu2",
+    "@id": "uuid:ed6050dc-76bd-45b5-83f3-b0d97c24cbf8",
+    "@type": "Component",
+    "name": "liblzma5",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "liblzma5/5.1.1alpha+20120614-2ubuntu2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1.1.8-3.2ubuntu2",
+    "@id": "uuid:3a374c32-f1bf-4ff2-a86a-58ae37d36b1b",
+    "@type": "Component",
+    "name": "libpam-modules-bin",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libpam-modules-bin/1.1.8-3.2ubuntu2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2.25-1~16.04.1",
+    "@id": "uuid:fde103d3-afec-4a53-856b-57f42e3ad6bc",
+    "@type": "Component",
+    "name": "grep",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "grep/2.25-1~16.04.1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "3.5.39",
+    "@id": "uuid:556bda80-6e68-4fe3-9f5d-24bad17f61fd",
+    "@type": "Component",
+    "name": "base-passwd",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "base-passwd/3.5.39/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1.42.13-1ubuntu1",
+    "@id": "uuid:57da5a44-5a9d-4b23-b9a0-cb07d16c1053",
+    "@type": "Component",
+    "name": "e2fslibs",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "e2fslibs/1.42.13-1ubuntu1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "0.0~r131-2ubuntu2",
+    "@id": "uuid:a67bb2d3-3df2-4905-9c52-8de46dd56d6f",
+    "@type": "Component",
+    "name": "liblz4-1",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "liblz4-1/0.0~r131-2ubuntu2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "4.7",
+    "@id": "uuid:11b677e5-c023-4054-8865-8c9142b6a520",
+    "@type": "Component",
+    "name": "debianutils",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "debianutils/4.7/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1.6.5-2ubuntu0.2",
+    "@id": "uuid:67940650-1907-4b60-bd42-97e18cfa59bf",
+    "@type": "Component",
+    "name": "libgcrypt20",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libgcrypt20/1.6.5-2ubuntu0.2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "6.0+20160213-1ubuntu1",
+    "@id": "uuid:e232d3cc-c633-4ace-a90c-aef65fd7b2f4",
+    "@type": "Component",
+    "name": "libncursesw5",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libncursesw5/6.0+20160213-1ubuntu1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "4.3-14ubuntu1.1",
+    "@id": "uuid:7267ede6-3fa7-4787-ba07-2366cd954ece",
+    "@type": "Component",
+    "name": "bash",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "bash/4.3-14ubuntu1.1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2.27.1-6ubuntu3.2",
+    "@id": "uuid:23c37928-447b-4593-9d9d-b6d243d8aa93",
+    "@type": "Component",
+    "name": "libuuid1",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libuuid1/2.27.1-6ubuntu3.2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "5.3.28-11",
+    "@id": "uuid:f1705df1-2e59-4a21-98ef-74bedb121bd2",
+    "@type": "Component",
+    "name": "libdb5.3",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libdb5.3/5.3.28-11/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1:2.24-12",
+    "@id": "uuid:44e182a1-f72f-488b-bc33-466cffa3f038",
+    "@type": "Component",
+    "name": "libcap2-bin",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libcap2-bin/1:2.24-12/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1.5.58ubuntu1",
+    "@id": "uuid:51176dfd-f0d4-4d79-bca6-78f56a1fd020",
+    "@type": "Component",
+    "name": "debconf",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "debconf/1.5.58ubuntu1/all"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1:1.2.8.dfsg-2ubuntu4",
+    "@id": "uuid:2a0324c3-73fd-49e2-8efb-8e15ef019411",
+    "@type": "Component",
+    "name": "zlib1g",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "zlib1g/1:1.2.8.dfsg-2ubuntu4/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "3.16ubuntu2",
+    "@id": "uuid:ac66c583-9ec4-4986-aa58-fc81bf616cfd",
+    "@type": "Component",
+    "name": "hostname",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "hostname/3.16ubuntu2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2.23-0ubuntu5",
+    "@id": "uuid:4bea4852-c85d-46b9-a340-b46f486d0539",
+    "@type": "Component",
+    "name": "multiarch-support",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "multiarch-support/2.23-0ubuntu5/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2016j-0ubuntu0.16.04",
+    "@id": "uuid:b67e367c-77ba-4fbb-b71d-3f434e78bed3",
+    "@type": "Component",
+    "name": "tzdata",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "tzdata/2016j-0ubuntu0.16.04/all"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1.29ubuntu3",
+    "@id": "uuid:91a1bd09-8606-4199-b532-36daa95fe659",
+    "@type": "Component",
+    "name": "init",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "init/1.29ubuntu3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "229-4ubuntu13",
+    "@id": "uuid:274f8a41-cb72-4455-8478-d28ae294cd24",
+    "@type": "Component",
+    "name": "systemd-sysv",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "systemd-sysv/229-4ubuntu13/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1.3.3-17ubuntu2",
+    "@id": "uuid:c3e4191f-b0a2-4a7b-8ef5-4a2e60398379",
+    "@type": "Component",
+    "name": "mawk",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "mawk/1.3.3-17ubuntu2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1.6-4ubuntu1",
+    "@id": "uuid:708ae4df-50ff-426f-b747-df02c4c74579",
+    "@type": "Component",
+    "name": "gzip",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "gzip/1.6-4ubuntu1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1.4.20-1ubuntu3.1",
+    "@id": "uuid:ff3c1ae6-fee7-49ea-bccb-34bf820ef9d0",
+    "@type": "Component",
+    "name": "gpgv",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "gpgv/1.4.20-1ubuntu3.1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1:2.24-12",
+    "@id": "uuid:14f27d90-0b25-4cbd-b019-d3297a7adabb",
+    "@type": "Component",
+    "name": "libcap2",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libcap2/1:2.24-12/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1:2.27.1-6ubuntu3.2",
+    "@id": "uuid:ae31990b-b20f-4249-aa2b-51f56a634a8e",
+    "@type": "Component",
+    "name": "bsdutils",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "bsdutils/1:2.27.1-6ubuntu3.2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "0.5.8-2.1ubuntu2",
+    "@id": "uuid:2b2cba1a-166d-4237-a597-0c2d9223c112",
+    "@type": "Component",
+    "name": "dash",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "dash/0.5.8-2.1ubuntu2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "6.0.1-0ubuntu1",
+    "@id": "uuid:f1b1737e-6b1a-45c3-a102-36c9dbdf8e6a",
+    "@type": "Component",
+    "name": "gcc-6-base",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "gcc-6-base/6.0.1-0ubuntu1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1.4.20-1ubuntu3.1",
+    "@id": "uuid:9e8c0fa2-4dc9-454c-89e6-9816ef772e57",
+    "@type": "Component",
+    "name": "gnupg",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "gnupg/1.4.20-1ubuntu3.1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2.27.1-6ubuntu3.2",
+    "@id": "uuid:36106b5e-63fd-4510-a1a4-a9773d8c2a03",
+    "@type": "Component",
+    "name": "mount",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "mount/2.27.1-6ubuntu3.2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "229-4ubuntu13",
+    "@id": "uuid:53c9acac-bfdd-4f8a-ba73-e7e2a10d18ce",
+    "@type": "Component",
+    "name": "libsystemd0",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libsystemd0/229-4ubuntu13/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2.23-0ubuntu5",
+    "@id": "uuid:06d4b9fa-472c-43fb-85f1-26e9612b5fab",
+    "@type": "Component",
+    "name": "libc6",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libc6/2.23-0ubuntu5/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2.27.1-6ubuntu3.2",
+    "@id": "uuid:009dcdda-cd92-4914-8a4e-54135fe232b9",
+    "@type": "Component",
+    "name": "libfdisk1",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libfdisk1/2.27.1-6ubuntu3.2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2:8.38-3.1",
+    "@id": "uuid:bc165ba9-6454-4626-bddc-e543dce64b50",
+    "@type": "Component",
+    "name": "libpcre3",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libpcre3/2:8.38-3.1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2:1.02.110-1ubuntu10",
+    "@id": "uuid:743e710e-239f-4aee-9408-7fb78c590c36",
+    "@type": "Component",
+    "name": "libdevmapper1.02.1",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libdevmapper1.02.1/2:1.02.110-1ubuntu10/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "8.25-2ubuntu2",
+    "@id": "uuid:c5ff4eec-7fb5-4437-b11b-5f7471080edb",
+    "@type": "Component",
+    "name": "coreutils",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "coreutils/8.25-2ubuntu2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1.42.13-1ubuntu1",
+    "@id": "uuid:400c3bab-8366-4756-ab2c-6238db78f745",
+    "@type": "Component",
+    "name": "e2fsprogs",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "e2fsprogs/1.42.13-1ubuntu1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1.28-2.1ubuntu0.1",
+    "@id": "uuid:7855a372-46a4-477f-9198-a4cf8c360c9f",
+    "@type": "Component",
+    "name": "tar",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "tar/1.28-2.1ubuntu0.1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1.0.6-8",
+    "@id": "uuid:251cd830-d839-4252-abac-1c1a084a330f",
+    "@type": "Component",
+    "name": "libbz2-1.0",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libbz2-1.0/1.0.6-8/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "22-1ubuntu4",
+    "@id": "uuid:b745771e-690e-481a-a752-a1ae0c623e5c",
+    "@type": "Component",
+    "name": "libkmod2",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libkmod2/22-1ubuntu4/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2.27.1-6ubuntu3.2",
+    "@id": "uuid:3effaf4a-1829-4750-aae7-c5512d13c669",
+    "@type": "Component",
+    "name": "libblkid1",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libblkid1/2.27.1-6ubuntu3.2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "9.20160110ubuntu0.2",
+    "@id": "uuid:ffb00cb4-8bcb-4d6a-be66-c5601c0ad994",
+    "@type": "Component",
+    "name": "lsb-base",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "lsb-base/9.20160110ubuntu0.2/all"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2:3.3.10-4ubuntu2.3",
+    "@id": "uuid:7f6e5d04-3cfb-455f-a524-ab90a1e6f238",
+    "@type": "Component",
+    "name": "procps",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "procps/2:3.3.10-4ubuntu2.3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1.21-2ubuntu1",
+    "@id": "uuid:cb947391-edf1-4aaa-bd33-9eadef3037a2",
+    "@type": "Component",
+    "name": "libgpg-error0",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libgpg-error0/1.21-2ubuntu1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "9.4ubuntu4.3",
+    "@id": "uuid:1d95e79e-cc0e-4e73-8e26-cf3dc303f02b",
+    "@type": "Component",
+    "name": "base-files",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "base-files/9.4ubuntu4.3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "0.0.9",
+    "@id": "uuid:2a4930b1-5701-4301-a865-37197244afae",
+    "@type": "Component",
+    "name": "sensible-utils",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "sensible-utils/0.0.9/all"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1:4.2-3.1ubuntu5",
+    "@id": "uuid:88fa6cec-c04f-44af-a825-2cc80c0ba908",
+    "@type": "Component",
+    "name": "passwd",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "passwd/1:4.2-3.1ubuntu5/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1.29ubuntu3",
+    "@id": "uuid:c4a9268d-28c4-4c65-b98b-97c39e7777d1",
+    "@type": "Component",
+    "name": "init-system-helpers",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "init-system-helpers/1.29ubuntu3/all"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "6.0+20160213-1ubuntu1",
+    "@id": "uuid:1aa3dccf-65fd-4174-80cc-5ae16557a852",
+    "@type": "Component",
+    "name": "ncurses-base",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "ncurses-base/6.0+20160213-1ubuntu1/all"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2.23-0ubuntu5",
+    "@id": "uuid:0a14802e-1a8d-4538-b419-25be946dd572",
+    "@type": "Component",
+    "name": "libc-bin",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libc-bin/2.23-0ubuntu5/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2.3-1build3",
+    "@id": "uuid:e08c8f5c-f9a7-4a6e-a74c-0dd536edfca2",
+    "@type": "Component",
+    "name": "libsemanage1",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libsemanage1/2.3-1build3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2.2.3-3ubuntu3",
+    "@id": "uuid:639d4287-abf9-491b-8ff6-74ded124b9b6",
+    "@type": "Component",
+    "name": "libseccomp2",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libseccomp2/2.2.3-3ubuntu3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2.10.95-0ubuntu2.5",
+    "@id": "uuid:8b20ce89-b19e-46cb-9803-b26c2b4f8301",
+    "@type": "Component",
+    "name": "libapparmor1",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libapparmor1/2.10.95-0ubuntu2.5/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2.88dsf-59.3ubuntu2",
+    "@id": "uuid:5ebe340b-3762-40f8-86a7-6388e1efe419",
+    "@type": "Component",
+    "name": "sysvinit-utils",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "sysvinit-utils/2.88dsf-59.3ubuntu2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2.3-1build3",
+    "@id": "uuid:b3338553-f456-48b1-ae9c-425216a1129b",
+    "@type": "Component",
+    "name": "libsemanage-common",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libsemanage-common/2.3-1build3/all"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "0.198ubuntu1",
+    "@id": "uuid:7404ba08-d875-4027-947f-04cb0a3a4296",
+    "@type": "Component",
+    "name": "libdebconfclient0",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libdebconfclient0/0.198ubuntu1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2.4-3build2",
+    "@id": "uuid:5e6cbaa5-ceac-4e05-a1b8-47f9f066a406",
+    "@type": "Component",
+    "name": "libselinux1",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libselinux1/2.4-3build2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "229-4ubuntu13",
+    "@id": "uuid:bc26fd1c-7617-4918-931d-f815ca584a1b",
+    "@type": "Component",
+    "name": "systemd",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "systemd/229-4ubuntu13/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1.18.4ubuntu1.1",
+    "@id": "uuid:f4d46140-5647-4b81-925e-613e8ae6e6df",
+    "@type": "Component",
+    "name": "dpkg",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "dpkg/1.18.4ubuntu1.1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2.88dsf-59.3ubuntu2",
+    "@id": "uuid:c5975176-9ab0-4f8a-95f2-ac56057ac37a",
+    "@type": "Component",
+    "name": "sysv-rc",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "sysv-rc/2.88dsf-59.3ubuntu2/all"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1.2.18",
+    "@id": "uuid:ccee3da0-2527-4ccc-bfb3-f58d894443e2",
+    "@type": "Component",
+    "name": "apt",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "apt/1.2.18/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1:3.3-3",
+    "@id": "uuid:e1f01df4-b316-439b-a33e-c42d1ec53106",
+    "@type": "Component",
+    "name": "diffutils",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "diffutils/1:3.3-3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1.1.8-3.2ubuntu2",
+    "@id": "uuid:ef6c8a5f-108d-40b3-9257-1e732e651077",
+    "@type": "Component",
+    "name": "libpam-modules",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libpam-modules/1.1.8-3.2ubuntu2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1.14.0-5ubuntu3",
+    "@id": "uuid:8fc91b65-38e5-45d0-a1af-d8e09e46596d",
+    "@type": "Component",
+    "name": "insserv",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "insserv/1.14.0-5ubuntu3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "5.4.0-6ubuntu1~16.04.4",
+    "@id": "uuid:f8e66a2a-919f-49d8-b7d6-db66c6bbb408",
+    "@type": "Component",
+    "name": "libstdc++6",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libstdc++6/5.4.0-6ubuntu1~16.04.4/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1:2.4.5-1ubuntu2",
+    "@id": "uuid:48032cac-9d74-453b-8aa6-de43a5347415",
+    "@type": "Component",
+    "name": "libaudit-common",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libaudit-common/1:2.4.5-1ubuntu2/all"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1.42.13-1ubuntu1",
+    "@id": "uuid:970e6f08-c4fa-46fc-9808-73d5d8a5b440",
+    "@type": "Component",
+    "name": "libcomerr2",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libcomerr2/1.42.13-1ubuntu1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "4.6.0+git+20160126-2",
+    "@id": "uuid:38773c1e-9bda-405e-8861-9ef7c2ee8b9e",
+    "@type": "Component",
+    "name": "findutils",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "findutils/4.6.0+git+20160126-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1.1.8-3.2ubuntu2",
+    "@id": "uuid:269308da-9ab0-4840-a135-033729d84bc6",
+    "@type": "Component",
+    "name": "libpam0g",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libpam0g/1.1.8-3.2ubuntu2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2.27.1-6ubuntu3.2",
+    "@id": "uuid:4ed5247a-d82f-482e-8302-cd4d568da71a",
+    "@type": "Component",
+    "name": "libmount1",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libmount1/2.27.1-6ubuntu3.2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1:4.2-3.1ubuntu5",
+    "@id": "uuid:5d1d2079-8323-4745-b8cb-4ed41557f227",
+    "@type": "Component",
+    "name": "login",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "login/1:4.2-3.1ubuntu5/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "3.113+nmu3ubuntu4",
+    "@id": "uuid:e24b7c1f-75d0-4f08-b835-8b1e354e4bff",
+    "@type": "Component",
+    "name": "adduser",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "adduser/3.113+nmu3ubuntu4/all"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2.88dsf-59.3ubuntu2",
+    "@id": "uuid:737607eb-8780-45f3-a526-d84371a26605",
+    "@type": "Component",
+    "name": "initscripts",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "initscripts/2.88dsf-59.3ubuntu2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2.2.52-3",
+    "@id": "uuid:3d8e94a2-346a-47e7-88eb-5643bf765f83",
+    "@type": "Component",
+    "name": "libacl1",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libacl1/2.2.52-3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "6.0+20160213-1ubuntu1",
+    "@id": "uuid:aefd00e7-e227-4aa0-b894-5b9ae7971bbb",
+    "@type": "Component",
+    "name": "ncurses-bin",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "ncurses-bin/6.0+20160213-1ubuntu1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2:3.3.10-4ubuntu2.3",
+    "@id": "uuid:83c1be46-5c5b-4bc7-a8bd-d97d49b488a3",
+    "@type": "Component",
+    "name": "libprocps4",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libprocps4/2:3.3.10-4ubuntu2.3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2:0.1.12-28",
+    "@id": "uuid:f69316c5-faa3-4ce9-ba17-505c4a695527",
+    "@type": "Component",
+    "name": "libusb-0.1-4",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libusb-0.1-4/2:0.1.12-28/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2.23-0ubuntu5",
+    "@id": "uuid:b6e981ff-175c-4263-afe6-60b6612776f5",
+    "@type": "Component",
+    "name": "locales",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "locales/2.23-0ubuntu5/all"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2.4-2",
+    "@id": "uuid:9b65eaf4-0ff0-4313-908e-10dfcef87691",
+    "@type": "Component",
+    "name": "libsepol1",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libsepol1/2.4-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2012.05.19",
+    "@id": "uuid:c170899c-1c66-4af9-bb6a-a8a5325c510d",
+    "@type": "Component",
+    "name": "ubuntu-keyring",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "ubuntu-keyring/2012.05.19/all"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1:6.0.1-0ubuntu1",
+    "@id": "uuid:ae976146-61b0-4308-90ce-870fb48ea389",
+    "@type": "Component",
+    "name": "libgcc1",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libgcc1/1:6.0.1-0ubuntu1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "6.3-8ubuntu2",
+    "@id": "uuid:a8108cc4-d6c2-4ffa-9eac-0cb4e0e175b2",
+    "@type": "Component",
+    "name": "libreadline6",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libreadline6/6.3-8ubuntu2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2.27.1-6ubuntu3.2",
+    "@id": "uuid:af414a68-b559-4054-8402-49f562a55ad4",
+    "@type": "Component",
+    "name": "util-linux",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "util-linux/2.27.1-6ubuntu3.2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "5.4.0-6ubuntu1~16.04.4",
+    "@id": "uuid:31c949c9-e16a-45ea-a7da-7a738aa4bb0d",
+    "@type": "Component",
+    "name": "gcc-5-base",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "gcc-5-base/5.4.0-6ubuntu1~16.04.4/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "1.0.4-5",
+    "@id": "uuid:42deeea9-65ae-49ef-8d2d-e1c504208f38",
+    "@type": "Component",
+    "name": "libustr-1.0-1",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libustr-1.0-1/1.0.4-5/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "4.2.2-7",
+    "@id": "uuid:d179ce30-bf09-4fd0-8bd2-b5d5c3403961",
+    "@type": "Component",
+    "name": "sed",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "sed/4.2.2-7/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2.27.1-6ubuntu3.2",
+    "@id": "uuid:a45ef5c7-87bb-44f4-9c1d-b47bb283bc82",
+    "@type": "Component",
+    "name": "libsmartcols1",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libsmartcols1/2.27.1-6ubuntu3.2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "revision": "2:1.6.6-5ubuntu2",
+    "@id": "uuid:6b1f5e38-6ccc-4e31-a779-07408d926f00",
+    "@type": "Component",
+    "name": "libcryptsetup4",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libcryptsetup4/2:1.6.6-5ubuntu2/amd64"
+    },
+    "relationship": []
+  }
+]

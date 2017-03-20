@@ -1,0 +1,1796 @@
+Loaded plugins: fastestmirror, refresh-packagekit, security
+Installed Packages
+ConsoleKit.x86_64       0.4.1-3.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+ConsoleKit-libs.x86_64  0.4.1-3.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+ConsoleKit-x11.x86_64   0.4.1-3.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+DeviceKit-power.x86_64  014-3.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+GConf2.x86_64           2.28.0-6.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+GConf2-gtk.x86_64       2.28.0-6.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+MAKEDEV.x86_64          3.24-6.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+ModemManager.x86_64     0.4.0-5.git20100628.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+NetworkManager.x86_64   1:0.8.1-99.el6  @base                                   
+NetworkManager-glib.x86_64
+                        1:0.8.1-99.el6  @base                                   
+NetworkManager-gnome.x86_64
+                        1:0.8.1-99.el6  @base                                   
+ORBit2.x86_64           2.14.17-5.el6   @base                                   
+PackageKit.x86_64       0.5.8-25.el6    @base                                   
+PackageKit-device-rebind.x86_64
+                        0.5.8-25.el6    @base                                   
+PackageKit-glib.x86_64  0.5.8-25.el6    @base                                   
+PackageKit-gstreamer-plugin.x86_64
+                        0.5.8-25.el6    @base                                   
+PackageKit-gtk-module.x86_64
+                        0.5.8-25.el6    @base                                   
+PackageKit-yum.x86_64   0.5.8-25.el6    @base                                   
+PackageKit-yum-plugin.x86_64
+                        0.5.8-25.el6    @base                                   
+SDL.x86_64              1.2.14-7.el6_7.1
+                                        @updates                                
+abrt.x86_64             2.0.8-34.el6.centos
+                                        @base                                   
+abrt-addon-ccpp.x86_64  2.0.8-34.el6.centos
+                                        @base                                   
+abrt-addon-kerneloops.x86_64
+                        2.0.8-34.el6.centos
+                                        @base                                   
+abrt-addon-python.x86_64
+                        2.0.8-34.el6.centos
+                                        @base                                   
+abrt-cli.x86_64         2.0.8-34.el6.centos
+                                        @base                                   
+abrt-desktop.x86_64     2.0.8-34.el6.centos
+                                        @base                                   
+abrt-gui.x86_64         2.0.8-34.el6.centos
+                                        @base                                   
+abrt-libs.x86_64        2.0.8-34.el6.centos
+                                        @base                                   
+abrt-python.x86_64      2.0.8-34.el6.centos
+                                        @base                                   
+abrt-tui.x86_64         2.0.8-34.el6.centos
+                                        @base                                   
+abyssinica-fonts.noarch 1.0-5.1.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+acl.x86_64              2.2.49-6.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+acpid.x86_64            1.0.10-2.1.el6  @anaconda-CentOS-201311272149.x86_64/6.5
+aic94xx-firmware.noarch 30-2.el6        @anaconda-CentOS-201311272149.x86_64/6.5
+alsa-lib.x86_64         1.0.22-3.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+alsa-plugins-pulseaudio.x86_64
+                        1.0.21-3.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+alsa-utils.x86_64       1.0.22-9.el6_6  @base                                   
+anthy.x86_64            9100h-10.1.el6  @anaconda-CentOS-201311272149.x86_64/6.5
+apache-maven.noarch     3.3.3-4.el6     @epel-apache-maven                      
+apr.x86_64              1.3.9-5.el6_2   @anaconda-CentOS-201311272149.x86_64/6.5
+apr-util.x86_64         1.3.9-3.el6_0.1 @anaconda-CentOS-201311272149.x86_64/6.5
+apr-util-ldap.x86_64    1.3.9-3.el6_0.1 @anaconda-CentOS-201311272149.x86_64/6.5
+at.x86_64               3.1.10-48.el6   @base                                   
+at-spi.x86_64           1.28.1-2.el6.centos
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+at-spi-python.x86_64    1.28.1-2.el6.centos
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+atk.x86_64              1.30.0-1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+atmel-firmware.noarch   1.3-7.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+attr.x86_64             2.4.44-7.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+audit.x86_64            2.3.7-5.el6     @base                                   
+audit-libs.x86_64       2.3.7-5.el6     @base                                   
+augeas-libs.x86_64      1.0.0-10.el6    @base                                   
+authconfig.x86_64       6.1.12-23.el6   @base                                   
+authconfig-gtk.x86_64   6.1.12-23.el6   @base                                   
+autocorr-en.noarch      1:4.2.8.2-11.el6_7.1
+                                        @updates                                
+autofs.x86_64           1:5.0.5-113.el6 @base                                   
+avahi-autoipd.x86_64    0.6.25-15.el6   @base                                   
+avahi-glib.x86_64       0.6.25-15.el6   @base                                   
+avahi-libs.x86_64       0.6.25-15.el6   @base                                   
+avahi-ui.x86_64         0.6.25-15.el6   @base                                   
+b43-fwcutter.x86_64     012-2.2.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+b43-openfwwf.noarch     5.2-10.el6      @base                                   
+basesystem.noarch       10.0-4.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+bash.x86_64             4.1.2-33.el6_7.1
+                                        @updates                                
+bc.x86_64               1.06.95-1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+bfa-firmware.noarch     3.2.23.0-2.el6  @base                                   
+bind-libs.x86_64        32:9.8.2-0.37.rc1.el6_7.5
+                                        @updates                                
+bind-utils.x86_64       32:9.8.2-0.37.rc1.el6_7.5
+                                        @updates                                
+binutils.x86_64         2.20.51.0.2-5.43.el6
+                                        @base                                   
+biosdevname.x86_64      0.6.2-1.el6     @base                                   
+blktrace.x86_64         1.0.1-6.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+bluez.x86_64            4.66-1.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+bluez-libs.x86_64       4.66-1.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+boost-filesystem.x86_64 1.41.0-27.el6   @base                                   
+boost-system.x86_64     1.41.0-27.el6   @base                                   
+brasero.x86_64          2.28.3-6.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+brasero-libs.x86_64     2.28.3-6.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+brasero-nautilus.x86_64 2.28.3-6.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+bridge-utils.x86_64     1.2-10.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+btparser.x86_64         0.17-2.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+busybox.x86_64          1:1.15.1-21.el6_6
+                                        @base                                   
+bzip2.x86_64            1.0.5-7.el6_0   @anaconda-CentOS-201311272149.x86_64/6.5
+bzip2-libs.x86_64       1.0.5-7.el6_0   @anaconda-CentOS-201311272149.x86_64/6.5
+c-ares.x86_64           1.10.0-3.el6    @base                                   
+c-ares19.x86_64         1.9.1-5.el6.3   @epel                                   
+c-ares19-devel.x86_64   1.9.1-5.el6.3   @epel                                   
+c2050.x86_64            0.3b-3.1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+c2070.x86_64            0.99-7.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+ca-certificates.noarch  2015.2.4-65.0.1.el6_6
+                                        @base                                   
+cairo.x86_64            1.8.8-6.el6_6   @base                                   
+cairomm.x86_64          1.8.0-2.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+cas.noarch              0.15-1.el6.1    @anaconda-CentOS-201311272149.x86_64/6.5
+cdparanoia.x86_64       10.2-5.1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+cdparanoia-libs.x86_64  10.2-5.1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+cdrdao.x86_64           1.2.3-4.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+centos-indexhtml.noarch 6-2.el6.centos  @base                                   
+centos-release.x86_64   6-7.el6.centos.12.3
+                                        @base                                   
+certmonger.x86_64       0.77.5-1.el6    @base                                   
+checkpolicy.x86_64      2.0.22-1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+cheese.x86_64           2.28.1-8.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+chkconfig.x86_64        1.3.49.3-5.el6  @base                                   
+cifs-utils.x86_64       4.8.1-20.el6    @base                                   
+cjet.x86_64             0.8.9-9.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+cjkuni-fonts-common.noarch
+                        0.2.20080216.1-36.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+cjkuni-uming-fonts.noarch
+                        0.2.20080216.1-36.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+cloog-ppl.x86_64        0.15.7-1.2.el6  @base                                   
+compat-libevent14.x86_64
+                        1.4.13-1.rhel6  @pgdg92                                 
+compat-readline5.x86_64 5.2-17.1.el6    @base                                   
+compiz.x86_64           0.8.2-24.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+compiz-gnome.x86_64     0.8.2-24.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+comps-extras.noarch     17.8-1.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+control-center.x86_64   1:2.28.1-39.el6 @anaconda-CentOS-201311272149.x86_64/6.5
+control-center-extra.x86_64
+                        1:2.28.1-39.el6 @anaconda-CentOS-201311272149.x86_64/6.5
+control-center-filesystem.x86_64
+                        1:2.28.1-39.el6 @anaconda-CentOS-201311272149.x86_64/6.5
+coreutils.x86_64        8.4-37.el6_7.3  @updates                                
+coreutils-libs.x86_64   8.4-37.el6_7.3  @updates                                
+cpio.x86_64             2.10-12.el6_5   @base                                   
+cpp.x86_64              4.4.7-16.el6    @base                                   
+cpuspeed.x86_64         1:1.5-22.el6    @base                                   
+cracklib.x86_64         2.8.16-4.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+cracklib-dicts.x86_64   2.8.16-4.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+cracklib-python.x86_64  2.8.16-4.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+crash.x86_64            7.1.0-3.el6_7   @updates                                
+crash-gcore-command.x86_64
+                        1.0-5.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+crash-trace-command.x86_64
+                        1.0-5.el6       @base                                   
+crda.x86_64             1.1.3_2014.06.13-1.el6
+                                        @base                                   
+cronie.x86_64           1.4.4-15.el6_7.1
+                                        @updates                                
+cronie-anacron.x86_64   1.4.4-15.el6_7.1
+                                        @updates                                
+crontabs.noarch         1.10-33.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+cryptsetup-luks.x86_64  1.2.0-11.el6    @base                                   
+cryptsetup-luks-libs.x86_64
+                        1.2.0-11.el6    @base                                   
+cups.x86_64             1:1.4.2-72.el6  @base                                   
+cups-libs.x86_64        1:1.4.2-72.el6  @base                                   
+cups-pk-helper.x86_64   0.0.4-12.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+curl.x86_64             7.19.7-46.el6   @base                                   
+cvs.x86_64              1.11.23-16.el6  @anaconda-CentOS-201311272149.x86_64/6.5
+cyrus-sasl.x86_64       2.1.23-15.el6_6.2
+                                        @base                                   
+cyrus-sasl-gssapi.x86_64
+                        2.1.23-15.el6_6.2
+                                        @base                                   
+cyrus-sasl-lib.x86_64   2.1.23-15.el6_6.2
+                                        @base                                   
+cyrus-sasl-md5.x86_64   2.1.23-15.el6_6.2
+                                        @base                                   
+cyrus-sasl-plain.x86_64 2.1.23-15.el6_6.2
+                                        @base                                   
+dash.x86_64             0.5.5.1-4.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+db4.x86_64              4.7.25-20.el6_7 @updates                                
+db4-cxx.x86_64          4.7.25-20.el6_7 @updates                                
+db4-devel.x86_64        4.7.25-20.el6_7 @updates                                
+db4-utils.x86_64        4.7.25-20.el6_7 @updates                                
+dbus.x86_64             1:1.2.24-8.el6_6
+                                        @base                                   
+dbus-c++.x86_64         0.5.0-0.10.20090203git13281b3.1.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+dbus-glib.x86_64        0.86-6.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+dbus-libs.x86_64        1:1.2.24-8.el6_6
+                                        @base                                   
+dbus-python.x86_64      0.83.0-6.1.el6  @anaconda-CentOS-201311272149.x86_64/6.5
+dbus-x11.x86_64         1:1.2.24-8.el6_6
+                                        @base                                   
+dejavu-fonts-common.noarch
+                        2.33-1.el6      @base                                   
+dejavu-sans-fonts.noarch
+                        2.33-1.el6      @base                                   
+dejavu-sans-mono-fonts.noarch
+                        2.33-1.el6      @base                                   
+dejavu-serif-fonts.noarch
+                        2.33-1.el6      @base                                   
+desktop-effects.x86_64  0.8.4-7.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+desktop-file-utils.x86_64
+                        0.15-9.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+device-mapper.x86_64    1.02.95-3.el6_7.4
+                                        @updates                                
+device-mapper-event.x86_64
+                        1.02.95-3.el6_7.4
+                                        @updates                                
+device-mapper-event-libs.x86_64
+                        1.02.95-3.el6_7.4
+                                        @updates                                
+device-mapper-libs.x86_64
+                        1.02.95-3.el6_7.4
+                                        @updates                                
+device-mapper-persistent-data.x86_64
+                        0.3.2-1.el6     @base                                   
+dhclient.x86_64         12:4.1.1-49.P1.el6.centos
+                                        @base                                   
+dhcp-common.x86_64      12:4.1.1-49.P1.el6.centos
+                                        @base                                   
+diffutils.x86_64        2.8.1-28.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+dmidecode.x86_64        1:2.12-6.el6    @base                                   
+dmraid.x86_64           1.0.0.rc16-11.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+dmraid-events.x86_64    1.0.0.rc16-11.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+dmz-cursor-themes.noarch
+                        0.4-4.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+dnsmasq.x86_64          2.48-14.el6     @base                                   
+docbook-dtds.noarch     1.0-51.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+dosfstools.x86_64       3.0.9-4.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+dracut.noarch           004-388.el6     @base                                   
+dracut-kernel.noarch    004-388.el6     @base                                   
+dvd+rw-tools.x86_64     7.1-6.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+e2fsprogs.x86_64        1.41.12-22.el6  @base                                   
+e2fsprogs-libs.x86_64   1.41.12-22.el6  @base                                   
+ed.x86_64               1.1-3.3.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+efibootmgr.x86_64       0.5.4-13.el6    @base                                   
+eggdbus.x86_64          0.6-3.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+eject.x86_64            2.1.5-17.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+ekiga.x86_64            3.2.6-4.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+elfutils.x86_64         0.161-3.el6     @base                                   
+elfutils-libelf.x86_64  0.161-3.el6     @base                                   
+elfutils-libs.x86_64    0.161-3.el6     @base                                   
+emacs.x86_64            1:23.1-28.el6   @base                                   
+emacs-common.x86_64     1:23.1-28.el6   @base                                   
+enchant.x86_64          1:1.5.0-5.el6   @base                                   
+enscript.x86_64         1.6.4-15.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+eog.x86_64              2.28.2-4.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+epel-release.noarch     6-8             installed                               
+ethtool.x86_64          2:3.5-6.el6     @base                                   
+evince.x86_64           2.28.2-14.el6_0.1
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+evince-dvi.x86_64       2.28.2-14.el6_0.1
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+evince-libs.x86_64      2.28.2-14.el6_0.1
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+evolution.x86_64        2.32.3-34.el6   @base                                   
+evolution-data-server.x86_64
+                        2.32.3-23.el6   @base                                   
+evolution-help.noarch   2.32.3-34.el6   @base                                   
+evolution-mapi.x86_64   0.32.2-12.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+exempi.x86_64           2.1.0-5.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+expat.x86_64            2.0.1-11.el6_2  @anaconda-CentOS-201311272149.x86_64/6.5
+farsight2.x86_64        0.0.16-1.1.el6  @anaconda-CentOS-201311272149.x86_64/6.5
+festival.x86_64         1.96-18.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+festival-lib.x86_64     1.96-18.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+festival-speechtools-libs.x86_64
+                        1.2.96-18.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+festvox-slt-arctic-hts.noarch
+                        0.20061229-18.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+file.x86_64             5.04-21.el6     @base                                   
+file-libs.x86_64        5.04-21.el6     @base                                   
+file-roller.x86_64      2.28.2-7.el6    @base                                   
+filesystem.x86_64       2.4.30-3.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+findutils.x86_64        1:4.4.2-6.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+fipscheck.x86_64        1.2.0-7.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+fipscheck-lib.x86_64    1.2.0-7.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+firefox.x86_64          38.5.0-2.el6.centos
+                                        @updates                                
+firstboot.x86_64        1.110.15-1.el6  @anaconda-CentOS-201311272149.x86_64/6.5
+flac.x86_64             1.2.1-7.el6_6   @base                                   
+fontconfig.x86_64       2.8.0-5.el6     @base                                   
+fontpackages-filesystem.noarch
+                        1.41-1.1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+foomatic.x86_64         4.0.4-3.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+foomatic-db.noarch      4.0-7.20091126.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+foomatic-db-filesystem.noarch
+                        4.0-7.20091126.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+foomatic-db-ppds.noarch 4.0-7.20091126.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+fprintd.x86_64          0.1-22.git04fd09cfa.el6
+                                        @base                                   
+fprintd-pam.x86_64      0.1-22.git04fd09cfa.el6
+                                        @base                                   
+freetype.x86_64         2.3.11-15.el6_6.1
+                                        @base                                   
+fuse.x86_64             2.8.3-4.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+fuse-libs.x86_64        2.8.3-4.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+gamin.x86_64            0.1.10-9.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gamin-python.x86_64     0.1.10-9.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gawk.x86_64             3.1.7-10.el6_7.3
+                                        @updates                                
+gcalctool.x86_64        5.28.2-3.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gcc.x86_64              4.4.7-16.el6    @base                                   
+gcc-c++.x86_64          4.4.7-16.el6    @base                                   
+gconfmm26.x86_64        2.28.0-1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gdb.x86_64              7.2-83.el6      @base                                   
+gdbm.x86_64             1.8.0-38.el6    @base                                   
+gdbm-devel.x86_64       1.8.0-38.el6    @base                                   
+gdk-pixbuf2.x86_64      2.24.1-6.el6_7  @updates                                
+gdm.x86_64              1:2.30.4-64.el6 @base                                   
+gdm-libs.x86_64         1:2.30.4-64.el6 @base                                   
+gdm-plugin-fingerprint.x86_64
+                        1:2.30.4-64.el6 @base                                   
+gdm-user-switch-applet.x86_64
+                        1:2.30.4-64.el6 @base                                   
+gedit.x86_64            1:2.28.4-3.el6  @anaconda-CentOS-201311272149.x86_64/6.5
+genisoimage.x86_64      1.1.9-12.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+geoclue.x86_64          0.11.1.1-0.13.20091026git73b6729.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+geronimo-specs-poms.noarch
+                        1.2-13.jpp5     @jpackage-generic                       
+geronimo-stax-1.0-api.noarch
+                        1.2-13.jpp5     @jpackage-generic                       
+gettext.x86_64          0.17-18.el6     @base                                   
+ghostscript.x86_64      8.70-21.el6     @base                                   
+ghostscript-fonts.noarch
+                        5.50-23.2.el6   @base                                   
+giflib.x86_64           4.1.6-3.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+git.x86_64              1.7.1-3.el6_4.1 @base                                   
+glib-networking.x86_64  2.28.6.1-2.2.el6
+                                        @base                                   
+glib2.x86_64            2.28.8-4.el6    @base                                   
+glibc.x86_64            2.12-1.166.el6_7.3
+                                        @updates                                
+glibc-common.x86_64     2.12-1.166.el6_7.3
+                                        @updates                                
+glibc-devel.x86_64      2.12-1.166.el6_7.3
+                                        @updates                                
+glibc-headers.x86_64    2.12-1.166.el6_7.3
+                                        @updates                                
+glibmm24.x86_64         2.22.1-1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+glx-utils.x86_64        10.4.3-1.el6    @base                                   
+gmp.x86_64              4.3.1-7.el6_2.2 @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-applets.x86_64    1:2.28.0-7.el6.centos
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-backgrounds.noarch
+                        2.28.0-2.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-bluetooth.x86_64  2.28.6-8.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-bluetooth-libs.x86_64
+                        2.28.6-8.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-desktop.x86_64    2.28.2-11.el6.centos
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-disk-utility.x86_64
+                        2.30.1-2.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-disk-utility-libs.x86_64
+                        2.30.1-2.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-disk-utility-ui-libs.x86_64
+                        2.30.1-2.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-doc-utils-stylesheets.noarch
+                        0.18.1-1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-icon-theme.noarch 2.28.0-2.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-keyring.x86_64    2.28.2-8.el6_3  @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-keyring-pam.x86_64
+                        2.28.2-8.el6_3  @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-mag.x86_64        0.15.9-2.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-media.x86_64      2.29.91-6.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-media-libs.x86_64 2.29.91-6.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-menus.x86_64      2.28.0-4.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-packagekit.x86_64 2.28.3-9.el6    @base                                   
+gnome-panel.x86_64      2.30.2-15.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-panel-libs.x86_64 2.30.2-15.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-power-manager.x86_64
+                        2.28.3-7.el6_4  @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-python2.x86_64    2.28.0-3.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-python2-applet.x86_64
+                        2.28.0-5.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-python2-bonobo.x86_64
+                        2.28.0-3.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-python2-canvas.x86_64
+                        2.28.0-3.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-python2-desktop.x86_64
+                        2.28.0-5.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-python2-extras.x86_64
+                        2.25.3-20.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-python2-gconf.x86_64
+                        2.28.0-3.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-python2-gnome.x86_64
+                        2.28.0-3.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-python2-gnomekeyring.x86_64
+                        2.28.0-5.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-python2-gnomevfs.x86_64
+                        2.28.0-3.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-python2-libegg.x86_64
+                        2.25.3-20.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-python2-libwnck.x86_64
+                        2.28.0-5.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-screensaver.x86_64
+                        2.28.3-28.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-session.x86_64    2.28.0-22.el6   @base                                   
+gnome-session-xsession.x86_64
+                        2.28.0-22.el6   @base                                   
+gnome-settings-daemon.x86_64
+                        2.28.2-31.el6   @base                                   
+gnome-speech.x86_64     0.4.25-3.1.el6  @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-system-monitor.x86_64
+                        2.28.0-11.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-terminal.x86_64   2.31.3-11.el6_6 @base                                   
+gnome-themes.noarch     2.28.1-6.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-user-docs.noarch  2.28.0-4.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-user-share.x86_64 2.28.2-3.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-utils.x86_64      1:2.28.1-10.el6 @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-utils-libs.x86_64 1:2.28.1-10.el6 @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-vfs2.x86_64       2.24.2-6.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gnome-vfs2-smb.x86_64   2.24.2-6.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gnote.x86_64            0.6.3-3.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+gnupg2.x86_64           2.0.14-8.el6    @base                                   
+gnutls.x86_64           2.8.5-18.el6    @base                                   
+gok.x86_64              2.28.1-5.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+google-crosextra-caladea-fonts.noarch
+                        1.002-0.3.20130214.el6.1
+                                        @base                                   
+google-crosextra-carlito-fonts.noarch
+                        1.103-0.1.20130920.el6.1
+                                        @base                                   
+gpgme.x86_64            1.1.8-3.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+gpm-libs.x86_64         1.20.6-12.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+grep.x86_64             2.20-3.el6_7.1  @updates                                
+groff.x86_64            1.18.1.4-21.el6 @anaconda-CentOS-201311272149.x86_64/6.5
+grub.x86_64             1:0.97-94.el6   @base                                   
+grubby.x86_64           7.0.15-7.el6    @base                                   
+gsm.x86_64              1.0.13-4.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gssdp.x86_64            0.7.1-1.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+gstreamer.x86_64        0.10.29-1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+gstreamer-plugins-bad-free.x86_64
+                        0.10.19-3.el6_5 @base                                   
+gstreamer-plugins-base.x86_64
+                        0.10.29-2.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+gstreamer-plugins-good.x86_64
+                        0.10.23-3.el6   @base                                   
+gstreamer-python.x86_64 0.10.16-1.1.el6 @anaconda-CentOS-201311272149.x86_64/6.5
+gstreamer-tools.x86_64  0.10.29-1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+gthumb.x86_64           2.10.11-8.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+gtk2.x86_64             2.24.23-6.el6   @base                                   
+gtk2-engines.x86_64     2.18.4-5.el6.centos
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+gtk2-immodule-xim.x86_64
+                        2.24.23-6.el6   @base                                   
+gtkhtml3.x86_64         3.32.2-2.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gtkmm24.x86_64          2.18.2-1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gtksourceview2.x86_64   2.8.2-4.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+gtkspell.x86_64         2.0.16-1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gucharmap.x86_64        2.28.2-2.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gupnp.x86_64            0.13.2-1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+gupnp-igd.x86_64        0.1.3-3.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+gutenprint.x86_64       5.2.5-2.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+gutenprint-cups.x86_64  5.2.5-2.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+gvfs.x86_64             1.4.3-22.el6    @base                                   
+gvfs-afc.x86_64         1.4.3-22.el6    @base                                   
+gvfs-archive.x86_64     1.4.3-22.el6    @base                                   
+gvfs-fuse.x86_64        1.4.3-22.el6    @base                                   
+gvfs-gphoto2.x86_64     1.4.3-22.el6    @base                                   
+gvfs-obexftp.x86_64     1.4.3-22.el6    @base                                   
+gvfs-smb.x86_64         1.4.3-22.el6    @base                                   
+gyp.noarch              0.1-0.6.1010svn.el6
+                                        @epel                                   
+gzip.x86_64             1.3.12-22.el6   @base                                   
+hal.x86_64              0.5.14-14.el6   @base                                   
+hal-info.noarch         20090716-5.el6  @base                                   
+hal-libs.x86_64         0.5.14-14.el6   @base                                   
+hdparm.x86_64           9.43-4.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+hesiod.x86_64           3.1.0-19.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+hicolor-icon-theme.noarch
+                        0.11-1.1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+hpijs.x86_64            1:3.14.6-3.el6  @base                                   
+hplip-common.x86_64     3.14.6-3.el6    @base                                   
+hplip-libs.x86_64       3.14.6-3.el6    @base                                   
+htop.x86_64             1.0.1-2.el6     @epel                                   
+http-parser.x86_64      2.0-4.20121128gitcd01361.el6
+                                        @epel                                   
+http-parser-devel.x86_64
+                        2.0-4.20121128gitcd01361.el6
+                                        @epel                                   
+httpd.x86_64            2.2.15-47.el6.centos.1
+                                        @updates                                
+httpd-tools.x86_64      2.2.15-47.el6.centos.1
+                                        @updates                                
+hunspell.x86_64         1.2.8-16.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+hunspell-en.noarch      0.20090216-7.1.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+hwdata.noarch           0.233-14.1.el6  @base                                   
+hyphen.x86_64           2.4-5.1.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+hyphen-en.noarch        2.4-5.1.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+ibus.x86_64             1.3.4-8.el6     @base                                   
+ibus-anthy.x86_64       1.2.1-3.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+ibus-chewing.x86_64     1.3.5.20100714-4.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+ibus-gtk.x86_64         1.3.4-8.el6     @base                                   
+ibus-hangul.x86_64      1.3.0.20100329-6.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+ibus-libs.x86_64        1.3.4-8.el6     @base                                   
+ibus-m17n.x86_64        1.3.0-2.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+ibus-pinyin.x86_64      1.3.8-1.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+ibus-qt.x86_64          1.3.0-2.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+ibus-rawcode.x86_64     1.3.0.20100421-2.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+ibus-sayura.x86_64      1.2.99.20100209-3.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+ibus-table.noarch       1.2.0.20100111-5.el6
+                                        @base                                   
+ibus-table-additional.noarch
+                        1.2.0.20100111-5.el6
+                                        @base                                   
+icedax.x86_64           1.1.9-12.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+im-chooser.x86_64       1.3.1-3.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+imsettings.x86_64       0.108.0-3.6.el6 @anaconda-CentOS-201311272149.x86_64/6.5
+imsettings-libs.x86_64  0.108.0-3.6.el6 @anaconda-CentOS-201311272149.x86_64/6.5
+info.x86_64             4.13a-8.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+initscripts.x86_64      9.03.49-1.el6.centos.3
+                                        @updates                                
+iok.x86_64              1.3.13-3.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+ipa-client.x86_64       3.0.0-50.el6.centos.3
+                                        @updates                                
+ipa-python.x86_64       3.0.0-50.el6.centos.3
+                                        @updates                                
+iproute.x86_64          2.6.32-45.el6   @base                                   
+iptables.x86_64         1.4.7-16.el6    @base                                   
+iptables-ipv6.x86_64    1.4.7-16.el6    @base                                   
+iputils.x86_64          20071127-20.el6 @base                                   
+ipw2100-firmware.noarch 1.3-11.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+ipw2200-firmware.noarch 3.1-4.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+irqbalance.x86_64       2:1.0.7-5.el6   @base                                   
+iso-codes.noarch        3.16-2.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+ivtv-firmware.noarch    2:20080701-20.2 @anaconda-CentOS-201311272149.x86_64/6.5
+iw.x86_64               3.10-1.1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+iwl100-firmware.noarch  39.31.5.1-1.el6 @anaconda-CentOS-201311272149.x86_64/6.5
+iwl1000-firmware.noarch 1:39.31.5.1-1.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+iwl3945-firmware.noarch 15.32.2.9-4.el6 @anaconda-CentOS-201311272149.x86_64/6.5
+iwl4965-firmware.noarch 228.61.2.24-2.1.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+iwl5000-firmware.noarch 8.83.5.1_1-1.el6_1.1
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+iwl5150-firmware.noarch 8.24.2.2-1.el6  @anaconda-CentOS-201311272149.x86_64/6.5
+iwl6000-firmware.noarch 9.221.4.1-1.el6 @anaconda-CentOS-201311272149.x86_64/6.5
+iwl6000g2a-firmware.noarch
+                        17.168.5.3-1.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+iwl6050-firmware.noarch 41.28.5.1-2.el6 @anaconda-CentOS-201311272149.x86_64/6.5
+jasper-libs.x86_64      1.900.1-16.el6_6.3
+                                        @base                                   
+java-1.6.0-openjdk.x86_64
+                        1:1.6.0.40-1.13.12.6.el6_8
+                                        @updates                                
+java-1.6.0-openjdk-devel.x86_64
+                        1:1.6.0.40-1.13.12.6.el6_8
+                                        @updates                                
+java-1.7.0-openjdk.x86_64
+                        1:1.7.0.111-2.6.7.2.el6_8
+                                        @updates                                
+java-1.7.0-openjdk-devel.x86_64
+                        1:1.7.0.111-2.6.7.2.el6_8
+                                        @updates                                
+java-1.8.0-openjdk.x86_64
+                        1:1.8.0.111-0.b15.el6_8
+                                        @updates                                
+java-1.8.0-openjdk-devel.x86_64
+                        1:1.8.0.111-0.b15.el6_8
+                                        @updates                                
+java-1.8.0-openjdk-headless.x86_64
+                        1:1.8.0.111-0.b15.el6_8
+                                        @updates                                
+jenkins.noarch          1.625.3-1.1     @jenkins                                
+jline.noarch            0.9.94-1.jpp5   @jpackage-generic                       
+jomolhari-fonts.noarch  0.003-8.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+jpackage-utils.noarch   5.0.0-2.jpp5    @jpackage-generic                       
+json-c.x86_64           0.11-12.el6     @base                                   
+kasumi.x86_64           2.5-1.1.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+kbd.x86_64              1.15-11.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+kbd-misc.noarch         1.15-11.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+kernel.x86_64           2.6.32-431.el6  @anaconda-CentOS-201311272149.x86_64/6.5
+kernel.x86_64           2.6.32-504.3.3.el6
+                                        @updates                                
+kernel.x86_64           2.6.32-573.12.1.el6
+                                        @updates                                
+kernel-firmware.noarch  2.6.32-573.12.1.el6
+                                        @updates                                
+kernel-headers.x86_64   2.6.32-573.12.1.el6
+                                        @updates                                
+kexec-tools.x86_64      2.0.0-286.el6   @base                                   
+keyutils.x86_64         1.4-5.el6       @base                                   
+keyutils-libs.x86_64    1.4-5.el6       @base                                   
+keyutils-libs-devel.x86_64
+                        1.4-5.el6       @base                                   
+khmeros-base-fonts.noarch
+                        5.0-9.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+khmeros-fonts-common.noarch
+                        5.0-9.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+kpartx.x86_64           0.4.9-87.el6    @base                                   
+kpathsea.x86_64         2007-60.el6_7   @updates                                
+krb5-devel.x86_64       1.10.3-42.el6   @base                                   
+krb5-libs.x86_64        1.10.3-42.el6   @base                                   
+krb5-workstation.x86_64 1.10.3-42.el6   @base                                   
+kurdit-unikurd-web-fonts.noarch
+                        20020502-6.el6  @anaconda-CentOS-201311272149.x86_64/6.5
+latrace.x86_64          0.5.9-2.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+lcms-libs.x86_64        1.19-1.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+ledmon.x86_64           0.79-1.el6      @base                                   
+less.x86_64             436-13.el6      @base                                   
+libICE.x86_64           1.0.6-1.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libIDL.x86_64           0.8.13-2.1.el6  @anaconda-CentOS-201311272149.x86_64/6.5
+libSM.x86_64            1.2.1-2.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libX11.x86_64           1.6.0-6.el6     @base                                   
+libX11-common.noarch    1.6.0-6.el6     @base                                   
+libXScrnSaver.x86_64    1.2.2-2.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libXau.x86_64           1.0.6-4.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libXaw.x86_64           1.0.11-2.el6    @base                                   
+libXcomposite.x86_64    0.4.3-4.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libXcursor.x86_64       1.1.14-2.1.el6  @base                                   
+libXdamage.x86_64       1.1.3-4.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libXdmcp.x86_64         1.1.1-3.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libXext.x86_64          1.3.2-2.1.el6   @base                                   
+libXfixes.x86_64        5.0.1-2.1.el6   @base                                   
+libXfont.x86_64         1.4.5-5.el6_7   @updates                                
+libXft.x86_64           2.3.1-2.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libXi.x86_64            1.7.2-2.2.el6   @base                                   
+libXinerama.x86_64      1.1.3-2.1.el6   @base                                   
+libXmu.x86_64           1.1.1-2.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libXpm.x86_64           3.5.10-2.el6    @base                                   
+libXrandr.x86_64        1.4.1-2.1.el6   @base                                   
+libXrender.x86_64       0.9.8-2.1.el6   @base                                   
+libXres.x86_64          1.0.7-2.1.el6   @base                                   
+libXt.x86_64            1.1.4-6.1.el6   @base                                   
+libXtst.x86_64          1.2.2-2.1.el6   @base                                   
+libXv.x86_64            1.0.9-2.1.el6   @base                                   
+libXvMC.x86_64          1.0.8-2.1.el6   @base                                   
+libXxf86dga.x86_64      1.1.4-2.1.el6   @base                                   
+libXxf86misc.x86_64     1.0.3-4.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libXxf86vm.x86_64       1.1.3-2.1.el6   @base                                   
+libacl.x86_64           2.2.49-6.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+libaio.x86_64           0.3.107-10.el6  @anaconda-CentOS-201311272149.x86_64/6.5
+libao.x86_64            0.8.8-7.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+libarchive.x86_64       2.8.3-4.el6_2   @anaconda-CentOS-201311272149.x86_64/6.5
+libart_lgpl.x86_64      2.3.20-5.1.el6  @anaconda-CentOS-201311272149.x86_64/6.5
+libasyncns.x86_64       0.8-1.1.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libatasmart.x86_64      0.17-4.el6_2    @anaconda-CentOS-201311272149.x86_64/6.5
+libattr.x86_64          2.4.44-7.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+libavc1394.x86_64       0.5.3-9.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+libbasicobjects.x86_64  0.1.1-11.el6    @base                                   
+libblkid.x86_64         2.17.2-12.18.el6
+                                        @base                                   
+libbonobo.x86_64        2.24.2-5.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+libbonoboui.x86_64      2.24.2-3.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+libburn.x86_64          0.7.0-2.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libcanberra.x86_64      0.22-1.el6.centos
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+libcanberra-gtk2.x86_64 0.22-1.el6.centos
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+libcap.x86_64           2.16-5.5.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+libcap-ng.x86_64        0.6.4-3.el6_0.1 @anaconda-CentOS-201311272149.x86_64/6.5
+libcdio.x86_64          0.81-3.1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+libchewing.x86_64       0.3.2-27.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+libcollection.x86_64    0.6.2-11.el6    @base                                   
+libcom_err.x86_64       1.41.12-22.el6  @base                                   
+libcom_err-devel.x86_64 1.41.12-22.el6  @base                                   
+libcroco.x86_64         0.6.2-5.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libcurl.x86_64          7.19.7-46.el6   @base                                   
+libdaemon.x86_64        0.14-1.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+libdhash.x86_64         0.4.3-11.el6    @base                                   
+libdiscid.x86_64        0.2.2-4.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+libdmx.x86_64           1.1.3-3.el6     @base                                   
+libdnet.x86_64          1.12-6.el6      @epel                                   
+libdrm.x86_64           2.4.59-2.el6    @base                                   
+libdv.x86_64            1.0.0-8.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+libedit.x86_64          2.11-4.20080712cvs.1.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+liberation-fonts-common.noarch
+                        1.05.1.20090721-5.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+liberation-mono-fonts.noarch
+                        1.05.1.20090721-5.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+liberation-sans-fonts.noarch
+                        1.05.1.20090721-5.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+liberation-serif-fonts.noarch
+                        1.05.1.20090721-5.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+libertas-usb8388-firmware.noarch
+                        2:5.110.22.p23-3.1.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+libevent.x86_64         2.0.19-1.rhel6  @pgdg92                                 
+libexif.x86_64          0.6.21-5.el6_3  @anaconda-CentOS-201311272149.x86_64/6.5
+libffi.x86_64           3.0.5-3.2.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+libfontenc.x86_64       1.0.5-2.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libfprint.x86_64        0.1.0-19.pre2.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+libgail-gnome.x86_64    1.20.1-4.1.el6.centos
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+libgcc.x86_64           4.4.7-16.el6    @base                                   
+libgcrypt.x86_64        1.4.5-11.el6_4  @anaconda-CentOS-201311272149.x86_64/6.5
+libgdata.x86_64         0.6.4-2.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libglade2.x86_64        2.6.4-3.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+libgnome.x86_64         2.28.0-11.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+libgnomecanvas.x86_64   2.26.0-4.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+libgnomekbd.x86_64      2.28.2-2.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+libgnomeui.x86_64       2.24.1-4.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+libgomp.x86_64          4.4.7-16.el6    @base                                   
+libgpg-error.x86_64     1.7-4.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+libgphoto2.x86_64       2.4.7-4.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libgpod.x86_64          0.7.2-6.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libgsf.x86_64           1.14.15-5.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+libgssglue.x86_64       0.1-11.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+libgtop2.x86_64         2.28.0-3.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+libgudev1.x86_64        147-2.63.el6_7.1
+                                        @updates                                
+libgweather.x86_64      2.28.0-5.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+libgxim.x86_64          0.3.3-3.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+libhangul.x86_64        0.0.10-1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+libical.x86_64          0.43-6.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+libicu.x86_64           4.2.1-12.el6    @base                                   
+libidn.x86_64           1.18-2.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+libiec61883.x86_64      1.2.0-4.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libieee1284.x86_64      0.2.11-9.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+libimobiledevice.x86_64 0.9.7-4.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libini_config.x86_64    1.1.0-11.el6    @base                                   
+libipa_hbac.x86_64      1.12.4-47.el6_7.4
+                                        @updates                                
+libipa_hbac-python.x86_64
+                        1.12.4-47.el6_7.4
+                                        @updates                                
+libiptcdata.x86_64      1.0.4-2.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+libisofs.x86_64         0.6.32-1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+libitm.x86_64           5.0.0-1.1.1.el6 @base                                   
+libjpeg-turbo.x86_64    1.2.1-3.el6_5   @base                                   
+libldb.x86_64           1.1.13-3.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+libmcpp.x86_64          2.7.2-4.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+libmng.x86_64           1.0.10-4.1.el6  @anaconda-CentOS-201311272149.x86_64/6.5
+libmpcdec.x86_64        1.2.6-6.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+libmspack.x86_64        0.5-0.1.alpha.el6
+                                        @epel                                   
+libmtp.x86_64           1.0.1-2.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libmusicbrainz3.x86_64  3.0.2-7.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libnice.x86_64          0.0.9-3.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libnih.x86_64           1.0.1-7.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libnl.x86_64            1.1.4-2.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libnotify.x86_64        0.5.0-1.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libogg.x86_64           2:1.1.4-2.1.el6 @anaconda-CentOS-201311272149.x86_64/6.5
+liboil.x86_64           0.3.16-4.1.el6  @anaconda-CentOS-201311272149.x86_64/6.5
+libopenraw.x86_64       0.0.5-4.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+libopenraw-gnome.x86_64 0.0.5-4.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+libotf.x86_64           0.9.9-3.1.el6   @base                                   
+libpanelappletmm.x86_64 2.26.0-3.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+libpath_utils.x86_64    0.2.1-11.el6    @base                                   
+libpcap.x86_64          14:1.4.0-4.20130826git2dbcaa1.el6
+                                        @base                                   
+libpciaccess.x86_64     0.13.3-0.1.el6  @base                                   
+libplist.x86_64         1.2-1.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+libpng.x86_64           2:1.2.49-2.el6_7
+                                        @updates                                
+libproxy.x86_64         0.3.0-10.el6    @base                                   
+libproxy-bin.x86_64     0.3.0-10.el6    @base                                   
+libproxy-python.x86_64  0.3.0-10.el6    @base                                   
+libpurple.x86_64        2.7.9-27.el6    @base                                   
+libraw1394.x86_64       2.0.4-1.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libref_array.x86_64     0.1.4-11.el6    @base                                   
+libreoffice-opensymbol-fonts.noarch
+                        1:4.2.8.2-11.el6_7.1
+                                        @updates                                
+libreport.x86_64        2.0.9-25.el6.centos
+                                        @updates                                
+libreport-cli.x86_64    2.0.9-25.el6.centos
+                                        @updates                                
+libreport-compat.x86_64 2.0.9-25.el6.centos
+                                        @updates                                
+libreport-filesystem.x86_64
+                        2.0.9-25.el6.centos
+                                        @updates                                
+libreport-gtk.x86_64    2.0.9-25.el6.centos
+                                        @updates                                
+libreport-newt.x86_64   2.0.9-25.el6.centos
+                                        @updates                                
+libreport-plugin-kerneloops.x86_64
+                        2.0.9-25.el6.centos
+                                        @updates                                
+libreport-plugin-logger.x86_64
+                        2.0.9-25.el6.centos
+                                        @updates                                
+libreport-plugin-mailx.x86_64
+                        2.0.9-25.el6.centos
+                                        @updates                                
+libreport-plugin-reportuploader.x86_64
+                        2.0.9-25.el6.centos
+                                        @updates                                
+libreport-plugin-rhtsupport.x86_64
+                        2.0.9-25.el6.centos
+                                        @updates                                
+libreport-plugin-ureport.x86_64
+                        2.0.9-25.el6.centos
+                                        @updates                                
+libreport-python.x86_64 2.0.9-25.el6.centos
+                                        @updates                                
+librsvg2.x86_64         2.26.0-14.el6   @base                                   
+libsamplerate.x86_64    0.1.7-2.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+libselinux.x86_64       2.0.94-7.el6    @base                                   
+libselinux-devel.x86_64 2.0.94-7.el6    @base                                   
+libselinux-python.x86_64
+                        2.0.94-7.el6    @base                                   
+libselinux-ruby.x86_64  2.0.94-7.el6    @base                                   
+libselinux-utils.x86_64 2.0.94-7.el6    @base                                   
+libsemanage.x86_64      2.0.43-5.1.el6  @base                                   
+libsepol.x86_64         2.0.41-4.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+libsepol-devel.x86_64   2.0.41-4.el6    @base                                   
+libshout.x86_64         2.2.2-5.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+libsigc++20.x86_64      2.2.4.2-1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+libsmbclient.x86_64     3.6.23-21.el6_7 @updates                                
+libsndfile.x86_64       1.0.20-5.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+libsoup.x86_64          2.34.3-3.el6_6  @base                                   
+libspectre.x86_64       0.2.4-1.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libss.x86_64            1.41.12-22.el6  @base                                   
+libssh2.x86_64          1.4.2-1.el6_6.1 @base                                   
+libsss_idmap.x86_64     1.12.4-47.el6_7.4
+                                        @updates                                
+libstdc++.x86_64        4.4.7-16.el6    @base                                   
+libstdc++-devel.x86_64  4.4.7-16.el6    @base                                   
+libtalloc.x86_64        2.0.7-2.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libtar.x86_64           1.2.11-17.el6_4.1
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+libtasn1.x86_64         2.3-6.el6_5     @base                                   
+libtdb.x86_64           1.2.10-1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+libtevent.x86_64        0.9.18-3.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+libthai.x86_64          0.1.12-3.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+libtheora.x86_64        1:1.1.0-2.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+libtiff.x86_64          3.9.4-10.el6_5  @base                                   
+libtirpc.x86_64         0.2.1-10.el6    @base                                   
+libtool-ltdl.x86_64     2.2.6-15.5.el6  @anaconda-CentOS-201311272149.x86_64/6.5
+libudev.x86_64          147-2.63.el6_7.1
+                                        @updates                                
+libusb.x86_64           0.1.12-23.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+libusb1.x86_64          1.0.9-0.6.rc1.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+libuser.x86_64          0.56.13-8.el6_7 @updates                                
+libuser-python.x86_64   0.56.13-8.el6_7 @updates                                
+libutempter.x86_64      1.1.5-4.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+libuuid.x86_64          2.17.2-12.18.el6
+                                        @base                                   
+libuv.x86_64            1:0.10.34-1.el6 @epel                                   
+libuv-devel.x86_64      1:0.10.34-1.el6 @epel                                   
+libv4l.x86_64           0.6.3-2.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+libvisual.x86_64        0.4.0-10.el6    @base                                   
+libvorbis.x86_64        1:1.2.3-4.el6_2.1
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+libvpx.x86_64           1.3.0-5.el6_5   @base                                   
+libwacom.x86_64         0.8-1.el6       @base                                   
+libwacom-data.noarch    0.8-1.el6       @base                                   
+libwnck.x86_64          2.28.0-3.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+libxcb.x86_64           1.9.1-3.el6     @base                                   
+libxkbfile.x86_64       1.0.6-1.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+libxklavier.x86_64      4.0-9.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+libxml2.x86_64          2.7.6-20.el6_7.1
+                                        @updates                                
+libxml2-python.x86_64   2.7.6-20.el6_7.1
+                                        @updates                                
+libxslt.x86_64          1.1.26-2.el6_3.1
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+lklug-fonts.noarch      0.6-4.20090803cvs.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+lksctp-tools.x86_64     1.0.10-7.el6    @base                                   
+lm_sensors-libs.x86_64  3.1.1-17.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+lockdev.x86_64          1.0.1-18.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+logrotate.x86_64        3.7.8-26.el6_7  @updates                                
+lohit-assamese-fonts.noarch
+                        2.4.3-5.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+lohit-bengali-fonts.noarch
+                        2.4.3-6.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+lohit-devanagari-fonts.noarch
+                        2.4.3-7.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+lohit-gujarati-fonts.noarch
+                        2.4.4-4.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+lohit-kannada-fonts.noarch
+                        2.4.5-6.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+lohit-oriya-fonts.noarch
+                        2.4.3-6.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+lohit-punjabi-fonts.noarch
+                        2.4.4-2.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+lohit-tamil-fonts.noarch
+                        2.4.5-5.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+lohit-telugu-fonts.noarch
+                        2.4.5-6.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+lpsolve.x86_64          5.5.0.15-2.el6  @anaconda-CentOS-201311272149.x86_64/6.5
+lsof.x86_64             4.82-5.el6      @base                                   
+ltrace.x86_64           0.5-28.45svn.el6
+                                        @base                                   
+lua.x86_64              5.1.4-4.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+lvm2.x86_64             2.02.118-3.el6_7.4
+                                        @updates                                
+lvm2-libs.x86_64        2.02.118-3.el6_7.4
+                                        @updates                                
+lx.x86_64               20030328-5.1.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+lzo.x86_64              2.03-3.1.el6_5.1
+                                        @base                                   
+m17n-contrib.noarch     1.1.10-4.el6_1.1
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+m17n-contrib-assamese.noarch
+                        1.1.10-4.el6_1.1
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+m17n-contrib-bengali.noarch
+                        1.1.10-4.el6_1.1
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+m17n-contrib-gujarati.noarch
+                        1.1.10-4.el6_1.1
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+m17n-contrib-hindi.noarch
+                        1.1.10-4.el6_1.1
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+m17n-contrib-kannada.noarch
+                        1.1.10-4.el6_1.1
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+m17n-contrib-maithili.noarch
+                        1.1.10-4.el6_1.1
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+m17n-contrib-malayalam.noarch
+                        1.1.10-4.el6_1.1
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+m17n-contrib-marathi.noarch
+                        1.1.10-4.el6_1.1
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+m17n-contrib-oriya.noarch
+                        1.1.10-4.el6_1.1
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+m17n-contrib-punjabi.noarch
+                        1.1.10-4.el6_1.1
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+m17n-contrib-sinhala.noarch
+                        1.1.10-4.el6_1.1
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+m17n-contrib-tamil.noarch
+                        1.1.10-4.el6_1.1
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+m17n-contrib-telugu.noarch
+                        1.1.10-4.el6_1.1
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+m17n-contrib-urdu.noarch
+                        1.1.10-4.el6_1.1
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+m17n-db.noarch          1.5.5-1.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+m17n-db-assamese.noarch 1.5.5-1.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+m17n-db-bengali.noarch  1.5.5-1.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+m17n-db-datafiles.noarch
+                        1.5.5-1.1.el6   @base                                   
+m17n-db-gujarati.noarch 1.5.5-1.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+m17n-db-hindi.noarch    1.5.5-1.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+m17n-db-kannada.noarch  1.5.5-1.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+m17n-db-malayalam.noarch
+                        1.5.5-1.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+m17n-db-oriya.noarch    1.5.5-1.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+m17n-db-punjabi.noarch  1.5.5-1.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+m17n-db-sinhala.noarch  1.5.5-1.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+m17n-db-tamil.noarch    1.5.5-1.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+m17n-db-telugu.noarch   1.5.5-1.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+m17n-db-thai.noarch     1.5.5-1.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+m17n-lib.x86_64         1.5.5-2.el6_1.1 @anaconda-CentOS-201311272149.x86_64/6.5
+m4.x86_64               1.4.13-5.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+madan-fonts.noarch      2.000-3.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+mailcap.noarch          2.1.31-2.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+mailx.x86_64            12.4-8.el6_6    @updates                                
+make.x86_64             1:3.81-20.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+man.x86_64              1.6f-32.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+man-pages.noarch        3.22-20.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+man-pages-overrides.noarch
+                        6.7.5-1.el6     @base                                   
+mcpp.x86_64             2.7.2-4.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+mdadm.x86_64            3.3.2-5.el6     @base                                   
+meanwhile.x86_64        1.1.0-3.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+media-player-info.noarch
+                        6-1.el6         @anaconda-CentOS-201311272149.x86_64/6.5
+mesa-dri-drivers.x86_64 10.4.3-1.el6    @base                                   
+mesa-dri-filesystem.x86_64
+                        10.4.3-1.el6    @base                                   
+mesa-dri1-drivers.x86_64
+                        7.11-8.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+mesa-libEGL.x86_64      10.4.3-1.el6    @base                                   
+mesa-libGL.x86_64       10.4.3-1.el6    @base                                   
+mesa-libGLU.x86_64      10.4.3-1.el6    @base                                   
+mesa-libgbm.x86_64      10.4.3-1.el6    @base                                   
+mesa-private-llvm.x86_64
+                        3.4-3.el6       @base                                   
+metacity.x86_64         2.28.0-23.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+microcode_ctl.x86_64    1:1.17-20.el6   @base                                   
+min12xxw.x86_64         0.0.9-5.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+mingetty.x86_64         1.08-5.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+mlocate.x86_64          0.22.2-6.el6    @base                                   
+mobile-broadband-provider-info.noarch
+                        1.20100122-4.el6
+                                        @base                                   
+mod_dnssd.x86_64        0.6-2.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+module-init-tools.x86_64
+                        3.9-25.el6      @base                                   
+mousetweaks.x86_64      2.28.2-1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+mozilla-filesystem.x86_64
+                        1.9-5.1.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+mpfr.x86_64             2.4.1-6.el6     @base                                   
+mtdev.x86_64            1.1.2-5.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+mtools.x86_64           4.0.12-1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+mtr.x86_64              2:0.75-5.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+mysql-libs.x86_64       5.1.73-5.el6_6  @base                                   
+mythes-en.noarch        3.0-6.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+nano.x86_64             2.0.9-7.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+nautilus.x86_64         2.28.4-19.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+nautilus-extensions.x86_64
+                        2.28.4-19.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+nautilus-open-terminal.x86_64
+                        0.17-4.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+nautilus-sendto.x86_64  2.28.2-4.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+ncurses.x86_64          5.7-4.20090207.el6
+                                        @base                                   
+ncurses-base.x86_64     5.7-4.20090207.el6
+                                        @base                                   
+ncurses-libs.x86_64     5.7-4.20090207.el6
+                                        @base                                   
+neon.x86_64             0.29.3-3.el6_4  @anaconda-CentOS-201311272149.x86_64/6.5
+net-snmp.x86_64         1:5.5-54.el6_7.1
+                                        @updates                                
+net-snmp-libs.x86_64    1:5.5-54.el6_7.1
+                                        @updates                                
+net-tools.x86_64        1.60-110.el6_2  @anaconda-CentOS-201311272149.x86_64/6.5
+newt.x86_64             0.52.11-3.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+newt-python.x86_64      0.52.11-3.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+nfs-utils.x86_64        1:1.2.3-64.el6  @base                                   
+nfs-utils-lib.x86_64    1.1.5-11.el6    @base                                   
+nfs4-acl-tools.x86_64   0.3.3-7.el6     @base                                   
+node-gyp.noarch         0.10.6-2.el6    @epel                                   
+nodejs.x86_64           0.10.36-3.el6   @epel                                   
+nodejs-abbrev.noarch    1.0.4-6.el6     @epel                                   
+nodejs-ansi.noarch      0.2.1-1.el6     @epel                                   
+nodejs-archy.noarch     0.0.2-8.el6     @epel                                   
+nodejs-asn1.noarch      0.1.11-3.el6    @epel                                   
+nodejs-assert-plus.noarch
+                        0.1.4-1.el6     @epel                                   
+nodejs-async.noarch     0.2.10-1.el6    @epel                                   
+nodejs-aws-sign.noarch  0.3.0-1.el6     @epel                                   
+nodejs-block-stream.noarch
+                        0.0.7-1.el6     @epel                                   
+nodejs-boom.noarch      0.4.2-2.el6     @epel                                   
+nodejs-child-process-close.noarch
+                        0.1.1-2.el6     @epel                                   
+nodejs-chmodr.noarch    0.1.0-4.el6     @epel                                   
+nodejs-chownr.noarch    0.0.1-9.el6     @epel                                   
+nodejs-cmd-shim.noarch  1.1.0-3.el6     @epel                                   
+nodejs-combined-stream.noarch
+                        0.0.4-3.el6     @epel                                   
+nodejs-config-chain.noarch
+                        1.1.7-1.el6     @epel                                   
+nodejs-cookie-jar.noarch
+                        1:0.3.0-1.el6   @epel                                   
+nodejs-couch-login.noarch
+                        0.1.18-1.el6    @epel                                   
+nodejs-cryptiles.noarch 0.2.2-1.el6     @epel                                   
+nodejs-ctype.noarch     0.5.3-3.el6     @epel                                   
+nodejs-delayed-stream.noarch
+                        0.0.5-5.el6     @epel                                   
+nodejs-devel.x86_64     0.10.36-3.el6   @epel                                   
+nodejs-editor.noarch    0.0.4-2.el6     @epel                                   
+nodejs-forever-agent.noarch
+                        0.5.0-1.el6     @epel                                   
+nodejs-form-data.noarch 0.1.1-1.el6     @epel                                   
+nodejs-fstream.noarch   0.1.24-1.el6    @epel                                   
+nodejs-fstream-ignore.noarch
+                        0.0.7-1.el6     @epel                                   
+nodejs-fstream-npm.noarch
+                        0.1.5-1.el6     @epel                                   
+nodejs-github-url-from-git.noarch
+                        1.1.1-2.el6     @epel                                   
+nodejs-glob.noarch      3.2.6-1.el6     @epel                                   
+nodejs-graceful-fs.noarch
+                        2.0.0-2.el6     @epel                                   
+nodejs-hawk.noarch      1.0.0-1.el6     @epel                                   
+nodejs-hoek.noarch      0.9.1-1.el6     @epel                                   
+nodejs-http-signature.noarch
+                        0.10.0-3.el6    @epel                                   
+nodejs-inherits.noarch  2.0.0-4.el6     @epel                                   
+nodejs-ini.noarch       1.1.0-3.el6     @epel                                   
+nodejs-init-package-json.noarch
+                        0.0.10-1.el6    @epel                                   
+nodejs-json-stringify-safe.noarch
+                        5.0.0-1.el6     @epel                                   
+nodejs-lockfile.noarch  0.4.2-1.el6     @epel                                   
+nodejs-lru-cache.noarch 2.3.0-3.el6     @epel                                   
+nodejs-mime.noarch      1.2.11-1.el6    @epel                                   
+nodejs-minimatch.noarch 0.2.12-2.el6    @epel                                   
+nodejs-mkdirp.noarch    0.3.5-3.el6     @epel                                   
+nodejs-mute-stream.noarch
+                        0.0.4-1.el6     @epel                                   
+nodejs-node-uuid.noarch 1.4.1-1.el6     @epel                                   
+nodejs-nopt.noarch      2.1.2-1.el6     @epel                                   
+nodejs-normalize-package-data.noarch
+                        0.2.1-1.el6     @epel                                   
+nodejs-npm-registry-client.noarch
+                        0.2.28-3.el6    @epel                                   
+nodejs-npm-user-validate.noarch
+                        0.0.3-1.el6     @epel                                   
+nodejs-npmconf.noarch   0.1.2-1.el6     @epel                                   
+nodejs-npmlog.noarch    0.0.4-1.el6     @epel                                   
+nodejs-oauth-sign.noarch
+                        0.3.0-1.el6     @epel                                   
+nodejs-once.noarch      1.1.1-5.el6     @epel                                   
+nodejs-opener.noarch    1.3.0-7.el6     @epel                                   
+nodejs-osenv.noarch     0.0.3-5.el6     @epel                                   
+nodejs-packaging.noarch 7-1.el6         @epel                                   
+nodejs-promzard.noarch  0.2.0-6.el6     @epel                                   
+nodejs-proto-list.noarch
+                        1.2.2-5.el6     @epel                                   
+nodejs-qs.noarch        0.6.6-3.el6     @epel                                   
+nodejs-read.noarch      1.0.5-1.el6     @epel                                   
+nodejs-read-installed.noarch
+                        0.2.4-1.el6     @epel                                   
+nodejs-read-package-json.noarch
+                        1.1.3-1.el6     @epel                                   
+nodejs-request.noarch   2.25.0-3.el6    @epel                                   
+nodejs-retry.noarch     0.6.0-5.el6     @epel                                   
+nodejs-rimraf.noarch    2.2.2-1.el6     @epel                                   
+nodejs-semver.noarch    2.1.0-1.el6     @epel                                   
+nodejs-sha.noarch       1.2.1-1.el6     @epel                                   
+nodejs-sigmund.noarch   1.0.0-5.el6     @epel                                   
+nodejs-slide.noarch     1.1.5-1.el6     @epel                                   
+nodejs-sntp.noarch      0.2.4-1.el6     @epel                                   
+nodejs-tar.noarch       0.1.18-1.el6    @epel                                   
+nodejs-tunnel-agent.noarch
+                        0.3.0-1.el6     @epel                                   
+nodejs-uid-number.noarch
+                        0.0.3-7.el6     @epel                                   
+nodejs-which.noarch     1.0.5-8.el6     @epel                                   
+notification-daemon.x86_64
+                        0.5.0-1.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+notify-python.x86_64    0.1.1-10.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+npm.noarch              1.3.6-5.el6     @epel                                   
+nspluginwrapper.x86_64  1.4.4-1.el6_3   @anaconda-CentOS-201311272149.x86_64/6.5
+nspr.x86_64             4.11.0-1.el6    @base                                   
+nss.x86_64              3.21.0-8.el6    @base                                   
+nss-softokn.x86_64      3.14.3-23.el6_7 @updates                                
+nss-softokn-freebl.x86_64
+                        3.14.3-23.el6_7 @updates                                
+nss-sysinit.x86_64      3.21.0-8.el6    @base                                   
+nss-tools.x86_64        3.21.0-8.el6    @base                                   
+nss-util.x86_64         3.21.0-2.el6    @base                                   
+ntp.x86_64              4.2.6p5-5.el6.centos.2
+                                        @updates                                
+ntpdate.x86_64          4.2.6p5-5.el6.centos.2
+                                        @updates                                
+ntsysv.x86_64           1.3.49.3-5.el6  @base                                   
+numactl.x86_64          2.0.9-2.el6     @base                                   
+nut-client.x86_64       2.6.5-2.el6     @epel                                   
+obex-data-server.x86_64 1:0.4.3-4.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+obexd.x86_64            0.19-2.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+oddjob.x86_64           0.30-6.el6      @base                                   
+oddjob-mkhomedir.x86_64 0.30-6.el6      @base                                   
+opal.x86_64             3.6.6-4.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+open-vm-tools.x86_64    10.0.5-2.el6    @epel                                   
+openchange.x86_64       1.0-6.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+openjpeg-libs.x86_64    1.3-11.el6      @base                                   
+openldap.x86_64         2.4.40-7.el6_7  @updates                                
+openobex.x86_64         1.4-7.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+openssh.x86_64          5.3p1-112.el6_7 @updates                                
+openssh-askpass.x86_64  5.3p1-112.el6_7 @updates                                
+openssh-clients.x86_64  5.3p1-112.el6_7 @updates                                
+openssh-server.x86_64   5.3p1-112.el6_7 @updates                                
+openssl.x86_64          1.0.1e-42.el6_7.1
+                                        @updates                                
+openssl-devel.x86_64    1.0.1e-42.el6_7.1
+                                        @updates                                
+orca.x86_64             2.28.2-1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+p11-kit.x86_64          0.18.5-2.el6_5.2
+                                        @base                                   
+p11-kit-trust.x86_64    0.18.5-2.el6_5.2
+                                        @base                                   
+pakchois.x86_64         0.4-3.2.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+paktype-fonts-common.noarch
+                        2.0-8.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+paktype-naqsh-fonts.noarch
+                        2.0-8.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+paktype-tehreer-fonts.noarch
+                        2.0-8.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+pam.x86_64              1.1.1-20.el6_7.1
+                                        @updates                                
+pam_krb5.x86_64         2.3.11-9.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+pam_passwdqc.x86_64     1.0.5-8.el6     @base                                   
+pango.x86_64            1.28.1-10.el6   @base                                   
+pangomm.x86_64          2.26.0-1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+paps.x86_64             0.6.8-13.el6.2  @anaconda-CentOS-201311272149.x86_64/6.5
+paps-libs.x86_64        0.6.8-13.el6.2  @anaconda-CentOS-201311272149.x86_64/6.5
+parted.x86_64           2.1-29.el6      @base                                   
+passwd.x86_64           0.77-4.el6_2.2  @anaconda-CentOS-201311272149.x86_64/6.5
+patch.x86_64            2.6-6.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+pax.x86_64              3.4-10.1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+pbm2l2030.x86_64        1.4-5.1.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+pbm2l7k.x86_64          990321-8.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+pciutils.x86_64         3.1.10-4.el6    @base                                   
+pciutils-libs.x86_64    3.1.10-4.el6    @base                                   
+pcmciautils.x86_64      015-4.2.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+pcre.x86_64             7.8-7.el6       @base                                   
+pcsc-lite-libs.x86_64   1.5.2-15.el6    @base                                   
+perl.x86_64             4:5.10.1-141.el6_7.1
+                                        @updates                                
+perl-CGI.x86_64         3.51-141.el6_7.1
+                                        @updates                                
+perl-Error.noarch       1:0.17015-4.el6 @base                                   
+perl-ExtUtils-MakeMaker.x86_64
+                        6.55-141.el6_7.1
+                                        @updates                                
+perl-ExtUtils-ParseXS.x86_64
+                        1:2.2003.0-141.el6_7.1
+                                        @updates                                
+perl-Git.noarch         1.7.1-3.el6_4.1 @base                                   
+perl-Module-Pluggable.x86_64
+                        1:3.90-141.el6_7.1
+                                        @updates                                
+perl-Pod-Escapes.x86_64 1:1.04-141.el6_7.1
+                                        @updates                                
+perl-Pod-Simple.x86_64  1:3.13-141.el6_7.1
+                                        @updates                                
+perl-Test-Harness.x86_64
+                        3.17-141.el6_7.1
+                                        @updates                                
+perl-Test-Simple.x86_64 0.92-141.el6_7.1
+                                        @updates                                
+perl-devel.x86_64       4:5.10.1-141.el6_7.1
+                                        @updates                                
+perl-libs.x86_64        4:5.10.1-141.el6_7.1
+                                        @updates                                
+perl-version.x86_64     3:0.77-141.el6_7.1
+                                        @updates                                
+pgdg-centos92.noarch    9.2-7           @pgdg92                                 
+phonon-backend-gstreamer.x86_64
+                        1:4.6.2-28.el6_5
+                                        @base                                   
+pidgin.x86_64           2.7.9-27.el6    @base                                   
+pinentry.x86_64         0.7.6-8.el6     @base                                   
+pinentry-gtk.x86_64     0.7.6-8.el6     @base                                   
+pinfo.x86_64            0.6.9-12.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+pixman.x86_64           0.32.4-4.el6    @base                                   
+pkgconfig.x86_64        1:0.23-9.1.el6  @anaconda-CentOS-201311272149.x86_64/6.5
+plymouth.x86_64         0.8.3-27.el6.centos.1
+                                        @base                                   
+plymouth-core-libs.x86_64
+                        0.8.3-27.el6.centos.1
+                                        @base                                   
+plymouth-gdm-hooks.x86_64
+                        0.8.3-27.el6.centos.1
+                                        @base                                   
+plymouth-graphics-libs.x86_64
+                        0.8.3-27.el6.centos.1
+                                        @base                                   
+plymouth-plugin-label.x86_64
+                        0.8.3-27.el6.centos.1
+                                        @base                                   
+plymouth-plugin-two-step.x86_64
+                        0.8.3-27.el6.centos.1
+                                        @base                                   
+plymouth-scripts.x86_64 0.8.3-27.el6.centos.1
+                                        @base                                   
+plymouth-system-theme.noarch
+                        0.8.3-27.el6.centos.1
+                                        @base                                   
+plymouth-theme-rings.noarch
+                        0.8.3-27.el6.centos.1
+                                        @base                                   
+plymouth-utils.x86_64   0.8.3-27.el6.centos.1
+                                        @base                                   
+pm-utils.x86_64         1.2.5-11.el6    @base                                   
+pnm2ppa.x86_64          1:1.04-19.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+policycoreutils.x86_64  2.0.83-24.el6   @base                                   
+polkit.x86_64           0.96-11.el6     @base                                   
+polkit-desktop-policy.noarch
+                        0.96-11.el6     @base                                   
+polkit-gnome.x86_64     0.96-4.el6      @base                                   
+poppler.x86_64          0.12.4-4.el6_6.1
+                                        @base                                   
+poppler-data.noarch     0.4.0-1.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+poppler-glib.x86_64     0.12.4-4.el6_6.1
+                                        @base                                   
+poppler-utils.x86_64    0.12.4-4.el6_6.1
+                                        @base                                   
+popt.x86_64             1.13-7.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+portreserve.x86_64      0.0.4-9.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+postfix.x86_64          2:2.6.6-6.el6_7.1
+                                        @updates                                
+postgresql92.x86_64     9.2.14-1PGDG.rhel6
+                                        @pgdg92                                 
+postgresql92-libs.x86_64
+                        9.2.14-1PGDG.rhel6
+                                        @pgdg92                                 
+postgresql92-server.x86_64
+                        9.2.14-1PGDG.rhel6
+                                        @pgdg92                                 
+ppl.x86_64              0.10.2-11.el6   @base                                   
+ppp.x86_64              2.4.5-10.el6    @base                                   
+prelink.x86_64          0.4.6-3.1.el6_4 @anaconda-CentOS-201311272149.x86_64/6.5
+printer-filters.noarch  1.1-4.1.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+procps.x86_64           3.2.8-35.el6_7  @updates                                
+psacct.x86_64           6.3.2-63.el6_3.3
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+psmisc.x86_64           22.6-19.el6_5   @base                                   
+psutils.x86_64          1.17-34.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+pth.x86_64              2.0.7-9.3.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+ptlib.x86_64            2.6.5-3.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+ptouch-driver.x86_64    1.3-2.1.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+pulseaudio.x86_64       0.9.21-21.el6   @base                                   
+pulseaudio-gdm-hooks.x86_64
+                        0.9.21-21.el6   @base                                   
+pulseaudio-libs.x86_64  0.9.21-21.el6   @base                                   
+pulseaudio-libs-glib2.x86_64
+                        0.9.21-21.el6   @base                                   
+pulseaudio-module-bluetooth.x86_64
+                        0.9.21-21.el6   @base                                   
+pulseaudio-module-gconf.x86_64
+                        0.9.21-21.el6   @base                                   
+pulseaudio-module-x11.x86_64
+                        0.9.21-21.el6   @base                                   
+pulseaudio-utils.x86_64 0.9.21-21.el6   @base                                   
+puppet-agent.x86_64     1.8.2-1.el6     @pc_repo                                
+puppetlabs-release.noarch
+                        22.0-2          installed                               
+pyOpenSSL.x86_64        0.13.1-2.el6    @base                                   
+pycairo.x86_64          1.8.6-2.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+pygobject2.x86_64       2.20.0-5.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+pygpgme.x86_64          0.1-18.20090824bzr68.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+pygtk2.x86_64           2.16.0-3.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+pygtk2-libglade.x86_64  2.16.0-3.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+pygtksourceview.x86_64  2.8.0-1.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+pyorbit.x86_64          2.24.0-5.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+pytalloc.x86_64         2.0.7-2.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+python.x86_64           2.6.6-64.el6    @base                                   
+python-argparse.noarch  1.2.1-2.1.el6   @base                                   
+python-beaker.noarch    1.3.1-7.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+python-crypto.x86_64    2.0.1-22.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+python-decorator.noarch 3.0.1-3.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+python-dmidecode.x86_64 3.10.13-3.el6_4 @base                                   
+python-ethtool.x86_64   0.6-5.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+python-iniparse.noarch  0.3.1-2.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+python-iwlib.x86_64     0.1-1.2.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+python-kerberos.x86_64  1.1-7.el6       @base                                   
+python-krbV.x86_64      1.0.90-3.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+python-ldap.x86_64      2.3.10-1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+python-libs.x86_64      2.6.6-64.el6    @base                                   
+python-lxml.x86_64      2.2.3-1.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+python-mako.noarch      0.3.4-1.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+python-markupsafe.x86_64
+                        0.9.2-4.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+python-meh.noarch       0.12.1-3.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+python-netaddr.noarch   0.7.5-4.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+python-nss.x86_64       0.16.0-1.el6    @base                                   
+python-paramiko.noarch  1.7.5-2.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+python-pycurl.x86_64    7.19.0-8.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+python-slip.noarch      0.2.20-1.el6_2  @anaconda-CentOS-201311272149.x86_64/6.5
+python-slip-dbus.noarch 0.2.20-1.el6_2  @anaconda-CentOS-201311272149.x86_64/6.5
+python-slip-gtk.noarch  0.2.20-1.el6_2  @anaconda-CentOS-201311272149.x86_64/6.5
+python-sssdconfig.noarch
+                        1.12.4-47.el6_7.4
+                                        @updates                                
+python-urlgrabber.noarch
+                        3.9.1-9.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+pywebkitgtk.x86_64      1.1.6-4.el6     @base                                   
+pyxdg.noarch            0.18-1.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+pyxf86config.x86_64     0.3.37-7.1.el6  @anaconda-CentOS-201311272149.x86_64/6.5
+ql2100-firmware.noarch  1.19.38-3.1.el6 @anaconda-CentOS-201311272149.x86_64/6.5
+ql2200-firmware.noarch  2.02.08-3.1.el6 @anaconda-CentOS-201311272149.x86_64/6.5
+ql23xx-firmware.noarch  3.03.27-3.1.el6 @anaconda-CentOS-201311272149.x86_64/6.5
+ql2400-firmware.noarch  7.03.00-1.el6_5 @base                                   
+ql2500-firmware.noarch  7.03.00-1.el6_5 @base                                   
+qt.x86_64               1:4.6.2-28.el6_5
+                                        @base                                   
+qt-sqlite.x86_64        1:4.6.2-28.el6_5
+                                        @base                                   
+qt-x11.x86_64           1:4.6.2-28.el6_5
+                                        @base                                   
+qt3.x86_64              3.3.8b-30.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+quota.x86_64            1:3.17-23.el6   @base                                   
+rarian.x86_64           0.8.1-5.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+rarian-compat.x86_64    0.8.1-5.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+rdate.x86_64            1.4-16.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+readahead.x86_64        1:1.5.6-2.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+readline.x86_64         6.0-4.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+redhat-bookmarks.noarch 6-1.el6.centos  @anaconda-CentOS-201311272149.x86_64/6.5
+redhat-logos.noarch     60.0.14-12.el6.centos
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+redhat-lsb.x86_64       4.0-7.el6.centos
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+redhat-lsb-compat.x86_64
+                        4.0-7.el6.centos
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+redhat-lsb-core.x86_64  4.0-7.el6.centos
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+redhat-lsb-graphics.x86_64
+                        4.0-7.el6.centos
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+redhat-lsb-printing.x86_64
+                        4.0-7.el6.centos
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+redhat-menus.noarch     14.0.0-3.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+redhat-rpm-config.noarch
+                        9.0.3-44.el6.centos
+                                        @base                                   
+rfkill.x86_64           0.3-4.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+rhino.noarch            1.7-1.r2.6.jpp5 @jpackage-generic                       
+rhythmbox.x86_64        0.12.8-1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+rng-tools.x86_64        5-2.el6_7       @updates                                
+rootfiles.noarch        8.1-6.1.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+rp-pppoe.x86_64         3.10-11.el6     @base                                   
+rpcbind.x86_64          0.2.0-11.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+rpm.x86_64              4.8.0-47.el6    @base                                   
+rpm-libs.x86_64         4.8.0-47.el6    @base                                   
+rpm-python.x86_64       4.8.0-47.el6    @base                                   
+rsync.x86_64            3.0.6-12.el6    @base                                   
+rsyslog.x86_64          5.8.10-10.el6_6 @updates                                
+rt61pci-firmware.noarch 1.2-7.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+rt73usb-firmware.noarch 1.8-7.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+rtkit.x86_64            0.5-2.el6_4     @anaconda-CentOS-201311272149.x86_64/6.5
+ruby.x86_64             1.8.7.374-4.el6_6
+                                        @base                                   
+ruby-augeas.x86_64      0.4.1-3.el6     @puppetlabs-deps                        
+ruby-irb.x86_64         1.8.7.374-4.el6_6
+                                        @base                                   
+ruby-libs.x86_64        1.8.7.374-4.el6_6
+                                        @base                                   
+ruby-rdoc.x86_64        1.8.7.374-4.el6_6
+                                        @base                                   
+ruby-shadow.x86_64      1:2.2.0-2.el6   @puppetlabs-deps                        
+rubygem-json.x86_64     1.5.5-3.el6     @puppetlabs-deps                        
+rubygems.noarch         1.3.7-5.el6     @base                                   
+samba-client.x86_64     3.6.23-21.el6_7 @updates                                
+samba-common.x86_64     3.6.23-21.el6_7 @updates                                
+samba-winbind.x86_64    3.6.23-21.el6_7 @updates                                
+samba-winbind-clients.x86_64
+                        3.6.23-21.el6_7 @updates                                
+samba4-libs.x86_64      4.0.0-66.el6_6.rc4
+                                        @base                                   
+sane-backends.x86_64    1.0.21-3.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+sane-backends-libs.x86_64
+                        1.0.21-3.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+sane-backends-libs-gphoto2.x86_64
+                        1.0.21-3.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+satyr.x86_64            0.16-2.el6      @base                                   
+scenery-backgrounds.noarch
+                        6.0.0-1.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+scl-utils.x86_64        20120927-27.el6_6
+                                        @base                                   
+screen.x86_64           4.0.3-19.el6    @base                                   
+seahorse.x86_64         2.28.1-4.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+sed.x86_64              4.2.1-10.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+selinux-policy.noarch   3.7.19-279.el6_7.8
+                                        @updates                                
+selinux-policy-targeted.noarch
+                        3.7.19-279.el6_7.8
+                                        @updates                                
+setserial.x86_64        2.17-25.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+setup.noarch            2.8.14-20.el6_4.1
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+setuptool.x86_64        1.19.9-4.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+sg3_utils-libs.x86_64   1.28-8.el6      @base                                   
+sgml-common.noarch      0.6.3-33.el6    @base                                   
+sgpio.x86_64            1.2.0.10-5.el6  @anaconda-CentOS-201311272149.x86_64/6.5
+shadow-utils.x86_64     2:4.1.4.2-19.el6_6.1
+                                        @base                                   
+shared-mime-info.x86_64 0.70-6.el6      @base                                   
+sil-padauk-fonts.noarch 2.6.1-1.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+slang.x86_64            2.2.1-1.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+smartmontools.x86_64    1:5.43-1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+smc-fonts-common.noarch 04.2-11.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+smc-meera-fonts.noarch  04.2-11.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+smp_utils.x86_64        0.94-4.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+snappy.x86_64           1.1.0-1.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+sos.noarch              3.2-28.el6.centos
+                                        @base                                   
+sound-juicer.x86_64     2.28.1-6.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+sound-theme-freedesktop.noarch
+                        0.7-3.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+speex.x86_64            1.2-0.12.rc1.1.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+spice-vdagent.x86_64    0.14.0-9.el6    @base                                   
+sqlite.x86_64           3.6.20-1.el6_7.2
+                                        @updates                                
+sssd.x86_64             1.12.4-47.el6_7.4
+                                        @updates                                
+sssd-ad.x86_64          1.12.4-47.el6_7.4
+                                        @updates                                
+sssd-client.x86_64      1.12.4-47.el6_7.4
+                                        @updates                                
+sssd-common.x86_64      1.12.4-47.el6_7.4
+                                        @updates                                
+sssd-common-pac.x86_64  1.12.4-47.el6_7.4
+                                        @updates                                
+sssd-ipa.x86_64         1.12.4-47.el6_7.4
+                                        @updates                                
+sssd-krb5.x86_64        1.12.4-47.el6_7.4
+                                        @updates                                
+sssd-krb5-common.x86_64 1.12.4-47.el6_7.4
+                                        @updates                                
+sssd-ldap.x86_64        1.12.4-47.el6_7.4
+                                        @updates                                
+sssd-proxy.x86_64       1.12.4-47.el6_7.4
+                                        @updates                                
+startup-notification.x86_64
+                        0.10-2.1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+stix-fonts.noarch       0.9-13.1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+strace.x86_64           4.8-10.el6      @base                                   
+sudo.x86_64             1.8.6p3-20.el6_7
+                                        @updates                                
+sysstat.x86_64          9.0.4-27.el6    @base                                   
+system-config-date.noarch
+                        1.9.60-2.el6.centos
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+system-config-date-docs.noarch
+                        1.0.11-1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+system-config-firewall.noarch
+                        1.2.27-7.2.el6_6
+                                        @updates                                
+system-config-firewall-base.noarch
+                        1.2.27-7.2.el6_6
+                                        @updates                                
+system-config-firewall-tui.noarch
+                        1.2.27-7.2.el6_6
+                                        @updates                                
+system-config-kdump.noarch
+                        2.0.5-18.el6    @base                                   
+system-config-keyboard.x86_64
+                        1.3.1-6.el6     @base                                   
+system-config-keyboard-base.x86_64
+                        1.3.1-6.el6     @base                                   
+system-config-network-tui.noarch
+                        1.6.0.el6.2-1.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+system-config-printer.x86_64
+                        1.1.16-25.el6   @base                                   
+system-config-printer-libs.x86_64
+                        1.1.16-25.el6   @base                                   
+system-config-printer-udev.x86_64
+                        1.1.16-25.el6   @base                                   
+system-config-services.noarch
+                        0.99.45-1.el6.3 @anaconda-CentOS-201311272149.x86_64/6.5
+system-config-services-docs.noarch
+                        1.1.8-1.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+system-config-users.noarch
+                        1.2.106-8.el6   @base                                   
+system-config-users-docs.noarch
+                        1.0.8-2.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+system-gnome-theme.noarch
+                        60.0.2-1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+system-icon-theme.noarch
+                        6.0.0-2.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+system-setup-keyboard.x86_64
+                        0.7-4.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+systemtap-runtime.x86_64
+                        2.7-2.el6       @base                                   
+sysvinit-tools.x86_64   2.87-6.dsf.el6  @base                                   
+taglib.x86_64           1.6.1-1.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+tar.x86_64              2:1.23-13.el6   @base                                   
+tcp_wrappers.x86_64     7.6-57.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+tcp_wrappers-libs.x86_64
+                        7.6-57.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+tcpdump.x86_64          14:4.0.0-5.20090921gitdf3cb4.2.el6
+                                        @base                                   
+tcsh.x86_64             6.17-25.el6_6   @base                                   
+thai-scalable-fonts-common.noarch
+                        0.4.12-2.1.el6  @anaconda-CentOS-201311272149.x86_64/6.5
+thai-scalable-waree-fonts.noarch
+                        0.4.12-2.1.el6  @anaconda-CentOS-201311272149.x86_64/6.5
+tibetan-machine-uni-fonts.noarch
+                        1.901-5.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+time.x86_64             1.7-38.el6      @base                                   
+tmpwatch.x86_64         2.9.16-5.el6_7  @updates                                
+totem.x86_64            2.28.6-4.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+totem-mozplugin.x86_64  2.28.6-4.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+totem-nautilus.x86_64   2.28.6-4.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+totem-pl-parser.x86_64  2.28.3-1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+trace-cmd.x86_64        1.0.5-11.el6    @base                                   
+traceroute.x86_64       3:2.0.14-2.el6  @anaconda-CentOS-201311272149.x86_64/6.5
+ttmkfdir.x86_64         3.0.9-32.1.el6  @anaconda-CentOS-201311272149.x86_64/6.5
+tzdata.noarch           2015g-2.el6     @updates                                
+tzdata-java.noarch      2015g-2.el6     @updates                                
+udev.x86_64             147-2.63.el6_7.1
+                                        @updates                                
+udisks.x86_64           1.0.1-9.el6     @base                                   
+un-core-dotum-fonts.noarch
+                        1.0.2-0.15.080608.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+un-core-fonts-common.noarch
+                        1.0.2-0.15.080608.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+unique.x86_64           1.1.4-2.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+unzip.x86_64            6.0-2.el6_6     @base                                   
+upstart.x86_64          0.6.5-13.el6_5.3
+                                        @base                                   
+urw-fonts.noarch        2.4-10.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+usbmuxd.x86_64          1.0.2-1.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+usbutils.x86_64         003-4.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+usermode.x86_64         1.102-3.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+usermode-gtk.x86_64     1.102-3.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+ustr.x86_64             1.0.4-9.1.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+util-linux-ng.x86_64    2.17.2-12.18.el6
+                                        @base                                   
+v8.x86_64               1:3.14.5.10-17.el6
+                                        @epel                                   
+v8-devel.x86_64         1:3.14.5.10-17.el6
+                                        @epel                                   
+valgrind.x86_64         1:3.8.1-8.el6   @base                                   
+vconfig.x86_64          1.9-8.1.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+vim-common.x86_64       2:7.4.629-5.el6 @base                                   
+vim-enhanced.x86_64     2:7.4.629-5.el6 @base                                   
+vim-filesystem.x86_64   2:7.4.629-5.el6 @base                                   
+vim-minimal.x86_64      2:7.4.629-5.el6 @base                                   
+vino.x86_64             2.28.1-9.el6_4  @anaconda-CentOS-201311272149.x86_64/6.5
+virt-what.x86_64        1.11-1.2.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+vlgothic-fonts.noarch   20091202-2.el6  @anaconda-CentOS-201311272149.x86_64/6.5
+vlgothic-fonts-common.noarch
+                        20091202-2.el6  @anaconda-CentOS-201311272149.x86_64/6.5
+vorbis-tools.x86_64     1:1.2.0-7.el6   @anaconda-CentOS-201311272149.x86_64/6.5
+vte.x86_64              0.25.1-9.el6    @base                                   
+wacomexpresskeys.x86_64 0.4.2-3.el6     @anaconda-CentOS-201311272149.x86_64/6.5
+wavpack.x86_64          4.60-1.1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+wdaemon.x86_64          0.17-5.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+webkitgtk.x86_64        1.4.3-9.el6_6   @updates                                
+wget.x86_64             1.12-5.el6_6.1  @updates                                
+which.x86_64            2.19-6.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+wireless-tools.x86_64   1:29-6.el6      @base                                   
+wodim.x86_64            1.1.9-12.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+words.noarch            3.0-17.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+wpa_supplicant.x86_64   1:0.7.3-6.el6   @base                                   
+wqy-zenhei-fonts.noarch 0.9.45-3.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+xcb-util.x86_64         0.3.6-6.el6     @base                                   
+xdg-user-dirs.x86_64    0.12-4.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+xdg-user-dirs-gtk.x86_64
+                        0.8-7.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+xdg-utils.noarch        1.0.2-17.20091016cvs.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+xkeyboard-config.noarch 2.11-3.el6      @base                                   
+xml-common.noarch       0.6.3-33.el6    @base                                   
+xmlbeans.noarch         2.3.0-2.jpp5    @jpackage-generic                       
+xmlrpc-c.x86_64         1.16.24-1210.1840.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+xmlrpc-c-client.x86_64  1.16.24-1210.1840.el6
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+xorg-x11-drivers.x86_64 7.3-13.4.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+xorg-x11-drv-acecad.x86_64
+                        1.5.0-7.el6     @base                                   
+xorg-x11-drv-aiptek.x86_64
+                        1.4.1-5.el6     @base                                   
+xorg-x11-drv-apm.x86_64 1.2.5-10.el6    @base                                   
+xorg-x11-drv-ast.x86_64 0.98.0-1.el6    @base                                   
+xorg-x11-drv-ati.x86_64 7.5.99-3.el6    @base                                   
+xorg-x11-drv-ati-firmware.noarch
+                        7.5.99-3.el6    @base                                   
+xorg-x11-drv-cirrus.x86_64
+                        1.5.2-2.el6     @base                                   
+xorg-x11-drv-dummy.x86_64
+                        0.3.6-15.el6    @base                                   
+xorg-x11-drv-elographics.x86_64
+                        1.4.1-3.el6     @base                                   
+xorg-x11-drv-evdev.x86_64
+                        2.8.2-4.el6     @base                                   
+xorg-x11-drv-fbdev.x86_64
+                        0.4.3-16.el6    @base                                   
+xorg-x11-drv-fpit.x86_64
+                        1.4.0-6.el6     @base                                   
+xorg-x11-drv-glint.x86_64
+                        1.2.8-10.el6    @base                                   
+xorg-x11-drv-hyperpen.x86_64
+                        1.4.1-5.el6     @base                                   
+xorg-x11-drv-i128.x86_64
+                        1.3.6-10.el6    @base                                   
+xorg-x11-drv-i740.x86_64
+                        1.3.4-11.el6    @base                                   
+xorg-x11-drv-intel.x86_64
+                        2.99.911-8.el6  @base                                   
+xorg-x11-drv-keyboard.x86_64
+                        1.8.0-1.el6     @base                                   
+xorg-x11-drv-mach64.x86_64
+                        6.9.4-9.el6     @base                                   
+xorg-x11-drv-mga.x86_64 1.6.3-6.el6     @base                                   
+xorg-x11-drv-modesetting.x86_64
+                        0.8.0-14.el6    @base                                   
+xorg-x11-drv-mouse.x86_64
+                        1.9.0-1.el6     @base                                   
+xorg-x11-drv-mutouch.x86_64
+                        1.3.0-5.el6     @base                                   
+xorg-x11-drv-nouveau.x86_64
+                        1:1.0.10-1.el6  @base                                   
+xorg-x11-drv-nv.x86_64  2.1.20-5.el6    @base                                   
+xorg-x11-drv-openchrome.x86_64
+                        0.3.3-6.el6     @base                                   
+xorg-x11-drv-penmount.x86_64
+                        1.5.0-5.el6     @base                                   
+xorg-x11-drv-qxl.x86_64 0.1.1-17.el6    @base                                   
+xorg-x11-drv-r128.x86_64
+                        6.9.1-8.el6     @base                                   
+xorg-x11-drv-rendition.x86_64
+                        4.2.5-10.el6    @base                                   
+xorg-x11-drv-s3virge.x86_64
+                        1.10.6-10.el6   @base                                   
+xorg-x11-drv-savage.x86_64
+                        2.3.7-2.el6     @base                                   
+xorg-x11-drv-siliconmotion.x86_64
+                        1.7.7-9.el6     @base                                   
+xorg-x11-drv-sis.x86_64 0.10.7-10.el6   @base                                   
+xorg-x11-drv-sisusb.x86_64
+                        0.9.6-10.el6    @base                                   
+xorg-x11-drv-synaptics.x86_64
+                        1.7.6-1.el6     @base                                   
+xorg-x11-drv-tdfx.x86_64
+                        1.4.5-10.el6    @base                                   
+xorg-x11-drv-trident.x86_64
+                        1.3.6-10.el6    @base                                   
+xorg-x11-drv-v4l.x86_64 0.2.0-36.el6    @base                                   
+xorg-x11-drv-vesa.x86_64
+                        2.3.2-15.el6    @base                                   
+xorg-x11-drv-vmmouse.x86_64
+                        13.0.0-2.el6    @base                                   
+xorg-x11-drv-vmware.x86_64
+                        13.0.1-9.el6    @base                                   
+xorg-x11-drv-void.x86_64
+                        1.4.0-23.el6    @base                                   
+xorg-x11-drv-voodoo.x86_64
+                        1.2.5-10.el6    @base                                   
+xorg-x11-drv-wacom.x86_64
+                        0.23.0-4.el6    @base                                   
+xorg-x11-drv-xgi.x86_64 1.6.0-20.20121114git.el6
+                                        @base                                   
+xorg-x11-font-utils.x86_64
+                        1:7.2-11.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+xorg-x11-fonts-100dpi.noarch
+                        7.2-11.el6      @base                                   
+xorg-x11-fonts-ISO8859-1-100dpi.noarch
+                        7.2-11.el6      @base                                   
+xorg-x11-fonts-Type1.noarch
+                        7.2-11.el6      @base                                   
+xorg-x11-fonts-misc.noarch
+                        7.2-11.el6      @base                                   
+xorg-x11-glamor.x86_64  0.6.0-5.20140506gitf78901e.el6
+                                        @base                                   
+xorg-x11-server-Xorg.x86_64
+                        1.15.0-36.el6.centos
+                                        @base                                   
+xorg-x11-server-common.x86_64
+                        1.15.0-36.el6.centos
+                                        @base                                   
+xorg-x11-server-utils.x86_64
+                        7.7-2.el6       @base                                   
+xorg-x11-utils.x86_64   7.5-6.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+xorg-x11-xauth.x86_64   1:1.0.2-7.1.el6 @anaconda-CentOS-201311272149.x86_64/6.5
+xorg-x11-xinit.x86_64   1.0.9-14.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+xorg-x11-xkb-utils.x86_64
+                        7.7-4.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+xulrunner.x86_64        17.0.10-1.el6.centos
+                                        @anaconda-CentOS-201311272149.x86_64/6.5
+xvattr.x86_64           1.3-18.el6      @anaconda-CentOS-201311272149.x86_64/6.5
+xz.x86_64               4.999.9-0.5.beta.20091007git.el6
+                                        @base                                   
+xz-libs.x86_64          4.999.9-0.5.beta.20091007git.el6
+                                        @base                                   
+xz-lzma-compat.x86_64   4.999.9-0.5.beta.20091007git.el6
+                                        @base                                   
+yelp.x86_64             2.28.1-17.el6_3 @anaconda-CentOS-201311272149.x86_64/6.5
+yum.noarch              3.2.29-69.el6.centos
+                                        @base                                   
+yum-metadata-parser.x86_64
+                        1.1.2-16.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+yum-plugin-fastestmirror.noarch
+                        1.1.30-30.el6   @base                                   
+yum-plugin-security.noarch
+                        1.1.30-30.el6   @base                                   
+yum-utils.noarch        1.1.30-30.el6   @base                                   
+zd1211-firmware.noarch  1.4-4.el6       @anaconda-CentOS-201311272149.x86_64/6.5
+zenity.x86_64           2.28.0-1.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+zip.x86_64              3.0-1.el6_7.1   @updates                                
+zlib.x86_64             1.2.3-29.el6    @anaconda-CentOS-201311272149.x86_64/6.5
+zlib-devel.x86_64       1.2.3-29.el6    @base                                   
