@@ -17,9 +17,10 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 
-import com.blackducksoftware.integration.hub.linux.BdioComponentDetails
-import com.blackducksoftware.integration.hub.linux.OperatingSystemEnum
-import com.blackducksoftware.integration.hub.linux.PackageManagerEnum
+import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter
+import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
+import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
+
 
 @Component
 class RpmExtractor extends Extractor {
@@ -30,16 +31,14 @@ class RpmExtractor extends Extractor {
         initValues(PackageManagerEnum.RPM)
     }
 
-    List<BdioComponentDetails> extractComponents(OperatingSystemEnum operatingSystem, File inputFile) {
-        def components = []
+    @Override
+    void extractComponents(BdioWriter bdioWriter, OperatingSystemEnum operatingSystem, File inputFile) {
         inputFile.eachLine { line ->
-            extract(operatingSystem, components, line)
+            extract(bdioWriter, operatingSystem, line)
         }
-
-        components
     }
 
-    void extract(OperatingSystemEnum operatingSystem, List<BdioComponentDetails> components, String inputLine) {
+    void extract(BdioWriter bdioWriter, OperatingSystemEnum operatingSystem, String inputLine) {
         if (valid(inputLine)) {
             def lastDotIndex = inputLine.lastIndexOf('.')
             def arch = inputLine.substring(lastDotIndex + 1)
@@ -51,7 +50,7 @@ class RpmExtractor extends Extractor {
             def artifact = inputLine.substring(0, secondToLastDashIndex)
 
             String externalId = "${artifact}/${versionRelease}/${arch}"
-            components.add(createBdioComponentDetails(operatingSystem, artifact, versionRelease, externalId))
+            bdioWriter.writeBdioNode(bdioNodeFactory.createComponent(artifact, versionRelease, null, operatingSystem.forge, externalId))
         }
     }
 

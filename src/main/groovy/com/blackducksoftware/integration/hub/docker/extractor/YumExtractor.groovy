@@ -17,9 +17,9 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 
-import com.blackducksoftware.integration.hub.linux.BdioComponentDetails
-import com.blackducksoftware.integration.hub.linux.OperatingSystemEnum
-import com.blackducksoftware.integration.hub.linux.PackageManagerEnum
+import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter
+import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
+import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 
 @Component
 class YumExtractor extends Extractor {
@@ -30,8 +30,7 @@ class YumExtractor extends Extractor {
         initValues(PackageManagerEnum.YUM)
     }
 
-    List<BdioComponentDetails> extractComponents(OperatingSystemEnum operatingSystem,  File yumOutput) {
-        def components = []
+    void extractComponents(BdioWriter bdioWriter, OperatingSystemEnum operatingSystem,  File yumOutput) {
         boolean startOfComponents = false
 
         def componentColumns = []
@@ -48,7 +47,7 @@ class YumExtractor extends Extractor {
                         String architecture = nameArch.substring(nameArch.lastIndexOf(".") + 1)
 
                         String externalId = "$name/$version/$architecture"
-                        components.add(createBdioComponentDetails(operatingSystem, name, version, externalId))
+                        bdioWriter.writeBdioNode(bdioNodeFactory.createComponent(name, version, null, operatingSystem.forge, externalId))
                         componentColumns = []
                     } else  if (componentColumns.size() > 3) {
                         logger.error("Parsing multi-line components has failed. $line")
@@ -57,7 +56,5 @@ class YumExtractor extends Extractor {
                 }
             }
         }
-
-        components
     }
 }

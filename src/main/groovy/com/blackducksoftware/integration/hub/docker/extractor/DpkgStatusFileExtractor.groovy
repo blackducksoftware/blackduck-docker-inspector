@@ -17,10 +17,11 @@ import org.apache.commons.lang3.StringUtils
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-import com.blackducksoftware.integration.hub.linux.BdioComponentDetails
-import com.blackducksoftware.integration.hub.linux.OperatingSystemEnum
-import com.blackducksoftware.integration.hub.linux.PackageManagerEnum
-import com.blackducksoftware.integration.hub.linux.extractor.data.DpkgStatusFilePackage
+import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter
+import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
+import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
+import com.blackducksoftware.integration.hub.docker.extractor.data.DpkgStatusFilePackage
+
 
 class DpkgStatusFileExtractor extends Extractor {
     private final Logger logger = LoggerFactory.getLogger(DpkgStatusFileExtractor.class)
@@ -30,12 +31,13 @@ class DpkgStatusFileExtractor extends Extractor {
         initValues(PackageManagerEnum.DPKG_STATUS_FILE)
     }
 
-    List<BdioComponentDetails> extractComponents(OperatingSystemEnum operatingSystem, File yumOutput) {
+    @Override
+    void extractComponents(BdioWriter bdioWriter, OperatingSystemEnum operatingSystem, File yumOutput) {
         def components = []
         boolean startOfComponents = false
 
         int packageSeparators = 0;
-        //TODO read Depends line to determine component relationships
+
         DpkgStatusFilePackage dpkgPackage = new DpkgStatusFilePackage()
         yumOutput.eachLine { line ->
             if (line != null) {
@@ -64,7 +66,7 @@ class DpkgStatusFileExtractor extends Extractor {
                     }
                 } else if (dpkgPackage.isComplete()){
                     if(dpkgPackage.installed){
-                        components.add(createBdioComponentDetails(operatingSystem, dpkgPackage.name, dpkgPackage.version, dpkgPackage.getExternalId()))
+                        bdioWriter.writeBdioNode(bdioNodeFactory.createComponent(dpkgPackage.name, dpkgPackage.version, null, operatingSystem.forge, dpkgPackage.getExternalId()))
                     }
                     dpkgPackage = new DpkgStatusFilePackage()
                 }
