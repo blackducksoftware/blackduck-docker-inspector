@@ -20,7 +20,12 @@ import org.springframework.stereotype.Component
 import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
-
+import com.sleepycat.bind.tuple.StringBinding
+import com.sleepycat.collections.StoredSortedMap
+import com.sleepycat.je.Database
+import com.sleepycat.je.DatabaseConfig
+import com.sleepycat.je.Environment
+import com.sleepycat.je.EnvironmentConfig
 
 @Component
 class RpmExtractor extends Extractor {
@@ -32,29 +37,19 @@ class RpmExtractor extends Extractor {
     }
 
     @Override
-    void extractComponents(BdioWriter bdioWriter, OperatingSystemEnum operatingSystem, File inputFile) {
-        inputFile.eachLine { line ->
-            extract(bdioWriter, operatingSystem, line)
+    void extractComponents(BdioWriter bdioWriter, OperatingSystemEnum operatingSystem, File databaseDirectory) {
+        EnvironmentConfig envConfig = new EnvironmentConfig()
+        envConfig.setTransactional(false)
+        envConfig.setAllowCreate(true)
+        Environment environment = new Environment(databaseDirectory, envConfig)
+        DatabaseConfig databaseConfig = new DatabaseConfig();
+        databaseConfig.setAllowCreate( true );
+        Database db = environment.openDatabase( null, "Packages", databaseConfig );
+        try {
+            StoredSortedMap<String, String> ssm = new StoredSortedMap<String, String>(db, new StringBinding(), new StringBinding(), true);
+            println("hello")
+        } finally {
+            db.close();
         }
-    }
-
-    void extract(BdioWriter bdioWriter, OperatingSystemEnum operatingSystem, String inputLine) {
-        if (valid(inputLine)) {
-            def lastDotIndex = inputLine.lastIndexOf('.')
-            def arch = inputLine.substring(lastDotIndex + 1)
-            def lastDashIndex = inputLine.lastIndexOf('-')
-            def nameVersion = inputLine.substring(0, lastDashIndex)
-            def secondToLastDashIndex = nameVersion.lastIndexOf('-')
-
-            def versionRelease = inputLine.substring(secondToLastDashIndex + 1, lastDotIndex)
-            def artifact = inputLine.substring(0, secondToLastDashIndex)
-
-            String externalId = "${artifact}/${versionRelease}/${arch}"
-            bdioWriter.writeBdioNode(bdioNodeFactory.createComponent(artifact, versionRelease, null, operatingSystem.forge, externalId))
-        }
-    }
-
-    boolean valid(String inputLine) {
-        inputLine.matches(".+-.+-.+\\..*")
     }
 }
