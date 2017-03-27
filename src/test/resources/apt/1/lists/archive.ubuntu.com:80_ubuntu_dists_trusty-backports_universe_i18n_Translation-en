@@ -1,0 +1,3372 @@
+Package: 0ad
+Description-md5: d943033bedada21853d2ae54a2578a7b
+Description-en: Real-time strategy game of ancient warfare
+ 0 A.D. (pronounced "zero ey-dee") is a free, open-source, cross-platform
+ real-time strategy (RTS) game of ancient warfare. In short, it is a
+ historically-based war/economy game that allows players to relive or rewrite
+ the history of Western civilizations, focusing on the years between 500 B.C.
+ and 500 A.D. The project is highly ambitious, involving state-of-the-art 3D
+ graphics, detailed artwork, sound, and a flexible and powerful custom-built
+ game engine.
+
+Package: 0ad-data
+Description-md5: 26581e685027d5ae84824362a4ba59ee
+Description-en: Real-time strategy game of ancient warfare (data files)
+ 0 A.D. (pronounced "zero ey-dee") is a free, open-source, cross-platform
+ real-time strategy (RTS) game of ancient warfare. In short, it is a
+ historically-based war/economy game that allows players to relive or rewrite
+ the history of Western civilizations, focusing on the years between 500 B.C.
+ and 500 A.D. The project is highly ambitious, involving state-of-the-art 3D
+ graphics, detailed artwork, sound, and a flexible and powerful custom-built
+ game engine.
+ .
+ This package contains the main data files required by 0 A.D.
+
+Package: 0ad-data-common
+Description-md5: 8d014b839c4c4e9b6f82c7512d7e3496
+Description-en: Real-time strategy game of ancient warfare (common data files)
+ 0 A.D. (pronounced "zero ey-dee") is a free, open-source, cross-platform
+ real-time strategy (RTS) game of ancient warfare. In short, it is a
+ historically-based war/economy game that allows players to relive or rewrite
+ the history of Western civilizations, focusing on the years between 500 B.C.
+ and 500 A.D. The project is highly ambitious, involving state-of-the-art 3D
+ graphics, detailed artwork, sound, and a flexible and powerful custom-built
+ game engine.
+ .
+ This package contains the data files (configuration and tools) required by
+ 0 A.D.
+
+Package: 0ad-dbg
+Description-md5: a858b67397d1d84d8b4cac9d0deae0d7
+Description-en: Real-time strategy game of ancient warfare (debug)
+ 0 A.D. (pronounced "zero ey-dee") is a free, open-source, cross-platform
+ real-time strategy (RTS) game of ancient warfare. In short, it is a
+ historically-based war/economy game that allows players to relive or rewrite
+ the history of Western civilizations, focusing on the years between 500 B.C.
+ and 500 A.D. The project is highly ambitious, involving state-of-the-art 3D
+ graphics, detailed artwork, sound, and a flexible and powerful custom-built
+ game engine.
+ .
+ This package contains the debugging symbols.
+
+Package: ansible
+Description-md5: db2b21b0d2286fccc4401d5982361488
+Description-en: Configuration management, deployment, and task execution system
+ Ansible is a radically simple model-driven configuration management,
+ multi-node deployment, and remote task execution system. Ansible works
+ over SSH and does not require any software or daemons to be installed
+ on remote nodes. Extension modules can be written in any language and
+ are transferred to managed machines automatically.
+
+Package: ansible-doc
+Description-md5: b4f36330179cb3fdb9f9d31dcd85daf0
+Description-en: Ansible documentation and examples
+ Ansible is a radically simple model-driven configuration management,
+ multi-node deployment, and remote task execution system. Ansible works
+ over SSH and does not require any software or daemons to be installed
+ on remote nodes. Extension modules can be written in any language and
+ are transferred to managed machines automatically.
+ .
+ This package contains HTML documentation and examples.
+
+Package: ansible-fireball
+Description-md5: efce1d8806104f92be6bdb77fb800621
+Description-en: Ansible fireball transport support
+ Ansible is a radically simple model-driven configuration management,
+ multi-node deployment, and remote task execution system. Ansible works
+ over SSH and does not require any software or daemons to be installed
+ on remote nodes. Extension modules can be written in any language and
+ are transferred to managed machines automatically.
+ .
+ Ansible can optionally use a 0MQ based transport mechanism, which is
+ considerably faster than the standard ssh mechanism when there are
+ multiple actions, but requires additional supporting packages.
+ .
+ This package is a dependency package, which depends on ansible and Python
+ modules for keyczar and ZeroMQ.
+
+Package: ansible-node-fireball
+Description-md5: 3765823451b25d1f45b97cc95330751d
+Description-en: Ansible fireball transport support for nodes
+ Ansible is a radically simple model-driven configuration management,
+ multi-node deployment, and remote task execution system. Ansible works
+ over SSH and does not require any software or daemons to be installed
+ on remote nodes. Extension modules can be written in any language and
+ are transferred to managed machines automatically.
+ .
+ Ansible can optionally use a 0MQ based transport mechanism, which has
+ additional requirements for nodes to use. This package includes those
+ requirements.
+ .
+ This package is a dependency package, which depends on Python modules for
+ keyczar and ZeroMQ.
+
+Package: apache2-mpm-itk
+Description-md5: bd734c62df55850706ab523ebbe8a663
+Description-en: transitional itk MPM package for apache2
+ This is a transitional package to apache2 for users of apache2-mpm-itk and
+ can be safely removed after the installation is complete.
+
+Package: apache2-suexec
+Description-md5: 2e2e5d833453263c27eb6bc5c3598903
+Description-en: transitional package for apache2-suexec-pristine
+ This is a transitional package for apache2-suexec-pristine, and can be safely
+ removed after the installation is complete.
+
+Package: apache2-suexec-custom
+Description-md5: 116f52596e88b0c7717e1f4973ada661
+Description-en: Apache HTTP Server configurable suexec program for mod_suexec
+ Provides a customizable version of the suexec helper program for mod_suexec.
+ This is not the version from upstream, but can be configured with a
+ configuration file.
+ .
+ If you do not need non-standard document root or userdir settings, it is
+ recommended that you use the standard suexec helper program from the
+ apache2-suexec-pristine package instead.
+
+Package: apache2-suexec-pristine
+Description-md5: 86a22eab8bdd72ac81f3d8aab53bf001
+Description-en: Apache HTTP Server standard suexec program for mod_suexec
+ Provides the standard suexec helper program for mod_suexec. This version is
+ compiled with document root /var/www and userdir suffix public_html. If you
+ need different settings, use the package apache2-suexec-custom.
+
+Package: asic0x-dkms
+Description-md5: 3ef0a678b73ba575b188f561994e3072
+Description-en: iBurst USB modem driver in DKMS format
+ This package builds the iBurst USB modem driver using DKMS.
+ .
+ This driver provides support for Kyocera iBurst / ArrayComm
+ User Terminal USB (UTU) and User Terminal Desktop (UTD) modems
+ connected via USB.
+ .
+ This driver creates an interface named "ethX", where X depends on
+ what other networking devices you have in use.
+
+Package: astyle
+Description-md5: 144ae49c88d0cc229c77c70fcfa4b46f
+Description-en: Source code indenter for C++/C/Java/C# source code
+ Artistic Style is a source code indenter, formatter, and beautifier
+ for the C, C++, C# and Java programming languages.
+ .
+ This package contains the command line tool.
+
+Package: boinc
+Description-md5: 79307295fad5fe1f0172f7d981ebfbac
+Description-en: metapackage for the BOINC client and the manager
+ The Berkeley Open Infrastructure for Network Computing (BOINC) is a
+ software platform for distributed computing: several initiatives of
+ various scientific disciplines all compete for the idle time of
+ desktop computers. The developers' web site at the University of
+ Berkeley serves as a common portal to the otherwise independently run
+ projects.
+ .
+ This package depends both on the BOINC core client program that is
+ required to participate in any project that uses BOINC, and the
+ BOINC Manager, a graphical monitor and control utility for the
+ BOINC core client.
+
+Package: boinc-amd-opencl
+Description-md5: 6e0625247955d16f5c815fea6934b5fa
+Description-en: metapackage for AMD/ATI OpenCL-savvy BOINC client and manager
+ The Berkeley Open Infrastructure for Network Computing (BOINC) is a
+ software platform for distributed computing: several initiatives of
+ various scientific disciplines all compete for the idle time of
+ desktop computers. The developers' web site at the University of
+ Berkeley serves as a common portal to the otherwise independently run
+ projects.
+ .
+ Regular users (righteously) often find it an unbearable nuisance to
+ care for the configuration of BOINC for the OpenCL-savvy AMD/ATI
+ graphics cards.  This package adds a series of dependencies from the
+ non-free section to the regular boinc package. This also meant this
+ binary package to be redistributed in the contrib section of Debian.
+ .
+ This package is not perfect, yet. A major problem for the moment
+ is the availability of the OpenCL driver for 32bit binaries for
+ amd64. If this is planned, install the amd-app package provided
+ through the AMD developer forum.
+
+Package: boinc-client
+Description-md5: 9bd4f63a5f0f805b9edce1e36fefff24
+Description-en: core client for the BOINC distributed computing infrastructure
+ The Berkeley Open Infrastructure for Network Computing (BOINC) is a
+ software platform for distributed computing: several initiatives of
+ various scientific disciplines all compete for the idle time of
+ desktop computers. The developers' web site at the University of
+ Berkeley serves as a common portal to the otherwise independently run
+ projects.
+ .
+ This package contains the BOINC core client program that is required
+ to participate in any project that uses BOINC. A central server
+ distributes work units and collects results via this client. When
+ attaching a local machine to a project, this client will also
+ dynamically download the scientific data and executables to be then
+ wrapped by the BOINC core client.
+
+Package: boinc-dbg
+Description-md5: 556c78de5f67fef81ed6aed04ee3368e
+Description-en: debugging symbols for BOINC binaries
+ The Berkeley Open Infrastructure for Network Computing (BOINC) is a
+ software platform for distributed computing using volunteered computer
+ resources.
+ .
+ This package contains unstripped versions of all binaries included in
+ the BOINC client packages. It is provided primarily to provide a backtrace
+ with names in a debugger, this makes it somewhat easier to interpret
+ core dumps. For installations running a BOINC server locally, it may
+ be of interest to also install the boinc-server-dbg package.
+
+Package: boinc-dev
+Description-md5: e4972735285fcfbe74ebb87ad01d2e97
+Description-en: development files to build applications for BOINC projects
+ Dummy transitional package helping the transition of a split of
+ architecture-independent development files and the architecture-dependent
+ dynamic libraries.  Static libraries are no longer redistributed.
+
+Package: boinc-manager
+Description-md5: 18cdf3bcfd01c25a71225cc0291571cd
+Description-en: GUI to control and monitor the BOINC core client
+ The Berkeley Open Infrastructure for Network Computing (BOINC) is a
+ software platform for distributed computing using volunteered computer
+ resources.
+ .
+ This package contains the BOINC Manager, a graphical monitor and
+ control utility for the BOINC core client. It gives a detailed
+ overview of the state of the client it is monitoring, as there are
+  * attached projects
+  * running tasks
+  * file transfers between the client and project servers
+  * statistics about granted credits and disk usage for every project
+  * constraints on CPU usage
+ The BOINC Manager has two modes of operation, the "Simple View" in which
+ it only displays the most important information and the "Advanced View"
+ in which all information and all control elements are available.
+ .
+ For active participation in any BOINC project the recommended
+ boinc-client package, not the boinc-manager, is required for every
+ machine contributing.
+
+Package: cgmanager-tests
+Description-md5: ae67e25e5df5a5c94f7f6232533f457d
+Description-en: Central cgroup manager daemon (tests)
+ cgmanager provides a central cgroup manager daemon and a
+ per-namespace manager proxy, allowing users and programs
+ to administrate cgroups through D-Bus requests.
+ .
+ This package contains the test scripts.
+
+Package: chemps2
+Description-md5: f2336d61a7ae95e11cc5fee187441363
+Description-en: Executable to call libchemps2-1 from the command line
+ chemps2 is a scientific library which contains a spin-adapted
+ implementation of the density matrix renormalization group (DMRG)
+ for ab initio quantum chemistry. This method allows one to obtain
+ numerical accuracy in active spaces beyond the capabilities of
+ full configuration interaction (FCI).
+ .
+ For an input Hamiltonian and targeted symmetry sector, the library
+ performs successive DMRG sweeps according to a user-defined
+ convergence scheme. As output, the library returns the minimal
+ encountered energy as well as the second order reduced density
+ matrix (2-RDM) of the active space. With the latter, various
+ molecular properties can be calculated, as well as the gradient and
+ Hessian for orbital rotations or nuclear displacements. In addition,
+ several correlation functions can be obtained to investigate the
+ electronic structure in the active space.
+ .
+ This package installs the executable which parses Hamiltonians in
+ fcidump format, performs DMRG sweeps according to a user-defined
+ convergence scheme, and writes the 2-RDM as output.
+
+Package: chemps2-doc
+Description-md5: 2ee7c8a68c2c3a1ed3cfb415b0d61f4b
+Description-en: Documentation of the libchemps2-1 package
+ chemps2 is a scientific library which contains a spin-adapted
+ implementation of the density matrix renormalization group (DMRG)
+ for ab initio quantum chemistry. This method allows one to obtain
+ numerical accuracy in active spaces beyond the capabilities of
+ full configuration interaction (FCI).
+ .
+ For an input Hamiltonian and targeted symmetry sector, the library
+ performs successive DMRG sweeps according to a user-defined
+ convergence scheme. As output, the library returns the minimal
+ encountered energy as well as the second order reduced density
+ matrix (2-RDM) of the active space. With the latter, various
+ molecular properties can be calculated, as well as the gradient and
+ Hessian for orbital rotations or nuclear displacements. In addition,
+ several correlation functions can be obtained to investigate the
+ electronic structure in the active space.
+ .
+ This is the common documentation package.
+
+Package: clamtk
+Description-md5: ff8fcc44c8794739ac1f2a82d228cff8
+Description-en: graphical front-end for ClamAV
+ ClamTk is a GUI front-end for ClamAV using perl-Gtk2.
+
+Package: clamtk-nautilus
+Description-md5: b636feddcde159bb5178a4050b471bff
+Description-en: Nautilus MenuProvider extension for clamtk
+ Nautilus plugin using nautilus-python to allow right click support for easy
+ virus scanning with clamtk and clamav.
+
+Package: clinfo
+Description-md5: 61f518af669d193a0d2dd298ab456672
+Description-en: Query OpenCL system information
+ OpenCL (Open Computing Language) is a multivendor open standard for
+ general-purpose parallel programming of heterogeneous systems that include
+ CPUs, GPUs and other processors.
+ .
+ This package contains a tool that queries the capabilities of the available
+ OpenCL drivers.
+
+Package: cppcheck
+Description-md5: 6fa80b43f2d07adae77227d397fb6650
+Description-en: tool for static C/C++ code analysis
+ Cppcheck is a command-line tool that tries to detect bugs that your
+ C/C++ compiler doesn't see. It is versatile, and can check non-standard
+ code including various compiler extensions, inline assembly code, etc.
+ Its internal preprocessor can handle includes, macros, and several
+ preprocessor commands. While Cppcheck is highly configurable,
+ you can start using it just by giving it a path to the source code.
+ .
+ It includes checks for:
+  * pointers to out-of-scope auto variables;
+  * assignment of auto variables to an effective parameter of a function;
+  * out-of-bounds errors in arrays and STL;
+  * missing class constructors;
+  * variables not initialized by a constructor;
+  * use of memset, memcpy, etcetera on a class;
+  * non-virtual destructors for base classes;
+  * operator= not returning a constant reference to itself;
+  * use of deprecated functions (mktemp, gets, scanf);
+  * exceptions thrown in destructors;
+  * memory leaks in class or function variables;
+  * C-style pointer cast in C++ code;
+  * redundant if;
+  * misuse of the strtol or sprintf functions;
+  * unsigned division or division by zero;
+  * unused functions and struct members;
+  * passing parameters by value;
+  * misuse of signed char variables;
+  * unusual pointer arithmetic (such as "abc" + 'd');
+  * dereferenced null pointers;
+  * incomplete statements;
+  * misuse of iterators when iterating through a container;
+  * dereferencing of erased iterators;
+  * use of invalidated vector iterators/pointers;
+
+Package: cppreference-doc-en-html
+Description-md5: ce2a74cd4401ff43c73c9f75bb7bde87
+Description-en: C and C++ standard library reference (English, Devhelp variant)
+ A version of online C and C++ standard library reference manual available at
+ en.cppreference.com, suitable for viewing offline.
+ .
+ This package contains a Devhelp book.
+
+Package: cppreference-doc-en-qch
+Description-md5: b01cfee5cceb0570b9cad9ffa94c48ae
+Description-en: C and C++ standard library reference (English, Qt Help variant)
+ A version of online C and C++ standard library reference manual available at
+ en.cppreference.com, suitable for viewing offline.
+ .
+ This package contains a Qt Help book.
+
+Package: ddrescueview
+Description-md5: a427543627bc780018d530ba2811779c
+Description-en: graphical viewer for GNU ddrescue log files
+ This small tool allows the user to graphically examine ddrescue's log files
+ in a user friendly GUI application. The Main window displays a block grid
+ with each block's color representing the block types it contains. Many people
+ know this type of view from defragmentation programs.
+ .
+ Features:
+  * Display ddrescue log in a colored block graphic
+  * Examine each block in the image, see a detailed list of
+    log entries contained
+  * To keep track of the rescue process, ddrescueview can automatically
+    re-read the logfile
+  * Units can be displayed with decimal (KB, MB...) or
+    binary (KiB, MiB...) prefixes
+
+Package: dianara
+Description-md5: 914df52829dfd22183e16056619a05d7
+Description-en: client for the pump.io federated social network
+ Dianara is a pump.io client, a desktop application for GNU/linux that allows
+ users to manage their Pump.io social networking accounts without the need to
+ use a web browser.
+
+Package: drmips
+Description-md5: dd09bcd6d4424bca0f2e254764149df4
+Description-en: Educational MIPS simulator
+ DrMIPS is a graphical simulator of the MIPS processor to support computer
+ architecture teaching and learning. It is intuitive, versatile and
+ configurable.
+ .
+ The simulator is available not only for personal computers but also for
+ Android devices, especially tablets.
+ .
+ DrMIPS was created under the Master's dissertation entitled
+ 'Tool to Support Computer Architecture Teaching and Learning' at the
+ Faculty of Engineering of the University of Porto, in Portugal.
+ .
+ This package installs the PC version of the simulator.
+
+Package: duck
+Description-md5: 3fc7d0ed78a8ca4ae10ab2f5330eed49
+Description-en: checks URLs in debian/control and debian/upstream files
+ duck, the Debian Url ChecKer, processes several fields in the
+ debian/control and  debian/upstream file and checks if links
+ found therin are valid.
+
+Package: fio
+Description-md5: f30ba0e0abc22f20ad53eb90c2693fe2
+Description-en: flexible I/O tester
+ fio is a tool that will spawn a number of threads or processes doing a
+ particular type of I/O action as specified by the user. fio takes a
+ number of global parameters, each inherited by the thread unless
+ otherwise parameters given to them overriding that setting is given.
+ The typical use of fio is to write a job file matching the I/O load
+ one wants to simulate.
+ .
+ This package contains the command line version of fio and all additional
+ command line tools. The package gfio contains the GTK+ based gui frontend
+ for fio.
+
+Package: fonts-noto
+Description-md5: b6b766650c9d958238a10ec660db1208
+Description-en: metapackage to pull in all Noto fonts
+ Noto is a collection of font families, each visually harmonized across
+ scripts.
+ .
+ Use this package if you want all Noto fonts.
+ .
+ The name "Noto" is short for "No Tofu", describing the aim of covering
+ all living Unicode scripts
+ (currently  are covered, at least partly, across
+ hinted, unhinted and CJK packages).
+ .
+ Tofu (豆腐) is japanese jargon for unicode replacement character "�"
+ (U+FFFD) often displayed as replacement for unassigned or unknown
+ characters.
+
+Package: fonts-noto-cjk
+Description-md5: 3fcdf5c3a2cf9652c3b0dba4c828e929
+Description-en: "No Tofu" font families with large Unicode coverage (CJK)
+ Noto is a collection of font families, each visually harmonized across
+ scripts.
+ .
+ This package contains Noto font families for Traditional Chinese,
+ Simplified Chinese, Japanese and Korean:
+ .
+  * Noto Sans CJK JP
+  * Noto Sans CJK KR
+  * Noto Sans CJK SC
+  * Noto Sans CJK TC
+  * Noto Sans Mono CJK JP
+  * Noto Sans Mono CJK KR
+  * Noto Sans Mono CJK SC
+  * Noto Sans Mono CJK TC
+ .
+ These fonts are derived from the font family Source Han Sans.
+ .
+ The name "Noto" is short for "No Tofu", describing the aim of covering
+ all living Unicode scripts
+ (currently 30 are covered, at least partly, across
+ hinted, unhinted and CJK packages).
+ .
+ Tofu (豆腐) is japanese jargon for unicode replacement character "�"
+ (U+FFFD) often displayed as replacement for unassigned or unknown
+ characters.
+
+Package: fonts-noto-hinted
+Description-md5: 3e7d7d09bcede1ef33baa20b98ccb6a4
+Description-en: "No Tofu" font families with large Unicode coverage (hinted)
+ Noto is a collection of font families, each visually harmonized across
+ scripts.
+ .
+ This package contains Noto font families with hinting:
+ .
+  * Noto Kufi Arabic
+  * Noto Naskh Arabic
+  * Noto Naskh Arabic UI
+  * Noto Sans
+  * Noto Sans Armenian
+  * Noto Sans Bengali
+  * Noto Sans Bengali UI
+  * Noto Sans Cham
+  * Noto Sans Devanagari
+  * Noto Sans Devanagari UI
+  * Noto Sans Ethiopic
+  * Noto Sans Georgian
+  * Noto Sans Gujarati
+  * Noto Sans Gujarati UI
+  * Noto Sans Gurmukhi
+  * Noto Sans Gurmukhi UI
+  * Noto Sans Hebrew
+  * Noto Sans Kannada
+  * Noto Sans Kannada UI
+  * Noto Sans Khmer
+  * Noto Sans Khmer UI
+  * Noto Sans Lao
+  * Noto Sans Lao UI
+  * Noto Sans Malayalam
+  * Noto Sans Malayalam UI
+  * Noto Sans Myanmar
+  * Noto Sans Myanmar UI
+  * Noto Sans Oriya
+  * Noto Sans Oriya UI
+  * Noto Sans Sinhala
+  * Noto Sans Tamil
+  * Noto Sans Tamil UI
+  * Noto Sans Telugu
+  * Noto Sans Telugu UI
+  * Noto Sans Thaana
+  * Noto Sans Thai
+  * Noto Sans Thai UI
+  * Noto Sans UI
+  * Noto Serif
+  * Noto Serif Armenian
+  * Noto Serif Georgian
+  * Noto Serif Khmer
+  * Noto Serif Lao
+  * Noto Serif Thai
+ .
+ The name "Noto" is short for "No Tofu", describing the aim of covering
+ all living Unicode scripts
+ (currently 30 are covered, at least partly, across
+ hinted, unhinted and CJK packages).
+ .
+ Tofu (豆腐) is japanese jargon for unicode replacement character "�"
+ (U+FFFD) often displayed as replacement for unassigned or unknown
+ characters.
+
+Package: fonts-noto-unhinted
+Description-md5: 94af5a7480145dc1fb3d9b9eb768a6c9
+Description-en: "No Tofu" font families with large Unicode coverage (unhinted)
+ Noto is a collection of font families, each visually harmonized across
+ scripts.
+ .
+ This package contains Noto font families which lacks hinting:
+ .
+  * Noto Sans Avestan
+  * Noto Sans Balinese
+  * Noto Sans Bamum
+  * Noto Sans Batak
+  * Noto Sans Brahmi
+  * Noto Sans Buginese
+  * Noto Sans Buhid
+  * Noto Sans Canadian Aboriginal
+  * Noto Sans Carian
+  * Noto Sans Cherokee
+  * Noto Sans Coptic
+  * Noto Sans Cuneiform
+  * Noto Sans Cypriot
+  * Noto Sans Deseret
+  * Noto Sans Egyptian Hieroglyphs
+  * Noto Sans Glagolitic
+  * Noto Sans Gothic
+  * Noto Sans Hanunoo
+  * Noto Sans Imperial Aramaic
+  * Noto Sans Inscriptional Pahlavi
+  * Noto Sans Inscriptional Parthian
+  * Noto Sans Javanese
+  * Noto Sans Kaithi
+  * Noto Sans Kayah Li
+  * Noto Sans Kharoshthi
+  * Noto Sans Lepcha
+  * Noto Sans Limbu
+  * Noto Sans Linear B
+  * Noto Sans Lisu
+  * Noto Sans Lycian
+  * Noto Sans Lydian
+  * Noto Sans Mandaic
+  * Noto Sans Meetei Mayek
+  * Noto Sans Mongolian
+  * Noto Sans NKo
+  * Noto Sans New Tai Lue
+  * Noto Sans Ogham
+  * Noto Sans Ol Chiki
+  * Noto Sans Old Italic
+  * Noto Sans Old Persian
+  * Noto Sans Old South Arabian
+  * Noto Sans Old Turkic
+  * Noto Sans Osmanya
+  * Noto Sans Phags Pa
+  * Noto Sans Phoenician
+  * Noto Sans Rejang
+  * Noto Sans Runic
+  * Noto Sans Samaritan
+  * Noto Sans Saurashtra
+  * Noto Sans Shavian
+  * Noto Sans Sundanese
+  * Noto Sans Syloti Nagri
+  * Noto Sans Symbols
+  * Noto Sans Syriac Eastern
+  * Noto Sans Syriac Estrangela
+  * Noto Sans Syriac Western
+  * Noto Sans Tagalog
+  * Noto Sans Tagbanwa
+  * Noto Sans Tai Le
+  * Noto Sans Tai Tham
+  * Noto Sans Tai Viet
+  * Noto Sans Tibetan
+  * Noto Sans Tifinagh
+  * Noto Sans Ugaritic
+  * Noto Sans Vai
+  * Noto Sans Yi
+ .
+ The name "Noto" is short for "No Tofu", describing the aim of covering
+ all living Unicode scripts
+ (currently 30 are covered, at least partly, across
+ hinted, unhinted and CJK packages).
+ .
+ Tofu (豆腐) is japanese jargon for unicode replacement character "�"
+ (U+FFFD) often displayed as replacement for unassigned or unknown
+ characters.
+
+Package: gcalcli
+Description-md5: 89a8bec70c5a4cfd128a59d0e0efe053
+Description-en: Google Calendar Command Line Interface
+ gcalcli is a Python application that allows you to access your Google
+ Calendar from a command line. It's easy to get your agenda, search for
+ events, and quickly add new events. Additionally gcalcli can be used as
+ a reminder service to execute any application you want.
+
+Package: gfio
+Description-md5: 9bb718a074c8f77e491c6cd74410d4cf
+Description-en: flexible I/O tester - gui frontend
+ fio is a tool that will spawn a number of threads or processes doing a
+ particular type of I/O action as specified by the user. fio takes a
+ number of global parameters, each inherited by the thread unless
+ otherwise parameters given to them overriding that setting is given.
+ The typical use of fio is to write a job file matching the I/O load
+ one wants to simulate.
+ .
+ This package contains the GTK+ based gui frontend for fio. The package
+ fio contains the command line version of fio which acts as a backend
+ to the GUI frontend. The frontend can talk to a locally or remotely
+ running fio server.
+
+Package: gir1.2-osmgpsmap-1.0
+Description-md5: dcc9fc0d2b5fd370912103088f0adfb1
+Description-en: GTK+ library to embed OpenStreetMap maps - Python bindings
+ libosmgpsmap is a library to embed maps in applications that when given GPS
+ co-ordinates, draws a GPS track, and points of interest on a moving map
+ display. Downloads map data from a number of websites, including
+ openstreetmap.org, openaerialmap.org and others.
+ .
+ This package provides the Python bindings for the library.
+
+Package: git-dpm
+Description-md5: 2e056c0a17325271b8379b7f70e2c0da
+Description-en: git Debian package manager
+ Manage Debian source packages in an git archive, storing
+ possible changes to the upstream source as git commits that
+ are stored in "3.0 (quilt)" format patch series.
+
+Package: gitolite3
+Description-md5: 458db366714b53b29b08a7091183f01b
+Description-en: SSH-based gatekeeper for git repositories (version 3)
+ Gitolite is an SSH-based gatekeeper providing access control for a server that
+ hosts many git repositories. Without gitolite,
+ each developer needing to push to one of the repositories hosted would need a
+ user account on that server; gitolite lets you do that just using
+ SSH public keys tied to a single, common, user that hosts all the
+ repositories.
+ .
+ Gitolite can restrict who can read (clone/fetch) from or write
+ (push) to a repository, and who can push to what branch or tag - an
+ important issue in corporate environments. Other features include:
+   * access control by branch-name or by modified file/directory;
+   * per-developer "personal namespace" prefixes;
+   * simple but powerful configuration file syntax (with validation);
+   * config files (and authority for maintaining them) can be split;
+   * easy integration with gitweb;
+   * comprehensive logging;
+   * easy migration from gitosis.
+
+Package: golang
+Description-md5: 8650a23f44e2d60a785ad3123733d6d8
+Description-en: Go programming language compiler - metapackage
+ The Go programming language is an open source project to make
+ programmers more productive. Go is expressive, concise, clean, and
+ efficient. Its concurrency mechanisms make it easy to write programs
+ that get the most out of multicore and networked machines, while its
+ novel type system enables flexible and modular program construction.
+ Go compiles quickly to machine code yet has the convenience of
+ garbage collection and the power of run-time reflection. It's a
+ fast, statically typed, compiled language that feels like a
+ dynamically typed, interpreted language.
+ .
+ This package is a metapackage that, when installed, guarantees
+ that (most of) a full Go development environment is installed.
+
+Package: golang-doc
+Description-md5: 908257b5bbd214052e43200b765f74b0
+Description-en: Go programming language compiler - documentation
+ The Go programming language is an open source project to make
+ programmers more productive. Go is expressive, concise, clean, and
+ efficient. Its concurrency mechanisms make it easy to write programs
+ that get the most out of multicore and networked machines, while its
+ novel type system enables flexible and modular program construction.
+ Go compiles quickly to machine code yet has the convenience of
+ garbage collection and the power of run-time reflection. It's a fast,
+ statically typed, compiled language that feels like a dynamically
+ typed, interpreted language.
+ .
+ This package provides the documentation for the Go programming
+ language. You can view the formatted documentation by running "godoc
+ --http=:6060", and then visiting http://localhost:6060/doc/install.html.
+
+Package: golang-github-lxc-lxd-dev
+Description-md5: bf546539c311f366eeb0ad488709554f
+Description-en: Container hypervisor based on LXC - go source
+ LXD offers a REST API to remotely manage containers over the network,
+ using an image based workflow and with support for live migration.
+ .
+ This package contains the source tree of the lxd project.
+
+Package: golang-go
+Description-md5: 940170dcf7ac6f145a20bbd40351c3e2
+Description-en: Go programming language compiler
+ The Go programming language is an open source project to make
+ programmers more productive. Go is expressive, concise, clean, and
+ efficient. Its concurrency mechanisms make it easy to write programs
+ that get the most out of multicore and networked machines, while its
+ novel type system enables flexible and modular program construction.
+ Go compiles quickly to machine code yet has the convenience of
+ garbage collection and the power of run-time reflection. It's a
+ fast, statically typed, compiled language that feels like a
+ dynamically typed, interpreted language.
+ .
+ This package provides an assembler, a compiler, and a linker for the
+ Go programming language. This is Google's implementation of the Go
+ tool chain.
+
+Package: golang-go-darwin-386
+Description-md5: 95f9647557c79a2a4de550aec5494a32
+Description-en: Go standard library compiled for darwin_386
+ This package contains the Go standard library,
+ compiled for darwin_386.
+ .
+ This package is just one of a number of packages, each providing the Go
+ standard library for a specific operating system/architecture combination.
+ Go supports cross-compilation, so each of these packages is useful on any
+ architecture.
+ .
+ The files contained in this package are independent of the host architecture,
+ that is, you can use golang-go-linux-amd64 to generate a binary for
+ linux_amd64, even though you are executing the Go compiler on linux_386.
+
+Package: golang-go-darwin-amd64
+Description-md5: 60b75ce7a4910fef2e833f29f0ab5f2f
+Description-en: Go standard library compiled for darwin_amd64
+ This package contains the Go standard library,
+ compiled for darwin_amd64.
+ .
+ This package is just one of a number of packages, each providing the Go
+ standard library for a specific operating system/architecture combination.
+ Go supports cross-compilation, so each of these packages is useful on any
+ architecture.
+ .
+ The files contained in this package are independent of the host architecture,
+ that is, you can use golang-go-linux-amd64 to generate a binary for
+ linux_amd64, even though you are executing the Go compiler on linux_386.
+
+Package: golang-go-freebsd-386
+Description-md5: 811e8366c0f95c9538ab49e11a71f15f
+Description-en: Go standard library compiled for freebsd_386
+ This package contains the Go standard library,
+ compiled for freebsd_386.
+ .
+ This package is just one of a number of packages, each providing the Go
+ standard library for a specific operating system/architecture combination.
+ Go supports cross-compilation, so each of these packages is useful on any
+ architecture.
+ .
+ The files contained in this package are independent of the host architecture,
+ that is, you can use golang-go-linux-amd64 to generate a binary for
+ linux_amd64, even though you are executing the Go compiler on linux_386.
+
+Package: golang-go-freebsd-amd64
+Description-md5: c06807cf938c35b525d30086910d9858
+Description-en: Go standard library compiled for freebsd_amd64
+ This package contains the Go standard library,
+ compiled for freebsd_amd64.
+ .
+ This package is just one of a number of packages, each providing the Go
+ standard library for a specific operating system/architecture combination.
+ Go supports cross-compilation, so each of these packages is useful on any
+ architecture.
+ .
+ The files contained in this package are independent of the host architecture,
+ that is, you can use golang-go-linux-amd64 to generate a binary for
+ linux_amd64, even though you are executing the Go compiler on linux_386.
+
+Package: golang-go-freebsd-arm
+Description-md5: edc55d0ccf6c917247b9a1cace6b3cb0
+Description-en: Go standard library compiled for freebsd_arm
+ This package contains the Go standard library,
+ compiled for freebsd_arm.
+ .
+ This package is just one of a number of packages, each providing the Go
+ standard library for a specific operating system/architecture combination.
+ Go supports cross-compilation, so each of these packages is useful on any
+ architecture.
+ .
+ The files contained in this package are independent of the host architecture,
+ that is, you can use golang-go-linux-amd64 to generate a binary for
+ linux_amd64, even though you are executing the Go compiler on linux_386.
+
+Package: golang-go-linux-386
+Description-md5: c497ad4c2afb9bb19d95ded805b48a8a
+Description-en: Go standard library compiled for linux_386
+ This package contains the Go standard library,
+ compiled for linux_386.
+ .
+ This package is just one of a number of packages, each providing the Go
+ standard library for a specific operating system/architecture combination.
+ Go supports cross-compilation, so each of these packages is useful on any
+ architecture.
+ .
+ The files contained in this package are independent of the host architecture,
+ that is, you can use golang-go-linux-amd64 to generate a binary for
+ linux_amd64, even though you are executing the Go compiler on linux_386.
+
+Package: golang-go-linux-amd64
+Description-md5: 18b5dd208f06cc735389a16aed5ec3a1
+Description-en: Go standard library compiled for linux_amd64
+ This package contains the Go standard library,
+ compiled for linux_amd64.
+ .
+ This package is just one of a number of packages, each providing the Go
+ standard library for a specific operating system/architecture combination.
+ Go supports cross-compilation, so each of these packages is useful on any
+ architecture.
+ .
+ The files contained in this package are independent of the host architecture,
+ that is, you can use golang-go-linux-amd64 to generate a binary for
+ linux_amd64, even though you are executing the Go compiler on linux_386.
+
+Package: golang-go-linux-arm
+Description-md5: 9411d0c6a7913891db3885866313120c
+Description-en: Go standard library compiled for linux_arm
+ This package contains the Go standard library,
+ compiled for linux_arm.
+ .
+ This package is just one of a number of packages, each providing the Go
+ standard library for a specific operating system/architecture combination.
+ Go supports cross-compilation, so each of these packages is useful on any
+ architecture.
+ .
+ The files contained in this package are independent of the host architecture,
+ that is, you can use golang-go-linux-amd64 to generate a binary for
+ linux_amd64, even though you are executing the Go compiler on linux_386.
+
+Package: golang-go-netbsd-386
+Description-md5: b6d69f5543979fd6d6c35da61a9d17a2
+Description-en: Go standard library compiled for netbsd_386
+ This package contains the Go standard library,
+ compiled for netbsd_386.
+ .
+ This package is just one of a number of packages, each providing the Go
+ standard library for a specific operating system/architecture combination.
+ Go supports cross-compilation, so each of these packages is useful on any
+ architecture.
+ .
+ The files contained in this package are independent of the host architecture,
+ that is, you can use golang-go-linux-amd64 to generate a binary for
+ linux_amd64, even though you are executing the Go compiler on linux_386.
+
+Package: golang-go-netbsd-amd64
+Description-md5: bf188a1f5f6082e2c79ba191e5c448cf
+Description-en: Go standard library compiled for netbsd_amd64
+ This package contains the Go standard library,
+ compiled for netbsd_amd64.
+ .
+ This package is just one of a number of packages, each providing the Go
+ standard library for a specific operating system/architecture combination.
+ Go supports cross-compilation, so each of these packages is useful on any
+ architecture.
+ .
+ The files contained in this package are independent of the host architecture,
+ that is, you can use golang-go-linux-amd64 to generate a binary for
+ linux_amd64, even though you are executing the Go compiler on linux_386.
+
+Package: golang-go-windows-386
+Description-md5: ea87a80d7d97c2f4c09ee28f575882c3
+Description-en: Go standard library compiled for windows_386
+ This package contains the Go standard library,
+ compiled for windows_386.
+ .
+ This package is just one of a number of packages, each providing the Go
+ standard library for a specific operating system/architecture combination.
+ Go supports cross-compilation, so each of these packages is useful on any
+ architecture.
+ .
+ The files contained in this package are independent of the host architecture,
+ that is, you can use golang-go-linux-amd64 to generate a binary for
+ linux_amd64, even though you are executing the Go compiler on linux_386.
+
+Package: golang-go-windows-amd64
+Description-md5: 48cba4dc98dab7c1732608174073bbc4
+Description-en: Go standard library compiled for windows_amd64
+ This package contains the Go standard library,
+ compiled for windows_amd64.
+ .
+ This package is just one of a number of packages, each providing the Go
+ standard library for a specific operating system/architecture combination.
+ Go supports cross-compilation, so each of these packages is useful on any
+ architecture.
+ .
+ The files contained in this package are independent of the host architecture,
+ that is, you can use golang-go-linux-amd64 to generate a binary for
+ linux_amd64, even though you are executing the Go compiler on linux_386.
+
+Package: golang-mode
+Description-md5: 1857af03b0b11392c79e41670dd43e5f
+Description-en: Go programming language - mode for GNU Emacs
+ This package provides a GNU Emacs major mode for editing code in
+ Google's Go programming language.
+
+Package: golang-src
+Description-md5: 03e83dd37db9c361a88e3532f6e41192
+Description-en: Go programming language compiler - source files
+ The Go programming language is an open source project to make
+ programmers more productive. Go is expressive, concise, clean, and
+ efficient. Its concurrency mechanisms make it easy to write programs
+ that get the most out of multicore and networked machines, while its
+ novel type system enables flexible and modular program construction.
+ Go compiles quickly to machine code yet has the convenience of
+ garbage collection and the power of run-time reflection. It's a
+ fast, statically typed, compiled language that feels like a
+ dynamically typed, interpreted language.
+ .
+ This package provides the Go programming language source files needed
+ for godoc and goinstall.
+
+Package: gramps
+Description-md5: 071b3383aeea7fac89f963d8d279732d
+Description-en: Genealogical research program
+ GRAMPS is an Open Source genealogy program written in Python, using
+ the GTK/GNOME interface. It is an extremely flexible program fitting
+ the needs for both the amateur genealogist and serious genealogical
+ researcher.
+ GRAMPS has the ability to import GEDCOM files exported from many
+ proprietary genealogy programs and can produce a large number of
+ reports in many popular formats.
+
+Package: hedgewars
+Description-md5: 9c3ca8edc97a53189e3cb27b4118a5ca
+Description-en: Funny turn-based artillery game, featuring fighting Hedgehogs!
+ Each player controls a team of several hedgehogs. During the
+ course of the game, players take turns with one of their
+ hedgehogs. They then use whatever tools and weapons are
+ available to attack and kill the opponents' hedgehogs, thereby
+ winning the game. Hedgehogs may move around the terrain in a
+ variety of ways, normally by walking and jumping but also by
+ using particular tools such as the "Rope" or "Parachute", to
+ move to otherwise inaccessible areas. Each turn is time-limited
+ to ensure that players do not hold up the game with excessive
+ thinking or moving.
+ .
+ A large variety of tools and weapons are available for players
+ during the game: Grenade, Cluster Bomb, Bazooka, UFO, Homing Bee,
+ Shotgun, Desert Eagle, Fire Punch, Baseball Bat, Dynamite, Mine,
+ Rope, Pneumatic pick, Parachute. Most weapons, when used, cause
+ explosions that deform the terrain, removing circular chunks.
+ The landscape is an island floating on a body of water, or a
+ restricted cave with water at the bottom. A hedgehog dies when
+ it enters the water (either by falling off the island, or
+ through a hole in the bottom of it), it is thrown off either
+ side of the arena or when its health is reduced, typically from
+ contact with explosions, to zero (the damage dealt to the
+ attacked hedgehog or hedgehogs after a player's or CPU turn is
+ shown only when all movement on the battlefield has ceased).
+
+Package: hedgewars-data
+Description-md5: a00ae77af1a4a8317e7becce4e0821a3
+Description-en: Data files for hedgewars
+ This package contains data files for the hedgewars package.
+ Examples of files are: maps, scripts, themes, images, sounds,
+ level data and other miscellaneous files needed by hedgewars.
+
+Package: hedgewars-dbg
+Description-md5: 1949755dcfd0a787f2aa4cea52236532
+Description-en: Debug symbols for Hedgewars
+ This package contains debug symbols for the hedgewars package.
+
+Package: icinga
+Description-md5: 9e42de67d0332fb8dd5990a9246a4b2b
+Description-en: host and network monitoring system - metapackage
+ Icinga is a modular monitoring framework for hosts, services, and
+ networks, based on the Nagios project. It is designed to be easy to
+ understand and modify to fit any need.
+ .
+ Features include:
+  * monitoring of network services via ping, SMTP, POP3, HTTP, NNTP, or
+    TCP port;
+  * plugin interface to allow for user-developed service checks
+  * contact notifications when problems occur and get resolved (via
+    email, pager, or user-defined method)
+  * support for proactive problem resolution (handlers can be defined to
+    be run during service or host events)
+  * web output: current status, notifications, problem history, log
+    file, etc.
+ .
+ This is a metapackage which depends on the Icinga core and the web
+ front-end.
+
+Package: icinga-cgi
+Description-md5: 5ae2c08b141cca01d3da95c88d459d0e
+Description-en: host and network monitoring system - CGI scripts
+ Icinga is a modular monitoring framework for hosts, services, and
+ networks, based on the Nagios project. It is designed to be easy to
+ understand and modify to fit any need.
+ .
+ Features include:
+  * monitoring of network services via ping, SMTP, POP3, HTTP, NNTP, or
+    TCP port
+  * plugin interface to allow for user-developed service checks
+  * contact notifications when problems occur and get resolved (via
+    email, pager, or user-defined method)
+  * support for proactive problem resolution (handlers can be defined to
+    be run during service or host events)
+  * web output: current status, notifications, problem history, log
+    file, etc.
+ .
+ This package provides CGI configuration files and the required dependencys.
+
+Package: icinga-cgi-bin
+Description-md5: b4c9a847cb5b4c3710dd7689e1e0423c
+Description-en: host and network monitoring system - CGI scripts
+ Icinga is a modular monitoring framework for hosts, services, and
+ networks, based on the Nagios project. It is designed to be easy to
+ understand and modify to fit any need.
+ .
+ Features include:
+  * monitoring of network services via ping, SMTP, POP3, HTTP, NNTP, or
+    TCP port
+  * plugin interface to allow for user-developed service checks
+  * contact notifications when problems occur and get resolved (via
+    email, pager, or user-defined method)
+  * support for proactive problem resolution (handlers can be defined to
+    be run during service or host events)
+  * web output: current status, notifications, problem history, log
+    file, etc.
+ .
+ This package provides CGI binarys and HTML files.
+
+Package: icinga-common
+Description-md5: 973f22c0f8c51b31744d2339593b3e15
+Description-en: host and network monitoring system - support files
+ Icinga is a modular monitoring framework for hosts, services, and
+ networks, based on the Nagios project. It is designed to be easy to
+ understand and modify to fit any need.
+ .
+ Features include:
+  * monitoring of network services via ping, SMTP, POP3, HTTP, NNTP, or
+    TCP port
+  * plugin interface to allow for user-developed service checks
+  * contact notifications when problems occur and get resolved (via
+    email, pager, or user-defined method)
+  * support for proactive problem resolution (handlers can be defined to
+    be run during service or host events)
+  * web output: current status, notifications, problem history, log
+    file, etc.
+ .
+ This package contains the common files for all Icinga packages.
+
+Package: icinga-core
+Description-md5: 9af27f2311be395cee023fe90a89a790
+Description-en: host and network monitoring system - core files
+ Icinga is a modular monitoring framework for hosts, services, and
+ networks, based on the Nagios project. It is designed to be easy to
+ understand and modify to fit any need.
+ .
+ Features include:
+  * monitoring of network services via ping, SMTP, POP3, HTTP, NNTP, or
+    TCP port
+  * plugin interface to allow for user-developed service checks;
+  * contact notifications when problems occur and get resolved (via
+    email, pager, or user-defined method)
+  * support for proactive problem resolution (handlers can be defined to
+    be run during service or host events)
+  * web output: current status, notifications, problem history, log
+    file, etc.
+ .
+ This package provides the core of Icinga without the web front-end.
+
+Package: icinga-dbg
+Description-md5: fb3d921003e19f524792f2e860c5eee0
+Description-en: host and network monitoring system - debug files
+ Icinga is a modular monitoring framework for hosts, services, and
+ networks, based on the Nagios project. It is designed to be easy to
+ understand and modify to fit any need.
+ .
+ Features include:
+  * monitoring of network services via ping, SMTP, POP3, HTTP, NNTP, or
+    TCP port
+  * plugin interface to allow for user-developed service checks;
+  * contact notifications when problems occur and get resolved (via
+    email, pager, or user-defined method)
+  * support for proactive problem resolution (handlers can be defined to
+    be run during service or host events)
+  * web output: current status, notifications, problem history, log
+    file, etc.
+ .
+ This package provides gdb debugging symbols for the Icinga binaries and
+ the mini_epn tool which can help in debugging Icinga problems.
+
+Package: icinga-doc
+Description-md5: c77819a8e66b5ca0571f7f276505a4a7
+Description-en: host and network monitoring system - documentation
+ Icinga is a modular monitoring framework for hosts, services, and
+ networks, based on the Nagios project. It is designed to be easy to
+ understand and modify to fit any need.
+ .
+ Features include:
+  * monitoring of network services via ping, SMTP, POP3, HTTP, NNTP, or
+    TCP port
+  * plugin interface to allow for user-developed service checks;
+  * contact notifications when problems occur and get resolved (via
+    email, pager, or user-defined method)
+  * support for proactive problem resolution (handlers can be defined to
+    be run during service or host events)
+  * web output: current status, notifications, problem history, log
+    file, etc.
+ .
+ This package provides the documentation for Icinga.
+
+Package: icinga-idoutils
+Description-md5: fe4b3c54805187510661f265f96d5cbf
+Description-en: host and network monitoring system - icinga-dataobjects support
+ Icinga is a modular monitoring framework for hosts, services, and
+ networks, based on the Nagios project. It is designed to be easy to
+ understand and modify to fit any need.
+ .
+ Features include:
+  * monitoring of network services via ping, SMTP, POP3, HTTP, NNTP, or
+    TCP port
+  * plugin interface to allow for user-developed service checks
+  * contact notifications when problems occur and get resolved (via
+    email, pager, or user-defined method)
+  * support for proactive problem resolution (handlers can be defined to
+    be run during service or host events)
+  * web output: current status, notifications, problem history, log
+    file, etc.
+ .
+ This package contains icinga-dataobjects support which makes it possible
+ to import Icinga status information messages into an SQL database.
+
+Package: iperf3
+Description-md5: 868f6472f9c9d19fbddc8629a2bc01a5
+Description-en: Internet Protocol bandwidth measuring tool
+ Iperf3 is a tool for performing network throughput measurements. It can
+ test either TCP or UDP throughput.
+ .
+ This is a new implementation that shares no code with the original
+ iperf from NLANR/DAST and also is not backwards compatible.
+ .
+ This package contains the command line utility.
+
+Package: jq
+Description-md5: 6f3a50ad5d3a200e13433cea785ae21c
+Description-en: lightweight and flexible command-line JSON processor
+ jq is like sed for JSON data – you can use it to slice
+ and filter and map and transform structured data with
+ the same ease that sed, awk, grep and friends let you
+ play with text.
+ .
+ It is written in portable C, and it has zero runtime
+ dependencies.
+ .
+ jq can mangle the data format that you have into the
+ one that you want with very little effort, and the
+ program to do so is often shorter and simpler than
+ you’d expect.
+
+Package: kate-syntax-go
+Description-md5: 7c41ffcbf8606b94bc99c5e82a31efd4
+Description-en: Go programming language - Kate highlighting syntax files
+ This package provides syntax files for the Kate editor for editing code
+ in Google's Go programming language.
+
+Package: kdeconnect
+Description-md5: 395c15316506015011d076d74e8c39b2
+Description-en: connect smartphones to your KDE Plasma Workspace
+ Tool to integrate the KDE Plasma Workspace with your smartphones and
+ similar devices.
+ It adds a set of plasmoid, plugins and services to the KDE Plasma Workspace.
+ At the  moment it only supports Android based devices.
+
+Package: kdeconnect-kde
+Description-md5: 3c2dd99b1831b85ea3e26f9930848eac
+Description-en: transitional package for kdeconnect-kde
+ This is a transitional package for kdeconnect-kde. It can be safely removed.
+
+Package: libacsccid1
+Description-md5: 05bf1db065acaecd723e98052825b2e6
+Description-en: PC/SC driver for ACS USB CCID smart card readers
+ This library provides a PC/SC IFD handler implementation for the ACS USB smart
+ card readers compliant to the CCID protocol.
+ .
+ This package is needed to communicate with the ACS CCID smartcard readers
+ through the PC/SC Lite resource manager (pcscd).
+ .
+ See README for a list of supported readers.
+
+Package: libapache2-mod-proxy-html
+Description-md5: 36c293ebb5b77f14b95215fd3ffa7760
+Description-en: Transitional package for apache2-bin
+ This is a transitional package for apache2-bin, and can be safely removed
+ after the installation is complete.
+
+Package: libastyle-dev
+Description-md5: 1e822b92b83cda73532f7773a511caf0
+Description-en: Library header files for C++/C/Java/C# source code indenter
+ Artistic Style is a source code indenter, formatter, and beautifier
+ for the C, C++, C# and Java programming languages.
+ .
+ This package contains the development headers.
+
+Package: libastyle0debian0
+Description-md5: c9dd64fca5da5102b306e8489337360c
+Description-en: Shared library for C++/C/Java/C# source code indenter
+ Artistic Style is a source code indenter, formatter, and beautifier
+ for the C, C++, C# and Java programming languages.
+ .
+ This package contains the shared library.
+
+Package: libastylej-jni
+Description-md5: 7792ad045d1c2fdb13d05d3194410349
+Description-en: Java JNI library for C++/C/Java/C# source code indenter
+ Artistic Style is a source code indenter, formatter, and beautifier
+ for the C, C++, C# and Java programming languages.
+ .
+ This package contains the Java native interface library.
+
+Package: libboinc-app-dev
+Description-md5: 14bf791641e7ac0e849dc1dede8fcd86
+Description-en: development files to build applications for BOINC projects
+ The Berkeley Open Infrastructure for Network Computing (BOINC) is a
+ software platform for distributed computing using volunteered computer
+ resources.
+ .
+ This package contains header files that are needed to develop and
+ compile applications which utilizes the BOINC infrastructure.
+
+Package: libboinc-app7
+Description-md5: c61445098356f24f852e0a3c9ef219e7
+Description-en: libraries for BOINC's scientific applications
+ The Berkeley Open Infrastructure for Network Computing (BOINC) is a
+ software platform for distributed computing using volunteered computer
+ resources.
+ .
+ This package contains dynamic libraries that are needed for applications
+ which utilizes the BOINC infrastructure and the boinc-client itself.
+
+Package: libboinc7
+Description-md5: 11081d0d4ad203dafbfd2b8fc5e1425b
+Description-en: libraries of BOINC the client depends on
+ The Berkeley Open Infrastructure for Network Computing (BOINC) is a
+ software platform for distributed computing using volunteered computer
+ resources.
+ .
+ The environment offers a series of libraries that both the user-run
+ client and the client-invoked scientific applications depend on. With
+ the number of cores per machine growing, and with scientific apps
+ commonly started for every core, it is essential to have memory
+ shared as much as possible between binaries of all projects.
+
+Package: libchemps2-1
+Description-md5: 79f5e99e45e622fa846b1c66d0b3e87b
+Description-en: Spin-adapted DMRG for ab initio quantum chemistry
+ chemps2 is a scientific library which contains a spin-adapted
+ implementation of the density matrix renormalization group (DMRG)
+ for ab initio quantum chemistry. This method allows one to obtain
+ numerical accuracy in active spaces beyond the capabilities of
+ full configuration interaction (FCI): up to 40 electrons in 40
+ orbitals for general active spaces; and up to 100 electrons in
+ 100 orbitals for one-dimensional active spaces, such as the
+ pi-system of all-trans polyenes.
+ .
+ For an input Hamiltonian and targeted symmetry sector, the library
+ performs successive DMRG sweeps according to a user-defined
+ convergence scheme. As output, the library returns the minimal
+ encountered energy as well as the second order reduced density
+ matrix (2-RDM) of the active space. With the latter, various
+ molecular properties can be calculated, as well as the gradient and
+ Hessian for orbital rotations or nuclear displacements. In addition,
+ several correlation functions can be obtained to investigate the
+ electronic structure in the active space.
+ .
+ This version of chemps2 is parallelized for shared memory
+ architectures with OpenMP.
+
+Package: libchemps2-dev
+Description-md5: 287102701abfe958a5628e0e299edc35
+Description-en: C++ headers, static library, and symlink for libchemps2-1
+ chemps2 is a scientific library which contains a spin-adapted
+ implementation of the density matrix renormalization group (DMRG)
+ for ab initio quantum chemistry. This method allows one to obtain
+ numerical accuracy in active spaces beyond the capabilities of
+ full configuration interaction (FCI).
+ .
+ For an input Hamiltonian and targeted symmetry sector, the library
+ performs successive DMRG sweeps according to a user-defined
+ convergence scheme. As output, the library returns the minimal
+ encountered energy as well as the second order reduced density
+ matrix (2-RDM) of the active space. With the latter, various
+ molecular properties can be calculated, as well as the gradient and
+ Hessian for orbital rotations or nuclear displacements. In addition,
+ several correlation functions can be obtained to investigate the
+ electronic structure in the active space.
+ .
+ This package installs the C++ headers, static library, and symlink
+ for libchemps2.
+
+Package: liberasurecode-dev
+Description-md5: fbad4cc5eda403f2ccf3578c485a317a
+Description-en: support of multiple erasure code backends - development files
+ Liberasurecode is an erasure code library which can support multiple erasure
+ code 'backends'. The repository includes a Jerasure for Reed-Solomon
+ implementation.
+ .
+ This package contains the development files needed to build against the shared
+ library.
+
+Package: liberasurecode0
+Description-md5: 3dca7acc4e8a6c946dd42ab4f1a445a6
+Description-en: support of multiple erasure code backends - shared library
+ Liberasurecode is an erasure code library which can support multiple erasure
+ code 'backends'. The repository includes a Jerasure for Reed-Solomon
+ implementation.
+ .
+ This package contains the shared library.
+
+Package: liberasurecode1
+Description-md5: 3dca7acc4e8a6c946dd42ab4f1a445a6
+Description-en: support of multiple erasure code backends - shared library
+ Liberasurecode is an erasure code library which can support multiple erasure
+ code 'backends'. The repository includes a Jerasure for Reed-Solomon
+ implementation.
+ .
+ This package contains the shared library.
+
+Package: libgf-complete-dev
+Description-md5: c9208c5bf2fca7bcffbb0c95c0d5122a
+Description-en: Galois Field Arithmetic - development files
+ Galois Field arithmetic forms the backbone of erasure-coded storage systems,
+ most famously the Reed-Solomon erasure code. A Galois Field is defined over
+ w-bit words and is termed GF(2w). As such, the elements of a Galois Field are
+ the integers 0, 1, . . ., 2^w − 1. Galois Field arithmetic defines addition
+ and multiplication over these closed sets of integers in such a way that they
+ work as you would hope they would work. Specifically, every number has a
+ unique multiplicative inverse. Moreover, there is a value, typically the value
+ 2, which has the property that you can enumerate all of the non-zero elements
+ of the field by taking that value to successively higher powers.
+ .
+ This package contains the development files needed to build against the shared
+ library.
+
+Package: libgf-complete1
+Description-md5: c7ded48be9d1d80e5d0262e62078b9e1
+Description-en: Galois Field Arithmetic - shared library
+ Galois Field arithmetic forms the backbone of erasure-coded storage systems,
+ most famously the Reed-Solomon erasure code. A Galois Field is defined over
+ w-bit words and is termed GF(2w). As such, the elements of a Galois Field are
+ the integers 0, 1, . . ., 2^w − 1. Galois Field arithmetic defines addition
+ and multiplication over these closed sets of integers in such a way that they
+ work as you would hope they would work. Specifically, every number has a
+ unique multiplicative inverse. Moreover, there is a value, typically the value
+ 2, which has the property that you can enumerate all of the non-zero elements
+ of the field by taking that value to successively higher powers.
+ .
+ This package contains the shared library.
+
+Package: libiperf-dev
+Description-md5: 86eb0fa7b273c3acf4c250e86fd9ae3a
+Description-en: Internet Protocol bandwidth measuring tool (development files)
+ Iperf3 is a tool for performing network throughput measurements. It can
+ test either TCP or UDP throughput.
+ .
+ This is a new implementation that shares no code with the original
+ iperf from NLANR/DAST and also is not backwards compatible.
+ .
+ This is the development package which contains headers files and the
+ static iperf library.
+
+Package: libiperf0
+Description-md5: 244f66f46718a4a37d9ee85afdde66c2
+Description-en: Internet Protocol bandwidth measuring tool (runtime files)
+ Iperf3 is a tool for performing network throughput measurements. It can
+ test either TCP or UDP throughput.
+ .
+ This is a new implementation that shares no code with the original
+ iperf from NLANR/DAST and also is not backwards compatible.
+ .
+ This is the runtime package for programs that use the shared iperf
+ library.
+
+Package: libjerasure-dev
+Description-md5: a4255e7dbd78582f505cb4b181c16b08
+Description-en: forward error correction erasure channel library - development files
+ In information theory, an erasure code is a forward error correction (FEC)
+ code for the binary erasure channel, which transforms a message of symbols
+ into a longer message (code word) with symbols such that the original
+ message can be recovered from a subset of the symbols.
+ .
+ Jerasure is a shared library that been designed to be modular, fast and
+ flexible. It is used in storage systems such as Swift and Ceph to add fault
+ tolerance.
+ .
+ This package contains the development files needed to build against the shared
+ library.
+
+Package: libjerasure2
+Description-md5: 52f44ea46b6015a3e1eb58abe90111f5
+Description-en: forward error correction erasure channel library - shared library
+ In information theory, an erasure code is a forward error correction (FEC)
+ code for the binary erasure channel, which transforms a message of symbols
+ into a longer message (code word) with symbols such that the original
+ message can be recovered from a subset of the symbols.
+ .
+ Jerasure is a shared library that been designed to be modular, fast and
+ flexible. It is used in storage systems such as Swift and Ceph to add fault
+ tolerance.
+ .
+ This package contains the shared library.
+
+Package: liblmdb-dev
+Description-md5: 5f89a06580a0fff610ed7f46de603936
+Description-en: Lightning Memory-Mapped Database development files
+ This package contains the development libraries, header files.  Install
+ lmdb-doc package for man pages.
+ .
+ Lighting Memory-Mapped Database (LMDB) is an ultra-fast, ultra-compact
+ key-value embedded data store developed for the OpenLDAP Project.  It uses
+ memory-mapped files, so it has the read performance of a pure in-memory
+ database while still offering the persistence of standard disk-based
+ databases, and is only limited to the size of the virtual address space, (it
+ is not limited to the size of physical RAM).
+
+Package: liblmdb0
+Description-md5: 205529036e221ed86db40fcd32032a9e
+Description-en: Lightning Memory-Mapped Database shared library
+ This package contains the LMDB shared library.
+ .
+ Lighting Memory-Mapped Database (LMDB) is an ultra-fast, ultra-compact
+ key-value embedded data store developed for the OpenLDAP Project.  It uses
+ memory-mapped files, so it has the read performance of a pure in-memory
+ database while still offering the persistence of standard disk-based
+ databases, and is only limited to the size of the virtual address space, (it
+ is not limited to the size of physical RAM).
+
+Package: libmoonshot1
+Description-md5: 3d8f7a7ba96d5ac27fe1d6b9317944c3
+Description-en: Moonshot Identity Shared Library
+ Project moonshot provides federated authentication using EAP, RADIUS
+ and SAML to applications beyond the web platform.  This library
+ allows other components to interact with the Moonshot identity store.
+
+Package: libndp-dbg
+Description-md5: 992a66f60e090ff4ec6e096176d5f9cb
+Description-en: Library for Neighbor Discovery Protocol (debug symbols)
+ libndp is a library the IPv6 Neighbor Discovery Protocol (NDP).  It
+ contains functions for building and parsing NDP messages, and provides
+ a high level interface for sending and receiving NDP messages on a
+ network interface.
+ .
+ This package provides debug symbols.
+
+Package: libndp-dev
+Description-md5: e7c07bbe96e16ea95d2e6528e6d41ec9
+Description-en: Library for Neighbor Discovery Protocol (development files)
+ libndp is a library the IPv6 Neighbor Discovery Protocol (NDP).  It
+ contains functions for building and parsing NDP messages, and provides
+ a high level interface for sending and receiving NDP messages on a
+ network interface.
+ .
+ This package contains the development files.
+
+Package: libndp-tools
+Description-md5: 058387013ef390ff7e494718751d58c1
+Description-en: Library for Neighbor Discovery Protocol (tools)
+ libndp is a library the IPv6 Neighbor Discovery Protocol (NDP).  It
+ contains functions for building and parsing NDP messages, and provides
+ a high level interface for sending and receiving NDP messages on a
+ network interface.
+ .
+ This package contains a tool named ndptool for sending and receiving
+ NDP messages.
+
+Package: libndp0
+Description-md5: d728056bdc8b4c907e5984b034134506
+Description-en: Library for Neighbor Discovery Protocol
+ libndp is a library the IPv6 Neighbor Discovery Protocol (NDP).  It
+ contains functions for building and parsing NDP messages, and provides
+ a high level interface for sending and receiving NDP messages on a
+ network interface.
+
+Package: libnss-cache
+Description-md5: 6fb15bb8f527d499dc98b3fa39fb6e66
+Description-en: NSS module for using nsscache-generated files
+ This package provides a Name Service Switch module that uses .cache
+ files as a name service. This means providing user account
+ information, group ids, netgroups, and automounts.
+
+Package: libnss-securepass
+Description-md5: 7519af5e2839ba55c8c9687496231afb
+Description-en: NSS (Name Service Switch) module for Securepass
+ This is a NSS module for users defined on SecurePass.
+ SecurePass provides web single sign-on through the CAS protocol.
+
+Package: libosmgpsmap-1.0-0
+Description-md5: 949cb1448db43a745f634c5b42194cab
+Description-en: GTK+ library to embed OpenStreetMap maps
+ libosmgpsmap is a library to embed maps in applications that when given GPS
+ co-ordinates, draws a GPS track, and points of interest on a moving map
+ display. Downloads map data from a number of websites, including
+ openstreetmap.org, openaerialmap.org and others.
+
+Package: libosmgpsmap-1.0-0-dbg
+Description-md5: 681685d95b2c8ae7bacebdd9d8cd762f
+Description-en: GTK+ library to embed OpenStreetMap maps - debugging symbols
+ libosmgpsmap is a library to embed maps in applications that when given GPS
+ co-ordinates, draws a GPS track, and points of interest on a moving map
+ display. Downloads map data from a number of websites, including
+ openstreetmap.org, openaerialmap.org and others.
+ .
+ This package contains the debugging symbols for the shared library and its
+ Python bindings.
+
+Package: libosmgpsmap-1.0-dev
+Description-md5: 1f2bceff5ac8f59a7e058fcf5758c7fa
+Description-en: GTK+ library to embed OpenStreetMap maps - development files
+ libosmgpsmap is a library to embed maps in applications that when given GPS
+ co-ordinates, draws a GPS track, and points of interest on a moving map
+ display. Downloads map data from a number of websites, including
+ openstreetmap.org, openaerialmap.org and others.
+ .
+ These are the development files for libosmgpsmap0, needed only if you're
+ writing or compiling an application which will use it.
+
+Package: libpam-cgfs
+Description-md5: e709f3eddd48d5ce8595be4d003fd4f5
+Description-en: PAM module for managing cgroups for LXC
+ LXCFS provides a FUSE based filesystem to improve the LXC experience
+ within the containers.
+ .
+ This provides a Pluggable Authentication Module (PAM) to provide
+ logged-in users with a set of cgroups which they can administer.
+ This allows for instance unprivileged containers, and session
+ management using cgroup process tracking.
+
+Package: libpam-ufpidentity
+Description-md5: 20fbb24c1c4dc2a66e4c413137976d92
+Description-en: PAM library for UFP identity
+ The UFP Identity PAM module provides integration of the UFP Identity
+ service into your existing user authentication infrastructure. PAM is
+ used by Linux/BSD, Solaris and Mac OS X for user authentication to
+ various services such as SSH, login, and sudo.
+ See https://github.com/ufpidentity/pam_ufpidentity/blob/master/README.md
+ for details about installation.
+
+Package: libqmi-utils
+Description-md5: 76e1eda70baf3a1a86ec637dca8a1dd9
+Description-en: Utilities to use the QMI protocol from the command line
+ This package contains the utilities that make it easier to use QMI
+ functionality from the command line.
+
+Package: libradsec-dev
+Description-md5: e87764a3164709e32edb1295f4d510ec
+Description-en: RADIUS library with RADSEc support
+ RADIUS (RFC 2865) provides a protocol for authenticating and
+ authorizing users to network services.
+ .
+ This is the development library for libradsec, a RADIUS library
+ supporting RADIUS and RADSEC.
+
+Package: libradsec0
+Description-md5: 7636d41ae25e0c7b3185736ba12e3cf3
+Description-en: RADIUS library supporting RADSEC
+ RADIUS (RFC 2865) provides a mechanism for authenticating and
+ authorizing users to use network services.
+ .
+ This is the shared library for a RADIUS library supporting RADSEC
+ (RADIUS over TLS).
+
+Package: libshibresolver-dbg
+Description-md5: ed85bf995e46dfc98edc161281626c5c
+Description-en: Shibboleth SP Attribute Resolver Debugging
+ This package contains a Shibboleth SP Extension that provides
+ externally accessible attribute resolver functionality for processing
+ local and remote sources of federated attribute information.
+ This package contains debugging symbols.
+ This package contains just the shared library.
+
+Package: libshibresolver-dev
+Description-md5: bf6d273ffef2045f1555cdbb4219a366
+Description-en: Shibboleth SP Attribute Resolver library
+ This package contains a Shibboleth SP Extension that provides
+ externally accessible attribute resolver functionality for processing
+ local and remote sources of federated attribute information.
+ .
+ This package includes files needed for development.
+
+Package: libshibresolver1
+Description-md5: d5edb6781f87b9ebb3368548ff83629b
+Description-en: Shibboleth SP Attribute Resolver library
+ This package contains a Shibboleth SP Extension that provides
+ externally accessible attribute resolver functionality for processing
+ local and remote sources of federated attribute information.
+ .
+ This package contains just the shared library.
+
+Package: libtinyxml2-2
+Description-md5: f7a6d9c81bce6e3c6808f3a7af25b07c
+Description-en: C++ XML parsing library
+ This package contains the shared version of the TinyXML2 library.
+ .
+ TinyXML2 is a simple and small C++ XML parser that can be easily integrating
+ into other programs. It reads XML and creates C++ objects representing the XML
+ document. The objects can be manipulated, changed, and saved again as XML.
+ .
+ TinyXML2 supersedes the previous TinyXML library, with various improvements:
+  - Fewer memory allocations (1% - 10% compared to TinyXML)
+  - Uses less memory (about 40% of that used by TinyXML)
+  - Faster
+  - No STL requirement
+  - More modern C++, including a proper namespace
+  - Proper and useful handling of whitespace
+
+Package: libtinyxml2-dev
+Description-md5: 010e91311a83f9f79a3ece268beb399a
+Description-en: TinyXML2 library - header and static library
+ This package contains the header file and a static version of the
+ TinyXML2 library.
+ .
+ TinyXML2 is a simple and small C++ XML parser that can be easily integrating
+ into other programs. It reads XML and creates C++ objects representing the XML
+ document. The objects can be manipulated, changed, and saved again as XML.
+ .
+ TinyXML2 supersedes the previous TinyXML library, with various improvements:
+  - Fewer memory allocations (1% - 10% compared to TinyXML)
+  - Uses less memory (about 40% of that used by TinyXML)
+  - Faster
+  - No STL requirement
+  - More modern C++, including a proper namespace
+  - Proper and useful handling of whitespace
+
+Package: libufpidentity-dev
+Description-md5: 487f4859cd423271467dc3f37e05b66f
+Description-en: UFP Identity development library for C applications
+ This library allows C applications to interact with the UFP Identity
+ service. Use this package if you want to develop applications that
+ interact with UFP Identity.
+
+Package: libufpidentity1
+Description-md5: 5bc0640a300fead34c82268eb2966e8b
+Description-en: UFP Identity library for C applications
+ This library allows C applications to interact with the UFP Identity
+ service. Use this package if you want to run applications that interact
+ with UFP Identity.
+
+Package: lmdb-dbg
+Description-md5: e40442100ecfd15f3c96921623551182
+Description-en: Lightning Memory-Mapped Database debug files
+ This package provides the detached debug symbols for the LMDB libraries
+ and utilities.
+ .
+ Lighting Memory-Mapped Database (LMDB) is an ultra-fast, ultra-compact
+ key-value embedded data store developed for the OpenLDAP Project.  It uses
+ memory-mapped files, so it has the read performance of a pure in-memory
+ database while still offering the persistence of standard disk-based
+ databases, and is only limited to the size of the virtual address space, (it
+ is not limited to the size of physical RAM).
+
+Package: lmdb-doc
+Description-md5: 76adb97f0851fb6cf4f777f7c68adab4
+Description-en: Lightning Memory-Mapped Database doxygen documentation
+ This package contains the doxygen generated documentation and the man
+ pages for the LMDB library.
+ .
+ Lighting Memory-Mapped Database (LMDB) is an ultra-fast, ultra-compact
+ key-value embedded data store developed for the OpenLDAP Project.  It uses
+ memory-mapped files, so it has the read performance of a pure in-memory
+ database while still offering the persistence of standard disk-based
+ databases, and is only limited to the size of the virtual address space, (it
+ is not limited to the size of physical RAM).
+
+Package: lmdb-utils
+Description-md5: e456d80fa8a524a61833c95d96211e00
+Description-en: Lightning Memory-Mapped Database Utilities
+ This package provides tools for manipulating LMDB databases:
+  * mdb_stat - LMDB environment status tool
+  * mdb_copy - LMDB environment copy tool
+ .
+ Lighting Memory-Mapped Database (LMDB) is an ultra-fast, ultra-compact
+ key-value embedded data store developed for the OpenLDAP Project.  It uses
+ memory-mapped files, so it has the read performance of a pure in-memory
+ database while still offering the persistence of standard disk-based
+ databases, and is only limited to the size of the virtual address space, (it
+ is not limited to the size of physical RAM).
+
+Package: lxc2
+Description-md5: 16aa6b32a6decc4b676db644304f6925
+Description-en: Container hypervisor based on LXC - metapackage
+ LXD offers a REST API to remotely manage containers over the network,
+ using an image based workflow and with support for live migration.
+ .
+ This is a dummy metapackage to install LXD and its client.
+
+Package: lxcfs
+Description-md5: f3cabfc6ca3d3433720d9d811af950bd
+Description-en: FUSE based filesystem for LXC
+ LXCFS provides a FUSE based filesystem to improve the LXC experience
+ within the containers.
+ .
+ This filesystem offers both a cgroupfs-like view for use by
+ unprivileged containers which wouldn't otherwise be allowed to mount
+ cgroupfs. And a set of files that are meant to be bind-mounted over
+ their /proc equivalent to make them cgroup-aware.
+
+Package: lxd
+Description-md5: aae21ff20f4cc6a1e21b22e39cdd87bf
+Description-en: Container hypervisor based on LXC - daemon
+ LXD offers a REST API to remotely manage containers over the network,
+ using an image based workflow and with support for live migration.
+ .
+ This package contains the LXD daemon.
+
+Package: lxd-client
+Description-md5: c5f7d80cfd076c2db1400c3ee9b9332f
+Description-en: Container hypervisor based on LXC - client
+ LXD offers a REST API to remotely manage containers over the network,
+ using an image based workflow and with support for live migration.
+ .
+ This package contains the command line client.
+
+Package: lxd-tools
+Description-md5: 1a9559067df933dcdc0a247f80f45ba8
+Description-en: Container hypervisor based on LXC - extra tools
+ LXD offers a REST API to remotely manage containers over the network,
+ using an image based workflow and with support for live migration.
+ .
+ This package contains extra tools provided with LXD.
+  - fuidshift - A tool to map/unmap filesystem uids/gids
+
+Package: minidlna
+Description-md5: 5b2d396f86d25a79b5ab8a1c34181623
+Description-en: lightweight DLNA/UPnP-AV server targeted at embedded systems
+ MiniDLNA (aka ReadyDLNA) is server software with the aim of being
+ fully compliant with DLNA/UPnP-AV clients.
+ .
+ The minidlna daemon serves media files (music, pictures, and video)
+ to clients on your network.  Example clients include applications
+ such as totem and xbmc, and devices such as portable media players,
+ smartphones, and televisions.
+ .
+ MiniDLNA is a simple, lightweight alternative to mediatomb, but has
+ fewer features. It does not have a web interface for administration
+ and must be configured by editing a text file.
+
+Package: modem-manager-gui
+Description-md5: 314225dccd2e8b945d86b7f542fc2542
+Description-en: GUI front-end for ModemManager / Wader / oFono
+ This program is a simple graphical interface for ModemManager, Wader and oFono
+ daemon D-Bus interfaces. It can send, receive and store SMS messages,
+ send USSD requests and read answers in GSM7 and UCS2 formats,
+ and scan for available mobile networks.
+
+Package: modem-manager-gui-dbg
+Description-md5: ee5cae2027ae1ae6db5e671e9bd7a096
+Description-en: GUI front-end for ModemManager / Wader / oFono - debugging symbols
+ This package contains detached debugging symbols.
+
+Package: moonshot-gss-eap
+Description-md5: 53e664206e4096c9a56682086dcee369
+Description-en: Moonshot Federated Authentication - authentication mechanism
+ Project moonshot provides federated authentication using EAP, RADIUS
+ and SAML to applications beyond the web platform. This package
+ contains the client and server plugins to perform authentication.
+
+Package: moonshot-gss-eap-dbg
+Description-md5: 83d1f7aea5d1d8e6bf51b9c7acf55126
+Description-en: Moonshot Federated Authentication - debugging Symbols
+ Project moonshot provides federated authentication using EAP, RADIUS
+ and SAML to applications beyond the web platform. This package
+ contains debugging symbols.
+
+Package: moonshot-ui
+Description-md5: 45913b038df055fb18ad3cd03c883d29
+Description-en: Moonshot Identity Selector
+ Project moonshot provides federated authentication using EAP, RADIUS
+ and SAML to applications beyond the web platform.
+ This package provides a service to manage the local identity store
+ and to select which identity is used with a given service.
+
+Package: moonshot-ui-dbg
+Description-md5: 1f70f6bc82f6373ddbc3e6c7495f562e
+Description-en: Moonshot Identity Selector Debug Symbols
+ Project moonshot provides federated authentication using EAP, RADIUS
+ and SAML to applications beyond the web platform.  This package
+ includes debugging symbols.
+
+Package: moonshot-ui-dev
+Description-md5: 1e363c664a55105090447fe9e767bf49
+Description-en: Moonshot Identity Development Files
+ Project moonshot provides federated authentication using EAP, RADIUS
+ and SAML to applications beyond the web platform.
+
+Package: nagios-plugins-contrib
+Description-md5: fcc8c15649f04e00a87ed5d11923a32f
+Description-en: Plugins for nagios compatible monitoring systems
+ This package provides various plugins for Nagios compatible monitoring
+ systems like Nagios and Icinga.
+ It contains the following plugins:
+ .
+   * check_ajp (1): plugin to monitor the AJP ping response time
+     Should work with all application servers (Tomcat, JBoss,....)
+     which provide an AJPv13 connector.
+   * check_backuppc (1.1.0): plugin for checking on the status of
+     BackupPC backups
+   * check_bgpstate (1.0): plugin to check all BGP session on Cisco routers
+   * check_checksums (20130611): plugin to verify file checksums
+     against (local, not 100% secure) lists.
+     Supports md5 sha1 sha224 sha256 sha384 sha512 checksums.
+   * check_clamav (1.2): plugin to check for clamav signature freshness
+     This script is used to compare the version and signature
+     level of the currently running clamd daemon with the latest
+     available versions listed in the TXT record for
+     current.cvd.clamav.net.
+   * check_cups (0.2): plugin to check queues on a remote CUPS server
+     This plugin is monitoring of queues on a remote CUPS server,
+     which means that it doesn't need to be installed on the print
+     server and run via NRPE.
+   * check_drbd (0.5.3): plugin to check DRBD device states
+     This plugin is for checking DRBD device states. It parses the
+     /proc/drbd device and analyses the output.
+   * check_email_delivery (0.7.1b): plugin to monitor email delivery
+     Some typical uses of this plugin include:
+       - check SMTP server
+       - check messages and quota on IMAP server
+       - check email delivery loop
+       - check auto-responder function
+       - keep an eye on email lag
+       - monitor automated mailboxes
+       - check email-to-FTP or other special email gateways
+   * check_etc_hosts (?): plugin to check /etc/hosts for DNS consistency
+     Check /etc/hosts, and make sure the content matches the information
+     in DNS.  Lookup IP, and check if the names listed in /etc/hosts
+     maches the one in DNS.  It will ignore entries with '# NAGIOSIGNORE'
+     at the end.
+   * check_etc_resolv: plugin to check /etc/resolv.conf
+     Check /etc/resolv.conf, and make sure the name servers listed are
+     working.  It will ignore entries with '# NAGIOSIGNORE' at the end.
+   * check_graphite: Plugin to monitor graphite metrics
+   * check_haproxy (rev135): plugin check the HAProxy statistics url
+   * check_hp_bladechassis (1.0.1): plugin to check the hardware health of
+     HP blade enclosures via SNMP.
+     The plugin is only tested with the c7000 enclosure.
+   * check_hpasm (4.6.3.2): plugin to check the hardware health of
+     HP Proliant Servers
+     It either uses snmp or - if installed - the hpasm package locally.
+     The plugin checks the health of
+       * Processors
+       * Power supplies
+       * Memory modules
+       * Fans
+       * CPU- and board-temperatures
+       * Raids
+     and alerts you if one of these components is faulty or operates
+     outside its normal parameters.
+   * check_httpd_status (rev153): plugin checking Apache or Lighthttpd
+     server-status page (using mod_status)
+   * check_ipmi_sensor (3.5): IPMI Sensor Monitoring Plugin
+     Plugin to monitor the hardware status (fan speed, temperaturs,
+     voltages, power usage, ...) of a server using IPMI.
+   * check_ldap_root (?): plugin to check LDAP server response
+     Make sure the LDAP server is able to respond by searching for the
+     root DSE.
+   * check_libs (520): plugin to report the usage of no longer existing
+     libraries by running processes
+   * check_lm_sensors (3.1.1): plugin to monitor hardware sensors
+     and disk temperatures
+   * check_memcached (1.3): plugin to check memcached instances
+     It will give a critical message if a partiular memcached host is
+     inaccessible and generate a warning if the hit/miss ratio falls
+     below a given threshold or the number of evictions exceeds a given
+     limit.
+     Hit/miss and evictions are measured over a 30 minute interval,
+     using a memcached object to store the earlier statistics.
+   * check_memory (1.0.1): plugin to check for free memory
+     This plugin excludes the system cache and buffer, because
+     on some system with very stable memory usage it is perfectly
+     normal for system cache to fill in all available memory.
+   * check_mongodb (60b639ef4c): Plugin script to monitor your MongoDB server(s)
+   * check_multipath (0.2.1): plugin to monitor the number of available and
+     failed paths of multipath devices
+   * check_mysql_health (2.1.8.2): plugin to check various parameters of a
+     MySQL database
+   * check_nfsmounts: checks whether there are stale NFS mounts on the host
+   * check_printer: plugin to check printer supply levels using SNMP
+     It outputs performance data for all supplies
+     found, for example toner and drum.
+   * check_raid (3.2.1+47b33d53db): plugin to check sw/hw RAID status
+     The plugin looks for any known types of RAID configurations,
+     and checks them all.
+     .
+     Supports:
+     - Adaptec AAC RAID via aaccli or afacli or arcconf
+     - AIX software RAID via lsvg
+     - HP/Compaq Smart Array via cciss_vol_status (hpsa supported too)
+     - HP Smart Array Controllers and MSA Controllers via hpacucli
+     - HP Smart Array (MSA1500) via serial line
+     - Linux 3ware SATA RAID via tw_cli
+     - Linux Device Mapper RAID via dmraid
+     - Linux DPT/I2O hardware RAID controllers via /proc/scsi/dpt_i2o
+     - Linux GDTH hardware RAID controllers via /proc/scsi/gdth
+     - Linux LSI MegaRaid hardware RAID via CmdTool2
+     - Linux LSI MegaRaid hardware RAID via megarc
+     - Linux LSI MegaRaid hardware RAID via /proc/megaraid
+     - Linux MegaIDE hardware RAID controllers via /proc/megaide
+     - Linux MPT hardware RAID via mpt-status
+     - Linux software RAID (md) via /proc/mdstat
+     - LSI Logic MegaRAID SAS series via MegaCli
+     - LSI MegaRaid via lsraid
+     - Serveraid IPS via ipssend
+     - Solaris software RAID via metastat
+     - Areca SATA RAID Support via cli64/cli32
+   * check_rbl (1.3.5): plugin to check if a server is blacklisted
+   * check_shutdown (?): plugin to check LDAP server response
+     Make sure the LDAP server is able to respond by searching for the
+     root DSE.
+   * check_smstools: plugin to check GSM Modems using smstools
+     check_smstools is a plugin to monitor a GSM modem
+     signal quality and registration status with smstools.
+   * check_snmp_environment (0.7): plugin to check various hardware statuses
+     Using snmp the plugin is able to retrieve Fan, power-supply,
+     voltage, temperature, card and module status and various other
+     information from Cisco, Nokia, Blue Coat, IronPort,
+     Foundry Network, Linux (using lm-sensors), Extreme Networks,
+     Juniper Networks, HP ProCurve, Netscreen, Citrix NetScaler
+     and Transmode Systems hardware.
+   * check_snmp_time (1.1): plugin to check the time on a server using SNMP
+     This plugin queries the remote systems time through SNMP and compares
+     it against the local time on the Nagios server. This identifies systems
+     with no correct time set and sends alarms if the time is off to far.
+     HOST-RESOURCES-MIB::hrSystemDate.0 used here returns 8 or 11 byte octets.
+     SNMP translation needs to be switched off and to be converted the
+     received SNMP data into readable strings.
+   * check_ssl_cert (1.16.1): plugin to check the CA and validity of an
+     X.509 certificate
+   * check_uptime (0.521): check_uptime returns uptime of a system
+     in text (readable) format as well as in minutes for performance graphing.
+     The plugin can either run on a local unix system (using 'uptime' command)
+     or check remote system by SNMP. Also it is able to report one CRITICAL
+     or WARNING alert if system has been rebooted since last check.
+   * check_v46 (2013-08-26T07:33:11Z): ipv4/ipv6 Nagios plugin wrapper
+     Nagios plugin wrapper for running the actual plugin for both / either of
+     IPv6 and/or IPv4.  The worst result of the actual plugin runs will be
+     the wrapper return value, that is, result will be OK only if all checks
+     returned OK.  Compatible with any plugin with standard command line options
+     -6/-4.
+   * check_varnish (1.1): plugin to monitor varnish instances
+   * check_webinject (1.80): plugin for testing web services
+     It uses the WebInject Perl module for automated testing of
+     web applications and web services. It can be used to check
+     individual system components that have HTTP interfaces
+     (JSP, ASP, CGI, PHP, AJAX, Servlets, HTML Forms,
+     XML/SOAP Web Services, REST, etc).
+   * check_whois (1.15): plugin to check for the expiration of a domain.
+     The plugin may not yet work with all registrars, since their
+     output formats differ or there is no expiration date in the
+     whois output.
+   * check_zone_auth (1.13): plugin to ensure that the authoritative nameservers
+     for a given zone remain in sync.
+   * check_zone_rrsig_expiration (1.11): plugin to check for expiration of
+     signatures in dnssec-enabled zones.
+   * dsa: plugins from the Debian System Administrators
+     nagios plugins repository.
+     * check_cert_expire: check for certificate expiration
+       using openssl on the certificate file
+     * check_dnssec_delegation: check for correct DNSSEC
+       delegation
+     * check_entropy: check if there is enough entropy available.
+     * check_packages: replacement for check_apt; needs a cronjob
+       to update the apt database regularily
+     * check_running_kernel: check if a system was rebooted after
+       a kernel upgrade
+     * check_soas: check SOA records
+     * check_statusfile: deliver the content of a status file
+       as check result
+   * extras (1): various scripts and extras
+     Not a plugin, but a collection of various useful
+     event/obsession handlers and similar scripts.
+   * percona-nagios-plugins (1.1.4): Percona Monitoring Plugins (nagios)
+     Nagios MySQL Monitoring plugins writting/provided by Percona.
+ .
+ Some scripts and binaries need more packages installed to work, which is
+ implemented as recommends.
+
+Package: nautilus-admin
+Description-md5: 1876aa704308109ce5025f2163cfff07
+Description-en: Extension for Nautilus to do administrative operations
+ Nautilus Admin is a simple Python extension for the Nautilus file manager
+ that adds some administrative actions to the right-click menu:
+ .
+   * Open as Administrator: opens a folder in a new Nautilus window
+     running with administrator (root) privileges.
+   * Edit as Administrator: opens a file in a Gedit window running
+     with administrator (root) privileges.
+
+Package: nautilus-hide
+Description-md5: 322ecdac81c2ee66a85088cccdebf975
+Description-en: Extension for Nautilus to hide files without renaming them
+ Nautilus Hide is a simple Python extension for the Nautilus file manager that
+ adds options to the right-click menu to hide or unhide files.
+ .
+ The extension hides the files without renaming them (i.e. without prefixing a
+ dot ('.') or suffixing a tilde ('~')).
+ It does that by adding their names to the folder's '.hidden' file, which
+ Nautilus reads to hide the listed files the next time you open or refresh the
+ folder.
+
+Package: p4vasp
+Description-md5: 117c42d1155eb3f5de7cbf580d61f239
+Description-en: visualization suite for the Vienna Ab-initio Simulation Package (VASP)
+ p4VASP is a visualization suite for the Vienna Ab-initio Simulation Package
+ (VASP). It contains an extensible GUI framework, that can be used to view
+ material structure, density of states, band-structure and more.
+ .
+ It provides a Python library, that greatly simplifies the process of
+ manipulation of the VASP input and output data in Python scripts. P4vasp
+ utilizes also many handy routines and objects e.g. for creating 2D graphs,
+ data storage (xml,DOM) or simple matrix library.
+
+Package: pdns-backend-geo
+Description-md5: 0de0439076a3e11cd9ea9fddf4bfd0f5
+Description-en: geo backend for PowerDNS
+ PowerDNS is a versatile nameserver which supports a large number
+ of different backends ranging from simple zonefiles to relational
+ databases and load balancing/failover algorithms.
+ PowerDNS tries to emphasize speed and security.
+ .
+ This package contains a geobackend for the PowerDNS nameserver. This backend
+ balances the load throughout the world so that people access the
+ geographically nearest available server.
+
+Package: pdns-backend-ldap
+Description-md5: 4a0bc88febfd35a7bd926ee36491c1d7
+Description-en: LDAP backend for PowerDNS
+ PowerDNS is a versatile nameserver which supports a large number
+ of different backends ranging from simple zonefiles to relational
+ databases and load balancing/failover algorithms.
+ PowerDNS tries to emphasize speed and security.
+ .
+ This package contains an LDAP backend for the PowerDNS nameserver.
+
+Package: pdns-backend-lua
+Description-md5: 9600ee613436adea0524702bf1acaf25
+Description-en: lua backend for PowerDNS
+ PowerDNS is a versatile nameserver which supports a large number
+ of different backends ranging from simple zonefiles to relational
+ databases and load balancing/failover algorithms.
+ PowerDNS tries to emphasize speed and security.
+ .
+ This package contains a lua backend for PowerDNS.
+
+Package: pdns-backend-mysql
+Description-md5: 1164bff30b1ab1739f42aaed7affc9c7
+Description-en: generic MySQL backend for PowerDNS
+ PowerDNS is a versatile nameserver which supports a large number
+ of different backends ranging from simple zonefiles to relational
+ databases and load balancing/failover algorithms.
+ PowerDNS tries to emphasize speed and security.
+ .
+ This package contains a generic MySQL backend for the PowerDNS
+ nameserver. It has configurable SQL statements.
+
+Package: pdns-backend-pgsql
+Description-md5: a233a6995015798ebf8c4cdf02274629
+Description-en: generic PostgreSQL backend for PowerDNS
+ PowerDNS is a versatile nameserver which supports a large number
+ of different backends ranging from simple zonefiles to relational
+ databases and load balancing/failover algorithms.
+ PowerDNS tries to emphasize speed and security.
+ .
+ This package contains a generic PostgreSQL backend for the PowerDNS
+ nameserver. It has configurable SQL statements.
+
+Package: pdns-backend-pipe
+Description-md5: 96ac7ab1bf36aade3437bee6809e2d08
+Description-en: pipe/coprocess backend for PowerDNS
+ PowerDNS is a versatile nameserver which supports a large number
+ of different backends ranging from simple zonefiles to relational
+ databases and load balancing/failover algorithms.
+ PowerDNS tries to emphasize speed and security.
+ .
+ This package contains the pipe backend for the PowerDNS nameserver. This
+ allows PowerDNS to retrieve domain info from a process that accepts
+ questions on stdin and returns answers on stdout.
+
+Package: pdns-backend-sqlite3
+Description-md5: 65f82fc75b0cd3812cf5ae9ae0056ba2
+Description-en: sqlite 3 backend for PowerDNS
+ PowerDNS is a versatile nameserver which supports a large number
+ of different backends ranging from simple zonefiles to relational
+ databases and load balancing/failover algorithms.
+ PowerDNS tries to emphasize speed and security.
+ .
+ This package contains a generic SQLite 3 backend for PowerDNS.
+
+Package: pdns-server
+Description-md5: 7249c7fbe90571b0924adf26220cd03f
+Description-en: extremely powerful and versatile nameserver
+ PowerDNS is a versatile nameserver which supports a large number
+ of different backends ranging from simple zonefiles to relational
+ databases and load balancing/failover algorithms.
+ PowerDNS tries to emphasize speed and security.
+ .
+ This is the authoritative nameserver that answers questions about
+ domains that it knows about. It also includes the bind backend that
+ allows PowerDNS to retrieve domain info from zone files as used by
+ the "bind" software.
+
+Package: pdns-server-dbg
+Description-md5: 4270641936ea913fa26100a8ecf1a9a3
+Description-en: debugging symbols for PowerDNS
+ PowerDNS is a versatile nameserver which supports a large number
+ of different backends ranging from simple zonefiles to relational
+ databases and load balancing/failover algorithms.
+ PowerDNS tries to emphasize speed and security.
+ .
+ This package contains debugging symbols for PowerDNS to assist in
+ debugging, such as gdb. It is not required for normal operation.
+
+Package: php-apc
+Description-md5: 10b152e0538ec2fbca79daa8485b5e32
+Description-en: APC User Cache for PHP 5 (transitional package)
+ This is a dummy transition package that can be safely removed once no
+ package depend on it.
+
+Package: php5-apcu
+Description-md5: 2193846443bf05b06b1f6b6a176487bc
+Description-en: APC User Cache for PHP 5
+ The APCu is userland caching: APC (Alternative PHP Cache) stripped of
+ opcode caching after the deployment of Zend OpCache in PHP 5.5 as the
+ primary solution to opcode caching in future versions of PHP.
+ .
+ The APCu is a fast solution for userland caching (and dumping) of PHP
+ variables locally, it is not distributed like MemcacheD, but they can
+ be used together for optimal caching.
+
+Package: plasma-widget-milou
+Description-md5: 98d290489808c036396ad07435f0092f
+Description-en: dedicated search plasmoid for KDE
+ A dedicated search application built on top of the KDE Semantic search for use
+ on KDE Plasma Workspaces.
+
+Package: plasma-widget-milou-dbg
+Description-md5: 94d614953306fc35e7221e31d56a50a2
+Description-en: dedicated search application built for KDE - debug package
+ A dedicated search application built on top of the KDE Semantic search for use
+ on KDE Plasma Workspaces.
+ .
+ This package contains debugging symbols for plasma-widget-milou
+
+Package: postfix-policyd-spf-python
+Description-md5: c26be09184f22dafa5a5249b2a7cc3bf
+Description-en: Postfix policy server for SPF checking
+ postfix-policyd-spf-python is a full featured Postfix policy engine for
+ SPF checking. It includes a variety of whitelisting mechanisms and policy
+ options to enable it to support the widest variety of system requirements.
+ It is implemented in pure Python and uses the python-spf module.  The SPF
+ web site is http://www.openspf.net/.  It has been updated to support RFC
+ 7208.
+
+Package: povray
+Description-md5: 1955185be2ce9918236f80d9162051ec
+Description-en: Persistence of vision raytracer (3D renderer)
+ POV-Ray is a full-featured ray tracer. Ray tracers simulate objects
+ and light sources of the real world to calculate photorealistic, computer
+ generated images. Because of the nature of ray tracing, this process is
+ quite CPU-intensive, at the benefit of more realistic images compared to
+ real time rendering techniques. For example, in POV-Ray, you can model a
+ glass prism, and you will see a spectrum in the resulting image.
+ .
+ POV-Ray by itself is a command-line utility that will take scene
+ descriptions, written in a special easy-to-understand language, to
+ produce ray-traced images (or even a sequence of images, for animations).
+ You can either write those scene-descriptions by hand, or use external
+ tools to generate (parts of) the scene.
+ .
+ povray-includes is highly recommended in addition to this package.
+
+Package: povray-examples
+Description-md5: 0fd010f2c5398de9711e51edb4e67faa
+Description-en: Persistence of vision raytracer (3D renderer) sample files
+ POV-Ray is a full-featured ray tracer. Ray tracers simulate objects
+ and light sources of the real world to calculate photorealistic, computer
+ generated images. Because of the nature of ray tracing, this process is
+ quite CPU-intensive, at the benefit of more realistic images compared to
+ real time rendering techniques. For example, in POV-Ray, you can model a
+ glass prism, and you will see a spectrum in the resulting image.
+ .
+ POV-Ray by itself is a command-line utility that will take scene
+ descriptions, written in a special easy-to-understand language, to
+ produce ray-traced images (or even a sequence of images, for animations).
+ You can either write those scene-descriptions by hand, or use external
+ tools to generate (parts of) the scene.
+ .
+ This package contains sample files.
+
+Package: povray-includes
+Description-md5: 12accf703d31c7f9c7b9f6f6c5f32afe
+Description-en: Persistance of vision raytracer (3D renderer) include files
+ POV-Ray is a full-featured ray tracer. Ray tracers simulate objects
+ and light sources of the real world to calculate photorealistic, computer
+ generated images. Because of the nature of ray tracing, this process is
+ quite CPU-intensive, at the benefit of more realistic images compared to
+ real time rendering techniques. For example, in POV-Ray, you can model a
+ glass prism, and you will see a spectrum in the resulting image.
+ .
+ POV-Ray by itself is a command-line utility that will take scene
+ descriptions, written in a special easy-to-understand language, to
+ produce ray-traced images (or even a sequence of images, for animations).
+ You can either write those scene-descriptions by hand, or use external
+ tools to generate (parts of) the scene.
+ .
+ This package contains architecture independent include files.
+
+Package: prodigal
+Description-md5: 17547e924925fa3b22bf27a8a6cf1be5
+Description-en: Microbial (bacterial and archaeal) gene finding program
+ Prodigal (Prokaryotic Dynamic Programming Genefinding Algorithm) is a
+ microbial (bacterial and archaeal) gene finding program developed at
+ Oak Ridge National Laboratory and the University of Tennessee.
+ Key features of Prodigal include:
+ .
+ Speed: Prodigal is an extremely fast gene recognition tool
+ (written in very vanilla C). It can analyze an entire microbial genome
+ in 30 seconds or less.
+ .
+ Accuracy: Prodigal is a highly accurate gene finder.
+ It correctly locates the 3' end of every gene in the experimentally verified
+ Ecogene data set (except those containing introns).
+ It possesses a very sophisticated ribosomal binding site scoring system that
+ enables it to locate the translation initiation site with great accuracy
+ (96% of the 5' ends in the Ecogene data set are located correctly).
+ .
+ Specificity: Prodigal's false positive rate compares favorably with other
+ gene identification programs, and usually falls under 5%.
+ .
+ GC-Content Indifferent: Prodigal performs well even in high GC genomes,
+ with over a 90% perfect match (5'+3') to the Pseudomonas aeruginosa curated
+ annotations.
+ .
+ Metagenomic Version: Prodigal can run in metagenomic mode and analyze
+ sequences even when the organism is unknown.
+ .
+ Ease of Use: Prodigal can be run in one step on a single genomic sequence
+ or on a draft genome containing many sequences. It does not need to be
+ supplied with any knowledge of the organism, as it learns all the properties
+ it needs to on its own.
+
+Package: prosody
+Description-md5: e311eacea694f5a28f7fa157b396e6aa
+Description-en: Lightweight Jabber/XMPP server
+ Prosody IM is a simple-to-use XMPP server. It is designed to be easy to
+ extend via plugins, and light on resources.
+
+Package: pumpa
+Description-md5: f3a83a3a5ff48b951ef4245c0842d065
+Description-en: simple desktop client for pump.io, the distributed social network
+ Pumpa is a simple Qt-based desktop client for identi.ca and other
+ pump.io-based distributed social network services.  Pumpa offers
+ several improvements over using the web interface, such as better
+ notifications and the ability to @reply particular users.
+
+Package: python-chemps2
+Description-md5: 5eac6b54ffd744e5213217a2fff08659
+Description-en: Python 2 interface for libchemps2-1
+ chemps2 is a scientific library which contains a spin-adapted
+ implementation of the density matrix renormalization group (DMRG)
+ for ab initio quantum chemistry. This method allows one to obtain
+ numerical accuracy in active spaces beyond the capabilities of
+ full configuration interaction (FCI).
+ .
+ For an input Hamiltonian and targeted symmetry sector, the library
+ performs successive DMRG sweeps according to a user-defined
+ convergence scheme. As output, the library returns the minimal
+ encountered energy as well as the second order reduced density
+ matrix (2-RDM) of the active space. With the latter, various
+ molecular properties can be calculated, as well as the gradient and
+ Hessian for orbital rotations or nuclear displacements. In addition,
+ several correlation functions can be obtained to investigate the
+ electronic structure in the active space.
+ .
+ This package installs the library for Python 2.
+
+Package: python-debianbts
+Description-md5: 9982e1a0a8643a6046dd278e33efcf4a
+Description-en: Python interface to Debian's Bug Tracking System
+ This package provides the debianbts module, which allows one to query Debian's
+ BTS via it's SOAP-interface and returns the answer in Python's native data
+ types.
+
+Package: python-ldap3
+Description-md5: 80cc59296cd0c35abdd18e9f3eaa5e56
+Description-en: Pure Python LDAP client library
+ A pure Python 3 LDAP version 3 strictly conforming to RFC4511 released under
+ the LGPL v3 open source license. RFC4511 is the current LDAP specification
+ (June 2006) from IETF and obsoletes the previous LDAP RFCs 2251, 2830, 3771
+ (December 1997)
+ .
+ This package contains the Python 3.x version of the library.
+
+Package: python-libcloud
+Description-md5: a87eb903408693bbb6f0b70287632dfe
+Description-en: unified Python interface into the cloud
+ libcloud is a pure Python client library for interacting with many of the
+ popular cloud server providers using a unified API. It was created to make it
+ easy for developers to build products that work between any of the services
+ that it supports.
+ .
+  * Avoid vendor lock-in
+  * Use the same API to talk to many different providers
+  * More than 30 supported providers total
+  * Four main APIs: Compute, Storage, Load Balancers, DNS
+  * Supports Python 2.5, Python 2.6, Python 2.7, PyPy and Python 3
+ .
+ Resource you can manage with Libcloud are divided in the following categories:
+ .
+  * Cloud Servers and Block Storage - services such as Amazon EC2 and
+    Rackspace Cloud Servers (libcloud.compute.*)
+  * Cloud Object Storage and CDN - services such as Amazon S3 and
+    Rackspace CloudFiles (libcloud.storage.*)
+  * Load Balancers as a Service, LBaaS (libcloud.loadbalancer.*)
+  * DNS as a Service, DNSaaS (libcloud.dns.*)
+ .
+ libcloud was originally created by the folks over at Cloudkick, but has
+ since grown into an independent free software project licensed under
+ the Apache License (2.0).
+
+Package: python-lmdb
+Description-md5: e95c5f59aaedd5fb3a91b415804a949d
+Description-en: Python binding for LMDB Lightning Memory-Mapped Database
+ Lighting Memory-Mapped Database (LMDB) is an ultra-fast, ultra-compact
+ key-value embedded data store developed for the OpenLDAP Project. It uses
+ memory-mapped files, so it has the read performance of a pure in-memory
+ database while still offering the persistence of standard disk-based
+ databases, and is only limited to the size of the virtual address space (it
+ is not limited to the size of physical RAM).
+ .
+ This package contains the 'lmdb' Python extension module.
+
+Package: python-pkginfo
+Description-md5: 31cb72d124064d116eaa9959258012bb
+Description-en: Python 2.x module to query metadata from packages
+ This package provides an API for querying the distutils metadata written in
+ the PKG-INFO file inside a source distribution (an sdist), or into the
+ EGG-INFO directory of an installed distribution.
+ .
+ This package contains the Python 2 version of the library
+
+Package: python-pkginfo-doc
+Description-md5: 5e02b68b0a2eaf2a14e1714caa31f897
+Description-en: Python module to query metadata from packages documentation
+ This package provides an API for querying the distutils metadata written in
+ the PKG-INFO file inside a source distribution (an sdist), or into the
+ EGG-INFO directory of an installed distribution.
+
+Package: python-pyclamd
+Description-md5: 28063f9fb1c814186264254b3509b2c9
+Description-en: Python interface to the ClamAV daemon
+ This package adds virus detection capabilities to Python software in
+ an efficient and easy way, thanks to the ClamAV antivirus toolkit.
+
+Package: python-pyeclib
+Description-md5: 3451c79f8bdf1f7a39cd1d1bf91e33ba
+Description-en: interface for implementing erasure codes - Python 2.x
+ This library provides a simple Python interface for implementing erasure
+ codes. To obtain the best possible performance, the underlying erasure code
+ algorithms are written in C.
+ .
+ This library makes use of Jerasure for Reed-Solomon and provides its own flat
+ XOR-based erasure code encoder and decoder. Currently, it implements a
+ specific class of HD Combination Codes (see "Flat XOR-based erasure codes in
+ storage systems: Constructions, efficient recovery, and tradeoffs" in IEEE
+ MSST 2010). These codes are well-suited to archival use-cases, have a simple
+ construction and require a minimum number of participating disks during
+ single-disk reconstruction (think XOR-based LRC code).
+ .
+ This package contains the Python 2.x module.
+
+Package: python-pysimplesoap
+Description-md5: aa2d72e4e169cc8c2fdf43aec9aa8262
+Description-en: simple and lightweight SOAP Library (Python 2)
+ Python simple and lightweigh SOAP library for client and server webservices
+ interfaces, aimed to be as small and easy as possible, supporting most common
+ functionality. Initially it was inspired by PHP Soap Extension (mimicking its
+ functionality, simplicity and ease of use), with many advanced features added.
+
+Package: python-releases
+Description-md5: 548324c2b54dfc871947c31f6ba13eb9
+Description-en: Sphinx extension for changelog manipulation (Python 2)
+ Releases is a Sphinx extension designed to help you keep a source control
+ friendly, merge friendly changelog file & turn it into useful, human readable
+ HTML output.
+ .
+ Specifically:
+ .
+   * The source format (kept in your Sphinx tree as ``changelog.rst``) is a
+     stream-like timeline that plays well with source control & only requires
+     one entry per change (even for changes that exist in multiple release
+     lines).
+   * The output (when you have the extension installed and run your Sphinx
+     build command) is a traditional looking changelog page with a section for
+     every release; multi-release issues are copied automatically into each
+     release.
+   * By default, feature and support issues are only displayed under feature
+     releases, and bugs are only displayed under bugfix releases. This can be
+     overridden on a per-issue basis.
+ .
+ This package contains the python2.x version of the library
+
+Package: python-reportbug
+Description-md5: a3f9f8c6d3fdd866d293b889a1d6b47a
+Description-en: Python modules for interacting with bug tracking systems
+ reportbug is a tool designed to make the reporting of bugs in Debian
+ and derived distributions relatively painless.
+ .
+ This package includes Python modules which may be reusable by other
+ tools that want to interact with the Debian bug tracking system.
+ .
+ To actually report a bug, install the reportbug package.
+
+Package: python-socketio-client
+Description-md5: 718aee649c50beef7db21bd467e3567c
+Description-en: socket.io-client library for python
+ This package contains a socket.io client library
+ for Python.
+ .
+ You can use it to write test code against your
+ socket.io server.
+
+Package: python-spf
+Description-md5: 62265429d6e0c3b217ad2d61bf424152
+Description-en: sender policy framework (SPF) module for Python
+ This module provides SPF (Sender Policy Framework) for Python.  It is RFC 7208
+ compliant.
+ .
+ For more information about SPF see http://www.openspf.org/
+
+Package: python-spyderlib
+Description-md5: 90ae9c3f325de5813979ba02c81d960b
+Description-en: python IDE for scientists (Python 2)
+ Originally written to design Spyder (the Scientific PYthon
+ Development EnviRonment), the spyderlib Python library provides
+ ready-to-use pure-Python widgets: source code editor with syntax
+ highlighting and code introspection/analysis features, NumPy array
+ editor, dictionary editor, Python console, etc. It's based on the Qt
+ Python binding module PyQt4 (and is compatible with PySide since
+ v2.2).
+ .
+ This is the Python 2 version of the package.
+
+Package: python-spyderlib-doc
+Description-md5: e4e6a390a37074c59fe1c6eaef6132f7
+Description-en: python IDE for scientists (Documentation)
+ Originally written to design Spyder (the Scientific PYthon
+ Development EnviRonment), the spyderlib Python library provides
+ ready-to-use pure-Python widgets: source code editor with syntax
+ highlighting and code introspection/analysis features, NumPy array
+ editor, dictionary editor, Python console, etc. It's based on the Qt
+ Python binding module PyQt4 (and is compatible with PySide since
+ v2.2).
+ .
+ This is the documentation of the package.
+
+Package: python3-debianbts
+Description-md5: 9982e1a0a8643a6046dd278e33efcf4a
+Description-en: Python interface to Debian's Bug Tracking System
+ This package provides the debianbts module, which allows one to query Debian's
+ BTS via it's SOAP-interface and returns the answer in Python's native data
+ types.
+
+Package: python3-ldap3
+Description-md5: 80cc59296cd0c35abdd18e9f3eaa5e56
+Description-en: Pure Python LDAP client library
+ A pure Python 3 LDAP version 3 strictly conforming to RFC4511 released under
+ the LGPL v3 open source license. RFC4511 is the current LDAP specification
+ (June 2006) from IETF and obsoletes the previous LDAP RFCs 2251, 2830, 3771
+ (December 1997)
+ .
+ This package contains the Python 3.x version of the library.
+
+Package: python3-libcloud
+Description-md5: e4ddaee6f830fb236c4aa8408eac8817
+Description-en: unified Python interface into the cloud (Python3 version)
+ libcloud is a pure Python client library for interacting with many of the
+ popular cloud server providers using a unified API. It was created to make it
+ easy for developers to build products that work between any of the services
+ that it supports.
+ .
+  * Avoid vendor lock-in
+  * Use the same API to talk to many different providers
+  * More than 30 supported providers total
+  * Four main APIs: Compute, Storage, Load Balancers, DNS
+  * Supports Python 2.5, Python 2.6, Python 2.7, PyPy and Python 3
+ .
+ Resource you can manage with Libcloud are divided in the following categories:
+ .
+  * Cloud Servers and Block Storage - services such as Amazon EC2 and
+    Rackspace Cloud Servers (libcloud.compute.*)
+  * Cloud Object Storage and CDN - services such as Amazon S3 and
+    Rackspace CloudFiles (libcloud.storage.*)
+  * Load Balancers as a Service, LBaaS (libcloud.loadbalancer.*)
+  * DNS as a Service, DNSaaS (libcloud.dns.*)
+ .
+ libcloud was originally created by the folks over at Cloudkick, but has
+ since grown into an independent free software project licensed under
+ the Apache License (2.0).
+ .
+ This is the Python 3 version of the package.
+
+Package: python3-lmdb
+Description-md5: 63a508f6a0191f0030de6784f7b9d0d0
+Description-en: Python 3 binding for LMDB Lightning Memory-Mapped Database
+ Lighting Memory-Mapped Database (LMDB) is an ultra-fast, ultra-compact
+ key-value embedded data store developed for the OpenLDAP Project. It uses
+ memory-mapped files, so it has the read performance of a pure in-memory
+ database while still offering the persistence of standard disk-based
+ databases, and is only limited to the size of the virtual address space (it
+ is not limited to the size of physical RAM).
+ .
+ This package contains the 'lmdb' Python 3 extension module.
+
+Package: python3-pkginfo
+Description-md5: a5607c8ef5bf8f5db16691fb45b6a9b7
+Description-en: Python 3.x module to query metadata from packages
+ This package provides an API for querying the distutils metadata written in
+ the PKG-INFO file inside a source distribution (an sdist), or into the
+ EGG-INFO directory of an installed distribution.
+ .
+ This package contains the Python 3 version of the library
+ In addition, this package contains the 'pkginfo' executable
+
+Package: python3-pyclamd
+Description-md5: 94d78b9ec37be30ebfc1c58a718ddb7e
+Description-en: Python 3 interface to the ClamAV daemon
+ This package adds virus detection capabilities to Python 3 software in
+ an efficient and easy way, thanks to the ClamAV antivirus toolkit.
+
+Package: python3-pyeclib
+Description-md5: 68e698b8d7e713858257d7db26cef498
+Description-en: interface for implementing erasure codes - Python 3.x
+ This library provides a simple Python interface for implementing erasure
+ codes. To obtain the best possible performance, the underlying erasure code
+ algorithms are written in C.
+ .
+ This library makes use of Jerasure for Reed-Solomon and provides its own flat
+ XOR-based erasure code encoder and decoder. Currently, it implements a
+ specific class of HD Combination Codes (see "Flat XOR-based erasure codes in
+ storage systems: Constructions, efficient recovery, and tradeoffs" in IEEE
+ MSST 2010). These codes are well-suited to archival use-cases, have a simple
+ construction and require a minimum number of participating disks during
+ single-disk reconstruction (think XOR-based LRC code).
+ .
+ This package contains the Python 3.x module.
+
+Package: python3-pysimplesoap
+Description-md5: 64be961691dfc51c9f3d0da82bf93d29
+Description-en: simple and lightweight SOAP Library (Python 3)
+ Python simple and lightweigh SOAP library for client and server webservices
+ interfaces, aimed to be as small and easy as possible, supporting most common
+ functionality. Initially it was inspired by PHP Soap Extension (mimicking its
+ functionality, simplicity and ease of use), with many advanced features added.
+ .
+ This package contains the Python 3 version of pysimplesoap .
+
+Package: python3-releases
+Description-md5: d41fbb88398665eb10dd5d3ac52de7d9
+Description-en: Sphinx extension for changelog manipulation (Python 3)
+ Releases is a Sphinx extension designed to help you keep a source control
+ friendly, merge friendly changelog file & turn it into useful, human readable
+ HTML output.
+ .
+ Specifically:
+ .
+   * The source format (kept in your Sphinx tree as ``changelog.rst``) is a
+     stream-like timeline that plays well with source control & only requires
+     one entry per change (even for changes that exist in multiple release
+     lines).
+   * The output (when you have the extension installed and run your Sphinx
+     build command) is a traditional looking changelog page with a section for
+     every release; multi-release issues are copied automatically into each
+     release.
+   * By default, feature and support issues are only displayed under feature
+     releases, and bugs are only displayed under bugfix releases. This can be
+     overridden on a per-issue basis.
+ .
+ This package contains the python3.x version of the library
+
+Package: python3-spf
+Description-md5: 4d72336c1804d9cfbacf3c008789ffe4
+Description-en: sender policy framework (SPF) module for Python 3
+ This module provides SPF (Sender Policy Framework) for Python 3.  It is RFC
+ 7208 compliant.
+ .
+ For more information about SPF see http://www.openspf.org/
+
+Package: python3-spyderlib
+Description-md5: 861683bd77341410f571c3669bfc1dfb
+Description-en: python IDE for scientists (Python 3)
+ Originally written to design Spyder (the Scientific PYthon
+ Development EnviRonment), the spyderlib Python library provides
+ ready-to-use pure-Python widgets: source code editor with syntax
+ highlighting and code introspection/analysis features, NumPy array
+ editor, dictionary editor, Python console, etc. It's based on the Qt
+ Python binding module PyQt4 (and is compatible with PySide since
+ v2.2).
+ .
+ This is the Python 3 version of the package.
+
+Package: qbittorrent
+Description-md5: eda9d802cb538c23f46dfba93459c129
+Description-en: bittorrent client based on libtorrent-rasterbar with a Qt4 GUI
+ BitTorrent client written in C++ and based on libtorrent-rasterbar with a Qt4
+ user interface. qBittorrent is a feature rich but lightweight client that is
+ very similar to uTorrent. Its main features are:
+ .
+  * Polished uTorrent-like user interface
+  * Well integrated and extensible search engine
+  * Remote control through a Web user interface
+  * Vuze-compatible protocol encryption
+  * uTorrent-compatible Peer eXchange (PeX)
+  * DHT (trackerless) support
+  * UPnP / NAT-PMP port forwarding
+  * IPv6 compliant
+  * RSS support with advanced download filters
+  * Advanced control over torrent content and trackers
+  * IP Filtering (eMule / Peer Guardian filters)
+  * Torrents queueing and prioritizing
+  * Good localization (~25 languages supported)
+  * Unicode support
+
+Package: qbittorrent-dbg
+Description-md5: de24222f1898e2379b2382a1b992a93e
+Description-en: debug symbols for qbittorrent and qbittorrent-nox
+ BitTorrent client written in C++ and based on libtorrent-rasterbar with a Qt4
+ user interface. qBittorrent is a feature rich but lightweight client that is
+ very similar to uTorrent.
+ .
+ This package contains the debugging symbols for qbittorrent and
+ qbittorrent-nox.
+
+Package: qbittorrent-nox
+Description-md5: 04e90a8e2d536da9ccfa6aa73cb63a9e
+Description-en: bittorrent client based on libtorrent-rasterbar (without X support)
+ BitTorrent client written in C++ and based on libtorrent-rasterbar.
+ qBittorrent-nox is a version of qBittorrent (Qt4 application) that does not
+ require X and can be controlled via a WebUI, thus is more suitable for headless
+ servers. It is a feature rich but lightweight client that is very similar to
+ rTorrent. Its main features are:
+ .
+  * Remote control through a Web user interface
+  * Vuze-compatible protocol encryption
+  * uTorrent-compatible Peer eXchange (PeX)
+  * DHT (trackerless) support
+  * UPnP / NAT-PMP port forwarding
+  * IPv6 compliant
+  * Advanced control over torrent content and trackers
+  * IP Filtering (eMule / Peer Guardian filters)
+  * Torrents queueing and prioritizing
+  * Good localization (~25 languages supported)
+  * Unicode support
+
+Package: reportbug
+Description-md5: 89ec41936f451ef5842d72156f0bc71c
+Description-en: reports bugs in the Debian distribution
+ reportbug is a tool designed to make the reporting of bugs in Debian
+ and derived distributions relatively painless.  Its features include:
+ .
+  * Integration with mutt and mh/nmh mail readers.
+  * Access to outstanding bug reports to make it easier to identify
+    whether problems have already been reported.
+  * Automatic checking for newer versions of packages.
+  * Optional automatic verification of integrity of packages via debsums.
+  * Support for following-up on outstanding reports.
+  * Optional PGP/GnuPG integration.
+ .
+ reportbug is designed to be used on systems with an installed mail
+ transport agent, like exim or sendmail; however, you can edit the
+ configuration file and send reports using any available mail server.
+ .
+ This package also includes the "querybts" script for browsing the
+ Debian bug tracking system.
+ .
+ REPORTBUG IS MEANT FOR UBUNTU DEVELOPERS TO FORWARD BUGS TO DEBIAN.
+ IF YOU WANT TO REPORT A BUG IN UBUNTU, PLEASE USE "ubuntu-bug"
+ INSTEAD (from the "apport" package).
+
+Package: seccomp
+Description-md5: 288b26d85c99739b7f18d60004ee2e63
+Description-en: helper tools for high level interface to Linux seccomp filter
+ Provides helper tools for interacting with libseccomp. Currently, only
+ a single tool exists, providing a way to easily enumerate syscalls across
+ the supported architectures.
+
+Package: shellcheck
+Description-md5: 7c996daa2907e3b071f909a6e67eef77
+Description-en: lint tool for shell scripts
+ The goals of ShellCheck are:
+ .
+  * To point out and clarify typical beginner's syntax issues,
+    that causes a shell to give cryptic error messages.
+ .
+  * To point out and clarify typical intermediate level semantic problems,
+    that causes a shell to behave strangely and counter-intuitively.
+ .
+  * To point out subtle caveats, corner cases and pitfalls, that may cause an
+    advanced user's otherwise working script to fail under future circumstances.
+
+Package: spf-tools-python
+Description-md5: f5797e3d8d4fd5ee8cb9e6c304bb2bb3
+Description-en: sender policy framework (SPF) tools for Python
+ SPF (Sender Policy Framework) related scripts and tools in Python. This
+ package currently provides three scripts:
+ .
+  * pyspf: command line use of spf.py
+  * spfquery: Python implementation of spfquery (uses alternatives)
+  * pyspf-type99: Tool to convert SPF records of type TXT to type SPF
+ .
+ spfquery and pyspf-type99 are compatible with python3
+ For more information about SPF look at http://www.openspf.org/
+
+Package: spyder
+Description-md5: e977df2b6e721ed1a561dd4d569b7998
+Description-en: python IDE for scientists (Python 2)
+ Spyder (previously known as Pydee) is a free open-source Python
+ development environment providing MATLAB-like features in a simple
+ and light-weighted software
+ .
+ This is the Python 2 version of the package.
+
+Package: spyder-common
+Description-md5: 214ee757f3b15ad5a4ef862c6d35c28a
+Description-en: python IDE for scientists (common files)
+ Originally written to design Spyder (the Scientific PYthon
+ Development EnviRonment), the spyderlib Python library provides
+ ready-to-use pure-Python widgets: source code editor with syntax
+ highlighting and code introspection/analysis features, NumPy array
+ editor, dictionary editor, Python console, etc. It's based on the Qt
+ Python binding module PyQt4 (and is compatible with PySide since
+ v2.2).
+ .
+ This is the common files of the package.
+
+Package: spyder3
+Description-md5: 6e5fbdf62f2e82a0a22bfa747e04588b
+Description-en: python IDE for scientists (Python 3)
+ Spyder (previously known as Pydee) is a free open-source Python
+ development environment providing MATLAB-like features in a simple
+ and light-weighted software
+ .
+ This is the Python 3 version of the package.
+
+Package: squid-deb-proxy-client
+Description-md5: 856848851e6fb0024f8c246f90d908b4
+Description-en: automatic proxy discovery for APT based on Avahi
+ This package contains a helper for the APT http method to discover
+ proxies that publish their service as _apt_proxy._tcp.
+ .
+ It was written to be installed on clients that should use
+ squid-deb-proxy automatically, but it will work with any proxy
+ that publishes the service as _apt_proxy._tcp.
+
+Package: stress-ng
+Description-md5: 978bc71488d990ede7d83e93b69cc662
+Description-en: tool to load and stress a computer
+ stress-ng can stress various subsystems of a computer.
+ It can stress load CPU, cache, disk, memory, socket
+ and pipe I/O, scheduling and much more.  stress-ng is
+ a re-write of the original stress tool by
+ Amos Waterland but has additional features such as
+ specifying the number of bogo operations to run,
+ execution metrics, a stress verification on memory
+ and compute operations and many more stress mechanisms.
+
+Package: svtplay-dl
+Description-md5: be0e16b26d60d2a9eaafebd65c2b21b4
+Description-en: program to download videos from video on demand sites
+ svtplay-dl is a command line application for downloading videos
+ from various video on demand sites (sometimes called "play"
+ services). Currently supports some 15+ service, including
+ SVTPlay, HBO, twitch.tv, vimeo and many more.
+
+Package: swig3.0
+Description-md5: 52b54965f2b28a9f8f9512151ba51620
+Description-en: Generate scripting interfaces to C/C++ code
+ SWIG is a compiler that makes it easy to integrate C and C++ code
+ with other languages including Perl, PHP, Tcl, Ruby, Python, Java,
+ Guile, Mzscheme, Chicken, OCaml, Pike, and C#.
+ .
+ Swig takes a set of ANSI C/C++ declarations and generates an
+ interface for them to your favorite scripting language.
+
+Package: swig3.0-doc
+Description-md5: 46a1a1a54da97568b9ea278e43bcfd42
+Description-en: HTML documentation for SWIG
+ Contains the users' and developers' manuals for SWIG (Simplified
+ Wrapper Interface Generator) 2.0 in HTML format.
+
+Package: swig3.0-examples
+Description-md5: 3ab5c9257106ba955b283c3165f0b8c9
+Description-en: Examples for applications of SWIG
+ Contains examples for applications of SWIG, a wrapper interface
+ generator to integrate C code into scripting languages.
+
+Package: sysdig
+Description-md5: 9ac48d4f346611eca196ebd0f7f593aa
+Description-en: system-level exploration and troubleshooting tool
+ Sysdig instruments your physical and virtual machines at the OS level by
+ installing into the Linux kernel and capturing system calls and other OS
+ events. Then, using sysdig's command line interface, you can filter and
+ decode these events in order to extract useful information.
+ .
+ Sysdig can be used to inspect systems live in real-time, or to generate
+ trace files that can be analyzed at a later stage.
+
+Package: sysdig-dkms
+Description-md5: 0d1291bf18e2be9d1e0c57423152afee
+Description-en: system-level exploration and troubleshooting tool - kernel source
+ Sysdig instruments your physical and virtual machines at the OS level by
+ installing into the Linux kernel and capturing system calls and other OS
+ events. Then, using sysdig's command line interface, you can filter and
+ decode these events in order to extract useful information.
+ .
+ Sysdig can be used to inspect systems live in real-time, or to generate
+ trace files that can be analyzed at a later stage.
+ .
+ This package contains the source for the kernel module of sysdig.
+
+Package: torsocks
+Description-md5: b174a69fd7528986b202a57d78551bd4
+Description-en: use SOCKS-friendly applications with Tor
+ Torsocks allows you to use most SOCKS-friendly applications in a safe way with
+ Tor. It ensures that DNS requests are handled safely and explicitly rejects
+ UDP traffic from the application you're using.
+
+Package: transdecoder
+Description-md5: a9ec13fc9691cd23fe3fc856a5e3fbbc
+Description-en: find coding regions within transcripts
+ TransDecoder identifies candidate coding regions within transcript sequences,
+ such as those generated by de novo RNA-Seq transcript assembly using Trinity,
+ or constructed based on RNA-Seq alignments to the genome using Tophat and
+ Cufflinks.
+ .
+ TransDecoder identifies likely coding sequences based on the following
+ criteria:
+  * a minimum length open reading frame (ORF) is found in a transcript sequence
+  * a log-likelihood score similar to what is computed by the GeneID software
+    is > 0.
+  * the above coding score is greatest when the ORF is scored in the 1st
+    reading frame as compared to scores in the other 5 reading frames.
+  * if a candidate ORF is found fully encapsulated by the coordinates of
+    another candidate ORF, the longer one is reported. However, a single
+    transcript can report multiple ORFs (allowing for operons, chimeras, etc).
+  * optional the putative peptide has a match to a Pfam domain above the noise
+    cutoff score.
+
+Package: transdecoder-doc
+Description-md5: 168523ac6b085515328a1fe5c662dc8b
+Description-en: find coding regions within transcripts
+ TransDecoder identifies candidate coding regions within transcript sequences,
+ such as those generated by de novo RNA-Seq transcript assembly using Trinity,
+ or constructed based on RNA-Seq alignments to the genome using Tophat and
+ Cufflinks.
+ .
+ TransDecoder identifies likely coding sequences based on the following
+ criteria:
+  * a minimum length open reading frame (ORF) is found in a transcript sequence
+  * a log-likelihood score similar to what is computed by the GeneID software
+    is > 0.
+  * the above coding score is greatest when the ORF is scored in the 1st
+    reading frame as compared to scores in the other 5 reading frames.
+  * if a candidate ORF is found fully encapsulated by the coordinates of
+    another candidate ORF, the longer one is reported. However, a single
+    transcript can report multiple ORFs (allowing for operons, chimeras, etc).
+  * optional the putative peptide has a match to a Pfam domain above the noise
+    cutoff score.
+ .
+ This package contains the documentation and sample data.
+
+Package: twine
+Description-md5: 0b366f69c74677ed9020904fb219e354
+Description-en: utility for interacting with PyPI
+ Twine is a tool for uploading distributions (in the python meaning) to PyPi.
+ .
+ Why Should I Use This?
+ .
+ The biggest reason to use twine is that python setup.py upload uploads files
+ over plaintext. This means anytime you use it you expose your username and
+ password to a MITM attack. Twine uses only verified TLS to upload to PyPI
+ protecting your credentials from theft.
+ .
+ Secondly it allows you to precreate your distribution files. python setup.py
+ upload only allows you to upload something that you’ve created in the same
+ command invocation. This means that you cannot test the exact file you’re
+ going to upload to PyPI to ensure that it works before uploading it.
+ .
+ Finally it allows you to pre-sign your files and pass the .asc files into the
+ command line invocation (twine upload twine-1.0.1.tar.gz
+ twine-1.0.1.tar.gz.asc). This enables you to be assured that you’re typing
+ your gpg passphrase into gpg itself and not anything else since you will be
+ the one directly executing gpg --detach-sign -a <filename>.
+ .
+ Features:
+ .
+  - Verified HTTPS Connections
+  - Uploading doesn’t require executing setup.py
+  - Uploading files that have already been created, allowing testing of
+    distributions before release
+  - Supports uploading any packaging format (including wheels).
+
+Package: ubumirror
+Description-md5: a0036de72b7cf69cb11aa7eb0faa2667
+Description-en: Ubuntu mirror scripts
+ This package contains scripts for mirroring various parts of the Ubuntu
+ infrastructure.
+ .
+ This includes archives packages, ISO files for releases, daily builds for ISO
+ files from cdimage and DVD images.
+
+Package: unity-tweak-tool
+Description-md5: 03fe374b7c5423fb415fda866ee7d016
+Description-en: configuration tool for the Unity desktop environment
+ Unity Tweak Tool is a settings manager for the Unity desktop.
+ It provides users with a fast, simple and easy-to-use interface
+ with which to access many useful and little known features and settings
+ of the desktop environment that one may want to configure.
+
+Package: vim-haproxy
+Description-md5: f0f210c34582537684988d90bc2d6337
+Description-en: syntax highlighting for HAProxy configuration files
+ The vim-haproxy package provides filetype detection and syntax highlighting
+ for HAProxy configuration files.
+ .
+ As per the Debian vim policy, installed addons are not activated
+ automatically, but the "vim-addon-manager" tool can be used for this purpose.
+
+Package: vim-syntax-go
+Description-md5: 9bbc6cf3cebd61967fe4a53ec7ba064e
+Description-en: Go programming language - Vim highlighting syntax files
+ This package provides syntax files for the Vim editor for editing code
+ in Google's Go programming language.
+
+Package: wesnoth
+Description-md5: 2a71a7a2a2874f7f0bf25835fd6bebf3
+Description-en: fantasy turn-based strategy game - complete suite (metapackage)
+ This metapackage pulls in the complete set of the latest stable version, most
+ helpful if you always want to have all the official campaigns installed. If
+ you only want to play over the network with other players or want to play only
+ a few campaigns you just need to install the wesnoth-core package and the
+ wanted campaign packages.
+ .
+ Battle for control of villages, using variety of units which have advantages
+ and disadvantages in different types of terrains and against different types
+ of attacks.  Units gain experience and advance levels, and are carried over
+ from one scenario to the next in a campaign.
+
+Package: wesnoth-1.12
+Description-md5: b4490f0b64389d931fdf07d83a102e7b
+Description-en: fantasy turn-based strategy game - complete suite (branch 1.12)
+ This package depends on the complete set of packages built from the wesnoth
+ source package but the server (which can be found in the
+ wesnoth-1.12-server package), most helpful if you always
+ want to have all the official campaigns installed.  If you only want to play
+ over the network with other players or want to play only a few campaigns you
+ just need to install the wesnoth-1.12-core package and
+ the wanted campaign packages.
+ .
+ Battle for control of villages, using variety of units which have advantages
+ and disadvantages in different types of terrains and against different types
+ of attacks.  Units gain experience and advance levels, and are carried over
+ from one scenario to the next in a campaign.
+
+Package: wesnoth-1.12-aoi
+Description-md5: affaa02b41ca4b96c91aca3e87881076
+Description-en: "An Orcish Incursion" official campaign for Wesnoth (branch 1.12)
+ This package contains the "An Orcish Incursion" campaign for Wesnoth:
+ "Defend the forests of the elves against the first orcs to reach the Great
+ Continent, learning valuable tactics as you do so."
+ (Novice level, 7 scenarios.)
+ .
+ Battle for control of villages, using variety of units which have advantages
+ and disadvantages in different types of terrains and against different types
+ of attacks.  Units gain experience and advance levels, and are carried over
+ from one scenario to the next in a campaign.
+
+Package: wesnoth-1.12-core
+Description-md5: b2753a6d786335280668ec8e8e9afbb9
+Description-en: fantasy turn-based strategy game (branch 1.12)
+ This package contains the main program for wesnoth. It can be used to play
+ multiplayer games.  If you want to play campaigns you will have to install
+ them individually, but if you prefer to have all the official campaigns
+ installed please be advised to install the wesnoth-1.12 package which depends
+ on all of them.
+ .
+ Battle for control of villages, using variety of units which have advantages
+ and disadvantages in different types of terrains and against different types
+ of attacks.  Units gain experience and advance levels, and are carried over
+ from one scenario to the next in a campaign.
+
+Package: wesnoth-1.12-data
+Description-md5: 82226fc89197ec6fe3fca3f87debdae1
+Description-en: data files for Wesnoth (branch 1.12)
+ This package contains the sound files and graphics for Wesnoth. It is required
+ for being able to play wesnoth or create maps with the editor.
+ .
+ Battle for control of villages, using variety of units which have advantages
+ and disadvantages in different types of terrains and against different types
+ of attacks.  Units gain experience and advance levels, and are carried over
+ from one scenario to the next in a campaign.
+
+Package: wesnoth-1.12-dbg
+Description-md5: e868481dfe577eaadf9e65d20dc99d43
+Description-en: fantasy turn-based strategy game (debugging symbols for branch 1.12)
+ This package contains the debugging symbols for the wesnoth binaries.
+ .
+ Battle for control of villages, using variety of units which have advantages
+ and disadvantages in different types of terrains and against different types
+ of attacks.  Units gain experience and advance levels, and are carried over
+ from one scenario to the next in a campaign.
+
+Package: wesnoth-1.12-did
+Description-md5: 0247ce6d654c88414d801d5bcd58ba26
+Description-en: "Descent Into Darkness" official campaign for Wesnoth (branch 1.12)
+ This package contains the "Descent Into Darkness" campaign for Wesnoth:
+ "Learn the dark arts of necromancy in order to save your people from an orcish
+ incursion."
+ (Intermediate level, 12 scenarios.)
+ .
+ Battle for control of villages, using variety of units which have advantages
+ and disadvantages in different types of terrains and against different types
+ of attacks.  Units gain experience and advance levels, and are carried over
+ from one scenario to the next in a campaign.
+
+Package: wesnoth-1.12-dm
+Description-md5: 54072dbdba1cecd3e8843858a998f446
+Description-en: "Delfador's Memoirs" official campaign for Wesnoth (branch 1.12)
+ This package contains the "Delfador's Memoirs" campaign for Wesnoth:
+ "Wesnoth seems to be slipping inexorably into chaos, as marauding orcs pour
+ south across the Great River, and mysterious and deadly creatures roam the
+ night. Who is the shadowy Iliah-Malal? Can you defeat him before he destroys
+ all life in Wesnoth?"
+ (Intermediate level, 19 scenarios)
+ .
+ Battle for control of villages, using variety of units which have advantages
+ and disadvantages in different types of terrains and against different types
+ of attacks.  Units gain experience and advance levels, and are carried over
+ from one scenario to the next in a campaign.
+
+Package: wesnoth-1.12-dw
+Description-md5: 8e22ee8c40c15a9818ccc7f61156f0ad
+Description-en: "Dead Water" official campaign for Wesnoth (branch 1.12)
+ This package contains the "Dead Water" campaign for Wesnoth:
+ "You are Kai Krellis, son and heir of the last merman king but only a child. A
+ necromancer is turning your subjects into undead slaves! Lead your people on a
+ mission to convince a powerful mer-sorceress to help you repel the invasion.
+ The oceans near the Northern Lands are perilous, so you will need cunning and
+ bravery to survive. But first you need to gain the respect of your troops!"
+ (Intermediate level, 10 scenarios)
+ .
+ Battle for control of villages, using variety of units which have advantages
+ and disadvantages in different types of terrains and against different types
+ of attacks.  Units gain experience and advance levels, and are carried over
+ from one scenario to the next in a campaign.
+
+Package: wesnoth-1.12-ei
+Description-md5: 8d0ccdb0ad3594b440b70f323923fabf
+Description-en: "The Eastern Invasion" official campaign for Wesnoth (branch 1.12)
+ This package contains the "The Eastern Invasion" campaign for Wesnoth:
+ "There are rumors of undead attacks on the eastern border of Wesnoth. You, an
+ officer in the Royal Army, have been sent to the eastern front to protect the
+ villagers and find out what is happening."
+ (Intermediate level, 16 scenarios.)"
+ .
+ Battle for control of villages, using variety of units which have advantages
+ and disadvantages in different types of terrains and against different types
+ of attacks.  Units gain experience and advance levels, and are carried over
+ from one scenario to the next in a campaign.
+
+Package: wesnoth-1.12-httt
+Description-md5: 14f233eb846a88c0d1fa8634d8e3f874
+Description-en: "Heir to the Throne" official campaign for Wesnoth (branch 1.12)
+ This package contains the "Heir to the Throne" campaign for Wesnoth:
+ "Fight to regain the throne of Wesnoth, of which you are the legitimate
+ heir."
+ (Novice level, 23 scenarios.)
+ .
+ Battle for control of villages, using variety of units which have advantages
+ and disadvantages in different types of terrains and against different types
+ of attacks.  Units gain experience and advance levels, and are carried over
+ from one scenario to the next in a campaign.
+
+Package: wesnoth-1.12-l
+Description-md5: a8ee2e50aaa2325b529ca44c67cf1b7e
+Description-en: "Liberty" official campaign for Wesnoth (branch 1.12)
+ This package contains the "Liberty" campaign for Wesnoth:
+ "As the shadow of civil war lengthens across Wesnoth, a band of hardy
+ marchlanders revolts against the tyranny of Queen Asheviere. To win their way
+ to freedom, they must defeat not just the trained blades of Wesnothian troops
+ but darker foes including orcs and undead."
+ (Intermediate level, 8 scenarios)
+ .
+ Battle for control of villages, using variety of units which have advantages
+ and disadvantages in different types of terrains and against different types
+ of attacks.  Units gain experience and advance levels, and are carried over
+ from one scenario to the next in a campaign.
+
+Package: wesnoth-1.12-low
+Description-md5: c12488f7e5d8494782a1f96799e24c56
+Description-en: "Legend of Wesmere" official campaign for Wesnoth (branch 1.12)
+ This package contains the "Legend of Wesmere" campaign for Wesnoth:
+ "The tale of Kalenz, the High Lord who rallied his people after the second
+ orcish invasion of the Great Continent and became the most renowned hero in
+ the recorded history of the Elves."
+ (Intermediate level, 18 scenarios.)
+ .
+ Battle for control of villages, using variety of units which have advantages
+ and disadvantages in different types of terrains and against different types
+ of attacks.  Units gain experience and advance levels, and are carried over
+ from one scenario to the next in a campaign.
+
+Package: wesnoth-1.12-music
+Description-md5: cbfa3fe59f937cbfdeb2d622d0f7dd93
+Description-en: music files for Wesnoth (branch 1.12)
+ This package contains the music files for Wesnoth. It is not required but
+ gives nice background music and encouraged.
+ .
+ Battle for control of villages, using variety of units which have advantages
+ and disadvantages in different types of terrains and against different types
+ of attacks.  Units gain experience and advance levels, and are carried over
+ from one scenario to the next in a campaign.
+
+Package: wesnoth-1.12-nr
+Description-md5: 1b934a71fdabca636a4dc71b1e6279f2
+Description-en: "Northern Rebirth" official campaign for Wesnoth (branch 1.12)
+ This package contains the "Northern Rebirth" campaign for Wesnoth:
+ "For the people of Dwarven Doors the choice was stark: either drudge as
+ downtrodden slaves for the orcs until the end of their brief and miserable
+ lives, or risk all for freedom and rise up against their cruel overlords.
+ Little did they suspect that their struggle would be the hinge of great events
+ that might restore the Northlands to the glory they had once known."
+ (Expert level, 13 scenarios.)
+ .
+ Battle for control of villages, using variety of units which have advantages
+ and disadvantages in different types of terrains and against different types
+ of attacks.  Units gain experience and advance levels, and are carried over
+ from one scenario to the next in a campaign.
+
+Package: wesnoth-1.12-server
+Description-md5: aed8ac544569ad9144de9f09404ed547
+Description-en: multiplayer network server for Wesnoth (branch 1.12)
+ This package contains the multiplayer network server for Wesnoth.  You need it
+ if you want to host multiplayer games on your computer and don't want to use
+ the official servers.
+ .
+ Battle for control of villages, using variety of units which have advantages
+ and disadvantages in different types of terrains and against different types
+ of attacks.  Units gain experience and advance levels, and are carried over
+ from one scenario to the next in a campaign.
+
+Package: wesnoth-1.12-sof
+Description-md5: 9520a776559c5ae23de86903cb1e14a2
+Description-en: "The Sceptre of Fire" official campaign for Wesnoth (branch 1.12)
+ This package contains the "The Sceptre of Fire" campaign for Wesnoth:
+  "The land of Wesnoth's banner bold
+  Comes not from its own land;
+  It comes from Dwarfdom, grim and old
+  Made by a runesmith's hand.
+  So now I tell from whence it came -
+  The Fire-sceptre great -
+  And of the makers of the same,
+  Their tale I now relate..."
+ (Expert level, 9 scenarios.)
+ .
+ Battle for control of villages, using variety of units which have advantages
+ and disadvantages in different types of terrains and against different types
+ of attacks.  Units gain experience and advance levels, and are carried over
+ from one scenario to the next in a campaign.
+
+Package: wesnoth-1.12-sotbe
+Description-md5: 37cc240d5b47a7eefe9f42dee935e2d2
+Description-en: "Son of the Black-Eye" official campaign for Wesnoth (branch 1.12)
+ This package contains the "Son of the Black-Eye" campaign for Wesnoth:
+ "Your father Karun Black-Eye was the greatest orcish leader that ever lived.
+ Now, as his son, it's up to you to thwart the selfish designs of the humans
+ who have broken the old agreements with the orcs and are bent upon taking your
+ lands. Unite the warring orcish tribes, bring together the Orcish Council and
+ call up the Great Horde to send the human-worms and their wose-born allies to
+ the land of the dead!"
+ (Expert level, 18 scenarios.)
+ .
+ Battle for control of villages, using variety of units which have advantages
+ and disadvantages in different types of terrains and against different types
+ of attacks.  Units gain experience and advance levels, and are carried over
+ from one scenario to the next in a campaign.
+
+Package: wesnoth-1.12-thot
+Description-md5: 7a52539d60f18f1b09534165ad4de5d8
+Description-en: "The Hammer of Thursagan" official campaign for Wesnoth (branch 1.12)
+ This package contains the "The Hammer of Thursagan" campaign for Wesnoth:
+ "In the first years of the Northern Alliance, an expedition from Knalga seeks
+ out their kin at Kal Kartha and to learn the fate of the legendary Hammer of
+ Thursagan. The perils of their journey through the wild Northern Lands, though
+ great, pale beside the evil they will face at its end."
+ (Intermediate level, 11 scenarios.)
+ .
+ Battle for control of villages, using variety of units which have advantages
+ and disadvantages in different types of terrains and against different types
+ of attacks.  Units gain experience and advance levels, and are carried over
+ from one scenario to the next in a campaign.
+
+Package: wesnoth-1.12-tools
+Description-md5: 578246cf0f4df14054d40c01b6ae3c96
+Description-en: tools for campaign developers for Wesnoth (branch 1.12)
+ This package contains various tools for Wesnoth that are especially useful for
+ campaign developers, including but not limited to scripts supporting the
+ generation and checking of WML (Wesnoth Markup Language).  You can find them
+ in the directory /usr/share/games/wesnoth/1.12/data/tools
+ after installation of the package.
+ .
+ Battle for control of villages, using variety of units which have advantages
+ and disadvantages in different types of terrains and against different types
+ of attacks.  Units gain experience and advance levels, and are carried over
+ from one scenario to the next in a campaign.
+
+Package: wesnoth-1.12-trow
+Description-md5: 31f781db81d9803f2fe75709109f8015
+Description-en: "The Rise of Wesnoth" official campaign for Wesnoth (branch 1.12)
+ This package contains the "The Rise of Wesnoth" campaign for Wesnoth:
+ "Lead Prince Haldric through the destruction of the Green Isle and across the
+ Ocean to establish the very kingdom of Wesnoth itself. The confrontation with
+ Lich-Lord Jevyan awaits..."
+ (Intermediate level, 24 scenarios.)
+ .
+ Battle for control of villages, using variety of units which have advantages
+ and disadvantages in different types of terrains and against different types
+ of attacks.  Units gain experience and advance levels, and are carried over
+ from one scenario to the next in a campaign.
+
+Package: wesnoth-1.12-tsg
+Description-md5: 0ff3bd02f8f9788f06725ed620fb4d7f
+Description-en: "The South Guard" official campaign for Wesnoth (branch 1.12)
+ This package contains the "The South Guard" campaign for Wesnoth:
+ "A young Knight, Deoran, is dispatched to take command of the South Guard...
+ Note: This campaign is designed as an introduction to Wesnoth. The 'Civilian'
+ difficulty level is aimed at first-time players."
+ (Novice level, 9 scenarios.)
+ .
+ Battle for control of villages, using variety of units which have advantages
+ and disadvantages in different types of terrains and against different types
+ of attacks.  Units gain experience and advance levels, and are carried over
+ from one scenario to the next in a campaign.
+
+Package: wesnoth-1.12-ttb
+Description-md5: 054711d0cfec44dd573231baa517bdfe
+Description-en: "A Tale of Two Brothers" official campaign for Wesnoth (branch 1.12)
+ This package contains the "A Tale of Two Brothers" campaign for Wesnoth:
+ "An evil mage is threatening the small village of Maghre and its inhabitants.
+ The village’s mage sends to his warrior brother for help, but not all goes as
+ planned. Can you help?"
+ (Novice level, 4 scenarios.)
+ .
+ Battle for control of villages, using variety of units which have advantages
+ and disadvantages in different types of terrains and against different types
+ of attacks.  Units gain experience and advance levels, and are carried over
+ from one scenario to the next in a campaign.
+
+Package: wesnoth-1.12-utbs
+Description-md5: 8fcaad789ea3d7f12db16dc2898e48ba
+Description-en: "Under the Burning Suns" official campaign for Wesnoth (branch 1.12)
+ This package contains the "Under the Burning Suns" campaign for Wesnoth:
+ "In the distant future a small band of elves struggles to survive amidst the
+ ruins of fallen empires. Lead your people out of the desert on an epic journey
+ to find a new home."
+ (Expert level, 10 scenarios.)
+ .
+ Battle for control of villages, using variety of units which have advantages
+ and disadvantages in different types of terrains and against different types
+ of attacks.  Units gain experience and advance levels, and are carried over
+ from one scenario to the next in a campaign.
+
+Package: wesnoth-core
+Description-md5: 49034f8e7b5044fce1f03bd566a97f33
+Description-en: fantasy turn-based strategy game (metapackage)
+ This metapackage pulls in the core wesnoth package which allows you to play
+ using the latest stable version.
+ .
+ Battle for control of villages, using variety of units which have advantages
+ and disadvantages in different types of terrains and against different types
+ of attacks.  Units gain experience and advance levels, and are carried over
+ from one scenario to the next in a campaign.
+
+Package: wesnoth-music
+Description-md5: 708dd00f3fd6bc8016e6d16439e8132f
+Description-en: music files for Wesnoth (metapackage)
+ This metapackage pulls in the music package for use with the latest stable
+ version of wesnoth.
+ .
+ Battle for control of villages, using variety of units which have advantages
+ and disadvantages in different types of terrains and against different types
+ of attacks.  Units gain experience and advance levels, and are carried over
+ from one scenario to the next in a campaign.
+
+Package: xfce4-whiskermenu-plugin
+Description-md5: 326f4d7cf73588e1afa8d3fa91109734
+Description-en: Alternate menu plugin for the Xfce desktop environment
+ Whisker Menu is an alternate application launcher for Xfce. When you open it
+ you are shown a list of applications you have marked as favorites. You can
+ browse through all of your installed applications by clicking on the category
+ buttons on the side. Top level catagories make browsing fast, and simple to
+ switch between. Additionally, Whisker Menu keeps a list of the last ten
+ applications that you've launched from it.
+
+Package: yaggo
+Description-md5: 9cc686a2c0fecd1e9435456badaa7934
+Description-en: generate command line parser using getopt_long
+ Yaggo is a tool to generate command line parsers for C++. Yaggo stands
+ for "Yet Another GenGetOpt" and is inspired by GNU Gengetopt.
+ .
+ It reads a configuration file describing the switches and argument for
+ a C++ program and it generates one header file that parses the command
+ line using getopt_long(3).
+
+Package: zsh-beta
+Description-md5: 93b1e231343d94696d26e9541e4cf2f3
+Description-en: transitional package to zsh
+ The purpose of this package is solely the transition from the zsh-beta
+ package to the zsh package. It can be safely removed if no more user
+ has zsh-beta as login shell.
+
+Package: zsh-static
+Description-md5: 23f1b767f357b2c1b99e434a26490622
+Description-en: shell with lots of features (static link)
+ Zsh is a UNIX command interpreter (shell) usable as an
+ interactive login shell and as a shell script command
+ processor. Of the standard shells, zsh most closely resembles
+ ksh but includes many enhancements. Zsh has command-line editing,
+ built-in spelling correction, programmable command completion,
+ shell functions (with autoloading), a history mechanism, and a
+ host of other features.
+ .
+ This is the statically-compiled version of the shell.
+

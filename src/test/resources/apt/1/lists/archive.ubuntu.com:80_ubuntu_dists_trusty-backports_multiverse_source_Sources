@@ -1,0 +1,86 @@
+Package: iucode-tool
+Binary: iucode-tool
+Version: 1.0.3-1~ubuntu14.04.1
+Priority: optional
+Section: multiverse/utils
+Maintainer: Henrique de Moraes Holschuh <hmh@debian.org>
+Build-Depends: debhelper (>= 7), autotools-dev, automake (>= 1:1.10), autoconf (>= 2.61)
+Architecture: i386 amd64
+Standards-Version: 3.9.5
+Format: 3.0 (quilt)
+Directory: pool/multiverse/i/iucode-tool
+Files:
+ 1147ae46e9312ba146580cc6dca3ecd5 2009 iucode-tool_1.0.3-1~ubuntu14.04.1.dsc
+ 2e00d53c61ba868ed050bcfab3efa97d 118352 iucode-tool_1.0.3.orig.tar.xz
+ c1b75d52990e8b497134f744b5ff696a 4316 iucode-tool_1.0.3-1~ubuntu14.04.1.debian.tar.xz
+Homepage: https://gitorious.org/iucode-tool/pages/Home
+Vcs-Browser: https://gitorious.org/iucode-tool/iucode-tool
+Vcs-Git: git://gitorious.org/iucode-tool/iucode-tool.git -b debian/master
+Package-List:
+ iucode-tool deb contrib/utils optional arch=i386,amd64
+Checksums-Sha1:
+ a1e511a704822b3d578eb29f76b18d5225e5e69d 2009 iucode-tool_1.0.3-1~ubuntu14.04.1.dsc
+ 6e2e442d370e5a4c05aca2441485fa173742f918 118352 iucode-tool_1.0.3.orig.tar.xz
+ 6a8a3597585ee43a97358ed98a42992569dfc548 4316 iucode-tool_1.0.3-1~ubuntu14.04.1.debian.tar.xz
+Checksums-Sha256:
+ 3337521f497f9c0d74b1e2adf8f9c45246f46d05f8d9ac1a6205407b51eeb68d 2009 iucode-tool_1.0.3-1~ubuntu14.04.1.dsc
+ 865f4458a4e0eab54b033c25d0ee60803fd6b76daae1bfea897869bfce073f63 118352 iucode-tool_1.0.3.orig.tar.xz
+ 8c80bcdbd196985fe6237f59a54b37be61d67b3bde386034c2a9504b673c4830 4316 iucode-tool_1.0.3-1~ubuntu14.04.1.debian.tar.xz
+
+Package: nvidia-modprobe
+Binary: nvidia-modprobe
+Version: 340.24-1~ubuntu14.04.1
+Priority: optional
+Section: multiverse/utils
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 9), m4
+Architecture: i386 amd64 armhf
+Standards-Version: 3.9.5
+Format: 3.0 (quilt)
+Directory: pool/multiverse/n/nvidia-modprobe
+Files:
+ 4d136ffd9283d6dee7ecf9f9815669d8 2134 nvidia-modprobe_340.24-1~ubuntu14.04.1.dsc
+ 56591382048891d5032065d21df5c787 29383 nvidia-modprobe_340.24.orig.tar.bz2
+ 9cb9709a791967a8ce9e14ec2b8f24ac 2468 nvidia-modprobe_340.24-1~ubuntu14.04.1.debian.tar.xz
+Uploaders: Andreas Beckmann <anbe@debian.org>, Vincent Cheng <vcheng@debian.org>
+Homepage: ftp://download.nvidia.com/XFree86/nvidia-modprobe/
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-nvidia/nvidia-modprobe.git
+Vcs-Git: git://anonscm.debian.org/pkg-nvidia/nvidia-modprobe.git
+Package-List:
+ nvidia-modprobe deb contrib/utils optional arch=i386,amd64,armhf
+Checksums-Sha1:
+ c500259767e6e5dc305349eb113e69d999a895af 2134 nvidia-modprobe_340.24-1~ubuntu14.04.1.dsc
+ 845b8d93b29bfb6334b685c8d6e0834e6b5ad58e 29383 nvidia-modprobe_340.24.orig.tar.bz2
+ 31d74a2041f838ca5a14e1c382504a047d51b6e6 2468 nvidia-modprobe_340.24-1~ubuntu14.04.1.debian.tar.xz
+Checksums-Sha256:
+ ce03fa141d9c0f13bbae61b7db77afb3fee18d75c797d674d86a7ccae24a7059 2134 nvidia-modprobe_340.24-1~ubuntu14.04.1.dsc
+ 43a46feaf98f5973e1a33757c197fece747270d6eaa356f66f11c40cba0852c1 29383 nvidia-modprobe_340.24.orig.tar.bz2
+ aba8cbe288e3586bd330400d743289972664bd6d9bec545156a9cc81d87b5380 2468 nvidia-modprobe_340.24-1~ubuntu14.04.1.debian.tar.xz
+
+Package: xml2rfc
+Binary: xml2rfc
+Version: 2.4.7-1~ubuntu14.04.1
+Priority: optional
+Section: multiverse/text
+Maintainer: Daniel Kahn Gillmor <dkg@fifthhorseman.net>
+Build-Depends: debhelper (>= 9), pyflakes, python-lxml, python, python-setuptools, dh-python, help2man
+Architecture: all
+Standards-Version: 3.9.5
+Format: 3.0 (quilt)
+Directory: pool/multiverse/x/xml2rfc
+Files:
+ 93d51843d3dfe061b48f8f5610a6c062 1833 xml2rfc_2.4.7-1~ubuntu14.04.1.dsc
+ 4160c9b3af3e7c92794e67b0f35b7194 1312258 xml2rfc_2.4.7.orig.tar.gz
+ cd6db3923f08910868ab9eec9115740b 14913 xml2rfc_2.4.7-1~ubuntu14.04.1.debian.tar.gz
+Homepage: https://pypi.python.org/pypi/xml2rfc/
+Package-List:
+ xml2rfc deb non-free/text optional
+Checksums-Sha1:
+ f29b33c86a5b23941de9bbfa5ed20f2e6abc5773 1833 xml2rfc_2.4.7-1~ubuntu14.04.1.dsc
+ 15e171fea31d2f4fcd61ca9c9da906016918aaf5 1312258 xml2rfc_2.4.7.orig.tar.gz
+ 41d9526ff46eedc6b6873e3859fa547bde726c89 14913 xml2rfc_2.4.7-1~ubuntu14.04.1.debian.tar.gz
+Checksums-Sha256:
+ 4c72d000bbd215903a459b48c0f97be485cc338f06172da20606e6baa59ab952 1833 xml2rfc_2.4.7-1~ubuntu14.04.1.dsc
+ f75ec480b1b11ac55e5d6e3d35df5f8fe2e66c7a447f229eee9f1e9a63b2bfd2 1312258 xml2rfc_2.4.7.orig.tar.gz
+ 60350d2ac1ec77c8186103b574f7631af1c3dc1d53264e379e77430d8d3ab8df 14913 xml2rfc_2.4.7-1~ubuntu14.04.1.debian.tar.gz
+

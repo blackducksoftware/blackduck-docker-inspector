@@ -1,0 +1,83 @@
+Package: boinc-nvidia-cuda
+Priority: optional
+Section: multiverse/net
+Installed-Size: 88
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian BOINC Maintainers <pkg-boinc-devel@lists.alioth.debian.org>
+Architecture: amd64
+Source: boinc
+Version: 7.2.47+dfsg-3~ubuntu14.04.1
+Depends: boinc, libcuda1 | libcuda-5.0-1 | nvidia-304 | nvidia-310 | nvidia-319
+Recommends: libcuda1-i386 | libcuda-5.0-1-i386
+Filename: pool/multiverse/b/boinc/boinc-nvidia-cuda_7.2.47+dfsg-3~ubuntu14.04.1_amd64.deb
+Size: 13626
+MD5sum: c93d1ea98d294d4b059a0d7649b38475
+SHA1: aae78b4b0343a2fef89a9b07dee0ad6c62e0ee43
+SHA256: 5818e82840be6968805f80869eee0318f7ef915796e10b62da7ea88283b055fb
+Description: metapackage for CUDA-savvy BOINC client and manager
+Homepage: http://boinc.berkeley.edu/
+Description-md5: 9384e2173f2ed43c0d057c1770da614c
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: iucode-tool
+Priority: optional
+Section: multiverse/utils
+Installed-Size: 88
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Henrique de Moraes Holschuh <hmh@debian.org>
+Architecture: amd64
+Version: 1.0.3-1~ubuntu14.04.1
+Depends: libc6 (>= 2.14)
+Recommends: intel-microcode (>= 1)
+Filename: pool/multiverse/i/iucode-tool/iucode-tool_1.0.3-1~ubuntu14.04.1_amd64.deb
+Size: 29616
+MD5sum: e1c7a7474fe0369e9b05242c7bd0b179
+SHA1: 0a6172c359d860a1da105c1348ed3263a095498b
+SHA256: 190330f4dd14ad2c889896bb7c419d07991c3419f0b34efb5e034ab79153f432
+Description: Intel processor microcode tool
+Homepage: https://gitorious.org/iucode-tool/pages/Home
+Description-md5: 85b8e9a4d04e1dafc3c5baa7e46a23a4
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: nvidia-modprobe
+Priority: optional
+Section: multiverse/utils
+Installed-Size: 75
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Architecture: amd64
+Version: 340.24-1~ubuntu14.04.1
+Depends: libc6 (>= 2.14)
+Filename: pool/multiverse/n/nvidia-modprobe/nvidia-modprobe_340.24-1~ubuntu14.04.1_amd64.deb
+Size: 14538
+MD5sum: fc01b4cb298d2a8812f657de374221cd
+SHA1: c0e27b47e1a2be0373dcb34d469bfda07bc668ab
+SHA256: ddb1f46fbd4753c5348dde7c6142e5f6b9296efabbf6d187929d4a5b6e6ec2a8
+Description: utility to load NVIDIA kernel modules and create device nodes
+Homepage: ftp://download.nvidia.com/XFree86/nvidia-modprobe/
+Description-md5: 681d2ef8dc157284d3ffc1ee5f3b75f7
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: xml2rfc
+Priority: optional
+Section: multiverse/text
+Installed-Size: 404
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Daniel Kahn Gillmor <dkg@fifthhorseman.net>
+Architecture: all
+Version: 2.4.7-1~ubuntu14.04.1
+Depends: python-lxml, python, python:any (>= 2.7.5-5~), python:any (<< 2.8), sgml-base (>= 1.26+nmu2)
+Filename: pool/multiverse/x/xml2rfc/xml2rfc_2.4.7-1~ubuntu14.04.1_all.deb
+Size: 76194
+MD5sum: 07eb22f5aef7fac609d93c51c16c3397
+SHA1: 54a6660dfa8928e2ac50cc64624e43241ac7d73f
+SHA256: 13f3678a4c292e113a57775f75f70e26ae5bdbd5a6197eb73f984bf3de36410c
+Description: XML-based formatting tool for RFCs
+Homepage: https://pypi.python.org/pypi/xml2rfc/
+Description-md5: 4686bf6f62893f3ed7d4429bc50aa594
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+

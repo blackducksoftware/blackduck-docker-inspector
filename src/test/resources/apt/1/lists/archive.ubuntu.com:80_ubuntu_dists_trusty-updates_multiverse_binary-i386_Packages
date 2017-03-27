@@ -1,0 +1,1465 @@
+Package: flashplugin-downloader
+Priority: optional
+Section: multiverse/web
+Installed-Size: 42
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Bart Martens <bartm@knars.be>
+Architecture: i386
+Source: flashplugin-nonfree
+Version: 25.0.0.127ubuntu0.14.04.1
+Depends: flashplugin-installer (>= 11.1.102.55ubuntu3)
+Filename: pool/multiverse/f/flashplugin-nonfree/flashplugin-downloader_25.0.0.127ubuntu0.14.04.1_i386.deb
+Size: 1886
+MD5sum: e3af4239760ae5537adabad1835672cb
+SHA1: 1b7b8267e2adbfcc22180670cdcde68c40213a8b
+SHA256: 2db0c039c05f6e54aa851fcce17a99cfcce0cb617835b043e5657655a273346b
+Description: Adobe Flash Player plugin installer (transitional package)
+Multi-Arch: foreign
+Homepage: http://www.adobe.com/products/flashplayer.html
+Description-md5: 66ea91f4e504085408ea841953dc65d0
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: flashplugin-installer
+Priority: optional
+Section: multiverse/web
+Installed-Size: 137
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Bart Martens <bartm@knars.be>
+Architecture: i386
+Source: flashplugin-nonfree
+Version: 25.0.0.127ubuntu0.14.04.1
+Replaces: flashplugin (<< 6), flashplugin-downloader (<< 11.1.102.55ubuntu3), flashplugin-nonfree (<< 11.0.1.152ubuntu1)
+Provides: flashplugin-nonfree
+Depends: debconf (>= 0.5) | debconf-2.0, wget, libgtk2.0-0, fontconfig, libxt6, libxext6, libatk1.0-0, libc6, libcairo2, libexpat1, libfontconfig1, libfreetype6, libglib2.0-0, libice6, libpango1.0-0, libpng12-0, libsm6, libx11-6, libxau6, libxcursor1, libxdmcp6, libxfixes3, libxi6, libxinerama1, libxrandr2, libxrender1, zlib1g, libnss3, libnspr4, libcurl3 | libcurl3-gnutls, libasound2, update-notifier-common (>= 0.119ubuntu2)
+Recommends: libasound2-plugins (>= 1.0.16)
+Suggests: firefox, x-ttcidfont-conf, ttf-mscorefonts-installer, ttf-bitstream-vera | ttf-dejavu, ttf-xfree86-nonfree, xfs
+Conflicts: flashplayer-mozilla, flashplugin (<< 6), flashplugin-nonfree (<< 11.0.1.152ubuntu1), libflashsupport
+Breaks: flashplugin-downloader (<< 11.1.102.55ubuntu3)
+Filename: pool/multiverse/f/flashplugin-nonfree/flashplugin-installer_25.0.0.127ubuntu0.14.04.1_i386.deb
+Size: 6832
+MD5sum: 82cd0be7ca47e074452a2e9683caa22f
+SHA1: bc23dfd4809c975b8fcedec5d2e00e5a1cc4ecf2
+SHA256: 35dfd641204486de5ab379a1075a955784def98b084c679ffd2e314ea833c1d9
+Description: Adobe Flash Player plugin installer
+Multi-Arch: foreign
+Homepage: http://www.adobe.com/products/flashplayer.html
+Npp-Applications: ec8030f7-c20a-464f-9b0e-13a3a9e97384, 92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a, aa5ca914-c309-495d-91cf-3141bbb04115
+Npp-Description: Adobe Flash SWF Player (http://www.adobe.com)
+Npp-File: libflashplayer.so
+Npp-Mimetype: application/x-shockwave-flash
+Npp-Name: Adobe Flash Player (installer)
+Description-md5: a03e9ebc20ce82c05567d088e79bf750
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: intel-microcode
+Priority: extra
+Section: multiverse/admin
+Installed-Size: 779
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Henrique de Moraes Holschuh <hmh@debian.org>
+Architecture: i386
+Version: 2.20140624-t-1ubuntu2
+Depends: iucode-tool (>= 1.0)
+Recommends: initramfs-tools (>= 0.113~)
+Conflicts: microcode.ctl (<< 0.18~0)
+Filename: pool/multiverse/i/intel-microcode/intel-microcode_2.20140624-t-1ubuntu2_i386.deb
+Size: 529892
+MD5sum: 50a440c127072683232d61cf11b35346
+SHA1: f6243dcb01fb646ffc2977f37646c1cf0b8f67b1
+SHA256: 407c1e08bf8d4b764a2124d5f34fa8418e98c2971e7de8a324144ea76f712c61
+Description: Processor microcode firmware for Intel CPUs
+Homepage: http://feeds.downloadcenter.intel.com/rss/?p=483&lang=eng
+Description-md5: 3edb9824276886579313f0e847f6bb14
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: kubuntu-restricted-extras
+Priority: optional
+Section: multiverse/metapackages
+Installed-Size: 30
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: i386
+Source: ubuntu-restricted-extras
+Version: 60.1
+Depends: kubuntu-restricted-addons
+Recommends: ttf-mscorefonts-installer, unrar, lame, libavcodec-extra
+Filename: pool/multiverse/u/ubuntu-restricted-extras/kubuntu-restricted-extras_60.1_i386.deb
+Size: 2882
+MD5sum: b2117217fb06cce80150dd22922f3e02
+SHA1: a4f22098e33dcf39469bfd3f3ad1426ee46eed9c
+SHA256: cdd6ea117de4cdd9907a1c534e873318c9774b322eea1dbfae3282873c7fb63d
+Description: Commonly used restricted packages for Kubuntu
+Description-md5: 5db1108a0d4c9f76c228fcf85f83cc57
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: libclamunrar7
+Priority: extra
+Section: multiverse/libs
+Installed-Size: 116
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: ClamAV Team <pkg-clamav-devel@lists.alioth.debian.org>
+Architecture: i386
+Source: libclamunrar
+Version: 0.99-0ubuntu0.14.04.1
+Depends: libclamav7, libc6 (>= 2.4)
+Filename: pool/multiverse/libc/libclamunrar/libclamunrar7_0.99-0ubuntu0.14.04.1_i386.deb
+Size: 32702
+MD5sum: 410391689472006f40bbaae321903ef9
+SHA1: 83a9a079b270c901197cd65217bb3119a0002ff9
+SHA256: 5f6cac5396cae115af5c352ab7012cc00f9b21021aed2cc7fc1c6bb744fda787
+Description: anti-virus utility for Unix - unrar support
+Homepage: http://www.clamav.net/
+Description-md5: cc91b3ee0883ae72d88576f9ca8c850e
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: libmyth-0.27-0
+Priority: optional
+Section: multiverse/libs
+Installed-Size: 31453
+Maintainer: MythTV Ubuntu Maintainers <ubuntu-mythtv@lists.ubuntu.com>
+Architecture: i386
+Source: mythtv
+Version: 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3
+Replaces: libmyth-0.23-0, libmyth-0.24-0, libmyth-0.25-0, libmyth-0.26-0, mythtv (<< 0.7-5)
+Depends: libasound2 (>= 1.0.16), libass4 (>= 0.9.11), libavahi-compat-libdnssd1 (>= 0.6.16), libavc1394-0 (>= 0.5.3), libbz2-1.0, libc6 (>= 2.17), libcrystalhd3, libfftw3-double3, libfftw3-single3, libfreetype6 (>= 2.2.1), libgcc1 (>= 1:4.1.1), libgl1-mesa-glx | libgl1, libiec61883-0 (>= 1.2.0), libmp3lame0, libpulse0 (>= 1:0.99.1), libqt4-dbus (>= 4:4.5.3), libqt4-network (>= 4:4.7.0~beta1), libqt4-opengl (>= 4:4.7.2), libqt4-script (>= 4:4.5.3), libqt4-sql (>= 4:4.5.3), libqt4-xml (>= 4:4.5.3), libqtcore4 (>= 4:4.7.0~beta2), libqtgui4 (>= 4:4.8.0), libqtwebkit4, libraw1394-11, libsdl1.2debian (>= 1.2.11), libssl1.0.0 (>= 1.0.0), libstdc++6 (>= 4.6), libtag1c2a (>= 1.6), libva-glx1, libva-x11-1 (>> 1.3.0~), libva1 (>> 1.3.0~), libvdpau1 (>= 0.2), libvpx1 (>= 1.3.0), libx11-6 (>= 2:1.4.99.1), libx264-142, libxext6, libxinerama1, libxml2 (>= 2.7.4), libxrandr2 (>= 4.3), libxv1, libxxf86vm1, zlib1g (>= 1:1.2.0), libqt4-sql-mysql
+Conflicts: libmyth-0.23-0, libmyth-0.24-0, libmyth-0.25-0, libmyth-0.26-0, mythtv (<< 0.7-5)
+Filename: pool/multiverse/m/mythtv/libmyth-0.27-0_0.27.0+fixes.20140324.8ee257c-0ubuntu3_i386.deb
+Size: 9671022
+MD5sum: edd810325783d77ed12f2834237e9725
+SHA1: ff84e3061d86d55d5c99588e461c3b72b31d0677
+SHA256: 71c804c0380c6eeca5382b23d44f911bc99bd14e9e11c46c81bc38ed32cfb1d0
+Description: Common library code for MythTV and add-on modules (runtime)
+Homepage: http://www.mythtv.org
+Description-md5: 6233f3ed93adc17b7f228bed7bd3b300
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+Supported: 9m
+Task: mythbuntu-frontend, mythbuntu-frontend, mythbuntu-desktop, mythbuntu-backend-slave, mythbuntu-backend-slave, mythbuntu-backend-master, mythbuntu-backend-master
+
+Package: libmyth-dev
+Priority: optional
+Section: multiverse/libdevel
+Installed-Size: 2554
+Maintainer: MythTV Ubuntu Maintainers <ubuntu-mythtv@lists.ubuntu.com>
+Architecture: i386
+Source: mythtv
+Version: 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3
+Provides: libmyth-0.27-0-dev
+Depends: libmyth-0.27-0 (= 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3)
+Conflicts: libmyth-0.27-0-dev
+Filename: pool/multiverse/m/mythtv/libmyth-dev_0.27.0+fixes.20140324.8ee257c-0ubuntu3_i386.deb
+Size: 350934
+MD5sum: 4994fa8e95aa731a1f91ff28c0981b0d
+SHA1: 737753a3ea299297269f8cd23f70eaaad52ed0e0
+SHA256: f27987585c4d1444da647f50ddf8bf879608531bf95ae986f0f23234e4e33bee
+Description: Common library code for MythTV and add-on modules (development)
+Homepage: http://www.mythtv.org
+Description-md5: cdf4db9954271d33355a9e9377695b78
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: libmyth-python
+Priority: optional
+Section: multiverse/libs
+Installed-Size: 1266
+Maintainer: MythTV Ubuntu Maintainers <ubuntu-mythtv@lists.ubuntu.com>
+Architecture: all
+Source: mythtv
+Version: 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3
+Replaces: mythtv-common (<< 0.20.98)
+Depends: python-mysqldb, python-lxml, python-urlgrabber
+Conflicts: mythtv-common (<< 0.20.98)
+Filename: pool/multiverse/m/mythtv/libmyth-python_0.27.0+fixes.20140324.8ee257c-0ubuntu3_all.deb
+Size: 233092
+MD5sum: 4125024fd33e9e1ca6ed815a31bdd0d0
+SHA1: c2dc0b9dc9e0350fee11b8b30b231d98e23d8106
+SHA256: e86662be1f3308233972880d68ef10774f1615a7e83e8f916490d7c759928c1c
+Description: A python library to access some MythTV features
+Homepage: http://www.mythtv.org
+Description-md5: 99e5b7fdac675ed6cfb57a0a42eb8400
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+Supported: 9m
+Task: mythbuntu-frontend, mythbuntu-frontend, mythbuntu-desktop, mythbuntu-backend-slave, mythbuntu-backend-slave, mythbuntu-backend-master, mythbuntu-backend-master
+
+Package: libmythtv-perl
+Priority: optional
+Section: multiverse/libs
+Installed-Size: 206
+Maintainer: MythTV Ubuntu Maintainers <ubuntu-mythtv@lists.ubuntu.com>
+Architecture: all
+Source: mythtv
+Version: 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3
+Replaces: libmyth-perl, mythtv-common (<< 0.20.98)
+Depends: perl, libdbi-perl, libdbd-mysql-perl, libnet-upnp-perl, libio-socket-inet6-perl
+Conflicts: libmyth-perl, mythtv-common (<< 0.20.98)
+Filename: pool/multiverse/m/mythtv/libmythtv-perl_0.27.0+fixes.20140324.8ee257c-0ubuntu3_all.deb
+Size: 25804
+MD5sum: bbc4ae90e3ab29442e7b54dfef181ab4
+SHA1: b0f3c8ed67be5f264c70c891f172c55bf7c47783
+SHA256: e7b52ab663a847f6d2659033c1d1ceaee02621de22ed1f78da9877a5edeec64a
+Description: A PERL library to access some MythTV features
+Homepage: http://www.mythtv.org
+Description-md5: 47f252d2997e94bf2a23b14c005706fe
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+Supported: 9m
+Task: mythbuntu-frontend, mythbuntu-frontend, mythbuntu-desktop, mythbuntu-backend-slave, mythbuntu-backend-slave, mythbuntu-backend-master, mythbuntu-backend-master
+
+Package: libxar-dev
+Priority: optional
+Section: multiverse/graphics
+Installed-Size: 3087
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Joachim Breitner <nomeata@debian.org>
+Architecture: i386
+Source: xaralx
+Version: 0.7r1785-5ubuntu2build0.1
+Depends: libc6 (>= 2.4), libgcc1 (>= 1:4.1.1), libstdc++6 (>= 4.4.0), libwxbase2.8-0 (>= 2.8.12.1+dfsg), libwxgtk2.8-0 (>= 2.8.12.1+dfsg)
+Filename: pool/multiverse/x/xaralx/libxar-dev_0.7r1785-5ubuntu2build0.1_i386.deb
+Size: 384398
+MD5sum: c1c8e63afe4e0fb46a0af0d7cafb12c9
+SHA1: 24f41c127b750c49dc0de03e1470aa6680c02694
+SHA256: 2359e695fdc2302fd97f4323ac1290b7b2e6c39244c2242dcdfa3c974addf2ff
+Description: Library to read and write Xar files
+Homepage: http://www.xaraxtreme.org/
+Description-md5: 06fcbe565ffd66e06c10bd6fa50a3e9c
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: linux-firmware-nonfree
+Priority: optional
+Section: multiverse/kernel
+Installed-Size: 8056
+Maintainer: Ubuntu Kernel Team <kernel-team@lists.ubuntu.com>
+Architecture: all
+Version: 1.14ubuntu3
+Replaces: linux-firmware (<< 1.17)
+Conflicts: linux-firmware (<< 1.17)
+Filename: pool/multiverse/l/linux-firmware-nonfree/linux-firmware-nonfree_1.14ubuntu3_all.deb
+Size: 2436350
+MD5sum: 6b4351b0d8f1f8c27ed101614abbcecf
+SHA1: f00a907fe74ca9037965ffc062043e0d64154fa1
+SHA256: 651660fe54115d0879d9bb564580e719a33b1b55071efe7a1f40acb1c80580ff
+Description: Non-free firmware for Linux kernel drivers
+Modaliases: cx18(pci:v000014F1d00005B7Asv*sd*bc*sc*i*, pci:v000014F1d00005B7Asv*sd*bc*sc*i*), dvb_usb_af9015(usb:v1B80pE401d*dc*dsc*dp*ic*isc*ip*in*, usb:v1F4Dp9016d*dc*dsc*dp*ic*isc*ip*in*, usb:v07CAp850Bd*dc*dsc*dp*ic*isc*ip*in*, usb:v0CCDp0099d*dc*dsc*dp*ic*isc*ip*in*, usb:v0CCDp0097d*dc*dsc*dp*ic*isc*ip*in*, usb:v07CAp815Ad*dc*dsc*dp*ic*isc*ip*in*, usb:v1B80pE39Ad*dc*dsc*dp*ic*isc*ip*in*, usb:v1B80pE383d*dc*dsc*dp*ic*isc*ip*in*, usb:v0413p6A04d*dc*dsc*dp*ic*isc*ip*in*, usb:v1B80pE402d*dc*dsc*dp*ic*isc*ip*in*, usb:v1B80pE39Dd*dc*dsc*dp*ic*isc*ip*in*, usb:v1B80pC161d*dc*dsc*dp*ic*isc*ip*in*, usb:v1B80pE400d*dc*dsc*dp*ic*isc*ip*in*, usb:v0458p4012d*dc*dsc*dp*ic*isc*ip*in*, usb:v1B80pC810d*dc*dsc*dp*ic*isc*ip*in*, usb:v1B80pE397d*dc*dsc*dp*ic*isc*ip*in*, usb:v07CApA805d*dc*dsc*dp*ic*isc*ip*in*, usb:v07CAp850Ad*dc*dsc*dp*ic*isc*ip*in*, usb:v15A4p901Bd*dc*dsc*dp*ic*isc*ip*in*, usb:v1B80pE395d*dc*dsc*dp*ic*isc*ip*in*, usb:v1B80pE39Bd*dc*dsc*dp*ic*isc*ip*in*, usb:v1B80pE396d*dc*dsc*dp*ic*isc*ip*in*, usb:v1462p8807d*dc*dsc*dp*ic*isc*ip*in*, usb:v07CApA309d*dc*dsc*dp*ic*isc*ip*in*, usb:v10B9p8000d*dc*dsc*dp*ic*isc*ip*in*, usb:v07CAp8150d*dc*dsc*dp*ic*isc*ip*in*, usb:v1462p8801d*dc*dsc*dp*ic*isc*ip*in*, usb:v1AE7p0381d*dc*dsc*dp*ic*isc*ip*in*, usb:v07CApA815d*dc*dsc*dp*ic*isc*ip*in*, usb:v1B80pC160d*dc*dsc*dp*ic*isc*ip*in*, usb:v0CCDp0069d*dc*dsc*dp*ic*isc*ip*in*, usb:v13D3p3237d*dc*dsc*dp*ic*isc*ip*in*, usb:v13D3p3226d*dc*dsc*dp*ic*isc*ip*in*, usb:v1B80pE399d*dc*dsc*dp*ic*isc*ip*in*, usb:v2304p022Bd*dc*dsc*dp*ic*isc*ip*in*, usb:v0413p6029d*dc*dsc*dp*ic*isc*ip*in*, usb:v15A4p9016d*dc*dsc*dp*ic*isc*ip*in*, usb:v15A4p9015d*dc*dsc*dp*ic*isc*ip*in*), p54pci(pci:v00001260d0000FFFFsv*sd*bc*sc*i*, pci:v00001260d00003886sv*sd*bc*sc*i*, pci:v00001260d00003877sv*sd*bc*sc*i*, pci:v000010B7d00006001sv*sd*bc*sc*i*, pci:v00001260d00003890sv*sd*bc*sc*i*), p54usb(usb:v413Cp8104d*dc*dsc*dp*ic*isc*ip*in*, usb:v413Cp8102d*dc*dsc*dp*ic*isc*ip*in*, usb:v413Cp5513d*dc*dsc*dp*ic*isc*ip*in*, usb:v2001p3705d*dc*dsc*dp*ic*isc*ip*in*, usb:v2001p3704d*dc*dsc*dp*ic*isc*ip*in*, usb:v1740p1000d*dc*dsc*dp*ic*isc*ip*in*, usb:v1668p1050d*dc*dsc*dp*ic*isc*ip*in*, usb:v1435p0427d*dc*dsc*dp*ic*isc*ip*in*, usb:v1413p5400d*dc*dsc*dp*ic*isc*ip*in*, usb:v13B1p000Cd*dc*dsc*dp*ic*isc*ip*in*, usb:v13B1p000Ad*dc*dsc*dp*ic*isc*ip*in*, usb:v1260pEE22d*dc*dsc*dp*ic*isc*ip*in*, usb:v124Ap4025d*dc*dsc*dp*ic*isc*ip*in*, usb:v0D8Ep3762d*dc*dsc*dp*ic*isc*ip*in*, usb:v0CDEp0015d*dc*dsc*dp*ic*isc*ip*in*, usb:v0CDEp0008d*dc*dsc*dp*ic*isc*ip*in*, usb:v0BF8p1009d*dc*dsc*dp*ic*isc*ip*in*, usb:v0BAFp0118d*dc*dsc*dp*ic*isc*ip*in*, usb:v0915p2002d*dc*dsc*dp*ic*isc*ip*in*, usb:v0915p2000d*dc*dsc*dp*ic*isc*ip*in*, usb:v0846p4240d*dc*dsc*dp*ic*isc*ip*in*, usb:v083ApF503d*dc*dsc*dp*ic*isc*ip*in*, usb:v083ApC501d*dc*dsc*dp*ic*isc*ip*in*, usb:v083Ap4531d*dc*dsc*dp*ic*isc*ip*in*, usb:v083Ap4521d*dc*dsc*dp*ic*isc*ip*in*, usb:v0803p4310d*dc*dsc*dp*ic*isc*ip*in*, usb:v07AAp0020d*dc*dsc*dp*ic*isc*ip*in*, usb:v0707pEE13d*dc*dsc*dp*ic*isc*ip*in*, usb:v06B9p0121d*dc*dsc*dp*ic*isc*ip*in*, usb:v06A9p000Ed*dc*dsc*dp*ic*isc*ip*in*, usb:v0572p2002d*dc*dsc*dp*ic*isc*ip*in*, usb:v0572p2000d*dc*dsc*dp*ic*isc*ip*in*, usb:v050Dp7050d*dc*dsc*dp*ic*isc*ip*in*, usb:v0471p1230d*dc*dsc*dp*ic*isc*ip*in*, usb:v5041p2235d*dc*dsc*dp*ic*isc*ip*in*, usb:v5041p2234d*dc*dsc*dp*ic*isc*ip*in*, usb:v2001p3762d*dc*dsc*dp*ic*isc*ip*in*, usb:v2001p3703d*dc*dsc*dp*ic*isc*ip*in*, usb:v2001p3701d*dc*dsc*dp*ic*isc*ip*in*, usb:v1915p2235d*dc*dsc*dp*ic*isc*ip*in*, usb:v1915p2234d*dc*dsc*dp*ic*isc*ip*in*, usb:v182Dp096Bd*dc*dsc*dp*ic*isc*ip*in*, usb:v1630p0005d*dc*dsc*dp*ic*isc*ip*in*, usb:v15A9p0002d*dc*dsc*dp*ic*isc*ip*in*, usb:v1435p0210d*dc*dsc*dp*ic*isc*ip*in*, usb:v124Ap4023d*dc*dsc*dp*ic*isc*ip*in*, usb:v107Bp55F2d*dc*dsc*dp*ic*isc*ip*in*, usb:v0DB0p6826d*dc*dsc*dp*ic*isc*ip*in*, usb:v0CDEp0006d*dc*dsc*dp*ic*isc*ip*in*, usb:v0BF8p1007d*dc*dsc*dp*ic*isc*ip*in*, usb:v09AAp1000d*dc*dsc*dp*ic*isc*ip*in*, usb:v0846p4220d*dc*dsc*dp*ic*isc*ip*in*, usb:v0846p4210d*dc*dsc*dp*ic*isc*ip*in*, usb:v0846p4200d*dc*dsc*dp*ic*isc*ip*in*, usb:v083Ap5501d*dc*dsc*dp*ic*isc*ip*in*, usb:v083Ap4502d*dc*dsc*dp*ic*isc*ip*in*, usb:v083Ap4501d*dc*dsc*dp*ic*isc*ip*in*, usb:v07AAp001Cd*dc*dsc*dp*ic*isc*ip*in*, usb:v0707pEE06d*dc*dsc*dp*ic*isc*ip*in*, usb:v06B9p0120d*dc*dsc*dp*ic*isc*ip*in*, usb:v0675p0530d*dc*dsc*dp*ic*isc*ip*in*, usb:v0506p0A11d*dc*dsc*dp*ic*isc*ip*in*, usb:v045Ep00C2d*dc*dsc*dp*ic*isc*ip*in*, usb:v0411p0050d*dc*dsc*dp*ic*isc*ip*in*, usb:v413Cp8104d*dc*dsc*dp*ic*isc*ip*in*, usb:v413Cp8102d*dc*dsc*dp*ic*isc*ip*in*, usb:v413Cp5513d*dc*dsc*dp*ic*isc*ip*in*, usb:v2001p3705d*dc*dsc*dp*ic*isc*ip*in*, usb:v2001p3704d*dc*dsc*dp*ic*isc*ip*in*, usb:v1740p1000d*dc*dsc*dp*ic*isc*ip*in*, usb:v1668p1050d*dc*dsc*dp*ic*isc*ip*in*, usb:v1435p0427d*dc*dsc*dp*ic*isc*ip*in*, usb:v1413p5400d*dc*dsc*dp*ic*isc*ip*in*, usb:v13B1p000Cd*dc*dsc*dp*ic*isc*ip*in*, usb:v13B1p000Ad*dc*dsc*dp*ic*isc*ip*in*, usb:v1260pEE22d*dc*dsc*dp*ic*isc*ip*in*, usb:v124Ap4025d*dc*dsc*dp*ic*isc*ip*in*, usb:v0D8Ep3762d*dc*dsc*dp*ic*isc*ip*in*, usb:v0CDEp0015d*dc*dsc*dp*ic*isc*ip*in*, usb:v0CDEp0008d*dc*dsc*dp*ic*isc*ip*in*, usb:v0BF8p1009d*dc*dsc*dp*ic*isc*ip*in*, usb:v0BAFp0118d*dc*dsc*dp*ic*isc*ip*in*, usb:v0915p2002d*dc*dsc*dp*ic*isc*ip*in*, usb:v0915p2000d*dc*dsc*dp*ic*isc*ip*in*, usb:v0846p4240d*dc*dsc*dp*ic*isc*ip*in*, usb:v083ApF503d*dc*dsc*dp*ic*isc*ip*in*, usb:v083ApC501d*dc*dsc*dp*ic*isc*ip*in*, usb:v083Ap4531d*dc*dsc*dp*ic*isc*ip*in*, usb:v083Ap4521d*dc*dsc*dp*ic*isc*ip*in*, usb:v0803p4310d*dc*dsc*dp*ic*isc*ip*in*, usb:v07AAp0020d*dc*dsc*dp*ic*isc*ip*in*, usb:v0707pEE13d*dc*dsc*dp*ic*isc*ip*in*, usb:v06B9p0121d*dc*dsc*dp*ic*isc*ip*in*, usb:v06A9p000Ed*dc*dsc*dp*ic*isc*ip*in*, usb:v0572p2002d*dc*dsc*dp*ic*isc*ip*in*, usb:v0572p2000d*dc*dsc*dp*ic*isc*ip*in*, usb:v050Dp7050d*dc*dsc*dp*ic*isc*ip*in*, usb:v0471p1230d*dc*dsc*dp*ic*isc*ip*in*, usb:v5041p2235d*dc*dsc*dp*ic*isc*ip*in*, usb:v5041p2234d*dc*dsc*dp*ic*isc*ip*in*, usb:v2001p3762d*dc*dsc*dp*ic*isc*ip*in*, usb:v2001p3703d*dc*dsc*dp*ic*isc*ip*in*, usb:v2001p3701d*dc*dsc*dp*ic*isc*ip*in*, usb:v1915p2235d*dc*dsc*dp*ic*isc*ip*in*, usb:v1915p2234d*dc*dsc*dp*ic*isc*ip*in*, usb:v182Dp096Bd*dc*dsc*dp*ic*isc*ip*in*, usb:v1630p0005d*dc*dsc*dp*ic*isc*ip*in*, usb:v15A9p0002d*dc*dsc*dp*ic*isc*ip*in*, usb:v1435p0210d*dc*dsc*dp*ic*isc*ip*in*, usb:v124Ap4023d*dc*dsc*dp*ic*isc*ip*in*, usb:v107Bp55F2d*dc*dsc*dp*ic*isc*ip*in*, usb:v0DB0p6826d*dc*dsc*dp*ic*isc*ip*in*, usb:v0CDEp0006d*dc*dsc*dp*ic*isc*ip*in*, usb:v0BF8p1007d*dc*dsc*dp*ic*isc*ip*in*, usb:v09AAp1000d*dc*dsc*dp*ic*isc*ip*in*, usb:v0846p4220d*dc*dsc*dp*ic*isc*ip*in*, usb:v0846p4210d*dc*dsc*dp*ic*isc*ip*in*, usb:v0846p4200d*dc*dsc*dp*ic*isc*ip*in*, usb:v083Ap5501d*dc*dsc*dp*ic*isc*ip*in*, usb:v083Ap4502d*dc*dsc*dp*ic*isc*ip*in*, usb:v083Ap4501d*dc*dsc*dp*ic*isc*ip*in*, usb:v07AAp001Cd*dc*dsc*dp*ic*isc*ip*in*, usb:v0707pEE06d*dc*dsc*dp*ic*isc*ip*in*, usb:v06B9p0120d*dc*dsc*dp*ic*isc*ip*in*, usb:v0675p0530d*dc*dsc*dp*ic*isc*ip*in*, usb:v0506p0A11d*dc*dsc*dp*ic*isc*ip*in*, usb:v045Ep00C2d*dc*dsc*dp*ic*isc*ip*in*, usb:v0411p0050d*dc*dsc*dp*ic*isc*ip*in*)
+Description-md5: 856ad6fa1547f2b2a3005ee38911321a
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+Supported: 9m
+
+Package: lubuntu-restricted-extras
+Priority: optional
+Section: multiverse/metapackages
+Installed-Size: 30
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Source: ubuntu-restricted-extras
+Version: 60.1
+Depends: ubuntu-restricted-extras
+Filename: pool/multiverse/u/ubuntu-restricted-extras/lubuntu-restricted-extras_60.1_all.deb
+Size: 1536
+MD5sum: bcccea6182a048f1a2929c04ca820590
+SHA1: 4df486d97e46b614180a0c84dfea067f1d984d11
+SHA256: cf6becd37dfcaeb6478eec8b03cadc1ed64f156330dce0fc7664c628306cb93a
+Description: Commonly used restricted packages (transitional package)
+Description-md5: 371f46e801f843ed03ddd9e04487f5a8
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: mytharchive
+Priority: optional
+Section: multiverse/graphics
+Installed-Size: 18273
+Maintainer: MythTV Ubuntu Maintainers <ubuntu-mythtv@lists.ubuntu.com>
+Architecture: i386
+Source: mythtv
+Version: 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3
+Replaces: mytharchive-data
+Depends: mythtv-transcode-utils (>= 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3), mythtv-frontend (>= 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3), mjpegtools, dvdauthor, genisoimage, dvd+rw-tools, python, python-imaging, python-mysqldb, libc6 (>= 2.11), libgcc1 (>= 1:4.1.1), libmyth-0.27-0 (>= 2:0.27.0+fixes.20140324.8ee257c), libqt4-sql (>= 4:4.5.3), libqt4-xml (>= 4:4.5.3), libqtcore4 (>= 4:4.8.0), libqtgui4 (>= 4:4.5.3), libstdc++6 (>= 4.1.1), zlib1g (>= 1:1.1.4)
+Recommends: m2vrequantiser
+Suggests: transcode, project-x
+Conflicts: mytharchive-data
+Filename: pool/multiverse/m/mythtv/mytharchive_0.27.0+fixes.20140324.8ee257c-0ubuntu3_i386.deb
+Size: 12075218
+MD5sum: 93836209f827526b42db5bdcca10cfc2
+SHA1: 61713b5b0788a6a61769f490f24ee47ab0ad85bd
+SHA256: 29889c7134b9e76fc0071e98b126f9b3ca05ada809bcce2800d6401412b0ffdc
+Description: create and burn DVD's from MythTV - binary file
+Homepage: http://www.mythtv.org
+Description-md5: e5e7e6b2e6a78544ce0f8630283b7970
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: mythbrowser
+Priority: optional
+Section: multiverse/graphics
+Installed-Size: 411
+Maintainer: MythTV Ubuntu Maintainers <ubuntu-mythtv@lists.ubuntu.com>
+Architecture: i386
+Source: mythtv
+Version: 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3
+Depends: mythtv-frontend (>= 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3), libc6 (>= 2.1.3), libgcc1 (>= 1:4.1.1), libmyth-0.27-0 (>= 2:0.27.0+fixes.20140324.8ee257c), libqt4-sql (>= 4:4.5.3), libqtcore4 (>= 4:4.7.0~beta1), libqtgui4 (>= 4:4.5.3), libstdc++6 (>= 4.1.1)
+Filename: pool/multiverse/m/mythtv/mythbrowser_0.27.0+fixes.20140324.8ee257c-0ubuntu3_i386.deb
+Size: 71104
+MD5sum: ee7851b711590a85bc6226d223f18923
+SHA1: 82c5b8d7f2fb3533f6a6cc4b80b74942b8e1a814
+SHA256: e38f9f2f91f2b5f4a8c78b1774a96a5f4bb674f9557b2290902fc5793c4f44ee
+Description: A web browser for MythTV
+Homepage: http://www.mythtv.org
+Description-md5: 778c569445bd55a1342d53b833894a61
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: mythgallery
+Priority: optional
+Section: multiverse/graphics
+Installed-Size: 932
+Maintainer: MythTV Ubuntu Maintainers <ubuntu-mythtv@lists.ubuntu.com>
+Architecture: i386
+Source: mythtv
+Version: 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3
+Depends: mythtv-frontend (>= 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3), libc6 (>= 2.4), libexif12, libgcc1 (>= 1:4.1.1), libgl1-mesa-glx | libgl1, libmyth-0.27-0 (>= 2:0.27.0+fixes.20140324.8ee257c), libqt4-opengl (>= 4:4.5.3), libqt4-sql (>= 4:4.5.3), libqtcore4 (>= 4:4.7.0~beta1), libqtgui4 (>= 4:4.5.3), libstdc++6 (>= 4.1.1)
+Filename: pool/multiverse/m/mythtv/mythgallery_0.27.0+fixes.20140324.8ee257c-0ubuntu3_i386.deb
+Size: 199824
+MD5sum: 9fccd6dcb48360d4964fbdb6fd7a81a3
+SHA1: 8daa88c36f8e5e361239c0cfcd58e9312deaae28
+SHA256: d01e890084e7d8dd128d9ea2acd43761bd86954622dbc0928f3d6d40e3f67f97
+Description: Image gallery/slideshow add-on module for MythTV
+Homepage: http://www.mythtv.org
+Description-md5: fec0a2ce379068f827fb4f32126d4bd8
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+Supported: 9m
+Task: mythbuntu-frontend, mythbuntu-desktop, mythbuntu-backend-slave, mythbuntu-backend-master
+
+Package: mythgame
+Priority: optional
+Section: multiverse/graphics
+Installed-Size: 862
+Maintainer: MythTV Ubuntu Maintainers <ubuntu-mythtv@lists.ubuntu.com>
+Architecture: i386
+Source: mythtv
+Version: 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3
+Depends: mythtv-frontend (>= 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3), python, libc6 (>= 2.4), libgcc1 (>= 1:4.1.1), libmyth-0.27-0 (>= 2:0.27.0+fixes.20140324.8ee257c), libqt4-sql (>= 4:4.5.3), libqtcore4 (>= 4:4.7.0~beta1), libqtgui4 (>= 4:4.5.3), libstdc++6 (>= 4.1.1), zlib1g (>= 1:1.1.4)
+Filename: pool/multiverse/m/mythtv/mythgame_0.27.0+fixes.20140324.8ee257c-0ubuntu3_i386.deb
+Size: 164690
+MD5sum: 5386fee48d148c2627f7b1541e2346d2
+SHA1: c557939799dc169b4603334d01061b2bfe4db395
+SHA256: 39e10ea3dd6c4864ce0c76ea57ceba0d108916273f913803a7865fbe47083d15
+Description: Emulator & PC Game frontend module for MythTV
+Homepage: http://www.mythtv.org
+Description-md5: 651467626e6c8fb63c90ba608648de17
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: mythmusic
+Priority: extra
+Section: multiverse/sound
+Installed-Size: 3790
+Maintainer: MythTV Ubuntu Maintainers <ubuntu-mythtv@lists.ubuntu.com>
+Architecture: i386
+Source: mythtv
+Version: 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3
+Depends: mythtv-frontend (>= 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3), libc6 (>= 2.4), libcdio-cdda1 (>= 0.83), libcdio-paranoia1 (>= 0.83), libcdio13 (>= 0.83), libfftw3-double3, libflac8 (>= 1.3.0), libgcc1 (>= 1:4.1.1), libmp3lame0, libmyth-0.27-0 (>= 2:0.27.0+fixes.20140324.8ee257c), libogg0 (>= 1.0rc3), libqt4-network (>= 4:4.5.3), libqt4-sql (>= 4:4.5.3), libqt4-xml (>= 4:4.5.3), libqtcore4 (>= 4:4.7.0~beta1), libqtgui4 (>= 4:4.5.3), libstdc++6 (>= 4.1.1), libvorbis0a (>= 1.1.2), libvorbisenc2 (>= 1.1.2)
+Filename: pool/multiverse/m/mythtv/mythmusic_0.27.0+fixes.20140324.8ee257c-0ubuntu3_i386.deb
+Size: 1069788
+MD5sum: d63acf155cdc3ed24007e2582076e201
+SHA1: f2525794172e71cdd5e885ebb5646e04fcfa3e0f
+SHA256: 12e7233ae07a23a0a37033824bd0844477d6408e20db0a06a77f15cfc5700a42
+Description: Music add-on module for MythTV
+Homepage: http://www.mythtv.org
+Description-md5: 934232dd58c42a6e29a6f5e799fd49b5
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+Supported: 9m
+Task: mythbuntu-frontend, mythbuntu-desktop, mythbuntu-backend-slave, mythbuntu-backend-master
+
+Package: mythnetvision
+Priority: optional
+Section: multiverse/graphics
+Installed-Size: 16830
+Maintainer: MythTV Ubuntu Maintainers <ubuntu-mythtv@lists.ubuntu.com>
+Architecture: i386
+Source: mythtv
+Version: 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3
+Depends: mythtv-frontend (>= 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3), mythbrowser (>= 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3), python-feedparser, python-pycurl, libc6 (>= 2.3.6-6~), libgcc1 (>= 1:4.1.1), libmyth-0.27-0 (>= 2:0.27.0+fixes.20140324.8ee257c), libqt4-network (>= 4:4.5.3), libqt4-sql (>= 4:4.5.3), libqt4-xml (>= 4:4.5.3), libqtcore4 (>= 4:4.8.0), libqtgui4 (>= 4:4.5.3), libstdc++6 (>= 4.1.1)
+Recommends: flashplugin-installer | adobe-flashplugin
+Filename: pool/multiverse/m/mythtv/mythnetvision_0.27.0+fixes.20140324.8ee257c-0ubuntu3_i386.deb
+Size: 14770854
+MD5sum: 5effad31d9bd16151e5e3e3de7847121
+SHA1: cc246e294092a238a5245038e9fc3a9af115b4c0
+SHA256: 86fd2be99571f08d297f6647438267d34805852d9b9e3b3f8288d8b1691d5284
+Description: A Internet Video Player plugin for MythTV
+Homepage: http://www.mythtv.org
+Description-md5: 45c60f5031add4d5409d92f660906d0d
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: mythnews
+Priority: optional
+Section: multiverse/graphics
+Installed-Size: 475
+Maintainer: MythTV Ubuntu Maintainers <ubuntu-mythtv@lists.ubuntu.com>
+Architecture: i386
+Source: mythtv
+Version: 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3
+Depends: mythtv-frontend (>= 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3), libc6 (>= 2.1.3), libgcc1 (>= 1:4.1.1), libmyth-0.27-0 (>= 2:0.27.0+fixes.20140324.8ee257c), libqt4-sql (>= 4:4.5.3), libqt4-xml (>= 4:4.5.3), libqtcore4 (>= 4:4.7.0~beta1), libstdc++6 (>= 4.1.1)
+Filename: pool/multiverse/m/mythtv/mythnews_0.27.0+fixes.20140324.8ee257c-0ubuntu3_i386.deb
+Size: 84786
+MD5sum: b8d45a937ee4f5af6404744918f5c903
+SHA1: 721bfcea732eff554d2008fe246655748e38bf6f
+SHA256: aa71c940679da8dda5569b1974901577627178fd5b63f539c2e9b43e9e707214
+Description: An RSS feed news reader module for MythTV
+Homepage: http://www.mythtv.org
+Description-md5: 4768e7f8feaf7629b36031e4fccbb33b
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: mythplugins
+Priority: optional
+Section: multiverse/graphics
+Installed-Size: 98
+Maintainer: MythTV Ubuntu Maintainers <ubuntu-mythtv@lists.ubuntu.com>
+Architecture: all
+Source: mythtv
+Version: 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3
+Replaces: mythmovies
+Depends: mythgallery, mythgame, mythmusic, mythnews, mythweather, mythweb, mytharchive, mythbrowser, mythnetvision
+Conflicts: mythflix, mythmovies
+Filename: pool/multiverse/m/mythtv/mythplugins_0.27.0+fixes.20140324.8ee257c-0ubuntu3_all.deb
+Size: 2446
+MD5sum: 5fcc36e8cebcab99053657e0c30d09c0
+SHA1: 2f6b48282b77a144cc5b697804fe7b528b78333d
+SHA256: 5e4827dc41db5888d7db78b74268ae7eba37a25e0bd5927de6867258f7d0f72f
+Description: Metapackage package for MythTV plugins
+Homepage: http://www.mythtv.org
+Description-md5: 0696eb742b526df2cc968b97eaf51c2f
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: mythtv
+Priority: optional
+Section: multiverse/graphics
+Installed-Size: 102
+Maintainer: MythTV Ubuntu Maintainers <ubuntu-mythtv@lists.ubuntu.com>
+Architecture: all
+Version: 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3
+Depends: mysql-server, mythtv-database, mythtv-frontend, mythtv-backend, ntp | time-daemon | ntp-simple
+Suggests: mythtv-doc
+Filename: pool/multiverse/m/mythtv/mythtv_0.27.0+fixes.20140324.8ee257c-0ubuntu3_all.deb
+Size: 4336
+MD5sum: 913de10c8bf662aee0b81cb6f697cf49
+SHA1: 50c18322de7233320e5638a1d8634301434d5dde
+SHA256: a9ef2d2afa29583ea7addcc267acd3aeb7ba110620bbccef205ffc3a28850247
+Description: Personal video recorder application (client and server)
+Homepage: http://www.mythtv.org
+Description-md5: 77aed03ad4cb0784d4f4419ecd330758
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+Supported: 9m
+Task: mythbuntu-frontend, mythbuntu-desktop, mythbuntu-backend-slave, mythbuntu-backend-master
+
+Package: mythtv-backend
+Priority: optional
+Section: multiverse/graphics
+Installed-Size: 4885
+Maintainer: MythTV Ubuntu Maintainers <ubuntu-mythtv@lists.ubuntu.com>
+Architecture: i386
+Source: mythtv
+Version: 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3
+Replaces: mythtv (<< 0.8-1), mythtv-frontend (<= 0.20-0.4)
+Depends: mythtv-common, mythtv-transcode-utils, libc6 (>= 2.15), libgcc1 (>= 1:4.1.1), libmyth-0.27-0 (>= 2:0.27.0+fixes.20140324.8ee257c), libqt4-network (>= 4:4.5.3), libqt4-script (>= 4:4.5.3), libqt4-sql (>= 4:4.5.3), libqt4-xml (>= 4:4.5.3), libqtcore4 (>= 4:4.8.0), libqtgui4 (>= 4:4.5.3), libstdc++6 (>= 4.6), cron, wget, zenity | kdebase-bin, gksu | kdebase-bin, xterm, python, sysv-rc (>= 2.88dsf-24) | file-rc (>= 0.8.16)
+Recommends: ntp | time-daemon | ntp-simple, logrotate, libmyth-python, libmythtv-perl
+Suggests: mythtv-frontend, mythweb, mythtv-database, xmltv-util
+Conflicts: mythtv (<< 0.8-1)
+Filename: pool/multiverse/m/mythtv/mythtv-backend_0.27.0+fixes.20140324.8ee257c-0ubuntu3_i386.deb
+Size: 1177672
+MD5sum: a2da5ec30b1047a6845f234cb6beb21c
+SHA1: ba889f9d34e652c8f2a72c5caf106443be38ab17
+SHA256: ee76d25b2c93476eebdd068d2e83f49fc033dc672f14283cc6458363aea7bc3f
+Description: Personal video recorder application (server)
+Homepage: http://www.mythtv.org
+Description-md5: 4189ea20703eb6b6e6312c0b94ed00e2
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+Supported: 9m
+Task: mythbuntu-frontend, mythbuntu-desktop, mythbuntu-backend-slave, mythbuntu-backend-slave, mythbuntu-backend-master, mythbuntu-backend-master
+
+Package: mythtv-backend-master
+Priority: optional
+Section: multiverse/metapackages
+Installed-Size: 98
+Maintainer: MythTV Ubuntu Maintainers <ubuntu-mythtv@lists.ubuntu.com>
+Architecture: all
+Source: mythtv
+Version: 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3
+Depends: mysql-server, ntp | time-daemon | ntp-simple, mythtv-database, mythtv-backend
+Recommends: mythweb
+Filename: pool/multiverse/m/mythtv/mythtv-backend-master_0.27.0+fixes.20140324.8ee257c-0ubuntu3_all.deb
+Size: 2630
+MD5sum: 214a1dd5f2220678fabf652a125ec10f
+SHA1: 785f0ce20f18cfebbe4ff8e0652a78a6335571b2
+SHA256: 861ef42aed18859785e01ae02834f3f92fd86351390b93df027b1bfc7c122e26
+Description: Metapackage to setup and configure a "Master Backend" profile of MythTV.
+Homepage: http://www.mythtv.org
+Description-md5: 15418a8fc285e4bfbc2fc2b519a118fd
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+Supported: 9m
+Task: mythbuntu-frontend, mythbuntu-desktop, mythbuntu-backend-slave, mythbuntu-backend-master, mythbuntu-backend-master
+
+Package: mythtv-common
+Priority: optional
+Section: multiverse/graphics
+Installed-Size: 19291
+Maintainer: MythTV Ubuntu Maintainers <ubuntu-mythtv@lists.ubuntu.com>
+Architecture: i386
+Source: mythtv
+Version: 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3
+Replaces: mythcontrols, mythmusic (<< 0.20.99+trunk14393), mythtv (<< 0.8-1), mythtv-backend (<< 1:0.24.0+fixes27252), mythtv-database (<< 0.24.0~trunk25638), mythtv-frontend (<< 0.23.0~trunk23548), mythtv-theme-gray-osd, mythtv-theme-isthmus, mythtv-theme-mythcenter, mythtv-theme-mythcenter-wide, mythvideo, mythweather (<< 0.20.99+trunk14393)
+Depends: pwgen, adduser, mysql-client, fonts-liberation | ttf-liberation, fonts-droid | ttf-droid, ttf-dejavu, fonts-tlwg-purisa, python, libxml-xpath-perl, libc6 (>= 2.4), libgcc1 (>= 1:4.1.1), libmyth-0.27-0 (>= 2:0.27.0+fixes.20140324.8ee257c), libqt4-network (>= 4:4.5.3), libqt4-sql (>= 4:4.5.3), libqt4-xml (>= 4:4.5.3), libqtcore4 (>= 4:4.8.0), libsdl1.2debian (>= 1.2.11), libstdc++6 (>= 4.1.1), debconf (>= 0.5) | debconf-2.0
+Recommends: mythtv-dbg
+Suggests: mythtv-doc
+Conflicts: mythcontrols, mythmusic (<< 0.20.99+trunk14393), mythtv (<< 0.8-1), mythtv-theme-blootube, mythtv-theme-blootube-wide, mythtv-theme-blootubelite-wide, mythtv-theme-childish, mythtv-theme-glass-wide, mythtv-theme-gray-osd, mythtv-theme-isthmus, mythtv-theme-iulius, mythtv-theme-metallurgy, mythtv-theme-minimalist-wide, mythtv-theme-mythcenter, mythtv-theme-mythcenter-wide, mythtv-theme-neon-wide, mythtv-theme-proejctgrayhem-wide, mythtv-theme-projectgrayhem, mythtv-theme-retro, mythtv-theme-titivillus, mythtv-themes, mythweather (<< 0.20.99+trunk14393)
+Breaks: mythtv-backend (<< 1:0.24.0+fixes27252), mythvideo
+Filename: pool/multiverse/m/mythtv/mythtv-common_0.27.0+fixes.20140324.8ee257c-0ubuntu3_i386.deb
+Size: 13252076
+MD5sum: c7de28a90933a755351e48a1ff6d47a7
+SHA1: 7cb720c41ede79f969b072f28a9cd0beefba5985
+SHA256: 22364a94fd9feb2d40f9a37c7319e0f7f3ca66acde6b183740a3ca097eb3db3d
+Description: Personal video recorder application (common data)
+Homepage: http://www.mythtv.org
+Description-md5: 640961451383b4431ededb3d21a6bfae
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+Supported: 9m
+Task: mythbuntu-frontend, mythbuntu-frontend, mythbuntu-desktop, mythbuntu-backend-slave, mythbuntu-backend-slave, mythbuntu-backend-master, mythbuntu-backend-master
+
+Package: mythtv-database
+Priority: optional
+Section: multiverse/graphics
+Installed-Size: 310
+Maintainer: MythTV Ubuntu Maintainers <ubuntu-mythtv@lists.ubuntu.com>
+Architecture: all
+Source: mythtv
+Version: 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3
+Replaces: mythtv (<< 0.8-1), mythtv-common (<< 0.8-2)
+Depends: mythtv-common, libdbd-mysql-perl, mysql-client, cron, debconf (>= 0.5) | debconf-2.0
+Recommends: update-notifier | update-notifier-kde
+Conflicts: mythtv (<< 0.8-1), mythtv-common (<< 0.8-2)
+Filename: pool/multiverse/m/mythtv/mythtv-database_0.27.0+fixes.20140324.8ee257c-0ubuntu3_all.deb
+Size: 31216
+MD5sum: 9983b012c1a09e20893c096afe885d39
+SHA1: 4ed627de0c121314a4a110e1fedc7dc8c3909e45
+SHA256: ec225cb1e5697c52a09d685b31351edf2d97c92a6c6d544f210f592e8c015b9d
+Description: Personal video recorder application (database)
+Homepage: http://www.mythtv.org
+Description-md5: d429ba7da095dc6f790bc512157b773d
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+Supported: 9m
+Task: mythbuntu-frontend, mythbuntu-desktop, mythbuntu-backend-slave, mythbuntu-backend-master, mythbuntu-backend-master
+
+Package: mythtv-dbg
+Priority: optional
+Section: multiverse/debug
+Installed-Size: 190254
+Maintainer: MythTV Ubuntu Maintainers <ubuntu-mythtv@lists.ubuntu.com>
+Architecture: i386
+Source: mythtv
+Version: 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3
+Replaces: mythplugins-dbg
+Depends: mythtv-backend (= 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3) | mythtv-frontend (= 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3)
+Recommends: libc6-dbg
+Conflicts: mythplugins-dbg
+Filename: pool/multiverse/m/mythtv/mythtv-dbg_0.27.0+fixes.20140324.8ee257c-0ubuntu3_i386.deb
+Size: 42236648
+MD5sum: 634fa7498af3555245ca8e3160401421
+SHA1: 2fcfec6043fc4cf27e4418c92643eec4403aece5
+SHA256: 23856ad4efb3c34bca1ec39aba06301c0ee18aaad9881ace761340156c64a5b2
+Description: Debug symbols for mythtv packages
+Homepage: http://www.mythtv.org
+Description-md5: b75efe12f9262ea1392215c42915eaab
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+Supported: 9m
+Task: mythbuntu-frontend, mythbuntu-frontend, mythbuntu-desktop, mythbuntu-backend-slave, mythbuntu-backend-slave, mythbuntu-backend-master, mythbuntu-backend-master
+
+Package: mythtv-doc
+Priority: optional
+Section: multiverse/graphics
+Installed-Size: 131
+Maintainer: MythTV Ubuntu Maintainers <ubuntu-mythtv@lists.ubuntu.com>
+Architecture: all
+Source: mythtv
+Version: 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3
+Replaces: mythtv (<< 0.8-1)
+Conflicts: mythtv (<< 0.8-1)
+Filename: pool/multiverse/m/mythtv/mythtv-doc_0.27.0+fixes.20140324.8ee257c-0ubuntu3_all.deb
+Size: 19522
+MD5sum: 76666eb546d49df62b12aece9f85a5f0
+SHA1: f320b2abe940e9194ce809ba250bc028f806bf6b
+SHA256: 5d9f45eae371407c6995bc1df90d91df7440d86fc56beba0ba9068a671952844
+Description: Personal video recorder application (documentation)
+Homepage: http://www.mythtv.org
+Description-md5: ef41b4ebcb6de4017bb501ecaedbec0d
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: mythtv-frontend
+Priority: optional
+Section: multiverse/graphics
+Installed-Size: 15819
+Maintainer: MythTV Ubuntu Maintainers <ubuntu-mythtv@lists.ubuntu.com>
+Architecture: i386
+Source: mythtv
+Version: 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3
+Replaces: mythappearance (<< 0.21.0), mythtv (<< 0.8-1), mythvideo
+Depends: mythtv-common, libc6 (>= 2.4), libgcc1 (>= 1:4.1.1), libmyth-0.27-0 (>= 2:0.27.0+fixes.20140324.8ee257c), libqt4-dbus (>= 4:4.5.3), libqt4-network (>= 4:4.5.3), libqt4-sql (>= 4:4.5.3), libqt4-xml (>= 4:4.5.3), libqtcore4 (>= 4:4.8.0), libqtgui4 (>= 4:4.5.3), libstdc++6 (>= 4.6), debconf (>= 0.5) | debconf-2.0, libnotify-bin, adduser, zenity | kdebase-bin, gksu | kdebase-bin, wmctrl, libxml-simple-perl, libwww-perl, libmyth-python, transcode, python, python-imdbpy
+Recommends: libmythtv-perl, python-imaging
+Suggests: mythtv-backend, mythmusic, mythweather, mythgallery, mythgame, ntp | time-daemon | ntp-simple
+Conflicts: mythappearance (<< 0.21.0), mythflix (<< 0.23.0), mythstream (<< 0.21.0), mythtv (<< 0.8-1)
+Breaks: mythvideo
+Filename: pool/multiverse/m/mythtv/mythtv-frontend_0.27.0+fixes.20140324.8ee257c-0ubuntu3_i386.deb
+Size: 2636238
+MD5sum: 5e1c75bc9b0d5110742daa57d3a53b54
+SHA1: 40e4ab98dffda025a17353aa4326dbe28cd8d87f
+SHA256: dfd4ccf730d119eb5ed558b3f56539e971115200816afd81a3c96b9471fdcd8e
+Description: Personal video recorder application (client)
+Homepage: http://www.mythtv.org
+Description-md5: 54d82fe5a446b4538080182b32c34d51
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+Supported: 9m
+Task: mythbuntu-frontend, mythbuntu-frontend, mythbuntu-desktop, mythbuntu-backend-slave, mythbuntu-backend-master
+
+Package: mythtv-theme-mythbuntu
+Priority: optional
+Section: multiverse/x11
+Installed-Size: 24845
+Maintainer: MythTV Ubuntu Maintainers <ubuntu-mythtv@lists.ubuntu.com>
+Architecture: all
+Source: mythtv
+Version: 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3
+Replaces: mythtv-common (<< 1:0.22.0~zrc1-0ubuntu1)
+Depends: mythtv-common, ttf-dejavu
+Filename: pool/multiverse/m/mythtv/mythtv-theme-mythbuntu_0.27.0+fixes.20140324.8ee257c-0ubuntu3_all.deb
+Size: 17639688
+MD5sum: b6564804d9c1c0b310be5e92a2cc5794
+SHA1: 260a1e0ee3122c663eb449257229ef9c2f83e8c5
+SHA256: cbd71548f05512d164ecded2783f4b78803ab6e8887fd927ab798dc39caa6969
+Description: The mythbuntu MythTV Theme
+Homepage: http://www.mythtv.org
+Description-md5: dcafbe0ddc60ef9d4cd6528e6172ed6d
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+Supported: 9m
+Task: mythbuntu-frontend, mythbuntu-desktop, mythbuntu-backend-slave, mythbuntu-backend-master
+
+Package: mythtv-transcode-utils
+Priority: optional
+Section: multiverse/graphics
+Installed-Size: 582
+Maintainer: MythTV Ubuntu Maintainers <ubuntu-mythtv@lists.ubuntu.com>
+Architecture: i386
+Source: mythtv
+Version: 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3
+Replaces: mythtv-backend (<< 0.20.2-0ubuntu1)
+Depends: mythtv-common, libc6 (>= 2.4), libgcc1 (>= 1:4.1.1), libmyth-0.27-0 (>= 2:0.27.0+fixes.20140324.8ee257c), libqt4-sql (>= 4:4.5.3), libqtcore4 (>= 4:4.8.0), libstdc++6 (>= 4.1.1)
+Suggests: mythtv-backend, mytharchive
+Conflicts: mythtv-backend (<< 0.20.2-0ubuntu1)
+Filename: pool/multiverse/m/mythtv/mythtv-transcode-utils_0.27.0+fixes.20140324.8ee257c-0ubuntu3_i386.deb
+Size: 151784
+MD5sum: 30bfef9376f2458c540edfbc9a911ca4
+SHA1: f45beeea50a3790106c49a541452bd14932b4cb3
+SHA256: cfc606e4eb4e072ee402cd819002d5fea337ffbac9a6e78413d47b2c4e3fbd97
+Description: Utilities used for transcoding MythTV tasks
+Homepage: http://www.mythtv.org
+Description-md5: 7e2f8e36412922b733817418892a44e3
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+Supported: 9m
+Task: mythbuntu-frontend, mythbuntu-desktop, mythbuntu-backend-slave, mythbuntu-backend-slave, mythbuntu-backend-master, mythbuntu-backend-master
+
+Package: mythweather
+Priority: optional
+Section: multiverse/graphics
+Installed-Size: 3352
+Maintainer: MythTV Ubuntu Maintainers <ubuntu-mythtv@lists.ubuntu.com>
+Architecture: i386
+Source: mythtv
+Version: 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3
+Replaces: mythtv-common (<< 0.20.99)
+Depends: mythtv-frontend (>= 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3), libc6 (>= 2.1.3), libgcc1 (>= 1:4.1.1), libmyth-0.27-0 (>= 2:0.27.0+fixes.20140324.8ee257c), libqt4-sql (>= 4:4.5.3), libqt4-xml (>= 4:4.5.3), libqtcore4 (>= 4:4.7.0~beta1), libstdc++6 (>= 4.1.1), perl, libimage-size-perl, perlmagick, libxml-parser-perl, libxml-sax-perl, libcarp-clan-perl, libsoap-lite-perl, libdate-manip-perl, libdate-calc-perl, libwww-perl, libxml-simple-perl, libdatetime-format-iso8601-perl, libjson-perl, libxml-xpath-perl
+Conflicts: mythtv-common (<< 0.20.99)
+Filename: pool/multiverse/m/mythtv/mythweather_0.27.0+fixes.20140324.8ee257c-0ubuntu3_i386.deb
+Size: 705970
+MD5sum: 3cb2c4fe3e8f6da8584066749fb1bfa0
+SHA1: 1eedef2eb75c5abbf072a2945ab91d1f5d2fcf5b
+SHA256: dcf0394b14c8a6a3037cb086853b787018538af5fec7eeb596eab2d0a8157365
+Description: Weather add-on module for MythTV
+Homepage: http://www.mythtv.org
+Description-md5: 0ee3d1458b56866d56ec87dc37b10bef
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: mythweb
+Priority: optional
+Section: multiverse/web
+Installed-Size: 4323
+Maintainer: MythTV Ubuntu Maintainers <ubuntu-mythtv@lists.ubuntu.com>
+Architecture: all
+Source: mythtv
+Version: 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3
+Depends: mythtv-common (>= 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3), apache2-mpm-prefork | httpd, php5 | libapache2-mod-php5, php5-mysql, php-mythtv, libhttp-date-perl, debconf (>= 0.5) | debconf-2.0
+Recommends: libmath-round-perl
+Filename: pool/multiverse/m/mythtv/mythweb_0.27.0+fixes.20140324.8ee257c-0ubuntu3_all.deb
+Size: 974614
+MD5sum: 9f36c6f6b66c72bf4dffd48f228ea392
+SHA1: ba67e251d1ad3dcbf60d999942a159c26785e5be
+SHA256: 156b39fc3667a9e37de32f5aabc90539c1b16a3be65e66dffc500270c53243f0
+Description: Web interface add-on module for MythTV
+Homepage: http://www.mythtv.org
+Description-md5: 61dcb33693d887e60efd1242bb775a3f
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+Supported: 9m
+Task: mythbuntu-frontend, mythbuntu-desktop, mythbuntu-backend-slave, mythbuntu-backend-master, mythbuntu-backend-master
+
+Package: mythzoneminder
+Priority: optional
+Section: multiverse/graphics
+Installed-Size: 718
+Maintainer: MythTV Ubuntu Maintainers <ubuntu-mythtv@lists.ubuntu.com>
+Architecture: i386
+Source: mythtv
+Version: 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3
+Depends: mythtv-frontend (>= 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3), libc6 (>= 2.4), libgcc1 (>= 1:4.1.1), libmysqlclient18 (>= 5.5.24+dfsg-1), libmyth-0.27-0 (>= 2:0.27.0+fixes.20140324.8ee257c), libqtcore4 (>= 4:4.7.0~beta1), libqtgui4 (>= 4:4.5.3), libstdc++6 (>= 4.1.1)
+Suggests: zoneminder
+Filename: pool/multiverse/m/mythtv/mythzoneminder_0.27.0+fixes.20140324.8ee257c-0ubuntu3_i386.deb
+Size: 176380
+MD5sum: 6f55cdb5728af0cfe82dac72e012384f
+SHA1: 1fbf0fd64ac2c8aa254114deb6571282cdfa3347
+SHA256: 390cdc8f7277075f8ff9fc26fc4f3b05d85a966f40ca727a665349acbcbb3021
+Description: view status and display footage recorded with zoneminder
+Homepage: http://www.mythtv.org
+Description-md5: 8d9d41b817bbe7c1bae729f6473e40c3
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: pepperflashplugin-nonfree
+Priority: optional
+Section: multiverse/web
+Installed-Size: 57
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Bart Martens <bartm@debian.org>
+Architecture: i386
+Version: 1.3ubuntu1.1
+Depends: debconf | debconf-2.0, wget, gnupg, libatk1.0-0, libcairo2, libfontconfig1, libfreetype6, libgcc1, libglib2.0-0, libgtk2.0-0 (>= 2.14), libnspr4, libnss3, libpango-1.0-0 | libpango1.0-0, libstdc++6, libx11-6, libxext6, libxt6, libcurl3-gnutls, binutils
+Suggests: chromium, ttf-mscorefonts-installer, ttf-dejavu, ttf-xfree86-nonfree, hal
+Conflicts: libflash-mozplugin
+Filename: pool/multiverse/p/pepperflashplugin-nonfree/pepperflashplugin-nonfree_1.3ubuntu1.1_i386.deb
+Size: 4740
+MD5sum: 94ca226c41bb455e0f6bfd9f079a3e8e
+SHA1: 62f3201d764997e3fb7d72fc9d0345b32a50b6ff
+SHA256: 9210ca08c53cbf25af715718a132f186b863e950fd8254b8f72a34020fe8d458
+Description: Pepper Flash Player - browser plugin
+Homepage: http://wiki.debian.org/PepperFlashPlayer
+Description-md5: ffddffcbb66de5d31dd4c784e6aa4973
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: php-mythtv
+Priority: optional
+Section: multiverse/graphics
+Installed-Size: 152
+Maintainer: MythTV Ubuntu Maintainers <ubuntu-mythtv@lists.ubuntu.com>
+Architecture: all
+Source: mythtv
+Version: 2:0.27.0+fixes.20140324.8ee257c-0ubuntu3
+Filename: pool/multiverse/m/mythtv/php-mythtv_0.27.0+fixes.20140324.8ee257c-0ubuntu3_all.deb
+Size: 16986
+MD5sum: 58212dee4a7df1641e8652faec5d2100
+SHA1: 82d5f512aa45feba0d56e2db63a37d0cf442cde5
+SHA256: 04c0d2816ed5baac7f0df32d6800202a5c8e97104a4301808bccec31b7c5ef5d
+Description: PHP Bindings for MythTV
+Homepage: http://www.mythtv.org
+Description-md5: cc74af3e7f32031e0ca3aeeac2981c9b
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+Supported: 9m
+Task: mythbuntu-frontend, mythbuntu-desktop, mythbuntu-backend-slave, mythbuntu-backend-master, mythbuntu-backend-master
+
+Package: steam
+Priority: extra
+Section: multiverse/games
+Installed-Size: 2744
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Architecture: i386
+Version: 1:1.0.0.45-1ubuntu1.1
+Depends: debconf (>= 0.5) | debconf-2.0, libc6 (>= 2.12), libstdc++6 (>= 4.3), libx11-6, xz-utils, libgl1-mesa-dri, libgl1-mesa-glx, libtxc-dxtn-s2tc0, xterm | x-terminal-emulator
+Pre-Depends: debconf, multiarch-support
+Recommends: zenity, fonts-liberation
+Filename: pool/multiverse/s/steam/steam_1.0.0.45-1ubuntu1.1_i386.deb
+Size: 837738
+MD5sum: fe6a62f282996867b81fafeb1f6b7398
+SHA1: 795a6d01ab6bf47ab73c7be2f51e3af93f04d445
+SHA256: f2c08c1e980785a9186fc10d422aadb739ebf9aa41f67286f6774b3a966b734c
+Description: Valve's Steam digital software delivery system
+Multi-Arch: foreign
+Homepage: http://www.steampowered.com
+Description-md5: f3396999f5291850ccfadc7534377d19
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: ubuntu-restricted-extras
+Priority: optional
+Section: multiverse/metapackages
+Installed-Size: 30
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: i386
+Version: 60.1
+Depends: ubuntu-restricted-addons
+Recommends: ttf-mscorefonts-installer, unrar, gstreamer0.10-plugins-bad-multiverse, libavcodec-extra
+Filename: pool/multiverse/u/ubuntu-restricted-extras/ubuntu-restricted-extras_60.1_i386.deb
+Size: 2922
+MD5sum: 9b6885f66beb7493301a86e05be6bb8b
+SHA1: 2373a8b97f4b55495b15f85a2943bec2dfd2aa5f
+SHA256: 93800b2bba0c15903a0c350e86ff47c0c5e2f0022c714df6adb8aa0899981eae
+Description: Commonly used restricted packages for Ubuntu
+Description-md5: 503c20bf281d1cda726316d55f800b9c
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: unrar
+Priority: optional
+Section: multiverse/utils
+Installed-Size: 298
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Martin Meredith <mez@debian.org>
+Architecture: i386
+Source: unrar-nonfree
+Version: 1:5.0.10-1ubuntu0.14.04.1
+Depends: libc6 (>= 2.7), libgcc1 (>= 1:4.1.1), libstdc++6 (>= 4.1.1)
+Conflicts: rar (<= 2.60-1)
+Filename: pool/multiverse/u/unrar-nonfree/unrar_5.0.10-1ubuntu0.14.04.1_i386.deb
+Size: 117402
+MD5sum: faefbbe1176fc60806bdf2e5ed3745ff
+SHA1: 7d033bcf7214d73f33860937cd35269f4f87c0ec
+SHA256: 9626e36a25bc7d56329337a3cec8ec5a0e65d83f43c3518ad500bc96464c1d01
+Description: Unarchiver for .rar files (non-free version)
+Homepage: http://www.rarlabs.com/
+Description-md5: 363f696bb115028ffafb265ccc9f32fb
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox
+Priority: optional
+Section: multiverse/misc
+Installed-Size: 57792
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: i386
+Version: 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1
+Depends: adduser, python (>= 2.7~), python (<< 2.8), python2.7, python:any (>= 2.7.5-5~), libc6 (>= 2.15), libcurl3-gnutls (>= 7.16.2), libgcc1 (>= 1:4.1.1), libgsoap4, libpng12-0 (>= 1.2.13-4), libpython2.7 (>= 2.7), libsdl1.2debian (>= 1.2.11), libssl1.0.0 (>= 1.0.0), libstdc++6 (>= 4.6), libvncserver0, libvpx1 (>= 1.0.0), libx11-6, libxcursor1 (>> 1.1.2), libxext6, libxml2 (>= 2.7.4), libxmu6, libxt6, zlib1g (>= 1:1.1.4), virtualbox-dkms (>= 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1) | virtualbox-source (>= 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1) | virtualbox-modules
+Recommends: virtualbox-qt (= 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1), libgl1-mesa-glx | libgl1, libqt4-opengl (>= 4:4.5.3), libqtcore4 (>= 4:4.5.3), libqtgui4 (>= 4:4.5.3)
+Suggests: vde2, virtualbox-guest-additions-iso
+Conflicts: virtualbox-2.0, virtualbox-2.1, virtualbox-2.2, virtualbox-3.0, virtualbox-3.1, virtualbox-3.2, virtualbox-4.0, virtualbox-4.1, virtualbox-4.2, virtualbox-4.3, virtualbox-5.0
+Filename: pool/multiverse/v/virtualbox/virtualbox_4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1_i386.deb
+Size: 13398326
+MD5sum: 1b3b278a8c73efe6260b9cfba882a21a
+SHA1: 610243b698f93d66e3ab395e21a66ae8b2006af2
+SHA256: d12a64aba113039ade252798b10c4b27aae87dc76907266e268dca200b924945
+Description: x86 virtualization solution - base binaries
+Homepage: http://www.virtualbox.org/
+Description-md5: 30f96d22c1a6ca04db16bdc1e79ad965
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-dbg
+Priority: extra
+Section: multiverse/debug
+Installed-Size: 290396
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: i386
+Source: virtualbox
+Version: 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1
+Depends: virtualbox (= 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1) | virtualbox-guest-utils (= 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1)
+Filename: pool/multiverse/v/virtualbox/virtualbox-dbg_4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1_i386.deb
+Size: 60880306
+MD5sum: 92dc663b40e32d97edbeb6925f031dd6
+SHA1: 10efaca8c26e0db5eabafcf0bdfc132b679a1885
+SHA256: cb94db87489d1d2a443083abcb62f709884026cc3a1b6880a5ede8a21f7fdf6c
+Description: x86 virtualization solution - debugging symbols
+Homepage: http://www.virtualbox.org/
+Description-md5: b271b8956187eca407d52354cf368938
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-dkms
+Priority: optional
+Section: multiverse/kernel
+Installed-Size: 4444
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: all
+Source: virtualbox
+Version: 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1
+Depends: dkms (>= 2.1.0.0)
+Recommends: virtualbox (>= 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1)
+Filename: pool/multiverse/v/virtualbox/virtualbox-dkms_4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1_all.deb
+Size: 566610
+MD5sum: 31785af2f27c34f4136caa819459ca01
+SHA1: c050ab2cef494706ecc958fa0f2d85df60af00ef
+SHA256: 8ddd85b61433d77ababcaba7696595f8bf2bd4f6ed5fff831869924d1b712d40
+Description: x86 virtualization solution - kernel module sources for dkms
+Homepage: http://www.virtualbox.org/
+Description-md5: 4d42f0fe51c4a92f2aed5071f84524ae
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-guest-additions-iso
+Priority: extra
+Section: multiverse/misc
+Installed-Size: 57061
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: all
+Version: 4.3.36-1ubuntu1.14.04.1
+Replaces: virtualbox-guest-additions (<< 4.0.6-1~)
+Recommends: virtualbox (>= 4.3.36)
+Conflicts: virtualbox-2.0, virtualbox-2.1, virtualbox-2.2, virtualbox-3.0, virtualbox-3.1, virtualbox-3.2, virtualbox-4.0, virtualbox-4.1, virtualbox-4.2, virtualbox-4.3, virtualbox-5.0
+Breaks: virtualbox-guest-additions (<< 4.0.6-1~)
+Filename: pool/multiverse/v/virtualbox-guest-additions-iso/virtualbox-guest-additions-iso_4.3.36-1ubuntu1.14.04.1_all.deb
+Size: 39979898
+MD5sum: 570b341b16ad48ee473d1b58618d36b9
+SHA1: 6d19f58eda1e53bda347d13e839678bc7b6dceff
+SHA256: e6bcd384a213a4d0c337d66539632fca302d08f08ce7ca892dadf8f91948bfcd
+Description: guest additions iso image for VirtualBox
+Homepage: http://www.virtualbox.org/
+Description-md5: 11a9eaac064138ec238f7c2ee4c018df
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-guest-dkms
+Priority: optional
+Section: multiverse/kernel
+Installed-Size: 3735
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: all
+Source: virtualbox
+Version: 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1
+Provides: virtualbox-guest-modules
+Depends: virtualbox-guest-utils (>= 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1), dkms (>= 2.1.0.0)
+Filename: pool/multiverse/v/virtualbox/virtualbox-guest-dkms_4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1_all.deb
+Size: 474666
+MD5sum: 95ff0471fa2c44defca56e4cbdbaa531
+SHA1: d2c827f226b8f3809ac6be592d25384990b7b231
+SHA256: bd1349f781d8787df2666946c3367bf2afcc7e8b95111485468c044c89944e58
+Description: x86 virtualization solution - guest addition module source for dkms
+Homepage: http://www.virtualbox.org/
+Modaliases: vboxguest(pci:v000080EEd0000CAFEsv00000000sd00000000bc*sc*i*)
+Description-md5: e15ead9377a7f1e325ded819d3cfaf8b
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-guest-dkms-lts-vivid
+Priority: optional
+Section: multiverse/kernel
+Installed-Size: 3735
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: all
+Source: virtualbox-lts-vivid
+Version: 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4
+Replaces: virtualbox-guest-dkms
+Provides: virtualbox-guest-dkms, virtualbox-guest-modules
+Depends: virtualbox-guest-utils-lts-vivid (>= 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4), dkms (>= 2.1.0.0)
+Conflicts: virtualbox-guest-dkms
+Filename: pool/multiverse/v/virtualbox-lts-vivid/virtualbox-guest-dkms-lts-vivid_4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4_all.deb
+Size: 475556
+MD5sum: 3ac55e3f159768c48723b7cf2fc28f78
+SHA1: 91e3fcd1999a84a1e24913ebb0edfffeecf55954
+SHA256: 5e70c78ebe7058f02d9d8a531a2a8241ef0cfdcf23c4e6879eb382423aa06dd8
+Description: x86 virtualization solution - guest addition module source for dkms
+Homepage: http://www.virtualbox.org/
+Modaliases: vboxguest(pci:v000080EEd0000CAFEsv00000000sd00000000bc*sc*i*)
+Description-md5: 2575c5f31229f04ec924594b8b892d9d
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-guest-dkms-lts-wily
+Priority: optional
+Section: multiverse/kernel
+Installed-Size: 3735
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: all
+Source: virtualbox-lts-wily
+Version: 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4
+Replaces: virtualbox-guest-dkms
+Provides: virtualbox-guest-dkms, virtualbox-guest-modules
+Depends: virtualbox-guest-utils-lts-wily (>= 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4), dkms (>= 2.1.0.0)
+Conflicts: virtualbox-guest-dkms
+Filename: pool/multiverse/v/virtualbox-lts-wily/virtualbox-guest-dkms-lts-wily_4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4_all.deb
+Size: 473162
+MD5sum: 9a05bbec743fd33c1470daf5aea3ac7a
+SHA1: da4a36bc4644175437fc8d91d6a34ae0784dbb17
+SHA256: 7ef3a9b1eb1b08cd3f0d6375b572ac60eb5a5c18bb0b6492a08f6af30432182e
+Description: x86 virtualization solution - guest addition module source for dkms
+Homepage: http://www.virtualbox.org/
+Modaliases: vboxguest(pci:v000080EEd0000CAFEsv00000000sd00000000bc*sc*i*)
+Description-md5: 38542512b0c4bc0f2d63f5345348322b
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-guest-dkms-lts-xenial
+Priority: optional
+Section: multiverse/kernel
+Installed-Size: 3735
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: all
+Source: virtualbox-lts-xenial
+Version: 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4
+Replaces: virtualbox-guest-dkms
+Provides: virtualbox-guest-dkms, virtualbox-guest-modules
+Depends: virtualbox-guest-utils-lts-xenial (>= 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4), dkms (>= 2.1.0.0)
+Conflicts: virtualbox-guest-dkms
+Filename: pool/multiverse/v/virtualbox-lts-xenial/virtualbox-guest-dkms-lts-xenial_4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4_all.deb
+Size: 475440
+MD5sum: 61923dd2bbc312ba1762e255732e23ca
+SHA1: 77c631fbe5ef4ed2f7ca05909fae5686efba598c
+SHA256: 91e931d9b102dc11ce117e5b5488db999b68b70d8e4d2a0d4485910d8b6a5c3b
+Description: x86 virtualization solution - guest addition module source for dkms
+Homepage: http://www.virtualbox.org/
+Modaliases: vboxguest(pci:v000080EEd0000CAFEsv00000000sd00000000bc*sc*i*)
+Description-md5: 0a04582808b38e608d38007cc6a36538
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-guest-source
+Priority: optional
+Section: multiverse/kernel
+Installed-Size: 675
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: all
+Source: virtualbox
+Version: 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1
+Depends: build-essential, bzip2, debhelper (>= 9), kbuild, module-assistant
+Filename: pool/multiverse/v/virtualbox/virtualbox-guest-source_4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1_all.deb
+Size: 582626
+MD5sum: 431112837881e911c2882281b5fbdc4d
+SHA1: 63f925fcba609d18f7c8f6d4fc22171cbbbd96ca
+SHA256: bc00ef65ed2cf3f03ad797fe4fe0499129ffdbba585339fc4c33816d2daaf05d
+Description: x86 virtualization solution - guest addition module source
+Homepage: http://www.virtualbox.org/
+Description-md5: 4e8ea50b26a8f2bc5f4e7ef943a32a06
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-guest-source-lts-vivid
+Priority: optional
+Section: multiverse/kernel
+Installed-Size: 3884
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: all
+Source: virtualbox-lts-vivid
+Version: 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4
+Replaces: virtualbox-guest-source
+Provides: virtualbox-guest-source
+Depends: build-essential, bzip2, debhelper (>= 9), kbuild, module-assistant
+Conflicts: virtualbox-guest-source
+Filename: pool/multiverse/v/virtualbox-lts-vivid/virtualbox-guest-source-lts-vivid_4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4_all.deb
+Size: 496828
+MD5sum: 88691971c3a6950049e4d069b5d3cd8a
+SHA1: 6d00a190145cc770a286b7f410ad273e94ca96a2
+SHA256: 425ac50cfb733459c0d7c7b2c59290d2e2a6a79ce26a3e80d92d23fef47a7e7c
+Description: x86 virtualization solution - guest addition module source
+Homepage: http://www.virtualbox.org/
+Description-md5: 4e8ea50b26a8f2bc5f4e7ef943a32a06
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-guest-source-lts-wily
+Priority: optional
+Section: multiverse/kernel
+Installed-Size: 3884
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: all
+Source: virtualbox-lts-wily
+Version: 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4
+Replaces: virtualbox-guest-source
+Provides: virtualbox-guest-source
+Depends: build-essential, bzip2, debhelper (>= 9), kbuild, module-assistant
+Conflicts: virtualbox-guest-source
+Filename: pool/multiverse/v/virtualbox-lts-wily/virtualbox-guest-source-lts-wily_4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4_all.deb
+Size: 494514
+MD5sum: 54eaa995db10647aa2bd9e51b4f0bbb5
+SHA1: 915672d9ee009739c29b0e4d7fc9c1bf647cc6b5
+SHA256: 9072b4f6b173d34d84df926c6fd6c4a091465f006f62d561388ada3fa3a87b63
+Description: x86 virtualization solution - guest addition module source
+Homepage: http://www.virtualbox.org/
+Description-md5: 4e8ea50b26a8f2bc5f4e7ef943a32a06
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-guest-source-lts-xenial
+Priority: optional
+Section: multiverse/kernel
+Installed-Size: 3884
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: all
+Source: virtualbox-lts-xenial
+Version: 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4
+Replaces: virtualbox-guest-source
+Provides: virtualbox-guest-source
+Depends: build-essential, bzip2, debhelper (>= 9), kbuild, module-assistant
+Conflicts: virtualbox-guest-source
+Filename: pool/multiverse/v/virtualbox-lts-xenial/virtualbox-guest-source-lts-xenial_4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4_all.deb
+Size: 496748
+MD5sum: 02db04216f2248de821931d89980fc8b
+SHA1: 5380ecf0726252845d258bdc0d9a63055504f9c6
+SHA256: 7f26e777f2ed714e4df3a41bb64d37e507f678adceef2c8ccc6b0aa6c6afe5d4
+Description: x86 virtualization solution - guest addition module source
+Homepage: http://www.virtualbox.org/
+Description-md5: 4e8ea50b26a8f2bc5f4e7ef943a32a06
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-guest-utils
+Priority: optional
+Section: multiverse/misc
+Installed-Size: 1821
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: i386
+Source: virtualbox
+Version: 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1
+Depends: adduser, pciutils, libc6 (>= 2.15), libpam0g (>= 0.99.7.1)
+Recommends: virtualbox-guest-dkms (= 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1) | virtualbox-guest-source (= 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1) | virtualbox-guest-modules, virtualbox-guest-x11 (= 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1)
+Filename: pool/multiverse/v/virtualbox/virtualbox-guest-utils_4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1_i386.deb
+Size: 373374
+MD5sum: 786d0a5a96960472fd555f6928cde0b3
+SHA1: b6efce562e2381918e0b3f848bc9379889540c42
+SHA256: b0fa2c699a2d5c82df54aa9e4eba08952fc1c507ec44de4d21ea4497b373bd49
+Description: x86 virtualization solution - non-X11 guest utilities
+Homepage: http://www.virtualbox.org/
+Description-md5: 0c420aa026ad03a572b15c6e38dbebf7
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-guest-utils-lts-vivid
+Priority: optional
+Section: multiverse/misc
+Installed-Size: 5030
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: i386
+Source: virtualbox-lts-vivid
+Version: 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4
+Replaces: virtualbox-guest-utils
+Provides: virtualbox-guest-utils
+Depends: adduser, pciutils, libc6 (>= 2.15), libpam0g (>= 0.99.7.1)
+Recommends: virtualbox-guest-dkms-lts-vivid (= 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4) | virtualbox-guest-source-lts-vivid (= 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4) | virtualbox-guest-modules-lts-vivid, virtualbox-guest-x11-lts-vivid (= 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4)
+Conflicts: virtualbox-guest-utils
+Filename: pool/multiverse/v/virtualbox-lts-vivid/virtualbox-guest-utils-lts-vivid_4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4_i386.deb
+Size: 1155152
+MD5sum: 854c8e3bc38da162c0a74f3687f9ff70
+SHA1: e417e52de3923c15edb69c2383cd676a4fce0f28
+SHA256: 57d4dada53704aa11457d9feed9a573973dad35c0139c1a081d79d2687c2050b
+Description: x86 virtualization solution - non-X11 guest utilities
+Homepage: http://www.virtualbox.org/
+Description-md5: 0c420aa026ad03a572b15c6e38dbebf7
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-guest-utils-lts-wily
+Priority: optional
+Section: multiverse/misc
+Installed-Size: 5028
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: i386
+Source: virtualbox-lts-wily
+Version: 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4
+Replaces: virtualbox-guest-utils
+Provides: virtualbox-guest-utils
+Depends: adduser, pciutils, libc6 (>= 2.15), libpam0g (>= 0.99.7.1)
+Recommends: virtualbox-guest-dkms-lts-wily (= 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4) | virtualbox-guest-source-lts-wily (= 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4) | virtualbox-guest-modules-lts-wily, virtualbox-guest-x11-lts-wily (= 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4)
+Conflicts: virtualbox-guest-utils
+Filename: pool/multiverse/v/virtualbox-lts-wily/virtualbox-guest-utils-lts-wily_4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4_i386.deb
+Size: 1156782
+MD5sum: 951a76f8f925b93a9a1573963b6dfb21
+SHA1: d33c8c91fef01ee7e857fccf07bb14c01e47cc99
+SHA256: 0a849464c86a412c06c1aca64dbbe39785713978f3d9ba07d27b231ed5b058bd
+Description: x86 virtualization solution - non-X11 guest utilities
+Homepage: http://www.virtualbox.org/
+Description-md5: 0c420aa026ad03a572b15c6e38dbebf7
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-guest-utils-lts-xenial
+Priority: optional
+Section: multiverse/misc
+Installed-Size: 5032
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: i386
+Source: virtualbox-lts-xenial
+Version: 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4
+Replaces: virtualbox-guest-utils
+Provides: virtualbox-guest-utils
+Depends: adduser, pciutils, libc6 (>= 2.15), libpam0g (>= 0.99.7.1)
+Recommends: virtualbox-guest-dkms-lts-xenial (= 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4) | virtualbox-guest-source-lts-xenial (= 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4) | virtualbox-guest-modules-lts-xenial, virtualbox-guest-x11-lts-xenial (= 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4)
+Conflicts: virtualbox-guest-utils
+Filename: pool/multiverse/v/virtualbox-lts-xenial/virtualbox-guest-utils-lts-xenial_4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4_i386.deb
+Size: 1156526
+MD5sum: 2968b6096873f8730ab1e7f8f103cd77
+SHA1: 764acba1b666d621ae50bba12d47d4bed94add68
+SHA256: 29096314981d4240ec1af8a09c6c5f8faa14dcb01b7137b440407b42021e10d2
+Description: x86 virtualization solution - non-X11 guest utilities
+Homepage: http://www.virtualbox.org/
+Description-md5: 0c420aa026ad03a572b15c6e38dbebf7
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-guest-x11
+Priority: optional
+Section: multiverse/x11
+Installed-Size: 5734
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: i386
+Source: virtualbox
+Version: 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1
+Provides: xorg-driver-video
+Depends: libnotify-bin, virtualbox-guest-utils (= 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1), libc6 (>= 2.15), libx11-6, libxcomposite1 (>= 1:0.3-1), libxdamage1 (>= 1:1.1), libxext6, libxfixes3, libxmu6, libxt6, xorg-video-abi-15, xserver-xorg-core (>= 2:1.14.99.902)
+Filename: pool/multiverse/v/virtualbox/virtualbox-guest-x11_4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1_i386.deb
+Size: 931238
+MD5sum: 70be0bc1fad64adde0e3f049bf8fbb98
+SHA1: d8793de16ffc9e177bd170d718698bf52b24587c
+SHA256: e17f879c5e175e23118775b3badb0bd64174602d0378436c7790b5371c3323a7
+Description: x86 virtualization solution - X11 guest utilities
+Homepage: http://www.virtualbox.org/
+Modaliases: vboxx11(pci:v000080EEd0000BEEFsv00000000sd00000000bc*sc*i*)
+Description-md5: 3487afde0b114ec7e205b11f1dd3f7a5
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-guest-x11-lts-vivid
+Priority: optional
+Section: multiverse/x11
+Installed-Size: 23153
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: i386
+Source: virtualbox-lts-vivid
+Version: 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4
+Replaces: virtualbox-guest-x11
+Provides: virtualbox-guest-x11, xorg-driver-video
+Depends: libnotify-bin, virtualbox-guest-utils-lts-vivid (= 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4), libc6 (>= 2.15), libx11-6, libxcomposite1 (>= 1:0.3-1), libxdamage1 (>= 1:1.1), libxext6, libxfixes3, libxmu6, libxt6, xorg-video-abi-19, xserver-xorg-core-lts-vivid (>= 2:1.16.99.901)
+Conflicts: virtualbox-guest-x11
+Filename: pool/multiverse/v/virtualbox-lts-vivid/virtualbox-guest-x11-lts-vivid_4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4_i386.deb
+Size: 3947254
+MD5sum: c76d25884c0833cab8ebf39509e323e5
+SHA1: 75b18b0e4a5938679caf4a9cc7a60c6d97adc4da
+SHA256: 5448300dde823d56affd025c076f16dbef8e2b1f63095bcb2c2d9bd89e56a21f
+Description: x86 virtualization solution - X11 guest utilities
+Homepage: http://www.virtualbox.org/
+Modaliases: vboxx11(pci:v000080EEd0000BEEFsv00000000sd00000000bc*sc*i*)
+Description-md5: 3487afde0b114ec7e205b11f1dd3f7a5
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-guest-x11-lts-wily
+Priority: optional
+Section: multiverse/x11
+Installed-Size: 23148
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: i386
+Source: virtualbox-lts-wily
+Version: 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4
+Replaces: virtualbox-guest-x11
+Provides: virtualbox-guest-x11, xorg-driver-video
+Depends: libnotify-bin, virtualbox-guest-utils-lts-wily (= 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4), libc6 (>= 2.15), libx11-6, libxcomposite1 (>= 1:0.3-1), libxdamage1 (>= 1:1.1), libxext6, libxfixes3, libxmu6, libxt6, xorg-video-abi-19, xserver-xorg-core-lts-wily (>= 2:1.16.99.901)
+Conflicts: virtualbox-guest-x11
+Filename: pool/multiverse/v/virtualbox-lts-wily/virtualbox-guest-x11-lts-wily_4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4_i386.deb
+Size: 3728798
+MD5sum: 09357c5b802c96f5cbb73b5976aaf66e
+SHA1: 6f15c6f2b5195e79f09b6089346bbde6fb85ff27
+SHA256: a14f99af1d5b4bbafaec21c3205c0ad28877ba54a6cd54b33adc07f64a6a6418
+Description: x86 virtualization solution - X11 guest utilities
+Homepage: http://www.virtualbox.org/
+Modaliases: vboxx11(pci:v000080EEd0000BEEFsv00000000sd00000000bc*sc*i*)
+Description-md5: 3487afde0b114ec7e205b11f1dd3f7a5
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-guest-x11-lts-xenial
+Priority: optional
+Section: multiverse/x11
+Installed-Size: 23165
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: i386
+Source: virtualbox-lts-xenial
+Version: 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4
+Replaces: virtualbox-guest-x11
+Provides: virtualbox-guest-x11, xorg-driver-video
+Depends: libnotify-bin, virtualbox-guest-utils-lts-xenial (= 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4), libc6 (>= 2.15), libx11-6, libxcomposite1 (>= 1:0.3-1), libxdamage1 (>= 1:1.1), libxext6, libxfixes3, libxmu6, libxt6, xorg-video-abi-20, xserver-xorg-core-lts-xenial (>= 2:1.17.99.902)
+Conflicts: virtualbox-guest-x11
+Filename: pool/multiverse/v/virtualbox-lts-xenial/virtualbox-guest-x11-lts-xenial_4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1~14.04.4_i386.deb
+Size: 3961762
+MD5sum: 8b71e8a7f249b87244927f435772ee9e
+SHA1: 7ffc764a1fcfd084a65ebba8710a5adfbc17840b
+SHA256: 25b9cd46404d00015203ef782e01ed48475b4bc8981a38cb21f291a35e3481b3
+Description: x86 virtualization solution - X11 guest utilities
+Homepage: http://www.virtualbox.org/
+Modaliases: vboxx11(pci:v000080EEd0000BEEFsv00000000sd00000000bc*sc*i*)
+Description-md5: 3487afde0b114ec7e205b11f1dd3f7a5
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-qt
+Priority: optional
+Section: multiverse/misc
+Installed-Size: 21202
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: i386
+Source: virtualbox
+Version: 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1
+Replaces: virtualbox (<< 4.1.6-dfsg-2~)
+Depends: virtualbox (= 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1), libc6 (>= 2.15), libgcc1 (>= 1:4.1.1), libgl1-mesa-glx | libgl1, libqt4-network (>= 4:4.5.3), libqt4-opengl (>= 4:4.7.2), libqtcore4 (>= 4:4.8.0), libqtgui4 (>= 4:4.8.0), libstdc++6 (>= 4.6), libx11-6, libxcursor1 (>> 1.1.2), libxext6, libxinerama1
+Breaks: virtualbox (<< 4.1.6-dfsg-2~)
+Filename: pool/multiverse/v/virtualbox/virtualbox-qt_4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1_i386.deb
+Size: 4684904
+MD5sum: 7d68167409acd4eec1d570da9db39721
+SHA1: 572b6d66842da83b0659b35fb3aa133606b8010d
+SHA256: 2bbe31f70c8a7cabc634903939ba0915ad594312f418ce91919ab25e21cd06a2
+Description: x86 virtualization solution - Qt based user interface
+Homepage: http://www.virtualbox.org/
+Description-md5: 41ed29f36ba23b3ce0155f9a8efcff60
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-source
+Priority: optional
+Section: multiverse/kernel
+Installed-Size: 764
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: all
+Source: virtualbox
+Version: 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1
+Depends: build-essential, bzip2, debhelper (>= 9), kbuild, module-assistant
+Recommends: virtualbox (>= 4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1)
+Filename: pool/multiverse/v/virtualbox/virtualbox-source_4.3.36-dfsg-1+deb8u1ubuntu1.14.04.1_all.deb
+Size: 673936
+MD5sum: cec7993c5a3a128b3099f8d3dbd0c7dc
+SHA1: 4f8488bf4fa972fb721c6914d13edc6c03c06136
+SHA256: 3dff7599f4b7291ad03f6dc07d92823335807c9bc90c9f2658297a348a37e8de
+Description: x86 virtualization solution - kernel module source
+Homepage: http://www.virtualbox.org/
+Description-md5: 53035ede584988f3413156cb7a5dbe8b
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: xaralx
+Priority: optional
+Section: multiverse/graphics
+Installed-Size: 11767
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Joachim Breitner <nomeata@debian.org>
+Architecture: i386
+Version: 0.7r1785-5ubuntu2build0.1
+Depends: libc6 (>= 2.4), libfreetype6 (>= 2.2.1), libgcc1 (>= 1:4.1.1), libglib2.0-0 (>= 2.12.0), libgtk2.0-0 (>= 2.8.0), libjpeg8 (>= 8c), libpango-1.0-0 (>= 1.14.0), libpangoft2-1.0-0 (>= 1.14.0), libpng12-0 (>= 1.2.13-4), libstdc++6 (>= 4.6), libwxbase2.8-0 (>= 2.8.12.1+dfsg), libwxgtk2.8-0 (>= 2.8.12.1+dfsg), libxml2 (>= 2.7.4)
+Recommends: xaralx-svg, imagemagick
+Suggests: xaralx-examples
+Filename: pool/multiverse/x/xaralx/xaralx_0.7r1785-5ubuntu2build0.1_i386.deb
+Size: 3595518
+MD5sum: 1528b0f314885a4b4a472d2863850a96
+SHA1: ae41db25f07d336c61188afa375a874e4786bf2b
+SHA256: c3685c6bd4dbce356be00ab52d57469d906c9fa72144892be3ee17eb943594f5
+Description: Heavyweight vector graphics, illustration and DTP Program
+Homepage: http://www.xaraxtreme.org/
+Description-md5: 9f449e7e81f38d25637029affb5f2dde
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: xaralx-examples
+Priority: optional
+Section: multiverse/graphics
+Installed-Size: 3254
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Joachim Breitner <nomeata@debian.org>
+Architecture: all
+Source: xaralx
+Version: 0.7r1785-5ubuntu2build0.1
+Recommends: xaralx
+Filename: pool/multiverse/x/xaralx/xaralx-examples_0.7r1785-5ubuntu2build0.1_all.deb
+Size: 3143378
+MD5sum: f1b27e5ed2c2148dd6e04a745aebe2b9
+SHA1: 20bec6234fd6a05f70f2330bc3f9b625ca5953af
+SHA256: cc2447ddf1414816ea18d4e03cc7f0a252ee060033348de2954b4e6d9f3fdbfd
+Description: Examples of works created by XaraLx
+Homepage: http://www.xaraxtreme.org/
+Description-md5: c7c4cd5fcd9d7443fba673356b0c0420
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: xaralx-svg
+Priority: optional
+Section: multiverse/graphics
+Installed-Size: 676
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Joachim Breitner <nomeata@debian.org>
+Architecture: i386
+Source: xaralx
+Version: 0.7r1785-5ubuntu2build0.1
+Depends: xaralx, libc6 (>= 2.4), libgcc1 (>= 1:4.1.1), libstdc++6 (>= 4.4.0), libwxbase2.8-0 (>= 2.8.12.1+dfsg), libwxgtk2.8-0 (>= 2.8.12.1+dfsg), libxml2 (>= 2.7.4)
+Filename: pool/multiverse/x/xaralx/xaralx-svg_0.7r1785-5ubuntu2build0.1_i386.deb
+Size: 197542
+MD5sum: 8ec47ab33bd16f3802f6c3c5b3a5b666
+SHA1: 7800be3076042c06278be83afbbfd6a8b1d9bbcf
+SHA256: 18ab3d6db89ed1dfc4b2b343768941ef92066623621d8c8581d7fa687bc081f5
+Description: SVG (Scalable Vector Graphics) plugin for XaraLX
+Homepage: http://www.xaraxtreme.org/
+Description-md5: a987bc3ca339ff73110ff5e3db7d11f3
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: xubuntu-restricted-extras
+Priority: optional
+Section: multiverse/metapackages
+Installed-Size: 30
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: i386
+Source: ubuntu-restricted-extras
+Version: 60.1
+Depends: xubuntu-restricted-addons
+Recommends: ttf-mscorefonts-installer, unrar, gstreamer0.10-plugins-bad-multiverse, libavcodec-extra
+Filename: pool/multiverse/u/ubuntu-restricted-extras/xubuntu-restricted-extras_60.1_i386.deb
+Size: 2920
+MD5sum: 758ce6fdc3f0c4455965277a62298d4f
+SHA1: 9b00aa96e60ec0e6d144a6c1abdbe76d8a53c7c2
+SHA256: 25b5b0777fb75030ac877b3dacfcb84cca61521157f8ff651b77a2ba1aaa5166
+Description: Commonly used restricted packages for Xubuntu
+Description-md5: 30684d3d9d8adb0cc68ed518d9d19c1f
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+

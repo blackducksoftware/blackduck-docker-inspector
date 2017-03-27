@@ -17,7 +17,7 @@ class RpmExtractorTest {
 
     @Test
     void testExtractingRpmFile1() {
-        extractingRpm("rpmdb/1/rpm")
+        extractingRpm("rpmdb/1/rpm/")
     }
 
     void extractingRpm(String fileName) {

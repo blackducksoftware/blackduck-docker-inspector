@@ -1,0 +1,3101 @@
+Package: puppetdb-termini
+Source: puppetdb
+Version: 3.0.0-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 164
+Depends: puppet-agent
+Conflicts: puppetdb-terminus
+Replaces: puppetdb-terminus
+Provides: puppetdb-terminus
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Termini for puppetdb
+ Contains terminus for:
+  puppetdb (version 3.0.0)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb-termini_3.0.0-1puppetlabs1_all.deb
+MD5sum: e5d1cdd6ab28e275b8ec360cceb5ffbb
+SHA1: d1fc9f032f73c69555c3d29ad091dec6d60fb8d8
+SHA256: 324938f3612176dbd9bef7b4f148f4fed4b143784e28e81f730331fd4cc69034
+Size: 19922
+
+Package: puppetdb-termini
+Source: puppetdb
+Version: 3.0.1-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 164
+Depends: puppet-agent
+Conflicts: puppetdb-terminus
+Replaces: puppetdb-terminus
+Provides: puppetdb-terminus
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Termini for puppetdb
+ Contains terminus for:
+  puppetdb (version 3.0.1)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb-termini_3.0.1-1puppetlabs1_all.deb
+MD5sum: 68ea077a894f46337b26515081d2c835
+SHA1: cbc18dad9bfc08914a923e1575878203962dad2e
+SHA256: a604723e528eb4e8b4ad971234f6e6c71810514bce140dae9a8a64bc1ffba36a
+Size: 19910
+
+Package: puppetdb-termini
+Source: puppetdb
+Version: 3.0.2-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 164
+Depends: puppet-agent
+Conflicts: puppetdb-terminus
+Replaces: puppetdb-terminus
+Provides: puppetdb-terminus
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Termini for puppetdb
+ Contains terminus for:
+  puppetdb (version 3.0.2)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb-termini_3.0.2-1puppetlabs1_all.deb
+MD5sum: 69f6b643a71cdf780eb8861960cd13b9
+SHA1: 6f801ab85ab2753a1019b195854b1eba4a16a7b3
+SHA256: f5733f57702edb063c13edfc7ec3167e985da87e18602de4e9a17192239aeda0
+Size: 19916
+
+Package: puppetdb-termini
+Source: puppetdb
+Version: 3.1.0-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 162
+Depends: puppet-agent
+Conflicts: puppetdb-terminus
+Replaces: puppetdb-terminus
+Provides: puppetdb-terminus
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Termini for puppetdb
+ Contains terminus for:
+  puppetdb (version 3.1.0)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb-termini_3.1.0-1puppetlabs1_all.deb
+MD5sum: 5599114d071ae51dee14b3411f5a60f7
+SHA1: 6f8a5d34b7c6fb0e8e4c6e12f6695fa9739c62b9
+SHA256: 43021055e4c95d04aa27aa7960153a54aaa576da2c1143d0c60375b8b1a06547
+Size: 19420
+
+Package: puppetdb-termini
+Source: puppetdb
+Version: 3.2.0-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 166
+Depends: puppet-agent
+Conflicts: puppetdb-terminus
+Replaces: puppetdb-terminus
+Provides: puppetdb-terminus
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Termini for puppetdb
+ Contains terminus for:
+  puppetdb (version 3.2.0)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb-termini_3.2.0-1puppetlabs1_all.deb
+MD5sum: cb97fbdbe59f50fc95c16e37297114b9
+SHA1: 2a6b91750a0769ced96d18075c32bade2a305147
+SHA256: 4bd61add106a64de973f57a41f7457d5d1f1951608274887bb501917a7af6b5b
+Size: 20428
+
+Package: puppetdb-termini
+Source: puppetdb
+Version: 3.2.2-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 166
+Depends: puppet-agent
+Conflicts: puppetdb-terminus
+Replaces: puppetdb-terminus
+Provides: puppetdb-terminus
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Termini for puppetdb
+ Contains terminus for:
+  puppetdb (version 3.2.2)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb-termini_3.2.2-1puppetlabs1_all.deb
+MD5sum: 24d379fdc2f9e8e7169d8f22578222d7
+SHA1: d83a07718e2b4b13a938bfbc4663c0cfd3241804
+SHA256: f03e8fd427504dc93ab1ad4592dc6d2a91d9b2858ed989f7be0aee431ed6f808
+Size: 20408
+
+Package: puppetdb-termini
+Source: puppetdb
+Version: 3.2.3-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 166
+Depends: puppet-agent
+Conflicts: puppetdb-terminus
+Replaces: puppetdb-terminus
+Provides: puppetdb-terminus
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Termini for puppetdb
+ Contains terminus for:
+  puppetdb (version 3.2.3)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb-termini_3.2.3-1puppetlabs1_all.deb
+MD5sum: c05bad50cdbc426afa3f4defdc1e3aeb
+SHA1: bed5db897a1d78d5bc715eb752c7033bb184d874
+SHA256: 8e3e394e4609f8b0c0da8942d1a1727f390772201c394655f1d5dba14cbb3f9a
+Size: 20254
+
+Package: puppetdb-termini
+Source: puppetdb
+Version: 3.2.4-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 166
+Depends: puppet-agent
+Conflicts: puppetdb-terminus
+Replaces: puppetdb-terminus
+Provides: puppetdb-terminus
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Termini for puppetdb
+ Contains terminus for:
+  puppetdb (version 3.2.4)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb-termini_3.2.4-1puppetlabs1_all.deb
+MD5sum: 2581746898a670f24f098f0a82ef7f42
+SHA1: f52be99fad3c1dc391120bee4f346812b1ad37a3
+SHA256: d155070fd792c3fa637881bb2beaaaae9a0825c99e755baaff479388298fe08f
+Size: 20252
+
+Package: puppetdb-termini
+Source: puppetdb
+Version: 4.0.0-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 161
+Depends: puppet-agent
+Conflicts: puppetdb-terminus
+Replaces: puppetdb-terminus
+Provides: puppetdb-terminus
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Termini for puppetdb
+ Contains terminus for:
+  puppetdb (version 4.0.0)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb-termini_4.0.0-1puppetlabs1_all.deb
+MD5sum: b88d95ad1d77d06ef9346aae58d51f7b
+SHA1: d120127f9fa4ca3c733ca50429b1e433c546713e
+SHA256: f65b21c38527e4cb7a47030ccbee13584755c87100a489cd9683a78b2e311118
+Size: 18224
+
+Package: puppetdb-termini
+Source: puppetdb
+Version: 4.0.2-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 161
+Depends: puppet-agent
+Conflicts: puppetdb-terminus
+Replaces: puppetdb-terminus
+Provides: puppetdb-terminus
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Termini for puppetdb
+ Contains terminus for:
+  puppetdb (version 4.0.2)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb-termini_4.0.2-1puppetlabs1_all.deb
+MD5sum: 9eb53d5686cac033fa00715e7f4e5a39
+SHA1: fb760fbf20c58ea60ddf897a3cfbaf967d12f388
+SHA256: 2e293dfd1a80161feb310df02a22c59c1d32af6b40abe67080462f2c87ec6ce9
+SHA512: 2159c9cc53d5171b18e1e6dcef69c07344643a0ce1f4b5da73ee5e6bf8b394ee3224eea75564ee8c2c00d37d14ad6debbb16c73f5b719d19969bc4632eb3fa7c
+Size: 18254
+
+Package: puppetdb-termini
+Source: puppetdb
+Version: 4.1.0-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 161
+Depends: puppet-agent
+Conflicts: puppetdb-terminus
+Replaces: puppetdb-terminus
+Provides: puppetdb-terminus
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Termini for puppetdb
+ Contains terminus for:
+  puppetdb (version 4.1.0)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb-termini_4.1.0-1puppetlabs1_all.deb
+MD5sum: 218b82f31298bee7c914bcddb5193508
+SHA1: e1c38d1ced3a9c40e7f82272f96dfe76efdefaa8
+SHA256: 1c820b549264a70622bbc6f2669b7e9544cd841b1266eef8d9e38e95df660ca8
+SHA512: dfe8d39a97a7afc8a48e97ff169e5f700d62b98ac6726adaa6f6401771bf5899fd175bdaacebb5db6335848c56ea92a169dd67bbc971e111fcecb5e603328466
+Size: 18280
+
+Package: puppetdb-termini
+Source: puppetdb
+Version: 4.1.2-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 161
+Depends: puppet-agent
+Conflicts: puppetdb-terminus
+Replaces: puppetdb-terminus
+Provides: puppetdb-terminus
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Termini for puppetdb
+ Contains terminus for:
+  puppetdb (version 4.1.2)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb-termini_4.1.2-1puppetlabs1_all.deb
+MD5sum: 156a9ccd3ee96715728f0f69143f7f9f
+SHA1: 9b1c56aec3b1c0c76a16bb1ff19af883a0361a21
+SHA256: 7cd7fc5bfe78833fb77e2c18b5e21a2b9e1f1c57945f8bcd266197b6c3c27ff6
+SHA512: c1ad37361285925b02f912c1cd8eff645b67313ed7ba7afa3e9277f5f30b906ca1fa0e45493617347457936625a02d88505ef254c890a7c214d8fe610b1b78cf
+Size: 18286
+
+Package: puppetdb-termini
+Source: puppetdb
+Version: 4.2.0-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 163
+Depends: puppet-agent
+Conflicts: puppetdb-terminus
+Replaces: puppetdb-terminus
+Provides: puppetdb-terminus
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Termini for puppetdb
+ Contains terminus for:
+  puppetdb (version 4.2.0)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb-termini_4.2.0-1puppetlabs1_all.deb
+MD5sum: c0be5aa3b95b391a4e3a3631fb6407de
+SHA1: 5460062098d40eecc5e85d9418069f6259da7a2f
+SHA256: 17b07da7bb179914dedfc094009f7da39bbcd3d0a2774abff2d83622a719a129
+SHA512: d212b4cf04ea7dd1b27c3f07405f97eabe30c775055d945bf60ecc38b5264a8e2f10e1b03fa1f491a9908a6d4ab612c1856b776cc53bd9ffa9c05ea5e9cb0e18
+Size: 18418
+
+Package: puppetdb-termini
+Source: puppetdb
+Version: 4.2.1-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 163
+Depends: puppet-agent
+Conflicts: puppetdb-terminus
+Replaces: puppetdb-terminus
+Provides: puppetdb-terminus
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Termini for puppetdb
+ Contains terminus for:
+  puppetdb (version 4.2.1)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb-termini_4.2.1-1puppetlabs1_all.deb
+MD5sum: 0a2b343d11e4547576b4b8159278eb24
+SHA1: 7d189ff5dd128a94fa6cd2a05d72458fba9c163d
+SHA256: 2aa0a88d982602b9c6b7ec201163c24ccada6af1674819aa9e5bdd02e58519be
+SHA512: f30e8370234ab26c269a5ffcf3c89e25c4cf88ba51d67859404f4036fc0ffa66675dc8390454ecc6e71a7e343f12054224b0c951f071a5374ea52aa2474ef8c4
+Size: 18438
+
+Package: puppetdb-termini
+Source: puppetdb
+Version: 4.2.2-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 163
+Depends: puppet-agent
+Conflicts: puppetdb-terminus
+Replaces: puppetdb-terminus
+Provides: puppetdb-terminus
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Termini for puppetdb
+ Contains terminus for:
+  puppetdb (version 4.2.2)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb-termini_4.2.2-1puppetlabs1_all.deb
+MD5sum: c657a21720480543fa24b32021a3217b
+SHA1: 8c371b042627939caa419e4c877a1b733bb260ad
+SHA256: 93421aec90339a8ad509d96c10ab6a01fb17e68547097c1028e3001eebea6ddc
+SHA512: 33b04c0957d978ccc2d5b9a508344f486775de3aa29b614aa710f4b8ae78622beff35bb0dcd99940054378182d8ca42c792c456f4f119c14c99c7f8a75b61c17
+Size: 18440
+
+Package: puppetdb-termini
+Source: puppetdb
+Version: 4.2.4-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 163
+Depends: puppet-agent
+Conflicts: puppetdb-terminus
+Replaces: puppetdb-terminus
+Provides: puppetdb-terminus
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Termini for puppetdb
+ Contains terminus for:
+  puppetdb (version 4.2.4)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb-termini_4.2.4-1puppetlabs1_all.deb
+MD5sum: ba852f6387a05173f64db32c1f272a87
+SHA1: 5ca6d59b3f05230f53c5e802cb3e541cbddd2a2f
+SHA256: f813458736caf605380c0f45c69d6d7948b4efe7a44681b1391d0299793b67af
+SHA512: ec24f808ba0404fd2b6b1b49a1904ba98c9acccbba24e7ec82cada72dbaf063976fa8d3bcd95ab91846f5cd3044d5a8faf9ab683f4d47448aee68e7797d4f94d
+Size: 18534
+
+Package: puppetdb-termini
+Source: puppetdb
+Version: 4.3.0-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 163
+Depends: puppet-agent
+Conflicts: puppetdb-terminus
+Replaces: puppetdb-terminus
+Provides: puppetdb-terminus
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Termini for puppetdb
+ Contains terminus for:
+  puppetdb (version 4.3.0)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb-termini_4.3.0-1puppetlabs1_all.deb
+MD5sum: a4a1cbb6a67b3c161e9101dffe163a87
+SHA1: 04e68cf84ec8135bc820c675b4a90da0abfccb39
+SHA256: 4d243e1680a0d249c5d58fc308f85578567a49211e036ed11bc78248ac58d1e6
+SHA512: 4cd4ff86237c35b841e8fbac737d728cf17362e54b19e9bf851300887c030e3903f17d2564e1e217e54a8ceadef0f3ab0b13c288ef2395ee82f70a62c28a99d1
+Size: 18510
+
+Package: puppetdb-termini
+Source: puppetdb
+Version: 4.3.2-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 163
+Depends: puppet-agent
+Conflicts: puppetdb-terminus
+Replaces: puppetdb-terminus
+Provides: puppetdb-terminus
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Termini for puppetdb
+ Contains terminus for:
+  puppetdb (version 4.3.2)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb-termini_4.3.2-1puppetlabs1_all.deb
+MD5sum: 51d5542fca87c9ae384a20324a02010d
+SHA1: c0e66702f4202e8c357a22c3510e0666cd26354f
+SHA256: 6035497a3595ce8a88286152059670d3e3678f3ab461f1afe1985af9e7385904
+SHA512: 478dc625700d11574bff4f93e2c0dab5f879052523d84634496ec816bd5217cf4cfc30dbf82a6856f9f6719d64ac7c9d1baf0b40f3a7b90fb10a0b9983217b0a
+Size: 18526
+
+Package: puppetdb-terminus
+Source: puppetdb
+Version: 2.3.3-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 274
+Depends: puppet-common (>= 3.5.1) | puppet-agent, libjson-ruby | ruby-json
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Connect Puppet to PuppetDB by setting up a terminus for PuppetDB.
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb-terminus_2.3.3-1puppetlabs1_all.deb
+MD5sum: 4d6434ac3d9cf890c47172cd3656f605
+SHA1: f96a05c034aa51097475e64f2262c854f5416f40
+SHA256: 2b3d0e683efbb1993742ddc025d60a4cf9e22ddaba3c45a3451a8759d2977618
+Size: 18740
+
+Package: puppetdb-terminus
+Source: puppetdb
+Version: 2.3.4-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 274
+Depends: puppet-common (>= 3.5.1) | puppet-agent, libjson-ruby | ruby-json
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Connect Puppet to PuppetDB by setting up a terminus for PuppetDB.
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb-terminus_2.3.4-1puppetlabs1_all.deb
+MD5sum: 5f982b5c3877df30e0070f262e525e76
+SHA1: 0a70ea3c74c0a087c8660641d22bdb81e5907631
+SHA256: 4da06a153fc37625f2378ce94269c4ba147bc81907c6ed7738fc5d4fe9ba981b
+Size: 18736
+
+Package: puppetdb-terminus
+Source: puppetdb
+Version: 2.3.5-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 274
+Depends: puppet-common (>= 3.5.1) | puppet-agent, libjson-ruby | ruby-json
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Connect Puppet to PuppetDB by setting up a terminus for PuppetDB.
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb-terminus_2.3.5-1puppetlabs1_all.deb
+MD5sum: f98162cf0879df02f30054f0a031a939
+SHA1: 62f1ccc52e0aa079c371049a536c0638647935bf
+SHA256: f55ca0c583c68765198688433f546a2a19512e67d75da3a3e1375fc1d583ef80
+Size: 18742
+
+Package: puppetdb-terminus
+Source: puppetdb
+Version: 2.3.6-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 274
+Depends: puppet-common (>= 3.5.1) | puppet-agent, libjson-ruby | ruby-json
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Connect Puppet to PuppetDB by setting up a terminus for PuppetDB.
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb-terminus_2.3.6-1puppetlabs1_all.deb
+MD5sum: 1e336117f72f534bcf45185e095f72b4
+SHA1: ad6c92b0bc04aaffb318f0be56c277196edecb48
+SHA256: daa518bb16f5a3756bf6cd7264b4cd78ee42b237423025c8907dcdd8cf646461
+Size: 18748
+
+Package: puppetdb-terminus
+Source: puppetdb
+Version: 2.3.7-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 274
+Depends: puppet-common (>= 3.5.1) | puppet-agent, libjson-ruby | ruby-json
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Connect Puppet to PuppetDB by setting up a terminus for PuppetDB.
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb-terminus_2.3.7-1puppetlabs1_all.deb
+MD5sum: 901c5797617029d2d3dfca2ffb378559
+SHA1: ca6887f65e515b5df15b87564cca66192ce00536
+SHA256: 74470559fb63255a587876212c83af89db70a2ae75d6c3ea2c6f6ee0a8dff012
+Size: 18736
+
+Package: puppetdb-terminus
+Source: puppetdb
+Version: 2.3.8-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 274
+Depends: puppet-common (>= 3.5.1) | puppet-agent, libjson-ruby | ruby-json
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Connect Puppet to PuppetDB by setting up a terminus for PuppetDB.
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb-terminus_2.3.8-1puppetlabs1_all.deb
+MD5sum: fddd7700ebe0fdd28a016550a3169a8b
+SHA1: 9ac62f4771a7c5813218d991cf86a713eeab305d
+SHA256: a31a1a2036f432479ffd14dcc5097c0b75c333f024526e3819c7a697bd12dd5b
+Size: 18742
+
+Package: puppetdb
+Version: 2.3.3-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 25981
+Depends: java7-runtime-headless | j2re1.7, adduser, puppet (>= 3.5.1) | puppet-agent
+Suggests: postgresql
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: PuppetDB Centralized Storage.
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb_2.3.3-1puppetlabs1_all.deb
+MD5sum: b6bf214231f5322c7de0d56aad5a1dfd
+SHA1: f01854606b755360b95cce61dd2b9c29828b94a6
+SHA256: f4216b3190fc46970378c678a7251e440991435f8ca921fb359549ecbb01f4a8
+Size: 23047480
+
+Package: puppetdb
+Version: 2.3.4-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 26255
+Depends: java7-runtime-headless | j2re1.7, adduser, puppet (>= 3.5.1) | puppet-agent
+Suggests: postgresql
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: PuppetDB Centralized Storage.
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb_2.3.4-1puppetlabs1_all.deb
+MD5sum: 9939d5de28828f473d0a7cde65670f3e
+SHA1: 223eec36daef127028b494e3231baf0d1050a682
+SHA256: f38c129ded9374bfda82347e0e88976ff4f03191cbf3ff08322baafc53e3cec0
+Size: 23296538
+
+Package: puppetdb
+Version: 2.3.5-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 26256
+Depends: java7-runtime-headless | j2re1.7, adduser, puppet (>= 3.5.1) | puppet-agent
+Suggests: postgresql
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: PuppetDB Centralized Storage.
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb_2.3.5-1puppetlabs1_all.deb
+MD5sum: 2797b4147e91e4080033c700c75580f2
+SHA1: 9c34c9c6b333111bfbf972dd4137d850607d4b4b
+SHA256: b38ccb3e3ef40a7b1de6e7bfd3c19dfef1c2ce599f10547f186710a16a118722
+Size: 23296752
+
+Package: puppetdb
+Version: 2.3.6-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 26256
+Depends: java7-runtime-headless | j2re1.7, adduser, puppet (>= 3.5.1) | puppet-agent
+Suggests: postgresql
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: PuppetDB Centralized Storage.
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb_2.3.6-1puppetlabs1_all.deb
+MD5sum: 8a644e42cc34f159b57c63515ae3566e
+SHA1: dbead21af41bfe35dc4bc2624395597b318586c9
+SHA256: 373141e60f160d683cd52201581faa04cab60c7ee6b8d6e941ec6df759a75d12
+Size: 23297912
+
+Package: puppetdb
+Version: 2.3.7-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 26256
+Depends: java7-runtime-headless | j2re1.7, adduser, puppet (>= 3.5.1) | puppet-agent
+Suggests: postgresql
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: PuppetDB Centralized Storage.
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb_2.3.7-1puppetlabs1_all.deb
+MD5sum: 7c0cf71c9372f6de2f8742d36362ffc9
+SHA1: d577501ce7e34ffbfa13ea77c43b429b363cb0e7
+SHA256: a7a697bee5e5f806e3d0ff1b190801899fc992c679b4ab1ced5b255ca4056c85
+Size: 23297842
+
+Package: puppetdb
+Version: 2.3.8-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 26257
+Depends: java7-runtime-headless | j2re1.7, adduser, puppet (>= 3.5.1) | puppet-agent
+Suggests: postgresql
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: PuppetDB Centralized Storage.
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb_2.3.8-1puppetlabs1_all.deb
+MD5sum: 28991ac5e51640db7972990c1d9dd7b8
+SHA1: ad77c026a72f57c4ddd46d22e97e5a2559ecfa6e
+SHA256: 443927a338f8819a7954e17975d070b5317c8c1eef3b4827de572256eb296bdd
+Size: 23297822
+
+Package: puppetdb
+Version: 3.0.0-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 27282
+Depends: java7-runtime-headless | java8-runtime-headless, net-tools, adduser, puppet (>= 3.8.1-1puppetlabs1) | puppet-agent, puppet (<< 5.0.0-1puppetlabs1) | puppet-agent
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetdb
+ Contains: Puppet-integrated catalog and fact storage (puppetdb 3.0.0)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb_3.0.0-1puppetlabs1_all.deb
+MD5sum: 3e6f03ac8f7e9274b4bacacb60eff495
+SHA1: 0cd3596170c157f0e0cf9eccba1d384ab55875a8
+SHA256: 67ea70b10c429952158ca6f1a79e6aec4517c5261203116e4f13b7c6aa5d27df
+Size: 23681232
+
+Package: puppetdb
+Version: 3.0.1-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 27283
+Depends: java7-runtime-headless | java8-runtime-headless, net-tools, adduser, puppet (>= 3.8.1-1puppetlabs1) | puppet-agent, puppet (<< 5.0.0-1puppetlabs1) | puppet-agent
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetdb
+ Contains: Puppet-integrated catalog and fact storage (puppetdb 3.0.1)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb_3.0.1-1puppetlabs1_all.deb
+MD5sum: 6d66c9cbaf0ba06b9d3b4eda3722c7f8
+SHA1: 00966a060b74107475a572f6c046737f84a840cc
+SHA256: 71d333bbf97cd65e9eeac86474a2d7e950e15812acbd4367bfb9ad34b0ee6a88
+Size: 23683084
+
+Package: puppetdb
+Version: 3.0.2-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 27287
+Depends: java7-runtime-headless | java8-runtime-headless, net-tools, adduser, puppet (>= 3.8.1-1puppetlabs1) | puppet-agent, puppet (<< 5.0.0-1puppetlabs1) | puppet-agent
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetdb
+ Contains: Puppet-integrated catalog and fact storage (puppetdb 3.0.2)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb_3.0.2-1puppetlabs1_all.deb
+MD5sum: 70946ebe73460d5df1d2e17e2baa9b0a
+SHA1: 9ef2bbf347ef02b40ab6fd11f28ba8603960446b
+SHA256: de3b5853cf1f86d83541151a3613d3dad04aca5f9929075f9c2c87fd37c23262
+Size: 23679786
+
+Package: puppetdb
+Version: 3.1.0-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 27898
+Depends: java7-runtime-headless | java8-runtime-headless, net-tools, adduser, puppet (>= 3.8.1-1puppetlabs1) | puppet-agent, puppet (<< 5.0.0-1puppetlabs1) | puppet-agent
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetdb
+ Contains: Puppet-integrated catalog and fact storage (puppetdb 3.1.0)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb_3.1.0-1puppetlabs1_all.deb
+MD5sum: ef9a744d5ba9db0f90b9656d6d52588f
+SHA1: bc50850c30a966885b8d8e5c07605ba1db45b608
+SHA256: cb50bfc9ff71b714906736e486ff5c37a550d2958bd19db110074aa526396ec1
+Size: 24224632
+
+Package: puppetdb
+Version: 3.2.0-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 27926
+Depends: java7-runtime-headless | java8-runtime-headless, net-tools, adduser, puppet (>= 3.8.1-1puppetlabs1) | puppet-agent, puppet (<< 5.0.0-1puppetlabs1) | puppet-agent
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetdb
+ Contains: Puppet-integrated catalog and fact storage (puppetdb 3.2.0)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb_3.2.0-1puppetlabs1_all.deb
+MD5sum: 9d580c2802b55a1939349f044a6424ad
+SHA1: 083e5c494a65c9c674e97babe4849532d48f850b
+SHA256: 2fd904dd3ab669c88a75905ef7e2a0b3f9a835a36d87de75cb44deba8bcbd451
+Size: 24233496
+
+Package: puppetdb
+Version: 3.2.2-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 27924
+Depends: java7-runtime-headless | java8-runtime-headless, net-tools, adduser, puppet (>= 3.8.1-1puppetlabs1) | puppet-agent, puppet (<< 5.0.0-1puppetlabs1) | puppet-agent
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetdb
+ Contains: Puppet-integrated catalog and fact storage (puppetdb 3.2.2)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb_3.2.2-1puppetlabs1_all.deb
+MD5sum: 5351fee04899b7b11fe3ac3628c64870
+SHA1: d7db10864be539d9d729a3cde82b8c9ee29f54b5
+SHA256: 2d886db25355dbffefa7311b07dbcebf5806bbc782b74a7df31f61587e8679c5
+Size: 24232910
+
+Package: puppetdb
+Version: 3.2.3-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 28138
+Depends: java7-runtime-headless | java8-runtime-headless, net-tools, adduser, puppet (>= 3.8.1-1puppetlabs1) | puppet-agent, puppet (<< 5.0.0-1puppetlabs1) | puppet-agent
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetdb
+ Contains: Puppet-integrated catalog and fact storage (puppetdb 3.2.3)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb_3.2.3-1puppetlabs1_all.deb
+MD5sum: db7e45c7323640202b28b9557d25aad3
+SHA1: 9eaf924294a9468f490bd6f158a80c3faf37a28b
+SHA256: 6d7128e64bddb77614cb2da4bea4683770acad9013b2711a14e236bc8ca3ecc6
+Size: 24302898
+
+Package: puppetdb
+Version: 3.2.4-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 28382
+Depends: java7-runtime-headless | java8-runtime-headless, net-tools, adduser, puppet (>= 3.8.1-1puppetlabs1) | puppet-agent, puppet (<< 5.0.0-1puppetlabs1) | puppet-agent
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetdb
+ Contains: Puppet-integrated catalog and fact storage (puppetdb 3.2.4)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb_3.2.4-1puppetlabs1_all.deb
+MD5sum: 19d83c18cce4811aa1f63a6e71a323e0
+SHA1: 90cff6c8d418a9c732171f37dd37728f1662d77f
+SHA256: a240cd66d620d4b6b948536a88f81eb25740c680484e0c38dc898236c960eaa9
+Size: 24524862
+
+Package: puppetdb
+Version: 4.0.0-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 24630
+Depends: java7-runtime-headless | java8-runtime-headless, net-tools, adduser, puppet (>= 3.8.1-1puppetlabs1) | puppet-agent, puppet (<< 5.0.0-1puppetlabs1) | puppet-agent
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetdb
+ Contains: Puppet-integrated catalog and fact storage (puppetdb 4.0.0)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb_4.0.0-1puppetlabs1_all.deb
+MD5sum: 6c1246325b71c4d3058f3728af19d8af
+SHA1: 28fea1fc57318ed7db865510af44d9065d1f91d0
+SHA256: 1f9f4373261e0696fb9f78e0032e46b8f11c6b137ede315c35fcbfd9bc669b64
+Size: 20907198
+
+Package: puppetdb
+Version: 4.0.2-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 24640
+Depends: java7-runtime-headless | java8-runtime-headless, net-tools, adduser, puppet (>= 3.8.1-1puppetlabs1) | puppet-agent, puppet (<< 5.0.0-1puppetlabs1) | puppet-agent
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetdb
+ Contains: Puppet-integrated catalog and fact storage (puppetdb 4.0.2)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb_4.0.2-1puppetlabs1_all.deb
+MD5sum: fd97cfcb5d3578f81911a4bfe436cbd9
+SHA1: e3338a3024cfd8b618301905ed7edd6b4e69252a
+SHA256: 2f96a9f94705e99954cd74ff9156f343035529ce2ca4ae194e8cfb1152d4e892
+SHA512: 9d40f81264845fb1e09f298d73b6f31246ed0ba242ef79e254cd98dd446f252b05474ba6368e687c6aa6eda149d8558b981dd1ae4a5ed7b7af7b0465115f3256
+Size: 20914906
+
+Package: puppetdb
+Version: 4.1.0-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 24838
+Depends: openjdk-7-jre-headless | openjdk-8-jre-headless, net-tools, adduser, puppet (>= 3.8.1-1puppetlabs1) | puppet-agent, puppet (<< 5.0.0-1puppetlabs1) | puppet-agent
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetdb
+ Contains: Puppet-integrated catalog and fact storage (puppetdb 4.1.0)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb_4.1.0-1puppetlabs1_all.deb
+MD5sum: be04c01ba5f0a049f0f9e1984fd119b0
+SHA1: 64d15691b85acb73ddf2cb6019f3b4693c0a07c9
+SHA256: 19a81a7c661ff9989588d8360deae864aa3efc34b2c434120f6b7d2cf8ea6abb
+SHA512: fb65e7cc5e31a2f460df00b12c6362efb829d9908081e7344e85e37bc0ab37654c2b37b40edcd7e88d7dff79f1f62dd40caa16a5bfbdb5e36211da747a3386b1
+Size: 21085768
+
+Package: puppetdb
+Version: 4.1.2-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 24833
+Depends: openjdk-7-jre-headless | openjdk-8-jre-headless, net-tools, adduser, puppet (>= 3.8.1-1puppetlabs1) | puppet-agent, puppet (<< 5.0.0-1puppetlabs1) | puppet-agent
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetdb
+ Contains: Puppet-integrated catalog and fact storage (puppetdb 4.1.2)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb_4.1.2-1puppetlabs1_all.deb
+MD5sum: cb04f3a995f2498ebe46c408fa3db1c9
+SHA1: 2455f7f8e36770ba467a4f9a6b51288959a47c81
+SHA256: 38646d2663d4c79d4429ec5109c5fd33a21d0a93abb45d872a30d2be92d09cb9
+SHA512: a7f7034d341bfcd381c78ed26238d22c35c149601625a66457ee38e6a73d2f5a328aad3552a3196338474ba1ac5d7bd7747c24db2e3c859a0748e1ca88c0aeea
+Size: 21082576
+
+Package: puppetdb
+Version: 4.2.0-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 24948
+Depends: openjdk-7-jre-headless | openjdk-8-jre-headless, net-tools, adduser, puppet (>= 3.8.1-1puppetlabs1) | puppet-agent, puppet (<< 5.0.0-1puppetlabs1) | puppet-agent
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetdb
+ Contains: Puppet-integrated catalog and fact storage (puppetdb 4.2.0)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb_4.2.0-1puppetlabs1_all.deb
+MD5sum: 7711dffce006e1f856b8d0d84bd1a6b8
+SHA1: 1f09640782c0996f9ee22da0a45bcb5d1d52f3ff
+SHA256: 57a397f5e858f9c987db770feeba1582b817e63833eb50e16b36590c29070974
+SHA512: 392a79116b47c894a18a1dd799985fe717df8d5ed8ef1c57e79fcb42a9db5a00acfb8146c5184a0fcadc245cae14ac67d688b4b34275010b0e045743599a4224
+Size: 21171918
+
+Package: puppetdb
+Version: 4.2.1-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 24946
+Depends: openjdk-7-jre-headless | openjdk-8-jre-headless, net-tools, adduser, puppet (>= 3.8.1-1puppetlabs1) | puppet-agent, puppet (<< 5.0.0-1puppetlabs1) | puppet-agent
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetdb
+ Contains: Puppet-integrated catalog and fact storage (puppetdb 4.2.1)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb_4.2.1-1puppetlabs1_all.deb
+MD5sum: 00f79d46e1c9875a67af70cb47c61b37
+SHA1: 1e8818d133a5e3986c233a86f83624e132094c29
+SHA256: 3ac62a7289e38671cda93eb47967a4ad4a4513279210f24ee7f8727bb744b471
+SHA512: 4c6fa7ecc00065ec89036659020693ca3d7520d0a280bb33a6f487c97f35bc5a37d62a4d8b333bc2608e64f6eeccd30dc9a7a0a2a4595b1991c932038ac11944
+Size: 21171276
+
+Package: puppetdb
+Version: 4.2.2-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 24963
+Depends: openjdk-7-jre-headless | openjdk-8-jre-headless, net-tools, adduser, puppet (>= 3.8.1-1puppetlabs1) | puppet-agent, puppet (<< 5.0.0-1puppetlabs1) | puppet-agent
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetdb
+ Contains: Puppet-integrated catalog and fact storage (puppetdb 4.2.2)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb_4.2.2-1puppetlabs1_all.deb
+MD5sum: 347051730a6d698217dc810f22646272
+SHA1: 467bcc5323b05dab57fd9687bc0738aa298f03c5
+SHA256: 989c5f70f5bf445873ec6bbec4339d56896fe9b8a9bc26361d2f148b79d917f3
+SHA512: b96e331f921f49ad0fd4f3159706413757e190f819f00922d6c8093a8552c1e4003ce9aa127d13394569fe4fcac8a6753302e2692c0f9ae5a9c6721be53f929a
+Size: 21176710
+
+Package: puppetdb
+Version: 4.2.4-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 25097
+Depends: openjdk-7-jre-headless | openjdk-8-jre-headless, net-tools, adduser, procps, puppet (>= 3.8.1-1puppetlabs1) | puppet-agent, puppet (<< 5.0.0-1puppetlabs1) | puppet-agent
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetdb
+ Contains: Puppet-integrated catalog and fact storage (puppetdb 4.2.4)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb_4.2.4-1puppetlabs1_all.deb
+MD5sum: 702c9aeb31cd0cc37f5e434be1cc0c09
+SHA1: 4e469fd2bf74cc32e9c1e4d9c42d1944d5daa031
+SHA256: b6feca14df4bce0aa41f7d6b0beda6bb0c91b1e8a9926f1b79b7c7f8bd2de25c
+SHA512: f5459b8ffd936c020a3e83a0b4dee12b973c9a6173a81958ff81b92c40ec05a58989de4a9f45e074192f2c23c26c0a83acd38a7183ee860f0f04b7a3a8f4588c
+Size: 21270726
+
+Package: puppetdb
+Version: 4.3.0-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 25118
+Depends: openjdk-7-jre-headless | openjdk-8-jre-headless, net-tools, adduser, procps, puppet (>= 3.8.1-1puppetlabs1) | puppet-agent, puppet (<< 5.0.0-1puppetlabs1) | puppet-agent
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetdb
+ Contains: Puppet-integrated catalog and fact storage (puppetdb 4.3.0)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb_4.3.0-1puppetlabs1_all.deb
+MD5sum: 491399dc43263c3ad6a84fa247028084
+SHA1: 74b930f438c5c2ff94bcc012556a0c69beaa1d80
+SHA256: db6fde6c6fdbd8c18f21d71a566c537550a17072f60ea7f3b251d0f16fd519af
+SHA512: 78186316573e283c13a7292f112f39ac91a7f8662f789b4dbd229b1197ac7df1843f5460102915956a0817631422d100b22d1061d102d76b3d112ff9cc1f6c75
+Size: 21287478
+
+Package: puppetdb
+Version: 4.3.2-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 25138
+Depends: openjdk-7-jre-headless | openjdk-8-jre-headless, net-tools, adduser, procps, puppet (>= 3.8.1-1puppetlabs1) | puppet-agent, puppet (<< 5.0.0-1puppetlabs1) | puppet-agent
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetdb
+ Contains: Puppet-integrated catalog and fact storage (puppetdb 4.3.2)
+Filename: pool/trusty/PC1/p/puppetdb/puppetdb_4.3.2-1puppetlabs1_all.deb
+MD5sum: c106f463fcea74b5395fc34f7ef88fae
+SHA1: 1cbaddc4d23020290810c6f9744589682e8721dc
+SHA256: b7067515057ed62bd07c69f600c4d9835d29e942d8c8c6267483556a4962075c
+SHA512: 9ad65e9f78171b78b3d816f33c733fbba22419e760d727dc76068e4617b21a45b8cb58b08821299ae6593fdd6dad4af5d1893c4895b5580ac0f9e23428e5a33b
+Size: 21295860
+
+Package: puppetlabs-release-pc1
+Version: 0.9.2-1trusty
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 42
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: Release packages for the Puppet Labs PC1 repository
+  .
+ Contains the following components:
+ gpg_key (2015.03.31)
+ repo_definition (2015.03.31)
+Filename: pool/trusty/PC1/p/puppetlabs-release-pc1/puppetlabs-release-pc1_0.9.2-1trusty_all.deb
+MD5sum: 7db96eab70a5b4873c73202454a9cca5
+SHA1: db43d7b03cc3c539ab6d09b46aeb7fce0e3e61cb
+SHA256: 89d7ae982154dcb4aa19cc23cad5c46e384a761e409935809b5541b2002ccd94
+Size: 2612
+
+Package: puppetlabs-release-pc1
+Version: 1.0.0-2trusty
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 45
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: Release packages for the Puppet Labs PC1 repository
+  .
+ Contains the following components:
+ gpg_key 2015.03.31
+ repo_definition 2015.09.28
+Filename: pool/trusty/PC1/p/puppetlabs-release-pc1/puppetlabs-release-pc1_1.0.0-2trusty_all.deb
+MD5sum: a714259d4a4bab4761ecd09fe4da493b
+SHA1: 5e86641d673ec8602354c264f3fbacd2cf312517
+SHA256: e75659a8f299c0c96490987c4cad004cb416a685a6be53faab88fb769e7d6b6b
+SHA512: f4df209df03e8266c9cbf4f722c1a9cf2a6df4cef9a80e982669406204149bb0b9dc013000c13ad18ad68cf0f7cf78a775ef30444414e7e48da0ea3e0675855c
+Size: 5244
+
+Package: puppetlabs-release-pc1
+Version: 1.1.0-1trusty
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 54
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: Release packages for the Puppet Labs PC1 repository
+  .
+ Contains the following components:
+ gpg_key 2016.08.19
+ repo_definition 2015.09.28
+Filename: pool/trusty/PC1/p/puppetlabs-release-pc1/puppetlabs-release-pc1_1.1.0-1trusty_all.deb
+MD5sum: b43aa8239a6a06cbc9b5a9ee996b5754
+SHA1: 29608b553cd7d0710d023dcf9650278b13b9b862
+SHA256: 8aef2979c3226c8b373f7000f518048ec9b30ec257cb42ddfdb2b70139326017
+SHA512: f3f8f86556d190ac250d726586ce6e1b77bff166998dd7598367c5795b17e94915b8956df74b43a7e8ba2f9a33d809e39f6f29a0a5678fd6a428f1c33ce1a75a
+Size: 13654
+
+Package: puppetlabs-release-pc1
+Version: 1.1.0-2trusty
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 54
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: Release packages for the Puppet Labs PC1 repository
+  .
+ Contains the following components:
+ gpg_key 2016.08.19
+ repo_definition 2015.09.28
+Filename: pool/trusty/PC1/p/puppetlabs-release-pc1/puppetlabs-release-pc1_1.1.0-2trusty_all.deb
+MD5sum: e2f5517f0b60c7c56fb11f3053e5f34a
+SHA1: 981ff670bd2d53fea6bc7457b7474ae75ca3b65c
+SHA256: e2fbde01e643dead0a8f9aaabd2c8bf09ccaeaf469a192bc2d0fbdbf611230ea
+SHA512: ddaaf8c126033a91e11881074abf3d7235deed58ca4e6b30260d56cc98e988e50eda1f2841a0be282e41cb2565d250d3d3b883dcf7cfa1c266abf57728307204
+Size: 13652
+
+Package: puppetlabs-release-pc1
+Version: 1.1.0-3trusty
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 54
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: Release packages for the Puppet Labs PC1 repository
+  .
+ Contains the following components:
+ gpg_key 2016.10.03
+ repo_definition 2016.10.03
+Filename: pool/trusty/PC1/p/puppetlabs-release-pc1/puppetlabs-release-pc1_1.1.0-3trusty_all.deb
+MD5sum: 90c7a828bbb9595d2da2f5fc74fe1996
+SHA1: 113cebf3db858155533e4e9171d665a73c3eaedc
+SHA256: d050a7ef239b23cd91b9037ef7842b4d7719aeff4e4392d3a9f12970aaaca879
+SHA512: 3aad3729a965d8ba6a9903b9e73eaa96455ded5baa247fc48ed01a9413c37ca88d25f92e5734233cfce4e56f6444472eadb4aedc1554d3a8a5ff66bec35c81ca
+Size: 13638
+
+Package: puppetlabs-release-pc1
+Version: 1.1.0-4trusty
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 54
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: Release packages for the Puppet Labs PC1 repository
+  .
+ Contains the following components:
+ gpg_key 2016.10.05
+ repo_definition 2016.10.03
+Filename: pool/trusty/PC1/p/puppetlabs-release-pc1/puppetlabs-release-pc1_1.1.0-4trusty_all.deb
+MD5sum: dcf6fdee86160994f0e66e86e28343ed
+SHA1: e21025a4acc389d5f0e8c71102367de826fc3c81
+SHA256: 0c828aa97a6ba151a41be7bdb8ec8dec17590822788c4f682ac9618155662b84
+SHA512: 2d33e3e1ad924ce2073be5dc6c20983c37b14fcfa1926a975eca7ea592e0d53cfbaeb2549b89777828262304974caf70131804c3ab5da62eb458d35473ca0b4f
+Size: 13644
+
+Package: puppetserver
+Version: 2.0.0-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 32748
+Depends: java7-runtime-headless, net-tools, adduser, puppet-agent
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetserver
+ Contains: Puppet Server (puppetserver 2.0.0,trapperkeeper-webserver-jetty9 1.1.1)
+Filename: pool/trusty/PC1/p/puppetserver/puppetserver_2.0.0-1puppetlabs1_all.deb
+MD5sum: 794d6d4b482c4ac87537272a16ae251b
+SHA1: 72eb9950e7c469de0e5816355407197b378f566d
+SHA256: 170e292dc03ba3f6ed836b39dfaf10842f59c70d851fa27864ed5ad717165649
+Size: 28832272
+
+Package: puppetserver
+Version: 2.1.0-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 46362
+Depends: java7-runtime-headless | java8-runtime-headless, net-tools, adduser, puppet-agent
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetserver
+ Contains: Puppet Server (puppetserver 2.1.0,trapperkeeper-webserver-jetty9 1.3.1)
+Filename: pool/trusty/PC1/p/puppetserver/puppetserver_2.1.0-1puppetlabs1_all.deb
+MD5sum: e63b6b1dafb1e463bf87dbb8173ff5c0
+SHA1: 16d92529e3a54834c9ba1091f81d75e7ad8c82e9
+SHA256: e2e53651412da215c2d921be085387f9a6b5054621b303edcef004bbbaeed4be
+Size: 41650970
+
+Package: puppetserver
+Version: 2.1.1-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 46363
+Depends: java7-runtime-headless | java8-runtime-headless, net-tools, adduser, puppet-agent
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetserver
+ Contains: Puppet Server (puppetserver 2.1.1,trapperkeeper-webserver-jetty9 1.3.1)
+Filename: pool/trusty/PC1/p/puppetserver/puppetserver_2.1.1-1puppetlabs1_all.deb
+MD5sum: b0692e1fbc719aff093eb32ba44e1de3
+SHA1: 4c4bf534011d6eadad4db1b7a27edeefe91d6930
+SHA256: 7a75faac001e43de9d7d7d5c5eea50ab8a4e24b294864566ddc14d73716f8e1f
+Size: 41673584
+
+Package: puppetserver
+Version: 2.1.2-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 46433
+Depends: java7-runtime-headless | java8-runtime-headless, net-tools, adduser, puppet-agent
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetserver
+ Contains: Puppet Server (puppetserver 2.1.2,trapperkeeper-webserver-jetty9 1.3.1)
+Filename: pool/trusty/PC1/p/puppetserver/puppetserver_2.1.2-1puppetlabs1_all.deb
+MD5sum: 7d293bb72e0849eeeed3fb4fa884cf71
+SHA1: e1d9fa08b7d01f5c7fb5cee0773c400ceb87d950
+SHA256: f0a450a32139dcea283b552e519a44a59b96691940448b6e07a8e26377f10d35
+Size: 41738122
+
+Package: puppetserver
+Version: 2.2.0-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 46490
+Depends: java7-runtime-headless | java8-runtime-headless, net-tools, adduser, puppet-agent (>= 1.3.0)
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetserver
+ Contains: Puppet Server (puppetserver 2.2.0,trapperkeeper-webserver-jetty9 1.3.1)
+Filename: pool/trusty/PC1/p/puppetserver/puppetserver_2.2.0-1puppetlabs1_all.deb
+MD5sum: 6d9980b88ebc9aa977a94acc0c3772ef
+SHA1: f6a02a62a604382ea3eb066dfa8501e8d95fb8a9
+SHA256: 3d22d75a80d530edb8789bc07138a2e027015928df1714c56fa5ab265304e395
+Size: 41786864
+
+Package: puppetserver
+Version: 2.2.1-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 46491
+Depends: java7-runtime-headless | java8-runtime-headless, net-tools, adduser, puppet-agent (>= 1.3.0)
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetserver
+ Contains: Puppet Server (puppetserver 2.2.1,trapperkeeper-webserver-jetty9 1.3.1)
+Filename: pool/trusty/PC1/p/puppetserver/puppetserver_2.2.1-1puppetlabs1_all.deb
+MD5sum: 4a0d1ebd1614a6ca7215338700e512ea
+SHA1: 231c4c450766cc6ebae19c2ae6c0675c2366467c
+SHA256: 315aaeefe79ca41ff09cf98c638e45a69c2402b572282d011e0a2116eed48732
+Size: 41787540
+
+Package: puppetserver
+Version: 2.3.0-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 37062
+Depends: java7-runtime-headless | java8-runtime-headless, net-tools, adduser, puppet-agent (>= 1.4.0)
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetserver
+ Contains: Puppet Server (clojure 1.7.0,puppetserver 2.3.0,trapperkeeper-webserver-jetty9 1.5.4)
+Filename: pool/trusty/PC1/p/puppetserver/puppetserver_2.3.0-1puppetlabs1_all.deb
+MD5sum: 5c3d4701db42f24d4ff78e53afa3ed9a
+SHA1: b99628fa8639e89f5d00b8d3f1ee9b854367a57e
+SHA256: 74b52670d651f76cdad94f1bf19a1d7b5469a20ea22573847e084d4908608fe4
+Size: 32785538
+
+Package: puppetserver
+Version: 2.3.1-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 37077
+Depends: java7-runtime-headless | java8-runtime-headless, net-tools, adduser, puppet-agent (>= 1.4.0)
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetserver
+ Contains: Puppet Server (clojure 1.7.0,puppetserver 2.3.1,trapperkeeper-webserver-jetty9 1.5.4)
+Filename: pool/trusty/PC1/p/puppetserver/puppetserver_2.3.1-1puppetlabs1_all.deb
+MD5sum: ca54265d6f2ef143d72e05dd53c6eadb
+SHA1: f86ba70171197f97e0b7f2252aebac5b1cf941f7
+SHA256: 071da961eea22b15cb1a0309cba80f3c8274c6591ab0439b44e5cf9d42bda829
+Size: 32800282
+
+Package: puppetserver
+Version: 2.3.2-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 37084
+Depends: java7-runtime-headless | java8-runtime-headless, net-tools, adduser, puppet-agent (>= 1.4.2)
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetserver
+ Contains: Puppet Server (clojure 1.7.0,puppetserver 2.3.2,trapperkeeper-webserver-jetty9 1.5.6)
+Filename: pool/trusty/PC1/p/puppetserver/puppetserver_2.3.2-1puppetlabs1_all.deb
+MD5sum: 63256ca153381c66866e0d16c389999b
+SHA1: 20c2bffcf01a9619ce7b66ca3c52aaba11885f9f
+SHA256: 8871f9daa2ede325617bc6d629802fbf360dce924bd43fcbb91b88acbfe7f750
+SHA512: 98c73634d3a06bbaddd33f296ed336225d61e635c8449ac6985a0b16ba7b92ef2cdee420b823aad1a153036f975ae35ed01e641155a5e576fc5eb89264850523
+Size: 32804640
+
+Package: puppetserver
+Version: 2.4.0-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 37245
+Depends: openjdk-7-jre-headless | openjdk-8-jre-headless, net-tools, adduser, puppet-agent (>= 1.5.0)
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetserver
+ Contains: Puppet Server (clojure 1.7.0,puppetserver 2.4.0,trapperkeeper-webserver-jetty9 1.5.9)
+Filename: pool/trusty/PC1/p/puppetserver/puppetserver_2.4.0-1puppetlabs1_all.deb
+MD5sum: dccd883d6da3b50a428535e071d066b7
+SHA1: cd74be4528b096aad72058b3b1ad6e7078a08ed4
+SHA256: d271b59096a04bc48d376ad4fd1fc86ae4d1f5e9488c639c1f64fb85c4b82be9
+SHA512: 82bbf231431e87c29dd31905e1c86befe2ceb91149136749ef5467fd7c106727d12bc0d13fc33b96a91a3d6e269aae3d19820225e782ac9fb9070269bb9b6ab6
+Size: 32956402
+
+Package: puppetserver
+Version: 2.5.0-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 37350
+Depends: openjdk-7-jre-headless | openjdk-8-jre-headless, net-tools, adduser, puppet-agent (>= 1.6.0)
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetserver
+ Contains: Puppet Server (clojure 1.7.0,puppetserver 2.5.0,trapperkeeper-webserver-jetty9 1.5.9)
+Filename: pool/trusty/PC1/p/puppetserver/puppetserver_2.5.0-1puppetlabs1_all.deb
+MD5sum: bcca388e931c9b474d83365f08887f50
+SHA1: 827ae0a269064460d51861dc4b181b5c9ff20664
+SHA256: d11889e8d791c449b52bcd9e42e46cf03872aab5c400dcb736640506a977b6ce
+SHA512: 166448e7ad88463c02841e76eb4de28bd87c7dcfe92e5b572e6c0f5504244ef52a883e8f88412d5ceec0e77d89b3ed3157e9b2cc33ec54d9a95487537387264e
+Size: 33040334
+
+Package: puppetserver
+Version: 2.6.0-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 37634
+Depends: openjdk-7-jre-headless | openjdk-8-jre-headless, net-tools, adduser, puppet-agent (>= 1.6.0)
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetserver
+ Contains: Puppet Server (clojure 1.7.0,puppetserver 2.6.0,trapperkeeper-webserver-jetty9 1.5.10)
+Filename: pool/trusty/PC1/p/puppetserver/puppetserver_2.6.0-1puppetlabs1_all.deb
+MD5sum: 61bfa627a7feabfcaf1c87e6b1aef378
+SHA1: 7a67255edd29176dd4c9fa5845dc5b7e05218556
+SHA256: c40318428c17f5a716ba714d2e9e070c2f2156bcef0f6d80b2e88ae837f4f0ec
+SHA512: 4ec8c2af5a28324f66cef5d48034fea9e769382b687bcff721800113dd820aad84c3cbc2f5f8e368e393beade8fef07e1ad7700593035ef1ae83d581e0c94caf
+Size: 33277268
+
+Package: puppetserver
+Version: 2.7.0-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 43156
+Depends: openjdk-7-jre-headless | openjdk-8-jre-headless, net-tools, adduser, procps, puppet-agent (>= 1.6.0)
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetserver
+ Contains: Puppet Server (clojure 1.8.0,puppetserver 2.7.0,trapperkeeper-webserver-jetty9 1.5.11)
+Filename: pool/trusty/PC1/p/puppetserver/puppetserver_2.7.0-1puppetlabs1_all.deb
+MD5sum: 903d27e1b5ca40fc01285447bb60f11b
+SHA1: e6c0e3235a92408ffd1047ce2b9020d6fe521875
+SHA256: 190dae85564203fe0937b220800e92cfa6daed7b84c024a5a3da6948cb3206c8
+SHA512: 5f03993e133b53bcdd11b3b45a938f5c2d2d2f6a656031ce36e440802caaa3066213c97a8549ad8b84b6c473ac207faa3847178a280f6f58eba94b7c282447b3
+Size: 34270670
+
+Package: puppetserver
+Version: 2.7.1-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 43154
+Depends: openjdk-7-jre-headless | openjdk-8-jre-headless, net-tools, adduser, procps, puppet-agent (>= 1.6.0)
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetserver
+ Contains: Puppet Server (clojure 1.8.0,puppetserver 2.7.1,trapperkeeper-webserver-jetty9 1.5.11)
+Filename: pool/trusty/PC1/p/puppetserver/puppetserver_2.7.1-1puppetlabs1_all.deb
+MD5sum: a2469c4d1217f809605aa6c0b411aa0b
+SHA1: ccd6803e256f74baaddd76b6f37cfb1821cba6b5
+SHA256: a18b5bc24033c18d9ece63fd033492fdd1514c30cd902ae5cb11871f445bd180
+SHA512: 00a4b531fe07c04ab1129321cfa70872ad5125feba605934c9492a4bf4e86fe78914c1f03ba080fabd6a4d20663837dbb71e5d4037e5c6afa0b7333205ff246e
+Size: 34266898
+
+Package: puppetserver
+Version: 2.7.2-1puppetlabs1
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 43151
+Depends: openjdk-7-jre-headless | openjdk-8-jre-headless, net-tools, adduser, procps, puppet-agent (>= 1.6.0)
+Section: utils
+Priority: optional
+Homepage: http://puppetlabs.com
+Description: Puppet Labs puppetserver
+ Contains: Puppet Server (clojure 1.8.0,puppetserver 2.7.2,trapperkeeper-webserver-jetty9 1.5.11)
+Filename: pool/trusty/PC1/p/puppetserver/puppetserver_2.7.2-1puppetlabs1_all.deb
+MD5sum: b8738d1d4ceb6cf6d29b469ec79dabb0
+SHA1: 5e8c32ee6e6750e7eb97032ddc2b8ff973173b36
+SHA256: c6521d4ada004bfd8924c1417e42dc7d1d183642b7b263150c45025aedee913a
+SHA512: 336842c258e55e9da4ec285a52659f68d2f4083fc2dd034d130efe605beff0e6e9e708576510f21732f3ccb0f3938b18bfb47a7a4e60016ab530458af3ecc392
+Size: 34268766
+
+Package: puppet-agent
+Version: 1.0.0-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 45383
+Depends: net-tools, libxml2, libreadline6, dmidecode
+Conflicts: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas (1.3.0)
+ cfacter (0.4.1)
+ facter (2.4.3)
+ hiera (2.0.1)
+ marionette-collective (2.8.1)
+ openssl (1.0.0r)
+ puppet (4.0.0)
+ ruby (2.1.5)
+ ruby-augeas (0.5.0)
+ ruby-shadow (2.3.3)
+ ruby-stomp (1.3.3)
+ rubygem-deep-merge (1.0.0)
+ rubygem-net-ssh (2.1.4)
+ virt-what (1.1.4)
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.0.0-1trusty_i386.deb
+MD5sum: 1477fee693e871f0683eb56b789595da
+SHA1: 32b4ccd9577c2d701d2b95859669bb8edfc4d776
+SHA256: 5dbee3ac562ace4c1f95a5237df78b3d3f12d2351cf99bb2a449aca7fddbe0f0
+Size: 8782312
+
+Package: puppet-agent
+Version: 1.0.1-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 45281
+Depends: net-tools, libxml2, libreadline6, dmidecode
+Conflicts: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas (1.3.0)
+ cfacter (0.4.1)
+ facter (2.4.3)
+ hiera (2.0.1)
+ marionette-collective (2.8.1)
+ openssl (1.0.0r)
+ puppet (4.0.0)
+ ruby (2.1.6)
+ ruby-augeas (0.5.0)
+ ruby-shadow (2.3.3)
+ ruby-stomp (1.3.3)
+ rubygem-deep-merge (1.0.0)
+ rubygem-net-ssh (2.1.4)
+ virt-what (1.1.4)
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.0.1-1trusty_i386.deb
+MD5sum: ef4345bd4f18efcbef78235b3a3e18fc
+SHA1: 72d69606c460f64db834afa7217d46b362770644
+SHA256: 59191ed1ecd603c4c38d7acc99b1d650f3f034ab09fb86f38d887bed79089a61
+Size: 8763176
+
+Package: puppet-agent
+Version: 1.1.0-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 45350
+Depends: tar, hostname, net-tools, libxml2, libreadline6, dmidecode
+Conflicts: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas (1.3.0)
+ cfacter (0.4.1)
+ facter (2.4.4)
+ hiera (2.0.1)
+ marionette-collective (2.8.2)
+ openssl (1.0.0r)
+ puppet (4.1.0)
+ ruby (2.1.6)
+ ruby-augeas (0.5.0)
+ ruby-shadow (2.3.3)
+ ruby-stomp (1.3.3)
+ rubygem-deep-merge (1.0.0)
+ rubygem-net-ssh (2.1.4)
+ virt-what (1.1.4)
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.1.0-1trusty_i386.deb
+MD5sum: 2381f088310f736d8dfccf8d5125f27b
+SHA1: 2ca7083b4a08b09f1f16114089a826c20d02f1b8
+SHA256: 9610c515744be4ca1a14e292eedbc478586b4a218c11566aea718c407c2dd6b7
+Size: 8777188
+
+Package: puppet-agent
+Version: 1.1.1-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 45340
+Depends: tar, hostname, net-tools, libxml2, libreadline6, dmidecode
+Conflicts: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.3.0
+ cfacter 0.4.1
+ facter 2.4.4
+ hiera 2.0.1
+ marionette-collective 2.8.2
+ openssl 1.0.0s
+ puppet 4.1.0
+ ruby 2.1.6
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-net-ssh 2.1.4
+ virt-what 1.1.4
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.1.1-1trusty_i386.deb
+MD5sum: c619b0defcae657194d1a49bf522c1b0
+SHA1: 60d19c1ece03bed2f35e7d4ee7114c8eb780f9f6
+SHA256: 6c048474fa8e6b4840f27d2e87b555b9c23143c1c10161523570a5e89d00e24a
+Size: 8776794
+
+Package: puppet-agent
+Version: 1.2.0-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 47706
+Depends: tar, libxml2, libreadline6, dmidecode
+Conflicts: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ curl 7.42.1
+ facter 3.0.0
+ hiera 3.0.1
+ marionette-collective 2.8.2
+ openssl 1.0.0s
+ puppet 4.2.0
+ ruby 2.1.6
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-hocon 0.9.0
+ rubygem-net-ssh 2.1.4
+ virt-what 1.1.4
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.2.0-1trusty_i386.deb
+MD5sum: 5a195ce8ca6a37692023b60930fadba1
+SHA1: 97dd34e9ce1e37a8ae27ba4c2de34dec436f901b
+SHA256: 86c263caa92ae5f311b31ea04fa4c508955d573b0c12ba9c7d2848876c9a7c9a
+Size: 9506208
+
+Package: puppet-agent
+Version: 1.2.1-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 47709
+Depends: tar, libxml2, libreadline6, dmidecode
+Conflicts: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ curl 7.42.1
+ facter 3.0.1
+ hiera 3.0.1
+ marionette-collective 2.8.2
+ openssl 1.0.0s
+ puppet 4.2.0
+ ruby 2.1.6
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-hocon 0.9.0
+ rubygem-net-ssh 2.1.4
+ virt-what 1.1.4
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.2.1-1trusty_i386.deb
+MD5sum: f94102dca7792adbc59bd0389a926f95
+SHA1: 6807ff271db1674b048feffd6fc354adeffe63d2
+SHA256: 9016dadc7474eeffaacbde01b1cfbde47fabfd38db6bb7d93deb589f814dbd68
+Size: 9491018
+
+Package: puppet-agent
+Version: 1.2.2-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 47769
+Depends: tar, libxml2, libreadline6, dmidecode
+Conflicts: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ curl 7.43.0
+ facter 3.0.2
+ hiera 3.0.1
+ marionette-collective 2.8.2
+ openssl 1.0.0s
+ puppet 4.2.1
+ ruby 2.1.6
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-hocon 0.9.2
+ rubygem-net-ssh 2.1.4
+ virt-what 1.1.4
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.2.2-1trusty_i386.deb
+MD5sum: 1e89ac6e7bc9baaf9a360f34d26347ca
+SHA1: ba1f6890466302740e27851281c8690f42769dae
+SHA256: 9103282ffd7038d5eda239b392367706ee762d99fbde2751526ee13bbd325ca7
+Size: 9523008
+
+Package: puppet-agent
+Version: 1.2.4-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 48872
+Depends: tar, libxml2, libreadline6, dmidecode
+Conflicts: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ curl 7.43.0
+ dmidecode 2.12
+ facter 3.1.0
+ hiera 3.0.3
+ marionette-collective 2.8.5
+ openssl 1.0.2d
+ puppet 4.2.2
+ ruby 2.1.6
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-hocon 0.9.3
+ rubygem-net-ssh 2.1.4
+ virt-what 1.1.4
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.2.4-1trusty_i386.deb
+MD5sum: 5e0122e96f04dc099a15b4d857777f50
+SHA1: 473442f9fcb79ab07947fe4947d41f6ef4d285fe
+SHA256: 19a9db1f3e429a53554017e80d99de70d0b82605111462599556f894180f4444
+Size: 9740078
+
+Package: puppet-agent
+Version: 1.2.5-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 48872
+Depends: tar, libxml2, libreadline6, dmidecode
+Conflicts: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ curl 7.43.0
+ dmidecode 2.12
+ facter 3.1.0
+ hiera 3.0.3
+ marionette-collective 2.8.6
+ openssl 1.0.2d
+ puppet 4.2.2
+ ruby 2.1.6
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-hocon 0.9.3
+ rubygem-net-ssh 2.1.4
+ virt-what 1.1.4
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.2.5-1trusty_i386.deb
+MD5sum: 2bf34a84ded039115db5d40f52672aab
+SHA1: 3bf8bb7ffb2597beae574f038a59cc0f1582319f
+SHA256: 054e8c7de3cc4ef4d85ebb3d0617e782b09d6c65df0209681f55a726e99d0327
+Size: 9739298
+
+Package: puppet-agent
+Version: 1.2.6-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 48872
+Depends: tar, libxml2, libreadline6, dmidecode
+Conflicts: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ curl 7.43.0
+ dmidecode 2.12
+ facter 3.1.0
+ hiera 3.0.3
+ marionette-collective 2.8.6
+ openssl 1.0.2d
+ puppet 4.2.2
+ ruby 2.1.6
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-hocon 0.9.3
+ rubygem-net-ssh 2.1.4
+ virt-what 1.1.4
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.2.6-1trusty_i386.deb
+MD5sum: e6bb276f95ca3e30f88291c273a384d1
+SHA1: d2e47f9d7727dce3b87d7d907a64f963514f9c2c
+SHA256: 8d24e88a3085bb3e685a526e5e2cd5746e6821d8436a77d303d3a09da4859460
+Size: 9738988
+
+Package: puppet-agent
+Version: 1.2.7-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 49242
+Depends: tar, libxml2, libreadline6, dmidecode
+Conflicts: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ curl 7.43.0
+ dmidecode 2.12
+ facter 3.1.1
+ hiera 3.0.4
+ marionette-collective 2.8.6
+ openssl 1.0.2d
+ puppet 4.2.3
+ ruby 2.1.7
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-hocon 0.9.3
+ rubygem-net-ssh 2.9.2
+ virt-what 1.1.4
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.2.7-1trusty_i386.deb
+MD5sum: c2d53450ea28f229207fdf1d89dd722e
+SHA1: e5c9cd74edca21fb841d83ec8959146e6098c26c
+SHA256: 42c989372ac3a77b17e96b7cb0c19aa3afc28d6dfbc5ad845a5487e42a2c5169
+Size: 9810436
+
+Package: puppet-agent
+Version: 1.3.0-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 59562
+Depends: tar, libxml2, libreadline6
+Conflicts: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ cpp-pcp-client 1.0.1
+ curl 7.43.0
+ dmidecode 2.12
+ facter 3.1.2
+ hiera 3.0.5
+ marionette-collective 2.8.6
+ openssl 1.0.2d
+ puppet 4.3.0
+ puppet-ca-bundle 1.0.4
+ pxp-agent 1.0.0
+ ruby 2.1.7
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-hocon 0.9.3
+ rubygem-net-ssh 2.9.2
+ shellpath 2015-09-18
+ virt-what 1.1.4
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.3.0-1trusty_i386.deb
+MD5sum: d12f7a43158701831f0334a1288b873e
+SHA1: 06ab49e308e51442fc701359b966cc34f180f53e
+SHA256: 8028b995e7fd34e17f500bd3995da0c80d56a07b8576618076425cbd04f7a6cb
+Size: 12137366
+
+Package: puppet-agent
+Version: 1.3.1-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 59801
+Depends: tar, libxml2, libreadline6
+Conflicts: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ cpp-pcp-client 1.0.1
+ curl 7.43.0
+ dmidecode 2.12
+ facter 3.1.3
+ hiera 3.0.5
+ marionette-collective 2.8.6
+ openssl 1.0.2d
+ puppet 4.3.1
+ puppet-ca-bundle 1.0.4
+ pxp-agent 1.0.1
+ ruby 2.1.7
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-hocon 0.9.3
+ rubygem-net-ssh 2.9.2
+ shellpath 2015-09-18
+ virt-what 1.1.4
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.3.1-1trusty_i386.deb
+MD5sum: b3b861ce5bcc45c18e2a5f8671af7e5f
+SHA1: 71d6f1ea8478ad7b2247c800e12cf21007ad6c75
+SHA256: 6147c22ba2af04d0634125bf24619d37e4dea77b66750dcd16aa2057e63c27ca
+Size: 12167952
+
+Package: puppet-agent
+Version: 1.3.2-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 60158
+Depends: tar, libxml2, libreadline6
+Conflicts: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ cpp-pcp-client 1.0.1
+ curl 7.43.0
+ dmidecode 2.12
+ facter 3.1.3
+ hiera 3.0.5
+ marionette-collective 2.8.6
+ openssl 1.0.2d
+ puppet 4.3.1
+ puppet-ca-bundle 1.0.7
+ pxp-agent 1.0.1
+ ruby 2.1.7
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-hocon 0.9.3
+ rubygem-net-ssh 2.9.2
+ shellpath 2015-09-18
+ virt-what 1.1.4
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.3.2-1trusty_i386.deb
+MD5sum: dddb9103047666d69e11997fad4ff872
+SHA1: 43e3e3000a8e85ff90fe7131a0cdb7ede928ef43
+SHA256: 20e1abfe91e8461413185e25ba585d77510ba591b86f24a18ab6ec1bd99bcdef
+Size: 12390370
+
+Package: puppet-agent
+Version: 1.3.4-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 65421
+Depends: tar, libreadline6
+Conflicts: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ cpp-pcp-client 1.0.1
+ curl 7.46.0
+ dmidecode 2.12
+ facter 3.1.4
+ hiera 3.0.6
+ libxml2 2.9.3
+ libxslt 1.1.28
+ marionette-collective 2.8.7
+ openssl 1.0.2e
+ puppet 4.3.2
+ puppet-ca-bundle 1.0.7
+ pxp-agent 1.0.2
+ ruby 2.1.8
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-hocon 0.9.3
+ rubygem-net-ssh 2.9.2
+ shellpath 2015-09-18
+ virt-what 1.1.4
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.3.4-1trusty_i386.deb
+MD5sum: ed0bc8d123655d8e32f71f86d585057e
+SHA1: 3202fc34c124e851730ffacf331e51bfdb92ca22
+SHA256: 078915eccf9798b7924d4a5b3527ce31ba222f5a08c231831133ff7c25d69146
+Size: 13516962
+
+Package: puppet-agent
+Version: 1.3.5-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 65424
+Depends: tar, libreadline6
+Conflicts: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ cpp-pcp-client 1.0.1
+ curl 7.46.0
+ dmidecode 2.12
+ facter 3.1.4
+ hiera 3.0.6
+ libxml2 2.9.3
+ libxslt 1.1.28
+ marionette-collective 2.8.7
+ openssl 1.0.2f
+ puppet 4.3.2
+ puppet-ca-bundle 1.0.7
+ pxp-agent 1.0.2
+ ruby 2.1.8
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-hocon 0.9.3
+ rubygem-net-ssh 2.9.2
+ shellpath 2015-09-18
+ virt-what 1.1.4
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.3.5-1trusty_i386.deb
+MD5sum: 96751a0dd975c9dbac627fcea9fab031
+SHA1: a569c16d6be2a4b509637fffb6051a9e0fbba643
+SHA256: 796fc9a0daeafd29381327c60357bead66adf6fbebc119f158873cefba207761
+Size: 13511672
+
+Package: puppet-agent
+Version: 1.3.6-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 65448
+Depends: tar, libreadline6
+Conflicts: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ cpp-pcp-client 1.0.4
+ curl 7.46.0
+ dmidecode 2.12
+ facter 3.1.4
+ hiera 3.0.6
+ libxml2 2.9.3
+ libxslt 1.1.28
+ marionette-collective 2.8.7
+ openssl 1.0.2g
+ puppet 4.3.2
+ puppet-ca-bundle 1.0.7
+ pxp-agent 1.0.3
+ ruby 2.1.8
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-hocon 0.9.3
+ rubygem-net-ssh 2.9.2
+ shellpath 2015-09-18
+ virt-what 1.1.4
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.3.6-1trusty_i386.deb
+MD5sum: e8880aa8fe9c542c50eeb91bc39e5d4f
+SHA1: 8e82d65e9e72e64b1694a62186138f7b9fb0b948
+SHA256: cf2334aed7380e388565f32a97d3a16bf1fc036b3fa368e498fb2a1e73d584f1
+Size: 13522172
+
+Package: puppet-agent
+Version: 1.4.0-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 68138
+Depends: tar, libreadline6
+Conflicts: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ cpp-pcp-client 1.1.1
+ curl 7.46.0
+ dmidecode 2.12
+ facter 3.1.5
+ hiera 3.1.0
+ leatherman 0.4.2
+ libxml2 2.9.3
+ libxslt 1.1.28
+ marionette-collective 2.8.8
+ openssl 1.0.2g
+ puppet 4.4.0
+ puppet-ca-bundle 1.0.7
+ pxp-agent 1.1.1
+ ruby 2.1.8
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-hocon 0.9.3
+ rubygem-net-ssh 2.9.2
+ shellpath 2015-09-18
+ virt-what 1.1.4
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.4.0-1trusty_i386.deb
+MD5sum: 83421c9744db33286b8d6a8e9a7a646e
+SHA1: 33028b7c867bf2bf43a96095003695aeb74000f9
+SHA256: 0367a81ac7584c9760d8b06016745445fd49b303ed5d921ac65379da21b6d81d
+Size: 13329460
+
+Package: puppet-agent
+Version: 1.4.1-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 68140
+Depends: tar, libreadline6
+Conflicts: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ cpp-pcp-client 1.1.1
+ curl 7.46.0
+ dmidecode 2.12
+ facter 3.1.5
+ hiera 3.1.1
+ leatherman 0.4.2
+ libxml2 2.9.3
+ libxslt 1.1.28
+ marionette-collective 2.8.8
+ openssl 1.0.2g
+ puppet 4.4.1
+ puppet-ca-bundle 1.0.7
+ pxp-agent 1.1.1
+ ruby 2.1.8
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-hocon 0.9.3
+ rubygem-net-ssh 2.9.2
+ shellpath 2015-09-18
+ virt-what 1.1.4
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.4.1-1trusty_i386.deb
+MD5sum: 764be27e37a50bd8ebe6f1426c0bdc53
+SHA1: f21fbaf724721c46aa1d948f7e00592dbfee466a
+SHA256: 44a3efb753993969ae1f7429c13c64fb186b84fc7ab8592a8a2af6a038b0492f
+Size: 13335012
+
+Package: puppet-agent
+Version: 1.4.2-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 68532
+Depends: tar, libreadline6
+Breaks: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ cpp-pcp-client 1.1.2
+ curl 7.46.0
+ dmidecode 2.12
+ facter 3.1.6
+ hiera 3.1.2
+ leatherman 0.6.2
+ libxml2 2.9.3
+ libxslt 1.1.28
+ marionette-collective 2.8.8
+ openssl 1.0.2g
+ puppet 4.4.2
+ puppet-ca-bundle 1.0.7
+ pxp-agent 1.1.2
+ ruby 2.1.8
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-hocon 0.9.3
+ rubygem-net-ssh 2.9.2
+ shellpath 2015-09-18
+ virt-what 1.1.4
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.4.2-1trusty_i386.deb
+MD5sum: 78f03d14d43d089d7f701b383c36ed98
+SHA1: decb739367ddf8ebb09ea6aa8bcffc2b287c5725
+SHA256: 8b77d9d254c0cb43b7ffa4c44cea1ae3e07b3b50278842cf0b0a4920bd4ab903
+SHA512: 3ee4fdf7bd325cdc711cd73cdf7d93c587343db112edb7dca03c3acd4c7f1c60fda32e0c06917cdfa41bb80eab1e8828a10896e1a1c57c5078924fd2d8d5df46
+Size: 13394410
+
+Package: puppet-agent
+Version: 1.5.0-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 69198
+Depends: tar, libreadline6
+Breaks: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ cpp-pcp-client 1.1.3
+ curl 7.46.0
+ dmidecode 2.12
+ facter 3.1.7
+ hiera 3.2.0
+ leatherman 0.6.3
+ libxml2 2.9.3
+ libxslt 1.1.28
+ marionette-collective 2.8.8
+ openssl 1.0.2h
+ puppet 4.5.0
+ puppet-ca-bundle 1.0.7
+ pxp-agent 1.1.3
+ ruby 2.1.9
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-hocon 0.9.3
+ rubygem-net-ssh 2.9.2
+ rubygem-semantic_puppet 0.1.2
+ shellpath 2015-09-18
+ virt-what 1.1.4
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.5.0-1trusty_i386.deb
+MD5sum: 50bf2c7c96a708a29285aa60577b6e41
+SHA1: 4f4124743d49ca31f075e808c50aa365e0be719c
+SHA256: ca32a493a513dec2f5f8a359f8e686b00c4a0ab002590075f74e6e59ebdac2a3
+SHA512: 35099f191f345d0046b03a0699cfed33fec369a784ac4169178f56e68a1a057d7c2442073bf12dcc204e2ec860df7b7c80ef51350b6f9f0fe62ec7fb569782b8
+Size: 13702620
+
+Package: puppet-agent
+Version: 1.5.1-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 69399
+Depends: tar, libreadline6
+Breaks: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ cpp-pcp-client 1.1.3
+ curl 7.46.0
+ dmidecode 2.12
+ facter 3.1.8
+ hiera 3.2.0
+ leatherman 0.7.1
+ libxml2 2.9.3
+ libxslt 1.1.28
+ marionette-collective 2.8.8
+ openssl 1.0.2h
+ puppet 4.5.1
+ puppet-ca-bundle 1.0.7
+ pxp-agent 1.1.3
+ ruby 2.1.9
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-hocon 0.9.3
+ rubygem-net-ssh 2.9.2
+ rubygem-semantic_puppet 0.1.2
+ shellpath 2015-09-18
+ virt-what 1.1.4
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.5.1-1trusty_i386.deb
+MD5sum: 085f01f294dacc717874d577856ca805
+SHA1: 954bb28942bc9dec2577c64a686208d20bdf4247
+SHA256: beb6aef0686610dd25f4045d4fb5d169bd09516ae9fa78e0a884376f5cd75fed
+SHA512: 1d1cc7cf42c44baeb5acc33a090c9badebec8148f5fc30ddd8f898b6ddb56447054def284099ec11686e59fc2cf05aa4f50e00c8c530961aa78498dfce4441a7
+Size: 13740064
+
+Package: puppet-agent
+Version: 1.5.2-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 69399
+Depends: tar, libreadline6
+Breaks: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ cpp-pcp-client 1.1.3
+ curl 7.46.0
+ dmidecode 2.12
+ facter 3.1.8
+ hiera 3.2.0
+ leatherman 0.7.1
+ libxml2 2.9.3
+ libxslt 1.1.28
+ marionette-collective 2.8.8
+ openssl 1.0.2h
+ puppet 4.5.2
+ puppet-ca-bundle 1.0.7
+ pxp-agent 1.1.3
+ ruby 2.1.9
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-hocon 0.9.3
+ rubygem-net-ssh 2.9.2
+ rubygem-semantic_puppet 0.1.2
+ shellpath 2015-09-18
+ virt-what 1.1.4
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.5.2-1trusty_i386.deb
+MD5sum: 71fea0688719de153f0f816551b2f9a3
+SHA1: 8310f0155e6a96c791252cc70703fd691c461a9c
+SHA256: 952c85ba140ce02d52f6725c8dd7c26a2314c6213d4e1a7d9779818248716ece
+SHA512: 0a076d144fe40b865c0c6b1e9fd3a12d8e7db4789d79da80696b2eb7f505eb289e0fb642e92beb319df3348119418536b0dc8771713a304b8e64c2157cee5786
+Size: 13738728
+
+Package: puppet-agent
+Version: 1.5.3-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 69417
+Depends: tar, libreadline6
+Breaks: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ cpp-pcp-client 1.1.4
+ curl 7.46.0
+ dmidecode 2.12
+ facter 3.3.0
+ hiera 3.2.0
+ leatherman 0.7.4
+ libxml2 2.9.4
+ libxslt 1.1.29
+ marionette-collective 2.8.9
+ openssl 1.0.2h
+ puppet 4.5.3
+ puppet-ca-bundle 1.0.7
+ pxp-agent 1.1.4
+ ruby 2.1.9
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-hocon 0.9.3
+ rubygem-net-ssh 2.9.2
+ rubygem-semantic_puppet 0.1.2
+ runtime
+ shellpath 2015-09-18
+ virt-what 1.14
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.5.3-1trusty_i386.deb
+MD5sum: 7f6f8b5b1dad809e0d03eb8299f34fda
+SHA1: d93241e46460dac8eea0687ec859308a15e3a7c4
+SHA256: e91e5e1aaf3568311f330b73fa9edee0edb08a30dc66c7b24d5541486c92cad0
+SHA512: e389371d7a7a0254c11faa3ed7e1473e0b175491d68d9b4281577e87a73c6547cea46365238de5235787526b924f437305931504fddd68bb394deffc409628d9
+Size: 13014634
+
+Package: puppet-agent
+Version: 1.6.0-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 74019
+Depends: tar, libreadline6
+Breaks: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ cpp-hocon 0.1.2
+ cpp-pcp-client 1.2.0
+ curl 7.46.0
+ dmidecode 2.12
+ facter 3.4.0
+ hiera 3.2.1
+ leatherman 0.8.1
+ libxml2 2.9.4
+ libxslt 1.1.29
+ marionette-collective 2.9.0
+ openssl 1.0.2h
+ puppet 4.6.0
+ puppet-ca-bundle 1.0.7
+ pxp-agent 1.2.0
+ ruby 2.1.9
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-hocon 0.9.3
+ rubygem-net-ssh 2.9.2
+ rubygem-semantic_puppet 0.1.2
+ runtime
+ shellpath 2015-09-18
+ virt-what 1.14
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.6.0-1trusty_i386.deb
+MD5sum: d8eaae6c285b075784cd7ca2d0b86778
+SHA1: cc43b9c3f0df8332f66b4c2542432d7a24cad6b0
+SHA256: 60a7584e07aac1a638ada67597e5b5b50e30cb1ab3dcfe35ec03560ff4078589
+SHA512: 02827660e2e3b75a517b50dfe148daa05504305c3a07916009e4e2f31987bbbde08bf0d36b6f7d9d8947f4bce7052ab175117e339fcb74f49aaefd57c51d9662
+Size: 14051176
+
+Package: puppet-agent
+Version: 1.6.1-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 74108
+Depends: tar, libreadline6
+Breaks: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ cpp-hocon 0.1.2
+ cpp-pcp-client 1.2.0
+ curl 7.46.0
+ dmidecode 2.12
+ facter 3.4.1
+ hiera 3.2.1
+ leatherman 0.8.1
+ libxml2 2.9.4
+ libxslt 1.1.29
+ marionette-collective 2.9.0
+ openssl 1.0.2h
+ puppet 4.6.1
+ puppet-ca-bundle 1.0.7
+ pxp-agent 1.2.1
+ ruby 2.1.9
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-hocon 0.9.3
+ rubygem-net-ssh 2.9.2
+ rubygem-semantic_puppet 0.1.2
+ runtime
+ shellpath 2015-09-18
+ virt-what 1.14
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.6.1-1trusty_i386.deb
+MD5sum: 87a63031492411659f988524331ef226
+SHA1: 13ed31f9d14930fe96c1169308aba3cf8d993f62
+SHA256: 53591f8a29b0755ff0e2d625c80e452e76035dc84600eff8e061bdb40534106e
+SHA512: 7fdb8f3a05f9c6b9a1c63c697b969d01ca387f791136065c2dae101a2da19f1c4988d316b05cd4998e535146e88d6dff6aa8968d864775f13f49eb5f73eaab88
+Size: 14714268
+
+Package: puppet-agent
+Version: 1.6.2-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 74111
+Depends: tar, libreadline6
+Breaks: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ cpp-hocon 0.1.2
+ cpp-pcp-client 1.2.0
+ curl 7.46.0
+ dmidecode 2.12
+ facter 3.4.1
+ hiera 3.2.1
+ leatherman 0.8.1
+ libxml2 2.9.4
+ libxslt 1.1.29
+ marionette-collective 2.9.0
+ openssl 1.0.2h
+ puppet 4.6.2
+ puppet-ca-bundle 1.0.7
+ pxp-agent 1.2.1
+ ruby 2.1.9
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-hocon 0.9.3
+ rubygem-net-ssh 2.9.2
+ rubygem-semantic_puppet 0.1.2
+ runtime
+ shellpath 2015-09-18
+ virt-what 1.14
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.6.2-1trusty_i386.deb
+MD5sum: 0d5db83d45123a6c5ff616bfb15574c8
+SHA1: 38c8b414cb40db14e6ee6c7c3c8aa90af7bcb9ae
+SHA256: 065048c210f68091fd04e39537d187753ce47c9e49603b3fea5d5a6a767da159
+SHA512: de3f7fccd11b294ea0aca82e144a7cc0ff8343398b6482457a23c314eb810795a66421300315060f2e6e479bb2a09347c672455ed9f4fb1fb5d9e9cca68a743f
+Size: 14713434
+
+Package: puppet-agent
+Version: 1.7.0-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 74111
+Depends: tar, libreadline6
+Breaks: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ cpp-hocon 0.1.2
+ cpp-pcp-client 1.2.0
+ curl 7.46.0
+ dmidecode 2.12
+ facter 3.4.1
+ hiera 3.2.1
+ leatherman 0.8.1
+ libxml2 2.9.4
+ libxslt 1.1.29
+ marionette-collective 2.9.0
+ openssl 1.0.2h
+ puppet 4.7.0
+ puppet-ca-bundle 1.0.7
+ pxp-agent 1.2.1
+ ruby 2.1.9
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-hocon 0.9.3
+ rubygem-net-ssh 2.9.2
+ rubygem-semantic_puppet 0.1.2
+ runtime
+ shellpath 2015-09-18
+ virt-what 1.14
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.7.0-1trusty_i386.deb
+MD5sum: 48002f53dd7606829185c4f580cc292c
+SHA1: d028a56d33fcff7fd8d7ef6f4bca960f9d69398c
+SHA256: cb310242d3b8ef7379773a63f123d38e871e108c6f456943d96235e75c165f60
+SHA512: b51fd790f525107f84f3ded5b31bddb1b88e511601d61d153647c6ede7a77881ed3bf42baacdf76a54785389f07e88440caa32be3bbe8b13c910e7dea8c0b343
+Size: 14717632
+
+Package: puppet-agent
+Version: 1.7.1-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 74192
+Depends: tar, libreadline6
+Breaks: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ cpp-hocon 0.1.2
+ cpp-pcp-client 1.2.0
+ curl 7.50.3
+ dmidecode 2.12
+ facter 3.4.1
+ hiera 3.2.1
+ leatherman 0.8.1
+ libxml2 2.9.4
+ libxslt 1.1.29
+ marionette-collective 2.9.0
+ openssl 1.0.2j
+ puppet 4.7.0
+ puppet-ca-bundle 1.0.7
+ pxp-agent 1.2.2
+ ruby 2.1.9
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-hocon 0.9.3
+ rubygem-net-ssh 2.9.2
+ rubygem-semantic_puppet 0.1.2
+ runtime
+ shellpath 2015-09-18
+ virt-what 1.14
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.7.1-1trusty_i386.deb
+MD5sum: d1fcf6601ef83891b0ef40b68ae3a642
+SHA1: 722a86a8b91e89dc5ad5cb729c26689420f9bf50
+SHA256: 60ca3aa3cf022a221da798a1fd09e0d6919045a63eb7de3828f1650b1f7fcaf4
+SHA512: ead718913230c3941db22977d22a4f103176bb94f340f43b50a843cced5d2458f94a49b24729ab070f99a89fa193af84652cdcc34bcf7b2ce47622bac1f52d78
+Size: 14739270
+
+Package: puppet-agent
+Version: 1.7.2-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 74605
+Depends: tar, libreadline6
+Breaks: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ cpp-hocon 0.1.2
+ cpp-pcp-client 1.2.1
+ curl 7.51.0
+ dmidecode 2.12
+ facter 3.4.2
+ hiera 3.2.2
+ leatherman 0.10.1
+ libxml2 2.9.4
+ libxslt 1.1.29
+ marionette-collective 2.9.1
+ openssl 1.0.2j
+ puppet 4.7.1
+ puppet-ca-bundle 1.0.7
+ pxp-agent 1.2.3
+ ruby 2.1.9
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-hocon 0.9.3
+ rubygem-net-ssh 2.9.2
+ rubygem-semantic_puppet 0.1.2
+ runtime
+ shellpath 2015-09-18
+ virt-what 1.14
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.7.2-1trusty_i386.deb
+MD5sum: fb4b6ce00cf13ee93902816f7b309a40
+SHA1: 19a7304542577b75dc054163230ce467315ad6db
+SHA256: df51e880e71240ab0fc4f54458f398b69d2cadafbc745bab0b62e4ba08a61dd1
+SHA512: 6dfed9e40ea06fd0d7b839991a0b9df6bee7529139782db305f14aa3f512431e64246e16ccf8f267cfce9934077064791f6b3f2cd2a8683687b2b0e53d341aa6
+Size: 14235102
+
+Package: puppet-agent
+Version: 1.8.0-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 82057
+Depends: tar, libreadline6
+Breaks: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ cpp-hocon 0.1.4
+ cpp-pcp-client 1.3.0
+ curl 7.50.3
+ dmidecode 2.12
+ facter 3.5.0
+ hiera 3.2.2
+ leatherman 0.9.2
+ libxml2 2.9.4
+ libxslt 1.1.29
+ marionette-collective 2.9.1
+ openssl 1.0.2j
+ puppet 4.8.0
+ puppet-ca-bundle 1.0.7
+ pxp-agent 1.3.0
+ ruby-2.1.9 2.1.9
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-fast_gettext 1.1.0
+ rubygem-gettext 3.2.2
+ rubygem-gettext-setup 0.6
+ rubygem-hocon 0.9.3
+ rubygem-locale 2.1.2-2
+ rubygem-net-ssh 2.9.2
+ rubygem-semantic_puppet 0.1.2
+ rubygem-text 1.3.1
+ runtime
+ shellpath 2015-09-18
+ virt-what 1.14
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.8.0-1trusty_i386.deb
+MD5sum: 201ed69d2200c69656495f457c9ceae0
+SHA1: 5313c79462a70d94fe022d9b29dfbe5067c2da2d
+SHA256: 4ede621abee4ca2ee22b8eeb1ebf32b5b6a62bc85d370008ce8623989d4d2da6
+SHA512: aa708747dce85380d568b27be6cab06e76d7afae1cd4ce426bdbfcb0c0291aad4e7db57abcb2384435c00e509652929f8f205bad96bedb815ba7f9750a3c4d95
+Size: 15640434
+
+Package: puppet-agent
+Version: 1.8.1-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 82054
+Depends: tar, libreadline6
+Conflicts: pe-r10k (<< 2.5.0.0)
+Breaks: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ cpp-hocon 0.1.4
+ cpp-pcp-client 1.3.0
+ curl 7.50.3
+ dmidecode 2.12
+ facter 3.5.0
+ hiera 3.2.2
+ leatherman 0.9.2
+ libxml2 2.9.4
+ libxslt 1.1.29
+ marionette-collective 2.9.1
+ openssl 1.0.2j
+ puppet 4.8.1
+ puppet-ca-bundle 1.0.7
+ pxp-agent 1.3.0
+ ruby-2.1.9 2.1.9
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-fast_gettext 1.1.0
+ rubygem-gettext 3.2.2
+ rubygem-gettext-setup 0.6
+ rubygem-hocon 0.9.3
+ rubygem-locale 2.1.2-2
+ rubygem-net-ssh 2.9.2
+ rubygem-semantic_puppet 0.1.2
+ rubygem-text 1.3.1
+ runtime
+ shellpath 2015-09-18
+ virt-what 1.14
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.8.1-1trusty_i386.deb
+MD5sum: 48fc09b16350404f4178fe2df94583bc
+SHA1: b60c62c98caabd28bb877d94789be0243d750ea4
+SHA256: a00aab144d1a82b56fdafc4aa5c4589f92e14252091d259c37e1d0ac715ff50b
+SHA512: 702b79dadb3f21ed26b3066e5f5321b94ca14a3a59d5cc262cc1190ab8ec9c3791088f4083212714e4ad43d3ade789ee586a06ff9cea8e58261a18a61916cf06
+Size: 15639818
+
+Package: puppet-agent
+Version: 1.8.2-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 82054
+Depends: tar, libreadline6
+Conflicts: pe-r10k (<< 2.5.0.0)
+Breaks: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ cpp-hocon 0.1.4
+ cpp-pcp-client 1.3.0
+ curl 7.50.3
+ dmidecode 2.12
+ facter 3.5.0
+ hiera 3.2.2
+ leatherman 0.9.2
+ libxml2 2.9.4
+ libxslt 1.1.29
+ marionette-collective 2.9.1
+ openssl 1.0.2j
+ puppet 4.8.1
+ puppet-ca-bundle 1.0.7
+ pxp-agent 1.3.1
+ ruby-2.1.9 2.1.9
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-fast_gettext 1.1.0
+ rubygem-gettext 3.2.2
+ rubygem-gettext-setup 0.6
+ rubygem-hocon 0.9.3
+ rubygem-locale 2.1.2-2
+ rubygem-net-ssh 2.9.2
+ rubygem-semantic_puppet 0.1.2
+ rubygem-text 1.3.1
+ runtime
+ shellpath 2015-09-18
+ virt-what 1.14
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.8.2-1trusty_i386.deb
+MD5sum: dd2d1ca768d4a32cf6aa8c931275143b
+SHA1: bcc850e9e89c1929b787cade05075617d3865d26
+SHA256: df4b4f1739216e3d8f2fd75e6e06a762540e928ca337777b3edc792fabc41619
+SHA512: 98163cf4edd9678fec351405790820954af09d3862ec96f381b23092e49dc2b3d44714bf13bd87b58f457a78eb85060cb0542850e6cefabb5d6028acc75cdc7a
+Size: 15638304
+
+Package: puppet-agent
+Version: 1.8.3-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 82060
+Depends: tar, libreadline6
+Conflicts: pe-r10k (<< 2.5.0.0)
+Breaks: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ cpp-hocon 0.1.4
+ cpp-pcp-client 1.3.1
+ curl 7.51.0
+ dmidecode 2.12
+ facter 3.5.1
+ hiera 3.2.2
+ leatherman 0.10.1
+ libxml2 2.9.4
+ libxslt 1.1.29
+ marionette-collective 2.9.1
+ openssl 1.0.2j
+ puppet 4.8.2
+ puppet-ca-bundle 1.0.7
+ pxp-agent 1.3.2
+ ruby-2.1.9 2.1.9
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-fast_gettext 1.1.0
+ rubygem-gettext 3.2.2
+ rubygem-gettext-setup 0.6
+ rubygem-hocon 0.9.3
+ rubygem-locale 2.1.2-2
+ rubygem-net-ssh 2.9.2
+ rubygem-semantic_puppet 0.1.2
+ rubygem-text 1.3.1
+ runtime
+ shellpath 2015-09-18
+ virt-what 1.14
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.8.3-1trusty_i386.deb
+MD5sum: a8b4e6b68a0eede53ec2fb4de687ea91
+SHA1: 50582b490ba370a612aadb58bb49b6a6e0e68873
+SHA256: c83f48a974e067ede199c10b15a249a7a81956325efa69d31fb2cb7172388ea0
+SHA512: fd7f617f6e568ad378df514be003278b5512ca91da389df24a49c16caf83cd66ce28d72d5015b4dc27ac5b3154ab38a371841c26a296a84b0b08fb596dc858e3
+Size: 15721754
+
+Package: puppet-agent
+Version: 1.9.0-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 82980
+Depends: tar, libreadline6
+Conflicts: pe-r10k (<< 2.5.0.0)
+Breaks: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ cpp-hocon 0.1.4
+ cpp-pcp-client 1.4.0
+ curl 7.51.0
+ dmidecode 2.12
+ facter 3.6.0
+ hiera 3.3.0
+ leatherman 0.10.2
+ libxml2 2.9.4
+ libxslt 1.1.29
+ marionette-collective 2.10.0
+ openssl 1.0.2j
+ puppet 4.9.0
+ puppet-ca-bundle 1.0.7
+ pxp-agent 1.4.0
+ ruby-2.1.9 2.1.9
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-fast_gettext 1.1.0
+ rubygem-gettext 3.2.2
+ rubygem-gettext-setup 0.10
+ rubygem-hocon 1.1.3
+ rubygem-locale 2.1.2-2
+ rubygem-net-ssh 2.9.2
+ rubygem-semantic_puppet 0.1.2
+ rubygem-text 1.3.1
+ runtime
+ shellpath 2015-09-18
+ virt-what 1.14
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.9.0-1trusty_i386.deb
+MD5sum: 804fd131037c71b03f3b56b0d0a5ed53
+SHA1: bde2e0a9ed33df3699b53d1a1e95cad67b8ca1e2
+SHA256: a119f9e70daa230cc39e4f7cb88c9b0d5b8814d74bd13eef385f6617ec4a3197
+SHA512: 2fc079319d5a838c34a170a743a71bbe98389f5702dad869a5f52787195cea005fc1ff05a8e6c433bc0df1facb876405ab4a3d6f20f4d701fe79d39ea25b7707
+Size: 15715542
+
+Package: puppet-agent
+Version: 1.9.1-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 82991
+Depends: tar, libreadline6
+Conflicts: pe-r10k (<< 2.5.0.0)
+Breaks: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ cpp-hocon 0.1.4
+ cpp-pcp-client 1.4.0
+ curl 7.51.0
+ dmidecode 2.12
+ facter 3.6.1
+ hiera 3.3.0
+ leatherman 0.10.2
+ libxml2 2.9.4
+ libxslt 1.1.29
+ marionette-collective 2.10.1
+ openssl 1.0.2j
+ puppet 4.9.2
+ puppet-ca-bundle 1.0.7
+ pxp-agent 1.4.0
+ ruby-2.1.9 2.1.9
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-fast_gettext 1.1.0
+ rubygem-gettext 3.2.2
+ rubygem-gettext-setup 0.10
+ rubygem-hocon 1.1.3
+ rubygem-locale 2.1.2-2
+ rubygem-net-ssh 2.9.2
+ rubygem-semantic_puppet 0.1.2
+ rubygem-text 1.3.1
+ runtime
+ shellpath 2015-09-18
+ virt-what 1.14
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.9.1-1trusty_i386.deb
+MD5sum: 9dcee9f4c96829f1b17ffa9f81aec412
+SHA1: f47920beed2c59a52e77fd30e926ac66dc64ad4c
+SHA256: 08029a0a6d575da97afabd34530b073aecedf45b37f67388cd77b776d0fbef91
+SHA512: 534e26ceaf6c4385c5b26cd3eca933f2350a80c7fe16e8812f625480fcda3e0a18fb8b03117d0a3c4be24ef53573260f67a0484de9320a763f1888bac0b24c14
+Size: 15949440
+
+Package: puppet-agent
+Version: 1.9.2-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 82980
+Depends: tar, libreadline6
+Conflicts: pe-r10k (<< 2.5.0.0)
+Breaks: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ cpp-hocon 0.1.4
+ cpp-pcp-client 1.4.0
+ curl 7.51.0
+ dmidecode 2.12
+ facter 3.6.1
+ hiera 3.3.0
+ leatherman 0.11.0
+ libxml2 2.9.4
+ libxslt 1.1.29
+ marionette-collective 2.10.1
+ openssl 1.0.2j
+ puppet 4.9.3
+ puppet-ca-bundle 1.0.7
+ pxp-agent 1.4.1
+ ruby-2.1.9 2.1.9
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-fast_gettext 1.1.0
+ rubygem-gettext 3.2.2
+ rubygem-gettext-setup 0.10
+ rubygem-hocon 1.1.3
+ rubygem-locale 2.1.2-2
+ rubygem-net-ssh 2.9.2
+ rubygem-semantic_puppet 0.1.2
+ rubygem-text 1.3.1
+ runtime
+ shellpath 2015-09-18
+ virt-what 1.14
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.9.2-1trusty_i386.deb
+MD5sum: 220856d26881cfdcb96801875461d73d
+SHA1: 05affcb5dc87dbdd4ccf87e4d5c478932979a364
+SHA256: eccb2d468b2dce840dcf33890e4054fb1c78712a2816db580227e59b78ceabaf
+SHA512: 963a2d043e58c8e184c5d39564dfab02982484c89679335ed817e31c76156bee4eeecb1ea1cc5e03b28e79eaba80d4a02486f175ab4d3e2cc83031b07558a9df
+Size: 15717560
+
+Package: puppet-agent
+Version: 1.9.3-1trusty
+Architecture: i386
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 82980
+Depends: tar, libreadline6
+Conflicts: pe-r10k (<< 2.5.0.0)
+Breaks: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Replaces: cfacter (<< 0.5.0), facter (<< 3.0.0), hiera (<< 2.0.0), mcollective (<< 3.0.0), mcollective-client (<< 3.0.0), mcollective-common (<< 3.0.0), mcollective-doc, pe-agent, pe-augeas, pe-cloud-provisioner, pe-cloud-provisioner-libs, pe-facter, pe-hiera, pe-libldap, pe-libyaml, pe-mcollective, pe-mcollective-client, pe-mcollective-common, pe-openssl, pe-puppet, pe-puppet-enterprise-release (<< 4.0.0), pe-puppetserver-common (<< 4.0.0), pe-ruby, pe-ruby-augeas, pe-ruby-ldap, pe-ruby-mysql, pe-ruby-rgen, pe-ruby-shadow, pe-ruby-stomp, pe-rubygem-deep-merge, pe-rubygem-gem2rpm, pe-rubygem-net-ssh, pe-rubygems, pe-virt-what, puppet (<< 4.0.0), puppet-common (<< 4.0.0)
+Provides: cfacter, facter, hiera, mcollective, mcollective-client, mcollective-common, puppet, puppet-common
+Section: admin
+Priority: optional
+Homepage: https://www.puppetlabs.com
+Description: The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, hiera and mcollective.
+  .
+ Contains the following components:
+ augeas 1.4.0
+ cpp-hocon 0.1.4
+ cpp-pcp-client 1.4.0
+ curl 7.51.0
+ dmidecode 2.12
+ facter 3.6.2
+ hiera 3.3.1
+ leatherman 0.11.1
+ libxml2 2.9.4
+ libxslt 1.1.29
+ marionette-collective 2.10.2
+ openssl 1.0.2j
+ puppet 4.9.4
+ puppet-ca-bundle 1.0.7
+ pxp-agent 1.4.1
+ ruby-2.1.9 2.1.9
+ ruby-augeas 0.5.0
+ ruby-shadow 2.3.3
+ ruby-stomp 1.3.3
+ rubygem-deep-merge 1.0.1
+ rubygem-fast_gettext 1.1.0
+ rubygem-gettext 3.2.2
+ rubygem-gettext-setup 0.10
+ rubygem-hocon 1.1.3
+ rubygem-locale 2.1.2-2
+ rubygem-net-ssh 2.9.2
+ rubygem-semantic_puppet 0.1.2
+ rubygem-text 1.3.1
+ runtime
+ shellpath 2015-09-18
+ virt-what 1.14
+Filename: pool/trusty/PC1/p/puppet-agent/puppet-agent_1.9.3-1trusty_i386.deb
+MD5sum: 77328e5565811e53be44b29a0dec02b2
+SHA1: 50dfa739721fcc02d0f118e11f5a026150704326
+SHA256: a3a24585a77edfc441f4d7278bee2e17667da7f7ecf10f461dc3d7cf6b9ea465
+SHA512: d43491dd17967b62c9dcd85d41c5437bc30c360364c19d4fb7c71c2152e0df166ce5bd7f6ad22b214d41c3a92c0d11c3940ad896614104002e91736ef6fae48d
+Size: 15943822
+
+Package: razor-server
+Version: 1.4.0-1trusty
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 128081
+Depends: libarchive-dev, openjdk-7-jre-headless
+Conflicts: razor-torquebox
+Breaks: razor-torquebox
+Replaces: razor-torquebox
+Provides: razor-torquebox
+Section: admin
+Priority: optional
+Homepage: https://www.puppet.com
+Description: Razor is an advanced provisioning application
+ Razor is an advanced provisioning application which can deploy both bare-metal
+ and virtual systems. It's aimed at solving the problem of how to bring new
+ metal into a state where your existing DevOps/configuration management
+ workflows can take it over.
+ Newly added machines in a Razor deployment will PXE-boot from a special Razor
+ Microkernel image, then check in, provide Razor with inventory information, and
+ wait for further instructions. Razor will consult user-created policy rules to
+ choose which preconfigured model to apply to a new node, which will begin to
+ follow the model's directions, giving feedback to Razor as it completes various
+ steps. Models can include steps for handoff to a DevOps system such as Puppet
+ or to any other system capable of controlling the node (such as a vCenter
+ server taking possession of ESX systems).
+ .
+ Contains the following components:
+ razor-server 1.4.0
+ razor-torquebox 3.1.2
+Filename: pool/trusty/PC1/r/razor-server/razor-server_1.4.0-1trusty_all.deb
+MD5sum: 61d1675d9f3770e2dbdbf2c84349030c
+SHA1: 66c39161b9468514a958c41f1e72dfa0ddf1d2e4
+SHA256: f461a552d9edd7f504c43793bc0349ed21935ad58ad0a59d49c539f04b43b486
+SHA512: cb5a3a8781e1ed0049815b44fc9d993eae7802b005b3397546247e8128f3b60292e7f3887fcf004f0e67b4a513c54986284f1d5cd96bacb12d162a531e5bb83e
+Size: 81452288
+
+Package: razor-server
+Version: 1.5.0-1trusty
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 122887
+Depends: libarchive-dev, openjdk-7-jre-headless
+Conflicts: razor-torquebox
+Breaks: razor-torquebox
+Replaces: razor-torquebox
+Provides: razor-torquebox
+Section: admin
+Priority: optional
+Homepage: https://www.puppet.com
+Description: Razor is an advanced provisioning application
+ Razor is an advanced provisioning application which can deploy both bare-metal
+ and virtual systems. It's aimed at solving the problem of how to bring new
+ metal into a state where your existing DevOps/configuration management
+ workflows can take it over.
+ Newly added machines in a Razor deployment will PXE-boot from a special Razor
+ Microkernel image, then check in, provide Razor with inventory information, and
+ wait for further instructions. Razor will consult user-created policy rules to
+ choose which preconfigured model to apply to a new node, which will begin to
+ follow the model's directions, giving feedback to Razor as it completes various
+ steps. Models can include steps for handoff to a DevOps system such as Puppet
+ or to any other system capable of controlling the node (such as a vCenter
+ server taking possession of ESX systems).
+ .
+ Contains the following components:
+ razor-server 1.5.0
+ razor-torquebox 3.1.2
+Filename: pool/trusty/PC1/r/razor-server/razor-server_1.5.0-1trusty_all.deb
+MD5sum: 2f69dca829952fe1f8e9bafb8504a6b4
+SHA1: e05cb51f036bf9e16618b7d49db98fc1b619ae3c
+SHA256: 152d9ad5ffd569ca1fbb67b1b30df12cf883fe67c25c4648cfab9bfc32e0da36
+SHA512: a78c118af3ec30edfc16ce6b0f09d76c28e7017bea9a56d065f2bee0cb2fa0820e499ac1b5e3203c8e77af947c2a64f3e59806c2492c1ad6ada0fa39b15f1613
+Size: 80507390
+
+Package: razor-server
+Version: 1.6.1-1trusty
+Architecture: all
+Maintainer: Puppet Labs <info@puppetlabs.com>
+Installed-Size: 122798
+Depends: libarchive-dev, openjdk-7-jre-headless
+Conflicts: razor-torquebox
+Breaks: razor-torquebox
+Replaces: razor-torquebox
+Provides: razor-torquebox
+Section: admin
+Priority: optional
+Homepage: https://www.puppet.com
+Description: Razor is an advanced provisioning application
+ Razor is an advanced provisioning application which can deploy both bare-metal
+ and virtual systems. It's aimed at solving the problem of how to bring new
+ metal into a state where your existing DevOps/configuration management
+ workflows can take it over.
+ Newly added machines in a Razor deployment will PXE-boot from a special Razor
+ Microkernel image, then check in, provide Razor with inventory information, and
+ wait for further instructions. Razor will consult user-created policy rules to
+ choose which preconfigured model to apply to a new node, which will begin to
+ follow the model's directions, giving feedback to Razor as it completes various
+ steps. Models can include steps for handoff to a DevOps system such as Puppet
+ or to any other system capable of controlling the node (such as a vCenter
+ server taking possession of ESX systems).
+ .
+ Contains the following components:
+ razor-server 1.6.1
+ razor-torquebox 3.1.2
+Filename: pool/trusty/PC1/r/razor-server/razor-server_1.6.1-1trusty_all.deb
+MD5sum: 75f3a06d311d68d62e2095aef900ac9d
+SHA1: 841030974cc7e2a4c2fe2e3bda6872d7fd2902b9
+SHA256: fbdd50cdeb85410ae25e7b10bcbcdefb467ad5690867261743eea1877b0a145e
+SHA512: d13cac18a46890dccb24600c4f8dc1a0059222af70aa143dd694519ed5531991cb00409c3fb8ab74806ed5e531221dd9ea59d873e647f23e0decdfb6dc710a5e
+Size: 80447512
+

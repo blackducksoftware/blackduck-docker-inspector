@@ -1,0 +1,634 @@
+Package: apache2
+Description-md5: 2afad91d50cbfeff68d0e3436b9ce235
+Description-en: Apache HTTP Server
+ The Apache Software Foundation's goal is to build a secure, efficient and
+ extensible HTTP server as standards-compliant open source software. The
+ result has long been the number one web server on the Internet.
+ .
+ This package contains the configuration files, init scripts and support
+ scripts. It does not install the actual apache2 binaries.
+
+Package: apache2-bin
+Description-md5: 768126d098ab290dd8fd72553414fb1c
+Description-en: Apache HTTP Server (binary files and modules)
+ The Apache Software Foundation's goal is to build a secure, efficient and
+ extensible HTTP server as standards-compliant open source software. The
+ result has long been the number one web server on the Internet.
+ .
+ This package contains the binaries only and does not set up a working
+ web-server instance. Install the "apache2" package to get a fully working
+ instance. Do not install this package unless you want to set-up the Apache
+ HTTP server entirely on your own.
+
+Package: apache2-data
+Description-md5: 43b9030fc3d3460e30654e95c72c1277
+Description-en: Apache HTTP Server (common files)
+ The Apache Software Foundation's goal is to build a secure, efficient and
+ extensible HTTP server as standards-compliant open source software. The
+ result has long been the number one web server on the Internet.
+ .
+ This package contains architecture-independent common files such as icons,
+ error pages and static index files.
+
+Package: apache2-dbg
+Description-md5: 9631d879f838030d45d1d561f55abee1
+Description-en: Apache debugging symbols
+ The Apache Software Foundation's goal is to build a secure, efficient and
+ extensible HTTP server as standards-compliant open source software. The
+ result has long been the number one web server on the Internet.
+ .
+ This package includes the debugging symbols. It can be used to debug
+ crashing server instances and modules.  See
+ /usr/share/doc/apache2/README.backtrace for more information.
+
+Package: apache2-dev
+Description-md5: 33ccaee882001bf3dff7d3a2f1df3b30
+Description-en: Apache HTTP Server (development headers)
+ The Apache Software Foundation's goal is to build a secure, efficient and
+ extensible HTTP server as standards-compliant open source software. The
+ result has long been the number one web server on the Internet.
+ .
+ This package provides development headers and the apxs2 binary for the Apache 2
+ HTTP server useful to develop and link third party additions to the Debian
+ Apache HTTP server package.
+ .
+ It also provides dh_apache2 and dh sequence addons useful to install various
+ Debian Apache2 extensions with debhelper. It supports
+  - Apache 2 module configurations and shared objects
+  - Site configuration files
+  - Global configuration files
+
+Package: apache2-doc
+Description-md5: 35791cd71bc2556ea2bde4e6294a5ad3
+Description-en: Apache HTTP Server (on-site documentation)
+ The Apache Software Foundation's goal is to build a secure, efficient and
+ extensible HTTP server as standards-compliant open source software. The
+ result has long been the number one web server on the Internet.
+ .
+ This package provides the documentation for the Apache 2 HTTP server. The
+ documentation is shipped in HTML format and can be accessed from a local
+ running Apache HTTP server instance or by browsing the file system directly.
+
+Package: apache2-mpm-event
+Description-md5: e8836e8c2c34524fb11cc83011803e4e
+Description-en: transitional event MPM package for apache2
+ This is a transitional package to apache2 for users of apache2-mpm-event and
+ can be safely removed after the  installation is complete.
+
+Package: apache2-mpm-prefork
+Description-md5: 2a27f385dd2020da306403c3748102b7
+Description-en: transitional prefork MPM package for apache2
+ This is a transitional package to apache2 for users of apache2-mpm-prefork and
+ can be safely removed after the installation is complete.
+
+Package: apache2-mpm-worker
+Description-md5: 4ed48ca29196089175ff0720834d5528
+Description-en: transitional worker MPM package for apache2
+ This is a transitional package to apache2 for users of apache2-mpm-worker and
+ can be safely removed after the installation is complete.
+
+Package: apache2-utils
+Description-md5: 3b2c95f65bdd470106fa63104997fa7f
+Description-en: Apache HTTP Server (utility programs for web servers)
+ Provides some add-on programs useful for any web server.  These include:
+  - ab (Apache benchmark tool)
+  - fcgistarter (Start a FastCGI program)
+  - logresolve (Resolve IP addresses to hostname in logfiles)
+  - htpasswd (Manipulate basic authentication files)
+  - htdigest (Manipulate digest authentication files)
+  - htdbm (Manipulate basic authentication files in DBM format, using APR)
+  - htcacheclean (Clean up the disk cache)
+  - rotatelogs (Periodically stop writing to a logfile and open a new one)
+  - split-logfile (Split a single log including multiple vhosts)
+  - checkgid (Checks whether the caller can setgid to the specified group)
+  - check_forensic (Extract mod_log_forensic output from Apache log files)
+  - httxt2dbm (Generate dbm files for use with RewriteMap)
+
+Package: apache2.2-bin
+Description-md5: 36c293ebb5b77f14b95215fd3ffa7760
+Description-en: Transitional package for apache2-bin
+ This is a transitional package for apache2-bin, and can be safely removed
+ after the installation is complete.
+
+Package: apache2.2-common
+Description-md5: d1a1637f978337732292196147e06d59
+Description-en: Transitional package for apache2
+ This is a transitional package for apache2-bin, and can be safely removed
+ after the installation is complete.
+
+Package: autopkgtest
+Description-md5: 31d9217a487d44cfd80f0588068648cd
+Description-en: automatic as-installed testing for Debian packages
+ autopkgtest runs tests on binary packages.  The tests are run on the
+ package as installed on a testbed system (which may be found via a
+ virtualisation or containment system).  The tests are expected to be
+ supplied in the corresponding Debian source package.
+ .
+ See autopkgtest(1) and /usr/share/doc/autopkgtest.
+ Depending on which virtualization server you want to use, you need to
+ install additional packages (schroot, lxc, lxd, or qemu-system)
+ .
+ For generating tests of well-known source packages such as Perl and Ruby
+ libraries you should install the autodep8 package.
+
+Package: cgmanager
+Description-md5: 573a1987c819a2ae4addaf68ae70241e
+Description-en: Central cgroup manager daemon
+ cgmanager provides a central cgroup manager daemon and a
+ per-namespace manager proxy, allowing users and programs
+ to administrate cgroups through D-Bus requests.
+ .
+ This package contains the cgroup management daemon and
+ proxy.
+
+Package: cgroup-lite
+Description-md5: fe014e9d284dece1e33bea560fa15953
+Description-en: Light-weight package to set up cgroups at system boot
+ Control groups are a kernel mechanism for tracking and imposing
+ limits on resource usage on groups of task.
+ .
+ This package installs an upstart job to set up cgroups when the
+ system boots, without doing any cgroup management or doing any
+ classification of tasks into cgroups.
+
+Package: flex
+Description-md5: c30a7ef9a61fca3debe97b92c3f65013
+Description-en: fast lexical analyzer generator
+ Flex is a tool for generating scanners: programs which recognized lexical
+ patterns in text. It reads the given input files for a description of a
+ scanner to generate. The description is in the form of pairs of regular
+ expressions and C code, called rules. Flex generates as output a C source
+ file, lex.yy.c, which defines a routine yylex().  This file is compiled
+ and linked with the -lfl library to produce an executable. When the
+ executable is run, it analyzes its input for occurrences of the regular
+ expressions. Whenever it finds one, it executes the corresponding C code.
+
+Package: flex-doc
+Description-md5: 213bd983eea770cd45ca9e776fa600ed
+Description-en: Documentation for flex (a fast lexical analyzer generator)
+ Flex is a tool for generating scanners: programs which recognized lexical
+ patterns in text. It reads the given input files for a description of a
+ scanner to generate. The description is in the form of pairs of regular
+ expressions and C code, called rules. Flex generates as output a C source
+ file, lex.yy.c, which defines a routine yylex().  This file is compiled
+ and linked with the -lfl library to produce an executable. When the
+ executable is run, it analyzes its input for occurrences of the regular
+ expressions. Whenever it finds one, it executes the corresponding C code.
+ .
+ This package contains the HTML documentation for flex.
+
+Package: haproxy
+Description-md5: 29390feb7563fd9f1e74f245bf31a64c
+Description-en: fast and reliable load balancing reverse proxy
+ HAProxy is a TCP/HTTP reverse proxy which is particularly suited for high
+ availability environments. It features connection persistence through HTTP
+ cookies, load balancing, header addition, modification, deletion both ways. It
+ has request blocking capabilities and provides interface to display server
+ status.
+
+Package: haproxy-dbg
+Description-md5: 299ccf94bd0ed4ecbce79cadd9912b80
+Description-en: fast and reliable load balancing reverse proxy (debug symbols)
+ HAProxy is a TCP/HTTP reverse proxy which is particularly suited for high
+ availability environments. It features connection persistence through HTTP
+ cookies, load balancing, header addition, modification, deletion both ways. It
+ has request blocking capabilities and provides interface to display server
+ status.
+ .
+ This package contains the debugging symbols for haproxy.
+
+Package: haproxy-doc
+Description-md5: f72de64c8c07f125957ba405924efb5e
+Description-en: fast and reliable load balancing reverse proxy (HTML documentation)
+ HAProxy is a TCP/HTTP reverse proxy which is particularly suited for high
+ availability environments. It features connection persistence through HTTP
+ cookies, load balancing, header addition, modification, deletion both ways. It
+ has request blocking capabilities and provides interface to display server
+ status.
+ .
+ This package contains the HTML documentation for haproxy.
+
+Package: kdump-tools
+Description-md5: e4c630411cca5f22a32a48bd81b16449
+Description-en: scripts and tools for automating kdump (Linux crash dumps)
+ kdump-tools provides an init script and a configuration script for
+ automating the use of kdump.  It uses the makedumpfile utility to
+ reduce the size of the /proc/vmcore file based on user preferences.
+ .
+ After installing, please see /usr/share/doc/kdump-tools/README.Debian
+ for information on enabling and configuring kdump.
+
+Package: keepalived
+Description-md5: e2d2506352721e77c2c351de4714ddd6
+Description-en: Failover and monitoring daemon for LVS clusters
+ keepalived is used for monitoring real servers within a Linux
+ Virtual Server (LVS) cluster.  keepalived can be configured to
+ remove real servers from the cluster pool if it stops responding,
+ as well as send a notification email to make the admin aware of
+ the service failure.
+ .
+ In addition, keepalived implements an independent Virtual Router
+ Redundancy Protocol (VRRPv2; see rfc2338 for additional info)
+ framework for director failover.
+ .
+ You need a kernel >= 2.4.28 or >= 2.6.11 for keepalived.
+ See README.Debian for more information.
+
+Package: libapache2-mod-macro
+Description-md5: 36c293ebb5b77f14b95215fd3ffa7760
+Description-en: Transitional package for apache2-bin
+ This is a transitional package for apache2-bin, and can be safely removed
+ after the installation is complete.
+
+Package: libcgmanager-dev
+Description-md5: 12f79f20c7c5ba65465769cf23c10653
+Description-en: Central cgroup manager daemon (dev)
+ cgmanager provides a central cgroup manager daemon and a
+ per-namespace manager proxy, allowing users and programs
+ to administrate cgroups through D-Bus requests.
+ .
+ This package contains the static library and C header files
+ needed for developing software using libcgmanager.
+
+Package: libcgmanager0
+Description-md5: ccb0bd9b73bea53fd951e4e6f59842e4
+Description-en: Central cgroup manager daemon (client library)
+ cgmanager provides a central cgroup manager daemon and a
+ per-namespace manager proxy, allowing users and programs
+ to administrate cgroups through D-Bus requests.
+ .
+ This package contains the shared library.
+
+Package: libfl-dev
+Description-md5: 2bc496d6314c70a6ebaa00f0ce759933
+Description-en: static library for flex (a fast lexical analyzer generator)
+ Flex is a tool for generating scanners: programs which recognized lexical
+ patterns in text. It reads the given input files for a description of a
+ scanner to generate. The description is in the form of pairs of regular
+ expressions and C code, called rules. Flex generates as output a C source
+ file, lex.yy.c, which defines a routine yylex().  This file is compiled
+ and linked with the -lfl library to produce an executable. When the
+ executable is run, it analyzes its input for occurrences of the regular
+ expressions. Whenever it finds one, it executes the corresponding C code.
+ .
+ This package contains the static library for flex.
+
+Package: liblxc1
+Description-md5: d757397b1a93a5bea5c72032f3ef485d
+Description-en: Linux Containers userspace tools (library)
+ Containers are insulated areas inside a system, which have their own namespace
+ for filesystem, network, PID, IPC, CPU and memory allocation and which can be
+ created using the Control Group and Namespace features included in the Linux
+ kernel.
+ .
+ This package contains the libraries.
+
+Package: libpam-cgm
+Description-md5: 4ff551a22d2d40c144e4df33413546c2
+Description-en: Central cgroup manager daemon (PAM module)
+ cgmanager provides a central cgroup manager daemon and a
+ per-namespace manager proxy, allowing users and programs
+ to administrate cgroups through D-Bus requests.
+ .
+ This provides a Pluggable Authentication Module (PAM) to provide
+ logged-in users with a set of cgroups which they can administer.
+ This allows for instance unprivileged containers.
+
+Package: libqmi-glib-dev
+Description-md5: c44abffbfc596d254147b508f8e0374e
+Description-en: Header files for adding QMI support to applications that use glib
+ This package contains the header and pkg-config files for development
+ applications using QMI functionality from applications that use glib.
+
+Package: libqmi-glib-doc
+Description-md5: 3bcaba736bf4f2671c9b86184d60ff6a
+Description-en: API documentation for libqmi-glib
+ This package provides the API documentation for libqmi-glib for adding
+ QMI support to applications that use glib.
+
+Package: libqmi-glib1
+Description-md5: 6c72eafa1689addb16b819279e6f3080
+Description-en: Support library to use the Qualcomm MSM Interface (QMI) protocol
+ Libraries for adding QMI support to applications that use glib.
+
+Package: libqmi-glib1-dbg
+Description-md5: 1e664a8b4c093f7d990b9d00ed52c7da
+Description-en: Support library to use the Qualcomm MSM Interface (QMI) protocol
+ This package contains detached debugging symbols.
+
+Package: libqmi-proxy
+Description-md5: 415b7b5c1f0133619dedb566502ee36d
+Description-en: Proxy to communicate with QMI ports
+ This package contains the binary qmi-proxy used by libqmi to allow multiple
+ clients to use the same QMI port simultaneously.
+
+Package: libseccomp-dev
+Description-md5: e5fdb6fdd319bc8b5c43a1e29c7d62d5
+Description-en: high level interface to Linux seccomp filter (development files)
+ This library provides a high level interface to constructing, analyzing
+ and installing seccomp filters via a BPF passed to the Linux Kernel's
+ prctl() syscall.
+ .
+ This package contains the development files.
+
+Package: libseccomp2
+Description-md5: 7ee97a8161e83bfebc75870eb92bde51
+Description-en: high level interface to Linux seccomp filter
+ This library provides a high level interface to constructing, analyzing
+ and installing seccomp filters via a BPF passed to the Linux Kernel's
+ prctl() syscall.
+
+Package: libxnvctrl-dev
+Description-md5: 71c9cd04112d6cef6a0d35dd8ec66dd8
+Description-en: NV-CONTROL X extension (development files)
+ The NV-CONTROL X extension provides a mechanism for X clients to
+ query and set configuration parameters of the NVIDIA X driver.
+ State set by the NV-CONTROL X extension is assumed to be persistent
+ only for the current server generation.
+
+Package: libxnvctrl0
+Description-md5: 6d4f8aebac836277193a58e922a49603
+Description-en: NV-CONTROL X extension (runtime library)
+ The NV-CONTROL X extension provides a mechanism for X clients to
+ query and set configuration parameters of the NVIDIA X driver.
+ State set by the NV-CONTROL X extension is assumed to be persistent
+ only for the current server generation.
+ .
+ This package contains the shared library.
+
+Package: lua-lxc
+Description-md5: a098f76ef28c4f60928555acc8b6b367
+Description-en: Linux Containers userspace tools (Lua bindings)
+ Containers are insulated areas inside a system, which have their own namespace
+ for filesystem, network, PID, IPC, CPU and memory allocation and which can be
+ created using the Control Group and Namespace features included in the Linux
+ kernel.
+ .
+ This package contains the Lua bindings.
+
+Package: lxc
+Description-md5: 8067647e29acc4eb5568eaa59cd81496
+Description-en: Transitional package for lxc1
+ This is a transitional dummy package. It can safely be removed.
+ .
+ The currently recommended LXC experience is available as lxc2 and is
+ provided by LXD using the LXC backend.
+
+Package: lxc-common
+Description-md5: cf91e149e888de845380dfd41e1f1da2
+Description-en: Linux Containers userspace tools (common tools)
+ Containers are insulated areas inside a system, which have their own namespace
+ for filesystem, network, PID, IPC, CPU and memory allocation and which can be
+ created using the Control Group and Namespace features included in the Linux
+ kernel.
+ .
+ This package contains a few binaries and security profiles required by
+ all liblxc1 users.
+
+Package: lxc-dbg
+Description-md5: 9ec9c23e26368a478bce79545cfbb782
+Description-en: Linux Containers userspace tools (debug)
+ Containers are insulated areas inside a system, which have their own namespace
+ for filesystem, network, PID, IPC, CPU and memory allocation and which can be
+ created using the Control Group and Namespace features included in the Linux
+ kernel.
+ .
+ This package contains the debugging symbols.
+
+Package: lxc-dev
+Description-md5: c719178b7e79ce1ed39519707c589961
+Description-en: Linux Containers userspace tools (development)
+ Containers are insulated areas inside a system, which have their own namespace
+ for filesystem, network, PID, IPC, CPU and memory allocation and which can be
+ created using the Control Group and Namespace features included in the Linux
+ kernel.
+ .
+ This package contains the development files.
+
+Package: lxc-templates
+Description-md5: 9a526ab1c6ccc435c574f17de9485e7e
+Description-en: Linux Containers userspace tools (templates)
+ Containers are insulated areas inside a system, which have their own namespace
+ for filesystem, network, PID, IPC, CPU and memory allocation and which can be
+ created using the Control Group and Namespace features included in the Linux
+ kernel.
+ .
+ This package contains the templates.
+
+Package: lxc-tests
+Description-md5: e03094a7d4b1a574890d104af255c273
+Description-en: Linux Containers userspace tools (test binaries)
+ Containers are insulated areas inside a system, which have their own namespace
+ for filesystem, network, PID, IPC, CPU and memory allocation and which can be
+ created using the Control Group and Namespace features included in the Linux
+ kernel.
+ .
+ This package contains the test binaries. Those binaries are primarily
+ used for autopkgtest and by some developers. They are not meant to be
+ installed on regular user systems.
+
+Package: lxc1
+Description-md5: 4ece0dffd153c29e95ffdb89f8238dfc
+Description-en: Linux Containers userspace tools
+ Containers are insulated areas inside a system, which have their own namespace
+ for filesystem, network, PID, IPC, CPU and memory allocation and which can be
+ created using the Control Group and Namespace features included in the Linux
+ kernel.
+ .
+ This package provides the lxc-* tools, which can be used to start a single
+ daemon in a container, or to boot an entire "containerized" system, and to
+ manage and debug your containers.
+
+Package: makedumpfile
+Description-md5: 63f8d9a2e0d40374bffffdb63689a386
+Description-en: VMcore extraction tool
+ This program is used to extract a subset of the memory available either
+ via /dev/mem or /proc/vmcore (for crashdumps). It is used to get memory
+ images without extra uneeded information (zero pages, userspace programs,
+ etc).
+
+Package: nvidia-settings
+Description-md5: 9bb7c34dc84550e6fff415c0eb0eda37
+Description-en: Tool for configuring the NVIDIA graphics driver
+ The nvidia-settings utility is a tool for configuring the NVIDIA
+ Linux graphics driver.  It operates by communicating with the NVIDIA
+ X driver, querying and updating state as appropriate.  This
+ communication is done with the NV-CONTROL X extension.
+ .
+ Values such as brightness and gamma, XVideo attributes, temperature,
+ and OpenGL settings can be queried and configured via nvidia-settings.
+
+Package: python-geoip
+Description-md5: 7728feb20ccb4df284edbff75a08cb2d
+Description-en: Python bindings for the GeoIP IP-to-country resolver library
+ GeoIP is a library that enables the user to find the country that any
+ IP address or hostname originates from, using a database instead of
+ DNS.
+ .
+ This package contains the Python bindings for GeoIP, allowing to use
+ this library within a Python program.
+
+Package: python-parsedatetime
+Description-md5: e09fdbe405ace759c61c71c6a03c761a
+Description-en: Python module to parse human-readable date/time expressions
+ parsedatetime is able to parse, for example, the following:
+ .
+   * August 25th, 2008
+   * 25 Aug 2008
+   * Aug 25 5pm
+   * 5pm August 25
+   * next saturday
+   * tomorrow
+   * next thursday at 4pm
+   * at 4pm
+   * eod
+   * tomorrow eod
+   * eod tuesday
+   * eoy
+   * eom
+   * in 5 minutes
+   * 5 minutes from now
+   * 5 hours before now
+   * 2 hours before noon
+   * 2 days from tomorrow
+
+Package: python3-geoip
+Description-md5: 95062c5b304c5669da5867898cc338c9
+Description-en: Python3 bindings for the GeoIP IP-to-country resolver library
+ GeoIP is a library that enables the user to find the country that any
+ IP address or hostname originates from, using a database instead of
+ DNS.
+ .
+ This package contains the Python3 bindings for GeoIP, allowing to use
+ this library within a Python3 program.
+
+Package: python3-lxc
+Description-md5: ee623a31db200104a7207d9de42b8f04
+Description-en: Linux Containers userspace tools (Python 3.x bindings)
+ Containers are insulated areas inside a system, which have their own namespace
+ for filesystem, network, PID, IPC, CPU and memory allocation and which can be
+ created using the Control Group and Namespace features included in the Linux
+ kernel.
+ .
+ This package contains the Python 3.x bindings.
+
+Package: screen
+Description-md5: 2d86b86ed6058a04c540802e49312f40
+Description-en: terminal multiplexer with VT100/ANSI terminal emulation
+ GNU Screen is a terminal multiplexer that runs several separate "screens" on
+ a single physical character-based terminal. Each virtual terminal emulates a
+ DEC VT100 plus several ANSI X3.64 and ISO 2022 functions. Screen sessions
+ can be detached and resumed later on a different terminal.
+ .
+ Screen also supports a whole slew of other features, including configurable
+ input and output translation, serial port support, configurable logging,
+ and multi-user support.
+
+Package: screen-dbg
+Description-md5: 04271e20641b982b8f437707b92dde1f
+Description-en: Debugging symbols for GNU Screen
+ GNU Screen is a terminal multiplexer that runs several separate "screens" on
+ a single physical character-based terminal.
+ .
+ This package contains the debugging symbols for GNU Screen.
+
+Package: sosreport
+Description-md5: 5b3e7a1f7fbde7625dc009697c8ed440
+Description-en: Set of tools to gather troubleshooting data from a system
+ Sos is a set of tools that gathers information about system
+ hardware and configuration. The information can then be used for
+ diagnostic purposes and debugging. Sos is commonly used to help
+ support technicians and developers.
+
+Package: squid-deb-proxy
+Description-md5: 41e200bb53a24b83c8c354c625759190
+Description-en: Squid proxy configuration to optimize package downloads
+ This package contains a Squid proxy configuration to manage a cache of
+ .deb downloads, with optimizations for the types of file present in
+ package repositories, and using a dedicated directory and port.
+
+Package: yelp-tools
+Description-md5: 67d34d4de561eee98dcba90001663b95
+Description-en: Yelp documentation tools
+ A set of command-line tools to build and check your documentation, as well
+ as an M4 file to use in your autotools-based build chain.
+
+Package: yelp-xsl
+Description-md5: 1a100ec4d885b993f504229830095864
+Description-en: XSL stylesheets for the yelp help browser
+ Yelp-xsl contains XSL stylesheets that are used by the yelp help browser
+ to format Docbook and Mallard documents.
+
+Package: zsh
+Description-md5: a129d6b2d23d2d5d3a6b822d3f8f856d
+Description-en: shell with lots of features
+ Zsh is a UNIX command interpreter (shell) usable as an
+ interactive login shell and as a shell script command
+ processor. Of the standard shells, zsh most closely resembles
+ ksh but includes many enhancements. Zsh has command-line editing,
+ built-in spelling correction, programmable command completion,
+ shell functions (with autoloading), a history mechanism, and a
+ host of other features.
+
+Package: zsh-beta-doc
+Description-md5: 425eb63fb19f0f0c8b27e64eb711dab6
+Description-en: transitional package to zsh-doc
+ The purpose of this package is solely the transition from the
+ zsh-beta-doc package to the zsh-doc package. It can be safely
+ removed.
+
+Package: zsh-common
+Description-md5: 8aac20ad1d93f2ea018a327bcfd5912f
+Description-en: architecture independent files for Zsh
+ Zsh is a UNIX command interpreter (shell) usable as an
+ interactive login shell and as a shell script command
+ processor. Of the standard shells, zsh most closely resembles
+ ksh but includes many enhancements. Zsh has command-line editing,
+ built-in spelling correction, programmable command completion,
+ shell functions (with autoloading), a history mechanism, and a
+ host of other features.
+ .
+ This package contains the common zsh files shared by all
+ architectures.
+
+Package: zsh-dbg
+Description-md5: b7daaaf215cd0857365c0b1532bd3ec4
+Description-en: shell with lots of features (debugging symbols)
+ Zsh is a UNIX command interpreter (shell) usable as an
+ interactive login shell and as a shell script command
+ processor. Of the standard shells, zsh most closely resembles
+ ksh but includes many enhancements. Zsh has command-line editing,
+ built-in spelling correction, programmable command completion,
+ shell functions (with autoloading), a history mechanism, and a
+ host of other features.
+ .
+ This package contains gdb debugging symbols for the 'zsh'
+ package.
+
+Package: zsh-dev
+Description-md5: 958eee099c22df2f69105f5ecae036a2
+Description-en: shell with lots of features (development files)
+ Zsh is a UNIX command interpreter (shell) usable as an
+ interactive login shell and as a shell script command
+ processor. Of the standard shells, zsh most closely resembles
+ ksh but includes many enhancements. Zsh has command-line editing,
+ built-in spelling correction, programmable command completion,
+ shell functions (with autoloading), a history mechanism, and a
+ host of other features.
+ .
+ This package contains headers and scripts necessary to compile
+ third-party modules.
+
+Package: zsh-doc
+Description-md5: 9b5459fce7bedf54d5694a22e68389c7
+Description-en: zsh documentation - info/HTML format
+ Zsh is a UNIX command interpreter (shell) usable as an
+ interactive login shell and as a shell script command
+ processor. Of the standard shells, zsh most closely resembles
+ ksh but includes many enhancements. Zsh has command-line editing,
+ built-in spelling correction, programmable command completion,
+ shell functions (with autoloading), a history mechanism, and a
+ host of other features.
+ .
+ This contains the documentation in GNU info and HTML formats.
+

@@ -1,0 +1,133 @@
+Package: oracle-jdk7-installer
+Description-md5: 584b152c046176a353edf910b3718d7a
+Description-en: Oracle JDK7 Installer meta package
+ Transitional oracle-jdk7-installer metapackage for oracle-java7-installer
+
+Package: oracle-java7-installer
+Description-md5: 523e4f34a0004fd0057693bc889bc42b
+Description-en: Oracle Java(TM) Development Kit (JDK) 7
+ The JDK(TM) is a development environment for building and running
+ applications, applets, and components using the Java programming language.
+ .
+ The JDK(TM) includes Java Runtime Environment (JRE) for running applications,
+ Java Plug-in for running applets in web browsers and tools useful for
+ developing and testing programs written in the Java programming language.
+ .
+ Note that this package does not contain any software from Oracle. This
+ package does however contain a script to download and install Oracle JDK 7.
+ All information regarding Java itself can be found on this website:
+ http://www.oracle.com/
+
+Package: oracle-java6-installer
+Description-md5: 8df763b4185eed08068e07bd944fb25c
+Description-en: Oracle Java(TM) Development Kit (JDK) 6
+ The JDK(TM) is a development environment for building and running
+ applications, applets, and components using the Java programming language.
+ .
+ The JDK(TM) includes Java Runtime Environment (JRE) for running applications,
+ Java Plug-in for running applets in web browsers and tools useful for
+ developing and testing programs written in the Java programming language.
+ .
+ Note that this package does not contain any software from Oracle. This
+ package does however contain a script to download and install Oracle JDK 6.
+ All information regarding Java itself can be found on this website:
+ http://www.oracle.com/
+
+Package: oracle-java8-installer
+Description-md5: 413372eec960dbbb3af5783097c677ea
+Description-en: Oracle Java(TM) Development Kit (JDK) 8
+ The JDK(TM) is a development environment for building and running
+ applications, applets, and components using the Java programming language.
+ .
+ The JDK(TM) includes Java Runtime Environment (JRE) for running applications,
+ Java Plug-in for running applets in web browsers and tools useful for
+ developing and testing programs written in the Java programming language.
+ .
+ Note that this package does not contain any software from Oracle. This
+ package does however contain a script to download and install Oracle JDK 8.
+ All information regarding Java itself can be found on this website:
+ http://www.oracle.com/
+
+Package: oracle-java7-set-default
+Description-md5: ce3d0abfdbb3afc5c35c82c8a0fee8a2
+Description-en: Set Oracle JDK 7 as default Java
+ This package sets Java 7 as default (JAVA_HOME, PATH, etc.)
+
+Package: oracle-java6-set-default
+Description-md5: 24033d842f8325d78a26c88a44ea7acb
+Description-en: Set Oracle JDK 6 as default Java
+ This package sets Java 6 as default (JAVA_HOME, PATH, etc.)
+
+Package: oracle-java8-set-default
+Description-md5: 5857354fbfa42bf8dcf3de5b16360b95
+Description-en: Set Oracle JDK 8 as default Java
+ This package sets Java 8 as default (JAVA_HOME, PATH, etc.)
+
+Package: oracle-java7-unlimited-jce-policy
+Description-md5: 387c84182539393c16efd0f8e6563d7b
+Description-en: Unlimited JCE Policy for Oracle Java 7
+ Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy
+ for Oracle Java 7
+ .
+ Due to import control restrictions of some countries, the version of
+ the JCE policy files that are bundled in the Java Runtime Environment,
+ or JRE(TM), 7 environment allow "strong" but limited cryptography to be
+ used. This download bundle (the one including this README file)
+ provides "unlimited strength" policy files which contain no
+ restrictions on cryptographic strengths.
+ .
+ This package only works properly if it's installed AFTER installing the
+ Oracle Java 7 package!
+
+Package: oracle-java8-unlimited-jce-policy
+Description-md5: c658837eb1363a202a60f3f1f1a37933
+Description-en: Unlimited JCE Policy for Oracle Java 8
+ Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy
+ for Oracle Java 8
+ .
+ Due to import control restrictions of some countries, the version of
+ the JCE policy files that are bundled in the Java Runtime Environment,
+ or JRE(TM), 8 environment allow "strong" but limited cryptography to be
+ used. This download bundle (the one including this README file)
+ provides "unlimited strength" policy files which contain no
+ restrictions on cryptographic strengths.
+ .
+ This package only works properly if it's installed AFTER installing the
+ Oracle Java 8 package!
+
+Package: oracle-java9-installer
+Description-md5: 55b64047c47c4969cc6ff771007acafa
+Description-en: Oracle Java(TM) Development Kit (JDK) 9
+ The JDK(TM) is a development environment for building and running
+ applications, applets, and components using the Java programming language.
+ .
+ The JDK(TM) includes Java Runtime Environment (JRE) for running applications,
+ Java Plug-in for running applets in web browsers and tools useful for
+ developing and testing programs written in the Java programming language.
+ .
+ Note that this package does not contain any software from Oracle. This
+ package does however contain a script to download and install Oracle JDK 9.
+ All information regarding Java itself can be found on this website:
+ http://www.oracle.com/
+
+Package: oracle-java9-set-default
+Description-md5: 320c7de2096ba13acc11601ee4c65dcc
+Description-en: Set Oracle JDK 9 as default Java
+ This package sets Java 9 as default (JAVA_HOME, PATH, etc.)
+
+Package: oracle-java9-unlimited-jce-policy
+Description-md5: b94c8e80a1c23023d1b081d08a71a12c
+Description-en: Unlimited JCE Policy for Oracle Java 9
+ Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy
+ for Oracle Java 9
+ .
+ Due to import control restrictions of some countries, the version of
+ the JCE policy files that are bundled in the Java Runtime Environment,
+ or JRE(TM), 9 environment allow "strong" but limited cryptography to be
+ used. This download bundle (the one including this README file)
+ provides "unlimited strength" policy files which contain no
+ restrictions on cryptographic strengths.
+ .
+ This package only works properly if it's installed AFTER installing the
+ Oracle Java 9 package!
+
