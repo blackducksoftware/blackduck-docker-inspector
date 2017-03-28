@@ -14,20 +14,10 @@ package com.blackducksoftware.integration.hub.docker.extractor
 import javax.annotation.PostConstruct
 
 import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 
-import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
-import com.sleepycat.je.Cursor
-import com.sleepycat.je.Database
-import com.sleepycat.je.DatabaseConfig
-import com.sleepycat.je.DatabaseEntry
-import com.sleepycat.je.Environment
-import com.sleepycat.je.EnvironmentConfig
-import com.sleepycat.je.LockMode
-import com.sleepycat.je.OperationStatus
 
 @Component
 class RpmExtractor extends Extractor {
@@ -38,34 +28,32 @@ class RpmExtractor extends Extractor {
         initValues(PackageManagerEnum.RPM)
     }
 
-    @Override
-    void extractComponents(BdioWriter bdioWriter, OperatingSystemEnum operatingSystem, File databaseDirectory) {
-        EnvironmentConfig envConfig = new EnvironmentConfig()
-        envConfig.setTransactional(false)
-        envConfig.setAllowCreate(true)
-        Environment environment = new Environment(databaseDirectory, envConfig)
-        environment.getDatabaseNames().each{name -> println(name) }
-
-        DatabaseConfig databaseConfig = new DatabaseConfig()
-        databaseConfig.setAllowCreate( false )
-        databaseConfig.setReadOnly(true)
-        Database db = environment.openDatabase( null, "__db.001", databaseConfig )
-        Cursor cursor = null
-        try {
-            cursor = db.openCursor(null, null)
-            DatabaseEntry foundKey = new DatabaseEntry()
-            DatabaseEntry foundData = new DatabaseEntry()
-            while (cursor.getNext(foundKey, foundData, LockMode.DEFAULT) ==
-            OperationStatus.SUCCESS) {
-                String keyString = new String(foundKey.getData())
-                String dataString = new String(foundData.getData())
-                println("Key | Data : " + keyString + " | " + dataString + "")
-            }
-
-            println("hello")
-        } finally {
-            cursor.close()
-            db.close()
+    List<BdioComponentDetails> extractComponents(OperatingSystemEnum operatingSystem, File inputFile) {
+        def components = []
+        inputFile.eachLine { line ->
+            extract(operatingSystem, components, line)
         }
+
+        components
+    }
+
+    void extract(OperatingSystemEnum operatingSystem, List<BdioComponentDetails> components, String inputLine) {
+        if (valid(inputLine)) {
+            def lastDotIndex = inputLine.lastIndexOf('.')
+            def arch = inputLine.substring(lastDotIndex + 1)
+            def lastDashIndex = inputLine.lastIndexOf('-')
+            def nameVersion = inputLine.substring(0, lastDashIndex)
+            def secondToLastDashIndex = nameVersion.lastIndexOf('-')
+
+            def versionRelease = inputLine.substring(secondToLastDashIndex + 1, lastDotIndex)
+            def artifact = inputLine.substring(0, secondToLastDashIndex)
+
+            String externalId = "${artifact}/${versionRelease}/${arch}"
+            components.add(createBdioComponentDetails(operatingSystem, artifact, versionRelease, externalId))
+        }
+    }
+
+    boolean valid(String inputLine) {
+        inputLine.matches(".+-.+-.+\\..*")
     }
 }

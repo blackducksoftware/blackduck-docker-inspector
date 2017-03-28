@@ -15,7 +15,6 @@ import javax.annotation.PostConstruct
 
 import org.springframework.stereotype.Component
 
-import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 
@@ -26,8 +25,7 @@ class DpkgExtractor extends Extractor {
         initValues(PackageManagerEnum.DPKG)
     }
 
-    @Override
-    void extractComponents(BdioWriter bdioWriter, OperatingSystemEnum operatingSystem, File yumOutput) {
+    List<BdioComponentDetails> extractComponents(OperatingSystemEnum operatingSystem, File yumOutput) {
         def components = []
 
         boolean startOfComponents = false
@@ -40,7 +38,7 @@ class DpkgExtractor extends Extractor {
                     def(name,version,architecture,description) = componentInfo.tokenize(" ")
 
                     String externalId = "$name/$version/$architecture"
-                    bdioWriter.writeBdioNode(bdioNodeFactory.createComponent(name, version, null, operatingSystem.forge, externalId))
+                    components.add(createBdioComponentDetails(operatingSystem, name, version, externalId))
                 }
             }
         }

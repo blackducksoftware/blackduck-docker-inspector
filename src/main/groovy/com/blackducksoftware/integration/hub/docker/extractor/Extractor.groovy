@@ -2,21 +2,18 @@ package com.blackducksoftware.integration.hub.docker.extractor
 
 import org.springframework.beans.factory.annotation.Value
 
-import com.blackducksoftware.integration.hub.bdio.simple.BdioNodeFactory
-import com.blackducksoftware.integration.hub.bdio.simple.BdioPropertyHelper
-import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter
+import com.blackducksoftware.integration.hub.bdio.simple.model.BdioExternalIdentifier
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 
 abstract class Extractor {
     @Value('${filename.separator}')
     String filenameSeparator
+
     PackageManagerEnum packageManagerEnum
-    final BdioPropertyHelper bdioPropertyHelper = new BdioPropertyHelper()
-    final BdioNodeFactory bdioNodeFactory = new BdioNodeFactory(bdioPropertyHelper)
 
     abstract void init()
-    abstract void extractComponents(BdioWriter bdioWriter, OperatingSystemEnum operatingSystem, File inputFile)
+    abstract List<BdioComponentDetails> extractComponents(OperatingSystemEnum operatingSystem, File inputFile)
 
     void initValues(PackageManagerEnum packageManagerEnum) {
         this.packageManagerEnum = packageManagerEnum
@@ -26,9 +23,25 @@ abstract class Extractor {
         packageManagerEnum.fileMatches(file)
     }
 
-    void extract(File inputFile) {
+    ExtractionResult extract(File inputFile) {
         def (hubProjectName, hubProjectVersionName, forge, packageManager) = inputFile.name.split(filenameSeparator)
         OperatingSystemEnum operatingSystemEnum = OperatingSystemEnum.determineOperatingSystem(forge)
-        extractComponents(operatingSystemEnum, inputFile)
+
+        def components = extractComponents(operatingSystemEnum, inputFile)
+
+        new ExtractionResult(hubProjectName: hubProjectName, hubProjectVersionName: hubProjectVersionName, bdioComponentDetailsList: components)
+    }
+
+    BdioComponentDetails createBdioComponentDetails(OperatingSystemEnum operatingSystemEnum, String name, String version, String externalId) {
+        def externalIdentifier = createLinuxIdentifier(operatingSystemEnum, externalId)
+        new BdioComponentDetails(name: name, version: version, externalIdentifier: externalIdentifier)
+    }
+
+    BdioExternalIdentifier createLinuxIdentifier(OperatingSystemEnum operatingSystemEnum, String externalId) {
+        def externalIdentifier = new BdioExternalIdentifier()
+        externalIdentifier.forge = operatingSystemEnum.forge
+        externalIdentifier.externalId = externalId
+
+        externalIdentifier
     }
 }
