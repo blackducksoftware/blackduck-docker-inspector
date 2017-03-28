@@ -44,4 +44,7 @@ class DpkgExtractor extends Extractor {
         }
         components
     }
+
+    void extractComponentRelationships(String packageName){
+    }
 }

@@ -26,12 +26,13 @@ abstract class Creator {
     PackageManagerEnum packageManagerEnum
     String testCommand
     String listPackagesCommand
+    long commandTimeout
 
     abstract void init()
 
     abstract String getPackageInfoCommand(String packageName)
 
-    void initValues(PackageManagerEnum packageManagerEnum, String testCommand, String listPackagesCommand) {
+    void initValues(PackageManagerEnum packageManagerEnum, String testCommand, String listPackagesCommand, long commandTimeout) {
         this.packageManagerEnum = packageManagerEnum
         this.testCommand = testCommand
         this.listPackagesCommand = listPackagesCommand
@@ -59,32 +60,26 @@ abstract class Creator {
         }
     }
 
-    String[] listPackages(long timeout) {
+    String[] listPackages() {
+        executeCommand(listPackagesCommand)
+    }
+
+    String[] getPackageInfo(String packageName) {
+        def infoCommand = getPackageInfoCommand(packageName)
+        executeCommand(infoCommand)
+    }
+
+    private String[] executeCommand(String commmand){
         try {
             def standardOut = new StringBuilder()
             def standardError = new StringBuilder()
-            def process = listPackagesCommand.execute()
+            def process = commmand.execute()
             process.consumeProcessOutput(standardOut, standardError)
-            process.waitForOrKill(timeout)
+            process.waitForOrKill(commandTimeout)
 
             standardOut.toString().split(System.lineSeparator())
         } catch(Exception e) {
             logger.error("Error executing command {}",listPackagesCommand,e)
-        }
-    }
-
-    String[] getPackageInfo(long timeout, String packageName) {
-        def infoCommand = getPackageInfoCommand(packageName)
-        try {
-            def standardOut = new StringBuilder()
-            def standardError = new StringBuilder()
-            def process = infoCommand.execute()
-            process.consumeProcessOutput(standardOut, standardError)
-            process.waitForOrKill(timeout)
-
-            standardOut.toString().split(System.lineSeparator())
-        } catch(Exception e) {
-            logger.error("Error executing command {}",infoCommand,e)
         }
     }
 }

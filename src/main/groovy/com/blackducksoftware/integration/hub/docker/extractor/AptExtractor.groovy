@@ -50,4 +50,7 @@ class AptExtractor extends Extractor {
             }
         }
     }
+
+    void extractComponentRelationships(String packageName){
+    }
 }

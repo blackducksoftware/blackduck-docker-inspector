@@ -16,6 +16,8 @@ import javax.annotation.PostConstruct
 import org.slf4j.Logger
 import org.springframework.stereotype.Component
 
+import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter
+import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 
@@ -28,32 +30,29 @@ class RpmExtractor extends Extractor {
         initValues(PackageManagerEnum.RPM)
     }
 
-    List<BdioComponentDetails> extractComponents(OperatingSystemEnum operatingSystem, File inputFile) {
-        def components = []
-        inputFile.eachLine { line ->
-            extract(operatingSystem, components, line)
-        }
-
-        components
+    boolean valid(String packageLine) {
+        packageLine.matches(".+-.+-.+\\..*")
     }
 
-    void extract(OperatingSystemEnum operatingSystem, List<BdioComponentDetails> components, String inputLine) {
-        if (valid(inputLine)) {
-            def lastDotIndex = inputLine.lastIndexOf('.')
-            def arch = inputLine.substring(lastDotIndex + 1)
-            def lastDashIndex = inputLine.lastIndexOf('-')
-            def nameVersion = inputLine.substring(0, lastDashIndex)
-            def secondToLastDashIndex = nameVersion.lastIndexOf('-')
+    void extractComponents(BdioWriter bdioWriter, OperatingSystemEnum operatingSystem, String[] packageList) {
+        packageList.each { packageLine ->
+            if (valid(packageLine)) {
+                def lastDotIndex = packageLine.lastIndexOf('.')
+                def arch = packageLine.substring(lastDotIndex + 1)
+                def lastDashIndex = packageLine.lastIndexOf('-')
+                def nameVersion = packageLine.substring(0, lastDashIndex)
+                def secondToLastDashIndex = nameVersion.lastIndexOf('-')
 
-            def versionRelease = inputLine.substring(secondToLastDashIndex + 1, lastDotIndex)
-            def artifact = inputLine.substring(0, secondToLastDashIndex)
+                def versionRelease = packageLine.substring(secondToLastDashIndex + 1, lastDotIndex)
+                def artifact = packageLine.substring(0, secondToLastDashIndex)
 
-            String externalId = "${artifact}/${versionRelease}/${arch}"
-            components.add(createBdioComponentDetails(operatingSystem, artifact, versionRelease, externalId))
+                String externalId = "${artifact}/${versionRelease}/${arch}"
+
+                BdioComponent component = bdioNodeFactory.createComponent(artifact, versionRelease, null, operatingSystem.forge, externalId)
+            }
         }
     }
 
-    boolean valid(String inputLine) {
-        inputLine.matches(".+-.+-.+\\..*")
+    void extractComponentRelationships(String packageName){
     }
 }

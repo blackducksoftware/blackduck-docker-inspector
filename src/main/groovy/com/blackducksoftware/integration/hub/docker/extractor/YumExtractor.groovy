@@ -33,7 +33,8 @@ class YumExtractor extends Extractor {
         boolean startOfComponents = false
 
         def componentColumns = []
-        yumOutput.eachLine { line ->
+        yumOutput.eachLine {
+            line ->
             if (line != null) {
                 if ('Installed Packages' == line) {
                     startOfComponents = true
@@ -54,6 +55,9 @@ class YumExtractor extends Extractor {
                     }
                 }
             }
+        }
+
+        void extractComponentRelationships(String packageName){
         }
 
         components
