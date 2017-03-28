@@ -48,7 +48,7 @@ class RpmExtractor extends Extractor {
 
                 String externalId = "${artifact}/${versionRelease}/${arch}"
 
-                BdioComponent component = bdioNodeFactory.createComponent(artifact, versionRelease, null, operatingSystem.forge, externalId)
+                BdioComponent bdioComponent = bdioNodeFactory.createComponent(artifact, versionRelease, null, operatingSystem.forge, externalId)
             }
         }
     }

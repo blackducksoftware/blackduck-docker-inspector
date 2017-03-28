@@ -16,6 +16,8 @@ import javax.annotation.PostConstruct
 import org.slf4j.Logger
 import org.springframework.stereotype.Component
 
+import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter
+import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 
@@ -28,18 +30,17 @@ class YumExtractor extends Extractor {
         initValues(PackageManagerEnum.YUM)
     }
 
-    List<BdioComponentDetails> extractComponents(OperatingSystemEnum operatingSystem,  File yumOutput) {
-        def components = []
+
+    void extractComponents(BdioWriter bdioWriter, OperatingSystemEnum operatingSystem, String[] packageList) {
         boolean startOfComponents = false
 
         def componentColumns = []
-        yumOutput.eachLine {
-            line ->
-            if (line != null) {
-                if ('Installed Packages' == line) {
+        packageList.each { packageLine ->
+            if (packageLine != null) {
+                if ('Installed Packages' == packageLine) {
                     startOfComponents = true
                 } else if (startOfComponents) {
-                    componentColumns.addAll(line.tokenize(' '))
+                    componentColumns.addAll(packageLine.tokenize(' '))
                     if ((componentColumns.size() == 3) && (!line.startsWith("Loaded plugins:"))) {
                         String nameArch = componentColumns.get(0)
                         String version = componentColumns.get(1)
@@ -47,7 +48,9 @@ class YumExtractor extends Extractor {
                         String architecture = nameArch.substring(nameArch.lastIndexOf(".") + 1)
 
                         String externalId = "$name/$version/$architecture"
-                        components.add(createBdioComponentDetails(operatingSystem, name, version, externalId))
+
+                        BdioComponent bdioComponent = bdioNodeFactory.createComponent(name, version, null, operatingSystem.forge, externalId)
+
                         componentColumns = []
                     } else  if (componentColumns.size() > 3) {
                         logger.error("Parsing multi-line components has failed. $line")
@@ -57,9 +60,10 @@ class YumExtractor extends Extractor {
             }
         }
 
-        void extractComponentRelationships(String packageName){
-        }
 
         components
+    }
+
+    void extractComponentRelationships(String packageName){
     }
 }

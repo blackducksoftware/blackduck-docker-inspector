@@ -16,6 +16,8 @@ import javax.annotation.PostConstruct
 import org.slf4j.Logger
 import org.springframework.stereotype.Component
 
+import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter
+import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 
@@ -28,25 +30,16 @@ class AptExtractor extends Extractor {
         initValues(PackageManagerEnum.APT)
     }
 
-    @Override
-    List<BdioComponentDetails> extractComponents(OperatingSystemEnum operatingSystem, File inputFile) {
-        def components = []
-
-        inputFile.eachLine { line ->
-            extract(operatingSystem,components, line)
-        }
-
-        components
-    }
-
-    void extract(OperatingSystemEnum operatingSystem, List<BdioComponentDetails> components, String inputLine) {
-        if (inputLine.contains(' ')) {
-            def (packageName, version) = inputLine.split(' ')
-            def index = packageName.indexOf('/')
-            if (index > 0) {
-                def component = packageName.substring(0, index)
-                String externalId = "${component}/${version}"
-                components.add(createBdioComponentDetails(operatingSystem, component, version, externalId))
+    void extractComponents(BdioWriter bdioWriter, OperatingSystemEnum operatingSystem, String[] packageList) {
+        packageList.each { packageLine ->
+            if (packageLine.contains(' ')) {
+                def (packageName, version) = packageLine.split(' ')
+                def index = packageName.indexOf('/')
+                if (index > 0) {
+                    def component = packageName.substring(0, index)
+                    String externalId = "${component}/${version}"
+                    BdioComponent bdioComponent = bdioNodeFactory.createComponent(component, version, null, operatingSystem.forge, externalId)
+                }
             }
         }
     }
