@@ -53,7 +53,7 @@ class YumExtractor extends Extractor {
 
                         componentColumns = []
                     } else  if (componentColumns.size() > 3) {
-                        logger.error("Parsing multi-line components has failed. $line")
+                        logger.error("Parsing multi-line components has failed. $packageLine")
                         componentColumns = []
                     }
                 }
