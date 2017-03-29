@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 
 @Component
-class YumCreator extends Creator {
+class YumExecutor extends Executor {
     @PostConstruct
     void init() {
         initValues(PackageManagerEnum.YUM, 'yum --version', 'yum list installed')

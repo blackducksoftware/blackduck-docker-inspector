@@ -18,13 +18,13 @@ import org.springframework.stereotype.Component
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 
 @Component
-class AptCreator extends Creator {
+class DpkgExecutor extends Executor {
     @PostConstruct
     void init() {
-        initValues(PackageManagerEnum.APT, 'apt --version', 'apt --installed list')
+        initValues(PackageManagerEnum.DPKG, 'dpkg --version', 'dpkg -l')
     }
 
     String getPackageInfoCommand(String packageName){
-        "apt show $packageName"
+        "dpkg -s $packageName"
     }
 }

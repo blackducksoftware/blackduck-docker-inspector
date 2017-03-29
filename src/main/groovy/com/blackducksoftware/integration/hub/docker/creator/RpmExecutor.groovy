@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 
 @Component
-class RpmCreator extends Creator {
+class RpmExecutor extends Executor {
     @PostConstruct
     public void init() {
         initValues(PackageManagerEnum.RPM, 'rpm --version', 'rpm -qa')

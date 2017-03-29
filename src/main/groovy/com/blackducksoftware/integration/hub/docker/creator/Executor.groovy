@@ -12,16 +12,11 @@
 package com.blackducksoftware.integration.hub.docker.creator
 
 import org.slf4j.Logger
-import org.springframework.beans.factory.annotation.Value
 
-import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 
-abstract class Creator {
+abstract class Executor {
     private final Logger logger = LoggerFactory.getLogger(getClass())
-
-    @Value('${filename.separator}')
-    String filenameSeparator
 
     PackageManagerEnum packageManagerEnum
     String testCommand
@@ -30,22 +25,10 @@ abstract class Creator {
 
     abstract void init()
 
-    abstract String getPackageInfoCommand(String packageName)
-
     void initValues(PackageManagerEnum packageManagerEnum, String testCommand, String listPackagesCommand, long commandTimeout) {
         this.packageManagerEnum = packageManagerEnum
         this.testCommand = testCommand
         this.listPackagesCommand = listPackagesCommand
-    }
-
-    String filename(String hubProjectName, String hubProjectVersionName, OperatingSystemEnum operatingSystemEnum) {
-        def pieces = [
-            hubProjectName,
-            hubProjectVersionName,
-            operatingSystemEnum.forge,
-            packageManagerEnum.filenameSuffix
-        ]
-        pieces.join(filenameSeparator)
     }
 
     boolean isCommandAvailable(long timeout) {
@@ -69,7 +52,7 @@ abstract class Creator {
         executeCommand(infoCommand)
     }
 
-    private String[] executeCommand(String commmand){
+    String[] executeCommand(String commmand){
         try {
             def standardOut = new StringBuilder()
             def standardError = new StringBuilder()
