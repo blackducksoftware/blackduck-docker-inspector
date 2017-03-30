@@ -34,8 +34,8 @@ repositories {
 
 dependencies {
     compile 'com.blackducksoftware.integration:hub-common:8.3.0'
-
-    compile group: 'com.sleepycat', name: 'je', version: '5.0.73'
+    
+    compile 'com.github.docker-java:docker-java:3.0.8'
     compile 'org.apache.commons:commons-lang3:3.5'
     compile 'commons-io:commons-io:2.5'
 
