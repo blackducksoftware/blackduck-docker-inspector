@@ -1,6 +1,5 @@
 package com.blackducksoftware.integration.hub.docker
 
-import org.apache.commons.compress.archivers.tar.TarArchiveInputStream
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger
@@ -60,41 +59,11 @@ class HubDockerManager {
         // Find the package manager files
         // extract the package manager files and put them into the correct locations on the machine that is running this
         //performExtractFromRunningImage()
-        List<File> untaredFiles = new ArrayList<>()
-        final File outputDir = new File("ubuntu");
-        def tarArchiveInputStream = new TarArchiveInputStream(new FileInputStream(dockerTar))
-        try {
-            def tarArchiveEntry
-            while (null != (tarArchiveEntry = tarArchiveInputStream.getNextTarEntry())) {
-                println tarArchiveEntry.name
-                final File outputFile = new File(outputDir, tarArchiveEntry.getName())
-                if (tarArchiveEntry.isDirectory()) {
-                    outputFile.mkdirs()
-                }else if(tarArchiveEntry.name.contains('layer.tar')){
-                    final OutputStream outputFileStream = new FileOutputStream(outputFile)
-                    try{
-                        IOUtils.copy(tarArchiveInputStream, outputFileStream)
-                        untaredFiles.add(outputFile)
-                    } finally{
-                        outputFileStream.close()
-                    }
-                }
+        DockerTarParser tarParser = new DockerTarParser()
+        tarParser.workingDirectory = new File("docker")
 
-            }
-        } finally {
-            IOUtils.closeQuietly(tarArchiveInputStream)
-        }
-        untaredFiles.each { layerTar ->
-            def layerInputStream = new TarArchiveInputStream(new FileInputStream(layerTar))
-            try {
-                def layerEntry
-                while (null != (layerEntry = layerInputStream.getNextTarEntry())) {
-                    println layerEntry.name
-                }
-            } finally {
-                IOUtils.closeQuietly(layerInputStream)
-            }
-        }
+        tarParser.parseImageTar(dockerTar)
+
     }
 
 
