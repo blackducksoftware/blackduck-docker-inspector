@@ -19,24 +19,18 @@ class DockerTarParser {
 
     File workingDirectory
 
-    DockerTarResults parseImageTar(File dockerTar){
+    void parseImageTar(File dockerTar){
         List<File> layerTars = extractLayerTars(dockerTar)
-        File extractedLayerDirectory = null
-        layerTars.each { layerTar ->
-            if(extractedLayerDirectory == null){
-                extractedLayerDirectory = parseLayerTarAndExtract(layerTar)
-            }
-        }
-        null
+        def layerOutputDir = new File(workingDirectory, "layerFiles")
+        layerTars.each { layerTar -> parseLayerTarAndExtract(layerTar, layerOutputDir) }
     }
 
     private List<File> extractLayerTars(File dockerTar){
         List<File> untaredFiles = new ArrayList<>()
-        final File outputDir = new File(workingDirectory, dockerTar.getName())
-        if(outputDir.exists()){
-            FileUtils.deleteDirectory(outputDir)
+        if(workingDirectory.exists()){
+            FileUtils.deleteDirectory(workingDirectory)
         }
-        outputDir.mkdirs()
+        final File outputDir = new File(workingDirectory, dockerTar.getName())
         def tarArchiveInputStream = new TarArchiveInputStream(new FileInputStream(dockerTar))
         try {
             def tarArchiveEntry
@@ -60,25 +54,19 @@ class DockerTarParser {
         untaredFiles
     }
 
-    private File parseLayerTarAndExtract(File layerTar){
-        def foundVarLib = false
-        def outputDir = new File(workingDirectory, layerTar.getName())
-        if(outputDir.exists()){
-            FileUtils.deleteDirectory(outputDir)
-        }
+    private void parseLayerTarAndExtract(File layerTar, File layerOutputDir){
         def layerInputStream = new TarArchiveInputStream(new FileInputStream(layerTar))
         try {
             def layerEntry
             while (null != (layerEntry = layerInputStream.getNextTarEntry())) {
-                if(layerEntry.name.contains('var/lib')){
-                    foundVarLib = true
-                    final File outputFile = new File(outputDir, layerEntry.getName())
+                if(shouldExtractEntry(layerEntry.name)){
+                    println layerEntry.name
+                    final File outputFile = new File(layerOutputDir, layerEntry.getName())
                     if (layerEntry.isDirectory()) {
                         outputFile.mkdirs()
                     } else {
                         final OutputStream outputFileStream = new FileOutputStream(outputFile)
                         try{
-                            println layerEntry.name
                             IOUtils.copy(layerInputStream, outputFileStream)
                         } finally{
                             outputFileStream.close()
@@ -89,8 +77,10 @@ class DockerTarParser {
         } finally {
             IOUtils.closeQuietly(layerInputStream)
         }
-        if(foundVarLib){
-            return outputDir
-        }
+    }
+
+
+    boolean shouldExtractEntry(String entryName){
+        entryName.matches("var/lib/(dpkg|apt|yum|rpm|apk){1}.*")
     }
 }
