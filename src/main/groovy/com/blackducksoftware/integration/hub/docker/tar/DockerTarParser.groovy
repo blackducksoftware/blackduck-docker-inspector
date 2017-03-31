@@ -9,7 +9,7 @@
  * accordance with the terms of the license agreement you entered into
  * with Black Duck Software.
  */
-package com.blackducksoftware.integration.hub.docker
+package com.blackducksoftware.integration.hub.docker.tar
 
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream
 import org.apache.commons.io.FileUtils
@@ -20,6 +20,9 @@ class DockerTarParser {
     File workingDirectory
 
     void parseImageTar(File dockerTar){
+        if(workingDirectory.exists()){
+            FileUtils.deleteDirectory(workingDirectory)
+        }
         List<File> layerTars = extractLayerTars(dockerTar)
         def layerOutputDir = new File(workingDirectory, "layerFiles")
         layerTars.each { layerTar -> parseLayerTarAndExtract(layerTar, layerOutputDir) }
@@ -27,9 +30,6 @@ class DockerTarParser {
 
     private List<File> extractLayerTars(File dockerTar){
         List<File> untaredFiles = new ArrayList<>()
-        if(workingDirectory.exists()){
-            FileUtils.deleteDirectory(workingDirectory)
-        }
         final File outputDir = new File(workingDirectory, dockerTar.getName())
         def tarArchiveInputStream = new TarArchiveInputStream(new FileInputStream(dockerTar))
         try {
