@@ -14,6 +14,6 @@ package com.blackducksoftware.integration.hub.docker.tar
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 
 class TarExtractionResults {
-    File[] extractedPackageManagerDirectories
-    PackageManagerEnum[] packageManagerEnum
+    List<File> extractedPackageManagerDirectories = new ArrayList<>()
+    List<PackageManagerEnum> packageManagerEnum = new ArrayList<>()
 }

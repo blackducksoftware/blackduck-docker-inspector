@@ -23,10 +23,6 @@ abstract class Extractor {
         this.creator = creator
     }
 
-    boolean shouldAttemptExtract(File file) {
-        packageManagerEnum.fileMatches(file)
-    }
-
     void extract(BdioWriter bdioWriter, OperatingSystemEnum operatingSystem) {
         extractComponents(bdioWriter, operatingSystem, creator.listPackages())
     }

@@ -1,19 +1,20 @@
 package com.blackducksoftware.integration.hub.docker
 
 enum PackageManagerEnum {
-    APT('apt.txt'),
-    YUM('yum.txt'),
-    RPM('rpm.txt'),
-    DPKG('dpkg.txt'),
-    DPKG_STATUS_FILE('status')
+    APT('/var/lib/apt'),
+    YUM('/var/lib/yum'),
+    RPM('/var/lib/rpm'),
+    DPKG('/var/lib/dpkg'),
+    APK('/var/lib/apk')
 
-    String filenameSuffix
+    String directory
 
-    private PackageManagerEnum(String filenameSuffix) {
-        this.filenameSuffix = filenameSuffix
+    private PackageManagerEnum(String directory) {
+        this.directory = directory
     }
 
-    public boolean fileMatches(File file) {
-        file.name.endsWith(filenameSuffix)
+    static PackageManagerEnum getPackageManagerEnumByName(String name){
+        name = name.toUpperCase()
+        PackageManagerEnum.valueOf(name)
     }
 }

@@ -15,17 +15,28 @@ import org.apache.commons.compress.archivers.tar.TarArchiveInputStream
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.IOUtils;
 
+import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
+
 class DockerTarParser {
 
     File workingDirectory
 
-    void parseImageTar(File dockerTar){
+    TarExtractionResults parseImageTar(File dockerTar){
         if(workingDirectory.exists()){
             FileUtils.deleteDirectory(workingDirectory)
         }
         List<File> layerTars = extractLayerTars(dockerTar)
         def layerOutputDir = new File(workingDirectory, "layerFiles")
-        layerTars.each { layerTar -> parseLayerTarAndExtract(layerTar, layerOutputDir) }
+        layerTars.each { layerTar ->
+            parseLayerTarAndExtract(layerTar, layerOutputDir)
+        }
+        TarExtractionResults results = new TarExtractionResults()
+        def packageManagerFiles =  new File(layerOutputDir, "var/lib")
+        packageManagerFiles.listFiles().each { packageManagerDirectory ->
+            results.packageManagerEnum.add(PackageManagerEnum.getPackageManagerEnumByName(packageManagerDirectory.getName()))
+            results.extractedPackageManagerDirectories.add(packageManagerDirectory)
+        }
+        results
     }
 
     private List<File> extractLayerTars(File dockerTar){
@@ -60,7 +71,6 @@ class DockerTarParser {
             def layerEntry
             while (null != (layerEntry = layerInputStream.getNextTarEntry())) {
                 if(shouldExtractEntry(layerEntry.name)){
-                    println layerEntry.name
                     final File outputFile = new File(layerOutputDir, layerEntry.getName())
                     if (layerEntry.isDirectory()) {
                         outputFile.mkdirs()
