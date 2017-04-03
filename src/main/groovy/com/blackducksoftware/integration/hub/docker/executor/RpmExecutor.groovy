@@ -9,7 +9,7 @@
  * accordance with the terms of the license agreement you entered into
  * with Black Duck Software.
  */
-package com.blackducksoftware.integration.hub.docker.creator
+package com.blackducksoftware.integration.hub.docker.executor
 
 import javax.annotation.PostConstruct
 
@@ -18,13 +18,13 @@ import org.springframework.stereotype.Component
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 
 @Component
-class AptExecutor extends Executor {
+class RpmExecutor extends Executor {
     @PostConstruct
-    void init() {
-        initValues(PackageManagerEnum.APT, 'apt --version', 'apt --installed list')
+    public void init() {
+        initValues(PackageManagerEnum.RPM, 'rpm --version', 'rpm -qa')
     }
 
     String getPackageInfoCommand(String packageName){
-        "apt show $packageName"
+        "rpm -qR $packageName"
     }
 }

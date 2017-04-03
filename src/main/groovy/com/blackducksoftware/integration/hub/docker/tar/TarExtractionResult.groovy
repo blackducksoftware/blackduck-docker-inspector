@@ -13,7 +13,7 @@ package com.blackducksoftware.integration.hub.docker.tar
 
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 
-class TarExtractionResults {
-    List<File> extractedPackageManagerDirectories = new ArrayList<>()
-    List<PackageManagerEnum> packageManagerEnum = new ArrayList<>()
+class TarExtractionResult {
+    File extractedPackageManagerDirectory
+    PackageManagerEnum packageManager
 }

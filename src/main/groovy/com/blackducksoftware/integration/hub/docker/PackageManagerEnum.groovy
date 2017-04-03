@@ -14,7 +14,11 @@ enum PackageManagerEnum {
     }
 
     static PackageManagerEnum getPackageManagerEnumByName(String name){
-        name = name.toUpperCase()
-        PackageManagerEnum.valueOf(name)
+        PackageManagerEnum result = null
+        if(name != null){
+            name = name.toUpperCase()
+            result = PackageManagerEnum.valueOf(name)
+        }
+        result
     }
 }

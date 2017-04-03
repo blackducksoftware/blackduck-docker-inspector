@@ -21,7 +21,7 @@ class DockerTarParser {
 
     File workingDirectory
 
-    TarExtractionResults parseImageTar(File dockerTar){
+    List<TarExtractionResult> parseImageTar(File dockerTar){
         if(workingDirectory.exists()){
             FileUtils.deleteDirectory(workingDirectory)
         }
@@ -30,11 +30,13 @@ class DockerTarParser {
         layerTars.each { layerTar ->
             parseLayerTarAndExtract(layerTar, layerOutputDir)
         }
-        TarExtractionResults results = new TarExtractionResults()
+        List<TarExtractionResult> results = new ArrayList<>()
         def packageManagerFiles =  new File(layerOutputDir, "var/lib")
         packageManagerFiles.listFiles().each { packageManagerDirectory ->
-            results.packageManagerEnum.add(PackageManagerEnum.getPackageManagerEnumByName(packageManagerDirectory.getName()))
-            results.extractedPackageManagerDirectories.add(packageManagerDirectory)
+            TarExtractionResult result = new TarExtractionResult()
+            result.packageManager =PackageManagerEnum.getPackageManagerEnumByName(packageManagerDirectory.getName())
+            result.extractedPackageManagerDirectory = packageManagerDirectory
+            results.add(result)
         }
         results
     }

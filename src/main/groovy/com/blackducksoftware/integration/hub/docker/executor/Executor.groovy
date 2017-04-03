@@ -9,7 +9,7 @@
  * accordance with the terms of the license agreement you entered into
  * with Black Duck Software.
  */
-package com.blackducksoftware.integration.hub.docker.creator
+package com.blackducksoftware.integration.hub.docker.executor
 
 import org.slf4j.Logger
 

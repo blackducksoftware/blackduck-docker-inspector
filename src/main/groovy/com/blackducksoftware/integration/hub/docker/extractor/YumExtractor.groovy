@@ -14,20 +14,25 @@ package com.blackducksoftware.integration.hub.docker.extractor
 import javax.annotation.PostConstruct
 
 import org.slf4j.Logger
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
+import com.blackducksoftware.integration.hub.docker.executor.YumExecutor
 
 @Component
 class YumExtractor extends Extractor {
     private final Logger logger = LoggerFactory.getLogger(YumExtractor.class)
 
+    @Autowired
+    YumExecutor executor
+
     @PostConstruct
     void init() {
-        initValues(PackageManagerEnum.YUM)
+        initValues(PackageManagerEnum.YUM, executor)
     }
 
 

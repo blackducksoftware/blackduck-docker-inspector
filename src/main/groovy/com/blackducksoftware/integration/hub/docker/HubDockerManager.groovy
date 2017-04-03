@@ -8,8 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
+import com.blackducksoftware.integration.hub.docker.extractor.Extractor
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser
-import com.blackducksoftware.integration.hub.docker.tar.TarExtractionResults
+import com.blackducksoftware.integration.hub.docker.tar.TarExtractionResult
 import com.github.dockerjava.api.DockerClient
 import com.github.dockerjava.core.DefaultDockerClientConfig
 import com.github.dockerjava.core.DockerClientBuilder
@@ -36,6 +37,10 @@ class HubDockerManager {
 
     @Autowired
     HubClient hubClient
+
+    @Autowired
+    List<Extractor> extractors
+
 
 
     void performExtractOfDockerImage(String imageName) {
@@ -64,17 +69,21 @@ class HubDockerManager {
         DockerTarParser tarParser = new DockerTarParser()
         tarParser.workingDirectory = new File("docker")
 
-        TarExtractionResults results = tarParser.parseImageTar(dockerTar)
-        results.extractedPackageManagerDirectories.each { println it.getAbsolutePath() }
-        results.packageManagerEnum.each { println it.name() }
+        List<TarExtractionResult> results = tarParser.parseImageTar(dockerTar)
 
+        setupPackageManagers(results)
+
+        performExtractFromRunningImage(results)
     }
 
 
-    void performExtractFromRunningImage(PackageManagerEnum[] packageManagerEnums) {
+    void performExtractFromRunningImage(List<TarExtractionResult> tarResults) {
         // run the package managers
         // extract the bdio from output
         // deploy bdio to the Hub
+
+
+
     }
 
     DockerClient getDockerClient(){
@@ -90,5 +99,21 @@ class HubDockerManager {
                 .withRegistryEmail("dockeruser@github.com")
                 .build();
         DockerClientBuilder.getInstance(config).build();
+    }
+
+    private void setupPackageManagers(List<TarExtractionResult> results){
+        results.each { result ->
+            File packageManagerDirectory = new File(result.packageManager.directory)
+            if(packageManagerDirectory.exists()){
+                //TODO delete or rename?
+                FileUtils.deleteDirectory(packageManagerDirectory)
+            }
+            FileUtils.copyDirectory(result.extractedPackageManagerDirectory, packageManagerDirectory)
+        }
+    }
+
+    private Extractor getExtractorByPackageManager(PackageManagerEnum packageManagerEnum){
+
+
     }
 }

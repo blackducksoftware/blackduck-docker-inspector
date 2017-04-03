@@ -9,7 +9,7 @@
  * accordance with the terms of the license agreement you entered into
  * with Black Duck Software.
  */
-package com.blackducksoftware.integration.hub.docker.creator
+package com.blackducksoftware.integration.hub.docker.executor
 
 import javax.annotation.PostConstruct
 
@@ -18,13 +18,13 @@ import org.springframework.stereotype.Component
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 
 @Component
-class YumExecutor extends Executor {
+class AptExecutor extends Executor {
     @PostConstruct
     void init() {
-        initValues(PackageManagerEnum.YUM, 'yum --version', 'yum list installed')
+        initValues(PackageManagerEnum.APT, 'apt --version', 'apt --installed list')
     }
 
     String getPackageInfoCommand(String packageName){
-        "yum deplist $packageName"
+        "apt show $packageName"
     }
 }

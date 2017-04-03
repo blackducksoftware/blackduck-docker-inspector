@@ -14,20 +14,25 @@ package com.blackducksoftware.integration.hub.docker.extractor
 import javax.annotation.PostConstruct
 
 import org.slf4j.Logger
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
+import com.blackducksoftware.integration.hub.docker.executor.RpmExecutor
 
 @Component
 class RpmExtractor extends Extractor {
     private final Logger logger = LoggerFactory.getLogger(RpmExtractor.class)
 
+    @Autowired
+    RpmExecutor executor
+
     @PostConstruct
     void init() {
-        initValues(PackageManagerEnum.RPM)
+        initValues(PackageManagerEnum.RPM, executor)
     }
 
     boolean valid(String packageLine) {
