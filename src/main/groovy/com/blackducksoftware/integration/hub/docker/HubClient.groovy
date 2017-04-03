@@ -49,6 +49,7 @@ class HubClient implements ApplicationContextAware {
         HubServicesFactory hubServicesFactory = new HubServicesFactory(credentialsRestConnection)
         BomImportRequestService bomImportRequestService = hubServicesFactory.createBomImportRequestService()
         bomImportRequestService.importBomFile(bdioFile, BuildToolConstants.BDIO_FILE_MEDIA_TYPE)
+        logger.info("Uploaded bdio file ${bdioFile.getName()} to ${hubServerConfig.hubUrl}")
     }
 
     private HubServerConfigBuilder createBuilder() {
