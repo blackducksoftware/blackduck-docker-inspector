@@ -14,6 +14,7 @@ package com.blackducksoftware.integration.hub.docker.tar
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils
 
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
@@ -23,7 +24,7 @@ class DockerTarParser {
 
     File workingDirectory
 
-    TarExtractionResults parseImageTar(File dockerTar){
+    TarExtractionResults parseImageTar(String operatingSystem, File dockerTar){
         if(workingDirectory.exists()){
             FileUtils.deleteDirectory(workingDirectory)
         }
@@ -33,7 +34,11 @@ class DockerTarParser {
             parseLayerTarAndExtract(layerTar, layerOutputDir)
         }
         TarExtractionResults results = new TarExtractionResults()
-        results.operatingSystemEnum = extractOperatingSystemFromFile(new File(layerOutputDir, "etc").listFiles()[0])
+        if(StringUtils.isNotBlank(operatingSystem)){
+            results.operatingSystemEnum = OperatingSystemEnum.determineOperatingSystem(operatingSystem)
+        } else{
+            results.operatingSystemEnum = extractOperatingSystemFromFile(new File(layerOutputDir, "etc").listFiles()[0])
+        }
         def packageManagerFiles =  new File(layerOutputDir, "var/lib")
         packageManagerFiles.listFiles().each { packageManagerDirectory ->
             TarExtractionResult result = new TarExtractionResult()

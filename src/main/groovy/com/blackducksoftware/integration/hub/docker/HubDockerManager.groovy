@@ -29,8 +29,8 @@ class HubDockerManager {
     @Value('${command.timeout}')
     long commandTimeout
 
-    @Autowired
-    OperatingSystemFinder operatingSystemFinder
+    @Value('${operating.system}')
+    String operatingSystem
 
     @Autowired
     HubClient hubClient
@@ -66,7 +66,7 @@ class HubDockerManager {
         DockerTarParser tarParser = new DockerTarParser()
         tarParser.workingDirectory = new File("docker")
 
-        TarExtractionResults results = tarParser.parseImageTar(dockerTar)
+        TarExtractionResults results = tarParser.parseImageTar(operatingSystem,dockerTar)
 
         setupPackageManagers(results.extractionResults)
 

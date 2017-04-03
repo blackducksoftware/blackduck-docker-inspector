@@ -26,7 +26,7 @@ class DockerTarParserTest {
         DockerTarParser tarParser = new DockerTarParser()
         tarParser.workingDirectory = new File("docker")
 
-        TarExtractionResults results = tarParser.parseImageTar(dockerTar)
+        TarExtractionResults results = tarParser.parseImageTar(null,dockerTar)
         println results.operatingSystemEnum.name()
     }
 }

@@ -19,7 +19,6 @@ class Application {
     @Value('${docker.image.name}')
     String dockerImageName
 
-
     @Autowired
     HubClient hubClient
 
