@@ -16,8 +16,8 @@ class Application {
     @Value('${docker.tar}')
     String dockerTar
 
-    @Value('${docker.image.id}')
-    String dockerImageId
+    @Value('${docker.image.name}')
+    String dockerImageName
 
 
     @Autowired
@@ -39,10 +39,10 @@ class Application {
             logger.error("Your Hub configuration is not valid: ${e.message}")
         }
 
-        if ('local' == extractMode) {
-            hubLinuxManager.performExtractFromLocalInspection()
-        } else {
-            hubLinuxManager.performExtractFromRemoteInspection()
+        if (dockerImageName != null) {
+            hubLinuxManager.performExtractOfDockerImage(dockerImageName)
+        } else if(dockerTar != null) {
+            hubLinuxManager.performExtractOfDockerTar(new File(dockerTar))
         }
     }
 }

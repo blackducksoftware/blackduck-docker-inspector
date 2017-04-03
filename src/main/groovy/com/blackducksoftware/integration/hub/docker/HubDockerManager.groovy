@@ -8,13 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
+import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter
 import com.blackducksoftware.integration.hub.docker.extractor.Extractor
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser
 import com.blackducksoftware.integration.hub.docker.tar.TarExtractionResult
+import com.blackducksoftware.integration.hub.docker.tar.TarExtractionResults
 import com.github.dockerjava.api.DockerClient
 import com.github.dockerjava.core.DefaultDockerClientConfig
 import com.github.dockerjava.core.DockerClientBuilder
 import com.github.dockerjava.core.DockerClientConfig
+import com.google.gson.Gson
 
 @Component
 class HubDockerManager {
@@ -25,12 +28,6 @@ class HubDockerManager {
 
     @Value('${command.timeout}')
     long commandTimeout
-
-    @Value('${docker.image.name}')
-    String dockerImageName
-
-    @Value('${docker.tar}')
-    String dockerTar
 
     @Autowired
     OperatingSystemFinder operatingSystemFinder
@@ -69,21 +66,28 @@ class HubDockerManager {
         DockerTarParser tarParser = new DockerTarParser()
         tarParser.workingDirectory = new File("docker")
 
-        List<TarExtractionResult> results = tarParser.parseImageTar(dockerTar)
+        TarExtractionResults results = tarParser.parseImageTar(dockerTar)
 
-        setupPackageManagers(results)
+        setupPackageManagers(results.extractionResults)
 
-        performExtractFromRunningImage(results)
+        performExtractFromRunningImage(dockerTar.getName(), results)
     }
 
 
-    void performExtractFromRunningImage(List<TarExtractionResult> tarResults) {
+    private void performExtractFromRunningImage(String fileNamePrefix, TarExtractionResults tarResults) {
+        File workingDirectory = new File(workingDirectoryPath)
         // run the package managers
         // extract the bdio from output
         // deploy bdio to the Hub
+        tarResults.extractionResults.each { extractionResult ->
+            def outputFile = new File(workingDirectory, "${fileNamePrefix}_${extractionResult.packageManager}_bdio.jsonld")
 
-
-
+            new FileOutputStream(outputFile).withStream { outputStream ->
+                BdioWriter writer = new BdioWriter(new Gson(), outputStream)
+                Extractor extractor = getExtractorByPackageManager(extractionResult.packageManager)
+                extractor.extract(writer, tarResults.operatingSystemEnum)
+            }
+        }
     }
 
     DockerClient getDockerClient(){
@@ -105,7 +109,6 @@ class HubDockerManager {
         results.each { result ->
             File packageManagerDirectory = new File(result.packageManager.directory)
             if(packageManagerDirectory.exists()){
-                //TODO delete or rename?
                 FileUtils.deleteDirectory(packageManagerDirectory)
             }
             FileUtils.copyDirectory(result.extractedPackageManagerDirectory, packageManagerDirectory)
@@ -113,7 +116,10 @@ class HubDockerManager {
     }
 
     private Extractor getExtractorByPackageManager(PackageManagerEnum packageManagerEnum){
-
-
+        extractors.each { extractor ->
+            if(extractor.packageManagerEnum == packageManagerEnum){
+                return extractor
+            }
+        }
     }
 }

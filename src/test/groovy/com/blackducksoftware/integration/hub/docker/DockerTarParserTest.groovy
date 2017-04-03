@@ -13,12 +13,20 @@ package com.blackducksoftware.integration.hub.docker
 
 import org.junit.Test
 
-class HubDockerManagerTest {
+import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser
+import com.blackducksoftware.integration.hub.docker.tar.TarExtractionResults
+
+class DockerTarParserTest {
 
     @Test
     void testPerformExtractOfDockerTar(){
-        HubDockerManager manager = new HubDockerManager()
-        File tarGz = new File("ubuntu.tar")
-        manager.performExtractOfDockerTar(tarGz)
+        //File dockerTar = new File("ubuntu.tar")
+        File dockerTar = new File("alpine.tar")
+
+        DockerTarParser tarParser = new DockerTarParser()
+        tarParser.workingDirectory = new File("docker")
+
+        TarExtractionResults results = tarParser.parseImageTar(dockerTar)
+        println results.operatingSystemEnum.name()
     }
 }

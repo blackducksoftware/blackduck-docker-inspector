@@ -15,13 +15,15 @@ import org.apache.commons.compress.archivers.tar.TarArchiveInputStream
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.IOUtils;
 
+import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
+import com.blackducksoftware.integration.hub.exception.HubIntegrationException
 
 class DockerTarParser {
 
     File workingDirectory
 
-    List<TarExtractionResult> parseImageTar(File dockerTar){
+    TarExtractionResults parseImageTar(File dockerTar){
         if(workingDirectory.exists()){
             FileUtils.deleteDirectory(workingDirectory)
         }
@@ -30,15 +32,39 @@ class DockerTarParser {
         layerTars.each { layerTar ->
             parseLayerTarAndExtract(layerTar, layerOutputDir)
         }
-        List<TarExtractionResult> results = new ArrayList<>()
+        TarExtractionResults results = new TarExtractionResults()
+        results.operatingSystemEnum = extractOperatingSystemFromFile(new File(layerOutputDir, "etc").listFiles()[0])
         def packageManagerFiles =  new File(layerOutputDir, "var/lib")
         packageManagerFiles.listFiles().each { packageManagerDirectory ->
             TarExtractionResult result = new TarExtractionResult()
             result.packageManager =PackageManagerEnum.getPackageManagerEnumByName(packageManagerDirectory.getName())
             result.extractedPackageManagerDirectory = packageManagerDirectory
-            results.add(result)
+            results.extractionResults.add(result)
         }
         results
+    }
+
+    private OperatingSystemEnum extractOperatingSystemFromFile(File osFile){
+        OperatingSystemEnum osEnum = null
+        String linePrefix = null
+        if(osFile.getName().equals('lsb-release')){
+            linePrefix = 'DISTRIB_ID='
+        } else if(osFile.getName().equals('os-release')){
+            linePrefix = 'ID='
+        }
+        if(linePrefix != null){
+            osFile.eachLine { line ->
+                line = line.trim()
+                if(line.startsWith(linePrefix)){
+                    def (description, value) = line.split('=')
+                    osEnum = OperatingSystemEnum.determineOperatingSystem(value)
+                }
+            }
+        }
+        if(osEnum == null){
+            throw new HubIntegrationException('Could not determing the Operating System of this Docker tar.')
+        }
+        osEnum
     }
 
     private List<File> extractLayerTars(File dockerTar){
@@ -74,9 +100,10 @@ class DockerTarParser {
             while (null != (layerEntry = layerInputStream.getNextTarEntry())) {
                 if(shouldExtractEntry(layerEntry.name)){
                     final File outputFile = new File(layerOutputDir, layerEntry.getName())
-                    if (layerEntry.isDirectory()) {
-                        outputFile.mkdirs()
-                    } else {
+                    if (layerEntry.isFile()) {
+                        if(!outputFile.getParentFile().exists()){
+                            outputFile.getParentFile().mkdirs()
+                        }
                         final OutputStream outputFileStream = new FileOutputStream(outputFile)
                         try{
                             IOUtils.copy(layerInputStream, outputFileStream)
@@ -93,6 +120,6 @@ class DockerTarParser {
 
 
     boolean shouldExtractEntry(String entryName){
-        entryName.matches("var/lib/(dpkg|apt|yum|rpm|apk){1}.*")
+        entryName.matches("(var/lib/(dpkg|apt|yum|rpm|apk){1}.*|etc/(lsb-release|os-release))")
     }
 }
