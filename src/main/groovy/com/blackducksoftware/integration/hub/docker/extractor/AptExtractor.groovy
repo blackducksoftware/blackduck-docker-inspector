@@ -17,7 +17,6 @@ import org.slf4j.Logger
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
-import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
@@ -35,7 +34,7 @@ class AptExtractor extends Extractor {
         initValues(PackageManagerEnum.APT, executor)
     }
 
-    void extractComponents(BdioWriter bdioWriter, OperatingSystemEnum operatingSystem, String[] packageList) {
+    BdioComponent[] extractComponents(OperatingSystemEnum operatingSystem, String[] packageList) {
         packageList.each { packageLine ->
             if (packageLine.contains(' ')) {
                 def (packageName, version) = packageLine.split(' ')
@@ -47,6 +46,7 @@ class AptExtractor extends Extractor {
                 }
             }
         }
+        null
     }
 
     void extractComponentRelationships(String packageName){

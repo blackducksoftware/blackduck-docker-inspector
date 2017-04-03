@@ -17,7 +17,6 @@ import org.slf4j.Logger
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
-import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
@@ -35,8 +34,7 @@ class YumExtractor extends Extractor {
         initValues(PackageManagerEnum.YUM, executor)
     }
 
-
-    void extractComponents(BdioWriter bdioWriter, OperatingSystemEnum operatingSystem, String[] packageList) {
+    BdioComponent[] extractComponents(OperatingSystemEnum operatingSystem, String[] packageList) {
         boolean startOfComponents = false
 
         def componentColumns = []
@@ -64,9 +62,7 @@ class YumExtractor extends Extractor {
                 }
             }
         }
-
-
-        components
+        null
     }
 
     void extractComponentRelationships(String packageName){

@@ -17,7 +17,6 @@ import org.slf4j.Logger
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
-import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
@@ -39,7 +38,7 @@ class RpmExtractor extends Extractor {
         packageLine.matches(".+-.+-.+\\..*")
     }
 
-    void extractComponents(BdioWriter bdioWriter, OperatingSystemEnum operatingSystem, String[] packageList) {
+    BdioComponent[] extractComponents(OperatingSystemEnum operatingSystem, String[] packageList) {
         packageList.each { packageLine ->
             if (valid(packageLine)) {
                 def lastDotIndex = packageLine.lastIndexOf('.')
@@ -56,6 +55,7 @@ class RpmExtractor extends Extractor {
                 BdioComponent bdioComponent = bdioNodeFactory.createComponent(artifact, versionRelease, null, operatingSystem.forge, externalId)
             }
         }
+        null
     }
 
     void extractComponentRelationships(String packageName){

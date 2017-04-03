@@ -3,6 +3,7 @@ package com.blackducksoftware.integration.hub.docker.extractor
 import com.blackducksoftware.integration.hub.bdio.simple.BdioNodeFactory
 import com.blackducksoftware.integration.hub.bdio.simple.BdioPropertyHelper
 import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter
+import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 import com.blackducksoftware.integration.hub.docker.executor.Executor
@@ -14,7 +15,7 @@ abstract class Extractor {
     Executor executor
 
     abstract void init()
-    abstract void extractComponents(BdioWriter bdioWriter, OperatingSystemEnum operatingSystem, String[] packageList)
+    abstract BdioComponent[] extractComponents(OperatingSystemEnum operatingSystem, String[] packageList)
 
     abstract void extractComponentRelationships(String packageName)
 
@@ -23,7 +24,10 @@ abstract class Extractor {
         this.executor = executor
     }
 
-    void extract(BdioWriter bdioWriter, OperatingSystemEnum operatingSystem) {
-        extractComponents(bdioWriter, operatingSystem, executor.listPackages())
+    void extract(BdioWriter bdioWriter, OperatingSystemEnum operatingSystem, String projectName, String version) {
+        bdioWriter.writeBdioNode(bdioNodeFactory.createBillOfMaterials(null, projectName, version))
+        bdioWriter.writeBdioNode(bdioNodeFactory.createProject(projectName, version, "uuid:${UUID.randomUUID()}", null))
+        List<BdioComponent> components = extractComponents(operatingSystem, executor.listPackages())
+        components.each { bdioWriter.write(it) }
     }
 }

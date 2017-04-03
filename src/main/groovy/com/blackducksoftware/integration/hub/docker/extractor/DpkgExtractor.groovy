@@ -16,7 +16,6 @@ import javax.annotation.PostConstruct
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
-import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
@@ -33,7 +32,7 @@ class DpkgExtractor extends Extractor {
         initValues(PackageManagerEnum.DPKG, executor)
     }
 
-    void extractComponents(BdioWriter bdioWriter, OperatingSystemEnum operatingSystem, String[] packageList) {
+    BdioComponent[] extractComponents(OperatingSystemEnum operatingSystem, String[] packageList) {
         boolean startOfComponents = false
         packageList.each { packageLine ->
             if (packageLine != null) {
@@ -49,6 +48,7 @@ class DpkgExtractor extends Extractor {
                 }
             }
         }
+        null
     }
 
     void extractComponentRelationships(String packageName){

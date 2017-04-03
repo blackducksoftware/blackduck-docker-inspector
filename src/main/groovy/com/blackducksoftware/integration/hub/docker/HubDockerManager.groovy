@@ -1,5 +1,8 @@
 package com.blackducksoftware.integration.hub.docker
 
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger
@@ -77,18 +80,23 @@ class HubDockerManager {
     }
 
 
-    private void performExtractFromRunningImage(String fileNamePrefix, TarExtractionResults tarResults) {
+    private void performExtractFromRunningImage(String tarFileName, TarExtractionResults tarResults) {
         File workingDirectory = new File(workingDirectoryPath)
         // run the package managers
         // extract the bdio from output
         // deploy bdio to the Hub
+
         tarResults.extractionResults.each { extractionResult ->
-            def outputFile = new File(workingDirectory, "${fileNamePrefix}_${extractionResult.packageManager}_bdio.jsonld")
+            String projectName = "${tarFileName}_${extractionResult.packageManager}"
+            String version = DateTimeFormatter.ISO_LOCAL_DATE.format(LocalDate.now())
+
+
+            def outputFile = new File(workingDirectory, "${projectName}_bdio.jsonld")
 
             new FileOutputStream(outputFile).withStream { outputStream ->
                 BdioWriter writer = new BdioWriter(new Gson(), outputStream)
                 Extractor extractor = getExtractorByPackageManager(extractionResult.packageManager)
-                extractor.extract(writer, tarResults.operatingSystemEnum)
+                extractor.extract(writer, tarResults.operatingSystemEnum, projectName, version)
             }
         }
     }
