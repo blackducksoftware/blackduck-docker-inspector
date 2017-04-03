@@ -13,6 +13,7 @@ import com.blackducksoftware.integration.hub.docker.extractor.Extractor
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser
 import com.blackducksoftware.integration.hub.docker.tar.TarExtractionResult
 import com.blackducksoftware.integration.hub.docker.tar.TarExtractionResults
+import com.blackducksoftware.integration.hub.exception.HubIntegrationException
 import com.github.dockerjava.api.DockerClient
 import com.github.dockerjava.core.DefaultDockerClientConfig
 import com.github.dockerjava.core.DockerClientBuilder
@@ -67,7 +68,9 @@ class HubDockerManager {
         tarParser.workingDirectory = new File("docker")
 
         TarExtractionResults results = tarParser.parseImageTar(operatingSystem,dockerTar)
-
+        if(results.operatingSystemEnum == null){
+            throw new HubIntegrationException('Could not determing the Operating System of this Docker tar.')
+        }
         setupPackageManagers(results.extractionResults)
 
         performExtractFromRunningImage(dockerTar.getName(), results)

@@ -18,7 +18,6 @@ import org.apache.commons.lang3.StringUtils
 
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
-import com.blackducksoftware.integration.hub.exception.HubIntegrationException
 
 class DockerTarParser {
 
@@ -65,9 +64,6 @@ class DockerTarParser {
                     osEnum = OperatingSystemEnum.determineOperatingSystem(value)
                 }
             }
-        }
-        if(osEnum == null){
-            throw new HubIntegrationException('Could not determing the Operating System of this Docker tar.')
         }
         osEnum
     }
