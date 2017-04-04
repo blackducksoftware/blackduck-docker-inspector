@@ -24,8 +24,10 @@ abstract class Extractor {
 
     void extract(BdioWriter bdioWriter, OperatingSystemEnum operatingSystem, String projectName, String version) {
         bdioWriter.writeBdioNode(bdioNodeFactory.createBillOfMaterials(null, projectName, version))
-        bdioWriter.writeBdioNode(bdioNodeFactory.createProject(projectName, version, "uuid:${UUID.randomUUID()}", null))
+        BdioComponent projectNode = bdioNodeFactory.createProject(projectName, version, "uuid:${UUID.randomUUID()}", null)
         List<BdioComponent> components = extractComponents(operatingSystem, executor.listPackages())
+        bdioPropertyHelper.addRelationships(projectNode, components)
+        bdioWriter.writeBdioNode(projectNode)
         components.each { bdioWriter.writeBdioNode(it) }
     }
 }
