@@ -17,7 +17,7 @@ description = ''
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-springBoot { mainClass = 'com.blackducksoftware.integration.hub.linux.Application' }
+springBoot { mainClass = 'com.blackducksoftware.integration.hub.docker.Application' }
 
 task produceFinalZip(type: Zip, dependsOn: build) {
     from("${buildDir}/libs") { include '*.jar' }

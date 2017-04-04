@@ -53,8 +53,6 @@ class HubDockerClient {
     @Value('${docker.registry.email}')
     String dockerRegistryEmail
 
-
-
     DockerClient getDockerClient(){
         DockerClientConfig config = DefaultDockerClientConfig.createDefaultConfigBuilder()
                 .withDockerHost(dockerHost)

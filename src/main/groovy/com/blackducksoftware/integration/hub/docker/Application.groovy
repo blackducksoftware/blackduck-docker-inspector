@@ -2,6 +2,7 @@ package com.blackducksoftware.integration.hub.docker
 
 import javax.annotation.PostConstruct
 
+import org.apache.commons.lang3.StringUtils
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -38,9 +39,9 @@ class Application {
             logger.error("Your Hub configuration is not valid: ${e.message}")
         }
 
-        if (dockerImageName != null) {
+        if (StringUtils.isNotBlank(dockerImageName)) {
             hubLinuxManager.performExtractOfDockerImage(dockerImageName)
-        } else if(dockerTar != null) {
+        } else if(StringUtils.isNotBlank(dockerTar)) {
             hubLinuxManager.performExtractOfDockerTar(new File(dockerTar))
         }
     }

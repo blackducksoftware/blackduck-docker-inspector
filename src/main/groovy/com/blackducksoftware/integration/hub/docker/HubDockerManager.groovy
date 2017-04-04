@@ -27,11 +27,8 @@ class HubDockerManager {
     @Value('${working.directory}')
     String workingDirectoryPath
 
-    @Value('${command.timeout}')
-    long commandTimeout
-
-    @Value('${operating.system}')
-    String operatingSystem
+    @Value('${linux.distro}')
+    String linuxDistro
 
     @Autowired
     HubClient hubClient
@@ -68,7 +65,7 @@ class HubDockerManager {
         DockerTarParser tarParser = new DockerTarParser()
         tarParser.workingDirectory = new File("docker")
 
-        TarExtractionResults results = tarParser.parseImageTar(operatingSystem,dockerTar)
+        TarExtractionResults results = tarParser.parseImageTar(linuxDistro, dockerTar)
         if(results.operatingSystemEnum == null){
             throw new HubIntegrationException('Could not determine the Operating System of this Docker tar.')
         }
@@ -102,6 +99,7 @@ class HubDockerManager {
                 extractor.extract(writer, tarResults.operatingSystemEnum, projectName, version)
             }
         }
+
     }
 
     private void stubPackageManagerFiles(List<TarExtractionResult> results){

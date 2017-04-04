@@ -12,6 +12,8 @@
 package com.blackducksoftware.integration.hub.docker.executor
 
 import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Value
 
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 
@@ -21,20 +23,22 @@ abstract class Executor {
     PackageManagerEnum packageManagerEnum
     String testCommand
     String listPackagesCommand
+
+    @Value('${command.timeout}')
     long commandTimeout
 
     abstract void init()
 
-    void initValues(PackageManagerEnum packageManagerEnum, String testCommand, String listPackagesCommand, long commandTimeout) {
+    void initValues(PackageManagerEnum packageManagerEnum, String testCommand, String listPackagesCommand) {
         this.packageManagerEnum = packageManagerEnum
         this.testCommand = testCommand
         this.listPackagesCommand = listPackagesCommand
     }
 
-    boolean isCommandAvailable(long timeout) {
+    boolean isCommandAvailable() {
         try {
             def proc = testCommand.execute()
-            proc.waitForOrKill(timeout)
+            proc.waitForOrKill(commandTimeout)
 
             return proc.exitValue() == 0
         } catch(Exception e) {
