@@ -35,6 +35,7 @@ class AptExtractor extends Extractor {
     }
 
     BdioComponent[] extractComponents(OperatingSystemEnum operatingSystem, String[] packageList) {
+        BdioComponent[] components = []
         packageList.each { packageLine ->
             if (packageLine.contains(' ')) {
                 def (packageName, version) = packageLine.split(' ')
@@ -43,12 +44,10 @@ class AptExtractor extends Extractor {
                     def component = packageName.substring(0, index)
                     String externalId = "${component}/${version}"
                     BdioComponent bdioComponent = bdioNodeFactory.createComponent(component, version, null, operatingSystem.forge, externalId)
+                    components.add(bdioComponent)
                 }
             }
         }
-        null
-    }
-
-    void extractComponentRelationships(String packageName){
+        components
     }
 }

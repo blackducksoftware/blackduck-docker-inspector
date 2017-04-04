@@ -17,8 +17,6 @@ abstract class Extractor {
     abstract void init()
     abstract BdioComponent[] extractComponents(OperatingSystemEnum operatingSystem, String[] packageList)
 
-    abstract void extractComponentRelationships(String packageName)
-
     void initValues(PackageManagerEnum packageManagerEnum,Executor executor) {
         this.packageManagerEnum = packageManagerEnum
         this.executor = executor

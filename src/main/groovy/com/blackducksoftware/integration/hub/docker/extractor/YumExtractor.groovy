@@ -35,8 +35,8 @@ class YumExtractor extends Extractor {
     }
 
     BdioComponent[] extractComponents(OperatingSystemEnum operatingSystem, String[] packageList) {
+        BdioComponent[] components = []
         boolean startOfComponents = false
-
         def componentColumns = []
         packageList.each { packageLine ->
             if (packageLine != null) {
@@ -44,7 +44,7 @@ class YumExtractor extends Extractor {
                     startOfComponents = true
                 } else if (startOfComponents) {
                     componentColumns.addAll(packageLine.tokenize(' '))
-                    if ((componentColumns.size() == 3) && (!line.startsWith("Loaded plugins:"))) {
+                    if ((componentColumns.size() == 3) && (!packageLine.startsWith("Loaded plugins:"))) {
                         String nameArch = componentColumns.get(0)
                         String version = componentColumns.get(1)
                         String name =nameArch.substring(0, nameArch.lastIndexOf("."))
@@ -53,7 +53,7 @@ class YumExtractor extends Extractor {
                         String externalId = "$name/$version/$architecture"
 
                         BdioComponent bdioComponent = bdioNodeFactory.createComponent(name, version, null, operatingSystem.forge, externalId)
-
+                        components.add(bdioComponent)
                         componentColumns = []
                     } else  if (componentColumns.size() > 3) {
                         logger.error("Parsing multi-line components has failed. $packageLine")
@@ -62,9 +62,6 @@ class YumExtractor extends Extractor {
                 }
             }
         }
-        null
-    }
-
-    void extractComponentRelationships(String packageName){
+        components
     }
 }

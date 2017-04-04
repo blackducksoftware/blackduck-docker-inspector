@@ -33,6 +33,7 @@ class DpkgExtractor extends Extractor {
     }
 
     BdioComponent[] extractComponents(OperatingSystemEnum operatingSystem, String[] packageList) {
+        BdioComponent[] components = []
         boolean startOfComponents = false
         packageList.each { packageLine ->
             if (packageLine != null) {
@@ -45,12 +46,10 @@ class DpkgExtractor extends Extractor {
                     String externalId = "$name/$version/$architecture"
 
                     BdioComponent bdioComponent = bdioNodeFactory.createComponent(name, version, null, operatingSystem.forge, externalId)
+                    components.add(bdioComponent)
                 }
             }
         }
-        null
-    }
-
-    void extractComponentRelationships(String packageName){
+        components
     }
 }

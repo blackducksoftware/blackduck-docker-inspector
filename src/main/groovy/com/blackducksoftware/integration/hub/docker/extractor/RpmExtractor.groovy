@@ -39,6 +39,7 @@ class RpmExtractor extends Extractor {
     }
 
     BdioComponent[] extractComponents(OperatingSystemEnum operatingSystem, String[] packageList) {
+        BdioComponent[] components = []
         packageList.each { packageLine ->
             if (valid(packageLine)) {
                 def lastDotIndex = packageLine.lastIndexOf('.')
@@ -53,11 +54,9 @@ class RpmExtractor extends Extractor {
                 String externalId = "${artifact}/${versionRelease}/${arch}"
 
                 BdioComponent bdioComponent = bdioNodeFactory.createComponent(artifact, versionRelease, null, operatingSystem.forge, externalId)
+                components.add(bdioComponent)
             }
         }
-        null
-    }
-
-    void extractComponentRelationships(String packageName){
+        components
     }
 }
