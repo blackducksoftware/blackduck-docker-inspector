@@ -63,7 +63,7 @@ class HubDockerManager {
         // extract the package manager files and put them into the correct locations on the machine that is running this
         //performExtractFromRunningImage()
         DockerTarParser tarParser = new DockerTarParser()
-        tarParser.workingDirectory = new File("docker")
+        tarParser.workingDirectory = new File(workingDirectoryPath)
 
         TarExtractionResults results = tarParser.parseImageTar(linuxDistro, dockerTar)
         if(results.operatingSystemEnum == null){
