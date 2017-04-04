@@ -45,7 +45,7 @@ class DpkgExtractor extends Extractor {
 
                     String externalId = "$name/$version/$architecture"
 
-                    BdioComponent bdioComponent = bdioNodeFactory.createComponent(name, version, null, operatingSystem.forge, externalId)
+                    BdioComponent bdioComponent = bdioNodeFactory.createComponent(name, version, bdioPropertyHelper.createBdioId(name, version), operatingSystem.forge, externalId)
                     components.add(bdioComponent)
                 }
             }

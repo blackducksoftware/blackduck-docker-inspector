@@ -44,7 +44,7 @@ class AptExtractor extends Extractor {
                 if (index > 0) {
                     def component = packageName.substring(0, index)
                     String externalId = "${component}/${version}"
-                    BdioComponent bdioComponent = bdioNodeFactory.createComponent(component, version, null, operatingSystem.forge, externalId)
+                    BdioComponent bdioComponent = bdioNodeFactory.createComponent(component, version, bdioPropertyHelper.createBdioId(component, version), operatingSystem.forge, externalId)
                     components.add(bdioComponent)
                 }
             }
