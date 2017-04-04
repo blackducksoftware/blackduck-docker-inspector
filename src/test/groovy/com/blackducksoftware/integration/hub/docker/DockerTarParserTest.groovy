@@ -21,7 +21,7 @@ class DockerTarParserTest {
     @Test
     void testPerformExtractOfDockerTar(){
         //File dockerTar = new File("ubuntu.tar")
-        File dockerTar = new File("alpine.tar")
+        File dockerTar = new File("ubuntu.tar")
 
         DockerTarParser tarParser = new DockerTarParser()
         tarParser.workingDirectory = new File("docker")

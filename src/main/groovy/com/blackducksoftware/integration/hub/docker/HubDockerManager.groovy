@@ -82,12 +82,12 @@ class HubDockerManager {
         }
     }
 
-    private File[] performExtractFromRunningImage(String tarFileName, TarExtractionResults tarResults) {
+    private List<File> performExtractFromRunningImage(String tarFileName, TarExtractionResults tarResults) {
         File workingDirectory = new File(workingDirectoryPath)
         // run the package managers
         // extract the bdio from output
         // deploy bdio to the Hub
-        File[] bdioFiles = []
+        def bdioFiles = []
         tarResults.extractionResults.each { extractionResult ->
             String projectName = "${tarFileName}_${extractionResult.packageManager}"
             String version = DateTimeFormatter.ISO_LOCAL_DATE.format(LocalDate.now())
@@ -113,10 +113,8 @@ class HubDockerManager {
     }
 
     private Extractor getExtractorByPackageManager(PackageManagerEnum packageManagerEnum){
-        extractors.each { extractor ->
-            if(extractor.packageManagerEnum == packageManagerEnum){
-                return extractor
-            }
+        extractors.find { currentExtractor ->
+            currentExtractor.packageManagerEnum == packageManagerEnum
         }
     }
 }

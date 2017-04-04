@@ -15,11 +15,14 @@ import org.apache.commons.compress.archivers.tar.TarArchiveInputStream
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 
 class DockerTarParser {
+    private final Logger logger = LoggerFactory.getLogger(DockerTarParser.class)
 
     File workingDirectory
 
@@ -99,19 +102,23 @@ class DockerTarParser {
         try {
             def layerEntry
             while (null != (layerEntry = layerInputStream.getNextTarEntry())) {
-                if(shouldExtractEntry(layerEntry.name)){
-                    final File outputFile = new File(layerOutputDir, layerEntry.getName())
-                    if (layerEntry.isFile()) {
-                        if(!outputFile.getParentFile().exists()){
-                            outputFile.getParentFile().mkdirs()
-                        }
-                        final OutputStream outputFileStream = new FileOutputStream(outputFile)
-                        try{
-                            IOUtils.copy(layerInputStream, outputFileStream)
-                        } finally{
-                            outputFileStream.close()
+                try{
+                    if(shouldExtractEntry(layerEntry.name)){
+                        final File outputFile = new File(layerOutputDir, layerEntry.getName())
+                        if (layerEntry.isFile()) {
+                            if(!outputFile.getParentFile().exists()){
+                                outputFile.getParentFile().mkdirs()
+                            }
+                            final OutputStream outputFileStream = new FileOutputStream(outputFile)
+                            try{
+                                IOUtils.copy(layerInputStream, outputFileStream)
+                            } finally{
+                                outputFileStream.close()
+                            }
                         }
                     }
+                }catch(Exception e){
+                    logger.error(e.getMessage(), e)
                 }
             }
         } finally {

@@ -24,7 +24,7 @@ class Application {
     HubClient hubClient
 
     @Autowired
-    HubDockerManager hubLinuxManager
+    HubDockerManager hubDockerManager
 
     static void main(final String[] args) {
         new SpringApplicationBuilder(Application.class).logStartupInfo(false).run(args)
@@ -40,9 +40,9 @@ class Application {
         }
 
         if (StringUtils.isNotBlank(dockerImageName)) {
-            hubLinuxManager.performExtractOfDockerImage(dockerImageName)
+            hubDockerManager.performExtractOfDockerImage(dockerImageName)
         } else if(StringUtils.isNotBlank(dockerTar)) {
-            hubLinuxManager.performExtractOfDockerTar(new File(dockerTar))
+            hubDockerManager.performExtractOfDockerTar(new File(dockerTar))
         }
     }
 }
