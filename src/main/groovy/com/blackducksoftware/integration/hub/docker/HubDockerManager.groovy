@@ -39,7 +39,7 @@ class HubDockerManager {
     @Autowired
     List<Extractor> extractors
 
-    File[] performExtractOfDockerImage(String imageName) {
+    List<File> performExtractOfDockerImage(String imageName) {
         // use docker to pull image if necessary
         // use docker to save image to tar
         // performExtractFromDockerTar()
@@ -57,7 +57,7 @@ class HubDockerManager {
         performExtractOfDockerTar(imageTarGzFile)
     }
 
-    File[] performExtractOfDockerTar(File dockerTar) {
+    List<File> performExtractOfDockerTar(File dockerTar) {
         // Parse through the tar and the tar layers
         // Find the package manager files
         // extract the package manager files and put them into the correct locations on the machine that is running this

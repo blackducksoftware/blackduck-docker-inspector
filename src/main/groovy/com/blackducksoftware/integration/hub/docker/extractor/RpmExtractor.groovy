@@ -39,8 +39,8 @@ class RpmExtractor extends Extractor {
         packageLine.matches(".+-.+-.+\\..*")
     }
 
-    BdioComponent[] extractComponents(OperatingSystemEnum operatingSystem, String[] packageList) {
-        BdioComponent[] components = []
+    List<BdioComponent> extractComponents(OperatingSystemEnum operatingSystem, String[] packageList) {
+        def components = []
         packageList.each { packageLine ->
             if (valid(packageLine)) {
                 def lastDotIndex = packageLine.lastIndexOf('.')

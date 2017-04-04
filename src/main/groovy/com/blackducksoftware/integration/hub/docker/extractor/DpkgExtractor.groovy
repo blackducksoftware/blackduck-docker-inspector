@@ -32,8 +32,8 @@ class DpkgExtractor extends Extractor {
         initValues(PackageManagerEnum.DPKG, executor)
     }
 
-    BdioComponent[] extractComponents(OperatingSystemEnum operatingSystem, String[] packageList) {
-        BdioComponent[] components = []
+    List<BdioComponent> extractComponents(OperatingSystemEnum operatingSystem, String[] packageList) {
+        def components = []
         boolean startOfComponents = false
         packageList.each { packageLine ->
             if (packageLine != null) {

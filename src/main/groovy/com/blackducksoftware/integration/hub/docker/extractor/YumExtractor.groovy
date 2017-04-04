@@ -35,8 +35,8 @@ class YumExtractor extends Extractor {
         initValues(PackageManagerEnum.YUM, executor)
     }
 
-    BdioComponent[] extractComponents(OperatingSystemEnum operatingSystem, String[] packageList) {
-        BdioComponent[] components = []
+    List<BdioComponent> extractComponents(OperatingSystemEnum operatingSystem, String[] packageList) {
+        def components = []
         boolean startOfComponents = false
         def componentColumns = []
         packageList.each { packageLine ->

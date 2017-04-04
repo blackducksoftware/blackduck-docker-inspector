@@ -35,8 +35,8 @@ class AptExtractor extends Extractor {
         initValues(PackageManagerEnum.APT, executor)
     }
 
-    BdioComponent[] extractComponents(OperatingSystemEnum operatingSystem, String[] packageList) {
-        BdioComponent[] components = []
+    List<BdioComponent> extractComponents(OperatingSystemEnum operatingSystem, String[] packageList) {
+        def components = []
         packageList.each { packageLine ->
             if (packageLine.contains(' ')) {
                 def (packageName, version) = packageLine.split(' ')

@@ -118,7 +118,7 @@ class DockerTarParser {
                         }
                     }
                 }catch(Exception e){
-                    logger.error(e.getMessage(), e)
+                    logger.error(e.toString())
                 }
             }
         } finally {

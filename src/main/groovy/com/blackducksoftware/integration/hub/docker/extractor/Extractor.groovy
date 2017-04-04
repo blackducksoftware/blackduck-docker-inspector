@@ -15,7 +15,7 @@ abstract class Extractor {
     Executor executor
 
     abstract void init()
-    abstract BdioComponent[] extractComponents(OperatingSystemEnum operatingSystem, String[] packageList)
+    abstract List<BdioComponent> extractComponents(OperatingSystemEnum operatingSystem, String[] packageList)
 
     void initValues(PackageManagerEnum packageManagerEnum,Executor executor) {
         this.packageManagerEnum = packageManagerEnum
@@ -26,6 +26,6 @@ abstract class Extractor {
         bdioWriter.writeBdioNode(bdioNodeFactory.createBillOfMaterials(null, projectName, version))
         bdioWriter.writeBdioNode(bdioNodeFactory.createProject(projectName, version, "uuid:${UUID.randomUUID()}", null))
         List<BdioComponent> components = extractComponents(operatingSystem, executor.listPackages())
-        components.each { bdioWriter.write(it) }
+        components.each { bdioWriter.writeBdioNode(it) }
     }
 }
