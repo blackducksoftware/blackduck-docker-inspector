@@ -105,9 +105,6 @@ class HubDockerManager {
     private void stubPackageManagerFiles(List<TarExtractionResult> results){
         results.each { result ->
             File packageManagerDirectory = new File(result.packageManager.directory)
-            if(packageManagerDirectory.exists()){
-                FileUtils.deleteDirectory(packageManagerDirectory)
-            }
             FileUtils.copyDirectory(result.extractedPackageManagerDirectory, packageManagerDirectory)
         }
     }

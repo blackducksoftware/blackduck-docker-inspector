@@ -25,7 +25,7 @@ import com.blackducksoftware.integration.hub.docker.executor.YumExecutor
 
 @Component
 class YumExtractor extends Extractor {
-    private final Logger logger = LoggerFactory.getLogger(YumExtractor.class)
+    private final Logger yumLogger = LoggerFactory.getLogger(YumExtractor.class)
 
     @Autowired
     YumExecutor executor
@@ -57,7 +57,7 @@ class YumExtractor extends Extractor {
                         components.add(bdioComponent)
                         componentColumns = []
                     } else  if (componentColumns.size() > 3) {
-                        logger.error("Parsing multi-line components has failed. $packageLine")
+                        yumLogger.error("Parsing multi-line components has failed. $packageLine")
                         componentColumns = []
                     }
                 }
