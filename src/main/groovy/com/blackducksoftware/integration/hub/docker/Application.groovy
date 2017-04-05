@@ -39,10 +39,12 @@ class Application {
             logger.error("Your Hub configuration is not valid: ${e.message}")
         }
 
+        def bdioFiles = null
         if (StringUtils.isNotBlank(dockerImageName)) {
-            hubDockerManager.performExtractOfDockerImage(dockerImageName)
+            bdioFiles = hubDockerManager.performExtractOfDockerImage(dockerImageName)
         } else if(StringUtils.isNotBlank(dockerTar)) {
-            hubDockerManager.performExtractOfDockerTar(new File(dockerTar))
+            bdioFiles =  hubDockerManager.performExtractOfDockerTar(new File(dockerTar))
         }
+        hubDockerManager.uploadBdioFiles(bdioFiles)
     }
 }

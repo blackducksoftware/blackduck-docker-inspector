@@ -74,10 +74,12 @@ class HubDockerManager {
         performExtractFromRunningImage(dockerTar.getName(), results)
     }
 
-    void uploadBdioFiles(File[] bdioFiles){
-        bdioFiles.each {
-            if (hubClient.isValid()) {
-                hubClient.uploadBdioToHub(it)
+    void uploadBdioFiles(List<File> bdioFiles){
+        if(bdioFiles != null){
+            bdioFiles.each { file ->
+                if (hubClient.isValid()) {
+                    hubClient.uploadBdioToHub(file)
+                }
             }
         }
     }
@@ -103,7 +105,7 @@ class HubDockerManager {
                 }
             }
         }
-
+        bdioFiles
     }
 
     private void stubPackageManagerFiles(List<TarExtractionResult> results){
