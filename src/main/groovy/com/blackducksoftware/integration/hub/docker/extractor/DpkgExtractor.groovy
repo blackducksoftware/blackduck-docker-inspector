@@ -29,10 +29,14 @@ class DpkgExtractor extends Extractor {
 
     @PostConstruct
     void init() {
-        initValues(PackageManagerEnum.DPKG, executor)
+        def forges = [
+            OperatingSystemEnum.DEBIAN.forge,
+            OperatingSystemEnum.UBUNTU.forge
+        ]
+        initValues(PackageManagerEnum.DPKG, executor, forges)
     }
 
-    List<BdioComponent> extractComponents(OperatingSystemEnum operatingSystem, String[] packageList) {
+    List<BdioComponent> extractComponents(String[] packageList) {
         def components = []
         boolean startOfComponents = false
         packageList.each { packageLine ->
@@ -45,8 +49,7 @@ class DpkgExtractor extends Extractor {
 
                     String externalId = "$name/$version/$architecture"
 
-                    BdioComponent bdioComponent = bdioNodeFactory.createComponent(name, version, bdioPropertyHelper.createBdioId(name, version), operatingSystem.forge, externalId)
-                    components.add(bdioComponent)
+                    components.addAll(createBdioComponent(name, version, externalId))
                 }
             }
         }

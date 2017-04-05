@@ -17,15 +17,18 @@ abstract class Extractor {
     private final Logger logger = LoggerFactory.getLogger(Extractor.class)
     final BdioPropertyHelper bdioPropertyHelper = new BdioPropertyHelper()
     final BdioNodeFactory bdioNodeFactory = new BdioNodeFactory(bdioPropertyHelper)
+
     PackageManagerEnum packageManagerEnum
     Executor executor
+    List<String> forges
 
     abstract void init()
-    abstract java.util.List<BdioComponent> extractComponents(OperatingSystemEnum operatingSystem, String[] packageList)
+    abstract java.util.List<BdioComponent> extractComponents(String[] packageList)
 
-    void initValues(PackageManagerEnum packageManagerEnum,Executor executor) {
+    void initValues(PackageManagerEnum packageManagerEnum,Executor executor, List<String> forges) {
         this.packageManagerEnum = packageManagerEnum
         this.executor = executor
+        this.forges = forges
     }
 
     void extract(BdioWriter bdioWriter, OperatingSystemEnum operatingSystem, String projectName, String version) {
@@ -33,11 +36,20 @@ abstract class Extractor {
         bdioWriter.writeBdioNode(bom)
         String externalId = "${projectName}/${version}"
         BdioProject projectNode = bdioNodeFactory.createProject(projectName, version, bdioPropertyHelper.createBdioId(projectName, version), operatingSystem.forge, externalId)
-        List<BdioComponent> components = extractComponents(operatingSystem, executor.listPackages())
+        List<BdioComponent> components = extractComponents(executor.listPackages())
         bdioPropertyHelper.addRelationships(projectNode, components)
         bdioWriter.writeBdioNode(projectNode)
         components.each { component ->
             bdioWriter.writeBdioNode(component)
         }
+    }
+
+    java.util.List<BdioComponent> createBdioComponent(String name, String version, String externalId){
+        def components = []
+        forges.each{ forge ->
+            BdioComponent bdioComponent = bdioNodeFactory.createComponent(name, version, bdioPropertyHelper.createBdioId(name, version), forge, externalId)
+            components.add(bdioComponent)
+        }
+        components
     }
 }

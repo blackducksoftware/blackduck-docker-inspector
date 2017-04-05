@@ -32,10 +32,13 @@ class YumExtractor extends Extractor {
 
     @PostConstruct
     void init() {
-        initValues(PackageManagerEnum.YUM, executor)
+        def forges = [
+            OperatingSystemEnum.CENTOS.forge
+        ]
+        initValues(PackageManagerEnum.YUM, executor, forges)
     }
 
-    List<BdioComponent> extractComponents(OperatingSystemEnum operatingSystem, String[] packageList) {
+    List<BdioComponent> extractComponents(String[] packageList) {
         def components = []
         boolean startOfComponents = false
         def componentColumns = []
@@ -53,8 +56,8 @@ class YumExtractor extends Extractor {
 
                         String externalId = "$name/$version/$architecture"
 
-                        BdioComponent bdioComponent = bdioNodeFactory.createComponent(name, version, bdioPropertyHelper.createBdioId(name, version), operatingSystem.forge, externalId)
-                        components.add(bdioComponent)
+                        components.addAll(createBdioComponent(name, version, externalId))
+
                         componentColumns = []
                     } else  if (componentColumns.size() > 3) {
                         yumLogger.error("Parsing multi-line components has failed. $packageLine")

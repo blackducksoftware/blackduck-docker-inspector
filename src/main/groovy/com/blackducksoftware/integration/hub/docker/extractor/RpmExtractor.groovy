@@ -29,14 +29,17 @@ class RpmExtractor extends Extractor {
 
     @PostConstruct
     void init() {
-        initValues(PackageManagerEnum.RPM, executor)
+        def forges = [
+            OperatingSystemEnum.CENTOS.forge
+        ]
+        initValues(PackageManagerEnum.RPM, executor, forges)
     }
 
     boolean valid(String packageLine) {
         packageLine.matches(".+-.+-.+\\..*")
     }
 
-    List<BdioComponent> extractComponents(OperatingSystemEnum operatingSystem, String[] packageList) {
+    List<BdioComponent> extractComponents(String[] packageList) {
         def components = []
         packageList.each { packageLine ->
             if (valid(packageLine)) {
@@ -51,8 +54,7 @@ class RpmExtractor extends Extractor {
 
                 String externalId = "${artifact}/${versionRelease}/${arch}"
 
-                BdioComponent bdioComponent = bdioNodeFactory.createComponent(artifact, versionRelease, bdioPropertyHelper.createBdioId(artifact, versionRelease), operatingSystem.forge, externalId)
-                components.add(bdioComponent)
+                components.addAll(createBdioComponent(artifact, versionRelease, externalId))
             }
         }
         components

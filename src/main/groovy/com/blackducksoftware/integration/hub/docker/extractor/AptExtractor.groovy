@@ -29,10 +29,14 @@ class AptExtractor extends Extractor {
 
     @PostConstruct
     void init() {
-        initValues(PackageManagerEnum.APT, executor)
+        def forges = [
+            OperatingSystemEnum.DEBIAN.forge,
+            OperatingSystemEnum.UBUNTU.forge
+        ]
+        initValues(PackageManagerEnum.APT, executor, forges)
     }
 
-    List<BdioComponent> extractComponents(OperatingSystemEnum operatingSystem, String[] packageList) {
+    List<BdioComponent> extractComponents(String[] packageList) {
         def components = []
         packageList.each { packageLine ->
             if (packageLine.contains(' ')) {
@@ -41,8 +45,7 @@ class AptExtractor extends Extractor {
                 if (index > 0) {
                     def component = packageName.substring(0, index)
                     String externalId = "${component}/${version}"
-                    BdioComponent bdioComponent = bdioNodeFactory.createComponent(component, version, bdioPropertyHelper.createBdioId(component, version), operatingSystem.forge, externalId)
-                    components.add(bdioComponent)
+                    components.addAll(createBdioComponent(component, version, externalId))
                 }
             }
         }
