@@ -2,9 +2,7 @@ package com.blackducksoftware.integration.hub.docker
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import org.springframework.beans.BeansException
-import org.springframework.context.ApplicationContext
-import org.springframework.context.ApplicationContextAware
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
 import com.blackducksoftware.integration.hub.api.bom.BomImportRequestService
@@ -17,15 +15,32 @@ import com.blackducksoftware.integration.hub.service.HubServicesFactory
 import com.blackducksoftware.integration.log.Slf4jIntLogger
 
 @Component
-class HubClient implements ApplicationContextAware {
+class HubClient {
     private final Logger logger = LoggerFactory.getLogger(HubClient.class)
 
-    ApplicationContext applicationContext
+    @Value('${hub.url}')
+    String hubUrl
 
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext
-    }
+    @Value('${hub.timeout}')
+    String hubTimeout
+
+    @Value('${hub.username}')
+    String hubUsername
+
+    @Value('${hub.password}')
+    String hubPassword
+
+    @Value('${hub.proxy.host}')
+    String hubProxyHost
+
+    @Value('${hub.proxy.port}')
+    String hubProxyPort
+
+    @Value('${hub.proxy.username}')
+    String hubProxyUsername
+
+    @Value('${hub.proxy.password}')
+    String hubProxyPassword
 
     boolean isValid() {
         createBuilder().isValid()
@@ -53,10 +68,16 @@ class HubClient implements ApplicationContextAware {
     }
 
     private HubServerConfigBuilder createBuilder() {
-        Properties props = new Properties()
-        props.putAll(applicationContext.getProperties())
         HubServerConfigBuilder hubServerConfigBuilder = new HubServerConfigBuilder()
-        hubServerConfigBuilder.setFromProperties(props)
+        hubServerConfigBuilder.hubUrl = hubUrl
+        hubServerConfigBuilder.username = hubUsername
+        hubServerConfigBuilder.password = hubPassword
+
+        hubServerConfigBuilder.timeout = hubTimeout
+        hubServerConfigBuilder.proxyHost = hubProxyHost
+        hubServerConfigBuilder.proxyPort = hubProxyPort
+        hubServerConfigBuilder.proxyUsername = hubProxyUsername
+        hubServerConfigBuilder.proxyPassword = hubProxyPassword
 
         hubServerConfigBuilder
     }
