@@ -1,8 +1,8 @@
 package com.blackducksoftware.integration.hub.docker
 
 enum OperatingSystemEnum {
-    ALPINE ('alpine'),
-    CENTOS ('centos'),
+    ALPINE('alpine'),
+    CENTOS('centos'),
     DEBIAN('debian'),
     FEDORA('fedora'),
     UBUNTU('ubuntu'),
