@@ -30,7 +30,8 @@ class RpmExtractor extends Extractor {
     @PostConstruct
     void init() {
         def forges = [
-            OperatingSystemEnum.CENTOS.forge
+            OperatingSystemEnum.CENTOS.forge,
+            OperatingSystemEnum.FEDORA.forge
         ]
         initValues(PackageManagerEnum.RPM, executor, forges)
     }
