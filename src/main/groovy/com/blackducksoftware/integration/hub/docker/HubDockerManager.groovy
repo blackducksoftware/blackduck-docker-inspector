@@ -95,8 +95,12 @@ class HubDockerManager {
             bdioFiles.add(outputFile)
             new FileOutputStream(outputFile).withStream { outputStream ->
                 BdioWriter writer = new BdioWriter(new Gson(), outputStream)
-                Extractor extractor = getExtractorByPackageManager(extractionResult.packageManager)
-                extractor.extract(writer, tarResults.operatingSystemEnum, projectName, version)
+                try{
+                    Extractor extractor = getExtractorByPackageManager(extractionResult.packageManager)
+                    extractor.extract(writer, tarResults.operatingSystemEnum, projectName, version)
+                }finally{
+                    writer.close()
+                }
             }
         }
 

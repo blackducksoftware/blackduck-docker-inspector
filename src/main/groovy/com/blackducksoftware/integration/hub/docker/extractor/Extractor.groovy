@@ -21,7 +21,7 @@ abstract class Extractor {
     Executor executor
 
     abstract void init()
-    abstract List<BdioComponent> extractComponents(OperatingSystemEnum operatingSystem, String[] packageList)
+    abstract java.util.List<BdioComponent> extractComponents(OperatingSystemEnum operatingSystem, String[] packageList)
 
     void initValues(PackageManagerEnum packageManagerEnum,Executor executor) {
         this.packageManagerEnum = packageManagerEnum
@@ -29,18 +29,14 @@ abstract class Extractor {
     }
 
     void extract(BdioWriter bdioWriter, OperatingSystemEnum operatingSystem, String projectName, String version) {
-        logger.info("Running extract")
         BdioBillOfMaterials bom = bdioNodeFactory.createBillOfMaterials(null, projectName, version)
-        logger.info(bom.toString()  +" :: "+ bom.id)
         bdioWriter.writeBdioNode(bom)
         String externalId = "${projectName}/${version}"
         BdioProject projectNode = bdioNodeFactory.createProject(projectName, version, bdioPropertyHelper.createBdioId(projectName, version), operatingSystem.forge, externalId)
-        logger.info(projectNode.toString()  +" :: "+ projectNode.id)
         List<BdioComponent> components = extractComponents(operatingSystem, executor.listPackages())
         bdioPropertyHelper.addRelationships(projectNode, components)
         bdioWriter.writeBdioNode(projectNode)
         components.each { component ->
-            logger.info(component.toString()  +" :: "+ component.id)
             bdioWriter.writeBdioNode(component)
         }
     }

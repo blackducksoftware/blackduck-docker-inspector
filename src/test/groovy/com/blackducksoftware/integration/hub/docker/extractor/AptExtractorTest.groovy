@@ -21,15 +21,36 @@ import com.google.gson.Gson
 class AptExtractorTest {
 
     @Test
-    void testAptExtraction(){
+    void testAptFile1() {
+        testAptExtraction('ubuntu_apt_package_list_1.txt','testAptBdio1.jsonld')
+    }
+
+    @Test
+    void testAptFile2() {
+        testAptExtraction('ubuntu_apt_package_list_2.txt','testAptBdio2.jsonld')
+    }
+
+    @Test
+    void testAptFile3() {
+        testAptExtraction('ubuntu_apt_package_list_3.txt','testAptBdio3.jsonld')
+    }
+
+    void testAptExtraction(String resourceName, String outputFileName){
+        URL url = this.getClass().getResource("/$resourceName")
+        File resourceFile = new File(URLDecoder.decode(url.getFile(), 'UTF-8'))
+
         AptExtractor extractor = new AptExtractor()
-        AptExecutorMock executor = new AptExecutorMock('ubuntu_apt_package_list_1.txt')
+        AptExecutorMock executor = new AptExecutorMock(resourceFile)
         extractor.executor = executor
         extractor.init()
-        File outputFile = new File('testBdio')
-        new FileOutputStream(outputFile).withStream { outputStream ->
-            BdioWriter writer = new BdioWriter(new Gson(), outputStream)
-            extractor.extract(writer, OperatingSystemEnum.UBUNTU, "Test", "1")
+        File outputFile = new File("test")
+        outputFile = new File(outputFile, outputFileName)
+        if(outputFile.exists()){
+            outputFile.delete()
         }
+        outputFile.getParentFile().mkdirs()
+        BdioWriter writer = new BdioWriter(new Gson(), new FileWriter(outputFile))
+        extractor.extract(writer, OperatingSystemEnum.UBUNTU, "Test", "1")
+        writer.close()
     }
 }

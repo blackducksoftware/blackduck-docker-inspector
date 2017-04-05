@@ -15,15 +15,14 @@ import com.blackducksoftware.integration.hub.docker.executor.AptExecutor
 
 class AptExecutorMock extends AptExecutor {
 
-    String resourceFileName
+    File resourceFile
 
 
-    AptExecutorMock(String resourceFileName){
-        this.resourceFileName = resourceFileName
+    AptExecutorMock(File resourceFile){
+        this.resourceFile = resourceFile
     }
 
     String[] listPackages(){
-        URL url = this.getClass().getResource("/$resourceFileName")
-        new File(URLDecoder.decode(url.getFile(), 'UTF-8')) as String[]
+        resourceFile as String[]
     }
 }
