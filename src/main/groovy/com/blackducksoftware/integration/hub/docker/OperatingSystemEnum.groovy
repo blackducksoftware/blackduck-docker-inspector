@@ -1,5 +1,8 @@
 package com.blackducksoftware.integration.hub.docker
 
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+
 enum OperatingSystemEnum {
     ALPINE('alpine'),
     CENTOS('centos'),

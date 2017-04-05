@@ -64,6 +64,7 @@ class DockerTarParser {
                 line = line.trim()
                 if(line.startsWith(linePrefix)){
                     def (description, value) = line.split('=')
+                    value = value.replaceAll('"', '')
                     osEnum = OperatingSystemEnum.determineOperatingSystem(value)
                 }
             }
