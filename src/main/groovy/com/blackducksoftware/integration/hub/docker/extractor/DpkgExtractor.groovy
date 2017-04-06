@@ -47,6 +47,7 @@ class DpkgExtractor extends Extractor {
                     String componentInfo = packageLine.substring(3)
                     def(name,version,architecture,description) = componentInfo.tokenize(" ")
 
+                    name = name.substring(0, name.indexOf(":"))
                     String externalId = "$name/$version/$architecture"
 
                     components.addAll(createBdioComponent(name, version, externalId))
