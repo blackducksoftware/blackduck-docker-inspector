@@ -112,9 +112,23 @@ class HubDockerManager {
         results.each { result ->
             File packageManagerDirectory = new File(result.packageManager.directory)
             if(packageManagerDirectory.exists()){
-                //FileUtils.cleanDirectory(packageManagerDirectory)
+                if(result.packageManager == PackageManagerEnum.DPKG){
+                    deleteFilesOnly(packageManagerDirectory)
+                } else{
+                    FileUtils.deleteDirectory(packageManagerDirectory)
+                }
             }
             FileUtils.copyDirectory(result.extractedPackageManagerDirectory, packageManagerDirectory)
+        }
+    }
+
+    private void deleteFilesOnly(File file){
+        if (file.isDirectory()){
+            for (File subFile: file.listFiles()) {
+                deleteFilesOnly(subFile)
+            }
+        } else{
+            file.delete()
         }
     }
 
