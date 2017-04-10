@@ -1,11 +1,22 @@
 buildscript {
-    repositories { mavenCentral() }
-    dependencies { classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.1.RELEASE") }
+    repositories { 
+        mavenCentral() 
+        jcenter()
+        }
+    dependencies { 
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.1.RELEASE") 
+        classpath 'com.bmuschko:gradle-docker-plugin:3.0.6'
+        }
 }
 
 apply plugin: 'groovy'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'eclipse'
+apply plugin: 'java'
+apply plugin: 'com.bmuschko.docker-remote-api'
+
+import com.bmuschko.gradle.docker.tasks.image.Dockerfile
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 
 tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
 tasks.withType(GroovyCompile) { options.encoding = 'UTF-8' }
@@ -25,6 +36,44 @@ task produceFinalZip(type: Zip, dependsOn: build) {
         include 'application.properties'
         into 'config'
     }
+}
+
+task addFinalZipToRunDir(type: Copy, dependsOn: produceFinalZip) {
+    def zipFile = file("${buildDir}/distributions/${project.name}-${version}.zip")
+    def outputDir = file("${buildDir}/${project.name}")
+    
+    from zipTree(zipFile)
+    into outputDir
+}
+
+task addBashScriptToRunDir(type: Copy, dependsOn: build) {
+    from 'src/main/resources/scan-docker-image-tar.sh'
+    into "${buildDir}/${project.name}"
+}
+
+task buildRunDir(dependsOn: [addFinalZipToRunDir, addBashScriptToRunDir]) {
+}
+
+task createDockerfile(type: Dockerfile) {
+    destFile = project.file("${buildDir}/${project.name}/Dockerfile")
+    from 'ubuntu:16.04'
+    maintainer 'Black Duck Software'
+    runCommand 'apt-get update'
+    runCommand 'apt-get install -y default-jre'
+    runCommand 'apt-get install -y vim'
+    runCommand 'mkdir /opt/blackduck'
+    runCommand 'mkdir /opt/blackduck/hub-docker'
+    runCommand 'mkdir /opt/blackduck/hub-docker/config'
+    addFile('config', '/opt/blackduck/hub-docker/config')
+    addFile("${project.name}-${version}.jar", "/opt/blackduck/${project.name}")
+    addFile("scan-docker-image-tar.sh", "/opt/blackduck/${project.name}")
+    runCommand 'mkdir /tmp/blackduck'
+    runCommand 'mkdir /tmp/blackduck/hub-docker'
+    runCommand 'mkdir /tmp/blackduck/hub-docker/working'
+}
+    
+task buildDockerImage (type: Exec, dependsOn: [createDockerfile, buildRunDir]) {
+    commandLine "docker", "build", "--tag", "blackduck/${project.name}:1.0", "${buildDir}/${project.name}"
 }
 
 repositories {
