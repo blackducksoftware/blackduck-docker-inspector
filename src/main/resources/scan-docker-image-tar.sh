@@ -9,4 +9,4 @@ if [ $# -eq 0 ]
     exit -1
 fi
 cd /opt/blackduck/hub-docker
-java -jar hub-docker-*.jar --docker.tar=$1
+java -jar hub-docker-*.jar --working.directory=/opt/blackduck/hub-docker/working --docker.tar=$1
