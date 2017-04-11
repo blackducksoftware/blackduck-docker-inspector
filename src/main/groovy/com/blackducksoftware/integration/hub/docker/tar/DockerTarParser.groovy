@@ -27,11 +27,15 @@ class DockerTarParser {
     File workingDirectory
 
     TarExtractionResults parseImageTar(String operatingSystem, File dockerTar){
-        if(workingDirectory.exists()){
-            FileUtils.deleteDirectory(workingDirectory)
+        File tarExtractionDirectory = new File(workingDirectory, 'tarExtraction')
+
+        if(tarExtractionDirectory.exists()){
+            FileUtils.deleteDirectory(tarExtractionDirectory)
         }
-        List<File> layerTars = extractLayerTars(dockerTar)
-        def layerOutputDir = new File(workingDirectory, "layerFiles")
+
+
+        List<File> layerTars = extractLayerTars(tarExtractionDirectory,dockerTar)
+        def layerOutputDir = new File(tarExtractionDirectory, 'layerFiles')
         layerTars.each { layerTar ->
             parseLayerTarAndExtract(layerTar, layerOutputDir)
         }
@@ -39,9 +43,9 @@ class DockerTarParser {
         if(StringUtils.isNotBlank(operatingSystem)){
             results.operatingSystemEnum = OperatingSystemEnum.determineOperatingSystem(operatingSystem)
         } else{
-            results.operatingSystemEnum = extractOperatingSystemFromFile(new File(layerOutputDir, "etc").listFiles()[0])
+            results.operatingSystemEnum = extractOperatingSystemFromFile(new File(layerOutputDir, 'etc').listFiles()[0])
         }
-        def packageManagerFiles =  new File(layerOutputDir, "var/lib")
+        def packageManagerFiles =  new File(layerOutputDir, 'var/lib')
         packageManagerFiles.listFiles().each { packageManagerDirectory ->
             TarExtractionResult result = new TarExtractionResult()
             result.packageManager =PackageManagerEnum.getPackageManagerEnumByName(packageManagerDirectory.getName())
@@ -72,9 +76,9 @@ class DockerTarParser {
         osEnum
     }
 
-    private List<File> extractLayerTars(File dockerTar){
+    private List<File> extractLayerTars(File tarExtractionDirectory, File dockerTar){
         List<File> untaredFiles = new ArrayList<>()
-        final File outputDir = new File(workingDirectory, dockerTar.getName())
+        final File outputDir = new File(tarExtractionDirectory, dockerTar.getName())
         def tarArchiveInputStream = new TarArchiveInputStream(new FileInputStream(dockerTar))
         try {
             def tarArchiveEntry

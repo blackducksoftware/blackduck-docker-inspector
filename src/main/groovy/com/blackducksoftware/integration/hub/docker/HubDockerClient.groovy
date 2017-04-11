@@ -11,6 +11,7 @@
  */
 package com.blackducksoftware.integration.hub.docker
 
+import org.apache.commons.lang3.StringUtils
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Component
 import com.github.dockerjava.api.DockerClient
 import com.github.dockerjava.core.DefaultDockerClientConfig
 import com.github.dockerjava.core.DockerClientBuilder
-import com.github.dockerjava.core.DockerClientConfig
+import com.github.dockerjava.core.DefaultDockerClientConfig.Builder
 
 @Component
 class HubDockerClient {
@@ -54,17 +55,32 @@ class HubDockerClient {
     String dockerRegistryEmail
 
     DockerClient getDockerClient(){
-        DockerClientConfig config = DefaultDockerClientConfig.createDefaultConfigBuilder()
-                .withDockerHost(dockerHost)
-                .withDockerTlsVerify(dockerTlsVerify)
-                .withDockerCertPath(dockerCertPath)
-                .withDockerConfig(dockerConfig)
-                .withApiVersion(dockerApiVersion)
-                .withRegistryUrl(dockerRegistryUrl)
-                .withRegistryUsername(dockerRegistryUsername)
-                .withRegistryPassword(dockerRegistryPassword)
-                .withRegistryEmail(dockerRegistryEmail)
-                .build();
+        Builder builder = DefaultDockerClientConfig.createDefaultConfigBuilder()
+        if(StringUtils.isNotBlank(dockerHost)){
+            builder.withDockerHost(dockerHost)
+        }
+        if(StringUtils.isNotBlank(dockerTlsVerify)){
+            builder.withDockerTlsVerify(dockerTlsVerify)
+        }
+        builder.withDockerCertPath(dockerCertPath)
+        builder.withDockerConfig(dockerConfig)
+        builder.withApiVersion(dockerApiVersion)
+        builder.withRegistryUrl(dockerRegistryUrl)
+        builder.withRegistryUsername(dockerRegistryUsername)
+        builder.withRegistryPassword(dockerRegistryPassword)
+        builder.withRegistryEmail(dockerRegistryEmail)
+
+        DefaultDockerClientConfig config =  builder.build()
+        logger.info('docker host : '+config.dockerHost)
+        logger.info('config : '+config.dockerConfig)
+        logger.info('api version : '+config.apiVersion)
+        logger.info('auth config : '+config.authConfig)
+        logger.info('registry url : '+config.registryUrl)
+        logger.info('registry user : '+config.registryUsername)
+        logger.info('registry pass : '+config.registryPassword)
+        logger.info('registry email : '+config.registryEmail)
+
+
         DockerClientBuilder.getInstance(config).build();
     }
 }

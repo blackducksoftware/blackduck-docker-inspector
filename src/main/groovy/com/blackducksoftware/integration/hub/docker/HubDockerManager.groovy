@@ -18,6 +18,8 @@ import com.blackducksoftware.integration.hub.docker.tar.TarExtractionResult
 import com.blackducksoftware.integration.hub.docker.tar.TarExtractionResults
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException
 import com.github.dockerjava.api.DockerClient
+import com.github.dockerjava.api.command.SaveImageCmd
+import com.github.dockerjava.core.command.PullImageResultCallback
 import com.google.gson.Gson
 
 @Component
@@ -39,22 +41,29 @@ class HubDockerManager {
     @Autowired
     List<Extractor> extractors
 
-    List<File> performExtractOfDockerImage(String imageName) {
+    List<File> performExtractOfDockerImage(String imageName, String tagName) {
         // use docker to pull image if necessary
         // use docker to save image to tar
         // performExtractFromDockerTar()
         DockerClient client = hubDockerClient.getDockerClient()
-
-        File imageTarGzFile = new File(imageName + ".tar")
-        InputStream tarGzInputStream = null
-        try{
-            tarGzInputStream = client.saveImageCmd(imageName).exec()
-            FileUtils.copyInputStreamToFile(tarGzInputStream, imageTarGzFile);
-        } finally{
-            IOUtils.closeQuietly(tarGzInputStream);
+        File imageTarDirectory = new File(new File(workingDirectoryPath), 'tarDirectory')
+        if(imageTarDirectory.exists()){
+            FileUtils.deleteDirectory(imageTarDirectory)
         }
-
-        performExtractOfDockerTar(imageTarGzFile)
+        logger.info("Pulling image ${imageName}:${tagName}")
+        client.pullImageCmd("${imageName}:${tagName}").exec(new PullImageResultCallback()).awaitSuccess()
+        File imageTarFile = new File(imageTarDirectory, "${imageName}_${tagName}.tar")
+        InputStream tarInputStream = null
+        try{
+            logger.info("Saving the docker image to : ${imageTarFile.getAbsolutePath()}")
+            SaveImageCmd saveCommand = client.saveImageCmd(imageName)
+            saveCommand.withTag(tagName)
+            tarInputStream = saveCommand.exec()
+            FileUtils.copyInputStreamToFile(tarInputStream, imageTarFile);
+        } finally{
+            IOUtils.closeQuietly(tarInputStream);
+        }
+        performExtractOfDockerTar(imageTarFile)
     }
 
     List<File> performExtractOfDockerTar(File dockerTar) {
