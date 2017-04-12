@@ -29,6 +29,8 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 def linuxFlavors = ["ubuntu:16.04", "centos", "alpine"]
+def linuxFlavorsApt = ["ubuntu:16.04", "alpine"]
+def linuxFlavorsYum = ["centos"]
 
 springBoot { mainClass = 'com.blackducksoftware.integration.hub.docker.Application' }
 
@@ -75,8 +77,31 @@ task createAddBashScriptTasks() {
     }
 }
 
-task createDockerfileTasks() {
-    linuxFlavors.eachWithIndex {linuxFlavor, index ->
+task "createcentosDockerfile"(type: Dockerfile) {
+    destFile = project.file("${buildDir}/images/centos/${project.name}/Dockerfile")
+    println "destFile: ${destFile}"
+    from 'centos'
+    maintainer 'Black Duck Software'
+    
+    runCommand 'yum update'
+    runCommand 'yum install -y wget'
+    runCommand 'wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u45-b14/jdk-8u45-linux-x64.rpm"'
+    runCommand 'rpm -ivh jdk-8u45-linux-x64.rpm'
+
+    //runCommand 'apt-get install -y vim'
+    runCommand 'mkdir /opt/blackduck'
+    runCommand 'mkdir /opt/blackduck/hub-docker'
+    runCommand 'mkdir /opt/blackduck/hub-docker/config'
+    addFile('config', '/opt/blackduck/hub-docker/config')
+    addFile("${project.name}-${version}.jar", "/opt/blackduck/${project.name}")
+    addFile("scan-docker-image-tar.sh", "/opt/blackduck/${project.name}")
+    runCommand 'mkdir /tmp/blackduck'
+    runCommand 'mkdir /tmp/blackduck/hub-docker'
+    runCommand 'mkdir /tmp/blackduck/hub-docker/working'
+}
+
+task createAptDockerfileTasks() {
+    linuxFlavorsApt.eachWithIndex {linuxFlavor, index ->
         def linuxFlavorDirName = linuxFlavor.replaceAll("[^a-zA-Z0-9]", "_")
         println "creating task create${linuxFlavor}Dockerfile"
         task "create${linuxFlavorDirName}Dockerfile"(type: Dockerfile) {
@@ -111,10 +136,9 @@ task buildImageDirs(dependsOn: [addFinalZipToubuntu_16_04ImageBuildDir, addFinal
 }
     
 task buildDockerImages (type: Exec, dependsOn: [buildImageDirs]) {
-    println "COMMAND LINE: docker build --tag blackduck/${project.name}:1.0 ${buildDir}/images/ubuntu_16_04/${project.name}"
-    commandLine "docker", "build", "--tag", "blackduck/${project.name}:1.0", "${buildDir}/images/ubuntu_16_04/${project.name}"
-    //commandLine "docker", "build", "--tag", "blackduck/${project.name}:1.0", "${buildDir}/images/alpine/${project.name}"
-    //commandLine "docker", "build", "--tag", "blackduck/${project.name}:1.0", "${buildDir}/images/centos/${project.name}"
+    //commandLine "docker", "build", "--tag", "blackduck/${project.name}/ubuntu_16_04:1.0", "${buildDir}/images/ubuntu_16_04/${project.name}"
+    //commandLine "docker", "build", "--tag", "blackduck/${project.name}/alpine:1.0", "${buildDir}/images/alpine/${project.name}"
+    commandLine "docker", "build", "--tag", "blackduck/${project.name}/centos:1.0", "${buildDir}/images/centos/${project.name}"
 }
 
 repositories {
