@@ -27,59 +27,9 @@ class HubDockerClient {
 
     private final Logger logger = LoggerFactory.getLogger(HubDockerClient.class)
 
-    @Value('${docker.host}')
-    String dockerHost
-
-    @Value('${docker.tls.verify}')
-    Boolean dockerTlsVerify
-
-    @Value('${docker.cert.path}')
-    String dockerCertPath
-
-    @Value('${docker.config}')
-    String dockerConfig
-
-    @Value('${docker.api.version}')
-    String dockerApiVersion
-
-    @Value('${docker.registry.url}')
-    String dockerRegistryUrl
-
-    @Value('${docker.registry.username}')
-    String dockerRegistryUsername
-
-    @Value('${docker.registry.password}')
-    String dockerRegistryPassword
-
-    @Value('${docker.registry.email}')
-    String dockerRegistryEmail
-
     DockerClient getDockerClient(){
         Builder builder = DefaultDockerClientConfig.createDefaultConfigBuilder()
-        if(StringUtils.isNotBlank(dockerHost)){
-            builder.withDockerHost(dockerHost)
-        }
-        if(StringUtils.isNotBlank(dockerTlsVerify)){
-            builder.withDockerTlsVerify(dockerTlsVerify)
-        }
-        builder.withDockerCertPath(dockerCertPath)
-        builder.withDockerConfig(dockerConfig)
-        builder.withApiVersion(dockerApiVersion)
-        builder.withRegistryUrl(dockerRegistryUrl)
-        builder.withRegistryUsername(dockerRegistryUsername)
-        builder.withRegistryPassword(dockerRegistryPassword)
-        builder.withRegistryEmail(dockerRegistryEmail)
-
         DefaultDockerClientConfig config =  builder.build()
-        logger.info('docker host : '+config.dockerHost)
-        logger.info('config : '+config.dockerConfig)
-        logger.info('api version : '+config.apiVersion)
-        logger.info('auth config : '+config.authConfig)
-        logger.info('registry url : '+config.registryUrl)
-        logger.info('registry user : '+config.registryUsername)
-        logger.info('registry pass : '+config.registryPassword)
-        logger.info('registry email : '+config.registryEmail)
-
 
         DockerClientBuilder.getInstance(config).build();
     }
