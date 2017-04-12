@@ -1,0 +1,11 @@
+language: java
+jdk:
+  - oraclejdk8
+install: true
+
+script:
+  - ./gradlew clean build
+  
+after_success:
+  -wget -o init.gradle https://raw.githubusercontent.com/blackducksoftware/hub-gradle-plugin/master/src/main/resources/init.gradle
+  -./gradlew --init-script init.gradle buildBom -PdeployHubBdio=false
