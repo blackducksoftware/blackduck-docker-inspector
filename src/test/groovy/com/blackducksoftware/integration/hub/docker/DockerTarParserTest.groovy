@@ -11,6 +11,7 @@
  */
 package com.blackducksoftware.integration.hub.docker
 
+import org.junit.Ignore
 import org.junit.Test
 
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser
@@ -18,6 +19,7 @@ import com.blackducksoftware.integration.hub.docker.tar.TarExtractionResults
 
 class DockerTarParserTest {
 
+    @Ignore
     @Test
     void testPerformExtractOfDockerTar(){
         //File dockerTar = new File("ubuntu.tar")
