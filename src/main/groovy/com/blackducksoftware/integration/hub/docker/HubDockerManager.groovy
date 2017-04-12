@@ -18,6 +18,7 @@ import com.blackducksoftware.integration.hub.docker.tar.TarExtractionResult
 import com.blackducksoftware.integration.hub.docker.tar.TarExtractionResults
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException
 import com.github.dockerjava.api.DockerClient
+import com.github.dockerjava.api.command.PullImageCmd
 import com.github.dockerjava.api.command.SaveImageCmd
 import com.github.dockerjava.core.command.PullImageResultCallback
 import com.google.gson.Gson
@@ -51,7 +52,8 @@ class HubDockerManager {
             FileUtils.deleteDirectory(imageTarDirectory)
         }
         logger.info("Pulling image ${imageName}:${tagName}")
-        client.pullImageCmd("${imageName}:${tagName}").exec(new PullImageResultCallback()).awaitSuccess()
+        PullImageCmd pull = client.pullImageCmd("${imageName}").withTag(tagName)
+        pull.exec(new PullImageResultCallback()).awaitSuccess()
         File imageTarFile = new File(imageTarDirectory, "${imageName}_${tagName}.tar")
         InputStream tarInputStream = null
         try{
