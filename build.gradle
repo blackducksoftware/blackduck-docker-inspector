@@ -135,9 +135,15 @@ task buildImageDirs(dependsOn: [addFinalZipToubuntu_16_04ImageBuildDir, addFinal
     addBashScriptToubuntu_16_04ImageBuildDir, addBashScriptTocentosImageBuildDir, addBashScriptToalpineImageBuildDir, createDockerfiles]) {
 }
     
-task buildDockerImages (type: Exec, dependsOn: [buildImageDirs]) {
-    //commandLine "docker", "build", "--tag", "blackduck/${project.name}/ubuntu_16_04:1.0", "${buildDir}/images/ubuntu_16_04/${project.name}"
-    //commandLine "docker", "build", "--tag", "blackduck/${project.name}/alpine:1.0", "${buildDir}/images/alpine/${project.name}"
+task buildDockerImageUbuntu (type: Exec, dependsOn: [buildImageDirs]) {
+    commandLine "docker", "build", "--tag", "blackduck/${project.name}/ubuntu_16_04:1.0", "${buildDir}/images/ubuntu_16_04/${project.name}"
+}
+
+task buildDockerImageAlpine (type: Exec, dependsOn: [buildImageDirs]) {
+    commandLine "docker", "build", "--tag", "blackduck/${project.name}/alpine:1.0", "${buildDir}/images/alpine/${project.name}"
+}
+
+task buildDockerImageCentOS (type: Exec, dependsOn: [buildImageDirs]) {
     commandLine "docker", "build", "--tag", "blackduck/${project.name}/centos:1.0", "${buildDir}/images/centos/${project.name}"
 }
 
