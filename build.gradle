@@ -77,27 +77,32 @@ task createAddBashScriptTasks() {
     }
 }
 
-task "createcentosDockerfile"(type: Dockerfile) {
-    destFile = project.file("${buildDir}/images/centos/${project.name}/Dockerfile")
-    println "destFile: ${destFile}"
-    from 'centos'
-    maintainer 'Black Duck Software'
-    
-    runCommand 'yum update'
-    runCommand 'yum install -y wget'
-    runCommand 'wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u45-b14/jdk-8u45-linux-x64.rpm"'
-    runCommand 'rpm -ivh jdk-8u45-linux-x64.rpm'
-
-    //runCommand 'apt-get install -y vim'
-    runCommand 'mkdir /opt/blackduck'
-    runCommand 'mkdir /opt/blackduck/hub-docker'
-    runCommand 'mkdir /opt/blackduck/hub-docker/config'
-    addFile('config', '/opt/blackduck/hub-docker/config')
-    addFile("${project.name}-${version}.jar", "/opt/blackduck/${project.name}")
-    addFile("scan-docker-image-tar.sh", "/opt/blackduck/${project.name}")
-    runCommand 'mkdir /tmp/blackduck'
-    runCommand 'mkdir /tmp/blackduck/hub-docker'
-    runCommand 'mkdir /tmp/blackduck/hub-docker/working'
+task createYumDockerfileTasks() {
+    linuxFlavorsYum.eachWithIndex {linuxFlavor, index ->
+        def linuxFlavorDirName = linuxFlavor.replaceAll("[^a-zA-Z0-9]", "_")
+        println "creating task create${linuxFlavor}Dockerfile"
+        task "create${linuxFlavorDirName}Dockerfile"(type: Dockerfile) {
+            destFile = project.file("${buildDir}/images/${linuxFlavorDirName}/${project.name}/Dockerfile")
+            println "destFile: ${destFile}"
+            from linuxFlavor
+            maintainer 'Black Duck Software'
+            
+            runCommand 'yum update'
+            runCommand 'yum install -y wget'
+            runCommand 'wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u45-b14/jdk-8u45-linux-x64.rpm"'
+            runCommand 'rpm -ivh jdk-8u45-linux-x64.rpm'
+            
+            runCommand 'mkdir /opt/blackduck'
+            runCommand 'mkdir /opt/blackduck/hub-docker'
+            runCommand 'mkdir /opt/blackduck/hub-docker/config'
+            addFile('config', '/opt/blackduck/hub-docker/config')
+            addFile("${project.name}-${version}.jar", "/opt/blackduck/${project.name}")
+            addFile("scan-docker-image-tar.sh", "/opt/blackduck/${project.name}")
+            runCommand 'mkdir /tmp/blackduck'
+            runCommand 'mkdir /tmp/blackduck/hub-docker'
+            runCommand 'mkdir /tmp/blackduck/hub-docker/working'
+        }
+    }
 }
 
 task createAptDockerfileTasks() {
