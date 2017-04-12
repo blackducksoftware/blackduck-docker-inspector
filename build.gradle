@@ -28,9 +28,9 @@ description = ''
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-def linuxFlavors = ["ubuntu:16.04", "centos", "alpine"]
-def linuxFlavorsApt = ["ubuntu:16.04", "alpine"]
+def linuxFlavorsApt = ["ubuntu:16.04"]
 def linuxFlavorsYum = ["centos"]
+def linuxFlavors = linuxFlavorsApt + linuxFlavorsYum
 
 springBoot { mainClass = 'com.blackducksoftware.integration.hub.docker.Application' }
 
@@ -45,7 +45,6 @@ task produceFinalZip(type: Zip, dependsOn: build) {
 task createAddZipTasks() {
     linuxFlavors.eachWithIndex {linuxFlavor, index ->
         def linuxFlavorDirName = linuxFlavor.replaceAll("[^a-zA-Z0-9]", "_")
-        println "creating task addBashScriptTo${linuxFlavor}ImageBuildDir"
         task "addFinalZipTo${linuxFlavorDirName}ImageBuildDir"(type: Copy, dependsOn: produceFinalZip) {
             def zipFile = file("${buildDir}/distributions/${project.name}-${version}.zip")
             def outputDir = file("${buildDir}/images/${linuxFlavorDirName}/${project.name}")
@@ -55,21 +54,9 @@ task createAddZipTasks() {
     }
 }
 
-task myTest() {
-    doLast {
-    println "this is a test"
-    linuxFlavors.collect {
-        def linuxFlavor2 = it
-        def linuxFlavorDirName2 = it.replaceAll("[^a-zA-Z0-9]", "_")
-         println "${linuxFlavor2} ==> ${linuxFlavorDirName2}" 
-         }
-    }
-}
-
 task createAddBashScriptTasks() {
     linuxFlavors.eachWithIndex {linuxFlavor, index ->
         def linuxFlavorDirName = linuxFlavor.replaceAll("[^a-zA-Z0-9]", "_")
-        println "creating task addBashScriptTo${linuxFlavor}ImageBuildDir"
         task "addBashScriptTo${linuxFlavorDirName}ImageBuildDir"(type: Copy, dependsOn: build) {
             from 'src/main/resources/scan-docker-image-tar.sh'
             into "${buildDir}/images/${linuxFlavorDirName}/${project.name}"
@@ -80,7 +67,6 @@ task createAddBashScriptTasks() {
 task createYumDockerfileTasks() {
     linuxFlavorsYum.eachWithIndex {linuxFlavor, index ->
         def linuxFlavorDirName = linuxFlavor.replaceAll("[^a-zA-Z0-9]", "_")
-        println "creating task create${linuxFlavor}Dockerfile"
         task "create${linuxFlavorDirName}Dockerfile"(type: Dockerfile) {
             destFile = project.file("${buildDir}/images/${linuxFlavorDirName}/${project.name}/Dockerfile")
             println "destFile: ${destFile}"
@@ -91,6 +77,7 @@ task createYumDockerfileTasks() {
             runCommand 'yum install -y wget'
             runCommand 'wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u45-b14/jdk-8u45-linux-x64.rpm"'
             runCommand 'rpm -ivh jdk-8u45-linux-x64.rpm'
+            runCommand 'yum install -y docker'
             
             runCommand 'mkdir /opt/blackduck'
             runCommand 'mkdir /opt/blackduck/hub-docker'
@@ -108,15 +95,16 @@ task createYumDockerfileTasks() {
 task createAptDockerfileTasks() {
     linuxFlavorsApt.eachWithIndex {linuxFlavor, index ->
         def linuxFlavorDirName = linuxFlavor.replaceAll("[^a-zA-Z0-9]", "_")
-        println "creating task create${linuxFlavor}Dockerfile"
         task "create${linuxFlavorDirName}Dockerfile"(type: Dockerfile) {
             destFile = project.file("${buildDir}/images/${linuxFlavorDirName}/${project.name}/Dockerfile")
             println "destFile: ${destFile}"
             from linuxFlavor
             maintainer 'Black Duck Software'
+            
             runCommand 'apt-get update -y'
             runCommand 'apt install -y openjdk-8-jdk'
-            //runCommand 'apt-get install -y vim'
+            runCommand 'apt-get install -y docker'
+            
             runCommand 'mkdir /opt/blackduck'
             runCommand 'mkdir /opt/blackduck/hub-docker'
             runCommand 'mkdir /opt/blackduck/hub-docker/config'
@@ -130,26 +118,25 @@ task createAptDockerfileTasks() {
     }
 }
 
-task createDockerfiles(dependsOn: [createubuntu_16_04Dockerfile, createalpineDockerfile, createcentosDockerfile]) {
-    doLast {
-        println "Created docker files"
+task createDockerfiles(dependsOn: [createubuntu_16_04Dockerfile, createcentosDockerfile]) {
+}
+
+task buildImageDirs(dependsOn: [addFinalZipToubuntu_16_04ImageBuildDir, addFinalZipTocentosImageBuildDir, 
+    addBashScriptToubuntu_16_04ImageBuildDir, addBashScriptTocentosImageBuildDir, createDockerfiles]) {
+}
+
+task createBuildDockerImageTasks() {
+    linuxFlavors.eachWithIndex {linuxFlavor, index ->
+        def linuxFlavorDirName = linuxFlavor.replaceAll("[^a-zA-Z0-9]", "_")
+        def taskName = "buildDockerImage_${linuxFlavorDirName}"
+        println "creating task ${taskName}"
+        task "${taskName}"(type: Exec, dependsOn: [buildImageDirs]) {
+            commandLine "docker", "build", "--tag", "blackduck/${project.name}/${linuxFlavorDirName}:1.0", "${buildDir}/images/${linuxFlavorDirName}/${project.name}"
+        }
     }
 }
 
-task buildImageDirs(dependsOn: [addFinalZipToubuntu_16_04ImageBuildDir, addFinalZipTocentosImageBuildDir, addFinalZipToalpineImageBuildDir, 
-    addBashScriptToubuntu_16_04ImageBuildDir, addBashScriptTocentosImageBuildDir, addBashScriptToalpineImageBuildDir, createDockerfiles]) {
-}
-    
-task buildDockerImageUbuntu (type: Exec, dependsOn: [buildImageDirs]) {
-    commandLine "docker", "build", "--tag", "blackduck/${project.name}/ubuntu_16_04:1.0", "${buildDir}/images/ubuntu_16_04/${project.name}"
-}
-
-task buildDockerImageAlpine (type: Exec, dependsOn: [buildImageDirs]) {
-    commandLine "docker", "build", "--tag", "blackduck/${project.name}/alpine:1.0", "${buildDir}/images/alpine/${project.name}"
-}
-
-task buildDockerImageCentOS (type: Exec, dependsOn: [buildImageDirs]) {
-    commandLine "docker", "build", "--tag", "blackduck/${project.name}/centos:1.0", "${buildDir}/images/centos/${project.name}"
+task buildDockerImages(dependsOn: [buildDockerImage_ubuntu_16_04, buildDockerImage_centos]) {
 }
 
 repositories {
