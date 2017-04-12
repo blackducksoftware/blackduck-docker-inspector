@@ -20,6 +20,9 @@ class Application {
     @Value('${docker.image.name}')
     String dockerImageName
 
+    @Value('${docker.tag.name}')
+    String dockerTagName
+
     @Autowired
     HubClient hubClient
 
@@ -41,7 +44,10 @@ class Application {
 
         def bdioFiles = null
         if (StringUtils.isNotBlank(dockerImageName)) {
-            bdioFiles = hubDockerManager.performExtractOfDockerImage(dockerImageName)
+            if (StringUtils.isBlank(dockerTagName)) {
+                dockerTagName = 'latest'
+            }
+            bdioFiles = hubDockerManager.performExtractOfDockerImage(dockerImageName, dockerTagName)
         } else if(StringUtils.isNotBlank(dockerTar)) {
             bdioFiles =  hubDockerManager.performExtractOfDockerTar(new File(dockerTar))
         }

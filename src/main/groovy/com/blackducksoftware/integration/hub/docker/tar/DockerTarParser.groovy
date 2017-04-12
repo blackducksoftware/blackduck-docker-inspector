@@ -24,24 +24,31 @@ import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 class DockerTarParser {
     private final Logger logger = LoggerFactory.getLogger(DockerTarParser.class)
 
+    private static final String OS_EXTRACTION_PATTERN = "etc/(lsb-release|os-release)"
+
+    private static final String EXTRACTION_PATTERN = "(var/lib/(dpkg|apt|yum|rpm|apk){1}.*|${OS_EXTRACTION_PATTERN}"
+
     File workingDirectory
 
     TarExtractionResults parseImageTar(String operatingSystem, File dockerTar){
-        if(workingDirectory.exists()){
-            FileUtils.deleteDirectory(workingDirectory)
+        File tarExtractionDirectory = new File(workingDirectory, 'tarExtraction')
+
+        if(tarExtractionDirectory.exists()){
+            FileUtils.deleteDirectory(tarExtractionDirectory)
         }
-        List<File> layerTars = extractLayerTars(dockerTar)
-        def layerOutputDir = new File(workingDirectory, "layerFiles")
+
+        List<File> layerTars = extractLayerTars(tarExtractionDirectory,dockerTar)
+        def layerOutputDir = new File(tarExtractionDirectory, 'layerFiles')
         layerTars.each { layerTar ->
-            parseLayerTarAndExtract(layerTar, layerOutputDir)
+            parseLayerTarAndExtract(EXTRACTION_PATTERN, layerTar, layerOutputDir)
         }
         TarExtractionResults results = new TarExtractionResults()
         if(StringUtils.isNotBlank(operatingSystem)){
             results.operatingSystemEnum = OperatingSystemEnum.determineOperatingSystem(operatingSystem)
         } else{
-            results.operatingSystemEnum = extractOperatingSystemFromFile(new File(layerOutputDir, "etc").listFiles()[0])
+            results.operatingSystemEnum = extractOperatingSystemFromFile(new File(layerOutputDir, 'etc').listFiles()[0])
         }
-        def packageManagerFiles =  new File(layerOutputDir, "var/lib")
+        def packageManagerFiles =  new File(layerOutputDir, 'var/lib')
         packageManagerFiles.listFiles().each { packageManagerDirectory ->
             TarExtractionResult result = new TarExtractionResult()
             result.packageManager =PackageManagerEnum.getPackageManagerEnumByName(packageManagerDirectory.getName())
@@ -49,6 +56,21 @@ class DockerTarParser {
             results.extractionResults.add(result)
         }
         results
+    }
+
+    OperatingSystemEnum parseImageTarForOperatingSystemOnly(File dockerTar){
+        File tarExtractionDirectory = new File(workingDirectory, 'tarExtraction')
+
+        if(tarExtractionDirectory.exists()){
+            FileUtils.deleteDirectory(tarExtractionDirectory)
+        }
+
+        List<File> layerTars = extractLayerTars(tarExtractionDirectory,dockerTar)
+        def layerOutputDir = new File(tarExtractionDirectory, 'layerFiles')
+        layerTars.each { layerTar ->
+            parseLayerTarAndExtract(OS_EXTRACTION_PATTERN, layerTar, layerOutputDir)
+        }
+        extractOperatingSystemFromFile(new File(layerOutputDir, 'etc').listFiles()[0])
     }
 
     private OperatingSystemEnum extractOperatingSystemFromFile(File osFile){
@@ -72,9 +94,9 @@ class DockerTarParser {
         osEnum
     }
 
-    private List<File> extractLayerTars(File dockerTar){
+    private List<File> extractLayerTars(File tarExtractionDirectory, File dockerTar){
         List<File> untaredFiles = new ArrayList<>()
-        final File outputDir = new File(workingDirectory, dockerTar.getName())
+        final File outputDir = new File(tarExtractionDirectory, dockerTar.getName())
         def tarArchiveInputStream = new TarArchiveInputStream(new FileInputStream(dockerTar))
         try {
             def tarArchiveEntry
@@ -98,13 +120,13 @@ class DockerTarParser {
         untaredFiles
     }
 
-    private void parseLayerTarAndExtract(File layerTar, File layerOutputDir){
+    private void parseLayerTarAndExtract(String extractionPattern, File layerTar, File layerOutputDir){
         def layerInputStream = new TarArchiveInputStream(new FileInputStream(layerTar))
         try {
             def layerEntry
             while (null != (layerEntry = layerInputStream.getNextTarEntry())) {
                 try{
-                    if(shouldExtractEntry(layerEntry.name)){
+                    if(shouldExtractEntry(extractionPattern, layerEntry.name)){
                         final File outputFile = new File(layerOutputDir, layerEntry.getName())
                         if (layerEntry.isFile()) {
                             if(!outputFile.getParentFile().exists()){
@@ -128,7 +150,7 @@ class DockerTarParser {
     }
 
 
-    boolean shouldExtractEntry(String entryName){
-        entryName.matches("(var/lib/(dpkg|apt|yum|rpm|apk){1}.*|etc/(lsb-release|os-release))")
+    boolean shouldExtractEntry(String extractionPattern, String entryName){
+        entryName.matches(extractionPattern)
     }
 }
