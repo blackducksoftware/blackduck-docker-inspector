@@ -73,7 +73,7 @@ task createYumDockerfileTasks() {
             from linuxFlavor
             maintainer 'Black Duck Software'
             
-            runCommand 'yum update'
+            runCommand 'yum update -y'
             runCommand 'yum install -y wget'
             runCommand 'wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u45-b14/jdk-8u45-linux-x64.rpm"'
             runCommand 'rpm -ivh jdk-8u45-linux-x64.rpm'
