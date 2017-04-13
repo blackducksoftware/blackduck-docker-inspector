@@ -20,6 +20,9 @@ import com.blackducksoftware.integration.hub.exception.HubIntegrationException
 import com.github.dockerjava.api.DockerClient
 import com.github.dockerjava.api.command.PullImageCmd
 import com.github.dockerjava.api.command.SaveImageCmd
+import com.github.dockerjava.core.DefaultDockerClientConfig
+import com.github.dockerjava.core.DockerClientBuilder
+import com.github.dockerjava.core.DefaultDockerClientConfig.Builder
 import com.github.dockerjava.core.command.PullImageResultCallback
 import com.google.gson.Gson
 
@@ -36,8 +39,6 @@ class HubDockerManager {
     @Autowired
     HubClient hubClient
 
-    @Autowired
-    HubDockerClient hubDockerClient
 
     @Autowired
     List<Extractor> extractors
@@ -46,7 +47,7 @@ class HubDockerManager {
         // use docker to pull image if necessary
         // use docker to save image to tar
         // performExtractFromDockerTar()
-        DockerClient client = hubDockerClient.getDockerClient()
+        DockerClient client = getDockerClient()
         File imageTarDirectory = new File(new File(workingDirectoryPath), 'tarDirectory')
         if(imageTarDirectory.exists()){
             FileUtils.deleteDirectory(imageTarDirectory)
@@ -93,6 +94,13 @@ class HubDockerManager {
                 }
             }
         }
+    }
+
+    private DockerClient getDockerClient(){
+        Builder builder = DefaultDockerClientConfig.createDefaultConfigBuilder()
+        DefaultDockerClientConfig config =  builder.build()
+
+        DockerClientBuilder.getInstance(config).build();
     }
 
     private List<File> performExtractFromRunningImage(String tarFileName, TarExtractionResults tarResults) {
