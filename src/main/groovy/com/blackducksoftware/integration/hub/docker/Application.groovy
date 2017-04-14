@@ -41,7 +41,7 @@ class Application {
         } catch (Exception e) {
             logger.error("Your Hub configuration is not valid: ${e.message}")
         }
-
+        hubDockerManager.cleanWorkingDirectory()
         def bdioFiles = null
         if (StringUtils.isNotBlank(dockerImageName)) {
             if (StringUtils.isBlank(dockerTagName)) {

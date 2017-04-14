@@ -1,10 +1,10 @@
 package com.blackducksoftware.integration.hub.docker
 
 enum PackageManagerEnum {
+    DPKG('/var/lib/dpkg'),
+    RPM('/var/lib/rpm'),
     APT('/var/lib/apt'),
     YUM('/var/lib/yum'),
-    RPM('/var/lib/rpm'),
-    DPKG('/var/lib/dpkg'),
     APK('/var/lib/apk')
 
     String directory
