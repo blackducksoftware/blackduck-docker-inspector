@@ -13,46 +13,46 @@ package com.blackducksoftware.integration.hub.docker.extractor
 
 import javax.annotation.PostConstruct
 
+import org.apache.commons.lang3.StringUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
-import com.blackducksoftware.integration.hub.docker.executor.DpkgExecutor
+import com.blackducksoftware.integration.hub.docker.executor.ApkExecutor
 
 @Component
-class DpkgExtractor extends Extractor {
+class ApkExtractor extends Extractor {
 
     @Autowired
-    DpkgExecutor executor
+    ApkExecutor executor
 
     @PostConstruct
     void init() {
         def forges = [
-            OperatingSystemEnum.DEBIAN.forge,
-            OperatingSystemEnum.UBUNTU.forge
+            OperatingSystemEnum.ALPINE.forge
         ]
-        initValues(PackageManagerEnum.DPKG, executor, forges)
+        initValues(PackageManagerEnum.APK, executor, forges)
     }
 
     List<BdioComponent> extractComponents(String[] packageList) {
         def components = []
-        boolean startOfComponents = false
         packageList.each { packageLine ->
-            if (packageLine != null) {
-                if (packageLine.matches("\\+\\+\\+-=+-=+-=+-=+")) {
-                    startOfComponents = true
-                } else if (startOfComponents){
-                    String componentInfo = packageLine.substring(3)
-                    def(name,version,architecture,description) = componentInfo.tokenize(" ")
-                    if (name.contains(":")) {
-                        name = name.substring(0, name.indexOf(":"))
+            if (!packageLine.toLowerCase().startsWith('warning')) {
+                String[] parts = packageLine.split('-')
+                def version = parts[parts.length -2]
+                def component = ''
+                parts = parts.take(parts.length - 2)
+                for(String part : parts){
+                    if(StringUtils.isNotBlank(component)){
+                        component += "-${part}"
+                    } else{
+                        component = part
                     }
-                    String externalId = "$name/$version/$architecture"
-
-                    components.addAll(createBdioComponent(name, version, externalId))
                 }
+                String externalId = "${component}/${version}"
+                components.addAll(createBdioComponent(component, version, externalId))
             }
         }
         components

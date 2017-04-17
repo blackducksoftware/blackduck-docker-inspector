@@ -19,35 +19,24 @@ import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 import com.blackducksoftware.integration.hub.docker.mock.ExecutorMock
 import com.google.gson.Gson
 
-class AptExtractorTest {
+class ApkExtractorTest {
 
     @Test
-    void testAptFile1() {
-        testAptExtraction('ubuntu_apt_package_list_1.txt','testAptBdio1.jsonld')
+    void testApkFile1() {
+        testApkExtraction('alpine_apk_output_1.txt','testApkBdio1.jsonld')
     }
 
-    @Test
-    void testAptFile2() {
-        testAptExtraction('ubuntu_apt_package_list_2.txt','testAptBdio2.jsonld')
-    }
-
-    @Test
-    void testAptFile3() {
-        testAptExtraction('ubuntu_apt_package_list_3.txt','testAptBdio3.jsonld')
-    }
-
-    void testAptExtraction(String resourceName, String outputFileName){
+    void testApkExtraction(String resourceName, String outputFileName){
         URL url = this.getClass().getResource("/$resourceName")
         File resourceFile = new File(URLDecoder.decode(url.getFile(), 'UTF-8'))
 
-        AptExtractor extractor = new AptExtractor()
+        ApkExtractor extractor = new ApkExtractor()
         ExecutorMock executor = new ExecutorMock(resourceFile)
         extractor.executor = executor
         def forges = [
-            OperatingSystemEnum.DEBIAN.forge,
-            OperatingSystemEnum.UBUNTU.forge
+            OperatingSystemEnum.ALPINE.forge
         ]
-        extractor.initValues(PackageManagerEnum.APT, executor, forges)
+        extractor.initValues(PackageManagerEnum.APK, executor, forges)
 
         File outputFile = new File("test")
         outputFile = new File(outputFile, outputFileName)

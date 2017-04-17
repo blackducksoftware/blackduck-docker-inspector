@@ -13,12 +13,11 @@ package com.blackducksoftware.integration.hub.docker.mock
 
 import com.blackducksoftware.integration.hub.docker.executor.AptExecutor
 
-class AptExecutorMock extends AptExecutor {
+class ExecutorMock extends AptExecutor {
 
     File resourceFile
 
-
-    AptExecutorMock(File resourceFile){
+    ExecutorMock(File resourceFile){
         this.resourceFile = resourceFile
     }
 
