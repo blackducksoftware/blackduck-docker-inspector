@@ -18,13 +18,13 @@ import org.springframework.stereotype.Component
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 
 @Component
-class AptExecutor extends Executor {
+class ApkExecutor extends Executor {
     @PostConstruct
     void init() {
-        initValues(PackageManagerEnum.APT, 'apt --version', 'apt --installed list')
+        initValues(PackageManagerEnum.APK, 'apk --version', 'apk info -v')
     }
 
     String getPackageInfoCommand(String packageName){
-        "apt show $packageName"
+        "apk info ${packageName} -a"
     }
 }

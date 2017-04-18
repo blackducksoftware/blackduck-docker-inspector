@@ -28,9 +28,9 @@ description = ''
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-def linuxFlavorsApt = ["ubuntu:16.04"]
+def linuxFlavorsDpkg = ["ubuntu:16.04"]
 def linuxFlavorsYum = ["centos"]
-def linuxFlavors = linuxFlavorsApt + linuxFlavorsYum
+def linuxFlavors = linuxFlavorsDpkg + linuxFlavorsYum
 
 springBoot { mainClass = 'com.blackducksoftware.integration.hub.docker.Application' }
 
@@ -93,7 +93,7 @@ task createYumDockerfileTasks() {
 }
 
 task createAptDockerfileTasks() {
-    linuxFlavorsApt.eachWithIndex {linuxFlavor, index ->
+    linuxFlavorsDpkg.eachWithIndex {linuxFlavor, index ->
         def linuxFlavorDirName = linuxFlavor.replaceAll("[^a-zA-Z0-9]", "_")
         task "create${linuxFlavorDirName}Dockerfile"(type: Dockerfile) {
             destFile = project.file("${buildDir}/images/${linuxFlavorDirName}/${project.name}/Dockerfile")

@@ -49,9 +49,6 @@ class HubDockerManager {
         // performExtractFromDockerTar()
         DockerClient client = getDockerClient()
         File imageTarDirectory = new File(new File(workingDirectoryPath), 'tarDirectory')
-        if(imageTarDirectory.exists()){
-            FileUtils.deleteDirectory(imageTarDirectory)
-        }
         logger.info("Pulling image ${imageName}:${tagName}")
         PullImageCmd pull = client.pullImageCmd("${imageName}").withTag(tagName)
         pull.exec(new PullImageResultCallback()).awaitSuccess()
@@ -81,8 +78,6 @@ class HubDockerManager {
         if(results.operatingSystemEnum == null){
             throw new HubIntegrationException('Could not determine the Operating System of this Docker tar.')
         }
-        stubPackageManagerFiles(results.extractionResults)
-
         performExtractFromRunningImage(dockerTar.getName(), results)
     }
 
@@ -93,6 +88,13 @@ class HubDockerManager {
                     hubClient.uploadBdioToHub(file)
                 }
             }
+        }
+    }
+
+    void cleanWorkingDirectory(){
+        File workingDirectory = new File(workingDirectoryPath)
+        if(workingDirectory.exists()){
+            FileUtils.deleteDirectory(workingDirectory)
         }
     }
 
@@ -110,7 +112,9 @@ class HubDockerManager {
         // deploy bdio to the Hub
         def bdioFiles = []
         tarResults.extractionResults.each { extractionResult ->
-            String projectName = "${tarFileName}_${extractionResult.packageManager}"
+            logger.info("${extractionResult.layer}_${extractionResult.extractedPackageManagerDirectory.getAbsolutePath()}")
+            stubPackageManagerFiles(extractionResult)
+            String projectName = "${tarFileName}_${extractionResult.layer}_${extractionResult.packageManager}"
             String version = DateTimeFormatter.ISO_LOCAL_DATE.format(LocalDate.now())
             def outputFile = new File(workingDirectory, "${projectName}_${version}_bdio.jsonld")
             bdioFiles.add(outputFile)
@@ -127,18 +131,18 @@ class HubDockerManager {
         bdioFiles
     }
 
-    private void stubPackageManagerFiles(List<TarExtractionResult> results){
-        results.each { result ->
-            File packageManagerDirectory = new File(result.packageManager.directory)
-            if(packageManagerDirectory.exists()){
-                if(result.packageManager == PackageManagerEnum.DPKG){
-                    deleteFilesOnly(packageManagerDirectory)
-                } else{
-                    FileUtils.deleteDirectory(packageManagerDirectory)
-                }
+    private void stubPackageManagerFiles(TarExtractionResult result){
+        File packageManagerDirectory = new File(result.packageManager.directory)
+        if(packageManagerDirectory.exists()){
+            deleteFilesOnly(packageManagerDirectory)
+            if(result.packageManager == PackageManagerEnum.DPKG){
+                File statusFile = new File(packageManagerDirectory, 'status')
+                statusFile.createNewFile()
+                File updatesDir = new File(packageManagerDirectory, 'updates')
+                updatesDir.mkdir()
             }
-            FileUtils.copyDirectory(result.extractedPackageManagerDirectory, packageManagerDirectory)
         }
+        FileUtils.copyDirectory(result.extractedPackageManagerDirectory, packageManagerDirectory)
     }
 
     private void deleteFilesOnly(File file){
