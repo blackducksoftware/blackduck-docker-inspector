@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
+import com.blackducksoftware.integration.hub.exception.HubIntegrationException
 
 abstract class Executor {
     private final Logger logger = LoggerFactory.getLogger(getClass())
@@ -56,15 +57,22 @@ abstract class Executor {
         executeCommand(infoCommand)
     }
 
-    String[] executeCommand(String commmand){
+    String[] executeCommand(String command){
         try {
             def standardOut = new StringBuilder()
             def standardError = new StringBuilder()
-            def process = commmand.execute()
+            def process = command.execute()
             process.consumeProcessOutput(standardOut, standardError)
             process.waitForOrKill(commandTimeout)
 
-            standardOut.toString().split(System.lineSeparator())
+            if(process.exitValue() !=0){
+                logger.error(standardError.toString())
+                throw new HubIntegrationException("Failed to run command ${command}")
+            }
+
+            def output =  standardOut.toString()
+            logger.info(output)
+            output.split(System.lineSeparator())
         } catch(Exception e) {
             logger.error("Error executing command {}",listPackagesCommand,e)
         }

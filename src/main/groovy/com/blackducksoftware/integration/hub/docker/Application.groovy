@@ -41,15 +41,15 @@ class Application {
         } catch (Exception e) {
             logger.error("Your Hub configuration is not valid: ${e.message}")
         }
-
+        hubDockerManager.cleanWorkingDirectory()
         def bdioFiles = null
-        if (StringUtils.isNotBlank(dockerImageName)) {
+        if(StringUtils.isNotBlank(dockerTar)) {
+            bdioFiles =  hubDockerManager.performExtractOfDockerTar(new File(dockerTar))
+        } else if (StringUtils.isNotBlank(dockerImageName)) {
             if (StringUtils.isBlank(dockerTagName)) {
                 dockerTagName = 'latest'
             }
             bdioFiles = hubDockerManager.performExtractOfDockerImage(dockerImageName, dockerTagName)
-        } else if(StringUtils.isNotBlank(dockerTar)) {
-            bdioFiles =  hubDockerManager.performExtractOfDockerTar(new File(dockerTar))
         }
         hubDockerManager.uploadBdioFiles(bdioFiles)
     }
