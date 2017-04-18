@@ -3,7 +3,6 @@ package com.blackducksoftware.integration.hub.docker
 enum PackageManagerEnum {
     DPKG('/var/lib/dpkg'),
     RPM('/var/lib/rpm'),
-    APT('/var/lib/apt'),
     YUM('/var/lib/yum'),
     APK('/var/lib/apk')
 

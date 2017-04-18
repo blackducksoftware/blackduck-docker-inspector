@@ -12,7 +12,6 @@
 package com.blackducksoftware.integration.hub.docker.tar
 
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream
-import org.apache.commons.io.FileUtils
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils
 import org.slf4j.Logger
@@ -27,7 +26,7 @@ class DockerTarParser {
 
     private static final String OS_EXTRACTION_PATTERN = "etc/(lsb-release|os-release)"
 
-    private static final String EXTRACTION_PATTERN = "(var/lib/(dpkg|apt|yum|rpm|apk){1}.*|${OS_EXTRACTION_PATTERN})"
+    private static final String EXTRACTION_PATTERN = "(var/lib/(dpkg|yum|rpm|apk){1}.*|${OS_EXTRACTION_PATTERN})"
 
     File workingDirectory
 

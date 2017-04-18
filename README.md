@@ -14,4 +14,5 @@ In Development...
 ## Package Managers ##
 - yum
 - rpm
-- apt-get
+- dpkg
+- apk
