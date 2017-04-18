@@ -1,6 +1,6 @@
 package com.blackducksoftware.integration.hub.docker
 
-import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 import org.apache.commons.io.FileUtils
@@ -128,10 +128,7 @@ class HubDockerManager {
             logger.info("${extractionResult.layer}_${extractionResult.extractedPackageManagerDirectory.getAbsolutePath()}")
             stubPackageManagerFiles(extractionResult)
             String projectName = "${tarFileName}_${extractionResult.layer}_${extractionResult.packageManager}"
-            // TODO this change fails:
-            // String version = DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(LocalDate.now())
-            // Reverted back to:
-            String version = DateTimeFormatter.ISO_LOCAL_DATE.format(LocalDate.now())
+            String version = DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(LocalDateTime.now())
             def outputFile = new File(workingDirectory, "${projectName}_${version}_bdio.jsonld")
             bdioFiles.add(outputFile)
             new FileOutputStream(outputFile).withStream { outputStream ->
