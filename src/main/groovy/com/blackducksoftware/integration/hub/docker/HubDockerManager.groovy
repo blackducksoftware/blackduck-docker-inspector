@@ -128,7 +128,10 @@ class HubDockerManager {
             logger.info("${extractionResult.layer}_${extractionResult.extractedPackageManagerDirectory.getAbsolutePath()}")
             stubPackageManagerFiles(extractionResult)
             String projectName = "${tarFileName}_${extractionResult.layer}_${extractionResult.packageManager}"
-            String version = DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(LocalDate.now())
+            // TODO this change fails:
+            // String version = DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(LocalDate.now())
+            // Reverted back to:
+            String version = DateTimeFormatter.ISO_LOCAL_DATE.format(LocalDate.now())
             def outputFile = new File(workingDirectory, "${projectName}_${version}_bdio.jsonld")
             bdioFiles.add(outputFile)
             new FileOutputStream(outputFile).withStream { outputStream ->
