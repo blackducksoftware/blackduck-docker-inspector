@@ -39,11 +39,17 @@ class HubDockerManager {
     @Autowired
     HubClient hubClient
 
-
     @Autowired
     List<Extractor> extractors
 
-    List<File> performExtractOfDockerImage(String imageName, String tagName) {
+    DockerTarParser tarParser
+
+    void init() {
+        tarParser = new DockerTarParser()
+        tarParser.workingDirectory = new File(workingDirectoryPath)
+    }
+
+    File getTarFileFromDockerImage(String imageName, String tagName) {
         // use docker to pull image if necessary
         // use docker to save image to tar
         // performExtractFromDockerTar()
@@ -63,22 +69,29 @@ class HubDockerManager {
         } finally{
             IOUtils.closeQuietly(tarInputStream);
         }
-        performExtractOfDockerTar(imageTarFile)
+        imageTarFile
     }
 
-    List<File> performExtractOfDockerTar(File dockerTar) {
+    File extractDockerLayers(File dockerTar) {
         // Parse through the tar and the tar layers
         // Find the package manager files
         // extract the package manager files and put them into the correct locations on the machine that is running this
         //performExtractFromRunningImage()
-        DockerTarParser tarParser = new DockerTarParser()
-        tarParser.workingDirectory = new File(workingDirectoryPath)
 
-        TarExtractionResults results = tarParser.parseImageTar(linuxDistro, dockerTar)
-        if(results.operatingSystemEnum == null){
+
+        File layerFilesDir = tarParser.extractDockerLayers(dockerTar)
+    }
+
+    OperatingSystemEnum detectOperatingSystem(String operatingSystem, File layerFilesDir) {
+        tarParser.detectOperatingSystem(operatingSystem, layerFilesDir)
+    }
+
+    List<File> generateBdioFromLayerFilesDir(File dockerTar, File layerFilesDir, OperatingSystemEnum osEnum) {
+        TarExtractionResults packageMgrDirs = tarParser.extractPackageManagerDirs(layerFilesDir, osEnum)
+        if(packageMgrDirs.operatingSystemEnum == null){
             throw new HubIntegrationException('Could not determine the Operating System of this Docker tar.')
         }
-        performExtractFromRunningImage(dockerTar.getName(), results)
+        generateBdioFromPackageMgrDirs(dockerTar.getName(), packageMgrDirs)
     }
 
     void uploadBdioFiles(List<File> bdioFiles){
@@ -105,7 +118,7 @@ class HubDockerManager {
         DockerClientBuilder.getInstance(config).build();
     }
 
-    private List<File> performExtractFromRunningImage(String tarFileName, TarExtractionResults tarResults) {
+    private List<File> generateBdioFromPackageMgrDirs(String tarFileName, TarExtractionResults tarResults) {
         File workingDirectory = new File(workingDirectoryPath)
         // run the package managers
         // extract the bdio from output

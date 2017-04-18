@@ -30,10 +30,10 @@ class DockerTarParser {
 
     File workingDirectory
 
-    TarExtractionResults parseImageTar(String operatingSystem, File dockerTar){
+    File extractDockerLayers(File dockerTar){
         File tarExtractionDirectory = new File(workingDirectory, 'tarExtraction')
         List<File> layerTars = extractLayerTars(tarExtractionDirectory,dockerTar)
-        def layerFilesDir = new File(tarExtractionDirectory, 'layerFiles')
+        File layerFilesDir = new File(tarExtractionDirectory, 'layerFiles')
         layerTars.each { layerTar ->
             def layerName = layerTar.getName()
             if(StringUtils.compare(layerName,'layer.tar') == 0){
@@ -42,18 +42,27 @@ class DockerTarParser {
             def layerOutputDir = new File(layerFilesDir, layerName)
             parseLayerTarAndExtract(EXTRACTION_PATTERN, layerTar, layerOutputDir)
         }
-        TarExtractionResults results = new TarExtractionResults()
+        layerFilesDir
+    }
+
+    OperatingSystemEnum detectOperatingSystem(String operatingSystem, File layerFilesDir) {
+        OperatingSystemEnum osEnum
         if(StringUtils.isNotBlank(operatingSystem)){
-            results.operatingSystemEnum = OperatingSystemEnum.determineOperatingSystem(operatingSystem)
+            osEnum = OperatingSystemEnum.determineOperatingSystem(operatingSystem)
         } else{
             logger.trace("Layer directory ${layerFilesDir.getName()}, looking for etc")
             def etcFile = findFileWithName(layerFilesDir, 'etc')
             if(etcFile == null || etcFile.listFiles().size() == 0){
                 throw new HubIntegrationException("Could not determine the Operating System because we could not find the OS files.")
             }
-            results.operatingSystemEnum = extractOperatingSystemFromFiles(etcFile.listFiles())
+            osEnum = extractOperatingSystemFromFiles(etcFile.listFiles())
         }
+        osEnum
+    }
 
+    TarExtractionResults extractPackageManagerDirs(File layerFilesDir, OperatingSystemEnum osEnum) {
+        TarExtractionResults results = new TarExtractionResults()
+        results.operatingSystemEnum = osEnum
         layerFilesDir.listFiles().each { layerDirectory ->
             logger.trace("Layer directory ${layerDirectory.getName()}, looking for lib")
             def libDir = findFileWithName(layerDirectory, 'lib')
@@ -70,25 +79,26 @@ class DockerTarParser {
         results
     }
 
-    OperatingSystemEnum parseImageTarForOperatingSystemOnly(File dockerTar){
-        File tarExtractionDirectory = new File(workingDirectory, 'tarExtraction')
-        List<File> layerTars = extractLayerTars(tarExtractionDirectory,dockerTar)
-        def layerFilesDir = new File(tarExtractionDirectory, 'layerFiles')
-        layerTars.each { layerTar ->
-            def layerName = layerTar.getName()
-            if(StringUtils.compare(layerName, 'layer.tar') == 0){
-                layerName = layerTar.getParentFile().getName()
-            }
-            def layerOutputDir = new File(layerFilesDir, layerName)
-            parseLayerTarAndExtract(OS_EXTRACTION_PATTERN, layerTar, layerOutputDir)
-        }
-        logger.trace("Layer directory ${layerFilesDir.getName()}, looking for etc")
-        def etcFile = findFileWithName(layerFilesDir, 'etc')
-        if(etcFile == null || etcFile.listFiles().size() == 0){
-            throw new HubIntegrationException("Could not determine the Operating System because we could not find the OS files.")
-        }
-        extractOperatingSystemFromFiles(etcFile.listFiles())
-    }
+    // TODO remove
+    //    OperatingSystemEnum parseImageTarForOperatingSystemOnly(File dockerTar){
+    //        File tarExtractionDirectory = new File(workingDirectory, 'tarExtraction')
+    //        List<File> layerTars = extractLayerTars(tarExtractionDirectory,dockerTar)
+    //        def layerFilesDir = new File(tarExtractionDirectory, 'layerFiles')
+    //        layerTars.each { layerTar ->
+    //            def layerName = layerTar.getName()
+    //            if(StringUtils.compare(layerName, 'layer.tar') == 0){
+    //                layerName = layerTar.getParentFile().getName()
+    //            }
+    //            def layerOutputDir = new File(layerFilesDir, layerName)
+    //            parseLayerTarAndExtract(OS_EXTRACTION_PATTERN, layerTar, layerOutputDir)
+    //        }
+    //        logger.trace("Layer directory ${layerFilesDir.getName()}, looking for etc")
+    //        def etcFile = findFileWithName(layerFilesDir, 'etc')
+    //        if(etcFile == null || etcFile.listFiles().size() == 0){
+    //            throw new HubIntegrationException("Could not determine the Operating System because we could not find the OS files.")
+    //        }
+    //        extractOperatingSystemFromFiles(etcFile.listFiles())
+    //    }
 
     private OperatingSystemEnum extractOperatingSystemFromFiles(File[] osFiles){
         OperatingSystemEnum osEnum = null

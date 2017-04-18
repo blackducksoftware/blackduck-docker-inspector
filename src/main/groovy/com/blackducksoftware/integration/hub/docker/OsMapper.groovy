@@ -22,4 +22,9 @@ class OsMapper {
     OperatingSystemEnum getRuntimeOsForTargetImageOs(OperatingSystemEnum targetImageOs) {
         targetToRuntimeMap.get(targetImageOs)
     }
+
+    OperatingSystemEnum getCurrentOs() {
+        String currentOsName = System.getProperty("os.name")
+        OperatingSystemEnum.determineOperatingSystem(currentOsName)
+    }
 }
