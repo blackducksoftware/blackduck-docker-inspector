@@ -12,7 +12,6 @@ In Development...
 ## Documentation ##
 
 ## Package Managers ##
-- yum
 - rpm
 - dpkg
 - apk
