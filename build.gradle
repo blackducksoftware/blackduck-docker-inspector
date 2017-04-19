@@ -102,8 +102,12 @@ task createAptDockerfileTasks() {
             maintainer 'Black Duck Software'
             
             runCommand 'apt-get update -y'
-            runCommand 'apt install -y openjdk-8-jdk'
-            runCommand 'apt-get install -y docker'
+            runCommand 'apt install -y openjdk-8-jdk apt-transport-https ca-certificates curl software-properties-common'
+            runCommand 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -'
+            runCommand 'add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"'
+            runCommand 'apt-get update -y'
+            runCommand 'apt-get install -y docker-ce'
+            runCommand 'dockerd &'
             
             runCommand 'mkdir /opt/blackduck'
             runCommand 'mkdir /opt/blackduck/hub-docker'
@@ -137,6 +141,10 @@ task createBuildDockerImageTasks() {
 }
 
 task buildDockerImages(dependsOn: [buildDockerImage_ubuntu_16_04, buildDockerImage_centos]) {
+}
+
+task temp(dependsOn: buildDockerImage_ubuntu_16_04) {
+    
 }
 
 repositories {
