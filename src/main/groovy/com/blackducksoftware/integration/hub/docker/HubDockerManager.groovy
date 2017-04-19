@@ -86,6 +86,10 @@ class HubDockerManager {
         tarParser.detectOperatingSystem(operatingSystem, layerFilesDir)
     }
 
+    OperatingSystemEnum detectCurrentOperatingSystem() {
+        tarParser.detectOperatingSystemFromEtcDir(new File("/etc"))
+    }
+
     List<File> generateBdioFromLayerFilesDir(File dockerTar, File layerFilesDir, OperatingSystemEnum osEnum) {
         TarExtractionResults packageMgrDirs = tarParser.extractPackageManagerDirs(layerFilesDir, osEnum)
         if(packageMgrDirs.operatingSystemEnum == null){

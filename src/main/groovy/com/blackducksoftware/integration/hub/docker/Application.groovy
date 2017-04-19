@@ -47,21 +47,38 @@ class Application {
         hubDockerManager.init()
         hubDockerManager.cleanWorkingDirectory()
         def bdioFiles = null
+        File dockerTarFile = deriveDockerTarFile()
+        File layerFilesDir = hubDockerManager.extractDockerLayers(new File(dockerTar))
+
+        OsMapper osMapper = new OsMapper()
+        OperatingSystemEnum targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro, layerFilesDir)
+        OperatingSystemEnum requiredOsEnum = osMapper.getRuntimeOsForTargetImageOs(targetOsEnum)
+        OperatingSystemEnum currentOsEnum = hubDockerManager.detectCurrentOperatingSystem()
+        if (currentOsEnum == requiredOsEnum) {
+            String msg = sprintf("Image inspection for %s can be run in this %s docker container",
+                    targetOsEnum.toString(), currentOsEnum.toString())
+            logger.info(msg)
+        } else {
+            String msg = sprintf("Image inspection for %s should not be run in this %s docker container",
+                    targetOsEnum.toString(), currentOsEnum.toString())
+            logger.error(msg)
+        }
+
+        bdioFiles = hubDockerManager.generateBdioFromLayerFilesDir(dockerTarFile, layerFilesDir, targetOsEnum)
+        hubDockerManager.uploadBdioFiles(bdioFiles)
+    }
+
+    private File deriveDockerTarFile() {
+        File dockerTarFile
         if(StringUtils.isNotBlank(dockerTar)) {
-            File dockerTarFile = new File(dockerTar)
-            File layerFilesDir = hubDockerManager.extractDockerLayers(new File(dockerTar))
-            OperatingSystemEnum targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro, layerFilesDir)
-            bdioFiles = hubDockerManager.generateBdioFromLayerFilesDir(dockerTarFile, layerFilesDir, targetOsEnum)
+            dockerTarFile = new File(dockerTar)
         } else if (StringUtils.isNotBlank(dockerImageName)) {
             if (StringUtils.isBlank(dockerTagName)) {
                 dockerTagName = 'latest'
             }
-            File dockerTarFile = hubDockerManager.getTarFileFromDockerImage(dockerImageName, dockerTagName)
-            File layerFilesDir = hubDockerManager.extractDockerLayers(dockerTarFile)
-            OperatingSystemEnum targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro, layerFilesDir)
-            bdioFiles = hubDockerManager.generateBdioFromLayerFilesDir(dockerTarFile, layerFilesDir, targetOsEnum)
+            dockerTarFile = hubDockerManager.getTarFileFromDockerImage(dockerImageName, dockerTagName)
         }
-        hubDockerManager.uploadBdioFiles(bdioFiles)
+        return dockerTarFile
     }
 
     void moveThisIntoInit(String linuxDistro, File layerFilesDir) {
