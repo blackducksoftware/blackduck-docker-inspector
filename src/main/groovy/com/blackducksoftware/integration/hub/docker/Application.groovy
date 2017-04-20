@@ -50,7 +50,7 @@ class Application {
         hubDockerManager.cleanWorkingDirectory()
         def bdioFiles = null
         File dockerTarFile = deriveDockerTarFile()
-        File layerFilesDir = hubDockerManager.extractDockerLayers(new File(dockerTar))
+        File layerFilesDir = hubDockerManager.extractDockerLayers(dockerTarFile)
 
         DockerImages dockerImages = new DockerImages()
         OperatingSystemEnum targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro, layerFilesDir)
@@ -82,7 +82,7 @@ class Application {
             }
             dockerTarFile = hubDockerManager.getTarFileFromDockerImage(dockerImageName, dockerTagName)
         }
-        return dockerTarFile
+        dockerTarFile
     }
 
     void moveThisIntoInit(String linuxDistro, File layerFilesDir) {
