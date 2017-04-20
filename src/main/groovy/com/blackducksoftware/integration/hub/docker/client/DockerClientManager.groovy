@@ -21,9 +21,12 @@ import org.springframework.stereotype.Component
 
 import com.blackducksoftware.integration.hub.docker.HubDockerClient
 import com.github.dockerjava.api.DockerClient
+import com.github.dockerjava.api.command.CopyArchiveToContainerCmd
 import com.github.dockerjava.api.command.CreateContainerResponse
+import com.github.dockerjava.api.command.ExecCreateCmdResponse
 import com.github.dockerjava.api.command.PullImageCmd
 import com.github.dockerjava.api.command.SaveImageCmd
+import com.github.dockerjava.core.command.ExecStartResultCallback
 import com.github.dockerjava.core.command.PullImageResultCallback
 
 @Component
@@ -55,7 +58,7 @@ class DockerClientManager {
         pull.exec(new PullImageResultCallback()).awaitSuccess()
     }
 
-    void run(String imageName, String tagName) {
+    void run(String imageName, String tagName, File dockerTarFile) {
         String imageId = "${imageName}:${tagName}"
         logger.info("Running container based on image ${imageId}")
 
@@ -63,18 +66,37 @@ class DockerClientManager {
         DockerClient dockerClient = hubDockerClient.getDockerClient()
         CreateContainerResponse container = dockerClient.createContainerCmd(imageId)
                 .withTty(true)
-                .withAttachStdin(true)
+                .withAttachStdin(true) // TODO remove these
                 .withAttachStderr(true)
                 .withAttachStdout(true)
                 .withCmd("/bin/bash")
                 .exec();
 
+        String srcPath = "/opt/blackduck/hub-docker/config/application.properties"
+        String destPath = "/opt/blackduck/hub-docker/config/"
+        copyFileToContainer(dockerClient, container, srcPath, destPath);
+
+        copyFileToContainer(dockerClient, container, dockerTarFile.getAbsolutePath(), "/tmp/"); // TODO where should this go?
+
         dockerClient.startContainerCmd(container.getId()).exec();
 
         logger.info(sprintf("Started container %s from image %s", container.getId(), imageId))
 
-        // TODO cp application.properties and image tar file to container
+
         // TODO execute hub-docker within the container
+        ExecCreateCmdResponse execCreateCmdResponse = dockerClient.execCreateCmd(container.getId())
+                .withAttachStdout(true)
+                .withAttachStderr(true)
+                .withCmd("/opt/blackduck/hub-docker/scan-docker-image-tar.sh", dockerTarFile.getAbsolutePath()).exec();
+        // exception occurs when running the following:
+        dockerClient.execStartCmd(execCreateCmdResponse.getId()).exec(
+                new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+    }
+
+    private copyFileToContainer(DockerClient dockerClient, CreateContainerResponse container, String srcPath, String destPath) {
+        CopyArchiveToContainerCmd  copyProperties = dockerClient.copyArchiveToContainerCmd(container.getId()).withHostResource(srcPath).withRemotePath(destPath)
+        copyProperties.exec()
+        logger.info("Copied ${srcPath} to container ${container.toString()}")
     }
 
     private saveImage(String imageName, String tagName, File imageTarFile) {

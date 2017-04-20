@@ -86,7 +86,7 @@ class Application {
                         runOnImageName, runOnImageVersion)
                 logger.warn(msg2)
             }
-            dockerClientManager.run(runOnImageName, runOnImageVersion)
+            dockerClientManager.run(runOnImageName, runOnImageVersion, dockerTarFile)
         }
     }
 
