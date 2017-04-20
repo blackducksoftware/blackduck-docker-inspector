@@ -74,6 +74,9 @@ class DockerClientManager {
         dockerClient.startContainerCmd(container.getId()).exec();
 
         logger.info(sprintf("Started container %s from image %s", container.getId(), imageId))
+
+        // TODO cp application.properties and image tar file to container
+        // TODO execute hub-docker within the container
     }
 
     private saveImage(String imageName, String tagName, File imageTarFile) {

@@ -54,7 +54,7 @@ class Application {
         hubDockerManager.cleanWorkingDirectory()
         def bdioFiles = null
         File dockerTarFile = deriveDockerTarFile()
-        File layerFilesDir = hubDockerManager.extractDockerLayers(new File(dockerTar))
+        File layerFilesDir = hubDockerManager.extractDockerLayers(dockerTarFile)
 
         DockerImages dockerImages = new DockerImages()
         OperatingSystemEnum targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro, layerFilesDir)
@@ -83,10 +83,7 @@ class Application {
                         runOnImageName, runOnImageVersion)
                 logger.warn(msg2)
             }
-            // TODO run image to create container
             dockerClientManager.run(runOnImageName, runOnImageVersion)
-            // TODO cp application.properties and image tar file to container
-            // TODO execute hub-docker within the container
         }
     }
 
