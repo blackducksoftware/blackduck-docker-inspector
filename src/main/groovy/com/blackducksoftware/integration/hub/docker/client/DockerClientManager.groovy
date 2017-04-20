@@ -65,9 +65,6 @@ class DockerClientManager {
         DockerClient dockerClient = hubDockerClient.getDockerClient()
         CreateContainerResponse container = dockerClient.createContainerCmd(imageId)
                 .withTty(true)
-                .withAttachStdin(true) // TODO remove these
-                .withAttachStderr(true)
-                .withAttachStdout(true)
                 .withCmd("/bin/bash")
                 .exec();
 
@@ -80,11 +77,13 @@ class DockerClientManager {
         dockerClient.startContainerCmd(container.getId()).exec();
         logger.info(sprintf("Started container %s from image %s", container.getId(), imageId))
 
-        // Run hub-docker in sub-container
+        String cmd = "/opt/blackduck/hub-docker/scan-docker-image-tar.sh"
+        String arg = dockerTarFile.getAbsolutePath()
+        logger.info(sprintf("Running %s on %s in container %s from image %s", cmd, arg, container.getId(), imageId))
         ExecCreateCmdResponse execCreateCmdResponse = dockerClient.execCreateCmd(container.getId())
                 .withAttachStdout(true)
                 .withAttachStderr(true)
-                .withCmd("/opt/blackduck/hub-docker/scan-docker-image-tar.sh", dockerTarFile.getAbsolutePath()).exec();
+                .withCmd(cmd, arg).exec();
         dockerClient.execStartCmd(execCreateCmdResponse.getId()).exec(
                 new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
     }
