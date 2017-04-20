@@ -67,24 +67,21 @@ class Application {
             String msg = sprintf("Image inspection for %s can be run in this %s docker container",
                     targetOsEnum.toString(), currentOsEnum.toString())
             logger.info(msg)
-
-            // TODO look for an opportunity to share next two lines across both scenarios
             bdioFiles = hubDockerManager.generateBdioFromLayerFilesDir(dockerTarFile, layerFilesDir, targetOsEnum)
             hubDockerManager.uploadBdioFiles(bdioFiles)
         } else {
             String runOnImageName = dockerImages.getDockerImageName(targetOsEnum)
             String runOnImageVersion = dockerImages.getDockerImageVersion(targetOsEnum)
-            String msg = sprintf("Image inspection for %s should not be run in this %s docker container; should use docker image %s:%s",
+            String msg = sprintf("Image inspection for %s should not be run in this %s docker container; will use docker image %s:%s",
                     targetOsEnum.toString(), currentOsEnum.toString(),
                     runOnImageName, runOnImageVersion)
-            logger.error(msg)
+            logger.info(msg)
             try {
                 dockerClientManager.pullImage(runOnImageName, runOnImageVersion)
             } catch (Exception e) {
-                // TODO improve this
-                String msg2 = sprintf("Unable to pull docker image %s:%s; proceeding anyway since it may already exist locally",
-                        runOnImageName, runOnImageVersion)
-                logger.warn(msg2)
+                logger.warn(sprintf(
+                        "Unable to pull docker image %s:%s; proceeding anyway since it may already exist locally",
+                        runOnImageName, runOnImageVersion))
             }
             dockerClientManager.run(runOnImageName, runOnImageVersion, dockerTarFile)
         }

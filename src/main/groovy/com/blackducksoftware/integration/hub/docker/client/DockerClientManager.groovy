@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
-import com.blackducksoftware.integration.hub.docker.HubDockerClient
 import com.github.dockerjava.api.DockerClient
 import com.github.dockerjava.api.command.CopyArchiveToContainerCmd
 import com.github.dockerjava.api.command.CreateContainerResponse
@@ -79,16 +78,13 @@ class DockerClientManager {
         copyFileToContainer(dockerClient, container, dockerTarFile.getAbsolutePath(), dockerTarFile.getParentFile().getAbsolutePath());
 
         dockerClient.startContainerCmd(container.getId()).exec();
-
         logger.info(sprintf("Started container %s from image %s", container.getId(), imageId))
 
-
-        // TODO execute hub-docker within the container
+        // Run hub-docker in sub-container
         ExecCreateCmdResponse execCreateCmdResponse = dockerClient.execCreateCmd(container.getId())
                 .withAttachStdout(true)
                 .withAttachStderr(true)
                 .withCmd("/opt/blackduck/hub-docker/scan-docker-image-tar.sh", dockerTarFile.getAbsolutePath()).exec();
-        // exception occurs when running the following:
         dockerClient.execStartCmd(execCreateCmdResponse.getId()).exec(
                 new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
     }
