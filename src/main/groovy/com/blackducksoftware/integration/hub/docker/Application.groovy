@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.builder.SpringApplicationBuilder
 
+import com.blackducksoftware.integration.hub.docker.image.DockerImages
+
 @SpringBootApplication
 class Application {
     private final Logger logger = LoggerFactory.getLogger(Application.class)
@@ -47,28 +49,47 @@ class Application {
         hubDockerManager.init()
         hubDockerManager.cleanWorkingDirectory()
         def bdioFiles = null
+        File dockerTarFile = deriveDockerTarFile()
+        File layerFilesDir = hubDockerManager.extractDockerLayers(new File(dockerTar))
+
+        DockerImages dockerImages = new DockerImages()
+        OperatingSystemEnum targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro, layerFilesDir)
+        OperatingSystemEnum requiredOsEnum = dockerImages.getDockerImageOs(targetOsEnum)
+        OperatingSystemEnum currentOsEnum = hubDockerManager.detectCurrentOperatingSystem()
+        if (currentOsEnum == requiredOsEnum) {
+            String msg = sprintf("Image inspection for %s can be run in this %s docker container",
+                    targetOsEnum.toString(), currentOsEnum.toString())
+            logger.info(msg)
+        } else {
+            String msg = sprintf("Image inspection for %s should not be run in this %s docker container; should use docker image %s:%s",
+                    targetOsEnum.toString(), currentOsEnum.toString(),
+                    dockerImages.getDockerImageName(targetOsEnum),
+                    dockerImages.getDockerImageVersion(targetOsEnum))
+            logger.error(msg)
+        }
+
+        bdioFiles = hubDockerManager.generateBdioFromLayerFilesDir(dockerTarFile, layerFilesDir, targetOsEnum)
+        hubDockerManager.uploadBdioFiles(bdioFiles)
+    }
+
+    private File deriveDockerTarFile() {
+        File dockerTarFile
         if(StringUtils.isNotBlank(dockerTar)) {
-            File dockerTarFile = new File(dockerTar)
-            File layerFilesDir = hubDockerManager.extractDockerLayers(new File(dockerTar))
-            OperatingSystemEnum targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro, layerFilesDir)
-            bdioFiles = hubDockerManager.generateBdioFromLayerFilesDir(dockerTarFile, layerFilesDir, targetOsEnum)
+            dockerTarFile = new File(dockerTar)
         } else if (StringUtils.isNotBlank(dockerImageName)) {
             if (StringUtils.isBlank(dockerTagName)) {
                 dockerTagName = 'latest'
             }
-            File dockerTarFile = hubDockerManager.getTarFileFromDockerImage(dockerImageName, dockerTagName)
-            File layerFilesDir = hubDockerManager.extractDockerLayers(dockerTarFile)
-            OperatingSystemEnum targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro, layerFilesDir)
-            bdioFiles = hubDockerManager.generateBdioFromLayerFilesDir(dockerTarFile, layerFilesDir, targetOsEnum)
+            dockerTarFile = hubDockerManager.getTarFileFromDockerImage(dockerImageName, dockerTagName)
         }
-        hubDockerManager.uploadBdioFiles(bdioFiles)
+        return dockerTarFile
     }
 
     void moveThisIntoInit(String linuxDistro, File layerFilesDir) {
         OperatingSystemEnum targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro, layerFilesDir)
 
-        OsMapper osMapper = new OsMapper()
-        OperatingSystemEnum requiredOsEnum = osMapper.getRuntimeOsForTargetImageOs(targetOsEnum)
+        DockerImages osMapper = new DockerImages()
+        OperatingSystemEnum requiredOsEnum = osMapper.getDockerImage(targetOsEnum)
         OperatingSystemEnum currentOsEnum = osMapper.getCurrentOs()
         if (currentOsEnum == requiredOsEnum) {
         } else {

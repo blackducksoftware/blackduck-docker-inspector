@@ -17,6 +17,8 @@ import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
 
+import com.blackducksoftware.integration.hub.docker.image.DockerImages
+
 class RuntimeOsTest {
 
     @BeforeClass
@@ -29,8 +31,13 @@ class RuntimeOsTest {
 
     @Test
     public void test() {
-        OsMapper osMapper = new OsMapper()
-        assertEquals(OperatingSystemEnum.UBUNTU, osMapper.getRuntimeOsForTargetImageOs(OperatingSystemEnum.CENTOS))
-        assertEquals(OperatingSystemEnum.CENTOS, osMapper.getRuntimeOsForTargetImageOs(OperatingSystemEnum.UBUNTU))
+        DockerImages osMapper = new DockerImages()
+        assertEquals("blackduck/hub-docker/centos", osMapper.getDockerImageName(OperatingSystemEnum.CENTOS))
+        assertEquals("1.0", osMapper.getDockerImageVersion(OperatingSystemEnum.CENTOS))
+        assertEquals(OperatingSystemEnum.CENTOS, osMapper.getDockerImageOs(OperatingSystemEnum.CENTOS))
+
+        assertEquals("blackduck/hub-docker/ubuntu_16_04", osMapper.getDockerImageName(OperatingSystemEnum.UBUNTU))
+        assertEquals("1.0", osMapper.getDockerImageVersion(OperatingSystemEnum.UBUNTU))
+        assertEquals(OperatingSystemEnum.UBUNTU, osMapper.getDockerImageOs(OperatingSystemEnum.UBUNTU))
     }
 }

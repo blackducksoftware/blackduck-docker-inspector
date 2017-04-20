@@ -4,7 +4,6 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 import org.apache.commons.io.FileUtils
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,15 +11,12 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
 import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter
+import com.blackducksoftware.integration.hub.docker.client.DockerClientManager
 import com.blackducksoftware.integration.hub.docker.extractor.Extractor
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser
 import com.blackducksoftware.integration.hub.docker.tar.TarExtractionResult
 import com.blackducksoftware.integration.hub.docker.tar.TarExtractionResults
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException
-import com.github.dockerjava.api.DockerClient
-import com.github.dockerjava.api.command.PullImageCmd
-import com.github.dockerjava.api.command.SaveImageCmd
-import com.github.dockerjava.core.command.PullImageResultCallback
 import com.google.gson.Gson
 
 @Component
@@ -37,7 +33,7 @@ class HubDockerManager {
     HubClient hubClient
 
     @Autowired
-    HubDockerClient hubDockerClient
+    DockerClientManager dockerClientManager
 
     @Autowired
     List<Extractor> extractors
@@ -50,26 +46,7 @@ class HubDockerManager {
     }
 
     File getTarFileFromDockerImage(String imageName, String tagName) {
-        // use docker to pull image if necessary
-        // use docker to save image to tar
-        // performExtractFromDockerTar()
-        DockerClient client = hubDockerClient.getDockerClient()
-        File imageTarDirectory = new File(new File(workingDirectoryPath), 'tarDirectory')
-        logger.info("Pulling image ${imageName}:${tagName}")
-        PullImageCmd pull = client.pullImageCmd("${imageName}").withTag(tagName)
-        pull.exec(new PullImageResultCallback()).awaitSuccess()
-        File imageTarFile = new File(imageTarDirectory, "${imageName}_${tagName}.tar")
-        InputStream tarInputStream = null
-        try{
-            logger.info("Saving the docker image to : ${imageTarFile.getAbsolutePath()}")
-            SaveImageCmd saveCommand = client.saveImageCmd(imageName)
-            saveCommand.withTag(tagName)
-            tarInputStream = saveCommand.exec()
-            FileUtils.copyInputStreamToFile(tarInputStream, imageTarFile);
-        } finally{
-            IOUtils.closeQuietly(tarInputStream);
-        }
-        imageTarFile
+        dockerClientManager.getTarFileFromDockerImage(imageName, tagName)
     }
 
     File extractDockerLayers(File dockerTar) {
@@ -77,13 +54,15 @@ class HubDockerManager {
         // Find the package manager files
         // extract the package manager files and put them into the correct locations on the machine that is running this
         //performExtractFromRunningImage()
-
-
-        File layerFilesDir = tarParser.extractDockerLayers(dockerTar)
+        tarParser.extractDockerLayers(dockerTar)
     }
 
     OperatingSystemEnum detectOperatingSystem(String operatingSystem, File layerFilesDir) {
         tarParser.detectOperatingSystem(operatingSystem, layerFilesDir)
+    }
+
+    OperatingSystemEnum detectCurrentOperatingSystem() {
+        tarParser.detectOperatingSystemFromEtcDir(new File("/etc"))
     }
 
     List<File> generateBdioFromLayerFilesDir(File dockerTar, File layerFilesDir, OperatingSystemEnum osEnum) {

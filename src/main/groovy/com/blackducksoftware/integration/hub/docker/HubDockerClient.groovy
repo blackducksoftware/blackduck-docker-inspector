@@ -40,20 +40,20 @@ class HubDockerClient {
     String dockerConfig
 
     ////// These seem to be ignored by the DockerClient /////
-    @Value('${docker.api.version}')
-    String dockerApiVersion
-
-    @Value('${docker.registry.url}')
-    String dockerRegistryUrl
-
-    @Value('${docker.registry.username}')
-    String dockerRegistryUsername
-
-    @Value('${docker.registry.password}')
-    String dockerRegistryPassword
-
-    @Value('${docker.registry.email}')
-    String dockerRegistryEmail
+    //    @Value('${docker.api.version}')
+    //    String dockerApiVersion
+    //
+    //    @Value('${docker.registry.url}')
+    //    String dockerRegistryUrl
+    //
+    //    @Value('${docker.registry.username}')
+    //    String dockerRegistryUsername
+    //
+    //    @Value('${docker.registry.password}')
+    //    String dockerRegistryPassword
+    //
+    //    @Value('${docker.registry.email}')
+    //    String dockerRegistryEmail
     //////////////////////////////////////////////////////////
 
     DockerClient getDockerClient(){
@@ -75,21 +75,21 @@ class HubDockerClient {
         if(StringUtils.isNotBlank(dockerConfig)){
             builder.withDockerConfig(dockerConfig)
         }
-        if(StringUtils.isNotBlank(dockerApiVersion)){
-            builder.withApiVersion(dockerApiVersion)
-        }
-        if(StringUtils.isNotBlank(dockerRegistryUrl)){
-            builder.withRegistryUrl(dockerRegistryUrl)
-        }
-        if(StringUtils.isNotBlank(dockerRegistryUsername)){
-            builder .withRegistryUsername(dockerRegistryUsername)
-        }
-        if(StringUtils.isNotBlank(dockerRegistryPassword)){
-            builder.withRegistryPassword(dockerRegistryPassword)
-        }
-        if(StringUtils.isNotBlank(dockerRegistryEmail)){
-            builder.withRegistryEmail(dockerRegistryEmail)
-        }
+        //        if(StringUtils.isNotBlank(dockerApiVersion)){
+        //            builder.withApiVersion(dockerApiVersion)
+        //        }
+        //        if(StringUtils.isNotBlank(dockerRegistryUrl)){
+        //            builder.withRegistryUrl(dockerRegistryUrl)
+        //        }
+        //        if(StringUtils.isNotBlank(dockerRegistryUsername)){
+        //            builder .withRegistryUsername(dockerRegistryUsername)
+        //        }
+        //        if(StringUtils.isNotBlank(dockerRegistryPassword)){
+        //            builder.withRegistryPassword(dockerRegistryPassword)
+        //        }
+        //        if(StringUtils.isNotBlank(dockerRegistryEmail)){
+        //            builder.withRegistryEmail(dockerRegistryEmail)
+        //        }
 
         DockerClientConfig config = builder.build()
         DockerClientBuilder.getInstance(config).build();
