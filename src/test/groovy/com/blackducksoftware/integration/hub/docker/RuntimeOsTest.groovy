@@ -32,11 +32,11 @@ class RuntimeOsTest {
     @Test
     public void test() {
         DockerImages osMapper = new DockerImages()
-        assertEquals("blackduck/hub-docker/centos", osMapper.getDockerImageName(OperatingSystemEnum.CENTOS))
+        assertEquals("hub-docker-centos", osMapper.getDockerImageName(OperatingSystemEnum.CENTOS))
         assertEquals("1.0", osMapper.getDockerImageVersion(OperatingSystemEnum.CENTOS))
         assertEquals(OperatingSystemEnum.CENTOS, osMapper.getDockerImageOs(OperatingSystemEnum.CENTOS))
 
-        assertEquals("blackduck/hub-docker/ubuntu_16_04", osMapper.getDockerImageName(OperatingSystemEnum.UBUNTU))
+        assertEquals("hub-docker-ubuntu", osMapper.getDockerImageName(OperatingSystemEnum.UBUNTU))
         assertEquals("1.0", osMapper.getDockerImageVersion(OperatingSystemEnum.UBUNTU))
         assertEquals(OperatingSystemEnum.UBUNTU, osMapper.getDockerImageOs(OperatingSystemEnum.UBUNTU))
     }

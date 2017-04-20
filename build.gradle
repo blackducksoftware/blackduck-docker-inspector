@@ -28,7 +28,7 @@ description = ''
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-def linuxFlavorsDpkg = ["ubuntu:16.04"]
+def linuxFlavorsDpkg = ["ubuntu"]
 def linuxFlavorsRpm = ["centos"]
 def linuxFlavors = linuxFlavorsDpkg + linuxFlavorsRpm
 
@@ -120,11 +120,11 @@ task createAptDockerfileTasks() {
     }
 }
 
-task createDockerfiles(dependsOn: [createubuntu_16_04Dockerfile, createcentosDockerfile]) {
+task createDockerfiles(dependsOn: [createubuntuDockerfile, createcentosDockerfile]) {
 }
 
-task buildImageDirs(dependsOn: [addFinalZipToubuntu_16_04ImageBuildDir, addFinalZipTocentosImageBuildDir, 
-    addBashScriptToubuntu_16_04ImageBuildDir, addBashScriptTocentosImageBuildDir, createDockerfiles]) {
+task buildImageDirs(dependsOn: [addFinalZipToubuntuImageBuildDir, addFinalZipTocentosImageBuildDir, 
+    addBashScriptToubuntuImageBuildDir, addBashScriptTocentosImageBuildDir, createDockerfiles]) {
 }
 
 task createBuildDockerImageTasks() {
@@ -133,12 +133,12 @@ task createBuildDockerImageTasks() {
         def taskName = "buildDockerImage_${linuxFlavorDirName}"
         println "creating task ${taskName}"
         task "${taskName}"(type: Exec, dependsOn: [buildImageDirs]) {
-            commandLine "docker", "build", "--tag", "blackduck/${project.name}/${linuxFlavorDirName}:1.0", "${buildDir}/images/${linuxFlavorDirName}/${project.name}"
+            commandLine "docker", "build", "--tag", "${project.name}-${linuxFlavorDirName}:1.0", "${buildDir}/images/${linuxFlavorDirName}/${project.name}"
         }
     }
 }
 
-task buildDockerImages(dependsOn: [buildDockerImage_ubuntu_16_04, buildDockerImage_centos]) {
+task buildDockerImages(dependsOn: [buildDockerImage_ubuntu, buildDockerImage_centos]) {
 }
 
 task temp(dependsOn: buildDockerImage_centos) {
