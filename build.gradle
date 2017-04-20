@@ -143,7 +143,7 @@ task createBuildDockerImageTasks() {
 task buildDockerImages(dependsOn: [buildDockerImage_ubuntu_16_04, buildDockerImage_centos]) {
 }
 
-task temp(dependsOn: buildDockerImage_ubuntu_16_04) {
+task temp(dependsOn: buildDockerImage_centos) {
     
 }
 

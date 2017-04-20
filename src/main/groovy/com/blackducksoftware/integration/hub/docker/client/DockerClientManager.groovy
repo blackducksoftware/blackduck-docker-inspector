@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
 import com.github.dockerjava.api.DockerClient
+import com.github.dockerjava.api.command.CreateContainerResponse
 import com.github.dockerjava.api.command.PullImageCmd
 import com.github.dockerjava.api.command.SaveImageCmd
 import com.github.dockerjava.core.DefaultDockerClientConfig
@@ -33,16 +34,49 @@ class DockerClientManager {
     @Value('${working.directory}')
     String workingDirectoryPath
 
+    private DockerClient client
+
+    public DockerClientManager() {
+        client = getDockerClient()
+    }
+
     File getTarFileFromDockerImage(String imageName, String tagName) {
         // use docker to pull image if necessary
         // use docker to save image to tar
         // performExtractFromDockerTar()
-        DockerClient client = getDockerClient()
+
         File imageTarDirectory = new File(new File(workingDirectoryPath), 'tarDirectory')
+        pullImage(imageName, tagName)
+        File imageTarFile = new File(imageTarDirectory, "${imageName}_${tagName}.tar")
+        saveImage(imageName, tagName, imageTarFile)
+        imageTarFile
+    }
+
+    void pullImage(String imageName, String tagName) {
         logger.info("Pulling image ${imageName}:${tagName}")
         PullImageCmd pull = client.pullImageCmd("${imageName}").withTag(tagName)
         pull.exec(new PullImageResultCallback()).awaitSuccess()
-        File imageTarFile = new File(imageTarDirectory, "${imageName}_${tagName}.tar")
+    }
+
+    void run(String imageName, String tagName) {
+        String imageId = "${imageName}:${tagName}"
+        logger.info("Running container based on image ${imageId}")
+
+
+        CreateContainerResponse container = dockerClient.createContainerCmd(imageId)
+                .withTty(true)
+                .withAttachStdin(true)
+                .withAttachStderr(true)
+                .withAttachStdout(true)
+                .withCmd("/bin/bash")
+                .exec();
+
+        dockerClient.startContainerCmd(container.getId()).exec();
+
+        logger.info(sprintf("Started container %s from image %s", container.getId(), imageId))
+    }
+
+    private saveImage(String imageName, String tagName, File imageTarFile) {
         InputStream tarInputStream = null
         try{
             logger.info("Saving the docker image to : ${imageTarFile.getAbsolutePath()}")
@@ -53,7 +87,6 @@ class DockerClientManager {
         } finally{
             IOUtils.closeQuietly(tarInputStream);
         }
-        imageTarFile
     }
 
     private DockerClient getDockerClient(){

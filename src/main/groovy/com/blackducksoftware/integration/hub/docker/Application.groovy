@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.builder.SpringApplicationBuilder
 
+import com.blackducksoftware.integration.hub.docker.client.DockerClientManager
 import com.blackducksoftware.integration.hub.docker.image.DockerImages
 
 @SpringBootApplication
@@ -33,6 +34,9 @@ class Application {
 
     @Autowired
     HubDockerManager hubDockerManager
+
+    @Autowired
+    DockerClientManager dockerClientManager
 
     static void main(final String[] args) {
         new SpringApplicationBuilder(Application.class).logStartupInfo(false).run(args)
@@ -60,16 +64,30 @@ class Application {
             String msg = sprintf("Image inspection for %s can be run in this %s docker container",
                     targetOsEnum.toString(), currentOsEnum.toString())
             logger.info(msg)
+
+            // TODO look for an opportunity to share next two lines across both scenarios
+            bdioFiles = hubDockerManager.generateBdioFromLayerFilesDir(dockerTarFile, layerFilesDir, targetOsEnum)
+            hubDockerManager.uploadBdioFiles(bdioFiles)
         } else {
+            String runOnImageName = dockerImages.getDockerImageName(targetOsEnum)
+            String runOnImageVersion = dockerImages.getDockerImageVersion(targetOsEnum)
             String msg = sprintf("Image inspection for %s should not be run in this %s docker container; should use docker image %s:%s",
                     targetOsEnum.toString(), currentOsEnum.toString(),
-                    dockerImages.getDockerImageName(targetOsEnum),
-                    dockerImages.getDockerImageVersion(targetOsEnum))
+                    runOnImageName, runOnImageVersion)
             logger.error(msg)
+            try {
+                dockerClientManager.pullImage(runOnImageName, runOnImageVersion)
+            } catch (Exception e) {
+                // TODO improve this
+                String msg2 = sprintf("Unable to pull docker image %s:%s; proceeding anyway since it may already exist locally",
+                        runOnImageName, runOnImageVersion)
+                logger.warn(msg2)
+            }
+            // TODO run image to create container
+            dockerClientManager.run(runOnImageName, runOnImageVersion)
+            // TODO cp application.properties and image tar file to container
+            // TODO execute hub-docker within the container
         }
-
-        bdioFiles = hubDockerManager.generateBdioFromLayerFilesDir(dockerTarFile, layerFilesDir, targetOsEnum)
-        hubDockerManager.uploadBdioFiles(bdioFiles)
     }
 
     private File deriveDockerTarFile() {
