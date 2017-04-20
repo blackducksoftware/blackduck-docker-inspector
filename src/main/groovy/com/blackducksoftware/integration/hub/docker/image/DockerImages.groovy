@@ -11,15 +11,18 @@
  */
 package com.blackducksoftware.integration.hub.docker.image
 
+import org.springframework.stereotype.Component
+
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 
+@Component
 class DockerImages {
     private Map<OperatingSystemEnum, DockerImage> dockerImageMap = new HashMap<>();
 
     DockerImages() {
         dockerImageMap.put(OperatingSystemEnum.CENTOS, new DockerImage(OperatingSystemEnum.CENTOS, "blackduck/hub-docker/centos", "1.0"))
-        dockerImageMap.put(OperatingSystemEnum.FEDORA, new DockerImage(OperatingSystemEnum.FEDORA, "blackduck/hub-docker/centos", "1.0"))
-        dockerImageMap.put(OperatingSystemEnum.DEBIAN, new DockerImage(OperatingSystemEnum.DEBIAN, "blackduck/hub-docker/ubuntu_16_04", "1.0"))
+        dockerImageMap.put(OperatingSystemEnum.FEDORA, new DockerImage(OperatingSystemEnum.CENTOS, "blackduck/hub-docker/centos", "1.0"))
+        dockerImageMap.put(OperatingSystemEnum.DEBIAN, new DockerImage(OperatingSystemEnum.UBUNTU, "blackduck/hub-docker/ubuntu_16_04", "1.0"))
         dockerImageMap.put(OperatingSystemEnum.UBUNTU, new DockerImage(OperatingSystemEnum.UBUNTU, "blackduck/hub-docker/ubuntu_16_04", "1.0"))
         dockerImageMap.put(OperatingSystemEnum.ALPINE, new DockerImage(OperatingSystemEnum.ALPINE, "blackduck/hub-docker/alpine", "1.0"))
     }
