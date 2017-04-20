@@ -33,6 +33,9 @@ class Application {
     HubClient hubClient
 
     @Autowired
+    DockerImages dockerImages
+
+    @Autowired
     HubDockerManager hubDockerManager
 
     @Autowired
@@ -56,7 +59,7 @@ class Application {
         File dockerTarFile = deriveDockerTarFile()
         File layerFilesDir = hubDockerManager.extractDockerLayers(dockerTarFile)
 
-        DockerImages dockerImages = new DockerImages()
+
         OperatingSystemEnum targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro, layerFilesDir)
         OperatingSystemEnum requiredOsEnum = dockerImages.getDockerImageOs(targetOsEnum)
         OperatingSystemEnum currentOsEnum = hubDockerManager.detectCurrentOperatingSystem()
