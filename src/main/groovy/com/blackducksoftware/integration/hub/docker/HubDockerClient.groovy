@@ -30,16 +30,18 @@ class HubDockerClient {
     @Value('${docker.host}')
     String dockerHost
 
+    // Have not tested these, they may also be ignored //
     @Value('${docker.tls.verify}')
     Boolean dockerTlsVerify
 
     @Value('${docker.cert.path}')
     String dockerCertPath
-
-    @Value('${docker.config}')
-    String dockerConfig
+    /////////////////////////////////////////////////////
 
     ////// These seem to be ignored by the DockerClient /////
+    //    @Value('${docker.config}')
+    //    String dockerConfig
+    //
     //    @Value('${docker.api.version}')
     //    String dockerApiVersion
     //
@@ -72,9 +74,9 @@ class HubDockerClient {
         if(StringUtils.isNotBlank(dockerCertPath)){
             builder.withDockerCertPath(dockerCertPath)
         }
-        if(StringUtils.isNotBlank(dockerConfig)){
-            builder.withDockerConfig(dockerConfig)
-        }
+        //        if(StringUtils.isNotBlank(dockerConfig)){
+        //            builder.withDockerConfig(dockerConfig)
+        //        }
         //        if(StringUtils.isNotBlank(dockerApiVersion)){
         //            builder.withApiVersion(dockerApiVersion)
         //        }
