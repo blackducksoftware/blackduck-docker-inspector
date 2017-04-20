@@ -76,7 +76,7 @@ class DockerClientManager {
         String destPath = "/opt/blackduck/hub-docker/config/"
         copyFileToContainer(dockerClient, container, srcPath, destPath);
 
-        copyFileToContainer(dockerClient, container, dockerTarFile.getAbsolutePath(), "/tmp/"); // TODO where should this go?
+        copyFileToContainer(dockerClient, container, dockerTarFile.getAbsolutePath(), dockerTarFile.getParentFile().getAbsolutePath());
 
         dockerClient.startContainerCmd(container.getId()).exec();
 
@@ -96,7 +96,7 @@ class DockerClientManager {
     private copyFileToContainer(DockerClient dockerClient, CreateContainerResponse container, String srcPath, String destPath) {
         CopyArchiveToContainerCmd  copyProperties = dockerClient.copyArchiveToContainerCmd(container.getId()).withHostResource(srcPath).withRemotePath(destPath)
         copyProperties.exec()
-        logger.info("Copied ${srcPath} to container ${container.toString()}")
+        logger.info("Copied ${srcPath} to container ${container.toString()}: ${destPath}")
     }
 
     private saveImage(String imageName, String tagName, File imageTarFile) {
