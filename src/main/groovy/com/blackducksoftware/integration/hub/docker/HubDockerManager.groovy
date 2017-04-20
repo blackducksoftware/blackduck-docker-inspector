@@ -54,9 +54,7 @@ class HubDockerManager {
         // Find the package manager files
         // extract the package manager files and put them into the correct locations on the machine that is running this
         //performExtractFromRunningImage()
-
-
-        File layerFilesDir = tarParser.extractDockerLayers(dockerTar)
+        tarParser.extractDockerLayers(dockerTar)
     }
 
     OperatingSystemEnum detectOperatingSystem(String operatingSystem, File layerFilesDir) {

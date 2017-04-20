@@ -97,7 +97,7 @@ class Application {
             }
             dockerTarFile = hubDockerManager.getTarFileFromDockerImage(dockerImageName, dockerTagName)
         }
-        return dockerTarFile
+        dockerTarFile
     }
 
     void moveThisIntoInit(String linuxDistro, File layerFilesDir) {
