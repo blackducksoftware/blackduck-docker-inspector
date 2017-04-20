@@ -71,7 +71,7 @@ abstract class Executor {
             }
 
             def output =  standardOut.toString()
-            logger.info(output)
+            logger.trace(output)
             output.split(System.lineSeparator())
         } catch(Exception e) {
             logger.error("Error executing command {}",listPackagesCommand,e)

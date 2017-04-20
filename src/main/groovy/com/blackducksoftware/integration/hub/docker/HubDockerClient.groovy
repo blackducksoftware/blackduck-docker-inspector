@@ -11,6 +11,7 @@
  */
 package com.blackducksoftware.integration.hub.docker
 
+import org.apache.commons.lang3.StringUtils
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
@@ -38,6 +39,7 @@ class HubDockerClient {
     @Value('${docker.config}')
     String dockerConfig
 
+    ////// These seem to be ignored by the DockerClient /////
     @Value('${docker.api.version}')
     String dockerApiVersion
 
@@ -52,21 +54,44 @@ class HubDockerClient {
 
     @Value('${docker.registry.email}')
     String dockerRegistryEmail
+    //////////////////////////////////////////////////////////
 
     DockerClient getDockerClient(){
         // Docker client uses the system properties for proxies
         // http.proxyHost , http.proxyPort, http.proxyUser, http.proxyPassword
-        DockerClientConfig config = DefaultDockerClientConfig.createDefaultConfigBuilder()
-                .withDockerHost(dockerHost)
-                .withDockerTlsVerify(dockerTlsVerify)
-                .withDockerCertPath(dockerCertPath)
-                .withDockerConfig(dockerConfig)
-                .withApiVersion(dockerApiVersion)
-                .withRegistryUrl(dockerRegistryUrl)
-                .withRegistryUsername(dockerRegistryUsername)
-                .withRegistryPassword(dockerRegistryPassword)
-                .withRegistryEmail(dockerRegistryEmail)
-                .build();
+        Properties properties = (Properties) System.getProperties().clone()
+        properties = DefaultDockerClientConfig.loadIncludedDockerProperties(properties)
+
+        DefaultDockerClientConfig.Builder builder = new DefaultDockerClientConfig.Builder().withProperties(properties)
+        if(StringUtils.isNotBlank(dockerHost)){
+            builder.withDockerHost(dockerHost)
+        }
+        if(dockerTlsVerify != null){
+            builder.withDockerTlsVerify(dockerTlsVerify)
+        }
+        if(StringUtils.isNotBlank(dockerCertPath)){
+            builder.withDockerCertPath(dockerCertPath)
+        }
+        if(StringUtils.isNotBlank(dockerConfig)){
+            builder.withDockerConfig(dockerConfig)
+        }
+        if(StringUtils.isNotBlank(dockerApiVersion)){
+            builder.withApiVersion(dockerApiVersion)
+        }
+        if(StringUtils.isNotBlank(dockerRegistryUrl)){
+            builder.withRegistryUrl(dockerRegistryUrl)
+        }
+        if(StringUtils.isNotBlank(dockerRegistryUsername)){
+            builder .withRegistryUsername(dockerRegistryUsername)
+        }
+        if(StringUtils.isNotBlank(dockerRegistryPassword)){
+            builder.withRegistryPassword(dockerRegistryPassword)
+        }
+        if(StringUtils.isNotBlank(dockerRegistryEmail)){
+            builder.withRegistryEmail(dockerRegistryEmail)
+        }
+
+        DockerClientConfig config = builder.build()
         DockerClientBuilder.getInstance(config).build();
     }
 }
