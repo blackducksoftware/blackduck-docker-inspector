@@ -68,8 +68,12 @@ task createAddZipTasks() {
 task createAddBashScriptTasks() {
     linuxFlavors.eachWithIndex {linuxFlavor, index ->
         String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
-        task "addBashScriptTo${linuxFlavorDirName}ImageBuildDir"(type: Copy, dependsOn: build) {
+        task "addBashScriptTarTo${linuxFlavorDirName}ImageBuildDir"(type: Copy, dependsOn: build) {
             from 'src/main/resources/scan-docker-image-tar.sh'
+            into "${buildDir}/images/${linuxFlavorDirName}/${project.name}"
+        }
+        task "addBashScriptRepoTo${linuxFlavorDirName}ImageBuildDir"(type: Copy, dependsOn: build) {
+            from 'src/main/resources/scan-docker-image-from-repo.sh'
             into "${buildDir}/images/${linuxFlavorDirName}/${project.name}"
         }
     }
@@ -96,6 +100,7 @@ task createApkDockerfileTasks() {
             addFile('config', '/opt/blackduck/hub-docker/config')
             addFile("${project.name}-${version}.jar", "/opt/blackduck/${project.name}")
             addFile("scan-docker-image-tar.sh", "/opt/blackduck/${project.name}")
+            addFile("scan-docker-image-from-repo.sh", "/opt/blackduck/${project.name}")
             runCommand 'mkdir /tmp/blackduck'
             runCommand 'mkdir /tmp/blackduck/hub-docker'
             runCommand 'mkdir /tmp/blackduck/hub-docker/working'
@@ -122,6 +127,7 @@ task createYumDockerfileTasks() {
             addFile('config', '/opt/blackduck/hub-docker/config')
             addFile("${project.name}-${version}.jar", "/opt/blackduck/${project.name}")
             addFile("scan-docker-image-tar.sh", "/opt/blackduck/${project.name}")
+            addFile("scan-docker-image-from-repo.sh", "/opt/blackduck/${project.name}")
             runCommand 'mkdir /tmp/blackduck'
             runCommand 'mkdir /tmp/blackduck/hub-docker'
             runCommand 'mkdir /tmp/blackduck/hub-docker/working'
@@ -152,6 +158,7 @@ task createAptDockerfileTasks() {
             addFile('config', '/opt/blackduck/hub-docker/config')
             addFile("${project.name}-${version}.jar", "/opt/blackduck/${project.name}")
             addFile("scan-docker-image-tar.sh", "/opt/blackduck/${project.name}")
+            addFile("scan-docker-image-from-repo.sh", "/opt/blackduck/${project.name}")
             runCommand 'mkdir /tmp/blackduck'
             runCommand 'mkdir /tmp/blackduck/hub-docker'
             runCommand 'mkdir /tmp/blackduck/hub-docker/working'
@@ -163,7 +170,7 @@ task createDockerfiles(dependsOn: [createubuntuDockerfile, createcentosDockerfil
 }
 
 task buildImageDirs(dependsOn: [addFinalZipToubuntuImageBuildDir, addFinalZipTocentosImageBuildDir, addFinalZipToalpineImageBuildDir,
-    addBashScriptToubuntuImageBuildDir, addBashScriptTocentosImageBuildDir, addBashScriptToalpineImageBuildDir, createDockerfiles]) {
+    addBashScriptTarToubuntuImageBuildDir, addBashScriptTarTocentosImageBuildDir, addBashScriptTarToalpineImageBuildDir, addBashScriptRepoToubuntuImageBuildDir, addBashScriptRepoTocentosImageBuildDir, addBashScriptRepoToalpineImageBuildDir, createDockerfiles]) {
 }
 
 task createBuildDockerImageTasks() {
