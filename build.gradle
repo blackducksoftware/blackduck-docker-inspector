@@ -42,13 +42,18 @@ task produceFinalZip(type: Zip, dependsOn: build) {
     }
 }
 
+String getNameWithoutVersion(String linuxFlavor) {
+    String linuxFlavorDirName = linuxFlavor
+    int colonIndex = linuxFlavor.indexOf(':')
+    if (colonIndex >= 0) {
+        linuxFlavorDirName = linuxFlavor.subSequence(0, colonIndex)
+    }
+    linuxFlavorDirName
+}
+
 task createAddZipTasks() {
     linuxFlavors.eachWithIndex {linuxFlavor, index ->
-        String linuxFlavorDirName = linuxFlavor
-        int colonIndex = linuxFlavor.indexOf(':')
-        if (colonIndex >= 0) {
-            linuxFlavorDirName = linuxFlavor.subSequence(0, colonIndex)
-        }
+        String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
         println "linuxFlavorDirName: ${linuxFlavorDirName}"
         task "addFinalZipTo${linuxFlavorDirName}ImageBuildDir"(type: Copy, dependsOn: produceFinalZip) {
             def zipFile = file("${buildDir}/distributions/${project.name}-${version}.zip")
@@ -61,11 +66,7 @@ task createAddZipTasks() {
 
 task createAddBashScriptTasks() {
     linuxFlavors.eachWithIndex {linuxFlavor, index ->
-        String linuxFlavorDirName = linuxFlavor
-        int colonIndex = linuxFlavor.indexOf(':')
-        if (colonIndex >= 0) {
-            linuxFlavorDirName = linuxFlavor.subSequence(0, colonIndex)
-        }
+        String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
         task "addBashScriptTo${linuxFlavorDirName}ImageBuildDir"(type: Copy, dependsOn: build) {
             from 'src/main/resources/scan-docker-image-tar.sh'
             into "${buildDir}/images/${linuxFlavorDirName}/${project.name}"
@@ -75,11 +76,7 @@ task createAddBashScriptTasks() {
 
 task createRpmDockerfileTasks() {
     linuxFlavorsRpm.eachWithIndex {linuxFlavor, index ->
-        String linuxFlavorDirName = linuxFlavor
-        int colonIndex = linuxFlavor.indexOf(':')
-        if (colonIndex >= 0) {
-            linuxFlavorDirName = linuxFlavor.subSequence(0, colonIndex)
-        }
+        String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
         task "create${linuxFlavorDirName}Dockerfile"(type: Dockerfile) {
             destFile = project.file("${buildDir}/images/${linuxFlavorDirName}/${project.name}/Dockerfile")
             println "destFile: ${destFile}"
@@ -105,11 +102,7 @@ task createRpmDockerfileTasks() {
 
 task createAptDockerfileTasks() {
     linuxFlavorsDpkg.eachWithIndex {linuxFlavor, index ->
-        String linuxFlavorDirName = linuxFlavor
-        int colonIndex = linuxFlavor.indexOf(':')
-        if (colonIndex >= 0) {
-            linuxFlavorDirName = linuxFlavor.subSequence(0, colonIndex)
-        }
+        String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
         task "create${linuxFlavorDirName}Dockerfile"(type: Dockerfile) {
             destFile = project.file("${buildDir}/images/${linuxFlavorDirName}/${project.name}/Dockerfile")
             println "destFile: ${destFile}"
@@ -146,11 +139,7 @@ task buildImageDirs(dependsOn: [addFinalZipToubuntuImageBuildDir, addFinalZipToc
 
 task createBuildDockerImageTasks() {
     linuxFlavors.eachWithIndex {linuxFlavor, index ->
-        String linuxFlavorDirName = linuxFlavor
-        int colonIndex = linuxFlavor.indexOf(':')
-        if (colonIndex >= 0) {
-            linuxFlavorDirName = linuxFlavor.subSequence(0, colonIndex)
-        }
+        String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
         def taskName = "buildDockerImage_${linuxFlavorDirName}"
         println "creating task ${taskName}"
         task "${taskName}"(type: Exec, dependsOn: [buildImageDirs]) {
