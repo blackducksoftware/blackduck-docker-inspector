@@ -3,7 +3,7 @@
 # This script (copied to the Docker container hub-docker will run in)
 # makes it easier to invoke hub-docker (especially from outside the container).
 #
-if [ $# -eq 0 ]
+if [ $# -ne 1 ]
   then
     echo "Usage: $0 <path to Docker image tar file>"
     exit -1

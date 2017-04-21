@@ -67,18 +67,22 @@ class DockerClientManager {
                 .withTty(true)
                 .withCmd("/bin/bash")
                 .exec();
-
+        // TODO fix hard coded paths; don't use /tmp
         String srcPath = "/opt/blackduck/hub-docker/config/application.properties"
         String destPath = "/opt/blackduck/hub-docker/config/"
         copyFileToContainer(dockerClient, container, srcPath, destPath);
 
-        copyFileToContainer(dockerClient, container, dockerTarFile.getAbsolutePath(), dockerTarFile.getParentFile().getAbsolutePath());
+        logger.info(sprintf("Docker image tar file: %s", dockerTarFile.getAbsolutePath()))
+        String tarFileDirInSubContainer = "/tmp/"
+        String tarFilePathInSubContainer = "/tmp/" + dockerTarFile.getName()
+        logger.info(sprintf("Docker image tar file path in sub-container: %s", tarFilePathInSubContainer))
+        copyFileToContainer(dockerClient, container, dockerTarFile.getAbsolutePath(), tarFileDirInSubContainer);
 
         dockerClient.startContainerCmd(container.getId()).exec();
         logger.info(sprintf("Started container %s from image %s", container.getId(), imageId))
 
         String cmd = "/opt/blackduck/hub-docker/scan-docker-image-tar.sh"
-        String arg = dockerTarFile.getAbsolutePath()
+        String arg = tarFilePathInSubContainer
         logger.info(sprintf("Running %s on %s in container %s from image %s", cmd, arg, container.getId(), imageId))
         ExecCreateCmdResponse execCreateCmdResponse = dockerClient.execCreateCmd(container.getId())
                 .withAttachStdout(true)
@@ -89,6 +93,7 @@ class DockerClientManager {
     }
 
     private copyFileToContainer(DockerClient dockerClient, CreateContainerResponse container, String srcPath, String destPath) {
+        logger.info("Copying ${srcPath} to container ${container.toString()}: ${destPath}")
         CopyArchiveToContainerCmd  copyProperties = dockerClient.copyArchiveToContainerCmd(container.getId()).withHostResource(srcPath).withRemotePath(destPath)
         copyProperties.exec()
         logger.info("Copied ${srcPath} to container ${container.toString()}: ${destPath}")
