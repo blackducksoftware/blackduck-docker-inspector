@@ -26,7 +26,7 @@ class DockerTarParser {
 
     private static final String OS_EXTRACTION_PATTERN = "etc/(lsb-release|os-release)"
 
-    private static final String EXTRACTION_PATTERN = "(var/lib/(dpkg|rpm|apk){1}.*|${OS_EXTRACTION_PATTERN})"
+    private static final String EXTRACTION_PATTERN = "(/lib/apk.*|var/lib/(dpkg|rpm){1}.*|${OS_EXTRACTION_PATTERN})"
 
     File workingDirectory
 
