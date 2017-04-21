@@ -26,7 +26,7 @@ class DockerTarParser {
 
     private static final String OS_EXTRACTION_PATTERN = "etc/(lsb-release|os-release)"
 
-    private static final String EXTRACTION_PATTERN = "(/lib/apk.*|var/lib/(dpkg|rpm){1}.*|${OS_EXTRACTION_PATTERN})"
+    private static final String EXTRACTION_PATTERN = "(lib/apk.*|var/lib/(dpkg|rpm){1}.*|${OS_EXTRACTION_PATTERN})"
 
     File workingDirectory
 
@@ -70,16 +70,20 @@ class DockerTarParser {
         TarExtractionResults results = new TarExtractionResults()
         results.operatingSystemEnum = osEnum
         layerFilesDir.listFiles().each { layerDirectory ->
-            logger.trace("Layer directory ${layerDirectory.getName()}, looking for lib")
+            logger.trace("Layer directory .getName()}, looking for lib")
             def libDir = findFileWithName(layerDirectory, 'lib')
-            logger.trace('lib directory : '+libDir.getAbsolutePath())
-            libDir.listFiles().each { packageManagerDirectory ->
-                logger.trace(packageManagerDirectory.getAbsolutePath())
-                TarExtractionResult result = new TarExtractionResult()
-                result.layer = layerDirectory.getName()
-                result.packageManager =PackageManagerEnum.getPackageManagerEnumByName(packageManagerDirectory.getName())
-                result.extractedPackageManagerDirectory = packageManagerDirectory
-                results.extractionResults.add(result)
+            if(libDir == null){
+                throw new HubIntegrationException("Could not find the lib directroy in ${layerDirectory.getAbsolutePath()}")
+            } else{
+                logger.trace('lib directory : '+libDir.getAbsolutePath())
+                libDir.listFiles().each { packageManagerDirectory ->
+                    logger.trace(packageManagerDirectory.getAbsolutePath())
+                    TarExtractionResult result = new TarExtractionResult()
+                    result.layer = layerDirectory.getName()
+                    result.packageManager =PackageManagerEnum.getPackageManagerEnumByName(packageManagerDirectory.getName())
+                    result.extractedPackageManagerDirectory = packageManagerDirectory
+                    results.extractionResults.add(result)
+                }
             }
         }
         results
