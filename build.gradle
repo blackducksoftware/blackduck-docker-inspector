@@ -28,9 +28,10 @@ description = ''
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-def linuxFlavorsDpkg = ["ubuntu:16.04"]
-def linuxFlavorsRpm = ["centos:7.3.1611"]
-def linuxFlavors = linuxFlavorsDpkg + linuxFlavorsRpm
+def linuxFlavorsApt = ["ubuntu:16.04"]
+def linuxFlavorsYum = ["centos:7.3.1611"]
+def linuxFlavorsApk = ["alpine:3.5"]
+def linuxFlavors = linuxFlavorsApt + linuxFlavorsYum + linuxFlavorsApk
 
 springBoot { mainClass = 'com.blackducksoftware.integration.hub.docker.Application' }
 
@@ -74,8 +75,36 @@ task createAddBashScriptTasks() {
     }
 }
 
-task createRpmDockerfileTasks() {
-    linuxFlavorsRpm.eachWithIndex {linuxFlavor, index ->
+task createApkDockerfileTasks() {
+    linuxFlavorsApk.eachWithIndex {linuxFlavor, index ->
+        String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
+        task "create${linuxFlavorDirName}Dockerfile"(type: Dockerfile) {
+            destFile = project.file("${buildDir}/images/${linuxFlavorDirName}/${project.name}/Dockerfile")
+            println "destFile: ${destFile}"
+            from linuxFlavor
+            maintainer 'Black Duck Software'
+            
+            runCommand 'apk update'
+            runCommand 'apk add bash'
+            runCommand 'apk add openjdk8-jre'
+            runCommand 'apk add docker'
+            
+            runCommand 'mkdir /opt'
+            runCommand 'mkdir /opt/blackduck'
+            runCommand 'mkdir /opt/blackduck/hub-docker'
+            runCommand 'mkdir /opt/blackduck/hub-docker/config'
+            addFile('config', '/opt/blackduck/hub-docker/config')
+            addFile("${project.name}-${version}.jar", "/opt/blackduck/${project.name}")
+            addFile("scan-docker-image-tar.sh", "/opt/blackduck/${project.name}")
+            runCommand 'mkdir /tmp/blackduck'
+            runCommand 'mkdir /tmp/blackduck/hub-docker'
+            runCommand 'mkdir /tmp/blackduck/hub-docker/working'
+        }
+    }
+}
+
+task createYumDockerfileTasks() {
+    linuxFlavorsYum.eachWithIndex {linuxFlavor, index ->
         String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
         task "create${linuxFlavorDirName}Dockerfile"(type: Dockerfile) {
             destFile = project.file("${buildDir}/images/${linuxFlavorDirName}/${project.name}/Dockerfile")
@@ -101,7 +130,7 @@ task createRpmDockerfileTasks() {
 }
 
 task createAptDockerfileTasks() {
-    linuxFlavorsDpkg.eachWithIndex {linuxFlavor, index ->
+    linuxFlavorsApt.eachWithIndex {linuxFlavor, index ->
         String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
         task "create${linuxFlavorDirName}Dockerfile"(type: Dockerfile) {
             destFile = project.file("${buildDir}/images/${linuxFlavorDirName}/${project.name}/Dockerfile")
@@ -130,11 +159,11 @@ task createAptDockerfileTasks() {
     }
 }
 
-task createDockerfiles(dependsOn: [createubuntuDockerfile, createcentosDockerfile]) {
+task createDockerfiles(dependsOn: [createubuntuDockerfile, createcentosDockerfile, createalpineDockerfile]) {
 }
 
-task buildImageDirs(dependsOn: [addFinalZipToubuntuImageBuildDir, addFinalZipTocentosImageBuildDir, 
-    addBashScriptToubuntuImageBuildDir, addBashScriptTocentosImageBuildDir, createDockerfiles]) {
+task buildImageDirs(dependsOn: [addFinalZipToubuntuImageBuildDir, addFinalZipTocentosImageBuildDir, addFinalZipToalpineImageBuildDir,
+    addBashScriptToubuntuImageBuildDir, addBashScriptTocentosImageBuildDir, addBashScriptToalpineImageBuildDir, createDockerfiles]) {
 }
 
 task createBuildDockerImageTasks() {
@@ -148,10 +177,10 @@ task createBuildDockerImageTasks() {
     }
 }
 
-task buildDockerImages(dependsOn: [buildDockerImage_ubuntu, buildDockerImage_centos]) {
+task buildDockerImages(dependsOn: [buildDockerImage_ubuntu, buildDockerImage_centos, buildDockerImage_alpine]) {
 }
 
-task temp(dependsOn: buildDockerImage_centos) {
+task temp(dependsOn: buildDockerImage_alpine) {
     
 }
 
