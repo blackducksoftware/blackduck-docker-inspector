@@ -64,8 +64,8 @@ class Application {
         OperatingSystemEnum requiredOsEnum = dockerImages.getDockerImageOs(targetOsEnum)
         OperatingSystemEnum currentOsEnum = hubDockerManager.detectCurrentOperatingSystem()
         if (currentOsEnum == requiredOsEnum) {
-            String msg = sprintf("Image inspection for %s can be run in this %s docker container",
-                    targetOsEnum.toString(), currentOsEnum.toString())
+            String msg = sprintf("Image inspection for %s can be run in this %s docker container; tarfile: %s",
+                    targetOsEnum.toString(), currentOsEnum.toString(), dockerTarFile.getAbsolutePath())
             logger.info(msg)
             bdioFiles = hubDockerManager.generateBdioFromLayerFilesDir(dockerTarFile, layerFilesDir, targetOsEnum)
             hubDockerManager.uploadBdioFiles(bdioFiles)
