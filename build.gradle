@@ -28,8 +28,8 @@ description = ''
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-def linuxFlavorsDpkg = ["ubuntu"]
-def linuxFlavorsRpm = ["centos"]
+def linuxFlavorsDpkg = ["ubuntu:16.04"]
+def linuxFlavorsRpm = ["centos:7.3.1611"]
 def linuxFlavors = linuxFlavorsDpkg + linuxFlavorsRpm
 
 springBoot { mainClass = 'com.blackducksoftware.integration.hub.docker.Application' }
@@ -44,7 +44,12 @@ task produceFinalZip(type: Zip, dependsOn: build) {
 
 task createAddZipTasks() {
     linuxFlavors.eachWithIndex {linuxFlavor, index ->
-        def linuxFlavorDirName = linuxFlavor.replaceAll("[^a-zA-Z0-9]", "_")
+        String linuxFlavorDirName = linuxFlavor
+        int colonIndex = linuxFlavor.indexOf(':')
+        if (colonIndex >= 0) {
+            linuxFlavorDirName = linuxFlavor.subSequence(0, colonIndex)
+        }
+        println "linuxFlavorDirName: ${linuxFlavorDirName}"
         task "addFinalZipTo${linuxFlavorDirName}ImageBuildDir"(type: Copy, dependsOn: produceFinalZip) {
             def zipFile = file("${buildDir}/distributions/${project.name}-${version}.zip")
             def outputDir = file("${buildDir}/images/${linuxFlavorDirName}/${project.name}")
@@ -56,7 +61,11 @@ task createAddZipTasks() {
 
 task createAddBashScriptTasks() {
     linuxFlavors.eachWithIndex {linuxFlavor, index ->
-        def linuxFlavorDirName = linuxFlavor.replaceAll("[^a-zA-Z0-9]", "_")
+        String linuxFlavorDirName = linuxFlavor
+        int colonIndex = linuxFlavor.indexOf(':')
+        if (colonIndex >= 0) {
+            linuxFlavorDirName = linuxFlavor.subSequence(0, colonIndex)
+        }
         task "addBashScriptTo${linuxFlavorDirName}ImageBuildDir"(type: Copy, dependsOn: build) {
             from 'src/main/resources/scan-docker-image-tar.sh'
             into "${buildDir}/images/${linuxFlavorDirName}/${project.name}"
@@ -66,7 +75,11 @@ task createAddBashScriptTasks() {
 
 task createRpmDockerfileTasks() {
     linuxFlavorsRpm.eachWithIndex {linuxFlavor, index ->
-        def linuxFlavorDirName = linuxFlavor.replaceAll("[^a-zA-Z0-9]", "_")
+        String linuxFlavorDirName = linuxFlavor
+        int colonIndex = linuxFlavor.indexOf(':')
+        if (colonIndex >= 0) {
+            linuxFlavorDirName = linuxFlavor.subSequence(0, colonIndex)
+        }
         task "create${linuxFlavorDirName}Dockerfile"(type: Dockerfile) {
             destFile = project.file("${buildDir}/images/${linuxFlavorDirName}/${project.name}/Dockerfile")
             println "destFile: ${destFile}"
@@ -92,7 +105,11 @@ task createRpmDockerfileTasks() {
 
 task createAptDockerfileTasks() {
     linuxFlavorsDpkg.eachWithIndex {linuxFlavor, index ->
-        def linuxFlavorDirName = linuxFlavor.replaceAll("[^a-zA-Z0-9]", "_")
+        String linuxFlavorDirName = linuxFlavor
+        int colonIndex = linuxFlavor.indexOf(':')
+        if (colonIndex >= 0) {
+            linuxFlavorDirName = linuxFlavor.subSequence(0, colonIndex)
+        }
         task "create${linuxFlavorDirName}Dockerfile"(type: Dockerfile) {
             destFile = project.file("${buildDir}/images/${linuxFlavorDirName}/${project.name}/Dockerfile")
             println "destFile: ${destFile}"
@@ -129,7 +146,11 @@ task buildImageDirs(dependsOn: [addFinalZipToubuntuImageBuildDir, addFinalZipToc
 
 task createBuildDockerImageTasks() {
     linuxFlavors.eachWithIndex {linuxFlavor, index ->
-        def linuxFlavorDirName = linuxFlavor.replaceAll("[^a-zA-Z0-9]", "_")
+        String linuxFlavorDirName = linuxFlavor
+        int colonIndex = linuxFlavor.indexOf(':')
+        if (colonIndex >= 0) {
+            linuxFlavorDirName = linuxFlavor.subSequence(0, colonIndex)
+        }
         def taskName = "buildDockerImage_${linuxFlavorDirName}"
         println "creating task ${taskName}"
         task "${taskName}"(type: Exec, dependsOn: [buildImageDirs]) {
