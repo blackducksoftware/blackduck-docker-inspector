@@ -15,13 +15,6 @@ import com.blackducksoftware.integration.hub.docker.image.DockerImages
 
 @SpringBootApplication
 class Application {
-    // These values must be consistent with the image building code in build.gradle
-    public static final String HUB_DOCKER_PGM_DIR_PATH = "/opt/blackduck/hub-docker/"
-    public static final String HUB_DOCKER_CONFIG_DIR_PATH = HUB_DOCKER_PGM_DIR_PATH + "config/"
-    public static final String HUB_DOCKER_CONFIG_FILE_PATH = HUB_DOCKER_CONFIG_DIR_PATH + "application.properties"
-    public static final String HUB_DOCKER_WORKING_DIR_PATH = HUB_DOCKER_PGM_DIR_PATH + "working/"
-    public static final String HUB_DOCKER_TARGET_DIR_PATH = HUB_DOCKER_PGM_DIR_PATH + "target/"
-
     private final Logger logger = LoggerFactory.getLogger(Application.class)
 
     @Value('${docker.tar}')

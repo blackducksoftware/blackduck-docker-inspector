@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
-import com.blackducksoftware.integration.hub.docker.Application
 import com.github.dockerjava.api.DockerClient
 import com.github.dockerjava.api.command.CopyArchiveToContainerCmd
 import com.github.dockerjava.api.command.CreateContainerResponse
@@ -31,11 +30,13 @@ import com.github.dockerjava.core.command.PullImageResultCallback
 
 @Component
 class DockerClientManager {
-
     private final Logger logger = LoggerFactory.getLogger(DockerClientManager.class)
 
     @Autowired
     HubDockerClient hubDockerClient
+
+    @Autowired
+    ProgramPaths programPaths
 
     @Value('${working.directory}')
     String workingDirectoryPath
@@ -67,20 +68,21 @@ class DockerClientManager {
                 .withTty(true)
                 .withCmd("/bin/bash")
                 .exec();
-        String srcPath = Application.HUB_DOCKER_CONFIG_FILE_PATH
-        String destPath = Application.HUB_DOCKER_CONFIG_DIR_PATH
+        String srcPath = programPaths.hubDockerConfigFilePath
+        String destPath = programPaths.hubDockerConfigDirPath
         copyFileToContainer(dockerClient, container, srcPath, destPath);
 
         logger.info(sprintf("Docker image tar file: %s", dockerTarFile.getAbsolutePath()))
-        String tarFileDirInSubContainer = Application.HUB_DOCKER_TARGET_DIR_PATH
-        String tarFilePathInSubContainer = Application.HUB_DOCKER_TARGET_DIR_PATH + dockerTarFile.getName()
+        String tarFileDirInSubContainer = programPaths.hubDockerTargetDirPath
+        String tarFilePathInSubContainer = programPaths.hubDockerTargetDirPath + dockerTarFile.getName()
         logger.info(sprintf("Docker image tar file path in sub-container: %s", tarFilePathInSubContainer))
         copyFileToContainer(dockerClient, container, dockerTarFile.getAbsolutePath(), tarFileDirInSubContainer);
 
         dockerClient.startContainerCmd(container.getId()).exec();
         logger.info(sprintf("Started container %s from image %s", container.getId(), imageId))
 
-        String cmd = Application.HUB_DOCKER_PGM_DIR_PATH + "scan-docker-image-tar.sh"
+        // I don't know why this "/" is needed
+        String cmd = programPaths.hubDockerPgmDirPath + "/scan-docker-image-tar.sh"
         String arg = tarFilePathInSubContainer
         execCommandInContainer(dockerClient, imageId, container, cmd, arg);
     }

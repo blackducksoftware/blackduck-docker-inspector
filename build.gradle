@@ -33,6 +33,10 @@ def linuxFlavorsYum = ["centos:7.3.1611"]
 def linuxFlavorsApk = ["alpine:3.5"]
 def linuxFlavors = linuxFlavorsApt + linuxFlavorsYum + linuxFlavorsApk
 
+Properties props = new Properties()
+props.load(new FileInputStream("src/main/resources/application.properties"))
+String hubDockerPgmDir = props.getProperty("install.dir")
+
 springBoot { mainClass = 'com.blackducksoftware.integration.hub.docker.Application' }
 
 task produceFinalZip(type: Zip, dependsOn: build) {
@@ -95,11 +99,11 @@ task createApkDockerfileTasks() {
             
             runCommand 'mkdir /opt'
             runCommand 'mkdir /opt/blackduck'
-            runCommand 'mkdir /opt/blackduck/hub-docker'
-            runCommand 'mkdir /opt/blackduck/hub-docker/config'
-            runCommand 'mkdir /opt/blackduck/hub-docker/working'
-            runCommand 'mkdir /opt/blackduck/hub-docker/target'
-            addFile('config', '/opt/blackduck/hub-docker/config')
+            runCommand "mkdir ${hubDockerPgmDir}"
+            runCommand "mkdir ${hubDockerPgmDir}/config"
+            runCommand "mkdir ${hubDockerPgmDir}/working"
+            runCommand "mkdir ${hubDockerPgmDir}/target"
+            addFile('config', "${hubDockerPgmDir}/config")
             addFile("${project.name}-${version}.jar", "/opt/blackduck/${project.name}")
             addFile("scan-docker-image-tar.sh", "/opt/blackduck/${project.name}")
             addFile("scan-docker-image-from-repo.sh", "/opt/blackduck/${project.name}")
@@ -121,11 +125,11 @@ task createYumDockerfileTasks() {
             runCommand 'yum install -y docker'
             
             runCommand 'mkdir /opt/blackduck'
-            runCommand 'mkdir /opt/blackduck/hub-docker'
-            runCommand 'mkdir /opt/blackduck/hub-docker/config'
-            runCommand 'mkdir /opt/blackduck/hub-docker/working'
-            runCommand 'mkdir /opt/blackduck/hub-docker/target'
-            addFile('config', '/opt/blackduck/hub-docker/config')
+            runCommand "mkdir ${hubDockerPgmDir}"
+            runCommand "mkdir ${hubDockerPgmDir}/config"
+            runCommand "mkdir ${hubDockerPgmDir}/working"
+            runCommand "mkdir ${hubDockerPgmDir}/target"
+            addFile('config', "${hubDockerPgmDir}/config")
             addFile("${project.name}-${version}.jar", "/opt/blackduck/${project.name}")
             addFile("scan-docker-image-tar.sh", "/opt/blackduck/${project.name}")
             addFile("scan-docker-image-from-repo.sh", "/opt/blackduck/${project.name}")
@@ -151,11 +155,11 @@ task createAptDockerfileTasks() {
             runCommand 'dockerd &'
             
             runCommand 'mkdir /opt/blackduck'
-            runCommand 'mkdir /opt/blackduck/hub-docker'
-            runCommand 'mkdir /opt/blackduck/hub-docker/config'
-            runCommand 'mkdir /opt/blackduck/hub-docker/working'
-            runCommand 'mkdir /opt/blackduck/hub-docker/target'
-            addFile('config', '/opt/blackduck/hub-docker/config')
+            runCommand "mkdir ${hubDockerPgmDir}"
+            runCommand "mkdir ${hubDockerPgmDir}/config"
+            runCommand "mkdir ${hubDockerPgmDir}/working"
+            runCommand "mkdir ${hubDockerPgmDir}/target"
+            addFile('config', "${hubDockerPgmDir}/config")
             addFile("${project.name}-${version}.jar", "/opt/blackduck/${project.name}")
             addFile("scan-docker-image-tar.sh", "/opt/blackduck/${project.name}")
             addFile("scan-docker-image-from-repo.sh", "/opt/blackduck/${project.name}")
@@ -184,8 +188,8 @@ task createBuildDockerImageTasks() {
 task buildDockerImages(dependsOn: [buildDockerImage_ubuntu, buildDockerImage_centos, buildDockerImage_alpine]) {
 }
 
-task temp(dependsOn: buildDockerImage_alpine) {
-    
+task temp() {
+    println "The value of hubDockerPgmDir is ${hubDockerPgmDir}"
 }
 
 repositories {
