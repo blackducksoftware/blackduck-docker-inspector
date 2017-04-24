@@ -53,7 +53,6 @@ class DockerClientManager {
 
     void pullImage(String imageName, String tagName) {
         logger.info("Pulling image ${imageName}:${tagName}")
-        // TODO look for a way to reuse dockerClient
         DockerClient dockerClient = hubDockerClient.getDockerClient()
         PullImageCmd pull = dockerClient.pullImageCmd("${imageName}").withTag(tagName)
         pull.exec(new PullImageResultCallback()).awaitSuccess()
@@ -63,7 +62,6 @@ class DockerClientManager {
         String imageId = "${imageName}:${tagName}"
         logger.info("Running container based on image ${imageId}")
 
-        // TODO look for a way to reuse dockerClient
         DockerClient dockerClient = hubDockerClient.getDockerClient()
         CreateContainerResponse container = dockerClient.createContainerCmd(imageId)
                 .withTty(true)
@@ -108,7 +106,6 @@ class DockerClientManager {
         InputStream tarInputStream = null
         try{
             logger.info("Saving the docker image to : ${imageTarFile.getAbsolutePath()}")
-            // TODO look for a way to reuse dockerClient
             DockerClient dockerClient = hubDockerClient.getDockerClient()
             SaveImageCmd saveCommand = dockerClient.saveImageCmd(imageName)
             saveCommand.withTag(tagName)

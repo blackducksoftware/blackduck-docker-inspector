@@ -58,42 +58,47 @@ class HubDockerClient {
     //    String dockerRegistryEmail
     //////////////////////////////////////////////////////////
 
+    private DockerClient dockerClient
+
     DockerClient getDockerClient(){
-        // Docker client uses the system properties for proxies
-        // http.proxyHost , http.proxyPort, http.proxyUser, http.proxyPassword
-        Properties properties = (Properties) System.getProperties().clone()
-        properties = DefaultDockerClientConfig.loadIncludedDockerProperties(properties)
+        if(dockerClient == null){
+            // Docker client uses the system properties for proxies
+            // http.proxyHost , http.proxyPort, http.proxyUser, http.proxyPassword
+            Properties properties = (Properties) System.getProperties().clone()
+            properties = DefaultDockerClientConfig.loadIncludedDockerProperties(properties)
 
-        DefaultDockerClientConfig.Builder builder = new DefaultDockerClientConfig.Builder().withProperties(properties)
-        if(StringUtils.isNotBlank(dockerHost)){
-            builder.withDockerHost(dockerHost)
-        }
-        if(dockerTlsVerify != null){
-            builder.withDockerTlsVerify(dockerTlsVerify)
-        }
-        if(StringUtils.isNotBlank(dockerCertPath)){
-            builder.withDockerCertPath(dockerCertPath)
-        }
-        //        if(StringUtils.isNotBlank(dockerConfig)){
-        //            builder.withDockerConfig(dockerConfig)
-        //        }
-        //        if(StringUtils.isNotBlank(dockerApiVersion)){
-        //            builder.withApiVersion(dockerApiVersion)
-        //        }
-        //        if(StringUtils.isNotBlank(dockerRegistryUrl)){
-        //            builder.withRegistryUrl(dockerRegistryUrl)
-        //        }
-        //        if(StringUtils.isNotBlank(dockerRegistryUsername)){
-        //            builder .withRegistryUsername(dockerRegistryUsername)
-        //        }
-        //        if(StringUtils.isNotBlank(dockerRegistryPassword)){
-        //            builder.withRegistryPassword(dockerRegistryPassword)
-        //        }
-        //        if(StringUtils.isNotBlank(dockerRegistryEmail)){
-        //            builder.withRegistryEmail(dockerRegistryEmail)
-        //        }
+            DefaultDockerClientConfig.Builder builder = new DefaultDockerClientConfig.Builder().withProperties(properties)
+            if(StringUtils.isNotBlank(dockerHost)){
+                builder.withDockerHost(dockerHost)
+            }
+            if(dockerTlsVerify != null){
+                builder.withDockerTlsVerify(dockerTlsVerify)
+            }
+            if(StringUtils.isNotBlank(dockerCertPath)){
+                builder.withDockerCertPath(dockerCertPath)
+            }
+            //        if(StringUtils.isNotBlank(dockerConfig)){
+            //            builder.withDockerConfig(dockerConfig)
+            //        }
+            //        if(StringUtils.isNotBlank(dockerApiVersion)){
+            //            builder.withApiVersion(dockerApiVersion)
+            //        }
+            //        if(StringUtils.isNotBlank(dockerRegistryUrl)){
+            //            builder.withRegistryUrl(dockerRegistryUrl)
+            //        }
+            //        if(StringUtils.isNotBlank(dockerRegistryUsername)){
+            //            builder .withRegistryUsername(dockerRegistryUsername)
+            //        }
+            //        if(StringUtils.isNotBlank(dockerRegistryPassword)){
+            //            builder.withRegistryPassword(dockerRegistryPassword)
+            //        }
+            //        if(StringUtils.isNotBlank(dockerRegistryEmail)){
+            //            builder.withRegistryEmail(dockerRegistryEmail)
+            //        }
 
-        DockerClientConfig config = builder.build()
-        DockerClientBuilder.getInstance(config).build();
+            DockerClientConfig config = builder.build()
+            dockerClient = DockerClientBuilder.getInstance(config).build();
+        }
+        dockerClient
     }
 }
