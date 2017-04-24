@@ -97,13 +97,12 @@ task createApkDockerfileTasks() {
             runCommand 'mkdir /opt/blackduck'
             runCommand 'mkdir /opt/blackduck/hub-docker'
             runCommand 'mkdir /opt/blackduck/hub-docker/config'
+            runCommand 'mkdir /opt/blackduck/hub-docker/working'
+            runCommand 'mkdir /opt/blackduck/hub-docker/target'
             addFile('config', '/opt/blackduck/hub-docker/config')
             addFile("${project.name}-${version}.jar", "/opt/blackduck/${project.name}")
             addFile("scan-docker-image-tar.sh", "/opt/blackduck/${project.name}")
             addFile("scan-docker-image-from-repo.sh", "/opt/blackduck/${project.name}")
-            runCommand 'mkdir /tmp/blackduck'
-            runCommand 'mkdir /tmp/blackduck/hub-docker'
-            runCommand 'mkdir /tmp/blackduck/hub-docker/working'
         }
     }
 }
@@ -124,13 +123,12 @@ task createYumDockerfileTasks() {
             runCommand 'mkdir /opt/blackduck'
             runCommand 'mkdir /opt/blackduck/hub-docker'
             runCommand 'mkdir /opt/blackduck/hub-docker/config'
+            runCommand 'mkdir /opt/blackduck/hub-docker/working'
+            runCommand 'mkdir /opt/blackduck/hub-docker/target'
             addFile('config', '/opt/blackduck/hub-docker/config')
             addFile("${project.name}-${version}.jar", "/opt/blackduck/${project.name}")
             addFile("scan-docker-image-tar.sh", "/opt/blackduck/${project.name}")
             addFile("scan-docker-image-from-repo.sh", "/opt/blackduck/${project.name}")
-            runCommand 'mkdir /tmp/blackduck'
-            runCommand 'mkdir /tmp/blackduck/hub-docker'
-            runCommand 'mkdir /tmp/blackduck/hub-docker/working'
         }
     }
 }
@@ -155,13 +153,12 @@ task createAptDockerfileTasks() {
             runCommand 'mkdir /opt/blackduck'
             runCommand 'mkdir /opt/blackduck/hub-docker'
             runCommand 'mkdir /opt/blackduck/hub-docker/config'
+            runCommand 'mkdir /opt/blackduck/hub-docker/working'
+            runCommand 'mkdir /opt/blackduck/hub-docker/target'
             addFile('config', '/opt/blackduck/hub-docker/config')
             addFile("${project.name}-${version}.jar", "/opt/blackduck/${project.name}")
             addFile("scan-docker-image-tar.sh", "/opt/blackduck/${project.name}")
             addFile("scan-docker-image-from-repo.sh", "/opt/blackduck/${project.name}")
-            runCommand 'mkdir /tmp/blackduck'
-            runCommand 'mkdir /tmp/blackduck/hub-docker'
-            runCommand 'mkdir /tmp/blackduck/hub-docker/working'
         }
     }
 }
