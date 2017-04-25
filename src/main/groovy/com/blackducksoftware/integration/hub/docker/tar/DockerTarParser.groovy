@@ -52,6 +52,10 @@ class DockerTarParser {
         } else{
             logger.trace("Layer directory ${layerFilesDir.getName()}, looking for etc")
             def etcFile = findFileWithName(layerFilesDir, 'etc')
+            if (etcFile == null) {
+                String msg = "Unable to identify the Linux flavor of this image. You'll need to run with the --linux.distro option"
+                throw new HubIntegrationException(msg)
+            }
             osEnum = detectOperatingSystemFromEtcDir(etcFile)
         }
         osEnum

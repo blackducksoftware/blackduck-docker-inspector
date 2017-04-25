@@ -105,15 +105,4 @@ class Application {
         }
         dockerTarFile
     }
-
-    void moveThisIntoInit(String linuxDistro, File layerFilesDir) {
-        OperatingSystemEnum targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro, layerFilesDir)
-
-        DockerImages osMapper = new DockerImages()
-        OperatingSystemEnum requiredOsEnum = osMapper.getDockerImage(targetOsEnum)
-        OperatingSystemEnum currentOsEnum = osMapper.getCurrentOs()
-        if (currentOsEnum == requiredOsEnum) {
-        } else {
-        }
-    }
 }
