@@ -75,12 +75,12 @@ class DockerClientManager {
         boolean isContainerRunning = false
         List<Container> containers = dockerClient.listContainersCmd().withShowAll(true).exec()
         Container extractorContainer = containers.find{ container ->
-            //FIXME There should be a better way to do this
             boolean foundName = false
             for(String name : container.getNames()){
                 // name prefixed with '/' for some reason
                 if(name.contains(Application.HUB_DOCKER_EXTRACTOR_CONTAINER)){
                     foundName = true
+                    break
                 }
             }
             foundName
