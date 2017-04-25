@@ -8,8 +8,13 @@ if [ $# -ne 1 ] && [ $# -ne 2 ]; then
     exit -1
 fi
 
-service docker start
-sleep 1
+if [ $(service docker status|grep "Docker is running"|wc -l) -gt 0 ]
+then
+	echo dockerd is already running
+else
+	service docker start
+	sleep 1
+fi
 service docker status
 
 cd /opt/blackduck/hub-docker
