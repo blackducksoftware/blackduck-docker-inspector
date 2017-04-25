@@ -8,5 +8,8 @@ if [ $# -ne 1 ]
     echo "Usage: $0 <path to Docker image tar file>"
     exit -1
 fi
+service docker start
+sleep 1
+service docker status
 cd /opt/blackduck/hub-docker
 java -jar hub-docker-*.jar --working.directory=/opt/blackduck/hub-docker/working --docker.tar=$1
