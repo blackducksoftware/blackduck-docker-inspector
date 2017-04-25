@@ -12,7 +12,7 @@
 package com.blackducksoftware.integration.hub.docker.tar
 
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream
-import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.IOUtils
 import org.apache.commons.lang3.StringUtils
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -67,7 +67,7 @@ class DockerTarParser {
             sprintf("Could not determine the Operating System because we could not find the OS files in %s.", etcFile.getAbsolutePath()))
         }
         OperatingSystemEnum osEnum = extractOperatingSystemFromFiles(etcFile.listFiles())
-        return osEnum
+        osEnum
     }
 
     TarExtractionResults extractPackageManagerDirs(File layerFilesDir, OperatingSystemEnum osEnum) {

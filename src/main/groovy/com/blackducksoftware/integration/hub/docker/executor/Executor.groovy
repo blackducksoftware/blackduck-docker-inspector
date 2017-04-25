@@ -44,7 +44,7 @@ abstract class Executor {
             return proc.exitValue() == 0
         } catch(Exception e) {
             logger.debug("Error executing test command {}",testCommand,e)
-            return false;
+            return false
         }
     }
 

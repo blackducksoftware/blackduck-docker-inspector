@@ -17,7 +17,7 @@ import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 
 @Component
 class DockerImages {
-    private Map<OperatingSystemEnum, DockerImage> dockerImageMap = new HashMap<>();
+    private Map<OperatingSystemEnum, DockerImage> dockerImageMap = new HashMap<>()
 
     DockerImages() {
         dockerImageMap.put(OperatingSystemEnum.CENTOS, new DockerImage(OperatingSystemEnum.CENTOS, "hub-docker-centos", "1.0"))
