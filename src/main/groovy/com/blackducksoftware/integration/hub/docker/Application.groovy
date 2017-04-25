@@ -22,6 +22,8 @@ class Application {
     public static final String HUB_DOCKER_WORKING_DIR_PATH = HUB_DOCKER_PGM_DIR_PATH + "working/"
     public static final String HUB_DOCKER_TARGET_DIR_PATH = HUB_DOCKER_PGM_DIR_PATH + "target/"
 
+    public static final String HUB_DOCKER_EXTRACTOR_CONTAINER = 'hub-docker-extractor'
+
     private final Logger logger = LoggerFactory.getLogger(Application.class)
 
     @Value('${docker.tar}')
@@ -77,6 +79,7 @@ class Application {
             bdioFiles = hubDockerManager.generateBdioFromLayerFilesDir(dockerTarFile, layerFilesDir, targetOsEnum)
             hubDockerManager.uploadBdioFiles(bdioFiles)
         } else {
+            // String runOnImageName = "int-docker-repo.docker-repo/${dockerImages.getDockerImageName(targetOsEnum)}"
             String runOnImageName = dockerImages.getDockerImageName(targetOsEnum)
             String runOnImageVersion = dockerImages.getDockerImageVersion(targetOsEnum)
             String msg = sprintf("Image inspection for %s should not be run in this %s docker container; will use docker image %s:%s",

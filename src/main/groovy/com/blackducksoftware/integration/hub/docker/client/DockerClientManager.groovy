@@ -26,8 +26,10 @@ import com.github.dockerjava.api.command.CreateContainerResponse
 import com.github.dockerjava.api.command.ExecCreateCmdResponse
 import com.github.dockerjava.api.command.PullImageCmd
 import com.github.dockerjava.api.command.SaveImageCmd
+import com.github.dockerjava.api.model.Container
 import com.github.dockerjava.core.command.ExecStartResultCallback
 import com.github.dockerjava.core.command.PullImageResultCallback
+
 
 @Component
 class DockerClientManager {
@@ -63,43 +65,71 @@ class DockerClientManager {
         logger.info("Running container based on image ${imageId}")
 
         DockerClient dockerClient = hubDockerClient.getDockerClient()
-        CreateContainerResponse container = dockerClient.createContainerCmd(imageId)
-                .withTty(true)
-                .withCmd("/bin/bash")
-                .exec();
-        String srcPath = Application.HUB_DOCKER_CONFIG_FILE_PATH
-        String destPath = Application.HUB_DOCKER_CONFIG_DIR_PATH
-        copyFileToContainer(dockerClient, container, srcPath, destPath);
 
-        logger.info(sprintf("Docker image tar file: %s", dockerTarFile.getAbsolutePath()))
-        String tarFileDirInSubContainer = Application.HUB_DOCKER_TARGET_DIR_PATH
+        dockerClient.startContainerCmd(tagName)
+
         String tarFilePathInSubContainer = Application.HUB_DOCKER_TARGET_DIR_PATH + dockerTarFile.getName()
-        logger.info(sprintf("Docker image tar file path in sub-container: %s", tarFilePathInSubContainer))
-        copyFileToContainer(dockerClient, container, dockerTarFile.getAbsolutePath(), tarFileDirInSubContainer);
 
-        dockerClient.startContainerCmd(container.getId()).exec();
-        logger.info(sprintf("Started container %s from image %s", container.getId(), imageId))
+        String containerId = ''
+        boolean isContainerRunning = false
+        List<Container> containers = dockerClient.listContainersCmd().exec()
+        Container extractorContainer = containers.find{ container ->
+            //FIXME There should be a better way to do this
+            boolean foundName = false
+            for(String name : container.getNames()){
+                // name prefixed with '/' for some reason
+                if(name.contains(Application.HUB_DOCKER_EXTRACTOR_CONTAINER)){
+                    foundName = true
+                }
+            }
+            foundName
+        }
+        if(extractorContainer != null){
+            containerId = extractorContainer.getId()
+            if(extractorContainer.getStatus().startsWith('Up')){
+                isContainerRunning = true
+            }
+        } else{
+            CreateContainerResponse containerResponse = dockerClient.createContainerCmd(imageId)
+                    .withTty(true)
+                    .withName(Application.HUB_DOCKER_EXTRACTOR_CONTAINER)
+                    .withCmd('/bin/bash')
+                    .exec()
 
+            containerId = containerResponse.getId()
+
+            String srcPath = Application.HUB_DOCKER_CONFIG_FILE_PATH
+            String destPath = Application.HUB_DOCKER_CONFIG_DIR_PATH
+            copyFileToContainer(dockerClient, containerId, srcPath, destPath)
+
+            logger.info(sprintf("Docker image tar file: %s", dockerTarFile.getAbsolutePath()))
+            String tarFileDirInSubContainer = Application.HUB_DOCKER_TARGET_DIR_PATH
+            logger.info(sprintf("Docker image tar file path in sub-container: %s", tarFilePathInSubContainer))
+            copyFileToContainer(dockerClient, containerId, dockerTarFile.getAbsolutePath(), tarFileDirInSubContainer)
+        }
+        if(!isContainerRunning){
+            dockerClient.startContainerCmd(containerId).exec()
+            logger.info(sprintf("Started container %s from image %s", containerId, imageId))
+        }
         String cmd = Application.HUB_DOCKER_PGM_DIR_PATH + "scan-docker-image-tar.sh"
-        String arg = tarFilePathInSubContainer
-        execCommandInContainer(dockerClient, imageId, container, cmd, arg);
+        execCommandInContainer(dockerClient, imageId, containerId, cmd, tarFilePathInSubContainer)
     }
 
-    private execCommandInContainer(DockerClient dockerClient, String imageId, CreateContainerResponse container, String cmd, String arg) {
-        logger.info(sprintf("Running %s on %s in container %s from image %s", cmd, arg, container.getId(), imageId))
-        ExecCreateCmdResponse execCreateCmdResponse = dockerClient.execCreateCmd(container.getId())
+    private execCommandInContainer(DockerClient dockerClient, String imageId, String containerId, String cmd, String arg) {
+        logger.info(sprintf("Running %s on %s in container %s from image %s", cmd, arg, containerId, imageId))
+        ExecCreateCmdResponse execCreateCmdResponse = dockerClient.execCreateCmd(containerId)
                 .withAttachStdout(true)
                 .withAttachStderr(true)
-                .withCmd(cmd, arg).exec();
+                .withCmd(cmd, arg).exec()
         dockerClient.execStartCmd(execCreateCmdResponse.getId()).exec(
                 new ExecStartResultCallback(System.out, System.err)).awaitCompletion()
     }
 
-    private copyFileToContainer(DockerClient dockerClient, CreateContainerResponse container, String srcPath, String destPath) {
-        logger.info("Copying ${srcPath} to container ${container.toString()}: ${destPath}")
-        CopyArchiveToContainerCmd  copyProperties = dockerClient.copyArchiveToContainerCmd(container.getId()).withHostResource(srcPath).withRemotePath(destPath)
+    private copyFileToContainer(DockerClient dockerClient, String containerId, String srcPath, String destPath) {
+        logger.info("Copying ${srcPath} to container ${containerId}: ${destPath}")
+        CopyArchiveToContainerCmd  copyProperties = dockerClient.copyArchiveToContainerCmd(containerId).withHostResource(srcPath).withRemotePath(destPath)
         copyProperties.exec()
-        logger.info("Copied ${srcPath} to container ${container.toString()}: ${destPath}")
+        logger.info("Copied ${srcPath} to container ${containerId}: ${destPath}")
     }
 
     private saveImage(String imageName, String tagName, File imageTarFile) {
@@ -110,9 +140,9 @@ class DockerClientManager {
             SaveImageCmd saveCommand = dockerClient.saveImageCmd(imageName)
             saveCommand.withTag(tagName)
             tarInputStream = saveCommand.exec()
-            FileUtils.copyInputStreamToFile(tarInputStream, imageTarFile);
+            FileUtils.copyInputStreamToFile(tarInputStream, imageTarFile)
         } finally{
-            IOUtils.closeQuietly(tarInputStream);
+            IOUtils.closeQuietly(tarInputStream)
         }
     }
 }
