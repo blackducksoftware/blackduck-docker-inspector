@@ -3,9 +3,11 @@
 # This script (copied to the Docker container hub-docker will run in)
 # makes it easier to invoke hub-docker (especially from outside the container).
 #
-if [ $# -ne 1 ]
+if [ $# -lt 1 ]
   then
-    echo "Usage: $0 <path to Docker image tar file>"
+    echo "Usage: $0 <path to Docker image tar file> [options]"
+    echo "options:"
+    echo "  --linux.distro=YourSpecificDistro"
     exit -1
 fi
 
@@ -18,5 +20,10 @@ else
 fi
 service docker status
 
+imageFile=$1
+shift
+
 cd /opt/blackduck/hub-docker
-java -jar hub-docker-*.jar --working.directory=/opt/blackduck/hub-docker/working --docker.tar=$1
+cmd="java -jar hub-docker-*.jar --working.directory=/opt/blackduck/hub-docker/working --docker.tar=$imageFile $*"
+echo "executing: $cmd"
+$cmd
