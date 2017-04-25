@@ -10,13 +10,15 @@
  * with Black Duck Software.
  */
 package com.blackducksoftware.integration.hub.docker.image
-
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 
 @Component
 class DockerImages {
+    private final Logger logger = LoggerFactory.getLogger(DockerImages.class)
     private Map<OperatingSystemEnum, DockerImage> dockerImageMap = new HashMap<>()
 
     DockerImages() {
@@ -28,14 +30,29 @@ class DockerImages {
     }
 
     OperatingSystemEnum getDockerImageOs(OperatingSystemEnum targetImageOs) {
-        dockerImageMap.get(targetImageOs).os
+        logger.info("getDockerImageOs(${targetImageOs})")
+        DockerImage image = dockerImageMap.get(targetImageOs)
+        if (image == null) {
+            null
+        }
+        image.os
     }
 
     String getDockerImageName(OperatingSystemEnum targetImageOs) {
-        dockerImageMap.get(targetImageOs).imageName
+        logger.info("getDockerImageName(${targetImageOs})")
+        DockerImage image = dockerImageMap.get(targetImageOs)
+        if (image == null) {
+            null
+        }
+        image.imageName
     }
 
     String getDockerImageVersion(OperatingSystemEnum targetImageOs) {
-        dockerImageMap.get(targetImageOs).imageVersion
+        logger.info("getDockerImageVersion(${targetImageOs})")
+        DockerImage image = dockerImageMap.get(targetImageOs)
+        if (image == null) {
+            null
+        }
+        image.imageVersion
     }
 }

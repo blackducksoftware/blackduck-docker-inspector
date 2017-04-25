@@ -58,13 +58,17 @@ class DockerTarParser {
             }
             osEnum = detectOperatingSystemFromEtcDir(etcFile)
         }
+        if (osEnum == null) {
+            String msg = "Unable to identify the Linux flavor of this image. You'll need to run with the --linux.distro option"
+            throw new HubIntegrationException(msg)
+        }
         osEnum
     }
 
     OperatingSystemEnum detectOperatingSystemFromEtcDir(File etcFile) {
         if(etcFile == null) {
             throw new HubIntegrationException(
-            sprintf("Could not determine the Operating System because etc dir not found."))
+            sprintf("Could not determine the Operating System because none of the expected etc files were found."))
         }
         if(etcFile == null || etcFile.listFiles() == null || etcFile.listFiles().size() == 0){
             throw new HubIntegrationException(
