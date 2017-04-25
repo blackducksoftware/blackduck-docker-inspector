@@ -27,6 +27,7 @@ import com.github.dockerjava.api.command.ExecCreateCmdResponse
 import com.github.dockerjava.api.command.PullImageCmd
 import com.github.dockerjava.api.command.SaveImageCmd
 import com.github.dockerjava.api.model.Container
+import com.github.dockerjava.api.model.Image
 import com.github.dockerjava.core.command.ExecStartResultCallback
 import com.github.dockerjava.core.command.PullImageResultCallback
 
@@ -58,8 +59,23 @@ class DockerClientManager {
     void pullImage(String imageName, String tagName) {
         logger.info("Pulling image ${imageName}:${tagName}")
         DockerClient dockerClient = hubDockerClient.getDockerClient()
-        PullImageCmd pull = dockerClient.pullImageCmd("${imageName}").withTag(tagName)
-        pull.exec(new PullImageResultCallback()).awaitSuccess()
+
+        List<Image> images =  dockerClient.listImagesCmd().withImageNameFilter(imageName).exec()
+        Image alreadyPulledImage = images.find { image ->
+            boolean foundTag = false
+            for(String tag : image.getRepoTags()){
+                if(tag.contains(tagName)){
+                    foundTag = true
+                    break
+                }
+            }
+            foundTag
+        }
+        if(alreadyPulledImage == null){
+            // Only pull if we dont already have it
+            PullImageCmd pull = dockerClient.pullImageCmd("${imageName}").withTag(tagName)
+            pull.exec(new PullImageResultCallback()).awaitSuccess()
+        }
     }
 
     void run(String imageName, String tagName, File dockerTarFile) {
@@ -73,14 +89,14 @@ class DockerClientManager {
 
         String containerId = ''
         boolean isContainerRunning = false
-        List<Container> containers = dockerClient.listContainersCmd().exec()
+        List<Container> containers = dockerClient.listContainersCmd().withShowAll(true).exec()
         Container extractorContainer = containers.find{ container ->
-            //FIXME There should be a better way to do this
             boolean foundName = false
             for(String name : container.getNames()){
                 // name prefixed with '/' for some reason
                 if(name.contains(Application.HUB_DOCKER_EXTRACTOR_CONTAINER)){
                     foundName = true
+                    break
                 }
             }
             foundName
