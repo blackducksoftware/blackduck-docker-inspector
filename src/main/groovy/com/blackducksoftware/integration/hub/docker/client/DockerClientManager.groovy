@@ -73,7 +73,7 @@ class DockerClientManager {
 
         String containerId = ''
         boolean isContainerRunning = false
-        List<Container> containers = dockerClient.listContainersCmd().exec()
+        List<Container> containers = dockerClient.listContainersCmd().withShowAll(true).exec()
         Container extractorContainer = containers.find{ container ->
             //FIXME There should be a better way to do this
             boolean foundName = false
