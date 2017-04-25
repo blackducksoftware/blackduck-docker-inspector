@@ -74,6 +74,7 @@ class Application {
             bdioFiles = hubDockerManager.generateBdioFromLayerFilesDir(dockerTarFile, layerFilesDir, targetOsEnum)
             hubDockerManager.uploadBdioFiles(bdioFiles)
         } else {
+            //TODO remove the prefix before release. Only used for testing pulling from our internal Artifactory
             // String runOnImageName = "int-docker-repo.docker-repo/${dockerImages.getDockerImageName(targetOsEnum)}"
             String runOnImageName = dockerImages.getDockerImageName(targetOsEnum)
             String runOnImageVersion = dockerImages.getDockerImageVersion(targetOsEnum)
