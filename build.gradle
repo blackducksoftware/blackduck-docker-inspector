@@ -95,7 +95,6 @@ task createApkDockerfileTasks() {
             runCommand 'apk update'
             runCommand 'apk add bash'
             runCommand 'apk add openjdk8-jre'
-            runCommand 'apk add docker'
             
             runCommand 'mkdir /opt'
             runCommand 'mkdir /opt/blackduck'
@@ -123,7 +122,6 @@ task createYumDockerfileTasks() {
             
             runCommand 'yum update -y'
             runCommand 'yum install -y java-1.8.0-openjdk'
-            runCommand 'yum install -y docker'
             
             runCommand 'mkdir /opt/blackduck'
             runCommand "mkdir ${hubDockerPgmDir}"
@@ -149,12 +147,11 @@ task createAptDockerfileTasks() {
             maintainer 'Black Duck Software'
             
             runCommand 'apt-get update -y'
-            runCommand 'apt install -y openjdk-8-jdk apt-transport-https ca-certificates curl software-properties-common'
+            runCommand 'apt install -y openjdk-8-jdk apt-transport-https ca-certificates curl software-properties-common vim'
             runCommand 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -'
             runCommand 'add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"'
             runCommand 'apt-get update -y'
             runCommand 'apt-get install -y docker-ce'
-            runCommand 'dockerd &'
             
             runCommand 'mkdir /opt/blackduck'
             runCommand "mkdir ${hubDockerPgmDir}"
@@ -191,8 +188,8 @@ task createBuildDockerImageTasks() {
 task buildDockerImages(dependsOn: [buildDockerImage_ubuntu, buildDockerImage_centos, buildDockerImage_alpine]) {
 }
 
-task temp() {
-    println "The value of hubDockerPgmDir is ${hubDockerPgmDir}"
+task temp(dependsOn: buildDockerImage_ubuntu) {
+
 }
 
 repositories {
