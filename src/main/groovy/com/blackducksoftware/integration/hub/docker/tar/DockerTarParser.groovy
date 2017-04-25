@@ -120,7 +120,7 @@ class DockerTarParser {
     }
 
     private File findFileWithName(File fileToSearch, String name){
-        logger.info(sprintf("Looking in %s for %s", fileToSearch.getAbsolutePath(), name))
+        logger.debug(sprintf("Looking in %s for %s", fileToSearch.getAbsolutePath(), name))
         if(StringUtils.compare(fileToSearch.getName(), name) == 0){
             logger.trace("File Name ${name} found ${fileToSearch.getAbsolutePath()}")
             return fileToSearch
