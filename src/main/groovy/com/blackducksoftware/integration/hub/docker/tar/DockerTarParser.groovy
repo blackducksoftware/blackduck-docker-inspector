@@ -58,6 +58,10 @@ class DockerTarParser {
     }
 
     OperatingSystemEnum detectOperatingSystemFromEtcDir(File etcFile) {
+        if(etcFile == null) {
+            throw new HubIntegrationException(
+            sprintf("Could not determine the Operating System because etc dir not found."))
+        }
         if(etcFile == null || etcFile.listFiles() == null || etcFile.listFiles().size() == 0){
             throw new HubIntegrationException(
             sprintf("Could not determine the Operating System because we could not find the OS files in %s.", etcFile.getAbsolutePath()))
@@ -116,6 +120,7 @@ class DockerTarParser {
     }
 
     private File findFileWithName(File fileToSearch, String name){
+        logger.info(sprintf("Looking in %s for %s", fileToSearch.getAbsolutePath(), name))
         if(StringUtils.compare(fileToSearch.getName(), name) == 0){
             logger.trace("File Name ${name} found ${fileToSearch.getAbsolutePath()}")
             return fileToSearch

@@ -107,6 +107,7 @@ task createApkDockerfileTasks() {
             addFile("${project.name}-${version}.jar", "/opt/blackduck/${project.name}")
             addFile("scan-docker-image-tar.sh", "/opt/blackduck/${project.name}")
             addFile("scan-docker-image-from-repo.sh", "/opt/blackduck/${project.name}")
+            runCommand "chmod u+x ${hubDockerPgmDir}/*.sh"
         }
     }
 }
@@ -133,6 +134,7 @@ task createYumDockerfileTasks() {
             addFile("${project.name}-${version}.jar", "/opt/blackduck/${project.name}")
             addFile("scan-docker-image-tar.sh", "/opt/blackduck/${project.name}")
             addFile("scan-docker-image-from-repo.sh", "/opt/blackduck/${project.name}")
+            runCommand "chmod u+x ${hubDockerPgmDir}/*.sh"
         }
     }
 }
@@ -163,6 +165,7 @@ task createAptDockerfileTasks() {
             addFile("${project.name}-${version}.jar", "/opt/blackduck/${project.name}")
             addFile("scan-docker-image-tar.sh", "/opt/blackduck/${project.name}")
             addFile("scan-docker-image-from-repo.sh", "/opt/blackduck/${project.name}")
+            runCommand "chmod u+x ${hubDockerPgmDir}/*.sh"
         }
     }
 }
