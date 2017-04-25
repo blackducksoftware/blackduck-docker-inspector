@@ -27,23 +27,40 @@ class ProgramPaths {
 
     private final Logger logger = LoggerFactory.getLogger(ProgramPaths.class)
 
-    String hubDockerConfigDirPath
-    String hubDockerConfigFilePath
-    String hubDockerTargetDirPath
+    private String hubDockerConfigDirPath
+    private String hubDockerConfigFilePath
+    private String hubDockerTargetDirPath
+    private boolean initDone = false
 
-    ProgramPaths() {
+    private void init() {
+        if (initDone) {
+            return
+        }
         if (StringUtils.isBlank(hubDockerPgmDirPath)) {
             logger.info("hubDockerPgmDirPath had no value; using: ${DEFAULT_PGM_DIR}")
             hubDockerPgmDirPath = DEFAULT_PGM_DIR;
-        } else {
-            logger.info("Read program dir: ${hubDockerPgmDirPath}")
         }
         if (!hubDockerPgmDirPath.endsWith("/")) {
             hubDockerPgmDirPath += "/"
         }
-        logger.info("Final program dir: ${hubDockerPgmDirPath}")
         hubDockerConfigDirPath = hubDockerPgmDirPath + "config/"
         hubDockerConfigFilePath = hubDockerConfigDirPath + "application.properties"
         hubDockerTargetDirPath = hubDockerPgmDirPath + "target/"
+        initDone = true
+    }
+
+    public String getHubDockerConfigDirPath() {
+        init()
+        return hubDockerConfigDirPath;
+    }
+
+    public String getHubDockerConfigFilePath() {
+        init()
+        return hubDockerConfigFilePath;
+    }
+
+    public String getHubDockerTargetDirPath() {
+        init()
+        return hubDockerTargetDirPath;
     }
 }

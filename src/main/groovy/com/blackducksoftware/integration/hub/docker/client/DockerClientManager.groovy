@@ -68,21 +68,20 @@ class DockerClientManager {
                 .withTty(true)
                 .withCmd("/bin/bash")
                 .exec();
-        String srcPath = programPaths.hubDockerConfigFilePath
-        String destPath = programPaths.hubDockerConfigDirPath
+        String srcPath = programPaths.getHubDockerConfigFilePath()
+        String destPath = programPaths.getHubDockerConfigDirPath()
         copyFileToContainer(dockerClient, container, srcPath, destPath);
 
         logger.info(sprintf("Docker image tar file: %s", dockerTarFile.getAbsolutePath()))
-        String tarFileDirInSubContainer = programPaths.hubDockerTargetDirPath
-        String tarFilePathInSubContainer = programPaths.hubDockerTargetDirPath + dockerTarFile.getName()
+        String tarFileDirInSubContainer = programPaths.getHubDockerTargetDirPath()
+        String tarFilePathInSubContainer = programPaths.getHubDockerTargetDirPath() + dockerTarFile.getName()
         logger.info(sprintf("Docker image tar file path in sub-container: %s", tarFilePathInSubContainer))
         copyFileToContainer(dockerClient, container, dockerTarFile.getAbsolutePath(), tarFileDirInSubContainer);
 
         dockerClient.startContainerCmd(container.getId()).exec();
         logger.info(sprintf("Started container %s from image %s", container.getId(), imageId))
 
-        // I don't know why this "/" is needed
-        String cmd = programPaths.hubDockerPgmDirPath + "/scan-docker-image-tar.sh"
+        String cmd = programPaths.getHubDockerPgmDirPath() + "scan-docker-image-tar.sh"
         String arg = tarFilePathInSubContainer
         execCommandInContainer(dockerClient, imageId, container, cmd, arg);
     }
