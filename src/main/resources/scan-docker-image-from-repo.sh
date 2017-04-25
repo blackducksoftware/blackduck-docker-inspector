@@ -4,7 +4,7 @@
 # makes it easier to invoke hub-docker (especially from outside the container).
 #
 if [ $# -ne 1 ] && [ $# -ne 2 ]; then
-    echo "Usage: $0 <path to Docker image tar file>"
+    echo "Usage: $0 <docker image name> [<docker image version>]"
     exit -1
 fi
 
