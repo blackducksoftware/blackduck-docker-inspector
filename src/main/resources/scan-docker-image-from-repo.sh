@@ -30,7 +30,7 @@ then
 fi
 
 cd /opt/blackduck/hub-docker
-if [ $# -eq 1 ]
+if [[ -z $imageVersion ]]
 then
 	cmd="java -jar hub-docker-*.jar --working.directory=/opt/blackduck/hub-docker/working --docker.image.name=$imageName $*"
 else
