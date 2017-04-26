@@ -74,7 +74,11 @@ class Application {
                         targetOsEnum.toString(), currentOsEnum.toString(), dockerTarFile.getAbsolutePath())
                 logger.info(msg)
                 bdioFiles = hubDockerManager.generateBdioFromLayerFilesDir(dockerTarFile, layerFilesDir, targetOsEnum)
-                hubDockerManager.uploadBdioFiles(bdioFiles)
+                if (bdioFiles.size() == 0) {
+                    logger.warn("No BDIO Files generated")
+                } else {
+                    hubDockerManager.uploadBdioFiles(bdioFiles)
+                }
             } else {
                 //TODO remove the prefix before release. Only used for testing pulling from our internal Artifactory
                 // String runOnImageName = "int-docker-repo.docker-repo/${dockerImages.getDockerImageName(targetOsEnum)}"

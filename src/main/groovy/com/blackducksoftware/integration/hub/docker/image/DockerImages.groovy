@@ -30,7 +30,7 @@ class DockerImages {
     }
 
     OperatingSystemEnum getDockerImageOs(OperatingSystemEnum targetImageOs) {
-        logger.info("getDockerImageOs(${targetImageOs})")
+        logger.debug("getDockerImageOs(${targetImageOs})")
         DockerImage image = dockerImageMap.get(targetImageOs)
         if (image == null) {
             null
