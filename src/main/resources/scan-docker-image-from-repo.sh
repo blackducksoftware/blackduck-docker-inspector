@@ -3,6 +3,7 @@
 # This script (copied to the Docker container hub-docker will run in)
 # makes it easier to invoke hub-docker (especially from outside the container).
 #
+#
 if [ $# -lt 1 ]
 then
     echo "Usage: $0 <docker image name> [<docker image version>] [options]"
