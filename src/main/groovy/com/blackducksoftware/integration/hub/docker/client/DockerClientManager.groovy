@@ -114,20 +114,19 @@ class DockerClientManager {
                     .exec()
 
             containerId = containerResponse.getId()
-
-            String srcPath = programPaths.getHubDockerConfigFilePath()
-            String destPath = programPaths.getHubDockerConfigDirPath()
-            copyFileToContainer(dockerClient, containerId, srcPath, destPath)
-
-            logger.info(sprintf("Docker image tar file: %s", dockerTarFile.getAbsolutePath()))
-            logger.info(sprintf("Docker image tar file path in sub-container: %s", tarFilePathInSubContainer))
-            copyFileToContainer(dockerClient, containerId, dockerTarFile.getAbsolutePath(), tarFileDirInSubContainer);
-
         }
         if(!isContainerRunning){
             dockerClient.startContainerCmd(containerId).exec()
             logger.info(sprintf("Started container %s from image %s", containerId, imageId))
         }
+        String srcPath = programPaths.getHubDockerConfigFilePath()
+        String destPath = programPaths.getHubDockerConfigDirPath()
+        copyFileToContainer(dockerClient, containerId, srcPath, destPath)
+
+        logger.info(sprintf("Docker image tar file: %s", dockerTarFile.getAbsolutePath()))
+        logger.info(sprintf("Docker image tar file path in sub-container: %s", tarFilePathInSubContainer))
+        copyFileToContainer(dockerClient, containerId, dockerTarFile.getAbsolutePath(), tarFileDirInSubContainer);
+
         String cmd = programPaths.getHubDockerPgmDirPath() + "scan-docker-image-tar.sh"
         execCommandInContainer(dockerClient, imageId, containerId, cmd, tarFilePathInSubContainer)
     }
