@@ -128,7 +128,7 @@ class DockerTarParser {
     }
 
     private File findFileWithName(File fileToSearch, String name){
-        logger.debug(sprintf("Looking in %s for %s", fileToSearch.getAbsolutePath(), name))
+        logger.trace(sprintf("Looking in %s for %s", fileToSearch.getAbsolutePath(), name))
         if(StringUtils.compare(fileToSearch.getName(), name) == 0){
             logger.trace("File Name ${name} found ${fileToSearch.getAbsolutePath()}")
             return fileToSearch
@@ -177,6 +177,9 @@ class DockerTarParser {
             while (null != (layerEntry = layerInputStream.getNextTarEntry())) {
                 try{
                     if(shouldExtractEntry(extractionPattern, layerEntry.name)){
+                        if ((layerEntry.name.startsWith("etc") && (layerEntry.isLink() || layerEntry.isSymbolicLink()))) {
+                            logger.warn("${layerEntry.name} is a link")
+                        }
                         final File outputFile = new File(layerOutputDir, layerEntry.getName())
                         if (layerEntry.isFile()) {
                             if(!outputFile.getParentFile().exists()){
