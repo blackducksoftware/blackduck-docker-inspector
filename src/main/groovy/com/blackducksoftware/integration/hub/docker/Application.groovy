@@ -16,10 +16,6 @@ import com.blackducksoftware.integration.hub.docker.image.DockerImages
 
 @SpringBootApplication
 class Application {
-    // These values must be consistent with the image building code in build.gradle
-
-    public static final String HUB_DOCKER_EXTRACTOR_CONTAINER = 'hub-docker-extractor'
-
     private final Logger logger = LoggerFactory.getLogger(Application.class)
 
     @Value('${docker.tar}')

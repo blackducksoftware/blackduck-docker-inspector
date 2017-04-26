@@ -20,7 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
-import com.blackducksoftware.integration.hub.docker.Application
 import com.github.dockerjava.api.DockerClient
 import com.github.dockerjava.api.command.CopyArchiveToContainerCmd
 import com.github.dockerjava.api.command.CreateContainerResponse
@@ -83,6 +82,7 @@ class DockerClientManager {
     void run(String imageName, String tagName, File dockerTarFile, String linuxDistro) {
         String imageId = "${imageName}:${tagName}"
         logger.info("Running container based on image ${imageId}")
+        String extractorContainerName = "${imageName}-extractor"
 
         DockerClient dockerClient = hubDockerClient.getDockerClient()
 
@@ -96,7 +96,7 @@ class DockerClientManager {
             boolean foundName = false
             for(String name : container.getNames()){
                 // name prefixed with '/' for some reason
-                if(name.contains(Application.HUB_DOCKER_EXTRACTOR_CONTAINER)){
+                if(name.contains(extractorContainerName)){
                     foundName = true
                     break
                 }
@@ -111,7 +111,7 @@ class DockerClientManager {
         } else{
             CreateContainerResponse containerResponse = dockerClient.createContainerCmd(imageId)
                     .withTty(true)
-                    .withName(Application.HUB_DOCKER_EXTRACTOR_CONTAINER)
+                    .withName(extractorContainerName)
                     .withCmd('/bin/bash')
                     .exec()
 
