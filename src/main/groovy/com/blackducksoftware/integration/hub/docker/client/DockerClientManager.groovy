@@ -79,7 +79,7 @@ class DockerClientManager {
         }
     }
 
-    void run(String imageName, String tagName, File dockerTarFile, String linuxDistro) {
+    void run(String imageName, String tagName, File dockerTarFile, String linuxDistro, boolean copyJar) {
         String imageId = "${imageName}:${tagName}"
         logger.info("Running container based on image ${imageId}")
         String extractorContainerName = "${imageName}-extractor"
@@ -129,6 +129,12 @@ class DockerClientManager {
         logger.info(sprintf("Docker image tar file path in sub-container: %s", tarFilePathInSubContainer))
         copyFileToContainer(dockerClient, containerId, dockerTarFile.getAbsolutePath(), tarFileDirInSubContainer);
 
+        if (copyJar) {
+            String jarFilePath = getJarFilePath()
+            logger.info(sprintf("Copying jar file %s to sub-container", jarFilePath))
+            copyFileToContainer(dockerClient, containerId, jarFilePath, programPaths.getHubDockerPgmDirPath());
+        }
+
         String cmd = programPaths.getHubDockerPgmDirPath() + "scan-docker-image-tar.sh"
         execCommandInContainer(dockerClient, imageId, containerId, cmd, tarFilePathInSubContainer, linuxDistro)
     }
@@ -167,5 +173,16 @@ class DockerClientManager {
         } finally{
             IOUtils.closeQuietly(tarInputStream)
         }
+    }
+
+    private String getJarFilePath() {
+        String jarFileName = new java.io.File(DockerClientManager.class.getProtectionDomain()
+                .getCodeSource()
+                .getLocation()
+                .getPath()).getAbsolutePath()
+        int startIndex = jarFileName.indexOf("${programPaths.getHubDockerPgmDirPath()}hub-docker-")
+        int endIndex = jarFileName.indexOf(".jar") + ".jar".length()
+        jarFileName = jarFileName.substring(startIndex, endIndex)
+        jarFileName
     }
 }

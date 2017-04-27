@@ -30,6 +30,9 @@ class Application {
     @Value('${linux.distro}')
     String linuxDistro
 
+    @Value('${dev.mode:false}')
+    Boolean devMode
+
     @Autowired
     HubClient hubClient
 
@@ -91,7 +94,7 @@ class Application {
                             "Unable to pull docker image %s:%s; proceeding anyway since it may already exist locally",
                             runOnImageName, runOnImageVersion))
                 }
-                dockerClientManager.run(runOnImageName, runOnImageVersion, dockerTarFile, linuxDistro)
+                dockerClientManager.run(runOnImageName, runOnImageVersion, dockerTarFile, linuxDistro, devMode)
             }
         } catch (Exception e) {
             logger.error("Error inspecting image: ${e.message}")
