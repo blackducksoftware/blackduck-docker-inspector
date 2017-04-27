@@ -28,9 +28,9 @@ import com.blackducksoftware.integration.hub.exception.HubIntegrationException
 class DockerTarParser {
     private final Logger logger = LoggerFactory.getLogger(DockerTarParser.class)
 
-    private static final String OS_EXTRACTION_PATTERN = "etc/(lsb-release|os-release)"
-
-    private static final String EXTRACTION_PATTERN = "(lib/apk.*|var/lib/(dpkg|rpm){1}.*|${OS_EXTRACTION_PATTERN})"
+    //    private static final String OS_EXTRACTION_PATTERN = "etc/(lsb-release|os-release)"
+    //
+    //    private static final String EXTRACTION_PATTERN = "(lib/apk.*|var/lib/(dpkg|rpm){1}.*|${OS_EXTRACTION_PATTERN})"
 
     File workingDirectory
 
@@ -44,7 +44,8 @@ class DockerTarParser {
                 layerName = layerTar.getParentFile().getName()
             }
             def layerOutputDir = new File(layerFilesDir, layerName)
-            parseLayerTarAndExtract(EXTRACTION_PATTERN, layerTar, layerOutputDir)
+            parseLayerTarAndExtract( layerTar, layerOutputDir)
+            // parseLayerTarAndExtract(EXTRACTION_PATTERN, layerTar, layerOutputDir)
         }
         layerFilesDir
     }
@@ -57,13 +58,13 @@ class DockerTarParser {
             logger.trace("Layer directory ${layerFilesDir.getName()}, looking for etc")
             def etcFile = findFileWithName(layerFilesDir, 'etc')
             if (etcFile == null) {
-                String msg = "Unable to identify the Linux flavor of this image. You'll need to run with the --linux.distro option"
+                String msg = "Unable to find the files that specify the Linux distro of this image. You'll need to run with the --linux.distro option"
                 throw new HubIntegrationException(msg)
             }
             osEnum = detectOperatingSystemFromEtcDir(etcFile)
         }
         if (osEnum == null) {
-            String msg = "Unable to identify the Linux flavor of this image. You'll need to run with the --linux.distro option"
+            String msg = "Unable to identify the Linux distro of this image. You'll need to run with the --linux.distro option"
             throw new HubIntegrationException(msg)
         }
         osEnum
@@ -103,7 +104,7 @@ class DockerTarParser {
                         result.extractedPackageManagerDirectory = packageManagerDirectory
                         results.extractionResults.add(result)
                     } catch (IllegalArgumentException e){
-                        logger.trace(e.toString())
+                        logger.debug(e.toString())
                     }
                 }
             }
@@ -138,7 +139,7 @@ class DockerTarParser {
     }
 
     private File findFileWithName(File fileToSearch, String name){
-        logger.debug(sprintf("Looking in %s for %s", fileToSearch.getAbsolutePath(), name))
+        logger.trace(sprintf("Looking in %s for %s", fileToSearch.getAbsolutePath(), name))
         if(StringUtils.compare(fileToSearch.getName(), name) == 0){
             logger.trace("File Name ${name} found ${fileToSearch.getAbsolutePath()}")
             return fileToSearch
@@ -180,7 +181,8 @@ class DockerTarParser {
         untaredFiles
     }
 
-    private void parseLayerTarAndExtract(String extractionPattern, File layerTar, File layerOutputDir){
+    private void parseLayerTarAndExtract(File layerTar, File layerOutputDir){
+        // private void parseLayerTarAndExtract(String extractionPattern, File layerTar, File layerOutputDir){
         def layerInputStream = new TarArchiveInputStream(new FileInputStream(layerTar))
         try {
             def layerEntry
@@ -188,7 +190,7 @@ class DockerTarParser {
                 try{
                     // if(shouldExtractEntry(extractionPattern, layerEntry.name)){
                     if(layerEntry.isSymbolicLink()){
-
+                        logger.debug("${layerEntry.name} is a symbolic link")
                         Path startLink = Paths.get(layerOutputDir.getAbsolutePath(), layerEntry.getName())
                         Path endLink = null
                         String linkPath = layerEntry.getLinkName()
@@ -204,9 +206,6 @@ class DockerTarParser {
                     } else {
                         final File outputFile = new File(layerOutputDir, layerEntry.getName())
                         if (layerEntry.isFile()) {
-                            //                        if(!outputFile.getParentFile().exists()){
-                            //                            outputFile.getParentFile().mkdirs()
-                            //                        }
                             final OutputStream outputFileStream = new FileOutputStream(outputFile)
                             try{
                                 IOUtils.copy(layerInputStream, outputFileStream)
@@ -228,7 +227,7 @@ class DockerTarParser {
         }
     }
 
-    boolean shouldExtractEntry(String extractionPattern, String entryName){
-        entryName.matches(extractionPattern)
-    }
+    //    boolean shouldExtractEntry(String extractionPattern, String entryName){
+    //        entryName.matches(extractionPattern)
+    //    }
 }

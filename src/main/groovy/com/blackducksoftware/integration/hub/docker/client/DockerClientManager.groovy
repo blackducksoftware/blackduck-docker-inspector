@@ -13,16 +13,17 @@ package com.blackducksoftware.integration.hub.docker.client
 
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.IOUtils
+import org.apache.commons.lang3.StringUtils
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
-import com.blackducksoftware.integration.hub.docker.Application
 import com.github.dockerjava.api.DockerClient
 import com.github.dockerjava.api.command.CopyArchiveToContainerCmd
 import com.github.dockerjava.api.command.CreateContainerResponse
+import com.github.dockerjava.api.command.ExecCreateCmd
 import com.github.dockerjava.api.command.ExecCreateCmdResponse
 import com.github.dockerjava.api.command.PullImageCmd
 import com.github.dockerjava.api.command.SaveImageCmd
@@ -78,9 +79,10 @@ class DockerClientManager {
         }
     }
 
-    void run(String imageName, String tagName, File dockerTarFile) {
+    void run(String imageName, String tagName, File dockerTarFile, String linuxDistro) {
         String imageId = "${imageName}:${tagName}"
         logger.info("Running container based on image ${imageId}")
+        String extractorContainerName = "${imageName}-extractor"
 
         DockerClient dockerClient = hubDockerClient.getDockerClient()
 
@@ -94,7 +96,7 @@ class DockerClientManager {
             boolean foundName = false
             for(String name : container.getNames()){
                 // name prefixed with '/' for some reason
-                if(name.contains(Application.HUB_DOCKER_EXTRACTOR_CONTAINER)){
+                if(name.contains(extractorContainerName)){
                     foundName = true
                     break
                 }
@@ -109,7 +111,7 @@ class DockerClientManager {
         } else{
             CreateContainerResponse containerResponse = dockerClient.createContainerCmd(imageId)
                     .withTty(true)
-                    .withName(Application.HUB_DOCKER_EXTRACTOR_CONTAINER)
+                    .withName(extractorContainerName)
                     .withCmd('/bin/bash')
                     .exec()
 
@@ -128,15 +130,20 @@ class DockerClientManager {
         copyFileToContainer(dockerClient, containerId, dockerTarFile.getAbsolutePath(), tarFileDirInSubContainer);
 
         String cmd = programPaths.getHubDockerPgmDirPath() + "scan-docker-image-tar.sh"
-        execCommandInContainer(dockerClient, imageId, containerId, cmd, tarFilePathInSubContainer)
+        execCommandInContainer(dockerClient, imageId, containerId, cmd, tarFilePathInSubContainer, linuxDistro)
     }
 
-    private execCommandInContainer(DockerClient dockerClient, String imageId, String containerId, String cmd, String arg) {
-        logger.info(sprintf("Running %s on %s in container %s from image %s", cmd, arg, containerId, imageId))
-        ExecCreateCmdResponse execCreateCmdResponse = dockerClient.execCreateCmd(containerId)
+    private execCommandInContainer(DockerClient dockerClient, String imageId, String containerId, String cmd, String arg, String linuxDistro) {
+        logger.info(sprintf("Running %s on %s with linuxDistro %s in container %s from image %s", cmd, arg, linuxDistro, containerId, imageId))
+        ExecCreateCmd execCreateCmd = dockerClient.execCreateCmd(containerId)
                 .withAttachStdout(true)
                 .withAttachStderr(true)
-                .withCmd(cmd, arg).exec()
+        if (!StringUtils.isBlank(linuxDistro)) {
+            execCreateCmd.withCmd(cmd, arg, "--linux.distro=${linuxDistro}")
+        } else {
+            execCreateCmd.withCmd(cmd, arg)
+        }
+        ExecCreateCmdResponse execCreateCmdResponse = execCreateCmd.exec()
         dockerClient.execStartCmd(execCreateCmdResponse.getId()).exec(
                 new ExecStartResultCallback(System.out, System.err)).awaitCompletion()
     }

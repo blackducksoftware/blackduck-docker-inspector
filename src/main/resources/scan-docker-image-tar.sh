@@ -3,6 +3,7 @@
 # This script (copied to the Docker container hub-docker will run in)
 # makes it easier to invoke hub-docker (especially from outside the container).
 #
+#
 if [ $# -lt 1 ]
   then
     echo "Usage: $0 <path to Docker image tar file> [options]"
@@ -10,15 +11,6 @@ if [ $# -lt 1 ]
     echo "  --linux.distro=YourSpecificDistro"
     exit -1
 fi
-
-if [ $(service docker status|grep "Docker is running"|wc -l) -gt 0 ]
-then
-	echo dockerd is already running
-else
-	service docker start
-	sleep 1
-fi
-service docker status
 
 imageFile=$1
 shift
