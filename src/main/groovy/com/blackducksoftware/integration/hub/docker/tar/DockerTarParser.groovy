@@ -56,12 +56,21 @@ class DockerTarParser {
             osEnum = OperatingSystemEnum.determineOperatingSystem(operatingSystem)
         } else{
             logger.trace("Layer directory ${layerFilesDir.getName()}, looking for etc")
-            def etcFile = findFileWithName(layerFilesDir, 'etc')
-            if (etcFile == null) {
+            List<File> etcFiles = findFileWithName(layerFilesDir, 'etc')
+            if (etcFiles == null) {
                 String msg = "Unable to find the files that specify the Linux distro of this image. You'll need to run with the --linux.distro option"
                 throw new HubIntegrationException(msg)
             }
-            osEnum = detectOperatingSystemFromEtcDir(etcFile)
+            for(File etcFile : etcFiles){
+                try{
+                    osEnum = detectOperatingSystemFromEtcDir(etcFile)
+                    if(osEnum != null){
+                        break
+                    }
+                } catch (HubIntegrationException e){
+                    logger.debug(e.toString())
+                }
+            }
         }
         if (osEnum == null) {
             String msg = "Unable to identify the Linux distro of this image. You'll need to run with the --linux.distro option"
@@ -79,7 +88,7 @@ class DockerTarParser {
             throw new HubIntegrationException(
             sprintf("Could not determine the Operating System because we could not find the OS files in %s.", etcFile.getAbsolutePath()))
         }
-        logger.info("ETC FILE ${etcFile.getAbsolutePath()}")
+        logger.debug("etc directory ${etcFile.getAbsolutePath()}")
         OperatingSystemEnum osEnum = extractOperatingSystemFromFiles(etcFile.listFiles())
         osEnum
     }
@@ -89,22 +98,24 @@ class DockerTarParser {
         results.operatingSystemEnum = osEnum
         layerFilesDir.listFiles().each { layerDirectory ->
             logger.trace("Layer directory .getName()}, looking for lib")
-            def libDir = findFileWithName(layerDirectory, 'lib')
-            if(libDir == null){
+            List<File> libDirs = findFileWithName(layerDirectory, 'lib')
+            if(libDirs == null){
                 logger.debug("Could not find the lib directroy in ${layerDirectory.getAbsolutePath()}")
             } else{
-                logger.trace('lib directory : '+libDir.getAbsolutePath())
-                libDir.listFiles().each { packageManagerDirectory ->
-                    try{
-                        PackageManagerEnum packageManager = PackageManagerEnum.getPackageManagerEnumByName(packageManagerDirectory.getName())
-                        logger.trace(packageManagerDirectory.getAbsolutePath())
-                        TarExtractionResult result = new TarExtractionResult()
-                        result.layer = layerDirectory.getName()
-                        result.packageManager = packageManager
-                        result.extractedPackageManagerDirectory = packageManagerDirectory
-                        results.extractionResults.add(result)
-                    } catch (IllegalArgumentException e){
-                        logger.debug(e.toString())
+                libDirs.each{ libDir ->
+                    logger.trace('lib directory : '+libDir.getAbsolutePath())
+                    libDir.listFiles().each { packageManagerDirectory ->
+                        try{
+                            PackageManagerEnum packageManager = PackageManagerEnum.getPackageManagerEnumByName(packageManagerDirectory.getName())
+                            logger.trace(packageManagerDirectory.getAbsolutePath())
+                            TarExtractionResult result = new TarExtractionResult()
+                            result.layer = layerDirectory.getName()
+                            result.packageManager = packageManager
+                            result.extractedPackageManagerDirectory = packageManagerDirectory
+                            results.extractionResults.add(result)
+                        } catch (IllegalArgumentException e){
+                            logger.debug(e.toString())
+                        }
                     }
                 }
             }
@@ -138,20 +149,22 @@ class DockerTarParser {
         osEnum
     }
 
-    private File findFileWithName(File fileToSearch, String name){
+    private List<File> findFileWithName(File fileToSearch, String name){
         logger.trace(sprintf("Looking in %s for %s", fileToSearch.getAbsolutePath(), name))
         if(StringUtils.compare(fileToSearch.getName(), name) == 0){
             logger.trace("File Name ${name} found ${fileToSearch.getAbsolutePath()}")
-            return fileToSearch
+            List<File> files = new ArrayList<>()
+            files.add(fileToSearch)
+            return files
         } else if (fileToSearch.isDirectory()){
-            File foundFile = null
+            List<File> files = new ArrayList<>()
             for(File subFile : fileToSearch.listFiles()){
-                foundFile = findFileWithName(subFile, name)
+                def foundFile = findFileWithName(subFile, name)
                 if(foundFile != null){
-                    break
+                    files.addAll(foundFile)
                 }
             }
-            return foundFile
+            return files
         }
     }
 
