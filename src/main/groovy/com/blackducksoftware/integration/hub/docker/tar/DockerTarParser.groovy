@@ -72,6 +72,27 @@ class DockerTarParser {
                 }
             }
         }
+
+        Set<PackageManagerEnum> packageManagers = new HashSet<>()
+        layerFilesDir.listFiles().each { layerDirectory ->
+            List<File> libDirs = findFileWithName(layerDirectory, 'lib')
+            if(libDirs != null){
+                libDirs.each{ libDir ->
+                    libDir.listFiles().each { packageManagerDirectory ->
+                        try{
+                            packageManagers.add(PackageManagerEnum.getPackageManagerEnumByName(packageManagerDirectory.getName()))
+                        } catch (IllegalArgumentException e){
+                            logger.debug(e.toString())
+                        }
+                    }
+                }
+            }
+        }
+        if(packageManagers.size() == 1){
+            PackageManagerEnum packageManager = packageManagers.iterator().next()
+            osEnum = packageManager.operatingSystem
+            logger.debug("Package manager ${packageManager.name()} returns Operating System ${osEnum.name()}")
+        }
         if (osEnum == null) {
             String msg = "Unable to identify the Linux distro of this image. You'll need to run with the --linux.distro option"
             throw new HubIntegrationException(msg)
