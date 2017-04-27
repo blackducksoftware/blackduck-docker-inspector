@@ -151,7 +151,7 @@ class DockerClientManager {
     private saveImage(String imageName, String tagName, File imageTarFile) {
         InputStream tarInputStream = null
         try{
-            logger.info("Saving the docker image to : ${imageTarFile.getAbsolutePath()}")
+            logger.info("Saving the docker image to : ${imageTarFile.getCanonicalPath()}")
             DockerClient dockerClient = hubDockerClient.getDockerClient()
             SaveImageCmd saveCommand = dockerClient.saveImageCmd(imageName)
             saveCommand.withTag(tagName)

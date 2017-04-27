@@ -11,6 +11,10 @@
  */
 package com.blackducksoftware.integration.hub.docker.tar
 
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.Paths
+
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream
 import org.apache.commons.io.IOUtils
 import org.apache.commons.lang3.StringUtils
@@ -74,6 +78,7 @@ class DockerTarParser {
             throw new HubIntegrationException(
             sprintf("Could not determine the Operating System because we could not find the OS files in %s.", etcFile.getAbsolutePath()))
         }
+        logger.info("ETC FILE ${etcFile.getAbsolutePath()}")
         OperatingSystemEnum osEnum = extractOperatingSystemFromFiles(etcFile.listFiles())
         osEnum
     }
@@ -85,16 +90,21 @@ class DockerTarParser {
             logger.trace("Layer directory .getName()}, looking for lib")
             def libDir = findFileWithName(layerDirectory, 'lib')
             if(libDir == null){
-                throw new HubIntegrationException("Could not find the lib directroy in ${layerDirectory.getAbsolutePath()}")
+                logger.debug("Could not find the lib directroy in ${layerDirectory.getAbsolutePath()}")
             } else{
                 logger.trace('lib directory : '+libDir.getAbsolutePath())
                 libDir.listFiles().each { packageManagerDirectory ->
-                    logger.trace(packageManagerDirectory.getAbsolutePath())
-                    TarExtractionResult result = new TarExtractionResult()
-                    result.layer = layerDirectory.getName()
-                    result.packageManager =PackageManagerEnum.getPackageManagerEnumByName(packageManagerDirectory.getName())
-                    result.extractedPackageManagerDirectory = packageManagerDirectory
-                    results.extractionResults.add(result)
+                    try{
+                        PackageManagerEnum packageManager = PackageManagerEnum.getPackageManagerEnumByName(packageManagerDirectory.getName())
+                        logger.trace(packageManagerDirectory.getAbsolutePath())
+                        TarExtractionResult result = new TarExtractionResult()
+                        result.layer = layerDirectory.getName()
+                        result.packageManager = packageManager
+                        result.extractedPackageManagerDirectory = packageManagerDirectory
+                        results.extractionResults.add(result)
+                    } catch (IllegalArgumentException e){
+                        logger.trace(e.toString())
+                    }
                 }
             }
         }
@@ -176,12 +186,27 @@ class DockerTarParser {
             def layerEntry
             while (null != (layerEntry = layerInputStream.getNextTarEntry())) {
                 try{
-                    if(shouldExtractEntry(extractionPattern, layerEntry.name)){
+                    // if(shouldExtractEntry(extractionPattern, layerEntry.name)){
+                    if(layerEntry.isSymbolicLink()){
+
+                        Path startLink = Paths.get(layerOutputDir.getAbsolutePath(), layerEntry.getName())
+                        Path endLink = null
+                        String linkPath = layerEntry.getLinkName()
+                        if (linkPath.startsWith('.')) {
+                            endLink =  startLink.resolveSibling(layerEntry.getLinkName())
+                            endLink = endLink.normalize()
+                        } else {
+                            endLink = Paths.get(layerOutputDir.getAbsolutePath(), layerEntry.getLinkName())
+                            endLink = endLink.normalize()
+                        }
+                        Files.createSymbolicLink(startLink, endLink)
+
+                    } else {
                         final File outputFile = new File(layerOutputDir, layerEntry.getName())
                         if (layerEntry.isFile()) {
-                            if(!outputFile.getParentFile().exists()){
-                                outputFile.getParentFile().mkdirs()
-                            }
+                            //                        if(!outputFile.getParentFile().exists()){
+                            //                            outputFile.getParentFile().mkdirs()
+                            //                        }
                             final OutputStream outputFileStream = new FileOutputStream(outputFile)
                             try{
                                 IOUtils.copy(layerInputStream, outputFileStream)
@@ -189,16 +214,19 @@ class DockerTarParser {
                                 outputFileStream.close()
                             }
                         }
+                        else {
+                            outputFile.mkdirs()
+                        }
                     }
-                }catch(Exception e){
-                    logger.error(e.toString())
+                    //   }
+                } catch(Exception e) {
+                    logger.debug(e.toString())
                 }
             }
         } finally {
             IOUtils.closeQuietly(layerInputStream)
         }
     }
-
 
     boolean shouldExtractEntry(String extractionPattern, String entryName){
         entryName.matches(extractionPattern)

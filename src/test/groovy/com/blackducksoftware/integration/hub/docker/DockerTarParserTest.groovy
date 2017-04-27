@@ -15,7 +15,6 @@ import org.junit.Ignore
 import org.junit.Test
 
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser
-import com.blackducksoftware.integration.hub.docker.tar.TarExtractionResults
 
 class DockerTarParserTest {
 
@@ -23,12 +22,12 @@ class DockerTarParserTest {
     @Test
     void testPerformExtractOfDockerTar(){
         //File dockerTar = new File("ubuntu.tar")
-        File dockerTar = new File("ubuntu.tar")
+        File dockerTar = new File("jenkins.tar")
 
         DockerTarParser tarParser = new DockerTarParser()
         tarParser.workingDirectory = new File("docker")
 
-        TarExtractionResults results = tarParser.parseImageTar(null,dockerTar)
-        println results.operatingSystemEnum.name()
+        File results = tarParser.extractDockerLayers(dockerTar)
+        println results.getAbsolutePath()
     }
 }
