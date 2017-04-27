@@ -131,7 +131,6 @@ class DockerClientManager {
 
         if (copyJar) {
             String jarFilePath = getJarFilePath()
-            logger.info(sprintf("Copying jar file %s to sub-container", jarFilePath))
             copyFileToContainer(dockerClient, containerId, jarFilePath, programPaths.getHubDockerPgmDirPath());
         }
 
@@ -158,7 +157,6 @@ class DockerClientManager {
         logger.info("Copying ${srcPath} to container ${containerId}: ${destPath}")
         CopyArchiveToContainerCmd  copyProperties = dockerClient.copyArchiveToContainerCmd(containerId).withHostResource(srcPath).withRemotePath(destPath)
         copyProperties.exec()
-        logger.info("Copied ${srcPath} to container ${containerId}: ${destPath}")
     }
 
     private saveImage(String imageName, String tagName, File imageTarFile) {

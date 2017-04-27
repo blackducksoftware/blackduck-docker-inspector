@@ -1,14 +1,16 @@
 package com.blackducksoftware.integration.hub.docker
 
 enum PackageManagerEnum {
-    DPKG('/var/lib/dpkg'),
-    RPM('/var/lib/rpm'),
-    APK('/var/lib/apk')
+    DPKG('/var/lib/dpkg', OperatingSystemEnum.UBUNTU),
+    RPM('/var/lib/rpm', OperatingSystemEnum.CENTOS),
+    APK('/var/lib/apk', OperatingSystemEnum.ALPINE)
 
-    String directory
+    final String directory
+    final OperatingSystemEnum operatingSystem
 
-    private PackageManagerEnum(String directory) {
+    private PackageManagerEnum(String directory, OperatingSystemEnum operatingSystem) {
         this.directory = directory
+        this.operatingSystem = operatingSystem
     }
 
     static PackageManagerEnum getPackageManagerEnumByName(String name){

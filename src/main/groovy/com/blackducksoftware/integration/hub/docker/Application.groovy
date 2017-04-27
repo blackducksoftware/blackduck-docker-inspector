@@ -52,6 +52,9 @@ class Application {
     @PostConstruct
     void init() {
         try {
+            if (devMode) {
+                logger.info("Running in development mode")
+            }
             try {
                 hubClient.testHubConnection()
                 logger.info 'Your Hub configuration is valid and a successful connection to the Hub was established.'
