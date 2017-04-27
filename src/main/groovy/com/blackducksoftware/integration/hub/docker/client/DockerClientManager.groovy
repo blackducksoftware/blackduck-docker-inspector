@@ -130,8 +130,7 @@ class DockerClientManager {
         copyFileToContainer(dockerClient, containerId, dockerTarFile.getAbsolutePath(), tarFileDirInSubContainer);
 
         if (copyJar) {
-            String jarFilePath = getJarFilePath()
-            copyFileToContainer(dockerClient, containerId, jarFilePath, programPaths.getHubDockerPgmDirPath());
+            copyFileToContainer(dockerClient, containerId, programPaths.getHubDockerJarPath(), programPaths.getHubDockerPgmDirPath());
         }
 
         String cmd = programPaths.getHubDockerPgmDirPath() + "scan-docker-image-tar.sh"
@@ -171,16 +170,5 @@ class DockerClientManager {
         } finally{
             IOUtils.closeQuietly(tarInputStream)
         }
-    }
-
-    private String getJarFilePath() {
-        String jarFileName = new java.io.File(DockerClientManager.class.getProtectionDomain()
-                .getCodeSource()
-                .getLocation()
-                .getPath()).getAbsolutePath()
-        int startIndex = jarFileName.indexOf("${programPaths.getHubDockerPgmDirPath()}hub-docker-")
-        int endIndex = jarFileName.indexOf(".jar") + ".jar".length()
-        jarFileName = jarFileName.substring(startIndex, endIndex)
-        jarFileName
     }
 }

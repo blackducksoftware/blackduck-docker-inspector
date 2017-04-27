@@ -30,6 +30,7 @@ class ProgramPaths {
     private String hubDockerConfigDirPath
     private String hubDockerConfigFilePath
     private String hubDockerTargetDirPath
+    private String hubDockerJarPath
     private boolean initDone = false
 
     private void init() {
@@ -46,6 +47,15 @@ class ProgramPaths {
         hubDockerConfigDirPath = hubDockerPgmDirPath + "config/"
         hubDockerConfigFilePath = hubDockerConfigDirPath + "application.properties"
         hubDockerTargetDirPath = hubDockerPgmDirPath + "target/"
+
+        String qualifiedJarPathString = new java.io.File(DockerClientManager.class.getProtectionDomain()
+                .getCodeSource()
+                .getLocation()
+                .getPath()).getAbsolutePath()
+        int startIndex = qualifiedJarPathString.indexOf("${hubDockerPgmDirPath}hub-docker-")
+        int endIndex = qualifiedJarPathString.indexOf(".jar") + ".jar".length()
+        hubDockerJarPath = qualifiedJarPathString.substring(startIndex, endIndex)
+
         initDone = true
     }
 
@@ -67,5 +77,10 @@ class ProgramPaths {
     public String getHubDockerPgmDirPath() {
         init()
         hubDockerPgmDirPath
+    }
+
+    public String getHubDockerJarPath() {
+        init()
+        return hubDockerJarPath;
     }
 }
