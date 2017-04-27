@@ -219,6 +219,7 @@ class DockerTarParser {
         // private void parseLayerTarAndExtract(String extractionPattern, File layerTar, File layerOutputDir){
         def layerInputStream = new TarArchiveInputStream(new FileInputStream(layerTar))
         try {
+            layerOutputDir.mkdirs()
             def layerEntry
             while (null != (layerEntry = layerInputStream.getNextTarEntry())) {
                 try{
