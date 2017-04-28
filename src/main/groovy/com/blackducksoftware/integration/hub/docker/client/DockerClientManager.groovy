@@ -81,7 +81,9 @@ class DockerClientManager {
         }
     }
 
-    void run(String imageName, String tagName, File dockerTarFile, String linuxDistro, boolean copyJar, String projectName, String projectVersion) {
+    void run(String imageName, String tagName, File dockerTarFile, String linuxDistro, boolean copyJar,
+            String hubProjectName, String hubProjectVersion) {
+
         String imageId = "${imageName}:${tagName}"
         logger.info("Running container based on image ${imageId}")
         String extractorContainerName = "${imageName}-extractor"
@@ -136,18 +138,21 @@ class DockerClientManager {
         }
 
         String cmd = programPaths.getHubDockerPgmDirPath() + "scan-docker-image-tar.sh"
-        execCommandInContainer(dockerClient, imageId, containerId, cmd, tarFilePathInSubContainer, linuxDistro)
+        execCommandInContainer(dockerClient, imageId, containerId, cmd, tarFilePathInSubContainer, linuxDistro,
+                hubProjectName, hubProjectVersion)
     }
 
-    private execCommandInContainer(DockerClient dockerClient, String imageId, String containerId, String cmd, String arg, String linuxDistro) {
-        logger.info(sprintf("Running %s on %s with linuxDistro %s in container %s from image %s", cmd, arg, linuxDistro, containerId, imageId))
+    private execCommandInContainer(DockerClient dockerClient, String imageId, String containerId, String cmd, String arg, String linuxDistro,
+            String hubProjectName, String hubProjectVersion) {
+        logger.info(sprintf("Running %s on %s with linuxDistro %s in container %s from image %s for hub project %s/%s", cmd, arg, linuxDistro, containerId, imageId,
+                hubProjectName, hubProjectVersion))
         ExecCreateCmd execCreateCmd = dockerClient.execCreateCmd(containerId)
                 .withAttachStdout(true)
                 .withAttachStderr(true)
         if (!StringUtils.isBlank(linuxDistro)) {
-            execCreateCmd.withCmd(cmd, arg, "--linux.distro=${linuxDistro}")
+            execCreateCmd.withCmd(cmd, arg, "--linux.distro=${linuxDistro}", "--hub.project.name=${hubProjectName}", "--hub.project.version=${hubProjectVersion}")
         } else {
-            execCreateCmd.withCmd(cmd, arg)
+            execCreateCmd.withCmd(cmd, arg, "--hub.project.name=${hubProjectName}", "--hub.project.version=${hubProjectVersion}")
         }
         ExecCreateCmdResponse execCreateCmdResponse = execCreateCmd.exec()
         dockerClient.execStartCmd(execCreateCmdResponse.getId()).exec(
