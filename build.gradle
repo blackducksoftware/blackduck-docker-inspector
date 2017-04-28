@@ -24,6 +24,7 @@ tasks.withType(GroovyCompile) { options.encoding = 'UTF-8' }
 group = 'com.blackducksoftware.integration'
 version = '0.0.1-SNAPSHOT'
 description = ''
+String hubDockerImageVersion = '0.0.1'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -180,7 +181,7 @@ task createBuildDockerImageTasks() {
         def taskName = "buildDockerImage_${linuxFlavorDirName}"
         println "creating task ${taskName}"
         task "${taskName}"(type: Exec, dependsOn: [buildImageDirs]) {
-            commandLine "docker", "build", "--tag", "${project.name}-${linuxFlavorDirName}:1.0", "${buildDir}/images/${linuxFlavorDirName}/${project.name}"
+            commandLine "docker", "build", "--tag", "${project.name}-${linuxFlavorDirName}:${hubDockerImageVersion}", "${buildDir}/images/${linuxFlavorDirName}/${project.name}"
         }
     }
 }
