@@ -31,8 +31,8 @@ abstract class Extractor {
         this.forges = forges
     }
 
-    void extract(BdioWriter bdioWriter, OperatingSystemEnum operatingSystem, String projectName, String version) {
-        BdioBillOfMaterials bom = bdioNodeFactory.createBillOfMaterials(null, projectName, version)
+    void extract(BdioWriter bdioWriter, OperatingSystemEnum operatingSystem, String codeLocationName, String projectName, String version) {
+        BdioBillOfMaterials bom = bdioNodeFactory.createBillOfMaterials(codeLocationName, projectName, version)
         bdioWriter.writeBdioNode(bom)
         String externalId = "${projectName}/${version}"
         BdioProject projectNode = bdioNodeFactory.createProject(projectName, version, bdioPropertyHelper.createBdioId(projectName, version), operatingSystem.forge, externalId)

@@ -118,12 +118,13 @@ class DockerTarParser {
         TarExtractionResults results = new TarExtractionResults()
         results.operatingSystemEnum = osEnum
         layerFilesDir.listFiles().each { layerDirectory ->
-            logger.trace("Layer directory .getName()}, looking for lib")
-            List<File> libDirs = findFileWithName(layerDirectory, 'lib')
-            if(libDirs == null){
+            logger.info("Extracting data from layer ${layerDirectory.getName()}")
+            List<File> varDirs = findFileWithName(layerDirectory, 'var')
+            if(varDirs == null){
                 logger.debug("Could not find the lib directroy in ${layerDirectory.getAbsolutePath()}")
-            } else{
-                libDirs.each{ libDir ->
+            } else {
+                varDirs.each{ varDir ->
+                    def libDir = new File(varDir, 'lib')
                     logger.trace('lib directory : '+libDir.getAbsolutePath())
                     libDir.listFiles().each { packageManagerDirectory ->
                         try{

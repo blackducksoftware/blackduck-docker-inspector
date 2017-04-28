@@ -64,6 +64,10 @@ class Application {
             hubDockerManager.init()
             hubDockerManager.cleanWorkingDirectory()
             def bdioFiles = null
+            if (StringUtils.isBlank(dockerTagName)) {
+                // set default if blank
+                dockerTagName = 'latest'
+            }
             File dockerTarFile = deriveDockerTarFile()
             File layerFilesDir = hubDockerManager.extractDockerLayers(dockerTarFile)
 
@@ -75,7 +79,7 @@ class Application {
                 String msg = sprintf("Image inspection for %s can be run in this %s docker container; tarfile: %s",
                         targetOsEnum.toString(), currentOsEnum.toString(), dockerTarFile.getAbsolutePath())
                 logger.info(msg)
-                bdioFiles = hubDockerManager.generateBdioFromLayerFilesDir(dockerTarFile, layerFilesDir, targetOsEnum)
+                bdioFiles = hubDockerManager.generateBdioFromLayerFilesDir(dockerImageName, dockerTagName, dockerTarFile, layerFilesDir, targetOsEnum)
                 if (bdioFiles.size() == 0) {
                     logger.warn("No BDIO Files generated")
                 } else {
@@ -111,9 +115,6 @@ class Application {
         if(StringUtils.isNotBlank(dockerTar)) {
             dockerTarFile = new File(dockerTar)
         } else if (StringUtils.isNotBlank(dockerImageName)) {
-            if (StringUtils.isBlank(dockerTagName)) {
-                dockerTagName = 'latest'
-            }
             dockerTarFile = hubDockerManager.getTarFileFromDockerImage(dockerImageName, dockerTagName)
         }
         dockerTarFile

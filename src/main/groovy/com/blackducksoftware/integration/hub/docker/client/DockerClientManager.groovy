@@ -76,6 +76,8 @@ class DockerClientManager {
             // Only pull if we dont already have it
             PullImageCmd pull = dockerClient.pullImageCmd("${imageName}").withTag(tagName)
             pull.exec(new PullImageResultCallback()).awaitSuccess()
+        } else{
+            logger.info('Image already pulled')
         }
     }
 

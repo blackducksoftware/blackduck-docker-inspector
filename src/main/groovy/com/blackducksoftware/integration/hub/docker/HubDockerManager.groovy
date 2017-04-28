@@ -4,6 +4,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 import org.apache.commons.io.FileUtils
+import org.apache.commons.lang3.StringUtils
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -28,6 +29,12 @@ class HubDockerManager {
 
     @Value('${linux.distro}')
     String linuxDistro
+
+    @Value('${hub.project.name}')
+    String hubProjectName
+
+    @Value('${hub.project.version}')
+    String hubVersionName
 
     @Autowired
     HubClient hubClient
@@ -65,12 +72,12 @@ class HubDockerManager {
         tarParser.detectOperatingSystemFromEtcDir(new File("/etc"))
     }
 
-    List<File> generateBdioFromLayerFilesDir(File dockerTar, File layerFilesDir, OperatingSystemEnum osEnum) {
+    List<File> generateBdioFromLayerFilesDir(String imageName, String tagName, File dockerTar, File layerFilesDir, OperatingSystemEnum osEnum) {
         TarExtractionResults packageMgrDirs = tarParser.extractPackageManagerDirs(layerFilesDir, osEnum)
         if(packageMgrDirs.operatingSystemEnum == null){
             throw new HubIntegrationException('Could not determine the Operating System of this Docker tar.')
         }
-        generateBdioFromPackageMgrDirs(dockerTar.getName(), packageMgrDirs)
+        generateBdioFromPackageMgrDirs(imageName, tagName, dockerTar.getName(), packageMgrDirs)
     }
 
     void uploadBdioFiles(List<File> bdioFiles){
@@ -90,24 +97,31 @@ class HubDockerManager {
         }
     }
 
-    private List<File> generateBdioFromPackageMgrDirs(String tarFileName, TarExtractionResults tarResults) {
+    private List<File> generateBdioFromPackageMgrDirs(String imageName, String tagName, String tarFileName, TarExtractionResults tarResults) {
         File workingDirectory = new File(workingDirectoryPath)
         // run the package managers
         // extract the bdio from output
         // deploy bdio to the Hub
         def bdioFiles = []
         tarResults.extractionResults.each { extractionResult ->
-            logger.info("${extractionResult.layer}_${extractionResult.extractedPackageManagerDirectory.getAbsolutePath()}")
+            String filePath = extractionResult.extractedPackageManagerDirectory.getAbsolutePath()
+            filePath = filePath.substring(filePath.indexOf(extractionResult.layer) + 1)
+            filePath = filePath.substring(filePath.indexOf('/') + 1)
+            filePath = filePath.replace('/', '_')
             stubPackageManagerFiles(extractionResult)
-            String projectName = "${tarFileName}_${extractionResult.layer}_${extractionResult.packageManager}"
-            String version = DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(LocalDateTime.now())
-            def outputFile = new File(workingDirectory, "${projectName}_${version}_bdio.jsonld")
+            def projectName = getProjectName(imageName, tarFileName)
+            def version = getVersionName(tagName)
+
+            String codeLocationName = "${projectName}_${version}_${extractionResult.layer}_${filePath}_${extractionResult.packageManager}"
+            logger.info(codeLocationName)
+
+            def outputFile = new File(workingDirectory, "${extractionResult.layer}_${filePath}_${projectName}_${version}_bdio.jsonld")
             bdioFiles.add(outputFile)
             new FileOutputStream(outputFile).withStream { outputStream ->
                 BdioWriter writer = new BdioWriter(new Gson(), outputStream)
                 try{
                     Extractor extractor = getExtractorByPackageManager(extractionResult.packageManager)
-                    extractor.extract(writer, tarResults.operatingSystemEnum, projectName, version)
+                    extractor.extract(writer, tarResults.operatingSystemEnum, codeLocationName, projectName, version)
                 }finally{
                     writer.close()
                 }
@@ -115,6 +129,31 @@ class HubDockerManager {
         }
         bdioFiles
     }
+
+    private String getProjectName(String imageName, String tarFileName){
+        def projectName = ''
+        if (StringUtils.isNotBlank(hubProjectName)){
+            projectName = hubProjectName
+        } else if(StringUtils.isNotBlank(imageName)){
+            projectName = "${imageName}_docker"
+        } else {
+            projectName = tarFileName
+        }
+        projectName
+    }
+
+    private String getVersionName(String tagName){
+        def version = ''
+        if (StringUtils.isNotBlank(hubVersionName)){
+            version = hubVersionName
+        } else if(StringUtils.isNotBlank(tagName)){
+            version = tagName
+        } else {
+            version = DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(LocalDateTime.now())
+        }
+        version
+    }
+
 
     private void stubPackageManagerFiles(TarExtractionResult result){
         File packageManagerDirectory = new File(result.packageManager.directory)

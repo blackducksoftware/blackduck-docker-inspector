@@ -45,7 +45,7 @@ class ApkExtractorTest {
         }
         outputFile.getParentFile().mkdirs()
         BdioWriter writer = new BdioWriter(new Gson(), new FileWriter(outputFile))
-        extractor.extract(writer, OperatingSystemEnum.UBUNTU, "Test", "1")
+        extractor.extract(writer, OperatingSystemEnum.UBUNTU, "CodeLocationName", "Test", "1")
         writer.close()
     }
 }
