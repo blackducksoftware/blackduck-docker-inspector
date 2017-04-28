@@ -205,9 +205,10 @@ class DockerTarParser {
             def tarArchiveEntry
             while (null != (tarArchiveEntry = tarArchiveInputStream.getNextTarEntry())) {
                 final File outputFile = new File(outputDir, tarArchiveEntry.getName())
-                if (tarArchiveEntry.isDirectory()) {
-                    outputFile.mkdirs()
-                } else {
+                if (tarArchiveEntry.isFile()) {
+                    if(!outputFile.getParentFile().exists()){
+                        outputFile.getParentFile().mkdirs()
+                    }
                     final OutputStream outputFileStream = new FileOutputStream(outputFile)
                     try{
                         IOUtils.copy(tarArchiveInputStream, outputFileStream)
@@ -251,15 +252,15 @@ class DockerTarParser {
                     } else {
                         final File outputFile = new File(layerOutputDir, layerEntry.getName())
                         if (layerEntry.isFile()) {
+                            if(!outputFile.getParentFile().exists()){
+                                outputFile.getParentFile().mkdirs()
+                            }
                             final OutputStream outputFileStream = new FileOutputStream(outputFile)
                             try{
                                 IOUtils.copy(layerInputStream, outputFileStream)
                             } finally{
                                 outputFileStream.close()
                             }
-                        }
-                        else {
-                            outputFile.mkdirs()
                         }
                     }
                     //   }
