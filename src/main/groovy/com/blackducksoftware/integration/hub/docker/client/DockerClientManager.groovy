@@ -81,7 +81,7 @@ class DockerClientManager {
         }
     }
 
-    void run(String imageName, String tagName, File dockerTarFile, String linuxDistro, boolean copyJar) {
+    void run(String imageName, String tagName, File dockerTarFile, String linuxDistro, boolean copyJar, String projectName, String projectVersion) {
         String imageId = "${imageName}:${tagName}"
         logger.info("Running container based on image ${imageId}")
         String extractorContainerName = "${imageName}-extractor"

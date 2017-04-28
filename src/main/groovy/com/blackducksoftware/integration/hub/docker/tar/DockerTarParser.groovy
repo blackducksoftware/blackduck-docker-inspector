@@ -36,7 +36,7 @@ class DockerTarParser {
 
     File extractDockerLayers(File dockerTar){
         File tarExtractionDirectory = new File(workingDirectory, 'tarExtraction')
-        List<File> layerTars = extractLayerTars(tarExtractionDirectory,dockerTar)
+        List<File> layerTars = extractLayerTars(tarExtractionDirectory, dockerTar)
         File layerFilesDir = new File(tarExtractionDirectory, 'layerFiles')
         layerTars.each { layerTar ->
             def layerName = layerTar.getName()
@@ -48,6 +48,13 @@ class DockerTarParser {
             // parseLayerTarAndExtract(EXTRACTION_PATTERN, layerTar, layerOutputDir)
         }
         layerFilesDir
+    }
+
+    String extractManifestFileContent(String dockerTarName){
+        File tarExtractionDirectory = new File(workingDirectory, 'tarExtraction')
+        File dockerTarDirectory = new File(tarExtractionDirectory, dockerTarName)
+        File manifest = new File(dockerTarDirectory, 'manifest.json')
+        StringUtils.join(manifest.readLines(), '\n')
     }
 
     OperatingSystemEnum detectOperatingSystem(String operatingSystem, File layerFilesDir) {
@@ -200,11 +207,13 @@ class DockerTarParser {
                 final File outputFile = new File(outputDir, tarArchiveEntry.getName())
                 if (tarArchiveEntry.isDirectory()) {
                     outputFile.mkdirs()
-                } else if(tarArchiveEntry.name.contains('layer.tar')){
+                } else {
                     final OutputStream outputFileStream = new FileOutputStream(outputFile)
                     try{
                         IOUtils.copy(tarArchiveInputStream, outputFileStream)
-                        untaredFiles.add(outputFile)
+                        if(tarArchiveEntry.name.contains('layer.tar')){
+                            untaredFiles.add(outputFile)
+                        }
                     } finally{
                         outputFileStream.close()
                     }

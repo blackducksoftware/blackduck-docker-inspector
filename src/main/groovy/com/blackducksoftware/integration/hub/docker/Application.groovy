@@ -13,6 +13,8 @@ import org.springframework.boot.builder.SpringApplicationBuilder
 
 import com.blackducksoftware.integration.hub.docker.client.DockerClientManager
 import com.blackducksoftware.integration.hub.docker.image.DockerImages
+import com.google.gson.JsonArray
+import com.google.gson.JsonParser
 
 @SpringBootApplication
 class Application {
@@ -32,6 +34,12 @@ class Application {
 
     @Value('${dev.mode:false}')
     Boolean devMode
+
+    @Value('${hub.project.name}')
+    String hubProjectName
+
+    @Value('${hub.project.version}')
+    String hubVersionName
 
     @Autowired
     HubClient hubClient
@@ -64,13 +72,10 @@ class Application {
             hubDockerManager.init()
             hubDockerManager.cleanWorkingDirectory()
             def bdioFiles = null
-            if (StringUtils.isBlank(dockerTagName)) {
-                // set default if blank
-                dockerTagName = 'latest'
-            }
             File dockerTarFile = deriveDockerTarFile()
             File layerFilesDir = hubDockerManager.extractDockerLayers(dockerTarFile)
 
+            String[] nameAndVersion = getProjectNameAndVersion(dockerTarFile.getName())
 
             OperatingSystemEnum targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro, layerFilesDir)
             OperatingSystemEnum requiredOsEnum = dockerImages.getDockerImageOs(targetOsEnum)
@@ -79,7 +84,7 @@ class Application {
                 String msg = sprintf("Image inspection for %s can be run in this %s docker container; tarfile: %s",
                         targetOsEnum.toString(), currentOsEnum.toString(), dockerTarFile.getAbsolutePath())
                 logger.info(msg)
-                bdioFiles = hubDockerManager.generateBdioFromLayerFilesDir(dockerImageName, dockerTagName, dockerTarFile, layerFilesDir, targetOsEnum)
+                bdioFiles = hubDockerManager.generateBdioFromLayerFilesDir(nameAndVersion[0], nameAndVersion[1], dockerTarFile, layerFilesDir, targetOsEnum)
                 if (bdioFiles.size() == 0) {
                     logger.warn("No BDIO Files generated")
                 } else {
@@ -101,12 +106,12 @@ class Application {
                             "Unable to pull docker image %s:%s; proceeding anyway since it may already exist locally",
                             runOnImageName, runOnImageVersion))
                 }
-                dockerClientManager.run(runOnImageName, runOnImageVersion, dockerTarFile, linuxDistro, devMode)
+                dockerClientManager.run(runOnImageName, runOnImageVersion, dockerTarFile, linuxDistro, devMode, nameAndVersion[0], nameAndVersion[1])
             }
         } catch (Exception e) {
             logger.error("Error inspecting image: ${e.message}")
             String trace = ExceptionUtils.getStackTrace(e)
-            logger.debug("Stack trace: ${trace}")
+            logger.error("Stack trace: ${trace}")
         }
     }
 
@@ -115,8 +120,34 @@ class Application {
         if(StringUtils.isNotBlank(dockerTar)) {
             dockerTarFile = new File(dockerTar)
         } else if (StringUtils.isNotBlank(dockerImageName)) {
+            if (StringUtils.isBlank(dockerTagName)) {
+                // set default if blank
+                dockerTagName = 'latest'
+            }
             dockerTarFile = hubDockerManager.getTarFileFromDockerImage(dockerImageName, dockerTagName)
         }
         dockerTarFile
     }
+
+    private String[] getProjectNameAndVersion(String tarFileName){
+        String[] nameAndVersion = ['', '']
+        String repoTag = ''
+        if (StringUtils.isNotBlank(hubProjectName)){
+            nameAndVersion[0] = hubProjectName
+        } else {
+            def manifestContentString = hubDockerManager.extractManifestFileContent(tarFileName)
+            JsonParser parser = new JsonParser()
+            def manifestContent = parser.parse(manifestContentString).getAsJsonArray().get(0).getAsJsonObject()
+            JsonArray repoArray = manifestContent.get('RepoTags').getAsJsonArray()
+            repoTag = repoArray.get(0).getAsString()
+            nameAndVersion[0] = repoTag.substring(0, repoTag.indexOf(':'))
+        }
+        if (StringUtils.isNotBlank(hubVersionName)){
+            nameAndVersion[1] = hubVersionName
+        } else {
+            nameAndVersion[1] = repoTag.substring(repoTag.indexOf(':') + 1)
+        }
+        nameAndVersion
+    }
+
 }
