@@ -1,5 +1,8 @@
 package com.blackducksoftware.integration.hub.docker
 
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
 import javax.annotation.PostConstruct
 
 import org.apache.commons.lang.exception.ExceptionUtils
@@ -75,7 +78,7 @@ class Application {
             File dockerTarFile = deriveDockerTarFile()
             File layerFilesDir = hubDockerManager.extractDockerLayers(dockerTarFile)
 
-            String[] nameAndVersion = getProjectNameAndVersion(dockerTarFile.getName())
+            getProjectNameAndVersion(dockerTarFile.getName())
 
             OperatingSystemEnum targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro, layerFilesDir)
             OperatingSystemEnum requiredOsEnum = dockerImages.getDockerImageOs(targetOsEnum)
@@ -84,7 +87,7 @@ class Application {
                 String msg = sprintf("Image inspection for %s can be run in this %s docker container; tarfile: %s",
                         targetOsEnum.toString(), currentOsEnum.toString(), dockerTarFile.getAbsolutePath())
                 logger.info(msg)
-                bdioFiles = hubDockerManager.generateBdioFromLayerFilesDir(nameAndVersion[0], nameAndVersion[1], dockerTarFile, layerFilesDir, targetOsEnum)
+                bdioFiles = hubDockerManager.generateBdioFromLayerFilesDir(hubProjectName, hubVersionName, dockerTarFile, layerFilesDir, targetOsEnum)
                 if (bdioFiles.size() == 0) {
                     logger.warn("No BDIO Files generated")
                 } else {
@@ -106,7 +109,7 @@ class Application {
                             "Unable to pull docker image %s:%s; proceeding anyway since it may already exist locally",
                             runOnImageName, runOnImageVersion))
                 }
-                dockerClientManager.run(runOnImageName, runOnImageVersion, dockerTarFile, linuxDistro, devMode, nameAndVersion[0], nameAndVersion[1])
+                dockerClientManager.run(runOnImageName, runOnImageVersion, dockerTarFile, linuxDistro, devMode, hubProjectName, hubVersionName)
             }
         } catch (Exception e) {
             logger.error("Error inspecting image: ${e.message}")
@@ -129,25 +132,34 @@ class Application {
         dockerTarFile
     }
 
-    private String[] getProjectNameAndVersion(String tarFileName){
-        String[] nameAndVersion = ['', '']
-        String repoTag = ''
-        if (StringUtils.isNotBlank(hubProjectName)){
-            nameAndVersion[0] = hubProjectName
-        } else {
-            def manifestContentString = hubDockerManager.extractManifestFileContent(tarFileName)
-            JsonParser parser = new JsonParser()
-            def manifestContent = parser.parse(manifestContentString).getAsJsonArray().get(0).getAsJsonObject()
-            JsonArray repoArray = manifestContent.get('RepoTags').getAsJsonArray()
-            repoTag = repoArray.get(0).getAsString()
-            nameAndVersion[0] = repoTag.substring(0, repoTag.indexOf(':'))
+    private void getProjectNameAndVersion(String tarFileName){
+        if (StringUtils.isBlank(hubProjectName) || StringUtils.isBlank(hubVersionName) ){
+            try{
+                def manifestContentString = hubDockerManager.extractManifestFileContent(tarFileName)
+                JsonParser parser = new JsonParser()
+                def manifestContent = parser.parse(manifestContentString).getAsJsonArray().get(0).getAsJsonObject()
+                JsonArray repoArray = manifestContent.get('RepoTags').getAsJsonArray()
+                def repoTag = repoArray.get(0).getAsString()
+                if(StringUtils.isBlank(hubProjectName)){
+                    hubProjectName  = repoTag.substring(0, repoTag.indexOf(':'))
+                }
+                if(StringUtils.isBlank(hubVersionName)){
+                    hubVersionName  = repoTag.substring(repoTag.indexOf(':') + 1)
+                }
+            } catch (Exception e){
+                logger.error("Could not parse the image manifest file : ${e.toString()}")
+                if(StringUtils.isNotBlank(dockerImageName)){
+                    hubProjectName = dockerImageName
+                } else {
+                    hubProjectName = tarFileName
+                }
+                if(StringUtils.isNotBlank(dockerTagName)){
+                    hubVersionName = dockerTagName
+                } else {
+                    hubVersionName = DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(LocalDateTime.now())
+                }
+            }
         }
-        if (StringUtils.isNotBlank(hubVersionName)){
-            nameAndVersion[1] = hubVersionName
-        } else {
-            nameAndVersion[1] = repoTag.substring(repoTag.indexOf(':') + 1)
-        }
-        nameAndVersion
     }
 
 }
