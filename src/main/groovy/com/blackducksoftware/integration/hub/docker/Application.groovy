@@ -16,7 +16,11 @@ import org.springframework.boot.builder.SpringApplicationBuilder
 
 import com.blackducksoftware.integration.hub.docker.client.DockerClientManager
 import com.blackducksoftware.integration.hub.docker.image.DockerImages
+import com.blackducksoftware.integration.hub.docker.tar.LayerMapping
+import com.blackducksoftware.integration.hub.docker.tar.manifest.ImageInfo
+import com.google.gson.Gson
 import com.google.gson.JsonArray
+import com.google.gson.JsonElement
 import com.google.gson.JsonParser
 
 @SpringBootApplication
@@ -69,6 +73,21 @@ class Application {
             try {
                 hubClient.testHubConnection()
                 logger.info 'Your Hub configuration is valid and a successful connection to the Hub was established.'
+
+                //                URL url = new URL(hubClient.hubUrl)
+                //                String javaHome = System.getProperty('java.home')
+                //                logger.info("${javaHome}/lib/security/jssecacerts")
+                //                logger.info("${url.getHost()}")
+                //
+                //                def standardOut = new StringBuilder()
+                //                def standardError = new StringBuilder()
+                //                String command = "keytool -printcert -rfc -sslserver ${url.getHost()} | keytool -importcert -keystore \"${javaHome}/lib/security/jssecacerts\" -storepass changeit -alias ${url.getHost()} -noprompt"
+                //                Process proc = command.execute()
+                //                proc.consumeProcessOutput(standardOut, standardError)
+                //                proc.waitForOrKill(10000)
+                //                logger.info(standardOut.toString())
+                //                logger.error(standardError.toString())
+                //                logger.info('EXIT CODE ' +proc.exitValue())
             } catch (Exception e) {
                 logger.error("Your Hub configuration is not valid: ${e.message}")
             }
@@ -76,9 +95,11 @@ class Application {
             hubDockerManager.cleanWorkingDirectory()
             def bdioFiles = null
             File dockerTarFile = deriveDockerTarFile()
-            File layerFilesDir = hubDockerManager.extractDockerLayers(dockerTarFile)
 
-            getProjectNameAndVersion(dockerTarFile.getName())
+            List<File> layerTars = hubDockerManager.extractLayerTars(dockerTarFile)
+            List<LayerMapping> layerMappings = getLayerMappings(dockerTarFile.getName())
+            File layerFilesDir = hubDockerManager.extractDockerLayers(layerTars, layerMappings)
+
 
             OperatingSystemEnum targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro, layerFilesDir)
             OperatingSystemEnum requiredOsEnum = dockerImages.getDockerImageOs(targetOsEnum)
@@ -87,7 +108,7 @@ class Application {
                 String msg = sprintf("Image inspection for %s can be run in this %s docker container; tarfile: %s",
                         targetOsEnum.toString(), currentOsEnum.toString(), dockerTarFile.getAbsolutePath())
                 logger.info(msg)
-                bdioFiles = hubDockerManager.generateBdioFromLayerFilesDir(hubProjectName, hubVersionName, dockerTarFile, layerFilesDir, targetOsEnum)
+                bdioFiles = hubDockerManager.generateBdioFromLayerFilesDir(layerMappings, hubProjectName, hubVersionName, dockerTarFile, layerFilesDir, targetOsEnum)
                 if (bdioFiles.size() == 0) {
                     logger.warn("No BDIO Files generated")
                 } else {
@@ -132,34 +153,47 @@ class Application {
         dockerTarFile
     }
 
-    private void getProjectNameAndVersion(String tarFileName){
-        if (StringUtils.isBlank(hubProjectName) || StringUtils.isBlank(hubVersionName) ){
-            try{
-                def manifestContentString = hubDockerManager.extractManifestFileContent(tarFileName)
-                JsonParser parser = new JsonParser()
-                def manifestContent = parser.parse(manifestContentString).getAsJsonArray().get(0).getAsJsonObject()
-                JsonArray repoArray = manifestContent.get('RepoTags').getAsJsonArray()
-                def repoTag = repoArray.get(0).getAsString()
-                if(StringUtils.isBlank(hubProjectName)){
-                    hubProjectName  = repoTag.substring(0, repoTag.indexOf(':'))
+    private List<LayerMapping> getLayerMappings(String tarFileName){
+        List<LayerMapping> mappings = new ArrayList<>()
+        try {
+            List<ImageInfo> images = getManifestContents(tarFileName)
+            for(ImageInfo image : images) {
+                LayerMapping mapping = new LayerMapping()
+                def (imageName, tagName) = image.repoTags.get(0).split(':')
+                logger.info("Image ${imageName} , Tag ${tagName}")
+                mapping.imageName =  imageName
+                mapping.tagName = tagName
+                for(String layer : image.layers){
+                    mapping.layers.add(layer.substring(0, layer.indexOf('/')))
                 }
-                if(StringUtils.isBlank(hubVersionName)){
-                    hubVersionName  = repoTag.substring(repoTag.indexOf(':') + 1)
-                }
-            } catch (Exception e){
-                logger.error("Could not parse the image manifest file : ${e.toString()}")
-                if(StringUtils.isNotBlank(dockerImageName)){
-                    hubProjectName = dockerImageName
+                if (StringUtils.isNotBlank(dockerImageName)) {
+                    if(StringUtils.compare(imageName, dockerImageName) == 0){
+                        mappings.add(mapping)
+                    }
                 } else {
-                    hubProjectName = tarFileName
-                }
-                if(StringUtils.isNotBlank(dockerTagName)){
-                    hubVersionName = dockerTagName
-                } else {
-                    hubVersionName = DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(LocalDateTime.now())
+                    mappings.add(mapping)
                 }
             }
+        } catch (Exception e) {
+            logger.error("Could not parse the image manifest file : ${e.toString()}")
+            LayerMapping mapping = new LayerMapping()
+            mapping.imageName =  tarFileName
+            mapping.tagName = DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(LocalDateTime.now())
+            mappings.add(mapping)
         }
+        mappings
+    }
+
+    private List<ImageInfo> getManifestContents(String tarFileName){
+        List<ImageInfo> images = new ArrayList<>()
+        def manifestContentString = hubDockerManager.extractManifestFileContent(tarFileName)
+        JsonParser parser = new JsonParser()
+        JsonArray manifestContent = parser.parse(manifestContentString).getAsJsonArray()
+        Gson gson = new Gson()
+        for(JsonElement element : manifestContent){
+            images.add(gson.fromJson(element, ImageInfo.class))
+        }
+        images
     }
 
 }
