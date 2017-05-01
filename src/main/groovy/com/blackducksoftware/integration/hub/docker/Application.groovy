@@ -114,7 +114,7 @@ class Application {
         } catch (Exception e) {
             logger.error("Error inspecting image: ${e.message}")
             String trace = ExceptionUtils.getStackTrace(e)
-            logger.error("Stack trace: ${trace}")
+            logger.debug("Stack trace: ${trace}")
         }
     }
 
