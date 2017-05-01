@@ -149,11 +149,18 @@ class DockerClientManager {
         ExecCreateCmd execCreateCmd = dockerClient.execCreateCmd(containerId)
                 .withAttachStdout(true)
                 .withAttachStderr(true)
-        if (!StringUtils.isBlank(linuxDistro)) {
-            execCreateCmd.withCmd(cmd, arg, "--linux.distro=${linuxDistro}", "--hub.project.name=${hubProjectName}", "--hub.project.version=${hubProjectVersion}")
-        } else {
-            execCreateCmd.withCmd(cmd, arg, "--hub.project.name=${hubProjectName}", "--hub.project.version=${hubProjectVersion}")
+        List<String> commands = [cmd, arg]
+        if (StringUtils.isNotBlank(linuxDistro)) {
+            commands.add("--linux.distro=${linuxDistro}")
         }
+        if(StringUtils.isNotBlank(hubProjectName)) {
+            commands.add("--hub.project.name=${hubProjectName}")
+        }
+        if(StringUtils.isNotBlank(hubProjectVersion)) {
+            commands.add("--hub.project.version=${hubProjectVersion}")
+        }
+        String[] cmdArr = commands.toArray()
+        execCreateCmd.withCmd(cmdArr)
         ExecCreateCmdResponse execCreateCmdResponse = execCreateCmd.exec()
         dockerClient.execStartCmd(execCreateCmdResponse.getId()).exec(
                 new ExecStartResultCallback(System.out, System.err)).awaitCompletion()
