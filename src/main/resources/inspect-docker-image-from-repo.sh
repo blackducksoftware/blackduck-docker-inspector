@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-# This script (copied to the Docker container hub-docker will run in)
-# makes it easier to invoke hub-docker (especially from outside the container).
+# This script (copied to the Docker container hub-inspector will run in)
+# makes it easier to invoke hub-inspector (especially from outside the container).
 #
 #
 if [ $# -lt 1 ]
@@ -30,12 +30,12 @@ then
 	shift
 fi
 
-cd /opt/blackduck/hub-docker
+cd /opt/blackduck/hub-inspector
 if [[ -z $imageVersion ]]
 then
-	cmd="java -jar hub-docker-*.jar --working.directory=/opt/blackduck/hub-docker/working --docker.image.name=$imageName $*"
+	cmd="java -jar hub-docker-*.jar --working.directory=/opt/blackduck/hub-inspector/working --docker.image.name=$imageName $*"
 else
-	cmd="java -jar hub-docker-*.jar --working.directory=/opt/blackduck/hub-docker/working --docker.image.name=$imageName --docker.tag.name=$imageVersion $*"
+	cmd="java -jar hub-docker-*.jar --working.directory=/opt/blackduck/hub-inspector/working --docker.image.name=$imageName --docker.tag.name=$imageVersion $*"
 fi
 
 echo "executing: $cmd"

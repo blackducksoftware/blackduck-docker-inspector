@@ -35,6 +35,8 @@ import com.github.dockerjava.core.command.PullImageResultCallback
 
 @Component
 class DockerClientManager {
+
+    private static final String INSPECTOR_COMMAND = "inspect-docker-image-tar.sh"
     private final Logger logger = LoggerFactory.getLogger(DockerClientManager.class)
 
     @Autowired
@@ -137,7 +139,7 @@ class DockerClientManager {
             copyFileToContainer(dockerClient, containerId, programPaths.getHubDockerJarPath(), programPaths.getHubDockerPgmDirPath());
         }
 
-        String cmd = programPaths.getHubDockerPgmDirPath() + "scan-docker-image-tar.sh"
+        String cmd = programPaths.getHubDockerPgmDirPath() + INSPECTOR_COMMAND
         execCommandInContainer(dockerClient, imageId, containerId, cmd, tarFilePathInSubContainer, linuxDistro,
                 hubProjectName, hubProjectVersion)
     }

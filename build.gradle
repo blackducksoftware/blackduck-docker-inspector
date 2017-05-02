@@ -24,6 +24,7 @@ tasks.withType(GroovyCompile) { options.encoding = 'UTF-8' }
 group = 'com.blackducksoftware.integration'
 version = '0.0.1-SNAPSHOT'
 description = ''
+String hubDockerImageName = 'hub-inspector'
 String hubDockerImageVersion = '0.0.1'
 
 sourceCompatibility = 1.8
@@ -63,7 +64,7 @@ task createAddZipTasks() {
         println "linuxFlavorDirName: ${linuxFlavorDirName}"
         task "addFinalZipTo${linuxFlavorDirName}ImageBuildDir"(type: Copy, dependsOn: produceFinalZip) {
             def zipFile = file("${buildDir}/distributions/${project.name}-${version}.zip")
-            def outputDir = file("${buildDir}/images/${linuxFlavorDirName}/${project.name}")
+            def outputDir = file("${buildDir}/images/${linuxFlavorDirName}/${hubDockerImageName}")
             from zipTree(zipFile)
             into outputDir
         }
@@ -74,12 +75,12 @@ task createAddBashScriptTasks() {
     linuxFlavors.eachWithIndex {linuxFlavor, index ->
         String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
         task "addBashScriptTarTo${linuxFlavorDirName}ImageBuildDir"(type: Copy, dependsOn: build) {
-            from 'src/main/resources/scan-docker-image-tar.sh'
-            into "${buildDir}/images/${linuxFlavorDirName}/${project.name}"
+            from 'src/main/resources/inspect-docker-image-tar.sh'
+            into "${buildDir}/images/${linuxFlavorDirName}/${hubDockerImageName}"
         }
         task "addBashScriptRepoTo${linuxFlavorDirName}ImageBuildDir"(type: Copy, dependsOn: build) {
-            from 'src/main/resources/scan-docker-image-from-repo.sh'
-            into "${buildDir}/images/${linuxFlavorDirName}/${project.name}"
+            from 'src/main/resources/inspect-docker-image-from-repo.sh'
+            into "${buildDir}/images/${linuxFlavorDirName}/${hubDockerImageName}"
         }
     }
 }
@@ -88,7 +89,7 @@ task createApkDockerfileTasks() {
     linuxFlavorsApk.eachWithIndex {linuxFlavor, index ->
         String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
         task "create${linuxFlavorDirName}Dockerfile"(type: Dockerfile) {
-            destFile = project.file("${buildDir}/images/${linuxFlavorDirName}/${project.name}/Dockerfile")
+            destFile = project.file("${buildDir}/images/${linuxFlavorDirName}/${hubDockerImageName}/Dockerfile")
             println "destFile: ${destFile}"
             from linuxFlavor
             maintainer 'Black Duck Software'
@@ -104,9 +105,9 @@ task createApkDockerfileTasks() {
             runCommand "mkdir ${hubDockerPgmDir}/working"
             runCommand "mkdir ${hubDockerPgmDir}/target"
             addFile('config', "${hubDockerPgmDir}/config")
-            addFile("${project.name}-${version}.jar", "/opt/blackduck/${project.name}")
-            addFile("scan-docker-image-tar.sh", "/opt/blackduck/${project.name}")
-            addFile("scan-docker-image-from-repo.sh", "/opt/blackduck/${project.name}")
+            addFile("${project.name}-${version}.jar", "/opt/blackduck/${hubDockerImageName}")
+            addFile("inspect-docker-image-tar.sh", "/opt/blackduck/${hubDockerImageName}")
+            addFile("inspect-docker-image-from-repo.sh", "/opt/blackduck/${hubDockerImageName}")
             runCommand "chmod u+x ${hubDockerPgmDir}/*.sh"
         }
     }
@@ -116,7 +117,7 @@ task createYumDockerfileTasks() {
     linuxFlavorsYum.eachWithIndex {linuxFlavor, index ->
         String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
         task "create${linuxFlavorDirName}Dockerfile"(type: Dockerfile) {
-            destFile = project.file("${buildDir}/images/${linuxFlavorDirName}/${project.name}/Dockerfile")
+            destFile = project.file("${buildDir}/images/${linuxFlavorDirName}/${hubDockerImageName}/Dockerfile")
             println "destFile: ${destFile}"
             from linuxFlavor
             maintainer 'Black Duck Software'
@@ -130,9 +131,9 @@ task createYumDockerfileTasks() {
             runCommand "mkdir ${hubDockerPgmDir}/working"
             runCommand "mkdir ${hubDockerPgmDir}/target"
             addFile('config', "${hubDockerPgmDir}/config")
-            addFile("${project.name}-${version}.jar", "/opt/blackduck/${project.name}")
-            addFile("scan-docker-image-tar.sh", "/opt/blackduck/${project.name}")
-            addFile("scan-docker-image-from-repo.sh", "/opt/blackduck/${project.name}")
+            addFile("${project.name}-${version}.jar", "/opt/blackduck/${hubDockerImageName}")
+            addFile("inspect-docker-image-tar.sh", "/opt/blackduck/${hubDockerImageName}")
+            addFile("inspect-docker-image-from-repo.sh", "/opt/blackduck/${hubDockerImageName}")
             runCommand "chmod u+x ${hubDockerPgmDir}/*.sh"
         }
     }
@@ -142,7 +143,7 @@ task createAptDockerfileTasks() {
     linuxFlavorsApt.eachWithIndex {linuxFlavor, index ->
         String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
         task "create${linuxFlavorDirName}Dockerfile"(type: Dockerfile) {
-            destFile = project.file("${buildDir}/images/${linuxFlavorDirName}/${project.name}/Dockerfile")
+            destFile = project.file("${buildDir}/images/${linuxFlavorDirName}/${hubDockerImageName}/Dockerfile")
             println "destFile: ${destFile}"
             from linuxFlavor
             maintainer 'Black Duck Software'
@@ -160,9 +161,9 @@ task createAptDockerfileTasks() {
             runCommand "mkdir ${hubDockerPgmDir}/working"
             runCommand "mkdir ${hubDockerPgmDir}/target"
             addFile('config', "${hubDockerPgmDir}/config")
-            addFile("${project.name}-${version}.jar", "/opt/blackduck/${project.name}")
-            addFile("scan-docker-image-tar.sh", "/opt/blackduck/${project.name}")
-            addFile("scan-docker-image-from-repo.sh", "/opt/blackduck/${project.name}")
+            addFile("${project.name}-${version}.jar", "/opt/blackduck/${hubDockerImageName}")
+            addFile("inspect-docker-image-tar.sh", "/opt/blackduck/${hubDockerImageName}")
+            addFile("inspect-docker-image-from-repo.sh", "/opt/blackduck/${hubDockerImageName}")
             runCommand "chmod u+x ${hubDockerPgmDir}/*.sh"
         }
     }
@@ -179,18 +180,23 @@ task createBuildDockerImageTasks() {
     linuxFlavors.eachWithIndex {linuxFlavor, index ->
         String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
         def taskName = "buildDockerImage_${linuxFlavorDirName}"
+        String suffix = getSuffix(linuxFlavorDirName)
         println "creating task ${taskName}"
         task "${taskName}"(type: Exec, dependsOn: [buildImageDirs]) {
-            commandLine "docker", "build", "--tag", "${project.name}-${linuxFlavorDirName}:${hubDockerImageVersion}", "${buildDir}/images/${linuxFlavorDirName}/${project.name}"
+            commandLine "docker", "build", "--tag", "${hubDockerImageName}${suffix}:${hubDockerImageVersion}", "${buildDir}/images/${linuxFlavorDirName}/${hubDockerImageName}"
         }
     }
 }
 
-task buildDockerImages(dependsOn: [buildDockerImage_ubuntu, buildDockerImage_centos, buildDockerImage_alpine]) {
+private String getSuffix(String linuxFlavorName) {
+    String suffix = ''
+    if (!linuxFlavorName.equals("ubuntu")) {
+        suffix = "-${linuxFlavorName}"
+    }
+    suffix
 }
 
-task temp(dependsOn: buildDockerImage_ubuntu) {
-
+task buildDockerImages(dependsOn: [buildDockerImage_ubuntu, buildDockerImage_centos, buildDockerImage_alpine]) {
 }
 
 repositories {
