@@ -1,5 +1,6 @@
 package com.blackducksoftware.integration.hub.docker
 
+import org.apache.commons.lang3.StringUtils
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
@@ -42,6 +43,9 @@ class HubClient {
     @Value('${hub.proxy.password}')
     String hubProxyPassword
 
+    @Value('${command.timeout}')
+    long commandTimeout
+
     boolean isValid() {
         createBuilder().isValid()
     }
@@ -80,5 +84,51 @@ class HubClient {
         hubServerConfigBuilder.proxyPassword = hubProxyPassword
 
         hubServerConfigBuilder
+    }
+
+
+    File retrieveHttpsCertificate(){
+        File certificateFile = new File('certificate.txt')
+        URL url = new URL(hubUrl)
+        String certificate = ''
+        def standardOut = new StringBuilder()
+        def standardError = new StringBuilder()
+        String command = "keytool -printcert -rfc -sslserver ${url.getHost()}"
+        Process proc = command.execute()
+        proc.consumeProcessOutput(standardOut, standardError)
+        proc.waitForOrKill(commandTimeout)
+        certificate = standardOut.toString()
+        logger.info("Retrieving the certificate from ${url.getHost()}")
+        logger.debug(certificate)
+        def error = standardError.toString()
+        if(StringUtils.isNotBlank(error)){
+            logger.warn(standardError.toString())
+        }
+        logger.debug("Exit code ${proc.exitValue()}")
+        certificateFile.write(certificate)
+        certificateFile
+    }
+
+    void importHttpsCertificate(File certificate){
+        URL url = new URL(hubUrl)
+
+        String javaHome = System.getProperty('java.home')
+        File jssecacerts = new File("${javaHome}")
+        jssecacerts = new File(jssecacerts, "lib")
+        jssecacerts = new File(jssecacerts, "security")
+        jssecacerts = new File(jssecacerts, "jssecacerts")
+
+        def standardOut = new StringBuilder()
+        def standardError = new StringBuilder()
+
+        String command = "keytool -importcert -keystore ${jssecacerts.getAbsolutePath()} -storepass changeit -alias ${url.getHost()} -noprompt -file ${certificate.getAbsolutePath()}"
+        logger.info(command)
+        Process proc = command.execute()
+        proc.consumeProcessOutput(standardOut, standardError)
+        proc.waitForOrKill(commandTimeout)
+        logger.info("Importing the certificate from ${certificate.getAbsolutePath()}")
+        logger.debug(standardOut.toString())
+        logger.warn(standardError.toString())
+        logger.info("Exit code ${proc.exitValue()}")
     }
 }

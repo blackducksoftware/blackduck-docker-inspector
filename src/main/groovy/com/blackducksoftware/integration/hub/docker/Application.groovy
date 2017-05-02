@@ -76,43 +76,6 @@ class Application {
             } catch (Exception e) {
                 logger.error("Your Hub configuration is not valid: ${e.message}")
 
-                //                URL url = new URL(hubClient.hubUrl)
-                //                String javaHome = System.getProperty('java.home')
-                //                logger.info("${javaHome}/lib/security/jssecacerts")
-                //                logger.info("${url.getHost()}")
-                //
-                //                String certificate = ''
-                //
-                //                def standardOut = new StringBuilder()
-                //                def standardError = new StringBuilder()
-                //                String command = "keytool -printcert -rfc -sslserver ${url.getHost()}"
-                //                Process proc = command.execute()
-                //                proc.consumeProcessOutput(standardOut, standardError)
-                //                proc.waitForOrKill(10000)1
-                //                certificate = standardOut.toString()
-                //                logger.info(certificate)
-                //                logger.error(standardError.toString())
-                //                logger.info('EXIT CODE ' +proc.exitValue())
-                //
-                //                File certFile = new File('cert.txt')
-                //                certFile.write(certificate)
-                //                File jssecacerts = new File("${javaHome}")
-                //                jssecacerts = new File(jssecacerts, "lib")
-                //                jssecacerts = new File(jssecacerts, "security")
-                //                jssecacerts = new File(jssecacerts, "jssecacerts")
-                //
-                //                standardOut = new StringBuilder()
-                //                standardError = new StringBuilder()
-                //
-                //                command = "keytool -importcert -keystore ${jssecacerts.getAbsolutePath()} -storepass changeit -alias ${url.getHost()} -noprompt -file ${certFile.getAbsolutePath()}"
-                //                logger.info(command)
-                //                proc = command.execute()
-                //                proc.consumeProcessOutput(standardOut, standardError)
-                //                proc.waitForOrKill(10000)
-                //                logger.info(standardOut.toString())
-                //                logger.error(standardError.toString())
-                //                logger.info('EXIT CODE ' +proc.exitValue())
-                //
                 //                try {
                 //                    hubClient.testHubConnection()
                 //                    logger.info 'Your Hub configuration is valid and a successful connection to the Hub was established.'
@@ -145,8 +108,8 @@ class Application {
                 }
             } else {
                 //TODO remove the prefix before release. Only used for testing pulling from our internal Artifactory
-                // String runOnImageName = "int-docker-repo.docker-repo/${dockerImages.getDockerImageName(targetOsEnum)}"
-                String runOnImageName = dockerImages.getDockerImageName(targetOsEnum)
+                String runOnImageName = "int-docker-repo.docker-repo/${dockerImages.getDockerImageName(targetOsEnum)}"
+                // String runOnImageName = dockerImages.getDockerImageName(targetOsEnum)
                 String runOnImageVersion = dockerImages.getDockerImageVersion(targetOsEnum)
                 String msg = sprintf("Image inspection for %s should not be run in this %s docker container; will use docker image %s:%s",
                         targetOsEnum.toString(), currentOsEnum.toString(),
@@ -188,6 +151,12 @@ class Application {
             List<ImageInfo> images = getManifestContents(tarFileName)
             for(ImageInfo image : images) {
                 LayerMapping mapping = new LayerMapping()
+
+                def specifiedRepoTag = ''
+                if (StringUtils.isNotBlank(dockerImageName)) {
+                    specifiedRepoTag = "${dockerImageName}:${dockerTagName}"
+                }
+
                 def (imageName, tagName) = image.repoTags.get(0).split(':')
                 logger.info("Image ${imageName} , Tag ${tagName}")
                 mapping.imageName =  imageName
@@ -196,11 +165,7 @@ class Application {
                     mapping.layers.add(layer.substring(0, layer.indexOf('/')))
                 }
                 if (StringUtils.isNotBlank(dockerImageName)) {
-                    if(StringUtils.isNotBlank(dockerTagName)){
-                        if(StringUtils.compare(imageName, dockerImageName) == 0 && StringUtils.compare(tagName, dockerTagName) == 0){
-                            mappings.add(mapping)
-                        }
-                    } else if(StringUtils.compare(imageName, dockerImageName) == 0){
+                    if(StringUtils.compare(imageName, dockerImageName) == 0 && StringUtils.compare(tagName, dockerTagName) == 0){
                         mappings.add(mapping)
                     }
                 } else {
