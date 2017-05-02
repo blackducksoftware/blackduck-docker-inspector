@@ -243,8 +243,7 @@ class DockerTarParser {
             while (null != (layerEntry = layerInputStream.getNextTarEntry())) {
                 try{
                     // if(shouldExtractEntry(extractionPattern, layerEntry.name)){
-                    if(layerEntry.isSymbolicLink()){
-                        logger.trace("${layerEntry.name} is a symbolic link")
+                    if(layerEntry.isSymbolicLink() || layerEntry.isLink()){
                         Path startLink = Paths.get(layerOutputDir.getAbsolutePath(), layerEntry.getName())
                         Path endLink = null
                         String linkPath = layerEntry.getLinkName()
@@ -255,8 +254,13 @@ class DockerTarParser {
                             endLink = Paths.get(layerOutputDir.getAbsolutePath(), layerEntry.getLinkName())
                             endLink = endLink.normalize()
                         }
-                        Files.createSymbolicLink(startLink, endLink)
-
+                        if(layerEntry.isSymbolicLink()){
+                            logger.debug("${layerEntry.name} is a symbolic link")
+                            Files.createSymbolicLink(startLink, endLink)
+                        } else if(layerEntry.isLink()){
+                            logger.debug("${layerEntry.name} is a hard link")
+                            Files.createLink(startLink, endLink)
+                        }
                     } else {
                         final File outputFile = new File(layerOutputDir, layerEntry.getName())
                         if (layerEntry.isFile()) {
@@ -269,6 +273,8 @@ class DockerTarParser {
                             } finally{
                                 outputFileStream.close()
                             }
+                        } else {
+                            outputFile.mkdirs()
                         }
                     }
                     //   }
