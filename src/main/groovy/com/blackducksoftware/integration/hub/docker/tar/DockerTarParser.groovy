@@ -244,7 +244,7 @@ class DockerTarParser {
                 try{
                     // if(shouldExtractEntry(extractionPattern, layerEntry.name)){
                     if(layerEntry.isSymbolicLink()){
-                        logger.debug("${layerEntry.name} is a symbolic link")
+                        logger.trace("${layerEntry.name} is a symbolic link")
                         Path startLink = Paths.get(layerOutputDir.getAbsolutePath(), layerEntry.getName())
                         Path endLink = null
                         String linkPath = layerEntry.getLinkName()

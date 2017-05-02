@@ -23,7 +23,7 @@ class ProgramPaths {
     @Value('${install.dir}')
     String hubDockerPgmDirPath
 
-    private static final String DEFAULT_PGM_DIR = "/opt/blackduck/hub-docker"
+    private static final String DEFAULT_PGM_DIR = "/opt/blackduck/hub-inspector"
 
     private final Logger logger = LoggerFactory.getLogger(ProgramPaths.class)
 
@@ -52,7 +52,10 @@ class ProgramPaths {
                 .getCodeSource()
                 .getLocation()
                 .getPath()).getAbsolutePath()
-        int startIndex = qualifiedJarPathString.indexOf("${hubDockerPgmDirPath}hub-docker-")
+        logger.debug("qualifiedJarPathString: ${qualifiedJarPathString}")
+        String prefix = "${hubDockerPgmDirPath}hub-docker-"
+        logger.debug("prefix: ${prefix}")
+        int startIndex = qualifiedJarPathString.indexOf(prefix)
         int endIndex = qualifiedJarPathString.indexOf(".jar") + ".jar".length()
         hubDockerJarPath = qualifiedJarPathString.substring(startIndex, endIndex)
 
