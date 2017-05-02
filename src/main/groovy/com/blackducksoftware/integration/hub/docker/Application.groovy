@@ -73,23 +73,52 @@ class Application {
             try {
                 hubClient.testHubConnection()
                 logger.info 'Your Hub configuration is valid and a successful connection to the Hub was established.'
+            } catch (Exception e) {
+                logger.error("Your Hub configuration is not valid: ${e.message}")
 
                 //                URL url = new URL(hubClient.hubUrl)
                 //                String javaHome = System.getProperty('java.home')
                 //                logger.info("${javaHome}/lib/security/jssecacerts")
                 //                logger.info("${url.getHost()}")
                 //
+                //                String certificate = ''
+                //
                 //                def standardOut = new StringBuilder()
                 //                def standardError = new StringBuilder()
-                //                String command = "keytool -printcert -rfc -sslserver ${url.getHost()} | keytool -importcert -keystore \"${javaHome}/lib/security/jssecacerts\" -storepass changeit -alias ${url.getHost()} -noprompt"
+                //                String command = "keytool -printcert -rfc -sslserver ${url.getHost()}"
                 //                Process proc = command.execute()
+                //                proc.consumeProcessOutput(standardOut, standardError)
+                //                proc.waitForOrKill(10000)1
+                //                certificate = standardOut.toString()
+                //                logger.info(certificate)
+                //                logger.error(standardError.toString())
+                //                logger.info('EXIT CODE ' +proc.exitValue())
+                //
+                //                File certFile = new File('cert.txt')
+                //                certFile.write(certificate)
+                //                File jssecacerts = new File("${javaHome}")
+                //                jssecacerts = new File(jssecacerts, "lib")
+                //                jssecacerts = new File(jssecacerts, "security")
+                //                jssecacerts = new File(jssecacerts, "jssecacerts")
+                //
+                //                standardOut = new StringBuilder()
+                //                standardError = new StringBuilder()
+                //
+                //                command = "keytool -importcert -keystore ${jssecacerts.getAbsolutePath()} -storepass changeit -alias ${url.getHost()} -noprompt -file ${certFile.getAbsolutePath()}"
+                //                logger.info(command)
+                //                proc = command.execute()
                 //                proc.consumeProcessOutput(standardOut, standardError)
                 //                proc.waitForOrKill(10000)
                 //                logger.info(standardOut.toString())
                 //                logger.error(standardError.toString())
                 //                logger.info('EXIT CODE ' +proc.exitValue())
-            } catch (Exception e) {
-                logger.error("Your Hub configuration is not valid: ${e.message}")
+                //
+                //                try {
+                //                    hubClient.testHubConnection()
+                //                    logger.info 'Your Hub configuration is valid and a successful connection to the Hub was established.'
+                //                } catch (Exception e1) {
+                //                    logger.error("Your Hub configuration is not valid: ${e1.message}")
+                //                }
             }
             hubDockerManager.init()
             hubDockerManager.cleanWorkingDirectory()
@@ -167,7 +196,11 @@ class Application {
                     mapping.layers.add(layer.substring(0, layer.indexOf('/')))
                 }
                 if (StringUtils.isNotBlank(dockerImageName)) {
-                    if(StringUtils.compare(imageName, dockerImageName) == 0){
+                    if(StringUtils.isNotBlank(dockerTagName)){
+                        if(StringUtils.compare(imageName, dockerImageName) == 0 && StringUtils.compare(tagName, dockerTagName) == 0){
+                            mappings.add(mapping)
+                        }
+                    } else if(StringUtils.compare(imageName, dockerImageName) == 0){
                         mappings.add(mapping)
                     }
                 } else {
