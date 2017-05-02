@@ -108,8 +108,8 @@ class Application {
                 }
             } else {
                 //TODO remove the prefix before release. Only used for testing pulling from our internal Artifactory
-                String runOnImageName = "int-docker-repo.docker-repo/${dockerImages.getDockerImageName(targetOsEnum)}"
-                // String runOnImageName = dockerImages.getDockerImageName(targetOsEnum)
+                // String runOnImageName = "int-docker-repo.docker-repo/${dockerImages.getDockerImageName(targetOsEnum)}"
+                String runOnImageName = dockerImages.getDockerImageName(targetOsEnum)
                 String runOnImageVersion = dockerImages.getDockerImageVersion(targetOsEnum)
                 String msg = sprintf("Image inspection for %s should not be run in this %s docker container; will use docker image %s:%s",
                         targetOsEnum.toString(), currentOsEnum.toString(),
