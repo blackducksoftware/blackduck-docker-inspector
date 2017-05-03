@@ -77,9 +77,15 @@ class Application {
                 logger.error("Your Hub configuration is not valid: ${e.getMessage()}")
                 if(StringUtils.contains(e.getMessage(), 'SunCertPathBuilderException')){
                     //TODO when integration common gets into hub common we can catch a new IntegrationCertificateException rather than doing this String check
-                    File certificate = hubClient.retrieveHttpsCertificate()
-                    hubClient.importHttpsCertificate(certificate)
-                    certificate.delete()
+                    File certificate = null
+                    try{
+                        certificate = hubClient.retrieveHttpsCertificate()
+                        hubClient.importHttpsCertificate(certificate)
+                    } finally{
+                        if(certificate != null && certificate.exists()){
+                            certificate.delete()
+                        }
+                    }
                     try {
                         hubClient.testHubConnection()
                         logger.info 'Your Hub configuration is valid and a successful connection to the Hub was established.'

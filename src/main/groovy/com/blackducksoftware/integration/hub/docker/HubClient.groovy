@@ -111,6 +111,9 @@ class HubClient {
             logger.warn(standardError.toString())
         }
         logger.debug("Exit code ${proc.exitValue()}")
+        if(proc.exitValue() != 0){
+            throw new HubIntegrationException("Failed to retrieve the certificate from ${hubUrl}")
+        }
         certificateFile.write(certificate)
         certificateFile
     }
@@ -133,7 +136,6 @@ class HubClient {
         def standardError = new StringBuilder()
 
         String command = "keytool -importcert -keystore ${keyStore} -storepass ${keyStorePass} -alias ${url.getHost()} -noprompt -file ${certificate.getAbsolutePath()}"
-        logger.info(command)
         Process proc = command.execute()
         proc.consumeProcessOutput(standardOut, standardError)
         proc.waitForOrKill(commandTimeout)
@@ -144,5 +146,8 @@ class HubClient {
             logger.warn(standardError.toString())
         }
         logger.debug("Exit code ${proc.exitValue()}")
+        if(proc.exitValue() != 0){
+            throw new HubIntegrationException("Failed to import the certificate into ${keyStore}")
+        }
     }
 }
