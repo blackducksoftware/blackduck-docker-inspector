@@ -52,6 +52,8 @@ class DockerTarParser {
                 def layerOutputDir = new File(layerFilesDir, layerName)
                 parseLayerTarAndExtract( layerTar, layerOutputDir)
                 // parseLayerTarAndExtract(EXTRACTION_PATTERN, layerTar, layerOutputDir)
+            } else {
+                logger.debug("Ignoring layer ${layerName}, this layer is not part of any of the Images/Tags we want to extract")
             }
         }
         layerFilesDir

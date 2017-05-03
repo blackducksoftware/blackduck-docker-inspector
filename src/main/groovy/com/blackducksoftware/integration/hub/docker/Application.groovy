@@ -93,10 +93,14 @@ class Application {
             def bdioFiles = null
             File dockerTarFile = deriveDockerTarFile()
 
+            if (StringUtils.isBlank(dockerTagName)) {
+                // set default if blank
+                dockerTagName = 'latest'
+            }
+
             List<File> layerTars = hubDockerManager.extractLayerTars(dockerTarFile)
             List<LayerMapping> layerMappings = getLayerMappings(dockerTarFile.getName())
             File layerFilesDir = hubDockerManager.extractDockerLayers(layerTars, layerMappings)
-
 
             OperatingSystemEnum targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro, layerFilesDir)
             OperatingSystemEnum requiredOsEnum = dockerImages.getDockerImageOs(targetOsEnum)
@@ -141,10 +145,6 @@ class Application {
         if(StringUtils.isNotBlank(dockerTar)) {
             dockerTarFile = new File(dockerTar)
         } else if (StringUtils.isNotBlank(dockerImageName)) {
-            if (StringUtils.isBlank(dockerTagName)) {
-                // set default if blank
-                dockerTagName = 'latest'
-            }
             dockerTarFile = hubDockerManager.getTarFileFromDockerImage(dockerImageName, dockerTagName)
         }
         dockerTarFile
@@ -161,8 +161,15 @@ class Application {
                 if (StringUtils.isNotBlank(dockerImageName)) {
                     specifiedRepoTag = "${dockerImageName}:${dockerTagName}"
                 }
-
-                def (imageName, tagName) = image.repoTags.get(0).split(':')
+                def (imageName, tagName) = ['', '']
+                def foundRepoTag = image.repoTags.find { repoTag ->
+                    StringUtils.compare(repoTag, specifiedRepoTag) == 0
+                }
+                if(StringUtils.isBlank(foundRepoTag)){
+                    (imageName, tagName) = image.repoTags.get(0).split(':')
+                } else {
+                    (imageName, tagName) = foundRepoTag.split(':')
+                }
                 logger.info("Image ${imageName} , Tag ${tagName}")
                 mapping.imageName =  imageName
                 mapping.tagName = tagName
@@ -171,9 +178,15 @@ class Application {
                 }
                 if (StringUtils.isNotBlank(dockerImageName)) {
                     if(StringUtils.compare(imageName, dockerImageName) == 0 && StringUtils.compare(tagName, dockerTagName) == 0){
+                        logger.debug('Adding layer mapping')
+                        logger.debug("Image ${mapping.imageName} , Tag ${mapping.tagName}")
+                        logger.debug("Layers ${mapping.layers}")
                         mappings.add(mapping)
                     }
                 } else {
+                    logger.debug('Adding layer mapping')
+                    logger.debug("Image ${mapping.imageName} , Tag ${mapping.tagName}")
+                    logger.debug("Layers ${mapping.layers}")
                     mappings.add(mapping)
                 }
             }
