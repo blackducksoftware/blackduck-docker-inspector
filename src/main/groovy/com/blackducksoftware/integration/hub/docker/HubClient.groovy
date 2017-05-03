@@ -46,6 +46,12 @@ class HubClient {
     @Value('${command.timeout}')
     long commandTimeout
 
+    @Value('${key.store}')
+    String keyStore
+
+    @Value('${key.store.pass}')
+    String keyStorePass
+
     boolean isValid() {
         createBuilder().isValid()
     }
@@ -112,16 +118,21 @@ class HubClient {
     void importHttpsCertificate(File certificate){
         URL url = new URL(hubUrl)
 
-        String javaHome = System.getProperty('java.home')
-        File jssecacerts = new File("${javaHome}")
-        jssecacerts = new File(jssecacerts, "lib")
-        jssecacerts = new File(jssecacerts, "security")
-        jssecacerts = new File(jssecacerts, "jssecacerts")
-
+        if(StringUtils.isBlank(keyStore)){
+            String javaHome = System.getProperty('java.home')
+            File jssecacerts = new File("${javaHome}")
+            jssecacerts = new File(jssecacerts, "lib")
+            jssecacerts = new File(jssecacerts, "security")
+            jssecacerts = new File(jssecacerts, "jssecacerts")
+            keyStore = jssecacerts.getAbsolutePath()
+        }
+        if(StringUtils.isBlank(keyStorePass)){
+            keyStorePass = 'changeit'
+        }
         def standardOut = new StringBuilder()
         def standardError = new StringBuilder()
 
-        String command = "keytool -importcert -keystore ${jssecacerts.getAbsolutePath()} -storepass changeit -alias ${url.getHost()} -noprompt -file ${certificate.getAbsolutePath()}"
+        String command = "keytool -importcert -keystore ${keyStore} -storepass ${keyStorePass} -alias ${url.getHost()} -noprompt -file ${certificate.getAbsolutePath()}"
         logger.info(command)
         Process proc = command.execute()
         proc.consumeProcessOutput(standardOut, standardError)
