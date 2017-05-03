@@ -128,7 +128,10 @@ class HubClient {
         proc.waitForOrKill(commandTimeout)
         logger.info("Importing the certificate from ${certificate.getAbsolutePath()}")
         logger.debug(standardOut.toString())
-        logger.warn(standardError.toString())
-        logger.info("Exit code ${proc.exitValue()}")
+        def error = standardError.toString()
+        if(StringUtils.isNotBlank(error)){
+            logger.warn(standardError.toString())
+        }
+        logger.debug("Exit code ${proc.exitValue()}")
     }
 }
