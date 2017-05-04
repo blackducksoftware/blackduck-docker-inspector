@@ -25,6 +25,8 @@ class ProgramPaths {
 
     private static final String DEFAULT_PGM_DIR = "/opt/blackduck/hub-inspector"
 
+	public static final String APPLICATION_PROPERTIES_FILENAME = "application.properties"
+
     private final Logger logger = LoggerFactory.getLogger(ProgramPaths.class)
 
     private String hubDockerConfigDirPath
@@ -45,7 +47,7 @@ class ProgramPaths {
             hubDockerPgmDirPath += "/"
         }
         hubDockerConfigDirPath = hubDockerPgmDirPath + "config/"
-        hubDockerConfigFilePath = hubDockerConfigDirPath + "application.properties"
+        hubDockerConfigFilePath = hubDockerConfigDirPath + APPLICATION_PROPERTIES_FILENAME
         hubDockerTargetDirPath = hubDockerPgmDirPath + "target/"
 
         String qualifiedJarPathString = new java.io.File(DockerClientManager.class.getProtectionDomain()

@@ -18,6 +18,10 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.core.env.AbstractEnvironment
+import org.springframework.core.env.Environment
+import org.springframework.core.env.MapPropertySource
+import org.springframework.core.env.PropertySource
 import org.springframework.stereotype.Component
 
 import com.github.dockerjava.api.DockerClient
@@ -37,6 +41,7 @@ import com.github.dockerjava.core.command.PullImageResultCallback
 class DockerClientManager {
 
     private static final String INSPECTOR_COMMAND = "inspect-docker-image-tar.sh"
+	private static final String IMAGE_TARFILE_PROPERTY = "docker.tar"
     private final Logger logger = LoggerFactory.getLogger(DockerClientManager.class)
 
     @Autowired
@@ -44,6 +49,9 @@ class DockerClientManager {
 
     @Autowired
     ProgramPaths programPaths
+	
+	@Autowired
+	HubDockerProperties hubDockerProperties
 
     @Value('${working.directory}')
     String workingDirectoryPath
@@ -127,9 +135,13 @@ class DockerClientManager {
             dockerClient.startContainerCmd(containerId).exec()
             logger.info(sprintf("Started container %s from image %s", containerId, imageId))
         }
-        String srcPath = programPaths.getHubDockerConfigFilePath()
-        String destPath = programPaths.getHubDockerConfigDirPath()
-        copyFileToContainer(dockerClient, containerId, srcPath, destPath)
+		hubDockerProperties.load()
+		hubDockerProperties.set(IMAGE_TARFILE_PROPERTY, tarFilePathInSubContainer)
+		String pathToPropertiesFileForSubContainer = "${programPaths.getHubDockerTargetDirPath()}${ProgramPaths.APPLICATION_PROPERTIES_FILENAME}"
+		hubDockerProperties.save(pathToPropertiesFileForSubContainer)
+		// TODO Now that we're updating the properties, we don't need all of the cmd line args
+		
+        copyFileToContainer(dockerClient, containerId, pathToPropertiesFileForSubContainer, programPaths.getHubDockerConfigDirPath())
 
         logger.info(sprintf("Docker image tar file: %s", dockerTarFile.getAbsolutePath()))
         logger.info(sprintf("Docker image tar file path in sub-container: %s", tarFilePathInSubContainer))
