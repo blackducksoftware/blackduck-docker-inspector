@@ -73,6 +73,7 @@ class Application {
             if(StringUtils.isBlank(dockerTagName)){
                 dockerTagName = 'latest'
             }
+			logger.info("Inspecting image/tag ${dockerImageName}/${dockerTagName}")
             try {
                 hubClient.testHubConnection()
                 logger.info 'Your Hub configuration is valid and a successful connection to the Hub was established.'
