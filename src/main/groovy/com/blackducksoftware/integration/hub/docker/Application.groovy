@@ -39,8 +39,8 @@ class Application {
     @Value('${linux.distro}')
     String linuxDistro
 
-    @Value('${dev.mode:false}')
-    Boolean devMode
+    @Value('${dev.mode}')
+    boolean devMode
 
     @Value('${hub.project.name}')
     String hubProjectName
@@ -70,6 +70,9 @@ class Application {
             if (devMode) {
                 logger.info("Running in development mode")
             }
+            if(StringUtils.isBlank(dockerTagName)){
+                dockerTagName = 'latest'
+            }
             try {
                 hubClient.testHubConnection()
                 logger.info 'Your Hub configuration is valid and a successful connection to the Hub was established.'
@@ -98,11 +101,6 @@ class Application {
             hubDockerManager.cleanWorkingDirectory()
             def bdioFiles = null
             File dockerTarFile = deriveDockerTarFile()
-
-            if (StringUtils.isBlank(dockerTagName)) {
-                // set default if blank
-                dockerTagName = 'latest'
-            }
 
             List<File> layerTars = hubDockerManager.extractLayerTars(dockerTarFile)
             List<LayerMapping> layerMappings = getLayerMappings(dockerTarFile.getName())
