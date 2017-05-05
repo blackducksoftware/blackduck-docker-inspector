@@ -205,6 +205,16 @@ class Application {
             mapping.tagName = DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(LocalDateTime.now())
             mappings.add(mapping)
         }
+		// TODO TEMP; useful for debugging, but can probably remove once we're 
+		// confident in layer targeting
+		logger.debug("getLayerMappings(): # mappings found: ${mappings.size()}")
+		for (LayerMapping m : mappings) {
+			logger.debug("getLayerMappings():\t${m.imageName}/${m.tagName}: ")
+			for (String layerId : m.layers) {
+				logger.debug("getLayerMappings():\t\t${layerId}")
+			}
+		}
+		//////////////////
         mappings
     }
 

@@ -109,7 +109,8 @@ class HubDockerManager {
             String filePath = extractionResult.extractedPackageManagerDirectory.getAbsolutePath()
             filePath = filePath.substring(filePath.indexOf(extractionResult.layer) + 1)
             filePath = filePath.substring(filePath.indexOf('/') + 1)
-            filePath = filePath.replace('/', '_')
+            filePath = filePath.replaceAll('/', '_')
+            String cleanedImageName = mapping.getImageName().replaceAll('/', '_')
             stubPackageManagerFiles(extractionResult)
             String codeLocationName, hubProjectName, hubVersionName = ''
             if(layerMappings.size() == 0){
@@ -117,13 +118,14 @@ class HubDockerManager {
                 hubProjectName = projectName
                 hubVersionName = versionName
             } else {
-                codeLocationName = "${mapping.imageName}_${mapping.tagName}_${extractionResult.layer}_${filePath}_${extractionResult.packageManager}"
-                hubProjectName = mapping.imageName
+                codeLocationName = "${cleanedImageName}_${mapping.tagName}_${extractionResult.layer}_${filePath}_${extractionResult.packageManager}"
+                hubProjectName = cleanedImageName
                 hubVersionName = mapping.tagName
             }
             logger.info("Code location : ${codeLocationName}")
 
-            def outputFile = new File(workingDirectory, "${extractionResult.layer}_${filePath}_${hubProjectName}_${hubVersionName}_bdio.jsonld")
+            String newFileName = "${extractionResult.layer}_${filePath}_${hubProjectName}_${hubVersionName}_bdio.jsonld"
+            def outputFile = new File(workingDirectory, newFileName)
             bdioFiles.add(outputFile)
             new FileOutputStream(outputFile).withStream { outputStream ->
                 BdioWriter writer = new BdioWriter(new Gson(), outputStream)
