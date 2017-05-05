@@ -121,7 +121,7 @@ class HubDockerManager {
                 hubProjectName = mapping.imageName
                 hubVersionName = mapping.tagName
             }
-            logger.info(codeLocationName)
+            logger.info("Code location : ${codeLocationName}")
 
             def outputFile = new File(workingDirectory, "${extractionResult.layer}_${filePath}_${hubProjectName}_${hubVersionName}_bdio.jsonld")
             bdioFiles.add(outputFile)

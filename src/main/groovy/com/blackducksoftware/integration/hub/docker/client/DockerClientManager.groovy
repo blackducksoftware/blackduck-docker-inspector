@@ -18,10 +18,6 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.core.env.AbstractEnvironment
-import org.springframework.core.env.Environment
-import org.springframework.core.env.MapPropertySource
-import org.springframework.core.env.PropertySource
 import org.springframework.stereotype.Component
 
 import com.github.dockerjava.api.DockerClient
@@ -41,7 +37,7 @@ import com.github.dockerjava.core.command.PullImageResultCallback
 class DockerClientManager {
 
     private static final String INSPECTOR_COMMAND = "inspect-docker-image-tar.sh"
-	private static final String IMAGE_TARFILE_PROPERTY = "docker.tar"
+    private static final String IMAGE_TARFILE_PROPERTY = "docker.tar"
     private final Logger logger = LoggerFactory.getLogger(DockerClientManager.class)
 
     @Autowired
@@ -49,9 +45,9 @@ class DockerClientManager {
 
     @Autowired
     ProgramPaths programPaths
-	
-	@Autowired
-	HubDockerProperties hubDockerProperties
+
+    @Autowired
+    HubDockerProperties hubDockerProperties
 
     @Value('${working.directory}')
     String workingDirectoryPath
@@ -62,7 +58,7 @@ class DockerClientManager {
         // performExtractFromDockerTar()
         File imageTarDirectory = new File(new File(workingDirectoryPath), 'tarDirectory')
         pullImage(imageName, tagName)
-        File imageTarFile = new File(imageTarDirectory, "${imageName}_${tagName}.tar")
+        File imageTarFile = new File(imageTarDirectory, "${imageName.replaceAll(':', '_')}_${tagName}.tar")
         saveImage(imageName, tagName, imageTarFile)
         imageTarFile
     }
@@ -135,12 +131,12 @@ class DockerClientManager {
             dockerClient.startContainerCmd(containerId).exec()
             logger.info(sprintf("Started container %s from image %s", containerId, imageId))
         }
-		hubDockerProperties.load()
-		hubDockerProperties.set(IMAGE_TARFILE_PROPERTY, tarFilePathInSubContainer)
-		String pathToPropertiesFileForSubContainer = "${programPaths.getHubDockerTargetDirPath()}${ProgramPaths.APPLICATION_PROPERTIES_FILENAME}"
-		hubDockerProperties.save(pathToPropertiesFileForSubContainer)
-		// TODO Now that we're updating the properties, we don't need all of the cmd line args
-		
+        hubDockerProperties.load()
+        hubDockerProperties.set(IMAGE_TARFILE_PROPERTY, tarFilePathInSubContainer)
+        String pathToPropertiesFileForSubContainer = "${programPaths.getHubDockerTargetDirPath()}${ProgramPaths.APPLICATION_PROPERTIES_FILENAME}"
+        hubDockerProperties.save(pathToPropertiesFileForSubContainer)
+        // TODO Now that we're updating the properties, we don't need all of the cmd line args
+
         copyFileToContainer(dockerClient, containerId, pathToPropertiesFileForSubContainer, programPaths.getHubDockerConfigDirPath())
 
         logger.info(sprintf("Docker image tar file: %s", dockerTarFile.getAbsolutePath()))
@@ -156,7 +152,7 @@ class DockerClientManager {
                 hubProjectName, hubProjectVersion)
     }
 
-    private execCommandInContainer(DockerClient dockerClient, String imageId, String containerId, String cmd, String arg, String linuxDistro,
+    private void execCommandInContainer(DockerClient dockerClient, String imageId, String containerId, String cmd, String arg, String linuxDistro,
             String hubProjectName, String hubProjectVersion) {
         logger.info(sprintf("Running %s on %s with linuxDistro %s in container %s from image %s for hub project %s/%s", cmd, arg, linuxDistro, containerId, imageId,
                 hubProjectName, hubProjectVersion))
@@ -180,13 +176,13 @@ class DockerClientManager {
                 new ExecStartResultCallback(System.out, System.err)).awaitCompletion()
     }
 
-    private copyFileToContainer(DockerClient dockerClient, String containerId, String srcPath, String destPath) {
+    private void copyFileToContainer(DockerClient dockerClient, String containerId, String srcPath, String destPath) {
         logger.info("Copying ${srcPath} to container ${containerId}: ${destPath}")
         CopyArchiveToContainerCmd  copyProperties = dockerClient.copyArchiveToContainerCmd(containerId).withHostResource(srcPath).withRemotePath(destPath)
         copyProperties.exec()
     }
 
-    private saveImage(String imageName, String tagName, File imageTarFile) {
+    private void saveImage(String imageName, String tagName, File imageTarFile) {
         InputStream tarInputStream = null
         try{
             logger.info("Saving the docker image to : ${imageTarFile.getCanonicalPath()}")

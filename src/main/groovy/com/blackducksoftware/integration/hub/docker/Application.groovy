@@ -73,7 +73,7 @@ class Application {
             if(StringUtils.isBlank(dockerTagName)){
                 dockerTagName = 'latest'
             }
-			logger.info("Inspecting image/tag ${dockerImageName}/${dockerTagName}")
+            logger.info("Inspecting image/tag ${dockerImageName}/${dockerTagName}")
             try {
                 hubClient.testHubConnection()
                 logger.info 'Your Hub configuration is valid and a successful connection to the Hub was established.'
@@ -162,21 +162,24 @@ class Application {
             for(ImageInfo image : images) {
                 LayerMapping mapping = new LayerMapping()
 
-                def specifiedRepoTag = ''
+                String specifiedRepoTag = ''
                 if (StringUtils.isNotBlank(dockerImageName)) {
                     specifiedRepoTag = "${dockerImageName}:${dockerTagName}"
                 }
                 def (imageName, tagName) = ['', '']
-                def foundRepoTag = image.repoTags.find { repoTag ->
+                String foundRepoTag = image.repoTags.find { repoTag ->
                     StringUtils.compare(repoTag, specifiedRepoTag) == 0
                 }
                 if(StringUtils.isBlank(foundRepoTag)){
-                    (imageName, tagName) = image.repoTags.get(0).split(':')
+                    def repoTag = image.repoTags.get(0)
+                    imageName = repoTag.substring(0, repoTag.lastIndexOf(':'))
+                    tagName = repoTag.substring(repoTag.lastIndexOf(':') + 1)
                 } else {
-                    (imageName, tagName) = foundRepoTag.split(':')
+                    imageName = foundRepoTag.substring(0, foundRepoTag.lastIndexOf(':'))
+                    tagName = foundRepoTag.substring(foundRepoTag.lastIndexOf(':') + 1)
                 }
                 logger.info("Image ${imageName} , Tag ${tagName}")
-                mapping.imageName =  imageName
+                mapping.imageName =  imageName.replaceAll(':', '_').replaceAll('/', '_')
                 mapping.tagName = tagName
                 for(String layer : image.layers){
                     mapping.layers.add(layer.substring(0, layer.indexOf('/')))

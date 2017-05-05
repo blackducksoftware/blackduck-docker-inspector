@@ -21,6 +21,11 @@ else
 fi
 service docker status
 
+if [[ -z $REGISTRY ]]
+then
+	docker login -u $REGISTRY_USERNAME  -p $REGISTRY_PASSWORD $REGISTRY
+fi
+
 imageName=$1
 imageVersion=
 shift
