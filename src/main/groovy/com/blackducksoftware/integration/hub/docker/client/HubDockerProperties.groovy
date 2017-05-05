@@ -3,137 +3,137 @@ package com.blackducksoftware.integration.hub.docker.client
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.core.env.AbstractEnvironment
-import org.springframework.core.env.Environment
-import org.springframework.core.env.MapPropertySource
-import org.springframework.core.env.PropertySource
 import org.springframework.stereotype.Component
-
-import com.google.common.collect.StandardTable.ColumnKeySet
 
 // TODO this implementation is horrible
 // Look for a way to determine keys and values at runtime
 
 @Component
 class HubDockerProperties {
-	
-	private final Logger logger = LoggerFactory.getLogger(HubDockerProperties.class)
 
-	@Value('${hub.url}')
-	String hubUrl
+    private final Logger logger = LoggerFactory.getLogger(HubDockerProperties.class)
 
-	@Value('${hub.timeout}')
-	String hubTimeout
+    @Value('${hub.url}')
+    String hubUrl
 
-	@Value('${hub.username}')
-	String hubUsername
+    @Value('${hub.timeout}')
+    String hubTimeout
 
-	@Value('${hub.password}')
-	String hubPassword
+    @Value('${hub.username}')
+    String hubUsername
 
-	@Value('${hub.proxy.host}')
-	String hubProxyHost
+    @Value('${hub.password}')
+    String hubPassword
 
-	@Value('${hub.proxy.port}')
-	String hubProxyPort
+    @Value('${hub.proxy.host}')
+    String hubProxyHost
 
-	@Value('${hub.proxy.username}')
-	String hubProxyUsername
+    @Value('${hub.proxy.port}')
+    String hubProxyPort
 
-	@Value('${hub.proxy.password}')
-	String hubProxyPassword
+    @Value('${hub.proxy.username}')
+    String hubProxyUsername
 
-	@Value('${key.store}')
-	String keyStore
+    @Value('${hub.proxy.password}')
+    String hubProxyPassword
 
-	@Value('${key.store.pass}')
-	String keyStorePass
+    @Value('${key.store}')
+    String keyStore
 
-	@Value('${hub.project.name}')
-	String hubProjectName
+    @Value('${key.store.pass}')
+    String keyStorePass
 
-	@Value('${hub.project.version}')
-	String hubProjectVersion
+    @Value('${hub.project.name}')
+    String hubProjectName
 
-	@Value('${linux.distro}')
-	String linuxDistro
+    @Value('${hub.project.version}')
+    String hubProjectVersion
 
-	@Value('${working.directory}')
-	String workingDirectory
+    @Value('${linux.distro}')
+    String linuxDistro
 
-	@Value('${command.timeout}')
-	String commandTimeout
+    @Value('${working.directory}')
+    String workingDirectory
 
-	@Value('${docker.tar}')
-	String dockerTar
+    @Value('${command.timeout}')
+    String commandTimeout
 
-	@Value('${docker.image.name}')
-	String dockerImageName
+    @Value('${docker.tar}')
+    String dockerTar
 
-	@Value('${docker.tag.name}')
-	String dockerTagName
+    @Value('${docker.image.name}')
+    String dockerImageName
 
-	@Value('${docker.host}')
-	String dockerHost
+    @Value('${docker.tag.name}')
+    String dockerTagName
 
-	@Value('${docker.tls.verify}')
-	String dockerTlsVerify
+    @Value('${docker.host}')
+    String dockerHost
 
-	@Value('${docker.cert.path}')
-	String dockerCertPath
+    @Value('${docker.tls.verify}')
+    String dockerTlsVerify
 
-	@Value('${install.dir}')
-	String installDir
+    @Value('${docker.cert.path}')
+    String dockerCertPath
 
-	@Value('${logging.level.com.blackducksoftware}')
-	String loggingLevelComBlackducksoftware
+    @Value('${install.dir}')
+    String installDir
 
-	@Value('${dev.mode}')
-	String devMode
+    @Value('${logging.level.com.blackducksoftware}')
+    String loggingLevelComBlackducksoftware
 
-	
-	private Properties propsForSubContainer
-	
-	public void load() {
-		propsForSubContainer = new Properties()
+    @Value('${dev.mode}')
+    String devMode
 
-		propsForSubContainer.put('hub.url', hubUrl)
-		propsForSubContainer.put('hub.timeout', hubTimeout)
-		propsForSubContainer.put('hub.username', hubUsername)
-		propsForSubContainer.put('hub.password', hubPassword)
-		propsForSubContainer.put('hub.proxy.host', hubProxyHost)
-		propsForSubContainer.put('hub.proxy.port', hubProxyPort)
-		propsForSubContainer.put('hub.proxy.username', hubProxyUsername)
-		propsForSubContainer.put('hub.proxy.password', hubProxyPassword)
-		propsForSubContainer.put('key.store', keyStore)
-		propsForSubContainer.put('key.store.pass', keyStorePass)
-		propsForSubContainer.put('hub.project.name', hubProjectName)
-		propsForSubContainer.put('hub.project.version', hubProjectVersion)
-		propsForSubContainer.put('linux.distro', linuxDistro)
-		propsForSubContainer.put('working.directory', workingDirectory)
-		propsForSubContainer.put('command.timeout', commandTimeout)
-		propsForSubContainer.put('docker.tar', dockerTar)
-		propsForSubContainer.put('docker.image.name', dockerImageName)
-		propsForSubContainer.put('docker.tag.name', dockerTagName)
-		propsForSubContainer.put('docker.host', dockerHost)
-		propsForSubContainer.put('docker.tls.verify', dockerTlsVerify)
-		propsForSubContainer.put('docker.cert.path', dockerCertPath)
-		propsForSubContainer.put('install.dir', installDir)
-		propsForSubContainer.put('logging.level.com.blackducksoftware', loggingLevelComBlackducksoftware)
-		propsForSubContainer.put('dev.mode', devMode)
-		
-		for (String key : propsForSubContainer.keySet()) {
-			logger.debug("load(): ${key}=${propsForSubContainer.get(key)}")
-		}
-	}
-	
-	public void set(String key, String value) {
-		propsForSubContainer.setProperty(key, value)
-	}
-	
-	public void save(String path) {
-		propsForSubContainer.store(new FileOutputStream(path), null);
-	}
+
+    private Properties propsForSubContainer
+
+    public void load() {
+        propsForSubContainer = new Properties()
+
+        propsForSubContainer.put('hub.url', hubUrl)
+        propsForSubContainer.put('hub.timeout', hubTimeout)
+        propsForSubContainer.put('hub.username', hubUsername)
+        propsForSubContainer.put('hub.password', hubPassword)
+        propsForSubContainer.put('hub.proxy.host', hubProxyHost)
+        propsForSubContainer.put('hub.proxy.port', hubProxyPort)
+        propsForSubContainer.put('hub.proxy.username', hubProxyUsername)
+        propsForSubContainer.put('hub.proxy.password', hubProxyPassword)
+        propsForSubContainer.put('key.store', keyStore)
+        propsForSubContainer.put('key.store.pass', keyStorePass)
+        propsForSubContainer.put('hub.project.name', hubProjectName)
+        propsForSubContainer.put('hub.project.version', hubProjectVersion)
+        propsForSubContainer.put('linux.distro', linuxDistro)
+        propsForSubContainer.put('working.directory', workingDirectory)
+        propsForSubContainer.put('command.timeout', commandTimeout)
+        propsForSubContainer.put('docker.tar', dockerTar)
+        propsForSubContainer.put('docker.image.name', dockerImageName)
+        propsForSubContainer.put('docker.tag.name', dockerTagName)
+        propsForSubContainer.put('docker.host', dockerHost)
+        propsForSubContainer.put('docker.tls.verify', dockerTlsVerify)
+        propsForSubContainer.put('docker.cert.path', dockerCertPath)
+        propsForSubContainer.put('install.dir', installDir)
+        propsForSubContainer.put('logging.level.com.blackducksoftware', loggingLevelComBlackducksoftware)
+        propsForSubContainer.put('dev.mode', devMode)
+
+        for (String key : propsForSubContainer.keySet()) {
+            logger.debug("load(): ${key}=${propsForSubContainer.get(key)}")
+        }
+    }
+
+    public void set(String key, String value) {
+        propsForSubContainer.setProperty(key, value)
+    }
+
+    public void save(String path) {
+        File propertiesFile = new File(path)
+        if (!propertiesFile.getParentFile().exists()) {
+            propertiesFile.getParentFile().mkdirs()
+        }
+        if (propertiesFile.exists()) {
+            propertiesFile.delete()
+        }
+        propsForSubContainer.store(new FileOutputStream(propertiesFile), null)
+    }
 }
