@@ -114,27 +114,10 @@ class HubDockerManager {
             String cleanedImageName = mapping.getImageName().replaceAll('/', '_')
             stubPackageManagerFiles(extractionResult)
             String codeLocationName, hubProjectName, hubVersionName = ''
-            if(layerMappings.size() == 0){ // TODO remove this clause??
-				if ((StringUtils.isBlank(projectName)) || (StringUtils.isBlank(projectVersion))) {
-					throw new HubIntegrationException("Since no layer mappings were found, the Hub project and version must be specified on the command line")
-				}
-                codeLocationName = "${projectName}_${versionName}_${extractionResult.layer}_${filePath}_${extractionResult.packageManager}"
-                logger.debug("Using project/version from config property")
-				hubProjectName = projectName
-                hubVersionName = versionName
-            } else {
-                codeLocationName = "${cleanedImageName}_${mapping.tagName}_${extractionResult.layer}_${filePath}_${extractionResult.packageManager}"
-				if (StringUtils.isBlank(projectName)) {
-					hubProjectName = cleanedImageName
-				} else {
-					hubProjectName = projectName
-				}
-				if (StringUtils.isBlank(versionName)) {
-					hubVersionName = mapping.tagName
-				} else {
-					hubVersionName = versionName
-				}
-            }
+            codeLocationName = "${cleanedImageName}_${mapping.tagName}_${extractionResult.layer}_${filePath}_${extractionResult.packageManager}"
+			hubProjectName = deriveHubProject(cleanedImageName, projectName)
+			hubVersionName = deriveHubProjectVersion(mapping, versionName)
+
             logger.info("Hub project/version: ${hubProjectName}/${hubVersionName}; Code location : ${codeLocationName}")
 
             String newFileName = "${extractionResult.layer}_${filePath}_${hubProjectName}_${hubVersionName}_bdio.jsonld"
@@ -152,6 +135,28 @@ class HubDockerManager {
         }
         bdioFiles
     }
+
+	private String deriveHubProject(String cleanedImageName, String projectName) {
+		String hubProjectName
+		if (StringUtils.isBlank(projectName)) {
+			hubProjectName = cleanedImageName
+		} else {
+			logger.debug("Using project from config property")
+			hubProjectName = projectName
+		}
+		return hubProjectName
+	}
+
+	private String deriveHubProjectVersion(LayerMapping mapping, String versionName) {
+		String hubVersionName
+		if (StringUtils.isBlank(versionName)) {
+			hubVersionName = mapping.tagName
+		} else {
+			logger.debug("Using project version from config property")
+			hubVersionName = versionName
+		}
+		return hubVersionName
+	}
 
 
     private void stubPackageManagerFiles(TarExtractionResult result){
