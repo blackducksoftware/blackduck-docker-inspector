@@ -45,7 +45,10 @@ class ApkExtractorTest {
         }
         outputFile.getParentFile().mkdirs()
         BdioWriter writer = new BdioWriter(new Gson(), new FileWriter(outputFile))
-        extractor.extract(writer, OperatingSystemEnum.UBUNTU, "CodeLocationName", "Test", "1")
+        ExtractionDetails extractionDetails = new ExtractionDetails()
+        extractionDetails.operatingSystem = OperatingSystemEnum.ALPINE
+        extractionDetails.architecture = 'x86'
+        extractor.extract(writer, extractionDetails, "CodeLocationName", "Test", "1")
         writer.close()
     }
 }
