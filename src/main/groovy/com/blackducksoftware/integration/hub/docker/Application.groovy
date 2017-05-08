@@ -136,7 +136,7 @@ class Application {
                             "Unable to pull docker image %s:%s; proceeding anyway since it may already exist locally",
                             runOnImageName, runOnImageVersion))
                 }
-                dockerClientManager.run(runOnImageName, runOnImageVersion, dockerTarFile, linuxDistro, devMode, hubProjectName, hubVersionName)
+                dockerClientManager.run(runOnImageName, runOnImageVersion, dockerTarFile, devMode)
             }
         } catch (Exception e) {
             logger.error("Error inspecting image: ${e.message}")
