@@ -51,7 +51,7 @@ class ApkExtractor extends Extractor {
                         component = part
                     }
                 }
-                String externalId = "${component}/${version}/${extractionDetails.operatingSystem}"
+                String externalId = "${component}/${version}/${extractionDetails.architecture}"
                 components.addAll(createBdioComponent(component, version, externalId))
             }
         }
