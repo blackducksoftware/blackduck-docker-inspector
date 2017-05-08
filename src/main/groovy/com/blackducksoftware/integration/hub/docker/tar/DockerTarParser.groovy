@@ -187,7 +187,7 @@ class DockerTarParser {
         osEnum
     }
 
-    private List<File> findFileWithName(File fileToSearch, String name){
+    List<File> findFileWithName(File fileToSearch, String name){
         logger.trace(sprintf("Looking in %s for %s", fileToSearch.getAbsolutePath(), name))
         if(StringUtils.compare(fileToSearch.getName(), name) == 0){
             logger.trace("File Name ${name} found ${fileToSearch.getAbsolutePath()}")

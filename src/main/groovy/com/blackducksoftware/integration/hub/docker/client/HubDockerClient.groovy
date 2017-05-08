@@ -30,7 +30,6 @@ class HubDockerClient {
     @Value('${docker.host}')
     String dockerHost
 
-
     @Value('${docker.registry}')
     String dockerRegistry
 

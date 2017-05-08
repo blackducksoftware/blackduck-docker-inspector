@@ -41,7 +41,7 @@ class RpmExtractor extends Extractor {
         packageLine.matches(".+-.+-.+\\..*")
     }
 
-    List<BdioComponent> extractComponents(String[] packageList) {
+    List<BdioComponent> extractComponents(ExtractionDetails extractionDetails, String[] packageList) {
         def components = []
         packageList.each { packageLine ->
             if (valid(packageLine)) {

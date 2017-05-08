@@ -9,7 +9,6 @@ import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioBillOfMaterials
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioProject
-import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 import com.blackducksoftware.integration.hub.docker.executor.Executor
 
@@ -23,7 +22,7 @@ abstract class Extractor {
     List<String> forges
 
     abstract void init()
-    abstract java.util.List<BdioComponent> extractComponents(String[] packageList)
+    abstract java.util.List<BdioComponent> extractComponents(ExtractionDetails extractionDetails, String[] packageList)
 
     void initValues(PackageManagerEnum packageManagerEnum,Executor executor, List<String> forges) {
         this.packageManagerEnum = packageManagerEnum
@@ -31,12 +30,12 @@ abstract class Extractor {
         this.forges = forges
     }
 
-    void extract(BdioWriter bdioWriter, OperatingSystemEnum operatingSystem, String codeLocationName, String projectName, String version) {
+    void extract(BdioWriter bdioWriter, ExtractionDetails extractionDetails, String codeLocationName, String projectName, String version) {
         BdioBillOfMaterials bom = bdioNodeFactory.createBillOfMaterials(codeLocationName, projectName, version)
         bdioWriter.writeBdioNode(bom)
         String externalId = "${projectName}/${version}"
-        BdioProject projectNode = bdioNodeFactory.createProject(projectName, version, bdioPropertyHelper.createBdioId(projectName, version), operatingSystem.forge, externalId)
-        List<BdioComponent> components = extractComponents(executor.listPackages())
+        BdioProject projectNode = bdioNodeFactory.createProject(projectName, version, bdioPropertyHelper.createBdioId(projectName, version), extractionDetails.operatingSystem.forge, externalId)
+        List<BdioComponent> components = extractComponents(extractionDetails, executor.listPackages())
         bdioPropertyHelper.addRelationships(projectNode, components)
         bdioWriter.writeBdioNode(projectNode)
         components.each { component ->

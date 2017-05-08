@@ -36,12 +36,12 @@ class ApkExtractor extends Extractor {
         initValues(PackageManagerEnum.APK, executor, forges)
     }
 
-    List<BdioComponent> extractComponents(String[] packageList) {
+    List<BdioComponent> extractComponents(ExtractionDetails extractionDetails, String[] packageList) {
         def components = []
         packageList.each { packageLine ->
             if (!packageLine.toLowerCase().startsWith('warning')) {
                 String[] parts = packageLine.split('-')
-                def version = parts[parts.length -2]
+                def version = "${parts[parts.length -2]}-${parts[parts.length -1]}"
                 def component = ''
                 parts = parts.take(parts.length - 2)
                 for(String part : parts){
@@ -51,7 +51,7 @@ class ApkExtractor extends Extractor {
                         component = part
                     }
                 }
-                String externalId = "${component}/${version}"
+                String externalId = "${component}/${version}/${extractionDetails.operatingSystem}"
                 components.addAll(createBdioComponent(component, version, externalId))
             }
         }

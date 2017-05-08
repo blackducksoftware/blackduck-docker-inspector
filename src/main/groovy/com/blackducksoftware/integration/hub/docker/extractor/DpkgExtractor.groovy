@@ -36,7 +36,7 @@ class DpkgExtractor extends Extractor {
         initValues(PackageManagerEnum.DPKG, executor, forges)
     }
 
-    List<BdioComponent> extractComponents(String[] packageList) {
+    List<BdioComponent> extractComponents(ExtractionDetails extractionDetails, String[] packageList) {
         def components = []
         boolean startOfComponents = false
         packageList.each { packageLine ->

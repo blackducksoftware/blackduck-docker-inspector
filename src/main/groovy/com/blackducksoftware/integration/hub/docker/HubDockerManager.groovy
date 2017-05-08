@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component
 
 import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter
 import com.blackducksoftware.integration.hub.docker.client.DockerClientManager
+import com.blackducksoftware.integration.hub.docker.extractor.ExtractionDetails
 import com.blackducksoftware.integration.hub.docker.extractor.Extractor
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser
 import com.blackducksoftware.integration.hub.docker.tar.LayerMapping
@@ -72,11 +73,23 @@ class HubDockerManager {
     }
 
     List<File> generateBdioFromLayerFilesDir(List<LayerMapping> mappings, String projectName, String versionName, File dockerTar, File layerFilesDir, OperatingSystemEnum osEnum) {
-        TarExtractionResults packageMgrDirs = tarParser.extractPackageManagerDirs(layerFilesDir, osEnum)
-        if(packageMgrDirs.operatingSystemEnum == null){
+        TarExtractionResults tarExtractionResults = tarParser.extractPackageManagerDirs(layerFilesDir, osEnum)
+        if(tarExtractionResults.operatingSystemEnum == null){
             throw new HubIntegrationException('Could not determine the Operating System of this Docker tar.')
         }
-        generateBdioFromPackageMgrDirs(mappings, projectName, versionName, dockerTar.getName(), packageMgrDirs)
+        String architecture = null
+        if(osEnum == OperatingSystemEnum.ALPINE){
+            List<File> etcDirectories = tarParser.findFileWithName(layerFilesDir, "etc")
+            for(File etc : etcDirectories){
+                File architectureFile = new File(etc, 'apk')
+                architectureFile = new File(architectureFile, 'arch')
+                if(architectureFile.exists()){
+                    architecture = architectureFile.readLines().get(0)
+                    break
+                }
+            }
+        }
+        generateBdioFromPackageMgrDirs(mappings, projectName, versionName, dockerTar.getName(), tarExtractionResults, architecture)
     }
 
     void uploadBdioFiles(List<File> bdioFiles){
@@ -96,7 +109,7 @@ class HubDockerManager {
         }
     }
 
-    private List<File> generateBdioFromPackageMgrDirs(List<LayerMapping> layerMappings, String projectName, String versionName, String tarFileName, TarExtractionResults tarResults) {
+    private List<File> generateBdioFromPackageMgrDirs(List<LayerMapping> layerMappings, String projectName, String versionName, String tarFileName, TarExtractionResults tarResults, String architecture) {
         File workingDirectory = new File(workingDirectoryPath)
         // run the package managers
         // extract the bdio from output
@@ -131,7 +144,10 @@ class HubDockerManager {
                 BdioWriter writer = new BdioWriter(new Gson(), outputStream)
                 try{
                     Extractor extractor = getExtractorByPackageManager(extractionResult.packageManager)
-                    extractor.extract(writer, tarResults.operatingSystemEnum, codeLocationName, hubProjectName, hubVersionName)
+                    ExtractionDetails extractionDetails = new ExtractionDetails()
+                    extractionDetails.operatingSystem = tarResults.operatingSystemEnum
+                    extractionDetails.architecture = architecture
+                    extractor.extract(writer, extractionDetails, codeLocationName, hubProjectName, hubVersionName)
                 }finally{
                     writer.close()
                 }
