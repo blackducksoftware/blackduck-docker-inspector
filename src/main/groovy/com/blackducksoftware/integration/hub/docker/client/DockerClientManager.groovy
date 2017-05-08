@@ -91,8 +91,7 @@ class DockerClientManager {
         }
     }
 
-    void run(String imageName, String tagName, File dockerTarFile, String linuxDistro, boolean copyJar,
-            String hubProjectName, String hubProjectVersion) {
+    void run(String imageName, String tagName, File dockerTarFile, boolean copyJar) {
 
         String imageId = "${imageName}:${tagName}"
         logger.info("Running container based on image ${imageId}")
@@ -152,27 +151,15 @@ class DockerClientManager {
         }
 
         String cmd = programPaths.getHubDockerPgmDirPath() + INSPECTOR_COMMAND
-        execCommandInContainer(dockerClient, imageId, containerId, cmd, tarFilePathInSubContainer, linuxDistro,
-                hubProjectName, hubProjectVersion)
+        execCommandInContainer(dockerClient, imageId, containerId, cmd, tarFilePathInSubContainer)
     }
 
-    private execCommandInContainer(DockerClient dockerClient, String imageId, String containerId, String cmd, String arg, String linuxDistro,
-            String hubProjectName, String hubProjectVersion) {
-        logger.info(sprintf("Running %s on %s with linuxDistro %s in container %s from image %s for hub project %s/%s", cmd, arg, linuxDistro, containerId, imageId,
-                hubProjectName, hubProjectVersion))
+    private execCommandInContainer(DockerClient dockerClient, String imageId, String containerId, String cmd, String arg) {
+        logger.info(sprintf("Running %s on %s in container %s from image %s", cmd, arg, containerId, imageId))
         ExecCreateCmd execCreateCmd = dockerClient.execCreateCmd(containerId)
                 .withAttachStdout(true)
                 .withAttachStderr(true)
         List<String> commands = [cmd, arg]
-        if (StringUtils.isNotBlank(linuxDistro)) {
-            commands.add("--linux.distro=${linuxDistro}")
-        }
-        if(StringUtils.isNotBlank(hubProjectName)) {
-            commands.add("--hub.project.name=${hubProjectName}")
-        }
-        if(StringUtils.isNotBlank(hubProjectVersion)) {
-            commands.add("--hub.project.version=${hubProjectVersion}")
-        }
         String[] cmdArr = commands.toArray()
         execCreateCmd.withCmd(cmdArr)
         ExecCreateCmdResponse execCreateCmdResponse = execCreateCmd.exec()

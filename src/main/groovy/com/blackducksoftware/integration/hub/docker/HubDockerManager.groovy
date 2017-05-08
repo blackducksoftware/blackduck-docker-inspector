@@ -97,7 +97,7 @@ class HubDockerManager {
     }
 
     private List<File> generateBdioFromPackageMgrDirs(List<LayerMapping> layerMappings, String projectName, String versionName, String tarFileName, TarExtractionResults tarResults) {
-        File workingDirectory = new File(workingDirectoryPath)
+		File workingDirectory = new File(workingDirectoryPath)
         // run the package managers
         // extract the bdio from output
         // deploy bdio to the Hub
@@ -113,14 +113,16 @@ class HubDockerManager {
 			String cleanedImageName = mapping.getImageName().replaceAll('/', '_')
             stubPackageManagerFiles(extractionResult)
             String codeLocationName, hubProjectName, hubVersionName = ''
-            if(layerMappings.size() == 0){
+            if(layerMappings.size() == 1){
                 codeLocationName = "${projectName}_${versionName}_${extractionResult.layer}_${filePath}_${extractionResult.packageManager}"
-                hubProjectName = projectName
+                logger.debug("Keeping project/version")
+				hubProjectName = projectName
                 hubVersionName = versionName
             } else {
                 codeLocationName = "${cleanedImageName}_${mapping.tagName}_${extractionResult.layer}_${filePath}_${extractionResult.packageManager}"
-                hubProjectName = cleanedImageName
+				hubProjectName = cleanedImageName
                 hubVersionName = mapping.tagName
+				logger.debug("Changing project/version to ${hubProjectName}/${hubVersionName}")
             }
             logger.info("codeLocationName: ${codeLocationName}")
 
