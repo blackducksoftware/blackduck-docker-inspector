@@ -30,6 +30,19 @@ class HubDockerClient {
     @Value('${docker.host}')
     String dockerHost
 
+
+    @Value('${docker.registry}')
+    String dockerRegistry
+
+    @Value('${docker.registry.username}')
+    String dockerRegistryUsername
+
+    @Value('${docker.registry.password}')
+    String dockerRegistryPassword
+
+    @Value('${command.timeout}')
+    long commandTimeout
+
     // Have not tested these, they may also be ignored //
     @Value('${docker.tls.verify}')
     Boolean dockerTlsVerify
@@ -45,14 +58,6 @@ class HubDockerClient {
     //    @Value('${docker.api.version}')
     //    String dockerApiVersion
     //
-    //    @Value('${docker.registry.url}')
-    //    String dockerRegistryUrl
-    //
-    //    @Value('${docker.registry.username}')
-    //    String dockerRegistryUsername
-    //
-    //    @Value('${docker.registry.password}')
-    //    String dockerRegistryPassword
     //
     //    @Value('${docker.registry.email}')
     //    String dockerRegistryEmail
@@ -62,6 +67,7 @@ class HubDockerClient {
 
     DockerClient getDockerClient(){
         if(dockerClient == null){
+            loginAuthenticatedRegistry()
             // Docker client uses the system properties for proxies
             // http.proxyHost , http.proxyPort, http.proxyUser, http.proxyPassword
             Properties properties = (Properties) System.getProperties().clone()
@@ -100,5 +106,23 @@ class HubDockerClient {
             dockerClient = DockerClientBuilder.getInstance(config).build();
         }
         dockerClient
+    }
+
+    private void loginAuthenticatedRegistry(){
+        if(StringUtils.isNotBlank(dockerRegistry) && StringUtils.isNotBlank(dockerRegistryUsername) && StringUtils.isNotBlank(dockerRegistryPassword)){
+            String command = "docker login -u ${dockerRegistryUsername}  -p ${dockerRegistryPassword} ${dockerRegistry}"
+            try {
+                def standardOut = new StringBuilder()
+                def standardError = new StringBuilder()
+                def process = command.execute()
+                process.consumeProcessOutput(standardOut, standardError)
+                process.waitForOrKill(commandTimeout)
+                logger.debug(standardOut.toString())
+                logger.debug(standardError.toString())
+            } catch(Exception e) {
+                logger.error("Error executing command {}",command,e)
+            }
+
+        }
     }
 }

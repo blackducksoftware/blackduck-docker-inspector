@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
+import org.apache.commons.lang3.StringUtils
 
 import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter
 import com.blackducksoftware.integration.hub.docker.client.DockerClientManager
@@ -110,24 +111,34 @@ class HubDockerManager {
             filePath = filePath.substring(filePath.indexOf(extractionResult.layer) + 1)
             filePath = filePath.substring(filePath.indexOf('/') + 1)
             filePath = filePath.replaceAll('/', '_')
-			String cleanedImageName = mapping.getImageName().replaceAll('/', '_')
+            String cleanedImageName = mapping.getImageName().replaceAll('/', '_')
             stubPackageManagerFiles(extractionResult)
             String codeLocationName, hubProjectName, hubVersionName = ''
-            if(layerMappings.size() == 1){
+            if(layerMappings.size() == 0){ // TODO remove this clause??
+				if ((StringUtils.isBlank(projectName)) || (StringUtils.isBlank(projectVersion))) {
+					throw new HubIntegrationException("Since no layer mappings were found, the Hub project and version must be specified on the command line")
+				}
                 codeLocationName = "${projectName}_${versionName}_${extractionResult.layer}_${filePath}_${extractionResult.packageManager}"
-                logger.debug("Keeping project/version")
+                logger.debug("Using project/version from config property")
 				hubProjectName = projectName
                 hubVersionName = versionName
             } else {
                 codeLocationName = "${cleanedImageName}_${mapping.tagName}_${extractionResult.layer}_${filePath}_${extractionResult.packageManager}"
-				hubProjectName = cleanedImageName
-                hubVersionName = mapping.tagName
-				logger.debug("Changing project/version to ${hubProjectName}/${hubVersionName}")
+				if (StringUtils.isBlank(projectName)) {
+					hubProjectName = cleanedImageName
+				} else {
+					hubProjectName = projectName
+				}
+				if (StringUtils.isBlank(versionName)) {
+					hubVersionName = mapping.tagName
+				} else {
+					hubVersionName = versionName
+				}
             }
-            logger.info("codeLocationName: ${codeLocationName}")
+            logger.info("Hub project/version: ${hubProjectName}/${hubVersionName}; Code location : ${codeLocationName}")
 
-			String newFileName = "${extractionResult.layer}_${filePath}_${hubProjectName}_${hubVersionName}_bdio.jsonld"
-			def outputFile = new File(workingDirectory, newFileName)
+            String newFileName = "${extractionResult.layer}_${filePath}_${hubProjectName}_${hubVersionName}_bdio.jsonld"
+            def outputFile = new File(workingDirectory, newFileName)
             bdioFiles.add(outputFile)
             new FileOutputStream(outputFile).withStream { outputStream ->
                 BdioWriter writer = new BdioWriter(new Gson(), outputStream)
