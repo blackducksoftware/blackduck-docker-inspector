@@ -38,25 +38,23 @@ class DockerTarParser {
 
     File extractDockerLayers(List<File> layerTars, List<LayerMapping> layerMappings){
         File tarExtractionDirectory = new File(workingDirectory, TAR_EXTRACTION_DIRECTORY)
-        File layerFilesDir = new File(tarExtractionDirectory, 'layerFiles')
-        layerTars.each { layerTar ->
-            def layerName = layerTar.getName()
-            if(StringUtils.compare(layerName,'layer.tar') == 0){
-                layerName = layerTar.getParentFile().getName()
-            }
-            def mapping = layerMappings.find { mapping ->
-                mapping.layers.contains(layerName)
+        File imageFilesDir = new File(tarExtractionDirectory, 'imageFiles')
 
-            }
-            if(mapping != null){
-                def layerOutputDir = new File(layerFilesDir, layerName)
-                parseLayerTarAndExtract( layerTar, layerOutputDir)
-                // parseLayerTarAndExtract(EXTRACTION_PATTERN, layerTar, layerOutputDir)
-            } else {
-                logger.debug("Ignoring layer ${layerName}, this layer is not part of any of the Images/Tags we want to extract")
+        layerMappings.each { mapping ->
+            mapping.layers.each { layer ->
+                File layerTar = layerTars.find{
+                    StringUtils.compare(layer, it.getParentFile().getName()) == 0
+                }
+                if(layerTar != null){
+                    def imageOutputDir = new File(imageFilesDir, mapping.getImageDirectory())
+                    parseLayerTarAndExtract( layerTar, imageOutputDir)
+                    // parseLayerTarAndExtract(EXTRACTION_PATTERN, layerTar, layerOutputDir)
+                } else {
+                    logger.debug("Ignoring layer ${layer}, this layer is not part of any of the Images/Tags we want to extract")
+                }
             }
         }
-        layerFilesDir
+        imageFilesDir
     }
 
     String extractManifestFileContent(String dockerTarName){
@@ -66,13 +64,13 @@ class DockerTarParser {
         StringUtils.join(manifest.readLines(), '\n')
     }
 
-    OperatingSystemEnum detectOperatingSystem(String operatingSystem, File layerFilesDir) {
+    OperatingSystemEnum detectOperatingSystem(String operatingSystem, File extractedFilesDir) {
         OperatingSystemEnum osEnum
         if(StringUtils.isNotBlank(operatingSystem)){
             osEnum = OperatingSystemEnum.determineOperatingSystem(operatingSystem)
         } else{
-            logger.trace("Layer directory ${layerFilesDir.getName()}, looking for etc")
-            List<File> etcFiles = findFileWithName(layerFilesDir, 'etc')
+            logger.trace("Layer directory ${extractedFilesDir.getName()}, looking for etc")
+            List<File> etcFiles = findFileWithName(extractedFilesDir, 'etc')
             if (etcFiles == null) {
                 String msg = "Unable to find the files that specify the Linux distro of this image. You'll need to run with the --linux.distro option"
                 throw new HubIntegrationException(msg)
@@ -90,7 +88,7 @@ class DockerTarParser {
         }
 
         Set<PackageManagerEnum> packageManagers = new HashSet<>()
-        layerFilesDir.listFiles().each { layerDirectory ->
+        extractedFilesDir.listFiles().each { layerDirectory ->
             List<File> libDirs = findFileWithName(layerDirectory, 'lib')
             if(libDirs != null){
                 libDirs.each{ libDir ->
@@ -130,17 +128,17 @@ class DockerTarParser {
         osEnum
     }
 
-    TarExtractionResults extractPackageManagerDirs(File layerFilesDir, OperatingSystemEnum osEnum) {
+    TarExtractionResults extractPackageManagerDirs(File extractedImageFilesDir, OperatingSystemEnum osEnum) {
         TarExtractionResults results = new TarExtractionResults()
         results.operatingSystemEnum = osEnum
-        layerFilesDir.listFiles().each { layerDirectory ->
-            logger.info("Extracting data from layer ${layerDirectory.getName()}")
+        extractedImageFilesDir.listFiles().each { imageDirectory ->
+            logger.info("Extracting data from layer ${imageDirectory.getName()}")
             PackageManagerEnum.values().each { packageManagerEnum ->
-                File packageManagerDirectory = new File(layerDirectory, packageManagerEnum.directory)
+                File packageManagerDirectory = new File(imageDirectory, packageManagerEnum.directory)
                 if (packageManagerDirectory.exists()){
                     logger.trace(packageManagerDirectory.getAbsolutePath())
                     TarExtractionResult result = new TarExtractionResult()
-                    result.layer = layerDirectory.getName()
+                    result.imageDirectoryName = imageDirectory.getName()
                     result.packageManager = packageManagerEnum
                     result.extractedPackageManagerDirectory = packageManagerDirectory
                     results.extractionResults.add(result)

@@ -65,22 +65,22 @@ class HubDockerManager {
         tarParser.extractManifestFileContent(dockerTarName)
     }
 
-    OperatingSystemEnum detectOperatingSystem(String operatingSystem, File layerFilesDir) {
-        tarParser.detectOperatingSystem(operatingSystem, layerFilesDir)
+    OperatingSystemEnum detectOperatingSystem(String operatingSystem, File extractedFilesDir) {
+        tarParser.detectOperatingSystem(operatingSystem, extractedFilesDir)
     }
 
     OperatingSystemEnum detectCurrentOperatingSystem() {
         tarParser.detectOperatingSystemFromEtcDir(new File("/etc"))
     }
 
-    List<File> generateBdioFromLayerFilesDir(List<LayerMapping> mappings, String projectName, String versionName, File dockerTar, File layerFilesDir, OperatingSystemEnum osEnum) {
-        TarExtractionResults tarExtractionResults = tarParser.extractPackageManagerDirs(layerFilesDir, osEnum)
+    List<File> generateBdioFromImageFilesDir(List<LayerMapping> mappings, String projectName, String versionName, File dockerTar, File imageFilesDir, OperatingSystemEnum osEnum) {
+        TarExtractionResults tarExtractionResults = tarParser.extractPackageManagerDirs(imageFilesDir, osEnum)
         if(tarExtractionResults.operatingSystemEnum == null){
             throw new HubIntegrationException('Could not determine the Operating System of this Docker tar.')
         }
         String architecture = null
         if(osEnum == OperatingSystemEnum.ALPINE){
-            List<File> etcDirectories = tarParser.findFileWithName(layerFilesDir, "etc")
+            List<File> etcDirectories = tarParser.findFileWithName(imageFilesDir, "etc")
             for(File etc : etcDirectories){
                 File architectureFile = new File(etc, 'apk')
                 architectureFile = new File(architectureFile, 'arch')
@@ -118,22 +118,23 @@ class HubDockerManager {
         def bdioFiles = []
         tarResults.extractionResults.each { extractionResult ->
             def mapping = layerMappings.find { mapping ->
-                mapping.layers.contains(extractionResult.layer)
+                StringUtils.compare(mapping.getImageDirectory(), extractionResult.imageDirectoryName) == 0
             }
+            String imageDirectoryName = mapping.getImageDirectory()
             String filePath = extractionResult.extractedPackageManagerDirectory.getAbsolutePath()
-            filePath = filePath.substring(filePath.indexOf(extractionResult.layer) + 1)
+            filePath = filePath.substring(filePath.indexOf(imageDirectoryName) + 1)
             filePath = filePath.substring(filePath.indexOf('/') + 1)
             filePath = filePath.replaceAll('/', '_')
-            String cleanedImageName = mapping.getImageName().replaceAll('/', '_')
+            String cleanedImageName = mapping.getImageDirectory().replaceAll('/', '_')
             stubPackageManagerFiles(extractionResult)
             String codeLocationName, hubProjectName, hubVersionName = ''
-            codeLocationName = "${cleanedImageName}_${mapping.tagName}_${extractionResult.layer}_${filePath}_${extractionResult.packageManager}"
+            codeLocationName = "${cleanedImageName}_${mapping.tagName}_${imageDirectoryName}_${filePath}_${extractionResult.packageManager}"
             hubProjectName = deriveHubProject(cleanedImageName, projectName)
             hubVersionName = deriveHubProjectVersion(mapping, versionName)
 
             logger.info("Hub project/version: ${hubProjectName}/${hubVersionName}; Code location : ${codeLocationName}")
 
-            String newFileName = "${extractionResult.layer}_${filePath}_${hubProjectName}_${hubVersionName}_bdio.jsonld"
+            String newFileName = "${imageDirectoryName}_${filePath}_${hubProjectName}_${hubVersionName}_bdio.jsonld"
             def outputFile = new File(workingDirectory, newFileName)
             bdioFiles.add(outputFile)
             new FileOutputStream(outputFile).withStream { outputStream ->

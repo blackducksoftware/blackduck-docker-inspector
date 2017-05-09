@@ -105,16 +105,16 @@ class Application {
 
             List<File> layerTars = hubDockerManager.extractLayerTars(dockerTarFile)
             List<LayerMapping> layerMappings = getLayerMappings(dockerTarFile.getName())
-            File layerFilesDir = hubDockerManager.extractDockerLayers(layerTars, layerMappings)
+            File imageFilesDir = hubDockerManager.extractDockerLayers(layerTars, layerMappings)
 
-            OperatingSystemEnum targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro, layerFilesDir)
+            OperatingSystemEnum targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro, imageFilesDir)
             OperatingSystemEnum requiredOsEnum = dockerImages.getDockerImageOs(targetOsEnum)
             OperatingSystemEnum currentOsEnum = hubDockerManager.detectCurrentOperatingSystem()
             if (currentOsEnum == requiredOsEnum) {
                 String msg = sprintf("Image inspection for %s can be run in this %s docker container; tarfile: %s",
                         targetOsEnum.toString(), currentOsEnum.toString(), dockerTarFile.getAbsolutePath())
                 logger.info(msg)
-                bdioFiles = hubDockerManager.generateBdioFromLayerFilesDir(layerMappings, hubProjectName, hubVersionName, dockerTarFile, layerFilesDir, targetOsEnum)
+                bdioFiles = hubDockerManager.generateBdioFromImageFilesDir(layerMappings, hubProjectName, hubVersionName, dockerTarFile, imageFilesDir, targetOsEnum)
                 if (bdioFiles.size() == 0) {
                     logger.warn("No BDIO Files generated")
                 } else {
@@ -205,16 +205,16 @@ class Application {
             mapping.tagName = DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(LocalDateTime.now())
             mappings.add(mapping)
         }
-		// TODO TEMP; useful for debugging, but can probably remove once we're 
-		// confident in layer targeting
-		logger.debug("getLayerMappings(): # mappings found: ${mappings.size()}")
-		for (LayerMapping m : mappings) {
-			logger.debug("getLayerMappings():\t${m.imageName}/${m.tagName}: ")
-			for (String layerId : m.layers) {
-				logger.debug("getLayerMappings():\t\t${layerId}")
-			}
-		}
-		//////////////////
+        // TODO TEMP; useful for debugging, but can probably remove once we're
+        // confident in layer targeting
+        logger.debug("getLayerMappings(): # mappings found: ${mappings.size()}")
+        for (LayerMapping m : mappings) {
+            logger.debug("getLayerMappings():\t${m.imageName}/${m.tagName}: ")
+            for (String layerId : m.layers) {
+                logger.debug("getLayerMappings():\t\t${layerId}")
+            }
+        }
+        //////////////////
         mappings
     }
 

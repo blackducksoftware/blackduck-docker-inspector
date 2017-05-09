@@ -15,4 +15,8 @@ class LayerMapping {
     String imageName
     String tagName
     Set<String> layers = new HashSet<>()
+
+    String getImageDirectory(){
+        "image_${imageName}_v_${tagName}"
+    }
 }
