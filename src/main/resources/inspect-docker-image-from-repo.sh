@@ -6,7 +6,7 @@
 #
 if [ $# -lt 1 ]
 then
-    echo "Usage: $0 <docker image name> [<docker image version>] [options]"
+    echo "Usage: $0 <docker image name>[:<docker image version>] [options]"
     echo "options:"
     echo "  --linux.distro=YourSpecificDistro"
     exit -1
@@ -21,22 +21,12 @@ else
 fi
 service docker status
 
-imageName=$1
-imageVersion=
+image=$1
 shift
-if [[ $1 != --* ]]
-then
-	imageVersion=$1
-	shift
-fi
 
 cd /opt/blackduck/hub-inspector
-if [[ -z $imageVersion ]]
-then
-	cmd="java -jar hub-docker-*.jar --working.directory=/opt/blackduck/hub-inspector/working --docker.image.name=$imageName $*"
-else
-	cmd="java -jar hub-docker-*.jar --working.directory=/opt/blackduck/hub-inspector/working --docker.image.name=$imageName --docker.tag.name=$imageVersion $*"
-fi
+cmd="java -jar hub-docker-*.jar --working.directory=/opt/blackduck/hub-inspector/working --docker.image=$image $*"
+
 
 echo "executing: $cmd"
 $cmd

@@ -29,12 +29,9 @@ class Application {
 
     @Value('${docker.tar}')
     String dockerTar
-
-    @Value('${docker.image.name}')
-    String dockerImageName
-
-    @Value('${docker.tag.name}')
-    String dockerTagName
+	
+	@Value('${docker.image}')
+	String dockerImage
 
     @Value('${linux.distro}')
     String linuxDistro
@@ -59,6 +56,9 @@ class Application {
 
     @Autowired
     DockerClientManager dockerClientManager
+	
+	String dockerImageName
+	String dockerTagName
 
     static void main(final String[] args) {
         new SpringApplicationBuilder(Application.class).logStartupInfo(false).run(args)
@@ -73,6 +73,7 @@ class Application {
             if(StringUtils.isBlank(dockerTagName)){
                 dockerTagName = 'latest'
             }
+			initImageName()
             logger.info("Inspecting image/tag ${dockerImageName}/${dockerTagName}")
             try {
                 hubClient.testHubConnection()
@@ -144,6 +145,18 @@ class Application {
             logger.debug("Stack trace: ${trace}")
         }
     }
+	
+	private void initImageName() {
+		if (StringUtils.isNotBlank(dockerImage)) {
+			String[] imageNameAndTag = dockerImage.split(':')
+			if ( (imageNameAndTag.length > 0) && (StringUtils.isNotBlank(imageNameAndTag[0])) ) {
+				dockerImageName = imageNameAndTag[0]
+			}
+			if ( (imageNameAndTag.length > 1) && (StringUtils.isNotBlank(imageNameAndTag[1]))) {
+				dockerTagName = imageNameAndTag[1]
+			}
+		}
+	}
 
     private File deriveDockerTarFile() {
         File dockerTarFile

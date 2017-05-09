@@ -59,11 +59,8 @@ class HubDockerProperties {
     @Value('${docker.tar}')
     String dockerTar
 
-    @Value('${docker.image.name}')
-    String dockerImageName
-
-    @Value('${docker.tag.name}')
-    String dockerTagName
+    @Value('${docker.image}')
+    String dockerImage
 
     @Value('${docker.host}')
     String dockerHost
@@ -104,8 +101,7 @@ class HubDockerProperties {
         propsForSubContainer.put('working.directory', workingDirectory)
         propsForSubContainer.put('command.timeout', commandTimeout)
         propsForSubContainer.put('docker.tar', dockerTar)
-        propsForSubContainer.put('docker.image.name', dockerImageName)
-        propsForSubContainer.put('docker.tag.name', dockerTagName)
+        propsForSubContainer.put('docker.image', dockerImage)
         propsForSubContainer.put('docker.host', dockerHost)
         propsForSubContainer.put('docker.tls.verify', dockerTlsVerify)
         propsForSubContainer.put('docker.cert.path', dockerCertPath)
