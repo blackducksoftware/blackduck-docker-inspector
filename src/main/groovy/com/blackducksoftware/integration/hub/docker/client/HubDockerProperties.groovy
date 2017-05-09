@@ -38,9 +38,6 @@ class HubDockerProperties {
     @Value('${hub.proxy.password}')
     String hubProxyPassword
 
-    @Value('${key.store}')
-    String keyStore
-
     @Value('${key.store.pass}')
     String keyStorePass
 
