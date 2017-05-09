@@ -128,7 +128,7 @@ class HubDockerManager {
             String cleanedImageName = mapping.imageName.replaceAll('/', '_')
             stubPackageManagerFiles(extractionResult)
             String codeLocationName, hubProjectName, hubVersionName = ''
-            codeLocationName = "${cleanedImageName}_${mapping.tagName}_${imageDirectoryName}_${filePath}_${extractionResult.packageManager}"
+            codeLocationName = "${imageDirectoryName}_${filePath}_${extractionResult.packageManager}"
             hubProjectName = deriveHubProject(cleanedImageName, projectName)
             hubVersionName = deriveHubProjectVersion(mapping, versionName)
 
