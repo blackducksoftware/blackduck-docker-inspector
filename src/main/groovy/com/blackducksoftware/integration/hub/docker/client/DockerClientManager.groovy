@@ -91,8 +91,8 @@ class DockerClientManager {
 
         String imageId = "${imageName}:${tagName}"
         logger.info("Running container based on image ${imageId}")
-        String extractorContainerName = "${imageName}-extractor"
-
+		String extractorContainerName = deriveContainerName(imageName)
+		logger.debug("Container name: ${extractorContainerName}")
         DockerClient dockerClient = hubDockerClient.getDockerClient()
 
         String tarFileDirInSubContainer = programPaths.getHubDockerTargetDirPath()
@@ -105,7 +105,9 @@ class DockerClientManager {
             boolean foundName = false
             for(String name : container.getNames()){
                 // name prefixed with '/' for some reason
+				logger.debug("Checking running container ${name} to see if it is ${extractorContainerName}")
                 if(name.contains(extractorContainerName)){
+					logger.debug("The extractor container already exists")
                     foundName = true
                     break
                 }
@@ -115,9 +117,11 @@ class DockerClientManager {
         if(extractorContainer != null){
             containerId = extractorContainer.getId()
             if(extractorContainer.getStatus().startsWith('Up')){
+				logger.debug("The extractor container is already running")
                 isContainerRunning = true
             }
         } else{
+			logger.debug("Creating container ${extractorContainerName} from image ${}")
             CreateContainerResponse containerResponse = dockerClient.createContainerCmd(imageId)
                     .withTty(true)
                     .withName(extractorContainerName)
@@ -148,6 +152,17 @@ class DockerClientManager {
         String cmd = programPaths.getHubDockerPgmDirPath() + INSPECTOR_COMMAND
         execCommandInContainer(dockerClient, imageId, containerId, cmd, tarFilePathInSubContainer)
     }
+	
+	private String deriveContainerName(String imageName) {
+		String extractorContainerName
+		int slashIndex = imageName.lastIndexOf('/')
+		if (slashIndex < 0) { 
+			extractorContainerName = "${imageName}-extractor"
+		} else {
+			extractorContainerName = imageName.substring(slashIndex+1)
+		}
+		extractorContainerName
+	}
 
     private void execCommandInContainer(DockerClient dockerClient, String imageId, String containerId, String cmd, String arg) {
         logger.info(sprintf("Running %s on %s in container %s from image %s", cmd, arg, containerId, imageId))

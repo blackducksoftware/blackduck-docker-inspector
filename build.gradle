@@ -183,7 +183,7 @@ task createBuildDockerImageTasks() {
         String suffix = getSuffix(linuxFlavorDirName)
         println "creating task ${taskName}"
         task "${taskName}"(type: Exec, dependsOn: [buildImageDirs]) {
-            commandLine "docker", "build", "--tag", "${hubDockerImageName}${suffix}:${hubDockerImageVersion}", "${buildDir}/images/${linuxFlavorDirName}/${hubDockerImageName}"
+            commandLine "docker", "build", "--tag", "blackducksoftware/${hubDockerImageName}${suffix}:${hubDockerImageVersion}", "${buildDir}/images/${linuxFlavorDirName}/${hubDockerImageName}"
         }
     }
 }
