@@ -32,11 +32,11 @@ class RuntimeOsTest {
     @Test
     public void test() {
         DockerImages osMapper = new DockerImages()
-        assertEquals("hub-inspector-centos", osMapper.getDockerImageName(OperatingSystemEnum.CENTOS))
+        assertEquals("hub-docker-inspector-centos", osMapper.getDockerImageName(OperatingSystemEnum.CENTOS))
         assertEquals("0.0.1", osMapper.getDockerImageVersion(OperatingSystemEnum.CENTOS))
         assertEquals(OperatingSystemEnum.CENTOS, osMapper.getDockerImageOs(OperatingSystemEnum.CENTOS))
 
-        assertEquals("hub-inspector", osMapper.getDockerImageName(OperatingSystemEnum.UBUNTU))
+        assertEquals("hub-docker-inspector", osMapper.getDockerImageName(OperatingSystemEnum.UBUNTU))
         assertEquals("0.0.1", osMapper.getDockerImageVersion(OperatingSystemEnum.UBUNTU))
         assertEquals(OperatingSystemEnum.UBUNTU, osMapper.getDockerImageOs(OperatingSystemEnum.UBUNTU))
     }

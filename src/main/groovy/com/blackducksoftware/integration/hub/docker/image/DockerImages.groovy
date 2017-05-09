@@ -22,11 +22,11 @@ class DockerImages {
     private Map<OperatingSystemEnum, DockerImage> dockerImageMap = new HashMap<>()
 
     DockerImages() {
-        dockerImageMap.put(OperatingSystemEnum.CENTOS, new DockerImage(OperatingSystemEnum.CENTOS, "hub-inspector-centos", "0.0.1"))
-        dockerImageMap.put(OperatingSystemEnum.FEDORA, new DockerImage(OperatingSystemEnum.CENTOS, "hub-inspector-centos", "0.0.1"))
-        dockerImageMap.put(OperatingSystemEnum.DEBIAN, new DockerImage(OperatingSystemEnum.UBUNTU, "hub-inspector", "0.0.1"))
-        dockerImageMap.put(OperatingSystemEnum.UBUNTU, new DockerImage(OperatingSystemEnum.UBUNTU, "hub-inspector", "0.0.1"))
-        dockerImageMap.put(OperatingSystemEnum.ALPINE, new DockerImage(OperatingSystemEnum.ALPINE, "hub-inspector-alpine", "0.0.1"))
+        dockerImageMap.put(OperatingSystemEnum.CENTOS, new DockerImage(OperatingSystemEnum.CENTOS, "hub-docker-inspector-centos", "0.0.1"))
+        dockerImageMap.put(OperatingSystemEnum.FEDORA, new DockerImage(OperatingSystemEnum.CENTOS, "hub-docker-inspector-centos", "0.0.1"))
+        dockerImageMap.put(OperatingSystemEnum.DEBIAN, new DockerImage(OperatingSystemEnum.UBUNTU, "hub-docker-inspector", "0.0.1"))
+        dockerImageMap.put(OperatingSystemEnum.UBUNTU, new DockerImage(OperatingSystemEnum.UBUNTU, "hub-docker-inspector", "0.0.1"))
+        dockerImageMap.put(OperatingSystemEnum.ALPINE, new DockerImage(OperatingSystemEnum.ALPINE, "hub-docker-inspector-alpine", "0.0.1"))
     }
 
     OperatingSystemEnum getDockerImageOs(OperatingSystemEnum targetImageOs) {

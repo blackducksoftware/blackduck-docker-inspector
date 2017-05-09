@@ -23,7 +23,7 @@ class ProgramPaths {
     @Value('${install.dir}')
     String hubDockerPgmDirPath
 
-    private static final String DEFAULT_PGM_DIR = "/opt/blackduck/hub-inspector"
+    private static final String DEFAULT_PGM_DIR = "/opt/blackduck/hub-docker-inspector"
 
 	public static final String APPLICATION_PROPERTIES_FILENAME = "application.properties"
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-# This script (copied to the Docker container hub-inspector will run in)
-# makes it easier to invoke hub-inspector (especially from outside the container).
+# This script (copied to the Docker container hub-docker-inspector will run in)
+# makes it easier to invoke hub-docker-inspector (especially from outside the container).
 #
 #
 if [ $# -lt 1 ]
@@ -24,8 +24,8 @@ service docker status
 image=$1
 shift
 
-cd /opt/blackduck/hub-inspector
-cmd="java -jar hub-docker-*.jar --working.directory=/opt/blackduck/hub-inspector/working --docker.image=$image $*"
+cd /opt/blackduck/hub-docker-inspector
+cmd="java -jar hub-docker-*.jar --working.directory=/opt/blackduck/hub-docker-inspector/working --docker.image=$image $*"
 
 
 echo "executing: $cmd"
