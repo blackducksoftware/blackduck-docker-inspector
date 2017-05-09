@@ -125,7 +125,7 @@ class HubDockerManager {
             filePath = filePath.substring(filePath.indexOf(imageDirectoryName) + 1)
             filePath = filePath.substring(filePath.indexOf('/') + 1)
             filePath = filePath.replaceAll('/', '_')
-            String cleanedImageName = mapping.getImageDirectory().replaceAll('/', '_')
+            String cleanedImageName = mapping.imageName.replaceAll('/', '_')
             stubPackageManagerFiles(extractionResult)
             String codeLocationName, hubProjectName, hubVersionName = ''
             codeLocationName = "${cleanedImageName}_${mapping.tagName}_${imageDirectoryName}_${filePath}_${extractionResult.packageManager}"
