@@ -46,9 +46,6 @@ class HubClient {
     @Value('${command.timeout}')
     long commandTimeout
 
-    @Value('${key.store}')
-    String keyStore
-
     @Value('${key.store.pass}')
     String keyStorePass
 
@@ -121,14 +118,12 @@ class HubClient {
     void importHttpsCertificate(File certificate){
         URL url = new URL(hubUrl)
 
-        if(StringUtils.isBlank(keyStore)){
-            String javaHome = System.getProperty('java.home')
-            File jssecacerts = new File("${javaHome}")
-            jssecacerts = new File(jssecacerts, "lib")
-            jssecacerts = new File(jssecacerts, "security")
-            jssecacerts = new File(jssecacerts, "jssecacerts")
-            keyStore = jssecacerts.getAbsolutePath()
-        }
+        String javaHome = System.getProperty('java.home')
+        File jssecacerts = new File("${javaHome}")
+        jssecacerts = new File(jssecacerts, "lib")
+        jssecacerts = new File(jssecacerts, "security")
+        jssecacerts = new File(jssecacerts, "jssecacerts")
+        String keyStore = jssecacerts.getAbsolutePath()
         if(StringUtils.isBlank(keyStorePass)){
             keyStorePass = 'changeit'
         }
