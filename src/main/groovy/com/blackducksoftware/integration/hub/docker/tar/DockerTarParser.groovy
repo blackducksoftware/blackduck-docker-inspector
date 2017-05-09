@@ -69,7 +69,7 @@ class DockerTarParser {
         if(StringUtils.isNotBlank(operatingSystem)){
             osEnum = OperatingSystemEnum.determineOperatingSystem(operatingSystem)
         } else{
-            logger.trace("Layer directory ${extractedFilesDir.getName()}, looking for etc")
+            logger.trace("Image directory ${extractedFilesDir.getName()}, looking for etc")
             List<File> etcFiles = findFileWithName(extractedFilesDir, 'etc')
             if (etcFiles == null) {
                 String msg = "Unable to find the files that specify the Linux distro of this image. You'll need to run with the --linux.distro option"
@@ -132,7 +132,7 @@ class DockerTarParser {
         TarExtractionResults results = new TarExtractionResults()
         results.operatingSystemEnum = osEnum
         extractedImageFilesDir.listFiles().each { imageDirectory ->
-            logger.info("Extracting data from layer ${imageDirectory.getName()}")
+            logger.info("Extracting data from Image directory ${imageDirectory.getName()}")
             PackageManagerEnum.values().each { packageManagerEnum ->
                 File packageManagerDirectory = new File(imageDirectory, packageManagerEnum.directory)
                 if (packageManagerDirectory.exists()){
