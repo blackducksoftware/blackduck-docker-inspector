@@ -37,10 +37,13 @@ class DockerTarParser {
     File workingDirectory
 
     File extractDockerLayers(List<File> layerTars, List<LayerMapping> layerMappings){
+		// TODO: This method loops through layerTars, but SHOULD loop through layerMappings... that's the 
+		// order we need to preserve; flip it
         File tarExtractionDirectory = new File(workingDirectory, TAR_EXTRACTION_DIRECTORY)
         File layerFilesDir = new File(tarExtractionDirectory, 'layerFiles')
         layerTars.each { layerTar ->
             def layerName = layerTar.getName()
+			
             if(StringUtils.compare(layerName,'layer.tar') == 0){
                 layerName = layerTar.getParentFile().getName()
             }
@@ -49,7 +52,7 @@ class DockerTarParser {
 
             }
             if(mapping != null){
-                def layerOutputDir = new File(layerFilesDir, layerName)
+                def layerOutputDir = new File(layerFilesDir, "image_${mapping.imageName}_v_${mapping.tagName}")
                 parseLayerTarAndExtract( layerTar, layerOutputDir)
                 // parseLayerTarAndExtract(EXTRACTION_PATTERN, layerTar, layerOutputDir)
             } else {
@@ -133,8 +136,9 @@ class DockerTarParser {
     TarExtractionResults extractPackageManagerDirs(File layerFilesDir, OperatingSystemEnum osEnum) {
         TarExtractionResults results = new TarExtractionResults()
         results.operatingSystemEnum = osEnum
-        layerFilesDir.listFiles().each { layerDirectory ->
-            logger.info("Extracting data from layer ${layerDirectory.getName()}")
+		File layerDirectory = layerFilesDir // TODO layers have been collapsed
+        
+            logger.info("Extracting data from unpacked files at ${layerDirectory.getName()}")
             List<File> varDirs = findFileWithName(layerDirectory, 'var')
             if(varDirs == null){
                 logger.debug("Could not find the lib directroy in ${layerDirectory.getAbsolutePath()}")
@@ -157,7 +161,7 @@ class DockerTarParser {
                     }
                 }
             }
-        }
+        
         results
     }
 
