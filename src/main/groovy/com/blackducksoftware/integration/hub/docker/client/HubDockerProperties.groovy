@@ -97,7 +97,6 @@ class HubDockerProperties {
         propsForSubContainer.put('hub.proxy.port', hubProxyPort)
         propsForSubContainer.put('hub.proxy.username', hubProxyUsername)
         propsForSubContainer.put('hub.proxy.password', hubProxyPassword)
-        propsForSubContainer.put('key.store', keyStore)
         propsForSubContainer.put('key.store.pass', keyStorePass)
         propsForSubContainer.put('hub.project.name', hubProjectName)
         propsForSubContainer.put('hub.project.version', hubProjectVersion)
