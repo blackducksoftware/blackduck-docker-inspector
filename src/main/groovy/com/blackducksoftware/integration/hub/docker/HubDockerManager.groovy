@@ -134,7 +134,7 @@ class HubDockerManager {
 
             logger.info("Hub project/version: ${hubProjectName}/${hubVersionName}; Code location : ${codeLocationName}")
 
-            String newFileName = "${imageDirectoryName}_${filePath}_${hubProjectName}_${hubVersionName}_bdio.jsonld"
+            String newFileName = "${cleanedImageName}_${filePath}_${hubProjectName}_${hubVersionName}_bdio.jsonld"
             def outputFile = new File(workingDirectory, newFileName)
             bdioFiles.add(outputFile)
             new FileOutputStream(outputFile).withStream { outputStream ->
