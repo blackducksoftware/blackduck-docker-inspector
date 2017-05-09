@@ -3,7 +3,7 @@ package com.blackducksoftware.integration.hub.docker
 enum PackageManagerEnum {
     DPKG('/var/lib/dpkg', OperatingSystemEnum.UBUNTU),
     RPM('/var/lib/rpm', OperatingSystemEnum.CENTOS),
-    APK('/var/lib/apk', OperatingSystemEnum.ALPINE)
+    APK('/lib/apk', OperatingSystemEnum.ALPINE)
 
     final String directory
     final OperatingSystemEnum operatingSystem

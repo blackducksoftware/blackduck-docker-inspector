@@ -98,7 +98,7 @@ class DockerTarParser {
                         try{
                             packageManagers.add(PackageManagerEnum.getPackageManagerEnumByName(packageManagerDirectory.getName()))
                         } catch (IllegalArgumentException e){
-                            logger.debug(e.toString())
+                            logger.trace(e.toString())
                         }
                     }
                 }
@@ -135,26 +135,15 @@ class DockerTarParser {
         results.operatingSystemEnum = osEnum
         layerFilesDir.listFiles().each { layerDirectory ->
             logger.info("Extracting data from layer ${layerDirectory.getName()}")
-            List<File> varDirs = findFileWithName(layerDirectory, 'var')
-            if(varDirs == null){
-                logger.debug("Could not find the lib directroy in ${layerDirectory.getAbsolutePath()}")
-            } else {
-                varDirs.each{ varDir ->
-                    def libDir = new File(varDir, 'lib')
-                    logger.trace('lib directory : '+libDir.getAbsolutePath())
-                    libDir.listFiles().each { packageManagerDirectory ->
-                        try{
-                            PackageManagerEnum packageManager = PackageManagerEnum.getPackageManagerEnumByName(packageManagerDirectory.getName())
-                            logger.trace(packageManagerDirectory.getAbsolutePath())
-                            TarExtractionResult result = new TarExtractionResult()
-                            result.layer = layerDirectory.getName()
-                            result.packageManager = packageManager
-                            result.extractedPackageManagerDirectory = packageManagerDirectory
-                            results.extractionResults.add(result)
-                        } catch (IllegalArgumentException e){
-                            logger.debug(e.toString())
-                        }
-                    }
+            PackageManagerEnum.values().each { packageManagerEnum ->
+                File packageManagerDirectory = new File(layerDirectory, packageManagerEnum.directory)
+                if (packageManagerDirectory.exists()){
+                    logger.trace(packageManagerDirectory.getAbsolutePath())
+                    TarExtractionResult result = new TarExtractionResult()
+                    result.layer = layerDirectory.getName()
+                    result.packageManager = packageManagerEnum
+                    result.extractedPackageManagerDirectory = packageManagerDirectory
+                    results.extractionResults.add(result)
                 }
             }
         }
@@ -257,10 +246,10 @@ class DockerTarParser {
                             endLink = endLink.normalize()
                         }
                         if(layerEntry.isSymbolicLink()){
-                            logger.debug("${layerEntry.name} is a symbolic link")
+                            logger.trace("${layerEntry.name} is a symbolic link")
                             Files.createSymbolicLink(startLink, endLink)
                         } else if(layerEntry.isLink()){
-                            logger.debug("${layerEntry.name} is a hard link")
+                            logger.trace("${layerEntry.name} is a hard link")
                             Files.createLink(startLink, endLink)
                         }
                     } else {
