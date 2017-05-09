@@ -29,9 +29,9 @@ class Application {
 
     @Value('${docker.tar}')
     String dockerTar
-	
-	@Value('${docker.image}')
-	String dockerImage
+
+    @Value('${docker.image}')
+    String dockerImage
 
     @Value('${linux.distro}')
     String linuxDistro
@@ -56,9 +56,9 @@ class Application {
 
     @Autowired
     DockerClientManager dockerClientManager
-	
-	String dockerImageName
-	String dockerTagName
+
+    String dockerImageName
+    String dockerTagName
 
     static void main(final String[] args) {
         new SpringApplicationBuilder(Application.class).logStartupInfo(false).run(args)
@@ -73,7 +73,7 @@ class Application {
             if(StringUtils.isBlank(dockerTagName)){
                 dockerTagName = 'latest'
             }
-			initImageName()
+            initImageName()
             logger.info("Inspecting image/tag ${dockerImageName}/${dockerTagName}")
             try {
                 hubClient.testHubConnection()
@@ -120,6 +120,9 @@ class Application {
                     logger.warn("No BDIO Files generated")
                 } else {
                     hubDockerManager.uploadBdioFiles(bdioFiles)
+                    logger.info(' ')
+                    logger.info('Successfully uploaded all of the bdio files!')
+                    logger.info(' ')
                 }
             } else {
                 //TODO remove the prefix before release. Only used for testing pulling from our internal Artifactory
@@ -145,18 +148,18 @@ class Application {
             logger.debug("Stack trace: ${trace}")
         }
     }
-	
-	private void initImageName() {
-		if (StringUtils.isNotBlank(dockerImage)) {
-			String[] imageNameAndTag = dockerImage.split(':')
-			if ( (imageNameAndTag.length > 0) && (StringUtils.isNotBlank(imageNameAndTag[0])) ) {
-				dockerImageName = imageNameAndTag[0]
-			}
-			if ( (imageNameAndTag.length > 1) && (StringUtils.isNotBlank(imageNameAndTag[1]))) {
-				dockerTagName = imageNameAndTag[1]
-			}
-		}
-	}
+
+    private void initImageName() {
+        if (StringUtils.isNotBlank(dockerImage)) {
+            String[] imageNameAndTag = dockerImage.split(':')
+            if ( (imageNameAndTag.length > 0) && (StringUtils.isNotBlank(imageNameAndTag[0])) ) {
+                dockerImageName = imageNameAndTag[0]
+            }
+            if ( (imageNameAndTag.length > 1) && (StringUtils.isNotBlank(imageNameAndTag[1]))) {
+                dockerTagName = imageNameAndTag[1]
+            }
+        }
+    }
 
     private File deriveDockerTarFile() {
         File dockerTarFile
