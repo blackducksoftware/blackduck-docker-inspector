@@ -50,7 +50,7 @@ class DockerTarParser {
                     parseLayerTarAndExtract( layerTar, imageOutputDir)
                     // parseLayerTarAndExtract(EXTRACTION_PATTERN, layerTar, layerOutputDir)
                 } else {
-                    logger.debug("Ignoring layer ${layer}, this layer is not part of any of the Images/Tags we want to extract")
+                    logger.warn("Could not find the tar for layer ${layer}")
                 }
             }
         }
