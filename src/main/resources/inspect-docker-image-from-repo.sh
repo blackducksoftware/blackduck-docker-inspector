@@ -12,14 +12,14 @@ then
     exit -1
 fi
 
-if [ $(service docker status|grep "Docker is running"|wc -l) -gt 0 ]
+if [ $(docker info 2>&1 |grep "Server Version"|wc -l) -gt 0 ]
 then
 	echo dockerd is already running
 else
-	service docker start
-	sleep 1
+	dockerd --storage-driver=vfs 2>&1 > /dev/null &
+	sleep 3
 fi
-service docker status
+docker info 2>&1 | grep "Server Version"
 
 image=$1
 shift
