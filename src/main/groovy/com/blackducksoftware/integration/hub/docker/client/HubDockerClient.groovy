@@ -108,8 +108,11 @@ class HubDockerClient {
     }
 
     private void loginAuthenticatedRegistry(){
-        if(StringUtils.isNotBlank(dockerRegistry) && StringUtils.isNotBlank(dockerRegistryUsername) && StringUtils.isNotBlank(dockerRegistryPassword)){
-            String command = "docker login -u ${dockerRegistryUsername}  -p ${dockerRegistryPassword} ${dockerRegistry}"
+        if(StringUtils.isNotBlank(dockerRegistryUsername) && StringUtils.isNotBlank(dockerRegistryPassword)){
+            String command = "docker login -u=${dockerRegistryUsername} -p=${dockerRegistryPassword}"
+            if(StringUtils.isNotBlank(dockerRegistry)){
+                command += " ${dockerRegistry}"
+            }
             try {
                 def standardOut = new StringBuilder()
                 def standardError = new StringBuilder()
