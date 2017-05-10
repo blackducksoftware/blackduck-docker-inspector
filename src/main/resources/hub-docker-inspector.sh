@@ -25,6 +25,18 @@ then
     exit -1
 fi
 
+if [ -f application.properties ]
+then
+	echo "Found application.properties"
+else
+	echo ""
+    echo "Run this command from the directory that contains the application.properties,"
+    echo "configured with your Hub connection details (hub.url, hub.username, and hub.password),"
+	echo "and Docker Hub connection details (docker.registry.username and docker.registry.password)."
+	echo ""
+    exit -1
+fi
+
 options=( "$@" )
 image=${options[${#options[@]}-1]}
 unset "options[${#options[@]}-1]"
