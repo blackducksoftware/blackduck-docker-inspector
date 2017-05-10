@@ -12,6 +12,16 @@ if [ $# -lt 1 ]
     exit -1
 fi
 
+if [ $(docker info 2>&1 |grep "Server Version"|wc -l) -gt 0 ]
+then
+	echo dockerd is already running
+else
+	echo starting dockerd...
+	dockerd --storage-driver=vfs 2> /dev/null > /dev/null &
+	sleep 3
+fi
+docker info 2>&1 | grep "Server Version"
+
 options=( "$@" )
 imageFile=${options[${#options[@]}-1]}
 unset "options[${#options[@]}-1]"
