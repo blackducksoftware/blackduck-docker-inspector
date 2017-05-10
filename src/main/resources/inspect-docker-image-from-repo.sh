@@ -16,7 +16,8 @@ if [ $(docker info 2>&1 |grep "Server Version"|wc -l) -gt 0 ]
 then
 	echo dockerd is already running
 else
-	dockerd --storage-driver=vfs 2>&1 > /dev/null &
+	echo starting dockerd...
+	dockerd --storage-driver=vfs 2> /dev/null > /dev/null &
 	sleep 3
 fi
 docker info 2>&1 | grep "Server Version"

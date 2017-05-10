@@ -120,9 +120,6 @@ class Application {
                     logger.warn("No BDIO Files generated")
                 } else {
                     hubDockerManager.uploadBdioFiles(bdioFiles)
-                    logger.info(' ')
-                    logger.info('Successfully uploaded all of the bdio files!')
-                    logger.info(' ')
                 }
             } else {
                 //TODO remove the prefix before release. Only used for testing pulling from our internal Artifactory
