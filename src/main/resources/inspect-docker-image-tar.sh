@@ -6,16 +6,17 @@
 #
 if [ $# -lt 1 ]
   then
-    echo "Usage: $0 <path to Docker image tar file> [options]"
-    echo "options:"
-    echo "  --linux.distro=YourSpecificDistro"
+    echo "Usage: $0 [options] <docker image name>[:<docker image version>]"
+    echo "options: any property from application.properties can be set by adding an option of the form:"
+    echo "  --<property name>=<value>"
     exit -1
 fi
 
-imageFile=$1
-shift
+options=( "$@" )
+imageFile=${options[${#options[@]}-1]}
+unset "options[${#options[@]}-1]"
 
 cd /opt/blackduck/hub-docker-inspector
-cmd="java -jar hub-docker-*.jar --working.directory=/opt/blackduck/hub-docker-inspector/working --docker.tar=$imageFile $*"
+cmd="java -jar hub-docker-*.jar --working.directory=/opt/blackduck/hub-docker-inspector/working --docker.tar=$imageFile ${options[*]}"
 echo "executing: $cmd"
 $cmd
