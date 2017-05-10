@@ -3,15 +3,25 @@
 # This script runs on the host machine, and uses hub-docker-inspector images/containers
 # to inspect the given Docker image.
 #
+# Run this script from the directory that contains the application.properties, configured
+# with your Hub connection details (hub.url, hub.username, and hub.password),
+# and Docker Hub connection details (docker.registry.username and docker.registry.password).
+#
 
 if [ $# -lt 1 ]
 then
+    echo ""
     echo "Usage: $0 [options] <image>"
-    echo "<image> can be of either of two forms:"
+    echo "<image> can be in either of two forms:"
     echo "	<docker image name>[:<docker image version>]"
     echo "	<saved image tarfile; must have .tar extension>"
     echo "options: any property from application.properties can be set by adding an option of the form:"
     echo "  --<property name>=<value>"
+    echo ""
+    echo "Run this command from the directory that contains the application.properties,"
+    echo "configured with your Hub connection details (hub.url, hub.username, and hub.password),"
+	echo "and Docker Hub connection details (docker.registry.username and docker.registry.password)."
+	echo ""
     exit -1
 fi
 
