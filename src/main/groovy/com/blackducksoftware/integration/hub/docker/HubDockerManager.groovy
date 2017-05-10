@@ -94,12 +94,15 @@ class HubDockerManager {
     }
 
     void uploadBdioFiles(List<File> bdioFiles){
-        if(bdioFiles != null){
-            bdioFiles.each { file ->
-                if (hubClient.isValid()) {
+        if(hubClient.isValid()){
+            if(bdioFiles != null){
+                bdioFiles.each { file ->
                     hubClient.uploadBdioToHub(file)
                 }
             }
+            logger.info(' ')
+            logger.info('Successfully uploaded all of the bdio files!')
+            logger.info(' ')
         }
     }
 
