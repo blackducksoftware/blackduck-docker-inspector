@@ -31,6 +31,7 @@ import com.github.dockerjava.api.model.Container
 import com.github.dockerjava.api.model.Image
 import com.github.dockerjava.core.command.ExecStartResultCallback
 import com.github.dockerjava.core.command.PullImageResultCallback
+import com.github.dockerjava.api.exception.NotFoundException
 
 
 @Component
@@ -81,7 +82,13 @@ class DockerClientManager {
         if(alreadyPulledImage == null){
             // Only pull if we dont already have it
             PullImageCmd pull = dockerClient.pullImageCmd("${imageName}").withTag(tagName)
-            pull.exec(new PullImageResultCallback()).awaitSuccess()
+
+			try {
+				pull.exec(new PullImageResultCallback()).awaitCompletion()
+			} catch (NotFoundException e) {
+				logger.error("*** Pull failed: Image ${imageName}:${tagName} not found. Please check the image name/tag")
+				throw e
+			}
         } else{
             logger.info('Image already pulled')
         }
