@@ -47,6 +47,7 @@ then
 else
 	echo hub-docker-inspector container is not running
 	docker rm hub-docker-inspector 2> /dev/null
+	echo "Pulling/running hub-docker-inspector Docker image"
 	docker run --name hub-docker-inspector -it -d --privileged blackducksoftware/hub-docker-inspector:0.0.1 /bin/bash 2> /dev/null
 fi
 
