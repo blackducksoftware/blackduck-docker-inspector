@@ -8,7 +8,7 @@
 # and Docker Hub connection details (docker.registry.username and docker.registry.password).
 #
 
-if [ $# -lt 1 ]
+if [ \( $# -lt 1 \) -o \( $1 = -h \) -o \( $1 = --help \) ]
 then
     echo ""
     echo "Usage: $0 [options] <image>"
@@ -48,7 +48,7 @@ else
 	echo hub-docker-inspector container is not running
 	docker rm hub-docker-inspector 2> /dev/null
 	echo "Pulling/running hub-docker-inspector Docker image"
-	docker run --name hub-docker-inspector -it -d --privileged blackducksoftware/hub-docker-inspector:0.0.1 /bin/bash 2> /dev/null
+	docker run --name hub-docker-inspector -it -d --privileged blackducksoftware/hub-docker-inspector:0.0.2 /bin/bash 2> /dev/null
 fi
 
 docker cp application.properties hub-docker-inspector:/opt/blackduck/hub-docker-inspector/config
