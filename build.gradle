@@ -199,6 +199,16 @@ private String getSuffix(String linuxFlavorName) {
 task buildDockerImages(dependsOn: [buildDockerImage_ubuntu, buildDockerImage_centos, buildDockerImage_alpine]) {
 }
 
+task packageScript(type: Zip) {
+	archiveName("${baseName}-${version}-script.${extension}")
+	from("${projectDir}/src/main/resources") {
+		include 'application.properties'
+		include 'hub-docker-inspector.sh'
+	}
+}
+
+task all(dependsOn: [buildDockerImages, packageScript]) {}
+
 repositories {
     mavenCentral()
     mavenLocal()
