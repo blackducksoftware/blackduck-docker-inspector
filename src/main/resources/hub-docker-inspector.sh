@@ -25,18 +25,6 @@ then
     exit -1
 fi
 
-if [ -f application.properties ]
-then
-	echo "Found application.properties"
-else
-	echo ""
-    echo "Run this command from the directory that contains the application.properties,"
-    echo "configured with your Hub connection details (hub.url, hub.username, and hub.password),"
-	echo "and Docker Hub connection details (docker.registry.username and docker.registry.password)."
-	echo ""
-    exit -1
-fi
-
 options=( "$@" )
 image=${options[${#options[@]}-1]}
 unset "options[${#options[@]}-1]"
@@ -51,7 +39,16 @@ else
 	docker run --name hub-docker-inspector -it -d --privileged blackducksoftware/hub-docker-inspector:0.0.2 /bin/bash 2> /dev/null
 fi
 
-docker cp application.properties hub-docker-inspector:/opt/blackduck/hub-docker-inspector/config
+if [ -f application.properties ]
+then
+	echo "Found application.properties"
+	docker cp application.properties hub-docker-inspector:/opt/blackduck/hub-docker-inspector/config
+else
+	echo "application.properties file not found in current directory."
+	echo "Without this file, you will have to set all required properties via the command line."
+	docker exec hub-docker-inspector rm -f /opt/blackduck/hub-docker-inspector/config/application.properties
+fi
+
 
 if [[ "$image" == *.tar ]]
 then
