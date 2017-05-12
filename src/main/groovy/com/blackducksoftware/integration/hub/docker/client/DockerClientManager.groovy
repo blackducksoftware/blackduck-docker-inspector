@@ -84,7 +84,7 @@ class DockerClientManager {
             PullImageCmd pull = dockerClient.pullImageCmd("${imageName}").withTag(tagName)
 
 			try {
-				pull.exec(new PullImageResultCallback()).awaitCompletion()
+				pull.exec(new PullImageResultCallback()).awaitSuccess()
 			} catch (NotFoundException e) {
 				logger.error("*** Pull failed: Image ${imageName}:${tagName} not found. Please check the image name/tag")
 				throw e
