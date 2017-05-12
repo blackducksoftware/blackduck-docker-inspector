@@ -7,10 +7,8 @@
 # with your Hub connection details (hub.url, hub.username, and hub.password),
 # and Docker Hub connection details (docker.registry.username and docker.registry.password).
 #
-
-if [ \( $# -lt 1 \) -o \( $1 = -h \) -o \( $1 = --help \) ]
-then
-    echo ""
+function printUsage() {
+	echo ""
     echo "Usage: $0 [options] <image>"
     echo "<image> can be in either of two forms:"
     echo "	<docker image name>[:<docker image version>]"
@@ -23,6 +21,16 @@ then
 	echo "and Docker Hub connection details (docker.registry.username and docker.registry.password)."
 	echo ""
     exit -1
+}
+
+if [ $# -lt 1 ]
+then
+    printUsage
+fi
+
+if [ \( $1 = -h \) -o \( $1 = --help \) ]
+then
+    printUsage
 fi
 
 options=( "$@" )
@@ -55,9 +63,10 @@ then
 	echo Inspecting image tar file: $image
 	tarfilename=$(basename $image)
 	docker cp $image hub-docker-inspector:/opt/blackduck/hub-docker-inspector/target/$tarfilename
-	docker exec hub-docker-inspector /opt/blackduck/hub-docker-inspector/inspect-docker-image-tar.sh ${options[*]} /opt/blackduck/hub-docker-inspector/target/$tarfilename
+	docker exec hub-docker-inspector /opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} /opt/blackduck/hub-docker-inspector/target/$tarfilename
 else
 	echo Inspecting image: $image
-	docker exec hub-docker-inspector /opt/blackduck/hub-docker-inspector/inspect-docker-image-from-repo.sh ${options[*]} $image
+	docker exec hub-docker-inspector /opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} $image
 fi
 
+exit 0

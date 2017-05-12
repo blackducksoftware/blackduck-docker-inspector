@@ -37,7 +37,7 @@ import com.github.dockerjava.api.exception.NotFoundException
 @Component
 class DockerClientManager {
 
-    private static final String INSPECTOR_COMMAND = "inspect-docker-image-tar.sh"
+    private static final String INSPECTOR_COMMAND = "hub-docker-inspector-launcher.sh"
     private static final String IMAGE_TARFILE_PROPERTY = "docker.tar"
     private final Logger logger = LoggerFactory.getLogger(DockerClientManager.class)
 
