@@ -25,6 +25,13 @@ import com.blackducksoftware.integration.hub.docker.tar.LayerMapping
 import static java.nio.file.StandardCopyOption.*;
 
 class DockerTarParserTest {
+	private final static int DPKG_STATUS_FILE_SIZE = 98016
+
+	private static final String IMAGE_NAME = "image1"
+
+	private static final String IMAGE_TAG = "image1tag1"
+
+	private static final String LAYER_ID = "layerId1"
 	
 	@Test
 	void testPerformExtractOfDockerTarSimple() {
@@ -36,15 +43,15 @@ class DockerTarParserTest {
 		doTest("withSymbolicLink")
 	}
 
-    void doTest(String type) {
+    void doTest(String testFileDir) {
 		File workingDirectory = createTempDirectory()
 		File tarExtractionDirectory = new File(workingDirectory, DockerTarParser.TAR_EXTRACTION_DIRECTORY)
-		File layerDir = new File(tarExtractionDirectory, "ubuntu_latest.tar/layerId1")
+		File layerDir = new File(tarExtractionDirectory, "ubuntu_latest.tar/${LAYER_ID}")
 		layerDir.mkdirs()
 		Path layerDirPath = Paths.get(layerDir.getAbsolutePath());
 
         File dockerTar = new File(layerDir, "layer.tar")
-		Files.copy((new File("src/test/resources/${type}/layer.tar")).toPath(), dockerTar.toPath(), REPLACE_EXISTING)
+		Files.copy((new File("src/test/resources/${testFileDir}/layer.tar")).toPath(), dockerTar.toPath(), REPLACE_EXISTING)
 		List<File> layerTars = new ArrayList<>()
 		layerTars.add(dockerTar)
 		
@@ -53,20 +60,20 @@ class DockerTarParserTest {
 		
 		List<LayerMapping> layerMappings = new ArrayList<>()
 		LayerMapping layerMapping = new LayerMapping()
-		layerMapping.imageName = "image1"
-		layerMapping.tagName = "image1tag1"
+		layerMapping.imageName = IMAGE_NAME
+		layerMapping.tagName = IMAGE_TAG
 		Set<String> layerIds = new HashSet<>()
-		layerIds.add("layerId1")
+		layerIds.add(LAYER_ID)
 		layerMapping.layers = layerIds
 		layerMappings.add(layerMapping)
 
         File results = tarParser.extractDockerLayers(layerTars, layerMappings)
 		assertEquals(tarExtractionDirectory.getAbsolutePath() + "/imageFiles", results.getAbsolutePath())
 		
-		File dpkgStatusFile = new File(workingDirectory.getAbsolutePath() + "/tarExtraction/imageFiles/image_image1_v_image1tag1/var/lib/dpkg/status")
+		File dpkgStatusFile = new File(workingDirectory.getAbsolutePath() + "/tarExtraction/imageFiles/image_${IMAGE_NAME}_v_${IMAGE_TAG}/var/lib/dpkg/status")
 		assertTrue(dpkgStatusFile.exists())
 		
-		assertEquals(98016, dpkgStatusFile.size())
+		assertEquals(DPKG_STATUS_FILE_SIZE, dpkgStatusFile.size())
     }
 
 
