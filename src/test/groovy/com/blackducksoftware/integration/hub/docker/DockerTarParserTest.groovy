@@ -22,6 +22,7 @@ import org.junit.Test
 import static org.junit.Assert.*
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser
 import com.blackducksoftware.integration.hub.docker.tar.LayerMapping
+import static java.nio.file.StandardCopyOption.*;
 
 class DockerTarParserTest {
 
@@ -30,11 +31,11 @@ class DockerTarParserTest {
 		File workingDirectory = createTempDirectory()
 		File tarExtractionDirectory = new File(workingDirectory, DockerTarParser.TAR_EXTRACTION_DIRECTORY)
 		File layerDir = new File(tarExtractionDirectory, "ubuntu_latest.tar/layerId1")
+		layerDir.mkdirs()
 		Path layerDirPath = Paths.get(layerDir.getAbsolutePath());
-		Files.createDirectories(layerDirPath);
 
         File dockerTar = new File(layerDir, "layer.tar")
-		dockerTar.createNewFile()
+		Files.copy((new File("src/test/resources/layer.tar")).toPath(), dockerTar.toPath(), REPLACE_EXISTING)
 		List<File> layerTars = new ArrayList<>()
 		layerTars.add(dockerTar)
 		
@@ -52,6 +53,11 @@ class DockerTarParserTest {
 
         File results = tarParser.extractDockerLayers(layerTars, layerMappings)
 		assertEquals(tarExtractionDirectory.getAbsolutePath() + "/imageFiles", results.getAbsolutePath())
+		
+		File dpkgStatusFile = new File(workingDirectory.getAbsolutePath() + "/tarExtraction/imageFiles/image_image1_v_image1tag1/var/lib/dpkg/status")
+		assertTrue(dpkgStatusFile.exists())
+		
+		assertEquals(98016, dpkgStatusFile.size())
     }
 
 
