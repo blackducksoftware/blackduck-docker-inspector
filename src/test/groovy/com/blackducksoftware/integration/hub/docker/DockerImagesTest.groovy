@@ -19,7 +19,7 @@ import org.junit.Test
 
 import com.blackducksoftware.integration.hub.docker.image.DockerImages
 
-class RuntimeOsTest {
+class DockerImagesTest {
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
