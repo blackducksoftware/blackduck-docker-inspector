@@ -32,7 +32,7 @@ class DockerTarParser {
     //
     //    private static final String EXTRACTION_PATTERN = "(lib/apk.*|var/lib/(dpkg|rpm){1}.*|${OS_EXTRACTION_PATTERN})"
 
-    private static final String TAR_EXTRACTION_DIRECTORY = 'tarExtraction'
+    public static final String TAR_EXTRACTION_DIRECTORY = 'tarExtraction'
 
     File workingDirectory
 
@@ -58,7 +58,7 @@ class DockerTarParser {
     }
 
     String extractManifestFileContent(String dockerTarName){
-        File tarExtractionDirectory = new File(workingDirectory, TAR_EXTRACTION_DIRECTORY)
+        File tarExtractionDirectory = new File(workingDirectory, TAR_EXTRACTION_DIRECTORY) // TODO duplicate code w/ line 40
         File dockerTarDirectory = new File(tarExtractionDirectory, dockerTarName)
         File manifest = new File(dockerTarDirectory, 'manifest.json')
         StringUtils.join(manifest.readLines(), '\n')
@@ -194,7 +194,7 @@ class DockerTarParser {
     }
 
     List<File> extractLayerTars(File dockerTar){
-        File tarExtractionDirectory = new File(workingDirectory, TAR_EXTRACTION_DIRECTORY)
+        File tarExtractionDirectory = new File(workingDirectory, TAR_EXTRACTION_DIRECTORY) // TODO duplicate code w/ line 40 and 61
         List<File> untaredFiles = new ArrayList<>()
         final File outputDir = new File(tarExtractionDirectory, dockerTar.getName())
         def tarArchiveInputStream = new TarArchiveInputStream(new FileInputStream(dockerTar))
