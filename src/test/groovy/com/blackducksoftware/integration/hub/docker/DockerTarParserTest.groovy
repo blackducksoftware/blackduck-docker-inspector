@@ -25,9 +25,18 @@ import com.blackducksoftware.integration.hub.docker.tar.LayerMapping
 import static java.nio.file.StandardCopyOption.*;
 
 class DockerTarParserTest {
+	
+	@Test
+	void testPerformExtractOfDockerTarSimple() {
+		doTest("simple")
+	}
+	
+	@Test
+	void testPerformExtractOfDockerTarWithSymbolicLink() {
+		doTest("withSymbolicLink")
+	}
 
-    @Test
-    void testPerformExtractOfDockerTar() {
+    void doTest(String type) {
 		File workingDirectory = createTempDirectory()
 		File tarExtractionDirectory = new File(workingDirectory, DockerTarParser.TAR_EXTRACTION_DIRECTORY)
 		File layerDir = new File(tarExtractionDirectory, "ubuntu_latest.tar/layerId1")
@@ -35,7 +44,7 @@ class DockerTarParserTest {
 		Path layerDirPath = Paths.get(layerDir.getAbsolutePath());
 
         File dockerTar = new File(layerDir, "layer.tar")
-		Files.copy((new File("src/test/resources/layer.tar")).toPath(), dockerTar.toPath(), REPLACE_EXISTING)
+		Files.copy((new File("src/test/resources/${type}/layer.tar")).toPath(), dockerTar.toPath(), REPLACE_EXISTING)
 		List<File> layerTars = new ArrayList<>()
 		layerTars.add(dockerTar)
 		
