@@ -50,10 +50,7 @@ class ProgramPaths {
         hubDockerConfigFilePath = hubDockerConfigDirPath + APPLICATION_PROPERTIES_FILENAME
         hubDockerTargetDirPath = hubDockerPgmDirPath + "target/"
 
-        String qualifiedJarPathString = new java.io.File(DockerClientManager.class.getProtectionDomain()
-                .getCodeSource()
-                .getLocation()
-                .getPath()).getAbsolutePath()
+        String qualifiedJarPathString = getQualifiedJarPath()
         logger.debug("qualifiedJarPathString: ${qualifiedJarPathString}")
         String prefix = "${hubDockerPgmDirPath}hub-docker-"
         logger.debug("prefix: ${prefix}")
@@ -63,6 +60,13 @@ class ProgramPaths {
 
         initDone = true
     }
+	
+	String getQualifiedJarPath() {
+		return new java.io.File(DockerClientManager.class.getProtectionDomain()
+                .getCodeSource()
+                .getLocation()
+                .getPath()).getAbsolutePath()
+	}
 
     public String getHubDockerConfigDirPath() {
         init()

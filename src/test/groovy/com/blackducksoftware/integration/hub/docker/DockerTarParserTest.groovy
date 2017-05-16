@@ -44,7 +44,7 @@ class DockerTarParserTest {
 	}
 
     void doTest(String testFileDir) {
-		File workingDirectory = createTempDirectory()
+		File workingDirectory = TestUtils.createTempDirectory()
 		File tarExtractionDirectory = new File(workingDirectory, DockerTarParser.TAR_EXTRACTION_DIRECTORY)
 		File layerDir = new File(tarExtractionDirectory, "ubuntu_latest.tar/${LAYER_ID}")
 		layerDir.mkdirs()
@@ -75,17 +75,4 @@ class DockerTarParserTest {
 		
 		assertEquals(DPKG_STATUS_FILE_SIZE, dpkgStatusFile.size())
     }
-
-
-public static File createTempDirectory() throws IOException {
-		final File temp = File.createTempFile("temp", Long.toString(System.nanoTime()));
-		if(!(temp.delete())) {
-			throw new IOException("Could not delete temp file: " + temp.getAbsolutePath());
-		}
-		if(!(temp.mkdir())) {
-			throw new IOException("Could not create temp directory: " + temp.getAbsolutePath());
-		}
-		return (temp);
-	}
-
 }
