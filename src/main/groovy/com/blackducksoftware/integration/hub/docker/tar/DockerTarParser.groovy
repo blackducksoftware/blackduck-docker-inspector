@@ -37,7 +37,7 @@ class DockerTarParser {
     File workingDirectory
 
     File extractDockerLayers(List<File> layerTars, List<LayerMapping> layerMappings){
-        File tarExtractionDirectory = new File(workingDirectory, TAR_EXTRACTION_DIRECTORY)
+        File tarExtractionDirectory = getTarExtractionDirectory()
         File imageFilesDir = new File(tarExtractionDirectory, 'imageFiles')
 
         layerMappings.each { mapping ->
@@ -56,9 +56,13 @@ class DockerTarParser {
         }
         imageFilesDir
     }
+	
+	private File getTarExtractionDirectory() {
+		return new File(workingDirectory, TAR_EXTRACTION_DIRECTORY)
+	}
 
     String extractManifestFileContent(String dockerTarName){
-        File tarExtractionDirectory = new File(workingDirectory, TAR_EXTRACTION_DIRECTORY) // TODO duplicate code w/ line 40
+        File tarExtractionDirectory = getTarExtractionDirectory()
         File dockerTarDirectory = new File(tarExtractionDirectory, dockerTarName)
         File manifest = new File(dockerTarDirectory, 'manifest.json')
         StringUtils.join(manifest.readLines(), '\n')
@@ -194,7 +198,7 @@ class DockerTarParser {
     }
 
     List<File> extractLayerTars(File dockerTar){
-        File tarExtractionDirectory = new File(workingDirectory, TAR_EXTRACTION_DIRECTORY) // TODO duplicate code w/ line 40 and 61
+        File tarExtractionDirectory = getTarExtractionDirectory()
         List<File> untaredFiles = new ArrayList<>()
         final File outputDir = new File(tarExtractionDirectory, dockerTar.getName())
         def tarArchiveInputStream = new TarArchiveInputStream(new FileInputStream(dockerTar))
