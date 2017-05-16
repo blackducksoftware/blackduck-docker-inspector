@@ -39,5 +39,9 @@ class DockerImagesTest {
         assertEquals("blackducksoftware/hub-docker-inspector", osMapper.getDockerImageName(OperatingSystemEnum.UBUNTU))
         assertEquals("0.0.2", osMapper.getDockerImageVersion(OperatingSystemEnum.UBUNTU))
         assertEquals(OperatingSystemEnum.UBUNTU, osMapper.getDockerImageOs(OperatingSystemEnum.UBUNTU))
+		
+		assertEquals("blackducksoftware/hub-docker-inspector-alpine", osMapper.getDockerImageName(OperatingSystemEnum.ALPINE))
+		assertEquals("0.0.2", osMapper.getDockerImageVersion(OperatingSystemEnum.ALPINE))
+		assertEquals(OperatingSystemEnum.ALPINE, osMapper.getDockerImageOs(OperatingSystemEnum.ALPINE))
     }
 }
