@@ -80,7 +80,7 @@ class ApplicationTest {
 			run: {String runOnImageName, String runOnImageVersion, File dockerTarFile, boolean devMode -> invokedSubContainer = true}
 			] as DockerClientManager
 		
-		app.init()
+		app.inspectImage()
 		if (expectBdioUpload) {
 			assertTrue(uploadedBdioFiles)
 			assertFalse(invokedSubContainer)

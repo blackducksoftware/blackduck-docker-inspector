@@ -65,20 +65,9 @@ class Application {
     }
 
     @PostConstruct
-    void init() {
+    void inspectImage() {
         try {
-            if (devMode) {
-                logger.info("Running in development mode")
-            }
-            if(StringUtils.isBlank(dockerTagName)){
-                dockerTagName = 'latest'
-            }
-            initImageName()
-            logger.info("Inspecting image/tag ${dockerImageName}/${dockerTagName}")
-            verifyHubConnection()
-            hubDockerManager.init()
-            hubDockerManager.cleanWorkingDirectory()
-            def bdioFiles = null
+            init()
             File dockerTarFile = deriveDockerTarFile()
 
             List<File> layerTars = hubDockerManager.extractLayerTars(dockerTarFile)
@@ -89,32 +78,9 @@ class Application {
             OperatingSystemEnum requiredOsEnum = dockerImages.getDockerImageOs(targetOsEnum)
             OperatingSystemEnum currentOsEnum = hubDockerManager.detectCurrentOperatingSystem()
             if (currentOsEnum == requiredOsEnum) {
-                String msg = sprintf("Image inspection for %s can be run in this %s docker container; tarfile: %s",
-                        targetOsEnum.toString(), currentOsEnum.toString(), dockerTarFile.getAbsolutePath())
-                logger.info(msg)
-                bdioFiles = hubDockerManager.generateBdioFromImageFilesDir(layerMappings, hubProjectName, hubVersionName, dockerTarFile, imageFilesDir, targetOsEnum)
-                if (bdioFiles.size() == 0) {
-                    logger.warn("No BDIO Files generated")
-                } else {
-                    hubDockerManager.uploadBdioFiles(bdioFiles)
-                }
+                generateBdio(dockerTarFile, imageFilesDir, layerMappings, currentOsEnum, targetOsEnum)
             } else {
-                //TODO remove the prefix before release. Only used for testing pulling from our internal Artifactory
-                // String runOnImageName = "int-docker-repo.docker-repo/${dockerImages.getDockerImageName(targetOsEnum)}"
-                String runOnImageName = dockerImages.getDockerImageName(targetOsEnum)
-                String runOnImageVersion = dockerImages.getDockerImageVersion(targetOsEnum)
-                String msg = sprintf("Image inspection for %s should not be run in this %s docker container; will use docker image %s:%s",
-                        targetOsEnum.toString(), currentOsEnum.toString(),
-                        runOnImageName, runOnImageVersion)
-                logger.info(msg)
-                try {
-                    dockerClientManager.pullImage(runOnImageName, runOnImageVersion)
-                } catch (Exception e) {
-                    logger.warn(sprintf(
-                            "Unable to pull docker image %s:%s; proceeding anyway since it may already exist locally",
-                            runOnImageName, runOnImageVersion))
-                }
-                dockerClientManager.run(runOnImageName, runOnImageVersion, dockerTarFile, devMode)
+                runInSubContainer(dockerTarFile, currentOsEnum, targetOsEnum)
             }
         } catch (Exception e) {
             logger.error("Error inspecting image: ${e.message}")
@@ -122,6 +88,49 @@ class Application {
             logger.debug("Stack trace: ${trace}")
         }
     }
+
+	private runInSubContainer(File dockerTarFile, OperatingSystemEnum currentOsEnum, OperatingSystemEnum targetOsEnum) {
+		String runOnImageName = dockerImages.getDockerImageName(targetOsEnum)
+		String runOnImageVersion = dockerImages.getDockerImageVersion(targetOsEnum)
+		String msg = sprintf("Image inspection for %s should not be run in this %s docker container; will use docker image %s:%s",
+				targetOsEnum.toString(), currentOsEnum.toString(),
+				runOnImageName, runOnImageVersion)
+		logger.info(msg)
+		try {
+			dockerClientManager.pullImage(runOnImageName, runOnImageVersion)
+		} catch (Exception e) {
+			logger.warn(sprintf(
+					"Unable to pull docker image %s:%s; proceeding anyway since it may already exist locally",
+					runOnImageName, runOnImageVersion))
+		}
+		dockerClientManager.run(runOnImageName, runOnImageVersion, dockerTarFile, devMode)
+	}
+
+	private generateBdio(File dockerTarFile, File imageFilesDir, List layerMappings, OperatingSystemEnum currentOsEnum, OperatingSystemEnum targetOsEnum) {
+		String msg = sprintf("Image inspection for %s can be run in this %s docker container; tarfile: %s",
+				targetOsEnum.toString(), currentOsEnum.toString(), dockerTarFile.getAbsolutePath())
+		logger.info(msg)
+		List<File> bdioFiles = hubDockerManager.generateBdioFromImageFilesDir(layerMappings, hubProjectName, hubVersionName, dockerTarFile, imageFilesDir, targetOsEnum)
+		if (bdioFiles.size() == 0) {
+			logger.warn("No BDIO Files generated")
+		} else {
+			hubDockerManager.uploadBdioFiles(bdioFiles)
+		}
+	}
+
+	private init() {
+		if (devMode) {
+			logger.info("Running in development mode")
+		}
+		if(StringUtils.isBlank(dockerTagName)){
+			dockerTagName = 'latest'
+		}
+		initImageName()
+		logger.info("Inspecting image/tag ${dockerImageName}/${dockerTagName}")
+		verifyHubConnection()
+		hubDockerManager.init()
+		hubDockerManager.cleanWorkingDirectory()
+	}
 	
 	private void verifyHubConnection() {
 		try {
