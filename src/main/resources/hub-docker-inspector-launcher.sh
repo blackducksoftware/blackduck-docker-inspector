@@ -25,7 +25,7 @@ then
 	echo dockerd is already running
 else
 	echo starting dockerd...
-	dockerd --storage-driver=overlay2 2> /dev/null > /dev/null &
+	dockerd --storage-driver=vfs 2> /dev/null > /dev/null &
 	sleep 3
 fi
 docker info 2>&1 | grep "Server Version"
