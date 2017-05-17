@@ -200,7 +200,7 @@ class Application {
                     imageName = foundRepoTag.substring(0, foundRepoTag.lastIndexOf(':'))
                     tagName = foundRepoTag.substring(foundRepoTag.lastIndexOf(':') + 1)
                 }
-                logger.info("Image ${imageName} , Tag ${tagName}")
+                logger.info("Image: ${imageName}, Tag: ${tagName}")
                 mapping.imageName =  imageName.replaceAll(':', '_').replaceAll('/', '_')
                 mapping.tagName = tagName
                 for(String layer : image.layers){
@@ -209,8 +209,8 @@ class Application {
                 if (StringUtils.isNotBlank(dockerImageName)) {
                     if(StringUtils.compare(imageName, dockerImageName) == 0 && StringUtils.compare(tagName, dockerTagName) == 0){
                         logger.debug('Adding layer mapping')
-                        logger.debug("Image ${mapping.imageName} , Tag ${mapping.tagName}")
-                        logger.debug("Layers ${mapping.layers}")
+                        logger.debug("Image: ${mapping.imageName}:${mapping.tagName}")
+                        logger.debug("Layers: ${mapping.layers}")
                         mappings.add(mapping)
                     }
                 } else {
