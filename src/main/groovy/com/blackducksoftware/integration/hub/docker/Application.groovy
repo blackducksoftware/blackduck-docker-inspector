@@ -75,30 +75,7 @@ class Application {
             }
             initImageName()
             logger.info("Inspecting image/tag ${dockerImageName}/${dockerTagName}")
-            try {
-                hubClient.testHubConnection()
-                logger.info 'Your Hub configuration is valid and a successful connection to the Hub was established.'
-            } catch (Exception e) {
-                logger.error("Your Hub configuration is not valid: ${e.getMessage()}")
-                if(StringUtils.contains(e.getMessage(), 'SunCertPathBuilderException')){
-                    //TODO when integration common gets into hub common we can catch a new IntegrationCertificateException rather than doing this String check
-                    File certificate = null
-                    try{
-                        certificate = hubClient.retrieveHttpsCertificate()
-                        hubClient.importHttpsCertificate(certificate)
-                    } finally{
-                        if(certificate != null && certificate.exists()){
-                            certificate.delete()
-                        }
-                    }
-                    try {
-                        hubClient.testHubConnection()
-                        logger.info 'Your Hub configuration is valid and a successful connection to the Hub was established.'
-                    } catch (Exception e1) {
-                        logger.error("Your Hub configuration is not valid: ${e1.getMessage()}")
-                    }
-                }
-            }
+            verifyHubConnection()
             hubDockerManager.init()
             hubDockerManager.cleanWorkingDirectory()
             def bdioFiles = null
@@ -145,6 +122,38 @@ class Application {
             logger.debug("Stack trace: ${trace}")
         }
     }
+	
+	private void verifyHubConnection() {
+		try {
+			hubClient.testHubConnection()
+			logger.info 'Your Hub configuration is valid and a successful connection to the Hub was established.'
+			return
+		} catch (Exception e) {
+			logger.error("The attempt to connect to the Hub was unsuccessful: ${e.getMessage()}")
+			if(StringUtils.contains(e.getMessage(), 'SunCertPathBuilderException')){
+				logger.info("The error is certificate-related; attempting to correct it...")
+				//TODO when integration common gets into hub common we can catch a new IntegrationCertificateException rather than doing this String check
+				File certificate = null
+				try{
+					certificate = hubClient.retrieveHttpsCertificate()
+					hubClient.importHttpsCertificate(certificate)
+				} finally{
+					if(certificate != null && certificate.exists()){
+						certificate.delete()
+					}
+				}
+				try {
+					hubClient.testHubConnection()
+					logger.info 'Your Hub configuration is valid and a successful connection to the Hub was established.'
+					return
+				} catch (Exception e1) {
+					logger.error("Unable to connect to the Hub: ${e1.getMessage()}")
+					throw e1
+				}
+			}
+			throw e
+		}
+	}
 
     private void initImageName() {
         if (StringUtils.isNotBlank(dockerImage)) {
