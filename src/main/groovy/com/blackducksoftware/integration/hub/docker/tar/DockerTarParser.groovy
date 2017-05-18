@@ -12,6 +12,7 @@
 package com.blackducksoftware.integration.hub.docker.tar
 
 import java.nio.file.Files
+import org.springframework.stereotype.Component
 import java.nio.file.Path
 import java.nio.file.Paths
 
@@ -25,6 +26,7 @@ import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException
 
+@Component
 class DockerTarParser {
     private final Logger logger = LoggerFactory.getLogger(DockerTarParser.class)
 
