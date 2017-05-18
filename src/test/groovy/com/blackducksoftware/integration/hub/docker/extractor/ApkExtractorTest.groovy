@@ -12,6 +12,8 @@
 package com.blackducksoftware.integration.hub.docker.extractor
 
 import org.junit.Test
+import com.blackducksoftware.integration.hub.docker.TestUtils
+import static org.junit.Assert.*
 import org.apache.commons.io.FileUtils
 
 import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter
@@ -54,6 +56,8 @@ class ApkExtractorTest {
 		
 		File file1 = new File("src/test/resources/testApkBdio1.jsonld");
 		File file2 = new File("test/testApkBdio1.jsonld");
-		boolean isTwoEqual = FileUtils.contentEquals(file1, file2);
+		println "Comparing ${file2.getAbsolutePath()} to ${file1.getAbsolutePath()}"
+		boolean filesAreEqual = TestUtils.contentEquals(file1, file2, ["\"@id\":", "\"externalSystemTypeId\":"])
+		assertTrue(filesAreEqual)
     }
 }

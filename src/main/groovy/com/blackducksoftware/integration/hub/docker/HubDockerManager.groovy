@@ -38,10 +38,13 @@ class HubDockerManager {
     @Autowired
     List<Extractor> extractors
 
+	@Autowired
     DockerTarParser tarParser
+	
+	@Autowired
+	PackageManagerFiles packageManagerFiles
 
     void init() {
-        tarParser = new DockerTarParser()
         tarParser.workingDirectory = new File(workingDirectoryPath)
     }
 
@@ -129,7 +132,7 @@ class HubDockerManager {
             filePath = filePath.substring(filePath.indexOf('/') + 1)
             filePath = filePath.replaceAll('/', '_')
             String cleanedImageName = mapping.imageName.replaceAll('/', '_')
-            stubPackageManagerFiles(extractionResult)
+            packageManagerFiles.stubPackageManagerFiles(extractionResult)
             String codeLocationName, hubProjectName, hubVersionName = ''
             codeLocationName = "${cleanedImageName}_${mapping.tagName}_${filePath}_${extractionResult.packageManager}"
             hubProjectName = deriveHubProject(cleanedImageName, projectName)
@@ -177,32 +180,6 @@ class HubDockerManager {
         }
         return hubVersionName
     }
-
-
-    private void stubPackageManagerFiles(TarExtractionResult result){
-        File packageManagerDirectory = new File(result.packageManager.directory)
-        if(packageManagerDirectory.exists()){
-            deleteFilesOnly(packageManagerDirectory)
-            if(result.packageManager == PackageManagerEnum.DPKG){
-                File statusFile = new File(packageManagerDirectory, 'status')
-                statusFile.createNewFile()
-                File updatesDir = new File(packageManagerDirectory, 'updates')
-                updatesDir.mkdir()
-            }
-        }
-        FileUtils.copyDirectory(result.extractedPackageManagerDirectory, packageManagerDirectory)
-    }
-
-    private void deleteFilesOnly(File file){
-        if (file.isDirectory()){
-            for (File subFile: file.listFiles()) {
-                deleteFilesOnly(subFile)
-            }
-        } else{
-            file.delete()
-        }
-    }
-
     private Extractor getExtractorByPackageManager(PackageManagerEnum packageManagerEnum){
         extractors.find { currentExtractor ->
             currentExtractor.packageManagerEnum == packageManagerEnum

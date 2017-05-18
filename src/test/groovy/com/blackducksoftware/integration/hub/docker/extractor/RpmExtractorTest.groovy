@@ -1,6 +1,7 @@
 package com.blackducksoftware.integration.hub.docker.extractor;
 
 import static org.junit.Assert.*
+import com.blackducksoftware.integration.hub.docker.TestUtils
 
 import com.blackducksoftware.integration.hub.docker.mock.ExecutorMock
 import com.google.gson.Gson
@@ -54,6 +55,8 @@ class RpmExtractorTest {
 		
 		File file1 = new File("src/test/resources/testRpmBdio1.jsonld");
 		File file2 = new File("test/testRpmBdio1.jsonld");
-		boolean isTwoEqual = FileUtils.contentEquals(file1, file2);
+		println "Comparing ${file2.getAbsolutePath()} to ${file1.getAbsolutePath()}"
+		boolean filesAreEqual = TestUtils.contentEquals(file1, file2, ["\"@id\":", "\"externalSystemTypeId\":"])
+		assertTrue(filesAreEqual)
     }
 }

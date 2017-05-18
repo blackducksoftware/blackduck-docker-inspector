@@ -11,6 +11,7 @@ import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
 import org.apache.commons.io.FileUtils
+import com.blackducksoftware.integration.hub.docker.TestUtils
 
 class DpkgExtractorTest {
 
@@ -54,7 +55,9 @@ class DpkgExtractorTest {
 		
 		File file1 = new File("src/test/resources/testDpkgBdio1.jsonld");
 		File file2 = new File("test/testDpkgBdio1.jsonld");
-		boolean isTwoEqual = FileUtils.contentEquals(file1, file2);
+		println "Comparing ${file2.getAbsolutePath()} to ${file1.getAbsolutePath()}"
+		boolean filesAreEqual = TestUtils.contentEquals(file1, file2, ["\"@id\":", "\"externalSystemTypeId\":"])
+		assertTrue(filesAreEqual)
     }
 
 }
