@@ -10,7 +10,10 @@ import com.blackducksoftware.integration.hub.docker.tar.TarExtractionResults
 import static org.junit.Assert.*
 import org.apache.commons.io.FileUtils
 import com.blackducksoftware.integration.hub.docker.client.DockerClientManager
+import com.blackducksoftware.integration.hub.docker.executor.ApkExecutor
 import com.blackducksoftware.integration.hub.docker.executor.DpkgExecutor
+import com.blackducksoftware.integration.hub.docker.executor.Executor
+import com.blackducksoftware.integration.hub.docker.extractor.ApkExtractor
 import com.blackducksoftware.integration.hub.docker.extractor.DpkgExtractor
 import com.blackducksoftware.integration.hub.docker.extractor.Extractor
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser
@@ -29,23 +32,31 @@ class HubDockerManagerTest {
 	}
 
 	@Test
-	public void test() {
-		String imageName = "ubuntu"
-		String tagName = "1.0"
-		OperatingSystemEnum os = OperatingSystemEnum.UBUNTU
-		
-		def packages = new File('src/test/resources/ubuntu_dpkg_output_1.txt') as String[]
-
+	public void testDpkg() {
+		String[] packages = new File("src/test/resources/ubuntu_dpkg_output_1.txt")
+		Executor executor = [
+			listPackages: {-> packages}
+			] as DpkgExecutor
+		doTest("ubuntu", "1.0", OperatingSystemEnum.UBUNTU, PackageManagerEnum.DPKG, new DpkgExtractor(), executor)
+	}
+	
+	@Test
+	public void testApk() {
+		String[] packages = new File("src/test/resources/alpine_apk_output_1.txt")
+		Executor executor = [
+			listPackages: {-> packages}
+			] as ApkExecutor
+		doTest("alpine", "1.0", OperatingSystemEnum.ALPINE, PackageManagerEnum.APK, new ApkExtractor(), executor)
+	}
+	
+	private void doTest(String imageName, String tagName, OperatingSystemEnum os, PackageManagerEnum pkgMgr, Extractor extractor, Executor executor) {
 		File imageTarFile = new File("test/image.tar")
 		
 		List<Extractor> extractors = new ArrayList<>()
-		Extractor dpkgExtractor = new DpkgExtractor()
-		dpkgExtractor.executor = [
-			listPackages: {-> packages}
-			] as DpkgExecutor
-		dpkgExtractor.executor.init()
-		dpkgExtractor.init()
-		extractors.add(dpkgExtractor)
+		extractor.executor = executor
+		extractor.executor.init()
+		extractor.init()
+		extractors.add(extractor)
 		
 		HubDockerManager mgr = new HubDockerManager()
 		mgr.packageManagerFiles = [
@@ -65,12 +76,16 @@ class HubDockerManagerTest {
 		TarExtractionResult result = new TarExtractionResult()
 		result.imageDirectoryName = "image_${imageName}_v_${tagName}"
 		result.extractedPackageManagerDirectory = new File("test/resources/imageDir")
-		result.packageManager = PackageManagerEnum.DPKG
+		result.packageManager = pkgMgr
 		extractionResults.add(result)
 		tarExtractionResults.extractionResults = extractionResults
 		
+		List<File> etcDirs = new ArrayList<>()
+		File etcDir = TestUtils.createTempDirectory()
+		etcDirs.add(etcDir)
 		mgr.tarParser = [
-			extractPackageManagerDirs: {File imageFilesDir, OperatingSystemEnum osEnum -> tarExtractionResults}
+			extractPackageManagerDirs: {File imageFilesDir, OperatingSystemEnum osEnum -> tarExtractionResults},
+			findFileWithName: {File fileToSearch, String name -> etcDirs}
 			] as DockerTarParser
 		
 		assertEquals("image.tar", mgr.getTarFileFromDockerImage(imageName, tagName).getName())
@@ -88,7 +103,7 @@ class HubDockerManagerTest {
 				println "${bdioFile.getAbsolutePath()}"
 		}
 
-		File file1 = new File("src/test/resources/imageDir_testProjectName_testProjectVersion_bdio.jsonld")
+		File file1 = new File("src/test/resources/${imageName}_imageDir_testProjectName_testProjectVersion_bdio.jsonld")
 		File file2 = bdioFiles.get(0)
 		println "Comparing ${file2.getAbsolutePath()} to ${file1.getAbsolutePath()}"
 		boolean filesAreEqual = TestUtils.contentEquals(file1, file2, ["\"@id\":", "\"externalSystemTypeId\":"])
