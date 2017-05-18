@@ -2,7 +2,7 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "alpine_1.0_Users_sbillings_Documents_git_hub-docker_test_resources_imageDir_APK",
-    "@id": "uuid:66953d52-f27f-486e-afd4-2e054ee961d6",
+    "@id": "uuid:00b351f9-d769-4a15-93cc-20392706a44c",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -69,7 +69,7 @@
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
-      "externalId": "musl/1.1.15-r6/null"
+      "externalId": "musl/1.1.15-r6/amd64"
     },
     "relationship": []
   },
@@ -80,7 +80,7 @@
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
-      "externalId": "busybox/1.25.1-r0/null"
+      "externalId": "busybox/1.25.1-r0/amd64"
     },
     "relationship": []
   },
@@ -91,7 +91,7 @@
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
-      "externalId": "alpine-baselayout/3.0.4-r0/null"
+      "externalId": "alpine-baselayout/3.0.4-r0/amd64"
     },
     "relationship": []
   },
@@ -102,7 +102,7 @@
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
-      "externalId": "alpine-keys/1.3-r0/null"
+      "externalId": "alpine-keys/1.3-r0/amd64"
     },
     "relationship": []
   },
@@ -113,7 +113,7 @@
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
-      "externalId": "libressl2.4-libcrypto/2.4.4-r0/null"
+      "externalId": "libressl2.4-libcrypto/2.4.4-r0/amd64"
     },
     "relationship": []
   },
@@ -124,7 +124,7 @@
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
-      "externalId": "libressl2.4-libssl/2.4.4-r0/null"
+      "externalId": "libressl2.4-libssl/2.4.4-r0/amd64"
     },
     "relationship": []
   },
@@ -135,7 +135,7 @@
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
-      "externalId": "zlib/1.2.8-r2/null"
+      "externalId": "zlib/1.2.8-r2/amd64"
     },
     "relationship": []
   },
@@ -146,7 +146,7 @@
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
-      "externalId": "apk-tools/2.6.8-r2/null"
+      "externalId": "apk-tools/2.6.8-r2/amd64"
     },
     "relationship": []
   },
@@ -157,7 +157,7 @@
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
-      "externalId": "scanelf/1.1.6-r0/null"
+      "externalId": "scanelf/1.1.6-r0/amd64"
     },
     "relationship": []
   },
@@ -168,7 +168,7 @@
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
-      "externalId": "musl-utils/1.1.15-r6/null"
+      "externalId": "musl-utils/1.1.15-r6/amd64"
     },
     "relationship": []
   },
@@ -179,7 +179,7 @@
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
-      "externalId": "libc-utils/0.7-r1/null"
+      "externalId": "libc-utils/0.7-r1/amd64"
     },
     "relationship": []
   }

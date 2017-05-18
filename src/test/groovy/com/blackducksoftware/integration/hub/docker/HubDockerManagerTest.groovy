@@ -82,6 +82,12 @@ class HubDockerManagerTest {
 		
 		List<File> etcDirs = new ArrayList<>()
 		File etcDir = TestUtils.createTempDirectory()
+		File etcApkDir = new File(etcDir, "apk")
+		File etcApkArchFile = new File(etcApkDir, "arch")
+		etcApkDir.mkdirs()
+		etcApkArchFile.createNewFile()
+		etcApkArchFile.write 'amd64'
+		
 		etcDirs.add(etcDir)
 		mgr.tarParser = [
 			extractPackageManagerDirs: {File imageFilesDir, OperatingSystemEnum osEnum -> tarExtractionResults},
