@@ -87,7 +87,7 @@ class HubDockerManagerTest {
 		for (File bdioFile : bdioFiles) {
 				println "${bdioFile.getAbsolutePath()}"
 		}
-		// compare to src/test/resources/imageDir_testProjectName_testProjectVersion_bdio.jsonld
+
 		File file1 = new File("src/test/resources/imageDir_testProjectName_testProjectVersion_bdio.jsonld")
 		File file2 = bdioFiles.get(0)
 		println "Comparing ${file2.getAbsolutePath()} to ${file1.getAbsolutePath()}"
