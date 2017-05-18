@@ -29,11 +29,6 @@ import com.blackducksoftware.integration.hub.exception.HubIntegrationException
 @Component
 class DockerTarParser {
     private final Logger logger = LoggerFactory.getLogger(DockerTarParser.class)
-
-    //    private static final String OS_EXTRACTION_PATTERN = "etc/(lsb-release|os-release)"
-    //
-    //    private static final String EXTRACTION_PATTERN = "(lib/apk.*|var/lib/(dpkg|rpm){1}.*|${OS_EXTRACTION_PATTERN})"
-
     public static final String TAR_EXTRACTION_DIRECTORY = 'tarExtraction'
 
     File workingDirectory
@@ -50,7 +45,6 @@ class DockerTarParser {
                 if(layerTar != null){
                     def imageOutputDir = new File(imageFilesDir, mapping.getImageDirectory())
                     parseLayerTarAndExtract( layerTar, imageOutputDir)
-                    // parseLayerTarAndExtract(EXTRACTION_PATTERN, layerTar, layerOutputDir)
                 } else {
                     logger.warn("Could not find the tar for layer ${layer}")
                 }
@@ -230,14 +224,12 @@ class DockerTarParser {
     }
 
     private void parseLayerTarAndExtract(File layerTar, File layerOutputDir){
-        // private void parseLayerTarAndExtract(String extractionPattern, File layerTar, File layerOutputDir){
         def layerInputStream = new TarArchiveInputStream(new FileInputStream(layerTar))
         try {
             layerOutputDir.mkdirs()
             def layerEntry
             while (null != (layerEntry = layerInputStream.getNextTarEntry())) {
                 try{
-                    // if(shouldExtractEntry(extractionPattern, layerEntry.name)){
                     if(layerEntry.isSymbolicLink() || layerEntry.isLink()){
                         Path startLink = Paths.get(layerOutputDir.getAbsolutePath(), layerEntry.getName())
                         Path endLink = null
@@ -272,7 +264,6 @@ class DockerTarParser {
                             outputFile.mkdirs()
                         }
                     }
-                    //   }
                 } catch(Exception e) {
                     logger.debug(e.toString())
                 }
@@ -281,8 +272,4 @@ class DockerTarParser {
             IOUtils.closeQuietly(layerInputStream)
         }
     }
-
-    //    boolean shouldExtractEntry(String extractionPattern, String entryName){
-    //        entryName.matches(extractionPattern)
-    //    }
 }

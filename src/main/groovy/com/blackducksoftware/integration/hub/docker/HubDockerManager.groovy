@@ -57,10 +57,6 @@ class HubDockerManager {
     }
 
     File extractDockerLayers(List<File> layerTars, List<LayerMapping> layerMappings) {
-        // Parse through the tar and the tar layers
-        // Find the package manager files
-        // extract the package manager files and put them into the correct locations on the machine that is running this
-        //performExtractFromRunningImage()
         tarParser.extractDockerLayers(layerTars, layerMappings)
     }
 
@@ -118,9 +114,6 @@ class HubDockerManager {
 
     private List<File> generateBdioFromPackageMgrDirs(List<LayerMapping> layerMappings, String projectName, String versionName, String tarFileName, TarExtractionResults tarResults, String architecture) {
         File workingDirectory = new File(workingDirectoryPath)
-        // run the package managers
-        // extract the bdio from output
-        // deploy bdio to the Hub
         def bdioFiles = []
         tarResults.extractionResults.each { extractionResult ->
             def mapping = layerMappings.find { mapping ->
