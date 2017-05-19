@@ -20,14 +20,35 @@ then
     exit -1
 fi
 
+dockerRunning=false
 if [ $(docker info 2>&1 |grep "Server Version"|wc -l) -gt 0 ]
 then
 	echo dockerd is already running
+	dockerRunning=true
 else
 	echo starting dockerd...
-	dockerd --storage-driver=vfs 2> /dev/null > /dev/null &
-	sleep 3
+	### dockerd --storage-driver=vfs 2> /dev/null > /dev/null &
+	dockerd --storage-driver=vfs &
+	
+	for i in 1 .. 5
+	do
+		echo "Pausing to give dockerd a chance to start"
+		sleep 3
+		if [ $(docker info 2>&1 |grep "Server Version"|wc -l) -gt 0 ]
+		then
+			echo dockerd started
+			dockerRunning=true
+			break
+		fi
+	done
 fi
+
+if [ $dockerRunning == false ]
+then
+	echo Unable to start dockerd
+	exit -1
+fi
+
 docker info 2>&1 | grep "Server Version"
 
 options=( "$@" )
