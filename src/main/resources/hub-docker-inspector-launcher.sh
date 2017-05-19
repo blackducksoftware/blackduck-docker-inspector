@@ -27,6 +27,7 @@ then
 	dockerRunning=true
 else
 	echo starting dockerd...
+	cd /opt/blackduck/hub-docker-inspector
 	rm -f dockerd_stdout.log
 	rm -f dockerd_stderr.log
 	dockerd --storage-driver=vfs 2> dockerd_stderr.log > dockerd_stdout.log &
