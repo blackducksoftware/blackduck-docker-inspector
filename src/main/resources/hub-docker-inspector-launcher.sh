@@ -27,8 +27,9 @@ then
 	dockerRunning=true
 else
 	echo starting dockerd...
-	### dockerd --storage-driver=vfs 2> /dev/null > /dev/null &
-	dockerd --storage-driver=vfs &
+	rm -f dockerd_stdout.log
+	rm -f dockerd_stderr.log
+	dockerd --storage-driver=vfs 2> dockerd_stderr.log > dockerd_stdout.log &
 	
 	for i in 1 .. 5
 	do
