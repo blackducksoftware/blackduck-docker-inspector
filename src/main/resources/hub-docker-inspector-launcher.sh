@@ -20,38 +20,42 @@ then
     exit -1
 fi
 
-dockerRunning=false
-if [ $(docker info 2>&1 |grep "Server Version"|wc -l) -gt 0 ]
+# If docker is installed (master container): start docker
+if [ $(which docker |wc -l) -gt 0 ]
 then
-	echo dockerd is already running
-	dockerRunning=true
-else
-	echo starting dockerd...
-	cd /opt/blackduck/hub-docker-inspector
-	rm -f dockerd_stdout.log
-	rm -f dockerd_stderr.log
-	dockerd --storage-driver=vfs 2> dockerd_stderr.log > dockerd_stdout.log &
+	dockerRunning=false
+	if [ $(docker info 2>&1 |grep "Server Version"|wc -l) -gt 0 ]
+	then
+		echo dockerd is already running
+		dockerRunning=true
+	else
+		echo starting dockerd...
+		cd /opt/blackduck/hub-docker-inspector
+		rm -f dockerd_stdout.log
+		rm -f dockerd_stderr.log
+		dockerd --storage-driver=vfs 2> dockerd_stderr.log > dockerd_stdout.log &
 	
-	for i in 1 .. 5
-	do
-		echo "Pausing to give dockerd a chance to start"
-		sleep 3
-		if [ $(docker info 2>&1 |grep "Server Version"|wc -l) -gt 0 ]
-		then
-			echo dockerd started
-			dockerRunning=true
-			break
-		fi
-	done
-fi
+		for i in 1 .. 5
+		do
+			echo "Pausing to give dockerd a chance to start"
+			sleep 3
+			if [ $(docker info 2>&1 |grep "Server Version"|wc -l) -gt 0 ]
+			then
+				echo dockerd started
+				dockerRunning=true
+				break
+			fi
+		done
+	fi
 
-if [ $dockerRunning == false ]
-then
-	echo Unable to start dockerd
-	exit -1
-fi
+	if [ $dockerRunning == false ]
+	then
+		echo Unable to start dockerd
+		exit -1
+	fi
 
-docker info 2>&1 | grep "Server Version"
+	docker info 2>&1 | grep "Server Version"
+fi
 
 options=( "$@" )
 image=${options[${#options[@]}-1]}
