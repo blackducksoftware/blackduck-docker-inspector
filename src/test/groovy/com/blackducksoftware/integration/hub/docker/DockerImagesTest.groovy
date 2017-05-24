@@ -33,15 +33,15 @@ class DockerImagesTest {
     public void test() {
         DockerImages osMapper = new DockerImages()
         assertEquals("blackducksoftware/hub-docker-inspector-centos", osMapper.getDockerImageName(OperatingSystemEnum.CENTOS))
-        assertEquals("0.0.2", osMapper.getDockerImageVersion(OperatingSystemEnum.CENTOS))
+        assertEquals("0.0.2-SNAPSHOT", osMapper.getDockerImageVersion(OperatingSystemEnum.CENTOS))
         assertEquals(OperatingSystemEnum.CENTOS, osMapper.getDockerImageOs(OperatingSystemEnum.CENTOS))
 
         assertEquals("blackducksoftware/hub-docker-inspector", osMapper.getDockerImageName(OperatingSystemEnum.UBUNTU))
-        assertEquals("0.0.2", osMapper.getDockerImageVersion(OperatingSystemEnum.UBUNTU))
+        assertEquals("0.0.2-SNAPSHOT", osMapper.getDockerImageVersion(OperatingSystemEnum.UBUNTU))
         assertEquals(OperatingSystemEnum.UBUNTU, osMapper.getDockerImageOs(OperatingSystemEnum.UBUNTU))
 		
 		assertEquals("blackducksoftware/hub-docker-inspector-alpine", osMapper.getDockerImageName(OperatingSystemEnum.ALPINE))
-		assertEquals("0.0.2", osMapper.getDockerImageVersion(OperatingSystemEnum.ALPINE))
+		assertEquals("0.0.2-SNAPSHOT", osMapper.getDockerImageVersion(OperatingSystemEnum.ALPINE))
 		assertEquals(OperatingSystemEnum.ALPINE, osMapper.getDockerImageOs(OperatingSystemEnum.ALPINE))
     }
 }

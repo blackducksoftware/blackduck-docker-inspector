@@ -8,12 +8,18 @@ import com.blackducksoftware.integration.hub.bdio.simple.BdioPropertyHelper
 import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioBillOfMaterials
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent
+import com.blackducksoftware.integration.hub.bdio.simple.model.BdioExternalIdentifier
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioProject
+import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.ExternalId
+import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.NameVersionExternalId
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 import com.blackducksoftware.integration.hub.docker.executor.Executor
+import com.blackducksoftware.integration.util.IntegrationEscapeUtil
+import org.apache.commons.lang3.StringUtils
 
 abstract class Extractor {
     private final Logger logger = LoggerFactory.getLogger(Extractor.class)
+	private final IntegrationEscapeUtil integrationEscapeUtil = new IntegrationEscapeUtil()
     final BdioPropertyHelper bdioPropertyHelper = new BdioPropertyHelper()
     final BdioNodeFactory bdioNodeFactory = new BdioNodeFactory(bdioPropertyHelper)
 
@@ -33,8 +39,9 @@ abstract class Extractor {
     void extract(BdioWriter bdioWriter, ExtractionDetails extractionDetails, String codeLocationName, String projectName, String version) {
         BdioBillOfMaterials bom = bdioNodeFactory.createBillOfMaterials(codeLocationName, projectName, version)
         bdioWriter.writeBdioNode(bom)
-        String externalId = "${projectName}/${version}"
-        BdioProject projectNode = bdioNodeFactory.createProject(projectName, version, bdioPropertyHelper.createBdioId(projectName, version), extractionDetails.operatingSystem.forge, externalId)
+		String externalId = getExternalId(projectName, version)
+		String bdioId = bdioPropertyHelper.createExternalIdentifier(extractionDetails.operatingSystem.forge, externalId)
+        BdioProject projectNode = bdioNodeFactory.createProject(projectName, version, bdioId, extractionDetails.operatingSystem.forge, externalId)
         List<BdioComponent> components = extractComponents(extractionDetails, executor.listPackages())
         bdioPropertyHelper.addRelationships(projectNode, components)
         bdioWriter.writeBdioNode(projectNode)
@@ -46,9 +53,18 @@ abstract class Extractor {
     java.util.List<BdioComponent> createBdioComponent(String name, String version, String externalId){
         def components = []
         forges.each{ forge ->
-            BdioComponent bdioComponent = bdioNodeFactory.createComponent(name, version, bdioPropertyHelper.createBdioId(name, version), forge, externalId)
+			String bdioId = createDataId(forge, name, version)
+            BdioComponent bdioComponent = bdioNodeFactory.createComponent(name, version, bdioId, forge, externalId)
             components.add(bdioComponent)
         }
         components
     }
+	
+	protected String createDataId(final String forge, String name, String version) {
+		return "data:" + getExternalId(name, version)
+	}
+	
+	protected String getExternalId(String name, String version) {
+		"${name}/${version}"
+	}
 }

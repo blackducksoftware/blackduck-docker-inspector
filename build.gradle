@@ -27,7 +27,6 @@ group = 'com.blackducksoftware.integration'
 version = '0.0.2-SNAPSHOT'
 description = ''
 String hubDockerImageName = 'hub-docker-inspector'
-String hubDockerImageVersion = '0.0.2'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -184,7 +183,7 @@ task createBuildDockerImageTasks() {
         String suffix = getSuffix(linuxFlavorDirName)
         println "creating task ${taskName}"
         task "${taskName}"(type: Exec, dependsOn: [buildImageDirs]) {
-            commandLine "docker", "build", "--tag", "blackducksoftware/${hubDockerImageName}${suffix}:${hubDockerImageVersion}", "${buildDir}/images/${linuxFlavorDirName}/${hubDockerImageName}"
+            commandLine "docker", "build", "--tag", "blackducksoftware/${hubDockerImageName}${suffix}:${version}", "${buildDir}/images/${linuxFlavorDirName}/${hubDockerImageName}"
         }
     }
 }
