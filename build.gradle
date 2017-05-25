@@ -36,13 +36,25 @@ def linuxFlavorsYum = ["centos:7.3.1611"]
 def linuxFlavorsApk = ["alpine:3.5"]
 def linuxFlavors = linuxFlavorsApt + linuxFlavorsYum + linuxFlavorsApk
 
-Properties props = new Properties()
-props.load(new FileInputStream("src/main/resources/application.properties"))
-String hubDockerPgmDir = props.getProperty("install.dir")
+Properties applicationProperties = new Properties()
+applicationProperties.load(new FileInputStream("src/main/resources/application.properties"))
+String hubDockerPgmDir = applicationProperties.getProperty("install.dir")
 
 springBoot { mainClass = 'com.blackducksoftware.integration.hub.docker.Application' }
 
-task produceFinalZip(type: Zip, dependsOn: build) {
+task writeVersionToPropertiesFile(dependsOn: build) {
+	doLast {
+		println '\tGenerating version properties file'
+		Properties versionProperties = new Properties()
+		File versionPropertiesFile = new File('build/classes/main/version.properties')
+		versionPropertiesFile.delete()
+		versionPropertiesFile.createNewFile()
+		versionProperties.setProperty('program.version', version)
+		versionProperties.store(versionPropertiesFile.newWriter(), null)
+	}
+}
+
+task produceFinalZip(type: Zip, dependsOn: writeVersionToPropertiesFile) {
     from("${buildDir}/libs") { include '*.jar' }
     from("${projectDir}/src/main/resources") {
         include 'application.properties'
