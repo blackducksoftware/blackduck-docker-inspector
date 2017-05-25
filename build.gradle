@@ -42,11 +42,20 @@ String hubDockerPgmDir = applicationProperties.getProperty("install.dir")
 
 springBoot { mainClass = 'com.blackducksoftware.integration.hub.docker.Application' }
 
+sourceSets {
+	main {
+		resources {
+			srcDirs = ['src/main/resources']
+			includes = ['*.properties']
+		}
+	}
+}
+
 task writeVersionToPropertiesFile(dependsOn: build) {
 	doLast {
 		println '\tGenerating version properties file'
 		Properties versionProperties = new Properties()
-		File versionPropertiesFile = new File('build/resources/main/version.properties')
+		File versionPropertiesFile = new File('src/main/resources/version.properties')
 		versionPropertiesFile.delete()
 		versionPropertiesFile.createNewFile()
 		versionProperties.setProperty('program.version', version)
