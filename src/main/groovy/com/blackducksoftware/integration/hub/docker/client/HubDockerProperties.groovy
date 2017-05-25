@@ -23,9 +23,7 @@ class HubDockerProperties {
     public void load() {
         propsForSubContainer = new Properties()
 		
-		final Properties propertiesFromFile = new Properties()
-		InputStream stream = this.getClass().getClassLoader().getResourceAsStream("application.properties")
-		propertiesFromFile.load(stream)
+		final ClassPathPropertiesFile propertiesFromFile = new ClassPathPropertiesFile('application.properties')
 		for (String propertyKey : propertiesFromFile.keySet()) {
 			String value = env.getProperty(propertyKey)
 			logger.debug("load(): ${propertyKey}=${value}")

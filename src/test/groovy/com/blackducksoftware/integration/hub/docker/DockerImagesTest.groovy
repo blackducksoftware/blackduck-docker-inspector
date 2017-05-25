@@ -16,7 +16,7 @@ import static org.junit.Assert.*
 import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
-
+import com.blackducksoftware.integration.hub.docker.client.ProgramVersion
 import com.blackducksoftware.integration.hub.docker.image.DockerImages
 
 class DockerImagesTest {
@@ -31,17 +31,22 @@ class DockerImagesTest {
 
     @Test
     public void test() {
+		ProgramVersion mockedProgramVersion = [
+			getProgramVersion: { '1.2.3' }
+		] as ProgramVersion
+
         DockerImages osMapper = new DockerImages()
+		osMapper.programVersion = mockedProgramVersion
         assertEquals("blackducksoftware/hub-docker-inspector-centos", osMapper.getDockerImageName(OperatingSystemEnum.CENTOS))
-        assertEquals("0.0.2-SNAPSHOT", osMapper.getDockerImageVersion(OperatingSystemEnum.CENTOS))
+        assertEquals("1.2.3", osMapper.getDockerImageVersion(OperatingSystemEnum.CENTOS))
         assertEquals(OperatingSystemEnum.CENTOS, osMapper.getDockerImageOs(OperatingSystemEnum.CENTOS))
 
         assertEquals("blackducksoftware/hub-docker-inspector", osMapper.getDockerImageName(OperatingSystemEnum.UBUNTU))
-        assertEquals("0.0.2-SNAPSHOT", osMapper.getDockerImageVersion(OperatingSystemEnum.UBUNTU))
+        assertEquals("1.2.3", osMapper.getDockerImageVersion(OperatingSystemEnum.UBUNTU))
         assertEquals(OperatingSystemEnum.UBUNTU, osMapper.getDockerImageOs(OperatingSystemEnum.UBUNTU))
 		
 		assertEquals("blackducksoftware/hub-docker-inspector-alpine", osMapper.getDockerImageName(OperatingSystemEnum.ALPINE))
-		assertEquals("0.0.2-SNAPSHOT", osMapper.getDockerImageVersion(OperatingSystemEnum.ALPINE))
+		assertEquals("1.2.3", osMapper.getDockerImageVersion(OperatingSystemEnum.ALPINE))
 		assertEquals(OperatingSystemEnum.ALPINE, osMapper.getDockerImageOs(OperatingSystemEnum.ALPINE))
     }
 }

@@ -46,7 +46,7 @@ task writeVersionToPropertiesFile(dependsOn: build) {
 	doLast {
 		println '\tGenerating version properties file'
 		Properties versionProperties = new Properties()
-		File versionPropertiesFile = new File('build/classes/main/version.properties')
+		File versionPropertiesFile = new File('build/resources/main/version.properties')
 		versionPropertiesFile.delete()
 		versionPropertiesFile.createNewFile()
 		versionProperties.setProperty('program.version', version)

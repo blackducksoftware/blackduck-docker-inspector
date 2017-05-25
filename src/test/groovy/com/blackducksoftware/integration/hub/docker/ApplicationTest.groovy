@@ -2,6 +2,7 @@ package com.blackducksoftware.integration.hub.docker;
 
 import java.util.List
 import com.blackducksoftware.integration.hub.docker.client.DockerClientManager
+import com.blackducksoftware.integration.hub.docker.client.ProgramVersion
 import com.blackducksoftware.integration.hub.docker.image.DockerImages
 import com.blackducksoftware.integration.hub.docker.tar.LayerMapping
 
@@ -39,6 +40,11 @@ class ApplicationTest {
 		Application app = new Application()
 		app.dockerImage = targetImageName
 		app.dockerImages = new DockerImages()
+		ProgramVersion mockedProgramVersion = [
+			getProgramVersion: { '1.2.3' }
+		] as ProgramVersion
+		app.dockerImages.programVersion = mockedProgramVersion
+		
 		
 		app.hubClient = [
 				isValid: { true },
