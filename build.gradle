@@ -99,10 +99,16 @@ task fixJarVersionInScript(type: Copy) {
 	filter(ReplaceTokens, tokens: [VERSION: version])
 }
 
+task fixJarVersionInMainScript(type: Copy) {
+	from 'src/main/resources/hub-docker-inspector.sh'
+	into 'build'
+	filter(ReplaceTokens, tokens: [VERSION: version])
+}
+
 task createAddBashScriptTasks() {
     linuxFlavors.eachWithIndex {linuxFlavor, index ->
         String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
-        task "addBashScriptTo${linuxFlavorDirName}ImageBuildDir"(type: Copy, dependsOn: [build, fixJarVersionInScript]) {
+        task "addBashScriptTo${linuxFlavorDirName}ImageBuildDir"(type: Copy, dependsOn: [build, fixJarVersionInScript, fixJarVersionInMainScript]) {
             from 'build/hub-docker-inspector-launcher.sh'
             into "${buildDir}/images/${linuxFlavorDirName}/${hubDockerImageName}"
         }
@@ -224,6 +230,8 @@ task packageScript(type: Zip) {
 	archiveName("${baseName}-${version}-script.${extension}")
 	from("${projectDir}/src/main/resources") {
 		include 'application.properties'
+	}
+	from("${projectDir}/build") {
 		include 'hub-docker-inspector.sh'
 	}
 }
