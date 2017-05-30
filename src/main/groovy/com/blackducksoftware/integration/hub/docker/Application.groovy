@@ -15,6 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.builder.SpringApplicationBuilder
 
 import com.blackducksoftware.integration.hub.docker.client.DockerClientManager
+import com.blackducksoftware.integration.hub.docker.client.ProgramVersion
 import com.blackducksoftware.integration.hub.docker.image.DockerImages
 import com.blackducksoftware.integration.hub.docker.tar.LayerMapping
 import com.blackducksoftware.integration.hub.docker.tar.manifest.ImageInfo
@@ -56,6 +57,9 @@ class Application {
 
     @Autowired
     DockerClientManager dockerClientManager
+	
+	@Autowired
+	ProgramVersion programVersion
 
     String dockerImageName
     String dockerTagName
@@ -119,6 +123,7 @@ class Application {
 	}
 
 	private init() {
+		logger.info("hub-docker-inspector ${programVersion.getProgramVersion()}")
 		if (devMode) {
 			logger.info("Running in development mode")
 		}

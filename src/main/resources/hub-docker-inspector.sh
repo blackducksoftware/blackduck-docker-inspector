@@ -28,6 +28,12 @@ then
     printUsage
 fi
 
+if [ \( $1 = -v \) -o \( $1 = --version \) ]
+then
+	echo "$0 @VERSION@"
+	exit -1
+fi
+
 if [ \( $1 = -h \) -o \( $1 = --help \) ]
 then
     printUsage

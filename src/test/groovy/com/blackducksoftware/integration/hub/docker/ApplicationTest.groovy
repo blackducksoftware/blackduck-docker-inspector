@@ -80,6 +80,10 @@ class ApplicationTest {
 				uploadBdioFiles: {List<File> bdioFilesToUpload -> uploadedBdioFiles = true}
 			] as HubDockerManager
 			
+			app.programVersion = [
+				getProgramVersion: {"1.2.3"}
+				] as ProgramVersion
+			
 
 		app.dockerClientManager = [
 			pullImage: {String runOnImageName, String runOnImageVersion -> },
