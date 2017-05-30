@@ -112,7 +112,7 @@ class HubDockerManagerTest {
 		File file1 = new File("src/test/resources/${imageName}_imageDir_testProjectName_testProjectVersion_bdio.jsonld")
 		File file2 = bdioFiles.get(0)
 		println "Comparing ${file2.getAbsolutePath()} to ${file1.getAbsolutePath()}"
-		boolean filesAreEqual = TestUtils.contentEquals(file1, file2, ["\"@id\":", "\"externalSystemTypeId\":"])
+		boolean filesAreEqual = TestUtils.contentEquals(file1, file2, ["\"@id\":", "\"externalSystemTypeId\":", "_Users_"])
 		assertTrue(filesAreEqual)
 	}
 
