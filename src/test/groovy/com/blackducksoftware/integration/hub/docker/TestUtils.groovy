@@ -32,6 +32,7 @@ class TestUtils {
 			boolean skip = false
 			if (exceptLinesContainingThese != null) {
 				for (String ignoreMe : exceptLinesContainingThese) {
+					println "Checking for ignored substring: ${ignoreMe}"
 					if (line1.contains(ignoreMe) && line2.contains(ignoreMe)) {
 						println "Skipping this line"
 						skip = true
