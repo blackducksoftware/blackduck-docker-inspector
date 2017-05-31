@@ -215,6 +215,21 @@ task createBuildDockerImageTasks() {
     }
 }
 
+task pushImageAlpine(type: Exec, dependsOn: [buildDockerImage_alpine]) {
+	commandLine "docker", "push", "blackducksoftware/hub-docker-inspector-alpine:${version}"
+}
+
+task pushImageCentos(type: Exec, dependsOn: [buildDockerImage_centos]) {
+	commandLine "docker", "push", "blackducksoftware/hub-docker-inspector-centos:${version}"
+}
+
+task pushImageUbuntu(type: Exec, dependsOn: [buildDockerImage_ubuntu]) {
+	commandLine "docker", "push", "blackducksoftware/hub-docker-inspector:${version}"
+}
+
+task pushImages(dependsOn: [pushImageAlpine, pushImageCentos, pushImageUbuntu]) {
+}
+
 private String getSuffix(String linuxFlavorName) {
     String suffix = ''
     if (!linuxFlavorName.equals("ubuntu")) {
