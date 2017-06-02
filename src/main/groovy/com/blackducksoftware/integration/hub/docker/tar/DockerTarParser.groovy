@@ -74,7 +74,7 @@ class DockerTarParser {
             logger.trace("Image directory ${extractedFilesDir.getName()}, looking for etc")
             List<File> etcFiles = findFileWithName(extractedFilesDir, 'etc')
             if (etcFiles == null) {
-                String msg = "Unable to find the files that specify the Linux distro of this image. You'll need to run with the --linux.distro option"
+                String msg = "Unable to find the files that specify the Linux distro of this image."
                 throw new HubIntegrationException(msg)
             }
             for(File etcFile : etcFiles){

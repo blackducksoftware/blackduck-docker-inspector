@@ -19,6 +19,7 @@ import com.blackducksoftware.integration.hub.docker.client.ProgramVersion
 import com.blackducksoftware.integration.hub.docker.image.DockerImages
 import com.blackducksoftware.integration.hub.docker.tar.LayerMapping
 import com.blackducksoftware.integration.hub.docker.tar.manifest.ImageInfo
+import com.blackducksoftware.integration.hub.exception.HubIntegrationException
 import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonElement
@@ -208,7 +209,11 @@ class Application {
                     StringUtils.compare(repoTag, specifiedRepoTag) == 0
                 }
                 if(StringUtils.isBlank(foundRepoTag)){
-					logger.debug("foundRepoTag is blank; parsing it")
+					logger.debug("Attempting to parse repoTag from manifest")
+					if (image.repoTags == null) {
+						String msg = "The RepoTags field is missing from the tar file manifest. Please make sure this tar file was saved using the image name (vs. image ID)"
+						throw new HubIntegrationException(msg)
+					}
                     def repoTag = image.repoTags.get(0)
 					logger.debug("repoTag: ${repoTag}")
                     imageName = repoTag.substring(0, repoTag.lastIndexOf(':'))
@@ -242,10 +247,7 @@ class Application {
             }
         } catch (Exception e) {
             logger.error("Could not parse the image manifest file : ${e.toString()}")
-            LayerMapping mapping = new LayerMapping()
-            mapping.imageName =  tarFileName
-            mapping.tagName = DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(LocalDateTime.now())
-            mappings.add(mapping)
+            throw e
         }
         // TODO TEMP; useful for debugging, but can probably remove once we're
         // confident in layer targeting
