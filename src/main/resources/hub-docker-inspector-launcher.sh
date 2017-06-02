@@ -65,9 +65,9 @@ cd /opt/blackduck/hub-docker-inspector
 
 if [[ "$image" == *.tar ]]
 then
-	cmd="java -jar hub-docker-@VERSION@.jar --working.directory=/opt/blackduck/hub-docker-inspector/working --docker.tar=$image ${options[*]}"
+	cmd="java -Dfile.encoding=UTF-8 -jar hub-docker-@VERSION@.jar --working.directory=/opt/blackduck/hub-docker-inspector/working --docker.tar=$image ${options[*]}"
 else
-	cmd="java -jar hub-docker-@VERSION@.jar --working.directory=/opt/blackduck/hub-docker-inspector/working --docker.image=$image ${options[*]}"
+	cmd="java -Dfile.encoding=UTF-8 -jar hub-docker-@VERSION@.jar --working.directory=/opt/blackduck/hub-docker-inspector/working --docker.image=$image ${options[*]}"
 fi
 
 echo "executing: $cmd"

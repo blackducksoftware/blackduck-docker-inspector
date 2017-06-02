@@ -11,6 +11,9 @@
  */
 package com.blackducksoftware.integration.hub.docker.tar.manifest
 
+import org.apache.commons.lang3.builder.RecursiveToStringStyle
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder
+
 import com.google.gson.annotations.SerializedName
 
 class ImageInfo {
@@ -23,4 +26,10 @@ class ImageInfo {
 
     @SerializedName("Layers")
     List<String> layers
+
+	@Override
+	public String toString() {
+		return ReflectionToStringBuilder.toString(this, RecursiveToStringStyle.JSON_STYLE);
+	}	
+	
 }

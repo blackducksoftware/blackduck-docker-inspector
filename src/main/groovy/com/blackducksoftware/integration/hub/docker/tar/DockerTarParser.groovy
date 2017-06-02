@@ -11,6 +11,7 @@
  */
 package com.blackducksoftware.integration.hub.docker.tar
 
+import java.nio.file.FileSystems
 import java.nio.file.Files
 import org.springframework.stereotype.Component
 import java.nio.file.Path
@@ -25,6 +26,7 @@ import org.slf4j.LoggerFactory
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException
+import java.nio.file.InvalidPathException
 
 @Component
 class DockerTarParser {
@@ -82,7 +84,7 @@ class DockerTarParser {
                         break
                     }
                 } catch (HubIntegrationException e){
-                    logger.debug(e.toString())
+                    logger.debug("Error detecing OS from etc dir: ${e.toString()}")
                 }
             }
         }
@@ -224,23 +226,50 @@ class DockerTarParser {
     }
 
     private void parseLayerTarAndExtract(File layerTar, File layerOutputDir){
-        def layerInputStream = new TarArchiveInputStream(new FileInputStream(layerTar))
+        def layerInputStream = new TarArchiveInputStream(new FileInputStream(layerTar), "UTF-8")
         try {
             layerOutputDir.mkdirs()
             def layerEntry
             while (null != (layerEntry = layerInputStream.getNextTarEntry())) {
                 try{
-                    if(layerEntry.isSymbolicLink() || layerEntry.isLink()){
-                        Path startLink = Paths.get(layerOutputDir.getAbsolutePath(), layerEntry.getName())
+                    if(layerEntry.isSymbolicLink() || layerEntry.isLink()) {
+						logger.trace("Processing link: ${layerEntry.getName()}")
+						logger.trace("Output dir path: ${layerOutputDir.getAbsolutePath()}")
+                        Path startLink
+						try {
+							startLink = Paths.get(layerOutputDir.getAbsolutePath(), layerEntry.getName())
+						} catch (InvalidPathException e) {
+							logger.error("Error extracting symbolic link ${layerEntry.getName()}: Error creating Path object: ${e.getMessage()}")
+							continue
+						}
                         Path endLink = null
+						logger.trace("Getting link name from layer entry")
                         String linkPath = layerEntry.getLinkName()
+						logger.trace("checking first char")
                         if (linkPath.startsWith('.')) {
+							logger.trace("resolving sibling")
                             endLink =  startLink.resolveSibling(layerEntry.getLinkName())
+							logger.trace("normalizing")
                             endLink = endLink.normalize()
                         } else {
-                            endLink = Paths.get(layerOutputDir.getAbsolutePath(), layerEntry.getLinkName())
+							logger.trace("getting end link via Paths.get()")
+							logger.trace("Processing link: ${layerEntry.getLinkName()}")
+							logger.trace("Output dir path: ${layerOutputDir.getAbsolutePath()}")
+//                            endLink = Paths.get(layerOutputDir.getAbsolutePath(), layerEntry.getLinkName())
+							Path targetDirPath = FileSystems.getDefault().getPath(layerOutputDir.getAbsolutePath());
+							
+							Path targetFilePath
+							try {
+								targetFilePath = FileSystems.getDefault().getPath(layerEntry.getLinkName())
+							} catch (InvalidPathException e) {
+								logger.error("Error extracting symbolic link to file ${layerEntry.getLinkName()}: Error creating Path object: ${e.getMessage()}")
+								continue
+							}
+							endLink = targetDirPath.resolve(targetFilePath)
+							logger.trace("normalizing ${endLink.toString()}")
                             endLink = endLink.normalize()
                         }
+						logger.trace("Checking link type")
                         if(layerEntry.isSymbolicLink()){
                             logger.trace("${layerEntry.name} is a symbolic link")
                             Files.createSymbolicLink(startLink, endLink)
@@ -249,11 +278,14 @@ class DockerTarParser {
                             Files.createLink(startLink, endLink)
                         }
                     } else {
+						logger.trace("Processing file/dir: ${layerEntry.getName()}")
                         final File outputFile = new File(layerOutputDir, layerEntry.getName())
                         if (layerEntry.isFile()) {
+							logger.trace("Processing file: ${layerEntry.getName()}")
                             if(!outputFile.getParentFile().exists()){
                                 outputFile.getParentFile().mkdirs()
                             }
+							logger.trace("Creating output stream for ${outputFile.getName()}")
                             final OutputStream outputFileStream = new FileOutputStream(outputFile)
                             try{
                                 IOUtils.copy(layerInputStream, outputFileStream)
@@ -265,7 +297,7 @@ class DockerTarParser {
                         }
                     }
                 } catch(Exception e) {
-                    logger.debug(e.toString())
+                    logger.error("Error extracting files from layer tar: ${e.toString()}", e)
                 }
             }
         } finally {

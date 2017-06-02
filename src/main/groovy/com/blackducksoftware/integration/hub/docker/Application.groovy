@@ -192,12 +192,13 @@ class Application {
     }
 
     private List<LayerMapping> getLayerMappings(String tarFileName){
+		logger.debug("getLayerMappings()")
         List<LayerMapping> mappings = new ArrayList<>()
         try {
             List<ImageInfo> images = getManifestContents(tarFileName)
             for(ImageInfo image : images) {
+				logger.debug("getLayerMappings(): image: ${image}")
                 LayerMapping mapping = new LayerMapping()
-
                 String specifiedRepoTag = ''
                 if (StringUtils.isNotBlank(dockerImageName)) {
                     specifiedRepoTag = "${dockerImageName}:${dockerTagName}"
@@ -207,12 +208,17 @@ class Application {
                     StringUtils.compare(repoTag, specifiedRepoTag) == 0
                 }
                 if(StringUtils.isBlank(foundRepoTag)){
+					logger.debug("foundRepoTag is blank; parsing it")
                     def repoTag = image.repoTags.get(0)
+					logger.debug("repoTag: ${repoTag}")
                     imageName = repoTag.substring(0, repoTag.lastIndexOf(':'))
                     tagName = repoTag.substring(repoTag.lastIndexOf(':') + 1)
+					logger.debug("Parsed imageName: ${imageName}; tagName: ${tagName}")
                 } else {
+					logger.debug("foundRepoTag: ${foundRepoTag}")
                     imageName = foundRepoTag.substring(0, foundRepoTag.lastIndexOf(':'))
                     tagName = foundRepoTag.substring(foundRepoTag.lastIndexOf(':') + 1)
+					logger.debug("Found imageName: ${imageName}; tagName: ${tagName}")
                 }
                 logger.info("Image: ${imageName}, Tag: ${tagName}")
                 mapping.imageName =  imageName.replaceAll(':', '_').replaceAll('/', '_')
@@ -255,12 +261,16 @@ class Application {
     }
 
     private List<ImageInfo> getManifestContents(String tarFileName){
+		logger.debug("getManifestContents()")
         List<ImageInfo> images = new ArrayList<>()
+		logger.debug("getManifestContents(): extracting manifest file content")
         def manifestContentString = hubDockerManager.extractManifestFileContent(tarFileName)
+		logger.debug("getManifestContents(): parsing: ${manifestContentString}")
         JsonParser parser = new JsonParser()
         JsonArray manifestContent = parser.parse(manifestContentString).getAsJsonArray()
         Gson gson = new Gson()
-        for(JsonElement element : manifestContent){
+        for(JsonElement element : manifestContent) {
+			logger.debug("getManifestContents(): element: ${element.toString()}")
             images.add(gson.fromJson(element, ImageInfo.class))
         }
         images
