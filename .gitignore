@@ -1,0 +1,11 @@
+bin/
+.gradle/
+.project
+.classpath
+.settings/
+build/
+.groovy/
+.DS_Store
+.idea
+classes/
+
