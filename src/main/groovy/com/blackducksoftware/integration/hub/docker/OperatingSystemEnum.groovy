@@ -9,7 +9,7 @@ enum OperatingSystemEnum {
     DEBIAN('debian'),
     FEDORA('fedora'),
     UBUNTU('ubuntu'),
-    REDHAT('redhat'),
+    REDHAT('redhat'), // TODO: remove?
 	RHEL('redhat')
 
     String forge
