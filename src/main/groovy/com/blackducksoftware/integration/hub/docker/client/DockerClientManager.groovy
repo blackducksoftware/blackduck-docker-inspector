@@ -130,6 +130,7 @@ class DockerClientManager {
         } else{
 			logger.debug("Creating container ${extractorContainerName} from image ${}")
             CreateContainerResponse containerResponse = dockerClient.createContainerCmd(imageId)
+					.withStdinOpen(true)
                     .withTty(true)
                     .withName(extractorContainerName)
                     .withCmd('/bin/bash')

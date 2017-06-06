@@ -21,7 +21,7 @@ then
 fi
 
 # If docker is installed (master container): start docker
-if [ $(which docker |wc -l) -gt 0 ]
+if [ $(ls -l /usr/bin/docker 2> /dev/null |wc -l) -gt 0 ]
 then
 	dockerRunning=false
 	if [ $(docker info 2>&1 |grep "Server Version"|wc -l) -gt 0 ]
