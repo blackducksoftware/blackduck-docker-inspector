@@ -43,6 +43,14 @@ options=( "$@" )
 image=${options[${#options[@]}-1]}
 unset "options[${#options[@]}-1]"
 
+if [ -z ${BD_HUB_PASSWORD+x} ]
+then
+        echo Environment variable BD_HUB_PASSWORD is not set
+else
+        echo BD_HUB_PASSWORD is set
+        options=( $options --hub.password=$BD_HUB_PASSWORD )
+fi
+
 if [ $(docker ps |grep "hub-docker-inspector" | wc -l) -gt 0 ]
 then
 	echo hub-docker-inspector container is already running
