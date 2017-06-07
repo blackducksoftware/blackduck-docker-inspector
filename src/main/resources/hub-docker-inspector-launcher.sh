@@ -42,8 +42,6 @@ then
 				export https_proxy=$(echo $arg | cut -d '=' -f 2)
 			fi
 		done
-		echo current shell variables:
-		set
 		
 		echo starting dockerd...
 		cd /opt/blackduck/hub-docker-inspector
@@ -86,5 +84,4 @@ else
 	cmd="java -Dfile.encoding=UTF-8 -jar hub-docker-@VERSION@.jar --working.directory=/opt/blackduck/hub-docker-inspector/working --docker.image=$image ${options[*]}"
 fi
 
-echo "executing: $cmd"
 $cmd

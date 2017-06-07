@@ -43,12 +43,39 @@ options=( "$@" )
 image=${options[${#options[@]}-1]}
 unset "options[${#options[@]}-1]"
 
+# Collect proxy env vars
+if [ -z ${SCAN_CLI_OPTS+x} ]
+then
+	echo SCAN_CLI_OPTS is not set
+else
+	echo SCAN_CLI_OPTS is set
+	for cli_opt in $SCAN_CLI_OPTS 
+	do
+		if [[ $cli_opt == -Dhttp.proxyHost=* ]]
+		then
+			options=( ${options[*]} "--hub.proxy.host=$(echo $cli_opt | cut -d '=' -f 2)" )
+		fi
+		if [[ $cli_opt == -Dhttp.proxyPort=* ]]
+		then
+			options=( ${options[*]} "--hub.proxy.port=$(echo $cli_opt | cut -d '=' -f 2)" )
+		fi
+		if [[ $cli_opt == -Dhttp.proxyUser=* ]]
+		then
+			options=( ${options[*]} "--hub.proxy.username=$(echo $cli_opt | cut -d '=' -f 2)" )
+		fi
+		if [[ $cli_opt == -Dhttp.proxyPassword=* ]]
+		then
+			options=( ${options[*]} "--hub.proxy.password=$(echo $cli_opt | cut -d '=' -f 2)" )
+		fi
+	done
+fi
+
 if [ -z ${BD_HUB_PASSWORD+x} ]
 then
         echo Environment variable BD_HUB_PASSWORD is not set
 else
         echo BD_HUB_PASSWORD is set
-        options=( $options --hub.password=$BD_HUB_PASSWORD )
+        options=( ${options[*]} --hub.password=$BD_HUB_PASSWORD )
 fi
 
 if [ $(docker ps |grep "hub-docker-inspector" | wc -l) -gt 0 ]
