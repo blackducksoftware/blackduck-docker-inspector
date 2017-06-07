@@ -29,6 +29,22 @@ then
 		echo dockerd is already running
 		dockerRunning=true
 	else
+		
+		# Set http_proxy, https_proxy (if provided)
+		for arg in $*
+		do
+			if [[ $arg == --http_proxy=* ]]
+			then
+				export http_proxy=$(echo $arg | cut -d '=' -f 2)
+			fi
+			if [[ $arg == --https_proxy=* ]]
+			then
+				export https_proxy=$(echo $arg | cut -d '=' -f 2)
+			fi
+		done
+		echo current shell variables:
+		set
+		
 		echo starting dockerd...
 		cd /opt/blackduck/hub-docker-inspector
 		rm -f dockerd_stdout.log
