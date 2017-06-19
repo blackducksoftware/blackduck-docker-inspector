@@ -35,8 +35,4 @@ class DpkgExecutor extends Executor {
 	void init() {
 		initValues(PackageManagerEnum.DPKG, 'dpkg --version', 'dpkg -l')
 	}
-
-	String getPackageInfoCommand(String packageName){
-		"dpkg -s $packageName"
-	}
 }

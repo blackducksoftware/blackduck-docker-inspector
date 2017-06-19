@@ -35,8 +35,4 @@ class RpmExecutor extends Executor {
 	public void init() {
 		initValues(PackageManagerEnum.RPM, 'rpm --version', 'rpm -qa')
 	}
-
-	String getPackageInfoCommand(String packageName){
-		"rpm -qR $packageName"
-	}
 }

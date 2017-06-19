@@ -47,28 +47,9 @@ abstract class Executor {
 		this.testCommand = testCommand
 		this.listPackagesCommand = listPackagesCommand
 	}
-
-	boolean isCommandAvailable() {
-		try {
-			def proc = testCommand.execute()
-			proc.waitForOrKill(commandTimeout)
-
-			return proc.exitValue() == 0
-		} catch(Exception e) {
-			logger.debug("Error executing test command {}",testCommand,e)
-			return false
-		}
-	}
-
 	String[] listPackages() {
 		executeCommand(listPackagesCommand)
 	}
-
-	String[] getPackageInfo(String packageName) {
-		def infoCommand = getPackageInfoCommand(packageName)
-		executeCommand(infoCommand)
-	}
-
 	String[] executeCommand(String command){
 		try {
 			def standardOut = new StringBuilder()

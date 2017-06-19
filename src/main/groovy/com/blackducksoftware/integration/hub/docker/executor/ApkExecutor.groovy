@@ -35,8 +35,4 @@ class ApkExecutor extends Executor {
 	void init() {
 		initValues(PackageManagerEnum.APK, 'apk --version', 'apk info -v')
 	}
-
-	String getPackageInfoCommand(String packageName){
-		"apk info ${packageName} -a"
-	}
 }
