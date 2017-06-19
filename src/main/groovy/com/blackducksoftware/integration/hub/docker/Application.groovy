@@ -23,9 +23,6 @@
  */
 package com.blackducksoftware.integration.hub.docker
 
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-
 import javax.annotation.PostConstruct
 
 import org.apache.commons.lang.exception.ExceptionUtils
@@ -81,9 +78,9 @@ class Application {
 
     @Autowired
     DockerClientManager dockerClientManager
-	
-	@Autowired
-	ProgramVersion programVersion
+
+    @Autowired
+    ProgramVersion programVersion
 
     String dockerImageName
     String dockerTagName
@@ -117,81 +114,59 @@ class Application {
         }
     }
 
-	private runInSubContainer(File dockerTarFile, OperatingSystemEnum currentOsEnum, OperatingSystemEnum targetOsEnum) {
-		String runOnImageName = dockerImages.getDockerImageName(targetOsEnum)
-		String runOnImageVersion = dockerImages.getDockerImageVersion(targetOsEnum)
-		String msg = sprintf("Image inspection for %s should not be run in this %s docker container; will use docker image %s:%s",
-				targetOsEnum.toString(), currentOsEnum.toString(),
-				runOnImageName, runOnImageVersion)
-		logger.info(msg)
-		try {
-			dockerClientManager.pullImage(runOnImageName, runOnImageVersion)
-		} catch (Exception e) {
-			logger.warn(sprintf(
-					"Unable to pull docker image %s:%s; proceeding anyway since it may already exist locally",
-					runOnImageName, runOnImageVersion))
-		}
-		dockerClientManager.run(runOnImageName, runOnImageVersion, dockerTarFile, devMode)
-	}
+    private runInSubContainer(File dockerTarFile, OperatingSystemEnum currentOsEnum, OperatingSystemEnum targetOsEnum) {
+        String runOnImageName = dockerImages.getDockerImageName(targetOsEnum)
+        String runOnImageVersion = dockerImages.getDockerImageVersion(targetOsEnum)
+        String msg = sprintf("Image inspection for %s should not be run in this %s docker container; will use docker image %s:%s",
+                targetOsEnum.toString(), currentOsEnum.toString(),
+                runOnImageName, runOnImageVersion)
+        logger.info(msg)
+        try {
+            dockerClientManager.pullImage(runOnImageName, runOnImageVersion)
+        } catch (Exception e) {
+            logger.warn(sprintf(
+                    "Unable to pull docker image %s:%s; proceeding anyway since it may already exist locally",
+                    runOnImageName, runOnImageVersion))
+        }
+        dockerClientManager.run(runOnImageName, runOnImageVersion, dockerTarFile, devMode)
+    }
 
-	private generateBdio(File dockerTarFile, File imageFilesDir, List layerMappings, OperatingSystemEnum currentOsEnum, OperatingSystemEnum targetOsEnum) {
-		String msg = sprintf("Image inspection for %s can be run in this %s docker container; tarfile: %s",
-				targetOsEnum.toString(), currentOsEnum.toString(), dockerTarFile.getAbsolutePath())
-		logger.info(msg)
-		List<File> bdioFiles = hubDockerManager.generateBdioFromImageFilesDir(layerMappings, hubProjectName, hubVersionName, dockerTarFile, imageFilesDir, targetOsEnum)
-		if (bdioFiles.size() == 0) {
-			logger.warn("No BDIO Files generated")
-		} else {
-			hubDockerManager.uploadBdioFiles(bdioFiles)
-		}
-	}
+    private generateBdio(File dockerTarFile, File imageFilesDir, List layerMappings, OperatingSystemEnum currentOsEnum, OperatingSystemEnum targetOsEnum) {
+        String msg = sprintf("Image inspection for %s can be run in this %s docker container; tarfile: %s",
+                targetOsEnum.toString(), currentOsEnum.toString(), dockerTarFile.getAbsolutePath())
+        logger.info(msg)
+        List<File> bdioFiles = hubDockerManager.generateBdioFromImageFilesDir(layerMappings, hubProjectName, hubVersionName, dockerTarFile, imageFilesDir, targetOsEnum)
+        if (bdioFiles.size() == 0) {
+            logger.warn("No BDIO Files generated")
+        } else {
+            hubDockerManager.uploadBdioFiles(bdioFiles)
+        }
+    }
 
-	private init() {
-		logger.info("hub-docker-inspector ${programVersion.getProgramVersion()}")
-		if (devMode) {
-			logger.info("Running in development mode")
-		}
-		if(StringUtils.isBlank(dockerTagName)){
-			dockerTagName = 'latest'
-		}
-		initImageName()
-		logger.info("Inspecting image/tag ${dockerImageName}/${dockerTagName}")
-		verifyHubConnection()
-		hubDockerManager.init()
-		hubDockerManager.cleanWorkingDirectory()
-	}
-	
-	private void verifyHubConnection() {
-		try {
-			hubClient.testHubConnection()
-			logger.info 'Your Hub configuration is valid and a successful connection to the Hub was established.'
-			return
-		} catch (Exception e) {
-			logger.error("The attempt to connect to the Hub was unsuccessful: ${e.getMessage()}")
-			if(StringUtils.contains(e.getMessage(), 'SunCertPathBuilderException')){
-				logger.info("The error is certificate-related; attempting to correct it...")
-				//TODO when integration common gets into hub common we can catch a new IntegrationCertificateException rather than doing this String check
-				File certificate = null
-				try{
-					certificate = hubClient.retrieveHttpsCertificate()
-					hubClient.importHttpsCertificate(certificate)
-				} finally{
-					if(certificate != null && certificate.exists()){
-						certificate.delete()
-					}
-				}
-				try {
-					hubClient.testHubConnection()
-					logger.info 'Your Hub configuration is valid and a successful connection to the Hub was established.'
-					return
-				} catch (Exception e1) {
-					logger.error("Unable to connect to the Hub: ${e1.getMessage()}")
-					throw e1
-				}
-			}
-			throw e
-		}
-	}
+    private init() {
+        logger.info("hub-docker-inspector ${programVersion.getProgramVersion()}")
+        if (devMode) {
+            logger.info("Running in development mode")
+        }
+        if(StringUtils.isBlank(dockerTagName)){
+            dockerTagName = 'latest'
+        }
+        initImageName()
+        logger.info("Inspecting image/tag ${dockerImageName}/${dockerTagName}")
+        verifyHubConnection()
+        hubDockerManager.init()
+        hubDockerManager.cleanWorkingDirectory()
+    }
+
+    private void verifyHubConnection() {
+        try {
+            hubClient.testHubConnection()
+            logger.info 'Your Hub configuration is valid and a successful connection to the Hub was established.'
+            return
+        } catch (Exception e) {
+            logger.error("Unable to connect to the Hub: ${e.getMessage()}")
+        }
+    }
 
     private void initImageName() {
         if (StringUtils.isNotBlank(dockerImage)) {
@@ -216,12 +191,12 @@ class Application {
     }
 
     private List<LayerMapping> getLayerMappings(String tarFileName){
-		logger.debug("getLayerMappings()")
+        logger.debug("getLayerMappings()")
         List<LayerMapping> mappings = new ArrayList<>()
         try {
             List<ImageInfo> images = getManifestContents(tarFileName)
             for(ImageInfo image : images) {
-				logger.debug("getLayerMappings(): image: ${image}")
+                logger.debug("getLayerMappings(): image: ${image}")
                 LayerMapping mapping = new LayerMapping()
                 String specifiedRepoTag = ''
                 if (StringUtils.isNotBlank(dockerImageName)) {
@@ -232,21 +207,21 @@ class Application {
                     StringUtils.compare(repoTag, specifiedRepoTag) == 0
                 }
                 if(StringUtils.isBlank(foundRepoTag)){
-					logger.debug("Attempting to parse repoTag from manifest")
-					if (image.repoTags == null) {
-						String msg = "The RepoTags field is missing from the tar file manifest. Please make sure this tar file was saved using the image name (vs. image ID)"
-						throw new HubIntegrationException(msg)
-					}
+                    logger.debug("Attempting to parse repoTag from manifest")
+                    if (image.repoTags == null) {
+                        String msg = "The RepoTags field is missing from the tar file manifest. Please make sure this tar file was saved using the image name (vs. image ID)"
+                        throw new HubIntegrationException(msg)
+                    }
                     def repoTag = image.repoTags.get(0)
-					logger.debug("repoTag: ${repoTag}")
+                    logger.debug("repoTag: ${repoTag}")
                     imageName = repoTag.substring(0, repoTag.lastIndexOf(':'))
                     tagName = repoTag.substring(repoTag.lastIndexOf(':') + 1)
-					logger.debug("Parsed imageName: ${imageName}; tagName: ${tagName}")
+                    logger.debug("Parsed imageName: ${imageName}; tagName: ${tagName}")
                 } else {
-					logger.debug("foundRepoTag: ${foundRepoTag}")
+                    logger.debug("foundRepoTag: ${foundRepoTag}")
                     imageName = foundRepoTag.substring(0, foundRepoTag.lastIndexOf(':'))
                     tagName = foundRepoTag.substring(foundRepoTag.lastIndexOf(':') + 1)
-					logger.debug("Found imageName: ${imageName}; tagName: ${tagName}")
+                    logger.debug("Found imageName: ${imageName}; tagName: ${tagName}")
                 }
                 logger.info("Image: ${imageName}, Tag: ${tagName}")
                 mapping.imageName =  imageName.replaceAll(':', '_').replaceAll('/', '_')
@@ -286,16 +261,16 @@ class Application {
     }
 
     private List<ImageInfo> getManifestContents(String tarFileName){
-		logger.debug("getManifestContents()")
+        logger.debug("getManifestContents()")
         List<ImageInfo> images = new ArrayList<>()
-		logger.debug("getManifestContents(): extracting manifest file content")
+        logger.debug("getManifestContents(): extracting manifest file content")
         def manifestContentString = hubDockerManager.extractManifestFileContent(tarFileName)
-		logger.debug("getManifestContents(): parsing: ${manifestContentString}")
+        logger.debug("getManifestContents(): parsing: ${manifestContentString}")
         JsonParser parser = new JsonParser()
         JsonArray manifestContent = parser.parse(manifestContentString).getAsJsonArray()
         Gson gson = new Gson()
         for(JsonElement element : manifestContent) {
-			logger.debug("getManifestContents(): element: ${element.toString()}")
+            logger.debug("getManifestContents(): element: ${element.toString()}")
             images.add(gson.fromJson(element, ImageInfo.class))
         }
         images

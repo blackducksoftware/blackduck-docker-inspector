@@ -23,7 +23,6 @@
  */
 package com.blackducksoftware.integration.hub.docker
 
-import org.apache.commons.lang3.StringUtils
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
@@ -69,8 +68,8 @@ class HubClient {
     @Value('${command.timeout}')
     long commandTimeout
 
-    @Value('${key.store.pass}')
-    String keyStorePass
+    @Value('${hub.auto.import.cert}')
+    Boolean autoImportCert
 
     boolean isValid() {
         createBuilder().isValid()
@@ -109,63 +108,11 @@ class HubClient {
         hubServerConfigBuilder.proxyUsername = hubProxyUsername
         hubServerConfigBuilder.proxyPassword = hubProxyPassword
 
+        if(autoImportCert == null){
+            autoImportCert = true
+        }
+        hubServerConfigBuilder.autoImportHttpsCertificates = autoImportCert
+
         hubServerConfigBuilder
-    }
-
-
-    File retrieveHttpsCertificate(){
-        File certificateFile = new File('certificate.txt')
-        URL url = new URL(hubUrl)
-        String certificate = ''
-        def standardOut = new StringBuilder()
-        def standardError = new StringBuilder()
-        String command = "keytool -printcert -rfc -sslserver ${url.getHost()}"
-        Process proc = command.execute()
-        proc.consumeProcessOutput(standardOut, standardError)
-        proc.waitForOrKill(commandTimeout)
-        certificate = standardOut.toString()
-        logger.info("Retrieving the certificate from ${url.getHost()}")
-        logger.debug(certificate)
-        def error = standardError.toString()
-        if(StringUtils.isNotBlank(error)){
-            logger.warn(standardError.toString())
-        }
-        logger.debug("Exit code ${proc.exitValue()}")
-        if(proc.exitValue() != 0){
-            throw new HubIntegrationException("Failed to retrieve the certificate from ${hubUrl}")
-        }
-        certificateFile.write(certificate)
-        certificateFile
-    }
-
-    void importHttpsCertificate(File certificate){
-        URL url = new URL(hubUrl)
-
-        String javaHome = System.getProperty('java.home')
-        File jssecacerts = new File("${javaHome}")
-        jssecacerts = new File(jssecacerts, "lib")
-        jssecacerts = new File(jssecacerts, "security")
-        jssecacerts = new File(jssecacerts, "jssecacerts")
-        String keyStore = jssecacerts.getAbsolutePath()
-        if(StringUtils.isBlank(keyStorePass)){
-            keyStorePass = 'changeit'
-        }
-        def standardOut = new StringBuilder()
-        def standardError = new StringBuilder()
-
-        String command = "keytool -importcert -keystore ${keyStore} -storepass ${keyStorePass} -alias ${url.getHost()} -noprompt -file ${certificate.getAbsolutePath()}"
-        Process proc = command.execute()
-        proc.consumeProcessOutput(standardOut, standardError)
-        proc.waitForOrKill(commandTimeout)
-        logger.info("Importing the certificate from ${certificate.getAbsolutePath()}")
-        logger.debug(standardOut.toString())
-        def error = standardError.toString()
-        if(StringUtils.isNotBlank(error)){
-            logger.warn(standardError.toString())
-        }
-        logger.debug("Exit code ${proc.exitValue()}")
-        if(proc.exitValue() != 0){
-            throw new HubIntegrationException("Failed to import the certificate into ${keyStore}")
-        }
     }
 }
