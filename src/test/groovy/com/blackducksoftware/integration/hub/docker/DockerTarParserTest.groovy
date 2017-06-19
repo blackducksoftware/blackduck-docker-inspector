@@ -11,18 +11,17 @@
  */
 package com.blackducksoftware.integration.hub.docker
 
-import java.io.File
+import static java.nio.file.StandardCopyOption.*;
+import static org.junit.Assert.*
+
+import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
-import java.nio.file.Files
-import java.util.List
 
-import org.junit.Ignore
 import org.junit.Test
-import static org.junit.Assert.*
+
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser
 import com.blackducksoftware.integration.hub.docker.tar.LayerMapping
-import static java.nio.file.StandardCopyOption.*;
 
 class DockerTarParserTest {
 	private final static int DPKG_STATUS_FILE_SIZE = 98016
@@ -32,32 +31,32 @@ class DockerTarParserTest {
 	private static final String IMAGE_TAG = "image1tag1"
 
 	private static final String LAYER_ID = "layerId1"
-	
+
 	@Test
 	void testPerformExtractOfDockerTarSimple() {
 		doTest("simple")
 	}
-	
+
 	@Test
 	void testPerformExtractOfDockerTarWithSymbolicLink() {
 		doTest("withSymbolicLink")
 	}
 
-    void doTest(String testFileDir) {
+	void doTest(String testFileDir) {
 		File workingDirectory = TestUtils.createTempDirectory()
 		File tarExtractionDirectory = new File(workingDirectory, DockerTarParser.TAR_EXTRACTION_DIRECTORY)
 		File layerDir = new File(tarExtractionDirectory, "ubuntu_latest.tar/${LAYER_ID}")
 		layerDir.mkdirs()
 		Path layerDirPath = Paths.get(layerDir.getAbsolutePath());
 
-        File dockerTar = new File(layerDir, "layer.tar")
+		File dockerTar = new File(layerDir, "layer.tar")
 		Files.copy((new File("src/test/resources/${testFileDir}/layer.tar")).toPath(), dockerTar.toPath(), REPLACE_EXISTING)
 		List<File> layerTars = new ArrayList<>()
 		layerTars.add(dockerTar)
-		
-        DockerTarParser tarParser = new DockerTarParser()
-        tarParser.workingDirectory = workingDirectory
-		
+
+		DockerTarParser tarParser = new DockerTarParser()
+		tarParser.workingDirectory = workingDirectory
+
 		List<LayerMapping> layerMappings = new ArrayList<>()
 		LayerMapping layerMapping = new LayerMapping()
 		layerMapping.imageName = IMAGE_NAME
@@ -67,12 +66,12 @@ class DockerTarParserTest {
 		layerMapping.layers = layerIds
 		layerMappings.add(layerMapping)
 
-        File results = tarParser.extractDockerLayers(layerTars, layerMappings)
+		File results = tarParser.extractDockerLayers(layerTars, layerMappings)
 		assertEquals(tarExtractionDirectory.getAbsolutePath() + "/imageFiles", results.getAbsolutePath())
-		
+
 		File dpkgStatusFile = new File(workingDirectory.getAbsolutePath() + "/tarExtraction/imageFiles/image_${IMAGE_NAME}_v_${IMAGE_TAG}/var/lib/dpkg/status")
 		assertTrue(dpkgStatusFile.exists())
-		
+
 		assertEquals(DPKG_STATUS_FILE_SIZE, dpkgStatusFile.size())
-    }
+	}
 }

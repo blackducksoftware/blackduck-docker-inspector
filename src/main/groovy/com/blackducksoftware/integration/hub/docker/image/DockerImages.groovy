@@ -28,19 +28,18 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
-import com.blackducksoftware.integration.hub.docker.client.ClassPathPropertiesFile
 import com.blackducksoftware.integration.hub.docker.client.ProgramVersion
 
 @Component
 class DockerImages {
-    private final Logger logger = LoggerFactory.getLogger(DockerImages.class)
-	
+	private final Logger logger = LoggerFactory.getLogger(DockerImages.class)
+
 	@Autowired
 	ProgramVersion programVersion
-	
-    private Map<OperatingSystemEnum, DockerImage> dockerImageMap = new HashMap<>()
+
+	private Map<OperatingSystemEnum, DockerImage> dockerImageMap = new HashMap<>()
 	private boolean initialized=false
-	
+
 	void init() {
 		String programVersion = programVersion.getProgramVersion()
 		dockerImageMap.put(OperatingSystemEnum.CENTOS, new DockerImage(OperatingSystemEnum.CENTOS, "blackducksoftware/hub-docker-inspector-centos", programVersion))
@@ -50,40 +49,40 @@ class DockerImages {
 		dockerImageMap.put(OperatingSystemEnum.ALPINE, new DockerImage(OperatingSystemEnum.ALPINE, "blackducksoftware/hub-docker-inspector-alpine", programVersion))
 		initialized=true
 	}
-	
-    OperatingSystemEnum getDockerImageOs(OperatingSystemEnum targetImageOs) {
-		if (!initialized) {
-			init()
-		}
-        logger.debug("getDockerImageOs(${targetImageOs})")
-        DockerImage image = dockerImageMap.get(targetImageOs)
-        if (image == null) {
-            null
-        }
-        image.os
-    }
 
-    String getDockerImageName(OperatingSystemEnum targetImageOs) {
+	OperatingSystemEnum getDockerImageOs(OperatingSystemEnum targetImageOs) {
 		if (!initialized) {
 			init()
 		}
-        logger.info("getDockerImageName(${targetImageOs})")
-        DockerImage image = dockerImageMap.get(targetImageOs)
-        if (image == null) {
-            null
-        }
-        image.imageName
-    }
+		logger.debug("getDockerImageOs(${targetImageOs})")
+		DockerImage image = dockerImageMap.get(targetImageOs)
+		if (image == null) {
+			null
+		}
+		image.os
+	}
 
-    String getDockerImageVersion(OperatingSystemEnum targetImageOs) {
+	String getDockerImageName(OperatingSystemEnum targetImageOs) {
 		if (!initialized) {
 			init()
 		}
-        logger.info("getDockerImageVersion(${targetImageOs})")
-        DockerImage image = dockerImageMap.get(targetImageOs)
-        if (image == null) {
-            null
-        }
-        image.imageVersion
-    }
+		logger.info("getDockerImageName(${targetImageOs})")
+		DockerImage image = dockerImageMap.get(targetImageOs)
+		if (image == null) {
+			null
+		}
+		image.imageName
+	}
+
+	String getDockerImageVersion(OperatingSystemEnum targetImageOs) {
+		if (!initialized) {
+			init()
+		}
+		logger.info("getDockerImageVersion(${targetImageOs})")
+		DockerImage image = dockerImageMap.get(targetImageOs)
+		if (image == null) {
+			null
+		}
+		image.imageVersion
+	}
 }
