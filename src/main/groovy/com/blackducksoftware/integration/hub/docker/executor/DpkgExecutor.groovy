@@ -31,12 +31,12 @@ import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 
 @Component
 class DpkgExecutor extends Executor {
-    @PostConstruct
-    void init() {
-        initValues(PackageManagerEnum.DPKG, 'dpkg --version', 'dpkg -l')
-    }
+	@PostConstruct
+	void init() {
+		initValues(PackageManagerEnum.DPKG, 'dpkg --version', 'dpkg -l')
+	}
 
-    String getPackageInfoCommand(String packageName){
-        "dpkg -s $packageName"
-    }
+	String getPackageInfoCommand(String packageName){
+		"dpkg -s $packageName"
+	}
 }

@@ -31,62 +31,62 @@ import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException
 
 abstract class Executor {
-    private final Logger logger = LoggerFactory.getLogger(getClass())
+	private final Logger logger = LoggerFactory.getLogger(getClass())
 
-    PackageManagerEnum packageManagerEnum
-    String testCommand
-    String listPackagesCommand
+	PackageManagerEnum packageManagerEnum
+	String testCommand
+	String listPackagesCommand
 
-    @Value('${command.timeout}')
-    long commandTimeout
+	@Value('${command.timeout}')
+	long commandTimeout
 
-    abstract void init()
+	abstract void init()
 
-    void initValues(PackageManagerEnum packageManagerEnum, String testCommand, String listPackagesCommand) {
-        this.packageManagerEnum = packageManagerEnum
-        this.testCommand = testCommand
-        this.listPackagesCommand = listPackagesCommand
-    }
+	void initValues(PackageManagerEnum packageManagerEnum, String testCommand, String listPackagesCommand) {
+		this.packageManagerEnum = packageManagerEnum
+		this.testCommand = testCommand
+		this.listPackagesCommand = listPackagesCommand
+	}
 
-    boolean isCommandAvailable() {
-        try {
-            def proc = testCommand.execute()
-            proc.waitForOrKill(commandTimeout)
+	boolean isCommandAvailable() {
+		try {
+			def proc = testCommand.execute()
+			proc.waitForOrKill(commandTimeout)
 
-            return proc.exitValue() == 0
-        } catch(Exception e) {
-            logger.debug("Error executing test command {}",testCommand,e)
-            return false
-        }
-    }
+			return proc.exitValue() == 0
+		} catch(Exception e) {
+			logger.debug("Error executing test command {}",testCommand,e)
+			return false
+		}
+	}
 
-    String[] listPackages() {
-        executeCommand(listPackagesCommand)
-    }
+	String[] listPackages() {
+		executeCommand(listPackagesCommand)
+	}
 
-    String[] getPackageInfo(String packageName) {
-        def infoCommand = getPackageInfoCommand(packageName)
-        executeCommand(infoCommand)
-    }
+	String[] getPackageInfo(String packageName) {
+		def infoCommand = getPackageInfoCommand(packageName)
+		executeCommand(infoCommand)
+	}
 
-    String[] executeCommand(String command){
-        try {
-            def standardOut = new StringBuilder()
-            def standardError = new StringBuilder()
-            def process = command.execute()
-            process.consumeProcessOutput(standardOut, standardError)
-            process.waitForOrKill(commandTimeout)
+	String[] executeCommand(String command){
+		try {
+			def standardOut = new StringBuilder()
+			def standardError = new StringBuilder()
+			def process = command.execute()
+			process.consumeProcessOutput(standardOut, standardError)
+			process.waitForOrKill(commandTimeout)
 
-            if(process.exitValue() !=0){
-                logger.error(standardError.toString())
-                throw new HubIntegrationException("Failed to run command ${command}")
-            }
+			if(process.exitValue() !=0){
+				logger.error(standardError.toString())
+				throw new HubIntegrationException("Failed to run command ${command}")
+			}
 
-            def output =  standardOut.toString()
-            logger.trace(output)
-            output.split(System.lineSeparator())
-        } catch(Exception e) {
-            logger.error("Error executing command {}",listPackagesCommand,e)
-        }
-    }
+			def output =  standardOut.toString()
+			logger.trace(output)
+			output.split(System.lineSeparator())
+		} catch(Exception e) {
+			logger.error("Error executing command {}",listPackagesCommand,e)
+		}
+	}
 }

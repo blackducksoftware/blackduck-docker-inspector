@@ -27,6 +27,6 @@ import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 
 class TarExtractionResults {
 
-    OperatingSystemEnum operatingSystemEnum
-    List<TarExtractionResult> extractionResults = new ArrayList<>()
+	OperatingSystemEnum operatingSystemEnum
+	List<TarExtractionResult> extractionResults = new ArrayList<>()
 }

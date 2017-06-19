@@ -36,37 +36,37 @@ import com.blackducksoftware.integration.hub.docker.executor.DpkgExecutor
 @Component
 class DpkgExtractor extends Extractor {
 
-    @Autowired
-    DpkgExecutor executor
+	@Autowired
+	DpkgExecutor executor
 
-    @PostConstruct
-    void init() {
-        def forges = [
-            OperatingSystemEnum.DEBIAN.forge,
-            OperatingSystemEnum.UBUNTU.forge
-        ]
-        initValues(PackageManagerEnum.DPKG, executor, forges)
-    }
+	@PostConstruct
+	void init() {
+		def forges = [
+			OperatingSystemEnum.DEBIAN.forge,
+			OperatingSystemEnum.UBUNTU.forge
+		]
+		initValues(PackageManagerEnum.DPKG, executor, forges)
+	}
 
-    List<BdioComponent> extractComponents(ExtractionDetails extractionDetails, String[] packageList) {
-        def components = []
-        boolean startOfComponents = false
-        packageList.each { packageLine ->
-            if (packageLine != null) {
-                if (packageLine.matches("\\+\\+\\+-=+-=+-=+-=+")) {
-                    startOfComponents = true
-                } else if (startOfComponents){
-                    String componentInfo = packageLine.substring(3)
-                    def(name,version,architecture,description) = componentInfo.tokenize(" ")
-                    if (name.contains(":")) {
-                        name = name.substring(0, name.indexOf(":"))
-                    }
-                    String externalId = "$name/$version/$architecture"
+	List<BdioComponent> extractComponents(ExtractionDetails extractionDetails, String[] packageList) {
+		def components = []
+		boolean startOfComponents = false
+		packageList.each { packageLine ->
+			if (packageLine != null) {
+				if (packageLine.matches("\\+\\+\\+-=+-=+-=+-=+")) {
+					startOfComponents = true
+				} else if (startOfComponents){
+					String componentInfo = packageLine.substring(3)
+					def(name,version,architecture,description) = componentInfo.tokenize(" ")
+					if (name.contains(":")) {
+						name = name.substring(0, name.indexOf(":"))
+					}
+					String externalId = "$name/$version/$architecture"
 
-                    components.addAll(createBdioComponent(name, version, externalId))
-                }
-            }
-        }
-        components
-    }
+					components.addAll(createBdioComponent(name, version, externalId))
+				}
+			}
+		}
+		components
+	}
 }

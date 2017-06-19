@@ -31,12 +31,12 @@ import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 
 @Component
 class ApkExecutor extends Executor {
-    @PostConstruct
-    void init() {
-        initValues(PackageManagerEnum.APK, 'apk --version', 'apk info -v')
-    }
+	@PostConstruct
+	void init() {
+		initValues(PackageManagerEnum.APK, 'apk --version', 'apk info -v')
+	}
 
-    String getPackageInfoCommand(String packageName){
-        "apk info ${packageName} -a"
-    }
+	String getPackageInfoCommand(String packageName){
+		"apk info ${packageName} -a"
+	}
 }

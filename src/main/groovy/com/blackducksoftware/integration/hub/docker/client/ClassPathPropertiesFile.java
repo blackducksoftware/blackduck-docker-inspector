@@ -31,16 +31,16 @@ import java.util.Set;
 public class ClassPathPropertiesFile {
 	private final Properties props;
 
-	public ClassPathPropertiesFile(String propetiesFilename) throws IOException {
+	public ClassPathPropertiesFile(final String propetiesFilename) throws IOException {
 		props = new Properties();
-		InputStream stream = this.getClass().getClassLoader().getResourceAsStream(propetiesFilename);
+		final InputStream stream = this.getClass().getClassLoader().getResourceAsStream(propetiesFilename);
 		props.load(stream);
 	}
-	
-	public String getProperty(String key) {
+
+	public String getProperty(final String key) {
 		return props.getProperty(key);
 	}
-	
+
 	public Set<Object> keySet() {
 		return props.keySet();
 	}

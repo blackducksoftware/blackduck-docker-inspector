@@ -31,12 +31,12 @@ import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 
 @Component
 class RpmExecutor extends Executor {
-    @PostConstruct
-    public void init() {
-        initValues(PackageManagerEnum.RPM, 'rpm --version', 'rpm -qa')
-    }
+	@PostConstruct
+	public void init() {
+		initValues(PackageManagerEnum.RPM, 'rpm --version', 'rpm -qa')
+	}
 
-    String getPackageInfoCommand(String packageName){
-        "rpm -qR $packageName"
-    }
+	String getPackageInfoCommand(String packageName){
+		"rpm -qR $packageName"
+	}
 }

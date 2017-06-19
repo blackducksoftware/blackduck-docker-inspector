@@ -27,6 +27,6 @@ import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 
 class ExtractionDetails {
 
-    OperatingSystemEnum operatingSystem
-    String architecture
+	OperatingSystemEnum operatingSystem
+	String architecture
 }

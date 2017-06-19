@@ -27,7 +27,7 @@ import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 
 class TarExtractionResult {
 
-    String imageDirectoryName
-    File extractedPackageManagerDirectory
-    PackageManagerEnum packageManager
+	String imageDirectoryName
+	File extractedPackageManagerDirectory
+	PackageManagerEnum packageManager
 }

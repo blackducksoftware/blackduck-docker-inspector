@@ -23,9 +23,9 @@
  */
 package com.blackducksoftware.integration.hub.docker
 
-import java.io.File
 import org.apache.commons.io.FileUtils
 import org.springframework.stereotype.Component
+
 import com.blackducksoftware.integration.hub.docker.tar.TarExtractionResult
 
 @Component
@@ -43,7 +43,7 @@ class PackageManagerFiles {
 		}
 		FileUtils.copyDirectory(result.extractedPackageManagerDirectory, packageManagerDirectory)
 	}
-	
+
 	private void deleteFilesOnly(File file){
 		if (file.isDirectory()){
 			for (File subFile: file.listFiles()) {

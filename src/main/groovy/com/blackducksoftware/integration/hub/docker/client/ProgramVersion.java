@@ -33,7 +33,7 @@ import org.springframework.stereotype.Component;
 public class ProgramVersion {
 	private final Logger logger = LoggerFactory.getLogger(ProgramVersion.class);
 	private String programVersion;
-	
+
 	public String getProgramVersion() throws IOException {
 		if (programVersion == null) {
 			final ClassPathPropertiesFile versionProperties = new ClassPathPropertiesFile("version.properties");

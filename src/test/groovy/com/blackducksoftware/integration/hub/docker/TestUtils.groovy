@@ -1,9 +1,5 @@
 package com.blackducksoftware.integration.hub.docker
 
-import java.awt.Component.BaselineResizeBehavior
-import java.io.File
-import java.io.IOException
-
 class TestUtils {
 	public static File createTempDirectory() throws IOException {
 		final File temp = File.createTempFile("temp", Long.toString(System.nanoTime()));
@@ -15,12 +11,12 @@ class TestUtils {
 		}
 		return (temp);
 	}
-	
+
 	public static boolean contentEquals(File file1, File file2, List<String> exceptLinesContainingThese) {
 		println "Comparing ${file1.getName()} and ${file2.getName()}"
 		List<String> lines1 = file1.readLines()
 		List<String> lines2 = file2.readLines()
-		
+
 		if (lines1.size() != lines2.size()) {
 			println ("Files' line counts are different")
 			return false
