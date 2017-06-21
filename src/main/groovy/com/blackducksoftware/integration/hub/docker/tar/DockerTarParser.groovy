@@ -291,7 +291,8 @@ class DockerTarParser {
 							try {
 								Files.createLink(startLink, endLink)
 							} catch (NoSuchFileException e) {
-								logger.warn("NoSuchFileException creating hard link from ${startLink.toString()} to ${endLink.toString()}")
+								logger.debug("NoSuchFileException creating hard link from ${startLink.toString()} to ${endLink.toString()}; " +
+										"this will not affect the results unless it affects a file needed by the package manager")
 							}
 						}
 					} else {
