@@ -49,22 +49,23 @@ abstract class Executor {
 		this.listPackagesCommand = listPackagesCommand
 	}
 	String[] listPackages() {
+		String[] results
 		logger.info("Executing package manager")
 		try {
-			executeCommand(listPackagesCommand)
+			results = executeCommand(listPackagesCommand)
 			logger.info("Command ${listPackagesCommand} executed successfully")
 		} catch (Exception e) {
 			if (!StringUtils.isBlank(upgradeCommand)) {
 				logger.warn("Error executing \"${listPackagesCommand}\": ${e.getMessage()}; Trying to upgrade package database by executing: ${upgradeCommand}")
 				executeCommand(upgradeCommand)
-				executeCommand(listPackagesCommand)
+				results = executeCommand(listPackagesCommand)
 				logger.info("Command ${listPackagesCommand} executed successfully on 2nd attempt (after db upgrade)")
 			} else {
 				logger.error("Error executing \"${listPackagesCommand}\": ${e.getMessage()}; No upgrade command has been provided for this package manager")
 				throw e
 			}
 		}
-
+		results
 	}
 	String[] executeCommand(String command){
 		def standardOut = new StringBuilder()
