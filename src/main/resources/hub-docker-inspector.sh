@@ -39,6 +39,21 @@ then
     printUsage
 fi
 
+containername=hub-docker-inspector
+imagename=hub-docker-inspector
+
+for cmdlinearg in "$@"
+do
+	if [[ $cmdlinearg == --runon=* ]]
+	then
+		runondistro=$(echo $cmdlinearg | cut -d '=' -f 2)
+		echo "Will run on the ${runondistro} image"
+		containername=hub-docker-inspector-${runondistro}
+		imagename=hub-docker-inspector-${runondistro}
+		break
+	fi
+done
+
 options=( "$@" )
 image=${options[${#options[@]}-1]}
 unset "options[${#options[@]}-1]"
@@ -78,24 +93,24 @@ else
         options=( ${options[*]} --hub.password=$BD_HUB_PASSWORD )
 fi
 
-if [ $(docker ps |grep "hub-docker-inspector" | wc -l) -gt 0 ]
+if [ $(docker ps |grep "${containername}" | wc -l) -gt 0 ]
 then
-	echo hub-docker-inspector container is already running
+	echo ${containername} container is already running
 else
-	echo hub-docker-inspector container is not running
-	docker rm hub-docker-inspector 2> /dev/null
+	echo ${containername} container is not running
+	docker rm ${containername} 2> /dev/null
 	echo "Pulling/running hub-docker-inspector Docker image"
-	docker run --name hub-docker-inspector -it -d --privileged blackducksoftware/hub-docker-inspector:@VERSION@ /bin/bash
+	docker run --name ${containername} -it -d --privileged blackducksoftware/${imagename}:@VERSION@ /bin/bash
 fi
 
 if [ -f application.properties ]
 then
 	echo "Found application.properties"
-	docker cp application.properties hub-docker-inspector:/opt/blackduck/hub-docker-inspector/config
+	docker cp application.properties ${containername}:/opt/blackduck/hub-docker-inspector/config
 else
 	echo "application.properties file not found in current directory."
 	echo "Without this file, you will have to set all required properties via the command line."
-	docker exec hub-docker-inspector rm -f /opt/blackduck/hub-docker-inspector/config/application.properties
+	docker exec ${containername} rm -f /opt/blackduck/hub-docker-inspector/config/application.properties
 fi
 
 
@@ -103,11 +118,11 @@ if [[ "$image" == *.tar ]]
 then
 	echo Inspecting image tar file: $image
 	tarfilename=$(basename $image)
-	docker cp $image hub-docker-inspector:/opt/blackduck/hub-docker-inspector/target/$tarfilename
-	docker exec hub-docker-inspector /opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} /opt/blackduck/hub-docker-inspector/target/$tarfilename
+	docker cp $image ${containername}:/opt/blackduck/hub-docker-inspector/target/$tarfilename
+	docker exec ${containername} /opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} /opt/blackduck/hub-docker-inspector/target/$tarfilename
 else
 	echo Inspecting image: $image
-	docker exec hub-docker-inspector /opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} $image
+	docker exec ${containername} /opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} $image
 fi
 
 exit 0

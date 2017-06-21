@@ -289,16 +289,18 @@ class DockerTarParser {
 							try {
 								Files.createSymbolicLink(startLink, endLink)
 							} catch (FileAlreadyExistsException e) {
-								logger.debug("FileAlreadyExistsException creating symbolic link from ${startLink.toString()} to ${endLink.toString()}; " +
-										"this will not affect the results unless it affects a file needed by the package manager")
+								logger.debug("Error creating symbolic link from ${startLink.toString()} to ${endLink.toString()}; " +
+										"this will not affect the results unless it affects a file needed by the package manager; " +
+										"Error: ${e.getMessage}")
 							}
 						} else if(layerEntry.isLink()){
 							logger.trace("${layerEntry.name} is a hard link")
 							try {
 								Files.createLink(startLink, endLink)
 							} catch (NoSuchFileException|FileAlreadyExistsException e) {
-								logger.debug("NoSuchFileException creating hard link from ${startLink.toString()} to ${endLink.toString()}; " +
-										"this will not affect the results unless it affects a file needed by the package manager")
+								logger.debug("Error creating hard link from ${startLink.toString()} to ${endLink.toString()}; " +
+										"this will not affect the results unless it affects a file needed by the package manager; " +
+										"Error: ${e.getMessage}")
 							}
 						}
 					} else {
