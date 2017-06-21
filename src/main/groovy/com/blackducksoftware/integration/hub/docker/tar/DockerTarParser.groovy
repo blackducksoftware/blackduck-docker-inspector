@@ -23,6 +23,7 @@
  */
 package com.blackducksoftware.integration.hub.docker.tar
 
+import java.nio.file.FileAlreadyExistsException
 import java.nio.file.FileSystems
 import java.nio.file.Files
 import java.nio.file.InvalidPathException
@@ -285,12 +286,17 @@ class DockerTarParser {
 						logger.trace("Checking link type")
 						if(layerEntry.isSymbolicLink()){
 							logger.trace("${layerEntry.name} is a symbolic link")
-							Files.createSymbolicLink(startLink, endLink)
+							try {
+								Files.createSymbolicLink(startLink, endLink)
+							} catch (FileAlreadyExistsException e) {
+								logger.debug("FileAlreadyExistsException creating symbolic link from ${startLink.toString()} to ${endLink.toString()}; " +
+										"this will not affect the results unless it affects a file needed by the package manager")
+							}
 						} else if(layerEntry.isLink()){
 							logger.trace("${layerEntry.name} is a hard link")
 							try {
 								Files.createLink(startLink, endLink)
-							} catch (NoSuchFileException e) {
+							} catch (NoSuchFileException|FileAlreadyExistsException e) {
 								logger.debug("NoSuchFileException creating hard link from ${startLink.toString()} to ${endLink.toString()}; " +
 										"this will not affect the results unless it affects a file needed by the package manager")
 							}
