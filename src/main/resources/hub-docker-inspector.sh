@@ -93,7 +93,7 @@ else
         options=( ${options[*]} --hub.password=$BD_HUB_PASSWORD )
 fi
 
-if [ $(docker ps |grep "${containername}" | wc -l) -gt 0 ]
+if [ $(docker ps |grep "${containername}\$" | wc -l) -gt 0 ]
 then
 	echo ${containername} container is already running
 else

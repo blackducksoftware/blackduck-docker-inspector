@@ -25,6 +25,8 @@ package com.blackducksoftware.integration.hub.docker.extractor
 
 import javax.annotation.PostConstruct
 
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
@@ -35,6 +37,7 @@ import com.blackducksoftware.integration.hub.docker.executor.RpmExecutor
 
 @Component
 class RpmExtractor extends Extractor {
+	private final Logger logger = LoggerFactory.getLogger(Extractor.class)
 
 	@Autowired
 	RpmExecutor executor
@@ -54,6 +57,7 @@ class RpmExtractor extends Extractor {
 	}
 
 	List<BdioComponent> extractComponents(ExtractionDetails extractionDetails, String[] packageList) {
+		logger.debug("extractComponents: Received ${packageList.length} package lines")
 		def components = []
 		packageList.each { packageLine ->
 			if (valid(packageLine)) {
@@ -67,10 +71,11 @@ class RpmExtractor extends Extractor {
 				def artifact = packageLine.substring(0, secondToLastDashIndex)
 
 				String externalId = "${artifact}/${versionRelease}/${arch}"
-
+				logger.debug("Adding ${externalId} to components list")
 				components.addAll(createBdioComponent(artifact, versionRelease, externalId))
 			}
 		}
+		logger.debug("extractComponents: Returning ${components.size()} components")
 		components
 	}
 }

@@ -48,6 +48,7 @@ abstract class Executor {
 		this.upgradeCommand = upgradeCommand
 		this.listPackagesCommand = listPackagesCommand
 	}
+
 	String[] listPackages() {
 		String[] results
 		logger.info("Executing package manager")
@@ -65,6 +66,7 @@ abstract class Executor {
 				throw e
 			}
 		}
+		logger.info("Package manager reported ${results.size()} package lines")
 		results
 	}
 	String[] executeCommand(String command){
