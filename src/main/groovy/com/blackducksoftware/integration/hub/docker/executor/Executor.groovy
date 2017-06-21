@@ -23,6 +23,7 @@
  */
 package com.blackducksoftware.integration.hub.docker.executor
 
+import org.apache.commons.lang3.StringUtils
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
@@ -34,7 +35,7 @@ abstract class Executor {
 	private final Logger logger = LoggerFactory.getLogger(getClass())
 
 	PackageManagerEnum packageManagerEnum
-	String testCommand
+	String upgradeCommand
 	String listPackagesCommand
 
 	@Value('${command.timeout}')
@@ -42,32 +43,43 @@ abstract class Executor {
 
 	abstract void init()
 
-	void initValues(PackageManagerEnum packageManagerEnum, String testCommand, String listPackagesCommand) {
+	void initValues(PackageManagerEnum packageManagerEnum, String upgradeCommand, String listPackagesCommand) {
 		this.packageManagerEnum = packageManagerEnum
-		this.testCommand = testCommand
+		this.upgradeCommand = upgradeCommand
 		this.listPackagesCommand = listPackagesCommand
 	}
 	String[] listPackages() {
-		executeCommand(listPackagesCommand)
+		logger.info("Executing package manager")
+		try {
+			executeCommand(listPackagesCommand)
+			logger.info("Command ${listPackagesCommand} executed successfully")
+		} catch (Exception e) {
+			if (!StringUtils.isBlank(upgradeCommand)) {
+				logger.warn("Error executing \"${listPackagesCommand}\": ${e.getMessage()}; Trying to upgrade package database by executing: ${upgradeCommand}")
+				executeCommand(upgradeCommand)
+				executeCommand(listPackagesCommand)
+				logger.info("Command ${listPackagesCommand} executed successfully on 2nd attempt (after db upgrade)")
+			} else {
+				logger.error("Error executing \"${listPackagesCommand}\": ${e.getMessage()}; No upgrade command has been provided for this package manager")
+				throw e
+			}
+		}
+
 	}
 	String[] executeCommand(String command){
-		try {
-			def standardOut = new StringBuilder()
-			def standardError = new StringBuilder()
-			def process = command.execute()
-			process.consumeProcessOutput(standardOut, standardError)
-			process.waitForOrKill(commandTimeout)
+		def standardOut = new StringBuilder()
+		def standardError = new StringBuilder()
+		def process = command.execute()
+		process.consumeProcessOutput(standardOut, standardError)
+		process.waitForOrKill(commandTimeout)
 
-			if(process.exitValue() !=0){
-				logger.error(standardError.toString())
-				throw new HubIntegrationException("Failed to run command ${command}")
-			}
-
-			def output =  standardOut.toString()
-			logger.trace(output)
-			output.split(System.lineSeparator())
-		} catch(Exception e) {
-			logger.error("Error executing command {}",listPackagesCommand,e)
+		if(process.exitValue() !=0){
+			logger.debug(standardError.toString())
+			throw new HubIntegrationException("Failed to run command ${command}")
 		}
+
+		def output =  standardOut.toString()
+		logger.trace(output)
+		output.split(System.lineSeparator())
 	}
 }

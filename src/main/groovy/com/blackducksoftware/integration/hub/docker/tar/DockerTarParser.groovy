@@ -26,6 +26,7 @@ package com.blackducksoftware.integration.hub.docker.tar
 import java.nio.file.FileSystems
 import java.nio.file.Files
 import java.nio.file.InvalidPathException
+import java.nio.file.NoSuchFileException
 import java.nio.file.Path
 import java.nio.file.Paths
 
@@ -287,7 +288,11 @@ class DockerTarParser {
 							Files.createSymbolicLink(startLink, endLink)
 						} else if(layerEntry.isLink()){
 							logger.trace("${layerEntry.name} is a hard link")
-							Files.createLink(startLink, endLink)
+							try {
+								Files.createLink(startLink, endLink)
+							} catch (NoSuchFileException e) {
+								logger.warn("NoSuchFileException creating hard link from ${startLink.toString()} to ${endLink.toString()}")
+							}
 						}
 					} else {
 						logger.trace("Processing file/dir: ${layerEntry.getName()}")
