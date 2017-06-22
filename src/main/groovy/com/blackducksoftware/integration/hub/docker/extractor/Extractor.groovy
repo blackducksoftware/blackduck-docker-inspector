@@ -62,6 +62,7 @@ abstract class Extractor {
 		String bdioId = bdioPropertyHelper.createExternalIdentifier(extractionDetails.operatingSystem.forge, externalId)
 		BdioProject projectNode = bdioNodeFactory.createProject(projectName, version, bdioId, extractionDetails.operatingSystem.forge, externalId)
 		List<BdioComponent> components = extractComponents(extractionDetails, executor.listPackages())
+		logger.info("Found ${components.size()} components")
 		bdioPropertyHelper.addRelationships(projectNode, components)
 		bdioWriter.writeBdioNode(projectNode)
 		components.each { component ->
@@ -76,7 +77,6 @@ abstract class Extractor {
 			BdioComponent bdioComponent = bdioNodeFactory.createComponent(name, version, bdioId, forge, externalId)
 			components.add(bdioComponent)
 		}
-		logger.info("Created ${components.size()} BDIO components")
 		components
 	}
 

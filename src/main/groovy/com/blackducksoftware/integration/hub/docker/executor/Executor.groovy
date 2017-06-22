@@ -66,7 +66,7 @@ abstract class Executor {
 				throw e
 			}
 		}
-		logger.info("Package manager reported ${results.size()} package lines")
+		logger.debug("Package manager reported ${results.size()} package lines")
 		results
 	}
 	String[] executeCommand(String command){
