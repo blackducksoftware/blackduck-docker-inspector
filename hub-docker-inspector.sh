@@ -30,7 +30,7 @@ fi
 
 if [ \( $1 = -v \) -o \( $1 = --version \) ]
 then
-	echo "$0 0.1.0"
+	echo "$0 0.1.1"
 	exit -1
 fi
 
@@ -100,7 +100,7 @@ else
 	echo ${containername} container is not running
 	docker rm ${containername} 2> /dev/null
 	echo "Pulling/running hub-docker-inspector Docker image"
-	docker run --name ${containername} -it -d --privileged blackducksoftware/${imagename}:0.1.0 /bin/bash
+	docker run --name ${containername} -it -d --privileged blackducksoftware/${imagename}:0.1.1 /bin/bash
 fi
 
 if [ -f application.properties ]
