@@ -76,6 +76,7 @@ abstract class Extractor {
 			BdioComponent bdioComponent = bdioNodeFactory.createComponent(name, version, bdioId, forge, externalId)
 			components.add(bdioComponent)
 		}
+		logger.info("Created ${components.size()} BDIO components")
 		components
 	}
 
