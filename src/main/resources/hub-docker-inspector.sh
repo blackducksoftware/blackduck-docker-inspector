@@ -41,6 +41,7 @@ fi
 
 containername=hub-docker-inspector
 imagename=hub-docker-inspector
+propdir=.
 
 for cmdlinearg in "$@"
 do
@@ -50,9 +51,19 @@ do
 		echo "Will run on the ${runondistro} image"
 		containername=hub-docker-inspector-${runondistro}
 		imagename=hub-docker-inspector-${runondistro}
-		break
+	fi
+	if [[ $cmdlinearg == --spring.config.location=* ]]
+	then
+		propdir=$(echo $cmdlinearg | cut -d '=' -f 2)
+		if [[ $propdir == */ ]]
+		then
+			propdir=$(echo $propdir | rev | cut -c 2- | rev)
+		fi
 	fi
 done
+
+propfile=${propdir}/application.properties
+echo "Properties file: ${propfile}"
 
 options=( "$@" )
 image=${options[${#options[@]}-1]}
@@ -103,12 +114,12 @@ else
 	docker run --name ${containername} -it -d --privileged blackducksoftware/${imagename}:@VERSION@ /bin/bash
 fi
 
-if [ -f application.properties ]
+if [ -f ${propfile} ]
 then
-	echo "Found application.properties"
-	docker cp application.properties ${containername}:/opt/blackduck/hub-docker-inspector/config
+	echo "Found ${propfile}"
+	docker cp ${propfile} ${containername}:/opt/blackduck/hub-docker-inspector/config
 else
-	echo "application.properties file not found in current directory."
+	echo "File ${propfile} not found."
 	echo "Without this file, you will have to set all required properties via the command line."
 	docker exec ${containername} rm -f /opt/blackduck/hub-docker-inspector/config/application.properties
 fi
