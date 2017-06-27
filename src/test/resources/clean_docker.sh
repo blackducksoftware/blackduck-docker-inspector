@@ -11,13 +11,13 @@ docker rmi blackducksoftware/hub-docker-inspector:0.1.2-SNAPSHOT
 docker rmi blackducksoftware/hub-docker-inspector-centos:0.1.2-SNAPSHOT
 docker rmi blackducksoftware/hub-docker-inspector-alpine:0.1.2-SNAPSHOT
 
-docker rmi blackducksoftware/hub-docker-inspector:0.1.1-SNAPSHOT
-docker rmi blackducksoftware/hub-docker-inspector-centos:0.1.1-SNAPSHOT
-docker rmi blackducksoftware/hub-docker-inspector-alpine:0.1.1-SNAPSHOT
+docker rmi blackducksoftware/hub-docker-inspector:0.1.3-SNAPSHOT
+docker rmi blackducksoftware/hub-docker-inspector-centos:0.1.3-SNAPSHOT
+docker rmi blackducksoftware/hub-docker-inspector-alpine:0.1.3-SNAPSHOT
 
-docker rmi blackducksoftware/hub-docker-inspector:0.1.1
-docker rmi blackducksoftware/hub-docker-inspector-centos:0.1.1
-docker rmi blackducksoftware/hub-docker-inspector-alpine:0.1.1
+docker rmi blackducksoftware/hub-docker-inspector:0.1.3
+docker rmi blackducksoftware/hub-docker-inspector-centos:0.1.3
+docker rmi blackducksoftware/hub-docker-inspector-alpine:0.1.3
 
 docker images
 
