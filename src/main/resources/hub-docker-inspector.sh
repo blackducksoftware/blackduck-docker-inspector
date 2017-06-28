@@ -42,6 +42,7 @@ fi
 containername=hub-docker-inspector
 imagename=hub-docker-inspector
 propdir=.
+hub_password_set_on_cmd_line=false
 
 for cmdlinearg in "$@"
 do
@@ -59,6 +60,10 @@ do
 		then
 			propdir=$(echo $propdir | rev | cut -c 2- | rev)
 		fi
+	fi
+	if [[ $cmdlinearg == --hub.password=* ]]
+	then
+		hub_password_set_on_cmd_line=true
 	fi
 done
 
@@ -96,9 +101,9 @@ else
 	done
 fi
 
-if [ -z ${BD_HUB_PASSWORD+x} ]
+if [ $hub_password_set_on_cmd_line = true -o -z "${BD_HUB_PASSWORD}" ]
 then
-        echo Environment variable BD_HUB_PASSWORD is not set
+        echo Environment variable BD_HUB_PASSWORD is not set or is being overridden on the command line
 else
         echo BD_HUB_PASSWORD is set
         options=( ${options[*]} --hub.password=$BD_HUB_PASSWORD )
