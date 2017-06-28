@@ -13,7 +13,7 @@ readonly INSPECTOR_SHELL_SCRIPT="${THISDIR}/hub-docker-inspector.sh"
 readonly DOCKER_SCAN_FETCH_URL="https://blackducksoftware.github.io/hub-docker-inspector/scan.docker.sh"
 readonly DOCKER_SCAN_SHELL_SCRIPT="${THISDIR}/scan.docker.sh"
 readonly EXECUTABLE_SHELL_SCRIPT="${THISDIR}/.scan.docker.sh"
-readonly IMAGE_TARFILE="${THISDIR}/toBeScanned.tar"
+IMAGE_TARFILE="${THISDIR}/toBeScanned.tar"
 
 function usage() {
    >&2 echo "Error: Missing or invalid arguments."
@@ -28,11 +28,11 @@ function usage() {
 }
 
 function using_proxy_instructions() {
-   echo "-----------------------------------------------------------------------------"
-   echo "You may need set the default proxies for Wget to use for http and https."
-   echo "To do this, create a ~/.wgetrc file."
+   echo "------------------------------------------------------------------------------------"
+   echo "You may need set the default proxies for 'wget' or 'curl' to use for http and https."
+   echo "To do this, create a ~/.wgetrc file for 'wget' or ~/.curlrc file for 'curl'."
    echo "This will override the values in the environment."
-   echo "Add these settings (using your proxy's URL) to the .wgetrc file:"
+   echo "Add these settings (using your proxy's URL) to the .wgetrc or .curlrc file:"
    echo ""
    echo "https_proxy=http://proxy.yourdomain.com:18023/"
    echo "http_proxy=http://proxy.yourdomain.com:18023/"
@@ -40,27 +40,55 @@ function using_proxy_instructions() {
    echo "If your proxy requires authentication, add these additional two lines:"
    echo "proxy_user=username"
    echo "proxy_password=password"
-   echo "----------------------------------------------------------------------------"
+   echo "-----------------------------------------------------------------------------------"
    echo ""
+}
+
+function execute_remote_request() {
+  local command=$2
+  local dest_url=$3
+  local output_filename=$4
+  local my_output my_success
+  if [ -z "$output_filename" ]; then
+    my_output=$($command 2>&1)
+  else 
+    my_output=$($command "${TEMP_FILE}" "$dest_url" 2>&1)
+  fi
+  my_success=$?
+  eval "$1='${my_output}'"
+  return $my_success
 }
 
 function get_remote_file() {
   readonly REQUEST_URL=$1
-  readonly OUTPUT_FILENAME=$2
   readonly TEMP_FILE="${THISDIR}/tmp.file"
+  local command_output
   if [ -n "$(which wget)" ]; then
-    wget_output=$(wget -O "${TEMP_FILE}"  "$REQUEST_URL" 2>&1)
-    local wget_success=$?
-    if [[ $wget_success -eq 0 ]]; then
-      mv "${TEMP_FILE}" "${OUTPUT_FILENAME}"
-      chmod 755 "${OUTPUT_FILENAME}"
+    execute_remote_request command_output "wget -O"  "$REQUEST_URL" "$2"
+    if [[ $? -eq 0 ]]; then
+      mv "${TEMP_FILE}" "$2"
+      chmod 755 "$2"
+      return 0
     else
-      if [[  "${wget_output}" == "${wget_output#*Resolving blackducksoftware.github.io}" ]]; then
+      if [[  "${my_output}" == "${my_output#*Resolving blackducksoftware.github.io}" ]]; then
         using_proxy_instructions
       fi
-      return 1
     fi
+    return 1
   else
+    if [ -n "$(which curl)" ]; then
+      execute_remote_request command_output "curl -s --netrc-optional -I $REQUEST_URL" ""
+      status_code=$(echo $command_output | cut -d $'\r' -f1 | cut -d $' ' -f2)
+      server_name=$(echo $command_output | cut -d $'\r' -f2 | cut -d $' ' -f3)
+      if [ "$status_code" == "200" ]; then
+        execute_remote_request command_output "curl --netrc-optional -s -o" "$REQUEST_URL" "$2"
+        return $?
+      else 
+        if [[ "$server_name" != "GitHub.com" ]]; then
+          using_proxy_instructions
+        fi
+      fi
+    fi
     return 2
   fi
 }
@@ -189,19 +217,23 @@ function main() {
 
   perform_validations $option_count
 
-  # if the --name scan.cli option was not provided
-  if [ -z "${name_arg}" ]; then
-    name_arg="--name ${docker_image}"
-  else
-    name_arg="--name ${name_arg}"
-  fi
-
   readonly HUB_URL="${hub_scheme}://${hub_host}:${hub_port}/"
   if [ -z "$hub_project" ]; then
     hub_project="${docker_image%:*}"
   fi
   if [ -z "$hub_version" ]; then
     hub_version="${docker_image#*:}"
+    if [ "$hub_version" == "$docker_image" ]; then 
+      hub_version="latest"
+    fi
+  fi
+  IMAGE_TARFILE="${THISDIR}/${docker_image%:*}-${hub_version}.tar"
+
+  # if the --name scan.cli option was not provided
+  if [ -z "${name_arg}" ]; then
+    name_arg="--name ${hub_project}_${hub_version}"
+  else
+    name_arg="--name ${name_arg}"
   fi
 
   # update_docker_inspector
@@ -225,7 +257,7 @@ function main() {
     fi
     if [ $do_inspect -eq 1 ]; then
       echo "Conduct  Inspection:"
-      "${INSPECTOR_SHELL_SCRIPT}" --hub.username=$hub_user --hub.url=$HUB_URL --hub.project.name="$hub_project" --hub.project.version="$hub_version" "$INSPECTOR_OPTS" "${IMAGE_TARFILE}"
+      "${INSPECTOR_SHELL_SCRIPT}" --hub.username=$hub_user --hub.url=$HUB_URL --hub.project.name="$hub_project" --hub.project.version="$hub_version" "${IMAGE_TARFILE}"
     fi
   else
     echo "Unable to save: ${docker_image} to a tar file."
