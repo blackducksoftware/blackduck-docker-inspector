@@ -13,7 +13,7 @@ readonly INSPECTOR_SHELL_SCRIPT="${THISDIR}/hub-docker-inspector.sh"
 readonly DOCKER_SCAN_FETCH_URL="https://blackducksoftware.github.io/hub-docker-inspector/scan.docker.sh"
 readonly DOCKER_SCAN_SHELL_SCRIPT="${THISDIR}/scan.docker.sh"
 readonly EXECUTABLE_SHELL_SCRIPT="${THISDIR}/.scan.docker.sh"
-IMAGE_TARFILE="${THISDIR}/toBeScanned.tar"
+IMAGE_TARFILE="${THISDIR}/scanned.tar"
 
 function usage() {
    >&2 echo "Error: Missing or invalid arguments."
@@ -227,7 +227,9 @@ function main() {
       hub_version="latest"
     fi
   fi
-  IMAGE_TARFILE="${THISDIR}/${docker_image%:*}-${hub_version}.tar"
+  raw_image_name="${docker_image%:*}"
+  clean_image_name=$(echo $raw_image_name | sed  -e "s/\//_/g")
+  IMAGE_TARFILE="${THISDIR}/${clean_image_name%:*}-${hub_version}.tar"
 
   # if the --name scan.cli option was not provided
   if [ -z "${name_arg}" ]; then
