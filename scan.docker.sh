@@ -66,7 +66,8 @@ function get_remote_file() {
   if [ -n "$(which wget)" ]; then
     execute_remote_request command_output "wget -O"  "$REQUEST_URL" "$2"
     if [[ $? -eq 0 ]]; then
-      mv "${TEMP_FILE}" "$2"
+      tr -d "\r" <"${TEMP_FILE}" >"$2"
+      rm "${TEMP_FILE}"
       chmod 755 "$2"
       return 0
     else
@@ -83,7 +84,8 @@ function get_remote_file() {
       if [ "$status_code" == "200" ]; then
         execute_remote_request command_output "curl --netrc-optional -s -o" "$REQUEST_URL" "$2"
         if [[ $? -eq 0 ]]; then
-          mv "${TEMP_FILE}" "$2"
+          tr -d "\r" <"${TEMP_FILE}" >"$2"
+          rm "${TEMP_FILE}"
           chmod 755 "$2"
           return $?
         fi
