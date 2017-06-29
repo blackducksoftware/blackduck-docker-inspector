@@ -70,7 +70,7 @@ function get_remote_file() {
       chmod 755 "$2"
       return 0
     else
-      if [[  "${my_output}" == "${my_output#*Resolving blackducksoftware.github.io}" ]]; then
+      if [[  "${command_output}" == "${command_output#*Resolving blackducksoftware.github.io}" ]]; then
         using_proxy_instructions
       fi
     fi
@@ -82,7 +82,11 @@ function get_remote_file() {
       server_name=$(echo $command_output | cut -d $'\r' -f2 | cut -d $' ' -f3)
       if [ "$status_code" == "200" ]; then
         execute_remote_request command_output "curl --netrc-optional -s -o" "$REQUEST_URL" "$2"
-        return $?
+        if [[ $? -eq 0 ]]; then
+          mv "${TEMP_FILE}" "$2"
+          chmod 755 "$2"
+          return $?
+        fi
       else 
         if [[ "$server_name" != "GitHub.com" ]]; then
           using_proxy_instructions
@@ -228,12 +232,12 @@ function main() {
     fi
   fi
   raw_image_name="${docker_image%:*}"
-  clean_image_name=$(echo $raw_image_name | sed  -e "s/\//_/g")
+  clean_image_name=$(echo "$raw_image_name" | sed  -e "s/\//_/g")
   IMAGE_TARFILE="${THISDIR}/${clean_image_name%:*}-${hub_version}.tar"
 
   # if the --name scan.cli option was not provided
   if [ -z "${name_arg}" ]; then
-    name_arg="--name ${hub_project}_${hub_version}"
+    name_arg="--name scanner_{hub_project}_${hub_version}"
   else
     name_arg="--name ${name_arg}"
   fi
