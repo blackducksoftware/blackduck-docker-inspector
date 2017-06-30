@@ -165,7 +165,7 @@ function main() {
   local do_scan=1
   local do_inspect=1
   local option_count=0
-  local inspector_version="0.0.4"
+  local inspector_version=
   while [[ $# -ge 1 ]]; do
     opt="$1"
     case $opt in
