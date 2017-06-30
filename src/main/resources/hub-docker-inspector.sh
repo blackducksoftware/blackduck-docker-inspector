@@ -106,7 +106,6 @@ then
         echo Environment variable BD_HUB_PASSWORD is not set or is being overridden on the command line
 else
         echo BD_HUB_PASSWORD is set
-        options=( ${options[*]} --hub.password=$BD_HUB_PASSWORD )
 fi
 
 if [ $(docker ps |grep "${containername}\$" | wc -l) -gt 0 ]
@@ -135,10 +134,10 @@ then
 	echo Inspecting image tar file: $image
 	tarfilename=$(basename $image)
 	docker cp $image ${containername}:/opt/blackduck/hub-docker-inspector/target/$tarfilename
-	docker exec ${containername} /opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} /opt/blackduck/hub-docker-inspector/target/$tarfilename
+	docker exec -e BD_HUB_PASSWORD ${containername} /opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} /opt/blackduck/hub-docker-inspector/target/$tarfilename
 else
 	echo Inspecting image: $image
-	docker exec ${containername} /opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} $image
+	docker exec -e BD_HUB_PASSWORD ${containername} /opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} $image
 fi
 
 exit 0

@@ -23,6 +23,7 @@
  */
 package com.blackducksoftware.integration.hub.docker
 
+import org.apache.commons.lang3.StringUtils
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
@@ -51,7 +52,10 @@ class HubClient {
 	String hubUsername
 
 	@Value('${hub.password}')
-	String hubPassword
+	String hubPasswordProperty
+
+	@Value('${BD_HUB_PASSWORD:}')
+	String hubPasswordEnvVar;
 
 	@Value('${hub.proxy.host}')
 	String hubProxyHost
@@ -97,6 +101,12 @@ class HubClient {
 	}
 
 	private HubServerConfigBuilder createBuilder() {
+
+		String hubPassword = hubPasswordEnvVar
+		if (!StringUtils.isBlank(hubPasswordProperty)) {
+			hubPassword = hubPasswordProperty
+		}
+
 		HubServerConfigBuilder hubServerConfigBuilder = new HubServerConfigBuilder()
 		hubServerConfigBuilder.hubUrl = hubUrl
 		hubServerConfigBuilder.username = hubUsername
