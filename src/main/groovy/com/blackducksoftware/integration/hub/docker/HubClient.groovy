@@ -106,6 +106,7 @@ class HubClient {
 		if (!StringUtils.isBlank(hubPasswordProperty)) {
 			hubPassword = hubPasswordProperty
 		}
+		logger.info("********* hubPassword: ${hubPassword}")
 
 		HubServerConfigBuilder hubServerConfigBuilder = new HubServerConfigBuilder()
 		hubServerConfigBuilder.hubUrl = hubUrl

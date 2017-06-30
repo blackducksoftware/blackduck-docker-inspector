@@ -22,9 +22,9 @@
  * under the License.
  */
 package com.blackducksoftware.integration.hub.docker.client
-
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.IOUtils
+import org.apache.commons.lang3.StringUtils
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -63,6 +63,12 @@ class DockerClientManager {
 
 	@Value('${working.directory}')
 	String workingDirectoryPath
+
+	@Value('${hub.password}')
+	String hubPasswordProperty
+
+	@Value('${BD_HUB_PASSWORD:}')
+	String hubPasswordEnvVar;
 
 	File getTarFileFromDockerImage(String imageName, String tagName) {
 		// use docker to pull image if necessary
@@ -107,6 +113,12 @@ class DockerClientManager {
 
 	void run(String imageName, String tagName, File dockerTarFile, boolean copyJar) {
 
+		String hubPassword = hubPasswordEnvVar
+		if (!StringUtils.isBlank(hubPasswordProperty)) {
+			hubPassword = hubPasswordProperty
+		}
+		logger.info("******* hubPasswordEnvVar: ${hubPasswordEnvVar}; hubPasswordProperty: ${hubPasswordProperty}; hubPassword: ${hubPassword}")
+
 		String imageId = "${imageName}:${tagName}"
 		logger.info("Running container based on image ${imageId}")
 		String extractorContainerName = deriveContainerName(imageName)
@@ -140,11 +152,13 @@ class DockerClientManager {
 			}
 		} else{
 			logger.debug("Creating container ${extractorContainerName} from image ${}")
+			logger.info("******* adding BD_HUB_PASSWORD=${hubPassword} to containerCmd")
 			CreateContainerResponse containerResponse = dockerClient.createContainerCmd(imageId)
 					.withStdinOpen(true)
 					.withTty(true)
 					.withName(extractorContainerName)
 					.withCmd('/bin/bash')
+					.withEnv("BD_HUB_PASSWORD=${hubPassword}")
 					.exec()
 
 			containerId = containerResponse.getId()

@@ -23,6 +23,7 @@ fi
 # If docker is installed (master container): start docker
 if [ $(ls -l /usr/bin/docker 2> /dev/null |wc -l) -gt 0 ]
 then
+	echo "Running on primary container"
 	dockerRunning=false
 	if [ $(docker info 2>&1 |grep "Server Version"|wc -l) -gt 0 ]
 	then
@@ -69,6 +70,14 @@ then
 	fi
 
 	docker info 2>&1 | grep "Server Version"
+	
+	echo "Stopping old containers, if they are running"
+	docker stop hub-docker-inspector-alpine
+	docker stop hub-docker-inspector-centos
+	echo "Removing old containers, if they are running"
+	docker rm hub-docker-inspector-alpine
+	docker rm hub-docker-inspector-centos
+	echo "Done removing old containers"
 fi
 
 options=( "$@" )
