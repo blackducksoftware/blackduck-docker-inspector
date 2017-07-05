@@ -103,7 +103,7 @@ class DockerClientManager {
 			try {
 				pull.exec(new PullImageResultCallback()).awaitSuccess()
 			} catch (NotFoundException e) {
-				logger.error("*** Pull failed: Image ${imageName}:${tagName} not found. Please check the image name/tag")
+				logger.error("Pull failed: Image ${imageName}:${tagName} not found. Please check the image name/tag")
 				throw e
 			}
 		} else{
@@ -117,7 +117,6 @@ class DockerClientManager {
 		if (!StringUtils.isBlank(hubPasswordProperty)) {
 			hubPassword = hubPasswordProperty
 		}
-		logger.info("******* hubPasswordEnvVar: ${hubPasswordEnvVar}; hubPasswordProperty: ${hubPasswordProperty}; hubPassword: ${hubPassword}")
 
 		String imageId = "${imageName}:${tagName}"
 		logger.info("Running container based on image ${imageId}")
@@ -152,7 +151,6 @@ class DockerClientManager {
 			}
 		} else{
 			logger.debug("Creating container ${extractorContainerName} from image ${}")
-			logger.info("******* adding BD_HUB_PASSWORD=${hubPassword} to containerCmd")
 			CreateContainerResponse containerResponse = dockerClient.createContainerCmd(imageId)
 					.withStdinOpen(true)
 					.withTty(true)
