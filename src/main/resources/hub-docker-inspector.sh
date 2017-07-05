@@ -112,7 +112,10 @@ function installPropertiesFile() {
 # Start script
 ##################
 
-echo "Start of script"
+containername=hub-docker-inspector
+imagename=hub-docker-inspector
+propdir=.
+hub_password_set_on_cmd_line=false
 
 if [ $# -lt 1 ]
 then
@@ -123,19 +126,23 @@ fi
 if [ \( $1 = -v \) -o \( $1 = --version \) ]
 then
 	echo "$0 @VERSION@"
-	exit -1
+	exit 0
 fi
 
 if [ \( $1 = -h \) -o \( $1 = --help \) ]
 then
     printUsage
-    exit -1
+    exit 0
 fi
 
-containername=hub-docker-inspector
-imagename=hub-docker-inspector
-propdir=.
-hub_password_set_on_cmd_line=false
+if [ \( $1 = -p \) -o \( $1 = --get-properties \) ]
+then
+    startContainer
+    echo "Copying application.properties template"
+    docker cp hub-docker-inspector:/opt/blackduck/hub-docker-inspector/template/application.properties .
+    exit 0
+fi
+
 preProcessOptions "$@"
 propfile=${propdir}/application.properties
 echo "Properties file: ${propfile}"
