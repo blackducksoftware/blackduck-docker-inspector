@@ -2,14 +2,14 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "ubuntu_1.0_Users_sbillings_Documents_git_hub-docker_test_resources_imageDir_DPKG",
-    "@id": "uuid:a12a6409-eec2-4548-9c7b-23dfc25b150e",
+    "@id": "uuid:2b300469-a6d8-4007-bfaf-0300894e20b2",
     "@type": "BillOfMaterials",
     "relationship": []
   },
   {
     "name": "testProjectName",
     "revision": "testProjectVersion",
-    "@id": "data:testProjectName/testProjectVersion",
+    "@id": "com.blackducksoftware.integration.hub.bdio.simple.model.BdioExternalIdentifier@5ef6ae06",
     "@type": "Project",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -225,14 +225,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:ca-certificates-java/20130815ubuntu1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:ca-certificates-java/20130815ubuntu1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "data:certmonger/0.74-0ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -697,14 +689,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:gconf2/3.2.6-0ubuntu2",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:gconf2/3.2.6-0ubuntu2",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "data:gconf2-common/3.2.6-0ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -889,14 +873,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:hiera/1.3.4-1puppetlabs1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:hiera/1.3.4-1puppetlabs1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "data:hostname/3.15ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -1062,14 +1038,6 @@
       },
       {
         "related": "data:iso-codes/3.52-1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:java-common/0.51",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:java-common/0.51",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1289,14 +1257,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libasyncns0/0.8-4ubuntu2",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libasyncns0/0.8-4ubuntu2",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "data:libatasmart4/0.19-3",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -1310,14 +1270,6 @@
       },
       {
         "related": "data:libatk-bridge2.0-0/2.10.2-2ubuntu1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libatk-wrapper-java-jni/0.30.4-4",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libatk-wrapper-java-jni/0.30.4-4",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1369,14 +1321,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libaugeas0/1.2.0-0ubuntu1.2",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libaugeas0/1.2.0-0ubuntu1.2",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "data:libavahi-client3/0.6.31-4ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -1401,14 +1345,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libavahi-glib1/0.6.31-4ubuntu1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libavahi-glib1/0.6.31-4ubuntu1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "data:libbasicobjects0/0.3.0.1-4",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -1430,22 +1366,6 @@
       },
       {
         "related": "data:libblkid1/2.20.1-5.1ubuntu20.7",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libbonobo2-0/2.32.1-0ubuntu5",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libbonobo2-0/2.32.1-0ubuntu5",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libbonobo2-common/2.32.1-0ubuntu5",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libbonobo2-common/2.32.1-0ubuntu5",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1510,14 +1430,6 @@
       },
       {
         "related": "data:libcairo2/1.13.0~20140204-0ubuntu1.",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libcanberra0/0.30-0ubuntu3",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libcanberra0/0.30-0ubuntu3",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1873,14 +1785,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libflac8/1.3.0-2ubuntu0.14.04.1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libflac8/1.3.0-2ubuntu0.14.04.1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "data:libfontconfig1/2.11.0-0ubuntu4.2",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -2070,38 +1974,6 @@
       },
       {
         "related": "data:libgmp10/2:5.1.3+dfsg-1ubuntu1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libgnome2-0/2.32.1-4ubuntu1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libgnome2-0/2.32.1-4ubuntu1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libgnome2-common/2.32.1-4ubuntu1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libgnome2-common/2.32.1-4ubuntu1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libgnomevfs2-0/1:2.24.4-1ubuntu6",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libgnomevfs2-0/1:2.24.4-1ubuntu6",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libgnomevfs2-common/1:2.24.4-1ubuntu6",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libgnomevfs2-common/1:2.24.4-1ubuntu6",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -2342,14 +2214,6 @@
       },
       {
         "related": "data:libicu52/52.1-3ubuntu0.4",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libidl0/0.8.14-0.2ubuntu4",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libidl0/0.8.14-0.2ubuntu4",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -2881,35 +2745,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libogg0/1.3.1-1ubuntu1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libogg0/1.3.1-1ubuntu1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "data:libopts25/1:5.18-2ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
         "related": "data:libopts25/1:5.18-2ubuntu2",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:liborbit-2-0/1:2.14.19-0.3",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:liborbit-2-0/1:2.14.19-0.3",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:liborbit2/1:2.14.19-0.3",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:liborbit2/1:2.14.19-0.3",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -3193,14 +3033,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libpulse0/1:4.0-0ubuntu11.1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libpulse0/1:4.0-0ubuntu11.1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "data:libpwquality-common/1.2.3-1ubuntu1.1",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -3353,14 +3185,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libruby1.9.1/1.9.3.484-2ubuntu1.2",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libruby1.9.1/1.9.3.484-2ubuntu1.2",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "data:libsane/1.0.23-3ubuntu3.1",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -3406,14 +3230,6 @@
       },
       {
         "related": "data:libsasl2-modules-gssapi-mit/2.1.25.dfsg1-17build1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libsctp1/1.0.15+dfsg-1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libsctp1/1.0.15+dfsg-1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -3494,14 +3310,6 @@
       },
       {
         "related": "data:libsm6/2:1.2.1-2",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libsndfile1/1.0.25-7ubuntu2.1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libsndfile1/1.0.25-7ubuntu2.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -3798,30 +3606,6 @@
       },
       {
         "related": "data:libv4lconvert0/1.0.1-1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libvorbis0a/1.3.2-1.3ubuntu1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libvorbis0a/1.3.2-1.3ubuntu1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libvorbisenc2/1.3.2-1.3ubuntu1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libvorbisenc2/1.3.2-1.3ubuntu1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libvorbisfile3/1.3.2-1.3ubuntu1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libvorbisfile3/1.3.2-1.3ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -4193,14 +3977,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libyaml-0-2/0.1.4-3ubuntu3.1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:libyaml-0-2/0.1.4-3ubuntu3.1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "data:linux-firmware/1.127.22",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -4273,46 +4049,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:linux-image-3.13.0-100-generic/3.13.0-100.147",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-3.13.0-100-generic/3.13.0-100.147",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-3.13.0-101-generic/3.13.0-101.148",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-3.13.0-101-generic/3.13.0-101.148",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-3.13.0-103-generic/3.13.0-103.150",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-3.13.0-103-generic/3.13.0-103.150",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-3.13.0-105-generic/3.13.0-105.152",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-3.13.0-105-generic/3.13.0-105.152",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-3.13.0-106-generic/3.13.0-106.153",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-3.13.0-106-generic/3.13.0-106.153",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "data:linux-image-3.13.0-107-generic/3.13.0-107.154",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -4329,99 +4065,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:linux-image-3.13.0-24-generic/3.13.0-24.47",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-3.13.0-24-generic/3.13.0-24.47",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-3.13.0-91-generic/3.13.0-91.138",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-3.13.0-91-generic/3.13.0-91.138",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-3.13.0-92-generic/3.13.0-92.139",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-3.13.0-92-generic/3.13.0-92.139",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-3.13.0-93-generic/3.13.0-93.140",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-3.13.0-93-generic/3.13.0-93.140",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-3.13.0-95-generic/3.13.0-95.142",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-3.13.0-95-generic/3.13.0-95.142",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-3.13.0-96-generic/3.13.0-96.143",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-3.13.0-96-generic/3.13.0-96.143",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "data:linux-image-3.13.0-98-generic/3.13.0-98.145",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
         "related": "data:linux-image-3.13.0-98-generic/3.13.0-98.145",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-extra-3.13.0-100-generic/3.13.0-100.147",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-extra-3.13.0-100-generic/3.13.0-100.147",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-extra-3.13.0-101-generic/3.13.0-101.148",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-extra-3.13.0-101-generic/3.13.0-101.148",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-extra-3.13.0-103-generic/3.13.0-103.150",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-extra-3.13.0-103-generic/3.13.0-103.150",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-extra-3.13.0-105-generic/3.13.0-105.152",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-extra-3.13.0-105-generic/3.13.0-105.152",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-extra-3.13.0-106-generic/3.13.0-106.153",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-extra-3.13.0-106-generic/3.13.0-106.153",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -4438,54 +4086,6 @@
       },
       {
         "related": "data:linux-image-extra-3.13.0-108-generic/3.13.0-108.155",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-extra-3.13.0-24-generic/3.13.0-24.47",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-extra-3.13.0-24-generic/3.13.0-24.47",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-extra-3.13.0-91-generic/3.13.0-91.138",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-extra-3.13.0-91-generic/3.13.0-91.138",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-extra-3.13.0-92-generic/3.13.0-92.139",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-extra-3.13.0-92-generic/3.13.0-92.139",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-extra-3.13.0-93-generic/3.13.0-93.140",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-extra-3.13.0-93-generic/3.13.0-93.140",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-extra-3.13.0-95-generic/3.13.0-95.142",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-extra-3.13.0-95-generic/3.13.0-95.142",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-extra-3.13.0-96-generic/3.13.0-96.143",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:linux-image-extra-3.13.0-96-generic/3.13.0-96.143",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -4809,14 +4409,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:openjdk-7-jre-headless/7u101-2.6.6-0ubuntu0.14.0",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:openjdk-7-jre-headless/7u101-2.6.6-0ubuntu0.14.0",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "data:openssh-client/1:6.6p1-2ubuntu2.8",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -5001,27 +4593,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:puppet/3.8.7-1puppetlabs1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:puppet/3.8.7-1puppetlabs1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "data:puppet-agent/1.8.2-1trusty",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
         "related": "data:puppet-agent/1.8.2-1trusty",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:puppet-common/3.8.7-1puppetlabs1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:puppet-common/3.8.7-1puppetlabs1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -5422,14 +4998,6 @@
       },
       {
         "related": "data:rsyslog/7.4.4-1ubuntu2.6",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:ruby1.9.1/1.9.3.484-2ubuntu1.2",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:ruby1.9.1/1.9.3.484-2ubuntu1.2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -6551,28 +6119,6 @@
     "relationship": []
   },
   {
-    "name": "ca-certificates-java",
-    "revision": "20130815ubuntu1",
-    "@id": "data:ca-certificates-java/20130815ubuntu1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "ca-certificates-java/20130815ubuntu1/all"
-    },
-    "relationship": []
-  },
-  {
-    "name": "ca-certificates-java",
-    "revision": "20130815ubuntu1",
-    "@id": "data:ca-certificates-java/20130815ubuntu1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "ca-certificates-java/20130815ubuntu1/all"
-    },
-    "relationship": []
-  },
-  {
     "name": "certmonger",
     "revision": "0.74-0ubuntu1",
     "@id": "data:certmonger/0.74-0ubuntu1",
@@ -7849,28 +7395,6 @@
     "relationship": []
   },
   {
-    "name": "gconf2",
-    "revision": "3.2.6-0ubuntu2",
-    "@id": "data:gconf2/3.2.6-0ubuntu2",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "gconf2/3.2.6-0ubuntu2/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "gconf2",
-    "revision": "3.2.6-0ubuntu2",
-    "@id": "data:gconf2/3.2.6-0ubuntu2",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "gconf2/3.2.6-0ubuntu2/amd64"
-    },
-    "relationship": []
-  },
-  {
     "name": "gconf2-common",
     "revision": "3.2.6-0ubuntu2",
     "@id": "data:gconf2-common/3.2.6-0ubuntu2",
@@ -8377,28 +7901,6 @@
     "relationship": []
   },
   {
-    "name": "hiera",
-    "revision": "1.3.4-1puppetlabs1",
-    "@id": "data:hiera/1.3.4-1puppetlabs1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "hiera/1.3.4-1puppetlabs1/all"
-    },
-    "relationship": []
-  },
-  {
-    "name": "hiera",
-    "revision": "1.3.4-1puppetlabs1",
-    "@id": "data:hiera/1.3.4-1puppetlabs1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "hiera/1.3.4-1puppetlabs1/all"
-    },
-    "relationship": []
-  },
-  {
     "name": "hostname",
     "revision": "3.15ubuntu1",
     "@id": "data:hostname/3.15ubuntu1",
@@ -8857,28 +8359,6 @@
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
       "externalId": "iso-codes/3.52-1/all"
-    },
-    "relationship": []
-  },
-  {
-    "name": "java-common",
-    "revision": "0.51",
-    "@id": "data:java-common/0.51",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "java-common/0.51/all"
-    },
-    "relationship": []
-  },
-  {
-    "name": "java-common",
-    "revision": "0.51",
-    "@id": "data:java-common/0.51",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "java-common/0.51/all"
     },
     "relationship": []
   },
@@ -9477,28 +8957,6 @@
     "relationship": []
   },
   {
-    "name": "libasyncns0",
-    "revision": "0.8-4ubuntu2",
-    "@id": "data:libasyncns0/0.8-4ubuntu2",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libasyncns0/0.8-4ubuntu2/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libasyncns0",
-    "revision": "0.8-4ubuntu2",
-    "@id": "data:libasyncns0/0.8-4ubuntu2",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libasyncns0/0.8-4ubuntu2/amd64"
-    },
-    "relationship": []
-  },
-  {
     "name": "libatasmart4",
     "revision": "0.19-3",
     "@id": "data:libatasmart4/0.19-3",
@@ -9539,28 +8997,6 @@
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
       "externalId": "libatk-bridge2.0-0/2.10.2-2ubuntu1/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libatk-wrapper-java-jni",
-    "revision": "0.30.4-4",
-    "@id": "data:libatk-wrapper-java-jni/0.30.4-4",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libatk-wrapper-java-jni/0.30.4-4/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libatk-wrapper-java-jni",
-    "revision": "0.30.4-4",
-    "@id": "data:libatk-wrapper-java-jni/0.30.4-4",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libatk-wrapper-java-jni/0.30.4-4/amd64"
     },
     "relationship": []
   },
@@ -9697,28 +9133,6 @@
     "relationship": []
   },
   {
-    "name": "libaugeas0",
-    "revision": "1.2.0-0ubuntu1.2",
-    "@id": "data:libaugeas0/1.2.0-0ubuntu1.2",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libaugeas0/1.2.0-0ubuntu1.2/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libaugeas0",
-    "revision": "1.2.0-0ubuntu1.2",
-    "@id": "data:libaugeas0/1.2.0-0ubuntu1.2",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libaugeas0/1.2.0-0ubuntu1.2/amd64"
-    },
-    "relationship": []
-  },
-  {
     "name": "libavahi-client3",
     "revision": "0.6.31-4ubuntu1",
     "@id": "data:libavahi-client3/0.6.31-4ubuntu1",
@@ -9785,28 +9199,6 @@
     "relationship": []
   },
   {
-    "name": "libavahi-glib1",
-    "revision": "0.6.31-4ubuntu1",
-    "@id": "data:libavahi-glib1/0.6.31-4ubuntu1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libavahi-glib1/0.6.31-4ubuntu1/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libavahi-glib1",
-    "revision": "0.6.31-4ubuntu1",
-    "@id": "data:libavahi-glib1/0.6.31-4ubuntu1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libavahi-glib1/0.6.31-4ubuntu1/amd64"
-    },
-    "relationship": []
-  },
-  {
     "name": "libbasicobjects0",
     "revision": "0.3.0.1-4",
     "@id": "data:libbasicobjects0/0.3.0.1-4",
@@ -9869,50 +9261,6 @@
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
       "externalId": "libblkid1/2.20.1-5.1ubuntu20.7/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libbonobo2-0",
-    "revision": "2.32.1-0ubuntu5",
-    "@id": "data:libbonobo2-0/2.32.1-0ubuntu5",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libbonobo2-0/2.32.1-0ubuntu5/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libbonobo2-0",
-    "revision": "2.32.1-0ubuntu5",
-    "@id": "data:libbonobo2-0/2.32.1-0ubuntu5",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libbonobo2-0/2.32.1-0ubuntu5/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libbonobo2-common",
-    "revision": "2.32.1-0ubuntu5",
-    "@id": "data:libbonobo2-common/2.32.1-0ubuntu5",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libbonobo2-common/2.32.1-0ubuntu5/all"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libbonobo2-common",
-    "revision": "2.32.1-0ubuntu5",
-    "@id": "data:libbonobo2-common/2.32.1-0ubuntu5",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libbonobo2-common/2.32.1-0ubuntu5/all"
     },
     "relationship": []
   },
@@ -10089,28 +9437,6 @@
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
       "externalId": "libcairo2/1.13.0~20140204-0ubuntu1./amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libcanberra0",
-    "revision": "0.30-0ubuntu3",
-    "@id": "data:libcanberra0/0.30-0ubuntu3",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libcanberra0/0.30-0ubuntu3/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libcanberra0",
-    "revision": "0.30-0ubuntu3",
-    "@id": "data:libcanberra0/0.30-0ubuntu3",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libcanberra0/0.30-0ubuntu3/amd64"
     },
     "relationship": []
   },
@@ -11083,28 +10409,6 @@
     "relationship": []
   },
   {
-    "name": "libflac8",
-    "revision": "1.3.0-2ubuntu0.14.04.1",
-    "@id": "data:libflac8/1.3.0-2ubuntu0.14.04.1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libflac8/1.3.0-2ubuntu0.14.04.1/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libflac8",
-    "revision": "1.3.0-2ubuntu0.14.04.1",
-    "@id": "data:libflac8/1.3.0-2ubuntu0.14.04.1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libflac8/1.3.0-2ubuntu0.14.04.1/amd64"
-    },
-    "relationship": []
-  },
-  {
     "name": "libfontconfig1",
     "revision": "2.11.0-0ubuntu4.2",
     "@id": "data:libfontconfig1/2.11.0-0ubuntu4.2",
@@ -11629,94 +10933,6 @@
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
       "externalId": "libgmp10/2:5.1.3+dfsg-1ubuntu1/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libgnome2-0",
-    "revision": "2.32.1-4ubuntu1",
-    "@id": "data:libgnome2-0/2.32.1-4ubuntu1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libgnome2-0/2.32.1-4ubuntu1/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libgnome2-0",
-    "revision": "2.32.1-4ubuntu1",
-    "@id": "data:libgnome2-0/2.32.1-4ubuntu1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libgnome2-0/2.32.1-4ubuntu1/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libgnome2-common",
-    "revision": "2.32.1-4ubuntu1",
-    "@id": "data:libgnome2-common/2.32.1-4ubuntu1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libgnome2-common/2.32.1-4ubuntu1/all"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libgnome2-common",
-    "revision": "2.32.1-4ubuntu1",
-    "@id": "data:libgnome2-common/2.32.1-4ubuntu1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libgnome2-common/2.32.1-4ubuntu1/all"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libgnomevfs2-0",
-    "revision": "1:2.24.4-1ubuntu6",
-    "@id": "data:libgnomevfs2-0/1:2.24.4-1ubuntu6",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libgnomevfs2-0/1:2.24.4-1ubuntu6/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libgnomevfs2-0",
-    "revision": "1:2.24.4-1ubuntu6",
-    "@id": "data:libgnomevfs2-0/1:2.24.4-1ubuntu6",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libgnomevfs2-0/1:2.24.4-1ubuntu6/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libgnomevfs2-common",
-    "revision": "1:2.24.4-1ubuntu6",
-    "@id": "data:libgnomevfs2-common/1:2.24.4-1ubuntu6",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libgnomevfs2-common/1:2.24.4-1ubuntu6/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libgnomevfs2-common",
-    "revision": "1:2.24.4-1ubuntu6",
-    "@id": "data:libgnomevfs2-common/1:2.24.4-1ubuntu6",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libgnomevfs2-common/1:2.24.4-1ubuntu6/amd64"
     },
     "relationship": []
   },
@@ -12377,28 +11593,6 @@
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
       "externalId": "libicu52/52.1-3ubuntu0.4/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libidl0",
-    "revision": "0.8.14-0.2ubuntu4",
-    "@id": "data:libidl0/0.8.14-0.2ubuntu4",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libidl0/0.8.14-0.2ubuntu4/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libidl0",
-    "revision": "0.8.14-0.2ubuntu4",
-    "@id": "data:libidl0/0.8.14-0.2ubuntu4",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libidl0/0.8.14-0.2ubuntu4/amd64"
     },
     "relationship": []
   },
@@ -13855,28 +13049,6 @@
     "relationship": []
   },
   {
-    "name": "libogg0",
-    "revision": "1.3.1-1ubuntu1",
-    "@id": "data:libogg0/1.3.1-1ubuntu1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libogg0/1.3.1-1ubuntu1/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libogg0",
-    "revision": "1.3.1-1ubuntu1",
-    "@id": "data:libogg0/1.3.1-1ubuntu1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libogg0/1.3.1-1ubuntu1/amd64"
-    },
-    "relationship": []
-  },
-  {
     "name": "libopts25",
     "revision": "1:5.18-2ubuntu2",
     "@id": "data:libopts25/1:5.18-2ubuntu2",
@@ -13895,50 +13067,6 @@
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
       "externalId": "libopts25/1:5.18-2ubuntu2/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "liborbit-2-0",
-    "revision": "1:2.14.19-0.3",
-    "@id": "data:liborbit-2-0/1:2.14.19-0.3",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "liborbit-2-0/1:2.14.19-0.3/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "liborbit-2-0",
-    "revision": "1:2.14.19-0.3",
-    "@id": "data:liborbit-2-0/1:2.14.19-0.3",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "liborbit-2-0/1:2.14.19-0.3/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "liborbit2",
-    "revision": "1:2.14.19-0.3",
-    "@id": "data:liborbit2/1:2.14.19-0.3",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "liborbit2/1:2.14.19-0.3/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "liborbit2",
-    "revision": "1:2.14.19-0.3",
-    "@id": "data:liborbit2/1:2.14.19-0.3",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "liborbit2/1:2.14.19-0.3/amd64"
     },
     "relationship": []
   },
@@ -14713,28 +13841,6 @@
     "relationship": []
   },
   {
-    "name": "libpulse0",
-    "revision": "1:4.0-0ubuntu11.1",
-    "@id": "data:libpulse0/1:4.0-0ubuntu11.1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libpulse0/1:4.0-0ubuntu11.1/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libpulse0",
-    "revision": "1:4.0-0ubuntu11.1",
-    "@id": "data:libpulse0/1:4.0-0ubuntu11.1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libpulse0/1:4.0-0ubuntu11.1/amd64"
-    },
-    "relationship": []
-  },
-  {
     "name": "libpwquality-common",
     "revision": "1.2.3-1ubuntu1.1",
     "@id": "data:libpwquality-common/1.2.3-1ubuntu1.1",
@@ -15153,28 +14259,6 @@
     "relationship": []
   },
   {
-    "name": "libruby1.9.1",
-    "revision": "1.9.3.484-2ubuntu1.2",
-    "@id": "data:libruby1.9.1/1.9.3.484-2ubuntu1.2",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libruby1.9.1/1.9.3.484-2ubuntu1.2/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libruby1.9.1",
-    "revision": "1.9.3.484-2ubuntu1.2",
-    "@id": "data:libruby1.9.1/1.9.3.484-2ubuntu1.2",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libruby1.9.1/1.9.3.484-2ubuntu1.2/amd64"
-    },
-    "relationship": []
-  },
-  {
     "name": "libsane",
     "revision": "1.0.23-3ubuntu3.1",
     "@id": "data:libsane/1.0.23-3ubuntu3.1",
@@ -15303,28 +14387,6 @@
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
       "externalId": "libsasl2-modules-gssapi-mit/2.1.25.dfsg1-17build1/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libsctp1",
-    "revision": "1.0.15+dfsg-1",
-    "@id": "data:libsctp1/1.0.15+dfsg-1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libsctp1/1.0.15+dfsg-1/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libsctp1",
-    "revision": "1.0.15+dfsg-1",
-    "@id": "data:libsctp1/1.0.15+dfsg-1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libsctp1/1.0.15+dfsg-1/amd64"
     },
     "relationship": []
   },
@@ -15545,28 +14607,6 @@
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
       "externalId": "libsm6/2:1.2.1-2/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libsndfile1",
-    "revision": "1.0.25-7ubuntu2.1",
-    "@id": "data:libsndfile1/1.0.25-7ubuntu2.1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libsndfile1/1.0.25-7ubuntu2.1/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libsndfile1",
-    "revision": "1.0.25-7ubuntu2.1",
-    "@id": "data:libsndfile1/1.0.25-7ubuntu2.1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libsndfile1/1.0.25-7ubuntu2.1/amd64"
     },
     "relationship": []
   },
@@ -16381,72 +15421,6 @@
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
       "externalId": "libv4lconvert0/1.0.1-1/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libvorbis0a",
-    "revision": "1.3.2-1.3ubuntu1",
-    "@id": "data:libvorbis0a/1.3.2-1.3ubuntu1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libvorbis0a/1.3.2-1.3ubuntu1/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libvorbis0a",
-    "revision": "1.3.2-1.3ubuntu1",
-    "@id": "data:libvorbis0a/1.3.2-1.3ubuntu1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libvorbis0a/1.3.2-1.3ubuntu1/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libvorbisenc2",
-    "revision": "1.3.2-1.3ubuntu1",
-    "@id": "data:libvorbisenc2/1.3.2-1.3ubuntu1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libvorbisenc2/1.3.2-1.3ubuntu1/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libvorbisenc2",
-    "revision": "1.3.2-1.3ubuntu1",
-    "@id": "data:libvorbisenc2/1.3.2-1.3ubuntu1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libvorbisenc2/1.3.2-1.3ubuntu1/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libvorbisfile3",
-    "revision": "1.3.2-1.3ubuntu1",
-    "@id": "data:libvorbisfile3/1.3.2-1.3ubuntu1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libvorbisfile3/1.3.2-1.3ubuntu1/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libvorbisfile3",
-    "revision": "1.3.2-1.3ubuntu1",
-    "@id": "data:libvorbisfile3/1.3.2-1.3ubuntu1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libvorbisfile3/1.3.2-1.3ubuntu1/amd64"
     },
     "relationship": []
   },
@@ -17463,28 +16437,6 @@
     "relationship": []
   },
   {
-    "name": "libyaml-0-2",
-    "revision": "0.1.4-3ubuntu3.1",
-    "@id": "data:libyaml-0-2/0.1.4-3ubuntu3.1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libyaml-0-2/0.1.4-3ubuntu3.1/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "libyaml-0-2",
-    "revision": "0.1.4-3ubuntu3.1",
-    "@id": "data:libyaml-0-2/0.1.4-3ubuntu3.1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libyaml-0-2/0.1.4-3ubuntu3.1/amd64"
-    },
-    "relationship": []
-  },
-  {
     "name": "linux-firmware",
     "revision": "1.127.22",
     "@id": "data:linux-firmware/1.127.22",
@@ -17683,116 +16635,6 @@
     "relationship": []
   },
   {
-    "name": "linux-image-3.13.0-100-generic",
-    "revision": "3.13.0-100.147",
-    "@id": "data:linux-image-3.13.0-100-generic/3.13.0-100.147",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "linux-image-3.13.0-100-generic/3.13.0-100.147/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-3.13.0-100-generic",
-    "revision": "3.13.0-100.147",
-    "@id": "data:linux-image-3.13.0-100-generic/3.13.0-100.147",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "linux-image-3.13.0-100-generic/3.13.0-100.147/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-3.13.0-101-generic",
-    "revision": "3.13.0-101.148",
-    "@id": "data:linux-image-3.13.0-101-generic/3.13.0-101.148",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "linux-image-3.13.0-101-generic/3.13.0-101.148/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-3.13.0-101-generic",
-    "revision": "3.13.0-101.148",
-    "@id": "data:linux-image-3.13.0-101-generic/3.13.0-101.148",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "linux-image-3.13.0-101-generic/3.13.0-101.148/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-3.13.0-103-generic",
-    "revision": "3.13.0-103.150",
-    "@id": "data:linux-image-3.13.0-103-generic/3.13.0-103.150",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "linux-image-3.13.0-103-generic/3.13.0-103.150/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-3.13.0-103-generic",
-    "revision": "3.13.0-103.150",
-    "@id": "data:linux-image-3.13.0-103-generic/3.13.0-103.150",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "linux-image-3.13.0-103-generic/3.13.0-103.150/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-3.13.0-105-generic",
-    "revision": "3.13.0-105.152",
-    "@id": "data:linux-image-3.13.0-105-generic/3.13.0-105.152",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "linux-image-3.13.0-105-generic/3.13.0-105.152/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-3.13.0-105-generic",
-    "revision": "3.13.0-105.152",
-    "@id": "data:linux-image-3.13.0-105-generic/3.13.0-105.152",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "linux-image-3.13.0-105-generic/3.13.0-105.152/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-3.13.0-106-generic",
-    "revision": "3.13.0-106.153",
-    "@id": "data:linux-image-3.13.0-106-generic/3.13.0-106.153",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "linux-image-3.13.0-106-generic/3.13.0-106.153/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-3.13.0-106-generic",
-    "revision": "3.13.0-106.153",
-    "@id": "data:linux-image-3.13.0-106-generic/3.13.0-106.153",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "linux-image-3.13.0-106-generic/3.13.0-106.153/amd64"
-    },
-    "relationship": []
-  },
-  {
     "name": "linux-image-3.13.0-107-generic",
     "revision": "3.13.0-107.154",
     "@id": "data:linux-image-3.13.0-107-generic/3.13.0-107.154",
@@ -17837,138 +16679,6 @@
     "relationship": []
   },
   {
-    "name": "linux-image-3.13.0-24-generic",
-    "revision": "3.13.0-24.47",
-    "@id": "data:linux-image-3.13.0-24-generic/3.13.0-24.47",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "linux-image-3.13.0-24-generic/3.13.0-24.47/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-3.13.0-24-generic",
-    "revision": "3.13.0-24.47",
-    "@id": "data:linux-image-3.13.0-24-generic/3.13.0-24.47",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "linux-image-3.13.0-24-generic/3.13.0-24.47/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-3.13.0-91-generic",
-    "revision": "3.13.0-91.138",
-    "@id": "data:linux-image-3.13.0-91-generic/3.13.0-91.138",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "linux-image-3.13.0-91-generic/3.13.0-91.138/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-3.13.0-91-generic",
-    "revision": "3.13.0-91.138",
-    "@id": "data:linux-image-3.13.0-91-generic/3.13.0-91.138",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "linux-image-3.13.0-91-generic/3.13.0-91.138/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-3.13.0-92-generic",
-    "revision": "3.13.0-92.139",
-    "@id": "data:linux-image-3.13.0-92-generic/3.13.0-92.139",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "linux-image-3.13.0-92-generic/3.13.0-92.139/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-3.13.0-92-generic",
-    "revision": "3.13.0-92.139",
-    "@id": "data:linux-image-3.13.0-92-generic/3.13.0-92.139",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "linux-image-3.13.0-92-generic/3.13.0-92.139/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-3.13.0-93-generic",
-    "revision": "3.13.0-93.140",
-    "@id": "data:linux-image-3.13.0-93-generic/3.13.0-93.140",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "linux-image-3.13.0-93-generic/3.13.0-93.140/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-3.13.0-93-generic",
-    "revision": "3.13.0-93.140",
-    "@id": "data:linux-image-3.13.0-93-generic/3.13.0-93.140",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "linux-image-3.13.0-93-generic/3.13.0-93.140/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-3.13.0-95-generic",
-    "revision": "3.13.0-95.142",
-    "@id": "data:linux-image-3.13.0-95-generic/3.13.0-95.142",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "linux-image-3.13.0-95-generic/3.13.0-95.142/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-3.13.0-95-generic",
-    "revision": "3.13.0-95.142",
-    "@id": "data:linux-image-3.13.0-95-generic/3.13.0-95.142",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "linux-image-3.13.0-95-generic/3.13.0-95.142/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-3.13.0-96-generic",
-    "revision": "3.13.0-96.143",
-    "@id": "data:linux-image-3.13.0-96-generic/3.13.0-96.143",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "linux-image-3.13.0-96-generic/3.13.0-96.143/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-3.13.0-96-generic",
-    "revision": "3.13.0-96.143",
-    "@id": "data:linux-image-3.13.0-96-generic/3.13.0-96.143",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "linux-image-3.13.0-96-generic/3.13.0-96.143/amd64"
-    },
-    "relationship": []
-  },
-  {
     "name": "linux-image-3.13.0-98-generic",
     "revision": "3.13.0-98.145",
     "@id": "data:linux-image-3.13.0-98-generic/3.13.0-98.145",
@@ -17987,116 +16697,6 @@
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
       "externalId": "linux-image-3.13.0-98-generic/3.13.0-98.145/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-extra-3.13.0-100-generic",
-    "revision": "3.13.0-100.147",
-    "@id": "data:linux-image-extra-3.13.0-100-generic/3.13.0-100.147",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "linux-image-extra-3.13.0-100-generic/3.13.0-100.147/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-extra-3.13.0-100-generic",
-    "revision": "3.13.0-100.147",
-    "@id": "data:linux-image-extra-3.13.0-100-generic/3.13.0-100.147",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "linux-image-extra-3.13.0-100-generic/3.13.0-100.147/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-extra-3.13.0-101-generic",
-    "revision": "3.13.0-101.148",
-    "@id": "data:linux-image-extra-3.13.0-101-generic/3.13.0-101.148",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "linux-image-extra-3.13.0-101-generic/3.13.0-101.148/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-extra-3.13.0-101-generic",
-    "revision": "3.13.0-101.148",
-    "@id": "data:linux-image-extra-3.13.0-101-generic/3.13.0-101.148",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "linux-image-extra-3.13.0-101-generic/3.13.0-101.148/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-extra-3.13.0-103-generic",
-    "revision": "3.13.0-103.150",
-    "@id": "data:linux-image-extra-3.13.0-103-generic/3.13.0-103.150",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "linux-image-extra-3.13.0-103-generic/3.13.0-103.150/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-extra-3.13.0-103-generic",
-    "revision": "3.13.0-103.150",
-    "@id": "data:linux-image-extra-3.13.0-103-generic/3.13.0-103.150",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "linux-image-extra-3.13.0-103-generic/3.13.0-103.150/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-extra-3.13.0-105-generic",
-    "revision": "3.13.0-105.152",
-    "@id": "data:linux-image-extra-3.13.0-105-generic/3.13.0-105.152",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "linux-image-extra-3.13.0-105-generic/3.13.0-105.152/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-extra-3.13.0-105-generic",
-    "revision": "3.13.0-105.152",
-    "@id": "data:linux-image-extra-3.13.0-105-generic/3.13.0-105.152",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "linux-image-extra-3.13.0-105-generic/3.13.0-105.152/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-extra-3.13.0-106-generic",
-    "revision": "3.13.0-106.153",
-    "@id": "data:linux-image-extra-3.13.0-106-generic/3.13.0-106.153",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "linux-image-extra-3.13.0-106-generic/3.13.0-106.153/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-extra-3.13.0-106-generic",
-    "revision": "3.13.0-106.153",
-    "@id": "data:linux-image-extra-3.13.0-106-generic/3.13.0-106.153",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "linux-image-extra-3.13.0-106-generic/3.13.0-106.153/amd64"
     },
     "relationship": []
   },
@@ -18141,138 +16741,6 @@
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
       "externalId": "linux-image-extra-3.13.0-108-generic/3.13.0-108.155/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-extra-3.13.0-24-generic",
-    "revision": "3.13.0-24.47",
-    "@id": "data:linux-image-extra-3.13.0-24-generic/3.13.0-24.47",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "linux-image-extra-3.13.0-24-generic/3.13.0-24.47/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-extra-3.13.0-24-generic",
-    "revision": "3.13.0-24.47",
-    "@id": "data:linux-image-extra-3.13.0-24-generic/3.13.0-24.47",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "linux-image-extra-3.13.0-24-generic/3.13.0-24.47/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-extra-3.13.0-91-generic",
-    "revision": "3.13.0-91.138",
-    "@id": "data:linux-image-extra-3.13.0-91-generic/3.13.0-91.138",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "linux-image-extra-3.13.0-91-generic/3.13.0-91.138/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-extra-3.13.0-91-generic",
-    "revision": "3.13.0-91.138",
-    "@id": "data:linux-image-extra-3.13.0-91-generic/3.13.0-91.138",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "linux-image-extra-3.13.0-91-generic/3.13.0-91.138/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-extra-3.13.0-92-generic",
-    "revision": "3.13.0-92.139",
-    "@id": "data:linux-image-extra-3.13.0-92-generic/3.13.0-92.139",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "linux-image-extra-3.13.0-92-generic/3.13.0-92.139/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-extra-3.13.0-92-generic",
-    "revision": "3.13.0-92.139",
-    "@id": "data:linux-image-extra-3.13.0-92-generic/3.13.0-92.139",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "linux-image-extra-3.13.0-92-generic/3.13.0-92.139/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-extra-3.13.0-93-generic",
-    "revision": "3.13.0-93.140",
-    "@id": "data:linux-image-extra-3.13.0-93-generic/3.13.0-93.140",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "linux-image-extra-3.13.0-93-generic/3.13.0-93.140/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-extra-3.13.0-93-generic",
-    "revision": "3.13.0-93.140",
-    "@id": "data:linux-image-extra-3.13.0-93-generic/3.13.0-93.140",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "linux-image-extra-3.13.0-93-generic/3.13.0-93.140/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-extra-3.13.0-95-generic",
-    "revision": "3.13.0-95.142",
-    "@id": "data:linux-image-extra-3.13.0-95-generic/3.13.0-95.142",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "linux-image-extra-3.13.0-95-generic/3.13.0-95.142/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-extra-3.13.0-95-generic",
-    "revision": "3.13.0-95.142",
-    "@id": "data:linux-image-extra-3.13.0-95-generic/3.13.0-95.142",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "linux-image-extra-3.13.0-95-generic/3.13.0-95.142/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-extra-3.13.0-96-generic",
-    "revision": "3.13.0-96.143",
-    "@id": "data:linux-image-extra-3.13.0-96-generic/3.13.0-96.143",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "linux-image-extra-3.13.0-96-generic/3.13.0-96.143/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "linux-image-extra-3.13.0-96-generic",
-    "revision": "3.13.0-96.143",
-    "@id": "data:linux-image-extra-3.13.0-96-generic/3.13.0-96.143",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "linux-image-extra-3.13.0-96-generic/3.13.0-96.143/amd64"
     },
     "relationship": []
   },
@@ -19157,28 +17625,6 @@
     "relationship": []
   },
   {
-    "name": "openjdk-7-jre-headless",
-    "revision": "7u101-2.6.6-0ubuntu0.14.0",
-    "@id": "data:openjdk-7-jre-headless/7u101-2.6.6-0ubuntu0.14.0",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "openjdk-7-jre-headless/7u101-2.6.6-0ubuntu0.14.0/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "openjdk-7-jre-headless",
-    "revision": "7u101-2.6.6-0ubuntu0.14.0",
-    "@id": "data:openjdk-7-jre-headless/7u101-2.6.6-0ubuntu0.14.0",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "openjdk-7-jre-headless/7u101-2.6.6-0ubuntu0.14.0/amd64"
-    },
-    "relationship": []
-  },
-  {
     "name": "openssh-client",
     "revision": "1:6.6p1-2ubuntu2.8",
     "@id": "data:openssh-client/1:6.6p1-2ubuntu2.8",
@@ -19685,28 +18131,6 @@
     "relationship": []
   },
   {
-    "name": "puppet",
-    "revision": "3.8.7-1puppetlabs1",
-    "@id": "data:puppet/3.8.7-1puppetlabs1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "puppet/3.8.7-1puppetlabs1/all"
-    },
-    "relationship": []
-  },
-  {
-    "name": "puppet",
-    "revision": "3.8.7-1puppetlabs1",
-    "@id": "data:puppet/3.8.7-1puppetlabs1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "puppet/3.8.7-1puppetlabs1/all"
-    },
-    "relationship": []
-  },
-  {
     "name": "puppet-agent",
     "revision": "1.8.2-1trusty",
     "@id": "data:puppet-agent/1.8.2-1trusty",
@@ -19725,28 +18149,6 @@
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
       "externalId": "puppet-agent/1.8.2-1trusty/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "puppet-common",
-    "revision": "3.8.7-1puppetlabs1",
-    "@id": "data:puppet-common/3.8.7-1puppetlabs1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "puppet-common/3.8.7-1puppetlabs1/all"
-    },
-    "relationship": []
-  },
-  {
-    "name": "puppet-common",
-    "revision": "3.8.7-1puppetlabs1",
-    "@id": "data:puppet-common/3.8.7-1puppetlabs1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "puppet-common/3.8.7-1puppetlabs1/all"
     },
     "relationship": []
   },
@@ -20847,28 +19249,6 @@
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
       "externalId": "rsyslog/7.4.4-1ubuntu2.6/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "ruby1.9.1",
-    "revision": "1.9.3.484-2ubuntu1.2",
-    "@id": "data:ruby1.9.1/1.9.3.484-2ubuntu1.2",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "ruby1.9.1/1.9.3.484-2ubuntu1.2/amd64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "ruby1.9.1",
-    "revision": "1.9.3.484-2ubuntu1.2",
-    "@id": "data:ruby1.9.1/1.9.3.484-2ubuntu1.2",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "ruby1.9.1/1.9.3.484-2ubuntu1.2/amd64"
     },
     "relationship": []
   },

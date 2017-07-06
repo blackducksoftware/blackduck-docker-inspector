@@ -25,6 +25,8 @@ package com.blackducksoftware.integration.hub.docker.extractor
 
 import javax.annotation.PostConstruct
 
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
@@ -35,6 +37,7 @@ import com.blackducksoftware.integration.hub.docker.executor.DpkgExecutor
 
 @Component
 class DpkgExtractor extends Extractor {
+	private final Logger logger = LoggerFactory.getLogger(DpkgExtractor.class)
 
 	@Autowired
 	DpkgExecutor executor
@@ -56,17 +59,36 @@ class DpkgExtractor extends Extractor {
 				if (packageLine.matches("\\+\\+\\+-=+-=+-=+-=+")) {
 					startOfComponents = true
 				} else if (startOfComponents){
-					String componentInfo = packageLine.substring(3)
-					def(name,version,architecture,description) = componentInfo.tokenize(" ")
-					if (name.contains(":")) {
-						name = name.substring(0, name.indexOf(":"))
-					}
-					String externalId = "$name/$version/$architecture"
+					String packageStatus = packageLine.substring(1, 2)
+					if (isInstalledStatus(packageStatus)) {
+						String componentInfo = packageLine.substring(3)
+						def(name,version,architecture,description) = componentInfo.tokenize(" ")
+						if (name.contains(":")) {
+							name = name.substring(0, name.indexOf(":"))
+						}
+						String externalId = "$name/$version/$architecture"
 
-					components.addAll(createBdioComponent(name, version, externalId))
+						components.addAll(createBdioComponent(name, version, externalId))
+					} else {
+						logger.debug("Package \"${packageLine}\" is listed but not installed (package status: ${packageStatus})")
+					}
 				}
 			}
 		}
 		components
+	}
+
+	// TODO refactor this
+	boolean isInstalledStatus(String packageStatus) {
+		if ("i".contentEquals(packageStatus)) {
+			return true
+		}
+		if ("W".contentEquals(packageStatus)) {
+			return true
+		}
+		if ("t".contentEquals(packageStatus)) {
+			return true
+		}
+		false
 	}
 }
