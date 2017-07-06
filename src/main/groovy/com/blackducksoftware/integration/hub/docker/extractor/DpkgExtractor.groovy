@@ -59,7 +59,7 @@ class DpkgExtractor extends Extractor {
 				if (packageLine.matches("\\+\\+\\+-=+-=+-=+-=+")) {
 					startOfComponents = true
 				} else if (startOfComponents){
-					String packageStatus = packageLine.substring(1, 2)
+					char packageStatus = packageLine.charAt(1)
 					if (isInstalledStatus(packageStatus)) {
 						String componentInfo = packageLine.substring(3)
 						def(name,version,architecture,description) = componentInfo.tokenize(" ")
@@ -78,15 +78,9 @@ class DpkgExtractor extends Extractor {
 		components
 	}
 
-	// TODO refactor this
-	boolean isInstalledStatus(String packageStatus) {
-		if ("i".contentEquals(packageStatus)) {
-			return true
-		}
-		if ("W".contentEquals(packageStatus)) {
-			return true
-		}
-		if ("t".contentEquals(packageStatus)) {
+	boolean isInstalledStatus(Character packageStatus) {
+		String packageStatusString = packageStatus.toString()
+		if ("iWt".contains(packageStatusString)) {
 			return true
 		}
 		false
