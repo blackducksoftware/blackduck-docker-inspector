@@ -314,12 +314,21 @@ class DockerTarParser {
 							String afterWhiteOutMark = fileSystemEntryName.substring(whiteOutMarkIndex + ".wh.".length())
 							String filePathToRemove = "${beforeWhiteOutMark}${afterWhiteOutMark}"
 							final File fileToRemove = new File(layerOutputDir, filePathToRemove)
-							logger.info("Removing ${filePathToRemove} from image (this layer whites it out)")
-							try {
-								Files.delete(fileToRemove.toPath())
-								logger.debug("File ${filePathToRemove} successfully removed")
-							} catch (Exception e) {
-								logger.error("Error removing whited-out file ${filePathToRemove}; this may result in incorrect (extra) components in the BOM")
+							logger.debug("Removing ${filePathToRemove} from image (this layer whites it out)")
+							if (fileToRemove.isDirectory()) {
+								try {
+									fileToRemove.deleteDir()
+									logger.debug("Directory ${filePathToRemove} successfully removed")
+								} catch (Exception e) {
+									logger.warn("Error removing whited-out directory ${filePathToRemove}")
+								}
+							} else {
+								try {
+									Files.delete(fileToRemove.toPath())
+									logger.debug("File ${filePathToRemove} successfully removed")
+								} catch (Exception e) {
+									logger.warn("Error removing whited-out file ${filePathToRemove}")
+								}
 							}
 						} else {
 							final File outputFile = new File(layerOutputDir, fileSystemEntryName)
