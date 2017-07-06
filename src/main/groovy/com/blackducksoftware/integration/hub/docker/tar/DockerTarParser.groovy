@@ -239,6 +239,7 @@ class DockerTarParser {
 		untaredFiles
 	}
 
+	// TODO this method needs to be split up
 	private void parseLayerTarAndExtract(File layerTar, File layerOutputDir){
 		def layerInputStream = new TarArchiveInputStream(new FileInputStream(layerTar), "UTF-8")
 		try {
@@ -304,22 +305,39 @@ class DockerTarParser {
 							}
 						}
 					} else {
-						logger.trace("Processing file/dir: ${layerEntry.getName()}")
-						final File outputFile = new File(layerOutputDir, layerEntry.getName())
-						if (layerEntry.isFile()) {
-							logger.trace("Processing file: ${layerEntry.getName()}")
-							if(!outputFile.getParentFile().exists()){
-								outputFile.getParentFile().mkdirs()
-							}
-							logger.trace("Creating output stream for ${outputFile.getName()}")
-							final OutputStream outputFileStream = new FileOutputStream(outputFile)
-							try{
-								IOUtils.copy(layerInputStream, outputFileStream)
-							} finally{
-								outputFileStream.close()
+						String fileSystemEntryName = layerEntry.getName()
+						logger.trace("Processing file/dir: ${fileSystemEntryName}")
+						if ((fileSystemEntryName.startsWith('.wh.')) | (fileSystemEntryName.contains('/.wh.')))   {
+							logger.trace("Found white-out file ${fileSystemEntryName}")
+							int whiteOutMarkIndex = fileSystemEntryName.indexOf('.wh.')
+							String beforeWhiteOutMark = fileSystemEntryName.substring(0, whiteOutMarkIndex)
+							String afterWhiteOutMark = fileSystemEntryName.substring(whiteOutMarkIndex + ".wh.".length())
+							String filePathToRemove = "${beforeWhiteOutMark}${afterWhiteOutMark}"
+							final File fileToRemove = new File(layerOutputDir, filePathToRemove)
+							logger.info("Removing ${filePathToRemove} from image (this layer whites it out)")
+							try {
+								Files.delete(fileToRemove.toPath())
+								logger.debug("File ${filePathToRemove} successfully removed")
+							} catch (Exception e) {
+								logger.error("Error removing whited-out file ${filePathToRemove}; this may result in incorrect (extra) components in the BOM")
 							}
 						} else {
-							outputFile.mkdirs()
+							final File outputFile = new File(layerOutputDir, fileSystemEntryName)
+							if (layerEntry.isFile()) {
+								logger.trace("Processing file: ${fileSystemEntryName}")
+								if(!outputFile.getParentFile().exists()){
+									outputFile.getParentFile().mkdirs()
+								}
+								logger.trace("Creating output stream for ${outputFile.getName()}")
+								final OutputStream outputFileStream = new FileOutputStream(outputFile)
+								try{
+									IOUtils.copy(layerInputStream, outputFileStream)
+								} finally{
+									outputFileStream.close()
+								}
+							} else {
+								outputFile.mkdirs()
+							}
 						}
 					}
 				} catch(Exception e) {
