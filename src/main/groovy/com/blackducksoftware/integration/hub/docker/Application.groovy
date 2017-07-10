@@ -38,12 +38,6 @@ import com.blackducksoftware.integration.hub.docker.client.DockerClientManager
 import com.blackducksoftware.integration.hub.docker.client.ProgramVersion
 import com.blackducksoftware.integration.hub.docker.image.DockerImages
 import com.blackducksoftware.integration.hub.docker.tar.LayerMapping
-import com.blackducksoftware.integration.hub.docker.tar.manifest.ImageInfo
-import com.blackducksoftware.integration.hub.exception.HubIntegrationException
-import com.google.gson.Gson
-import com.google.gson.JsonArray
-import com.google.gson.JsonElement
-import com.google.gson.JsonParser
 
 @SpringBootApplication
 class Application {
@@ -96,7 +90,7 @@ class Application {
 			File dockerTarFile = deriveDockerTarFile()
 
 			List<File> layerTars = hubDockerManager.extractLayerTars(dockerTarFile)
-			List<LayerMapping> layerMappings = getLayerMappings(dockerTarFile.getName())
+			List<LayerMapping> layerMappings = hubDockerManager.getLayerMappings(dockerTarFile.getName(), dockerImageName, dockerTagName)
 			File imageFilesDir = hubDockerManager.extractDockerLayers(layerTars, layerMappings)
 
 			OperatingSystemEnum targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro, imageFilesDir)
@@ -190,90 +184,6 @@ class Application {
 		dockerTarFile
 	}
 
-	private List<LayerMapping> getLayerMappings(String tarFileName){
-		logger.debug("getLayerMappings()")
-		List<LayerMapping> mappings = new ArrayList<>()
-		try {
-			List<ImageInfo> images = getManifestContents(tarFileName)
-			for(ImageInfo image : images) {
-				logger.debug("getLayerMappings(): image: ${image}")
-				LayerMapping mapping = new LayerMapping()
-				String specifiedRepoTag = ''
-				if (StringUtils.isNotBlank(dockerImageName)) {
-					specifiedRepoTag = "${dockerImageName}:${dockerTagName}"
-				}
-				def (imageName, tagName) = ['', '']
-				String foundRepoTag = image.repoTags.find { repoTag ->
-					StringUtils.compare(repoTag, specifiedRepoTag) == 0
-				}
-				if(StringUtils.isBlank(foundRepoTag)){
-					logger.debug("Attempting to parse repoTag from manifest")
-					if (image.repoTags == null) {
-						String msg = "The RepoTags field is missing from the tar file manifest. Please make sure this tar file was saved using the image name (vs. image ID)"
-						throw new HubIntegrationException(msg)
-					}
-					def repoTag = image.repoTags.get(0)
-					logger.debug("repoTag: ${repoTag}")
-					imageName = repoTag.substring(0, repoTag.lastIndexOf(':'))
-					tagName = repoTag.substring(repoTag.lastIndexOf(':') + 1)
-					logger.debug("Parsed imageName: ${imageName}; tagName: ${tagName}")
-				} else {
-					logger.debug("foundRepoTag: ${foundRepoTag}")
-					imageName = foundRepoTag.substring(0, foundRepoTag.lastIndexOf(':'))
-					tagName = foundRepoTag.substring(foundRepoTag.lastIndexOf(':') + 1)
-					logger.debug("Found imageName: ${imageName}; tagName: ${tagName}")
-				}
-				logger.info("Image: ${imageName}, Tag: ${tagName}")
-				mapping.imageName =  imageName.replaceAll(':', '_').replaceAll('/', '_')
-				mapping.tagName = tagName
-				for(String layer : image.layers){
-					mapping.layers.add(layer.substring(0, layer.indexOf('/')))
-				}
-				if (StringUtils.isNotBlank(dockerImageName)) {
-					if(StringUtils.compare(imageName, dockerImageName) == 0 && StringUtils.compare(tagName, dockerTagName) == 0){
-						logger.debug('Adding layer mapping')
-						logger.debug("Image: ${mapping.imageName}:${mapping.tagName}")
-						logger.debug("Layers: ${mapping.layers}")
-						mappings.add(mapping)
-					}
-				} else {
-					logger.debug('Adding layer mapping')
-					logger.debug("Image ${mapping.imageName} , Tag ${mapping.tagName}")
-					logger.debug("Layers ${mapping.layers}")
-					mappings.add(mapping)
-				}
-			}
-		} catch (Exception e) {
-			logger.error("Could not parse the image manifest file : ${e.toString()}")
-			throw e
-		}
-		// TODO TEMP; useful for debugging, but can probably remove once we're
-		// confident in layer targeting
-		logger.debug("getLayerMappings(): # mappings found: ${mappings.size()}")
-		for (LayerMapping m : mappings) {
-			logger.debug("getLayerMappings():\t${m.imageName}/${m.tagName}: ")
-			for (String layerId : m.layers) {
-				logger.debug("getLayerMappings():\t\t${layerId}")
-			}
-		}
-		//////////////////
-		mappings
-	}
 
-	private List<ImageInfo> getManifestContents(String tarFileName){
-		logger.debug("getManifestContents()")
-		List<ImageInfo> images = new ArrayList<>()
-		logger.debug("getManifestContents(): extracting manifest file content")
-		def manifestContentString = hubDockerManager.extractManifestFileContent(tarFileName)
-		logger.debug("getManifestContents(): parsing: ${manifestContentString}")
-		JsonParser parser = new JsonParser()
-		JsonArray manifestContent = parser.parse(manifestContentString).getAsJsonArray()
-		Gson gson = new Gson()
-		for(JsonElement element : manifestContent) {
-			logger.debug("getManifestContents(): element: ${element.toString()}")
-			images.add(gson.fromJson(element, ImageInfo.class))
-		}
-		images
-	}
 
 }

@@ -33,16 +33,29 @@ class DockerTarParserTest {
 	private static final String LAYER_ID = "layerId1"
 
 	@Test
-	void testPerformExtractOfDockerTarSimple() {
-		doTest("simple")
+	void testExtractFullImage() {
+		File dockerTar = new File("src/test/resources/centos_minus_vim_plus_bacula.tar")
+		File workingDirectory = TestUtils.createTempDirectory()
+
+		DockerTarParser tarParser = new DockerTarParser()
+		tarParser.workingDirectory = workingDirectory
+
+		tarParser.extractLayerTars(dockerTar)
+		println "workingDirectory: ${workingDirectory.getAbsolutePath()}"
+		println "Done"
 	}
 
 	@Test
-	void testPerformExtractOfDockerTarWithSymbolicLink() {
-		doTest("withSymbolicLink")
+	void testExtractDockerLayerTarSimple() {
+		doLayerTest("simple")
 	}
 
-	void doTest(String testFileDir) {
+	@Test
+	void testExtractDockerLayerTarWithSymbolicLink() {
+		doLayerTest("withSymbolicLink")
+	}
+
+	void doLayerTest(String testFileDir) {
 		File workingDirectory = TestUtils.createTempDirectory()
 		File tarExtractionDirectory = new File(workingDirectory, DockerTarParser.TAR_EXTRACTION_DIRECTORY)
 		File layerDir = new File(tarExtractionDirectory, "ubuntu_latest.tar/${LAYER_ID}")

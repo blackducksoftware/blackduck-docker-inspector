@@ -94,6 +94,10 @@ class HubDockerManager {
 		tarParser.detectOperatingSystemFromEtcDir(new File("/etc"))
 	}
 
+	List<LayerMapping> getLayerMappings(String tarFileName, String dockerImageName, String dockerTagName) {
+		return tarParser.getLayerMappings(tarFileName, dockerImageName, dockerTagName)
+	}
+
 	List<File> generateBdioFromImageFilesDir(List<LayerMapping> mappings, String projectName, String versionName, File dockerTar, File imageFilesDir, OperatingSystemEnum osEnum) {
 		TarExtractionResults tarExtractionResults = tarParser.extractPackageManagerDirs(imageFilesDir, osEnum)
 		if(tarExtractionResults.operatingSystemEnum == null){
