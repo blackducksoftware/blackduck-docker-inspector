@@ -33,6 +33,7 @@ import org.springframework.stereotype.Component
 
 import com.github.dockerjava.api.DockerClient
 import com.github.dockerjava.api.command.CopyArchiveToContainerCmd
+import com.github.dockerjava.api.command.CreateContainerCmd
 import com.github.dockerjava.api.command.CreateContainerResponse
 import com.github.dockerjava.api.command.ExecCreateCmd
 import com.github.dockerjava.api.command.ExecCreateCmdResponse
@@ -69,6 +70,12 @@ class DockerClientManager {
 
 	@Value('${BD_HUB_PASSWORD:}')
 	String hubPasswordEnvVar;
+
+	@Value('${hub.proxy.host}')
+	String hubProxyHostProperty
+
+	@Value('${SCAN_CLI_OPTS:}')
+	String scanCliOptsEnvVar;
 
 	File getTarFileFromDockerImage(String imageName, String tagName) {
 		// use docker to pull image if necessary
@@ -150,15 +157,19 @@ class DockerClientManager {
 				isContainerRunning = true
 			}
 		} else{
-			logger.debug("Creating container ${extractorContainerName} from image ${}")
-			CreateContainerResponse containerResponse = dockerClient.createContainerCmd(imageId)
+			logger.debug("Creating container ${extractorContainerName} from image ${imageId}")
+			CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageId)
 					.withStdinOpen(true)
 					.withTty(true)
 					.withName(extractorContainerName)
 					.withCmd('/bin/bash')
-					.withEnv("BD_HUB_PASSWORD=${hubPassword}")
-					.exec()
+			if ((StringUtils.isBlank(hubProxyHostProperty)) && (!StringUtils.isBlank(scanCliOptsEnvVar))) {
+				createContainerCmd.withEnv("BD_HUB_PASSWORD=${hubPassword}", "SCAN_CLI_OPTS=${scanCliOptsEnvVar}")
+			} else {
+				createContainerCmd.withEnv("BD_HUB_PASSWORD=${hubPassword}")
+			}
 
+			CreateContainerResponse containerResponse = createContainerCmd.exec()
 			containerId = containerResponse.getId()
 		}
 		if(!isContainerRunning){

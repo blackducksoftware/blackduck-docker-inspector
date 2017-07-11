@@ -47,34 +47,6 @@ function preProcessOptions() {
 	done
 }
 
-function collectProxyEnvVars() {
-	if [ -z ${SCAN_CLI_OPTS+x} ]
-	then
-		echo SCAN_CLI_OPTS is not set
-	else
-		echo SCAN_CLI_OPTS is set
-		for cli_opt in $SCAN_CLI_OPTS 
-		do
-			if [[ $cli_opt == -Dhttp*.proxyHost=* ]]
-			then
-				options=( ${options[*]} "--hub.proxy.host=$(echo $cli_opt | cut -d '=' -f 2)" )
-			fi
-			if [[ $cli_opt == -Dhttp*.proxyPort=* ]]
-			then
-				options=( ${options[*]} "--hub.proxy.port=$(echo $cli_opt | cut -d '=' -f 2)" )
-			fi
-			if [[ $cli_opt == -Dhttp*.proxyUser=* ]]
-			then
-				options=( ${options[*]} "--hub.proxy.username=$(echo $cli_opt | cut -d '=' -f 2)" )
-			fi
-			if [[ $cli_opt == -Dhttp*.proxyPassword=* ]]
-			then
-				options=( ${options[*]} "--hub.proxy.password=$(echo $cli_opt | cut -d '=' -f 2)" )
-			fi
-		done
-	fi
-}
-
 function checkForPassword() {
 	if [ $hub_password_set_on_cmd_line = true -o -z "${BD_HUB_PASSWORD}" ]
 	then
@@ -150,7 +122,6 @@ echo "Properties file: ${propfile}"
 options=( "$@" )
 image=${options[${#options[@]}-1]}
 unset "options[${#options[@]}-1]"
-collectProxyEnvVars
 checkForPassword
 startContainer
 installPropertiesFile
@@ -160,10 +131,10 @@ then
 	echo Inspecting image tar file: $image
 	tarfilename=$(basename $image)
 	docker cp $image ${containername}:/opt/blackduck/hub-docker-inspector/target/$tarfilename
-	docker exec -e BD_HUB_PASSWORD ${containername} /opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} /opt/blackduck/hub-docker-inspector/target/$tarfilename
+	docker exec -e BD_HUB_PASSWORD -e SCAN_CLI_OPTS ${containername} /opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} /opt/blackduck/hub-docker-inspector/target/$tarfilename
 else
 	echo Inspecting image: $image
-	docker exec -e BD_HUB_PASSWORD ${containername} /opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} $image
+	docker exec -e BD_HUB_PASSWORD -e SCAN_CLI_OPTS ${containername} /opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} $image
 fi
 
 exit 0

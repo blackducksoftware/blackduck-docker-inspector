@@ -55,19 +55,22 @@ class HubClient {
 	String hubPasswordProperty
 
 	@Value('${BD_HUB_PASSWORD:}')
-	String hubPasswordEnvVar;
+	String hubPasswordEnvVar
+
+	@Value('${SCAN_CLI_OPTS:}')
+	String scanCliOptsEnvVar
 
 	@Value('${hub.proxy.host}')
-	String hubProxyHost
+	String hubProxyHostProperty
 
 	@Value('${hub.proxy.port}')
-	String hubProxyPort
+	String hubProxyPortProperty
 
 	@Value('${hub.proxy.username}')
-	String hubProxyUsername
+	String hubProxyUsernameProperty
 
 	@Value('${hub.proxy.password}')
-	String hubProxyPassword
+	String hubProxyPasswordProperty
 
 	@Value('${command.timeout}')
 	long commandTimeout
@@ -87,7 +90,7 @@ class HubClient {
 		HubServerConfig hubServerConfig = createBuilder().build()
 		CredentialsRestConnection credentialsRestConnection = hubServerConfig.createCredentialsRestConnection(new Slf4jIntLogger(logger))
 		credentialsRestConnection.connect()
-		logger.info('Successful connection to the Hub!')
+		logger.info('Successful connection to the Hub.')
 	}
 
 	void uploadBdioToHub(File bdioFile) {
@@ -107,6 +110,26 @@ class HubClient {
 			hubPassword = hubPasswordProperty
 		}
 
+		String hubProxyHost = hubProxyHostProperty
+		String hubProxyPort = hubProxyPortProperty
+		String hubProxyUsername = hubProxyUsernameProperty
+		String hubProxyPassword = hubProxyPasswordProperty
+		if ((StringUtils.isBlank(hubProxyHostProperty)) && (!StringUtils.isBlank(scanCliOptsEnvVar))) {
+			List<String> scanCliOpts = scanCliOptsEnvVar.split("\\s")
+			for (String opt : scanCliOpts) {
+				opt = opt.trim()
+				if ((opt.startsWith("-Dhttp.proxy.host=")) || (opt.startsWith("-Dhttps.proxy.host="))) {
+					hubProxyHost = getValue(opt)
+				} else if ((opt.startsWith("-Dhttp.proxy.port=")) || (opt.startsWith("-Dhttps.proxy.port="))) {
+					hubProxyPort = getValue(opt)
+				} else if ((opt.startsWith("-Dhttp.proxy.username=")) || (opt.startsWith("-Dhttps.proxy.username="))) {
+					hubProxyUsername = getValue(opt)
+				} else if ((opt.startsWith("-Dhttp.proxy.password=")) || (opt.startsWith("-Dhttps.proxy.password="))) {
+					hubProxyPassword = getValue(opt)
+				}
+			}
+		}
+
 		HubServerConfigBuilder hubServerConfigBuilder = new HubServerConfigBuilder()
 		hubServerConfigBuilder.hubUrl = hubUrl
 		hubServerConfigBuilder.username = hubUsername
@@ -124,5 +147,14 @@ class HubClient {
 		hubServerConfigBuilder.autoImportHttpsCertificates = autoImportCert
 
 		hubServerConfigBuilder
+	}
+
+	private String getValue(String nameEqualsValue) {
+		List<String> nameValue = nameEqualsValue.split("=")
+		String value = null
+		if (nameValue.size() == 2) {
+			value = nameValue.get(1)
+		}
+		return value
 	}
 }
