@@ -18,31 +18,61 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 
+import org.junit.Ignore
 import org.junit.Test
 
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser
 import com.blackducksoftware.integration.hub.docker.tar.LayerMapping
+import com.blackducksoftware.integration.hub.docker.tar.TarExtractionResults
+
+import groovy.io.FileType
 
 class DockerTarParserTest {
 	private final static int DPKG_STATUS_FILE_SIZE = 98016
 
-	private static final String IMAGE_NAME = "image1"
+	private static final String IMAGE_NAME = "centos_minus_vim_plus_bacula"
 
-	private static final String IMAGE_TAG = "image1tag1"
+	private static final String IMAGE_TAG = "1"
 
 	private static final String LAYER_ID = "layerId1"
 
+	// This test requires a full docker image tarfile, which is pretty big for source control
+	@Ignore
 	@Test
 	void testExtractFullImage() {
 		File dockerTar = new File("src/test/resources/centos_minus_vim_plus_bacula.tar")
 		File workingDirectory = TestUtils.createTempDirectory()
+		println "workingDirectory: ${workingDirectory.getAbsolutePath()}"
 
 		DockerTarParser tarParser = new DockerTarParser()
 		tarParser.workingDirectory = workingDirectory
 
-		tarParser.extractLayerTars(dockerTar)
-		println "workingDirectory: ${workingDirectory.getAbsolutePath()}"
-		println "Done"
+		List<File> layerTars = tarParser.extractLayerTars(dockerTar)
+		List<LayerMapping> layerMappings = tarParser.getLayerMappings(dockerTar.getName(), IMAGE_NAME, IMAGE_TAG)
+		assertEquals(1, layerMappings.size())
+		assertEquals(3, layerMappings.get(0).layers.size())
+		assertEquals("2a0fa5e88024009238839366f837dd956d6cd5ec47c69a27ee2d29f7043b311e", layerMappings.get(0).layers.get(0))
+		assertEquals("be1e7f55c85cbbee044eb3390a68a217796cbed6ca20f2d928e99127405873c5", layerMappings.get(0).layers.get(1))
+		assertEquals("43ee44a345a69374e3207bd2777c574a1b74532ee4e928108bfe0883908fc7e0", layerMappings.get(0).layers.get(2))
+		File imageFilesDir = tarParser.extractDockerLayers(layerTars, layerMappings)
+		OperatingSystemEnum targetOsEnum = tarParser.detectOperatingSystem(null, imageFilesDir)
+		TarExtractionResults tarExtractionResults = tarParser.extractPackageManagerDirs(imageFilesDir, targetOsEnum)
+
+		boolean varLibRpmNameFound = false
+		int numFilesFound = 0
+		workingDirectory.eachFileRecurse(FileType.FILES) { file ->
+			numFilesFound++
+			if (file.getAbsolutePath().endsWith("var/lib/rpm/Name")) {
+				println file.getAbsolutePath()
+				varLibRpmNameFound = true
+				String stringsOutput = "strings ${file.getAbsolutePath()}".execute().getText()
+				assertTrue(stringsOutput.contains("bacula-console"))
+				assertTrue(stringsOutput.contains("bacula-client"))
+				assertTrue(stringsOutput.contains("bacula-director"))
+			}
+		}
+		assertTrue(varLibRpmNameFound)
+		assertEquals(162836, numFilesFound)
 	}
 
 	@Test
@@ -74,7 +104,7 @@ class DockerTarParserTest {
 		LayerMapping layerMapping = new LayerMapping()
 		layerMapping.imageName = IMAGE_NAME
 		layerMapping.tagName = IMAGE_TAG
-		Set<String> layerIds = new HashSet<>()
+		List<String> layerIds = new ArrayList<>()
 		layerIds.add(LAYER_ID)
 		layerMapping.layers = layerIds
 		layerMappings.add(layerMapping)

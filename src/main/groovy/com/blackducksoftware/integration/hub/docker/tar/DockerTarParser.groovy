@@ -61,11 +61,13 @@ class DockerTarParser {
 
 		layerMappings.each { mapping ->
 			mapping.layers.each { layer ->
+				logger.trace("layer: ${layer}")
 				File layerTar = layerTars.find{
 					StringUtils.compare(layer, it.getParentFile().getName()) == 0
 				}
 				if(layerTar != null){
 					def imageOutputDir = new File(imageFilesDir, mapping.getImageDirectory())
+					logger.trace("Processing layer: ${layerTar.getAbsolutePath()}")
 					parseLayerTarAndExtract( layerTar, imageOutputDir)
 				} else {
 					logger.warn("Could not find the tar for layer ${layer}")
@@ -158,7 +160,7 @@ class DockerTarParser {
 			PackageManagerEnum.values().each { packageManagerEnum ->
 				File packageManagerDirectory = new File(imageDirectory, packageManagerEnum.directory)
 				if (packageManagerDirectory.exists()){
-					logger.trace("*** Package Manager Dir: ${packageManagerDirectory.getAbsolutePath()}")
+					logger.trace("Package Manager Dir: ${packageManagerDirectory.getAbsolutePath()}")
 					TarExtractionResult result = new TarExtractionResult()
 					result.imageDirectoryName = imageDirectory.getName()
 					result.packageManager = packageManagerEnum

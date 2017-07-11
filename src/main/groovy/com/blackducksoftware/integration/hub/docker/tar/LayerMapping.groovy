@@ -29,7 +29,7 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder
 class LayerMapping {
 	String imageName
 	String tagName
-	Set<String> layers = new HashSet<>()
+	List<String> layers = new ArrayList<>()
 
 	String getImageDirectory(){
 		"image_${imageName}_v_${tagName}"
