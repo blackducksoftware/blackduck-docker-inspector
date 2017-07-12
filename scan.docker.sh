@@ -117,8 +117,9 @@ function update_self_and_invoke() {
 
 function pull_image_if_necessary() {
   local image=$1
+  local image_version=$2
   local existing_image=$(docker images -q "$image")
-  if [ -z "$existing_image" ]; then
+  if [ -z "$existing_image" ] || [ "$image_version" == "latest" ]; then
     echo "Existing image not present, pulling from docker repository"
     docker pull "$image"
     existing_image=$(docker images -q "$image")
@@ -239,7 +240,7 @@ function main() {
 
   # if the --name scan.cli option was not provided
   if [ -z "${name_arg}" ]; then
-    name_arg="--name scanner_{hub_project}_${hub_version}"
+    name_arg="--name scanner_${hub_project}_${hub_version}"
   else
     name_arg="--name ${name_arg}"
   fi
@@ -255,9 +256,9 @@ function main() {
     echo "Using default hub-docker-inspector.sh"
   fi
 
-  pull_image_if_necessary $docker_image
+  pull_image_if_necessary $docker_image $hub_version
 
-  docker save "$docker_image" -o "${IMAGE_TARFILE}" 2>/dev/null
+  docker save -o "${IMAGE_TARFILE}" "$docker_image" 2>/dev/null
   if [ $? -eq 0 ]; then
     if [ $do_scan -eq 1 ]; then
       echo "Perform scan:"
