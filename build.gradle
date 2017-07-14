@@ -191,6 +191,8 @@ task buildTestDockerTarfile(type: Exec, dependsOn: buildTestDockerImage) {
 	commandLine "docker", "save", "-o", "${buildDir}/images/test/centos_minus_vim_plus_bacula.tar", "blackducksoftware/centos_minus_vim_plus_bacula:1.0"
 }
 
+test.dependsOn buildTestDockerTarfile
+
 task createDpkgDockerfileTasks() {
     linuxFlavorsDpkg.eachWithIndex {linuxFlavor, index ->
         String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
