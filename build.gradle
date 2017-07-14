@@ -31,10 +31,10 @@ String hubDockerImageName = 'hub-docker-inspector'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-def linuxFlavorsApt = ["ubuntu:16.04"]
-def linuxFlavorsYum = ["centos:7.3.1611"]
+def linuxFlavorsDpkg = ["ubuntu:16.04"]
+def linuxFlavorsRpm = ["centos:7.3.1611"]
 def linuxFlavorsApk = ["alpine:3.5"]
-def linuxFlavors = linuxFlavorsApt + linuxFlavorsYum + linuxFlavorsApk
+def linuxFlavors = linuxFlavorsDpkg + linuxFlavorsRpm + linuxFlavorsApk
 
 Properties applicationProperties = new Properties()
 applicationProperties.load(new FileInputStream("src/main/resources/application.properties"))
@@ -148,8 +148,8 @@ task createApkDockerfileTasks() {
     }
 }
 
-task createYumDockerfileTasks() {
-    linuxFlavorsYum.eachWithIndex {linuxFlavor, index ->
+task createRpmDockerfileTasks() {
+    linuxFlavorsRpm.eachWithIndex {linuxFlavor, index ->
         String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
         task "create${linuxFlavorDirName}Dockerfile"(type: Dockerfile) {
             destFile = project.file("${buildDir}/images/${linuxFlavorDirName}/${hubDockerImageName}/Dockerfile")
@@ -173,8 +173,8 @@ task createYumDockerfileTasks() {
     }
 }
 
-task createAptDockerfileTasks() {
-    linuxFlavorsApt.eachWithIndex {linuxFlavor, index ->
+task createDpkgDockerfileTasks() {
+    linuxFlavorsDpkg.eachWithIndex {linuxFlavor, index ->
         String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
         task "create${linuxFlavorDirName}Dockerfile"(type: Dockerfile) {
             destFile = project.file("${buildDir}/images/${linuxFlavorDirName}/${hubDockerImageName}/Dockerfile")
