@@ -18,7 +18,6 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 
-import org.junit.Ignore
 import org.junit.Test
 
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser
@@ -30,17 +29,15 @@ import groovy.io.FileType
 class DockerTarParserTest {
 	private final static int DPKG_STATUS_FILE_SIZE = 98016
 
-	private static final String IMAGE_NAME = "centos_minus_vim_plus_bacula"
+	private static final String IMAGE_NAME = "blackducksoftware/centos_minus_vim_plus_bacula"
 
-	private static final String IMAGE_TAG = "1"
+	private static final String IMAGE_TAG = "1.0"
 
 	private static final String LAYER_ID = "layerId1"
 
-	// This test requires a full docker image tarfile, which is pretty big for source control
-	@Ignore
 	@Test
 	void testExtractFullImage() {
-		File dockerTar = new File("src/test/resources/centos_minus_vim_plus_bacula.tar")
+		File dockerTar = new File("build/images/test/centos_minus_vim_plus_bacula.tar")
 		File workingDirectory = TestUtils.createTempDirectory()
 		println "workingDirectory: ${workingDirectory.getAbsolutePath()}"
 
@@ -52,8 +49,8 @@ class DockerTarParserTest {
 		assertEquals(1, layerMappings.size())
 		assertEquals(3, layerMappings.get(0).layers.size())
 		assertEquals("2a0fa5e88024009238839366f837dd956d6cd5ec47c69a27ee2d29f7043b311e", layerMappings.get(0).layers.get(0))
-		assertEquals("be1e7f55c85cbbee044eb3390a68a217796cbed6ca20f2d928e99127405873c5", layerMappings.get(0).layers.get(1))
-		assertEquals("43ee44a345a69374e3207bd2777c574a1b74532ee4e928108bfe0883908fc7e0", layerMappings.get(0).layers.get(2))
+		assertEquals("33f0709ec12cb533a81146972fe0dc1266276b9712fe8e38e9adbfb0ea850b03", layerMappings.get(0).layers.get(1))
+		assertEquals("190490c915ae589b0535d70f09f0fb0b457d28715063d177452f70777ec820c3", layerMappings.get(0).layers.get(2))
 		File imageFilesDir = tarParser.extractDockerLayers(layerTars, layerMappings)
 		OperatingSystemEnum targetOsEnum = tarParser.detectOperatingSystem(null, imageFilesDir)
 		TarExtractionResults tarExtractionResults = tarParser.extractPackageManagerDirs(imageFilesDir, targetOsEnum)
@@ -72,7 +69,7 @@ class DockerTarParserTest {
 			}
 		}
 		assertTrue(varLibRpmNameFound)
-		assertEquals(162836, numFilesFound)
+		assertEquals(158043, numFilesFound)
 	}
 
 	@Test
