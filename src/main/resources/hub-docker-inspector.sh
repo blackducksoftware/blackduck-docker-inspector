@@ -141,10 +141,10 @@ then
 	echo Inspecting image tar file: $image
 	tarfilename=$(basename $image)
 	docker cp $image ${containername}:/opt/blackduck/hub-docker-inspector/target/$tarfilename
-	docker exec -e BD_HUB_PASSWORD -e SCAN_CLI_OPTS ${containername} /opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} /opt/blackduck/hub-docker-inspector/target/$tarfilename
+	docker exec -e BD_HUB_PASSWORD -e SCAN_CLI_OPTS -e http_proxy -e https_proxy -e HTTP_PROXY -e HTTPS_PROXY ${containername} /opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} /opt/blackduck/hub-docker-inspector/target/$tarfilename
 else
 	echo Inspecting image: $image
-	docker exec -e BD_HUB_PASSWORD -e SCAN_CLI_OPTS ${containername} /opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} $image
+	docker exec -e BD_HUB_PASSWORD -e SCAN_CLI_OPTS -e http_proxy -e https_proxy -e HTTP_PROXY -e HTTPS_PROXY ${containername} /opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} $image
 fi
 
 exit 0
