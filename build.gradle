@@ -173,6 +173,20 @@ task createRpmDockerfileTasks() {
     }
 }
 
+task createTestDockerfile(type: Dockerfile) {
+	destFile = project.file("${buildDir}/images/test/centos_minus_vim_plus_bacula/Dockerfile")
+	println "destFile: ${destFile}"
+	from 'centos'
+	maintainer 'Black Duck Software'
+	
+	runCommand 'rpm -e vim-minimal'
+    runCommand 'yum install -y bacula-director bacula-storage bacula-client bacula-console'
+}
+
+task buildTestDockerImage(type: Exec, dependsOn: [createTestDockerfile]) {
+	commandLine "docker", "build", "--tag", "blackducksoftware/centos_minus_vim_plus_bacula:1.0", "${buildDir}/images/test/centos_minus_vim_plus_bacula"
+}
+
 task createDpkgDockerfileTasks() {
     linuxFlavorsDpkg.eachWithIndex {linuxFlavor, index ->
         String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
