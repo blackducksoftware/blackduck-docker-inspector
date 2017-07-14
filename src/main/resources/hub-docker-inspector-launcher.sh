@@ -58,11 +58,11 @@ then
 	docker info 2>&1 | grep "Server Version"
 	
 	echo "Stopping old containers, if they are running"
-	docker stop hub-docker-inspector-alpine
-	docker stop hub-docker-inspector-centos
+	docker stop hub-docker-inspector-alpine 2> container_stderr.log > container_stdout.log
+	docker stop hub-docker-inspector-centos 2>> container_stderr.log >> container_stdout.log
 	echo "Removing old containers, if they are running"
-	docker rm hub-docker-inspector-alpine
-	docker rm hub-docker-inspector-centos
+	docker rm hub-docker-inspector-alpine 2>> container_stderr.log >> container_stdout.log
+	docker rm hub-docker-inspector-centos 2>> container_stderr.log >> container_stdout.log
 	echo "Done removing old containers"
 fi
 
