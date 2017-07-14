@@ -153,13 +153,9 @@ class Application {
 	}
 
 	private void verifyHubConnection() {
-		try {
-			hubClient.testHubConnection()
-			logger.info 'Your Hub configuration is valid and a successful connection to the Hub was established.'
-			return
-		} catch (Exception e) {
-			logger.error("Unable to connect to the Hub: ${e.getMessage()}")
-		}
+		hubClient.testHubConnection()
+		logger.info 'Your Hub configuration is valid and a successful connection to the Hub was established.'
+		return
 	}
 
 	private void initImageName() {

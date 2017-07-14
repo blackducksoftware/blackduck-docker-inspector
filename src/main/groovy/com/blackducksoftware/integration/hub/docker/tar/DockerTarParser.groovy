@@ -113,6 +113,7 @@ class DockerTarParser {
 
 		Set<PackageManagerEnum> packageManagers = new HashSet<>()
 		extractedFilesDir.listFiles().each { layerDirectory ->
+			logger.trace("Looking in layerDirectory ${layerDirectory.getAbsolutePath()} for lib dir")
 			List<File> libDirs = findFileWithName(layerDirectory, 'lib')
 			if(libDirs != null){
 				libDirs.each{ libDir ->
