@@ -280,7 +280,10 @@ task packageScript(type: Zip) {
 	}
 }
 
-task all(dependsOn: [buildDockerImages, packageScript, pushImages]) {}
+
+task pkg(dependsOn: [buildDockerImages, packageScript]) {}
+
+task all(dependsOn: [pkg, pushImages]) {}
 
 repositories {
     mavenCentral()
