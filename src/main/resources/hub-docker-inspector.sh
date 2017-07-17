@@ -139,6 +139,11 @@ installPropertiesFile
 if [[ "$image" == *.tar ]]
 then
 	echo Inspecting image tar file: $image
+	if [ ! -r ${image} ]
+	then
+		echo "ERROR: Tar file ${image} does not exist"
+		exit -1
+	fi
 	tarfilename=$(basename $image)
 	docker exec ${containername} rm -f /opt/blackduck/hub-docker-inspector/target/$tarfilename
 	docker cp $image ${containername}:/opt/blackduck/hub-docker-inspector/target/$tarfilename
