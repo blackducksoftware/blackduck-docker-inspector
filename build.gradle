@@ -238,7 +238,7 @@ task createBuildDockerImageTasks() {
         def taskName = "buildDockerImage_${linuxFlavorDirName}"
         String suffix = getSuffix(linuxFlavorDirName)
         println "creating task ${taskName}"
-        task "${taskName}"(type: Exec, dependsOn: [buildImageDirs]) {
+        task "${taskName}"(type: Exec, dependsOn: ["removeDockerImage_${linuxFlavorDirName}", buildImageDirs]) {
             commandLine "docker", "build", "--tag", "blackducksoftware/${hubDockerImageName}${suffix}:${version}", "${buildDir}/images/${linuxFlavorDirName}/${hubDockerImageName}"
         }
     }
@@ -265,6 +265,19 @@ private String getSuffix(String linuxFlavorName) {
         suffix = "-${linuxFlavorName}"
     }
     suffix
+}
+
+task createRemoveDockerImageTasks() {
+    linuxFlavors.eachWithIndex {linuxFlavor, index ->
+        String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
+        def taskName = "removeDockerImage_${linuxFlavorDirName}"
+        String suffix = getSuffix(linuxFlavorDirName)
+        println "creating task ${taskName}"
+        task "${taskName}"(type: Exec) {
+			ignoreExitValue true
+            commandLine "docker", "rmi", "blackducksoftware/${hubDockerImageName}${suffix}:${version}"
+        }
+    }
 }
 
 task buildDockerImages(dependsOn: [buildDockerImage_ubuntu, buildDockerImage_centos, buildDockerImage_alpine]) {
