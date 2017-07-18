@@ -17,6 +17,8 @@ apply plugin: 'eclipse'
 apply plugin: 'java'
 apply plugin: 'com.bmuschko.docker-remote-api'
 
+compileJava.options.encoding = 'UTF-8'
+
 import com.bmuschko.gradle.docker.tasks.image.Dockerfile
 import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 
@@ -129,7 +131,8 @@ task createApkDockerfileTasks() {
             println "destFile: ${destFile}"
             from linuxFlavor
             maintainer 'Black Duck Software'
-            
+            environmentVariable('LANG', 'en_US.UTF-8')
+			
             runCommand 'apk update'
             runCommand 'apk add bash'
             runCommand 'apk add openjdk8-jre'
@@ -156,7 +159,8 @@ task createRpmDockerfileTasks() {
             println "destFile: ${destFile}"
             from linuxFlavor
             maintainer 'Black Duck Software'
-            
+			environmentVariable('LANG', 'en_US.UTF-8')
+			
             runCommand 'yum update -y'
             runCommand 'yum install -y java-1.8.0-openjdk'
             
@@ -178,6 +182,7 @@ task createTestDockerfile(type: Dockerfile) {
 	println "destFile: ${destFile}"
 	from 'centos'
 	maintainer 'Black Duck Software'
+	environmentVariable('LANG', 'en_US.UTF-8')
 	
 	runCommand 'rpm -e vim-minimal'
     runCommand 'yum install -y bacula-director bacula-storage bacula-client bacula-console'
@@ -201,13 +206,16 @@ task createDpkgDockerfileTasks() {
             println "destFile: ${destFile}"
             from linuxFlavor
             maintainer 'Black Duck Software'
-            
+			environmentVariable('LANG', 'en_US.UTF-8')
+			
             runCommand 'apt-get update -y'
             runCommand 'apt install -y openjdk-8-jdk apt-transport-https ca-certificates curl software-properties-common vim'
             runCommand 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -'
             runCommand 'add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"'
             runCommand 'apt-get update -y'
             runCommand 'apt-get install -y docker-ce'
+			runCommand 'apt-get install -y locales'
+			runCommand 'locale-gen "en_US.UTF-8"'
             
             runCommand 'mkdir /opt/blackduck'
             runCommand "mkdir ${hubDockerPgmDir}"

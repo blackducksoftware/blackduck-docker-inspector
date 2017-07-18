@@ -31,6 +31,7 @@ import java.nio.file.NoSuchFileException
 import java.nio.file.Path
 import java.nio.file.Paths
 
+import org.apache.commons.compress.archivers.tar.TarArchiveEntry
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream
 import org.apache.commons.io.IOUtils
 import org.apache.commons.lang3.StringUtils
@@ -341,7 +342,7 @@ class DockerTarParser {
 		def layerInputStream = new TarArchiveInputStream(new FileInputStream(layerTar), "UTF-8")
 		try {
 			layerOutputDir.mkdirs()
-			def layerEntry
+			TarArchiveEntry layerEntry
 			while (null != (layerEntry = layerInputStream.getNextTarEntry())) {
 				try{
 					if(layerEntry.isSymbolicLink() || layerEntry.isLink()) {
@@ -364,12 +365,9 @@ class DockerTarParser {
 							logger.trace("normalizing")
 							endLink = endLink.normalize()
 						} else {
-							logger.trace("getting end link via Paths.get()")
 							logger.trace("Processing link: ${layerEntry.getLinkName()}")
 							logger.trace("Output dir path: ${layerOutputDir.getAbsolutePath()}")
-							//                            endLink = Paths.get(layerOutputDir.getAbsolutePath(), layerEntry.getLinkName())
 							Path targetDirPath = FileSystems.getDefault().getPath(layerOutputDir.getAbsolutePath());
-
 							Path targetFilePath
 							try {
 								targetFilePath = FileSystems.getDefault().getPath(layerEntry.getLinkName())
