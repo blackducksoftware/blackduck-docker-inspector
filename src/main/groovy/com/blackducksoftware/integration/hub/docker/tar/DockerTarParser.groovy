@@ -362,7 +362,7 @@ class DockerTarParser {
 						logger.trace("Getting link name from layer entry")
 						String linkPath = layerEntry.getLinkName()
 						logger.trace("checking first char")
-						if (linkPath.startsWith('.')) {
+						if (!linkPath.startsWith('/')) {
 							logger.trace("resolving sibling")
 							logger.trace("Calculating endLink: startLink: ${startLink.toString()}; layerEntry.getLinkName(): ${layerEntry.getLinkName()}")
 							endLink =  layerOutputDirPath.resolve(layerEntry.getLinkName())
