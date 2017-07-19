@@ -342,9 +342,23 @@ class DockerTarParser {
 		def layerInputStream = new TarArchiveInputStream(new FileInputStream(layerTar), "UTF-8")
 		try {
 			layerOutputDir.mkdirs()
+			logger.info("*** layerOutputDir: ${layerOutputDir.getAbsolutePath()}")
+			Path layerOutputDirPath = layerOutputDir.toPath()
 			TarArchiveEntry layerEntry
 			while (null != (layerEntry = layerInputStream.getNextTarEntry())) {
 				try{
+					///////////////////////////////////////////
+					logger.info("=== Processing layerEntry: ${layerEntry.getName()}")
+					if (layerEntry.isFile()) {
+						File f = layerEntry.getFile()
+						if (f != null) {
+							String n = f.getName()
+							if ("McMurdo".equals(n)) {
+								logger.info("*** Processing file/dir: ${n}")
+							}
+						}
+					}
+					//////////////////////////////////////////
 					if(layerEntry.isSymbolicLink() || layerEntry.isLink()) {
 						logger.trace("Processing link: ${layerEntry.getName()}")
 						logger.trace("Output dir path: ${layerOutputDir.getAbsolutePath()}")
@@ -352,7 +366,7 @@ class DockerTarParser {
 						try {
 							startLink = Paths.get(layerOutputDir.getAbsolutePath(), layerEntry.getName())
 						} catch (InvalidPathException e) {
-							logger.error("Error extracting symbolic link ${layerEntry.getName()}: Error creating Path object: ${e.getMessage()}")
+							logger.warn("Error extracting symbolic link ${layerEntry.getName()}: Error creating Path object: ${e.getMessage()}")
 							continue
 						}
 						Path endLink = null
@@ -361,9 +375,15 @@ class DockerTarParser {
 						logger.trace("checking first char")
 						if (linkPath.startsWith('.')) {
 							logger.trace("resolving sibling")
-							endLink =  startLink.resolveSibling(layerEntry.getLinkName())
-							logger.trace("normalizing")
+							/////////////////////////////////////
+							logger.info("*** Calculating endLink")
+							logger.info("*** startLink: ${startLink.toString()}")
+							logger.info("*** layerEntry.getLinkName(): ${layerEntry.getLinkName()}")
+							//////////////////////////////////////////////////
+							endLink =  layerOutputDirPath.resolve(layerEntry.getLinkName())
+							logger.trace("normalizing ${endLink.toString()}")
 							endLink = endLink.normalize()
+							logger.info("*** endLink: ${endLink.toString()}")
 						} else {
 							logger.trace("Processing link: ${layerEntry.getLinkName()}")
 							logger.trace("Output dir path: ${layerOutputDir.getAbsolutePath()}")
@@ -372,12 +392,18 @@ class DockerTarParser {
 							try {
 								targetFilePath = FileSystems.getDefault().getPath(layerEntry.getLinkName())
 							} catch (InvalidPathException e) {
-								logger.error("Error extracting symbolic link to file ${layerEntry.getLinkName()}: Error creating Path object: ${e.getMessage()}")
+								logger.warn("Error extracting symbolic link to file ${layerEntry.getLinkName()}: Error creating Path object: ${e.getMessage()}")
 								continue
 							}
+							/////////////////////////////////////
+							logger.info("*** Calculating endLink")
+							logger.info("*** targetDirPath: ${targetDirPath.toString()}")
+							logger.info("*** targetFilePath: ${targetFilePath.toString()}")
+							//////////////////////////////////////////////////
 							endLink = targetDirPath.resolve(targetFilePath)
 							logger.trace("normalizing ${endLink.toString()}")
 							endLink = endLink.normalize()
+							logger.info("*** endLink: ${endLink.toString()}")
 						}
 						logger.trace("Checking link type")
 						if(layerEntry.isSymbolicLink()){
@@ -385,16 +411,20 @@ class DockerTarParser {
 							try {
 								Files.createSymbolicLink(startLink, endLink)
 							} catch (FileAlreadyExistsException e) {
-								logger.debug("Error creating symbolic link from ${startLink.toString()} to ${endLink.toString()}; " +
+								logger.warn("FileAlreadyExistsException creating symbolic link from ${startLink.toString()} to ${endLink.toString()}; " +
 										"this will not affect the results unless it affects a file needed by the package manager; " +
 										"Error: ${e.getMessage()}")
 							}
 						} else if(layerEntry.isLink()){
-							logger.trace("${layerEntry.name} is a hard link")
+							logger.trace("${layerEntry.name} is a hard link: ${startLink.toString()} -> ${endLink.toString()}")
+							/////////////////// TEMP /////////////////
+							File targetFile = endLink.toFile()
+							logger.info("*** target file exists? ${targetFile.exists()}")
+							/////////////////////////////////////////
 							try {
 								Files.createLink(startLink, endLink)
 							} catch (NoSuchFileException|FileAlreadyExistsException e) {
-								logger.debug("Error creating hard link from ${startLink.toString()} to ${endLink.toString()}; " +
+								logger.warn("Error creating hard link from ${startLink.toString()} to ${endLink.toString()}; " +
 										"this will not affect the results unless it affects a file needed by the package manager; " +
 										"Error: ${e.getMessage()}")
 							}
@@ -402,6 +432,11 @@ class DockerTarParser {
 					} else {
 						String fileSystemEntryName = layerEntry.getName()
 						logger.trace("Processing file/dir: ${fileSystemEntryName}")
+						///////////////////////////////////////////
+						if ("McMurdo".equals(fileSystemEntryName)) {
+							logger.info("*** Processing file/dir: ${fileSystemEntryName}")
+						}
+						//////////////////////////////////////////
 						if ((fileSystemEntryName.startsWith('.wh.')) | (fileSystemEntryName.contains('/.wh.')))   {
 							logger.trace("Found white-out file ${fileSystemEntryName}")
 							int whiteOutMarkIndex = fileSystemEntryName.indexOf('.wh.')
