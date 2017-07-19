@@ -196,8 +196,6 @@ task buildTestDockerTarfile(type: Exec, dependsOn: buildTestDockerImage) {
 	commandLine "docker", "save", "-o", "${buildDir}/images/test/centos_minus_vim_plus_bacula.tar", "blackducksoftware/centos_minus_vim_plus_bacula:1.0"
 }
 
-test.dependsOn buildTestDockerTarfile
-
 task createDpkgDockerfileTasks() {
     linuxFlavorsDpkg.eachWithIndex {linuxFlavor, index ->
         String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
@@ -301,6 +299,15 @@ task packageScript(type: Zip) {
 	}
 }
 
+task stopDockerContainer(type: Exec) {
+	commandLine 'docker', 'stop', 'hub-docker-inspector'
+}
+
+task testPrep(dependsOn: [stopDockerContainer, removeDockerImage_ubuntu, removeDockerImage_centos, removeDockerImage_alpine, buildTestDockerTarfile]) {
+	
+}
+
+test.dependsOn testPrep
 
 task pkg(dependsOn: [buildDockerImages, packageScript]) {}
 
