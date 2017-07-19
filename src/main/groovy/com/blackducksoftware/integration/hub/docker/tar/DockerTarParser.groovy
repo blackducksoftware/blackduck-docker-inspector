@@ -169,7 +169,7 @@ class DockerTarParser {
 					result.extractedPackageManagerDirectory = packageManagerDirectory
 					results.extractionResults.add(result)
 				} else {
-					logger.error("Package manager dir ${packageManagerDirectory.getAbsolutePath()} does not exist")
+					logger.info("Package manager dir ${packageManagerDirectory.getAbsolutePath()} does not exist")
 				}
 			}
 		}
