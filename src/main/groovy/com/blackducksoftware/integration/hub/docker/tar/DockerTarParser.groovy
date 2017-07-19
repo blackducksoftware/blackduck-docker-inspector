@@ -342,23 +342,12 @@ class DockerTarParser {
 		def layerInputStream = new TarArchiveInputStream(new FileInputStream(layerTar), "UTF-8")
 		try {
 			layerOutputDir.mkdirs()
-			logger.info("*** layerOutputDir: ${layerOutputDir.getAbsolutePath()}")
+			logger.trace("layerOutputDir: ${layerOutputDir.getAbsolutePath()}")
 			Path layerOutputDirPath = layerOutputDir.toPath()
 			TarArchiveEntry layerEntry
 			while (null != (layerEntry = layerInputStream.getNextTarEntry())) {
 				try{
-					///////////////////////////////////////////
-					logger.info("=== Processing layerEntry: ${layerEntry.getName()}")
-					if (layerEntry.isFile()) {
-						File f = layerEntry.getFile()
-						if (f != null) {
-							String n = f.getName()
-							if ("McMurdo".equals(n)) {
-								logger.info("*** Processing file/dir: ${n}")
-							}
-						}
-					}
-					//////////////////////////////////////////
+					logger.trace("Processing layerEntry: ${layerEntry.getName()}")
 					if(layerEntry.isSymbolicLink() || layerEntry.isLink()) {
 						logger.trace("Processing link: ${layerEntry.getName()}")
 						logger.trace("Output dir path: ${layerOutputDir.getAbsolutePath()}")
@@ -375,15 +364,11 @@ class DockerTarParser {
 						logger.trace("checking first char")
 						if (linkPath.startsWith('.')) {
 							logger.trace("resolving sibling")
-							/////////////////////////////////////
-							logger.info("*** Calculating endLink")
-							logger.info("*** startLink: ${startLink.toString()}")
-							logger.info("*** layerEntry.getLinkName(): ${layerEntry.getLinkName()}")
-							//////////////////////////////////////////////////
+							logger.trace("Calculating endLink: startLink: ${startLink.toString()}; layerEntry.getLinkName(): ${layerEntry.getLinkName()}")
 							endLink =  layerOutputDirPath.resolve(layerEntry.getLinkName())
 							logger.trace("normalizing ${endLink.toString()}")
 							endLink = endLink.normalize()
-							logger.info("*** endLink: ${endLink.toString()}")
+							logger.trace("endLink: ${endLink.toString()}")
 						} else {
 							logger.trace("Processing link: ${layerEntry.getLinkName()}")
 							logger.trace("Output dir path: ${layerOutputDir.getAbsolutePath()}")
@@ -395,15 +380,11 @@ class DockerTarParser {
 								logger.warn("Error extracting symbolic link to file ${layerEntry.getLinkName()}: Error creating Path object: ${e.getMessage()}")
 								continue
 							}
-							/////////////////////////////////////
-							logger.info("*** Calculating endLink")
-							logger.info("*** targetDirPath: ${targetDirPath.toString()}")
-							logger.info("*** targetFilePath: ${targetFilePath.toString()}")
-							//////////////////////////////////////////////////
+							logger.trace("Calculating endLink; targetDirPath: ${targetDirPath.toString()}; targetFilePath: ${targetFilePath.toString()}")
 							endLink = targetDirPath.resolve(targetFilePath)
 							logger.trace("normalizing ${endLink.toString()}")
 							endLink = endLink.normalize()
-							logger.info("*** endLink: ${endLink.toString()}")
+							logger.trace("endLink: ${endLink.toString()}")
 						}
 						logger.trace("Checking link type")
 						if(layerEntry.isSymbolicLink()){
@@ -418,9 +399,6 @@ class DockerTarParser {
 						} else if(layerEntry.isLink()){
 							logger.trace("${layerEntry.name} is a hard link: ${startLink.toString()} -> ${endLink.toString()}")
 							File targetFile = endLink.toFile()
-							/////////////////// TEMP /////////////////
-							logger.info("*** target file exists? ${targetFile.exists()}")
-							/////////////////////////////////////////
 							if (!targetFile.exists()) {
 								logger.warn("Attempting to create a link to ${targetFile}, but it does not exist")
 							}
@@ -435,11 +413,6 @@ class DockerTarParser {
 					} else {
 						String fileSystemEntryName = layerEntry.getName()
 						logger.trace("Processing file/dir: ${fileSystemEntryName}")
-						///////////////////////////////////////////
-						if ("McMurdo".equals(fileSystemEntryName)) {
-							logger.info("*** Processing file/dir: ${fileSystemEntryName}")
-						}
-						//////////////////////////////////////////
 						if ((fileSystemEntryName.startsWith('.wh.')) | (fileSystemEntryName.contains('/.wh.')))   {
 							logger.trace("Found white-out file ${fileSystemEntryName}")
 							int whiteOutMarkIndex = fileSystemEntryName.indexOf('.wh.')
