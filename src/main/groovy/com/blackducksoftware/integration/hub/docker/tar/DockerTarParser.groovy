@@ -417,10 +417,13 @@ class DockerTarParser {
 							}
 						} else if(layerEntry.isLink()){
 							logger.trace("${layerEntry.name} is a hard link: ${startLink.toString()} -> ${endLink.toString()}")
-							/////////////////// TEMP /////////////////
 							File targetFile = endLink.toFile()
+							/////////////////// TEMP /////////////////
 							logger.info("*** target file exists? ${targetFile.exists()}")
 							/////////////////////////////////////////
+							if (!targetFile.exists()) {
+								logger.warn("Attempting to create a link to ${targetFile}, but it does not exist")
+							}
 							try {
 								Files.createLink(startLink, endLink)
 							} catch (NoSuchFileException|FileAlreadyExistsException e) {
