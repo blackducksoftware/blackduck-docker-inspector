@@ -115,7 +115,7 @@ function update_self_and_invoke() {
   exec "${EXECUTABLE_SHELL_SCRIPT}" "$@"
 }
 
-function pull_image_if_necessary() {
+function pull_image_if_necessary() { 
   local image=$1
   local image_version=$2
   local existing_image=$(docker images -q "$image")
@@ -165,6 +165,7 @@ function main() {
   local name_arg=""
   local do_scan=1
   local do_inspect=1
+  local pull_from_remote=1
   local option_count=0
   local inspector_version=
   while [[ $# -ge 1 ]]; do
@@ -209,6 +210,9 @@ function main() {
         hub_version="$2"
         shift
         ;;
+      --use-local)
+        pull_from_remote=0
+        ;;
       --no-scan)
         do_scan=0
         ;;
@@ -229,13 +233,14 @@ function main() {
     hub_project="${docker_image%:*}"
   fi
   if [ -z "$hub_version" ]; then
-    hub_version="${docker_image#*:}"
+    hub_version="${docker_image##*:}"
     if [ "$hub_version" == "$docker_image" ]; then 
       hub_version="latest"
     fi
   fi
   raw_image_name="${docker_image%:*}"
-  clean_image_name=$(echo "$raw_image_name" | sed  -e "s/\//_/g")
+  clean_image_name=$(echo "$raw_image_name" | sed  -e "s/\//_/g")  # convert slash to underscore
+  clean_image_name=$(echo "$clean_image_name" | sed -e "s/\:/_/g") # convert colon to underscore
   IMAGE_TARFILE="${THISDIR}/${clean_image_name%:*}-${hub_version}.tar"
 
   # if the --name scan.cli option was not provided
@@ -256,7 +261,9 @@ function main() {
     echo "Using default hub-docker-inspector.sh"
   fi
 
-  pull_image_if_necessary $docker_image $hub_version
+  if [ $pull_from_remote -eq 1 ]; then
+    pull_image_if_necessary $docker_image $hub_version
+  fi
 
   docker save -o "${IMAGE_TARFILE}" "$docker_image" 2>/dev/null
   if [ $? -eq 0 ]; then
@@ -269,7 +276,7 @@ function main() {
       "${INSPECTOR_SHELL_SCRIPT}" --hub.username=$hub_user --hub.url=$HUB_URL --hub.project.name="$hub_project" --hub.project.version="$hub_version" "${IMAGE_TARFILE}"
     fi
   else
-    echo "Unable to save: ${docker_image} to a tar file."
+    echo "Unable to save: ${IMAGE_TARFILE} to a tar file."
     echo "Please verify the image name:tag and try again."
   fi
 }
