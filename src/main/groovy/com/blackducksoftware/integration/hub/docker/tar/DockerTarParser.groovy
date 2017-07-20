@@ -346,15 +346,41 @@ class DockerTarParser {
 			Path layerOutputDirPath = layerOutputDir.toPath()
 			TarArchiveEntry layerEntry
 			while (null != (layerEntry = layerInputStream.getNextTarEntry())) {
-				try{
-					logger.trace("Processing layerEntry: ${layerEntry.getName()}")
+				try {
+					String fileSystemEntryName = layerEntry.getName()
+					logger.trace("Processing layerEntry: ${fileSystemEntryName}")
+					if ((fileSystemEntryName.startsWith('.wh.')) || (fileSystemEntryName.contains('/.wh.')))   {
+						logger.trace("Found white-out file ${fileSystemEntryName}")
+						int whiteOutMarkIndex = fileSystemEntryName.indexOf('.wh.')
+						String beforeWhiteOutMark = fileSystemEntryName.substring(0, whiteOutMarkIndex)
+						String afterWhiteOutMark = fileSystemEntryName.substring(whiteOutMarkIndex + ".wh.".length())
+						String filePathToRemove = "${beforeWhiteOutMark}${afterWhiteOutMark}"
+						final File fileToRemove = new File(layerOutputDir, filePathToRemove)
+						logger.trace("Removing ${filePathToRemove} from image (this layer whites it out)")
+						if (fileToRemove.isDirectory()) {
+							try {
+								fileToRemove.deleteDir()
+								logger.trace("Directory ${filePathToRemove} successfully removed")
+							} catch (Exception e) {
+								logger.warn("Error removing whited-out directory ${filePathToRemove}")
+							}
+						} else {
+							try {
+								Files.delete(fileToRemove.toPath())
+								logger.trace("File ${filePathToRemove} successfully removed")
+							} catch (Exception e) {
+								logger.warn("Error removing whited-out file ${filePathToRemove}")
+							}
+						}
+						continue
+					}
 					if(layerEntry.isSymbolicLink() || layerEntry.isLink()) {
-						logger.trace("Processing link: ${layerEntry.getName()}")
+						logger.trace("Processing link: ${fileSystemEntryName}")
 						Path startLink = null
 						try {
-							startLink = Paths.get(layerOutputDir.getAbsolutePath(), layerEntry.getName())
+							startLink = Paths.get(layerOutputDir.getAbsolutePath(), fileSystemEntryName)
 						} catch (InvalidPathException e) {
-							logger.warn("Error extracting symbolic link ${layerEntry.getName()}: Error creating Path object: ${e.getMessage()}")
+							logger.warn("Error extracting symbolic link ${fileSystemEntryName}: Error creating Path object: ${e.getMessage()}")
 							continue
 						}
 						Path endLink = null
@@ -405,49 +431,26 @@ class DockerTarParser {
 							}
 						}
 					} else {
-						String fileSystemEntryName = layerEntry.getName()
+
 						logger.trace("Processing file/dir: ${fileSystemEntryName}")
-						if ((fileSystemEntryName.startsWith('.wh.')) | (fileSystemEntryName.contains('/.wh.')))   {
-							logger.trace("Found white-out file ${fileSystemEntryName}")
-							int whiteOutMarkIndex = fileSystemEntryName.indexOf('.wh.')
-							String beforeWhiteOutMark = fileSystemEntryName.substring(0, whiteOutMarkIndex)
-							String afterWhiteOutMark = fileSystemEntryName.substring(whiteOutMarkIndex + ".wh.".length())
-							String filePathToRemove = "${beforeWhiteOutMark}${afterWhiteOutMark}"
-							final File fileToRemove = new File(layerOutputDir, filePathToRemove)
-							logger.trace("Removing ${filePathToRemove} from image (this layer whites it out)")
-							if (fileToRemove.isDirectory()) {
-								try {
-									fileToRemove.deleteDir()
-									logger.trace("Directory ${filePathToRemove} successfully removed")
-								} catch (Exception e) {
-									logger.warn("Error removing whited-out directory ${filePathToRemove}")
-								}
-							} else {
-								try {
-									Files.delete(fileToRemove.toPath())
-									logger.trace("File ${filePathToRemove} successfully removed")
-								} catch (Exception e) {
-									logger.warn("Error removing whited-out file ${filePathToRemove}")
-								}
+
+						final File outputFile = new File(layerOutputDir, fileSystemEntryName)
+						if (layerEntry.isFile()) {
+							logger.trace("Processing file: ${fileSystemEntryName}")
+							if(!outputFile.getParentFile().exists()){
+								outputFile.getParentFile().mkdirs()
+							}
+							logger.trace("Creating output stream for ${outputFile.getName()}")
+							final OutputStream outputFileStream = new FileOutputStream(outputFile)
+							try{
+								IOUtils.copy(layerInputStream, outputFileStream)
+							} finally{
+								outputFileStream.close()
 							}
 						} else {
-							final File outputFile = new File(layerOutputDir, fileSystemEntryName)
-							if (layerEntry.isFile()) {
-								logger.trace("Processing file: ${fileSystemEntryName}")
-								if(!outputFile.getParentFile().exists()){
-									outputFile.getParentFile().mkdirs()
-								}
-								logger.trace("Creating output stream for ${outputFile.getName()}")
-								final OutputStream outputFileStream = new FileOutputStream(outputFile)
-								try{
-									IOUtils.copy(layerInputStream, outputFileStream)
-								} finally{
-									outputFileStream.close()
-								}
-							} else {
-								outputFile.mkdirs()
-							}
+							outputFile.mkdirs()
 						}
+
 					}
 				} catch(Exception e) {
 					logger.error("Error extracting files from layer tar: ${e.toString()}", e)

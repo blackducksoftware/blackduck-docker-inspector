@@ -300,6 +300,7 @@ task packageScript(type: Zip) {
 }
 
 task stopDockerContainer(type: Exec) {
+	ignoreExitValue true
 	commandLine 'docker', 'stop', 'hub-docker-inspector'
 }
 
