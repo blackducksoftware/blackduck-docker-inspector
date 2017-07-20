@@ -67,7 +67,7 @@ class DockerTarParserTest {
 			}
 		}
 		assertTrue(varLibRpmNameFound)
-		assertEquals(158045, numFilesFound)
+		assertEquals(18476, numFilesFound)
 	}
 
 	@Test

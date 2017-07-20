@@ -24,7 +24,6 @@
 package com.blackducksoftware.integration.hub.docker.tar
 
 import java.nio.file.FileAlreadyExistsException
-import java.nio.file.FileSystems
 import java.nio.file.Files
 import java.nio.file.InvalidPathException
 import java.nio.file.NoSuchFileException
@@ -339,10 +338,11 @@ class DockerTarParser {
 
 	// TODO this method needs to be split up
 	private void parseLayerTarAndExtract(File layerTar, File layerOutputDir){
+		logger.debug("layerTar: ${layerTar.getAbsolutePath()}")
 		def layerInputStream = new TarArchiveInputStream(new FileInputStream(layerTar), "UTF-8")
 		try {
 			layerOutputDir.mkdirs()
-			logger.trace("layerOutputDir: ${layerOutputDir.getAbsolutePath()}")
+			logger.debug("layerOutputDir: ${layerOutputDir.getAbsolutePath()}")
 			Path layerOutputDirPath = layerOutputDir.toPath()
 			TarArchiveEntry layerEntry
 			while (null != (layerEntry = layerInputStream.getNextTarEntry())) {
@@ -350,8 +350,7 @@ class DockerTarParser {
 					logger.trace("Processing layerEntry: ${layerEntry.getName()}")
 					if(layerEntry.isSymbolicLink() || layerEntry.isLink()) {
 						logger.trace("Processing link: ${layerEntry.getName()}")
-						logger.trace("Output dir path: ${layerOutputDir.getAbsolutePath()}")
-						Path startLink
+						Path startLink = null
 						try {
 							startLink = Paths.get(layerOutputDir.getAbsolutePath(), layerEntry.getName())
 						} catch (InvalidPathException e) {
@@ -361,42 +360,37 @@ class DockerTarParser {
 						Path endLink = null
 						logger.trace("Getting link name from layer entry")
 						String linkPath = layerEntry.getLinkName()
-						logger.trace("checking first char")
-						if (!linkPath.startsWith('/')) {
-							logger.trace("resolving sibling")
+						logger.trace("layerEntry.getLinkName(): ${linkPath}")
+						logger.trace("Checking link type")
+						if(layerEntry.isSymbolicLink()){
+							logger.trace("${layerEntry.name} is a symbolic link")
+							logger.trace("Calculating endLink: startLink: ${startLink.toString()}; layerEntry.getLinkName(): ${layerEntry.getLinkName()}")
+							if (linkPath.startsWith('/')) {
+								String relLinkPath = "." + linkPath
+								logger.trace("endLink made relative: ${relLinkPath}")
+								endLink =  layerOutputDirPath.resolve(relLinkPath)
+							} else {
+								endLink = startLink.resolveSibling(layerEntry.getLinkName())
+							}
+							logger.trace("normalizing ${endLink.toString()}")
+							endLink = endLink.normalize()
+							logger.trace("endLink: ${endLink.toString()}")
+							try {
+								Files.createSymbolicLink(startLink, endLink)
+							} catch (FileAlreadyExistsException e) {
+								String msg = "FileAlreadyExistsException creating symbolic link from ${startLink.toString()} to ${endLink.toString()}; " +
+										"this will not affect the results unless it affects a file needed by the package manager; " +
+										"Error: ${e.getMessage()}"
+								throw new HubIntegrationException(msg, e)
+							}
+						} else if (layerEntry.isLink()) {
+							logger.trace("${layerEntry.name} is a hard link")
 							logger.trace("Calculating endLink: startLink: ${startLink.toString()}; layerEntry.getLinkName(): ${layerEntry.getLinkName()}")
 							endLink =  layerOutputDirPath.resolve(layerEntry.getLinkName())
 							logger.trace("normalizing ${endLink.toString()}")
 							endLink = endLink.normalize()
 							logger.trace("endLink: ${endLink.toString()}")
-						} else {
-							logger.trace("Processing link: ${layerEntry.getLinkName()}")
-							logger.trace("Output dir path: ${layerOutputDir.getAbsolutePath()}")
-							Path targetDirPath = FileSystems.getDefault().getPath(layerOutputDir.getAbsolutePath());
-							Path targetFilePath
-							try {
-								targetFilePath = FileSystems.getDefault().getPath(layerEntry.getLinkName())
-							} catch (InvalidPathException e) {
-								logger.warn("Error extracting symbolic link to file ${layerEntry.getLinkName()}: Error creating Path object: ${e.getMessage()}")
-								continue
-							}
-							logger.trace("Calculating endLink; targetDirPath: ${targetDirPath.toString()}; targetFilePath: ${targetFilePath.toString()}")
-							endLink = targetDirPath.resolve(targetFilePath)
-							logger.trace("normalizing ${endLink.toString()}")
-							endLink = endLink.normalize()
-							logger.trace("endLink: ${endLink.toString()}")
-						}
-						logger.trace("Checking link type")
-						if(layerEntry.isSymbolicLink()){
-							logger.trace("${layerEntry.name} is a symbolic link")
-							try {
-								Files.createSymbolicLink(startLink, endLink)
-							} catch (FileAlreadyExistsException e) {
-								logger.warn("FileAlreadyExistsException creating symbolic link from ${startLink.toString()} to ${endLink.toString()}; " +
-										"this will not affect the results unless it affects a file needed by the package manager; " +
-										"Error: ${e.getMessage()}")
-							}
-						} else if(layerEntry.isLink()){
+
 							logger.trace("${layerEntry.name} is a hard link: ${startLink.toString()} -> ${endLink.toString()}")
 							File targetFile = endLink.toFile()
 							if (!targetFile.exists()) {
@@ -420,18 +414,18 @@ class DockerTarParser {
 							String afterWhiteOutMark = fileSystemEntryName.substring(whiteOutMarkIndex + ".wh.".length())
 							String filePathToRemove = "${beforeWhiteOutMark}${afterWhiteOutMark}"
 							final File fileToRemove = new File(layerOutputDir, filePathToRemove)
-							logger.debug("Removing ${filePathToRemove} from image (this layer whites it out)")
+							logger.trace("Removing ${filePathToRemove} from image (this layer whites it out)")
 							if (fileToRemove.isDirectory()) {
 								try {
 									fileToRemove.deleteDir()
-									logger.debug("Directory ${filePathToRemove} successfully removed")
+									logger.trace("Directory ${filePathToRemove} successfully removed")
 								} catch (Exception e) {
 									logger.warn("Error removing whited-out directory ${filePathToRemove}")
 								}
 							} else {
 								try {
 									Files.delete(fileToRemove.toPath())
-									logger.debug("File ${filePathToRemove} successfully removed")
+									logger.trace("File ${filePathToRemove} successfully removed")
 								} catch (Exception e) {
 									logger.warn("Error removing whited-out file ${filePathToRemove}")
 								}
