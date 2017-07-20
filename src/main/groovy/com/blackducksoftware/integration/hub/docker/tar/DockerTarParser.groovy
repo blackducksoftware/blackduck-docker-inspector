@@ -407,7 +407,7 @@ class DockerTarParser {
 								String msg = "FileAlreadyExistsException creating symbolic link from ${startLink.toString()} to ${endLink.toString()}; " +
 										"this will not affect the results unless it affects a file needed by the package manager; " +
 										"Error: ${e.getMessage()}"
-								throw new HubIntegrationException(msg, e)
+								throw new HubIntegrationException(msg)
 							}
 						} else if (layerEntry.isLink()) {
 							logger.trace("${layerEntry.name} is a hard link")
@@ -453,7 +453,7 @@ class DockerTarParser {
 
 					}
 				} catch(Exception e) {
-					logger.error("Error extracting files from layer tar: ${e.toString()}", e)
+					logger.error("Error extracting files from layer tar: ${e.toString()}")
 				}
 			}
 		} finally {
