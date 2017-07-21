@@ -3,6 +3,8 @@
 # This script (copied to the Docker container hub-docker-inspector will run in)
 # makes sure the docker daemon is running, then invokes the hub-docker-inspector jar.
 #
+version=@VERSION@
+
 if [ \( $# -lt 1 \) -o \( $1 = -h \) -o \( $1 = --help \) ]
 then
     echo ""
@@ -18,6 +20,12 @@ then
 	echo "and Docker Hub connection details (docker.registry.username and docker.registry.password)."
 	echo ""
     exit -1
+fi
+
+if [ \( $1 = -v \) -o \( $1 = --version \) ]
+then
+	echo "$(basename $0) ${version}"
+	exit 0
 fi
 
 # If docker is installed (master container): start docker
@@ -74,9 +82,9 @@ cd /opt/blackduck/hub-docker-inspector
 
 if [[ "$image" == *.tar ]]
 then
-	cmd="java -Dfile.encoding=UTF-8 -jar hub-docker-inspector-@VERSION@.jar --working.directory=/opt/blackduck/hub-docker-inspector/working --docker.tar=$image ${options[*]}"
+	cmd="java -Dfile.encoding=UTF-8 -jar hub-docker-inspector-${version}.jar --working.directory=/opt/blackduck/hub-docker-inspector/working --docker.tar=$image ${options[*]}"
 else
-	cmd="java -Dfile.encoding=UTF-8 -jar hub-docker-inspector-@VERSION@.jar --working.directory=/opt/blackduck/hub-docker-inspector/working --docker.image=$image ${options[*]}"
+	cmd="java -Dfile.encoding=UTF-8 -jar hub-docker-inspector-${version}.jar --working.directory=/opt/blackduck/hub-docker-inspector/working --docker.image=$image ${options[*]}"
 fi
 
 $cmd

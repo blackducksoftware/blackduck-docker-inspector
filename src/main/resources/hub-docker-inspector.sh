@@ -74,7 +74,7 @@ function startContainer() {
 		echo ${containername} container is not running
 		docker rm ${containername} 2> /dev/null
 		echo "Pulling/running hub-docker-inspector Docker image"
-		docker run --name ${containername} -it -d --privileged blackducksoftware/${imagename}:@VERSION@ /bin/bash
+		docker run --name ${containername} -it -d --privileged blackducksoftware/${imagename}:${version} /bin/bash
 	fi
 }
 
@@ -93,7 +93,7 @@ function installPropertiesFile() {
 ##################
 # Start script
 ##################
-
+version=@VERSION@
 containername=hub-docker-inspector
 imagename=hub-docker-inspector
 propdir=.
@@ -107,7 +107,7 @@ fi
 
 if [ \( $1 = -v \) -o \( $1 = --version \) ]
 then
-	echo "$0 @VERSION@"
+	echo "$(basename $0) ${version}"
 	exit 0
 fi
 
