@@ -157,10 +157,12 @@ class HubDockerManager {
 			hubProjectName = deriveHubProject(cleanedImageName, projectName)
 			hubVersionName = deriveHubProjectVersion(mapping, versionName)
 
-			logger.info("Hub project/version: ${hubProjectName}/${hubVersionName}; Code location : ${codeLocationName}")
+			logger.info("Hub project, version: ${hubProjectName}, ${hubVersionName}; Code location : ${codeLocationName}")
 
-			String newFileName = "${cleanedImageName}_${filePath}_${hubProjectName}_${hubVersionName}_bdio.jsonld"
-			def outputFile = new File(workingDirectory, newFileName)
+			String cleanedHubProjectName = hubProjectName.replaceAll('/', '_')
+			String bdioFilename = "${cleanedImageName}_${filePath}_${cleanedHubProjectName}_${hubVersionName}_bdio.jsonld"
+			logger.debug("bdioFilename: ${bdioFilename}")
+			def outputFile = new File(workingDirectory, bdioFilename)
 			bdioFiles.add(outputFile)
 			new FileOutputStream(outputFile).withStream { outputStream ->
 				BdioWriter writer = new BdioWriter(new Gson(), outputStream)
