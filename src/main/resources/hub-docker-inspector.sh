@@ -67,14 +67,27 @@ function checkForPassword() {
 }
 
 function startContainer() {
+	docker rm ${containername} 2> /dev/null
+	echo "Pulling/running hub-docker-inspector Docker image"
+	docker run --name ${containername} -it -d --privileged blackducksoftware/${imagename}:${version} /bin/bash
+}
+
+function ensureContainerRunning() {
 	if [ $(docker ps |grep "${containername}\$" | wc -l) -gt 0 ]
 	then
-		echo ${containername} container is already running
+		echo "The ${containername} container is already running"
+		containerVersion=$(docker exec hub-docker-inspector ls /opt/blackduck/hub-docker-inspector | grep \.jar | sed s/hub-docker-inspector-// | sed 's/\.jar//')
+		echo "The ${containername} container is already running, and running version ${containerVersion}"
+		if [ ${version} != ${containerVersion} ]
+		then
+			echo "Stopping old container"
+			docker stop hub-docker-inspector
+			startContainer
+		fi
+		
 	else
 		echo ${containername} container is not running
-		docker rm ${containername} 2> /dev/null
-		echo "Pulling/running hub-docker-inspector Docker image"
-		docker run --name ${containername} -it -d --privileged blackducksoftware/${imagename}:${version} /bin/bash
+		startContainer
 	fi
 }
 
@@ -119,7 +132,7 @@ fi
 
 if [ \( $1 = -p \) -o \( $1 = --get-properties \) ]
 then
-    startContainer
+    ensureContainerRunning
     echo "Copying application.properties template"
     docker cp hub-docker-inspector:/opt/blackduck/hub-docker-inspector/template/application.properties .
     exit 0
@@ -133,7 +146,7 @@ options=( "$@" )
 image=${options[${#options[@]}-1]}
 unset "options[${#options[@]}-1]"
 checkForPassword
-startContainer
+ensureContainerRunning
 installPropertiesFile
 
 if [[ "$image" == *.tar ]]
