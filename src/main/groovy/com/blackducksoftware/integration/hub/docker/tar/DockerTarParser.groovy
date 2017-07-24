@@ -402,6 +402,11 @@ class DockerTarParser {
 							endLink = endLink.normalize()
 							logger.trace("endLink: ${endLink.toString()}")
 							try {
+								try {
+									Files.delete(startLink) // remove lower layer's version if exists
+								} catch (IOException e) {
+									// expected (most of the time)
+								}
 								Files.createSymbolicLink(startLink, endLink)
 							} catch (FileAlreadyExistsException e) {
 								String msg = "FileAlreadyExistsException creating symbolic link from ${startLink.toString()} to ${endLink.toString()}; " +
