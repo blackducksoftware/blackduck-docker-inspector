@@ -36,6 +36,24 @@ class DockerTarParserTest {
 
 	private static final String LAYER_ID = "layerId1"
 
+	@Ignore
+	@Test
+	void testTEMP() {
+		File dockerTar = new File("build/images/test/hub-webapp.tar")
+		File workingDirectory = TestUtils.createTempDirectory()
+		println "workingDirectory: ${workingDirectory.getAbsolutePath()}"
+
+		DockerTarParser tarParser = new DockerTarParser()
+		tarParser.workingDirectory = workingDirectory
+
+		List<File> layerTars = tarParser.extractLayerTars(dockerTar)
+		List<LayerMapping> layerMappings = tarParser.getLayerMappings(dockerTar.getName(), "blackducksoftware/hub-webapp", "4.0.0")
+
+		File imageFilesDir = tarParser.extractDockerLayers(layerTars, layerMappings)
+		OperatingSystemEnum targetOsEnum = tarParser.detectOperatingSystem(null, imageFilesDir)
+		TarExtractionResults tarExtractionResults = tarParser.extractPackageManagerDirs(imageFilesDir, targetOsEnum)
+	}
+
 	@Test
 	void testExtractFullImage() {
 		File dockerTar = new File("build/images/test/centos_minus_vim_plus_bacula.tar")
