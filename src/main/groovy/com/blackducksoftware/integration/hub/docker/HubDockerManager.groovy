@@ -23,6 +23,9 @@
  */
 package com.blackducksoftware.integration.hub.docker
 
+import java.nio.file.Files
+import java.nio.file.Path
+
 import org.apache.commons.io.FileUtils
 import org.apache.commons.lang3.StringUtils
 import org.slf4j.Logger
@@ -136,6 +139,12 @@ class HubDockerManager {
 		if(workingDirectory.exists()){
 			FileUtils.deleteDirectory(workingDirectory)
 		}
+	}
+
+	void copyToWorkingDir(File fileToCopy, String newFilename) {
+		File workingDirFile = new File(workingDirectoryPath)
+		Path destPath = workingDirFile.toPath().resolve(newFilename)
+		Files.copy(fileToCopy.toPath(), destPath)
 	}
 
 	private List<File> generateBdioFromPackageMgrDirs(List<LayerMapping> layerMappings, String projectName, String versionName, String tarFileName, TarExtractionResults tarResults, String architecture) {

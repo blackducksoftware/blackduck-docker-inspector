@@ -134,6 +134,7 @@ class Application {
 			logger.warn("No BDIO Files generated")
 		} else {
 			hubDockerManager.uploadBdioFiles(bdioFiles)
+			hubDockerManager.copyToWorkingDir(bdioFiles.get(0), "output_bdio.jsonld")
 		}
 	}
 

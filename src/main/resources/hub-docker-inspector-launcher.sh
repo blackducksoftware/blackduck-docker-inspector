@@ -42,7 +42,7 @@ then
 		cd /opt/blackduck/hub-docker-inspector
 		rm -f dockerd_stdout.log
 		rm -f dockerd_stderr.log
-		dockerd --storage-driver=vfs 2> dockerd_stderr.log > dockerd_stdout.log &
+		dockerd --storage-driver=vfs ${DOCKERD_OPTS} 2> dockerd_stderr.log > dockerd_stdout.log &
 	
 		for i in 1 .. 5
 		do
