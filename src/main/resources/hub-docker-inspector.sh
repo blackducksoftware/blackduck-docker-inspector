@@ -107,6 +107,7 @@ function installPropertiesFile() {
 # Start script
 ##################
 version=@VERSION@
+bdioOutputPath=/tmp/myoutput/output_bdio.json
 containername=hub-docker-inspector
 imagename=hub-docker-inspector
 propdir=.
@@ -165,5 +166,9 @@ else
 	echo Inspecting image: $image
 	docker exec -e BD_HUB_PASSWORD -e SCAN_CLI_OPTS -e http_proxy -e https_proxy -e HTTP_PROXY -e HTTPS_PROXY -e DOCKERD_OPTS ${containername} /opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} $image
 fi
+
+# TODO shouldn't always do this
+docker cp ${containername}:/opt/blackduck/hub-docker-inspector/working/output_bdio.jsonld /tmp
+mv /tmp/output_bdio.jsonld ${bdioOutputPath}
 
 exit 0

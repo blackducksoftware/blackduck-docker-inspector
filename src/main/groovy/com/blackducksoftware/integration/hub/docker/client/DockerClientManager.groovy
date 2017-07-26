@@ -22,6 +22,8 @@
  * under the License.
  */
 package com.blackducksoftware.integration.hub.docker.client
+import java.nio.charset.StandardCharsets
+
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.IOUtils
 import org.apache.commons.lang3.StringUtils
@@ -79,9 +81,6 @@ class DockerClientManager {
 	String scanCliOptsEnvVar;
 
 	File getTarFileFromDockerImage(String imageName, String tagName) {
-		// use docker to pull image if necessary
-		// use docker to save image to tar
-		// performExtractFromDockerTar()
 		File imageTarDirectory = new File(new File(workingDirectoryPath), 'tarDirectory')
 		pullImage(imageName, tagName)
 		File imageTarFile = new File(imageTarDirectory, "${imageName.replaceAll(':', '_')}_${tagName}.tar")
@@ -194,7 +193,19 @@ class DockerClientManager {
 
 		String cmd = programPaths.getHubDockerPgmDirPath() + INSPECTOR_COMMAND
 		execCommandInContainer(dockerClient, imageId, containerId, cmd, tarFilePathInSubContainer)
-		copyFileFromContainer(dockerClient, containerId, programPaths.getHubDockerOutputJsonPath(), programPaths.getHubDockerWorkingDirPath())
+		// TODO using a hack for now
+		//		copyFileFromContainer(dockerClient, containerId, programPaths.getHubDockerOutputJsonPath(), programPaths.getHubDockerOutputJsonPath())
+		copyFileFromContainerViaShell(containerId, programPaths.getHubDockerOutputJsonPath(), programPaths.getHubDockerWorkingDirPath())
+	}
+
+	// TODO this is a hack, and probably handles errors poorly
+	private void copyFileFromContainerViaShell(String containerId, String fromPath, String toPath) {
+		logger.debug("Copying ${fromPath} from container to ${toPath} via shell command")
+		def sout = new StringBuilder(), serr = new StringBuilder()
+		def proc = "docker cp ${containerId}:${fromPath} ${toPath}".execute()
+		proc.consumeProcessOutput(sout, serr)
+		proc.waitForOrKill(5000)
+		logger.debug("out> $sout err> $serr")
 	}
 
 	private String deriveContainerName(String imageName) {
@@ -224,13 +235,50 @@ class DockerClientManager {
 	private void copyFileToContainer(DockerClient dockerClient, String containerId, String srcPath, String destPath) {
 		logger.info("Copying ${srcPath} to container ${containerId}: ${destPath}")
 		CopyArchiveToContainerCmd  copyProperties = dockerClient.copyArchiveToContainerCmd(containerId).withHostResource(srcPath).withRemotePath(destPath)
-		copyProperties.exec()
+		execCopyTo(copyProperties)
 	}
 
+	// TODO this prepends some garbage to the file
 	private void copyFileFromContainer(DockerClient dockerClient, String containerId, String srcPath, String destPath) {
-		logger.info("Copying ${srcPath} from container ${containerId} to: ${destPath}")
-		CopyArchiveFromContainerCmd  copyProperties = dockerClient.copyArchiveFromContainerCmd(containerId, srcPath).withHostPath(destPath)
-		copyProperties.exec()
+		logger.info("Copying ${srcPath} from container ${containerId} --> ${destPath}")
+		CopyArchiveFromContainerCmd  copyProperties = dockerClient.copyArchiveFromContainerCmd(containerId, srcPath)
+				.withContainerId(containerId)
+				.withResource(srcPath)
+				.withHostPath(destPath)
+		execCopyFrom(copyProperties, destPath)
+	}
+
+	private execCopyTo(CopyArchiveToContainerCmd copyProperties) {
+		InputStream is
+		try {
+			is = copyProperties.exec()
+			if (is != null) {
+				String output = IOUtils.toString(is, StandardCharsets.UTF_8);
+				logger.debug("Output from copy command: ${output}")
+			}
+		} finally {
+			if (is != null) {
+				IOUtils.closeQuietly(is)
+			}
+		}
+	}
+	private execCopyFrom(CopyArchiveFromContainerCmd copyProperties, String destPath) {
+		InputStream is
+		try {
+			is = copyProperties.exec()
+			if (is != null) {
+				String output = IOUtils.toString(is, StandardCharsets.UTF_8);
+				logger.trace("Output from copy command: ${output}")
+				//				File targetFile = new File(destPath)
+				//				FileUtils.copyInputStreamToFile(is, targetFile)
+			} else {
+				logger.error("Copy failed (input stream returned is null")
+			}
+		} finally {
+			if (is != null) {
+				IOUtils.closeQuietly(is)
+			}
+		}
 	}
 
 	private void saveImage(String imageName, String tagName, File imageTarFile) {
