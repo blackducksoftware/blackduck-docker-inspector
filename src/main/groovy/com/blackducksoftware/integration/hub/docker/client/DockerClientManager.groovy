@@ -32,6 +32,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
 import com.github.dockerjava.api.DockerClient
+import com.github.dockerjava.api.command.CopyArchiveFromContainerCmd
 import com.github.dockerjava.api.command.CopyArchiveToContainerCmd
 import com.github.dockerjava.api.command.CreateContainerCmd
 import com.github.dockerjava.api.command.CreateContainerResponse
@@ -193,6 +194,7 @@ class DockerClientManager {
 
 		String cmd = programPaths.getHubDockerPgmDirPath() + INSPECTOR_COMMAND
 		execCommandInContainer(dockerClient, imageId, containerId, cmd, tarFilePathInSubContainer)
+		copyFileFromContainer(dockerClient, containerId, programPaths.getHubDockerOutputJsonPath(), programPaths.getHubDockerWorkingDirPath())
 	}
 
 	private String deriveContainerName(String imageName) {
@@ -222,6 +224,12 @@ class DockerClientManager {
 	private void copyFileToContainer(DockerClient dockerClient, String containerId, String srcPath, String destPath) {
 		logger.info("Copying ${srcPath} to container ${containerId}: ${destPath}")
 		CopyArchiveToContainerCmd  copyProperties = dockerClient.copyArchiveToContainerCmd(containerId).withHostResource(srcPath).withRemotePath(destPath)
+		copyProperties.exec()
+	}
+
+	private void copyFileFromContainer(DockerClient dockerClient, String containerId, String srcPath, String destPath) {
+		logger.info("Copying ${srcPath} from container ${containerId} to: ${destPath}")
+		CopyArchiveFromContainerCmd  copyProperties = dockerClient.copyArchiveFromContainerCmd(containerId, srcPath).withHostPath(destPath)
 		copyProperties.exec()
 	}
 

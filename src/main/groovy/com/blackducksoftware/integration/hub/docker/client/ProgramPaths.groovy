@@ -45,6 +45,9 @@ class ProgramPaths {
 	private String hubDockerConfigFilePath
 	private String hubDockerTargetDirPath
 	private String hubDockerJarPath
+	private String hubDockerWorkingDirPath
+	private String hubDockerOutputJsonPath
+
 	private boolean initDone = false
 
 	private void init() {
@@ -61,6 +64,8 @@ class ProgramPaths {
 		hubDockerConfigDirPath = hubDockerPgmDirPath + "config/"
 		hubDockerConfigFilePath = hubDockerConfigDirPath + APPLICATION_PROPERTIES_FILENAME
 		hubDockerTargetDirPath = hubDockerPgmDirPath + "target/"
+		hubDockerWorkingDirPath = hubDockerPgmDirPath + "working/"
+		hubDockerOutputJsonPath = hubDockerWorkingDirPath + "output_bdio.jsonld"
 
 		String qualifiedJarPathString = getQualifiedJarPath()
 		logger.debug("qualifiedJarPathString: ${qualifiedJarPathString}")
@@ -103,5 +108,13 @@ class ProgramPaths {
 	public String getHubDockerJarPath() {
 		init()
 		return hubDockerJarPath;
+	}
+
+	public String getHubDockerWorkingDirPath() {
+		return hubDockerWorkingDirPath;
+	}
+
+	public String getHubDockerOutputJsonPath() {
+		return hubDockerOutputJsonPath;
 	}
 }
