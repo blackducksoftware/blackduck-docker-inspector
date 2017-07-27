@@ -36,6 +36,7 @@ import org.springframework.stereotype.Component
 
 import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter
 import com.blackducksoftware.integration.hub.docker.client.DockerClientManager
+import com.blackducksoftware.integration.hub.docker.client.ProgramPaths
 import com.blackducksoftware.integration.hub.docker.extractor.ExtractionDetails
 import com.blackducksoftware.integration.hub.docker.extractor.Extractor
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser
@@ -48,14 +49,14 @@ import com.google.gson.Gson
 class HubDockerManager {
 	private final Logger logger = LoggerFactory.getLogger(HubDockerManager.class)
 
-	@Value('${working.directory}')
-	String workingDirectoryPath
-
 	@Value('${linux.distro}')
 	String linuxDistro
 
 	@Autowired
 	HubClient hubClient
+
+	@Autowired
+	ProgramPaths programPaths
 
 	@Autowired
 	DockerClientManager dockerClientManager
@@ -70,7 +71,7 @@ class HubDockerManager {
 	PackageManagerFiles packageManagerFiles
 
 	void init() {
-		tarParser.workingDirectory = new File(workingDirectoryPath)
+		tarParser.workingDirectory = new File(programPaths.getHubDockerWorkingDirPath())
 	}
 
 	File getTarFileFromDockerImage(String imageName, String tagName) {
@@ -135,20 +136,20 @@ class HubDockerManager {
 	}
 
 	void cleanWorkingDirectory(){
-		File workingDirectory = new File(workingDirectoryPath)
+		File workingDirectory = new File(programPaths.getHubDockerWorkingDirPath())
 		if(workingDirectory.exists()){
 			FileUtils.deleteDirectory(workingDirectory)
 		}
 	}
 
 	void copyToWorkingDir(File fileToCopy, String newFilename) {
-		File workingDirFile = new File(workingDirectoryPath)
+		File workingDirFile = new File(programPaths.getHubDockerWorkingDirPath())
 		Path destPath = workingDirFile.toPath().resolve(newFilename)
 		Files.copy(fileToCopy.toPath(), destPath)
 	}
 
 	private List<File> generateBdioFromPackageMgrDirs(List<LayerMapping> layerMappings, String projectName, String versionName, String tarFileName, TarExtractionResults tarResults, String architecture) {
-		File workingDirectory = new File(workingDirectoryPath)
+		File workingDirectory = new File(programPaths.getHubDockerWorkingDirPath())
 		def bdioFiles = []
 		tarResults.extractionResults.each { extractionResult ->
 			def mapping = layerMappings.find { mapping ->

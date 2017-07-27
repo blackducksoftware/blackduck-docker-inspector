@@ -65,9 +65,6 @@ class DockerClientManager {
 	@Autowired
 	HubDockerProperties hubDockerProperties
 
-	@Value('${working.directory}')
-	String workingDirectoryPath
-
 	@Value('${hub.password}')
 	String hubPasswordProperty
 
@@ -81,7 +78,7 @@ class DockerClientManager {
 	String scanCliOptsEnvVar;
 
 	File getTarFileFromDockerImage(String imageName, String tagName) {
-		File imageTarDirectory = new File(new File(workingDirectoryPath), 'tarDirectory')
+		File imageTarDirectory = new File(new File(programPaths.getHubDockerWorkingDirPath()), 'tarDirectory')
 		pullImage(imageName, tagName)
 		File imageTarFile = new File(imageTarDirectory, "${imageName.replaceAll(':', '_')}_${tagName}.tar")
 		saveImage(imageName, tagName, imageTarFile)

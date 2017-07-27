@@ -26,14 +26,12 @@ package com.blackducksoftware.integration.hub.docker.client
 import org.apache.commons.lang3.StringUtils
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
 @Component
 class ProgramPaths {
 
-	@Value('${install.dir}')
-	String hubDockerPgmDirPath
+	private String hubDockerPgmDirPath
 
 	private static final String DEFAULT_PGM_DIR = "/opt/blackduck/hub-docker-inspector"
 
@@ -111,10 +109,12 @@ class ProgramPaths {
 	}
 
 	public String getHubDockerWorkingDirPath() {
+		init()
 		return hubDockerWorkingDirPath;
 	}
 
 	public String getHubDockerOutputJsonPath() {
+		init()
 		return hubDockerOutputJsonPath;
 	}
 }

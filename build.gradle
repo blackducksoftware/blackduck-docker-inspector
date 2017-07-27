@@ -40,7 +40,7 @@ def linuxFlavors = linuxFlavorsDpkg + linuxFlavorsRpm + linuxFlavorsApk
 
 Properties applicationProperties = new Properties()
 applicationProperties.load(new FileInputStream("src/main/resources/application.properties"))
-String hubDockerPgmDir = applicationProperties.getProperty("install.dir")
+String hubDockerPgmDir = '/opt/blackduck/hub-docker-inspector'
 
 springBoot { mainClass = 'com.blackducksoftware.integration.hub.docker.Application' }
 
