@@ -107,11 +107,16 @@ function installPropertiesFile() {
 	fi
 }
 
+# Usage: get_property FILE KEY
+function get_property {
+	grep "^$2=" "$1" | cut -d'=' -f2
+}
+
 ##################
 # Start script
 ##################
 version=@VERSION@
-bdioOutputPath=/tmp/myoutput/output_bdio.json
+bdioOutputPath=""
 containername=hub-docker-inspector
 imagename=hub-docker-inspector
 propdir=.
@@ -147,6 +152,13 @@ preProcessOptions "$@"
 propfile=${propdir}/application.properties
 echo "Properties file: ${propfile}"
 
+if [ -z "${bdioOutputPath}" ]
+then
+	echo "Looking in ${propfile} for bdio.output.path"
+	bdioOutputPath=$(get_property "${propfile}" "bdio.output.path")
+	echo "bdioOutputPath: ${bdioOutputPath}"
+fi
+
 options=( "$@" )
 image=${options[${#options[@]}-1]}
 unset "options[${#options[@]}-1]"
@@ -171,10 +183,18 @@ else
 	docker exec -e BD_HUB_PASSWORD -e SCAN_CLI_OPTS -e http_proxy -e https_proxy -e HTTP_PROXY -e HTTPS_PROXY -e DOCKERD_OPTS ${containername} /opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} $image
 fi
 
-if [ ! -z ${bdioOutputPath} ]
+if [ ! -z "${bdioOutputPath}" ]
 then
-	######## TODO verify it's an existing dir ###########
-	docker cp ${containername}:/opt/blackduck/hub-docker-inspector/output/. ${bdioOutputPath}
+	if [ -f "${bdioOutputPath}" ]
+	then
+		echo "ERROR: Unable to copy BDIO output file to ${bdioOutputPath} because it is an existing file"
+		exit -2
+	fi
+	if [ ! -e "${bdioOutputPath}" ]
+	then
+		mkdir -p "${bdioOutputPath}"
+	fi
+	docker cp ${containername}:/opt/blackduck/hub-docker-inspector/output/. "${bdioOutputPath}"
 fi
 
 exit 0

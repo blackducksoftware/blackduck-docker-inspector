@@ -53,7 +53,6 @@ class ProgramPaths {
 			return
 		}
 		if (StringUtils.isBlank(hubDockerPgmDirPath)) {
-			logger.info("hubDockerPgmDirPath had no value; using: ${DEFAULT_PGM_DIR}")
 			hubDockerPgmDirPath = DEFAULT_PGM_DIR;
 		}
 		if (!hubDockerPgmDirPath.endsWith("/")) {

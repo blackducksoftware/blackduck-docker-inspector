@@ -79,12 +79,13 @@ image=${options[${#options[@]}-1]}
 unset "options[${#options[@]}-1]"
 
 cd /opt/blackduck/hub-docker-inspector
+rm -rf output/*
 
 if [[ "$image" == *.tar ]]
 then
-	cmd="java -Dfile.encoding=UTF-8 -jar hub-docker-inspector-${version}.jar --working.directory=/opt/blackduck/hub-docker-inspector/working --docker.tar=$image ${options[*]}"
+	cmd="java -Dfile.encoding=UTF-8 -jar hub-docker-inspector-${version}.jar --docker.tar=$image ${options[*]}"
 else
-	cmd="java -Dfile.encoding=UTF-8 -jar hub-docker-inspector-${version}.jar --working.directory=/opt/blackduck/hub-docker-inspector/working --docker.image=$image ${options[*]}"
+	cmd="java -Dfile.encoding=UTF-8 -jar hub-docker-inspector-${version}.jar --docker.image=$image ${options[*]}"
 fi
 
 $cmd
