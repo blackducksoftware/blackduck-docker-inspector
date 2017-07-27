@@ -190,12 +190,10 @@ class DockerClientManager {
 
 		String cmd = programPaths.getHubDockerPgmDirPath() + INSPECTOR_COMMAND
 		execCommandInContainer(dockerClient, imageId, containerId, cmd, tarFilePathInSubContainer)
-		// TODO using a hack for now
-		//		copyFileFromContainer(dockerClient, containerId, programPaths.getHubDockerOutputJsonPath(), programPaths.getHubDockerOutputJsonPath())
-		copyFileFromContainerViaShell(containerId, programPaths.getHubDockerOutputJsonPath(), programPaths.getHubDockerWorkingDirPath())
+		copyFileFromContainerViaShell(containerId, programPaths.getHubDockerOutputJsonPath() + ".", programPaths.getHubDockerOutputJsonPath())
 	}
 
-	// TODO this is a hack, and probably handles errors poorly
+	// TODO this is kind of a hack, and probably handles errors poorly
 	private void copyFileFromContainerViaShell(String containerId, String fromPath, String toPath) {
 		logger.debug("Copying ${fromPath} from container to ${toPath} via shell command")
 		def sout = new StringBuilder(), serr = new StringBuilder()
@@ -235,7 +233,7 @@ class DockerClientManager {
 		execCopyTo(copyProperties)
 	}
 
-	// TODO this prepends some garbage to the file
+	// TODO Not used; this prepends some garbage to the file
 	private void copyFileFromContainer(DockerClient dockerClient, String containerId, String srcPath, String destPath) {
 		logger.info("Copying ${srcPath} from container ${containerId} --> ${destPath}")
 		CopyArchiveFromContainerCmd  copyProperties = dockerClient.copyArchiveFromContainerCmd(containerId, srcPath)

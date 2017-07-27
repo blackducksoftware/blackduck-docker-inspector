@@ -173,10 +173,8 @@ fi
 
 if [ ! -z ${bdioOutputPath} ]
 then
-	tempDir=$(mktemp -d)
-	docker cp ${containername}:/opt/blackduck/hub-docker-inspector/working/output_bdio.jsonld ${tempDir}
-	mv ${tempDir}/output_bdio.jsonld ${bdioOutputPath}
-	rm -rf ${tempDir}
+	######## TODO verify it's an existing dir ###########
+	docker cp ${containername}:/opt/blackduck/hub-docker-inspector/output/. ${bdioOutputPath}
 fi
 
 exit 0

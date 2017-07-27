@@ -142,9 +142,10 @@ class HubDockerManager {
 		}
 	}
 
-	void copyToWorkingDir(File fileToCopy, String newFilename) {
-		File workingDirFile = new File(programPaths.getHubDockerWorkingDirPath())
-		Path destPath = workingDirFile.toPath().resolve(newFilename)
+	void copyFile(File fileToCopy, File destination) {
+		String filename = fileToCopy.getName()
+		logger.debug("Copying ${fileToCopy.getAbsolutePath()} to ${destination.getAbsolutePath()}")
+		Path destPath = destination.toPath().resolve(filename)
 		Files.copy(fileToCopy.toPath(), destPath)
 	}
 

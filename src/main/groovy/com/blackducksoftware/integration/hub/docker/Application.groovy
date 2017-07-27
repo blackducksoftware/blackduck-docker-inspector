@@ -35,6 +35,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.builder.SpringApplicationBuilder
 
 import com.blackducksoftware.integration.hub.docker.client.DockerClientManager
+import com.blackducksoftware.integration.hub.docker.client.ProgramPaths
 import com.blackducksoftware.integration.hub.docker.client.ProgramVersion
 import com.blackducksoftware.integration.hub.docker.image.DockerImages
 import com.blackducksoftware.integration.hub.docker.tar.LayerMapping
@@ -78,6 +79,9 @@ class Application {
 
 	@Autowired
 	ProgramVersion programVersion
+
+	@Autowired
+	ProgramPaths programPaths
 
 	String dockerImageName
 	String dockerTagName
@@ -142,7 +146,8 @@ class Application {
 				logger.debug("Uploading BDIO to Hub")
 				hubDockerManager.uploadBdioFiles(bdioFiles)
 			}
-			hubDockerManager.copyToWorkingDir(bdioFiles.get(0), "output_bdio.jsonld")
+			File outputDir = new File(programPaths.getHubDockerOutputJsonPath())
+			hubDockerManager.copyFile(bdioFiles.get(0), outputDir)
 		}
 	}
 

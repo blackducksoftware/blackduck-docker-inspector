@@ -63,7 +63,7 @@ class ProgramPaths {
 		hubDockerConfigFilePath = hubDockerConfigDirPath + APPLICATION_PROPERTIES_FILENAME
 		hubDockerTargetDirPath = hubDockerPgmDirPath + "target/"
 		hubDockerWorkingDirPath = hubDockerPgmDirPath + "working/"
-		hubDockerOutputJsonPath = hubDockerWorkingDirPath + "output_bdio.jsonld"
+		hubDockerOutputJsonPath = hubDockerPgmDirPath + "output/"
 
 		String qualifiedJarPathString = getQualifiedJarPath()
 		logger.debug("qualifiedJarPathString: ${qualifiedJarPathString}")

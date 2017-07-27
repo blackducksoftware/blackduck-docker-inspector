@@ -143,6 +143,7 @@ task createApkDockerfileTasks() {
             runCommand "mkdir ${hubDockerPgmDir}/config"
             runCommand "mkdir ${hubDockerPgmDir}/working"
             runCommand "mkdir ${hubDockerPgmDir}/target"
+			runCommand "mkdir ${hubDockerPgmDir}/output"
             addFile('config', "${hubDockerPgmDir}/config")
             addFile("${project.name}-${version}.jar", "/opt/blackduck/${hubDockerImageName}")
             addFile("hub-docker-inspector-launcher.sh", "/opt/blackduck/${hubDockerImageName}")
@@ -169,6 +170,7 @@ task createRpmDockerfileTasks() {
             runCommand "mkdir ${hubDockerPgmDir}/config"
             runCommand "mkdir ${hubDockerPgmDir}/working"
             runCommand "mkdir ${hubDockerPgmDir}/target"
+			runCommand "mkdir ${hubDockerPgmDir}/output"
             addFile('config', "${hubDockerPgmDir}/config")
             addFile("${project.name}-${version}.jar", "/opt/blackduck/${hubDockerImageName}")
             addFile("hub-docker-inspector-launcher.sh", "/opt/blackduck/${hubDockerImageName}")
@@ -221,6 +223,7 @@ task createDpkgDockerfileTasks() {
             runCommand "mkdir ${hubDockerPgmDir}/working"
 			runCommand "mkdir ${hubDockerPgmDir}/template"
             runCommand "mkdir ${hubDockerPgmDir}/target"
+			runCommand "mkdir ${hubDockerPgmDir}/output"
             addFile('config', "${hubDockerPgmDir}/config")
             addFile("${project.name}-${version}.jar", "/opt/blackduck/${hubDockerImageName}")
             addFile("hub-docker-inspector-launcher.sh", "/opt/blackduck/${hubDockerImageName}")
