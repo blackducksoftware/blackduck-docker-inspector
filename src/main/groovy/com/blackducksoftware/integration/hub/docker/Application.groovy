@@ -61,6 +61,9 @@ class Application {
 	@Value('${hub.project.version}')
 	String hubVersionName
 
+	@Value('${dry.run}')
+	boolean dryRun
+
 	@Autowired
 	HubClient hubClient
 
@@ -133,7 +136,12 @@ class Application {
 		if (bdioFiles.size() == 0) {
 			logger.warn("No BDIO Files generated")
 		} else {
-			hubDockerManager.uploadBdioFiles(bdioFiles)
+			if (dryRun) {
+				logger.info("Running in dry run mode; not uploading BDIO to Hub")
+			} else {
+				logger.debug("Uploading BDIO to Hub")
+				hubDockerManager.uploadBdioFiles(bdioFiles)
+			}
 			hubDockerManager.copyToWorkingDir(bdioFiles.get(0), "output_bdio.jsonld")
 		}
 	}

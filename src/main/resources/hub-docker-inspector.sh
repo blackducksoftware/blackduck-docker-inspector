@@ -54,7 +54,7 @@ function preProcessOptions() {
 		then
 			hub_password_set_on_cmd_line=true
 		fi
-		if [[ $cmdlinearg == --bdio-output-path=* ]]
+		if [[ $cmdlinearg == --bdio.output.path=* ]]
 		then
 			bdioOutputPath=$(echo $cmdlinearg | cut -d '=' -f 2)
 		fi
