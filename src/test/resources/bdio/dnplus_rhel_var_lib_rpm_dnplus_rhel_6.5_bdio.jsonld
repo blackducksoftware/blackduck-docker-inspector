@@ -1,0 +1,6321 @@
+[
+  {
+    "specVersion": "1.1.0",
+    "spdx:name": "dnplus_rhel_6.5_var_lib_rpm_RPM",
+    "@id": "uuid:87427af8-68a5-4e67-845b-731320e51dc7",
+    "@type": "BillOfMaterials",
+    "relationship": []
+  },
+  {
+    "name": "dnplus_rhel",
+    "revision": "6.5",
+    "@id": "com.blackducksoftware.integration.hub.bdio.simple.model.BdioExternalIdentifier@6379eb",
+    "@type": "Project",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "dnplus_rhel/6.5"
+    },
+    "relationship": [
+      {
+        "related": "data:basesystem/10.0-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:basesystem/10.0-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:basesystem/10.0-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:nss-softokn-freebl/3.14.3-9.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:nss-softokn-freebl/3.14.3-9.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:nss-softokn-freebl/3.14.3-9.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libattr/2.4.44-7.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libattr/2.4.44-7.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libattr/2.4.44-7.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:compat-db42/4.2.52-15.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:compat-db42/4.2.52-15.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:compat-db42/4.2.52-15.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libstdc++/4.4.7-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libstdc++/4.4.7-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libstdc++/4.4.7-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:zlib/1.2.3-29.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:zlib/1.2.3-29.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:zlib/1.2.3-29.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:bc/1.06.95-1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:bc/1.06.95-1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:bc/1.06.95-1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:tar/1.23-11.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:tar/1.23-11.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:tar/1.23-11.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:audit-libs/2.2-2.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:audit-libs/2.2-2.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:audit-libs/2.2-2.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:chkconfig/1.3.49.3-2.el6_4.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:chkconfig/1.3.49.3-2.el6_4.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:chkconfig/1.3.49.3-2.el6_4.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libidn/1.18-2.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libidn/1.18-2.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libidn/1.18-2.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:elfutils-libelf/0.152-1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:elfutils-libelf/0.152-1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:elfutils-libelf/0.152-1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:xz-libs/4.999.9-0.3.beta.20091007git.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:xz-libs/4.999.9-0.3.beta.20091007git.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:xz-libs/4.999.9-0.3.beta.20091007git.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:p11-kit-trust/0.18.5-2.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:p11-kit-trust/0.18.5-2.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:p11-kit-trust/0.18.5-2.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:upstart/0.6.5-12.el6_4.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:upstart/0.6.5-12.el6_4.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:upstart/0.6.5-12.el6_4.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:findutils/4.4.2-6.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:findutils/4.4.2-6.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:findutils/4.4.2-6.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:mingetty/1.08-5.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:mingetty/1.08-5.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:mingetty/1.08-5.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsemanage/2.0.43-4.2.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsemanage/2.0.43-4.2.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsemanage/2.0.43-4.2.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:psmisc/22.6-15.el6_0.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:psmisc/22.6-15.el6_0.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:psmisc/22.6-15.el6_0.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:net-tools/1.60-110.el6_2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:net-tools/1.60-110.el6_2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:net-tools/1.60-110.el6_2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ncurses/5.7-3.20090208.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ncurses/5.7-3.20090208.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ncurses/5.7-3.20090208.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:gzip/1.3.12-19.el6_4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:gzip/1.3.12-19.el6_4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:gzip/1.3.12-19.el6_4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:coreutils/8.4-31.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:coreutils/8.4-31.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:coreutils/8.4-31.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:nss/3.15.1-15.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:nss/3.15.1-15.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:nss/3.15.1-15.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcurl/7.19.7-37.el6_4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcurl/7.19.7-37.el6_4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcurl/7.19.7-37.el6_4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:logrotate/3.7.8-17.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:logrotate/3.7.8-17.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:logrotate/3.7.8-17.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:module-init-tools/3.9-21.el6_4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:module-init-tools/3.9-21.el6_4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:module-init-tools/3.9-21.el6_4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:glib2/2.26.1-3.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:glib2/2.26.1-3.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:glib2/2.26.1-3.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:procps/3.2.8-25.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:procps/3.2.8-25.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:procps/3.2.8-25.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:iputils/20071127-17.el6_4.2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:iputils/20071127-17.el6_4.2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:iputils/20071127-17.el6_4.2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:rsyslog/5.8.10-8.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:rsyslog/5.8.10-8.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:rsyslog/5.8.10-8.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:cronie/1.4.4-12.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:cronie/1.4.4-12.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:cronie/1.4.4-12.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:gdbm/1.8.0-36.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:gdbm/1.8.0-36.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:gdbm/1.8.0-36.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:perl-version/0.77-136.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:perl-version/0.77-136.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:perl-version/0.77-136.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:unzip/6.0-1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:unzip/6.0-1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:unzip/6.0-1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:filesystem/2.4.30-3.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:filesystem/2.4.30-3.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:filesystem/2.4.30-3.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:glibc-common/2.12-1.132.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:glibc-common/2.12-1.132.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:glibc-common/2.12-1.132.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:bash/4.1.2-15.el6_4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:bash/4.1.2-15.el6_4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:bash/4.1.2-15.el6_4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libstdc++/4.4.7-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libstdc++/4.4.7-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libstdc++/4.4.7-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:glibc/2.12-1.132.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:glibc/2.12-1.132.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:glibc/2.12-1.132.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libaio/0.3.107-10.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libaio/0.3.107-10.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libaio/0.3.107-10.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:readline/6.0-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:readline/6.0-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:readline/6.0-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libacl/2.2.49-6.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libacl/2.2.49-6.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libacl/2.2.49-6.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:nss-util/3.15.1-3.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:nss-util/3.15.1-3.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:nss-util/3.15.1-3.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:popt/1.13-7.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:popt/1.13-7.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:popt/1.13-7.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:cyrus-sasl-lib/2.1.23-13.el6_3.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:cyrus-sasl-lib/2.1.23-13.el6_3.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:cyrus-sasl-lib/2.1.23-13.el6_3.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libuuid/2.17.2-12.14.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libuuid/2.17.2-12.14.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libuuid/2.17.2-12.14.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:file-libs/5.04-15.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:file-libs/5.04-15.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:file-libs/5.04-15.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:lua/5.1.4-4.1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:lua/5.1.4-4.1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:lua/5.1.4-4.1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libnih/1.0.1-7.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libnih/1.0.1-7.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libnih/1.0.1-7.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:db4-utils/4.7.25-18.el6_4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:db4-utils/4.7.25-18.el6_4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:db4-utils/4.7.25-18.el6_4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:tcp_wrappers-libs/7.6-57.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:tcp_wrappers-libs/7.6-57.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:tcp_wrappers-libs/7.6-57.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ustr/1.0.4-9.1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ustr/1.0.4-9.1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ustr/1.0.4-9.1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ethtool/3.5-1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ethtool/3.5-1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ethtool/3.5-1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:pkgconfig/0.23-9.1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:pkgconfig/0.23-9.1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:pkgconfig/0.23-9.1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:krb5-libs/1.10.3-10.el6_4.6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:krb5-libs/1.10.3-10.el6_4.6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:krb5-libs/1.10.3-10.el6_4.6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:less/436-10.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:less/436-10.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:less/436-10.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:coreutils-libs/8.4-31.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:coreutils-libs/8.4-31.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:coreutils-libs/8.4-31.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libssh2/1.4.2-1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libssh2/1.4.2-1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libssh2/1.4.2-1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:openldap/2.4.23-32.el6_4.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:openldap/2.4.23-32.el6_4.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:openldap/2.4.23-32.el6_4.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:rpm/4.8.0-37.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:rpm/4.8.0-37.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:rpm/4.8.0-37.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:binutils/2.20.51.0.2-5.36.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:binutils/2.20.51.0.2-5.36.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:binutils/2.20.51.0.2-5.36.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:shared-mime-info/0.70-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:shared-mime-info/0.70-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:shared-mime-info/0.70-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:diffutils/2.8.1-28.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:diffutils/2.8.1-28.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:diffutils/2.8.1-28.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:iproute/2.6.32-31.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:iproute/2.6.32-31.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:iproute/2.6.32-31.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:udev/147-2.51.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:udev/147-2.51.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:udev/147-2.51.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:cronie-noanacron/1.4.4-12.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:cronie-noanacron/1.4.4-12.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:cronie-noanacron/1.4.4-12.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libaio-devel/0.3.107-10.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libaio-devel/0.3.107-10.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libaio-devel/0.3.107-10.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:perl-Pod-Simple/3.13-136.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:perl-Pod-Simple/3.13-136.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:perl-Pod-Simple/3.13-136.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libaio/0.3.107-10.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libaio/0.3.107-10.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libaio/0.3.107-10.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libgcc/4.4.7-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libgcc/4.4.7-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libgcc/4.4.7-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:tzdata/2013g-1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:tzdata/2013g-1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:tzdata/2013g-1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ncurses-libs/5.7-3.20090208.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ncurses-libs/5.7-3.20090208.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ncurses-libs/5.7-3.20090208.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:compat-libstdc++-33/3.2.3-69.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:compat-libstdc++-33/3.2.3-69.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:compat-libstdc++-33/3.2.3-69.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:nss-softokn-freebl/3.14.3-9.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:nss-softokn-freebl/3.14.3-9.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:nss-softokn-freebl/3.14.3-9.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:zlib/1.2.3-29.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:zlib/1.2.3-29.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:zlib/1.2.3-29.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:gawk/3.1.7-10.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:gawk/3.1.7-10.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:gawk/3.1.7-10.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libselinux/2.0.94-5.3.el6_4.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libselinux/2.0.94-5.3.el6_4.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libselinux/2.0.94-5.3.el6_4.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:db4/4.7.25-18.el6_4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:db4/4.7.25-18.el6_4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:db4/4.7.25-18.el6_4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:sed/4.2.1-10.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:sed/4.2.1-10.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:sed/4.2.1-10.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:dbus-libs/1.2.24-7.el6_3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:dbus-libs/1.2.24-7.el6_3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:dbus-libs/1.2.24-7.el6_3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:sysvinit-tools/2.87-5.dsf.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:sysvinit-tools/2.87-5.dsf.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:sysvinit-tools/2.87-5.dsf.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:grep/2.6.3-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:grep/2.6.3-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:grep/2.6.3-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:p11-kit/0.18.5-2.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:p11-kit/0.18.5-2.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:p11-kit/0.18.5-2.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libblkid/2.17.2-12.14.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libblkid/2.17.2-12.14.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libblkid/2.17.2-12.14.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:MAKEDEV/3.24-6.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:MAKEDEV/3.24-6.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:MAKEDEV/3.24-6.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:procmail/3.22-25.1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:procmail/3.22-25.1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:procmail/3.22-25.1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libusb/0.1.12-23.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libusb/0.1.12-23.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libusb/0.1.12-23.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:nss-softokn/3.14.3-9.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:nss-softokn/3.14.3-9.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:nss-softokn/3.14.3-9.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:expat/2.0.1-11.el6_2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:expat/2.0.1-11.el6_2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:expat/2.0.1-11.el6_2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:keyutils-libs/1.4-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:keyutils-libs/1.4-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:keyutils-libs/1.4-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:groff/1.18.1.4-21.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:groff/1.18.1.4-21.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:groff/1.18.1.4-21.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:cracklib-dicts/2.8.16-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:cracklib-dicts/2.8.16-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:cracklib-dicts/2.8.16-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:openssl/1.0.1e-15.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:openssl/1.0.1e-15.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:openssl/1.0.1e-15.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:nss-tools/3.15.1-15.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:nss-tools/3.15.1-15.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:nss-tools/3.15.1-15.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:rpm-libs/4.8.0-37.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:rpm-libs/4.8.0-37.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:rpm-libs/4.8.0-37.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:redhat-release-server/6Server-6.5.0.1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:redhat-release-server/6Server-6.5.0.1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:redhat-release-server/6Server-6.5.0.1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libxml2/2.7.6-14.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libxml2/2.7.6-14.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libxml2/2.7.6-14.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:dbus-glib/0.86-6.el6_4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:dbus-glib/0.86-6.el6_4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:dbus-glib/0.86-6.el6_4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:iptables/1.4.7-11.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:iptables/1.4.7-11.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:iptables/1.4.7-11.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:initscripts/9.03.40-2.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:initscripts/9.03.40-2.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:initscripts/9.03.40-2.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:sendmail/8.14.4-8.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:sendmail/8.14.4-8.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:sendmail/8.14.4-8.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:which/2.19-6.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:which/2.19-6.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:which/2.19-6.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:perl-libs/5.10.1-136.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:perl-libs/5.10.1-136.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:perl-libs/5.10.1-136.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:perl/5.10.1-136.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:perl/5.10.1-136.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:perl/5.10.1-136.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:setup/2.8.14-20.el6_4.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:setup/2.8.14-20.el6_4.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:setup/2.8.14-20.el6_4.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ncurses-base/5.7-3.20090208.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ncurses-base/5.7-3.20090208.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ncurses-base/5.7-3.20090208.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:glibc/2.12-1.132.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:glibc/2.12-1.132.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:glibc/2.12-1.132.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcap/2.16-5.5.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcap/2.16-5.5.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcap/2.16-5.5.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libgcc/4.4.7-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libgcc/4.4.7-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libgcc/4.4.7-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ncurses-libs/5.7-3.20090208.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ncurses-libs/5.7-3.20090208.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ncurses-libs/5.7-3.20090208.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:info/4.13a-8.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:info/4.13a-8.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:info/4.13a-8.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsepol/2.0.41-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsepol/2.0.41-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsepol/2.0.41-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:nspr/4.10.0-1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:nspr/4.10.0-1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:nspr/4.10.0-1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:shadow-utils/4.1.4.2-13.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:shadow-utils/4.1.4.2-13.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:shadow-utils/4.1.4.2-13.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcom_err/1.41.12-18.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcom_err/1.41.12-18.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcom_err/1.41.12-18.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:bzip2-libs/1.0.5-7.el6_0",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:bzip2-libs/1.0.5-7.el6_0",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:bzip2-libs/1.0.5-7.el6_0",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:pcre/7.8-6.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:pcre/7.8-6.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:pcre/7.8-6.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libtasn1/2.3-3.el6_2.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libtasn1/2.3-3.el6_2.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libtasn1/2.3-3.el6_2.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ca-certificates/2013.1.94-65.0.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ca-certificates/2013.1.94-65.0.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ca-certificates/2013.1.94-65.0.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libutempter/1.1.5-4.1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libutempter/1.1.5-4.1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libutempter/1.1.5-4.1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:cpio/2.10-11.el6_3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:cpio/2.10-11.el6_3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:cpio/2.10-11.el6_3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:checkpolicy/2.0.22-1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:checkpolicy/2.0.22-1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:checkpolicy/2.0.22-1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:sqlite/3.6.20-1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:sqlite/3.6.20-1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:sqlite/3.6.20-1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:make/3.81-20.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:make/3.81-20.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:make/3.81-20.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libselinux-utils/2.0.94-5.3.el6_4.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libselinux-utils/2.0.94-5.3.el6_4.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libselinux-utils/2.0.94-5.3.el6_4.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:gmp/4.3.1-7.el6_2.2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:gmp/4.3.1-7.el6_2.2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:gmp/4.3.1-7.el6_2.2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:cracklib/2.8.16-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:cracklib/2.8.16-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:cracklib/2.8.16-4.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:pam/1.1.1-17.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:pam/1.1.1-17.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:pam/1.1.1-17.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:nss-sysinit/3.15.1-15.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:nss-sysinit/3.15.1-15.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:nss-sysinit/3.15.1-15.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:curl/7.19.7-37.el6_4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:curl/7.19.7-37.el6_4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:curl/7.19.7-37.el6_4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:hesiod/3.1.0-19.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:hesiod/3.1.0-19.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:hesiod/3.1.0-19.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:hwdata/0.233-9.1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:hwdata/0.233-9.1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:hwdata/0.233-9.1.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:gamin/0.1.10-9.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:gamin/0.1.10-9.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:gamin/0.1.10-9.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:policycoreutils/2.0.83-19.39.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:policycoreutils/2.0.83-19.39.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:policycoreutils/2.0.83-19.39.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:util-linux-ng/2.17.2-12.14.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:util-linux-ng/2.17.2-12.14.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:util-linux-ng/2.17.2-12.14.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:cyrus-sasl/2.1.23-13.el6_3.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:cyrus-sasl/2.1.23-13.el6_3.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:cyrus-sasl/2.1.23-13.el6_3.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:crontabs/1.10-33.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:crontabs/1.10-33.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:crontabs/1.10-33.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:perl-Pod-Escapes/1.04-136.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:perl-Pod-Escapes/1.04-136.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:perl-Pod-Escapes/1.04-136.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:perl-Module-Pluggable/3.90-136.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:perl-Module-Pluggable/3.90-136.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:perl-Module-Pluggable/3.90-136.el6",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "basesystem",
+    "revision": "10.0-4.el6",
+    "@id": "data:basesystem/10.0-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "basesystem/10.0-4.el6/noarch"
+    },
+    "relationship": []
+  },
+  {
+    "name": "basesystem",
+    "revision": "10.0-4.el6",
+    "@id": "data:basesystem/10.0-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "basesystem/10.0-4.el6/noarch"
+    },
+    "relationship": []
+  },
+  {
+    "name": "basesystem",
+    "revision": "10.0-4.el6",
+    "@id": "data:basesystem/10.0-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "basesystem/10.0-4.el6/noarch"
+    },
+    "relationship": []
+  },
+  {
+    "name": "nss-softokn-freebl",
+    "revision": "3.14.3-9.el6",
+    "@id": "data:nss-softokn-freebl/3.14.3-9.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "nss-softokn-freebl/3.14.3-9.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "nss-softokn-freebl",
+    "revision": "3.14.3-9.el6",
+    "@id": "data:nss-softokn-freebl/3.14.3-9.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "nss-softokn-freebl/3.14.3-9.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "nss-softokn-freebl",
+    "revision": "3.14.3-9.el6",
+    "@id": "data:nss-softokn-freebl/3.14.3-9.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "nss-softokn-freebl/3.14.3-9.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libattr",
+    "revision": "2.4.44-7.el6",
+    "@id": "data:libattr/2.4.44-7.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "libattr/2.4.44-7.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libattr",
+    "revision": "2.4.44-7.el6",
+    "@id": "data:libattr/2.4.44-7.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "libattr/2.4.44-7.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libattr",
+    "revision": "2.4.44-7.el6",
+    "@id": "data:libattr/2.4.44-7.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "libattr/2.4.44-7.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "compat-db42",
+    "revision": "4.2.52-15.el6",
+    "@id": "data:compat-db42/4.2.52-15.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "compat-db42/4.2.52-15.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "compat-db42",
+    "revision": "4.2.52-15.el6",
+    "@id": "data:compat-db42/4.2.52-15.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "compat-db42/4.2.52-15.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "compat-db42",
+    "revision": "4.2.52-15.el6",
+    "@id": "data:compat-db42/4.2.52-15.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "compat-db42/4.2.52-15.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libstdc++",
+    "revision": "4.4.7-4.el6",
+    "@id": "data:libstdc++/4.4.7-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "libstdc++/4.4.7-4.el6/i686"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libstdc++",
+    "revision": "4.4.7-4.el6",
+    "@id": "data:libstdc++/4.4.7-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "libstdc++/4.4.7-4.el6/i686"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libstdc++",
+    "revision": "4.4.7-4.el6",
+    "@id": "data:libstdc++/4.4.7-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "libstdc++/4.4.7-4.el6/i686"
+    },
+    "relationship": []
+  },
+  {
+    "name": "zlib",
+    "revision": "1.2.3-29.el6",
+    "@id": "data:zlib/1.2.3-29.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "zlib/1.2.3-29.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "zlib",
+    "revision": "1.2.3-29.el6",
+    "@id": "data:zlib/1.2.3-29.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "zlib/1.2.3-29.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "zlib",
+    "revision": "1.2.3-29.el6",
+    "@id": "data:zlib/1.2.3-29.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "zlib/1.2.3-29.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "bc",
+    "revision": "1.06.95-1.el6",
+    "@id": "data:bc/1.06.95-1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "bc/1.06.95-1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "bc",
+    "revision": "1.06.95-1.el6",
+    "@id": "data:bc/1.06.95-1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "bc/1.06.95-1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "bc",
+    "revision": "1.06.95-1.el6",
+    "@id": "data:bc/1.06.95-1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "bc/1.06.95-1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "tar",
+    "revision": "1.23-11.el6",
+    "@id": "data:tar/1.23-11.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "tar/1.23-11.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "tar",
+    "revision": "1.23-11.el6",
+    "@id": "data:tar/1.23-11.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "tar/1.23-11.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "tar",
+    "revision": "1.23-11.el6",
+    "@id": "data:tar/1.23-11.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "tar/1.23-11.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "audit-libs",
+    "revision": "2.2-2.el6",
+    "@id": "data:audit-libs/2.2-2.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "audit-libs/2.2-2.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "audit-libs",
+    "revision": "2.2-2.el6",
+    "@id": "data:audit-libs/2.2-2.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "audit-libs/2.2-2.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "audit-libs",
+    "revision": "2.2-2.el6",
+    "@id": "data:audit-libs/2.2-2.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "audit-libs/2.2-2.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "chkconfig",
+    "revision": "1.3.49.3-2.el6_4.1",
+    "@id": "data:chkconfig/1.3.49.3-2.el6_4.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "chkconfig/1.3.49.3-2.el6_4.1/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "chkconfig",
+    "revision": "1.3.49.3-2.el6_4.1",
+    "@id": "data:chkconfig/1.3.49.3-2.el6_4.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "chkconfig/1.3.49.3-2.el6_4.1/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "chkconfig",
+    "revision": "1.3.49.3-2.el6_4.1",
+    "@id": "data:chkconfig/1.3.49.3-2.el6_4.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "chkconfig/1.3.49.3-2.el6_4.1/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libidn",
+    "revision": "1.18-2.el6",
+    "@id": "data:libidn/1.18-2.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "libidn/1.18-2.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libidn",
+    "revision": "1.18-2.el6",
+    "@id": "data:libidn/1.18-2.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "libidn/1.18-2.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libidn",
+    "revision": "1.18-2.el6",
+    "@id": "data:libidn/1.18-2.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "libidn/1.18-2.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "elfutils-libelf",
+    "revision": "0.152-1.el6",
+    "@id": "data:elfutils-libelf/0.152-1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "elfutils-libelf/0.152-1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "elfutils-libelf",
+    "revision": "0.152-1.el6",
+    "@id": "data:elfutils-libelf/0.152-1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "elfutils-libelf/0.152-1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "elfutils-libelf",
+    "revision": "0.152-1.el6",
+    "@id": "data:elfutils-libelf/0.152-1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "elfutils-libelf/0.152-1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "xz-libs",
+    "revision": "4.999.9-0.3.beta.20091007git.el6",
+    "@id": "data:xz-libs/4.999.9-0.3.beta.20091007git.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "xz-libs/4.999.9-0.3.beta.20091007git.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "xz-libs",
+    "revision": "4.999.9-0.3.beta.20091007git.el6",
+    "@id": "data:xz-libs/4.999.9-0.3.beta.20091007git.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "xz-libs/4.999.9-0.3.beta.20091007git.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "xz-libs",
+    "revision": "4.999.9-0.3.beta.20091007git.el6",
+    "@id": "data:xz-libs/4.999.9-0.3.beta.20091007git.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "xz-libs/4.999.9-0.3.beta.20091007git.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "p11-kit-trust",
+    "revision": "0.18.5-2.el6",
+    "@id": "data:p11-kit-trust/0.18.5-2.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "p11-kit-trust/0.18.5-2.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "p11-kit-trust",
+    "revision": "0.18.5-2.el6",
+    "@id": "data:p11-kit-trust/0.18.5-2.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "p11-kit-trust/0.18.5-2.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "p11-kit-trust",
+    "revision": "0.18.5-2.el6",
+    "@id": "data:p11-kit-trust/0.18.5-2.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "p11-kit-trust/0.18.5-2.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "upstart",
+    "revision": "0.6.5-12.el6_4.1",
+    "@id": "data:upstart/0.6.5-12.el6_4.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "upstart/0.6.5-12.el6_4.1/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "upstart",
+    "revision": "0.6.5-12.el6_4.1",
+    "@id": "data:upstart/0.6.5-12.el6_4.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "upstart/0.6.5-12.el6_4.1/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "upstart",
+    "revision": "0.6.5-12.el6_4.1",
+    "@id": "data:upstart/0.6.5-12.el6_4.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "upstart/0.6.5-12.el6_4.1/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "findutils",
+    "revision": "4.4.2-6.el6",
+    "@id": "data:findutils/4.4.2-6.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "findutils/4.4.2-6.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "findutils",
+    "revision": "4.4.2-6.el6",
+    "@id": "data:findutils/4.4.2-6.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "findutils/4.4.2-6.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "findutils",
+    "revision": "4.4.2-6.el6",
+    "@id": "data:findutils/4.4.2-6.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "findutils/4.4.2-6.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "mingetty",
+    "revision": "1.08-5.el6",
+    "@id": "data:mingetty/1.08-5.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "mingetty/1.08-5.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "mingetty",
+    "revision": "1.08-5.el6",
+    "@id": "data:mingetty/1.08-5.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "mingetty/1.08-5.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "mingetty",
+    "revision": "1.08-5.el6",
+    "@id": "data:mingetty/1.08-5.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "mingetty/1.08-5.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsemanage",
+    "revision": "2.0.43-4.2.el6",
+    "@id": "data:libsemanage/2.0.43-4.2.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "libsemanage/2.0.43-4.2.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsemanage",
+    "revision": "2.0.43-4.2.el6",
+    "@id": "data:libsemanage/2.0.43-4.2.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "libsemanage/2.0.43-4.2.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsemanage",
+    "revision": "2.0.43-4.2.el6",
+    "@id": "data:libsemanage/2.0.43-4.2.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "libsemanage/2.0.43-4.2.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "psmisc",
+    "revision": "22.6-15.el6_0.1",
+    "@id": "data:psmisc/22.6-15.el6_0.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "psmisc/22.6-15.el6_0.1/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "psmisc",
+    "revision": "22.6-15.el6_0.1",
+    "@id": "data:psmisc/22.6-15.el6_0.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "psmisc/22.6-15.el6_0.1/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "psmisc",
+    "revision": "22.6-15.el6_0.1",
+    "@id": "data:psmisc/22.6-15.el6_0.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "psmisc/22.6-15.el6_0.1/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "net-tools",
+    "revision": "1.60-110.el6_2",
+    "@id": "data:net-tools/1.60-110.el6_2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "net-tools/1.60-110.el6_2/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "net-tools",
+    "revision": "1.60-110.el6_2",
+    "@id": "data:net-tools/1.60-110.el6_2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "net-tools/1.60-110.el6_2/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "net-tools",
+    "revision": "1.60-110.el6_2",
+    "@id": "data:net-tools/1.60-110.el6_2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "net-tools/1.60-110.el6_2/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ncurses",
+    "revision": "5.7-3.20090208.el6",
+    "@id": "data:ncurses/5.7-3.20090208.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "ncurses/5.7-3.20090208.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ncurses",
+    "revision": "5.7-3.20090208.el6",
+    "@id": "data:ncurses/5.7-3.20090208.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "ncurses/5.7-3.20090208.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ncurses",
+    "revision": "5.7-3.20090208.el6",
+    "@id": "data:ncurses/5.7-3.20090208.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "ncurses/5.7-3.20090208.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "gzip",
+    "revision": "1.3.12-19.el6_4",
+    "@id": "data:gzip/1.3.12-19.el6_4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "gzip/1.3.12-19.el6_4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "gzip",
+    "revision": "1.3.12-19.el6_4",
+    "@id": "data:gzip/1.3.12-19.el6_4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "gzip/1.3.12-19.el6_4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "gzip",
+    "revision": "1.3.12-19.el6_4",
+    "@id": "data:gzip/1.3.12-19.el6_4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "gzip/1.3.12-19.el6_4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "coreutils",
+    "revision": "8.4-31.el6",
+    "@id": "data:coreutils/8.4-31.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "coreutils/8.4-31.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "coreutils",
+    "revision": "8.4-31.el6",
+    "@id": "data:coreutils/8.4-31.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "coreutils/8.4-31.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "coreutils",
+    "revision": "8.4-31.el6",
+    "@id": "data:coreutils/8.4-31.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "coreutils/8.4-31.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "nss",
+    "revision": "3.15.1-15.el6",
+    "@id": "data:nss/3.15.1-15.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "nss/3.15.1-15.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "nss",
+    "revision": "3.15.1-15.el6",
+    "@id": "data:nss/3.15.1-15.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "nss/3.15.1-15.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "nss",
+    "revision": "3.15.1-15.el6",
+    "@id": "data:nss/3.15.1-15.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "nss/3.15.1-15.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcurl",
+    "revision": "7.19.7-37.el6_4",
+    "@id": "data:libcurl/7.19.7-37.el6_4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "libcurl/7.19.7-37.el6_4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcurl",
+    "revision": "7.19.7-37.el6_4",
+    "@id": "data:libcurl/7.19.7-37.el6_4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "libcurl/7.19.7-37.el6_4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcurl",
+    "revision": "7.19.7-37.el6_4",
+    "@id": "data:libcurl/7.19.7-37.el6_4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "libcurl/7.19.7-37.el6_4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "logrotate",
+    "revision": "3.7.8-17.el6",
+    "@id": "data:logrotate/3.7.8-17.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "logrotate/3.7.8-17.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "logrotate",
+    "revision": "3.7.8-17.el6",
+    "@id": "data:logrotate/3.7.8-17.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "logrotate/3.7.8-17.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "logrotate",
+    "revision": "3.7.8-17.el6",
+    "@id": "data:logrotate/3.7.8-17.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "logrotate/3.7.8-17.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "module-init-tools",
+    "revision": "3.9-21.el6_4",
+    "@id": "data:module-init-tools/3.9-21.el6_4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "module-init-tools/3.9-21.el6_4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "module-init-tools",
+    "revision": "3.9-21.el6_4",
+    "@id": "data:module-init-tools/3.9-21.el6_4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "module-init-tools/3.9-21.el6_4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "module-init-tools",
+    "revision": "3.9-21.el6_4",
+    "@id": "data:module-init-tools/3.9-21.el6_4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "module-init-tools/3.9-21.el6_4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "glib2",
+    "revision": "2.26.1-3.el6",
+    "@id": "data:glib2/2.26.1-3.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "glib2/2.26.1-3.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "glib2",
+    "revision": "2.26.1-3.el6",
+    "@id": "data:glib2/2.26.1-3.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "glib2/2.26.1-3.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "glib2",
+    "revision": "2.26.1-3.el6",
+    "@id": "data:glib2/2.26.1-3.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "glib2/2.26.1-3.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "procps",
+    "revision": "3.2.8-25.el6",
+    "@id": "data:procps/3.2.8-25.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "procps/3.2.8-25.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "procps",
+    "revision": "3.2.8-25.el6",
+    "@id": "data:procps/3.2.8-25.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "procps/3.2.8-25.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "procps",
+    "revision": "3.2.8-25.el6",
+    "@id": "data:procps/3.2.8-25.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "procps/3.2.8-25.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "iputils",
+    "revision": "20071127-17.el6_4.2",
+    "@id": "data:iputils/20071127-17.el6_4.2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "iputils/20071127-17.el6_4.2/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "iputils",
+    "revision": "20071127-17.el6_4.2",
+    "@id": "data:iputils/20071127-17.el6_4.2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "iputils/20071127-17.el6_4.2/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "iputils",
+    "revision": "20071127-17.el6_4.2",
+    "@id": "data:iputils/20071127-17.el6_4.2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "iputils/20071127-17.el6_4.2/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "rsyslog",
+    "revision": "5.8.10-8.el6",
+    "@id": "data:rsyslog/5.8.10-8.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "rsyslog/5.8.10-8.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "rsyslog",
+    "revision": "5.8.10-8.el6",
+    "@id": "data:rsyslog/5.8.10-8.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "rsyslog/5.8.10-8.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "rsyslog",
+    "revision": "5.8.10-8.el6",
+    "@id": "data:rsyslog/5.8.10-8.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "rsyslog/5.8.10-8.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "cronie",
+    "revision": "1.4.4-12.el6",
+    "@id": "data:cronie/1.4.4-12.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "cronie/1.4.4-12.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "cronie",
+    "revision": "1.4.4-12.el6",
+    "@id": "data:cronie/1.4.4-12.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "cronie/1.4.4-12.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "cronie",
+    "revision": "1.4.4-12.el6",
+    "@id": "data:cronie/1.4.4-12.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "cronie/1.4.4-12.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "gdbm",
+    "revision": "1.8.0-36.el6",
+    "@id": "data:gdbm/1.8.0-36.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "gdbm/1.8.0-36.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "gdbm",
+    "revision": "1.8.0-36.el6",
+    "@id": "data:gdbm/1.8.0-36.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "gdbm/1.8.0-36.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "gdbm",
+    "revision": "1.8.0-36.el6",
+    "@id": "data:gdbm/1.8.0-36.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "gdbm/1.8.0-36.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "perl-version",
+    "revision": "0.77-136.el6",
+    "@id": "data:perl-version/0.77-136.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "perl-version/0.77-136.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "perl-version",
+    "revision": "0.77-136.el6",
+    "@id": "data:perl-version/0.77-136.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "perl-version/0.77-136.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "perl-version",
+    "revision": "0.77-136.el6",
+    "@id": "data:perl-version/0.77-136.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "perl-version/0.77-136.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "unzip",
+    "revision": "6.0-1.el6",
+    "@id": "data:unzip/6.0-1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "unzip/6.0-1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "unzip",
+    "revision": "6.0-1.el6",
+    "@id": "data:unzip/6.0-1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "unzip/6.0-1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "unzip",
+    "revision": "6.0-1.el6",
+    "@id": "data:unzip/6.0-1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "unzip/6.0-1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "filesystem",
+    "revision": "2.4.30-3.el6",
+    "@id": "data:filesystem/2.4.30-3.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "filesystem/2.4.30-3.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "filesystem",
+    "revision": "2.4.30-3.el6",
+    "@id": "data:filesystem/2.4.30-3.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "filesystem/2.4.30-3.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "filesystem",
+    "revision": "2.4.30-3.el6",
+    "@id": "data:filesystem/2.4.30-3.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "filesystem/2.4.30-3.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "glibc-common",
+    "revision": "2.12-1.132.el6",
+    "@id": "data:glibc-common/2.12-1.132.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "glibc-common/2.12-1.132.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "glibc-common",
+    "revision": "2.12-1.132.el6",
+    "@id": "data:glibc-common/2.12-1.132.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "glibc-common/2.12-1.132.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "glibc-common",
+    "revision": "2.12-1.132.el6",
+    "@id": "data:glibc-common/2.12-1.132.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "glibc-common/2.12-1.132.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "bash",
+    "revision": "4.1.2-15.el6_4",
+    "@id": "data:bash/4.1.2-15.el6_4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "bash/4.1.2-15.el6_4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "bash",
+    "revision": "4.1.2-15.el6_4",
+    "@id": "data:bash/4.1.2-15.el6_4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "bash/4.1.2-15.el6_4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "bash",
+    "revision": "4.1.2-15.el6_4",
+    "@id": "data:bash/4.1.2-15.el6_4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "bash/4.1.2-15.el6_4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libstdc++",
+    "revision": "4.4.7-4.el6",
+    "@id": "data:libstdc++/4.4.7-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "libstdc++/4.4.7-4.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libstdc++",
+    "revision": "4.4.7-4.el6",
+    "@id": "data:libstdc++/4.4.7-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "libstdc++/4.4.7-4.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libstdc++",
+    "revision": "4.4.7-4.el6",
+    "@id": "data:libstdc++/4.4.7-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "libstdc++/4.4.7-4.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "glibc",
+    "revision": "2.12-1.132.el6",
+    "@id": "data:glibc/2.12-1.132.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "glibc/2.12-1.132.el6/i686"
+    },
+    "relationship": []
+  },
+  {
+    "name": "glibc",
+    "revision": "2.12-1.132.el6",
+    "@id": "data:glibc/2.12-1.132.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "glibc/2.12-1.132.el6/i686"
+    },
+    "relationship": []
+  },
+  {
+    "name": "glibc",
+    "revision": "2.12-1.132.el6",
+    "@id": "data:glibc/2.12-1.132.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "glibc/2.12-1.132.el6/i686"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libaio",
+    "revision": "0.3.107-10.el6",
+    "@id": "data:libaio/0.3.107-10.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "libaio/0.3.107-10.el6/i686"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libaio",
+    "revision": "0.3.107-10.el6",
+    "@id": "data:libaio/0.3.107-10.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "libaio/0.3.107-10.el6/i686"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libaio",
+    "revision": "0.3.107-10.el6",
+    "@id": "data:libaio/0.3.107-10.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "libaio/0.3.107-10.el6/i686"
+    },
+    "relationship": []
+  },
+  {
+    "name": "readline",
+    "revision": "6.0-4.el6",
+    "@id": "data:readline/6.0-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "readline/6.0-4.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "readline",
+    "revision": "6.0-4.el6",
+    "@id": "data:readline/6.0-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "readline/6.0-4.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "readline",
+    "revision": "6.0-4.el6",
+    "@id": "data:readline/6.0-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "readline/6.0-4.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libacl",
+    "revision": "2.2.49-6.el6",
+    "@id": "data:libacl/2.2.49-6.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "libacl/2.2.49-6.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libacl",
+    "revision": "2.2.49-6.el6",
+    "@id": "data:libacl/2.2.49-6.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "libacl/2.2.49-6.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libacl",
+    "revision": "2.2.49-6.el6",
+    "@id": "data:libacl/2.2.49-6.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "libacl/2.2.49-6.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "nss-util",
+    "revision": "3.15.1-3.el6",
+    "@id": "data:nss-util/3.15.1-3.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "nss-util/3.15.1-3.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "nss-util",
+    "revision": "3.15.1-3.el6",
+    "@id": "data:nss-util/3.15.1-3.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "nss-util/3.15.1-3.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "nss-util",
+    "revision": "3.15.1-3.el6",
+    "@id": "data:nss-util/3.15.1-3.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "nss-util/3.15.1-3.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "popt",
+    "revision": "1.13-7.el6",
+    "@id": "data:popt/1.13-7.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "popt/1.13-7.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "popt",
+    "revision": "1.13-7.el6",
+    "@id": "data:popt/1.13-7.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "popt/1.13-7.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "popt",
+    "revision": "1.13-7.el6",
+    "@id": "data:popt/1.13-7.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "popt/1.13-7.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "cyrus-sasl-lib",
+    "revision": "2.1.23-13.el6_3.1",
+    "@id": "data:cyrus-sasl-lib/2.1.23-13.el6_3.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "cyrus-sasl-lib/2.1.23-13.el6_3.1/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "cyrus-sasl-lib",
+    "revision": "2.1.23-13.el6_3.1",
+    "@id": "data:cyrus-sasl-lib/2.1.23-13.el6_3.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "cyrus-sasl-lib/2.1.23-13.el6_3.1/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "cyrus-sasl-lib",
+    "revision": "2.1.23-13.el6_3.1",
+    "@id": "data:cyrus-sasl-lib/2.1.23-13.el6_3.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "cyrus-sasl-lib/2.1.23-13.el6_3.1/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libuuid",
+    "revision": "2.17.2-12.14.el6",
+    "@id": "data:libuuid/2.17.2-12.14.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "libuuid/2.17.2-12.14.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libuuid",
+    "revision": "2.17.2-12.14.el6",
+    "@id": "data:libuuid/2.17.2-12.14.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "libuuid/2.17.2-12.14.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libuuid",
+    "revision": "2.17.2-12.14.el6",
+    "@id": "data:libuuid/2.17.2-12.14.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "libuuid/2.17.2-12.14.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "file-libs",
+    "revision": "5.04-15.el6",
+    "@id": "data:file-libs/5.04-15.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "file-libs/5.04-15.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "file-libs",
+    "revision": "5.04-15.el6",
+    "@id": "data:file-libs/5.04-15.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "file-libs/5.04-15.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "file-libs",
+    "revision": "5.04-15.el6",
+    "@id": "data:file-libs/5.04-15.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "file-libs/5.04-15.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "lua",
+    "revision": "5.1.4-4.1.el6",
+    "@id": "data:lua/5.1.4-4.1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "lua/5.1.4-4.1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "lua",
+    "revision": "5.1.4-4.1.el6",
+    "@id": "data:lua/5.1.4-4.1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "lua/5.1.4-4.1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "lua",
+    "revision": "5.1.4-4.1.el6",
+    "@id": "data:lua/5.1.4-4.1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "lua/5.1.4-4.1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libnih",
+    "revision": "1.0.1-7.el6",
+    "@id": "data:libnih/1.0.1-7.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "libnih/1.0.1-7.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libnih",
+    "revision": "1.0.1-7.el6",
+    "@id": "data:libnih/1.0.1-7.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "libnih/1.0.1-7.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libnih",
+    "revision": "1.0.1-7.el6",
+    "@id": "data:libnih/1.0.1-7.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "libnih/1.0.1-7.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "db4-utils",
+    "revision": "4.7.25-18.el6_4",
+    "@id": "data:db4-utils/4.7.25-18.el6_4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "db4-utils/4.7.25-18.el6_4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "db4-utils",
+    "revision": "4.7.25-18.el6_4",
+    "@id": "data:db4-utils/4.7.25-18.el6_4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "db4-utils/4.7.25-18.el6_4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "db4-utils",
+    "revision": "4.7.25-18.el6_4",
+    "@id": "data:db4-utils/4.7.25-18.el6_4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "db4-utils/4.7.25-18.el6_4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "tcp_wrappers-libs",
+    "revision": "7.6-57.el6",
+    "@id": "data:tcp_wrappers-libs/7.6-57.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "tcp_wrappers-libs/7.6-57.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "tcp_wrappers-libs",
+    "revision": "7.6-57.el6",
+    "@id": "data:tcp_wrappers-libs/7.6-57.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "tcp_wrappers-libs/7.6-57.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "tcp_wrappers-libs",
+    "revision": "7.6-57.el6",
+    "@id": "data:tcp_wrappers-libs/7.6-57.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "tcp_wrappers-libs/7.6-57.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ustr",
+    "revision": "1.0.4-9.1.el6",
+    "@id": "data:ustr/1.0.4-9.1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "ustr/1.0.4-9.1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ustr",
+    "revision": "1.0.4-9.1.el6",
+    "@id": "data:ustr/1.0.4-9.1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "ustr/1.0.4-9.1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ustr",
+    "revision": "1.0.4-9.1.el6",
+    "@id": "data:ustr/1.0.4-9.1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "ustr/1.0.4-9.1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ethtool",
+    "revision": "3.5-1.el6",
+    "@id": "data:ethtool/3.5-1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "ethtool/3.5-1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ethtool",
+    "revision": "3.5-1.el6",
+    "@id": "data:ethtool/3.5-1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "ethtool/3.5-1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ethtool",
+    "revision": "3.5-1.el6",
+    "@id": "data:ethtool/3.5-1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "ethtool/3.5-1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "pkgconfig",
+    "revision": "0.23-9.1.el6",
+    "@id": "data:pkgconfig/0.23-9.1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "pkgconfig/0.23-9.1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "pkgconfig",
+    "revision": "0.23-9.1.el6",
+    "@id": "data:pkgconfig/0.23-9.1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "pkgconfig/0.23-9.1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "pkgconfig",
+    "revision": "0.23-9.1.el6",
+    "@id": "data:pkgconfig/0.23-9.1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "pkgconfig/0.23-9.1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "krb5-libs",
+    "revision": "1.10.3-10.el6_4.6",
+    "@id": "data:krb5-libs/1.10.3-10.el6_4.6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "krb5-libs/1.10.3-10.el6_4.6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "krb5-libs",
+    "revision": "1.10.3-10.el6_4.6",
+    "@id": "data:krb5-libs/1.10.3-10.el6_4.6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "krb5-libs/1.10.3-10.el6_4.6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "krb5-libs",
+    "revision": "1.10.3-10.el6_4.6",
+    "@id": "data:krb5-libs/1.10.3-10.el6_4.6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "krb5-libs/1.10.3-10.el6_4.6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "less",
+    "revision": "436-10.el6",
+    "@id": "data:less/436-10.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "less/436-10.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "less",
+    "revision": "436-10.el6",
+    "@id": "data:less/436-10.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "less/436-10.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "less",
+    "revision": "436-10.el6",
+    "@id": "data:less/436-10.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "less/436-10.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "coreutils-libs",
+    "revision": "8.4-31.el6",
+    "@id": "data:coreutils-libs/8.4-31.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "coreutils-libs/8.4-31.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "coreutils-libs",
+    "revision": "8.4-31.el6",
+    "@id": "data:coreutils-libs/8.4-31.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "coreutils-libs/8.4-31.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "coreutils-libs",
+    "revision": "8.4-31.el6",
+    "@id": "data:coreutils-libs/8.4-31.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "coreutils-libs/8.4-31.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libssh2",
+    "revision": "1.4.2-1.el6",
+    "@id": "data:libssh2/1.4.2-1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "libssh2/1.4.2-1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libssh2",
+    "revision": "1.4.2-1.el6",
+    "@id": "data:libssh2/1.4.2-1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "libssh2/1.4.2-1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libssh2",
+    "revision": "1.4.2-1.el6",
+    "@id": "data:libssh2/1.4.2-1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "libssh2/1.4.2-1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "openldap",
+    "revision": "2.4.23-32.el6_4.1",
+    "@id": "data:openldap/2.4.23-32.el6_4.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "openldap/2.4.23-32.el6_4.1/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "openldap",
+    "revision": "2.4.23-32.el6_4.1",
+    "@id": "data:openldap/2.4.23-32.el6_4.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "openldap/2.4.23-32.el6_4.1/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "openldap",
+    "revision": "2.4.23-32.el6_4.1",
+    "@id": "data:openldap/2.4.23-32.el6_4.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "openldap/2.4.23-32.el6_4.1/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "rpm",
+    "revision": "4.8.0-37.el6",
+    "@id": "data:rpm/4.8.0-37.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "rpm/4.8.0-37.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "rpm",
+    "revision": "4.8.0-37.el6",
+    "@id": "data:rpm/4.8.0-37.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "rpm/4.8.0-37.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "rpm",
+    "revision": "4.8.0-37.el6",
+    "@id": "data:rpm/4.8.0-37.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "rpm/4.8.0-37.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "binutils",
+    "revision": "2.20.51.0.2-5.36.el6",
+    "@id": "data:binutils/2.20.51.0.2-5.36.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "binutils/2.20.51.0.2-5.36.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "binutils",
+    "revision": "2.20.51.0.2-5.36.el6",
+    "@id": "data:binutils/2.20.51.0.2-5.36.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "binutils/2.20.51.0.2-5.36.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "binutils",
+    "revision": "2.20.51.0.2-5.36.el6",
+    "@id": "data:binutils/2.20.51.0.2-5.36.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "binutils/2.20.51.0.2-5.36.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "shared-mime-info",
+    "revision": "0.70-4.el6",
+    "@id": "data:shared-mime-info/0.70-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "shared-mime-info/0.70-4.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "shared-mime-info",
+    "revision": "0.70-4.el6",
+    "@id": "data:shared-mime-info/0.70-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "shared-mime-info/0.70-4.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "shared-mime-info",
+    "revision": "0.70-4.el6",
+    "@id": "data:shared-mime-info/0.70-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "shared-mime-info/0.70-4.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "diffutils",
+    "revision": "2.8.1-28.el6",
+    "@id": "data:diffutils/2.8.1-28.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "diffutils/2.8.1-28.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "diffutils",
+    "revision": "2.8.1-28.el6",
+    "@id": "data:diffutils/2.8.1-28.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "diffutils/2.8.1-28.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "diffutils",
+    "revision": "2.8.1-28.el6",
+    "@id": "data:diffutils/2.8.1-28.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "diffutils/2.8.1-28.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "iproute",
+    "revision": "2.6.32-31.el6",
+    "@id": "data:iproute/2.6.32-31.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "iproute/2.6.32-31.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "iproute",
+    "revision": "2.6.32-31.el6",
+    "@id": "data:iproute/2.6.32-31.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "iproute/2.6.32-31.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "iproute",
+    "revision": "2.6.32-31.el6",
+    "@id": "data:iproute/2.6.32-31.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "iproute/2.6.32-31.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "udev",
+    "revision": "147-2.51.el6",
+    "@id": "data:udev/147-2.51.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "udev/147-2.51.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "udev",
+    "revision": "147-2.51.el6",
+    "@id": "data:udev/147-2.51.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "udev/147-2.51.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "udev",
+    "revision": "147-2.51.el6",
+    "@id": "data:udev/147-2.51.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "udev/147-2.51.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "cronie-noanacron",
+    "revision": "1.4.4-12.el6",
+    "@id": "data:cronie-noanacron/1.4.4-12.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "cronie-noanacron/1.4.4-12.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "cronie-noanacron",
+    "revision": "1.4.4-12.el6",
+    "@id": "data:cronie-noanacron/1.4.4-12.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "cronie-noanacron/1.4.4-12.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "cronie-noanacron",
+    "revision": "1.4.4-12.el6",
+    "@id": "data:cronie-noanacron/1.4.4-12.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "cronie-noanacron/1.4.4-12.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libaio-devel",
+    "revision": "0.3.107-10.el6",
+    "@id": "data:libaio-devel/0.3.107-10.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "libaio-devel/0.3.107-10.el6/i686"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libaio-devel",
+    "revision": "0.3.107-10.el6",
+    "@id": "data:libaio-devel/0.3.107-10.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "libaio-devel/0.3.107-10.el6/i686"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libaio-devel",
+    "revision": "0.3.107-10.el6",
+    "@id": "data:libaio-devel/0.3.107-10.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "libaio-devel/0.3.107-10.el6/i686"
+    },
+    "relationship": []
+  },
+  {
+    "name": "perl-Pod-Simple",
+    "revision": "3.13-136.el6",
+    "@id": "data:perl-Pod-Simple/3.13-136.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "perl-Pod-Simple/3.13-136.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "perl-Pod-Simple",
+    "revision": "3.13-136.el6",
+    "@id": "data:perl-Pod-Simple/3.13-136.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "perl-Pod-Simple/3.13-136.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "perl-Pod-Simple",
+    "revision": "3.13-136.el6",
+    "@id": "data:perl-Pod-Simple/3.13-136.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "perl-Pod-Simple/3.13-136.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libaio",
+    "revision": "0.3.107-10.el6",
+    "@id": "data:libaio/0.3.107-10.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "libaio/0.3.107-10.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libaio",
+    "revision": "0.3.107-10.el6",
+    "@id": "data:libaio/0.3.107-10.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "libaio/0.3.107-10.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libaio",
+    "revision": "0.3.107-10.el6",
+    "@id": "data:libaio/0.3.107-10.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "libaio/0.3.107-10.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libgcc",
+    "revision": "4.4.7-4.el6",
+    "@id": "data:libgcc/4.4.7-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "libgcc/4.4.7-4.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libgcc",
+    "revision": "4.4.7-4.el6",
+    "@id": "data:libgcc/4.4.7-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "libgcc/4.4.7-4.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libgcc",
+    "revision": "4.4.7-4.el6",
+    "@id": "data:libgcc/4.4.7-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "libgcc/4.4.7-4.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "tzdata",
+    "revision": "2013g-1.el6",
+    "@id": "data:tzdata/2013g-1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "tzdata/2013g-1.el6/noarch"
+    },
+    "relationship": []
+  },
+  {
+    "name": "tzdata",
+    "revision": "2013g-1.el6",
+    "@id": "data:tzdata/2013g-1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "tzdata/2013g-1.el6/noarch"
+    },
+    "relationship": []
+  },
+  {
+    "name": "tzdata",
+    "revision": "2013g-1.el6",
+    "@id": "data:tzdata/2013g-1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "tzdata/2013g-1.el6/noarch"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ncurses-libs",
+    "revision": "5.7-3.20090208.el6",
+    "@id": "data:ncurses-libs/5.7-3.20090208.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "ncurses-libs/5.7-3.20090208.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ncurses-libs",
+    "revision": "5.7-3.20090208.el6",
+    "@id": "data:ncurses-libs/5.7-3.20090208.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "ncurses-libs/5.7-3.20090208.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ncurses-libs",
+    "revision": "5.7-3.20090208.el6",
+    "@id": "data:ncurses-libs/5.7-3.20090208.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "ncurses-libs/5.7-3.20090208.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "compat-libstdc++-33",
+    "revision": "3.2.3-69.el6",
+    "@id": "data:compat-libstdc++-33/3.2.3-69.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "compat-libstdc++-33/3.2.3-69.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "compat-libstdc++-33",
+    "revision": "3.2.3-69.el6",
+    "@id": "data:compat-libstdc++-33/3.2.3-69.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "compat-libstdc++-33/3.2.3-69.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "compat-libstdc++-33",
+    "revision": "3.2.3-69.el6",
+    "@id": "data:compat-libstdc++-33/3.2.3-69.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "compat-libstdc++-33/3.2.3-69.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "nss-softokn-freebl",
+    "revision": "3.14.3-9.el6",
+    "@id": "data:nss-softokn-freebl/3.14.3-9.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "nss-softokn-freebl/3.14.3-9.el6/i686"
+    },
+    "relationship": []
+  },
+  {
+    "name": "nss-softokn-freebl",
+    "revision": "3.14.3-9.el6",
+    "@id": "data:nss-softokn-freebl/3.14.3-9.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "nss-softokn-freebl/3.14.3-9.el6/i686"
+    },
+    "relationship": []
+  },
+  {
+    "name": "nss-softokn-freebl",
+    "revision": "3.14.3-9.el6",
+    "@id": "data:nss-softokn-freebl/3.14.3-9.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "nss-softokn-freebl/3.14.3-9.el6/i686"
+    },
+    "relationship": []
+  },
+  {
+    "name": "zlib",
+    "revision": "1.2.3-29.el6",
+    "@id": "data:zlib/1.2.3-29.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "zlib/1.2.3-29.el6/i686"
+    },
+    "relationship": []
+  },
+  {
+    "name": "zlib",
+    "revision": "1.2.3-29.el6",
+    "@id": "data:zlib/1.2.3-29.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "zlib/1.2.3-29.el6/i686"
+    },
+    "relationship": []
+  },
+  {
+    "name": "zlib",
+    "revision": "1.2.3-29.el6",
+    "@id": "data:zlib/1.2.3-29.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "zlib/1.2.3-29.el6/i686"
+    },
+    "relationship": []
+  },
+  {
+    "name": "gawk",
+    "revision": "3.1.7-10.el6",
+    "@id": "data:gawk/3.1.7-10.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "gawk/3.1.7-10.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "gawk",
+    "revision": "3.1.7-10.el6",
+    "@id": "data:gawk/3.1.7-10.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "gawk/3.1.7-10.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "gawk",
+    "revision": "3.1.7-10.el6",
+    "@id": "data:gawk/3.1.7-10.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "gawk/3.1.7-10.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libselinux",
+    "revision": "2.0.94-5.3.el6_4.1",
+    "@id": "data:libselinux/2.0.94-5.3.el6_4.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "libselinux/2.0.94-5.3.el6_4.1/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libselinux",
+    "revision": "2.0.94-5.3.el6_4.1",
+    "@id": "data:libselinux/2.0.94-5.3.el6_4.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "libselinux/2.0.94-5.3.el6_4.1/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libselinux",
+    "revision": "2.0.94-5.3.el6_4.1",
+    "@id": "data:libselinux/2.0.94-5.3.el6_4.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "libselinux/2.0.94-5.3.el6_4.1/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "db4",
+    "revision": "4.7.25-18.el6_4",
+    "@id": "data:db4/4.7.25-18.el6_4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "db4/4.7.25-18.el6_4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "db4",
+    "revision": "4.7.25-18.el6_4",
+    "@id": "data:db4/4.7.25-18.el6_4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "db4/4.7.25-18.el6_4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "db4",
+    "revision": "4.7.25-18.el6_4",
+    "@id": "data:db4/4.7.25-18.el6_4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "db4/4.7.25-18.el6_4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "sed",
+    "revision": "4.2.1-10.el6",
+    "@id": "data:sed/4.2.1-10.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "sed/4.2.1-10.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "sed",
+    "revision": "4.2.1-10.el6",
+    "@id": "data:sed/4.2.1-10.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "sed/4.2.1-10.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "sed",
+    "revision": "4.2.1-10.el6",
+    "@id": "data:sed/4.2.1-10.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "sed/4.2.1-10.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "dbus-libs",
+    "revision": "1.2.24-7.el6_3",
+    "@id": "data:dbus-libs/1.2.24-7.el6_3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "dbus-libs/1.2.24-7.el6_3/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "dbus-libs",
+    "revision": "1.2.24-7.el6_3",
+    "@id": "data:dbus-libs/1.2.24-7.el6_3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "dbus-libs/1.2.24-7.el6_3/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "dbus-libs",
+    "revision": "1.2.24-7.el6_3",
+    "@id": "data:dbus-libs/1.2.24-7.el6_3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "dbus-libs/1.2.24-7.el6_3/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "sysvinit-tools",
+    "revision": "2.87-5.dsf.el6",
+    "@id": "data:sysvinit-tools/2.87-5.dsf.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "sysvinit-tools/2.87-5.dsf.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "sysvinit-tools",
+    "revision": "2.87-5.dsf.el6",
+    "@id": "data:sysvinit-tools/2.87-5.dsf.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "sysvinit-tools/2.87-5.dsf.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "sysvinit-tools",
+    "revision": "2.87-5.dsf.el6",
+    "@id": "data:sysvinit-tools/2.87-5.dsf.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "sysvinit-tools/2.87-5.dsf.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "grep",
+    "revision": "2.6.3-4.el6",
+    "@id": "data:grep/2.6.3-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "grep/2.6.3-4.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "grep",
+    "revision": "2.6.3-4.el6",
+    "@id": "data:grep/2.6.3-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "grep/2.6.3-4.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "grep",
+    "revision": "2.6.3-4.el6",
+    "@id": "data:grep/2.6.3-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "grep/2.6.3-4.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "p11-kit",
+    "revision": "0.18.5-2.el6",
+    "@id": "data:p11-kit/0.18.5-2.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "p11-kit/0.18.5-2.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "p11-kit",
+    "revision": "0.18.5-2.el6",
+    "@id": "data:p11-kit/0.18.5-2.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "p11-kit/0.18.5-2.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "p11-kit",
+    "revision": "0.18.5-2.el6",
+    "@id": "data:p11-kit/0.18.5-2.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "p11-kit/0.18.5-2.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libblkid",
+    "revision": "2.17.2-12.14.el6",
+    "@id": "data:libblkid/2.17.2-12.14.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "libblkid/2.17.2-12.14.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libblkid",
+    "revision": "2.17.2-12.14.el6",
+    "@id": "data:libblkid/2.17.2-12.14.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "libblkid/2.17.2-12.14.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libblkid",
+    "revision": "2.17.2-12.14.el6",
+    "@id": "data:libblkid/2.17.2-12.14.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "libblkid/2.17.2-12.14.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "MAKEDEV",
+    "revision": "3.24-6.el6",
+    "@id": "data:MAKEDEV/3.24-6.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "MAKEDEV/3.24-6.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "MAKEDEV",
+    "revision": "3.24-6.el6",
+    "@id": "data:MAKEDEV/3.24-6.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "MAKEDEV/3.24-6.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "MAKEDEV",
+    "revision": "3.24-6.el6",
+    "@id": "data:MAKEDEV/3.24-6.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "MAKEDEV/3.24-6.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "procmail",
+    "revision": "3.22-25.1.el6",
+    "@id": "data:procmail/3.22-25.1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "procmail/3.22-25.1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "procmail",
+    "revision": "3.22-25.1.el6",
+    "@id": "data:procmail/3.22-25.1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "procmail/3.22-25.1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "procmail",
+    "revision": "3.22-25.1.el6",
+    "@id": "data:procmail/3.22-25.1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "procmail/3.22-25.1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libusb",
+    "revision": "0.1.12-23.el6",
+    "@id": "data:libusb/0.1.12-23.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "libusb/0.1.12-23.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libusb",
+    "revision": "0.1.12-23.el6",
+    "@id": "data:libusb/0.1.12-23.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "libusb/0.1.12-23.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libusb",
+    "revision": "0.1.12-23.el6",
+    "@id": "data:libusb/0.1.12-23.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "libusb/0.1.12-23.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "nss-softokn",
+    "revision": "3.14.3-9.el6",
+    "@id": "data:nss-softokn/3.14.3-9.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "nss-softokn/3.14.3-9.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "nss-softokn",
+    "revision": "3.14.3-9.el6",
+    "@id": "data:nss-softokn/3.14.3-9.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "nss-softokn/3.14.3-9.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "nss-softokn",
+    "revision": "3.14.3-9.el6",
+    "@id": "data:nss-softokn/3.14.3-9.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "nss-softokn/3.14.3-9.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "expat",
+    "revision": "2.0.1-11.el6_2",
+    "@id": "data:expat/2.0.1-11.el6_2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "expat/2.0.1-11.el6_2/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "expat",
+    "revision": "2.0.1-11.el6_2",
+    "@id": "data:expat/2.0.1-11.el6_2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "expat/2.0.1-11.el6_2/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "expat",
+    "revision": "2.0.1-11.el6_2",
+    "@id": "data:expat/2.0.1-11.el6_2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "expat/2.0.1-11.el6_2/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "keyutils-libs",
+    "revision": "1.4-4.el6",
+    "@id": "data:keyutils-libs/1.4-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "keyutils-libs/1.4-4.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "keyutils-libs",
+    "revision": "1.4-4.el6",
+    "@id": "data:keyutils-libs/1.4-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "keyutils-libs/1.4-4.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "keyutils-libs",
+    "revision": "1.4-4.el6",
+    "@id": "data:keyutils-libs/1.4-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "keyutils-libs/1.4-4.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "groff",
+    "revision": "1.18.1.4-21.el6",
+    "@id": "data:groff/1.18.1.4-21.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "groff/1.18.1.4-21.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "groff",
+    "revision": "1.18.1.4-21.el6",
+    "@id": "data:groff/1.18.1.4-21.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "groff/1.18.1.4-21.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "groff",
+    "revision": "1.18.1.4-21.el6",
+    "@id": "data:groff/1.18.1.4-21.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "groff/1.18.1.4-21.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "cracklib-dicts",
+    "revision": "2.8.16-4.el6",
+    "@id": "data:cracklib-dicts/2.8.16-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "cracklib-dicts/2.8.16-4.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "cracklib-dicts",
+    "revision": "2.8.16-4.el6",
+    "@id": "data:cracklib-dicts/2.8.16-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "cracklib-dicts/2.8.16-4.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "cracklib-dicts",
+    "revision": "2.8.16-4.el6",
+    "@id": "data:cracklib-dicts/2.8.16-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "cracklib-dicts/2.8.16-4.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "openssl",
+    "revision": "1.0.1e-15.el6",
+    "@id": "data:openssl/1.0.1e-15.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "openssl/1.0.1e-15.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "openssl",
+    "revision": "1.0.1e-15.el6",
+    "@id": "data:openssl/1.0.1e-15.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "openssl/1.0.1e-15.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "openssl",
+    "revision": "1.0.1e-15.el6",
+    "@id": "data:openssl/1.0.1e-15.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "openssl/1.0.1e-15.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "nss-tools",
+    "revision": "3.15.1-15.el6",
+    "@id": "data:nss-tools/3.15.1-15.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "nss-tools/3.15.1-15.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "nss-tools",
+    "revision": "3.15.1-15.el6",
+    "@id": "data:nss-tools/3.15.1-15.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "nss-tools/3.15.1-15.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "nss-tools",
+    "revision": "3.15.1-15.el6",
+    "@id": "data:nss-tools/3.15.1-15.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "nss-tools/3.15.1-15.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "rpm-libs",
+    "revision": "4.8.0-37.el6",
+    "@id": "data:rpm-libs/4.8.0-37.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "rpm-libs/4.8.0-37.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "rpm-libs",
+    "revision": "4.8.0-37.el6",
+    "@id": "data:rpm-libs/4.8.0-37.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "rpm-libs/4.8.0-37.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "rpm-libs",
+    "revision": "4.8.0-37.el6",
+    "@id": "data:rpm-libs/4.8.0-37.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "rpm-libs/4.8.0-37.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "redhat-release-server",
+    "revision": "6Server-6.5.0.1.el6",
+    "@id": "data:redhat-release-server/6Server-6.5.0.1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "redhat-release-server/6Server-6.5.0.1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "redhat-release-server",
+    "revision": "6Server-6.5.0.1.el6",
+    "@id": "data:redhat-release-server/6Server-6.5.0.1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "redhat-release-server/6Server-6.5.0.1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "redhat-release-server",
+    "revision": "6Server-6.5.0.1.el6",
+    "@id": "data:redhat-release-server/6Server-6.5.0.1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "redhat-release-server/6Server-6.5.0.1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libxml2",
+    "revision": "2.7.6-14.el6",
+    "@id": "data:libxml2/2.7.6-14.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "libxml2/2.7.6-14.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libxml2",
+    "revision": "2.7.6-14.el6",
+    "@id": "data:libxml2/2.7.6-14.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "libxml2/2.7.6-14.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libxml2",
+    "revision": "2.7.6-14.el6",
+    "@id": "data:libxml2/2.7.6-14.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "libxml2/2.7.6-14.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "dbus-glib",
+    "revision": "0.86-6.el6_4",
+    "@id": "data:dbus-glib/0.86-6.el6_4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "dbus-glib/0.86-6.el6_4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "dbus-glib",
+    "revision": "0.86-6.el6_4",
+    "@id": "data:dbus-glib/0.86-6.el6_4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "dbus-glib/0.86-6.el6_4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "dbus-glib",
+    "revision": "0.86-6.el6_4",
+    "@id": "data:dbus-glib/0.86-6.el6_4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "dbus-glib/0.86-6.el6_4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "iptables",
+    "revision": "1.4.7-11.el6",
+    "@id": "data:iptables/1.4.7-11.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "iptables/1.4.7-11.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "iptables",
+    "revision": "1.4.7-11.el6",
+    "@id": "data:iptables/1.4.7-11.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "iptables/1.4.7-11.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "iptables",
+    "revision": "1.4.7-11.el6",
+    "@id": "data:iptables/1.4.7-11.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "iptables/1.4.7-11.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "initscripts",
+    "revision": "9.03.40-2.el6",
+    "@id": "data:initscripts/9.03.40-2.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "initscripts/9.03.40-2.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "initscripts",
+    "revision": "9.03.40-2.el6",
+    "@id": "data:initscripts/9.03.40-2.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "initscripts/9.03.40-2.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "initscripts",
+    "revision": "9.03.40-2.el6",
+    "@id": "data:initscripts/9.03.40-2.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "initscripts/9.03.40-2.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "sendmail",
+    "revision": "8.14.4-8.el6",
+    "@id": "data:sendmail/8.14.4-8.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "sendmail/8.14.4-8.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "sendmail",
+    "revision": "8.14.4-8.el6",
+    "@id": "data:sendmail/8.14.4-8.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "sendmail/8.14.4-8.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "sendmail",
+    "revision": "8.14.4-8.el6",
+    "@id": "data:sendmail/8.14.4-8.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "sendmail/8.14.4-8.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "which",
+    "revision": "2.19-6.el6",
+    "@id": "data:which/2.19-6.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "which/2.19-6.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "which",
+    "revision": "2.19-6.el6",
+    "@id": "data:which/2.19-6.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "which/2.19-6.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "which",
+    "revision": "2.19-6.el6",
+    "@id": "data:which/2.19-6.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "which/2.19-6.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "perl-libs",
+    "revision": "5.10.1-136.el6",
+    "@id": "data:perl-libs/5.10.1-136.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "perl-libs/5.10.1-136.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "perl-libs",
+    "revision": "5.10.1-136.el6",
+    "@id": "data:perl-libs/5.10.1-136.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "perl-libs/5.10.1-136.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "perl-libs",
+    "revision": "5.10.1-136.el6",
+    "@id": "data:perl-libs/5.10.1-136.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "perl-libs/5.10.1-136.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "perl",
+    "revision": "5.10.1-136.el6",
+    "@id": "data:perl/5.10.1-136.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "perl/5.10.1-136.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "perl",
+    "revision": "5.10.1-136.el6",
+    "@id": "data:perl/5.10.1-136.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "perl/5.10.1-136.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "perl",
+    "revision": "5.10.1-136.el6",
+    "@id": "data:perl/5.10.1-136.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "perl/5.10.1-136.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "setup",
+    "revision": "2.8.14-20.el6_4.1",
+    "@id": "data:setup/2.8.14-20.el6_4.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "setup/2.8.14-20.el6_4.1/noarch"
+    },
+    "relationship": []
+  },
+  {
+    "name": "setup",
+    "revision": "2.8.14-20.el6_4.1",
+    "@id": "data:setup/2.8.14-20.el6_4.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "setup/2.8.14-20.el6_4.1/noarch"
+    },
+    "relationship": []
+  },
+  {
+    "name": "setup",
+    "revision": "2.8.14-20.el6_4.1",
+    "@id": "data:setup/2.8.14-20.el6_4.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "setup/2.8.14-20.el6_4.1/noarch"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ncurses-base",
+    "revision": "5.7-3.20090208.el6",
+    "@id": "data:ncurses-base/5.7-3.20090208.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "ncurses-base/5.7-3.20090208.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ncurses-base",
+    "revision": "5.7-3.20090208.el6",
+    "@id": "data:ncurses-base/5.7-3.20090208.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "ncurses-base/5.7-3.20090208.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ncurses-base",
+    "revision": "5.7-3.20090208.el6",
+    "@id": "data:ncurses-base/5.7-3.20090208.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "ncurses-base/5.7-3.20090208.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "glibc",
+    "revision": "2.12-1.132.el6",
+    "@id": "data:glibc/2.12-1.132.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "glibc/2.12-1.132.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "glibc",
+    "revision": "2.12-1.132.el6",
+    "@id": "data:glibc/2.12-1.132.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "glibc/2.12-1.132.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "glibc",
+    "revision": "2.12-1.132.el6",
+    "@id": "data:glibc/2.12-1.132.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "glibc/2.12-1.132.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcap",
+    "revision": "2.16-5.5.el6",
+    "@id": "data:libcap/2.16-5.5.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "libcap/2.16-5.5.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcap",
+    "revision": "2.16-5.5.el6",
+    "@id": "data:libcap/2.16-5.5.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "libcap/2.16-5.5.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcap",
+    "revision": "2.16-5.5.el6",
+    "@id": "data:libcap/2.16-5.5.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "libcap/2.16-5.5.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libgcc",
+    "revision": "4.4.7-4.el6",
+    "@id": "data:libgcc/4.4.7-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "libgcc/4.4.7-4.el6/i686"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libgcc",
+    "revision": "4.4.7-4.el6",
+    "@id": "data:libgcc/4.4.7-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "libgcc/4.4.7-4.el6/i686"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libgcc",
+    "revision": "4.4.7-4.el6",
+    "@id": "data:libgcc/4.4.7-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "libgcc/4.4.7-4.el6/i686"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ncurses-libs",
+    "revision": "5.7-3.20090208.el6",
+    "@id": "data:ncurses-libs/5.7-3.20090208.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "ncurses-libs/5.7-3.20090208.el6/i686"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ncurses-libs",
+    "revision": "5.7-3.20090208.el6",
+    "@id": "data:ncurses-libs/5.7-3.20090208.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "ncurses-libs/5.7-3.20090208.el6/i686"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ncurses-libs",
+    "revision": "5.7-3.20090208.el6",
+    "@id": "data:ncurses-libs/5.7-3.20090208.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "ncurses-libs/5.7-3.20090208.el6/i686"
+    },
+    "relationship": []
+  },
+  {
+    "name": "info",
+    "revision": "4.13a-8.el6",
+    "@id": "data:info/4.13a-8.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "info/4.13a-8.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "info",
+    "revision": "4.13a-8.el6",
+    "@id": "data:info/4.13a-8.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "info/4.13a-8.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "info",
+    "revision": "4.13a-8.el6",
+    "@id": "data:info/4.13a-8.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "info/4.13a-8.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsepol",
+    "revision": "2.0.41-4.el6",
+    "@id": "data:libsepol/2.0.41-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "libsepol/2.0.41-4.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsepol",
+    "revision": "2.0.41-4.el6",
+    "@id": "data:libsepol/2.0.41-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "libsepol/2.0.41-4.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsepol",
+    "revision": "2.0.41-4.el6",
+    "@id": "data:libsepol/2.0.41-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "libsepol/2.0.41-4.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "nspr",
+    "revision": "4.10.0-1.el6",
+    "@id": "data:nspr/4.10.0-1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "nspr/4.10.0-1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "nspr",
+    "revision": "4.10.0-1.el6",
+    "@id": "data:nspr/4.10.0-1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "nspr/4.10.0-1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "nspr",
+    "revision": "4.10.0-1.el6",
+    "@id": "data:nspr/4.10.0-1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "nspr/4.10.0-1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "shadow-utils",
+    "revision": "4.1.4.2-13.el6",
+    "@id": "data:shadow-utils/4.1.4.2-13.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "shadow-utils/4.1.4.2-13.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "shadow-utils",
+    "revision": "4.1.4.2-13.el6",
+    "@id": "data:shadow-utils/4.1.4.2-13.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "shadow-utils/4.1.4.2-13.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "shadow-utils",
+    "revision": "4.1.4.2-13.el6",
+    "@id": "data:shadow-utils/4.1.4.2-13.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "shadow-utils/4.1.4.2-13.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcom_err",
+    "revision": "1.41.12-18.el6",
+    "@id": "data:libcom_err/1.41.12-18.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "libcom_err/1.41.12-18.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcom_err",
+    "revision": "1.41.12-18.el6",
+    "@id": "data:libcom_err/1.41.12-18.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "libcom_err/1.41.12-18.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcom_err",
+    "revision": "1.41.12-18.el6",
+    "@id": "data:libcom_err/1.41.12-18.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "libcom_err/1.41.12-18.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "bzip2-libs",
+    "revision": "1.0.5-7.el6_0",
+    "@id": "data:bzip2-libs/1.0.5-7.el6_0",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "bzip2-libs/1.0.5-7.el6_0/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "bzip2-libs",
+    "revision": "1.0.5-7.el6_0",
+    "@id": "data:bzip2-libs/1.0.5-7.el6_0",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "bzip2-libs/1.0.5-7.el6_0/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "bzip2-libs",
+    "revision": "1.0.5-7.el6_0",
+    "@id": "data:bzip2-libs/1.0.5-7.el6_0",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "bzip2-libs/1.0.5-7.el6_0/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "pcre",
+    "revision": "7.8-6.el6",
+    "@id": "data:pcre/7.8-6.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "pcre/7.8-6.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "pcre",
+    "revision": "7.8-6.el6",
+    "@id": "data:pcre/7.8-6.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "pcre/7.8-6.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "pcre",
+    "revision": "7.8-6.el6",
+    "@id": "data:pcre/7.8-6.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "pcre/7.8-6.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libtasn1",
+    "revision": "2.3-3.el6_2.1",
+    "@id": "data:libtasn1/2.3-3.el6_2.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "libtasn1/2.3-3.el6_2.1/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libtasn1",
+    "revision": "2.3-3.el6_2.1",
+    "@id": "data:libtasn1/2.3-3.el6_2.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "libtasn1/2.3-3.el6_2.1/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libtasn1",
+    "revision": "2.3-3.el6_2.1",
+    "@id": "data:libtasn1/2.3-3.el6_2.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "libtasn1/2.3-3.el6_2.1/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ca-certificates",
+    "revision": "2013.1.94-65.0.el6",
+    "@id": "data:ca-certificates/2013.1.94-65.0.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "ca-certificates/2013.1.94-65.0.el6/noarch"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ca-certificates",
+    "revision": "2013.1.94-65.0.el6",
+    "@id": "data:ca-certificates/2013.1.94-65.0.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "ca-certificates/2013.1.94-65.0.el6/noarch"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ca-certificates",
+    "revision": "2013.1.94-65.0.el6",
+    "@id": "data:ca-certificates/2013.1.94-65.0.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "ca-certificates/2013.1.94-65.0.el6/noarch"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libutempter",
+    "revision": "1.1.5-4.1.el6",
+    "@id": "data:libutempter/1.1.5-4.1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "libutempter/1.1.5-4.1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libutempter",
+    "revision": "1.1.5-4.1.el6",
+    "@id": "data:libutempter/1.1.5-4.1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "libutempter/1.1.5-4.1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libutempter",
+    "revision": "1.1.5-4.1.el6",
+    "@id": "data:libutempter/1.1.5-4.1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "libutempter/1.1.5-4.1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "cpio",
+    "revision": "2.10-11.el6_3",
+    "@id": "data:cpio/2.10-11.el6_3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "cpio/2.10-11.el6_3/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "cpio",
+    "revision": "2.10-11.el6_3",
+    "@id": "data:cpio/2.10-11.el6_3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "cpio/2.10-11.el6_3/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "cpio",
+    "revision": "2.10-11.el6_3",
+    "@id": "data:cpio/2.10-11.el6_3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "cpio/2.10-11.el6_3/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "checkpolicy",
+    "revision": "2.0.22-1.el6",
+    "@id": "data:checkpolicy/2.0.22-1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "checkpolicy/2.0.22-1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "checkpolicy",
+    "revision": "2.0.22-1.el6",
+    "@id": "data:checkpolicy/2.0.22-1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "checkpolicy/2.0.22-1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "checkpolicy",
+    "revision": "2.0.22-1.el6",
+    "@id": "data:checkpolicy/2.0.22-1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "checkpolicy/2.0.22-1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "sqlite",
+    "revision": "3.6.20-1.el6",
+    "@id": "data:sqlite/3.6.20-1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "sqlite/3.6.20-1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "sqlite",
+    "revision": "3.6.20-1.el6",
+    "@id": "data:sqlite/3.6.20-1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "sqlite/3.6.20-1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "sqlite",
+    "revision": "3.6.20-1.el6",
+    "@id": "data:sqlite/3.6.20-1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "sqlite/3.6.20-1.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "make",
+    "revision": "3.81-20.el6",
+    "@id": "data:make/3.81-20.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "make/3.81-20.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "make",
+    "revision": "3.81-20.el6",
+    "@id": "data:make/3.81-20.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "make/3.81-20.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "make",
+    "revision": "3.81-20.el6",
+    "@id": "data:make/3.81-20.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "make/3.81-20.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libselinux-utils",
+    "revision": "2.0.94-5.3.el6_4.1",
+    "@id": "data:libselinux-utils/2.0.94-5.3.el6_4.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "libselinux-utils/2.0.94-5.3.el6_4.1/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libselinux-utils",
+    "revision": "2.0.94-5.3.el6_4.1",
+    "@id": "data:libselinux-utils/2.0.94-5.3.el6_4.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "libselinux-utils/2.0.94-5.3.el6_4.1/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libselinux-utils",
+    "revision": "2.0.94-5.3.el6_4.1",
+    "@id": "data:libselinux-utils/2.0.94-5.3.el6_4.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "libselinux-utils/2.0.94-5.3.el6_4.1/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "gmp",
+    "revision": "4.3.1-7.el6_2.2",
+    "@id": "data:gmp/4.3.1-7.el6_2.2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "gmp/4.3.1-7.el6_2.2/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "gmp",
+    "revision": "4.3.1-7.el6_2.2",
+    "@id": "data:gmp/4.3.1-7.el6_2.2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "gmp/4.3.1-7.el6_2.2/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "gmp",
+    "revision": "4.3.1-7.el6_2.2",
+    "@id": "data:gmp/4.3.1-7.el6_2.2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "gmp/4.3.1-7.el6_2.2/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "cracklib",
+    "revision": "2.8.16-4.el6",
+    "@id": "data:cracklib/2.8.16-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "cracklib/2.8.16-4.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "cracklib",
+    "revision": "2.8.16-4.el6",
+    "@id": "data:cracklib/2.8.16-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "cracklib/2.8.16-4.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "cracklib",
+    "revision": "2.8.16-4.el6",
+    "@id": "data:cracklib/2.8.16-4.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "cracklib/2.8.16-4.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "pam",
+    "revision": "1.1.1-17.el6",
+    "@id": "data:pam/1.1.1-17.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "pam/1.1.1-17.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "pam",
+    "revision": "1.1.1-17.el6",
+    "@id": "data:pam/1.1.1-17.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "pam/1.1.1-17.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "pam",
+    "revision": "1.1.1-17.el6",
+    "@id": "data:pam/1.1.1-17.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "pam/1.1.1-17.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "nss-sysinit",
+    "revision": "3.15.1-15.el6",
+    "@id": "data:nss-sysinit/3.15.1-15.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "nss-sysinit/3.15.1-15.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "nss-sysinit",
+    "revision": "3.15.1-15.el6",
+    "@id": "data:nss-sysinit/3.15.1-15.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "nss-sysinit/3.15.1-15.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "nss-sysinit",
+    "revision": "3.15.1-15.el6",
+    "@id": "data:nss-sysinit/3.15.1-15.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "nss-sysinit/3.15.1-15.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "curl",
+    "revision": "7.19.7-37.el6_4",
+    "@id": "data:curl/7.19.7-37.el6_4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "curl/7.19.7-37.el6_4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "curl",
+    "revision": "7.19.7-37.el6_4",
+    "@id": "data:curl/7.19.7-37.el6_4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "curl/7.19.7-37.el6_4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "curl",
+    "revision": "7.19.7-37.el6_4",
+    "@id": "data:curl/7.19.7-37.el6_4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "curl/7.19.7-37.el6_4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "hesiod",
+    "revision": "3.1.0-19.el6",
+    "@id": "data:hesiod/3.1.0-19.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "hesiod/3.1.0-19.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "hesiod",
+    "revision": "3.1.0-19.el6",
+    "@id": "data:hesiod/3.1.0-19.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "hesiod/3.1.0-19.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "hesiod",
+    "revision": "3.1.0-19.el6",
+    "@id": "data:hesiod/3.1.0-19.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "hesiod/3.1.0-19.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "hwdata",
+    "revision": "0.233-9.1.el6",
+    "@id": "data:hwdata/0.233-9.1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "hwdata/0.233-9.1.el6/noarch"
+    },
+    "relationship": []
+  },
+  {
+    "name": "hwdata",
+    "revision": "0.233-9.1.el6",
+    "@id": "data:hwdata/0.233-9.1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "hwdata/0.233-9.1.el6/noarch"
+    },
+    "relationship": []
+  },
+  {
+    "name": "hwdata",
+    "revision": "0.233-9.1.el6",
+    "@id": "data:hwdata/0.233-9.1.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "hwdata/0.233-9.1.el6/noarch"
+    },
+    "relationship": []
+  },
+  {
+    "name": "gamin",
+    "revision": "0.1.10-9.el6",
+    "@id": "data:gamin/0.1.10-9.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "gamin/0.1.10-9.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "gamin",
+    "revision": "0.1.10-9.el6",
+    "@id": "data:gamin/0.1.10-9.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "gamin/0.1.10-9.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "gamin",
+    "revision": "0.1.10-9.el6",
+    "@id": "data:gamin/0.1.10-9.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "gamin/0.1.10-9.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "policycoreutils",
+    "revision": "2.0.83-19.39.el6",
+    "@id": "data:policycoreutils/2.0.83-19.39.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "policycoreutils/2.0.83-19.39.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "policycoreutils",
+    "revision": "2.0.83-19.39.el6",
+    "@id": "data:policycoreutils/2.0.83-19.39.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "policycoreutils/2.0.83-19.39.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "policycoreutils",
+    "revision": "2.0.83-19.39.el6",
+    "@id": "data:policycoreutils/2.0.83-19.39.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "policycoreutils/2.0.83-19.39.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "util-linux-ng",
+    "revision": "2.17.2-12.14.el6",
+    "@id": "data:util-linux-ng/2.17.2-12.14.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "util-linux-ng/2.17.2-12.14.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "util-linux-ng",
+    "revision": "2.17.2-12.14.el6",
+    "@id": "data:util-linux-ng/2.17.2-12.14.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "util-linux-ng/2.17.2-12.14.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "util-linux-ng",
+    "revision": "2.17.2-12.14.el6",
+    "@id": "data:util-linux-ng/2.17.2-12.14.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "util-linux-ng/2.17.2-12.14.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "cyrus-sasl",
+    "revision": "2.1.23-13.el6_3.1",
+    "@id": "data:cyrus-sasl/2.1.23-13.el6_3.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "cyrus-sasl/2.1.23-13.el6_3.1/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "cyrus-sasl",
+    "revision": "2.1.23-13.el6_3.1",
+    "@id": "data:cyrus-sasl/2.1.23-13.el6_3.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "cyrus-sasl/2.1.23-13.el6_3.1/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "cyrus-sasl",
+    "revision": "2.1.23-13.el6_3.1",
+    "@id": "data:cyrus-sasl/2.1.23-13.el6_3.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "cyrus-sasl/2.1.23-13.el6_3.1/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "crontabs",
+    "revision": "1.10-33.el6",
+    "@id": "data:crontabs/1.10-33.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "crontabs/1.10-33.el6/noarch"
+    },
+    "relationship": []
+  },
+  {
+    "name": "crontabs",
+    "revision": "1.10-33.el6",
+    "@id": "data:crontabs/1.10-33.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "crontabs/1.10-33.el6/noarch"
+    },
+    "relationship": []
+  },
+  {
+    "name": "crontabs",
+    "revision": "1.10-33.el6",
+    "@id": "data:crontabs/1.10-33.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "crontabs/1.10-33.el6/noarch"
+    },
+    "relationship": []
+  },
+  {
+    "name": "perl-Pod-Escapes",
+    "revision": "1.04-136.el6",
+    "@id": "data:perl-Pod-Escapes/1.04-136.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "perl-Pod-Escapes/1.04-136.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "perl-Pod-Escapes",
+    "revision": "1.04-136.el6",
+    "@id": "data:perl-Pod-Escapes/1.04-136.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "perl-Pod-Escapes/1.04-136.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "perl-Pod-Escapes",
+    "revision": "1.04-136.el6",
+    "@id": "data:perl-Pod-Escapes/1.04-136.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "perl-Pod-Escapes/1.04-136.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "perl-Module-Pluggable",
+    "revision": "3.90-136.el6",
+    "@id": "data:perl-Module-Pluggable/3.90-136.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "perl-Module-Pluggable/3.90-136.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "perl-Module-Pluggable",
+    "revision": "3.90-136.el6",
+    "@id": "data:perl-Module-Pluggable/3.90-136.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "perl-Module-Pluggable/3.90-136.el6/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "perl-Module-Pluggable",
+    "revision": "3.90-136.el6",
+    "@id": "data:perl-Module-Pluggable/3.90-136.el6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "perl-Module-Pluggable/3.90-136.el6/x86_64"
+    },
+    "relationship": []
+  }
+]

@@ -50,6 +50,11 @@ class EndToEndTest {
 		test("tomcat", "6.0.53-jre7", "var_lib_dpkg")
 	}
 
+	@Test
+	public void testRhel() {
+		test("dnplus/rhel", "6.5", "var_lib_rpm")
+	}
+
 	private void test(String image, String tag, String pkgMgrPathString) {
 		println "Running end to end test on ${image}:${tag}"
 		String imageUnderscored = image.replace('/', '_')
