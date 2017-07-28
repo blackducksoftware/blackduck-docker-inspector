@@ -38,9 +38,10 @@ class EndToEndTest {
 		println "Running end to end test on ${image}:${tag}"
 
 		File expectedBdio = new File("src/test/resources/bdio/${image}_${pkgMgrPathString}_${image}_${tag}_bdio.jsonld")
+		assertTrue(expectedBdio.exists())
 		File actualBdio = new File("test/output/${image}_${pkgMgrPathString}_${image}_${tag}_bdio.jsonld")
 		Files.deleteIfExists(actualBdio.toPath())
-
+		assertFalse(actualBdio.exists())
 		ProcessBuilder pb =
 				new ProcessBuilder("build/hub-docker-inspector.sh",
 				"--logging.level.com.blackducksoftware=INFO",
@@ -56,9 +57,10 @@ class EndToEndTest {
 		boolean finished = p.waitFor(240, TimeUnit.SECONDS)
 		assertTrue(finished)
 		println "hub-docker-inspector done; verifying results..."
-
+		assertTrue(actualBdio.exists())
 		List<String> exceptLinesContainingThese = new ArrayList<>()
 		exceptLinesContainingThese.add("\"@id\":")
+
 		boolean outputBdioIsGood = TestUtils.contentEquals(expectedBdio, actualBdio, exceptLinesContainingThese)
 		assertTrue(outputBdioIsGood)
 	}
