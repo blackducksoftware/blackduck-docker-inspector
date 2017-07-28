@@ -307,7 +307,7 @@ task stopDockerContainer(type: Exec) {
 	commandLine 'docker', 'stop', 'hub-docker-inspector'
 }
 
-task testPrep(dependsOn: [stopDockerContainer, removeDockerImage_ubuntu, removeDockerImage_centos, removeDockerImage_alpine, buildTestDockerTarfile]) {
+task testPrep(dependsOn: [stopDockerContainer, removeDockerImage_ubuntu, removeDockerImage_centos, removeDockerImage_alpine, buildTestDockerTarfile, packageScript]) {
 	
 }
 
