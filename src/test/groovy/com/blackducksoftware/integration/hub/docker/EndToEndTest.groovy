@@ -21,6 +21,11 @@ class EndToEndTest {
 	}
 
 	@Test
+	public void testUbuntu() {
+		test("ubuntu", "17.04", "var_lib_dpkg")
+	}
+
+	@Test
 	public void testAlpine() {
 		test("alpine", "3.6", "lib_apk")
 	}
