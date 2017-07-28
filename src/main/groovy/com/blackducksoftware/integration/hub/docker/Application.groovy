@@ -161,7 +161,9 @@ class Application {
 		}
 		initImageName()
 		logger.info("Inspecting image/tag ${dockerImageName}/${dockerTagName}")
-		verifyHubConnection()
+		if (!dryRun) {
+			verifyHubConnection()
+		}
 		hubDockerManager.init()
 		hubDockerManager.cleanWorkingDirectory()
 	}
