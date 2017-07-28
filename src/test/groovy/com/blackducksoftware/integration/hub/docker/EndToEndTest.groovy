@@ -34,12 +34,18 @@ class EndToEndTest {
 	public void testCentos() {
 		test("centos", "7.3.1611", "var_lib_rpm")
 	}
+
+	@Test
+	public void testHubWebapp() {
+		test("blackducksoftware/hub-webapp", "4.0.0", "lib_apk")
+	}
+
 	private void test(String image, String tag, String pkgMgrPathString) {
 		println "Running end to end test on ${image}:${tag}"
-
-		File expectedBdio = new File("src/test/resources/bdio/${image}_${pkgMgrPathString}_${image}_${tag}_bdio.jsonld")
+		String imageUnderscored = image.replace('/', '_')
+		File expectedBdio = new File("src/test/resources/bdio/${imageUnderscored}_${pkgMgrPathString}_${imageUnderscored}_${tag}_bdio.jsonld")
 		assertTrue(expectedBdio.exists())
-		File actualBdio = new File("test/output/${image}_${pkgMgrPathString}_${image}_${tag}_bdio.jsonld")
+		File actualBdio = new File("test/output/${imageUnderscored}_${pkgMgrPathString}_${imageUnderscored}_${tag}_bdio.jsonld")
 		Files.deleteIfExists(actualBdio.toPath())
 		assertFalse(actualBdio.exists())
 		ProcessBuilder pb =
