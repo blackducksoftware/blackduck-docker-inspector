@@ -1,0 +1,6651 @@
+[
+  {
+    "specVersion": "1.1.0",
+    "spdx:name": "tomcat_6.0.53-jre7_var_lib_dpkg_DPKG",
+    "@id": "uuid:ebde1953-c30f-4d72-8159-c6bc580d646d",
+    "@type": "BillOfMaterials",
+    "relationship": []
+  },
+  {
+    "name": "tomcat",
+    "revision": "6.0.53-jre7",
+    "@id": "com.blackducksoftware.integration.hub.bdio.simple.model.BdioExternalIdentifier@65f095f8",
+    "@type": "Project",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "tomcat/6.0.53-jre7"
+    },
+    "relationship": [
+      {
+        "related": "data:acl/2.2.52-2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:acl/2.2.52-2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:adduser/3.113+nmu3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:adduser/3.113+nmu3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:apt/1.0.9.8.4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:apt/1.0.9.8.4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:base-files/8+deb8u9",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:base-files/8+deb8u9",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:base-passwd/3.5.37",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:base-passwd/3.5.37",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:bash/4.3-11+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:bash/4.3-11+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:bsdutils/1:2.25.2-6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:bsdutils/1:2.25.2-6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:bzip2/1.0.6-7+b3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:bzip2/1.0.6-7+b3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ca-certificates/20141019+deb8u3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ca-certificates/20141019+deb8u3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ca-certificates-java/20140324",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ca-certificates-java/20140324",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:coreutils/8.23-4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:coreutils/8.23-4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:curl/7.38.0-4+deb8u5",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:curl/7.38.0-4+deb8u5",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:dash/0.5.7-4+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:dash/0.5.7-4+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:dbus/1.8.22-0+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:dbus/1.8.22-0+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:debconf/1.5.56+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:debconf/1.5.56+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:debconf-i18n/1.5.56+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:debconf-i18n/1.5.56+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:debian-archive-keyring/2017.5~deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:debian-archive-keyring/2017.5~deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:debianutils/4.4+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:debianutils/4.4+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:diffutils/1:3.3-1+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:diffutils/1:3.3-1+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:dmsetup/2:1.02.90-2.2+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:dmsetup/2:1.02.90-2.2+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:dpkg/1.17.27",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:dpkg/1.17.27",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:e2fslibs/1.42.12-2+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:e2fslibs/1.42.12-2+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:e2fsprogs/1.42.12-2+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:e2fsprogs/1.42.12-2+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:findutils/4.4.2-9+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:findutils/4.4.2-9+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:fontconfig-config/2.11.0-6.3+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:fontconfig-config/2.11.0-6.3+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:fonts-dejavu-core/2.34-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:fonts-dejavu-core/2.34-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:gcc-4.8-base/4.8.4-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:gcc-4.8-base/4.8.4-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:gcc-4.9-base/4.9.2-10",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:gcc-4.9-base/4.9.2-10",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:gnupg/1.4.18-7+deb8u3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:gnupg/1.4.18-7+deb8u3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:gpgv/1.4.18-7+deb8u3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:gpgv/1.4.18-7+deb8u3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:grep/2.20-4.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:grep/2.20-4.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:gzip/1.6-4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:gzip/1.6-4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:hostname/3.15",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:hostname/3.15",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:inetutils-ping/2:1.9.2.39.3a460-3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:inetutils-ping/2:1.9.2.39.3a460-3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:init/1.22",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:init/1.22",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:initscripts/2.88dsf-59",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:initscripts/2.88dsf-59",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:insserv/1.14.0-5",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:insserv/1.14.0-5",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:iproute2/3.16.0-2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:iproute2/3.16.0-2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:java-common/0.52",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:java-common/0.52",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libacl1/2.2.52-2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libacl1/2.2.52-2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libalgorithm-c3-perl/0.09-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libalgorithm-c3-perl/0.09-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libapr1/1.5.1-3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libapr1/1.5.1-3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libapt-pkg4.12/1.0.9.8.4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libapt-pkg4.12/1.0.9.8.4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libarchive-extract-perl/0.72-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libarchive-extract-perl/0.72-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libasyncns0/0.8-5",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libasyncns0/0.8-5",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libattr1/1:2.4.47-2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libattr1/1:2.4.47-2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libaudit-common/1:2.4-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libaudit-common/1:2.4-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libaudit1/1:2.4-1+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libaudit1/1:2.4-1+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libavahi-client3/0.6.31-5",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libavahi-client3/0.6.31-5",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libavahi-common-data/0.6.31-5",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libavahi-common-data/0.6.31-5",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libavahi-common3/0.6.31-5",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libavahi-common3/0.6.31-5",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libblkid1/2.25.2-6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libblkid1/2.25.2-6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libbz2-1.0/1.0.6-7+b3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libbz2-1.0/1.0.6-7+b3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libc-bin/2.19-18+deb8u10",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libc-bin/2.19-18+deb8u10",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libc6/2.19-18+deb8u10",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libc6/2.19-18+deb8u10",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcap-ng0/0.7.4-2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcap-ng0/0.7.4-2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcap2/1:2.24-8",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcap2/1:2.24-8",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcap2-bin/1:2.24-8",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcap2-bin/1:2.24-8",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcgi-fast-perl/1:2.04-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcgi-fast-perl/1:2.04-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcgi-pm-perl/4.09-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcgi-pm-perl/4.09-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libclass-c3-perl/0.26-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libclass-c3-perl/0.26-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libclass-c3-xs-perl/0.13-2+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libclass-c3-xs-perl/0.13-2+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcomerr2/1.42.12-2+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcomerr2/1.42.12-2+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcpan-meta-perl/2.142690-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcpan-meta-perl/2.142690-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcryptsetup4/2:1.6.6-5",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcryptsetup4/2:1.6.6-5",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcups2/1.7.5-11+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcups2/1.7.5-11+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcurl3/7.38.0-4+deb8u5",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libcurl3/7.38.0-4+deb8u5",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libdata-optlist-perl/0.109-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libdata-optlist-perl/0.109-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libdata-section-perl/0.200006-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libdata-section-perl/0.200006-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libdb5.3/5.3.28-9",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libdb5.3/5.3.28-9",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libdbus-1-3/1.8.22-0+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libdbus-1-3/1.8.22-0+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libdebconfclient0/0.192",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libdebconfclient0/0.192",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libdevmapper1.02.1/2:1.02.90-2.2+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libdevmapper1.02.1/2:1.02.90-2.2+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libexpat1/2.1.0-6+deb8u4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libexpat1/2.1.0-6+deb8u4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libfcgi-perl/0.77-1+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libfcgi-perl/0.77-1+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libffi6/3.1-2+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libffi6/3.1-2+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libflac8/1.3.0-3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libflac8/1.3.0-3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libfontconfig1/2.11.0-6.3+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libfontconfig1/2.11.0-6.3+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libfreetype6/2.5.2-3+deb8u2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libfreetype6/2.5.2-3+deb8u2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libgcc1/1:4.9.2-10",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libgcc1/1:4.9.2-10",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libgcrypt20/1.6.3-2+deb8u4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libgcrypt20/1.6.3-2+deb8u4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libgdbm3/1.8.3-13.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libgdbm3/1.8.3-13.1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libglib2.0-0/2.42.1-1+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libglib2.0-0/2.42.1-1+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libglib2.0-data/2.42.1-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libglib2.0-data/2.42.1-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libgmp10/2:6.0.0+dfsg-6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libgmp10/2:6.0.0+dfsg-6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libgnutls-deb0-28/3.3.8-6+deb8u7",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libgnutls-deb0-28/3.3.8-6+deb8u7",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libgpg-error0/1.17-3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libgpg-error0/1.17-3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libgssapi-krb5-2/1.12.1+dfsg-19+deb8u2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libgssapi-krb5-2/1.12.1+dfsg-19+deb8u2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libhogweed2/2.7.1-5+deb8u2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libhogweed2/2.7.1-5+deb8u2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libice6/2:1.0.9-1+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libice6/2:1.0.9-1+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libicu52/52.1-8+deb8u5",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libicu52/52.1-8+deb8u5",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libidn11/1.29-1+deb8u2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libidn11/1.29-1+deb8u2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libjpeg62-turbo/1:1.3.1-12",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libjpeg62-turbo/1:1.3.1-12",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libjson-c2/0.11-4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libjson-c2/0.11-4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libk5crypto3/1.12.1+dfsg-19+deb8u2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libk5crypto3/1.12.1+dfsg-19+deb8u2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libkeyutils1/1.5.9-5+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libkeyutils1/1.5.9-5+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libkmod2/18-3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libkmod2/18-3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libkrb5-3/1.12.1+dfsg-19+deb8u2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libkrb5-3/1.12.1+dfsg-19+deb8u2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libkrb5support0/1.12.1+dfsg-19+deb8u2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libkrb5support0/1.12.1+dfsg-19+deb8u2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:liblcms2-2/2.6-3+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:liblcms2-2/2.6-3+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libldap-2.4-2/2.4.40+dfsg-1+deb8u3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libldap-2.4-2/2.4.40+dfsg-1+deb8u3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:liblocale-gettext-perl/1.05-8+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:liblocale-gettext-perl/1.05-8+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:liblog-message-perl/0.8-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:liblog-message-perl/0.8-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:liblog-message-simple-perl/0.10-2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:liblog-message-simple-perl/0.10-2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:liblzma5/5.1.1alpha+20120614-2+b3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:liblzma5/5.1.1alpha+20120614-2+b3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libmodule-build-perl/0.421000-2+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libmodule-build-perl/0.421000-2+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libmodule-pluggable-perl/5.1-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libmodule-pluggable-perl/5.1-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libmodule-signature-perl/0.73-1+deb8u2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libmodule-signature-perl/0.73-1+deb8u2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libmount1/2.25.2-6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libmount1/2.25.2-6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libmro-compat-perl/0.12-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libmro-compat-perl/0.12-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libncurses5/5.9+20140913-1+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libncurses5/5.9+20140913-1+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libncursesw5/5.9+20140913-1+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libncursesw5/5.9+20140913-1+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libnettle4/2.7.1-5+deb8u2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libnettle4/2.7.1-5+deb8u2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libnspr4/2:4.12-1+debu8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libnspr4/2:4.12-1+debu8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libnss3/2:3.26-1+debu8u2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libnss3/2:3.26-1+debu8u2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libogg0/1.3.2-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libogg0/1.3.2-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libp11-kit0/0.20.7-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libp11-kit0/0.20.7-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libpackage-constants-perl/0.04-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libpackage-constants-perl/0.04-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libpam-modules/1.1.8-3.1+deb8u2+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libpam-modules/1.1.8-3.1+deb8u2+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libpam-modules-bin/1.1.8-3.1+deb8u2+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libpam-modules-bin/1.1.8-3.1+deb8u2+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libpam-runtime/1.1.8-3.1+deb8u2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libpam-runtime/1.1.8-3.1+deb8u2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libpam0g/1.1.8-3.1+deb8u2+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libpam0g/1.1.8-3.1+deb8u2+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libparams-util-perl/1.07-2+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libparams-util-perl/1.07-2+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libpcre3/2:8.35-3.3+deb8u4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libpcre3/2:8.35-3.3+deb8u4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libpcsclite1/1.8.13-1+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libpcsclite1/1.8.13-1+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libpng12-0/1.2.50-2+deb8u3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libpng12-0/1.2.50-2+deb8u3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libpod-latex-perl/0.61-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libpod-latex-perl/0.61-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libpod-readme-perl/0.11-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libpod-readme-perl/0.11-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libprocps3/2:3.3.9-9",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libprocps3/2:3.3.9-9",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libpsl0/0.5.1-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libpsl0/0.5.1-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libpulse0/5.0-13",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libpulse0/5.0-13",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libreadline6/6.3-8+b3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libreadline6/6.3-8+b3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libregexp-common-perl/2013031301-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libregexp-common-perl/2013031301-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:librtmp1/2.4+20150115.gita107cef-1+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:librtmp1/2.4+20150115.gita107cef-1+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsasl2-2/2.1.26.dfsg1-13+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsasl2-2/2.1.26.dfsg1-13+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsasl2-modules-db/2.1.26.dfsg1-13+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsasl2-modules-db/2.1.26.dfsg1-13+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsctp1/1.0.16+dfsg-2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsctp1/1.0.16+dfsg-2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libselinux1/2.3-2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libselinux1/2.3-2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsemanage-common/2.3-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsemanage-common/2.3-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsemanage1/2.3-1+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsemanage1/2.3-1+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsepol1/2.3-2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsepol1/2.3-2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libslang2/2.3.0-2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libslang2/2.3.0-2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsm6/2:1.2.2-1+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsm6/2:1.2.2-1+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsmartcols1/2.25.2-6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsmartcols1/2.25.2-6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsndfile1/1.0.25-9.1+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsndfile1/1.0.25-9.1+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsoftware-license-perl/0.103010-3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsoftware-license-perl/0.103010-3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsqlite3-0/3.8.7.1-1+deb8u2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsqlite3-0/3.8.7.1-1+deb8u2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libss2/1.42.12-2+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libss2/1.42.12-2+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libssh2-1/1.4.3-4.1+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libssh2-1/1.4.3-4.1+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libssl1.0.0/1.0.1t-1+deb8u6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libssl1.0.0/1.0.1t-1+deb8u6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libssl1.1/1.1.0f-3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libssl1.1/1.1.0f-3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libstdc++6/4.9.2-10",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libstdc++6/4.9.2-10",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsub-exporter-perl/0.986-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsub-exporter-perl/0.986-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsub-install-perl/0.928-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsub-install-perl/0.928-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsystemd0/215-17+deb8u7",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libsystemd0/215-17+deb8u7",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libtasn1-6/4.2-3+deb8u3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libtasn1-6/4.2-3+deb8u3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libterm-ui-perl/0.42-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libterm-ui-perl/0.42-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libtext-charwidth-perl/0.04-7+b3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libtext-charwidth-perl/0.04-7+b3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libtext-iconv-perl/1.7-5+b2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libtext-iconv-perl/1.7-5+b2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libtext-soundex-perl/3.4-1+b2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libtext-soundex-perl/3.4-1+b2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libtext-template-perl/1.46-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libtext-template-perl/1.46-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libtext-wrapi18n-perl/0.06-7",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libtext-wrapi18n-perl/0.06-7",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libtinfo5/5.9+20140913-1+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libtinfo5/5.9+20140913-1+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libudev1/215-17+deb8u7",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libudev1/215-17+deb8u7",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libusb-0.1-4/2:0.1.12-25",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libusb-0.1-4/2:0.1.12-25",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libustr-1.0-1/1.0.4-3+b2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libustr-1.0-1/1.0.4-3+b2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libuuid1/2.25.2-6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libuuid1/2.25.2-6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libvorbis0a/1.3.4-2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libvorbis0a/1.3.4-2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libvorbisenc2/1.3.4-2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libvorbisenc2/1.3.4-2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libwrap0/7.6.q-25",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libwrap0/7.6.q-25",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libx11-6/2:1.6.2-3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libx11-6/2:1.6.2-3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libx11-data/2:1.6.2-3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libx11-data/2:1.6.2-3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libx11-xcb1/2:1.6.2-3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libx11-xcb1/2:1.6.2-3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libxau6/1:1.0.8-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libxau6/1:1.0.8-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libxcb1/1.10-3+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libxcb1/1.10-3+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libxdmcp6/1:1.1.1-1+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libxdmcp6/1:1.1.1-1+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libxext6/2:1.3.3-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libxext6/2:1.3.3-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libxi6/2:1.7.4-1+b2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libxi6/2:1.7.4-1+b2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libxml2/2.9.1+dfsg1-5+deb8u4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libxml2/2.9.1+dfsg1-5+deb8u4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libxtst6/2:1.2.2-1+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:libxtst6/2:1.2.2-1+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:lksctp-tools/1.0.16+dfsg-2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:lksctp-tools/1.0.16+dfsg-2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:login/1:4.2-3+deb8u4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:login/1:4.2-3+deb8u4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:lsb-base/4.1+Debian13+nmu1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:lsb-base/4.1+Debian13+nmu1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:mawk/1.3.3-17",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:mawk/1.3.3-17",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:mount/2.25.2-6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:mount/2.25.2-6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:multiarch-support/2.19-18+deb8u10",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:multiarch-support/2.19-18+deb8u10",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ncurses-base/5.9+20140913-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ncurses-base/5.9+20140913-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ncurses-bin/5.9+20140913-1+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ncurses-bin/5.9+20140913-1+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:netbase/5.3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:netbase/5.3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:openjdk-7-jre-headless/7u131-2.6.9-2~deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:openjdk-7-jre-headless/7u131-2.6.9-2~deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:openssl/1.1.0f-3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:openssl/1.1.0f-3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:passwd/1:4.2-3+deb8u4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:passwd/1:4.2-3+deb8u4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:perl/5.20.2-3+deb8u8",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:perl/5.20.2-3+deb8u8",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:perl-base/5.20.2-3+deb8u8",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:perl-base/5.20.2-3+deb8u8",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:perl-modules/5.20.2-3+deb8u8",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:perl-modules/5.20.2-3+deb8u8",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:procps/2:3.3.9-9",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:procps/2:3.3.9-9",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:readline-common/6.3-8",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:readline-common/6.3-8",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:rename/0.20-3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:rename/0.20-3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:sed/4.2.2-4+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:sed/4.2.2-4+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:sensible-utils/0.0.9",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:sensible-utils/0.0.9",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:sgml-base/1.26+nmu4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:sgml-base/1.26+nmu4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:shared-mime-info/1.3-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:shared-mime-info/1.3-1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:startpar/0.59-3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:startpar/0.59-3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:systemd/215-17+deb8u7",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:systemd/215-17+deb8u7",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:systemd-sysv/215-17+deb8u7",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:systemd-sysv/215-17+deb8u7",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:sysv-rc/2.88dsf-59",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:sysv-rc/2.88dsf-59",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:sysvinit-utils/2.88dsf-59",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:sysvinit-utils/2.88dsf-59",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:tar/1.27.1-2+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:tar/1.27.1-2+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:tcpd/7.6.q-25",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:tcpd/7.6.q-25",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:tzdata/2017b-0+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:tzdata/2017b-0+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:tzdata-java/2017b-0+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:tzdata-java/2017b-0+deb8u1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ucf/3.0030",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:ucf/3.0030",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:udev/215-17+deb8u7",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:udev/215-17+deb8u7",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:unzip/6.0-16+deb8u3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:unzip/6.0-16+deb8u3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:util-linux/2.25.2-6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:util-linux/2.25.2-6",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:wget/1.16-1+deb8u2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:wget/1.16-1+deb8u2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:x11-common/1:7.7+7",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:x11-common/1:7.7+7",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:xdg-user-dirs/0.15-2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:xdg-user-dirs/0.15-2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:xml-core/0.13+nmu2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:xml-core/0.13+nmu2",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:xz-utils/5.1.1alpha+20120614-2+b3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:xz-utils/5.1.1alpha+20120614-2+b3",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:zlib1g/1:1.2.8.dfsg-2+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:zlib1g/1:1.2.8.dfsg-2+b1",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "acl",
+    "revision": "2.2.52-2",
+    "@id": "data:acl/2.2.52-2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "acl/2.2.52-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "acl",
+    "revision": "2.2.52-2",
+    "@id": "data:acl/2.2.52-2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "acl/2.2.52-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "adduser",
+    "revision": "3.113+nmu3",
+    "@id": "data:adduser/3.113+nmu3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "adduser/3.113+nmu3/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "adduser",
+    "revision": "3.113+nmu3",
+    "@id": "data:adduser/3.113+nmu3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "adduser/3.113+nmu3/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "apt",
+    "revision": "1.0.9.8.4",
+    "@id": "data:apt/1.0.9.8.4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "apt/1.0.9.8.4/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "apt",
+    "revision": "1.0.9.8.4",
+    "@id": "data:apt/1.0.9.8.4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "apt/1.0.9.8.4/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "base-files",
+    "revision": "8+deb8u9",
+    "@id": "data:base-files/8+deb8u9",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "base-files/8+deb8u9/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "base-files",
+    "revision": "8+deb8u9",
+    "@id": "data:base-files/8+deb8u9",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "base-files/8+deb8u9/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "base-passwd",
+    "revision": "3.5.37",
+    "@id": "data:base-passwd/3.5.37",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "base-passwd/3.5.37/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "base-passwd",
+    "revision": "3.5.37",
+    "@id": "data:base-passwd/3.5.37",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "base-passwd/3.5.37/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "bash",
+    "revision": "4.3-11+deb8u1",
+    "@id": "data:bash/4.3-11+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "bash/4.3-11+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "bash",
+    "revision": "4.3-11+deb8u1",
+    "@id": "data:bash/4.3-11+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "bash/4.3-11+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "bsdutils",
+    "revision": "1:2.25.2-6",
+    "@id": "data:bsdutils/1:2.25.2-6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "bsdutils/1:2.25.2-6/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "bsdutils",
+    "revision": "1:2.25.2-6",
+    "@id": "data:bsdutils/1:2.25.2-6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "bsdutils/1:2.25.2-6/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "bzip2",
+    "revision": "1.0.6-7+b3",
+    "@id": "data:bzip2/1.0.6-7+b3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "bzip2/1.0.6-7+b3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "bzip2",
+    "revision": "1.0.6-7+b3",
+    "@id": "data:bzip2/1.0.6-7+b3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "bzip2/1.0.6-7+b3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ca-certificates",
+    "revision": "20141019+deb8u3",
+    "@id": "data:ca-certificates/20141019+deb8u3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "ca-certificates/20141019+deb8u3/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ca-certificates",
+    "revision": "20141019+deb8u3",
+    "@id": "data:ca-certificates/20141019+deb8u3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "ca-certificates/20141019+deb8u3/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ca-certificates-java",
+    "revision": "20140324",
+    "@id": "data:ca-certificates-java/20140324",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "ca-certificates-java/20140324/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ca-certificates-java",
+    "revision": "20140324",
+    "@id": "data:ca-certificates-java/20140324",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "ca-certificates-java/20140324/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "coreutils",
+    "revision": "8.23-4",
+    "@id": "data:coreutils/8.23-4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "coreutils/8.23-4/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "coreutils",
+    "revision": "8.23-4",
+    "@id": "data:coreutils/8.23-4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "coreutils/8.23-4/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "curl",
+    "revision": "7.38.0-4+deb8u5",
+    "@id": "data:curl/7.38.0-4+deb8u5",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "curl/7.38.0-4+deb8u5/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "curl",
+    "revision": "7.38.0-4+deb8u5",
+    "@id": "data:curl/7.38.0-4+deb8u5",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "curl/7.38.0-4+deb8u5/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "dash",
+    "revision": "0.5.7-4+b1",
+    "@id": "data:dash/0.5.7-4+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "dash/0.5.7-4+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "dash",
+    "revision": "0.5.7-4+b1",
+    "@id": "data:dash/0.5.7-4+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "dash/0.5.7-4+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "dbus",
+    "revision": "1.8.22-0+deb8u1",
+    "@id": "data:dbus/1.8.22-0+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "dbus/1.8.22-0+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "dbus",
+    "revision": "1.8.22-0+deb8u1",
+    "@id": "data:dbus/1.8.22-0+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "dbus/1.8.22-0+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "debconf",
+    "revision": "1.5.56+deb8u1",
+    "@id": "data:debconf/1.5.56+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "debconf/1.5.56+deb8u1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "debconf",
+    "revision": "1.5.56+deb8u1",
+    "@id": "data:debconf/1.5.56+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "debconf/1.5.56+deb8u1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "debconf-i18n",
+    "revision": "1.5.56+deb8u1",
+    "@id": "data:debconf-i18n/1.5.56+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "debconf-i18n/1.5.56+deb8u1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "debconf-i18n",
+    "revision": "1.5.56+deb8u1",
+    "@id": "data:debconf-i18n/1.5.56+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "debconf-i18n/1.5.56+deb8u1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "debian-archive-keyring",
+    "revision": "2017.5~deb8u1",
+    "@id": "data:debian-archive-keyring/2017.5~deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "debian-archive-keyring/2017.5~deb8u1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "debian-archive-keyring",
+    "revision": "2017.5~deb8u1",
+    "@id": "data:debian-archive-keyring/2017.5~deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "debian-archive-keyring/2017.5~deb8u1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "debianutils",
+    "revision": "4.4+b1",
+    "@id": "data:debianutils/4.4+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "debianutils/4.4+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "debianutils",
+    "revision": "4.4+b1",
+    "@id": "data:debianutils/4.4+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "debianutils/4.4+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "diffutils",
+    "revision": "1:3.3-1+b1",
+    "@id": "data:diffutils/1:3.3-1+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "diffutils/1:3.3-1+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "diffutils",
+    "revision": "1:3.3-1+b1",
+    "@id": "data:diffutils/1:3.3-1+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "diffutils/1:3.3-1+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "dmsetup",
+    "revision": "2:1.02.90-2.2+deb8u1",
+    "@id": "data:dmsetup/2:1.02.90-2.2+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "dmsetup/2:1.02.90-2.2+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "dmsetup",
+    "revision": "2:1.02.90-2.2+deb8u1",
+    "@id": "data:dmsetup/2:1.02.90-2.2+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "dmsetup/2:1.02.90-2.2+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "dpkg",
+    "revision": "1.17.27",
+    "@id": "data:dpkg/1.17.27",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "dpkg/1.17.27/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "dpkg",
+    "revision": "1.17.27",
+    "@id": "data:dpkg/1.17.27",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "dpkg/1.17.27/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "e2fslibs",
+    "revision": "1.42.12-2+b1",
+    "@id": "data:e2fslibs/1.42.12-2+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "e2fslibs/1.42.12-2+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "e2fslibs",
+    "revision": "1.42.12-2+b1",
+    "@id": "data:e2fslibs/1.42.12-2+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "e2fslibs/1.42.12-2+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "e2fsprogs",
+    "revision": "1.42.12-2+b1",
+    "@id": "data:e2fsprogs/1.42.12-2+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "e2fsprogs/1.42.12-2+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "e2fsprogs",
+    "revision": "1.42.12-2+b1",
+    "@id": "data:e2fsprogs/1.42.12-2+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "e2fsprogs/1.42.12-2+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "findutils",
+    "revision": "4.4.2-9+b1",
+    "@id": "data:findutils/4.4.2-9+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "findutils/4.4.2-9+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "findutils",
+    "revision": "4.4.2-9+b1",
+    "@id": "data:findutils/4.4.2-9+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "findutils/4.4.2-9+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "fontconfig-config",
+    "revision": "2.11.0-6.3+deb8u1",
+    "@id": "data:fontconfig-config/2.11.0-6.3+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "fontconfig-config/2.11.0-6.3+deb8u1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "fontconfig-config",
+    "revision": "2.11.0-6.3+deb8u1",
+    "@id": "data:fontconfig-config/2.11.0-6.3+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "fontconfig-config/2.11.0-6.3+deb8u1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "fonts-dejavu-core",
+    "revision": "2.34-1",
+    "@id": "data:fonts-dejavu-core/2.34-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "fonts-dejavu-core/2.34-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "fonts-dejavu-core",
+    "revision": "2.34-1",
+    "@id": "data:fonts-dejavu-core/2.34-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "fonts-dejavu-core/2.34-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "gcc-4.8-base",
+    "revision": "4.8.4-1",
+    "@id": "data:gcc-4.8-base/4.8.4-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "gcc-4.8-base/4.8.4-1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "gcc-4.8-base",
+    "revision": "4.8.4-1",
+    "@id": "data:gcc-4.8-base/4.8.4-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "gcc-4.8-base/4.8.4-1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "gcc-4.9-base",
+    "revision": "4.9.2-10",
+    "@id": "data:gcc-4.9-base/4.9.2-10",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "gcc-4.9-base/4.9.2-10/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "gcc-4.9-base",
+    "revision": "4.9.2-10",
+    "@id": "data:gcc-4.9-base/4.9.2-10",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "gcc-4.9-base/4.9.2-10/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "gnupg",
+    "revision": "1.4.18-7+deb8u3",
+    "@id": "data:gnupg/1.4.18-7+deb8u3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "gnupg/1.4.18-7+deb8u3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "gnupg",
+    "revision": "1.4.18-7+deb8u3",
+    "@id": "data:gnupg/1.4.18-7+deb8u3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "gnupg/1.4.18-7+deb8u3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "gpgv",
+    "revision": "1.4.18-7+deb8u3",
+    "@id": "data:gpgv/1.4.18-7+deb8u3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "gpgv/1.4.18-7+deb8u3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "gpgv",
+    "revision": "1.4.18-7+deb8u3",
+    "@id": "data:gpgv/1.4.18-7+deb8u3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "gpgv/1.4.18-7+deb8u3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "grep",
+    "revision": "2.20-4.1",
+    "@id": "data:grep/2.20-4.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "grep/2.20-4.1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "grep",
+    "revision": "2.20-4.1",
+    "@id": "data:grep/2.20-4.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "grep/2.20-4.1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "gzip",
+    "revision": "1.6-4",
+    "@id": "data:gzip/1.6-4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "gzip/1.6-4/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "gzip",
+    "revision": "1.6-4",
+    "@id": "data:gzip/1.6-4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "gzip/1.6-4/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "hostname",
+    "revision": "3.15",
+    "@id": "data:hostname/3.15",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "hostname/3.15/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "hostname",
+    "revision": "3.15",
+    "@id": "data:hostname/3.15",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "hostname/3.15/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "inetutils-ping",
+    "revision": "2:1.9.2.39.3a460-3",
+    "@id": "data:inetutils-ping/2:1.9.2.39.3a460-3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "inetutils-ping/2:1.9.2.39.3a460-3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "inetutils-ping",
+    "revision": "2:1.9.2.39.3a460-3",
+    "@id": "data:inetutils-ping/2:1.9.2.39.3a460-3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "inetutils-ping/2:1.9.2.39.3a460-3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "init",
+    "revision": "1.22",
+    "@id": "data:init/1.22",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "init/1.22/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "init",
+    "revision": "1.22",
+    "@id": "data:init/1.22",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "init/1.22/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "initscripts",
+    "revision": "2.88dsf-59",
+    "@id": "data:initscripts/2.88dsf-59",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "initscripts/2.88dsf-59/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "initscripts",
+    "revision": "2.88dsf-59",
+    "@id": "data:initscripts/2.88dsf-59",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "initscripts/2.88dsf-59/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "insserv",
+    "revision": "1.14.0-5",
+    "@id": "data:insserv/1.14.0-5",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "insserv/1.14.0-5/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "insserv",
+    "revision": "1.14.0-5",
+    "@id": "data:insserv/1.14.0-5",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "insserv/1.14.0-5/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "iproute2",
+    "revision": "3.16.0-2",
+    "@id": "data:iproute2/3.16.0-2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "iproute2/3.16.0-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "iproute2",
+    "revision": "3.16.0-2",
+    "@id": "data:iproute2/3.16.0-2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "iproute2/3.16.0-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "java-common",
+    "revision": "0.52",
+    "@id": "data:java-common/0.52",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "java-common/0.52/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "java-common",
+    "revision": "0.52",
+    "@id": "data:java-common/0.52",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "java-common/0.52/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libacl1",
+    "revision": "2.2.52-2",
+    "@id": "data:libacl1/2.2.52-2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libacl1/2.2.52-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libacl1",
+    "revision": "2.2.52-2",
+    "@id": "data:libacl1/2.2.52-2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libacl1/2.2.52-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libalgorithm-c3-perl",
+    "revision": "0.09-1",
+    "@id": "data:libalgorithm-c3-perl/0.09-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libalgorithm-c3-perl/0.09-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libalgorithm-c3-perl",
+    "revision": "0.09-1",
+    "@id": "data:libalgorithm-c3-perl/0.09-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libalgorithm-c3-perl/0.09-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libapr1",
+    "revision": "1.5.1-3",
+    "@id": "data:libapr1/1.5.1-3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libapr1/1.5.1-3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libapr1",
+    "revision": "1.5.1-3",
+    "@id": "data:libapr1/1.5.1-3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libapr1/1.5.1-3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libapt-pkg4.12",
+    "revision": "1.0.9.8.4",
+    "@id": "data:libapt-pkg4.12/1.0.9.8.4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libapt-pkg4.12/1.0.9.8.4/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libapt-pkg4.12",
+    "revision": "1.0.9.8.4",
+    "@id": "data:libapt-pkg4.12/1.0.9.8.4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libapt-pkg4.12/1.0.9.8.4/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libarchive-extract-perl",
+    "revision": "0.72-1",
+    "@id": "data:libarchive-extract-perl/0.72-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libarchive-extract-perl/0.72-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libarchive-extract-perl",
+    "revision": "0.72-1",
+    "@id": "data:libarchive-extract-perl/0.72-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libarchive-extract-perl/0.72-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libasyncns0",
+    "revision": "0.8-5",
+    "@id": "data:libasyncns0/0.8-5",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libasyncns0/0.8-5/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libasyncns0",
+    "revision": "0.8-5",
+    "@id": "data:libasyncns0/0.8-5",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libasyncns0/0.8-5/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libattr1",
+    "revision": "1:2.4.47-2",
+    "@id": "data:libattr1/1:2.4.47-2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libattr1/1:2.4.47-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libattr1",
+    "revision": "1:2.4.47-2",
+    "@id": "data:libattr1/1:2.4.47-2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libattr1/1:2.4.47-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libaudit-common",
+    "revision": "1:2.4-1",
+    "@id": "data:libaudit-common/1:2.4-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libaudit-common/1:2.4-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libaudit-common",
+    "revision": "1:2.4-1",
+    "@id": "data:libaudit-common/1:2.4-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libaudit-common/1:2.4-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libaudit1",
+    "revision": "1:2.4-1+b1",
+    "@id": "data:libaudit1/1:2.4-1+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libaudit1/1:2.4-1+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libaudit1",
+    "revision": "1:2.4-1+b1",
+    "@id": "data:libaudit1/1:2.4-1+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libaudit1/1:2.4-1+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libavahi-client3",
+    "revision": "0.6.31-5",
+    "@id": "data:libavahi-client3/0.6.31-5",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libavahi-client3/0.6.31-5/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libavahi-client3",
+    "revision": "0.6.31-5",
+    "@id": "data:libavahi-client3/0.6.31-5",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libavahi-client3/0.6.31-5/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libavahi-common-data",
+    "revision": "0.6.31-5",
+    "@id": "data:libavahi-common-data/0.6.31-5",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libavahi-common-data/0.6.31-5/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libavahi-common-data",
+    "revision": "0.6.31-5",
+    "@id": "data:libavahi-common-data/0.6.31-5",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libavahi-common-data/0.6.31-5/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libavahi-common3",
+    "revision": "0.6.31-5",
+    "@id": "data:libavahi-common3/0.6.31-5",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libavahi-common3/0.6.31-5/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libavahi-common3",
+    "revision": "0.6.31-5",
+    "@id": "data:libavahi-common3/0.6.31-5",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libavahi-common3/0.6.31-5/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libblkid1",
+    "revision": "2.25.2-6",
+    "@id": "data:libblkid1/2.25.2-6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libblkid1/2.25.2-6/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libblkid1",
+    "revision": "2.25.2-6",
+    "@id": "data:libblkid1/2.25.2-6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libblkid1/2.25.2-6/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libbz2-1.0",
+    "revision": "1.0.6-7+b3",
+    "@id": "data:libbz2-1.0/1.0.6-7+b3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libbz2-1.0/1.0.6-7+b3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libbz2-1.0",
+    "revision": "1.0.6-7+b3",
+    "@id": "data:libbz2-1.0/1.0.6-7+b3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libbz2-1.0/1.0.6-7+b3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libc-bin",
+    "revision": "2.19-18+deb8u10",
+    "@id": "data:libc-bin/2.19-18+deb8u10",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libc-bin/2.19-18+deb8u10/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libc-bin",
+    "revision": "2.19-18+deb8u10",
+    "@id": "data:libc-bin/2.19-18+deb8u10",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libc-bin/2.19-18+deb8u10/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libc6",
+    "revision": "2.19-18+deb8u10",
+    "@id": "data:libc6/2.19-18+deb8u10",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libc6/2.19-18+deb8u10/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libc6",
+    "revision": "2.19-18+deb8u10",
+    "@id": "data:libc6/2.19-18+deb8u10",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libc6/2.19-18+deb8u10/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcap-ng0",
+    "revision": "0.7.4-2",
+    "@id": "data:libcap-ng0/0.7.4-2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libcap-ng0/0.7.4-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcap-ng0",
+    "revision": "0.7.4-2",
+    "@id": "data:libcap-ng0/0.7.4-2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libcap-ng0/0.7.4-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcap2",
+    "revision": "1:2.24-8",
+    "@id": "data:libcap2/1:2.24-8",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libcap2/1:2.24-8/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcap2",
+    "revision": "1:2.24-8",
+    "@id": "data:libcap2/1:2.24-8",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libcap2/1:2.24-8/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcap2-bin",
+    "revision": "1:2.24-8",
+    "@id": "data:libcap2-bin/1:2.24-8",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libcap2-bin/1:2.24-8/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcap2-bin",
+    "revision": "1:2.24-8",
+    "@id": "data:libcap2-bin/1:2.24-8",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libcap2-bin/1:2.24-8/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcgi-fast-perl",
+    "revision": "1:2.04-1",
+    "@id": "data:libcgi-fast-perl/1:2.04-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libcgi-fast-perl/1:2.04-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcgi-fast-perl",
+    "revision": "1:2.04-1",
+    "@id": "data:libcgi-fast-perl/1:2.04-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libcgi-fast-perl/1:2.04-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcgi-pm-perl",
+    "revision": "4.09-1",
+    "@id": "data:libcgi-pm-perl/4.09-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libcgi-pm-perl/4.09-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcgi-pm-perl",
+    "revision": "4.09-1",
+    "@id": "data:libcgi-pm-perl/4.09-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libcgi-pm-perl/4.09-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libclass-c3-perl",
+    "revision": "0.26-1",
+    "@id": "data:libclass-c3-perl/0.26-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libclass-c3-perl/0.26-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libclass-c3-perl",
+    "revision": "0.26-1",
+    "@id": "data:libclass-c3-perl/0.26-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libclass-c3-perl/0.26-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libclass-c3-xs-perl",
+    "revision": "0.13-2+b1",
+    "@id": "data:libclass-c3-xs-perl/0.13-2+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libclass-c3-xs-perl/0.13-2+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libclass-c3-xs-perl",
+    "revision": "0.13-2+b1",
+    "@id": "data:libclass-c3-xs-perl/0.13-2+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libclass-c3-xs-perl/0.13-2+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcomerr2",
+    "revision": "1.42.12-2+b1",
+    "@id": "data:libcomerr2/1.42.12-2+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libcomerr2/1.42.12-2+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcomerr2",
+    "revision": "1.42.12-2+b1",
+    "@id": "data:libcomerr2/1.42.12-2+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libcomerr2/1.42.12-2+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcpan-meta-perl",
+    "revision": "2.142690-1",
+    "@id": "data:libcpan-meta-perl/2.142690-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libcpan-meta-perl/2.142690-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcpan-meta-perl",
+    "revision": "2.142690-1",
+    "@id": "data:libcpan-meta-perl/2.142690-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libcpan-meta-perl/2.142690-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcryptsetup4",
+    "revision": "2:1.6.6-5",
+    "@id": "data:libcryptsetup4/2:1.6.6-5",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libcryptsetup4/2:1.6.6-5/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcryptsetup4",
+    "revision": "2:1.6.6-5",
+    "@id": "data:libcryptsetup4/2:1.6.6-5",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libcryptsetup4/2:1.6.6-5/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcups2",
+    "revision": "1.7.5-11+deb8u1",
+    "@id": "data:libcups2/1.7.5-11+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libcups2/1.7.5-11+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcups2",
+    "revision": "1.7.5-11+deb8u1",
+    "@id": "data:libcups2/1.7.5-11+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libcups2/1.7.5-11+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcurl3",
+    "revision": "7.38.0-4+deb8u5",
+    "@id": "data:libcurl3/7.38.0-4+deb8u5",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libcurl3/7.38.0-4+deb8u5/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcurl3",
+    "revision": "7.38.0-4+deb8u5",
+    "@id": "data:libcurl3/7.38.0-4+deb8u5",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libcurl3/7.38.0-4+deb8u5/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libdata-optlist-perl",
+    "revision": "0.109-1",
+    "@id": "data:libdata-optlist-perl/0.109-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libdata-optlist-perl/0.109-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libdata-optlist-perl",
+    "revision": "0.109-1",
+    "@id": "data:libdata-optlist-perl/0.109-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libdata-optlist-perl/0.109-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libdata-section-perl",
+    "revision": "0.200006-1",
+    "@id": "data:libdata-section-perl/0.200006-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libdata-section-perl/0.200006-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libdata-section-perl",
+    "revision": "0.200006-1",
+    "@id": "data:libdata-section-perl/0.200006-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libdata-section-perl/0.200006-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libdb5.3",
+    "revision": "5.3.28-9",
+    "@id": "data:libdb5.3/5.3.28-9",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libdb5.3/5.3.28-9/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libdb5.3",
+    "revision": "5.3.28-9",
+    "@id": "data:libdb5.3/5.3.28-9",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libdb5.3/5.3.28-9/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libdbus-1-3",
+    "revision": "1.8.22-0+deb8u1",
+    "@id": "data:libdbus-1-3/1.8.22-0+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libdbus-1-3/1.8.22-0+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libdbus-1-3",
+    "revision": "1.8.22-0+deb8u1",
+    "@id": "data:libdbus-1-3/1.8.22-0+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libdbus-1-3/1.8.22-0+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libdebconfclient0",
+    "revision": "0.192",
+    "@id": "data:libdebconfclient0/0.192",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libdebconfclient0/0.192/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libdebconfclient0",
+    "revision": "0.192",
+    "@id": "data:libdebconfclient0/0.192",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libdebconfclient0/0.192/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libdevmapper1.02.1",
+    "revision": "2:1.02.90-2.2+deb8u1",
+    "@id": "data:libdevmapper1.02.1/2:1.02.90-2.2+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libdevmapper1.02.1/2:1.02.90-2.2+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libdevmapper1.02.1",
+    "revision": "2:1.02.90-2.2+deb8u1",
+    "@id": "data:libdevmapper1.02.1/2:1.02.90-2.2+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libdevmapper1.02.1/2:1.02.90-2.2+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libexpat1",
+    "revision": "2.1.0-6+deb8u4",
+    "@id": "data:libexpat1/2.1.0-6+deb8u4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libexpat1/2.1.0-6+deb8u4/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libexpat1",
+    "revision": "2.1.0-6+deb8u4",
+    "@id": "data:libexpat1/2.1.0-6+deb8u4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libexpat1/2.1.0-6+deb8u4/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libfcgi-perl",
+    "revision": "0.77-1+deb8u1",
+    "@id": "data:libfcgi-perl/0.77-1+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libfcgi-perl/0.77-1+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libfcgi-perl",
+    "revision": "0.77-1+deb8u1",
+    "@id": "data:libfcgi-perl/0.77-1+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libfcgi-perl/0.77-1+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libffi6",
+    "revision": "3.1-2+deb8u1",
+    "@id": "data:libffi6/3.1-2+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libffi6/3.1-2+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libffi6",
+    "revision": "3.1-2+deb8u1",
+    "@id": "data:libffi6/3.1-2+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libffi6/3.1-2+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libflac8",
+    "revision": "1.3.0-3",
+    "@id": "data:libflac8/1.3.0-3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libflac8/1.3.0-3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libflac8",
+    "revision": "1.3.0-3",
+    "@id": "data:libflac8/1.3.0-3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libflac8/1.3.0-3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libfontconfig1",
+    "revision": "2.11.0-6.3+deb8u1",
+    "@id": "data:libfontconfig1/2.11.0-6.3+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libfontconfig1/2.11.0-6.3+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libfontconfig1",
+    "revision": "2.11.0-6.3+deb8u1",
+    "@id": "data:libfontconfig1/2.11.0-6.3+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libfontconfig1/2.11.0-6.3+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libfreetype6",
+    "revision": "2.5.2-3+deb8u2",
+    "@id": "data:libfreetype6/2.5.2-3+deb8u2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libfreetype6/2.5.2-3+deb8u2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libfreetype6",
+    "revision": "2.5.2-3+deb8u2",
+    "@id": "data:libfreetype6/2.5.2-3+deb8u2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libfreetype6/2.5.2-3+deb8u2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libgcc1",
+    "revision": "1:4.9.2-10",
+    "@id": "data:libgcc1/1:4.9.2-10",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libgcc1/1:4.9.2-10/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libgcc1",
+    "revision": "1:4.9.2-10",
+    "@id": "data:libgcc1/1:4.9.2-10",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libgcc1/1:4.9.2-10/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libgcrypt20",
+    "revision": "1.6.3-2+deb8u4",
+    "@id": "data:libgcrypt20/1.6.3-2+deb8u4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libgcrypt20/1.6.3-2+deb8u4/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libgcrypt20",
+    "revision": "1.6.3-2+deb8u4",
+    "@id": "data:libgcrypt20/1.6.3-2+deb8u4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libgcrypt20/1.6.3-2+deb8u4/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libgdbm3",
+    "revision": "1.8.3-13.1",
+    "@id": "data:libgdbm3/1.8.3-13.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libgdbm3/1.8.3-13.1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libgdbm3",
+    "revision": "1.8.3-13.1",
+    "@id": "data:libgdbm3/1.8.3-13.1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libgdbm3/1.8.3-13.1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libglib2.0-0",
+    "revision": "2.42.1-1+b1",
+    "@id": "data:libglib2.0-0/2.42.1-1+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libglib2.0-0/2.42.1-1+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libglib2.0-0",
+    "revision": "2.42.1-1+b1",
+    "@id": "data:libglib2.0-0/2.42.1-1+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libglib2.0-0/2.42.1-1+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libglib2.0-data",
+    "revision": "2.42.1-1",
+    "@id": "data:libglib2.0-data/2.42.1-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libglib2.0-data/2.42.1-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libglib2.0-data",
+    "revision": "2.42.1-1",
+    "@id": "data:libglib2.0-data/2.42.1-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libglib2.0-data/2.42.1-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libgmp10",
+    "revision": "2:6.0.0+dfsg-6",
+    "@id": "data:libgmp10/2:6.0.0+dfsg-6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libgmp10/2:6.0.0+dfsg-6/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libgmp10",
+    "revision": "2:6.0.0+dfsg-6",
+    "@id": "data:libgmp10/2:6.0.0+dfsg-6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libgmp10/2:6.0.0+dfsg-6/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libgnutls-deb0-28",
+    "revision": "3.3.8-6+deb8u7",
+    "@id": "data:libgnutls-deb0-28/3.3.8-6+deb8u7",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libgnutls-deb0-28/3.3.8-6+deb8u7/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libgnutls-deb0-28",
+    "revision": "3.3.8-6+deb8u7",
+    "@id": "data:libgnutls-deb0-28/3.3.8-6+deb8u7",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libgnutls-deb0-28/3.3.8-6+deb8u7/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libgpg-error0",
+    "revision": "1.17-3",
+    "@id": "data:libgpg-error0/1.17-3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libgpg-error0/1.17-3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libgpg-error0",
+    "revision": "1.17-3",
+    "@id": "data:libgpg-error0/1.17-3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libgpg-error0/1.17-3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libgssapi-krb5-2",
+    "revision": "1.12.1+dfsg-19+deb8u2",
+    "@id": "data:libgssapi-krb5-2/1.12.1+dfsg-19+deb8u2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libgssapi-krb5-2/1.12.1+dfsg-19+deb8u2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libgssapi-krb5-2",
+    "revision": "1.12.1+dfsg-19+deb8u2",
+    "@id": "data:libgssapi-krb5-2/1.12.1+dfsg-19+deb8u2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libgssapi-krb5-2/1.12.1+dfsg-19+deb8u2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libhogweed2",
+    "revision": "2.7.1-5+deb8u2",
+    "@id": "data:libhogweed2/2.7.1-5+deb8u2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libhogweed2/2.7.1-5+deb8u2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libhogweed2",
+    "revision": "2.7.1-5+deb8u2",
+    "@id": "data:libhogweed2/2.7.1-5+deb8u2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libhogweed2/2.7.1-5+deb8u2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libice6",
+    "revision": "2:1.0.9-1+b1",
+    "@id": "data:libice6/2:1.0.9-1+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libice6/2:1.0.9-1+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libice6",
+    "revision": "2:1.0.9-1+b1",
+    "@id": "data:libice6/2:1.0.9-1+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libice6/2:1.0.9-1+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libicu52",
+    "revision": "52.1-8+deb8u5",
+    "@id": "data:libicu52/52.1-8+deb8u5",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libicu52/52.1-8+deb8u5/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libicu52",
+    "revision": "52.1-8+deb8u5",
+    "@id": "data:libicu52/52.1-8+deb8u5",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libicu52/52.1-8+deb8u5/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libidn11",
+    "revision": "1.29-1+deb8u2",
+    "@id": "data:libidn11/1.29-1+deb8u2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libidn11/1.29-1+deb8u2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libidn11",
+    "revision": "1.29-1+deb8u2",
+    "@id": "data:libidn11/1.29-1+deb8u2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libidn11/1.29-1+deb8u2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libjpeg62-turbo",
+    "revision": "1:1.3.1-12",
+    "@id": "data:libjpeg62-turbo/1:1.3.1-12",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libjpeg62-turbo/1:1.3.1-12/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libjpeg62-turbo",
+    "revision": "1:1.3.1-12",
+    "@id": "data:libjpeg62-turbo/1:1.3.1-12",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libjpeg62-turbo/1:1.3.1-12/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libjson-c2",
+    "revision": "0.11-4",
+    "@id": "data:libjson-c2/0.11-4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libjson-c2/0.11-4/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libjson-c2",
+    "revision": "0.11-4",
+    "@id": "data:libjson-c2/0.11-4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libjson-c2/0.11-4/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libk5crypto3",
+    "revision": "1.12.1+dfsg-19+deb8u2",
+    "@id": "data:libk5crypto3/1.12.1+dfsg-19+deb8u2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libk5crypto3/1.12.1+dfsg-19+deb8u2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libk5crypto3",
+    "revision": "1.12.1+dfsg-19+deb8u2",
+    "@id": "data:libk5crypto3/1.12.1+dfsg-19+deb8u2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libk5crypto3/1.12.1+dfsg-19+deb8u2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libkeyutils1",
+    "revision": "1.5.9-5+b1",
+    "@id": "data:libkeyutils1/1.5.9-5+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libkeyutils1/1.5.9-5+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libkeyutils1",
+    "revision": "1.5.9-5+b1",
+    "@id": "data:libkeyutils1/1.5.9-5+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libkeyutils1/1.5.9-5+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libkmod2",
+    "revision": "18-3",
+    "@id": "data:libkmod2/18-3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libkmod2/18-3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libkmod2",
+    "revision": "18-3",
+    "@id": "data:libkmod2/18-3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libkmod2/18-3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libkrb5-3",
+    "revision": "1.12.1+dfsg-19+deb8u2",
+    "@id": "data:libkrb5-3/1.12.1+dfsg-19+deb8u2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libkrb5-3/1.12.1+dfsg-19+deb8u2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libkrb5-3",
+    "revision": "1.12.1+dfsg-19+deb8u2",
+    "@id": "data:libkrb5-3/1.12.1+dfsg-19+deb8u2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libkrb5-3/1.12.1+dfsg-19+deb8u2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libkrb5support0",
+    "revision": "1.12.1+dfsg-19+deb8u2",
+    "@id": "data:libkrb5support0/1.12.1+dfsg-19+deb8u2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libkrb5support0/1.12.1+dfsg-19+deb8u2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libkrb5support0",
+    "revision": "1.12.1+dfsg-19+deb8u2",
+    "@id": "data:libkrb5support0/1.12.1+dfsg-19+deb8u2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libkrb5support0/1.12.1+dfsg-19+deb8u2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "liblcms2-2",
+    "revision": "2.6-3+deb8u1",
+    "@id": "data:liblcms2-2/2.6-3+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "liblcms2-2/2.6-3+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "liblcms2-2",
+    "revision": "2.6-3+deb8u1",
+    "@id": "data:liblcms2-2/2.6-3+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "liblcms2-2/2.6-3+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libldap-2.4-2",
+    "revision": "2.4.40+dfsg-1+deb8u3",
+    "@id": "data:libldap-2.4-2/2.4.40+dfsg-1+deb8u3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libldap-2.4-2/2.4.40+dfsg-1+deb8u3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libldap-2.4-2",
+    "revision": "2.4.40+dfsg-1+deb8u3",
+    "@id": "data:libldap-2.4-2/2.4.40+dfsg-1+deb8u3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libldap-2.4-2/2.4.40+dfsg-1+deb8u3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "liblocale-gettext-perl",
+    "revision": "1.05-8+b1",
+    "@id": "data:liblocale-gettext-perl/1.05-8+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "liblocale-gettext-perl/1.05-8+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "liblocale-gettext-perl",
+    "revision": "1.05-8+b1",
+    "@id": "data:liblocale-gettext-perl/1.05-8+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "liblocale-gettext-perl/1.05-8+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "liblog-message-perl",
+    "revision": "0.8-1",
+    "@id": "data:liblog-message-perl/0.8-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "liblog-message-perl/0.8-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "liblog-message-perl",
+    "revision": "0.8-1",
+    "@id": "data:liblog-message-perl/0.8-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "liblog-message-perl/0.8-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "liblog-message-simple-perl",
+    "revision": "0.10-2",
+    "@id": "data:liblog-message-simple-perl/0.10-2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "liblog-message-simple-perl/0.10-2/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "liblog-message-simple-perl",
+    "revision": "0.10-2",
+    "@id": "data:liblog-message-simple-perl/0.10-2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "liblog-message-simple-perl/0.10-2/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "liblzma5",
+    "revision": "5.1.1alpha+20120614-2+b3",
+    "@id": "data:liblzma5/5.1.1alpha+20120614-2+b3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "liblzma5/5.1.1alpha+20120614-2+b3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "liblzma5",
+    "revision": "5.1.1alpha+20120614-2+b3",
+    "@id": "data:liblzma5/5.1.1alpha+20120614-2+b3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "liblzma5/5.1.1alpha+20120614-2+b3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libmodule-build-perl",
+    "revision": "0.421000-2+deb8u1",
+    "@id": "data:libmodule-build-perl/0.421000-2+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libmodule-build-perl/0.421000-2+deb8u1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libmodule-build-perl",
+    "revision": "0.421000-2+deb8u1",
+    "@id": "data:libmodule-build-perl/0.421000-2+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libmodule-build-perl/0.421000-2+deb8u1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libmodule-pluggable-perl",
+    "revision": "5.1-1",
+    "@id": "data:libmodule-pluggable-perl/5.1-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libmodule-pluggable-perl/5.1-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libmodule-pluggable-perl",
+    "revision": "5.1-1",
+    "@id": "data:libmodule-pluggable-perl/5.1-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libmodule-pluggable-perl/5.1-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libmodule-signature-perl",
+    "revision": "0.73-1+deb8u2",
+    "@id": "data:libmodule-signature-perl/0.73-1+deb8u2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libmodule-signature-perl/0.73-1+deb8u2/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libmodule-signature-perl",
+    "revision": "0.73-1+deb8u2",
+    "@id": "data:libmodule-signature-perl/0.73-1+deb8u2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libmodule-signature-perl/0.73-1+deb8u2/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libmount1",
+    "revision": "2.25.2-6",
+    "@id": "data:libmount1/2.25.2-6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libmount1/2.25.2-6/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libmount1",
+    "revision": "2.25.2-6",
+    "@id": "data:libmount1/2.25.2-6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libmount1/2.25.2-6/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libmro-compat-perl",
+    "revision": "0.12-1",
+    "@id": "data:libmro-compat-perl/0.12-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libmro-compat-perl/0.12-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libmro-compat-perl",
+    "revision": "0.12-1",
+    "@id": "data:libmro-compat-perl/0.12-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libmro-compat-perl/0.12-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libncurses5",
+    "revision": "5.9+20140913-1+b1",
+    "@id": "data:libncurses5/5.9+20140913-1+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libncurses5/5.9+20140913-1+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libncurses5",
+    "revision": "5.9+20140913-1+b1",
+    "@id": "data:libncurses5/5.9+20140913-1+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libncurses5/5.9+20140913-1+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libncursesw5",
+    "revision": "5.9+20140913-1+b1",
+    "@id": "data:libncursesw5/5.9+20140913-1+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libncursesw5/5.9+20140913-1+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libncursesw5",
+    "revision": "5.9+20140913-1+b1",
+    "@id": "data:libncursesw5/5.9+20140913-1+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libncursesw5/5.9+20140913-1+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libnettle4",
+    "revision": "2.7.1-5+deb8u2",
+    "@id": "data:libnettle4/2.7.1-5+deb8u2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libnettle4/2.7.1-5+deb8u2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libnettle4",
+    "revision": "2.7.1-5+deb8u2",
+    "@id": "data:libnettle4/2.7.1-5+deb8u2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libnettle4/2.7.1-5+deb8u2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libnspr4",
+    "revision": "2:4.12-1+debu8u1",
+    "@id": "data:libnspr4/2:4.12-1+debu8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libnspr4/2:4.12-1+debu8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libnspr4",
+    "revision": "2:4.12-1+debu8u1",
+    "@id": "data:libnspr4/2:4.12-1+debu8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libnspr4/2:4.12-1+debu8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libnss3",
+    "revision": "2:3.26-1+debu8u2",
+    "@id": "data:libnss3/2:3.26-1+debu8u2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libnss3/2:3.26-1+debu8u2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libnss3",
+    "revision": "2:3.26-1+debu8u2",
+    "@id": "data:libnss3/2:3.26-1+debu8u2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libnss3/2:3.26-1+debu8u2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libogg0",
+    "revision": "1.3.2-1",
+    "@id": "data:libogg0/1.3.2-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libogg0/1.3.2-1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libogg0",
+    "revision": "1.3.2-1",
+    "@id": "data:libogg0/1.3.2-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libogg0/1.3.2-1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libp11-kit0",
+    "revision": "0.20.7-1",
+    "@id": "data:libp11-kit0/0.20.7-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libp11-kit0/0.20.7-1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libp11-kit0",
+    "revision": "0.20.7-1",
+    "@id": "data:libp11-kit0/0.20.7-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libp11-kit0/0.20.7-1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpackage-constants-perl",
+    "revision": "0.04-1",
+    "@id": "data:libpackage-constants-perl/0.04-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libpackage-constants-perl/0.04-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpackage-constants-perl",
+    "revision": "0.04-1",
+    "@id": "data:libpackage-constants-perl/0.04-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libpackage-constants-perl/0.04-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpam-modules",
+    "revision": "1.1.8-3.1+deb8u2+b1",
+    "@id": "data:libpam-modules/1.1.8-3.1+deb8u2+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libpam-modules/1.1.8-3.1+deb8u2+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpam-modules",
+    "revision": "1.1.8-3.1+deb8u2+b1",
+    "@id": "data:libpam-modules/1.1.8-3.1+deb8u2+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libpam-modules/1.1.8-3.1+deb8u2+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpam-modules-bin",
+    "revision": "1.1.8-3.1+deb8u2+b1",
+    "@id": "data:libpam-modules-bin/1.1.8-3.1+deb8u2+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libpam-modules-bin/1.1.8-3.1+deb8u2+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpam-modules-bin",
+    "revision": "1.1.8-3.1+deb8u2+b1",
+    "@id": "data:libpam-modules-bin/1.1.8-3.1+deb8u2+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libpam-modules-bin/1.1.8-3.1+deb8u2+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpam-runtime",
+    "revision": "1.1.8-3.1+deb8u2",
+    "@id": "data:libpam-runtime/1.1.8-3.1+deb8u2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libpam-runtime/1.1.8-3.1+deb8u2/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpam-runtime",
+    "revision": "1.1.8-3.1+deb8u2",
+    "@id": "data:libpam-runtime/1.1.8-3.1+deb8u2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libpam-runtime/1.1.8-3.1+deb8u2/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpam0g",
+    "revision": "1.1.8-3.1+deb8u2+b1",
+    "@id": "data:libpam0g/1.1.8-3.1+deb8u2+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libpam0g/1.1.8-3.1+deb8u2+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpam0g",
+    "revision": "1.1.8-3.1+deb8u2+b1",
+    "@id": "data:libpam0g/1.1.8-3.1+deb8u2+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libpam0g/1.1.8-3.1+deb8u2+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libparams-util-perl",
+    "revision": "1.07-2+b1",
+    "@id": "data:libparams-util-perl/1.07-2+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libparams-util-perl/1.07-2+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libparams-util-perl",
+    "revision": "1.07-2+b1",
+    "@id": "data:libparams-util-perl/1.07-2+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libparams-util-perl/1.07-2+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpcre3",
+    "revision": "2:8.35-3.3+deb8u4",
+    "@id": "data:libpcre3/2:8.35-3.3+deb8u4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libpcre3/2:8.35-3.3+deb8u4/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpcre3",
+    "revision": "2:8.35-3.3+deb8u4",
+    "@id": "data:libpcre3/2:8.35-3.3+deb8u4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libpcre3/2:8.35-3.3+deb8u4/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpcsclite1",
+    "revision": "1.8.13-1+deb8u1",
+    "@id": "data:libpcsclite1/1.8.13-1+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libpcsclite1/1.8.13-1+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpcsclite1",
+    "revision": "1.8.13-1+deb8u1",
+    "@id": "data:libpcsclite1/1.8.13-1+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libpcsclite1/1.8.13-1+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpng12-0",
+    "revision": "1.2.50-2+deb8u3",
+    "@id": "data:libpng12-0/1.2.50-2+deb8u3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libpng12-0/1.2.50-2+deb8u3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpng12-0",
+    "revision": "1.2.50-2+deb8u3",
+    "@id": "data:libpng12-0/1.2.50-2+deb8u3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libpng12-0/1.2.50-2+deb8u3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpod-latex-perl",
+    "revision": "0.61-1",
+    "@id": "data:libpod-latex-perl/0.61-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libpod-latex-perl/0.61-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpod-latex-perl",
+    "revision": "0.61-1",
+    "@id": "data:libpod-latex-perl/0.61-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libpod-latex-perl/0.61-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpod-readme-perl",
+    "revision": "0.11-1",
+    "@id": "data:libpod-readme-perl/0.11-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libpod-readme-perl/0.11-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpod-readme-perl",
+    "revision": "0.11-1",
+    "@id": "data:libpod-readme-perl/0.11-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libpod-readme-perl/0.11-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libprocps3",
+    "revision": "2:3.3.9-9",
+    "@id": "data:libprocps3/2:3.3.9-9",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libprocps3/2:3.3.9-9/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libprocps3",
+    "revision": "2:3.3.9-9",
+    "@id": "data:libprocps3/2:3.3.9-9",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libprocps3/2:3.3.9-9/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpsl0",
+    "revision": "0.5.1-1",
+    "@id": "data:libpsl0/0.5.1-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libpsl0/0.5.1-1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpsl0",
+    "revision": "0.5.1-1",
+    "@id": "data:libpsl0/0.5.1-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libpsl0/0.5.1-1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpulse0",
+    "revision": "5.0-13",
+    "@id": "data:libpulse0/5.0-13",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libpulse0/5.0-13/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpulse0",
+    "revision": "5.0-13",
+    "@id": "data:libpulse0/5.0-13",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libpulse0/5.0-13/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libreadline6",
+    "revision": "6.3-8+b3",
+    "@id": "data:libreadline6/6.3-8+b3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libreadline6/6.3-8+b3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libreadline6",
+    "revision": "6.3-8+b3",
+    "@id": "data:libreadline6/6.3-8+b3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libreadline6/6.3-8+b3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libregexp-common-perl",
+    "revision": "2013031301-1",
+    "@id": "data:libregexp-common-perl/2013031301-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libregexp-common-perl/2013031301-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libregexp-common-perl",
+    "revision": "2013031301-1",
+    "@id": "data:libregexp-common-perl/2013031301-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libregexp-common-perl/2013031301-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "librtmp1",
+    "revision": "2.4+20150115.gita107cef-1+deb8u1",
+    "@id": "data:librtmp1/2.4+20150115.gita107cef-1+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "librtmp1/2.4+20150115.gita107cef-1+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "librtmp1",
+    "revision": "2.4+20150115.gita107cef-1+deb8u1",
+    "@id": "data:librtmp1/2.4+20150115.gita107cef-1+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "librtmp1/2.4+20150115.gita107cef-1+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsasl2-2",
+    "revision": "2.1.26.dfsg1-13+deb8u1",
+    "@id": "data:libsasl2-2/2.1.26.dfsg1-13+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libsasl2-2/2.1.26.dfsg1-13+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsasl2-2",
+    "revision": "2.1.26.dfsg1-13+deb8u1",
+    "@id": "data:libsasl2-2/2.1.26.dfsg1-13+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libsasl2-2/2.1.26.dfsg1-13+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsasl2-modules-db",
+    "revision": "2.1.26.dfsg1-13+deb8u1",
+    "@id": "data:libsasl2-modules-db/2.1.26.dfsg1-13+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libsasl2-modules-db/2.1.26.dfsg1-13+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsasl2-modules-db",
+    "revision": "2.1.26.dfsg1-13+deb8u1",
+    "@id": "data:libsasl2-modules-db/2.1.26.dfsg1-13+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libsasl2-modules-db/2.1.26.dfsg1-13+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsctp1",
+    "revision": "1.0.16+dfsg-2",
+    "@id": "data:libsctp1/1.0.16+dfsg-2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libsctp1/1.0.16+dfsg-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsctp1",
+    "revision": "1.0.16+dfsg-2",
+    "@id": "data:libsctp1/1.0.16+dfsg-2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libsctp1/1.0.16+dfsg-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libselinux1",
+    "revision": "2.3-2",
+    "@id": "data:libselinux1/2.3-2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libselinux1/2.3-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libselinux1",
+    "revision": "2.3-2",
+    "@id": "data:libselinux1/2.3-2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libselinux1/2.3-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsemanage-common",
+    "revision": "2.3-1",
+    "@id": "data:libsemanage-common/2.3-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libsemanage-common/2.3-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsemanage-common",
+    "revision": "2.3-1",
+    "@id": "data:libsemanage-common/2.3-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libsemanage-common/2.3-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsemanage1",
+    "revision": "2.3-1+b1",
+    "@id": "data:libsemanage1/2.3-1+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libsemanage1/2.3-1+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsemanage1",
+    "revision": "2.3-1+b1",
+    "@id": "data:libsemanage1/2.3-1+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libsemanage1/2.3-1+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsepol1",
+    "revision": "2.3-2",
+    "@id": "data:libsepol1/2.3-2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libsepol1/2.3-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsepol1",
+    "revision": "2.3-2",
+    "@id": "data:libsepol1/2.3-2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libsepol1/2.3-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libslang2",
+    "revision": "2.3.0-2",
+    "@id": "data:libslang2/2.3.0-2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libslang2/2.3.0-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libslang2",
+    "revision": "2.3.0-2",
+    "@id": "data:libslang2/2.3.0-2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libslang2/2.3.0-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsm6",
+    "revision": "2:1.2.2-1+b1",
+    "@id": "data:libsm6/2:1.2.2-1+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libsm6/2:1.2.2-1+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsm6",
+    "revision": "2:1.2.2-1+b1",
+    "@id": "data:libsm6/2:1.2.2-1+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libsm6/2:1.2.2-1+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsmartcols1",
+    "revision": "2.25.2-6",
+    "@id": "data:libsmartcols1/2.25.2-6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libsmartcols1/2.25.2-6/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsmartcols1",
+    "revision": "2.25.2-6",
+    "@id": "data:libsmartcols1/2.25.2-6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libsmartcols1/2.25.2-6/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsndfile1",
+    "revision": "1.0.25-9.1+deb8u1",
+    "@id": "data:libsndfile1/1.0.25-9.1+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libsndfile1/1.0.25-9.1+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsndfile1",
+    "revision": "1.0.25-9.1+deb8u1",
+    "@id": "data:libsndfile1/1.0.25-9.1+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libsndfile1/1.0.25-9.1+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsoftware-license-perl",
+    "revision": "0.103010-3",
+    "@id": "data:libsoftware-license-perl/0.103010-3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libsoftware-license-perl/0.103010-3/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsoftware-license-perl",
+    "revision": "0.103010-3",
+    "@id": "data:libsoftware-license-perl/0.103010-3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libsoftware-license-perl/0.103010-3/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsqlite3-0",
+    "revision": "3.8.7.1-1+deb8u2",
+    "@id": "data:libsqlite3-0/3.8.7.1-1+deb8u2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libsqlite3-0/3.8.7.1-1+deb8u2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsqlite3-0",
+    "revision": "3.8.7.1-1+deb8u2",
+    "@id": "data:libsqlite3-0/3.8.7.1-1+deb8u2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libsqlite3-0/3.8.7.1-1+deb8u2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libss2",
+    "revision": "1.42.12-2+b1",
+    "@id": "data:libss2/1.42.12-2+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libss2/1.42.12-2+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libss2",
+    "revision": "1.42.12-2+b1",
+    "@id": "data:libss2/1.42.12-2+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libss2/1.42.12-2+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libssh2-1",
+    "revision": "1.4.3-4.1+deb8u1",
+    "@id": "data:libssh2-1/1.4.3-4.1+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libssh2-1/1.4.3-4.1+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libssh2-1",
+    "revision": "1.4.3-4.1+deb8u1",
+    "@id": "data:libssh2-1/1.4.3-4.1+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libssh2-1/1.4.3-4.1+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libssl1.0.0",
+    "revision": "1.0.1t-1+deb8u6",
+    "@id": "data:libssl1.0.0/1.0.1t-1+deb8u6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libssl1.0.0/1.0.1t-1+deb8u6/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libssl1.0.0",
+    "revision": "1.0.1t-1+deb8u6",
+    "@id": "data:libssl1.0.0/1.0.1t-1+deb8u6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libssl1.0.0/1.0.1t-1+deb8u6/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libssl1.1",
+    "revision": "1.1.0f-3",
+    "@id": "data:libssl1.1/1.1.0f-3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libssl1.1/1.1.0f-3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libssl1.1",
+    "revision": "1.1.0f-3",
+    "@id": "data:libssl1.1/1.1.0f-3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libssl1.1/1.1.0f-3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libstdc++6",
+    "revision": "4.9.2-10",
+    "@id": "data:libstdc++6/4.9.2-10",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libstdc++6/4.9.2-10/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libstdc++6",
+    "revision": "4.9.2-10",
+    "@id": "data:libstdc++6/4.9.2-10",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libstdc++6/4.9.2-10/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsub-exporter-perl",
+    "revision": "0.986-1",
+    "@id": "data:libsub-exporter-perl/0.986-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libsub-exporter-perl/0.986-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsub-exporter-perl",
+    "revision": "0.986-1",
+    "@id": "data:libsub-exporter-perl/0.986-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libsub-exporter-perl/0.986-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsub-install-perl",
+    "revision": "0.928-1",
+    "@id": "data:libsub-install-perl/0.928-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libsub-install-perl/0.928-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsub-install-perl",
+    "revision": "0.928-1",
+    "@id": "data:libsub-install-perl/0.928-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libsub-install-perl/0.928-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsystemd0",
+    "revision": "215-17+deb8u7",
+    "@id": "data:libsystemd0/215-17+deb8u7",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libsystemd0/215-17+deb8u7/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsystemd0",
+    "revision": "215-17+deb8u7",
+    "@id": "data:libsystemd0/215-17+deb8u7",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libsystemd0/215-17+deb8u7/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libtasn1-6",
+    "revision": "4.2-3+deb8u3",
+    "@id": "data:libtasn1-6/4.2-3+deb8u3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libtasn1-6/4.2-3+deb8u3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libtasn1-6",
+    "revision": "4.2-3+deb8u3",
+    "@id": "data:libtasn1-6/4.2-3+deb8u3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libtasn1-6/4.2-3+deb8u3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libterm-ui-perl",
+    "revision": "0.42-1",
+    "@id": "data:libterm-ui-perl/0.42-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libterm-ui-perl/0.42-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libterm-ui-perl",
+    "revision": "0.42-1",
+    "@id": "data:libterm-ui-perl/0.42-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libterm-ui-perl/0.42-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libtext-charwidth-perl",
+    "revision": "0.04-7+b3",
+    "@id": "data:libtext-charwidth-perl/0.04-7+b3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libtext-charwidth-perl/0.04-7+b3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libtext-charwidth-perl",
+    "revision": "0.04-7+b3",
+    "@id": "data:libtext-charwidth-perl/0.04-7+b3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libtext-charwidth-perl/0.04-7+b3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libtext-iconv-perl",
+    "revision": "1.7-5+b2",
+    "@id": "data:libtext-iconv-perl/1.7-5+b2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libtext-iconv-perl/1.7-5+b2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libtext-iconv-perl",
+    "revision": "1.7-5+b2",
+    "@id": "data:libtext-iconv-perl/1.7-5+b2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libtext-iconv-perl/1.7-5+b2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libtext-soundex-perl",
+    "revision": "3.4-1+b2",
+    "@id": "data:libtext-soundex-perl/3.4-1+b2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libtext-soundex-perl/3.4-1+b2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libtext-soundex-perl",
+    "revision": "3.4-1+b2",
+    "@id": "data:libtext-soundex-perl/3.4-1+b2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libtext-soundex-perl/3.4-1+b2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libtext-template-perl",
+    "revision": "1.46-1",
+    "@id": "data:libtext-template-perl/1.46-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libtext-template-perl/1.46-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libtext-template-perl",
+    "revision": "1.46-1",
+    "@id": "data:libtext-template-perl/1.46-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libtext-template-perl/1.46-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libtext-wrapi18n-perl",
+    "revision": "0.06-7",
+    "@id": "data:libtext-wrapi18n-perl/0.06-7",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libtext-wrapi18n-perl/0.06-7/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libtext-wrapi18n-perl",
+    "revision": "0.06-7",
+    "@id": "data:libtext-wrapi18n-perl/0.06-7",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libtext-wrapi18n-perl/0.06-7/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libtinfo5",
+    "revision": "5.9+20140913-1+b1",
+    "@id": "data:libtinfo5/5.9+20140913-1+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libtinfo5/5.9+20140913-1+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libtinfo5",
+    "revision": "5.9+20140913-1+b1",
+    "@id": "data:libtinfo5/5.9+20140913-1+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libtinfo5/5.9+20140913-1+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libudev1",
+    "revision": "215-17+deb8u7",
+    "@id": "data:libudev1/215-17+deb8u7",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libudev1/215-17+deb8u7/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libudev1",
+    "revision": "215-17+deb8u7",
+    "@id": "data:libudev1/215-17+deb8u7",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libudev1/215-17+deb8u7/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libusb-0.1-4",
+    "revision": "2:0.1.12-25",
+    "@id": "data:libusb-0.1-4/2:0.1.12-25",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libusb-0.1-4/2:0.1.12-25/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libusb-0.1-4",
+    "revision": "2:0.1.12-25",
+    "@id": "data:libusb-0.1-4/2:0.1.12-25",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libusb-0.1-4/2:0.1.12-25/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libustr-1.0-1",
+    "revision": "1.0.4-3+b2",
+    "@id": "data:libustr-1.0-1/1.0.4-3+b2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libustr-1.0-1/1.0.4-3+b2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libustr-1.0-1",
+    "revision": "1.0.4-3+b2",
+    "@id": "data:libustr-1.0-1/1.0.4-3+b2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libustr-1.0-1/1.0.4-3+b2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libuuid1",
+    "revision": "2.25.2-6",
+    "@id": "data:libuuid1/2.25.2-6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libuuid1/2.25.2-6/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libuuid1",
+    "revision": "2.25.2-6",
+    "@id": "data:libuuid1/2.25.2-6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libuuid1/2.25.2-6/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libvorbis0a",
+    "revision": "1.3.4-2",
+    "@id": "data:libvorbis0a/1.3.4-2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libvorbis0a/1.3.4-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libvorbis0a",
+    "revision": "1.3.4-2",
+    "@id": "data:libvorbis0a/1.3.4-2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libvorbis0a/1.3.4-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libvorbisenc2",
+    "revision": "1.3.4-2",
+    "@id": "data:libvorbisenc2/1.3.4-2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libvorbisenc2/1.3.4-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libvorbisenc2",
+    "revision": "1.3.4-2",
+    "@id": "data:libvorbisenc2/1.3.4-2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libvorbisenc2/1.3.4-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libwrap0",
+    "revision": "7.6.q-25",
+    "@id": "data:libwrap0/7.6.q-25",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libwrap0/7.6.q-25/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libwrap0",
+    "revision": "7.6.q-25",
+    "@id": "data:libwrap0/7.6.q-25",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libwrap0/7.6.q-25/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libx11-6",
+    "revision": "2:1.6.2-3",
+    "@id": "data:libx11-6/2:1.6.2-3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libx11-6/2:1.6.2-3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libx11-6",
+    "revision": "2:1.6.2-3",
+    "@id": "data:libx11-6/2:1.6.2-3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libx11-6/2:1.6.2-3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libx11-data",
+    "revision": "2:1.6.2-3",
+    "@id": "data:libx11-data/2:1.6.2-3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libx11-data/2:1.6.2-3/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libx11-data",
+    "revision": "2:1.6.2-3",
+    "@id": "data:libx11-data/2:1.6.2-3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libx11-data/2:1.6.2-3/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libx11-xcb1",
+    "revision": "2:1.6.2-3",
+    "@id": "data:libx11-xcb1/2:1.6.2-3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libx11-xcb1/2:1.6.2-3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libx11-xcb1",
+    "revision": "2:1.6.2-3",
+    "@id": "data:libx11-xcb1/2:1.6.2-3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libx11-xcb1/2:1.6.2-3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libxau6",
+    "revision": "1:1.0.8-1",
+    "@id": "data:libxau6/1:1.0.8-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libxau6/1:1.0.8-1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libxau6",
+    "revision": "1:1.0.8-1",
+    "@id": "data:libxau6/1:1.0.8-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libxau6/1:1.0.8-1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libxcb1",
+    "revision": "1.10-3+b1",
+    "@id": "data:libxcb1/1.10-3+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libxcb1/1.10-3+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libxcb1",
+    "revision": "1.10-3+b1",
+    "@id": "data:libxcb1/1.10-3+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libxcb1/1.10-3+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libxdmcp6",
+    "revision": "1:1.1.1-1+b1",
+    "@id": "data:libxdmcp6/1:1.1.1-1+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libxdmcp6/1:1.1.1-1+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libxdmcp6",
+    "revision": "1:1.1.1-1+b1",
+    "@id": "data:libxdmcp6/1:1.1.1-1+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libxdmcp6/1:1.1.1-1+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libxext6",
+    "revision": "2:1.3.3-1",
+    "@id": "data:libxext6/2:1.3.3-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libxext6/2:1.3.3-1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libxext6",
+    "revision": "2:1.3.3-1",
+    "@id": "data:libxext6/2:1.3.3-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libxext6/2:1.3.3-1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libxi6",
+    "revision": "2:1.7.4-1+b2",
+    "@id": "data:libxi6/2:1.7.4-1+b2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libxi6/2:1.7.4-1+b2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libxi6",
+    "revision": "2:1.7.4-1+b2",
+    "@id": "data:libxi6/2:1.7.4-1+b2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libxi6/2:1.7.4-1+b2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libxml2",
+    "revision": "2.9.1+dfsg1-5+deb8u4",
+    "@id": "data:libxml2/2.9.1+dfsg1-5+deb8u4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libxml2/2.9.1+dfsg1-5+deb8u4/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libxml2",
+    "revision": "2.9.1+dfsg1-5+deb8u4",
+    "@id": "data:libxml2/2.9.1+dfsg1-5+deb8u4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libxml2/2.9.1+dfsg1-5+deb8u4/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libxtst6",
+    "revision": "2:1.2.2-1+b1",
+    "@id": "data:libxtst6/2:1.2.2-1+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libxtst6/2:1.2.2-1+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "libxtst6",
+    "revision": "2:1.2.2-1+b1",
+    "@id": "data:libxtst6/2:1.2.2-1+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libxtst6/2:1.2.2-1+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "lksctp-tools",
+    "revision": "1.0.16+dfsg-2",
+    "@id": "data:lksctp-tools/1.0.16+dfsg-2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "lksctp-tools/1.0.16+dfsg-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "lksctp-tools",
+    "revision": "1.0.16+dfsg-2",
+    "@id": "data:lksctp-tools/1.0.16+dfsg-2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "lksctp-tools/1.0.16+dfsg-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "login",
+    "revision": "1:4.2-3+deb8u4",
+    "@id": "data:login/1:4.2-3+deb8u4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "login/1:4.2-3+deb8u4/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "login",
+    "revision": "1:4.2-3+deb8u4",
+    "@id": "data:login/1:4.2-3+deb8u4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "login/1:4.2-3+deb8u4/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "lsb-base",
+    "revision": "4.1+Debian13+nmu1",
+    "@id": "data:lsb-base/4.1+Debian13+nmu1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "lsb-base/4.1+Debian13+nmu1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "lsb-base",
+    "revision": "4.1+Debian13+nmu1",
+    "@id": "data:lsb-base/4.1+Debian13+nmu1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "lsb-base/4.1+Debian13+nmu1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "mawk",
+    "revision": "1.3.3-17",
+    "@id": "data:mawk/1.3.3-17",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "mawk/1.3.3-17/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "mawk",
+    "revision": "1.3.3-17",
+    "@id": "data:mawk/1.3.3-17",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "mawk/1.3.3-17/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "mount",
+    "revision": "2.25.2-6",
+    "@id": "data:mount/2.25.2-6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "mount/2.25.2-6/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "mount",
+    "revision": "2.25.2-6",
+    "@id": "data:mount/2.25.2-6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "mount/2.25.2-6/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "multiarch-support",
+    "revision": "2.19-18+deb8u10",
+    "@id": "data:multiarch-support/2.19-18+deb8u10",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "multiarch-support/2.19-18+deb8u10/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "multiarch-support",
+    "revision": "2.19-18+deb8u10",
+    "@id": "data:multiarch-support/2.19-18+deb8u10",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "multiarch-support/2.19-18+deb8u10/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ncurses-base",
+    "revision": "5.9+20140913-1",
+    "@id": "data:ncurses-base/5.9+20140913-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "ncurses-base/5.9+20140913-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ncurses-base",
+    "revision": "5.9+20140913-1",
+    "@id": "data:ncurses-base/5.9+20140913-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "ncurses-base/5.9+20140913-1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ncurses-bin",
+    "revision": "5.9+20140913-1+b1",
+    "@id": "data:ncurses-bin/5.9+20140913-1+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "ncurses-bin/5.9+20140913-1+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ncurses-bin",
+    "revision": "5.9+20140913-1+b1",
+    "@id": "data:ncurses-bin/5.9+20140913-1+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "ncurses-bin/5.9+20140913-1+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "netbase",
+    "revision": "5.3",
+    "@id": "data:netbase/5.3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "netbase/5.3/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "netbase",
+    "revision": "5.3",
+    "@id": "data:netbase/5.3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "netbase/5.3/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "openjdk-7-jre-headless",
+    "revision": "7u131-2.6.9-2~deb8u1",
+    "@id": "data:openjdk-7-jre-headless/7u131-2.6.9-2~deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "openjdk-7-jre-headless/7u131-2.6.9-2~deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "openjdk-7-jre-headless",
+    "revision": "7u131-2.6.9-2~deb8u1",
+    "@id": "data:openjdk-7-jre-headless/7u131-2.6.9-2~deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "openjdk-7-jre-headless/7u131-2.6.9-2~deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "openssl",
+    "revision": "1.1.0f-3",
+    "@id": "data:openssl/1.1.0f-3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "openssl/1.1.0f-3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "openssl",
+    "revision": "1.1.0f-3",
+    "@id": "data:openssl/1.1.0f-3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "openssl/1.1.0f-3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "passwd",
+    "revision": "1:4.2-3+deb8u4",
+    "@id": "data:passwd/1:4.2-3+deb8u4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "passwd/1:4.2-3+deb8u4/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "passwd",
+    "revision": "1:4.2-3+deb8u4",
+    "@id": "data:passwd/1:4.2-3+deb8u4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "passwd/1:4.2-3+deb8u4/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "perl",
+    "revision": "5.20.2-3+deb8u8",
+    "@id": "data:perl/5.20.2-3+deb8u8",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "perl/5.20.2-3+deb8u8/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "perl",
+    "revision": "5.20.2-3+deb8u8",
+    "@id": "data:perl/5.20.2-3+deb8u8",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "perl/5.20.2-3+deb8u8/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "perl-base",
+    "revision": "5.20.2-3+deb8u8",
+    "@id": "data:perl-base/5.20.2-3+deb8u8",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "perl-base/5.20.2-3+deb8u8/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "perl-base",
+    "revision": "5.20.2-3+deb8u8",
+    "@id": "data:perl-base/5.20.2-3+deb8u8",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "perl-base/5.20.2-3+deb8u8/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "perl-modules",
+    "revision": "5.20.2-3+deb8u8",
+    "@id": "data:perl-modules/5.20.2-3+deb8u8",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "perl-modules/5.20.2-3+deb8u8/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "perl-modules",
+    "revision": "5.20.2-3+deb8u8",
+    "@id": "data:perl-modules/5.20.2-3+deb8u8",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "perl-modules/5.20.2-3+deb8u8/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "procps",
+    "revision": "2:3.3.9-9",
+    "@id": "data:procps/2:3.3.9-9",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "procps/2:3.3.9-9/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "procps",
+    "revision": "2:3.3.9-9",
+    "@id": "data:procps/2:3.3.9-9",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "procps/2:3.3.9-9/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "readline-common",
+    "revision": "6.3-8",
+    "@id": "data:readline-common/6.3-8",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "readline-common/6.3-8/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "readline-common",
+    "revision": "6.3-8",
+    "@id": "data:readline-common/6.3-8",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "readline-common/6.3-8/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "rename",
+    "revision": "0.20-3",
+    "@id": "data:rename/0.20-3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "rename/0.20-3/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "rename",
+    "revision": "0.20-3",
+    "@id": "data:rename/0.20-3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "rename/0.20-3/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "sed",
+    "revision": "4.2.2-4+deb8u1",
+    "@id": "data:sed/4.2.2-4+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "sed/4.2.2-4+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "sed",
+    "revision": "4.2.2-4+deb8u1",
+    "@id": "data:sed/4.2.2-4+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "sed/4.2.2-4+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "sensible-utils",
+    "revision": "0.0.9",
+    "@id": "data:sensible-utils/0.0.9",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "sensible-utils/0.0.9/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "sensible-utils",
+    "revision": "0.0.9",
+    "@id": "data:sensible-utils/0.0.9",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "sensible-utils/0.0.9/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "sgml-base",
+    "revision": "1.26+nmu4",
+    "@id": "data:sgml-base/1.26+nmu4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "sgml-base/1.26+nmu4/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "sgml-base",
+    "revision": "1.26+nmu4",
+    "@id": "data:sgml-base/1.26+nmu4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "sgml-base/1.26+nmu4/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "shared-mime-info",
+    "revision": "1.3-1",
+    "@id": "data:shared-mime-info/1.3-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "shared-mime-info/1.3-1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "shared-mime-info",
+    "revision": "1.3-1",
+    "@id": "data:shared-mime-info/1.3-1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "shared-mime-info/1.3-1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "startpar",
+    "revision": "0.59-3",
+    "@id": "data:startpar/0.59-3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "startpar/0.59-3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "startpar",
+    "revision": "0.59-3",
+    "@id": "data:startpar/0.59-3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "startpar/0.59-3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "systemd",
+    "revision": "215-17+deb8u7",
+    "@id": "data:systemd/215-17+deb8u7",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "systemd/215-17+deb8u7/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "systemd",
+    "revision": "215-17+deb8u7",
+    "@id": "data:systemd/215-17+deb8u7",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "systemd/215-17+deb8u7/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "systemd-sysv",
+    "revision": "215-17+deb8u7",
+    "@id": "data:systemd-sysv/215-17+deb8u7",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "systemd-sysv/215-17+deb8u7/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "systemd-sysv",
+    "revision": "215-17+deb8u7",
+    "@id": "data:systemd-sysv/215-17+deb8u7",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "systemd-sysv/215-17+deb8u7/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "sysv-rc",
+    "revision": "2.88dsf-59",
+    "@id": "data:sysv-rc/2.88dsf-59",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "sysv-rc/2.88dsf-59/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "sysv-rc",
+    "revision": "2.88dsf-59",
+    "@id": "data:sysv-rc/2.88dsf-59",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "sysv-rc/2.88dsf-59/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "sysvinit-utils",
+    "revision": "2.88dsf-59",
+    "@id": "data:sysvinit-utils/2.88dsf-59",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "sysvinit-utils/2.88dsf-59/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "sysvinit-utils",
+    "revision": "2.88dsf-59",
+    "@id": "data:sysvinit-utils/2.88dsf-59",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "sysvinit-utils/2.88dsf-59/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "tar",
+    "revision": "1.27.1-2+deb8u1",
+    "@id": "data:tar/1.27.1-2+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "tar/1.27.1-2+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "tar",
+    "revision": "1.27.1-2+deb8u1",
+    "@id": "data:tar/1.27.1-2+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "tar/1.27.1-2+deb8u1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "tcpd",
+    "revision": "7.6.q-25",
+    "@id": "data:tcpd/7.6.q-25",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "tcpd/7.6.q-25/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "tcpd",
+    "revision": "7.6.q-25",
+    "@id": "data:tcpd/7.6.q-25",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "tcpd/7.6.q-25/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "tzdata",
+    "revision": "2017b-0+deb8u1",
+    "@id": "data:tzdata/2017b-0+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "tzdata/2017b-0+deb8u1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "tzdata",
+    "revision": "2017b-0+deb8u1",
+    "@id": "data:tzdata/2017b-0+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "tzdata/2017b-0+deb8u1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "tzdata-java",
+    "revision": "2017b-0+deb8u1",
+    "@id": "data:tzdata-java/2017b-0+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "tzdata-java/2017b-0+deb8u1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "tzdata-java",
+    "revision": "2017b-0+deb8u1",
+    "@id": "data:tzdata-java/2017b-0+deb8u1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "tzdata-java/2017b-0+deb8u1/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ucf",
+    "revision": "3.0030",
+    "@id": "data:ucf/3.0030",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "ucf/3.0030/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "ucf",
+    "revision": "3.0030",
+    "@id": "data:ucf/3.0030",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "ucf/3.0030/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "udev",
+    "revision": "215-17+deb8u7",
+    "@id": "data:udev/215-17+deb8u7",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "udev/215-17+deb8u7/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "udev",
+    "revision": "215-17+deb8u7",
+    "@id": "data:udev/215-17+deb8u7",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "udev/215-17+deb8u7/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "unzip",
+    "revision": "6.0-16+deb8u3",
+    "@id": "data:unzip/6.0-16+deb8u3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "unzip/6.0-16+deb8u3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "unzip",
+    "revision": "6.0-16+deb8u3",
+    "@id": "data:unzip/6.0-16+deb8u3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "unzip/6.0-16+deb8u3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "util-linux",
+    "revision": "2.25.2-6",
+    "@id": "data:util-linux/2.25.2-6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "util-linux/2.25.2-6/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "util-linux",
+    "revision": "2.25.2-6",
+    "@id": "data:util-linux/2.25.2-6",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "util-linux/2.25.2-6/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "wget",
+    "revision": "1.16-1+deb8u2",
+    "@id": "data:wget/1.16-1+deb8u2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "wget/1.16-1+deb8u2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "wget",
+    "revision": "1.16-1+deb8u2",
+    "@id": "data:wget/1.16-1+deb8u2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "wget/1.16-1+deb8u2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "x11-common",
+    "revision": "1:7.7+7",
+    "@id": "data:x11-common/1:7.7+7",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "x11-common/1:7.7+7/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "x11-common",
+    "revision": "1:7.7+7",
+    "@id": "data:x11-common/1:7.7+7",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "x11-common/1:7.7+7/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "xdg-user-dirs",
+    "revision": "0.15-2",
+    "@id": "data:xdg-user-dirs/0.15-2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "xdg-user-dirs/0.15-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "xdg-user-dirs",
+    "revision": "0.15-2",
+    "@id": "data:xdg-user-dirs/0.15-2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "xdg-user-dirs/0.15-2/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "xml-core",
+    "revision": "0.13+nmu2",
+    "@id": "data:xml-core/0.13+nmu2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "xml-core/0.13+nmu2/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "xml-core",
+    "revision": "0.13+nmu2",
+    "@id": "data:xml-core/0.13+nmu2",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "xml-core/0.13+nmu2/all"
+    },
+    "relationship": []
+  },
+  {
+    "name": "xz-utils",
+    "revision": "5.1.1alpha+20120614-2+b3",
+    "@id": "data:xz-utils/5.1.1alpha+20120614-2+b3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "xz-utils/5.1.1alpha+20120614-2+b3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "xz-utils",
+    "revision": "5.1.1alpha+20120614-2+b3",
+    "@id": "data:xz-utils/5.1.1alpha+20120614-2+b3",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "xz-utils/5.1.1alpha+20120614-2+b3/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "zlib1g",
+    "revision": "1:1.2.8.dfsg-2+b1",
+    "@id": "data:zlib1g/1:1.2.8.dfsg-2+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "zlib1g/1:1.2.8.dfsg-2+b1/amd64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "zlib1g",
+    "revision": "1:1.2.8.dfsg-2+b1",
+    "@id": "data:zlib1g/1:1.2.8.dfsg-2+b1",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "zlib1g/1:1.2.8.dfsg-2+b1/amd64"
+    },
+    "relationship": []
+  }
+]

@@ -45,6 +45,11 @@ class EndToEndTest {
 		test("blackducksoftware/hub-zookeeper", "4.0.0", "lib_apk")
 	}
 
+	@Test
+	public void testTomcat() {
+		test("tomcat", "6.0.53-jre7", "var_lib_dpkg")
+	}
+
 	private void test(String image, String tag, String pkgMgrPathString) {
 		println "Running end to end test on ${image}:${tag}"
 		String imageUnderscored = image.replace('/', '_')
