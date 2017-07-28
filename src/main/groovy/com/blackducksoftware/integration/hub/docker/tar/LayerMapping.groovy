@@ -23,21 +23,20 @@
  */
 package com.blackducksoftware.integration.hub.docker.tar
 
+
 import org.apache.commons.lang3.builder.RecursiveToStringStyle
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder
 
 class LayerMapping {
-	String imageName
-	String tagName
-	List<String> layers = new ArrayList<>()
+    String imageName
+    String tagName
+    List<String> layers = new ArrayList<>()
 
-	String getImageDirectory(){
-		"image_${imageName}_v_${tagName}"
-	}
-	@Override
-	public String toString() {
-		return ReflectionToStringBuilder.toString(this, RecursiveToStringStyle.JSON_STYLE);
-	}
-
-
+    String getImageDirectory(){
+        "image_${imageName}_v_${tagName}"
+    }
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this, RecursiveToStringStyle.JSON_STYLE);
+    }
 }

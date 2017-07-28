@@ -22,15 +22,16 @@
  * under the License.
  */
 package com.blackducksoftware.integration.hub.docker.image
+
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 
 class DockerImage {
-	private final OperatingSystemEnum os
-	private final String imageName
-	private final String imageVersion
-	public DockerImage(OperatingSystemEnum os, String imageName, String imageVersion) {
-		this.os = os
-		this.imageName = imageName
-		this.imageVersion = imageVersion
-	}
+    private final OperatingSystemEnum os
+    private final String imageName
+    private final String imageVersion
+    public DockerImage(OperatingSystemEnum os, String imageName, String imageVersion) {
+        this.os = os
+        this.imageName = imageName
+        this.imageVersion = imageVersion
+    }
 }

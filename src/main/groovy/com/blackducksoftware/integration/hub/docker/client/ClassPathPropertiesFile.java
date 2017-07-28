@@ -29,19 +29,19 @@ import java.util.Properties;
 import java.util.Set;
 
 public class ClassPathPropertiesFile {
-	private final Properties props;
+    private final Properties props;
 
-	public ClassPathPropertiesFile(final String propetiesFilename) throws IOException {
-		props = new Properties();
-		final InputStream stream = this.getClass().getClassLoader().getResourceAsStream(propetiesFilename);
-		props.load(stream);
-	}
+    public ClassPathPropertiesFile(final String propetiesFilename) throws IOException {
+        props = new Properties();
+        final InputStream stream = this.getClass().getClassLoader().getResourceAsStream(propetiesFilename);
+        props.load(stream);
+    }
 
-	public String getProperty(final String key) {
-		return props.getProperty(key);
-	}
+    public String getProperty(final String key) {
+        return props.getProperty(key);
+    }
 
-	public Set<Object> keySet() {
-		return props.keySet();
-	}
+    public Set<Object> keySet() {
+        return props.keySet();
+    }
 }

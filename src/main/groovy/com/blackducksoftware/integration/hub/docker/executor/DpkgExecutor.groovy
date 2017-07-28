@@ -23,6 +23,7 @@
  */
 package com.blackducksoftware.integration.hub.docker.executor
 
+
 import javax.annotation.PostConstruct
 
 import org.springframework.stereotype.Component
@@ -31,8 +32,8 @@ import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 
 @Component
 class DpkgExecutor extends Executor {
-	@PostConstruct
-	void init() {
-		initValues(PackageManagerEnum.DPKG, null, 'dpkg -l')
-	}
+    @PostConstruct
+    void init() {
+        initValues(PackageManagerEnum.DPKG, null, 'dpkg -l')
+    }
 }

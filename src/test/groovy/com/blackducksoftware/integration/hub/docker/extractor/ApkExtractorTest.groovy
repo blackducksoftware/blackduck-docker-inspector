@@ -11,6 +11,7 @@
  */
 package com.blackducksoftware.integration.hub.docker.extractor
 
+
 import static org.junit.Assert.*
 
 import org.junit.Test
@@ -24,40 +25,43 @@ import com.google.gson.Gson
 
 class ApkExtractorTest {
 
-	@Test
-	void testApkFile1() {
-		testApkExtraction('alpine_apk_output_1.txt','testApkBdio1.jsonld')
-	}
+    @Test
+    void testApkFile1() {
+        testApkExtraction('alpine_apk_output_1.txt','testApkBdio1.jsonld')
+    }
 
-	void testApkExtraction(String resourceName, String outputFileName){
-		URL url = this.getClass().getResource("/$resourceName")
-		File resourceFile = new File(URLDecoder.decode(url.getFile(), 'UTF-8'))
+    void testApkExtraction(String resourceName, String outputFileName){
+        URL url = this.getClass().getResource("/$resourceName")
+        File resourceFile = new File(URLDecoder.decode(url.getFile(), 'UTF-8'))
 
-		ApkExtractor extractor = new ApkExtractor()
-		ExecutorMock executor = new ExecutorMock(resourceFile)
-		extractor.executor = executor
-		def forges = [
-			OperatingSystemEnum.ALPINE.forge
-		]
-		extractor.initValues(PackageManagerEnum.APK, executor, forges)
+        ApkExtractor extractor = new ApkExtractor()
+        ExecutorMock executor = new ExecutorMock(resourceFile)
+        extractor.executor = executor
+        def forges = [
+            OperatingSystemEnum.ALPINE.forge
+        ]
+        extractor.initValues(PackageManagerEnum.APK, executor, forges)
 
-		File outputFile = new File("test")
-		outputFile = new File(outputFile, outputFileName)
-		if(outputFile.exists()){
-			outputFile.delete()
-		}
-		outputFile.getParentFile().mkdirs()
-		BdioWriter writer = new BdioWriter(new Gson(), new FileWriter(outputFile))
-		ExtractionDetails extractionDetails = new ExtractionDetails()
-		extractionDetails.operatingSystem = OperatingSystemEnum.ALPINE
-		extractionDetails.architecture = 'x86'
-		extractor.extract(writer, extractionDetails, "CodeLocationName", "Test", "1")
-		writer.close()
+        File outputFile = new File("test")
+        outputFile = new File(outputFile, outputFileName)
+        if(outputFile.exists()){
+            outputFile.delete()
+        }
+        outputFile.getParentFile().mkdirs()
+        BdioWriter writer = new BdioWriter(new Gson(), new FileWriter(outputFile))
+        ExtractionDetails extractionDetails = new ExtractionDetails()
+        extractionDetails.operatingSystem = OperatingSystemEnum.ALPINE
+        extractionDetails.architecture = 'x86'
+        extractor.extract(writer, extractionDetails, "CodeLocationName", "Test", "1")
+        writer.close()
 
-		File file1 = new File("src/test/resources/testApkBdio1.jsonld");
-		File file2 = new File("test/testApkBdio1.jsonld");
-		println "Comparing ${file2.getAbsolutePath()} to ${file1.getAbsolutePath()}"
-		boolean filesAreEqual = TestUtils.contentEquals(file1, file2, ["\"@id\":", "\"externalSystemTypeId\":"])
-		assertTrue(filesAreEqual)
-	}
+        File file1 = new File("src/test/resources/testApkBdio1.jsonld");
+        File file2 = new File("test/testApkBdio1.jsonld");
+        println "Comparing ${file2.getAbsolutePath()} to ${file1.getAbsolutePath()}"
+        boolean filesAreEqual = TestUtils.contentEquals(file1, file2, [
+            "\"@id\":",
+            "\"externalSystemTypeId\":"
+        ])
+        assertTrue(filesAreEqual)
+    }
 }

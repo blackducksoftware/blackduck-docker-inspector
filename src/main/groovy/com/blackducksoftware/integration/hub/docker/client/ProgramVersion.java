@@ -31,15 +31,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ProgramVersion {
-	private final Logger logger = LoggerFactory.getLogger(ProgramVersion.class);
-	private String programVersion;
+    private final Logger logger = LoggerFactory.getLogger(ProgramVersion.class);
+    private String programVersion;
 
-	public String getProgramVersion() throws IOException {
-		if (programVersion == null) {
-			final ClassPathPropertiesFile versionProperties = new ClassPathPropertiesFile("version.properties");
-			programVersion = versionProperties.getProperty("program.version");
-			logger.debug(String.format("programVersion: %s", programVersion));
-		}
-		return programVersion;
-	}
+    public String getProgramVersion() throws IOException {
+        if (programVersion == null) {
+            final ClassPathPropertiesFile versionProperties = new ClassPathPropertiesFile("version.properties");
+            programVersion = versionProperties.getProperty("program.version");
+            logger.debug(String.format("programVersion: %s", programVersion));
+        }
+        return programVersion;
+    }
 }

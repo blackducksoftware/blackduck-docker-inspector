@@ -23,6 +23,7 @@
  */
 package com.blackducksoftware.integration.hub.docker.executor
 
+
 import javax.annotation.PostConstruct
 
 import org.springframework.stereotype.Component
@@ -31,8 +32,8 @@ import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 
 @Component
 class ApkExecutor extends Executor {
-	@PostConstruct
-	void init() {
-		initValues(PackageManagerEnum.APK, null, 'apk info -v')
-	}
+    @PostConstruct
+    void init() {
+        initValues(PackageManagerEnum.APK, null, 'apk info -v')
+    }
 }

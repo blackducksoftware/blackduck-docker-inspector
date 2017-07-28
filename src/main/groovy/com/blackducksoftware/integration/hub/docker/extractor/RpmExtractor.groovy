@@ -23,6 +23,7 @@
  */
 package com.blackducksoftware.integration.hub.docker.extractor
 
+
 import javax.annotation.PostConstruct
 
 import org.slf4j.Logger
@@ -37,45 +38,45 @@ import com.blackducksoftware.integration.hub.docker.executor.RpmExecutor
 
 @Component
 class RpmExtractor extends Extractor {
-	private final Logger logger = LoggerFactory.getLogger(Extractor.class)
+    private final Logger logger = LoggerFactory.getLogger(Extractor.class)
 
-	@Autowired
-	RpmExecutor executor
+    @Autowired
+    RpmExecutor executor
 
-	@PostConstruct
-	void init() {
-		def forges = [
-			OperatingSystemEnum.CENTOS.forge,
-			OperatingSystemEnum.FEDORA.forge,
-			OperatingSystemEnum.REDHAT.forge
-		]
-		initValues(PackageManagerEnum.RPM, executor, forges)
-	}
+    @PostConstruct
+    void init() {
+        def forges = [
+            OperatingSystemEnum.CENTOS.forge,
+            OperatingSystemEnum.FEDORA.forge,
+            OperatingSystemEnum.REDHAT.forge
+        ]
+        initValues(PackageManagerEnum.RPM, executor, forges)
+    }
 
-	boolean valid(String packageLine) {
-		packageLine.matches(".+-.+-.+\\..*")
-	}
+    boolean valid(String packageLine) {
+        packageLine.matches(".+-.+-.+\\..*")
+    }
 
-	List<BdioComponent> extractComponents(ExtractionDetails extractionDetails, String[] packageList) {
-		logger.debug("extractComponents: Received ${packageList.length} package lines")
-		def components = []
-		packageList.each { packageLine ->
-			if (valid(packageLine)) {
-				def lastDotIndex = packageLine.lastIndexOf('.')
-				def arch = packageLine.substring(lastDotIndex + 1)
-				def lastDashIndex = packageLine.lastIndexOf('-')
-				def nameVersion = packageLine.substring(0, lastDashIndex)
-				def secondToLastDashIndex = nameVersion.lastIndexOf('-')
+    List<BdioComponent> extractComponents(ExtractionDetails extractionDetails, String[] packageList) {
+        logger.debug("extractComponents: Received ${packageList.length} package lines")
+        def components = []
+        packageList.each { packageLine ->
+            if (valid(packageLine)) {
+                def lastDotIndex = packageLine.lastIndexOf('.')
+                def arch = packageLine.substring(lastDotIndex + 1)
+                def lastDashIndex = packageLine.lastIndexOf('-')
+                def nameVersion = packageLine.substring(0, lastDashIndex)
+                def secondToLastDashIndex = nameVersion.lastIndexOf('-')
 
-				def versionRelease = packageLine.substring(secondToLastDashIndex + 1, lastDotIndex)
-				def artifact = packageLine.substring(0, secondToLastDashIndex)
+                def versionRelease = packageLine.substring(secondToLastDashIndex + 1, lastDotIndex)
+                def artifact = packageLine.substring(0, secondToLastDashIndex)
 
-				String externalId = "${artifact}/${versionRelease}/${arch}"
-				logger.debug("Adding ${externalId} to components list")
-				components.addAll(createBdioComponent(artifact, versionRelease, externalId))
-			}
-		}
-		logger.debug("extractComponents: Returning ${components.size()} components")
-		components
-	}
+                String externalId = "${artifact}/${versionRelease}/${arch}"
+                logger.debug("Adding ${externalId} to components list")
+                components.addAll(createBdioComponent(artifact, versionRelease, externalId))
+            }
+        }
+        logger.debug("extractComponents: Returning ${components.size()} components")
+        components
+    }
 }

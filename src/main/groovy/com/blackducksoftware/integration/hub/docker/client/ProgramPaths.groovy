@@ -23,6 +23,7 @@
  */
 package com.blackducksoftware.integration.hub.docker.client
 
+
 import org.apache.commons.lang3.StringUtils
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -31,89 +32,89 @@ import org.springframework.stereotype.Component
 @Component
 class ProgramPaths {
 
-	private String hubDockerPgmDirPath
+    private String hubDockerPgmDirPath
 
-	private static final String DEFAULT_PGM_DIR = "/opt/blackduck/hub-docker-inspector"
+    private static final String DEFAULT_PGM_DIR = "/opt/blackduck/hub-docker-inspector"
 
-	public static final String APPLICATION_PROPERTIES_FILENAME = "application.properties"
+    public static final String APPLICATION_PROPERTIES_FILENAME = "application.properties"
 
-	private final Logger logger = LoggerFactory.getLogger(ProgramPaths.class)
+    private final Logger logger = LoggerFactory.getLogger(ProgramPaths.class)
 
-	private String hubDockerConfigDirPath
-	private String hubDockerConfigFilePath
-	private String hubDockerTargetDirPath
-	private String hubDockerJarPath
-	private String hubDockerWorkingDirPath
-	private String hubDockerOutputJsonPath
+    private String hubDockerConfigDirPath
+    private String hubDockerConfigFilePath
+    private String hubDockerTargetDirPath
+    private String hubDockerJarPath
+    private String hubDockerWorkingDirPath
+    private String hubDockerOutputJsonPath
 
-	private boolean initDone = false
+    private boolean initDone = false
 
-	private void init() {
-		if (initDone) {
-			return
-		}
-		if (StringUtils.isBlank(hubDockerPgmDirPath)) {
-			hubDockerPgmDirPath = DEFAULT_PGM_DIR;
-		}
-		if (!hubDockerPgmDirPath.endsWith("/")) {
-			hubDockerPgmDirPath += "/"
-		}
-		hubDockerConfigDirPath = hubDockerPgmDirPath + "config/"
-		hubDockerConfigFilePath = hubDockerConfigDirPath + APPLICATION_PROPERTIES_FILENAME
-		hubDockerTargetDirPath = hubDockerPgmDirPath + "target/"
-		hubDockerWorkingDirPath = hubDockerPgmDirPath + "working/"
-		hubDockerOutputJsonPath = hubDockerPgmDirPath + "output/"
+    private void init() {
+        if (initDone) {
+            return
+        }
+        if (StringUtils.isBlank(hubDockerPgmDirPath)) {
+            hubDockerPgmDirPath = DEFAULT_PGM_DIR;
+        }
+        if (!hubDockerPgmDirPath.endsWith("/")) {
+            hubDockerPgmDirPath += "/"
+        }
+        hubDockerConfigDirPath = hubDockerPgmDirPath + "config/"
+        hubDockerConfigFilePath = hubDockerConfigDirPath + APPLICATION_PROPERTIES_FILENAME
+        hubDockerTargetDirPath = hubDockerPgmDirPath + "target/"
+        hubDockerWorkingDirPath = hubDockerPgmDirPath + "working/"
+        hubDockerOutputJsonPath = hubDockerPgmDirPath + "output/"
 
-		String qualifiedJarPathString = getQualifiedJarPath()
-		logger.debug("qualifiedJarPathString: ${qualifiedJarPathString}")
-		String prefix = "${hubDockerPgmDirPath}hub-docker-"
-		logger.debug("prefix: ${prefix}")
-		int startIndex = qualifiedJarPathString.indexOf(prefix)
-		int endIndex = qualifiedJarPathString.indexOf(".jar") + ".jar".length()
-		hubDockerJarPath = qualifiedJarPathString.substring(startIndex, endIndex)
+        String qualifiedJarPathString = getQualifiedJarPath()
+        logger.debug("qualifiedJarPathString: ${qualifiedJarPathString}")
+        String prefix = "${hubDockerPgmDirPath}hub-docker-"
+        logger.debug("prefix: ${prefix}")
+        int startIndex = qualifiedJarPathString.indexOf(prefix)
+        int endIndex = qualifiedJarPathString.indexOf(".jar") + ".jar".length()
+        hubDockerJarPath = qualifiedJarPathString.substring(startIndex, endIndex)
 
-		initDone = true
-	}
+        initDone = true
+    }
 
-	String getQualifiedJarPath() {
-		return new java.io.File(DockerClientManager.class.getProtectionDomain()
-				.getCodeSource()
-				.getLocation()
-				.getPath()).getAbsolutePath()
-	}
+    String getQualifiedJarPath() {
+        return new java.io.File(DockerClientManager.class.getProtectionDomain()
+                .getCodeSource()
+                .getLocation()
+                .getPath()).getAbsolutePath()
+    }
 
-	public String getHubDockerConfigDirPath() {
-		init()
-		hubDockerConfigDirPath
-	}
+    public String getHubDockerConfigDirPath() {
+        init()
+        hubDockerConfigDirPath
+    }
 
-	public String getHubDockerConfigFilePath() {
-		init()
-		hubDockerConfigFilePath
-	}
+    public String getHubDockerConfigFilePath() {
+        init()
+        hubDockerConfigFilePath
+    }
 
-	public String getHubDockerTargetDirPath() {
-		init()
-		hubDockerTargetDirPath
-	}
+    public String getHubDockerTargetDirPath() {
+        init()
+        hubDockerTargetDirPath
+    }
 
-	public String getHubDockerPgmDirPath() {
-		init()
-		hubDockerPgmDirPath
-	}
+    public String getHubDockerPgmDirPath() {
+        init()
+        hubDockerPgmDirPath
+    }
 
-	public String getHubDockerJarPath() {
-		init()
-		return hubDockerJarPath;
-	}
+    public String getHubDockerJarPath() {
+        init()
+        return hubDockerJarPath;
+    }
 
-	public String getHubDockerWorkingDirPath() {
-		init()
-		return hubDockerWorkingDirPath;
-	}
+    public String getHubDockerWorkingDirPath() {
+        init()
+        return hubDockerWorkingDirPath;
+    }
 
-	public String getHubDockerOutputJsonPath() {
-		init()
-		return hubDockerOutputJsonPath;
-	}
+    public String getHubDockerOutputJsonPath() {
+        init()
+        return hubDockerOutputJsonPath;
+    }
 }

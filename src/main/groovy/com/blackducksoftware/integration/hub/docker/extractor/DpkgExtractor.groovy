@@ -23,6 +23,7 @@
  */
 package com.blackducksoftware.integration.hub.docker.extractor
 
+
 import javax.annotation.PostConstruct
 
 import org.slf4j.Logger
@@ -37,52 +38,52 @@ import com.blackducksoftware.integration.hub.docker.executor.DpkgExecutor
 
 @Component
 class DpkgExtractor extends Extractor {
-	private final Logger logger = LoggerFactory.getLogger(DpkgExtractor.class)
+    private final Logger logger = LoggerFactory.getLogger(DpkgExtractor.class)
 
-	@Autowired
-	DpkgExecutor executor
+    @Autowired
+    DpkgExecutor executor
 
-	@PostConstruct
-	void init() {
-		def forges = [
-			OperatingSystemEnum.DEBIAN.forge,
-			OperatingSystemEnum.UBUNTU.forge
-		]
-		initValues(PackageManagerEnum.DPKG, executor, forges)
-	}
+    @PostConstruct
+    void init() {
+        def forges = [
+            OperatingSystemEnum.DEBIAN.forge,
+            OperatingSystemEnum.UBUNTU.forge
+        ]
+        initValues(PackageManagerEnum.DPKG, executor, forges)
+    }
 
-	List<BdioComponent> extractComponents(ExtractionDetails extractionDetails, String[] packageList) {
-		def components = []
-		boolean startOfComponents = false
-		packageList.each { packageLine ->
-			if (packageLine != null) {
-				if (packageLine.matches("\\+\\+\\+-=+-=+-=+-=+")) {
-					startOfComponents = true
-				} else if (startOfComponents){
-					char packageStatus = packageLine.charAt(1)
-					if (isInstalledStatus(packageStatus)) {
-						String componentInfo = packageLine.substring(3)
-						def(name,version,architecture,description) = componentInfo.tokenize(" ")
-						if (name.contains(":")) {
-							name = name.substring(0, name.indexOf(":"))
-						}
-						String externalId = "$name/$version/$architecture"
+    List<BdioComponent> extractComponents(ExtractionDetails extractionDetails, String[] packageList) {
+        def components = []
+        boolean startOfComponents = false
+        packageList.each { packageLine ->
+            if (packageLine != null) {
+                if (packageLine.matches("\\+\\+\\+-=+-=+-=+-=+")) {
+                    startOfComponents = true
+                } else if (startOfComponents){
+                    char packageStatus = packageLine.charAt(1)
+                    if (isInstalledStatus(packageStatus)) {
+                        String componentInfo = packageLine.substring(3)
+                        def(name,version,architecture,description) = componentInfo.tokenize(" ")
+                        if (name.contains(":")) {
+                            name = name.substring(0, name.indexOf(":"))
+                        }
+                        String externalId = "$name/$version/$architecture"
 
-						components.addAll(createBdioComponent(name, version, externalId))
-					} else {
-						logger.debug("Package \"${packageLine}\" is listed but not installed (package status: ${packageStatus})")
-					}
-				}
-			}
-		}
-		components
-	}
+                        components.addAll(createBdioComponent(name, version, externalId))
+                    } else {
+                        logger.debug("Package \"${packageLine}\" is listed but not installed (package status: ${packageStatus})")
+                    }
+                }
+            }
+        }
+        components
+    }
 
-	boolean isInstalledStatus(Character packageStatus) {
-		String packageStatusString = packageStatus.toString()
-		if ("iWt".contains(packageStatusString)) {
-			return true
-		}
-		false
-	}
+    boolean isInstalledStatus(Character packageStatus) {
+        String packageStatusString = packageStatus.toString()
+        if ("iWt".contains(packageStatusString)) {
+            return true
+        }
+        false
+    }
 }

@@ -23,6 +23,7 @@
  */
 package com.blackducksoftware.integration.hub.docker
 
+
 import org.apache.commons.lang3.StringUtils
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -40,121 +41,121 @@ import com.blackducksoftware.integration.log.Slf4jIntLogger
 
 @Component
 class HubClient {
-	private final Logger logger = LoggerFactory.getLogger(HubClient.class)
+    private final Logger logger = LoggerFactory.getLogger(HubClient.class)
 
-	@Value('${hub.url}')
-	String hubUrl
+    @Value('${hub.url}')
+    String hubUrl
 
-	@Value('${hub.timeout}')
-	String hubTimeout
+    @Value('${hub.timeout}')
+    String hubTimeout
 
-	@Value('${hub.username}')
-	String hubUsername
+    @Value('${hub.username}')
+    String hubUsername
 
-	@Value('${hub.password}')
-	String hubPasswordProperty
+    @Value('${hub.password}')
+    String hubPasswordProperty
 
-	@Value('${BD_HUB_PASSWORD:}')
-	String hubPasswordEnvVar
+    @Value('${BD_HUB_PASSWORD:}')
+    String hubPasswordEnvVar
 
-	@Value('${SCAN_CLI_OPTS:}')
-	String scanCliOptsEnvVar
+    @Value('${SCAN_CLI_OPTS:}')
+    String scanCliOptsEnvVar
 
-	@Value('${hub.proxy.host}')
-	String hubProxyHostProperty
+    @Value('${hub.proxy.host}')
+    String hubProxyHostProperty
 
-	@Value('${hub.proxy.port}')
-	String hubProxyPortProperty
+    @Value('${hub.proxy.port}')
+    String hubProxyPortProperty
 
-	@Value('${hub.proxy.username}')
-	String hubProxyUsernameProperty
+    @Value('${hub.proxy.username}')
+    String hubProxyUsernameProperty
 
-	@Value('${hub.proxy.password}')
-	String hubProxyPasswordProperty
+    @Value('${hub.proxy.password}')
+    String hubProxyPasswordProperty
 
-	@Value('${command.timeout}')
-	long commandTimeout
+    @Value('${command.timeout}')
+    long commandTimeout
 
-	@Value('${hub.auto.import.cert}')
-	Boolean autoImportCert
+    @Value('${hub.auto.import.cert}')
+    Boolean autoImportCert
 
-	boolean isValid() {
-		createBuilder().isValid()
-	}
+    boolean isValid() {
+        createBuilder().isValid()
+    }
 
-	void assertValid() throws IllegalStateException {
-		createBuilder().build()
-	}
+    void assertValid() throws IllegalStateException {
+        createBuilder().build()
+    }
 
-	void testHubConnection() throws HubIntegrationException {
-		HubServerConfig hubServerConfig = createBuilder().build()
-		CredentialsRestConnection credentialsRestConnection = hubServerConfig.createCredentialsRestConnection(new Slf4jIntLogger(logger))
-		credentialsRestConnection.connect()
-		logger.info('Successful connection to the Hub.')
-	}
+    void testHubConnection() throws HubIntegrationException {
+        HubServerConfig hubServerConfig = createBuilder().build()
+        CredentialsRestConnection credentialsRestConnection = hubServerConfig.createCredentialsRestConnection(new Slf4jIntLogger(logger))
+        credentialsRestConnection.connect()
+        logger.info('Successful connection to the Hub.')
+    }
 
-	void uploadBdioToHub(File bdioFile) {
-		HubServerConfig hubServerConfig = createBuilder().build()
+    void uploadBdioToHub(File bdioFile) {
+        HubServerConfig hubServerConfig = createBuilder().build()
 
-		CredentialsRestConnection credentialsRestConnection = hubServerConfig.createCredentialsRestConnection(new Slf4jIntLogger(logger))
-		HubServicesFactory hubServicesFactory = new HubServicesFactory(credentialsRestConnection)
-		BomImportRequestService bomImportRequestService = hubServicesFactory.createBomImportRequestService()
-		bomImportRequestService.importBomFile(bdioFile, BuildToolConstants.BDIO_FILE_MEDIA_TYPE)
-		logger.info("Uploaded bdio file ${bdioFile.getName()} to ${hubServerConfig.hubUrl}")
-	}
+        CredentialsRestConnection credentialsRestConnection = hubServerConfig.createCredentialsRestConnection(new Slf4jIntLogger(logger))
+        HubServicesFactory hubServicesFactory = new HubServicesFactory(credentialsRestConnection)
+        BomImportRequestService bomImportRequestService = hubServicesFactory.createBomImportRequestService()
+        bomImportRequestService.importBomFile(bdioFile, BuildToolConstants.BDIO_FILE_MEDIA_TYPE)
+        logger.info("Uploaded bdio file ${bdioFile.getName()} to ${hubServerConfig.hubUrl}")
+    }
 
-	private HubServerConfigBuilder createBuilder() {
+    private HubServerConfigBuilder createBuilder() {
 
-		String hubPassword = hubPasswordEnvVar
-		if (!StringUtils.isBlank(hubPasswordProperty)) {
-			hubPassword = hubPasswordProperty
-		}
+        String hubPassword = hubPasswordEnvVar
+        if (!StringUtils.isBlank(hubPasswordProperty)) {
+            hubPassword = hubPasswordProperty
+        }
 
-		String hubProxyHost = hubProxyHostProperty
-		String hubProxyPort = hubProxyPortProperty
-		String hubProxyUsername = hubProxyUsernameProperty
-		String hubProxyPassword = hubProxyPasswordProperty
-		if ((StringUtils.isBlank(hubProxyHostProperty)) && (!StringUtils.isBlank(scanCliOptsEnvVar))) {
-			List<String> scanCliOpts = scanCliOptsEnvVar.split("\\s")
-			for (String opt : scanCliOpts) {
-				opt = opt.trim()
-				if ((opt.startsWith("-Dhttp.proxy.host=")) || (opt.startsWith("-Dhttps.proxy.host="))) {
-					hubProxyHost = getValue(opt)
-				} else if ((opt.startsWith("-Dhttp.proxy.port=")) || (opt.startsWith("-Dhttps.proxy.port="))) {
-					hubProxyPort = getValue(opt)
-				} else if ((opt.startsWith("-Dhttp.proxy.username=")) || (opt.startsWith("-Dhttps.proxy.username="))) {
-					hubProxyUsername = getValue(opt)
-				} else if ((opt.startsWith("-Dhttp.proxy.password=")) || (opt.startsWith("-Dhttps.proxy.password="))) {
-					hubProxyPassword = getValue(opt)
-				}
-			}
-		}
+        String hubProxyHost = hubProxyHostProperty
+        String hubProxyPort = hubProxyPortProperty
+        String hubProxyUsername = hubProxyUsernameProperty
+        String hubProxyPassword = hubProxyPasswordProperty
+        if ((StringUtils.isBlank(hubProxyHostProperty)) && (!StringUtils.isBlank(scanCliOptsEnvVar))) {
+            List<String> scanCliOpts = scanCliOptsEnvVar.split("\\s")
+            for (String opt : scanCliOpts) {
+                opt = opt.trim()
+                if ((opt.startsWith("-Dhttp.proxy.host=")) || (opt.startsWith("-Dhttps.proxy.host="))) {
+                    hubProxyHost = getValue(opt)
+                } else if ((opt.startsWith("-Dhttp.proxy.port=")) || (opt.startsWith("-Dhttps.proxy.port="))) {
+                    hubProxyPort = getValue(opt)
+                } else if ((opt.startsWith("-Dhttp.proxy.username=")) || (opt.startsWith("-Dhttps.proxy.username="))) {
+                    hubProxyUsername = getValue(opt)
+                } else if ((opt.startsWith("-Dhttp.proxy.password=")) || (opt.startsWith("-Dhttps.proxy.password="))) {
+                    hubProxyPassword = getValue(opt)
+                }
+            }
+        }
 
-		HubServerConfigBuilder hubServerConfigBuilder = new HubServerConfigBuilder()
-		hubServerConfigBuilder.hubUrl = hubUrl
-		hubServerConfigBuilder.username = hubUsername
-		hubServerConfigBuilder.password = hubPassword
+        HubServerConfigBuilder hubServerConfigBuilder = new HubServerConfigBuilder()
+        hubServerConfigBuilder.hubUrl = hubUrl
+        hubServerConfigBuilder.username = hubUsername
+        hubServerConfigBuilder.password = hubPassword
 
-		hubServerConfigBuilder.timeout = hubTimeout
-		hubServerConfigBuilder.proxyHost = hubProxyHost
-		hubServerConfigBuilder.proxyPort = hubProxyPort
-		hubServerConfigBuilder.proxyUsername = hubProxyUsername
-		hubServerConfigBuilder.proxyPassword = hubProxyPassword
+        hubServerConfigBuilder.timeout = hubTimeout
+        hubServerConfigBuilder.proxyHost = hubProxyHost
+        hubServerConfigBuilder.proxyPort = hubProxyPort
+        hubServerConfigBuilder.proxyUsername = hubProxyUsername
+        hubServerConfigBuilder.proxyPassword = hubProxyPassword
 
-		if(autoImportCert == null){
-			autoImportCert = true
-		}
-		hubServerConfigBuilder.autoImportHttpsCertificates = autoImportCert
+        if(autoImportCert == null){
+            autoImportCert = true
+        }
+        hubServerConfigBuilder.autoImportHttpsCertificates = autoImportCert
 
-		hubServerConfigBuilder
-	}
+        hubServerConfigBuilder
+    }
 
-	private String getValue(String nameEqualsValue) {
-		List<String> nameValue = nameEqualsValue.split("=")
-		String value = null
-		if (nameValue.size() == 2) {
-			value = nameValue.get(1)
-		}
-		return value
-	}
+    private String getValue(String nameEqualsValue) {
+        List<String> nameValue = nameEqualsValue.split("=")
+        String value = null
+        if (nameValue.size() == 2) {
+            value = nameValue.get(1)
+        }
+        return value
+    }
 }

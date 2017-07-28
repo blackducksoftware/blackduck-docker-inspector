@@ -23,6 +23,7 @@
  */
 package com.blackducksoftware.integration.hub.docker.executor
 
+
 import org.apache.commons.lang3.StringUtils
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -32,57 +33,57 @@ import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException
 
 abstract class Executor {
-	private final Logger logger = LoggerFactory.getLogger(getClass())
+    private final Logger logger = LoggerFactory.getLogger(getClass())
 
-	PackageManagerEnum packageManagerEnum
-	String upgradeCommand
-	String listPackagesCommand
+    PackageManagerEnum packageManagerEnum
+    String upgradeCommand
+    String listPackagesCommand
 
-	@Value('${command.timeout}')
-	long commandTimeout
+    @Value('${command.timeout}')
+    long commandTimeout
 
-	abstract void init()
+    abstract void init()
 
-	void initValues(PackageManagerEnum packageManagerEnum, String upgradeCommand, String listPackagesCommand) {
-		this.packageManagerEnum = packageManagerEnum
-		this.upgradeCommand = upgradeCommand
-		this.listPackagesCommand = listPackagesCommand
-	}
+    void initValues(PackageManagerEnum packageManagerEnum, String upgradeCommand, String listPackagesCommand) {
+        this.packageManagerEnum = packageManagerEnum
+        this.upgradeCommand = upgradeCommand
+        this.listPackagesCommand = listPackagesCommand
+    }
 
-	String[] listPackages() {
-		String[] results
-		logger.info("Executing package manager")
-		try {
-			results = executeCommand(listPackagesCommand)
-			logger.info("Command ${listPackagesCommand} executed successfully")
-		} catch (Exception e) {
-			if (!StringUtils.isBlank(upgradeCommand)) {
-				logger.warn("Error executing \"${listPackagesCommand}\": ${e.getMessage()}; Trying to upgrade package database by executing: ${upgradeCommand}")
-				executeCommand(upgradeCommand)
-				results = executeCommand(listPackagesCommand)
-				logger.info("Command ${listPackagesCommand} executed successfully on 2nd attempt (after db upgrade)")
-			} else {
-				logger.error("Error executing \"${listPackagesCommand}\": ${e.getMessage()}; No upgrade command has been provided for this package manager")
-				throw e
-			}
-		}
-		logger.debug("Package manager reported ${results.size()} package lines")
-		results
-	}
-	String[] executeCommand(String command){
-		def standardOut = new StringBuilder()
-		def standardError = new StringBuilder()
-		def process = command.execute()
-		process.consumeProcessOutput(standardOut, standardError)
-		process.waitForOrKill(commandTimeout)
+    String[] listPackages() {
+        String[] results
+        logger.info("Executing package manager")
+        try {
+            results = executeCommand(listPackagesCommand)
+            logger.info("Command ${listPackagesCommand} executed successfully")
+        } catch (Exception e) {
+            if (!StringUtils.isBlank(upgradeCommand)) {
+                logger.warn("Error executing \"${listPackagesCommand}\": ${e.getMessage()}; Trying to upgrade package database by executing: ${upgradeCommand}")
+                executeCommand(upgradeCommand)
+                results = executeCommand(listPackagesCommand)
+                logger.info("Command ${listPackagesCommand} executed successfully on 2nd attempt (after db upgrade)")
+            } else {
+                logger.error("Error executing \"${listPackagesCommand}\": ${e.getMessage()}; No upgrade command has been provided for this package manager")
+                throw e
+            }
+        }
+        logger.debug("Package manager reported ${results.size()} package lines")
+        results
+    }
+    String[] executeCommand(String command){
+        def standardOut = new StringBuilder()
+        def standardError = new StringBuilder()
+        def process = command.execute()
+        process.consumeProcessOutput(standardOut, standardError)
+        process.waitForOrKill(commandTimeout)
 
-		if(process.exitValue() !=0){
-			logger.debug(standardError.toString())
-			throw new HubIntegrationException("Failed to run command ${command}")
-		}
+        if(process.exitValue() !=0){
+            logger.debug(standardError.toString())
+            throw new HubIntegrationException("Failed to run command ${command}")
+        }
 
-		def output =  standardOut.toString()
-		logger.trace(output)
-		output.split(System.lineSeparator())
-	}
+        def output =  standardOut.toString()
+        logger.trace(output)
+        output.split(System.lineSeparator())
+    }
 }

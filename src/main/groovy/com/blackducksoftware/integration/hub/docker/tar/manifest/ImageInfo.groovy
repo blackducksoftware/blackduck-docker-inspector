@@ -23,6 +23,7 @@
  */
 package com.blackducksoftware.integration.hub.docker.tar.manifest
 
+
 import org.apache.commons.lang3.builder.RecursiveToStringStyle
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder
 
@@ -30,18 +31,17 @@ import com.google.gson.annotations.SerializedName
 
 class ImageInfo {
 
-	@SerializedName("Config")
-	String config
+    @SerializedName("Config")
+    String config
 
-	@SerializedName("RepoTags")
-	List<String> repoTags
+    @SerializedName("RepoTags")
+    List<String> repoTags
 
-	@SerializedName("Layers")
-	List<String> layers
+    @SerializedName("Layers")
+    List<String> layers
 
-	@Override
-	public String toString() {
-		return ReflectionToStringBuilder.toString(this, RecursiveToStringStyle.JSON_STYLE);
-	}
-
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this, RecursiveToStringStyle.JSON_STYLE);
+    }
 }

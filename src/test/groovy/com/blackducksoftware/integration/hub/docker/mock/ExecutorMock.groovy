@@ -11,21 +11,22 @@
  */
 package com.blackducksoftware.integration.hub.docker.mock
 
+
 import com.blackducksoftware.integration.hub.docker.executor.Executor
 
 class ExecutorMock extends Executor {
 
-	File resourceFile
+    File resourceFile
 
-	ExecutorMock(File resourceFile){
-		this.resourceFile = resourceFile
-	}
+    ExecutorMock(File resourceFile){
+        this.resourceFile = resourceFile
+    }
 
-	String[] listPackages(){
-		resourceFile as String[]
-	}
+    String[] listPackages(){
+        resourceFile as String[]
+    }
 
-	@Override
-	public void init() {
-	}
+    @Override
+    public void init() {
+    }
 }
