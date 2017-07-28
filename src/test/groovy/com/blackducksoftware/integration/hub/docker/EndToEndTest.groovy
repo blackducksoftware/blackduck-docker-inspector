@@ -40,6 +40,11 @@ class EndToEndTest {
 		test("blackducksoftware/hub-webapp", "4.0.0", "lib_apk")
 	}
 
+	@Test
+	public void testHubZookeeper() {
+		test("blackducksoftware/hub-zookeeper", "4.0.0", "lib_apk")
+	}
+
 	private void test(String image, String tag, String pkgMgrPathString) {
 		println "Running end to end test on ${image}:${tag}"
 		String imageUnderscored = image.replace('/', '_')
