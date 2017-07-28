@@ -21,6 +21,11 @@ class EndToEndTest {
 	}
 
 	@Test
+	public void testAlpine() {
+		test("alpine", "3.6", "lib_apk")
+	}
+
+	@Test
 	public void testCentos() {
 		test("centos", "7.3.1611", "var_lib_rpm")
 	}
