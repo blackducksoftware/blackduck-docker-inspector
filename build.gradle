@@ -51,6 +51,19 @@ sourceSets {
 			includes = ['*.properties']
 		}
 	}
+    integrationTest {
+        groovy {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/integration-test/groovy')
+        }
+        resources.srcDir file('src/integration-test/resources')
+    }
+}
+
+configurations {
+    integrationTestCompile.extendsFrom testCompile
+    integrationTestRuntime.extendsFrom testRuntime
 }
 
 task writeVersionToPropertiesFile(dependsOn: build) {
@@ -265,9 +278,6 @@ task pushImageUbuntu(type: Exec, dependsOn: [buildDockerImage_ubuntu]) {
 	commandLine "docker", "push", "blackducksoftware/hub-docker-inspector:${version}"
 }
 
-task pushImages(dependsOn: [pushImageAlpine, pushImageCentos, pushImageUbuntu]) {
-}
-
 private String getSuffix(String linuxFlavorName) {
     String suffix = ''
     if (!linuxFlavorName.equals("ubuntu")) {
@@ -315,7 +325,19 @@ test.dependsOn testPrep
 
 task pkg(dependsOn: [buildDockerImages, packageScript]) {}
 
-task all(dependsOn: [pkg, pushImages]) {}
+task pushImages(dependsOn: [pkg, pushImageAlpine, pushImageCentos, pushImageUbuntu]) {
+}
+
+task integrationTest(type: Test, dependsOn: pushImages) {
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    outputs.upToDateWhen { false }
+}
+
+//check.dependsOn integrationTest
+//integrationTest.mustRunAfter pushImages
+
+task all(dependsOn: [integrationTest]) {}
 
 repositories {
     mavenCentral()
@@ -333,4 +355,6 @@ dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.4.8'
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
+    
+    integrationTestCompile 'org.assertj:assertj-core:3.0.0'
 }
