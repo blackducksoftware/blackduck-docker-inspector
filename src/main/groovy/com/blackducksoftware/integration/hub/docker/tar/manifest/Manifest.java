@@ -17,7 +17,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 public class Manifest {
-    private final Logger logger = LoggerFactory.getLogger(Manifest.class);
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final File tarExtractionDirectory;
 
     public Manifest(final File tarExtractionDirectory) {

@@ -24,14 +24,6 @@
 package com.blackducksoftware.integration.hub.docker.tar
 
 
-import java.nio.file.FileAlreadyExistsException
-import java.nio.file.Files
-import java.nio.file.InvalidPathException
-import java.nio.file.NoSuchFileException
-import java.nio.file.Path
-import java.nio.file.Paths
-
-import org.apache.commons.compress.archivers.tar.TarArchiveEntry
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream
 import org.apache.commons.io.IOUtils
 import org.apache.commons.lang3.StringUtils
@@ -61,13 +53,15 @@ class DockerTarParser {
         layerMappings.each { mapping ->
             mapping.layers.each { layer ->
                 logger.trace("layer: ${layer}")
+                // TODO: move this to LayerTar class?
                 File layerTar = layerTars.find{
                     StringUtils.compare(layer, it.getParentFile().getName()) == 0
                 }
                 if(layerTar != null){
                     def imageOutputDir = new File(imageFilesDir, mapping.getImageDirectory())
                     logger.trace("Processing layer: ${layerTar.getAbsolutePath()}")
-                    parseLayerTarAndExtract( layerTar, imageOutputDir)
+                    DockerLayerTar dockerLayerTar = new DockerLayerTar(layerTar)
+                    dockerLayerTar.extractToDir(imageOutputDir)
                 } else {
                     logger.warn("Could not find the tar for layer ${layer}")
                 }
@@ -315,133 +309,5 @@ class DockerTarParser {
 
 
 
-    // TODO this method needs to be split up
-    private void parseLayerTarAndExtract(File layerTar, File layerOutputDir){
-        logger.debug("layerTar: ${layerTar.getAbsolutePath()}")
-        def layerInputStream = new TarArchiveInputStream(new FileInputStream(layerTar), "UTF-8")
-        try {
-            layerOutputDir.mkdirs()
-            logger.debug("layerOutputDir: ${layerOutputDir.getAbsolutePath()}")
-            Path layerOutputDirPath = layerOutputDir.toPath()
-            TarArchiveEntry layerEntry
-            while (null != (layerEntry = layerInputStream.getNextTarEntry())) {
-                try {
-                    String fileSystemEntryName = layerEntry.getName()
-                    logger.trace("Processing layerEntry: ${fileSystemEntryName}")
-                    if ((fileSystemEntryName.startsWith('.wh.')) || (fileSystemEntryName.contains('/.wh.')))   {
-                        logger.trace("Found white-out file ${fileSystemEntryName}")
-                        int whiteOutMarkIndex = fileSystemEntryName.indexOf('.wh.')
-                        String beforeWhiteOutMark = fileSystemEntryName.substring(0, whiteOutMarkIndex)
-                        String afterWhiteOutMark = fileSystemEntryName.substring(whiteOutMarkIndex + ".wh.".length())
-                        String filePathToRemove = "${beforeWhiteOutMark}${afterWhiteOutMark}"
-                        final File fileToRemove = new File(layerOutputDir, filePathToRemove)
-                        logger.trace("Removing ${filePathToRemove} from image (this layer whites it out)")
-                        if (fileToRemove.isDirectory()) {
-                            try {
-                                fileToRemove.deleteDir()
-                                logger.trace("Directory ${filePathToRemove} successfully removed")
-                            } catch (Exception e) {
-                                logger.warn("Error removing whited-out directory ${filePathToRemove}")
-                            }
-                        } else {
-                            try {
-                                Files.delete(fileToRemove.toPath())
-                                logger.trace("File ${filePathToRemove} successfully removed")
-                            } catch (Exception e) {
-                                logger.warn("Error removing whited-out file ${filePathToRemove}")
-                            }
-                        }
-                        continue
-                    }
-                    if(layerEntry.isSymbolicLink() || layerEntry.isLink()) {
-                        logger.trace("Processing link: ${fileSystemEntryName}")
-                        Path startLink = null
-                        try {
-                            startLink = Paths.get(layerOutputDir.getAbsolutePath(), fileSystemEntryName)
-                        } catch (InvalidPathException e) {
-                            logger.warn("Error extracting symbolic link ${fileSystemEntryName}: Error creating Path object: ${e.getMessage()}")
-                            continue
-                        }
-                        Path endLink = null
-                        logger.trace("Getting link name from layer entry")
-                        String linkPath = layerEntry.getLinkName()
-                        logger.trace("layerEntry.getLinkName(): ${linkPath}")
-                        logger.trace("Checking link type")
-                        if(layerEntry.isSymbolicLink()){
-                            logger.trace("${layerEntry.name} is a symbolic link")
-                            logger.trace("Calculating endLink: startLink: ${startLink.toString()}; layerEntry.getLinkName(): ${layerEntry.getLinkName()}")
-                            if (linkPath.startsWith('/')) {
-                                String relLinkPath = "." + linkPath
-                                logger.trace("endLink made relative: ${relLinkPath}")
-                                endLink =  layerOutputDirPath.resolve(relLinkPath)
-                            } else {
-                                endLink = startLink.resolveSibling(layerEntry.getLinkName())
-                            }
-                            logger.trace("normalizing ${endLink.toString()}")
-                            endLink = endLink.normalize()
-                            logger.trace("endLink: ${endLink.toString()}")
-                            try {
-                                try {
-                                    Files.delete(startLink) // remove lower layer's version if exists
-                                } catch (IOException e) {
-                                    // expected (most of the time)
-                                }
-                                Files.createSymbolicLink(startLink, endLink)
-                            } catch (FileAlreadyExistsException e) {
-                                String msg = "FileAlreadyExistsException creating symbolic link from ${startLink.toString()} to ${endLink.toString()}; " +
-                                        "this will not affect the results unless it affects a file needed by the package manager; " +
-                                        "Error: ${e.getMessage()}"
-                                throw new HubIntegrationException(msg)
-                            }
-                        } else if (layerEntry.isLink()) {
-                            logger.trace("${layerEntry.name} is a hard link")
-                            logger.trace("Calculating endLink: startLink: ${startLink.toString()}; layerEntry.getLinkName(): ${layerEntry.getLinkName()}")
-                            endLink =  layerOutputDirPath.resolve(layerEntry.getLinkName())
-                            logger.trace("normalizing ${endLink.toString()}")
-                            endLink = endLink.normalize()
-                            logger.trace("endLink: ${endLink.toString()}")
 
-                            logger.trace("${layerEntry.name} is a hard link: ${startLink.toString()} -> ${endLink.toString()}")
-                            File targetFile = endLink.toFile()
-                            if (!targetFile.exists()) {
-                                logger.warn("Attempting to create a link to ${targetFile}, but it does not exist")
-                            }
-                            try {
-                                Files.createLink(startLink, endLink)
-                            } catch (NoSuchFileException|FileAlreadyExistsException e) {
-                                logger.warn("Error creating hard link from ${startLink.toString()} to ${endLink.toString()}; " +
-                                        "this will not affect the results unless it affects a file needed by the package manager; " +
-                                        "Error: ${e.getMessage()}")
-                            }
-                        }
-                    } else {
-
-                        logger.trace("Processing file/dir: ${fileSystemEntryName}")
-
-                        final File outputFile = new File(layerOutputDir, fileSystemEntryName)
-                        if (layerEntry.isFile()) {
-                            logger.trace("Processing file: ${fileSystemEntryName}")
-                            if(!outputFile.getParentFile().exists()){
-                                outputFile.getParentFile().mkdirs()
-                            }
-                            logger.trace("Creating output stream for ${outputFile.getName()}")
-                            final OutputStream outputFileStream = new FileOutputStream(outputFile)
-                            try{
-                                IOUtils.copy(layerInputStream, outputFileStream)
-                            } finally{
-                                outputFileStream.close()
-                            }
-                        } else {
-                            outputFile.mkdirs()
-                        }
-
-                    }
-                } catch(Exception e) {
-                    logger.error("Error extracting files from layer tar: ${e.toString()}")
-                }
-            }
-        } finally {
-            IOUtils.closeQuietly(layerInputStream)
-        }
-    }
 }
