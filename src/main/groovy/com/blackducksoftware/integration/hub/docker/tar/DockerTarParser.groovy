@@ -35,22 +35,20 @@ import org.apache.commons.compress.archivers.tar.TarArchiveEntry
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream
 import org.apache.commons.io.IOUtils
 import org.apache.commons.lang3.StringUtils
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component
 
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 import com.blackducksoftware.integration.hub.docker.tar.manifest.ImageInfo
+import com.blackducksoftware.integration.hub.docker.tar.manifest.Manifest
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException
-import com.google.gson.Gson
-import com.google.gson.JsonArray
-import com.google.gson.JsonElement
-import com.google.gson.JsonParser
 
 @Component
 class DockerTarParser {
     private final Logger logger = LoggerFactory.getLogger(DockerTarParser.class)
+
     public static final String TAR_EXTRACTION_DIRECTORY = 'tarExtraction'
 
     // TODO make this private; add getter/setter (it gets set in HubDockerManager, plus tests)
@@ -80,13 +78,6 @@ class DockerTarParser {
 
     private File getTarExtractionDirectory() {
         return new File(workingDirectory, TAR_EXTRACTION_DIRECTORY)
-    }
-
-    private String extractManifestFileContent(String dockerTarName){
-        File tarExtractionDirectory = getTarExtractionDirectory()
-        File dockerTarDirectory = new File(tarExtractionDirectory, dockerTarName)
-        File manifest = new File(dockerTarDirectory, 'manifest.json')
-        StringUtils.join(manifest.readLines(), '\n')
     }
 
     OperatingSystemEnum detectOperatingSystem(String operatingSystem, File extractedFilesDir) {
@@ -254,8 +245,9 @@ class DockerTarParser {
     public List<LayerMapping> getLayerMappings(String tarFileName, String dockerImageName, String dockerTagName){
         logger.debug("getLayerMappings()")
         List<LayerMapping> mappings = new ArrayList<>()
+        Manifest manifest = new Manifest(this.getTarExtractionDirectory())
         try {
-            List<ImageInfo> images = getManifestContents(tarFileName)
+            List<ImageInfo> images = manifest.getManifestContents(tarFileName)
             for(ImageInfo image : images) {
                 logger.debug("getLayerMappings(): image: ${image}")
                 LayerMapping mapping = new LayerMapping()
@@ -321,21 +313,7 @@ class DockerTarParser {
         mappings
     }
 
-    private List<ImageInfo> getManifestContents(String tarFileName){
-        logger.debug("getManifestContents()")
-        List<ImageInfo> images = new ArrayList<>()
-        logger.debug("getManifestContents(): extracting manifest file content")
-        def manifestContentString = extractManifestFileContent(tarFileName)
-        logger.debug("getManifestContents(): parsing: ${manifestContentString}")
-        JsonParser parser = new JsonParser()
-        JsonArray manifestContent = parser.parse(manifestContentString).getAsJsonArray()
-        Gson gson = new Gson()
-        for(JsonElement element : manifestContent) {
-            logger.debug("getManifestContents(): element: ${element.toString()}")
-            images.add(gson.fromJson(element, ImageInfo.class))
-        }
-        images
-    }
+
 
     // TODO this method needs to be split up
     private void parseLayerTarAndExtract(File layerTar, File layerOutputDir){
