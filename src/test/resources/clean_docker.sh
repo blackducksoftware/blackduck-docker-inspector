@@ -4,6 +4,7 @@ docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
 
 docker rmi blackducksoftware/centos_minus_vim_plus_bacula:1.0
+docker rmi blackducksoftware/whiteouttest:1.0
 
 docker rmi blackducksoftware/hub-docker-inspector:1.1.1
 docker rmi blackducksoftware/hub-docker-inspector-centos:1.1.1

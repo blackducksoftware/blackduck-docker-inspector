@@ -23,54 +23,71 @@ class EndToEndTest {
 
     @Test
     public void testUbuntu() {
-        test("ubuntu", "17.04", "var_lib_dpkg")
+        testImage("ubuntu", "17.04", "var_lib_dpkg")
     }
 
     @Test
     public void testAlpine() {
-        test("alpine", "3.6", "lib_apk")
+        testImage("alpine", "3.6", "lib_apk")
     }
 
     @Test
     public void testCentos() {
-        test("centos", "7.3.1611", "var_lib_rpm")
+        testImage("centos", "7.3.1611", "var_lib_rpm")
     }
 
     @Test
     public void testHubWebapp() {
-        test("blackducksoftware/hub-webapp", "4.0.0", "lib_apk")
+        testImage("blackducksoftware/hub-webapp", "4.0.0", "lib_apk")
     }
 
     @Test
     public void testHubZookeeper() {
-        test("blackducksoftware/hub-zookeeper", "4.0.0", "lib_apk")
+        testImage("blackducksoftware/hub-zookeeper", "4.0.0", "lib_apk")
     }
 
     @Test
     public void testTomcat() {
-        test("tomcat", "6.0.53-jre7", "var_lib_dpkg")
+        testImage("tomcat", "6.0.53-jre7", "var_lib_dpkg")
     }
 
     @Test
     public void testRhel() {
-        test("dnplus/rhel", "6.5", "var_lib_rpm")
+        testImage("dnplus/rhel", "6.5", "var_lib_rpm")
     }
 
-    private void test(String image, String tag, String pkgMgrPathString) {
-        println "Running end to end test on ${image}:${tag}"
+    @Test
+    public void testWhiteout() {
+        testTar("blackducksoftware", "whiteouttest", "1.0", "var_lib_dpkg")
+    }
+
+    private void testImage(String image, String tag, String pkgMgrPathString) {
+        String inspectTarget = "${image}:${tag}"
         String imageUnderscored = image.replace('/', '_')
+        test(imageUnderscored, pkgMgrPathString, tag, inspectTarget)
+    }
+
+    private void testTar(String repo, String image, String tag, String pkgMgrPathString) {
+        String inspectTarget = "build/images/test/${image}.tar"
+        String imageUnderscored = "${repo}_${image}"
+        test(imageUnderscored, pkgMgrPathString, tag, inspectTarget)
+    }
+
+    private void test(String imageUnderscored, String pkgMgrPathString, String tag, String inspectTarget) {
         File expectedBdio = new File("src/test/resources/bdio/${imageUnderscored}_${pkgMgrPathString}_${imageUnderscored}_${tag}_bdio.jsonld")
         assertTrue(expectedBdio.exists())
         File actualBdio = new File("test/output/${imageUnderscored}_${pkgMgrPathString}_${imageUnderscored}_${tag}_bdio.jsonld")
         Files.deleteIfExists(actualBdio.toPath())
         assertFalse(actualBdio.exists())
+
+        println "Running end to end test on ${inspectTarget}"
         ProcessBuilder pb =
                 new ProcessBuilder("build/hub-docker-inspector.sh",
                 "--logging.level.com.blackducksoftware=INFO",
                 "--dry.run=true",
                 "--bdio.output.path=test/output",
                 "--dev.mode=true",
-                "${image}:${tag}");
+                inspectTarget);
         Map<String, String> env = pb.environment();
         env.put("PATH", "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin");
         pb.redirectErrorStream(true);
@@ -83,7 +100,7 @@ class EndToEndTest {
         List<String> exceptLinesContainingThese = new ArrayList<>()
         exceptLinesContainingThese.add("\"@id\":")
 
-        boolean outputBdioIsGood = TestUtils.contentEquals(expectedBdio, actualBdio, exceptLinesContainingThese)
-        assertTrue(outputBdioIsGood)
+        boolean outputBdioMatches = TestUtils.contentEquals(expectedBdio, actualBdio, exceptLinesContainingThese)
+        assertTrue(outputBdioMatches)
     }
 }

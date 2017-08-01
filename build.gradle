@@ -211,6 +211,26 @@ task buildTestDockerTarfile(type: Exec, dependsOn: buildTestDockerImage) {
 	commandLine "docker", "save", "-o", "${buildDir}/images/test/centos_minus_vim_plus_bacula.tar", "blackducksoftware/centos_minus_vim_plus_bacula:1.0"
 }
 
+task createWhTestDockerfile(type: Dockerfile) {
+    destFile = project.file("${buildDir}/images/test/whiteouttest/Dockerfile")
+    println "destFile: ${destFile}"
+    from 'ubuntu'
+    maintainer 'Black Duck Software'
+    environmentVariable('LANG', 'en_US.UTF-8')
+    
+    runCommand 'apt-get update'
+    runCommand 'apt-get -y install curl'
+    runCommand 'apt-get -y remove curl'
+}
+
+task buildWhTestDockerImage(type: Exec, dependsOn: [createWhTestDockerfile]) {
+    commandLine "docker", "build", "--tag", "blackducksoftware/whiteouttest:1.0", "${buildDir}/images/test/whiteouttest"
+}
+
+task buildWhTestDockerTarfile(type: Exec, dependsOn: buildWhTestDockerImage) {
+    commandLine "docker", "save", "-o", "${buildDir}/images/test/whiteouttest.tar", "blackducksoftware/whiteouttest:1.0"
+}
+
 task createDpkgDockerfileTasks() {
     linuxFlavorsDpkg.eachWithIndex {linuxFlavor, index ->
         String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
@@ -328,7 +348,7 @@ task pkg(dependsOn: [buildDockerImages, packageScript]) {}
 task pushImages(dependsOn: [pkg, pushImageAlpine, pushImageCentos, pushImageUbuntu]) {
 }
 
-task integrationTest(type: Test, dependsOn: pushImages) {
+task integrationTest(type: Test, dependsOn: [pushImages, buildWhTestDockerTarfile]) {
     testClassesDir = sourceSets.integrationTest.output.classesDir
     classpath = sourceSets.integrationTest.runtimeClasspath
     outputs.upToDateWhen { false }
