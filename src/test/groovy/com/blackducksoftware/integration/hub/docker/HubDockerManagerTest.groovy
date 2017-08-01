@@ -100,11 +100,9 @@ class HubDockerManagerTest {
         assertEquals("image.tar", mgr.getTarFileFromDockerImage(imageName, tagName).getName())
 
         List<LayerMapping> mappings = new ArrayList<LayerMapping>()
-        LayerMapping mapping = new LayerMapping()
-        mapping.imageName = imageName
-        mapping.tagName = tagName
-        mapping.layers = new ArrayList<>()
-        mapping.layers.add("testLayerId")
+        List<String> layerIds = new ArrayList<>()
+        layerIds.add("testLayerId")
+        LayerMapping mapping = new LayerMapping(imageName, tagName, layerIds)
         mappings.add(mapping)
         File imageFilesDir
         List<File> bdioFiles = mgr.generateBdioFromImageFilesDir(mappings, "testProjectName", "testProjectVersion", imageTarFile, imageFilesDir, os)

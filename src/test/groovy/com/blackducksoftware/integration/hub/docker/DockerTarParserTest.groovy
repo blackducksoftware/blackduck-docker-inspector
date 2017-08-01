@@ -106,12 +106,9 @@ class DockerTarParserTest {
         tarParser.workingDirectory = workingDirectory
 
         List<LayerMapping> layerMappings = new ArrayList<>()
-        LayerMapping layerMapping = new LayerMapping()
-        layerMapping.imageName = IMAGE_NAME
-        layerMapping.tagName = IMAGE_TAG
         List<String> layerIds = new ArrayList<>()
         layerIds.add(LAYER_ID)
-        layerMapping.layers = layerIds
+        LayerMapping layerMapping = new LayerMapping(IMAGE_NAME, IMAGE_TAG, layerIds)
         layerMappings.add(layerMapping)
 
         File results = tarParser.extractDockerLayers(layerTars, layerMappings)

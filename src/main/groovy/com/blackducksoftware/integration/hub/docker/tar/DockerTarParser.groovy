@@ -33,7 +33,6 @@ import org.springframework.stereotype.Component
 
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
-import com.blackducksoftware.integration.hub.docker.tar.manifest.ImageInfo
 import com.blackducksoftware.integration.hub.docker.tar.manifest.Manifest
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException
 
@@ -238,58 +237,10 @@ class DockerTarParser {
 
     public List<LayerMapping> getLayerMappings(String tarFileName, String dockerImageName, String dockerTagName){
         logger.debug("getLayerMappings()")
-        List<LayerMapping> mappings = new ArrayList<>()
-        Manifest manifest = new Manifest(this.getTarExtractionDirectory())
+        Manifest manifest = new Manifest( dockerImageName, dockerTagName, getTarExtractionDirectory(), tarFileName)
+        List<LayerMapping> mappings;
         try {
-            List<ImageInfo> images = manifest.getManifestContents(tarFileName)
-            for(ImageInfo image : images) {
-                logger.debug("getLayerMappings(): image: ${image}")
-                LayerMapping mapping = new LayerMapping()
-                String specifiedRepoTag = ''
-                if (StringUtils.isNotBlank(dockerImageName)) {
-                    specifiedRepoTag = "${dockerImageName}:${dockerTagName}"
-                }
-                def (imageName, tagName) = ['', '']
-                String foundRepoTag = image.repoTags.find { repoTag ->
-                    StringUtils.compare(repoTag, specifiedRepoTag) == 0
-                }
-                if(StringUtils.isBlank(foundRepoTag)){
-                    logger.debug("Attempting to parse repoTag from manifest")
-                    if (image.repoTags == null) {
-                        String msg = "The RepoTags field is missing from the tar file manifest. Please make sure this tar file was saved using the image name (vs. image ID)"
-                        throw new HubIntegrationException(msg)
-                    }
-                    def repoTag = image.repoTags.get(0)
-                    logger.debug("repoTag: ${repoTag}")
-                    imageName = repoTag.substring(0, repoTag.lastIndexOf(':'))
-                    tagName = repoTag.substring(repoTag.lastIndexOf(':') + 1)
-                    logger.debug("Parsed imageName: ${imageName}; tagName: ${tagName}")
-                } else {
-                    logger.debug("foundRepoTag: ${foundRepoTag}")
-                    imageName = foundRepoTag.substring(0, foundRepoTag.lastIndexOf(':'))
-                    tagName = foundRepoTag.substring(foundRepoTag.lastIndexOf(':') + 1)
-                    logger.debug("Found imageName: ${imageName}; tagName: ${tagName}")
-                }
-                logger.info("Image: ${imageName}, Tag: ${tagName}")
-                mapping.imageName =  imageName.replaceAll(':', '_').replaceAll('/', '_')
-                mapping.tagName = tagName
-                for(String layer : image.layers){
-                    mapping.layers.add(layer.substring(0, layer.indexOf('/')))
-                }
-                if (StringUtils.isNotBlank(dockerImageName)) {
-                    if(StringUtils.compare(imageName, dockerImageName) == 0 && StringUtils.compare(tagName, dockerTagName) == 0){
-                        logger.debug('Adding layer mapping')
-                        logger.debug("Image: ${mapping.imageName}:${mapping.tagName}")
-                        logger.debug("Layers: ${mapping.layers}")
-                        mappings.add(mapping)
-                    }
-                } else {
-                    logger.debug('Adding layer mapping')
-                    logger.debug("Image ${mapping.imageName} , Tag ${mapping.tagName}")
-                    logger.debug("Layers ${mapping.layers}")
-                    mappings.add(mapping)
-                }
-            }
+            mappings = manifest.getLayerMappings();
         } catch (Exception e) {
             logger.error("Could not parse the image manifest file : ${e.toString()}")
             throw e
