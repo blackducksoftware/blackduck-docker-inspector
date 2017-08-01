@@ -25,7 +25,7 @@ public class Manifest {
     }
 
     public List<ImageInfo> getManifestContents(final String tarFileName) throws IOException {
-        logger.info("*** getManifestContents()");
+        logger.trace("getManifestContents()");
         final List<ImageInfo> images = new ArrayList<>();
         logger.debug("getManifestContents(): extracting manifest file content");
         final String manifestContentString = extractManifestFileContent(tarFileName);
