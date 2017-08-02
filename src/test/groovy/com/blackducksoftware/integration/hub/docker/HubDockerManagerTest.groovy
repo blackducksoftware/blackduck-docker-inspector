@@ -15,6 +15,7 @@ import com.blackducksoftware.integration.hub.docker.executor.Executor
 import com.blackducksoftware.integration.hub.docker.extractor.ApkExtractor
 import com.blackducksoftware.integration.hub.docker.extractor.DpkgExtractor
 import com.blackducksoftware.integration.hub.docker.extractor.Extractor
+import com.blackducksoftware.integration.hub.docker.linux.Dir
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser
 import com.blackducksoftware.integration.hub.docker.tar.LayerMapping
 import com.blackducksoftware.integration.hub.docker.tar.TarExtractionResult
@@ -93,9 +94,10 @@ class HubDockerManagerTest {
 
         etcDirs.add(etcDir)
         mgr.tarParser = [
-            extractPackageManagerDirs: {File imageFilesDir, OperatingSystemEnum osEnum -> tarExtractionResults},
-            findFileWithName: {File fileToSearch, String name -> etcDirs}
+            extractPackageManagerDirs: {File imageFilesDir, OperatingSystemEnum osEnum -> tarExtractionResults}
         ] as DockerTarParser
+
+        Dir.metaClass.static.findFileWithName = {File fileToSearch, String name -> etcDirs}
 
         assertEquals("image.tar", mgr.getTarFileFromDockerImage(imageName, tagName).getName())
 

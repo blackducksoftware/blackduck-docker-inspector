@@ -39,6 +39,7 @@ import com.blackducksoftware.integration.hub.docker.client.DockerClientManager
 import com.blackducksoftware.integration.hub.docker.client.ProgramPaths
 import com.blackducksoftware.integration.hub.docker.extractor.ExtractionDetails
 import com.blackducksoftware.integration.hub.docker.extractor.Extractor
+import com.blackducksoftware.integration.hub.docker.linux.Dir
 import com.blackducksoftware.integration.hub.docker.linux.EtcDir
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser
 import com.blackducksoftware.integration.hub.docker.tar.LayerMapping
@@ -112,7 +113,7 @@ class HubDockerManager {
         }
         String architecture = null
         if(osEnum == OperatingSystemEnum.ALPINE){
-            List<File> etcDirectories = tarParser.findFileWithName(imageFilesDir, "etc")
+            List<File> etcDirectories = Dir.findFileWithName(imageFilesDir, "etc")
             for(File etc : etcDirectories){
                 File architectureFile = new File(etc, 'apk')
                 architectureFile = new File(architectureFile, 'arch')

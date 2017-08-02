@@ -33,6 +33,7 @@ import org.springframework.stereotype.Component
 
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
+import com.blackducksoftware.integration.hub.docker.linux.Dir
 import com.blackducksoftware.integration.hub.docker.linux.EtcDir
 import com.blackducksoftware.integration.hub.docker.tar.manifest.Manifest
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException
@@ -80,7 +81,7 @@ class DockerTarParser {
             osEnum = OperatingSystemEnum.determineOperatingSystem(operatingSystem)
         } else{
             logger.trace("Image directory ${extractedFilesDir.getName()}, looking for etc")
-            List<File> etcFiles = findFileWithName(extractedFilesDir, 'etc')
+            List<File> etcFiles = Dir.findFileWithName(extractedFilesDir, 'etc')
             if (etcFiles == null) {
                 String msg = "Unable to find the files that specify the Linux distro of this image."
                 throw new HubIntegrationException(msg)
@@ -101,7 +102,7 @@ class DockerTarParser {
         Set<PackageManagerEnum> packageManagers = new HashSet<>()
         extractedFilesDir.listFiles().each { layerDirectory ->
             logger.trace("Looking in layerDirectory ${layerDirectory.getAbsolutePath()} for lib dir")
-            List<File> libDirs = findFileWithName(layerDirectory, 'lib')
+            List<File> libDirs = Dir.findFileWithName(layerDirectory, 'lib')
             if(libDirs != null){
                 libDirs.each{ libDir ->
                     libDir.listFiles().each { packageManagerDirectory ->
@@ -148,27 +149,6 @@ class DockerTarParser {
             }
         }
         results
-    }
-
-
-
-    List<File> findFileWithName(File fileToSearch, String name){
-        logger.trace(sprintf("Looking in %s for %s", fileToSearch.getAbsolutePath(), name))
-        if(StringUtils.compare(fileToSearch.getName(), name) == 0){
-            logger.trace("File Name ${name} found ${fileToSearch.getAbsolutePath()}")
-            List<File> files = new ArrayList<>()
-            files.add(fileToSearch)
-            return files
-        } else if (fileToSearch.isDirectory()){
-            List<File> files = new ArrayList<>()
-            for(File subFile : fileToSearch.listFiles()){
-                def foundFile = findFileWithName(subFile, name)
-                if(foundFile != null){
-                    files.addAll(foundFile)
-                }
-            }
-            return files
-        }
     }
 
     List<File> extractLayerTars(File dockerTar){
