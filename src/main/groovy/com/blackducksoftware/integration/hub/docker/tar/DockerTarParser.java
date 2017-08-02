@@ -65,28 +65,32 @@ public class DockerTarParser {
         for (final LayerMapping mapping : layerMappings) {
             for (final String layer : mapping.getLayers()) {
 
-                logger.trace("Looking for tar for layer: ${layer}");
-                // TODO: move this to LayerTar class? extract method?
-                File layerTar = null;
-                for (final File candidateLayerTar : layerTars) {
-                    if (layer.equals(candidateLayerTar.getParentFile().getName())) {
-                        logger.info(String.format("Found layer tar for layer %s", layer));
-                        layerTar = candidateLayerTar;
-                        break;
-                    }
-                }
+                logger.trace(String.format("Looking for tar for layer: %s", layer));
+                final File layerTar = getLayerTar(layerTars, layer);
 
                 if (layerTar != null) {
                     final File imageOutputDir = new File(imageFilesDir, mapping.getImageDirectory());
-                    logger.trace("Processing layer: ${layerTar.getAbsolutePath()}");
+                    logger.trace(String.format("Processing layer: %s", layerTar.getAbsolutePath()));
                     final DockerLayerTar dockerLayerTar = new DockerLayerTar(layerTar);
                     dockerLayerTar.extractToDir(imageOutputDir);
                 } else {
-                    logger.error("Could not find the tar for layer ${layer}");
+                    logger.error(String.format("Could not find the tar for layer %s", layer));
                 }
             }
         }
         return imageFilesDir;
+    }
+
+    private File getLayerTar(final List<File> layerTars, final String layer) {
+        File layerTar = null;
+        for (final File candidateLayerTar : layerTars) {
+            if (layer.equals(candidateLayerTar.getParentFile().getName())) {
+                logger.info(String.format("Found layer tar for layer %s", layer));
+                layerTar = candidateLayerTar;
+                break;
+            }
+        }
+        return layerTar;
     }
 
     private File getTarExtractionDirectory() {
@@ -111,7 +115,7 @@ public class DockerTarParser {
     }
 
     private OperatingSystemEnum deriveOsFromEtcDir(final File extractedFilesDir) throws HubIntegrationException, IOException {
-        logger.trace("Image directory ${extractedFilesDir.getName()}, looking for etc");
+        logger.trace(String.format("Image directory %s, looking for etc", extractedFilesDir.getName()));
         OperatingSystemEnum osEnum = null;
         final List<File> etcFiles = Dirs.findFileWithName(extractedFilesDir, "etc");
         if (etcFiles == null) {
@@ -126,7 +130,7 @@ public class DockerTarParser {
                     break;
                 }
             } catch (final HubIntegrationException e) {
-                logger.debug("Error detecing OS from etc dir: ${e.toString()}");
+                logger.debug(String.format("Error detecing OS from etc dir: %s", e.toString()));
             }
         }
         return osEnum;
@@ -140,7 +144,7 @@ public class DockerTarParser {
         if (packageManagers.size() == 1) {
             final PackageManagerEnum packageManager = packageManagers.iterator().next();
             osEnum = packageManager.getOperatingSystem();
-            logger.debug("Package manager ${packageManager.name()} returns Operating System ${osEnum.name()}");
+            logger.debug(String.format("Package manager %s returns Operating System %s", packageManager.name(), osEnum.name()));
             return osEnum;
         }
         return null;
@@ -152,15 +156,15 @@ public class DockerTarParser {
         // There will only be one imageDirectory; the .each is a lazy way to get it
         // It has the entire target image file system
         for (final File imageDirectory : extractedImageFilesDir.listFiles()) {
-            logger.debug("Checking image file system at ${imageDirectory.getName()} for package managers");
+            logger.debug(String.format("Checking image file system at %s for package managers", imageDirectory.getName()));
             for (final PackageManagerEnum packageManagerEnum : PackageManagerEnum.values()) {
                 final File packageManagerDirectory = new File(imageDirectory, packageManagerEnum.getDirectory());
                 if (packageManagerDirectory.exists()) {
-                    logger.trace("Package Manager Dir: ${packageManagerDirectory.getAbsolutePath()}");
+                    logger.trace(String.format("Package Manager Dir: %s", packageManagerDirectory.getAbsolutePath()));
                     final ImagePkgMgr result = new ImagePkgMgr(imageDirectory.getName(), packageManagerDirectory, packageManagerEnum);
                     imagePkgMgrInfo.getPkgMgrs().add(result);
                 } else {
-                    logger.info("Package manager dir ${packageManagerDirectory.getAbsolutePath()} does not exist");
+                    logger.info(String.format("Package manager dir %s does not exist", packageManagerDirectory.getAbsolutePath()));
                 }
             }
         }
@@ -204,7 +208,7 @@ public class DockerTarParser {
         try {
             mappings = manifest.getLayerMappings();
         } catch (final Exception e) {
-            logger.error("Could not parse the image manifest file : ${e.toString()}");
+            logger.error(String.format("Could not parse the image manifest file : %s", e.getMessage()));
             throw e;
         }
         return mappings;
