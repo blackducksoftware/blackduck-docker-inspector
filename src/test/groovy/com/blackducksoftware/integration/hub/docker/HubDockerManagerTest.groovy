@@ -18,7 +18,7 @@ import com.blackducksoftware.integration.hub.docker.extractor.Extractor
 import com.blackducksoftware.integration.hub.docker.linux.Dirs
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser
 import com.blackducksoftware.integration.hub.docker.tar.ImagePkgMgr
-import com.blackducksoftware.integration.hub.docker.tar.ImagePkgMgrInfo
+import com.blackducksoftware.integration.hub.docker.tar.ImageInfo
 import com.blackducksoftware.integration.hub.docker.tar.LayerMapping
 
 class HubDockerManagerTest {
@@ -74,7 +74,7 @@ class HubDockerManagerTest {
         ] as DockerClientManager
         mgr.extractors = extractors
 
-        ImagePkgMgrInfo tarExtractionResults = new ImagePkgMgrInfo()
+        ImageInfo tarExtractionResults = new ImageInfo()
         tarExtractionResults.operatingSystemEnum = os
         List<ImagePkgMgr> extractionResults = new ArrayList<>()
         ImagePkgMgr result = new ImagePkgMgr()

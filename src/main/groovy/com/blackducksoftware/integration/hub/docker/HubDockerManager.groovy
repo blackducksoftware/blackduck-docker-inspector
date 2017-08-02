@@ -42,7 +42,7 @@ import com.blackducksoftware.integration.hub.docker.extractor.Extractor
 import com.blackducksoftware.integration.hub.docker.linux.Dirs
 import com.blackducksoftware.integration.hub.docker.linux.EtcDir
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser
-import com.blackducksoftware.integration.hub.docker.tar.ImagePkgMgrInfo
+import com.blackducksoftware.integration.hub.docker.tar.ImageInfo
 import com.blackducksoftware.integration.hub.docker.tar.LayerMapping
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException
 import com.google.gson.Gson
@@ -107,7 +107,7 @@ class HubDockerManager {
     }
 
     List<File> generateBdioFromImageFilesDir(List<LayerMapping> mappings, String projectName, String versionName, File dockerTar, File imageFilesDir, OperatingSystemEnum osEnum) {
-        ImagePkgMgrInfo imagePkgMgrInfo = tarParser.collectPkgMgrInfo(imageFilesDir, osEnum)
+        ImageInfo imagePkgMgrInfo = tarParser.collectPkgMgrInfo(imageFilesDir, osEnum)
         if(imagePkgMgrInfo.operatingSystemEnum == null){
             throw new HubIntegrationException('Could not determine the Operating System of this Docker tar.')
         }
@@ -153,10 +153,10 @@ class HubDockerManager {
         Files.copy(fileToCopy.toPath(), destPath)
     }
 
-    private List<File> generateBdioFromPackageMgrDirs(List<LayerMapping> layerMappings, String projectName, String versionName, String tarFileName, ImagePkgMgrInfo tarResults, String architecture) {
+    private List<File> generateBdioFromPackageMgrDirs(List<LayerMapping> layerMappings, String projectName, String versionName, String tarFileName, ImageInfo imageInfo, String architecture) {
         File workingDirectory = new File(programPaths.getHubDockerWorkingDirPath())
         def bdioFiles = []
-        tarResults.pkgMgrs.each { extractionResult ->
+        imageInfo.pkgMgrs.each { extractionResult ->
             def mapping = layerMappings.find { mapping ->
                 StringUtils.compare(mapping.getImageDirectory(), extractionResult.imageDirectoryName) == 0
             }
@@ -184,7 +184,7 @@ class HubDockerManager {
                 try{
                     Extractor extractor = getExtractorByPackageManager(extractionResult.packageManager)
                     ExtractionDetails extractionDetails = new ExtractionDetails()
-                    extractionDetails.operatingSystem = tarResults.operatingSystemEnum
+                    extractionDetails.operatingSystem = imageInfo.operatingSystemEnum
                     extractionDetails.architecture = architecture
                     extractor.extract(writer, extractionDetails, codeLocationName, hubProjectName, hubVersionName)
                 }finally{

@@ -65,7 +65,7 @@ class DockerTarParser {
                     DockerLayerTar dockerLayerTar = new DockerLayerTar(layerTar)
                     dockerLayerTar.extractToDir(imageOutputDir)
                 } else {
-                    logger.warn("Could not find the tar for layer ${layer}")
+                    logger.error("Could not find the tar for layer ${layer}")
                 }
             }
         }
@@ -113,8 +113,8 @@ class DockerTarParser {
         osEnum
     }
 
-    public ImagePkgMgrInfo collectPkgMgrInfo(File extractedImageFilesDir, OperatingSystemEnum osEnum) {
-        ImagePkgMgrInfo imagePkgMgrInfo = new ImagePkgMgrInfo()
+    public ImageInfo collectPkgMgrInfo(File extractedImageFilesDir, OperatingSystemEnum osEnum) {
+        ImageInfo imagePkgMgrInfo = new ImageInfo()
         imagePkgMgrInfo.operatingSystemEnum = osEnum
         // There will only be one imageDirectory; the each just gets its name.
         // It has the entire target image file system
