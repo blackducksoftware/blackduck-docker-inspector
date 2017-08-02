@@ -12,7 +12,7 @@ public class Dir {
     private static final Logger logger = LoggerFactory.getLogger(Dir.class);
 
     public static List<File> findFileWithName(final File dirFile, final String name) {
-        logger.info(String.format("======== Looking in %s for %s", dirFile.getAbsolutePath(), name));
+        logger.info(String.format("Looking in %s for %s", dirFile.getAbsolutePath(), name));
 
         final File[] fileArray = dirFile.listFiles(new FilenameFilter() {
             @Override
