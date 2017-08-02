@@ -35,6 +35,7 @@ import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 import com.blackducksoftware.integration.hub.docker.linux.Dir
 import com.blackducksoftware.integration.hub.docker.linux.EtcDir
+import com.blackducksoftware.integration.hub.docker.linux.FileSys
 import com.blackducksoftware.integration.hub.docker.tar.manifest.Manifest
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException
 
@@ -79,7 +80,7 @@ class DockerTarParser {
         OperatingSystemEnum osEnum
         if(StringUtils.isNotBlank(operatingSystem)){
             osEnum = OperatingSystemEnum.determineOperatingSystem(operatingSystem)
-        } else{
+        } else {
             logger.trace("Image directory ${extractedFilesDir.getName()}, looking for etc")
             List<File> etcFiles = Dir.findFileWithName(extractedFilesDir, 'etc')
             if (etcFiles == null) {
@@ -98,24 +99,9 @@ class DockerTarParser {
                 }
             }
         }
-
-        Set<PackageManagerEnum> packageManagers = new HashSet<>()
-        extractedFilesDir.listFiles().each { layerDirectory ->
-            logger.info("*** Looking in layerDirectory ${layerDirectory.getAbsolutePath()} for lib dir")
-            List<File> libDirs = Dir.findFileWithName(layerDirectory, 'lib')
-            if(libDirs != null){
-                libDirs.each{ libDir ->
-                    libDir.listFiles().each { packageManagerDirectory ->
-                        try{
-                            packageManagers.add(PackageManagerEnum.getPackageManagerEnumByName(packageManagerDirectory.getName()))
-                        } catch (IllegalArgumentException e){
-                            logger.trace(e.toString())
-                        }
-                    }
-                }
-            }
-        }
-        if(packageManagers.size() == 1){
+        FileSys extractedFileSys = new FileSys(extractedFilesDir)
+        Set<PackageManagerEnum> packageManagers = extractedFileSys.getPackageManagers()
+        if (packageManagers.size() == 1) {
             PackageManagerEnum packageManager = packageManagers.iterator().next()
             osEnum = packageManager.operatingSystem
             logger.debug("Package manager ${packageManager.name()} returns Operating System ${osEnum.name()}")

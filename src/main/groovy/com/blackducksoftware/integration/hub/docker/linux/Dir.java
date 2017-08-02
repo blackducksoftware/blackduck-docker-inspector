@@ -15,7 +15,7 @@ public class Dir {
     private static final Logger logger = LoggerFactory.getLogger(Dir.class);
 
     public static List<File> findFileWithName(final File dirFile, final String targetName) {
-        logger.info(String.format("*** Looking in %s for %s", dirFile.getAbsolutePath(), targetName));
+        logger.trace(String.format("Looking in %s for %s", dirFile.getAbsolutePath(), targetName));
         final List<File> results = new ArrayList<>();
 
         try (Stream<Path> stream = Files.find(dirFile.toPath(), 100, (path, attr) -> path.getFileName().toString().equals(targetName))) {
