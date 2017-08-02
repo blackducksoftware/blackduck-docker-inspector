@@ -33,6 +33,7 @@ import org.springframework.stereotype.Component
 
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
+import com.blackducksoftware.integration.hub.docker.filesystem.FileSystemManager
 import com.blackducksoftware.integration.hub.docker.tar.manifest.Manifest
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException
 
@@ -86,7 +87,7 @@ class DockerTarParser {
             }
             for(File etcFile : etcFiles){
                 try{
-                    osEnum = detectOperatingSystemFromEtcDir(etcFile)
+                    osEnum = FileSystemManager.detectOperatingSystemFromEtcDir(etcFile)
                     if(osEnum != null){
                         break
                     }
@@ -124,19 +125,7 @@ class DockerTarParser {
         osEnum
     }
 
-    OperatingSystemEnum detectOperatingSystemFromEtcDir(File etcFile) {
-        if(etcFile == null) {
-            throw new HubIntegrationException(
-            sprintf("Could not determine the Operating System because none of the expected etc files were found."))
-        }
-        if(etcFile == null || etcFile.listFiles() == null || etcFile.listFiles().size() == 0){
-            throw new HubIntegrationException(
-            sprintf("Could not determine the Operating System because we could not find the OS files in %s.", etcFile.getAbsolutePath()))
-        }
-        logger.debug("etc directory ${etcFile.getAbsolutePath()}")
-        OperatingSystemEnum osEnum = extractOperatingSystemFromFiles(etcFile.listFiles())
-        osEnum
-    }
+
 
     TarExtractionResults extractPackageManagerDirs(File extractedImageFilesDir, OperatingSystemEnum osEnum) {
         TarExtractionResults results = new TarExtractionResults()
@@ -160,31 +149,7 @@ class DockerTarParser {
         results
     }
 
-    private OperatingSystemEnum extractOperatingSystemFromFiles(File[] osFiles){
-        OperatingSystemEnum osEnum = null
-        for(File osFile : osFiles){
-            String linePrefix = null
-            if(StringUtils.compare(osFile.getName(),'lsb-release') == 0){
-                linePrefix = 'DISTRIB_ID='
-            } else if(StringUtils.compare(osFile.getName(),'os-release') == 0){
-                linePrefix = 'ID='
-            }
-            if(linePrefix != null){
-                osFile.eachLine { line ->
-                    line = line.trim()
-                    if(line.startsWith(linePrefix)){
-                        def (description, value) = line.split('=')
-                        value = value.replaceAll('"', '')
-                        osEnum = OperatingSystemEnum.determineOperatingSystem(value)
-                    }
-                }
-            }
-            if(osEnum != null){
-                break
-            }
-        }
-        osEnum
-    }
+
 
     List<File> findFileWithName(File fileToSearch, String name){
         logger.trace(sprintf("Looking in %s for %s", fileToSearch.getAbsolutePath(), name))
@@ -245,20 +210,6 @@ class DockerTarParser {
             logger.error("Could not parse the image manifest file : ${e.toString()}")
             throw e
         }
-        // TODO TEMP; useful for debugging, but can probably remove once we're
-        // confident in layer targeting
-        logger.debug("getLayerMappings(): # mappings found: ${mappings.size()}")
-        for (LayerMapping m : mappings) {
-            logger.debug("getLayerMappings():\t${m.imageName}/${m.tagName}: ")
-            for (String layerId : m.layers) {
-                logger.debug("getLayerMappings():\t\t${layerId}")
-            }
-        }
-        //////////////////
         mappings
     }
-
-
-
-
 }
