@@ -76,50 +76,64 @@ class DockerTarParser {
         return new File(workingDirectory, TAR_EXTRACTION_DIRECTORY)
     }
 
-    OperatingSystemEnum detectOperatingSystem(String operatingSystem, File extractedFilesDir) {
-        OperatingSystemEnum osEnum
+    public OperatingSystemEnum detectOperatingSystem(String operatingSystem, File extractedFilesDir) {
+        OperatingSystemEnum osEnum = deriveOsFromPkgMgr(extractedFilesDir);
+        if (osEnum != null) {
+            return osEnum;
+        }
         if(StringUtils.isNotBlank(operatingSystem)){
             osEnum = OperatingSystemEnum.determineOperatingSystem(operatingSystem)
-        } else {
-            logger.trace("Image directory ${extractedFilesDir.getName()}, looking for etc")
-            List<File> etcFiles = Dirs.findFileWithName(extractedFilesDir, 'etc')
-            if (etcFiles == null) {
-                String msg = "Unable to find the files that specify the Linux distro of this image."
-                throw new HubIntegrationException(msg)
-            }
-            for (File etcFile : etcFiles) {
-                try{
-                    EtcDir etcDir = new EtcDir(etcFile)
-                    osEnum = etcDir.getOperatingSystem()
-                    if(osEnum != null){
-                        break
-                    }
-                } catch (HubIntegrationException e){
-                    logger.debug("Error detecing OS from etc dir: ${e.toString()}")
-                }
-            }
+            return osEnum;
         }
-        FileSys extractedFileSys = new FileSys(extractedFilesDir)
-        Set<PackageManagerEnum> packageManagers = extractedFileSys.getPackageManagers()
-        if (packageManagers.size() == 1) {
-            PackageManagerEnum packageManager = packageManagers.iterator().next()
-            osEnum = packageManager.operatingSystem
-            logger.debug("Package manager ${packageManager.name()} returns Operating System ${osEnum.name()}")
-        }
+        osEnum = deriveOsFromEtcDir(extractedFilesDir);
         if (osEnum == null) {
             String msg = "Unable to identify the Linux distro of this image. You'll need to run with the --linux.distro option"
             throw new HubIntegrationException(msg)
         }
         osEnum
     }
+    private OperatingSystemEnum deriveOsFromEtcDir(File extractedFilesDir) {
+        logger.trace("Image directory ${extractedFilesDir.getName()}, looking for etc")
+        List<File> etcFiles = Dirs.findFileWithName(extractedFilesDir, 'etc')
+        if (etcFiles == null) {
+            String msg = "Unable to find the files that specify the Linux distro of this image."
+            throw new HubIntegrationException(msg)
+        }
+        for (File etcFile : etcFiles) {
+            try{
+                EtcDir etcDir = new EtcDir(etcFile)
+                osEnum = etcDir.getOperatingSystem()
+                if(osEnum != null){
+                    break
+                }
+            } catch (HubIntegrationException e){
+                logger.debug("Error detecing OS from etc dir: ${e.toString()}")
+            }
+        }
+    }
+
+    private OperatingSystemEnum deriveOsFromPkgMgr(File extractedFilesDir) {
+        OperatingSystemEnum osEnum = null;
+
+        FileSys extractedFileSys = new FileSys(extractedFilesDir)
+        Set<PackageManagerEnum> packageManagers = extractedFileSys.getPackageManagers()
+        if (packageManagers.size() == 1) {
+            PackageManagerEnum packageManager = packageManagers.iterator().next()
+            osEnum = packageManager.operatingSystem
+            logger.debug("Package manager ${packageManager.name()} returns Operating System ${osEnum.name()}")
+            return osEnum;
+        }
+        return null;
+
+    }
 
     public ImageInfo collectPkgMgrInfo(File extractedImageFilesDir, OperatingSystemEnum osEnum) {
         ImageInfo imagePkgMgrInfo = new ImageInfo()
         imagePkgMgrInfo.operatingSystemEnum = osEnum
-        // There will only be one imageDirectory; the each just gets its name.
+        // There will only be one imageDirectory; the .each is a lazy way to get it
         // It has the entire target image file system
         extractedImageFilesDir.listFiles().each { imageDirectory ->
-            logger.info("**************9 Extracting data from Image directory ${imageDirectory.getName()}")
+            logger.debug("Checking image file system at ${imageDirectory.getName()} for package managers")
             PackageManagerEnum.values().each { packageManagerEnum ->
                 File packageManagerDirectory = new File(imageDirectory, packageManagerEnum.directory)
                 if (packageManagerDirectory.exists()){
