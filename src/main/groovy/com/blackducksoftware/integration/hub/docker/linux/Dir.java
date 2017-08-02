@@ -11,13 +11,13 @@ import org.slf4j.LoggerFactory;
 public class Dir {
     private static final Logger logger = LoggerFactory.getLogger(Dir.class);
 
-    public static List<File> findFileWithName(final File dirFile, final String name) {
-        logger.info(String.format("Looking in %s for %s", dirFile.getAbsolutePath(), name));
+    public static List<File> findFileWithName(final File dirFile, final String targetName) {
+        logger.info(String.format("*** Looking in %s for %s", dirFile.getAbsolutePath(), targetName));
 
         final File[] fileArray = dirFile.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(final File dir, final String name) {
-                return name.matches("^" + name + "$");
+                return name.matches("^" + targetName + "$");
             }
         });
         final List<File> fileList = Arrays.asList(fileArray);
