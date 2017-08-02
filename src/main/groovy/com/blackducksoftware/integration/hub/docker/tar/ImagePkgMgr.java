@@ -21,25 +21,38 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.blackducksoftware.integration.hub.docker.tar.manifest;
+package com.blackducksoftware.integration.hub.docker.tar;
 
-import java.util.List;
+import java.io.File;
 
 import org.apache.commons.lang3.builder.RecursiveToStringStyle;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
-import com.google.gson.annotations.SerializedName;
+import com.blackducksoftware.integration.hub.docker.PackageManagerEnum;
 
-public class ImageInfo {
+public class ImagePkgMgr {
 
-    @SerializedName("Config")
-    public String config;
+    private final String imageDirectoryName;
+    private final File extractedPackageManagerDirectory;
+    private final PackageManagerEnum packageManager;
 
-    @SerializedName("RepoTags")
-    public List<String> repoTags;
+    public ImagePkgMgr(final String imageDirectoryName, final File extractedPackageManagerDirectory, final PackageManagerEnum packageManager) {
+        this.imageDirectoryName = imageDirectoryName;
+        this.extractedPackageManagerDirectory = extractedPackageManagerDirectory;
+        this.packageManager = packageManager;
+    }
 
-    @SerializedName("Layers")
-    public List<String> layers;
+    public String getImageDirectoryName() {
+        return imageDirectoryName;
+    }
+
+    public File getExtractedPackageManagerDirectory() {
+        return extractedPackageManagerDirectory;
+    }
+
+    public PackageManagerEnum getPackageManager() {
+        return packageManager;
+    }
 
     @Override
     public String toString() {

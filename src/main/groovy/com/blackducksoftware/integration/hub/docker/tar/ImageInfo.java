@@ -21,25 +21,33 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.blackducksoftware.integration.hub.docker.tar.manifest;
+package com.blackducksoftware.integration.hub.docker.tar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.builder.RecursiveToStringStyle;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
-import com.google.gson.annotations.SerializedName;
+import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum;
 
 public class ImageInfo {
 
-    @SerializedName("Config")
-    public String config;
+    private final OperatingSystemEnum operatingSystemEnum;
+    private final List<ImagePkgMgr> pkgMgrs;
 
-    @SerializedName("RepoTags")
-    public List<String> repoTags;
+    public ImageInfo(final OperatingSystemEnum operatingSystemEnum) {
+        this.operatingSystemEnum = operatingSystemEnum;
+        this.pkgMgrs = new ArrayList<>();
+    }
 
-    @SerializedName("Layers")
-    public List<String> layers;
+    public OperatingSystemEnum getOperatingSystemEnum() {
+        return operatingSystemEnum;
+    }
+
+    public List<ImagePkgMgr> getPkgMgrs() {
+        return pkgMgrs;
+    }
 
     @Override
     public String toString() {

@@ -52,8 +52,12 @@ import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 public class DockerTarParser {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public static final String TAR_EXTRACTION_DIRECTORY = "tarExtraction";
+    private static final String TAR_EXTRACTION_DIRECTORY = "tarExtraction";
     private File workingDirectory;
+
+    public void setWorkingDirectory(final File workingDirectory) {
+        this.workingDirectory = workingDirectory;
+    }
 
     File extractDockerLayers(final List<File> layerTars, final List<LayerMapping> layerMappings) throws IOException {
         final File tarExtractionDirectory = getTarExtractionDirectory();
@@ -144,8 +148,7 @@ public class DockerTarParser {
     }
 
     public ImageInfo collectPkgMgrInfo(final File extractedImageFilesDir, final OperatingSystemEnum osEnum) {
-        final ImageInfo imagePkgMgrInfo = new ImageInfo();
-        imagePkgMgrInfo.setOperatingSystemEnum(osEnum);
+        final ImageInfo imagePkgMgrInfo = new ImageInfo(osEnum);
         // There will only be one imageDirectory; the .each is a lazy way to get it
         // It has the entire target image file system
         for (final File imageDirectory : extractedImageFilesDir.listFiles()) {
@@ -154,10 +157,7 @@ public class DockerTarParser {
                 final File packageManagerDirectory = new File(imageDirectory, packageManagerEnum.getDirectory());
                 if (packageManagerDirectory.exists()) {
                     logger.trace("Package Manager Dir: ${packageManagerDirectory.getAbsolutePath()}");
-                    final ImagePkgMgr result = new ImagePkgMgr();
-                    result.setImageDirectoryName(imageDirectory.getName());
-                    result.setPackageManager(packageManagerEnum);
-                    result.setExtractedPackageManagerDirectory(packageManagerDirectory);
+                    final ImagePkgMgr result = new ImagePkgMgr(imageDirectory.getName(), packageManagerDirectory, packageManagerEnum);
                     imagePkgMgrInfo.getPkgMgrs().add(result);
                 } else {
                     logger.info("Package manager dir ${packageManagerDirectory.getAbsolutePath()} does not exist");

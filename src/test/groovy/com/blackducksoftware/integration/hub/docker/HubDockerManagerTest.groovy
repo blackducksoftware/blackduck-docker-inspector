@@ -17,8 +17,8 @@ import com.blackducksoftware.integration.hub.docker.extractor.DpkgExtractor
 import com.blackducksoftware.integration.hub.docker.extractor.Extractor
 import com.blackducksoftware.integration.hub.docker.linux.Dirs
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser
-import com.blackducksoftware.integration.hub.docker.tar.ImagePkgMgr
 import com.blackducksoftware.integration.hub.docker.tar.ImageInfo
+import com.blackducksoftware.integration.hub.docker.tar.ImagePkgMgr
 import com.blackducksoftware.integration.hub.docker.tar.LayerMapping
 
 class HubDockerManagerTest {
@@ -60,7 +60,7 @@ class HubDockerManagerTest {
 
         HubDockerManager mgr = new HubDockerManager()
         mgr.packageManagerFiles = [
-            stubPackageManagerFiles: {ImagePkgMgr result -> println "stubPackageManagerFiles() mocked"}
+            stubPackageManagerFiles: {ImagePkgMgr imagePkgMgr -> println "stubPackageManagerFiles() mocked"}
         ] as PackageManagerFiles
         mgr.programPaths = [
             getHubDockerWorkingDirPath: {
@@ -74,15 +74,9 @@ class HubDockerManagerTest {
         ] as DockerClientManager
         mgr.extractors = extractors
 
-        ImageInfo tarExtractionResults = new ImageInfo()
-        tarExtractionResults.operatingSystemEnum = os
-        List<ImagePkgMgr> extractionResults = new ArrayList<>()
-        ImagePkgMgr result = new ImagePkgMgr()
-        result.imageDirectoryName = "image_${imageName}_v_${tagName}"
-        result.extractedPackageManagerDirectory = new File("test/resources/imageDir")
-        result.packageManager = pkgMgr
-        extractionResults.add(result)
-        tarExtractionResults.pkgMgrs = extractionResults
+        ImageInfo imageInfo = new ImageInfo(os)
+        ImagePkgMgr imagePkgMgr = new ImagePkgMgr("image_${imageName}_v_${tagName}", new File("test/resources/imageDir"), pkgMgr)
+        imageInfo.getPkgMgrs().add(imagePkgMgr)
 
         List<File> etcDirs = new ArrayList<>()
         File etcDir = TestUtils.createTempDirectory()
@@ -94,7 +88,7 @@ class HubDockerManagerTest {
 
         etcDirs.add(etcDir)
         mgr.tarParser = [
-            collectPkgMgrInfo: {File imageFilesDir, OperatingSystemEnum osEnum -> tarExtractionResults}
+            collectPkgMgrInfo: {File imageFilesDir, OperatingSystemEnum osEnum -> imageInfo}
         ] as DockerTarParser
 
         Dirs.metaClass.static.findFileWithName = {File fileToSearch, String name -> etcDirs}

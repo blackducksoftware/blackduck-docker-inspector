@@ -74,7 +74,7 @@ class HubDockerManager {
     PackageManagerFiles packageManagerFiles
 
     void init() {
-        tarParser.workingDirectory = new File(programPaths.getHubDockerWorkingDirPath())
+        tarParser.setWorkingDirectory(new File(programPaths.getHubDockerWorkingDirPath()))
     }
 
     File getTarFileFromDockerImage(String imageName, String tagName) {
