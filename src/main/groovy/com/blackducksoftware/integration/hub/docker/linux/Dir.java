@@ -1,9 +1,12 @@
 package com.blackducksoftware.integration.hub.docker.linux;
 
 import java.io.File;
-import java.io.FilenameFilter;
-import java.util.Arrays;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,14 +16,13 @@ public class Dir {
 
     public static List<File> findFileWithName(final File dirFile, final String targetName) {
         logger.info(String.format("*** Looking in %s for %s", dirFile.getAbsolutePath(), targetName));
+        final List<File> results = new ArrayList<>();
 
-        final File[] fileArray = dirFile.listFiles(new FilenameFilter() {
-            @Override
-            public boolean accept(final File dir, final String name) {
-                return name.matches("^" + targetName + "$");
-            }
-        });
-        final List<File> fileList = Arrays.asList(fileArray);
-        return fileList;
+        try (Stream<Path> stream = Files.find(dirFile.toPath(), 100, (path, attr) -> path.getFileName().toString().equals(targetName))) {
+            stream.forEach(path -> results.add(path.toFile()));
+        } catch (final IOException e) {
+            e.printStackTrace();
+        }
+        return results;
     }
 }
