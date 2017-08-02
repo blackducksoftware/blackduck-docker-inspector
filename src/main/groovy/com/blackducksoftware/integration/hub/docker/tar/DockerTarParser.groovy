@@ -33,7 +33,7 @@ import org.springframework.stereotype.Component
 
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
-import com.blackducksoftware.integration.hub.docker.linux.Dir
+import com.blackducksoftware.integration.hub.docker.linux.Dirs
 import com.blackducksoftware.integration.hub.docker.linux.EtcDir
 import com.blackducksoftware.integration.hub.docker.linux.FileSys
 import com.blackducksoftware.integration.hub.docker.tar.manifest.Manifest
@@ -46,7 +46,7 @@ class DockerTarParser {
     public static final String TAR_EXTRACTION_DIRECTORY = 'tarExtraction'
 
     // TODO make this private; add getter/setter (it gets set in HubDockerManager, plus tests)
-    File workingDirectory
+    private File workingDirectory
 
     File extractDockerLayers(List<File> layerTars, List<LayerMapping> layerMappings){
         File tarExtractionDirectory = getTarExtractionDirectory()
@@ -82,7 +82,7 @@ class DockerTarParser {
             osEnum = OperatingSystemEnum.determineOperatingSystem(operatingSystem)
         } else {
             logger.trace("Image directory ${extractedFilesDir.getName()}, looking for etc")
-            List<File> etcFiles = Dir.findFileWithName(extractedFilesDir, 'etc')
+            List<File> etcFiles = Dirs.findFileWithName(extractedFilesDir, 'etc')
             if (etcFiles == null) {
                 String msg = "Unable to find the files that specify the Linux distro of this image."
                 throw new HubIntegrationException(msg)
@@ -113,28 +113,28 @@ class DockerTarParser {
         osEnum
     }
 
-
-
-    TarExtractionResults extractPackageManagerDirs(File extractedImageFilesDir, OperatingSystemEnum osEnum) {
-        TarExtractionResults results = new TarExtractionResults()
-        results.operatingSystemEnum = osEnum
+    public ImagePkgMgrInfo collectPkgMgrInfo(File extractedImageFilesDir, OperatingSystemEnum osEnum) {
+        ImagePkgMgrInfo imagePkgMgrInfo = new ImagePkgMgrInfo()
+        imagePkgMgrInfo.operatingSystemEnum = osEnum
+        // There will only be one imageDirectory; the each just gets its name.
+        // It has the entire target image file system
         extractedImageFilesDir.listFiles().each { imageDirectory ->
-            logger.info("Extracting data from Image directory ${imageDirectory.getName()}")
+            logger.info("**************9 Extracting data from Image directory ${imageDirectory.getName()}")
             PackageManagerEnum.values().each { packageManagerEnum ->
                 File packageManagerDirectory = new File(imageDirectory, packageManagerEnum.directory)
                 if (packageManagerDirectory.exists()){
                     logger.trace("Package Manager Dir: ${packageManagerDirectory.getAbsolutePath()}")
-                    TarExtractionResult result = new TarExtractionResult()
+                    ImagePkgMgr result = new ImagePkgMgr()
                     result.imageDirectoryName = imageDirectory.getName()
                     result.packageManager = packageManagerEnum
                     result.extractedPackageManagerDirectory = packageManagerDirectory
-                    results.extractionResults.add(result)
+                    imagePkgMgrInfo.pkgMgrs.add(result)
                 } else {
                     logger.info("Package manager dir ${packageManagerDirectory.getAbsolutePath()} does not exist")
                 }
             }
         }
-        results
+        imagePkgMgrInfo
     }
 
     List<File> extractLayerTars(File dockerTar){

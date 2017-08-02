@@ -27,11 +27,11 @@ package com.blackducksoftware.integration.hub.docker
 import org.apache.commons.io.FileUtils
 import org.springframework.stereotype.Component
 
-import com.blackducksoftware.integration.hub.docker.tar.TarExtractionResult
+import com.blackducksoftware.integration.hub.docker.tar.ImagePkgMgr
 
 @Component
 class PackageManagerFiles {
-    public void stubPackageManagerFiles(TarExtractionResult result){
+    public void stubPackageManagerFiles(ImagePkgMgr result){
         File packageManagerDirectory = new File(result.packageManager.directory)
         if(packageManagerDirectory.exists()){
             deleteFilesOnly(packageManagerDirectory)

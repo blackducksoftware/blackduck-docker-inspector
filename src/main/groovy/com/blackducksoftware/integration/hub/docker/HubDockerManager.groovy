@@ -39,11 +39,11 @@ import com.blackducksoftware.integration.hub.docker.client.DockerClientManager
 import com.blackducksoftware.integration.hub.docker.client.ProgramPaths
 import com.blackducksoftware.integration.hub.docker.extractor.ExtractionDetails
 import com.blackducksoftware.integration.hub.docker.extractor.Extractor
-import com.blackducksoftware.integration.hub.docker.linux.Dir
+import com.blackducksoftware.integration.hub.docker.linux.Dirs
 import com.blackducksoftware.integration.hub.docker.linux.EtcDir
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser
+import com.blackducksoftware.integration.hub.docker.tar.ImagePkgMgrInfo
 import com.blackducksoftware.integration.hub.docker.tar.LayerMapping
-import com.blackducksoftware.integration.hub.docker.tar.TarExtractionResults
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException
 import com.google.gson.Gson
 
@@ -107,23 +107,23 @@ class HubDockerManager {
     }
 
     List<File> generateBdioFromImageFilesDir(List<LayerMapping> mappings, String projectName, String versionName, File dockerTar, File imageFilesDir, OperatingSystemEnum osEnum) {
-        TarExtractionResults tarExtractionResults = tarParser.extractPackageManagerDirs(imageFilesDir, osEnum)
-        if(tarExtractionResults.operatingSystemEnum == null){
+        ImagePkgMgrInfo imagePkgMgrInfo = tarParser.collectPkgMgrInfo(imageFilesDir, osEnum)
+        if(imagePkgMgrInfo.operatingSystemEnum == null){
             throw new HubIntegrationException('Could not determine the Operating System of this Docker tar.')
         }
         String architecture = null
-        if(osEnum == OperatingSystemEnum.ALPINE){
-            List<File> etcDirectories = Dir.findFileWithName(imageFilesDir, "etc")
-            for(File etc : etcDirectories){
+        if (osEnum == OperatingSystemEnum.ALPINE) {
+            List<File> etcDirectories = Dirs.findFileWithName(imageFilesDir, "etc")
+            for (File etc : etcDirectories) {
                 File architectureFile = new File(etc, 'apk')
                 architectureFile = new File(architectureFile, 'arch')
-                if(architectureFile.exists()){
+                if (architectureFile.exists()) {
                     architecture = architectureFile.readLines().get(0)
                     break
                 }
             }
         }
-        generateBdioFromPackageMgrDirs(mappings, projectName, versionName, dockerTar.getName(), tarExtractionResults, architecture)
+        generateBdioFromPackageMgrDirs(mappings, projectName, versionName, dockerTar.getName(), imagePkgMgrInfo, architecture)
     }
 
     void uploadBdioFiles(List<File> bdioFiles){
@@ -153,10 +153,10 @@ class HubDockerManager {
         Files.copy(fileToCopy.toPath(), destPath)
     }
 
-    private List<File> generateBdioFromPackageMgrDirs(List<LayerMapping> layerMappings, String projectName, String versionName, String tarFileName, TarExtractionResults tarResults, String architecture) {
+    private List<File> generateBdioFromPackageMgrDirs(List<LayerMapping> layerMappings, String projectName, String versionName, String tarFileName, ImagePkgMgrInfo tarResults, String architecture) {
         File workingDirectory = new File(programPaths.getHubDockerWorkingDirPath())
         def bdioFiles = []
-        tarResults.extractionResults.each { extractionResult ->
+        tarResults.pkgMgrs.each { extractionResult ->
             def mapping = layerMappings.find { mapping ->
                 StringUtils.compare(mapping.getImageDirectory(), extractionResult.imageDirectoryName) == 0
             }

@@ -20,18 +20,17 @@ public class FileSys {
 
     public Set<PackageManagerEnum> getPackageManagers() {
         final Set<PackageManagerEnum> packageManagers = new HashSet<>();
-        ///// TODO: This seems dumb to loop and recurse; just look recursively under root
-        for (final File rootLevelDir : root.listFiles()) {
-            logger.info(String.format("========= *** Looking in rootLevelDir %s for lib dir", rootLevelDir.getAbsolutePath()));
-            final List<File> libDirs = Dir.findFileWithName(rootLevelDir, "lib");
-            if (libDirs != null) {
-                for (final File libDir : libDirs) {
-                    for (final File packageManagerDirectory : libDir.listFiles()) {
-                        try {
-                            packageManagers.add(PackageManagerEnum.getPackageManagerEnumByName(packageManagerDirectory.getName()));
-                        } catch (final IllegalArgumentException e) {
-                            logger.trace(e.toString());
-                        }
+
+        logger.debug(String.format("Looking in root dir %s for lib dir", root.getAbsolutePath()));
+        final List<File> libDirs = Dirs.findFileWithName(root, "lib");
+        if (libDirs != null) {
+            for (final File libDir : libDirs) {
+                for (final File packageManagerDirectory : libDir.listFiles()) {
+                    logger.trace(String.format("Checking dir %s to see if it's a package manager dir", packageManagerDirectory.getAbsolutePath()));
+                    try {
+                        packageManagers.add(PackageManagerEnum.getPackageManagerEnumByName(packageManagerDirectory.getName()));
+                    } catch (final IllegalArgumentException e) {
+                        logger.trace(e.toString());
                     }
                 }
             }
