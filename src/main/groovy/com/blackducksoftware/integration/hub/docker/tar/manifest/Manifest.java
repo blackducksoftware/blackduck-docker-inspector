@@ -37,11 +37,11 @@ public class Manifest {
         final List<ImageInfo> images = getManifestContents();
         for (final ImageInfo image : images) {
 
-            logger.debug("getLayerMappings(): image: ${image}");
+            logger.debug(String.format("getLayerMappings(): image: %s", image));
 
             String specifiedRepoTag = "";
             if (StringUtils.isNotBlank(dockerImageName)) {
-                specifiedRepoTag = "${dockerImageName}:${dockerTagName}";
+                specifiedRepoTag = String.format("%s:%s", dockerImageName, dockerTagName);
             }
             String imageName = "";
             String tagName = "";
@@ -60,17 +60,17 @@ public class Manifest {
                     throw new HubIntegrationException(msg);
                 }
                 final String repoTag = image.repoTags.get(0);
-                logger.debug("repoTag: ${repoTag}");
+                logger.debug(String.format("repoTag: %s", repoTag));
                 imageName = repoTag.substring(0, repoTag.lastIndexOf(':'));
                 tagName = repoTag.substring(repoTag.lastIndexOf(':') + 1);
-                logger.debug("Parsed imageName: ${imageName}; tagName: ${tagName}");
+                logger.debug(String.format("Parsed imageName: %s; tagName: %s", imageName, tagName));
             } else {
-                logger.debug("foundRepoTag: ${foundRepoTag}");
+                logger.debug(String.format("foundRepoTag: %s", foundRepoTag));
                 imageName = foundRepoTag.substring(0, foundRepoTag.lastIndexOf(':'));
                 tagName = foundRepoTag.substring(foundRepoTag.lastIndexOf(':') + 1);
-                logger.debug("Found imageName: ${imageName}; tagName: ${tagName}");
+                logger.debug(String.format("Found imageName: %s; tagName: %s", imageName, tagName));
             }
-            logger.info("Image: ${imageName}, Tag: ${tagName}");
+            logger.info(String.format("Image: %s, Tag: %s", imageName, tagName));
             final List<String> layerIds = new ArrayList<>();
             for (final String layer : image.layers) {
                 layerIds.add(layer.substring(0, layer.indexOf('/')));
@@ -79,14 +79,14 @@ public class Manifest {
             if (StringUtils.isNotBlank(dockerImageName)) {
                 if (StringUtils.compare(imageName, dockerImageName) == 0 && StringUtils.compare(tagName, dockerTagName) == 0) {
                     logger.debug("Adding layer mapping");
-                    logger.debug("Image: ${mapping.imageName}:${mapping.tagName}");
-                    logger.debug("Layers: ${mapping.layers}");
+                    logger.debug(String.format("Image: %s:%s", mapping.getImageName(), mapping.getTagName()));
+                    logger.debug(String.format("Layers: %s", mapping.getLayers()));
                     mappings.add(mapping);
                 }
             } else {
                 logger.debug("Adding layer mapping");
-                logger.debug("Image ${mapping.imageName} , Tag ${mapping.tagName}");
-                logger.debug("Layers ${mapping.layers}");
+                logger.debug(String.format("Image %s , Tag %s", mapping.getImageName(), mapping.getTagName()));
+                logger.debug(String.format("Layers %s", mapping.getLayers()));
                 mappings.add(mapping);
             }
         }
@@ -98,12 +98,12 @@ public class Manifest {
         final List<ImageInfo> images = new ArrayList<>();
         logger.debug("getManifestContents(): extracting manifest file content");
         final String manifestContentString = extractManifestFileContent(dockerTarFileName);
-        logger.debug("getManifestContents(): parsing: ${manifestContentString}");
+        logger.debug(String.format("getManifestContents(): parsing: %s", manifestContentString));
         final JsonParser parser = new JsonParser();
         final JsonArray manifestContent = parser.parse(manifestContentString).getAsJsonArray();
         final Gson gson = new Gson();
         for (final JsonElement element : manifestContent) {
-            logger.debug("getManifestContents(): element: ${element.toString()}");
+            logger.debug(String.format("getManifestContents(): element: %s", element.toString()));
             images.add(gson.fromJson(element, ImageInfo.class));
         }
         return images;

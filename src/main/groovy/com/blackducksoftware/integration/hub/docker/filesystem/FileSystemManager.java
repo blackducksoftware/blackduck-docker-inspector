@@ -23,7 +23,7 @@ public class FileSystemManager {
         if (etcFile == null || etcFile.listFiles() == null || (FileUtils.listFiles(etcFile, FileFileFilter.FILE, null).size() == 0)) {
             throw new HubIntegrationException(String.format("Could not determine the Operating System because we could not find the OS files in %s.", etcFile.getAbsolutePath()));
         }
-        logger.debug("etc directory ${etcFile.getAbsolutePath()}");
+        logger.debug(String.format("etc directory %s", etcFile.getAbsolutePath()));
         final OperatingSystemEnum osEnum = extractOperatingSystemFromFiles(etcFile.listFiles());
         return osEnum;
     }
