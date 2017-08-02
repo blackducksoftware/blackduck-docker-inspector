@@ -1,4 +1,4 @@
-package com.blackducksoftware.integration.hub.docker.filesystem;
+package com.blackducksoftware.integration.hub.docker.linux;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,10 +13,15 @@ import org.slf4j.LoggerFactory;
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 
-public class FileSystemManager {
-    private static final Logger logger = LoggerFactory.getLogger(FileSystemManager.class);
+public class EtcDir {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final File etcFile;
 
-    public static OperatingSystemEnum detectOperatingSystemFromEtcDir(final File etcFile) throws HubIntegrationException, IOException {
+    public EtcDir(final File etcFile) {
+        this.etcFile = etcFile;
+    }
+
+    public OperatingSystemEnum getOperatingSystem() throws HubIntegrationException, IOException {
         if (etcFile == null) {
             throw new HubIntegrationException("Could not determine the Operating System because none of the expected etc files were found.");
         }

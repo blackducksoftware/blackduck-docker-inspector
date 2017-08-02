@@ -33,7 +33,7 @@ import org.springframework.stereotype.Component
 
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
-import com.blackducksoftware.integration.hub.docker.filesystem.FileSystemManager
+import com.blackducksoftware.integration.hub.docker.linux.EtcDir
 import com.blackducksoftware.integration.hub.docker.tar.manifest.Manifest
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException
 
@@ -85,9 +85,10 @@ class DockerTarParser {
                 String msg = "Unable to find the files that specify the Linux distro of this image."
                 throw new HubIntegrationException(msg)
             }
-            for(File etcFile : etcFiles){
+            for (File etcFile : etcFiles) {
                 try{
-                    osEnum = FileSystemManager.detectOperatingSystemFromEtcDir(etcFile)
+                    EtcDir etcDir = new EtcDir(etcFile)
+                    osEnum = etcDir.getOperatingSystem()
                     if(osEnum != null){
                         break
                     }

@@ -39,7 +39,7 @@ import com.blackducksoftware.integration.hub.docker.client.DockerClientManager
 import com.blackducksoftware.integration.hub.docker.client.ProgramPaths
 import com.blackducksoftware.integration.hub.docker.extractor.ExtractionDetails
 import com.blackducksoftware.integration.hub.docker.extractor.Extractor
-import com.blackducksoftware.integration.hub.docker.filesystem.FileSystemManager
+import com.blackducksoftware.integration.hub.docker.linux.EtcDir
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser
 import com.blackducksoftware.integration.hub.docker.tar.LayerMapping
 import com.blackducksoftware.integration.hub.docker.tar.TarExtractionResults
@@ -97,7 +97,8 @@ class HubDockerManager {
     }
 
     OperatingSystemEnum detectCurrentOperatingSystem() {
-        FileSystemManager.detectOperatingSystemFromEtcDir(new File("/etc"))
+        EtcDir etcDir = new EtcDir(new File("/etc"))
+        etcDir.getOperatingSystem()
     }
 
     List<LayerMapping> getLayerMappings(String tarFileName, String dockerImageName, String dockerTagName) {
