@@ -25,8 +25,9 @@ class ProgramPathsTest {
         File jarFile = new File(installDir, "hub-docker-1.0.0.jar")
         jarFile.createNewFile()
 
-        ProgramPaths paths = new ProgramPaths()
-        paths.getMetaClass().getQualifiedJarPath = { -> return "SOMEJUNK${installDirPath}/${jarFileName}OTHERJUNK" }
+        ProgramPaths paths = [
+            getQualifiedJarPath: { -> return "SOMEJUNK${installDirPath}/${jarFileName}OTHERJUNK".toString() }
+        ] as ProgramPaths
 
         paths.hubDockerPgmDirPath = installDir.getAbsolutePath()
         paths.init()

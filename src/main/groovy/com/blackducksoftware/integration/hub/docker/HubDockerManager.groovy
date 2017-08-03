@@ -160,22 +160,18 @@ class HubDockerManager {
         ManifestLayerMapping manifestMapping = layerMappings.find { mapping ->
             StringUtils.compare(mapping.getTargetImageFileSystemRoot(), imageInfo.fileSystemRootDirName) == 0
         }
-        String imageDirectoryName = manifestMapping.getTargetImageFileSystemRoot()
-        String filePath = imageInfo.pkgMgr.extractedPackageManagerDirectory.getAbsolutePath()
-        filePath = filePath.substring(filePath.indexOf(imageDirectoryName) + 1)
-        filePath = filePath.substring(filePath.indexOf('/') + 1)
-        filePath = filePath.replaceAll('/', '_')
-        String cleanedImageName = manifestMapping.imageName.replaceAll('/', '_')
+
         packageManagerFiles.stubPackageManagerFiles(imageInfo.pkgMgr)
         String codeLocationName, hubProjectName, hubVersionName = ''
-        codeLocationName = "${cleanedImageName}_${manifestMapping.tagName}_${filePath}_${imageInfo.pkgMgr.packageManager}"
-        hubProjectName = deriveHubProject(cleanedImageName, projectName)
+        String imageDirectoryName = manifestMapping.getTargetImageFileSystemRoot()
+        String pkgMgrFilePath = imageInfo.pkgMgr.extractedPackageManagerDirectory.getAbsolutePath()
+        pkgMgrFilePath = pkgMgrFilePath.substring(pkgMgrFilePath.indexOf(imageDirectoryName) + 1)
+        pkgMgrFilePath = pkgMgrFilePath.substring(pkgMgrFilePath.indexOf('/') + 1)
+        codeLocationName = programPaths.getCodeLocationName(manifestMapping.imageName, manifestMapping.tagName, pkgMgrFilePath, imageInfo.pkgMgr.packageManager.toString())
+        hubProjectName = deriveHubProject(manifestMapping.imageName, projectName)
         hubVersionName = deriveHubProjectVersion(manifestMapping, versionName)
-
         logger.info("Hub project, version: ${hubProjectName}, ${hubVersionName}; Code location : ${codeLocationName}")
-
-        String cleanedHubProjectName = hubProjectName.replaceAll('/', '_')
-        String bdioFilename = "${cleanedImageName}_${filePath}_${cleanedHubProjectName}_${hubVersionName}_bdio.jsonld"
+        String bdioFilename = programPaths.getBdioFilename(manifestMapping.imageName, pkgMgrFilePath, hubProjectName, hubVersionName)
         logger.debug("bdioFilename: ${bdioFilename}")
         def outputFile = new File(workingDirectory, bdioFilename)
         bdioFiles.add(outputFile)
@@ -195,10 +191,10 @@ class HubDockerManager {
         bdioFiles
     }
 
-    private String deriveHubProject(String cleanedImageName, String projectName) {
+    private String deriveHubProject(String imageName, String projectName) {
         String hubProjectName
         if (StringUtils.isBlank(projectName)) {
-            hubProjectName = cleanedImageName
+            hubProjectName = programPaths.cleanImageName(imageName)
         } else {
             logger.debug("Using project from config property")
             hubProjectName = projectName

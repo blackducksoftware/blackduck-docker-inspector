@@ -79,7 +79,7 @@ class DockerClientManager {
     File getTarFileFromDockerImage(String imageName, String tagName) {
         File imageTarDirectory = new File(new File(programPaths.getHubDockerWorkingDirPath()), 'tarDirectory')
         pullImage(imageName, tagName)
-        File imageTarFile = new File(imageTarDirectory, "${imageName.replaceAll(':', '_')}_${tagName}.tar")
+        File imageTarFile = new File(imageTarDirectory, programPaths.getImageTarFilename(imageName, tagName))
         saveImage(imageName, tagName, imageTarFile)
         imageTarFile
     }
