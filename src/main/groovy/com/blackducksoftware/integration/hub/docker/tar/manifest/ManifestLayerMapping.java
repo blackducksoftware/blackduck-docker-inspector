@@ -21,37 +21,38 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.blackducksoftware.integration.hub.docker.tar;
+package com.blackducksoftware.integration.hub.docker.tar.manifest;
 
-import java.io.File;
+import java.util.List;
 
 import org.apache.commons.lang3.builder.RecursiveToStringStyle;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
-import com.blackducksoftware.integration.hub.docker.PackageManagerEnum;
+public class ManifestLayerMapping {
+    private final String imageName;
+    private final String tagName;
+    private final List<String> layers;
 
-public class ImagePkgMgr {
-
-    private final String extractedFileSystemRootDirName;
-    private final File extractedPackageManagerDirectory;
-    private final PackageManagerEnum packageManager;
-
-    public ImagePkgMgr(final String extractedFileSystemRootDirName, final File extractedPackageManagerDirectory, final PackageManagerEnum packageManager) {
-        this.extractedFileSystemRootDirName = extractedFileSystemRootDirName;
-        this.extractedPackageManagerDirectory = extractedPackageManagerDirectory;
-        this.packageManager = packageManager;
+    public ManifestLayerMapping(final String imageName, final String tagName, final List<String> layers) {
+        this.imageName = imageName;
+        this.tagName = tagName;
+        this.layers = layers;
     }
 
-    public String getImageDirectoryName() {
-        return extractedFileSystemRootDirName;
+    public String getImageName() {
+        return imageName;
     }
 
-    public File getExtractedPackageManagerDirectory() {
-        return extractedPackageManagerDirectory;
+    public String getTagName() {
+        return tagName;
     }
 
-    public PackageManagerEnum getPackageManager() {
-        return packageManager;
+    public List<String> getLayers() {
+        return layers;
+    }
+
+    public String getTargetImageFileSystemRoot() {
+        return String.format("image_%s_v_%s", imageName, tagName);
     }
 
     @Override

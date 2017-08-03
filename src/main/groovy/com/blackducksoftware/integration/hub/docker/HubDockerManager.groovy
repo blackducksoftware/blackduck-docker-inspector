@@ -43,7 +43,7 @@ import com.blackducksoftware.integration.hub.docker.linux.Dirs
 import com.blackducksoftware.integration.hub.docker.linux.EtcDir
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser
 import com.blackducksoftware.integration.hub.docker.tar.ImageInfo
-import com.blackducksoftware.integration.hub.docker.tar.LayerMapping
+import com.blackducksoftware.integration.hub.docker.tar.manifest.ManifestLayerMapping
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException
 import com.google.gson.Gson
 
@@ -85,7 +85,7 @@ class HubDockerManager {
         tarParser.extractLayerTars(dockerTar)
     }
 
-    File extractDockerLayers(List<File> layerTars, List<LayerMapping> layerMappings) {
+    File extractDockerLayers(List<File> layerTars, List<ManifestLayerMapping> layerMappings) {
         tarParser.extractDockerLayers(layerTars, layerMappings)
     }
 
@@ -102,18 +102,18 @@ class HubDockerManager {
         etcDir.getOperatingSystem()
     }
 
-    List<LayerMapping> getLayerMappings(String tarFileName, String dockerImageName, String dockerTagName) {
+    List<ManifestLayerMapping> getLayerMappings(String tarFileName, String dockerImageName, String dockerTagName) {
         return tarParser.getLayerMappings(tarFileName, dockerImageName, dockerTagName)
     }
 
-    List<File> generateBdioFromImageFilesDir(List<LayerMapping> mappings, String projectName, String versionName, File dockerTar, File imageFilesDir, OperatingSystemEnum osEnum) {
-        ImageInfo imagePkgMgrInfo = tarParser.collectPkgMgrInfo(imageFilesDir, osEnum)
+    List<File> generateBdioFromImageFilesDir(List<ManifestLayerMapping> mappings, String projectName, String versionName, File dockerTar, File targetImageFileSystemParentDir, OperatingSystemEnum osEnum) {
+        ImageInfo imagePkgMgrInfo = tarParser.collectPkgMgrInfo(targetImageFileSystemParentDir, osEnum)
         if(imagePkgMgrInfo.operatingSystemEnum == null){
             throw new HubIntegrationException('Could not determine the Operating System of this Docker tar.')
         }
         String architecture = null
         if (osEnum == OperatingSystemEnum.ALPINE) {
-            List<File> etcDirectories = Dirs.findFileWithName(imageFilesDir, "etc")
+            List<File> etcDirectories = Dirs.findFileWithName(targetImageFileSystemParentDir, "etc")
             for (File etc : etcDirectories) {
                 File architectureFile = new File(etc, 'apk')
                 architectureFile = new File(architectureFile, 'arch')
@@ -153,24 +153,24 @@ class HubDockerManager {
         Files.copy(fileToCopy.toPath(), destPath)
     }
 
-    private List<File> generateBdioFromPackageMgrDirs(List<LayerMapping> layerMappings, String projectName, String versionName, String tarFileName, ImageInfo imageInfo, String architecture) {
+    private List<File> generateBdioFromPackageMgrDirs(List<ManifestLayerMapping> layerMappings, String projectName, String versionName, String tarFileName, ImageInfo imageInfo, String architecture) {
         File workingDirectory = new File(programPaths.getHubDockerWorkingDirPath())
         def bdioFiles = []
         imageInfo.pkgMgrs.each { extractionResult ->
-            def mapping = layerMappings.find { mapping ->
-                StringUtils.compare(mapping.getImageDirectory(), extractionResult.imageDirectoryName) == 0
+            ManifestLayerMapping manifestMapping = layerMappings.find { mapping ->
+                StringUtils.compare(mapping.getTargetImageFileSystemRoot(), extractionResult.extractedFileSystemRootDirName) == 0
             }
-            String imageDirectoryName = mapping.getImageDirectory()
+            String imageDirectoryName = manifestMapping.getTargetImageFileSystemRoot()
             String filePath = extractionResult.extractedPackageManagerDirectory.getAbsolutePath()
             filePath = filePath.substring(filePath.indexOf(imageDirectoryName) + 1)
             filePath = filePath.substring(filePath.indexOf('/') + 1)
             filePath = filePath.replaceAll('/', '_')
-            String cleanedImageName = mapping.imageName.replaceAll('/', '_')
+            String cleanedImageName = manifestMapping.imageName.replaceAll('/', '_')
             packageManagerFiles.stubPackageManagerFiles(extractionResult)
             String codeLocationName, hubProjectName, hubVersionName = ''
-            codeLocationName = "${cleanedImageName}_${mapping.tagName}_${filePath}_${extractionResult.packageManager}"
+            codeLocationName = "${cleanedImageName}_${manifestMapping.tagName}_${filePath}_${extractionResult.packageManager}"
             hubProjectName = deriveHubProject(cleanedImageName, projectName)
-            hubVersionName = deriveHubProjectVersion(mapping, versionName)
+            hubVersionName = deriveHubProjectVersion(manifestMapping, versionName)
 
             logger.info("Hub project, version: ${hubProjectName}, ${hubVersionName}; Code location : ${codeLocationName}")
 
@@ -206,7 +206,7 @@ class HubDockerManager {
         return hubProjectName
     }
 
-    private String deriveHubProjectVersion(LayerMapping mapping, String versionName) {
+    private String deriveHubProjectVersion(ManifestLayerMapping mapping, String versionName) {
         String hubVersionName
         if (StringUtils.isBlank(versionName)) {
             hubVersionName = mapping.tagName

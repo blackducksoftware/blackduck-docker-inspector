@@ -39,7 +39,8 @@ import com.blackducksoftware.integration.hub.docker.client.DockerClientManager
 import com.blackducksoftware.integration.hub.docker.client.ProgramPaths
 import com.blackducksoftware.integration.hub.docker.client.ProgramVersion
 import com.blackducksoftware.integration.hub.docker.image.DockerImages
-import com.blackducksoftware.integration.hub.docker.tar.LayerMapping
+import com.blackducksoftware.integration.hub.docker.tar.manifest.ManifestLayerMapping
+import com.blackducksoftware.integration.hub.exception.HubIntegrationException
 
 @SpringBootApplication
 class Application {
@@ -98,14 +99,14 @@ class Application {
             File dockerTarFile = deriveDockerTarFile()
 
             List<File> layerTars = hubDockerManager.extractLayerTars(dockerTarFile)
-            List<LayerMapping> layerMappings = hubDockerManager.getLayerMappings(dockerTarFile.getName(), dockerImageName, dockerTagName)
-            File imageFilesDir = hubDockerManager.extractDockerLayers(layerTars, layerMappings)
+            List<ManifestLayerMapping> layerMappings = hubDockerManager.getLayerMappings(dockerTarFile.getName(), dockerImageName, dockerTagName)
+            File targetImageFileSystemParentDir = hubDockerManager.extractDockerLayers(layerTars, layerMappings)
 
-            OperatingSystemEnum targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro, imageFilesDir)
+            OperatingSystemEnum targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro, targetImageFileSystemParentDir)
             OperatingSystemEnum requiredOsEnum = dockerImages.getDockerImageOs(targetOsEnum)
             OperatingSystemEnum currentOsEnum = hubDockerManager.detectCurrentOperatingSystem()
             if (currentOsEnum == requiredOsEnum) {
-                generateBdio(dockerTarFile, imageFilesDir, layerMappings, currentOsEnum, targetOsEnum)
+                generateBdio(dockerTarFile, targetImageFileSystemParentDir, layerMappings, currentOsEnum, targetOsEnum)
             } else {
                 runInSubContainer(dockerTarFile, currentOsEnum, targetOsEnum)
             }
@@ -133,14 +134,17 @@ class Application {
         dockerClientManager.run(runOnImageName, runOnImageVersion, dockerTarFile, devMode)
     }
 
-    private generateBdio(File dockerTarFile, File imageFilesDir, List layerMappings, OperatingSystemEnum currentOsEnum, OperatingSystemEnum targetOsEnum) {
+    private generateBdio(File dockerTarFile, File targetImageFileSystemParentDir, List layerMappings, OperatingSystemEnum currentOsEnum, OperatingSystemEnum targetOsEnum) {
         String msg = sprintf("Image inspection for %s can be run in this %s docker container; tarfile: %s",
                 targetOsEnum.toString(), currentOsEnum.toString(), dockerTarFile.getAbsolutePath())
         logger.info(msg)
-        List<File> bdioFiles = hubDockerManager.generateBdioFromImageFilesDir(layerMappings, hubProjectName, hubVersionName, dockerTarFile, imageFilesDir, targetOsEnum)
+        List<File> bdioFiles = hubDockerManager.generateBdioFromImageFilesDir(layerMappings, hubProjectName, hubVersionName, dockerTarFile, targetImageFileSystemParentDir, targetOsEnum)
         if (bdioFiles.size() == 0) {
             logger.warn("No BDIO Files generated")
         } else {
+            if (bdioFiles.size() > 1) {
+                throw new HubIntegrationException(String.format("Number of BDIO files (%d) is greater than one", bdioFiles.size()))
+            }
             if (dryRun) {
                 logger.info("Running in dry run mode; not uploading BDIO to Hub")
             } else {

@@ -19,7 +19,7 @@ import com.blackducksoftware.integration.hub.docker.linux.Dirs
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser
 import com.blackducksoftware.integration.hub.docker.tar.ImageInfo
 import com.blackducksoftware.integration.hub.docker.tar.ImagePkgMgr
-import com.blackducksoftware.integration.hub.docker.tar.LayerMapping
+import com.blackducksoftware.integration.hub.docker.tar.manifest.ManifestLayerMapping
 
 class HubDockerManagerTest {
 
@@ -95,10 +95,10 @@ class HubDockerManagerTest {
 
         assertEquals("image.tar", mgr.getTarFileFromDockerImage(imageName, tagName).getName())
 
-        List<LayerMapping> mappings = new ArrayList<LayerMapping>()
+        List<ManifestLayerMapping> mappings = new ArrayList<ManifestLayerMapping>()
         List<String> layerIds = new ArrayList<>()
         layerIds.add("testLayerId")
-        LayerMapping mapping = new LayerMapping(imageName, tagName, layerIds)
+        ManifestLayerMapping mapping = new ManifestLayerMapping(imageName, tagName, layerIds)
         mappings.add(mapping)
         File imageFilesDir
         List<File> bdioFiles = mgr.generateBdioFromImageFilesDir(mappings, "testProjectName", "testProjectVersion", imageTarFile, imageFilesDir, os)

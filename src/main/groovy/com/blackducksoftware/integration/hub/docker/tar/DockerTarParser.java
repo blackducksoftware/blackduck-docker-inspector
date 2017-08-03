@@ -46,55 +46,37 @@ import com.blackducksoftware.integration.hub.docker.linux.Dirs;
 import com.blackducksoftware.integration.hub.docker.linux.EtcDir;
 import com.blackducksoftware.integration.hub.docker.linux.FileSys;
 import com.blackducksoftware.integration.hub.docker.tar.manifest.Manifest;
+import com.blackducksoftware.integration.hub.docker.tar.manifest.ManifestLayerMapping;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 
 @Component
 public class DockerTarParser {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
     private static final String TAR_EXTRACTION_DIRECTORY = "tarExtraction";
+    private static final String TARGET_IMAGE_FILESYSTEM_PARENT_DIR = "imageFiles";
+    private static final String DOCKER_LAYER_TAR_FILENAME = "layer.tar";
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private File workingDirectory;
+    private File tarExtractionDirectory;
 
     public void setWorkingDirectory(final File workingDirectory) {
         this.workingDirectory = workingDirectory;
     }
 
-    File extractDockerLayers(final List<File> layerTars, final List<LayerMapping> layerMappings) throws IOException {
+    public File extractDockerLayers(final List<File> layerTars, final List<ManifestLayerMapping> manifestLayerMappings) throws IOException {
         final File tarExtractionDirectory = getTarExtractionDirectory();
-        final File imageFilesDir = new File(tarExtractionDirectory, "imageFiles");
-        for (final LayerMapping mapping : layerMappings) {
-            for (final String layer : mapping.getLayers()) {
-
+        final File targetImageFileSystemParentDir = new File(tarExtractionDirectory, TARGET_IMAGE_FILESYSTEM_PARENT_DIR);
+        for (final ManifestLayerMapping manifestLayerMapping : manifestLayerMappings) {
+            for (final String layer : manifestLayerMapping.getLayers()) {
                 logger.trace(String.format("Looking for tar for layer: %s", layer));
                 final File layerTar = getLayerTar(layerTars, layer);
-
                 if (layerTar != null) {
-                    final File imageOutputDir = new File(imageFilesDir, mapping.getImageDirectory());
-                    logger.trace(String.format("Processing layer: %s", layerTar.getAbsolutePath()));
-                    final DockerLayerTar dockerLayerTar = new DockerLayerTar(layerTar);
-                    dockerLayerTar.extractToDir(imageOutputDir);
+                    extractLayerTarToDir(targetImageFileSystemParentDir, layerTar, manifestLayerMapping);
                 } else {
                     logger.error(String.format("Could not find the tar for layer %s", layer));
                 }
             }
         }
-        return imageFilesDir;
-    }
-
-    private File getLayerTar(final List<File> layerTars, final String layer) {
-        File layerTar = null;
-        for (final File candidateLayerTar : layerTars) {
-            if (layer.equals(candidateLayerTar.getParentFile().getName())) {
-                logger.info(String.format("Found layer tar for layer %s", layer));
-                layerTar = candidateLayerTar;
-                break;
-            }
-        }
-        return layerTar;
-    }
-
-    private File getTarExtractionDirectory() {
-        return new File(workingDirectory, TAR_EXTRACTION_DIRECTORY);
+        return targetImageFileSystemParentDir;
     }
 
     public OperatingSystemEnum detectOperatingSystem(final String operatingSystem, final File extractedFilesDir) throws HubIntegrationException, IOException {
@@ -112,6 +94,94 @@ public class DockerTarParser {
             throw new HubIntegrationException(msg);
         }
         return osEnum;
+    }
+
+    public ImageInfo collectPkgMgrInfo(final File targetImageFileSystemParentDir, final OperatingSystemEnum osEnum) {
+        final ImageInfo imagePkgMgrInfo = new ImageInfo(osEnum);
+        // There will only be one targetImageFileSystem
+        for (final File targetImageFileSystem : targetImageFileSystemParentDir.listFiles()) {
+            logger.debug(String.format("Checking image file system at %s for package managers", targetImageFileSystem.getName()));
+            for (final PackageManagerEnum packageManagerEnum : PackageManagerEnum.values()) {
+                final File packageManagerDirectory = new File(targetImageFileSystem, packageManagerEnum.getDirectory());
+                if (packageManagerDirectory.exists()) {
+                    logger.info(String.format("Found package Manager Dir: %s", packageManagerDirectory.getAbsolutePath()));
+                    final ImagePkgMgr result = new ImagePkgMgr(targetImageFileSystem.getName(), packageManagerDirectory, packageManagerEnum);
+                    imagePkgMgrInfo.getPkgMgrs().add(result);
+                } else {
+                    logger.debug(String.format("Package manager dir %s does not exist", packageManagerDirectory.getAbsolutePath()));
+                }
+            }
+        }
+        return imagePkgMgrInfo;
+    }
+
+    public List<File> extractLayerTars(final File dockerTar) throws IOException {
+        final File tarExtractionDirectory = getTarExtractionDirectory();
+        final List<File> untaredFiles = new ArrayList<>();
+        final File outputDir = new File(tarExtractionDirectory, dockerTar.getName());
+        final TarArchiveInputStream tarArchiveInputStream = new TarArchiveInputStream(new FileInputStream(dockerTar));
+        try {
+            TarArchiveEntry tarArchiveEntry = null;
+            while (null != (tarArchiveEntry = tarArchiveInputStream.getNextTarEntry())) {
+                final File outputFile = new File(outputDir, tarArchiveEntry.getName());
+                if (tarArchiveEntry.isFile()) {
+                    if (!outputFile.getParentFile().exists()) {
+                        outputFile.getParentFile().mkdirs();
+                    }
+                    final OutputStream outputFileStream = new FileOutputStream(outputFile);
+                    try {
+                        IOUtils.copy(tarArchiveInputStream, outputFileStream);
+                        if (tarArchiveEntry.getName().contains(DOCKER_LAYER_TAR_FILENAME)) {
+                            untaredFiles.add(outputFile);
+                        }
+                    } finally {
+                        outputFileStream.close();
+                    }
+                }
+            }
+        } finally {
+            IOUtils.closeQuietly(tarArchiveInputStream);
+        }
+        return untaredFiles;
+    }
+
+    public List<ManifestLayerMapping> getLayerMappings(final String tarFileName, final String dockerImageName, final String dockerTagName) throws Exception {
+        logger.debug("getLayerMappings()");
+        final Manifest manifest = new Manifest(dockerImageName, dockerTagName, getTarExtractionDirectory(), tarFileName);
+        List<ManifestLayerMapping> mappings;
+        try {
+            mappings = manifest.getLayerMappings();
+        } catch (final Exception e) {
+            logger.error(String.format("Could not parse the image manifest file : %s", e.getMessage()));
+            throw e;
+        }
+        return mappings;
+    }
+
+    private File getTarExtractionDirectory() {
+        if (tarExtractionDirectory == null) {
+            tarExtractionDirectory = new File(workingDirectory, TAR_EXTRACTION_DIRECTORY);
+        }
+        return tarExtractionDirectory;
+    }
+
+    private void extractLayerTarToDir(final File imageFilesDir, final File layerTar, final ManifestLayerMapping mapping) throws IOException {
+        final File imageOutputDir = new File(imageFilesDir, mapping.getTargetImageFileSystemRoot());
+        logger.trace(String.format("Extracting layer: %s into %s", layerTar.getAbsolutePath(), mapping.getTargetImageFileSystemRoot()));
+        final DockerLayerTar dockerLayerTar = new DockerLayerTar(layerTar);
+        dockerLayerTar.extractToDir(imageOutputDir);
+    }
+
+    private File getLayerTar(final List<File> layerTars, final String layer) {
+        File layerTar = null;
+        for (final File candidateLayerTar : layerTars) {
+            if (layer.equals(candidateLayerTar.getParentFile().getName())) {
+                logger.info(String.format("Found layer tar for layer %s", layer));
+                layerTar = candidateLayerTar;
+                break;
+            }
+        }
+        return layerTar;
     }
 
     private OperatingSystemEnum deriveOsFromEtcDir(final File extractedFilesDir) throws HubIntegrationException, IOException {
@@ -151,66 +221,4 @@ public class DockerTarParser {
 
     }
 
-    public ImageInfo collectPkgMgrInfo(final File extractedImageFilesDir, final OperatingSystemEnum osEnum) {
-        final ImageInfo imagePkgMgrInfo = new ImageInfo(osEnum);
-        // There will only be one imageDirectory; the .each is a lazy way to get it
-        // It has the entire target image file system
-        for (final File imageDirectory : extractedImageFilesDir.listFiles()) {
-            logger.debug(String.format("Checking image file system at %s for package managers", imageDirectory.getName()));
-            for (final PackageManagerEnum packageManagerEnum : PackageManagerEnum.values()) {
-                final File packageManagerDirectory = new File(imageDirectory, packageManagerEnum.getDirectory());
-                if (packageManagerDirectory.exists()) {
-                    logger.trace(String.format("Package Manager Dir: %s", packageManagerDirectory.getAbsolutePath()));
-                    final ImagePkgMgr result = new ImagePkgMgr(imageDirectory.getName(), packageManagerDirectory, packageManagerEnum);
-                    imagePkgMgrInfo.getPkgMgrs().add(result);
-                } else {
-                    logger.info(String.format("Package manager dir %s does not exist", packageManagerDirectory.getAbsolutePath()));
-                }
-            }
-        }
-        return imagePkgMgrInfo;
-    }
-
-    public List<File> extractLayerTars(final File dockerTar) throws IOException {
-        final File tarExtractionDirectory = getTarExtractionDirectory();
-        final List<File> untaredFiles = new ArrayList<>();
-        final File outputDir = new File(tarExtractionDirectory, dockerTar.getName());
-        final TarArchiveInputStream tarArchiveInputStream = new TarArchiveInputStream(new FileInputStream(dockerTar));
-        try {
-            TarArchiveEntry tarArchiveEntry = null;
-            while (null != (tarArchiveEntry = tarArchiveInputStream.getNextTarEntry())) {
-                final File outputFile = new File(outputDir, tarArchiveEntry.getName());
-                if (tarArchiveEntry.isFile()) {
-                    if (!outputFile.getParentFile().exists()) {
-                        outputFile.getParentFile().mkdirs();
-                    }
-                    final OutputStream outputFileStream = new FileOutputStream(outputFile);
-                    try {
-                        IOUtils.copy(tarArchiveInputStream, outputFileStream);
-                        if (tarArchiveEntry.getName().contains("layer.tar")) {
-                            untaredFiles.add(outputFile);
-                        }
-                    } finally {
-                        outputFileStream.close();
-                    }
-                }
-            }
-        } finally {
-            IOUtils.closeQuietly(tarArchiveInputStream);
-        }
-        return untaredFiles;
-    }
-
-    public List<LayerMapping> getLayerMappings(final String tarFileName, final String dockerImageName, final String dockerTagName) throws Exception {
-        logger.debug("getLayerMappings()");
-        final Manifest manifest = new Manifest(dockerImageName, dockerTagName, getTarExtractionDirectory(), tarFileName);
-        List<LayerMapping> mappings;
-        try {
-            mappings = manifest.getLayerMappings();
-        } catch (final Exception e) {
-            logger.error(String.format("Could not parse the image manifest file : %s", e.getMessage()));
-            throw e;
-        }
-        return mappings;
-    }
 }
