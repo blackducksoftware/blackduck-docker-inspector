@@ -179,8 +179,8 @@ class DockerClientManager {
 
         copyFileToContainer(dockerClient, containerId, pathToPropertiesFileForSubContainer, programPaths.getHubDockerConfigDirPath())
 
-        logger.info(sprintf("Docker image tar file: %s", dockerTarFile.getAbsolutePath()))
-        logger.info(sprintf("Docker image tar file path in sub-container: %s", tarFilePathInSubContainer))
+        logger.debug(sprintf("Docker image tar file: %s", dockerTarFile.getAbsolutePath()))
+        logger.debug(sprintf("Docker image tar file path in sub-container: %s", tarFilePathInSubContainer))
         copyFileToContainer(dockerClient, containerId, dockerTarFile.getAbsolutePath(), tarFileDirInSubContainer);
 
         if (copyJar) {
