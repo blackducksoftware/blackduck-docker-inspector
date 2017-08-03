@@ -74,9 +74,8 @@ class HubDockerManagerTest {
         ] as DockerClientManager
         mgr.extractors = extractors
 
-        ImageInfo imageInfo = new ImageInfo(os)
-        ImagePkgMgr imagePkgMgr = new ImagePkgMgr("image_${imageName}_v_${tagName}", new File("test/resources/imageDir"), pkgMgr)
-        imageInfo.getPkgMgrs().add(imagePkgMgr)
+        ImagePkgMgr imagePkgMgr = new ImagePkgMgr(new File("test/resources/imageDir"), pkgMgr)
+        ImageInfo imageInfo = new ImageInfo("image_${imageName}_v_${tagName}", os, imagePkgMgr)
 
         List<File> etcDirs = new ArrayList<>()
         File etcDir = TestUtils.createTempDirectory()

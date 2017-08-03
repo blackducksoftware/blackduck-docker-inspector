@@ -32,18 +32,12 @@ import com.blackducksoftware.integration.hub.docker.PackageManagerEnum;
 
 public class ImagePkgMgr {
 
-    private final String extractedFileSystemRootDirName;
     private final File extractedPackageManagerDirectory;
     private final PackageManagerEnum packageManager;
 
-    public ImagePkgMgr(final String extractedFileSystemRootDirName, final File extractedPackageManagerDirectory, final PackageManagerEnum packageManager) {
-        this.extractedFileSystemRootDirName = extractedFileSystemRootDirName;
+    public ImagePkgMgr(final File extractedPackageManagerDirectory, final PackageManagerEnum packageManager) {
         this.extractedPackageManagerDirectory = extractedPackageManagerDirectory;
         this.packageManager = packageManager;
-    }
-
-    public String getImageDirectoryName() {
-        return extractedFileSystemRootDirName;
     }
 
     public File getExtractedPackageManagerDirectory() {

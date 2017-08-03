@@ -8,6 +8,7 @@ import org.junit.BeforeClass
 import org.junit.Test
 
 import com.blackducksoftware.integration.hub.docker.client.DockerClientManager
+import com.blackducksoftware.integration.hub.docker.client.ProgramPaths
 import com.blackducksoftware.integration.hub.docker.client.ProgramVersion
 import com.blackducksoftware.integration.hub.docker.image.DockerImages
 import com.blackducksoftware.integration.hub.docker.tar.manifest.ManifestLayerMapping
@@ -40,6 +41,10 @@ class ApplicationTest {
             getProgramVersion: { '1.2.3' }
         ] as ProgramVersion
         app.dockerImages.programVersion = mockedProgramVersion
+        ProgramPaths mockedProgramPaths = [
+            getHubDockerOutputJsonPath: TestUtils.createTempDirectory().getAbsolutePath()
+        ] as ProgramPaths
+        app.programPaths = mockedProgramPaths
 
 
         app.hubClient = [
@@ -47,7 +52,6 @@ class ApplicationTest {
             assertValid: {},
             testHubConnection: {},
             uploadBdioToHub: { File bdioFile ->
-
             }
         ] as HubClient
 
@@ -56,7 +60,9 @@ class ApplicationTest {
         layerTarFiles.add(tarFile)
 
         List<File> bdioFiles = new ArrayList<>()
-        File bdioFile = new File("src/test/resources/bdioFile.jsonld")
+        File bdioDir = TestUtils.createTempDirectory()
+        File bdioFile = new File(bdioDir, "test.jsonld")
+        bdioFile.createNewFile()
         bdioFiles.add(bdioFile)
 
         boolean uploadedBdioFiles = false
@@ -71,7 +77,7 @@ class ApplicationTest {
             generateBdioFromPackageMgrDirs: {null},
             deriveDockerTarFile: {null},
             getTarFileFromDockerImage: {String imageName, String tagName -> new File("src/test/resources/image.tar")},
-            extractDockerLayers: {List<File> layerTars, List<ManifestLayerMapping> layerMappings -> null},
+            extractDockerLayers: {List<File> layerTars, List<ManifestLayerMapping> layerMappings -> new File ("test")},
             detectOperatingSystem: {String operatingSystem, File extractedFilesDir -> targetOsEnum},
             detectCurrentOperatingSystem: {OperatingSystemEnum.UBUNTU},
             generateBdioFromImageFilesDir: {List<ManifestLayerMapping> mappings, String projectName, String versionName, File dockerTar, File imageFilesDir, OperatingSystemEnum osEnum -> bdioFiles},

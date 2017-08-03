@@ -52,7 +52,7 @@ public class ManifestLayerMapping {
     }
 
     public String getTargetImageFileSystemRoot() {
-        return String.format("image_%s_v_%s", imageName, tagName);
+        return String.format("image_%s_v_%s", imageName.replaceAll("/", "_"), tagName);
     }
 
     @Override

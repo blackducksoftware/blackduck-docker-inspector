@@ -91,6 +91,8 @@ class DockerTarParserTest {
     }
 
     void doLayerTest(String testFileDir) {
+        String underscoredImageName = IMAGE_NAME.replace('/', '_')
+        String targetImageFileSystemRootDirName = "image_${underscoredImageName}_v_${IMAGE_TAG}"
         File workingDirectory = TestUtils.createTempDirectory()
         File tarExtractionDirectory = new File(workingDirectory, DockerTarParser.TAR_EXTRACTION_DIRECTORY)
         File layerDir = new File(tarExtractionDirectory, "ubuntu_latest.tar/${LAYER_ID}")
@@ -111,10 +113,10 @@ class DockerTarParserTest {
         ManifestLayerMapping layerMapping = new ManifestLayerMapping(IMAGE_NAME, IMAGE_TAG, layerIds)
         layerMappings.add(layerMapping)
 
-        File results = tarParser.extractDockerLayers(layerTars, layerMappings)
-        assertEquals(tarExtractionDirectory.getAbsolutePath() + "/imageFiles", results.getAbsolutePath())
+        File targetImageFileSystemRootDir = tarParser.extractDockerLayers(layerTars, layerMappings)
+        assertEquals(tarExtractionDirectory.getAbsolutePath() + "/imageFiles/${targetImageFileSystemRootDirName}", targetImageFileSystemRootDir.getAbsolutePath())
 
-        File dpkgStatusFile = new File(workingDirectory.getAbsolutePath() + "/tarExtraction/imageFiles/image_${IMAGE_NAME}_v_${IMAGE_TAG}/var/lib/dpkg/status")
+        File dpkgStatusFile = new File(workingDirectory.getAbsolutePath() + "/tarExtraction/imageFiles/${targetImageFileSystemRootDirName}/var/lib/dpkg/status")
         assertTrue(dpkgStatusFile.exists())
 
         assertEquals(DPKG_STATUS_FILE_SIZE, dpkgStatusFile.size())

@@ -23,30 +23,32 @@
  */
 package com.blackducksoftware.integration.hub.docker.tar;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.lang3.builder.RecursiveToStringStyle;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum;
 
 public class ImageInfo {
-
+    private final String fileSystemRootDirName;
     private final OperatingSystemEnum operatingSystemEnum;
-    private final List<ImagePkgMgr> pkgMgrs;
+    private final ImagePkgMgr pkgMgr;
 
-    public ImageInfo(final OperatingSystemEnum operatingSystemEnum) {
+    public ImageInfo(final String fileSystemRootDirName, final OperatingSystemEnum operatingSystemEnum, final ImagePkgMgr pkgMgr) {
+        this.fileSystemRootDirName = fileSystemRootDirName;
         this.operatingSystemEnum = operatingSystemEnum;
-        this.pkgMgrs = new ArrayList<>();
+        this.pkgMgr = pkgMgr;
+    }
+
+    public String getFileSystemRootDirName() {
+        return fileSystemRootDirName;
     }
 
     public OperatingSystemEnum getOperatingSystemEnum() {
         return operatingSystemEnum;
     }
 
-    public List<ImagePkgMgr> getPkgMgrs() {
-        return pkgMgrs;
+    public ImagePkgMgr getPkgMgr() {
+        return pkgMgr;
     }
 
     @Override

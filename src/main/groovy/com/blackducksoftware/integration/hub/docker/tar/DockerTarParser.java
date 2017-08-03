@@ -65,22 +65,23 @@ public class DockerTarParser {
     public File extractDockerLayers(final List<File> layerTars, final List<ManifestLayerMapping> manifestLayerMappings) throws IOException {
         final File tarExtractionDirectory = getTarExtractionDirectory();
         final File targetImageFileSystemParentDir = new File(tarExtractionDirectory, TARGET_IMAGE_FILESYSTEM_PARENT_DIR);
+        File targetImageFileSystemRootDir = null;
         for (final ManifestLayerMapping manifestLayerMapping : manifestLayerMappings) {
             for (final String layer : manifestLayerMapping.getLayers()) {
                 logger.trace(String.format("Looking for tar for layer: %s", layer));
                 final File layerTar = getLayerTar(layerTars, layer);
                 if (layerTar != null) {
-                    extractLayerTarToDir(targetImageFileSystemParentDir, layerTar, manifestLayerMapping);
+                    targetImageFileSystemRootDir = extractLayerTarToDir(targetImageFileSystemParentDir, layerTar, manifestLayerMapping);
                 } else {
                     logger.error(String.format("Could not find the tar for layer %s", layer));
                 }
             }
         }
-        return targetImageFileSystemParentDir;
+        return targetImageFileSystemRootDir;
     }
 
-    public OperatingSystemEnum detectOperatingSystem(final String operatingSystem, final File extractedFilesDir) throws HubIntegrationException, IOException {
-        OperatingSystemEnum osEnum = deriveOsFromPkgMgr(extractedFilesDir);
+    public OperatingSystemEnum detectOperatingSystem(final String operatingSystem, final File targetImageFileSystemRootDir) throws HubIntegrationException, IOException {
+        OperatingSystemEnum osEnum = deriveOsFromPkgMgr(targetImageFileSystemRootDir);
         if (osEnum != null) {
             return osEnum;
         }
@@ -88,7 +89,7 @@ public class DockerTarParser {
             osEnum = OperatingSystemEnum.determineOperatingSystem(operatingSystem);
             return osEnum;
         }
-        osEnum = deriveOsFromEtcDir(extractedFilesDir);
+        osEnum = deriveOsFromEtcDir(targetImageFileSystemRootDir);
         if (osEnum == null) {
             final String msg = "Unable to identify the Linux distro of this image. You'll need to run with the --linux.distro option";
             throw new HubIntegrationException(msg);
@@ -96,23 +97,22 @@ public class DockerTarParser {
         return osEnum;
     }
 
-    public ImageInfo collectPkgMgrInfo(final File targetImageFileSystemParentDir, final OperatingSystemEnum osEnum) {
-        final ImageInfo imagePkgMgrInfo = new ImageInfo(osEnum);
-        // There will only be one targetImageFileSystem
-        for (final File targetImageFileSystem : targetImageFileSystemParentDir.listFiles()) {
-            logger.debug(String.format("Checking image file system at %s for package managers", targetImageFileSystem.getName()));
-            for (final PackageManagerEnum packageManagerEnum : PackageManagerEnum.values()) {
-                final File packageManagerDirectory = new File(targetImageFileSystem, packageManagerEnum.getDirectory());
-                if (packageManagerDirectory.exists()) {
-                    logger.info(String.format("Found package Manager Dir: %s", packageManagerDirectory.getAbsolutePath()));
-                    final ImagePkgMgr result = new ImagePkgMgr(targetImageFileSystem.getName(), packageManagerDirectory, packageManagerEnum);
-                    imagePkgMgrInfo.getPkgMgrs().add(result);
-                } else {
-                    logger.debug(String.format("Package manager dir %s does not exist", packageManagerDirectory.getAbsolutePath()));
-                }
+    public ImageInfo collectPkgMgrInfo(final File targetImageFileSystemRootDir, final OperatingSystemEnum osEnum) {
+        logger.debug(String.format("Checking image file system at %s for package managers", targetImageFileSystemRootDir.getName()));
+        for (final PackageManagerEnum packageManagerEnum : PackageManagerEnum.values()) {
+            final File packageManagerDirectory = new File(targetImageFileSystemRootDir, packageManagerEnum.getDirectory());
+            if (packageManagerDirectory.exists()) {
+                logger.info(String.format("Found package Manager Dir: %s", packageManagerDirectory.getAbsolutePath()));
+                final ImagePkgMgr targetImagePkgMgr = new ImagePkgMgr(packageManagerDirectory, packageManagerEnum);
+                final ImageInfo imagePkgMgrInfo = new ImageInfo(targetImageFileSystemRootDir.getName(), osEnum, targetImagePkgMgr);
+                return imagePkgMgrInfo;
+            } else {
+                logger.debug(String.format("Package manager dir %s does not exist", packageManagerDirectory.getAbsolutePath()));
             }
         }
-        return imagePkgMgrInfo;
+
+        logger.error("No package manager found");
+        return new ImageInfo(targetImageFileSystemRootDir.getName(), osEnum, null);
     }
 
     public List<File> extractLayerTars(final File dockerTar) throws IOException {
@@ -165,18 +165,19 @@ public class DockerTarParser {
         return tarExtractionDirectory;
     }
 
-    private void extractLayerTarToDir(final File imageFilesDir, final File layerTar, final ManifestLayerMapping mapping) throws IOException {
-        final File imageOutputDir = new File(imageFilesDir, mapping.getTargetImageFileSystemRoot());
+    private File extractLayerTarToDir(final File imageFilesDir, final File layerTar, final ManifestLayerMapping mapping) throws IOException {
         logger.trace(String.format("Extracting layer: %s into %s", layerTar.getAbsolutePath(), mapping.getTargetImageFileSystemRoot()));
+        final File targetImageFileSystemRoot = new File(imageFilesDir, mapping.getTargetImageFileSystemRoot());
         final DockerLayerTar dockerLayerTar = new DockerLayerTar(layerTar);
-        dockerLayerTar.extractToDir(imageOutputDir);
+        dockerLayerTar.extractToDir(targetImageFileSystemRoot);
+        return targetImageFileSystemRoot;
     }
 
     private File getLayerTar(final List<File> layerTars, final String layer) {
         File layerTar = null;
         for (final File candidateLayerTar : layerTars) {
             if (layer.equals(candidateLayerTar.getParentFile().getName())) {
-                logger.info(String.format("Found layer tar for layer %s", layer));
+                logger.debug(String.format("Found layer tar for layer %s", layer));
                 layerTar = candidateLayerTar;
                 break;
             }
@@ -184,10 +185,10 @@ public class DockerTarParser {
         return layerTar;
     }
 
-    private OperatingSystemEnum deriveOsFromEtcDir(final File extractedFilesDir) throws HubIntegrationException, IOException {
-        logger.trace(String.format("Image directory %s, looking for etc", extractedFilesDir.getName()));
+    private OperatingSystemEnum deriveOsFromEtcDir(final File targetImageFileSystemRootDir) throws HubIntegrationException, IOException {
+        logger.trace(String.format("Target file system root dir %s, looking for etc", targetImageFileSystemRootDir.getName()));
         OperatingSystemEnum osEnum = null;
-        final List<File> etcFiles = Dirs.findFileWithName(extractedFilesDir, "etc");
+        final List<File> etcFiles = Dirs.findFileWithName(targetImageFileSystemRootDir, "etc");
         if (etcFiles == null) {
             final String msg = "Unable to find the files that specify the Linux distro of this image.";
             throw new HubIntegrationException(msg);
@@ -206,10 +207,10 @@ public class DockerTarParser {
         return osEnum;
     }
 
-    private OperatingSystemEnum deriveOsFromPkgMgr(final File extractedFilesDir) {
+    private OperatingSystemEnum deriveOsFromPkgMgr(final File targetImageFileSystemRootDir) {
         OperatingSystemEnum osEnum = null;
 
-        final FileSys extractedFileSys = new FileSys(extractedFilesDir);
+        final FileSys extractedFileSys = new FileSys(targetImageFileSystemRootDir);
         final Set<PackageManagerEnum> packageManagers = extractedFileSys.getPackageManagers();
         if (packageManagers.size() == 1) {
             final PackageManagerEnum packageManager = packageManagers.iterator().next();

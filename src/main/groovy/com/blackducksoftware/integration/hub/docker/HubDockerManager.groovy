@@ -93,8 +93,8 @@ class HubDockerManager {
         tarParser.extractManifestFileContent(dockerTarName)
     }
 
-    OperatingSystemEnum detectOperatingSystem(String operatingSystem, File extractedFilesDir) {
-        tarParser.detectOperatingSystem(operatingSystem, extractedFilesDir)
+    OperatingSystemEnum detectOperatingSystem(String operatingSystem, File targetImageFileSystemRootDir) {
+        tarParser.detectOperatingSystem(operatingSystem, targetImageFileSystemRootDir)
     }
 
     OperatingSystemEnum detectCurrentOperatingSystem() {
@@ -106,14 +106,14 @@ class HubDockerManager {
         return tarParser.getLayerMappings(tarFileName, dockerImageName, dockerTagName)
     }
 
-    List<File> generateBdioFromImageFilesDir(List<ManifestLayerMapping> mappings, String projectName, String versionName, File dockerTar, File targetImageFileSystemParentDir, OperatingSystemEnum osEnum) {
-        ImageInfo imagePkgMgrInfo = tarParser.collectPkgMgrInfo(targetImageFileSystemParentDir, osEnum)
+    List<File> generateBdioFromImageFilesDir(List<ManifestLayerMapping> mappings, String projectName, String versionName, File dockerTar, File targetImageFileSystemRootDir, OperatingSystemEnum osEnum) {
+        ImageInfo imagePkgMgrInfo = tarParser.collectPkgMgrInfo(targetImageFileSystemRootDir, osEnum)
         if(imagePkgMgrInfo.operatingSystemEnum == null){
             throw new HubIntegrationException('Could not determine the Operating System of this Docker tar.')
         }
         String architecture = null
         if (osEnum == OperatingSystemEnum.ALPINE) {
-            List<File> etcDirectories = Dirs.findFileWithName(targetImageFileSystemParentDir, "etc")
+            List<File> etcDirectories = Dirs.findFileWithName(targetImageFileSystemRootDir, "etc")
             for (File etc : etcDirectories) {
                 File architectureFile = new File(etc, 'apk')
                 architectureFile = new File(architectureFile, 'arch')
@@ -145,7 +145,7 @@ class HubDockerManager {
             FileUtils.deleteDirectory(workingDirectory)
         }
     }
-
+    // TODO move this to a more logical place (like maybe Dir?)
     void copyFile(File fileToCopy, File destination) {
         String filename = fileToCopy.getName()
         logger.debug("Copying ${fileToCopy.getAbsolutePath()} to ${destination.getAbsolutePath()}")
@@ -156,42 +156,42 @@ class HubDockerManager {
     private List<File> generateBdioFromPackageMgrDirs(List<ManifestLayerMapping> layerMappings, String projectName, String versionName, String tarFileName, ImageInfo imageInfo, String architecture) {
         File workingDirectory = new File(programPaths.getHubDockerWorkingDirPath())
         def bdioFiles = []
-        imageInfo.pkgMgrs.each { extractionResult ->
-            ManifestLayerMapping manifestMapping = layerMappings.find { mapping ->
-                StringUtils.compare(mapping.getTargetImageFileSystemRoot(), extractionResult.extractedFileSystemRootDirName) == 0
-            }
-            String imageDirectoryName = manifestMapping.getTargetImageFileSystemRoot()
-            String filePath = extractionResult.extractedPackageManagerDirectory.getAbsolutePath()
-            filePath = filePath.substring(filePath.indexOf(imageDirectoryName) + 1)
-            filePath = filePath.substring(filePath.indexOf('/') + 1)
-            filePath = filePath.replaceAll('/', '_')
-            String cleanedImageName = manifestMapping.imageName.replaceAll('/', '_')
-            packageManagerFiles.stubPackageManagerFiles(extractionResult)
-            String codeLocationName, hubProjectName, hubVersionName = ''
-            codeLocationName = "${cleanedImageName}_${manifestMapping.tagName}_${filePath}_${extractionResult.packageManager}"
-            hubProjectName = deriveHubProject(cleanedImageName, projectName)
-            hubVersionName = deriveHubProjectVersion(manifestMapping, versionName)
 
-            logger.info("Hub project, version: ${hubProjectName}, ${hubVersionName}; Code location : ${codeLocationName}")
+        ManifestLayerMapping manifestMapping = layerMappings.find { mapping ->
+            StringUtils.compare(mapping.getTargetImageFileSystemRoot(), imageInfo.fileSystemRootDirName) == 0
+        }
+        String imageDirectoryName = manifestMapping.getTargetImageFileSystemRoot()
+        String filePath = imageInfo.pkgMgr.extractedPackageManagerDirectory.getAbsolutePath()
+        filePath = filePath.substring(filePath.indexOf(imageDirectoryName) + 1)
+        filePath = filePath.substring(filePath.indexOf('/') + 1)
+        filePath = filePath.replaceAll('/', '_')
+        String cleanedImageName = manifestMapping.imageName.replaceAll('/', '_')
+        packageManagerFiles.stubPackageManagerFiles(imageInfo.pkgMgr)
+        String codeLocationName, hubProjectName, hubVersionName = ''
+        codeLocationName = "${cleanedImageName}_${manifestMapping.tagName}_${filePath}_${imageInfo.pkgMgr.packageManager}"
+        hubProjectName = deriveHubProject(cleanedImageName, projectName)
+        hubVersionName = deriveHubProjectVersion(manifestMapping, versionName)
 
-            String cleanedHubProjectName = hubProjectName.replaceAll('/', '_')
-            String bdioFilename = "${cleanedImageName}_${filePath}_${cleanedHubProjectName}_${hubVersionName}_bdio.jsonld"
-            logger.debug("bdioFilename: ${bdioFilename}")
-            def outputFile = new File(workingDirectory, bdioFilename)
-            bdioFiles.add(outputFile)
-            new FileOutputStream(outputFile).withStream { outputStream ->
-                BdioWriter writer = new BdioWriter(new Gson(), outputStream)
-                try{
-                    Extractor extractor = getExtractorByPackageManager(extractionResult.packageManager)
-                    ExtractionDetails extractionDetails = new ExtractionDetails()
-                    extractionDetails.operatingSystem = imageInfo.operatingSystemEnum
-                    extractionDetails.architecture = architecture
-                    extractor.extract(writer, extractionDetails, codeLocationName, hubProjectName, hubVersionName)
-                }finally{
-                    writer.close()
-                }
+        logger.info("Hub project, version: ${hubProjectName}, ${hubVersionName}; Code location : ${codeLocationName}")
+
+        String cleanedHubProjectName = hubProjectName.replaceAll('/', '_')
+        String bdioFilename = "${cleanedImageName}_${filePath}_${cleanedHubProjectName}_${hubVersionName}_bdio.jsonld"
+        logger.debug("bdioFilename: ${bdioFilename}")
+        def outputFile = new File(workingDirectory, bdioFilename)
+        bdioFiles.add(outputFile)
+        new FileOutputStream(outputFile).withStream { outputStream ->
+            BdioWriter writer = new BdioWriter(new Gson(), outputStream)
+            try{
+                Extractor extractor = getExtractorByPackageManager(imageInfo.pkgMgr.packageManager)
+                ExtractionDetails extractionDetails = new ExtractionDetails()
+                extractionDetails.operatingSystem = imageInfo.operatingSystemEnum
+                extractionDetails.architecture = architecture
+                extractor.extract(writer, extractionDetails, codeLocationName, hubProjectName, hubVersionName)
+            }finally{
+                writer.close()
             }
         }
+
         bdioFiles
     }
 

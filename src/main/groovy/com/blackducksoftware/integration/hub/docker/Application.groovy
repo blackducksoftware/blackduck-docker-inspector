@@ -100,13 +100,13 @@ class Application {
 
             List<File> layerTars = hubDockerManager.extractLayerTars(dockerTarFile)
             List<ManifestLayerMapping> layerMappings = hubDockerManager.getLayerMappings(dockerTarFile.getName(), dockerImageName, dockerTagName)
-            File targetImageFileSystemParentDir = hubDockerManager.extractDockerLayers(layerTars, layerMappings)
+            File targetImageFileSystemRootDir = hubDockerManager.extractDockerLayers(layerTars, layerMappings)
 
-            OperatingSystemEnum targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro, targetImageFileSystemParentDir)
+            OperatingSystemEnum targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro, targetImageFileSystemRootDir)
             OperatingSystemEnum requiredOsEnum = dockerImages.getDockerImageOs(targetOsEnum)
             OperatingSystemEnum currentOsEnum = hubDockerManager.detectCurrentOperatingSystem()
             if (currentOsEnum == requiredOsEnum) {
-                generateBdio(dockerTarFile, targetImageFileSystemParentDir, layerMappings, currentOsEnum, targetOsEnum)
+                generateBdio(dockerTarFile, targetImageFileSystemRootDir, layerMappings, currentOsEnum, targetOsEnum)
             } else {
                 runInSubContainer(dockerTarFile, currentOsEnum, targetOsEnum)
             }
@@ -134,11 +134,11 @@ class Application {
         dockerClientManager.run(runOnImageName, runOnImageVersion, dockerTarFile, devMode)
     }
 
-    private generateBdio(File dockerTarFile, File targetImageFileSystemParentDir, List layerMappings, OperatingSystemEnum currentOsEnum, OperatingSystemEnum targetOsEnum) {
+    private generateBdio(File dockerTarFile, File targetImageFileSystemRootDir, List layerMappings, OperatingSystemEnum currentOsEnum, OperatingSystemEnum targetOsEnum) {
         String msg = sprintf("Image inspection for %s can be run in this %s docker container; tarfile: %s",
                 targetOsEnum.toString(), currentOsEnum.toString(), dockerTarFile.getAbsolutePath())
         logger.info(msg)
-        List<File> bdioFiles = hubDockerManager.generateBdioFromImageFilesDir(layerMappings, hubProjectName, hubVersionName, dockerTarFile, targetImageFileSystemParentDir, targetOsEnum)
+        List<File> bdioFiles = hubDockerManager.generateBdioFromImageFilesDir(layerMappings, hubProjectName, hubVersionName, dockerTarFile, targetImageFileSystemRootDir, targetOsEnum)
         if (bdioFiles.size() == 0) {
             logger.warn("No BDIO Files generated")
         } else {
