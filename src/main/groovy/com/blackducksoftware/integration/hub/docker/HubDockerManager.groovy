@@ -158,12 +158,12 @@ class HubDockerManager {
         def bdioFiles = []
 
         ManifestLayerMapping manifestMapping = layerMappings.find { mapping ->
-            StringUtils.compare(mapping.getTargetImageFileSystemRoot(), imageInfo.fileSystemRootDirName) == 0
+            StringUtils.compare(mapping.getTargetImageFileSystemRootDirName(), imageInfo.fileSystemRootDirName) == 0
         }
 
         packageManagerFiles.stubPackageManagerFiles(imageInfo.pkgMgr)
         String codeLocationName, hubProjectName, hubVersionName = ''
-        String imageDirectoryName = manifestMapping.getTargetImageFileSystemRoot()
+        String imageDirectoryName = manifestMapping.getTargetImageFileSystemRootDirName()
         String pkgMgrFilePath = imageInfo.pkgMgr.extractedPackageManagerDirectory.getAbsolutePath()
         pkgMgrFilePath = pkgMgrFilePath.substring(pkgMgrFilePath.indexOf(imageDirectoryName) + 1)
         pkgMgrFilePath = pkgMgrFilePath.substring(pkgMgrFilePath.indexOf('/') + 1)

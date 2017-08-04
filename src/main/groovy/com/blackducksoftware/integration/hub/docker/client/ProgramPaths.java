@@ -120,7 +120,7 @@ public class ProgramPaths {
     }
 
     public String getTargetImageFileSystemRootDirName(final String imageName, final String imageTag) {
-        return null; // TODO
+        return String.format("image_%s_v_%s", imageName.replaceAll("/", "_"), imageTag);
     }
 
     public String getCodeLocationName(final String imageName, final String imageTag, final String pkgMgrFilePath, final String pkgMgrName) {

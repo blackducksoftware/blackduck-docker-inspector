@@ -12,6 +12,7 @@ import org.apache.commons.lang3.builder.RecursiveToStringStyle;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.google.gson.Gson;
@@ -25,6 +26,9 @@ public class Manifest {
     private final String dockerTagName;
     private final File tarExtractionDirectory;
     private final String dockerTarFileName;
+
+    @Autowired
+    ManifestLayerMappingFactory manifestLayerMappingFactory;
 
     public Manifest(final String dockerImageName, final String dockerTagName, final File tarExtractionDirectory, final String dockerTarFileName) {
         this.dockerImageName = dockerImageName;
@@ -76,7 +80,7 @@ public class Manifest {
             for (final String layer : image.layers) {
                 layerIds.add(layer.substring(0, layer.indexOf('/')));
             }
-            final ManifestLayerMapping mapping = new ManifestLayerMapping(imageName.replaceAll(":", "_").replaceAll("/", "_"), tagName, layerIds);
+            final ManifestLayerMapping mapping = manifestLayerMappingFactory.createManifestLayerMapping(imageName.replaceAll(":", "_").replaceAll("/", "_"), tagName, layerIds);
             if (StringUtils.isNotBlank(dockerImageName)) {
                 if (StringUtils.compare(imageName, dockerImageName) == 0 && StringUtils.compare(tagName, dockerTagName) == 0) {
                     logger.debug("Adding layer mapping");

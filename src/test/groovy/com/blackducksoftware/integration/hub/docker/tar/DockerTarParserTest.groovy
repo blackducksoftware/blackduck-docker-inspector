@@ -24,6 +24,8 @@ import org.junit.Test
 
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.TestUtils
+import com.blackducksoftware.integration.hub.docker.client.ProgramPaths
+import com.blackducksoftware.integration.hub.docker.tar.manifest.HardwiredManifestFactory
 import com.blackducksoftware.integration.hub.docker.tar.manifest.ManifestLayerMapping
 
 import groovy.io.FileType
@@ -45,6 +47,7 @@ class DockerTarParserTest {
 
         DockerTarParser tarParser = new DockerTarParser()
         tarParser.workingDirectory = workingDirectory
+        tarParser.manifestFactory = new HardwiredManifestFactory()
 
         List<File> layerTars = tarParser.extractLayerTars(dockerTar)
         List<ManifestLayerMapping> layerMappings = tarParser.getLayerMappings(dockerTar.getName(), IMAGE_NAME, IMAGE_TAG)
@@ -106,11 +109,13 @@ class DockerTarParserTest {
 
         DockerTarParser tarParser = new DockerTarParser()
         tarParser.workingDirectory = workingDirectory
+        tarParser.manifestFactory = new HardwiredManifestFactory()
 
         List<ManifestLayerMapping> layerMappings = new ArrayList<>()
         List<String> layerIds = new ArrayList<>()
         layerIds.add(LAYER_ID)
         ManifestLayerMapping layerMapping = new ManifestLayerMapping(IMAGE_NAME, IMAGE_TAG, layerIds)
+        layerMapping.programPaths = new ProgramPaths()
         layerMappings.add(layerMapping)
 
         File targetImageFileSystemRootDir = tarParser.extractDockerLayers(layerTars, layerMappings)

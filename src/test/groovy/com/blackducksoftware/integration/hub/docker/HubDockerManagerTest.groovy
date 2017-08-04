@@ -98,6 +98,7 @@ class HubDockerManagerTest {
         List<String> layerIds = new ArrayList<>()
         layerIds.add("testLayerId")
         ManifestLayerMapping mapping = new ManifestLayerMapping(imageName, tagName, layerIds)
+        mapping.programPaths = new ProgramPaths()
         mappings.add(mapping)
         File imageFilesDir
         List<File> bdioFiles = mgr.generateBdioFromImageFilesDir(mappings, "testProjectName", "testProjectVersion", imageTarFile, imageFilesDir, os)
