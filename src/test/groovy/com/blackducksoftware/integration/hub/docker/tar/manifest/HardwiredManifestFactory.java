@@ -7,7 +7,7 @@ public class HardwiredManifestFactory implements ManifestFactory {
     @Override
     public Manifest createManifest(final String dockerImageName, final String dockerTagName, final File tarExtractionDirectory, final String dockerTarFileName) {
         final Manifest manifest = new Manifest(dockerImageName, dockerTagName, tarExtractionDirectory, dockerTarFileName);
-        manifest.manifestLayerMappingFactory = new HardwiredManifestLayerMappingFactory();
+        manifest.setManifestLayerMappingFactory(new HardwiredManifestLayerMappingFactory());
         return manifest;
     }
 

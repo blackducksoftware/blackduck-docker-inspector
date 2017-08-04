@@ -124,7 +124,7 @@ public class ProgramPaths {
     }
 
     public String getCodeLocationName(final String imageName, final String imageTag, final String pkgMgrFilePath, final String pkgMgrName) {
-        return String.format("%s_%s_%s", cleanSlashedString(imageName), imageTag, cleanSlashedString(pkgMgrFilePath), pkgMgrName);
+        return String.format("%s_%s_%s", slashesToUnderscore(imageName), imageTag, slashesToUnderscore(pkgMgrFilePath), pkgMgrName);
     }
 
     public String getBdioFilename(final String imageName, final String pkgMgrFilePath, final String hubProjectName, final String hubVersionName) {
@@ -132,18 +132,22 @@ public class ProgramPaths {
     }
 
     public String cleanHubProjectName(final String hubProjectName) {
-        return cleanSlashedString(hubProjectName);
+        return slashesToUnderscore(hubProjectName);
     }
 
     public String cleanImageName(final String imageName) {
-        return cleanSlashedString(imageName);
+        return colonsToUnderscores(slashesToUnderscore(imageName));
     }
 
     public String cleanPath(final String path) {
-        return cleanSlashedString(path);
+        return slashesToUnderscore(path);
     }
 
-    private String cleanSlashedString(final String imageName) {
+    private String slashesToUnderscore(final String imageName) {
         return imageName.replaceAll("/", "_");
+    }
+
+    private String colonsToUnderscores(final String imageName) {
+        return imageName.replaceAll(":", "_");
     }
 }
