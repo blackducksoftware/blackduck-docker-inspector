@@ -10,7 +10,7 @@ import com.blackducksoftware.integration.hub.docker.client.ProgramPaths;
 public class AutowiredManifestLayerMappingFactory implements ManifestLayerMappingFactory {
 
     public AutowiredManifestLayerMappingFactory() {
-        System.out.println("AutowiredManifestLayerMappingFactory()");
+        // TODO remove this comment
     }
 
     @Override
