@@ -208,6 +208,7 @@ task buildTestDockerImage(type: Exec, dependsOn: [createTestDockerfile]) {
 }
 
 task buildTestDockerTarfile(type: Exec, dependsOn: buildTestDockerImage) {
+    outputs.files file("${buildDir}/images/test/centos_minus_vim_plus_bacula.tar")
 	commandLine "docker", "save", "-o", "${buildDir}/images/test/centos_minus_vim_plus_bacula.tar", "blackducksoftware/centos_minus_vim_plus_bacula:1.0"
 }
 
