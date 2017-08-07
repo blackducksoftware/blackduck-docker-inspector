@@ -149,7 +149,7 @@ class Application {
             }
             File outputDir = new File(programPaths.getHubDockerOutputJsonPath())
             for (File bdioFile : bdioFiles) {
-                logger.info("BDIO file: bdioFile.getName()")
+                logger.info("BDIO file: ${bdioFile.getName()}")
                 hubDockerManager.copyFile(bdioFile, outputDir)
             }
         }

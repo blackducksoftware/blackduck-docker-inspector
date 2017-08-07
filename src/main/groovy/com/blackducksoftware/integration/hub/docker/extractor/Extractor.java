@@ -23,6 +23,7 @@
  */
 package com.blackducksoftware.integration.hub.docker.extractor;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +39,7 @@ import com.blackducksoftware.integration.hub.bdio.simple.model.BdioExternalIdent
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioProject;
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum;
 import com.blackducksoftware.integration.hub.docker.executor.Executor;
+import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 
 public abstract class Extractor {
     private final Logger logger = LoggerFactory.getLogger(Extractor.class);
@@ -62,7 +64,7 @@ public abstract class Extractor {
         return packageManagerEnum;
     }
 
-    void extract(final BdioWriter bdioWriter, final ExtractionDetails extractionDetails, final String codeLocationName, final String projectName, final String version) {
+    void extract(final BdioWriter bdioWriter, final ExtractionDetails extractionDetails, final String codeLocationName, final String projectName, final String version) throws HubIntegrationException, IOException, InterruptedException {
         final BdioBillOfMaterials bom = bdioNodeFactory.createBillOfMaterials(codeLocationName, projectName, version);
         bdioWriter.writeBdioNode(bom);
         final String externalId = getExternalId(projectName, version);
