@@ -35,7 +35,6 @@ class DpkgExtractorTest {
 
         DpkgExtractor extractor = new DpkgExtractor()
         ExecutorMock executor = new ExecutorMock(resourceFile)
-        extractor.executor = executor
         def forges = [
             OperatingSystemEnum.UBUNTU.forge
         ]
@@ -48,9 +47,7 @@ class DpkgExtractorTest {
         }
         outputFile.getParentFile().mkdirs()
         BdioWriter writer = new BdioWriter(new Gson(), new FileWriter(outputFile))
-        ExtractionDetails extractionDetails = new ExtractionDetails()
-        extractionDetails.operatingSystem = OperatingSystemEnum.UBUNTU
-        extractionDetails.architecture = 'x86'
+        ExtractionDetails extractionDetails = new ExtractionDetails(OperatingSystemEnum.UBUNTU, 'x86')
         extractor.extract(writer, extractionDetails, "CodeLocationName", "Test", "1")
         writer.close()
 

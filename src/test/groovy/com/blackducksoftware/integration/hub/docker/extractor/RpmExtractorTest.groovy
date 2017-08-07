@@ -35,7 +35,6 @@ class RpmExtractorTest {
 
         RpmExtractor extractor = new RpmExtractor()
         ExecutorMock executor = new ExecutorMock(resourceFile)
-        extractor.executor = executor
         def forges = [
             OperatingSystemEnum.CENTOS.forge
         ]
@@ -48,9 +47,7 @@ class RpmExtractorTest {
         }
         outputFile.getParentFile().mkdirs()
         BdioWriter writer = new BdioWriter(new Gson(), new FileWriter(outputFile))
-        ExtractionDetails extractionDetails = new ExtractionDetails()
-        extractionDetails.operatingSystem = OperatingSystemEnum.CENTOS
-        extractionDetails.architecture = 'x86'
+        ExtractionDetails extractionDetails = new ExtractionDetails(OperatingSystemEnum.CENTOS, 'x86')
         extractor.extract(writer, extractionDetails, "CodeLocationName", "Test", "1")
         writer.close()
 

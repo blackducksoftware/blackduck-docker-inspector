@@ -36,7 +36,6 @@ class ApkExtractorTest {
 
         ApkExtractor extractor = new ApkExtractor()
         ExecutorMock executor = new ExecutorMock(resourceFile)
-        extractor.executor = executor
         def forges = [
             OperatingSystemEnum.ALPINE.forge
         ]
@@ -49,9 +48,7 @@ class ApkExtractorTest {
         }
         outputFile.getParentFile().mkdirs()
         BdioWriter writer = new BdioWriter(new Gson(), new FileWriter(outputFile))
-        ExtractionDetails extractionDetails = new ExtractionDetails()
-        extractionDetails.operatingSystem = OperatingSystemEnum.ALPINE
-        extractionDetails.architecture = 'x86'
+        ExtractionDetails extractionDetails = new ExtractionDetails(OperatingSystemEnum.ALPINE, 'x86')
         extractor.extract(writer, extractionDetails, "CodeLocationName", "Test", "1")
         writer.close()
 

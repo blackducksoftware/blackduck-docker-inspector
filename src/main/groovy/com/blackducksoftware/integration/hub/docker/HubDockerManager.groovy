@@ -179,9 +179,7 @@ class HubDockerManager {
             BdioWriter writer = new BdioWriter(new Gson(), outputStream)
             try{
                 Extractor extractor = getExtractorByPackageManager(imageInfo.pkgMgr.packageManager)
-                ExtractionDetails extractionDetails = new ExtractionDetails()
-                extractionDetails.operatingSystem = imageInfo.operatingSystemEnum
-                extractionDetails.architecture = architecture
+                ExtractionDetails extractionDetails = new ExtractionDetails(imageInfo.operatingSystemEnum, architecture)
                 extractor.extract(writer, extractionDetails, codeLocationName, hubProjectName, hubVersionName)
             }finally{
                 writer.close()
@@ -214,7 +212,7 @@ class HubDockerManager {
     }
     private Extractor getExtractorByPackageManager(PackageManagerEnum packageManagerEnum){
         extractors.find { currentExtractor ->
-            currentExtractor.packageManagerEnum == packageManagerEnum
+            currentExtractor.getPackageManagerEnum() == packageManagerEnum
         }
     }
 }
