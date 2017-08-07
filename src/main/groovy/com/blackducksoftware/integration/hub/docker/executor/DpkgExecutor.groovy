@@ -34,6 +34,6 @@ import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 class DpkgExecutor extends Executor {
     @PostConstruct
     void init() {
-        initValues(PackageManagerEnum.DPKG, null, 'dpkg -l')
+        initValues(PackageManagerEnum.DPKG, null, 'dpkg -l', 5)
     }
 }

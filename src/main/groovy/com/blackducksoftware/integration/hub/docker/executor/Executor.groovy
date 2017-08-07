@@ -38,16 +38,18 @@ abstract class Executor {
     PackageManagerEnum packageManagerEnum
     String upgradeCommand
     String listPackagesCommand
+    int sampleSize // list pkgs this # times, use mode to pick the winner
 
     @Value('${command.timeout}')
     long commandTimeout
 
     abstract void init()
 
-    void initValues(PackageManagerEnum packageManagerEnum, String upgradeCommand, String listPackagesCommand) {
+    void initValues(PackageManagerEnum packageManagerEnum, String upgradeCommand, String listPackagesCommand, int sampleSize) {
         this.packageManagerEnum = packageManagerEnum
         this.upgradeCommand = upgradeCommand
         this.listPackagesCommand = listPackagesCommand
+        this.sampleSize = sampleSize
     }
 
     String[] listPackages() {
@@ -86,4 +88,9 @@ abstract class Executor {
         logger.trace(output)
         output.split(System.lineSeparator())
     }
+
+    public int getSampleSize() {
+        return sampleSize;
+    }
+
 }

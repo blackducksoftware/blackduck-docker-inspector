@@ -34,6 +34,6 @@ import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 class ApkExecutor extends Executor {
     @PostConstruct
     void init() {
-        initValues(PackageManagerEnum.APK, null, 'apk info -v')
+        initValues(PackageManagerEnum.APK, null, 'apk info -v', 1)
     }
 }

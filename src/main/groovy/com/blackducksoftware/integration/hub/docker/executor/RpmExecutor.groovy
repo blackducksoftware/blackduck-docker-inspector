@@ -34,6 +34,6 @@ import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 class RpmExecutor extends Executor {
     @PostConstruct
     public void init() {
-        initValues(PackageManagerEnum.RPM, 'rpm --rebuilddb', 'rpm -qa')
+        initValues(PackageManagerEnum.RPM, 'rpm --rebuilddb', 'rpm -qa', 1)
     }
 }
