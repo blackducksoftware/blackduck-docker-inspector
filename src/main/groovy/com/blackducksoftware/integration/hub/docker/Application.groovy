@@ -40,7 +40,6 @@ import com.blackducksoftware.integration.hub.docker.client.ProgramPaths
 import com.blackducksoftware.integration.hub.docker.client.ProgramVersion
 import com.blackducksoftware.integration.hub.docker.image.DockerImages
 import com.blackducksoftware.integration.hub.docker.tar.manifest.ManifestLayerMapping
-import com.blackducksoftware.integration.hub.exception.HubIntegrationException
 
 @SpringBootApplication
 class Application {
@@ -142,17 +141,17 @@ class Application {
         if (bdioFiles.size() == 0) {
             logger.warn("No BDIO Files generated")
         } else {
-            if (bdioFiles.size() > 1) {
-                throw new HubIntegrationException(String.format("Number of BDIO files (%d) is greater than one", bdioFiles.size()))
-            }
             if (dryRun) {
                 logger.info("Running in dry run mode; not uploading BDIO to Hub")
             } else {
-                logger.debug("Uploading BDIO to Hub")
+                logger.info("Uploading BDIO to Hub")
                 hubDockerManager.uploadBdioFiles(bdioFiles)
             }
             File outputDir = new File(programPaths.getHubDockerOutputJsonPath())
-            hubDockerManager.copyFile(bdioFiles.get(0), outputDir)
+            for (File bdioFile : bdioFiles) {
+                logger.info("BDIO file: bdioFile.getName()")
+                hubDockerManager.copyFile(bdioFile, outputDir)
+            }
         }
     }
 
