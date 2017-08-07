@@ -74,7 +74,7 @@ class EndToEndTest {
     }
 
     private void test(String imageUnderscored, String pkgMgrPathString, String tag, String inspectTarget) {
-        File expectedBdio = new File("src/test/resources/bdio/${imageUnderscored}_${pkgMgrPathString}_${imageUnderscored}_${tag}_bdio.jsonld")
+        File expectedBdio = new File("src/integration-test/resources/bdio/${imageUnderscored}_${pkgMgrPathString}_${imageUnderscored}_${tag}_bdio.jsonld")
         assertTrue(expectedBdio.exists())
         File actualBdio = new File("test/output/${imageUnderscored}_${pkgMgrPathString}_${imageUnderscored}_${tag}_bdio.jsonld")
         Files.deleteIfExists(actualBdio.toPath())
