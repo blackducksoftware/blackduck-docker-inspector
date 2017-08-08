@@ -20,7 +20,8 @@ import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 import com.blackducksoftware.integration.hub.docker.TestUtils
-import com.blackducksoftware.integration.hub.docker.mock.ExecutorMock
+import com.blackducksoftware.integration.hub.docker.executor.ExecutorMock
+import com.blackducksoftware.integration.hub.docker.tar.ImagePkgMgr
 import com.google.gson.Gson
 
 class ApkExtractorTest {
@@ -49,7 +50,8 @@ class ApkExtractorTest {
         outputFile.getParentFile().mkdirs()
         BdioWriter writer = new BdioWriter(new Gson(), new FileWriter(outputFile))
         ExtractionDetails extractionDetails = new ExtractionDetails(OperatingSystemEnum.ALPINE, 'x86')
-        extractor.extract(writer, extractionDetails, "CodeLocationName", "Test", "1")
+        final ImagePkgMgr imagePkgMgr = new ImagePkgMgr(new File("nonexistentdir"), PackageManagerEnum.APK)
+        extractor.extract(imagePkgMgr, writer, extractionDetails, "CodeLocationName", "Test", "1")
         writer.close()
 
         File file1 = new File("src/test/resources/testApkBdio1.jsonld");

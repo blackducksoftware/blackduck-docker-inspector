@@ -25,32 +25,37 @@ package com.blackducksoftware.integration.hub.docker
 
 
 import org.apache.commons.io.FileUtils
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 
+import com.blackducksoftware.integration.hub.docker.extractor.Extractor
 import com.blackducksoftware.integration.hub.docker.tar.ImagePkgMgr
 
 @Component
 class PackageManagerFiles {
-    public void stubPackageManagerFiles(ImagePkgMgr result){
-        File packageManagerDirectory = new File(result.packageManager.directory)
-        if(packageManagerDirectory.exists()){
+    private final Logger logger = LoggerFactory.getLogger(Extractor.class);
+    public void stubPackageManagerFiles(ImagePkgMgr imagePkgMgr) {
+        File packageManagerDirectory = new File(imagePkgMgr.packageManager.directory)
+        if (packageManagerDirectory.exists()) {
             deleteFilesOnly(packageManagerDirectory)
-            if(result.packageManager == PackageManagerEnum.DPKG){
+            if (imagePkgMgr.packageManager == PackageManagerEnum.DPKG) {
                 File statusFile = new File(packageManagerDirectory, 'status')
                 statusFile.createNewFile()
                 File updatesDir = new File(packageManagerDirectory, 'updates')
                 updatesDir.mkdir()
             }
         }
-        FileUtils.copyDirectory(result.extractedPackageManagerDirectory, packageManagerDirectory)
+        logger.info(String.format("*** Copying %s to %s", imagePkgMgr.extractedPackageManagerDirectory.getAbsolutePath(), packageManagerDirectory.getAbsolutePath()))
+        FileUtils.copyDirectory(imagePkgMgr.extractedPackageManagerDirectory, packageManagerDirectory)
     }
 
-    private void deleteFilesOnly(File file){
-        if (file.isDirectory()){
+    private void deleteFilesOnly(File file) {
+        if (file.isDirectory()) {
             for (File subFile: file.listFiles()) {
                 deleteFilesOnly(subFile)
             }
-        } else{
+        } else {
             file.delete()
         }
     }

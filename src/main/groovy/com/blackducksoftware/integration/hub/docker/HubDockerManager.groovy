@@ -161,7 +161,6 @@ class HubDockerManager {
             StringUtils.compare(mapping.getTargetImageFileSystemRootDirName(), imageInfo.fileSystemRootDirName) == 0
         }
 
-        packageManagerFiles.stubPackageManagerFiles(imageInfo.pkgMgr)
         String codeLocationName, hubProjectName, hubVersionName = ''
         String imageDirectoryName = manifestMapping.getTargetImageFileSystemRootDirName()
         String pkgMgrFilePath = imageInfo.pkgMgr.extractedPackageManagerDirectory.getAbsolutePath()
@@ -180,7 +179,7 @@ class HubDockerManager {
             try{
                 Extractor extractor = getExtractorByPackageManager(imageInfo.pkgMgr.packageManager)
                 ExtractionDetails extractionDetails = new ExtractionDetails(imageInfo.operatingSystemEnum, architecture)
-                extractor.extract(writer, extractionDetails, codeLocationName, hubProjectName, hubVersionName)
+                extractor.extract(imageInfo.pkgMgr, writer, extractionDetails, codeLocationName, hubProjectName, hubVersionName)
             }finally{
                 writer.close()
             }

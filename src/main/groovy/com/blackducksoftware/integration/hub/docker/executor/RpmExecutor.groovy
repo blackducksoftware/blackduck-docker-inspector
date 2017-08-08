@@ -28,12 +28,10 @@ import javax.annotation.PostConstruct
 
 import org.springframework.stereotype.Component
 
-import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
-
 @Component
 class RpmExecutor extends Executor {
     @PostConstruct
     public void init() {
-        initValues(PackageManagerEnum.RPM, 'rpm --rebuilddb', 'rpm -qa', 1)
+        initValues('rpm --rebuilddb', 'rpm -qa', 1)
     }
 }

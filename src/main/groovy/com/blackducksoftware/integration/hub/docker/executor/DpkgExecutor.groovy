@@ -28,12 +28,10 @@ import javax.annotation.PostConstruct
 
 import org.springframework.stereotype.Component
 
-import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
-
 @Component
 class DpkgExecutor extends Executor {
     @PostConstruct
     void init() {
-        initValues(PackageManagerEnum.DPKG, null, 'dpkg -l', 5)
+        initValues(null, 'dpkg -l', 4)
     }
 }

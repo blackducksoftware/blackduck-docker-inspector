@@ -35,7 +35,8 @@ class HubDockerManagerTest {
     public void testDpkg() {
         String[] packages = new File("src/test/resources/ubuntu_dpkg_output_1.txt")
         Executor executor = [
-            listPackages: {-> packages}
+            listPackages: {-> packages},
+            runPackageManager: {ImagePkgMgr imagePkgMgr-> packages}
         ] as DpkgExecutor
         doTest("ubuntu", "1.0", OperatingSystemEnum.UBUNTU, PackageManagerEnum.DPKG, new DpkgExtractor(), executor)
     }
@@ -44,13 +45,16 @@ class HubDockerManagerTest {
     public void testApk() {
         String[] packages = new File("src/test/resources/alpine_apk_output_1.txt")
         Executor executor = [
-            listPackages: {-> packages}
+            listPackages: {-> packages},
+            runPackageManager: {ImagePkgMgr imagePkgMgr-> packages}
         ] as ApkExecutor
         doTest("alpine", "1.0", OperatingSystemEnum.ALPINE, PackageManagerEnum.APK, new ApkExtractor(), executor)
     }
 
     private void doTest(String imageName, String tagName, OperatingSystemEnum os, PackageManagerEnum pkgMgr, Extractor extractor, Executor executor) {
         File imageTarFile = new File("test/image.tar")
+        ImagePkgMgr imagePkgMgr = new ImagePkgMgr(new File("test/resources/imageDir/image_${imageName}_v_${tagName}/${pkgMgr.directory.replaceAll('/', '_')}"), pkgMgr)
+        ImageInfo imageInfo = new ImageInfo("image_${imageName}_v_${tagName}", os, imagePkgMgr)
 
         List<Extractor> extractors = new ArrayList<>()
         extractor.executor = executor
@@ -60,7 +64,7 @@ class HubDockerManagerTest {
 
         HubDockerManager mgr = new HubDockerManager()
         mgr.packageManagerFiles = [
-            stubPackageManagerFiles: {ImagePkgMgr imagePkgMgr -> println "stubPackageManagerFiles() mocked"}
+            stubPackageManagerFiles: {ImagePkgMgr m -> println "stubPackageManagerFiles() mocked"}
         ] as PackageManagerFiles
         mgr.programPaths = [
             getHubDockerWorkingDirPath: {
@@ -74,8 +78,7 @@ class HubDockerManagerTest {
         ] as DockerClientManager
         mgr.extractors = extractors
 
-        ImagePkgMgr imagePkgMgr = new ImagePkgMgr(new File("test/resources/imageDir/image_${imageName}_v_${tagName}/${pkgMgr.directory.replaceAll('/', '_')}"), pkgMgr)
-        ImageInfo imageInfo = new ImageInfo("image_${imageName}_v_${tagName}", os, imagePkgMgr)
+
 
         List<File> etcDirs = new ArrayList<>()
         File etcDir = TestUtils.createTempDirectory()
@@ -100,7 +103,7 @@ class HubDockerManagerTest {
         ManifestLayerMapping mapping = new ManifestLayerMapping(imageName, tagName, layerIds)
         mapping.programPaths = new ProgramPaths()
         mappings.add(mapping)
-        File imageFilesDir
+        File imageFilesDir = new File("src/test/resources/imageDir")
         List<File> bdioFiles = mgr.generateBdioFromImageFilesDir(mappings, "testProjectName", "testProjectVersion", imageTarFile, imageFilesDir, os)
         for (File bdioFile : bdioFiles) {
             println "${bdioFile.getAbsolutePath()}"

@@ -9,10 +9,11 @@
  * accordance with the terms of the license agreement you entered into
  * with Black Duck Software.
  */
-package com.blackducksoftware.integration.hub.docker.mock
+package com.blackducksoftware.integration.hub.docker.executor
 
 
-import com.blackducksoftware.integration.hub.docker.executor.Executor
+import com.blackducksoftware.integration.hub.docker.tar.ImagePkgMgr
+import com.blackducksoftware.integration.hub.exception.HubIntegrationException
 
 class ExecutorMock extends Executor {
 
@@ -20,6 +21,11 @@ class ExecutorMock extends Executor {
 
     ExecutorMock(File resourceFile){
         this.resourceFile = resourceFile
+    }
+
+    public String[] runPackageManager(final ImagePkgMgr imagePkgMgr) throws HubIntegrationException, IOException, InterruptedException {
+        final String[] packages = listPackages();
+        return packages;
     }
 
     String[] listPackages(){
