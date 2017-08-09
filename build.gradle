@@ -366,7 +366,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.blackducksoftware.integration:hub-common:13.1.0'
+    compile 'com.blackducksoftware.integration:hub-common:13.2.2'
     
     compile 'com.github.docker-java:docker-java:3.0.8'
     compile 'org.apache.commons:commons-lang3:3.5'
