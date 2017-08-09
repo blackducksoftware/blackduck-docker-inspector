@@ -32,6 +32,6 @@ import org.springframework.stereotype.Component
 class RpmExecutor extends Executor {
     @PostConstruct
     public void init() {
-        initValues('rpm --rebuilddb', 'rpm -qa', 1)
+        initValues('rpm --rebuilddb', 'rpm -qa')
     }
 }

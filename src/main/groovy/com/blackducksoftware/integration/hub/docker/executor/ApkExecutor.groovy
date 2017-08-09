@@ -32,6 +32,6 @@ import org.springframework.stereotype.Component
 class ApkExecutor extends Executor {
     @PostConstruct
     void init() {
-        initValues(null, 'apk info -v', 1)
+        initValues(null, 'apk info -v')
     }
 }

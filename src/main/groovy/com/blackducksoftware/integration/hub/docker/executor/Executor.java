@@ -28,13 +28,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.collections4.SortedBag;
-import org.apache.commons.collections4.bag.TreeBag;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -49,40 +45,23 @@ public abstract class Executor {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private String upgradeCommand;
     private String listPackagesCommand;
-    private int sampleSize; // list pkgs this # times, use mode to pick the winner
 
     @Value("${command.timeout}")
     long commandTimeout;
 
     abstract void init();
 
-    void initValues(final String upgradeCommand, final String listPackagesCommand, final int sampleSize) {
+    void initValues(final String upgradeCommand, final String listPackagesCommand) {
         this.upgradeCommand = upgradeCommand;
         this.listPackagesCommand = listPackagesCommand;
-        this.sampleSize = sampleSize;
     }
 
     public String[] runPackageManager(final ImagePkgMgr imagePkgMgr) throws HubIntegrationException, IOException, InterruptedException {
         final PackageManagerFiles pkgMgrFiles = new PackageManagerFiles();
-        final Map<Integer, String[]> packagesByCount = new HashMap<>();
-        final SortedBag<Integer> counts = new TreeBag<>();
-        // TODO: I put the sampling to address an intermittent problem with incomplete results, but
-        // I have not seen the problem since converting this class from groovy to java
-        // ("".execute() to ProcessBuilder). If the problem stays away, remove this loop.
-        // In the groovy implementation, the output was occasionally truncated.
-        // It was subject to command.timeout, but at 2 minutes (default) you'd think that'd be pretty safe.
-        // -- Steve B.
-        for (int i = 0; i < sampleSize; i++) {
-            pkgMgrFiles.stubPackageManagerFiles(imagePkgMgr);
-            final String[] packages = listPackages();
-            logger.trace(String.format("Package count: %d", packages.length));
-            counts.add(packages.length);
-            packagesByCount.put(packages.length, packages);
-        }
-        if (counts.first() != counts.last()) {
-            logger.warn(String.format("Package manager reported inconsistent results (%d:%d); Using %d", counts.first(), counts.last(), counts.first()));
-        }
-        return packagesByCount.get(counts.first());
+        pkgMgrFiles.stubPackageManagerFiles(imagePkgMgr);
+        final String[] packages = listPackages();
+        logger.trace(String.format("Package count: %d", packages.length));
+        return packages;
     }
 
     private String[] listPackages() throws HubIntegrationException, IOException, InterruptedException {

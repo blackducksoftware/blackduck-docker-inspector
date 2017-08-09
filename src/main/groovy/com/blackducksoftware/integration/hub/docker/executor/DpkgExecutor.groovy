@@ -32,6 +32,6 @@ import org.springframework.stereotype.Component
 class DpkgExecutor extends Executor {
     @PostConstruct
     void init() {
-        initValues(null, 'dpkg -l', 4) // TODO sampleSize should probably be 1
+        initValues(null, 'dpkg -l')
     }
 }
