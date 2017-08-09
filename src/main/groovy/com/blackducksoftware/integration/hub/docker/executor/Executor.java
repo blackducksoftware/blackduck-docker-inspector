@@ -62,23 +62,33 @@ public abstract class Executor {
     }
 
     public String[] runPackageManager(final ImagePkgMgr imagePkgMgr) throws HubIntegrationException, IOException, InterruptedException {
-        // TODO : loop here: sampleSize
-        new PackageManagerFiles().stubPackageManagerFiles(imagePkgMgr);
-        final String[] packages = listPackages();
-        return packages;
+        final PackageManagerFiles pkgMgrFiles = new PackageManagerFiles();
+        final Map<Integer, String[]> packagesByCount = new HashMap<>();
+        final SortedBag<Integer> counts = new TreeBag<>();
+
+        for (int i = 0; i < sampleSize; i++) {
+            pkgMgrFiles.stubPackageManagerFiles(imagePkgMgr);
+            final String[] packages = listPackages();
+            logger.info(String.format("*** Count: %d", packages.length));
+            counts.add(packages.length);
+            packagesByCount.put(packages.length, packages);
+        }
+        logger.info(String.format("***** First count: %s", counts.first()));
+        logger.info(String.format("***** Last count: %s", counts.last()));
+        return packagesByCount.get(counts.first());
     }
 
     private String[] listPackages() throws HubIntegrationException, IOException, InterruptedException {
         String[] results;
-        logger.info("Executing package manager");
+        logger.debug("Executing package manager");
         try {
-            results = executeCommand(listPackagesCommand, sampleSize);
+            results = executeCommand(listPackagesCommand);
             logger.info(String.format("Command %s executed successfully", listPackagesCommand));
         } catch (final Exception e) {
             if (!StringUtils.isBlank(upgradeCommand)) {
                 logger.warn(String.format("Error executing \"%s\": %s; Trying to upgrade package database by executing: %s", listPackagesCommand, e.getMessage(), upgradeCommand));
                 executeCommand(upgradeCommand);
-                results = executeCommand(listPackagesCommand, sampleSize);
+                results = executeCommand(listPackagesCommand);
                 logger.info(String.format("Command %s executed successfully on 2nd attempt (after db upgrade)", listPackagesCommand));
             } else {
                 logger.error(String.format("Error executing \"%s\": %s; No upgrade command has been provided for this package manager", listPackagesCommand), e.getMessage());
@@ -112,7 +122,7 @@ public abstract class Executor {
         final Process process = builder.start();
         final int errCode = process.waitFor();
         if (errCode == 0) {
-            logger.info(String.format("Execution of command: %s: Succeeded", commandString));
+            logger.debug(String.format("Execution of command: %s: Succeeded", commandString));
         } else {
             throw new HubIntegrationException(String.format("Execution of command: %s: Error code: %d", commandString, errCode));
         }

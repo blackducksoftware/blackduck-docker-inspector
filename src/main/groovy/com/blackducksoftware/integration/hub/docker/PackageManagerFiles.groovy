@@ -46,7 +46,7 @@ class PackageManagerFiles {
                 updatesDir.mkdir()
             }
         }
-        logger.info(String.format("*** Copying %s to %s", imagePkgMgr.extractedPackageManagerDirectory.getAbsolutePath(), packageManagerDirectory.getAbsolutePath()))
+        logger.debug(String.format("Copying %s to %s", imagePkgMgr.extractedPackageManagerDirectory.getAbsolutePath(), packageManagerDirectory.getAbsolutePath()))
         FileUtils.copyDirectory(imagePkgMgr.extractedPackageManagerDirectory, packageManagerDirectory)
     }
 
