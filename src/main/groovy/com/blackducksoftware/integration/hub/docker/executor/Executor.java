@@ -31,6 +31,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.collections4.SortedBag;
 import org.apache.commons.collections4.bag.TreeBag;
@@ -97,27 +98,12 @@ public abstract class Executor {
                 results = executeCommand(listPackagesCommand);
                 logger.info(String.format("Command %s executed successfully on 2nd attempt (after db upgrade)", listPackagesCommand));
             } else {
-                logger.error(String.format("Error executing \"%s\": %s; No upgrade command has been provided for this package manager", listPackagesCommand), e.getMessage());
+                logger.error(String.format("Error executing \"%s\": %s; No upgrade command has been provided for this package manager", listPackagesCommand, e.getMessage()));
                 throw e;
             }
         }
         logger.debug(String.format("Package manager reported %s package lines", results.length));
         return results;
-    }
-
-    private String[] executeCommand(final String commandString, final int sampleSize) throws IOException, InterruptedException, HubIntegrationException {
-        final Map<Integer, String[]> packagesByCount = new HashMap<>();
-        final SortedBag<Integer> counts = new TreeBag<>();
-
-        for (int i = 0; i < sampleSize; i++) {
-            final String[] packages = executeCommand(commandString);
-            logger.info(String.format("*** Count: %d", packages.length));
-            counts.add(packages.length);
-            packagesByCount.put(packages.length, packages);
-        }
-        logger.info(String.format("***** First count: %s", counts.first()));
-        logger.info(String.format("***** Last count: %s", counts.last()));
-        return packagesByCount.get(counts.first());
     }
 
     private String[] executeCommand(final String commandString) throws IOException, InterruptedException, HubIntegrationException {
@@ -126,7 +112,11 @@ public abstract class Executor {
         builder.command(commandStringList.toArray(new String[commandStringList.size()]));
         builder.directory(new File("."));
         final Process process = builder.start();
-        final int errCode = process.waitFor();
+        final boolean finished = process.waitFor(this.commandTimeout, TimeUnit.MILLISECONDS);
+        if (!finished) {
+            throw new HubIntegrationException(String.format("Execution of command %s timed out (timeout: %d milliseconds)", commandString, commandTimeout));
+        }
+        final int errCode = process.exitValue();
         if (errCode == 0) {
             logger.debug(String.format("Execution of command: %s: Succeeded", commandString));
         } else {
