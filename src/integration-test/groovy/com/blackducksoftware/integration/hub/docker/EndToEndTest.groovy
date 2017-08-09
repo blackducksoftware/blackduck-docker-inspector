@@ -83,7 +83,7 @@ class EndToEndTest {
         println "Running end to end test on ${inspectTarget}"
         ProcessBuilder pb =
                 new ProcessBuilder("build/hub-docker-inspector.sh",
-                "--logging.level.com.blackducksoftware=TRACE",
+                "--logging.level.com.blackducksoftware=INFO",
                 "--dry.run=true",
                 "--bdio.output.path=test/output",
                 "--dev.mode=true",
