@@ -65,16 +65,22 @@ public abstract class Executor {
         final PackageManagerFiles pkgMgrFiles = new PackageManagerFiles();
         final Map<Integer, String[]> packagesByCount = new HashMap<>();
         final SortedBag<Integer> counts = new TreeBag<>();
-
+        // TODO: I put the sampling to address an intermittent problem with incomplete results, but
+        // I have not seen the problem since converting this class from groovy to java
+        // ("".execute() to ProcessBuilder). If the problem stays away, remove this loop.
+        // In the groovy implementation, the output was occasionally truncated.
+        // It was subject to command.timeout, but at 2 minutes (default) you'd think that'd be pretty safe.
+        // -- Steve B.
         for (int i = 0; i < sampleSize; i++) {
             pkgMgrFiles.stubPackageManagerFiles(imagePkgMgr);
             final String[] packages = listPackages();
-            logger.info(String.format("*** Count: %d", packages.length));
+            logger.trace(String.format("Package count: %d", packages.length));
             counts.add(packages.length);
             packagesByCount.put(packages.length, packages);
         }
-        logger.info(String.format("***** First count: %s", counts.first()));
-        logger.info(String.format("***** Last count: %s", counts.last()));
+        if (counts.first() != counts.last()) {
+            logger.warn(String.format("Package manager reported inconsistent results (%d:%d); Using %d", counts.first(), counts.last(), counts.first()));
+        }
         return packagesByCount.get(counts.first());
     }
 
