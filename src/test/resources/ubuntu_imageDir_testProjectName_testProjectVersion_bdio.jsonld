@@ -1,15 +1,15 @@
 [
   {
     "specVersion": "1.1.0",
-    "spdx:name": "ubuntu_1.0_Users_sbillings_Documents_git_hub-docker_test_resources_imageDir_DPKG",
-    "@id": "uuid:2b300469-a6d8-4007-bfaf-0300894e20b2",
+    "spdx:name": "ubuntu_1.0_var_lib_dpkg_DPKG",
+    "@id": "uuid:d41adf1e-afd2-41a3-ba89-147caaae7913",
     "@type": "BillOfMaterials",
     "relationship": []
   },
   {
     "name": "testProjectName",
     "revision": "testProjectVersion",
-    "@id": "com.blackducksoftware.integration.hub.bdio.simple.model.BdioExternalIdentifier@5ef6ae06",
+    "@id": "data:debian/testProjectName/testProjectVersion",
     "@type": "Project",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",

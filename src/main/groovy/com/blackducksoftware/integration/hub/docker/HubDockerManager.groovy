@@ -164,8 +164,8 @@ class HubDockerManager {
         String codeLocationName, hubProjectName, hubVersionName = ''
         String imageDirectoryName = manifestMapping.getTargetImageFileSystemRootDirName()
         String pkgMgrFilePath = imageInfo.pkgMgr.extractedPackageManagerDirectory.getAbsolutePath()
-        pkgMgrFilePath = pkgMgrFilePath.substring(pkgMgrFilePath.indexOf(imageDirectoryName) + 1)
-        pkgMgrFilePath = pkgMgrFilePath.substring(pkgMgrFilePath.indexOf('/') + 1)
+        pkgMgrFilePath = pkgMgrFilePath.substring(pkgMgrFilePath.indexOf(imageDirectoryName) + imageDirectoryName.length()+1)
+
         codeLocationName = programPaths.getCodeLocationName(manifestMapping.imageName, manifestMapping.tagName, pkgMgrFilePath, imageInfo.pkgMgr.packageManager.toString())
         hubProjectName = deriveHubProject(manifestMapping.imageName, projectName)
         hubVersionName = deriveHubProjectVersion(manifestMapping, versionName)

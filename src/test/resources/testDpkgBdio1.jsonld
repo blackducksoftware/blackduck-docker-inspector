@@ -2,14 +2,14 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "CodeLocationName",
-    "@id": "uuid:5496eb10-05a9-4582-bd8a-490d74c1aada",
+    "@id": "uuid:42deabcb-b331-4ff3-9687-2527f3845980",
     "@type": "BillOfMaterials",
     "relationship": []
   },
   {
     "name": "Test",
     "revision": "1",
-    "@id": "com.blackducksoftware.integration.hub.bdio.simple.model.BdioExternalIdentifier@405fccc2",
+    "@id": "data:ubuntu/Test/1",
     "@type": "Project",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",

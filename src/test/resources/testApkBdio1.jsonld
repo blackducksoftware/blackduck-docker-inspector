@@ -2,14 +2,14 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "CodeLocationName",
-    "@id": "uuid:3ab7b42d-26e3-4ca1-8795-8146df570da9",
+    "@id": "uuid:ffa2b4b7-00cb-4db2-8773-0655493745ea",
     "@type": "BillOfMaterials",
     "relationship": []
   },
   {
     "name": "Test",
     "revision": "1",
-    "@id": "data:Test/1",
+    "@id": "data:alpine/Test/1",
     "@type": "Project",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",

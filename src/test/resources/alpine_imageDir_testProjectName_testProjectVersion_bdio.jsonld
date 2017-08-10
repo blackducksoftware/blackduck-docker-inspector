@@ -1,15 +1,15 @@
 [
   {
     "specVersion": "1.1.0",
-    "spdx:name": "alpine_1.0_Users_sbillings_Documents_git_hub-docker_test_resources_imageDir_APK",
-    "@id": "uuid:00b351f9-d769-4a15-93cc-20392706a44c",
+    "spdx:name": "alpine_1.0_lib_apk_APK",
+    "@id": "uuid:4942a3a2-a9dc-44ab-a550-685e1d9c288e",
     "@type": "BillOfMaterials",
     "relationship": []
   },
   {
     "name": "testProjectName",
     "revision": "testProjectVersion",
-    "@id": "data:testProjectName/testProjectVersion",
+    "@id": "data:alpine/testProjectName/testProjectVersion",
     "@type": "Project",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",

@@ -2,17 +2,17 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "CodeLocationName",
-    "@id": "uuid:8dee4ec6-f96a-4cea-ad6b-cf2bc5024e1d",
+    "@id": "uuid:bf6b4488-8e7e-4de1-8f57-dfec50111ff6",
     "@type": "BillOfMaterials",
     "relationship": []
   },
   {
     "name": "Test",
     "revision": "1",
-    "@id": "data:Test/1",
+    "@id": "data:centos/Test/1",
     "@type": "Project",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "Test/1"
     },
     "relationship": [
@@ -2548,7 +2548,7 @@
     "@id": "data:libjpeg-turbo/1.2.90-5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libjpeg-turbo/1.2.90-5.el7/x86_64"
     },
     "relationship": []
@@ -2559,7 +2559,7 @@
     "@id": "data:filesystem/3.2-20.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "filesystem/3.2-20.el7/x86_64"
     },
     "relationship": []
@@ -2570,7 +2570,7 @@
     "@id": "data:mesa-libglapi/10.6.5-3.20150824.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "mesa-libglapi/10.6.5-3.20150824.el7/x86_64"
     },
     "relationship": []
@@ -2581,7 +2581,7 @@
     "@id": "data:rsyslog/7.4.7-12.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "rsyslog/7.4.7-12.el7/x86_64"
     },
     "relationship": []
@@ -2592,7 +2592,7 @@
     "@id": "data:ncurses-base/5.9-13.20130511.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "ncurses-base/5.9-13.20130511.el7/noarch"
     },
     "relationship": []
@@ -2603,7 +2603,7 @@
     "@id": "data:fontpackages-filesystem/1.44-8.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "fontpackages-filesystem/1.44-8.el7/noarch"
     },
     "relationship": []
@@ -2614,7 +2614,7 @@
     "@id": "data:libusbx/1.0.15-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libusbx/1.0.15-4.el7/x86_64"
     },
     "relationship": []
@@ -2625,7 +2625,7 @@
     "@id": "data:ncurses-libs/5.9-13.20130511.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "ncurses-libs/5.9-13.20130511.el7/x86_64"
     },
     "relationship": []
@@ -2636,7 +2636,7 @@
     "@id": "data:xorg-x11-font-utils/7.5-20.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "xorg-x11-font-utils/7.5-20.el7/x86_64"
     },
     "relationship": []
@@ -2647,7 +2647,7 @@
     "@id": "data:postfix/2.10.1-6.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "postfix/2.10.1-6.el7/x86_64"
     },
     "relationship": []
@@ -2658,7 +2658,7 @@
     "@id": "data:libselinux/2.2.2-6.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libselinux/2.2.2-6.el7/x86_64"
     },
     "relationship": []
@@ -2669,7 +2669,7 @@
     "@id": "data:dejavu-sans-mono-fonts/2.33-6.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "dejavu-sans-mono-fonts/2.33-6.el7/noarch"
     },
     "relationship": []
@@ -2680,7 +2680,7 @@
     "@id": "data:microcode_ctl/2.1-12.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "microcode_ctl/2.1-12.el7/x86_64"
     },
     "relationship": []
@@ -2691,7 +2691,7 @@
     "@id": "data:graphite2/1.3.6-1.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "graphite2/1.3.6-1.el7_2/x86_64"
     },
     "relationship": []
@@ -2702,7 +2702,7 @@
     "@id": "data:parted/3.1-23.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "parted/3.1-23.el7/x86_64"
     },
     "relationship": []
@@ -2713,7 +2713,7 @@
     "@id": "data:libcom_err/1.42.9-7.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libcom_err/1.42.9-7.el7/x86_64"
     },
     "relationship": []
@@ -2724,7 +2724,7 @@
     "@id": "data:libXau/1.0.8-2.1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libXau/1.0.8-2.1.el7/x86_64"
     },
     "relationship": []
@@ -2735,7 +2735,7 @@
     "@id": "data:authconfig/6.2.8-10.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "authconfig/6.2.8-10.el7/x86_64"
     },
     "relationship": []
@@ -2746,7 +2746,7 @@
     "@id": "data:grep/2.20-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "grep/2.20-2.el7/x86_64"
     },
     "relationship": []
@@ -2757,7 +2757,7 @@
     "@id": "data:GConf2/3.2.6-8.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "GConf2/3.2.6-8.el7/x86_64"
     },
     "relationship": []
@@ -2768,7 +2768,7 @@
     "@id": "data:btrfs-progs/3.19.1-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "btrfs-progs/3.19.1-1.el7/x86_64"
     },
     "relationship": []
@@ -2779,7 +2779,7 @@
     "@id": "data:gawk/4.0.2-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "gawk/4.0.2-4.el7/x86_64"
     },
     "relationship": []
@@ -2790,7 +2790,7 @@
     "@id": "data:libtool-ltdl/2.4.2-21.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libtool-ltdl/2.4.2-21.el7_2/x86_64"
     },
     "relationship": []
@@ -2801,7 +2801,7 @@
     "@id": "data:libsysfs/2.1.0-16.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libsysfs/2.1.0-16.el7/x86_64"
     },
     "relationship": []
@@ -2812,7 +2812,7 @@
     "@id": "data:glib2/2.42.2-5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "glib2/2.42.2-5.el7/x86_64"
     },
     "relationship": []
@@ -2823,7 +2823,7 @@
     "@id": "data:rest/0.7.92-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "rest/0.7.92-3.el7/x86_64"
     },
     "relationship": []
@@ -2834,7 +2834,7 @@
     "@id": "data:iwl3945-firmware/15.32.2.9-43.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "iwl3945-firmware/15.32.2.9-43.el7/noarch"
     },
     "relationship": []
@@ -2845,7 +2845,7 @@
     "@id": "data:libattr/2.4.46-12.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libattr/2.4.46-12.el7/x86_64"
     },
     "relationship": []
@@ -2856,7 +2856,7 @@
     "@id": "data:libX11-common/1.6.3-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libX11-common/1.6.3-2.el7/noarch"
     },
     "relationship": []
@@ -2867,7 +2867,7 @@
     "@id": "data:iwl5000-firmware/8.83.5.1_1-43.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "iwl5000-firmware/8.83.5.1_1-43.el7/noarch"
     },
     "relationship": []
@@ -2878,7 +2878,7 @@
     "@id": "data:cpio/2.11-24.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "cpio/2.11-24.el7/x86_64"
     },
     "relationship": []
@@ -2889,7 +2889,7 @@
     "@id": "data:libXt/1.1.4-6.1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libXt/1.1.4-6.1.el7/x86_64"
     },
     "relationship": []
@@ -2900,7 +2900,7 @@
     "@id": "data:ivtv-firmware/20080701-26.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "ivtv-firmware/20080701-26.el7/noarch"
     },
     "relationship": []
@@ -2911,7 +2911,7 @@
     "@id": "data:sqlite/3.7.17-8.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "sqlite/3.7.17-8.el7/x86_64"
     },
     "relationship": []
@@ -2922,7 +2922,7 @@
     "@id": "data:libXmu/1.1.2-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libXmu/1.1.2-2.el7/x86_64"
     },
     "relationship": []
@@ -2933,7 +2933,7 @@
     "@id": "data:iwl2000-firmware/18.168.6.1-43.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "iwl2000-firmware/18.168.6.1-43.el7/noarch"
     },
     "relationship": []
@@ -2944,7 +2944,7 @@
     "@id": "data:findutils/4.5.11-5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "findutils/4.5.11-5.el7/x86_64"
     },
     "relationship": []
@@ -2955,7 +2955,7 @@
     "@id": "data:mesa-libEGL/10.6.5-3.20150824.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "mesa-libEGL/10.6.5-3.20150824.el7/x86_64"
     },
     "relationship": []
@@ -2966,7 +2966,7 @@
     "@id": "data:iwl5150-firmware/8.24.2.2-43.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "iwl5150-firmware/8.24.2.2-43.el7/noarch"
     },
     "relationship": []
@@ -2977,7 +2977,7 @@
     "@id": "data:which/2.20-7.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "which/2.20-7.el7/x86_64"
     },
     "relationship": []
@@ -2988,7 +2988,7 @@
     "@id": "data:libXcursor/1.1.14-2.1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libXcursor/1.1.14-2.1.el7/x86_64"
     },
     "relationship": []
@@ -2999,7 +2999,7 @@
     "@id": "data:libtalloc/2.1.5-1.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libtalloc/2.1.5-1.el7_2/x86_64"
     },
     "relationship": []
@@ -3010,7 +3010,7 @@
     "@id": "data:gdbm/1.10-8.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "gdbm/1.10-8.el7/x86_64"
     },
     "relationship": []
@@ -3021,7 +3021,7 @@
     "@id": "data:mesa-libGL/10.6.5-3.20150824.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "mesa-libGL/10.6.5-3.20150824.el7/x86_64"
     },
     "relationship": []
@@ -3032,7 +3032,7 @@
     "@id": "data:libbasicobjects/0.1.1-25.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libbasicobjects/0.1.1-25.el7/x86_64"
     },
     "relationship": []
@@ -3043,7 +3043,7 @@
     "@id": "data:libassuan/2.1.0-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libassuan/2.1.0-3.el7/x86_64"
     },
     "relationship": []
@@ -3054,7 +3054,7 @@
     "@id": "data:cairo-gobject/1.14.2-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "cairo-gobject/1.14.2-1.el7/x86_64"
     },
     "relationship": []
@@ -3065,7 +3065,7 @@
     "@id": "data:libsss_idmap/1.13.0-40.el7_2.9",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libsss_idmap/1.13.0-40.el7_2.9/x86_64"
     },
     "relationship": []
@@ -3076,7 +3076,7 @@
     "@id": "data:groff-base/1.22.2-8.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "groff-base/1.22.2-8.el7/x86_64"
     },
     "relationship": []
@@ -3087,7 +3087,7 @@
     "@id": "data:at-spi2-core/2.8.0-6.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "at-spi2-core/2.8.0-6.el7/x86_64"
     },
     "relationship": []
@@ -3098,7 +3098,7 @@
     "@id": "data:libnfsidmap/0.25-12.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libnfsidmap/0.25-12.el7/x86_64"
     },
     "relationship": []
@@ -3109,7 +3109,7 @@
     "@id": "data:xz/5.1.2-12alpha.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "xz/5.1.2-12alpha.el7/x86_64"
     },
     "relationship": []
@@ -3120,7 +3120,7 @@
     "@id": "data:gtk3/3.14.13-16.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "gtk3/3.14.13-16.el7/x86_64"
     },
     "relationship": []
@@ -3131,7 +3131,7 @@
     "@id": "data:python-pyasn1/0.1.6-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-pyasn1/0.1.6-2.el7/noarch"
     },
     "relationship": []
@@ -3142,7 +3142,7 @@
     "@id": "data:newt/0.52.15-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "newt/0.52.15-4.el7/x86_64"
     },
     "relationship": []
@@ -3153,7 +3153,7 @@
     "@id": "data:vim-common/7.4.160-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "vim-common/7.4.160-1.el7/x86_64"
     },
     "relationship": []
@@ -3164,7 +3164,7 @@
     "@id": "data:libipa_hbac/1.13.0-40.el7_2.9",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libipa_hbac/1.13.0-40.el7_2.9/x86_64"
     },
     "relationship": []
@@ -3175,7 +3175,7 @@
     "@id": "data:libdaemon/0.14-7.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libdaemon/0.14-7.el7/x86_64"
     },
     "relationship": []
@@ -3186,7 +3186,7 @@
     "@id": "data:perl-Pod-Parser/1.61-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Pod-Parser/1.61-2.el7/noarch"
     },
     "relationship": []
@@ -3197,7 +3197,7 @@
     "@id": "data:bind-utils/9.9.4-29.el7_2.3",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "bind-utils/9.9.4-29.el7_2.3/x86_64"
     },
     "relationship": []
@@ -3208,7 +3208,7 @@
     "@id": "data:libtasn1/3.8-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libtasn1/3.8-2.el7/x86_64"
     },
     "relationship": []
@@ -3219,7 +3219,7 @@
     "@id": "data:perl-Digest/1.17-245.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Digest/1.17-245.el7/noarch"
     },
     "relationship": []
@@ -3230,7 +3230,7 @@
     "@id": "data:python-qrcode-core/5.0.1-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-qrcode-core/5.0.1-1.el7/noarch"
     },
     "relationship": []
@@ -3241,7 +3241,7 @@
     "@id": "data:less/458-9.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "less/458-9.el7/x86_64"
     },
     "relationship": []
@@ -3252,7 +3252,7 @@
     "@id": "data:qt3/3.3.8b-51.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "qt3/3.3.8b-51.el7/x86_64"
     },
     "relationship": []
@@ -3263,7 +3263,7 @@
     "@id": "data:cups-libs/1.6.3-22.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "cups-libs/1.6.3-22.el7/x86_64"
     },
     "relationship": []
@@ -3274,7 +3274,7 @@
     "@id": "data:acl/2.2.51-12.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "acl/2.2.51-12.el7/x86_64"
     },
     "relationship": []
@@ -3285,7 +3285,7 @@
     "@id": "data:perl-Test-Simple/0.98-243.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Test-Simple/0.98-243.el7/noarch"
     },
     "relationship": []
@@ -3296,7 +3296,7 @@
     "@id": "data:libwbclient/4.2.10-6.2.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libwbclient/4.2.10-6.2.el7_2/x86_64"
     },
     "relationship": []
@@ -3307,7 +3307,7 @@
     "@id": "data:libpng12/1.2.50-7.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libpng12/1.2.50-7.el7_2/x86_64"
     },
     "relationship": []
@@ -3318,7 +3318,7 @@
     "@id": "data:python-kerberos/1.1-15.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-kerberos/1.1-15.el7/x86_64"
     },
     "relationship": []
@@ -3329,7 +3329,7 @@
     "@id": "data:mozjs17/17.0.0-12.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "mozjs17/17.0.0-12.el7/x86_64"
     },
     "relationship": []
@@ -3340,7 +3340,7 @@
     "@id": "data:systemtap-sdt-devel/2.8-10.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "systemtap-sdt-devel/2.8-10.el7/x86_64"
     },
     "relationship": []
@@ -3351,7 +3351,7 @@
     "@id": "data:libxslt/1.1.28-5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libxslt/1.1.28-5.el7/x86_64"
     },
     "relationship": []
@@ -3362,7 +3362,7 @@
     "@id": "data:freetype/2.4.11-11.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "freetype/2.4.11-11.el7/x86_64"
     },
     "relationship": []
@@ -3373,7 +3373,7 @@
     "@id": "data:perl-TimeDate/2.30-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-TimeDate/2.30-2.el7/noarch"
     },
     "relationship": []
@@ -3384,7 +3384,7 @@
     "@id": "data:libsss_nss_idmap/1.13.0-40.el7_2.9",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libsss_nss_idmap/1.13.0-40.el7_2.9/x86_64"
     },
     "relationship": []
@@ -3395,7 +3395,7 @@
     "@id": "data:snappy/1.1.0-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "snappy/1.1.0-3.el7/x86_64"
     },
     "relationship": []
@@ -3406,7 +3406,7 @@
     "@id": "data:perl-Text-Soundex/3.04-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Text-Soundex/3.04-4.el7/x86_64"
     },
     "relationship": []
@@ -3417,7 +3417,7 @@
     "@id": "data:quota-nls/4.01-11.el7_2.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "quota-nls/4.01-11.el7_2.1/noarch"
     },
     "relationship": []
@@ -3428,7 +3428,7 @@
     "@id": "data:libsemanage/2.1.10-18.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libsemanage/2.1.10-18.el7/x86_64"
     },
     "relationship": []
@@ -3439,7 +3439,7 @@
     "@id": "data:bc/1.06.95-13.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "bc/1.06.95-13.el7/x86_64"
     },
     "relationship": []
@@ -3450,7 +3450,7 @@
     "@id": "data:python-yubico/1.2.3-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-yubico/1.2.3-1.el7/noarch"
     },
     "relationship": []
@@ -3461,7 +3461,7 @@
     "@id": "data:mailcap/2.1.41-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "mailcap/2.1.41-2.el7/noarch"
     },
     "relationship": []
@@ -3472,7 +3472,7 @@
     "@id": "data:python-sss-murmur/1.13.0-40.el7_2.9",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-sss-murmur/1.13.0-40.el7_2.9/x86_64"
     },
     "relationship": []
@@ -3483,7 +3483,7 @@
     "@id": "data:ruby-libs/2.0.0.598-25.el7_1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "ruby-libs/2.0.0.598-25.el7_1/x86_64"
     },
     "relationship": []
@@ -3494,7 +3494,7 @@
     "@id": "data:perl-FCGI/0.74-8.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-FCGI/0.74-8.el7/x86_64"
     },
     "relationship": []
@@ -3505,7 +3505,7 @@
     "@id": "data:python-cffi/0.8.6-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-cffi/0.8.6-2.el7/x86_64"
     },
     "relationship": []
@@ -3516,7 +3516,7 @@
     "@id": "data:gzip/1.5-8.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "gzip/1.5-8.el7/x86_64"
     },
     "relationship": []
@@ -3527,7 +3527,7 @@
     "@id": "data:qt-settings/19-23.5.el7.centos",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "qt-settings/19-23.5.el7.centos/noarch"
     },
     "relationship": []
@@ -3538,7 +3538,7 @@
     "@id": "data:gssproxy/0.4.1-7.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "gssproxy/0.4.1-7.el7/x86_64"
     },
     "relationship": []
@@ -3549,7 +3549,7 @@
     "@id": "data:cracklib-dicts/2.9.0-11.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "cracklib-dicts/2.9.0-11.el7/x86_64"
     },
     "relationship": []
@@ -3560,7 +3560,7 @@
     "@id": "data:perl-IO-Compress/2.061-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-IO-Compress/2.061-2.el7/noarch"
     },
     "relationship": []
@@ -3571,7 +3571,7 @@
     "@id": "data:python-setuptools/0.9.8-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-setuptools/0.9.8-4.el7/noarch"
     },
     "relationship": []
@@ -3582,7 +3582,7 @@
     "@id": "data:perl-HTML-Tagset/3.20-15.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-HTML-Tagset/3.20-15.el7/noarch"
     },
     "relationship": []
@@ -3593,7 +3593,7 @@
     "@id": "data:sssd-krb5-common/1.13.0-40.el7_2.9",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "sssd-krb5-common/1.13.0-40.el7_2.9/x86_64"
     },
     "relationship": []
@@ -3604,7 +3604,7 @@
     "@id": "data:pygobject3-base/3.14.0-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "pygobject3-base/3.14.0-3.el7/x86_64"
     },
     "relationship": []
@@ -3615,7 +3615,7 @@
     "@id": "data:glibc-devel/2.17-106.el7_2.6",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "glibc-devel/2.17-106.el7_2.6/x86_64"
     },
     "relationship": []
@@ -3626,7 +3626,7 @@
     "@id": "data:sssd-krb5/1.13.0-40.el7_2.9",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "sssd-krb5/1.13.0-40.el7_2.9/x86_64"
     },
     "relationship": []
@@ -3637,7 +3637,7 @@
     "@id": "data:libselinux-python/2.2.2-6.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libselinux-python/2.2.2-6.el7/x86_64"
     },
     "relationship": []
@@ -3648,7 +3648,7 @@
     "@id": "data:perl-devel/5.16.3-286.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-devel/5.16.3-286.el7/x86_64"
     },
     "relationship": []
@@ -3659,7 +3659,7 @@
     "@id": "data:hesiod/3.2.1-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "hesiod/3.2.1-3.el7/x86_64"
     },
     "relationship": []
@@ -3670,7 +3670,7 @@
     "@id": "data:perl-IO-Socket-SSL/1.94-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-IO-Socket-SSL/1.94-3.el7/noarch"
     },
     "relationship": []
@@ -3681,7 +3681,7 @@
     "@id": "data:tzdata/2016f-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "tzdata/2016f-1.el7/noarch"
     },
     "relationship": []
@@ -3692,7 +3692,7 @@
     "@id": "data:pyliblzma/0.5.3-11.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "pyliblzma/0.5.3-11.el7/x86_64"
     },
     "relationship": []
@@ -3703,7 +3703,7 @@
     "@id": "data:patch/2.7.1-8.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "patch/2.7.1-8.el7/x86_64"
     },
     "relationship": []
@@ -3714,7 +3714,7 @@
     "@id": "data:nspr/4.11.0-1.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "nspr/4.11.0-1.el7_2/x86_64"
     },
     "relationship": []
@@ -3725,7 +3725,7 @@
     "@id": "data:rubygem-json/1.7.7-25.el7_1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "rubygem-json/1.7.7-25.el7_1/x86_64"
     },
     "relationship": []
@@ -3736,7 +3736,7 @@
     "@id": "data:perl-Business-ISBN-Data/20120719.001-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Business-ISBN-Data/20120719.001-2.el7/noarch"
     },
     "relationship": []
@@ -3747,7 +3747,7 @@
     "@id": "data:libgudev1/219-19.el7_2.11",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libgudev1/219-19.el7_2.11/x86_64"
     },
     "relationship": []
@@ -3758,7 +3758,7 @@
     "@id": "data:ruby/2.0.0.598-25.el7_1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "ruby/2.0.0.598-25.el7_1/x86_64"
     },
     "relationship": []
@@ -3769,7 +3769,7 @@
     "@id": "data:perl-HTTP-Cookies/6.01-5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-HTTP-Cookies/6.01-5.el7/noarch"
     },
     "relationship": []
@@ -3780,7 +3780,7 @@
     "@id": "data:gmp/6.0.0-12.el7_1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "gmp/6.0.0-12.el7_1/x86_64"
     },
     "relationship": []
@@ -3791,7 +3791,7 @@
     "@id": "data:hiera/1.3.4-5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "hiera/1.3.4-5.el7/noarch"
     },
     "relationship": []
@@ -3802,7 +3802,7 @@
     "@id": "data:perl-WWW-RobotRules/6.02-5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-WWW-RobotRules/6.02-5.el7/noarch"
     },
     "relationship": []
@@ -3813,7 +3813,7 @@
     "@id": "data:libblkid/2.23.2-26.el7_2.2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libblkid/2.23.2-26.el7_2.2/x86_64"
     },
     "relationship": []
@@ -3824,7 +3824,7 @@
     "@id": "data:perl-Sys-Syslog/0.33-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Sys-Syslog/0.33-3.el7/x86_64"
     },
     "relationship": []
@@ -3835,7 +3835,7 @@
     "@id": "data:chkconfig/1.3.61-5.el7_2.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "chkconfig/1.3.61-5.el7_2.1/x86_64"
     },
     "relationship": []
@@ -3846,7 +3846,7 @@
     "@id": "data:binutils/2.23.52.0.1-55.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "binutils/2.23.52.0.1-55.el7/x86_64"
     },
     "relationship": []
@@ -3857,7 +3857,7 @@
     "@id": "data:foomatic-filters/4.0.9-8.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "foomatic-filters/4.0.9-8.el7/x86_64"
     },
     "relationship": []
@@ -3868,7 +3868,7 @@
     "@id": "data:nss-tools/3.21.0-9.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "nss-tools/3.21.0-9.el7_2/x86_64"
     },
     "relationship": []
@@ -3879,7 +3879,7 @@
     "@id": "data:nut-client/2.7.2-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "nut-client/2.7.2-3.el7/x86_64"
     },
     "relationship": []
@@ -3890,7 +3890,7 @@
     "@id": "data:device-mapper-libs/1.02.107-5.el7_2.5",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "device-mapper-libs/1.02.107-5.el7_2.5/x86_64"
     },
     "relationship": []
@@ -3901,7 +3901,7 @@
     "@id": "data:perl-Thread-Queue/3.02-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Thread-Queue/3.02-2.el7/noarch"
     },
     "relationship": []
@@ -3912,7 +3912,7 @@
     "@id": "data:dracut/033-360.el7_2.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "dracut/033-360.el7_2.1/x86_64"
     },
     "relationship": []
@@ -3923,7 +3923,7 @@
     "@id": "data:rpm/4.11.3-17.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "rpm/4.11.3-17.el7/x86_64"
     },
     "relationship": []
@@ -3934,7 +3934,7 @@
     "@id": "data:bzip2/1.0.6-13.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "bzip2/1.0.6-13.el7/x86_64"
     },
     "relationship": []
@@ -3945,7 +3945,7 @@
     "@id": "data:systemd-sysv/219-19.el7_2.11",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "systemd-sysv/219-19.el7_2.11/x86_64"
     },
     "relationship": []
@@ -3956,7 +3956,7 @@
     "@id": "data:policycoreutils/2.2.5-20.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "policycoreutils/2.2.5-20.el7/x86_64"
     },
     "relationship": []
@@ -3967,7 +3967,7 @@
     "@id": "data:iptables-services/1.4.21-16.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "iptables-services/1.4.21-16.el7/x86_64"
     },
     "relationship": []
@@ -3978,7 +3978,7 @@
     "@id": "data:python-pyudev/0.15-7.el7_2.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-pyudev/0.15-7.el7_2.1/noarch"
     },
     "relationship": []
@@ -3989,7 +3989,7 @@
     "@id": "data:dhcp-common/4.2.5-42.el7.centos",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "dhcp-common/4.2.5-42.el7.centos/x86_64"
     },
     "relationship": []
@@ -4000,7 +4000,7 @@
     "@id": "data:libicu/50.1.2-15.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libicu/50.1.2-15.el7/x86_64"
     },
     "relationship": []
@@ -4011,7 +4011,7 @@
     "@id": "data:NetworkManager/1.0.6-30.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "NetworkManager/1.0.6-30.el7_2/x86_64"
     },
     "relationship": []
@@ -4022,7 +4022,7 @@
     "@id": "data:lsscsi/0.27-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "lsscsi/0.27-3.el7/x86_64"
     },
     "relationship": []
@@ -4033,7 +4033,7 @@
     "@id": "data:puppet-agent/1.8.2-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "puppet-agent/1.8.2-1.el7/x86_64"
     },
     "relationship": []
@@ -4044,7 +4044,7 @@
     "@id": "data:teamd/1.17-6.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "teamd/1.17-6.el7_2/x86_64"
     },
     "relationship": []
@@ -4055,7 +4055,7 @@
     "@id": "data:rpm-build-libs/4.11.3-17.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "rpm-build-libs/4.11.3-17.el7/x86_64"
     },
     "relationship": []
@@ -4066,7 +4066,7 @@
     "@id": "data:NetworkManager-tui/1.0.6-30.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "NetworkManager-tui/1.0.6-30.el7_2/x86_64"
     },
     "relationship": []
@@ -4077,7 +4077,7 @@
     "@id": "data:yum-plugin-fastestmirror/1.1.31-34.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "yum-plugin-fastestmirror/1.1.31-34.el7/noarch"
     },
     "relationship": []
@@ -4088,7 +4088,7 @@
     "@id": "data:dracut-config-rescue/033-360.el7_2.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "dracut-config-rescue/033-360.el7_2.1/x86_64"
     },
     "relationship": []
@@ -4099,7 +4099,7 @@
     "@id": "data:iptables/1.4.21-16.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "iptables/1.4.21-16.el7/x86_64"
     },
     "relationship": []
@@ -4110,7 +4110,7 @@
     "@id": "data:openssh-server/6.6.1p1-25.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "openssh-server/6.6.1p1-25.el7_2/x86_64"
     },
     "relationship": []
@@ -4121,7 +4121,7 @@
     "@id": "data:logrotate/3.8.6-7.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "logrotate/3.8.6-7.el7_2/x86_64"
     },
     "relationship": []
@@ -4132,7 +4132,7 @@
     "@id": "data:kmod/20-5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "kmod/20-5.el7/x86_64"
     },
     "relationship": []
@@ -4143,7 +4143,7 @@
     "@id": "data:pcre/8.32-15.el7_2.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "pcre/8.32-15.el7_2.1/x86_64"
     },
     "relationship": []
@@ -4154,7 +4154,7 @@
     "@id": "data:iputils/20121221-7.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "iputils/20121221-7.el7/x86_64"
     },
     "relationship": []
@@ -4165,7 +4165,7 @@
     "@id": "data:net-snmp-libs/5.7.2-24.el7_2.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "net-snmp-libs/5.7.2-24.el7_2.1/x86_64"
     },
     "relationship": []
@@ -4176,7 +4176,7 @@
     "@id": "data:polkit-pkla-compat/0.1-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "polkit-pkla-compat/0.1-4.el7/x86_64"
     },
     "relationship": []
@@ -4187,7 +4187,7 @@
     "@id": "data:perl-podlators/2.5.1-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-podlators/2.5.1-3.el7/noarch"
     },
     "relationship": []
@@ -4198,7 +4198,7 @@
     "@id": "data:hwdata/0.252-8.1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "hwdata/0.252-8.1.el7/x86_64"
     },
     "relationship": []
@@ -4209,7 +4209,7 @@
     "@id": "data:perl-Encode/2.51-7.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Encode/2.51-7.el7/x86_64"
     },
     "relationship": []
@@ -4220,7 +4220,7 @@
     "@id": "data:libdrm/2.4.60-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libdrm/2.4.60-3.el7/x86_64"
     },
     "relationship": []
@@ -4231,7 +4231,7 @@
     "@id": "data:perl-Storable/2.45-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Storable/2.45-3.el7/x86_64"
     },
     "relationship": []
@@ -4242,7 +4242,7 @@
     "@id": "data:perl-Socket/2.010-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Socket/2.010-3.el7/x86_64"
     },
     "relationship": []
@@ -4253,7 +4253,7 @@
     "@id": "data:trousers/0.3.13-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "trousers/0.3.13-1.el7/x86_64"
     },
     "relationship": []
@@ -4264,7 +4264,7 @@
     "@id": "data:perl-Scalar-List-Utils/1.27-248.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Scalar-List-Utils/1.27-248.el7/x86_64"
     },
     "relationship": []
@@ -4275,7 +4275,7 @@
     "@id": "data:fxload/2002_04_11-16.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "fxload/2002_04_11-16.el7/x86_64"
     },
     "relationship": []
@@ -4286,7 +4286,7 @@
     "@id": "data:perl-threads/1.87-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-threads/1.87-4.el7/x86_64"
     },
     "relationship": []
@@ -4297,7 +4297,7 @@
     "@id": "data:net-tools/2.0-0.17.20131004git.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "net-tools/2.0-0.17.20131004git.el7/x86_64"
     },
     "relationship": []
@@ -4308,7 +4308,7 @@
     "@id": "data:perl/5.16.3-286.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl/5.16.3-286.el7/x86_64"
     },
     "relationship": []
@@ -4319,7 +4319,7 @@
     "@id": "data:libpipeline/1.2.3-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libpipeline/1.2.3-3.el7/x86_64"
     },
     "relationship": []
@@ -4330,7 +4330,7 @@
     "@id": "data:libICE/1.0.9-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libICE/1.0.9-2.el7/x86_64"
     },
     "relationship": []
@@ -4341,7 +4341,7 @@
     "@id": "data:jansson/2.4-6.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "jansson/2.4-6.el7/x86_64"
     },
     "relationship": []
@@ -4352,7 +4352,7 @@
     "@id": "data:libgcc/4.8.5-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libgcc/4.8.5-4.el7/x86_64"
     },
     "relationship": []
@@ -4363,7 +4363,7 @@
     "@id": "data:libSM/1.2.2-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libSM/1.2.2-2.el7/x86_64"
     },
     "relationship": []
@@ -4374,7 +4374,7 @@
     "@id": "data:libestr/0.1.9-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libestr/0.1.9-2.el7/x86_64"
     },
     "relationship": []
@@ -4385,7 +4385,7 @@
     "@id": "data:setup/2.8.71-6.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "setup/2.8.71-6.el7/noarch"
     },
     "relationship": []
@@ -4396,7 +4396,7 @@
     "@id": "data:atk/2.14.0-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "atk/2.14.0-1.el7/x86_64"
     },
     "relationship": []
@@ -4407,7 +4407,7 @@
     "@id": "data:kbd-legacy/1.15.5-11.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "kbd-legacy/1.15.5-11.el7/noarch"
     },
     "relationship": []
@@ -4418,7 +4418,7 @@
     "@id": "data:basesystem/10.0-7.el7.centos",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "basesystem/10.0-7.el7.centos/noarch"
     },
     "relationship": []
@@ -4429,7 +4429,7 @@
     "@id": "data:libthai/0.1.14-9.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libthai/0.1.14-9.el7/x86_64"
     },
     "relationship": []
@@ -4440,7 +4440,7 @@
     "@id": "data:irqbalance/1.0.7-5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "irqbalance/1.0.7-5.el7/x86_64"
     },
     "relationship": []
@@ -4451,7 +4451,7 @@
     "@id": "data:kbd-misc/1.15.5-11.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "kbd-misc/1.15.5-11.el7/noarch"
     },
     "relationship": []
@@ -4462,7 +4462,7 @@
     "@id": "data:ilmbase/1.0.3-7.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "ilmbase/1.0.3-7.el7/x86_64"
     },
     "relationship": []
@@ -4473,7 +4473,7 @@
     "@id": "data:linux-firmware/20150904-43.git6ebf5d5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "linux-firmware/20150904-43.git6ebf5d5.el7/noarch"
     },
     "relationship": []
@@ -4484,7 +4484,7 @@
     "@id": "data:lcms2/2.6-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "lcms2/2.6-2.el7/x86_64"
     },
     "relationship": []
@@ -4495,7 +4495,7 @@
     "@id": "data:man-db/2.6.3-9.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "man-db/2.6.3-9.el7/x86_64"
     },
     "relationship": []
@@ -4506,7 +4506,7 @@
     "@id": "data:fontconfig/2.10.95-7.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "fontconfig/2.10.95-7.el7/x86_64"
     },
     "relationship": []
@@ -4517,7 +4517,7 @@
     "@id": "data:libfontenc/1.1.2-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libfontenc/1.1.2-3.el7/x86_64"
     },
     "relationship": []
@@ -4528,7 +4528,7 @@
     "@id": "data:firewalld/0.3.9-14.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "firewalld/0.3.9-14.el7/noarch"
     },
     "relationship": []
@@ -4539,7 +4539,7 @@
     "@id": "data:libstdc++/4.8.5-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libstdc++/4.8.5-4.el7/x86_64"
     },
     "relationship": []
@@ -4550,7 +4550,7 @@
     "@id": "data:libgusb/0.1.6-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libgusb/0.1.6-3.el7/x86_64"
     },
     "relationship": []
@@ -4561,7 +4561,7 @@
     "@id": "data:bash/4.2.46-19.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "bash/4.2.46-19.el7/x86_64"
     },
     "relationship": []
@@ -4572,7 +4572,7 @@
     "@id": "data:libXfont/1.5.1-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libXfont/1.5.1-2.el7/x86_64"
     },
     "relationship": []
@@ -4583,7 +4583,7 @@
     "@id": "data:audit/2.4.1-5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "audit/2.4.1-5.el7/x86_64"
     },
     "relationship": []
@@ -4594,7 +4594,7 @@
     "@id": "data:urw-fonts/2.4-16.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "urw-fonts/2.4-16.el7/noarch"
     },
     "relationship": []
@@ -4605,7 +4605,7 @@
     "@id": "data:zlib/1.2.7-15.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "zlib/1.2.7-15.el7/x86_64"
     },
     "relationship": []
@@ -4616,7 +4616,7 @@
     "@id": "data:dejavu-fonts-common/2.33-6.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "dejavu-fonts-common/2.33-6.el7/noarch"
     },
     "relationship": []
@@ -4627,7 +4627,7 @@
     "@id": "data:biosdevname/0.6.2-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "biosdevname/0.6.2-1.el7/x86_64"
     },
     "relationship": []
@@ -4638,7 +4638,7 @@
     "@id": "data:audit-libs/2.4.1-5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "audit-libs/2.4.1-5.el7/x86_64"
     },
     "relationship": []
@@ -4649,7 +4649,7 @@
     "@id": "data:desktop-file-utils/0.22-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "desktop-file-utils/0.22-1.el7/x86_64"
     },
     "relationship": []
@@ -4660,7 +4660,7 @@
     "@id": "data:aic94xx-firmware/30-6.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "aic94xx-firmware/30-6.el7/noarch"
     },
     "relationship": []
@@ -4671,7 +4671,7 @@
     "@id": "data:sed/4.2.2-5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "sed/4.2.2-5.el7/x86_64"
     },
     "relationship": []
@@ -4682,7 +4682,7 @@
     "@id": "data:mesa-libgbm/10.6.5-3.20150824.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "mesa-libgbm/10.6.5-3.20150824.el7/x86_64"
     },
     "relationship": []
@@ -4693,7 +4693,7 @@
     "@id": "data:libdb/5.3.21-19.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libdb/5.3.21-19.el7/x86_64"
     },
     "relationship": []
@@ -4704,7 +4704,7 @@
     "@id": "data:harfbuzz/0.9.36-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "harfbuzz/0.9.36-1.el7/x86_64"
     },
     "relationship": []
@@ -4715,7 +4715,7 @@
     "@id": "data:iprutils/2.4.8-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "iprutils/2.4.8-1.el7/x86_64"
     },
     "relationship": []
@@ -4726,7 +4726,7 @@
     "@id": "data:popt/1.13-16.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "popt/1.13-16.el7/x86_64"
     },
     "relationship": []
@@ -4737,7 +4737,7 @@
     "@id": "data:m17n-lib/1.6.4-14.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "m17n-lib/1.6.4-14.el7/x86_64"
     },
     "relationship": []
@@ -4748,7 +4748,7 @@
     "@id": "data:libxcb/1.11-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libxcb/1.11-4.el7/x86_64"
     },
     "relationship": []
@@ -4759,7 +4759,7 @@
     "@id": "data:passwd/0.79-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "passwd/0.79-4.el7/x86_64"
     },
     "relationship": []
@@ -4770,7 +4770,7 @@
     "@id": "data:bzip2-libs/1.0.6-13.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "bzip2-libs/1.0.6-13.el7/x86_64"
     },
     "relationship": []
@@ -4781,7 +4781,7 @@
     "@id": "data:adwaita-icon-theme/3.14.1-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "adwaita-icon-theme/3.14.1-1.el7/noarch"
     },
     "relationship": []
@@ -4792,7 +4792,7 @@
     "@id": "data:xfsprogs/3.2.2-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "xfsprogs/3.2.2-2.el7/x86_64"
     },
     "relationship": []
@@ -4803,7 +4803,7 @@
     "@id": "data:readline/6.2-9.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "readline/6.2-9.el7/x86_64"
     },
     "relationship": []
@@ -4814,7 +4814,7 @@
     "@id": "data:jbigkit-libs/2.0-11.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "jbigkit-libs/2.0-11.el7/x86_64"
     },
     "relationship": []
@@ -4825,7 +4825,7 @@
     "@id": "data:e2fsprogs/1.42.9-7.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "e2fsprogs/1.42.9-7.el7/x86_64"
     },
     "relationship": []
@@ -4836,7 +4836,7 @@
     "@id": "data:json-glib/1.0.2-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "json-glib/1.0.2-1.el7/x86_64"
     },
     "relationship": []
@@ -4847,7 +4847,7 @@
     "@id": "data:tar/1.26-29.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "tar/1.26-29.el7/x86_64"
     },
     "relationship": []
@@ -4858,7 +4858,7 @@
     "@id": "data:libffi/3.0.13-16.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libffi/3.0.13-16.el7/x86_64"
     },
     "relationship": []
@@ -4869,7 +4869,7 @@
     "@id": "data:puppetlabs-release/7-12",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "puppetlabs-release/7-12/noarch"
     },
     "relationship": []
@@ -4880,7 +4880,7 @@
     "@id": "data:pkgconfig/0.27.1-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "pkgconfig/0.27.1-4.el7/x86_64"
     },
     "relationship": []
@@ -4891,7 +4891,7 @@
     "@id": "data:rootfiles/8.1-11.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "rootfiles/8.1-11.el7/noarch"
     },
     "relationship": []
@@ -4902,7 +4902,7 @@
     "@id": "data:libgpg-error/1.12-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libgpg-error/1.12-3.el7/x86_64"
     },
     "relationship": []
@@ -4913,7 +4913,7 @@
     "@id": "data:iwl6050-firmware/41.28.5.1-43.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "iwl6050-firmware/41.28.5.1-43.el7/noarch"
     },
     "relationship": []
@@ -4924,7 +4924,7 @@
     "@id": "data:libcap/2.22-8.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libcap/2.22-8.el7/x86_64"
     },
     "relationship": []
@@ -4935,7 +4935,7 @@
     "@id": "data:iwl4965-firmware/228.61.2.24-43.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "iwl4965-firmware/228.61.2.24-43.el7/noarch"
     },
     "relationship": []
@@ -4946,7 +4946,7 @@
     "@id": "data:libgcrypt/1.5.3-12.el7_1.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libgcrypt/1.5.3-12.el7_1.1/x86_64"
     },
     "relationship": []
@@ -4957,7 +4957,7 @@
     "@id": "data:iwl6000g2a-firmware/17.168.5.3-43.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "iwl6000g2a-firmware/17.168.5.3-43.el7/noarch"
     },
     "relationship": []
@@ -4968,7 +4968,7 @@
     "@id": "data:libnl3/3.2.21-10.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libnl3/3.2.21-10.el7/x86_64"
     },
     "relationship": []
@@ -4979,7 +4979,7 @@
     "@id": "data:iwl6000g2b-firmware/17.168.5.2-43.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "iwl6000g2b-firmware/17.168.5.2-43.el7/noarch"
     },
     "relationship": []
@@ -4990,7 +4990,7 @@
     "@id": "data:elfutils-libs/0.163-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "elfutils-libs/0.163-3.el7/x86_64"
     },
     "relationship": []
@@ -5001,7 +5001,7 @@
     "@id": "data:iwl105-firmware/18.168.6.1-43.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "iwl105-firmware/18.168.6.1-43.el7/noarch"
     },
     "relationship": []
@@ -5012,7 +5012,7 @@
     "@id": "data:lua/5.1.4-14.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "lua/5.1.4-14.el7/x86_64"
     },
     "relationship": []
@@ -5023,7 +5023,7 @@
     "@id": "data:iwl135-firmware/18.168.6.1-43.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "iwl135-firmware/18.168.6.1-43.el7/noarch"
     },
     "relationship": []
@@ -5034,7 +5034,7 @@
     "@id": "data:diffutils/3.3-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "diffutils/3.3-4.el7/x86_64"
     },
     "relationship": []
@@ -5045,7 +5045,7 @@
     "@id": "data:iwl6000-firmware/9.221.4.1-43.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "iwl6000-firmware/9.221.4.1-43.el7/noarch"
     },
     "relationship": []
@@ -5056,7 +5056,7 @@
     "@id": "data:expat/2.1.0-8.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "expat/2.1.0-8.el7/x86_64"
     },
     "relationship": []
@@ -5067,7 +5067,7 @@
     "@id": "data:iwl7260-firmware/22.0.7.0-43.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "iwl7260-firmware/22.0.7.0-43.el7/noarch"
     },
     "relationship": []
@@ -5078,7 +5078,7 @@
     "@id": "data:dbus-glib/0.100-7.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "dbus-glib/0.100-7.el7/x86_64"
     },
     "relationship": []
@@ -5089,7 +5089,7 @@
     "@id": "data:iwl100-firmware/39.31.5.1-43.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "iwl100-firmware/39.31.5.1-43.el7/noarch"
     },
     "relationship": []
@@ -5100,7 +5100,7 @@
     "@id": "data:file-libs/5.11-31.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "file-libs/5.11-31.el7/x86_64"
     },
     "relationship": []
@@ -5111,7 +5111,7 @@
     "@id": "data:krb5-libs/1.13.2-12.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "krb5-libs/1.13.2-12.el7_2/x86_64"
     },
     "relationship": []
@@ -5122,7 +5122,7 @@
     "@id": "data:pciutils-libs/3.2.1-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "pciutils-libs/3.2.1-4.el7/x86_64"
     },
     "relationship": []
@@ -5133,7 +5133,7 @@
     "@id": "data:libtevent/0.9.26-1.el7_2.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libtevent/0.9.26-1.el7_2.1/x86_64"
     },
     "relationship": []
@@ -5144,7 +5144,7 @@
     "@id": "data:file/5.11-31.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "file/5.11-31.el7/x86_64"
     },
     "relationship": []
@@ -5155,7 +5155,7 @@
     "@id": "data:libldb/1.1.25-1.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libldb/1.1.25-1.el7_2/x86_64"
     },
     "relationship": []
@@ -5166,7 +5166,7 @@
     "@id": "data:libnl3-cli/3.2.21-10.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libnl3-cli/3.2.21-10.el7/x86_64"
     },
     "relationship": []
@@ -5177,7 +5177,7 @@
     "@id": "data:libref_array/0.1.5-25.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libref_array/0.1.5-25.el7/x86_64"
     },
     "relationship": []
@@ -5188,7 +5188,7 @@
     "@id": "data:libcroco/0.6.8-5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libcroco/0.6.8-5.el7/x86_64"
     },
     "relationship": []
@@ -5199,7 +5199,7 @@
     "@id": "data:libdhash/0.4.3-25.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libdhash/0.4.3-25.el7/x86_64"
     },
     "relationship": []
@@ -5210,7 +5210,7 @@
     "@id": "data:cyrus-sasl-lib/2.1.26-20.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "cyrus-sasl-lib/2.1.26-20.el7_2/x86_64"
     },
     "relationship": []
@@ -5221,7 +5221,7 @@
     "@id": "data:libgomp/4.8.5-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libgomp/4.8.5-4.el7/x86_64"
     },
     "relationship": []
@@ -5232,7 +5232,7 @@
     "@id": "data:xmlrpc-c/1.32.5-1905.svn2451.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "xmlrpc-c/1.32.5-1905.svn2451.el7/x86_64"
     },
     "relationship": []
@@ -5243,7 +5243,7 @@
     "@id": "data:libselinux-utils/2.2.2-6.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libselinux-utils/2.2.2-6.el7/x86_64"
     },
     "relationship": []
@@ -5254,7 +5254,7 @@
     "@id": "data:xmlrpc-c-client/1.32.5-1905.svn2451.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "xmlrpc-c-client/1.32.5-1905.svn2451.el7/x86_64"
     },
     "relationship": []
@@ -5265,7 +5265,7 @@
     "@id": "data:libedit/3.0-12.20121213cvs.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libedit/3.0-12.20121213cvs.el7/x86_64"
     },
     "relationship": []
@@ -5276,7 +5276,7 @@
     "@id": "data:cyrus-sasl-gssapi/2.1.26-20.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "cyrus-sasl-gssapi/2.1.26-20.el7_2/x86_64"
     },
     "relationship": []
@@ -5287,7 +5287,7 @@
     "@id": "data:slang/2.2.4-11.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "slang/2.2.4-11.el7/x86_64"
     },
     "relationship": []
@@ -5298,7 +5298,7 @@
     "@id": "data:python-six/1.9.0-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-six/1.9.0-2.el7/noarch"
     },
     "relationship": []
@@ -5309,7 +5309,7 @@
     "@id": "data:sysvinit-tools/2.88-14.dsf.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "sysvinit-tools/2.88-14.dsf.el7/x86_64"
     },
     "relationship": []
@@ -5320,7 +5320,7 @@
     "@id": "data:keyutils/1.5.8-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "keyutils/1.5.8-3.el7/x86_64"
     },
     "relationship": []
@@ -5331,7 +5331,7 @@
     "@id": "data:tcp_wrappers-libs/7.6-77.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "tcp_wrappers-libs/7.6-77.el7/x86_64"
     },
     "relationship": []
@@ -5342,7 +5342,7 @@
     "@id": "data:python-sssdconfig/1.13.0-40.el7_2.9",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-sssdconfig/1.13.0-40.el7_2.9/noarch"
     },
     "relationship": []
@@ -5353,7 +5353,7 @@
     "@id": "data:ethtool/3.15-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "ethtool/3.15-2.el7/x86_64"
     },
     "relationship": []
@@ -5364,7 +5364,7 @@
     "@id": "data:bind-libs/9.9.4-29.el7_2.3",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "bind-libs/9.9.4-29.el7_2.3/x86_64"
     },
     "relationship": []
@@ -5375,7 +5375,7 @@
     "@id": "data:keyutils-libs/1.5.8-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "keyutils-libs/1.5.8-3.el7/x86_64"
     },
     "relationship": []
@@ -5386,7 +5386,7 @@
     "@id": "data:python-libipa_hbac/1.13.0-40.el7_2.9",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-libipa_hbac/1.13.0-40.el7_2.9/x86_64"
     },
     "relationship": []
@@ -5397,7 +5397,7 @@
     "@id": "data:p11-kit-trust/0.20.7-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "p11-kit-trust/0.20.7-3.el7/x86_64"
     },
     "relationship": []
@@ -5408,7 +5408,7 @@
     "@id": "data:oddjob-mkhomedir/0.31.5-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "oddjob-mkhomedir/0.31.5-4.el7/x86_64"
     },
     "relationship": []
@@ -5419,7 +5419,7 @@
     "@id": "data:gettext-libs/0.18.2.1-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "gettext-libs/0.18.2.1-4.el7/x86_64"
     },
     "relationship": []
@@ -5430,7 +5430,7 @@
     "@id": "data:certmonger/0.78.4-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "certmonger/0.78.4-1.el7/x86_64"
     },
     "relationship": []
@@ -5441,7 +5441,7 @@
     "@id": "data:pytalloc/2.1.5-1.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "pytalloc/2.1.5-1.el7_2/x86_64"
     },
     "relationship": []
@@ -5452,7 +5452,7 @@
     "@id": "data:vim-minimal/7.4.160-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "vim-minimal/7.4.160-1.el7/x86_64"
     },
     "relationship": []
@@ -5463,7 +5463,7 @@
     "@id": "data:samba-libs/4.2.10-6.2.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "samba-libs/4.2.10-6.2.el7_2/x86_64"
     },
     "relationship": []
@@ -5474,7 +5474,7 @@
     "@id": "data:gobject-introspection/1.42.0-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "gobject-introspection/1.42.0-1.el7/x86_64"
     },
     "relationship": []
@@ -5485,7 +5485,7 @@
     "@id": "data:samba-common/4.2.10-6.2.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "samba-common/4.2.10-6.2.el7_2/noarch"
     },
     "relationship": []
@@ -5496,7 +5496,7 @@
     "@id": "data:augeas-libs/1.4.0-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "augeas-libs/1.4.0-2.el7/x86_64"
     },
     "relationship": []
@@ -5507,7 +5507,7 @@
     "@id": "data:samba-client-libs/4.2.10-6.2.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "samba-client-libs/4.2.10-6.2.el7_2/x86_64"
     },
     "relationship": []
@@ -5518,7 +5518,7 @@
     "@id": "data:pinentry/0.8.1-14.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "pinentry/0.8.1-14.el7/x86_64"
     },
     "relationship": []
@@ -5529,7 +5529,7 @@
     "@id": "data:libsmbclient/4.2.10-6.2.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libsmbclient/4.2.10-6.2.el7_2/x86_64"
     },
     "relationship": []
@@ -5540,7 +5540,7 @@
     "@id": "data:libdb-utils/5.3.21-19.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libdb-utils/5.3.21-19.el7/x86_64"
     },
     "relationship": []
@@ -5551,7 +5551,7 @@
     "@id": "data:pam_krb5/2.4.8-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "pam_krb5/2.4.8-4.el7/x86_64"
     },
     "relationship": []
@@ -5562,7 +5562,7 @@
     "@id": "data:make/3.82-21.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "make/3.82-21.el7/x86_64"
     },
     "relationship": []
@@ -5573,7 +5573,7 @@
     "@id": "data:python-krbV/1.0.90-8.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-krbV/1.0.90-8.el7/x86_64"
     },
     "relationship": []
@@ -5584,7 +5584,7 @@
     "@id": "data:libselinux-ruby/2.2.2-6.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libselinux-ruby/2.2.2-6.el7/x86_64"
     },
     "relationship": []
@@ -5595,7 +5595,7 @@
     "@id": "data:python-lxml/3.2.1-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-lxml/3.2.1-4.el7/x86_64"
     },
     "relationship": []
@@ -5606,7 +5606,7 @@
     "@id": "data:ncurses/5.9-13.20130511.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "ncurses/5.9-13.20130511.el7/x86_64"
     },
     "relationship": []
@@ -5617,7 +5617,7 @@
     "@id": "data:python-enum34/1.0.4-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-enum34/1.0.4-1.el7/noarch"
     },
     "relationship": []
@@ -5628,7 +5628,7 @@
     "@id": "data:libproxy/0.4.11-8.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libproxy/0.4.11-8.el7/x86_64"
     },
     "relationship": []
@@ -5639,7 +5639,7 @@
     "@id": "data:sssd-client/1.13.0-40.el7_2.9",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "sssd-client/1.13.0-40.el7_2.9/x86_64"
     },
     "relationship": []
@@ -5650,7 +5650,7 @@
     "@id": "data:libpcap/1.5.3-8.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libpcap/1.5.3-8.el7/x86_64"
     },
     "relationship": []
@@ -5661,7 +5661,7 @@
     "@id": "data:python-dns/1.12.0-1.20150617git465785f.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-dns/1.12.0-1.20150617git465785f.el7/noarch"
     },
     "relationship": []
@@ -5672,7 +5672,7 @@
     "@id": "data:ustr/1.0.4-16.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "ustr/1.0.4-16.el7/x86_64"
     },
     "relationship": []
@@ -5683,7 +5683,7 @@
     "@id": "data:quota/4.01-11.el7_2.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "quota/4.01-11.el7_2.1/x86_64"
     },
     "relationship": []
@@ -5694,7 +5694,7 @@
     "@id": "data:autogen-libopts/5.18-5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "autogen-libopts/5.18-5.el7/x86_64"
     },
     "relationship": []
@@ -5705,7 +5705,7 @@
     "@id": "data:pyusb/1.0.0-0.11.b1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "pyusb/1.0.0-0.11.b1.el7/noarch"
     },
     "relationship": []
@@ -5716,7 +5716,7 @@
     "@id": "data:python-dateutil/1.5-7.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-dateutil/1.5-7.el7/noarch"
     },
     "relationship": []
@@ -5727,7 +5727,7 @@
     "@id": "data:python-ldap/2.4.15-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-ldap/2.4.15-2.el7/x86_64"
     },
     "relationship": []
@@ -5738,7 +5738,7 @@
     "@id": "data:shadow-utils/4.1.5.1-18.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "shadow-utils/4.1.5.1-18.el7/x86_64"
     },
     "relationship": []
@@ -5749,7 +5749,7 @@
     "@id": "data:python-nss/0.16.0-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-nss/0.16.0-3.el7/x86_64"
     },
     "relationship": []
@@ -5760,7 +5760,7 @@
     "@id": "data:python-libs/2.7.5-34.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-libs/2.7.5-34.el7/x86_64"
     },
     "relationship": []
@@ -5771,7 +5771,7 @@
     "@id": "data:python-pycparser/2.14-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-pycparser/2.14-1.el7/noarch"
     },
     "relationship": []
@@ -5782,7 +5782,7 @@
     "@id": "data:python-cryptography/0.8.2-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-cryptography/0.8.2-1.el7/x86_64"
     },
     "relationship": []
@@ -5793,7 +5793,7 @@
     "@id": "data:cracklib/2.9.0-11.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "cracklib/2.9.0-11.el7/x86_64"
     },
     "relationship": []
@@ -5804,7 +5804,7 @@
     "@id": "data:dbus-python/1.1.1-9.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "dbus-python/1.1.1-9.el7/x86_64"
     },
     "relationship": []
@@ -5815,7 +5815,7 @@
     "@id": "data:libpwquality/1.2.3-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libpwquality/1.2.3-4.el7/x86_64"
     },
     "relationship": []
@@ -5826,7 +5826,7 @@
     "@id": "data:gettext/0.18.2.1-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "gettext/0.18.2.1-4.el7/x86_64"
     },
     "relationship": []
@@ -5837,7 +5837,7 @@
     "@id": "data:centos-logos/70.0.6-3.el7.centos",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "centos-logos/70.0.6-3.el7.centos/noarch"
     },
     "relationship": []
@@ -5848,7 +5848,7 @@
     "@id": "data:grubby/8.28-17.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "grubby/8.28-17.el7/x86_64"
     },
     "relationship": []
@@ -5859,7 +5859,7 @@
     "@id": "data:python-slip/0.4.0-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-slip/0.4.0-2.el7/noarch"
     },
     "relationship": []
@@ -5870,7 +5870,7 @@
     "@id": "data:python-iniparse/0.4-9.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-iniparse/0.4-9.el7/noarch"
     },
     "relationship": []
@@ -5881,7 +5881,7 @@
     "@id": "data:python-configobj/4.7.2-7.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-configobj/4.7.2-7.el7/noarch"
     },
     "relationship": []
@@ -5892,7 +5892,7 @@
     "@id": "data:yum-metadata-parser/1.1.4-10.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "yum-metadata-parser/1.1.4-10.el7/x86_64"
     },
     "relationship": []
@@ -5903,7 +5903,7 @@
     "@id": "data:nss-softokn-freebl/3.16.2.3-14.2.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "nss-softokn-freebl/3.16.2.3-14.2.el7_2/x86_64"
     },
     "relationship": []
@@ -5914,7 +5914,7 @@
     "@id": "data:pyxattr/0.5.1-5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "pyxattr/0.5.1-5.el7/x86_64"
     },
     "relationship": []
@@ -5925,7 +5925,7 @@
     "@id": "data:glibc-common/2.17-106.el7_2.6",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "glibc-common/2.17-106.el7_2.6/x86_64"
     },
     "relationship": []
@@ -5936,7 +5936,7 @@
     "@id": "data:rubygem-bigdecimal/1.2.0-25.el7_1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "rubygem-bigdecimal/1.2.0-25.el7_1/x86_64"
     },
     "relationship": []
@@ -5947,7 +5947,7 @@
     "@id": "data:nss-util/3.21.0-2.2.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "nss-util/3.21.0-2.2.el7_2/x86_64"
     },
     "relationship": []
@@ -5958,7 +5958,7 @@
     "@id": "data:rubygem-psych/2.0.0-25.el7_1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "rubygem-psych/2.0.0-25.el7_1/x86_64"
     },
     "relationship": []
@@ -5969,7 +5969,7 @@
     "@id": "data:ruby-irb/2.0.0.598-25.el7_1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "ruby-irb/2.0.0.598-25.el7_1/noarch"
     },
     "relationship": []
@@ -5980,7 +5980,7 @@
     "@id": "data:rubygem-io-console/0.4.2-25.el7_1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "rubygem-io-console/0.4.2-25.el7_1/x86_64"
     },
     "relationship": []
@@ -5991,7 +5991,7 @@
     "@id": "data:ruby-shadow/2.2.0-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "ruby-shadow/2.2.0-2.el7/x86_64"
     },
     "relationship": []
@@ -6002,7 +6002,7 @@
     "@id": "data:ruby-augeas/0.5.0-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "ruby-augeas/0.5.0-1.el7/x86_64"
     },
     "relationship": []
@@ -6013,7 +6013,7 @@
     "@id": "data:libutempter/1.1.6-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libutempter/1.1.6-4.el7/x86_64"
     },
     "relationship": []
@@ -6024,7 +6024,7 @@
     "@id": "data:fipscheck/1.4.1-5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "fipscheck/1.4.1-5.el7/x86_64"
     },
     "relationship": []
@@ -6035,7 +6035,7 @@
     "@id": "data:libcurl/7.29.0-25.el7.centos",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libcurl/7.29.0-25.el7.centos/x86_64"
     },
     "relationship": []
@@ -6046,7 +6046,7 @@
     "@id": "data:rpm-libs/4.11.3-17.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "rpm-libs/4.11.3-17.el7/x86_64"
     },
     "relationship": []
@@ -6057,7 +6057,7 @@
     "@id": "data:dhcp-libs/4.2.5-42.el7.centos",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "dhcp-libs/4.2.5-42.el7.centos/x86_64"
     },
     "relationship": []
@@ -6068,7 +6068,7 @@
     "@id": "data:python-urlgrabber/3.10-7.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-urlgrabber/3.10-7.el7/noarch"
     },
     "relationship": []
@@ -6079,7 +6079,7 @@
     "@id": "data:hardlink/1.0-19.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "hardlink/1.0-19.el7/x86_64"
     },
     "relationship": []
@@ -6090,7 +6090,7 @@
     "@id": "data:gnupg2/2.0.22-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "gnupg2/2.0.22-3.el7/x86_64"
     },
     "relationship": []
@@ -6101,7 +6101,7 @@
     "@id": "data:screen/4.1.0-0.23.20120314git3c2946.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "screen/4.1.0-0.23.20120314git3c2946.el7_2/x86_64"
     },
     "relationship": []
@@ -6112,7 +6112,7 @@
     "@id": "data:rpm-python/4.11.3-17.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "rpm-python/4.11.3-17.el7/x86_64"
     },
     "relationship": []
@@ -6123,7 +6123,7 @@
     "@id": "data:pygpgme/0.3-9.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "pygpgme/0.3-9.el7/x86_64"
     },
     "relationship": []
@@ -6134,7 +6134,7 @@
     "@id": "data:yum/3.4.3-132.el7.centos.0.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "yum/3.4.3-132.el7.centos.0.1/noarch"
     },
     "relationship": []
@@ -6145,7 +6145,7 @@
     "@id": "data:libnetfilter_conntrack/1.0.4-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libnetfilter_conntrack/1.0.4-2.el7/x86_64"
     },
     "relationship": []
@@ -6156,7 +6156,7 @@
     "@id": "data:nmap-ncat/6.40-7.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "nmap-ncat/6.40-7.el7/x86_64"
     },
     "relationship": []
@@ -6167,7 +6167,7 @@
     "@id": "data:lm_sensors-libs/3.3.4-11.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "lm_sensors-libs/3.3.4-11.el7/x86_64"
     },
     "relationship": []
@@ -6178,7 +6178,7 @@
     "@id": "data:perl-HTTP-Tiny/0.033-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-HTTP-Tiny/0.033-3.el7/noarch"
     },
     "relationship": []
@@ -6189,7 +6189,7 @@
     "@id": "data:crontabs/1.11-6.20121102git.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "crontabs/1.11-6.20121102git.el7/noarch"
     },
     "relationship": []
@@ -6200,7 +6200,7 @@
     "@id": "data:perl-Pod-Perldoc/3.20-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Pod-Perldoc/3.20-4.el7/noarch"
     },
     "relationship": []
@@ -6211,7 +6211,7 @@
     "@id": "data:os-prober/1.58-5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "os-prober/1.58-5.el7/x86_64"
     },
     "relationship": []
@@ -6222,7 +6222,7 @@
     "@id": "data:perl-Text-ParseWords/3.29-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Text-ParseWords/3.29-4.el7/noarch"
     },
     "relationship": []
@@ -6233,7 +6233,7 @@
     "@id": "data:libpciaccess/0.13.4-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libpciaccess/0.13.4-2.el7/x86_64"
     },
     "relationship": []
@@ -6244,7 +6244,7 @@
     "@id": "data:perl-Pod-Usage/1.63-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Pod-Usage/1.63-3.el7/noarch"
     },
     "relationship": []
@@ -6255,7 +6255,7 @@
     "@id": "data:plymouth-scripts/0.8.9-0.24.20140113.el7.centos",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "plymouth-scripts/0.8.9-0.24.20140113.el7.centos/x86_64"
     },
     "relationship": []
@@ -6266,7 +6266,7 @@
     "@id": "data:perl-macros/5.16.3-286.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-macros/5.16.3-286.el7/x86_64"
     },
     "relationship": []
@@ -6277,7 +6277,7 @@
     "@id": "data:pciutils/3.2.1-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "pciutils/3.2.1-4.el7/x86_64"
     },
     "relationship": []
@@ -6288,7 +6288,7 @@
     "@id": "data:perl-Exporter/5.68-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Exporter/5.68-3.el7/noarch"
     },
     "relationship": []
@@ -6299,7 +6299,7 @@
     "@id": "data:dnsmasq/2.66-14.el7_1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "dnsmasq/2.66-14.el7_1/x86_64"
     },
     "relationship": []
@@ -6310,7 +6310,7 @@
     "@id": "data:perl-Time-Local/1.2300-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Time-Local/1.2300-2.el7/noarch"
     },
     "relationship": []
@@ -6321,7 +6321,7 @@
     "@id": "data:ppp/2.4.5-33.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "ppp/2.4.5-33.el7/x86_64"
     },
     "relationship": []
@@ -6332,7 +6332,7 @@
     "@id": "data:perl-Carp/1.26-244.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Carp/1.26-244.el7/noarch"
     },
     "relationship": []
@@ -6343,7 +6343,7 @@
     "@id": "data:perl-PathTools/3.40-5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-PathTools/3.40-5.el7/x86_64"
     },
     "relationship": []
@@ -6354,7 +6354,7 @@
     "@id": "data:libsoup/2.48.1-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libsoup/2.48.1-3.el7/x86_64"
     },
     "relationship": []
@@ -6365,7 +6365,7 @@
     "@id": "data:perl-File-Temp/0.23.01-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-File-Temp/0.23.01-3.el7/noarch"
     },
     "relationship": []
@@ -6376,7 +6376,7 @@
     "@id": "data:alsa-firmware/1.0.28-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "alsa-firmware/1.0.28-2.el7/noarch"
     },
     "relationship": []
@@ -6387,7 +6387,7 @@
     "@id": "data:perl-threads-shared/1.43-6.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-threads-shared/1.43-6.el7/x86_64"
     },
     "relationship": []
@@ -6398,7 +6398,7 @@
     "@id": "data:ebtables/2.0.10-13.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "ebtables/2.0.10-13.el7/x86_64"
     },
     "relationship": []
@@ -6409,7 +6409,7 @@
     "@id": "data:perl-Filter/1.49-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Filter/1.49-3.el7/x86_64"
     },
     "relationship": []
@@ -6420,7 +6420,7 @@
     "@id": "data:perl-Getopt-Long/2.40-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Getopt-Long/2.40-2.el7/noarch"
     },
     "relationship": []
@@ -6431,7 +6431,7 @@
     "@id": "data:net-snmp-agent-libs/5.7.2-24.el7_2.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "net-snmp-agent-libs/5.7.2-24.el7_2.1/x86_64"
     },
     "relationship": []
@@ -6442,7 +6442,7 @@
     "@id": "data:net-snmp/5.7.2-24.el7_2.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "net-snmp/5.7.2-24.el7_2.1/x86_64"
     },
     "relationship": []
@@ -6453,7 +6453,7 @@
     "@id": "data:json-c/0.11-4.el7_0",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "json-c/0.11-4.el7_0/x86_64"
     },
     "relationship": []
@@ -6464,7 +6464,7 @@
     "@id": "data:poppler-data/0.4.6-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "poppler-data/0.4.6-3.el7/noarch"
     },
     "relationship": []
@@ -6475,7 +6475,7 @@
     "@id": "data:emacs-common/24.3-18.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "emacs-common/24.3-18.el7/x86_64"
     },
     "relationship": []
@@ -6486,7 +6486,7 @@
     "@id": "data:libwmf-lite/0.2.8.4-41.el7_1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libwmf-lite/0.2.8.4-41.el7_1/x86_64"
     },
     "relationship": []
@@ -6497,7 +6497,7 @@
     "@id": "data:libxshmfence/1.2-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libxshmfence/1.2-1.el7/x86_64"
     },
     "relationship": []
@@ -6508,7 +6508,7 @@
     "@id": "data:libX11/1.6.3-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libX11/1.6.3-2.el7/x86_64"
     },
     "relationship": []
@@ -6519,7 +6519,7 @@
     "@id": "data:libXrender/0.9.8-2.1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libXrender/0.9.8-2.1.el7/x86_64"
     },
     "relationship": []
@@ -6530,7 +6530,7 @@
     "@id": "data:gdk-pixbuf2/2.31.6-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "gdk-pixbuf2/2.31.6-3.el7/x86_64"
     },
     "relationship": []
@@ -6541,7 +6541,7 @@
     "@id": "data:libXdamage/1.1.4-4.1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libXdamage/1.1.4-4.1.el7/x86_64"
     },
     "relationship": []
@@ -6552,7 +6552,7 @@
     "@id": "data:libXft/2.3.2-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libXft/2.3.2-2.el7/x86_64"
     },
     "relationship": []
@@ -6563,7 +6563,7 @@
     "@id": "data:libXpm/3.5.11-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libXpm/3.5.11-3.el7/x86_64"
     },
     "relationship": []
@@ -6574,7 +6574,7 @@
     "@id": "data:libXaw/1.0.12-5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libXaw/1.0.12-5.el7/x86_64"
     },
     "relationship": []
@@ -6585,7 +6585,7 @@
     "@id": "data:libXtst/1.2.2-2.1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libXtst/1.2.2-2.1.el7/x86_64"
     },
     "relationship": []
@@ -6596,7 +6596,7 @@
     "@id": "data:ghostscript/9.07-18.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "ghostscript/9.07-18.el7/x86_64"
     },
     "relationship": []
@@ -6607,7 +6607,7 @@
     "@id": "data:libXxf86vm/1.1.3-2.1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libXxf86vm/1.1.3-2.1.el7/x86_64"
     },
     "relationship": []
@@ -6618,7 +6618,7 @@
     "@id": "data:cairo/1.14.2-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "cairo/1.14.2-1.el7/x86_64"
     },
     "relationship": []
@@ -6629,7 +6629,7 @@
     "@id": "data:librsvg2/2.39.0-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "librsvg2/2.39.0-1.el7/x86_64"
     },
     "relationship": []
@@ -6640,7 +6640,7 @@
     "@id": "data:ImageMagick/6.7.8.9-15.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "ImageMagick/6.7.8.9-15.el7_2/x86_64"
     },
     "relationship": []
@@ -6651,7 +6651,7 @@
     "@id": "data:libXevie/1.0.3-7.1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libXevie/1.0.3-7.1.el7/x86_64"
     },
     "relationship": []
@@ -6662,7 +6662,7 @@
     "@id": "data:at-spi2-atk/2.8.1-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "at-spi2-atk/2.8.1-4.el7/x86_64"
     },
     "relationship": []
@@ -6673,7 +6673,7 @@
     "@id": "data:libXcomposite/0.4.4-4.1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libXcomposite/0.4.4-4.1.el7/x86_64"
     },
     "relationship": []
@@ -6684,7 +6684,7 @@
     "@id": "data:emacs/24.3-18.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "emacs/24.3-18.el7/x86_64"
     },
     "relationship": []
@@ -6695,7 +6695,7 @@
     "@id": "data:vim-filesystem/7.4.160-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "vim-filesystem/7.4.160-1.el7/x86_64"
     },
     "relationship": []
@@ -6706,7 +6706,7 @@
     "@id": "data:vim-enhanced/7.4.160-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "vim-enhanced/7.4.160-1.el7/x86_64"
     },
     "relationship": []
@@ -6717,7 +6717,7 @@
     "@id": "data:perl-Test-Harness/3.28-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Test-Harness/3.28-3.el7/noarch"
     },
     "relationship": []
@@ -6728,7 +6728,7 @@
     "@id": "data:libmng/1.0.10-14.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libmng/1.0.10-14.el7/x86_64"
     },
     "relationship": []
@@ -6739,7 +6739,7 @@
     "@id": "data:perl-XML-SAX-Base/1.08-7.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-XML-SAX-Base/1.08-7.el7/noarch"
     },
     "relationship": []
@@ -6750,7 +6750,7 @@
     "@id": "data:perl-XML-NamespaceSupport/1.11-10.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-XML-NamespaceSupport/1.11-10.el7/noarch"
     },
     "relationship": []
@@ -6761,7 +6761,7 @@
     "@id": "data:perl-Digest-MD5/2.52-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Digest-MD5/2.52-3.el7/x86_64"
     },
     "relationship": []
@@ -6772,7 +6772,7 @@
     "@id": "data:perl-Pod-Checker/1.60-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Pod-Checker/1.60-2.el7/noarch"
     },
     "relationship": []
@@ -6783,7 +6783,7 @@
     "@id": "data:perl-Pod-Plainer/1.03-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Pod-Plainer/1.03-4.el7/noarch"
     },
     "relationship": []
@@ -6794,7 +6794,7 @@
     "@id": "data:perl-Net-LibIDN/0.12-15.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Net-LibIDN/0.12-15.el7/x86_64"
     },
     "relationship": []
@@ -6805,7 +6805,7 @@
     "@id": "data:spax/1.5.2-13.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "spax/1.5.2-13.el7/x86_64"
     },
     "relationship": []
@@ -6816,7 +6816,7 @@
     "@id": "data:redhat-lsb-submod-multimedia/4.1-27.el7.centos.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "redhat-lsb-submod-multimedia/4.1-27.el7.centos.1/x86_64"
     },
     "relationship": []
@@ -6827,7 +6827,7 @@
     "@id": "data:pyparsing/1.5.6-9.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "pyparsing/1.5.6-9.el7/noarch"
     },
     "relationship": []
@@ -6838,7 +6838,7 @@
     "@id": "data:perl-Module-Pluggable/4.8-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Module-Pluggable/4.8-3.el7/noarch"
     },
     "relationship": []
@@ -6849,7 +6849,7 @@
     "@id": "data:cups-client/1.6.3-22.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "cups-client/1.6.3-22.el7/x86_64"
     },
     "relationship": []
@@ -6860,7 +6860,7 @@
     "@id": "data:perl-HTTP-Date/6.02-8.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-HTTP-Date/6.02-8.el7/noarch"
     },
     "relationship": []
@@ -6871,7 +6871,7 @@
     "@id": "data:perl-Text-Unidecode/0.04-20.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Text-Unidecode/0.04-20.el7/noarch"
     },
     "relationship": []
@@ -6882,7 +6882,7 @@
     "@id": "data:perl-IO-HTML/1.00-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-IO-HTML/1.00-2.el7/noarch"
     },
     "relationship": []
@@ -6893,7 +6893,7 @@
     "@id": "data:perl-Class-ISA/0.36-1010.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Class-ISA/0.36-1010.el7/noarch"
     },
     "relationship": []
@@ -6904,7 +6904,7 @@
     "@id": "data:gdbm-devel/1.10-8.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "gdbm-devel/1.10-8.el7/x86_64"
     },
     "relationship": []
@@ -6915,7 +6915,7 @@
     "@id": "data:perl-ExtUtils-Manifest/1.61-244.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-ExtUtils-Manifest/1.61-244.el7/noarch"
     },
     "relationship": []
@@ -6926,7 +6926,7 @@
     "@id": "data:perl-LWP-MediaTypes/6.02-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-LWP-MediaTypes/6.02-2.el7/noarch"
     },
     "relationship": []
@@ -6937,7 +6937,7 @@
     "@id": "data:gtk2/2.24.28-8.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "gtk2/2.24.28-8.el7/x86_64"
     },
     "relationship": []
@@ -6948,7 +6948,7 @@
     "@id": "data:perl-CGI/3.63-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-CGI/3.63-4.el7/noarch"
     },
     "relationship": []
@@ -6959,7 +6959,7 @@
     "@id": "data:at/3.1.13-20.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "at/3.1.13-20.el7/x86_64"
     },
     "relationship": []
@@ -6970,7 +6970,7 @@
     "@id": "data:libini_config/1.2.0-25.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libini_config/1.2.0-25.el7/x86_64"
     },
     "relationship": []
@@ -6981,7 +6981,7 @@
     "@id": "data:qt/4.8.5-12.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "qt/4.8.5-12.el7_2/x86_64"
     },
     "relationship": []
@@ -6992,7 +6992,7 @@
     "@id": "data:nfs-utils/1.3.0-0.21.el7_2.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "nfs-utils/1.3.0-0.21.el7_2.1/x86_64"
     },
     "relationship": []
@@ -7003,7 +7003,7 @@
     "@id": "data:perl-Compress-Raw-Bzip2/2.061-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Compress-Raw-Bzip2/2.061-3.el7/x86_64"
     },
     "relationship": []
@@ -7014,7 +7014,7 @@
     "@id": "data:python-backports-ssl_match_hostname/3.4.0.2-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-backports-ssl_match_hostname/3.4.0.2-4.el7/noarch"
     },
     "relationship": []
@@ -7025,7 +7025,7 @@
     "@id": "data:perl-Env/1.04-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Env/1.04-2.el7/noarch"
     },
     "relationship": []
@@ -7036,7 +7036,7 @@
     "@id": "data:ipa-python/4.2.0-15.0.1.el7.centos.17",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "ipa-python/4.2.0-15.0.1.el7.centos.17/x86_64"
     },
     "relationship": []
@@ -7047,7 +7047,7 @@
     "@id": "data:time/1.7-45.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "time/1.7-45.el7/x86_64"
     },
     "relationship": []
@@ -7058,7 +7058,7 @@
     "@id": "data:sssd-common/1.13.0-40.el7_2.9",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "sssd-common/1.13.0-40.el7_2.9/x86_64"
     },
     "relationship": []
@@ -7069,7 +7069,7 @@
     "@id": "data:perl-local-lib/1.008010-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-local-lib/1.008010-3.el7/noarch"
     },
     "relationship": []
@@ -7080,7 +7080,7 @@
     "@id": "data:sssd-common-pac/1.13.0-40.el7_2.9",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "sssd-common-pac/1.13.0-40.el7_2.9/x86_64"
     },
     "relationship": []
@@ -7091,7 +7091,7 @@
     "@id": "data:glibc-headers/2.17-106.el7_2.6",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "glibc-headers/2.17-106.el7_2.6/x86_64"
     },
     "relationship": []
@@ -7102,7 +7102,7 @@
     "@id": "data:sssd-ad/1.13.0-40.el7_2.9",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "sssd-ad/1.13.0-40.el7_2.9/x86_64"
     },
     "relationship": []
@@ -7113,7 +7113,7 @@
     "@id": "data:perl-ExtUtils-MakeMaker/6.68-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-ExtUtils-MakeMaker/6.68-3.el7/noarch"
     },
     "relationship": []
@@ -7124,7 +7124,7 @@
     "@id": "data:sssd-ldap/1.13.0-40.el7_2.9",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "sssd-ldap/1.13.0-40.el7_2.9/x86_64"
     },
     "relationship": []
@@ -7135,7 +7135,7 @@
     "@id": "data:perl-ExtUtils-ParseXS/3.18-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-ExtUtils-ParseXS/3.18-2.el7/noarch"
     },
     "relationship": []
@@ -7146,7 +7146,7 @@
     "@id": "data:sssd/1.13.0-40.el7_2.9",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "sssd/1.13.0-40.el7_2.9/x86_64"
     },
     "relationship": []
@@ -7157,7 +7157,7 @@
     "@id": "data:perl-CPAN/1.9800-286.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-CPAN/1.9800-286.el7/noarch"
     },
     "relationship": []
@@ -7168,7 +7168,7 @@
     "@id": "data:autofs/5.0.7-54.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "autofs/5.0.7-54.el7/x86_64"
     },
     "relationship": []
@@ -7179,7 +7179,7 @@
     "@id": "data:perl-IO-Socket-IP/0.21-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-IO-Socket-IP/0.21-4.el7/noarch"
     },
     "relationship": []
@@ -7190,7 +7190,7 @@
     "@id": "data:bind-libs-lite/9.9.4-29.el7_2.3",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "bind-libs-lite/9.9.4-29.el7_2.3/x86_64"
     },
     "relationship": []
@@ -7201,7 +7201,7 @@
     "@id": "data:perl-Net-HTTP/6.06-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Net-HTTP/6.06-2.el7/noarch"
     },
     "relationship": []
@@ -7212,7 +7212,7 @@
     "@id": "data:xdg-utils/1.1.0-0.16.20120809git.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "xdg-utils/1.1.0-0.16.20120809git.el7/noarch"
     },
     "relationship": []
@@ -7223,7 +7223,7 @@
     "@id": "data:redhat-lsb-core/4.1-27.el7.centos.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "redhat-lsb-core/4.1-27.el7.centos.1/x86_64"
     },
     "relationship": []
@@ -7234,7 +7234,7 @@
     "@id": "data:redhat-lsb-cxx/4.1-27.el7.centos.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "redhat-lsb-cxx/4.1-27.el7.centos.1/x86_64"
     },
     "relationship": []
@@ -7245,7 +7245,7 @@
     "@id": "data:libuuid/2.23.2-26.el7_2.2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libuuid/2.23.2-26.el7_2.2/x86_64"
     },
     "relationship": []
@@ -7256,7 +7256,7 @@
     "@id": "data:perl-Business-ISBN/2.06-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Business-ISBN/2.06-2.el7/noarch"
     },
     "relationship": []
@@ -7267,7 +7267,7 @@
     "@id": "data:iproute/3.10.0-54.el7_2.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "iproute/3.10.0-54.el7_2.1/x86_64"
     },
     "relationship": []
@@ -7278,7 +7278,7 @@
     "@id": "data:perl-HTTP-Message/6.06-6.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-HTTP-Message/6.06-6.el7/noarch"
     },
     "relationship": []
@@ -7289,7 +7289,7 @@
     "@id": "data:nss-softokn/3.16.2.3-14.2.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "nss-softokn/3.16.2.3-14.2.el7_2/x86_64"
     },
     "relationship": []
@@ -7300,7 +7300,7 @@
     "@id": "data:perl-HTML-Parser/3.71-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-HTML-Parser/3.71-4.el7/x86_64"
     },
     "relationship": []
@@ -7311,7 +7311,7 @@
     "@id": "data:openssl-libs/1.0.1e-51.el7_2.5",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "openssl-libs/1.0.1e-51.el7_2.5/x86_64"
     },
     "relationship": []
@@ -7322,7 +7322,7 @@
     "@id": "data:perl-HTTP-Daemon/6.01-5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-HTTP-Daemon/6.01-5.el7/noarch"
     },
     "relationship": []
@@ -7333,7 +7333,7 @@
     "@id": "data:ca-certificates/2015.2.6-70.1.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "ca-certificates/2015.2.6-70.1.el7_2/noarch"
     },
     "relationship": []
@@ -7344,7 +7344,7 @@
     "@id": "data:perl-libwww-perl/6.05-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-libwww-perl/6.05-2.el7/noarch"
     },
     "relationship": []
@@ -7355,7 +7355,7 @@
     "@id": "data:libmount/2.23.2-26.el7_2.2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libmount/2.23.2-26.el7_2.2/x86_64"
     },
     "relationship": []
@@ -7366,7 +7366,7 @@
     "@id": "data:perl-XML-LibXML/2.0018-5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-XML-LibXML/2.0018-5.el7/x86_64"
     },
     "relationship": []
@@ -7377,7 +7377,7 @@
     "@id": "data:util-linux/2.23.2-26.el7_2.2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "util-linux/2.23.2-26.el7_2.2/x86_64"
     },
     "relationship": []
@@ -7388,7 +7388,7 @@
     "@id": "data:perl-Locale-Codes/3.26-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Locale-Codes/3.26-2.el7/noarch"
     },
     "relationship": []
@@ -7399,7 +7399,7 @@
     "@id": "data:nss/3.21.0-9.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "nss/3.21.0-9.el7_2/x86_64"
     },
     "relationship": []
@@ -7410,7 +7410,7 @@
     "@id": "data:redhat-lsb-languages/4.1-27.el7.centos.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "redhat-lsb-languages/4.1-27.el7.centos.1/x86_64"
     },
     "relationship": []
@@ -7421,7 +7421,7 @@
     "@id": "data:NetworkManager-libnm/1.0.6-30.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "NetworkManager-libnm/1.0.6-30.el7_2/x86_64"
     },
     "relationship": []
@@ -7432,7 +7432,7 @@
     "@id": "data:redhat-lsb-printing/4.1-27.el7.centos.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "redhat-lsb-printing/4.1-27.el7.centos.1/x86_64"
     },
     "relationship": []
@@ -7443,7 +7443,7 @@
     "@id": "data:openldap/2.4.40-9.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "openldap/2.4.40-9.el7_2/x86_64"
     },
     "relationship": []
@@ -7454,7 +7454,7 @@
     "@id": "data:initscripts/9.49.30-1.el7_2.2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "initscripts/9.49.30-1.el7_2.2/x86_64"
     },
     "relationship": []
@@ -7465,7 +7465,7 @@
     "@id": "data:unzip/6.0-15.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "unzip/6.0-15.el7/x86_64"
     },
     "relationship": []
@@ -7476,7 +7476,7 @@
     "@id": "data:device-mapper/1.02.107-5.el7_2.5",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "device-mapper/1.02.107-5.el7_2.5/x86_64"
     },
     "relationship": []
@@ -7487,7 +7487,7 @@
     "@id": "data:dwz/0.11-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "dwz/0.11-3.el7/x86_64"
     },
     "relationship": []
@@ -7498,7 +7498,7 @@
     "@id": "data:kpartx/0.4.9-85.el7_2.5",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "kpartx/0.4.9-85.el7_2.5/x86_64"
     },
     "relationship": []
@@ -7509,7 +7509,7 @@
     "@id": "data:perl-srpm-macros/1-8.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-srpm-macros/1-8.el7/noarch"
     },
     "relationship": []
@@ -7520,7 +7520,7 @@
     "@id": "data:dracut-network/033-360.el7_2.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "dracut-network/033-360.el7_2.1/x86_64"
     },
     "relationship": []
@@ -7531,7 +7531,7 @@
     "@id": "data:redhat-rpm-config/9.1.0-68.el7.centos",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "redhat-rpm-config/9.1.0-68.el7.centos/noarch"
     },
     "relationship": []
@@ -7542,7 +7542,7 @@
     "@id": "data:polkit/0.112-7.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "polkit/0.112-7.el7_2/x86_64"
     },
     "relationship": []
@@ -7553,7 +7553,7 @@
     "@id": "data:gdb/7.6.1-80.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "gdb/7.6.1-80.el7/x86_64"
     },
     "relationship": []
@@ -7564,7 +7564,7 @@
     "@id": "data:cronie-anacron/1.4.11-14.el7_2.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "cronie-anacron/1.4.11-14.el7_2.1/x86_64"
     },
     "relationship": []
@@ -7575,7 +7575,7 @@
     "@id": "data:rpmdevtools/8.3-5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "rpmdevtools/8.3-5.el7/noarch"
     },
     "relationship": []
@@ -7586,7 +7586,7 @@
     "@id": "data:selinux-policy/3.13.1-60.el7_2.7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "selinux-policy/3.13.1-60.el7_2.7/noarch"
     },
     "relationship": []
@@ -7597,7 +7597,7 @@
     "@id": "data:lsof/4.87-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "lsof/4.87-4.el7/x86_64"
     },
     "relationship": []
@@ -7608,7 +7608,7 @@
     "@id": "data:libndp/1.2-6.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libndp/1.2-6.el7_2/x86_64"
     },
     "relationship": []
@@ -7619,7 +7619,7 @@
     "@id": "data:libdnet/1.12-13.1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libdnet/1.12-13.1.el7/x86_64"
     },
     "relationship": []
@@ -7630,7 +7630,7 @@
     "@id": "data:avahi-autoipd/0.6.31-15.el7_2.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "avahi-autoipd/0.6.31-15.el7_2.1/x86_64"
     },
     "relationship": []
@@ -7641,7 +7641,7 @@
     "@id": "data:open-vm-tools/9.10.2-5.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "open-vm-tools/9.10.2-5.el7_2/x86_64"
     },
     "relationship": []
@@ -7652,7 +7652,7 @@
     "@id": "data:python-perf/3.10.0-327.22.2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-perf/3.10.0-327.22.2.el7/x86_64"
     },
     "relationship": []
@@ -7663,7 +7663,7 @@
     "@id": "data:libteam/1.17-6.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libteam/1.17-6.el7_2/x86_64"
     },
     "relationship": []
@@ -7674,7 +7674,7 @@
     "@id": "data:NetworkManager-team/1.0.6-30.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "NetworkManager-team/1.0.6-30.el7_2/x86_64"
     },
     "relationship": []
@@ -7685,7 +7685,7 @@
     "@id": "data:tuned/2.5.1-4.el7_2.3",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "tuned/2.5.1-4.el7_2.3/noarch"
     },
     "relationship": []
@@ -7696,7 +7696,7 @@
     "@id": "data:selinux-policy-targeted/3.13.1-60.el7_2.7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "selinux-policy-targeted/3.13.1-60.el7_2.7/noarch"
     },
     "relationship": []
@@ -7707,7 +7707,7 @@
     "@id": "data:kexec-tools/2.0.7-38.el7_2.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "kexec-tools/2.0.7-38.el7_2.1/x86_64"
     },
     "relationship": []
@@ -7718,7 +7718,7 @@
     "@id": "data:grub2/2.02-0.34.el7.centos",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "grub2/2.02-0.34.el7.centos/x86_64"
     },
     "relationship": []
@@ -7729,7 +7729,7 @@
     "@id": "data:rdma/7.2_4.1_rc6-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "rdma/7.2_4.1_rc6-2.el7/noarch"
     },
     "relationship": []
@@ -7740,7 +7740,7 @@
     "@id": "data:openssh-clients/6.6.1p1-25.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "openssh-clients/6.6.1p1-25.el7_2/x86_64"
     },
     "relationship": []
@@ -7751,7 +7751,7 @@
     "@id": "data:openssl/1.0.1e-51.el7_2.5",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "openssl/1.0.1e-51.el7_2.5/x86_64"
     },
     "relationship": []
@@ -7762,7 +7762,7 @@
     "@id": "data:mariadb-libs/5.5.47-1.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "mariadb-libs/5.5.47-1.el7_2/x86_64"
     },
     "relationship": []
@@ -7773,7 +7773,7 @@
     "@id": "data:gnutls/3.3.8-14.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "gnutls/3.3.8-14.el7_2/x86_64"
     },
     "relationship": []
@@ -7784,7 +7784,7 @@
     "@id": "data:numactl-libs/2.0.9-6.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "numactl-libs/2.0.9-6.el7_2/x86_64"
     },
     "relationship": []
@@ -7795,7 +7795,7 @@
     "@id": "data:libpng/1.5.13-7.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libpng/1.5.13-7.el7_2/x86_64"
     },
     "relationship": []
@@ -7806,7 +7806,7 @@
     "@id": "data:centos-release/7-2.1511.el7.centos.2.10",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "centos-release/7-2.1511.el7.centos.2.10/x86_64"
     },
     "relationship": []
@@ -7817,7 +7817,7 @@
     "@id": "data:jasper-libs/1.900.1-29.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "jasper-libs/1.900.1-29.el7/x86_64"
     },
     "relationship": []
@@ -7828,7 +7828,7 @@
     "@id": "data:kbd/1.15.5-11.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "kbd/1.15.5-11.el7/x86_64"
     },
     "relationship": []
@@ -7839,7 +7839,7 @@
     "@id": "data:emacs-filesystem/24.3-18.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "emacs-filesystem/24.3-18.el7/noarch"
     },
     "relationship": []
@@ -7850,7 +7850,7 @@
     "@id": "data:pixman/0.32.6-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "pixman/0.32.6-3.el7/x86_64"
     },
     "relationship": []
@@ -7861,7 +7861,7 @@
     "@id": "data:xz-libs/5.1.2-12alpha.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "xz-libs/5.1.2-12alpha.el7/x86_64"
     },
     "relationship": []
@@ -7872,7 +7872,7 @@
     "@id": "data:colord-libs/1.2.7-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "colord-libs/1.2.7-2.el7/x86_64"
     },
     "relationship": []
@@ -7883,7 +7883,7 @@
     "@id": "data:kernel/3.10.0-327.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "kernel/3.10.0-327.el7/x86_64"
     },
     "relationship": []
@@ -7894,7 +7894,7 @@
     "@id": "data:libsepol/2.1.9-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libsepol/2.1.9-3.el7/x86_64"
     },
     "relationship": []
@@ -7905,7 +7905,7 @@
     "@id": "data:ghostscript-fonts/5.50-32.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "ghostscript-fonts/5.50-32.el7/noarch"
     },
     "relationship": []
@@ -7916,7 +7916,7 @@
     "@id": "data:info/5.1-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "info/5.1-4.el7/x86_64"
     },
     "relationship": []
@@ -7927,7 +7927,7 @@
     "@id": "data:OpenEXR-libs/1.7.1-7.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "OpenEXR-libs/1.7.1-7.el7/x86_64"
     },
     "relationship": []
@@ -7938,7 +7938,7 @@
     "@id": "data:m17n-db/1.6.4-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "m17n-db/1.6.4-3.el7/noarch"
     },
     "relationship": []
@@ -7949,7 +7949,7 @@
     "@id": "data:adwaita-cursor-theme/3.14.1-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "adwaita-cursor-theme/3.14.1-1.el7/noarch"
     },
     "relationship": []
@@ -7960,7 +7960,7 @@
     "@id": "data:dbus-libs/1.6.12-13.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "dbus-libs/1.6.12-13.el7/x86_64"
     },
     "relationship": []
@@ -7971,7 +7971,7 @@
     "@id": "data:libtiff/4.0.3-14.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libtiff/4.0.3-14.el7/x86_64"
     },
     "relationship": []
@@ -7982,7 +7982,7 @@
     "@id": "data:wget/1.14-10.el7_0.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "wget/1.14-10.el7_0.1/x86_64"
     },
     "relationship": []
@@ -7993,7 +7993,7 @@
     "@id": "data:elfutils-libelf/0.163-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "elfutils-libelf/0.163-3.el7/x86_64"
     },
     "relationship": []
@@ -8004,7 +8004,7 @@
     "@id": "data:liblockfile/1.08-17.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "liblockfile/1.08-17.el7/x86_64"
     },
     "relationship": []
@@ -8015,7 +8015,7 @@
     "@id": "data:epel-release/7-7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "epel-release/7-7/noarch"
     },
     "relationship": []
@@ -8026,7 +8026,7 @@
     "@id": "data:shared-mime-info/1.1-9.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "shared-mime-info/1.1-9.el7/x86_64"
     },
     "relationship": []
@@ -8037,7 +8037,7 @@
     "@id": "data:hicolor-icon-theme/0.12-7.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "hicolor-icon-theme/0.12-7.el7/noarch"
     },
     "relationship": []
@@ -8048,7 +8048,7 @@
     "@id": "data:iwl3160-firmware/22.0.7.0-43.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "iwl3160-firmware/22.0.7.0-43.el7/noarch"
     },
     "relationship": []
@@ -8059,7 +8059,7 @@
     "@id": "data:libacl/2.2.51-12.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libacl/2.2.51-12.el7/x86_64"
     },
     "relationship": []
@@ -8070,7 +8070,7 @@
     "@id": "data:libXext/1.3.3-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libXext/1.3.3-3.el7/x86_64"
     },
     "relationship": []
@@ -8081,7 +8081,7 @@
     "@id": "data:iwl7265-firmware/22.0.7.0-43.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "iwl7265-firmware/22.0.7.0-43.el7/noarch"
     },
     "relationship": []
@@ -8092,7 +8092,7 @@
     "@id": "data:p11-kit/0.20.7-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "p11-kit/0.20.7-3.el7/x86_64"
     },
     "relationship": []
@@ -8103,7 +8103,7 @@
     "@id": "data:libXfixes/5.0.1-2.1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libXfixes/5.0.1-2.1.el7/x86_64"
     },
     "relationship": []
@@ -8114,7 +8114,7 @@
     "@id": "data:iwl2030-firmware/18.168.6.1-43.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "iwl2030-firmware/18.168.6.1-43.el7/noarch"
     },
     "relationship": []
@@ -8125,7 +8125,7 @@
     "@id": "data:libidn/1.28-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libidn/1.28-4.el7/x86_64"
     },
     "relationship": []
@@ -8136,7 +8136,7 @@
     "@id": "data:libXi/1.7.4-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libXi/1.7.4-2.el7/x86_64"
     },
     "relationship": []
@@ -8147,7 +8147,7 @@
     "@id": "data:iwl1000-firmware/39.31.5.1-43.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "iwl1000-firmware/39.31.5.1-43.el7/noarch"
     },
     "relationship": []
@@ -8158,7 +8158,7 @@
     "@id": "data:libcap-ng/0.7.5-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libcap-ng/0.7.5-4.el7/x86_64"
     },
     "relationship": []
@@ -8169,7 +8169,7 @@
     "@id": "data:libotf/0.9.13-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libotf/0.9.13-4.el7/x86_64"
     },
     "relationship": []
@@ -8180,7 +8180,7 @@
     "@id": "data:libXrandr/1.4.2-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libXrandr/1.4.2-2.el7/x86_64"
     },
     "relationship": []
@@ -8191,7 +8191,7 @@
     "@id": "data:libtdb/1.3.8-1.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libtdb/1.3.8-1.el7_2/x86_64"
     },
     "relationship": []
@@ -8202,7 +8202,7 @@
     "@id": "data:pango/1.36.8-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "pango/1.36.8-2.el7/x86_64"
     },
     "relationship": []
@@ -8213,7 +8213,7 @@
     "@id": "data:libcollection/0.6.2-25.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libcollection/0.6.2-25.el7/x86_64"
     },
     "relationship": []
@@ -8224,7 +8224,7 @@
     "@id": "data:e2fsprogs-libs/1.42.9-7.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "e2fsprogs-libs/1.42.9-7.el7/x86_64"
     },
     "relationship": []
@@ -8235,7 +8235,7 @@
     "@id": "data:libXinerama/1.1.3-2.1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libXinerama/1.1.3-2.1.el7/x86_64"
     },
     "relationship": []
@@ -8246,7 +8246,7 @@
     "@id": "data:libtirpc/0.2.4-0.6.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libtirpc/0.2.4-0.6.el7/x86_64"
     },
     "relationship": []
@@ -8257,7 +8257,7 @@
     "@id": "data:libunistring/0.9.3-9.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libunistring/0.9.3-9.el7/x86_64"
     },
     "relationship": []
@@ -8268,7 +8268,7 @@
     "@id": "data:giflib/4.1.6-9.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "giflib/4.1.6-9.el7/x86_64"
     },
     "relationship": []
@@ -8279,7 +8279,7 @@
     "@id": "data:rpcbind/0.2.0-33.el7_2.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "rpcbind/0.2.0-33.el7_2.1/x86_64"
     },
     "relationship": []
@@ -8290,7 +8290,7 @@
     "@id": "data:libnfnetlink/1.0.1-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libnfnetlink/1.0.1-4.el7/x86_64"
     },
     "relationship": []
@@ -8301,7 +8301,7 @@
     "@id": "data:gpm-libs/1.20.7-5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "gpm-libs/1.20.7-5.el7/x86_64"
     },
     "relationship": []
@@ -8312,7 +8312,7 @@
     "@id": "data:psmisc/22.20-9.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "psmisc/22.20-9.el7/x86_64"
     },
     "relationship": []
@@ -8323,7 +8323,7 @@
     "@id": "data:lzo/2.06-8.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "lzo/2.06-8.el7/x86_64"
     },
     "relationship": []
@@ -8334,7 +8334,7 @@
     "@id": "data:perl-Compress-Raw-Zlib/2.061-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Compress-Raw-Zlib/2.061-4.el7/x86_64"
     },
     "relationship": []
@@ -8345,7 +8345,7 @@
     "@id": "data:bind-license/9.9.4-29.el7_2.3",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "bind-license/9.9.4-29.el7_2.3/noarch"
     },
     "relationship": []
@@ -8356,7 +8356,7 @@
     "@id": "data:hostname/3.13-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "hostname/3.13-3.el7/x86_64"
     },
     "relationship": []
@@ -8367,7 +8367,7 @@
     "@id": "data:perl-Encode-Locale/1.03-5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Encode-Locale/1.03-5.el7/noarch"
     },
     "relationship": []
@@ -8378,7 +8378,7 @@
     "@id": "data:oddjob/0.31.5-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "oddjob/0.31.5-4.el7/x86_64"
     },
     "relationship": []
@@ -8389,7 +8389,7 @@
     "@id": "data:dmidecode/2.12-9.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "dmidecode/2.12-9.el7/x86_64"
     },
     "relationship": []
@@ -8400,7 +8400,7 @@
     "@id": "data:perl-Digest-SHA/5.85-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Digest-SHA/5.85-3.el7/x86_64"
     },
     "relationship": []
@@ -8411,7 +8411,7 @@
     "@id": "data:libverto-tevent/0.2.5-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libverto-tevent/0.2.5-4.el7/x86_64"
     },
     "relationship": []
@@ -8422,7 +8422,7 @@
     "@id": "data:nettle/2.7.1-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "nettle/2.7.1-4.el7/x86_64"
     },
     "relationship": []
@@ -8433,7 +8433,7 @@
     "@id": "data:perl-Pod-LaTeX/0.61-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Pod-LaTeX/0.61-2.el7/noarch"
     },
     "relationship": []
@@ -8444,7 +8444,7 @@
     "@id": "data:samba-common-tools/4.2.10-6.2.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "samba-common-tools/4.2.10-6.2.el7_2/x86_64"
     },
     "relationship": []
@@ -8455,7 +8455,7 @@
     "@id": "data:gsettings-desktop-schemas/3.14.2-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "gsettings-desktop-schemas/3.14.2-1.el7/x86_64"
     },
     "relationship": []
@@ -8466,7 +8466,7 @@
     "@id": "data:mailx/12.5-12.el7_0",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "mailx/12.5-12.el7_0/x86_64"
     },
     "relationship": []
@@ -8477,7 +8477,7 @@
     "@id": "data:samba-common-libs/4.2.10-6.2.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "samba-common-libs/4.2.10-6.2.el7_2/x86_64"
     },
     "relationship": []
@@ -8488,7 +8488,7 @@
     "@id": "data:libss/1.42.9-7.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libss/1.42.9-7.el7/x86_64"
     },
     "relationship": []
@@ -8499,7 +8499,7 @@
     "@id": "data:libdb-devel/5.3.21-19.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libdb-devel/5.3.21-19.el7/x86_64"
     },
     "relationship": []
@@ -8510,7 +8510,7 @@
     "@id": "data:krb5-workstation/1.13.2-12.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "krb5-workstation/1.13.2-12.el7_2/x86_64"
     },
     "relationship": []
@@ -8521,7 +8521,7 @@
     "@id": "data:kmod-libs/20-5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "kmod-libs/20-5.el7/x86_64"
     },
     "relationship": []
@@ -8532,7 +8532,7 @@
     "@id": "data:perl-B-Lint/1.17-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-B-Lint/1.17-3.el7/noarch"
     },
     "relationship": []
@@ -8543,7 +8543,7 @@
     "@id": "data:python-netaddr/0.7.5-7.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-netaddr/0.7.5-7.el7/noarch"
     },
     "relationship": []
@@ -8554,7 +8554,7 @@
     "@id": "data:libmodman/2.0.1-8.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libmodman/2.0.1-8.el7/x86_64"
     },
     "relationship": []
@@ -8565,7 +8565,7 @@
     "@id": "data:perl-File-Listing/6.04-7.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-File-Listing/6.04-7.el7/noarch"
     },
     "relationship": []
@@ -8576,7 +8576,7 @@
     "@id": "data:tcp_wrappers/7.6-77.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "tcp_wrappers/7.6-77.el7/x86_64"
     },
     "relationship": []
@@ -8587,7 +8587,7 @@
     "@id": "data:libyaml/0.1.4-11.el7_0",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libyaml/0.1.4-11.el7_0/x86_64"
     },
     "relationship": []
@@ -8598,7 +8598,7 @@
     "@id": "data:mesa-libGLU/9.0.0-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "mesa-libGLU/9.0.0-4.el7/x86_64"
     },
     "relationship": []
@@ -8609,7 +8609,7 @@
     "@id": "data:libevent/2.0.21-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libevent/2.0.21-4.el7/x86_64"
     },
     "relationship": []
@@ -8620,7 +8620,7 @@
     "@id": "data:libverto/0.2.5-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libverto/0.2.5-4.el7/x86_64"
     },
     "relationship": []
@@ -8631,7 +8631,7 @@
     "@id": "data:m4/1.4.16-10.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "m4/1.4.16-10.el7/x86_64"
     },
     "relationship": []
@@ -8642,7 +8642,7 @@
     "@id": "data:pyOpenSSL/0.13.1-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "pyOpenSSL/0.13.1-3.el7/x86_64"
     },
     "relationship": []
@@ -8653,7 +8653,7 @@
     "@id": "data:ed/1.9-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "ed/1.9-4.el7/x86_64"
     },
     "relationship": []
@@ -8664,7 +8664,7 @@
     "@id": "data:python-ply/3.4-10.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-ply/3.4-10.el7/noarch"
     },
     "relationship": []
@@ -8675,7 +8675,7 @@
     "@id": "data:python/2.7.5-34.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python/2.7.5-34.el7/x86_64"
     },
     "relationship": []
@@ -8686,7 +8686,7 @@
     "@id": "data:perl-Net-SSLeay/1.55-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Net-SSLeay/1.55-3.el7/x86_64"
     },
     "relationship": []
@@ -8697,7 +8697,7 @@
     "@id": "data:libpath_utils/0.2.1-25.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libpath_utils/0.2.1-25.el7/x86_64"
     },
     "relationship": []
@@ -8708,7 +8708,7 @@
     "@id": "data:python-decorator/3.4.0-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-decorator/3.4.0-3.el7/noarch"
     },
     "relationship": []
@@ -8719,7 +8719,7 @@
     "@id": "data:qt-x11/4.8.5-12.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "qt-x11/4.8.5-12.el7_2/x86_64"
     },
     "relationship": []
@@ -8730,7 +8730,7 @@
     "@id": "data:python-backports/1.0-8.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-backports/1.0-8.el7/x86_64"
     },
     "relationship": []
@@ -8741,7 +8741,7 @@
     "@id": "data:pam/1.1.8-12.el7_1.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "pam/1.1.8-12.el7_1.1/x86_64"
     },
     "relationship": []
@@ -8752,7 +8752,7 @@
     "@id": "data:redhat-lsb-submod-security/4.1-27.el7.centos.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "redhat-lsb-submod-security/4.1-27.el7.centos.1/x86_64"
     },
     "relationship": []
@@ -8763,7 +8763,7 @@
     "@id": "data:c-ares/1.10.0-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "c-ares/1.10.0-3.el7/x86_64"
     },
     "relationship": []
@@ -8774,7 +8774,7 @@
     "@id": "data:kernel-headers/3.10.0-327.22.2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "kernel-headers/3.10.0-327.22.2.el7/x86_64"
     },
     "relationship": []
@@ -8785,7 +8785,7 @@
     "@id": "data:sssd-ipa/1.13.0-40.el7_2.9",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "sssd-ipa/1.13.0-40.el7_2.9/x86_64"
     },
     "relationship": []
@@ -8796,7 +8796,7 @@
     "@id": "data:plymouth-core-libs/0.8.9-0.24.20140113.el7.centos",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "plymouth-core-libs/0.8.9-0.24.20140113.el7.centos/x86_64"
     },
     "relationship": []
@@ -8807,7 +8807,7 @@
     "@id": "data:perl-ExtUtils-Install/1.58-286.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-ExtUtils-Install/1.58-286.el7/noarch"
     },
     "relationship": []
@@ -8818,7 +8818,7 @@
     "@id": "data:sssd-proxy/1.13.0-40.el7_2.9",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "sssd-proxy/1.13.0-40.el7_2.9/x86_64"
     },
     "relationship": []
@@ -8829,7 +8829,7 @@
     "@id": "data:python-slip-dbus/0.4.0-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-slip-dbus/0.4.0-2.el7/noarch"
     },
     "relationship": []
@@ -8840,7 +8840,7 @@
     "@id": "data:perl-File-CheckTree/4.42-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-File-CheckTree/4.42-3.el7/noarch"
     },
     "relationship": []
@@ -8851,7 +8851,7 @@
     "@id": "data:ipa-client/4.2.0-15.0.1.el7.centos.17",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "ipa-client/4.2.0-15.0.1.el7.centos.17/x86_64"
     },
     "relationship": []
@@ -8862,7 +8862,7 @@
     "@id": "data:newt-python/0.52.15-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "newt-python/0.52.15-4.el7/x86_64"
     },
     "relationship": []
@@ -8873,7 +8873,7 @@
     "@id": "data:perl-autodie/2.16-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-autodie/2.16-2.el7/noarch"
     },
     "relationship": []
@@ -8884,7 +8884,7 @@
     "@id": "data:glibc/2.17-106.el7_2.6",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "glibc/2.17-106.el7_2.6/x86_64"
     },
     "relationship": []
@@ -8895,7 +8895,7 @@
     "@id": "data:redhat-lsb-desktop/4.1-27.el7.centos.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "redhat-lsb-desktop/4.1-27.el7.centos.1/x86_64"
     },
     "relationship": []
@@ -8906,7 +8906,7 @@
     "@id": "data:systemd-libs/219-19.el7_2.11",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "systemd-libs/219-19.el7_2.11/x86_64"
     },
     "relationship": []
@@ -8917,7 +8917,7 @@
     "@id": "data:rubygem-rdoc/4.0.0-25.el7_1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "rubygem-rdoc/4.0.0-25.el7_1/noarch"
     },
     "relationship": []
@@ -8928,7 +8928,7 @@
     "@id": "data:perl-URI/1.60-9.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-URI/1.60-9.el7/noarch"
     },
     "relationship": []
@@ -8939,7 +8939,7 @@
     "@id": "data:procps-ng/3.3.10-5.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "procps-ng/3.3.10-5.el7_2/x86_64"
     },
     "relationship": []
@@ -8950,7 +8950,7 @@
     "@id": "data:rubygems/2.0.14-25.el7_1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "rubygems/2.0.14-25.el7_1/noarch"
     },
     "relationship": []
@@ -8961,7 +8961,7 @@
     "@id": "data:perl-HTTP-Negotiate/6.01-5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-HTTP-Negotiate/6.01-5.el7/noarch"
     },
     "relationship": []
@@ -8972,7 +8972,7 @@
     "@id": "data:coreutils/8.22-15.el7_2.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "coreutils/8.22-15.el7_2.1/x86_64"
     },
     "relationship": []
@@ -8983,7 +8983,7 @@
     "@id": "data:perl-XML-SAX/0.99-9.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-XML-SAX/0.99-9.el7/noarch"
     },
     "relationship": []
@@ -8994,7 +8994,7 @@
     "@id": "data:systemd/219-19.el7_2.11",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "systemd/219-19.el7_2.11/x86_64"
     },
     "relationship": []
@@ -9005,7 +9005,7 @@
     "@id": "data:perl-Locale-Maketext/1.23-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Locale-Maketext/1.23-3.el7/noarch"
     },
     "relationship": []
@@ -9016,7 +9016,7 @@
     "@id": "data:nss-sysinit/3.21.0-9.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "nss-sysinit/3.21.0-9.el7_2/x86_64"
     },
     "relationship": []
@@ -9027,7 +9027,7 @@
     "@id": "data:alsa-lib/1.0.28-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "alsa-lib/1.0.28-2.el7/x86_64"
     },
     "relationship": []
@@ -9038,7 +9038,7 @@
     "@id": "data:redhat-lsb/4.1-27.el7.centos.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "redhat-lsb/4.1-27.el7.centos.1/x86_64"
     },
     "relationship": []
@@ -9049,7 +9049,7 @@
     "@id": "data:openssh/6.6.1p1-25.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "openssh/6.6.1p1-25.el7_2/x86_64"
     },
     "relationship": []
@@ -9060,7 +9060,7 @@
     "@id": "data:fipscheck-lib/1.4.1-5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "fipscheck-lib/1.4.1-5.el7/x86_64"
     },
     "relationship": []
@@ -9071,7 +9071,7 @@
     "@id": "data:elfutils/0.163-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "elfutils/0.163-3.el7/x86_64"
     },
     "relationship": []
@@ -9082,7 +9082,7 @@
     "@id": "data:grub2-tools/2.02-0.34.el7.centos",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "grub2-tools/2.02-0.34.el7.centos/x86_64"
     },
     "relationship": []
@@ -9093,7 +9093,7 @@
     "@id": "data:curl/7.29.0-25.el7.centos",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "curl/7.29.0-25.el7.centos/x86_64"
     },
     "relationship": []
@@ -9104,7 +9104,7 @@
     "@id": "data:zip/3.0-10.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "zip/3.0-10.el7/x86_64"
     },
     "relationship": []
@@ -9115,7 +9115,7 @@
     "@id": "data:ntpdate/4.2.6p5-22.el7.centos.2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "ntpdate/4.2.6p5-22.el7.centos.2/x86_64"
     },
     "relationship": []
@@ -9126,7 +9126,7 @@
     "@id": "data:libuser/0.60-7.el7_1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libuser/0.60-7.el7_1/x86_64"
     },
     "relationship": []
@@ -9137,7 +9137,7 @@
     "@id": "data:rpm-build/4.11.3-17.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "rpm-build/4.11.3-17.el7/x86_64"
     },
     "relationship": []
@@ -9148,7 +9148,7 @@
     "@id": "data:cronie/1.4.11-14.el7_2.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "cronie/1.4.11-14.el7_2.1/x86_64"
     },
     "relationship": []
@@ -9159,7 +9159,7 @@
     "@id": "data:virt-what/1.13-6.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "virt-what/1.13-6.el7/x86_64"
     },
     "relationship": []
@@ -9170,7 +9170,7 @@
     "@id": "data:libmspack/0.5-0.4.alpha.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libmspack/0.5-0.4.alpha.el7/x86_64"
     },
     "relationship": []
@@ -9181,7 +9181,7 @@
     "@id": "data:avahi-libs/0.6.31-15.el7_2.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "avahi-libs/0.6.31-15.el7_2.1/x86_64"
     },
     "relationship": []
@@ -9192,7 +9192,7 @@
     "@id": "data:python-pycurl/7.19.0-17.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "python-pycurl/7.19.0-17.el7/x86_64"
     },
     "relationship": []
@@ -9203,7 +9203,7 @@
     "@id": "data:kernel-tools-libs/3.10.0-327.22.2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "kernel-tools-libs/3.10.0-327.22.2.el7/x86_64"
     },
     "relationship": []
@@ -9214,7 +9214,7 @@
     "@id": "data:pth/2.0.7-23.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "pth/2.0.7-23.el7/x86_64"
     },
     "relationship": []
@@ -9225,7 +9225,7 @@
     "@id": "data:kernel-tools/3.10.0-327.22.2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "kernel-tools/3.10.0-327.22.2.el7/x86_64"
     },
     "relationship": []
@@ -9236,7 +9236,7 @@
     "@id": "data:gpgme/1.3.2-5.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "gpgme/1.3.2-5.el7/x86_64"
     },
     "relationship": []
@@ -9247,7 +9247,7 @@
     "@id": "data:ntp/4.2.6p5-22.el7.centos.2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "ntp/4.2.6p5-22.el7.centos.2/x86_64"
     },
     "relationship": []
@@ -9258,7 +9258,7 @@
     "@id": "data:libmnl/1.0.3-7.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libmnl/1.0.3-7.el7/x86_64"
     },
     "relationship": []
@@ -9269,7 +9269,7 @@
     "@id": "data:kernel/3.10.0-327.22.2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "kernel/3.10.0-327.22.2.el7/x86_64"
     },
     "relationship": []
@@ -9280,7 +9280,7 @@
     "@id": "data:qrencode-libs/3.4.1-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "qrencode-libs/3.4.1-3.el7/x86_64"
     },
     "relationship": []
@@ -9291,7 +9291,7 @@
     "@id": "data:sudo/1.8.6p7-17.el7_2",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "sudo/1.8.6p7-17.el7_2/x86_64"
     },
     "relationship": []
@@ -9302,7 +9302,7 @@
     "@id": "data:cryptsetup-libs/1.6.7-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "cryptsetup-libs/1.6.7-1.el7/x86_64"
     },
     "relationship": []
@@ -9313,7 +9313,7 @@
     "@id": "data:libssh2/1.4.3-10.el7_2.1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libssh2/1.4.3-10.el7_2.1/x86_64"
     },
     "relationship": []
@@ -9324,7 +9324,7 @@
     "@id": "data:dbus/1.6.12-13.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "dbus/1.6.12-13.el7/x86_64"
     },
     "relationship": []
@@ -9335,7 +9335,7 @@
     "@id": "data:libxml2/2.9.1-6.el7_2.3",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "libxml2/2.9.1-6.el7_2.3/x86_64"
     },
     "relationship": []
@@ -9346,7 +9346,7 @@
     "@id": "data:dhclient/4.2.5-42.el7.centos",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "dhclient/4.2.5-42.el7.centos/x86_64"
     },
     "relationship": []
@@ -9357,7 +9357,7 @@
     "@id": "data:perl-parent/0.225-244.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-parent/0.225-244.el7/noarch"
     },
     "relationship": []
@@ -9368,7 +9368,7 @@
     "@id": "data:perl-Pod-Escapes/1.04-286.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Pod-Escapes/1.04-286.el7/noarch"
     },
     "relationship": []
@@ -9379,7 +9379,7 @@
     "@id": "data:perl-libs/5.16.3-286.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-libs/5.16.3-286.el7/x86_64"
     },
     "relationship": []
@@ -9390,7 +9390,7 @@
     "@id": "data:plymouth/0.8.9-0.24.20140113.el7.centos",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "plymouth/0.8.9-0.24.20140113.el7.centos/x86_64"
     },
     "relationship": []
@@ -9401,7 +9401,7 @@
     "@id": "data:perl-constant/1.27-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-constant/1.27-2.el7/noarch"
     },
     "relationship": []
@@ -9412,7 +9412,7 @@
     "@id": "data:wpa_supplicant/2.0-17.el7_1",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "wpa_supplicant/2.0-17.el7_1/x86_64"
     },
     "relationship": []
@@ -9423,7 +9423,7 @@
     "@id": "data:perl-Time-HiRes/1.9725-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Time-HiRes/1.9725-3.el7/x86_64"
     },
     "relationship": []
@@ -9434,7 +9434,7 @@
     "@id": "data:glib-networking/2.42.0-1.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "glib-networking/2.42.0-1.el7/x86_64"
     },
     "relationship": []
@@ -9445,7 +9445,7 @@
     "@id": "data:perl-File-Path/2.09-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-File-Path/2.09-2.el7/noarch"
     },
     "relationship": []
@@ -9456,7 +9456,7 @@
     "@id": "data:alsa-tools-firmware/1.0.28-2.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "alsa-tools-firmware/1.0.28-2.el7/x86_64"
     },
     "relationship": []
@@ -9467,7 +9467,7 @@
     "@id": "data:perl-Pod-Simple/3.28-4.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Pod-Simple/3.28-4.el7/noarch"
     },
     "relationship": []
@@ -9478,7 +9478,7 @@
     "@id": "data:perl-Data-Dumper/2.145-3.el7",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "centos",
       "externalId": "perl-Data-Dumper/2.145-3.el7/x86_64"
     },
     "relationship": []

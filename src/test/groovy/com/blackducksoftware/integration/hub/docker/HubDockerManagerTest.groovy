@@ -53,7 +53,7 @@ class HubDockerManagerTest {
 
     private void doTest(String imageName, String tagName, OperatingSystemEnum os, PackageManagerEnum pkgMgr, Extractor extractor, Executor executor) {
         File imageTarFile = new File("test/image.tar")
-        ImagePkgMgr imagePkgMgr = new ImagePkgMgr(new File("test/resources/imageDir/image_${imageName}_v_${tagName}/${pkgMgr.directory.replaceAll('/', '_')}"), pkgMgr)
+        ImagePkgMgr imagePkgMgr = new ImagePkgMgr(new File("test/resources/imageDir/image_${imageName}_v_${tagName}/${pkgMgr.directory}"), pkgMgr)
         ImageInfo imageInfo = new ImageInfo("image_${imageName}_v_${tagName}", os, imagePkgMgr)
 
         List<Extractor> extractors = new ArrayList<>()
