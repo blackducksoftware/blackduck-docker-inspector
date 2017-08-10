@@ -2,7 +2,7 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "CodeLocationName",
-    "@id": "uuid:ffa2b4b7-00cb-4db2-8773-0655493745ea",
+    "@id": "uuid:2ae5a56d-617d-41b0-98ef-adfb9644ea22",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -17,47 +17,47 @@
     },
     "relationship": [
       {
-        "related": "data:musl/1.1.15-r6",
+        "related": "data:alpine/musl/1.1.15-r6",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:busybox/1.25.1-r0",
+        "related": "data:alpine/busybox/1.25.1-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:alpine-baselayout/3.0.4-r0",
+        "related": "data:alpine/alpine-baselayout/3.0.4-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:alpine-keys/1.3-r0",
+        "related": "data:alpine/alpine-keys/1.3-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libressl2.4-libcrypto/2.4.4-r0",
+        "related": "data:alpine/libressl2.4-libcrypto/2.4.4-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libressl2.4-libssl/2.4.4-r0",
+        "related": "data:alpine/libressl2.4-libssl/2.4.4-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:zlib/1.2.8-r2",
+        "related": "data:alpine/zlib/1.2.8-r2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:apk-tools/2.6.8-r2",
+        "related": "data:alpine/apk-tools/2.6.8-r2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:scanelf/1.1.6-r0",
+        "related": "data:alpine/scanelf/1.1.6-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:musl-utils/1.1.15-r6",
+        "related": "data:alpine/musl-utils/1.1.15-r6",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libc-utils/0.7-r1",
+        "related": "data:alpine/libc-utils/0.7-r1",
         "relationshipType": "DYNAMIC_LINK"
       }
     ]
@@ -65,7 +65,7 @@
   {
     "name": "musl",
     "revision": "1.1.15-r6",
-    "@id": "data:musl/1.1.15-r6",
+    "@id": "data:alpine/musl/1.1.15-r6",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -76,7 +76,7 @@
   {
     "name": "busybox",
     "revision": "1.25.1-r0",
-    "@id": "data:busybox/1.25.1-r0",
+    "@id": "data:alpine/busybox/1.25.1-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -87,7 +87,7 @@
   {
     "name": "alpine-baselayout",
     "revision": "3.0.4-r0",
-    "@id": "data:alpine-baselayout/3.0.4-r0",
+    "@id": "data:alpine/alpine-baselayout/3.0.4-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -98,7 +98,7 @@
   {
     "name": "alpine-keys",
     "revision": "1.3-r0",
-    "@id": "data:alpine-keys/1.3-r0",
+    "@id": "data:alpine/alpine-keys/1.3-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -109,7 +109,7 @@
   {
     "name": "libressl2.4-libcrypto",
     "revision": "2.4.4-r0",
-    "@id": "data:libressl2.4-libcrypto/2.4.4-r0",
+    "@id": "data:alpine/libressl2.4-libcrypto/2.4.4-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -120,7 +120,7 @@
   {
     "name": "libressl2.4-libssl",
     "revision": "2.4.4-r0",
-    "@id": "data:libressl2.4-libssl/2.4.4-r0",
+    "@id": "data:alpine/libressl2.4-libssl/2.4.4-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -131,7 +131,7 @@
   {
     "name": "zlib",
     "revision": "1.2.8-r2",
-    "@id": "data:zlib/1.2.8-r2",
+    "@id": "data:alpine/zlib/1.2.8-r2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -142,7 +142,7 @@
   {
     "name": "apk-tools",
     "revision": "2.6.8-r2",
-    "@id": "data:apk-tools/2.6.8-r2",
+    "@id": "data:alpine/apk-tools/2.6.8-r2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -153,7 +153,7 @@
   {
     "name": "scanelf",
     "revision": "1.1.6-r0",
-    "@id": "data:scanelf/1.1.6-r0",
+    "@id": "data:alpine/scanelf/1.1.6-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -164,7 +164,7 @@
   {
     "name": "musl-utils",
     "revision": "1.1.15-r6",
-    "@id": "data:musl-utils/1.1.15-r6",
+    "@id": "data:alpine/musl-utils/1.1.15-r6",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -175,7 +175,7 @@
   {
     "name": "libc-utils",
     "revision": "0.7-r1",
-    "@id": "data:libc-utils/0.7-r1",
+    "@id": "data:alpine/libc-utils/0.7-r1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",

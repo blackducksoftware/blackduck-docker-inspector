@@ -89,13 +89,13 @@ public abstract class Extractor {
     public List<BdioComponent> createBdioComponent(final String name, final String version, final String externalId) {
         final List<BdioComponent> components = new ArrayList<>();
         for (final String forge : forges) {
-            final BdioComponent bdioComponent = bdioNodeFactory.createComponent(name, version, getComponentBdioId(name, version), forge, externalId);
+            final BdioComponent bdioComponent = bdioNodeFactory.createComponent(name, version, getComponentBdioId(forge, name, version), forge, externalId);
             components.add(bdioComponent);
         }
         return components;
     }
 
-    private String getComponentBdioId(final String name, final String version) {
-        return String.format("data:%s/%s", name, version);
+    private String getComponentBdioId(final String forge, final String name, final String version) {
+        return String.format("data:%s/%s/%s", forge, name, version);
     }
 }
