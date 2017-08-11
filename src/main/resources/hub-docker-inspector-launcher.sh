@@ -22,6 +22,12 @@ function printUsage() {
 	echo ""
 }
 
+# print an error message
+err() {
+  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2
+}
+
+# Start dockerd
 function startDocker() {
 	echo starting dockerd...
 	cd /opt/blackduck/hub-docker-inspector
@@ -42,6 +48,9 @@ function startDocker() {
 	done
 }
 
+# Stop/remove any old hub-docker-inspector-* containers
+# since, via the API, env vars can only be passed 
+# when starting a container
 function initContainers() {
 	echo "Stopping old containers, if they are running"
 	docker stop hub-docker-inspector-alpine 2> container_stderr.log > container_stdout.log
@@ -52,6 +61,7 @@ function initContainers() {
 	echo "Done removing old containers"
 }
 
+# Start dockerd if its not already running
 function initDocker() {
 	dockerRunning=false
 	if [ $(docker info 2>&1 |grep "Server Version"|wc -l) -gt 0 ]
@@ -64,7 +74,7 @@ function initDocker() {
 
 	if [ $dockerRunning == false ]
 	then
-		echo Unable to start dockerd
+		err Unable to start dockerd
 		exit -1
 	fi
 

@@ -6,7 +6,7 @@
 # Run this script from the directory that contains the application.properties, configured
 # with your Hub connection details (hub.url, hub.username, and hub.password),
 # and Docker Hub connection details (docker.registry.username and docker.registry.password).
-#
+
 function printUsage() {
 	echo ""
     echo "Usage: $0 [options] <image>"
@@ -32,6 +32,11 @@ function printUsage() {
 	echo "Documentation: https://blackducksoftware.atlassian.net/wiki/spaces/INTDOCS/pages/48435867/Hub+Docker+Inspector"
 }
 
+err() {
+  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2
+}
+
+# Look through args for ones this script needs to act on
 function preProcessOptions() {
 	for cmdlinearg in "$@"
 	do
@@ -61,6 +66,7 @@ function preProcessOptions() {
 	done
 }
 
+# Inform user on whether password is set via env var
 function checkForPassword() {
 	if [ $hub_password_set_on_cmd_line = true -o -z "${BD_HUB_PASSWORD}" ]
 	then
@@ -70,18 +76,20 @@ function checkForPassword() {
 	fi
 }
 
+# Start the hub-docker-inspector container
 function startContainer() {
 	docker rm ${containername} 2> /dev/null
 	echo "Pulling/running hub-docker-inspector Docker image"
 	docker run --name ${containername} -it -d --privileged blackducksoftware/${imagename}:${version} /bin/bash
 }
 
+# Check to be sure the hub-docker-container is running
 function ensureContainerRunning() {
 	if [ $(docker ps |grep "${containername}\$" | wc -l) -gt 0 ]
 	then
 		echo "The ${containername} container is already running"
 		containerVersion=$(docker exec hub-docker-inspector ls /opt/blackduck/hub-docker-inspector | grep \.jar | sed s/hub-docker-inspector-// | sed 's/\.jar//')
-		echo "The ${containername} container is already running, and running version ${containerVersion}"
+		echo "The ${containername} container is running version ${containerVersion}"
 		if [ ${version} != ${containerVersion} ]
 		then
 			echo "Stopping old container"
@@ -95,6 +103,7 @@ function ensureContainerRunning() {
 	fi
 }
 
+# Copy application.properties into the container
 function installPropertiesFile() {
 	if [ -f ${propfile} ]
 	then
@@ -107,6 +116,7 @@ function installPropertiesFile() {
 	fi
 }
 
+# Get a property value from the given properties file
 # Usage: get_property FILE KEY
 function get_property {
 	grep "^$2=" "$1" | cut -d'=' -f2
@@ -171,7 +181,7 @@ then
 	echo Inspecting image tar file: $image
 	if [ ! -r ${image} ]
 	then
-		echo "ERROR: Tar file ${image} does not exist"
+		err "ERROR: Tar file ${image} does not exist"
 		exit -1
 	fi
 	tarfilename=$(basename $image)
@@ -187,7 +197,7 @@ if [ ! -z "${bdioOutputPath}" ]
 then
 	if [ -f "${bdioOutputPath}" ]
 	then
-		echo "ERROR: Unable to copy BDIO output file to ${bdioOutputPath} because it is an existing file"
+		err "ERROR: Unable to copy BDIO output file to ${bdioOutputPath} because it is an existing file"
 		exit -2
 	fi
 	if [ ! -e "${bdioOutputPath}" ]
