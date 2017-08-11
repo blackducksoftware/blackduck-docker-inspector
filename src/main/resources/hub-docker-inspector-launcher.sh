@@ -4,10 +4,11 @@
 # makes sure the docker daemon is running, then invokes the hub-docker-inspector jar.
 #
 version=@VERSION@
+jarfile=hub-docker-inspector-${version}.jar
+encodingSetting=-Dfile.encoding=UTF-8
 
-if [ \( $# -lt 1 \) -o \( $1 = -h \) -o \( $1 = --help \) ]
-then
-    echo ""
+function printUsage() {
+	echo ""
     echo "Usage: $0 [options] <image>"
     echo "<image> can be in either of two forms:"
     echo "	<docker image name>[:<docker image version>]"
@@ -19,6 +20,68 @@ then
     echo "configured with your Hub connection details (hub.url, hub.username, and hub.password),"
 	echo "and Docker Hub connection details (docker.registry.username and docker.registry.password)."
 	echo ""
+}
+
+function startDocker() {
+	echo starting dockerd...
+	cd /opt/blackduck/hub-docker-inspector
+	rm -f dockerd_stdout.log
+	rm -f dockerd_stderr.log
+	dockerd --storage-driver=vfs ${DOCKERD_OPTS} 2> dockerd_stderr.log > dockerd_stdout.log &
+	
+	for i in 1 .. 5
+	do
+		echo "Pausing to give dockerd a chance to start"
+		sleep 3
+		if [ $(docker info 2>&1 |grep "Server Version"|wc -l) -gt 0 ]
+		then
+			echo dockerd started
+			dockerRunning=true
+			break
+		fi
+	done
+}
+
+function initContainers() {
+	echo "Stopping old containers, if they are running"
+	docker stop hub-docker-inspector-alpine 2> container_stderr.log > container_stdout.log
+	docker stop hub-docker-inspector-centos 2>> container_stderr.log >> container_stdout.log
+	echo "Removing old containers, if they are running"
+	docker rm hub-docker-inspector-alpine 2>> container_stderr.log >> container_stdout.log
+	docker rm hub-docker-inspector-centos 2>> container_stderr.log >> container_stdout.log
+	echo "Done removing old containers"
+}
+
+function initDocker() {
+	dockerRunning=false
+	if [ $(docker info 2>&1 |grep "Server Version"|wc -l) -gt 0 ]
+	then
+		echo dockerd is already running
+		dockerRunning=true
+	else		
+		startDocker
+	fi
+
+	if [ $dockerRunning == false ]
+	then
+		echo Unable to start dockerd
+		exit -1
+	fi
+
+	docker info 2>&1 | grep "Server Version"
+	
+	initContainers
+}
+
+if [ \( $# -lt 1 \) ]
+then
+    printUsage
+    exit -1
+fi
+
+if [ \( $1 = -h \) -o \( $1 = --help \) ]
+then
+    printUsage
     exit -1
 fi
 
@@ -32,46 +95,7 @@ fi
 if [ $(ls -l /usr/bin/docker 2> /dev/null |wc -l) -gt 0 ]
 then
 	echo "Running on primary container"
-	dockerRunning=false
-	if [ $(docker info 2>&1 |grep "Server Version"|wc -l) -gt 0 ]
-	then
-		echo dockerd is already running
-		dockerRunning=true
-	else		
-		echo starting dockerd...
-		cd /opt/blackduck/hub-docker-inspector
-		rm -f dockerd_stdout.log
-		rm -f dockerd_stderr.log
-		dockerd --storage-driver=vfs ${DOCKERD_OPTS} 2> dockerd_stderr.log > dockerd_stdout.log &
-	
-		for i in 1 .. 5
-		do
-			echo "Pausing to give dockerd a chance to start"
-			sleep 3
-			if [ $(docker info 2>&1 |grep "Server Version"|wc -l) -gt 0 ]
-			then
-				echo dockerd started
-				dockerRunning=true
-				break
-			fi
-		done
-	fi
-
-	if [ $dockerRunning == false ]
-	then
-		echo Unable to start dockerd
-		exit -1
-	fi
-
-	docker info 2>&1 | grep "Server Version"
-	
-	echo "Stopping old containers, if they are running"
-	docker stop hub-docker-inspector-alpine 2> container_stderr.log > container_stdout.log
-	docker stop hub-docker-inspector-centos 2>> container_stderr.log >> container_stdout.log
-	echo "Removing old containers, if they are running"
-	docker rm hub-docker-inspector-alpine 2>> container_stderr.log >> container_stdout.log
-	docker rm hub-docker-inspector-centos 2>> container_stderr.log >> container_stdout.log
-	echo "Done removing old containers"
+	initDocker
 fi
 
 options=( "$@" )
@@ -83,9 +107,9 @@ rm -rf output/*
 
 if [[ "$image" == *.tar ]]
 then
-	cmd="java -Dfile.encoding=UTF-8 ${DOCKER_INSPECTOR_JAVA_OPTS} -jar hub-docker-inspector-${version}.jar --docker.tar=$image ${options[*]}"
+	cmd="java $encodingSetting ${DOCKER_INSPECTOR_JAVA_OPTS} -jar $jarfile --docker.tar=$image ${options[*]}"
 else
-	cmd="java -Dfile.encoding=UTF-8 ${DOCKER_INSPECTOR_JAVA_OPTS} -jar hub-docker-inspector-${version}.jar --docker.image=$image ${options[*]}"
+	cmd="java $encodingSetting ${DOCKER_INSPECTOR_JAVA_OPTS} -jar $jarfile --docker.image=$image ${options[*]}"
 fi
 
 $cmd
