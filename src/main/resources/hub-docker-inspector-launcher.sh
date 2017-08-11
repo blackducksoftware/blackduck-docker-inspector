@@ -73,6 +73,9 @@ function initDocker() {
 	initContainers
 }
 
+##################
+# Start script
+##################
 if [ \( $# -lt 1 \) ]
 then
     printUsage
