@@ -83,9 +83,9 @@ rm -rf output/*
 
 if [[ "$image" == *.tar ]]
 then
-	cmd="java -Dfile.encoding=UTF-8 -jar hub-docker-inspector-${version}.jar --docker.tar=$image ${options[*]}"
+	cmd="java -Dfile.encoding=UTF-8 ${DOCKER_INSPECTOR_JAVA_OPTS} -jar hub-docker-inspector-${version}.jar --docker.tar=$image ${options[*]}"
 else
-	cmd="java -Dfile.encoding=UTF-8 -jar hub-docker-inspector-${version}.jar --docker.image=$image ${options[*]}"
+	cmd="java -Dfile.encoding=UTF-8 ${DOCKER_INSPECTOR_JAVA_OPTS} -jar hub-docker-inspector-${version}.jar --docker.image=$image ${options[*]}"
 fi
 
 $cmd
