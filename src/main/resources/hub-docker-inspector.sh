@@ -40,28 +40,28 @@ err() {
 function preProcessOptions() {
 	for cmdlinearg in "$@"
 	do
-		if [[ $cmdlinearg == --runon=* ]]
+		if [[ "$cmdlinearg" == --runon=* ]]
 		then
-			runondistro=$(echo $cmdlinearg | cut -d '=' -f 2)
+			runondistro=$(echo "$cmdlinearg" | cut -d '=' -f 2)
 			echo "Will run on the ${runondistro} image"
-			containername=hub-docker-inspector-${runondistro}
-			imagename=hub-docker-inspector-${runondistro}
+			containername="hub-docker-inspector-${runondistro}"
+			imagename="hub-docker-inspector-${runondistro}"
 		fi
-		if [[ $cmdlinearg == --spring.config.location=* ]]
+		if [[ "$cmdlinearg" == --spring.config.location=* ]]
 		then
-			propdir=$(echo $cmdlinearg | cut -d '=' -f 2)
-			if [[ $propdir == */ ]]
+			propdir=$(echo "$cmdlinearg" | cut -d '=' -f 2)
+			if [[ "$propdir" == */ ]]
 			then
-				propdir=$(echo $propdir | rev | cut -c 2- | rev)
+				propdir=$(echo "$propdir" | rev | cut -c 2- | rev)
 			fi
 		fi
-		if [[ $cmdlinearg == --hub.password=* ]]
+		if [[ "$cmdlinearg" == --hub.password=* ]]
 		then
 			hub_password_set_on_cmd_line=true
 		fi
-		if [[ $cmdlinearg == --bdio.output.path=* ]]
+		if [[ "$cmdlinearg" == --bdio.output.path=* ]]
 		then
-			bdioOutputPath=$(echo $cmdlinearg | cut -d '=' -f 2)
+			bdioOutputPath=$(echo "$cmdlinearg" | cut -d '=' -f 2)
 		fi
 	done
 }
@@ -78,9 +78,9 @@ function checkForPassword() {
 
 # Start the hub-docker-inspector container
 function startContainer() {
-	docker rm ${containername} 2> /dev/null
+	docker rm "${containername}" 2> /dev/null
 	echo "Pulling/running hub-docker-inspector Docker image"
-	docker run --name ${containername} -it -d --privileged blackducksoftware/${imagename}:${version} /bin/bash
+	docker run --name "${containername}" -it -d --privileged "blackducksoftware/${imagename}:${version}" /bin/bash
 }
 
 # Check to be sure the hub-docker-container is running
@@ -90,7 +90,7 @@ function ensureContainerRunning() {
 		echo "The ${containername} container is already running"
 		containerVersion=$(docker exec hub-docker-inspector ls /opt/blackduck/hub-docker-inspector | grep \.jar | sed s/hub-docker-inspector-// | sed 's/\.jar//')
 		echo "The ${containername} container is running version ${containerVersion}"
-		if [ ${version} != ${containerVersion} ]
+		if [ "${version}" != "${containerVersion}" ]
 		then
 			echo "Stopping old container"
 			docker stop hub-docker-inspector
@@ -98,21 +98,21 @@ function ensureContainerRunning() {
 		fi
 		
 	else
-		echo ${containername} container is not running
+		echo "${containername} container is not running"
 		startContainer
 	fi
 }
 
 # Copy application.properties into the container
 function installPropertiesFile() {
-	if [ -f ${propfile} ]
+	if [ -f "${propfile}" ]
 	then
 		echo "Found ${propfile}"
-		docker cp ${propfile} ${containername}:/opt/blackduck/hub-docker-inspector/config
+		docker cp "${propfile}" "${containername}:/opt/blackduck/hub-docker-inspector/config"
 	else
 		echo "File ${propfile} not found."
 		echo "Without this file, you will have to set all required properties via the command line."
-		docker exec ${containername} rm -f /opt/blackduck/hub-docker-inspector/config/application.properties
+		docker exec "${containername}" rm -f /opt/blackduck/hub-docker-inspector/config/application.properties
 	fi
 }
 
@@ -125,7 +125,7 @@ function get_property {
 ##################
 # Start script
 ##################
-version=@VERSION@
+version="@VERSION@"
 bdioOutputPath=""
 containername=hub-docker-inspector
 imagename=hub-docker-inspector
@@ -138,19 +138,19 @@ then
     exit -1
 fi
 
-if [ \( $1 = -v \) -o \( $1 = --version \) ]
+if [ \( "$1" = -v \) -o \( "$1" = --version \) ]
 then
 	echo "$(basename $0) ${version}"
 	exit 0
 fi
 
-if [ \( $1 = -h \) -o \( $1 = --help \) ]
+if [ \( "$1" = -h \) -o \( "$1" = --help \) ]
 then
     printUsage
     exit 0
 fi
 
-if [ \( $1 = -p \) -o \( $1 = --get-properties \) ]
+if [ \( "$1" = -p \) -o \( "$1" = --get-properties \) ]
 then
     ensureContainerRunning
     echo "Copying application.properties template"
@@ -159,18 +159,18 @@ then
 fi
 
 preProcessOptions "$@"
-propfile=${propdir}/application.properties
+propfile="${propdir}/application.properties"
 echo "Properties file: ${propfile}"
 
 if [ -z "${bdioOutputPath}" ]
 then
 	echo "Looking in ${propfile} for bdio.output.path"
 	bdioOutputPath=$(get_property "${propfile}" "bdio.output.path")
-	echo "bdioOutputPath: ${bdioOutputPath}"
+	echo "BDIO output path: ${bdioOutputPath}"
 fi
 
 options=( "$@" )
-image=${options[${#options[@]}-1]}
+image="${options[${#options[@]}-1]}"
 unset "options[${#options[@]}-1]"
 checkForPassword
 ensureContainerRunning
@@ -178,19 +178,19 @@ installPropertiesFile
 
 if [[ "$image" == *.tar ]]
 then
-	echo Inspecting image tar file: $image
-	if [ ! -r ${image} ]
+	echo "Inspecting image tar file: $image"
+	if [ ! -r "${image}" ]
 	then
 		err "ERROR: Tar file ${image} does not exist"
 		exit -1
 	fi
-	tarfilename=$(basename $image)
-	docker exec ${containername} rm -f /opt/blackduck/hub-docker-inspector/target/$tarfilename
-	docker cp $image ${containername}:/opt/blackduck/hub-docker-inspector/target/$tarfilename
-	docker exec -e BD_HUB_PASSWORD -e SCAN_CLI_OPTS -e http_proxy -e https_proxy -e HTTP_PROXY -e HTTPS_PROXY -e DOCKERD_OPTS -e DOCKER_INSPECTOR_JAVA_OPTS ${containername} /opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} /opt/blackduck/hub-docker-inspector/target/$tarfilename
+	tarfilename=$(basename "$image")
+	docker exec "${containername}" rm -f "/opt/blackduck/hub-docker-inspector/target/$tarfilename"
+	docker cp "$image" "${containername}:/opt/blackduck/hub-docker-inspector/target/$tarfilename"
+	docker exec -e BD_HUB_PASSWORD -e SCAN_CLI_OPTS -e http_proxy -e https_proxy -e HTTP_PROXY -e HTTPS_PROXY -e DOCKERD_OPTS -e DOCKER_INSPECTOR_JAVA_OPTS "${containername}" /opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} "\"/opt/blackduck/hub-docker-inspector/target/$tarfilename\""
 else
 	echo Inspecting image: $image
-	docker exec -e BD_HUB_PASSWORD -e SCAN_CLI_OPTS -e http_proxy -e https_proxy -e HTTP_PROXY -e HTTPS_PROXY -e DOCKERD_OPTS -e DOCKER_INSPECTOR_JAVA_OPTS ${containername} /opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} $image
+	docker exec -e BD_HUB_PASSWORD -e SCAN_CLI_OPTS -e http_proxy -e https_proxy -e HTTP_PROXY -e HTTPS_PROXY -e DOCKERD_OPTS -e DOCKER_INSPECTOR_JAVA_OPTS "${containername}" /opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} "\"$image\""
 fi
 
 if [ ! -z "${bdioOutputPath}" ]
@@ -204,7 +204,7 @@ then
 	then
 		mkdir -p "${bdioOutputPath}"
 	fi
-	docker cp ${containername}:/opt/blackduck/hub-docker-inspector/output/. "${bdioOutputPath}"
+	docker cp "${containername}:/opt/blackduck/hub-docker-inspector/output/." "${bdioOutputPath}"
 fi
 
 exit 0

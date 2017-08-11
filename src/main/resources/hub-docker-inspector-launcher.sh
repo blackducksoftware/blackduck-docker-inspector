@@ -3,9 +3,9 @@
 # This script (copied to the Docker container hub-docker-inspector will run in)
 # makes sure the docker daemon is running, then invokes the hub-docker-inspector jar.
 #
-version=@VERSION@
-jarfile=hub-docker-inspector-${version}.jar
-encodingSetting=-Dfile.encoding=UTF-8
+version="@VERSION@"
+jarfile="hub-docker-inspector-${version}.jar"
+encodingSetting="-Dfile.encoding=UTF-8"
 
 function printUsage() {
 	echo ""
@@ -72,7 +72,7 @@ function initDocker() {
 		startDocker
 	fi
 
-	if [ $dockerRunning == false ]
+	if [ "$dockerRunning" == false ]
 	then
 		err Unable to start dockerd
 		exit -1
@@ -92,13 +92,13 @@ then
     exit -1
 fi
 
-if [ \( $1 = -h \) -o \( $1 = --help \) ]
+if [ \( "$1" = -h \) -o \( "$1" = --help \) ]
 then
     printUsage
     exit -1
 fi
 
-if [ \( $1 = -v \) -o \( $1 = --version \) ]
+if [ \( "$1" = -v \) -o \( "$1" = --version \) ]
 then
 	echo "$(basename $0) ${version}"
 	exit 0
@@ -112,7 +112,9 @@ then
 fi
 
 options=( "$@" )
-image=${options[${#options[@]}-1]}
+image="${options[${#options[@]}-1]}"
+# remove surrounding quotes
+image=${image//\"/}
 unset "options[${#options[@]}-1]"
 
 cd /opt/blackduck/hub-docker-inspector
@@ -120,9 +122,7 @@ rm -rf output/*
 
 if [[ "$image" == *.tar ]]
 then
-	cmd="java $encodingSetting ${DOCKER_INSPECTOR_JAVA_OPTS} -jar $jarfile --docker.tar=$image ${options[*]}"
+	java "$encodingSetting" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "$jarfile" "--docker.tar=$image" "${options[*]}"
 else
-	cmd="java $encodingSetting ${DOCKER_INSPECTOR_JAVA_OPTS} -jar $jarfile --docker.image=$image ${options[*]}"
+	java "$encodingSetting" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "$jarfile" "--docker.image=$image" "${options[*]}"
 fi
-
-$cmd
