@@ -43,9 +43,6 @@ function preProcessOptions() {
 		if [[ "$cmdlinearg" == --runon=* ]]
 		then
 			runondistro=$(echo "$cmdlinearg" | cut -d '=' -f 2)
-			echo "Will run on the ${runondistro} image"
-			containername="hub-docker-inspector-${runondistro}"
-			imagename="hub-docker-inspector-${runondistro}"
 		fi
 		if [[ "$cmdlinearg" == --spring.config.location=* ]]
 		then
@@ -122,6 +119,25 @@ function get_property {
 	grep "^$2=" "$1" | cut -d'=' -f2
 }
 
+# determine which image/container to run on/in
+function determineRunOnImage {
+	if [ -z "${runondistro}" ]
+	then
+		echo "Looking in ${propfile} for runon"
+		runondistro=$(get_property "${propfile}" "runon")
+	fi
+	if [ -z "${runondistro}" ]
+	then
+	echo "Will run on the default (ubuntu) image"
+		containername="hub-docker-inspector"
+		imagename="hub-docker-inspector"
+	else
+		echo "Will run on the ${runondistro} image"
+		containername="hub-docker-inspector-${runondistro}"
+		imagename="hub-docker-inspector-${runondistro}"
+	fi
+}
+
 ##################
 # Start script
 ##################
@@ -169,6 +185,7 @@ then
 	echo "BDIO output path: ${bdioOutputPath}"
 fi
 
+determineRunOnImage
 options=( "$@" )
 image="${options[${#options[@]}-1]}"
 unset "options[${#options[@]}-1]"
