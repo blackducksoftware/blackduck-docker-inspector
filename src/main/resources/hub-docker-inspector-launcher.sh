@@ -122,7 +122,7 @@ rm -rf output/*
 
 if [[ "$image" == *.tar ]]
 then
-	java "$encodingSetting" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "$jarfile" "--docker.tar=$image" "${options[*]}"
+	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarfile}" "--docker.tar=$image" ${options[*]}
 else
-	java "$encodingSetting" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "$jarfile" "--docker.image=$image" "${options[*]}"
+	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarfile}" "--docker.image=$image" ${options[*]}
 fi
