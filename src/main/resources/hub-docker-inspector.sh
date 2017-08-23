@@ -116,7 +116,7 @@ function installPropertiesFile() {
 # Get a property value from the given properties file
 # Usage: get_property FILE KEY
 function get_property {
-	grep "^$2=" "$1" | cut -d'=' -f2
+	grep "^$2=" "$1" 2> /dev/null | cut -d'=' -f2
 }
 
 # determine which image/container to run on/in
