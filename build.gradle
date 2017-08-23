@@ -224,7 +224,16 @@ task createWhTestDockerfile(type: Dockerfile) {
     runCommand 'apt-get -y remove curl'
 }
 
-task buildWhTestDockerImage(type: Exec, dependsOn: [createWhTestDockerfile]) {
+task removeWhImage(type: Exec) {
+    ignoreExitValue true
+    commandLine "docker", "rmi", "blackducksoftware/whiteouttest:1.0"
+}
+
+task listImages(type: Exec) {
+    commandLine "docker", "images"
+}
+
+task buildWhTestDockerImage(type: Exec, dependsOn: [removeWhImage, listImages, createWhTestDockerfile]) {
     commandLine "docker", "build", "--no-cache", "--tag", "blackducksoftware/whiteouttest:1.0", "${buildDir}/images/test/whiteouttest"
 }
 
