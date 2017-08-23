@@ -204,7 +204,7 @@ task createTestDockerfile(type: Dockerfile) {
 }
 
 task buildTestDockerImage(type: Exec, dependsOn: [createTestDockerfile]) {
-	commandLine "docker", "build", "--tag", "blackducksoftware/centos_minus_vim_plus_bacula:1.0", "${buildDir}/images/test/centos_minus_vim_plus_bacula"
+	commandLine "docker", "build", "--no-cache", "--tag", "blackducksoftware/centos_minus_vim_plus_bacula:1.0", "${buildDir}/images/test/centos_minus_vim_plus_bacula"
 }
 
 task buildTestDockerTarfile(type: Exec, dependsOn: buildTestDockerImage) {
@@ -225,7 +225,7 @@ task createWhTestDockerfile(type: Dockerfile) {
 }
 
 task buildWhTestDockerImage(type: Exec, dependsOn: [createWhTestDockerfile]) {
-    commandLine "docker", "build", "--tag", "blackducksoftware/whiteouttest:1.0", "${buildDir}/images/test/whiteouttest"
+    commandLine "docker", "build", "--no-cache", "--tag", "blackducksoftware/whiteouttest:1.0", "${buildDir}/images/test/whiteouttest"
 }
 
 task buildWhTestDockerTarfile(type: Exec, dependsOn: buildWhTestDockerImage) {
