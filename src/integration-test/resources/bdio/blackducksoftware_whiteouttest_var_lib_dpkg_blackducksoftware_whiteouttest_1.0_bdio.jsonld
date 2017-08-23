@@ -2,14 +2,14 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "blackducksoftware_whiteouttest_1.0_var_lib_dpkg_DPKG",
-    "@id": "uuid:9779cdff-499c-4aab-b750-c6d884c1a706",
+    "@id": "uuid:9f5f8a53-7e9b-405c-b964-f43d29846060",
     "@type": "BillOfMaterials",
     "relationship": []
   },
   {
     "name": "blackducksoftware_whiteouttest",
     "revision": "1.0",
-    "@id": "com.blackducksoftware.integration.hub.bdio.simple.model.BdioExternalIdentifier@489115ef",
+    "@id": "data:debian/blackducksoftware_whiteouttest/1_0",
     "@type": "Project",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -25,19 +25,19 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:apt/1.2.20",
+        "related": "data:apt/1.2.24",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:apt/1.2.20",
+        "related": "data:apt/1.2.24",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:base-files/9.4ubuntu4.4",
+        "related": "data:base-files/9.4ubuntu4.5",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:base-files/9.4ubuntu4.4",
+        "related": "data:base-files/9.4ubuntu4.5",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -257,11 +257,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libapt-pkg5.0/1.2.20",
+        "related": "data:libapt-pkg5.0/1.2.24",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libapt-pkg5.0/1.2.20",
+        "related": "data:libapt-pkg5.0/1.2.24",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -529,11 +529,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libkmod2/22-1ubuntu4",
+        "related": "data:libkmod2/22-1ubuntu5",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libkmod2/22-1ubuntu4",
+        "related": "data:libkmod2/22-1ubuntu5",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -801,11 +801,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libsystemd0/229-4ubuntu17",
+        "related": "data:libsystemd0/229-4ubuntu19",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libsystemd0/229-4ubuntu17",
+        "related": "data:libsystemd0/229-4ubuntu19",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -825,11 +825,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libudev1/229-4ubuntu17",
+        "related": "data:libudev1/229-4ubuntu19",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libudev1/229-4ubuntu17",
+        "related": "data:libudev1/229-4ubuntu19",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -985,19 +985,19 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:systemd/229-4ubuntu17",
+        "related": "data:systemd/229-4ubuntu19",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:systemd/229-4ubuntu17",
+        "related": "data:systemd/229-4ubuntu19",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:systemd-sysv/229-4ubuntu17",
+        "related": "data:systemd-sysv/229-4ubuntu19",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:systemd-sysv/229-4ubuntu17",
+        "related": "data:systemd-sysv/229-4ubuntu19",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1074,45 +1074,45 @@
   },
   {
     "name": "apt",
-    "revision": "1.2.20",
-    "@id": "data:apt/1.2.20",
+    "revision": "1.2.24",
+    "@id": "data:apt/1.2.24",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "apt/1.2.20/amd64"
+      "externalId": "apt/1.2.24/amd64"
     },
     "relationship": []
   },
   {
     "name": "apt",
-    "revision": "1.2.20",
-    "@id": "data:apt/1.2.20",
+    "revision": "1.2.24",
+    "@id": "data:apt/1.2.24",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "apt/1.2.20/amd64"
+      "externalId": "apt/1.2.24/amd64"
     },
     "relationship": []
   },
   {
     "name": "base-files",
-    "revision": "9.4ubuntu4.4",
-    "@id": "data:base-files/9.4ubuntu4.4",
+    "revision": "9.4ubuntu4.5",
+    "@id": "data:base-files/9.4ubuntu4.5",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "base-files/9.4ubuntu4.4/amd64"
+      "externalId": "base-files/9.4ubuntu4.5/amd64"
     },
     "relationship": []
   },
   {
     "name": "base-files",
-    "revision": "9.4ubuntu4.4",
-    "@id": "data:base-files/9.4ubuntu4.4",
+    "revision": "9.4ubuntu4.5",
+    "@id": "data:base-files/9.4ubuntu4.5",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "base-files/9.4ubuntu4.4/amd64"
+      "externalId": "base-files/9.4ubuntu4.5/amd64"
     },
     "relationship": []
   },
@@ -1712,23 +1712,23 @@
   },
   {
     "name": "libapt-pkg5.0",
-    "revision": "1.2.20",
-    "@id": "data:libapt-pkg5.0/1.2.20",
+    "revision": "1.2.24",
+    "@id": "data:libapt-pkg5.0/1.2.24",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "libapt-pkg5.0/1.2.20/amd64"
+      "externalId": "libapt-pkg5.0/1.2.24/amd64"
     },
     "relationship": []
   },
   {
     "name": "libapt-pkg5.0",
-    "revision": "1.2.20",
-    "@id": "data:libapt-pkg5.0/1.2.20",
+    "revision": "1.2.24",
+    "@id": "data:libapt-pkg5.0/1.2.24",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "libapt-pkg5.0/1.2.20/amd64"
+      "externalId": "libapt-pkg5.0/1.2.24/amd64"
     },
     "relationship": []
   },
@@ -2460,23 +2460,23 @@
   },
   {
     "name": "libkmod2",
-    "revision": "22-1ubuntu4",
-    "@id": "data:libkmod2/22-1ubuntu4",
+    "revision": "22-1ubuntu5",
+    "@id": "data:libkmod2/22-1ubuntu5",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "libkmod2/22-1ubuntu4/amd64"
+      "externalId": "libkmod2/22-1ubuntu5/amd64"
     },
     "relationship": []
   },
   {
     "name": "libkmod2",
-    "revision": "22-1ubuntu4",
-    "@id": "data:libkmod2/22-1ubuntu4",
+    "revision": "22-1ubuntu5",
+    "@id": "data:libkmod2/22-1ubuntu5",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "libkmod2/22-1ubuntu4/amd64"
+      "externalId": "libkmod2/22-1ubuntu5/amd64"
     },
     "relationship": []
   },
@@ -3208,23 +3208,23 @@
   },
   {
     "name": "libsystemd0",
-    "revision": "229-4ubuntu17",
-    "@id": "data:libsystemd0/229-4ubuntu17",
+    "revision": "229-4ubuntu19",
+    "@id": "data:libsystemd0/229-4ubuntu19",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "libsystemd0/229-4ubuntu17/amd64"
+      "externalId": "libsystemd0/229-4ubuntu19/amd64"
     },
     "relationship": []
   },
   {
     "name": "libsystemd0",
-    "revision": "229-4ubuntu17",
-    "@id": "data:libsystemd0/229-4ubuntu17",
+    "revision": "229-4ubuntu19",
+    "@id": "data:libsystemd0/229-4ubuntu19",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "libsystemd0/229-4ubuntu17/amd64"
+      "externalId": "libsystemd0/229-4ubuntu19/amd64"
     },
     "relationship": []
   },
@@ -3274,23 +3274,23 @@
   },
   {
     "name": "libudev1",
-    "revision": "229-4ubuntu17",
-    "@id": "data:libudev1/229-4ubuntu17",
+    "revision": "229-4ubuntu19",
+    "@id": "data:libudev1/229-4ubuntu19",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "libudev1/229-4ubuntu17/amd64"
+      "externalId": "libudev1/229-4ubuntu19/amd64"
     },
     "relationship": []
   },
   {
     "name": "libudev1",
-    "revision": "229-4ubuntu17",
-    "@id": "data:libudev1/229-4ubuntu17",
+    "revision": "229-4ubuntu19",
+    "@id": "data:libudev1/229-4ubuntu19",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "libudev1/229-4ubuntu17/amd64"
+      "externalId": "libudev1/229-4ubuntu19/amd64"
     },
     "relationship": []
   },
@@ -3714,45 +3714,45 @@
   },
   {
     "name": "systemd",
-    "revision": "229-4ubuntu17",
-    "@id": "data:systemd/229-4ubuntu17",
+    "revision": "229-4ubuntu19",
+    "@id": "data:systemd/229-4ubuntu19",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "systemd/229-4ubuntu17/amd64"
+      "externalId": "systemd/229-4ubuntu19/amd64"
     },
     "relationship": []
   },
   {
     "name": "systemd",
-    "revision": "229-4ubuntu17",
-    "@id": "data:systemd/229-4ubuntu17",
+    "revision": "229-4ubuntu19",
+    "@id": "data:systemd/229-4ubuntu19",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "systemd/229-4ubuntu17/amd64"
+      "externalId": "systemd/229-4ubuntu19/amd64"
     },
     "relationship": []
   },
   {
     "name": "systemd-sysv",
-    "revision": "229-4ubuntu17",
-    "@id": "data:systemd-sysv/229-4ubuntu17",
+    "revision": "229-4ubuntu19",
+    "@id": "data:systemd-sysv/229-4ubuntu19",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "systemd-sysv/229-4ubuntu17/amd64"
+      "externalId": "systemd-sysv/229-4ubuntu19/amd64"
     },
     "relationship": []
   },
   {
     "name": "systemd-sysv",
-    "revision": "229-4ubuntu17",
-    "@id": "data:systemd-sysv/229-4ubuntu17",
+    "revision": "229-4ubuntu19",
+    "@id": "data:systemd-sysv/229-4ubuntu19",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "systemd-sysv/229-4ubuntu17/amd64"
+      "externalId": "systemd-sysv/229-4ubuntu19/amd64"
     },
     "relationship": []
   },

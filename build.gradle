@@ -192,6 +192,16 @@ task createRpmDockerfileTasks() {
     }
 }
 
+task removeTestImage(type: Exec) {
+    ignoreExitValue true
+    commandLine "docker", "rmi", "blackducksoftware/centos_minus_vim_plus_bacula:1.0"
+}
+
+task removeTestBaseImage(type: Exec) {
+    ignoreExitValue true
+    commandLine "docker", "rmi", "centos:latest"
+}
+
 task createTestDockerfile(type: Dockerfile) {
 	destFile = project.file("${buildDir}/images/test/centos_minus_vim_plus_bacula/Dockerfile")
 	println "destFile: ${destFile}"
@@ -203,7 +213,7 @@ task createTestDockerfile(type: Dockerfile) {
     runCommand 'yum install -y bacula-director bacula-storage bacula-client bacula-console'
 }
 
-task buildTestDockerImage(type: Exec, dependsOn: [createTestDockerfile]) {
+task buildTestDockerImage(type: Exec, dependsOn: [removeTestBaseImage, removeTestImage, createTestDockerfile]) {
 	commandLine "docker", "build", "--no-cache", "--tag", "blackducksoftware/centos_minus_vim_plus_bacula:1.0", "${buildDir}/images/test/centos_minus_vim_plus_bacula"
 }
 
@@ -229,11 +239,16 @@ task removeWhImage(type: Exec) {
     commandLine "docker", "rmi", "blackducksoftware/whiteouttest:1.0"
 }
 
+task removeWhBaseImage(type: Exec) {
+    ignoreExitValue true
+    commandLine "docker", "rmi", "ubuntu:latest"
+}
+
 task listImages(type: Exec) {
     commandLine "docker", "images"
 }
 
-task buildWhTestDockerImage(type: Exec, dependsOn: [removeWhImage, listImages, createWhTestDockerfile]) {
+task buildWhTestDockerImage(type: Exec, dependsOn: [removeWhBaseImage, removeWhImage, listImages, createWhTestDockerfile]) {
     commandLine "docker", "build", "--no-cache", "--tag", "blackducksoftware/whiteouttest:1.0", "${buildDir}/images/test/whiteouttest"
 }
 
