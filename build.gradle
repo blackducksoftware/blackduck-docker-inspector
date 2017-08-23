@@ -199,18 +199,18 @@ task removeTestImage(type: Exec) {
 
 task removeTestBaseImage(type: Exec) {
     ignoreExitValue true
-    commandLine "docker", "rmi", "centos:latest"
+    commandLine "docker", "rmi", "centos:7.3.1611"
 }
 
 task createTestDockerfile(type: Dockerfile) {
 	destFile = project.file("${buildDir}/images/test/centos_minus_vim_plus_bacula/Dockerfile")
 	println "destFile: ${destFile}"
-	from 'centos'
+	from 'centos:7.3.1611'
 	maintainer 'Black Duck Software'
 	environmentVariable('LANG', 'en_US.UTF-8')
 	
 	runCommand 'rpm -e vim-minimal'
-    runCommand 'yum install -y bacula-director bacula-storage bacula-client bacula-console'
+    runCommand 'yum install -y bacula-director-5.2.13-23.1.el7 bacula-storage-5.2.13-23.1.el7 bacula-client-5.2.13-23.1.el7 bacula-console-5.2.13-23.1.el7'
 }
 
 task buildTestDockerImage(type: Exec, dependsOn: [removeTestBaseImage, removeTestImage, createTestDockerfile]) {
@@ -225,12 +225,12 @@ task buildTestDockerTarfile(type: Exec, dependsOn: buildTestDockerImage) {
 task createWhTestDockerfile(type: Dockerfile) {
     destFile = project.file("${buildDir}/images/test/whiteouttest/Dockerfile")
     println "destFile: ${destFile}"
-    from 'ubuntu'
+    from 'ubuntu:16.04'
     maintainer 'Black Duck Software'
     environmentVariable('LANG', 'en_US.UTF-8')
     
     runCommand 'apt-get update'
-    runCommand 'apt-get -y install curl'
+    runCommand 'apt-get -y install curl=7.47.0-1ubuntu2.2'
     runCommand 'apt-get -y remove curl'
 }
 
@@ -241,7 +241,7 @@ task removeWhImage(type: Exec) {
 
 task removeWhBaseImage(type: Exec) {
     ignoreExitValue true
-    commandLine "docker", "rmi", "ubuntu:latest"
+    commandLine "docker", "rmi", "ubuntu:16.04"
 }
 
 task listImages(type: Exec) {
@@ -381,8 +381,11 @@ task integrationTest(type: Test, dependsOn: [pushImages, buildWhTestDockerTarfil
     outputs.upToDateWhen { false }
 }
 
-//check.dependsOn integrationTest
-//integrationTest.mustRunAfter pushImages
+task itOnly(type: Test) {
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    outputs.upToDateWhen { false }
+}
 
 task all(dependsOn: [integrationTest]) {}
 
