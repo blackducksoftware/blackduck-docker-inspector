@@ -204,10 +204,10 @@ then
 	tarfilename=$(basename "$image")
 	docker exec "${containername}" rm -f "/opt/blackduck/hub-docker-inspector/target/$tarfilename"
 	docker cp "$image" "${containername}:/opt/blackduck/hub-docker-inspector/target/$tarfilename"
-	docker exec -e "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/blackduck/hub-docker-inspector" -e BD_HUB_PASSWORD -e SCAN_CLI_OPTS -e http_proxy -e https_proxy -e HTTP_PROXY -e HTTPS_PROXY -e DOCKERD_OPTS -e DOCKER_INSPECTOR_JAVA_OPTS "${containername}" /opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} "\"/opt/blackduck/hub-docker-inspector/target/$tarfilename\""
+	docker exec -e BD_HUB_PASSWORD -e SCAN_CLI_OPTS -e http_proxy -e https_proxy -e HTTP_PROXY -e HTTPS_PROXY -e DOCKERD_OPTS -e DOCKER_INSPECTOR_JAVA_OPTS "${containername}" //opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} "\"/opt/blackduck/hub-docker-inspector/target/$tarfilename\""
 else
 	echo Inspecting image: $image
-	docker exec -e "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/blackduck/hub-docker-inspector" -e BD_HUB_PASSWORD -e SCAN_CLI_OPTS -e http_proxy -e https_proxy -e HTTP_PROXY -e HTTPS_PROXY -e DOCKERD_OPTS -e DOCKER_INSPECTOR_JAVA_OPTS "${containername}" /opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} "\"$image\""
+	docker exec -e BD_HUB_PASSWORD -e SCAN_CLI_OPTS -e http_proxy -e https_proxy -e HTTP_PROXY -e HTTPS_PROXY -e DOCKERD_OPTS -e DOCKER_INSPECTOR_JAVA_OPTS "${containername}" //opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} "\"$image\""
 fi
 
 if [ ! -z "${bdioOutputPath}" ]
