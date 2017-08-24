@@ -39,6 +39,46 @@ class DockerTarParserTest {
 
     private static final String LAYER_ID = "layerId1"
 
+    @Ignore
+    @Test
+    void testMultipleVersionsInOneTarTEMP() {
+        File dockerTar = new File("/tmp/ttt/ubuntu.tar")
+        File workingDirectory = TestUtils.createTempDirectory()
+        println "workingDirectory: ${workingDirectory.getAbsolutePath()}"
+
+        DockerTarParser tarParser = new DockerTarParser()
+        tarParser.workingDirectory = workingDirectory
+        tarParser.manifestFactory = new HardwiredManifestFactory()
+
+        List<File> layerTars = tarParser.extractLayerTars(dockerTar)
+        List<ManifestLayerMapping> layerMappings = tarParser.getLayerMappings(dockerTar.getName(), "ubuntu", "latest")
+        //        assertEquals(1, layerMappings.size())
+        //        assertEquals(3, layerMappings.get(0).layers.size())
+        File imageFilesDir = tarParser.extractDockerLayers(layerTars, layerMappings)
+        OperatingSystemEnum targetOsEnum = tarParser.detectOperatingSystem(null, imageFilesDir)
+        ImageInfo tarExtractionResults = tarParser.collectPkgMgrInfo(imageFilesDir, targetOsEnum)
+
+        boolean varLibRpmNameFound = false
+        int numFilesFound = 0
+        workingDirectory.eachFileRecurse(FileType.FILES) { file ->
+            numFilesFound++
+            if (file.getAbsolutePath().endsWith("var/lib/rpm/Name")) {
+                println file.getAbsolutePath()
+                varLibRpmNameFound = true
+                String stringsOutput = "strings ${file.getAbsolutePath()}".execute().getText()
+                //                assertTrue(stringsOutput.contains("bacula-console"))
+                //                assertTrue(stringsOutput.contains("bacula-client"))
+                //                assertTrue(stringsOutput.contains("bacula-director"))
+            }
+        }
+        //        assertTrue(varLibRpmNameFound)
+
+        // MacOS file system does not preserve case which throws off the count
+        println "Extracted ${numFilesFound} files"
+        //        assertTrue(numFilesFound > 18000)
+        //        assertTrue(numFilesFound < 19000)
+    }
+
     @Test
     void testExtractFullImage() {
         File dockerTar = new File("build/images/test/centos_minus_vim_plus_bacula.tar")
