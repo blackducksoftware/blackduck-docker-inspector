@@ -117,7 +117,7 @@ public class Application {
                 runInSubContainer(dockerTarFile, currentOsEnum, targetOsEnum);
             }
         } catch (final Exception e) {
-            logger.error(String.format("Error inspecting image: ${e.message}"));
+            logger.error(String.format("Error inspecting image: %s", e.getMessage()));
             final String trace = ExceptionUtils.getStackTrace(e);
             logger.debug(String.format("Stack trace: %s", trace));
         }
@@ -164,10 +164,6 @@ public class Application {
             logger.info("Running in development mode");
         }
         logger.trace(String.format("dockerTagName: %s", dockerTagName));
-        if (StringUtils.isBlank(dockerTagName)) {
-            dockerTagName = "latest";
-        }
-        logger.trace(String.format("dockerTagName: %s", dockerTagName));
         initImageName();
         logger.info(String.format("Inspecting image/tag %s/%s", dockerImageName, dockerTagName));
         if (!dryRun) {
@@ -191,6 +187,8 @@ public class Application {
             }
             if ((imageNameAndTag.length > 1) && (StringUtils.isNotBlank(imageNameAndTag[1]))) {
                 dockerTagName = imageNameAndTag[1];
+            } else {
+                dockerTagName = "latest";
             }
         }
     }

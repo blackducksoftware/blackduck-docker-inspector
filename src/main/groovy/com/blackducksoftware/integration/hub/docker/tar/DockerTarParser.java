@@ -155,7 +155,7 @@ public class DockerTarParser {
         final Manifest manifest = manifestFactory.createManifest(dockerImageName, dockerTagName, getTarExtractionDirectory(), tarFileName);
         List<ManifestLayerMapping> mappings;
         try {
-            mappings = manifest.getLayerMappings();
+            mappings = manifest.getLayerMappings(dockerImageName, dockerTagName);
         } catch (final Exception e) {
             logger.error(String.format("Could not parse the image manifest file : %s", e.getMessage()));
             throw e;

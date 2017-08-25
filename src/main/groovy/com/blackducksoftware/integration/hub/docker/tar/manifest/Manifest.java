@@ -39,7 +39,8 @@ public class Manifest {
         this.manifestLayerMappingFactory = manifestLayerMappingFactory;
     }
 
-    public List<ManifestLayerMapping> getLayerMappings() throws HubIntegrationException, IOException {
+    public List<ManifestLayerMapping> getLayerMappings(final String targetImageName, final String targetTagName) throws HubIntegrationException, IOException {
+        logger.debug(String.format("getLayerMappings(): targetImageName: %s; targetTagName: %s", targetImageName, targetTagName));
         final List<ManifestLayerMapping> mappings = new ArrayList<>();
         final List<ImageInfo> images = getManifestContents();
         for (final ImageInfo image : images) {
@@ -76,6 +77,15 @@ public class Manifest {
                 imageName = foundRepoTag.substring(0, foundRepoTag.lastIndexOf(':'));
                 tagName = foundRepoTag.substring(foundRepoTag.lastIndexOf(':') + 1);
                 logger.debug(String.format("Found imageName: %s; tagName: %s", imageName, tagName));
+            }
+
+            if ((!StringUtils.isBlank(targetImageName)) && (!targetImageName.equals(imageName))) {
+                logger.debug("This is not the target image; skipping it");
+                continue;
+            }
+            if ((!StringUtils.isBlank(targetTagName)) && (!targetTagName.equals(tagName))) {
+                logger.debug("This is not the target image tag; skipping it");
+                continue;
             }
             logger.info(String.format("Image: %s, Tag: %s", imageName, tagName));
             final List<String> layerIds = new ArrayList<>();
