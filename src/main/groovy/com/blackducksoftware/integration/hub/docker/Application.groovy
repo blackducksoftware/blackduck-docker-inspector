@@ -85,6 +85,8 @@ class Application {
     ProgramPaths programPaths
 
     String dockerImageName
+
+    @Value('${docker.image.tag}')
     String dockerTagName
 
     static void main(final String[] args) {
@@ -160,9 +162,11 @@ class Application {
         if (devMode) {
             logger.info("Running in development mode")
         }
-        if(StringUtils.isBlank(dockerTagName)){
+        logger.trace(String.format("dockerTagName: %s", dockerTagName))
+        if(StringUtils.isBlank(dockerTagName)) {
             dockerTagName = 'latest'
         }
+        logger.trace(String.format("dockerTagName: %s", dockerTagName))
         initImageName()
         logger.info("Inspecting image/tag ${dockerImageName}/${dockerTagName}")
         if (!dryRun) {

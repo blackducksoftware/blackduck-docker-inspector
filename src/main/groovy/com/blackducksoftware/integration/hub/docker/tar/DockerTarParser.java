@@ -151,7 +151,7 @@ public class DockerTarParser {
     }
 
     public List<ManifestLayerMapping> getLayerMappings(final String tarFileName, final String dockerImageName, final String dockerTagName) throws Exception {
-        logger.debug("getLayerMappings()");
+        logger.debug(String.format("getLayerMappings(): dockerImageName: %s; dockerTagName: %s", dockerImageName, dockerTagName));
         final Manifest manifest = manifestFactory.createManifest(dockerImageName, dockerTagName, getTarExtractionDirectory(), tarFileName);
         List<ManifestLayerMapping> mappings;
         try {

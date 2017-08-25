@@ -78,7 +78,7 @@ task writeVersionToPropertiesFile() {
 	}
 }
 
-task produceFinalZip(type: Zip, dependsOn: writeVersionToPropertiesFile) {
+task produceFinalZip(type: Zip, dependsOn: [build, writeVersionToPropertiesFile]) {
     from("${buildDir}/libs") { include '*.jar' }
     from("${projectDir}/src/main/resources") {
         include 'application.properties'
