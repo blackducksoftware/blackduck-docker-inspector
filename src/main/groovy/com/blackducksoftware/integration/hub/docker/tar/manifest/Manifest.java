@@ -39,10 +39,16 @@ public class Manifest {
         this.manifestLayerMappingFactory = manifestLayerMappingFactory;
     }
 
+    // TODO split up this method
     public List<ManifestLayerMapping> getLayerMappings(final String targetImageName, final String targetTagName) throws HubIntegrationException, IOException {
         logger.debug(String.format("getLayerMappings(): targetImageName: %s; targetTagName: %s", targetImageName, targetTagName));
         final List<ManifestLayerMapping> mappings = new ArrayList<>();
         final List<ImageInfo> images = getManifestContents();
+        if ((images.size() > 1) && (StringUtils.isBlank(targetImageName) || StringUtils.isBlank(targetTagName))) {
+            final String msg = "When the manifest contains multiple images or tags, the target image and tag to inspect must be specified";
+            logger.debug(msg);
+            throw new HubIntegrationException(msg);
+        }
         for (final ImageInfo image : images) {
 
             logger.debug(String.format("getLayerMappings(): image: %s", image));

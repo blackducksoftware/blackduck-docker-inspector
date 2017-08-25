@@ -180,6 +180,7 @@ public class Application {
     }
 
     private void initImageName() {
+        logger.debug(String.format("initImageName(): %s", dockerImage));
         if (StringUtils.isNotBlank(dockerImage)) {
             final String[] imageNameAndTag = dockerImage.split(":");
             if ((imageNameAndTag.length > 0) && (StringUtils.isNotBlank(imageNameAndTag[0]))) {
@@ -188,7 +189,9 @@ public class Application {
             if ((imageNameAndTag.length > 1) && (StringUtils.isNotBlank(imageNameAndTag[1]))) {
                 dockerTagName = imageNameAndTag[1];
             } else {
-                dockerTagName = "latest";
+                if (StringUtils.isBlank(dockerTar)) {
+                    dockerTagName = "latest";
+                }
             }
         }
     }
