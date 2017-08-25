@@ -78,7 +78,7 @@ public class HubDockerManager {
     @Autowired
     PackageManagerFiles packageManagerFiles;
 
-    void init() {
+    public void init() {
         tarParser.setWorkingDirectory(new File(programPaths.getHubDockerWorkingDirPath()));
     }
 
@@ -95,7 +95,7 @@ public class HubDockerManager {
     }
 
     // TODO exception handling (in all java classes, actually)
-    OperatingSystemEnum detectOperatingSystem(final String operatingSystem, final File targetImageFileSystemRootDir) throws HubIntegrationException, IOException {
+    public OperatingSystemEnum detectOperatingSystem(final String operatingSystem, final File targetImageFileSystemRootDir) throws HubIntegrationException, IOException {
         return tarParser.detectOperatingSystem(operatingSystem, targetImageFileSystemRootDir);
     }
 
