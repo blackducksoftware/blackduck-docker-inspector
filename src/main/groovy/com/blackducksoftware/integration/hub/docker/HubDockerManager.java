@@ -82,39 +82,34 @@ public class HubDockerManager {
         tarParser.setWorkingDirectory(new File(programPaths.getHubDockerWorkingDirPath()));
     }
 
-    File getTarFileFromDockerImage(final String imageName, final String tagName) {
+    public File getTarFileFromDockerImage(final String imageName, final String tagName) {
         return dockerClientManager.getTarFileFromDockerImage(imageName, tagName);
     }
 
-    List<File> extractLayerTars(final File dockerTar) throws IOException {
+    public List<File> extractLayerTars(final File dockerTar) throws IOException {
         return tarParser.extractLayerTars(dockerTar);
     }
 
-    File extractDockerLayers(final List<File> layerTars, final List<ManifestLayerMapping> layerMappings) throws IOException {
+    public File extractDockerLayers(final List<File> layerTars, final List<ManifestLayerMapping> layerMappings) throws IOException {
         return tarParser.extractDockerLayers(layerTars, layerMappings);
     }
 
-    // String extractManifestFileContent(final String dockerTarName) {
-    // return tarParser.extractManifestFileContent(dockerTarName);
-    // }
-    // TODO: remove above? make method public or private
-    // TODO exception handling
+    // TODO exception handling (in all java classes, actually)
     OperatingSystemEnum detectOperatingSystem(final String operatingSystem, final File targetImageFileSystemRootDir) throws HubIntegrationException, IOException {
         return tarParser.detectOperatingSystem(operatingSystem, targetImageFileSystemRootDir);
     }
 
-    OperatingSystemEnum detectCurrentOperatingSystem() throws HubIntegrationException, IOException {
+    public OperatingSystemEnum detectCurrentOperatingSystem() throws HubIntegrationException, IOException {
         final EtcDir etcDir = new EtcDir(new File("/etc"));
         return etcDir.getOperatingSystem();
     }
 
-    List<ManifestLayerMapping> getLayerMappings(final String tarFileName, final String dockerImageName, final String dockerTagName) throws Exception {
+    public List<ManifestLayerMapping> getLayerMappings(final String tarFileName, final String dockerImageName, final String dockerTagName) throws Exception {
         return tarParser.getLayerMappings(tarFileName, dockerImageName, dockerTagName);
     }
 
-    // TODO: fix groovy syntax strings
-    List<File> generateBdioFromImageFilesDir(final List<ManifestLayerMapping> mappings, final String projectName, final String versionName, final File dockerTar, final File targetImageFileSystemRootDir, final OperatingSystemEnum osEnum)
-            throws IOException, HubIntegrationException, InterruptedException {
+    public List<File> generateBdioFromImageFilesDir(final List<ManifestLayerMapping> mappings, final String projectName, final String versionName, final File dockerTar, final File targetImageFileSystemRootDir,
+            final OperatingSystemEnum osEnum) throws IOException, HubIntegrationException, InterruptedException {
         final ImageInfo imagePkgMgrInfo = tarParser.collectPkgMgrInfo(targetImageFileSystemRootDir, osEnum);
         if (imagePkgMgrInfo.getOperatingSystemEnum() == null) {
             throw new HubIntegrationException("Could not determine the Operating System of this Docker tar.");
@@ -134,7 +129,7 @@ public class HubDockerManager {
         return generateBdioFromPackageMgrDirs(mappings, projectName, versionName, dockerTar.getName(), imagePkgMgrInfo, architecture);
     }
 
-    void uploadBdioFiles(final List<File> bdioFiles) {
+    public void uploadBdioFiles(final List<File> bdioFiles) {
         if (hubClient.isValid()) {
             if (bdioFiles != null) {
                 for (final File file : bdioFiles) {
@@ -147,7 +142,7 @@ public class HubDockerManager {
         }
     }
 
-    void cleanWorkingDirectory() throws IOException {
+    public void cleanWorkingDirectory() throws IOException {
         final File workingDirectory = new File(programPaths.getHubDockerWorkingDirPath());
         if (workingDirectory.exists()) {
             FileUtils.deleteDirectory(workingDirectory);
@@ -155,7 +150,7 @@ public class HubDockerManager {
     }
 
     // TODO move this to a more logical place (like maybe Dir?)
-    void copyFile(final File fileToCopy, final File destination) throws IOException {
+    public void copyFile(final File fileToCopy, final File destination) throws IOException {
         final String filename = fileToCopy.getName();
         logger.debug(String.format("Copying %s to %s", fileToCopy.getAbsolutePath(), destination.getAbsolutePath()));
         final Path destPath = destination.toPath().resolve(filename);
