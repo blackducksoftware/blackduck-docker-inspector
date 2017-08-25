@@ -157,7 +157,7 @@ public class HubDockerManager {
     // TODO move this to a more logical place (like maybe Dir?)
     void copyFile(final File fileToCopy, final File destination) throws IOException {
         final String filename = fileToCopy.getName();
-        logger.debug("Copying ${fileToCopy.getAbsolutePath()} to ${destination.getAbsolutePath()}");
+        logger.debug(String.format("Copying %s to %s", fileToCopy.getAbsolutePath(), destination.getAbsolutePath()));
         final Path destPath = destination.toPath().resolve(filename);
         Files.copy(fileToCopy.toPath(), destPath);
     }
@@ -185,9 +185,9 @@ public class HubDockerManager {
         codeLocationName = programPaths.getCodeLocationName(manifestMapping.getImageName(), manifestMapping.getTagName(), pkgMgrFilePath, imageInfo.getPkgMgr().getPackageManager().toString());
         hubProjectName = deriveHubProject(manifestMapping.getImageName(), projectName);
         hubVersionName = deriveHubProjectVersion(manifestMapping, versionName);
-        logger.info("Hub project, version: ${hubProjectName}, ${hubVersionName}; Code location : ${codeLocationName}");
+        logger.info(String.format("Hub project, version: %s, %s; Code location : %s", hubProjectName, hubVersionName, codeLocationName));
         final String bdioFilename = programPaths.getBdioFilename(manifestMapping.getImageName(), pkgMgrFilePath, hubProjectName, hubVersionName);
-        logger.debug("bdioFilename: ${bdioFilename}");
+        logger.debug(String.format("bdioFilename: %s", bdioFilename));
         final File outputFile = new File(workingDirectory, bdioFilename);
         bdioFiles.add(outputFile);
         try (FileOutputStream outputStream = new FileOutputStream(outputFile)) {
