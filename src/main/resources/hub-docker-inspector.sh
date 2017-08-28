@@ -60,16 +60,44 @@ function preProcessOptions() {
 		then
 			bdioOutputPath=$(echo "$cmdlinearg" | cut -d '=' -f 2)
 		fi
+		if [[ "$cmdlinearg" == --no.prompt=true ]]
+		then
+			noPromptMode=true
+			echo "Running in \"no prompt\" mode"
+		fi
+		if [[ "$cmdlinearg" == --dry.run=true ]]
+		then
+			dryRunMode=true
+			echo "Running in \"dry run\" mode"
+		fi
 	done
+}
+
+# Prompt user for Hub Password
+function promptForHubPassword() {
+	read -s -p "Hub Password has not been set. Please enter Hub password: " hubPassword
+	echo ""
+	export BD_HUB_PASSWORD="${hubPassword}"
 }
 
 # Inform user on whether password is set via env var
 function checkForPassword() {
-	if [ $hub_password_set_on_cmd_line = true -o -z "${BD_HUB_PASSWORD}" ]
+	if [ $hub_password_set_on_cmd_line == true -o -z "${BD_HUB_PASSWORD}" ]
 	then
    	    echo Environment variable BD_HUB_PASSWORD is not set or is being overridden on the command line
 	else
         echo BD_HUB_PASSWORD is set
+	fi
+	if [ $hub_password_set_on_cmd_line == false -a -z "${BD_HUB_PASSWORD}" -a $dryRunMode == false ]
+	then
+   	    
+		if [ $noPromptMode == false ]
+		then
+			promptForHubPassword
+		else
+			err "The Hub password has not been provided, and \"no prompt\" mode is enabled"
+			exit -1
+		fi
 	fi
 }
 
@@ -147,6 +175,8 @@ containername=hub-docker-inspector
 imagename=hub-docker-inspector
 propdir=.
 hub_password_set_on_cmd_line=false
+noPromptMode=false
+dryRunMode=false
 
 if [ $# -lt 1 ]
 then
