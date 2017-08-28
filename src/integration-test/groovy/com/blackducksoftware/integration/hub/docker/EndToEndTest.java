@@ -113,7 +113,7 @@ public class EndToEndTest {
         pb.redirectErrorStream(true);
         pb.redirectOutput(Redirect.INHERIT);
         final Process p = pb.start();
-        final boolean finished = p.waitFor(240, TimeUnit.SECONDS);
+        final boolean finished = p.waitFor(480, TimeUnit.SECONDS);
         assertTrue(finished);
         System.out.println("hub-docker-inspector done; verifying results...");
         assertTrue(actualBdio.exists());
