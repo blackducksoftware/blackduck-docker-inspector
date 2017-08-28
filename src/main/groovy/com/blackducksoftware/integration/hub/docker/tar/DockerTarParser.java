@@ -160,6 +160,10 @@ public class DockerTarParser {
             logger.error(String.format("Could not parse the image manifest file : %s", e.getMessage()));
             throw e;
         }
+        if (mappings.size() == 0) {
+            final String msg = String.format("Could not find image %s:%s in tar file %s", dockerImageName, dockerTagName, tarFileName);
+            throw new HubIntegrationException(msg);
+        }
         return mappings;
     }
 
