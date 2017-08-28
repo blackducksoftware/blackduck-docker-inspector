@@ -256,6 +256,10 @@ task buildWhTestDockerTarfile(type: Exec, dependsOn: buildWhTestDockerImage) {
     commandLine "docker", "save", "-o", "${buildDir}/images/test/whiteouttest.tar", "blackducksoftware/whiteouttest:1.0"
 }
 
+task buildAggTestDockerTarfile(type: Exec, dependsOn: [buildTestDockerImage, buildWhTestDockerImage]) {
+    commandLine "docker", "save", "-o", "${buildDir}/images/test/aggregated.tar", "blackducksoftware/centos_minus_vim_plus_bacula:1.0", "blackducksoftware/whiteouttest:1.0"
+}
+
 task createDpkgDockerfileTasks() {
     linuxFlavorsDpkg.eachWithIndex {linuxFlavor, index ->
         String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
