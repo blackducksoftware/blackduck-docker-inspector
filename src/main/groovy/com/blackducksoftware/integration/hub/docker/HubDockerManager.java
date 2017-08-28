@@ -40,6 +40,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter;
 import com.blackducksoftware.integration.hub.docker.client.DockerClientManager;
 import com.blackducksoftware.integration.hub.docker.client.ProgramPaths;
@@ -129,7 +130,7 @@ public class HubDockerManager {
         return generateBdioFromPackageMgrDirs(mappings, projectName, versionName, dockerTar.getName(), imagePkgMgrInfo, architecture);
     }
 
-    public void uploadBdioFiles(final List<File> bdioFiles) {
+    public void uploadBdioFiles(final List<File> bdioFiles) throws IntegrationException {
         if (hubClient.isValid()) {
             if (bdioFiles != null) {
                 for (final File file : bdioFiles) {

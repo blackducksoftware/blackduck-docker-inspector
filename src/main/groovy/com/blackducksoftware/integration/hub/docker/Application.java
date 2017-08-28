@@ -38,6 +38,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
+import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.client.DockerClientManager;
 import com.blackducksoftware.integration.hub.docker.client.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.client.ProgramVersion;
@@ -71,7 +72,7 @@ public class Application {
     boolean dryRun;
 
     @Autowired
-    HubClient hubClient;
+    public HubClient hubClient;
 
     @Autowired
     DockerImages dockerImages;
@@ -137,7 +138,7 @@ public class Application {
     }
 
     private void generateBdio(final File dockerTarFile, final File targetImageFileSystemRootDir, final List<ManifestLayerMapping> layerMappings, final OperatingSystemEnum currentOsEnum, final OperatingSystemEnum targetOsEnum)
-            throws HubIntegrationException, IOException, InterruptedException {
+            throws IOException, InterruptedException, IntegrationException {
         final String msg = String.format("Image inspection for %s can be run in this %s docker container; tarfile: %s", targetOsEnum.toString(), currentOsEnum.toString(), dockerTarFile.getAbsolutePath());
         logger.info(msg);
         final List<File> bdioFiles = hubDockerManager.generateBdioFromImageFilesDir(layerMappings, hubProjectName, hubVersionName, dockerTarFile, targetImageFileSystemRootDir, targetOsEnum);
@@ -158,7 +159,7 @@ public class Application {
         }
     }
 
-    private void init() throws IOException, HubIntegrationException {
+    private void init() throws IOException, IntegrationException {
         logger.info(String.format("hub-docker-inspector %s", programVersion.getProgramVersion()));
         if (devMode) {
             logger.info("Running in development mode");
