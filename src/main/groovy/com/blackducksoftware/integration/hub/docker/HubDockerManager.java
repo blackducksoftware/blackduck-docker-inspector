@@ -83,7 +83,7 @@ public class HubDockerManager {
         tarParser.setWorkingDirectory(new File(programPaths.getHubDockerWorkingDirPath()));
     }
 
-    public File getTarFileFromDockerImage(final String imageName, final String tagName) {
+    public File getTarFileFromDockerImage(final String imageName, final String tagName) throws IOException {
         return dockerClientManager.getTarFileFromDockerImage(imageName, tagName);
     }
 

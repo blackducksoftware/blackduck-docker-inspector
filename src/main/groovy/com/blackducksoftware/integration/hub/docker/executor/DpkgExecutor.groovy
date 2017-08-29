@@ -29,7 +29,7 @@ import javax.annotation.PostConstruct
 import org.springframework.stereotype.Component
 
 @Component
-class DpkgExecutor extends Executor {
+class DpkgExecutor extends PkgMgrExecutor {
     @PostConstruct
     void init() {
         initValues(null, 'dpkg -l')

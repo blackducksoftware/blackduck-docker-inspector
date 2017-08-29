@@ -15,7 +15,7 @@ package com.blackducksoftware.integration.hub.docker.executor
 import com.blackducksoftware.integration.hub.docker.tar.ImagePkgMgr
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException
 
-class ExecutorMock extends Executor {
+class ExecutorMock extends PkgMgrExecutor {
 
     File resourceFile
 

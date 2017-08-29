@@ -40,7 +40,7 @@ import com.blackducksoftware.integration.hub.bdio.simple.model.Forge;
 import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.ExternalId;
 import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.NameVersionExternalId;
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum;
-import com.blackducksoftware.integration.hub.docker.executor.Executor;
+import com.blackducksoftware.integration.hub.docker.executor.PkgMgrExecutor;
 import com.blackducksoftware.integration.hub.docker.tar.ImagePkgMgr;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 
@@ -50,14 +50,14 @@ public abstract class Extractor {
     private final BdioNodeFactory bdioNodeFactory = new BdioNodeFactory(bdioPropertyHelper);
 
     private PackageManagerEnum packageManagerEnum;
-    private Executor executor;
+    private PkgMgrExecutor executor;
     private List<String> forges;
 
     abstract void init();
 
     abstract java.util.List<BdioComponent> extractComponents(ExtractionDetails extractionDetails, String[] packageList);
 
-    void initValues(final PackageManagerEnum packageManagerEnum, final Executor executor, final List<String> forges) {
+    void initValues(final PackageManagerEnum packageManagerEnum, final PkgMgrExecutor executor, final List<String> forges) {
         this.packageManagerEnum = packageManagerEnum;
         this.executor = executor;
         this.forges = forges;

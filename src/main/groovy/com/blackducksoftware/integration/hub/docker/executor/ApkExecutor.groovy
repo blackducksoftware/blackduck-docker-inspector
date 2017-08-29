@@ -29,7 +29,7 @@ import javax.annotation.PostConstruct
 import org.springframework.stereotype.Component
 
 @Component
-class ApkExecutor extends Executor {
+class ApkExecutor extends PkgMgrExecutor {
     @PostConstruct
     void init() {
         initValues(null, 'apk info -v')

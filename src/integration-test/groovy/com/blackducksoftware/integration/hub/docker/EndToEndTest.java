@@ -96,7 +96,7 @@ public class EndToEndTest {
         Files.deleteIfExists(actualBdio.toPath());
         assertFalse(actualBdio.exists());
 
-        final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--logging.level.com.blackducksoftware=INFO", "--dry.run=true", "--bdio.output.path=test/output", "--dev.mode=true");
+        final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--dry.run=true", "--bdio.output.path=test/output", "--dev.mode=true");
         // Arrays.asList returns a fixed size list; need a variable sized list
         final List<String> fullCmd = new ArrayList<>();
         fullCmd.addAll(partialCmd);
@@ -104,6 +104,7 @@ public class EndToEndTest {
             fullCmd.add(String.format("--docker.image=%s", image));
             fullCmd.add(String.format("--docker.image.tag=%s", tag));
         }
+        fullCmd.add("--logging.level.com.blackducksoftware=TRACE");
         fullCmd.add(inspectTarget);
 
         System.out.println(String.format("Running end to end test on %s", inspectTarget));

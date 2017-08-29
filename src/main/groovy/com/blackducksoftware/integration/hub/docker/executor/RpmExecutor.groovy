@@ -29,7 +29,7 @@ import javax.annotation.PostConstruct
 import org.springframework.stereotype.Component
 
 @Component
-class RpmExecutor extends Executor {
+class RpmExecutor extends PkgMgrExecutor {
     @PostConstruct
     public void init() {
         initValues('rpm --rebuilddb', 'rpm -qa')

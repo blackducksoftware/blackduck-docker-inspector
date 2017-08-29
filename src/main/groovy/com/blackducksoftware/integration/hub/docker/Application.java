@@ -124,7 +124,7 @@ public class Application {
         }
     }
 
-    private void runInSubContainer(final File dockerTarFile, final OperatingSystemEnum currentOsEnum, final OperatingSystemEnum targetOsEnum) {
+    private void runInSubContainer(final File dockerTarFile, final OperatingSystemEnum currentOsEnum, final OperatingSystemEnum targetOsEnum) throws InterruptedException, IOException, HubIntegrationException {
         final String runOnImageName = dockerImages.getDockerImageName(targetOsEnum);
         final String runOnImageVersion = dockerImages.getDockerImageVersion(targetOsEnum);
         final String msg = String.format("Image inspection for %s should not be run in this %s docker container; will use docker image %s:%s", targetOsEnum.toString(), currentOsEnum.toString(), runOnImageName, runOnImageVersion);
@@ -197,7 +197,7 @@ public class Application {
         }
     }
 
-    private File deriveDockerTarFile() {
+    private File deriveDockerTarFile() throws IOException {
         File dockerTarFile = null;
         if (StringUtils.isNotBlank(dockerTar)) {
             dockerTarFile = new File(dockerTar);
