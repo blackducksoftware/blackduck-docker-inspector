@@ -21,7 +21,7 @@ import com.google.gson.JsonParser;
 
 public class Manifest {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private final String dockerImageName;
+    private final String dockerImageName; // TODO are these 2 obsolete?
     private final String dockerTagName;
     private final File tarExtractionDirectory;
     private final String dockerTarFileName;
@@ -45,7 +45,7 @@ public class Manifest {
         final List<ImageInfo> images = getManifestContents();
         logger.debug(String.format("getLayerMappings(): images.size(): %d", images.size()));
         validateImageSpecificity(images, targetImageName, targetTagName);
-        final String specifiedRepoTag = deriveSpecifiedRepoTag();
+        final String specifiedRepoTag = deriveSpecifiedRepoTag(targetImageName, targetTagName);
         logger.debug(String.format("getLayerMappings(): specifiedRepoTag: %s", specifiedRepoTag));
         for (final ImageInfo image : images) {
             logger.debug(String.format("getLayerMappings(): image: %s", image));
@@ -57,9 +57,6 @@ public class Manifest {
             final String foundImageName = foundRepoTag.substring(0, foundRepoTag.lastIndexOf(':'));
             final String foundTagName = foundRepoTag.substring(foundRepoTag.lastIndexOf(':') + 1);
             logger.debug(String.format("Found imageName: %s; tagName: %s", foundImageName, foundTagName));
-            if (!isTheTargetImage(targetImageName, targetTagName, foundImageName, foundTagName)) {
-                continue;
-            }
             addMapping(mappings, image, foundImageName, foundTagName);
         }
         return mappings;
@@ -74,18 +71,6 @@ public class Manifest {
             }
         }
         return null;
-    }
-
-    private boolean isTheTargetImage(final String targetImageName, final String targetTagName, final String givenImageName, final String givenTagName) {
-        if ((!StringUtils.isBlank(targetImageName)) && (!targetImageName.equals(givenImageName))) {
-            logger.info(String.format("************ %s is not the target image; skipping it", givenImageName));
-            return false;
-        }
-        if ((!StringUtils.isBlank(targetTagName)) && (!targetTagName.equals(givenTagName))) {
-            logger.info(String.format("************ %s is not the target image tag; skipping it", givenTagName));
-            return false;
-        }
-        return true;
     }
 
     private void addMapping(final List<ManifestLayerMapping> mappings, final ImageInfo image, final String imageName, final String tagName) {
@@ -111,7 +96,7 @@ public class Manifest {
         mappings.add(mapping);
     }
 
-    private String deriveSpecifiedRepoTag() {
+    private String deriveSpecifiedRepoTag(final String dockerImageName, final String dockerTagName) {
         String specifiedRepoTag = "";
         if (StringUtils.isNotBlank(dockerImageName)) {
             specifiedRepoTag = String.format("%s:%s", dockerImageName, dockerTagName);
