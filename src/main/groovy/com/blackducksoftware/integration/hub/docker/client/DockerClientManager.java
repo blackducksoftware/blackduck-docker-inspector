@@ -65,28 +65,28 @@ public class DockerClientManager {
     // TODO private members
 
     @Autowired
-    HubDockerClient hubDockerClient;
+    private HubDockerClient hubDockerClient;
 
     @Autowired
-    Executor executor;
+    private Executor executor;
 
     @Autowired
-    ProgramPaths programPaths;
+    private ProgramPaths programPaths;
 
     @Autowired
-    HubDockerProperties hubDockerProperties;
+    private HubDockerProperties hubDockerProperties;
 
     @Value("${hub.password}")
-    String hubPasswordProperty;
+    private String hubPasswordProperty;
 
     @Value("${BD_HUB_PASSWORD:}")
-    String hubPasswordEnvVar;
+    private String hubPasswordEnvVar;
 
     @Value("${hub.proxy.host}")
-    String hubProxyHostProperty;
+    private String hubProxyHostProperty;
 
     @Value("${SCAN_CLI_OPTS:}")
-    String scanCliOptsEnvVar;
+    private String scanCliOptsEnvVar;
 
     public File getTarFileFromDockerImage(final String imageName, final String tagName) throws IOException {
         final File imageTarDirectory = new File(new File(programPaths.getHubDockerWorkingDirPath()), "tarDirectory");
