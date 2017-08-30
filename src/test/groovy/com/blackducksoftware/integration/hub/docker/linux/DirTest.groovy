@@ -35,7 +35,7 @@ class DirTest {
         File targetFile = targetFilePath.toFile()
         targetFile.createNewFile()
 
-        List<File> results = Dirs.findFileWithName(parentDir, "targetFile")
+        List<File> results = FileOperations.findFileWithName(parentDir, "targetFile")
         assertEquals(1, results.size())
         assertEquals("targetFile", results.get(0).getName())
         println "Found: ${results.get(0).getAbsolutePath()}"

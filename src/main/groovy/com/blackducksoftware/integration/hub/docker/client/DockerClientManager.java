@@ -62,8 +62,6 @@ public class DockerClientManager {
     private static final String IMAGE_TAG_PROPERTY = "docker.image.tag";
     private final Logger logger = LoggerFactory.getLogger(DockerClientManager.class);
 
-    // TODO private members
-
     @Autowired
     private HubDockerClient hubDockerClient;
 

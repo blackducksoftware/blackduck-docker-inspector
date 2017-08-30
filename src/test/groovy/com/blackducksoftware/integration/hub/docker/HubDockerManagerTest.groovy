@@ -15,7 +15,7 @@ import com.blackducksoftware.integration.hub.docker.executor.Executor
 import com.blackducksoftware.integration.hub.docker.extractor.ApkExtractor
 import com.blackducksoftware.integration.hub.docker.extractor.DpkgExtractor
 import com.blackducksoftware.integration.hub.docker.extractor.Extractor
-import com.blackducksoftware.integration.hub.docker.linux.Dirs
+import com.blackducksoftware.integration.hub.docker.linux.FileOperations
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser
 import com.blackducksoftware.integration.hub.docker.tar.ImageInfo
 import com.blackducksoftware.integration.hub.docker.tar.ImagePkgMgr
@@ -90,7 +90,7 @@ class HubDockerManagerTest {
             collectPkgMgrInfo: {File imageFilesDir, OperatingSystemEnum osEnum -> imageInfo}
         ] as DockerTarParser
 
-        Dirs.metaClass.static.findFileWithName = {File fileToSearch, String name -> etcDirs}
+        FileOperations.metaClass.static.findFileWithName = {File fileToSearch, String name -> etcDirs}
 
         assertEquals("image.tar", mgr.getTarFileFromDockerImage(imageName, tagName).getName())
 

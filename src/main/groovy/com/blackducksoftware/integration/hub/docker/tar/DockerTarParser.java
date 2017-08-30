@@ -43,7 +43,7 @@ import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum;
-import com.blackducksoftware.integration.hub.docker.linux.Dirs;
+import com.blackducksoftware.integration.hub.docker.linux.FileOperations;
 import com.blackducksoftware.integration.hub.docker.linux.EtcDir;
 import com.blackducksoftware.integration.hub.docker.linux.FileSys;
 import com.blackducksoftware.integration.hub.docker.tar.manifest.Manifest;
@@ -197,7 +197,7 @@ public class DockerTarParser {
     private OperatingSystemEnum deriveOsFromEtcDir(final File targetImageFileSystemRootDir) throws HubIntegrationException, IOException {
         logger.trace(String.format("Target file system root dir %s, looking for etc", targetImageFileSystemRootDir.getName()));
         OperatingSystemEnum osEnum = null;
-        final List<File> etcFiles = Dirs.findFileWithName(targetImageFileSystemRootDir, "etc");
+        final List<File> etcFiles = FileOperations.findFileWithName(targetImageFileSystemRootDir, "etc");
         if (etcFiles == null) {
             final String msg = "Unable to find the files that specify the Linux distro of this image.";
             throw new HubIntegrationException(msg);

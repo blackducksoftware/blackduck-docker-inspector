@@ -27,8 +27,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +44,7 @@ import com.blackducksoftware.integration.hub.docker.client.DockerClientManager;
 import com.blackducksoftware.integration.hub.docker.client.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.extractor.ExtractionDetails;
 import com.blackducksoftware.integration.hub.docker.extractor.Extractor;
-import com.blackducksoftware.integration.hub.docker.linux.Dirs;
+import com.blackducksoftware.integration.hub.docker.linux.FileOperations;
 import com.blackducksoftware.integration.hub.docker.linux.EtcDir;
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser;
 import com.blackducksoftware.integration.hub.docker.tar.ImageInfo;
@@ -92,7 +90,6 @@ public class HubDockerManager {
         return tarParser.extractDockerLayers(layerTars, layerMappings);
     }
 
-    // TODO exception handling (in all java classes, actually)
     public OperatingSystemEnum detectOperatingSystem(final String operatingSystem, final File targetImageFileSystemRootDir) throws HubIntegrationException, IOException {
         return tarParser.detectOperatingSystem(operatingSystem, targetImageFileSystemRootDir);
     }
@@ -114,7 +111,7 @@ public class HubDockerManager {
         }
         String architecture = null;
         if (osEnum == OperatingSystemEnum.ALPINE) {
-            final List<File> etcDirectories = Dirs.findFileWithName(targetImageFileSystemRootDir, "etc");
+            final List<File> etcDirectories = FileOperations.findFileWithName(targetImageFileSystemRootDir, "etc");
             for (final File etc : etcDirectories) {
                 File architectureFile = new File(etc, "apk");
                 architectureFile = new File(architectureFile, "arch");
@@ -145,14 +142,6 @@ public class HubDockerManager {
         if (workingDirectory.exists()) {
             FileUtils.deleteDirectory(workingDirectory);
         }
-    }
-
-    // TODO move this to a more logical place (like maybe Dir?)
-    public void copyFile(final File fileToCopy, final File destination) throws IOException {
-        final String filename = fileToCopy.getName();
-        logger.debug(String.format("Copying %s to %s", fileToCopy.getAbsolutePath(), destination.getAbsolutePath()));
-        final Path destPath = destination.toPath().resolve(filename);
-        Files.copy(fileToCopy.toPath(), destPath);
     }
 
     private List<File> generateBdioFromPackageMgrDirs(final List<ManifestLayerMapping> layerMappings, final String projectName, final String versionName, final String tarFileName, final ImageInfo imageInfo, final String architecture)

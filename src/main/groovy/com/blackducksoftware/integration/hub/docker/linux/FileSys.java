@@ -24,7 +24,7 @@ public class FileSys {
         final Set<PackageManagerEnum> packageManagers = new HashSet<>();
 
         logger.debug(String.format("Looking in root dir %s for lib dir", root.getAbsolutePath()));
-        final List<File> libDirs = Dirs.findFileWithName(root, "lib");
+        final List<File> libDirs = FileOperations.findFileWithName(root, "lib");
         if (libDirs != null) {
             for (final File libDir : libDirs) {
                 for (final File packageManagerDirectory : libDir.listFiles()) {

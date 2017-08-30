@@ -43,6 +43,7 @@ import com.blackducksoftware.integration.hub.docker.client.DockerClientManager;
 import com.blackducksoftware.integration.hub.docker.client.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.client.ProgramVersion;
 import com.blackducksoftware.integration.hub.docker.image.DockerImages;
+import com.blackducksoftware.integration.hub.docker.linux.FileOperations;
 import com.blackducksoftware.integration.hub.docker.tar.manifest.ManifestLayerMapping;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 
@@ -71,7 +72,6 @@ public class Application {
     @Value("${dry.run}")
     private boolean dryRun;
 
-    // TODO why is this public??
     @Autowired
     private HubClient hubClient;
 
@@ -90,7 +90,6 @@ public class Application {
     @Autowired
     private ProgramPaths programPaths;
 
-    // TODO make members private
     private String dockerImageName;
 
     @Value("${docker.image.tag}")
@@ -155,7 +154,7 @@ public class Application {
             final File outputDir = new File(programPaths.getHubDockerOutputJsonPath());
             for (final File bdioFile : bdioFiles) {
                 logger.info(String.format("BDIO file: %s", bdioFile.getName()));
-                hubDockerManager.copyFile(bdioFile, outputDir);
+                FileOperations.copyFile(bdioFile, outputDir);
             }
         }
     }
@@ -181,26 +180,18 @@ public class Application {
         return;
     }
 
-    // TODO too much logging
     private void initImageName() {
         logger.debug(String.format("initImageName(): %s", dockerImage));
         if (StringUtils.isNotBlank(dockerImage)) {
-            logger.trace(String.format("initImageName(): dockerImage specified: %s", dockerImage));
             final String[] imageNameAndTag = dockerImage.split(":");
-            logger.debug(String.format("initImageName(): imageNameAndTag.length: %d", imageNameAndTag.length));
             if ((imageNameAndTag.length > 0) && (StringUtils.isNotBlank(imageNameAndTag[0]))) {
                 dockerImageName = imageNameAndTag[0];
-                logger.trace(String.format("initImageName(): set dockerImageName: %s", dockerImageName));
             }
             if ((imageNameAndTag.length > 1) && (StringUtils.isNotBlank(imageNameAndTag[1]))) {
-                logger.debug(String.format("initImageName(): imageNameAndTag[1]: %s", imageNameAndTag[1]));
                 dockerTagName = imageNameAndTag[1];
-                logger.trace(String.format("initImageName(): set dockerTagName: %s", dockerTagName));
             } else {
-                logger.trace(String.format("initImageName(): dockerTar: %s", dockerTar));
                 if (StringUtils.isBlank(dockerTar)) {
                     dockerTagName = "latest";
-                    logger.trace(String.format("initImageName(): set dockerTagName: %s", dockerTagName));
                 }
             }
         }
