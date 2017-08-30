@@ -51,49 +51,50 @@ public class Application {
     private final Logger logger = LoggerFactory.getLogger(Application.class);
 
     @Value("${docker.tar}")
-    String dockerTar;
+    private String dockerTar;
 
     @Value("${docker.image}")
-    String dockerImage;
+    private String dockerImage;
 
     @Value("${linux.distro}")
-    String linuxDistro;
+    private String linuxDistro;
 
     @Value("${dev.mode}")
-    boolean devMode;
+    private boolean devMode;
 
     @Value("${hub.project.name}")
-    String hubProjectName;
+    private String hubProjectName;
 
     @Value("${hub.project.version}")
-    String hubVersionName;
+    private String hubVersionName;
 
     @Value("${dry.run}")
-    boolean dryRun;
+    private boolean dryRun;
 
+    // TODO why is this public??
     @Autowired
     public HubClient hubClient;
 
     @Autowired
-    DockerImages dockerImages;
+    private DockerImages dockerImages;
 
     @Autowired
-    HubDockerManager hubDockerManager;
+    private HubDockerManager hubDockerManager;
 
     @Autowired
-    DockerClientManager dockerClientManager;
+    private DockerClientManager dockerClientManager;
 
     @Autowired
-    ProgramVersion programVersion;
+    private ProgramVersion programVersion;
 
     @Autowired
-    ProgramPaths programPaths;
+    private ProgramPaths programPaths;
 
     // TODO make members private
-    String dockerImageName;
+    private String dockerImageName;
 
     @Value("${docker.image.tag}")
-    String dockerTagName;
+    private String dockerTagName;
 
     public static void main(final String[] args) {
         new SpringApplicationBuilder(Application.class).logStartupInfo(false).run(args);
