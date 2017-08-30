@@ -73,7 +73,7 @@ public class Application {
 
     // TODO why is this public??
     @Autowired
-    public HubClient hubClient;
+    private HubClient hubClient;
 
     @Autowired
     private DockerImages dockerImages;
