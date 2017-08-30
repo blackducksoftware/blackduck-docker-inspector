@@ -21,16 +21,12 @@ import com.google.gson.JsonParser;
 
 public class Manifest {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private final String dockerImageName; // TODO are these 2 obsolete?
-    private final String dockerTagName;
     private final File tarExtractionDirectory;
     private final String dockerTarFileName;
 
     private ManifestLayerMappingFactory manifestLayerMappingFactory;
 
-    public Manifest(final String dockerImageName, final String dockerTagName, final File tarExtractionDirectory, final String dockerTarFileName) {
-        this.dockerImageName = dockerImageName;
-        this.dockerTagName = dockerTagName;
+    public Manifest(final File tarExtractionDirectory, final String dockerTarFileName) {
         this.tarExtractionDirectory = tarExtractionDirectory;
         this.dockerTarFileName = dockerTarFileName;
     }
@@ -54,10 +50,7 @@ public class Manifest {
                 continue;
             }
             logger.debug(String.format("foundRepoTag: %s", foundRepoTag));
-            final String foundImageName = foundRepoTag.substring(0, foundRepoTag.lastIndexOf(':'));
-            final String foundTagName = foundRepoTag.substring(foundRepoTag.lastIndexOf(':') + 1);
-            logger.debug(String.format("Found imageName: %s; tagName: %s", foundImageName, foundTagName));
-            addMapping(mappings, image, foundImageName, foundTagName);
+            addMapping(mappings, image, targetImageName, targetTagName);
         }
         return mappings;
     }
@@ -80,8 +73,8 @@ public class Manifest {
             layerIds.add(layer.substring(0, layer.indexOf('/')));
         }
         final ManifestLayerMapping mapping = manifestLayerMappingFactory.createManifestLayerMapping(imageName, tagName, layerIds);
-        if (StringUtils.isNotBlank(dockerImageName)) {
-            if (StringUtils.compare(imageName, dockerImageName) == 0 && StringUtils.compare(tagName, dockerTagName) == 0) {
+        if (StringUtils.isNotBlank(imageName)) {
+            if (StringUtils.compare(imageName, imageName) == 0 && StringUtils.compare(tagName, tagName) == 0) {
                 addMapping(mappings, mapping);
             }
         } else {

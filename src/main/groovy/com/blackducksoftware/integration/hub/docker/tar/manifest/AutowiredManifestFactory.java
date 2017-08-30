@@ -12,8 +12,8 @@ public class AutowiredManifestFactory implements ManifestFactory {
     }
 
     @Override
-    public Manifest createManifest(final String dockerImageName, final String dockerTagName, final File tarExtractionDirectory, final String dockerTarFileName) {
-        final Manifest manifest = new Manifest(dockerImageName, dockerTagName, tarExtractionDirectory, dockerTarFileName);
+    public Manifest createManifest(final File tarExtractionDirectory, final String dockerTarFileName) {
+        final Manifest manifest = new Manifest(tarExtractionDirectory, dockerTarFileName);
         final ManifestLayerMappingFactory factory = new AutowiredManifestLayerMappingFactory();
         manifest.setManifestLayerMappingFactory(factory);
         return manifest;
