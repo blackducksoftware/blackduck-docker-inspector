@@ -39,83 +39,92 @@ public class Manifest {
         this.manifestLayerMappingFactory = manifestLayerMappingFactory;
     }
 
-    // TODO split up this method
     public List<ManifestLayerMapping> getLayerMappings(final String targetImageName, final String targetTagName) throws HubIntegrationException, IOException {
         logger.debug(String.format("getLayerMappings(): targetImageName: %s; targetTagName: %s", targetImageName, targetTagName));
         final List<ManifestLayerMapping> mappings = new ArrayList<>();
         final List<ImageInfo> images = getManifestContents();
         logger.debug(String.format("getLayerMappings(): images.size(): %d", images.size()));
+        validateImageSpecificity(images, targetImageName, targetTagName);
+        final String specifiedRepoTag = deriveSpecifiedRepoTag();
+        logger.debug(String.format("getLayerMappings(): specifiedRepoTag: %s", specifiedRepoTag));
+        for (final ImageInfo image : images) {
+            logger.debug(String.format("getLayerMappings(): image: %s", image));
+            final String foundRepoTag = findRepoTag(image, specifiedRepoTag);
+            if (foundRepoTag == null) {
+                continue;
+            }
+            logger.debug(String.format("foundRepoTag: %s", foundRepoTag));
+            final String foundImageName = foundRepoTag.substring(0, foundRepoTag.lastIndexOf(':'));
+            final String foundTagName = foundRepoTag.substring(foundRepoTag.lastIndexOf(':') + 1);
+            logger.debug(String.format("Found imageName: %s; tagName: %s", foundImageName, foundTagName));
+            if (!isTheTargetImage(targetImageName, targetTagName, foundImageName, foundTagName)) {
+                continue;
+            }
+            addMapping(mappings, image, foundImageName, foundTagName);
+        }
+        return mappings;
+    }
+
+    private String findRepoTag(final ImageInfo image, final String targetRepoTag) throws HubIntegrationException {
+        for (final String repoTag : image.repoTags) {
+            logger.trace(String.format("Target repo tag %s; checking %s", targetRepoTag, repoTag));
+            if (StringUtils.compare(repoTag, targetRepoTag) == 0) {
+                logger.trace(String.format("Found the targetRepoTag %s", targetRepoTag));
+                return repoTag;
+            }
+        }
+        return null;
+    }
+
+    private boolean isTheTargetImage(final String targetImageName, final String targetTagName, final String givenImageName, final String givenTagName) {
+        if ((!StringUtils.isBlank(targetImageName)) && (!targetImageName.equals(givenImageName))) {
+            logger.info(String.format("************ %s is not the target image; skipping it", givenImageName));
+            return false;
+        }
+        if ((!StringUtils.isBlank(targetTagName)) && (!targetTagName.equals(givenTagName))) {
+            logger.info(String.format("************ %s is not the target image tag; skipping it", givenTagName));
+            return false;
+        }
+        return true;
+    }
+
+    private void addMapping(final List<ManifestLayerMapping> mappings, final ImageInfo image, final String imageName, final String tagName) {
+        logger.info(String.format("Image: %s, Tag: %s", imageName, tagName));
+        final List<String> layerIds = new ArrayList<>();
+        for (final String layer : image.layers) {
+            layerIds.add(layer.substring(0, layer.indexOf('/')));
+        }
+        final ManifestLayerMapping mapping = manifestLayerMappingFactory.createManifestLayerMapping(imageName, tagName, layerIds);
+        if (StringUtils.isNotBlank(dockerImageName)) {
+            if (StringUtils.compare(imageName, dockerImageName) == 0 && StringUtils.compare(tagName, dockerTagName) == 0) {
+                addMapping(mappings, mapping);
+            }
+        } else {
+            addMapping(mappings, mapping);
+        }
+    }
+
+    private void addMapping(final List<ManifestLayerMapping> mappings, final ManifestLayerMapping mapping) {
+        logger.debug("Adding layer mapping");
+        logger.debug(String.format("Image %s , Tag %s", mapping.getImageName(), mapping.getTagName()));
+        logger.debug(String.format("Layers %s", mapping.getLayers()));
+        mappings.add(mapping);
+    }
+
+    private String deriveSpecifiedRepoTag() {
+        String specifiedRepoTag = "";
+        if (StringUtils.isNotBlank(dockerImageName)) {
+            specifiedRepoTag = String.format("%s:%s", dockerImageName, dockerTagName);
+        }
+        return specifiedRepoTag;
+    }
+
+    private void validateImageSpecificity(final List<ImageInfo> images, final String targetImageName, final String targetTagName) throws HubIntegrationException {
         if ((images.size() > 1) && (StringUtils.isBlank(targetImageName) || StringUtils.isBlank(targetTagName))) {
             final String msg = "When the manifest contains multiple images or tags, the target image and tag to inspect must be specified";
             logger.debug(msg);
             throw new HubIntegrationException(msg);
         }
-        for (final ImageInfo image : images) {
-
-            logger.debug(String.format("getLayerMappings(): image: %s", image));
-
-            String specifiedRepoTag = "";
-            if (StringUtils.isNotBlank(dockerImageName)) {
-                specifiedRepoTag = String.format("%s:%s", dockerImageName, dockerTagName);
-            }
-            logger.debug(String.format("getLayerMappings(): specifiedRepoTag: %s", specifiedRepoTag));
-            String imageName = "";
-            String tagName = "";
-            String foundRepoTag = null;
-
-            for (final String repoTag : image.repoTags) {
-                if (StringUtils.compare(repoTag, specifiedRepoTag) == 0) {
-                    foundRepoTag = repoTag;
-                }
-            }
-
-            if (StringUtils.isBlank(foundRepoTag)) {
-                logger.debug("Attempting to parse repoTag from manifest");
-                if (image.repoTags == null) {
-                    final String msg = "The RepoTags field is missing from the tar file manifest. Please make sure this tar file was saved using the image name (vs. image ID)";
-                    throw new HubIntegrationException(msg);
-                }
-                final String repoTag = image.repoTags.get(0);
-                logger.debug(String.format("repoTag: %s", repoTag));
-                imageName = repoTag.substring(0, repoTag.lastIndexOf(':'));
-                tagName = repoTag.substring(repoTag.lastIndexOf(':') + 1);
-                logger.debug(String.format("Parsed imageName: %s; tagName: %s", imageName, tagName));
-            } else {
-                logger.debug(String.format("foundRepoTag: %s", foundRepoTag));
-                imageName = foundRepoTag.substring(0, foundRepoTag.lastIndexOf(':'));
-                tagName = foundRepoTag.substring(foundRepoTag.lastIndexOf(':') + 1);
-                logger.debug(String.format("Found imageName: %s; tagName: %s", imageName, tagName));
-            }
-
-            if ((!StringUtils.isBlank(targetImageName)) && (!targetImageName.equals(imageName))) {
-                logger.debug("This is not the target image; skipping it");
-                continue;
-            }
-            if ((!StringUtils.isBlank(targetTagName)) && (!targetTagName.equals(tagName))) {
-                logger.debug("This is not the target image tag; skipping it");
-                continue;
-            }
-            logger.info(String.format("Image: %s, Tag: %s", imageName, tagName));
-            final List<String> layerIds = new ArrayList<>();
-            for (final String layer : image.layers) {
-                layerIds.add(layer.substring(0, layer.indexOf('/')));
-            }
-            final ManifestLayerMapping mapping = manifestLayerMappingFactory.createManifestLayerMapping(imageName, tagName, layerIds);
-            if (StringUtils.isNotBlank(dockerImageName)) {
-                if (StringUtils.compare(imageName, dockerImageName) == 0 && StringUtils.compare(tagName, dockerTagName) == 0) {
-                    logger.debug("Adding layer mapping");
-                    logger.debug(String.format("Image: %s:%s", mapping.getImageName(), mapping.getTagName()));
-                    logger.debug(String.format("Layers: %s", mapping.getLayers()));
-                    mappings.add(mapping);
-                }
-            } else {
-                logger.debug("Adding layer mapping");
-                logger.debug(String.format("Image %s , Tag %s", mapping.getImageName(), mapping.getTagName()));
-                logger.debug(String.format("Layers %s", mapping.getLayers()));
-                mappings.add(mapping);
-            }
-        }
-        return mappings;
     }
 
     private List<ImageInfo> getManifestContents() throws IOException {
