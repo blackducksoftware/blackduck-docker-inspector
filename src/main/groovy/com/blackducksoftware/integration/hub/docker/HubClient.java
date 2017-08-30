@@ -48,42 +48,40 @@ public class HubClient {
     private final Logger logger = LoggerFactory.getLogger(HubClient.class);
 
     @Value("${hub.url}")
-    String hubUrl;
+    private String hubUrl;
 
     @Value("${hub.timeout}")
-    String hubTimeout;
+    private String hubTimeout;
 
     @Value("${hub.username}")
-    String hubUsername;
+    private String hubUsername;
 
     @Value("${hub.password}")
-    String hubPasswordProperty;
+    private String hubPasswordProperty;
 
     @Value("${BD_HUB_PASSWORD:}")
-    String hubPasswordEnvVar;
+    private String hubPasswordEnvVar;
 
     @Value("${SCAN_CLI_OPTS:}")
-    String scanCliOptsEnvVar;
+    private String scanCliOptsEnvVar;
 
     @Value("${hub.proxy.host}")
-    String hubProxyHostProperty;
+    private String hubProxyHostProperty;
 
     @Value("${hub.proxy.port}")
-    String hubProxyPortProperty;
+    private String hubProxyPortProperty;
 
     @Value("${hub.proxy.username}")
-    String hubProxyUsernameProperty;
+    private String hubProxyUsernameProperty;
 
     @Value("${hub.proxy.password}")
-    String hubProxyPasswordProperty;
+    private String hubProxyPasswordProperty;
 
     @Value("${command.timeout}")
-    long commandTimeout;
+    private long commandTimeout;
 
     @Value("${hub.auto.import.cert}")
-    Boolean autoImportCert;
-
-    // TODO make members private
+    private Boolean autoImportCert;
 
     public boolean isValid() {
         return createBuilder().isValid();

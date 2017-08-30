@@ -59,25 +59,22 @@ public class HubDockerManager {
     private final Logger logger = LoggerFactory.getLogger(HubDockerManager.class);
 
     @Value("${linux.distro}")
-    String linuxDistro;
+    private String linuxDistro;
 
     @Autowired
-    HubClient hubClient;
+    private HubClient hubClient;
 
     @Autowired
-    ProgramPaths programPaths;
+    private ProgramPaths programPaths;
 
     @Autowired
-    DockerClientManager dockerClientManager;
+    private DockerClientManager dockerClientManager;
 
     @Autowired
-    List<Extractor> extractors;
+    private List<Extractor> extractors;
 
     @Autowired
-    DockerTarParser tarParser;
-
-    @Autowired
-    PackageManagerFiles packageManagerFiles;
+    private DockerTarParser tarParser;
 
     public void init() {
         tarParser.setWorkingDirectory(new File(programPaths.getHubDockerWorkingDirPath()));

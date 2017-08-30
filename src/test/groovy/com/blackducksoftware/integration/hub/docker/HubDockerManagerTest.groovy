@@ -63,9 +63,6 @@ class HubDockerManagerTest {
         extractors.add(extractor)
 
         HubDockerManager mgr = new HubDockerManager()
-        mgr.packageManagerFiles = [
-            stubPackageManagerFiles: {ImagePkgMgr m -> println "stubPackageManagerFiles() mocked"}
-        ] as PackageManagerFiles
         mgr.programPaths = [
             getHubDockerWorkingDirPath: {
                 -> TestUtils.createTempDirectory().getAbsolutePath()
