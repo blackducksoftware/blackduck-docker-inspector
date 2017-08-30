@@ -26,7 +26,6 @@ package com.blackducksoftware.integration.hub.docker.client;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -41,7 +40,6 @@ import org.springframework.stereotype.Component;
 import com.blackducksoftware.integration.hub.docker.executor.Executor;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.github.dockerjava.api.DockerClient;
-import com.github.dockerjava.api.command.CopyArchiveFromContainerCmd;
 import com.github.dockerjava.api.command.CopyArchiveToContainerCmd;
 import com.github.dockerjava.api.command.CreateContainerCmd;
 import com.github.dockerjava.api.command.CreateContainerResponse;
@@ -134,25 +132,47 @@ public class DockerClientManager {
         return alreadyPulledImage;
     }
 
-    // TODO too big
     public void run(final String runOnImageName, final String runOnTagName, final File dockerTarFile, final boolean copyJar, final String targetImage, final String targetImageTag)
             throws InterruptedException, IOException, HubIntegrationException {
 
-        String hubPassword = hubPasswordEnvVar;
-        if (!StringUtils.isBlank(hubPasswordProperty)) {
-            hubPassword = hubPasswordProperty;
-        }
-
+        final String hubPassword = getHubPassword();
         final String imageId = String.format("%s:%s", runOnImageName, runOnTagName);
         logger.info(String.format("Running container based on image %s", imageId));
         final String extractorContainerName = deriveContainerName(runOnImageName);
         logger.debug(String.format("Container name: %s", extractorContainerName));
         final DockerClient dockerClient = hubDockerClient.getDockerClient();
-
         final String tarFileDirInSubContainer = programPaths.getHubDockerTargetDirPath();
         final String tarFilePathInSubContainer = programPaths.getHubDockerTargetDirPath() + dockerTarFile.getName();
 
-        String containerId = "";
+        final String containerId = ensureContainerRunning(dockerClient, imageId, extractorContainerName, hubPassword);
+        setPropertiesInSubContainer(dockerClient, containerId, tarFilePathInSubContainer, tarFileDirInSubContainer, dockerTarFile, targetImage, targetImageTag);
+        if (copyJar) {
+            copyFileToContainer(dockerClient, containerId, programPaths.getHubDockerJarPath(), programPaths.getHubDockerPgmDirPath());
+        }
+
+        final String cmd = programPaths.getHubDockerPgmDirPath() + INSPECTOR_COMMAND;
+        execCommandInContainer(dockerClient, imageId, containerId, cmd, tarFilePathInSubContainer);
+        copyFileFromContainer(containerId, programPaths.getHubDockerOutputJsonPath() + ".", programPaths.getHubDockerOutputJsonPath());
+    }
+
+    private void setPropertiesInSubContainer(final DockerClient dockerClient, final String containerId, final String tarFilePathInSubContainer, final String tarFileDirInSubContainer, final File dockerTarFile, final String targetImage,
+            final String targetImageTag) throws IOException {
+        hubDockerProperties.load();
+        hubDockerProperties.set(IMAGE_TARFILE_PROPERTY, tarFilePathInSubContainer);
+        hubDockerProperties.set(IMAGE_NAME_PROPERTY, targetImage);
+        hubDockerProperties.set(IMAGE_TAG_PROPERTY, targetImageTag);
+        final String pathToPropertiesFileForSubContainer = String.format("%s%s", programPaths.getHubDockerTargetDirPath(), ProgramPaths.APPLICATION_PROPERTIES_FILENAME);
+        hubDockerProperties.save(pathToPropertiesFileForSubContainer);
+
+        copyFileToContainer(dockerClient, containerId, pathToPropertiesFileForSubContainer, programPaths.getHubDockerConfigDirPath());
+
+        logger.trace(String.format("Docker image tar file: %s", dockerTarFile.getAbsolutePath()));
+        logger.trace(String.format("Docker image tar file path in sub-container: %s", tarFilePathInSubContainer));
+        copyFileToContainer(dockerClient, containerId, dockerTarFile.getAbsolutePath(), tarFileDirInSubContainer);
+    }
+
+    private String ensureContainerRunning(final DockerClient dockerClient, final String imageId, final String extractorContainerName, final String hubPassword) {
+        String containerId;
         boolean isContainerRunning = false;
         final List<Container> containers = dockerClient.listContainersCmd().withShowAll(true).exec();
         final Container extractorContainer = getRunningContainer(containers, extractorContainerName);
@@ -178,26 +198,15 @@ public class DockerClientManager {
             dockerClient.startContainerCmd(containerId).exec();
             logger.info(String.format("Started container %s from image %s", containerId, imageId));
         }
-        hubDockerProperties.load();
-        hubDockerProperties.set(IMAGE_TARFILE_PROPERTY, tarFilePathInSubContainer);
-        hubDockerProperties.set(IMAGE_NAME_PROPERTY, targetImage);
-        hubDockerProperties.set(IMAGE_TAG_PROPERTY, targetImageTag);
-        final String pathToPropertiesFileForSubContainer = String.format("%s%s", programPaths.getHubDockerTargetDirPath(), ProgramPaths.APPLICATION_PROPERTIES_FILENAME);
-        hubDockerProperties.save(pathToPropertiesFileForSubContainer);
+        return containerId;
+    }
 
-        copyFileToContainer(dockerClient, containerId, pathToPropertiesFileForSubContainer, programPaths.getHubDockerConfigDirPath());
-
-        logger.debug(String.format("Docker image tar file: %s", dockerTarFile.getAbsolutePath()));
-        logger.debug(String.format("Docker image tar file path in sub-container: %s", tarFilePathInSubContainer));
-        copyFileToContainer(dockerClient, containerId, dockerTarFile.getAbsolutePath(), tarFileDirInSubContainer);
-
-        if (copyJar) {
-            copyFileToContainer(dockerClient, containerId, programPaths.getHubDockerJarPath(), programPaths.getHubDockerPgmDirPath());
+    private String getHubPassword() {
+        String hubPassword = hubPasswordEnvVar;
+        if (!StringUtils.isBlank(hubPasswordProperty)) {
+            hubPassword = hubPasswordProperty;
         }
-
-        final String cmd = programPaths.getHubDockerPgmDirPath() + INSPECTOR_COMMAND;
-        execCommandInContainer(dockerClient, imageId, containerId, cmd, tarFilePathInSubContainer);
-        copyFileFromContainerViaShell(containerId, programPaths.getHubDockerOutputJsonPath() + ".", programPaths.getHubDockerOutputJsonPath());
+        return hubPassword;
     }
 
     private Container getRunningContainer(final List<Container> containers, final String extractorContainerName) {
@@ -219,18 +228,10 @@ public class DockerClientManager {
         return extractorContainer;
     }
 
-    // TODO this is kind of a hack, and probably handles errors poorly
-    private void copyFileFromContainerViaShell(final String containerId, final String fromPath, final String toPath) throws HubIntegrationException, IOException, InterruptedException {
+    // The docker api that does this corrupts the file, so we do it via a shell cmd
+    private void copyFileFromContainer(final String containerId, final String fromPath, final String toPath) throws HubIntegrationException, IOException, InterruptedException {
         logger.debug(String.format("Copying %s from container to %s via shell command", fromPath, toPath));
         executor.executeCommand(String.format("docker cp %s:%s %s", containerId, fromPath, toPath));
-
-        // TODO clean up:
-        // final StringBuilder sout = new StringBuilder();
-        // final StringBuilder serr = new StringBuilder();
-        // final def proc = "docker cp ${containerId}:${fromPath} ${toPath}".execute();
-        // proc.consumeProcessOutput(sout, serr);
-        // proc.waitForOrKill(5000);
-        // logger.debug("out> $sout err> $serr");
     }
 
     private String deriveContainerName(final String imageName) {
@@ -260,40 +261,7 @@ public class DockerClientManager {
     }
 
     private void execCopyTo(final CopyArchiveToContainerCmd copyProperties) throws IOException {
-        // TODO clean up
-        // InputStream is = null;
-        try {
-            // is = copyProperties.getTarInputStream(); // TODO this is an input, not the output; how to get output??
-            copyProperties.exec();
-
-            // if (is != null) {
-            // final String output = IOUtils.toString(is, StandardCharsets.UTF_8);
-            // logger.debug(String.format("Output from copy command: %s", output));
-            // }
-        } finally {
-            // if (is != null) {
-            // IOUtils.closeQuietly(is);
-            // }
-        }
-    }
-
-    private void execCopyFrom(final CopyArchiveFromContainerCmd copyProperties, final String destPath) throws IOException {
-        InputStream is = null;
-        try {
-            is = copyProperties.exec();
-            if (is != null) {
-                final String output = IOUtils.toString(is, StandardCharsets.UTF_8);
-                logger.trace(String.format("Output from copy command: %s", output));
-                // File targetFile = new File(destPath)
-                // FileUtils.copyInputStreamToFile(is, targetFile)
-            } else {
-                logger.error("Copy failed (input stream returned is null");
-            }
-        } finally {
-            if (is != null) {
-                IOUtils.closeQuietly(is);
-            }
-        }
+        copyProperties.exec();
     }
 
     private void saveImage(final String imageName, final String tagName, final File imageTarFile) throws IOException {
