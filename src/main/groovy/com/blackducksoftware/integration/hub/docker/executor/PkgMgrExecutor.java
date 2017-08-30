@@ -15,7 +15,7 @@ public abstract class PkgMgrExecutor extends Executor {
     private String upgradeCommand;
     private String listPackagesCommand;
 
-    abstract void init();
+    public abstract void init();
 
     void initValues(final String upgradeCommand, final String listPackagesCommand) {
         this.upgradeCommand = upgradeCommand;

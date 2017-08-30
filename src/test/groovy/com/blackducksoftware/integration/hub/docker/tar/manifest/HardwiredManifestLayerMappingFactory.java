@@ -9,7 +9,7 @@ public class HardwiredManifestLayerMappingFactory implements ManifestLayerMappin
     @Override
     public ManifestLayerMapping createManifestLayerMapping(final String imageName, final String tagName, final List<String> layers) {
         final ManifestLayerMapping mapping = new ManifestLayerMapping(imageName, tagName, layers);
-        mapping.programPaths = new ProgramPaths();
+        mapping.setProgramPaths(new ProgramPaths());
         return mapping;
     }
 

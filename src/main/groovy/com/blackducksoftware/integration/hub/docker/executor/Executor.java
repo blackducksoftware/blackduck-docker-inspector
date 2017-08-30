@@ -44,7 +44,7 @@ public class Executor {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Value("${command.timeout}")
-    long commandTimeout;
+    private long commandTimeout;
 
     public String[] executeCommand(final String commandString) throws IOException, InterruptedException, HubIntegrationException {
         final List<String> commandStringList = Arrays.asList(commandString.split(" "));

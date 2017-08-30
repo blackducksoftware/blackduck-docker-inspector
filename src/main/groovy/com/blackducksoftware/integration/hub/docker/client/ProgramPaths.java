@@ -48,7 +48,7 @@ public class ProgramPaths {
 
     private boolean initDone = false;
 
-    void init() {
+    public void init() {
         if (initDone) {
             return;
         }

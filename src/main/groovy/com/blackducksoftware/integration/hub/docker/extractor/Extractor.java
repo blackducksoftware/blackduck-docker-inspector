@@ -53,9 +53,9 @@ public abstract class Extractor {
     private PkgMgrExecutor executor;
     private List<String> forges;
 
-    abstract void init();
+    public abstract void init();
 
-    abstract java.util.List<BdioComponent> extractComponents(ExtractionDetails extractionDetails, String[] packageList);
+    public abstract List<BdioComponent> extractComponents(ExtractionDetails extractionDetails, String[] packageList);
 
     void initValues(final PackageManagerEnum packageManagerEnum, final PkgMgrExecutor executor, final List<String> forges) {
         this.packageManagerEnum = packageManagerEnum;

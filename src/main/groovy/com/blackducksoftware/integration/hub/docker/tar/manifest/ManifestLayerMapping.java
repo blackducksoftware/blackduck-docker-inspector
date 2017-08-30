@@ -37,7 +37,7 @@ public class ManifestLayerMapping {
     private final List<String> layers;
 
     @Autowired
-    ProgramPaths programPaths;
+    private ProgramPaths programPaths;
 
     public ManifestLayerMapping(final String imageName, final String tagName, final List<String> layers) {
         this.imageName = imageName;
@@ -58,11 +58,19 @@ public class ManifestLayerMapping {
     }
 
     public String getTargetImageFileSystemRootDirName() {
-        return programPaths.getTargetImageFileSystemRootDirName(imageName, tagName);
+        return getProgramPaths().getTargetImageFileSystemRootDirName(imageName, tagName);
     }
 
     @Override
     public String toString() {
         return ReflectionToStringBuilder.toString(this, RecursiveToStringStyle.JSON_STYLE);
+    }
+
+    public ProgramPaths getProgramPaths() {
+        return programPaths;
+    }
+
+    public void setProgramPaths(ProgramPaths programPaths) {
+        this.programPaths = programPaths;
     }
 }
