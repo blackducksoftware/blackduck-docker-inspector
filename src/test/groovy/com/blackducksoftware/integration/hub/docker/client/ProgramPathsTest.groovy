@@ -29,7 +29,7 @@ class ProgramPathsTest {
             getQualifiedJarPath: { -> return "SOMEJUNK${installDirPath}/${jarFileName}OTHERJUNK".toString() }
         ] as ProgramPaths
 
-        paths.hubDockerPgmDirPath = installDir.getAbsolutePath()
+        paths.setHubDockerPgmDirPath(installDir.getAbsolutePath())
         paths.init()
 
         assertEquals("${installDirPath}/config/".toString(), paths.getHubDockerConfigDirPath())

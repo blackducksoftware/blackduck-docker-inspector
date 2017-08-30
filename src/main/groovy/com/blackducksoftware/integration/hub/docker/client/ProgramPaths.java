@@ -31,7 +31,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProgramPaths {
 
-    public String hubDockerPgmDirPath; // TODO make private
+    private String hubDockerPgmDirPath;
 
     private static final String DEFAULT_PGM_DIR = "/opt/blackduck/hub-docker-inspector";
 
@@ -114,8 +114,11 @@ public class ProgramPaths {
         return hubDockerOutputJsonPath;
     }
 
+    public void setHubDockerPgmDirPath(final String hubDockerPgmDirPath) {
+        this.hubDockerPgmDirPath = hubDockerPgmDirPath;
+    }
+
     public String getImageTarFilename(final String imageName, final String tagName) {
-        // TODO this used to replace : with _ in image name; why??
         return String.format("%s_%s.tar", imageName, tagName);
     }
 
