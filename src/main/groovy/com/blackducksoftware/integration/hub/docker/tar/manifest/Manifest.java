@@ -44,6 +44,7 @@ public class Manifest {
         logger.debug(String.format("getLayerMappings(): targetImageName: %s; targetTagName: %s", targetImageName, targetTagName));
         final List<ManifestLayerMapping> mappings = new ArrayList<>();
         final List<ImageInfo> images = getManifestContents();
+        logger.debug(String.format("getLayerMappings(): images.size(): %d", images.size()));
         if ((images.size() > 1) && (StringUtils.isBlank(targetImageName) || StringUtils.isBlank(targetTagName))) {
             final String msg = "When the manifest contains multiple images or tags, the target image and tag to inspect must be specified";
             logger.debug(msg);
@@ -57,6 +58,7 @@ public class Manifest {
             if (StringUtils.isNotBlank(dockerImageName)) {
                 specifiedRepoTag = String.format("%s:%s", dockerImageName, dockerTagName);
             }
+            logger.debug(String.format("getLayerMappings(): specifiedRepoTag: %s", specifiedRepoTag));
             String imageName = "";
             String tagName = "";
             String foundRepoTag = null;

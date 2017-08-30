@@ -60,6 +60,8 @@ public class DockerClientManager {
 
     private static final String INSPECTOR_COMMAND = "hub-docker-inspector-launcher.sh";
     private static final String IMAGE_TARFILE_PROPERTY = "docker.tar";
+    private static final String IMAGE_NAME_PROPERTY = "docker.image";
+    private static final String IMAGE_TAG_PROPERTY = "docker.image.tag";
     private final Logger logger = LoggerFactory.getLogger(DockerClientManager.class);
 
     // TODO private members
@@ -99,23 +101,7 @@ public class DockerClientManager {
     public void pullImage(final String imageName, final String tagName) {
         logger.info(String.format("Pulling image %s:%s", imageName, tagName));
         final DockerClient dockerClient = hubDockerClient.getDockerClient();
-
-        // TODO extract method
-        Image alreadyPulledImage = null;
-        final List<Image> images = dockerClient.listImagesCmd().withImageNameFilter(imageName).exec();
-        for (final Image image : images) {
-            for (final String tag : image.getRepoTags()) {
-                if (tag.contains(tagName)) {
-                    alreadyPulledImage = image;
-                    break;
-                }
-            }
-            if (alreadyPulledImage != null) {
-                break;
-            }
-        }
-        ////// end extract method
-
+        final Image alreadyPulledImage = getLocalImage(dockerClient, imageName, tagName);
         if (alreadyPulledImage == null) {
             // Only pull if we dont already have it
             final PullImageCmd pull = dockerClient.pullImageCmd(imageName).withTag(tagName);
@@ -131,16 +117,35 @@ public class DockerClientManager {
         }
     }
 
-    public void run(final String imageName, final String tagName, final File dockerTarFile, final boolean copyJar) throws InterruptedException, IOException, HubIntegrationException {
+    private Image getLocalImage(final DockerClient dockerClient, final String imageName, final String tagName) {
+        Image alreadyPulledImage = null;
+        final List<Image> images = dockerClient.listImagesCmd().withImageNameFilter(imageName).exec();
+        for (final Image image : images) {
+            for (final String tag : image.getRepoTags()) {
+                if (tag.contains(tagName)) {
+                    alreadyPulledImage = image;
+                    break;
+                }
+            }
+            if (alreadyPulledImage != null) {
+                break;
+            }
+        }
+        return alreadyPulledImage;
+    }
+
+    // TODO too big
+    public void run(final String runOnImageName, final String runOnTagName, final File dockerTarFile, final boolean copyJar, final String targetImage, final String targetImageTag)
+            throws InterruptedException, IOException, HubIntegrationException {
 
         String hubPassword = hubPasswordEnvVar;
         if (!StringUtils.isBlank(hubPasswordProperty)) {
             hubPassword = hubPasswordProperty;
         }
 
-        final String imageId = String.format("%s:%s", imageName, tagName);
+        final String imageId = String.format("%s:%s", runOnImageName, runOnTagName);
         logger.info(String.format("Running container based on image %s", imageId));
-        final String extractorContainerName = deriveContainerName(imageName);
+        final String extractorContainerName = deriveContainerName(runOnImageName);
         logger.debug(String.format("Container name: %s", extractorContainerName));
         final DockerClient dockerClient = hubDockerClient.getDockerClient();
 
@@ -150,24 +155,7 @@ public class DockerClientManager {
         String containerId = "";
         boolean isContainerRunning = false;
         final List<Container> containers = dockerClient.listContainersCmd().withShowAll(true).exec();
-        /////// TODO extract method
-        Container extractorContainer = null;
-        for (final Container container : containers) {
-            for (final String name : container.getNames()) {
-                // name prefixed with '/' for some reason
-                logger.debug(String.format("Checking running container %s to see if it is %s", name, extractorContainerName));
-                if (name.contains(extractorContainerName)) {
-                    logger.debug("The extractor container already exists");
-                    extractorContainer = container;
-                    break;
-                }
-            }
-            if (extractorContainer != null) {
-                break;
-            }
-        }
-        ///////// end extract method
-
+        final Container extractorContainer = getRunningContainer(containers, extractorContainerName);
         if (extractorContainer != null) {
             containerId = extractorContainer.getId();
             if (extractorContainer.getStatus().startsWith("Up")) {
@@ -192,6 +180,8 @@ public class DockerClientManager {
         }
         hubDockerProperties.load();
         hubDockerProperties.set(IMAGE_TARFILE_PROPERTY, tarFilePathInSubContainer);
+        hubDockerProperties.set(IMAGE_NAME_PROPERTY, targetImage);
+        hubDockerProperties.set(IMAGE_TAG_PROPERTY, targetImageTag);
         final String pathToPropertiesFileForSubContainer = String.format("%s%s", programPaths.getHubDockerTargetDirPath(), ProgramPaths.APPLICATION_PROPERTIES_FILENAME);
         hubDockerProperties.save(pathToPropertiesFileForSubContainer);
 
@@ -208,6 +198,25 @@ public class DockerClientManager {
         final String cmd = programPaths.getHubDockerPgmDirPath() + INSPECTOR_COMMAND;
         execCommandInContainer(dockerClient, imageId, containerId, cmd, tarFilePathInSubContainer);
         copyFileFromContainerViaShell(containerId, programPaths.getHubDockerOutputJsonPath() + ".", programPaths.getHubDockerOutputJsonPath());
+    }
+
+    private Container getRunningContainer(final List<Container> containers, final String extractorContainerName) {
+        Container extractorContainer = null;
+        for (final Container container : containers) {
+            for (final String name : container.getNames()) {
+                // name prefixed with '/' for some reason
+                logger.debug(String.format("Checking running container %s to see if it is %s", name, extractorContainerName));
+                if (name.contains(extractorContainerName)) {
+                    logger.debug("The extractor container already exists");
+                    extractorContainer = container;
+                    break;
+                }
+            }
+            if (extractorContainer != null) {
+                break;
+            }
+        }
+        return extractorContainer;
     }
 
     // TODO this is kind of a hack, and probably handles errors poorly
@@ -250,27 +259,21 @@ public class DockerClientManager {
         execCopyTo(copyProperties);
     }
 
-    // TODO Not used; this prepends some garbage to the file
-    private void copyFileFromContainer(final DockerClient dockerClient, final String containerId, final String srcPath, final String destPath) throws IOException {
-        logger.info(String.format("Copying %s from container %s --> %s", srcPath, containerId, destPath));
-        final CopyArchiveFromContainerCmd copyProperties = dockerClient.copyArchiveFromContainerCmd(containerId, srcPath).withContainerId(containerId).withResource(srcPath).withHostPath(destPath);
-        execCopyFrom(copyProperties, destPath);
-    }
-
     private void execCopyTo(final CopyArchiveToContainerCmd copyProperties) throws IOException {
-        InputStream is = null;
+        // TODO clean up
+        // InputStream is = null;
         try {
-            is = copyProperties.getTarInputStream(); // TODO is this order right?
+            // is = copyProperties.getTarInputStream(); // TODO this is an input, not the output; how to get output??
             copyProperties.exec();
 
-            if (is != null) {
-                final String output = IOUtils.toString(is, StandardCharsets.UTF_8);
-                logger.debug(String.format("Output from copy command: %s", output));
-            }
+            // if (is != null) {
+            // final String output = IOUtils.toString(is, StandardCharsets.UTF_8);
+            // logger.debug(String.format("Output from copy command: %s", output));
+            // }
         } finally {
-            if (is != null) {
-                IOUtils.closeQuietly(is);
-            }
+            // if (is != null) {
+            // IOUtils.closeQuietly(is);
+            // }
         }
     }
 

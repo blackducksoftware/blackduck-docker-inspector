@@ -134,7 +134,7 @@ public class Application {
         } catch (final Exception e) {
             logger.warn(String.format("Unable to pull docker image %s:%s; proceeding anyway since it may already exist locally", runOnImageName, runOnImageVersion));
         }
-        dockerClientManager.run(runOnImageName, runOnImageVersion, dockerTarFile, devMode);
+        dockerClientManager.run(runOnImageName, runOnImageVersion, dockerTarFile, devMode, dockerImageName, dockerTagName);
     }
 
     private void generateBdio(final File dockerTarFile, final File targetImageFileSystemRootDir, final List<ManifestLayerMapping> layerMappings, final OperatingSystemEnum currentOsEnum, final OperatingSystemEnum targetOsEnum)
@@ -180,21 +180,30 @@ public class Application {
         return;
     }
 
+    // TODO too much logging
     private void initImageName() {
         logger.debug(String.format("initImageName(): %s", dockerImage));
         if (StringUtils.isNotBlank(dockerImage)) {
+            logger.trace(String.format("initImageName(): dockerImage specified: %s", dockerImage));
             final String[] imageNameAndTag = dockerImage.split(":");
+            logger.debug(String.format("initImageName(): imageNameAndTag.length: %d", imageNameAndTag.length));
             if ((imageNameAndTag.length > 0) && (StringUtils.isNotBlank(imageNameAndTag[0]))) {
                 dockerImageName = imageNameAndTag[0];
+                logger.trace(String.format("initImageName(): set dockerImageName: %s", dockerImageName));
             }
             if ((imageNameAndTag.length > 1) && (StringUtils.isNotBlank(imageNameAndTag[1]))) {
+                logger.debug(String.format("initImageName(): imageNameAndTag[1]: %s", imageNameAndTag[1]));
                 dockerTagName = imageNameAndTag[1];
+                logger.trace(String.format("initImageName(): set dockerTagName: %s", dockerTagName));
             } else {
+                logger.trace(String.format("initImageName(): dockerTar: %s", dockerTar));
                 if (StringUtils.isBlank(dockerTar)) {
                     dockerTagName = "latest";
+                    logger.trace(String.format("initImageName(): set dockerTagName: %s", dockerTagName));
                 }
             }
         }
+        logger.debug(String.format("initImageName(): final: dockerImageName: %s; dockerTagName: %s", dockerImage, dockerTagName));
     }
 
     private File deriveDockerTarFile() throws IOException {
