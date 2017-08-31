@@ -29,69 +29,78 @@ public class EndToEndTest {
 
     @Test
     public void testUbuntu() throws IOException, InterruptedException {
-        testImage("ubuntu:17.04", "ubuntu", "17.04", "var_lib_dpkg");
+        testImage("ubuntu:17.04", "ubuntu", "17.04", "var_lib_dpkg", true);
     }
 
     @Test
     public void testAlpine() throws IOException, InterruptedException {
-        testImage("alpine:3.6", "alpine", "3.6", "lib_apk");
+        testImage("alpine:3.6", "alpine", "3.6", "lib_apk", true);
+    }
+
+    @Test
+    public void testAlpineLatest() throws IOException, InterruptedException {
+        testImage("alpine", "alpine", "latest", "lib_apk", false);
     }
 
     @Test
     public void testCentos() throws IOException, InterruptedException {
-        testImage("centos:7.3.1611", "centos", "7.3.1611", "var_lib_rpm");
+        testImage("centos:7.3.1611", "centos", "7.3.1611", "var_lib_rpm", true);
     }
 
     @Test
     public void testHubWebapp() throws IOException, InterruptedException {
-        testImage("blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", "lib_apk");
+        testImage("blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", "lib_apk", true);
     }
 
     @Test
     public void testHubZookeeper() throws IOException, InterruptedException {
-        testImage("blackducksoftware/hub-zookeeper:4.0.0", "blackducksoftware_hub-zookeeper", "4.0.0", "lib_apk");
+        testImage("blackducksoftware/hub-zookeeper:4.0.0", "blackducksoftware_hub-zookeeper", "4.0.0", "lib_apk", true);
     }
 
     @Test
     public void testTomcat() throws IOException, InterruptedException {
-        testImage("tomcat:6.0.53-jre7", "tomcat", "6.0.53-jre7", "var_lib_dpkg");
+        testImage("tomcat:6.0.53-jre7", "tomcat", "6.0.53-jre7", "var_lib_dpkg", true);
     }
 
     @Test
     public void testRhel() throws IOException, InterruptedException {
-        testImage("dnplus/rhel:6.5", "dnplus_rhel", "6.5", "var_lib_rpm");
+        testImage("dnplus/rhel:6.5", "dnplus_rhel", "6.5", "var_lib_rpm", true);
     }
 
     @Test
     public void testWhiteout() throws IOException, InterruptedException {
-        testTar("whiteouttest.tar", "blackducksoftware_whiteouttest", "blackducksoftware/whiteouttest", "1.0", "1.0", "var_lib_dpkg");
+        testTar("whiteouttest.tar", "blackducksoftware_whiteouttest", "blackducksoftware/whiteouttest", "1.0", "1.0", "var_lib_dpkg", true);
     }
 
     @Test
     public void testAggregateTarfileImageOne() throws IOException, InterruptedException {
-        testTar("aggregated.tar", "blackducksoftware_whiteouttest", "blackducksoftware/whiteouttest", "1.0", "1.0", "var_lib_dpkg");
+        testTar("aggregated.tar", "blackducksoftware_whiteouttest", "blackducksoftware/whiteouttest", "1.0", "1.0", "var_lib_dpkg", true);
     }
 
     @Test
     public void testAggregateTarfileImageTwo() throws IOException, InterruptedException {
-        testTar("aggregated.tar", "blackducksoftware_centos_minus_vim_plus_bacula", "blackducksoftware/centos_minus_vim_plus_bacula", "1.0", "1.0", "var_lib_rpm");
+        testTar("aggregated.tar", "blackducksoftware_centos_minus_vim_plus_bacula", "blackducksoftware/centos_minus_vim_plus_bacula", "1.0", "1.0", "var_lib_rpm", true);
     }
 
-    private void testImage(final String inspectTarget, final String imageForBdioFilename, final String tagForBdioFilename, final String pkgMgrPathString) throws IOException, InterruptedException {
-        test(imageForBdioFilename, pkgMgrPathString, null, null, tagForBdioFilename, inspectTarget);
+    private void testImage(final String inspectTarget, final String imageForBdioFilename, final String tagForBdioFilename, final String pkgMgrPathString, final boolean requireBdioMatch) throws IOException, InterruptedException {
+        test(imageForBdioFilename, pkgMgrPathString, null, null, tagForBdioFilename, inspectTarget, requireBdioMatch);
     }
 
     // TODO arg order is weird
-    private void testTar(final String tarFilename, final String imageForBdioFilename, final String repo, final String tag, final String tagForBdioFilename, final String pkgMgrPathString) throws IOException, InterruptedException {
+    private void testTar(final String tarFilename, final String imageForBdioFilename, final String repo, final String tag, final String tagForBdioFilename, final String pkgMgrPathString, final boolean requireBdioMatch)
+            throws IOException, InterruptedException {
         final String inspectTarget = String.format(String.format("build/images/test/%s", tarFilename));
-        test(imageForBdioFilename, pkgMgrPathString, repo, tag, tagForBdioFilename, inspectTarget);
+        test(imageForBdioFilename, pkgMgrPathString, repo, tag, tagForBdioFilename, inspectTarget, requireBdioMatch);
     }
 
     // TODO arg order is weird
-    private void test(final String imageForBdioFilename, final String pkgMgrPathString, final String repo, final String tag, final String tagForBdioFilename, final String inspectTarget) throws IOException, InterruptedException {
+    private void test(final String imageForBdioFilename, final String pkgMgrPathString, final String repo, final String tag, final String tagForBdioFilename, final String inspectTarget, final boolean requireBdioMatch)
+            throws IOException, InterruptedException {
 
         final File expectedBdio = new File(String.format(String.format("src/integration-test/resources/bdio/%s_%s_%s_%s_bdio.jsonld", imageForBdioFilename, pkgMgrPathString, imageForBdioFilename, tagForBdioFilename)));
-        assertTrue(expectedBdio.exists());
+        if (requireBdioMatch) {
+            assertTrue(expectedBdio.exists());
+        }
         final File actualBdio = new File(String.format(String.format("test/output/%s_%s_%s_%s_bdio.jsonld", imageForBdioFilename, pkgMgrPathString, imageForBdioFilename, tagForBdioFilename)));
         Files.deleteIfExists(actualBdio.toPath());
         assertFalse(actualBdio.exists());
@@ -120,10 +129,12 @@ public class EndToEndTest {
         assertTrue(finished);
         System.out.println("hub-docker-inspector done; verifying results...");
         assertTrue(actualBdio.exists());
-        final List<String> exceptLinesContainingThese = new ArrayList<>();
-        exceptLinesContainingThese.add("\"@id\":");
+        if (requireBdioMatch) {
+            final List<String> exceptLinesContainingThese = new ArrayList<>();
+            exceptLinesContainingThese.add("\"@id\":");
 
-        final boolean outputBdioMatches = TestUtils.contentEquals(expectedBdio, actualBdio, exceptLinesContainingThese);
-        assertTrue(outputBdioMatches);
+            final boolean outputBdioMatches = TestUtils.contentEquals(expectedBdio, actualBdio, exceptLinesContainingThese);
+            assertTrue(outputBdioMatches);
+        }
     }
 }
