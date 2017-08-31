@@ -29,70 +29,68 @@ public class EndToEndTest {
 
     @Test
     public void testUbuntu() throws IOException, InterruptedException {
-        testImage("ubuntu", "17.04", "var_lib_dpkg");
+        testImage("ubuntu:17.04", "ubuntu", "17.04", "var_lib_dpkg");
     }
 
     @Test
     public void testAlpine() throws IOException, InterruptedException {
-        testImage("alpine", "3.6", "lib_apk");
+        testImage("alpine:3.6", "alpine", "3.6", "lib_apk");
     }
 
     @Test
     public void testCentos() throws IOException, InterruptedException {
-        testImage("centos", "7.3.1611", "var_lib_rpm");
+        testImage("centos:7.3.1611", "centos", "7.3.1611", "var_lib_rpm");
     }
 
     @Test
     public void testHubWebapp() throws IOException, InterruptedException {
-        testImage("blackducksoftware/hub-webapp", "4.0.0", "lib_apk");
+        testImage("blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", "lib_apk");
     }
 
     @Test
     public void testHubZookeeper() throws IOException, InterruptedException {
-        testImage("blackducksoftware/hub-zookeeper", "4.0.0", "lib_apk");
+        testImage("blackducksoftware/hub-zookeeper:4.0.0", "blackducksoftware_hub-zookeeper", "4.0.0", "lib_apk");
     }
 
     @Test
     public void testTomcat() throws IOException, InterruptedException {
-        testImage("tomcat", "6.0.53-jre7", "var_lib_dpkg");
+        testImage("tomcat:6.0.53-jre7", "tomcat", "6.0.53-jre7", "var_lib_dpkg");
     }
 
     @Test
     public void testRhel() throws IOException, InterruptedException {
-        testImage("dnplus/rhel", "6.5", "var_lib_rpm");
+        testImage("dnplus/rhel:6.5", "dnplus_rhel", "6.5", "var_lib_rpm");
     }
 
     @Test
     public void testWhiteout() throws IOException, InterruptedException {
-        testTar("whiteouttest.tar", "blackducksoftware/whiteouttest", "1.0", "var_lib_dpkg", false);
+        testTar("whiteouttest.tar", "tbd", "blackducksoftware/whiteouttest", "1.0", "tbd2", "var_lib_dpkg");
     }
 
     @Test
     public void testAggregateTarfileImageOne() throws IOException, InterruptedException {
-        testTar("aggregated.tar", "blackducksoftware/whiteouttest", "1.0", "var_lib_dpkg", true);
+        testTar("aggregated.tar", "tbd", "blackducksoftware/whiteouttest", "1.0", "tbd2", "var_lib_dpkg");
     }
 
     @Test
     public void testAggregateTarfileImageTwo() throws IOException, InterruptedException {
-        testTar("aggregated.tar", "blackducksoftware/centos_minus_vim_plus_bacula", "1.0", "var_lib_rpm", true);
+        testTar("aggregated.tar", "tbd", "blackducksoftware/centos_minus_vim_plus_bacula", "1.0", "tbd2", "var_lib_rpm");
     }
 
-    private void testImage(final String image, final String tag, final String pkgMgrPathString) throws IOException, InterruptedException {
-        final String inspectTarget = String.format(String.format("%s:%s", image, tag));
-        final String imageUnderscored = image.replace('/', '_');
-        test(imageUnderscored, pkgMgrPathString, image, tag, inspectTarget, false);
+    private void testImage(final String inspectTarget, final String imageForBdioFilename, final String tagForBdioFilename, final String pkgMgrPathString) throws IOException, InterruptedException {
+        test(imageForBdioFilename, pkgMgrPathString, null, null, tagForBdioFilename, inspectTarget);
     }
 
-    private void testTar(final String tarFilename, final String image, final String tag, final String pkgMgrPathString, final boolean specifyImageTag) throws IOException, InterruptedException {
+    private void testTar(final String tarFilename, final String imageForBdioFilename, final String repo, final String tag, final String tagForBdioFilename, final String pkgMgrPathString) throws IOException, InterruptedException {
         final String inspectTarget = String.format(String.format("build/images/test/%s", tarFilename));
-        final String imageUnderscored = image.replace('/', '_'); // TODO move this into test?
-        test(imageUnderscored, pkgMgrPathString, image, tag, inspectTarget, specifyImageTag);
+        test(imageForBdioFilename, pkgMgrPathString, repo, tag, tagForBdioFilename, inspectTarget);
     }
 
-    private void test(final String imageUnderscored, final String pkgMgrPathString, final String image, final String tag, final String inspectTarget, final boolean specifyImageTag) throws IOException, InterruptedException {
-        final File expectedBdio = new File(String.format(String.format("src/integration-test/resources/bdio/%s_%s_%s_%s_bdio.jsonld", imageUnderscored, pkgMgrPathString, imageUnderscored, tag)));
+    private void test(final String imageForBdioFilename, final String pkgMgrPathString, final String repo, final String tag, final String tagForBdioFilename, final String inspectTarget) throws IOException, InterruptedException {
+
+        final File expectedBdio = new File(String.format(String.format("src/integration-test/resources/bdio/%s_%s_%s_%s_bdio.jsonld", imageForBdioFilename, pkgMgrPathString, imageForBdioFilename, tagForBdioFilename)));
         assertTrue(expectedBdio.exists());
-        final File actualBdio = new File(String.format(String.format("test/output/%s_%s_%s_%s_bdio.jsonld", imageUnderscored, pkgMgrPathString, imageUnderscored, tag)));
+        final File actualBdio = new File(String.format(String.format("test/output/%s_%s_%s_%s_bdio.jsonld", imageForBdioFilename, pkgMgrPathString, imageForBdioFilename, tagForBdioFilename)));
         Files.deleteIfExists(actualBdio.toPath());
         assertFalse(actualBdio.exists());
 
@@ -100,14 +98,16 @@ public class EndToEndTest {
         // Arrays.asList returns a fixed size list; need a variable sized list
         final List<String> fullCmd = new ArrayList<>();
         fullCmd.addAll(partialCmd);
-        if (specifyImageTag) {
-            fullCmd.add(String.format("--docker.image=%s", image));
+        if (repo != null) {
+            fullCmd.add(String.format("--docker.image.repo=%s", repo));
+        }
+        if (tag != null) {
             fullCmd.add(String.format("--docker.image.tag=%s", tag));
         }
-        fullCmd.add("--logging.level.com.blackducksoftware=TRACE");
+        fullCmd.add("--logging.level.com.blackducksoftware=DEBUG");
         fullCmd.add(inspectTarget);
 
-        System.out.println(String.format("Running end to end test on %s", inspectTarget));
+        System.out.println(String.format("Running end to end test on %s with command %s", inspectTarget, fullCmd.toString()));
         final ProcessBuilder pb = new ProcessBuilder(fullCmd);
         final Map<String, String> env = pb.environment();
         env.put("PATH", "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin");

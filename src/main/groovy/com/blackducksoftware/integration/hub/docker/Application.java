@@ -51,11 +51,21 @@ import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 public class Application {
     private final Logger logger = LoggerFactory.getLogger(Application.class);
 
+    // User should specify docker.tar OR docker.image
     @Value("${docker.tar}")
     private String dockerTar;
 
+    // This may or may not have tag, like: ubuntu or ubuntu:16.04
     @Value("${docker.image}")
     private String dockerImage;
+
+    // docker.image.repo and docker.image.tag are for selecting an image
+    // from a multi-image tarfile
+    @Value("${docker.image.repo}")
+    private String dockerImageRepo;
+
+    @Value("${docker.image.tag}")
+    private String dockerImageTag;
 
     @Value("${linux.distro}")
     private String linuxDistro;
@@ -90,11 +100,6 @@ public class Application {
     @Autowired
     private ProgramPaths programPaths;
 
-    private String dockerImageName;
-
-    @Value("${docker.image.tag}")
-    private String dockerTagName;
-
     public static void main(final String[] args) {
         new SpringApplicationBuilder(Application.class).logStartupInfo(false).run(args);
     }
@@ -106,7 +111,7 @@ public class Application {
             final File dockerTarFile = deriveDockerTarFile();
 
             final List<File> layerTars = hubDockerManager.extractLayerTars(dockerTarFile);
-            final List<ManifestLayerMapping> layerMappings = hubDockerManager.getLayerMappings(dockerTarFile.getName(), dockerImageName, dockerTagName);
+            final List<ManifestLayerMapping> layerMappings = hubDockerManager.getLayerMappings(dockerTarFile.getName(), dockerImageRepo, dockerImageTag);
             final File targetImageFileSystemRootDir = hubDockerManager.extractDockerLayers(layerTars, layerMappings);
 
             final OperatingSystemEnum targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro, targetImageFileSystemRootDir);
@@ -134,7 +139,7 @@ public class Application {
         } catch (final Exception e) {
             logger.warn(String.format("Unable to pull docker image %s:%s; proceeding anyway since it may already exist locally", runOnImageName, runOnImageVersion));
         }
-        dockerClientManager.run(runOnImageName, runOnImageVersion, dockerTarFile, devMode, dockerImageName, dockerTagName);
+        dockerClientManager.run(runOnImageName, runOnImageVersion, dockerTarFile, devMode, dockerImage, dockerImageRepo, dockerImageTag);
     }
 
     private void generateBdio(final File dockerTarFile, final File targetImageFileSystemRootDir, final List<ManifestLayerMapping> layerMappings, final OperatingSystemEnum currentOsEnum, final OperatingSystemEnum targetOsEnum)
@@ -164,9 +169,9 @@ public class Application {
         if (devMode) {
             logger.info("Running in development mode");
         }
-        logger.trace(String.format("dockerTagName: %s", dockerTagName));
+        logger.trace(String.format("dockerImageTag: %s", dockerImageTag));
         initImageName();
-        logger.info(String.format("Inspecting image/tag %s/%s", dockerImageName, dockerTagName));
+        logger.info(String.format("Inspecting image:tag %s:%s", dockerImageRepo, dockerImageTag));
         if (!dryRun) {
             verifyHubConnection();
         }
@@ -180,30 +185,28 @@ public class Application {
         return;
     }
 
-    private void initImageName() {
-        logger.debug(String.format("initImageName(): %s", dockerImage));
+    private void initImageName() throws HubIntegrationException {
+        logger.debug(String.format("initImageName(): dockerImage: %s, dockerTar: %s", dockerImage, dockerTar));
         if (StringUtils.isNotBlank(dockerImage)) {
             final String[] imageNameAndTag = dockerImage.split(":");
             if ((imageNameAndTag.length > 0) && (StringUtils.isNotBlank(imageNameAndTag[0]))) {
-                dockerImageName = imageNameAndTag[0];
+                dockerImageRepo = imageNameAndTag[0];
             }
             if ((imageNameAndTag.length > 1) && (StringUtils.isNotBlank(imageNameAndTag[1]))) {
-                dockerTagName = imageNameAndTag[1];
+                dockerImageTag = imageNameAndTag[1];
             } else {
-                if (StringUtils.isBlank(dockerTar)) {
-                    dockerTagName = "latest";
-                }
+                dockerImageTag = "latest";
             }
         }
-        logger.debug(String.format("initImageName(): final: dockerImageName: %s; dockerTagName: %s", dockerImage, dockerTagName));
+        logger.debug(String.format("initImageName(): final: dockerImage: %s; dockerImageRepo: %s; dockerImageTag: %s", dockerImage, dockerImageRepo, dockerImageTag));
     }
 
     private File deriveDockerTarFile() throws IOException {
         File dockerTarFile = null;
         if (StringUtils.isNotBlank(dockerTar)) {
             dockerTarFile = new File(dockerTar);
-        } else if (StringUtils.isNotBlank(dockerImageName)) {
-            dockerTarFile = hubDockerManager.getTarFileFromDockerImage(dockerImageName, dockerTagName);
+        } else if (StringUtils.isNotBlank(dockerImageRepo)) {
+            dockerTarFile = hubDockerManager.getTarFileFromDockerImage(dockerImageRepo, dockerImageTag);
         }
         return dockerTarFile;
     }

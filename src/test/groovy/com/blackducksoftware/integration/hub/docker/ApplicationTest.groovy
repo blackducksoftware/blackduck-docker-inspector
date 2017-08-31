@@ -95,7 +95,7 @@ class ApplicationTest {
 
         app.dockerClientManager = [
             pullImage: {String runOnImageName, String runOnImageVersion -> },
-            run: {String runOnImageName, String runOnImageVersion, File dockerTarFile, boolean devMode, String image, String tag ->
+            run: {String runOnImageName, String runOnImageVersion, File dockerTarFile, boolean devMode, String image, String repo, String tag ->
                 invokedSubContainer = true}
         ] as DockerClientManager
 

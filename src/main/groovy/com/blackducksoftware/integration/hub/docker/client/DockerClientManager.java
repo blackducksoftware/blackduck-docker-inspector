@@ -58,7 +58,8 @@ public class DockerClientManager {
 
     private static final String INSPECTOR_COMMAND = "hub-docker-inspector-launcher.sh";
     private static final String IMAGE_TARFILE_PROPERTY = "docker.tar";
-    private static final String IMAGE_NAME_PROPERTY = "docker.image";
+    private static final String IMAGE_PROPERTY = "docker.image";
+    private static final String IMAGE_REPO_PROPERTY = "docker.image.repo";
     private static final String IMAGE_TAG_PROPERTY = "docker.image.tag";
     private final Logger logger = LoggerFactory.getLogger(DockerClientManager.class);
 
@@ -130,7 +131,7 @@ public class DockerClientManager {
         return alreadyPulledImage;
     }
 
-    public void run(final String runOnImageName, final String runOnTagName, final File dockerTarFile, final boolean copyJar, final String targetImage, final String targetImageTag)
+    public void run(final String runOnImageName, final String runOnTagName, final File dockerTarFile, final boolean copyJar, final String targetImage, final String targetImageRepo, final String targetImageTag)
             throws InterruptedException, IOException, HubIntegrationException {
 
         final String hubPassword = getHubPassword();
@@ -143,7 +144,7 @@ public class DockerClientManager {
         final String tarFilePathInSubContainer = programPaths.getHubDockerTargetDirPath() + dockerTarFile.getName();
 
         final String containerId = ensureContainerRunning(dockerClient, imageId, extractorContainerName, hubPassword);
-        setPropertiesInSubContainer(dockerClient, containerId, tarFilePathInSubContainer, tarFileDirInSubContainer, dockerTarFile, targetImage, targetImageTag);
+        setPropertiesInSubContainer(dockerClient, containerId, tarFilePathInSubContainer, tarFileDirInSubContainer, dockerTarFile, targetImage, targetImageRepo, targetImageTag);
         if (copyJar) {
             copyFileToContainer(dockerClient, containerId, programPaths.getHubDockerJarPath(), programPaths.getHubDockerPgmDirPath());
         }
@@ -154,10 +155,11 @@ public class DockerClientManager {
     }
 
     private void setPropertiesInSubContainer(final DockerClient dockerClient, final String containerId, final String tarFilePathInSubContainer, final String tarFileDirInSubContainer, final File dockerTarFile, final String targetImage,
-            final String targetImageTag) throws IOException {
+            final String targetImageRepo, final String targetImageTag) throws IOException {
         hubDockerProperties.load();
         hubDockerProperties.set(IMAGE_TARFILE_PROPERTY, tarFilePathInSubContainer);
-        hubDockerProperties.set(IMAGE_NAME_PROPERTY, targetImage);
+        hubDockerProperties.set(IMAGE_PROPERTY, targetImage);
+        hubDockerProperties.set(IMAGE_REPO_PROPERTY, targetImageRepo);
         hubDockerProperties.set(IMAGE_TAG_PROPERTY, targetImageTag);
         final String pathToPropertiesFileForSubContainer = String.format("%s%s", programPaths.getHubDockerTargetDirPath(), ProgramPaths.APPLICATION_PROPERTIES_FILENAME);
         hubDockerProperties.save(pathToPropertiesFileForSubContainer);
