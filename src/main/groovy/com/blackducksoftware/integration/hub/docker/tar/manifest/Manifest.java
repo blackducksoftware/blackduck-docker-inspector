@@ -41,21 +41,27 @@ public class Manifest {
         final List<ImageInfo> images = getManifestContents();
         logger.debug(String.format("getLayerMappings(): images.size(): %d", images.size()));
         validateImageSpecificity(images, targetImageName, targetTagName);
-        final String specifiedRepoTag = deriveSpecifiedRepoTag(targetImageName, targetTagName);
-        logger.debug(String.format("getLayerMappings(): specifiedRepoTag: %s", specifiedRepoTag));
         for (final ImageInfo image : images) {
             logger.debug(String.format("getLayerMappings(): image: %s", image));
-            final String foundRepoTag = findRepoTag(image, specifiedRepoTag);
+            final String foundRepoTag = findRepoTag(images.size(), image, targetImageName, targetTagName);
             if (foundRepoTag == null) {
                 continue;
             }
             logger.debug(String.format("foundRepoTag: %s", foundRepoTag));
-            addMapping(mappings, image, targetImageName, targetTagName);
+            final String[] foundRepoTagParts = foundRepoTag.split(":");
+            addMapping(mappings, image, foundRepoTagParts[0], foundRepoTagParts[1]);
         }
         return mappings;
     }
 
-    private String findRepoTag(final ImageInfo image, final String targetRepoTag) throws HubIntegrationException {
+    private String findRepoTag(final int numImages, final ImageInfo image, final String targetImageName, final String targetTagName) throws HubIntegrationException {
+        // user didn't specify which image, and there is only one: return it
+        if ((numImages == 1) && StringUtils.isBlank(targetImageName) && StringUtils.isBlank(targetTagName)) {
+            logger.debug(String.format("User did not specify a repo:tag, and there's only one; inspecting that one: %s", image.repoTags.get(0)));
+            return image.repoTags.get(0);
+        }
+        final String targetRepoTag = deriveSpecifiedRepoTag(targetImageName, targetTagName);
+        logger.debug(String.format("findRepoTag(): specifiedRepoTag: %s", targetRepoTag));
         for (final String repoTag : image.repoTags) {
             logger.trace(String.format("Target repo tag %s; checking %s", targetRepoTag, repoTag));
             if (StringUtils.compare(repoTag, targetRepoTag) == 0) {
@@ -67,19 +73,12 @@ public class Manifest {
     }
 
     private void addMapping(final List<ManifestLayerMapping> mappings, final ImageInfo image, final String imageName, final String tagName) {
-        logger.info(String.format("Image: %s, Tag: %s", imageName, tagName));
         final List<String> layerIds = new ArrayList<>();
         for (final String layer : image.layers) {
             layerIds.add(layer.substring(0, layer.indexOf('/')));
         }
         final ManifestLayerMapping mapping = manifestLayerMappingFactory.createManifestLayerMapping(imageName, tagName, layerIds);
-        if (StringUtils.isNotBlank(imageName)) {
-            if (StringUtils.compare(imageName, imageName) == 0 && StringUtils.compare(tagName, tagName) == 0) {
-                addMapping(mappings, mapping);
-            }
-        } else {
-            addMapping(mappings, mapping);
-        }
+        addMapping(mappings, mapping);
     }
 
     private void addMapping(final List<ManifestLayerMapping> mappings, final ManifestLayerMapping mapping) {
