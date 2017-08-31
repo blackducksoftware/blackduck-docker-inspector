@@ -82,6 +82,11 @@ public class EndToEndTest {
         testTar("aggregated.tar", "blackducksoftware_centos_minus_vim_plus_bacula", "blackducksoftware/centos_minus_vim_plus_bacula", "1.0", "1.0", "var_lib_rpm", true);
     }
 
+    @Test
+    public void testAlpineLatestTar() throws IOException, InterruptedException {
+        testTar("alpine.tar", "alpine", "alpine", "latest", "latest", "lib_apk", false);
+    }
+
     private void testImage(final String inspectTarget, final String imageForBdioFilename, final String tagForBdioFilename, final String pkgMgrPathString, final boolean requireBdioMatch) throws IOException, InterruptedException {
         test(imageForBdioFilename, pkgMgrPathString, null, null, tagForBdioFilename, inspectTarget, requireBdioMatch);
     }

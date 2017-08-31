@@ -256,6 +256,15 @@ task buildWhTestDockerTarfile(type: Exec, dependsOn: buildWhTestDockerImage) {
     commandLine "docker", "save", "-o", "${buildDir}/images/test/whiteouttest.tar", "blackducksoftware/whiteouttest:1.0"
 }
 
+task removeAlpineImage(type: Exec) {
+    ignoreExitValue true
+    commandLine "docker", "rmi", "alpine:latest"
+}
+
+task buildAlpineTestDockerTarfile(type: Exec) {
+    commandLine "docker", "save", "-o", "${buildDir}/images/test/alpine.tar", "alpine:latest"
+}
+
 task buildAggTestDockerTarfile(type: Exec, dependsOn: [buildTestDockerImage, buildWhTestDockerImage]) {
     commandLine "docker", "save", "-o", "${buildDir}/images/test/aggregated.tar", "blackducksoftware/centos_minus_vim_plus_bacula:1.0", "blackducksoftware/whiteouttest:1.0"
 }
@@ -379,7 +388,7 @@ task pkg(dependsOn: [buildDockerImages, packageScript]) {}
 task pushImages(dependsOn: [pkg, pushImageAlpine, pushImageCentos, pushImageUbuntu]) {
 }
 
-task integrationTest(type: Test, dependsOn: [pushImages, buildWhTestDockerTarfile, buildAggTestDockerTarfile]) {
+task integrationTest(type: Test, dependsOn: [pushImages, buildWhTestDockerTarfile, buildAggTestDockerTarfile, buildAlpineTestDockerTarfile]) {
     testClassesDir = sourceSets.integrationTest.output.classesDir
     classpath = sourceSets.integrationTest.runtimeClasspath
     outputs.upToDateWhen { false }
