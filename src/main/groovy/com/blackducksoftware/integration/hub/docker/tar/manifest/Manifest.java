@@ -83,7 +83,7 @@ public class Manifest {
 
     private void addMapping(final List<ManifestLayerMapping> mappings, final ManifestLayerMapping mapping) {
         logger.debug("Adding layer mapping");
-        logger.debug(String.format("Image %s , Tag %s", mapping.getImageName(), mapping.getTagName()));
+        logger.debug(String.format("Image %s, Tag %s", mapping.getImageName(), mapping.getTagName()));
         logger.debug(String.format("Layers %s", mapping.getLayers()));
         mappings.add(mapping);
     }
