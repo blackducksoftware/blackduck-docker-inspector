@@ -83,8 +83,13 @@ public class EndToEndTest {
     }
 
     @Test
-    public void testAlpineLatestTar() throws IOException, InterruptedException {
+    public void testAlpineLatestTarRepoTagSpecified() throws IOException, InterruptedException {
         testTar("alpine.tar", "alpine", "alpine", "latest", "latest", "lib_apk", false);
+    }
+
+    @Test
+    public void testAlpineLatestTarRepoTagNotSpecified() throws IOException, InterruptedException {
+        testTar("alpine.tar", "alpine", null, null, "latest", "lib_apk", false);
     }
 
     private void testImage(final String inspectTarget, final String imageForBdioFilename, final String tagForBdioFilename, final String pkgMgrPathString, final boolean requireBdioMatch) throws IOException, InterruptedException {
