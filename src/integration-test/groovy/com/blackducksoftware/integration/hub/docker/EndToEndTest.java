@@ -64,28 +64,30 @@ public class EndToEndTest {
 
     @Test
     public void testWhiteout() throws IOException, InterruptedException {
-        testTar("whiteouttest.tar", "tbd", "blackducksoftware/whiteouttest", "1.0", "tbd2", "var_lib_dpkg");
+        testTar("whiteouttest.tar", "blackducksoftware_whiteouttest", "blackducksoftware/whiteouttest", "1.0", "1.0", "var_lib_dpkg");
     }
 
     @Test
     public void testAggregateTarfileImageOne() throws IOException, InterruptedException {
-        testTar("aggregated.tar", "tbd", "blackducksoftware/whiteouttest", "1.0", "tbd2", "var_lib_dpkg");
+        testTar("aggregated.tar", "blackducksoftware_whiteouttest", "blackducksoftware/whiteouttest", "1.0", "1.0", "var_lib_dpkg");
     }
 
     @Test
     public void testAggregateTarfileImageTwo() throws IOException, InterruptedException {
-        testTar("aggregated.tar", "tbd", "blackducksoftware/centos_minus_vim_plus_bacula", "1.0", "tbd2", "var_lib_rpm");
+        testTar("aggregated.tar", "blackducksoftware_centos_minus_vim_plus_bacula", "blackducksoftware/centos_minus_vim_plus_bacula", "1.0", "1.0", "var_lib_rpm");
     }
 
     private void testImage(final String inspectTarget, final String imageForBdioFilename, final String tagForBdioFilename, final String pkgMgrPathString) throws IOException, InterruptedException {
         test(imageForBdioFilename, pkgMgrPathString, null, null, tagForBdioFilename, inspectTarget);
     }
 
+    // TODO arg order is weird
     private void testTar(final String tarFilename, final String imageForBdioFilename, final String repo, final String tag, final String tagForBdioFilename, final String pkgMgrPathString) throws IOException, InterruptedException {
         final String inspectTarget = String.format(String.format("build/images/test/%s", tarFilename));
         test(imageForBdioFilename, pkgMgrPathString, repo, tag, tagForBdioFilename, inspectTarget);
     }
 
+    // TODO arg order is weird
     private void test(final String imageForBdioFilename, final String pkgMgrPathString, final String repo, final String tag, final String tagForBdioFilename, final String inspectTarget) throws IOException, InterruptedException {
 
         final File expectedBdio = new File(String.format(String.format("src/integration-test/resources/bdio/%s_%s_%s_%s_bdio.jsonld", imageForBdioFilename, pkgMgrPathString, imageForBdioFilename, tagForBdioFilename)));

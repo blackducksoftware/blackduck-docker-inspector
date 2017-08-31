@@ -139,6 +139,7 @@ public class Application {
         } catch (final Exception e) {
             logger.warn(String.format("Unable to pull docker image %s:%s; proceeding anyway since it may already exist locally", runOnImageName, runOnImageVersion));
         }
+        logger.debug(String.format("runInSubContainer(): Running subcontainer on image %s, repo %s, tag %s", dockerImage, dockerImageRepo, dockerImageTag));
         dockerClientManager.run(runOnImageName, runOnImageVersion, dockerTarFile, devMode, dockerImage, dockerImageRepo, dockerImageTag);
     }
 
