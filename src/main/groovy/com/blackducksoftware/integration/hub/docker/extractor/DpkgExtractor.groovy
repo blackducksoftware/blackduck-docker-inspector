@@ -31,6 +31,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
+import com.blackducksoftware.integration.hub.bdio.simple.DependencyNodeBuilder
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent
 import com.blackducksoftware.integration.hub.bdio.simple.model.DependencyNode
 import com.blackducksoftware.integration.hub.bdio.simple.model.Forge
@@ -56,9 +57,8 @@ class DpkgExtractor extends Extractor {
 
     List<BdioComponent> extractComponents(ExtractionDetails extractionDetails, String[] packageList) {
         final List<BdioComponent> components = new ArrayList<>();
-        final List<DependencyNode> dNodes = new ArrayList<>();
-        final DependencyNode rootNode = createDependencyNode(new Forge(OperatingSystemEnum.UBUNTU.forge), "root", "1.0", extractionDetails.architecture);
-        dNodes.add(rootNode);
+        final DependencyNode rootNode = createDependencyNode(OperatingSystemEnum.UBUNTU.forge, "root", "1.0", extractionDetails.architecture);
+        final DependencyNodeBuilder dNodeBuilder = new DependencyNodeBuilder(rootNode);
         boolean startOfComponents = false
         packageList.each { packageLine ->
             if (packageLine != null) {
@@ -74,13 +74,14 @@ class DpkgExtractor extends Extractor {
                         }
                         String externalId = "$name/$version/$architecture"
 
-                        createBdioComponent(components, rootNode, dNodes, name, version, externalId, extractionDetails.architecture)
+                        createBdioComponent(dNodeBuilder, components, name, version, externalId, extractionDetails.architecture)
                     } else {
                         logger.debug("Package \"${packageLine}\" is listed but not installed (package status: ${packageStatus})")
                     }
                 }
             }
         }
+        logger.debug(String.format("********** DependencyNode tree: %s", rootNode));
         components
     }
 

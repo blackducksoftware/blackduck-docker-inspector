@@ -24,6 +24,7 @@
 package com.blackducksoftware.integration.hub.docker.extractor;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -32,6 +33,7 @@ import org.slf4j.LoggerFactory;
 import com.blackducksoftware.integration.hub.bdio.simple.BdioNodeFactory;
 import com.blackducksoftware.integration.hub.bdio.simple.BdioPropertyHelper;
 import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter;
+import com.blackducksoftware.integration.hub.bdio.simple.DependencyNodeBuilder;
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioBillOfMaterials;
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent;
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioProject;
@@ -87,14 +89,12 @@ public abstract class Extractor {
         }
     }
 
-    public void createBdioComponent(final List<BdioComponent> components, final DependencyNode rootNode, final List<DependencyNode> dNodes, final String name, final String version, final String externalId, final String arch) {
+    public void createBdioComponent(final DependencyNodeBuilder dNodeBuilder, final List<BdioComponent> components, final List<DependencyNode> dNodes, final String name, final String version, final String externalId, final String arch) {
         for (final String forge : forges) {
             final BdioComponent bdioComponent = bdioNodeFactory.createComponent(name, version, getComponentBdioId(name, version), forge, externalId);
             components.add(bdioComponent);
-            // Create DependencyNode
             final DependencyNode dNode = createDependencyNode(forge, name, version, arch);
-            rootNode.children.add(dNode);
-            dNodes.add(dNode);
+            dNodeBuilder.addParentNodeWithChildren(dNode, new ArrayList<>());
         }
     }
 

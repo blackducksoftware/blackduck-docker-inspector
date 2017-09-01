@@ -31,9 +31,9 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
+import com.blackducksoftware.integration.hub.bdio.simple.DependencyNodeBuilder
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent
 import com.blackducksoftware.integration.hub.bdio.simple.model.DependencyNode
-import com.blackducksoftware.integration.hub.bdio.simple.model.Forge
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 import com.blackducksoftware.integration.hub.docker.executor.RpmExecutor
@@ -62,9 +62,8 @@ class RpmExtractor extends Extractor {
     List<BdioComponent> extractComponents(ExtractionDetails extractionDetails, String[] packageList) {
         logger.debug("extractComponents: Received ${packageList.length} package lines")
         final List<BdioComponent> components = new ArrayList<>();
-        final List<DependencyNode> dNodes = new ArrayList<>();
-        final DependencyNode rootNode = createDependencyNode(new Forge(OperatingSystemEnum.CENTOS.forge), "root", "1.0", extractionDetails.architecture);
-        dNodes.add(rootNode);
+        final DependencyNode rootNode = createDependencyNode(OperatingSystemEnum.CENTOS.forge, "root", "1.0", extractionDetails.architecture);
+        final DependencyNodeBuilder dNodeBuilder = new DependencyNodeBuilder(rootNode);
         packageList.each { packageLine ->
             if (valid(packageLine)) {
                 def lastDotIndex = packageLine.lastIndexOf('.')
@@ -78,10 +77,10 @@ class RpmExtractor extends Extractor {
 
                 String externalId = "${artifact}/${versionRelease}/${arch}"
                 logger.debug("Adding ${externalId} to components list")
-                createBdioComponent(components, rootNode, dNodes, artifact, versionRelease, externalId, extractionDetails.architecture)
+                createBdioComponent(dNodeBuilder, components, artifact, versionRelease, externalId, extractionDetails.architecture)
             }
         }
-        logger.debug("extractComponents: Returning ${components.size()} components")
+        logger.debug(String.format("********** DependencyNode tree: %s", rootNode));
         components
     }
 }
