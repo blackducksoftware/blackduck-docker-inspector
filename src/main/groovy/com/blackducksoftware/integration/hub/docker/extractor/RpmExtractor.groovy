@@ -73,7 +73,7 @@ class RpmExtractor extends Extractor {
 
                 String externalId = "${artifact}/${versionRelease}/${arch}"
                 logger.debug("Adding ${externalId} to components list")
-                components.addAll(createBdioComponent(artifact, versionRelease, externalId))
+                components.addAll(createBdioComponent(artifact, versionRelease, externalId, extractionDetails.architecture))
             }
         }
         logger.debug("extractComponents: Returning ${components.size()} components")

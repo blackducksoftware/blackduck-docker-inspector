@@ -36,7 +36,9 @@ import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter;
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioBillOfMaterials;
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent;
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioProject;
+import com.blackducksoftware.integration.hub.bdio.simple.model.DependencyNode;
 import com.blackducksoftware.integration.hub.bdio.simple.model.Forge;
+import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.ArchitectureExternalId;
 import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.ExternalId;
 import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.NameVersionExternalId;
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum;
@@ -86,11 +88,17 @@ public abstract class Extractor {
         }
     }
 
-    public List<BdioComponent> createBdioComponent(final String name, final String version, final String externalId) {
+    public List<BdioComponent> createBdioComponent(final String name, final String version, final String externalId, final String arch) {
         final List<BdioComponent> components = new ArrayList<>();
         for (final String forge : forges) {
             final BdioComponent bdioComponent = bdioNodeFactory.createComponent(name, version, getComponentBdioId(name, version), forge, externalId);
             components.add(bdioComponent);
+            /////////////////////////////////
+            // Create DependencyNode
+            final Forge forgeObj = new Forge(forge, ":");
+            final DependencyNode dNode = new DependencyNode(name, version, new ArchitectureExternalId(forgeObj, name, version, arch));
+            logger.debug(String.format("Generated DependencyNode: %s", dNode));
+            /////////////////////////////////
         }
         return components;
     }

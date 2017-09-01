@@ -69,7 +69,7 @@ class DpkgExtractor extends Extractor {
                         }
                         String externalId = "$name/$version/$architecture"
 
-                        components.addAll(createBdioComponent(name, version, externalId))
+                        components.addAll(createBdioComponent(name, version, externalId, extractionDetails.architecture))
                     } else {
                         logger.debug("Package \"${packageLine}\" is listed but not installed (package status: ${packageStatus})")
                     }
