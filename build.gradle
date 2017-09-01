@@ -261,7 +261,11 @@ task removeAlpineImage(type: Exec) {
     commandLine "docker", "rmi", "alpine:latest"
 }
 
-task buildAlpineTestDockerTarfile(type: Exec) {
+task pullAlpineLatest(type: Exec) {
+    commandLine "docker", "pull", "alpine:latest"
+}
+
+task buildAlpineTestDockerTarfile(type: Exec, dependsOn: pullAlpineLatest) {
     commandLine "docker", "save", "-o", "${buildDir}/images/test/alpine.tar", "alpine:latest"
 }
 
