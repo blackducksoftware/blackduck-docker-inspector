@@ -89,7 +89,7 @@ public abstract class Extractor {
         }
     }
 
-    public void createBdioComponent(final DependencyNodeBuilder dNodeBuilder, final List<BdioComponent> components, final List<DependencyNode> dNodes, final String name, final String version, final String externalId, final String arch) {
+    public void createBdioComponent(final DependencyNodeBuilder dNodeBuilder, final List<BdioComponent> components, final String name, final String version, final String externalId, final String arch) {
         for (final String forge : forges) {
             final BdioComponent bdioComponent = bdioNodeFactory.createComponent(name, version, getComponentBdioId(name, version), forge, externalId);
             components.add(bdioComponent);
@@ -98,7 +98,7 @@ public abstract class Extractor {
         }
     }
 
-    private DependencyNode createDependencyNode(final String forge, final String name, final String version, final String arch) {
+    protected DependencyNode createDependencyNode(final String forge, final String name, final String version, final String arch) {
         final Forge forgeObj = new Forge(forge, ":");
         final DependencyNode dNode = new DependencyNode(name, version, new ArchitectureExternalId(forgeObj, name, version, arch));
         logger.debug(String.format("Generated DependencyNode: %s", dNode));
