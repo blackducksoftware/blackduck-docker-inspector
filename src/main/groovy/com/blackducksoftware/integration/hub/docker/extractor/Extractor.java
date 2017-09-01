@@ -24,7 +24,6 @@
 package com.blackducksoftware.integration.hub.docker.extractor;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -88,19 +87,22 @@ public abstract class Extractor {
         }
     }
 
-    public List<BdioComponent> createBdioComponent(final String name, final String version, final String externalId, final String arch) {
-        final List<BdioComponent> components = new ArrayList<>();
+    public void createBdioComponent(final List<BdioComponent> components, final DependencyNode rootNode, final List<DependencyNode> dNodes, final String name, final String version, final String externalId, final String arch) {
         for (final String forge : forges) {
             final BdioComponent bdioComponent = bdioNodeFactory.createComponent(name, version, getComponentBdioId(name, version), forge, externalId);
             components.add(bdioComponent);
-            /////////////////////////////////
             // Create DependencyNode
-            final Forge forgeObj = new Forge(forge, ":");
-            final DependencyNode dNode = new DependencyNode(name, version, new ArchitectureExternalId(forgeObj, name, version, arch));
-            logger.debug(String.format("Generated DependencyNode: %s", dNode));
-            /////////////////////////////////
+            final DependencyNode dNode = createDependencyNode(forge, name, version, arch);
+            rootNode.children.add(dNode);
+            dNodes.add(dNode);
         }
-        return components;
+    }
+
+    private DependencyNode createDependencyNode(final String forge, final String name, final String version, final String arch) {
+        final Forge forgeObj = new Forge(forge, ":");
+        final DependencyNode dNode = new DependencyNode(name, version, new ArchitectureExternalId(forgeObj, name, version, arch));
+        logger.debug(String.format("Generated DependencyNode: %s", dNode));
+        return dNode;
     }
 
     private String getComponentBdioId(final String name, final String version) {

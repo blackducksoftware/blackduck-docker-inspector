@@ -32,6 +32,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent
+import com.blackducksoftware.integration.hub.bdio.simple.model.DependencyNode
+import com.blackducksoftware.integration.hub.bdio.simple.model.Forge
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 import com.blackducksoftware.integration.hub.docker.executor.DpkgExecutor
@@ -53,7 +55,10 @@ class DpkgExtractor extends Extractor {
     }
 
     List<BdioComponent> extractComponents(ExtractionDetails extractionDetails, String[] packageList) {
-        def components = []
+        final List<BdioComponent> components = new ArrayList<>();
+        final List<DependencyNode> dNodes = new ArrayList<>();
+        final DependencyNode rootNode = createDependencyNode(new Forge(OperatingSystemEnum.UBUNTU.forge), "root", "1.0", extractionDetails.architecture);
+        dNodes.add(rootNode);
         boolean startOfComponents = false
         packageList.each { packageLine ->
             if (packageLine != null) {
@@ -69,7 +74,7 @@ class DpkgExtractor extends Extractor {
                         }
                         String externalId = "$name/$version/$architecture"
 
-                        components.addAll(createBdioComponent(name, version, externalId, extractionDetails.architecture))
+                        createBdioComponent(components, rootNode, dNodes, name, version, externalId, extractionDetails.architecture)
                     } else {
                         logger.debug("Package \"${packageLine}\" is listed but not installed (package status: ${packageStatus})")
                     }

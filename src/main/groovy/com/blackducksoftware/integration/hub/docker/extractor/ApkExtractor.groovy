@@ -30,7 +30,10 @@ import org.apache.commons.lang3.StringUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
+import com.blackducksoftware.integration.hub.bdio.simple.DependencyNodeBuilder
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent
+import com.blackducksoftware.integration.hub.bdio.simple.model.DependencyNode
+import com.blackducksoftware.integration.hub.bdio.simple.model.Forge
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 import com.blackducksoftware.integration.hub.docker.executor.ApkExecutor
@@ -50,7 +53,10 @@ class ApkExtractor extends Extractor {
     }
 
     List<BdioComponent> extractComponents(ExtractionDetails extractionDetails, String[] packageList) {
-        def components = []
+        final List<BdioComponent> components = new ArrayList<>();
+        final List<DependencyNode> dNodes = new ArrayList<>();
+        final DependencyNode rootNode = createDependencyNode(new Forge(OperatingSystemEnum.ALPINE.forge), "root", "1.0", extractionDetails.architecture);
+        final DependencyNodeBuilder builder = new DependencyNodeBuilder(rootNode);
         packageList.each { packageLine ->
             if (!packageLine.toLowerCase().startsWith('warning')) {
                 String[] parts = packageLine.split('-')
@@ -67,7 +73,7 @@ class ApkExtractor extends Extractor {
                 // if a package starts with a period, we should ignore it because it is a virtual meta package and the version information is missing
                 if(!component.startsWith('.')){
                     String externalId = "${component}/${version}/${extractionDetails.architecture}"
-                    components.addAll(createBdioComponent(component, version, externalId, extractionDetails.architecture))
+                    createBdioComponent(components, rootNode, dNodes, component, version, externalId, extractionDetails.architecture)
                 }
             }
         }
