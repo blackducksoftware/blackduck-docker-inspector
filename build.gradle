@@ -146,9 +146,7 @@ task createApkDockerfileTasks() {
             maintainer 'Black Duck Software'
             environmentVariable('LANG', 'en_US.UTF-8')
 			
-            runCommand 'apk update'
-            runCommand 'apk add bash'
-            runCommand 'apk add openjdk8-jre'
+            runCommand 'apk update && apk add bash && apk add openjdk8-jre'
             
             runCommand 'mkdir /opt'
             runCommand 'mkdir /opt/blackduck'
@@ -175,8 +173,7 @@ task createRpmDockerfileTasks() {
             maintainer 'Black Duck Software'
 			environmentVariable('LANG', 'en_US.UTF-8')
 			
-            runCommand 'yum update -y'
-            runCommand 'yum install -y java-1.8.0-openjdk'
+            runCommand 'yum update -y && yum install -y java-1.8.0-openjdk && yum clean all -y'
             
             runCommand 'mkdir /opt/blackduck'
             runCommand "mkdir ${hubDockerPgmDir}"
@@ -209,17 +206,20 @@ task createTestDockerfile(type: Dockerfile) {
 	maintainer 'Black Duck Software'
 	environmentVariable('LANG', 'en_US.UTF-8')
 	
-	runCommand 'rpm -e vim-minimal'
-    runCommand 'yum install -y bacula-director-5.2.13-23.1.el7 bacula-storage-5.2.13-23.1.el7 bacula-client-5.2.13-23.1.el7 bacula-console-5.2.13-23.1.el7'
+	runCommand 'rpm -e vim-minimal && \
+        yum install -y bacula-director-5.2.13-23.1.el7 bacula-storage-5.2.13-23.1.el7 bacula-client-5.2.13-23.1.el7 \
+        bacula-console-5.2.13-23.1.el7'
 }
 
 task buildTestDockerImage(type: Exec, dependsOn: [removeTestBaseImage, removeTestImage, createTestDockerfile]) {
-	commandLine "docker", "build", "--no-cache", "--tag", "blackducksoftware/centos_minus_vim_plus_bacula:1.0", "${buildDir}/images/test/centos_minus_vim_plus_bacula"
+	commandLine "docker", "build", "--no-cache", "--tag", "blackducksoftware/centos_minus_vim_plus_bacula:1.0", \
+        "${buildDir}/images/test/centos_minus_vim_plus_bacula"
 }
 
 task buildTestDockerTarfile(type: Exec, dependsOn: buildTestDockerImage) {
     outputs.files file("${buildDir}/images/test/centos_minus_vim_plus_bacula.tar")
-	commandLine "docker", "save", "-o", "${buildDir}/images/test/centos_minus_vim_plus_bacula.tar", "blackducksoftware/centos_minus_vim_plus_bacula:1.0"
+	commandLine "docker", "save", "-o", "${buildDir}/images/test/centos_minus_vim_plus_bacula.tar", \
+        "blackducksoftware/centos_minus_vim_plus_bacula:1.0"
 }
 
 task createWhTestDockerfile(type: Dockerfile) {
@@ -229,9 +229,7 @@ task createWhTestDockerfile(type: Dockerfile) {
     maintainer 'Black Duck Software'
     environmentVariable('LANG', 'en_US.UTF-8')
     
-    runCommand 'apt-get update'
-    runCommand 'apt-get -y install curl=7.47.0-1ubuntu2.2'
-    runCommand 'apt-get -y remove curl'
+    runCommand 'apt-get update && apt-get -y install curl=7.47.0-1ubuntu2.2 && apt-get -y remove curl && apt-get -y clean'
 }
 
 task removeWhImage(type: Exec) {
@@ -270,7 +268,8 @@ task buildAlpineTestDockerTarfile(type: Exec, dependsOn: pullAlpineLatest) {
 }
 
 task buildAggTestDockerTarfile(type: Exec, dependsOn: [buildTestDockerImage, buildWhTestDockerImage]) {
-    commandLine "docker", "save", "-o", "${buildDir}/images/test/aggregated.tar", "blackducksoftware/centos_minus_vim_plus_bacula:1.0", "blackducksoftware/whiteouttest:1.0"
+    commandLine "docker", "save", "-o", "${buildDir}/images/test/aggregated.tar", "blackducksoftware/centos_minus_vim_plus_bacula:1.0", \
+        "blackducksoftware/whiteouttest:1.0"
 }
 
 task createDpkgDockerfileTasks() {
@@ -283,13 +282,11 @@ task createDpkgDockerfileTasks() {
             maintainer 'Black Duck Software'
 			environmentVariable('LANG', 'en_US.UTF-8')
 			
-            runCommand 'apt-get update -y'
-            runCommand 'apt install -y openjdk-8-jdk apt-transport-https ca-certificates curl software-properties-common vim'
-            runCommand 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -'
-            runCommand 'add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"'
-            runCommand 'apt-get update -y'
-            runCommand 'apt-get install -y docker-ce'
-			runCommand 'apt-get install -y locales'
+            runCommand 'apt-get update -y && \
+                apt install -y openjdk-8-jdk apt-transport-https ca-certificates curl software-properties-common vim && \
+                curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - \
+                && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
+                && apt-get update -y && apt-get install -y docker-ce && apt-get install -y locales && apt-get -y clean'
 			runCommand 'locale-gen "en_US.UTF-8"'
             
             runCommand 'mkdir /opt/blackduck'
@@ -323,7 +320,8 @@ task createBuildDockerImageTasks() {
         String suffix = getSuffix(linuxFlavorDirName)
         println "creating task ${taskName}"
         task "${taskName}"(type: Exec, dependsOn: ["removeDockerImage_${linuxFlavorDirName}", buildImageDirs]) {
-            commandLine "docker", "build", "--tag", "blackducksoftware/${hubDockerImageName}${suffix}:${version}", "${buildDir}/images/${linuxFlavorDirName}/${hubDockerImageName}"
+            commandLine "docker", "build", "--tag", "blackducksoftware/${hubDockerImageName}${suffix}:${version}", \
+                "${buildDir}/images/${linuxFlavorDirName}/${hubDockerImageName}"
         }
     }
 }
@@ -379,7 +377,8 @@ task stopDockerContainer(type: Exec) {
 	commandLine 'docker', 'stop', 'hub-docker-inspector'
 }
 
-task testPrep(dependsOn: [stopDockerContainer, removeDockerImage_ubuntu, removeDockerImage_centos, removeDockerImage_alpine, buildTestDockerTarfile, packageScript]) {
+task testPrep(dependsOn: [stopDockerContainer, removeDockerImage_ubuntu, removeDockerImage_centos, removeDockerImage_alpine, \
+    buildTestDockerTarfile, packageScript]) {
 	
 }
 
@@ -392,7 +391,8 @@ task pkg(dependsOn: [buildDockerImages, packageScript]) {}
 task pushImages(dependsOn: [pkg, pushImageAlpine, pushImageCentos, pushImageUbuntu]) {
 }
 
-task integrationTest(type: Test, dependsOn: [pushImages, buildWhTestDockerTarfile, buildAggTestDockerTarfile, buildAlpineTestDockerTarfile]) {
+task integrationTest(type: Test, dependsOn: [pushImages, buildWhTestDockerTarfile, buildAggTestDockerTarfile, \
+        buildAlpineTestDockerTarfile]) {
     testClassesDir = sourceSets.integrationTest.output.classesDir
     classpath = sourceSets.integrationTest.runtimeClasspath
     outputs.upToDateWhen { false }
