@@ -120,7 +120,7 @@ unset "options[${#options[@]}-1]"
 cd /opt/blackduck/hub-docker-inspector
 rm -rf output/*
 
-// Reason for using exec: http://www.projectatomic.io/docs/docker-image-author-guidance/
+# Reason for using exec: http://www.projectatomic.io/docs/docker-image-author-guidance/
 if [[ "$image" == *.tar ]]
 then
 	exec java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarfile}" "--docker.tar=$image" ${options[*]}

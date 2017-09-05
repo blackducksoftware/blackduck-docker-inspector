@@ -24,7 +24,7 @@
 package com.blackducksoftware.integration.hub.docker.extractor;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -89,12 +89,13 @@ public abstract class Extractor {
         }
     }
 
-    public void createBdioComponent(final DependencyNodeBuilder dNodeBuilder, final List<BdioComponent> components, final String name, final String version, final String externalId, final String arch) {
+    public void createBdioComponent(final DependencyNodeBuilder dNodeBuilder, final DependencyNode rootNode, final List<BdioComponent> components, final String name, final String version, final String externalId, final String arch) {
         for (final String forge : forges) {
             final BdioComponent bdioComponent = bdioNodeFactory.createComponent(name, version, getComponentBdioId(name, version), forge, externalId);
             components.add(bdioComponent);
             final DependencyNode dNode = createDependencyNode(forge, name, version, arch);
-            dNodeBuilder.addParentNodeWithChildren(dNode, new ArrayList<>());
+            logger.debug(String.format("-------- adding %s as child to dependency node tree; dataId: %s", dNode.name, dNode.externalId.createDataId()));
+            dNodeBuilder.addParentNodeWithChildren(rootNode, Arrays.asList(dNode));
         }
     }
 

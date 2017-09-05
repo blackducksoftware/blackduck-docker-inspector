@@ -81,7 +81,7 @@ class ApkExtractor extends Extractor {
                 // if a package starts with a period, we should ignore it because it is a virtual meta package and the version information is missing
                 if (!component.startsWith(".")) {
                     final String externalId = String.format("%s/%s/%s", component, version, extractionDetails.getArchitecture());
-                    createBdioComponent(dNodeBuilder, components, component, version, externalId, extractionDetails.getArchitecture());
+                    createBdioComponent(dNodeBuilder, rootNode, components, component, version, externalId, extractionDetails.getArchitecture());
                 }
             }
         }

@@ -34,7 +34,6 @@ import org.springframework.stereotype.Component
 import com.blackducksoftware.integration.hub.bdio.simple.DependencyNodeBuilder
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent
 import com.blackducksoftware.integration.hub.bdio.simple.model.DependencyNode
-import com.blackducksoftware.integration.hub.bdio.simple.model.Forge
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 import com.blackducksoftware.integration.hub.docker.executor.DpkgExecutor
@@ -74,7 +73,7 @@ class DpkgExtractor extends Extractor {
                         }
                         String externalId = "$name/$version/$architecture"
 
-                        createBdioComponent(dNodeBuilder, components, name, version, externalId, extractionDetails.architecture)
+                        createBdioComponent(dNodeBuilder, rootNode, components, name, version, externalId, extractionDetails.architecture)
                     } else {
                         logger.debug("Package \"${packageLine}\" is listed but not installed (package status: ${packageStatus})")
                     }
