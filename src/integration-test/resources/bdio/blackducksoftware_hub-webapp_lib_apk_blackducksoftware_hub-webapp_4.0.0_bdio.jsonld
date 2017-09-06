@@ -2,14 +2,14 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "blackducksoftware_hub-webapp_4.0.0_lib_apk_APK",
-    "@id": "uuid:d2c2796b-be71-4c00-afcf-7c587045496f",
+    "@id": "uuid:142f3e3c-a201-4cd3-9c6b-3b80613e1455",
     "@type": "BillOfMaterials",
     "relationship": []
   },
   {
     "name": "blackducksoftware_hub-webapp",
     "revision": "4.0.0",
-    "@id": "com.blackducksoftware.integration.hub.bdio.simple.model.BdioExternalIdentifier@294425a7",
+    "@id": "data:alpine/blackducksoftware_hub_webapp/4_0_0",
     "@type": "Project",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -17,299 +17,299 @@
     },
     "relationship": [
       {
-        "related": "data:musl/1.1.15-r6",
+        "related": "data:alpine/musl/1.1.15-r6",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:busybox/1.25.1-r0",
+        "related": "data:alpine/busybox/1.25.1-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:alpine-baselayout/3.0.4-r0",
+        "related": "data:alpine/alpine-baselayout/3.0.4-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:alpine-keys/1.3-r0",
+        "related": "data:alpine/alpine-keys/1.3-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libressl2.4-libcrypto/2.4.4-r0",
+        "related": "data:alpine/libressl2.4-libcrypto/2.4.4-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libressl2.4-libssl/2.4.4-r0",
+        "related": "data:alpine/libressl2.4-libssl/2.4.4-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:zlib/1.2.8-r2",
+        "related": "data:alpine/zlib/1.2.8-r2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:apk-tools/2.6.8-r2",
+        "related": "data:alpine/apk-tools/2.6.8-r2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:scanelf/1.1.6-r0",
+        "related": "data:alpine/scanelf/1.1.6-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:musl-utils/1.1.15-r6",
+        "related": "data:alpine/musl-utils/1.1.15-r6",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libc-utils/0.7-r1",
+        "related": "data:alpine/libc-utils/0.7-r1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libffi/3.2.1-r2",
+        "related": "data:alpine/libffi/3.2.1-r2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libtasn1/4.9-r0",
+        "related": "data:alpine/libtasn1/4.9-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:p11-kit/0.23.2-r1",
+        "related": "data:alpine/p11-kit/0.23.2-r1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:p11-kit-trust/0.23.2-r1",
+        "related": "data:alpine/p11-kit-trust/0.23.2-r1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:ca-certificates/20161130-r0",
+        "related": "data:alpine/ca-certificates/20161130-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:java-cacerts/1.0-r0",
+        "related": "data:alpine/java-cacerts/1.0-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libxau/1.0.8-r1",
+        "related": "data:alpine/libxau/1.0.8-r1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libxdmcp/1.1.2-r2",
+        "related": "data:alpine/libxdmcp/1.1.2-r2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libxcb/1.12-r0",
+        "related": "data:alpine/libxcb/1.12-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libx11/1.6.4-r0",
+        "related": "data:alpine/libx11/1.6.4-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libxcomposite/0.4.4-r0",
+        "related": "data:alpine/libxcomposite/0.4.4-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libxext/1.3.3-r1",
+        "related": "data:alpine/libxext/1.3.3-r1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libxi/1.7.7-r0",
+        "related": "data:alpine/libxi/1.7.7-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libxrender/0.9.10-r1",
+        "related": "data:alpine/libxrender/0.9.10-r1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libxtst/1.2.3-r0",
+        "related": "data:alpine/libxtst/1.2.3-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:alsa-lib/1.1.3-r0",
+        "related": "data:alpine/alsa-lib/1.1.3-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libbz2/1.0.6-r5",
+        "related": "data:alpine/libbz2/1.0.6-r5",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libpng/1.6.25-r0",
+        "related": "data:alpine/libpng/1.6.25-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:freetype/2.7-r0",
+        "related": "data:alpine/freetype/2.7-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libgcc/6.2.1-r1",
+        "related": "data:alpine/libgcc/6.2.1-r1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:giflib/5.1.4-r1",
+        "related": "data:alpine/giflib/5.1.4-r1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libjpeg-turbo/1.5.1-r0",
+        "related": "data:alpine/libjpeg-turbo/1.5.1-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libstdc++/6.2.1-r1",
+        "related": "data:alpine/libstdc++/6.2.1-r1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:openjdk8-jre-lib/8.121.13-r0",
+        "related": "data:alpine/openjdk8-jre-lib/8.121.13-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:java-common/0.1-r0",
+        "related": "data:alpine/java-common/0.1-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:krb5-conf/1.0-r1",
+        "related": "data:alpine/krb5-conf/1.0-r1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libcom_err/1.43.3-r0",
+        "related": "data:alpine/libcom_err/1.43.3-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:keyutils-libs/1.5.9-r1",
+        "related": "data:alpine/keyutils-libs/1.5.9-r1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libverto/0.2.5-r0",
+        "related": "data:alpine/libverto/0.2.5-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:krb5-libs/1.14.3-r1",
+        "related": "data:alpine/krb5-libs/1.14.3-r1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:lcms2/2.8-r1",
+        "related": "data:alpine/lcms2/2.8-r1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:nspr/4.12-r0",
+        "related": "data:alpine/nspr/4.12-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:sqlite-libs/3.15.2-r0",
+        "related": "data:alpine/sqlite-libs/3.15.2-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:nss/3.27.2-r1",
+        "related": "data:alpine/nss/3.27.2-r1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:pcsc-lite-libs/1.8.20-r0",
+        "related": "data:alpine/pcsc-lite-libs/1.8.20-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:lksctp-tools/1.0.17-r0",
+        "related": "data:alpine/lksctp-tools/1.0.17-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:openjdk8-jre-base/8.121.13-r0",
+        "related": "data:alpine/openjdk8-jre-base/8.121.13-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:openjdk8-jre/8.121.13-r0",
+        "related": "data:alpine/openjdk8-jre/8.121.13-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libgpg-error/1.24-r0",
+        "related": "data:alpine/libgpg-error/1.24-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libassuan/2.4.3-r0",
+        "related": "data:alpine/libassuan/2.4.3-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libcap/2.25-r1",
+        "related": "data:alpine/libcap/2.25-r1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:ncurses-terminfo-base/6.0-r7",
+        "related": "data:alpine/ncurses-terminfo-base/6.0-r7",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:ncurses-terminfo/6.0-r7",
+        "related": "data:alpine/ncurses-terminfo/6.0-r7",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:ncurses-libs/6.0-r7",
+        "related": "data:alpine/ncurses-libs/6.0-r7",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:pinentry/0.9.7-r0",
+        "related": "data:alpine/pinentry/0.9.7-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libgcrypt/1.7.3-r0",
+        "related": "data:alpine/libgcrypt/1.7.3-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libksba/1.3.4-r0",
+        "related": "data:alpine/libksba/1.3.4-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:db/5.3.28-r0",
+        "related": "data:alpine/db/5.3.28-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libsasl/2.1.26-r8",
+        "related": "data:alpine/libsasl/2.1.26-r8",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libldap/2.4.44-r3",
+        "related": "data:alpine/libldap/2.4.44-r3",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:npth/1.2-r0",
+        "related": "data:alpine/npth/1.2-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:gnupg/2.1.15-r0",
+        "related": "data:alpine/gnupg/2.1.15-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libcrypto1.0/1.0.2k-r0",
+        "related": "data:alpine/libcrypto1.0/1.0.2k-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libssl1.0/1.0.2k-r0",
+        "related": "data:alpine/libssl1.0/1.0.2k-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libuuid/2.28.2-r1",
+        "related": "data:alpine/libuuid/2.28.2-r1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:apr/1.5.2-r1",
+        "related": "data:alpine/apr/1.5.2-r1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:su-exec/0.2-r0",
+        "related": "data:alpine/su-exec/0.2-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libssh2/1.7.0-r2",
+        "related": "data:alpine/libssh2/1.7.0-r2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libcurl/7.52.1-r3",
+        "related": "data:alpine/libcurl/7.52.1-r3",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:curl/7.52.1-r3",
+        "related": "data:alpine/curl/7.52.1-r3",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:oniguruma/6.1.3-r0",
+        "related": "data:alpine/oniguruma/6.1.3-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:jq/1.5-r3",
+        "related": "data:alpine/jq/1.5-r3",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:openssl/1.0.2k-r0",
+        "related": "data:alpine/openssl/1.0.2k-r0",
         "relationshipType": "DYNAMIC_LINK"
       }
     ]
@@ -317,7 +317,7 @@
   {
     "name": "musl",
     "revision": "1.1.15-r6",
-    "@id": "data:musl/1.1.15-r6",
+    "@id": "data:alpine/musl/1.1.15-r6",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -328,7 +328,7 @@
   {
     "name": "busybox",
     "revision": "1.25.1-r0",
-    "@id": "data:busybox/1.25.1-r0",
+    "@id": "data:alpine/busybox/1.25.1-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -339,7 +339,7 @@
   {
     "name": "alpine-baselayout",
     "revision": "3.0.4-r0",
-    "@id": "data:alpine-baselayout/3.0.4-r0",
+    "@id": "data:alpine/alpine-baselayout/3.0.4-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -350,7 +350,7 @@
   {
     "name": "alpine-keys",
     "revision": "1.3-r0",
-    "@id": "data:alpine-keys/1.3-r0",
+    "@id": "data:alpine/alpine-keys/1.3-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -361,7 +361,7 @@
   {
     "name": "libressl2.4-libcrypto",
     "revision": "2.4.4-r0",
-    "@id": "data:libressl2.4-libcrypto/2.4.4-r0",
+    "@id": "data:alpine/libressl2.4-libcrypto/2.4.4-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -372,7 +372,7 @@
   {
     "name": "libressl2.4-libssl",
     "revision": "2.4.4-r0",
-    "@id": "data:libressl2.4-libssl/2.4.4-r0",
+    "@id": "data:alpine/libressl2.4-libssl/2.4.4-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -383,7 +383,7 @@
   {
     "name": "zlib",
     "revision": "1.2.8-r2",
-    "@id": "data:zlib/1.2.8-r2",
+    "@id": "data:alpine/zlib/1.2.8-r2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -394,7 +394,7 @@
   {
     "name": "apk-tools",
     "revision": "2.6.8-r2",
-    "@id": "data:apk-tools/2.6.8-r2",
+    "@id": "data:alpine/apk-tools/2.6.8-r2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -405,7 +405,7 @@
   {
     "name": "scanelf",
     "revision": "1.1.6-r0",
-    "@id": "data:scanelf/1.1.6-r0",
+    "@id": "data:alpine/scanelf/1.1.6-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -416,7 +416,7 @@
   {
     "name": "musl-utils",
     "revision": "1.1.15-r6",
-    "@id": "data:musl-utils/1.1.15-r6",
+    "@id": "data:alpine/musl-utils/1.1.15-r6",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -427,7 +427,7 @@
   {
     "name": "libc-utils",
     "revision": "0.7-r1",
-    "@id": "data:libc-utils/0.7-r1",
+    "@id": "data:alpine/libc-utils/0.7-r1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -438,7 +438,7 @@
   {
     "name": "libffi",
     "revision": "3.2.1-r2",
-    "@id": "data:libffi/3.2.1-r2",
+    "@id": "data:alpine/libffi/3.2.1-r2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -449,7 +449,7 @@
   {
     "name": "libtasn1",
     "revision": "4.9-r0",
-    "@id": "data:libtasn1/4.9-r0",
+    "@id": "data:alpine/libtasn1/4.9-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -460,7 +460,7 @@
   {
     "name": "p11-kit",
     "revision": "0.23.2-r1",
-    "@id": "data:p11-kit/0.23.2-r1",
+    "@id": "data:alpine/p11-kit/0.23.2-r1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -471,7 +471,7 @@
   {
     "name": "p11-kit-trust",
     "revision": "0.23.2-r1",
-    "@id": "data:p11-kit-trust/0.23.2-r1",
+    "@id": "data:alpine/p11-kit-trust/0.23.2-r1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -482,7 +482,7 @@
   {
     "name": "ca-certificates",
     "revision": "20161130-r0",
-    "@id": "data:ca-certificates/20161130-r0",
+    "@id": "data:alpine/ca-certificates/20161130-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -493,7 +493,7 @@
   {
     "name": "java-cacerts",
     "revision": "1.0-r0",
-    "@id": "data:java-cacerts/1.0-r0",
+    "@id": "data:alpine/java-cacerts/1.0-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -504,7 +504,7 @@
   {
     "name": "libxau",
     "revision": "1.0.8-r1",
-    "@id": "data:libxau/1.0.8-r1",
+    "@id": "data:alpine/libxau/1.0.8-r1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -515,7 +515,7 @@
   {
     "name": "libxdmcp",
     "revision": "1.1.2-r2",
-    "@id": "data:libxdmcp/1.1.2-r2",
+    "@id": "data:alpine/libxdmcp/1.1.2-r2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -526,7 +526,7 @@
   {
     "name": "libxcb",
     "revision": "1.12-r0",
-    "@id": "data:libxcb/1.12-r0",
+    "@id": "data:alpine/libxcb/1.12-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -537,7 +537,7 @@
   {
     "name": "libx11",
     "revision": "1.6.4-r0",
-    "@id": "data:libx11/1.6.4-r0",
+    "@id": "data:alpine/libx11/1.6.4-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -548,7 +548,7 @@
   {
     "name": "libxcomposite",
     "revision": "0.4.4-r0",
-    "@id": "data:libxcomposite/0.4.4-r0",
+    "@id": "data:alpine/libxcomposite/0.4.4-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -559,7 +559,7 @@
   {
     "name": "libxext",
     "revision": "1.3.3-r1",
-    "@id": "data:libxext/1.3.3-r1",
+    "@id": "data:alpine/libxext/1.3.3-r1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -570,7 +570,7 @@
   {
     "name": "libxi",
     "revision": "1.7.7-r0",
-    "@id": "data:libxi/1.7.7-r0",
+    "@id": "data:alpine/libxi/1.7.7-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -581,7 +581,7 @@
   {
     "name": "libxrender",
     "revision": "0.9.10-r1",
-    "@id": "data:libxrender/0.9.10-r1",
+    "@id": "data:alpine/libxrender/0.9.10-r1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -592,7 +592,7 @@
   {
     "name": "libxtst",
     "revision": "1.2.3-r0",
-    "@id": "data:libxtst/1.2.3-r0",
+    "@id": "data:alpine/libxtst/1.2.3-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -603,7 +603,7 @@
   {
     "name": "alsa-lib",
     "revision": "1.1.3-r0",
-    "@id": "data:alsa-lib/1.1.3-r0",
+    "@id": "data:alpine/alsa-lib/1.1.3-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -614,7 +614,7 @@
   {
     "name": "libbz2",
     "revision": "1.0.6-r5",
-    "@id": "data:libbz2/1.0.6-r5",
+    "@id": "data:alpine/libbz2/1.0.6-r5",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -625,7 +625,7 @@
   {
     "name": "libpng",
     "revision": "1.6.25-r0",
-    "@id": "data:libpng/1.6.25-r0",
+    "@id": "data:alpine/libpng/1.6.25-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -636,7 +636,7 @@
   {
     "name": "freetype",
     "revision": "2.7-r0",
-    "@id": "data:freetype/2.7-r0",
+    "@id": "data:alpine/freetype/2.7-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -647,7 +647,7 @@
   {
     "name": "libgcc",
     "revision": "6.2.1-r1",
-    "@id": "data:libgcc/6.2.1-r1",
+    "@id": "data:alpine/libgcc/6.2.1-r1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -658,7 +658,7 @@
   {
     "name": "giflib",
     "revision": "5.1.4-r1",
-    "@id": "data:giflib/5.1.4-r1",
+    "@id": "data:alpine/giflib/5.1.4-r1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -669,7 +669,7 @@
   {
     "name": "libjpeg-turbo",
     "revision": "1.5.1-r0",
-    "@id": "data:libjpeg-turbo/1.5.1-r0",
+    "@id": "data:alpine/libjpeg-turbo/1.5.1-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -680,7 +680,7 @@
   {
     "name": "libstdc++",
     "revision": "6.2.1-r1",
-    "@id": "data:libstdc++/6.2.1-r1",
+    "@id": "data:alpine/libstdc++/6.2.1-r1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -691,7 +691,7 @@
   {
     "name": "openjdk8-jre-lib",
     "revision": "8.121.13-r0",
-    "@id": "data:openjdk8-jre-lib/8.121.13-r0",
+    "@id": "data:alpine/openjdk8-jre-lib/8.121.13-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -702,7 +702,7 @@
   {
     "name": "java-common",
     "revision": "0.1-r0",
-    "@id": "data:java-common/0.1-r0",
+    "@id": "data:alpine/java-common/0.1-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -713,7 +713,7 @@
   {
     "name": "krb5-conf",
     "revision": "1.0-r1",
-    "@id": "data:krb5-conf/1.0-r1",
+    "@id": "data:alpine/krb5-conf/1.0-r1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -724,7 +724,7 @@
   {
     "name": "libcom_err",
     "revision": "1.43.3-r0",
-    "@id": "data:libcom_err/1.43.3-r0",
+    "@id": "data:alpine/libcom_err/1.43.3-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -735,7 +735,7 @@
   {
     "name": "keyutils-libs",
     "revision": "1.5.9-r1",
-    "@id": "data:keyutils-libs/1.5.9-r1",
+    "@id": "data:alpine/keyutils-libs/1.5.9-r1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -746,7 +746,7 @@
   {
     "name": "libverto",
     "revision": "0.2.5-r0",
-    "@id": "data:libverto/0.2.5-r0",
+    "@id": "data:alpine/libverto/0.2.5-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -757,7 +757,7 @@
   {
     "name": "krb5-libs",
     "revision": "1.14.3-r1",
-    "@id": "data:krb5-libs/1.14.3-r1",
+    "@id": "data:alpine/krb5-libs/1.14.3-r1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -768,7 +768,7 @@
   {
     "name": "lcms2",
     "revision": "2.8-r1",
-    "@id": "data:lcms2/2.8-r1",
+    "@id": "data:alpine/lcms2/2.8-r1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -779,7 +779,7 @@
   {
     "name": "nspr",
     "revision": "4.12-r0",
-    "@id": "data:nspr/4.12-r0",
+    "@id": "data:alpine/nspr/4.12-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -790,7 +790,7 @@
   {
     "name": "sqlite-libs",
     "revision": "3.15.2-r0",
-    "@id": "data:sqlite-libs/3.15.2-r0",
+    "@id": "data:alpine/sqlite-libs/3.15.2-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -801,7 +801,7 @@
   {
     "name": "nss",
     "revision": "3.27.2-r1",
-    "@id": "data:nss/3.27.2-r1",
+    "@id": "data:alpine/nss/3.27.2-r1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -812,7 +812,7 @@
   {
     "name": "pcsc-lite-libs",
     "revision": "1.8.20-r0",
-    "@id": "data:pcsc-lite-libs/1.8.20-r0",
+    "@id": "data:alpine/pcsc-lite-libs/1.8.20-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -823,7 +823,7 @@
   {
     "name": "lksctp-tools",
     "revision": "1.0.17-r0",
-    "@id": "data:lksctp-tools/1.0.17-r0",
+    "@id": "data:alpine/lksctp-tools/1.0.17-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -834,7 +834,7 @@
   {
     "name": "openjdk8-jre-base",
     "revision": "8.121.13-r0",
-    "@id": "data:openjdk8-jre-base/8.121.13-r0",
+    "@id": "data:alpine/openjdk8-jre-base/8.121.13-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -845,7 +845,7 @@
   {
     "name": "openjdk8-jre",
     "revision": "8.121.13-r0",
-    "@id": "data:openjdk8-jre/8.121.13-r0",
+    "@id": "data:alpine/openjdk8-jre/8.121.13-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -856,7 +856,7 @@
   {
     "name": "libgpg-error",
     "revision": "1.24-r0",
-    "@id": "data:libgpg-error/1.24-r0",
+    "@id": "data:alpine/libgpg-error/1.24-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -867,7 +867,7 @@
   {
     "name": "libassuan",
     "revision": "2.4.3-r0",
-    "@id": "data:libassuan/2.4.3-r0",
+    "@id": "data:alpine/libassuan/2.4.3-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -878,7 +878,7 @@
   {
     "name": "libcap",
     "revision": "2.25-r1",
-    "@id": "data:libcap/2.25-r1",
+    "@id": "data:alpine/libcap/2.25-r1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -889,7 +889,7 @@
   {
     "name": "ncurses-terminfo-base",
     "revision": "6.0-r7",
-    "@id": "data:ncurses-terminfo-base/6.0-r7",
+    "@id": "data:alpine/ncurses-terminfo-base/6.0-r7",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -900,7 +900,7 @@
   {
     "name": "ncurses-terminfo",
     "revision": "6.0-r7",
-    "@id": "data:ncurses-terminfo/6.0-r7",
+    "@id": "data:alpine/ncurses-terminfo/6.0-r7",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -911,7 +911,7 @@
   {
     "name": "ncurses-libs",
     "revision": "6.0-r7",
-    "@id": "data:ncurses-libs/6.0-r7",
+    "@id": "data:alpine/ncurses-libs/6.0-r7",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -922,7 +922,7 @@
   {
     "name": "pinentry",
     "revision": "0.9.7-r0",
-    "@id": "data:pinentry/0.9.7-r0",
+    "@id": "data:alpine/pinentry/0.9.7-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -933,7 +933,7 @@
   {
     "name": "libgcrypt",
     "revision": "1.7.3-r0",
-    "@id": "data:libgcrypt/1.7.3-r0",
+    "@id": "data:alpine/libgcrypt/1.7.3-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -944,7 +944,7 @@
   {
     "name": "libksba",
     "revision": "1.3.4-r0",
-    "@id": "data:libksba/1.3.4-r0",
+    "@id": "data:alpine/libksba/1.3.4-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -955,7 +955,7 @@
   {
     "name": "db",
     "revision": "5.3.28-r0",
-    "@id": "data:db/5.3.28-r0",
+    "@id": "data:alpine/db/5.3.28-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -966,7 +966,7 @@
   {
     "name": "libsasl",
     "revision": "2.1.26-r8",
-    "@id": "data:libsasl/2.1.26-r8",
+    "@id": "data:alpine/libsasl/2.1.26-r8",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -977,7 +977,7 @@
   {
     "name": "libldap",
     "revision": "2.4.44-r3",
-    "@id": "data:libldap/2.4.44-r3",
+    "@id": "data:alpine/libldap/2.4.44-r3",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -988,7 +988,7 @@
   {
     "name": "npth",
     "revision": "1.2-r0",
-    "@id": "data:npth/1.2-r0",
+    "@id": "data:alpine/npth/1.2-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -999,7 +999,7 @@
   {
     "name": "gnupg",
     "revision": "2.1.15-r0",
-    "@id": "data:gnupg/2.1.15-r0",
+    "@id": "data:alpine/gnupg/2.1.15-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -1010,7 +1010,7 @@
   {
     "name": "libcrypto1.0",
     "revision": "1.0.2k-r0",
-    "@id": "data:libcrypto1.0/1.0.2k-r0",
+    "@id": "data:alpine/libcrypto1.0/1.0.2k-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -1021,7 +1021,7 @@
   {
     "name": "libssl1.0",
     "revision": "1.0.2k-r0",
-    "@id": "data:libssl1.0/1.0.2k-r0",
+    "@id": "data:alpine/libssl1.0/1.0.2k-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -1032,7 +1032,7 @@
   {
     "name": "libuuid",
     "revision": "2.28.2-r1",
-    "@id": "data:libuuid/2.28.2-r1",
+    "@id": "data:alpine/libuuid/2.28.2-r1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -1043,7 +1043,7 @@
   {
     "name": "apr",
     "revision": "1.5.2-r1",
-    "@id": "data:apr/1.5.2-r1",
+    "@id": "data:alpine/apr/1.5.2-r1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -1054,7 +1054,7 @@
   {
     "name": "su-exec",
     "revision": "0.2-r0",
-    "@id": "data:su-exec/0.2-r0",
+    "@id": "data:alpine/su-exec/0.2-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -1065,7 +1065,7 @@
   {
     "name": "libssh2",
     "revision": "1.7.0-r2",
-    "@id": "data:libssh2/1.7.0-r2",
+    "@id": "data:alpine/libssh2/1.7.0-r2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -1076,7 +1076,7 @@
   {
     "name": "libcurl",
     "revision": "7.52.1-r3",
-    "@id": "data:libcurl/7.52.1-r3",
+    "@id": "data:alpine/libcurl/7.52.1-r3",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -1087,7 +1087,7 @@
   {
     "name": "curl",
     "revision": "7.52.1-r3",
-    "@id": "data:curl/7.52.1-r3",
+    "@id": "data:alpine/curl/7.52.1-r3",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -1098,7 +1098,7 @@
   {
     "name": "oniguruma",
     "revision": "6.1.3-r0",
-    "@id": "data:oniguruma/6.1.3-r0",
+    "@id": "data:alpine/oniguruma/6.1.3-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -1109,7 +1109,7 @@
   {
     "name": "jq",
     "revision": "1.5-r3",
-    "@id": "data:jq/1.5-r3",
+    "@id": "data:alpine/jq/1.5-r3",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -1120,7 +1120,7 @@
   {
     "name": "openssl",
     "revision": "1.0.2k-r0",
-    "@id": "data:openssl/1.0.2k-r0",
+    "@id": "data:alpine/openssl/1.0.2k-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",

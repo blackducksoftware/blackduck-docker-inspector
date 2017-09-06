@@ -2,14 +2,14 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "ubuntu_17.04_var_lib_dpkg_DPKG",
-    "@id": "uuid:8f5661a7-fec6-4d96-97f0-62e9dc0f9eb3",
+    "@id": "uuid:1cdebea6-086a-460b-bca9-be9a060533ff",
     "@type": "BillOfMaterials",
     "relationship": []
   },
   {
     "name": "ubuntu",
     "revision": "17.04",
-    "@id": "com.blackducksoftware.integration.hub.bdio.simple.model.BdioExternalIdentifier@59af0466",
+    "@id": "data:debian/ubuntu/17_04",
     "@type": "Project",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -17,699 +17,699 @@
     },
     "relationship": [
       {
-        "related": "data:adduser/3.113+nmu3ubuntu5",
+        "related": "data:debian/adduser/3.113+nmu3ubuntu5",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:adduser/3.113+nmu3ubuntu5",
+        "related": "data:ubuntu/adduser/3.113+nmu3ubuntu5",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:apt/1.4",
+        "related": "data:debian/apt/1.4",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:apt/1.4",
+        "related": "data:ubuntu/apt/1.4",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:base-files/9.6ubuntu13",
+        "related": "data:debian/base-files/9.6ubuntu13",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:base-files/9.6ubuntu13",
+        "related": "data:ubuntu/base-files/9.6ubuntu13",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:base-passwd/3.5.43",
+        "related": "data:debian/base-passwd/3.5.43",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:base-passwd/3.5.43",
+        "related": "data:ubuntu/base-passwd/3.5.43",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:bash/4.4-2ubuntu1.1",
+        "related": "data:debian/bash/4.4-2ubuntu1.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:bash/4.4-2ubuntu1.1",
+        "related": "data:ubuntu/bash/4.4-2ubuntu1.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:bsdutils/1:2.29-1ubuntu2.1",
+        "related": "data:debian/bsdutils/1:2.29-1ubuntu2.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:bsdutils/1:2.29-1ubuntu2.1",
+        "related": "data:ubuntu/bsdutils/1:2.29-1ubuntu2.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:coreutils/8.26-3ubuntu3",
+        "related": "data:debian/coreutils/8.26-3ubuntu3",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:coreutils/8.26-3ubuntu3",
+        "related": "data:ubuntu/coreutils/8.26-3ubuntu3",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:dash/0.5.8-2.3ubuntu1",
+        "related": "data:debian/dash/0.5.8-2.3ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:dash/0.5.8-2.3ubuntu1",
+        "related": "data:ubuntu/dash/0.5.8-2.3ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:debconf/1.5.59ubuntu1",
+        "related": "data:debian/debconf/1.5.59ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:debconf/1.5.59ubuntu1",
+        "related": "data:ubuntu/debconf/1.5.59ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:debianutils/4.8.1",
+        "related": "data:debian/debianutils/4.8.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:debianutils/4.8.1",
+        "related": "data:ubuntu/debianutils/4.8.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:diffutils/1:3.5-3",
+        "related": "data:debian/diffutils/1:3.5-3",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:diffutils/1:3.5-3",
+        "related": "data:ubuntu/diffutils/1:3.5-3",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:dpkg/1.18.10ubuntu2",
+        "related": "data:debian/dpkg/1.18.10ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:dpkg/1.18.10ubuntu2",
+        "related": "data:ubuntu/dpkg/1.18.10ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:e2fslibs/1.43.4-2",
+        "related": "data:debian/e2fslibs/1.43.4-2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:e2fslibs/1.43.4-2",
+        "related": "data:ubuntu/e2fslibs/1.43.4-2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:e2fsprogs/1.43.4-2",
+        "related": "data:debian/e2fsprogs/1.43.4-2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:e2fsprogs/1.43.4-2",
+        "related": "data:ubuntu/e2fsprogs/1.43.4-2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:findutils/4.6.0+git+20161106-2",
+        "related": "data:debian/findutils/4.6.0+git+20161106-2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:findutils/4.6.0+git+20161106-2",
+        "related": "data:ubuntu/findutils/4.6.0+git+20161106-2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:gcc-6-base/6.3.0-12ubuntu2",
+        "related": "data:debian/gcc-6-base/6.3.0-12ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:gcc-6-base/6.3.0-12ubuntu2",
+        "related": "data:ubuntu/gcc-6-base/6.3.0-12ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:gnupg/2.1.15-1ubuntu7",
+        "related": "data:debian/gnupg/2.1.15-1ubuntu7",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:gnupg/2.1.15-1ubuntu7",
+        "related": "data:ubuntu/gnupg/2.1.15-1ubuntu7",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:gnupg-agent/2.1.15-1ubuntu7",
+        "related": "data:debian/gnupg-agent/2.1.15-1ubuntu7",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:gnupg-agent/2.1.15-1ubuntu7",
+        "related": "data:ubuntu/gnupg-agent/2.1.15-1ubuntu7",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:gpgv/2.1.15-1ubuntu7",
+        "related": "data:debian/gpgv/2.1.15-1ubuntu7",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:gpgv/2.1.15-1ubuntu7",
+        "related": "data:ubuntu/gpgv/2.1.15-1ubuntu7",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:grep/2.27-2",
+        "related": "data:debian/grep/2.27-2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:grep/2.27-2",
+        "related": "data:ubuntu/grep/2.27-2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:gzip/1.6-4ubuntu1",
+        "related": "data:debian/gzip/1.6-4ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:gzip/1.6-4ubuntu1",
+        "related": "data:ubuntu/gzip/1.6-4ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:hostname/3.18",
+        "related": "data:debian/hostname/3.18",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:hostname/3.18",
+        "related": "data:ubuntu/hostname/3.18",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:init-system-helpers/1.47",
+        "related": "data:debian/init-system-helpers/1.47",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:init-system-helpers/1.47",
+        "related": "data:ubuntu/init-system-helpers/1.47",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libacl1/2.2.52-3",
+        "related": "data:debian/libacl1/2.2.52-3",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libacl1/2.2.52-3",
+        "related": "data:ubuntu/libacl1/2.2.52-3",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libapt-pkg5.0/1.4",
+        "related": "data:debian/libapt-pkg5.0/1.4",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libapt-pkg5.0/1.4",
+        "related": "data:ubuntu/libapt-pkg5.0/1.4",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libassuan0/2.4.3-2",
+        "related": "data:debian/libassuan0/2.4.3-2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libassuan0/2.4.3-2",
+        "related": "data:ubuntu/libassuan0/2.4.3-2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libattr1/1:2.4.47-2",
+        "related": "data:debian/libattr1/1:2.4.47-2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libattr1/1:2.4.47-2",
+        "related": "data:ubuntu/libattr1/1:2.4.47-2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libaudit-common/1:2.6.6-1ubuntu1",
+        "related": "data:debian/libaudit-common/1:2.6.6-1ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libaudit-common/1:2.6.6-1ubuntu1",
+        "related": "data:ubuntu/libaudit-common/1:2.6.6-1ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libaudit1/1:2.6.6-1ubuntu1",
+        "related": "data:debian/libaudit1/1:2.6.6-1ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libaudit1/1:2.6.6-1ubuntu1",
+        "related": "data:ubuntu/libaudit1/1:2.6.6-1ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libblkid1/2.29-1ubuntu2.1",
+        "related": "data:debian/libblkid1/2.29-1ubuntu2.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libblkid1/2.29-1ubuntu2.1",
+        "related": "data:ubuntu/libblkid1/2.29-1ubuntu2.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libbz2-1.0/1.0.6-8.1",
+        "related": "data:debian/libbz2-1.0/1.0.6-8.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libbz2-1.0/1.0.6-8.1",
+        "related": "data:ubuntu/libbz2-1.0/1.0.6-8.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libc-bin/2.24-9ubuntu2.2",
+        "related": "data:debian/libc-bin/2.24-9ubuntu2.2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libc-bin/2.24-9ubuntu2.2",
+        "related": "data:ubuntu/libc-bin/2.24-9ubuntu2.2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libc6/2.24-9ubuntu2.2",
+        "related": "data:debian/libc6/2.24-9ubuntu2.2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libc6/2.24-9ubuntu2.2",
+        "related": "data:ubuntu/libc6/2.24-9ubuntu2.2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libcap-ng0/0.7.7-3",
+        "related": "data:debian/libcap-ng0/0.7.7-3",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libcap-ng0/0.7.7-3",
+        "related": "data:ubuntu/libcap-ng0/0.7.7-3",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libcomerr2/1.43.4-2",
+        "related": "data:debian/libcomerr2/1.43.4-2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libcomerr2/1.43.4-2",
+        "related": "data:ubuntu/libcomerr2/1.43.4-2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libdb5.3/5.3.28-12",
+        "related": "data:debian/libdb5.3/5.3.28-12",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libdb5.3/5.3.28-12",
+        "related": "data:ubuntu/libdb5.3/5.3.28-12",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libdebconfclient0/0.213ubuntu1",
+        "related": "data:debian/libdebconfclient0/0.213ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libdebconfclient0/0.213ubuntu1",
+        "related": "data:ubuntu/libdebconfclient0/0.213ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libfdisk1/2.29-1ubuntu2.1",
+        "related": "data:debian/libfdisk1/2.29-1ubuntu2.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libfdisk1/2.29-1ubuntu2.1",
+        "related": "data:ubuntu/libfdisk1/2.29-1ubuntu2.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libgcc1/1:6.3.0-12ubuntu2",
+        "related": "data:debian/libgcc1/1:6.3.0-12ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libgcc1/1:6.3.0-12ubuntu2",
+        "related": "data:ubuntu/libgcc1/1:6.3.0-12ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libgcrypt20/1.7.6-1ubuntu0.1",
+        "related": "data:debian/libgcrypt20/1.7.6-1ubuntu0.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libgcrypt20/1.7.6-1ubuntu0.1",
+        "related": "data:ubuntu/libgcrypt20/1.7.6-1ubuntu0.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libgpg-error0/1.26-2",
+        "related": "data:debian/libgpg-error0/1.26-2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libgpg-error0/1.26-2",
+        "related": "data:ubuntu/libgpg-error0/1.26-2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libksba8/1.3.5-2",
+        "related": "data:debian/libksba8/1.3.5-2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libksba8/1.3.5-2",
+        "related": "data:ubuntu/libksba8/1.3.5-2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:liblz4-1/0.0~r131-2ubuntu2",
+        "related": "data:debian/liblz4-1/0.0~r131-2ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:liblz4-1/0.0~r131-2ubuntu2",
+        "related": "data:ubuntu/liblz4-1/0.0~r131-2ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:liblzma5/5.2.2-1.2",
+        "related": "data:debian/liblzma5/5.2.2-1.2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:liblzma5/5.2.2-1.2",
+        "related": "data:ubuntu/liblzma5/5.2.2-1.2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libmount1/2.29-1ubuntu2.1",
+        "related": "data:debian/libmount1/2.29-1ubuntu2.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libmount1/2.29-1ubuntu2.1",
+        "related": "data:ubuntu/libmount1/2.29-1ubuntu2.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libncurses5/6.0+20160625-1ubuntu1",
+        "related": "data:debian/libncurses5/6.0+20160625-1ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libncurses5/6.0+20160625-1ubuntu1",
+        "related": "data:ubuntu/libncurses5/6.0+20160625-1ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libncursesw5/6.0+20160625-1ubuntu1",
+        "related": "data:debian/libncursesw5/6.0+20160625-1ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libncursesw5/6.0+20160625-1ubuntu1",
+        "related": "data:ubuntu/libncursesw5/6.0+20160625-1ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libnpth0/1.3-1",
+        "related": "data:debian/libnpth0/1.3-1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libnpth0/1.3-1",
+        "related": "data:ubuntu/libnpth0/1.3-1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libpam-modules/1.1.8-3.2ubuntu2",
+        "related": "data:debian/libpam-modules/1.1.8-3.2ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libpam-modules/1.1.8-3.2ubuntu2",
+        "related": "data:ubuntu/libpam-modules/1.1.8-3.2ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libpam-modules-bin/1.1.8-3.2ubuntu2",
+        "related": "data:debian/libpam-modules-bin/1.1.8-3.2ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libpam-modules-bin/1.1.8-3.2ubuntu2",
+        "related": "data:ubuntu/libpam-modules-bin/1.1.8-3.2ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libpam-runtime/1.1.8-3.2ubuntu2",
+        "related": "data:debian/libpam-runtime/1.1.8-3.2ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libpam-runtime/1.1.8-3.2ubuntu2",
+        "related": "data:ubuntu/libpam-runtime/1.1.8-3.2ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libpam0g/1.1.8-3.2ubuntu2",
+        "related": "data:debian/libpam0g/1.1.8-3.2ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libpam0g/1.1.8-3.2ubuntu2",
+        "related": "data:ubuntu/libpam0g/1.1.8-3.2ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libpcre3/2:8.39-3",
+        "related": "data:debian/libpcre3/2:8.39-3",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libpcre3/2:8.39-3",
+        "related": "data:ubuntu/libpcre3/2:8.39-3",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libprocps6/2:3.3.12-1ubuntu2",
+        "related": "data:debian/libprocps6/2:3.3.12-1ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libprocps6/2:3.3.12-1ubuntu2",
+        "related": "data:ubuntu/libprocps6/2:3.3.12-1ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libreadline7/7.0-0ubuntu2",
+        "related": "data:debian/libreadline7/7.0-0ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libreadline7/7.0-0ubuntu2",
+        "related": "data:ubuntu/libreadline7/7.0-0ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libselinux1/2.6-3",
+        "related": "data:debian/libselinux1/2.6-3",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libselinux1/2.6-3",
+        "related": "data:ubuntu/libselinux1/2.6-3",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libsemanage-common/2.6-2",
+        "related": "data:debian/libsemanage-common/2.6-2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libsemanage-common/2.6-2",
+        "related": "data:ubuntu/libsemanage-common/2.6-2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libsemanage1/2.6-2",
+        "related": "data:debian/libsemanage1/2.6-2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libsemanage1/2.6-2",
+        "related": "data:ubuntu/libsemanage1/2.6-2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libsepol1/2.6-2",
+        "related": "data:debian/libsepol1/2.6-2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libsepol1/2.6-2",
+        "related": "data:ubuntu/libsepol1/2.6-2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libsmartcols1/2.29-1ubuntu2.1",
+        "related": "data:debian/libsmartcols1/2.29-1ubuntu2.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libsmartcols1/2.29-1ubuntu2.1",
+        "related": "data:ubuntu/libsmartcols1/2.29-1ubuntu2.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libsqlite3-0/3.16.2-3",
+        "related": "data:debian/libsqlite3-0/3.16.2-3",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libsqlite3-0/3.16.2-3",
+        "related": "data:ubuntu/libsqlite3-0/3.16.2-3",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libss2/1.43.4-2",
+        "related": "data:debian/libss2/1.43.4-2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libss2/1.43.4-2",
+        "related": "data:ubuntu/libss2/1.43.4-2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libstdc++6/6.3.0-12ubuntu2",
+        "related": "data:debian/libstdc++6/6.3.0-12ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libstdc++6/6.3.0-12ubuntu2",
+        "related": "data:ubuntu/libstdc++6/6.3.0-12ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libsystemd0/232-21ubuntu5",
+        "related": "data:debian/libsystemd0/232-21ubuntu5",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libsystemd0/232-21ubuntu5",
+        "related": "data:ubuntu/libsystemd0/232-21ubuntu5",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libtinfo5/6.0+20160625-1ubuntu1",
+        "related": "data:debian/libtinfo5/6.0+20160625-1ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libtinfo5/6.0+20160625-1ubuntu1",
+        "related": "data:ubuntu/libtinfo5/6.0+20160625-1ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libudev1/232-21ubuntu5",
+        "related": "data:debian/libudev1/232-21ubuntu5",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libudev1/232-21ubuntu5",
+        "related": "data:ubuntu/libudev1/232-21ubuntu5",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libustr-1.0-1/1.0.4-6",
+        "related": "data:debian/libustr-1.0-1/1.0.4-6",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libustr-1.0-1/1.0.4-6",
+        "related": "data:ubuntu/libustr-1.0-1/1.0.4-6",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libuuid1/2.29-1ubuntu2.1",
+        "related": "data:debian/libuuid1/2.29-1ubuntu2.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:libuuid1/2.29-1ubuntu2.1",
+        "related": "data:ubuntu/libuuid1/2.29-1ubuntu2.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:login/1:4.2-3.2ubuntu1.17.04.2",
+        "related": "data:debian/login/1:4.2-3.2ubuntu1.17.04.2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:login/1:4.2-3.2ubuntu1.17.04.2",
+        "related": "data:ubuntu/login/1:4.2-3.2ubuntu1.17.04.2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:lsb-base/9.20160110ubuntu5",
+        "related": "data:debian/lsb-base/9.20160110ubuntu5",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:lsb-base/9.20160110ubuntu5",
+        "related": "data:ubuntu/lsb-base/9.20160110ubuntu5",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:mawk/1.3.3-17ubuntu2",
+        "related": "data:debian/mawk/1.3.3-17ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:mawk/1.3.3-17ubuntu2",
+        "related": "data:ubuntu/mawk/1.3.3-17ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:mount/2.29-1ubuntu2.1",
+        "related": "data:debian/mount/2.29-1ubuntu2.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:mount/2.29-1ubuntu2.1",
+        "related": "data:ubuntu/mount/2.29-1ubuntu2.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:multiarch-support/2.24-9ubuntu2.2",
+        "related": "data:debian/multiarch-support/2.24-9ubuntu2.2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:multiarch-support/2.24-9ubuntu2.2",
+        "related": "data:ubuntu/multiarch-support/2.24-9ubuntu2.2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:ncurses-base/6.0+20160625-1ubuntu1",
+        "related": "data:debian/ncurses-base/6.0+20160625-1ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:ncurses-base/6.0+20160625-1ubuntu1",
+        "related": "data:ubuntu/ncurses-base/6.0+20160625-1ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:ncurses-bin/6.0+20160625-1ubuntu1",
+        "related": "data:debian/ncurses-bin/6.0+20160625-1ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:ncurses-bin/6.0+20160625-1ubuntu1",
+        "related": "data:ubuntu/ncurses-bin/6.0+20160625-1ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:passwd/1:4.2-3.2ubuntu1.17.04.2",
+        "related": "data:debian/passwd/1:4.2-3.2ubuntu1.17.04.2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:passwd/1:4.2-3.2ubuntu1.17.04.2",
+        "related": "data:ubuntu/passwd/1:4.2-3.2ubuntu1.17.04.2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:perl-base/5.24.1-2ubuntu1",
+        "related": "data:debian/perl-base/5.24.1-2ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:perl-base/5.24.1-2ubuntu1",
+        "related": "data:ubuntu/perl-base/5.24.1-2ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:pinentry-curses/1.0.0-2",
+        "related": "data:debian/pinentry-curses/1.0.0-2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:pinentry-curses/1.0.0-2",
+        "related": "data:ubuntu/pinentry-curses/1.0.0-2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:procps/2:3.3.12-1ubuntu2",
+        "related": "data:debian/procps/2:3.3.12-1ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:procps/2:3.3.12-1ubuntu2",
+        "related": "data:ubuntu/procps/2:3.3.12-1ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:readline-common/7.0-0ubuntu2",
+        "related": "data:debian/readline-common/7.0-0ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:readline-common/7.0-0ubuntu2",
+        "related": "data:ubuntu/readline-common/7.0-0ubuntu2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:sed/4.4-1",
+        "related": "data:debian/sed/4.4-1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:sed/4.4-1",
+        "related": "data:ubuntu/sed/4.4-1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:sensible-utils/0.0.9",
+        "related": "data:debian/sensible-utils/0.0.9",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:sensible-utils/0.0.9",
+        "related": "data:ubuntu/sensible-utils/0.0.9",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:sysvinit-utils/2.88dsf-59.8git1",
+        "related": "data:debian/sysvinit-utils/2.88dsf-59.8git1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:sysvinit-utils/2.88dsf-59.8git1",
+        "related": "data:ubuntu/sysvinit-utils/2.88dsf-59.8git1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:tar/1.29b-1.1",
+        "related": "data:debian/tar/1.29b-1.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:tar/1.29b-1.1",
+        "related": "data:ubuntu/tar/1.29b-1.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:ubuntu-keyring/2016.10.27",
+        "related": "data:debian/ubuntu-keyring/2016.10.27",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:ubuntu-keyring/2016.10.27",
+        "related": "data:ubuntu/ubuntu-keyring/2016.10.27",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:util-linux/2.29-1ubuntu2.1",
+        "related": "data:debian/util-linux/2.29-1ubuntu2.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:util-linux/2.29-1ubuntu2.1",
+        "related": "data:ubuntu/util-linux/2.29-1ubuntu2.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:zlib1g/1:1.2.11.dfsg-0ubuntu1",
+        "related": "data:debian/zlib1g/1:1.2.11.dfsg-0ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:zlib1g/1:1.2.11.dfsg-0ubuntu1",
+        "related": "data:ubuntu/zlib1g/1:1.2.11.dfsg-0ubuntu1",
         "relationshipType": "DYNAMIC_LINK"
       }
     ]
@@ -717,7 +717,7 @@
   {
     "name": "adduser",
     "revision": "3.113+nmu3ubuntu5",
-    "@id": "data:adduser/3.113+nmu3ubuntu5",
+    "@id": "data:debian/adduser/3.113+nmu3ubuntu5",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -728,7 +728,7 @@
   {
     "name": "adduser",
     "revision": "3.113+nmu3ubuntu5",
-    "@id": "data:adduser/3.113+nmu3ubuntu5",
+    "@id": "data:ubuntu/adduser/3.113+nmu3ubuntu5",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -739,7 +739,7 @@
   {
     "name": "apt",
     "revision": "1.4",
-    "@id": "data:apt/1.4",
+    "@id": "data:debian/apt/1.4",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -750,7 +750,7 @@
   {
     "name": "apt",
     "revision": "1.4",
-    "@id": "data:apt/1.4",
+    "@id": "data:ubuntu/apt/1.4",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -761,7 +761,7 @@
   {
     "name": "base-files",
     "revision": "9.6ubuntu13",
-    "@id": "data:base-files/9.6ubuntu13",
+    "@id": "data:debian/base-files/9.6ubuntu13",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -772,7 +772,7 @@
   {
     "name": "base-files",
     "revision": "9.6ubuntu13",
-    "@id": "data:base-files/9.6ubuntu13",
+    "@id": "data:ubuntu/base-files/9.6ubuntu13",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -783,7 +783,7 @@
   {
     "name": "base-passwd",
     "revision": "3.5.43",
-    "@id": "data:base-passwd/3.5.43",
+    "@id": "data:debian/base-passwd/3.5.43",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -794,7 +794,7 @@
   {
     "name": "base-passwd",
     "revision": "3.5.43",
-    "@id": "data:base-passwd/3.5.43",
+    "@id": "data:ubuntu/base-passwd/3.5.43",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -805,7 +805,7 @@
   {
     "name": "bash",
     "revision": "4.4-2ubuntu1.1",
-    "@id": "data:bash/4.4-2ubuntu1.1",
+    "@id": "data:debian/bash/4.4-2ubuntu1.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -816,7 +816,7 @@
   {
     "name": "bash",
     "revision": "4.4-2ubuntu1.1",
-    "@id": "data:bash/4.4-2ubuntu1.1",
+    "@id": "data:ubuntu/bash/4.4-2ubuntu1.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -827,7 +827,7 @@
   {
     "name": "bsdutils",
     "revision": "1:2.29-1ubuntu2.1",
-    "@id": "data:bsdutils/1:2.29-1ubuntu2.1",
+    "@id": "data:debian/bsdutils/1:2.29-1ubuntu2.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -838,7 +838,7 @@
   {
     "name": "bsdutils",
     "revision": "1:2.29-1ubuntu2.1",
-    "@id": "data:bsdutils/1:2.29-1ubuntu2.1",
+    "@id": "data:ubuntu/bsdutils/1:2.29-1ubuntu2.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -849,7 +849,7 @@
   {
     "name": "coreutils",
     "revision": "8.26-3ubuntu3",
-    "@id": "data:coreutils/8.26-3ubuntu3",
+    "@id": "data:debian/coreutils/8.26-3ubuntu3",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -860,7 +860,7 @@
   {
     "name": "coreutils",
     "revision": "8.26-3ubuntu3",
-    "@id": "data:coreutils/8.26-3ubuntu3",
+    "@id": "data:ubuntu/coreutils/8.26-3ubuntu3",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -871,7 +871,7 @@
   {
     "name": "dash",
     "revision": "0.5.8-2.3ubuntu1",
-    "@id": "data:dash/0.5.8-2.3ubuntu1",
+    "@id": "data:debian/dash/0.5.8-2.3ubuntu1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -882,7 +882,7 @@
   {
     "name": "dash",
     "revision": "0.5.8-2.3ubuntu1",
-    "@id": "data:dash/0.5.8-2.3ubuntu1",
+    "@id": "data:ubuntu/dash/0.5.8-2.3ubuntu1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -893,7 +893,7 @@
   {
     "name": "debconf",
     "revision": "1.5.59ubuntu1",
-    "@id": "data:debconf/1.5.59ubuntu1",
+    "@id": "data:debian/debconf/1.5.59ubuntu1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -904,7 +904,7 @@
   {
     "name": "debconf",
     "revision": "1.5.59ubuntu1",
-    "@id": "data:debconf/1.5.59ubuntu1",
+    "@id": "data:ubuntu/debconf/1.5.59ubuntu1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -915,7 +915,7 @@
   {
     "name": "debianutils",
     "revision": "4.8.1",
-    "@id": "data:debianutils/4.8.1",
+    "@id": "data:debian/debianutils/4.8.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -926,7 +926,7 @@
   {
     "name": "debianutils",
     "revision": "4.8.1",
-    "@id": "data:debianutils/4.8.1",
+    "@id": "data:ubuntu/debianutils/4.8.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -937,7 +937,7 @@
   {
     "name": "diffutils",
     "revision": "1:3.5-3",
-    "@id": "data:diffutils/1:3.5-3",
+    "@id": "data:debian/diffutils/1:3.5-3",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -948,7 +948,7 @@
   {
     "name": "diffutils",
     "revision": "1:3.5-3",
-    "@id": "data:diffutils/1:3.5-3",
+    "@id": "data:ubuntu/diffutils/1:3.5-3",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -959,7 +959,7 @@
   {
     "name": "dpkg",
     "revision": "1.18.10ubuntu2",
-    "@id": "data:dpkg/1.18.10ubuntu2",
+    "@id": "data:debian/dpkg/1.18.10ubuntu2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -970,7 +970,7 @@
   {
     "name": "dpkg",
     "revision": "1.18.10ubuntu2",
-    "@id": "data:dpkg/1.18.10ubuntu2",
+    "@id": "data:ubuntu/dpkg/1.18.10ubuntu2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -981,7 +981,7 @@
   {
     "name": "e2fslibs",
     "revision": "1.43.4-2",
-    "@id": "data:e2fslibs/1.43.4-2",
+    "@id": "data:debian/e2fslibs/1.43.4-2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -992,7 +992,7 @@
   {
     "name": "e2fslibs",
     "revision": "1.43.4-2",
-    "@id": "data:e2fslibs/1.43.4-2",
+    "@id": "data:ubuntu/e2fslibs/1.43.4-2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1003,7 +1003,7 @@
   {
     "name": "e2fsprogs",
     "revision": "1.43.4-2",
-    "@id": "data:e2fsprogs/1.43.4-2",
+    "@id": "data:debian/e2fsprogs/1.43.4-2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1014,7 +1014,7 @@
   {
     "name": "e2fsprogs",
     "revision": "1.43.4-2",
-    "@id": "data:e2fsprogs/1.43.4-2",
+    "@id": "data:ubuntu/e2fsprogs/1.43.4-2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1025,7 +1025,7 @@
   {
     "name": "findutils",
     "revision": "4.6.0+git+20161106-2",
-    "@id": "data:findutils/4.6.0+git+20161106-2",
+    "@id": "data:debian/findutils/4.6.0+git+20161106-2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1036,7 +1036,7 @@
   {
     "name": "findutils",
     "revision": "4.6.0+git+20161106-2",
-    "@id": "data:findutils/4.6.0+git+20161106-2",
+    "@id": "data:ubuntu/findutils/4.6.0+git+20161106-2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1047,7 +1047,7 @@
   {
     "name": "gcc-6-base",
     "revision": "6.3.0-12ubuntu2",
-    "@id": "data:gcc-6-base/6.3.0-12ubuntu2",
+    "@id": "data:debian/gcc-6-base/6.3.0-12ubuntu2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1058,7 +1058,7 @@
   {
     "name": "gcc-6-base",
     "revision": "6.3.0-12ubuntu2",
-    "@id": "data:gcc-6-base/6.3.0-12ubuntu2",
+    "@id": "data:ubuntu/gcc-6-base/6.3.0-12ubuntu2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1069,7 +1069,7 @@
   {
     "name": "gnupg",
     "revision": "2.1.15-1ubuntu7",
-    "@id": "data:gnupg/2.1.15-1ubuntu7",
+    "@id": "data:debian/gnupg/2.1.15-1ubuntu7",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1080,7 +1080,7 @@
   {
     "name": "gnupg",
     "revision": "2.1.15-1ubuntu7",
-    "@id": "data:gnupg/2.1.15-1ubuntu7",
+    "@id": "data:ubuntu/gnupg/2.1.15-1ubuntu7",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1091,7 +1091,7 @@
   {
     "name": "gnupg-agent",
     "revision": "2.1.15-1ubuntu7",
-    "@id": "data:gnupg-agent/2.1.15-1ubuntu7",
+    "@id": "data:debian/gnupg-agent/2.1.15-1ubuntu7",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1102,7 +1102,7 @@
   {
     "name": "gnupg-agent",
     "revision": "2.1.15-1ubuntu7",
-    "@id": "data:gnupg-agent/2.1.15-1ubuntu7",
+    "@id": "data:ubuntu/gnupg-agent/2.1.15-1ubuntu7",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1113,7 +1113,7 @@
   {
     "name": "gpgv",
     "revision": "2.1.15-1ubuntu7",
-    "@id": "data:gpgv/2.1.15-1ubuntu7",
+    "@id": "data:debian/gpgv/2.1.15-1ubuntu7",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1124,7 +1124,7 @@
   {
     "name": "gpgv",
     "revision": "2.1.15-1ubuntu7",
-    "@id": "data:gpgv/2.1.15-1ubuntu7",
+    "@id": "data:ubuntu/gpgv/2.1.15-1ubuntu7",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1135,7 +1135,7 @@
   {
     "name": "grep",
     "revision": "2.27-2",
-    "@id": "data:grep/2.27-2",
+    "@id": "data:debian/grep/2.27-2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1146,7 +1146,7 @@
   {
     "name": "grep",
     "revision": "2.27-2",
-    "@id": "data:grep/2.27-2",
+    "@id": "data:ubuntu/grep/2.27-2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1157,7 +1157,7 @@
   {
     "name": "gzip",
     "revision": "1.6-4ubuntu1",
-    "@id": "data:gzip/1.6-4ubuntu1",
+    "@id": "data:debian/gzip/1.6-4ubuntu1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1168,7 +1168,7 @@
   {
     "name": "gzip",
     "revision": "1.6-4ubuntu1",
-    "@id": "data:gzip/1.6-4ubuntu1",
+    "@id": "data:ubuntu/gzip/1.6-4ubuntu1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1179,7 +1179,7 @@
   {
     "name": "hostname",
     "revision": "3.18",
-    "@id": "data:hostname/3.18",
+    "@id": "data:debian/hostname/3.18",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1190,7 +1190,7 @@
   {
     "name": "hostname",
     "revision": "3.18",
-    "@id": "data:hostname/3.18",
+    "@id": "data:ubuntu/hostname/3.18",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1201,7 +1201,7 @@
   {
     "name": "init-system-helpers",
     "revision": "1.47",
-    "@id": "data:init-system-helpers/1.47",
+    "@id": "data:debian/init-system-helpers/1.47",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1212,7 +1212,7 @@
   {
     "name": "init-system-helpers",
     "revision": "1.47",
-    "@id": "data:init-system-helpers/1.47",
+    "@id": "data:ubuntu/init-system-helpers/1.47",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1223,7 +1223,7 @@
   {
     "name": "libacl1",
     "revision": "2.2.52-3",
-    "@id": "data:libacl1/2.2.52-3",
+    "@id": "data:debian/libacl1/2.2.52-3",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1234,7 +1234,7 @@
   {
     "name": "libacl1",
     "revision": "2.2.52-3",
-    "@id": "data:libacl1/2.2.52-3",
+    "@id": "data:ubuntu/libacl1/2.2.52-3",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1245,7 +1245,7 @@
   {
     "name": "libapt-pkg5.0",
     "revision": "1.4",
-    "@id": "data:libapt-pkg5.0/1.4",
+    "@id": "data:debian/libapt-pkg5.0/1.4",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1256,7 +1256,7 @@
   {
     "name": "libapt-pkg5.0",
     "revision": "1.4",
-    "@id": "data:libapt-pkg5.0/1.4",
+    "@id": "data:ubuntu/libapt-pkg5.0/1.4",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1267,7 +1267,7 @@
   {
     "name": "libassuan0",
     "revision": "2.4.3-2",
-    "@id": "data:libassuan0/2.4.3-2",
+    "@id": "data:debian/libassuan0/2.4.3-2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1278,7 +1278,7 @@
   {
     "name": "libassuan0",
     "revision": "2.4.3-2",
-    "@id": "data:libassuan0/2.4.3-2",
+    "@id": "data:ubuntu/libassuan0/2.4.3-2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1289,7 +1289,7 @@
   {
     "name": "libattr1",
     "revision": "1:2.4.47-2",
-    "@id": "data:libattr1/1:2.4.47-2",
+    "@id": "data:debian/libattr1/1:2.4.47-2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1300,7 +1300,7 @@
   {
     "name": "libattr1",
     "revision": "1:2.4.47-2",
-    "@id": "data:libattr1/1:2.4.47-2",
+    "@id": "data:ubuntu/libattr1/1:2.4.47-2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1311,7 +1311,7 @@
   {
     "name": "libaudit-common",
     "revision": "1:2.6.6-1ubuntu1",
-    "@id": "data:libaudit-common/1:2.6.6-1ubuntu1",
+    "@id": "data:debian/libaudit-common/1:2.6.6-1ubuntu1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1322,7 +1322,7 @@
   {
     "name": "libaudit-common",
     "revision": "1:2.6.6-1ubuntu1",
-    "@id": "data:libaudit-common/1:2.6.6-1ubuntu1",
+    "@id": "data:ubuntu/libaudit-common/1:2.6.6-1ubuntu1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1333,7 +1333,7 @@
   {
     "name": "libaudit1",
     "revision": "1:2.6.6-1ubuntu1",
-    "@id": "data:libaudit1/1:2.6.6-1ubuntu1",
+    "@id": "data:debian/libaudit1/1:2.6.6-1ubuntu1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1344,7 +1344,7 @@
   {
     "name": "libaudit1",
     "revision": "1:2.6.6-1ubuntu1",
-    "@id": "data:libaudit1/1:2.6.6-1ubuntu1",
+    "@id": "data:ubuntu/libaudit1/1:2.6.6-1ubuntu1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1355,7 +1355,7 @@
   {
     "name": "libblkid1",
     "revision": "2.29-1ubuntu2.1",
-    "@id": "data:libblkid1/2.29-1ubuntu2.1",
+    "@id": "data:debian/libblkid1/2.29-1ubuntu2.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1366,7 +1366,7 @@
   {
     "name": "libblkid1",
     "revision": "2.29-1ubuntu2.1",
-    "@id": "data:libblkid1/2.29-1ubuntu2.1",
+    "@id": "data:ubuntu/libblkid1/2.29-1ubuntu2.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1377,7 +1377,7 @@
   {
     "name": "libbz2-1.0",
     "revision": "1.0.6-8.1",
-    "@id": "data:libbz2-1.0/1.0.6-8.1",
+    "@id": "data:debian/libbz2-1.0/1.0.6-8.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1388,7 +1388,7 @@
   {
     "name": "libbz2-1.0",
     "revision": "1.0.6-8.1",
-    "@id": "data:libbz2-1.0/1.0.6-8.1",
+    "@id": "data:ubuntu/libbz2-1.0/1.0.6-8.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1399,7 +1399,7 @@
   {
     "name": "libc-bin",
     "revision": "2.24-9ubuntu2.2",
-    "@id": "data:libc-bin/2.24-9ubuntu2.2",
+    "@id": "data:debian/libc-bin/2.24-9ubuntu2.2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1410,7 +1410,7 @@
   {
     "name": "libc-bin",
     "revision": "2.24-9ubuntu2.2",
-    "@id": "data:libc-bin/2.24-9ubuntu2.2",
+    "@id": "data:ubuntu/libc-bin/2.24-9ubuntu2.2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1421,7 +1421,7 @@
   {
     "name": "libc6",
     "revision": "2.24-9ubuntu2.2",
-    "@id": "data:libc6/2.24-9ubuntu2.2",
+    "@id": "data:debian/libc6/2.24-9ubuntu2.2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1432,7 +1432,7 @@
   {
     "name": "libc6",
     "revision": "2.24-9ubuntu2.2",
-    "@id": "data:libc6/2.24-9ubuntu2.2",
+    "@id": "data:ubuntu/libc6/2.24-9ubuntu2.2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1443,7 +1443,7 @@
   {
     "name": "libcap-ng0",
     "revision": "0.7.7-3",
-    "@id": "data:libcap-ng0/0.7.7-3",
+    "@id": "data:debian/libcap-ng0/0.7.7-3",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1454,7 +1454,7 @@
   {
     "name": "libcap-ng0",
     "revision": "0.7.7-3",
-    "@id": "data:libcap-ng0/0.7.7-3",
+    "@id": "data:ubuntu/libcap-ng0/0.7.7-3",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1465,7 +1465,7 @@
   {
     "name": "libcomerr2",
     "revision": "1.43.4-2",
-    "@id": "data:libcomerr2/1.43.4-2",
+    "@id": "data:debian/libcomerr2/1.43.4-2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1476,7 +1476,7 @@
   {
     "name": "libcomerr2",
     "revision": "1.43.4-2",
-    "@id": "data:libcomerr2/1.43.4-2",
+    "@id": "data:ubuntu/libcomerr2/1.43.4-2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1487,7 +1487,7 @@
   {
     "name": "libdb5.3",
     "revision": "5.3.28-12",
-    "@id": "data:libdb5.3/5.3.28-12",
+    "@id": "data:debian/libdb5.3/5.3.28-12",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1498,7 +1498,7 @@
   {
     "name": "libdb5.3",
     "revision": "5.3.28-12",
-    "@id": "data:libdb5.3/5.3.28-12",
+    "@id": "data:ubuntu/libdb5.3/5.3.28-12",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1509,7 +1509,7 @@
   {
     "name": "libdebconfclient0",
     "revision": "0.213ubuntu1",
-    "@id": "data:libdebconfclient0/0.213ubuntu1",
+    "@id": "data:debian/libdebconfclient0/0.213ubuntu1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1520,7 +1520,7 @@
   {
     "name": "libdebconfclient0",
     "revision": "0.213ubuntu1",
-    "@id": "data:libdebconfclient0/0.213ubuntu1",
+    "@id": "data:ubuntu/libdebconfclient0/0.213ubuntu1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1531,7 +1531,7 @@
   {
     "name": "libfdisk1",
     "revision": "2.29-1ubuntu2.1",
-    "@id": "data:libfdisk1/2.29-1ubuntu2.1",
+    "@id": "data:debian/libfdisk1/2.29-1ubuntu2.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1542,7 +1542,7 @@
   {
     "name": "libfdisk1",
     "revision": "2.29-1ubuntu2.1",
-    "@id": "data:libfdisk1/2.29-1ubuntu2.1",
+    "@id": "data:ubuntu/libfdisk1/2.29-1ubuntu2.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1553,7 +1553,7 @@
   {
     "name": "libgcc1",
     "revision": "1:6.3.0-12ubuntu2",
-    "@id": "data:libgcc1/1:6.3.0-12ubuntu2",
+    "@id": "data:debian/libgcc1/1:6.3.0-12ubuntu2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1564,7 +1564,7 @@
   {
     "name": "libgcc1",
     "revision": "1:6.3.0-12ubuntu2",
-    "@id": "data:libgcc1/1:6.3.0-12ubuntu2",
+    "@id": "data:ubuntu/libgcc1/1:6.3.0-12ubuntu2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1575,7 +1575,7 @@
   {
     "name": "libgcrypt20",
     "revision": "1.7.6-1ubuntu0.1",
-    "@id": "data:libgcrypt20/1.7.6-1ubuntu0.1",
+    "@id": "data:debian/libgcrypt20/1.7.6-1ubuntu0.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1586,7 +1586,7 @@
   {
     "name": "libgcrypt20",
     "revision": "1.7.6-1ubuntu0.1",
-    "@id": "data:libgcrypt20/1.7.6-1ubuntu0.1",
+    "@id": "data:ubuntu/libgcrypt20/1.7.6-1ubuntu0.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1597,7 +1597,7 @@
   {
     "name": "libgpg-error0",
     "revision": "1.26-2",
-    "@id": "data:libgpg-error0/1.26-2",
+    "@id": "data:debian/libgpg-error0/1.26-2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1608,7 +1608,7 @@
   {
     "name": "libgpg-error0",
     "revision": "1.26-2",
-    "@id": "data:libgpg-error0/1.26-2",
+    "@id": "data:ubuntu/libgpg-error0/1.26-2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1619,7 +1619,7 @@
   {
     "name": "libksba8",
     "revision": "1.3.5-2",
-    "@id": "data:libksba8/1.3.5-2",
+    "@id": "data:debian/libksba8/1.3.5-2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1630,7 +1630,7 @@
   {
     "name": "libksba8",
     "revision": "1.3.5-2",
-    "@id": "data:libksba8/1.3.5-2",
+    "@id": "data:ubuntu/libksba8/1.3.5-2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1641,7 +1641,7 @@
   {
     "name": "liblz4-1",
     "revision": "0.0~r131-2ubuntu2",
-    "@id": "data:liblz4-1/0.0~r131-2ubuntu2",
+    "@id": "data:debian/liblz4-1/0.0~r131-2ubuntu2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1652,7 +1652,7 @@
   {
     "name": "liblz4-1",
     "revision": "0.0~r131-2ubuntu2",
-    "@id": "data:liblz4-1/0.0~r131-2ubuntu2",
+    "@id": "data:ubuntu/liblz4-1/0.0~r131-2ubuntu2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1663,7 +1663,7 @@
   {
     "name": "liblzma5",
     "revision": "5.2.2-1.2",
-    "@id": "data:liblzma5/5.2.2-1.2",
+    "@id": "data:debian/liblzma5/5.2.2-1.2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1674,7 +1674,7 @@
   {
     "name": "liblzma5",
     "revision": "5.2.2-1.2",
-    "@id": "data:liblzma5/5.2.2-1.2",
+    "@id": "data:ubuntu/liblzma5/5.2.2-1.2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1685,7 +1685,7 @@
   {
     "name": "libmount1",
     "revision": "2.29-1ubuntu2.1",
-    "@id": "data:libmount1/2.29-1ubuntu2.1",
+    "@id": "data:debian/libmount1/2.29-1ubuntu2.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1696,7 +1696,7 @@
   {
     "name": "libmount1",
     "revision": "2.29-1ubuntu2.1",
-    "@id": "data:libmount1/2.29-1ubuntu2.1",
+    "@id": "data:ubuntu/libmount1/2.29-1ubuntu2.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1707,7 +1707,7 @@
   {
     "name": "libncurses5",
     "revision": "6.0+20160625-1ubuntu1",
-    "@id": "data:libncurses5/6.0+20160625-1ubuntu1",
+    "@id": "data:debian/libncurses5/6.0+20160625-1ubuntu1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1718,7 +1718,7 @@
   {
     "name": "libncurses5",
     "revision": "6.0+20160625-1ubuntu1",
-    "@id": "data:libncurses5/6.0+20160625-1ubuntu1",
+    "@id": "data:ubuntu/libncurses5/6.0+20160625-1ubuntu1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1729,7 +1729,7 @@
   {
     "name": "libncursesw5",
     "revision": "6.0+20160625-1ubuntu1",
-    "@id": "data:libncursesw5/6.0+20160625-1ubuntu1",
+    "@id": "data:debian/libncursesw5/6.0+20160625-1ubuntu1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1740,7 +1740,7 @@
   {
     "name": "libncursesw5",
     "revision": "6.0+20160625-1ubuntu1",
-    "@id": "data:libncursesw5/6.0+20160625-1ubuntu1",
+    "@id": "data:ubuntu/libncursesw5/6.0+20160625-1ubuntu1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1751,7 +1751,7 @@
   {
     "name": "libnpth0",
     "revision": "1.3-1",
-    "@id": "data:libnpth0/1.3-1",
+    "@id": "data:debian/libnpth0/1.3-1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1762,7 +1762,7 @@
   {
     "name": "libnpth0",
     "revision": "1.3-1",
-    "@id": "data:libnpth0/1.3-1",
+    "@id": "data:ubuntu/libnpth0/1.3-1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1773,7 +1773,7 @@
   {
     "name": "libpam-modules",
     "revision": "1.1.8-3.2ubuntu2",
-    "@id": "data:libpam-modules/1.1.8-3.2ubuntu2",
+    "@id": "data:debian/libpam-modules/1.1.8-3.2ubuntu2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1784,7 +1784,7 @@
   {
     "name": "libpam-modules",
     "revision": "1.1.8-3.2ubuntu2",
-    "@id": "data:libpam-modules/1.1.8-3.2ubuntu2",
+    "@id": "data:ubuntu/libpam-modules/1.1.8-3.2ubuntu2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1795,7 +1795,7 @@
   {
     "name": "libpam-modules-bin",
     "revision": "1.1.8-3.2ubuntu2",
-    "@id": "data:libpam-modules-bin/1.1.8-3.2ubuntu2",
+    "@id": "data:debian/libpam-modules-bin/1.1.8-3.2ubuntu2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1806,7 +1806,7 @@
   {
     "name": "libpam-modules-bin",
     "revision": "1.1.8-3.2ubuntu2",
-    "@id": "data:libpam-modules-bin/1.1.8-3.2ubuntu2",
+    "@id": "data:ubuntu/libpam-modules-bin/1.1.8-3.2ubuntu2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1817,7 +1817,7 @@
   {
     "name": "libpam-runtime",
     "revision": "1.1.8-3.2ubuntu2",
-    "@id": "data:libpam-runtime/1.1.8-3.2ubuntu2",
+    "@id": "data:debian/libpam-runtime/1.1.8-3.2ubuntu2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1828,7 +1828,7 @@
   {
     "name": "libpam-runtime",
     "revision": "1.1.8-3.2ubuntu2",
-    "@id": "data:libpam-runtime/1.1.8-3.2ubuntu2",
+    "@id": "data:ubuntu/libpam-runtime/1.1.8-3.2ubuntu2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1839,7 +1839,7 @@
   {
     "name": "libpam0g",
     "revision": "1.1.8-3.2ubuntu2",
-    "@id": "data:libpam0g/1.1.8-3.2ubuntu2",
+    "@id": "data:debian/libpam0g/1.1.8-3.2ubuntu2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1850,7 +1850,7 @@
   {
     "name": "libpam0g",
     "revision": "1.1.8-3.2ubuntu2",
-    "@id": "data:libpam0g/1.1.8-3.2ubuntu2",
+    "@id": "data:ubuntu/libpam0g/1.1.8-3.2ubuntu2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1861,7 +1861,7 @@
   {
     "name": "libpcre3",
     "revision": "2:8.39-3",
-    "@id": "data:libpcre3/2:8.39-3",
+    "@id": "data:debian/libpcre3/2:8.39-3",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1872,7 +1872,7 @@
   {
     "name": "libpcre3",
     "revision": "2:8.39-3",
-    "@id": "data:libpcre3/2:8.39-3",
+    "@id": "data:ubuntu/libpcre3/2:8.39-3",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1883,7 +1883,7 @@
   {
     "name": "libprocps6",
     "revision": "2:3.3.12-1ubuntu2",
-    "@id": "data:libprocps6/2:3.3.12-1ubuntu2",
+    "@id": "data:debian/libprocps6/2:3.3.12-1ubuntu2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1894,7 +1894,7 @@
   {
     "name": "libprocps6",
     "revision": "2:3.3.12-1ubuntu2",
-    "@id": "data:libprocps6/2:3.3.12-1ubuntu2",
+    "@id": "data:ubuntu/libprocps6/2:3.3.12-1ubuntu2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1905,7 +1905,7 @@
   {
     "name": "libreadline7",
     "revision": "7.0-0ubuntu2",
-    "@id": "data:libreadline7/7.0-0ubuntu2",
+    "@id": "data:debian/libreadline7/7.0-0ubuntu2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1916,7 +1916,7 @@
   {
     "name": "libreadline7",
     "revision": "7.0-0ubuntu2",
-    "@id": "data:libreadline7/7.0-0ubuntu2",
+    "@id": "data:ubuntu/libreadline7/7.0-0ubuntu2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1927,7 +1927,7 @@
   {
     "name": "libselinux1",
     "revision": "2.6-3",
-    "@id": "data:libselinux1/2.6-3",
+    "@id": "data:debian/libselinux1/2.6-3",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1938,7 +1938,7 @@
   {
     "name": "libselinux1",
     "revision": "2.6-3",
-    "@id": "data:libselinux1/2.6-3",
+    "@id": "data:ubuntu/libselinux1/2.6-3",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1949,7 +1949,7 @@
   {
     "name": "libsemanage-common",
     "revision": "2.6-2",
-    "@id": "data:libsemanage-common/2.6-2",
+    "@id": "data:debian/libsemanage-common/2.6-2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1960,7 +1960,7 @@
   {
     "name": "libsemanage-common",
     "revision": "2.6-2",
-    "@id": "data:libsemanage-common/2.6-2",
+    "@id": "data:ubuntu/libsemanage-common/2.6-2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1971,7 +1971,7 @@
   {
     "name": "libsemanage1",
     "revision": "2.6-2",
-    "@id": "data:libsemanage1/2.6-2",
+    "@id": "data:debian/libsemanage1/2.6-2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -1982,7 +1982,7 @@
   {
     "name": "libsemanage1",
     "revision": "2.6-2",
-    "@id": "data:libsemanage1/2.6-2",
+    "@id": "data:ubuntu/libsemanage1/2.6-2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -1993,7 +1993,7 @@
   {
     "name": "libsepol1",
     "revision": "2.6-2",
-    "@id": "data:libsepol1/2.6-2",
+    "@id": "data:debian/libsepol1/2.6-2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2004,7 +2004,7 @@
   {
     "name": "libsepol1",
     "revision": "2.6-2",
-    "@id": "data:libsepol1/2.6-2",
+    "@id": "data:ubuntu/libsepol1/2.6-2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -2015,7 +2015,7 @@
   {
     "name": "libsmartcols1",
     "revision": "2.29-1ubuntu2.1",
-    "@id": "data:libsmartcols1/2.29-1ubuntu2.1",
+    "@id": "data:debian/libsmartcols1/2.29-1ubuntu2.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2026,7 +2026,7 @@
   {
     "name": "libsmartcols1",
     "revision": "2.29-1ubuntu2.1",
-    "@id": "data:libsmartcols1/2.29-1ubuntu2.1",
+    "@id": "data:ubuntu/libsmartcols1/2.29-1ubuntu2.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -2037,7 +2037,7 @@
   {
     "name": "libsqlite3-0",
     "revision": "3.16.2-3",
-    "@id": "data:libsqlite3-0/3.16.2-3",
+    "@id": "data:debian/libsqlite3-0/3.16.2-3",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2048,7 +2048,7 @@
   {
     "name": "libsqlite3-0",
     "revision": "3.16.2-3",
-    "@id": "data:libsqlite3-0/3.16.2-3",
+    "@id": "data:ubuntu/libsqlite3-0/3.16.2-3",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -2059,7 +2059,7 @@
   {
     "name": "libss2",
     "revision": "1.43.4-2",
-    "@id": "data:libss2/1.43.4-2",
+    "@id": "data:debian/libss2/1.43.4-2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2070,7 +2070,7 @@
   {
     "name": "libss2",
     "revision": "1.43.4-2",
-    "@id": "data:libss2/1.43.4-2",
+    "@id": "data:ubuntu/libss2/1.43.4-2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -2081,7 +2081,7 @@
   {
     "name": "libstdc++6",
     "revision": "6.3.0-12ubuntu2",
-    "@id": "data:libstdc++6/6.3.0-12ubuntu2",
+    "@id": "data:debian/libstdc++6/6.3.0-12ubuntu2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2092,7 +2092,7 @@
   {
     "name": "libstdc++6",
     "revision": "6.3.0-12ubuntu2",
-    "@id": "data:libstdc++6/6.3.0-12ubuntu2",
+    "@id": "data:ubuntu/libstdc++6/6.3.0-12ubuntu2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -2103,7 +2103,7 @@
   {
     "name": "libsystemd0",
     "revision": "232-21ubuntu5",
-    "@id": "data:libsystemd0/232-21ubuntu5",
+    "@id": "data:debian/libsystemd0/232-21ubuntu5",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2114,7 +2114,7 @@
   {
     "name": "libsystemd0",
     "revision": "232-21ubuntu5",
-    "@id": "data:libsystemd0/232-21ubuntu5",
+    "@id": "data:ubuntu/libsystemd0/232-21ubuntu5",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -2125,7 +2125,7 @@
   {
     "name": "libtinfo5",
     "revision": "6.0+20160625-1ubuntu1",
-    "@id": "data:libtinfo5/6.0+20160625-1ubuntu1",
+    "@id": "data:debian/libtinfo5/6.0+20160625-1ubuntu1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2136,7 +2136,7 @@
   {
     "name": "libtinfo5",
     "revision": "6.0+20160625-1ubuntu1",
-    "@id": "data:libtinfo5/6.0+20160625-1ubuntu1",
+    "@id": "data:ubuntu/libtinfo5/6.0+20160625-1ubuntu1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -2147,7 +2147,7 @@
   {
     "name": "libudev1",
     "revision": "232-21ubuntu5",
-    "@id": "data:libudev1/232-21ubuntu5",
+    "@id": "data:debian/libudev1/232-21ubuntu5",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2158,7 +2158,7 @@
   {
     "name": "libudev1",
     "revision": "232-21ubuntu5",
-    "@id": "data:libudev1/232-21ubuntu5",
+    "@id": "data:ubuntu/libudev1/232-21ubuntu5",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -2169,7 +2169,7 @@
   {
     "name": "libustr-1.0-1",
     "revision": "1.0.4-6",
-    "@id": "data:libustr-1.0-1/1.0.4-6",
+    "@id": "data:debian/libustr-1.0-1/1.0.4-6",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2180,7 +2180,7 @@
   {
     "name": "libustr-1.0-1",
     "revision": "1.0.4-6",
-    "@id": "data:libustr-1.0-1/1.0.4-6",
+    "@id": "data:ubuntu/libustr-1.0-1/1.0.4-6",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -2191,7 +2191,7 @@
   {
     "name": "libuuid1",
     "revision": "2.29-1ubuntu2.1",
-    "@id": "data:libuuid1/2.29-1ubuntu2.1",
+    "@id": "data:debian/libuuid1/2.29-1ubuntu2.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2202,7 +2202,7 @@
   {
     "name": "libuuid1",
     "revision": "2.29-1ubuntu2.1",
-    "@id": "data:libuuid1/2.29-1ubuntu2.1",
+    "@id": "data:ubuntu/libuuid1/2.29-1ubuntu2.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -2213,7 +2213,7 @@
   {
     "name": "login",
     "revision": "1:4.2-3.2ubuntu1.17.04.2",
-    "@id": "data:login/1:4.2-3.2ubuntu1.17.04.2",
+    "@id": "data:debian/login/1:4.2-3.2ubuntu1.17.04.2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2224,7 +2224,7 @@
   {
     "name": "login",
     "revision": "1:4.2-3.2ubuntu1.17.04.2",
-    "@id": "data:login/1:4.2-3.2ubuntu1.17.04.2",
+    "@id": "data:ubuntu/login/1:4.2-3.2ubuntu1.17.04.2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -2235,7 +2235,7 @@
   {
     "name": "lsb-base",
     "revision": "9.20160110ubuntu5",
-    "@id": "data:lsb-base/9.20160110ubuntu5",
+    "@id": "data:debian/lsb-base/9.20160110ubuntu5",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2246,7 +2246,7 @@
   {
     "name": "lsb-base",
     "revision": "9.20160110ubuntu5",
-    "@id": "data:lsb-base/9.20160110ubuntu5",
+    "@id": "data:ubuntu/lsb-base/9.20160110ubuntu5",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -2257,7 +2257,7 @@
   {
     "name": "mawk",
     "revision": "1.3.3-17ubuntu2",
-    "@id": "data:mawk/1.3.3-17ubuntu2",
+    "@id": "data:debian/mawk/1.3.3-17ubuntu2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2268,7 +2268,7 @@
   {
     "name": "mawk",
     "revision": "1.3.3-17ubuntu2",
-    "@id": "data:mawk/1.3.3-17ubuntu2",
+    "@id": "data:ubuntu/mawk/1.3.3-17ubuntu2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -2279,7 +2279,7 @@
   {
     "name": "mount",
     "revision": "2.29-1ubuntu2.1",
-    "@id": "data:mount/2.29-1ubuntu2.1",
+    "@id": "data:debian/mount/2.29-1ubuntu2.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2290,7 +2290,7 @@
   {
     "name": "mount",
     "revision": "2.29-1ubuntu2.1",
-    "@id": "data:mount/2.29-1ubuntu2.1",
+    "@id": "data:ubuntu/mount/2.29-1ubuntu2.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -2301,7 +2301,7 @@
   {
     "name": "multiarch-support",
     "revision": "2.24-9ubuntu2.2",
-    "@id": "data:multiarch-support/2.24-9ubuntu2.2",
+    "@id": "data:debian/multiarch-support/2.24-9ubuntu2.2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2312,7 +2312,7 @@
   {
     "name": "multiarch-support",
     "revision": "2.24-9ubuntu2.2",
-    "@id": "data:multiarch-support/2.24-9ubuntu2.2",
+    "@id": "data:ubuntu/multiarch-support/2.24-9ubuntu2.2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -2323,7 +2323,7 @@
   {
     "name": "ncurses-base",
     "revision": "6.0+20160625-1ubuntu1",
-    "@id": "data:ncurses-base/6.0+20160625-1ubuntu1",
+    "@id": "data:debian/ncurses-base/6.0+20160625-1ubuntu1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2334,7 +2334,7 @@
   {
     "name": "ncurses-base",
     "revision": "6.0+20160625-1ubuntu1",
-    "@id": "data:ncurses-base/6.0+20160625-1ubuntu1",
+    "@id": "data:ubuntu/ncurses-base/6.0+20160625-1ubuntu1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -2345,7 +2345,7 @@
   {
     "name": "ncurses-bin",
     "revision": "6.0+20160625-1ubuntu1",
-    "@id": "data:ncurses-bin/6.0+20160625-1ubuntu1",
+    "@id": "data:debian/ncurses-bin/6.0+20160625-1ubuntu1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2356,7 +2356,7 @@
   {
     "name": "ncurses-bin",
     "revision": "6.0+20160625-1ubuntu1",
-    "@id": "data:ncurses-bin/6.0+20160625-1ubuntu1",
+    "@id": "data:ubuntu/ncurses-bin/6.0+20160625-1ubuntu1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -2367,7 +2367,7 @@
   {
     "name": "passwd",
     "revision": "1:4.2-3.2ubuntu1.17.04.2",
-    "@id": "data:passwd/1:4.2-3.2ubuntu1.17.04.2",
+    "@id": "data:debian/passwd/1:4.2-3.2ubuntu1.17.04.2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2378,7 +2378,7 @@
   {
     "name": "passwd",
     "revision": "1:4.2-3.2ubuntu1.17.04.2",
-    "@id": "data:passwd/1:4.2-3.2ubuntu1.17.04.2",
+    "@id": "data:ubuntu/passwd/1:4.2-3.2ubuntu1.17.04.2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -2389,7 +2389,7 @@
   {
     "name": "perl-base",
     "revision": "5.24.1-2ubuntu1",
-    "@id": "data:perl-base/5.24.1-2ubuntu1",
+    "@id": "data:debian/perl-base/5.24.1-2ubuntu1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2400,7 +2400,7 @@
   {
     "name": "perl-base",
     "revision": "5.24.1-2ubuntu1",
-    "@id": "data:perl-base/5.24.1-2ubuntu1",
+    "@id": "data:ubuntu/perl-base/5.24.1-2ubuntu1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -2411,7 +2411,7 @@
   {
     "name": "pinentry-curses",
     "revision": "1.0.0-2",
-    "@id": "data:pinentry-curses/1.0.0-2",
+    "@id": "data:debian/pinentry-curses/1.0.0-2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2422,7 +2422,7 @@
   {
     "name": "pinentry-curses",
     "revision": "1.0.0-2",
-    "@id": "data:pinentry-curses/1.0.0-2",
+    "@id": "data:ubuntu/pinentry-curses/1.0.0-2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -2433,7 +2433,7 @@
   {
     "name": "procps",
     "revision": "2:3.3.12-1ubuntu2",
-    "@id": "data:procps/2:3.3.12-1ubuntu2",
+    "@id": "data:debian/procps/2:3.3.12-1ubuntu2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2444,7 +2444,7 @@
   {
     "name": "procps",
     "revision": "2:3.3.12-1ubuntu2",
-    "@id": "data:procps/2:3.3.12-1ubuntu2",
+    "@id": "data:ubuntu/procps/2:3.3.12-1ubuntu2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -2455,7 +2455,7 @@
   {
     "name": "readline-common",
     "revision": "7.0-0ubuntu2",
-    "@id": "data:readline-common/7.0-0ubuntu2",
+    "@id": "data:debian/readline-common/7.0-0ubuntu2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2466,7 +2466,7 @@
   {
     "name": "readline-common",
     "revision": "7.0-0ubuntu2",
-    "@id": "data:readline-common/7.0-0ubuntu2",
+    "@id": "data:ubuntu/readline-common/7.0-0ubuntu2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -2477,7 +2477,7 @@
   {
     "name": "sed",
     "revision": "4.4-1",
-    "@id": "data:sed/4.4-1",
+    "@id": "data:debian/sed/4.4-1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2488,7 +2488,7 @@
   {
     "name": "sed",
     "revision": "4.4-1",
-    "@id": "data:sed/4.4-1",
+    "@id": "data:ubuntu/sed/4.4-1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -2499,7 +2499,7 @@
   {
     "name": "sensible-utils",
     "revision": "0.0.9",
-    "@id": "data:sensible-utils/0.0.9",
+    "@id": "data:debian/sensible-utils/0.0.9",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2510,7 +2510,7 @@
   {
     "name": "sensible-utils",
     "revision": "0.0.9",
-    "@id": "data:sensible-utils/0.0.9",
+    "@id": "data:ubuntu/sensible-utils/0.0.9",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -2521,7 +2521,7 @@
   {
     "name": "sysvinit-utils",
     "revision": "2.88dsf-59.8git1",
-    "@id": "data:sysvinit-utils/2.88dsf-59.8git1",
+    "@id": "data:debian/sysvinit-utils/2.88dsf-59.8git1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2532,7 +2532,7 @@
   {
     "name": "sysvinit-utils",
     "revision": "2.88dsf-59.8git1",
-    "@id": "data:sysvinit-utils/2.88dsf-59.8git1",
+    "@id": "data:ubuntu/sysvinit-utils/2.88dsf-59.8git1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -2543,7 +2543,7 @@
   {
     "name": "tar",
     "revision": "1.29b-1.1",
-    "@id": "data:tar/1.29b-1.1",
+    "@id": "data:debian/tar/1.29b-1.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2554,7 +2554,7 @@
   {
     "name": "tar",
     "revision": "1.29b-1.1",
-    "@id": "data:tar/1.29b-1.1",
+    "@id": "data:ubuntu/tar/1.29b-1.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -2565,7 +2565,7 @@
   {
     "name": "ubuntu-keyring",
     "revision": "2016.10.27",
-    "@id": "data:ubuntu-keyring/2016.10.27",
+    "@id": "data:debian/ubuntu-keyring/2016.10.27",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2576,7 +2576,7 @@
   {
     "name": "ubuntu-keyring",
     "revision": "2016.10.27",
-    "@id": "data:ubuntu-keyring/2016.10.27",
+    "@id": "data:ubuntu/ubuntu-keyring/2016.10.27",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -2587,7 +2587,7 @@
   {
     "name": "util-linux",
     "revision": "2.29-1ubuntu2.1",
-    "@id": "data:util-linux/2.29-1ubuntu2.1",
+    "@id": "data:debian/util-linux/2.29-1ubuntu2.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2598,7 +2598,7 @@
   {
     "name": "util-linux",
     "revision": "2.29-1ubuntu2.1",
-    "@id": "data:util-linux/2.29-1ubuntu2.1",
+    "@id": "data:ubuntu/util-linux/2.29-1ubuntu2.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -2609,7 +2609,7 @@
   {
     "name": "zlib1g",
     "revision": "1:1.2.11.dfsg-0ubuntu1",
-    "@id": "data:zlib1g/1:1.2.11.dfsg-0ubuntu1",
+    "@id": "data:debian/zlib1g/1:1.2.11.dfsg-0ubuntu1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
@@ -2620,7 +2620,7 @@
   {
     "name": "zlib1g",
     "revision": "1:1.2.11.dfsg-0ubuntu1",
-    "@id": "data:zlib1g/1:1.2.11.dfsg-0ubuntu1",
+    "@id": "data:ubuntu/zlib1g/1:1.2.11.dfsg-0ubuntu1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",

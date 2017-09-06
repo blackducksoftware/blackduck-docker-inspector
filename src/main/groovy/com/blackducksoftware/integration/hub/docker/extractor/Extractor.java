@@ -98,7 +98,7 @@ public abstract class Extractor {
 
     public void createBdioComponent(final DependencyNodeBuilder dNodeBuilder, final DependencyNode rootNode, final List<BdioComponent> components, final String name, final String version, final String externalId, final String arch) {
         for (final String forge : forges) {
-            final BdioComponent bdioComponent = bdioNodeFactory.createComponent(name, version, getComponentBdioId(name, version), forge, externalId);
+            final BdioComponent bdioComponent = bdioNodeFactory.createComponent(name, version, getComponentBdioId(forge, name, version), forge, externalId);
             components.add(bdioComponent);
             final DependencyNode dNode = createDependencyNode(forge, name, version, arch);
             logger.trace(String.format("adding %s as child to dependency node tree; dataId: %s", dNode.name, dNode.externalId.createDataId()));
@@ -113,7 +113,7 @@ public abstract class Extractor {
         return dNode;
     }
 
-    private String getComponentBdioId(final String name, final String version) {
-        return String.format("data:%s/%s", name, version);
+    private String getComponentBdioId(final String forge, final String name, final String version) {
+        return String.format("data:%s/%s/%s", forge, name, version);
     }
 }
