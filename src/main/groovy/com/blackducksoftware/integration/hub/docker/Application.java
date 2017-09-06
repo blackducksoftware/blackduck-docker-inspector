@@ -43,7 +43,6 @@ import com.blackducksoftware.integration.hub.docker.client.DockerClientManager;
 import com.blackducksoftware.integration.hub.docker.client.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.client.ProgramVersion;
 import com.blackducksoftware.integration.hub.docker.image.DockerImages;
-import com.blackducksoftware.integration.hub.docker.linux.FileOperations;
 import com.blackducksoftware.integration.hub.docker.tar.manifest.ManifestLayerMapping;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 
@@ -156,11 +155,6 @@ public class Application {
             } else {
                 logger.info("Uploading BDIO to Hub");
                 hubDockerManager.uploadBdioFiles(bdioFiles);
-            }
-            final File outputDir = new File(programPaths.getHubDockerOutputJsonPath());
-            for (final File bdioFile : bdioFiles) {
-                logger.info(String.format("BDIO file: %s", bdioFile.getName()));
-                FileOperations.copyFile(bdioFile, outputDir);
             }
         }
     }

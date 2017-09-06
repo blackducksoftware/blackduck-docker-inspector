@@ -43,6 +43,7 @@ import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.Archit
 import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.ExternalId;
 import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.NameVersionExternalId;
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum;
+import com.blackducksoftware.integration.hub.docker.dependencynode.DependencyNodeWriter;
 import com.blackducksoftware.integration.hub.docker.executor.PkgMgrExecutor;
 import com.blackducksoftware.integration.hub.docker.tar.ImagePkgMgr;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
@@ -58,7 +59,7 @@ public abstract class Extractor {
 
     public abstract void init();
 
-    public abstract List<BdioComponent> extractComponents(ExtractionDetails extractionDetails, String[] packageList);
+    public abstract ExtractionResults extractComponents(ExtractionDetails extractionDetails, String[] packageList);
 
     void initValues(final PackageManagerEnum packageManagerEnum, final PkgMgrExecutor executor, final List<String> forges) {
         this.packageManagerEnum = packageManagerEnum;
@@ -70,8 +71,8 @@ public abstract class Extractor {
         return packageManagerEnum;
     }
 
-    public void extract(final ImagePkgMgr imagePkgMgr, final BdioWriter bdioWriter, final ExtractionDetails extractionDetails, final String codeLocationName, final String projectName, final String version)
-            throws HubIntegrationException, IOException, InterruptedException {
+    public void extract(final ImagePkgMgr imagePkgMgr, final BdioWriter bdioWriter, final DependencyNodeWriter dependenciesWriter, final ExtractionDetails extractionDetails, final String codeLocationName, final String projectName,
+            final String version) throws HubIntegrationException, IOException, InterruptedException {
         final BdioBillOfMaterials bom = bdioNodeFactory.createBillOfMaterials(codeLocationName, projectName, version);
         bdioWriter.writeBdioNode(bom);
 
@@ -80,12 +81,18 @@ public abstract class Extractor {
         final String externalId = extId.createExternalId();
         final BdioProject projectNode = bdioNodeFactory.createProject(projectName, version, extId.createDataId(), extractionDetails.getOperatingSystem().getForge(), externalId);
         logger.debug(String.format("BDIO project ID: %s", projectNode.id));
-        final List<BdioComponent> components = extractComponents(extractionDetails, executor.runPackageManager(imagePkgMgr));
+        final ExtractionResults extractionResults = extractComponents(extractionDetails, executor.runPackageManager(imagePkgMgr));
+        final List<BdioComponent> components = extractionResults.getComponents();
         logger.info(String.format("Found %s potential components", components.size()));
         bdioPropertyHelper.addRelationships(projectNode, components);
         bdioWriter.writeBdioNode(projectNode);
         for (final BdioComponent component : components) {
             bdioWriter.writeBdioNode(component);
+        }
+        if (dependenciesWriter != null) {
+            final DependencyNode rootNode = extractionResults.getDependenciesRootNode();
+            logger.debug(String.format("***** writing dependency node: %s", rootNode.name));
+            dependenciesWriter.writeDependencyNode(rootNode);
         }
     }
 

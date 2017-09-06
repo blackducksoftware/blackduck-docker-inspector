@@ -54,7 +54,7 @@ class DpkgExtractor extends Extractor {
         initValues(PackageManagerEnum.DPKG, executor, forges)
     }
 
-    List<BdioComponent> extractComponents(ExtractionDetails extractionDetails, String[] packageList) {
+    ExtractionResults extractComponents(ExtractionDetails extractionDetails, String[] packageList) {
         final List<BdioComponent> components = new ArrayList<>();
         final DependencyNode rootNode = createDependencyNode(OperatingSystemEnum.UBUNTU.forge, "root", "1.0", extractionDetails.architecture);
         final DependencyNodeBuilder dNodeBuilder = new DependencyNodeBuilder(rootNode);
@@ -81,7 +81,7 @@ class DpkgExtractor extends Extractor {
             }
         }
         logger.debug(String.format("********** DependencyNode tree: %s", rootNode));
-        components
+        return new ExtractionResults(components, rootNode);
     }
 
     boolean isInstalledStatus(Character packageStatus) {

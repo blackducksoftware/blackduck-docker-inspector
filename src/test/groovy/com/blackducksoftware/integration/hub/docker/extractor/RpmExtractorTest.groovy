@@ -29,7 +29,7 @@ class RpmExtractorTest {
     void testRpmFile1() {
         testRpmExtraction('centos_rpm_output_1.txt','testRpmBdio1.jsonld')
     }
-
+    // TODO also test dependency node output
     void testRpmExtraction(String resourceName, String outputFileName){
         URL url = this.getClass().getResource("/$resourceName")
         File resourceFile = new File(URLDecoder.decode(url.getFile(), 'UTF-8'))
@@ -50,7 +50,7 @@ class RpmExtractorTest {
         BdioWriter writer = new BdioWriter(new Gson(), new FileWriter(outputFile))
         ExtractionDetails extractionDetails = new ExtractionDetails(OperatingSystemEnum.CENTOS, 'x86')
         ImagePkgMgr imagePkgMgr = new ImagePkgMgr(new File("nonexistentdir"), PackageManagerEnum.RPM)
-        extractor.extract(imagePkgMgr, writer, extractionDetails, "CodeLocationName", "Test", "1")
+        extractor.extract(imagePkgMgr, writer, null, extractionDetails, "CodeLocationName", "Test", "1")
         writer.close()
 
         File file1 = new File("src/test/resources/testRpmBdio1.jsonld");

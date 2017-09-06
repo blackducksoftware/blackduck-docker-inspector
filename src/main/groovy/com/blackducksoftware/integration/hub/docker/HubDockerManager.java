@@ -42,10 +42,11 @@ import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter;
 import com.blackducksoftware.integration.hub.docker.client.DockerClientManager;
 import com.blackducksoftware.integration.hub.docker.client.ProgramPaths;
+import com.blackducksoftware.integration.hub.docker.dependencynode.DependencyNodeWriter;
 import com.blackducksoftware.integration.hub.docker.extractor.ExtractionDetails;
 import com.blackducksoftware.integration.hub.docker.extractor.Extractor;
-import com.blackducksoftware.integration.hub.docker.linux.FileOperations;
 import com.blackducksoftware.integration.hub.docker.linux.EtcDir;
+import com.blackducksoftware.integration.hub.docker.linux.FileOperations;
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser;
 import com.blackducksoftware.integration.hub.docker.tar.ImageInfo;
 import com.blackducksoftware.integration.hub.docker.tar.manifest.ManifestLayerMapping;
@@ -146,7 +147,7 @@ public class HubDockerManager {
 
     private List<File> generateBdioFromPackageMgrDirs(final List<ManifestLayerMapping> layerMappings, final String projectName, final String versionName, final String tarFileName, final ImageInfo imageInfo, final String architecture)
             throws FileNotFoundException, IOException, HubIntegrationException, InterruptedException {
-        final File workingDirectory = new File(programPaths.getHubDockerWorkingDirPath());
+        final File outputDirectory = new File(programPaths.getHubDockerOutputJsonPath());
         final List<File> bdioFiles = new ArrayList<>();
 
         ManifestLayerMapping manifestMapping = null;
@@ -169,14 +170,18 @@ public class HubDockerManager {
         hubVersionName = deriveHubProjectVersion(manifestMapping, versionName);
         logger.info(String.format("Hub project, version: %s, %s; Code location : %s", hubProjectName, hubVersionName, codeLocationName));
         final String bdioFilename = programPaths.getBdioFilename(manifestMapping.getImageName(), pkgMgrFilePath, hubProjectName, hubVersionName);
-        logger.debug(String.format("bdioFilename: %s", bdioFilename));
-        final File outputFile = new File(workingDirectory, bdioFilename);
-        bdioFiles.add(outputFile);
-        try (FileOutputStream outputStream = new FileOutputStream(outputFile)) {
-            try (BdioWriter writer = new BdioWriter(new Gson(), outputStream);) {
+        final String dependenciesFilename = programPaths.getDependencyNodesFilename(manifestMapping.getImageName(), pkgMgrFilePath, hubProjectName, hubVersionName);
+        logger.debug(String.format("bdioFilename: %s; dependenciesFilename: %s", bdioFilename, dependenciesFilename));
+        final File bdioOutputFile = new File(outputDirectory, bdioFilename);
+        final File dependenciesOutputFile = new File(outputDirectory, dependenciesFilename);
+        logger.debug(String.format("******* dependenciesOutputFile: %s", dependenciesOutputFile));
+        bdioFiles.add(bdioOutputFile);
+        try (FileOutputStream bdioOutputStream = new FileOutputStream(bdioOutputFile); FileOutputStream dependenciesOutputStream = new FileOutputStream(dependenciesOutputFile)) {
+            try (BdioWriter bdioWriter = new BdioWriter(new Gson(), bdioOutputStream); DependencyNodeWriter dependenciesWriter = new DependencyNodeWriter(new Gson(), dependenciesOutputStream)) {
                 final Extractor extractor = getExtractorByPackageManager(imageInfo.getPkgMgr().getPackageManager());
                 final ExtractionDetails extractionDetails = new ExtractionDetails(imageInfo.getOperatingSystemEnum(), architecture);
-                extractor.extract(imageInfo.getPkgMgr(), writer, extractionDetails, codeLocationName, hubProjectName, hubVersionName);
+                logger.debug(String.format("***** dependenciesWriter: %s", dependenciesWriter.toString()));
+                extractor.extract(imageInfo.getPkgMgr(), bdioWriter, dependenciesWriter, extractionDetails, codeLocationName, hubProjectName, hubVersionName);
             }
         }
 

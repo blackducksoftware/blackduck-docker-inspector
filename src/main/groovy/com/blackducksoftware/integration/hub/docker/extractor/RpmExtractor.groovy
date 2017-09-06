@@ -59,7 +59,7 @@ class RpmExtractor extends Extractor {
         packageLine.matches(".+-.+-.+\\..*")
     }
 
-    List<BdioComponent> extractComponents(ExtractionDetails extractionDetails, String[] packageList) {
+    ExtractionResults extractComponents(ExtractionDetails extractionDetails, String[] packageList) {
         logger.debug("extractComponents: Received ${packageList.length} package lines")
         final List<BdioComponent> components = new ArrayList<>();
         final DependencyNode rootNode = createDependencyNode(OperatingSystemEnum.CENTOS.forge, "root", "1.0", extractionDetails.architecture);
@@ -81,6 +81,6 @@ class RpmExtractor extends Extractor {
             }
         }
         logger.debug(String.format("********** DependencyNode tree: %s", rootNode));
-        components
+        return new ExtractionResults(components, rootNode);
     }
 }

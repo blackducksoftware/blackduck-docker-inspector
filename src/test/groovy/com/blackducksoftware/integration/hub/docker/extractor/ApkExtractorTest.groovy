@@ -30,8 +30,8 @@ class ApkExtractorTest {
     void testApkFile1() {
         testApkExtraction('alpine_apk_output_1.txt','testApkBdio1.jsonld')
     }
-
-    void testApkExtraction(String resourceName, String outputFileName){
+    // TODO also test dependency node output
+    void testApkExtraction(String resourceName, String bdioOutputFileName){
         URL url = this.getClass().getResource("/$resourceName")
         File resourceFile = new File(URLDecoder.decode(url.getFile(), 'UTF-8'))
 
@@ -42,17 +42,17 @@ class ApkExtractorTest {
         ]
         extractor.initValues(PackageManagerEnum.APK, executor, forges)
 
-        File outputFile = new File("test")
-        outputFile = new File(outputFile, outputFileName)
-        if(outputFile.exists()){
-            outputFile.delete()
+        File bdioOutputFile = new File("test")
+        bdioOutputFile = new File(bdioOutputFile, bdioOutputFileName)
+        if(bdioOutputFile.exists()){
+            bdioOutputFile.delete()
         }
-        outputFile.getParentFile().mkdirs()
-        BdioWriter writer = new BdioWriter(new Gson(), new FileWriter(outputFile))
+        bdioOutputFile.getParentFile().mkdirs()
+        BdioWriter bdioWriter = new BdioWriter(new Gson(), new FileWriter(bdioOutputFile))
         ExtractionDetails extractionDetails = new ExtractionDetails(OperatingSystemEnum.ALPINE, 'x86')
         final ImagePkgMgr imagePkgMgr = new ImagePkgMgr(new File("nonexistentdir"), PackageManagerEnum.APK)
-        extractor.extract(imagePkgMgr, writer, extractionDetails, "CodeLocationName", "Test", "1")
-        writer.close()
+        extractor.extract(imagePkgMgr, bdioWriter, null, extractionDetails, "CodeLocationName", "Test", "1")
+        bdioWriter.close()
 
         File file1 = new File("src/test/resources/testApkBdio1.jsonld");
         File file2 = new File("test/testApkBdio1.jsonld");

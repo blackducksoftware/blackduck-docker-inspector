@@ -57,7 +57,7 @@ class ApkExtractor extends Extractor {
     }
 
     @Override
-    public List<BdioComponent> extractComponents(final ExtractionDetails extractionDetails, final String[] packageList) {
+    public ExtractionResults extractComponents(final ExtractionDetails extractionDetails, final String[] packageList) {
         final List<BdioComponent> components = new ArrayList<>();
         final DependencyNode rootNode = createDependencyNode(OperatingSystemEnum.ALPINE.getForge(), "root", "1.0", extractionDetails.getArchitecture());
         final DependencyNodeBuilder dNodeBuilder = new DependencyNodeBuilder(rootNode);
@@ -86,6 +86,6 @@ class ApkExtractor extends Extractor {
             }
         }
         logger.debug(String.format("********** DependencyNode tree: %s", rootNode));
-        return components;
+        return new ExtractionResults(components, rootNode);
     }
 }

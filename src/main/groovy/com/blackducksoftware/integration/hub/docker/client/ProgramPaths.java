@@ -134,6 +134,10 @@ public class ProgramPaths {
         return String.format("%s_%s_%s_%s_bdio.jsonld", cleanImageName(imageName), cleanPath(pkgMgrFilePath), cleanHubProjectName(hubProjectName), hubVersionName);
     }
 
+    public String getDependencyNodesFilename(final String imageName, final String pkgMgrFilePath, final String hubProjectName, final String hubVersionName) {
+        return String.format("%s_%s_%s_%s_dependencies.json", cleanImageName(imageName), cleanPath(pkgMgrFilePath), cleanHubProjectName(hubProjectName), hubVersionName);
+    }
+
     public String cleanHubProjectName(final String hubProjectName) {
         return slashesToUnderscore(hubProjectName);
     }

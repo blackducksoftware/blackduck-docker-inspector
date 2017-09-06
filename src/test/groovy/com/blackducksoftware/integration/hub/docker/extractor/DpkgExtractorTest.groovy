@@ -29,7 +29,7 @@ class DpkgExtractorTest {
     void testDpkgFile1() {
         testDpkgExtraction('ubuntu_dpkg_output_1.txt','testDpkgBdio1.jsonld')
     }
-
+    // TODO also test dependency node output
     void testDpkgExtraction(String resourceName, String outputFileName){
         URL url = this.getClass().getResource("/$resourceName")
         File resourceFile = new File(URLDecoder.decode(url.getFile(), 'UTF-8'))
@@ -50,7 +50,7 @@ class DpkgExtractorTest {
         BdioWriter writer = new BdioWriter(new Gson(), new FileWriter(outputFile))
         ExtractionDetails extractionDetails = new ExtractionDetails(OperatingSystemEnum.UBUNTU, 'x86')
         ImagePkgMgr imagePkgMgr = new ImagePkgMgr(new File("nonexistentdir"), PackageManagerEnum.DPKG)
-        extractor.extract(imagePkgMgr, writer, extractionDetails, "CodeLocationName", "Test", "1")
+        extractor.extract(imagePkgMgr, writer, null, extractionDetails, "CodeLocationName", "Test", "1")
         writer.close()
 
         File file1 = new File("src/test/resources/testDpkgBdio1.jsonld");
