@@ -111,9 +111,18 @@ public class EndToEndTest {
         if (requireBdioMatch) {
             assertTrue(expectedBdio.exists());
         }
+        final File expectedDependencies = new File(String.format(String.format("src/integration-test/resources/bdio/%s_%s_%s_%s_dependencies.json", imageForBdioFilename, pkgMgrPathString, imageForBdioFilename, tagForBdioFilename)));
+        if (requireBdioMatch) {
+            // assertTrue(expectedDependencies.exists());
+        }
+
         final File actualBdio = new File(String.format(String.format("test/output/%s_%s_%s_%s_bdio.jsonld", imageForBdioFilename, pkgMgrPathString, imageForBdioFilename, tagForBdioFilename)));
         Files.deleteIfExists(actualBdio.toPath());
         assertFalse(actualBdio.exists());
+
+        final File actualDependencies = new File(String.format(String.format("test/output/%s_%s_%s_%s_dependencies.json", imageForBdioFilename, pkgMgrPathString, imageForBdioFilename, tagForBdioFilename)));
+        Files.deleteIfExists(actualDependencies.toPath());
+        assertFalse(actualDependencies.exists());
 
         final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--dry.run=true", "--bdio.output.path=test/output", "--dev.mode=true");
         // Arrays.asList returns a fixed size list; need a variable sized list
@@ -145,6 +154,14 @@ public class EndToEndTest {
 
             final boolean outputBdioMatches = TestUtils.contentEquals(expectedBdio, actualBdio, exceptLinesContainingThese);
             assertTrue(outputBdioMatches);
+        }
+
+        assertTrue(actualDependencies.exists());
+        if (requireBdioMatch) {
+            final List<String> exceptLinesContainingThese = new ArrayList<>();
+
+            final boolean outputDependenciesMatches = TestUtils.contentEquals(expectedDependencies, actualDependencies, exceptLinesContainingThese);
+            assertTrue(outputDependenciesMatches);
         }
     }
 }

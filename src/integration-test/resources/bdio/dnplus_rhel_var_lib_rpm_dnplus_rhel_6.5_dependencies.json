@@ -1,0 +1,5203 @@
+[
+  {
+    "name": "root",
+    "version": "1.0",
+    "externalId": {
+      "name": "root",
+      "version": "1.0",
+      "forge": {
+        "name": "centos",
+        "separator": ":"
+      }
+    },
+    "children": [
+      {
+        "name": "libselinux",
+        "version": "2.0.94-5.3.el6_4.1",
+        "externalId": {
+          "name": "libselinux",
+          "version": "2.0.94-5.3.el6_4.1",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "cyrus-sasl",
+        "version": "2.1.23-13.el6_3.1",
+        "externalId": {
+          "name": "cyrus-sasl",
+          "version": "2.1.23-13.el6_3.1",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "cracklib",
+        "version": "2.8.16-4.el6",
+        "externalId": {
+          "name": "cracklib",
+          "version": "2.8.16-4.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "glibc",
+        "version": "2.12-1.132.el6",
+        "externalId": {
+          "name": "glibc",
+          "version": "2.12-1.132.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libcurl",
+        "version": "7.19.7-37.el6_4",
+        "externalId": {
+          "name": "libcurl",
+          "version": "7.19.7-37.el6_4",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "keyutils-libs",
+        "version": "1.4-4.el6",
+        "externalId": {
+          "name": "keyutils-libs",
+          "version": "1.4-4.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "ca-certificates",
+        "version": "2013.1.94-65.0.el6",
+        "externalId": {
+          "name": "ca-certificates",
+          "version": "2013.1.94-65.0.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "module-init-tools",
+        "version": "3.9-21.el6_4",
+        "externalId": {
+          "name": "module-init-tools",
+          "version": "3.9-21.el6_4",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "nss-sysinit",
+        "version": "3.15.1-15.el6",
+        "externalId": {
+          "name": "nss-sysinit",
+          "version": "3.15.1-15.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "iptables",
+        "version": "1.4.7-11.el6",
+        "externalId": {
+          "name": "iptables",
+          "version": "1.4.7-11.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "nss-util",
+        "version": "3.15.1-3.el6",
+        "externalId": {
+          "name": "nss-util",
+          "version": "3.15.1-3.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "MAKEDEV",
+        "version": "3.24-6.el6",
+        "externalId": {
+          "name": "MAKEDEV",
+          "version": "3.24-6.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "policycoreutils",
+        "version": "2.0.83-19.39.el6",
+        "externalId": {
+          "name": "policycoreutils",
+          "version": "2.0.83-19.39.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "db4",
+        "version": "4.7.25-18.el6_4",
+        "externalId": {
+          "name": "db4",
+          "version": "4.7.25-18.el6_4",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "openssl",
+        "version": "1.0.1e-15.el6",
+        "externalId": {
+          "name": "openssl",
+          "version": "1.0.1e-15.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "cyrus-sasl-lib",
+        "version": "2.1.23-13.el6_3.1",
+        "externalId": {
+          "name": "cyrus-sasl-lib",
+          "version": "2.1.23-13.el6_3.1",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "sysvinit-tools",
+        "version": "2.87-5.dsf.el6",
+        "externalId": {
+          "name": "sysvinit-tools",
+          "version": "2.87-5.dsf.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "crontabs",
+        "version": "1.10-33.el6",
+        "externalId": {
+          "name": "crontabs",
+          "version": "1.10-33.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "mingetty",
+        "version": "1.08-5.el6",
+        "externalId": {
+          "name": "mingetty",
+          "version": "1.08-5.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "ncurses-base",
+        "version": "5.7-3.20090208.el6",
+        "externalId": {
+          "name": "ncurses-base",
+          "version": "5.7-3.20090208.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libstdc++",
+        "version": "4.4.7-4.el6",
+        "externalId": {
+          "name": "libstdc++",
+          "version": "4.4.7-4.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libstdc++",
+        "version": "4.4.7-4.el6",
+        "externalId": {
+          "name": "libstdc++",
+          "version": "4.4.7-4.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "procmail",
+        "version": "3.22-25.1.el6",
+        "externalId": {
+          "name": "procmail",
+          "version": "3.22-25.1.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "gdbm",
+        "version": "1.8.0-36.el6",
+        "externalId": {
+          "name": "gdbm",
+          "version": "1.8.0-36.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "MAKEDEV",
+        "version": "3.24-6.el6",
+        "externalId": {
+          "name": "MAKEDEV",
+          "version": "3.24-6.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libusb",
+        "version": "0.1.12-23.el6",
+        "externalId": {
+          "name": "libusb",
+          "version": "0.1.12-23.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "nss",
+        "version": "3.15.1-15.el6",
+        "externalId": {
+          "name": "nss",
+          "version": "3.15.1-15.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "elfutils-libelf",
+        "version": "0.152-1.el6",
+        "externalId": {
+          "name": "elfutils-libelf",
+          "version": "0.152-1.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libaio",
+        "version": "0.3.107-10.el6",
+        "externalId": {
+          "name": "libaio",
+          "version": "0.3.107-10.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libsemanage",
+        "version": "2.0.43-4.2.el6",
+        "externalId": {
+          "name": "libsemanage",
+          "version": "2.0.43-4.2.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "openssl",
+        "version": "1.0.1e-15.el6",
+        "externalId": {
+          "name": "openssl",
+          "version": "1.0.1e-15.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "pcre",
+        "version": "7.8-6.el6",
+        "externalId": {
+          "name": "pcre",
+          "version": "7.8-6.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "crontabs",
+        "version": "1.10-33.el6",
+        "externalId": {
+          "name": "crontabs",
+          "version": "1.10-33.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "procmail",
+        "version": "3.22-25.1.el6",
+        "externalId": {
+          "name": "procmail",
+          "version": "3.22-25.1.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "elfutils-libelf",
+        "version": "0.152-1.el6",
+        "externalId": {
+          "name": "elfutils-libelf",
+          "version": "0.152-1.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "zlib",
+        "version": "1.2.3-29.el6",
+        "externalId": {
+          "name": "zlib",
+          "version": "1.2.3-29.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "make",
+        "version": "3.81-20.el6",
+        "externalId": {
+          "name": "make",
+          "version": "3.81-20.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "xz-libs",
+        "version": "4.999.9-0.3.beta.20091007git.el6",
+        "externalId": {
+          "name": "xz-libs",
+          "version": "4.999.9-0.3.beta.20091007git.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libutempter",
+        "version": "1.1.5-4.1.el6",
+        "externalId": {
+          "name": "libutempter",
+          "version": "1.1.5-4.1.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "cracklib",
+        "version": "2.8.16-4.el6",
+        "externalId": {
+          "name": "cracklib",
+          "version": "2.8.16-4.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libblkid",
+        "version": "2.17.2-12.14.el6",
+        "externalId": {
+          "name": "libblkid",
+          "version": "2.17.2-12.14.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libsepol",
+        "version": "2.0.41-4.el6",
+        "externalId": {
+          "name": "libsepol",
+          "version": "2.0.41-4.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "cyrus-sasl",
+        "version": "2.1.23-13.el6_3.1",
+        "externalId": {
+          "name": "cyrus-sasl",
+          "version": "2.1.23-13.el6_3.1",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "nss-softokn-freebl",
+        "version": "3.14.3-9.el6",
+        "externalId": {
+          "name": "nss-softokn-freebl",
+          "version": "3.14.3-9.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "ncurses-base",
+        "version": "5.7-3.20090208.el6",
+        "externalId": {
+          "name": "ncurses-base",
+          "version": "5.7-3.20090208.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "nss-sysinit",
+        "version": "3.15.1-15.el6",
+        "externalId": {
+          "name": "nss-sysinit",
+          "version": "3.15.1-15.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "tcp_wrappers-libs",
+        "version": "7.6-57.el6",
+        "externalId": {
+          "name": "tcp_wrappers-libs",
+          "version": "7.6-57.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "openldap",
+        "version": "2.4.23-32.el6_4.1",
+        "externalId": {
+          "name": "openldap",
+          "version": "2.4.23-32.el6_4.1",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libselinux",
+        "version": "2.0.94-5.3.el6_4.1",
+        "externalId": {
+          "name": "libselinux",
+          "version": "2.0.94-5.3.el6_4.1",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "which",
+        "version": "2.19-6.el6",
+        "externalId": {
+          "name": "which",
+          "version": "2.19-6.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "iptables",
+        "version": "1.4.7-11.el6",
+        "externalId": {
+          "name": "iptables",
+          "version": "1.4.7-11.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "db4",
+        "version": "4.7.25-18.el6_4",
+        "externalId": {
+          "name": "db4",
+          "version": "4.7.25-18.el6_4",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "shared-mime-info",
+        "version": "0.70-4.el6",
+        "externalId": {
+          "name": "shared-mime-info",
+          "version": "0.70-4.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "ca-certificates",
+        "version": "2013.1.94-65.0.el6",
+        "externalId": {
+          "name": "ca-certificates",
+          "version": "2013.1.94-65.0.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "cronie-noanacron",
+        "version": "1.4.4-12.el6",
+        "externalId": {
+          "name": "cronie-noanacron",
+          "version": "1.4.4-12.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "checkpolicy",
+        "version": "2.0.22-1.el6",
+        "externalId": {
+          "name": "checkpolicy",
+          "version": "2.0.22-1.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "ncurses",
+        "version": "5.7-3.20090208.el6",
+        "externalId": {
+          "name": "ncurses",
+          "version": "5.7-3.20090208.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "elfutils-libelf",
+        "version": "0.152-1.el6",
+        "externalId": {
+          "name": "elfutils-libelf",
+          "version": "0.152-1.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libuuid",
+        "version": "2.17.2-12.14.el6",
+        "externalId": {
+          "name": "libuuid",
+          "version": "2.17.2-12.14.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "iproute",
+        "version": "2.6.32-31.el6",
+        "externalId": {
+          "name": "iproute",
+          "version": "2.6.32-31.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "curl",
+        "version": "7.19.7-37.el6_4",
+        "externalId": {
+          "name": "curl",
+          "version": "7.19.7-37.el6_4",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "glibc",
+        "version": "2.12-1.132.el6",
+        "externalId": {
+          "name": "glibc",
+          "version": "2.12-1.132.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "lua",
+        "version": "5.1.4-4.1.el6",
+        "externalId": {
+          "name": "lua",
+          "version": "5.1.4-4.1.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libusb",
+        "version": "0.1.12-23.el6",
+        "externalId": {
+          "name": "libusb",
+          "version": "0.1.12-23.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libblkid",
+        "version": "2.17.2-12.14.el6",
+        "externalId": {
+          "name": "libblkid",
+          "version": "2.17.2-12.14.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "nspr",
+        "version": "4.10.0-1.el6",
+        "externalId": {
+          "name": "nspr",
+          "version": "4.10.0-1.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "module-init-tools",
+        "version": "3.9-21.el6_4",
+        "externalId": {
+          "name": "module-init-tools",
+          "version": "3.9-21.el6_4",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libblkid",
+        "version": "2.17.2-12.14.el6",
+        "externalId": {
+          "name": "libblkid",
+          "version": "2.17.2-12.14.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "basesystem",
+        "version": "10.0-4.el6",
+        "externalId": {
+          "name": "basesystem",
+          "version": "10.0-4.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "keyutils-libs",
+        "version": "1.4-4.el6",
+        "externalId": {
+          "name": "keyutils-libs",
+          "version": "1.4-4.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libutempter",
+        "version": "1.1.5-4.1.el6",
+        "externalId": {
+          "name": "libutempter",
+          "version": "1.1.5-4.1.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "coreutils-libs",
+        "version": "8.4-31.el6",
+        "externalId": {
+          "name": "coreutils-libs",
+          "version": "8.4-31.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "nss",
+        "version": "3.15.1-15.el6",
+        "externalId": {
+          "name": "nss",
+          "version": "3.15.1-15.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "cyrus-sasl-lib",
+        "version": "2.1.23-13.el6_3.1",
+        "externalId": {
+          "name": "cyrus-sasl-lib",
+          "version": "2.1.23-13.el6_3.1",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "nss-tools",
+        "version": "3.15.1-15.el6",
+        "externalId": {
+          "name": "nss-tools",
+          "version": "3.15.1-15.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "gdbm",
+        "version": "1.8.0-36.el6",
+        "externalId": {
+          "name": "gdbm",
+          "version": "1.8.0-36.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "redhat-release-server",
+        "version": "6Server-6.5.0.1.el6",
+        "externalId": {
+          "name": "redhat-release-server",
+          "version": "6Server-6.5.0.1.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "cyrus-sasl",
+        "version": "2.1.23-13.el6_3.1",
+        "externalId": {
+          "name": "cyrus-sasl",
+          "version": "2.1.23-13.el6_3.1",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libselinux-utils",
+        "version": "2.0.94-5.3.el6_4.1",
+        "externalId": {
+          "name": "libselinux-utils",
+          "version": "2.0.94-5.3.el6_4.1",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "basesystem",
+        "version": "10.0-4.el6",
+        "externalId": {
+          "name": "basesystem",
+          "version": "10.0-4.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "glibc-common",
+        "version": "2.12-1.132.el6",
+        "externalId": {
+          "name": "glibc-common",
+          "version": "2.12-1.132.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "tcp_wrappers-libs",
+        "version": "7.6-57.el6",
+        "externalId": {
+          "name": "tcp_wrappers-libs",
+          "version": "7.6-57.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "setup",
+        "version": "2.8.14-20.el6_4.1",
+        "externalId": {
+          "name": "setup",
+          "version": "2.8.14-20.el6_4.1",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "nss-sysinit",
+        "version": "3.15.1-15.el6",
+        "externalId": {
+          "name": "nss-sysinit",
+          "version": "3.15.1-15.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "nss-softokn-freebl",
+        "version": "3.14.3-9.el6",
+        "externalId": {
+          "name": "nss-softokn-freebl",
+          "version": "3.14.3-9.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "rsyslog",
+        "version": "5.8.10-8.el6",
+        "externalId": {
+          "name": "rsyslog",
+          "version": "5.8.10-8.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "bc",
+        "version": "1.06.95-1.el6",
+        "externalId": {
+          "name": "bc",
+          "version": "1.06.95-1.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "bash",
+        "version": "4.1.2-15.el6_4",
+        "externalId": {
+          "name": "bash",
+          "version": "4.1.2-15.el6_4",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "psmisc",
+        "version": "22.6-15.el6_0.1",
+        "externalId": {
+          "name": "psmisc",
+          "version": "22.6-15.el6_0.1",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "zlib",
+        "version": "1.2.3-29.el6",
+        "externalId": {
+          "name": "zlib",
+          "version": "1.2.3-29.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "shared-mime-info",
+        "version": "0.70-4.el6",
+        "externalId": {
+          "name": "shared-mime-info",
+          "version": "0.70-4.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libcurl",
+        "version": "7.19.7-37.el6_4",
+        "externalId": {
+          "name": "libcurl",
+          "version": "7.19.7-37.el6_4",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "xz-libs",
+        "version": "4.999.9-0.3.beta.20091007git.el6",
+        "externalId": {
+          "name": "xz-libs",
+          "version": "4.999.9-0.3.beta.20091007git.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libutempter",
+        "version": "1.1.5-4.1.el6",
+        "externalId": {
+          "name": "libutempter",
+          "version": "1.1.5-4.1.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "policycoreutils",
+        "version": "2.0.83-19.39.el6",
+        "externalId": {
+          "name": "policycoreutils",
+          "version": "2.0.83-19.39.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "mingetty",
+        "version": "1.08-5.el6",
+        "externalId": {
+          "name": "mingetty",
+          "version": "1.08-5.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "file-libs",
+        "version": "5.04-15.el6",
+        "externalId": {
+          "name": "file-libs",
+          "version": "5.04-15.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "compat-db42",
+        "version": "4.2.52-15.el6",
+        "externalId": {
+          "name": "compat-db42",
+          "version": "4.2.52-15.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "dbus-glib",
+        "version": "0.86-6.el6_4",
+        "externalId": {
+          "name": "dbus-glib",
+          "version": "0.86-6.el6_4",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libuuid",
+        "version": "2.17.2-12.14.el6",
+        "externalId": {
+          "name": "libuuid",
+          "version": "2.17.2-12.14.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "ncurses",
+        "version": "5.7-3.20090208.el6",
+        "externalId": {
+          "name": "ncurses",
+          "version": "5.7-3.20090208.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "unzip",
+        "version": "6.0-1.el6",
+        "externalId": {
+          "name": "unzip",
+          "version": "6.0-1.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libcap",
+        "version": "2.16-5.5.el6",
+        "externalId": {
+          "name": "libcap",
+          "version": "2.16-5.5.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libaio",
+        "version": "0.3.107-10.el6",
+        "externalId": {
+          "name": "libaio",
+          "version": "0.3.107-10.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "tzdata",
+        "version": "2013g-1.el6",
+        "externalId": {
+          "name": "tzdata",
+          "version": "2013g-1.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "pam",
+        "version": "1.1.1-17.el6",
+        "externalId": {
+          "name": "pam",
+          "version": "1.1.1-17.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "binutils",
+        "version": "2.20.51.0.2-5.36.el6",
+        "externalId": {
+          "name": "binutils",
+          "version": "2.20.51.0.2-5.36.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "perl-version",
+        "version": "0.77-136.el6",
+        "externalId": {
+          "name": "perl-version",
+          "version": "0.77-136.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libidn",
+        "version": "1.18-2.el6",
+        "externalId": {
+          "name": "libidn",
+          "version": "1.18-2.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "readline",
+        "version": "6.0-4.el6",
+        "externalId": {
+          "name": "readline",
+          "version": "6.0-4.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "pcre",
+        "version": "7.8-6.el6",
+        "externalId": {
+          "name": "pcre",
+          "version": "7.8-6.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "p11-kit-trust",
+        "version": "0.18.5-2.el6",
+        "externalId": {
+          "name": "p11-kit-trust",
+          "version": "0.18.5-2.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libtasn1",
+        "version": "2.3-3.el6_2.1",
+        "externalId": {
+          "name": "libtasn1",
+          "version": "2.3-3.el6_2.1",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libattr",
+        "version": "2.4.44-7.el6",
+        "externalId": {
+          "name": "libattr",
+          "version": "2.4.44-7.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "readline",
+        "version": "6.0-4.el6",
+        "externalId": {
+          "name": "readline",
+          "version": "6.0-4.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "rpm-libs",
+        "version": "4.8.0-37.el6",
+        "externalId": {
+          "name": "rpm-libs",
+          "version": "4.8.0-37.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libattr",
+        "version": "2.4.44-7.el6",
+        "externalId": {
+          "name": "libattr",
+          "version": "2.4.44-7.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libcom_err",
+        "version": "1.41.12-18.el6",
+        "externalId": {
+          "name": "libcom_err",
+          "version": "1.41.12-18.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libcurl",
+        "version": "7.19.7-37.el6_4",
+        "externalId": {
+          "name": "libcurl",
+          "version": "7.19.7-37.el6_4",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "less",
+        "version": "436-10.el6",
+        "externalId": {
+          "name": "less",
+          "version": "436-10.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "ca-certificates",
+        "version": "2013.1.94-65.0.el6",
+        "externalId": {
+          "name": "ca-certificates",
+          "version": "2013.1.94-65.0.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "checkpolicy",
+        "version": "2.0.22-1.el6",
+        "externalId": {
+          "name": "checkpolicy",
+          "version": "2.0.22-1.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "binutils",
+        "version": "2.20.51.0.2-5.36.el6",
+        "externalId": {
+          "name": "binutils",
+          "version": "2.20.51.0.2-5.36.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "net-tools",
+        "version": "1.60-110.el6_2",
+        "externalId": {
+          "name": "net-tools",
+          "version": "1.60-110.el6_2",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "rsyslog",
+        "version": "5.8.10-8.el6",
+        "externalId": {
+          "name": "rsyslog",
+          "version": "5.8.10-8.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "glibc",
+        "version": "2.12-1.132.el6",
+        "externalId": {
+          "name": "glibc",
+          "version": "2.12-1.132.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libsemanage",
+        "version": "2.0.43-4.2.el6",
+        "externalId": {
+          "name": "libsemanage",
+          "version": "2.0.43-4.2.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "cronie-noanacron",
+        "version": "1.4.4-12.el6",
+        "externalId": {
+          "name": "cronie-noanacron",
+          "version": "1.4.4-12.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "sysvinit-tools",
+        "version": "2.87-5.dsf.el6",
+        "externalId": {
+          "name": "sysvinit-tools",
+          "version": "2.87-5.dsf.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "perl-Pod-Escapes",
+        "version": "1.04-136.el6",
+        "externalId": {
+          "name": "perl-Pod-Escapes",
+          "version": "1.04-136.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "policycoreutils",
+        "version": "2.0.83-19.39.el6",
+        "externalId": {
+          "name": "policycoreutils",
+          "version": "2.0.83-19.39.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "net-tools",
+        "version": "1.60-110.el6_2",
+        "externalId": {
+          "name": "net-tools",
+          "version": "1.60-110.el6_2",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "perl-version",
+        "version": "0.77-136.el6",
+        "externalId": {
+          "name": "perl-version",
+          "version": "0.77-136.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "logrotate",
+        "version": "3.7.8-17.el6",
+        "externalId": {
+          "name": "logrotate",
+          "version": "3.7.8-17.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "tar",
+        "version": "1.23-11.el6",
+        "externalId": {
+          "name": "tar",
+          "version": "1.23-11.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libstdc++",
+        "version": "4.4.7-4.el6",
+        "externalId": {
+          "name": "libstdc++",
+          "version": "4.4.7-4.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "nss-softokn",
+        "version": "3.14.3-9.el6",
+        "externalId": {
+          "name": "nss-softokn",
+          "version": "3.14.3-9.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "which",
+        "version": "2.19-6.el6",
+        "externalId": {
+          "name": "which",
+          "version": "2.19-6.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "gamin",
+        "version": "0.1.10-9.el6",
+        "externalId": {
+          "name": "gamin",
+          "version": "0.1.10-9.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "p11-kit",
+        "version": "0.18.5-2.el6",
+        "externalId": {
+          "name": "p11-kit",
+          "version": "0.18.5-2.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "nss-util",
+        "version": "3.15.1-3.el6",
+        "externalId": {
+          "name": "nss-util",
+          "version": "3.15.1-3.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "MAKEDEV",
+        "version": "3.24-6.el6",
+        "externalId": {
+          "name": "MAKEDEV",
+          "version": "3.24-6.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "p11-kit",
+        "version": "0.18.5-2.el6",
+        "externalId": {
+          "name": "p11-kit",
+          "version": "0.18.5-2.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "openssl",
+        "version": "1.0.1e-15.el6",
+        "externalId": {
+          "name": "openssl",
+          "version": "1.0.1e-15.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "less",
+        "version": "436-10.el6",
+        "externalId": {
+          "name": "less",
+          "version": "436-10.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "rsyslog",
+        "version": "5.8.10-8.el6",
+        "externalId": {
+          "name": "rsyslog",
+          "version": "5.8.10-8.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "rpm-libs",
+        "version": "4.8.0-37.el6",
+        "externalId": {
+          "name": "rpm-libs",
+          "version": "4.8.0-37.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "glib2",
+        "version": "2.26.1-3.el6",
+        "externalId": {
+          "name": "glib2",
+          "version": "2.26.1-3.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libcap",
+        "version": "2.16-5.5.el6",
+        "externalId": {
+          "name": "libcap",
+          "version": "2.16-5.5.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "crontabs",
+        "version": "1.10-33.el6",
+        "externalId": {
+          "name": "crontabs",
+          "version": "1.10-33.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "findutils",
+        "version": "4.4.2-6.el6",
+        "externalId": {
+          "name": "findutils",
+          "version": "4.4.2-6.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "diffutils",
+        "version": "2.8.1-28.el6",
+        "externalId": {
+          "name": "diffutils",
+          "version": "2.8.1-28.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "info",
+        "version": "4.13a-8.el6",
+        "externalId": {
+          "name": "info",
+          "version": "4.13a-8.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "procps",
+        "version": "3.2.8-25.el6",
+        "externalId": {
+          "name": "procps",
+          "version": "3.2.8-25.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "nspr",
+        "version": "4.10.0-1.el6",
+        "externalId": {
+          "name": "nspr",
+          "version": "4.10.0-1.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "cracklib",
+        "version": "2.8.16-4.el6",
+        "externalId": {
+          "name": "cracklib",
+          "version": "2.8.16-4.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "info",
+        "version": "4.13a-8.el6",
+        "externalId": {
+          "name": "info",
+          "version": "4.13a-8.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "mingetty",
+        "version": "1.08-5.el6",
+        "externalId": {
+          "name": "mingetty",
+          "version": "1.08-5.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "file-libs",
+        "version": "5.04-15.el6",
+        "externalId": {
+          "name": "file-libs",
+          "version": "5.04-15.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "ncurses-base",
+        "version": "5.7-3.20090208.el6",
+        "externalId": {
+          "name": "ncurses-base",
+          "version": "5.7-3.20090208.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "compat-db42",
+        "version": "4.2.52-15.el6",
+        "externalId": {
+          "name": "compat-db42",
+          "version": "4.2.52-15.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "tar",
+        "version": "1.23-11.el6",
+        "externalId": {
+          "name": "tar",
+          "version": "1.23-11.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "which",
+        "version": "2.19-6.el6",
+        "externalId": {
+          "name": "which",
+          "version": "2.19-6.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "db4-utils",
+        "version": "4.7.25-18.el6_4",
+        "externalId": {
+          "name": "db4-utils",
+          "version": "4.7.25-18.el6_4",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "gamin",
+        "version": "0.1.10-9.el6",
+        "externalId": {
+          "name": "gamin",
+          "version": "0.1.10-9.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "compat-db42",
+        "version": "4.2.52-15.el6",
+        "externalId": {
+          "name": "compat-db42",
+          "version": "4.2.52-15.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "rpm",
+        "version": "4.8.0-37.el6",
+        "externalId": {
+          "name": "rpm",
+          "version": "4.8.0-37.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "db4-utils",
+        "version": "4.7.25-18.el6_4",
+        "externalId": {
+          "name": "db4-utils",
+          "version": "4.7.25-18.el6_4",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "glib2",
+        "version": "2.26.1-3.el6",
+        "externalId": {
+          "name": "glib2",
+          "version": "2.26.1-3.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "ncurses",
+        "version": "5.7-3.20090208.el6",
+        "externalId": {
+          "name": "ncurses",
+          "version": "5.7-3.20090208.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "iptables",
+        "version": "1.4.7-11.el6",
+        "externalId": {
+          "name": "iptables",
+          "version": "1.4.7-11.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libcap",
+        "version": "2.16-5.5.el6",
+        "externalId": {
+          "name": "libcap",
+          "version": "2.16-5.5.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "pcre",
+        "version": "7.8-6.el6",
+        "externalId": {
+          "name": "pcre",
+          "version": "7.8-6.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "nss-util",
+        "version": "3.15.1-3.el6",
+        "externalId": {
+          "name": "nss-util",
+          "version": "3.15.1-3.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "cronie-noanacron",
+        "version": "1.4.4-12.el6",
+        "externalId": {
+          "name": "cronie-noanacron",
+          "version": "1.4.4-12.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "checkpolicy",
+        "version": "2.0.22-1.el6",
+        "externalId": {
+          "name": "checkpolicy",
+          "version": "2.0.22-1.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libuuid",
+        "version": "2.17.2-12.14.el6",
+        "externalId": {
+          "name": "libuuid",
+          "version": "2.17.2-12.14.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "unzip",
+        "version": "6.0-1.el6",
+        "externalId": {
+          "name": "unzip",
+          "version": "6.0-1.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "rpm",
+        "version": "4.8.0-37.el6",
+        "externalId": {
+          "name": "rpm",
+          "version": "4.8.0-37.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "audit-libs",
+        "version": "2.2-2.el6",
+        "externalId": {
+          "name": "audit-libs",
+          "version": "2.2-2.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "binutils",
+        "version": "2.20.51.0.2-5.36.el6",
+        "externalId": {
+          "name": "binutils",
+          "version": "2.20.51.0.2-5.36.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "dbus-libs",
+        "version": "1.2.24-7.el6_3",
+        "externalId": {
+          "name": "dbus-libs",
+          "version": "1.2.24-7.el6_3",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "keyutils-libs",
+        "version": "1.4-4.el6",
+        "externalId": {
+          "name": "keyutils-libs",
+          "version": "1.4-4.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "findutils",
+        "version": "4.4.2-6.el6",
+        "externalId": {
+          "name": "findutils",
+          "version": "4.4.2-6.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "sysvinit-tools",
+        "version": "2.87-5.dsf.el6",
+        "externalId": {
+          "name": "sysvinit-tools",
+          "version": "2.87-5.dsf.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "net-tools",
+        "version": "1.60-110.el6_2",
+        "externalId": {
+          "name": "net-tools",
+          "version": "1.60-110.el6_2",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "perl-Pod-Escapes",
+        "version": "1.04-136.el6",
+        "externalId": {
+          "name": "perl-Pod-Escapes",
+          "version": "1.04-136.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "cronie",
+        "version": "1.4.4-12.el6",
+        "externalId": {
+          "name": "cronie",
+          "version": "1.4.4-12.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "diffutils",
+        "version": "2.8.1-28.el6",
+        "externalId": {
+          "name": "diffutils",
+          "version": "2.8.1-28.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "dbus-glib",
+        "version": "0.86-6.el6_4",
+        "externalId": {
+          "name": "dbus-glib",
+          "version": "0.86-6.el6_4",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "cyrus-sasl-lib",
+        "version": "2.1.23-13.el6_3.1",
+        "externalId": {
+          "name": "cyrus-sasl-lib",
+          "version": "2.1.23-13.el6_3.1",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "gdbm",
+        "version": "1.8.0-36.el6",
+        "externalId": {
+          "name": "gdbm",
+          "version": "1.8.0-36.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "shadow-utils",
+        "version": "4.1.4.2-13.el6",
+        "externalId": {
+          "name": "shadow-utils",
+          "version": "4.1.4.2-13.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "db4-utils",
+        "version": "4.7.25-18.el6_4",
+        "externalId": {
+          "name": "db4-utils",
+          "version": "4.7.25-18.el6_4",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libcom_err",
+        "version": "1.41.12-18.el6",
+        "externalId": {
+          "name": "libcom_err",
+          "version": "1.41.12-18.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "udev",
+        "version": "147-2.51.el6",
+        "externalId": {
+          "name": "udev",
+          "version": "147-2.51.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "grep",
+        "version": "2.6.3-4.el6",
+        "externalId": {
+          "name": "grep",
+          "version": "2.6.3-4.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "ncurses-libs",
+        "version": "5.7-3.20090208.el6",
+        "externalId": {
+          "name": "ncurses-libs",
+          "version": "5.7-3.20090208.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libssh2",
+        "version": "1.4.2-1.el6",
+        "externalId": {
+          "name": "libssh2",
+          "version": "1.4.2-1.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "glib2",
+        "version": "2.26.1-3.el6",
+        "externalId": {
+          "name": "glib2",
+          "version": "2.26.1-3.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "iputils",
+        "version": "20071127-17.el6_4.2",
+        "externalId": {
+          "name": "iputils",
+          "version": "20071127-17.el6_4.2",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "dbus-libs",
+        "version": "1.2.24-7.el6_3",
+        "externalId": {
+          "name": "dbus-libs",
+          "version": "1.2.24-7.el6_3",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "expat",
+        "version": "2.0.1-11.el6_2",
+        "externalId": {
+          "name": "expat",
+          "version": "2.0.1-11.el6_2",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "sendmail",
+        "version": "8.14.4-8.el6",
+        "externalId": {
+          "name": "sendmail",
+          "version": "8.14.4-8.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "hesiod",
+        "version": "3.1.0-19.el6",
+        "externalId": {
+          "name": "hesiod",
+          "version": "3.1.0-19.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "cronie",
+        "version": "1.4.4-12.el6",
+        "externalId": {
+          "name": "cronie",
+          "version": "1.4.4-12.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "gawk",
+        "version": "3.1.7-10.el6",
+        "externalId": {
+          "name": "gawk",
+          "version": "3.1.7-10.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "audit-libs",
+        "version": "2.2-2.el6",
+        "externalId": {
+          "name": "audit-libs",
+          "version": "2.2-2.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "procps",
+        "version": "3.2.8-25.el6",
+        "externalId": {
+          "name": "procps",
+          "version": "3.2.8-25.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "cracklib-dicts",
+        "version": "2.8.16-4.el6",
+        "externalId": {
+          "name": "cracklib-dicts",
+          "version": "2.8.16-4.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "pkgconfig",
+        "version": "0.23-9.1.el6",
+        "externalId": {
+          "name": "pkgconfig",
+          "version": "0.23-9.1.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "util-linux-ng",
+        "version": "2.17.2-12.14.el6",
+        "externalId": {
+          "name": "util-linux-ng",
+          "version": "2.17.2-12.14.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "nss-softokn",
+        "version": "3.14.3-9.el6",
+        "externalId": {
+          "name": "nss-softokn",
+          "version": "3.14.3-9.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "chkconfig",
+        "version": "1.3.49.3-2.el6_4.1",
+        "externalId": {
+          "name": "chkconfig",
+          "version": "1.3.49.3-2.el6_4.1",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "perl-libs",
+        "version": "5.10.1-136.el6",
+        "externalId": {
+          "name": "perl-libs",
+          "version": "5.10.1-136.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "groff",
+        "version": "1.18.1.4-21.el6",
+        "externalId": {
+          "name": "groff",
+          "version": "1.18.1.4-21.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "cronie",
+        "version": "1.4.4-12.el6",
+        "externalId": {
+          "name": "cronie",
+          "version": "1.4.4-12.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "gzip",
+        "version": "1.3.12-19.el6_4",
+        "externalId": {
+          "name": "gzip",
+          "version": "1.3.12-19.el6_4",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "p11-kit",
+        "version": "0.18.5-2.el6",
+        "externalId": {
+          "name": "p11-kit",
+          "version": "0.18.5-2.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libssh2",
+        "version": "1.4.2-1.el6",
+        "externalId": {
+          "name": "libssh2",
+          "version": "1.4.2-1.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "sqlite",
+        "version": "3.6.20-1.el6",
+        "externalId": {
+          "name": "sqlite",
+          "version": "3.6.20-1.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "upstart",
+        "version": "0.6.5-12.el6_4.1",
+        "externalId": {
+          "name": "upstart",
+          "version": "0.6.5-12.el6_4.1",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "ncurses-libs",
+        "version": "5.7-3.20090208.el6",
+        "externalId": {
+          "name": "ncurses-libs",
+          "version": "5.7-3.20090208.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "grep",
+        "version": "2.6.3-4.el6",
+        "externalId": {
+          "name": "grep",
+          "version": "2.6.3-4.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "upstart",
+        "version": "0.6.5-12.el6_4.1",
+        "externalId": {
+          "name": "upstart",
+          "version": "0.6.5-12.el6_4.1",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "procps",
+        "version": "3.2.8-25.el6",
+        "externalId": {
+          "name": "procps",
+          "version": "3.2.8-25.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libcom_err",
+        "version": "1.41.12-18.el6",
+        "externalId": {
+          "name": "libcom_err",
+          "version": "1.41.12-18.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "audit-libs",
+        "version": "2.2-2.el6",
+        "externalId": {
+          "name": "audit-libs",
+          "version": "2.2-2.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "ethtool",
+        "version": "3.5-1.el6",
+        "externalId": {
+          "name": "ethtool",
+          "version": "3.5-1.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "pam",
+        "version": "1.1.1-17.el6",
+        "externalId": {
+          "name": "pam",
+          "version": "1.1.1-17.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libacl",
+        "version": "2.2.49-6.el6",
+        "externalId": {
+          "name": "libacl",
+          "version": "2.2.49-6.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "hesiod",
+        "version": "3.1.0-19.el6",
+        "externalId": {
+          "name": "hesiod",
+          "version": "3.1.0-19.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "expat",
+        "version": "2.0.1-11.el6_2",
+        "externalId": {
+          "name": "expat",
+          "version": "2.0.1-11.el6_2",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "iputils",
+        "version": "20071127-17.el6_4.2",
+        "externalId": {
+          "name": "iputils",
+          "version": "20071127-17.el6_4.2",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "diffutils",
+        "version": "2.8.1-28.el6",
+        "externalId": {
+          "name": "diffutils",
+          "version": "2.8.1-28.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "gzip",
+        "version": "1.3.12-19.el6_4",
+        "externalId": {
+          "name": "gzip",
+          "version": "1.3.12-19.el6_4",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "findutils",
+        "version": "4.4.2-6.el6",
+        "externalId": {
+          "name": "findutils",
+          "version": "4.4.2-6.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "util-linux-ng",
+        "version": "2.17.2-12.14.el6",
+        "externalId": {
+          "name": "util-linux-ng",
+          "version": "2.17.2-12.14.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libidn",
+        "version": "1.18-2.el6",
+        "externalId": {
+          "name": "libidn",
+          "version": "1.18-2.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "bzip2-libs",
+        "version": "1.0.5-7.el6_0",
+        "externalId": {
+          "name": "bzip2-libs",
+          "version": "1.0.5-7.el6_0",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "dbus-libs",
+        "version": "1.2.24-7.el6_3",
+        "externalId": {
+          "name": "dbus-libs",
+          "version": "1.2.24-7.el6_3",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "info",
+        "version": "4.13a-8.el6",
+        "externalId": {
+          "name": "info",
+          "version": "4.13a-8.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "initscripts",
+        "version": "9.03.40-2.el6",
+        "externalId": {
+          "name": "initscripts",
+          "version": "9.03.40-2.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "sendmail",
+        "version": "8.14.4-8.el6",
+        "externalId": {
+          "name": "sendmail",
+          "version": "8.14.4-8.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "p11-kit-trust",
+        "version": "0.18.5-2.el6",
+        "externalId": {
+          "name": "p11-kit-trust",
+          "version": "0.18.5-2.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "gawk",
+        "version": "3.1.7-10.el6",
+        "externalId": {
+          "name": "gawk",
+          "version": "3.1.7-10.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "shadow-utils",
+        "version": "4.1.4.2-13.el6",
+        "externalId": {
+          "name": "shadow-utils",
+          "version": "4.1.4.2-13.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libtasn1",
+        "version": "2.3-3.el6_2.1",
+        "externalId": {
+          "name": "libtasn1",
+          "version": "2.3-3.el6_2.1",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libattr",
+        "version": "2.4.44-7.el6",
+        "externalId": {
+          "name": "libattr",
+          "version": "2.4.44-7.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "ustr",
+        "version": "1.0.4-9.1.el6",
+        "externalId": {
+          "name": "ustr",
+          "version": "1.0.4-9.1.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "gamin",
+        "version": "0.1.10-9.el6",
+        "externalId": {
+          "name": "gamin",
+          "version": "0.1.10-9.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "perl-libs",
+        "version": "5.10.1-136.el6",
+        "externalId": {
+          "name": "perl-libs",
+          "version": "5.10.1-136.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "perl-Pod-Simple",
+        "version": "3.13-136.el6",
+        "externalId": {
+          "name": "perl-Pod-Simple",
+          "version": "3.13-136.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libgcc",
+        "version": "4.4.7-4.el6",
+        "externalId": {
+          "name": "libgcc",
+          "version": "4.4.7-4.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "upstart",
+        "version": "0.6.5-12.el6_4.1",
+        "externalId": {
+          "name": "upstart",
+          "version": "0.6.5-12.el6_4.1",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "cracklib-dicts",
+        "version": "2.8.16-4.el6",
+        "externalId": {
+          "name": "cracklib-dicts",
+          "version": "2.8.16-4.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "tar",
+        "version": "1.23-11.el6",
+        "externalId": {
+          "name": "tar",
+          "version": "1.23-11.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "hesiod",
+        "version": "3.1.0-19.el6",
+        "externalId": {
+          "name": "hesiod",
+          "version": "3.1.0-19.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "filesystem",
+        "version": "2.4.30-3.el6",
+        "externalId": {
+          "name": "filesystem",
+          "version": "2.4.30-3.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "rpm",
+        "version": "4.8.0-37.el6",
+        "externalId": {
+          "name": "rpm",
+          "version": "4.8.0-37.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "p11-kit-trust",
+        "version": "0.18.5-2.el6",
+        "externalId": {
+          "name": "p11-kit-trust",
+          "version": "0.18.5-2.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libnih",
+        "version": "1.0.1-7.el6",
+        "externalId": {
+          "name": "libnih",
+          "version": "1.0.1-7.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "hwdata",
+        "version": "0.233-9.1.el6",
+        "externalId": {
+          "name": "hwdata",
+          "version": "0.233-9.1.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "ethtool",
+        "version": "3.5-1.el6",
+        "externalId": {
+          "name": "ethtool",
+          "version": "3.5-1.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "gmp",
+        "version": "4.3.1-7.el6_2.2",
+        "externalId": {
+          "name": "gmp",
+          "version": "4.3.1-7.el6_2.2",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "tzdata",
+        "version": "2013g-1.el6",
+        "externalId": {
+          "name": "tzdata",
+          "version": "2013g-1.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "bzip2-libs",
+        "version": "1.0.5-7.el6_0",
+        "externalId": {
+          "name": "bzip2-libs",
+          "version": "1.0.5-7.el6_0",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "perl",
+        "version": "5.10.1-136.el6",
+        "externalId": {
+          "name": "perl",
+          "version": "5.10.1-136.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "krb5-libs",
+        "version": "1.10.3-10.el6_4.6",
+        "externalId": {
+          "name": "krb5-libs",
+          "version": "1.10.3-10.el6_4.6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "sqlite",
+        "version": "3.6.20-1.el6",
+        "externalId": {
+          "name": "sqlite",
+          "version": "3.6.20-1.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "shadow-utils",
+        "version": "4.1.4.2-13.el6",
+        "externalId": {
+          "name": "shadow-utils",
+          "version": "4.1.4.2-13.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "popt",
+        "version": "1.13-7.el6",
+        "externalId": {
+          "name": "popt",
+          "version": "1.13-7.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "file-libs",
+        "version": "5.04-15.el6",
+        "externalId": {
+          "name": "file-libs",
+          "version": "5.04-15.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "dbus-glib",
+        "version": "0.86-6.el6_4",
+        "externalId": {
+          "name": "dbus-glib",
+          "version": "0.86-6.el6_4",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "cpio",
+        "version": "2.10-11.el6_3",
+        "externalId": {
+          "name": "cpio",
+          "version": "2.10-11.el6_3",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "logrotate",
+        "version": "3.7.8-17.el6",
+        "externalId": {
+          "name": "logrotate",
+          "version": "3.7.8-17.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "sed",
+        "version": "4.2.1-10.el6",
+        "externalId": {
+          "name": "sed",
+          "version": "4.2.1-10.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "logrotate",
+        "version": "3.7.8-17.el6",
+        "externalId": {
+          "name": "logrotate",
+          "version": "3.7.8-17.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "ethtool",
+        "version": "3.5-1.el6",
+        "externalId": {
+          "name": "ethtool",
+          "version": "3.5-1.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "sendmail",
+        "version": "8.14.4-8.el6",
+        "externalId": {
+          "name": "sendmail",
+          "version": "8.14.4-8.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "less",
+        "version": "436-10.el6",
+        "externalId": {
+          "name": "less",
+          "version": "436-10.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "tzdata",
+        "version": "2013g-1.el6",
+        "externalId": {
+          "name": "tzdata",
+          "version": "2013g-1.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "cpio",
+        "version": "2.10-11.el6_3",
+        "externalId": {
+          "name": "cpio",
+          "version": "2.10-11.el6_3",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "perl-Module-Pluggable",
+        "version": "3.90-136.el6",
+        "externalId": {
+          "name": "perl-Module-Pluggable",
+          "version": "3.90-136.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "perl-Pod-Escapes",
+        "version": "1.04-136.el6",
+        "externalId": {
+          "name": "perl-Pod-Escapes",
+          "version": "1.04-136.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "perl-Module-Pluggable",
+        "version": "3.90-136.el6",
+        "externalId": {
+          "name": "perl-Module-Pluggable",
+          "version": "3.90-136.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "rpm-libs",
+        "version": "4.8.0-37.el6",
+        "externalId": {
+          "name": "rpm-libs",
+          "version": "4.8.0-37.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "unzip",
+        "version": "6.0-1.el6",
+        "externalId": {
+          "name": "unzip",
+          "version": "6.0-1.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libacl",
+        "version": "2.2.49-6.el6",
+        "externalId": {
+          "name": "libacl",
+          "version": "2.2.49-6.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "pam",
+        "version": "1.1.1-17.el6",
+        "externalId": {
+          "name": "pam",
+          "version": "1.1.1-17.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "perl-version",
+        "version": "0.77-136.el6",
+        "externalId": {
+          "name": "perl-version",
+          "version": "0.77-136.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "nspr",
+        "version": "4.10.0-1.el6",
+        "externalId": {
+          "name": "nspr",
+          "version": "4.10.0-1.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "readline",
+        "version": "6.0-4.el6",
+        "externalId": {
+          "name": "readline",
+          "version": "6.0-4.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "nss-softokn",
+        "version": "3.14.3-9.el6",
+        "externalId": {
+          "name": "nss-softokn",
+          "version": "3.14.3-9.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "coreutils",
+        "version": "8.4-31.el6",
+        "externalId": {
+          "name": "coreutils",
+          "version": "8.4-31.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "grep",
+        "version": "2.6.3-4.el6",
+        "externalId": {
+          "name": "grep",
+          "version": "2.6.3-4.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "udev",
+        "version": "147-2.51.el6",
+        "externalId": {
+          "name": "udev",
+          "version": "147-2.51.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "perl",
+        "version": "5.10.1-136.el6",
+        "externalId": {
+          "name": "perl",
+          "version": "5.10.1-136.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "bzip2-libs",
+        "version": "1.0.5-7.el6_0",
+        "externalId": {
+          "name": "bzip2-libs",
+          "version": "1.0.5-7.el6_0",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "gzip",
+        "version": "1.3.12-19.el6_4",
+        "externalId": {
+          "name": "gzip",
+          "version": "1.3.12-19.el6_4",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libtasn1",
+        "version": "2.3-3.el6_2.1",
+        "externalId": {
+          "name": "libtasn1",
+          "version": "2.3-3.el6_2.1",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "sed",
+        "version": "4.2.1-10.el6",
+        "externalId": {
+          "name": "sed",
+          "version": "4.2.1-10.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "sqlite",
+        "version": "3.6.20-1.el6",
+        "externalId": {
+          "name": "sqlite",
+          "version": "3.6.20-1.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "glibc-common",
+        "version": "2.12-1.132.el6",
+        "externalId": {
+          "name": "glibc-common",
+          "version": "2.12-1.132.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "cpio",
+        "version": "2.10-11.el6_3",
+        "externalId": {
+          "name": "cpio",
+          "version": "2.10-11.el6_3",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "setup",
+        "version": "2.8.14-20.el6_4.1",
+        "externalId": {
+          "name": "setup",
+          "version": "2.8.14-20.el6_4.1",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libselinux-utils",
+        "version": "2.0.94-5.3.el6_4.1",
+        "externalId": {
+          "name": "libselinux-utils",
+          "version": "2.0.94-5.3.el6_4.1",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "nss",
+        "version": "3.15.1-15.el6",
+        "externalId": {
+          "name": "nss",
+          "version": "3.15.1-15.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "popt",
+        "version": "1.13-7.el6",
+        "externalId": {
+          "name": "popt",
+          "version": "1.13-7.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libaio-devel",
+        "version": "0.3.107-10.el6",
+        "externalId": {
+          "name": "libaio-devel",
+          "version": "0.3.107-10.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libacl",
+        "version": "2.2.49-6.el6",
+        "externalId": {
+          "name": "libacl",
+          "version": "2.2.49-6.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "perl-Module-Pluggable",
+        "version": "3.90-136.el6",
+        "externalId": {
+          "name": "perl-Module-Pluggable",
+          "version": "3.90-136.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libsemanage",
+        "version": "2.0.43-4.2.el6",
+        "externalId": {
+          "name": "libsemanage",
+          "version": "2.0.43-4.2.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "iproute",
+        "version": "2.6.32-31.el6",
+        "externalId": {
+          "name": "iproute",
+          "version": "2.6.32-31.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "curl",
+        "version": "7.19.7-37.el6_4",
+        "externalId": {
+          "name": "curl",
+          "version": "7.19.7-37.el6_4",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "bash",
+        "version": "4.1.2-15.el6_4",
+        "externalId": {
+          "name": "bash",
+          "version": "4.1.2-15.el6_4",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libnih",
+        "version": "1.0.1-7.el6",
+        "externalId": {
+          "name": "libnih",
+          "version": "1.0.1-7.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "perl-Pod-Simple",
+        "version": "3.13-136.el6",
+        "externalId": {
+          "name": "perl-Pod-Simple",
+          "version": "3.13-136.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "bc",
+        "version": "1.06.95-1.el6",
+        "externalId": {
+          "name": "bc",
+          "version": "1.06.95-1.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libidn",
+        "version": "1.18-2.el6",
+        "externalId": {
+          "name": "libidn",
+          "version": "1.18-2.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "compat-libstdc++-33",
+        "version": "3.2.3-69.el6",
+        "externalId": {
+          "name": "compat-libstdc++-33",
+          "version": "3.2.3-69.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "make",
+        "version": "3.81-20.el6",
+        "externalId": {
+          "name": "make",
+          "version": "3.81-20.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "redhat-release-server",
+        "version": "6Server-6.5.0.1.el6",
+        "externalId": {
+          "name": "redhat-release-server",
+          "version": "6Server-6.5.0.1.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "nss-softokn-freebl",
+        "version": "3.14.3-9.el6",
+        "externalId": {
+          "name": "nss-softokn-freebl",
+          "version": "3.14.3-9.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "ustr",
+        "version": "1.0.4-9.1.el6",
+        "externalId": {
+          "name": "ustr",
+          "version": "1.0.4-9.1.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "coreutils-libs",
+        "version": "8.4-31.el6",
+        "externalId": {
+          "name": "coreutils-libs",
+          "version": "8.4-31.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "openldap",
+        "version": "2.4.23-32.el6_4.1",
+        "externalId": {
+          "name": "openldap",
+          "version": "2.4.23-32.el6_4.1",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "make",
+        "version": "3.81-20.el6",
+        "externalId": {
+          "name": "make",
+          "version": "3.81-20.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "perl",
+        "version": "5.10.1-136.el6",
+        "externalId": {
+          "name": "perl",
+          "version": "5.10.1-136.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "coreutils",
+        "version": "8.4-31.el6",
+        "externalId": {
+          "name": "coreutils",
+          "version": "8.4-31.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "nss-tools",
+        "version": "3.15.1-15.el6",
+        "externalId": {
+          "name": "nss-tools",
+          "version": "3.15.1-15.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "tcp_wrappers-libs",
+        "version": "7.6-57.el6",
+        "externalId": {
+          "name": "tcp_wrappers-libs",
+          "version": "7.6-57.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "xz-libs",
+        "version": "4.999.9-0.3.beta.20091007git.el6",
+        "externalId": {
+          "name": "xz-libs",
+          "version": "4.999.9-0.3.beta.20091007git.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "lua",
+        "version": "5.1.4-4.1.el6",
+        "externalId": {
+          "name": "lua",
+          "version": "5.1.4-4.1.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libaio",
+        "version": "0.3.107-10.el6",
+        "externalId": {
+          "name": "libaio",
+          "version": "0.3.107-10.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "shared-mime-info",
+        "version": "0.70-4.el6",
+        "externalId": {
+          "name": "shared-mime-info",
+          "version": "0.70-4.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "ncurses-libs",
+        "version": "5.7-3.20090208.el6",
+        "externalId": {
+          "name": "ncurses-libs",
+          "version": "5.7-3.20090208.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libselinux-utils",
+        "version": "2.0.94-5.3.el6_4.1",
+        "externalId": {
+          "name": "libselinux-utils",
+          "version": "2.0.94-5.3.el6_4.1",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "compat-libstdc++-33",
+        "version": "3.2.3-69.el6",
+        "externalId": {
+          "name": "compat-libstdc++-33",
+          "version": "3.2.3-69.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "filesystem",
+        "version": "2.4.30-3.el6",
+        "externalId": {
+          "name": "filesystem",
+          "version": "2.4.30-3.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "module-init-tools",
+        "version": "3.9-21.el6_4",
+        "externalId": {
+          "name": "module-init-tools",
+          "version": "3.9-21.el6_4",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libssh2",
+        "version": "1.4.2-1.el6",
+        "externalId": {
+          "name": "libssh2",
+          "version": "1.4.2-1.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "curl",
+        "version": "7.19.7-37.el6_4",
+        "externalId": {
+          "name": "curl",
+          "version": "7.19.7-37.el6_4",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "filesystem",
+        "version": "2.4.30-3.el6",
+        "externalId": {
+          "name": "filesystem",
+          "version": "2.4.30-3.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "psmisc",
+        "version": "22.6-15.el6_0.1",
+        "externalId": {
+          "name": "psmisc",
+          "version": "22.6-15.el6_0.1",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "hwdata",
+        "version": "0.233-9.1.el6",
+        "externalId": {
+          "name": "hwdata",
+          "version": "0.233-9.1.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "db4",
+        "version": "4.7.25-18.el6_4",
+        "externalId": {
+          "name": "db4",
+          "version": "4.7.25-18.el6_4",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "cracklib-dicts",
+        "version": "2.8.16-4.el6",
+        "externalId": {
+          "name": "cracklib-dicts",
+          "version": "2.8.16-4.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "gmp",
+        "version": "4.3.1-7.el6_2.2",
+        "externalId": {
+          "name": "gmp",
+          "version": "4.3.1-7.el6_2.2",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libxml2",
+        "version": "2.7.6-14.el6",
+        "externalId": {
+          "name": "libxml2",
+          "version": "2.7.6-14.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "sed",
+        "version": "4.2.1-10.el6",
+        "externalId": {
+          "name": "sed",
+          "version": "4.2.1-10.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "krb5-libs",
+        "version": "1.10.3-10.el6_4.6",
+        "externalId": {
+          "name": "krb5-libs",
+          "version": "1.10.3-10.el6_4.6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "coreutils",
+        "version": "8.4-31.el6",
+        "externalId": {
+          "name": "coreutils",
+          "version": "8.4-31.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "basesystem",
+        "version": "10.0-4.el6",
+        "externalId": {
+          "name": "basesystem",
+          "version": "10.0-4.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "nss-tools",
+        "version": "3.15.1-15.el6",
+        "externalId": {
+          "name": "nss-tools",
+          "version": "3.15.1-15.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libgcc",
+        "version": "4.4.7-4.el6",
+        "externalId": {
+          "name": "libgcc",
+          "version": "4.4.7-4.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "redhat-release-server",
+        "version": "6Server-6.5.0.1.el6",
+        "externalId": {
+          "name": "redhat-release-server",
+          "version": "6Server-6.5.0.1.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "bc",
+        "version": "1.06.95-1.el6",
+        "externalId": {
+          "name": "bc",
+          "version": "1.06.95-1.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "compat-libstdc++-33",
+        "version": "3.2.3-69.el6",
+        "externalId": {
+          "name": "compat-libstdc++-33",
+          "version": "3.2.3-69.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "setup",
+        "version": "2.8.14-20.el6_4.1",
+        "externalId": {
+          "name": "setup",
+          "version": "2.8.14-20.el6_4.1",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "glibc-common",
+        "version": "2.12-1.132.el6",
+        "externalId": {
+          "name": "glibc-common",
+          "version": "2.12-1.132.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "bash",
+        "version": "4.1.2-15.el6_4",
+        "externalId": {
+          "name": "bash",
+          "version": "4.1.2-15.el6_4",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "psmisc",
+        "version": "22.6-15.el6_0.1",
+        "externalId": {
+          "name": "psmisc",
+          "version": "22.6-15.el6_0.1",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "zlib",
+        "version": "1.2.3-29.el6",
+        "externalId": {
+          "name": "zlib",
+          "version": "1.2.3-29.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "pkgconfig",
+        "version": "0.23-9.1.el6",
+        "externalId": {
+          "name": "pkgconfig",
+          "version": "0.23-9.1.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "expat",
+        "version": "2.0.1-11.el6_2",
+        "externalId": {
+          "name": "expat",
+          "version": "2.0.1-11.el6_2",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "chkconfig",
+        "version": "1.3.49.3-2.el6_4.1",
+        "externalId": {
+          "name": "chkconfig",
+          "version": "1.3.49.3-2.el6_4.1",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "initscripts",
+        "version": "9.03.40-2.el6",
+        "externalId": {
+          "name": "initscripts",
+          "version": "9.03.40-2.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "procmail",
+        "version": "3.22-25.1.el6",
+        "externalId": {
+          "name": "procmail",
+          "version": "3.22-25.1.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "groff",
+        "version": "1.18.1.4-21.el6",
+        "externalId": {
+          "name": "groff",
+          "version": "1.18.1.4-21.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libxml2",
+        "version": "2.7.6-14.el6",
+        "externalId": {
+          "name": "libxml2",
+          "version": "2.7.6-14.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "initscripts",
+        "version": "9.03.40-2.el6",
+        "externalId": {
+          "name": "initscripts",
+          "version": "9.03.40-2.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libsepol",
+        "version": "2.0.41-4.el6",
+        "externalId": {
+          "name": "libsepol",
+          "version": "2.0.41-4.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "udev",
+        "version": "147-2.51.el6",
+        "externalId": {
+          "name": "udev",
+          "version": "147-2.51.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libselinux",
+        "version": "2.0.94-5.3.el6_4.1",
+        "externalId": {
+          "name": "libselinux",
+          "version": "2.0.94-5.3.el6_4.1",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libaio-devel",
+        "version": "0.3.107-10.el6",
+        "externalId": {
+          "name": "libaio-devel",
+          "version": "0.3.107-10.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libaio-devel",
+        "version": "0.3.107-10.el6",
+        "externalId": {
+          "name": "libaio-devel",
+          "version": "0.3.107-10.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "perl-libs",
+        "version": "5.10.1-136.el6",
+        "externalId": {
+          "name": "perl-libs",
+          "version": "5.10.1-136.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "lua",
+        "version": "5.1.4-4.1.el6",
+        "externalId": {
+          "name": "lua",
+          "version": "5.1.4-4.1.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "iproute",
+        "version": "2.6.32-31.el6",
+        "externalId": {
+          "name": "iproute",
+          "version": "2.6.32-31.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libnih",
+        "version": "1.0.1-7.el6",
+        "externalId": {
+          "name": "libnih",
+          "version": "1.0.1-7.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "hwdata",
+        "version": "0.233-9.1.el6",
+        "externalId": {
+          "name": "hwdata",
+          "version": "0.233-9.1.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "pkgconfig",
+        "version": "0.23-9.1.el6",
+        "externalId": {
+          "name": "pkgconfig",
+          "version": "0.23-9.1.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "perl-Pod-Simple",
+        "version": "3.13-136.el6",
+        "externalId": {
+          "name": "perl-Pod-Simple",
+          "version": "3.13-136.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libusb",
+        "version": "0.1.12-23.el6",
+        "externalId": {
+          "name": "libusb",
+          "version": "0.1.12-23.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "gawk",
+        "version": "3.1.7-10.el6",
+        "externalId": {
+          "name": "gawk",
+          "version": "3.1.7-10.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "gmp",
+        "version": "4.3.1-7.el6_2.2",
+        "externalId": {
+          "name": "gmp",
+          "version": "4.3.1-7.el6_2.2",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "util-linux-ng",
+        "version": "2.17.2-12.14.el6",
+        "externalId": {
+          "name": "util-linux-ng",
+          "version": "2.17.2-12.14.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "iputils",
+        "version": "20071127-17.el6_4.2",
+        "externalId": {
+          "name": "iputils",
+          "version": "20071127-17.el6_4.2",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "krb5-libs",
+        "version": "1.10.3-10.el6_4.6",
+        "externalId": {
+          "name": "krb5-libs",
+          "version": "1.10.3-10.el6_4.6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "chkconfig",
+        "version": "1.3.49.3-2.el6_4.1",
+        "externalId": {
+          "name": "chkconfig",
+          "version": "1.3.49.3-2.el6_4.1",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "openldap",
+        "version": "2.4.23-32.el6_4.1",
+        "externalId": {
+          "name": "openldap",
+          "version": "2.4.23-32.el6_4.1",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libgcc",
+        "version": "4.4.7-4.el6",
+        "externalId": {
+          "name": "libgcc",
+          "version": "4.4.7-4.el6",
+          "forge": {
+            "name": "centos",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libxml2",
+        "version": "2.7.6-14.el6",
+        "externalId": {
+          "name": "libxml2",
+          "version": "2.7.6-14.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "popt",
+        "version": "1.13-7.el6",
+        "externalId": {
+          "name": "popt",
+          "version": "1.13-7.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "libsepol",
+        "version": "2.0.41-4.el6",
+        "externalId": {
+          "name": "libsepol",
+          "version": "2.0.41-4.el6",
+          "forge": {
+            "name": "redhat",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "ustr",
+        "version": "1.0.4-9.1.el6",
+        "externalId": {
+          "name": "ustr",
+          "version": "1.0.4-9.1.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "coreutils-libs",
+        "version": "8.4-31.el6",
+        "externalId": {
+          "name": "coreutils-libs",
+          "version": "8.4-31.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      },
+      {
+        "name": "groff",
+        "version": "1.18.1.4-21.el6",
+        "externalId": {
+          "name": "groff",
+          "version": "1.18.1.4-21.el6",
+          "forge": {
+            "name": "fedora",
+            "separator": ":"
+          }
+        },
+        "children": []
+      }
+    ]
+  }
+]
