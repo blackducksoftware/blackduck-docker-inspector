@@ -80,7 +80,7 @@ class DpkgExtractor extends Extractor {
                 }
             }
         }
-        logger.debug(String.format("********** DependencyNode tree: %s", rootNode));
+        logger.trace(String.format("DependencyNode tree: %s", rootNode));
         return new ExtractionResults(components, rootNode);
     }
 

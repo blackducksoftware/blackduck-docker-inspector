@@ -68,7 +68,6 @@ class ApkExtractor extends Extractor {
                 final String version = String.format("%s-%s", parts[parts.length - 2], parts[parts.length - 1]);
                 logger.trace(String.format("version: %s", version));
                 String component = "";
-                // parts = parts.take(parts.length - 2); // TODO remove me
                 for (int i = 0; i < parts.length - 2; i++) {
                     final String part = parts[i];
                     if (StringUtils.isNotBlank(component)) {
@@ -85,7 +84,7 @@ class ApkExtractor extends Extractor {
                 }
             }
         }
-        logger.debug(String.format("********** DependencyNode tree: %s", rootNode));
+        logger.trace(String.format("DependencyNode tree: root node: %s", rootNode.name));
         return new ExtractionResults(components, rootNode);
     }
 }

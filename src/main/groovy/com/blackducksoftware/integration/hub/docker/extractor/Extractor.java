@@ -91,7 +91,7 @@ public abstract class Extractor {
         }
         if (dependenciesWriter != null) {
             final DependencyNode rootNode = extractionResults.getDependenciesRootNode();
-            logger.debug(String.format("***** writing dependency node: %s", rootNode.name));
+            logger.trace(String.format("writing dependency node: %s", rootNode.name));
             dependenciesWriter.writeDependencyNode(rootNode);
         }
     }
@@ -101,7 +101,7 @@ public abstract class Extractor {
             final BdioComponent bdioComponent = bdioNodeFactory.createComponent(name, version, getComponentBdioId(name, version), forge, externalId);
             components.add(bdioComponent);
             final DependencyNode dNode = createDependencyNode(forge, name, version, arch);
-            logger.debug(String.format("-------- adding %s as child to dependency node tree; dataId: %s", dNode.name, dNode.externalId.createDataId()));
+            logger.trace(String.format("adding %s as child to dependency node tree; dataId: %s", dNode.name, dNode.externalId.createDataId()));
             dNodeBuilder.addParentNodeWithChildren(rootNode, Arrays.asList(dNode));
         }
     }

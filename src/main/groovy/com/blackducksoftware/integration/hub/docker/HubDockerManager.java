@@ -174,13 +174,12 @@ public class HubDockerManager {
         logger.debug(String.format("bdioFilename: %s; dependenciesFilename: %s", bdioFilename, dependenciesFilename));
         final File bdioOutputFile = new File(outputDirectory, bdioFilename);
         final File dependenciesOutputFile = new File(outputDirectory, dependenciesFilename);
-        logger.debug(String.format("******* dependenciesOutputFile: %s", dependenciesOutputFile));
+        logger.trace(String.format("dependenciesOutputFile: %s", dependenciesOutputFile));
         bdioFiles.add(bdioOutputFile);
         try (FileOutputStream bdioOutputStream = new FileOutputStream(bdioOutputFile); FileOutputStream dependenciesOutputStream = new FileOutputStream(dependenciesOutputFile)) {
             try (BdioWriter bdioWriter = new BdioWriter(new Gson(), bdioOutputStream); DependencyNodeWriter dependenciesWriter = new DependencyNodeWriter(new Gson(), dependenciesOutputStream)) {
                 final Extractor extractor = getExtractorByPackageManager(imageInfo.getPkgMgr().getPackageManager());
                 final ExtractionDetails extractionDetails = new ExtractionDetails(imageInfo.getOperatingSystemEnum(), architecture);
-                logger.debug(String.format("***** dependenciesWriter: %s", dependenciesWriter.toString()));
                 extractor.extract(imageInfo.getPkgMgr(), bdioWriter, dependenciesWriter, extractionDetails, codeLocationName, hubProjectName, hubVersionName);
             }
         }

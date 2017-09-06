@@ -80,7 +80,6 @@ class RpmExtractor extends Extractor {
                 createBdioComponent(dNodeBuilder, rootNode, components, artifact, versionRelease, externalId, extractionDetails.architecture)
             }
         }
-        logger.debug(String.format("********** DependencyNode tree: %s", rootNode));
         return new ExtractionResults(components, rootNode);
     }
 }
