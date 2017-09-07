@@ -26,10 +26,14 @@ package com.blackducksoftware.integration.hub.docker.client;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ProgramPaths {
+
+    @Value("${hub.codelocation.prefix}")
+    private String codeLocationPrefix;
 
     private String hubDockerPgmDirPath;
 
@@ -127,6 +131,9 @@ public class ProgramPaths {
     }
 
     public String getCodeLocationName(final String imageName, final String imageTag, final String pkgMgrFilePath, final String pkgMgrName) {
+        if (!StringUtils.isBlank(codeLocationPrefix)) {
+            return String.format("%s_%s_%s_%s_%s", codeLocationPrefix, slashesToUnderscore(imageName), imageTag, slashesToUnderscore(pkgMgrFilePath), pkgMgrName);
+        }
         return String.format("%s_%s_%s_%s", slashesToUnderscore(imageName), imageTag, slashesToUnderscore(pkgMgrFilePath), pkgMgrName);
     }
 
