@@ -43,6 +43,7 @@ import com.blackducksoftware.integration.hub.docker.client.DockerClientManager;
 import com.blackducksoftware.integration.hub.docker.client.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.client.ProgramVersion;
 import com.blackducksoftware.integration.hub.docker.image.DockerImages;
+import com.blackducksoftware.integration.hub.docker.linux.FileOperations;
 import com.blackducksoftware.integration.hub.docker.tar.manifest.ManifestLayerMapping;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 
@@ -80,6 +81,9 @@ public class Application {
 
     @Value("${dry.run}")
     private boolean dryRun;
+
+    @Value("${output.include.tarfile}")
+    private boolean outputIncludeTarfile;
 
     @Autowired
     private HubClient hubClient;
@@ -121,10 +125,19 @@ public class Application {
             } else {
                 runInSubContainer(dockerTarFile, currentOsEnum, targetOsEnum);
             }
+            provideTarIfRequested(dockerTarFile);
         } catch (final Exception e) {
             logger.error(String.format("Error inspecting image: %s", e.getMessage()));
             final String trace = ExceptionUtils.getStackTrace(e);
             logger.debug(String.format("Stack trace: %s", trace));
+        }
+    }
+
+    private void provideTarIfRequested(final File dockerTarFile) throws IOException {
+        if (outputIncludeTarfile) {
+            final File outputDirectory = new File(programPaths.getHubDockerOutputJsonPath());
+            logger.debug(String.format("Moving tarfile %s to output dir %s", dockerTarFile.getAbsolutePath(), outputDirectory.getAbsolutePath()));
+            FileOperations.moveFile(dockerTarFile, outputDirectory);
         }
     }
 

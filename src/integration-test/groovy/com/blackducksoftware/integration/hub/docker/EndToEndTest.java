@@ -124,7 +124,7 @@ public class EndToEndTest {
         Files.deleteIfExists(actualDependencies.toPath());
         assertFalse(actualDependencies.exists());
 
-        final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--dry.run=true", "--bdio.output.path=test/output", "--dev.mode=true");
+        final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--dry.run=true", "--output.path=test/output", "--dev.mode=true");
         // Arrays.asList returns a fixed size list; need a variable sized list
         final List<String> fullCmd = new ArrayList<>();
         fullCmd.addAll(partialCmd);

@@ -56,9 +56,9 @@ function preProcessOptions() {
 		then
 			hub_password_set_on_cmd_line=true
 		fi
-		if [[ "$cmdlinearg" == --bdio.output.path=* ]]
+		if [[ "$cmdlinearg" == --output.path=* ]]
 		then
-			bdioOutputPath=$(echo "$cmdlinearg" | cut -d '=' -f 2)
+			outputPath=$(echo "$cmdlinearg" | cut -d '=' -f 2)
 		fi
 		if [[ "$cmdlinearg" == --no.prompt=true ]]
 		then
@@ -170,7 +170,7 @@ function determineRunOnImage {
 # Start script
 ##################
 version="@VERSION@"
-bdioOutputPath=""
+outputPath=""
 containername=hub-docker-inspector
 imagename=hub-docker-inspector
 propdir=.
@@ -208,11 +208,11 @@ preProcessOptions "$@"
 propfile="${propdir}/application.properties"
 echo "Properties file: ${propfile}"
 
-if [ -z "${bdioOutputPath}" ]
+if [ -z "${outputPath}" ]
 then
-	echo "Looking in ${propfile} for bdio.output.path"
-	bdioOutputPath=$(get_property "${propfile}" "bdio.output.path")
-	echo "BDIO output path: ${bdioOutputPath}"
+	echo "Looking in ${propfile} for output.path"
+	outputPath=$(get_property "${propfile}" "output.path")
+	echo "BDIO output path: ${outputPath}"
 fi
 
 determineRunOnImage
@@ -240,18 +240,18 @@ else
 	docker exec -e BD_HUB_PASSWORD -e SCAN_CLI_OPTS -e http_proxy -e https_proxy -e HTTP_PROXY -e HTTPS_PROXY -e DOCKERD_OPTS -e DOCKER_INSPECTOR_JAVA_OPTS "${containername}" //opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} "\"$image\""
 fi
 
-if [ ! -z "${bdioOutputPath}" ]
+if [ ! -z "${outputPath}" ]
 then
-	if [ -f "${bdioOutputPath}" ]
+	if [ -f "${outputPath}" ]
 	then
-		err "ERROR: Unable to copy BDIO output file to ${bdioOutputPath} because it is an existing file"
+		err "ERROR: Unable to copy BDIO output file to ${outputPath} because it is an existing file"
 		exit -2
 	fi
-	if [ ! -e "${bdioOutputPath}" ]
+	if [ ! -e "${outputPath}" ]
 	then
-		mkdir -p "${bdioOutputPath}"
+		mkdir -p "${outputPath}"
 	fi
-	docker cp "${containername}:/opt/blackduck/hub-docker-inspector/output/." "${bdioOutputPath}"
+	docker cp "${containername}:/opt/blackduck/hub-docker-inspector/output/." "${outputPath}"
 fi
 
 exit 0

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -31,5 +32,13 @@ public class FileOperations {
         logger.debug(String.format("Copying %s to %s", fileToCopy.getAbsolutePath(), destination.getAbsolutePath()));
         final Path destPath = destination.toPath().resolve(filename);
         Files.copy(fileToCopy.toPath(), destPath);
+    }
+
+    public static void moveFile(final File fileToMove, final File destination) throws IOException {
+        final String filename = fileToMove.getName();
+        logger.debug(String.format("Copying %s to %s", fileToMove.getAbsolutePath(), destination.getAbsolutePath()));
+        final Path destPath = destination.toPath().resolve(filename);
+        Files.copy(fileToMove.toPath(), destPath);
+        Files.move(fileToMove.toPath(), destPath, StandardCopyOption.REPLACE_EXISTING);
     }
 }

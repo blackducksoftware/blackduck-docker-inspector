@@ -61,6 +61,7 @@ public class DockerClientManager {
     private static final String IMAGE_PROPERTY = "docker.image";
     private static final String IMAGE_REPO_PROPERTY = "docker.image.repo";
     private static final String IMAGE_TAG_PROPERTY = "docker.image.tag";
+    private static final String OUTPUT_INCLUDE_TARFILE_PROPERTY = "output.include.tarfile";
     private final Logger logger = LoggerFactory.getLogger(DockerClientManager.class);
 
     @Autowired
@@ -161,6 +162,7 @@ public class DockerClientManager {
         hubDockerProperties.set(IMAGE_PROPERTY, targetImage);
         hubDockerProperties.set(IMAGE_REPO_PROPERTY, targetImageRepo);
         hubDockerProperties.set(IMAGE_TAG_PROPERTY, targetImageTag);
+        hubDockerProperties.set(OUTPUT_INCLUDE_TARFILE_PROPERTY, "false");
         final String pathToPropertiesFileForSubContainer = String.format("%s%s", programPaths.getHubDockerTargetDirPath(), ProgramPaths.APPLICATION_PROPERTIES_FILENAME);
         hubDockerProperties.save(pathToPropertiesFileForSubContainer);
 
@@ -251,7 +253,9 @@ public class DockerClientManager {
         final String[] cmdArr = { cmd, arg };
         execCreateCmd.withCmd(cmdArr);
         final ExecCreateCmdResponse execCreateCmdResponse = execCreateCmd.exec();
+        logger.info("Switching to target image appropriate container");
         dockerClient.execStartCmd(execCreateCmdResponse.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+        logger.info("Returning to primary container");
     }
 
     private void copyFileToContainer(final DockerClient dockerClient, final String containerId, final String srcPath, final String destPath) throws IOException {
