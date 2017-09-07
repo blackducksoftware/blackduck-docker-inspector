@@ -145,6 +145,10 @@ public class ProgramPaths {
         return String.format("%s_%s_%s_%s_dependencies.json", cleanImageName(imageName), cleanPath(pkgMgrFilePath), cleanHubProjectName(hubProjectName), hubVersionName);
     }
 
+    void setCodeLocationPrefix(final String codeLocationPrefix) {
+        this.codeLocationPrefix = codeLocationPrefix;
+    }
+
     public String cleanHubProjectName(final String hubProjectName) {
         return slashesToUnderscore(hubProjectName);
     }
