@@ -103,6 +103,25 @@ public class EndToEndTest {
         test(imageForBdioFilename, pkgMgrPathString, repo, tag, tagForBdioFilename, inspectTarget, requireBdioMatch);
     }
 
+    private File getOutputTarFile(final String inspectTarget, final String imageForBdioFilename, final String tagForBdioFilename) {
+        String outputTarFileName = null;
+
+        if (inspectTarget.endsWith(".tar")) {
+            final String inspectTargetFileName = inspectTarget.substring(18);
+
+            outputTarFileName = String.format("test/output/%s", inspectTargetFileName);
+        } else {
+            String inspectTargetFileName = String.format("%s_%s.tar", imageForBdioFilename, tagForBdioFilename);
+            if (inspectTarget.contains("/")) {
+                final int slashPos = inspectTarget.indexOf('/');
+                inspectTargetFileName = inspectTargetFileName.substring(slashPos + 1);
+            }
+            outputTarFileName = String.format("test/output/%s", inspectTargetFileName);
+        }
+        final File outputTarFile = new File(outputTarFileName);
+        return outputTarFile;
+    }
+
     // TODO arg order is weird
     private void test(final String imageForBdioFilename, final String pkgMgrPathString, final String repo, final String tag, final String tagForBdioFilename, final String inspectTarget, final boolean requireBdioMatch)
             throws IOException, InterruptedException {
@@ -116,6 +135,10 @@ public class EndToEndTest {
             // assertTrue(expectedDependencies.exists());
         }
 
+        final File outputTarFile = getOutputTarFile(inspectTarget, imageForBdioFilename, tagForBdioFilename);
+        Files.deleteIfExists(outputTarFile.toPath());
+        assertFalse(outputTarFile.exists());
+
         final File actualBdio = new File(String.format(String.format("test/output/%s_%s_%s_%s_bdio.jsonld", imageForBdioFilename, pkgMgrPathString, imageForBdioFilename, tagForBdioFilename)));
         Files.deleteIfExists(actualBdio.toPath());
         assertFalse(actualBdio.exists());
@@ -124,7 +147,7 @@ public class EndToEndTest {
         Files.deleteIfExists(actualDependencies.toPath());
         assertFalse(actualDependencies.exists());
 
-        final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--dry.run=true", "--output.path=test/output", "--dev.mode=true");
+        final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--dry.run=true", "--output.path=test/output", "--output.include.tarfile=true", "--dev.mode=true");
         // Arrays.asList returns a fixed size list; need a variable sized list
         final List<String> fullCmd = new ArrayList<>();
         fullCmd.addAll(partialCmd);
@@ -163,5 +186,7 @@ public class EndToEndTest {
             final boolean outputDependenciesMatches = TestUtils.contentEquals(expectedDependencies, actualDependencies, exceptLinesContainingThese);
             assertTrue(outputDependenciesMatches);
         }
+
+        assertTrue(outputTarFile.exists());
     }
 }
