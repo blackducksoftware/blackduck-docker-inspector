@@ -29,6 +29,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.commons.compress.compressors.CompressorException;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -44,6 +45,7 @@ import com.blackducksoftware.integration.hub.docker.client.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.client.ProgramVersion;
 import com.blackducksoftware.integration.hub.docker.image.DockerImages;
 import com.blackducksoftware.integration.hub.docker.linux.FileOperations;
+import com.blackducksoftware.integration.hub.docker.linux.FileSys;
 import com.blackducksoftware.integration.hub.docker.tar.manifest.ManifestLayerMapping;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 
@@ -84,6 +86,9 @@ public class Application {
 
     @Value("${output.include.tarfile}")
     private boolean outputIncludeTarfile;
+
+    @Value("${output.include.containerfilesystem.tarfile}")
+    private boolean outputIncludeContainerFileSystemTarfile;
 
     @Autowired
     private HubClient hubClient;
@@ -126,6 +131,7 @@ public class Application {
                 runInSubContainer(dockerTarFile, currentOsEnum, targetOsEnum);
             }
             provideTarIfRequested(dockerTarFile);
+            provideContainerFileSystemTarIfRequested(targetImageFileSystemRootDir);
         } catch (final Exception e) {
             logger.error(String.format("Error inspecting image: %s", e.getMessage()));
             final String trace = ExceptionUtils.getStackTrace(e);
@@ -135,9 +141,20 @@ public class Application {
 
     private void provideTarIfRequested(final File dockerTarFile) throws IOException {
         if (outputIncludeTarfile) {
-            final File outputDirectory = new File(programPaths.getHubDockerOutputJsonPath());
+            final File outputDirectory = new File(programPaths.getHubDockerOutputPath());
             logger.debug(String.format("Moving tarfile %s to output dir %s", dockerTarFile.getAbsolutePath(), outputDirectory.getAbsolutePath()));
             FileOperations.moveFile(dockerTarFile, outputDirectory);
+        }
+    }
+
+    private void provideContainerFileSystemTarIfRequested(final File targetImageFileSystemRootDir) throws IOException, CompressorException {
+        if (outputIncludeContainerFileSystemTarfile) {
+            final File outputDirectory = new File(programPaths.getHubDockerOutputPath());
+            final String containerFileSystemTarFilename = programPaths.getContainerFileSystemTarFilename(dockerImageRepo, dockerImageTag);
+            final File containerFileSystemTarFile = new File(outputDirectory, containerFileSystemTarFilename);
+            logger.debug(String.format("Creating container filesystem tarfile %s from %s into %s", containerFileSystemTarFile.getAbsolutePath(), targetImageFileSystemRootDir.getAbsolutePath(), outputDirectory.getAbsolutePath()));
+            final FileSys containerFileSys = new FileSys(targetImageFileSystemRootDir);
+            containerFileSys.createTarGz(containerFileSystemTarFile);
         }
     }
 

@@ -147,7 +147,7 @@ public class HubDockerManager {
 
     private List<File> generateBdioFromPackageMgrDirs(final List<ManifestLayerMapping> layerMappings, final String projectName, final String versionName, final String tarFileName, final ImageInfo imageInfo, final String architecture)
             throws FileNotFoundException, IOException, HubIntegrationException, InterruptedException {
-        final File outputDirectory = new File(programPaths.getHubDockerOutputJsonPath());
+        final File outputDirectory = new File(programPaths.getHubDockerOutputPath());
         final List<File> bdioFiles = new ArrayList<>();
 
         ManifestLayerMapping manifestMapping = null;
