@@ -48,7 +48,7 @@ public class ProgramPaths {
     private String hubDockerTargetDirPath;
     private String hubDockerJarPath;
     private String hubDockerWorkingDirPath;
-    private String hubDockerOutputJsonPath;
+    private String hubDockerOutputPath;
 
     private boolean initDone = false;
 
@@ -66,7 +66,7 @@ public class ProgramPaths {
         hubDockerConfigFilePath = hubDockerConfigDirPath + APPLICATION_PROPERTIES_FILENAME;
         hubDockerTargetDirPath = hubDockerPgmDirPath + "target/";
         hubDockerWorkingDirPath = hubDockerPgmDirPath + "working/";
-        hubDockerOutputJsonPath = hubDockerPgmDirPath + "output/";
+        hubDockerOutputPath = hubDockerPgmDirPath + "output/";
 
         final String qualifiedJarPathString = getQualifiedJarPath();
         logger.debug(String.format("qualifiedJarPathString: %s", qualifiedJarPathString));
@@ -113,9 +113,9 @@ public class ProgramPaths {
         return hubDockerWorkingDirPath;
     }
 
-    public String getHubDockerOutputJsonPath() {
+    public String getHubDockerOutputPath() {
         init();
-        return hubDockerOutputJsonPath;
+        return hubDockerOutputPath;
     }
 
     public void setHubDockerPgmDirPath(final String hubDockerPgmDirPath) {
@@ -124,6 +124,10 @@ public class ProgramPaths {
 
     public String getImageTarFilename(final String imageName, final String tagName) {
         return String.format("%s_%s.tar", imageName, tagName);
+    }
+
+    public String getContainerFileSystemTarFilename(final String imageName, final String tagName) {
+        return String.format("%s_%s_containerfilesystem.tar.gz", imageName, tagName);
     }
 
     public String getTargetImageFileSystemRootDirName(final String imageName, final String imageTag) {

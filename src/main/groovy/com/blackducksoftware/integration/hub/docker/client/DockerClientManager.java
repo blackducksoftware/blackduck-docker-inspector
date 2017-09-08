@@ -62,6 +62,7 @@ public class DockerClientManager {
     private static final String IMAGE_REPO_PROPERTY = "docker.image.repo";
     private static final String IMAGE_TAG_PROPERTY = "docker.image.tag";
     private static final String OUTPUT_INCLUDE_TARFILE_PROPERTY = "output.include.tarfile";
+    private static final String OUTPUT_INCLUDE_CONTAINER_FILE_SYSTEM_TARFILE_PROPERTY = "output.include.containerfilesystem.tarfile";
     private final Logger logger = LoggerFactory.getLogger(DockerClientManager.class);
 
     @Autowired
@@ -152,7 +153,7 @@ public class DockerClientManager {
 
         final String cmd = programPaths.getHubDockerPgmDirPath() + INSPECTOR_COMMAND;
         execCommandInContainer(dockerClient, imageId, containerId, cmd, tarFilePathInSubContainer);
-        copyFileFromContainer(containerId, programPaths.getHubDockerOutputJsonPath() + ".", programPaths.getHubDockerOutputJsonPath());
+        copyFileFromContainer(containerId, programPaths.getHubDockerOutputPath() + ".", programPaths.getHubDockerOutputPath());
     }
 
     private void setPropertiesInSubContainer(final DockerClient dockerClient, final String containerId, final String tarFilePathInSubContainer, final String tarFileDirInSubContainer, final File dockerTarFile, final String targetImage,
@@ -163,6 +164,7 @@ public class DockerClientManager {
         hubDockerProperties.set(IMAGE_REPO_PROPERTY, targetImageRepo);
         hubDockerProperties.set(IMAGE_TAG_PROPERTY, targetImageTag);
         hubDockerProperties.set(OUTPUT_INCLUDE_TARFILE_PROPERTY, "false");
+        hubDockerProperties.set(OUTPUT_INCLUDE_CONTAINER_FILE_SYSTEM_TARFILE_PROPERTY, "false");
         final String pathToPropertiesFileForSubContainer = String.format("%s%s", programPaths.getHubDockerTargetDirPath(), ProgramPaths.APPLICATION_PROPERTIES_FILENAME);
         hubDockerProperties.save(pathToPropertiesFileForSubContainer);
 
