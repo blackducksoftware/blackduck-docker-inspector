@@ -127,7 +127,7 @@ public class ProgramPaths {
     }
 
     public String getContainerFileSystemTarFilename(final String imageName, final String tagName) {
-        return String.format("%s_%s_containerfilesystem.tar.gz", imageName, tagName);
+        return String.format("%s_%s_containerfilesystem.tar.gz", slashesToUnderscore(imageName), tagName);
     }
 
     public String getTargetImageFileSystemRootDirName(final String imageName, final String imageTag) {

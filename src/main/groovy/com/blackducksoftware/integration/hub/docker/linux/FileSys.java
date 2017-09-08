@@ -60,35 +60,39 @@ public class FileSys {
             gzOut = new GzipCompressorOutputStream(bOut);
             tOut = new TarArchiveOutputStream(gzOut);
             tOut.setLongFileMode(TarArchiveOutputStream.LONGFILE_POSIX);
-            addFileToTarGz(tOut, root, "");
+            addFileToTar(tOut, root, "");
         } finally {
-            tOut.finish();
-            tOut.close();
-            gzOut.close();
-            bOut.close();
-            fOut.close();
+            if (tOut != null) {
+                tOut.finish();
+                tOut.close();
+            }
+            if (gzOut != null) {
+                gzOut.close();
+            }
+            if (bOut != null) {
+                bOut.close();
+            }
+            if (fOut != null) {
+                fOut.close();
+            }
         }
-
-        // TODO is it better to use this factory?
-        // CompressorOutputStream gzippedOut = new CompressorStreamFactory()
-        // .createCompressorOutputStream(CompressorStreamFactory., myOutputStream );
     }
 
-    private void addFileToTarGz(final TarArchiveOutputStream tOut, final File f, final String base) throws IOException {
-        final String entryName = base + f.getName();
-        final TarArchiveEntry tarEntry = new TarArchiveEntry(f, entryName);
+    private void addFileToTar(final TarArchiveOutputStream tOut, final File fileToAdd, final String base) throws IOException {
+        final String entryName = base + fileToAdd.getName();
+        final TarArchiveEntry tarEntry = new TarArchiveEntry(fileToAdd, entryName);
         tOut.putArchiveEntry(tarEntry);
 
-        if (f.isFile()) {
-            IOUtils.copy(new FileInputStream(f), tOut);
+        if (fileToAdd.isFile()) {
+            IOUtils.copy(new FileInputStream(fileToAdd), tOut);
             tOut.closeArchiveEntry();
         } else {
             tOut.closeArchiveEntry();
-            final File[] children = f.listFiles();
+            final File[] children = fileToAdd.listFiles();
             if (children != null) {
                 for (final File child : children) {
-                    logger.trace(String.format("Adding to tar.gz file: %s", child.getName()));
-                    addFileToTarGz(tOut, child, entryName + "/");
+                    logger.trace(String.format("Adding to tar.gz file: %s", child.getAbsolutePath()));
+                    addFileToTar(tOut, child, entryName + "/");
                 }
             }
         }

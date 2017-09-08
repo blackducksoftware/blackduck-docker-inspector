@@ -87,7 +87,7 @@ public class Application {
     @Value("${output.include.tarfile}")
     private boolean outputIncludeTarfile;
 
-    @Value("${output.include.containerfilesystem.tarfile}")
+    @Value("${output.include.containerfilesystem}")
     private boolean outputIncludeContainerFileSystemTarfile;
 
     @Autowired
