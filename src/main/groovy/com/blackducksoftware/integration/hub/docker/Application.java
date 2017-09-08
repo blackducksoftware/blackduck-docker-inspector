@@ -120,6 +120,7 @@ public class Application {
 
             final List<File> layerTars = hubDockerManager.extractLayerTars(dockerTarFile);
             final List<ManifestLayerMapping> layerMappings = hubDockerManager.getLayerMappings(dockerTarFile.getName(), dockerImageRepo, dockerImageTag);
+            fillInMissingImageNameTagFromManifest(layerMappings);
             final File targetImageFileSystemRootDir = hubDockerManager.extractDockerLayers(layerTars, layerMappings);
 
             final OperatingSystemEnum targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro, targetImageFileSystemRootDir);
@@ -224,6 +225,18 @@ public class Application {
             }
         }
         logger.debug(String.format("initImageName(): final: dockerImage: %s; dockerImageRepo: %s; dockerImageTag: %s", dockerImage, dockerImageRepo, dockerImageTag));
+    }
+
+    private void fillInMissingImageNameTagFromManifest(final List<ManifestLayerMapping> layerMappings) {
+        if ((layerMappings != null) && (layerMappings.size() == 1)) {
+            if (StringUtils.isBlank(dockerImageRepo)) {
+                dockerImageRepo = layerMappings.get(0).getImageName();
+            }
+            if (StringUtils.isBlank(dockerImageTag)) {
+                dockerImageTag = layerMappings.get(0).getTagName();
+            }
+        }
+        logger.debug(String.format("fillInMissingImageNameTagFromManifest(): final: dockerImage: %s; dockerImageRepo: %s; dockerImageTag: %s", dockerImage, dockerImageRepo, dockerImageTag));
     }
 
     private File deriveDockerTarFile() throws IOException {
