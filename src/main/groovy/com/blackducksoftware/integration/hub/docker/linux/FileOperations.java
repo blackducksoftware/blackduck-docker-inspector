@@ -38,7 +38,6 @@ public class FileOperations {
         final String filename = fileToMove.getName();
         logger.debug(String.format("Copying %s to %s", fileToMove.getAbsolutePath(), destination.getAbsolutePath()));
         final Path destPath = destination.toPath().resolve(filename);
-        Files.copy(fileToMove.toPath(), destPath);
         Files.move(fileToMove.toPath(), destPath, StandardCopyOption.REPLACE_EXISTING);
     }
 }
