@@ -24,6 +24,9 @@ public class FileOperationsTest {
         final File fileToMove = new File("test/fileToMove.txt");
         fileToMove.createNewFile();
         final File destinationDir = new File("test/output");
+        if (!destinationDir.exists()) {
+            destinationDir.mkdirs();
+        }
         final File destinationFile = new File(destinationDir, "fileToMove.txt");
         destinationFile.delete();
         FileOperations.moveFile(fileToMove, destinationDir);
