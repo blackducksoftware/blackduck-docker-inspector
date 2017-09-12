@@ -33,7 +33,7 @@ class ProgramPathsTest {
             paths.codeLocationPrefix = "xyz"
         }
 
-        paths.setHubDockerPgmDirPath(installDir.getAbsolutePath())
+        paths.setHubDockerPgmDirPath(installDir.getAbsolutePath() + "/")
         paths.init()
 
         assertEquals("${installDirPath}/config/".toString(), paths.getHubDockerConfigDirPath())

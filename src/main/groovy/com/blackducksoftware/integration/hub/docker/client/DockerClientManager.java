@@ -142,18 +142,18 @@ public class DockerClientManager {
         final String extractorContainerName = deriveContainerName(runOnImageName);
         logger.debug(String.format("Container name: %s", extractorContainerName));
         final DockerClient dockerClient = hubDockerClient.getDockerClient();
-        final String tarFileDirInSubContainer = programPaths.getHubDockerTargetDirPath();
-        final String tarFilePathInSubContainer = programPaths.getHubDockerTargetDirPath() + dockerTarFile.getName();
+        final String tarFileDirInSubContainer = programPaths.getHubDockerTargetDirPathContainer();
+        final String tarFilePathInSubContainer = programPaths.getHubDockerTargetDirPathContainer() + dockerTarFile.getName();
 
         final String containerId = ensureContainerRunning(dockerClient, imageId, extractorContainerName, hubPassword);
         setPropertiesInSubContainer(dockerClient, containerId, tarFilePathInSubContainer, tarFileDirInSubContainer, dockerTarFile, targetImage, targetImageRepo, targetImageTag);
         if (copyJar) {
-            copyFileToContainer(dockerClient, containerId, programPaths.getHubDockerJarPath(), programPaths.getHubDockerPgmDirPath());
+            copyFileToContainer(dockerClient, containerId, programPaths.getHubDockerJarPath(), programPaths.getHubDockerPgmDirPathContainer());
         }
 
-        final String cmd = programPaths.getHubDockerPgmDirPath() + INSPECTOR_COMMAND;
+        final String cmd = programPaths.getHubDockerPgmDirPathContainer() + INSPECTOR_COMMAND;
         execCommandInContainer(dockerClient, imageId, containerId, cmd, tarFilePathInSubContainer);
-        copyFileFromContainer(containerId, programPaths.getHubDockerOutputPath() + ".", programPaths.getHubDockerOutputPath());
+        copyFileFromContainer(containerId, programPaths.getHubDockerOutputPathContainer() + ".", programPaths.getHubDockerOutputPath());
     }
 
     private void setPropertiesInSubContainer(final DockerClient dockerClient, final String containerId, final String tarFilePathInSubContainer, final String tarFileDirInSubContainer, final File dockerTarFile, final String targetImage,
@@ -168,7 +168,7 @@ public class DockerClientManager {
         final String pathToPropertiesFileForSubContainer = String.format("%s%s", programPaths.getHubDockerTargetDirPath(), ProgramPaths.APPLICATION_PROPERTIES_FILENAME);
         hubDockerProperties.save(pathToPropertiesFileForSubContainer);
 
-        copyFileToContainer(dockerClient, containerId, pathToPropertiesFileForSubContainer, programPaths.getHubDockerConfigDirPath());
+        copyFileToContainer(dockerClient, containerId, pathToPropertiesFileForSubContainer, programPaths.getHubDockerConfigDirPathContainer());
 
         logger.trace(String.format("Docker image tar file: %s", dockerTarFile.getAbsolutePath()));
         logger.trace(String.format("Docker image tar file path in sub-container: %s", tarFilePathInSubContainer));
@@ -235,6 +235,8 @@ public class DockerClientManager {
     // The docker api that does this corrupts the file, so we do it via a shell cmd
     private void copyFileFromContainer(final String containerId, final String fromPath, final String toPath) throws HubIntegrationException, IOException, InterruptedException {
         logger.debug(String.format("Copying %s from container to %s via shell command", fromPath, toPath));
+        final File toDir = new File(toPath);
+        toDir.mkdirs();
         executor.executeCommand(String.format("docker cp %s:%s %s", containerId, fromPath, toPath));
     }
 
