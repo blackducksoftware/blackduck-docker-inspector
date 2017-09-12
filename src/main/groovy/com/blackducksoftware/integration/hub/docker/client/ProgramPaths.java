@@ -70,17 +70,16 @@ public class ProgramPaths {
 
         final String qualifiedJarPathString = getQualifiedJarPath();
         logger.debug(String.format("qualifiedJarPathString: %s", qualifiedJarPathString));
-        final String prefix = String.format("%shub-docker-", hubDockerPgmDirPath);
-        logger.debug(String.format("prefix: %s", prefix));
-        final int startIndex = qualifiedJarPathString.indexOf(prefix);
+        final String prefix = "file:";
+        final int startIndex = qualifiedJarPathString.indexOf(prefix) + prefix.length();
         final int endIndex = qualifiedJarPathString.indexOf(".jar") + ".jar".length();
         hubDockerJarPath = qualifiedJarPathString.substring(startIndex, endIndex);
-
+        logger.debug(String.format("hubDockerJarPath: %s", hubDockerJarPath));
         initDone = true;
     }
 
     public String getQualifiedJarPath() {
-        return new java.io.File(DockerClientManager.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getAbsolutePath();
+        return DockerClientManager.class.getProtectionDomain().getCodeSource().getLocation().getPath();
     }
 
     public String getHubDockerConfigDirPath() {

@@ -26,7 +26,7 @@ class ProgramPathsTest {
         jarFile.createNewFile()
 
         ProgramPaths paths = [
-            getQualifiedJarPath: { -> return "SOMEJUNK${installDirPath}/${jarFileName}OTHERJUNK".toString() }
+            getQualifiedJarPath: { -> return "file:${installDirPath}/${jarFileName}OTHERJUNK".toString() }
         ] as ProgramPaths
 
         if (prefixCodeLocationName) {

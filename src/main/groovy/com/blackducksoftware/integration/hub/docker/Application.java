@@ -90,6 +90,9 @@ public class Application {
     @Value("${output.include.containerfilesystem}")
     private boolean outputIncludeContainerFileSystemTarfile;
 
+    @Value("${on.host:true}")
+    private boolean onHost;
+
     @Autowired
     private HubClient hubClient;
 
@@ -122,14 +125,11 @@ public class Application {
             final List<ManifestLayerMapping> layerMappings = hubDockerManager.getLayerMappings(dockerTarFile.getName(), dockerImageRepo, dockerImageTag);
             fillInMissingImageNameTagFromManifest(layerMappings);
             final File targetImageFileSystemRootDir = hubDockerManager.extractDockerLayers(layerTars, layerMappings);
-
             final OperatingSystemEnum targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro, targetImageFileSystemRootDir);
-            final OperatingSystemEnum requiredOsEnum = dockerImages.getDockerImageOs(targetOsEnum);
-            final OperatingSystemEnum currentOsEnum = hubDockerManager.detectCurrentOperatingSystem();
-            if (currentOsEnum == requiredOsEnum) {
-                generateBdio(dockerTarFile, targetImageFileSystemRootDir, layerMappings, currentOsEnum, targetOsEnum);
+            if (!onHost) {
+                generateBdio(dockerTarFile, targetImageFileSystemRootDir, layerMappings, targetOsEnum);
             } else {
-                runInSubContainer(dockerTarFile, currentOsEnum, targetOsEnum);
+                runInSubContainer(dockerTarFile, targetOsEnum);
             }
             provideTarIfRequested(dockerTarFile);
             provideContainerFileSystemTarIfRequested(targetImageFileSystemRootDir);
@@ -159,10 +159,10 @@ public class Application {
         }
     }
 
-    private void runInSubContainer(final File dockerTarFile, final OperatingSystemEnum currentOsEnum, final OperatingSystemEnum targetOsEnum) throws InterruptedException, IOException, HubIntegrationException {
+    private void runInSubContainer(final File dockerTarFile, final OperatingSystemEnum targetOsEnum) throws InterruptedException, IOException, HubIntegrationException {
         final String runOnImageName = dockerImages.getDockerImageName(targetOsEnum);
         final String runOnImageVersion = dockerImages.getDockerImageVersion(targetOsEnum);
-        final String msg = String.format("Image inspection for %s should not be run in this %s docker container; will use docker image %s:%s", targetOsEnum.toString(), currentOsEnum.toString(), runOnImageName, runOnImageVersion);
+        final String msg = String.format("Image inspection for %s will use docker image %s:%s", targetOsEnum.toString(), runOnImageName, runOnImageVersion);
         logger.info(msg);
         try {
             dockerClientManager.pullImage(runOnImageName, runOnImageVersion);
@@ -173,9 +173,9 @@ public class Application {
         dockerClientManager.run(runOnImageName, runOnImageVersion, dockerTarFile, devMode, dockerImage, dockerImageRepo, dockerImageTag);
     }
 
-    private void generateBdio(final File dockerTarFile, final File targetImageFileSystemRootDir, final List<ManifestLayerMapping> layerMappings, final OperatingSystemEnum currentOsEnum, final OperatingSystemEnum targetOsEnum)
+    private void generateBdio(final File dockerTarFile, final File targetImageFileSystemRootDir, final List<ManifestLayerMapping> layerMappings, final OperatingSystemEnum targetOsEnum)
             throws IOException, InterruptedException, IntegrationException {
-        final String msg = String.format("Image inspection for %s can be run in this %s docker container; tarfile: %s", targetOsEnum.toString(), currentOsEnum.toString(), dockerTarFile.getAbsolutePath());
+        final String msg = String.format("Target image tarfile: %s; target OS: %s", dockerTarFile.getAbsolutePath(), targetOsEnum.toString());
         logger.info(msg);
         final List<File> bdioFiles = hubDockerManager.generateBdioFromImageFilesDir(dockerImageRepo, dockerImageTag, layerMappings, hubProjectName, hubVersionName, dockerTarFile, targetImageFileSystemRootDir, targetOsEnum);
         if (bdioFiles.size() == 0) {

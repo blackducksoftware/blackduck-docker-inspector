@@ -25,15 +25,15 @@ class ApplicationTest {
 
     @Test
     public void testCanUseCurrentContainer() {
-        doTest("ubuntu", OperatingSystemEnum.UBUNTU, true)
+        doTest(false, "ubuntu", OperatingSystemEnum.UBUNTU, true)
     }
 
     @Test
     public void testNeedDifferentContainer() {
-        doTest("alpine", OperatingSystemEnum.ALPINE, false)
+        doTest(true, "alpine", OperatingSystemEnum.ALPINE, false)
     }
 
-    private void doTest(String targetImageName, OperatingSystemEnum targetOsEnum, boolean expectBdioUpload) {
+    private void doTest(boolean onHost, String targetImageName, OperatingSystemEnum targetOsEnum, boolean expectBdioUpload) {
         Application app = new Application()
         app.dockerImage = targetImageName
         app.dockerImages = new DockerImages()
@@ -91,8 +91,7 @@ class ApplicationTest {
         app.programVersion = [
             getProgramVersion: {"1.2.3"}
         ] as ProgramVersion
-
-
+        app.onHost = onHost;
         app.dockerClientManager = [
             pullImage: {String runOnImageName, String runOnImageVersion -> },
             run: {String runOnImageName, String runOnImageVersion, File dockerTarFile, boolean devMode, String image, String repo, String tag ->
