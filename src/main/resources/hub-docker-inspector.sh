@@ -237,7 +237,9 @@ then
 	docker exec -e BD_HUB_PASSWORD -e SCAN_CLI_OPTS -e http_proxy -e https_proxy -e HTTP_PROXY -e HTTPS_PROXY -e DOCKERD_OPTS -e DOCKER_INSPECTOR_JAVA_OPTS "${containername}" //opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} "\"/opt/blackduck/hub-docker-inspector/target/$tarfilename\""
 else
 	echo Inspecting image: $image
-	docker exec -e BD_HUB_PASSWORD -e SCAN_CLI_OPTS -e http_proxy -e https_proxy -e HTTP_PROXY -e HTTPS_PROXY -e DOCKERD_OPTS -e DOCKER_INSPECTOR_JAVA_OPTS "${containername}" //opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} "\"$image\""
+	# TODO TEMP
+	cp ~/Documents/git/hub-docker-inspector/build/libs/*.jar .
+	~/Documents/git/hub-docker-inspector/build/hub-docker-inspector-launcher.sh ${options[*]} "\"$image\""
 fi
 
 if [ ! -z "${outputPath}" ]
