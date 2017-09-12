@@ -61,7 +61,7 @@ class ApkExtractorTest {
 
         ExtractionDetails extractionDetails = new ExtractionDetails(OperatingSystemEnum.ALPINE, 'x86')
         final ImagePkgMgr imagePkgMgr = new ImagePkgMgr(new File("nonexistentdir"), PackageManagerEnum.APK)
-        extractor.extract(imagePkgMgr, bdioWriter, dependenciesWriter, extractionDetails, "CodeLocationName", "Test", "1")
+        extractor.extract("root", "1.0", imagePkgMgr, bdioWriter, dependenciesWriter, extractionDetails, "CodeLocationName", "Test", "1")
         bdioWriter.close()
         dependenciesWriter.close();
 

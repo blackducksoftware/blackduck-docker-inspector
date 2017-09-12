@@ -1,9 +1,9 @@
 [
   {
-    "name": "root",
+    "name": "blackducksoftware/whiteouttest",
     "version": "1.0",
     "externalId": {
-      "name": "root",
+      "name": "blackducksoftware/whiteouttest",
       "version": "1.0",
       "forge": {
         "name": "ubuntu",

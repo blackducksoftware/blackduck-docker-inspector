@@ -19,14 +19,12 @@ public class DependencyNodeWriter implements Closeable {
         this.gson = gson;
         this.jsonWriter = new JsonWriter(writer);
         jsonWriter.setIndent("  ");
-        jsonWriter.beginArray();
     }
 
     public DependencyNodeWriter(final Gson gson, final OutputStream outputStream) throws IOException {
         this.gson = gson;
         this.jsonWriter = new JsonWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
         jsonWriter.setIndent("  ");
-        jsonWriter.beginArray();
     }
 
     public void writeDependencyNode(final DependencyNode dependencyNode) {
@@ -35,7 +33,6 @@ public class DependencyNodeWriter implements Closeable {
 
     @Override
     public void close() throws IOException {
-        jsonWriter.endArray();
         jsonWriter.close();
     }
 

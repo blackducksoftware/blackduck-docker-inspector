@@ -54,9 +54,9 @@ class DpkgExtractor extends Extractor {
         initValues(PackageManagerEnum.DPKG, executor, forges)
     }
 
-    ExtractionResults extractComponents(ExtractionDetails extractionDetails, String[] packageList) {
+    ExtractionResults extractComponents(String dockerImageRepo, String dockerImageTag, ExtractionDetails extractionDetails, String[] packageList) {
         final List<BdioComponent> components = new ArrayList<>();
-        final DependencyNode rootNode = createDependencyNode(OperatingSystemEnum.UBUNTU.forge, "root", "1.0", extractionDetails.architecture);
+        final DependencyNode rootNode = createDependencyNode(OperatingSystemEnum.UBUNTU.forge, dockerImageRepo, dockerImageTag, extractionDetails.architecture);
         final DependencyNodeBuilder dNodeBuilder = new DependencyNodeBuilder(rootNode);
         boolean startOfComponents = false
         packageList.each { packageLine ->

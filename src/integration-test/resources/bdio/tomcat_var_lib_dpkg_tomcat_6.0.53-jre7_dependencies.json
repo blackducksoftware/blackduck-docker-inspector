@@ -1,10 +1,10 @@
 [
   {
-    "name": "root",
-    "version": "1.0",
+    "name": "tomcat",
+    "version": "6.0.53-jre7",
     "externalId": {
-      "name": "root",
-      "version": "1.0",
+      "name": "tomcat",
+      "version": "6.0.53-jre7",
       "forge": {
         "name": "ubuntu",
         "separator": ":"

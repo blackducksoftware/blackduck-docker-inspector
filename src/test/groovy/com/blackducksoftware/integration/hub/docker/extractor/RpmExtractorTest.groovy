@@ -60,7 +60,7 @@ class RpmExtractorTest {
 
         ExtractionDetails extractionDetails = new ExtractionDetails(OperatingSystemEnum.CENTOS, 'x86')
         ImagePkgMgr imagePkgMgr = new ImagePkgMgr(new File("nonexistentdir"), PackageManagerEnum.RPM)
-        extractor.extract(imagePkgMgr, bdioWriter, dependenciesWriter, extractionDetails, "CodeLocationName", "Test", "1")
+        extractor.extract("root", "1.0", imagePkgMgr, bdioWriter, dependenciesWriter, extractionDetails, "CodeLocationName", "Test", "1")
         bdioWriter.close()
         dependenciesWriter.close()
 

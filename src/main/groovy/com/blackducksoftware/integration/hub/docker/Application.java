@@ -177,7 +177,7 @@ public class Application {
             throws IOException, InterruptedException, IntegrationException {
         final String msg = String.format("Image inspection for %s can be run in this %s docker container; tarfile: %s", targetOsEnum.toString(), currentOsEnum.toString(), dockerTarFile.getAbsolutePath());
         logger.info(msg);
-        final List<File> bdioFiles = hubDockerManager.generateBdioFromImageFilesDir(layerMappings, hubProjectName, hubVersionName, dockerTarFile, targetImageFileSystemRootDir, targetOsEnum);
+        final List<File> bdioFiles = hubDockerManager.generateBdioFromImageFilesDir(dockerImageRepo, dockerImageTag, layerMappings, hubProjectName, hubVersionName, dockerTarFile, targetImageFileSystemRootDir, targetOsEnum);
         if (bdioFiles.size() == 0) {
             logger.warn("No BDIO Files generated");
         } else {

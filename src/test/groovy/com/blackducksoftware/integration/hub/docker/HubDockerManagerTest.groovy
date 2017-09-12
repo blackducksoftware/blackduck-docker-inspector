@@ -101,7 +101,7 @@ class HubDockerManagerTest {
         mapping.programPaths = new ProgramPaths()
         mappings.add(mapping)
         File imageFilesDir = new File("src/test/resources/imageDir")
-        List<File> bdioFiles = mgr.generateBdioFromImageFilesDir(mappings, "testProjectName", "testProjectVersion", imageTarFile, imageFilesDir, os)
+        List<File> bdioFiles = mgr.generateBdioFromImageFilesDir("root", "1.0", mappings, "testProjectName", "testProjectVersion", imageTarFile, imageFilesDir, os)
         for (File bdioFile : bdioFiles) {
             println "${bdioFile.getAbsolutePath()}"
         }

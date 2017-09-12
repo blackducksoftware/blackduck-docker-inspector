@@ -59,7 +59,7 @@ public abstract class Extractor {
 
     public abstract void init();
 
-    public abstract ExtractionResults extractComponents(ExtractionDetails extractionDetails, String[] packageList);
+    public abstract ExtractionResults extractComponents(String dockerImageRepo, String dockerImageTag, ExtractionDetails extractionDetails, String[] packageList);
 
     void initValues(final PackageManagerEnum packageManagerEnum, final PkgMgrExecutor executor, final List<String> forges) {
         this.packageManagerEnum = packageManagerEnum;
@@ -71,8 +71,8 @@ public abstract class Extractor {
         return packageManagerEnum;
     }
 
-    public void extract(final ImagePkgMgr imagePkgMgr, final BdioWriter bdioWriter, final DependencyNodeWriter dependenciesWriter, final ExtractionDetails extractionDetails, final String codeLocationName, final String projectName,
-            final String version) throws HubIntegrationException, IOException, InterruptedException {
+    public void extract(final String dockerImageRepo, final String dockerImageTag, final ImagePkgMgr imagePkgMgr, final BdioWriter bdioWriter, final DependencyNodeWriter dependenciesWriter, final ExtractionDetails extractionDetails,
+            final String codeLocationName, final String projectName, final String version) throws HubIntegrationException, IOException, InterruptedException {
         final BdioBillOfMaterials bom = bdioNodeFactory.createBillOfMaterials(codeLocationName, projectName, version);
         bdioWriter.writeBdioNode(bom);
 
@@ -81,7 +81,7 @@ public abstract class Extractor {
         final String externalId = extId.createExternalId();
         final BdioProject projectNode = bdioNodeFactory.createProject(projectName, version, extId.createDataId(), extractionDetails.getOperatingSystem().getForge(), externalId);
         logger.debug(String.format("BDIO project ID: %s", projectNode.id));
-        final ExtractionResults extractionResults = extractComponents(extractionDetails, executor.runPackageManager(imagePkgMgr));
+        final ExtractionResults extractionResults = extractComponents(dockerImageRepo, dockerImageTag, extractionDetails, executor.runPackageManager(imagePkgMgr));
         final List<BdioComponent> components = extractionResults.getComponents();
         logger.info(String.format("Found %s potential components", components.size()));
         bdioPropertyHelper.addRelationships(projectNode, components);

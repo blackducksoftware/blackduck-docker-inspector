@@ -57,9 +57,9 @@ class ApkExtractor extends Extractor {
     }
 
     @Override
-    public ExtractionResults extractComponents(final ExtractionDetails extractionDetails, final String[] packageList) {
+    public ExtractionResults extractComponents(final String dockerImageRepo, final String dockerImageTag, final ExtractionDetails extractionDetails, final String[] packageList) {
         final List<BdioComponent> components = new ArrayList<>();
-        final DependencyNode rootNode = createDependencyNode(OperatingSystemEnum.ALPINE.getForge(), "root", "1.0", extractionDetails.getArchitecture());
+        final DependencyNode rootNode = createDependencyNode(OperatingSystemEnum.ALPINE.getForge(), dockerImageRepo, dockerImageTag, extractionDetails.getArchitecture());
         final DependencyNodeBuilder dNodeBuilder = new DependencyNodeBuilder(rootNode);
         for (final String packageLine : packageList) {
             if (!packageLine.toLowerCase().startsWith("warning")) {

@@ -104,8 +104,8 @@ public class HubDockerManager {
         return tarParser.getLayerMappings(tarFileName, dockerImageName, dockerTagName);
     }
 
-    public List<File> generateBdioFromImageFilesDir(final List<ManifestLayerMapping> mappings, final String projectName, final String versionName, final File dockerTar, final File targetImageFileSystemRootDir,
-            final OperatingSystemEnum osEnum) throws IOException, HubIntegrationException, InterruptedException {
+    public List<File> generateBdioFromImageFilesDir(final String dockerImageRepo, final String dockerImageTag, final List<ManifestLayerMapping> mappings, final String projectName, final String versionName, final File dockerTar,
+            final File targetImageFileSystemRootDir, final OperatingSystemEnum osEnum) throws IOException, HubIntegrationException, InterruptedException {
         final ImageInfo imagePkgMgrInfo = tarParser.collectPkgMgrInfo(targetImageFileSystemRootDir, osEnum);
         if (imagePkgMgrInfo.getOperatingSystemEnum() == null) {
             throw new HubIntegrationException("Could not determine the Operating System of this Docker tar.");
@@ -122,7 +122,7 @@ public class HubDockerManager {
                 }
             }
         }
-        return generateBdioFromPackageMgrDirs(mappings, projectName, versionName, dockerTar.getName(), imagePkgMgrInfo, architecture);
+        return generateBdioFromPackageMgrDirs(dockerImageRepo, dockerImageTag, mappings, projectName, versionName, dockerTar.getName(), imagePkgMgrInfo, architecture);
     }
 
     public void uploadBdioFiles(final List<File> bdioFiles) throws IntegrationException {
@@ -145,8 +145,8 @@ public class HubDockerManager {
         }
     }
 
-    private List<File> generateBdioFromPackageMgrDirs(final List<ManifestLayerMapping> layerMappings, final String projectName, final String versionName, final String tarFileName, final ImageInfo imageInfo, final String architecture)
-            throws FileNotFoundException, IOException, HubIntegrationException, InterruptedException {
+    private List<File> generateBdioFromPackageMgrDirs(final String dockerImageRepo, final String dockerImageTag, final List<ManifestLayerMapping> layerMappings, final String projectName, final String versionName, final String tarFileName,
+            final ImageInfo imageInfo, final String architecture) throws FileNotFoundException, IOException, HubIntegrationException, InterruptedException {
         final File outputDirectory = new File(programPaths.getHubDockerOutputPath());
         final List<File> bdioFiles = new ArrayList<>();
 
@@ -180,7 +180,7 @@ public class HubDockerManager {
             try (BdioWriter bdioWriter = new BdioWriter(new Gson(), bdioOutputStream); DependencyNodeWriter dependenciesWriter = new DependencyNodeWriter(new Gson(), dependenciesOutputStream)) {
                 final Extractor extractor = getExtractorByPackageManager(imageInfo.getPkgMgr().getPackageManager());
                 final ExtractionDetails extractionDetails = new ExtractionDetails(imageInfo.getOperatingSystemEnum(), architecture);
-                extractor.extract(imageInfo.getPkgMgr(), bdioWriter, dependenciesWriter, extractionDetails, codeLocationName, hubProjectName, hubVersionName);
+                extractor.extract(dockerImageRepo, dockerImageTag, imageInfo.getPkgMgr(), bdioWriter, dependenciesWriter, extractionDetails, codeLocationName, hubProjectName, hubVersionName);
             }
         }
 

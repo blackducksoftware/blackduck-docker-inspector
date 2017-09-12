@@ -42,7 +42,7 @@ public class DependencyNodeWriterTest {
         dNodeWriter.close();
 
         final String outString = out.toString();
-        assertEquals(1210, outString.length());
+        assertEquals(1092, outString.length());
         assertTrue(outString.contains("pkg1"));
         assertTrue(outString.contains("pkg2"));
         assertTrue(outString.contains("pkg3"));

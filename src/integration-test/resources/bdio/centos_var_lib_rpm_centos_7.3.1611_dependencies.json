@@ -1,10 +1,10 @@
 [
   {
-    "name": "root",
-    "version": "1.0",
+    "name": "centos",
+    "version": "7.3.1611",
     "externalId": {
-      "name": "root",
-      "version": "1.0",
+      "name": "centos",
+      "version": "7.3.1611",
       "forge": {
         "name": "centos",
         "separator": ":"

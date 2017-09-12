@@ -1,9 +1,9 @@
 [
   {
-    "name": "root",
+    "name": "blackducksoftware/centos_minus_vim_plus_bacula",
     "version": "1.0",
     "externalId": {
-      "name": "root",
+      "name": "blackducksoftware/centos_minus_vim_plus_bacula",
       "version": "1.0",
       "forge": {
         "name": "centos",

@@ -1,10 +1,10 @@
 [
   {
-    "name": "root",
-    "version": "1.0",
+    "name": "dnplus/rhel",
+    "version": "6.5",
     "externalId": {
-      "name": "root",
-      "version": "1.0",
+      "name": "dnplus/rhel",
+      "version": "6.5",
       "forge": {
         "name": "centos",
         "separator": ":"

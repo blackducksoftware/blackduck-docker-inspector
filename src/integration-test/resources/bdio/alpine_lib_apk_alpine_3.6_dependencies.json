@@ -1,11 +1,11 @@
 [
   {
-    "name": "root",
-    "version": "1.0",
+    "name": "alpine",
+    "version": "3.6",
     "externalId": {
       "architecture": "x86_64",
-      "name": "root",
-      "version": "1.0",
+      "name": "alpine",
+      "version": "3.6",
       "forge": {
         "name": "alpine",
         "separator": ":"
