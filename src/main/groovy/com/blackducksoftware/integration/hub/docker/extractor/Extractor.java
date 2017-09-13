@@ -107,6 +107,7 @@ public abstract class Extractor {
     }
 
     protected DependencyNode createDependencyNode(final String forge, final String name, final String version, final String arch) {
+        logger.debug(String.format("Creating dependency node with forge: %s, name: %s; version: %s, arch: %s", forge, name, version, arch));
         final Forge forgeObj = new Forge(forge, ":");
         final DependencyNode dNode = new DependencyNode(name, version, new ArchitectureExternalId(forgeObj, name, version, arch));
         logger.debug(String.format("Generated DependencyNode: %s", dNode));
