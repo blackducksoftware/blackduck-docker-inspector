@@ -239,7 +239,7 @@ public class Application {
         logger.debug(String.format("fillInMissingImageNameTagFromManifest(): final: dockerImage: %s; dockerImageRepo: %s; dockerImageTag: %s", dockerImage, dockerImageRepo, dockerImageTag));
     }
 
-    private File deriveDockerTarFile() throws IOException {
+    private File deriveDockerTarFile() throws IOException, HubIntegrationException {
         File dockerTarFile = null;
         if (StringUtils.isNotBlank(dockerTar)) {
             dockerTarFile = new File(dockerTar);

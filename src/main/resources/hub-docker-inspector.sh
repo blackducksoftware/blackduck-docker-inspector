@@ -198,10 +198,12 @@ fi
 
 if [ \( "$1" = -p \) -o \( "$1" = --get-properties \) ]
 then
-    ensureContainerRunning
-    echo "Copying application.properties template"
-    docker cp hub-docker-inspector:/opt/blackduck/hub-docker-inspector/template/application.properties .
-    exit 0
+	echo "************ NOT IMPLEMENTED"
+	exit -1
+    #ensureContainerRunning
+    #echo "Copying application.properties template"
+    #docker cp hub-docker-inspector:/opt/blackduck/hub-docker-inspector/template/application.properties .
+    #exit 0
 fi
 
 preProcessOptions "$@"
@@ -220,8 +222,8 @@ options=( "$@" )
 image="${options[${#options[@]}-1]}"
 unset "options[${#options[@]}-1]"
 checkForPassword
-ensureContainerRunning
-installPropertiesFile
+#ensureContainerRunning
+#installPropertiesFile
 
 if [[ "$image" == *.tar ]]
 then
@@ -239,7 +241,10 @@ else
 	echo Inspecting image: $image
 	# TODO TEMP
 	cp ~/Documents/git/hub-docker-inspector/build/libs/*.jar .
+	echo "******* invoking launcher script"
+	chmod +x ~/Documents/git/hub-docker-inspector/build/hub-docker-inspector-launcher.sh
 	~/Documents/git/hub-docker-inspector/build/hub-docker-inspector-launcher.sh ${options[*]} "\"$image\""
+	echo "******* DONE invoking launcher script"
 fi
 
 if [ ! -z "${outputPath}" ]

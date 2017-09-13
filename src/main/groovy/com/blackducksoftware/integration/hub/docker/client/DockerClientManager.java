@@ -89,7 +89,7 @@ public class DockerClientManager {
     @Value("${SCAN_CLI_OPTS:}")
     private String scanCliOptsEnvVar;
 
-    public File getTarFileFromDockerImage(final String imageName, final String tagName) throws IOException {
+    public File getTarFileFromDockerImage(final String imageName, final String tagName) throws IOException, HubIntegrationException {
         final File imageTarDirectory = new File(new File(programPaths.getHubDockerWorkingDirPath()), "tarDirectory");
         pullImage(imageName, tagName);
         final File imageTarFile = new File(imageTarDirectory, programPaths.getImageTarFilename(imageName, tagName));
@@ -97,7 +97,7 @@ public class DockerClientManager {
         return imageTarFile;
     }
 
-    public void pullImage(final String imageName, final String tagName) {
+    public void pullImage(final String imageName, final String tagName) throws HubIntegrationException {
         logger.info(String.format("Pulling image %s:%s", imageName, tagName));
         final DockerClient dockerClient = hubDockerClient.getDockerClient();
         final Image alreadyPulledImage = getLocalImage(dockerClient, imageName, tagName);
@@ -272,7 +272,7 @@ public class DockerClientManager {
         copyProperties.exec();
     }
 
-    private void saveImage(final String imageName, final String tagName, final File imageTarFile) throws IOException {
+    private void saveImage(final String imageName, final String tagName, final File imageTarFile) throws IOException, HubIntegrationException {
         InputStream tarInputStream = null;
         try {
             logger.info(String.format("Saving the docker image to : %s", imageTarFile.getCanonicalPath()));
