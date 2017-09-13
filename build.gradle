@@ -414,7 +414,7 @@ repositories {
 dependencies {
     compile 'com.blackducksoftware.integration:hub-common:14.4.1'
     
-    compile 'com.github.docker-java:docker-java:3.0.8'
+    compile 'com.github.docker-java:docker-java:3.0.12'
     compile 'org.apache.commons:commons-lang3:3.5'
     compile 'commons-io:commons-io:2.5'
     compile 'org.apache.commons:commons-collections4:4.1'

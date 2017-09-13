@@ -87,7 +87,7 @@ class HubDockerClient {
 
     DockerClient getDockerClient() throws HubIntegrationException {
         if (dockerClient == null) {
-            loginAuthenticatedRegistry();
+            // loginAuthenticatedRegistry();
             // Docker client uses the system properties for proxies
             // http.proxyHost , http.proxyPort, http.proxyUser, http.proxyPassword
             final Builder builder = DefaultDockerClientConfig.createDefaultConfigBuilder();
@@ -120,6 +120,8 @@ class HubDockerClient {
             // }
 
             final DockerClientConfig config = builder.build();
+            logger.debug(String.format("docker host: %s", config.getDockerHost()));
+            logger.debug(String.format("docker username: %s", config.getRegistryUsername()));
             dockerClient = DockerClientBuilder.getInstance(config).build();
         }
         return dockerClient;
