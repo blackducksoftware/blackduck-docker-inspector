@@ -85,6 +85,8 @@ class HubDockerClient {
 
     private DockerClient dockerClient;
 
+    // TODO this belongs in DockerClientManager (and needs cleanup)
+
     DockerClient getDockerClient() throws HubIntegrationException {
         if (dockerClient == null) {
             // loginAuthenticatedRegistry();
