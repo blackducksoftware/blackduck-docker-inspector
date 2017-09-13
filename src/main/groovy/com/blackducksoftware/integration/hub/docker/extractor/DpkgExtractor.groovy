@@ -78,7 +78,7 @@ class DpkgExtractor extends Extractor {
                         }
                         //                        String externalId = "$name/$version/$architecture"
                         final String externalId = String.format("%s/%s/%s", name, version, architecture);
-                        logger.debug(String.format("*** Constructed externalId: %s", externalId));
+                        logger.debug(String.format("Constructed externalId: %s", externalId));
 
                         createBdioComponent(dNodeBuilder, rootNode, components, name, version, externalId, architecture)
                     } else {

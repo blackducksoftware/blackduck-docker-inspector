@@ -81,7 +81,7 @@ class RpmExtractor extends Extractor {
 
                 //                String externalId = "${artifact}/${versionRelease}/${arch}"
                 final String externalId = String.format("%s/%s/%s", artifact, versionRelease, arch);
-                logger.debug(String.format("*** Constructed externalId: %s", externalId));
+                logger.debug(String.format("Constructed externalId: %s", externalId));
 
                 logger.debug("Adding ${externalId} to components list")
                 createBdioComponent(dNodeBuilder, rootNode, components, artifact, versionRelease, externalId, arch)

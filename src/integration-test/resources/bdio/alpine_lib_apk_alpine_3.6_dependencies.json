@@ -1,7 +1,9 @@
 {
-  "name": "alpine",
-  "version": "3.6",
-  "externalId": {
+  "bomToolType": "DOCKER",
+  "sourcePath": "alpine_3.6",
+  "bomToolProjectName": "alpine",
+  "bomToolProjectVersionName": "3.6",
+  "bomToolProjectExternalId": {
     "architecture": "x86_64",
     "name": "alpine",
     "version": "3.6",
@@ -10,7 +12,7 @@
       "separator": ":"
     }
   },
-  "children": [
+  "dependencies": [
     {
       "name": "zlib",
       "version": "1.2.11-r0",
