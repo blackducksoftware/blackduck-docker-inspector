@@ -34,6 +34,8 @@ import org.springframework.stereotype.Component
 import com.blackducksoftware.integration.hub.bdio.simple.DependencyNodeBuilder
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent
 import com.blackducksoftware.integration.hub.bdio.simple.model.DependencyNode
+import com.blackducksoftware.integration.hub.detect.model.BomToolType
+import com.blackducksoftware.integration.hub.detect.model.DetectCodeLocation
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 import com.blackducksoftware.integration.hub.docker.executor.RpmExecutor
@@ -63,6 +65,8 @@ class RpmExtractor extends Extractor {
         logger.debug("extractComponents: Received ${packageList.length} package lines")
         final List<BdioComponent> components = new ArrayList<>();
         final DependencyNode rootNode = createDependencyNode(OperatingSystemEnum.CENTOS.forge, dockerImageRepo, dockerImageTag, extractionDetails.architecture);
+        final DetectCodeLocation codeLocation =
+                new DetectCodeLocation(BomToolType.DOCKER, String.format("%s_%s", dockerImageRepo, dockerImageTag), rootNode);
         final DependencyNodeBuilder dNodeBuilder = new DependencyNodeBuilder(rootNode);
         packageList.each { packageLine ->
             if (valid(packageLine)) {
@@ -75,11 +79,14 @@ class RpmExtractor extends Extractor {
                 def versionRelease = packageLine.substring(secondToLastDashIndex + 1, lastDotIndex)
                 def artifact = packageLine.substring(0, secondToLastDashIndex)
 
-                String externalId = "${artifact}/${versionRelease}/${arch}"
+                //                String externalId = "${artifact}/${versionRelease}/${arch}"
+                final String externalId = String.format("%s/%s/%s", artifact, versionRelease, arch);
+                logger.debug(String.format("Constructed externalId: %s", externalId));
+
                 logger.debug("Adding ${externalId} to components list")
-                createBdioComponent(dNodeBuilder, rootNode, components, artifact, versionRelease, externalId, extractionDetails.architecture)
+                createBdioComponent(dNodeBuilder, rootNode, components, artifact, versionRelease, externalId, arch)
             }
         }
-        return new ExtractionResults(components, rootNode);
+        return new ExtractionResults(components, codeLocation);
     }
 }

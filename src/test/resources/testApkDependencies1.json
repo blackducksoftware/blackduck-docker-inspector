@@ -1,7 +1,9 @@
 {
-  "name": "root",
-  "version": "1.0",
-  "externalId": {
+  "bomToolType": "DOCKER",
+  "sourcePath": "root_1.0",
+  "bomToolProjectName": "root",
+  "bomToolProjectVersionName": "1.0",
+  "bomToolProjectExternalId": {
     "architecture": "x86",
     "name": "root",
     "version": "1.0",
@@ -10,7 +12,7 @@
       "separator": ":"
     }
   },
-  "children": [
+  "dependencies": [
     {
       "name": "busybox",
       "version": "1.25.1-r0",

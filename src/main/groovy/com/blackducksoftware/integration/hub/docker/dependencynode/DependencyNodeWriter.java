@@ -7,7 +7,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 
-import com.blackducksoftware.integration.hub.bdio.simple.model.DependencyNode;
+import com.blackducksoftware.integration.hub.detect.model.DetectCodeLocation;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonWriter;
 
@@ -27,7 +27,7 @@ public class DependencyNodeWriter implements Closeable {
         jsonWriter.setIndent("  ");
     }
 
-    public void writeDependencyNode(final DependencyNode dependencyNode) {
+    public void writeDependencyNode(final DetectCodeLocation dependencyNode) {
         gson.toJson(dependencyNode, dependencyNode.getClass(), jsonWriter);
     }
 

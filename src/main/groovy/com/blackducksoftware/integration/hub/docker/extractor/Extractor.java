@@ -42,6 +42,7 @@ import com.blackducksoftware.integration.hub.bdio.simple.model.Forge;
 import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.ArchitectureExternalId;
 import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.ExternalId;
 import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.NameVersionExternalId;
+import com.blackducksoftware.integration.hub.detect.model.DetectCodeLocation;
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum;
 import com.blackducksoftware.integration.hub.docker.dependencynode.DependencyNodeWriter;
 import com.blackducksoftware.integration.hub.docker.executor.PkgMgrExecutor;
@@ -90,8 +91,8 @@ public abstract class Extractor {
             bdioWriter.writeBdioNode(component);
         }
         if (dependenciesWriter != null) {
-            final DependencyNode rootNode = extractionResults.getDependenciesRootNode();
-            logger.trace(String.format("writing dependency node: %s", rootNode.name));
+            final DetectCodeLocation rootNode = extractionResults.getDependenciesRootNode();
+            logger.trace(String.format("writing code location: %s", rootNode.getSourcePath()));
             dependenciesWriter.writeDependencyNode(rootNode);
         }
     }
@@ -107,6 +108,7 @@ public abstract class Extractor {
     }
 
     protected DependencyNode createDependencyNode(final String forge, final String name, final String version, final String arch) {
+        logger.debug(String.format("Creating dependency node with forge: %s, name: %s; version: %s, arch: %s", forge, name, version, arch));
         final Forge forgeObj = new Forge(forge, ":");
         final DependencyNode dNode = new DependencyNode(name, version, new ArchitectureExternalId(forgeObj, name, version, arch));
         logger.debug(String.format("Generated DependencyNode: %s", dNode));

@@ -111,7 +111,7 @@ public class HubDockerManager {
             throw new HubIntegrationException("Could not determine the Operating System of this Docker tar.");
         }
         String architecture = null;
-        if (osEnum == OperatingSystemEnum.ALPINE) {
+        if (osEnum == OperatingSystemEnum.ALPINE) { // TODO This code should be in a pkg-manager-specific class
             final List<File> etcDirectories = FileOperations.findFileWithName(targetImageFileSystemRootDir, "etc");
             for (final File etc : etcDirectories) {
                 File architectureFile = new File(etc, "apk");
@@ -122,6 +122,7 @@ public class HubDockerManager {
                 }
             }
         }
+        logger.debug(String.format("generateBdioFromImageFilesDir(): architecture: %s", architecture));
         return generateBdioFromPackageMgrDirs(dockerImageRepo, dockerImageTag, mappings, projectName, versionName, dockerTar.getName(), imagePkgMgrInfo, architecture);
     }
 

@@ -15,6 +15,8 @@ import com.blackducksoftware.integration.hub.bdio.simple.DependencyNodeBuilder;
 import com.blackducksoftware.integration.hub.bdio.simple.model.DependencyNode;
 import com.blackducksoftware.integration.hub.bdio.simple.model.Forge;
 import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.ArchitectureExternalId;
+import com.blackducksoftware.integration.hub.detect.model.BomToolType;
+import com.blackducksoftware.integration.hub.detect.model.DetectCodeLocation;
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum;
 import com.google.gson.Gson;
 
@@ -31,6 +33,7 @@ public class DependencyNodeWriterTest {
     @Test
     public void test() throws IOException {
         final DependencyNode rootNode = createDependencyNode(OperatingSystemEnum.ALPINE.getForge(), "root", "1.0", "testArch");
+        final DetectCodeLocation codeLocation = new DetectCodeLocation(BomToolType.DOCKER, "my_image", rootNode);
         final DependencyNodeBuilder dNodeBuilder = new DependencyNodeBuilder(rootNode);
         for (int i = 1; i <= 3; i++) {
             final DependencyNode dNode = createDependencyNode(OperatingSystemEnum.ALPINE.getForge(), "pkg" + i, "version", "testArch");
@@ -38,11 +41,11 @@ public class DependencyNodeWriterTest {
         }
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
         final DependencyNodeWriter dNodeWriter = new DependencyNodeWriter(new Gson(), out);
-        dNodeWriter.writeDependencyNode(rootNode);
+        dNodeWriter.writeDependencyNode(codeLocation);
         dNodeWriter.close();
 
         final String outString = out.toString();
-        assertEquals(1092, outString.length());
+        assertEquals(1197, outString.length());
         assertTrue(outString.contains("pkg1"));
         assertTrue(outString.contains("pkg2"));
         assertTrue(outString.contains("pkg3"));

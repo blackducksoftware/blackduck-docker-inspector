@@ -1,7 +1,9 @@
 {
-  "name": "blackducksoftware/hub-zookeeper",
-  "version": "4.0.0",
-  "externalId": {
+  "bomToolType": "DOCKER",
+  "sourcePath": "blackducksoftware/hub-zookeeper_4.0.0",
+  "bomToolProjectName": "blackducksoftware/hub-zookeeper",
+  "bomToolProjectVersionName": "4.0.0",
+  "bomToolProjectExternalId": {
     "architecture": "x86_64",
     "name": "blackducksoftware/hub-zookeeper",
     "version": "4.0.0",
@@ -10,7 +12,7 @@
       "separator": ":"
     }
   },
-  "children": [
+  "dependencies": [
     {
       "name": "ncurses-terminfo-base",
       "version": "6.0-r7",

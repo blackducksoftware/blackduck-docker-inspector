@@ -37,6 +37,8 @@ import org.springframework.stereotype.Component;
 import com.blackducksoftware.integration.hub.bdio.simple.DependencyNodeBuilder;
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent;
 import com.blackducksoftware.integration.hub.bdio.simple.model.DependencyNode;
+import com.blackducksoftware.integration.hub.detect.model.BomToolType;
+import com.blackducksoftware.integration.hub.detect.model.DetectCodeLocation;
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum;
 import com.blackducksoftware.integration.hub.docker.executor.ApkExecutor;
@@ -60,6 +62,7 @@ class ApkExtractor extends Extractor {
     public ExtractionResults extractComponents(final String dockerImageRepo, final String dockerImageTag, final ExtractionDetails extractionDetails, final String[] packageList) {
         final List<BdioComponent> components = new ArrayList<>();
         final DependencyNode rootNode = createDependencyNode(OperatingSystemEnum.ALPINE.getForge(), dockerImageRepo, dockerImageTag, extractionDetails.getArchitecture());
+        final DetectCodeLocation codeLocation = new DetectCodeLocation(BomToolType.DOCKER, String.format("%s_%s", dockerImageRepo, dockerImageTag), rootNode);
         final DependencyNodeBuilder dNodeBuilder = new DependencyNodeBuilder(rootNode);
         for (final String packageLine : packageList) {
             if (!packageLine.toLowerCase().startsWith("warning")) {
@@ -80,11 +83,12 @@ class ApkExtractor extends Extractor {
                 // if a package starts with a period, we should ignore it because it is a virtual meta package and the version information is missing
                 if (!component.startsWith(".")) {
                     final String externalId = String.format("%s/%s/%s", component, version, extractionDetails.getArchitecture());
+                    logger.debug(String.format("Constructed externalId: %s", externalId));
                     createBdioComponent(dNodeBuilder, rootNode, components, component, version, externalId, extractionDetails.getArchitecture());
                 }
             }
         }
         logger.trace(String.format("DependencyNode tree: root node: %s", rootNode.name));
-        return new ExtractionResults(components, rootNode);
+        return new ExtractionResults(components, codeLocation);
     }
 }
