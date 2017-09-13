@@ -1,7 +1,9 @@
 {
-  "name": "blackducksoftware/whiteouttest",
-  "version": "1.0",
-  "externalId": {
+  "bomToolType": "DOCKER",
+  "sourcePath": "blackducksoftware/whiteouttest_1.0",
+  "bomToolProjectName": "blackducksoftware/whiteouttest",
+  "bomToolProjectVersionName": "1.0",
+  "bomToolProjectExternalId": {
     "name": "blackducksoftware/whiteouttest",
     "version": "1.0",
     "forge": {
@@ -9,11 +11,824 @@
       "separator": ":"
     }
   },
-  "children": [
+  "dependencies": [
+    {
+      "name": "libkrb5-3",
+      "version": "1.13.2+dfsg-5ubuntu2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libkrb5-3",
+        "version": "1.13.2+dfsg-5ubuntu2",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "base-files",
+      "version": "9.4ubuntu4.5",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "base-files",
+        "version": "9.4ubuntu4.5",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "gnupg",
+      "version": "1.4.20-1ubuntu3.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "gnupg",
+        "version": "1.4.20-1ubuntu3.1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "adduser",
+      "version": "3.113+nmu3ubuntu4",
+      "externalId": {
+        "architecture": "all",
+        "name": "adduser",
+        "version": "3.113+nmu3ubuntu4",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libasn1-8-heimdal",
+      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libasn1-8-heimdal",
+        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libusb-0.1-4",
+      "version": "2:0.1.12-28",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libusb-0.1-4",
+        "version": "2:0.1.12-28",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libacl1",
+      "version": "2.2.52-3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libacl1",
+        "version": "2.2.52-3",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libc-bin",
+      "version": "2.23-0ubuntu9",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libc-bin",
+        "version": "2.23-0ubuntu9",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libcap2-bin",
+      "version": "1:2.24-12",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libcap2-bin",
+        "version": "1:2.24-12",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "base-passwd",
+      "version": "3.5.39",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "base-passwd",
+        "version": "3.5.39",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "grep",
+      "version": "2.25-1~16.04.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "grep",
+        "version": "2.25-1~16.04.1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libheimbase1-heimdal",
+      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libheimbase1-heimdal",
+        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libncursesw5",
+      "version": "6.0+20160213-1ubuntu1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libncursesw5",
+        "version": "6.0+20160213-1ubuntu1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "gcc-6-base",
+      "version": "6.0.1-0ubuntu1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "gcc-6-base",
+        "version": "6.0.1-0ubuntu1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libcomerr2",
+      "version": "1.42.13-1ubuntu1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libcomerr2",
+        "version": "1.42.13-1ubuntu1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libgcrypt20",
+      "version": "1.6.5-2ubuntu0.3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libgcrypt20",
+        "version": "1.6.5-2ubuntu0.3",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "passwd",
+      "version": "1:4.2-3.1ubuntu5.3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "passwd",
+        "version": "1:4.2-3.1ubuntu5.3",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "openssl",
+      "version": "1.0.2g-1ubuntu4.8",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "openssl",
+        "version": "1.0.2g-1ubuntu4.8",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libaudit1",
+      "version": "1:2.4.5-1ubuntu2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libaudit1",
+        "version": "1:2.4.5-1ubuntu2",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libfdisk1",
+      "version": "2.27.1-6ubuntu3.3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libfdisk1",
+        "version": "2.27.1-6ubuntu3.3",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libkmod2",
+      "version": "22-1ubuntu5",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libkmod2",
+        "version": "22-1ubuntu5",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "sensible-utils",
+      "version": "0.0.9",
+      "externalId": {
+        "architecture": "all",
+        "name": "sensible-utils",
+        "version": "0.0.9",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libsmartcols1",
+      "version": "2.27.1-6ubuntu3.3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libsmartcols1",
+        "version": "2.27.1-6ubuntu3.3",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "bash",
+      "version": "4.3-14ubuntu1.2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "bash",
+        "version": "4.3-14ubuntu1.2",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "apt",
+      "version": "1.2.24",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "apt",
+        "version": "1.2.24",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libattr1",
+      "version": "1:2.4.47-2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libattr1",
+        "version": "1:2.4.47-2",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libp11-kit0",
+      "version": "0.23.2-5~ubuntu16.04.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libp11-kit0",
+        "version": "0.23.2-5~ubuntu16.04.1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "hostname",
+      "version": "3.16ubuntu2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "hostname",
+        "version": "3.16ubuntu2",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libselinux1",
+      "version": "2.4-3build2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libselinux1",
+        "version": "2.4-3build2",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "insserv",
+      "version": "1.14.0-5ubuntu3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "insserv",
+        "version": "1.14.0-5ubuntu3",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "sysvinit-utils",
+      "version": "2.88dsf-59.3ubuntu2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "sysvinit-utils",
+        "version": "2.88dsf-59.3ubuntu2",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "systemd",
+      "version": "229-4ubuntu19",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "systemd",
+        "version": "229-4ubuntu19",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "mawk",
+      "version": "1.3.3-17ubuntu2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "mawk",
+        "version": "1.3.3-17ubuntu2",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libapparmor1",
+      "version": "2.10.95-0ubuntu2.6",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libapparmor1",
+        "version": "2.10.95-0ubuntu2.6",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libcryptsetup4",
+      "version": "2:1.6.6-5ubuntu2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libcryptsetup4",
+        "version": "2:1.6.6-5ubuntu2",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "gcc-5-base",
+      "version": "5.4.0-6ubuntu1~16.04.4",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "gcc-5-base",
+        "version": "5.4.0-6ubuntu1~16.04.4",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libgpg-error0",
+      "version": "1.21-2ubuntu1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libgpg-error0",
+        "version": "1.21-2ubuntu1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "e2fslibs",
+      "version": "1.42.13-1ubuntu1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "e2fslibs",
+        "version": "1.42.13-1ubuntu1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libdebconfclient0",
+      "version": "0.198ubuntu1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libdebconfclient0",
+        "version": "0.198ubuntu1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libsystemd0",
+      "version": "229-4ubuntu19",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libsystemd0",
+        "version": "229-4ubuntu19",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libhx509-5-heimdal",
+      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libhx509-5-heimdal",
+        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libpam-modules",
+      "version": "1.1.8-3.2ubuntu2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libpam-modules",
+        "version": "1.1.8-3.2ubuntu2",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libreadline6",
+      "version": "6.3-8ubuntu2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libreadline6",
+        "version": "6.3-8ubuntu2",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "procps",
+      "version": "2:3.3.10-4ubuntu2.3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "procps",
+        "version": "2:3.3.10-4ubuntu2.3",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libgmp10",
+      "version": "2:6.1.0+dfsg-2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libgmp10",
+        "version": "2:6.1.0+dfsg-2",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libapt-pkg5.0",
+      "version": "1.2.24",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libapt-pkg5.0",
+        "version": "1.2.24",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libdb5.3",
+      "version": "5.3.28-11",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libdb5.3",
+        "version": "5.3.28-11",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libcurl3-gnutls",
+      "version": "7.47.0-1ubuntu2.2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libcurl3-gnutls",
+        "version": "7.47.0-1ubuntu2.2",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "gpgv",
+      "version": "1.4.20-1ubuntu3.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "gpgv",
+        "version": "1.4.20-1ubuntu3.1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libnettle6",
+      "version": "3.2-1ubuntu0.16.04.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libnettle6",
+        "version": "3.2-1ubuntu0.16.04.1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "lsb-base",
+      "version": "9.20160110ubuntu0.2",
+      "externalId": {
+        "architecture": "all",
+        "name": "lsb-base",
+        "version": "9.20160110ubuntu0.2",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "perl-base",
+      "version": "5.22.1-9",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "perl-base",
+        "version": "5.22.1-9",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libroken18-heimdal",
+      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libroken18-heimdal",
+        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "systemd-sysv",
+      "version": "229-4ubuntu19",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "systemd-sysv",
+        "version": "229-4ubuntu19",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libpcre3",
+      "version": "2:8.38-3.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libpcre3",
+        "version": "2:8.38-3.1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libtasn1-6",
+      "version": "4.7-3ubuntu0.16.04.2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libtasn1-6",
+        "version": "4.7-3ubuntu0.16.04.2",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libheimntlm0-heimdal",
+      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libheimntlm0-heimdal",
+        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "mount",
+      "version": "2.27.1-6ubuntu3.3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "mount",
+        "version": "2.27.1-6ubuntu3.3",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
     {
       "name": "multiarch-support",
       "version": "2.23-0ubuntu9",
       "externalId": {
+        "architecture": "amd64",
         "name": "multiarch-support",
         "version": "2.23-0ubuntu9",
         "forge": {
@@ -27,6 +842,7 @@
       "name": "e2fsprogs",
       "version": "1.42.13-1ubuntu1",
       "externalId": {
+        "architecture": "amd64",
         "name": "e2fsprogs",
         "version": "1.42.13-1ubuntu1",
         "forge": {
@@ -37,35 +853,10 @@
       "children": []
     },
     {
-      "name": "libpam-runtime",
-      "version": "1.1.8-3.2ubuntu2",
-      "externalId": {
-        "name": "libpam-runtime",
-        "version": "1.1.8-3.2ubuntu2",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libnettle6",
-      "version": "3.2-1ubuntu0.16.04.1",
-      "externalId": {
-        "name": "libnettle6",
-        "version": "3.2-1ubuntu0.16.04.1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
       "name": "libcap2",
       "version": "1:2.24-12",
       "externalId": {
+        "architecture": "amd64",
         "name": "libcap2",
         "version": "1:2.24-12",
         "forge": {
@@ -76,24 +867,12 @@
       "children": []
     },
     {
-      "name": "libcryptsetup4",
-      "version": "2:1.6.6-5ubuntu2",
+      "name": "libhcrypto4-heimdal",
+      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
       "externalId": {
-        "name": "libcryptsetup4",
-        "version": "2:1.6.6-5ubuntu2",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libpam0g",
-      "version": "1.1.8-3.2ubuntu2",
-      "externalId": {
-        "name": "libpam0g",
-        "version": "1.1.8-3.2ubuntu2",
+        "architecture": "amd64",
+        "name": "libhcrypto4-heimdal",
+        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
         "forge": {
           "name": "debian",
           "separator": ":"
@@ -102,63 +881,12 @@
       "children": []
     },
     {
-      "name": "libdebconfclient0",
-      "version": "0.198ubuntu1",
+      "name": "libk5crypto3",
+      "version": "1.13.2+dfsg-5ubuntu2",
       "externalId": {
-        "name": "libdebconfclient0",
-        "version": "0.198ubuntu1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libidn11",
-      "version": "1.32-3ubuntu1.1",
-      "externalId": {
-        "name": "libidn11",
-        "version": "1.32-3ubuntu1.1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "bash",
-      "version": "4.3-14ubuntu1.2",
-      "externalId": {
-        "name": "bash",
-        "version": "4.3-14ubuntu1.2",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libtinfo5",
-      "version": "6.0+20160213-1ubuntu1",
-      "externalId": {
-        "name": "libtinfo5",
-        "version": "6.0+20160213-1ubuntu1",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libp11-kit0",
-      "version": "0.23.2-5~ubuntu16.04.1",
-      "externalId": {
-        "name": "libp11-kit0",
-        "version": "0.23.2-5~ubuntu16.04.1",
+        "architecture": "amd64",
+        "name": "libk5crypto3",
+        "version": "1.13.2+dfsg-5ubuntu2",
         "forge": {
           "name": "ubuntu",
           "separator": ":"
@@ -170,10 +898,263 @@
       "name": "libgnutls30",
       "version": "3.4.10-4ubuntu1.3",
       "externalId": {
+        "architecture": "amd64",
         "name": "libgnutls30",
         "version": "3.4.10-4ubuntu1.3",
         "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libidn11",
+      "version": "1.32-3ubuntu1.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libidn11",
+        "version": "1.32-3ubuntu1.1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libgcc1",
+      "version": "1:6.0.1-0ubuntu1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libgcc1",
+        "version": "1:6.0.1-0ubuntu1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libsemanage1",
+      "version": "2.3-1build3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libsemanage1",
+        "version": "2.3-1build3",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libldap-2.4-2",
+      "version": "2.4.42+dfsg-2ubuntu3.2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libldap-2.4-2",
+        "version": "2.4.42+dfsg-2ubuntu3.2",
+        "forge": {
           "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "init",
+      "version": "1.29ubuntu4",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "init",
+        "version": "1.29ubuntu4",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libaudit-common",
+      "version": "1:2.4.5-1ubuntu2",
+      "externalId": {
+        "architecture": "all",
+        "name": "libaudit-common",
+        "version": "1:2.4.5-1ubuntu2",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libreadline6",
+      "version": "6.3-8ubuntu2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libreadline6",
+        "version": "6.3-8ubuntu2",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libsasl2-modules-db",
+      "version": "2.1.26.dfsg1-14build1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libsasl2-modules-db",
+        "version": "2.1.26.dfsg1-14build1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libhx509-5-heimdal",
+      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libhx509-5-heimdal",
+        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libgmp10",
+      "version": "2:6.1.0+dfsg-2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libgmp10",
+        "version": "2:6.1.0+dfsg-2",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libgcc1",
+      "version": "1:6.0.1-0ubuntu1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libgcc1",
+        "version": "1:6.0.1-0ubuntu1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libnettle6",
+      "version": "3.2-1ubuntu0.16.04.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libnettle6",
+        "version": "3.2-1ubuntu0.16.04.1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libsasl2-2",
+      "version": "2.1.26.dfsg1-14build1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libsasl2-2",
+        "version": "2.1.26.dfsg1-14build1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libkeyutils1",
+      "version": "1.5.9-8ubuntu1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libkeyutils1",
+        "version": "1.5.9-8ubuntu1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libcurl3-gnutls",
+      "version": "7.47.0-1ubuntu2.2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libcurl3-gnutls",
+        "version": "7.47.0-1ubuntu2.2",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "makedev",
+      "version": "2.3.1-93ubuntu2~ubuntu16.04.1",
+      "externalId": {
+        "architecture": "all",
+        "name": "makedev",
+        "version": "2.3.1-93ubuntu2~ubuntu16.04.1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libuuid1",
+      "version": "2.27.1-6ubuntu3.3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libuuid1",
+        "version": "2.27.1-6ubuntu3.3",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "util-linux",
+      "version": "2.27.1-6ubuntu3.3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "util-linux",
+        "version": "2.27.1-6ubuntu3.3",
+        "forge": {
+          "name": "debian",
           "separator": ":"
         }
       },
@@ -183,21 +1164,9 @@
       "name": "tar",
       "version": "1.28-2.1ubuntu0.1",
       "externalId": {
+        "architecture": "amd64",
         "name": "tar",
         "version": "1.28-2.1ubuntu0.1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "mawk",
-      "version": "1.3.3-17ubuntu2",
-      "externalId": {
-        "name": "mawk",
-        "version": "1.3.3-17ubuntu2",
         "forge": {
           "name": "debian",
           "separator": ":"
@@ -206,11 +1175,54 @@
       "children": []
     },
     {
-      "name": "insserv",
-      "version": "1.14.0-5ubuntu3",
+      "name": "libbz2-1.0",
+      "version": "1.0.6-8",
       "externalId": {
-        "name": "insserv",
-        "version": "1.14.0-5ubuntu3",
+        "architecture": "amd64",
+        "name": "libbz2-1.0",
+        "version": "1.0.6-8",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libpcre3",
+      "version": "2:8.38-3.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libpcre3",
+        "version": "2:8.38-3.1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libssl1.0.0",
+      "version": "1.0.2g-1ubuntu4.8",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libssl1.0.0",
+        "version": "1.0.2g-1ubuntu4.8",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libprocps4",
+      "version": "2:3.3.10-4ubuntu2.3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libprocps4",
+        "version": "2:3.3.10-4ubuntu2.3",
         "forge": {
           "name": "debian",
           "separator": ":"
@@ -222,7 +1234,470 @@
       "name": "passwd",
       "version": "1:4.2-3.1ubuntu5.3",
       "externalId": {
+        "architecture": "amd64",
         "name": "passwd",
+        "version": "1:4.2-3.1ubuntu5.3",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "librtmp1",
+      "version": "2.4+20151223.gitfa8646d-1ubuntu0.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "librtmp1",
+        "version": "2.4+20151223.gitfa8646d-1ubuntu0.1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "ncurses-base",
+      "version": "6.0+20160213-1ubuntu1",
+      "externalId": {
+        "architecture": "all",
+        "name": "ncurses-base",
+        "version": "6.0+20160213-1ubuntu1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "debianutils",
+      "version": "4.7",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "debianutils",
+        "version": "4.7",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libsepol1",
+      "version": "2.4-2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libsepol1",
+        "version": "2.4-2",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libustr-1.0-1",
+      "version": "1.0.4-5",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libustr-1.0-1",
+        "version": "1.0.4-5",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "liblz4-1",
+      "version": "0.0~r131-2ubuntu2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "liblz4-1",
+        "version": "0.0~r131-2ubuntu2",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libmount1",
+      "version": "2.27.1-6ubuntu3.3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libmount1",
+        "version": "2.27.1-6ubuntu3.3",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libstdc++6",
+      "version": "5.4.0-6ubuntu1~16.04.4",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libstdc++6",
+        "version": "5.4.0-6ubuntu1~16.04.4",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "sed",
+      "version": "4.2.2-7",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "sed",
+        "version": "4.2.2-7",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "init-system-helpers",
+      "version": "1.29ubuntu4",
+      "externalId": {
+        "architecture": "all",
+        "name": "init-system-helpers",
+        "version": "1.29ubuntu4",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libcomerr2",
+      "version": "1.42.13-1ubuntu1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libcomerr2",
+        "version": "1.42.13-1ubuntu1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libncurses5",
+      "version": "6.0+20160213-1ubuntu1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libncurses5",
+        "version": "6.0+20160213-1ubuntu1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libc6",
+      "version": "2.23-0ubuntu9",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libc6",
+        "version": "2.23-0ubuntu9",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libpam0g",
+      "version": "1.1.8-3.2ubuntu2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libpam0g",
+        "version": "1.1.8-3.2ubuntu2",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libidn11",
+      "version": "1.32-3ubuntu1.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libidn11",
+        "version": "1.32-3ubuntu1.1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libaudit-common",
+      "version": "1:2.4.5-1ubuntu2",
+      "externalId": {
+        "architecture": "all",
+        "name": "libaudit-common",
+        "version": "1:2.4.5-1ubuntu2",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "bsdutils",
+      "version": "1:2.27.1-6ubuntu3.3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "bsdutils",
+        "version": "1:2.27.1-6ubuntu3.3",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "grep",
+      "version": "2.25-1~16.04.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "grep",
+        "version": "2.25-1~16.04.1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libuuid1",
+      "version": "2.27.1-6ubuntu3.3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libuuid1",
+        "version": "2.27.1-6ubuntu3.3",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "ncurses-bin",
+      "version": "6.0+20160213-1ubuntu1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "ncurses-bin",
+        "version": "6.0+20160213-1ubuntu1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libgpg-error0",
+      "version": "1.21-2ubuntu1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libgpg-error0",
+        "version": "1.21-2ubuntu1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libsasl2-modules-db",
+      "version": "2.1.26.dfsg1-14build1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libsasl2-modules-db",
+        "version": "2.1.26.dfsg1-14build1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libusb-0.1-4",
+      "version": "2:0.1.12-28",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libusb-0.1-4",
+        "version": "2:0.1.12-28",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "makedev",
+      "version": "2.3.1-93ubuntu2~ubuntu16.04.1",
+      "externalId": {
+        "architecture": "all",
+        "name": "makedev",
+        "version": "2.3.1-93ubuntu2~ubuntu16.04.1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "adduser",
+      "version": "3.113+nmu3ubuntu4",
+      "externalId": {
+        "architecture": "all",
+        "name": "adduser",
+        "version": "3.113+nmu3ubuntu4",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "tar",
+      "version": "1.28-2.1ubuntu0.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "tar",
+        "version": "1.28-2.1ubuntu0.1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libgssapi3-heimdal",
+      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libgssapi3-heimdal",
+        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libsasl2-2",
+      "version": "2.1.26.dfsg1-14build1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libsasl2-2",
+        "version": "2.1.26.dfsg1-14build1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "gcc-6-base",
+      "version": "6.0.1-0ubuntu1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "gcc-6-base",
+        "version": "6.0.1-0ubuntu1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "systemd-sysv",
+      "version": "229-4ubuntu19",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "systemd-sysv",
+        "version": "229-4ubuntu19",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libprocps4",
+      "version": "2:3.3.10-4ubuntu2.3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libprocps4",
+        "version": "2:3.3.10-4ubuntu2.3",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libustr-1.0-1",
+      "version": "1.0.4-5",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libustr-1.0-1",
+        "version": "1.0.4-5",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "login",
+      "version": "1:4.2-3.1ubuntu5.3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "login",
         "version": "1:4.2-3.1ubuntu5.3",
         "forge": {
           "name": "ubuntu",
@@ -235,22 +1710,10 @@
       "name": "hostname",
       "version": "3.16ubuntu2",
       "externalId": {
+        "architecture": "amd64",
         "name": "hostname",
         "version": "3.16ubuntu2",
         "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libseccomp2",
-      "version": "2.2.3-3ubuntu3",
-      "externalId": {
-        "name": "libseccomp2",
-        "version": "2.2.3-3ubuntu3",
-        "forge": {
           "name": "debian",
           "separator": ":"
         }
@@ -258,400 +1721,11 @@
       "children": []
     },
     {
-      "name": "gnupg",
-      "version": "1.4.20-1ubuntu3.1",
-      "externalId": {
-        "name": "gnupg",
-        "version": "1.4.20-1ubuntu3.1",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libdb5.3",
-      "version": "5.3.28-11",
-      "externalId": {
-        "name": "libdb5.3",
-        "version": "5.3.28-11",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "adduser",
-      "version": "3.113+nmu3ubuntu4",
-      "externalId": {
-        "name": "adduser",
-        "version": "3.113+nmu3ubuntu4",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "base-files",
-      "version": "9.4ubuntu4.5",
-      "externalId": {
-        "name": "base-files",
-        "version": "9.4ubuntu4.5",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libprocps4",
-      "version": "2:3.3.10-4ubuntu2.3",
-      "externalId": {
-        "name": "libprocps4",
-        "version": "2:3.3.10-4ubuntu2.3",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libgpg-error0",
-      "version": "1.21-2ubuntu1",
-      "externalId": {
-        "name": "libgpg-error0",
-        "version": "1.21-2ubuntu1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libheimbase1-heimdal",
-      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-      "externalId": {
-        "name": "libheimbase1-heimdal",
-        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libuuid1",
-      "version": "2.27.1-6ubuntu3.3",
-      "externalId": {
-        "name": "libuuid1",
-        "version": "2.27.1-6ubuntu3.3",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libcap2-bin",
-      "version": "1:2.24-12",
-      "externalId": {
-        "name": "libcap2-bin",
-        "version": "1:2.24-12",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libkrb5support0",
-      "version": "1.13.2+dfsg-5ubuntu2",
-      "externalId": {
-        "name": "libkrb5support0",
-        "version": "1.13.2+dfsg-5ubuntu2",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "bsdutils",
-      "version": "1:2.27.1-6ubuntu3.3",
-      "externalId": {
-        "name": "bsdutils",
-        "version": "1:2.27.1-6ubuntu3.3",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "lsb-base",
-      "version": "9.20160110ubuntu0.2",
-      "externalId": {
-        "name": "lsb-base",
-        "version": "9.20160110ubuntu0.2",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "gcc-6-base",
-      "version": "6.0.1-0ubuntu1",
-      "externalId": {
-        "name": "gcc-6-base",
-        "version": "6.0.1-0ubuntu1",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libgcc1",
-      "version": "1:6.0.1-0ubuntu1",
-      "externalId": {
-        "name": "libgcc1",
-        "version": "1:6.0.1-0ubuntu1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "base-passwd",
-      "version": "3.5.39",
-      "externalId": {
-        "name": "base-passwd",
-        "version": "3.5.39",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libcomerr2",
-      "version": "1.42.13-1ubuntu1",
-      "externalId": {
-        "name": "libcomerr2",
-        "version": "1.42.13-1ubuntu1",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "coreutils",
-      "version": "8.25-2ubuntu3~16.04",
-      "externalId": {
-        "name": "coreutils",
-        "version": "8.25-2ubuntu3~16.04",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "ubuntu-keyring",
-      "version": "2012.05.19",
-      "externalId": {
-        "name": "ubuntu-keyring",
-        "version": "2012.05.19",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libaudit1",
-      "version": "1:2.4.5-1ubuntu2",
-      "externalId": {
-        "name": "libaudit1",
-        "version": "1:2.4.5-1ubuntu2",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "util-linux",
-      "version": "2.27.1-6ubuntu3.3",
-      "externalId": {
-        "name": "util-linux",
-        "version": "2.27.1-6ubuntu3.3",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "debianutils",
-      "version": "4.7",
-      "externalId": {
-        "name": "debianutils",
-        "version": "4.7",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libgcrypt20",
-      "version": "1.6.5-2ubuntu0.3",
-      "externalId": {
-        "name": "libgcrypt20",
-        "version": "1.6.5-2ubuntu0.3",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "gcc-5-base",
-      "version": "5.4.0-6ubuntu1~16.04.4",
-      "externalId": {
-        "name": "gcc-5-base",
-        "version": "5.4.0-6ubuntu1~16.04.4",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "ca-certificates",
-      "version": "20160104ubuntu1",
-      "externalId": {
-        "name": "ca-certificates",
-        "version": "20160104ubuntu1",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libcurl3-gnutls",
-      "version": "7.47.0-1ubuntu2.2",
-      "externalId": {
-        "name": "libcurl3-gnutls",
-        "version": "7.47.0-1ubuntu2.2",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libc-bin",
-      "version": "2.23-0ubuntu9",
-      "externalId": {
-        "name": "libc-bin",
-        "version": "2.23-0ubuntu9",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "login",
-      "version": "1:4.2-3.1ubuntu5.3",
-      "externalId": {
-        "name": "login",
-        "version": "1:4.2-3.1ubuntu5.3",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libgmp10",
-      "version": "2:6.1.0+dfsg-2",
-      "externalId": {
-        "name": "libgmp10",
-        "version": "2:6.1.0+dfsg-2",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "mount",
-      "version": "2.27.1-6ubuntu3.3",
-      "externalId": {
-        "name": "mount",
-        "version": "2.27.1-6ubuntu3.3",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "diffutils",
-      "version": "1:3.3-3",
-      "externalId": {
-        "name": "diffutils",
-        "version": "1:3.3-3",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libncursesw5",
+      "name": "ncurses-base",
       "version": "6.0+20160213-1ubuntu1",
       "externalId": {
-        "name": "libncursesw5",
+        "architecture": "all",
+        "name": "ncurses-base",
         "version": "6.0+20160213-1ubuntu1",
         "forge": {
           "name": "ubuntu",
@@ -661,22 +1735,10 @@
       "children": []
     },
     {
-      "name": "libsqlite3-0",
-      "version": "3.11.0-1ubuntu1",
-      "externalId": {
-        "name": "libsqlite3-0",
-        "version": "3.11.0-1ubuntu1",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
       "name": "librtmp1",
       "version": "2.4+20151223.gitfa8646d-1ubuntu0.1",
       "externalId": {
+        "architecture": "amd64",
         "name": "librtmp1",
         "version": "2.4+20151223.gitfa8646d-1ubuntu0.1",
         "forge": {
@@ -687,11 +1749,68 @@
       "children": []
     },
     {
-      "name": "libacl1",
-      "version": "2.2.52-3",
+      "name": "libncurses5",
+      "version": "6.0+20160213-1ubuntu1",
       "externalId": {
-        "name": "libacl1",
-        "version": "2.2.52-3",
+        "architecture": "amd64",
+        "name": "libncurses5",
+        "version": "6.0+20160213-1ubuntu1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "coreutils",
+      "version": "8.25-2ubuntu3~16.04",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "coreutils",
+        "version": "8.25-2ubuntu3~16.04",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "zlib1g",
+      "version": "1:1.2.8.dfsg-2ubuntu4.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "zlib1g",
+        "version": "1:1.2.8.dfsg-2ubuntu4.1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "liblz4-1",
+      "version": "0.0~r131-2ubuntu2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "liblz4-1",
+        "version": "0.0~r131-2ubuntu2",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "debianutils",
+      "version": "4.7",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "debianutils",
+        "version": "4.7",
         "forge": {
           "name": "debian",
           "separator": ":"
@@ -700,11 +1819,12 @@
       "children": []
     },
     {
-      "name": "openssl",
-      "version": "1.0.2g-1ubuntu4.8",
+      "name": "libc6",
+      "version": "2.23-0ubuntu9",
       "externalId": {
-        "name": "openssl",
-        "version": "1.0.2g-1ubuntu4.8",
+        "architecture": "amd64",
+        "name": "libc6",
+        "version": "2.23-0ubuntu9",
         "forge": {
           "name": "debian",
           "separator": ":"
@@ -713,11 +1833,68 @@
       "children": []
     },
     {
-      "name": "systemd",
-      "version": "229-4ubuntu19",
+      "name": "sed",
+      "version": "4.2.2-7",
       "externalId": {
-        "name": "systemd",
-        "version": "229-4ubuntu19",
+        "architecture": "amd64",
+        "name": "sed",
+        "version": "4.2.2-7",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "init-system-helpers",
+      "version": "1.29ubuntu4",
+      "externalId": {
+        "architecture": "all",
+        "name": "init-system-helpers",
+        "version": "1.29ubuntu4",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libcryptsetup4",
+      "version": "2:1.6.6-5ubuntu2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libcryptsetup4",
+        "version": "2:1.6.6-5ubuntu2",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libss2",
+      "version": "1.42.13-1ubuntu1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libss2",
+        "version": "1.42.13-1ubuntu1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libblkid1",
+      "version": "2.27.1-6ubuntu3.3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libblkid1",
+        "version": "2.27.1-6ubuntu3.3",
         "forge": {
           "name": "ubuntu",
           "separator": ":"
@@ -729,216 +1906,9 @@
       "name": "readline-common",
       "version": "6.3-8ubuntu2",
       "externalId": {
+        "architecture": "all",
         "name": "readline-common",
         "version": "6.3-8ubuntu2",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "zlib1g",
-      "version": "1:1.2.8.dfsg-2ubuntu4.1",
-      "externalId": {
-        "name": "zlib1g",
-        "version": "1:1.2.8.dfsg-2ubuntu4.1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libkrb5-3",
-      "version": "1.13.2+dfsg-5ubuntu2",
-      "externalId": {
-        "name": "libkrb5-3",
-        "version": "1.13.2+dfsg-5ubuntu2",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libsemanage-common",
-      "version": "2.3-1build3",
-      "externalId": {
-        "name": "libsemanage-common",
-        "version": "2.3-1build3",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libsasl2-modules",
-      "version": "2.1.26.dfsg1-14build1",
-      "externalId": {
-        "name": "libsasl2-modules",
-        "version": "2.1.26.dfsg1-14build1",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libsmartcols1",
-      "version": "2.27.1-6ubuntu3.3",
-      "externalId": {
-        "name": "libsmartcols1",
-        "version": "2.27.1-6ubuntu3.3",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "gzip",
-      "version": "1.6-4ubuntu1",
-      "externalId": {
-        "name": "gzip",
-        "version": "1.6-4ubuntu1",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libudev1",
-      "version": "229-4ubuntu19",
-      "externalId": {
-        "name": "libudev1",
-        "version": "229-4ubuntu19",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "ncurses-base",
-      "version": "6.0+20160213-1ubuntu1",
-      "externalId": {
-        "name": "ncurses-base",
-        "version": "6.0+20160213-1ubuntu1",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libasn1-8-heimdal",
-      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-      "externalId": {
-        "name": "libasn1-8-heimdal",
-        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "ca-certificates",
-      "version": "20160104ubuntu1",
-      "externalId": {
-        "name": "ca-certificates",
-        "version": "20160104ubuntu1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "sed",
-      "version": "4.2.2-7",
-      "externalId": {
-        "name": "sed",
-        "version": "4.2.2-7",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libkmod2",
-      "version": "22-1ubuntu5",
-      "externalId": {
-        "name": "libkmod2",
-        "version": "22-1ubuntu5",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "dash",
-      "version": "0.5.8-2.1ubuntu2",
-      "externalId": {
-        "name": "dash",
-        "version": "0.5.8-2.1ubuntu2",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libcomerr2",
-      "version": "1.42.13-1ubuntu1",
-      "externalId": {
-        "name": "libcomerr2",
-        "version": "1.42.13-1ubuntu1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "gcc-6-base",
-      "version": "6.0.1-0ubuntu1",
-      "externalId": {
-        "name": "gcc-6-base",
-        "version": "6.0.1-0ubuntu1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libc6",
-      "version": "2.23-0ubuntu9",
-      "externalId": {
-        "name": "libc6",
-        "version": "2.23-0ubuntu9",
         "forge": {
           "name": "ubuntu",
           "separator": ":"
@@ -950,569 +1920,11 @@
       "name": "libsystemd0",
       "version": "229-4ubuntu19",
       "externalId": {
+        "architecture": "amd64",
         "name": "libsystemd0",
         "version": "229-4ubuntu19",
         "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "krb5-locales",
-      "version": "1.13.2+dfsg-5ubuntu2",
-      "externalId": {
-        "name": "krb5-locales",
-        "version": "1.13.2+dfsg-5ubuntu2",
-        "forge": {
           "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libsasl2-modules-db",
-      "version": "2.1.26.dfsg1-14build1",
-      "externalId": {
-        "name": "libsasl2-modules-db",
-        "version": "2.1.26.dfsg1-14build1",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libaudit-common",
-      "version": "1:2.4.5-1ubuntu2",
-      "externalId": {
-        "name": "libaudit-common",
-        "version": "1:2.4.5-1ubuntu2",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libustr-1.0-1",
-      "version": "1.0.4-5",
-      "externalId": {
-        "name": "libustr-1.0-1",
-        "version": "1.0.4-5",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libkrb5-26-heimdal",
-      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-      "externalId": {
-        "name": "libkrb5-26-heimdal",
-        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libffi6",
-      "version": "3.2.1-4",
-      "externalId": {
-        "name": "libffi6",
-        "version": "3.2.1-4",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "debianutils",
-      "version": "4.7",
-      "externalId": {
-        "name": "debianutils",
-        "version": "4.7",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libc-bin",
-      "version": "2.23-0ubuntu9",
-      "externalId": {
-        "name": "libc-bin",
-        "version": "2.23-0ubuntu9",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libgssapi3-heimdal",
-      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-      "externalId": {
-        "name": "libgssapi3-heimdal",
-        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libacl1",
-      "version": "2.2.52-3",
-      "externalId": {
-        "name": "libacl1",
-        "version": "2.2.52-3",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "base-passwd",
-      "version": "3.5.39",
-      "externalId": {
-        "name": "base-passwd",
-        "version": "3.5.39",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libmount1",
-      "version": "2.27.1-6ubuntu3.3",
-      "externalId": {
-        "name": "libmount1",
-        "version": "2.27.1-6ubuntu3.3",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libapt-pkg5.0",
-      "version": "1.2.24",
-      "externalId": {
-        "name": "libapt-pkg5.0",
-        "version": "1.2.24",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "systemd",
-      "version": "229-4ubuntu19",
-      "externalId": {
-        "name": "systemd",
-        "version": "229-4ubuntu19",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libpam-modules-bin",
-      "version": "1.1.8-3.2ubuntu2",
-      "externalId": {
-        "name": "libpam-modules-bin",
-        "version": "1.1.8-3.2ubuntu2",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "initscripts",
-      "version": "2.88dsf-59.3ubuntu2",
-      "externalId": {
-        "name": "initscripts",
-        "version": "2.88dsf-59.3ubuntu2",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "sysv-rc",
-      "version": "2.88dsf-59.3ubuntu2",
-      "externalId": {
-        "name": "sysv-rc",
-        "version": "2.88dsf-59.3ubuntu2",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "gcc-5-base",
-      "version": "5.4.0-6ubuntu1~16.04.4",
-      "externalId": {
-        "name": "gcc-5-base",
-        "version": "5.4.0-6ubuntu1~16.04.4",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libsasl2-2",
-      "version": "2.1.26.dfsg1-14build1",
-      "externalId": {
-        "name": "libsasl2-2",
-        "version": "2.1.26.dfsg1-14build1",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libstdc++6",
-      "version": "5.4.0-6ubuntu1~16.04.4",
-      "externalId": {
-        "name": "libstdc++6",
-        "version": "5.4.0-6ubuntu1~16.04.4",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "liblzma5",
-      "version": "5.1.1alpha+20120614-2ubuntu2",
-      "externalId": {
-        "name": "liblzma5",
-        "version": "5.1.1alpha+20120614-2ubuntu2",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libssl1.0.0",
-      "version": "1.0.2g-1ubuntu4.8",
-      "externalId": {
-        "name": "libssl1.0.0",
-        "version": "1.0.2g-1ubuntu4.8",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libreadline6",
-      "version": "6.3-8ubuntu2",
-      "externalId": {
-        "name": "libreadline6",
-        "version": "6.3-8ubuntu2",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "findutils",
-      "version": "4.6.0+git+20160126-2",
-      "externalId": {
-        "name": "findutils",
-        "version": "4.6.0+git+20160126-2",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libwind0-heimdal",
-      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-      "externalId": {
-        "name": "libwind0-heimdal",
-        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "ncurses-bin",
-      "version": "6.0+20160213-1ubuntu1",
-      "externalId": {
-        "name": "ncurses-bin",
-        "version": "6.0+20160213-1ubuntu1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "multiarch-support",
-      "version": "2.23-0ubuntu9",
-      "externalId": {
-        "name": "multiarch-support",
-        "version": "2.23-0ubuntu9",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libsepol1",
-      "version": "2.4-2",
-      "externalId": {
-        "name": "libsepol1",
-        "version": "2.4-2",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libsmartcols1",
-      "version": "2.27.1-6ubuntu3.3",
-      "externalId": {
-        "name": "libsmartcols1",
-        "version": "2.27.1-6ubuntu3.3",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "sensible-utils",
-      "version": "0.0.9",
-      "externalId": {
-        "name": "sensible-utils",
-        "version": "0.0.9",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "perl-base",
-      "version": "5.22.1-9",
-      "externalId": {
-        "name": "perl-base",
-        "version": "5.22.1-9",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "krb5-locales",
-      "version": "1.13.2+dfsg-5ubuntu2",
-      "externalId": {
-        "name": "krb5-locales",
-        "version": "1.13.2+dfsg-5ubuntu2",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libkmod2",
-      "version": "22-1ubuntu5",
-      "externalId": {
-        "name": "libkmod2",
-        "version": "22-1ubuntu5",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "sed",
-      "version": "4.2.2-7",
-      "externalId": {
-        "name": "sed",
-        "version": "4.2.2-7",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libasn1-8-heimdal",
-      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-      "externalId": {
-        "name": "libasn1-8-heimdal",
-        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libhcrypto4-heimdal",
-      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-      "externalId": {
-        "name": "libhcrypto4-heimdal",
-        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "bsdutils",
-      "version": "1:2.27.1-6ubuntu3.3",
-      "externalId": {
-        "name": "bsdutils",
-        "version": "1:2.27.1-6ubuntu3.3",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libsemanage1",
-      "version": "2.3-1build3",
-      "externalId": {
-        "name": "libsemanage1",
-        "version": "2.3-1build3",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libpam-runtime",
-      "version": "1.1.8-3.2ubuntu2",
-      "externalId": {
-        "name": "libpam-runtime",
-        "version": "1.1.8-3.2ubuntu2",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libattr1",
-      "version": "1:2.4.47-2",
-      "externalId": {
-        "name": "libattr1",
-        "version": "1:2.4.47-2",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libsasl2-modules-db",
-      "version": "2.1.26.dfsg1-14build1",
-      "externalId": {
-        "name": "libsasl2-modules-db",
-        "version": "2.1.26.dfsg1-14build1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libsemanage-common",
-      "version": "2.3-1build3",
-      "externalId": {
-        "name": "libsemanage-common",
-        "version": "2.3-1build3",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libustr-1.0-1",
-      "version": "1.0.4-5",
-      "externalId": {
-        "name": "libustr-1.0-1",
-        "version": "1.0.4-5",
-        "forge": {
-          "name": "ubuntu",
           "separator": ":"
         }
       },
@@ -1522,6 +1934,7 @@
       "name": "dash",
       "version": "0.5.8-2.1ubuntu2",
       "externalId": {
+        "architecture": "amd64",
         "name": "dash",
         "version": "0.5.8-2.1ubuntu2",
         "forge": {
@@ -1532,11 +1945,12 @@
       "children": []
     },
     {
-      "name": "libncursesw5",
-      "version": "6.0+20160213-1ubuntu1",
+      "name": "libpam-modules",
+      "version": "1.1.8-3.2ubuntu2",
       "externalId": {
-        "name": "libncursesw5",
-        "version": "6.0+20160213-1ubuntu1",
+        "architecture": "amd64",
+        "name": "libpam-modules",
+        "version": "1.1.8-3.2ubuntu2",
         "forge": {
           "name": "debian",
           "separator": ":"
@@ -1545,298 +1959,13 @@
       "children": []
     },
     {
-      "name": "libffi6",
-      "version": "3.2.1-4",
-      "externalId": {
-        "name": "libffi6",
-        "version": "3.2.1-4",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "passwd",
-      "version": "1:4.2-3.1ubuntu5.3",
-      "externalId": {
-        "name": "passwd",
-        "version": "1:4.2-3.1ubuntu5.3",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libapt-pkg5.0",
-      "version": "1.2.24",
-      "externalId": {
-        "name": "libapt-pkg5.0",
-        "version": "1.2.24",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libbz2-1.0",
-      "version": "1.0.6-8",
-      "externalId": {
-        "name": "libbz2-1.0",
-        "version": "1.0.6-8",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libsasl2-2",
-      "version": "2.1.26.dfsg1-14build1",
-      "externalId": {
-        "name": "libsasl2-2",
-        "version": "2.1.26.dfsg1-14build1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "debconf",
-      "version": "1.5.58ubuntu1",
-      "externalId": {
-        "name": "debconf",
-        "version": "1.5.58ubuntu1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "mount",
-      "version": "2.27.1-6ubuntu3.3",
-      "externalId": {
-        "name": "mount",
-        "version": "2.27.1-6ubuntu3.3",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libstdc++6",
-      "version": "5.4.0-6ubuntu1~16.04.4",
-      "externalId": {
-        "name": "libstdc++6",
-        "version": "5.4.0-6ubuntu1~16.04.4",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "systemd-sysv",
-      "version": "229-4ubuntu19",
-      "externalId": {
-        "name": "systemd-sysv",
-        "version": "229-4ubuntu19",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libmount1",
-      "version": "2.27.1-6ubuntu3.3",
-      "externalId": {
-        "name": "libmount1",
-        "version": "2.27.1-6ubuntu3.3",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libssl1.0.0",
-      "version": "1.0.2g-1ubuntu4.8",
-      "externalId": {
-        "name": "libssl1.0.0",
-        "version": "1.0.2g-1ubuntu4.8",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "mawk",
-      "version": "1.3.3-17ubuntu2",
-      "externalId": {
-        "name": "mawk",
-        "version": "1.3.3-17ubuntu2",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "liblzma5",
-      "version": "5.1.1alpha+20120614-2ubuntu2",
-      "externalId": {
-        "name": "liblzma5",
-        "version": "5.1.1alpha+20120614-2ubuntu2",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "base-files",
-      "version": "9.4ubuntu4.5",
-      "externalId": {
-        "name": "base-files",
-        "version": "9.4ubuntu4.5",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libpcre3",
-      "version": "2:8.38-3.1",
-      "externalId": {
-        "name": "libpcre3",
-        "version": "2:8.38-3.1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libwind0-heimdal",
-      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-      "externalId": {
-        "name": "libwind0-heimdal",
-        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "sysv-rc",
-      "version": "2.88dsf-59.3ubuntu2",
-      "externalId": {
-        "name": "sysv-rc",
-        "version": "2.88dsf-59.3ubuntu2",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "perl-base",
-      "version": "5.22.1-9",
-      "externalId": {
-        "name": "perl-base",
-        "version": "5.22.1-9",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "procps",
-      "version": "2:3.3.10-4ubuntu2.3",
-      "externalId": {
-        "name": "procps",
-        "version": "2:3.3.10-4ubuntu2.3",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libldap-2.4-2",
-      "version": "2.4.42+dfsg-2ubuntu3.2",
-      "externalId": {
-        "name": "libldap-2.4-2",
-        "version": "2.4.42+dfsg-2ubuntu3.2",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libreadline6",
+      "name": "readline-common",
       "version": "6.3-8ubuntu2",
       "externalId": {
-        "name": "libreadline6",
+        "architecture": "all",
+        "name": "readline-common",
         "version": "6.3-8ubuntu2",
         "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libusb-0.1-4",
-      "version": "2:0.1.12-28",
-      "externalId": {
-        "name": "libusb-0.1-4",
-        "version": "2:0.1.12-28",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libgnutls30",
-      "version": "3.4.10-4ubuntu1.3",
-      "externalId": {
-        "name": "libgnutls30",
-        "version": "3.4.10-4ubuntu1.3",
-        "forge": {
           "name": "debian",
           "separator": ":"
         }
@@ -1844,11 +1973,12 @@
       "children": []
     },
     {
-      "name": "libtasn1-6",
-      "version": "4.7-3ubuntu0.16.04.2",
+      "name": "libkrb5support0",
+      "version": "1.13.2+dfsg-5ubuntu2",
       "externalId": {
-        "name": "libtasn1-6",
-        "version": "4.7-3ubuntu0.16.04.2",
+        "architecture": "amd64",
+        "name": "libkrb5support0",
+        "version": "1.13.2+dfsg-5ubuntu2",
         "forge": {
           "name": "ubuntu",
           "separator": ":"
@@ -1857,24 +1987,12 @@
       "children": []
     },
     {
-      "name": "coreutils",
-      "version": "8.25-2ubuntu3~16.04",
+      "name": "libseccomp2",
+      "version": "2.2.3-3ubuntu3",
       "externalId": {
-        "name": "coreutils",
-        "version": "8.25-2ubuntu3~16.04",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "ncurses-base",
-      "version": "6.0+20160213-1ubuntu1",
-      "externalId": {
-        "name": "ncurses-base",
-        "version": "6.0+20160213-1ubuntu1",
+        "architecture": "amd64",
+        "name": "libseccomp2",
+        "version": "2.2.3-3ubuntu3",
         "forge": {
           "name": "ubuntu",
           "separator": ":"
@@ -1883,193 +2001,12 @@
       "children": []
     },
     {
-      "name": "sysvinit-utils",
-      "version": "2.88dsf-59.3ubuntu2",
+      "name": "libdb5.3",
+      "version": "5.3.28-11",
       "externalId": {
-        "name": "sysvinit-utils",
-        "version": "2.88dsf-59.3ubuntu2",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libapparmor1",
-      "version": "2.10.95-0ubuntu2.6",
-      "externalId": {
-        "name": "libapparmor1",
-        "version": "2.10.95-0ubuntu2.6",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libaudit1",
-      "version": "1:2.4.5-1ubuntu2",
-      "externalId": {
-        "name": "libaudit1",
-        "version": "1:2.4.5-1ubuntu2",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libhcrypto4-heimdal",
-      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-      "externalId": {
-        "name": "libhcrypto4-heimdal",
-        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libheimntlm0-heimdal",
-      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-      "externalId": {
-        "name": "libheimntlm0-heimdal",
-        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libselinux1",
-      "version": "2.4-3build2",
-      "externalId": {
-        "name": "libselinux1",
-        "version": "2.4-3build2",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "dpkg",
-      "version": "1.18.4ubuntu1.2",
-      "externalId": {
-        "name": "dpkg",
-        "version": "1.18.4ubuntu1.2",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libsemanage1",
-      "version": "2.3-1build3",
-      "externalId": {
-        "name": "libsemanage1",
-        "version": "2.3-1build3",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "login",
-      "version": "1:4.2-3.1ubuntu5.3",
-      "externalId": {
-        "name": "login",
-        "version": "1:4.2-3.1ubuntu5.3",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "apt",
-      "version": "1.2.24",
-      "externalId": {
-        "name": "apt",
-        "version": "1.2.24",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libattr1",
-      "version": "1:2.4.47-2",
-      "externalId": {
-        "name": "libattr1",
-        "version": "1:2.4.47-2",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libfdisk1",
-      "version": "2.27.1-6ubuntu3.3",
-      "externalId": {
-        "name": "libfdisk1",
-        "version": "2.27.1-6ubuntu3.3",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "diffutils",
-      "version": "1:3.3-3",
-      "externalId": {
-        "name": "diffutils",
-        "version": "1:3.3-3",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "gpgv",
-      "version": "1.4.20-1ubuntu3.1",
-      "externalId": {
-        "name": "gpgv",
-        "version": "1.4.20-1ubuntu3.1",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "ubuntu-keyring",
-      "version": "2012.05.19",
-      "externalId": {
-        "name": "ubuntu-keyring",
-        "version": "2012.05.19",
+        "architecture": "amd64",
+        "name": "libdb5.3",
+        "version": "5.3.28-11",
         "forge": {
           "name": "ubuntu",
           "separator": ":"
@@ -2081,6 +2018,7 @@
       "name": "libgssapi3-heimdal",
       "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
       "externalId": {
+        "architecture": "amd64",
         "name": "libgssapi3-heimdal",
         "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
         "forge": {
@@ -2091,11 +2029,40 @@
       "children": []
     },
     {
-      "name": "zlib1g",
-      "version": "1:1.2.8.dfsg-2ubuntu4.1",
+      "name": "libsepol1",
+      "version": "2.4-2",
       "externalId": {
-        "name": "zlib1g",
-        "version": "1:1.2.8.dfsg-2ubuntu4.1",
+        "architecture": "amd64",
+        "name": "libsepol1",
+        "version": "2.4-2",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "ncurses-bin",
+      "version": "6.0+20160213-1ubuntu1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "ncurses-bin",
+        "version": "6.0+20160213-1ubuntu1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libapt-pkg5.0",
+      "version": "1.2.24",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libapt-pkg5.0",
+        "version": "1.2.24",
         "forge": {
           "name": "debian",
           "separator": ":"
@@ -2107,151 +2074,9 @@
       "name": "procps",
       "version": "2:3.3.10-4ubuntu2.3",
       "externalId": {
+        "architecture": "amd64",
         "name": "procps",
         "version": "2:3.3.10-4ubuntu2.3",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "gzip",
-      "version": "1.6-4ubuntu1",
-      "externalId": {
-        "name": "gzip",
-        "version": "1.6-4ubuntu1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libbz2-1.0",
-      "version": "1.0.6-8",
-      "externalId": {
-        "name": "libbz2-1.0",
-        "version": "1.0.6-8",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "util-linux",
-      "version": "2.27.1-6ubuntu3.3",
-      "externalId": {
-        "name": "util-linux",
-        "version": "2.27.1-6ubuntu3.3",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libkrb5-3",
-      "version": "1.13.2+dfsg-5ubuntu2",
-      "externalId": {
-        "name": "libkrb5-3",
-        "version": "1.13.2+dfsg-5ubuntu2",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libudev1",
-      "version": "229-4ubuntu19",
-      "externalId": {
-        "name": "libudev1",
-        "version": "229-4ubuntu19",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libusb-0.1-4",
-      "version": "2:0.1.12-28",
-      "externalId": {
-        "name": "libusb-0.1-4",
-        "version": "2:0.1.12-28",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libtasn1-6",
-      "version": "4.7-3ubuntu0.16.04.2",
-      "externalId": {
-        "name": "libtasn1-6",
-        "version": "4.7-3ubuntu0.16.04.2",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "init",
-      "version": "1.29ubuntu4",
-      "externalId": {
-        "name": "init",
-        "version": "1.29ubuntu4",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libldap-2.4-2",
-      "version": "2.4.42+dfsg-2ubuntu3.2",
-      "externalId": {
-        "name": "libldap-2.4-2",
-        "version": "2.4.42+dfsg-2ubuntu3.2",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libnettle6",
-      "version": "3.2-1ubuntu0.16.04.1",
-      "externalId": {
-        "name": "libnettle6",
-        "version": "3.2-1ubuntu0.16.04.1",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libk5crypto3",
-      "version": "1.13.2+dfsg-5ubuntu2",
-      "externalId": {
-        "name": "libk5crypto3",
-        "version": "1.13.2+dfsg-5ubuntu2",
         "forge": {
           "name": "debian",
           "separator": ":"
@@ -2263,49 +2088,11 @@
       "name": "lsb-base",
       "version": "9.20160110ubuntu0.2",
       "externalId": {
+        "architecture": "all",
         "name": "lsb-base",
         "version": "9.20160110ubuntu0.2",
         "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libncurses5",
-      "version": "6.0+20160213-1ubuntu1",
-      "externalId": {
-        "name": "libncurses5",
-        "version": "6.0+20160213-1ubuntu1",
-        "forge": {
           "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libcryptsetup4",
-      "version": "2:1.6.6-5ubuntu2",
-      "externalId": {
-        "name": "libcryptsetup4",
-        "version": "2:1.6.6-5ubuntu2",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libsepol1",
-      "version": "2.4-2",
-      "externalId": {
-        "name": "libsepol1",
-        "version": "2.4-2",
-        "forge": {
-          "name": "debian",
           "separator": ":"
         }
       },
@@ -2315,6 +2102,7 @@
       "name": "libpam0g",
       "version": "1.1.8-3.2ubuntu2",
       "externalId": {
+        "architecture": "amd64",
         "name": "libpam0g",
         "version": "1.1.8-3.2ubuntu2",
         "forge": {
@@ -2325,11 +2113,12 @@
       "children": []
     },
     {
-      "name": "libgssapi-krb5-2",
-      "version": "1.13.2+dfsg-5ubuntu2",
+      "name": "e2fslibs",
+      "version": "1.42.13-1ubuntu1",
       "externalId": {
-        "name": "libgssapi-krb5-2",
-        "version": "1.13.2+dfsg-5ubuntu2",
+        "architecture": "amd64",
+        "name": "e2fslibs",
+        "version": "1.42.13-1ubuntu1",
         "forge": {
           "name": "debian",
           "separator": ":"
@@ -2338,11 +2127,12 @@
       "children": []
     },
     {
-      "name": "libpcre3",
-      "version": "2:8.38-3.1",
+      "name": "apt",
+      "version": "1.2.24",
       "externalId": {
-        "name": "libpcre3",
-        "version": "2:8.38-3.1",
+        "architecture": "amd64",
+        "name": "apt",
+        "version": "1.2.24",
         "forge": {
           "name": "debian",
           "separator": ":"
@@ -2351,11 +2141,26 @@
       "children": []
     },
     {
-      "name": "libkrb5-26-heimdal",
-      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+      "name": "libpam-runtime",
+      "version": "1.1.8-3.2ubuntu2",
       "externalId": {
-        "name": "libkrb5-26-heimdal",
-        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+        "architecture": "all",
+        "name": "libpam-runtime",
+        "version": "1.1.8-3.2ubuntu2",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libsemanage1",
+      "version": "2.3-1build3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libsemanage1",
+        "version": "2.3-1build3",
         "forge": {
           "name": "ubuntu",
           "separator": ":"
@@ -2364,11 +2169,12 @@
       "children": []
     },
     {
-      "name": "libsystemd0",
-      "version": "229-4ubuntu19",
+      "name": "perl-base",
+      "version": "5.22.1-9",
       "externalId": {
-        "name": "libsystemd0",
-        "version": "229-4ubuntu19",
+        "architecture": "amd64",
+        "name": "perl-base",
+        "version": "5.22.1-9",
         "forge": {
           "name": "debian",
           "separator": ":"
@@ -2377,11 +2183,40 @@
       "children": []
     },
     {
-      "name": "systemd-sysv",
-      "version": "229-4ubuntu19",
+      "name": "util-linux",
+      "version": "2.27.1-6ubuntu3.3",
       "externalId": {
-        "name": "systemd-sysv",
-        "version": "229-4ubuntu19",
+        "architecture": "amd64",
+        "name": "util-linux",
+        "version": "2.27.1-6ubuntu3.3",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "gpgv",
+      "version": "1.4.20-1ubuntu3.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "gpgv",
+        "version": "1.4.20-1ubuntu3.1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libblkid1",
+      "version": "2.27.1-6ubuntu3.3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libblkid1",
+        "version": "2.27.1-6ubuntu3.3",
         "forge": {
           "name": "debian",
           "separator": ":"
@@ -2393,6 +2228,7 @@
       "name": "e2fsprogs",
       "version": "1.42.13-1ubuntu1",
       "externalId": {
+        "architecture": "amd64",
         "name": "e2fsprogs",
         "version": "1.42.13-1ubuntu1",
         "forge": {
@@ -2403,24 +2239,12 @@
       "children": []
     },
     {
-      "name": "libaudit-common",
-      "version": "1:2.4.5-1ubuntu2",
+      "name": "libkeyutils1",
+      "version": "1.5.9-8ubuntu1",
       "externalId": {
-        "name": "libaudit-common",
-        "version": "1:2.4.5-1ubuntu2",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "debconf",
-      "version": "1.5.58ubuntu1",
-      "externalId": {
-        "name": "debconf",
-        "version": "1.5.58ubuntu1",
+        "architecture": "amd64",
+        "name": "libkeyutils1",
+        "version": "1.5.9-8ubuntu1",
         "forge": {
           "name": "debian",
           "separator": ":"
@@ -2429,375 +2253,12 @@
       "children": []
     },
     {
-      "name": "insserv",
-      "version": "1.14.0-5ubuntu3",
-      "externalId": {
-        "name": "insserv",
-        "version": "1.14.0-5ubuntu3",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libss2",
-      "version": "1.42.13-1ubuntu1",
-      "externalId": {
-        "name": "libss2",
-        "version": "1.42.13-1ubuntu1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "tar",
-      "version": "1.28-2.1ubuntu0.1",
-      "externalId": {
-        "name": "tar",
-        "version": "1.28-2.1ubuntu0.1",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "initscripts",
-      "version": "2.88dsf-59.3ubuntu2",
-      "externalId": {
-        "name": "initscripts",
-        "version": "2.88dsf-59.3ubuntu2",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libdb5.3",
-      "version": "5.3.28-11",
-      "externalId": {
-        "name": "libdb5.3",
-        "version": "5.3.28-11",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "hostname",
-      "version": "3.16ubuntu2",
-      "externalId": {
-        "name": "hostname",
-        "version": "3.16ubuntu2",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libdebconfclient0",
-      "version": "0.198ubuntu1",
-      "externalId": {
-        "name": "libdebconfclient0",
-        "version": "0.198ubuntu1",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libseccomp2",
-      "version": "2.2.3-3ubuntu3",
-      "externalId": {
-        "name": "libseccomp2",
-        "version": "2.2.3-3ubuntu3",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libuuid1",
-      "version": "2.27.1-6ubuntu3.3",
-      "externalId": {
-        "name": "libuuid1",
-        "version": "2.27.1-6ubuntu3.3",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libpam-modules-bin",
-      "version": "1.1.8-3.2ubuntu2",
-      "externalId": {
-        "name": "libpam-modules-bin",
-        "version": "1.1.8-3.2ubuntu2",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "ncurses-bin",
-      "version": "6.0+20160213-1ubuntu1",
-      "externalId": {
-        "name": "ncurses-bin",
-        "version": "6.0+20160213-1ubuntu1",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libheimbase1-heimdal",
+      "name": "libheimntlm0-heimdal",
       "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
       "externalId": {
-        "name": "libheimbase1-heimdal",
+        "architecture": "amd64",
+        "name": "libheimntlm0-heimdal",
         "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libprocps4",
-      "version": "2:3.3.10-4ubuntu2.3",
-      "externalId": {
-        "name": "libprocps4",
-        "version": "2:3.3.10-4ubuntu2.3",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libblkid1",
-      "version": "2.27.1-6ubuntu3.3",
-      "externalId": {
-        "name": "libblkid1",
-        "version": "2.27.1-6ubuntu3.3",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "findutils",
-      "version": "4.6.0+git+20160126-2",
-      "externalId": {
-        "name": "findutils",
-        "version": "4.6.0+git+20160126-2",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libgpg-error0",
-      "version": "1.21-2ubuntu1",
-      "externalId": {
-        "name": "libgpg-error0",
-        "version": "1.21-2ubuntu1",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "sensible-utils",
-      "version": "0.0.9",
-      "externalId": {
-        "name": "sensible-utils",
-        "version": "0.0.9",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "liblz4-1",
-      "version": "0.0~r131-2ubuntu2",
-      "externalId": {
-        "name": "liblz4-1",
-        "version": "0.0~r131-2ubuntu2",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libc6",
-      "version": "2.23-0ubuntu9",
-      "externalId": {
-        "name": "libc6",
-        "version": "2.23-0ubuntu9",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libhogweed4",
-      "version": "3.2-1ubuntu0.16.04.1",
-      "externalId": {
-        "name": "libhogweed4",
-        "version": "3.2-1ubuntu0.16.04.1",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libgcrypt20",
-      "version": "1.6.5-2ubuntu0.3",
-      "externalId": {
-        "name": "libgcrypt20",
-        "version": "1.6.5-2ubuntu0.3",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "e2fslibs",
-      "version": "1.42.13-1ubuntu1",
-      "externalId": {
-        "name": "e2fslibs",
-        "version": "1.42.13-1ubuntu1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libncurses5",
-      "version": "6.0+20160213-1ubuntu1",
-      "externalId": {
-        "name": "libncurses5",
-        "version": "6.0+20160213-1ubuntu1",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libgcc1",
-      "version": "1:6.0.1-0ubuntu1",
-      "externalId": {
-        "name": "libgcc1",
-        "version": "1:6.0.1-0ubuntu1",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libdevmapper1.02.1",
-      "version": "2:1.02.110-1ubuntu10",
-      "externalId": {
-        "name": "libdevmapper1.02.1",
-        "version": "2:1.02.110-1ubuntu10",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libgssapi-krb5-2",
-      "version": "1.13.2+dfsg-5ubuntu2",
-      "externalId": {
-        "name": "libgssapi-krb5-2",
-        "version": "1.13.2+dfsg-5ubuntu2",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "init-system-helpers",
-      "version": "1.29ubuntu4",
-      "externalId": {
-        "name": "init-system-helpers",
-        "version": "1.29ubuntu4",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "grep",
-      "version": "2.25-1~16.04.1",
-      "externalId": {
-        "name": "grep",
-        "version": "2.25-1~16.04.1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libss2",
-      "version": "1.42.13-1ubuntu1",
-      "externalId": {
-        "name": "libss2",
-        "version": "1.42.13-1ubuntu1",
         "forge": {
           "name": "debian",
           "separator": ":"
@@ -2809,6 +2270,7 @@
       "name": "openssl",
       "version": "1.0.2g-1ubuntu4.8",
       "externalId": {
+        "architecture": "amd64",
         "name": "openssl",
         "version": "1.0.2g-1ubuntu4.8",
         "forge": {
@@ -2819,37 +2281,12 @@
       "children": []
     },
     {
-      "name": "libsqlite3-0",
-      "version": "3.11.0-1ubuntu1",
+      "name": "login",
+      "version": "1:4.2-3.1ubuntu5.3",
       "externalId": {
-        "name": "libsqlite3-0",
-        "version": "3.11.0-1ubuntu1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "readline-common",
-      "version": "6.3-8ubuntu2",
-      "externalId": {
-        "name": "readline-common",
-        "version": "6.3-8ubuntu2",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libkeyutils1",
-      "version": "1.5.9-8ubuntu1",
-      "externalId": {
-        "name": "libkeyutils1",
-        "version": "1.5.9-8ubuntu1",
+        "architecture": "amd64",
+        "name": "login",
+        "version": "1:4.2-3.1ubuntu5.3",
         "forge": {
           "name": "debian",
           "separator": ":"
@@ -2858,24 +2295,12 @@
       "children": []
     },
     {
-      "name": "apt",
-      "version": "1.2.24",
+      "name": "libtasn1-6",
+      "version": "4.7-3ubuntu0.16.04.2",
       "externalId": {
-        "name": "apt",
-        "version": "1.2.24",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "makedev",
-      "version": "2.3.1-93ubuntu2~ubuntu16.04.1",
-      "externalId": {
-        "name": "makedev",
-        "version": "2.3.1-93ubuntu2~ubuntu16.04.1",
+        "architecture": "amd64",
+        "name": "libtasn1-6",
+        "version": "4.7-3ubuntu0.16.04.2",
         "forge": {
           "name": "debian",
           "separator": ":"
@@ -2884,11 +2309,12 @@
       "children": []
     },
     {
-      "name": "librtmp1",
-      "version": "2.4+20151223.gitfa8646d-1ubuntu0.1",
+      "name": "libldap-2.4-2",
+      "version": "2.4.42+dfsg-2ubuntu3.2",
       "externalId": {
-        "name": "librtmp1",
-        "version": "2.4+20151223.gitfa8646d-1ubuntu0.1",
+        "architecture": "amd64",
+        "name": "libldap-2.4-2",
+        "version": "2.4.42+dfsg-2ubuntu3.2",
         "forge": {
           "name": "debian",
           "separator": ":"
@@ -2897,37 +2323,12 @@
       "children": []
     },
     {
-      "name": "libsasl2-modules",
-      "version": "2.1.26.dfsg1-14build1",
+      "name": "libsemanage-common",
+      "version": "2.3-1build3",
       "externalId": {
-        "name": "libsasl2-modules",
-        "version": "2.1.26.dfsg1-14build1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libhx509-5-heimdal",
-      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-      "externalId": {
-        "name": "libhx509-5-heimdal",
-        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libroken18-heimdal",
-      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-      "externalId": {
-        "name": "libroken18-heimdal",
-        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+        "architecture": "all",
+        "name": "libsemanage-common",
+        "version": "2.3-1build3",
         "forge": {
           "name": "debian",
           "separator": ":"
@@ -2936,11 +2337,12 @@
       "children": []
     },
     {
-      "name": "liblz4-1",
-      "version": "0.0~r131-2ubuntu2",
+      "name": "coreutils",
+      "version": "8.25-2ubuntu3~16.04",
       "externalId": {
-        "name": "liblz4-1",
-        "version": "0.0~r131-2ubuntu2",
+        "architecture": "amd64",
+        "name": "coreutils",
+        "version": "8.25-2ubuntu3~16.04",
         "forge": {
           "name": "debian",
           "separator": ":"
@@ -2949,114 +2351,11 @@
       "children": []
     },
     {
-      "name": "libapparmor1",
-      "version": "2.10.95-0ubuntu2.6",
-      "externalId": {
-        "name": "libapparmor1",
-        "version": "2.10.95-0ubuntu2.6",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libpam-modules",
-      "version": "1.1.8-3.2ubuntu2",
-      "externalId": {
-        "name": "libpam-modules",
-        "version": "1.1.8-3.2ubuntu2",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "sysvinit-utils",
-      "version": "2.88dsf-59.3ubuntu2",
-      "externalId": {
-        "name": "sysvinit-utils",
-        "version": "2.88dsf-59.3ubuntu2",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libblkid1",
-      "version": "2.27.1-6ubuntu3.3",
-      "externalId": {
-        "name": "libblkid1",
-        "version": "2.27.1-6ubuntu3.3",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libcap2",
-      "version": "1:2.24-12",
-      "externalId": {
-        "name": "libcap2",
-        "version": "1:2.24-12",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libpam-modules",
-      "version": "1.1.8-3.2ubuntu2",
-      "externalId": {
-        "name": "libpam-modules",
-        "version": "1.1.8-3.2ubuntu2",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libselinux1",
-      "version": "2.4-3build2",
-      "externalId": {
-        "name": "libselinux1",
-        "version": "2.4-3build2",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "bash",
-      "version": "4.3-14ubuntu1.2",
-      "externalId": {
-        "name": "bash",
-        "version": "4.3-14ubuntu1.2",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "e2fslibs",
+      "name": "libss2",
       "version": "1.42.13-1ubuntu1",
       "externalId": {
-        "name": "e2fslibs",
+        "architecture": "amd64",
+        "name": "libss2",
         "version": "1.42.13-1ubuntu1",
         "forge": {
           "name": "debian",
@@ -3066,11 +2365,12 @@
       "children": []
     },
     {
-      "name": "libfdisk1",
-      "version": "2.27.1-6ubuntu3.3",
+      "name": "multiarch-support",
+      "version": "2.23-0ubuntu9",
       "externalId": {
-        "name": "libfdisk1",
-        "version": "2.27.1-6ubuntu3.3",
+        "architecture": "amd64",
+        "name": "multiarch-support",
+        "version": "2.23-0ubuntu9",
         "forge": {
           "name": "ubuntu",
           "separator": ":"
@@ -3079,37 +2379,26 @@
       "children": []
     },
     {
-      "name": "libheimntlm0-heimdal",
+      "name": "zlib1g",
+      "version": "1:1.2.8.dfsg-2ubuntu4.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "zlib1g",
+        "version": "1:1.2.8.dfsg-2ubuntu4.1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libhcrypto4-heimdal",
       "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
       "externalId": {
-        "name": "libheimntlm0-heimdal",
+        "architecture": "amd64",
+        "name": "libhcrypto4-heimdal",
         "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libdevmapper1.02.1",
-      "version": "2:1.02.110-1ubuntu10",
-      "externalId": {
-        "name": "libdevmapper1.02.1",
-        "version": "2:1.02.110-1ubuntu10",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "init-system-helpers",
-      "version": "1.29ubuntu4",
-      "externalId": {
-        "name": "init-system-helpers",
-        "version": "1.29ubuntu4",
         "forge": {
           "name": "ubuntu",
           "separator": ":"
@@ -3121,21 +2410,23 @@
       "name": "dpkg",
       "version": "1.18.4ubuntu1.2",
       "externalId": {
+        "architecture": "amd64",
         "name": "dpkg",
         "version": "1.18.4ubuntu1.2",
         "forge": {
-          "name": "debian",
+          "name": "ubuntu",
           "separator": ":"
         }
       },
       "children": []
     },
     {
-      "name": "grep",
-      "version": "2.25-1~16.04.1",
+      "name": "libwind0-heimdal",
+      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
       "externalId": {
-        "name": "grep",
-        "version": "2.25-1~16.04.1",
+        "architecture": "amd64",
+        "name": "libwind0-heimdal",
+        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
         "forge": {
           "name": "debian",
           "separator": ":"
@@ -3144,10 +2435,67 @@
       "children": []
     },
     {
-      "name": "gpgv",
+      "name": "libacl1",
+      "version": "2.2.52-3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libacl1",
+        "version": "2.2.52-3",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libkrb5-26-heimdal",
+      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libkrb5-26-heimdal",
+        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libstdc++6",
+      "version": "5.4.0-6ubuntu1~16.04.4",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libstdc++6",
+        "version": "5.4.0-6ubuntu1~16.04.4",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "findutils",
+      "version": "4.6.0+git+20160126-2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "findutils",
+        "version": "4.6.0+git+20160126-2",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "gnupg",
       "version": "1.4.20-1ubuntu3.1",
       "externalId": {
-        "name": "gpgv",
+        "architecture": "amd64",
+        "name": "gnupg",
         "version": "1.4.20-1ubuntu3.1",
         "forge": {
           "name": "ubuntu",
@@ -3157,24 +2505,12 @@
       "children": []
     },
     {
-      "name": "libp11-kit0",
-      "version": "0.23.2-5~ubuntu16.04.1",
+      "name": "libgcrypt20",
+      "version": "1.6.5-2ubuntu0.3",
       "externalId": {
-        "name": "libp11-kit0",
-        "version": "0.23.2-5~ubuntu16.04.1",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libhogweed4",
-      "version": "3.2-1ubuntu0.16.04.1",
-      "externalId": {
-        "name": "libhogweed4",
-        "version": "3.2-1ubuntu0.16.04.1",
+        "architecture": "amd64",
+        "name": "libgcrypt20",
+        "version": "1.6.5-2ubuntu0.3",
         "forge": {
           "name": "ubuntu",
           "separator": ":"
@@ -3183,11 +2519,12 @@
       "children": []
     },
     {
-      "name": "libkeyutils1",
-      "version": "1.5.9-8ubuntu1",
+      "name": "libkmod2",
+      "version": "22-1ubuntu5",
       "externalId": {
-        "name": "libkeyutils1",
-        "version": "1.5.9-8ubuntu1",
+        "architecture": "amd64",
+        "name": "libkmod2",
+        "version": "22-1ubuntu5",
         "forge": {
           "name": "ubuntu",
           "separator": ":"
@@ -3196,11 +2533,12 @@
       "children": []
     },
     {
-      "name": "libcurl3-gnutls",
-      "version": "7.47.0-1ubuntu2.2",
+      "name": "libaudit1",
+      "version": "1:2.4.5-1ubuntu2",
       "externalId": {
-        "name": "libcurl3-gnutls",
-        "version": "7.47.0-1ubuntu2.2",
+        "architecture": "amd64",
+        "name": "libaudit1",
+        "version": "1:2.4.5-1ubuntu2",
         "forge": {
           "name": "debian",
           "separator": ":"
@@ -3209,24 +2547,12 @@
       "children": []
     },
     {
-      "name": "libgmp10",
-      "version": "2:6.1.0+dfsg-2",
+      "name": "libbz2-1.0",
+      "version": "1.0.6-8",
       "externalId": {
-        "name": "libgmp10",
-        "version": "2:6.1.0+dfsg-2",
-        "forge": {
-          "name": "debian",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "init",
-      "version": "1.29ubuntu4",
-      "externalId": {
-        "name": "init",
-        "version": "1.29ubuntu4",
+        "architecture": "amd64",
+        "name": "libbz2-1.0",
+        "version": "1.0.6-8",
         "forge": {
           "name": "ubuntu",
           "separator": ":"
@@ -3235,11 +2561,68 @@
       "children": []
     },
     {
-      "name": "libidn11",
-      "version": "1.32-3ubuntu1.1",
+      "name": "diffutils",
+      "version": "1:3.3-3",
       "externalId": {
-        "name": "libidn11",
-        "version": "1.32-3ubuntu1.1",
+        "architecture": "amd64",
+        "name": "diffutils",
+        "version": "1:3.3-3",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "sysvinit-utils",
+      "version": "2.88dsf-59.3ubuntu2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "sysvinit-utils",
+        "version": "2.88dsf-59.3ubuntu2",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libasn1-8-heimdal",
+      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libasn1-8-heimdal",
+        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "base-passwd",
+      "version": "3.5.39",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "base-passwd",
+        "version": "3.5.39",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libattr1",
+      "version": "1:2.4.47-2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libattr1",
+        "version": "1:2.4.47-2",
         "forge": {
           "name": "debian",
           "separator": ":"
@@ -3251,6 +2634,7 @@
       "name": "libtinfo5",
       "version": "6.0+20160213-1ubuntu1",
       "externalId": {
+        "architecture": "amd64",
         "name": "libtinfo5",
         "version": "6.0+20160213-1ubuntu1",
         "forge": {
@@ -3261,11 +2645,12 @@
       "children": []
     },
     {
-      "name": "adduser",
-      "version": "3.113+nmu3ubuntu4",
+      "name": "libc-bin",
+      "version": "2.23-0ubuntu9",
       "externalId": {
-        "name": "adduser",
-        "version": "3.113+nmu3ubuntu4",
+        "architecture": "amd64",
+        "name": "libc-bin",
+        "version": "2.23-0ubuntu9",
         "forge": {
           "name": "ubuntu",
           "separator": ":"
@@ -3274,50 +2659,12 @@
       "children": []
     },
     {
-      "name": "libkrb5support0",
-      "version": "1.13.2+dfsg-5ubuntu2",
+      "name": "liblzma5",
+      "version": "5.1.1alpha+20120614-2ubuntu2",
       "externalId": {
-        "name": "libkrb5support0",
-        "version": "1.13.2+dfsg-5ubuntu2",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "gnupg",
-      "version": "1.4.20-1ubuntu3.1",
-      "externalId": {
-        "name": "gnupg",
-        "version": "1.4.20-1ubuntu3.1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "makedev",
-      "version": "2.3.1-93ubuntu2~ubuntu16.04.1",
-      "externalId": {
-        "name": "makedev",
-        "version": "2.3.1-93ubuntu2~ubuntu16.04.1",
-        "forge": {
-          "name": "ubuntu",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libhx509-5-heimdal",
-      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-      "externalId": {
-        "name": "libhx509-5-heimdal",
-        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+        "architecture": "amd64",
+        "name": "liblzma5",
+        "version": "5.1.1alpha+20120614-2ubuntu2",
         "forge": {
           "name": "debian",
           "separator": ":"
@@ -3326,11 +2673,138 @@
       "children": []
     },
     {
-      "name": "libroken18-heimdal",
-      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+      "name": "libfdisk1",
+      "version": "2.27.1-6ubuntu3.3",
       "externalId": {
-        "name": "libroken18-heimdal",
-        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+        "architecture": "amd64",
+        "name": "libfdisk1",
+        "version": "2.27.1-6ubuntu3.3",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "base-files",
+      "version": "9.4ubuntu4.5",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "base-files",
+        "version": "9.4ubuntu4.5",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libpam-modules-bin",
+      "version": "1.1.8-3.2ubuntu2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libpam-modules-bin",
+        "version": "1.1.8-3.2ubuntu2",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "bash",
+      "version": "4.3-14ubuntu1.2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "bash",
+        "version": "4.3-14ubuntu1.2",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libffi6",
+      "version": "3.2.1-4",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libffi6",
+        "version": "3.2.1-4",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libncursesw5",
+      "version": "6.0+20160213-1ubuntu1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libncursesw5",
+        "version": "6.0+20160213-1ubuntu1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libp11-kit0",
+      "version": "0.23.2-5~ubuntu16.04.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libp11-kit0",
+        "version": "0.23.2-5~ubuntu16.04.1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libapparmor1",
+      "version": "2.10.95-0ubuntu2.6",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libapparmor1",
+        "version": "2.10.95-0ubuntu2.6",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "mawk",
+      "version": "1.3.3-17ubuntu2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "mawk",
+        "version": "1.3.3-17ubuntu2",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "bsdutils",
+      "version": "1:2.27.1-6ubuntu3.3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "bsdutils",
+        "version": "1:2.27.1-6ubuntu3.3",
         "forge": {
           "name": "ubuntu",
           "separator": ":"
@@ -3342,8 +2816,121 @@
       "name": "libcap2-bin",
       "version": "1:2.24-12",
       "externalId": {
+        "architecture": "amd64",
         "name": "libcap2-bin",
         "version": "1:2.24-12",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libmount1",
+      "version": "2.27.1-6ubuntu3.3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libmount1",
+        "version": "2.27.1-6ubuntu3.3",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libssl1.0.0",
+      "version": "1.0.2g-1ubuntu4.8",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libssl1.0.0",
+        "version": "1.0.2g-1ubuntu4.8",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "ca-certificates",
+      "version": "20160104ubuntu1",
+      "externalId": {
+        "architecture": "all",
+        "name": "ca-certificates",
+        "version": "20160104ubuntu1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libwind0-heimdal",
+      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libwind0-heimdal",
+        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "liblzma5",
+      "version": "5.1.1alpha+20120614-2ubuntu2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "liblzma5",
+        "version": "5.1.1alpha+20120614-2ubuntu2",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "gcc-5-base",
+      "version": "5.4.0-6ubuntu1~16.04.4",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "gcc-5-base",
+        "version": "5.4.0-6ubuntu1~16.04.4",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libkrb5-26-heimdal",
+      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libkrb5-26-heimdal",
+        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "findutils",
+      "version": "4.6.0+git+20160126-2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "findutils",
+        "version": "4.6.0+git+20160126-2",
         "forge": {
           "name": "ubuntu",
           "separator": ":"
@@ -3355,8 +2942,681 @@
       "name": "libk5crypto3",
       "version": "1.13.2+dfsg-5ubuntu2",
       "externalId": {
+        "architecture": "amd64",
         "name": "libk5crypto3",
         "version": "1.13.2+dfsg-5ubuntu2",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "mount",
+      "version": "2.27.1-6ubuntu3.3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "mount",
+        "version": "2.27.1-6ubuntu3.3",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libpam-modules-bin",
+      "version": "1.1.8-3.2ubuntu2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libpam-modules-bin",
+        "version": "1.1.8-3.2ubuntu2",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libhogweed4",
+      "version": "3.2-1ubuntu0.16.04.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libhogweed4",
+        "version": "3.2-1ubuntu0.16.04.1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "sysv-rc",
+      "version": "2.88dsf-59.3ubuntu2",
+      "externalId": {
+        "architecture": "all",
+        "name": "sysv-rc",
+        "version": "2.88dsf-59.3ubuntu2",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "dpkg",
+      "version": "1.18.4ubuntu1.2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "dpkg",
+        "version": "1.18.4ubuntu1.2",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "ca-certificates",
+      "version": "20160104ubuntu1",
+      "externalId": {
+        "architecture": "all",
+        "name": "ca-certificates",
+        "version": "20160104ubuntu1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libsasl2-modules",
+      "version": "2.1.26.dfsg1-14build1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libsasl2-modules",
+        "version": "2.1.26.dfsg1-14build1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "init",
+      "version": "1.29ubuntu4",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "init",
+        "version": "1.29ubuntu4",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libdevmapper1.02.1",
+      "version": "2:1.02.110-1ubuntu10",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libdevmapper1.02.1",
+        "version": "2:1.02.110-1ubuntu10",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libroken18-heimdal",
+      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libroken18-heimdal",
+        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libgssapi-krb5-2",
+      "version": "1.13.2+dfsg-5ubuntu2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libgssapi-krb5-2",
+        "version": "1.13.2+dfsg-5ubuntu2",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "initscripts",
+      "version": "2.88dsf-59.3ubuntu2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "initscripts",
+        "version": "2.88dsf-59.3ubuntu2",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libsqlite3-0",
+      "version": "3.11.0-1ubuntu1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libsqlite3-0",
+        "version": "3.11.0-1ubuntu1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "gzip",
+      "version": "1.6-4ubuntu1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "gzip",
+        "version": "1.6-4ubuntu1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "debconf",
+      "version": "1.5.58ubuntu1",
+      "externalId": {
+        "architecture": "all",
+        "name": "debconf",
+        "version": "1.5.58ubuntu1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libkrb5-3",
+      "version": "1.13.2+dfsg-5ubuntu2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libkrb5-3",
+        "version": "1.13.2+dfsg-5ubuntu2",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "ubuntu-keyring",
+      "version": "2012.05.19",
+      "externalId": {
+        "architecture": "all",
+        "name": "ubuntu-keyring",
+        "version": "2012.05.19",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libcap2",
+      "version": "1:2.24-12",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libcap2",
+        "version": "1:2.24-12",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libseccomp2",
+      "version": "2.2.3-3ubuntu3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libseccomp2",
+        "version": "2.2.3-3ubuntu3",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libudev1",
+      "version": "229-4ubuntu19",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libudev1",
+        "version": "229-4ubuntu19",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "krb5-locales",
+      "version": "1.13.2+dfsg-5ubuntu2",
+      "externalId": {
+        "architecture": "all",
+        "name": "krb5-locales",
+        "version": "1.13.2+dfsg-5ubuntu2",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libgnutls30",
+      "version": "3.4.10-4ubuntu1.3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libgnutls30",
+        "version": "3.4.10-4ubuntu1.3",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libheimbase1-heimdal",
+      "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libheimbase1-heimdal",
+        "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libkrb5support0",
+      "version": "1.13.2+dfsg-5ubuntu2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libkrb5support0",
+        "version": "1.13.2+dfsg-5ubuntu2",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "debconf",
+      "version": "1.5.58ubuntu1",
+      "externalId": {
+        "architecture": "all",
+        "name": "debconf",
+        "version": "1.5.58ubuntu1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libhogweed4",
+      "version": "3.2-1ubuntu0.16.04.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libhogweed4",
+        "version": "3.2-1ubuntu0.16.04.1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "sysv-rc",
+      "version": "2.88dsf-59.3ubuntu2",
+      "externalId": {
+        "architecture": "all",
+        "name": "sysv-rc",
+        "version": "2.88dsf-59.3ubuntu2",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "dash",
+      "version": "0.5.8-2.1ubuntu2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "dash",
+        "version": "0.5.8-2.1ubuntu2",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libffi6",
+      "version": "3.2.1-4",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libffi6",
+        "version": "3.2.1-4",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "sensible-utils",
+      "version": "0.0.9",
+      "externalId": {
+        "architecture": "all",
+        "name": "sensible-utils",
+        "version": "0.0.9",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "gzip",
+      "version": "1.6-4ubuntu1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "gzip",
+        "version": "1.6-4ubuntu1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libtinfo5",
+      "version": "6.0+20160213-1ubuntu1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libtinfo5",
+        "version": "6.0+20160213-1ubuntu1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libdevmapper1.02.1",
+      "version": "2:1.02.110-1ubuntu10",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libdevmapper1.02.1",
+        "version": "2:1.02.110-1ubuntu10",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libpam-runtime",
+      "version": "1.1.8-3.2ubuntu2",
+      "externalId": {
+        "architecture": "all",
+        "name": "libpam-runtime",
+        "version": "1.1.8-3.2ubuntu2",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "krb5-locales",
+      "version": "1.13.2+dfsg-5ubuntu2",
+      "externalId": {
+        "architecture": "all",
+        "name": "krb5-locales",
+        "version": "1.13.2+dfsg-5ubuntu2",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libgssapi-krb5-2",
+      "version": "1.13.2+dfsg-5ubuntu2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libgssapi-krb5-2",
+        "version": "1.13.2+dfsg-5ubuntu2",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "diffutils",
+      "version": "1:3.3-3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "diffutils",
+        "version": "1:3.3-3",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "ubuntu-keyring",
+      "version": "2012.05.19",
+      "externalId": {
+        "architecture": "all",
+        "name": "ubuntu-keyring",
+        "version": "2012.05.19",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "initscripts",
+      "version": "2.88dsf-59.3ubuntu2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "initscripts",
+        "version": "2.88dsf-59.3ubuntu2",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "insserv",
+      "version": "1.14.0-5ubuntu3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "insserv",
+        "version": "1.14.0-5ubuntu3",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libsemanage-common",
+      "version": "2.3-1build3",
+      "externalId": {
+        "architecture": "all",
+        "name": "libsemanage-common",
+        "version": "2.3-1build3",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "systemd",
+      "version": "229-4ubuntu19",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "systemd",
+        "version": "229-4ubuntu19",
+        "forge": {
+          "name": "ubuntu",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libdebconfclient0",
+      "version": "0.198ubuntu1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libdebconfclient0",
+        "version": "0.198ubuntu1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libsqlite3-0",
+      "version": "3.11.0-1ubuntu1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libsqlite3-0",
+        "version": "3.11.0-1ubuntu1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libudev1",
+      "version": "229-4ubuntu19",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libudev1",
+        "version": "229-4ubuntu19",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libsasl2-modules",
+      "version": "2.1.26.dfsg1-14build1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libsasl2-modules",
+        "version": "2.1.26.dfsg1-14build1",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libselinux1",
+      "version": "2.4-3build2",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libselinux1",
+        "version": "2.4-3build2",
+        "forge": {
+          "name": "debian",
+          "separator": ":"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libsmartcols1",
+      "version": "2.27.1-6ubuntu3.3",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libsmartcols1",
+        "version": "2.27.1-6ubuntu3.3",
         "forge": {
           "name": "ubuntu",
           "separator": ":"
