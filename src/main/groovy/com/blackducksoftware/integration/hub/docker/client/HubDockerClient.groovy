@@ -84,9 +84,10 @@ class HubDockerClient {
             // http.proxyHost , http.proxyPort, http.proxyUser, http.proxyPassword
             Properties properties = (Properties) System.getProperties().clone()
             properties = DefaultDockerClientConfig.loadIncludedDockerProperties(properties)
+            logger.debug(String.format("Docker properties: %s", properties.toString()));
 
             DefaultDockerClientConfig.Builder builder = new DefaultDockerClientConfig.Builder().withProperties(properties)
-            if(StringUtils.isNotBlank(dockerHost)){
+            if (StringUtils.isNotBlank(dockerHost)) {
                 builder.withDockerHost(dockerHost)
             }
             if(dockerTlsVerify != null){
@@ -122,6 +123,7 @@ class HubDockerClient {
 
     private void loginAuthenticatedRegistry(){
         if(StringUtils.isNotBlank(dockerRegistryUsername) && StringUtils.isNotBlank(dockerRegistryPassword)){
+            logger.debug(String.format("Logging into docker as %s", dockerRegistryUsername));
             String command = "docker login -u=${dockerRegistryUsername} -p=${dockerRegistryPassword}"
             if(StringUtils.isNotBlank(dockerRegistry)){
                 command += " ${dockerRegistry}"
