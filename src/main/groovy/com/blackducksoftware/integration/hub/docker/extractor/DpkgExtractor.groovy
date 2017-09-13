@@ -34,6 +34,8 @@ import org.springframework.stereotype.Component
 import com.blackducksoftware.integration.hub.bdio.simple.DependencyNodeBuilder
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent
 import com.blackducksoftware.integration.hub.bdio.simple.model.DependencyNode
+import com.blackducksoftware.integration.hub.detect.model.BomToolType
+import com.blackducksoftware.integration.hub.detect.model.DetectCodeLocation
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 import com.blackducksoftware.integration.hub.docker.executor.DpkgExecutor
@@ -57,6 +59,9 @@ class DpkgExtractor extends Extractor {
     ExtractionResults extractComponents(String dockerImageRepo, String dockerImageTag, ExtractionDetails extractionDetails, String[] packageList) {
         final List<BdioComponent> components = new ArrayList<>();
         final DependencyNode rootNode = createDependencyNode(OperatingSystemEnum.UBUNTU.forge, dockerImageRepo, dockerImageTag, extractionDetails.architecture);
+        final DetectCodeLocation codeLocation =
+                new DetectCodeLocation(BomToolType.DOCKER, String.format("%s_%s", dockerImageRepo, dockerImageTag), rootNode)
+
         final DependencyNodeBuilder dNodeBuilder = new DependencyNodeBuilder(rootNode);
         boolean startOfComponents = false
         packageList.each { packageLine ->
@@ -71,9 +76,11 @@ class DpkgExtractor extends Extractor {
                         if (name.contains(":")) {
                             name = name.substring(0, name.indexOf(":"))
                         }
-                        String externalId = "$name/$version/$architecture"
+                        //                        String externalId = "$name/$version/$architecture"
+                        final String externalId = String.format("%s/%s/%s", name, version, architecture);
+                        logger.debug(String.format("*** Constructed externalId: %s", externalId));
 
-                        createBdioComponent(dNodeBuilder, rootNode, components, name, version, externalId, extractionDetails.architecture)
+                        createBdioComponent(dNodeBuilder, rootNode, components, name, version, externalId, architecture)
                     } else {
                         logger.debug("Package \"${packageLine}\" is listed but not installed (package status: ${packageStatus})")
                     }
@@ -81,7 +88,7 @@ class DpkgExtractor extends Extractor {
             }
         }
         logger.trace(String.format("DependencyNode tree: %s", rootNode));
-        return new ExtractionResults(components, rootNode);
+        return new ExtractionResults(components, codeLocation);
     }
 
     boolean isInstalledStatus(Character packageStatus) {
