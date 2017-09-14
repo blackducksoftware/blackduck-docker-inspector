@@ -240,7 +240,12 @@ then
 else
 	echo Inspecting image: $image
 	# TODO TEMP
-	cp ~/Documents/git/hub-docker-inspector/build/libs/*.jar .
+	echo "******* TEMP: getting hub-docker-inspector-3.0.0-SNAPSHOT.jar from latest build"
+	cp ~/Documents/git/hub-docker-inspector/build/distributions/*.zip ~/Documents/Files/hub-inspector/test
+	pushd ~/Documents/Files/hub-inspector/test
+	unzip -o hub-docker-inspector-3.0.0-SNAPSHOT.zip
+	popd
+	cp ~/Documents/Files/hub-inspector/test/hub-docker-inspector-3.0.0-SNAPSHOT.jar .
 	echo "******* invoking launcher script"
 	chmod +x ~/Documents/git/hub-docker-inspector/build/hub-docker-inspector-launcher.sh
 	~/Documents/git/hub-docker-inspector/build/hub-docker-inspector-launcher.sh ${options[*]} "\"$image\""

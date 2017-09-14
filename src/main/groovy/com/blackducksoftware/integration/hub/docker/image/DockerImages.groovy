@@ -45,8 +45,8 @@ class DockerImages {
         String programVersion = programVersion.getProgramVersion()
         dockerImageMap.put(OperatingSystemEnum.CENTOS, new DockerImage(OperatingSystemEnum.CENTOS, "blackducksoftware/hub-docker-inspector-centos", programVersion))
         dockerImageMap.put(OperatingSystemEnum.FEDORA, new DockerImage(OperatingSystemEnum.CENTOS, "blackducksoftware/hub-docker-inspector-centos", programVersion))
-        dockerImageMap.put(OperatingSystemEnum.DEBIAN, new DockerImage(OperatingSystemEnum.UBUNTU, "blackducksoftware/hub-docker-inspector", programVersion))
-        dockerImageMap.put(OperatingSystemEnum.UBUNTU, new DockerImage(OperatingSystemEnum.UBUNTU, "blackducksoftware/hub-docker-inspector", programVersion))
+        dockerImageMap.put(OperatingSystemEnum.DEBIAN, new DockerImage(OperatingSystemEnum.UBUNTU, "blackducksoftware/hub-docker-inspector-ubuntu", programVersion))
+        dockerImageMap.put(OperatingSystemEnum.UBUNTU, new DockerImage(OperatingSystemEnum.UBUNTU, "blackducksoftware/hub-docker-inspector-ubuntu", programVersion))
         dockerImageMap.put(OperatingSystemEnum.ALPINE, new DockerImage(OperatingSystemEnum.ALPINE, "blackducksoftware/hub-docker-inspector-alpine", programVersion))
         initialized=true
     }
