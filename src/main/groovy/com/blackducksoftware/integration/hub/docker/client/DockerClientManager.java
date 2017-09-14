@@ -259,7 +259,7 @@ public class DockerClientManager {
         final String[] cmdArr = { cmd, arg };
         execCreateCmd.withCmd(cmdArr);
         final ExecCreateCmdResponse execCreateCmdResponse = execCreateCmd.exec();
-        logger.info("Switching to target image appropriate container");
+        logger.info("Invoking container appropriate for this target image");
         dockerClient.execStartCmd(execCreateCmdResponse.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
         logger.info("Returning to primary container");
     }
