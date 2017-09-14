@@ -67,6 +67,9 @@ public class ProgramPaths {
     }
 
     private String getProgramDirPathHost() {
+        if (!hostWorkingDirPath.endsWith("/")) {
+            hostWorkingDirPath = String.format("%s/", hostWorkingDirPath);
+        }
         return hostWorkingDirPath;
     }
 
