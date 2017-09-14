@@ -34,6 +34,9 @@ public class ProgramPaths {
     @Value("${on.host}")
     private boolean onHost;
 
+    @Value("${host.working.dir.path:notused}")
+    private String hostWorkingDirPath;
+
     @Value("${hub.codelocation.prefix}")
     private String codeLocationPrefix;
 
@@ -64,7 +67,7 @@ public class ProgramPaths {
     }
 
     private String getProgramDirPathHost() {
-        return "/tmp/";
+        return hostWorkingDirPath;
     }
 
     private String getProgramDirPathContainer() {

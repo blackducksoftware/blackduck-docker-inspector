@@ -40,10 +40,10 @@ err() {
 function preProcessOptions() {
 	for cmdlinearg in "$@"
 	do
-		if [[ "$cmdlinearg" == --runon=* ]]
-		then
-			runondistro=$(echo "$cmdlinearg" | cut -d '=' -f 2)
-		fi
+#		if [[ "$cmdlinearg" == --runon=* ]]
+#		then
+#			runondistro=$(echo "$cmdlinearg" | cut -d '=' -f 2)
+#		fi
 		if [[ "$cmdlinearg" == --spring.config.location=* ]]
 		then
 			propdir=$(echo "$cmdlinearg" | cut -d '=' -f 2)
@@ -59,6 +59,10 @@ function preProcessOptions() {
 		if [[ "$cmdlinearg" == --output.path=* ]]
 		then
 			outputPath=$(echo "$cmdlinearg" | cut -d '=' -f 2)
+		fi
+		if [[ "$cmdlinearg" == --working.dir.path=* ]]
+		then
+			workingDir=$(echo "$cmdlinearg" | cut -d '=' -f 2)
 		fi
 		if [[ "$cmdlinearg" == --no.prompt=true ]]
 		then
@@ -156,7 +160,7 @@ function determineRunOnImage {
 	fi
 	if [ -z "${runondistro}" ]
 	then
-	echo "Will run on the default (ubuntu) image"
+		echo "Will run on the default (ubuntu) image"
 		containername="hub-docker-inspector"
 		imagename="hub-docker-inspector"
 	else
@@ -177,6 +181,7 @@ propdir=.
 hub_password_set_on_cmd_line=false
 noPromptMode=false
 dryRunMode=false
+createdWorkingDir=false
 
 if [ $# -lt 1 ]
 then
@@ -214,10 +219,23 @@ if [ -z "${outputPath}" ]
 then
 	echo "Looking in ${propfile} for output.path"
 	outputPath=$(get_property "${propfile}" "output.path")
-	echo "BDIO output path: ${outputPath}"
+	echo "output path: ${outputPath}"
 fi
 
-determineRunOnImage
+if [ -z "${workingDir}" ]
+then
+	echo "Looking in ${propfile} for output.path"
+	workingDir=$(get_property "${propfile}" "working.dir.path")
+	echo "output path: ${workingDir}"
+fi
+if [ -z "${workingDir}" ]
+then
+	workingDir="$(mktemp -d)"
+	createdWorkingDir=true
+	echo "Created working directory: ${workingDir}"
+fi
+
+######determineRunOnImage
 options=( "$@" )
 image="${options[${#options[@]}-1]}"
 unset "options[${#options[@]}-1]"
@@ -248,7 +266,7 @@ else
 	cp ~/Documents/Files/hub-inspector/test/hub-docker-inspector-3.0.0-SNAPSHOT.jar .
 	echo "******* invoking launcher script"
 	chmod +x ~/Documents/git/hub-docker-inspector/build/hub-docker-inspector-launcher.sh
-	~/Documents/git/hub-docker-inspector/build/hub-docker-inspector-launcher.sh ${options[*]} "\"$image\""
+	~/Documents/git/hub-docker-inspector/build/hub-docker-inspector-launcher.sh ${options[*]} "--host.working.dir.path=${workingDir}" "\"$image\""
 	echo "******* DONE invoking launcher script"
 fi
 
@@ -263,7 +281,13 @@ then
 	then
 		mkdir -p "${outputPath}"
 	fi
-	docker cp "${containername}:/opt/blackduck/hub-docker-inspector/output/." "${outputPath}"
+	cp -R "${workingDir}/output/*" "${outputPath}"
+fi
+
+if [ $createdWorkingDir == true ]
+then
+	echo "DISABLED: Removing ${workingDir}"
+	###rm -rf ${workingDir}
 fi
 
 exit 0
