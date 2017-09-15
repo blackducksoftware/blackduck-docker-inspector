@@ -281,7 +281,13 @@ then
 	then
 		mkdir -p "${outputPath}"
 	fi
-	cp -R "${workingDir}/output/*" "${outputPath}"
+	echo "----- hostname: $(hostname)"
+	echo "----- ls -l ${workingDir}/output"
+	ls -l "${workingDir}/output"
+	echo "----- ls -ld ${outputPath}"
+	ls -ld "${outputPath}"
+	echo "Copying output to ${outputPath}"
+	cp "${workingDir}"/output/* "${outputPath}"
 fi
 
 if [ $createdWorkingDir == true ]
