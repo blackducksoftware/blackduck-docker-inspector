@@ -2,7 +2,7 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "ubuntu_17.04_var_lib_dpkg_DPKG",
-    "@id": "uuid:1cdebea6-086a-460b-bca9-be9a060533ff",
+    "@id": "uuid:63ce333e-5349-4e42-b839-8b612b98655e",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -25,11 +25,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:debian/apt/1.4",
+        "related": "data:debian/apt/1.4.6~17.04.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:ubuntu/apt/1.4",
+        "related": "data:ubuntu/apt/1.4.6~17.04.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -209,11 +209,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:debian/libapt-pkg5.0/1.4",
+        "related": "data:debian/libapt-pkg5.0/1.4.6~17.04.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:ubuntu/libapt-pkg5.0/1.4",
+        "related": "data:ubuntu/libapt-pkg5.0/1.4.6~17.04.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -738,23 +738,23 @@
   },
   {
     "name": "apt",
-    "revision": "1.4",
-    "@id": "data:debian/apt/1.4",
+    "revision": "1.4.6~17.04.1",
+    "@id": "data:debian/apt/1.4.6~17.04.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "apt/1.4/amd64"
+      "externalId": "apt/1.4.6~17.04.1/amd64"
     },
     "relationship": []
   },
   {
     "name": "apt",
-    "revision": "1.4",
-    "@id": "data:ubuntu/apt/1.4",
+    "revision": "1.4.6~17.04.1",
+    "@id": "data:ubuntu/apt/1.4.6~17.04.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "apt/1.4/amd64"
+      "externalId": "apt/1.4.6~17.04.1/amd64"
     },
     "relationship": []
   },
@@ -1244,23 +1244,23 @@
   },
   {
     "name": "libapt-pkg5.0",
-    "revision": "1.4",
-    "@id": "data:debian/libapt-pkg5.0/1.4",
+    "revision": "1.4.6~17.04.1",
+    "@id": "data:debian/libapt-pkg5.0/1.4.6~17.04.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "libapt-pkg5.0/1.4/amd64"
+      "externalId": "libapt-pkg5.0/1.4.6~17.04.1/amd64"
     },
     "relationship": []
   },
   {
     "name": "libapt-pkg5.0",
-    "revision": "1.4",
-    "@id": "data:ubuntu/libapt-pkg5.0/1.4",
+    "revision": "1.4.6~17.04.1",
+    "@id": "data:ubuntu/libapt-pkg5.0/1.4.6~17.04.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "libapt-pkg5.0/1.4/amd64"
+      "externalId": "libapt-pkg5.0/1.4.6~17.04.1/amd64"
     },
     "relationship": []
   },

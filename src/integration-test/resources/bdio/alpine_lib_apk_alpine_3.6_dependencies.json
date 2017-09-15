@@ -9,80 +9,10 @@
     "version": "3.6",
     "forge": {
       "name": "alpine",
-      "separator": ":"
+      "separator": "/"
     }
   },
   "dependencies": [
-    {
-      "name": "zlib",
-      "version": "1.2.11-r0",
-      "externalId": {
-        "architecture": "x86_64",
-        "name": "zlib",
-        "version": "1.2.11-r0",
-        "forge": {
-          "name": "alpine",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "apk-tools",
-      "version": "2.7.2-r0",
-      "externalId": {
-        "architecture": "x86_64",
-        "name": "apk-tools",
-        "version": "2.7.2-r0",
-        "forge": {
-          "name": "alpine",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "alpine-baselayout",
-      "version": "3.0.4-r0",
-      "externalId": {
-        "architecture": "x86_64",
-        "name": "alpine-baselayout",
-        "version": "3.0.4-r0",
-        "forge": {
-          "name": "alpine",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "busybox",
-      "version": "1.26.2-r5",
-      "externalId": {
-        "architecture": "x86_64",
-        "name": "busybox",
-        "version": "1.26.2-r5",
-        "forge": {
-          "name": "alpine",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "alpine-keys",
-      "version": "2.1-r1",
-      "externalId": {
-        "architecture": "x86_64",
-        "name": "alpine-keys",
-        "version": "2.1-r1",
-        "forge": {
-          "name": "alpine",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
     {
       "name": "musl",
       "version": "1.1.16-r10",
@@ -92,63 +22,7 @@
         "version": "1.1.16-r10",
         "forge": {
           "name": "alpine",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libc-utils",
-      "version": "0.7.1-r0",
-      "externalId": {
-        "architecture": "x86_64",
-        "name": "libc-utils",
-        "version": "0.7.1-r0",
-        "forge": {
-          "name": "alpine",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libressl2.5-libssl",
-      "version": "2.5.4-r0",
-      "externalId": {
-        "architecture": "x86_64",
-        "name": "libressl2.5-libssl",
-        "version": "2.5.4-r0",
-        "forge": {
-          "name": "alpine",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "scanelf",
-      "version": "1.2.2-r0",
-      "externalId": {
-        "architecture": "x86_64",
-        "name": "scanelf",
-        "version": "1.2.2-r0",
-        "forge": {
-          "name": "alpine",
-          "separator": ":"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "musl-utils",
-      "version": "1.1.16-r10",
-      "externalId": {
-        "architecture": "x86_64",
-        "name": "musl-utils",
-        "version": "1.1.16-r10",
-        "forge": {
-          "name": "alpine",
-          "separator": ":"
+          "separator": "/"
         }
       },
       "children": []
@@ -162,7 +36,133 @@
         "version": "2.5.4-r0",
         "forge": {
           "name": "alpine",
-          "separator": ":"
+          "separator": "/"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libc-utils",
+      "version": "0.7.1-r0",
+      "externalId": {
+        "architecture": "x86_64",
+        "name": "libc-utils",
+        "version": "0.7.1-r0",
+        "forge": {
+          "name": "alpine",
+          "separator": "/"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "busybox",
+      "version": "1.26.2-r5",
+      "externalId": {
+        "architecture": "x86_64",
+        "name": "busybox",
+        "version": "1.26.2-r5",
+        "forge": {
+          "name": "alpine",
+          "separator": "/"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "alpine-keys",
+      "version": "2.1-r1",
+      "externalId": {
+        "architecture": "x86_64",
+        "name": "alpine-keys",
+        "version": "2.1-r1",
+        "forge": {
+          "name": "alpine",
+          "separator": "/"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "musl-utils",
+      "version": "1.1.16-r10",
+      "externalId": {
+        "architecture": "x86_64",
+        "name": "musl-utils",
+        "version": "1.1.16-r10",
+        "forge": {
+          "name": "alpine",
+          "separator": "/"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "scanelf",
+      "version": "1.2.2-r0",
+      "externalId": {
+        "architecture": "x86_64",
+        "name": "scanelf",
+        "version": "1.2.2-r0",
+        "forge": {
+          "name": "alpine",
+          "separator": "/"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "apk-tools",
+      "version": "2.7.2-r0",
+      "externalId": {
+        "architecture": "x86_64",
+        "name": "apk-tools",
+        "version": "2.7.2-r0",
+        "forge": {
+          "name": "alpine",
+          "separator": "/"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libressl2.5-libssl",
+      "version": "2.5.4-r0",
+      "externalId": {
+        "architecture": "x86_64",
+        "name": "libressl2.5-libssl",
+        "version": "2.5.4-r0",
+        "forge": {
+          "name": "alpine",
+          "separator": "/"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "alpine-baselayout",
+      "version": "3.0.4-r0",
+      "externalId": {
+        "architecture": "x86_64",
+        "name": "alpine-baselayout",
+        "version": "3.0.4-r0",
+        "forge": {
+          "name": "alpine",
+          "separator": "/"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "zlib",
+      "version": "1.2.11-r0",
+      "externalId": {
+        "architecture": "x86_64",
+        "name": "zlib",
+        "version": "1.2.11-r0",
+        "forge": {
+          "name": "alpine",
+          "separator": "/"
         }
       },
       "children": []
