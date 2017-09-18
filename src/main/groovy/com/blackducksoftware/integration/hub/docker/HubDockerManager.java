@@ -45,7 +45,6 @@ import com.blackducksoftware.integration.hub.docker.client.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.dependencynode.DependencyNodeWriter;
 import com.blackducksoftware.integration.hub.docker.extractor.ExtractionDetails;
 import com.blackducksoftware.integration.hub.docker.extractor.Extractor;
-import com.blackducksoftware.integration.hub.docker.linux.EtcDir;
 import com.blackducksoftware.integration.hub.docker.linux.FileOperations;
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser;
 import com.blackducksoftware.integration.hub.docker.tar.ImageInfo;
@@ -93,11 +92,6 @@ public class HubDockerManager {
 
     public OperatingSystemEnum detectOperatingSystem(final String operatingSystem, final File targetImageFileSystemRootDir) throws HubIntegrationException, IOException {
         return tarParser.detectOperatingSystem(operatingSystem, targetImageFileSystemRootDir);
-    }
-
-    public OperatingSystemEnum detectCurrentOperatingSystem() throws HubIntegrationException, IOException {
-        final EtcDir etcDir = new EtcDir(new File("/etc"));
-        return etcDir.getOperatingSystem();
     }
 
     public List<ManifestLayerMapping> getLayerMappings(final String tarFileName, final String dockerImageName, final String dockerTagName) throws Exception {

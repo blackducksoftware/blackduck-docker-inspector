@@ -43,8 +43,6 @@ import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum;
-import com.blackducksoftware.integration.hub.docker.linux.FileOperations;
-import com.blackducksoftware.integration.hub.docker.linux.EtcDir;
 import com.blackducksoftware.integration.hub.docker.linux.FileSys;
 import com.blackducksoftware.integration.hub.docker.tar.manifest.Manifest;
 import com.blackducksoftware.integration.hub.docker.tar.manifest.ManifestFactory;
@@ -94,12 +92,7 @@ public class DockerTarParser {
             osEnum = OperatingSystemEnum.determineOperatingSystem(operatingSystem);
             return osEnum;
         }
-        osEnum = deriveOsFromEtcDir(targetImageFileSystemRootDir);
-        if (osEnum == null) {
-            final String msg = "Unable to identify the Linux distro of this image. You'll need to run with the --linux.distro option";
-            throw new HubIntegrationException(msg);
-        }
-        return osEnum;
+        throw new HubIntegrationException("No package manager files were found, and no operating system name was provided.");
     }
 
     public ImageInfo collectPkgMgrInfo(final File targetImageFileSystemRootDir, final OperatingSystemEnum osEnum) {
@@ -192,28 +185,6 @@ public class DockerTarParser {
             }
         }
         return layerTar;
-    }
-
-    private OperatingSystemEnum deriveOsFromEtcDir(final File targetImageFileSystemRootDir) throws HubIntegrationException, IOException {
-        logger.trace(String.format("Target file system root dir %s, looking for etc", targetImageFileSystemRootDir.getName()));
-        OperatingSystemEnum osEnum = null;
-        final List<File> etcFiles = FileOperations.findFileWithName(targetImageFileSystemRootDir, "etc");
-        if (etcFiles == null) {
-            final String msg = "Unable to find the files that specify the Linux distro of this image.";
-            throw new HubIntegrationException(msg);
-        }
-        for (final File etcFile : etcFiles) {
-            try {
-                final EtcDir etcDir = new EtcDir(etcFile);
-                osEnum = etcDir.getOperatingSystem();
-                if (osEnum != null) {
-                    break;
-                }
-            } catch (final HubIntegrationException e) {
-                logger.debug(String.format("Error detecing OS from etc dir: %s", e.toString()));
-            }
-        }
-        return osEnum;
     }
 
     private OperatingSystemEnum deriveOsFromPkgMgr(final File targetImageFileSystemRootDir) {
