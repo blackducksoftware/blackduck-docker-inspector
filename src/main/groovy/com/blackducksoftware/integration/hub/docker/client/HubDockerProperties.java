@@ -54,7 +54,7 @@ class HubDockerProperties {
         for (final Object propertyKeyObject : propertiesFromFile.keySet()) {
             final String propertyKey = (String) propertyKeyObject;
             final String value = env.getProperty(propertyKey);
-            logger.trace("load(): %s=%s", propertyKey, value);
+            logger.trace(String.format("load(): %s=%s", propertyKey, value));
             propsForSubContainer.put(propertyKey, value);
         }
     }
