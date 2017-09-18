@@ -243,6 +243,15 @@ checkForPassword
 #ensureContainerRunning
 #installPropertiesFile
 
+# TODO TEMP
+echo "******* TEMP: getting hub-docker-inspector-3.0.0-SNAPSHOT.jar from latest build"
+cp ~/Documents/git/hub-docker-inspector/build/distributions/*.zip ~/Documents/Files/hub-inspector/test
+pushd ~/Documents/Files/hub-inspector/test
+unzip -o hub-docker-inspector-3.0.0-SNAPSHOT.zip
+popd
+cp ~/Documents/Files/hub-inspector/test/hub-docker-inspector-3.0.0-SNAPSHOT.jar .
+# END TEMP
+
 if [[ "$image" == *.tar ]]
 then
 	echo "Inspecting image tar file: $image"
@@ -252,18 +261,16 @@ then
 		exit -1
 	fi
 	tarfilename=$(basename "$image")
-	docker exec "${containername}" rm -f "/opt/blackduck/hub-docker-inspector/target/$tarfilename"
-	docker cp "$image" "${containername}:/opt/blackduck/hub-docker-inspector/target/$tarfilename"
-	docker exec -e BD_HUB_PASSWORD -e SCAN_CLI_OPTS -e http_proxy -e https_proxy -e HTTP_PROXY -e HTTPS_PROXY -e DOCKERD_OPTS -e DOCKER_INSPECTOR_JAVA_OPTS "${containername}" //opt/blackduck/hub-docker-inspector/hub-docker-inspector-launcher.sh ${options[*]} "\"/opt/blackduck/hub-docker-inspector/target/$tarfilename\""
+	
+	# TODO TEMP
+	echo "******* invoking launcher script"
+	chmod +x ~/Documents/git/hub-docker-inspector/build/hub-docker-inspector-launcher.sh
+	~/Documents/git/hub-docker-inspector/build/hub-docker-inspector-launcher.sh ${options[*]} "--host.working.dir.path=${workingDir}" "\"$image\""
+	echo "******* DONE invoking launcher script"
+
 else
 	echo Inspecting image: $image
 	# TODO TEMP
-	echo "******* TEMP: getting hub-docker-inspector-3.0.0-SNAPSHOT.jar from latest build"
-	cp ~/Documents/git/hub-docker-inspector/build/distributions/*.zip ~/Documents/Files/hub-inspector/test
-	pushd ~/Documents/Files/hub-inspector/test
-	unzip -o hub-docker-inspector-3.0.0-SNAPSHOT.zip
-	popd
-	cp ~/Documents/Files/hub-inspector/test/hub-docker-inspector-3.0.0-SNAPSHOT.jar .
 	echo "******* invoking launcher script"
 	chmod +x ~/Documents/git/hub-docker-inspector/build/hub-docker-inspector-launcher.sh
 	~/Documents/git/hub-docker-inspector/build/hub-docker-inspector-launcher.sh ${options[*]} "--host.working.dir.path=${workingDir}" "\"$image\""

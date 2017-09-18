@@ -143,8 +143,13 @@ public class Application {
     private void provideTarIfRequested(final File dockerTarFile) throws IOException {
         if (outputIncludeTarfile) {
             final File outputDirectory = new File(programPaths.getHubDockerOutputPath());
-            logger.debug(String.format("Moving tarfile %s to output dir %s", dockerTarFile.getAbsolutePath(), outputDirectory.getAbsolutePath()));
-            FileOperations.moveFile(dockerTarFile, outputDirectory);
+            if (onHost) {
+                logger.debug(String.format("Copying %s to output dir %s", dockerTarFile.getAbsolutePath(), outputDirectory.getAbsolutePath()));
+                FileOperations.copyFile(dockerTarFile, outputDirectory);
+            } else {
+                logger.debug(String.format("Moving %s to output dir %s", dockerTarFile.getAbsolutePath(), outputDirectory.getAbsolutePath()));
+                FileOperations.moveFile(dockerTarFile, outputDirectory);
+            }
         }
     }
 
