@@ -109,7 +109,7 @@ public class DockerTarParser {
             }
         }
 
-        logger.error("No package manager found");
+        logger.error("No package manager files found");
         return new ImageInfo(targetImageFileSystemRootDir.getName(), osEnum, null);
     }
 

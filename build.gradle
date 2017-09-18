@@ -283,10 +283,8 @@ task createDpkgDockerfileTasks() {
 			environmentVariable('LANG', 'en_US.UTF-8')
 			
             runCommand 'apt-get update -y && \
-                apt install -y openjdk-8-jdk apt-transport-https ca-certificates curl software-properties-common vim && \
-                curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - \
-                && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
-                && apt-get update -y && apt-get install -y docker-ce && apt-get install -y locales && apt-get -y clean'
+                apt install -y openjdk-8-jdk vim && \
+                apt-get install -y locales && apt-get -y clean'
 			runCommand 'locale-gen "en_US.UTF-8"'
             
             runCommand 'mkdir /opt/blackduck'

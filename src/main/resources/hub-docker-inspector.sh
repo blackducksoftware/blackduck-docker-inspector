@@ -40,10 +40,6 @@ err() {
 function preProcessOptions() {
 	for cmdlinearg in "$@"
 	do
-#		if [[ "$cmdlinearg" == --runon=* ]]
-#		then
-#			runondistro=$(echo "$cmdlinearg" | cut -d '=' -f 2)
-#		fi
 		if [[ "$cmdlinearg" == --spring.config.location=* ]]
 		then
 			propdir=$(echo "$cmdlinearg" | cut -d '=' -f 2)
@@ -105,69 +101,10 @@ function checkForPassword() {
 	fi
 }
 
-# Start the hub-docker-inspector container
-function startContainer() {
-	docker rm "${containername}" 2> /dev/null
-	echo "Pulling/running hub-docker-inspector Docker image"
-	docker run --name "${containername}" -it -d --privileged "blackducksoftware/${imagename}:${version}" bash
-}
-
-# Check to be sure the hub-docker-container is running
-function ensureContainerRunning() {
-	if [ $(docker ps |grep "${containername}\$" | wc -l) -gt 0 ]
-	then
-		echo "The ${containername} container is already running"
-		containerVersion=$(docker exec hub-docker-inspector ls /opt/blackduck/hub-docker-inspector | grep \.jar | sed s/hub-docker-inspector-// | sed 's/\.jar//')
-		echo "The ${containername} container is running version ${containerVersion}"
-		if [ "${version}" != "${containerVersion}" ]
-		then
-			echo "Stopping old container"
-			docker stop hub-docker-inspector
-			startContainer
-		fi
-		
-	else
-		echo "${containername} container is not running"
-		startContainer
-	fi
-}
-
-# Copy application.properties into the container
-function installPropertiesFile() {
-	if [ -f "${propfile}" ]
-	then
-		echo "Found ${propfile}"
-		docker cp "${propfile}" "${containername}:/opt/blackduck/hub-docker-inspector/config"
-	else
-		echo "File ${propfile} not found."
-		echo "Without this file, you will have to set all required properties via the command line."
-		docker exec "${containername}" rm -f /opt/blackduck/hub-docker-inspector/config/application.properties
-	fi
-}
-
 # Get a property value from the given properties file
 # Usage: get_property FILE KEY
 function get_property {
 	grep "^$2=" "$1" 2> /dev/null | cut -d'=' -f2
-}
-
-# determine which image/container to run on/in
-function determineRunOnImage {
-	if [ -z "${runondistro}" ]
-	then
-		echo "Looking in ${propfile} for runon"
-		runondistro=$(get_property "${propfile}" "runon")
-	fi
-	if [ -z "${runondistro}" ]
-	then
-		echo "Will run on the default (ubuntu) image"
-		containername="hub-docker-inspector"
-		imagename="hub-docker-inspector"
-	else
-		echo "Will run on the ${runondistro} image"
-		containername="hub-docker-inspector-${runondistro}"
-		imagename="hub-docker-inspector-${runondistro}"
-	fi
 }
 
 ##################
@@ -175,8 +112,6 @@ function determineRunOnImage {
 ##################
 version="@VERSION@"
 outputPath=""
-containername=hub-docker-inspector
-imagename=hub-docker-inspector
 propdir=.
 hub_password_set_on_cmd_line=false
 noPromptMode=false
@@ -235,13 +170,10 @@ then
 	echo "Created working directory: ${workingDir}"
 fi
 
-######determineRunOnImage
 options=( "$@" )
 image="${options[${#options[@]}-1]}"
 unset "options[${#options[@]}-1]"
 checkForPassword
-#ensureContainerRunning
-#installPropertiesFile
 
 # TODO TEMP
 echo "******* TEMP: getting hub-docker-inspector-3.0.0-SNAPSHOT.jar from latest build"

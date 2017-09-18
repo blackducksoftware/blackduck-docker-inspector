@@ -27,64 +27,6 @@ err() {
   echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2
 }
 
-# Start dockerd
-###function startDocker() {
-###	echo starting dockerd...
-###	cd /opt/blackduck/hub-docker-inspector
-###	rm -f dockerd_stdout.log
-###	rm -f dockerd_stderr.log
-###	dockerd --storage-driver=vfs ${DOCKERD_OPTS} 2> dockerd_stderr.log > dockerd_stdout.log &
-###	
-###	for i in 1 .. 5
-###	do
-###		echo "Pausing to give dockerd a chance to start"
-###		sleep 3
-###		if [ $(docker info 2>&1 |grep "Server Version"|wc -l) -gt 0 ]
-###		then
-###			echo dockerd started
-###			dockerRunning=true
-###			break
-###		fi
-###	done
-###}
-
-# Stop/remove any old hub-docker-inspector-* containers
-# since, via the API, env vars can only be passed 
-# when starting a container
-function initContainers() {
-	echo "Stopping old containers, if they are running"
-	docker stop hub-docker-inspector-ubuntu 2> container_stderr.log > container_stdout.log
-	docker stop hub-docker-inspector-alpine 2> container_stderr.log > container_stdout.log
-	docker stop hub-docker-inspector-centos 2>> container_stderr.log >> container_stdout.log
-	echo "Removing old containers, if they are running"
-	docker rm hub-docker-inspector-ubuntu 2>> container_stderr.log >> container_stdout.log
-	docker rm hub-docker-inspector-alpine 2>> container_stderr.log >> container_stdout.log
-	docker rm hub-docker-inspector-centos 2>> container_stderr.log >> container_stdout.log
-	echo "Done removing old containers"
-}
-
-# Start dockerd if its not already running
-###function initDocker() {
-###	dockerRunning=false
-###	if [ $(docker info 2>&1 |grep "Server Version"|wc -l) -gt 0 ]
-###	then
-###		echo dockerd is already running
-###		dockerRunning=true
-###	else		
-###		startDocker
-###	fi
-###
-###	if [ "$dockerRunning" == false ]
-###	then
-###		err Unable to start dockerd
-###		exit -1
-###	fi
-###
-###	docker info 2>&1 | grep "Server Version"
-###	
-###	initContainers
-###}
-
 ##################
 # Start script
 ##################
@@ -105,13 +47,6 @@ then
 	echo "$(basename $0) ${version}"
 	exit 0
 fi
-
-# If docker is installed (master container): start docker
-###if [ $(ls -l /usr/bin/docker 2> /dev/null |wc -l) -gt 0 ]
-###then
-###	echo "Running on primary container"
-###	initDocker
-###fi
 
 options=( "$@" )
 image="${options[${#options[@]}-1]}"
