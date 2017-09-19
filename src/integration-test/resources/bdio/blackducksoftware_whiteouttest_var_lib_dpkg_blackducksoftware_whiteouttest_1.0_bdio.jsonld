@@ -2,7 +2,7 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "blackducksoftware_whiteouttest_1.0_var_lib_dpkg_DPKG",
-    "@id": "uuid:b67df26c-1660-4950-97fd-bc75fcc03f22",
+    "@id": "uuid:c45a9ccd-ef78-49ff-a6f1-eb7e6257cd04",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -249,11 +249,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:debian/libapparmor1/2.10.95-0ubuntu2.6",
+        "related": "data:debian/libapparmor1/2.10.95-0ubuntu2.7",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:ubuntu/libapparmor1/2.10.95-0ubuntu2.6",
+        "related": "data:ubuntu/libapparmor1/2.10.95-0ubuntu2.7",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -353,11 +353,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:debian/libcryptsetup4/2:1.6.6-5ubuntu2",
+        "related": "data:debian/libcryptsetup4/2:1.6.6-5ubuntu2.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:ubuntu/libcryptsetup4/2:1.6.6-5ubuntu2",
+        "related": "data:ubuntu/libcryptsetup4/2:1.6.6-5ubuntu2.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1690,23 +1690,23 @@
   },
   {
     "name": "libapparmor1",
-    "revision": "2.10.95-0ubuntu2.6",
-    "@id": "data:debian/libapparmor1/2.10.95-0ubuntu2.6",
+    "revision": "2.10.95-0ubuntu2.7",
+    "@id": "data:debian/libapparmor1/2.10.95-0ubuntu2.7",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "libapparmor1/2.10.95-0ubuntu2.6/amd64"
+      "externalId": "libapparmor1/2.10.95-0ubuntu2.7/amd64"
     },
     "relationship": []
   },
   {
     "name": "libapparmor1",
-    "revision": "2.10.95-0ubuntu2.6",
-    "@id": "data:ubuntu/libapparmor1/2.10.95-0ubuntu2.6",
+    "revision": "2.10.95-0ubuntu2.7",
+    "@id": "data:ubuntu/libapparmor1/2.10.95-0ubuntu2.7",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "libapparmor1/2.10.95-0ubuntu2.6/amd64"
+      "externalId": "libapparmor1/2.10.95-0ubuntu2.7/amd64"
     },
     "relationship": []
   },
@@ -1976,23 +1976,23 @@
   },
   {
     "name": "libcryptsetup4",
-    "revision": "2:1.6.6-5ubuntu2",
-    "@id": "data:debian/libcryptsetup4/2:1.6.6-5ubuntu2",
+    "revision": "2:1.6.6-5ubuntu2.1",
+    "@id": "data:debian/libcryptsetup4/2:1.6.6-5ubuntu2.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "libcryptsetup4/2:1.6.6-5ubuntu2/amd64"
+      "externalId": "libcryptsetup4/2:1.6.6-5ubuntu2.1/amd64"
     },
     "relationship": []
   },
   {
     "name": "libcryptsetup4",
-    "revision": "2:1.6.6-5ubuntu2",
-    "@id": "data:ubuntu/libcryptsetup4/2:1.6.6-5ubuntu2",
+    "revision": "2:1.6.6-5ubuntu2.1",
+    "@id": "data:ubuntu/libcryptsetup4/2:1.6.6-5ubuntu2.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "libcryptsetup4/2:1.6.6-5ubuntu2/amd64"
+      "externalId": "libcryptsetup4/2:1.6.6-5ubuntu2.1/amd64"
     },
     "relationship": []
   },

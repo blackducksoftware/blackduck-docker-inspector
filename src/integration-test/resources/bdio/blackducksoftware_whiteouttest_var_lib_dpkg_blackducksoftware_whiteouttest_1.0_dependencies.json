@@ -41,6 +41,20 @@
       "children": []
     },
     {
+      "name": "libcryptsetup4",
+      "version": "2:1.6.6-5ubuntu2.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libcryptsetup4",
+        "version": "2:1.6.6-5ubuntu2.1",
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/"
+        }
+      },
+      "children": []
+    },
+    {
       "name": "adduser",
       "version": "3.113+nmu3ubuntu4",
       "externalId": {
@@ -307,20 +321,6 @@
       "children": []
     },
     {
-      "name": "libapparmor1",
-      "version": "2.10.95-0ubuntu2.6",
-      "externalId": {
-        "architecture": "amd64",
-        "name": "libapparmor1",
-        "version": "2.10.95-0ubuntu2.6",
-        "forge": {
-          "name": "ubuntu",
-          "separator": "/"
-        }
-      },
-      "children": []
-    },
-    {
       "name": "libselinux1",
       "version": "2.4-3build2",
       "externalId": {
@@ -371,20 +371,6 @@
         "version": "1.6.5-2ubuntu0.3",
         "forge": {
           "name": "debian",
-          "separator": "/"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libcryptsetup4",
-      "version": "2:1.6.6-5ubuntu2",
-      "externalId": {
-        "architecture": "amd64",
-        "name": "libcryptsetup4",
-        "version": "2:1.6.6-5ubuntu2",
-        "forge": {
-          "name": "ubuntu",
           "separator": "/"
         }
       },
@@ -859,6 +845,20 @@
         "architecture": "amd64",
         "name": "perl-base",
         "version": "5.22.1-9",
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libapparmor1",
+      "version": "2.10.95-0ubuntu2.7",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libapparmor1",
+        "version": "2.10.95-0ubuntu2.7",
         "forge": {
           "name": "ubuntu",
           "separator": "/"
@@ -1783,20 +1783,6 @@
         "architecture": "amd64",
         "name": "sed",
         "version": "4.2.2-7",
-        "forge": {
-          "name": "debian",
-          "separator": "/"
-        }
-      },
-      "children": []
-    },
-    {
-      "name": "libcryptsetup4",
-      "version": "2:1.6.6-5ubuntu2",
-      "externalId": {
-        "architecture": "amd64",
-        "name": "libcryptsetup4",
-        "version": "2:1.6.6-5ubuntu2",
         "forge": {
           "name": "debian",
           "separator": "/"
@@ -2883,20 +2869,6 @@
       "children": []
     },
     {
-      "name": "libapparmor1",
-      "version": "2.10.95-0ubuntu2.6",
-      "externalId": {
-        "architecture": "amd64",
-        "name": "libapparmor1",
-        "version": "2.10.95-0ubuntu2.6",
-        "forge": {
-          "name": "debian",
-          "separator": "/"
-        }
-      },
-      "children": []
-    },
-    {
       "name": "initscripts",
       "version": "2.88dsf-59.3ubuntu2",
       "externalId": {
@@ -3149,6 +3121,20 @@
       "children": []
     },
     {
+      "name": "libapparmor1",
+      "version": "2.10.95-0ubuntu2.7",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libapparmor1",
+        "version": "2.10.95-0ubuntu2.7",
+        "forge": {
+          "name": "debian",
+          "separator": "/"
+        }
+      },
+      "children": []
+    },
+    {
       "name": "findutils",
       "version": "4.6.0+git+20160126-2",
       "externalId": {
@@ -3309,6 +3295,20 @@
         "architecture": "amd64",
         "name": "systemd",
         "version": "229-4ubuntu19",
+        "forge": {
+          "name": "debian",
+          "separator": "/"
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "libcryptsetup4",
+      "version": "2:1.6.6-5ubuntu2.1",
+      "externalId": {
+        "architecture": "amd64",
+        "name": "libcryptsetup4",
+        "version": "2:1.6.6-5ubuntu2.1",
         "forge": {
           "name": "debian",
           "separator": "/"
