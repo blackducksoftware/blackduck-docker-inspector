@@ -367,12 +367,24 @@ task packageScript(type: Zip, dependsOn: fixJarVersionInMainScript) {
 	}
 }
 
-task stopDockerContainer(type: Exec) {
+task stopDockerContainerUbuntu(type: Exec) {
 	ignoreExitValue true
-	commandLine 'docker', 'stop', 'hub-docker-inspector'
+	commandLine 'docker', 'stop', 'hub-docker-inspector-ubuntu'
 }
 
-task testPrep(dependsOn: [stopDockerContainer, removeDockerImage_ubuntu, removeDockerImage_centos, removeDockerImage_alpine, \
+task stopDockerContainerCentos(type: Exec) {
+    ignoreExitValue true
+    commandLine 'docker', 'stop', 'hub-docker-inspector-centos'
+}
+
+task stopDockerContainerAlpine(type: Exec) {
+    ignoreExitValue true
+    commandLine 'docker', 'stop', 'hub-docker-inspector-alpine'
+}
+
+task stopDockerContainers(dependsOn: [stopDockerContainerUbuntu, stopDockerContainerCentos, stopDockerContainerAlpine]) {}
+
+task testPrep(dependsOn: [stopDockerContainers, removeDockerImage_ubuntu, removeDockerImage_centos, removeDockerImage_alpine, \
     buildTestDockerTarfile, packageScript]) {
 	
 }
