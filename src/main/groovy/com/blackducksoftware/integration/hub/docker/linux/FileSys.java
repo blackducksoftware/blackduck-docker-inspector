@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -84,7 +85,9 @@ public class FileSys {
         tOut.putArchiveEntry(tarEntry);
 
         if (fileToAdd.isFile()) {
-            IOUtils.copy(new FileInputStream(fileToAdd), tOut);
+            try (final InputStream fileToAddInputStream = new FileInputStream(fileToAdd)) {
+                IOUtils.copy(fileToAddInputStream, tOut);
+            }
             tOut.closeArchiveEntry();
         } else {
             tOut.closeArchiveEntry();
