@@ -66,7 +66,8 @@ class HubDockerManagerTest {
         String tempDirPath = TestUtils.createTempDirectory().getAbsolutePath()
         mgr.programPaths = [
             getHubDockerWorkingDirPath: { -> tempDirPath },
-            getHubDockerOutputPath: { -> tempDirPath }
+            getHubDockerOutputPath: { -> tempDirPath },
+            getHubDockerOutputPathContainer: { -> tempDirPath }
         ] as ProgramPaths
         mgr.hubClient = [
         ] as HubClient

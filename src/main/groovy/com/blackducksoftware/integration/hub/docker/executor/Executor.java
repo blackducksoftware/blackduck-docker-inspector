@@ -64,7 +64,7 @@ public class Executor {
         }
         final InputStream inputStream = process.getInputStream();
         final String outputString = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-        logger.debug(String.format("Command output:/n%s", outputString));
+        logger.debug(String.format("Command output: %s", outputString));
         return outputString.split(System.lineSeparator());
     }
 

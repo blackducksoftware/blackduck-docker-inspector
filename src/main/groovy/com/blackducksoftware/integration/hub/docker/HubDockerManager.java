@@ -142,9 +142,17 @@ public class HubDockerManager {
 
     private List<File> generateBdioFromPackageMgrDirs(final String dockerImageRepo, final String dockerImageTag, final List<ManifestLayerMapping> layerMappings, final String projectName, final String versionName, final String tarFileName,
             final ImageInfo imageInfo, final String architecture) throws FileNotFoundException, IOException, HubIntegrationException, InterruptedException {
-        final File outputDirectory = new File(programPaths.getHubDockerOutputPath());
-        final List<File> bdioFiles = new ArrayList<>();
+        logger.trace("generateBdioFromPackageMgrDirs(): Purging/recreating output dir");
+        final File outputDirectory = new File(programPaths.getHubDockerOutputPathContainer());
+        try {
+            FileUtils.deleteDirectory(outputDirectory);
+            outputDirectory.mkdirs();
+        } catch (final IOException e) {
+            logger.warn(String.format("Error purging output dir: %s", outputDirectory.getAbsolutePath()));
+        }
+        logger.trace(String.format("outputDirectory: exists: %b; isDirectory: %b; $ files: %d", outputDirectory.exists(), outputDirectory.isDirectory(), outputDirectory.listFiles().length));
 
+        final List<File> bdioFiles = new ArrayList<>();
         ManifestLayerMapping manifestMapping = null;
         for (final ManifestLayerMapping mapping : layerMappings) {
             if (StringUtils.compare(mapping.getTargetImageFileSystemRootDirName(), imageInfo.getFileSystemRootDirName()) == 0) {
