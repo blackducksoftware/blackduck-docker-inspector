@@ -194,24 +194,11 @@ then
 		err "ERROR: Tar file ${image} does not exist"
 		exit -1
 	fi
-	tarfilename=$(basename "$image")
-	
-	# TODO TEMP
-	#echo "******* invoking launcher script"
-	#chmod +x ~/Documents/git/hub-docker-inspector/build/hub-docker-inspector-launcher.sh
-	#~/Documents/git/hub-docker-inspector/build/hub-docker-inspector-launcher.sh ${options[*]} "--host.working.dir.path=${workingDir}" "\"$image\""
-	#echo "******* DONE invoking launcher script"
-	# TODO the two java calls look identical; if so, move 'em outside the if
 	echo "******* invoking jar"
 	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarfile}" "--docker.tar=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
 	echo "******* DONE invoking jar"
 else
 	echo Inspecting image: $image
-	# TODO TEMP
-	#echo "******* invoking launcher script"
-	#chmod +x ~/Documents/git/hub-docker-inspector/build/hub-docker-inspector-launcher.sh
-	#~/Documents/git/hub-docker-inspector/build/hub-docker-inspector-launcher.sh ${options[*]} "--host.working.dir.path=${workingDir}" "\"$image\""
-	#echo "******* DONE invoking launcher script"
 	echo "******* invoking jar"
 	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarfile}" "--docker.image=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
 	echo "******* DONE invoking jar"
