@@ -58,7 +58,7 @@ public class Executor {
         }
         final int errCode = process.exitValue();
         if (errCode == 0) {
-            logger.debug(String.format("Execution of command: %s: Succeeded", commandString));
+            logger.debug(String.format("Success executing command: %s", commandString));
         } else {
             throw new HubIntegrationException(String.format("Execution of command: %s: Error code: %d", commandString, errCode));
         }

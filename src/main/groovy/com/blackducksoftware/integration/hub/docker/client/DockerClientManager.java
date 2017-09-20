@@ -26,6 +26,7 @@ package com.blackducksoftware.integration.hub.docker.client;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -56,12 +57,12 @@ import com.github.dockerjava.core.command.PullImageResultCallback;
 @Component
 public class DockerClientManager {
 
-    private static final String INSPECTOR_COMMAND = "hub-docker-inspector-launcher.sh";
     private static final String IMAGE_TARFILE_PROPERTY = "docker.tar";
     private static final String IMAGE_PROPERTY = "docker.image";
     private static final String IMAGE_REPO_PROPERTY = "docker.image.repo";
     private static final String IMAGE_TAG_PROPERTY = "docker.image.tag";
     private static final String ON_HOST_PROPERTY = "on.host";
+    private static final String DRY_RUN_PROPERTY = "dry.run";
     private static final String OUTPUT_INCLUDE_TARFILE_PROPERTY = "output.include.tarfile";
     private static final String OUTPUT_INCLUDE_CONTAINER_FILE_SYSTEM_TARFILE_PROPERTY = "output.include.containerfilesystem";
     private final Logger logger = LoggerFactory.getLogger(DockerClientManager.class);
@@ -88,7 +89,13 @@ public class DockerClientManager {
     private String hubProxyHostProperty;
 
     @Value("${SCAN_CLI_OPTS:}")
-    private String scanCliOptsEnvVar;
+    private String scanCliOptsEnvVarValue;
+
+    @Value("${DOCKER_INSPECTOR_JAVA_OPTS:}")
+    private String dockerInspectorJavaOptsValue;
+
+    @Value("${dry.run}")
+    private boolean dryRun;
 
     public File getTarFileFromDockerImage(final String imageName, final String tagName) throws IOException, HubIntegrationException {
         final File imageTarDirectory = new File(new File(programPaths.getHubDockerWorkingDirPath()), "tarDirectory");
@@ -152,8 +159,21 @@ public class DockerClientManager {
             copyFileToContainer(dockerClient, containerId, programPaths.getHubDockerJarPath(), programPaths.getHubDockerPgmDirPathContainer());
         }
 
-        final String cmd = programPaths.getHubDockerPgmDirPathContainer() + INSPECTOR_COMMAND;
-        execCommandInContainer(dockerClient, imageId, containerId, cmd, tarFilePathInSubContainer);
+        final List<String> cmd = new ArrayList<>();
+        cmd.add("java");
+        cmd.add("-Dfile.encoding=UTF-8");
+        if (!StringUtils.isBlank(dockerInspectorJavaOptsValue)) {
+            final String[] dockerInspectorJavaOptsParts = dockerInspectorJavaOptsValue.split("\\b");
+            for (int i = 0; i < dockerInspectorJavaOptsParts.length; i++) {
+                cmd.add(dockerInspectorJavaOptsParts[i]);
+            }
+        }
+        cmd.add("-jar");
+        cmd.add("/opt/blackduck/hub-docker-inspector/hub-docker-inspector.jar");
+        cmd.add(String.format("--spring.config.location=%s", "/opt/blackduck/hub-docker-inspector/config/application.properties"));
+        cmd.add(String.format("--docker.tar=%s", tarFilePathInSubContainer));
+        cmd.add(String.format("--working.dir.path=%s", "/opt/blackduck/hub-docker-inspector/working"));
+        execCommandInContainer(dockerClient, imageId, containerId, cmd);
         copyFileFromContainer(containerId, programPaths.getHubDockerOutputPathContainer() + ".", programPaths.getHubDockerOutputPath());
     }
 
@@ -167,6 +187,7 @@ public class DockerClientManager {
         hubDockerProperties.set(OUTPUT_INCLUDE_TARFILE_PROPERTY, "false");
         hubDockerProperties.set(OUTPUT_INCLUDE_CONTAINER_FILE_SYSTEM_TARFILE_PROPERTY, "false");
         hubDockerProperties.set(ON_HOST_PROPERTY, "false");
+        hubDockerProperties.set(DRY_RUN_PROPERTY, (new Boolean(dryRun).toString()));
         final String pathToPropertiesFileForSubContainer = String.format("%s%s", programPaths.getHubDockerTargetDirPath(), ProgramPaths.APPLICATION_PROPERTIES_FILENAME);
         hubDockerProperties.save(pathToPropertiesFileForSubContainer);
 
@@ -191,8 +212,8 @@ public class DockerClientManager {
         } else {
             logger.debug(String.format("Creating container %s from image %s", extractorContainerName, imageId));
             final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageId).withStdinOpen(true).withTty(true).withName(extractorContainerName).withCmd("/bin/bash");
-            if ((StringUtils.isBlank(hubProxyHostProperty)) && (!StringUtils.isBlank(scanCliOptsEnvVar))) {
-                createContainerCmd.withEnv(String.format("BD_HUB_PASSWORD=%s", hubPassword), String.format("SCAN_CLI_OPTS=%s", scanCliOptsEnvVar));
+            if ((StringUtils.isBlank(hubProxyHostProperty)) && (!StringUtils.isBlank(scanCliOptsEnvVarValue))) {
+                createContainerCmd.withEnv(String.format("BD_HUB_PASSWORD=%s", hubPassword), String.format("SCAN_CLI_OPTS=%s", scanCliOptsEnvVarValue));
             } else {
                 createContainerCmd.withEnv(String.format("BD_HUB_PASSWORD=%s", hubPassword));
             }
@@ -253,10 +274,15 @@ public class DockerClientManager {
         return extractorContainerName;
     }
 
-    private void execCommandInContainer(final DockerClient dockerClient, final String imageId, final String containerId, final String cmd, final String arg) throws InterruptedException {
-        logger.info(String.format("Running %s on %s in container %s from image %s", cmd, arg, containerId, imageId));
+    private void execCommandInContainer(final DockerClient dockerClient, final String imageId, final String containerId, final List<String> cmd) throws InterruptedException {
+        logger.info(String.format("************************** Running %s in container %s from image %s", cmd.get(0), containerId, imageId));
         final ExecCreateCmd execCreateCmd = dockerClient.execCreateCmd(containerId).withAttachStdout(true).withAttachStderr(true);
-        final String[] cmdArr = { cmd, arg };
+        // final String[] cmdArr = (String[]) cmd.toArray();
+        final String[] cmdArr = new String[cmd.size()];
+        for (int i = 0; i < cmd.size(); i++) {
+            logger.debug(String.format("cmdArr[%d]=%s", i, cmd.get(i)));
+            cmdArr[i] = cmd.get(i);
+        }
         execCreateCmd.withCmd(cmdArr);
         final ExecCreateCmdResponse execCreateCmdResponse = execCreateCmd.exec();
         logger.info("Invoking container appropriate for this target image");

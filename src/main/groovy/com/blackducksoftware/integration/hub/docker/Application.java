@@ -197,9 +197,8 @@ public class Application {
 
     private void init() throws IOException, IntegrationException {
         logger.info(String.format("hub-docker-inspector %s", programVersion.getProgramVersion()));
-        if (devMode) {
-            logger.info("Running in development mode");
-        }
+        logger.debug(String.format("Dry run mode is set to %b", dryRun));
+        logger.debug(String.format("Development mode is set to %b", devMode));
         logger.trace(String.format("dockerImageTag: %s", dockerImageTag));
         initImageName();
         logger.info(String.format("Inspecting image:tag %s:%s", dockerImageRepo, dockerImageTag));
