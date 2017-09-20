@@ -156,7 +156,7 @@ public class DockerClientManager {
         final String containerId = ensureContainerRunning(dockerClient, imageId, extractorContainerName, hubPassword);
         setPropertiesInSubContainer(dockerClient, containerId, tarFilePathInSubContainer, tarFileDirInSubContainer, dockerTarFile, targetImage, targetImageRepo, targetImageTag);
         if (copyJar) {
-            copyFileToContainer(dockerClient, containerId, normalizeName(programPaths.getHubDockerJarPathHost()), programPaths.getHubDockerPgmDirPathContainer());
+            copyFileToContainer(dockerClient, containerId, normalizeJarFilename(programPaths.getHubDockerJarPathHost()), programPaths.getHubDockerPgmDirPathContainer());
         }
 
         final List<String> cmd = new ArrayList<>();
@@ -177,7 +177,8 @@ public class DockerClientManager {
         copyFileFromContainer(containerId, programPaths.getHubDockerOutputPathContainer() + ".", programPaths.getHubDockerOutputPath());
     }
 
-    private String normalizeName(final String hostJarPath) throws IOException {
+    // TODO maybe this belongs somewhere else?
+    private String normalizeJarFilename(final String hostJarPath) throws IOException {
         final File fromFile = new File(hostJarPath);
         final File toFile = new File(programPaths.getHubDockerTempDirPath() + "hub-docker-inspector.jar");
         FileUtils.copyFile(fromFile, toFile);
