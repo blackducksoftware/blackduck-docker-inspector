@@ -261,7 +261,7 @@ public class DockerClientManager {
         final ExecCreateCmdResponse execCreateCmdResponse = execCreateCmd.exec();
         logger.info("Invoking container appropriate for this target image");
         dockerClient.execStartCmd(execCreateCmdResponse.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-        logger.info("Returning to primary container");
+        logger.info("The container execution has completed");
     }
 
     private void copyFileToContainer(final DockerClient dockerClient, final String containerId, final String srcPath, final String destPath) throws IOException {

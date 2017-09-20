@@ -111,6 +111,7 @@ function get_property {
 # Start script
 ##################
 version="@VERSION@"
+encodingSetting="-Dfile.encoding=UTF-8"
 outputPath=""
 propdir=.
 hub_password_set_on_cmd_line=false
@@ -182,6 +183,7 @@ pushd ~/Documents/Files/hub-inspector/test
 unzip -o hub-docker-inspector-3.0.0-SNAPSHOT.zip
 popd
 cp ~/Documents/Files/hub-inspector/test/hub-docker-inspector-3.0.0-SNAPSHOT.jar .
+jarfile="hub-docker-inspector-${version}.jar"
 # END TEMP
 
 if [[ "$image" == *.tar ]]
@@ -203,10 +205,13 @@ then
 else
 	echo Inspecting image: $image
 	# TODO TEMP
-	echo "******* invoking launcher script"
-	chmod +x ~/Documents/git/hub-docker-inspector/build/hub-docker-inspector-launcher.sh
-	~/Documents/git/hub-docker-inspector/build/hub-docker-inspector-launcher.sh ${options[*]} "--host.working.dir.path=${workingDir}" "\"$image\""
-	echo "******* DONE invoking launcher script"
+	#echo "******* invoking launcher script"
+	#chmod +x ~/Documents/git/hub-docker-inspector/build/hub-docker-inspector-launcher.sh
+	#~/Documents/git/hub-docker-inspector/build/hub-docker-inspector-launcher.sh ${options[*]} "--host.working.dir.path=${workingDir}" "\"$image\""
+	#echo "******* DONE invoking launcher script"
+	echo "******* invoking jar"
+	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarfile}" "--docker.image=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
+	echo "******* DONE invoking jar"
 fi
 
 if [ ! -z "${outputPath}" ]
