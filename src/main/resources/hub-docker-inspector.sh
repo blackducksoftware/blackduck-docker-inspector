@@ -60,6 +60,10 @@ function preProcessOptions() {
 		then
 			workingDir=$(echo "$cmdlinearg" | cut -d '=' -f 2)
 		fi
+		if [[ "$cmdlinearg" == --jar.path=* ]]
+		then
+			jarPath=$(echo "$cmdlinearg" | cut -d '=' -f 2)
+		fi
 		if [[ "$cmdlinearg" == --no.prompt=true ]]
 		then
 			noPromptMode=true
@@ -118,6 +122,7 @@ hub_password_set_on_cmd_line=false
 noPromptMode=false
 dryRunMode=false
 createdWorkingDir=false
+jarPath="./hub-docker-inspector.sh"
 
 if [ $# -lt 1 ]
 then
@@ -160,9 +165,15 @@ fi
 
 if [ -z "${workingDir}" ]
 then
-	echo "Looking in ${propfile} for output.path"
+	echo "Looking in ${propfile} for working.dir.path"
 	workingDir=$(get_property "${propfile}" "working.dir.path")
 	echo "output path: ${workingDir}"
+fi
+if [ -z "${jarPath}" ]
+then
+	echo "Looking in ${propfile} for jar.path"
+	jarPath=$(get_property "${propfile}" "jar.path")
+	echo "jar path: ${jarPath}"
 fi
 if [ -z "${workingDir}" ]
 then
@@ -176,16 +187,6 @@ image="${options[${#options[@]}-1]}"
 unset "options[${#options[@]}-1]"
 checkForPassword
 
-# TODO TEMP
-echo "******* TEMP: getting hub-docker-inspector-3.0.0-SNAPSHOT.jar from latest build"
-cp ~/Documents/git/hub-docker-inspector/build/distributions/*.zip ~/Documents/Files/hub-inspector/test
-pushd ~/Documents/Files/hub-inspector/test
-unzip -o hub-docker-inspector-3.0.0-SNAPSHOT.zip
-popd
-cp ~/Documents/Files/hub-inspector/test/hub-docker-inspector-3.0.0-SNAPSHOT.jar .
-jarfile="hub-docker-inspector-${version}.jar"
-# END TEMP
-
 if [[ "$image" == *.tar ]]
 then
 	echo "Inspecting image tar file: $image"
@@ -194,14 +195,10 @@ then
 		err "ERROR: Tar file ${image} does not exist"
 		exit -1
 	fi
-	echo "******* invoking jar"
-	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarfile}" "--docker.tar=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
-	echo "******* DONE invoking jar"
+	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "--docker.tar=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
 else
 	echo Inspecting image: $image
-	echo "******* invoking jar"
-	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarfile}" "--docker.image=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
-	echo "******* DONE invoking jar"
+	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "--docker.image=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
 fi
 
 if [ ! -z "${outputPath}" ]
