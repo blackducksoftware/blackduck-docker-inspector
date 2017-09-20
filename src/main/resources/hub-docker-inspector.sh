@@ -121,8 +121,9 @@ propdir=.
 hub_password_set_on_cmd_line=false
 noPromptMode=false
 dryRunMode=false
+workingDir=""
 createdWorkingDir=false
-jarPath="./hub-docker-inspector.sh"
+jarPath=""
 
 if [ $# -lt 1 ]
 then
@@ -167,7 +168,13 @@ if [ -z "${workingDir}" ]
 then
 	echo "Looking in ${propfile} for working.dir.path"
 	workingDir=$(get_property "${propfile}" "working.dir.path")
-	echo "output path: ${workingDir}"
+	echo "working dir: ${workingDir}"
+fi
+if [ -z "${workingDir}" ]
+then
+	workingDir="$(mktemp -d)"
+	createdWorkingDir=true
+	echo "Created working directory: ${workingDir}"
 fi
 if [ -z "${jarPath}" ]
 then
@@ -175,11 +182,16 @@ then
 	jarPath=$(get_property "${propfile}" "jar.path")
 	echo "jar path: ${jarPath}"
 fi
-if [ -z "${workingDir}" ]
+if [ -z "${jarPath}" ]
 then
-	workingDir="$(mktemp -d)"
-	createdWorkingDir=true
-	echo "Created working directory: ${workingDir}"
+	echo "Getting hub-docker-inspector.jar from github"
+	pushd "${workingDir}"
+	curl --fail -O  https://blackducksoftware.github.io/hub-docker-inspector/hub-docker-inspector.jar
+	ls -lrt
+	chmod +x hub-docker-inspector.jar
+	popd
+	jarPath="${workingDir}/hub-docker-inspector.jar"
+	echo "jar path: ${jarPath}"
 fi
 
 options=( "$@" )
