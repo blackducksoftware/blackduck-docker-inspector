@@ -108,28 +108,11 @@ task createAddZipTasks() {
     }
 }
 
-task fixJarVersionInScript(type: Copy) {
-	from 'src/main/resources/hub-docker-inspector-launcher.sh'
-	into 'build'
-	filter(ReplaceTokens, tokens: [VERSION: version])
-}
-
 task fixJarVersionInMainScript(type: Copy) {
 	from 'src/main/resources/hub-docker-inspector.sh'
 	into 'build'
 	filter(ReplaceTokens, tokens: [VERSION: version])
 }
-
-task createAddBashScriptTasks() {
-    linuxFlavors.eachWithIndex {linuxFlavor, index ->
-        String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
-        task "addBashScriptTo${linuxFlavorDirName}ImageBuildDir"(type: Copy, dependsOn: [build, fixJarVersionInScript, fixJarVersionInMainScript]) {
-            from 'build/hub-docker-inspector-launcher.sh'
-            into "${buildDir}/images/${linuxFlavorDirName}/${hubDockerImageName}"
-        }
-    }
-}
-
 
 task "addApplicationPropertiesFileToUbuntuImageBuildDir"(type: Copy, dependsOn: build) {
 			from 'src/main/resources/application.properties'
@@ -300,8 +283,7 @@ task createDockerfiles(dependsOn: [createubuntuDockerfile, createcentosDockerfil
 }
 
 task buildImageDirs(dependsOn: [addFinalZipToubuntuImageBuildDir, addFinalZipTocentosImageBuildDir, addFinalZipToalpineImageBuildDir,
-	addApplicationPropertiesFileToUbuntuImageBuildDir,
-    addBashScriptToubuntuImageBuildDir, addBashScriptTocentosImageBuildDir, addBashScriptToalpineImageBuildDir, createDockerfiles]) {
+	addApplicationPropertiesFileToUbuntuImageBuildDir, createDockerfiles]) {
 }
 
 task createBuildDockerImageTasks() {
