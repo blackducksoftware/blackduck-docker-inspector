@@ -40,7 +40,7 @@ class ProgramPathsTest {
         assertEquals("${installDirPath}/config/application.properties".toString(), paths.getHubDockerConfigFilePath())
         assertEquals("${installDirPath}/target/".toString(), paths.getHubDockerTargetDirPath())
         assertEquals("${installDirPath}/".toString(), paths.getHubDockerPgmDirPath())
-        assertEquals("${installDirPath}/${jarFileName}".toString(), paths.getHubDockerJarPath())
+        assertEquals("${installDirPath}/${jarFileName}".toString(), paths.getHubDockerJarPathActual())
 
         if (prefixCodeLocationName) {
             assertEquals("xyz_imageName_imageTag_pkgMgrFilePath_pkgMgrName", paths.getCodeLocationName("imageName", "imageTag",  "pkgMgrFilePath",  "pkgMgrName"))

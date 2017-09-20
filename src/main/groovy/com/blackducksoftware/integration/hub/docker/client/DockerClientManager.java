@@ -156,7 +156,7 @@ public class DockerClientManager {
         final String containerId = ensureContainerRunning(dockerClient, imageId, extractorContainerName, hubPassword);
         setPropertiesInSubContainer(dockerClient, containerId, tarFilePathInSubContainer, tarFileDirInSubContainer, dockerTarFile, targetImage, targetImageRepo, targetImageTag);
         if (copyJar) {
-            copyFileToContainer(dockerClient, containerId, programPaths.getHubDockerJarPath(), programPaths.getHubDockerPgmDirPathContainer());
+            copyFileToContainer(dockerClient, containerId, normalizeName(programPaths.getHubDockerJarPathHost()), programPaths.getHubDockerPgmDirPathContainer());
         }
 
         final List<String> cmd = new ArrayList<>();
@@ -175,6 +175,13 @@ public class DockerClientManager {
         cmd.add(String.format("--working.dir.path=%s", "/opt/blackduck/hub-docker-inspector/working"));
         execCommandInContainer(dockerClient, imageId, containerId, cmd);
         copyFileFromContainer(containerId, programPaths.getHubDockerOutputPathContainer() + ".", programPaths.getHubDockerOutputPath());
+    }
+
+    private String normalizeName(final String hostJarPath) throws IOException {
+        final File fromFile = new File(hostJarPath);
+        final File toFile = new File(programPaths.getHubDockerTempDirPath() + "hub-docker-inspector.jar");
+        FileUtils.copyFile(fromFile, toFile);
+        return toFile.getAbsolutePath();
     }
 
     private void setPropertiesInSubContainer(final DockerClient dockerClient, final String containerId, final String tarFilePathInSubContainer, final String tarFileDirInSubContainer, final File dockerTarFile, final String targetImage,

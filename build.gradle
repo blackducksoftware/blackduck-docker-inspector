@@ -270,7 +270,7 @@ task createDpkgDockerfileTasks() {
             runCommand "mkdir ${hubDockerPgmDir}"
             runCommand "mkdir ${hubDockerPgmDir}/config"
             runCommand "mkdir ${hubDockerPgmDir}/working"
-			runCommand "mkdir ${hubDockerPgmDir}/template"
+			runCommand "mkdir ${hubDockerPgmDir}/temp"
             runCommand "mkdir ${hubDockerPgmDir}/target"
 			runCommand "mkdir ${hubDockerPgmDir}/output"
             addFile('config', "${hubDockerPgmDir}/config")

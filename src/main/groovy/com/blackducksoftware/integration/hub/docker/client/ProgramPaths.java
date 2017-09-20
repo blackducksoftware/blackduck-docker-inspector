@@ -40,6 +40,9 @@ public class ProgramPaths {
     @Value("${hub.codelocation.prefix}")
     private String codeLocationPrefix;
 
+    @Value("${jar.path}")
+    private String givenJarPath;
+
     private String hubDockerPgmDirPath;
     private String hubDockerPgmDirPathContainer;
     public static final String APPLICATION_PROPERTIES_FILENAME = "application.properties";
@@ -47,11 +50,13 @@ public class ProgramPaths {
     private final Logger logger = LoggerFactory.getLogger(ProgramPaths.class);
 
     private String hubDockerConfigDirPath;
+    private String hubDockerTempDirPath;
     private String hubDockerConfigDirPathContainer;
     private String hubDockerConfigFilePath;
     private String hubDockerTargetDirPath;
     private String hubDockerTargetDirPathContainer;
-    private String hubDockerJarPath;
+    private String hubDockerJarPathActual;
+    private String hubDockerJarPathHost;
     private String hubDockerWorkingDirPath;
     private String hubDockerOutputPath;
     private String hubDockerOutputPathContainer;
@@ -77,15 +82,21 @@ public class ProgramPaths {
         return "/opt/blackduck/hub-docker-inspector/";
     }
 
+    // TODO unhardcode stuff
     public void init() {
         if (initDone) {
             return;
         }
+        logger.debug(String.format("givenJarPath: %s", givenJarPath));
         if (StringUtils.isBlank(hubDockerPgmDirPath)) {
             hubDockerPgmDirPath = getProgramDirPath();
         }
+        if (StringUtils.isBlank(hubDockerJarPathHost)) {
+            hubDockerJarPathHost = givenJarPath;
+        }
         hubDockerPgmDirPathContainer = getProgramDirPathContainer();
         hubDockerConfigDirPath = hubDockerPgmDirPath + "config/";
+        hubDockerTempDirPath = hubDockerPgmDirPath + "temp/";
         hubDockerConfigDirPathContainer = hubDockerPgmDirPathContainer + "config/";
         hubDockerConfigFilePath = hubDockerConfigDirPath + APPLICATION_PROPERTIES_FILENAME;
         hubDockerTargetDirPath = hubDockerPgmDirPath + "target/";
@@ -99,8 +110,8 @@ public class ProgramPaths {
         final String prefix = "file:";
         final int startIndex = qualifiedJarPathString.indexOf(prefix) + prefix.length();
         final int endIndex = qualifiedJarPathString.indexOf(".jar") + ".jar".length();
-        hubDockerJarPath = qualifiedJarPathString.substring(startIndex, endIndex);
-        logger.debug(String.format("hubDockerJarPath: %s", hubDockerJarPath));
+        hubDockerJarPathActual = qualifiedJarPathString.substring(startIndex, endIndex);
+        logger.debug(String.format("hubDockerJarPathActual: %s", hubDockerJarPathActual));
         initDone = true;
     }
 
@@ -111,6 +122,11 @@ public class ProgramPaths {
     public String getHubDockerConfigDirPath() {
         init();
         return hubDockerConfigDirPath;
+    }
+
+    public String getHubDockerTempDirPath() {
+        init();
+        return hubDockerTempDirPath;
     }
 
     public String getHubDockerConfigDirPathContainer() {
@@ -143,9 +159,19 @@ public class ProgramPaths {
         return hubDockerPgmDirPathContainer;
     }
 
-    public String getHubDockerJarPath() {
+    public String getHubDockerJarPathHost() {
         init();
-        return hubDockerJarPath;
+        return hubDockerJarPathHost;
+    }
+
+    public String getHubDockerJarPathContainer() {
+        init();
+        return "/opt/blackduck/hub-docker-inspector/hub-docker-inspector.jar";
+    }
+
+    public String getHubDockerJarPathActual() {
+        init();
+        return hubDockerJarPathActual;
     }
 
     public String getHubDockerWorkingDirPath() {
