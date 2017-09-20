@@ -283,7 +283,7 @@ public class DockerClientManager {
     }
 
     private void execCommandInContainer(final DockerClient dockerClient, final String imageId, final String containerId, final List<String> cmd) throws InterruptedException {
-        logger.info(String.format("************************** Running %s in container %s from image %s", cmd.get(0), containerId, imageId));
+        logger.info(String.format("Running %s in container %s from image %s", cmd.get(0), containerId, imageId));
         final ExecCreateCmd execCreateCmd = dockerClient.execCreateCmd(containerId).withAttachStdout(true).withAttachStderr(true);
         // final String[] cmdArr = (String[]) cmd.toArray();
         final String[] cmdArr = new String[cmd.size()];

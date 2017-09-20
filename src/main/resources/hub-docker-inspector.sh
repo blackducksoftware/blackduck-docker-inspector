@@ -159,40 +159,34 @@ echo "Properties file: ${propfile}"
 
 if [ -z "${outputPath}" ]
 then
-	echo "Looking in ${propfile} for output.path"
 	outputPath=$(get_property "${propfile}" "output.path")
-	echo "output path: ${outputPath}"
 fi
+echo "Output path: ${outputPath}"
 
 if [ -z "${workingDir}" ]
 then
-	echo "Looking in ${propfile} for working.dir.path"
 	workingDir=$(get_property "${propfile}" "working.dir.path")
-	echo "working dir: ${workingDir}"
 fi
 if [ -z "${workingDir}" ]
 then
 	workingDir="$(mktemp -d)"
 	createdWorkingDir=true
-	echo "Created working directory: ${workingDir}"
 fi
+echo "Working directory: ${workingDir}"
+
 if [ -z "${jarPath}" ]
 then
-	echo "Looking in ${propfile} for jar.path"
 	jarPath=$(get_property "${propfile}" "jar.path")
-	echo "jar path: ${jarPath}"
 fi
 if [ -z "${jarPath}" ]
 then
 	echo "Getting hub-docker-inspector.jar from github"
 	pushd "${workingDir}"
 	curl --fail -O  https://blackducksoftware.github.io/hub-docker-inspector/hub-docker-inspector.jar
-	ls -lrt
-	chmod +x hub-docker-inspector.jar
 	popd
 	jarPath="${workingDir}/hub-docker-inspector.jar"
-	echo "jar path: ${jarPath}"
 fi
+echo "Jar path: ${jarPath}"
 
 options=( "$@" )
 image="${options[${#options[@]}-1]}"
@@ -224,11 +218,6 @@ then
 	then
 		mkdir -p "${outputPath}"
 	fi
-	echo "----- hostname: $(hostname)"
-	echo "----- ls -l ${workingDir}/output"
-	ls -l "${workingDir}/output"
-	echo "----- ls -ld ${outputPath}"
-	ls -ld "${outputPath}"
 	echo "Copying output to ${outputPath}"
 	cp "${workingDir}"/output/* "${outputPath}"
 fi
