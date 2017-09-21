@@ -43,6 +43,7 @@ import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.client.DockerClientManager;
 import com.blackducksoftware.integration.hub.docker.client.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.client.ProgramVersion;
+import com.blackducksoftware.integration.hub.docker.hub.HubClient;
 import com.blackducksoftware.integration.hub.docker.image.DockerImages;
 import com.blackducksoftware.integration.hub.docker.linux.FileOperations;
 import com.blackducksoftware.integration.hub.docker.linux.FileSys;

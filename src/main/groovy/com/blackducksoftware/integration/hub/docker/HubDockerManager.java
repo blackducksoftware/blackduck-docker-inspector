@@ -45,6 +45,7 @@ import com.blackducksoftware.integration.hub.docker.client.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.dependencynode.DependencyNodeWriter;
 import com.blackducksoftware.integration.hub.docker.extractor.ExtractionDetails;
 import com.blackducksoftware.integration.hub.docker.extractor.Extractor;
+import com.blackducksoftware.integration.hub.docker.hub.HubClient;
 import com.blackducksoftware.integration.hub.docker.linux.FileOperations;
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser;
 import com.blackducksoftware.integration.hub.docker.tar.ImageInfo;

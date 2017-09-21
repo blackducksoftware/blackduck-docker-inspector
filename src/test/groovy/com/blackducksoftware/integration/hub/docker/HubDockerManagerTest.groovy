@@ -15,6 +15,7 @@ import com.blackducksoftware.integration.hub.docker.executor.Executor
 import com.blackducksoftware.integration.hub.docker.extractor.ApkExtractor
 import com.blackducksoftware.integration.hub.docker.extractor.DpkgExtractor
 import com.blackducksoftware.integration.hub.docker.extractor.Extractor
+import com.blackducksoftware.integration.hub.docker.hub.HubClient
 import com.blackducksoftware.integration.hub.docker.linux.FileOperations
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser
 import com.blackducksoftware.integration.hub.docker.tar.ImageInfo
