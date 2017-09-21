@@ -140,6 +140,8 @@ task createApkDockerfileTasks() {
 			runCommand "mkdir ${hubDockerPgmDir}/output"
             addFile('config', "${hubDockerPgmDir}/config")
             addFile("${project.name}-${version}.jar", "/opt/blackduck/${hubDockerImageName}/${project.name}.jar")
+            runCommand "chown -R 10001 ${hubDockerPgmDir}"
+            user '10001'
         }
     }
 }
@@ -164,6 +166,8 @@ task createRpmDockerfileTasks() {
 			runCommand "mkdir ${hubDockerPgmDir}/output"
             addFile('config', "${hubDockerPgmDir}/config")
             addFile("${project.name}-${version}.jar", "/opt/blackduck/${hubDockerImageName}/${project.name}.jar")
+            runCommand "chown -R 10001 ${hubDockerPgmDir}"
+            user '10001'
         }
     }
 }
@@ -275,6 +279,9 @@ task createDpkgDockerfileTasks() {
 			runCommand "mkdir ${hubDockerPgmDir}/output"
             addFile('config', "${hubDockerPgmDir}/config")
             addFile("${project.name}-${version}.jar", "/opt/blackduck/${hubDockerImageName}/${project.name}.jar")
+            runCommand "chown -R 10001 ${hubDockerPgmDir}"
+            runCommand "chmod -R g+w /var/lib/dpkg"
+            user '10001'
         }
     }
 }

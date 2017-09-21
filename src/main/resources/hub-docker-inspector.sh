@@ -63,6 +63,7 @@ function preProcessOptions() {
 		if [[ "$cmdlinearg" == --jar.path=* ]]
 		then
 			jarPath=$(echo "$cmdlinearg" | cut -d '=' -f 2)
+			jarPathAlreadySet=true
 		fi
 		if [[ "$cmdlinearg" == --no.prompt=true ]]
 		then
@@ -124,6 +125,7 @@ dryRunMode=false
 workingDir=""
 createdWorkingDir=false
 jarPath=""
+jarPathAlreadySet=false
 
 if [ $# -lt 1 ]
 then
@@ -192,6 +194,11 @@ options=( "$@" )
 image="${options[${#options[@]}-1]}"
 unset "options[${#options[@]}-1]"
 checkForPassword
+newJarPathAssignment=""
+if [[ $jarPathAlreadySet == false ]]
+then
+	newJarPathAssignment="--jar.path=${jarPath}"
+fi
 
 if [[ "$image" == *.tar ]]
 then
@@ -201,10 +208,10 @@ then
 		err "ERROR: Tar file ${image} does not exist"
 		exit -1
 	fi
-	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "--jar.path=${jarPath}" "--docker.tar=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
+	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" "--docker.tar=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
 else
 	echo Inspecting image: $image
-	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "--jar.path=${jarPath}" "--docker.image=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
+	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" "--docker.image=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
 fi
 
 if [ ! -z "${outputPath}" ]
