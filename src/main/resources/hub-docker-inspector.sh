@@ -182,9 +182,9 @@ if [ -z "${jarPath}" ]
 then
 	echo "Getting hub-docker-inspector.jar from github"
 	pushd "${workingDir}"
-	curl --fail -O  https://blackducksoftware.github.io/hub-docker-inspector/hub-docker-inspector.jar
+	curl --fail -O  https://blackducksoftware.github.io/hub-docker-inspector/hub-docker-inspector-${version}.jar
 	popd
-	jarPath="${workingDir}/hub-docker-inspector.jar"
+	jarPath="${workingDir}/hub-docker-inspector-${version}.jar"
 fi
 echo "Jar path: ${jarPath}"
 
@@ -201,10 +201,10 @@ then
 		err "ERROR: Tar file ${image} does not exist"
 		exit -1
 	fi
-	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "--docker.tar=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
+	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "--jar.path=${jarPath}" "--docker.tar=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
 else
 	echo Inspecting image: $image
-	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "--docker.image=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
+	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "--jar.path=${jarPath}" "--docker.image=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
 fi
 
 if [ ! -z "${outputPath}" ]
