@@ -184,7 +184,15 @@ if [ -z "${jarPath}" ]
 then
 	echo "Getting hub-docker-inspector.jar from github"
 	pushd "${workingDir}"
-	curl --fail -O  https://blackducksoftware.github.io/hub-docker-inspector/hub-docker-inspector-${version}.jar
+	jarUrl="https://blackducksoftware.github.io/hub-docker-inspector/hub-docker-inspector-${version}.jar"
+	curl --fail -O  ${jarUrl}
+	curlStatus=$?
+	if [[ "${curlStatus}" != "0" ]]
+	then
+		err "ERROR ${curlStatus} fetching ${jarUrl}"
+		err "If you have the hub-docker-inspector .jar file, you can set the jar.path property to the path to the .jar file"
+		exit ${curlStatus}
+	fi
 	popd
 	jarPath="${workingDir}/hub-docker-inspector-${version}.jar"
 fi

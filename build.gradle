@@ -108,7 +108,7 @@ task createAddZipTasks() {
     }
 }
 
-task fixJarVersionInMainScript(type: Copy) {
+task buildScript(type: Copy) {
 	from 'src/main/resources/hub-docker-inspector.sh'
 	into 'build'
 	filter(ReplaceTokens, tokens: [VERSION: version])
@@ -341,7 +341,7 @@ task createRemoveDockerImageTasks() {
 task buildDockerImages(dependsOn: [buildDockerImage_ubuntu, buildDockerImage_centos, buildDockerImage_alpine]) {
 }
 
-task packageScript(type: Zip, dependsOn: fixJarVersionInMainScript) {
+task packageScript(type: Zip, dependsOn: buildScript) {
 	archiveName("${baseName}-${version}-script.${extension}")
 	from("${projectDir}/src/main/resources") {
 		include 'application.properties'
