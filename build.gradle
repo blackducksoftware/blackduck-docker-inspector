@@ -141,6 +141,7 @@ task createApkDockerfileTasks() {
             addFile('config', "${hubDockerPgmDir}/config")
             addFile("${project.name}-${version}.jar", "/opt/blackduck/${hubDockerImageName}/${project.name}.jar")
             runCommand "chown -R 10001 ${hubDockerPgmDir}"
+            runCommand "chmod -R g+w /lib/apk"
             user '10001'
         }
     }
@@ -167,6 +168,7 @@ task createRpmDockerfileTasks() {
             addFile('config', "${hubDockerPgmDir}/config")
             addFile("${project.name}-${version}.jar", "/opt/blackduck/${hubDockerImageName}/${project.name}.jar")
             runCommand "chown -R 10001 ${hubDockerPgmDir}"
+            runCommand "chmod -R g+w /var/lib"
             user '10001'
         }
     }
