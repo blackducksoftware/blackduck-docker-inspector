@@ -23,14 +23,8 @@
  */
 package com.blackducksoftware.integration.hub.docker.client;
 
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.blackducksoftware.integration.hub.docker.executor.Executor;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
@@ -41,51 +35,12 @@ import com.github.dockerjava.core.DockerClientConfig;
 @Component
 class HubDockerClient {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    @Autowired
-    Executor executor;
-
-    @Value("${docker.host}")
-    String dockerHost;
-
-    @Value("${docker.registry}")
-    String dockerRegistry;
-
-    @Value("${docker.registry.username}")
-    String dockerRegistryUsername;
-
-    @Value("${docker.registry.password}")
-    String dockerRegistryPassword;
-
-    @Value("${command.timeout}")
-    long commandTimeout;
-
-    // Have not tested these, they may also be ignored //
-    @Value("${docker.tls.verify}")
-    Boolean dockerTlsVerify;
-
-    @Value("${docker.cert.path}")
-    String dockerCertPath;
-
     private DockerClient dockerClient;
 
-    DockerClient getDockerClient() throws HubIntegrationException {
+    public DockerClient getDockerClient() throws HubIntegrationException {
         if (dockerClient == null) {
             final Builder builder = DefaultDockerClientConfig.createDefaultConfigBuilder();
-            if (StringUtils.isNotBlank(dockerHost)) {
-                builder.withDockerHost(dockerHost);
-            }
-            if (dockerTlsVerify != null) {
-                builder.withDockerTlsVerify(dockerTlsVerify);
-            }
-            if (StringUtils.isNotBlank(dockerCertPath)) {
-                builder.withDockerCertPath(dockerCertPath);
-            }
-
             final DockerClientConfig config = builder.build();
-            logger.debug(String.format("docker host: %s", config.getDockerHost()));
-            logger.debug(String.format("docker username: %s", config.getRegistryUsername()));
             dockerClient = DockerClientBuilder.getInstance(config).build();
         }
         return dockerClient;

@@ -150,7 +150,6 @@ public class Application {
         }
     }
 
-    // TODO these result methods may not belong here
     private void clearResult() {
         try {
             final File outputFile = new File(programPaths.getHubDockerResultPath());
