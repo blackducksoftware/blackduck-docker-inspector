@@ -24,6 +24,7 @@
 package com.blackducksoftware.integration.hub.docker;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -47,8 +48,11 @@ import com.blackducksoftware.integration.hub.docker.hub.HubClient;
 import com.blackducksoftware.integration.hub.docker.image.DockerImages;
 import com.blackducksoftware.integration.hub.docker.linux.FileOperations;
 import com.blackducksoftware.integration.hub.docker.linux.FileSys;
+import com.blackducksoftware.integration.hub.docker.result.Result;
+import com.blackducksoftware.integration.hub.docker.result.ResultWriter;
 import com.blackducksoftware.integration.hub.docker.tar.manifest.ManifestLayerMapping;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
+import com.google.gson.Gson;
 
 @SpringBootApplication
 public class Application {
@@ -134,10 +138,31 @@ public class Application {
             }
             provideTarIfRequested(dockerTarFile);
             provideContainerFileSystemTarIfRequested(targetImageFileSystemRootDir);
+            writeResult(true, "Success");
         } catch (final Exception e) {
-            logger.error(String.format("Error inspecting image: %s", e.getMessage()));
+            final String msg = String.format("Error inspecting image: %s", e.getMessage());
+            logger.error(msg);
             final String trace = ExceptionUtils.getStackTrace(e);
             logger.debug(String.format("Stack trace: %s", trace));
+            writeResult(false, msg);
+        }
+    }
+
+    private void writeResult(final boolean succeeded, final String msg) {
+        final Result result = new Result(succeeded, msg);
+        try {
+            final File outputDirectory = new File(programPaths.getHubDockerOutputPath());
+            outputDirectory.mkdirs();
+            final String resultFilename = "result.json";
+            final File resultOutputFile = new File(outputDirectory, resultFilename);
+
+            try (FileOutputStream resultOutputStream = new FileOutputStream(resultOutputFile)) {
+                try (ResultWriter resultWriter = new ResultWriter(new Gson(), resultOutputStream)) {
+                    resultWriter.writeResult(result);
+                }
+            }
+        } catch (final Exception e) {
+            logger.error(String.format("Error writing result file: %s", e.getMessage()));
         }
     }
 
