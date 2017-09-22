@@ -165,8 +165,7 @@ public class Application {
         try {
             final File outputDirectory = new File(programPaths.getHubDockerOutputPath());
             outputDirectory.mkdirs();
-            final String resultFilename = "result.json";
-            final File resultOutputFile = new File(outputDirectory, resultFilename);
+            final File resultOutputFile = new File(programPaths.getHubDockerResultPath());
 
             try (FileOutputStream resultOutputStream = new FileOutputStream(resultOutputFile)) {
                 try (ResultWriter resultWriter = new ResultWriter(new Gson(), resultOutputStream)) {
