@@ -226,8 +226,8 @@ fi
 
 if [ $createdWorkingDir == true ]
 then
-	echo "DISABLED: Removing ${workingDir}"
-	###rm -rf ${workingDir}   ### TODO
+	echo "Removing ${workingDir}"
+	rm -rf ${workingDir}
 fi
 
 numSuccessMessages=$(grep "\"succeeded\":[ 	]*true" "${outputPath}"/result.json | wc -l)
