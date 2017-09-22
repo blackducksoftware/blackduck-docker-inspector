@@ -23,8 +23,6 @@
  */
 package com.blackducksoftware.integration.hub.docker.client;
 
-import java.io.IOException;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,29 +67,11 @@ class HubDockerClient {
 
     @Value("${docker.cert.path}")
     String dockerCertPath;
-    /////////////////////////////////////////////////////
-
-    ////// These seem to be ignored by the DockerClient /////
-    // @Value("${docker.config}")
-    // String dockerConfig
-    //
-    // @Value("${docker.api.version}")
-    // String dockerApiVersion
-    //
-    //
-    // @Value("${docker.registry.email}")
-    // String dockerRegistryEmail
-    //////////////////////////////////////////////////////////
 
     private DockerClient dockerClient;
 
-    // TODO this belongs in DockerClientManager (and needs cleanup)
-
     DockerClient getDockerClient() throws HubIntegrationException {
         if (dockerClient == null) {
-            // loginAuthenticatedRegistry();
-            // Docker client uses the system properties for proxies
-            // http.proxyHost , http.proxyPort, http.proxyUser, http.proxyPassword
             final Builder builder = DefaultDockerClientConfig.createDefaultConfigBuilder();
             if (StringUtils.isNotBlank(dockerHost)) {
                 builder.withDockerHost(dockerHost);
@@ -102,24 +82,6 @@ class HubDockerClient {
             if (StringUtils.isNotBlank(dockerCertPath)) {
                 builder.withDockerCertPath(dockerCertPath);
             }
-            // if(StringUtils.isNotBlank(dockerConfig)){
-            // builder.withDockerConfig(dockerConfig)
-            // }
-            // if(StringUtils.isNotBlank(dockerApiVersion)){
-            // builder.withApiVersion(dockerApiVersion)
-            // }
-            // if(StringUtils.isNotBlank(dockerRegistryUrl)){
-            // builder.withRegistryUrl(dockerRegistryUrl)
-            // }
-            // if(StringUtils.isNotBlank(dockerRegistryUsername)){
-            // builder .withRegistryUsername(dockerRegistryUsername)
-            // }
-            // if(StringUtils.isNotBlank(dockerRegistryPassword)){
-            // builder.withRegistryPassword(dockerRegistryPassword)
-            // }
-            // if(StringUtils.isNotBlank(dockerRegistryEmail)){
-            // builder.withRegistryEmail(dockerRegistryEmail)
-            // }
 
             final DockerClientConfig config = builder.build();
             logger.debug(String.format("docker host: %s", config.getDockerHost()));
@@ -127,21 +89,5 @@ class HubDockerClient {
             dockerClient = DockerClientBuilder.getInstance(config).build();
         }
         return dockerClient;
-    }
-
-    private void loginAuthenticatedRegistry() throws HubIntegrationException {
-        if (StringUtils.isNotBlank(dockerRegistryUsername) && StringUtils.isNotBlank(dockerRegistryPassword)) {
-            logger.debug(String.format("Logging into docker as %s", dockerRegistryUsername));
-            String command = "docker login -u=${dockerRegistryUsername} -p=${dockerRegistryPassword}";
-            if (StringUtils.isNotBlank(dockerRegistry)) {
-                command += " ${dockerRegistry}";
-            }
-            try {
-                executor.executeCommand(command);
-            } catch (HubIntegrationException | IOException | InterruptedException e) {
-                final String msg = String.format("Error executing command: %s; error: %s", command, e.getMessage());
-                throw new HubIntegrationException(msg, e);
-            }
-        }
     }
 }

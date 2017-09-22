@@ -23,6 +23,10 @@
  */
 package com.blackducksoftware.integration.hub.docker.client;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +35,28 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ProgramPaths {
+    private static final String CONTAINER_JAR_PATH = "/opt/blackduck/hub-docker-inspector/hub-docker-inspector.jar";
+
+    private static final String JAR_FILENAME = "hub-docker-inspector.jar";
+
+    private static final String JAR_FILE_SUFFIX = ".jar";
+
+    private static final String FILE_URI_PREFIX = "file:";
+
+    private static final String RESULT_JSON_FILENAME = "result.json";
+
+    private static final String OUTPUT_DIR = "output/";
+
+    private static final String WORKING_DIR = "working/";
+
+    private static final String TARGET_DIR = "target/";
+
+    private static final String TEMP_DIR = "temp/";
+
+    private static final String CONFIG_DIR = "config/";
+
+    private static final String CONTAINER_PROGRAM_DIR = "/opt/blackduck/hub-docker-inspector/";
+
     @Value("${on.host}")
     private boolean onHost;
 
@@ -80,10 +106,9 @@ public class ProgramPaths {
     }
 
     private String getProgramDirPathContainer() {
-        return "/opt/blackduck/hub-docker-inspector/";
+        return CONTAINER_PROGRAM_DIR;
     }
 
-    // TODO unhardcode stuff
     public void init() {
         if (initDone) {
             return;
@@ -96,25 +121,32 @@ public class ProgramPaths {
             hubDockerJarPathHost = givenJarPath;
         }
         hubDockerPgmDirPathContainer = getProgramDirPathContainer();
-        hubDockerConfigDirPath = hubDockerPgmDirPath + "config/";
-        hubDockerTempDirPath = hubDockerPgmDirPath + "temp/";
-        hubDockerConfigDirPathContainer = hubDockerPgmDirPathContainer + "config/";
+        hubDockerConfigDirPath = hubDockerPgmDirPath + CONFIG_DIR;
+        hubDockerTempDirPath = hubDockerPgmDirPath + TEMP_DIR;
+        hubDockerConfigDirPathContainer = hubDockerPgmDirPathContainer + CONFIG_DIR;
         hubDockerConfigFilePath = hubDockerConfigDirPath + APPLICATION_PROPERTIES_FILENAME;
-        hubDockerTargetDirPath = hubDockerPgmDirPath + "target/";
-        hubDockerTargetDirPathContainer = hubDockerPgmDirPathContainer + "target/";
-        hubDockerWorkingDirPath = hubDockerPgmDirPath + "working/";
-        hubDockerOutputPath = hubDockerPgmDirPath + "output/";
-        hubDockerOutputPathContainer = getProgramDirPathContainer() + "output/";
-        hubDockerResultPath = hubDockerOutputPath + "result.json";
+        hubDockerTargetDirPath = hubDockerPgmDirPath + TARGET_DIR;
+        hubDockerTargetDirPathContainer = hubDockerPgmDirPathContainer + TARGET_DIR;
+        hubDockerWorkingDirPath = hubDockerPgmDirPath + WORKING_DIR;
+        hubDockerOutputPath = hubDockerPgmDirPath + OUTPUT_DIR;
+        hubDockerOutputPathContainer = getProgramDirPathContainer() + OUTPUT_DIR;
+        hubDockerResultPath = hubDockerOutputPath + RESULT_JSON_FILENAME;
 
         final String qualifiedJarPathString = getQualifiedJarPath();
         logger.debug(String.format("qualifiedJarPathString: %s", qualifiedJarPathString));
-        final String prefix = "file:";
+        final String prefix = FILE_URI_PREFIX;
         final int startIndex = qualifiedJarPathString.indexOf(prefix) + prefix.length();
-        final int endIndex = qualifiedJarPathString.indexOf(".jar") + ".jar".length();
+        final int endIndex = qualifiedJarPathString.indexOf(JAR_FILE_SUFFIX) + JAR_FILE_SUFFIX.length();
         hubDockerJarPathActual = qualifiedJarPathString.substring(startIndex, endIndex);
         logger.debug(String.format("hubDockerJarPathActual: %s", hubDockerJarPathActual));
         initDone = true;
+    }
+
+    public String normalizeJarFilename(final String hostJarPath) throws IOException {
+        final File fromFile = new File(hostJarPath);
+        final File toFile = new File(getHubDockerTempDirPath() + JAR_FILENAME);
+        FileUtils.copyFile(fromFile, toFile);
+        return toFile.getAbsolutePath();
     }
 
     public String getQualifiedJarPath() {
@@ -168,7 +200,7 @@ public class ProgramPaths {
 
     public String getHubDockerJarPathContainer() {
         init();
-        return "/opt/blackduck/hub-docker-inspector/hub-docker-inspector.jar";
+        return CONTAINER_JAR_PATH;
     }
 
     public String getHubDockerJarPathActual() {
