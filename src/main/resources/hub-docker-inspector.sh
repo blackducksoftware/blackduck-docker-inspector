@@ -20,9 +20,6 @@ function printUsage() {
     echo "configured with your Hub connection details (hub.url, hub.username, and hub.password),"
 	echo "and Docker Hub connection details (docker.registry.username and docker.registry.password)."
 	echo ""
-	echo "To get an application.properties template file:"
-	echo "  $0 --get-properties"
-	echo ""
 	echo "For greater security, the Hub password can be set via the environment variable BD_HUB_PASSWORD"
 	echo ""
 	echo "For example:"
@@ -143,16 +140,6 @@ if [ \( "$1" = -h \) -o \( "$1" = --help \) ]
 then
     printUsage
     exit 0
-fi
-
-if [ \( "$1" = -p \) -o \( "$1" = --get-properties \) ]
-then
-	echo "************ NOT IMPLEMENTED"
-	exit -1
-    #ensureContainerRunning
-    #echo "Copying application.properties template"
-    #docker cp hub-docker-inspector:/opt/blackduck/hub-docker-inspector/template/application.properties .
-    #exit 0
 fi
 
 preProcessOptions "$@"
