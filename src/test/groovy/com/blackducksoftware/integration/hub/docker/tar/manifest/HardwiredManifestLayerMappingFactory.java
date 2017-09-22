@@ -2,7 +2,7 @@ package com.blackducksoftware.integration.hub.docker.tar.manifest;
 
 import java.util.List;
 
-import com.blackducksoftware.integration.hub.docker.client.ProgramPaths;
+import com.blackducksoftware.integration.hub.docker.ProgramPaths;
 
 public class HardwiredManifestLayerMappingFactory implements ManifestLayerMappingFactory {
 

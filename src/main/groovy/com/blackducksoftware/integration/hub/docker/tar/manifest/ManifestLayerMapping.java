@@ -29,7 +29,7 @@ import org.apache.commons.lang3.builder.RecursiveToStringStyle;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.blackducksoftware.integration.hub.docker.client.ProgramPaths;
+import com.blackducksoftware.integration.hub.docker.ProgramPaths;
 
 public class ManifestLayerMapping {
     private final String imageName;

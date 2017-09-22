@@ -23,8 +23,8 @@ import org.junit.Ignore
 import org.junit.Test
 
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
+import com.blackducksoftware.integration.hub.docker.ProgramPaths
 import com.blackducksoftware.integration.hub.docker.TestUtils
-import com.blackducksoftware.integration.hub.docker.client.ProgramPaths
 import com.blackducksoftware.integration.hub.docker.tar.manifest.HardwiredManifestFactory
 import com.blackducksoftware.integration.hub.docker.tar.manifest.ManifestLayerMapping
 

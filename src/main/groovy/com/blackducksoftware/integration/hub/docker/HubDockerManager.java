@@ -41,7 +41,6 @@ import org.springframework.stereotype.Component;
 import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter;
 import com.blackducksoftware.integration.hub.docker.client.DockerClientManager;
-import com.blackducksoftware.integration.hub.docker.client.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.dependencynode.DependencyNodeWriter;
 import com.blackducksoftware.integration.hub.docker.extractor.ExtractionDetails;
 import com.blackducksoftware.integration.hub.docker.extractor.Extractor;

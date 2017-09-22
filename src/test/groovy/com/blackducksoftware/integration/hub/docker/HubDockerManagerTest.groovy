@@ -8,7 +8,6 @@ import org.junit.BeforeClass
 import org.junit.Test
 
 import com.blackducksoftware.integration.hub.docker.client.DockerClientManager
-import com.blackducksoftware.integration.hub.docker.client.ProgramPaths
 import com.blackducksoftware.integration.hub.docker.executor.ApkExecutor
 import com.blackducksoftware.integration.hub.docker.executor.DpkgExecutor
 import com.blackducksoftware.integration.hub.docker.executor.Executor

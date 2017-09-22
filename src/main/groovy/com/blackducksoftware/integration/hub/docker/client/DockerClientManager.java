@@ -38,6 +38,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.blackducksoftware.integration.hub.docker.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.executor.Executor;
 import com.blackducksoftware.integration.hub.docker.hub.HubPassword;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
