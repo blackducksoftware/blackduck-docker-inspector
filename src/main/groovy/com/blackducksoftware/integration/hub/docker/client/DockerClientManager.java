@@ -64,7 +64,7 @@ public class DockerClientManager {
     private static final String IMAGE_TAG_PROPERTY = "docker.image.tag";
     private static final String ON_HOST_PROPERTY = "on.host";
     private static final String DRY_RUN_PROPERTY = "dry.run";
-    private static final String OUTPUT_INCLUDE_TARFILE_PROPERTY = "output.include.tarfile";
+    private static final String OUTPUT_INCLUDE_DOCKER_TARFILE_PROPERTY = "output.include.dockertarfile";
     private static final String OUTPUT_INCLUDE_CONTAINER_FILE_SYSTEM_TARFILE_PROPERTY = "output.include.containerfilesystem";
     private final Logger logger = LoggerFactory.getLogger(DockerClientManager.class);
 
@@ -196,7 +196,7 @@ public class DockerClientManager {
         hubDockerProperties.set(IMAGE_PROPERTY, targetImage);
         hubDockerProperties.set(IMAGE_REPO_PROPERTY, targetImageRepo);
         hubDockerProperties.set(IMAGE_TAG_PROPERTY, targetImageTag);
-        hubDockerProperties.set(OUTPUT_INCLUDE_TARFILE_PROPERTY, "false");
+        hubDockerProperties.set(OUTPUT_INCLUDE_DOCKER_TARFILE_PROPERTY, "false");
         hubDockerProperties.set(OUTPUT_INCLUDE_CONTAINER_FILE_SYSTEM_TARFILE_PROPERTY, "false");
         hubDockerProperties.set(ON_HOST_PROPERTY, "false");
         hubDockerProperties.set(DRY_RUN_PROPERTY, (new Boolean(dryRun).toString()));

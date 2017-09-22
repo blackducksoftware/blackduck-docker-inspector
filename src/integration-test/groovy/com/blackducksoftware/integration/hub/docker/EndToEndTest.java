@@ -158,7 +158,7 @@ public class EndToEndTest {
         assertFalse(actualDependencies.exists());
 
         final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--dry.run=true", "--jar.path=build/images/alpine/hub-docker-inspector/hub-docker-inspector-3.0.0-SNAPSHOT.jar", "--output.path=test/output",
-                "--output.include.tarfile=true", "--output.include.containerfilesystem=true", "--dev.mode=true");
+                "--output.include.dockertarfile=true", "--output.include.containerfilesystem=true", "--dev.mode=true");
         // Arrays.asList returns a fixed size list; need a variable sized list
         final List<String> fullCmd = new ArrayList<>();
         fullCmd.addAll(partialCmd);

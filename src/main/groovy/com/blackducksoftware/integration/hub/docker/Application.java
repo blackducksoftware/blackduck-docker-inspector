@@ -85,8 +85,8 @@ public class Application {
     @Value("${dry.run}")
     private boolean dryRun;
 
-    @Value("${output.include.tarfile}")
-    private boolean outputIncludeTarfile;
+    @Value("${output.include.dockertarfile}")
+    private boolean outputIncludeDockerTarfile;
 
     @Value("${output.include.containerfilesystem}")
     private boolean outputIncludeContainerFileSystemTarfile;
@@ -142,7 +142,7 @@ public class Application {
     }
 
     private void provideTarIfRequested(final File dockerTarFile) throws IOException {
-        if (outputIncludeTarfile) {
+        if (outputIncludeDockerTarfile) {
             final File outputDirectory = new File(programPaths.getHubDockerOutputPath());
             if (onHost) {
                 logger.debug(String.format("Copying %s to output dir %s", dockerTarFile.getAbsolutePath(), outputDirectory.getAbsolutePath()));
