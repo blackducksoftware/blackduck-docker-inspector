@@ -60,6 +60,7 @@ public class ProgramPaths {
     private String hubDockerWorkingDirPath;
     private String hubDockerOutputPath;
     private String hubDockerOutputPathContainer;
+    private String hubDockerResultPath;
 
     private boolean initDone = false;
 
@@ -104,6 +105,7 @@ public class ProgramPaths {
         hubDockerWorkingDirPath = hubDockerPgmDirPath + "working/";
         hubDockerOutputPath = hubDockerPgmDirPath + "output/";
         hubDockerOutputPathContainer = getProgramDirPathContainer() + "output/";
+        hubDockerResultPath = hubDockerOutputPath + "result.json";
 
         final String qualifiedJarPathString = getQualifiedJarPath();
         logger.debug(String.format("qualifiedJarPathString: %s", qualifiedJarPathString));
@@ -182,6 +184,11 @@ public class ProgramPaths {
     public String getHubDockerOutputPath() {
         init();
         return hubDockerOutputPath;
+    }
+
+    public String getHubDockerResultPath() {
+        init();
+        return hubDockerResultPath;
     }
 
     public String getHubDockerOutputPathContainer() {

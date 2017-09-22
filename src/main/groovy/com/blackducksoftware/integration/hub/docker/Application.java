@@ -138,13 +138,25 @@ public class Application {
             }
             provideTarIfRequested(dockerTarFile);
             provideContainerFileSystemTarIfRequested(targetImageFileSystemRootDir);
-            writeResult(true, "Success");
+            if (!onHost) {
+                writeResult(true, "Success");
+            }
         } catch (final Exception e) {
             final String msg = String.format("Error inspecting image: %s", e.getMessage());
             logger.error(msg);
             final String trace = ExceptionUtils.getStackTrace(e);
             logger.debug(String.format("Stack trace: %s", trace));
             writeResult(false, msg);
+        }
+    }
+
+    // TODO these result methods may not belong here
+    private void clearResult() {
+        try {
+            final File outputFile = new File(programPaths.getHubDockerResultPath());
+            outputFile.delete();
+        } catch (final Exception e) {
+            logger.warn(String.format("Error clearing result file: %s", e.getMessage()));
         }
     }
 
@@ -226,6 +238,7 @@ public class Application {
         logger.debug(String.format("Dry run mode is set to %b", dryRun));
         logger.debug(String.format("Development mode is set to %b", devMode));
         logger.trace(String.format("dockerImageTag: %s", dockerImageTag));
+        clearResult();
         initImageName();
         logger.info(String.format("Inspecting image:tag %s:%s", dockerImageRepo, dockerImageTag));
         if (!dryRun) {
