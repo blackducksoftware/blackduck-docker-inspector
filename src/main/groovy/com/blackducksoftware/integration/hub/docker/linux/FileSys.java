@@ -42,7 +42,7 @@ public class FileSys {
                     try {
                         packageManagers.add(PackageManagerEnum.getPackageManagerEnumByName(packageManagerDirectory.getName()));
                     } catch (final IllegalArgumentException e) {
-                        logger.trace(e.toString()); // TODO is this right??
+                        logger.trace(String.format("%s is not a package manager", packageManagerDirectory.getName()));
                     }
                 }
             }
