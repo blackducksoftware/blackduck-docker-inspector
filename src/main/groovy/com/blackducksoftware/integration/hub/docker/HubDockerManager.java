@@ -106,7 +106,7 @@ public class HubDockerManager {
         }
         String architecture = null;
         if (osEnum == OperatingSystemEnum.ALPINE) { // TODO This code should be in a pkg-manager-specific class
-            final List<File> etcDirectories = FileOperations.findFileWithName(targetImageFileSystemRootDir, "etc");
+            final List<File> etcDirectories = FileOperations.findDirWithName(targetImageFileSystemRootDir, "etc");
             for (final File etc : etcDirectories) {
                 File architectureFile = new File(etc, "apk");
                 architectureFile = new File(architectureFile, "arch");

@@ -34,7 +34,7 @@ public class FileSys {
         final Set<PackageManagerEnum> packageManagers = new HashSet<>();
 
         logger.debug(String.format("Looking in root dir %s for lib dir", root.getAbsolutePath()));
-        final List<File> libDirs = FileOperations.findFileWithName(root, "lib");
+        final List<File> libDirs = FileOperations.findDirWithName(root, "lib");
         if (libDirs != null) {
             for (final File libDir : libDirs) {
                 for (final File packageManagerDirectory : libDir.listFiles()) {
@@ -42,7 +42,7 @@ public class FileSys {
                     try {
                         packageManagers.add(PackageManagerEnum.getPackageManagerEnumByName(packageManagerDirectory.getName()));
                     } catch (final IllegalArgumentException e) {
-                        logger.trace(e.toString());
+                        logger.trace(e.toString()); // TODO is this right??
                     }
                 }
             }

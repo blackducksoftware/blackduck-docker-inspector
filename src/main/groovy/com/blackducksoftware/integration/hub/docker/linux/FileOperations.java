@@ -6,23 +6,31 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Stream;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.IOFileFilter;
+import org.apache.commons.io.filefilter.NameFileFilter;
+import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class FileOperations {
     private static final Logger logger = LoggerFactory.getLogger(FileOperations.class);
 
-    public static List<File> findFileWithName(final File dirFile, final String targetName) {
-        logger.trace(String.format("Looking in %s for %s", dirFile.getAbsolutePath(), targetName));
+    public static List<File> findDirWithName(final File dirFile, final String targetName) {
         final List<File> results = new ArrayList<>();
-
-        try (Stream<Path> stream = Files.find(dirFile.toPath(), 100, (path, attr) -> path.getFileName().toString().equals(targetName))) {
-            stream.forEach(path -> results.add(path.toFile()));
-        } catch (final IOException e) {
-            e.printStackTrace();
+        logger.trace(String.format("Looking in %s for Dir %s", dirFile.getAbsolutePath(), targetName));
+        final IOFileFilter fileFilter = new NameFileFilter(targetName);
+        final IOFileFilter dirFilter = TrueFileFilter.INSTANCE;
+        final Iterator<File> iter = FileUtils.iterateFilesAndDirs(dirFile, fileFilter, dirFilter);
+        while (iter.hasNext()) {
+            final File f = iter.next();
+            if (targetName.equals(f.getName()) && (f.isDirectory())) {
+                logger.trace(String.format("Match: %s", f.getAbsolutePath()));
+                results.add(f);
+            }
         }
         return results;
     }
