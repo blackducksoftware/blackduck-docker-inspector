@@ -36,8 +36,6 @@ import org.springframework.stereotype.Component;
 import com.blackducksoftware.integration.hub.bdio.simple.DependencyNodeBuilder;
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent;
 import com.blackducksoftware.integration.hub.bdio.simple.model.DependencyNode;
-import com.blackducksoftware.integration.hub.detect.model.BomToolType;
-import com.blackducksoftware.integration.hub.detect.model.DetectCodeLocation;
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum;
 import com.blackducksoftware.integration.hub.docker.executor.RpmExecutor;
@@ -68,7 +66,6 @@ class RpmExtractor extends Extractor {
         logger.debug("extractComponents: Received ${packageList.length} package lines");
         final List<BdioComponent> components = new ArrayList<>();
         final DependencyNode rootNode = createDependencyNode(OperatingSystemEnum.CENTOS.getForge(), dockerImageRepo, dockerImageTag, extractionDetails.getArchitecture());
-        final DetectCodeLocation codeLocation = new DetectCodeLocation(BomToolType.DOCKER, String.format("%s_%s", dockerImageRepo, dockerImageTag), rootNode);
         final DependencyNodeBuilder dNodeBuilder = new DependencyNodeBuilder(rootNode);
         for (final String packageLine : packageList) {
             if (valid(packageLine)) {
@@ -84,6 +81,6 @@ class RpmExtractor extends Extractor {
                 createBdioComponent(dNodeBuilder, rootNode, components, artifact, versionRelease, externalId, arch);
             }
         }
-        return new ExtractionResults(components, codeLocation);
+        return new ExtractionResults(components);
     }
 }

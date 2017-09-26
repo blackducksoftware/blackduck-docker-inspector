@@ -36,8 +36,6 @@ import org.springframework.stereotype.Component;
 import com.blackducksoftware.integration.hub.bdio.simple.DependencyNodeBuilder;
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent;
 import com.blackducksoftware.integration.hub.bdio.simple.model.DependencyNode;
-import com.blackducksoftware.integration.hub.detect.model.BomToolType;
-import com.blackducksoftware.integration.hub.detect.model.DetectCodeLocation;
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum;
 import com.blackducksoftware.integration.hub.docker.executor.DpkgExecutor;
@@ -62,7 +60,6 @@ class DpkgExtractor extends Extractor {
     public ExtractionResults extractComponents(final String dockerImageRepo, final String dockerImageTag, final ExtractionDetails extractionDetails, final String[] packageList) {
         final List<BdioComponent> components = new ArrayList<>();
         final DependencyNode rootNode = createDependencyNode(OperatingSystemEnum.UBUNTU.getForge(), dockerImageRepo, dockerImageTag, extractionDetails.getArchitecture());
-        final DetectCodeLocation codeLocation = new DetectCodeLocation(BomToolType.DOCKER, String.format("%s_%s", dockerImageRepo, dockerImageTag), rootNode);
 
         final DependencyNodeBuilder dNodeBuilder = new DependencyNodeBuilder(rootNode);
         boolean startOfComponents = false;
@@ -93,7 +90,7 @@ class DpkgExtractor extends Extractor {
             }
         }
         logger.trace(String.format("DependencyNode tree: %s", rootNode));
-        return new ExtractionResults(components, codeLocation);
+        return new ExtractionResults(components);
     }
 
     private boolean isInstalledStatus(final Character packageStatus) {

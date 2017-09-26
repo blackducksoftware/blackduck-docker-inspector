@@ -43,9 +43,7 @@ import com.blackducksoftware.integration.hub.bdio.simple.model.Forge;
 import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.ArchitectureExternalId;
 import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.ExternalId;
 import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.NameVersionExternalId;
-import com.blackducksoftware.integration.hub.detect.model.DetectCodeLocation;
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum;
-import com.blackducksoftware.integration.hub.docker.dependencynode.DependencyNodeWriter;
 import com.blackducksoftware.integration.hub.docker.executor.PkgMgrExecutor;
 import com.blackducksoftware.integration.hub.docker.tar.ImagePkgMgr;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
@@ -77,8 +75,8 @@ public abstract class Extractor {
         return packageManagerEnum;
     }
 
-    public void extract(final String dockerImageRepo, final String dockerImageTag, final ImagePkgMgr imagePkgMgr, final BdioWriter bdioWriter, final DependencyNodeWriter dependenciesWriter, final ExtractionDetails extractionDetails,
-            final String codeLocationName, final String projectName, final String version) throws HubIntegrationException, IOException, InterruptedException {
+    public void extract(final String dockerImageRepo, final String dockerImageTag, final ImagePkgMgr imagePkgMgr, final BdioWriter bdioWriter, final ExtractionDetails extractionDetails, final String codeLocationName,
+            final String projectName, final String version) throws HubIntegrationException, IOException, InterruptedException {
         final BdioBillOfMaterials bom = bdioNodeFactory.createBillOfMaterials(codeLocationName, projectName, version);
         bdioWriter.writeBdioNode(bom);
 
@@ -94,11 +92,6 @@ public abstract class Extractor {
         bdioWriter.writeBdioNode(projectNode);
         for (final BdioComponent component : components) {
             bdioWriter.writeBdioNode(component);
-        }
-        if (dependenciesWriter != null) {
-            final DetectCodeLocation rootNode = extractionResults.getDependenciesRootNode();
-            logger.trace(String.format("writing code location: %s", rootNode.getSourcePath()));
-            dependenciesWriter.writeDependencyNode(rootNode);
         }
     }
 

@@ -41,7 +41,6 @@ import org.springframework.stereotype.Component;
 import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter;
 import com.blackducksoftware.integration.hub.docker.client.DockerClientManager;
-import com.blackducksoftware.integration.hub.docker.dependencynode.DependencyNodeWriter;
 import com.blackducksoftware.integration.hub.docker.extractor.ExtractionDetails;
 import com.blackducksoftware.integration.hub.docker.extractor.Extractor;
 import com.blackducksoftware.integration.hub.docker.hub.HubClient;
@@ -172,11 +171,11 @@ public class HubDockerManager {
         final File dependenciesOutputFile = new File(outputDirectory, dependenciesFilename);
         logger.trace(String.format("dependenciesOutputFile: %s", dependenciesOutputFile));
         bdioFiles.add(bdioOutputFile);
-        try (FileOutputStream bdioOutputStream = new FileOutputStream(bdioOutputFile); FileOutputStream dependenciesOutputStream = new FileOutputStream(dependenciesOutputFile)) {
-            try (BdioWriter bdioWriter = new BdioWriter(new Gson(), bdioOutputStream); DependencyNodeWriter dependenciesWriter = new DependencyNodeWriter(new Gson(), dependenciesOutputStream)) {
+        try (FileOutputStream bdioOutputStream = new FileOutputStream(bdioOutputFile)) {
+            try (BdioWriter bdioWriter = new BdioWriter(new Gson(), bdioOutputStream)) {
                 final Extractor extractor = getExtractorByPackageManager(imageInfo.getPkgMgr().getPackageManager());
                 final ExtractionDetails extractionDetails = new ExtractionDetails(imageInfo.getOperatingSystemEnum(), architecture);
-                extractor.extract(dockerImageRepo, dockerImageTag, imageInfo.getPkgMgr(), bdioWriter, dependenciesWriter, extractionDetails, codeLocationName, hubProjectName, hubVersionName);
+                extractor.extract(dockerImageRepo, dockerImageTag, imageInfo.getPkgMgr(), bdioWriter, extractionDetails, codeLocationName, hubProjectName, hubVersionName);
             }
         }
 
