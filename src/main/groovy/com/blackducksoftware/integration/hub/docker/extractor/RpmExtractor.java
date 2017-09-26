@@ -36,6 +36,7 @@ import org.springframework.stereotype.Component;
 import com.blackducksoftware.integration.hub.bdio.simple.DependencyNodeBuilder;
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent;
 import com.blackducksoftware.integration.hub.bdio.simple.model.DependencyNode;
+import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.ExternalIdFactory;
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum;
 import com.blackducksoftware.integration.hub.docker.executor.RpmExecutor;
@@ -54,7 +55,8 @@ class RpmExtractor extends Extractor {
         forges.add(OperatingSystemEnum.CENTOS.getForge());
         forges.add(OperatingSystemEnum.FEDORA.getForge());
         forges.add(OperatingSystemEnum.REDHAT.getForge());
-        initValues(PackageManagerEnum.RPM, executor, forges);
+        final ExternalIdFactory externalIdFactory = new ExternalIdFactory();
+        initValues(PackageManagerEnum.RPM, executor, forges, externalIdFactory);
     }
 
     private boolean valid(final String packageLine) {

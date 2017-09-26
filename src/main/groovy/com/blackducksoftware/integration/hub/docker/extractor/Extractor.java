@@ -40,9 +40,8 @@ import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent;
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioProject;
 import com.blackducksoftware.integration.hub.bdio.simple.model.DependencyNode;
 import com.blackducksoftware.integration.hub.bdio.simple.model.Forge;
-import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.ArchitectureExternalId;
 import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.ExternalId;
-import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.NameVersionExternalId;
+import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.ExternalIdFactory;
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum;
 import com.blackducksoftware.integration.hub.docker.executor.PkgMgrExecutor;
 import com.blackducksoftware.integration.hub.docker.tar.ImagePkgMgr;
@@ -56,6 +55,7 @@ public abstract class Extractor {
     private PackageManagerEnum packageManagerEnum;
     private PkgMgrExecutor executor;
     private List<String> forges;
+    private ExternalIdFactory externalIdFactory;
 
     public abstract void init();
 
@@ -65,10 +65,11 @@ public abstract class Extractor {
 
     public abstract List<BdioComponent> extractComponents(String dockerImageRepo, String dockerImageTag, ExtractionDetails extractionDetails, String[] packageList);
 
-    void initValues(final PackageManagerEnum packageManagerEnum, final PkgMgrExecutor executor, final List<String> forges) {
+    void initValues(final PackageManagerEnum packageManagerEnum, final PkgMgrExecutor executor, final List<String> forges, final ExternalIdFactory externalIdFactory) {
         this.packageManagerEnum = packageManagerEnum;
         this.executor = executor;
         this.forges = forges;
+        this.externalIdFactory = externalIdFactory;
     }
 
     public PackageManagerEnum getPackageManagerEnum() {
@@ -81,9 +82,9 @@ public abstract class Extractor {
         bdioWriter.writeBdioNode(bom);
 
         final Forge forgeObject = new Forge(forges.get(0), "/");
-        final ExternalId extId = new NameVersionExternalId(forgeObject, projectName, version);
+        final ExternalId extId = externalIdFactory.createNameVersionExternalId(forgeObject, projectName, version);
         final String externalId = extId.createExternalId();
-        final BdioProject projectNode = bdioNodeFactory.createProject(projectName, version, extId.createDataId(), extractionDetails.getOperatingSystem().getForge(), externalId);
+        final BdioProject projectNode = bdioNodeFactory.createProject(projectName, version, extId.createBdioId(), extractionDetails.getOperatingSystem().getForge(), externalId);
         logger.debug(String.format("BDIO project ID: %s", projectNode.id));
         final List<BdioComponent> components = extractComponents(dockerImageRepo, dockerImageTag, extractionDetails, executor.runPackageManager(imagePkgMgr));
         logger.info(String.format("Found %s potential components", components.size()));
@@ -99,7 +100,7 @@ public abstract class Extractor {
             final BdioComponent bdioComponent = bdioNodeFactory.createComponent(name, version, getComponentBdioId(forge, name, version), forge, externalId);
             components.add(bdioComponent);
             final DependencyNode dNode = createDependencyNode(forge, name, version, arch);
-            logger.trace(String.format("adding %s as child to dependency node tree; dataId: %s", dNode.name, dNode.externalId.createDataId()));
+            logger.trace(String.format("adding %s as child to dependency node tree; dataId: %s", dNode.name, dNode.externalId.createBdioId()));
             dNodeBuilder.addParentNodeWithChildren(rootNode, Arrays.asList(dNode));
         }
     }
@@ -107,7 +108,9 @@ public abstract class Extractor {
     protected DependencyNode createDependencyNode(final String forge, final String name, final String version, final String arch) {
         logger.trace(String.format("Creating dependency node with forge: %s, name: %s; version: %s, arch: %s", forge, name, version, arch));
         final Forge forgeObj = new Forge(forge, "/");
-        final DependencyNode dNode = new DependencyNode(name, version, new ArchitectureExternalId(forgeObj, name, version, arch));
+
+        final ExternalId externalId = externalIdFactory.createArchitectureExternalId(forgeObj, name, version, arch);
+        final DependencyNode dNode = new DependencyNode(name, version, externalId);
         logger.trace(String.format("Generated DependencyNode: %s", dNode));
         return dNode;
     }

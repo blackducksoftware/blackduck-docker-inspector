@@ -36,6 +36,7 @@ import org.springframework.stereotype.Component;
 import com.blackducksoftware.integration.hub.bdio.simple.DependencyNodeBuilder;
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent;
 import com.blackducksoftware.integration.hub.bdio.simple.model.DependencyNode;
+import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.ExternalIdFactory;
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum;
 import com.blackducksoftware.integration.hub.docker.executor.DpkgExecutor;
@@ -53,7 +54,8 @@ class DpkgExtractor extends Extractor {
         final List<String> forges = new ArrayList<>();
         forges.add(OperatingSystemEnum.DEBIAN.getForge());
         forges.add(OperatingSystemEnum.UBUNTU.getForge());
-        initValues(PackageManagerEnum.DPKG, executor, forges);
+        final ExternalIdFactory externalIdFactory = new ExternalIdFactory();
+        initValues(PackageManagerEnum.DPKG, executor, forges, externalIdFactory);
     }
 
     @Override
