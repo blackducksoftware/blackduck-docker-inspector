@@ -61,7 +61,7 @@ class ApkExtractor extends Extractor {
     }
 
     @Override
-    public ExtractionResults extractComponents(final String dockerImageRepo, final String dockerImageTag, final ExtractionDetails extractionDetails, final String[] packageList) {
+    public List<BdioComponent> extractComponents(final String dockerImageRepo, final String dockerImageTag, final ExtractionDetails extractionDetails, final String[] packageList) {
         final List<BdioComponent> components = new ArrayList<>();
         final DependencyNode rootNode = createDependencyNode(OperatingSystemEnum.ALPINE.getForge(), dockerImageRepo, dockerImageTag, extractionDetails.getArchitecture());
         final DependencyNodeBuilder dNodeBuilder = new DependencyNodeBuilder(rootNode);
@@ -90,7 +90,7 @@ class ApkExtractor extends Extractor {
             }
         }
         logger.trace(String.format("DependencyNode tree: root node: %s", rootNode.name));
-        return new ExtractionResults(components);
+        return components;
     }
 
     @Override

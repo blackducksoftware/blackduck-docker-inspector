@@ -63,7 +63,7 @@ public abstract class Extractor {
         return null;
     }
 
-    public abstract ExtractionResults extractComponents(String dockerImageRepo, String dockerImageTag, ExtractionDetails extractionDetails, String[] packageList);
+    public abstract List<BdioComponent> extractComponents(String dockerImageRepo, String dockerImageTag, ExtractionDetails extractionDetails, String[] packageList);
 
     void initValues(final PackageManagerEnum packageManagerEnum, final PkgMgrExecutor executor, final List<String> forges) {
         this.packageManagerEnum = packageManagerEnum;
@@ -85,8 +85,7 @@ public abstract class Extractor {
         final String externalId = extId.createExternalId();
         final BdioProject projectNode = bdioNodeFactory.createProject(projectName, version, extId.createDataId(), extractionDetails.getOperatingSystem().getForge(), externalId);
         logger.debug(String.format("BDIO project ID: %s", projectNode.id));
-        final ExtractionResults extractionResults = extractComponents(dockerImageRepo, dockerImageTag, extractionDetails, executor.runPackageManager(imagePkgMgr));
-        final List<BdioComponent> components = extractionResults.getComponents();
+        final List<BdioComponent> components = extractComponents(dockerImageRepo, dockerImageTag, extractionDetails, executor.runPackageManager(imagePkgMgr));
         logger.info(String.format("Found %s potential components", components.size()));
         bdioPropertyHelper.addRelationships(projectNode, components);
         bdioWriter.writeBdioNode(projectNode);

@@ -62,7 +62,7 @@ class RpmExtractor extends Extractor {
     }
 
     @Override
-    public ExtractionResults extractComponents(final String dockerImageRepo, final String dockerImageTag, final ExtractionDetails extractionDetails, final String[] packageList) {
+    public List<BdioComponent> extractComponents(final String dockerImageRepo, final String dockerImageTag, final ExtractionDetails extractionDetails, final String[] packageList) {
         logger.debug("extractComponents: Received ${packageList.length} package lines");
         final List<BdioComponent> components = new ArrayList<>();
         final DependencyNode rootNode = createDependencyNode(OperatingSystemEnum.CENTOS.getForge(), dockerImageRepo, dockerImageTag, extractionDetails.getArchitecture());
@@ -81,6 +81,6 @@ class RpmExtractor extends Extractor {
                 createBdioComponent(dNodeBuilder, rootNode, components, artifact, versionRelease, externalId, arch);
             }
         }
-        return new ExtractionResults(components);
+        return components;
     }
 }

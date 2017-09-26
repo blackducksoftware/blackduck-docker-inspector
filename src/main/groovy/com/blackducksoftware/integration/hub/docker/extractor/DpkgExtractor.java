@@ -57,7 +57,7 @@ class DpkgExtractor extends Extractor {
     }
 
     @Override
-    public ExtractionResults extractComponents(final String dockerImageRepo, final String dockerImageTag, final ExtractionDetails extractionDetails, final String[] packageList) {
+    public List<BdioComponent> extractComponents(final String dockerImageRepo, final String dockerImageTag, final ExtractionDetails extractionDetails, final String[] packageList) {
         final List<BdioComponent> components = new ArrayList<>();
         final DependencyNode rootNode = createDependencyNode(OperatingSystemEnum.UBUNTU.getForge(), dockerImageRepo, dockerImageTag, extractionDetails.getArchitecture());
 
@@ -90,7 +90,7 @@ class DpkgExtractor extends Extractor {
             }
         }
         logger.trace(String.format("DependencyNode tree: %s", rootNode));
-        return new ExtractionResults(components);
+        return components;
     }
 
     private boolean isInstalledStatus(final Character packageStatus) {
