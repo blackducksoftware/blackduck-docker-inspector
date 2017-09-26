@@ -83,13 +83,17 @@ public class DockerTarParser {
         return targetImageFileSystemRootDir;
     }
 
-    public OperatingSystemEnum detectOperatingSystem(final String operatingSystem, final File targetImageFileSystemRootDir) throws HubIntegrationException, IOException {
-        OperatingSystemEnum osEnum = deriveOsFromPkgMgr(targetImageFileSystemRootDir);
-        if (osEnum != null) {
-            return osEnum;
-        }
+    public OperatingSystemEnum detectOperatingSystem(final String operatingSystem) {
+        OperatingSystemEnum osEnum = null;
         if (StringUtils.isNotBlank(operatingSystem)) {
             osEnum = OperatingSystemEnum.determineOperatingSystem(operatingSystem);
+        }
+        return osEnum;
+    }
+
+    public OperatingSystemEnum detectOperatingSystem(final File targetImageFileSystemRootDir) throws HubIntegrationException, IOException {
+        final OperatingSystemEnum osEnum = deriveOsFromPkgMgr(targetImageFileSystemRootDir);
+        if (osEnum != null) {
             return osEnum;
         }
         throw new HubIntegrationException("No package manager files were found, and no operating system name was provided.");

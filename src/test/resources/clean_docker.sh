@@ -10,6 +10,10 @@ docker rmi blackducksoftware/hub-docker-inspector-ubuntu:3.0.0
 docker rmi blackducksoftware/hub-docker-inspector-centos:3.0.0
 docker rmi blackducksoftware/hub-docker-inspector-alpine:3.0.0
 
+docker rmi blackducksoftware/hub-docker-inspector-ubuntu:3.0.0-RC2
+docker rmi blackducksoftware/hub-docker-inspector-centos:3.0.0-RC2
+docker rmi blackducksoftware/hub-docker-inspector-alpine:3.0.0-RC2
+
 docker rmi blackducksoftware/hub-docker-inspector-ubuntu:3.0.0-RC1
 docker rmi blackducksoftware/hub-docker-inspector-centos:3.0.0-RC1
 docker rmi blackducksoftware/hub-docker-inspector-alpine:3.0.0-RC1

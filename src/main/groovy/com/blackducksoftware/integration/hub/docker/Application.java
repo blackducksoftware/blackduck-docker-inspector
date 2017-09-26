@@ -128,15 +128,21 @@ public class Application {
             final List<File> layerTars = hubDockerManager.extractLayerTars(dockerTarFile);
             final List<ManifestLayerMapping> layerMappings = hubDockerManager.getLayerMappings(dockerTarFile.getName(), dockerImageRepo, dockerImageTag);
             fillInMissingImageNameTagFromManifest(layerMappings);
-            final File targetImageFileSystemRootDir = hubDockerManager.extractDockerLayers(layerTars, layerMappings);
-            final OperatingSystemEnum targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro, targetImageFileSystemRootDir);
-            if (!onHost) {
-                generateBdio(dockerTarFile, targetImageFileSystemRootDir, layerMappings, targetOsEnum);
-            } else {
+            OperatingSystemEnum targetOsEnum = null;
+            if (onHost) {
+                targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro);
+                if (targetOsEnum == null) {
+                    final File targetImageFileSystemRootDir = hubDockerManager.extractDockerLayers(layerTars, layerMappings);
+                    targetOsEnum = hubDockerManager.detectOperatingSystem(targetImageFileSystemRootDir);
+                }
                 runInSubContainer(dockerTarFile, targetOsEnum);
+            } else {
+                final File targetImageFileSystemRootDir = hubDockerManager.extractDockerLayers(layerTars, layerMappings);
+                targetOsEnum = hubDockerManager.detectOperatingSystem(targetImageFileSystemRootDir);
+                generateBdio(dockerTarFile, targetImageFileSystemRootDir, layerMappings, targetOsEnum);
+                createContainerFileSystemTarIfRequested(targetImageFileSystemRootDir);
             }
-            provideTarIfRequested(dockerTarFile);
-            provideContainerFileSystemTarIfRequested(targetImageFileSystemRootDir);
+            provideDockerTarIfRequested(dockerTarFile);
             if (!onHost) {
                 writeResult(true, "Success");
             }
@@ -175,7 +181,7 @@ public class Application {
         }
     }
 
-    private void provideTarIfRequested(final File dockerTarFile) throws IOException {
+    private void provideDockerTarIfRequested(final File dockerTarFile) throws IOException {
         if (outputIncludeDockerTarfile) {
             final File outputDirectory = new File(programPaths.getHubDockerOutputPath());
             if (onHost) {
@@ -188,7 +194,7 @@ public class Application {
         }
     }
 
-    private void provideContainerFileSystemTarIfRequested(final File targetImageFileSystemRootDir) throws IOException, CompressorException {
+    private void createContainerFileSystemTarIfRequested(final File targetImageFileSystemRootDir) throws IOException, CompressorException {
         if (outputIncludeContainerFileSystemTarfile) {
             final File outputDirectory = new File(programPaths.getHubDockerOutputPath());
             final String containerFileSystemTarFilename = programPaths.getContainerFileSystemTarFilename(dockerImageRepo, dockerImageTag);

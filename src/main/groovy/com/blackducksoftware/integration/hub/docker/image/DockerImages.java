@@ -59,7 +59,7 @@ public class DockerImages {
         if (!initialized) {
             init();
         }
-        logger.debug("getDockerImageOs(${targetImageOs})");
+        logger.debug(String.format("getDockerImageOs(%s)", targetImageOs));
         final DockerImage image = dockerImageMap.get(targetImageOs);
         if (image == null) {
             return null;
@@ -71,7 +71,7 @@ public class DockerImages {
         if (!initialized) {
             init();
         }
-        logger.info("getDockerImageName(${targetImageOs})");
+        logger.info(String.format("getDockerImageName(%s)", targetImageOs));
         final DockerImage image = dockerImageMap.get(targetImageOs);
         if (image == null) {
             return null;
@@ -83,7 +83,7 @@ public class DockerImages {
         if (!initialized) {
             init();
         }
-        logger.info("getDockerImageVersion(${targetImageOs})");
+        logger.info(String.format("getDockerImageVersion(%s)", targetImageOs));
         final DockerImage image = dockerImageMap.get(targetImageOs);
         if (image == null) {
             return null;

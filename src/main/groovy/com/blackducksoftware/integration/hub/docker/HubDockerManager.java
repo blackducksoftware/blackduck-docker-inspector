@@ -90,8 +90,12 @@ public class HubDockerManager {
         return tarParser.extractDockerLayers(layerTars, layerMappings);
     }
 
-    public OperatingSystemEnum detectOperatingSystem(final String operatingSystem, final File targetImageFileSystemRootDir) throws HubIntegrationException, IOException {
-        return tarParser.detectOperatingSystem(operatingSystem, targetImageFileSystemRootDir);
+    public OperatingSystemEnum detectOperatingSystem(final String operatingSystem) {
+        return tarParser.detectOperatingSystem(operatingSystem);
+    }
+
+    public OperatingSystemEnum detectOperatingSystem(final File targetImageFileSystemRootDir) throws HubIntegrationException, IOException {
+        return tarParser.detectOperatingSystem(targetImageFileSystemRootDir);
     }
 
     public List<ManifestLayerMapping> getLayerMappings(final String tarFileName, final String dockerImageName, final String dockerTagName) throws Exception {

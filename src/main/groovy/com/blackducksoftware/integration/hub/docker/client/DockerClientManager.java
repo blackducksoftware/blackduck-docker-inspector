@@ -102,6 +102,9 @@ public class DockerClientManager {
     @Value("${dry.run}")
     private boolean dryRun;
 
+    @Value("${output.include.containerfilesystem}")
+    private boolean outputIncludeContainerFileSystemTarfile;
+
     public File getTarFileFromDockerImage(final String imageName, final String tagName) throws IOException, HubIntegrationException {
         final File imageTarDirectory = new File(new File(programPaths.getHubDockerWorkingDirPath()), "tarDirectory");
         pullImage(imageName, tagName);
@@ -190,7 +193,7 @@ public class DockerClientManager {
         hubDockerProperties.set(IMAGE_REPO_PROPERTY, targetImageRepo);
         hubDockerProperties.set(IMAGE_TAG_PROPERTY, targetImageTag);
         hubDockerProperties.set(OUTPUT_INCLUDE_DOCKER_TARFILE_PROPERTY, "false");
-        hubDockerProperties.set(OUTPUT_INCLUDE_CONTAINER_FILE_SYSTEM_TARFILE_PROPERTY, "false");
+        hubDockerProperties.set(OUTPUT_INCLUDE_CONTAINER_FILE_SYSTEM_TARFILE_PROPERTY, (new Boolean(outputIncludeContainerFileSystemTarfile)).toString());
         hubDockerProperties.set(ON_HOST_PROPERTY, "false");
         hubDockerProperties.set(DRY_RUN_PROPERTY, (new Boolean(dryRun).toString()));
         final String pathToPropertiesFileForSubContainer = String.format("%s%s", programPaths.getHubDockerTargetDirPath(), ProgramPaths.APPLICATION_PROPERTIES_FILENAME);
