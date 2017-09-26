@@ -83,11 +83,11 @@ class DpkgExtractor extends Extractor {
                             name = name.substring(0, name.indexOf(":"));
                         }
                         final String externalId = String.format("%s/%s/%s", name, version, architecture);
-                        logger.debug(String.format("Constructed externalId: %s", externalId));
+                        logger.trace(String.format("Constructed externalId: %s", externalId));
 
                         createBdioComponent(dNodeBuilder, rootNode, components, name, version, externalId, architecture);
                     } else {
-                        logger.debug(String.format("Package \"%s\" is listed but not installed (package status: %s)", packageLine, packageStatus));
+                        logger.trace(String.format("Package \"%s\" is listed but not installed (package status: %s)", packageLine, packageStatus));
                     }
                 }
             }
