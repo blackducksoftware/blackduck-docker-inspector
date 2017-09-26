@@ -45,7 +45,6 @@ import com.blackducksoftware.integration.hub.docker.dependencynode.DependencyNod
 import com.blackducksoftware.integration.hub.docker.extractor.ExtractionDetails;
 import com.blackducksoftware.integration.hub.docker.extractor.Extractor;
 import com.blackducksoftware.integration.hub.docker.hub.HubClient;
-import com.blackducksoftware.integration.hub.docker.linux.FileOperations;
 import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser;
 import com.blackducksoftware.integration.hub.docker.tar.ImageInfo;
 import com.blackducksoftware.integration.hub.docker.tar.manifest.ManifestLayerMapping;
@@ -108,18 +107,8 @@ public class HubDockerManager {
         if (imagePkgMgrInfo.getOperatingSystemEnum() == null) {
             throw new HubIntegrationException("Could not determine the Operating System of this Docker tar.");
         }
-        String architecture = null;
-        if (osEnum == OperatingSystemEnum.ALPINE) { // TODO This code should be in a pkg-manager-specific class
-            final List<File> etcDirectories = FileOperations.findDirWithName(targetImageFileSystemRootDir, "etc");
-            for (final File etc : etcDirectories) {
-                File architectureFile = new File(etc, "apk");
-                architectureFile = new File(architectureFile, "arch");
-                if (architectureFile.exists()) {
-                    architecture = FileUtils.readLines(architectureFile, "UTF-8").get(0);
-                    break;
-                }
-            }
-        }
+
+        final String architecture = getExtractorByPackageManager(imagePkgMgrInfo.getPkgMgr().getPackageManager()).deriveArchitecture(targetImageFileSystemRootDir);
         logger.debug(String.format("generateBdioFromImageFilesDir(): architecture: %s", architecture));
         return generateBdioFromPackageMgrDirs(dockerImageRepo, dockerImageTag, mappings, projectName, versionName, dockerTar.getName(), imagePkgMgrInfo, architecture);
     }

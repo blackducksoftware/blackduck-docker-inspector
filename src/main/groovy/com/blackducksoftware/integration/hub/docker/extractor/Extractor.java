@@ -23,6 +23,7 @@
  */
 package com.blackducksoftware.integration.hub.docker.extractor;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -59,6 +60,10 @@ public abstract class Extractor {
     private List<String> forges;
 
     public abstract void init();
+
+    public String deriveArchitecture(final File targetImageFileSystemRootDir) throws IOException {
+        return null;
+    }
 
     public abstract ExtractionResults extractComponents(String dockerImageRepo, String dockerImageTag, ExtractionDetails extractionDetails, String[] packageList);
 

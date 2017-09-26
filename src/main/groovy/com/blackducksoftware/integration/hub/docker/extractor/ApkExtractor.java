@@ -23,11 +23,14 @@
  */
 package com.blackducksoftware.integration.hub.docker.extractor;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,6 +45,7 @@ import com.blackducksoftware.integration.hub.detect.model.DetectCodeLocation;
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum;
 import com.blackducksoftware.integration.hub.docker.executor.ApkExecutor;
+import com.blackducksoftware.integration.hub.docker.linux.FileOperations;
 
 @Component
 class ApkExtractor extends Extractor {
@@ -90,5 +94,20 @@ class ApkExtractor extends Extractor {
         }
         logger.trace(String.format("DependencyNode tree: root node: %s", rootNode.name));
         return new ExtractionResults(components, codeLocation);
+    }
+
+    @Override
+    public String deriveArchitecture(final File targetImageFileSystemRootDir) throws IOException {
+        String architecture = null;
+        final List<File> etcDirectories = FileOperations.findDirWithName(targetImageFileSystemRootDir, "etc");
+        for (final File etc : etcDirectories) {
+            File architectureFile = new File(etc, "apk");
+            architectureFile = new File(architectureFile, "arch");
+            if (architectureFile.exists()) {
+                architecture = FileUtils.readLines(architectureFile, "UTF-8").get(0);
+                break;
+            }
+        }
+        return architecture;
     }
 }
