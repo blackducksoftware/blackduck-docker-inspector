@@ -17,6 +17,7 @@ import static org.junit.Assert.*
 import org.junit.Test
 
 import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter
+import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.ExternalIdFactory
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 import com.blackducksoftware.integration.hub.docker.TestUtils
@@ -40,7 +41,7 @@ class ApkExtractorTest {
         def forges = [
             OperatingSystemEnum.ALPINE.forge
         ]
-        extractor.initValues(PackageManagerEnum.APK, executor, forges)
+        extractor.initValues(PackageManagerEnum.APK, executor, forges, new ExternalIdFactory())
 
         File bdioOutputFile = new File("test")
         bdioOutputFile = new File(bdioOutputFile, bdioOutputFileName)

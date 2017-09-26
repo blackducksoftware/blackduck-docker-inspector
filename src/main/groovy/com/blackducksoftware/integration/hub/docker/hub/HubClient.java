@@ -77,8 +77,8 @@ public class HubClient {
     @Value("${command.timeout}")
     private long commandTimeout;
 
-    @Value("${hub.auto.import.cert}")
-    private Boolean autoImportCert;
+    @Value("${hub.always.trust.cert}")
+    private Boolean setAlwaysTrustServerCertificate;
 
     public boolean isValid() {
         return createBuilder().isValid();
@@ -103,7 +103,7 @@ public class HubClient {
         final CredentialsRestConnection credentialsRestConnection = hubServerConfig.createCredentialsRestConnection(new Slf4jIntLogger(logger));
         final HubServicesFactory hubServicesFactory = new HubServicesFactory(credentialsRestConnection);
         final BomImportRequestService bomImportRequestService = hubServicesFactory.createBomImportRequestService();
-        bomImportRequestService.importBomFile(bdioFile, BuildToolConstants.BDIO_FILE_MEDIA_TYPE);
+        bomImportRequestService.importBomFile(bdioFile, "application/ld+json");
         logger.info(String.format("Uploaded bdio file %s to %s", bdioFile.getName(), hubServerConfig.getHubUrl()));
     }
 
@@ -140,10 +140,10 @@ public class HubClient {
         hubServerConfigBuilder.setProxyUsername(hubProxyUsername);
         hubServerConfigBuilder.setProxyPassword(hubProxyPassword);
 
-        if (autoImportCert == null) {
-            autoImportCert = true;
+        if (setAlwaysTrustServerCertificate == null) {
+            setAlwaysTrustServerCertificate = true;
         }
-        hubServerConfigBuilder.setAutoImportHttpsCertificates(autoImportCert);
+        hubServerConfigBuilder.setAlwaysTrustServerCertificate(setAlwaysTrustServerCertificate);
 
         return hubServerConfigBuilder;
     }

@@ -8,6 +8,7 @@ import org.junit.BeforeClass
 import org.junit.Test
 
 import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter
+import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.ExternalIdFactory
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 import com.blackducksoftware.integration.hub.docker.TestUtils
@@ -39,7 +40,7 @@ class DpkgExtractorTest {
         def forges = [
             OperatingSystemEnum.UBUNTU.forge
         ]
-        extractor.initValues(PackageManagerEnum.DPKG, executor, forges)
+        extractor.initValues(PackageManagerEnum.DPKG, executor, forges, new ExternalIdFactory())
 
         File bdioOutputFile = new File("test")
         bdioOutputFile = new File(bdioOutputFile, bdioOutputFileName)
