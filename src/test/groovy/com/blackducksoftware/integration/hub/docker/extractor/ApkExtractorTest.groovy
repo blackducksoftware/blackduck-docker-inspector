@@ -29,10 +29,10 @@ class ApkExtractorTest {
 
     @Test
     void testApkFile1() {
-        testApkExtraction('alpine_apk_output_1.txt', 'testApkBdio1.jsonld', 'testApkDependencies1.json')
+        testApkExtraction('alpine_apk_output_1.txt', 'testApkBdio1.jsonld')
     }
 
-    void testApkExtraction(String resourceName, String bdioOutputFileName, String dependenciesOutputFileName) {
+    void testApkExtraction(String resourceName, String bdioOutputFileName) {
         URL url = this.getClass().getResource("/$resourceName")
         File resourceFile = new File(URLDecoder.decode(url.getFile(), 'UTF-8'))
 
@@ -60,15 +60,6 @@ class ApkExtractorTest {
         File file2 = new File("test/testApkBdio1.jsonld");
         println "Comparing ${file2.getAbsolutePath()} to ${file1.getAbsolutePath()}"
         boolean filesAreEqual = TestUtils.contentEquals(file1, file2, [
-            "\"@id\":",
-            "\"externalSystemTypeId\":"
-        ])
-        assertTrue(filesAreEqual)
-
-        file1 = new File("src/test/resources/testApkDependencies1.json");
-        file2 = new File("test/testApkDependencies1.json");
-        println "Comparing ${file2.getAbsolutePath()} to ${file1.getAbsolutePath()}"
-        filesAreEqual = TestUtils.contentEquals(file1, file2, [
             "\"@id\":",
             "\"externalSystemTypeId\":"
         ])

@@ -224,13 +224,7 @@ then
 	cp "${workingDir}"/output/* "${outputPath}"
 fi
 
-if [ $createdWorkingDir == true ]
-then
-	echo "Removing ${workingDir}"
-	rm -rf ${workingDir}
-fi
-
-numSuccessMessages=$(grep "\"succeeded\":[ 	]*true" "${outputPath}"/result.json | wc -l)
+numSuccessMessages=$(grep "\"succeeded\":[ 	]*true" "${workingDir}"/output//result.json | wc -l)
 if [[ "${numSuccessMessages}" -eq "1" ]]
 then
 	echo "Succeeded"
@@ -239,4 +233,11 @@ else
 	echo "Failed"
 	status=1
 fi
+
+if [ $createdWorkingDir == true ]
+then
+	echo "Removing ${workingDir}"
+	rm -rf ${workingDir}
+fi
+
 exit ${status}

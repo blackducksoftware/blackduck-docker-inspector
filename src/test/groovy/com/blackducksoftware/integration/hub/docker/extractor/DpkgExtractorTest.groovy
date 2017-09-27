@@ -28,10 +28,10 @@ class DpkgExtractorTest {
 
     @Test
     void testDpkgFile1() {
-        testDpkgExtraction('ubuntu_dpkg_output_1.txt', 'testDpkgBdio1.jsonld', 'testDpkgDependencies1.json')
+        testDpkgExtraction('ubuntu_dpkg_output_1.txt', 'testDpkgBdio1.jsonld')
     }
 
-    void testDpkgExtraction(String resourceName, String bdioOutputFileName, String dependenciesOutputFileName) {
+    void testDpkgExtraction(String resourceName, String bdioOutputFileName) {
         URL url = this.getClass().getResource("/$resourceName")
         File resourceFile = new File(URLDecoder.decode(url.getFile(), 'UTF-8'))
 
@@ -60,15 +60,6 @@ class DpkgExtractorTest {
         File file2 = new File("test/testDpkgBdio1.jsonld");
         println "Comparing ${file2.getAbsolutePath()} to ${file1.getAbsolutePath()}"
         boolean filesAreEqual = TestUtils.contentEquals(file1, file2, [
-            "\"@id\":",
-            "\"externalSystemTypeId\":"
-        ])
-        assertTrue(filesAreEqual)
-
-        file1 = new File("src/test/resources/testDpkgDependencies1.json");
-        file2 = new File("test/testDpkgDependencies1.json");
-        println "Comparing ${file2.getAbsolutePath()} to ${file1.getAbsolutePath()}"
-        filesAreEqual = TestUtils.contentEquals(file1, file2, [
             "\"@id\":",
             "\"externalSystemTypeId\":"
         ])

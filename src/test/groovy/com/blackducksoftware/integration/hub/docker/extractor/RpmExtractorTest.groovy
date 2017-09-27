@@ -28,10 +28,10 @@ class RpmExtractorTest {
 
     @Test
     void testRpmFile1() {
-        testRpmExtraction('centos_rpm_output_1.txt', 'testRpmBdio1.jsonld', 'testRpmDependencies1.json')
+        testRpmExtraction('centos_rpm_output_1.txt', 'testRpmBdio1.jsonld')
     }
 
-    void testRpmExtraction(String resourceName, String bdioOutputFileName, String dependenciesOutputFileName){
+    void testRpmExtraction(String resourceName, String bdioOutputFileName){
         URL url = this.getClass().getResource("/$resourceName")
         File resourceFile = new File(URLDecoder.decode(url.getFile(), 'UTF-8'))
 
@@ -59,15 +59,6 @@ class RpmExtractorTest {
         File file2 = new File("test/testRpmBdio1.jsonld");
         println "Comparing ${file2.getAbsolutePath()} to ${file1.getAbsolutePath()}"
         boolean filesAreEqual = TestUtils.contentEquals(file1, file2, [
-            "\"@id\":",
-            "\"externalSystemTypeId\":"
-        ])
-        assertTrue(filesAreEqual)
-
-        file1 = new File("src/test/resources/testRpmDependencies1.json");
-        file2 = new File("test/testRpmDependencies1.json");
-        println "Comparing ${file2.getAbsolutePath()} to ${file1.getAbsolutePath()}"
-        filesAreEqual = TestUtils.contentEquals(file1, file2, [
             "\"@id\":",
             "\"externalSystemTypeId\":"
         ])
