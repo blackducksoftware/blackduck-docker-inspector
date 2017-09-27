@@ -165,11 +165,7 @@ public class HubDockerManager {
         hubVersionName = deriveHubProjectVersion(manifestMapping, versionName);
         logger.info(String.format("Hub project, version: %s, %s; Code location : %s", hubProjectName, hubVersionName, codeLocationName));
         final String bdioFilename = programPaths.getBdioFilename(manifestMapping.getImageName(), pkgMgrFilePath, hubProjectName, hubVersionName);
-        final String dependenciesFilename = programPaths.getDependencyNodesFilename(manifestMapping.getImageName(), pkgMgrFilePath, hubProjectName, hubVersionName);
-        logger.debug(String.format("bdioFilename: %s; dependenciesFilename: %s", bdioFilename, dependenciesFilename));
         final File bdioOutputFile = new File(outputDirectory, bdioFilename);
-        final File dependenciesOutputFile = new File(outputDirectory, dependenciesFilename);
-        logger.trace(String.format("dependenciesOutputFile: %s", dependenciesOutputFile));
         bdioFiles.add(bdioOutputFile);
         try (FileOutputStream bdioOutputStream = new FileOutputStream(bdioOutputFile)) {
             try (BdioWriter bdioWriter = new BdioWriter(new Gson(), bdioOutputStream)) {
