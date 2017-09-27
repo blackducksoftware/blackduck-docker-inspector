@@ -138,6 +138,10 @@ public class EndToEndTest {
         if (requireBdioMatch) {
             assertTrue(expectedBdio.exists());
         }
+        final File expectedDependencies = new File(String.format(String.format("src/integration-test/resources/bdio/%s_%s_%s_%s_dependencies.json", imageForBdioFilename, pkgMgrPathString, imageForBdioFilename, tagForBdioFilename)));
+        if (requireBdioMatch) {
+            assertTrue(expectedDependencies.exists());
+        }
 
         final File outputImageTarFile = getOutputImageTarFile(inspectTarget, imageForBdioFilename, tagForBdioFilename);
         Files.deleteIfExists(outputImageTarFile.toPath());
@@ -150,6 +154,10 @@ public class EndToEndTest {
         final File actualBdio = new File(String.format(String.format("test/output/%s_%s_%s_%s_bdio.jsonld", imageForBdioFilename, pkgMgrPathString, imageForBdioFilename, tagForBdioFilename)));
         Files.deleteIfExists(actualBdio.toPath());
         assertFalse(actualBdio.exists());
+
+        final File actualDependencies = new File(String.format(String.format("test/output/%s_%s_%s_%s_dependencies.json", imageForBdioFilename, pkgMgrPathString, imageForBdioFilename, tagForBdioFilename)));
+        Files.deleteIfExists(actualDependencies.toPath());
+        assertFalse(actualDependencies.exists());
 
         final String programVersion = (new ProgramVersion()).getProgramVersion();
         final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--dry.run=true", String.format("--jar.path=build/images/alpine/hub-docker-inspector/hub-docker-inspector-%s.jar", programVersion),
@@ -183,6 +191,14 @@ public class EndToEndTest {
 
             final boolean outputBdioMatches = TestUtils.contentEquals(expectedBdio, actualBdio, exceptLinesContainingThese);
             assertTrue(outputBdioMatches);
+        }
+
+        assertTrue(actualDependencies.exists());
+        if (requireBdioMatch) {
+            final List<String> exceptLinesContainingThese = new ArrayList<>();
+            exceptLinesContainingThese.add("@id");
+            final boolean outputDependenciesMatches = TestUtils.contentEquals(expectedDependencies, actualDependencies, exceptLinesContainingThese);
+            assertTrue(outputDependenciesMatches);
         }
 
         assertTrue(outputImageTarFile.exists());

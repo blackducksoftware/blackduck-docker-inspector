@@ -50,10 +50,20 @@ class RpmExtractorTest {
         bdioOutputFile.getParentFile().mkdirs()
         BdioWriter bdioWriter = new BdioWriter(new Gson(), new FileWriter(bdioOutputFile))
 
+        File dependenciesOutputFile = new File("test")
+        dependenciesOutputFile = new File(dependenciesOutputFile, dependenciesOutputFileName)
+        if(dependenciesOutputFile.exists()){
+            dependenciesOutputFile.delete()
+        }
+        dependenciesOutputFile.getParentFile().mkdirs()
+        BdioWriter dependenciesWriter = new BdioWriter(new Gson(), new FileWriter(dependenciesOutputFile))
+
         ExtractionDetails extractionDetails = new ExtractionDetails(OperatingSystemEnum.CENTOS, 'x86')
         ImagePkgMgr imagePkgMgr = new ImagePkgMgr(new File("nonexistentdir"), PackageManagerEnum.RPM)
-        extractor.extract("root", "1.0", imagePkgMgr, bdioWriter, extractionDetails, "CodeLocationName", "Test", "1")
+        extractor.extract("root", "1.0", imagePkgMgr, bdioWriter, dependenciesWriter, extractionDetails, "CodeLocationName", "Test", "1")
         bdioWriter.close()
+        dependenciesWriter.close()
+
 
         File file1 = new File("src/test/resources/testRpmBdio1.jsonld");
         File file2 = new File("test/testRpmBdio1.jsonld");

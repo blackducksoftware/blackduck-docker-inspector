@@ -40,6 +40,7 @@ import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent;
 import com.blackducksoftware.integration.hub.bdio.simple.model.BdioProject;
 import com.blackducksoftware.integration.hub.bdio.simple.model.DependencyNode;
 import com.blackducksoftware.integration.hub.bdio.simple.model.Forge;
+import com.blackducksoftware.integration.hub.bdio.simple.model.SimpleBdioDocument;
 import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.ExternalId;
 import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.ExternalIdFactory;
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum;
@@ -76,15 +77,15 @@ public abstract class Extractor {
         return packageManagerEnum;
     }
 
-    public void extract(final String dockerImageRepo, final String dockerImageTag, final ImagePkgMgr imagePkgMgr, final BdioWriter bdioWriter, final ExtractionDetails extractionDetails, final String codeLocationName,
-            final String projectName, final String version) throws HubIntegrationException, IOException, InterruptedException {
-        final BdioBillOfMaterials bom = bdioNodeFactory.createBillOfMaterials(codeLocationName, projectName, version);
+    public void extract(final String dockerImageRepo, final String dockerImageTag, final ImagePkgMgr imagePkgMgr, final BdioWriter bdioWriter, final BdioWriter dependenciesWriter, final ExtractionDetails extractionDetails,
+            final String codeLocationName, final String projectName, final String projectVersion) throws HubIntegrationException, IOException, InterruptedException {
+        final BdioBillOfMaterials bom = bdioNodeFactory.createBillOfMaterials(codeLocationName, projectName, projectVersion);
         bdioWriter.writeBdioNode(bom);
 
         final Forge forgeObject = new Forge(forges.get(0), "/");
-        final ExternalId extId = externalIdFactory.createNameVersionExternalId(forgeObject, projectName, version);
+        final ExternalId extId = externalIdFactory.createNameVersionExternalId(forgeObject, projectName, projectVersion);
         final String externalId = extId.createExternalId();
-        final BdioProject projectNode = bdioNodeFactory.createProject(projectName, version, extId.createBdioId(), extractionDetails.getOperatingSystem().getForge(), externalId);
+        final BdioProject projectNode = bdioNodeFactory.createProject(projectName, projectVersion, extId.createBdioId(), extractionDetails.getOperatingSystem().getForge(), externalId);
         logger.debug(String.format("BDIO project ID: %s", projectNode.id));
         final List<BdioComponent> components = extractComponents(dockerImageRepo, dockerImageTag, extractionDetails, executor.runPackageManager(imagePkgMgr));
         logger.info(String.format("Found %s potential components", components.size()));
@@ -93,6 +94,22 @@ public abstract class Extractor {
         for (final BdioComponent component : components) {
             bdioWriter.writeBdioNode(component);
         }
+
+        if (dependenciesWriter != null) {
+            final SimpleBdioDocument dependenciesRootNode = createSimpleBdioDocument(projectName, projectVersion, bom, components);
+            logger.trace(String.format("writing dependenciesRootNode for project %s/%s", dependenciesRootNode.project.name, dependenciesRootNode.project.version));
+            dependenciesWriter.writeSimpleBdioDocument(dependenciesRootNode);
+        }
+    }
+
+    private SimpleBdioDocument createSimpleBdioDocument(final String projectName, final String version, final BdioBillOfMaterials bom, final List<BdioComponent> components) {
+        final SimpleBdioDocument dependenciesRootNode = new SimpleBdioDocument();
+        dependenciesRootNode.billOfMaterials = bom;
+        dependenciesRootNode.project = new BdioProject();
+        dependenciesRootNode.project.name = projectName;
+        dependenciesRootNode.project.version = version;
+        dependenciesRootNode.components = components;
+        return dependenciesRootNode;
     }
 
     public void createBdioComponent(final DependencyNodeBuilder dNodeBuilder, final DependencyNode rootNode, final List<BdioComponent> components, final String name, final String version, final String externalId, final String arch) {
