@@ -308,15 +308,19 @@ task createBuildDockerImageTasks() {
     }
 }
 
-task pushImageAlpine(type: Exec, dependsOn: [buildDockerImage_alpine]) {
+task dockerLogin(type: Exec) {
+    commandLine "docker", "login", "--username", "$System.env.DOCKER_HUB_USER", "--password", "$System.env.DOCKER_HUB_PASSWORD"
+}
+
+task pushImageAlpine(type: Exec, dependsOn: [buildDockerImage_alpine, dockerLogin]) {
 	commandLine "docker", "push", "blackducksoftware/hub-docker-inspector-alpine:${version}"
 }
 
-task pushImageCentos(type: Exec, dependsOn: [buildDockerImage_centos]) {
+task pushImageCentos(type: Exec, dependsOn: [buildDockerImage_centos, dockerLogin]) {
 	commandLine "docker", "push", "blackducksoftware/hub-docker-inspector-centos:${version}"
 }
 
-task pushImageUbuntu(type: Exec, dependsOn: [buildDockerImage_ubuntu]) {
+task pushImageUbuntu(type: Exec, dependsOn: [buildDockerImage_ubuntu, dockerLogin]) {
 	commandLine "docker", "push", "blackducksoftware/hub-docker-inspector-ubuntu:${version}"
 }
 
@@ -379,11 +383,7 @@ test.dependsOn testPrep
 
 task pkg(dependsOn: [buildDockerImages, packageScript]) {}
 
-task dockerLogin(type: Exec) {
-    commandLine "docker", "login", "--username", "$System.env.DOCKER_HUB_USER", "--password", "$System.env.DOCKER_HUB_PASSWORD"
-}
-
-task pushImages(dependsOn: [pkg, dockerLogin, pushImageAlpine, pushImageCentos, pushImageUbuntu]) {
+task pushImages(dependsOn: [pkg, pushImageAlpine, pushImageCentos, pushImageUbuntu]) {
 }
 
 task buildTestTarfiles(dependsOn: [buildWhTestDockerTarfile, buildAggTestDockerTarfile, \
