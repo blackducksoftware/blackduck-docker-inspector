@@ -177,7 +177,20 @@ public class EndToEndTest {
         System.out.println(String.format("Running end to end test on %s with command %s", inspectTarget, fullCmd.toString()));
         final ProcessBuilder pb = new ProcessBuilder(fullCmd);
         final Map<String, String> env = pb.environment();
-        env.put("PATH", "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH");
+        final String oldPath = System.getenv("PATH");
+        System.out.println(String.format("Original path: %s", oldPath));
+        final String javaHome = System.getenv("JAVA_HOME");
+        final String newPath;
+        if (javaHome != null) {
+            System.out.println(String.format("JAVA_HOME: %s", javaHome));
+            final String javaHomeBin = String.format("%s/bin", javaHome);
+            System.out.println(String.format("javaHomeBin: %s", javaHomeBin));
+            newPath = String.format("/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:%s:%s", oldPath, javaHomeBin);
+        } else {
+            newPath = String.format("/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:%s", oldPath);
+        }
+        System.out.println(String.format("Adjusted path: %s", newPath));
+        env.put("PATH", newPath);
         pb.redirectErrorStream(true);
         pb.redirectOutput(Redirect.INHERIT);
         final Process p = pb.start();
