@@ -292,7 +292,7 @@ public class DockerClientManager {
     }
 
     private void copyFileToContainer(final DockerClient dockerClient, final String containerId, final String srcPath, final String destPath) throws IOException {
-        logger.info(String.format("Copying %s to container %s: %s", srcPath, containerId, destPath));
+        logger.debug(String.format("Copying %s to container %s: %s", srcPath, containerId, destPath));
         final CopyArchiveToContainerCmd copyProperties = dockerClient.copyArchiveToContainerCmd(containerId).withHostResource(srcPath).withRemotePath(destPath);
         execCopyTo(copyProperties);
     }

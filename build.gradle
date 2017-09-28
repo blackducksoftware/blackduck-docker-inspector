@@ -379,7 +379,11 @@ test.dependsOn testPrep
 
 task pkg(dependsOn: [buildDockerImages, packageScript]) {}
 
-task pushImages(dependsOn: [pkg, pushImageAlpine, pushImageCentos, pushImageUbuntu]) {
+task dockerLogin(type: Exec) {
+    commandLine "docker", "login", "--username", "$System.env.DOCKER_HUB_USER", "--password", "$System.env.DOCKER_HUB_PASSWORD"
+}
+
+task pushImages(dependsOn: [pkg, dockerLogin, pushImageAlpine, pushImageCentos, pushImageUbuntu]) {
 }
 
 task buildTestTarfiles(dependsOn: [buildWhTestDockerTarfile, buildAggTestDockerTarfile, \
