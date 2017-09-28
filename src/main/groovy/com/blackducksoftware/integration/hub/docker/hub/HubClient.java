@@ -24,6 +24,7 @@
 package com.blackducksoftware.integration.hub.docker.hub;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -37,11 +38,16 @@ import org.springframework.stereotype.Component;
 import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.api.bom.BomImportRequestService;
 import com.blackducksoftware.integration.hub.builder.HubServerConfigBuilder;
+import com.blackducksoftware.integration.hub.dataservice.phonehome.PhoneHomeDataService;
+import com.blackducksoftware.integration.hub.docker.client.ProgramVersion;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.blackducksoftware.integration.hub.global.HubServerConfig;
 import com.blackducksoftware.integration.hub.rest.CredentialsRestConnection;
 import com.blackducksoftware.integration.hub.service.HubServicesFactory;
 import com.blackducksoftware.integration.log.Slf4jIntLogger;
+import com.blackducksoftware.integration.phonehome.PhoneHomeRequestBody;
+import com.blackducksoftware.integration.phonehome.PhoneHomeRequestBodyBuilder;
+import com.blackducksoftware.integration.phonehome.enums.BlackDuckName;
 
 @Component
 public class HubClient {
@@ -80,6 +86,9 @@ public class HubClient {
     @Value("${hub.always.trust.cert}")
     private Boolean setAlwaysTrustServerCertificate;
 
+    @Autowired
+    private ProgramVersion programVersion;
+
     public boolean isValid() {
         return createBuilder().isValid();
     }
@@ -105,6 +114,24 @@ public class HubClient {
         final BomImportRequestService bomImportRequestService = hubServicesFactory.createBomImportRequestService();
         bomImportRequestService.importBomFile(bdioFile);
         logger.info(String.format("Uploaded bdio file %s to %s", bdioFile.getName(), hubServerConfig.getHubUrl()));
+        phoneHome(hubServicesFactory);
+    }
+
+    private void phoneHome(final HubServicesFactory hubServicesFactory) {
+        logger.trace("Attempting to phone home");
+        final PhoneHomeDataService phoner = hubServicesFactory.createPhoneHomeDataService();
+        final PhoneHomeRequestBodyBuilder phoneHomeRequestBodyBuilder = new PhoneHomeRequestBodyBuilder();
+        phoneHomeRequestBodyBuilder.setBlackDuckName(BlackDuckName.HUB);
+
+        PhoneHomeRequestBody phoneHomeRequestBody = null;
+        try {
+            phoneHomeRequestBody = phoner.createInitialPhoneHomeRequestBodyBuilder("Hub-Docker-Inspector", programVersion.getProgramVersion(), programVersion.getProgramVersion()).buildObject();
+        } catch (final IOException e) {
+            logger.error(String.format("Unable to phone home: %s", e.getMessage()));
+            e.printStackTrace();
+        }
+        phoner.phoneHome(phoneHomeRequestBody);
+        logger.trace("Attempt to phone home completed");
     }
 
     private HubServerConfigBuilder createBuilder() {
