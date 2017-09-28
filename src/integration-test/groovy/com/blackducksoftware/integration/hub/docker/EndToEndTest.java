@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -133,6 +134,12 @@ public class EndToEndTest {
     // TODO arg order is weird
     private void test(final String imageForBdioFilename, final String pkgMgrPathString, final String repo, final String tag, final String tagForBdioFilename, final String inspectTarget, final boolean requireBdioMatch)
             throws IOException, InterruptedException {
+        final String workingDirPath = "test/endToEnd";
+        try {
+            FileUtils.deleteDirectory(new File(workingDirPath));
+        } catch (final Exception e) {
+            System.out.println(String.format("Unable to delete %s", workingDirPath));
+        }
 
         final File expectedBdio = new File(String.format(String.format("src/integration-test/resources/bdio/%s_%s_%s_%s_bdio.jsonld", imageForBdioFilename, pkgMgrPathString, imageForBdioFilename, tagForBdioFilename)));
         if (requireBdioMatch) {
@@ -164,7 +171,7 @@ public class EndToEndTest {
             fullCmd.add(String.format("--docker.image.tag=%s", tag));
         }
         fullCmd.add("--logging.level.com.blackducksoftware=INFO");
-        fullCmd.add("--working.dir.path=test/endToEnd");
+        fullCmd.add(String.format("--working.dir.path=%s", workingDirPath));
         fullCmd.add(inspectTarget);
 
         System.out.println(String.format("Running end to end test on %s with command %s", inspectTarget, fullCmd.toString()));
