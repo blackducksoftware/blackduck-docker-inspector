@@ -177,7 +177,7 @@ public class EndToEndTest {
         System.out.println(String.format("Running end to end test on %s with command %s", inspectTarget, fullCmd.toString()));
         final ProcessBuilder pb = new ProcessBuilder(fullCmd);
         final Map<String, String> env = pb.environment();
-        env.put("PATH", "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin");
+        env.put("PATH", "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$JAVA_HOME/bin");
         pb.redirectErrorStream(true);
         pb.redirectOutput(Redirect.INHERIT);
         final Process p = pb.start();
