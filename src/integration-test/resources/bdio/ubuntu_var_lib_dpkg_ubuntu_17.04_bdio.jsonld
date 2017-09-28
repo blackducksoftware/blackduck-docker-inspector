@@ -2,14 +2,14 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "ubuntu_17.04_var_lib_dpkg_DPKG",
-    "@id": "uuid:63ce333e-5349-4e42-b839-8b612b98655e",
+    "@id": "uuid:38939641-1b13-455c-8307-2b4b499d0577",
     "@type": "BillOfMaterials",
     "relationship": []
   },
   {
     "name": "ubuntu",
     "revision": "17.04",
-    "@id": "data:debian/ubuntu/17_04",
+    "@id": "http:debian/ubuntu/17_04",
     "@type": "Project",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -329,11 +329,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:debian/libgcrypt20/1.7.6-1ubuntu0.1",
+        "related": "data:debian/libgcrypt20/1.7.6-1ubuntu0.2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:ubuntu/libgcrypt20/1.7.6-1ubuntu0.1",
+        "related": "data:ubuntu/libgcrypt20/1.7.6-1ubuntu0.2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1574,23 +1574,23 @@
   },
   {
     "name": "libgcrypt20",
-    "revision": "1.7.6-1ubuntu0.1",
-    "@id": "data:debian/libgcrypt20/1.7.6-1ubuntu0.1",
+    "revision": "1.7.6-1ubuntu0.2",
+    "@id": "data:debian/libgcrypt20/1.7.6-1ubuntu0.2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "libgcrypt20/1.7.6-1ubuntu0.1/amd64"
+      "externalId": "libgcrypt20/1.7.6-1ubuntu0.2/amd64"
     },
     "relationship": []
   },
   {
     "name": "libgcrypt20",
-    "revision": "1.7.6-1ubuntu0.1",
-    "@id": "data:ubuntu/libgcrypt20/1.7.6-1ubuntu0.1",
+    "revision": "1.7.6-1ubuntu0.2",
+    "@id": "data:ubuntu/libgcrypt20/1.7.6-1ubuntu0.2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "libgcrypt20/1.7.6-1ubuntu0.1/amd64"
+      "externalId": "libgcrypt20/1.7.6-1ubuntu0.2/amd64"
     },
     "relationship": []
   },
