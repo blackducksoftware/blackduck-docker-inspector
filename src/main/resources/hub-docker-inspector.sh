@@ -195,6 +195,8 @@ then
 	newJarPathAssignment="--jar.path=${jarPath}"
 fi
 
+export && which java # TODO TEMP
+
 if [[ "$image" == *.tar ]]
 then
 	echo "Inspecting image tar file: $image"
