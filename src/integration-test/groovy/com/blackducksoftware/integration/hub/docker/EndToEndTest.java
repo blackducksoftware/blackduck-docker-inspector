@@ -164,6 +164,7 @@ public class EndToEndTest {
             fullCmd.add(String.format("--docker.image.tag=%s", tag));
         }
         fullCmd.add("--logging.level.com.blackducksoftware=INFO");
+        fullCmd.add("--working.dir.path=test/endToEnd");
         fullCmd.add(inspectTarget);
 
         System.out.println(String.format("Running end to end test on %s with command %s", inspectTarget, fullCmd.toString()));
