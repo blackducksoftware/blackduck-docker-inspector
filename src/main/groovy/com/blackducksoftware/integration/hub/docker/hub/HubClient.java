@@ -103,7 +103,7 @@ public class HubClient {
         final CredentialsRestConnection credentialsRestConnection = hubServerConfig.createCredentialsRestConnection(new Slf4jIntLogger(logger));
         final HubServicesFactory hubServicesFactory = new HubServicesFactory(credentialsRestConnection);
         final BomImportRequestService bomImportRequestService = hubServicesFactory.createBomImportRequestService();
-        bomImportRequestService.importBomFile(bdioFile, "application/ld+json");
+        bomImportRequestService.importBomFile(bdioFile);
         logger.info(String.format("Uploaded bdio file %s to %s", bdioFile.getName(), hubServerConfig.getHubUrl()));
     }
 
