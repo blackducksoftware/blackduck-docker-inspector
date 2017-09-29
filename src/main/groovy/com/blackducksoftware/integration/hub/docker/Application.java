@@ -76,9 +76,6 @@ public class Application {
     @Value("${linux.distro}")
     private String linuxDistro;
 
-    @Value("${dev.mode}")
-    private boolean devMode;
-
     @Value("${hub.project.name}")
     private String hubProjectName;
 
@@ -216,7 +213,7 @@ public class Application {
             logger.warn(String.format("Unable to pull docker image %s:%s; proceeding anyway since it may already exist locally", runOnImageName, runOnImageVersion));
         }
         logger.debug(String.format("runInSubContainer(): Running subcontainer on image %s, repo %s, tag %s", dockerImage, dockerImageRepo, dockerImageTag));
-        dockerClientManager.run(runOnImageName, runOnImageVersion, dockerTarFile, devMode, dockerImage, dockerImageRepo, dockerImageTag);
+        dockerClientManager.run(runOnImageName, runOnImageVersion, dockerTarFile, true, dockerImage, dockerImageRepo, dockerImageTag);
     }
 
     private void generateBdio(final File dockerTarFile, final File targetImageFileSystemRootDir, final List<ManifestLayerMapping> layerMappings, final OperatingSystemEnum targetOsEnum)
@@ -239,7 +236,6 @@ public class Application {
     private void init() throws IOException, IntegrationException {
         logger.info(String.format("hub-docker-inspector %s", programVersion.getProgramVersion()));
         logger.debug(String.format("Dry run mode is set to %b", dryRun));
-        logger.debug(String.format("Development mode is set to %b", devMode));
         logger.trace(String.format("dockerImageTag: %s", dockerImageTag));
         clearResult();
         initImageName();
