@@ -35,8 +35,10 @@ err() {
 
 # Look through args for ones this script needs to act on
 function preProcessOptions() {
+	cmdlineargindex=0
 	for cmdlinearg in "$@"
 	do
+		echo "Processing cmdlineargindex: ${cmdlineargindex}; cmdlinearg: ${cmdlinearg}"
 		if [[ "$cmdlinearg" == --spring.config.location=* ]]
 		then
 			propdir=$(echo "$cmdlinearg" | cut -d '=' -f 2)
@@ -44,34 +46,42 @@ function preProcessOptions() {
 			then
 				propdir=$(echo "$propdir" | rev | cut -c 2- | rev)
 			fi
-		fi
-		if [[ "$cmdlinearg" == --hub.password=* ]]
+		elif [[ "$cmdlinearg" == --hub.password=* ]]
 		then
+			options[${cmdlineargindex}]="${cmdlinearg}"
 			hub_password_set_on_cmd_line=true
-		fi
-		if [[ "$cmdlinearg" == --output.path=* ]]
+		elif [[ "$cmdlinearg" == --output.path=* ]]
 		then
+			options[${cmdlineargindex}]="${cmdlinearg}"
 			outputPath=$(echo "$cmdlinearg" | cut -d '=' -f 2)
-		fi
-		if [[ "$cmdlinearg" == --working.dir.path=* ]]
+		elif [[ "$cmdlinearg" == --working.dir.path=* ]]
 		then
+			options[${cmdlineargindex}]="${cmdlinearg}"
 			workingDir=$(echo "$cmdlinearg" | cut -d '=' -f 2)
-		fi
-		if [[ "$cmdlinearg" == --jar.path=* ]]
+		elif [[ "$cmdlinearg" == --jar.path=* ]]
 		then
+			options[${cmdlineargindex}]="${cmdlinearg}"
 			jarPath=$(echo "$cmdlinearg" | cut -d '=' -f 2)
 			jarPathAlreadySet=true
-		fi
-		if [[ "$cmdlinearg" == --no.prompt=true ]]
+		elif [[ "$cmdlinearg" == --no.prompt=true ]]
 		then
+			options[${cmdlineargindex}]="${cmdlinearg}"
 			noPromptMode=true
 			echo "Running in \"no prompt\" mode"
-		fi
-		if [[ "$cmdlinearg" == --dry.run=true ]]
+		elif [[ "$cmdlinearg" == --dry.run=true ]]
 		then
+			options[${cmdlineargindex}]="${cmdlinearg}"
 			dryRunMode=true
 			echo "Running in \"dry run\" mode"
+		else
+			if [[ ${cmdlineargindex} -eq $(( $# - 1)) ]]
+			then
+				image="${cmdlinearg}"
+			else
+				options[${cmdlineargindex}]="${cmdlinearg}"
+			fi
 		fi
+		(( cmdlineargindex += 1 ))
 	done
 }
 
@@ -112,7 +122,7 @@ function get_property {
 ##################
 # Start script
 ##################
-version="@VERSION@"
+version="3.0.0-RC2"
 encodingSetting="-Dfile.encoding=UTF-8"
 outputPath=""
 propdir=.
@@ -185,15 +195,22 @@ then
 fi
 echo "Jar path: ${jarPath}"
 
-options=( "$@" )
-image="${options[${#options[@]}-1]}"
-unset "options[${#options[@]}-1]"
 checkForPassword
 newJarPathAssignment=""
 if [[ $jarPathAlreadySet == false ]]
 then
 	newJarPathAssignment="--jar.path=${jarPath}"
 fi
+
+if [ -e "${propfile/#~/$HOME}" ]
+then
+	echo "Copying ${propfile} to ${workingDir}"
+	cp "${propfile/#~/$HOME}" "${workingDir}"
+else
+	echo "${propfile} does not exist"
+fi
+
+cd "${workingDir}"
 
 if [[ "$image" == *.tar ]]
 then
