@@ -44,7 +44,6 @@ function preProcessOptions() {
 	cmdlineargindex=0
 	for cmdlinearg in "$@"
 	do
-		echo "Processing cmdlineargindex: ${cmdlineargindex}; cmdlinearg: ${cmdlinearg}"
 		if [[ "$cmdlinearg" == --spring.config.location=* ]]
 		then
 			propdir=$(echo "$cmdlinearg" | cut -d '=' -f 2)
@@ -193,7 +192,7 @@ fi
 if [ -z "${jarPath}" ]
 then
 	echo "Getting hub-docker-inspector.jar from github"
-	pushd "${workingDir}"
+	pushd "${workingDir}" > /dev/null
 	jarUrl="https://blackducksoftware.github.io/hub-docker-inspector/hub-docker-inspector-${version}.jar"
 	curl --fail -O  ${jarUrl}
 	curlStatus=$?
@@ -203,7 +202,7 @@ then
 		err "If you have the hub-docker-inspector .jar file, you can set the jar.path property to the path to the .jar file"
 		exit ${curlStatus}
 	fi
-	popd
+	popd > /dev/null
 	jarPath="${workingDir}/hub-docker-inspector-${version}.jar"
 fi
 echo "Jar path: ${jarPath}"
