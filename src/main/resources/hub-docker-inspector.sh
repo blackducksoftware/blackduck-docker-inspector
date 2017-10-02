@@ -29,7 +29,12 @@ function printUsage() {
 	echo "Documentation: https://blackducksoftware.atlassian.net/wiki/spaces/INTDOCS/pages/48435867/Hub+Docker+Inspector"
 }
 
-# Log message
+# Write message to stdout
+log() {
+  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@"
+}
+
+# Write message to stderr
 err() {
   echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2
 }
@@ -107,9 +112,9 @@ function promptForHubPassword() {
 function checkForPassword() {
 	if [ $hub_password_set_on_cmd_line == true -o -z "${BD_HUB_PASSWORD}" ]
 	then
-   	    echo Environment variable BD_HUB_PASSWORD is not set or is being overridden on the command line
+   	    log Environment variable BD_HUB_PASSWORD is not set or is being overridden on the command line
 	else
-        echo BD_HUB_PASSWORD is set
+        log BD_HUB_PASSWORD is set
 	fi
 	if [ $hub_password_set_on_cmd_line == false -a -z "${BD_HUB_PASSWORD}" -a $dryRunMode == false ]
 	then
@@ -165,13 +170,13 @@ fi
 
 preProcessOptions "$@"
 propfile="${propdir}/application.properties"
-echo "Properties file: ${propfile}"
+log "Properties file: ${propfile}"
 
 if [ -z "${outputPath}" ]
 then
 	outputPath=$(get_property "${propfile}" "output.path")
 fi
-echo "Output path: ${outputPath}"
+log "Output path: ${outputPath}"
 
 if [ -z "${workingDir}" ]
 then
@@ -182,7 +187,6 @@ then
 	workingDir="$(mktemp -d)"
 	createdWorkingDir=true
 fi
-echo "Working directory: ${workingDir}"
 
 if [ -z "${jarPath}" ]
 then
@@ -191,7 +195,7 @@ then
 fi
 if [ -z "${jarPath}" ]
 then
-	echo "Getting hub-docker-inspector.jar from github"
+	log "Getting hub-docker-inspector.jar from github"
 	pushd "${workingDir}" > /dev/null
 	jarUrl="https://blackducksoftware.github.io/hub-docker-inspector/hub-docker-inspector-${version}.jar"
 	curl --fail -O  ${jarUrl}
@@ -205,7 +209,7 @@ then
 	popd > /dev/null
 	jarPath="${workingDir}/hub-docker-inspector-${version}.jar"
 fi
-echo "Jar path: ${jarPath}"
+log "Jar path: ${jarPath}"
 
 checkForPassword
 newJarPathAssignment=""
@@ -216,18 +220,18 @@ fi
 
 if [ -e "${propfile}" ]
 then
-	echo "Copying ${propfile} to ${workingDir}"
+	log "Copying ${propfile} to ${workingDir}"
 	cp "${propfile}" "${workingDir}"
 	options+=("--spring.config.location=file:${workingDir}/application.properties")
 else
-	echo "${propfile} does not exist"
+	log "${propfile} does not exist"
 fi
 
-echo "Options: ${options[*]}"
+log "Options: ${options[*]}"
 
 if [[ "$image" == *.tar ]]
 then
-	echo "Inspecting image tar file: $image"
+	log "Inspecting image tar file: $image"
 	if [ ! -r "${image}" ]
 	then
 		err "ERROR: Tar file ${image} does not exist"
@@ -235,7 +239,7 @@ then
 	fi
 	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" "--docker.tar=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
 else
-	echo Inspecting image: $image
+	log Inspecting image: $image
 	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" "--docker.image=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
 fi
 
@@ -250,23 +254,23 @@ then
 	then
 		mkdir -p "${outputPath}"
 	fi
-	echo "Copying output to ${outputPath}"
+	log "Copying output to ${outputPath}"
 	cp "${workingDir}"/output/* "${outputPath}"
 fi
 
 numSuccessMessages=$(grep "\"succeeded\":[ 	]*true" "${workingDir}"/output//result.json | wc -l)
 if [[ "${numSuccessMessages}" -eq "1" ]]
 then
-	echo "Succeeded"
+	log "Succeeded"
 	status=0
 else
-	echo "Failed"
+	err "Failed"
 	status=1
 fi
 
 if [ $createdWorkingDir == true ]
 then
-	echo "Removing ${workingDir}"
+	log "Removing ${workingDir}"
 	rm -rf ${workingDir}
 fi
 
