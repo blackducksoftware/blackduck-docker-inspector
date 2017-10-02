@@ -29,8 +29,14 @@ function printUsage() {
 	echo "Documentation: https://blackducksoftware.atlassian.net/wiki/spaces/INTDOCS/pages/48435867/Hub+Docker+Inspector"
 }
 
+# Log message
 err() {
   echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2
+}
+
+# Expand tilde
+function expandPath() {
+	echo "${@/#~/$HOME}"
 }
 
 # Look through args for ones this script needs to act on
@@ -42,10 +48,16 @@ function preProcessOptions() {
 		if [[ "$cmdlinearg" == --spring.config.location=* ]]
 		then
 			propdir=$(echo "$cmdlinearg" | cut -d '=' -f 2)
+			if [[ "${propdir}" == file:* ]]
+			then
+				propdir="${propdir:5}"
+			fi
+			propdir=$(expandPath "${propdir}")
 			if [[ "$propdir" == */ ]]
 			then
 				propdir=$(echo "$propdir" | rev | cut -c 2- | rev)
 			fi
+			##### options[${cmdlineargindex}]="--spring.config.location=${propdir}"
 		elif [[ "$cmdlinearg" == --hub.password=* ]]
 		then
 			options[${cmdlineargindex}]="${cmdlinearg}"
@@ -67,12 +79,10 @@ function preProcessOptions() {
 		then
 			options[${cmdlineargindex}]="${cmdlinearg}"
 			noPromptMode=true
-			echo "Running in \"no prompt\" mode"
 		elif [[ "$cmdlinearg" == --dry.run=true ]]
 		then
 			options[${cmdlineargindex}]="${cmdlinearg}"
 			dryRunMode=true
-			echo "Running in \"dry run\" mode"
 		else
 			if [[ ${cmdlineargindex} -eq $(( $# - 1)) ]]
 			then
@@ -202,15 +212,16 @@ then
 	newJarPathAssignment="--jar.path=${jarPath}"
 fi
 
-if [ -e "${propfile/#~/$HOME}" ]
+if [ -e "${propfile}" ]
 then
 	echo "Copying ${propfile} to ${workingDir}"
-	cp "${propfile/#~/$HOME}" "${workingDir}"
+	cp "${propfile}" "${workingDir}"
+	options+=("--spring.config.location=file:${workingDir}/application.properties")
 else
 	echo "${propfile} does not exist"
 fi
 
-cd "${workingDir}"
+echo "Options: ${options[*]}"
 
 if [[ "$image" == *.tar ]]
 then
