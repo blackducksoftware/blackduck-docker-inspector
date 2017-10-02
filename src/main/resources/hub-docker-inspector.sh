@@ -63,19 +63,19 @@ function preProcessOptions() {
 			hub_password_set_on_cmd_line=true
 		elif [[ "$cmdlinearg" == --output.path=* ]]
 		then
-			options[${cmdlineargindex}]="${cmdlinearg}"
 			outputPath=$(echo "$cmdlinearg" | cut -d '=' -f 2)
 			outputPath=$(expandPath "${outputPath}")
+			options[${cmdlineargindex}]="--output.path=${outputPath}"
 		elif [[ "$cmdlinearg" == --working.dir.path=* ]]
 		then
-			options[${cmdlineargindex}]="${cmdlinearg}"
 			workingDir=$(echo "$cmdlinearg" | cut -d '=' -f 2)
 			workingDir=$(expandPath "${workingDir}")
+			options[${cmdlineargindex}]="--working.dir.path=${workingDir}"
 		elif [[ "$cmdlinearg" == --jar.path=* ]]
 		then
-			options[${cmdlineargindex}]="${cmdlinearg}"
 			jarPath=$(echo "$cmdlinearg" | cut -d '=' -f 2)
 			jarPath=$(expandPath "${jarPath}")
+			options[${cmdlineargindex}]="--jar.path=${jarPath}"
 			jarPathAlreadySet=true
 		elif [[ "$cmdlinearg" == --no.prompt=true ]]
 		then
@@ -188,6 +188,7 @@ echo "Working directory: ${workingDir}"
 if [ -z "${jarPath}" ]
 then
 	jarPath=$(get_property "${propfile}" "jar.path")
+	jarPath=$(expandPath "${jarPath}")
 fi
 if [ -z "${jarPath}" ]
 then
