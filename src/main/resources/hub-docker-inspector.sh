@@ -57,7 +57,6 @@ function preProcessOptions() {
 			then
 				propdir=$(echo "$propdir" | rev | cut -c 2- | rev)
 			fi
-			##### options[${cmdlineargindex}]="--spring.config.location=${propdir}"
 		elif [[ "$cmdlinearg" == --hub.password=* ]]
 		then
 			options[${cmdlineargindex}]="${cmdlinearg}"
@@ -66,6 +65,7 @@ function preProcessOptions() {
 		then
 			options[${cmdlineargindex}]="${cmdlinearg}"
 			outputPath=$(echo "$cmdlinearg" | cut -d '=' -f 2)
+			outputPath=$(expandPath "${outputPath}")
 		elif [[ "$cmdlinearg" == --working.dir.path=* ]]
 		then
 			options[${cmdlineargindex}]="${cmdlinearg}"
