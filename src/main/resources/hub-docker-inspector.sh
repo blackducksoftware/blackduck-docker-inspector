@@ -75,6 +75,7 @@ function preProcessOptions() {
 		then
 			options[${cmdlineargindex}]="${cmdlinearg}"
 			jarPath=$(echo "$cmdlinearg" | cut -d '=' -f 2)
+			jarPath=$(expandPath "${jarPath}")
 			jarPathAlreadySet=true
 		elif [[ "$cmdlinearg" == --no.prompt=true ]]
 		then
