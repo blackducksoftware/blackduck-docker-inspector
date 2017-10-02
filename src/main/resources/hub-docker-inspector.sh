@@ -70,6 +70,7 @@ function preProcessOptions() {
 		then
 			options[${cmdlineargindex}]="${cmdlinearg}"
 			workingDir=$(echo "$cmdlinearg" | cut -d '=' -f 2)
+			workingDir=$(expandPath "${workingDir}")
 		elif [[ "$cmdlinearg" == --jar.path=* ]]
 		then
 			options[${cmdlineargindex}]="${cmdlinearg}"
