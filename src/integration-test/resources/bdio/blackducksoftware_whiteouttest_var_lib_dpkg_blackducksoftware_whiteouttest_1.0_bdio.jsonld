@@ -2,14 +2,14 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "blackducksoftware_whiteouttest_1.0_var_lib_dpkg_DPKG",
-    "@id": "uuid:c45a9ccd-ef78-49ff-a6f1-eb7e6257cd04",
+    "@id": "uuid:84427ab5-f064-498e-9146-cdd80c748c88",
     "@type": "BillOfMaterials",
     "relationship": []
   },
   {
     "name": "blackducksoftware_whiteouttest",
     "revision": "1.0",
-    "@id": "data:debian/blackducksoftware_whiteouttest/1_0",
+    "@id": "http:debian/blackducksoftware_whiteouttest/1_0",
     "@type": "Project",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
@@ -65,11 +65,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:debian/ca-certificates/20160104ubuntu1",
+        "related": "data:debian/ca-certificates/20170717~16.04.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:ubuntu/ca-certificates/20160104ubuntu1",
+        "related": "data:ubuntu/ca-certificates/20170717~16.04.1",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -505,11 +505,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:debian/libidn11/1.32-3ubuntu1.1",
+        "related": "data:debian/libidn11/1.32-3ubuntu1.2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:ubuntu/libidn11/1.32-3ubuntu1.1",
+        "related": "data:ubuntu/libidn11/1.32-3ubuntu1.2",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1184,23 +1184,23 @@
   },
   {
     "name": "ca-certificates",
-    "revision": "20160104ubuntu1",
-    "@id": "data:debian/ca-certificates/20160104ubuntu1",
+    "revision": "20170717~16.04.1",
+    "@id": "data:debian/ca-certificates/20170717~16.04.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "ca-certificates/20160104ubuntu1/all"
+      "externalId": "ca-certificates/20170717~16.04.1/all"
     },
     "relationship": []
   },
   {
     "name": "ca-certificates",
-    "revision": "20160104ubuntu1",
-    "@id": "data:ubuntu/ca-certificates/20160104ubuntu1",
+    "revision": "20170717~16.04.1",
+    "@id": "data:ubuntu/ca-certificates/20170717~16.04.1",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "ca-certificates/20160104ubuntu1/all"
+      "externalId": "ca-certificates/20170717~16.04.1/all"
     },
     "relationship": []
   },
@@ -2394,23 +2394,23 @@
   },
   {
     "name": "libidn11",
-    "revision": "1.32-3ubuntu1.1",
-    "@id": "data:debian/libidn11/1.32-3ubuntu1.1",
+    "revision": "1.32-3ubuntu1.2",
+    "@id": "data:debian/libidn11/1.32-3ubuntu1.2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "libidn11/1.32-3ubuntu1.1/amd64"
+      "externalId": "libidn11/1.32-3ubuntu1.2/amd64"
     },
     "relationship": []
   },
   {
     "name": "libidn11",
-    "revision": "1.32-3ubuntu1.1",
-    "@id": "data:ubuntu/libidn11/1.32-3ubuntu1.1",
+    "revision": "1.32-3ubuntu1.2",
+    "@id": "data:ubuntu/libidn11/1.32-3ubuntu1.2",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "libidn11/1.32-3ubuntu1.1/amd64"
+      "externalId": "libidn11/1.32-3ubuntu1.2/amd64"
     },
     "relationship": []
   },
