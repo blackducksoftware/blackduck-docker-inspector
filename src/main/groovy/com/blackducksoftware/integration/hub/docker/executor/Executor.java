@@ -23,15 +23,16 @@
  */
 package com.blackducksoftware.integration.hub.docker.executor;
 
-import java.io.File;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.io.IOUtils;
+import org.apache.commons.exec.CommandLine;
+import org.apache.commons.exec.DefaultExecutor;
+import org.apache.commons.exec.ExecuteException;
+import org.apache.commons.exec.ExecuteWatchdog;
+import org.apache.commons.exec.PumpStreamHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,26 +47,38 @@ public class Executor {
     @Value("${command.timeout}")
     private long commandTimeout;
 
-    public String[] executeCommand(final String commandString) throws IOException, InterruptedException, HubIntegrationException {
-        final List<String> commandStringList = Arrays.asList(commandString.split(" "));
-        final ProcessBuilder builder = new ProcessBuilder();
-        builder.command(commandStringList.toArray(new String[commandStringList.size()]));
-        builder.directory(new File("."));
-        final Process process = builder.start();
-        final boolean finished = process.waitFor(this.commandTimeout, TimeUnit.MILLISECONDS);
-        if (!finished) {
-            throw new HubIntegrationException(String.format("Execution of command %s timed out (timeout: %d milliseconds)", commandString, commandTimeout));
+    public String[] executeCommand(final String commandString) throws HubIntegrationException, UnsupportedEncodingException {
+        logger.debug(String.format("Executing: %s with timeout %d", commandString, commandTimeout));
+        final CommandLine cmdLine = CommandLine.parse(commandString);
+        final DefaultExecutor executor = new DefaultExecutor();
+        executor.setExitValue(1);
+        final ExecuteWatchdog watchdog = new ExecuteWatchdog(commandTimeout);
+        executor.setWatchdog(watchdog);
+        final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        final ByteArrayOutputStream errorStream = new ByteArrayOutputStream();
+        final PumpStreamHandler streamHandler = new PumpStreamHandler(outputStream, errorStream);
+        executor.setStreamHandler(streamHandler);
+        int exitValue = -1;
+        try {
+            exitValue = executor.execute(cmdLine);
+        } catch (final ExecuteException e) {
+            exitValue = e.getExitValue();
+            logger.trace(String.format("Execution of command: %s: ExecutionException: %s; exitCode: %d; Continuing anyway...", commandString, e.getMessage(), exitValue));
+            // throw new HubIntegrationException(String.format("Execution of command: %s: ExecutionException: %s", commandString, e.getMessage()));
+        } catch (final IOException e) {
+            throw new HubIntegrationException(String.format("Execution of command: %s: IOException: %s", commandString, e.getMessage()));
         }
-        final int errCode = process.exitValue();
-        if (errCode == 0) {
+        if (watchdog.killedProcess()) {
+            throw new HubIntegrationException(String.format("Execution of command: %s with timeout %d timed out", commandString, commandTimeout, exitValue));
+        }
+        if (exitValue == 0) {
             logger.debug(String.format("Success executing command: %s", commandString));
         } else {
-            throw new HubIntegrationException(String.format("Execution of command: %s: Error code: %d", commandString, errCode));
+            throw new HubIntegrationException(String.format("Execution of command: %s: Error code: %d: stderr: %s", commandString, exitValue, errorStream.toString(StandardCharsets.UTF_8.name())));
         }
-        final InputStream inputStream = process.getInputStream();
-        final String outputString = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-        logger.debug(String.format("Command output: %s", outputString));
-        return outputString.split(System.lineSeparator());
+
+        logger.debug(String.format("Command output: %s", outputStream.toString(StandardCharsets.UTF_8.name())));
+        return outputStream.toString(StandardCharsets.UTF_8.name()).split(System.lineSeparator());
     }
 
 }

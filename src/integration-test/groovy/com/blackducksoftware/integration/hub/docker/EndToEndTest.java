@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
@@ -184,8 +183,7 @@ public class EndToEndTest {
         pb.redirectErrorStream(true);
         pb.redirectOutput(Redirect.INHERIT);
         final Process p = pb.start();
-        final boolean finished = p.waitFor(480, TimeUnit.SECONDS);
-        assertTrue(finished);
+        p.waitFor();
         System.out.println("hub-docker-inspector done; verifying results...");
         assertTrue(actualBdio.exists());
         if (requireBdioMatch) {
