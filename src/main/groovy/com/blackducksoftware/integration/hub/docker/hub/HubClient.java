@@ -144,13 +144,13 @@ public class HubClient {
             final List<String> scanCliOpts = Arrays.asList(scanCliOptsEnvVar.split("\\s"));
             for (String opt : scanCliOpts) {
                 opt = opt.trim();
-                if ((opt.startsWith("-Dhttp.proxy.host=")) || (opt.startsWith("-Dhttps.proxy.host="))) {
+                if ((opt.startsWith("-Dhttp.proxy.host=")) || (opt.startsWith("-Dhttps.proxy.host=")) || (opt.startsWith("-Dhttp.proxyHost=")) || (opt.startsWith("-Dhttps.proxyHost="))) {
                     hubProxyHost = getValue(opt);
-                } else if ((opt.startsWith("-Dhttp.proxy.port=")) || (opt.startsWith("-Dhttps.proxy.port="))) {
+                } else if ((opt.startsWith("-Dhttp.proxy.port=")) || (opt.startsWith("-Dhttps.proxy.port=")) || (opt.startsWith("-Dhttp.proxyPort=")) || (opt.startsWith("-Dhttps.proxyPort="))) {
                     hubProxyPort = getValue(opt);
-                } else if ((opt.startsWith("-Dhttp.proxy.username=")) || (opt.startsWith("-Dhttps.proxy.username="))) {
+                } else if ((opt.startsWith("-Dhttp.proxy.username=")) || (opt.startsWith("-Dhttps.proxy.username=")) || (opt.startsWith("-Dhttp.proxyUser=")) || (opt.startsWith("-Dhttps.proxyUser="))) {
                     hubProxyUsername = getValue(opt);
-                } else if ((opt.startsWith("-Dhttp.proxy.password=")) || (opt.startsWith("-Dhttps.proxy.password="))) {
+                } else if ((opt.startsWith("-Dhttp.proxy.password=")) || (opt.startsWith("-Dhttps.proxy.password=")) || (opt.startsWith("-Dhttp.proxyPassword=")) || (opt.startsWith("-Dhttps.proxyPassword="))) {
                     hubProxyPassword = getValue(opt);
                 }
             }
