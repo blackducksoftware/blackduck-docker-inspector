@@ -116,7 +116,8 @@ function checkForPassword() {
 	else
         log BD_HUB_PASSWORD is set
 	fi
-	if [ $hub_password_set_on_cmd_line == false -a -z "${BD_HUB_PASSWORD}" -a $dryRunMode == false ]
+	passwordFromConfigFile=$(get_property "${propfile}" "hub.password")
+	if [ $hub_password_set_on_cmd_line == false -a -z "${BD_HUB_PASSWORD}" -a $dryRunMode == false -a -z "${passwordFromConfigFile}" ]
 	then
    	    
 		if [ $noPromptMode == false ]
