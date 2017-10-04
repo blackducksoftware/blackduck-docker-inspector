@@ -139,7 +139,7 @@ function get_property {
 ##################
 # Start script
 ##################
-version="3.0.0-RC2"
+version="@VERSION@"
 encodingSetting="-Dfile.encoding=UTF-8"
 outputPath=""
 propdir=.
