@@ -143,7 +143,7 @@ public class Application {
             if (!onHost) {
                 writeResult(true, "Success");
             }
-        } catch (final Exception e) {
+        } catch (final Throwable e) {
             final String msg = String.format("Error inspecting image: %s", e.getMessage());
             logger.error(msg);
             final String trace = ExceptionUtils.getStackTrace(e);
