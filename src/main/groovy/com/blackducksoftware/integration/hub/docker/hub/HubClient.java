@@ -43,6 +43,7 @@ import com.blackducksoftware.integration.hub.docker.client.ProgramVersion;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.blackducksoftware.integration.hub.global.HubServerConfig;
 import com.blackducksoftware.integration.hub.rest.CredentialsRestConnection;
+import com.blackducksoftware.integration.hub.rest.RestConnection;
 import com.blackducksoftware.integration.hub.service.HubServicesFactory;
 import com.blackducksoftware.integration.log.Slf4jIntLogger;
 import com.blackducksoftware.integration.phonehome.PhoneHomeRequestBody;
@@ -55,6 +56,12 @@ public class HubClient {
 
     @Autowired
     private HubPassword hubPassword;
+
+    @Value("${caller.name}")
+    private String callerName;
+
+    @Value("${caller.version}")
+    private String callerVersion;
 
     @Value("${hub.url}")
     private String hubUrl;
@@ -108,28 +115,36 @@ public class HubClient {
 
     public void uploadBdioToHub(final File bdioFile) throws IntegrationException {
         final HubServerConfig hubServerConfig = createBuilder().build();
-
         final CredentialsRestConnection credentialsRestConnection = hubServerConfig.createCredentialsRestConnection(new Slf4jIntLogger(logger));
         final HubServicesFactory hubServicesFactory = new HubServicesFactory(credentialsRestConnection);
         final BomImportRequestService bomImportRequestService = hubServicesFactory.createBomImportRequestService();
         bomImportRequestService.importBomFile(bdioFile);
         logger.info(String.format("Uploaded bdio file %s to %s", bdioFile.getName(), hubServerConfig.getHubUrl()));
-        phoneHome(hubServicesFactory);
     }
 
-    private void phoneHome(final HubServicesFactory hubServicesFactory) {
-        logger.trace("Attempting to phone home");
-        final PhoneHomeDataService phoner = hubServicesFactory.createPhoneHomeDataService();
-        final PhoneHomeRequestBodyBuilder phoneHomeRequestBodyBuilder = new PhoneHomeRequestBodyBuilder();
-        phoneHomeRequestBodyBuilder.setBlackDuckName(BlackDuckName.HUB);
-
-        PhoneHomeRequestBody phoneHomeRequestBody = null;
+    public void phoneHome() {
+        logger.debug("Attempting to phone home");
         try {
-            phoneHomeRequestBody = phoner.createInitialPhoneHomeRequestBodyBuilder("Hub-Docker-Inspector", programVersion.getProgramVersion(), programVersion.getProgramVersion()).buildObject();
-        } catch (final IOException e) {
-            logger.error(String.format("Unable to phone home: %s", e.getMessage()));
-            e.printStackTrace();
+            final HubServerConfig hubServerConfig = createBuilder().build();
+            final CredentialsRestConnection credentialsRestConnection = hubServerConfig.createCredentialsRestConnection(new Slf4jIntLogger(logger));
+            phoneHome(credentialsRestConnection);
+        } catch (final Throwable e) {
+            logger.debug(String.format("Attempt to phone home failed: %s", e.getMessage()));
         }
+    }
+
+    private void phoneHome(final RestConnection restConnection) throws IOException {
+        final HubServicesFactory hubServicesFactory = new HubServicesFactory(restConnection);
+        final PhoneHomeDataService phoner = hubServicesFactory.createPhoneHomeDataService();
+        final PhoneHomeRequestBodyBuilder phoneHomeRequestBodyBuilder = phoner.createInitialPhoneHomeRequestBodyBuilder("Hub-Docker-Inspector", programVersion.getProgramVersion(), programVersion.getProgramVersion());
+        phoneHomeRequestBodyBuilder.setBlackDuckName(BlackDuckName.HUB);
+        if (!StringUtils.isBlank(callerName)) {
+            phoneHomeRequestBodyBuilder.addToMetaDataMap("callerName", callerName);
+        }
+        if (!StringUtils.isBlank(callerVersion)) {
+            phoneHomeRequestBodyBuilder.addToMetaDataMap("callerVersion", callerVersion);
+        }
+        final PhoneHomeRequestBody phoneHomeRequestBody = phoneHomeRequestBodyBuilder.buildObject();
         phoner.phoneHome(phoneHomeRequestBody);
         logger.trace("Attempt to phone home completed");
     }

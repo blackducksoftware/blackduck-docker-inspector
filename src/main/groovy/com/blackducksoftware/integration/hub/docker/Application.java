@@ -246,6 +246,9 @@ public class Application {
         logger.info(String.format("hub-docker-inspector %s", programVersion.getProgramVersion()));
         logger.debug(String.format("Dry run mode is set to %b", dryRun));
         logger.trace(String.format("dockerImageTag: %s", dockerImageTag));
+        if (onHost) {
+            hubDockerManager.phoneHome();
+        }
         clearResult();
         initImageName();
         logger.info(String.format("Inspecting image:tag %s:%s", dockerImageRepo, dockerImageTag));
