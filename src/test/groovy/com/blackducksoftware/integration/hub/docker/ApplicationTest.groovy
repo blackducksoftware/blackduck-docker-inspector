@@ -24,11 +24,6 @@ class ApplicationTest {
     }
 
     @Test
-    public void testCanUseCurrentContainer() {
-        doTest(false, "ubuntu", OperatingSystemEnum.UBUNTU, true)
-    }
-
-    @Test
     public void testNeedDifferentContainer() {
         doTest(true, "alpine", OperatingSystemEnum.ALPINE, false)
     }
