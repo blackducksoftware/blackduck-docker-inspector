@@ -132,14 +132,18 @@ public class ProgramPaths {
         hubDockerOutputPath = hubDockerPgmDirPath + OUTPUT_DIR;
         hubDockerOutputPathContainer = getProgramDirPathContainer() + OUTPUT_DIR;
         hubDockerResultPath = hubDockerOutputPath + RESULT_JSON_FILENAME;
+        hubDockerJarPathActual = deriveJarPath();
+    }
 
+    private String deriveJarPath() {
         final String qualifiedJarPathString = getQualifiedJarPath();
         logger.debug(String.format("qualifiedJarPathString: %s", qualifiedJarPathString));
         final String prefix = FILE_URI_PREFIX;
         final int startIndex = qualifiedJarPathString.indexOf(prefix) + prefix.length();
         final int endIndex = qualifiedJarPathString.indexOf(JAR_FILE_SUFFIX) + JAR_FILE_SUFFIX.length();
-        hubDockerJarPathActual = qualifiedJarPathString.substring(startIndex, endIndex);
+        final String hubDockerJarPathActual = qualifiedJarPathString.substring(startIndex, endIndex);
         logger.debug(String.format("hubDockerJarPathActual: %s", hubDockerJarPathActual));
+        return hubDockerJarPathActual;
     }
 
     public String normalizeJarFilename(final String hostJarPath) throws IOException {
