@@ -157,7 +157,7 @@ public class HubClient {
             final UnauthenticatedRestConnection restConnection = new UnauthenticatedRestConnection(intLogger, new URL("http://www.google.com"), 15);
             final PhoneHomeClient phClient = new PhoneHomeClient(intLogger, restConnection);
             final Map<String, String> infoMap = new HashMap<>();
-            infoMap.put("blackDuckName", "None");
+            infoMap.put("blackDuckName", BlackDuckName.HUB.getName());
             infoMap.put("blackDuckVersion", "None");
             infoMap.put("thirdPartyName", THIRD_PARTY_NAME_DOCKER);
             infoMap.put("thirdPartyVersion", dockerEngineVersion);
