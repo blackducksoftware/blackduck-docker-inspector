@@ -28,6 +28,7 @@ import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -131,14 +132,18 @@ public class ProgramPaths {
         hubDockerOutputPath = hubDockerPgmDirPath + OUTPUT_DIR;
         hubDockerOutputPathContainer = getProgramDirPathContainer() + OUTPUT_DIR;
         hubDockerResultPath = hubDockerOutputPath + RESULT_JSON_FILENAME;
+        hubDockerJarPathActual = deriveJarPath();
+    }
 
+    private String deriveJarPath() {
         final String qualifiedJarPathString = getQualifiedJarPath();
         logger.debug(String.format("qualifiedJarPathString: %s", qualifiedJarPathString));
         final String prefix = FILE_URI_PREFIX;
         final int startIndex = qualifiedJarPathString.indexOf(prefix) + prefix.length();
         final int endIndex = qualifiedJarPathString.indexOf(JAR_FILE_SUFFIX) + JAR_FILE_SUFFIX.length();
-        hubDockerJarPathActual = qualifiedJarPathString.substring(startIndex, endIndex);
+        final String hubDockerJarPathActual = qualifiedJarPathString.substring(startIndex, endIndex);
         logger.debug(String.format("hubDockerJarPathActual: %s", hubDockerJarPathActual));
+        return hubDockerJarPathActual;
     }
 
     public String normalizeJarFilename(final String hostJarPath) throws IOException {
@@ -236,7 +241,30 @@ public class ProgramPaths {
     }
 
     public String getBdioFilename(final String imageName, final String pkgMgrFilePath, final String hubProjectName, final String hubVersionName) {
-        return String.format("%s_%s_%s_%s_bdio.jsonld", cleanImageName(imageName), cleanPath(pkgMgrFilePath), cleanHubProjectName(hubProjectName), hubVersionName);
+        return createBdioFilename(cleanImageName(imageName), cleanPath(pkgMgrFilePath), cleanHubProjectName(hubProjectName), hubVersionName);
+    }
+
+    private String createBdioFilename(final String cleanImageName, final String cleanPkgMgrFilePath, final String cleanHubProjectName, final String hubVersionName) {
+        final String[] parts = new String[4];
+        parts[0] = cleanImageName;
+        parts[1] = cleanPkgMgrFilePath;
+        parts[2] = cleanHubProjectName;
+        parts[3] = hubVersionName;
+
+        String filename = generateFilename(cleanImageName, cleanPkgMgrFilePath, cleanHubProjectName, hubVersionName);
+        for (int i = 0; (filename.length() >= 255) && (i < 4); i++) {
+            parts[i] = DigestUtils.sha1Hex(parts[i]);
+            if (parts[i].length() > 15) {
+                parts[i] = parts[i].substring(0, 15);
+            }
+
+            filename = generateFilename(parts[0], parts[1], parts[2], parts[3]);
+        }
+        return filename;
+    }
+
+    private String generateFilename(final String cleanImageName, final String cleanPkgMgrFilePath, final String cleanHubProjectName, final String hubVersionName) {
+        return String.format("%s_%s_%s_%s_bdio.jsonld", cleanImageName, cleanPkgMgrFilePath, cleanHubProjectName, hubVersionName);
     }
 
     void setCodeLocationPrefix(final String codeLocationPrefix) {

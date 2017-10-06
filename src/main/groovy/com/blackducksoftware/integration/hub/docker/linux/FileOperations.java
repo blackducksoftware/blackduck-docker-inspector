@@ -13,6 +13,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.IOFileFilter;
 import org.apache.commons.io.filefilter.NameFileFilter;
 import org.apache.commons.io.filefilter.TrueFileFilter;
+import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,6 +29,22 @@ public class FileOperations {
         while (iter.hasNext()) {
             final File f = iter.next();
             if (targetName.equals(f.getName()) && (f.isDirectory())) {
+                logger.trace(String.format("Match: %s", f.getAbsolutePath()));
+                results.add(f);
+            }
+        }
+        return results;
+    }
+
+    public static List<File> findFilesWithExt(final File dirFile, final String fileExtension) {
+        final List<File> results = new ArrayList<>();
+        logger.trace(String.format("Looking in %s for files with extension %s", dirFile.getAbsolutePath(), fileExtension));
+        final IOFileFilter fileFilter = new WildcardFileFilter("*." + fileExtension);
+        final IOFileFilter dirFilter = TrueFileFilter.INSTANCE;
+        final Iterator<File> iter = FileUtils.iterateFilesAndDirs(dirFile, fileFilter, dirFilter);
+        while (iter.hasNext()) {
+            final File f = iter.next();
+            if (f.isFile()) {
                 logger.trace(String.format("Match: %s", f.getAbsolutePath()));
                 results.add(f);
             }

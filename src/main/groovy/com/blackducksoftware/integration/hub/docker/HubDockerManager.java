@@ -112,6 +112,10 @@ public class HubDockerManager {
         return generateBdioFromPackageMgrDirs(dockerImageRepo, dockerImageTag, mappings, projectName, versionName, dockerTar.getName(), imagePkgMgrInfo, architecture);
     }
 
+    public void phoneHome() {
+        hubClient.phoneHome(dockerClientManager.getDockerEngineVersion());
+    }
+
     public void uploadBdioFiles(final List<File> bdioFiles) throws IntegrationException {
         if (hubClient.isValid()) {
             if (bdioFiles != null) {

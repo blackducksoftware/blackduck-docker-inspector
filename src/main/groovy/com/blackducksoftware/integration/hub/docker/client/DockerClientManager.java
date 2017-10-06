@@ -53,6 +53,7 @@ import com.github.dockerjava.api.command.SaveImageCmd;
 import com.github.dockerjava.api.exception.NotFoundException;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.Image;
+import com.github.dockerjava.api.model.Info;
 import com.github.dockerjava.core.command.ExecStartResultCallback;
 import com.github.dockerjava.core.command.PullImageResultCallback;
 
@@ -183,6 +184,22 @@ public class DockerClientManager {
         cmd.add(String.format("--working.dir.path=%s", "/opt/blackduck/hub-docker-inspector/working"));
         execCommandInContainer(dockerClient, imageId, containerId, cmd);
         copyFileFromContainer(containerId, programPaths.getHubDockerOutputPathContainer() + ".", programPaths.getHubDockerOutputPath());
+    }
+
+    public String getDockerEngineVersion() {
+        try {
+            final DockerClient dockerClient = hubDockerClient.getDockerClient();
+            final Info dockerInfo = dockerClient.infoCmd().exec();
+            final String engineVersion = dockerInfo.getServerVersion();
+            logger.debug(String.format("Docker Engine (Server) Version: %s", engineVersion));
+            if (engineVersion == null) {
+                return "Unknown";
+            } else {
+                return engineVersion;
+            }
+        } catch (final HubIntegrationException e) {
+            return "Unknown";
+        }
     }
 
     private void setPropertiesInSubContainer(final DockerClient dockerClient, final String containerId, final String tarFilePathInSubContainer, final String tarFileDirInSubContainer, final File dockerTarFile, final String targetImage,

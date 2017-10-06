@@ -133,6 +133,17 @@ public class Application {
                     targetOsEnum = hubDockerManager.detectOperatingSystem(targetImageFileSystemRootDir);
                 }
                 runInSubContainer(dockerTarFile, targetOsEnum);
+                final List<File> bdioFiles = findBdioFiles();
+                if (bdioFiles.size() == 0) {
+                    logger.warn("No BDIO Files generated");
+                } else {
+                    if (dryRun) {
+                        logger.info("Running in dry run mode; not uploading BDIO to Hub");
+                    } else {
+                        logger.info("Uploading BDIO to Hub");
+                        hubDockerManager.uploadBdioFiles(bdioFiles);
+                    }
+                }
             } else {
                 final File targetImageFileSystemRootDir = hubDockerManager.extractDockerLayers(layerTars, layerMappings);
                 targetOsEnum = hubDockerManager.detectOperatingSystem(targetImageFileSystemRootDir);
@@ -143,13 +154,19 @@ public class Application {
             if (!onHost) {
                 writeResult(true, "Success");
             }
-        } catch (final Exception e) {
+        } catch (final Throwable e) {
             final String msg = String.format("Error inspecting image: %s", e.getMessage());
             logger.error(msg);
             final String trace = ExceptionUtils.getStackTrace(e);
             logger.debug(String.format("Stack trace: %s", trace));
             writeResult(false, msg);
         }
+    }
+
+    private List<File> findBdioFiles() {
+        final List<File> bdioFiles = FileOperations.findFilesWithExt(new File(programPaths.getHubDockerOutputPath()), "jsonld");
+        logger.info(String.format("Found %d BDIO files produced by the container", bdioFiles.size()));
+        return bdioFiles;
     }
 
     private void clearResult() {
@@ -216,27 +233,22 @@ public class Application {
         dockerClientManager.run(runOnImageName, runOnImageVersion, dockerTarFile, true, dockerImage, dockerImageRepo, dockerImageTag);
     }
 
+    // Runs only in container
     private void generateBdio(final File dockerTarFile, final File targetImageFileSystemRootDir, final List<ManifestLayerMapping> layerMappings, final OperatingSystemEnum targetOsEnum)
             throws IOException, InterruptedException, IntegrationException {
         final String msg = String.format("Target image tarfile: %s; target OS: %s", dockerTarFile.getAbsolutePath(), targetOsEnum.toString());
         logger.info(msg);
         final List<File> bdioFiles = hubDockerManager.generateBdioFromImageFilesDir(dockerImageRepo, dockerImageTag, layerMappings, hubProjectName, hubVersionName, dockerTarFile, targetImageFileSystemRootDir, targetOsEnum);
-        if (bdioFiles.size() == 0) {
-            logger.warn("No BDIO Files generated");
-        } else {
-            if (dryRun) {
-                logger.info("Running in dry run mode; not uploading BDIO to Hub");
-            } else {
-                logger.info("Uploading BDIO to Hub");
-                hubDockerManager.uploadBdioFiles(bdioFiles);
-            }
-        }
+        logger.warn(String.format("%d BDIO Files generated", bdioFiles.size()));
     }
 
     private void init() throws IOException, IntegrationException {
         logger.info(String.format("hub-docker-inspector %s", programVersion.getProgramVersion()));
         logger.debug(String.format("Dry run mode is set to %b", dryRun));
         logger.trace(String.format("dockerImageTag: %s", dockerImageTag));
+        if (onHost) {
+            hubDockerManager.phoneHome();
+        }
         clearResult();
         initImageName();
         logger.info(String.format("Inspecting image:tag %s:%s", dockerImageRepo, dockerImageTag));

@@ -24,11 +24,6 @@ class ApplicationTest {
     }
 
     @Test
-    public void testCanUseCurrentContainer() {
-        doTest(false, "ubuntu", OperatingSystemEnum.UBUNTU, true)
-    }
-
-    @Test
     public void testNeedDifferentContainer() {
         doTest(true, "alpine", OperatingSystemEnum.ALPINE, false)
     }
@@ -50,6 +45,7 @@ class ApplicationTest {
         app.hubClient = [
             isValid: { true },
             assertValid: {},
+            phoneHome: {},
             testHubConnection: {},
             uploadBdioToHub: { File bdioFile ->
             }
@@ -86,7 +82,9 @@ class ApplicationTest {
             uploadBdioFiles: {List<File> bdioFilesToUpload -> uploadedBdioFiles = true},
             extractManifestFileContent: {"[{\"Config\":\"0ef2e08ed3fabfc44002ccb846c4f2416a2135affc3ce39538834059606f32dd.json\",\"RepoTags\":[\"ubuntu:latest\"],\"Layers\":[\"cac2bb4c0c91ffa2821e9fecd2f8ccb32de91a33bfe079ae8c114170946c4dd2/layer.tar\",\"b5700afeeb6506d3e0387581b099aff4837d656276eb90afd4a53c72902ef00d/layer.tar\",\"8e985b9f58683665e5f66dc569e4eac9dc35c6d5cb9c00476c9860854df08308/layer.tar\",\"f2f739cbcf40cde68032e30fead7c9fb894db4210be3d2682f6950c7f1033be4/layer.tar\",\"7ec9b78a3372f84778c8b023dc9029848bb078674d49ae569e0a2663bfd1fe9f/layer.tar\"]}]"},
             getLayerMappings: {String tarFileName, String dockerImageName, String dockerTagName ->
-                null}
+                null},
+            phoneHome: {
+            }
         ] as HubDockerManager
 
         app.programVersion = [
