@@ -105,6 +105,9 @@ public class HubClient {
     @Value("${hub.always.trust.cert}")
     private Boolean setAlwaysTrustServerCertificate;
 
+    @Value("${phone.home:true}")
+    private Boolean phoneHomeEnabled;
+
     @Autowired
     private ProgramVersion programVersion;
 
@@ -135,6 +138,10 @@ public class HubClient {
     }
 
     public void phoneHome(final String dockerEngineVersion) {
+        if (!phoneHomeEnabled) {
+            logger.debug("PhoneHome disabled");
+            return;
+        }
         logger.debug("Attempting to phone home");
         try {
             phoneHomeHubConnection(dockerEngineVersion);
