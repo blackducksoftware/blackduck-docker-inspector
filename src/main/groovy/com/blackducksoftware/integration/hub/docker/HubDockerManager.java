@@ -113,7 +113,7 @@ public class HubDockerManager {
     }
 
     public void phoneHome() {
-        hubClient.phoneHome();
+        hubClient.phoneHome(dockerClientManager.getDockerEngineVersion());
     }
 
     public void uploadBdioFiles(final List<File> bdioFiles) throws IntegrationException {
