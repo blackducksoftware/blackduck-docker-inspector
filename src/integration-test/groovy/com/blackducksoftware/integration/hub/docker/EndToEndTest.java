@@ -169,7 +169,7 @@ public class EndToEndTest {
         if (tag != null) {
             fullCmd.add(String.format("--docker.image.tag=%s", tag));
         }
-        fullCmd.add("--logging.level.com.blackducksoftware=INFO");
+        fullCmd.add("--logging.level.com.blackducksoftware=DEBUG");
         fullCmd.add(String.format("--working.dir.path=%s", workingDirPath));
         fullCmd.add(inspectTarget);
 
