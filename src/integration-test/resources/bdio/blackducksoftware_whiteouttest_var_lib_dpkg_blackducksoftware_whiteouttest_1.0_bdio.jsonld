@@ -2,7 +2,7 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "blackducksoftware_whiteouttest_1.0_var_lib_dpkg_DPKG",
-    "@id": "uuid:84427ab5-f064-498e-9146-cdd80c748c88",
+    "@id": "uuid:01afecf9-c2a8-455b-aec0-d8cdc49c6217",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -361,11 +361,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:debian/libcurl3-gnutls/7.47.0-1ubuntu2.2",
+        "related": "data:debian/libcurl3-gnutls/7.47.0-1ubuntu2.3",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:ubuntu/libcurl3-gnutls/7.47.0-1ubuntu2.2",
+        "related": "data:ubuntu/libcurl3-gnutls/7.47.0-1ubuntu2.3",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1998,23 +1998,23 @@
   },
   {
     "name": "libcurl3-gnutls",
-    "revision": "7.47.0-1ubuntu2.2",
-    "@id": "data:debian/libcurl3-gnutls/7.47.0-1ubuntu2.2",
+    "revision": "7.47.0-1ubuntu2.3",
+    "@id": "data:debian/libcurl3-gnutls/7.47.0-1ubuntu2.3",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "libcurl3-gnutls/7.47.0-1ubuntu2.2/amd64"
+      "externalId": "libcurl3-gnutls/7.47.0-1ubuntu2.3/amd64"
     },
     "relationship": []
   },
   {
     "name": "libcurl3-gnutls",
-    "revision": "7.47.0-1ubuntu2.2",
-    "@id": "data:ubuntu/libcurl3-gnutls/7.47.0-1ubuntu2.2",
+    "revision": "7.47.0-1ubuntu2.3",
+    "@id": "data:ubuntu/libcurl3-gnutls/7.47.0-1ubuntu2.3",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "libcurl3-gnutls/7.47.0-1ubuntu2.2/amd64"
+      "externalId": "libcurl3-gnutls/7.47.0-1ubuntu2.3/amd64"
     },
     "relationship": []
   },

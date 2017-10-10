@@ -44,6 +44,11 @@ function expandPath() {
 	echo "${@/#~/$HOME}"
 }
 
+# escape spaces
+function escapeSpaces() {
+	echo "${@// /%20}"
+}
+
 # Look through args for ones this script needs to act on
 function preProcessOptions() {
 	cmdlineargindex=0
@@ -79,7 +84,8 @@ function preProcessOptions() {
 		then
 			jarPath=$(echo "$cmdlinearg" | cut -d '=' -f 2)
 			jarPath=$(expandPath "${jarPath}")
-			options[${cmdlineargindex}]="--jar.path=${jarPath}"
+			jarPathEscaped=$(escapeSpaces "${jarPath}")
+			options[${cmdlineargindex}]="--jar.path=${jarPathEscaped}"
 			jarPathAlreadySet=true
 		elif [[ "$cmdlinearg" == --no.prompt=true ]]
 		then
@@ -228,6 +234,7 @@ else
 	log "${propfile} does not exist"
 fi
 
+log "jarPath: ${jarPath}"
 log "Options: ${options[*]}"
 
 if [[ "$image" == *.tar ]]

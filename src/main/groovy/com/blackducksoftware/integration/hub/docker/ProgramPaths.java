@@ -119,7 +119,7 @@ public class ProgramPaths {
             hubDockerPgmDirPath = getProgramDirPath();
         }
         if (StringUtils.isBlank(hubDockerJarPathHost)) {
-            hubDockerJarPathHost = givenJarPath;
+            hubDockerJarPathHost = givenJarPath.replaceAll("%20", " ");
         }
         hubDockerPgmDirPathContainer = getProgramDirPathContainer();
         hubDockerConfigDirPath = hubDockerPgmDirPath + CONFIG_DIR;
@@ -219,6 +219,10 @@ public class ProgramPaths {
 
     public void setHubDockerPgmDirPath(final String hubDockerPgmDirPath) {
         this.hubDockerPgmDirPath = hubDockerPgmDirPath;
+    }
+
+    void setGivenJarPath(final String givenJarPath) {
+        this.givenJarPath = givenJarPath;
     }
 
     public String getImageTarFilename(final String imageName, final String tagName) {

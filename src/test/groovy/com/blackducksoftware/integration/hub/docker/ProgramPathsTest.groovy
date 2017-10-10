@@ -26,6 +26,7 @@ class ProgramPathsTest {
         ProgramPaths paths = [
             getQualifiedJarPath: { -> return "file:${installDirPath}/${jarFileName}OTHERJUNK".toString() }
         ] as ProgramPaths
+        paths.setGivenJarPath("/tmp/t.tar");
 
         if (prefixCodeLocationName) {
             paths.codeLocationPrefix = "xyz"
