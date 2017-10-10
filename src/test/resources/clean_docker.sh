@@ -6,6 +6,10 @@ docker rm $(docker ps -a -q)
 docker rmi blackducksoftware/centos_minus_vim_plus_bacula:1.0
 docker rmi blackducksoftware/whiteouttest:1.0
 
+docker rmi blackducksoftware/hub-docker-inspector-ubuntu:latest
+docker rmi blackducksoftware/hub-docker-inspector-centos:latest
+docker rmi blackducksoftware/hub-docker-inspector-alpine:latest
+
 docker rmi blackducksoftware/hub-docker-inspector-ubuntu:3.1.1
 docker rmi blackducksoftware/hub-docker-inspector-centos:3.1.1
 docker rmi blackducksoftware/hub-docker-inspector-alpine:3.1.1

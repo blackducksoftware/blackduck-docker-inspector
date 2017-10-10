@@ -381,6 +381,36 @@ compileJava.dependsOn writeVersionToPropertiesFile
 
 test.dependsOn testPrep
 
+task tagAlpineImageAsLatest(type: Exec, dependsOn: buildDockerImage_alpine) {
+    commandLine 'docker', 'tag', "blackducksoftware/${hubDockerImageName}-alpine:${version}", "blackducksoftware/${hubDockerImageName}-alpine:latest"
+}
+
+task tagCentosImageAsLatest(type: Exec, dependsOn: buildDockerImage_centos) {
+    commandLine 'docker', 'tag', "blackducksoftware/${hubDockerImageName}-centos:${version}", "blackducksoftware/${hubDockerImageName}-centos:latest"
+}
+
+task tagUbuntuImageAsLatest(type: Exec, dependsOn: buildDockerImage_ubuntu) {
+    commandLine 'docker', 'tag', "blackducksoftware/${hubDockerImageName}-ubuntu:${version}", "blackducksoftware/${hubDockerImageName}-ubuntu:latest"
+}
+
+task tagDockerImagesAsLatest(dependsOn: [tagAlpineImageAsLatest, tagUbuntuImageAsLatest, tagCentosImageAsLatest]) {
+    
+}
+
+task releaseUbuntuImage(type: Exec, dependsOn: [pushImageUbuntu, tagUbuntuImageAsLatest]) {
+    commandLine 'docker', 'push', "blackducksoftware/${hubDockerImageName}-ubuntu:latest"
+}
+
+task releaseCentosImage(type: Exec, dependsOn: [pushImageCentos, tagCentosImageAsLatest]) {
+    commandLine 'docker', 'push', "blackducksoftware/${hubDockerImageName}-centos:latest"
+}
+
+task releaseAlpineImage(type: Exec, dependsOn: [pushImageAlpine, tagAlpineImageAsLatest]) {
+    commandLine 'docker', 'push', "blackducksoftware/${hubDockerImageName}-alpine:latest"
+}
+
+task release(dependsOn: [releaseUbuntuImage, releaseCentosImage, releaseAlpineImage]) {}
+
 task pkg(dependsOn: [buildDockerImages, packageScript]) {}
 
 task pushImages(dependsOn: [pkg, pushImageAlpine, pushImageCentos, pushImageUbuntu]) {
