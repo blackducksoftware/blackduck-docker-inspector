@@ -257,9 +257,16 @@ then
 		exit -1
 	fi
 	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" "--docker.tar=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
+	status=$?
 else
 	log Inspecting image: $image
 	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" "--docker.image=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
+	status=$?
+fi
+
+if [[ "${status}" -ne "0" ]]
+then
+	exit "${status}"
 fi
 
 if [ ! -z "${outputPath}" ]
