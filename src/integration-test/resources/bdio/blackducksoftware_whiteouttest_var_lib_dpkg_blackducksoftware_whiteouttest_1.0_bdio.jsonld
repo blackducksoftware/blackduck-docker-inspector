@@ -2,7 +2,7 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "blackducksoftware_whiteouttest_1.0_var_lib_dpkg_DPKG",
-    "@id": "uuid:01afecf9-c2a8-455b-aec0-d8cdc49c6217",
+    "@id": "uuid:38185431-33ce-40f3-84b2-316b0f704868",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -145,11 +145,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:debian/gcc-5-base/5.4.0-6ubuntu1~16.04.4",
+        "related": "data:debian/gcc-5-base/5.4.0-6ubuntu1~16.04.5",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:ubuntu/gcc-5-base/5.4.0-6ubuntu1~16.04.4",
+        "related": "data:ubuntu/gcc-5-base/5.4.0-6ubuntu1~16.04.5",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -793,11 +793,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:debian/libstdc++6/5.4.0-6ubuntu1~16.04.4",
+        "related": "data:debian/libstdc++6/5.4.0-6ubuntu1~16.04.5",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:ubuntu/libstdc++6/5.4.0-6ubuntu1~16.04.4",
+        "related": "data:ubuntu/libstdc++6/5.4.0-6ubuntu1~16.04.5",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1404,23 +1404,23 @@
   },
   {
     "name": "gcc-5-base",
-    "revision": "5.4.0-6ubuntu1~16.04.4",
-    "@id": "data:debian/gcc-5-base/5.4.0-6ubuntu1~16.04.4",
+    "revision": "5.4.0-6ubuntu1~16.04.5",
+    "@id": "data:debian/gcc-5-base/5.4.0-6ubuntu1~16.04.5",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "gcc-5-base/5.4.0-6ubuntu1~16.04.4/amd64"
+      "externalId": "gcc-5-base/5.4.0-6ubuntu1~16.04.5/amd64"
     },
     "relationship": []
   },
   {
     "name": "gcc-5-base",
-    "revision": "5.4.0-6ubuntu1~16.04.4",
-    "@id": "data:ubuntu/gcc-5-base/5.4.0-6ubuntu1~16.04.4",
+    "revision": "5.4.0-6ubuntu1~16.04.5",
+    "@id": "data:ubuntu/gcc-5-base/5.4.0-6ubuntu1~16.04.5",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "gcc-5-base/5.4.0-6ubuntu1~16.04.4/amd64"
+      "externalId": "gcc-5-base/5.4.0-6ubuntu1~16.04.5/amd64"
     },
     "relationship": []
   },
@@ -3186,23 +3186,23 @@
   },
   {
     "name": "libstdc++6",
-    "revision": "5.4.0-6ubuntu1~16.04.4",
-    "@id": "data:debian/libstdc++6/5.4.0-6ubuntu1~16.04.4",
+    "revision": "5.4.0-6ubuntu1~16.04.5",
+    "@id": "data:debian/libstdc++6/5.4.0-6ubuntu1~16.04.5",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "libstdc++6/5.4.0-6ubuntu1~16.04.4/amd64"
+      "externalId": "libstdc++6/5.4.0-6ubuntu1~16.04.5/amd64"
     },
     "relationship": []
   },
   {
     "name": "libstdc++6",
-    "revision": "5.4.0-6ubuntu1~16.04.4",
-    "@id": "data:ubuntu/libstdc++6/5.4.0-6ubuntu1~16.04.4",
+    "revision": "5.4.0-6ubuntu1~16.04.5",
+    "@id": "data:ubuntu/libstdc++6/5.4.0-6ubuntu1~16.04.5",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "libstdc++6/5.4.0-6ubuntu1~16.04.4/amd64"
+      "externalId": "libstdc++6/5.4.0-6ubuntu1~16.04.5/amd64"
     },
     "relationship": []
   },
