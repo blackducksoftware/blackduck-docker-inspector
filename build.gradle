@@ -410,8 +410,12 @@ task releaseAlpineImage(type: Exec, dependsOn: [pushImageAlpine, tagAlpineImageA
 }
 
 task checkVersion() {
-    if ((version.contains("-SNAPSHOT")) || (version.contains("-RC"))) {
-        throw new StopExecutionException("This version (${version}) looks like a snapshot or release candidate; failing build")
+    doFirst {
+        println "Checking to make sure this version (${version}) is a release version"
+        if ((version.contains("-SNAPSHOT")) || (version.contains("-RC"))) {
+            println "Throwing exception to terminate this build"
+            throw new InvalidUserDataException("This version (${version}) looks like a snapshot or release candidate; failing build")
+        }
     }
 }
 
