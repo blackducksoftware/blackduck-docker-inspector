@@ -409,7 +409,13 @@ task releaseAlpineImage(type: Exec, dependsOn: [pushImageAlpine, tagAlpineImageA
     commandLine 'docker', 'push', "blackducksoftware/${hubDockerImageName}-alpine:latest"
 }
 
-task release(dependsOn: [releaseUbuntuImage, releaseCentosImage, releaseAlpineImage]) {}
+task checkVersion() {
+    if ((version.contains("-SNAPSHOT")) || (version.contains("-RC"))) {
+        throw new StopExecutionException("This version (${version}) looks like a snapshot or release candidate; failing build")
+    }
+}
+
+task release(dependsOn: [checkVersion, releaseUbuntuImage, releaseCentosImage, releaseAlpineImage]) {}
 
 task pkg(dependsOn: [buildDockerImages, packageScript]) {}
 
