@@ -122,7 +122,7 @@ function checkForPassword() {
 	else
         log BD_HUB_PASSWORD is set
 	fi
-	passwordFromConfigFile=$(get_property "${propfile}" "hub.password")
+	passwordFromConfigFile=$(getProperty "${propfile}" "hub.password")
 	if [ $hub_password_set_on_cmd_line == false -a -z "${BD_HUB_PASSWORD}" -a $dryRunMode == false -a -z "${passwordFromConfigFile}" ]
 	then
    	    
@@ -137,9 +137,23 @@ function checkForPassword() {
 }
 
 # Get a property value from the given properties file
-# Usage: get_property FILE KEY
-function get_property {
+# Usage: getProperty FILE KEY
+function getProperty {
 	grep "^$2=" "$1" 2> /dev/null | cut -d'=' -f2
+}
+
+# Pull the latest jar down to the current working directory
+function pullJar {
+	log "Getting hub-docker-inspector.jar from github"
+	jarUrl="https://blackducksoftware.github.io/hub-docker-inspector/hub-docker-inspector-${version}.jar"
+	curl --fail -O  ${jarUrl}
+	curlStatus=$?
+	if [[ "${curlStatus}" != "0" ]]
+	then
+		err "ERROR ${curlStatus} fetching ${jarUrl}"
+		err "If you have the hub-docker-inspector .jar file, you can set the jar.path property to the path to the .jar file"
+		exit ${curlStatus}
+	fi
 }
 
 ##################
@@ -175,19 +189,25 @@ then
     exit 0
 fi
 
+if [ \( "$1" = -j \) -o \( "$1" = --pulljar \) ]
+then
+    pullJar
+    exit 0
+fi
+
 preProcessOptions "$@"
 propfile="${propdir}/application.properties"
 log "Properties file: ${propfile}"
 
 if [ -z "${outputPath}" ]
 then
-	outputPath=$(get_property "${propfile}" "output.path")
+	outputPath=$(getProperty "${propfile}" "output.path")
 fi
 log "Output path: ${outputPath}"
 
 if [ -z "${workingDir}" ]
 then
-	workingDir=$(get_property "${propfile}" "working.dir.path")
+	workingDir=$(getProperty "${propfile}" "working.dir.path")
 fi
 if [ -z "${workingDir}" ]
 then
@@ -197,22 +217,13 @@ fi
 
 if [ -z "${jarPath}" ]
 then
-	jarPath=$(get_property "${propfile}" "jar.path")
+	jarPath=$(getProperty "${propfile}" "jar.path")
 	jarPath=$(expandPath "${jarPath}")
 fi
 if [ -z "${jarPath}" ]
 then
-	log "Getting hub-docker-inspector.jar from github"
 	pushd "${workingDir}" > /dev/null
-	jarUrl="https://blackducksoftware.github.io/hub-docker-inspector/hub-docker-inspector-${version}.jar"
-	curl --fail -O  ${jarUrl}
-	curlStatus=$?
-	if [[ "${curlStatus}" != "0" ]]
-	then
-		err "ERROR ${curlStatus} fetching ${jarUrl}"
-		err "If you have the hub-docker-inspector .jar file, you can set the jar.path property to the path to the .jar file"
-		exit ${curlStatus}
-	fi
+	pullJar
 	popd > /dev/null
 	jarPath="${workingDir}/hub-docker-inspector-${version}.jar"
 fi
