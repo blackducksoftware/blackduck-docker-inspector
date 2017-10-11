@@ -26,7 +26,7 @@ tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
 tasks.withType(GroovyCompile) { options.encoding = 'UTF-8' }
 
 group = 'com.blackducksoftware.integration'
-version = '3.1.1'
+version = '4.0.0-SNAPSHOT'
 description = ''
 String hubDockerImageName = 'hub-docker-inspector'
 
@@ -409,7 +409,13 @@ task releaseAlpineImage(type: Exec, dependsOn: [pushImageAlpine, tagAlpineImageA
     commandLine 'docker', 'push', "blackducksoftware/${hubDockerImageName}-alpine:latest"
 }
 
-task release(dependsOn: [releaseUbuntuImage, releaseCentosImage, releaseAlpineImage]) {}
+task checkVersion() {
+    if ((${version}.contains("-SNAPSHOT")) || (${version}.contains("-RC"))) {
+        throw new StopExecutionException("This version looks like a snapshot or release candidate; failing build")
+    }
+}
+
+task release(dependsOn: [checkVersion, releaseUbuntuImage, releaseCentosImage, releaseAlpineImage]) {}
 
 task pkg(dependsOn: [buildDockerImages, packageScript]) {}
 
