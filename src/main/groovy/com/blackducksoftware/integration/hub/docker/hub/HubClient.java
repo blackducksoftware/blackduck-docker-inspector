@@ -82,7 +82,7 @@ public class HubClient {
     private String hubTimeout;
 
     @Value("${hub.username}")
-    private String hubUsername;
+    private String hubUsername; // access via getHubUsername()
 
     @Value("${SCAN_CLI_OPTS:}")
     private String scanCliOptsEnvVar;
@@ -135,6 +135,15 @@ public class HubClient {
         final BomImportRequestService bomImportRequestService = hubServicesFactory.createBomImportRequestService();
         bomImportRequestService.importBomFile(bdioFile);
         logger.info(String.format("Uploaded bdio file %s to %s", bdioFile.getName(), hubServerConfig.getHubUrl()));
+    }
+
+    private String getHubUsername() {
+        return unEscape(hubUsername);
+    }
+
+    // TODO ProgramPaths has the same code; share
+    private String unEscape(final String origString) {
+        return origString.replaceAll("%20", " ");
     }
 
     public void phoneHome(final String dockerEngineVersion) {
@@ -219,7 +228,7 @@ public class HubClient {
 
         final HubServerConfigBuilder hubServerConfigBuilder = new HubServerConfigBuilder();
         hubServerConfigBuilder.setHubUrl(hubUrl);
-        hubServerConfigBuilder.setUsername(hubUsername);
+        hubServerConfigBuilder.setUsername(getHubUsername());
         hubServerConfigBuilder.setPassword(hubPasswordString);
 
         hubServerConfigBuilder.setTimeout(hubTimeout);

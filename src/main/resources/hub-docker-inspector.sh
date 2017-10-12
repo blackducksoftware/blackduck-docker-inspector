@@ -95,6 +95,11 @@ function preProcessOptions() {
 		then
 			options[${cmdlineargindex}]="${cmdlinearg}"
 			dryRunMode=true
+		elif [[ "$cmdlinearg" == --hub.username=* ]]
+		then
+			hubUsername=$(echo "$cmdlinearg" | cut -d '=' -f 2)
+			hubUsernameEscaped=$(escapeSpaces "${hubUsername}")
+			hubUsernameArgument="--hub.username=${hubUsernameEscaped}"
 		else
 			if [[ ${cmdlineargindex} -eq $(( $# - 1)) ]]
 			then
@@ -170,6 +175,7 @@ workingDir=""
 createdWorkingDir=false
 jarPath=""
 jarPathAlreadySet=false
+hubUsernameArgument=""
 
 if [ $# -lt 1 ]
 then
@@ -256,11 +262,11 @@ then
 		err "ERROR: Tar file ${image} does not exist"
 		exit -1
 	fi
-	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" "--docker.tar=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
+	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" ${hubUsernameArgument} "--docker.tar=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
 	status=$?
 else
 	log Inspecting image: $image
-	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" "--docker.image=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
+	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" ${hubUsernameArgument} "--docker.image=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
 	status=$?
 fi
 
