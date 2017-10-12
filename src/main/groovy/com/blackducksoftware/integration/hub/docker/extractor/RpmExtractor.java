@@ -33,10 +33,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.blackducksoftware.integration.hub.bdio.simple.DependencyNodeBuilder;
-import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent;
-import com.blackducksoftware.integration.hub.bdio.simple.model.DependencyNode;
-import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.ExternalIdFactory;
+import com.blackducksoftware.integration.hub.bdio.graph.MutableDependencyGraph;
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum;
 import com.blackducksoftware.integration.hub.docker.executor.RpmExecutor;
@@ -55,8 +52,7 @@ class RpmExtractor extends Extractor {
         forges.add(OperatingSystemEnum.CENTOS.getForge());
         forges.add(OperatingSystemEnum.FEDORA.getForge());
         forges.add(OperatingSystemEnum.REDHAT.getForge());
-        final ExternalIdFactory externalIdFactory = new ExternalIdFactory();
-        initValues(PackageManagerEnum.RPM, executor, forges, externalIdFactory);
+        initValues(PackageManagerEnum.RPM, executor, forges);
     }
 
     private boolean valid(final String packageLine) {
@@ -64,11 +60,8 @@ class RpmExtractor extends Extractor {
     }
 
     @Override
-    public List<BdioComponent> extractComponents(final String dockerImageRepo, final String dockerImageTag, final ExtractionDetails extractionDetails, final String[] packageList) {
+    public void extractComponents(final MutableDependencyGraph dependencies, final String dockerImageRepo, final String dockerImageTag, final ExtractionDetails extractionDetails, final String[] packageList) {
         logger.debug("extractComponents: Received ${packageList.length} package lines");
-        final List<BdioComponent> components = new ArrayList<>();
-        final DependencyNode rootNode = createDependencyNode(OperatingSystemEnum.CENTOS.getForge(), dockerImageRepo, dockerImageTag, extractionDetails.getArchitecture());
-        final DependencyNodeBuilder dNodeBuilder = new DependencyNodeBuilder(rootNode);
         for (final String packageLine : packageList) {
             if (valid(packageLine)) {
                 final int lastDotIndex = packageLine.lastIndexOf('.');
@@ -80,9 +73,8 @@ class RpmExtractor extends Extractor {
                 final String artifact = packageLine.substring(0, secondToLastDashIndex);
                 final String externalId = String.format("%s/%s/%s", artifact, versionRelease, arch);
                 logger.debug(String.format("Adding externalId %s to components list", externalId));
-                createBdioComponent(dNodeBuilder, rootNode, components, artifact, versionRelease, externalId, arch);
+                createBdioComponent(dependencies, artifact, versionRelease, externalId, arch);
             }
         }
-        return components;
     }
 }

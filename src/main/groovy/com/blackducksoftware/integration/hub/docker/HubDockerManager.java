@@ -39,7 +39,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.exception.IntegrationException;
-import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter;
+import com.blackducksoftware.integration.hub.bdio.BdioWriter;
 import com.blackducksoftware.integration.hub.docker.client.DockerClientManager;
 import com.blackducksoftware.integration.hub.docker.extractor.ExtractionDetails;
 import com.blackducksoftware.integration.hub.docker.extractor.Extractor;
