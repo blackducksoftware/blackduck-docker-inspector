@@ -7,12 +7,14 @@
 # with your Hub connection details (hub.url, hub.username, and hub.password),
 # and Docker Hub connection details (docker.registry.username and docker.registry.password).
 
+# To override the default location of /tmp, specify
+# your own DOCKER_INSPECTOR_TEMP_DIR in your environment and
+# *that* location will be used.
+DOCKER_INSPECTOR_TEMP_DIR=${DOCKER_INSPECTOR_TEMP_DIR:-/tmp/hub-docker-inspector}
+
 function printUsage() {
 	echo ""
-    echo "Usage: $0 [options] <image>"
-    echo "<image> can be in either of two forms:"
-    echo "	<docker image name>[:<docker image version>]"
-    echo "	<saved image tarfile; must have .tar extension>"
+    echo "Usage: $0 [options]"
     echo "options: any property from application.properties can be set by adding an option of the form:"
     echo "  --<property name>=<value>"
     echo ""
@@ -75,11 +77,6 @@ function preProcessOptions() {
 			outputPath=$(echo "$cmdlinearg" | cut -d '=' -f 2)
 			outputPath=$(expandPath "${outputPath}")
 			options[${cmdlineargindex}]="--output.path=${outputPath}"
-		elif [[ "$cmdlinearg" == --working.dir.path=* ]]
-		then
-			workingDir=$(echo "$cmdlinearg" | cut -d '=' -f 2)
-			workingDir=$(expandPath "${workingDir}")
-			options[${cmdlineargindex}]="--working.dir.path=${workingDir}"
 		elif [[ "$cmdlinearg" == --jar.path=* ]]
 		then
 			jarPath=$(echo "$cmdlinearg" | cut -d '=' -f 2)
@@ -96,12 +93,7 @@ function preProcessOptions() {
 			options[${cmdlineargindex}]="${cmdlinearg}"
 			dryRunMode=true
 		else
-			if [[ ${cmdlineargindex} -eq $(( $# - 1)) ]]
-			then
-				image="${cmdlinearg}"
-			else
-				options[${cmdlineargindex}]="${cmdlinearg}"
-			fi
+			options[${cmdlineargindex}]="${cmdlinearg}"
 		fi
 		(( cmdlineargindex += 1 ))
 	done
@@ -166,10 +158,10 @@ propdir=.
 hub_password_set_on_cmd_line=false
 noPromptMode=false
 dryRunMode=false
-workingDir=""
 createdWorkingDir=false
 jarPath=""
 jarPathAlreadySet=false
+workingDir=$(expandPath "${DOCKER_INSPECTOR_TEMP_DIR}")
 
 if [ $# -lt 1 ]
 then
@@ -205,16 +197,6 @@ then
 fi
 log "Output path: ${outputPath}"
 
-if [ -z "${workingDir}" ]
-then
-	workingDir=$(getProperty "${propfile}" "working.dir.path")
-fi
-if [ -z "${workingDir}" ]
-then
-	workingDir="$(mktemp -d)"
-	createdWorkingDir=true
-fi
-
 if [ -z "${jarPath}" ]
 then
 	jarPath=$(getProperty "${propfile}" "jar.path")
@@ -222,7 +204,7 @@ then
 fi
 if [ -z "${jarPath}" ]
 then
-	pushd "${workingDir}" > /dev/null
+	pushd "${DOCKER_INSPECTOR_TEMP_DIR}" > /dev/null
 	pullJar
 	popd > /dev/null
 	jarPath="${workingDir}/hub-docker-inspector-${version}.jar"
@@ -238,9 +220,9 @@ fi
 
 if [ -e "${propfile}" ]
 then
-	log "Copying ${propfile} to ${workingDir}"
-	cp "${propfile}" "${workingDir}"
-	options+=("--spring.config.location=file:${workingDir}/application.properties")
+	log "**** NOT Copying ${propfile} to ${workingDir}"
+	#cp "${propfile}" "${workingDir}"
+	#options+=("--spring.config.location=file:${workingDir}/application.properties")
 else
 	log "${propfile} does not exist"
 fi
@@ -248,21 +230,10 @@ fi
 log "jarPath: ${jarPath}"
 log "Options: ${options[*]}"
 
-if [[ "$image" == *.tar ]]
-then
-	log "Inspecting image tar file: $image"
-	if [ ! -r "${image}" ]
-	then
-		err "ERROR: Tar file ${image} does not exist"
-		exit -1
-	fi
-	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" "--docker.tar=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
-	status=$?
-else
-	log Inspecting image: $image
-	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" "--docker.image=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
-	status=$?
-fi
+log Inspecting image: $image
+java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" "--host.working.dir.path=${workingDir}" ${options[*]}
+status=$?
+
 
 if [[ "${status}" -ne "0" ]]
 then
