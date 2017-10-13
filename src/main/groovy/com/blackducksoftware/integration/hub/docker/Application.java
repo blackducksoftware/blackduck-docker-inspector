@@ -24,7 +24,6 @@
 package com.blackducksoftware.integration.hub.docker;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -48,14 +47,14 @@ import com.blackducksoftware.integration.hub.docker.image.DockerImages;
 import com.blackducksoftware.integration.hub.docker.linux.FileOperations;
 import com.blackducksoftware.integration.hub.docker.linux.FileSys;
 import com.blackducksoftware.integration.hub.docker.result.Result;
-import com.blackducksoftware.integration.hub.docker.result.ResultWriter;
+import com.blackducksoftware.integration.hub.docker.result.ResultFile;
 import com.blackducksoftware.integration.hub.docker.tar.manifest.ManifestLayerMapping;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.google.gson.Gson;
 
 @SpringBootApplication
 public class Application {
-    private final Logger logger = LoggerFactory.getLogger(Application.class);
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // User should specify docker.tar OR docker.image
     @Value("${docker.tar}")
@@ -112,6 +111,9 @@ public class Application {
     @Autowired
     private ProgramPaths programPaths;
 
+    @Autowired
+    private ResultFile resultFile;
+
     public static void main(final String[] args) {
         new SpringApplicationBuilder(Application.class).logStartupInfo(false).run(args);
     }
@@ -120,6 +122,7 @@ public class Application {
     public void inspectImage() {
         try {
             init();
+            final Gson gson = new Gson();
             final File dockerTarFile = deriveDockerTarFile();
 
             final List<File> layerTars = hubDockerManager.extractLayerTars(dockerTarFile);
@@ -151,15 +154,23 @@ public class Application {
                 createContainerFileSystemTarIfRequested(targetImageFileSystemRootDir);
             }
             provideDockerTarIfRequested(dockerTarFile);
-            if (!onHost) {
-                writeResult(true, "Success");
+
+            if (onHost) {
+                final Result result = resultFile.read(gson);
+                if (!result.getSucceeded()) {
+                    logger.error(String.format("*** Failed: %s", result.getMessage()));
+                } else {
+                    logger.info("*** Succeeded");
+                }
+            } else {
+                resultFile.write(gson, true, "Success");
             }
         } catch (final Throwable e) {
             final String msg = String.format("Error inspecting image: %s", e.getMessage());
             logger.error(msg);
             final String trace = ExceptionUtils.getStackTrace(e);
             logger.debug(String.format("Stack trace: %s", trace));
-            writeResult(false, msg);
+            resultFile.write(new Gson(), false, msg);
         }
     }
 
@@ -175,23 +186,6 @@ public class Application {
             outputFile.delete();
         } catch (final Exception e) {
             logger.warn(String.format("Error clearing result file: %s", e.getMessage()));
-        }
-    }
-
-    private void writeResult(final boolean succeeded, final String msg) {
-        final Result result = new Result(succeeded, msg);
-        try {
-            final File outputDirectory = new File(programPaths.getHubDockerOutputPath());
-            outputDirectory.mkdirs();
-            final File resultOutputFile = new File(programPaths.getHubDockerResultPath());
-
-            try (FileOutputStream resultOutputStream = new FileOutputStream(resultOutputFile)) {
-                try (ResultWriter resultWriter = new ResultWriter(new Gson(), resultOutputStream)) {
-                    resultWriter.writeResult(result);
-                }
-            }
-        } catch (final Exception e) {
-            logger.error(String.format("Error writing result file: %s", e.getMessage()));
         }
     }
 

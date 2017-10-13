@@ -218,19 +218,8 @@ then
 	newJarPathAssignment="--jar.path=${jarPath}"
 fi
 
-if [ -e "${propfile}" ]
-then
-	log "**** NOT Copying ${propfile} to ${workingDir}"
-	#cp "${propfile}" "${workingDir}"
-	#options+=("--spring.config.location=file:${workingDir}/application.properties")
-else
-	log "${propfile} does not exist"
-fi
-
 log "jarPath: ${jarPath}"
 log "Options: ${options[*]}"
-
-log Inspecting image: $image
 java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" "--host.working.dir.path=${workingDir}" ${options[*]}
 status=$?
 
