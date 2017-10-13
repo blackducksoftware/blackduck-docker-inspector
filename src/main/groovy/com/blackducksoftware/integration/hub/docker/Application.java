@@ -93,9 +93,6 @@ public class Application {
     @Value("${on.host:true}")
     private boolean onHost;
 
-    @Value("${output.path:}")
-    private String outputDir;
-
     @Autowired
     private HubClient hubClient;
 
@@ -138,6 +135,7 @@ public class Application {
                 extractAndInspect(dockerTarFile, layerTars, layerMappings);
             }
             provideDockerTarIfRequested(dockerTarFile);
+            copyOutputToUserOutputDir();
             reportResult();
         } catch (final Throwable e) {
             final String msg = String.format("Error inspecting image: %s", e.getMessage());
@@ -146,6 +144,16 @@ public class Application {
             logger.debug(String.format("Stack trace: %s", trace));
             resultFile.write(new Gson(), false, msg);
         }
+    }
+
+    private void copyOutputToUserOutputDir() throws IOException {
+        final String userOutputDirPath = programPaths.getUserOutputDir();
+        if (userOutputDirPath == null) {
+            logger.debug("User has not specified an output path");
+            return;
+        }
+        logger.debug(String.format("Copying output to %s", userOutputDirPath));
+        FileOperations.copyDirContentsToDir(programPaths.getHubDockerOutputPath(), userOutputDirPath, true);
     }
 
     private void uploadBdioFiles() throws IntegrationException {

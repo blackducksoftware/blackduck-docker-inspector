@@ -74,6 +74,9 @@ public class ProgramPaths {
     @Value("${jar.path}")
     private String givenJarPath;
 
+    @Value("${output.path:}")
+    private String userOutputDir;
+
     private String hubDockerPgmDirPath;
     private String hubDockerPgmDirPathContainer;
     public static final String APPLICATION_PROPERTIES_FILENAME = "application.properties";
@@ -133,6 +136,13 @@ public class ProgramPaths {
         hubDockerOutputPathContainer = getProgramDirPathContainer() + OUTPUT_DIR;
         hubDockerResultPath = hubDockerOutputPath + RESULT_JSON_FILENAME;
         hubDockerJarPathActual = deriveJarPath();
+    }
+
+    public String getUserOutputDir() {
+        if (StringUtils.isBlank(userOutputDir)) {
+            return null;
+        }
+        return userOutputDir;
     }
 
     private String deriveJarPath() {

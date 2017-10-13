@@ -65,4 +65,13 @@ public class FileOperations {
         final Path destPath = destination.toPath().resolve(filename);
         Files.move(fileToMove.toPath(), destPath, StandardCopyOption.REPLACE_EXISTING);
     }
+
+    public static void copyDirContentsToDir(final String fromDirPath, final String toDirPath, final boolean createIfNecessary) throws IOException {
+        final File srcDir = new File(fromDirPath);
+        final File destDir = new File(toDirPath);
+        if (createIfNecessary && !destDir.exists()) {
+            destDir.mkdirs();
+        }
+        FileUtils.copyDirectory(srcDir, destDir);
+    }
 }
