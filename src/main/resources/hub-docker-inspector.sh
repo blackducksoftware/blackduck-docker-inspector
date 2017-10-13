@@ -56,48 +56,18 @@ function preProcessOptions() {
 	cmdlineargindex=0
 	for cmdlinearg in "$@"
 	do
-		if [[ "$cmdlinearg" == --spring.config.location=* ]]
-		then
-			propdir=$(echo "$cmdlinearg" | cut -d '=' -f 2)
-			if [[ "${propdir}" == file:* ]]
-			then
-				propdir="${propdir:5}"
-			fi
-			propdir=$(expandPath "${propdir}")
-			if [[ "$propdir" == */ ]]
-			then
-				propdir=$(echo "$propdir" | rev | cut -c 2- | rev)
-			fi
-		elif [[ "$cmdlinearg" == --hub.password=* ]]
-		then
-			options[${cmdlineargindex}]="${cmdlinearg}"
-			hub_password_set_on_cmd_line=true
-		elif [[ "$cmdlinearg" == --jar.path=* ]]
+		if [[ "$cmdlinearg" == --jar.path=* ]]
 		then
 			jarPath=$(echo "$cmdlinearg" | cut -d '=' -f 2)
 			jarPath=$(expandPath "${jarPath}")
 			jarPathEscaped=$(escapeSpaces "${jarPath}")
 			options[${cmdlineargindex}]="--jar.path=${jarPathEscaped}"
 			jarPathAlreadySet=true
-		elif [[ "$cmdlinearg" == --no.prompt=true ]]
-		then
-			options[${cmdlineargindex}]="${cmdlinearg}"
-			noPromptMode=true
-		elif [[ "$cmdlinearg" == --dry.run=true ]]
-		then
-			options[${cmdlineargindex}]="${cmdlinearg}"
-			dryRunMode=true
 		else
 			options[${cmdlineargindex}]="${cmdlinearg}"
 		fi
 		(( cmdlineargindex += 1 ))
 	done
-}
-
-# Get a property value from the given properties file
-# Usage: getProperty FILE KEY
-function getProperty {
-	grep "^$2=" "$1" 2> /dev/null | cut -d'=' -f2
 }
 
 # Pull the latest jar down to the current working directory
@@ -119,11 +89,6 @@ function pullJar {
 ##################
 version="@VERSION@"
 encodingSetting="-Dfile.encoding=UTF-8"
-propdir=.
-hub_password_set_on_cmd_line=false
-noPromptMode=false
-dryRunMode=false
-createdWorkingDir=false
 jarPath=""
 jarPathAlreadySet=false
 workingDir=$(expandPath "${DOCKER_INSPECTOR_TEMP_DIR}")
@@ -153,14 +118,7 @@ then
 fi
 
 preProcessOptions "$@"
-propfile="${propdir}/application.properties"
-log "Properties file: ${propfile}"
 
-if [ -z "${jarPath}" ]
-then
-	jarPath=$(getProperty "${propfile}" "jar.path")
-	jarPath=$(expandPath "${jarPath}")
-fi
 if [ -z "${jarPath}" ]
 then
 	pushd "${DOCKER_INSPECTOR_TEMP_DIR}" > /dev/null
@@ -170,7 +128,6 @@ then
 fi
 log "Jar path: ${jarPath}"
 
-checkForPassword
 newJarPathAssignment=""
 if [[ $jarPathAlreadySet == false ]]
 then
@@ -181,16 +138,5 @@ log "jarPath: ${jarPath}"
 log "Options: ${options[*]}"
 java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" "--host.working.dir.path=${workingDir}" ${options[*]}
 status=$?
-
-if [[ "${status}" -ne "0" ]]
-then
-	exit "${status}"
-fi
-
-if [ $createdWorkingDir == true ]
-then
-	log "Removing ${workingDir}"
-	rm -rf ${workingDir}
-fi
 
 exit ${status}
