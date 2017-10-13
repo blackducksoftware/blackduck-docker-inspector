@@ -99,35 +99,6 @@ function preProcessOptions() {
 	done
 }
 
-# Prompt user for Hub Password
-function promptForHubPassword() {
-	read -s -p "Hub Password has not been set. Please enter Hub password: " hubPassword
-	echo ""
-	export BD_HUB_PASSWORD="${hubPassword}"
-}
-
-# Inform user on whether password is set via env var
-function checkForPassword() {
-	if [ $hub_password_set_on_cmd_line == true -o -z "${BD_HUB_PASSWORD}" ]
-	then
-   	    log Environment variable BD_HUB_PASSWORD is not set or is being overridden on the command line
-	else
-        log BD_HUB_PASSWORD is set
-	fi
-	passwordFromConfigFile=$(getProperty "${propfile}" "hub.password")
-	if [ $hub_password_set_on_cmd_line == false -a -z "${BD_HUB_PASSWORD}" -a $dryRunMode == false -a -z "${passwordFromConfigFile}" ]
-	then
-   	    
-		if [ $noPromptMode == false ]
-		then
-			promptForHubPassword
-		else
-			err "The Hub password has not been provided, and \"no prompt\" mode is enabled"
-			exit -1
-		fi
-	fi
-}
-
 # Get a property value from the given properties file
 # Usage: getProperty FILE KEY
 function getProperty {

@@ -93,6 +93,9 @@ public class Application {
     @Value("${on.host:true}")
     private boolean onHost;
 
+    @Value("${output.path:}")
+    private String outputDir;
+
     @Autowired
     private HubClient hubClient;
 
@@ -122,55 +125,73 @@ public class Application {
     public void inspectImage() {
         try {
             init();
-            final Gson gson = new Gson();
             final File dockerTarFile = deriveDockerTarFile();
-
             final List<File> layerTars = hubDockerManager.extractLayerTars(dockerTarFile);
             final List<ManifestLayerMapping> layerMappings = hubDockerManager.getLayerMappings(dockerTarFile.getName(), dockerImageRepo, dockerImageTag);
             fillInMissingImageNameTagFromManifest(layerMappings);
             OperatingSystemEnum targetOsEnum = null;
             if (onHost) {
-                targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro);
-                if (targetOsEnum == null) {
-                    final File targetImageFileSystemRootDir = hubDockerManager.extractDockerLayers(layerTars, layerMappings);
-                    targetOsEnum = hubDockerManager.detectOperatingSystem(targetImageFileSystemRootDir);
-                }
-                runInSubContainer(dockerTarFile, targetOsEnum);
-                final List<File> bdioFiles = findBdioFiles();
-                if (bdioFiles.size() == 0) {
-                    logger.warn("No BDIO Files generated");
-                } else {
-                    if (dryRun) {
-                        logger.info("Running in dry run mode; not uploading BDIO to Hub");
-                    } else {
-                        logger.info("Uploading BDIO to Hub");
-                        hubDockerManager.uploadBdioFiles(bdioFiles);
-                    }
-                }
+                targetOsEnum = detectImageOs(layerTars, layerMappings);
+                inspectInSubContainer(dockerTarFile, targetOsEnum);
+                uploadBdioFiles();
             } else {
-                final File targetImageFileSystemRootDir = hubDockerManager.extractDockerLayers(layerTars, layerMappings);
-                targetOsEnum = hubDockerManager.detectOperatingSystem(targetImageFileSystemRootDir);
-                generateBdio(dockerTarFile, targetImageFileSystemRootDir, layerMappings, targetOsEnum);
-                createContainerFileSystemTarIfRequested(targetImageFileSystemRootDir);
+                extractAndInspect(dockerTarFile, layerTars, layerMappings);
             }
             provideDockerTarIfRequested(dockerTarFile);
-
-            if (onHost) {
-                final Result result = resultFile.read(gson);
-                if (!result.getSucceeded()) {
-                    logger.error(String.format("*** Failed: %s", result.getMessage()));
-                } else {
-                    logger.info("*** Succeeded");
-                }
-            } else {
-                resultFile.write(gson, true, "Success");
-            }
+            reportResult();
         } catch (final Throwable e) {
             final String msg = String.format("Error inspecting image: %s", e.getMessage());
             logger.error(msg);
             final String trace = ExceptionUtils.getStackTrace(e);
             logger.debug(String.format("Stack trace: %s", trace));
             resultFile.write(new Gson(), false, msg);
+        }
+    }
+
+    private void uploadBdioFiles() throws IntegrationException {
+        final List<File> bdioFiles = findBdioFiles();
+        if (bdioFiles.size() == 0) {
+            logger.warn("No BDIO Files generated");
+        } else {
+            if (dryRun) {
+                logger.info("Running in dry run mode; not uploading BDIO to Hub");
+            } else {
+                logger.info("Uploading BDIO to Hub");
+                hubDockerManager.uploadBdioFiles(bdioFiles);
+            }
+        }
+    }
+
+    private OperatingSystemEnum detectImageOs(final List<File> layerTars, final List<ManifestLayerMapping> layerMappings) throws IOException, HubIntegrationException {
+        OperatingSystemEnum targetOsEnum;
+        targetOsEnum = hubDockerManager.detectOperatingSystem(linuxDistro);
+        if (targetOsEnum == null) {
+            final File targetImageFileSystemRootDir = hubDockerManager.extractDockerLayers(layerTars, layerMappings);
+            targetOsEnum = hubDockerManager.detectOperatingSystem(targetImageFileSystemRootDir);
+        }
+        return targetOsEnum;
+    }
+
+    private void extractAndInspect(final File dockerTarFile, final List<File> layerTars, final List<ManifestLayerMapping> layerMappings)
+            throws IOException, HubIntegrationException, InterruptedException, IntegrationException, CompressorException {
+        OperatingSystemEnum targetOsEnum;
+        final File targetImageFileSystemRootDir = hubDockerManager.extractDockerLayers(layerTars, layerMappings);
+        targetOsEnum = hubDockerManager.detectOperatingSystem(targetImageFileSystemRootDir);
+        generateBdio(dockerTarFile, targetImageFileSystemRootDir, layerMappings, targetOsEnum);
+        createContainerFileSystemTarIfRequested(targetImageFileSystemRootDir);
+    }
+
+    private void reportResult() throws HubIntegrationException {
+        final Gson gson = new Gson();
+        if (onHost) {
+            final Result result = resultFile.read(gson);
+            if (!result.getSucceeded()) {
+                logger.error(String.format("*** Failed: %s", result.getMessage()));
+            } else {
+                logger.info("*** Succeeded");
+            }
+        } else {
+            resultFile.write(gson, true, "Success");
         }
     }
 
@@ -213,7 +234,7 @@ public class Application {
         }
     }
 
-    private void runInSubContainer(final File dockerTarFile, final OperatingSystemEnum targetOsEnum) throws InterruptedException, IOException, HubIntegrationException {
+    private void inspectInSubContainer(final File dockerTarFile, final OperatingSystemEnum targetOsEnum) throws InterruptedException, IOException, HubIntegrationException {
         final String runOnImageName = dockerImages.getDockerImageName(targetOsEnum);
         final String runOnImageVersion = dockerImages.getDockerImageVersion(targetOsEnum);
         final String msg = String.format("Image inspection for %s will use docker image %s:%s", targetOsEnum.toString(), runOnImageName, runOnImageVersion);
