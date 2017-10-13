@@ -72,11 +72,6 @@ function preProcessOptions() {
 		then
 			options[${cmdlineargindex}]="${cmdlinearg}"
 			hub_password_set_on_cmd_line=true
-		elif [[ "$cmdlinearg" == --output.path=* ]]
-		then
-			outputPath=$(echo "$cmdlinearg" | cut -d '=' -f 2)
-			outputPath=$(expandPath "${outputPath}")
-			options[${cmdlineargindex}]="--output.path=${outputPath}"
 		elif [[ "$cmdlinearg" == --jar.path=* ]]
 		then
 			jarPath=$(echo "$cmdlinearg" | cut -d '=' -f 2)
@@ -124,7 +119,6 @@ function pullJar {
 ##################
 version="@VERSION@"
 encodingSetting="-Dfile.encoding=UTF-8"
-outputPath=""
 propdir=.
 hub_password_set_on_cmd_line=false
 noPromptMode=false
@@ -162,12 +156,6 @@ preProcessOptions "$@"
 propfile="${propdir}/application.properties"
 log "Properties file: ${propfile}"
 
-if [ -z "${outputPath}" ]
-then
-	outputPath=$(getProperty "${propfile}" "output.path")
-fi
-log "Output path: ${outputPath}"
-
 if [ -z "${jarPath}" ]
 then
 	jarPath=$(getProperty "${propfile}" "jar.path")
@@ -197,21 +185,6 @@ status=$?
 if [[ "${status}" -ne "0" ]]
 then
 	exit "${status}"
-fi
-
-if [ ! -z "${outputPath}" ]
-then
-	if [ -f "${outputPath}" ]
-	then
-		err "ERROR: Unable to copy BDIO output file to ${outputPath} because it is an existing file"
-		exit -2
-	fi
-	if [ ! -e "${outputPath}" ]
-	then
-		mkdir -p "${outputPath}"
-	fi
-	log "Copying output to ${outputPath}"
-	cp "${workingDir}"/output/* "${outputPath}"
 fi
 
 if [ $createdWorkingDir == true ]
