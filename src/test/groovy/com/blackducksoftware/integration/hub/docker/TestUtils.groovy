@@ -14,7 +14,7 @@ class TestUtils {
     }
 
     public static boolean contentEquals(File file1, File file2, List<String> exceptLinesContainingThese) {
-        println "Comparing ${file1.getAbsolutePath()} and ${file2.getAbsolutePath()}"
+        println "Comparing ${file1.getAbsolutePath()} ${file2.getAbsolutePath()}"
         int ignoredLineCount = 0
         int matchedLineCount = 0
         List<String> lines1 = file1.readLines()
