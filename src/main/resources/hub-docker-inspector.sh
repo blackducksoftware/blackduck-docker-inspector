@@ -223,7 +223,6 @@ log "Options: ${options[*]}"
 java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" "--host.working.dir.path=${workingDir}" ${options[*]}
 status=$?
 
-
 if [[ "${status}" -ne "0" ]]
 then
 	exit "${status}"
@@ -242,16 +241,6 @@ then
 	fi
 	log "Copying output to ${outputPath}"
 	cp "${workingDir}"/output/* "${outputPath}"
-fi
-
-numSuccessMessages=$(grep "\"succeeded\":[ 	]*true" "${workingDir}"/output//result.json | wc -l)
-if [[ "${numSuccessMessages}" -eq "1" ]]
-then
-	log "Succeeded"
-	status=0
-else
-	err "Failed"
-	status=1
 fi
 
 if [ $createdWorkingDir == true ]
