@@ -59,7 +59,15 @@ function preProcessOptions() {
 			propdir=$(echo "$cmdlinearg" | cut -d '=' -f 2)
 			if [[ "${propdir}" == file:* ]]
 			then
+				# trim off the file: prefix
 				propdir="${propdir:5}"
+			fi
+			if [[ "${propdir}" == */application.properties ]]
+			then
+				# trim off the /application.properties suffix
+				oldLength=${#propdir}
+				newLength=$(($oldLength-23))
+				propdir="${propdir:0:$newLength}"
 			fi
 			propdir=$(expandPath "${propdir}")
 			if [[ "$propdir" == */ ]]
