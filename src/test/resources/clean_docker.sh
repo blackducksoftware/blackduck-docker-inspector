@@ -10,6 +10,14 @@ docker rmi blackducksoftware/hub-docker-inspector-ubuntu:latest
 docker rmi blackducksoftware/hub-docker-inspector-centos:latest
 docker rmi blackducksoftware/hub-docker-inspector-alpine:latest
 
+docker rmi blackducksoftware/hub-docker-inspector-ubuntu:4.0.0
+docker rmi blackducksoftware/hub-docker-inspector-centos:4.0.0
+docker rmi blackducksoftware/hub-docker-inspector-alpine:4.0.0
+
+docker rmi blackducksoftware/hub-docker-inspector-ubuntu:4.0.0-SNAPSHOT
+docker rmi blackducksoftware/hub-docker-inspector-centos:4.0.0-SNAPSHOT
+docker rmi blackducksoftware/hub-docker-inspector-alpine:4.0.0-SNAPSHOT
+
 docker rmi blackducksoftware/hub-docker-inspector-ubuntu:3.1.2
 docker rmi blackducksoftware/hub-docker-inspector-centos:3.1.2
 docker rmi blackducksoftware/hub-docker-inspector-alpine:3.1.2
