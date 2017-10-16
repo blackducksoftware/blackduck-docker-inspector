@@ -68,6 +68,16 @@ function preProcessOptions() {
 			jarPathEscaped=$(escapeSpaces "${jarPath}")
 			options[${cmdlineargindex}]="--jar.path=${jarPathEscaped}"
 			jarPathAlreadySet=true
+		elif [[ "$cmdlinearg" == --spring.config.location=* ]]
+		then
+			# Once IDETECT-339 is done/released, this clause can go away
+			springConfigLocation=$(echo "$cmdlinearg" | cut -d '=' -f 2)
+			if [[ "$springConfigLocation" == file:* ]]
+			then
+				options[${cmdlineargindex}]="--spring.config.location=${springConfigLocation}"
+			else
+				options[${cmdlineargindex}]="--spring.config.location=file:${springConfigLocation}"
+			fi
 		else
 			if [[ "${cmdlineargindex}" -eq $(( $# - 1)) ]]
 			then
