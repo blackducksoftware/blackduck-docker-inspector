@@ -34,9 +34,14 @@ log() {
   echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@"
 }
 
-# Write message to stderr
+# Write warning to stdout
+warn() {
+  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: WARNING: $@"
+}
+
+# Write an error message to stderr
 err() {
-  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2
+  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: ERROR: $@" >&2
 }
 
 # Expand tilde
@@ -61,6 +66,8 @@ function preProcessOptions() {
 			then
 				# trim off the file: prefix
 				propdir="${propdir:5}"
+			else
+				warn "This format for the value of --spring.config.location has been deprecated. The value should be: file:<dir>/application.properties"
 			fi
 			if [[ "${propdir}" == */application.properties ]]
 			then
@@ -68,6 +75,8 @@ function preProcessOptions() {
 				oldLength=${#propdir}
 				newLength=$(($oldLength-23))
 				propdir="${propdir:0:$newLength}"
+			else
+				warn "This format for the value of --spring.config.location has been deprecated. The value should be: file:<dir>/application.properties"
 			fi
 			propdir=$(expandPath "${propdir}")
 			if [[ "$propdir" == */ ]]
@@ -163,8 +172,7 @@ function pullJar {
 	curlStatus=$?
 	if [[ "${curlStatus}" != "0" ]]
 	then
-		err "ERROR ${curlStatus} fetching ${jarUrl}"
-		err "If you have the hub-docker-inspector .jar file, you can set the jar.path property to the path to the .jar file"
+		err "curl returned ${curlStatus} fetching ${jarUrl}. If you have the hub-docker-inspector .jar file, you can set the jar.path property to the path to the .jar file"
 		exit ${curlStatus}
 	fi
 }
@@ -267,7 +275,7 @@ then
 	log "Inspecting image tar file: $image"
 	if [ ! -r "${image}" ]
 	then
-		err "ERROR: Tar file ${image} does not exist"
+		err "Tar file ${image} does not exist"
 		exit -1
 	fi
 	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" ${hubUsernameArgument} "--docker.tar=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
@@ -287,7 +295,7 @@ if [ ! -z "${outputPath}" ]
 then
 	if [ -f "${outputPath}" ]
 	then
-		err "ERROR: Unable to copy BDIO output file to ${outputPath} because it is an existing file"
+		err "Unable to copy BDIO output file to ${outputPath} because it is an existing file"
 		exit -2
 	fi
 	if [ ! -e "${outputPath}" ]
