@@ -36,9 +36,14 @@ log() {
   echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@"
 }
 
-# Write message to stderr
+# Write warning to stdout
+warn() {
+  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: WARNING: $@"
+}
+
+# Write error message to stderr
 err() {
-  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2
+  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: ERROR: $@" >&2
 }
 
 # Expand tilde
@@ -64,7 +69,25 @@ function preProcessOptions() {
 			options[${cmdlineargindex}]="--jar.path=${jarPathEscaped}"
 			jarPathAlreadySet=true
 		else
-			options[${cmdlineargindex}]="${cmdlinearg}"
+			if [[ "${cmdlineargindex}" -eq $(( $# - 1)) ]]
+			then
+				if [[ "${cmdlinearg}" =~ ^--.*=.* ]]
+				then
+					options[${cmdlineargindex}]="${cmdlinearg}"
+				else
+					image="${cmdlinearg}"
+					if [[ "${image}" == *.tar ]]
+					then
+						warn "This command line format is deprecated. Please replace the final argument ${image} with --docker.tar=${image}"
+						options[${cmdlineargindex}]="--docker.tar=${cmdlinearg}"
+					else
+						warn "This command line format is deprecated. Please replace the final argument ${image} with --docker.image=${image}"
+						options[${cmdlineargindex}]="--docker.image=${cmdlinearg}"
+					fi
+				fi
+			else
+				options[${cmdlineargindex}]="${cmdlinearg}"
+			fi
 		fi
 		(( cmdlineargindex += 1 ))
 	done
@@ -78,8 +101,7 @@ function pullJar {
 	curlStatus=$?
 	if [[ "${curlStatus}" != "0" ]]
 	then
-		err "ERROR ${curlStatus} fetching ${jarUrl}"
-		err "If you have the hub-docker-inspector .jar file, you can set the jar.path property to the path to the .jar file"
+		err "${curlStatus} fetching ${jarUrl}. If you have the hub-docker-inspector .jar file, you can set the jar.path property to the path to the .jar file"
 		exit ${curlStatus}
 	fi
 }
