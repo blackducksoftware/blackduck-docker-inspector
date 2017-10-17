@@ -65,7 +65,7 @@ public class ProgramPaths {
     @Value("${on.host}")
     private boolean onHost;
 
-    @Value("${host.working.dir.path:notused}")
+    @Value("${working.dir.path:/tmp/hub-docker-inspector}")
     private String hostWorkingDirPath;
 
     @Value("${hub.codelocation.prefix}")

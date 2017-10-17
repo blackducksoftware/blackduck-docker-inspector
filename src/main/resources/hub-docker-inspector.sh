@@ -60,10 +60,10 @@ function getLatestVersion() {
 		CURRENT_VERSION=$( <$VERSION_FILE_DESTINATION )
 	fi
 
-	echo "******* curl $DOCKER_INSPECTOR_CURL_OPTS -o $VERSION_FILE_DESTINATION https://blackducksoftware.github.io/hub-docker-inspector/latest-commit-id.txt"
 	curl $DOCKER_INSPECTOR_CURL_OPTS -o $VERSION_FILE_DESTINATION https://blackducksoftware.github.io/hub-docker-inspector/latest-commit-id.txt
 	LATEST_VERSION=$( <$VERSION_FILE_DESTINATION )
-	echo "********* LATEST_VERSION: ${LATEST_VERSION}"
+	echo "The latest version of the hub-docker-inspector jar file: ${LATEST_VERSION}"
+	echo "The currently-installed version of the hub-docker-inspector jar file: ${CURRENT_VERSION}"
 }
 
 # Expand tilde
@@ -186,7 +186,7 @@ then
 	pushd "${DOCKER_INSPECTOR_TEMP_DIR}" > /dev/null
 	pullJar
 	popd > /dev/null
-	jarPath="${workingDir}/hub-docker-inspector-${version}.jar"
+	jarPath="${DOCKER_INSPECTOR_TEMP_DIR}/hub-docker-inspector-${version}.jar"
 fi
 log "Jar path: ${jarPath}"
 
@@ -198,7 +198,7 @@ fi
 
 log "jarPath: ${jarPath}"
 log "Options: ${options[*]}"
-java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" "--host.working.dir.path=${workingDir}" ${options[*]}
+java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" "--working.dir.path=${workingDir}" ${options[*]}
 status=$?
 
 exit ${status}
