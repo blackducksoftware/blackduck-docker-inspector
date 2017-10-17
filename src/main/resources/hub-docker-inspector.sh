@@ -12,6 +12,13 @@
 # *that* location will be used.
 DOCKER_INSPECTOR_TEMP_DIR=${DOCKER_INSPECTOR_TEMP_DIR:-/tmp/hub-docker-inspector}
 
+# If you want to pass any additional options to
+# curl, specify DOCKER_INSPECTOR_CURL_OPTS in your environment.
+# For example, to specify a proxy, you would set
+# DOCKER_INSPECTOR_CURL_OPTS=--proxy http://myproxy:3128
+DOCKER_INSPECTOR_CURL_OPTS=${DOCKER_INSPECTOR_CURL_OPTS:-}
+
+
 function printUsage() {
 	echo ""
     echo "Usage: $0 [options]"
@@ -44,6 +51,19 @@ warn() {
 # Write error message to stderr
 err() {
   echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: ERROR: $@" >&2
+}
+
+function getLatestVersion() {
+	VERSION_FILE_DESTINATION="${DOCKER_INSPECTOR_TEMP_DIR}/hub-docker-inspector-latest-commit-id.txt"
+	CURRENT_VERSION=""
+	if [ -f $VERSION_FILE_DESTINATION ]; then
+		CURRENT_VERSION=$( <$VERSION_FILE_DESTINATION )
+	fi
+
+	echo "******* curl $DOCKER_INSPECTOR_CURL_OPTS -o $VERSION_FILE_DESTINATION https://blackducksoftware.github.io/hub-docker-inspector/latest-commit-id.txt"
+	curl $DOCKER_INSPECTOR_CURL_OPTS -o $VERSION_FILE_DESTINATION https://blackducksoftware.github.io/hub-docker-inspector/latest-commit-id.txt
+	LATEST_VERSION=$( <$VERSION_FILE_DESTINATION )
+	echo "********* LATEST_VERSION: ${LATEST_VERSION}"
 }
 
 # Expand tilde
@@ -132,6 +152,8 @@ encodingSetting="-Dfile.encoding=UTF-8"
 jarPath=""
 jarPathAlreadySet=false
 workingDir=$(expandPath "${DOCKER_INSPECTOR_TEMP_DIR}")
+
+getLatestVersion
 
 if [ $# -lt 1 ]
 then
