@@ -262,7 +262,7 @@ public class Application {
         final String msg = String.format("Target image tarfile: %s; target OS: %s", dockerTarFile.getAbsolutePath(), targetOsEnum.toString());
         logger.info(msg);
         final List<File> bdioFiles = hubDockerManager.generateBdioFromImageFilesDir(dockerImageRepo, dockerImageTag, layerMappings, hubProjectName, hubVersionName, dockerTarFile, targetImageFileSystemRootDir, targetOsEnum);
-        logger.warn(String.format("%d BDIO Files generated", bdioFiles.size()));
+        logger.info(String.format("%d BDIO Files generated", bdioFiles.size()));
     }
 
     private void init() throws IOException, IntegrationException {
