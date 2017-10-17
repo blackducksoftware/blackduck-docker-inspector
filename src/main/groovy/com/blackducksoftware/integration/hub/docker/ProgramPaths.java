@@ -121,6 +121,7 @@ public class ProgramPaths {
         if (StringUtils.isBlank(hubDockerPgmDirPath)) {
             hubDockerPgmDirPath = getProgramDirPath();
         }
+        logger.debug(String.format("hubDockerPgmDirPath: %s", hubDockerPgmDirPath));
         if (StringUtils.isBlank(hubDockerJarPathHost)) {
             hubDockerJarPathHost = givenJarPath.replaceAll("%20", " ");
         }

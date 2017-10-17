@@ -11,6 +11,7 @@
 # your own DOCKER_INSPECTOR_TEMP_DIR in your environment and
 # *that* location will be used.
 DOCKER_INSPECTOR_TEMP_DIR=${DOCKER_INSPECTOR_TEMP_DIR:-/tmp/hub-docker-inspector}
+echo "******* DOCKER_INSPECTOR_TEMP_DIR: ${DOCKER_INSPECTOR_TEMP_DIR}"
 
 # If you want to pass any additional options to
 # curl, specify DOCKER_INSPECTOR_CURL_OPTS in your environment.
@@ -151,7 +152,6 @@ version="@VERSION@"
 encodingSetting="-Dfile.encoding=UTF-8"
 jarPath=""
 jarPathAlreadySet=false
-workingDir=$(expandPath "${DOCKER_INSPECTOR_TEMP_DIR}")
 
 getLatestVersion
 
@@ -198,7 +198,7 @@ fi
 
 log "jarPath: ${jarPath}"
 log "Options: ${options[*]}"
-java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" "--working.dir.path=${workingDir}" ${options[*]}
+java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" ${options[*]}
 status=$?
 
 exit ${status}
