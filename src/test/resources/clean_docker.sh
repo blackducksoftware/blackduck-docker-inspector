@@ -18,6 +18,30 @@ docker rmi blackducksoftware/hub-docker-inspector-ubuntu:4.0.0-SNAPSHOT
 docker rmi blackducksoftware/hub-docker-inspector-centos:4.0.0-SNAPSHOT
 docker rmi blackducksoftware/hub-docker-inspector-alpine:4.0.0-SNAPSHOT
 
+docker rmi blackducksoftware/hub-docker-inspector-ubuntu:3.2.1
+docker rmi blackducksoftware/hub-docker-inspector-centos:3.2.1
+docker rmi blackducksoftware/hub-docker-inspector-alpine:3.2.1
+
+docker rmi blackducksoftware/hub-docker-inspector-ubuntu:3.2.1-SNAPSHOT
+docker rmi blackducksoftware/hub-docker-inspector-centos:3.2.1-SNAPSHOT
+docker rmi blackducksoftware/hub-docker-inspector-alpine:3.2.1-SNAPSHOT
+
+docker rmi blackducksoftware/hub-docker-inspector-ubuntu:3.2.0
+docker rmi blackducksoftware/hub-docker-inspector-centos:3.2.0
+docker rmi blackducksoftware/hub-docker-inspector-alpine:3.2.0
+
+docker rmi blackducksoftware/hub-docker-inspector-ubuntu:3.2.0-SNAPSHOT
+docker rmi blackducksoftware/hub-docker-inspector-centos:3.2.0-SNAPSHOT
+docker rmi blackducksoftware/hub-docker-inspector-alpine:3.2.0-SNAPSHOT
+
+docker rmi blackducksoftware/hub-docker-inspector-ubuntu:3.1.3
+docker rmi blackducksoftware/hub-docker-inspector-centos:3.1.3
+docker rmi blackducksoftware/hub-docker-inspector-alpine:3.1.3
+
+docker rmi blackducksoftware/hub-docker-inspector-ubuntu:3.1.3-SNAPSHOT
+docker rmi blackducksoftware/hub-docker-inspector-centos:3.1.3-SNAPSHOT
+docker rmi blackducksoftware/hub-docker-inspector-alpine:3.1.3-SNAPSHOT
+
 docker rmi blackducksoftware/hub-docker-inspector-ubuntu:3.1.2
 docker rmi blackducksoftware/hub-docker-inspector-centos:3.1.2
 docker rmi blackducksoftware/hub-docker-inspector-alpine:3.1.2

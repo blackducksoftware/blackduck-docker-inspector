@@ -72,12 +72,20 @@ function preProcessOptions() {
 		then
 			# Once IDETECT-339 is done/released, this clause can go away
 			springConfigLocation=$(echo "$cmdlinearg" | cut -d '=' -f 2)
-			if [[ "$springConfigLocation" == file:* ]]
+			if ! [[ "$springConfigLocation" == file:* ]]
 			then
-				options[${cmdlineargindex}]="--spring.config.location=${springConfigLocation}"
-			else
-				options[${cmdlineargindex}]="--spring.config.location=file:${springConfigLocation}"
+				springConfigLocation="file:${springConfigLocation}"
 			fi
+			if ! [[ "$springConfigLocation" == */application.properties ]]
+			then
+				if [[ "$springConfigLocation" == */ ]]
+				then
+					springConfigLocation="${springConfigLocation}application.properties"
+				else
+					springConfigLocation="${springConfigLocation}/application.properties"
+				fi
+			fi
+			options[${cmdlineargindex}]="--spring.config.location=${springConfigLocation}"
 		else
 			if [[ "${cmdlineargindex}" -eq $(( $# - 1)) ]]
 			then
