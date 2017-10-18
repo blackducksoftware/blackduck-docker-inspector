@@ -72,9 +72,6 @@ public class FileOperations {
         if (createIfNecessary && !destDir.exists()) {
             destDir.mkdirs();
         }
-        for (final File srcFile : srcDir.listFiles()) {
-            logger.debug(String.format("Copying file %s to dir %s", srcFile.getAbsolutePath(), destDir.getAbsolutePath()));
-            FileUtils.copyFileToDirectory(srcFile, destDir);
-        }
+        FileUtils.copyDirectory(srcDir, destDir);
     }
 }
