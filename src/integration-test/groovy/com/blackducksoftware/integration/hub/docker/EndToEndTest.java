@@ -1,5 +1,6 @@
 package com.blackducksoftware.integration.hub.docker;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -169,7 +170,7 @@ public class EndToEndTest {
         if (tag != null) {
             fullCmd.add(String.format("--docker.image.tag=%s", tag));
         }
-        fullCmd.add("--logging.level.com.blackducksoftware=INFO");
+        fullCmd.add("--logging.level.com.blackducksoftware=DEBUG");
         fullCmd.add(String.format("--working.dir.path=%s", workingDirPath));
         fullCmd.add(inspectTarget);
 
@@ -183,7 +184,8 @@ public class EndToEndTest {
         pb.redirectErrorStream(true);
         pb.redirectOutput(Redirect.INHERIT);
         final Process p = pb.start();
-        p.waitFor();
+        final int retCode = p.waitFor();
+        assertEquals(0, retCode);
         System.out.println("hub-docker-inspector done; verifying results...");
         assertTrue(actualBdio.exists());
         if (requireBdioMatch) {

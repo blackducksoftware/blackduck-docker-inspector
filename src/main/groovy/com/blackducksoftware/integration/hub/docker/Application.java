@@ -135,7 +135,9 @@ public class Application {
                 extractAndInspect(dockerTarFile, layerTars, layerMappings);
             }
             provideDockerTarIfRequested(dockerTarFile);
-            copyOutputToUserOutputDir();
+            if (onHost) {
+                copyOutputToUserOutputDir();
+            }
             reportResult();
         } catch (final Throwable e) {
             final String msg = String.format("Error inspecting image: %s", e.getMessage());
@@ -267,6 +269,7 @@ public class Application {
 
     private void init() throws IOException, IntegrationException {
         logger.info(String.format("hub-docker-inspector %s", programVersion.getProgramVersion()));
+        logger.debug(String.format("running from dir: %s", System.getProperty("user.dir")));
         logger.debug(String.format("Dry run mode is set to %b", dryRun));
         logger.trace(String.format("dockerImageTag: %s", dockerImageTag));
         if (onHost) {
