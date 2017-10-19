@@ -228,5 +228,5 @@ log "Options: ${options[*]}"
 log "Jar dir: ${DOCKER_INSPECTOR_JAR_DIR}"
 java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" ${options[*]}
 status=$?
-
+log "Return code: ${status}"
 exit ${status}

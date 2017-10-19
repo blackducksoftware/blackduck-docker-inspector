@@ -54,7 +54,7 @@ import com.google.gson.Gson;
 
 @SpringBootApplication
 public class Application {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
     // User should specify docker.tar OR docker.image
     @Value("${docker.tar}")
@@ -93,6 +93,9 @@ public class Application {
     @Value("${on.host:true}")
     private boolean onHost;
 
+    @Value("${cleanup.working.dir.files:true}")
+    private boolean cleanupWorkingDirFiles;
+
     @Autowired
     private HubClient hubClient;
 
@@ -114,8 +117,11 @@ public class Application {
     @Autowired
     private ResultFile resultFile;
 
+    private static int returnCode = -1;
+
     public static void main(final String[] args) {
         new SpringApplicationBuilder(Application.class).logStartupInfo(false).run(args);
+        System.exit(returnCode);
     }
 
     @PostConstruct
@@ -138,7 +144,10 @@ public class Application {
             if (onHost) {
                 copyOutputToUserOutputDir();
             }
-            reportResult();
+            returnCode = reportResult();
+            if (onHost && cleanupWorkingDirFiles) {
+                logger.info("********* should clean up working dir files here");
+            }
         } catch (final Throwable e) {
             final String msg = String.format("Error inspecting image: %s", e.getMessage());
             logger.error(msg);
@@ -191,17 +200,20 @@ public class Application {
         createContainerFileSystemTarIfRequested(targetImageFileSystemRootDir);
     }
 
-    private void reportResult() throws HubIntegrationException {
+    private int reportResult() throws HubIntegrationException {
         final Gson gson = new Gson();
         if (onHost) {
             final Result result = resultFile.read(gson);
             if (!result.getSucceeded()) {
                 logger.error(String.format("*** Failed: %s", result.getMessage()));
+                return -1;
             } else {
                 logger.info("*** Succeeded");
+                return 0;
             }
         } else {
             resultFile.write(gson, true, "Success");
+            return 0;
         }
     }
 
