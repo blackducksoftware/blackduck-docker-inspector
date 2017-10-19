@@ -23,6 +23,8 @@ DOCKER_INSPECTOR_CURL_OPTS=${DOCKER_INSPECTOR_CURL_OPTS:-}
 # from LATEST.
 DOCKER_INSPECTOR_RELEASE_VERSION=${DOCKER_INSPECTOR_LATEST_RELEASE_VERSION}
 
+latestReleasedJarUrl="http://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.blackducksoftware.integration&a=hub-docker-inspector&v=LATEST"
+
 function printUsage() {
 	echo ""
     echo "Usage: $0 [options]"
@@ -76,7 +78,7 @@ function getLatestJar() {
 	
 	# If the user specified a version: get that
 	if [ -z "${DOCKER_INSPECTOR_RELEASE_VERSION}" ]; then
-      selectedJarUrl="http://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.blackducksoftware.integration&a=hub-docker-inspector&v=LATEST"
+      selectedJarUrl="${latestReleasedJarUrl}"
       selectedJarFilename=$(curl -Ls -w %{url_effective} -o /dev/null "http://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.blackducksoftware.integration&a=hub-docker-inspector&v=LATEST" | awk -F/ '{print $NF}')
       echo "*** latest jar file on repository.sonatype.org is: ${selectedJarFilename}; faking it by forcing it to hub-docker-inspector-4.0.0-SNAPSHOT.jar"
       selectedJarFilename=hub-docker-inspector-4.0.0-SNAPSHOT.jar
@@ -205,9 +207,13 @@ fi
 
 if [ \( "$1" = -j \) -o \( "$1" = --pulljar \) ]
 then
-	### TBD TODO Need to think about this!
-    err "This feature has been temporarily disabled"
-    exit -1
+	curl ${DOCKER_INSPECTOR_CURL_OPTS} --fail -L -O "${latestReleasedJarUrl}"
+	if [[ $? -ne 0 ]]
+	then
+		err "Download of ${latestReleasedJarUrl} failed."
+		exit -1
+	fi
+	log "Saved ${latestReleasedJarUrl} to $(pwd)"
 fi
 
 preProcessOptions "$@"
