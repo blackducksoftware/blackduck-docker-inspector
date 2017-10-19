@@ -227,18 +227,14 @@ fi
 
 preProcessOptions "$@"
 
-if [ -z "${userSpecifiedJarPath}" ]
-then
-	getLatestJar
-	jarPath="${downloadedJarPath}"
-else
-	jarPath="${userSpecifiedJarPath}"
-fi
-
 newJarPathAssignment=""
 if [[ $jarPathAlreadySpecifiedOnCmdLine == false ]]
 then
+	getLatestJar
+	jarPath="${downloadedJarPath}"
 	newJarPathAssignment="--jar.path=${jarPath}"
+else
+	jarPath="${userSpecifiedJarPath}"
 fi
 
 log "jarPath: ${jarPath}"
