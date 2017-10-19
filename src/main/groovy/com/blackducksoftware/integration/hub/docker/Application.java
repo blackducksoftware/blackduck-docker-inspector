@@ -93,7 +93,7 @@ public class Application {
     @Value("${on.host:true}")
     private boolean onHost;
 
-    @Value("${cleanup.working.dir.files:true}")
+    @Value("${cleanup.working.dir:true}")
     private boolean cleanupWorkingDirFiles;
 
     @Autowired
@@ -118,10 +118,14 @@ public class Application {
     private ResultFile resultFile;
 
     private static int returnCode = -1;
+    private static boolean onHostStatic = true;
 
     public static void main(final String[] args) {
         new SpringApplicationBuilder(Application.class).logStartupInfo(false).run(args);
-        System.exit(returnCode);
+        if (onHostStatic) {
+            logger.info(String.format("Returning %d", returnCode));
+            System.exit(returnCode);
+        }
     }
 
     @PostConstruct
@@ -146,7 +150,7 @@ public class Application {
             }
             returnCode = reportResult();
             if (onHost && cleanupWorkingDirFiles) {
-                logger.info("********* should clean up working dir files here");
+                FileOperations.removeFileOrDirQuietly(programPaths.getHubDockerPgmDirPath());
             }
         } catch (final Throwable e) {
             final String msg = String.format("Error inspecting image: %s", e.getMessage());
@@ -284,6 +288,7 @@ public class Application {
         logger.debug(String.format("running from dir: %s", System.getProperty("user.dir")));
         logger.debug(String.format("Dry run mode is set to %b", dryRun));
         logger.trace(String.format("dockerImageTag: %s", dockerImageTag));
+        onHostStatic = onHost;
         if (onHost) {
             hubDockerManager.phoneHome();
         }
@@ -294,7 +299,7 @@ public class Application {
             verifyHubConnection();
         }
         hubDockerManager.init();
-        hubDockerManager.cleanWorkingDirectory();
+        FileOperations.removeFileOrDir(programPaths.getHubDockerWorkingDirPath());
     }
 
     private void verifyHubConnection() throws HubIntegrationException {

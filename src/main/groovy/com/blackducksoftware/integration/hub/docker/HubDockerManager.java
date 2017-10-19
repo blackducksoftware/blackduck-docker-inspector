@@ -129,13 +129,6 @@ public class HubDockerManager {
         }
     }
 
-    public void cleanWorkingDirectory() throws IOException {
-        final File workingDirectory = new File(programPaths.getHubDockerWorkingDirPath());
-        if (workingDirectory.exists()) {
-            FileUtils.deleteDirectory(workingDirectory);
-        }
-    }
-
     private List<File> generateBdioFromPackageMgrDirs(final String dockerImageRepo, final String dockerImageTag, final List<ManifestLayerMapping> layerMappings, final String projectName, final String versionName, final String tarFileName,
             final ImageInfo imageInfo, final String architecture) throws FileNotFoundException, IOException, HubIntegrationException, InterruptedException {
         logger.trace("generateBdioFromPackageMgrDirs(): Purging/recreating output dir");

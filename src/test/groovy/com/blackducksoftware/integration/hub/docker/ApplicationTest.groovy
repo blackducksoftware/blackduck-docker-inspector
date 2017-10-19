@@ -38,8 +38,12 @@ class ApplicationTest {
             getProgramVersion: { '1.2.3' }
         ] as ProgramVersion
         app.dockerImages.programVersion = mockedProgramVersion
+        File tmpDir = TestUtils.createTempDirectory()
+        File outputDir = new File(tmpDir, "output")
+        File workingDir = new File(tmpDir, "working")
         ProgramPaths mockedProgramPaths = [
-            getHubDockerOutputJsonPath: TestUtils.createTempDirectory().getAbsolutePath()
+            getHubDockerOutputJsonPath: outputDir.getAbsolutePath(),
+            getHubDockerWorkingDirPath: workingDir.getAbsolutePath()
         ] as ProgramPaths
         app.programPaths = mockedProgramPaths
         app.resultFile = [

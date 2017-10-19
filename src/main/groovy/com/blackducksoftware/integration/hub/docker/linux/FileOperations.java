@@ -74,4 +74,20 @@ public class FileOperations {
         }
         FileUtils.copyDirectory(srcDir, destDir);
     }
+
+    public static void removeFileOrDirQuietly(final String fileOrDirPath) {
+        try {
+            removeFileOrDir(fileOrDirPath);
+        } catch (final IOException e) {
+            logger.warn(String.format("Error removing working directory: %s", e.getMessage()));
+        }
+    }
+
+    public static void removeFileOrDir(final String fileOrDirPath) throws IOException {
+        logger.info(String.format("Removing working directory: %s", fileOrDirPath));
+        final File workingDirectory = new File(fileOrDirPath);
+        if (workingDirectory.exists()) {
+            FileUtils.deleteDirectory(workingDirectory);
+        }
+    }
 }
