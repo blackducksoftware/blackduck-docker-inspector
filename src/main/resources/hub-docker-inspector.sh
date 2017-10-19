@@ -11,7 +11,6 @@
 # your own DOCKER_INSPECTOR_TEMP_DIR in your environment and
 # *that* location will be used.
 DOCKER_INSPECTOR_TEMP_DIR=${DOCKER_INSPECTOR_TEMP_DIR:-/tmp/hub-docker-inspector}
-echo "******* DOCKER_INSPECTOR_TEMP_DIR: ${DOCKER_INSPECTOR_TEMP_DIR}"
 
 # If you want to pass any additional options to
 # curl, specify DOCKER_INSPECTOR_CURL_OPTS in your environment.
@@ -19,6 +18,10 @@ echo "******* DOCKER_INSPECTOR_TEMP_DIR: ${DOCKER_INSPECTOR_TEMP_DIR}"
 # DOCKER_INSPECTOR_CURL_OPTS=--proxy http://myproxy:3128
 DOCKER_INSPECTOR_CURL_OPTS=${DOCKER_INSPECTOR_CURL_OPTS:-}
 
+# DOCKER_INSPECTOR_LATEST_RELEASE_VERSION should be set in your
+# environment if you wish to use a version different
+# from LATEST.
+DOCKER_INSPECTOR_RELEASE_VERSION=${DOCKER_INSPECTOR_LATEST_RELEASE_VERSION}
 
 function printUsage() {
 	echo ""
@@ -55,16 +58,59 @@ err() {
 }
 
 function getLatestVersion() {
+	echo "*** DOCKER_INSPECTOR_TEMP_DIR: ${DOCKER_INSPECTOR_TEMP_DIR}"
 	VERSION_FILE_DESTINATION="${DOCKER_INSPECTOR_TEMP_DIR}/hub-docker-inspector-latest-commit-id.txt"
 	CURRENT_VERSION=""
 	if [ -f $VERSION_FILE_DESTINATION ]; then
+		echo "*** existing version file: ${VERSION_FILE_DESTINATION}"
 		CURRENT_VERSION=$( <$VERSION_FILE_DESTINATION )
+		echo "*** current version: ${CURRENT_VERSION}"
 	fi
 
+	mkdir -p "${DOCKER_INSPECTOR_TEMP_DIR}"
+	echo "executing: curl $DOCKER_INSPECTOR_CURL_OPTS -o $VERSION_FILE_DESTINATION https://blackducksoftware.github.io/hub-docker-inspector/latest-commit-id.txt"
 	curl $DOCKER_INSPECTOR_CURL_OPTS -o $VERSION_FILE_DESTINATION https://blackducksoftware.github.io/hub-docker-inspector/latest-commit-id.txt
 	LATEST_VERSION=$( <$VERSION_FILE_DESTINATION )
 	echo "The latest version of the hub-docker-inspector jar file: ${LATEST_VERSION}"
 	echo "The currently-installed version of the hub-docker-inspector jar file: ${CURRENT_VERSION}"
+	
+	##### TODO What is this doing??
+	if [ -z "${DOCKER_INSPECTOR_RELEASE_VERSION}" ]; then
+      DOCKER_INSPECTOR_SOURCE="http://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.blackducksoftware.integration&a=hub-docker-inspector&v=LATEST"
+      FILE_NAME=$(curl -Ls -w %{url_effective} -o /dev/null "http://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.blackducksoftware.integration&a=hub-docker-inspector&v=LATEST" | awk -F/ '{print $NF}')
+      echo "******* latest jar file on repository.sonatype.org is: ${FILE_NAME}; faking it by forcing it to hub-docker-inspector-4.0.0-SNAPSHOT.jar"
+      FILE_NAME=hub-docker-inspector-4.0.0-SNAPSHOT.jar
+      
+      DOCKER_INSPECTOR_DESTINATION="${DOCKER_INSPECTOR_TEMP_DIR}/${FILE_NAME}"
+    else
+      DOCKER_INSPECTOR_SOURCE="http://repo2.maven.org/maven2/com/blackducksoftware/integration/hub-docker-inspector/${DOCKER_INSPECTOR_RELEASE_VERSION}/hub-docker-inspector-${DOCKER_INSPECTOR_RELEASE_VERSION}.jar"
+      DOCKER_INSPECTOR_DESTINATION="${DOCKER_INSPECTOR_TEMP_DIR}/hub-docker-inspector-${DOCKER_INSPECTOR_RELEASE_VERSION}.jar"
+    fi
+    echo "will look for : ${DOCKER_INSPECTOR_SOURCE}"
+    
+	USE_REMOTE=1
+	if [ ! -f "${DOCKER_INSPECTOR_DESTINATION}" ]; then
+		echo "You don't have a hub-docker-inspector jar file at ${DOCKER_INSPECTOR_DESTINATION}, so it will be downloaded."
+	elif [ "$CURRENT_VERSION" != "$LATEST_VERSION" ] ; then
+		echo "${DOCKER_INSPECTOR_DESTINATION} is no longer the latest version; the newer version will be downloaded."
+	else
+		echo "${DOCKER_INSPECTOR_DESTINATION} is up-to-date."
+		USE_REMOTE=0
+	fi
+
+	if [ $USE_REMOTE -eq 1 ]; then
+		echo "Downloading ${DOCKER_INSPECTOR_SOURCE} from remote"
+		DOCKER_INSPECTOR_SOURCE="https://blackducksoftware.github.io/hub-docker-inspector/hub-docker-inspector-${version}.jar"
+		echo "******** Actually, faking it and copying jar from build/images/ubuntu/hub-docker-inspector/hub-docker-inspector-4.0.0-SNAPSHOT.jar"
+		cp build/images/ubuntu/hub-docker-inspector/hub-docker-inspector-4.0.0-SNAPSHOT.jar "${DOCKER_INSPECTOR_DESTINATION}"
+		######### curl ${DOCKER_INSPECTOR_CURL_OPTS} --fail -L -o "${DOCKER_INSPECTOR_DESTINATION}" "${DOCKER_INSPECTOR_SOURCE}"
+		if [[ $? -ne 0 ]]
+		then
+			err "Download of ${DOCKER_INSPECTOR_SOURCE} failed."
+			exit -1
+		fi
+		echo "saved ${DOCKER_INSPECTOR_SOURCE} to ${DOCKER_INSPECTOR_DESTINATION}"
+	fi
 }
 
 # Expand tilde
@@ -136,7 +182,7 @@ function preProcessOptions() {
 function pullJar {
 	log "Getting hub-docker-inspector.jar from github"
 	jarUrl="https://blackducksoftware.github.io/hub-docker-inspector/hub-docker-inspector-${version}.jar"
-	curl --fail -O  ${jarUrl}
+	curl $DOCKER_INSPECTOR_CURL_OPTS --fail -O  ${jarUrl}
 	curlStatus=$?
 	if [[ "${curlStatus}" != "0" ]]
 	then
@@ -198,7 +244,7 @@ fi
 
 log "jarPath: ${jarPath}"
 log "Options: ${options[*]}"
-java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" ${options[*]}
+################################### TBD TODO TEMP #### java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" ${options[*]}
 status=$?
 
 exit ${status}
