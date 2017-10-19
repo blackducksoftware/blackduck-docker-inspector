@@ -7,10 +7,10 @@
 # with your Hub connection details (hub.url, hub.username, and hub.password),
 # and Docker Hub connection details (docker.registry.username and docker.registry.password).
 
-# To override the default location of /tmp, specify
-# your own DOCKER_INSPECTOR_WORKING_DIR in your environment and
+# To override the default location of /tmp/hub-docker-inspector, specify
+# your own DOCKER_INSPECTOR_JAR_DIR in your environment and
 # *that* location will be used.
-DOCKER_INSPECTOR_WORKING_DIR=${DOCKER_INSPECTOR_WORKING_DIR:-/tmp/hub-docker-inspector}
+DOCKER_INSPECTOR_JAR_DIR=${DOCKER_INSPECTOR_JAR_DIR:-/tmp/hub-docker-inspector}
 
 # If you want to pass any additional options to
 # curl, specify DOCKER_INSPECTOR_CURL_OPTS in your environment.
@@ -58,8 +58,8 @@ err() {
 }
 
 function getLatestJar() {
-	log "Working dir: ${DOCKER_INSPECTOR_WORKING_DIR}"
-	versionFileDestinationFile="${DOCKER_INSPECTOR_WORKING_DIR}/hub-docker-inspector-latest-commit-id.txt"
+	log "Jar dir: ${DOCKER_INSPECTOR_JAR_DIR}"
+	versionFileDestinationFile="${DOCKER_INSPECTOR_JAR_DIR}/hub-docker-inspector-latest-commit-id.txt"
 	currentVersionCommitId=""
 	if [ -f $versionFileDestinationFile ]; then
 		log "Existing version commit ID file: ${versionFileDestinationFile}"
@@ -67,7 +67,7 @@ function getLatestJar() {
 		log "Current version commit ID: ${currentVersionCommitId}"
 	fi
 
-	mkdir -p "${DOCKER_INSPECTOR_WORKING_DIR}"
+	mkdir -p "${DOCKER_INSPECTOR_JAR_DIR}"
 	log "executing: curl $DOCKER_INSPECTOR_CURL_OPTS -o $versionFileDestinationFile https://blackducksoftware.github.io/hub-docker-inspector/latest-commit-id.txt"
 	curl $DOCKER_INSPECTOR_CURL_OPTS -o $versionFileDestinationFile https://blackducksoftware.github.io/hub-docker-inspector/latest-commit-id.txt
 	latestVersionCommitId=$( <$versionFileDestinationFile )
@@ -81,10 +81,10 @@ function getLatestJar() {
       echo "*** latest jar file on repository.sonatype.org is: ${selectedJarFilename}; faking it by forcing it to hub-docker-inspector-4.0.0-SNAPSHOT.jar"
       selectedJarFilename=hub-docker-inspector-4.0.0-SNAPSHOT.jar
       
-      downloadedJarPath="${DOCKER_INSPECTOR_WORKING_DIR}/${selectedJarFilename}"
+      downloadedJarPath="${DOCKER_INSPECTOR_JAR_DIR}/${selectedJarFilename}"
     else
       selectedJarUrl="http://repo2.maven.org/maven2/com/blackducksoftware/integration/hub-docker-inspector/${DOCKER_INSPECTOR_RELEASE_VERSION}/hub-docker-inspector-${DOCKER_INSPECTOR_RELEASE_VERSION}.jar"
-      downloadedJarPath="${DOCKER_INSPECTOR_WORKING_DIR}/hub-docker-inspector-${DOCKER_INSPECTOR_RELEASE_VERSION}.jar"
+      downloadedJarPath="${DOCKER_INSPECTOR_JAR_DIR}/hub-docker-inspector-${DOCKER_INSPECTOR_RELEASE_VERSION}.jar"
     fi
     echo "will look for : ${selectedJarUrl}"
     
@@ -240,8 +240,7 @@ fi
 log "jarPath: ${jarPath}"
 log "newJarPathAssignment: ${newJarPathAssignment}"
 log "Options: ${options[*]}"
-log "Working dir: ${DOCKER_INSPECTOR_WORKING_DIR}"
-export DOCKER_INSPECTOR_WORKING_DIR
+log "Jar dir: ${DOCKER_INSPECTOR_JAR_DIR}"
 java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" ${options[*]}
 status=$?
 

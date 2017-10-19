@@ -68,9 +68,6 @@ public class ProgramPaths {
     @Value("${working.dir.path:/tmp/hub-docker-inspector}")
     private String hostWorkingDirPath;
 
-    @Value("${DOCKER_INSPECTOR_WORKING_DIR:}")
-    private String hostWorkingDirPathEnvVarValue;
-
     @Value("${hub.codelocation.prefix}")
     private String codeLocationPrefix;
 
@@ -108,10 +105,6 @@ public class ProgramPaths {
     }
 
     private String getProgramDirPathHost() {
-        if (!StringUtils.isBlank(hostWorkingDirPathEnvVarValue)) {
-            logger.debug("Working dir: Using env variable");
-            hostWorkingDirPath = hostWorkingDirPathEnvVarValue;
-        }
         if (!hostWorkingDirPath.endsWith("/")) {
             hostWorkingDirPath = String.format("%s/", hostWorkingDirPath);
         }
