@@ -100,7 +100,6 @@ function getLatestJar() {
 
 	if [ $mustDownloadJar -eq 1 ]; then
 		echo "Downloading ${selectedJarUrl} from remote"
-		selectedJarUrl="https://blackducksoftware.github.io/hub-docker-inspector/hub-docker-inspector-${version}.jar"
 		echo "*** Actually, faking it and copying jar from /Users/sbillings/Documents/git/hub-docker-inspector/build/images/ubuntu/hub-docker-inspector/hub-docker-inspector-4.0.0-SNAPSHOT.jar"
 		cp /Users/sbillings/Documents/git/hub-docker-inspector/build/images/ubuntu/hub-docker-inspector/hub-docker-inspector-4.0.0-SNAPSHOT.jar "${downloadedJarPath}"
 		######### curl ${DOCKER_INSPECTOR_CURL_OPTS} --fail -L -o "${downloadedJarPath}" "${selectedJarUrl}"
@@ -178,20 +177,6 @@ function preProcessOptions() {
 	done
 }
 
-# Pull the latest jar down to the current working directory
-function pullJar {
-	### TODO remove?
-	log "Getting hub-docker-inspector.jar from github"
-	jarUrl="https://blackducksoftware.github.io/hub-docker-inspector/hub-docker-inspector-${version}.jar"
-	curl $DOCKER_INSPECTOR_CURL_OPTS --fail -O  ${jarUrl}
-	curlStatus=$?
-	if [[ "${curlStatus}" != "0" ]]
-	then
-		err "${curlStatus} fetching ${jarUrl}. If you have the hub-docker-inspector .jar file, you can set the jar.path property to the path to the .jar file"
-		exit ${curlStatus}
-	fi
-}
-
 ##################
 # Start script
 ##################
@@ -221,8 +206,8 @@ fi
 if [ \( "$1" = -j \) -o \( "$1" = --pulljar \) ]
 then
 	### TBD TODO Need to think about this!
-    pullJar
-    exit 0
+    err "This feature has been temporarily disabled"
+    exit -1
 fi
 
 preProcessOptions "$@"
