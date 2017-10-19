@@ -157,9 +157,11 @@ public class ProgramPaths {
         return hubDockerJarPathActual;
     }
 
-    public String normalizeJarFilename(final String hostJarPath) throws IOException {
+    // TODO not sure this class should be copying files
+    public String copyJarToWorkingDir(final String hostJarPath) throws IOException {
         final File fromFile = new File(hostJarPath);
         final File toFile = new File(getHubDockerTempDirPath() + JAR_FILENAME);
+        logger.debug(String.format("copyJarToWorkingDir(): Copying %s to %s", fromFile.getAbsolutePath(), toFile.getAbsolutePath()));
         FileUtils.copyFile(fromFile, toFile);
         return toFile.getAbsolutePath();
     }

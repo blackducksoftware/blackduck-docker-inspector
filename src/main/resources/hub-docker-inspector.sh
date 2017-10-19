@@ -81,20 +81,20 @@ function getLatestJar() {
       echo "*** latest jar file on repository.sonatype.org is: ${selectedJarFilename}; faking it by forcing it to hub-docker-inspector-4.0.0-SNAPSHOT.jar"
       selectedJarFilename=hub-docker-inspector-4.0.0-SNAPSHOT.jar
       
-      selectedJarPath="${DOCKER_INSPECTOR_TEMP_DIR}/${selectedJarFilename}"
+      downloadedJarPath="${DOCKER_INSPECTOR_TEMP_DIR}/${selectedJarFilename}"
     else
       selectedJarUrl="http://repo2.maven.org/maven2/com/blackducksoftware/integration/hub-docker-inspector/${DOCKER_INSPECTOR_RELEASE_VERSION}/hub-docker-inspector-${DOCKER_INSPECTOR_RELEASE_VERSION}.jar"
-      selectedJarPath="${DOCKER_INSPECTOR_TEMP_DIR}/hub-docker-inspector-${DOCKER_INSPECTOR_RELEASE_VERSION}.jar"
+      downloadedJarPath="${DOCKER_INSPECTOR_TEMP_DIR}/hub-docker-inspector-${DOCKER_INSPECTOR_RELEASE_VERSION}.jar"
     fi
     echo "will look for : ${selectedJarUrl}"
     
 	mustDownloadJar=1
-	if [ ! -f "${selectedJarPath}" ]; then
-		echo "You don't have a hub-docker-inspector jar file at ${selectedJarPath}, so it will be downloaded."
+	if [ ! -f "${downloadedJarPath}" ]; then
+		echo "You don't have a hub-docker-inspector jar file at ${downloadedJarPath}, so it will be downloaded."
 	elif [ "$currentVersionCommitId" != "$latestVersionCommitId" ] ; then
-		echo "${selectedJarPath} is no longer the latest version; the newer version will be downloaded."
+		echo "${downloadedJarPath} is no longer the latest version; the newer version will be downloaded."
 	else
-		echo "${selectedJarPath} is up-to-date."
+		echo "${downloadedJarPath} is up-to-date."
 		mustDownloadJar=0
 	fi
 
@@ -102,14 +102,14 @@ function getLatestJar() {
 		echo "Downloading ${selectedJarUrl} from remote"
 		selectedJarUrl="https://blackducksoftware.github.io/hub-docker-inspector/hub-docker-inspector-${version}.jar"
 		echo "*** Actually, faking it and copying jar from build/images/ubuntu/hub-docker-inspector/hub-docker-inspector-4.0.0-SNAPSHOT.jar"
-		cp build/images/ubuntu/hub-docker-inspector/hub-docker-inspector-4.0.0-SNAPSHOT.jar "${selectedJarPath}"
-		######### curl ${DOCKER_INSPECTOR_CURL_OPTS} --fail -L -o "${selectedJarPath}" "${selectedJarUrl}"
+		cp build/images/ubuntu/hub-docker-inspector/hub-docker-inspector-4.0.0-SNAPSHOT.jar "${downloadedJarPath}"
+		######### curl ${DOCKER_INSPECTOR_CURL_OPTS} --fail -L -o "${downloadedJarPath}" "${selectedJarUrl}"
 		if [[ $? -ne 0 ]]
 		then
 			err "Download of ${selectedJarUrl} failed."
 			exit -1
 		fi
-		log "Saved ${selectedJarUrl} to ${selectedJarPath}"
+		log "Saved ${selectedJarUrl} to ${downloadedJarPath}"
 	fi
 }
 
@@ -130,11 +130,11 @@ function preProcessOptions() {
 	do
 		if [[ "$cmdlinearg" == --jar.path=* ]]
 		then
-			jarPath=$(echo "$cmdlinearg" | cut -d '=' -f 2)
-			jarPath=$(expandPath "${jarPath}")
-			jarPathEscaped=$(escapeSpaces "${jarPath}")
-			options[${cmdlineargindex}]="--jar.path=${jarPathEscaped}"
-			jarPathAlreadySet=true
+			userSpecifiedJarPath=$(echo "$cmdlinearg" | cut -d '=' -f 2)
+			userSpecifiedJarPath=$(expandPath "${userSpecifiedJarPath}")
+			userSpecifiedJarPathEscaped=$(escapeSpaces "${userSpecifiedJarPath}")
+			options[${cmdlineargindex}]="--jar.path=${userSpecifiedJarPathEscaped}"
+			jarPathAlreadySpecifiedOnCmdLine=true
 		elif [[ "$cmdlinearg" == --spring.config.location=* ]]
 		then
 			# Once IDETECT-339 is done/released, this clause can go away
@@ -196,10 +196,8 @@ function pullJar {
 ##################
 version="@VERSION@"
 encodingSetting="-Dfile.encoding=UTF-8"
-jarPath=""
-jarPathAlreadySet=false
-
-getLatestJar
+userSpecifiedJarPath=""
+jarPathAlreadySpecifiedOnCmdLine=false
 
 if [ $# -lt 1 ]
 then
@@ -221,28 +219,29 @@ fi
 
 if [ \( "$1" = -j \) -o \( "$1" = --pulljar \) ]
 then
+	### TBD TODO Need to think about this!
     pullJar
     exit 0
 fi
 
 preProcessOptions "$@"
 
-if [ -z "${jarPath}" ]
+if [ -z "${userSpecifiedJarPath}" ]
 then
-	pushd "${DOCKER_INSPECTOR_TEMP_DIR}" > /dev/null
-	pullJar
-	popd > /dev/null
-	jarPath="${DOCKER_INSPECTOR_TEMP_DIR}/hub-docker-inspector-${version}.jar"
+	getLatestJar
+	jarPath="${downloadedJarPath}"
+else
+	jarPath="${userSpecifiedJarPath}"
 fi
-log "Jar path: ${jarPath}"
 
 newJarPathAssignment=""
-if [[ $jarPathAlreadySet == false ]]
+if [[ $jarPathAlreadySpecifiedOnCmdLine == false ]]
 then
 	newJarPathAssignment="--jar.path=${jarPath}"
 fi
 
 log "jarPath: ${jarPath}"
+log "newJarPathAssignment: ${newJarPathAssignment}"
 log "Options: ${options[*]}"
 java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" ${options[*]}
 status=$?
