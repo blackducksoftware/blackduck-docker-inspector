@@ -83,18 +83,11 @@ public abstract class Extractor {
 
     public void createBdioComponent(final MutableDependencyGraph dependencies, final String name, final String version, final String externalId, final String arch) {
         for (final String forge : forges) {
-            // final BdioComponent bdioComponent = bdioNodeFactory.createComponent(name, version, getComponentBdioId(forge, name, version), forge, externalId);
-            // components.add(bdioComponent);
             final Forge forgeObj = new Forge(forge, "/");
             final ExternalId extId = (new SimpleBdioFactory()).createArchitectureExternalId(forgeObj, name, version, arch);
             final Dependency dep = (new SimpleBdioFactory()).createDependency(name, version, extId); // createDependencyNode(forge, name, version, arch);
             logger.trace(String.format("adding %s as child to dependency node tree; dataId: %s", dep.name, dep.externalId.createBdioId()));
             dependencies.addChildToRoot(dep);
         }
-    }
-
-    // TODO delete dead code and comments
-    private String getComponentBdioId(final String forge, final String name, final String version) {
-        return String.format("data:%s/%s/%s", forge, name, version);
     }
 }

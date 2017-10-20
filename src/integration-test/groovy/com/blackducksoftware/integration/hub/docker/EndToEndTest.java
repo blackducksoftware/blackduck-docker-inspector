@@ -99,7 +99,6 @@ public class EndToEndTest {
         test(imageForBdioFilename, pkgMgrPathString, null, null, tagForBdioFilename, inspectTarget, requireBdioMatch);
     }
 
-    // TODO arg order is weird
     private void testTar(final String tarFilename, final String imageForBdioFilename, final String repo, final String tag, final String tagForBdioFilename, final String pkgMgrPathString, final boolean requireBdioMatch)
             throws IOException, InterruptedException {
         final String inspectTarget = String.format(String.format("build/images/test/%s", tarFilename));
@@ -131,7 +130,6 @@ public class EndToEndTest {
         return outputTarFile;
     }
 
-    // TODO arg order is weird
     private void test(final String imageForBdioFilename, final String pkgMgrPathString, final String repo, final String tag, final String tagForBdioFilename, final String inspectTarget, final boolean requireBdioMatch)
             throws IOException, InterruptedException {
         final String workingDirPath = "test/endToEnd";

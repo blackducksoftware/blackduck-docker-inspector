@@ -23,13 +23,9 @@
  */
 package com.blackducksoftware.integration.hub.docker;
 
-import java.io.File;
-import java.io.IOException;
-
 import javax.annotation.PostConstruct;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -123,7 +119,7 @@ public class ProgramPaths {
         }
         logger.debug(String.format("hubDockerPgmDirPath: %s", hubDockerPgmDirPath));
         if (StringUtils.isBlank(hubDockerJarPathHost)) {
-            hubDockerJarPathHost = givenJarPath.replaceAll("%20", " ");
+            hubDockerJarPathHost = unEscape(givenJarPath);
         }
         hubDockerPgmDirPathContainer = getProgramDirPathContainer();
         hubDockerConfigDirPath = hubDockerPgmDirPath + CONFIG_DIR;
@@ -137,6 +133,10 @@ public class ProgramPaths {
         hubDockerOutputPathContainer = getProgramDirPathContainer() + OUTPUT_DIR;
         hubDockerResultPath = hubDockerOutputPath + RESULT_JSON_FILENAME;
         hubDockerJarPathActual = deriveJarPath();
+    }
+
+    public String unEscape(final String origString) {
+        return origString.replaceAll("%20", " ");
     }
 
     public String getUserOutputDir() {
@@ -155,15 +155,6 @@ public class ProgramPaths {
         final String hubDockerJarPathActual = qualifiedJarPathString.substring(startIndex, endIndex);
         logger.debug(String.format("hubDockerJarPathActual: %s", hubDockerJarPathActual));
         return hubDockerJarPathActual;
-    }
-
-    // TODO not sure this class should be copying files
-    public String copyJarToWorkingDir(final String hostJarPath) throws IOException {
-        final File fromFile = new File(hostJarPath);
-        final File toFile = new File(getHubDockerTempDirPath() + JAR_FILENAME);
-        logger.debug(String.format("copyJarToWorkingDir(): Copying %s to %s", fromFile.getAbsolutePath(), toFile.getAbsolutePath()));
-        FileUtils.copyFile(fromFile, toFile);
-        return toFile.getAbsolutePath();
     }
 
     public String getQualifiedJarPath() {

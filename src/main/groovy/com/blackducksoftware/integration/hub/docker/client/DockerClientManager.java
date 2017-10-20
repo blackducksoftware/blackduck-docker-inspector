@@ -165,9 +165,7 @@ public class DockerClientManager {
         final String containerId = ensureContainerRunning(dockerClient, imageId, extractorContainerName, hubPasswordString);
         setPropertiesInSubContainer(dockerClient, containerId, tarFilePathInSubContainer, tarFileDirInSubContainer, dockerTarFile, targetImage, targetImageRepo, targetImageTag);
         if (copyJar) {
-            // TODO: why copy twice??
-            final String jarPathInWorkingDir = programPaths.copyJarToWorkingDir(programPaths.getHubDockerJarPathHost());
-            copyFileToContainer(dockerClient, containerId, jarPathInWorkingDir, programPaths.getHubDockerPgmDirPathContainer());
+            copyFileToContainer(dockerClient, containerId, programPaths.getHubDockerJarPathHost(), programPaths.getHubDockerPgmDirPathContainer());
         }
 
         final List<String> cmd = new ArrayList<>();
