@@ -130,6 +130,10 @@ function pull_image_if_necessary() {
   fi
 }
 
+# Validate directory is writable and that docker exists and is valid for this User
+# additionally, validate 3 parameters: image_name, username, and host
+# if dryrun then adjust validations accordingly
+#
 function perform_validations() {
   if [ ! -w "${THISDIR}" ]; then
     echo "Directory ${THISDIR} is not writable!"
@@ -137,10 +141,20 @@ function perform_validations() {
     echo "Please fix the directory permissions and try again"
     exit 10
   fi
-  local opt_count=$1
-  if [ $opt_count -lt 3 ]; then
-    "All required options not present!"
+  if [ -z "${docker_image}" ]; then
+    echo "Image name is required, but is not present!"
     usage
+  fi
+  # If this is not a dry run, then ensure that user and host are provided
+  if [ -z "${dry_run}" ]; then
+    if [ -z "${hub_user}" ]; then
+      echo "Username is required, but is not present"
+      usage
+    fi
+    if [ -z "${hub_host}" ]; then
+      echo "Specifying the Hub host is required, but is not present"
+      usage
+    fi
   fi
   if [ -z "$(which docker)" ]; then
     echo "Docker is required to be in your PATH and it cannot be found."
@@ -156,6 +170,11 @@ function perform_validations() {
   fi
 }
 
+
+dry_run=""
+hub_host=""
+docker_image=""
+hub_user=""
 function main() {
   cp "${EXECUTABLE_SHELL_SCRIPT}" "${DOCKER_SCAN_SHELL_SCRIPT}"
   local hub_port="443"
@@ -166,26 +185,22 @@ function main() {
   local do_scan=1
   local do_inspect=1
   local pull_from_remote=1
-  local option_count=0
   local inspector_version=
   while [[ $# -ge 1 ]]; do
     opt="$1"
     case $opt in
       --image)
-        local docker_image="$2"
+        docker_image="$2"
         shift
-        ((option_count++))
         ;;
       --host)
-        local hub_host="$2"
+        hub_host="$2"
         shift
-        ((option_count++))
         ;;
       --username)
-        local hub_user="$2"
+        hub_user="--username $2"
         shift
-        ((option_count++))
-	;;
+	    ;;
       --port)
         hub_port="$2"
         shift
@@ -200,6 +215,10 @@ function main() {
         ;;
       --name)
         name_arg="$2"
+        shift
+        ;;
+      --dryRunWriteDir)
+        dry_run="--dryRunWriteDir $2"
         shift
         ;;
       --project)
@@ -226,7 +245,7 @@ function main() {
     shift
   done
 
-  perform_validations $option_count
+  perform_validations
 
   readonly HUB_URL="${hub_scheme}://${hub_host}:${hub_port}/"
   if [ -z "$hub_project" ]; then
@@ -265,15 +284,23 @@ function main() {
     pull_image_if_necessary $docker_image $hub_version
   fi
 
+  local cli_status=0
   docker save -o "${IMAGE_TARFILE}" "$docker_image" 2>/dev/null
   if [ $? -eq 0 ]; then
     if [ $do_scan -eq 1 ]; then
       echo "Perform scan:"
-      "${THISDIR}"/scan.cli.sh --host $hub_host --port $hub_port --scheme $hub_scheme --username $hub_user --project "$hub_project" --release "$hub_version" $name_arg $optional_args "${IMAGE_TARFILE}"
+      local hub_parameters=""
+      if [ -n "${hub_host}" ]; then
+        hub_parameters="--host ${hub_host} --port $hub_port --scheme $hub_scheme"
+      fi
+      "${THISDIR}"/scan.cli.sh $hub_parameters $hub_user $dry_run --project "$hub_project" --release "$hub_version" $name_arg $optional_args "${IMAGE_TARFILE}"
+      cli_status=$?
     fi
     if [ $do_inspect -eq 1 ]; then
-      echo "Conduct  Inspection:"
-      "${INSPECTOR_SHELL_SCRIPT}" --hub.username=$hub_user --hub.url=$HUB_URL --hub.project.name="$hub_project" --hub.project.version="$hub_version" "${IMAGE_TARFILE}"
+      if [ $cli_status -eq 0 ]; then
+        echo "Conduct  Inspection:"
+        "${INSPECTOR_SHELL_SCRIPT}" --hub.username=$hub_user --hub.url=$HUB_URL --hub.project.name="$hub_project" --hub.project.version="$hub_version" "${IMAGE_TARFILE}"
+      fi
     fi
   else
     echo "Unable to save: ${IMAGE_TARFILE} to a tar file."
