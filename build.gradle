@@ -471,7 +471,7 @@ task customSigning(dependsOn: ['javadocJar', 'sourcesJar']) {
         println "Signing Jar files"
         signing.sign(jarFiles)
 
-        pom {
+        pom() {
             project {
                 name rootProject.name
                 description rootProject.description
