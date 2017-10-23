@@ -18,10 +18,10 @@ DOCKER_INSPECTOR_JAR_DIR=${DOCKER_INSPECTOR_JAR_DIR:-/tmp/hub-docker-inspector}
 # DOCKER_INSPECTOR_CURL_OPTS=--proxy http://myproxy:3128
 DOCKER_INSPECTOR_CURL_OPTS=${DOCKER_INSPECTOR_CURL_OPTS:-}
 
-# DOCKER_INSPECTOR_LATEST_RELEASE_VERSION should be set in your
+# DOCKER_INSPECTOR_VERSION should be set in your
 # environment if you wish to use a version different
 # from LATEST.
-DOCKER_INSPECTOR_RELEASE_VERSION=${DOCKER_INSPECTOR_LATEST_RELEASE_VERSION}
+jarVersion=${DOCKER_INSPECTOR_VERSION}
 
 latestReleasedJarUrl='https://updates.suite.blackducksoftware.com/bdosvr/com/blackducksoftware/integration/hub-docker-inspector/\[RELEASE\]/hub-docker-inspector-\[RELEASE\].jar'
 
@@ -64,6 +64,7 @@ function getLatestJar() {
 	versionFileDestinationFile="${DOCKER_INSPECTOR_JAR_DIR}/hub-docker-inspector-latest-commit-id.txt"
 	currentVersionCommitId=""
 	#### TODO maybe get this working later... For now: never assume jar is up to date
+	#### Disabled because "have latest" determination not working when user specifies a jar version
 #	if [ -f $versionFileDestinationFile ]; then
 #		log "Existing version commit ID file: ${versionFileDestinationFile}"
 #		currentVersionCommitId=$( <$versionFileDestinationFile )
@@ -74,32 +75,33 @@ function getLatestJar() {
 	log "executing: curl $DOCKER_INSPECTOR_CURL_OPTS -o $versionFileDestinationFile https://blackducksoftware.github.io/hub-docker-inspector/latest-commit-id.txt"
 	curl $DOCKER_INSPECTOR_CURL_OPTS -o $versionFileDestinationFile https://blackducksoftware.github.io/hub-docker-inspector/latest-commit-id.txt
 	latestVersionCommitId=$( <$versionFileDestinationFile )
-	echo "The latest version of the hub-docker-inspector jar file: ${latestVersionCommitId}"
-	echo "The currently-installed version of the hub-docker-inspector jar file: ${currentVersionCommitId}"
+	log "The latest version of the hub-docker-inspector jar file: ${latestVersionCommitId}"
+	log "The currently-installed version of the hub-docker-inspector jar file: ${currentVersionCommitId}"
 	
 	# If the user specified a version: get that
-	if [ -z "${DOCKER_INSPECTOR_RELEASE_VERSION}" ]; then
+	if [ -z "${jarVersion}" ]; then
       selectedJarUrl="${latestReleasedJarUrl}"
-      echo "*** getting latestReleasedVersion"
-      #####latestReleasedVersion=$(curl 'http://prd-eng-repo01.dc2.lan:8181/artifactory/api/search/latestVersion?g=com.blackducksoftware.integration&a=hub-docker-inspector')
-      latestReleasedFilename=$(curl --head 'https://updates.suite.blackducksoftware.com/bdosvr/com/blackducksoftware/integration/hub-docker-inspector/\[RELEASE\]/hub-docker-inspector-\[RELEASE\].jar' | fgrep 'X-Artifactory-Filename' | cut -d' ' -f2)
-      echo "*** latestReleasedFilename: ${latestReleasedFilename}"
+      log "Getting name of latest released jar file"
+      latestReleasedFilename=$(curl --head 'https://updates.suite.blackducksoftware.com/bdosvr/com/blackducksoftware/integration/hub-docker-inspector/\[RELEASE\]/hub-docker-inspector-\[RELEASE\].jar' | fgrep 'X-Artifactory-Filename' | cut -d' ' -f2 | tr -d '\r\n')
+      log "Latest released jar filename: ${latestReleasedFilename}"
+      echo "${latestReleasedFilename}" | od -xc
       selectedJarFilename="${latestReleasedFilename}"
       downloadedJarPath="${DOCKER_INSPECTOR_JAR_DIR}/${selectedJarFilename}"
     else
-      selectedJarUrl="https://updates.suite.blackducksoftware.com/bdosvr/com/blackducksoftware/integration/hub-docker-inspector/${DOCKER_INSPECTOR_RELEASE_VERSION}/hub-docker-inspector-${DOCKER_INSPECTOR_RELEASE_VERSION}.jar"
-      downloadedJarPath="${DOCKER_INSPECTOR_JAR_DIR}/hub-docker-inspector-${DOCKER_INSPECTOR_RELEASE_VERSION}.jar"
+      log "Will download hub-docker-inspector-${jarVersion}.jar"
+      selectedJarUrl="https://updates.suite.blackducksoftware.com/bdosvr/com/blackducksoftware/integration/hub-docker-inspector/${jarVersion}/hub-docker-inspector-${jarVersion}.jar"
+      downloadedJarPath="${DOCKER_INSPECTOR_JAR_DIR}/hub-docker-inspector-${jarVersion}.jar"
     fi
-    echo "will look for : ${selectedJarUrl}"
-    echo "*** downloadedJarPath: ${downloadedJarPath}"
+    log "Will download from: ${selectedJarUrl}"
+    log "                to: ${downloadedJarPath}"
     
 	mustDownloadJar=1
 	if [ ! -f "${downloadedJarPath}" ]; then
-		echo "You don't have a hub-docker-inspector jar file at ${downloadedJarPath}, so it will be downloaded."
+		log "You don't have a hub-docker-inspector jar file at ${downloadedJarPath}, so it will be downloaded."
 	elif [ "$currentVersionCommitId" != "$latestVersionCommitId" ] ; then
-		echo "${downloadedJarPath} is no longer the latest version; the newer version will be downloaded."
+		log "${downloadedJarPath} needs to be downloaded."
 	else
-		echo "${downloadedJarPath} is up-to-date."
+		log "${downloadedJarPath} is up-to-date."
 		mustDownloadJar=0
 	fi
 	
