@@ -23,7 +23,7 @@ DOCKER_INSPECTOR_CURL_OPTS=${DOCKER_INSPECTOR_CURL_OPTS:-}
 # from LATEST.
 DOCKER_INSPECTOR_RELEASE_VERSION=${DOCKER_INSPECTOR_LATEST_RELEASE_VERSION}
 
-latestReleasedJarUrl='http://prd-eng-repo01.dc2.lan:8181/artifactory/bds-integrations/com/blackducksoftware/integration/hub-docker-inspector/\[RELEASE\]/hub-docker-inspector-\[RELEASE\].jar'
+latestReleasedJarUrl='https://updates.suite.blackducksoftware.com/bdosvr/com/blackducksoftware/integration/hub-docker-inspector/\[RELEASE\]/hub-docker-inspector-\[RELEASE\].jar'
 
 function printUsage() {
 	echo ""
@@ -80,11 +80,14 @@ function getLatestJar() {
 	# If the user specified a version: get that
 	if [ -z "${DOCKER_INSPECTOR_RELEASE_VERSION}" ]; then
       selectedJarUrl="${latestReleasedJarUrl}"
-      latestReleasedVersion=$(curl 'http://prd-eng-repo01.dc2.lan:8181/artifactory/api/search/latestVersion?g=com.blackducksoftware.integration&a=hub-docker-inspector')
-      selectedJarFilename=hub-docker-inspector-${latestReleasedVersion}.jar
+      echo "*** getting latestReleasedVersion"
+      #####latestReleasedVersion=$(curl 'http://prd-eng-repo01.dc2.lan:8181/artifactory/api/search/latestVersion?g=com.blackducksoftware.integration&a=hub-docker-inspector')
+      latestReleasedFilename=$(curl --head 'https://updates.suite.blackducksoftware.com/bdosvr/com/blackducksoftware/integration/hub-docker-inspector/\[RELEASE\]/hub-docker-inspector-\[RELEASE\].jar' | fgrep 'X-Artifactory-Filename' | cut -d' ' -f2)
+      echo "*** latestReleasedFilename: ${latestReleasedFilename}"
+      selectedJarFilename="${latestReleasedFilename}"
       downloadedJarPath="${DOCKER_INSPECTOR_JAR_DIR}/${selectedJarFilename}"
     else
-      selectedJarUrl="http://prd-eng-repo01.dc2.lan:8181/artifactory/bds-integrations/com/blackducksoftware/integration/hub-docker-inspector/${DOCKER_INSPECTOR_RELEASE_VERSION}/hub-docker-inspector-${DOCKER_INSPECTOR_RELEASE_VERSION}.jar"
+      selectedJarUrl="https://updates.suite.blackducksoftware.com/bdosvr/com/blackducksoftware/integration/hub-docker-inspector/${DOCKER_INSPECTOR_RELEASE_VERSION}/hub-docker-inspector-${DOCKER_INSPECTOR_RELEASE_VERSION}.jar"
       downloadedJarPath="${DOCKER_INSPECTOR_JAR_DIR}/hub-docker-inspector-${DOCKER_INSPECTOR_RELEASE_VERSION}.jar"
     fi
     echo "will look for : ${selectedJarUrl}"
