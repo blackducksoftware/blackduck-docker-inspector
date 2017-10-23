@@ -23,7 +23,7 @@ DOCKER_INSPECTOR_CURL_OPTS=${DOCKER_INSPECTOR_CURL_OPTS:-}
 # from LATEST.
 DOCKER_INSPECTOR_RELEASE_VERSION=${DOCKER_INSPECTOR_LATEST_RELEASE_VERSION}
 
-latestReleasedJarUrl="http://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.blackducksoftware.integration&a=hub-docker-inspector&v=LATEST"
+latestReleasedJarUrl='http://prd-eng-repo01.dc2.lan:8181/artifactory/bds-integrations/com/blackducksoftware/integration/hub-docker-inspector/\[RELEASE\]/hub-docker-inspector-\[RELEASE\].jar'
 
 function printUsage() {
 	echo ""
@@ -63,11 +63,12 @@ function getLatestJar() {
 	log "Jar dir: ${DOCKER_INSPECTOR_JAR_DIR}"
 	versionFileDestinationFile="${DOCKER_INSPECTOR_JAR_DIR}/hub-docker-inspector-latest-commit-id.txt"
 	currentVersionCommitId=""
-	if [ -f $versionFileDestinationFile ]; then
-		log "Existing version commit ID file: ${versionFileDestinationFile}"
-		currentVersionCommitId=$( <$versionFileDestinationFile )
-		log "Current version commit ID: ${currentVersionCommitId}"
-	fi
+	#### TODO maybe get this working later... For now: never assume jar is up to date
+#	if [ -f $versionFileDestinationFile ]; then
+#		log "Existing version commit ID file: ${versionFileDestinationFile}"
+#		currentVersionCommitId=$( <$versionFileDestinationFile )
+#		log "Current version commit ID: ${currentVersionCommitId}"
+#	fi
 
 	mkdir -p "${DOCKER_INSPECTOR_JAR_DIR}"
 	log "executing: curl $DOCKER_INSPECTOR_CURL_OPTS -o $versionFileDestinationFile https://blackducksoftware.github.io/hub-docker-inspector/latest-commit-id.txt"
@@ -79,16 +80,15 @@ function getLatestJar() {
 	# If the user specified a version: get that
 	if [ -z "${DOCKER_INSPECTOR_RELEASE_VERSION}" ]; then
       selectedJarUrl="${latestReleasedJarUrl}"
-      selectedJarFilename=$(curl -Ls -w %{url_effective} -o /dev/null "http://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.blackducksoftware.integration&a=hub-docker-inspector&v=LATEST" | awk -F/ '{print $NF}')
-      echo "*** latest jar file on repository.sonatype.org is: ${selectedJarFilename}; faking it by forcing it to hub-docker-inspector-4.0.0-SNAPSHOT.jar"
-      selectedJarFilename=hub-docker-inspector-4.0.0-SNAPSHOT.jar
-      
+      latestReleasedVersion=$(curl 'http://prd-eng-repo01.dc2.lan:8181/artifactory/api/search/latestVersion?g=com.blackducksoftware.integration&a=hub-docker-inspector')
+      selectedJarFilename=hub-docker-inspector-${latestReleasedVersion}.jar
       downloadedJarPath="${DOCKER_INSPECTOR_JAR_DIR}/${selectedJarFilename}"
     else
-      selectedJarUrl="http://repo2.maven.org/maven2/com/blackducksoftware/integration/hub-docker-inspector/${DOCKER_INSPECTOR_RELEASE_VERSION}/hub-docker-inspector-${DOCKER_INSPECTOR_RELEASE_VERSION}.jar"
+      selectedJarUrl="http://prd-eng-repo01.dc2.lan:8181/artifactory/bds-integrations/com/blackducksoftware/integration/hub-docker-inspector/${DOCKER_INSPECTOR_RELEASE_VERSION}/hub-docker-inspector-${DOCKER_INSPECTOR_RELEASE_VERSION}.jar"
       downloadedJarPath="${DOCKER_INSPECTOR_JAR_DIR}/hub-docker-inspector-${DOCKER_INSPECTOR_RELEASE_VERSION}.jar"
     fi
     echo "will look for : ${selectedJarUrl}"
+    echo "*** downloadedJarPath: ${downloadedJarPath}"
     
 	mustDownloadJar=1
 	if [ ! -f "${downloadedJarPath}" ]; then
@@ -99,12 +99,9 @@ function getLatestJar() {
 		echo "${downloadedJarPath} is up-to-date."
 		mustDownloadJar=0
 	fi
-
+	
 	if [ $mustDownloadJar -eq 1 ]; then
-		echo "Downloading ${selectedJarUrl} from remote"
-		echo "*** Actually, faking it and copying jar from /Users/sbillings/Documents/git/hub-docker-inspector/build/images/ubuntu/hub-docker-inspector/hub-docker-inspector-4.0.0-SNAPSHOT.jar"
-		cp /Users/sbillings/Documents/git/hub-docker-inspector/build/images/ubuntu/hub-docker-inspector/hub-docker-inspector-4.0.0-SNAPSHOT.jar "${downloadedJarPath}"
-		######### curl ${DOCKER_INSPECTOR_CURL_OPTS} --fail -L -o "${downloadedJarPath}" "${selectedJarUrl}"
+		curl ${DOCKER_INSPECTOR_CURL_OPTS} --fail -L -o "${downloadedJarPath}" "${selectedJarUrl}"
 		if [[ $? -ne 0 ]]
 		then
 			err "Download of ${selectedJarUrl} failed."
