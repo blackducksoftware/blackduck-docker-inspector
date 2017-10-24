@@ -79,9 +79,7 @@ function getLatestJar() {
 	# If the user specified a version: get that
 	if [ -z "${jarVersion}" ]; then
       selectedJarUrl="${latestReleasedJarUrl}"
-      log "Getting name of latest released jar file"
-      latestReleasedFilename=$(curl --head 'https://updates.suite.blackducksoftware.com/bdosvr/com/blackducksoftware/integration/hub-docker-inspector/\[RELEASE\]/hub-docker-inspector-\[RELEASE\].jar' | fgrep 'X-Artifactory-Filename' | cut -d' ' -f2 | tr -d '\r\n')
-      log "Latest released jar filename: ${latestReleasedFilename}"
+      deriveLatestReleasedFilename
       selectedJarFilename="${latestReleasedFilename}"
       downloadedJarPath="${DOCKER_INSPECTOR_JAR_DIR}/${selectedJarFilename}"
     else
@@ -112,6 +110,13 @@ function getLatestJar() {
 		fi
 		log "Saved ${selectedJarUrl} to ${downloadedJarPath}"
 	fi
+}
+
+#
+function deriveLatestReleasedFilename() {
+	log "Getting name of latest released jar file"
+    latestReleasedFilename=$(curl --head 'https://updates.suite.blackducksoftware.com/bdosvr/com/blackducksoftware/integration/hub-docker-inspector/\[RELEASE\]/hub-docker-inspector-\[RELEASE\].jar' | fgrep 'X-Artifactory-Filename' | cut -d' ' -f2 | tr -d '\r\n')
+    log "Latest released jar filename: ${latestReleasedFilename}"
 }
 
 # Expand tilde
@@ -207,13 +212,15 @@ fi
 
 if [ \( "$1" = -j \) -o \( "$1" = --pulljar \) ]
 then
-	curl ${DOCKER_INSPECTOR_CURL_OPTS} --fail -L -O "${latestReleasedJarUrl}"
+	deriveLatestReleasedFilename
+	curl ${DOCKER_INSPECTOR_CURL_OPTS} --fail -L -o "${latestReleasedFilename}" "${latestReleasedJarUrl}"
 	if [[ $? -ne 0 ]]
 	then
 		err "Download of ${latestReleasedJarUrl} failed."
 		exit -1
 	fi
 	log "Saved ${latestReleasedJarUrl} to $(pwd)"
+	exit 0
 fi
 
 preProcessOptions "$@"
