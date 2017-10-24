@@ -10,7 +10,7 @@
 # To override the default location of /tmp/hub-docker-inspector, specify
 # your own DOCKER_INSPECTOR_JAR_DIR in your environment and
 # *that* location will be used.
-DOCKER_INSPECTOR_JAR_DIR=${DOCKER_INSPECTOR_JAR_DIR:-/tmp/hub-docker-inspector-jar}
+DOCKER_INSPECTOR_JAR_DIR=${DOCKER_INSPECTOR_JAR_DIR:-/tmp/hub-docker-inspector}
 
 # If you want to pass any additional options to
 # curl, specify DOCKER_INSPECTOR_CURL_OPTS in your environment.
