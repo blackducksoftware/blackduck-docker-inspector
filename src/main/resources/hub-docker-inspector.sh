@@ -24,6 +24,7 @@ DOCKER_INSPECTOR_CURL_OPTS=${DOCKER_INSPECTOR_CURL_OPTS:-}
 jarVersion=${DOCKER_INSPECTOR_VERSION}
 
 latestReleasedJarUrl='https://updates.suite.blackducksoftware.com/bdosvr/com/blackducksoftware/integration/hub-docker-inspector/\[RELEASE\]/hub-docker-inspector-\[RELEASE\].jar'
+localCommitIdFile="${DOCKER_INSPECTOR_JAR_DIR}/hub-docker-inspector-latest-commit-id.txt"
 
 function printUsage() {
 	echo ""
@@ -61,20 +62,18 @@ err() {
 
 function getLatestJar() {
 	log "Jar dir: ${DOCKER_INSPECTOR_JAR_DIR}"
-	versionFileDestinationFile="${DOCKER_INSPECTOR_JAR_DIR}/hub-docker-inspector-latest-commit-id.txt"
+	
 	currentVersionCommitId=""
-	#### TODO maybe get this working later... For now: never assume jar is up to date
-	#### Disabled because "have latest" determination not working when user specifies a jar version
-#	if [ -f $versionFileDestinationFile ]; then
-#		log "Existing version commit ID file: ${versionFileDestinationFile}"
-#		currentVersionCommitId=$( <$versionFileDestinationFile )
-#		log "Current version commit ID: ${currentVersionCommitId}"
-#	fi
+	if [ -f "${localCommitIdFile}" ]; then
+		log "Existing version commit ID file: ${localCommitIdFile}"
+		currentVersionCommitId=$( <"${localCommitIdFile}" )
+		log "Current version commit ID: ${currentVersionCommitId}"
+	fi
 
 	mkdir -p "${DOCKER_INSPECTOR_JAR_DIR}"
-	log "executing: curl $DOCKER_INSPECTOR_CURL_OPTS -o $versionFileDestinationFile https://blackducksoftware.github.io/hub-docker-inspector/latest-commit-id.txt"
-	curl $DOCKER_INSPECTOR_CURL_OPTS -o $versionFileDestinationFile https://blackducksoftware.github.io/hub-docker-inspector/latest-commit-id.txt
-	latestVersionCommitId=$( <$versionFileDestinationFile )
+	log "executing: curl ${DOCKER_INSPECTOR_CURL_OPTS} -o ${localCommitIdFile} https://blackducksoftware.github.io/hub-docker-inspector/latest-commit-id.txt"
+	curl ${DOCKER_INSPECTOR_CURL_OPTS} -o "${localCommitIdFile}" https://blackducksoftware.github.io/hub-docker-inspector/latest-commit-id.txt
+	latestVersionCommitId=$( <"${localCommitIdFile}" )
 	log "The latest version of the hub-docker-inspector jar file: ${latestVersionCommitId}"
 	log "The currently-installed version of the hub-docker-inspector jar file: ${currentVersionCommitId}"
 	
@@ -84,11 +83,11 @@ function getLatestJar() {
       log "Getting name of latest released jar file"
       latestReleasedFilename=$(curl --head 'https://updates.suite.blackducksoftware.com/bdosvr/com/blackducksoftware/integration/hub-docker-inspector/\[RELEASE\]/hub-docker-inspector-\[RELEASE\].jar' | fgrep 'X-Artifactory-Filename' | cut -d' ' -f2 | tr -d '\r\n')
       log "Latest released jar filename: ${latestReleasedFilename}"
-      echo "${latestReleasedFilename}" | od -xc
       selectedJarFilename="${latestReleasedFilename}"
       downloadedJarPath="${DOCKER_INSPECTOR_JAR_DIR}/${selectedJarFilename}"
     else
       log "Will download hub-docker-inspector-${jarVersion}.jar"
+      rm -f "${localCommitIdFile}" # Local commit ID won't apply to this jar
       selectedJarUrl="https://updates.suite.blackducksoftware.com/bdosvr/com/blackducksoftware/integration/hub-docker-inspector/${jarVersion}/hub-docker-inspector-${jarVersion}.jar"
       downloadedJarPath="${DOCKER_INSPECTOR_JAR_DIR}/hub-docker-inspector-${jarVersion}.jar"
     fi
@@ -98,14 +97,14 @@ function getLatestJar() {
 	mustDownloadJar=1
 	if [ ! -f "${downloadedJarPath}" ]; then
 		log "You don't have a hub-docker-inspector jar file at ${downloadedJarPath}, so it will be downloaded."
-	elif [ "$currentVersionCommitId" != "$latestVersionCommitId" ] ; then
+	elif [ "${currentVersionCommitId}" != "${latestVersionCommitId}" ] ; then
 		log "${downloadedJarPath} needs to be downloaded."
 	else
 		log "${downloadedJarPath} is up-to-date."
 		mustDownloadJar=0
 	fi
 	
-	if [ $mustDownloadJar -eq 1 ]; then
+	if [ ${mustDownloadJar} -eq 1 ]; then
 		curl ${DOCKER_INSPECTOR_CURL_OPTS} --fail -L -o "${downloadedJarPath}" "${selectedJarUrl}"
 		if [[ $? -ne 0 ]]
 		then
@@ -131,24 +130,24 @@ function preProcessOptions() {
 	cmdlineargindex=0
 	for cmdlinearg in "$@"
 	do
-		if [[ "$cmdlinearg" == --jar.path=* ]]
+		if [[ "${cmdlinearg}" == --jar.path=* ]]
 		then
-			userSpecifiedJarPath=$(echo "$cmdlinearg" | cut -d '=' -f 2)
+			userSpecifiedJarPath=$(echo "${cmdlinearg}" | cut -d '=' -f 2)
 			userSpecifiedJarPath=$(expandPath "${userSpecifiedJarPath}")
 			userSpecifiedJarPathEscaped=$(escapeSpaces "${userSpecifiedJarPath}")
 			options[${cmdlineargindex}]="--jar.path=${userSpecifiedJarPathEscaped}"
 			jarPathAlreadySpecifiedOnCmdLine=true
-		elif [[ "$cmdlinearg" == --spring.config.location=* ]]
+		elif [[ "${cmdlinearg}" == --spring.config.location=* ]]
 		then
 			# Once IDETECT-339 is done/released, this clause can go away
-			springConfigLocation=$(echo "$cmdlinearg" | cut -d '=' -f 2)
-			if ! [[ "$springConfigLocation" == file:* ]]
+			springConfigLocation=$(echo "${cmdlinearg}" | cut -d '=' -f 2)
+			if ! [[ "${springConfigLocation}" == file:* ]]
 			then
 				springConfigLocation="file:${springConfigLocation}"
 			fi
-			if ! [[ "$springConfigLocation" == */application.properties ]]
+			if ! [[ "${springConfigLocation}" == */application.properties ]]
 			then
-				if [[ "$springConfigLocation" == */ ]]
+				if [[ "${springConfigLocation}" == */ ]]
 				then
 					springConfigLocation="${springConfigLocation}application.properties"
 				else
@@ -221,13 +220,13 @@ fi
 preProcessOptions "$@"
 
 newJarPathAssignment=""
-if [[ $jarPathAlreadySpecifiedOnCmdLine == false ]]
+if [[ ${jarPathAlreadySpecifiedOnCmdLine} == true ]]
 then
+	jarPath="${userSpecifiedJarPath}"
+else
 	getLatestJar
 	jarPath="${downloadedJarPath}"
 	newJarPathAssignment="--jar.path=${jarPath}"
-else
-	jarPath="${userSpecifiedJarPath}"
 fi
 
 log "jarPath: ${jarPath}"
