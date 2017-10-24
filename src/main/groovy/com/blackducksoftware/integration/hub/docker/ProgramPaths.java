@@ -113,13 +113,18 @@ public class ProgramPaths {
 
     @PostConstruct
     public void init() {
+        hubDockerJarPathActual = deriveJarPath();
         logger.debug(String.format("givenJarPath: %s", givenJarPath));
         if (StringUtils.isBlank(hubDockerPgmDirPath)) {
             hubDockerPgmDirPath = getProgramDirPath();
         }
         logger.debug(String.format("hubDockerPgmDirPath: %s", hubDockerPgmDirPath));
         if (StringUtils.isBlank(hubDockerJarPathHost)) {
-            hubDockerJarPathHost = unEscape(givenJarPath);
+            if (StringUtils.isBlank(givenJarPath)) {
+                hubDockerJarPathHost = hubDockerJarPathActual;
+            } else {
+                hubDockerJarPathHost = unEscape(givenJarPath);
+            }
         }
         hubDockerPgmDirPathContainer = getProgramDirPathContainer();
         hubDockerConfigDirPath = hubDockerPgmDirPath + CONFIG_DIR;
@@ -132,7 +137,7 @@ public class ProgramPaths {
         hubDockerOutputPath = hubDockerPgmDirPath + OUTPUT_DIR;
         hubDockerOutputPathContainer = getProgramDirPathContainer() + OUTPUT_DIR;
         hubDockerResultPath = hubDockerOutputPath + RESULT_JSON_FILENAME;
-        hubDockerJarPathActual = deriveJarPath();
+
     }
 
     public String unEscape(final String origString) {

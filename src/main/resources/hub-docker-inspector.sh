@@ -71,7 +71,6 @@ function getLatestJar() {
 	fi
 
 	mkdir -p "${DOCKER_INSPECTOR_JAR_DIR}"
-	log "executing: curl ${DOCKER_INSPECTOR_CURL_OPTS} -o ${localCommitIdFile} https://blackducksoftware.github.io/hub-docker-inspector/latest-commit-id.txt"
 	curl ${DOCKER_INSPECTOR_CURL_OPTS} -o "${localCommitIdFile}" https://blackducksoftware.github.io/hub-docker-inspector/latest-commit-id.txt
 	latestVersionCommitId=$( <"${localCommitIdFile}" )
 	log "The latest version of the hub-docker-inspector jar file: ${latestVersionCommitId}"
