@@ -39,7 +39,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.exception.IntegrationException;
-import com.blackducksoftware.integration.hub.bdio.simple.BdioWriter;
+import com.blackducksoftware.integration.hub.bdio.BdioWriter;
 import com.blackducksoftware.integration.hub.docker.client.DockerClientManager;
 import com.blackducksoftware.integration.hub.docker.extractor.ExtractionDetails;
 import com.blackducksoftware.integration.hub.docker.extractor.Extractor;
@@ -126,13 +126,6 @@ public class HubDockerManager {
             logger.info(" ");
             logger.info("Successfully uploaded all of the bdio files!");
             logger.info(" ");
-        }
-    }
-
-    public void cleanWorkingDirectory() throws IOException {
-        final File workingDirectory = new File(programPaths.getHubDockerWorkingDirPath());
-        if (workingDirectory.exists()) {
-            FileUtils.deleteDirectory(workingDirectory);
         }
     }
 

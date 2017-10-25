@@ -165,7 +165,7 @@ public class DockerClientManager {
         final String containerId = ensureContainerRunning(dockerClient, imageId, extractorContainerName, hubPasswordString);
         setPropertiesInSubContainer(dockerClient, containerId, tarFilePathInSubContainer, tarFileDirInSubContainer, dockerTarFile, targetImage, targetImageRepo, targetImageTag);
         if (copyJar) {
-            copyFileToContainer(dockerClient, containerId, programPaths.normalizeJarFilename(programPaths.getHubDockerJarPathHost()), programPaths.getHubDockerPgmDirPathContainer());
+            copyFileToContainer(dockerClient, containerId, programPaths.getHubDockerJarPathHost(), programPaths.getHubDockerPgmDirPathContainer());
         }
 
         final List<String> cmd = new ArrayList<>();
@@ -181,7 +181,6 @@ public class DockerClientManager {
         cmd.add("/opt/blackduck/hub-docker-inspector/hub-docker-inspector.jar");
         cmd.add(String.format("--spring.config.location=%s", "/opt/blackduck/hub-docker-inspector/config/application.properties"));
         cmd.add(String.format("--docker.tar=%s", tarFilePathInSubContainer));
-        cmd.add(String.format("--working.dir.path=%s", "/opt/blackduck/hub-docker-inspector/working"));
         execCommandInContainer(dockerClient, imageId, containerId, cmd);
         copyFileFromContainer(containerId, programPaths.getHubDockerOutputPathContainer() + ".", programPaths.getHubDockerOutputPath());
     }

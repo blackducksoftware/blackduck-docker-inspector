@@ -65,4 +65,29 @@ public class FileOperations {
         final Path destPath = destination.toPath().resolve(filename);
         Files.move(fileToMove.toPath(), destPath, StandardCopyOption.REPLACE_EXISTING);
     }
+
+    public static void copyDirContentsToDir(final String fromDirPath, final String toDirPath, final boolean createIfNecessary) throws IOException {
+        final File srcDir = new File(fromDirPath);
+        final File destDir = new File(toDirPath);
+        if (createIfNecessary && !destDir.exists()) {
+            destDir.mkdirs();
+        }
+        FileUtils.copyDirectory(srcDir, destDir);
+    }
+
+    public static void removeFileOrDirQuietly(final String fileOrDirPath) {
+        try {
+            removeFileOrDir(fileOrDirPath);
+        } catch (final IOException e) {
+            logger.warn(String.format("Error removing working directory: %s", e.getMessage()));
+        }
+    }
+
+    public static void removeFileOrDir(final String fileOrDirPath) throws IOException {
+        logger.info(String.format("Removing working directory: %s", fileOrDirPath));
+        final File workingDirectory = new File(fileOrDirPath);
+        if (workingDirectory.exists()) {
+            FileUtils.deleteDirectory(workingDirectory);
+        }
+    }
 }

@@ -11,7 +11,9 @@ import com.blackducksoftware.integration.hub.docker.client.DockerClientManager
 import com.blackducksoftware.integration.hub.docker.client.ProgramVersion
 import com.blackducksoftware.integration.hub.docker.hub.HubClient
 import com.blackducksoftware.integration.hub.docker.image.DockerImages
+import com.blackducksoftware.integration.hub.docker.result.ResultFile
 import com.blackducksoftware.integration.hub.docker.tar.manifest.ManifestLayerMapping
+import com.google.gson.Gson
 
 class ApplicationTest {
 
@@ -36,11 +38,18 @@ class ApplicationTest {
             getProgramVersion: { '1.2.3' }
         ] as ProgramVersion
         app.dockerImages.programVersion = mockedProgramVersion
+        File tmpDir = TestUtils.createTempDirectory()
+        File outputDir = new File(tmpDir, "output")
+        File workingDir = new File(tmpDir, "working")
         ProgramPaths mockedProgramPaths = [
-            getHubDockerOutputJsonPath: TestUtils.createTempDirectory().getAbsolutePath()
+            getHubDockerOutputJsonPath: outputDir.getAbsolutePath(),
+            getHubDockerWorkingDirPath: workingDir.getAbsolutePath()
         ] as ProgramPaths
         app.programPaths = mockedProgramPaths
-
+        app.resultFile = [
+            write: { final Gson gson, final boolean succeeded, final String msg ->
+            }
+        ] as ResultFile
 
         app.hubClient = [
             isValid: { true },

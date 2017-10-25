@@ -37,10 +37,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.blackducksoftware.integration.hub.bdio.simple.DependencyNodeBuilder;
-import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent;
-import com.blackducksoftware.integration.hub.bdio.simple.model.DependencyNode;
-import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.ExternalIdFactory;
+import com.blackducksoftware.integration.hub.bdio.graph.MutableDependencyGraph;
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum;
 import com.blackducksoftware.integration.hub.docker.executor.ApkExecutor;
@@ -58,15 +55,11 @@ class ApkExtractor extends Extractor {
     public void init() {
         final List<String> forges = new ArrayList<>();
         forges.add(OperatingSystemEnum.ALPINE.getForge());
-        final ExternalIdFactory externalIdFactory = new ExternalIdFactory();
-        initValues(PackageManagerEnum.APK, executor, forges, externalIdFactory);
+        initValues(PackageManagerEnum.APK, executor, forges);
     }
 
     @Override
-    public List<BdioComponent> extractComponents(final String dockerImageRepo, final String dockerImageTag, final ExtractionDetails extractionDetails, final String[] packageList) {
-        final List<BdioComponent> components = new ArrayList<>();
-        final DependencyNode rootNode = createDependencyNode(OperatingSystemEnum.ALPINE.getForge(), dockerImageRepo, dockerImageTag, extractionDetails.getArchitecture());
-        final DependencyNodeBuilder dNodeBuilder = new DependencyNodeBuilder(rootNode);
+    public void extractComponents(final MutableDependencyGraph dependencies, final String dockerImageRepo, final String dockerImageTag, final ExtractionDetails extractionDetails, final String[] packageList) {
         for (final String packageLine : packageList) {
             if (!packageLine.toLowerCase().startsWith("warning")) {
                 logger.trace(String.format("packageLine: %s", packageLine));
@@ -87,12 +80,10 @@ class ApkExtractor extends Extractor {
                 if (!component.startsWith(".")) {
                     final String externalId = String.format("%s/%s/%s", component, version, extractionDetails.getArchitecture());
                     logger.debug(String.format("Constructed externalId: %s", externalId));
-                    createBdioComponent(dNodeBuilder, rootNode, components, component, version, externalId, extractionDetails.getArchitecture());
+                    createBdioComponent(dependencies, component, version, externalId, extractionDetails.getArchitecture());
                 }
             }
         }
-        logger.trace(String.format("DependencyNode tree: root node: %s", rootNode.name));
-        return components;
     }
 
     @Override

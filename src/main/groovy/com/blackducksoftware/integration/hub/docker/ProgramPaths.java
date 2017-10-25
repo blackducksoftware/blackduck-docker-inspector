@@ -23,13 +23,9 @@
  */
 package com.blackducksoftware.integration.hub.docker;
 
-import java.io.File;
-import java.io.IOException;
-
 import javax.annotation.PostConstruct;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,7 +61,7 @@ public class ProgramPaths {
     @Value("${on.host}")
     private boolean onHost;
 
-    @Value("${host.working.dir.path:notused}")
+    @Value("${working.dir.path:/tmp/hub-docker-inspector-files}")
     private String hostWorkingDirPath;
 
     @Value("${hub.codelocation.prefix}")
@@ -73,6 +69,9 @@ public class ProgramPaths {
 
     @Value("${jar.path}")
     private String givenJarPath;
+
+    @Value("${output.path:}")
+    private String userOutputDir;
 
     private String hubDockerPgmDirPath;
     private String hubDockerPgmDirPathContainer;
@@ -114,12 +113,18 @@ public class ProgramPaths {
 
     @PostConstruct
     public void init() {
+        hubDockerJarPathActual = deriveJarPath();
         logger.debug(String.format("givenJarPath: %s", givenJarPath));
         if (StringUtils.isBlank(hubDockerPgmDirPath)) {
             hubDockerPgmDirPath = getProgramDirPath();
         }
+        logger.debug(String.format("hubDockerPgmDirPath: %s", hubDockerPgmDirPath));
         if (StringUtils.isBlank(hubDockerJarPathHost)) {
-            hubDockerJarPathHost = givenJarPath.replaceAll("%20", " ");
+            if (StringUtils.isBlank(givenJarPath)) {
+                hubDockerJarPathHost = hubDockerJarPathActual;
+            } else {
+                hubDockerJarPathHost = unEscape(givenJarPath);
+            }
         }
         hubDockerPgmDirPathContainer = getProgramDirPathContainer();
         hubDockerConfigDirPath = hubDockerPgmDirPath + CONFIG_DIR;
@@ -132,7 +137,18 @@ public class ProgramPaths {
         hubDockerOutputPath = hubDockerPgmDirPath + OUTPUT_DIR;
         hubDockerOutputPathContainer = getProgramDirPathContainer() + OUTPUT_DIR;
         hubDockerResultPath = hubDockerOutputPath + RESULT_JSON_FILENAME;
-        hubDockerJarPathActual = deriveJarPath();
+
+    }
+
+    public String unEscape(final String origString) {
+        return origString.replaceAll("%20", " ");
+    }
+
+    public String getUserOutputDir() {
+        if (StringUtils.isBlank(userOutputDir)) {
+            return null;
+        }
+        return userOutputDir;
     }
 
     private String deriveJarPath() {
@@ -144,13 +160,6 @@ public class ProgramPaths {
         final String hubDockerJarPathActual = qualifiedJarPathString.substring(startIndex, endIndex);
         logger.debug(String.format("hubDockerJarPathActual: %s", hubDockerJarPathActual));
         return hubDockerJarPathActual;
-    }
-
-    public String normalizeJarFilename(final String hostJarPath) throws IOException {
-        final File fromFile = new File(hostJarPath);
-        final File toFile = new File(getHubDockerTempDirPath() + JAR_FILENAME);
-        FileUtils.copyFile(fromFile, toFile);
-        return toFile.getAbsolutePath();
     }
 
     public String getQualifiedJarPath() {

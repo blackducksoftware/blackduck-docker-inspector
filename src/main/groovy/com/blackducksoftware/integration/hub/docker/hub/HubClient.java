@@ -43,6 +43,7 @@ import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.api.bom.BomImportRequestService;
 import com.blackducksoftware.integration.hub.builder.HubServerConfigBuilder;
 import com.blackducksoftware.integration.hub.dataservice.phonehome.PhoneHomeDataService;
+import com.blackducksoftware.integration.hub.docker.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.client.ProgramVersion;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.blackducksoftware.integration.hub.global.HubServerConfig;
@@ -111,6 +112,9 @@ public class HubClient {
     @Autowired
     private ProgramVersion programVersion;
 
+    @Autowired
+    private ProgramPaths programPaths;
+
     public boolean isValid() {
         return createBuilder().isValid();
     }
@@ -137,13 +141,13 @@ public class HubClient {
         logger.info(String.format("Uploaded bdio file %s to %s", bdioFile.getName(), hubServerConfig.getHubUrl()));
     }
 
+    // Keep the unEscape here through 4.0.0, and then drop it after that.
+    // It's here to provide a method (--hub.username=You%20Zer) for putting Hub Usernames with embedded spaces
+    // on the command line that will work across 3.1.2/later and 4.0.0.
+    // Starting in 4.0.0 the method is --hub.username=\"You Zer\"
+    // See IDOCKER-273
     private String getHubUsername() {
-        return unEscape(hubUsername);
-    }
-
-    // TODO ProgramPaths has the same code; share
-    private String unEscape(final String origString) {
-        return origString.replaceAll("%20", " ");
+        return programPaths.unEscape(hubUsername);
     }
 
     public void phoneHome(final String dockerEngineVersion) {

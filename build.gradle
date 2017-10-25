@@ -26,7 +26,7 @@ tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
 tasks.withType(GroovyCompile) { options.encoding = 'UTF-8' }
 
 group = 'com.blackducksoftware.integration'
-version = '3.2.1-SNAPSHOT'
+version = '4.0.0-RC1'
 description = ''
 String hubDockerImageName = 'hub-docker-inspector'
 
@@ -214,7 +214,7 @@ task createWhTestDockerfile(type: Dockerfile) {
     maintainer 'Black Duck Software'
     environmentVariable('LANG', 'en_US.UTF-8')
     
-    runCommand 'apt-get update && apt-get -y install curl=7.47.0-1ubuntu2.3 && apt-get -y remove curl && apt-get -y clean'
+    runCommand 'apt-get update && apt-get -y install curl=7.47.0-1ubuntu2.4 && apt-get -y remove curl && apt-get -y clean'
 }
 
 task removeWhImage(type: Exec) {
@@ -449,7 +449,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.blackducksoftware.integration:hub-common:16.0.0'
+    compile 'com.blackducksoftware.integration:hub-common:18.0.0'
     
     compile 'com.github.docker-java:docker-java:3.0.12'
     compile 'org.apache.commons:commons-lang3:3.5'

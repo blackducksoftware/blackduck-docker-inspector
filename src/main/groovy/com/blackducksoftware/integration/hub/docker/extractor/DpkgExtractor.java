@@ -33,10 +33,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.blackducksoftware.integration.hub.bdio.simple.DependencyNodeBuilder;
-import com.blackducksoftware.integration.hub.bdio.simple.model.BdioComponent;
-import com.blackducksoftware.integration.hub.bdio.simple.model.DependencyNode;
-import com.blackducksoftware.integration.hub.bdio.simple.model.externalid.ExternalIdFactory;
+import com.blackducksoftware.integration.hub.bdio.graph.MutableDependencyGraph;
 import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.docker.PackageManagerEnum;
 import com.blackducksoftware.integration.hub.docker.executor.DpkgExecutor;
@@ -54,16 +51,11 @@ class DpkgExtractor extends Extractor {
         final List<String> forges = new ArrayList<>();
         forges.add(OperatingSystemEnum.DEBIAN.getForge());
         forges.add(OperatingSystemEnum.UBUNTU.getForge());
-        final ExternalIdFactory externalIdFactory = new ExternalIdFactory();
-        initValues(PackageManagerEnum.DPKG, executor, forges, externalIdFactory);
+        initValues(PackageManagerEnum.DPKG, executor, forges);
     }
 
     @Override
-    public List<BdioComponent> extractComponents(final String dockerImageRepo, final String dockerImageTag, final ExtractionDetails extractionDetails, final String[] packageList) {
-        final List<BdioComponent> components = new ArrayList<>();
-        final DependencyNode rootNode = createDependencyNode(OperatingSystemEnum.UBUNTU.getForge(), dockerImageRepo, dockerImageTag, extractionDetails.getArchitecture());
-
-        final DependencyNodeBuilder dNodeBuilder = new DependencyNodeBuilder(rootNode);
+    public void extractComponents(final MutableDependencyGraph dependencies, final String dockerImageRepo, final String dockerImageTag, final ExtractionDetails extractionDetails, final String[] packageList) {
         boolean startOfComponents = false;
         for (final String packageLine : packageList) {
 
@@ -84,15 +76,13 @@ class DpkgExtractor extends Extractor {
                         final String externalId = String.format("%s/%s/%s", name, version, architecture);
                         logger.trace(String.format("Constructed externalId: %s", externalId));
 
-                        createBdioComponent(dNodeBuilder, rootNode, components, name, version, externalId, architecture);
+                        createBdioComponent(dependencies, name, version, externalId, architecture);
                     } else {
                         logger.trace(String.format("Package \"%s\" is listed but not installed (package status: %s)", packageLine, packageStatus));
                     }
                 }
             }
         }
-        logger.trace(String.format("DependencyNode tree: %s", rootNode));
-        return components;
     }
 
     private boolean isInstalledStatus(final Character packageStatus) {
