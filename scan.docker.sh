@@ -198,7 +198,7 @@ function main() {
         shift
         ;;
       --username)
-        hub_user="--username $2"
+        hub_user="$2"
         shift
 	    ;;
       --port)
@@ -239,7 +239,7 @@ function main() {
         do_inspect=0
         ;;
       *)
-	optional_args="${optional_args} $1"
+	    optional_args="${optional_args} $1"
         ;;
     esac
     shift
@@ -293,14 +293,19 @@ function main() {
       if [ -n "${hub_host}" ]; then
         hub_parameters="--host ${hub_host} --port $hub_port --scheme $hub_scheme"
       fi
-      "${THISDIR}"/scan.cli.sh $hub_parameters $hub_user $dry_run --project "$hub_project" --release "$hub_version" $name_arg $optional_args "${IMAGE_TARFILE}"
-      cli_status=$?
+      "${THISDIR}"/scan.cli.sh $hub_parameters --username "$hub_user" $dry_run --project "$hub_project" --release "$hub_version" $name_arg $optional_args "${IMAGE_TARFILE}"
+      cmd_status=$?
+      if [ $cmd_status -ne 0 ]; then
+        exit $cmd_status
+      fi
     fi
     if [ $do_inspect -eq 1 ]; then
-      if [ $cli_status -eq 0 ]; then
-        echo "Conduct  Inspection:"
-        "${INSPECTOR_SHELL_SCRIPT}" --hub.username=$hub_user --hub.url=$HUB_URL --hub.project.name="$hub_project" --hub.project.version="$hub_version" "${IMAGE_TARFILE}"
-      fi
+      echo "Conduct  Inspection:"
+      "${INSPECTOR_SHELL_SCRIPT}" --hub.username=$hub_user --hub.url=$HUB_URL --hub.project.name="$hub_project" --hub.project.version="$hub_version" "${IMAGE_TARFILE}"
+      cmd_status=$?
+      if [ $cmd_status -ne 0 ]; then
+        exit $cmd_status
+      fi   
     fi
   else
     echo "Unable to save: ${IMAGE_TARFILE} to a tar file."
