@@ -23,8 +23,17 @@ DOCKER_INSPECTOR_CURL_OPTS=${DOCKER_INSPECTOR_CURL_OPTS:-}
 # from LATEST.
 jarVersion=${DOCKER_INSPECTOR_VERSION}
 
-latestReleasedJarUrl='https://updates.suite.blackducksoftware.com/bdosvr/com/blackducksoftware/integration/hub-docker-inspector/\[RELEASE\]/hub-docker-inspector-\[RELEASE\].jar'
+##################
+# Initialize
+##################
+latestCommitIdFileUrl="https://blackducksoftware.github.io/hub-docker-inspector/latest-commit-id.txt"
 localCommitIdFile="${DOCKER_INSPECTOR_JAR_DIR}/hub-docker-inspector-latest-commit-id.txt"
+latestReleasedJarUrl='https://updates.suite.blackducksoftware.com/bdosvr/com/blackducksoftware/integration/hub-docker-inspector/\[RELEASE\]/hub-docker-inspector-\[RELEASE\].jar'
+currentVersionCommitId=""
+version="@VERSION@"
+encodingSetting="-Dfile.encoding=UTF-8"
+userSpecifiedJarPath=""
+jarPathAlreadySpecifiedOnCmdLine=false
 
 function printUsage() {
 	echo ""
@@ -60,22 +69,24 @@ err() {
   echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: ERROR: $@" >&2
 }
 
-function getLatestJar() {
-	log "Jar dir: ${DOCKER_INSPECTOR_JAR_DIR}"
-	
-	currentVersionCommitId=""
+function deriveCurrentVersionCommitId() {
+	log "Checking ${localCommitIdFile} for commit ID"
 	if [ -f "${localCommitIdFile}" ]; then
 		log "Existing version commit ID file: ${localCommitIdFile}"
 		currentVersionCommitId=$( <"${localCommitIdFile}" )
 		log "Current version commit ID: ${currentVersionCommitId}"
 	fi
+	log "The currently-installed version of the hub-docker-inspector jar file: ${currentVersionCommitId}"
+}
 
-	mkdir -p "${DOCKER_INSPECTOR_JAR_DIR}"
-	curl ${DOCKER_INSPECTOR_CURL_OPTS} -o "${localCommitIdFile}" https://blackducksoftware.github.io/hub-docker-inspector/latest-commit-id.txt
+function deriveLatestVersionCommitId() {
+	log "Downloading ${latestCommitIdFileUrl} to ${localCommitIdFile}"
+	curl ${DOCKER_INSPECTOR_CURL_OPTS} -o "${localCommitIdFile}" "${latestCommitIdFileUrl}"
 	latestVersionCommitId=$( <"${localCommitIdFile}" )
 	log "The latest version of the hub-docker-inspector jar file: ${latestVersionCommitId}"
-	log "The currently-installed version of the hub-docker-inspector jar file: ${currentVersionCommitId}"
-	
+}
+
+function deriveJarDetails() {
 	# If the user specified a version: get that
 	if [ -z "${jarVersion}" ]; then
       selectedJarUrl="${latestReleasedJarUrl}"
@@ -88,20 +99,24 @@ function getLatestJar() {
       selectedJarUrl="https://updates.suite.blackducksoftware.com/bdosvr/com/blackducksoftware/integration/hub-docker-inspector/${jarVersion}/hub-docker-inspector-${jarVersion}.jar"
       downloadedJarPath="${DOCKER_INSPECTOR_JAR_DIR}/hub-docker-inspector-${jarVersion}.jar"
     fi
-    log "Will download from: ${selectedJarUrl}"
-    log "                to: ${downloadedJarPath}"
-    
-	mustDownloadJar=1
+    log "Selected jar: ${selectedJarUrl}"
+    log "  local path: ${downloadedJarPath}"
+}
+
+function determineIsJarDownloadRequired() {
+	jarDownloadRequired=true
 	if [ ! -f "${downloadedJarPath}" ]; then
 		log "You don't have a hub-docker-inspector jar file at ${downloadedJarPath}, so it will be downloaded."
 	elif [ "${currentVersionCommitId}" != "${latestVersionCommitId}" ] ; then
 		log "${downloadedJarPath} needs to be downloaded."
 	else
 		log "${downloadedJarPath} is up-to-date."
-		mustDownloadJar=0
+		jarDownloadRequired=false
 	fi
-	
-	if [ ${mustDownloadJar} -eq 1 ]; then
+}
+
+function downloadJarIfRequired() {
+	if [ ${jarDownloadRequired} == true ]; then
 		curl ${DOCKER_INSPECTOR_CURL_OPTS} --fail -L -o "${downloadedJarPath}" "${selectedJarUrl}"
 		if [[ $? -ne 0 ]]
 		then
@@ -110,6 +125,14 @@ function getLatestJar() {
 		fi
 		log "Saved ${selectedJarUrl} to ${downloadedJarPath}"
 	fi
+}
+
+function prepareLatestJar() {
+	deriveCurrentVersionCommitId
+	deriveLatestVersionCommitId
+	deriveJarDetails
+	determineIsJarDownloadRequired
+	downloadJarIfRequired
 }
 
 #
@@ -187,10 +210,6 @@ function preProcessOptions() {
 ##################
 # Start script
 ##################
-version="@VERSION@"
-encodingSetting="-Dfile.encoding=UTF-8"
-userSpecifiedJarPath=""
-jarPathAlreadySpecifiedOnCmdLine=false
 
 if [ $# -lt 1 ]
 then
@@ -225,12 +244,15 @@ fi
 
 preProcessOptions "$@"
 
+log "Jar dir: ${DOCKER_INSPECTOR_JAR_DIR}"
+mkdir -p "${DOCKER_INSPECTOR_JAR_DIR}"
+
 newJarPathAssignment=""
 if [[ ${jarPathAlreadySpecifiedOnCmdLine} == true ]]
 then
 	jarPath="${userSpecifiedJarPath}"
 else
-	getLatestJar
+	prepareLatestJar
 	jarPath="${downloadedJarPath}"
 	newJarPathAssignment="--jar.path=${jarPath}"
 fi
