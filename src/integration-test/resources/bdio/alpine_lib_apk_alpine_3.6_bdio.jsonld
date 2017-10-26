@@ -2,7 +2,7 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "alpine_3.6_lib_apk_APK",
-    "@id": "uuid:e98f8bc1-2d7e-4a51-8bc2-e245907b0c40",
+    "@id": "uuid:f951a069-4493-4ded-9cca-7c4be1af6e97",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -29,27 +29,23 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:alpine/musl/1_1_16_r14/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:alpine/zlib/1_2_11_r0/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:alpine/busybox/1_26_2_r5/x86_64",
+        "related": "http:alpine/musl_utils/1_1_16_r14/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libressl2_5_libssl/2_5_5_r0/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
         "related": "http:alpine/alpine_keys/2_1_r1/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:alpine/libressl2_5_libssl/2_5_4_r0/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:alpine/musl/1_1_16_r10/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:alpine/apk_tools/2_7_2_r0/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -61,11 +57,15 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:alpine/musl_utils/1_1_16_r10/x86_64",
+        "related": "http:alpine/libressl2_5_libcrypto/2_5_5_r0/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:alpine/libressl2_5_libcrypto/2_5_4_r0/x86_64",
+        "related": "http:alpine/apk_tools/2_7_3_r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/busybox/1_26_2_r7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       }
     ]
@@ -85,6 +85,26 @@
         },
         "name": "libc-utils",
         "version": "0.7.1-r0",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "musl",
+    "revision": "1.1.16-r14",
+    "@id": "http:alpine/musl/1_1_16_r14/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "alpine",
+      "externalId": "musl/1.1.16-r14/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/"
+        },
+        "name": "musl",
+        "version": "1.1.16-r14",
         "architecture": "x86_64"
       }
     },
@@ -111,20 +131,40 @@
     "relationship": []
   },
   {
-    "name": "busybox",
-    "revision": "1.26.2-r5",
-    "@id": "http:alpine/busybox/1_26_2_r5/x86_64",
+    "name": "musl-utils",
+    "revision": "1.1.16-r14",
+    "@id": "http:alpine/musl_utils/1_1_16_r14/x86_64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
-      "externalId": "busybox/1.26.2-r5/x86_64",
+      "externalId": "musl-utils/1.1.16-r14/x86_64",
       "externalIdMetaData": {
         "forge": {
           "name": "alpine",
           "separator": "/"
         },
-        "name": "busybox",
-        "version": "1.26.2-r5",
+        "name": "musl-utils",
+        "version": "1.1.16-r14",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libressl2.5-libssl",
+    "revision": "2.5.5-r0",
+    "@id": "http:alpine/libressl2_5_libssl/2_5_5_r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "alpine",
+      "externalId": "libressl2.5-libssl/2.5.5-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/"
+        },
+        "name": "libressl2.5-libssl",
+        "version": "2.5.5-r0",
         "architecture": "x86_64"
       }
     },
@@ -145,66 +185,6 @@
         },
         "name": "alpine-keys",
         "version": "2.1-r1",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libressl2.5-libssl",
-    "revision": "2.5.4-r0",
-    "@id": "http:alpine/libressl2_5_libssl/2_5_4_r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
-      "externalId": "libressl2.5-libssl/2.5.4-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/"
-        },
-        "name": "libressl2.5-libssl",
-        "version": "2.5.4-r0",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "musl",
-    "revision": "1.1.16-r10",
-    "@id": "http:alpine/musl/1_1_16_r10/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
-      "externalId": "musl/1.1.16-r10/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/"
-        },
-        "name": "musl",
-        "version": "1.1.16-r10",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "apk-tools",
-    "revision": "2.7.2-r0",
-    "@id": "http:alpine/apk_tools/2_7_2_r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
-      "externalId": "apk-tools/2.7.2-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/"
-        },
-        "name": "apk-tools",
-        "version": "2.7.2-r0",
         "architecture": "x86_64"
       }
     },
@@ -251,40 +231,60 @@
     "relationship": []
   },
   {
-    "name": "musl-utils",
-    "revision": "1.1.16-r10",
-    "@id": "http:alpine/musl_utils/1_1_16_r10/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
-      "externalId": "musl-utils/1.1.16-r10/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/"
-        },
-        "name": "musl-utils",
-        "version": "1.1.16-r10",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "libressl2.5-libcrypto",
-    "revision": "2.5.4-r0",
-    "@id": "http:alpine/libressl2_5_libcrypto/2_5_4_r0/x86_64",
+    "revision": "2.5.5-r0",
+    "@id": "http:alpine/libressl2_5_libcrypto/2_5_5_r0/x86_64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
-      "externalId": "libressl2.5-libcrypto/2.5.4-r0/x86_64",
+      "externalId": "libressl2.5-libcrypto/2.5.5-r0/x86_64",
       "externalIdMetaData": {
         "forge": {
           "name": "alpine",
           "separator": "/"
         },
         "name": "libressl2.5-libcrypto",
-        "version": "2.5.4-r0",
+        "version": "2.5.5-r0",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "apk-tools",
+    "revision": "2.7.3-r0",
+    "@id": "http:alpine/apk_tools/2_7_3_r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "alpine",
+      "externalId": "apk-tools/2.7.3-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/"
+        },
+        "name": "apk-tools",
+        "version": "2.7.3-r0",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "busybox",
+    "revision": "1.26.2-r7",
+    "@id": "http:alpine/busybox/1_26_2_r7/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "alpine",
+      "externalId": "busybox/1.26.2-r7/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/"
+        },
+        "name": "busybox",
+        "version": "1.26.2-r7",
         "architecture": "x86_64"
       }
     },
