@@ -2,7 +2,7 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "blackducksoftware_whiteouttest_1.0_var_lib_dpkg_DPKG",
-    "@id": "uuid:2c37236f-463a-4369-b32b-120588886785",
+    "@id": "uuid:668f00b1-7533-4478-9357-b576399c0bad",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -613,11 +613,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/perl_base/5_22_1_9/amd64",
+        "related": "http:ubuntu/libgnutls30/3_4_10_4ubuntu1_4/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/libgnutls30/3_4_10_4ubuntu1_3/amd64",
+        "related": "http:debian/perl_base/5_22_1_9/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1041,6 +1041,10 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:debian/libgnutls30/3_4_10_4ubuntu1_4/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:ubuntu/ncurses_base/6_0_20160213_1ubuntu1/all",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -1050,10 +1054,6 @@
       },
       {
         "related": "http:debian/libaudit1/1_2_4_5_1ubuntu2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:debian/libgnutls30/3_4_10_4ubuntu1_3/amd64",
         "relationshipType": "DYNAMIC_LINK"
       }
     ]
@@ -3999,6 +3999,26 @@
     "relationship": []
   },
   {
+    "name": "libgnutls30",
+    "revision": "3.4.10-4ubuntu1.4",
+    "@id": "http:ubuntu/libgnutls30/3_4_10_4ubuntu1_4/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libgnutls30/3.4.10-4ubuntu1.4/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/"
+        },
+        "name": "libgnutls30",
+        "version": "3.4.10-4ubuntu1.4",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "perl-base",
     "revision": "5.22.1-9",
     "@id": "http:debian/perl_base/5_22_1_9/amd64",
@@ -4013,26 +4033,6 @@
         },
         "name": "perl-base",
         "version": "5.22.1-9",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libgnutls30",
-    "revision": "3.4.10-4ubuntu1.3",
-    "@id": "http:ubuntu/libgnutls30/3_4_10_4ubuntu1_3/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libgnutls30/3.4.10-4ubuntu1.3/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "ubuntu",
-          "separator": "/"
-        },
-        "name": "libgnutls30",
-        "version": "3.4.10-4ubuntu1.3",
         "architecture": "amd64"
       }
     },
@@ -6139,6 +6139,26 @@
     "relationship": []
   },
   {
+    "name": "libgnutls30",
+    "revision": "3.4.10-4ubuntu1.4",
+    "@id": "http:debian/libgnutls30/3_4_10_4ubuntu1_4/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libgnutls30/3.4.10-4ubuntu1.4/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "debian",
+          "separator": "/"
+        },
+        "name": "libgnutls30",
+        "version": "3.4.10-4ubuntu1.4",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "ncurses-base",
     "revision": "6.0+20160213-1ubuntu1",
     "@id": "http:ubuntu/ncurses_base/6_0_20160213_1ubuntu1/all",
@@ -6193,26 +6213,6 @@
         },
         "name": "libaudit1",
         "version": "1:2.4.5-1ubuntu2",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libgnutls30",
-    "revision": "3.4.10-4ubuntu1.3",
-    "@id": "http:debian/libgnutls30/3_4_10_4ubuntu1_3/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libgnutls30/3.4.10-4ubuntu1.3/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "debian",
-          "separator": "/"
-        },
-        "name": "libgnutls30",
-        "version": "3.4.10-4ubuntu1.3",
         "architecture": "amd64"
       }
     },
