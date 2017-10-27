@@ -264,9 +264,9 @@ function main() {
 
   # if the --name scan.cli option was not provided
   if [ -z "${name_arg}" ]; then
-    name_arg="--name scanner_${hub_project}_${hub_version}"
+    name_arg="scanner_${hub_project}_${hub_version}"
   else
-    name_arg="--name ${name_arg}"
+    name_arg="${name_arg}"
   fi
 
   # update_docker_inspector
@@ -293,7 +293,7 @@ function main() {
       if [ -n "${hub_host}" ]; then
         hub_parameters="--host ${hub_host} --port $hub_port --scheme $hub_scheme"
       fi
-      "${THISDIR}"/scan.cli.sh $hub_parameters --username "$hub_user" $dry_run --project "$hub_project" --release "$hub_version" $name_arg $optional_args "${IMAGE_TARFILE}"
+      "${THISDIR}"/scan.cli.sh $hub_parameters --username "$hub_user" $dry_run --project "$hub_project" --release "$hub_version" --name "$name_arg" $optional_args "${IMAGE_TARFILE}"
       cmd_status=$?
       if [ $cmd_status -ne 0 ]; then
         exit $cmd_status
