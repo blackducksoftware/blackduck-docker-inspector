@@ -30,6 +30,10 @@ version = '4.0.0-SNAPSHOT'
 description = ''
 String hubDockerImageName = 'hub-docker-inspector'
 
+final String artifactoryUrl = "http://prd-eng-repo01.dc2.lan:8181/artifactory"
+final String artifactoryRepoKey = "bds-integrations"
+final String artifactoryIntegrationPath = "com/blackducksoftware/integration"
+
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
@@ -440,6 +444,11 @@ task itOnly(type: Test) {
     classpath = sourceSets.integrationTest.runtimeClasspath
     outputs.upToDateWhen { false }
 }
+
+task publishJarToArtifactory(type: Exec, dependsOn: build) {
+    commandLine 'curl', '-u', "${System.env.BDS_PUBLIC_ARTIFACTORY_USERNAME}:${System.env.BDS_PUBLIC_ARTIFACTORY_PASSWORD}", '-X', 'PUT', "${artifactoryUrl}/${artifactoryRepoKey}/${artifactoryIntegrationPath}/${project.name}/${version}/${project.name}-${version}.jar", '-T', "${buildDir}/libs/${project.name}-${version}.jar", '-f'
+}
+
 
 task all(dependsOn: [integrationTest]) {}
 
