@@ -28,12 +28,12 @@ jarVersion=${DOCKER_INSPECTOR_VERSION}
 ##################
 latestCommitIdFileUrl="https://blackducksoftware.github.io/hub-docker-inspector/latest-commit-id.txt"
 localCommitIdFile="${DOCKER_INSPECTOR_JAR_DIR}/hub-docker-inspector-latest-commit-id.txt"
-latestReleasedJarUrl='https://test-repo.blackducksoftware.com/artifactory/bds-integrations-snapshot/com/blackducksoftware/integration/hub-docker-inspector/\[RELEASE\]/hub-docker-inspector-\[RELEASE\].jar'
 currentVersionCommitId=""
 version="@VERSION@"
 encodingSetting="-Dfile.encoding=UTF-8"
 userSpecifiedJarPath=""
 jarPathAlreadySpecifiedOnCmdLine=false
+latestReleaseVersion=
 
 function printUsage() {
 	echo ""
@@ -89,6 +89,9 @@ function deriveLatestVersionCommitId() {
 function deriveJarDetails() {
 	# If the user specified a version: get that
 	if [ -z "${jarVersion}" ]; then
+	  deriveLatestReleaseVersion
+	  latestReleasedJarUrl="https://test-repo.blackducksoftware.com/artifactory/bds-integrations-release/com/blackducksoftware/integration/hub-docker-inspector/${latestReleaseVersion}/hub-docker-inspector-${latestReleaseVersion}.jar"
+	
       selectedJarUrl="${latestReleasedJarUrl}"
       deriveLatestReleasedFilename
       selectedJarFilename="${latestReleasedFilename}"
@@ -99,7 +102,7 @@ function deriveJarDetails() {
       if [[ $jarVersion == *"SNAPSHOT"* ]]; then
       	selectedRepoKey="bds-integrations-snapshot"
       else
-      	selectedRepoKey="bds-integrations-released"
+      	selectedRepoKey="bds-integrations-release"
       fi
       selectedJarUrl="https://test-repo.blackducksoftware.com/artifactory/${selectedRepoKey}/com/blackducksoftware/integration/hub-docker-inspector/${jarVersion}/hub-docker-inspector-${jarVersion}.jar"
       downloadedJarPath="${DOCKER_INSPECTOR_JAR_DIR}/hub-docker-inspector-${jarVersion}.jar"
@@ -141,10 +144,18 @@ function prepareLatestJar() {
 }
 
 #
+function deriveLatestReleaseVersion() {
+	if [[ -z "${latestReleaseVersion}" ]]; then
+		latestReleaseVersion=$(curl https://test-repo.blackducksoftware.com/artifactory/bds-integrations-release/com/blackducksoftware/integration/hub-docker-inspector/maven-metadata.xml | grep latest | sed -e 's@<latest>@@' -e 's@</latest>@@' -e 's/^[ \t]*//')
+	fi
+	echo "Latest release version: ${latestReleaseVersion}"
+}
+
+#
 function deriveLatestReleasedFilename() {
-	log "Getting name of latest released jar file"
-	# TODO factor out the released URL
-    latestReleasedFilename=$(curl --head 'https://test-repo.blackducksoftware.com/artifactory/bds-integrations-snapshot/com/blackducksoftware/integration/hub-docker-inspector/\[RELEASE\]/hub-docker-inspector-\[RELEASE\].jar' | fgrep 'X-Artifactory-Filename' | cut -d' ' -f2 | tr -d '\r\n')
+	log "Deriving name of latest released jar file"
+	deriveLatestReleaseVersion
+    latestReleasedFilename=hub-docker-inspector-${latestReleaseVersion}.jar
     log "Latest released jar filename: ${latestReleasedFilename}"
 }
 
