@@ -2,7 +2,7 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "blackducksoftware_whiteouttest_1.0_var_lib_dpkg_DPKG",
-    "@id": "uuid:38185431-33ce-40f3-84b2-316b0f704868",
+    "@id": "uuid:7a81c573-78bf-4545-bd2a-3155726d81ef",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -361,11 +361,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:debian/libcurl3-gnutls/7.47.0-1ubuntu2.3",
+        "related": "data:debian/libcurl3-gnutls/7.47.0-1ubuntu2.4",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:ubuntu/libcurl3-gnutls/7.47.0-1ubuntu2.3",
+        "related": "data:ubuntu/libcurl3-gnutls/7.47.0-1ubuntu2.4",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -433,11 +433,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:debian/libgnutls30/3.4.10-4ubuntu1.3",
+        "related": "data:debian/libgnutls30/3.4.10-4ubuntu1.4",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:ubuntu/libgnutls30/3.4.10-4ubuntu1.3",
+        "related": "data:ubuntu/libgnutls30/3.4.10-4ubuntu1.4",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -785,11 +785,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:debian/libssl1.0.0/1.0.2g-1ubuntu4.8",
+        "related": "data:debian/libssl1.0.0/1.0.2g-1ubuntu4.9",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:ubuntu/libssl1.0.0/1.0.2g-1ubuntu4.8",
+        "related": "data:ubuntu/libssl1.0.0/1.0.2g-1ubuntu4.9",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -929,11 +929,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:debian/openssl/1.0.2g-1ubuntu4.8",
+        "related": "data:debian/openssl/1.0.2g-1ubuntu4.9",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:ubuntu/openssl/1.0.2g-1ubuntu4.8",
+        "related": "data:ubuntu/openssl/1.0.2g-1ubuntu4.9",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1998,23 +1998,23 @@
   },
   {
     "name": "libcurl3-gnutls",
-    "revision": "7.47.0-1ubuntu2.3",
-    "@id": "data:debian/libcurl3-gnutls/7.47.0-1ubuntu2.3",
+    "revision": "7.47.0-1ubuntu2.4",
+    "@id": "data:debian/libcurl3-gnutls/7.47.0-1ubuntu2.4",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "libcurl3-gnutls/7.47.0-1ubuntu2.3/amd64"
+      "externalId": "libcurl3-gnutls/7.47.0-1ubuntu2.4/amd64"
     },
     "relationship": []
   },
   {
     "name": "libcurl3-gnutls",
-    "revision": "7.47.0-1ubuntu2.3",
-    "@id": "data:ubuntu/libcurl3-gnutls/7.47.0-1ubuntu2.3",
+    "revision": "7.47.0-1ubuntu2.4",
+    "@id": "data:ubuntu/libcurl3-gnutls/7.47.0-1ubuntu2.4",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "libcurl3-gnutls/7.47.0-1ubuntu2.3/amd64"
+      "externalId": "libcurl3-gnutls/7.47.0-1ubuntu2.4/amd64"
     },
     "relationship": []
   },
@@ -2196,23 +2196,23 @@
   },
   {
     "name": "libgnutls30",
-    "revision": "3.4.10-4ubuntu1.3",
-    "@id": "data:debian/libgnutls30/3.4.10-4ubuntu1.3",
+    "revision": "3.4.10-4ubuntu1.4",
+    "@id": "data:debian/libgnutls30/3.4.10-4ubuntu1.4",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "libgnutls30/3.4.10-4ubuntu1.3/amd64"
+      "externalId": "libgnutls30/3.4.10-4ubuntu1.4/amd64"
     },
     "relationship": []
   },
   {
     "name": "libgnutls30",
-    "revision": "3.4.10-4ubuntu1.3",
-    "@id": "data:ubuntu/libgnutls30/3.4.10-4ubuntu1.3",
+    "revision": "3.4.10-4ubuntu1.4",
+    "@id": "data:ubuntu/libgnutls30/3.4.10-4ubuntu1.4",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "libgnutls30/3.4.10-4ubuntu1.3/amd64"
+      "externalId": "libgnutls30/3.4.10-4ubuntu1.4/amd64"
     },
     "relationship": []
   },
@@ -3164,23 +3164,23 @@
   },
   {
     "name": "libssl1.0.0",
-    "revision": "1.0.2g-1ubuntu4.8",
-    "@id": "data:debian/libssl1.0.0/1.0.2g-1ubuntu4.8",
+    "revision": "1.0.2g-1ubuntu4.9",
+    "@id": "data:debian/libssl1.0.0/1.0.2g-1ubuntu4.9",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "libssl1.0.0/1.0.2g-1ubuntu4.8/amd64"
+      "externalId": "libssl1.0.0/1.0.2g-1ubuntu4.9/amd64"
     },
     "relationship": []
   },
   {
     "name": "libssl1.0.0",
-    "revision": "1.0.2g-1ubuntu4.8",
-    "@id": "data:ubuntu/libssl1.0.0/1.0.2g-1ubuntu4.8",
+    "revision": "1.0.2g-1ubuntu4.9",
+    "@id": "data:ubuntu/libssl1.0.0/1.0.2g-1ubuntu4.9",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "libssl1.0.0/1.0.2g-1ubuntu4.8/amd64"
+      "externalId": "libssl1.0.0/1.0.2g-1ubuntu4.9/amd64"
     },
     "relationship": []
   },
@@ -3560,23 +3560,23 @@
   },
   {
     "name": "openssl",
-    "revision": "1.0.2g-1ubuntu4.8",
-    "@id": "data:debian/openssl/1.0.2g-1ubuntu4.8",
+    "revision": "1.0.2g-1ubuntu4.9",
+    "@id": "data:debian/openssl/1.0.2g-1ubuntu4.9",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "openssl/1.0.2g-1ubuntu4.8/amd64"
+      "externalId": "openssl/1.0.2g-1ubuntu4.9/amd64"
     },
     "relationship": []
   },
   {
     "name": "openssl",
-    "revision": "1.0.2g-1ubuntu4.8",
-    "@id": "data:ubuntu/openssl/1.0.2g-1ubuntu4.8",
+    "revision": "1.0.2g-1ubuntu4.9",
+    "@id": "data:ubuntu/openssl/1.0.2g-1ubuntu4.9",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "openssl/1.0.2g-1ubuntu4.8/amd64"
+      "externalId": "openssl/1.0.2g-1ubuntu4.9/amd64"
     },
     "relationship": []
   },

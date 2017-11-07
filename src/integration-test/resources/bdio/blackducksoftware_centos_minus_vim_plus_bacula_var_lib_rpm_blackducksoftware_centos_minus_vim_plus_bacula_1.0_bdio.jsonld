@@ -2,14 +2,14 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "blackducksoftware_centos_minus_vim_plus_bacula_1.0_var_lib_rpm_RPM",
-    "@id": "uuid:4404f828-fcb2-4367-8f9c-b58e59e43aae",
+    "@id": "uuid:ca3bee99-e186-46cc-aa33-037087524014",
     "@type": "BillOfMaterials",
     "relationship": []
   },
   {
     "name": "blackducksoftware_centos_minus_vim_plus_bacula",
     "revision": "1.0",
-    "@id": "data:centos/blackducksoftware_centos_minus_vim_plus_bacula/1_0",
+    "@id": "http:centos/blackducksoftware_centos_minus_vim_plus_bacula/1_0",
     "@type": "Project",
     "externalIdentifier": {
       "externalSystemTypeId": "centos",
@@ -881,30 +881,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:centos/systemd-libs/219-42.el7_4.1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:fedora/systemd-libs/219-42.el7_4.1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:redhat/systemd-libs/219-42.el7_4.1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:centos/systemd-sysv/219-42.el7_4.1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:fedora/systemd-sysv/219-42.el7_4.1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:redhat/systemd-sysv/219-42.el7_4.1",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "data:centos/postgresql-libs/9.2.23-1.el7_4",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -914,6 +890,30 @@
       },
       {
         "related": "data:redhat/postgresql-libs/9.2.23-1.el7_4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:centos/systemd-libs/219-42.el7_4.4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:fedora/systemd-libs/219-42.el7_4.4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:redhat/systemd-libs/219-42.el7_4.4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:centos/systemd-sysv/219-42.el7_4.4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:fedora/systemd-sysv/219-42.el7_4.4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:redhat/systemd-sysv/219-42.el7_4.4",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -2009,15 +2009,27 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:centos/systemd/219-42.el7_4.1",
+        "related": "data:centos/bacula-libs-sql/5.2.13-23.1.el7",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:fedora/systemd/219-42.el7_4.1",
+        "related": "data:fedora/bacula-libs-sql/5.2.13-23.1.el7",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:redhat/systemd/219-42.el7_4.1",
+        "related": "data:redhat/bacula-libs-sql/5.2.13-23.1.el7",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:centos/systemd/219-42.el7_4.4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:fedora/systemd/219-42.el7_4.4",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "data:redhat/systemd/219-42.el7_4.4",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -2030,18 +2042,6 @@
       },
       {
         "related": "data:redhat/mt-st/1.1-14.el7",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:centos/bacula-libs-sql/5.2.13-23.1.el7",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:fedora/bacula-libs-sql/5.2.13-23.1.el7",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "data:redhat/bacula-libs-sql/5.2.13-23.1.el7",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -4639,72 +4639,6 @@
     "relationship": []
   },
   {
-    "name": "systemd-libs",
-    "revision": "219-42.el7_4.1",
-    "@id": "data:centos/systemd-libs/219-42.el7_4.1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "centos",
-      "externalId": "systemd-libs/219-42.el7_4.1/x86_64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "systemd-libs",
-    "revision": "219-42.el7_4.1",
-    "@id": "data:fedora/systemd-libs/219-42.el7_4.1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "fedora",
-      "externalId": "systemd-libs/219-42.el7_4.1/x86_64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "systemd-libs",
-    "revision": "219-42.el7_4.1",
-    "@id": "data:redhat/systemd-libs/219-42.el7_4.1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "redhat",
-      "externalId": "systemd-libs/219-42.el7_4.1/x86_64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "systemd-sysv",
-    "revision": "219-42.el7_4.1",
-    "@id": "data:centos/systemd-sysv/219-42.el7_4.1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "centos",
-      "externalId": "systemd-sysv/219-42.el7_4.1/x86_64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "systemd-sysv",
-    "revision": "219-42.el7_4.1",
-    "@id": "data:fedora/systemd-sysv/219-42.el7_4.1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "fedora",
-      "externalId": "systemd-sysv/219-42.el7_4.1/x86_64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "systemd-sysv",
-    "revision": "219-42.el7_4.1",
-    "@id": "data:redhat/systemd-sysv/219-42.el7_4.1",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "redhat",
-      "externalId": "systemd-sysv/219-42.el7_4.1/x86_64"
-    },
-    "relationship": []
-  },
-  {
     "name": "postgresql-libs",
     "revision": "9.2.23-1.el7_4",
     "@id": "data:centos/postgresql-libs/9.2.23-1.el7_4",
@@ -4734,6 +4668,72 @@
     "externalIdentifier": {
       "externalSystemTypeId": "redhat",
       "externalId": "postgresql-libs/9.2.23-1.el7_4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "systemd-libs",
+    "revision": "219-42.el7_4.4",
+    "@id": "data:centos/systemd-libs/219-42.el7_4.4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "systemd-libs/219-42.el7_4.4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "systemd-libs",
+    "revision": "219-42.el7_4.4",
+    "@id": "data:fedora/systemd-libs/219-42.el7_4.4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "systemd-libs/219-42.el7_4.4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "systemd-libs",
+    "revision": "219-42.el7_4.4",
+    "@id": "data:redhat/systemd-libs/219-42.el7_4.4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "systemd-libs/219-42.el7_4.4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "systemd-sysv",
+    "revision": "219-42.el7_4.4",
+    "@id": "data:centos/systemd-sysv/219-42.el7_4.4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "systemd-sysv/219-42.el7_4.4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "systemd-sysv",
+    "revision": "219-42.el7_4.4",
+    "@id": "data:fedora/systemd-sysv/219-42.el7_4.4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "systemd-sysv/219-42.el7_4.4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "systemd-sysv",
+    "revision": "219-42.el7_4.4",
+    "@id": "data:redhat/systemd-sysv/219-42.el7_4.4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "systemd-sysv/219-42.el7_4.4/x86_64"
     },
     "relationship": []
   },
@@ -7741,35 +7741,68 @@
     "relationship": []
   },
   {
-    "name": "systemd",
-    "revision": "219-42.el7_4.1",
-    "@id": "data:centos/systemd/219-42.el7_4.1",
+    "name": "bacula-libs-sql",
+    "revision": "5.2.13-23.1.el7",
+    "@id": "data:centos/bacula-libs-sql/5.2.13-23.1.el7",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "centos",
-      "externalId": "systemd/219-42.el7_4.1/x86_64"
+      "externalId": "bacula-libs-sql/5.2.13-23.1.el7/x86_64"
     },
     "relationship": []
   },
   {
-    "name": "systemd",
-    "revision": "219-42.el7_4.1",
-    "@id": "data:fedora/systemd/219-42.el7_4.1",
+    "name": "bacula-libs-sql",
+    "revision": "5.2.13-23.1.el7",
+    "@id": "data:fedora/bacula-libs-sql/5.2.13-23.1.el7",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "fedora",
-      "externalId": "systemd/219-42.el7_4.1/x86_64"
+      "externalId": "bacula-libs-sql/5.2.13-23.1.el7/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "bacula-libs-sql",
+    "revision": "5.2.13-23.1.el7",
+    "@id": "data:redhat/bacula-libs-sql/5.2.13-23.1.el7",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "bacula-libs-sql/5.2.13-23.1.el7/x86_64"
     },
     "relationship": []
   },
   {
     "name": "systemd",
-    "revision": "219-42.el7_4.1",
-    "@id": "data:redhat/systemd/219-42.el7_4.1",
+    "revision": "219-42.el7_4.4",
+    "@id": "data:centos/systemd/219-42.el7_4.4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "systemd/219-42.el7_4.4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "systemd",
+    "revision": "219-42.el7_4.4",
+    "@id": "data:fedora/systemd/219-42.el7_4.4",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "systemd/219-42.el7_4.4/x86_64"
+    },
+    "relationship": []
+  },
+  {
+    "name": "systemd",
+    "revision": "219-42.el7_4.4",
+    "@id": "data:redhat/systemd/219-42.el7_4.4",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "redhat",
-      "externalId": "systemd/219-42.el7_4.1/x86_64"
+      "externalId": "systemd/219-42.el7_4.4/x86_64"
     },
     "relationship": []
   },
@@ -7803,39 +7836,6 @@
     "externalIdentifier": {
       "externalSystemTypeId": "redhat",
       "externalId": "mt-st/1.1-14.el7/x86_64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "bacula-libs-sql",
-    "revision": "5.2.13-23.1.el7",
-    "@id": "data:centos/bacula-libs-sql/5.2.13-23.1.el7",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "centos",
-      "externalId": "bacula-libs-sql/5.2.13-23.1.el7/x86_64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "bacula-libs-sql",
-    "revision": "5.2.13-23.1.el7",
-    "@id": "data:fedora/bacula-libs-sql/5.2.13-23.1.el7",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "fedora",
-      "externalId": "bacula-libs-sql/5.2.13-23.1.el7/x86_64"
-    },
-    "relationship": []
-  },
-  {
-    "name": "bacula-libs-sql",
-    "revision": "5.2.13-23.1.el7",
-    "@id": "data:redhat/bacula-libs-sql/5.2.13-23.1.el7",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "redhat",
-      "externalId": "bacula-libs-sql/5.2.13-23.1.el7/x86_64"
     },
     "relationship": []
   },

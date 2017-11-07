@@ -2,14 +2,14 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "alpine_3.6_lib_apk_APK",
-    "@id": "uuid:94e4ea71-0848-4b55-b5b6-b519b7da15f9",
+    "@id": "uuid:cf3cbe1f-f78d-4e06-9ec0-ec87d879c234",
     "@type": "BillOfMaterials",
     "relationship": []
   },
   {
     "name": "alpine",
     "revision": "3.6",
-    "@id": "data:alpine/alpine/3_6",
+    "@id": "http:alpine/alpine/3_6",
     "@type": "Project",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
@@ -17,11 +17,11 @@
     },
     "relationship": [
       {
-        "related": "data:alpine/musl/1.1.16-r10",
+        "related": "data:alpine/musl/1.1.16-r14",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:alpine/busybox/1.26.2-r5",
+        "related": "data:alpine/busybox/1.26.2-r7",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -33,11 +33,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:alpine/libressl2.5-libcrypto/2.5.4-r0",
+        "related": "data:alpine/libressl2.5-libcrypto/2.5.5-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:alpine/libressl2.5-libssl/2.5.4-r0",
+        "related": "data:alpine/libressl2.5-libssl/2.5.5-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -45,7 +45,7 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:alpine/apk-tools/2.7.2-r0",
+        "related": "data:alpine/apk-tools/2.7.3-r0",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -53,7 +53,7 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "data:alpine/musl-utils/1.1.16-r10",
+        "related": "data:alpine/musl-utils/1.1.16-r14",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -64,23 +64,23 @@
   },
   {
     "name": "musl",
-    "revision": "1.1.16-r10",
-    "@id": "data:alpine/musl/1.1.16-r10",
+    "revision": "1.1.16-r14",
+    "@id": "data:alpine/musl/1.1.16-r14",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
-      "externalId": "musl/1.1.16-r10/x86_64"
+      "externalId": "musl/1.1.16-r14/x86_64"
     },
     "relationship": []
   },
   {
     "name": "busybox",
-    "revision": "1.26.2-r5",
-    "@id": "data:alpine/busybox/1.26.2-r5",
+    "revision": "1.26.2-r7",
+    "@id": "data:alpine/busybox/1.26.2-r7",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
-      "externalId": "busybox/1.26.2-r5/x86_64"
+      "externalId": "busybox/1.26.2-r7/x86_64"
     },
     "relationship": []
   },
@@ -108,23 +108,23 @@
   },
   {
     "name": "libressl2.5-libcrypto",
-    "revision": "2.5.4-r0",
-    "@id": "data:alpine/libressl2.5-libcrypto/2.5.4-r0",
+    "revision": "2.5.5-r0",
+    "@id": "data:alpine/libressl2.5-libcrypto/2.5.5-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
-      "externalId": "libressl2.5-libcrypto/2.5.4-r0/x86_64"
+      "externalId": "libressl2.5-libcrypto/2.5.5-r0/x86_64"
     },
     "relationship": []
   },
   {
     "name": "libressl2.5-libssl",
-    "revision": "2.5.4-r0",
-    "@id": "data:alpine/libressl2.5-libssl/2.5.4-r0",
+    "revision": "2.5.5-r0",
+    "@id": "data:alpine/libressl2.5-libssl/2.5.5-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
-      "externalId": "libressl2.5-libssl/2.5.4-r0/x86_64"
+      "externalId": "libressl2.5-libssl/2.5.5-r0/x86_64"
     },
     "relationship": []
   },
@@ -141,12 +141,12 @@
   },
   {
     "name": "apk-tools",
-    "revision": "2.7.2-r0",
-    "@id": "data:alpine/apk-tools/2.7.2-r0",
+    "revision": "2.7.3-r0",
+    "@id": "data:alpine/apk-tools/2.7.3-r0",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
-      "externalId": "apk-tools/2.7.2-r0/x86_64"
+      "externalId": "apk-tools/2.7.3-r0/x86_64"
     },
     "relationship": []
   },
@@ -163,12 +163,12 @@
   },
   {
     "name": "musl-utils",
-    "revision": "1.1.16-r10",
-    "@id": "data:alpine/musl-utils/1.1.16-r10",
+    "revision": "1.1.16-r14",
+    "@id": "data:alpine/musl-utils/1.1.16-r14",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
-      "externalId": "musl-utils/1.1.16-r10/x86_64"
+      "externalId": "musl-utils/1.1.16-r14/x86_64"
     },
     "relationship": []
   },
