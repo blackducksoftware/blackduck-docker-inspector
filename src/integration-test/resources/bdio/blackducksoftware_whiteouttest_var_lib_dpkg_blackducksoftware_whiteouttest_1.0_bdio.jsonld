@@ -2,7 +2,7 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "blackducksoftware_whiteouttest_1.0_var_lib_dpkg_DPKG",
-    "@id": "uuid:668f00b1-7533-4478-9357-b576399c0bad",
+    "@id": "uuid:213dd27e-dd91-4f6e-bb87-88f28cc7efee",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -149,10 +149,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/libssl1_0_0/1_0_2g_1ubuntu4_8/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:ubuntu/libstdc__6/5_4_0_6ubuntu1_16_04_5/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -198,6 +194,10 @@
       },
       {
         "related": "http:ubuntu/libwind0_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:ubuntu/libssl1_0_0/1_0_2g_1ubuntu4_9/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -325,11 +325,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/openssl/1_0_2g_1ubuntu4_8/amd64",
+        "related": "http:ubuntu/libbz2_1_0/1_0_6_8/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/libbz2_1_0/1_0_6_8/amd64",
+        "related": "http:debian/openssl/1_0_2g_1ubuntu4_9/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -353,11 +353,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/openssl/1_0_2g_1ubuntu4_8/amd64",
+        "related": "http:ubuntu/libheimntlm0_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/libheimntlm0_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
+        "related": "http:ubuntu/openssl/1_0_2g_1ubuntu4_9/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -921,6 +921,10 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:debian/libssl1_0_0/1_0_2g_1ubuntu4_9/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:debian/init_system_helpers/1_29ubuntu4/all",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -934,10 +938,6 @@
       },
       {
         "related": "http:debian/libk5crypto3/1_13_2_dfsg_5ubuntu2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:debian/libssl1_0_0/1_0_2g_1ubuntu4_8/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1679,26 +1679,6 @@
     "relationship": []
   },
   {
-    "name": "libssl1.0.0",
-    "revision": "1.0.2g-1ubuntu4.8",
-    "@id": "http:ubuntu/libssl1_0_0/1_0_2g_1ubuntu4_8/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libssl1.0.0/1.0.2g-1ubuntu4.8/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "ubuntu",
-          "separator": "/"
-        },
-        "name": "libssl1.0.0",
-        "version": "1.0.2g-1ubuntu4.8",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "libstdc++6",
     "revision": "5.4.0-6ubuntu1~16.04.5",
     "@id": "http:ubuntu/libstdc__6/5_4_0_6ubuntu1_16_04_5/amd64",
@@ -1933,6 +1913,26 @@
         },
         "name": "libwind0-heimdal",
         "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libssl1.0.0",
+    "revision": "1.0.2g-1ubuntu4.9",
+    "@id": "http:ubuntu/libssl1_0_0/1_0_2g_1ubuntu4_9/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libssl1.0.0/1.0.2g-1ubuntu4.9/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/"
+        },
+        "name": "libssl1.0.0",
+        "version": "1.0.2g-1ubuntu4.9",
         "architecture": "amd64"
       }
     },
@@ -2559,26 +2559,6 @@
     "relationship": []
   },
   {
-    "name": "openssl",
-    "revision": "1.0.2g-1ubuntu4.8",
-    "@id": "http:debian/openssl/1_0_2g_1ubuntu4_8/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "openssl/1.0.2g-1ubuntu4.8/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "debian",
-          "separator": "/"
-        },
-        "name": "openssl",
-        "version": "1.0.2g-1ubuntu4.8",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "libbz2-1.0",
     "revision": "1.0.6-8",
     "@id": "http:ubuntu/libbz2_1_0/1_0_6_8/amd64",
@@ -2593,6 +2573,26 @@
         },
         "name": "libbz2-1.0",
         "version": "1.0.6-8",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "openssl",
+    "revision": "1.0.2g-1ubuntu4.9",
+    "@id": "http:debian/openssl/1_0_2g_1ubuntu4_9/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "openssl/1.0.2g-1ubuntu4.9/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "debian",
+          "separator": "/"
+        },
+        "name": "openssl",
+        "version": "1.0.2g-1ubuntu4.9",
         "architecture": "amd64"
       }
     },
@@ -2699,26 +2699,6 @@
     "relationship": []
   },
   {
-    "name": "openssl",
-    "revision": "1.0.2g-1ubuntu4.8",
-    "@id": "http:ubuntu/openssl/1_0_2g_1ubuntu4_8/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "openssl/1.0.2g-1ubuntu4.8/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "ubuntu",
-          "separator": "/"
-        },
-        "name": "openssl",
-        "version": "1.0.2g-1ubuntu4.8",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "libheimntlm0-heimdal",
     "revision": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
     "@id": "http:ubuntu/libheimntlm0_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
@@ -2733,6 +2713,26 @@
         },
         "name": "libheimntlm0-heimdal",
         "version": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "openssl",
+    "revision": "1.0.2g-1ubuntu4.9",
+    "@id": "http:ubuntu/openssl/1_0_2g_1ubuntu4_9/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "openssl/1.0.2g-1ubuntu4.9/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/"
+        },
+        "name": "openssl",
+        "version": "1.0.2g-1ubuntu4.9",
         "architecture": "amd64"
       }
     },
@@ -5539,6 +5539,26 @@
     "relationship": []
   },
   {
+    "name": "libssl1.0.0",
+    "revision": "1.0.2g-1ubuntu4.9",
+    "@id": "http:debian/libssl1_0_0/1_0_2g_1ubuntu4_9/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libssl1.0.0/1.0.2g-1ubuntu4.9/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "debian",
+          "separator": "/"
+        },
+        "name": "libssl1.0.0",
+        "version": "1.0.2g-1ubuntu4.9",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "init-system-helpers",
     "revision": "1.29ubuntu4",
     "@id": "http:debian/init_system_helpers/1_29ubuntu4/all",
@@ -5613,26 +5633,6 @@
         },
         "name": "libk5crypto3",
         "version": "1.13.2+dfsg-5ubuntu2",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libssl1.0.0",
-    "revision": "1.0.2g-1ubuntu4.8",
-    "@id": "http:debian/libssl1_0_0/1_0_2g_1ubuntu4_8/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libssl1.0.0/1.0.2g-1ubuntu4.8/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "debian",
-          "separator": "/"
-        },
-        "name": "libssl1.0.0",
-        "version": "1.0.2g-1ubuntu4.8",
         "architecture": "amd64"
       }
     },
