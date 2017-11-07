@@ -64,6 +64,9 @@ public class Application {
     @Value("${docker.image}")
     private String dockerImage;
 
+    @Value("${docker.image.id}")
+    private String dockerImageId;
+
     // docker.image.repo and docker.image.tag are for selecting an image
     // from a multi-image tarfile
     @Value("${docker.image.repo}")
@@ -340,6 +343,8 @@ public class Application {
         File dockerTarFile = null;
         if (StringUtils.isNotBlank(dockerTar)) {
             dockerTarFile = new File(dockerTar);
+        } else if (StringUtils.isNotBlank(dockerImageId)) {
+            dockerTarFile = hubDockerManager.getTarFileFromDockerImageById(dockerImageId);
         } else if (StringUtils.isNotBlank(dockerImageRepo)) {
             dockerTarFile = hubDockerManager.getTarFileFromDockerImage(dockerImageRepo, dockerImageTag);
         }

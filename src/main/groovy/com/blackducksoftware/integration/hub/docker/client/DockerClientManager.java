@@ -48,6 +48,8 @@ import com.github.dockerjava.api.command.CreateContainerCmd;
 import com.github.dockerjava.api.command.CreateContainerResponse;
 import com.github.dockerjava.api.command.ExecCreateCmd;
 import com.github.dockerjava.api.command.ExecCreateCmdResponse;
+import com.github.dockerjava.api.command.InspectImageCmd;
+import com.github.dockerjava.api.command.InspectImageResponse;
 import com.github.dockerjava.api.command.PullImageCmd;
 import com.github.dockerjava.api.command.SaveImageCmd;
 import com.github.dockerjava.api.exception.NotFoundException;
@@ -106,11 +108,27 @@ public class DockerClientManager {
     @Value("${output.include.containerfilesystem}")
     private boolean outputIncludeContainerFileSystemTarfile;
 
+    public File getTarFileFromDockerImageById(final String imageId) throws HubIntegrationException, IOException {
+        final File imageTarDirectory = new File(new File(programPaths.getHubDockerWorkingDirPath()), "tarDirectory");
+        final DockerClient dockerClient = hubDockerClient.getDockerClient();
+        final InspectImageCmd inspectImageCmd = dockerClient.inspectImageCmd(imageId);
+        final InspectImageResponse imageDetails = inspectImageCmd.exec();
+        final List<String> repoTags = imageDetails.getRepoTags();
+        if (repoTags.size() == 0) {
+            throw new HubIntegrationException(String.format("Unable to get image name:tag for image ID %s", imageId));
+        }
+        final String[] imageNameTagParts = repoTags.get(0).split(":");
+        final String imageName = imageNameTagParts[0];
+        final String tagName = imageNameTagParts[1];
+        logger.info(String.format("Converted image ID %s to image name:tag %s:%s", imageId, imageName, tagName));
+        final File imageTarFile = saveImageToDir(imageTarDirectory, imageName, tagName);
+        return imageTarFile;
+    }
+
     public File getTarFileFromDockerImage(final String imageName, final String tagName) throws IOException, HubIntegrationException {
         final File imageTarDirectory = new File(new File(programPaths.getHubDockerWorkingDirPath()), "tarDirectory");
         pullImage(imageName, tagName);
-        final File imageTarFile = new File(imageTarDirectory, programPaths.getImageTarFilename(imageName, tagName));
-        saveImage(imageName, tagName, imageTarFile);
+        final File imageTarFile = saveImageToDir(imageTarDirectory, imageName, tagName);
         return imageTarFile;
     }
 
@@ -131,6 +149,12 @@ public class DockerClientManager {
         } else {
             logger.info("Image already pulled");
         }
+    }
+
+    private File saveImageToDir(final File imageTarDirectory, final String imageName, final String tagName) throws IOException, HubIntegrationException {
+        final File imageTarFile = new File(imageTarDirectory, programPaths.getImageTarFilename(imageName, tagName));
+        saveImageToFile(imageName, tagName, imageTarFile);
+        return imageTarFile;
     }
 
     private Image getLocalImage(final DockerClient dockerClient, final String imageName, final String tagName) {
@@ -317,7 +341,7 @@ public class DockerClientManager {
         copyProperties.exec();
     }
 
-    private void saveImage(final String imageName, final String tagName, final File imageTarFile) throws IOException, HubIntegrationException {
+    private void saveImageToFile(final String imageName, final String tagName, final File imageTarFile) throws IOException, HubIntegrationException {
         InputStream tarInputStream = null;
         try {
             logger.info(String.format("Saving the docker image to : %s", imageTarFile.getCanonicalPath()));
