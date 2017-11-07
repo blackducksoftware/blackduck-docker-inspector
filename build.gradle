@@ -11,10 +11,14 @@ buildscript {
         }
 }
 
-apply plugin: 'groovy'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'eclipse'
-apply plugin: 'java'
+plugins {
+    id 'groovy'
+    id 'eclipse'
+    id 'org.springframework.boot' version '1.5.8.RELEASE'
+    id 'maven-publish'
+    id "com.jfrog.artifactory" version '4.5.4'
+}
+
 apply plugin: 'com.bmuschko.docker-remote-api'
 
 compileJava.options.encoding = 'UTF-8'
@@ -30,8 +34,7 @@ version = '4.0.0-SNAPSHOT'
 description = ''
 String hubDockerImageName = 'hub-docker-inspector'
 
-final String artifactoryUrl = "http://prd-eng-repo01.dc2.lan:8181/artifactory"
-final String artifactoryRepoKey = "bds-integrations"
+final String artifactoryUrl = "https://test-repo.blackducksoftware.com/artifactory"
 final String artifactoryIntegrationPath = "com/blackducksoftware/integration"
 
 sourceCompatibility = 1.7
@@ -443,17 +446,36 @@ task itOnly(type: Test) {
     outputs.upToDateWhen { false }
 }
 
-task publishJarToArtifactory(type: Exec, dependsOn: build) {
-    commandLine 'curl', '-u', "${System.env.BDS_PUBLIC_ARTIFACTORY_USERNAME}:${System.env.BDS_PUBLIC_ARTIFACTORY_PASSWORD}", '-X', 'PUT', "${artifactoryUrl}/${artifactoryRepoKey}/${artifactoryIntegrationPath}/${project.name}/${version}/${project.name}-${version}.jar", '-T', "${buildDir}/libs/${project.name}-${version}.jar", '-f'
-}
-
-task release(dependsOn: [checkVersion, releaseUbuntuImage, releaseCentosImage, releaseAlpineImage, publishJarToArtifactory]) {}
+task release(dependsOn: [checkVersion, releaseUbuntuImage, releaseCentosImage, releaseAlpineImage, artifactoryPublish]) {}
 
 task all(dependsOn: [integrationTest]) {}
 
 repositories {
     mavenCentral()
     mavenLocal()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            def artifactName = "${buildDir}/libs/${project.name}-${version}.jar"
+            artifact (artifactName)
+        }
+    }
+}
+
+artifactory {
+    publish {
+        contextUrl = artifactoryUrl
+        repository {
+            repoKey = artifactoryRepo
+            username = artifactoryDeployerUsername
+            password = artifactoryDeployerPassword
+        }
+        defaults {
+            publications ('mavenJava')
+        }
+    }
 }
 
 dependencies {

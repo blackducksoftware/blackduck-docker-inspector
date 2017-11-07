@@ -28,7 +28,7 @@ jarVersion=${DOCKER_INSPECTOR_VERSION}
 ##################
 latestCommitIdFileUrl="https://blackducksoftware.github.io/hub-docker-inspector/latest-commit-id.txt"
 localCommitIdFile="${DOCKER_INSPECTOR_JAR_DIR}/hub-docker-inspector-latest-commit-id.txt"
-latestReleasedJarUrl='https://updates.suite.blackducksoftware.com/bdosvr/com/blackducksoftware/integration/hub-docker-inspector/\[RELEASE\]/hub-docker-inspector-\[RELEASE\].jar'
+latestReleasedJarUrl='https://test-repo.blackducksoftware.com/artifactory/bds-integrations-snapshot/com/blackducksoftware/integration/hub-docker-inspector/\[RELEASE\]/hub-docker-inspector-\[RELEASE\].jar'
 currentVersionCommitId=""
 version="@VERSION@"
 encodingSetting="-Dfile.encoding=UTF-8"
@@ -96,7 +96,12 @@ function deriveJarDetails() {
     else
       log "Will download hub-docker-inspector-${jarVersion}.jar"
       rm -f "${localCommitIdFile}" # Local commit ID won't apply to this jar
-      selectedJarUrl="https://updates.suite.blackducksoftware.com/bdosvr/com/blackducksoftware/integration/hub-docker-inspector/${jarVersion}/hub-docker-inspector-${jarVersion}.jar"
+      if [[ $jarVersion == *"SNAPSHOT"* ]]; then
+      	selectedRepoKey="bds-integrations-snapshot"
+      else
+      	selectedRepoKey="bds-integrations-released"
+      fi
+      selectedJarUrl="https://test-repo.blackducksoftware.com/artifactory/${selectedRepoKey}/com/blackducksoftware/integration/hub-docker-inspector/${jarVersion}/hub-docker-inspector-${jarVersion}.jar"
       downloadedJarPath="${DOCKER_INSPECTOR_JAR_DIR}/hub-docker-inspector-${jarVersion}.jar"
     fi
     log "Selected jar: ${selectedJarUrl}"
@@ -138,7 +143,8 @@ function prepareLatestJar() {
 #
 function deriveLatestReleasedFilename() {
 	log "Getting name of latest released jar file"
-    latestReleasedFilename=$(curl --head 'https://updates.suite.blackducksoftware.com/bdosvr/com/blackducksoftware/integration/hub-docker-inspector/\[RELEASE\]/hub-docker-inspector-\[RELEASE\].jar' | fgrep 'X-Artifactory-Filename' | cut -d' ' -f2 | tr -d '\r\n')
+	# TODO factor out the released URL
+    latestReleasedFilename=$(curl --head 'https://test-repo.blackducksoftware.com/artifactory/bds-integrations-snapshot/com/blackducksoftware/integration/hub-docker-inspector/\[RELEASE\]/hub-docker-inspector-\[RELEASE\].jar' | fgrep 'X-Artifactory-Filename' | cut -d' ' -f2 | tr -d '\r\n')
     log "Latest released jar filename: ${latestReleasedFilename}"
 }
 
