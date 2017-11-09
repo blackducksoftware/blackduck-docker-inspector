@@ -119,7 +119,7 @@ public class ProgramPaths {
             hubDockerPgmDirPath = getProgramDirPath();
         }
         if (StringUtils.isBlank(hubDockerJarPathHost)) {
-            hubDockerJarPathHost = givenJarPath.replaceAll("%20", " ");
+            hubDockerJarPathHost = unEscape(givenJarPath);
         }
         hubDockerPgmDirPathContainer = getProgramDirPathContainer();
         hubDockerConfigDirPath = hubDockerPgmDirPath + CONFIG_DIR;
@@ -133,6 +133,10 @@ public class ProgramPaths {
         hubDockerOutputPathContainer = getProgramDirPathContainer() + OUTPUT_DIR;
         hubDockerResultPath = hubDockerOutputPath + RESULT_JSON_FILENAME;
         hubDockerJarPathActual = deriveJarPath();
+    }
+
+    public static String unEscape(final String origString) {
+        return origString.replaceAll("%20", " ");
     }
 
     private String deriveJarPath() {

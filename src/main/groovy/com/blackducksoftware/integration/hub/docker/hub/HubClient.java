@@ -43,6 +43,7 @@ import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.api.bom.BomImportRequestService;
 import com.blackducksoftware.integration.hub.builder.HubServerConfigBuilder;
 import com.blackducksoftware.integration.hub.dataservice.phonehome.PhoneHomeDataService;
+import com.blackducksoftware.integration.hub.docker.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.client.ProgramVersion;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.blackducksoftware.integration.hub.global.HubServerConfig;
@@ -138,12 +139,7 @@ public class HubClient {
     }
 
     private String getHubUsername() {
-        return unEscape(hubUsername);
-    }
-
-    // TODO ProgramPaths has the same code; share
-    private String unEscape(final String origString) {
-        return origString.replaceAll("%20", " ");
+        return ProgramPaths.unEscape(hubUsername);
     }
 
     public void phoneHome(final String dockerEngineVersion) {

@@ -117,6 +117,16 @@ function preProcessOptions() {
 			hubUsername=$(echo "$cmdlinearg" | cut -d '=' -f 2)
 			hubUsernameEscaped=$(escapeSpaces "${hubUsername}")
 			hubUsernameArgument="--hub.username=${hubUsernameEscaped}"
+		elif [[ "$cmdlinearg" == --hub.project.name=* ]]
+		then
+			hubProjectName=$(echo "$cmdlinearg" | cut -d '=' -f 2)
+			hubProjectNameEscaped=$(escapeSpaces "${hubProjectName}")
+			hubProjectNameArgument="--hub.project.name=${hubProjectNameEscaped}"
+		elif [[ "$cmdlinearg" == --hub.project.version=* ]]
+		then
+			hubProjectVersion=$(echo "$cmdlinearg" | cut -d '=' -f 2)
+			hubProjectVersionEscaped=$(escapeSpaces "${hubProjectVersion}")
+			hubProjectVersionArgument="--hub.project.version=${hubProjectVersionEscaped}"
 		else
 			if [[ ${cmdlineargindex} -eq $(( $# - 1)) ]]
 			then
@@ -192,6 +202,8 @@ createdWorkingDir=false
 jarPath=""
 jarPathAlreadySet=false
 hubUsernameArgument=""
+hubProjectNameArgument=""
+hubProjectVersionArgument=""
 
 if [ $# -lt 1 ]
 then
@@ -278,11 +290,11 @@ then
 		err "Tar file ${image} does not exist"
 		exit -1
 	fi
-	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" ${hubUsernameArgument} "--docker.tar=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
+	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" ${hubUsernameArgument} ${hubProjectNameArgument} ${hubProjectVersionArgument} "--docker.tar=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
 	status=$?
 else
 	log Inspecting image: $image
-	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" ${hubUsernameArgument} "--docker.image=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
+	java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" ${hubUsernameArgument} ${hubProjectNameArgument} ${hubProjectVersionArgument} "--docker.image=$image" "--host.working.dir.path=${workingDir}" ${options[*]}
 	status=$?
 fi
 

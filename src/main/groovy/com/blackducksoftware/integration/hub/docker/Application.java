@@ -77,10 +77,10 @@ public class Application {
     private String linuxDistro;
 
     @Value("${hub.project.name}")
-    private String hubProjectName;
+    private String hubProjectName; // access via getHubProjectName()
 
     @Value("${hub.project.version}")
-    private String hubVersionName;
+    private String hubProjectVersion; // access via getHubProjectVersion()
 
     @Value("${dry.run}")
     private boolean dryRun;
@@ -238,8 +238,16 @@ public class Application {
             throws IOException, InterruptedException, IntegrationException {
         final String msg = String.format("Target image tarfile: %s; target OS: %s", dockerTarFile.getAbsolutePath(), targetOsEnum.toString());
         logger.info(msg);
-        final List<File> bdioFiles = hubDockerManager.generateBdioFromImageFilesDir(dockerImageRepo, dockerImageTag, layerMappings, hubProjectName, hubVersionName, dockerTarFile, targetImageFileSystemRootDir, targetOsEnum);
+        final List<File> bdioFiles = hubDockerManager.generateBdioFromImageFilesDir(dockerImageRepo, dockerImageTag, layerMappings, getHubProjectName(), getHubProjectVersion(), dockerTarFile, targetImageFileSystemRootDir, targetOsEnum);
         logger.warn(String.format("%d BDIO Files generated", bdioFiles.size()));
+    }
+
+    private String getHubProjectName() {
+        return ProgramPaths.unEscape(hubProjectName);
+    }
+
+    private String getHubProjectVersion() {
+        return ProgramPaths.unEscape(hubProjectVersion);
     }
 
     private void init() throws IOException, IntegrationException {
