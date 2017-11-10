@@ -23,6 +23,8 @@
  */
 package com.blackducksoftware.integration.hub.docker;
 
+import java.io.File;
+
 import javax.annotation.PostConstruct;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -141,7 +143,9 @@ public class ProgramPaths {
     }
 
     public String unEscape(final String origString) {
-        return origString.replaceAll("%20", " ");
+        final String unEscapedString = origString.replaceAll("%20", " ");
+        logger.debug(String.format("UnEscaped %s to %s", origString, unEscapedString));
+        return unEscapedString;
     }
 
     public String getUserOutputDir() {
@@ -200,6 +204,11 @@ public class ProgramPaths {
 
     public String getHubDockerJarPathHost() {
         return hubDockerJarPathHost;
+    }
+
+    public String getHubDockerJarFilenameHost() {
+        final File jarFile = new File(hubDockerJarPathHost);
+        return jarFile.getName();
     }
 
     public String getHubDockerJarPathContainer() {

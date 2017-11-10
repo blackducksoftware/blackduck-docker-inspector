@@ -202,7 +202,7 @@ public class DockerClientManager {
             }
         }
         cmd.add("-jar");
-        cmd.add("/opt/blackduck/hub-docker-inspector/hub-docker-inspector.jar");
+        cmd.add(String.format("/opt/blackduck/hub-docker-inspector/%s", programPaths.getHubDockerJarFilenameHost()));
         cmd.add(String.format("--spring.config.location=%s", "/opt/blackduck/hub-docker-inspector/config/application.properties"));
         cmd.add(String.format("--docker.tar=%s", tarFilePathInSubContainer));
         execCommandInContainer(dockerClient, imageId, containerId, cmd);

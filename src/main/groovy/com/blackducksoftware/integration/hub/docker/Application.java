@@ -282,8 +282,16 @@ public class Application {
             throws IOException, InterruptedException, IntegrationException {
         final String msg = String.format("Target image tarfile: %s; target OS: %s", dockerTarFile.getAbsolutePath(), targetOsEnum.toString());
         logger.info(msg);
-        final List<File> bdioFiles = hubDockerManager.generateBdioFromImageFilesDir(dockerImageRepo, dockerImageTag, layerMappings, hubProjectName, hubVersionName, dockerTarFile, targetImageFileSystemRootDir, targetOsEnum);
+        final List<File> bdioFiles = hubDockerManager.generateBdioFromImageFilesDir(dockerImageRepo, dockerImageTag, layerMappings, getHubProjectName(), getHubProjectVersion(), dockerTarFile, targetImageFileSystemRootDir, targetOsEnum);
         logger.info(String.format("%d BDIO Files generated", bdioFiles.size()));
+    }
+
+    private String getHubProjectName() {
+        return programPaths.unEscape(hubProjectName);
+    }
+
+    private String getHubProjectVersion() {
+        return programPaths.unEscape(hubVersionName);
     }
 
     private void init() throws IOException, IntegrationException {

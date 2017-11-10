@@ -106,6 +106,7 @@ public class HubDockerManager {
 
     public List<File> generateBdioFromImageFilesDir(final String dockerImageRepo, final String dockerImageTag, final List<ManifestLayerMapping> mappings, final String projectName, final String versionName, final File dockerTar,
             final File targetImageFileSystemRootDir, final OperatingSystemEnum osEnum) throws IOException, HubIntegrationException, InterruptedException {
+        logger.debug(String.format("generateBdioFromImageFilesDir(): projectName: %s, versionName: %s", projectName, versionName));
         final ImageInfo imagePkgMgrInfo = tarParser.collectPkgMgrInfo(targetImageFileSystemRootDir, osEnum);
         if (imagePkgMgrInfo.getOperatingSystemEnum() == null) {
             throw new HubIntegrationException("Could not determine the Operating System of this Docker tar.");
@@ -133,8 +134,8 @@ public class HubDockerManager {
         }
     }
 
-    private List<File> generateBdioFromPackageMgrDirs(final String dockerImageRepo, final String dockerImageTag, final List<ManifestLayerMapping> layerMappings, final String projectName, final String versionName, final String tarFileName,
-            final ImageInfo imageInfo, final String architecture) throws FileNotFoundException, IOException, HubIntegrationException, InterruptedException {
+    private List<File> generateBdioFromPackageMgrDirs(final String dockerImageRepo, final String dockerImageTag, final List<ManifestLayerMapping> layerMappings, final String givenProjectName, final String givenVersionName,
+            final String tarFileName, final ImageInfo imageInfo, final String architecture) throws FileNotFoundException, IOException, HubIntegrationException, InterruptedException {
         logger.trace("generateBdioFromPackageMgrDirs(): Purging/recreating output dir");
         final File outputDirectory = new File(programPaths.getHubDockerOutputPathContainer());
         try {
@@ -156,23 +157,22 @@ public class HubDockerManager {
             throw new HubIntegrationException(String.format("Mapping for %s not found in target image manifest file", imageInfo.getFileSystemRootDirName()));
         }
 
-        String codeLocationName, hubProjectName, hubVersionName = "";
         final String imageDirectoryName = manifestMapping.getTargetImageFileSystemRootDirName();
         String pkgMgrFilePath = imageInfo.getPkgMgr().getExtractedPackageManagerDirectory().getAbsolutePath();
         pkgMgrFilePath = pkgMgrFilePath.substring(pkgMgrFilePath.indexOf(imageDirectoryName) + imageDirectoryName.length() + 1);
 
-        codeLocationName = programPaths.getCodeLocationName(manifestMapping.getImageName(), manifestMapping.getTagName(), pkgMgrFilePath, imageInfo.getPkgMgr().getPackageManager().toString());
-        hubProjectName = deriveHubProject(manifestMapping.getImageName(), projectName);
-        hubVersionName = deriveHubProjectVersion(manifestMapping, versionName);
-        logger.info(String.format("Hub project, version: %s, %s; Code location : %s", hubProjectName, hubVersionName, codeLocationName));
-        final String bdioFilename = programPaths.getBdioFilename(manifestMapping.getImageName(), pkgMgrFilePath, hubProjectName, hubVersionName);
+        final String codeLocationName = programPaths.getCodeLocationName(manifestMapping.getImageName(), manifestMapping.getTagName(), pkgMgrFilePath, imageInfo.getPkgMgr().getPackageManager().toString());
+        final String finalProjectName = deriveHubProject(manifestMapping.getImageName(), givenProjectName);
+        final String finalProjectVersionName = deriveHubProjectVersion(manifestMapping, givenVersionName);
+        logger.info(String.format("Hub project: %s, version: %s; Code location : %s", finalProjectName, finalProjectVersionName, codeLocationName));
+        final String bdioFilename = programPaths.getBdioFilename(manifestMapping.getImageName(), pkgMgrFilePath, finalProjectName, finalProjectVersionName);
         final File bdioOutputFile = new File(outputDirectory, bdioFilename);
         bdioFiles.add(bdioOutputFile);
         try (FileOutputStream bdioOutputStream = new FileOutputStream(bdioOutputFile)) {
             try (BdioWriter bdioWriter = new BdioWriter(new Gson(), bdioOutputStream)) {
                 final Extractor extractor = getExtractorByPackageManager(imageInfo.getPkgMgr().getPackageManager());
                 final ExtractionDetails extractionDetails = new ExtractionDetails(imageInfo.getOperatingSystemEnum(), architecture);
-                extractor.extract(dockerImageRepo, dockerImageTag, imageInfo.getPkgMgr(), bdioWriter, extractionDetails, codeLocationName, hubProjectName, hubVersionName);
+                extractor.extract(dockerImageRepo, dockerImageTag, imageInfo.getPkgMgr(), bdioWriter, extractionDetails, codeLocationName, finalProjectName, finalProjectVersionName);
             }
         }
 

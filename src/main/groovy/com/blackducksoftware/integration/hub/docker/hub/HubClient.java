@@ -141,11 +141,6 @@ public class HubClient {
         logger.info(String.format("Uploaded bdio file %s to %s", bdioFile.getName(), hubServerConfig.getHubUrl()));
     }
 
-    // Keep the unEscape here through 4.0.0, and then drop it after that.
-    // It's here to provide a method (--hub.username=You%20Zer) for putting Hub Usernames with embedded spaces
-    // on the command line that will work across 3.1.2/later and 4.0.0.
-    // Starting in 4.0.0 the method is --hub.username=\"You Zer\"
-    // See IDOCKER-273
     private String getHubUsername() {
         return programPaths.unEscape(hubUsername);
     }

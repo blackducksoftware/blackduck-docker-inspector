@@ -34,6 +34,9 @@ encodingSetting="-Dfile.encoding=UTF-8"
 userSpecifiedJarPath=""
 jarPathAlreadySpecifiedOnCmdLine=false
 latestReleaseVersion=
+hubUsernameArgument=""
+hubProjectNameArgument=""
+hubProjectVersionArgument=""
 
 function printUsage() {
 	echo ""
@@ -181,6 +184,21 @@ function preProcessOptions() {
 			userSpecifiedJarPathEscaped=$(escapeSpaces "${userSpecifiedJarPath}")
 			options[${cmdlineargindex}]="--jar.path=${userSpecifiedJarPathEscaped}"
 			jarPathAlreadySpecifiedOnCmdLine=true
+		elif [[ "$cmdlinearg" == --hub.username=* ]]
+                then
+                        hubUsername=$(echo "$cmdlinearg" | cut -d '=' -f 2)
+                        hubUsernameEscaped=$(escapeSpaces "${hubUsername}")
+                        hubUsernameArgument="--hub.username=${hubUsernameEscaped}"
+                elif [[ "$cmdlinearg" == --hub.project.name=* ]]
+                then
+                        hubProjectName=$(echo "$cmdlinearg" | cut -d '=' -f 2)
+                        hubProjectNameEscaped=$(escapeSpaces "${hubProjectName}")
+                        hubProjectNameArgument="--hub.project.name=${hubProjectNameEscaped}"
+                elif [[ "$cmdlinearg" == --hub.project.version=* ]]
+                then
+                        hubProjectVersion=$(echo "$cmdlinearg" | cut -d '=' -f 2)
+                        hubProjectVersionEscaped=$(escapeSpaces "${hubProjectVersion}")
+                        hubProjectVersionArgument="--hub.project.version=${hubProjectVersionEscaped}"
 		elif [[ "${cmdlinearg}" == --spring.config.location=* ]]
 		then
 			# Once IDETECT-339 is done/released, this clause can go away
@@ -278,7 +296,7 @@ log "jarPath: ${jarPath}"
 log "newJarPathAssignment: ${newJarPathAssignment}"
 log "Options: ${options[*]}"
 log "Jar dir: ${DOCKER_INSPECTOR_JAR_DIR}"
-java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" ${options[*]}
+java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" ${options[*]} ${hubUsernameArgument} ${hubProjectNameArgument} ${hubProjectVersionArgument}
 status=$?
 log "Return code: ${status}"
 exit ${status}
