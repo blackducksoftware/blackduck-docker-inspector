@@ -301,7 +301,7 @@ function main() {
     fi
     if [ $do_inspect -eq 1 ]; then
       echo "Conduct  Inspection:"
-      "${INSPECTOR_SHELL_SCRIPT}" --hub.username=$hub_user --hub.url=$HUB_URL --hub.project.name="$hub_project" --hub.project.version="$hub_version" "${IMAGE_TARFILE}"
+      "${INSPECTOR_SHELL_SCRIPT}" --hub.username="$hub_user" --hub.url=$HUB_URL --hub.project.name="$hub_project" --hub.project.version="$hub_version" "${IMAGE_TARFILE}"
       cmd_status=$?
       if [ $cmd_status -ne 0 ]; then
         exit $cmd_status
