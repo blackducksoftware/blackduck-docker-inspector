@@ -443,8 +443,6 @@ task itOnly(type: Test) {
     outputs.upToDateWhen { false }
 }
 
-task release(dependsOn: [checkVersion, releaseUbuntuImage, releaseCentosImage, releaseAlpineImage, artifactoryPublish]) {}
-
 task all(dependsOn: [pushImages, integrationTest, artifactoryPublish]) {}
 
 repositories {
