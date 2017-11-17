@@ -105,6 +105,7 @@ class ApplicationTest {
             run: {String runOnImageName, String runOnImageVersion, File dockerTarFile, boolean devMode, String image, String repo, String tag ->
                 invokedSubContainer = true}
         ] as DockerClientManager
+        app.config = new Config();
 
         app.inspectImage()
         if (expectBdioUpload) {

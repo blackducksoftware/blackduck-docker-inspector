@@ -120,6 +120,9 @@ public class Application {
     @Autowired
     private ResultFile resultFile;
 
+    @Autowired
+    private Config config;
+
     private static int returnCode = -1;
     private static boolean onHostStatic = true;
 
@@ -311,6 +314,9 @@ public class Application {
         }
         hubDockerManager.init();
         FileOperations.removeFileOrDir(programPaths.getHubDockerWorkingDirPath());
+        config.getSortedPropNames();
+        logger.info(String.format("=== testProp: %b", config.getTestProp()));
+        config.seekFieldsWithAnnotations();
     }
 
     private void verifyHubConnection() throws HubIntegrationException {
