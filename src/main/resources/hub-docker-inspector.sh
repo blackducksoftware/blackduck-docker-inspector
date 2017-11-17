@@ -267,6 +267,7 @@ fi
 if [ \( "$1" = -j \) -o \( "$1" = --pulljar \) ]
 then
 	deriveLatestReleasedFilename
+    deriveJarDetails
 	curl ${DOCKER_INSPECTOR_CURL_OPTS} --fail -L -o "${latestReleasedFilename}" "${latestReleasedJarUrl}"
 	if [[ $? -ne 0 ]]
 	then
