@@ -67,9 +67,9 @@ public class Config {
     }
 
     // TODO not sure this belongs here
-    public List<Field> getConfigProperties() {
+    public List<DockerInspectorOption> getConfigOptions() throws IllegalArgumentException, IllegalAccessException {
         final Object configObject = this;
-        final List<Field> fieldsWithAnnotations = new ArrayList<>();
+        final List<DockerInspectorOption> opts = new ArrayList<>();
         for (final Field field : configObject.getClass().getDeclaredFields()) {
             final Annotation[] declaredAnnotations = field.getDeclaredAnnotations();
             if (declaredAnnotations.length > 0) {
@@ -81,15 +81,22 @@ public class Config {
                         final ValueDescription valueDescription = field.getAnnotation(ValueDescription.class);
                         if (!Config.GROUP_PRIVATE.equals(valueDescription.group())) {
                             logger.info(String.format("=== propName: %s, fieldName: %s, group: %s, description: %s", propName, field.getName(), valueDescription.group(), valueDescription.description()));
+                            // TODO working on values.......
+                            String value = "unknown";
+                            if (field.getType() == String.class) {
+                                value = (String) field.get(configObject);
+                            }
+                            final DockerInspectorOption opt = new DockerInspectorOption(propName, field.getName(), "originalValue: TBD", value, valueDescription.description(), field.getType(), "defaultValue: TBD", valueDescription.group());
+                            opts.add(opt);
                         } else {
                             logger.info(String.format("=== SKIPPING private prop: propName: %s, fieldName: %s, group: %s, description: %s", propName, field.getName(), valueDescription.group(), valueDescription.description()));
                         }
                     }
                 }
-                fieldsWithAnnotations.add(field);
+
             }
         }
-        return fieldsWithAnnotations;
+        return opts;
     }
 
 }

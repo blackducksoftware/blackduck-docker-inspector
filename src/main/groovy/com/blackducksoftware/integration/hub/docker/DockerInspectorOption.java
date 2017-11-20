@@ -23,17 +23,16 @@
 package com.blackducksoftware.integration.hub.docker;
 
 public class DockerInspectorOption {
-    final String key;
-    final String fieldName;
-    final String description;
-    final Class valueType;
-    final String group;
-    final String originalValue;
-    final String defaultValue;
-    final String resolvedValue;
-    public String interactiveValue = null;
+    private final String key;
+    private final String fieldName;
+    private final String description;
+    private final Class<?> valueType;
+    private final String group;
+    private final String originalValue;
+    private final String defaultValue;
+    private final String resolvedValue;
 
-    public DockerInspectorOption(final String key, final String fieldName, final String originalValue, final String resolvedValue, final String description, final Class valueType, final String defaultValue, final String group) {
+    public DockerInspectorOption(final String key, final String fieldName, final String originalValue, final String resolvedValue, final String description, final Class<?> valueType, final String defaultValue, final String group) {
         this.key = key;
         this.description = description;
         this.valueType = valueType;
@@ -43,4 +42,37 @@ public class DockerInspectorOption {
         this.originalValue = originalValue;
         this.resolvedValue = resolvedValue;
     }
+
+    public String getKey() {
+        return key;
+    }
+
+    public String getFieldName() {
+        return fieldName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Class<?> getValueType() {
+        return valueType;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public String getOriginalValue() {
+        return originalValue;
+    }
+
+    public String getDefaultValue() {
+        return defaultValue;
+    }
+
+    public String getResolvedValue() {
+        return resolvedValue;
+    }
+
 }
