@@ -2,7 +2,7 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "ubuntu_17.04_var_lib_dpkg_DPKG",
-    "@id": "uuid:c485c161-9922-4c40-aa88-553cfd2275af",
+    "@id": "uuid:e450197a-677b-4f9b-bb52-35b2b8243533",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -37,10 +37,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/perl_base/5_24_1_2ubuntu1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:ubuntu/libuuid1/2_29_1ubuntu2_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -58,6 +54,10 @@
       },
       {
         "related": "http:debian/apt/1_4_6_17_04_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:ubuntu/perl_base/5_24_1_2ubuntu1_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -149,10 +149,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/base_files/9_6ubuntu13/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:ubuntu/lsb_base/9_20160110ubuntu5/all",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -198,6 +194,10 @@
       },
       {
         "related": "http:ubuntu/dash/0_5_8_2_3ubuntu1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:debian/libsystemd0/232_21ubuntu7_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -273,10 +273,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/libudev1/232_21ubuntu5/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:debian/libapt_pkg5_0/1_4_6_17_04_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -314,6 +310,10 @@
       },
       {
         "related": "http:ubuntu/libncursesw5/6_0_20160625_1ubuntu1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:ubuntu/base_files/9_6ubuntu13_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -429,6 +429,10 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:debian/perl_base/5_24_1_2ubuntu1_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:ubuntu/libgcrypt20/1_7_6_1ubuntu0_2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -513,10 +517,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/libudev1/232_21ubuntu5/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:debian/base_passwd/3_5_43/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -533,11 +533,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/ncurses_bin/6_0_20160625_1ubuntu1/amd64",
+        "related": "http:ubuntu/libudev1/232_21ubuntu7_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/libsystemd0/232_21ubuntu5/amd64",
+        "related": "http:debian/ncurses_bin/6_0_20160625_1ubuntu1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -545,11 +545,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/libsystemd0/232_21ubuntu5/amd64",
+        "related": "http:debian/grep/2_27_2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/grep/2_27_2/amd64",
+        "related": "http:ubuntu/libsystemd0/232_21ubuntu7_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -566,6 +566,10 @@
       },
       {
         "related": "http:debian/debianutils/4_8_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:debian/libudev1/232_21ubuntu7_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -606,10 +610,6 @@
       },
       {
         "related": "http:ubuntu/coreutils/8_26_3ubuntu3/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:debian/base_files/9_6ubuntu13/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -685,7 +685,7 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/perl_base/5_24_1_2ubuntu1/amd64",
+        "related": "http:debian/base_files/9_6ubuntu13_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -777,26 +777,6 @@
         },
         "name": "libblkid1",
         "version": "2.29-1ubuntu2.1",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "perl-base",
-    "revision": "5.24.1-2ubuntu1",
-    "@id": "http:debian/perl_base/5_24_1_2ubuntu1/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "perl-base/5.24.1-2ubuntu1/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "debian",
-          "separator": "/"
-        },
-        "name": "perl-base",
-        "version": "5.24.1-2ubuntu1",
         "architecture": "amd64"
       }
     },
@@ -897,6 +877,26 @@
         },
         "name": "apt",
         "version": "1.4.6~17.04.1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "perl-base",
+    "revision": "5.24.1-2ubuntu1.1",
+    "@id": "http:ubuntu/perl_base/5_24_1_2ubuntu1_1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "perl-base/5.24.1-2ubuntu1.1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/"
+        },
+        "name": "perl-base",
+        "version": "5.24.1-2ubuntu1.1",
         "architecture": "amd64"
       }
     },
@@ -1343,26 +1343,6 @@
     "relationship": []
   },
   {
-    "name": "base-files",
-    "revision": "9.6ubuntu13",
-    "@id": "http:ubuntu/base_files/9_6ubuntu13/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "base-files/9.6ubuntu13/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "ubuntu",
-          "separator": "/"
-        },
-        "name": "base-files",
-        "version": "9.6ubuntu13",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "lsb-base",
     "revision": "9.20160110ubuntu5",
     "@id": "http:ubuntu/lsb_base/9_20160110ubuntu5/all",
@@ -1597,6 +1577,26 @@
         },
         "name": "dash",
         "version": "0.5.8-2.3ubuntu1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsystemd0",
+    "revision": "232-21ubuntu7.1",
+    "@id": "http:debian/libsystemd0/232_21ubuntu7_1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libsystemd0/232-21ubuntu7.1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "debian",
+          "separator": "/"
+        },
+        "name": "libsystemd0",
+        "version": "232-21ubuntu7.1",
         "architecture": "amd64"
       }
     },
@@ -1963,26 +1963,6 @@
     "relationship": []
   },
   {
-    "name": "libudev1",
-    "revision": "232-21ubuntu5",
-    "@id": "http:ubuntu/libudev1/232_21ubuntu5/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libudev1/232-21ubuntu5/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "ubuntu",
-          "separator": "/"
-        },
-        "name": "libudev1",
-        "version": "232-21ubuntu5",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "libapt-pkg5.0",
     "revision": "1.4.6~17.04.1",
     "@id": "http:debian/libapt_pkg5_0/1_4_6_17_04_1/amd64",
@@ -2177,6 +2157,26 @@
         },
         "name": "libncursesw5",
         "version": "6.0+20160625-1ubuntu1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "base-files",
+    "revision": "9.6ubuntu13.1",
+    "@id": "http:ubuntu/base_files/9_6ubuntu13_1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "base-files/9.6ubuntu13.1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/"
+        },
+        "name": "base-files",
+        "version": "9.6ubuntu13.1",
         "architecture": "amd64"
       }
     },
@@ -2743,6 +2743,26 @@
     "relationship": []
   },
   {
+    "name": "perl-base",
+    "revision": "5.24.1-2ubuntu1.1",
+    "@id": "http:debian/perl_base/5_24_1_2ubuntu1_1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "perl-base/5.24.1-2ubuntu1.1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "debian",
+          "separator": "/"
+        },
+        "name": "perl-base",
+        "version": "5.24.1-2ubuntu1.1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "libgcrypt20",
     "revision": "1.7.6-1ubuntu0.2",
     "@id": "http:ubuntu/libgcrypt20/1_7_6_1ubuntu0_2/amd64",
@@ -3163,26 +3183,6 @@
     "relationship": []
   },
   {
-    "name": "libudev1",
-    "revision": "232-21ubuntu5",
-    "@id": "http:debian/libudev1/232_21ubuntu5/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libudev1/232-21ubuntu5/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "debian",
-          "separator": "/"
-        },
-        "name": "libudev1",
-        "version": "232-21ubuntu5",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "base-passwd",
     "revision": "3.5.43",
     "@id": "http:debian/base_passwd/3_5_43/amd64",
@@ -3263,6 +3263,26 @@
     "relationship": []
   },
   {
+    "name": "libudev1",
+    "revision": "232-21ubuntu7.1",
+    "@id": "http:ubuntu/libudev1/232_21ubuntu7_1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libudev1/232-21ubuntu7.1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/"
+        },
+        "name": "libudev1",
+        "version": "232-21ubuntu7.1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "ncurses-bin",
     "revision": "6.0+20160625-1ubuntu1",
     "@id": "http:debian/ncurses_bin/6_0_20160625_1ubuntu1/amd64",
@@ -3277,26 +3297,6 @@
         },
         "name": "ncurses-bin",
         "version": "6.0+20160625-1ubuntu1",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libsystemd0",
-    "revision": "232-21ubuntu5",
-    "@id": "http:ubuntu/libsystemd0/232_21ubuntu5/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libsystemd0/232-21ubuntu5/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "ubuntu",
-          "separator": "/"
-        },
-        "name": "libsystemd0",
-        "version": "232-21ubuntu5",
         "architecture": "amd64"
       }
     },
@@ -3323,26 +3323,6 @@
     "relationship": []
   },
   {
-    "name": "libsystemd0",
-    "revision": "232-21ubuntu5",
-    "@id": "http:debian/libsystemd0/232_21ubuntu5/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libsystemd0/232-21ubuntu5/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "debian",
-          "separator": "/"
-        },
-        "name": "libsystemd0",
-        "version": "232-21ubuntu5",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "grep",
     "revision": "2.27-2",
     "@id": "http:debian/grep/2_27_2/amd64",
@@ -3357,6 +3337,26 @@
         },
         "name": "grep",
         "version": "2.27-2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsystemd0",
+    "revision": "232-21ubuntu7.1",
+    "@id": "http:ubuntu/libsystemd0/232_21ubuntu7_1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libsystemd0/232-21ubuntu7.1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/"
+        },
+        "name": "libsystemd0",
+        "version": "232-21ubuntu7.1",
         "architecture": "amd64"
       }
     },
@@ -3437,6 +3437,26 @@
         },
         "name": "debianutils",
         "version": "4.8.1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libudev1",
+    "revision": "232-21ubuntu7.1",
+    "@id": "http:debian/libudev1/232_21ubuntu7_1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libudev1/232-21ubuntu7.1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "debian",
+          "separator": "/"
+        },
+        "name": "libudev1",
+        "version": "232-21ubuntu7.1",
         "architecture": "amd64"
       }
     },
@@ -3637,26 +3657,6 @@
         },
         "name": "coreutils",
         "version": "8.26-3ubuntu3",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "base-files",
-    "revision": "9.6ubuntu13",
-    "@id": "http:debian/base_files/9_6ubuntu13/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "base-files/9.6ubuntu13/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "debian",
-          "separator": "/"
-        },
-        "name": "base-files",
-        "version": "9.6ubuntu13",
         "architecture": "amd64"
       }
     },
@@ -4023,20 +4023,20 @@
     "relationship": []
   },
   {
-    "name": "perl-base",
-    "revision": "5.24.1-2ubuntu1",
-    "@id": "http:ubuntu/perl_base/5_24_1_2ubuntu1/amd64",
+    "name": "base-files",
+    "revision": "9.6ubuntu13.1",
+    "@id": "http:debian/base_files/9_6ubuntu13_1/amd64",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "perl-base/5.24.1-2ubuntu1/amd64",
+      "externalSystemTypeId": "debian",
+      "externalId": "base-files/9.6ubuntu13.1/amd64",
       "externalIdMetaData": {
         "forge": {
-          "name": "ubuntu",
+          "name": "debian",
           "separator": "/"
         },
-        "name": "perl-base",
-        "version": "5.24.1-2ubuntu1",
+        "name": "base-files",
+        "version": "9.6ubuntu13.1",
         "architecture": "amd64"
       }
     },
