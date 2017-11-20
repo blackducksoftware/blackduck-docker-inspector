@@ -316,7 +316,7 @@ public class Application {
         FileOperations.removeFileOrDir(programPaths.getHubDockerWorkingDirPath());
         config.getSortedPropNames();
         logger.info(String.format("=== testProp: %b", config.getTestProp()));
-        config.seekFieldsWithAnnotations();
+        config.getConfigProperties();
     }
 
     private void verifyHubConnection() throws HubIntegrationException {

@@ -67,7 +67,7 @@ public class Config {
     }
 
     // TODO not sure this belongs here
-    public List<Field> seekFieldsWithAnnotations() {
+    public List<Field> getConfigProperties() {
         final Object configObject = this;
         final List<Field> fieldsWithAnnotations = new ArrayList<>();
         for (final Field field : configObject.getClass().getDeclaredFields()) {
