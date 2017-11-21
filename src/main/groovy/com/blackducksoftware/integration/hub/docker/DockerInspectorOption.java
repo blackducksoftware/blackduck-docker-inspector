@@ -28,18 +28,16 @@ public class DockerInspectorOption {
     private final String description;
     private final Class<?> valueType;
     private final String group;
-    private final String originalValue;
     private final String defaultValue;
     private final String resolvedValue;
 
-    public DockerInspectorOption(final String key, final String fieldName, final String originalValue, final String resolvedValue, final String description, final Class<?> valueType, final String defaultValue, final String group) {
+    public DockerInspectorOption(final String key, final String fieldName, final String resolvedValue, final String description, final Class<?> valueType, final String defaultValue, final String group) {
         this.key = key;
         this.description = description;
         this.valueType = valueType;
         this.group = group;
         this.defaultValue = defaultValue;
         this.fieldName = fieldName;
-        this.originalValue = originalValue;
         this.resolvedValue = resolvedValue;
     }
 
@@ -61,10 +59,6 @@ public class DockerInspectorOption {
 
     public String getGroup() {
         return group;
-    }
-
-    public String getOriginalValue() {
-        return originalValue;
     }
 
     public String getDefaultValue() {

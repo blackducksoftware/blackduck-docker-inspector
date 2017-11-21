@@ -26,6 +26,7 @@ package com.blackducksoftware.integration.hub.docker;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.SortedSet;
 
 import javax.annotation.PostConstruct;
 
@@ -138,6 +139,7 @@ public class Application {
     public void inspectImage() {
         try {
             init();
+            readConfig();
             final File dockerTarFile = deriveDockerTarFile();
             final List<File> layerTars = hubDockerManager.extractLayerTars(dockerTarFile);
             final List<ManifestLayerMapping> layerMappings = hubDockerManager.getLayerMappings(dockerTarFile.getName(), dockerImageRepo, dockerImageTag);
@@ -314,9 +316,20 @@ public class Application {
         }
         hubDockerManager.init();
         FileOperations.removeFileOrDir(programPaths.getHubDockerWorkingDirPath());
-        config.getSortedPropNames();
-        logger.info(String.format("=== testProp: %b", config.getTestProp()));
-        config.getConfigOptions();
+    }
+
+    private void readConfig() throws IllegalArgumentException, IllegalAccessException, IOException {
+
+        final List<DockerInspectorOption> configOptions = config.getConfigOptions();
+        for (final DockerInspectorOption opt : configOptions) {
+            logger.info(String.format("*** Option: %s/%s/%s/%s/%s", opt.getKey(), opt.getValueType().toString(), opt.getDefaultValue(), opt.getResolvedValue(), opt.getDescription()));
+        }
+
+        final SortedSet<String> propNames = config.getSortedPropNames();
+        for (final String propName : propNames) {
+            logger.info(String.format("*** propName: %s", propName));
+        }
+        logger.info(String.format("=== testProp: %b", config.getTestPropPublicBoolean()));
     }
 
     private void verifyHubConnection() throws HubIntegrationException {

@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import org.apache.commons.lang3.BooleanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,16 +53,24 @@ public class Config {
         return sortedPropNames;
     }
 
-    @ValueDescription(description = "This is test.prop.public's description", defaultValue = "false", group = Config.GROUP_PUBLIC)
-    @Value("${test.prop.public:true}")
-    Boolean testPropPublic;
+    @ValueDescription(description = "This is test.prop.public.string's description", defaultValue = "someDefault", group = Config.GROUP_PUBLIC)
+    @Value("${test.prop.public.string:}")
+    String testPropPublicString;
+
+    @ValueDescription(description = "This is test.prop.public.boolean's description", defaultValue = "false", group = Config.GROUP_PUBLIC)
+    @Value("${test.prop.public.boolean:false}")
+    Boolean testPropPublicBoolean;
 
     @ValueDescription(description = "This is test.prop.private's description", defaultValue = "false", group = Config.GROUP_PRIVATE)
-    @Value("${test.prop.private:true}")
+    @Value("${test.prop.private:}")
     Boolean testPropPrivate;
 
-    public boolean getTestProp() {
-        return BooleanUtils.toBoolean(testPropPublic);
+    public String getTestPropPublicString() {
+        return testPropPublicString;
+    }
+
+    public Boolean getTestPropPublicBoolean() {
+        return testPropPublicBoolean;
     }
 
     // TODO not sure this belongs here
@@ -80,13 +87,13 @@ public class Config {
                         final String propName = SpringValueUtils.springKeyFromValueAnnotation(propMappingString);
                         final ValueDescription valueDescription = field.getAnnotation(ValueDescription.class);
                         if (!Config.GROUP_PRIVATE.equals(valueDescription.group())) {
-                            logger.info(String.format("=== propName: %s, fieldName: %s, group: %s, description: %s", propName, field.getName(), valueDescription.group(), valueDescription.description()));
-                            // TODO working on values.......
-                            String value = "unknown";
-                            if (field.getType() == String.class) {
-                                value = (String) field.get(configObject);
+                            final Object fieldValueObject = field.get(configObject);
+                            if (fieldValueObject == null) {
+                                logger.warn(String.format("propName %s field is null", propName));
+                                continue;
                             }
-                            final DockerInspectorOption opt = new DockerInspectorOption(propName, field.getName(), "originalValue: TBD", value, valueDescription.description(), field.getType(), "defaultValue: TBD", valueDescription.group());
+                            final String value = fieldValueObject.toString();
+                            final DockerInspectorOption opt = new DockerInspectorOption(propName, field.getName(), value, valueDescription.description(), field.getType(), valueDescription.defaultValue(), valueDescription.group());
                             opts.add(opt);
                         } else {
                             logger.info(String.format("=== SKIPPING private prop: propName: %s, fieldName: %s, group: %s, description: %s", propName, field.getName(), valueDescription.group(), valueDescription.description()));
