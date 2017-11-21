@@ -1,12 +1,9 @@
 package com.blackducksoftware.integration.hub.docker;
 
-import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +12,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.stereotype.Component;
 
-import com.blackducksoftware.integration.hub.docker.client.ClassPathPropertiesFile;
 import com.blackducksoftware.integration.hub.docker.help.ValueDescription;
 
 @Component
@@ -27,31 +23,6 @@ public class Config {
 
     @Autowired
     ConfigurableEnvironment configurableEnvironment;
-
-    private boolean initialized = false;
-    private final SortedSet<String> sortedPropNames = new TreeSet<>();
-
-    public void init() throws IOException {
-        if (initialized) {
-            return;
-        }
-        final ClassPathPropertiesFile props = new ClassPathPropertiesFile("application.properties");
-        for (final Object propObj : props.keySet()) {
-            if (propObj instanceof String) {
-                final String propName = (String) propObj;
-                sortedPropNames.add(propName);
-            }
-        }
-        for (final String propName : sortedPropNames) {
-            logger.info(String.format("*** Found property name: %s, value: %s", propName, props.getProperty(propName)));
-        }
-        initialized = true;
-    }
-
-    public SortedSet<String> getSortedPropNames() throws IOException {
-        init();
-        return sortedPropNames;
-    }
 
     @ValueDescription(description = "This is test.prop.public.string's description", defaultValue = "someDefault", group = Config.GROUP_PUBLIC)
     @Value("${test.prop.public.string:}")

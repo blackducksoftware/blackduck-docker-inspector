@@ -22,11 +22,17 @@
  */
 package com.blackducksoftware.integration.hub.docker;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class DockerInspectorOption {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     private final String key;
     private final String fieldName;
     private final String description;
     private final Class<?> valueType;
+    private final String valueTypeString;
     private final String group;
     private final String defaultValue;
     private final String resolvedValue;
@@ -39,6 +45,10 @@ public class DockerInspectorOption {
         this.defaultValue = defaultValue;
         this.fieldName = fieldName;
         this.resolvedValue = resolvedValue;
+
+        final String[] parts = valueType.toString().split("\\.");
+        logger.debug(String.format("Split %s into %d parts", valueType.toString(), parts.length));
+        this.valueTypeString = parts[parts.length - 1];
     }
 
     public String getKey() {
@@ -55,6 +65,10 @@ public class DockerInspectorOption {
 
     public Class<?> getValueType() {
         return valueType;
+    }
+
+    public String getValueTypeString() {
+        return valueTypeString;
     }
 
     public String getGroup() {

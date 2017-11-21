@@ -26,7 +26,6 @@ package com.blackducksoftware.integration.hub.docker;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.SortedSet;
 
 import javax.annotation.PostConstruct;
 
@@ -322,14 +321,8 @@ public class Application {
 
         final List<DockerInspectorOption> configOptions = config.getConfigOptions();
         for (final DockerInspectorOption opt : configOptions) {
-            logger.info(String.format("*** Option: %s/%s/%s/%s/%s", opt.getKey(), opt.getValueType().toString(), opt.getDefaultValue(), opt.getResolvedValue(), opt.getDescription()));
+            logger.info(String.format("\t--%s: type: %s; default: %s; description: %s; value: %s", opt.getKey(), opt.getValueTypeString(), opt.getDefaultValue(), opt.getDescription(), opt.getResolvedValue()));
         }
-
-        final SortedSet<String> propNames = config.getSortedPropNames();
-        for (final String propName : propNames) {
-            logger.info(String.format("*** propName: %s", propName));
-        }
-        logger.info(String.format("=== testProp: %b", config.getTestPropPublicBoolean()));
     }
 
     private void verifyHubConnection() throws HubIntegrationException {
