@@ -175,7 +175,7 @@ public class DockerClientManager {
     }
 
     public void run(final String runOnImageName, final String runOnTagName, final File dockerTarFile, final boolean copyJar, final String targetImage, final String targetImageRepo, final String targetImageTag)
-            throws InterruptedException, IOException, HubIntegrationException {
+            throws InterruptedException, IOException, HubIntegrationException, IllegalArgumentException, IllegalAccessException {
 
         final String hubPasswordString = hubPassword.get();
         final String imageId = String.format("%s:%s", runOnImageName, runOnTagName);
@@ -226,7 +226,7 @@ public class DockerClientManager {
     }
 
     private void setPropertiesInSubContainer(final DockerClient dockerClient, final String containerId, final String tarFilePathInSubContainer, final String tarFileDirInSubContainer, final File dockerTarFile, final String targetImage,
-            final String targetImageRepo, final String targetImageTag) throws IOException {
+            final String targetImageRepo, final String targetImageTag) throws IOException, IllegalArgumentException, IllegalAccessException {
         hubDockerProperties.load();
         hubDockerProperties.set(IMAGE_TARFILE_PROPERTY, tarFilePathInSubContainer);
         hubDockerProperties.set(IMAGE_PROPERTY, targetImage);

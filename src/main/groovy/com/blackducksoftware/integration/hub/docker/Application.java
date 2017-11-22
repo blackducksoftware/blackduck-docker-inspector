@@ -312,7 +312,7 @@ public class Application {
         }
     }
 
-    private void inspectInSubContainer(final File dockerTarFile, final OperatingSystemEnum targetOsEnum) throws InterruptedException, IOException, HubIntegrationException {
+    private void inspectInSubContainer(final File dockerTarFile, final OperatingSystemEnum targetOsEnum) throws InterruptedException, IOException, HubIntegrationException, IllegalArgumentException, IllegalAccessException {
         final String runOnImageName = dockerImages.getDockerImageName(targetOsEnum);
         final String runOnImageVersion = dockerImages.getDockerImageVersion(targetOsEnum);
         final String msg = String.format("Image inspection for %s will use docker image %s:%s", targetOsEnum.toString(), runOnImageName, runOnImageVersion);

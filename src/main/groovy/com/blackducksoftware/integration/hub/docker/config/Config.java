@@ -36,6 +36,10 @@ public class Config {
     @Value("${test.prop.private:}")
     private Boolean testPropPrivate;
 
+    private List<DockerInspectorOption> publicOptions;
+    private List<String> allKeys;
+    private boolean initialized = false;
+
     public String getTestPropPublicString() {
         return testPropPublicString;
     }
@@ -44,9 +48,23 @@ public class Config {
         return testPropPublicBoolean;
     }
 
-    public List<DockerInspectorOption> getConfigOptions() throws IllegalArgumentException, IllegalAccessException {
+    public List<DockerInspectorOption> getPublicConfigOptions() throws IllegalArgumentException, IllegalAccessException {
+        init();
+        return publicOptions;
+    }
+
+    public List<String> getAllKeys() throws IllegalArgumentException, IllegalAccessException {
+        init();
+        return allKeys;
+    }
+
+    public void init() throws IllegalArgumentException, IllegalAccessException {
+        if (initialized) {
+            return;
+        }
         final Object configObject = this;
-        final List<DockerInspectorOption> opts = new ArrayList<>();
+        publicOptions = new ArrayList<>();
+        allKeys = new ArrayList<>();
         for (final Field field : configObject.getClass().getDeclaredFields()) {
             final Annotation[] declaredAnnotations = field.getDeclaredAnnotations();
             if (declaredAnnotations.length > 0) {
@@ -55,6 +73,7 @@ public class Config {
                     if (annotation.annotationType().getName().equals(ValueDescription.class.getName())) {
                         final String propMappingString = field.getAnnotation(Value.class).value();
                         final String propName = SpringValueUtils.springKeyFromValueAnnotation(propMappingString);
+                        allKeys.add(propName);
                         final ValueDescription valueDescription = field.getAnnotation(ValueDescription.class);
                         if (!Config.GROUP_PRIVATE.equals(valueDescription.group())) {
                             final Object fieldValueObject = field.get(configObject);
@@ -64,16 +83,16 @@ public class Config {
                             }
                             final String value = fieldValueObject.toString();
                             final DockerInspectorOption opt = new DockerInspectorOption(propName, field.getName(), value, valueDescription.description(), field.getType(), valueDescription.defaultValue(), valueDescription.group());
-                            opts.add(opt);
+                            publicOptions.add(opt);
                         } else {
-                            logger.debug(String.format("Skipping private prop: propName: %s, fieldName: %s, group: %s, description: %s", propName, field.getName(), valueDescription.group(), valueDescription.description()));
+                            logger.debug(String.format("private prop: propName: %s, fieldName: %s, group: %s, description: %s", propName, field.getName(), valueDescription.group(), valueDescription.description()));
                         }
                     }
                 }
 
             }
         }
-        return opts;
+        initialized = true;
     }
 
 }

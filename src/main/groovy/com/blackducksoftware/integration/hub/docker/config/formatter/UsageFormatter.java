@@ -20,7 +20,7 @@ public class UsageFormatter {
     public List<String> getStringList() throws IllegalArgumentException, IllegalAccessException, IOException {
         final List<String> usage = new ArrayList<>();
         usage.add(String.format("Usage: %s <options>; Available options:", Application.PROGRAM_NAME));
-        final List<DockerInspectorOption> configOptions = config.getConfigOptions();
+        final List<DockerInspectorOption> configOptions = config.getPublicConfigOptions();
         for (final DockerInspectorOption opt : configOptions) {
             usage.add(String.format("\t--%s: type: %s; default: %s; description: %s; value: %s", opt.getKey(), opt.getValueTypeString(), opt.getDefaultValue(), opt.getDescription(), opt.getResolvedValue()));
         }
