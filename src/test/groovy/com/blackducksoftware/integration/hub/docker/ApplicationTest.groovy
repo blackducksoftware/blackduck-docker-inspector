@@ -10,6 +10,7 @@ import org.junit.Test
 import com.blackducksoftware.integration.hub.docker.client.DockerClientManager
 import com.blackducksoftware.integration.hub.docker.client.ProgramVersion
 import com.blackducksoftware.integration.hub.docker.config.Config
+import com.blackducksoftware.integration.hub.docker.config.formatter.UsageFormatter
 import com.blackducksoftware.integration.hub.docker.hub.HubClient
 import com.blackducksoftware.integration.hub.docker.image.DockerImages
 import com.blackducksoftware.integration.hub.docker.result.ResultFile
@@ -107,6 +108,11 @@ class ApplicationTest {
                 invokedSubContainer = true}
         ] as DockerClientManager
         app.config = new Config();
+
+        final UsageFormatter helpGenerator = new UsageFormatter();
+        helpGenerator.config = app.config;
+        helpGenerator.config.testPropPublicString = "test prop public string value";
+        app.usageFormatter = helpGenerator
 
         app.inspectImage()
         if (expectBdioUpload) {

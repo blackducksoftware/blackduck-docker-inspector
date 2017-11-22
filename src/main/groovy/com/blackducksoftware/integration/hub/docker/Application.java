@@ -43,7 +43,7 @@ import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.client.DockerClientManager;
 import com.blackducksoftware.integration.hub.docker.client.ProgramVersion;
 import com.blackducksoftware.integration.hub.docker.config.Config;
-import com.blackducksoftware.integration.hub.docker.config.DockerInspectorOption;
+import com.blackducksoftware.integration.hub.docker.config.formatter.UsageFormatter;
 import com.blackducksoftware.integration.hub.docker.hub.HubClient;
 import com.blackducksoftware.integration.hub.docker.image.DockerImages;
 import com.blackducksoftware.integration.hub.docker.linux.FileOperations;
@@ -58,7 +58,7 @@ import com.google.gson.Gson;
 public class Application {
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-    private static final String programName = "hub-docker-inspector.sh"; // TODO unhardcode
+    public static final String PROGRAM_NAME = "hub-docker-inspector.sh"; // TODO unhardcode
 
     // User should specify docker.tar OR docker.image
     @Value("${docker.tar}")
@@ -127,6 +127,9 @@ public class Application {
     @Autowired
     private Config config;
 
+    @Autowired
+    private UsageFormatter usageFormatter;
+
     private static int returnCode = -1;
     private static boolean onHostStatic = true;
 
@@ -142,7 +145,7 @@ public class Application {
     public void inspectImage() {
         try {
             init();
-            displayUsage();
+            showUsage();
             final File dockerTarFile = deriveDockerTarFile();
             final List<File> layerTars = hubDockerManager.extractLayerTars(dockerTarFile);
             final List<ManifestLayerMapping> layerMappings = hubDockerManager.getLayerMappings(dockerTarFile.getName(), dockerImageRepo, dockerImageTag);
@@ -169,6 +172,13 @@ public class Application {
             final String trace = ExceptionUtils.getStackTrace(e);
             logger.debug(String.format("Stack trace: %s", trace));
             resultFile.write(new Gson(), false, msg);
+        }
+    }
+
+    private void showUsage() throws IllegalArgumentException, IllegalAccessException, IOException {
+        final List<String> usage = usageFormatter.getStringList();
+        for (final String line : usage) {
+            logger.debug(line);
         }
     }
 
@@ -319,14 +329,6 @@ public class Application {
         }
         hubDockerManager.init();
         FileOperations.removeFileOrDir(programPaths.getHubDockerWorkingDirPath());
-    }
-
-    private void displayUsage() throws IllegalArgumentException, IllegalAccessException, IOException {
-        logger.info(String.format("Usage: %s <options>; Available options:", programName));
-        final List<DockerInspectorOption> configOptions = config.getConfigOptions();
-        for (final DockerInspectorOption opt : configOptions) {
-            logger.info(String.format("\t--%s: type: %s; default: %s; description: %s; value: %s", opt.getKey(), opt.getValueTypeString(), opt.getDefaultValue(), opt.getDescription(), opt.getResolvedValue()));
-        }
     }
 
     private void verifyHubConnection() throws HubIntegrationException {

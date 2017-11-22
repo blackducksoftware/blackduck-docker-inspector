@@ -26,15 +26,15 @@ public class Config {
 
     @ValueDescription(description = "This is test.prop.public.string's description", defaultValue = "someDefault", group = Config.GROUP_PUBLIC)
     @Value("${test.prop.public.string:}")
-    String testPropPublicString;
+    private String testPropPublicString;
 
     @ValueDescription(description = "This is test.prop.public.boolean's description", defaultValue = "false", group = Config.GROUP_PUBLIC)
     @Value("${test.prop.public.boolean:false}")
-    Boolean testPropPublicBoolean;
+    private Boolean testPropPublicBoolean;
 
     @ValueDescription(description = "This is test.prop.private's description", defaultValue = "false", group = Config.GROUP_PRIVATE)
     @Value("${test.prop.private:}")
-    Boolean testPropPrivate;
+    private Boolean testPropPrivate;
 
     public String getTestPropPublicString() {
         return testPropPublicString;
