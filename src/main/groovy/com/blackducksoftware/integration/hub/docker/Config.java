@@ -44,7 +44,6 @@ public class Config {
         return testPropPublicBoolean;
     }
 
-    // TODO not sure this belongs here
     public List<DockerInspectorOption> getConfigOptions() throws IllegalArgumentException, IllegalAccessException {
         final Object configObject = this;
         final List<DockerInspectorOption> opts = new ArrayList<>();
@@ -67,7 +66,7 @@ public class Config {
                             final DockerInspectorOption opt = new DockerInspectorOption(propName, field.getName(), value, valueDescription.description(), field.getType(), valueDescription.defaultValue(), valueDescription.group());
                             opts.add(opt);
                         } else {
-                            logger.info(String.format("=== SKIPPING private prop: propName: %s, fieldName: %s, group: %s, description: %s", propName, field.getName(), valueDescription.group(), valueDescription.description()));
+                            logger.debug(String.format("Skipping private prop: propName: %s, fieldName: %s, group: %s, description: %s", propName, field.getName(), valueDescription.group(), valueDescription.description()));
                         }
                     }
                 }

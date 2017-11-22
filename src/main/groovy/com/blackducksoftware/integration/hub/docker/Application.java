@@ -56,6 +56,8 @@ import com.google.gson.Gson;
 public class Application {
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
+    private static final String programName = "hub-docker-inspector.sh"; // TODO unhardcode
+
     // User should specify docker.tar OR docker.image
     @Value("${docker.tar}")
     private String dockerTar;
@@ -138,7 +140,7 @@ public class Application {
     public void inspectImage() {
         try {
             init();
-            readConfig();
+            displayUsage();
             final File dockerTarFile = deriveDockerTarFile();
             final List<File> layerTars = hubDockerManager.extractLayerTars(dockerTarFile);
             final List<ManifestLayerMapping> layerMappings = hubDockerManager.getLayerMappings(dockerTarFile.getName(), dockerImageRepo, dockerImageTag);
@@ -317,8 +319,8 @@ public class Application {
         FileOperations.removeFileOrDir(programPaths.getHubDockerWorkingDirPath());
     }
 
-    private void readConfig() throws IllegalArgumentException, IllegalAccessException, IOException {
-
+    private void displayUsage() throws IllegalArgumentException, IllegalAccessException, IOException {
+        logger.info(String.format("Usage: %s <options>; Available options:", programName));
         final List<DockerInspectorOption> configOptions = config.getConfigOptions();
         for (final DockerInspectorOption opt : configOptions) {
             logger.info(String.format("\t--%s: type: %s; default: %s; description: %s; value: %s", opt.getKey(), opt.getValueTypeString(), opt.getDefaultValue(), opt.getDescription(), opt.getResolvedValue()));
