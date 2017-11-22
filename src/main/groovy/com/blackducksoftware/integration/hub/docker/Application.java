@@ -36,6 +36,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
@@ -125,6 +126,9 @@ public class Application {
     private ResultFile resultFile;
 
     @Autowired
+    ApplicationArguments applicationArguments;
+
+    @Autowired
     private Config config;
 
     @Autowired
@@ -145,7 +149,12 @@ public class Application {
     public void inspectImage() {
         try {
             init();
-            showUsage();
+            if (helpInvoked()) {
+                showUsage();
+                returnCode = 0;
+                return;
+            }
+
             final File dockerTarFile = deriveDockerTarFile();
             final List<File> layerTars = hubDockerManager.extractLayerTars(dockerTarFile);
             final List<ManifestLayerMapping> layerMappings = hubDockerManager.getLayerMappings(dockerTarFile.getName(), dockerImageRepo, dockerImageTag);
@@ -175,11 +184,32 @@ public class Application {
         }
     }
 
+    private boolean helpInvoked() {
+        if (applicationArguments == null) {
+            return false;
+        }
+        if (contains(applicationArguments.getSourceArgs(), "-h") || (contains(applicationArguments.getSourceArgs(), "-help"))) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean contains(final String[] stringsToSearch, final String targetString) {
+        for (final String stringToTest : stringsToSearch) {
+            if (targetString.equals(stringToTest)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void showUsage() throws IllegalArgumentException, IllegalAccessException, IOException {
         final List<String> usage = usageFormatter.getStringList();
+        System.out.println("----------");
         for (final String line : usage) {
-            logger.debug(line);
+            System.out.println(line);
         }
+        System.out.println("----------");
     }
 
     private void copyOutputToUserOutputDir() throws IOException {
