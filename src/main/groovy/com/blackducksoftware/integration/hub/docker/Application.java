@@ -148,13 +148,9 @@ public class Application {
     @PostConstruct
     public void inspectImage() {
         try {
-            init();
-            if (helpInvoked()) {
-                showUsage();
-                returnCode = 0;
+            if (!initAndValidate()) {
                 return;
             }
-
             final File dockerTarFile = deriveDockerTarFile();
             final List<File> layerTars = hubDockerManager.extractLayerTars(dockerTarFile);
             final List<ManifestLayerMapping> layerMappings = hubDockerManager.getLayerMappings(dockerTarFile.getName(), dockerImageRepo, dockerImageTag);
@@ -185,10 +181,14 @@ public class Application {
     }
 
     private boolean helpInvoked() {
+        logger.debug("Checking to see if help argument passed");
         if (applicationArguments == null) {
+            logger.debug("applicationArguments is null");
             return false;
         }
-        if (contains(applicationArguments.getSourceArgs(), "-h") || (contains(applicationArguments.getSourceArgs(), "-help"))) {
+        final String[] args = applicationArguments.getSourceArgs();
+        if (contains(args, "-h") || (contains(args, "--help"))) {
+            logger.debug("Help argument passed");
             return true;
         }
         return false;
@@ -196,6 +196,7 @@ public class Application {
 
     private boolean contains(final String[] stringsToSearch, final String targetString) {
         for (final String stringToTest : stringsToSearch) {
+            logger.trace(String.format("Comparing target string %s against %s", targetString, stringToTest));
             if (targetString.equals(stringToTest)) {
                 return true;
             }
@@ -342,8 +343,13 @@ public class Application {
         return programPaths.unEscape(hubVersionName);
     }
 
-    private void init() throws IOException, IntegrationException {
+    private boolean initAndValidate() throws IOException, IntegrationException, IllegalArgumentException, IllegalAccessException {
         logger.info(String.format("hub-docker-inspector %s", programVersion.getProgramVersion()));
+        if (helpInvoked()) {
+            showUsage();
+            returnCode = 0;
+            return false;
+        }
         logger.debug(String.format("running from dir: %s", System.getProperty("user.dir")));
         logger.debug(String.format("Dry run mode is set to %b", dryRun));
         logger.trace(String.format("dockerImageTag: %s", dockerImageTag));
@@ -359,6 +365,7 @@ public class Application {
         }
         hubDockerManager.init();
         FileOperations.removeFileOrDir(programPaths.getHubDockerWorkingDirPath());
+        return true;
     }
 
     private void verifyHubConnection() throws HubIntegrationException {
