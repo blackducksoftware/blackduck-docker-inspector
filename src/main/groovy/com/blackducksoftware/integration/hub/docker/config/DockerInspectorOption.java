@@ -20,7 +20,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.blackducksoftware.integration.hub.docker;
+package com.blackducksoftware.integration.hub.docker.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

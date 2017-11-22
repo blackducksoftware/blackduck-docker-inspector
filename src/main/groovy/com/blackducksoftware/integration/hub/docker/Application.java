@@ -42,6 +42,8 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.client.DockerClientManager;
 import com.blackducksoftware.integration.hub.docker.client.ProgramVersion;
+import com.blackducksoftware.integration.hub.docker.config.Config;
+import com.blackducksoftware.integration.hub.docker.config.DockerInspectorOption;
 import com.blackducksoftware.integration.hub.docker.hub.HubClient;
 import com.blackducksoftware.integration.hub.docker.image.DockerImages;
 import com.blackducksoftware.integration.hub.docker.linux.FileOperations;

@@ -1,4 +1,4 @@
-package com.blackducksoftware.integration.hub.docker;
+package com.blackducksoftware.integration.hub.docker.config;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;

@@ -20,7 +20,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.blackducksoftware.integration.hub.docker;
+package com.blackducksoftware.integration.hub.docker.config;
 
 public class SpringValueUtils {
     public static String springKeyFromValueAnnotation(String value) {
