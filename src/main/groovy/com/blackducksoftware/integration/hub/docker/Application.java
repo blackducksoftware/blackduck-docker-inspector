@@ -196,7 +196,6 @@ public class Application {
 
     private boolean contains(final String[] stringsToSearch, final String targetString) {
         for (final String stringToTest : stringsToSearch) {
-            logger.trace(String.format("Comparing target string %s against %s", targetString, stringToTest));
             if (targetString.equals(stringToTest)) {
                 return true;
             }

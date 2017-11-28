@@ -29,11 +29,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.hub.docker.config.Config;
@@ -47,26 +47,24 @@ class HubDockerProperties {
     @Autowired
     private Config config;
 
-    @Autowired
-    private Environment env;
-
     private Properties propsForSubContainer;
 
     public void load() throws IOException, IllegalArgumentException, IllegalAccessException {
         propsForSubContainer = new Properties();
 
-        // TODO get keys from Config instead of file
-        final ClassPathPropertiesFile propertiesFromFile = new ClassPathPropertiesFile("application.properties");
-        for (final Object propertyKeyObject : propertiesFromFile.keySet()) {
-            final String propertyKey = (String) propertyKeyObject;
-            final String value = env.getProperty(propertyKey);
-            logger.trace(String.format("load(): %s=%s", propertyKey, value));
+        for (final String propertyKey : config.getAllKeys()) {
+            logger.trace(String.format("Config option key: %s", propertyKey));
+            final String value = config.get(propertyKey);
+            logger.trace(String.format("load(): %s=%s (%s)", propertyKey, getValueObscuredIfSensitive(propertyKey, value), config.isPublic(propertyKey) ? "public" : "private"));
             propsForSubContainer.put(propertyKey, value);
         }
-        // TODO TEMP
-        for (final String key : config.getAllKeys()) {
-            logger.debug(String.format("*** Config option key: %s", key));
+    }
+
+    private String getValueObscuredIfSensitive(final String key, final String value) {
+        if ((!StringUtils.isBlank(value)) && (key.endsWith(".password"))) {
+            return "********";
         }
+        return value;
     }
 
     public void set(final String key, final String value) {
