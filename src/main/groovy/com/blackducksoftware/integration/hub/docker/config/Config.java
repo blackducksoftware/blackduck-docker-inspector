@@ -26,18 +26,6 @@ public class Config {
     @Autowired
     ConfigurableEnvironment configurableEnvironment;
 
-    @ValueDescription(description = "This is test.prop.public.string's description", defaultValue = "someDefault", group = Config.GROUP_PUBLIC)
-    @Value("${test.prop.public.string:}")
-    private String testPropPublicString;
-
-    @ValueDescription(description = "This is test.prop.public.boolean's description", defaultValue = "false", group = Config.GROUP_PUBLIC)
-    @Value("${test.prop.public.boolean:false}")
-    private Boolean testPropPublicBoolean;
-
-    @ValueDescription(description = "This is test.prop.private's description", defaultValue = "false", group = Config.GROUP_PRIVATE)
-    @Value("${test.prop.private:false}")
-    private Boolean testPropPrivate;
-
     // Black Duck Hub connection details
     @ValueDescription(description = "Hub URL", defaultValue = "", group = Config.GROUP_PUBLIC)
     @Value("${hub.url:}")
@@ -75,7 +63,7 @@ public class Config {
     // If using an https Hub server, you can choose to always trust the server certificates
     @ValueDescription(description = "Hub Always Trust Cert?", defaultValue = "false", group = Config.GROUP_PUBLIC)
     @Value("${hub.always.trust.cert:false}")
-    private String hubAlwaysTrustCert;
+    private final Boolean hubAlwaysTrustCert = new Boolean(false); // don't know why this is required on just this one
 
     // The default project name will be the Docker image name
     @ValueDescription(description = "Hub Project Name", defaultValue = "", group = Config.GROUP_PUBLIC)
@@ -95,7 +83,7 @@ public class Config {
     // If false, will leave behind the files created in the working dir
     @ValueDescription(description = "Cleanup Working Dir?", defaultValue = "true", group = Config.GROUP_PUBLIC)
     @Value("${cleanup.working.dir:true}")
-    private String cleanupWorkingDir;
+    private Boolean cleanupWorkingDir;
 
     // If Hub Docker Inspector cannot derive it automatically,
     // use linux.distro to specify the target image linux distribution
@@ -118,7 +106,7 @@ public class Config {
     // If dry.run=true, Hub Docker Inspector won't upload results to Hub
     @ValueDescription(description = "Dry Run Mode?", defaultValue = "false", group = Config.GROUP_PUBLIC)
     @Value("${dry.run:false}")
-    private String dryRun;
+    private Boolean dryRun;
 
     // Path on host of a directory into which the resulting output files will be copied
     @ValueDescription(description = "Path to directory for output files", defaultValue = "", group = Config.GROUP_PUBLIC)
@@ -128,12 +116,12 @@ public class Config {
     // Set to true to include the image tarfile in the output
     @ValueDescription(description = "Include Docker tarfile in output?", defaultValue = "false", group = Config.GROUP_PUBLIC)
     @Value("${output.include.dockertarfile:false}")
-    private String outputIncludeDockertarfile;
+    private Boolean outputIncludeDockertarfile;
 
     // Set to true to include the container file system tarfile in the output
     @ValueDescription(description = "Include container filesystem (a large file) in output?", defaultValue = "false", group = Config.GROUP_PUBLIC)
     @Value("${output.include.containerfilesystem:false}")
-    private String outputIncludeContainerfilesystem;
+    private Boolean outputIncludeContainerfilesystem;
 
     // If you want to add a prefix to the code location name, specify it here
     @ValueDescription(description = "Hub CodeLocation prefix", defaultValue = "", group = Config.GROUP_PUBLIC)
@@ -168,7 +156,7 @@ public class Config {
 
     @ValueDescription(description = "Running on host?", defaultValue = "true", group = Config.GROUP_PRIVATE)
     @Value("${on.host:true}")
-    private String onHost;
+    private Boolean onHost;
 
     @ValueDescription(description = "Caller Name", defaultValue = "", group = Config.GROUP_PRIVATE)
     @Value("${caller.name:}")
@@ -180,7 +168,7 @@ public class Config {
 
     @ValueDescription(description = "Phone Home?", defaultValue = "true", group = Config.GROUP_PRIVATE)
     @Value("${phone.home:true}")
-    private String phoneHome;
+    private Boolean phoneHome;
 
     private List<DockerInspectorOption> publicOptions;
     private Map<String, DockerInspectorOption> options;
@@ -227,16 +215,17 @@ public class Config {
             final Annotation[] declaredAnnotations = field.getDeclaredAnnotations();
             if (declaredAnnotations.length > 0) {
                 for (final Annotation annotation : declaredAnnotations) {
-                    logger.debug(String.format("config object field: %s, annotation: %s", field.getName(), annotation.annotationType().getName()));
                     if (annotation.annotationType().getName().equals(ValueDescription.class.getName())) {
+                        logger.debug(String.format("ValueDescription annotated config object field: %s", field.getName()));
                         final String propMappingString = field.getAnnotation(Value.class).value();
                         final String propName = SpringValueUtils.springKeyFromValueAnnotation(propMappingString);
-                        allKeys.add(propName);
                         final Object fieldValueObject = field.get(configObject);
                         if (fieldValueObject == null) {
                             logger.warn(String.format("propName %s field is null", propName));
                             continue;
                         }
+                        logger.info(String.format("*** adding prop key %s", propName));
+                        allKeys.add(propName);
                         final String value = fieldValueObject.toString();
                         final ValueDescription valueDescription = field.getAnnotation(ValueDescription.class);
                         final DockerInspectorOption opt = new DockerInspectorOption(propName, field.getName(), value, valueDescription.description(), field.getType(), valueDescription.defaultValue(), valueDescription.group());

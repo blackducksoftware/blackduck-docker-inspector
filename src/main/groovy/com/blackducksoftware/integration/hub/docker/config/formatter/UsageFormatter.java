@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +23,11 @@ public class UsageFormatter {
         usage.add(String.format("Usage: %s <options>; Available options:", Application.PROGRAM_NAME));
         final List<DockerInspectorOption> configOptions = config.getPublicConfigOptions();
         for (final DockerInspectorOption opt : configOptions) {
-            usage.add(String.format("\t--%s: type: %s; default: %s; description: %s; value: %s", opt.getKey(), opt.getValueTypeString(), opt.getDefaultValue(), opt.getDescription(), opt.getResolvedValue()));
+            if (!StringUtils.isBlank(opt.getDefaultValue())) {
+                usage.add(String.format("  --%s: [%s]: %s; default: %s", opt.getKey(), opt.getValueTypeString(), opt.getDescription(), opt.getDefaultValue()));
+            } else {
+                usage.add(String.format("  --%s: [%s]: %s", opt.getKey(), opt.getValueTypeString(), opt.getDescription()));
+            }
         }
         return usage;
     }

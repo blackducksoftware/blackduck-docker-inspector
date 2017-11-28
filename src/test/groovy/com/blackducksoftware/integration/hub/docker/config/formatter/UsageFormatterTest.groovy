@@ -22,10 +22,9 @@ class UsageFormatterTest {
     public void test() {
         final UsageFormatter helpPrinter = new UsageFormatter();
         helpPrinter.config = new Config();
-        helpPrinter.config.testPropPublicString = "test prop public string value";
+        helpPrinter.config.hubUrl = "test prop public string value";
         List<String> usageStrings = helpPrinter.getStringList();
-        for (String line : usageStrings) {
-            println line
-        }
+        assertEquals("Usage: hub-docker-inspector.sh <options>; Available options:", usageStrings.get(0))
+        assertEquals("  --hub.url: [String]: Hub URL", usageStrings.get(1))
     }
 }

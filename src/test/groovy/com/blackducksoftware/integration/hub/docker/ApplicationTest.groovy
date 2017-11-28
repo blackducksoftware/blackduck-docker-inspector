@@ -111,7 +111,7 @@ class ApplicationTest {
 
         final UsageFormatter helpGenerator = new UsageFormatter();
         helpGenerator.config = app.config;
-        helpGenerator.config.testPropPublicString = "test prop public string value";
+        helpGenerator.config.hubUrl = "test prop public string value";
         app.usageFormatter = helpGenerator
 
         app.inspectImage()
