@@ -63,7 +63,7 @@ public class Config {
     // If using an https Hub server, you can choose to always trust the server certificates
     @ValueDescription(description = "Hub Always Trust Cert?", defaultValue = "false", group = Config.GROUP_PUBLIC)
     @Value("${hub.always.trust.cert:false}")
-    private final Boolean hubAlwaysTrustCert = new Boolean(false); // don't know why this is required on just this one
+    private final Boolean hubAlwaysTrustCert = new Boolean(false); // don't know why init is required on just this one
 
     // The default project name will be the Docker image name
     @ValueDescription(description = "Hub Project Name", defaultValue = "", group = Config.GROUP_PUBLIC)
@@ -224,7 +224,7 @@ public class Config {
                             logger.warn(String.format("propName %s field is null", propName));
                             continue;
                         }
-                        logger.info(String.format("*** adding prop key %s", propName));
+                        logger.trace(String.format("adding prop key %s", propName));
                         allKeys.add(propName);
                         final String value = fieldValueObject.toString();
                         final ValueDescription valueDescription = field.getAnnotation(ValueDescription.class);
