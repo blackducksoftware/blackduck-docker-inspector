@@ -31,16 +31,18 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.hub.docker.client.DockerClientManager;
+import com.blackducksoftware.integration.hub.docker.config.Config;
 
 @Component
 public class ProgramPaths {
-    private static final String CONTAINER_JAR_PATH = "/opt/blackduck/hub-docker-inspector/hub-docker-inspector.jar";
+    @Autowired
+    private Config config;
 
-    private static final String JAR_FILENAME = "hub-docker-inspector.jar";
+    private static final String CONTAINER_JAR_PATH = "/opt/blackduck/hub-docker-inspector/hub-docker-inspector.jar";
 
     private static final String JAR_FILE_SUFFIX = ".jar";
 
@@ -59,21 +61,6 @@ public class ProgramPaths {
     private static final String CONFIG_DIR = "config/";
 
     private static final String CONTAINER_PROGRAM_DIR = "/opt/blackduck/hub-docker-inspector/";
-
-    @Value("${on.host}")
-    private boolean onHost;
-
-    @Value("${working.dir.path:/tmp/hub-docker-inspector-files}")
-    private String hostWorkingDirPath;
-
-    @Value("${hub.codelocation.prefix}")
-    private String codeLocationPrefix;
-
-    @Value("${jar.path}")
-    private String givenJarPath;
-
-    @Value("${output.path:}")
-    private String userOutputDir;
 
     private String hubDockerPgmDirPath;
     private String hubDockerPgmDirPathContainer;
@@ -95,7 +82,7 @@ public class ProgramPaths {
     private String hubDockerResultPath;
 
     private String getProgramDirPath() {
-        if (onHost) {
+        if (config.isOnHost()) {
             return getProgramDirPathHost();
         } else {
             return getProgramDirPathContainer();
@@ -103,10 +90,10 @@ public class ProgramPaths {
     }
 
     private String getProgramDirPathHost() {
-        if (!hostWorkingDirPath.endsWith("/")) {
-            hostWorkingDirPath = String.format("%s/", hostWorkingDirPath);
+        if (!config.getWorkingDirPath().endsWith("/")) {
+            config.setWorkingDirPath(String.format("%s/", config.getWorkingDirPath()));
         }
-        return hostWorkingDirPath;
+        return config.getWorkingDirPath();
     }
 
     private String getProgramDirPathContainer() {
@@ -116,16 +103,16 @@ public class ProgramPaths {
     @PostConstruct
     public void init() {
         hubDockerJarPathActual = deriveJarPath();
-        logger.debug(String.format("givenJarPath: %s", givenJarPath));
+        logger.debug(String.format("givenJarPath: %s", config.getJarPath()));
         if (StringUtils.isBlank(hubDockerPgmDirPath)) {
             hubDockerPgmDirPath = getProgramDirPath();
         }
         logger.debug(String.format("hubDockerPgmDirPath: %s", hubDockerPgmDirPath));
         if (StringUtils.isBlank(hubDockerJarPathHost)) {
-            if (StringUtils.isBlank(givenJarPath)) {
+            if (StringUtils.isBlank(config.getJarPath())) {
                 hubDockerJarPathHost = hubDockerJarPathActual;
             } else {
-                hubDockerJarPathHost = unEscape(givenJarPath);
+                hubDockerJarPathHost = unEscape(config.getJarPath());
             }
         }
         hubDockerPgmDirPathContainer = getProgramDirPathContainer();
@@ -149,10 +136,10 @@ public class ProgramPaths {
     }
 
     public String getUserOutputDir() {
-        if (StringUtils.isBlank(userOutputDir)) {
+        if (StringUtils.isBlank(config.getOutputPath())) {
             return null;
         }
-        return userOutputDir;
+        return config.getOutputPath();
     }
 
     private String deriveJarPath() {
@@ -240,7 +227,7 @@ public class ProgramPaths {
     }
 
     void setGivenJarPath(final String givenJarPath) {
-        this.givenJarPath = givenJarPath;
+        config.setJarPath(givenJarPath);
     }
 
     public String getImageTarFilename(final String imageName, final String tagName) {
@@ -256,8 +243,8 @@ public class ProgramPaths {
     }
 
     public String getCodeLocationName(final String imageName, final String imageTag, final String pkgMgrFilePath, final String pkgMgrName) {
-        if (!StringUtils.isBlank(codeLocationPrefix)) {
-            return String.format("%s_%s_%s_%s_%s", codeLocationPrefix, slashesToUnderscore(imageName), imageTag, slashesToUnderscore(pkgMgrFilePath), pkgMgrName);
+        if (!StringUtils.isBlank(config.getHubCodelocationPrefix())) {
+            return String.format("%s_%s_%s_%s_%s", config.getHubCodelocationPrefix(), slashesToUnderscore(imageName), imageTag, slashesToUnderscore(pkgMgrFilePath), pkgMgrName);
         }
         return String.format("%s_%s_%s_%s", slashesToUnderscore(imageName), imageTag, slashesToUnderscore(pkgMgrFilePath), pkgMgrName);
     }
@@ -290,7 +277,7 @@ public class ProgramPaths {
     }
 
     void setCodeLocationPrefix(final String codeLocationPrefix) {
-        this.codeLocationPrefix = codeLocationPrefix;
+        config.setHubCodelocationPrefix(codeLocationPrefix);
     }
 
     public String cleanHubProjectName(final String hubProjectName) {
@@ -311,5 +298,9 @@ public class ProgramPaths {
 
     private String colonsToUnderscores(final String imageName) {
         return imageName.replaceAll(":", "_");
+    }
+
+    void setConfig(final Config config) {
+        this.config = config;
     }
 }

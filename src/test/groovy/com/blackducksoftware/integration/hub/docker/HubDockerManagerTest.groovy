@@ -8,6 +8,8 @@ import org.junit.BeforeClass
 import org.junit.Test
 
 import com.blackducksoftware.integration.hub.docker.client.DockerClientManager
+import com.blackducksoftware.integration.hub.docker.config.Config
+import com.blackducksoftware.integration.hub.docker.config.DockerInspectorOption
 import com.blackducksoftware.integration.hub.docker.executor.ApkExecutor
 import com.blackducksoftware.integration.hub.docker.executor.DpkgExecutor
 import com.blackducksoftware.integration.hub.docker.executor.Executor
@@ -52,6 +54,30 @@ class HubDockerManagerTest {
     }
 
     private void doTest(String imageName, String tagName, OperatingSystemEnum os, PackageManagerEnum pkgMgr, Extractor extractor, Executor executor) {
+        List<DockerInspectorOption> configOptions = new ArrayList<>();
+        configOptions.add(new DockerInspectorOption("hub.url", "hubUrl", "testHubUrl", "Hub URL", String.class, "", Config.GROUP_PUBLIC));
+        Config config = [
+            isOnHost: { true },
+            isDryRun: { false },
+            getLinuxDistro: { "" },
+            getDockerTar: { "" },
+            getDockerImage: { targetImageName },
+            getDockerImageId: { "" },
+            getTargetImageName: { "" },
+            getDockerImageRepo: { targetImageName },
+            getDockerImageTag : { "" },
+            getHubUrl: { "test prop public string value" },
+            setDockerImageRepo: {},
+            setJarPath: {},
+            getJarPath: { "/tmp/t.jar" },
+            getHubCodelocationPrefix: { "" },
+            setHubCodelocationPrefix: { },
+            setDockerImageTag: {
+            },
+            getHubUrl: { "testHubUrl" },
+            getPublicConfigOptions: { configOptions }
+        ] as Config;
+
         File imageTarFile = new File("test/image.tar")
         ImagePkgMgr imagePkgMgr = new ImagePkgMgr(new File("test/resources/imageDir/image_${imageName}_v_${tagName}/${pkgMgr.directory}"), pkgMgr)
         ImageInfo imageInfo = new ImageInfo("image_${imageName}_v_${tagName}", os, imagePkgMgr)
@@ -69,6 +95,7 @@ class HubDockerManagerTest {
             getHubDockerOutputPath: { -> tempDirPath },
             getHubDockerOutputPathContainer: { -> tempDirPath }
         ] as ProgramPaths
+        mgr.programPaths.config = config;
         mgr.hubClient = [
         ] as HubClient
         mgr.dockerClientManager = [

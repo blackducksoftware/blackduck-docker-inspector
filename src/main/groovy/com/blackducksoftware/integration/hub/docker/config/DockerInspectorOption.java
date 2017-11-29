@@ -22,6 +22,8 @@
  */
 package com.blackducksoftware.integration.hub.docker.config;
 
+import org.apache.commons.lang3.builder.RecursiveToStringStyle;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,7 +37,7 @@ public class DockerInspectorOption {
     private final String valueTypeString;
     private final String group;
     private final String defaultValue;
-    private final String resolvedValue;
+    private String resolvedValue;
 
     public DockerInspectorOption(final String key, final String fieldName, final String resolvedValue, final String description, final Class<?> valueType, final String defaultValue, final String group) {
         this.key = key;
@@ -47,7 +49,7 @@ public class DockerInspectorOption {
         this.resolvedValue = resolvedValue;
 
         final String[] parts = valueType.toString().split("\\.");
-        logger.debug(String.format("Split %s into %d parts", valueType.toString(), parts.length));
+        logger.trace(String.format("Split %s into %d parts", valueType.toString(), parts.length));
         this.valueTypeString = parts[parts.length - 1];
     }
 
@@ -83,4 +85,12 @@ public class DockerInspectorOption {
         return resolvedValue;
     }
 
+    public void setResolvedValue(final String resolvedValue) {
+        this.resolvedValue = resolvedValue;
+    }
+
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this, RecursiveToStringStyle.JSON_STYLE);
+    }
 }

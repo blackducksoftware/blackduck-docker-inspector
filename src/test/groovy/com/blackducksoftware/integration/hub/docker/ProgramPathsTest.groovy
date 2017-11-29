@@ -5,6 +5,9 @@ import static org.junit.Assert.*
 
 import org.junit.Test
 
+import com.blackducksoftware.integration.hub.docker.config.Config
+import com.blackducksoftware.integration.hub.docker.config.DockerInspectorOption
+
 class ProgramPathsTest {
 
     @Test
@@ -18,6 +21,34 @@ class ProgramPathsTest {
     }
 
     private void doTest(String jarFileName, boolean prefixCodeLocationName) {
+        String prefix = "";
+        if (prefixCodeLocationName) {
+            prefix = "xyz";
+        }
+        List<DockerInspectorOption> configOptions = new ArrayList<>();
+        configOptions.add(new DockerInspectorOption("hub.url", "hubUrl", "testHubUrl", "Hub URL", String.class, "", Config.GROUP_PUBLIC));
+        Config config = [
+            isOnHost: { true },
+            isDryRun: { false },
+            getLinuxDistro: { "" },
+            getDockerTar: { "" },
+            getDockerImage: { targetImageName },
+            getDockerImageId: { "" },
+            getTargetImageName: { "" },
+            getDockerImageRepo: { targetImageName },
+            getDockerImageTag : { "" },
+            getHubUrl: { "test prop public string value" },
+            setDockerImageRepo: {},
+            setJarPath: {},
+            getJarPath: { "/tmp/t.jar" },
+            getHubCodelocationPrefix: { prefix },
+            setHubCodelocationPrefix: { },
+            setDockerImageTag: {
+            },
+            getHubUrl: { "testHubUrl" },
+            getPublicConfigOptions: { configOptions }
+        ] as Config;
+
         File installDir = TestUtils.createTempDirectory()
         String installDirPath = installDir.getAbsolutePath()
         File jarFile = new File(installDir, "hub-docker-1.0.0.jar")
@@ -26,10 +57,12 @@ class ProgramPathsTest {
         ProgramPaths paths = [
             getQualifiedJarPath: { -> return "file:${installDirPath}/${jarFileName}OTHERJUNK".toString() }
         ] as ProgramPaths
+
+        paths.config = config;
         paths.setGivenJarPath("/tmp/t.tar");
 
         if (prefixCodeLocationName) {
-            paths.codeLocationPrefix = "xyz"
+            paths.codeLocationPrefix = prefixCodeLocationName
         }
 
         paths.setHubDockerPgmDirPath(installDir.getAbsolutePath() + "/")
