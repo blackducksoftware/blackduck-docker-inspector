@@ -35,7 +35,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.exception.IntegrationException;
@@ -53,9 +52,6 @@ import com.google.gson.Gson;
 @Component
 public class HubDockerManager {
     private final Logger logger = LoggerFactory.getLogger(HubDockerManager.class);
-
-    @Value("${linux.distro}")
-    private String linuxDistro;
 
     @Autowired
     private HubClient hubClient;

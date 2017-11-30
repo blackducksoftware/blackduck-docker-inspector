@@ -1,22 +1,21 @@
 package com.blackducksoftware.integration.hub.docker.hub;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.blackducksoftware.integration.hub.docker.config.Config;
 
 @Component
 public class HubPassword {
 
-    @Value("${hub.password}")
-    private String hubPasswordProperty;
-
-    @Value("${BD_HUB_PASSWORD:}")
-    private String hubPasswordEnvVar;
+    @Autowired
+    private Config config;
 
     public String get() {
-        String hubPassword = hubPasswordEnvVar;
-        if (!StringUtils.isBlank(hubPasswordProperty)) {
-            hubPassword = hubPasswordProperty;
+        String hubPassword = config.getHubPasswordEnvVar();
+        if (!StringUtils.isBlank(config.getHubPassword())) {
+            hubPassword = config.getHubPassword();
         }
         return hubPassword;
     }

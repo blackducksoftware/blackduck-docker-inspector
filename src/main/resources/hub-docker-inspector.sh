@@ -220,7 +220,7 @@ function preProcessOptions() {
 		else
 			if [[ "${cmdlineargindex}" -eq $(( $# - 1)) ]]
 			then
-				if [[ "${cmdlinearg}" =~ ^--.*=.* ]]
+				if [[ "${cmdlinearg}" =~ ^-.* ]]
 				then
 					options[${cmdlineargindex}]="${cmdlinearg}"
 				else
@@ -256,12 +256,6 @@ if [ \( "$1" = -v \) -o \( "$1" = --version \) ]
 then
 	echo "$(basename $0) ${version}"
 	exit 0
-fi
-
-if [ \( "$1" = -h \) -o \( "$1" = --help \) ]
-then
-    printUsage
-    exit 0
 fi
 
 if [ \( "$1" = -j \) -o \( "$1" = --pulljar \) ]

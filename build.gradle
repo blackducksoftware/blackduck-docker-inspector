@@ -431,7 +431,7 @@ task pushImages(dependsOn: [pkg, pushImageAlpine, pushImageCentos, pushImageUbun
 task buildTestTarfiles(dependsOn: [buildWhTestDockerTarfile, buildAggTestDockerTarfile, \
         buildAlpineTestDockerTarfile]) {}
 
-task integrationTest(type: Test, dependsOn: [buildTestTarfiles]) {
+task integrationTest(type: Test, dependsOn: [pkg, buildTestTarfiles]) {
     testClassesDir = sourceSets.integrationTest.output.classesDir
     classpath = sourceSets.integrationTest.runtimeClasspath
     outputs.upToDateWhen { false }

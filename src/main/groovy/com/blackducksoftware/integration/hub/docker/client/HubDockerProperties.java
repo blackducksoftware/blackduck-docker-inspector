@@ -29,12 +29,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
+
+import com.blackducksoftware.integration.hub.docker.config.Config;
 
 @PropertySource("classpath:application.properties")
 @Component
@@ -43,20 +45,26 @@ class HubDockerProperties {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private Environment env;
+    private Config config;
 
     private Properties propsForSubContainer;
 
-    public void load() throws IOException {
+    public void load() throws IOException, IllegalArgumentException, IllegalAccessException {
         propsForSubContainer = new Properties();
 
-        final ClassPathPropertiesFile propertiesFromFile = new ClassPathPropertiesFile("application.properties");
-        for (final Object propertyKeyObject : propertiesFromFile.keySet()) {
-            final String propertyKey = (String) propertyKeyObject;
-            final String value = env.getProperty(propertyKey);
-            logger.trace(String.format("load(): %s=%s", propertyKey, value));
+        for (final String propertyKey : config.getAllKeys()) {
+            logger.trace(String.format("Config option key: %s", propertyKey));
+            final String value = config.get(propertyKey);
+            logger.trace(String.format("load(): %s=%s (%s)", propertyKey, getValueObscuredIfSensitive(propertyKey, value), config.isPublic(propertyKey) ? "public" : "private"));
             propsForSubContainer.put(propertyKey, value);
         }
+    }
+
+    private String getValueObscuredIfSensitive(final String key, final String value) {
+        if ((!StringUtils.isBlank(value)) && (key.endsWith(".password"))) {
+            return "********";
+        }
+        return value;
     }
 
     public void set(final String key, final String value) {

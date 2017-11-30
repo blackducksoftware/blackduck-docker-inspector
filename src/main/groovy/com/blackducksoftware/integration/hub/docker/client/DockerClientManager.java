@@ -35,10 +35,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.hub.docker.ProgramPaths;
+import com.blackducksoftware.integration.hub.docker.config.Config;
 import com.blackducksoftware.integration.hub.docker.executor.Executor;
 import com.blackducksoftware.integration.hub.docker.hub.HubPassword;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
@@ -87,26 +87,8 @@ public class DockerClientManager {
     @Autowired
     private HubDockerProperties hubDockerProperties;
 
-    @Value("${hub.password}")
-    private String hubPasswordProperty;
-
-    @Value("${BD_HUB_PASSWORD:}")
-    private String hubPasswordEnvVar;
-
-    @Value("${hub.proxy.host}")
-    private String hubProxyHostProperty;
-
-    @Value("${SCAN_CLI_OPTS:}")
-    private String scanCliOptsEnvVarValue;
-
-    @Value("${DOCKER_INSPECTOR_JAVA_OPTS:}")
-    private String dockerInspectorJavaOptsValue;
-
-    @Value("${dry.run}")
-    private boolean dryRun;
-
-    @Value("${output.include.containerfilesystem}")
-    private boolean outputIncludeContainerFileSystemTarfile;
+    @Autowired
+    private Config config;
 
     public File getTarFileFromDockerImageById(final String imageId) throws HubIntegrationException, IOException {
         final File imageTarDirectory = new File(new File(programPaths.getHubDockerWorkingDirPath()), "tarDirectory");
@@ -175,7 +157,7 @@ public class DockerClientManager {
     }
 
     public void run(final String runOnImageName, final String runOnTagName, final File dockerTarFile, final boolean copyJar, final String targetImage, final String targetImageRepo, final String targetImageTag)
-            throws InterruptedException, IOException, HubIntegrationException {
+            throws InterruptedException, IOException, HubIntegrationException, IllegalArgumentException, IllegalAccessException {
 
         final String hubPasswordString = hubPassword.get();
         final String imageId = String.format("%s:%s", runOnImageName, runOnTagName);
@@ -195,8 +177,8 @@ public class DockerClientManager {
         final List<String> cmd = new ArrayList<>();
         cmd.add("java");
         cmd.add("-Dfile.encoding=UTF-8");
-        if (!StringUtils.isBlank(dockerInspectorJavaOptsValue)) {
-            final String[] dockerInspectorJavaOptsParts = dockerInspectorJavaOptsValue.split("\\b");
+        if (!StringUtils.isBlank(config.getDockerInspectorJavaOptsValue())) {
+            final String[] dockerInspectorJavaOptsParts = config.getDockerInspectorJavaOptsValue().split("\\b");
             for (int i = 0; i < dockerInspectorJavaOptsParts.length; i++) {
                 cmd.add(dockerInspectorJavaOptsParts[i]);
             }
@@ -226,16 +208,16 @@ public class DockerClientManager {
     }
 
     private void setPropertiesInSubContainer(final DockerClient dockerClient, final String containerId, final String tarFilePathInSubContainer, final String tarFileDirInSubContainer, final File dockerTarFile, final String targetImage,
-            final String targetImageRepo, final String targetImageTag) throws IOException {
+            final String targetImageRepo, final String targetImageTag) throws IOException, IllegalArgumentException, IllegalAccessException {
         hubDockerProperties.load();
         hubDockerProperties.set(IMAGE_TARFILE_PROPERTY, tarFilePathInSubContainer);
         hubDockerProperties.set(IMAGE_PROPERTY, targetImage);
         hubDockerProperties.set(IMAGE_REPO_PROPERTY, targetImageRepo);
         hubDockerProperties.set(IMAGE_TAG_PROPERTY, targetImageTag);
         hubDockerProperties.set(OUTPUT_INCLUDE_DOCKER_TARFILE_PROPERTY, "false");
-        hubDockerProperties.set(OUTPUT_INCLUDE_CONTAINER_FILE_SYSTEM_TARFILE_PROPERTY, (new Boolean(outputIncludeContainerFileSystemTarfile)).toString());
+        hubDockerProperties.set(OUTPUT_INCLUDE_CONTAINER_FILE_SYSTEM_TARFILE_PROPERTY, (new Boolean(config.isOutputIncludeContainerfilesystem())).toString());
         hubDockerProperties.set(ON_HOST_PROPERTY, "false");
-        hubDockerProperties.set(DRY_RUN_PROPERTY, (new Boolean(dryRun).toString()));
+        hubDockerProperties.set(DRY_RUN_PROPERTY, (new Boolean(config.isDryRun()).toString()));
         final String pathToPropertiesFileForSubContainer = String.format("%s%s", programPaths.getHubDockerTargetDirPath(), ProgramPaths.APPLICATION_PROPERTIES_FILENAME);
         hubDockerProperties.save(pathToPropertiesFileForSubContainer);
 
@@ -262,8 +244,8 @@ public class DockerClientManager {
         }
         logger.debug(String.format("Creating container %s from image %s", extractorContainerName, imageId));
         final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageId).withStdinOpen(true).withTty(true).withName(extractorContainerName).withCmd("/bin/bash");
-        if ((StringUtils.isBlank(hubProxyHostProperty)) && (!StringUtils.isBlank(scanCliOptsEnvVarValue))) {
-            createContainerCmd.withEnv(String.format("BD_HUB_PASSWORD=%s", hubPassword), String.format("SCAN_CLI_OPTS=%s", scanCliOptsEnvVarValue));
+        if ((StringUtils.isBlank(config.getHubProxyHost())) && (!StringUtils.isBlank(config.getScanCliOptsEnvVar()))) {
+            createContainerCmd.withEnv(String.format("BD_HUB_PASSWORD=%s", hubPassword), String.format("SCAN_CLI_OPTS=%s", config.getScanCliOptsEnvVar()));
         } else {
             createContainerCmd.withEnv(String.format("BD_HUB_PASSWORD=%s", hubPassword));
         }

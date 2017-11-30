@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.lang.ProcessBuilder.Redirect;
 import java.nio.file.Files;
@@ -93,6 +94,59 @@ public class EndToEndTest {
     @Test
     public void testAlpineLatestTarRepoTagNotSpecified() throws IOException, InterruptedException {
         testTar("alpine.tar", "alpine", null, null, "latest", "lib_apk", false);
+    }
+
+    @Test
+    public void testPullJar() throws IOException, InterruptedException {
+        final File workingDir = new File("test/pulljar");
+        FileUtils.deleteDirectory(workingDir);
+        workingDir.mkdir();
+        System.out.println(String.format("workingDir: %s", workingDir.getAbsolutePath()));
+        final FilenameFilter jarFileFilter = getJarFilenameFilter();
+        final File[] jarFilesBefore = workingDir.listFiles(jarFileFilter);
+        assertTrue(String.format("%s should be an empty directory", workingDir.getAbsolutePath()), jarFilesBefore.length == 0);
+
+        final List<String> partialCmd = Arrays.asList("../../build/hub-docker-inspector.sh", "--pulljar");
+        // Arrays.asList returns a fixed size list; need a variable sized list
+        final List<String> fullCmd = new ArrayList<>();
+        fullCmd.addAll(partialCmd);
+
+        System.out.println(String.format("Running --pulljar end to end test"));
+        final ProcessBuilder pb = new ProcessBuilder(fullCmd);
+        final Map<String, String> env = pb.environment();
+        final String oldPath = System.getenv("PATH");
+        final String newPath = String.format("/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:%s", oldPath);
+        System.out.println(String.format("Adjusted path: %s", newPath));
+        env.put("PATH", newPath);
+        pb.redirectErrorStream(true);
+        pb.redirectOutput(Redirect.INHERIT);
+        pb.directory(workingDir);
+        final Process p = pb.start();
+        final int retCode = p.waitFor();
+        assertEquals(0, retCode);
+        System.out.println("hub-docker-inspector --pulljar done; verifying results...");
+
+        final File[] jarFilesAfter = workingDir.listFiles(jarFileFilter);
+        final boolean foundOne = jarFilesAfter.length == 1;
+        for (final File jarFile : jarFilesAfter) {
+            System.out.println(String.format("Found jar file: %s", jarFile.getName()));
+            jarFile.delete();
+        }
+        assertTrue("Expected a single pulled jar file", foundOne);
+    }
+
+    private FilenameFilter getJarFilenameFilter() {
+        final FilenameFilter jarFileFilter = new FilenameFilter() {
+            @Override
+            public boolean accept(final File dir, final String name) {
+                if (name.endsWith(".jar")) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        };
+        return jarFileFilter;
     }
 
     private void testImage(final String inspectTarget, final String imageForBdioFilename, final String tagForBdioFilename, final String pkgMgrPathString, final boolean requireBdioMatch) throws IOException, InterruptedException {

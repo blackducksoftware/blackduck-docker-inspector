@@ -35,7 +35,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.exception.EncryptionException;
@@ -45,6 +44,7 @@ import com.blackducksoftware.integration.hub.builder.HubServerConfigBuilder;
 import com.blackducksoftware.integration.hub.dataservice.phonehome.PhoneHomeDataService;
 import com.blackducksoftware.integration.hub.docker.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.client.ProgramVersion;
+import com.blackducksoftware.integration.hub.docker.config.Config;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.blackducksoftware.integration.hub.global.HubServerConfig;
 import com.blackducksoftware.integration.hub.rest.CredentialsRestConnection;
@@ -68,46 +68,10 @@ public class HubClient {
     private final Logger logger = LoggerFactory.getLogger(HubClient.class);
 
     @Autowired
+    private Config config;
+
+    @Autowired
     private HubPassword hubPassword;
-
-    @Value("${caller.name}")
-    private String callerName;
-
-    @Value("${caller.version}")
-    private String callerVersion;
-
-    @Value("${hub.url}")
-    private String hubUrl;
-
-    @Value("${hub.timeout}")
-    private String hubTimeout;
-
-    @Value("${hub.username}")
-    private String hubUsername; // access via getHubUsername()
-
-    @Value("${SCAN_CLI_OPTS:}")
-    private String scanCliOptsEnvVar;
-
-    @Value("${hub.proxy.host}")
-    private String hubProxyHostProperty;
-
-    @Value("${hub.proxy.port}")
-    private String hubProxyPortProperty;
-
-    @Value("${hub.proxy.username}")
-    private String hubProxyUsernameProperty;
-
-    @Value("${hub.proxy.password}")
-    private String hubProxyPasswordProperty;
-
-    @Value("${command.timeout}")
-    private long commandTimeout;
-
-    @Value("${hub.always.trust.cert}")
-    private Boolean setAlwaysTrustServerCertificate;
-
-    @Value("${phone.home:true}")
-    private Boolean phoneHomeEnabled;
 
     @Autowired
     private ProgramVersion programVersion;
@@ -120,6 +84,11 @@ public class HubClient {
     }
 
     public void testHubConnection() throws HubIntegrationException {
+        logger.trace(String.format("Hub username: %s", getHubUsername())); // ArgsWithSpacesTest tests this in output
+        if (config.isDryRun()) {
+            logger.debug("In dry run mode; skipping verification of Hub connection");
+            return;
+        }
         final HubServerConfig hubServerConfig = createBuilder().build();
         final CredentialsRestConnection credentialsRestConnection;
         try {
@@ -142,11 +111,11 @@ public class HubClient {
     }
 
     private String getHubUsername() {
-        return programPaths.unEscape(hubUsername);
+        return programPaths.unEscape(config.getHubUsername());
     }
 
     public void phoneHome(final String dockerEngineVersion) {
-        if (!phoneHomeEnabled) {
+        if (!config.isPhoneHome()) {
             logger.debug("PhoneHome disabled");
             return;
         }
@@ -171,11 +140,11 @@ public class HubClient {
             infoMap.put("thirdPartyVersion", dockerEngineVersion);
             infoMap.put("pluginVersion", programVersion.getProgramVersion());
 
-            if (!StringUtils.isBlank(callerName)) {
-                infoMap.put(PHONE_HOME_METADATA_NAME_CALLER_NAME, callerName);
+            if (!StringUtils.isBlank(config.getCallerName())) {
+                infoMap.put(PHONE_HOME_METADATA_NAME_CALLER_NAME, config.getCallerName());
             }
-            if (!StringUtils.isBlank(callerVersion)) {
-                infoMap.put(PHONE_HOME_METADATA_NAME_CALLER_VERSION, callerVersion);
+            if (!StringUtils.isBlank(config.getCallerVersion())) {
+                infoMap.put(PHONE_HOME_METADATA_NAME_CALLER_VERSION, config.getCallerVersion());
             }
             final PhoneHomeRequestBody phoneHomeRequestBody = new PhoneHomeRequestBody("None", "Integrations", infoMap);
             phClient.postPhoneHomeRequest(phoneHomeRequestBody);
@@ -192,11 +161,11 @@ public class HubClient {
         final PhoneHomeDataService phoner = hubServicesFactory.createPhoneHomeDataService();
         final PhoneHomeRequestBodyBuilder phoneHomeRequestBodyBuilder = phoner.createInitialPhoneHomeRequestBodyBuilder(THIRD_PARTY_NAME_DOCKER, dockerEngineVersion, programVersion.getProgramVersion());
         phoneHomeRequestBodyBuilder.setBlackDuckName(BlackDuckName.HUB);
-        if (!StringUtils.isBlank(callerName)) {
-            phoneHomeRequestBodyBuilder.addToMetaDataMap(PHONE_HOME_METADATA_NAME_CALLER_NAME, callerName);
+        if (!StringUtils.isBlank(config.getCallerName())) {
+            phoneHomeRequestBodyBuilder.addToMetaDataMap(PHONE_HOME_METADATA_NAME_CALLER_NAME, config.getCallerName());
         }
-        if (!StringUtils.isBlank(callerVersion)) {
-            phoneHomeRequestBodyBuilder.addToMetaDataMap(PHONE_HOME_METADATA_NAME_CALLER_VERSION, callerVersion);
+        if (!StringUtils.isBlank(config.getCallerVersion())) {
+            phoneHomeRequestBodyBuilder.addToMetaDataMap(PHONE_HOME_METADATA_NAME_CALLER_VERSION, config.getCallerVersion());
         }
         final PhoneHomeRequestBody phoneHomeRequestBody = phoneHomeRequestBodyBuilder.buildObject();
         phoner.phoneHome(phoneHomeRequestBody);
@@ -205,12 +174,12 @@ public class HubClient {
 
     private HubServerConfigBuilder createBuilder() {
         final String hubPasswordString = hubPassword.get();
-        String hubProxyHost = hubProxyHostProperty;
-        String hubProxyPort = hubProxyPortProperty;
-        String hubProxyUsername = hubProxyUsernameProperty;
-        String hubProxyPassword = hubProxyPasswordProperty;
-        if ((StringUtils.isBlank(hubProxyHostProperty)) && (!StringUtils.isBlank(scanCliOptsEnvVar))) {
-            final List<String> scanCliOpts = Arrays.asList(scanCliOptsEnvVar.split("\\s"));
+        String hubProxyHost = config.getHubProxyHost();
+        String hubProxyPort = config.getHubProxyPort();
+        String hubProxyUsername = config.getHubProxyUsername();
+        String hubProxyPassword = config.getHubProxyPassword();
+        if ((StringUtils.isBlank(config.getHubProxyHost())) && (!StringUtils.isBlank(config.getScanCliOptsEnvVar()))) {
+            final List<String> scanCliOpts = Arrays.asList(config.getScanCliOptsEnvVar().split("\\s"));
             for (String opt : scanCliOpts) {
                 opt = opt.trim();
                 if ((opt.startsWith("-Dhttp.proxy.host=")) || (opt.startsWith("-Dhttps.proxy.host=")) || (opt.startsWith("-Dhttp.proxyHost=")) || (opt.startsWith("-Dhttps.proxyHost="))) {
@@ -226,20 +195,16 @@ public class HubClient {
         }
 
         final HubServerConfigBuilder hubServerConfigBuilder = new HubServerConfigBuilder();
-        hubServerConfigBuilder.setHubUrl(hubUrl);
+        hubServerConfigBuilder.setHubUrl(config.getHubUrl());
         hubServerConfigBuilder.setUsername(getHubUsername());
         hubServerConfigBuilder.setPassword(hubPasswordString);
 
-        hubServerConfigBuilder.setTimeout(hubTimeout);
+        hubServerConfigBuilder.setTimeout(config.getHubTimeout());
         hubServerConfigBuilder.setProxyHost(hubProxyHost);
         hubServerConfigBuilder.setProxyPort(hubProxyPort);
         hubServerConfigBuilder.setProxyUsername(hubProxyUsername);
         hubServerConfigBuilder.setProxyPassword(hubProxyPassword);
-
-        if (setAlwaysTrustServerCertificate == null) {
-            setAlwaysTrustServerCertificate = true;
-        }
-        hubServerConfigBuilder.setAlwaysTrustServerCertificate(setAlwaysTrustServerCertificate);
+        hubServerConfigBuilder.setAlwaysTrustServerCertificate(config.isHubAlwaysTrustCert());
 
         return hubServerConfigBuilder;
     }
