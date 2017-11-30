@@ -84,6 +84,11 @@ public class HubClient {
     }
 
     public void testHubConnection() throws HubIntegrationException {
+        logger.trace(String.format("Hub username: %s", getHubUsername())); // ArgsWithSpacesTest tests this in output
+        if (config.isDryRun()) {
+            logger.debug("In dry run mode; skipping verification of Hub connection");
+            return;
+        }
         final HubServerConfig hubServerConfig = createBuilder().build();
         final CredentialsRestConnection credentialsRestConnection;
         try {

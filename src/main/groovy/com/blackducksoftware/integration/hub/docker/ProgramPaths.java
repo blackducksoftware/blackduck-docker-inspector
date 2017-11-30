@@ -131,7 +131,6 @@ public class ProgramPaths {
 
     public String unEscape(final String origString) {
         final String unEscapedString = origString.replaceAll("%20", " ");
-        logger.debug(String.format("UnEscaped %s to %s", origString, unEscapedString));
         return unEscapedString;
     }
 
