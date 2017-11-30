@@ -218,7 +218,7 @@ task createWhTestDockerfile(type: Dockerfile) {
     maintainer 'Black Duck Software'
     environmentVariable('LANG', 'en_US.UTF-8')
     
-    runCommand 'apt-get update && apt-get -y install curl=7.47.0-1ubuntu2.4 && apt-get -y remove curl && apt-get -y clean'
+    runCommand 'apt-get update && apt-get -y install curl && apt-get -y remove curl && apt-get -y clean'
 }
 
 task removeWhImage(type: Exec) {
