@@ -53,7 +53,7 @@ public class Executor {
         final CommandLine cmdLine = CommandLine.parse(commandString);
         final DefaultExecutor executor = new DefaultExecutor();
         executor.setExitValue(1);
-        final ExecuteWatchdog watchdog = new ExecuteWatchdog(new Long(config.getCommandTimeout()));
+        final ExecuteWatchdog watchdog = new ExecuteWatchdog(config.getCommandTimeout());
         executor.setWatchdog(watchdog);
         final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         final ByteArrayOutputStream errorStream = new ByteArrayOutputStream();

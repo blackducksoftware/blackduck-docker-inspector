@@ -30,7 +30,7 @@ public class Config {
 
     @ValueDescription(description = "Hub Timeout in seconds", defaultValue = "120", group = Config.GROUP_PUBLIC)
     @Value("${hub.timeout:120}")
-    private String hubTimeout = "";
+    private Integer hubTimeout = 120;
 
     @ValueDescription(description = "Hub Username", defaultValue = "", group = Config.GROUP_PUBLIC)
     @Value("${hub.username:}")
@@ -92,7 +92,7 @@ public class Config {
     // Timeout for external command execution (to pull a docker image, etc.)
     @ValueDescription(description = "Command Timeout (Milliseconds)", defaultValue = "120000", group = Config.GROUP_PUBLIC)
     @Value("${command.timeout:120000}")
-    private String commandTimeout = "";
+    private Long commandTimeout = 120000L;
 
     // Logging level: ERROR, WARN, INFO, DEBUG, TRACE
     // TODO what about this logging level??
@@ -251,8 +251,8 @@ public class Config {
         return optionsByFieldName.get("hubUrl").getResolvedValue();
     }
 
-    public String getHubTimeout() {
-        return optionsByFieldName.get("hubTimeout").getResolvedValue();
+    public Integer getHubTimeout() {
+        return new Integer(optionsByFieldName.get("hubTimeout").getResolvedValue());
     }
 
     public String getHubUsername() {
@@ -303,8 +303,8 @@ public class Config {
         return optionsByFieldName.get("linuxDistro").getResolvedValue();
     }
 
-    public String getCommandTimeout() {
-        return optionsByFieldName.get("commandTimeout").getResolvedValue();
+    public Long getCommandTimeout() {
+        return new Long(optionsByFieldName.get("commandTimeout").getResolvedValue());
     }
 
     public boolean isDryRun() {
@@ -372,27 +372,15 @@ public class Config {
     }
 
     public String getScanCliOptsEnvVar() {
-        final DockerInspectorOption opt = optionsByFieldName.get("scanCliOptsEnvVar");
-        if (opt != null) {
-            return opt.getResolvedValue();
-        }
-        return null;
+        return scanCliOptsEnvVar;
     }
 
     public String getHubPasswordEnvVar() {
-        final DockerInspectorOption opt = optionsByFieldName.get("hubPasswordEnvVar");
-        if (opt != null) {
-            return opt.getResolvedValue();
-        }
-        return null;
+        return hubPasswordEnvVar;
     }
 
     public String getDockerInspectorJavaOptsValue() {
-        final DockerInspectorOption opt = optionsByFieldName.get("dockerInspectorJavaOptsValue");
-        if (opt != null) {
-            return opt.getResolvedValue();
-        }
-        return null;
+        return dockerInspectorJavaOptsValue;
     }
 
     public void setDockerImageRepo(final String newValue) {
