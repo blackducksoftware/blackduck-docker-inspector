@@ -43,7 +43,8 @@ class UsageFormatterTest {
         ] as Config;
         helpPrinter.config = config;
         List<String> usageStrings = helpPrinter.getStringList();
-        assertEquals("Usage: hub-docker-inspector.sh <options>; Available options:", usageStrings.get(0))
-        assertEquals("  --hub.url: [String]: Hub URL", usageStrings.get(1))
+        assertTrue(usageStrings.size() >= 16);
+        assertEquals("Usage: hub-docker-inspector.sh <options>", usageStrings.get(0))
+        assertEquals("options: any supported property can be set by adding to the command line", usageStrings.get(1))
     }
 }
