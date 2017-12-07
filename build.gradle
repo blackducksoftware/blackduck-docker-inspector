@@ -30,7 +30,7 @@ tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
 tasks.withType(GroovyCompile) { options.encoding = 'UTF-8' }
 
 group = 'com.blackducksoftware.integration'
-version = '4.0.3-SNAPSHOT'
+version = '4.0.3'
 description = ''
 String hubDockerImageName = 'hub-docker-inspector'
 
