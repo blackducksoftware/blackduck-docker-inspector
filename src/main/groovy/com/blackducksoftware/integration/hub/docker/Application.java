@@ -316,7 +316,9 @@ public class Application {
         clearResult();
         initImageName();
         logger.info(String.format("Inspecting image:tag %s:%s", config.getDockerImageRepo(), config.getDockerImageTag()));
-        verifyHubConnection();
+        if (config.isOnHost()) {
+            verifyHubConnection();
+        }
         hubDockerManager.init();
         FileOperations.removeFileOrDir(programPaths.getHubDockerWorkingDirPath());
         return true;
