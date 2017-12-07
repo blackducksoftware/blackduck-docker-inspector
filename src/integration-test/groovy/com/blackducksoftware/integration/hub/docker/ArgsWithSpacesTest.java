@@ -87,7 +87,7 @@ public class ArgsWithSpacesTest {
                 reader.close();
             }
         }
-        assertEquals(2, foundUsernameCount);
+        assertEquals(1, foundUsernameCount);
         assertEquals(1, foundProjectNameVersionCount);
     }
 }
