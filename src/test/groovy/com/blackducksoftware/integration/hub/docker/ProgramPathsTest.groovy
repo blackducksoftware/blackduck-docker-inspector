@@ -46,7 +46,8 @@ class ProgramPathsTest {
             setDockerImageTag: {
             },
             getHubUrl: { "testHubUrl" },
-            getPublicConfigOptions: { configOptions }
+            getPublicConfigOptions: { configOptions },
+            getRunId: { "" }
         ] as Config;
 
         File installDir = TestUtils.createTempDirectory()

@@ -50,15 +50,15 @@ public class ProgramPaths {
 
     private static final String RESULT_JSON_FILENAME = "result.json";
 
-    private static final String OUTPUT_DIR = "output/";
+    private static final String OUTPUT_DIR = "output";
 
-    private static final String WORKING_DIR = "working/";
+    private static final String WORKING_DIR = "working";
 
-    private static final String TARGET_DIR = "target/";
+    private static final String TARGET_DIR = "target";
 
-    private static final String TEMP_DIR = "temp/";
+    private static final String TEMP_DIR = "temp";
 
-    private static final String CONFIG_DIR = "config/";
+    private static final String CONFIG_DIR = "config";
 
     private static final String CONTAINER_PROGRAM_DIR = "/opt/blackduck/hub-docker-inspector/";
 
@@ -116,15 +116,15 @@ public class ProgramPaths {
             }
         }
         hubDockerPgmDirPathContainer = getProgramDirPathContainer();
-        hubDockerConfigDirPath = hubDockerPgmDirPath + CONFIG_DIR;
-        hubDockerTempDirPath = hubDockerPgmDirPath + TEMP_DIR;
-        hubDockerConfigDirPathContainer = hubDockerPgmDirPathContainer + CONFIG_DIR;
+        hubDockerConfigDirPath = hubDockerPgmDirPath + CONFIG_DIR + "/";
+        hubDockerTempDirPath = hubDockerPgmDirPath + TEMP_DIR + "/";
+        hubDockerConfigDirPathContainer = hubDockerPgmDirPathContainer + CONFIG_DIR + "/";
         hubDockerConfigFilePath = hubDockerConfigDirPath + APPLICATION_PROPERTIES_FILENAME;
-        hubDockerTargetDirPath = hubDockerPgmDirPath + TARGET_DIR;
-        hubDockerTargetDirPathContainer = hubDockerPgmDirPathContainer + TARGET_DIR;
-        hubDockerWorkingDirPath = hubDockerPgmDirPath + WORKING_DIR;
-        hubDockerOutputPath = hubDockerPgmDirPath + OUTPUT_DIR;
-        hubDockerOutputPathContainer = getProgramDirPathContainer() + OUTPUT_DIR;
+        hubDockerTargetDirPath = hubDockerPgmDirPath + TARGET_DIR + "/";
+        hubDockerTargetDirPathContainer = hubDockerPgmDirPathContainer + TARGET_DIR + "/";
+        hubDockerWorkingDirPath = adjustWithRunId(hubDockerPgmDirPath + WORKING_DIR) + "/";
+        hubDockerOutputPath = hubDockerPgmDirPath + OUTPUT_DIR + "/";
+        hubDockerOutputPathContainer = getProgramDirPathContainer() + OUTPUT_DIR + "/";
         hubDockerResultPath = hubDockerOutputPath + RESULT_JSON_FILENAME;
 
     }
@@ -250,6 +250,25 @@ public class ProgramPaths {
 
     public String getBdioFilename(final String imageName, final String pkgMgrFilePath, final String hubProjectName, final String hubVersionName) {
         return createBdioFilename(cleanImageName(imageName), cleanPath(pkgMgrFilePath), cleanHubProjectName(hubProjectName), hubVersionName);
+    }
+
+    public String deriveContainerName(final String imageName) {
+        String extractorContainerName;
+        final int slashIndex = imageName.lastIndexOf('/');
+        if (slashIndex < 0) {
+            extractorContainerName = String.format("%s-extractor", imageName);
+        } else {
+            extractorContainerName = imageName.substring(slashIndex + 1);
+        }
+        return adjustWithRunId(extractorContainerName);
+    }
+
+    private String adjustWithRunId(final String origName) {
+        String adjustedName = origName;
+        if (!StringUtils.isBlank(config.getRunId())) {
+            adjustedName = String.format("%s_runId_%s", origName, config.getRunId());
+        }
+        return adjustedName;
     }
 
     private String createBdioFilename(final String cleanImageName, final String cleanPkgMgrFilePath, final String cleanHubProjectName, final String hubVersionName) {

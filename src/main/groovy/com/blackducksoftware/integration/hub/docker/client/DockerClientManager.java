@@ -162,7 +162,7 @@ public class DockerClientManager {
         final String hubPasswordString = hubPassword.get();
         final String imageId = String.format("%s:%s", runOnImageName, runOnTagName);
         logger.info(String.format("Running container based on image %s", imageId));
-        final String extractorContainerName = deriveContainerName(runOnImageName);
+        final String extractorContainerName = programPaths.deriveContainerName(runOnImageName);
         logger.debug(String.format("Container name: %s", extractorContainerName));
         final DockerClient dockerClient = hubDockerClient.getDockerClient();
         final String tarFileDirInSubContainer = programPaths.getHubDockerTargetDirPathContainer();
@@ -284,17 +284,6 @@ public class DockerClientManager {
         final File toDir = new File(toPath);
         toDir.mkdirs();
         executor.executeCommand(String.format("docker cp %s:%s %s", containerId, fromPath, toPath));
-    }
-
-    private String deriveContainerName(final String imageName) {
-        String extractorContainerName;
-        final int slashIndex = imageName.lastIndexOf('/');
-        if (slashIndex < 0) {
-            extractorContainerName = String.format("%s-extractor", imageName);
-        } else {
-            extractorContainerName = imageName.substring(slashIndex + 1);
-        }
-        return extractorContainerName;
     }
 
     private void execCommandInContainer(final DockerClient dockerClient, final String imageId, final String containerId, final List<String> cmd) throws InterruptedException {
