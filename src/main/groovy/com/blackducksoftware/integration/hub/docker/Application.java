@@ -125,7 +125,7 @@ public class Application {
             }
             returnCode = reportResult();
             if (config.isOnHost() && config.isCleanupWorkingDir()) {
-                FileOperations.removeFileOrDirQuietly(programPaths.getHubDockerPgmDirPath());
+                FileOperations.removeFileOrDirQuietly(programPaths.getHubDockerPgmDirPathHost());
             }
         } catch (final Throwable e) {
             final String msg = String.format("Error inspecting image: %s", e.getMessage());
@@ -175,7 +175,7 @@ public class Application {
             return;
         }
         logger.debug(String.format("Copying output to %s", userOutputDirPath));
-        FileOperations.copyDirContentsToDir(programPaths.getHubDockerOutputPath(), userOutputDirPath, true);
+        FileOperations.copyDirContentsToDir(programPaths.getHubDockerOutputPathHost(), userOutputDirPath, true);
     }
 
     private void uploadBdioFiles() throws IntegrationException {
@@ -229,7 +229,7 @@ public class Application {
     }
 
     private List<File> findBdioFiles() {
-        final List<File> bdioFiles = FileOperations.findFilesWithExt(new File(programPaths.getHubDockerOutputPath()), "jsonld");
+        final List<File> bdioFiles = FileOperations.findFilesWithExt(new File(programPaths.getHubDockerOutputPathHost()), "jsonld");
         logger.info(String.format("Found %d BDIO files produced by the container", bdioFiles.size()));
         return bdioFiles;
     }
@@ -245,11 +245,12 @@ public class Application {
 
     private void provideDockerTarIfRequested(final File dockerTarFile) throws IOException {
         if (config.isOutputIncludeDockertarfile()) {
-            final File outputDirectory = new File(programPaths.getHubDockerOutputPath());
             if (config.isOnHost()) {
+                final File outputDirectory = new File(programPaths.getHubDockerOutputPathHost());
                 logger.debug(String.format("Copying %s to output dir %s", dockerTarFile.getAbsolutePath(), outputDirectory.getAbsolutePath()));
                 FileOperations.copyFile(dockerTarFile, outputDirectory);
             } else {
+                final File outputDirectory = new File(programPaths.getHubDockerOutputPathContainer());
                 logger.debug(String.format("Moving %s to output dir %s", dockerTarFile.getAbsolutePath(), outputDirectory.getAbsolutePath()));
                 FileOperations.moveFile(dockerTarFile, outputDirectory);
             }
@@ -258,7 +259,7 @@ public class Application {
 
     private void createContainerFileSystemTarIfRequested(final File targetImageFileSystemRootDir) throws IOException, CompressorException {
         if (config.isOutputIncludeContainerfilesystem()) {
-            final File outputDirectory = new File(programPaths.getHubDockerOutputPath());
+            final File outputDirectory = new File(programPaths.getHubDockerOutputPathContainer());
             final String containerFileSystemTarFilename = programPaths.getContainerFileSystemTarFilename(config.getDockerImageRepo(), config.getDockerImageTag());
             final File containerFileSystemTarFile = new File(outputDirectory, containerFileSystemTarFilename);
             logger.debug(String.format("Creating container filesystem tarfile %s from %s into %s", containerFileSystemTarFile.getAbsolutePath(), targetImageFileSystemRootDir.getAbsolutePath(), outputDirectory.getAbsolutePath()));

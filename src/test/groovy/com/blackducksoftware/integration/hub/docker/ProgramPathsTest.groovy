@@ -66,13 +66,13 @@ class ProgramPathsTest {
             paths.codeLocationPrefix = prefixCodeLocationName
         }
 
-        paths.setHubDockerPgmDirPath(installDir.getAbsolutePath() + "/")
+        paths.setHubDockerPgmDirPathHost(installDir.getAbsolutePath() + "/")
         paths.init()
 
-        assertEquals("${installDirPath}/config/".toString(), paths.getHubDockerConfigDirPath())
-        assertEquals("${installDirPath}/config/application.properties".toString(), paths.getHubDockerConfigFilePath())
-        assertEquals("${installDirPath}/target/".toString(), paths.getHubDockerTargetDirPath())
-        assertEquals("${installDirPath}/".toString(), paths.getHubDockerPgmDirPath())
+        assertEquals("${installDirPath}/config/".toString(), paths.getHubDockerConfigDirPathHost())
+        assertEquals("${installDirPath}/config/application.properties".toString(), paths.getHubDockerConfigFilePathHost())
+        assertEquals("${installDirPath}/target/".toString(), paths.getHubDockerTargetDirPathHost())
+        assertEquals("${installDirPath}/".toString(), paths.getHubDockerPgmDirPathHost())
         assertEquals("${installDirPath}/${jarFileName}".toString(), paths.getHubDockerJarPathActual())
 
         if (prefixCodeLocationName) {

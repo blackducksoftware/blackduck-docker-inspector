@@ -62,32 +62,27 @@ public class ProgramPaths {
 
     private static final String CONTAINER_PROGRAM_DIR = "/opt/blackduck/hub-docker-inspector/";
 
-    private String hubDockerPgmDirPath;
+    private String hubDockerPgmDirPathHost;
     private String hubDockerPgmDirPathContainer;
     public static final String APPLICATION_PROPERTIES_FILENAME = "application.properties";
 
     private final Logger logger = LoggerFactory.getLogger(ProgramPaths.class);
 
-    private String hubDockerConfigDirPath;
-    private String hubDockerTempDirPath;
+    private String hubDockerConfigDirPathHost;
     private String hubDockerConfigDirPathContainer;
-    private String hubDockerConfigFilePath;
-    private String hubDockerTargetDirPath;
+    private String hubDockerTempDirPathContainer;
+    private String hubDockerConfigFilePathHost;
+    private String hubDockerConfigFilePathContainer;
+    private String hubDockerTargetDirPathHost;
     private String hubDockerTargetDirPathContainer;
     private String hubDockerJarPathActual;
     private String hubDockerJarPathHost;
-    private String hubDockerWorkingDirPath;
-    private String hubDockerOutputPath;
+    private String hubDockerWorkingDirPathHost;
+    private String hubDockerWorkingDirPathContainer;
+    private String hubDockerOutputPathHost;
     private String hubDockerOutputPathContainer;
-    private String hubDockerResultPath;
-
-    private String getProgramDirPath() {
-        if (config.isOnHost()) {
-            return getProgramDirPathHost();
-        } else {
-            return getProgramDirPathContainer();
-        }
-    }
+    private String hubDockerResultPathHost;
+    private String hubDockerResultPathContainer;
 
     private String getProgramDirPathHost() {
         if (!config.getWorkingDirPath().endsWith("/")) {
@@ -104,10 +99,10 @@ public class ProgramPaths {
     public void init() {
         hubDockerJarPathActual = deriveJarPath();
         logger.debug(String.format("givenJarPath: %s", config.getJarPath()));
-        if (StringUtils.isBlank(hubDockerPgmDirPath)) {
-            hubDockerPgmDirPath = getProgramDirPath();
+        if (StringUtils.isBlank(hubDockerPgmDirPathHost)) {
+            hubDockerPgmDirPathHost = getProgramDirPathHost();
         }
-        logger.debug(String.format("hubDockerPgmDirPath: %s", hubDockerPgmDirPath));
+        logger.debug(String.format("hubDockerPgmDirPathHost: %s", hubDockerPgmDirPathHost));
         if (StringUtils.isBlank(hubDockerJarPathHost)) {
             if (StringUtils.isBlank(config.getJarPath())) {
                 hubDockerJarPathHost = hubDockerJarPathActual;
@@ -116,16 +111,19 @@ public class ProgramPaths {
             }
         }
         hubDockerPgmDirPathContainer = getProgramDirPathContainer();
-        hubDockerConfigDirPath = hubDockerPgmDirPath + CONFIG_DIR + "/";
-        hubDockerTempDirPath = hubDockerPgmDirPath + TEMP_DIR + "/";
+        hubDockerConfigDirPathHost = hubDockerPgmDirPathHost + CONFIG_DIR + "/";
         hubDockerConfigDirPathContainer = hubDockerPgmDirPathContainer + CONFIG_DIR + "/";
-        hubDockerConfigFilePath = hubDockerConfigDirPath + APPLICATION_PROPERTIES_FILENAME;
-        hubDockerTargetDirPath = hubDockerPgmDirPath + TARGET_DIR + "/";
+        hubDockerTempDirPathContainer = hubDockerPgmDirPathContainer + TEMP_DIR + "/";
+        hubDockerConfigFilePathHost = hubDockerConfigDirPathHost + APPLICATION_PROPERTIES_FILENAME;
+        hubDockerConfigFilePathContainer = hubDockerConfigDirPathContainer + APPLICATION_PROPERTIES_FILENAME;
+        hubDockerTargetDirPathHost = adjustWithRunId(hubDockerPgmDirPathHost + TARGET_DIR) + "/";
         hubDockerTargetDirPathContainer = hubDockerPgmDirPathContainer + TARGET_DIR + "/";
-        hubDockerWorkingDirPath = adjustWithRunId(hubDockerPgmDirPath + WORKING_DIR) + "/";
-        hubDockerOutputPath = hubDockerPgmDirPath + OUTPUT_DIR + "/";
+        hubDockerWorkingDirPathHost = adjustWithRunId(hubDockerPgmDirPathHost + WORKING_DIR) + "/";
+        hubDockerWorkingDirPathContainer = hubDockerPgmDirPathContainer + WORKING_DIR + "/";
+        hubDockerOutputPathHost = adjustWithRunId(hubDockerPgmDirPathHost + OUTPUT_DIR) + "/";
         hubDockerOutputPathContainer = getProgramDirPathContainer() + OUTPUT_DIR + "/";
-        hubDockerResultPath = hubDockerOutputPath + RESULT_JSON_FILENAME;
+        hubDockerResultPathHost = hubDockerOutputPathHost + RESULT_JSON_FILENAME;
+        hubDockerResultPathContainer = hubDockerOutputPathContainer + RESULT_JSON_FILENAME;
 
     }
 
@@ -156,32 +154,36 @@ public class ProgramPaths {
         return DockerClientManager.class.getProtectionDomain().getCodeSource().getLocation().getPath();
     }
 
-    public String getHubDockerConfigDirPath() {
-        return hubDockerConfigDirPath;
+    public String getHubDockerConfigDirPathHost() {
+        return hubDockerConfigDirPathHost;
     }
 
-    public String getHubDockerTempDirPath() {
-        return hubDockerTempDirPath;
+    public String getHubDockerTempDirPathContainer() {
+        return hubDockerTempDirPathContainer;
     }
 
     public String getHubDockerConfigDirPathContainer() {
         return hubDockerConfigDirPathContainer;
     }
 
-    public String getHubDockerConfigFilePath() {
-        return hubDockerConfigFilePath;
+    public String getHubDockerConfigFilePathHost() {
+        return hubDockerConfigFilePathHost;
     }
 
-    public String getHubDockerTargetDirPath() {
-        return hubDockerTargetDirPath;
+    public String getHubDockerConfigFilePathContainer() {
+        return hubDockerConfigFilePathContainer;
+    }
+
+    public String getHubDockerTargetDirPathHost() {
+        return hubDockerTargetDirPathHost;
     }
 
     public String getHubDockerTargetDirPathContainer() {
         return hubDockerTargetDirPathContainer;
     }
 
-    public String getHubDockerPgmDirPath() {
-        return hubDockerPgmDirPath;
+    public String getHubDockerPgmDirPathHost() {
+        return hubDockerPgmDirPathHost;
     }
 
     public String getHubDockerPgmDirPathContainer() {
@@ -206,23 +208,60 @@ public class ProgramPaths {
     }
 
     public String getHubDockerWorkingDirPath() {
-        return hubDockerWorkingDirPath;
+        if (config.isOnHost()) {
+            return getHubDockerWorkingDirPathHost();
+        } else {
+            return getHubDockerWorkingDirPathContainer();
+        }
+    }
+
+    public String getHubDockerWorkingDirPathHost() {
+        return hubDockerWorkingDirPathHost;
+    }
+
+    public String getHubDockerWorkingDirPathContainer() {
+        return hubDockerWorkingDirPathContainer;
     }
 
     public String getHubDockerOutputPath() {
-        return hubDockerOutputPath;
+        if (config.isOnHost()) {
+            return getHubDockerOutputPathHost();
+        } else {
+            return getHubDockerOutputPathContainer();
+        }
+    }
+
+    public String getHubDockerOutputPathHost() {
+        return hubDockerOutputPathHost;
     }
 
     public String getHubDockerResultPath() {
-        return hubDockerResultPath;
+        if (config.isOnHost()) {
+            return getHubDockerResultPathHost();
+        } else {
+            return getHubDockerResultPathContainer();
+        }
+    }
+
+    public String getHubDockerResultPathHost() {
+        return hubDockerResultPathHost;
+    }
+
+    public String getHubDockerResultPathContainer() {
+        return hubDockerResultPathContainer;
     }
 
     public String getHubDockerOutputPathContainer() {
         return hubDockerOutputPathContainer;
     }
 
-    public void setHubDockerPgmDirPath(final String hubDockerPgmDirPath) {
-        this.hubDockerPgmDirPath = hubDockerPgmDirPath;
+    public void setHubDockerPgmDirPathHost(final String hubDockerPgmDirPath) {
+        this.hubDockerPgmDirPathHost = hubDockerPgmDirPath;
+    }
+
+    // TODO not sure this is used; seems very unlikely
+    public void setHubDockerPgmDirPathContainer(final String hubDockerPgmDirPath) {
+        this.hubDockerPgmDirPathContainer = hubDockerPgmDirPath;
     }
 
     void setGivenJarPath(final String givenJarPath) {
@@ -268,6 +307,7 @@ public class ProgramPaths {
         if (!StringUtils.isBlank(config.getRunId())) {
             adjustedName = String.format("%s_runId_%s", origName, config.getRunId());
         }
+        logger.info(String.format("Adjusted %s to %s", origName, adjustedName));
         return adjustedName;
     }
 

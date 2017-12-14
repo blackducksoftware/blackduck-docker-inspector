@@ -188,7 +188,7 @@ public class DockerClientManager {
         cmd.add(String.format("--spring.config.location=%s", "/opt/blackduck/hub-docker-inspector/config/application.properties"));
         cmd.add(String.format("--docker.tar=%s", tarFilePathInSubContainer));
         execCommandInContainer(dockerClient, imageId, containerId, cmd);
-        copyFileFromContainer(containerId, programPaths.getHubDockerOutputPathContainer() + ".", programPaths.getHubDockerOutputPath());
+        copyFileFromContainer(containerId, programPaths.getHubDockerOutputPathContainer() + ".", programPaths.getHubDockerOutputPathHost());
     }
 
     public String getDockerEngineVersion() {
@@ -218,7 +218,7 @@ public class DockerClientManager {
         hubDockerProperties.set(OUTPUT_INCLUDE_CONTAINER_FILE_SYSTEM_TARFILE_PROPERTY, (new Boolean(config.isOutputIncludeContainerfilesystem())).toString());
         hubDockerProperties.set(ON_HOST_PROPERTY, "false");
         hubDockerProperties.set(DRY_RUN_PROPERTY, (new Boolean(config.isDryRun()).toString()));
-        final String pathToPropertiesFileForSubContainer = String.format("%s%s", programPaths.getHubDockerTargetDirPath(), ProgramPaths.APPLICATION_PROPERTIES_FILENAME);
+        final String pathToPropertiesFileForSubContainer = String.format("%s%s", programPaths.getHubDockerTargetDirPathHost(), ProgramPaths.APPLICATION_PROPERTIES_FILENAME);
         hubDockerProperties.save(pathToPropertiesFileForSubContainer);
 
         copyFileToContainer(dockerClient, containerId, pathToPropertiesFileForSubContainer, programPaths.getHubDockerConfigDirPathContainer());
