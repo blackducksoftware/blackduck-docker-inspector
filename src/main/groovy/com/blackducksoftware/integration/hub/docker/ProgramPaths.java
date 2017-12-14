@@ -24,6 +24,8 @@
 package com.blackducksoftware.integration.hub.docker;
 
 import java.io.File;
+import java.lang.management.ManagementFactory;
+import java.util.Date;
 
 import javax.annotation.PostConstruct;
 
@@ -83,6 +85,7 @@ public class ProgramPaths {
     private String hubDockerOutputPathContainer;
     private String hubDockerResultPathHost;
     private String hubDockerResultPathContainer;
+    private String cleanedProcessId;
 
     private String getProgramDirPathHost() {
         if (!config.getWorkingDirPath().endsWith("/")) {
@@ -97,6 +100,8 @@ public class ProgramPaths {
 
     @PostConstruct
     public void init() {
+        cleanedProcessId = atSignToUnderscore(getProcessIdOrGenerateUniqueId());
+        logger.info(String.format("Process name: %s", cleanedProcessId));
         hubDockerJarPathActual = deriveJarPath();
         logger.debug(String.format("givenJarPath: %s", config.getJarPath()));
         if (StringUtils.isBlank(hubDockerPgmDirPathHost)) {
@@ -111,20 +116,33 @@ public class ProgramPaths {
             }
         }
         hubDockerPgmDirPathContainer = getProgramDirPathContainer();
-        hubDockerConfigDirPathHost = hubDockerPgmDirPathHost + CONFIG_DIR + "/";
+        hubDockerConfigDirPathHost = adjustWithProcessId(hubDockerPgmDirPathHost + CONFIG_DIR) + "/";
         hubDockerConfigDirPathContainer = hubDockerPgmDirPathContainer + CONFIG_DIR + "/";
         hubDockerTempDirPathContainer = hubDockerPgmDirPathContainer + TEMP_DIR + "/";
         hubDockerConfigFilePathHost = hubDockerConfigDirPathHost + APPLICATION_PROPERTIES_FILENAME;
         hubDockerConfigFilePathContainer = hubDockerConfigDirPathContainer + APPLICATION_PROPERTIES_FILENAME;
-        hubDockerTargetDirPathHost = adjustWithRunId(hubDockerPgmDirPathHost + TARGET_DIR) + "/";
+        hubDockerTargetDirPathHost = adjustWithProcessId(hubDockerPgmDirPathHost + TARGET_DIR) + "/";
         hubDockerTargetDirPathContainer = hubDockerPgmDirPathContainer + TARGET_DIR + "/";
-        hubDockerWorkingDirPathHost = adjustWithRunId(hubDockerPgmDirPathHost + WORKING_DIR) + "/";
+        hubDockerWorkingDirPathHost = adjustWithProcessId(hubDockerPgmDirPathHost + WORKING_DIR) + "/";
         hubDockerWorkingDirPathContainer = hubDockerPgmDirPathContainer + WORKING_DIR + "/";
-        hubDockerOutputPathHost = adjustWithRunId(hubDockerPgmDirPathHost + OUTPUT_DIR) + "/";
+        hubDockerOutputPathHost = adjustWithProcessId(hubDockerPgmDirPathHost + OUTPUT_DIR) + "/";
         hubDockerOutputPathContainer = getProgramDirPathContainer() + OUTPUT_DIR + "/";
         hubDockerResultPathHost = hubDockerOutputPathHost + RESULT_JSON_FILENAME;
         hubDockerResultPathContainer = hubDockerOutputPathContainer + RESULT_JSON_FILENAME;
 
+    }
+
+    private String getProcessIdOrGenerateUniqueId() {
+        String processId = null;
+        try {
+            processId = ManagementFactory.getRuntimeMXBean().getName();
+            return processId;
+        } catch (final Throwable t) {
+            logger.debug("Unable to get process ID from system");
+            final long currentMillisecond = (new Date()).getTime();
+            processId = Long.toString(currentMillisecond);
+        }
+        return processId;
     }
 
     public String unEscape(final String origString) {
@@ -299,15 +317,12 @@ public class ProgramPaths {
         } else {
             extractorContainerName = imageName.substring(slashIndex + 1);
         }
-        return adjustWithRunId(extractorContainerName);
+        return adjustWithProcessId(extractorContainerName);
     }
 
-    private String adjustWithRunId(final String origName) {
-        String adjustedName = origName;
-        if (!StringUtils.isBlank(config.getRunId())) {
-            adjustedName = String.format("%s_runId_%s", origName, config.getRunId());
-        }
-        logger.info(String.format("Adjusted %s to %s", origName, adjustedName));
+    private String adjustWithProcessId(final String origName) {
+        final String adjustedName = String.format("%s_%s", origName, cleanedProcessId);
+        logger.debug(String.format("Adjusted %s to %s", origName, adjustedName));
         return adjustedName;
     }
 
@@ -352,6 +367,10 @@ public class ProgramPaths {
 
     private String slashesToUnderscore(final String imageName) {
         return imageName.replaceAll("/", "_");
+    }
+
+    private String atSignToUnderscore(final String imageName) {
+        return imageName.replaceAll("@", "_");
     }
 
     private String colonsToUnderscores(final String imageName) {

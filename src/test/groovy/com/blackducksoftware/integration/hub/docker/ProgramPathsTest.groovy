@@ -69,9 +69,10 @@ class ProgramPathsTest {
         paths.setHubDockerPgmDirPathHost(installDir.getAbsolutePath() + "/")
         paths.init()
 
-        assertEquals("${installDirPath}/config/".toString(), paths.getHubDockerConfigDirPathHost())
-        assertEquals("${installDirPath}/config/application.properties".toString(), paths.getHubDockerConfigFilePathHost())
-        assertEquals("${installDirPath}/target/".toString(), paths.getHubDockerTargetDirPathHost())
+        assertTrue(paths.getHubDockerConfigDirPathHost().startsWith("${installDirPath}/config_".toString()))
+        assertTrue(paths.getHubDockerConfigFilePathHost().startsWith("${installDirPath}/config_".toString()))
+        assertTrue(paths.getHubDockerConfigFilePathHost().endsWith("/application.properties".toString()))
+        assertTrue(paths.getHubDockerTargetDirPathHost().startsWith("${installDirPath}/target_".toString()))
         assertEquals("${installDirPath}/".toString(), paths.getHubDockerPgmDirPathHost())
         assertEquals("${installDirPath}/${jarFileName}".toString(), paths.getHubDockerJarPathActual())
 

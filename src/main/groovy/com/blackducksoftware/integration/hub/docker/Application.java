@@ -125,7 +125,7 @@ public class Application {
             }
             returnCode = reportResult();
             if (config.isOnHost() && config.isCleanupWorkingDir()) {
-                FileOperations.removeFileOrDirQuietly(programPaths.getHubDockerPgmDirPathHost());
+                cleanupWorkingDirs();
             }
         } catch (final Throwable e) {
             final String msg = String.format("Error inspecting image: %s", e.getMessage());
@@ -134,6 +134,12 @@ public class Application {
             logger.debug(String.format("Stack trace: %s", trace));
             resultFile.write(new Gson(), false, msg);
         }
+    }
+
+    private void cleanupWorkingDirs() throws IOException {
+        FileOperations.removeFileOrDir(programPaths.getHubDockerWorkingDirPathHost());
+        FileOperations.removeFileOrDir(programPaths.getHubDockerTargetDirPathHost());
+        FileOperations.removeFileOrDir(programPaths.getHubDockerOutputPathHost());
     }
 
     private boolean helpInvoked() {

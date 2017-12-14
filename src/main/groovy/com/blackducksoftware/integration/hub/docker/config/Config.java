@@ -167,10 +167,6 @@ public class Config {
     @Value("${phone.home:true}")
     private Boolean phoneHome = Boolean.TRUE;
 
-    @ValueDescription(description = "A unique string identifying this run (to enable multiple runs in parallel)", defaultValue = "", group = Config.GROUP_PUBLIC)
-    @Value("${run.id:}")
-    private String runId = "";
-
     @Value("${BD_HUB_PASSWORD:}")
     private String hubPasswordEnvVar = "";
 
@@ -375,10 +371,6 @@ public class Config {
         return optionsByFieldName.get("phoneHome").getResolvedValue().equals("true");
     }
 
-    public String getRunId() {
-        return optionsByFieldName.get("runId").getResolvedValue();
-    }
-
     public String getScanCliOptsEnvVar() {
         return scanCliOptsEnvVar;
     }
@@ -451,6 +443,5 @@ public class Config {
         this.phoneHome = null;
         this.scanCliOptsEnvVar = null;
         this.workingDirPath = null;
-        this.runId = null;
     }
 }
