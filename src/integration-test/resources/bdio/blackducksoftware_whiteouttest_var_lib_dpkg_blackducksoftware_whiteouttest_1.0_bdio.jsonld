@@ -2,7 +2,7 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "blackducksoftware_whiteouttest_1.0_var_lib_dpkg_DPKG",
-    "@id": "uuid:98b5c3fa-e339-4dbf-8826-49f08c913cb0",
+    "@id": "uuid:23b82dfc-fbc8-4645-8eb6-6cee5fb3cbdd",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -106,10 +106,6 @@
       },
       {
         "related": "http:debian/adduser/3_113_nmu3ubuntu4/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:debian/libdb5_3/5_3_28_11/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -417,6 +413,10 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:ubuntu/libdb5_3/5_3_28_11ubuntu0_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:ubuntu/coreutils/8_25_2ubuntu3_16_04/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -525,15 +525,15 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:debian/dpkg/1_18_4ubuntu1_3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:debian/libacl1/2_2_52_3/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
         "related": "http:debian/libseccomp2/2_2_3_3ubuntu3/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:debian/dpkg/1_18_4ubuntu1_2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -665,6 +665,10 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:debian/libdb5_3/5_3_28_11ubuntu0_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:debian/initscripts/2_88dsf_59_3ubuntu2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -793,6 +797,10 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:ubuntu/dpkg/1_18_4ubuntu1_3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:debian/libtinfo5/6_0_20160213_1ubuntu1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -802,10 +810,6 @@
       },
       {
         "related": "http:debian/libsystemd0/229_4ubuntu21/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:ubuntu/dpkg/1_18_4ubuntu1_2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -894,10 +898,6 @@
       },
       {
         "related": "http:debian/libidn11/1_32_3ubuntu1_2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:ubuntu/libdb5_3/5_3_28_11/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1474,26 +1474,6 @@
         "name": "adduser",
         "version": "3.113+nmu3ubuntu4",
         "architecture": "all"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libdb5.3",
-    "revision": "5.3.28-11",
-    "@id": "http:debian/libdb5_3/5_3_28_11/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libdb5.3/5.3.28-11/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "debian",
-          "separator": "/"
-        },
-        "name": "libdb5.3",
-        "version": "5.3.28-11",
-        "architecture": "amd64"
       }
     },
     "relationship": []
@@ -3019,6 +2999,26 @@
     "relationship": []
   },
   {
+    "name": "libdb5.3",
+    "revision": "5.3.28-11ubuntu0.1",
+    "@id": "http:ubuntu/libdb5_3/5_3_28_11ubuntu0_1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libdb5.3/5.3.28-11ubuntu0.1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/"
+        },
+        "name": "libdb5.3",
+        "version": "5.3.28-11ubuntu0.1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "coreutils",
     "revision": "8.25-2ubuntu3~16.04",
     "@id": "http:ubuntu/coreutils/8_25_2ubuntu3_16_04/amd64",
@@ -3559,6 +3559,26 @@
     "relationship": []
   },
   {
+    "name": "dpkg",
+    "revision": "1.18.4ubuntu1.3",
+    "@id": "http:debian/dpkg/1_18_4ubuntu1_3/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "dpkg/1.18.4ubuntu1.3/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "debian",
+          "separator": "/"
+        },
+        "name": "dpkg",
+        "version": "1.18.4ubuntu1.3",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "libacl1",
     "revision": "2.2.52-3",
     "@id": "http:debian/libacl1/2_2_52_3/amd64",
@@ -3593,26 +3613,6 @@
         },
         "name": "libseccomp2",
         "version": "2.2.3-3ubuntu3",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "dpkg",
-    "revision": "1.18.4ubuntu1.2",
-    "@id": "http:debian/dpkg/1_18_4ubuntu1_2/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "dpkg/1.18.4ubuntu1.2/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "debian",
-          "separator": "/"
-        },
-        "name": "dpkg",
-        "version": "1.18.4ubuntu1.2",
         "architecture": "amd64"
       }
     },
@@ -4259,6 +4259,26 @@
     "relationship": []
   },
   {
+    "name": "libdb5.3",
+    "revision": "5.3.28-11ubuntu0.1",
+    "@id": "http:debian/libdb5_3/5_3_28_11ubuntu0_1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libdb5.3/5.3.28-11ubuntu0.1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "debian",
+          "separator": "/"
+        },
+        "name": "libdb5.3",
+        "version": "5.3.28-11ubuntu0.1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "initscripts",
     "revision": "2.88dsf-59.3ubuntu2",
     "@id": "http:debian/initscripts/2_88dsf_59_3ubuntu2/amd64",
@@ -4899,6 +4919,26 @@
     "relationship": []
   },
   {
+    "name": "dpkg",
+    "revision": "1.18.4ubuntu1.3",
+    "@id": "http:ubuntu/dpkg/1_18_4ubuntu1_3/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "dpkg/1.18.4ubuntu1.3/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/"
+        },
+        "name": "dpkg",
+        "version": "1.18.4ubuntu1.3",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "libtinfo5",
     "revision": "6.0+20160213-1ubuntu1",
     "@id": "http:debian/libtinfo5/6_0_20160213_1ubuntu1/amd64",
@@ -4953,26 +4993,6 @@
         },
         "name": "libsystemd0",
         "version": "229-4ubuntu21",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "dpkg",
-    "revision": "1.18.4ubuntu1.2",
-    "@id": "http:ubuntu/dpkg/1_18_4ubuntu1_2/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "dpkg/1.18.4ubuntu1.2/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "ubuntu",
-          "separator": "/"
-        },
-        "name": "dpkg",
-        "version": "1.18.4ubuntu1.2",
         "architecture": "amd64"
       }
     },
@@ -5413,26 +5433,6 @@
         },
         "name": "libidn11",
         "version": "1.32-3ubuntu1.2",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libdb5.3",
-    "revision": "5.3.28-11",
-    "@id": "http:ubuntu/libdb5_3/5_3_28_11/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libdb5.3/5.3.28-11/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "ubuntu",
-          "separator": "/"
-        },
-        "name": "libdb5.3",
-        "version": "5.3.28-11",
         "architecture": "amd64"
       }
     },
