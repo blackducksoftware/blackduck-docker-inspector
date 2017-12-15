@@ -24,6 +24,8 @@
 package com.blackducksoftware.integration.hub.docker;
 
 import java.io.File;
+import java.lang.management.ManagementFactory;
+import java.util.Date;
 
 import javax.annotation.PostConstruct;
 
@@ -50,44 +52,40 @@ public class ProgramPaths {
 
     private static final String RESULT_JSON_FILENAME = "result.json";
 
-    private static final String OUTPUT_DIR = "output/";
+    private static final String OUTPUT_DIR = "output";
 
-    private static final String WORKING_DIR = "working/";
+    private static final String WORKING_DIR = "working";
 
-    private static final String TARGET_DIR = "target/";
+    private static final String TARGET_DIR = "target";
 
-    private static final String TEMP_DIR = "temp/";
+    private static final String TEMP_DIR = "temp";
 
-    private static final String CONFIG_DIR = "config/";
+    private static final String CONFIG_DIR = "config";
 
     private static final String CONTAINER_PROGRAM_DIR = "/opt/blackduck/hub-docker-inspector/";
 
-    private String hubDockerPgmDirPath;
+    private String hubDockerPgmDirPathHost;
     private String hubDockerPgmDirPathContainer;
     public static final String APPLICATION_PROPERTIES_FILENAME = "application.properties";
 
     private final Logger logger = LoggerFactory.getLogger(ProgramPaths.class);
 
-    private String hubDockerConfigDirPath;
-    private String hubDockerTempDirPath;
+    private String hubDockerConfigDirPathHost;
     private String hubDockerConfigDirPathContainer;
-    private String hubDockerConfigFilePath;
-    private String hubDockerTargetDirPath;
+    private String hubDockerTempDirPathContainer;
+    private String hubDockerConfigFilePathHost;
+    private String hubDockerConfigFilePathContainer;
+    private String hubDockerTargetDirPathHost;
     private String hubDockerTargetDirPathContainer;
     private String hubDockerJarPathActual;
     private String hubDockerJarPathHost;
-    private String hubDockerWorkingDirPath;
-    private String hubDockerOutputPath;
+    private String hubDockerWorkingDirPathHost;
+    private String hubDockerWorkingDirPathContainer;
+    private String hubDockerOutputPathHost;
     private String hubDockerOutputPathContainer;
-    private String hubDockerResultPath;
-
-    private String getProgramDirPath() {
-        if (config.isOnHost()) {
-            return getProgramDirPathHost();
-        } else {
-            return getProgramDirPathContainer();
-        }
-    }
+    private String hubDockerResultPathHost;
+    private String hubDockerResultPathContainer;
+    private String cleanedProcessId;
 
     private String getProgramDirPathHost() {
         if (!config.getWorkingDirPath().endsWith("/")) {
@@ -102,31 +100,42 @@ public class ProgramPaths {
 
     @PostConstruct
     public void init() {
+        cleanedProcessId = atSignToUnderscore(getProcessIdOrGenerateUniqueId());
+        logger.info(String.format("Process name: %s", cleanedProcessId));
         hubDockerJarPathActual = deriveJarPath();
-        logger.debug(String.format("givenJarPath: %s", config.getJarPath()));
-        if (StringUtils.isBlank(hubDockerPgmDirPath)) {
-            hubDockerPgmDirPath = getProgramDirPath();
+        if (StringUtils.isBlank(hubDockerPgmDirPathHost)) {
+            hubDockerPgmDirPathHost = getProgramDirPathHost();
         }
-        logger.debug(String.format("hubDockerPgmDirPath: %s", hubDockerPgmDirPath));
-        if (StringUtils.isBlank(hubDockerJarPathHost)) {
-            if (StringUtils.isBlank(config.getJarPath())) {
-                hubDockerJarPathHost = hubDockerJarPathActual;
-            } else {
-                hubDockerJarPathHost = unEscape(config.getJarPath());
-            }
-        }
+        logger.debug(String.format("hubDockerPgmDirPathHost: %s", hubDockerPgmDirPathHost));
+        hubDockerJarPathHost = hubDockerJarPathActual;
         hubDockerPgmDirPathContainer = getProgramDirPathContainer();
-        hubDockerConfigDirPath = hubDockerPgmDirPath + CONFIG_DIR;
-        hubDockerTempDirPath = hubDockerPgmDirPath + TEMP_DIR;
-        hubDockerConfigDirPathContainer = hubDockerPgmDirPathContainer + CONFIG_DIR;
-        hubDockerConfigFilePath = hubDockerConfigDirPath + APPLICATION_PROPERTIES_FILENAME;
-        hubDockerTargetDirPath = hubDockerPgmDirPath + TARGET_DIR;
-        hubDockerTargetDirPathContainer = hubDockerPgmDirPathContainer + TARGET_DIR;
-        hubDockerWorkingDirPath = hubDockerPgmDirPath + WORKING_DIR;
-        hubDockerOutputPath = hubDockerPgmDirPath + OUTPUT_DIR;
-        hubDockerOutputPathContainer = getProgramDirPathContainer() + OUTPUT_DIR;
-        hubDockerResultPath = hubDockerOutputPath + RESULT_JSON_FILENAME;
+        hubDockerConfigDirPathHost = adjustWithProcessId(hubDockerPgmDirPathHost + CONFIG_DIR) + "/";
+        hubDockerConfigDirPathContainer = hubDockerPgmDirPathContainer + CONFIG_DIR + "/";
+        hubDockerTempDirPathContainer = hubDockerPgmDirPathContainer + TEMP_DIR + "/";
+        hubDockerConfigFilePathHost = hubDockerConfigDirPathHost + APPLICATION_PROPERTIES_FILENAME;
+        hubDockerConfigFilePathContainer = hubDockerConfigDirPathContainer + APPLICATION_PROPERTIES_FILENAME;
+        hubDockerTargetDirPathHost = adjustWithProcessId(hubDockerPgmDirPathHost + TARGET_DIR) + "/";
+        hubDockerTargetDirPathContainer = hubDockerPgmDirPathContainer + TARGET_DIR + "/";
+        hubDockerWorkingDirPathHost = adjustWithProcessId(hubDockerPgmDirPathHost + WORKING_DIR) + "/";
+        hubDockerWorkingDirPathContainer = hubDockerPgmDirPathContainer + WORKING_DIR + "/";
+        hubDockerOutputPathHost = adjustWithProcessId(hubDockerPgmDirPathHost + OUTPUT_DIR) + "/";
+        hubDockerOutputPathContainer = getProgramDirPathContainer() + OUTPUT_DIR + "/";
+        hubDockerResultPathHost = hubDockerOutputPathHost + RESULT_JSON_FILENAME;
+        hubDockerResultPathContainer = hubDockerOutputPathContainer + RESULT_JSON_FILENAME;
 
+    }
+
+    private String getProcessIdOrGenerateUniqueId() {
+        String processId = null;
+        try {
+            processId = ManagementFactory.getRuntimeMXBean().getName();
+            return processId;
+        } catch (final Throwable t) {
+            logger.debug("Unable to get process ID from system");
+            final long currentMillisecond = (new Date()).getTime();
+            processId = Long.toString(currentMillisecond);
+        }
+        return processId;
     }
 
     public String unEscape(final String origString) {
@@ -156,32 +165,36 @@ public class ProgramPaths {
         return DockerClientManager.class.getProtectionDomain().getCodeSource().getLocation().getPath();
     }
 
-    public String getHubDockerConfigDirPath() {
-        return hubDockerConfigDirPath;
+    public String getHubDockerConfigDirPathHost() {
+        return hubDockerConfigDirPathHost;
     }
 
-    public String getHubDockerTempDirPath() {
-        return hubDockerTempDirPath;
+    public String getHubDockerTempDirPathContainer() {
+        return hubDockerTempDirPathContainer;
     }
 
     public String getHubDockerConfigDirPathContainer() {
         return hubDockerConfigDirPathContainer;
     }
 
-    public String getHubDockerConfigFilePath() {
-        return hubDockerConfigFilePath;
+    public String getHubDockerConfigFilePathHost() {
+        return hubDockerConfigFilePathHost;
     }
 
-    public String getHubDockerTargetDirPath() {
-        return hubDockerTargetDirPath;
+    public String getHubDockerConfigFilePathContainer() {
+        return hubDockerConfigFilePathContainer;
+    }
+
+    public String getHubDockerTargetDirPathHost() {
+        return hubDockerTargetDirPathHost;
     }
 
     public String getHubDockerTargetDirPathContainer() {
         return hubDockerTargetDirPathContainer;
     }
 
-    public String getHubDockerPgmDirPath() {
-        return hubDockerPgmDirPath;
+    public String getHubDockerPgmDirPathHost() {
+        return hubDockerPgmDirPathHost;
     }
 
     public String getHubDockerPgmDirPathContainer() {
@@ -206,27 +219,55 @@ public class ProgramPaths {
     }
 
     public String getHubDockerWorkingDirPath() {
-        return hubDockerWorkingDirPath;
+        if (config.isOnHost()) {
+            return getHubDockerWorkingDirPathHost();
+        } else {
+            return getHubDockerWorkingDirPathContainer();
+        }
+    }
+
+    public String getHubDockerWorkingDirPathHost() {
+        return hubDockerWorkingDirPathHost;
+    }
+
+    public String getHubDockerWorkingDirPathContainer() {
+        return hubDockerWorkingDirPathContainer;
     }
 
     public String getHubDockerOutputPath() {
-        return hubDockerOutputPath;
+        if (config.isOnHost()) {
+            return getHubDockerOutputPathHost();
+        } else {
+            return getHubDockerOutputPathContainer();
+        }
+    }
+
+    public String getHubDockerOutputPathHost() {
+        return hubDockerOutputPathHost;
     }
 
     public String getHubDockerResultPath() {
-        return hubDockerResultPath;
+        if (config.isOnHost()) {
+            return getHubDockerResultPathHost();
+        } else {
+            return getHubDockerResultPathContainer();
+        }
+    }
+
+    public String getHubDockerResultPathHost() {
+        return hubDockerResultPathHost;
+    }
+
+    public String getHubDockerResultPathContainer() {
+        return hubDockerResultPathContainer;
     }
 
     public String getHubDockerOutputPathContainer() {
         return hubDockerOutputPathContainer;
     }
 
-    public void setHubDockerPgmDirPath(final String hubDockerPgmDirPath) {
-        this.hubDockerPgmDirPath = hubDockerPgmDirPath;
-    }
-
-    void setGivenJarPath(final String givenJarPath) {
-        config.setJarPath(givenJarPath);
+    public void setHubDockerPgmDirPathHost(final String hubDockerPgmDirPath) {
+        this.hubDockerPgmDirPathHost = hubDockerPgmDirPath;
     }
 
     public String getImageTarFilename(final String imageName, final String tagName) {
@@ -250,6 +291,23 @@ public class ProgramPaths {
 
     public String getBdioFilename(final String imageName, final String pkgMgrFilePath, final String hubProjectName, final String hubVersionName) {
         return createBdioFilename(cleanImageName(imageName), cleanPath(pkgMgrFilePath), cleanHubProjectName(hubProjectName), hubVersionName);
+    }
+
+    public String deriveContainerName(final String imageName) {
+        String extractorContainerName;
+        final int slashIndex = imageName.lastIndexOf('/');
+        if (slashIndex < 0) {
+            extractorContainerName = String.format("%s-extractor", imageName);
+        } else {
+            extractorContainerName = imageName.substring(slashIndex + 1);
+        }
+        return adjustWithProcessId(extractorContainerName);
+    }
+
+    private String adjustWithProcessId(final String origName) {
+        final String adjustedName = String.format("%s_%s", origName, cleanedProcessId);
+        logger.debug(String.format("Adjusted %s to %s", origName, adjustedName));
+        return adjustedName;
     }
 
     private String createBdioFilename(final String cleanImageName, final String cleanPkgMgrFilePath, final String cleanHubProjectName, final String hubVersionName) {
@@ -293,6 +351,10 @@ public class ProgramPaths {
 
     private String slashesToUnderscore(final String imageName) {
         return imageName.replaceAll("/", "_");
+    }
+
+    private String atSignToUnderscore(final String imageName) {
+        return imageName.replaceAll("@", "_");
     }
 
     private String colonsToUnderscores(final String imageName) {

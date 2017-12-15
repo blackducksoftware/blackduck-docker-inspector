@@ -46,7 +46,8 @@ class ProgramPathsTest {
             setDockerImageTag: {
             },
             getHubUrl: { "testHubUrl" },
-            getPublicConfigOptions: { configOptions }
+            getPublicConfigOptions: { configOptions },
+            getRunId: { "" }
         ] as Config;
 
         File installDir = TestUtils.createTempDirectory()
@@ -59,19 +60,19 @@ class ProgramPathsTest {
         ] as ProgramPaths
 
         paths.config = config;
-        paths.setGivenJarPath("/tmp/t.tar");
 
         if (prefixCodeLocationName) {
             paths.codeLocationPrefix = prefixCodeLocationName
         }
 
-        paths.setHubDockerPgmDirPath(installDir.getAbsolutePath() + "/")
+        paths.setHubDockerPgmDirPathHost(installDir.getAbsolutePath() + "/")
         paths.init()
 
-        assertEquals("${installDirPath}/config/".toString(), paths.getHubDockerConfigDirPath())
-        assertEquals("${installDirPath}/config/application.properties".toString(), paths.getHubDockerConfigFilePath())
-        assertEquals("${installDirPath}/target/".toString(), paths.getHubDockerTargetDirPath())
-        assertEquals("${installDirPath}/".toString(), paths.getHubDockerPgmDirPath())
+        assertTrue(paths.getHubDockerConfigDirPathHost().startsWith("${installDirPath}/config_".toString()))
+        assertTrue(paths.getHubDockerConfigFilePathHost().startsWith("${installDirPath}/config_".toString()))
+        assertTrue(paths.getHubDockerConfigFilePathHost().endsWith("/application.properties".toString()))
+        assertTrue(paths.getHubDockerTargetDirPathHost().startsWith("${installDirPath}/target_".toString()))
+        assertEquals("${installDirPath}/".toString(), paths.getHubDockerPgmDirPathHost())
         assertEquals("${installDirPath}/${jarFileName}".toString(), paths.getHubDockerJarPathActual())
 
         if (prefixCodeLocationName) {

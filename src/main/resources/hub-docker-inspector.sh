@@ -32,7 +32,7 @@ currentVersionCommitId=""
 version="@VERSION@"
 encodingSetting="-Dfile.encoding=UTF-8"
 userSpecifiedJarPath=""
-jarPathAlreadySpecifiedOnCmdLine=false
+jarPathSpecifiedOnCmdLine=false
 latestReleaseVersion=
 hubUsernameArgument=""
 hubProjectNameArgument=""
@@ -181,9 +181,7 @@ function preProcessOptions() {
 		then
 			userSpecifiedJarPath=$(echo "${cmdlinearg}" | cut -d '=' -f 2)
 			userSpecifiedJarPath=$(expandPath "${userSpecifiedJarPath}")
-			userSpecifiedJarPathEscaped=$(escapeSpaces "${userSpecifiedJarPath}")
-			options[${cmdlineargindex}]="--jar.path=${userSpecifiedJarPathEscaped}"
-			jarPathAlreadySpecifiedOnCmdLine=true
+			jarPathSpecifiedOnCmdLine=true
 		elif [[ "$cmdlinearg" == --hub.username=* ]]
                 then
                         hubUsername=$(echo "$cmdlinearg" | cut -d '=' -f 2)
@@ -277,21 +275,18 @@ preProcessOptions "$@"
 log "Jar dir: ${DOCKER_INSPECTOR_JAR_DIR}"
 mkdir -p "${DOCKER_INSPECTOR_JAR_DIR}"
 
-newJarPathAssignment=""
-if [[ ${jarPathAlreadySpecifiedOnCmdLine} == true ]]
+if [[ ${jarPathSpecifiedOnCmdLine} == true ]]
 then
 	jarPath="${userSpecifiedJarPath}"
 else
 	prepareLatestJar
 	jarPath="${downloadedJarPath}"
-	newJarPathAssignment="--jar.path=${jarPath}"
 fi
 
 log "jarPath: ${jarPath}"
-log "newJarPathAssignment: ${newJarPathAssignment}"
 log "Options: ${options[*]}"
 log "Jar dir: ${DOCKER_INSPECTOR_JAR_DIR}"
-java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" "${newJarPathAssignment}" ${options[*]} ${hubUsernameArgument} ${hubProjectNameArgument} ${hubProjectVersionArgument}
+java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" ${options[*]} ${hubUsernameArgument} ${hubProjectNameArgument} ${hubProjectVersionArgument}
 status=$?
 log "Return code: ${status}"
 exit ${status}

@@ -51,7 +51,9 @@ import com.github.dockerjava.api.command.ExecCreateCmdResponse;
 import com.github.dockerjava.api.command.InspectImageCmd;
 import com.github.dockerjava.api.command.InspectImageResponse;
 import com.github.dockerjava.api.command.PullImageCmd;
+import com.github.dockerjava.api.command.RemoveContainerCmd;
 import com.github.dockerjava.api.command.SaveImageCmd;
+import com.github.dockerjava.api.command.StopContainerCmd;
 import com.github.dockerjava.api.exception.NotFoundException;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.Image;
@@ -162,7 +164,7 @@ public class DockerClientManager {
         final String hubPasswordString = hubPassword.get();
         final String imageId = String.format("%s:%s", runOnImageName, runOnTagName);
         logger.info(String.format("Running container based on image %s", imageId));
-        final String extractorContainerName = deriveContainerName(runOnImageName);
+        final String extractorContainerName = programPaths.deriveContainerName(runOnImageName);
         logger.debug(String.format("Container name: %s", extractorContainerName));
         final DockerClient dockerClient = hubDockerClient.getDockerClient();
         final String tarFileDirInSubContainer = programPaths.getHubDockerTargetDirPathContainer();
@@ -188,7 +190,29 @@ public class DockerClientManager {
         cmd.add(String.format("--spring.config.location=%s", "/opt/blackduck/hub-docker-inspector/config/application.properties"));
         cmd.add(String.format("--docker.tar=%s", tarFilePathInSubContainer));
         execCommandInContainer(dockerClient, imageId, containerId, cmd);
-        copyFileFromContainer(containerId, programPaths.getHubDockerOutputPathContainer() + ".", programPaths.getHubDockerOutputPath());
+        copyFileFromContainer(containerId, programPaths.getHubDockerOutputPathContainer() + ".", programPaths.getHubDockerOutputPathHost());
+        stopRemoveContainer(dockerClient, containerId);
+    }
+
+    private void stopRemoveContainer(final DockerClient dockerClient, final String containerId) {
+        stopContainer(dockerClient, containerId);
+        removeContainer(dockerClient, containerId);
+    }
+
+    private void removeContainer(final DockerClient dockerClient, final String containerId) {
+        final RemoveContainerCmd rmCmd = dockerClient.removeContainerCmd(containerId);
+        logger.info(String.format("Removing container %s", containerId));
+        rmCmd.exec();
+        logger.info(String.format("Container %s removed", containerId));
+    }
+
+    private void stopContainer(final DockerClient dockerClient, final String containerId) {
+        final Long timeoutMilliseconds = config.getCommandTimeout();
+        final int timeoutSeconds = (int) (timeoutMilliseconds / 1000L);
+        logger.info(String.format("Stopping container %s", containerId));
+        final StopContainerCmd stopCmd = dockerClient.stopContainerCmd(containerId).withTimeout(timeoutSeconds);
+        stopCmd.exec();
+        logger.info(String.format("Container %s stopped", containerId));
     }
 
     public String getDockerEngineVersion() {
@@ -218,7 +242,7 @@ public class DockerClientManager {
         hubDockerProperties.set(OUTPUT_INCLUDE_CONTAINER_FILE_SYSTEM_TARFILE_PROPERTY, (new Boolean(config.isOutputIncludeContainerfilesystem())).toString());
         hubDockerProperties.set(ON_HOST_PROPERTY, "false");
         hubDockerProperties.set(DRY_RUN_PROPERTY, (new Boolean(config.isDryRun()).toString()));
-        final String pathToPropertiesFileForSubContainer = String.format("%s%s", programPaths.getHubDockerTargetDirPath(), ProgramPaths.APPLICATION_PROPERTIES_FILENAME);
+        final String pathToPropertiesFileForSubContainer = String.format("%s%s", programPaths.getHubDockerTargetDirPathHost(), ProgramPaths.APPLICATION_PROPERTIES_FILENAME);
         hubDockerProperties.save(pathToPropertiesFileForSubContainer);
 
         copyFileToContainer(dockerClient, containerId, pathToPropertiesFileForSubContainer, programPaths.getHubDockerConfigDirPathContainer());
@@ -284,17 +308,6 @@ public class DockerClientManager {
         final File toDir = new File(toPath);
         toDir.mkdirs();
         executor.executeCommand(String.format("docker cp %s:%s %s", containerId, fromPath, toPath));
-    }
-
-    private String deriveContainerName(final String imageName) {
-        String extractorContainerName;
-        final int slashIndex = imageName.lastIndexOf('/');
-        if (slashIndex < 0) {
-            extractorContainerName = String.format("%s-extractor", imageName);
-        } else {
-            extractorContainerName = imageName.substring(slashIndex + 1);
-        }
-        return extractorContainerName;
     }
 
     private void execCommandInContainer(final DockerClient dockerClient, final String imageId, final String containerId, final List<String> cmd) throws InterruptedException {
