@@ -126,6 +126,7 @@ public class Config {
     private String hubCodelocationPrefix = "";
 
     // Path to the hub-docker-inspector .jar file
+    // Only used by hub-docker-inspector.sh
     @ValueDescription(description = "Hub Docker Inspector .jar file path", defaultValue = "", group = Config.GROUP_PUBLIC)
     @Value("${jar.path:}")
     private String jarPath = "";
@@ -331,10 +332,6 @@ public class Config {
         return optionsByFieldName.get("hubCodelocationPrefix").getResolvedValue();
     }
 
-    public String getJarPath() {
-        return optionsByFieldName.get("jarPath").getResolvedValue();
-    }
-
     public String getDockerImage() {
         return optionsByFieldName.get("dockerImage").getResolvedValue();
     }
@@ -393,10 +390,6 @@ public class Config {
 
     public void setWorkingDirPath(final String newValue) {
         optionsByFieldName.get("workingDirPath").setResolvedValue(newValue);
-    }
-
-    public void setJarPath(final String newValue) {
-        optionsByFieldName.get("jarPath").setResolvedValue(newValue);
     }
 
     public void setHubCodelocationPrefix(final String newValue) {

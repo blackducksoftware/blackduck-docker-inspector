@@ -60,7 +60,6 @@ class ProgramPathsTest {
         ] as ProgramPaths
 
         paths.config = config;
-        paths.setGivenJarPath("/tmp/t.tar");
 
         if (prefixCodeLocationName) {
             paths.codeLocationPrefix = prefixCodeLocationName

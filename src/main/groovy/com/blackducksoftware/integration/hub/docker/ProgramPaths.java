@@ -103,18 +103,11 @@ public class ProgramPaths {
         cleanedProcessId = atSignToUnderscore(getProcessIdOrGenerateUniqueId());
         logger.info(String.format("Process name: %s", cleanedProcessId));
         hubDockerJarPathActual = deriveJarPath();
-        logger.debug(String.format("givenJarPath: %s", config.getJarPath()));
         if (StringUtils.isBlank(hubDockerPgmDirPathHost)) {
             hubDockerPgmDirPathHost = getProgramDirPathHost();
         }
         logger.debug(String.format("hubDockerPgmDirPathHost: %s", hubDockerPgmDirPathHost));
-        if (StringUtils.isBlank(hubDockerJarPathHost)) {
-            if (StringUtils.isBlank(config.getJarPath())) {
-                hubDockerJarPathHost = hubDockerJarPathActual;
-            } else {
-                hubDockerJarPathHost = unEscape(config.getJarPath());
-            }
-        }
+        hubDockerJarPathHost = hubDockerJarPathActual;
         hubDockerPgmDirPathContainer = getProgramDirPathContainer();
         hubDockerConfigDirPathHost = adjustWithProcessId(hubDockerPgmDirPathHost + CONFIG_DIR) + "/";
         hubDockerConfigDirPathContainer = hubDockerPgmDirPathContainer + CONFIG_DIR + "/";
@@ -275,15 +268,6 @@ public class ProgramPaths {
 
     public void setHubDockerPgmDirPathHost(final String hubDockerPgmDirPath) {
         this.hubDockerPgmDirPathHost = hubDockerPgmDirPath;
-    }
-
-    // TODO not sure this is used; seems very unlikely
-    public void setHubDockerPgmDirPathContainer(final String hubDockerPgmDirPath) {
-        this.hubDockerPgmDirPathContainer = hubDockerPgmDirPath;
-    }
-
-    void setGivenJarPath(final String givenJarPath) {
-        config.setJarPath(givenJarPath);
     }
 
     public String getImageTarFilename(final String imageName, final String tagName) {
