@@ -7,6 +7,4 @@ script:
   - ./gradlew clean build
   
 after_success:
-  - curl https://raw.githubusercontent.com/blackducksoftware/hub-gradle-plugin/master/src/main/resources/init.gradle -o init.gradle
-  - ./gradlew --init-script init.gradle buildBom -Pblackduck_deployHubBdio=false
-  - bash <(curl -s https://copilot.blackducksoftware.com/bash/travis) ./build/blackduck/*_bdio.jsonld
+  - bash <(curl -s https://copilot.blackducksoftware.com/ci/travis/scripts/upload)
