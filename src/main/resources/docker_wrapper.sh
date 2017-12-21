@@ -1,18 +1,18 @@
 #!/bin/bash -v
 
-#rm -rf /tmp/aaa
-rm -rf /tmp/aaa/*.jsonld
+rm -rf /tmp/aaa
+#rm -rf /tmp/aaa/*.jsonld
 
 ##############################
 # Get runOn image
 ##############################
-#./build/hub-docker-inspector.sh --jar.path=build/libs/hub-docker-inspector-5.0.0-SNAPSHOT.jar \
-#	--determine.run.on.image.only=true \
-#	--cleanup.working.dir=false \
-#	--logging.level.com.blackducksoftware=DEBUG \
-#	--output.path=/tmp/aaa \
-#	--output.include.dockertarfile=true \
-#	alpine:latest
+./build/hub-docker-inspector.sh --jar.path=build/libs/hub-docker-inspector-5.0.0-SNAPSHOT.jar \
+	--determine.run.on.image.only=true \
+	--cleanup.working.dir=false \
+	--logging.level.com.blackducksoftware=INFO \
+	--output.path=/tmp/aaa \
+	--output.include.dockertarfile=true \
+	alpine:latest
 
 imageName=$(fgrep runOnImageName /tmp/aaa/result.json | cut -d'"' -f4)
 imageTag=$(fgrep runOnImageTag /tmp/aaa/result.json | cut -d'"' -f4)
@@ -36,6 +36,8 @@ docker cp mytestcontainer:/opt/blackduck/hub-docker-inspector/output/alpine_lib_
 ./build/hub-docker-inspector.sh --jar.path=build/libs/hub-docker-inspector-5.0.0-SNAPSHOT.jar \
 	--upload.bdio.only=true \
 	--cleanup.working.dir=false \
-	--logging.level.com.blackducksoftware=DEBUG \
+	--logging.level.com.blackducksoftware=TRACE \
 	--output.path=/tmp/aaa \
-	alpine:latest
+	--hub.url=https://int-hub02.dc1.lan \
+	--hub.username=sysadmin \
+	--hub.password=blackduck
