@@ -89,6 +89,10 @@ public class HubClient {
             logger.debug("In dry run mode; skipping verification of Hub connection");
             return;
         }
+        if (config.isDetermineRunOnImageOnly()) {
+            logger.debug("In determine run-on image mode; skipping verification of Hub connection");
+            return;
+        }
         final HubServerConfig hubServerConfig = createBuilder().build();
         final CredentialsRestConnection credentialsRestConnection;
         try {
