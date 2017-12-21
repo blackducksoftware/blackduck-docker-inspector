@@ -103,13 +103,14 @@ public class Application {
 
     @PostConstruct
     public void inspectImage() { // TODO this has gotten too complex
-        String runOnImageName = "";
-        String runOnImageTag = "";
+        String runOnImageName = null;
+        String runOnImageTag = null;
+        File dockerTarFile = null;
+        String bdioFilename = null; // TODO be consistent: init all 4 to null
         try {
             if (!initAndValidate()) {
                 return;
             }
-            File dockerTarFile = null;
             List<File> layerTars = null;
             List<ManifestLayerMapping> layerMappings = null;
             if (!config.isUploadBdioOnly()) {
@@ -128,13 +129,13 @@ public class Application {
                 }
                 if (config.isUploadBdioOnly()) {
                     logger.info("Mode: Upload BDIO only");
-                    uploadBdioFiles(programPaths.getUserOutputDir());
+                    bdioFilename = uploadBdioFiles(programPaths.getUserOutputDir());
                 } else if (config.isDetermineRunOnImageOnly()) {
                     logger.info("Mode: Determine run-on image only");
                 } else {
                     logger.info("Mode: Inspect image");
                     inspectInSubContainer(dockerTarFile, targetOsEnum, runOnImageName, runOnImageTag);
-                    uploadBdioFiles(programPaths.getHubDockerOutputPathHost());
+                    bdioFilename = uploadBdioFiles(programPaths.getHubDockerOutputPathHost());
                 }
             } else {
                 logger.info("Running on: Container");
@@ -144,7 +145,7 @@ public class Application {
             if (config.isOnHost() && !config.isUploadBdioOnly()) {
                 copyOutputToUserOutputDir();
             }
-            returnCode = reportResult(runOnImageName, runOnImageTag);
+            returnCode = reportResult(runOnImageName, runOnImageTag, dockerTarFile == null ? "" : dockerTarFile.getName(), bdioFilename);
             if (config.isOnHost() && !config.isUploadBdioOnly()) {
                 copyResultToUserOutputDir();
             }
@@ -156,7 +157,7 @@ public class Application {
             logger.error(msg);
             final String trace = ExceptionUtils.getStackTrace(e);
             logger.debug(String.format("Stack trace: %s", trace));
-            resultFile.write(new Gson(), false, msg, runOnImageName, runOnImageTag);
+            resultFile.write(new Gson(), false, msg, runOnImageName, runOnImageTag, dockerTarFile == null ? "" : dockerTarFile.getName(), bdioFilename);
         }
     }
 
@@ -239,11 +240,15 @@ public class Application {
         FileOperations.copyFile(new File(programPaths.getHubDockerResultPathHost()), userOutputDir);
     }
 
-    private void uploadBdioFiles(final String pathToDirContainingBdio) throws IntegrationException {
+    private String uploadBdioFiles(final String pathToDirContainingBdio) throws IntegrationException {
+        String bdioFilename = null;
         final List<File> bdioFiles = findBdioFiles(pathToDirContainingBdio);
         if (bdioFiles.size() == 0) {
             logger.warn("No BDIO Files generated");
+        } else if (bdioFiles.size() > 1) {
+            throw new HubIntegrationException(String.format("Found %d BDIO files in %s", bdioFiles.size(), pathToDirContainingBdio));
         } else {
+            bdioFilename = bdioFiles.get(0).getName();
             if (config.isDryRun()) {
                 logger.info("Running in dry run mode; not uploading BDIO to Hub");
             } else {
@@ -251,6 +256,7 @@ public class Application {
                 hubDockerManager.uploadBdioFiles(bdioFiles);
             }
         }
+        return bdioFilename;
     }
 
     private OperatingSystemEnum detectImageOs(final List<File> layerTars, final List<ManifestLayerMapping> layerMappings) throws IOException, HubIntegrationException {
@@ -273,20 +279,20 @@ public class Application {
     }
 
     // TODO this has gotten too complex
-    private int reportResult(final String runOnImageName, final String runOnImageTag) throws HubIntegrationException {
+    private int reportResult(final String runOnImageName, final String runOnImageTag, final String dockerTarfilename, final String bdioFilename) throws HubIntegrationException {
         final Gson gson = new Gson();
         if (config.isOnHost()) {
             if (config.isDetermineRunOnImageOnly()) {
                 if (StringUtils.isBlank(runOnImageName) || StringUtils.isBlank(runOnImageTag)) {
                     final String msg = "Failed to determine run-on image name and/or tag";
                     logger.error(msg);
-                    resultFile.write(gson, false, msg, runOnImageName, runOnImageTag);
+                    resultFile.write(gson, false, msg, runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename);
                     return -1;
                 } else {
-                    return reportSuccess(runOnImageName, runOnImageTag, gson);
+                    return reportSuccess(runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename, gson);
                 }
             } else if (config.isUploadBdioOnly()) {
-                return reportSuccess(runOnImageName, runOnImageTag, gson);
+                return reportSuccess(runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename, gson);
             }
             final Result resultReportedFromContainer = resultFile.read(gson);
             if (!resultReportedFromContainer.isSucceeded()) {
@@ -297,12 +303,13 @@ public class Application {
                 return 0;
             }
         } else {
-            return reportSuccess(runOnImageName, runOnImageTag, gson);
+            return reportSuccess(runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename, gson);
         }
     }
 
-    private int reportSuccess(final String runOnImageName, final String runOnImageTag, final Gson gson) {
-        resultFile.write(gson, true, "Success", runOnImageName, runOnImageTag);
+    // TODO gson should be first
+    private int reportSuccess(final String runOnImageName, final String runOnImageTag, final String dockerTarfilename, final String bdioFilename, final Gson gson) {
+        resultFile.write(gson, true, "Success", runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename);
         return 0;
     }
 
