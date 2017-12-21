@@ -37,8 +37,8 @@ public class ResultFile {
         return result;
     }
 
-    public void write(final Gson gson, final boolean succeeded, final String msg) {
-        final Result result = new Result(succeeded, msg);
+    public void write(final Gson gson, final boolean succeeded, final String msg, final String runOnImageName, final String runOnImageTag) {
+        final Result result = new Result(succeeded, msg, runOnImageName, runOnImageTag);
         try {
             final File outputDirectory = new File(programPaths.getHubDockerOutputPath());
             outputDirectory.mkdirs();

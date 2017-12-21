@@ -168,6 +168,10 @@ public class Config {
     @Value("${phone.home:true}")
     private Boolean phoneHome = Boolean.TRUE;
 
+    @ValueDescription(description = "Determine run-on image only?", defaultValue = "false", group = Config.GROUP_PUBLIC)
+    @Value("${determine.run.on.image.only:false}")
+    private Boolean determineRunOnImageOnly = Boolean.FALSE;
+
     @Value("${BD_HUB_PASSWORD:}")
     private String hubPasswordEnvVar = "";
 
@@ -380,6 +384,10 @@ public class Config {
         return dockerInspectorJavaOptsValue;
     }
 
+    public boolean isDetermineRunOnImageOnly() {
+        return determineRunOnImageOnly;
+    }
+
     public void setDockerImageRepo(final String newValue) {
         optionsByFieldName.get("dockerImageRepo").setResolvedValue(newValue);
     }
@@ -436,5 +444,6 @@ public class Config {
         this.phoneHome = null;
         this.scanCliOptsEnvVar = null;
         this.workingDirPath = null;
+        this.determineRunOnImageOnly = null;
     }
 }

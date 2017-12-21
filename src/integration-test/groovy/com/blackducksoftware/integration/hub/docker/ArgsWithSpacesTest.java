@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -66,6 +67,10 @@ public class ArgsWithSpacesTest {
         pb.redirectOutput(outputFile);
         final Process p = pb.start();
         final int retCode = p.waitFor();
+        if (retCode != 0) {
+            final String log = FileUtils.readFileToString(outputFile, StandardCharsets.UTF_8);
+            System.out.println(log);
+        }
         assertEquals(0, retCode);
 
         int foundUsernameCount = 0;
