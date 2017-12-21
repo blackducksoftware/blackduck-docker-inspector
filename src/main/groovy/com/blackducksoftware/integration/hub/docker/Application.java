@@ -102,35 +102,53 @@ public class Application {
     }
 
     @PostConstruct
-    public void inspectImage() {
+    public void inspectImage() { // TODO this has gotten too complex
         String runOnImageName = "";
         String runOnImageTag = "";
         try {
             if (!initAndValidate()) {
                 return;
             }
-            final File dockerTarFile = deriveDockerTarFile();
-            final List<File> layerTars = hubDockerManager.extractLayerTars(dockerTarFile);
-            final List<ManifestLayerMapping> layerMappings = hubDockerManager.getLayerMappings(dockerTarFile.getName(), config.getDockerImageRepo(), config.getDockerImageTag());
-            fillInMissingImageNameTagFromManifest(layerMappings);
+            File dockerTarFile = null;
+            List<File> layerTars = null;
+            List<ManifestLayerMapping> layerMappings = null;
+            if (!config.isUploadBdioOnly()) {
+                dockerTarFile = deriveDockerTarFile();
+                layerTars = hubDockerManager.extractLayerTars(dockerTarFile);
+                layerMappings = hubDockerManager.getLayerMappings(dockerTarFile.getName(), config.getDockerImageRepo(), config.getDockerImageTag());
+                fillInMissingImageNameTagFromManifest(layerMappings);
+            }
             OperatingSystemEnum targetOsEnum = null;
             if (config.isOnHost()) {
-                targetOsEnum = detectImageOs(layerTars, layerMappings);
-                runOnImageName = dockerImages.getDockerImageName(targetOsEnum);
-                runOnImageTag = dockerImages.getDockerImageVersion(targetOsEnum);
-                if (!config.isDetermineRunOnImageOnly()) {
+                logger.info("Running on: Host");
+                if (!config.isUploadBdioOnly()) {
+                    targetOsEnum = detectImageOs(layerTars, layerMappings);
+                    runOnImageName = dockerImages.getDockerImageName(targetOsEnum);
+                    runOnImageTag = dockerImages.getDockerImageVersion(targetOsEnum);
+                }
+                if (config.isUploadBdioOnly()) {
+                    logger.info("Mode: Upload BDIO only");
+                    uploadBdioFiles(programPaths.getUserOutputDir());
+                } else if (config.isDetermineRunOnImageOnly()) {
+                    logger.info("Mode: Determine run-on image only");
+                } else {
+                    logger.info("Mode: Inspect image");
                     inspectInSubContainer(dockerTarFile, targetOsEnum, runOnImageName, runOnImageTag);
-                    uploadBdioFiles();
+                    uploadBdioFiles(programPaths.getHubDockerOutputPathHost());
                 }
             } else {
+                logger.info("Running on: Container");
                 extractAndInspect(dockerTarFile, layerTars, layerMappings);
             }
             provideDockerTarIfRequested(dockerTarFile);
-            if (config.isOnHost()) {
+            if (config.isOnHost() && !config.isUploadBdioOnly()) {
                 copyOutputToUserOutputDir();
             }
             returnCode = reportResult(runOnImageName, runOnImageTag);
-            if (config.isOnHost() && config.isCleanupWorkingDir()) {
+            if (config.isOnHost() && !config.isUploadBdioOnly()) {
+                copyResultToUserOutputDir();
+            }
+            if (config.isOnHost() && !config.isUploadBdioOnly() && config.isCleanupWorkingDir()) {
                 cleanupWorkingDirs();
             }
         } catch (final Throwable e) {
@@ -143,6 +161,7 @@ public class Application {
     }
 
     private void cleanupWorkingDirs() throws IOException {
+        logger.debug(String.format("Removing %s, %s, %s", programPaths.getHubDockerWorkingDirPathHost(), programPaths.getHubDockerTargetDirPathHost(), programPaths.getHubDockerOutputPathHost()));
         FileOperations.removeFileOrDir(programPaths.getHubDockerWorkingDirPathHost());
         FileOperations.removeFileOrDir(programPaths.getHubDockerTargetDirPathHost());
         FileOperations.removeFileOrDir(programPaths.getHubDockerOutputPathHost());
@@ -186,19 +205,49 @@ public class Application {
             logger.debug("User has not specified an output path");
             return;
         }
-        logger.debug(String.format("Copying output to %s", userOutputDirPath));
-        FileOperations.copyDirContentsToDir(programPaths.getHubDockerOutputPathHost(), userOutputDirPath, true);
+        final File srcDir = new File(programPaths.getHubDockerOutputPathHost());
+        if (!srcDir.exists()) {
+            logger.info(String.format("Dir %s does not exist", srcDir.getAbsolutePath()));
+            return;
+        }
+        logger.debug(String.format("Copying output from %s to %s", programPaths.getHubDockerOutputPathHost(), userOutputDirPath));
+        final File userOutputDir = new File(userOutputDirPath);
+        ensureDirExists(userOutputDir);
+        FileOperations.copyDirContentsToDir(programPaths.getHubDockerOutputPathHost(), userOutputDir.getAbsolutePath(), true);
     }
 
-    private void uploadBdioFiles() throws IntegrationException {
-        final List<File> bdioFiles = findBdioFiles();
+    private void ensureDirExists(final File dir) {
+        logger.debug(String.format("Creating %s (if it does not exist)", dir.getAbsoluteFile()));
+        final boolean mkdirsResult = dir.mkdirs();
+        logger.debug(String.format("\tmkdirs result: %b", mkdirsResult));
+    }
+
+    // TODO eliminate redundancy between these two methods
+    private void copyResultToUserOutputDir() throws IOException {
+        final String userOutputDirPath = programPaths.getUserOutputDir();
+        if (userOutputDirPath == null) {
+            logger.debug("User has not specified an output path");
+            return;
+        }
+        logger.debug(String.format("Copying result file from %s to %s", programPaths.getHubDockerResultPathHost(), userOutputDirPath));
+        final File sourceResultFile = new File(programPaths.getHubDockerResultPathHost());
+        final File userOutputDir = new File(userOutputDirPath);
+        ensureDirExists(userOutputDir);
+        final File targetFile = new File(userOutputDir, sourceResultFile.getName());
+        logger.debug(String.format("Removing %s if it exists", targetFile.getAbsolutePath()));
+        FileOperations.removeFileOrDirQuietly(targetFile.getAbsolutePath());
+        FileOperations.copyFile(new File(programPaths.getHubDockerResultPathHost()), userOutputDir);
+    }
+
+    private void uploadBdioFiles(final String pathToDirContainingBdio) throws IntegrationException {
+        final List<File> bdioFiles = findBdioFiles(pathToDirContainingBdio);
         if (bdioFiles.size() == 0) {
             logger.warn("No BDIO Files generated");
         } else {
             if (config.isDryRun()) {
                 logger.info("Running in dry run mode; not uploading BDIO to Hub");
             } else {
-                logger.info("Uploading BDIO to Hub");
+                logger.info(String.format("Uploading BDIO to Hub: %d files; first file: %s", bdioFiles.size(), bdioFiles.get(0).getAbsolutePath()));
                 hubDockerManager.uploadBdioFiles(bdioFiles);
             }
         }
@@ -223,6 +272,7 @@ public class Application {
         createContainerFileSystemTarIfRequested(targetImageFileSystemRootDir);
     }
 
+    // TODO this has gotten too complex
     private int reportResult(final String runOnImageName, final String runOnImageTag) throws HubIntegrationException {
         final Gson gson = new Gson();
         if (config.isOnHost()) {
@@ -235,6 +285,8 @@ public class Application {
                 } else {
                     return reportSuccess(runOnImageName, runOnImageTag, gson);
                 }
+            } else if (config.isUploadBdioOnly()) {
+                return reportSuccess(runOnImageName, runOnImageTag, gson);
             }
             final Result resultReportedFromContainer = resultFile.read(gson);
             if (!resultReportedFromContainer.isSucceeded()) {
@@ -254,8 +306,8 @@ public class Application {
         return 0;
     }
 
-    private List<File> findBdioFiles() {
-        final List<File> bdioFiles = FileOperations.findFilesWithExt(new File(programPaths.getHubDockerOutputPathHost()), "jsonld");
+    private List<File> findBdioFiles(final String pathToDirContainingBdio) {
+        final List<File> bdioFiles = FileOperations.findFilesWithExt(new File(pathToDirContainingBdio), "jsonld");
         logger.info(String.format("Found %d BDIO files produced by the container", bdioFiles.size()));
         return bdioFiles;
     }
@@ -274,6 +326,7 @@ public class Application {
             if (config.isOnHost()) {
                 final File outputDirectory = new File(programPaths.getHubDockerOutputPathHost());
                 logger.debug(String.format("Copying %s to output dir %s", dockerTarFile.getAbsolutePath(), outputDirectory.getAbsolutePath()));
+                ensureDirExists(outputDirectory); // TODO FileOperations should do this
                 FileOperations.copyFile(dockerTarFile, outputDirectory);
             } else {
                 final File outputDirectory = new File(programPaths.getHubDockerOutputPathContainer());

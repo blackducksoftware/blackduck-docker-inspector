@@ -79,15 +79,19 @@ public class FileOperations {
         try {
             removeFileOrDir(fileOrDirPath);
         } catch (final IOException e) {
-            logger.warn(String.format("Error removing working directory: %s", e.getMessage()));
+            logger.warn(String.format("Error removing file or directory %s: ", fileOrDirPath, e.getMessage()));
         }
     }
 
     public static void removeFileOrDir(final String fileOrDirPath) throws IOException {
-        logger.info(String.format("Removing working directory: %s", fileOrDirPath));
-        final File workingDirectory = new File(fileOrDirPath);
-        if (workingDirectory.exists()) {
-            FileUtils.deleteDirectory(workingDirectory);
+        logger.info(String.format("Removing file or dir: %s", fileOrDirPath));
+        final File fileOrDir = new File(fileOrDirPath);
+        if (fileOrDir.exists()) {
+            if (fileOrDir.isDirectory()) {
+                FileUtils.deleteDirectory(fileOrDir);
+            } else {
+                FileUtils.deleteQuietly(fileOrDir);
+            }
         }
     }
 }

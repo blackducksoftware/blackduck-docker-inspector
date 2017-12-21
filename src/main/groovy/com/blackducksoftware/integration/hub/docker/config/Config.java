@@ -172,6 +172,10 @@ public class Config {
     @Value("${determine.run.on.image.only:false}")
     private Boolean determineRunOnImageOnly = Boolean.FALSE;
 
+    @ValueDescription(description = "Upload BDIO only?", defaultValue = "false", group = Config.GROUP_PUBLIC)
+    @Value("${upload.bdio.only:false}")
+    private Boolean uploadBdioOnly = Boolean.FALSE;
+
     @Value("${BD_HUB_PASSWORD:}")
     private String hubPasswordEnvVar = "";
 
@@ -388,6 +392,10 @@ public class Config {
         return determineRunOnImageOnly;
     }
 
+    public boolean isUploadBdioOnly() {
+        return uploadBdioOnly;
+    }
+
     public void setDockerImageRepo(final String newValue) {
         optionsByFieldName.get("dockerImageRepo").setResolvedValue(newValue);
     }
@@ -445,5 +453,6 @@ public class Config {
         this.scanCliOptsEnvVar = null;
         this.workingDirPath = null;
         this.determineRunOnImageOnly = null;
+        this.uploadBdioOnly = null;
     }
 }

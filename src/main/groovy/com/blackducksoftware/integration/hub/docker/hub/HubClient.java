@@ -93,6 +93,10 @@ public class HubClient {
             logger.debug("In determine run-on image mode; skipping verification of Hub connection");
             return;
         }
+        if (config.isUploadBdioOnly()) {
+            logger.debug("In upload BDIO only mode; skipping verification of Hub connection");
+            return;
+        }
         final HubServerConfig hubServerConfig = createBuilder().build();
         final CredentialsRestConnection credentialsRestConnection;
         try {
