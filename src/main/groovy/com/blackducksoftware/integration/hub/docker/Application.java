@@ -101,8 +101,10 @@ public class Application {
         }
     }
 
+    // TODO this has gotten too complex and needs to be re-organized
+    // host-vs-container and which-function concerns should be separate
     @PostConstruct
-    public void inspectImage() { // TODO this has gotten too complex
+    public void inspectImage() {
         String runOnImageName = null;
         String runOnImageTag = null;
         File dockerTarFile = null;
@@ -139,7 +141,15 @@ public class Application {
                 }
             } else {
                 logger.info("Running on: Container");
-                extractAndInspect(dockerTarFile, layerTars, layerMappings);
+                if (config.isDetermineRunOnImageOnly()) {
+                    logger.info("Mode: Determine run-on image only");
+                    targetOsEnum = detectImageOs(layerTars, layerMappings);
+                    runOnImageName = dockerImages.getDockerImageName(targetOsEnum);
+                    runOnImageTag = dockerImages.getDockerImageVersion(targetOsEnum);
+                } else {
+                    logger.info("Mode: Extract / inspect");
+                    extractAndInspect(dockerTarFile, layerTars, layerMappings);
+                }
             }
             provideDockerTarIfRequested(dockerTarFile);
             if (config.isOnHost() && !config.isUploadBdioOnly()) {
