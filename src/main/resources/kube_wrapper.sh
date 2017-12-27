@@ -1,17 +1,19 @@
 #!/bin/bash -v
 
-minikube start
-eval $(minikube docker-env)
-
 targetImageName=alpine
 targetImageTag=latest
-peekOnImageName=blackducksoftware/hub-docker-inspector-alpine
-peekOnImageTag=4.1.0
+
+
 targetImageDir=/tmp
 targetImageTarfile=savedimage.tar
-outputDir=/tmp/aaa
-inspectContainerName=hub-docker-inspector-inspect
-peekContainerName=hub-docker-inspector-peek
+outputDir=/tmp/hub-docker-inspector-output
+inspectOnContainerName=hub-docker-inspector-inspect
+peekOnContainerName=hub-docker-inspector-peek
+peekOnImageName=blackducksoftware/hub-docker-inspector-alpine
+peekOnImageTag=4.1.0
+
+minikube start
+eval $(minikube docker-env)
 
 rm -rf "${outputDir}"
 mkdir "${outputDir}"
@@ -22,14 +24,15 @@ rm -f "${targetImageDir}/${targetImageTarfile}"
 #################################################################
 docker pull "${targetImageName}:${targetImageTag}"
 docker save -o "${targetImageDir}/${targetImageTarfile}" "${targetImageName}:${targetImageTag}"
+chmod a+r "${targetImageDir}/${targetImageTarfile}"
 
 #################################################################
 # Get peekOn image / start and setup peekOn container (wrapper)
 #################################################################
-kubectl run "${peekContainerName}" --image="${peekOnImageName}:${peekOnImageTag}" --command -- tail -f /dev/null
+kubectl run "${peekOnContainerName}" --image="${peekOnImageName}:${peekOnImageTag}" --command -- tail -f /dev/null
 echo "Pausing to give the peekOn pod time to start..."
 sleep 10
-peekPodName=$(kubectl get pods | grep "${peekContainerName}"  | tr -s " " | cut -d' ' -f1)
+peekPodName=$(kubectl get pods | grep "${peekOnContainerName}"  | tr -s " " | cut -d' ' -f1)
 echo "peekPodName: ${peekPodName}"
 
 podIsRunning=false
@@ -37,7 +40,7 @@ counter=0
 while [[ $counter -lt 30 ]]; do
 	echo the counter is $counter
 	kubectl get pods
-	peekOnPodStatus=$(kubectl get pods | grep "${peekContainerName}"  | tr -s " " | cut -d' ' -f3)
+	peekOnPodStatus=$(kubectl get pods | grep "${peekOnContainerName}"  | tr -s " " | cut -d' ' -f3)
 	echo "peekOnPodStatus: ${peekOnPodStatus}"
 	if [ "${peekOnPodStatus}" == "Running" ]; then
 		echo "The peekOn pod is ready"
@@ -72,8 +75,8 @@ kubectl cp "${peekPodName}:/opt/blackduck/hub-docker-inspector/output/result.jso
 
 ls "${outputDir}"
 
-inspectOnImageName=$(fgrep runOnImageName "${outputDir}/result.json" | cut -d'"' -f4)
-inspectOnImageTag=$(fgrep runOnImageTag "${outputDir}/result.json" | cut -d'"' -f4)
+inspectOnImageName=$(fgrep inspectOnImageName "${outputDir}/result.json" | cut -d'"' -f4)
+inspectOnImageTag=$(fgrep inspectOnImageTag "${outputDir}/result.json" | cut -d'"' -f4)
 bdioFilename=$(fgrep bdioFilename "${outputDir}/result.json" | cut -d'"' -f4)
 
 echo "Running on: ${inspectOnImageName}:${inspectOnImageTag}"
@@ -81,10 +84,10 @@ echo "Running on: ${inspectOnImageName}:${inspectOnImageTag}"
 #################################################################
 # Get inspectOn image / start and setup inspectOn container (wrapper)
 #################################################################
-kubectl run "${inspectContainerName}" --image="${inspectOnImageName}:${inspectOnImageTag}" --command -- tail -f /dev/null
+kubectl run "${inspectOnContainerName}" --image="${inspectOnImageName}:${inspectOnImageTag}" --command -- tail -f /dev/null
 echo "Pausing to give the inspectOn pod time to start..."
 sleep 10
-inspectPodName=$(kubectl get pods | grep "${inspectContainerName}"  | tr -s " " | cut -d' ' -f1)
+inspectPodName=$(kubectl get pods | grep "${inspectOnContainerName}"  | tr -s " " | cut -d' ' -f1)
 echo "inspectPodName: ${inspectPodName}"
 
 podIsRunning=false
@@ -92,7 +95,7 @@ counter=0
 while [[ $counter -lt 10 ]]; do
 	echo the counter is $counter
 	kubectl get pods
-	inspectOnPodStatus=$(kubectl get pods | grep "${inspectContainerName}"  | tr -s " " | cut -d' ' -f3)
+	inspectOnPodStatus=$(kubectl get pods | grep "${inspectOnContainerName}"  | tr -s " " | cut -d' ' -f3)
 	echo "inspectOnPodStatus: ${inspectOnPodStatus}"
 	if [ "${inspectOnPodStatus}" == "Running" ]; then
 		echo "The inspectOn pod is ready"
