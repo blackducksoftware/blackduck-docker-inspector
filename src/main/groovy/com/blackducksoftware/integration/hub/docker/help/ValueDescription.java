@@ -35,4 +35,6 @@ public @interface ValueDescription {
     String defaultValue() default "";
 
     String group() default "";
+
+    boolean deprecated() default false;
 }

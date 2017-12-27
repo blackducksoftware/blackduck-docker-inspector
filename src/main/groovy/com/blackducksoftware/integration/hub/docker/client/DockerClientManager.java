@@ -69,7 +69,6 @@ public class DockerClientManager {
     private static final String IMAGE_REPO_PROPERTY = "docker.image.repo";
     private static final String IMAGE_TAG_PROPERTY = "docker.image.tag";
     private static final String ON_HOST_PROPERTY = "on.host";
-    private static final String DRY_RUN_PROPERTY = "dry.run";
     private static final String OUTPUT_INCLUDE_DOCKER_TARFILE_PROPERTY = "output.include.dockertarfile";
     private static final String OUTPUT_INCLUDE_CONTAINER_FILE_SYSTEM_TARFILE_PROPERTY = "output.include.containerfilesystem";
     private final Logger logger = LoggerFactory.getLogger(DockerClientManager.class);
@@ -189,6 +188,12 @@ public class DockerClientManager {
         cmd.add(String.format("/opt/blackduck/hub-docker-inspector/%s", programPaths.getHubDockerJarFilenameHost()));
         cmd.add(String.format("--spring.config.location=%s", "/opt/blackduck/hub-docker-inspector/config/application.properties"));
         cmd.add(String.format("--docker.tar=%s", tarFilePathInSubContainer));
+        // TODO move these to application.properties?
+        cmd.add("--inspect=true");
+        cmd.add("--inspect.in.container=false");
+        cmd.add("--upload.bdio=false");
+        cmd.add("--detect.pkg.mgr=true");
+
         execCommandInContainer(dockerClient, imageId, containerId, cmd);
         copyFileFromContainer(containerId, programPaths.getHubDockerOutputPathContainer() + ".", programPaths.getHubDockerOutputPathHost());
         stopRemoveContainer(dockerClient, containerId);
@@ -241,7 +246,6 @@ public class DockerClientManager {
         hubDockerProperties.set(OUTPUT_INCLUDE_DOCKER_TARFILE_PROPERTY, "false");
         hubDockerProperties.set(OUTPUT_INCLUDE_CONTAINER_FILE_SYSTEM_TARFILE_PROPERTY, (new Boolean(config.isOutputIncludeContainerfilesystem())).toString());
         hubDockerProperties.set(ON_HOST_PROPERTY, "false");
-        hubDockerProperties.set(DRY_RUN_PROPERTY, (new Boolean(config.isDryRun()).toString()));
         final String pathToPropertiesFileForSubContainer = String.format("%s%s", programPaths.getHubDockerTargetDirPathHost(), ProgramPaths.APPLICATION_PROPERTIES_FILENAME);
         hubDockerProperties.save(pathToPropertiesFileForSubContainer);
 

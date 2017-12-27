@@ -113,53 +113,53 @@ public class Application {
             if (!initAndValidate()) {
                 return;
             }
+
             List<File> layerTars = null;
             List<ManifestLayerMapping> layerMappings = null;
-            if (!config.isUploadBdioOnly()) {
+            if (config.isDetectPkgMgr() || config.isInspect()) {
                 dockerTarFile = deriveDockerTarFile();
                 layerTars = hubDockerManager.extractLayerTars(dockerTarFile);
                 layerMappings = hubDockerManager.getLayerMappings(dockerTarFile.getName(), config.getDockerImageRepo(), config.getDockerImageTag());
                 fillInMissingImageNameTagFromManifest(layerMappings);
             }
             OperatingSystemEnum targetOsEnum = null;
-            if (config.isOnHost()) {
-                logger.info("Running on: Host");
-                if (!config.isUploadBdioOnly()) {
-                    targetOsEnum = detectImageOs(layerTars, layerMappings);
-                    runOnImageName = dockerImages.getDockerImageName(targetOsEnum);
-                    runOnImageTag = dockerImages.getDockerImageVersion(targetOsEnum);
+            File targetImageFileSystemRootDir = null;
+            if (config.isDetectPkgMgr()) {
+                targetOsEnum = hubDockerManager.detectOperatingSystem(config.getLinuxDistro());
+                if (targetOsEnum == null) {
+                    targetImageFileSystemRootDir = hubDockerManager.extractDockerLayers(layerTars, layerMappings);
+                    targetOsEnum = hubDockerManager.detectOperatingSystem(targetImageFileSystemRootDir);
                 }
-                if (config.isUploadBdioOnly()) {
-                    logger.info("Mode: Upload BDIO only");
-                    bdioFilename = uploadBdioFiles(programPaths.getUserOutputDir());
-                } else if (config.isDetermineRunOnImageOnly()) {
-                    logger.info("Mode: Determine run-on image only");
-                } else {
-                    logger.info("Mode: Inspect image");
-                    inspectInSubContainer(dockerTarFile, targetOsEnum, runOnImageName, runOnImageTag);
-                    bdioFilename = uploadBdioFiles(programPaths.getHubDockerOutputPathHost());
+                runOnImageName = dockerImages.getDockerImageName(targetOsEnum);
+                runOnImageTag = dockerImages.getDockerImageVersion(targetOsEnum);
+            }
+            if (config.isInspect()) {
+                if (targetImageFileSystemRootDir == null) {
+                    targetImageFileSystemRootDir = hubDockerManager.extractDockerLayers(layerTars, layerMappings);
                 }
-            } else {
-                logger.info("Running on: Container");
-                if (config.isDetermineRunOnImageOnly()) {
-                    logger.info("Mode: Determine run-on image only");
-                    targetOsEnum = detectImageOs(layerTars, layerMappings);
-                    runOnImageName = dockerImages.getDockerImageName(targetOsEnum);
-                    runOnImageTag = dockerImages.getDockerImageVersion(targetOsEnum);
-                } else {
-                    logger.info("Mode: Extract / inspect");
-                    extractAndInspect(dockerTarFile, layerTars, layerMappings);
+                if (targetOsEnum == null) {
+                    targetOsEnum = hubDockerManager.detectOperatingSystem(targetImageFileSystemRootDir);
                 }
+                logger.info(String.format("Target image tarfile: %s; target OS: %s", dockerTarFile.getAbsolutePath(), targetOsEnum.toString()));
+                final List<File> bdioFiles = hubDockerManager.generateBdioFromImageFilesDir(config.getDockerImageRepo(), config.getDockerImageTag(), layerMappings, getHubProjectName(), getHubProjectVersion(), dockerTarFile,
+                        targetImageFileSystemRootDir, targetOsEnum);
+                logger.info(String.format("%d BDIO Files generated", bdioFiles.size()));
+                createContainerFileSystemTarIfRequested(targetImageFileSystemRootDir);
+            } else if (config.isInspectInContainer()) {
+                inspectInSubContainer(dockerTarFile, targetOsEnum, runOnImageName, runOnImageTag);
+            }
+            if (config.isUploadBdio()) {
+                bdioFilename = uploadBdioFiles(programPaths.getHubDockerOutputPath());
             }
             provideDockerTarIfRequested(dockerTarFile);
-            if (config.isOnHost() && !config.isUploadBdioOnly()) {
+            if (config.isOnHost() && (config.isInspect() || config.isInspectInContainer())) {
                 copyOutputToUserOutputDir();
             }
             returnCode = reportResult(runOnImageName, runOnImageTag, dockerTarFile == null ? "" : dockerTarFile.getName(), bdioFilename);
-            if (config.isOnHost() && !config.isUploadBdioOnly()) {
+            if (config.isOnHost()) {
                 copyResultToUserOutputDir();
             }
-            if (config.isOnHost() && !config.isUploadBdioOnly() && config.isCleanupWorkingDir()) {
+            if (config.isOnHost() && config.isInspect() && config.isCleanupWorkingDir()) {
                 cleanupWorkingDirs();
             }
         } catch (final Throwable e) {
@@ -251,6 +251,7 @@ public class Application {
     }
 
     private String uploadBdioFiles(final String pathToDirContainingBdio) throws IntegrationException {
+        logger.debug(String.format("uploadBdioFiles(%s)", pathToDirContainingBdio));
         String bdioFilename = null;
         final List<File> bdioFiles = findBdioFiles(pathToDirContainingBdio);
         if (bdioFiles.size() == 0) {
@@ -259,40 +260,17 @@ public class Application {
             throw new HubIntegrationException(String.format("Found %d BDIO files in %s", bdioFiles.size(), pathToDirContainingBdio));
         } else {
             bdioFilename = bdioFiles.get(0).getName();
-            if (config.isDryRun()) {
-                logger.info("Running in dry run mode; not uploading BDIO to Hub");
-            } else {
-                logger.info(String.format("Uploading BDIO to Hub: %d files; first file: %s", bdioFiles.size(), bdioFiles.get(0).getAbsolutePath()));
-                hubDockerManager.uploadBdioFiles(bdioFiles);
-            }
+            logger.info(String.format("Uploading BDIO to Hub: %d files; first file: %s", bdioFiles.size(), bdioFiles.get(0).getAbsolutePath()));
+            hubDockerManager.uploadBdioFiles(bdioFiles);
         }
         return bdioFilename;
-    }
-
-    private OperatingSystemEnum detectImageOs(final List<File> layerTars, final List<ManifestLayerMapping> layerMappings) throws IOException, HubIntegrationException {
-        OperatingSystemEnum targetOsEnum;
-        targetOsEnum = hubDockerManager.detectOperatingSystem(config.getLinuxDistro());
-        if (targetOsEnum == null) {
-            final File targetImageFileSystemRootDir = hubDockerManager.extractDockerLayers(layerTars, layerMappings);
-            targetOsEnum = hubDockerManager.detectOperatingSystem(targetImageFileSystemRootDir);
-        }
-        return targetOsEnum;
-    }
-
-    private void extractAndInspect(final File dockerTarFile, final List<File> layerTars, final List<ManifestLayerMapping> layerMappings)
-            throws IOException, HubIntegrationException, InterruptedException, IntegrationException, CompressorException {
-        OperatingSystemEnum targetOsEnum;
-        final File targetImageFileSystemRootDir = hubDockerManager.extractDockerLayers(layerTars, layerMappings);
-        targetOsEnum = hubDockerManager.detectOperatingSystem(targetImageFileSystemRootDir);
-        generateBdio(dockerTarFile, targetImageFileSystemRootDir, layerMappings, targetOsEnum);
-        createContainerFileSystemTarIfRequested(targetImageFileSystemRootDir);
     }
 
     // TODO this has gotten too complex
     private int reportResult(final String runOnImageName, final String runOnImageTag, final String dockerTarfilename, final String bdioFilename) throws HubIntegrationException {
         final Gson gson = new Gson();
         if (config.isOnHost()) {
-            if (config.isDetermineRunOnImageOnly()) {
+            if (config.isDetectPkgMgr() && !config.isInspect() && !config.isInspectInContainer()) {
                 if (StringUtils.isBlank(runOnImageName) || StringUtils.isBlank(runOnImageTag)) {
                     final String msg = "Failed to determine run-on image name and/or tag";
                     logger.error(msg);
@@ -301,7 +279,7 @@ public class Application {
                 } else {
                     return reportSuccess(runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename, gson);
                 }
-            } else if (config.isUploadBdioOnly()) {
+            } else if (config.isUploadBdio() && !config.isInspect() && !config.isInspectInContainer()) {
                 return reportSuccess(runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename, gson);
             }
             final Result resultReportedFromContainer = resultFile.read(gson);
@@ -378,16 +356,6 @@ public class Application {
         dockerClientManager.run(runOnImageName, runOnImageTag, dockerTarFile, true, config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag());
     }
 
-    // Runs only in container
-    private void generateBdio(final File dockerTarFile, final File targetImageFileSystemRootDir, final List<ManifestLayerMapping> layerMappings, final OperatingSystemEnum targetOsEnum)
-            throws IOException, InterruptedException, IntegrationException {
-        final String msg = String.format("Target image tarfile: %s; target OS: %s", dockerTarFile.getAbsolutePath(), targetOsEnum.toString());
-        logger.info(msg);
-        final List<File> bdioFiles = hubDockerManager.generateBdioFromImageFilesDir(config.getDockerImageRepo(), config.getDockerImageTag(), layerMappings, getHubProjectName(), getHubProjectVersion(), dockerTarFile,
-                targetImageFileSystemRootDir, targetOsEnum);
-        logger.info(String.format("%d BDIO Files generated", bdioFiles.size()));
-    }
-
     private String getHubProjectName() {
         return programPaths.unEscape(config.getHubProjectName());
     }
@@ -406,6 +374,10 @@ public class Application {
         logger.debug(String.format("running from dir: %s", System.getProperty("user.dir")));
         logger.debug(String.format("Dry run mode is set to %b", config.isDryRun()));
         logger.trace(String.format("dockerImageTag: %s", config.getDockerImageTag()));
+        if (config.isDryRun()) {
+            logger.warn("dry.run is deprecated. Set upload.bdio=false instead");
+            config.setUploadBdio(false);
+        }
         onHostStatic = config.isOnHost();
         if (config.isOnHost()) {
             hubDockerManager.phoneHome();
@@ -418,6 +390,8 @@ public class Application {
         }
         hubDockerManager.init();
         FileOperations.removeFileOrDir(programPaths.getHubDockerWorkingDirPath());
+
+        logger.debug(String.format("Upload BDIO is set to %b", config.isUploadBdio()));
         return true;
     }
 

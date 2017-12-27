@@ -55,7 +55,7 @@ class HubDockerManagerTest {
 
     private void doTest(String imageName, String tagName, OperatingSystemEnum os, PackageManagerEnum pkgMgr, Extractor extractor, Executor executor) {
         List<DockerInspectorOption> configOptions = new ArrayList<>();
-        configOptions.add(new DockerInspectorOption("hub.url", "hubUrl", "testHubUrl", "Hub URL", String.class, "", Config.GROUP_PUBLIC));
+        configOptions.add(new DockerInspectorOption("hub.url", "hubUrl", "testHubUrl", "Hub URL", String.class, "", Config.GROUP_PUBLIC, false));
         Config config = [
             isOnHost: { true },
             isDryRun: { false },

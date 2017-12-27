@@ -38,8 +38,9 @@ public class DockerInspectorOption {
     private final String group;
     private final String defaultValue;
     private String resolvedValue;
+    private final boolean deprecated;
 
-    public DockerInspectorOption(final String key, final String fieldName, final String resolvedValue, final String description, final Class<?> valueType, final String defaultValue, final String group) {
+    public DockerInspectorOption(final String key, final String fieldName, final String resolvedValue, final String description, final Class<?> valueType, final String defaultValue, final String group, final boolean deprecated) {
         this.key = key;
         this.description = description;
         this.valueType = valueType;
@@ -47,6 +48,7 @@ public class DockerInspectorOption {
         this.defaultValue = defaultValue;
         this.fieldName = fieldName;
         this.resolvedValue = resolvedValue;
+        this.deprecated = deprecated;
 
         final String[] parts = valueType.toString().split("\\.");
         logger.trace(String.format("Split %s into %d parts", valueType.toString(), parts.length));
@@ -87,6 +89,10 @@ public class DockerInspectorOption {
 
     public void setResolvedValue(final String resolvedValue) {
         this.resolvedValue = resolvedValue;
+    }
+
+    public boolean isDeprecated() {
+        return deprecated;
     }
 
     @Override

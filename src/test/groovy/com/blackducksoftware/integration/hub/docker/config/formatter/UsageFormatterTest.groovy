@@ -23,7 +23,7 @@ class UsageFormatterTest {
     public void test() {
         final UsageFormatter helpPrinter = new UsageFormatter();
         List<DockerInspectorOption> configOptions = new ArrayList<>();
-        configOptions.add(new DockerInspectorOption("hub.url", "hubUrl", "testHubUrl", "Hub URL", String.class, "", Config.GROUP_PUBLIC));
+        configOptions.add(new DockerInspectorOption("hub.url", "hubUrl", "testHubUrl", "Hub URL", String.class, "", Config.GROUP_PUBLIC, false));
         Config config = [
             isOnHost: { true },
             isDryRun: { false },

@@ -24,158 +24,169 @@ public class Config {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // Black Duck Hub connection details
-    @ValueDescription(description = "Hub URL", defaultValue = "", group = Config.GROUP_PUBLIC)
+    @ValueDescription(description = "Hub URL", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${hub.url:}")
     private String hubUrl = "";
 
-    @ValueDescription(description = "Hub Timeout in seconds", defaultValue = "120", group = Config.GROUP_PUBLIC)
+    @ValueDescription(description = "Hub Timeout in seconds", defaultValue = "120", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${hub.timeout:120}")
     private Integer hubTimeout = 120;
 
-    @ValueDescription(description = "Hub Username", defaultValue = "", group = Config.GROUP_PUBLIC)
+    @ValueDescription(description = "Hub Username", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${hub.username:}")
     private String hubUsername = "";
 
-    @ValueDescription(description = "Hub Password", defaultValue = "", group = Config.GROUP_PUBLIC)
+    @ValueDescription(description = "Hub Password", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${hub.password:}")
     private String hubPassword = "";
 
     // The properties in this section must be set if you must connect to the Hub through a proxy
-    @ValueDescription(description = "Hub Proxy Host", defaultValue = "", group = Config.GROUP_PUBLIC)
+    @ValueDescription(description = "Hub Proxy Host", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${hub.proxy.host:}")
     private String hubProxyHost = "";
 
-    @ValueDescription(description = "Hub Proxy Port", defaultValue = "", group = Config.GROUP_PUBLIC)
+    @ValueDescription(description = "Hub Proxy Port", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${hub.proxy.port:}")
     private String hubProxyPort = "";
 
-    @ValueDescription(description = "Hub Proxy Username", defaultValue = "", group = Config.GROUP_PUBLIC)
+    @ValueDescription(description = "Hub Proxy Username", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${hub.proxy.username:}")
     private String hubProxyUsername = "";
 
-    @ValueDescription(description = "Hub Proxy Password", defaultValue = "", group = Config.GROUP_PUBLIC)
+    @ValueDescription(description = "Hub Proxy Password", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${hub.proxy.password:}")
     private String hubProxyPassword = "";
 
     // If using an https Hub server, you can choose to always trust the server certificates
-    @ValueDescription(description = "Hub Always Trust Cert?", defaultValue = "false", group = Config.GROUP_PUBLIC)
+    @ValueDescription(description = "Hub Always Trust Cert?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${hub.always.trust.cert:false}")
     private Boolean hubAlwaysTrustCert = Boolean.FALSE;
 
     // The default project name will be the Docker image name
-    @ValueDescription(description = "Hub Project Name", defaultValue = "", group = Config.GROUP_PUBLIC)
+    @ValueDescription(description = "Hub Project Name", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${hub.project.name:}")
     private String hubProjectName = "";
 
     // The default version name will be Docker image tag
-    @ValueDescription(description = "Hub Project Version", defaultValue = "", group = Config.GROUP_PUBLIC)
+    @ValueDescription(description = "Hub Project Version", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${hub.project.version:}")
     private String hubProjectVersion = "";
 
     // Working directory
-    @ValueDescription(description = "Working Directory Path", defaultValue = "/tmp/hub-docker-inspector-files", group = Config.GROUP_PUBLIC)
+    @ValueDescription(description = "Working Directory Path", defaultValue = "/tmp/hub-docker-inspector-files", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${working.dir.path:/tmp/hub-docker-inspector-files}")
     private String workingDirPath = "";
 
     // If false, will leave behind the files created in the working dir
-    @ValueDescription(description = "Cleanup Working Dir?", defaultValue = "true", group = Config.GROUP_PUBLIC)
+    @ValueDescription(description = "Cleanup Working Dir?", defaultValue = "true", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${cleanup.working.dir:true}")
     private Boolean cleanupWorkingDir = Boolean.TRUE;
 
     // If Hub Docker Inspector cannot derive it automatically,
     // use linux.distro to specify the target image linux distribution
     // (ubuntu, debian, busybox, centos, fedora, redhat, alpine)
-    @ValueDescription(description = "Linux Distribution Name", defaultValue = "", group = Config.GROUP_PUBLIC)
+    @ValueDescription(description = "Linux Distribution Name", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${linux.distro:}")
     private String linuxDistro = "";
 
     // Timeout for external command execution (to pull a docker image, etc.)
-    @ValueDescription(description = "Command Timeout (Milliseconds)", defaultValue = "120000", group = Config.GROUP_PUBLIC)
+    @ValueDescription(description = "Command Timeout (Milliseconds)", defaultValue = "120000", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${command.timeout:120000}")
     private Long commandTimeout = 120000L;
 
     // Logging level: ERROR, WARN, INFO, DEBUG, TRACE
     // TODO what about this logging level??
-    @ValueDescription(description = "Logging Level (WARN, INFO, DEBUG, TRACE)", defaultValue = "INFO", group = Config.GROUP_PUBLIC)
+    @ValueDescription(description = "Logging Level (WARN, INFO, DEBUG, TRACE)", defaultValue = "INFO", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${logging.level.com.blackducksoftware:INFO}")
     private String loggingLevel = "";
 
     // If dry.run=true, Hub Docker Inspector won't upload results to Hub
-    @ValueDescription(description = "Dry Run Mode?", defaultValue = "false", group = Config.GROUP_PUBLIC)
+    @ValueDescription(description = "Dry Run Mode. Use upload.bdio=false instead", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = true)
     @Value("${dry.run:false}")
     private Boolean dryRun = Boolean.FALSE;
 
     // Path on host of a directory into which the resulting output files will be copied
-    @ValueDescription(description = "Path to directory for output files", defaultValue = "", group = Config.GROUP_PUBLIC)
+    @ValueDescription(description = "Path to directory for output files", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${output.path:}")
     private String outputPath = "";
 
     // Set to true to include the image tarfile in the output
-    @ValueDescription(description = "Include Docker tarfile in output?", defaultValue = "false", group = Config.GROUP_PUBLIC)
+    @ValueDescription(description = "Include Docker tarfile in output?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${output.include.dockertarfile:false}")
     private Boolean outputIncludeDockertarfile = Boolean.FALSE;
 
     // Set to true to include the container file system tarfile in the output
-    @ValueDescription(description = "Include container filesystem (a large file) in output?", defaultValue = "false", group = Config.GROUP_PUBLIC)
+    @ValueDescription(description = "Include container filesystem (a large file) in output?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${output.include.containerfilesystem:false}")
     private Boolean outputIncludeContainerfilesystem = Boolean.FALSE;
 
     // If you want to add a prefix to the code location name, specify it here
-    @ValueDescription(description = "Hub CodeLocation prefix", defaultValue = "", group = Config.GROUP_PUBLIC)
+    @ValueDescription(description = "Hub CodeLocation prefix", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${hub.codelocation.prefix:}")
     private String hubCodelocationPrefix = "";
 
     // Path to the hub-docker-inspector .jar file
     // Only used by hub-docker-inspector.sh
-    @ValueDescription(description = "Hub Docker Inspector .jar file path", defaultValue = "", group = Config.GROUP_PUBLIC)
+    @ValueDescription(description = "Hub Docker Inspector .jar file path", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${jar.path:}")
     private String jarPath = "";
 
     // The following properties should not normally be set/changed by the user
-    @ValueDescription(description = "Docker Image name:tag", defaultValue = "", group = Config.GROUP_PUBLIC)
+    @ValueDescription(description = "Docker Image name:tag", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${docker.image:}")
     private String dockerImage = "";
 
-    @ValueDescription(description = "Docker tarfile path", defaultValue = "", group = Config.GROUP_PUBLIC)
+    @ValueDescription(description = "Docker tarfile path", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${docker.tar:}")
     private String dockerTar = "";
 
-    @ValueDescription(description = "docker.image.id", defaultValue = "", group = Config.GROUP_PUBLIC)
+    @ValueDescription(description = "docker.image.id", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${docker.image.id:}")
     private String dockerImageId = "";
 
-    @ValueDescription(description = "Docker Image Repo", defaultValue = "", group = Config.GROUP_PRIVATE)
+    @ValueDescription(description = "Docker Image Repo", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${docker.image.repo:}")
     private String dockerImageRepo = "";
 
-    @ValueDescription(description = "Docker Image Tag", defaultValue = "", group = Config.GROUP_PRIVATE)
+    @ValueDescription(description = "Docker Image Tag", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${docker.image.tag:}")
     private String dockerImageTag = "";
 
-    @ValueDescription(description = "Running on host?", defaultValue = "true", group = Config.GROUP_PRIVATE)
+    @ValueDescription(description = "Running on host?", defaultValue = "true", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${on.host:true}")
     private Boolean onHost = Boolean.TRUE;
 
-    @ValueDescription(description = "Caller Name", defaultValue = "", group = Config.GROUP_PRIVATE)
+    @ValueDescription(description = "Caller Name", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${caller.name:}")
     private String callerName = "";
 
-    @ValueDescription(description = "caller.version", defaultValue = "", group = Config.GROUP_PRIVATE)
+    @ValueDescription(description = "caller.version", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${caller.version:}")
     private String callerVersion = "";
 
-    @ValueDescription(description = "Phone Home?", defaultValue = "true", group = Config.GROUP_PRIVATE)
+    @ValueDescription(description = "Phone Home?", defaultValue = "true", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${phone.home:true}")
     private Boolean phoneHome = Boolean.TRUE;
 
-    @ValueDescription(description = "Determine run-on image only?", defaultValue = "false", group = Config.GROUP_PUBLIC)
-    @Value("${determine.run.on.image.only:false}")
-    private Boolean determineRunOnImageOnly = Boolean.FALSE;
+    // Properties added for orchestration support
 
-    @ValueDescription(description = "Upload BDIO only?", defaultValue = "false", group = Config.GROUP_PUBLIC)
-    @Value("${upload.bdio.only:false}")
-    private Boolean uploadBdioOnly = Boolean.FALSE;
+    @ValueDescription(description = "Detect target image package manager?", defaultValue = "true", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${detect.pkg.mgr:true}")
+    private Boolean detectPkgMgr = Boolean.TRUE;
 
+    @ValueDescription(description = "Inspect?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${inspect:false}")
+    private Boolean inspect = Boolean.FALSE;
+
+    @ValueDescription(description = "Launch container to inspect?", defaultValue = "true", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${inspect.in.container:true}")
+    private Boolean inspectInContainer = Boolean.TRUE;
+
+    @ValueDescription(description = "Upload BDIO?", defaultValue = "true", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${upload.bdio:true}")
+    private Boolean uploadBdio = Boolean.TRUE;
+
+    // Environment Variables
     @Value("${BD_HUB_PASSWORD:}")
     private String hubPasswordEnvVar = "";
 
@@ -238,7 +249,8 @@ public class Config {
                         logger.trace(String.format("adding prop key %s [value: %s]", propName, value));
                         allKeys.add(propName);
                         final ValueDescription valueDescription = field.getAnnotation(ValueDescription.class);
-                        final DockerInspectorOption opt = new DockerInspectorOption(propName, field.getName(), value, valueDescription.description(), field.getType(), valueDescription.defaultValue(), valueDescription.group());
+                        final DockerInspectorOption opt = new DockerInspectorOption(propName, field.getName(), value, valueDescription.description(), field.getType(), valueDescription.defaultValue(), valueDescription.group(),
+                                valueDescription.deprecated());
                         optionsByKey.put(propName, opt);
                         optionsByFieldName.put(field.getName(), opt);
                         if (!Config.GROUP_PRIVATE.equals(valueDescription.group())) {
@@ -388,12 +400,24 @@ public class Config {
         return dockerInspectorJavaOptsValue;
     }
 
-    public boolean isDetermineRunOnImageOnly() {
-        return determineRunOnImageOnly;
+    public boolean isInspect() {
+        return inspect;
     }
 
-    public boolean isUploadBdioOnly() {
-        return uploadBdioOnly;
+    public boolean isInspectInContainer() {
+        return inspectInContainer;
+    }
+
+    public boolean isUploadBdio() {
+        return uploadBdio;
+    }
+
+    public void setUploadBdio(final boolean value) {
+        uploadBdio = value;
+    }
+
+    public boolean isDetectPkgMgr() {
+        return detectPkgMgr;
     }
 
     public void setDockerImageRepo(final String newValue) {
@@ -452,7 +476,9 @@ public class Config {
         this.phoneHome = null;
         this.scanCliOptsEnvVar = null;
         this.workingDirPath = null;
-        this.determineRunOnImageOnly = null;
-        this.uploadBdioOnly = null;
+        this.inspect = null;
+        this.inspectInContainer = null;
+        this.uploadBdio = null;
+        this.detectPkgMgr = null;
     }
 }

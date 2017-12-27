@@ -37,11 +37,14 @@ public class UsageFormatter {
         usage.add(String.format("Available properties:"));
         final List<DockerInspectorOption> configOptions = config.getPublicConfigOptions();
         for (final DockerInspectorOption opt : configOptions) {
+            final StringBuilder usageLine = new StringBuilder(String.format("  %s [%s]: %s", opt.getKey(), opt.getValueTypeString(), opt.getDescription()));
             if (!StringUtils.isBlank(opt.getDefaultValue())) {
-                usage.add(String.format("  %s [%s]: %s; default: %s", opt.getKey(), opt.getValueTypeString(), opt.getDescription(), opt.getDefaultValue()));
-            } else {
-                usage.add(String.format("  %s [%s]: %s", opt.getKey(), opt.getValueTypeString(), opt.getDescription()));
+                usageLine.append(String.format("; default: %s", opt.getDefaultValue()));
             }
+            if (opt.isDeprecated()) {
+                usageLine.append(String.format("; [DEPRECATED]"));
+            }
+            usage.add(usageLine.toString());
         }
         usage.add("");
         usage.add("Documentation: https://blackducksoftware.atlassian.net/wiki/spaces/INTDOCS/pages/48435867/Hub+Docker+Inspector");

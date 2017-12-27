@@ -85,12 +85,8 @@ public class HubClient {
 
     public void testHubConnection() throws HubIntegrationException {
         logger.trace(String.format("Hub username: %s", getHubUsername())); // ArgsWithSpacesTest tests this in output
-        if (config.isDryRun()) {
-            logger.debug("In dry run mode; skipping verification of Hub connection");
-            return;
-        }
-        if (config.isDetermineRunOnImageOnly()) {
-            logger.debug("In determine run-on image mode; skipping verification of Hub connection");
+        if (!config.isUploadBdio()) {
+            logger.debug("Upload of BDIO not enabled; skipping verification of Hub connection");
             return;
         }
         final HubServerConfig hubServerConfig = createBuilder().build();
