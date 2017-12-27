@@ -1,4 +1,4 @@
-#!/bin/bash -v
+#!/bin/bash
 
 targetImageName=alpine
 targetImageTag=latest
@@ -18,31 +18,19 @@ rm -f "${targetImageDir}/${targetImageTarfile}"
 #################################################################
 # Pull/save image (wrapper)
 #################################################################
+echo "--------------------------------------------------------------"
+echo "docker_wrapper.sh: Pulling/saving the target image"
+echo "--------------------------------------------------------------"
 docker pull "${targetImageName}:${targetImageTag}"
 docker save -o "${targetImageDir}/${targetImageTarfile}" "${targetImageName}:${targetImageTag}"
 chmod a+r "${targetImageDir}/${targetImageTarfile}"
 
 #################################################################
-# Determine inspectOn image (jar on host)
-#################################################################
-#./build/hub-docker-inspector.sh --jar.path=build/libs/hub-docker-inspector-5.0.0-SNAPSHOT.jar \
-#	--determine.run.on.image.only=true \
-#	--cleanup.working.dir=false \
-#	--logging.level.com.blackducksoftware=INFO \
-#	--output.path="${outputDir}" \
-#	--output.include.dockertarfile=true \
-#	--docker.tar=/tmp/savedimage.tar
-#
-#imageName=$(fgrep inspectOnImageName "${outputDir}/result.json" | cut -d'"' -f4)
-#imageTag=$(fgrep inspectOnImageTag "${outputDir}/result.json" | cut -d'"' -f4)
-#dockerTarfilename=$(fgrep dockerTarfilename "${outputDir}/result.json" | cut -d'"' -f4)
-#bdioFilename=$(fgrep bdioFilename "${outputDir}/result.json" | cut -d'"' -f4)
-#
-#echo "Running on: ${imageName}:${imageTag}"
-
-#################################################################
 # Get peekOn image / start and setup peekOn container (wrapper)
 #################################################################
+echo "--------------------------------------------------------------"
+echo "docker_wrapper.sh: Starting container for target image package manager detection"
+echo "--------------------------------------------------------------"
 docker run -it -d --name "${peekOnContainerName}" "${peekOnImageName}:${peekOnImageTag}" /bin/bash
 docker cp build/libs/hub-docker-inspector-5.0.0-SNAPSHOT.jar "${peekOnContainerName}:/opt/blackduck/hub-docker-inspector"
 docker cp "${targetImageDir}/${targetImageTarfile}" "${peekOnContainerName}:/opt/blackduck/hub-docker-inspector/target"
@@ -50,6 +38,9 @@ docker cp "${targetImageDir}/${targetImageTarfile}" "${peekOnContainerName}:/opt
 #################################################################
 # Determine inspectOn image (jar on peekOnContainer)
 #################################################################
+echo "--------------------------------------------------------------"
+echo "docker_wrapper.sh: Detecting target image package manager"
+echo "--------------------------------------------------------------"
 docker exec "${peekOnContainerName}" \
 	java -Dfile.encoding=UTF-8 -jar /opt/blackduck/hub-docker-inspector/hub-docker-inspector-5.0.0-SNAPSHOT.jar \
 	--on.host=false \
@@ -65,27 +56,24 @@ inspectOnImageName=$(fgrep inspectOnImageName "${outputDir}/result.json" | cut -
 inspectOnImageTag=$(fgrep inspectOnImageTag "${outputDir}/result.json" | cut -d'"' -f4)
 bdioFilename=$(fgrep bdioFilename "${outputDir}/result.json" | cut -d'"' -f4)
 
-echo "Running on: ${inspectOnImageName}:${inspectOnImageTag}"
-
-# ====== end of new stuff
-
-
-
-
-
+echo "Docker image selected for target image inspection: ${inspectOnImageName}:${inspectOnImageTag}"
 
 #################################################################
 # Get inspectOn image / start and setup inspectOn container (wrapper)
 #################################################################
+echo "--------------------------------------------------------------"
+echo "docker_wrapper.sh: Starting container for target image inspection"
+echo "--------------------------------------------------------------"
 docker run -it -d --name "${inspectOnContainerName}" "${inspectOnImageName}:${inspectOnImageTag}" /bin/bash
 docker cp build/libs/hub-docker-inspector-5.0.0-SNAPSHOT.jar "${inspectOnContainerName}:/opt/blackduck/hub-docker-inspector"
 docker cp "${targetImageDir}/${targetImageTarfile}" "${inspectOnContainerName}:/opt/blackduck/hub-docker-inspector/target"
-ls "${outputDir}"
 
 #################################################################
 # Inspect (jar in container)
 #################################################################
-echo docker exec "${inspectOnContainerName}" java -Dfile.encoding=UTF-8 -jar /opt/blackduck/hub-docker-inspector/hub-docker-inspector-5.0.0-SNAPSHOT.jar --on.host=false "--docker.tar=/opt/blackduck/hub-docker-inspector/target/${targetImageTarfile}"
+echo "--------------------------------------------------------------"
+echo "docker_wrapper.sh: Target image inspection"
+echo "--------------------------------------------------------------"
 docker exec "${inspectOnContainerName}" java -Dfile.encoding=UTF-8 -jar /opt/blackduck/hub-docker-inspector/hub-docker-inspector-5.0.0-SNAPSHOT.jar --on.host=false "--docker.tar=/opt/blackduck/hub-docker-inspector/target/${targetImageTarfile}"
 
 docker cp "${inspectOnContainerName}:/opt/blackduck/hub-docker-inspector/output/${bdioFilename}" "${outputDir}"
@@ -93,6 +81,9 @@ docker cp "${inspectOnContainerName}:/opt/blackduck/hub-docker-inspector/output/
 #################################################################
 # Upload BDIO (jar on host)
 #################################################################
+echo "--------------------------------------------------------------"
+echo "docker_wrapper.sh: Uploading BDIO file (BOM) to Hub"
+echo "--------------------------------------------------------------"
 ./build/hub-docker-inspector.sh --jar.path=build/libs/hub-docker-inspector-5.0.0-SNAPSHOT.jar \
 	--upload.bdio.only=true \
 	--cleanup.working.dir=false \
@@ -106,6 +97,9 @@ docker cp "${inspectOnContainerName}:/opt/blackduck/hub-docker-inspector/output/
 #################################################################
 # Clean up container (wrapper)
 #################################################################
+echo "--------------------------------------------------------------"
+echo "docker_wrapper.sh: Stopping/removing containers"
+echo "--------------------------------------------------------------"
 docker stop "${peekOnContainerName}"
 docker rm "${peekOnContainerName}"
 docker stop "${inspectOnContainerName}"

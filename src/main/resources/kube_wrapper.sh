@@ -1,4 +1,4 @@
-#!/bin/bash -v
+#!/bin/bash
 
 targetImageName=alpine
 targetImageTag=latest
@@ -22,6 +22,9 @@ rm -f "${targetImageDir}/${targetImageTarfile}"
 #################################################################
 # Pull/save target image (wrapper)
 #################################################################
+echo "--------------------------------------------------------------"
+echo "kube_wrapper.sh: Pulling/saving the target image"
+echo "--------------------------------------------------------------"
 docker pull "${targetImageName}:${targetImageTag}"
 docker save -o "${targetImageDir}/${targetImageTarfile}" "${targetImageName}:${targetImageTag}"
 chmod a+r "${targetImageDir}/${targetImageTarfile}"
@@ -29,6 +32,9 @@ chmod a+r "${targetImageDir}/${targetImageTarfile}"
 #################################################################
 # Get peekOn image / start and setup peekOn container (wrapper)
 #################################################################
+echo "--------------------------------------------------------------"
+echo "kube_wrapper.sh: Starting container for target image package manager detection"
+echo "--------------------------------------------------------------"
 kubectl run "${peekOnContainerName}" --image="${peekOnImageName}:${peekOnImageTag}" --command -- tail -f /dev/null
 echo "Pausing to give the peekOn pod time to start..."
 sleep 10
@@ -64,6 +70,9 @@ kubectl cp "${targetImageDir}/${targetImageTarfile}" "${peekPodName}:/opt/blackd
 #################################################################
 # Determine inspectOn image (jar on peekOnContainer)
 #################################################################
+echo "--------------------------------------------------------------"
+echo "kube_wrapper.sh: Detecting target image package manager"
+echo "--------------------------------------------------------------"
 kubectl exec -it "${peekPodName}" -- \
 	java -Dfile.encoding=UTF-8 -jar /opt/blackduck/hub-docker-inspector/hub-docker-inspector-5.0.0-SNAPSHOT.jar \
 	--on.host=false \
@@ -79,11 +88,14 @@ inspectOnImageName=$(fgrep inspectOnImageName "${outputDir}/result.json" | cut -
 inspectOnImageTag=$(fgrep inspectOnImageTag "${outputDir}/result.json" | cut -d'"' -f4)
 bdioFilename=$(fgrep bdioFilename "${outputDir}/result.json" | cut -d'"' -f4)
 
-echo "Running on: ${inspectOnImageName}:${inspectOnImageTag}"
+echo "Docker image selected for target image inspection: ${inspectOnImageName}:${inspectOnImageTag}"
 
 #################################################################
 # Get inspectOn image / start and setup inspectOn container (wrapper)
 #################################################################
+echo "--------------------------------------------------------------"
+echo "kube_wrapper.sh: Starting container for target image inspection"
+echo "--------------------------------------------------------------"
 kubectl run "${inspectOnContainerName}" --image="${inspectOnImageName}:${inspectOnImageTag}" --command -- tail -f /dev/null
 echo "Pausing to give the inspectOn pod time to start..."
 sleep 10
@@ -119,6 +131,9 @@ kubectl cp "${targetImageDir}/${targetImageTarfile}" "${inspectPodName}:/opt/bla
 #################################################################
 # Inspect (jar in container)
 #################################################################
+echo "--------------------------------------------------------------"
+echo "kube_wrapper.sh: Target image inspection"
+echo "--------------------------------------------------------------"
 kubectl exec -it "${inspectPodName}" -- \
 	java -Dfile.encoding=UTF-8 -jar /opt/blackduck/hub-docker-inspector/hub-docker-inspector-5.0.0-SNAPSHOT.jar \
 	--on.host=false \
@@ -131,6 +146,9 @@ ls "${outputDir}"
 #################################################################
 # Upload BDIO (jar on host)
 #################################################################
+echo "--------------------------------------------------------------"
+echo "kube_wrapper.sh: Uploading BDIO file (BOM) to Hub"
+echo "--------------------------------------------------------------"
 ./build/hub-docker-inspector.sh --jar.path=build/libs/hub-docker-inspector-5.0.0-SNAPSHOT.jar \
 	--upload.bdio.only=true \
 	--cleanup.working.dir=false \
@@ -144,5 +162,8 @@ ls "${outputDir}"
 #################################################################
 # Clean up minikube VM (wrapper)
 #################################################################
+echo "--------------------------------------------------------------"
+echo "kube_wrapper.sh: Stopping/removing minikube"
+echo "--------------------------------------------------------------"
 minikube stop
 minikube delete
