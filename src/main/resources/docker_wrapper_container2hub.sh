@@ -6,11 +6,11 @@ targetImageTag=latest
 targetImageDir=/tmp
 targetImageTarfile=savedimage.tar
 outputDir=/tmp/hub-docker-inspector-output
-peekOnContainerName=hub-docker-inspector-peek
+identifyOnContainerName=hub-docker-inspector-identify
 inspectOnContainerName=hub-docker-inspector-inspect
 uploadOnContainerName=hub-docker-inspector-upload
-peekOnImageName=blackducksoftware/hub-docker-inspector-alpine
-peekOnImageTag=4.1.0
+identifyOnImageName=blackducksoftware/hub-docker-inspector-alpine
+identifyOnImageTag=4.1.0
 
 rm -rf "${outputDir}"
 mkdir "${outputDir}"
@@ -27,31 +27,31 @@ docker save -o "${targetImageDir}/${targetImageTarfile}" "${targetImageName}:${t
 chmod a+r "${targetImageDir}/${targetImageTarfile}"
 
 #################################################################
-# Get peekOn image / start and setup peekOn container (wrapper)
+# Get identifyOn image / start and setup identifyOn container (wrapper)
 #################################################################
 echo "--------------------------------------------------------------"
-echo "docker_wrapper.sh: Starting container for target image package manager detection"
+echo "docker_wrapper.sh: Starting container for target image package manager identification"
 echo "--------------------------------------------------------------"
-docker run -it -d --name "${peekOnContainerName}" "${peekOnImageName}:${peekOnImageTag}" /bin/bash
-docker cp build/libs/hub-docker-inspector-5.0.0-SNAPSHOT.jar "${peekOnContainerName}:/opt/blackduck/hub-docker-inspector"
-docker cp "${targetImageDir}/${targetImageTarfile}" "${peekOnContainerName}:/opt/blackduck/hub-docker-inspector/target"
+docker run -it -d --name "${identifyOnContainerName}" "${identifyOnImageName}:${identifyOnImageTag}" /bin/bash
+docker cp build/libs/hub-docker-inspector-5.0.0-SNAPSHOT.jar "${identifyOnContainerName}:/opt/blackduck/hub-docker-inspector"
+docker cp "${targetImageDir}/${targetImageTarfile}" "${identifyOnContainerName}:/opt/blackduck/hub-docker-inspector/target"
 
 #################################################################
-# Determine inspectOn image (jar on peekOnContainer)
+# Determine inspectOn image (jar on identifyOnContainer)
 #################################################################
 echo "--------------------------------------------------------------"
-echo "docker_wrapper.sh: Detecting target image package manager"
+echo "docker_wrapper.sh: Identifying target image package manager"
 echo "--------------------------------------------------------------"
-docker exec "${peekOnContainerName}" \
+docker exec "${identifyOnContainerName}" \
 	java -Dfile.encoding=UTF-8 -jar /opt/blackduck/hub-docker-inspector/hub-docker-inspector-5.0.0-SNAPSHOT.jar \
 	--on.host=false \
-	--detect.pkg.mgr=true \
+	--identify.pkg.mgr=true \
 	--inspect=false \
 	--inspect.in.container=false \
 	--logging.level.com.blackducksoftware=INFO \
 	--docker.tar="/opt/blackduck/hub-docker-inspector/target/${targetImageTarfile}"
 
-docker cp "${peekOnContainerName}:/opt/blackduck/hub-docker-inspector/output/result.json" "${outputDir}"
+docker cp "${identifyOnContainerName}:/opt/blackduck/hub-docker-inspector/output/result.json" "${outputDir}"
 
 ls "${outputDir}"
 
@@ -103,7 +103,7 @@ docker cp build/libs/hub-docker-inspector-5.0.0-SNAPSHOT.jar "${uploadOnContaine
 docker cp "${bdioFilePath}" "${uploadOnContainerName}:/opt/blackduck/hub-docker-inspector/output"
 docker exec "${uploadOnContainerName}" java -Dfile.encoding=UTF-8 -jar /opt/blackduck/hub-docker-inspector/hub-docker-inspector-5.0.0-SNAPSHOT.jar \
 	--on.host=false \
-	--detect.pkg.mgr=false \
+	--identify.pkg.mgr=false \
 	--inspect=false \
 	--inspect.in.container=false \
 	--upload.bdio=true \
@@ -120,8 +120,8 @@ docker exec "${uploadOnContainerName}" java -Dfile.encoding=UTF-8 -jar /opt/blac
 echo "--------------------------------------------------------------"
 echo "docker_wrapper.sh: Stopping/removing containers"
 echo "--------------------------------------------------------------"
-docker stop "${peekOnContainerName}"
-docker rm "${peekOnContainerName}"
+docker stop "${identifyOnContainerName}"
+docker rm "${identifyOnContainerName}"
 docker stop "${inspectOnContainerName}"
 docker rm "${inspectOnContainerName}"
 docker stop "${uploadOnContainerName}"

@@ -170,9 +170,9 @@ public class Config {
 
     // Properties added for orchestration support
 
-    @ValueDescription(description = "Detect target image package manager?", defaultValue = "true", group = Config.GROUP_PUBLIC, deprecated = false)
-    @Value("${detect.pkg.mgr:true}")
-    private Boolean detectPkgMgr = Boolean.TRUE;
+    @ValueDescription(description = "Identify target image package manager?", defaultValue = "true", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${identify.pkg.mgr:true}")
+    private Boolean identifyPkgMgr = Boolean.TRUE;
 
     @ValueDescription(description = "Inspect?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${inspect:false}")
@@ -424,8 +424,8 @@ public class Config {
         uploadBdio = value;
     }
 
-    public boolean isDetectPkgMgr() {
-        return detectPkgMgr;
+    public boolean isIdentifyPkgMgr() {
+        return identifyPkgMgr;
     }
 
     public void setDockerImageRepo(final String newValue) {
@@ -487,7 +487,7 @@ public class Config {
         this.inspect = null;
         this.inspectInContainer = null;
         this.uploadBdio = null;
-        this.detectPkgMgr = null;
+        this.identifyPkgMgr = null;
         this.bdioPath = null;
     }
 }

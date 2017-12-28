@@ -8,9 +8,9 @@ targetImageDir=/tmp
 targetImageTarfile=savedimage.tar
 outputDir=/tmp/hub-docker-inspector-output
 inspectOnContainerName=hub-docker-inspector-inspect
-peekOnContainerName=hub-docker-inspector-peek
-peekOnImageName=blackducksoftware/hub-docker-inspector-alpine
-peekOnImageTag=4.1.0
+identifyOnContainerName=hub-docker-inspector-identify
+identifyOnImageName=blackducksoftware/hub-docker-inspector-alpine
+identifyOnImageTag=4.1.0
 
 minikube start
 eval $(minikube docker-env)
@@ -30,57 +30,60 @@ docker save -o "${targetImageDir}/${targetImageTarfile}" "${targetImageName}:${t
 chmod a+r "${targetImageDir}/${targetImageTarfile}"
 
 #################################################################
-# Get peekOn image / start and setup peekOn container (wrapper)
+# Get "target image pkg mgr identification" image / start and setup "target image pkg mgr identification" container (wrapper)
 #################################################################
 echo "--------------------------------------------------------------"
-echo "kube_wrapper.sh: Starting container for target image package manager detection"
+echo "kube_wrapper.sh: Starting container for target image package manager identification"
 echo "--------------------------------------------------------------"
-kubectl run "${peekOnContainerName}" --image="${peekOnImageName}:${peekOnImageTag}" --command -- tail -f /dev/null
-echo "Pausing to give the peekOn pod time to start..."
+kubectl run "${identifyOnContainerName}" --image="${identifyOnImageName}:${identifyOnImageTag}" --command -- tail -f /dev/null
+echo "Pausing to give the identifyOn pod time to start..."
 sleep 10
-peekPodName=$(kubectl get pods | grep "${peekOnContainerName}"  | tr -s " " | cut -d' ' -f1)
-echo "peekPodName: ${peekPodName}"
+identifyPodName=$(kubectl get pods | grep "${identifyOnContainerName}"  | tr -s " " | cut -d' ' -f1)
+echo "identifyPodName: ${identifyPodName}"
 
 podIsRunning=false
 counter=0
 while [[ $counter -lt 30 ]]; do
 	echo the counter is $counter
 	kubectl get pods
-	peekOnPodStatus=$(kubectl get pods | grep "${peekOnContainerName}"  | tr -s " " | cut -d' ' -f3)
-	echo "peekOnPodStatus: ${peekOnPodStatus}"
-	if [ "${peekOnPodStatus}" == "Running" ]; then
-		echo "The peekOn pod is ready"
+	identifyOnPodStatus=$(kubectl get pods | grep "${identifyOnContainerName}"  | tr -s " " | cut -d' ' -f3)
+	echo "identifyOnPodStatus: ${identifyOnPodStatus}"
+	if [ "${identifyOnPodStatus}" == "Running" ]; then
+		echo "The identifyOn pod is ready"
 		break
 	else
-		echo "The peekOn pod is NOT ready"
+		echo "The identifyOn pod is NOT ready"
 	fi
-	echo "Pausing to give the peekOn pod time to start..."
+	echo "Pausing to give the identifyOn pod time to start..."
 	sleep 10
 	count=$((count+1))
 done
-if [ "${peekOnPodStatus}" != "Running" ]; then
-	echo "peekOn pod never started!"
+if [ "${identifyOnPodStatus}" != "Running" ]; then
+	echo "identifyOn pod never started!"
 	exit -1
 fi
-echo "peekOnPod ${peekPodName}, is running"
+echo "identifyOnPod ${identifyPodName}, is running"
 
-kubectl cp build/libs/hub-docker-inspector-5.0.0-SNAPSHOT.jar "${peekPodName}:/opt/blackduck/hub-docker-inspector"
-kubectl cp "${targetImageDir}/${targetImageTarfile}" "${peekPodName}:/opt/blackduck/hub-docker-inspector/target"
+kubectl cp build/libs/hub-docker-inspector-5.0.0-SNAPSHOT.jar "${identifyPodName}:/opt/blackduck/hub-docker-inspector"
+kubectl cp "${targetImageDir}/${targetImageTarfile}" "${identifyPodName}:/opt/blackduck/hub-docker-inspector/target"
 
 #################################################################
-# Determine inspectOn image (jar on peekOnContainer)
+# Determine inspectOn image (jar on identifyOnContainer)
 #################################################################
 echo "--------------------------------------------------------------"
-echo "kube_wrapper.sh: Detecting target image package manager"
+echo "kube_wrapper.sh: Identifying target image package manager"
 echo "--------------------------------------------------------------"
-kubectl exec -it "${peekPodName}" -- \
+kubectl exec -it "${identifyPodName}" -- \
 	java -Dfile.encoding=UTF-8 -jar /opt/blackduck/hub-docker-inspector/hub-docker-inspector-5.0.0-SNAPSHOT.jar \
 	--on.host=false \
-	--determine.run.on.image.only=true \
+	--identify.pkg.mgr=true \
+	--inspect=false \
+	--inspect.in.container=false \
+	--upload.bdio=false \
 	--logging.level.com.blackducksoftware=INFO \
 	--docker.tar="/opt/blackduck/hub-docker-inspector/target/${targetImageTarfile}"
 
-kubectl cp "${peekPodName}:/opt/blackduck/hub-docker-inspector/output/result.json" "${outputDir}"
+kubectl cp "${identifyPodName}:/opt/blackduck/hub-docker-inspector/output/result.json" "${outputDir}"
 
 ls "${outputDir}"
 
@@ -137,6 +140,10 @@ echo "--------------------------------------------------------------"
 kubectl exec -it "${inspectPodName}" -- \
 	java -Dfile.encoding=UTF-8 -jar /opt/blackduck/hub-docker-inspector/hub-docker-inspector-5.0.0-SNAPSHOT.jar \
 	--on.host=false \
+	--identify.pkg.mgr=false \
+	--inspect=true \
+	--inspect.in.container=false \
+	--upload.bdio=false \
 	"--docker.tar=/opt/blackduck/hub-docker-inspector/target/${targetImageTarfile}"
 
 kubectl cp "${inspectPodName}:/opt/blackduck/hub-docker-inspector/output/${bdioFilename}" "${outputDir}"
@@ -150,8 +157,12 @@ echo "--------------------------------------------------------------"
 echo "kube_wrapper.sh: Uploading BDIO file (BOM) to Hub"
 echo "--------------------------------------------------------------"
 ./build/hub-docker-inspector.sh --jar.path=build/libs/hub-docker-inspector-5.0.0-SNAPSHOT.jar \
-	--upload.bdio.only=true \
-	--cleanup.working.dir=false \
+	--on.host=false \
+	--identify.pkg.mgr=false \
+	--inspect=false \
+	--inspect.in.container=false \
+	--upload.bdio=true \
+	--bdio.path="${outputDir}" \
 	--logging.level.com.blackducksoftware=INFO \
 	--output.path="${outputDir}" \
 	--hub.url=https://int-hub02.dc1.lan \

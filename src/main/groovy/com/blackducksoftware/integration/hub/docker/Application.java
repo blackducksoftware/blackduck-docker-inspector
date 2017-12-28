@@ -113,7 +113,7 @@ public class Application {
             }
             List<File> layerTars = null;
             List<ManifestLayerMapping> layerMappings = null;
-            if (config.isDetectPkgMgr() || config.isInspect()) {
+            if (config.isIdentifyPkgMgr() || config.isInspect()) {
                 dockerTarFile = deriveDockerTarFile();
                 layerTars = hubDockerManager.extractLayerTars(dockerTarFile);
                 layerMappings = hubDockerManager.getLayerMappings(dockerTarFile.getName(), config.getDockerImageRepo(), config.getDockerImageTag());
@@ -121,7 +121,7 @@ public class Application {
             }
             OperatingSystemEnum targetOsEnum = null;
             File targetImageFileSystemRootDir = null;
-            if (config.isDetectPkgMgr()) {
+            if (config.isIdentifyPkgMgr()) {
                 targetOsEnum = hubDockerManager.detectOperatingSystem(config.getLinuxDistro());
                 if (targetOsEnum == null) {
                     targetImageFileSystemRootDir = hubDockerManager.extractDockerLayers(layerTars, layerMappings);
@@ -129,7 +129,7 @@ public class Application {
                 }
                 runOnImageName = dockerImages.getDockerImageName(targetOsEnum);
                 runOnImageTag = dockerImages.getDockerImageVersion(targetOsEnum);
-                logger.info(String.format("Target OS: %s; corresponding inspection image: %s:%s", targetOsEnum.name(), runOnImageName, runOnImageTag));
+                logger.info(String.format("Identified target OS: %s; corresponding inspection image: %s:%s", targetOsEnum.name(), runOnImageName, runOnImageTag));
             }
             if (config.isInspect()) {
                 if (targetImageFileSystemRootDir == null) {
@@ -277,7 +277,7 @@ public class Application {
     private int reportResult(final String runOnImageName, final String runOnImageTag, final String dockerTarfilename, final String bdioFilename) throws HubIntegrationException {
         final Gson gson = new Gson();
         if (config.isOnHost()) {
-            if (config.isDetectPkgMgr() && !config.isInspect() && !config.isInspectInContainer()) {
+            if (config.isIdentifyPkgMgr() && !config.isInspect() && !config.isInspectInContainer()) {
                 if (StringUtils.isBlank(runOnImageName) || StringUtils.isBlank(runOnImageTag)) {
                     final String msg = "Failed to determine run-on image name and/or tag";
                     logger.error(msg);
@@ -310,7 +310,7 @@ public class Application {
 
     private List<File> findBdioFiles(final String pathToDirContainingBdio) {
         final List<File> bdioFiles = FileOperations.findFilesWithExt(new File(pathToDirContainingBdio), "jsonld");
-        logger.info(String.format("Found %d BDIO files produced by the container", bdioFiles.size()));
+        logger.info(String.format("Found %d BDIO files in %s", bdioFiles.size(), pathToDirContainingBdio));
         return bdioFiles;
     }
 
