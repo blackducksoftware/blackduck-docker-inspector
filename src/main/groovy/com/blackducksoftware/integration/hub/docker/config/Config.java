@@ -186,6 +186,10 @@ public class Config {
     @Value("${upload.bdio:true}")
     private Boolean uploadBdio = Boolean.TRUE;
 
+    @ValueDescription(description = "Path to directory containing BDIO file to upload", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${bdio.path:}")
+    private String bdioPath = "";
+
     // Environment Variables
     @Value("${BD_HUB_PASSWORD:}")
     private String hubPasswordEnvVar = "";
@@ -340,6 +344,10 @@ public class Config {
         return optionsByFieldName.get("outputPath").getResolvedValue();
     }
 
+    public String getBdioPath() {
+        return optionsByFieldName.get("bdioPath").getResolvedValue();
+    }
+
     public boolean isOutputIncludeDockertarfile() {
         return optionsByFieldName.get("outputIncludeDockertarfile").getResolvedValue().equals("true");
     }
@@ -480,5 +488,6 @@ public class Config {
         this.inspectInContainer = null;
         this.uploadBdio = null;
         this.detectPkgMgr = null;
+        this.bdioPath = null;
     }
 }

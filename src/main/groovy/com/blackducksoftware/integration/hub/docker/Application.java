@@ -101,14 +101,12 @@ public class Application {
         }
     }
 
-    // TODO this has gotten too complex and needs to be re-organized
-    // host-vs-container and which-function concerns should be separate
     @PostConstruct
     public void inspectImage() {
         String runOnImageName = null;
         String runOnImageTag = null;
         File dockerTarFile = null;
-        String bdioFilename = null; // TODO be consistent: init all 4 to null
+        String bdioFilename = null;
         try {
             if (!initAndValidate()) {
                 return;
@@ -132,6 +130,7 @@ public class Application {
                 }
                 runOnImageName = dockerImages.getDockerImageName(targetOsEnum);
                 runOnImageTag = dockerImages.getDockerImageVersion(targetOsEnum);
+                logger.info(String.format("Target OS: %s; corresponding inspection image: %s:%s", targetOsEnum.name(), runOnImageName, runOnImageTag));
             }
             if (config.isInspect()) {
                 if (targetImageFileSystemRootDir == null) {
@@ -146,10 +145,12 @@ public class Application {
                 logger.info(String.format("%d BDIO Files generated", bdioFiles.size()));
                 createContainerFileSystemTarIfRequested(targetImageFileSystemRootDir);
             } else if (config.isInspectInContainer()) {
+                logger.info("Inspecting image in container");
                 inspectInSubContainer(dockerTarFile, targetOsEnum, runOnImageName, runOnImageTag);
             }
             if (config.isUploadBdio()) {
-                bdioFilename = uploadBdioFiles(programPaths.getHubDockerOutputPath());
+                logger.info("Uploading BDIO to Hub");
+                bdioFilename = uploadBdioFiles();
             }
             provideDockerTarIfRequested(dockerTarFile);
             if (config.isOnHost() && (config.isInspect() || config.isInspectInContainer())) {
@@ -218,10 +219,10 @@ public class Application {
         }
         final File srcDir = new File(programPaths.getHubDockerOutputPathHost());
         if (!srcDir.exists()) {
-            logger.info(String.format("Dir %s does not exist", srcDir.getAbsolutePath()));
+            logger.info(String.format("Output source dir %s does not exist", srcDir.getAbsolutePath()));
             return;
         }
-        logger.debug(String.format("Copying output from %s to %s", programPaths.getHubDockerOutputPathHost(), userOutputDirPath));
+        logger.info(String.format("Copying output from %s to %s", programPaths.getHubDockerOutputPathHost(), userOutputDirPath));
         final File userOutputDir = new File(userOutputDirPath);
         ensureDirExists(userOutputDir);
         FileOperations.copyDirContentsToDir(programPaths.getHubDockerOutputPathHost(), userOutputDir.getAbsolutePath(), true);
@@ -250,8 +251,14 @@ public class Application {
         FileOperations.copyFile(new File(programPaths.getHubDockerResultPathHost()), userOutputDir);
     }
 
-    private String uploadBdioFiles(final String pathToDirContainingBdio) throws IntegrationException {
-        logger.debug(String.format("uploadBdioFiles(%s)", pathToDirContainingBdio));
+    private String uploadBdioFiles() throws IntegrationException {
+        String pathToDirContainingBdio = null;
+        if (StringUtils.isBlank(config.getBdioPath())) {
+            pathToDirContainingBdio = programPaths.getHubDockerOutputPath();
+        } else {
+            pathToDirContainingBdio = config.getBdioPath();
+        }
+        logger.debug(String.format("Uploading BDIO files from %s", pathToDirContainingBdio));
         String bdioFilename = null;
         final List<File> bdioFiles = findBdioFiles(pathToDirContainingBdio);
         if (bdioFiles.size() == 0) {

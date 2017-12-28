@@ -71,7 +71,7 @@ public class DockerImages {
         if (!initialized) {
             init();
         }
-        logger.info(String.format("getDockerImageName(%s)", targetImageOs));
+        logger.debug(String.format("getDockerImageName(%s)", targetImageOs));
         final DockerImage image = dockerImageMap.get(targetImageOs);
         if (image == null) {
             return null;
@@ -83,7 +83,7 @@ public class DockerImages {
         if (!initialized) {
             init();
         }
-        logger.info(String.format("getDockerImageVersion(%s)", targetImageOs));
+        logger.debug(String.format("getDockerImageVersion(%s)", targetImageOs));
         final DockerImage image = dockerImageMap.get(targetImageOs);
         if (image == null) {
             return null;

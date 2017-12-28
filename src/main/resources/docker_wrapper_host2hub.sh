@@ -59,6 +59,8 @@ inspectOnImageTag=$(fgrep inspectOnImageTag "${outputDir}/result.json" | cut -d'
 bdioFilename=$(fgrep bdioFilename "${outputDir}/result.json" | cut -d'"' -f4)
 
 echo "Docker image selected for target image inspection: ${inspectOnImageName}:${inspectOnImageTag}"
+rm -rf "${outputDir}"
+mkdir "${outputDir}"
 
 #################################################################
 # Get inspectOn image / start and setup inspectOn container (wrapper)
@@ -79,6 +81,7 @@ echo "--------------------------------------------------------------"
 docker exec "${inspectOnContainerName}" java -Dfile.encoding=UTF-8 -jar /opt/blackduck/hub-docker-inspector/hub-docker-inspector-5.0.0-SNAPSHOT.jar \
 	--on.host=false \
 	--inspect=true \
+	--upload.bdio=false \
 	--inspect.in.container=false \
 	--docker.tar="/opt/blackduck/hub-docker-inspector/target/${targetImageTarfile}"
 
@@ -91,10 +94,13 @@ echo "--------------------------------------------------------------"
 echo "docker_wrapper.sh: Uploading BDIO file (BOM) to Hub"
 echo "--------------------------------------------------------------"
 ./build/hub-docker-inspector.sh --jar.path=build/libs/hub-docker-inspector-5.0.0-SNAPSHOT.jar \
-	--upload.bdio.only=true \
+	--detect.pkg.mgr=false \
+	--inspect=false \
+	--inspect.in.container=false \
+	--upload.bdio=true \
 	--cleanup.working.dir=false \
 	--logging.level.com.blackducksoftware=INFO \
-	--output.path="${outputDir}" \
+	--bdio.path="${outputDir}" \
 	--hub.url=https://int-hub02.dc1.lan \
 	--hub.username=sysadmin \
 	--hub.password=blackduck
