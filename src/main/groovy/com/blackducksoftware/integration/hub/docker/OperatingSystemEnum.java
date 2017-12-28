@@ -29,7 +29,7 @@ public enum OperatingSystemEnum {
     DEBIAN("debian"),
     FEDORA("fedora"),
     UBUNTU("ubuntu"),
-    REDHAT("redhat"), // TODO: remove?
+    REDHAT("redhat"), // this may not be needed
     RHEL("redhat");
 
     private final String forge;

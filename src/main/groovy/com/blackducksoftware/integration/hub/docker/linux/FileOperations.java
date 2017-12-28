@@ -53,6 +53,7 @@ public class FileOperations {
     }
 
     public static void copyFile(final File fileToCopy, final File destination) throws IOException {
+        ensureDirExists(destination);
         final String filename = fileToCopy.getName();
         logger.debug(String.format("Copying %s to %s", fileToCopy.getAbsolutePath(), destination.getAbsolutePath()));
         final Path destPath = destination.toPath().resolve(filename);
@@ -93,5 +94,11 @@ public class FileOperations {
                 FileUtils.deleteQuietly(fileOrDir);
             }
         }
+    }
+
+    public static void ensureDirExists(final File dir) {
+        logger.debug(String.format("Creating %s (if it does not exist)", dir.getAbsoluteFile()));
+        final boolean mkdirsResult = dir.mkdirs();
+        logger.debug(String.format("\tmkdirs result: %b", mkdirsResult));
     }
 }

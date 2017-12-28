@@ -95,7 +95,6 @@ public class Config {
     private Long commandTimeout = 120000L;
 
     // Logging level: ERROR, WARN, INFO, DEBUG, TRACE
-    // TODO what about this logging level??
     @ValueDescription(description = "Logging Level (WARN, INFO, DEBUG, TRACE)", defaultValue = "INFO", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${logging.level.com.blackducksoftware:INFO}")
     private String loggingLevel = "";

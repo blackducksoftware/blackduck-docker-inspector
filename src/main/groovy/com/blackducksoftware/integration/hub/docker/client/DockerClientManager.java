@@ -69,6 +69,12 @@ public class DockerClientManager {
     private static final String IMAGE_REPO_PROPERTY = "docker.image.repo";
     private static final String IMAGE_TAG_PROPERTY = "docker.image.tag";
     private static final String ON_HOST_PROPERTY = "on.host";
+
+    private static String INSPECT_PROPERTY = "inspect"; // true
+    private static String INSPECT_IN_CONTAINER_PROPERTY = "inspect.in.container"; // false
+    private static String UPLOAD_BDIO_PROPERTY = "upload.bdio"; // false
+    private static String DETECT_PKG_MGR_PROPERTY = "detect.pkg.mgr"; // true
+
     private static final String OUTPUT_INCLUDE_DOCKER_TARFILE_PROPERTY = "output.include.dockertarfile";
     private static final String OUTPUT_INCLUDE_CONTAINER_FILE_SYSTEM_TARFILE_PROPERTY = "output.include.containerfilesystem";
     private final Logger logger = LoggerFactory.getLogger(DockerClientManager.class);
@@ -188,12 +194,6 @@ public class DockerClientManager {
         cmd.add(String.format("/opt/blackduck/hub-docker-inspector/%s", programPaths.getHubDockerJarFilenameHost()));
         cmd.add(String.format("--spring.config.location=%s", "/opt/blackduck/hub-docker-inspector/config/application.properties"));
         cmd.add(String.format("--docker.tar=%s", tarFilePathInSubContainer));
-        // TODO move these to application.properties?
-        cmd.add("--inspect=true");
-        cmd.add("--inspect.in.container=false");
-        cmd.add("--upload.bdio=false");
-        cmd.add("--detect.pkg.mgr=true");
-
         execCommandInContainer(dockerClient, imageId, containerId, cmd);
         copyFileFromContainer(containerId, programPaths.getHubDockerOutputPathContainer() + ".", programPaths.getHubDockerOutputPathHost());
         stopRemoveContainer(dockerClient, containerId);
@@ -246,6 +246,11 @@ public class DockerClientManager {
         hubDockerProperties.set(OUTPUT_INCLUDE_DOCKER_TARFILE_PROPERTY, "false");
         hubDockerProperties.set(OUTPUT_INCLUDE_CONTAINER_FILE_SYSTEM_TARFILE_PROPERTY, (new Boolean(config.isOutputIncludeContainerfilesystem())).toString());
         hubDockerProperties.set(ON_HOST_PROPERTY, "false");
+        hubDockerProperties.set(DETECT_PKG_MGR_PROPERTY, "true");
+        hubDockerProperties.set(INSPECT_PROPERTY, "true");
+        hubDockerProperties.set(INSPECT_IN_CONTAINER_PROPERTY, "false");
+        hubDockerProperties.set(UPLOAD_BDIO_PROPERTY, "false");
+
         final String pathToPropertiesFileForSubContainer = String.format("%s%s", programPaths.getHubDockerTargetDirPathHost(), ProgramPaths.APPLICATION_PROPERTIES_FILENAME);
         hubDockerProperties.save(pathToPropertiesFileForSubContainer);
 

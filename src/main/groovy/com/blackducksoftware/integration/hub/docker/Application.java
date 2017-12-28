@@ -130,6 +130,9 @@ public class Application {
                 runOnImageName = dockerImages.getDockerImageName(targetOsEnum);
                 runOnImageTag = dockerImages.getDockerImageVersion(targetOsEnum);
                 logger.info(String.format("Identified target OS: %s; corresponding inspection image: %s:%s", targetOsEnum.name(), runOnImageName, runOnImageTag));
+                if (StringUtils.isBlank(runOnImageName) || StringUtils.isBlank(runOnImageTag)) {
+                    throw new HubIntegrationException("Failed to identify inspection image name and/or tag");
+                }
             }
             if (config.isInspect()) {
                 if (targetImageFileSystemRootDir == null) {
@@ -224,17 +227,9 @@ public class Application {
         }
         logger.info(String.format("Copying output from %s to %s", programPaths.getHubDockerOutputPathHost(), userOutputDirPath));
         final File userOutputDir = new File(userOutputDirPath);
-        ensureDirExists(userOutputDir);
         FileOperations.copyDirContentsToDir(programPaths.getHubDockerOutputPathHost(), userOutputDir.getAbsolutePath(), true);
     }
 
-    private void ensureDirExists(final File dir) {
-        logger.debug(String.format("Creating %s (if it does not exist)", dir.getAbsoluteFile()));
-        final boolean mkdirsResult = dir.mkdirs();
-        logger.debug(String.format("\tmkdirs result: %b", mkdirsResult));
-    }
-
-    // TODO eliminate redundancy between these two methods
     private void copyResultToUserOutputDir() throws IOException {
         final String userOutputDirPath = programPaths.getUserOutputDir();
         if (userOutputDirPath == null) {
@@ -244,7 +239,6 @@ public class Application {
         logger.debug(String.format("Copying result file from %s to %s", programPaths.getHubDockerResultPathHost(), userOutputDirPath));
         final File sourceResultFile = new File(programPaths.getHubDockerResultPathHost());
         final File userOutputDir = new File(userOutputDirPath);
-        ensureDirExists(userOutputDir);
         final File targetFile = new File(userOutputDir, sourceResultFile.getName());
         logger.debug(String.format("Removing %s if it exists", targetFile.getAbsolutePath()));
         FileOperations.removeFileOrDirQuietly(targetFile.getAbsolutePath());
@@ -273,22 +267,9 @@ public class Application {
         return bdioFilename;
     }
 
-    // TODO this has gotten too complex
     private int reportResult(final String runOnImageName, final String runOnImageTag, final String dockerTarfilename, final String bdioFilename) throws HubIntegrationException {
         final Gson gson = new Gson();
-        if (config.isOnHost()) {
-            if (config.isIdentifyPkgMgr() && !config.isInspect() && !config.isInspectInContainer()) {
-                if (StringUtils.isBlank(runOnImageName) || StringUtils.isBlank(runOnImageTag)) {
-                    final String msg = "Failed to determine run-on image name and/or tag";
-                    logger.error(msg);
-                    resultFile.write(gson, false, msg, runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename);
-                    return -1;
-                } else {
-                    return reportSuccess(runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename, gson);
-                }
-            } else if (config.isUploadBdio() && !config.isInspect() && !config.isInspectInContainer()) {
-                return reportSuccess(runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename, gson);
-            }
+        if (config.isOnHost() && config.isInspectInContainer()) {
             final Result resultReportedFromContainer = resultFile.read(gson);
             if (!resultReportedFromContainer.isSucceeded()) {
                 logger.error(String.format("*** Failed: %s", resultReportedFromContainer.getMessage()));
@@ -298,14 +279,9 @@ public class Application {
                 return 0;
             }
         } else {
-            return reportSuccess(runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename, gson);
+            resultFile.write(gson, true, "Success", runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename);
+            return 0;
         }
-    }
-
-    // TODO gson should be first
-    private int reportSuccess(final String runOnImageName, final String runOnImageTag, final String dockerTarfilename, final String bdioFilename, final Gson gson) {
-        resultFile.write(gson, true, "Success", runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename);
-        return 0;
     }
 
     private List<File> findBdioFiles(final String pathToDirContainingBdio) {
@@ -328,7 +304,6 @@ public class Application {
             if (config.isOnHost()) {
                 final File outputDirectory = new File(programPaths.getHubDockerOutputPathHost());
                 logger.debug(String.format("Copying %s to output dir %s", dockerTarFile.getAbsolutePath(), outputDirectory.getAbsolutePath()));
-                ensureDirExists(outputDirectory); // TODO FileOperations should do this
                 FileOperations.copyFile(dockerTarFile, outputDirectory);
             } else {
                 final File outputDirectory = new File(programPaths.getHubDockerOutputPathContainer());
