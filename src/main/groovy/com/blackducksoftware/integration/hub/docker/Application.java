@@ -111,7 +111,6 @@ public class Application {
             if (!initAndValidate()) {
                 return;
             }
-
             List<File> layerTars = null;
             List<ManifestLayerMapping> layerMappings = null;
             if (config.isDetectPkgMgr() || config.isInspect()) {
@@ -143,6 +142,7 @@ public class Application {
                 final List<File> bdioFiles = hubDockerManager.generateBdioFromImageFilesDir(config.getDockerImageRepo(), config.getDockerImageTag(), layerMappings, getHubProjectName(), getHubProjectVersion(), dockerTarFile,
                         targetImageFileSystemRootDir, targetOsEnum);
                 logger.info(String.format("%d BDIO Files generated", bdioFiles.size()));
+                bdioFilename = bdioFiles.size() == 1 ? bdioFiles.get(0).getName() : null;
                 createContainerFileSystemTarIfRequested(targetImageFileSystemRootDir);
             } else if (config.isInspectInContainer()) {
                 logger.info("Inspecting image in container");
