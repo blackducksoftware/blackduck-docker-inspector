@@ -99,8 +99,8 @@ kubectl exec -it "${identifyPodName}" -- \
 	--logging.level.com.blackducksoftware=INFO \
 	--docker.tar="/opt/blackduck/hub-docker-inspector/target/${targetImageTarfile}"
 
-echo kubectl cp "${identifyPodName}:/opt/blackduck/hub-docker-inspector/output/result.json" "${outputDir}"
-kubectl cp "${identifyPodName}:/opt/blackduck/hub-docker-inspector/output/result.json" "${outputDir}"
+echo kubectl cp --container="${identifyOnContainerName}" "${identifyPodName}:/opt/blackduck/hub-docker-inspector/output/result.json" "${outputDir}"
+kubectl cp --container="${identifyOnContainerName}" "${identifyPodName}:/opt/blackduck/hub-docker-inspector/output/result.json" "${outputDir}"
 
 ls "${outputDir}"
 
@@ -145,8 +145,8 @@ if [ "${inspectOnPodStatus}" != "Running" ]; then
 fi
 echo "inspectOnPod ${inspectPodName}, is running"
 
-kubectl cp build/libs/hub-docker-inspector-5.0.0-SNAPSHOT.jar "${inspectPodName}:/opt/blackduck/hub-docker-inspector"
-kubectl cp "${targetImageDir}/${targetImageTarfile}" "${inspectPodName}:/opt/blackduck/hub-docker-inspector/target"
+kubectl cp --container="${inspectOnContainerName}" build/libs/hub-docker-inspector-5.0.0-SNAPSHOT.jar "${inspectPodName}:/opt/blackduck/hub-docker-inspector"
+kubectl cp --container="${inspectOnContainerName}" "${targetImageDir}/${targetImageTarfile}" "${inspectPodName}:/opt/blackduck/hub-docker-inspector/target"
 
 #################################################################
 # Inspect (jar in container)
@@ -168,12 +168,12 @@ kubectl exec -it "${inspectPodName}" -- \
 kubectl exec -it "${inspectPodName}" -- \
 	ls -lrt /opt/blackduck/hub-docker-inspector/output
 	
-echo kubectl cp "${inspectPodName}:/opt/blackduck/hub-docker-inspector/output/result.json" "${outputDir}"
-kubectl cp "${inspectPodName}:/opt/blackduck/hub-docker-inspector/output/result.json" "${outputDir}"
+echo kubectl cp --container="${inspectOnContainerName}" "${inspectPodName}:/opt/blackduck/hub-docker-inspector/output/result.json" "${outputDir}"
+kubectl cp --container="${inspectOnContainerName}" "${inspectPodName}:/opt/blackduck/hub-docker-inspector/output/result.json" "${outputDir}"
 bdioFilename=$(fgrep bdioFilename "${outputDir}/result.json" | cut -d'"' -f4)
 bdioFilePath="${outputDir}/${bdioFilename}"
-echo kubectl cp "${inspectPodName}:/opt/blackduck/hub-docker-inspector/output/${bdioFilename}" "${outputDir}"
-kubectl cp "${inspectPodName}:/opt/blackduck/hub-docker-inspector/output/${bdioFilename}" "${outputDir}"
+echo kubectl cp --container="${inspectOnContainerName}" "${inspectPodName}:/opt/blackduck/hub-docker-inspector/output/${bdioFilename}" "${outputDir}"
+kubectl cp --container="${inspectOnContainerName}" "${inspectPodName}:/opt/blackduck/hub-docker-inspector/output/${bdioFilename}" "${outputDir}"
 echo "BDIO file: ${bdioFilePath}"
 ls -l "${bdioFilePath}"
 
@@ -214,8 +214,8 @@ if [ "${uploadOnPodStatus}" != "Running" ]; then
 	exit -1
 fi
 echo "uploadOnPod ${uploadPodName}, is running"
-kubectl cp build/libs/hub-docker-inspector-5.0.0-SNAPSHOT.jar "${uploadPodName}:/opt/blackduck/hub-docker-inspector"
-kubectl cp "${bdioFilePath}" "${uploadPodName}:/opt/blackduck/hub-docker-inspector/output"
+kubectl cp --container="${uploadOnContainerName}" build/libs/hub-docker-inspector-5.0.0-SNAPSHOT.jar "${uploadPodName}:/opt/blackduck/hub-docker-inspector"
+kubectl cp --container="${uploadOnContainerName}" "${bdioFilePath}" "${uploadPodName}:/opt/blackduck/hub-docker-inspector/output"
 kubectl exec -it "${uploadPodName}" -- \
 	java -Dfile.encoding=UTF-8 -jar /opt/blackduck/hub-docker-inspector/hub-docker-inspector-5.0.0-SNAPSHOT.jar \
 	--on.host=false \
