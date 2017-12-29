@@ -8,7 +8,6 @@ targetImageDir=/tmp
 targetImageTarfile=savedimage.tar
 outputDir=/tmp/hub-docker-inspector-output
 identifyOnContainerName=hub-docker-inspector-identify
-inspectOnContainerName=hub-docker-inspector-inspect
 uploadOnContainerName=hub-docker-inspector-upload
 
 identifyOnImageName=blackducksoftware/hub-docker-inspector-alpine
@@ -110,6 +109,8 @@ inspectOnImageTag=$(fgrep inspectOnImageTag "${outputDir}/result.json" | cut -d'
 bdioFilename=$(fgrep bdioFilename "${outputDir}/result.json" | cut -d'"' -f4)
 
 echo "Docker image selected for target image inspection: ${inspectOnImageName}:${inspectOnImageTag} (OS name: ${inspectOnOsName})"
+
+inspectOnContainerName="hub-docker-inspector-${inspectOnOsName}"
 
 #################################################################
 # Get inspectOn image / start and setup inspectOn container (wrapper)
