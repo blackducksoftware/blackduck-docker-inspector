@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.docker.ProgramPaths;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.google.gson.Gson;
@@ -37,8 +38,9 @@ public class ResultFile {
         return result;
     }
 
-    public void write(final Gson gson, final boolean succeeded, final String msg, final String runOnImageName, final String runOnImageTag, final String dockerTarfilename, final String bdioFilename) {
-        final Result result = new Result(succeeded, msg, runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename);
+    public void write(final Gson gson, final boolean succeeded, final String msg, final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag, final String dockerTarfilename, final String bdioFilename) {
+        final String runOnOsName = targetOs == null ? "" : targetOs.name().toLowerCase();
+        final Result result = new Result(succeeded, msg, runOnOsName, runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename);
         try {
             final File outputDirectory = new File(programPaths.getHubDockerOutputPath());
             outputDirectory.mkdirs();

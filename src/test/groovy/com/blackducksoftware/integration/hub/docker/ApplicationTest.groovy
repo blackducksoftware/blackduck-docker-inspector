@@ -65,7 +65,7 @@ class ApplicationTest {
         ] as ProgramPaths
         app.programPaths = mockedProgramPaths
         app.resultFile = [
-            write: { final Gson gson, final boolean succeeded, final String msg, final String imageName, final String imageTag, final String dockerTarfilename, final String bdioFilename ->
+            write: { final Gson gson, final boolean succeeded, final String msg, final OperatingSystemEnum targetOs, final String imageName, final String imageTag, final String dockerTarfilename, final String bdioFilename ->
             }
         ] as ResultFile
 

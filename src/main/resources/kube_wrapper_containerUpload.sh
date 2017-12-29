@@ -104,11 +104,12 @@ kubectl cp --container="${identifyOnContainerName}" "${identifyPodName}:/opt/bla
 
 ls "${outputDir}"
 
+inspectOnOsName=$(fgrep inspectOnOsName "${outputDir}/result.json" | cut -d'"' -f4)
 inspectOnImageName=$(fgrep inspectOnImageName "${outputDir}/result.json" | cut -d'"' -f4)
 inspectOnImageTag=$(fgrep inspectOnImageTag "${outputDir}/result.json" | cut -d'"' -f4)
 bdioFilename=$(fgrep bdioFilename "${outputDir}/result.json" | cut -d'"' -f4)
 
-echo "Docker image selected for target image inspection: ${inspectOnImageName}:${inspectOnImageTag}"
+echo "Docker image selected for target image inspection: ${inspectOnImageName}:${inspectOnImageTag} (OS name: ${inspectOnOsName})"
 
 #################################################################
 # Get inspectOn image / start and setup inspectOn container (wrapper)
@@ -223,7 +224,7 @@ kubectl exec -it "${uploadPodName}" -- \
 	--inspect=false \
 	--inspect.in.container=false \
 	--upload.bdio=true \
-	--bdio.path="/opt/blackduck/hub-docker-inspector/output/${bdioFilename}" \
+	--bdio.path="/opt/blackduck/hub-docker-inspector/output" \
 	--logging.level.com.blackducksoftware=INFO \
 	--hub.url=https://int-hub02.dc1.lan \
 	--hub.username=sysadmin \

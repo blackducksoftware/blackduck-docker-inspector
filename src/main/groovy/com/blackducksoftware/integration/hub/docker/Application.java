@@ -107,6 +107,7 @@ public class Application {
         String runOnImageTag = null;
         File dockerTarFile = null;
         String bdioFilename = null;
+        OperatingSystemEnum targetOs = null;
         try {
             if (!initAndValidate()) {
                 return;
@@ -119,17 +120,17 @@ public class Application {
                 layerMappings = hubDockerManager.getLayerMappings(dockerTarFile.getName(), config.getDockerImageRepo(), config.getDockerImageTag());
                 fillInMissingImageNameTagFromManifest(layerMappings);
             }
-            OperatingSystemEnum targetOsEnum = null;
+
             File targetImageFileSystemRootDir = null;
             if (config.isIdentifyPkgMgr()) {
-                targetOsEnum = hubDockerManager.detectOperatingSystem(config.getLinuxDistro());
-                if (targetOsEnum == null) {
+                targetOs = hubDockerManager.detectOperatingSystem(config.getLinuxDistro());
+                if (targetOs == null) {
                     targetImageFileSystemRootDir = hubDockerManager.extractDockerLayers(layerTars, layerMappings);
-                    targetOsEnum = hubDockerManager.detectOperatingSystem(targetImageFileSystemRootDir);
+                    targetOs = hubDockerManager.detectOperatingSystem(targetImageFileSystemRootDir);
                 }
-                runOnImageName = dockerImages.getDockerImageName(targetOsEnum);
-                runOnImageTag = dockerImages.getDockerImageVersion(targetOsEnum);
-                logger.info(String.format("Identified target OS: %s; corresponding inspection image: %s:%s", targetOsEnum.name(), runOnImageName, runOnImageTag));
+                runOnImageName = dockerImages.getDockerImageName(targetOs);
+                runOnImageTag = dockerImages.getDockerImageVersion(targetOs);
+                logger.info(String.format("Identified target OS: %s; corresponding inspection image: %s:%s", targetOs.name(), runOnImageName, runOnImageTag));
                 if (StringUtils.isBlank(runOnImageName) || StringUtils.isBlank(runOnImageTag)) {
                     throw new HubIntegrationException("Failed to identify inspection image name and/or tag");
                 }
@@ -138,18 +139,18 @@ public class Application {
                 if (targetImageFileSystemRootDir == null) {
                     targetImageFileSystemRootDir = hubDockerManager.extractDockerLayers(layerTars, layerMappings);
                 }
-                if (targetOsEnum == null) {
-                    targetOsEnum = hubDockerManager.detectOperatingSystem(targetImageFileSystemRootDir);
+                if (targetOs == null) {
+                    targetOs = hubDockerManager.detectOperatingSystem(targetImageFileSystemRootDir);
                 }
-                logger.info(String.format("Target image tarfile: %s; target OS: %s", dockerTarFile.getAbsolutePath(), targetOsEnum.toString()));
+                logger.info(String.format("Target image tarfile: %s; target OS: %s", dockerTarFile.getAbsolutePath(), targetOs.toString()));
                 final List<File> bdioFiles = hubDockerManager.generateBdioFromImageFilesDir(config.getDockerImageRepo(), config.getDockerImageTag(), layerMappings, getHubProjectName(), getHubProjectVersion(), dockerTarFile,
-                        targetImageFileSystemRootDir, targetOsEnum);
+                        targetImageFileSystemRootDir, targetOs);
                 logger.info(String.format("%d BDIO Files generated", bdioFiles.size()));
                 bdioFilename = bdioFiles.size() == 1 ? bdioFiles.get(0).getName() : null;
                 createContainerFileSystemTarIfRequested(targetImageFileSystemRootDir);
             } else if (config.isInspectInContainer()) {
                 logger.info("Inspecting image in container");
-                inspectInSubContainer(dockerTarFile, targetOsEnum, runOnImageName, runOnImageTag);
+                inspectInSubContainer(dockerTarFile, targetOs, runOnImageName, runOnImageTag);
             }
             if (config.isUploadBdio()) {
                 logger.info("Uploading BDIO to Hub");
@@ -159,7 +160,7 @@ public class Application {
             if (config.isOnHost() && (config.isInspect() || config.isInspectInContainer())) {
                 copyOutputToUserOutputDir();
             }
-            returnCode = reportResult(runOnImageName, runOnImageTag, dockerTarFile == null ? "" : dockerTarFile.getName(), bdioFilename);
+            returnCode = reportResult(targetOs, runOnImageName, runOnImageTag, dockerTarFile == null ? "" : dockerTarFile.getName(), bdioFilename);
             if (config.isOnHost()) {
                 copyResultToUserOutputDir();
             }
@@ -171,7 +172,7 @@ public class Application {
             logger.error(msg);
             final String trace = ExceptionUtils.getStackTrace(e);
             logger.debug(String.format("Stack trace: %s", trace));
-            resultFile.write(new Gson(), false, msg, runOnImageName, runOnImageTag, dockerTarFile == null ? "" : dockerTarFile.getName(), bdioFilename);
+            resultFile.write(new Gson(), false, msg, targetOs, runOnImageName, runOnImageTag, dockerTarFile == null ? "" : dockerTarFile.getName(), bdioFilename);
         }
     }
 
@@ -267,7 +268,7 @@ public class Application {
         return bdioFilename;
     }
 
-    private int reportResult(final String runOnImageName, final String runOnImageTag, final String dockerTarfilename, final String bdioFilename) throws HubIntegrationException {
+    private int reportResult(final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag, final String dockerTarfilename, final String bdioFilename) throws HubIntegrationException {
         final Gson gson = new Gson();
         if (config.isOnHost() && config.isInspectInContainer()) {
             final Result resultReportedFromContainer = resultFile.read(gson);
@@ -279,7 +280,7 @@ public class Application {
                 return 0;
             }
         } else {
-            resultFile.write(gson, true, "Success", runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename);
+            resultFile.write(gson, true, "Success", targetOs, runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename);
             return 0;
         }
     }
@@ -324,10 +325,10 @@ public class Application {
         }
     }
 
-    private void inspectInSubContainer(final File dockerTarFile, final OperatingSystemEnum targetOsEnum, final String runOnImageName, final String runOnImageTag)
+    private void inspectInSubContainer(final File dockerTarFile, final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag)
             throws InterruptedException, IOException, HubIntegrationException, IllegalArgumentException, IllegalAccessException {
 
-        final String msg = String.format("Image inspection for %s will use docker image %s:%s", targetOsEnum.toString(), runOnImageName, runOnImageTag);
+        final String msg = String.format("Image inspection for %s will use docker image %s:%s", targetOs.toString(), runOnImageName, runOnImageTag);
         logger.info(msg);
         try {
             dockerClientManager.pullImage(runOnImageName, runOnImageTag);
