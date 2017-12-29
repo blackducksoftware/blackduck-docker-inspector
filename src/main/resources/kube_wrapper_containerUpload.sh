@@ -8,17 +8,30 @@ targetImageDir=/tmp
 targetImageTarfile=savedimage.tar
 outputDir=/tmp/hub-docker-inspector-output
 identifyOnContainerName=hub-docker-inspector-identify
-identifyOnImageName=blackducksoftware/hub-docker-inspector-alpine
-identifyOnImageTag=4.1.0
 inspectOnContainerName=hub-docker-inspector-inspect
 uploadOnContainerName=hub-docker-inspector-upload
 
-minikube start
-eval $(minikube docker-env)
+identifyOnImageName=blackducksoftware/hub-docker-inspector-alpine
+identifyOnImageTag=4.1.0
 
+
+function ensureKubeRunning() {
+	kubeRunning=$(minikube status | grep "minikube: Running" | wc -l)
+	if [[ ${kubeRunning} -eq 0 ]]; then
+		echo "Starting minikube"
+		minikube start
+	else
+		echo "minikube is already running"
+	fi
+	eval $(minikube docker-env)
+}
+
+ensureKubeRunning
 rm -rf "${outputDir}"
 mkdir "${outputDir}"
 rm -f "${targetImageDir}/${targetImageTarfile}"
+
+kubectl get pods
 
 #################################################################
 # Pull/save target image (wrapper)
@@ -65,8 +78,8 @@ if [ "${identifyOnPodStatus}" != "Running" ]; then
 fi
 echo "identifyOnPod ${identifyPodName}, is running"
 
-kubectl cp build/libs/hub-docker-inspector-5.0.0-SNAPSHOT.jar "${identifyPodName}:/opt/blackduck/hub-docker-inspector"
-kubectl cp "${targetImageDir}/${targetImageTarfile}" "${identifyPodName}:/opt/blackduck/hub-docker-inspector/target"
+kubectl cp --container="${identifyOnContainerName}" build/libs/hub-docker-inspector-5.0.0-SNAPSHOT.jar "${identifyPodName}:/opt/blackduck/hub-docker-inspector"
+kubectl cp --container="${identifyOnContainerName}" "${targetImageDir}/${targetImageTarfile}" "${identifyPodName}:/opt/blackduck/hub-docker-inspector/target"
 
 #################################################################
 # Determine inspectOn image (jar on identifyOnContainer)
@@ -74,6 +87,8 @@ kubectl cp "${targetImageDir}/${targetImageTarfile}" "${identifyPodName}:/opt/bl
 echo "--------------------------------------------------------------"
 echo "kube_wrapper.sh: Identifying target image package manager"
 echo "--------------------------------------------------------------"
+rm -rf "${outputDir}"
+mkdir "${outputDir}"
 kubectl exec -it "${identifyPodName}" -- \
 	java -Dfile.encoding=UTF-8 -jar /opt/blackduck/hub-docker-inspector/hub-docker-inspector-5.0.0-SNAPSHOT.jar \
 	--on.host=false \
@@ -84,6 +99,7 @@ kubectl exec -it "${identifyPodName}" -- \
 	--logging.level.com.blackducksoftware=INFO \
 	--docker.tar="/opt/blackduck/hub-docker-inspector/target/${targetImageTarfile}"
 
+echo kubectl cp "${identifyPodName}:/opt/blackduck/hub-docker-inspector/output/result.json" "${outputDir}"
 kubectl cp "${identifyPodName}:/opt/blackduck/hub-docker-inspector/output/result.json" "${outputDir}"
 
 ls "${outputDir}"
@@ -138,6 +154,8 @@ kubectl cp "${targetImageDir}/${targetImageTarfile}" "${inspectPodName}:/opt/bla
 echo "--------------------------------------------------------------"
 echo "kube_wrapper.sh: Target image inspection"
 echo "--------------------------------------------------------------"
+rm -rf "${outputDir}"
+mkdir "${outputDir}"
 kubectl exec -it "${inspectPodName}" -- \
 	java -Dfile.encoding=UTF-8 -jar /opt/blackduck/hub-docker-inspector/hub-docker-inspector-5.0.0-SNAPSHOT.jar \
 	--on.host=false \
@@ -147,15 +165,23 @@ kubectl exec -it "${inspectPodName}" -- \
 	--upload.bdio=false \
 	"--docker.tar=/opt/blackduck/hub-docker-inspector/target/${targetImageTarfile}"
 
-kubectl cp "${inspectOnPodName}:/opt/blackduck/hub-docker-inspector/output/result.json" "${outputDir}"
+kubectl exec -it "${inspectPodName}" -- \
+	ls -lrt /opt/blackduck/hub-docker-inspector/output
+	
+echo kubectl cp "${inspectPodName}:/opt/blackduck/hub-docker-inspector/output/result.json" "${outputDir}"
+kubectl cp "${inspectPodName}:/opt/blackduck/hub-docker-inspector/output/result.json" "${outputDir}"
 bdioFilename=$(fgrep bdioFilename "${outputDir}/result.json" | cut -d'"' -f4)
 bdioFilePath="${outputDir}/${bdioFilename}"
+echo kubectl cp "${inspectPodName}:/opt/blackduck/hub-docker-inspector/output/${bdioFilename}" "${outputDir}"
 kubectl cp "${inspectPodName}:/opt/blackduck/hub-docker-inspector/output/${bdioFilename}" "${outputDir}"
 echo "BDIO file: ${bdioFilePath}"
+ls -l "${bdioFilePath}"
 
 #################################################################
 # Upload BDIO (jar on host)
-# (Or, simply set --upload.bdio=true in the inspect phase)
+# Or, simply set --upload.bdio=true in the inspect phase.
+# Or, run the .jar directly on this machine, similar to below
+# but with --on.host=true and --bdio.path pointing to local dir.
 #################################################################
 echo "--------------------------------------------------------------"
 echo "kube_wrapper.sh: Uploading BDIO file (BOM) to Hub"
@@ -208,7 +234,10 @@ kubectl exec -it "${uploadPodName}" -- \
 # Clean up minikube VM (wrapper)
 #################################################################
 echo "--------------------------------------------------------------"
-echo "kube_wrapper.sh: Stopping/removing minikube"
+echo "kube_wrapper.sh: Deleting deployments"
 echo "--------------------------------------------------------------"
-minikube stop
-minikube delete
+kubectl get pods
+kubectl delete deployment "${identifyOnContainerName}"
+kubectl delete deployment "${inspectOnContainerName}"
+kubectl delete deployment "${uploadOnContainerName}"
+kubectl get pods
