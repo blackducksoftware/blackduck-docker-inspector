@@ -25,6 +25,39 @@ function ensureKubeRunning() {
 	eval $(minikube docker-env)
 }
 
+function waitForPodToStart() {
+	newContainerName=$1
+	newPodName=""
+	
+	echo "Pausing to give the new pod for container ${newContainerName} time to start..."
+	sleep 15
+	newPodName=$(kubectl get pods | grep "${newContainerName}"  | tr -s " " | cut -d' ' -f1)
+	echo "newPodName: ${newPodName}"
+
+	podIsRunning=false
+	counter=0
+	while [[ $counter -lt 10 ]]; do
+		echo the counter is $counter
+		kubectl get pods
+		newPodStatus=$(kubectl get pods | grep "${newContainerName}"  | tr -s " " | cut -d' ' -f3)
+		echo "newPodStatus: ${newPodStatus}"
+		if [ "${newPodStatus}" == "Running" ]; then
+			echo "The new pod running container ${newContainerName} is ready"
+			break
+		else
+			echo "The new pod is NOT ready"
+		fi
+		echo "Pausing to give the new pod time to start..."
+		sleep 10
+		counter=$((counter+1))
+	done
+	if [ "${newPodStatus}" != "Running" ]; then
+		echo "The new pod for container ${newContainerName} never started!"
+		exit -1
+	fi
+	echo "New Pod ${newPodName}, is running container ${newContainerName}"
+}
+
 ensureKubeRunning
 rm -rf "${outputDir}"
 mkdir "${outputDir}"
@@ -49,33 +82,8 @@ echo "--------------------------------------------------------------"
 echo "kube_wrapper.sh: Starting container for target image package manager identification"
 echo "--------------------------------------------------------------"
 kubectl run "${identifyOnContainerName}" --image="${identifyOnImageName}:${identifyOnImageTag}" --command -- tail -f /dev/null
-echo "Pausing to give the identifyOn pod time to start..."
-sleep 10
-identifyPodName=$(kubectl get pods | grep "${identifyOnContainerName}"  | tr -s " " | cut -d' ' -f1)
-echo "identifyPodName: ${identifyPodName}"
-
-podIsRunning=false
-counter=0
-while [[ $counter -lt 30 ]]; do
-	echo the counter is $counter
-	kubectl get pods
-	identifyOnPodStatus=$(kubectl get pods | grep "${identifyOnContainerName}"  | tr -s " " | cut -d' ' -f3)
-	echo "identifyOnPodStatus: ${identifyOnPodStatus}"
-	if [ "${identifyOnPodStatus}" == "Running" ]; then
-		echo "The identifyOn pod is ready"
-		break
-	else
-		echo "The identifyOn pod is NOT ready"
-	fi
-	echo "Pausing to give the identifyOn pod time to start..."
-	sleep 10
-	count=$((count+1))
-done
-if [ "${identifyOnPodStatus}" != "Running" ]; then
-	echo "identifyOn pod never started!"
-	exit -1
-fi
-echo "identifyOnPod ${identifyPodName}, is running"
+waitForPodToStart "${identifyOnContainerName}"
+identifyPodName="${newPodName}"
 
 kubectl cp --container="${identifyOnContainerName}" build/libs/hub-docker-inspector-5.0.0-SNAPSHOT.jar "${identifyPodName}:/opt/blackduck/hub-docker-inspector"
 kubectl cp --container="${identifyOnContainerName}" "${targetImageDir}/${targetImageTarfile}" "${identifyPodName}:/opt/blackduck/hub-docker-inspector/target"
@@ -119,33 +127,8 @@ echo "--------------------------------------------------------------"
 echo "kube_wrapper.sh: Starting container for target image inspection"
 echo "--------------------------------------------------------------"
 kubectl run "${inspectOnContainerName}" --image="${inspectOnImageName}:${inspectOnImageTag}" --command -- tail -f /dev/null
-echo "Pausing to give the inspectOn pod time to start..."
-sleep 10
-inspectPodName=$(kubectl get pods | grep "${inspectOnContainerName}"  | tr -s " " | cut -d' ' -f1)
-echo "inspectPodName: ${inspectPodName}"
-
-podIsRunning=false
-counter=0
-while [[ $counter -lt 10 ]]; do
-	echo the counter is $counter
-	kubectl get pods
-	inspectOnPodStatus=$(kubectl get pods | grep "${inspectOnContainerName}"  | tr -s " " | cut -d' ' -f3)
-	echo "inspectOnPodStatus: ${inspectOnPodStatus}"
-	if [ "${inspectOnPodStatus}" == "Running" ]; then
-		echo "The inspectOn pod is ready"
-		break
-	else
-		echo "The inspectOn pod is NOT ready"
-	fi
-	echo "Pausing to give the inspectOn pod time to start..."
-	sleep 10
-	counter=$((counter+1))
-done
-if [ "${inspectOnPodStatus}" != "Running" ]; then
-	echo "inspectOn pod never started!"
-	exit -1
-fi
-echo "inspectOnPod ${inspectPodName}, is running"
+waitForPodToStart "${inspectOnContainerName}"
+inspectPodName="${newPodName}"
 
 kubectl cp --container="${inspectOnContainerName}" build/libs/hub-docker-inspector-5.0.0-SNAPSHOT.jar "${inspectPodName}:/opt/blackduck/hub-docker-inspector"
 kubectl cp --container="${inspectOnContainerName}" "${targetImageDir}/${targetImageTarfile}" "${inspectPodName}:/opt/blackduck/hub-docker-inspector/target"
@@ -189,33 +172,9 @@ echo "--------------------------------------------------------------"
 echo "kube_wrapper.sh: Uploading BDIO file (BOM) to Hub"
 echo "--------------------------------------------------------------"
 kubectl run "${uploadOnContainerName}" --image="${inspectOnImageName}:${inspectOnImageTag}" --command -- tail -f /dev/null
-echo "Pausing to give the uploadOn pod time to start..."
-sleep 10
-uploadPodName=$(kubectl get pods | grep "${uploadOnContainerName}"  | tr -s " " | cut -d' ' -f1)
-echo "uploadPodName: ${uploadPodName}"
+waitForPodToStart "${uploadOnContainerName}"
+uploadPodName="${newPodName}"
 
-podIsRunning=false
-counter=0
-while [[ $counter -lt 10 ]]; do
-	echo the counter is $counter
-	kubectl get pods
-	uploadOnPodStatus=$(kubectl get pods | grep "${uploadOnContainerName}"  | tr -s " " | cut -d' ' -f3)
-	echo "uploadOnPodStatus: ${uploadOnPodStatus}"
-	if [ "${uploadOnPodStatus}" == "Running" ]; then
-		echo "The uploadOn pod is ready"
-		break
-	else
-		echo "The uploadOn pod is NOT ready"
-	fi
-	echo "Pausing to give the uploadOn pod time to start..."
-	sleep 10
-	counter=$((counter+1))
-done
-if [ "${uploadOnPodStatus}" != "Running" ]; then
-	echo "uploadOn pod never started!"
-	exit -1
-fi
-echo "uploadOnPod ${uploadPodName}, is running"
 kubectl cp --container="${uploadOnContainerName}" build/libs/hub-docker-inspector-5.0.0-SNAPSHOT.jar "${uploadPodName}:/opt/blackduck/hub-docker-inspector"
 kubectl cp --container="${uploadOnContainerName}" "${bdioFilePath}" "${uploadPodName}:/opt/blackduck/hub-docker-inspector/output"
 kubectl exec -it "${uploadPodName}" -- \
