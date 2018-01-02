@@ -105,62 +105,17 @@ public class Application {
     public void inspectImage() {
         final DissectedImage dissectedImage = new DissectedImage();
         try {
-            if (!initAndValidate()) {
+            if (!initAndValidate(config)) {
                 return;
             }
-            if (config.isIdentifyPkgMgr() || config.isInspect()) {
-                dissectedImage.setDockerTarFile(deriveDockerTarFile());
-                dissectedImage.setLayerTars(hubDockerManager.extractLayerTars(dissectedImage.getDockerTarFile()));
-                dissectedImage.setLayerMappings(hubDockerManager.getLayerMappings(dissectedImage.getDockerTarFile().getName(), config.getDockerImageRepo(), config.getDockerImageTag()));
-                fillInMissingImageNameTagFromManifest(dissectedImage.getLayerMappings());
-            }
-
-            if (config.isIdentifyPkgMgr()) {
-                dissectedImage.setTargetOs(hubDockerManager.detectOperatingSystem(config.getLinuxDistro()));
-                if (dissectedImage.getTargetOs() == null) {
-                    dissectedImage.setTargetImageFileSystemRootDir(hubDockerManager.extractDockerLayers(dissectedImage.getLayerTars(), dissectedImage.getLayerMappings()));
-                    dissectedImage.setTargetOs(hubDockerManager.detectOperatingSystem(dissectedImage.getTargetImageFileSystemRootDir()));
-                }
-                dissectedImage.setRunOnImageName(dockerImages.getDockerImageName(dissectedImage.getTargetOs()));
-                dissectedImage.setRunOnImageTag(dockerImages.getDockerImageVersion(dissectedImage.getTargetOs()));
-                logger.info(String.format("Identified target OS: %s; corresponding inspection image: %s:%s", dissectedImage.getTargetOs().name(), dissectedImage.getRunOnImageName(), dissectedImage.getRunOnImageTag()));
-                if (StringUtils.isBlank(dissectedImage.getRunOnImageName()) || StringUtils.isBlank(dissectedImage.getRunOnImageTag())) {
-                    throw new HubIntegrationException("Failed to identify inspection image name and/or tag");
-                }
-            }
-            if (config.isInspect()) {
-                if (dissectedImage.getTargetImageFileSystemRootDir() == null) {
-                    dissectedImage.setTargetImageFileSystemRootDir(hubDockerManager.extractDockerLayers(dissectedImage.getLayerTars(), dissectedImage.getLayerMappings()));
-                }
-                if (dissectedImage.getTargetOs() == null) {
-                    dissectedImage.setTargetOs(hubDockerManager.detectOperatingSystem(dissectedImage.getTargetImageFileSystemRootDir()));
-                }
-                logger.info(String.format("Target image tarfile: %s; target OS: %s", dissectedImage.getDockerTarFile().getAbsolutePath(), dissectedImage.getTargetOs().toString()));
-                final List<File> bdioFiles = hubDockerManager.generateBdioFromImageFilesDir(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), getHubProjectName(), getHubProjectVersion(),
-                        dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs());
-                logger.info(String.format("%d BDIO Files generated", bdioFiles.size()));
-                dissectedImage.setBdioFilename(bdioFiles.size() == 1 ? bdioFiles.get(0).getName() : null);
-                createContainerFileSystemTarIfRequested(dissectedImage.getTargetImageFileSystemRootDir());
-            } else if (config.isInspectInContainer()) {
-                logger.info("Inspecting image in container");
-                inspectInSubContainer(dissectedImage.getDockerTarFile(), dissectedImage.getTargetOs(), dissectedImage.getRunOnImageName(), dissectedImage.getRunOnImageTag());
-            }
-            if (config.isUploadBdio()) {
-                logger.info("Uploading BDIO to Hub");
-                dissectedImage.setBdioFilename(uploadBdioFiles());
-            }
-            provideDockerTarIfRequested(dissectedImage.getDockerTarFile());
-            if (config.isOnHost() && (config.isInspect() || config.isInspectInContainer())) {
-                copyOutputToUserOutputDir();
-            }
-            returnCode = reportResult(dissectedImage.getTargetOs(), dissectedImage.getRunOnImageName(), dissectedImage.getRunOnImageTag(), dissectedImage.getDockerTarFile() == null ? "" : dissectedImage.getDockerTarFile().getName(),
-                    dissectedImage.getBdioFilename());
-            if (config.isOnHost()) {
-                copyResultToUserOutputDir();
-            }
-            if (config.isOnHost() && config.isInspect() && config.isCleanupWorkingDir()) {
-                cleanupWorkingDirs();
-            }
+            parseManifest(config, dissectedImage);
+            extractLayers(config, dissectedImage);
+            inspect(config, dissectedImage);
+            uploadBdio(config, dissectedImage);
+            provideDockerTar(config, dissectedImage.getDockerTarFile());
+            provideOutput(config);
+            reportResults(config, dissectedImage);
+            cleanUp(config);
         } catch (final Throwable e) {
             final String msg = String.format("Error inspecting image: %s", e.getMessage());
             logger.error(msg);
@@ -168,6 +123,78 @@ public class Application {
             logger.debug(String.format("Stack trace: %s", trace));
             resultFile.write(new Gson(), false, msg, dissectedImage.getTargetOs(), dissectedImage.getRunOnImageName(), dissectedImage.getRunOnImageTag(),
                     dissectedImage.getDockerTarFile() == null ? "" : dissectedImage.getDockerTarFile().getName(), dissectedImage.getBdioFilename());
+        }
+    }
+
+    private void cleanUp(final Config config) throws IOException {
+        if (config.isOnHost() && config.isInspect() && config.isCleanupWorkingDir()) {
+            cleanupWorkingDirs();
+        }
+    }
+
+    private void reportResults(final Config config, final DissectedImage dissectedImage) throws HubIntegrationException, IOException {
+        returnCode = reportResult(config, dissectedImage.getTargetOs(), dissectedImage.getRunOnImageName(), dissectedImage.getRunOnImageTag(), dissectedImage.getDockerTarFile() == null ? "" : dissectedImage.getDockerTarFile().getName(),
+                dissectedImage.getBdioFilename());
+        if (config.isOnHost()) {
+            copyResultToUserOutputDir();
+        }
+    }
+
+    private void provideOutput(final Config config) throws IOException {
+        if (config.isOnHost() && (config.isInspect() || config.isInspectInContainer())) {
+            copyOutputToUserOutputDir();
+        }
+    }
+
+    private void uploadBdio(final Config config, final DissectedImage dissectedImage) throws IntegrationException {
+        if (config.isUploadBdio()) {
+            logger.info("Uploading BDIO to Hub");
+            dissectedImage.setBdioFilename(uploadBdioFiles(config));
+        }
+    }
+
+    private void inspect(final Config config, final DissectedImage dissectedImage) throws IOException, HubIntegrationException, InterruptedException, CompressorException, IllegalAccessException {
+        if (config.isInspect()) {
+            if (dissectedImage.getTargetImageFileSystemRootDir() == null) {
+                dissectedImage.setTargetImageFileSystemRootDir(hubDockerManager.extractDockerLayers(dissectedImage.getLayerTars(), dissectedImage.getLayerMappings()));
+            }
+            if (dissectedImage.getTargetOs() == null) {
+                dissectedImage.setTargetOs(hubDockerManager.detectOperatingSystem(dissectedImage.getTargetImageFileSystemRootDir()));
+            }
+            logger.info(String.format("Target image tarfile: %s; target OS: %s", dissectedImage.getDockerTarFile().getAbsolutePath(), dissectedImage.getTargetOs().toString()));
+            final List<File> bdioFiles = hubDockerManager.generateBdioFromImageFilesDir(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), getHubProjectName(config), getHubProjectVersion(config),
+                    dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs());
+            logger.info(String.format("%d BDIO Files generated", bdioFiles.size()));
+            dissectedImage.setBdioFilename(bdioFiles.size() == 1 ? bdioFiles.get(0).getName() : null);
+            createContainerFileSystemTarIfRequested(config, dissectedImage.getTargetImageFileSystemRootDir());
+        } else if (config.isInspectInContainer()) {
+            logger.info("Inspecting image in container");
+            inspectInSubContainer(config, dissectedImage.getDockerTarFile(), dissectedImage.getTargetOs(), dissectedImage.getRunOnImageName(), dissectedImage.getRunOnImageTag());
+        }
+    }
+
+    private void extractLayers(final Config config, final DissectedImage dissectedImage) throws IOException, HubIntegrationException {
+        if (config.isIdentifyPkgMgr()) {
+            dissectedImage.setTargetOs(hubDockerManager.detectOperatingSystem(config.getLinuxDistro()));
+            if (dissectedImage.getTargetOs() == null) {
+                dissectedImage.setTargetImageFileSystemRootDir(hubDockerManager.extractDockerLayers(dissectedImage.getLayerTars(), dissectedImage.getLayerMappings()));
+                dissectedImage.setTargetOs(hubDockerManager.detectOperatingSystem(dissectedImage.getTargetImageFileSystemRootDir()));
+            }
+            dissectedImage.setRunOnImageName(dockerImages.getDockerImageName(dissectedImage.getTargetOs()));
+            dissectedImage.setRunOnImageTag(dockerImages.getDockerImageVersion(dissectedImage.getTargetOs()));
+            logger.info(String.format("Identified target OS: %s; corresponding inspection image: %s:%s", dissectedImage.getTargetOs().name(), dissectedImage.getRunOnImageName(), dissectedImage.getRunOnImageTag()));
+            if (StringUtils.isBlank(dissectedImage.getRunOnImageName()) || StringUtils.isBlank(dissectedImage.getRunOnImageTag())) {
+                throw new HubIntegrationException("Failed to identify inspection image name and/or tag");
+            }
+        }
+    }
+
+    private void parseManifest(final Config config, final DissectedImage dissectedImage) throws IOException, HubIntegrationException, Exception {
+        if (config.isIdentifyPkgMgr() || config.isInspect()) {
+            dissectedImage.setDockerTarFile(deriveDockerTarFile(config));
+            dissectedImage.setLayerTars(hubDockerManager.extractLayerTars(dissectedImage.getDockerTarFile()));
+            dissectedImage.setLayerMappings(hubDockerManager.getLayerMappings(dissectedImage.getDockerTarFile().getName(), config.getDockerImageRepo(), config.getDockerImageTag()));
+            fillInMissingImageNameTagFromManifest(config, dissectedImage.getLayerMappings());
         }
     }
 
@@ -241,7 +268,7 @@ public class Application {
         FileOperations.copyFile(new File(programPaths.getHubDockerResultPathHost()), userOutputDir);
     }
 
-    private String uploadBdioFiles() throws IntegrationException {
+    private String uploadBdioFiles(final Config config) throws IntegrationException {
         String pathToDirContainingBdio = null;
         if (StringUtils.isBlank(config.getBdioPath())) {
             pathToDirContainingBdio = programPaths.getHubDockerOutputPath();
@@ -263,7 +290,7 @@ public class Application {
         return bdioFilename;
     }
 
-    private int reportResult(final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag, final String dockerTarfilename, final String bdioFilename) throws HubIntegrationException {
+    private int reportResult(final Config config, final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag, final String dockerTarfilename, final String bdioFilename) throws HubIntegrationException {
         final Gson gson = new Gson();
         if (config.isOnHost() && config.isInspectInContainer()) {
             final Result resultReportedFromContainer = resultFile.read(gson);
@@ -295,7 +322,7 @@ public class Application {
         }
     }
 
-    private void provideDockerTarIfRequested(final File dockerTarFile) throws IOException {
+    private void provideDockerTar(final Config config, final File dockerTarFile) throws IOException {
         if (config.isOutputIncludeDockertarfile()) {
             if (config.isOnHost()) {
                 final File outputDirectory = new File(programPaths.getHubDockerOutputPathHost());
@@ -309,7 +336,7 @@ public class Application {
         }
     }
 
-    private void createContainerFileSystemTarIfRequested(final File targetImageFileSystemRootDir) throws IOException, CompressorException {
+    private void createContainerFileSystemTarIfRequested(final Config config, final File targetImageFileSystemRootDir) throws IOException, CompressorException {
         if (config.isOutputIncludeContainerfilesystem()) {
             final File outputDirectory = new File(programPaths.getHubDockerOutputPathContainer());
             final String containerFileSystemTarFilename = programPaths.getContainerFileSystemTarFilename(config.getDockerImageRepo(), config.getDockerImageTag());
@@ -320,7 +347,7 @@ public class Application {
         }
     }
 
-    private void inspectInSubContainer(final File dockerTarFile, final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag)
+    private void inspectInSubContainer(final Config config, final File dockerTarFile, final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag)
             throws InterruptedException, IOException, HubIntegrationException, IllegalArgumentException, IllegalAccessException {
 
         final String msg = String.format("Image inspection for %s will use docker image %s:%s", targetOs.toString(), runOnImageName, runOnImageTag);
@@ -334,15 +361,15 @@ public class Application {
         dockerClientManager.run(runOnImageName, runOnImageTag, dockerTarFile, true, config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag());
     }
 
-    private String getHubProjectName() {
+    private String getHubProjectName(final Config config) {
         return programPaths.unEscape(config.getHubProjectName());
     }
 
-    private String getHubProjectVersion() {
+    private String getHubProjectVersion(final Config config) {
         return programPaths.unEscape(config.getHubProjectVersion());
     }
 
-    private boolean initAndValidate() throws IOException, IntegrationException, IllegalArgumentException, IllegalAccessException {
+    private boolean initAndValidate(final Config config) throws IOException, IntegrationException, IllegalArgumentException, IllegalAccessException {
         logger.info(String.format("hub-docker-inspector %s", programVersion.getProgramVersion()));
         if (helpInvoked()) {
             showUsage();
@@ -361,7 +388,7 @@ public class Application {
             hubDockerManager.phoneHome();
         }
         clearResult();
-        initImageName();
+        initImageName(config);
         logger.info(String.format("Inspecting image:tag %s:%s", config.getDockerImageRepo(), config.getDockerImageTag()));
         if (config.isOnHost()) {
             verifyHubConnection();
@@ -379,7 +406,7 @@ public class Application {
         return;
     }
 
-    private void initImageName() throws HubIntegrationException {
+    private void initImageName(final Config config) throws HubIntegrationException {
         logger.debug(String.format("initImageName(): dockerImage: %s, dockerTar: %s", config.getDockerImage(), config.getDockerTar()));
         if (StringUtils.isNotBlank(config.getDockerImage())) {
             final String[] imageNameAndTag = config.getDockerImage().split(":");
@@ -395,7 +422,7 @@ public class Application {
         logger.debug(String.format("initImageName(): final: dockerImage: %s; dockerImageRepo: %s; dockerImageTag: %s", config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag()));
     }
 
-    private void fillInMissingImageNameTagFromManifest(final List<ManifestLayerMapping> layerMappings) {
+    private void fillInMissingImageNameTagFromManifest(final Config config, final List<ManifestLayerMapping> layerMappings) {
         if ((layerMappings != null) && (layerMappings.size() == 1)) {
             if (StringUtils.isBlank(config.getDockerImageRepo())) {
                 config.setDockerImageRepo(layerMappings.get(0).getImageName());
@@ -407,7 +434,7 @@ public class Application {
         logger.debug(String.format("fillInMissingImageNameTagFromManifest(): final: dockerImage: %s; dockerImageRepo: %s; dockerImageTag: %s", config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag()));
     }
 
-    private File deriveDockerTarFile() throws IOException, HubIntegrationException {
+    private File deriveDockerTarFile(final Config config) throws IOException, HubIntegrationException {
         File dockerTarFile = null;
         if (StringUtils.isNotBlank(config.getDockerTar())) {
             dockerTarFile = new File(config.getDockerTar());
