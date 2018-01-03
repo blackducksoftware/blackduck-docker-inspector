@@ -45,13 +45,14 @@ class ApplicationTest {
             getDockerImageTag : { "" },
             getHubUrl: { "test prop public string value" },
             setDockerImageRepo: {},
-            setDockerImageTag: {
-            }
+            setDockerImageTag: {},
+            getInspectorRepository: { "blackducksoftware" }
         ] as Config;
 
         Application app = new Application()
         app.config = config
         app.dockerImages = new DockerImages()
+        app.dockerImages.config = config
         ProgramVersion mockedProgramVersion = [
             getProgramVersion: { '1.2.3' }
         ] as ProgramVersion

@@ -168,6 +168,10 @@ public class Config {
     @Value("${phone.home:true}")
     private Boolean phoneHome = Boolean.TRUE;
 
+    @ValueDescription(description = "Repository name for the Hub Docker Inspector images", defaultValue = "blackducksoftware", group = Config.GROUP_PUBLIC)
+    @Value("${inspector.repository:blackducksoftware}")
+    private String inspectorRepository = "blackducksoftware";
+
     @Value("${BD_HUB_PASSWORD:}")
     private String hubPasswordEnvVar = "";
 
@@ -360,6 +364,10 @@ public class Config {
         return optionsByFieldName.get("callerName").getResolvedValue();
     }
 
+    public String getInspectorRepository() {
+        return optionsByFieldName.get("inspectorRepository").getResolvedValue();
+    }
+
     public String getCallerVersion() {
         return optionsByFieldName.get("callerVersion").getResolvedValue();
     }
@@ -436,5 +444,6 @@ public class Config {
         this.phoneHome = null;
         this.scanCliOptsEnvVar = null;
         this.workingDirPath = null;
+        this.inspectorRepository = null;
     }
 }
