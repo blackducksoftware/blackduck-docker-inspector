@@ -19,6 +19,7 @@ import org.junit.BeforeClass
 import org.junit.Test
 
 import com.blackducksoftware.integration.hub.docker.client.ProgramVersion
+import com.blackducksoftware.integration.hub.docker.config.Config
 import com.blackducksoftware.integration.hub.docker.image.DockerImages
 
 class DockerImagesTest {
@@ -32,12 +33,16 @@ class DockerImagesTest {
     }
 
     @Test
-    public void test() {
+    public void testBasic() {
         ProgramVersion mockedProgramVersion = [
             getProgramVersion: { '1.2.3' }
         ] as ProgramVersion
 
         DockerImages osMapper = new DockerImages()
+        Config config = [
+            getInspectorRepository: { "blackducksoftware" }
+        ] as Config;
+        osMapper.config = config
         osMapper.programVersion = mockedProgramVersion
         assertEquals("blackducksoftware/hub-docker-inspector-centos", osMapper.getDockerImageName(OperatingSystemEnum.CENTOS))
         assertEquals("1.2.3", osMapper.getDockerImageVersion(OperatingSystemEnum.CENTOS))
@@ -50,5 +55,50 @@ class DockerImagesTest {
         assertEquals("blackducksoftware/hub-docker-inspector-alpine", osMapper.getDockerImageName(OperatingSystemEnum.ALPINE))
         assertEquals("1.2.3", osMapper.getDockerImageVersion(OperatingSystemEnum.ALPINE))
         assertEquals(OperatingSystemEnum.ALPINE, osMapper.getDockerImageOs(OperatingSystemEnum.ALPINE))
+    }
+
+    @Test
+    public void testAlternateRepoWithoutSlash() {
+        ProgramVersion mockedProgramVersion = [
+            getProgramVersion: { '1.2.3' }
+        ] as ProgramVersion
+
+        DockerImages osMapper = new DockerImages()
+        Config config = [
+            getInspectorRepository: { "myrepo" }
+        ] as Config;
+        osMapper.config = config
+        osMapper.programVersion = mockedProgramVersion
+        assertEquals("myrepo/hub-docker-inspector-centos", osMapper.getDockerImageName(OperatingSystemEnum.CENTOS))
+    }
+
+    @Test
+    public void testAlternateRepoWithSlash() {
+        ProgramVersion mockedProgramVersion = [
+            getProgramVersion: { '1.2.3' }
+        ] as ProgramVersion
+
+        DockerImages osMapper = new DockerImages()
+        Config config = [
+            getInspectorRepository: { "myrepo/" }
+        ] as Config;
+        osMapper.config = config
+        osMapper.programVersion = mockedProgramVersion
+        assertEquals("myrepo/hub-docker-inspector-centos", osMapper.getDockerImageName(OperatingSystemEnum.CENTOS))
+    }
+
+    @Test
+    public void testNoRepo() {
+        ProgramVersion mockedProgramVersion = [
+            getProgramVersion: { '1.2.3' }
+        ] as ProgramVersion
+
+        DockerImages osMapper = new DockerImages()
+        Config config = [
+            getInspectorRepository: { "" }
+        ] as Config;
+        osMapper.config = config
+        osMapper.programVersion = mockedProgramVersion
+        assertEquals("hub-docker-inspector-centos", osMapper.getDockerImageName(OperatingSystemEnum.CENTOS))
     }
 }

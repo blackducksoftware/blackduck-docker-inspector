@@ -168,7 +168,6 @@ public class Config {
     private Boolean phoneHome = Boolean.TRUE;
 
     // Properties added for orchestration support
-
     @ValueDescription(description = "Identify target image package manager?", defaultValue = "true", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${identify.pkg.mgr:true}")
     private Boolean identifyPkgMgr = Boolean.TRUE;
@@ -188,6 +187,10 @@ public class Config {
     @ValueDescription(description = "Path to directory containing BDIO file to upload", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${bdio.path:}")
     private String bdioPath = "";
+
+    @ValueDescription(description = "Repository name for the Hub Docker Inspector images", defaultValue = "blackducksoftware", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${inspector.repository:blackducksoftware}")
+    private String inspectorRepository = "blackducksoftware";
 
     // Environment Variables
     @Value("${BD_HUB_PASSWORD:}")
@@ -387,6 +390,10 @@ public class Config {
         return optionsByFieldName.get("callerName").getResolvedValue();
     }
 
+    public String getInspectorRepository() {
+        return optionsByFieldName.get("inspectorRepository").getResolvedValue();
+    }
+
     public String getCallerVersion() {
         return optionsByFieldName.get("callerVersion").getResolvedValue();
     }
@@ -488,5 +495,6 @@ public class Config {
         this.uploadBdio = null;
         this.identifyPkgMgr = null;
         this.bdioPath = null;
+        this.inspectorRepository = null;
     }
 }
