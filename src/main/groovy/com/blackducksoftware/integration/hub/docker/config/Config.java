@@ -168,15 +168,15 @@ public class Config {
     private Boolean phoneHome = Boolean.TRUE;
 
     // Properties added for orchestration support
-    @ValueDescription(description = "Identify target image package manager?", defaultValue = "true", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Identify target image package manager?", defaultValue = "true", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${identify.pkg.mgr:true}")
     private Boolean identifyPkgMgr = Boolean.TRUE;
 
-    @ValueDescription(description = "Inspect?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Inspect?", defaultValue = "false", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${inspect:false}")
     private Boolean inspect = Boolean.FALSE;
 
-    @ValueDescription(description = "Launch container to inspect?", defaultValue = "true", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Launch container to inspect?", defaultValue = "true", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${inspect.in.container:true}")
     private Boolean inspectInContainer = Boolean.TRUE;
 
@@ -184,9 +184,10 @@ public class Config {
     @Value("${upload.bdio:true}")
     private Boolean uploadBdio = Boolean.TRUE;
 
-    @ValueDescription(description = "Path to directory containing BDIO file to upload", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Path to directory containing BDIO file to upload", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${bdio.path:}")
     private String bdioPath = "";
+    // End properties added for orchestration support
 
     @ValueDescription(description = "Repository name for the Hub Docker Inspector images", defaultValue = "blackducksoftware", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${inspector.repository:blackducksoftware}")
