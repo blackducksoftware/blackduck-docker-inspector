@@ -2,7 +2,7 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "blackducksoftware_centos_minus_vim_plus_bacula_1.0_var_lib_rpm_RPM",
-    "@id": "uuid:33ecc868-3dbd-475e-bdc5-b725cc812221",
+    "@id": "uuid:e45407aa-cf78-4fb5-baf6-c150c9b13b74",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -153,10 +153,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:centos/dracut/033_502_el7/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:redhat/kmod_libs/20_9_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -218,10 +214,6 @@
       },
       {
         "related": "http:fedora/pth/2_0_7_23_el7/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:fedora/dracut/033_502_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1037,6 +1029,10 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:centos/dracut/033_502_el7_4_1/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:centos/libssh2/1_4_3_10_el7_2_1/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -1729,10 +1725,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:redhat/dracut/033_502_el7/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:fedora/elfutils_libelf/0_166_2_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -1802,6 +1794,10 @@
       },
       {
         "related": "http:fedora/systemd_sysv/219_42_el7_4_4/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:redhat/dracut/033_502_el7_4_1/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -2026,6 +2022,10 @@
       },
       {
         "related": "http:fedora/centos_release/7_3_1611_el7_centos/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:fedora/dracut/033_502_el7_4_1/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -2911,26 +2911,6 @@
     "relationship": []
   },
   {
-    "name": "dracut",
-    "revision": "033-502.el7",
-    "@id": "http:centos/dracut/033_502_el7/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "centos",
-      "externalId": "dracut/033-502.el7/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "centos",
-          "separator": "/"
-        },
-        "name": "dracut",
-        "version": "033-502.el7",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "kmod-libs",
     "revision": "20-9.el7",
     "@id": "http:redhat/kmod_libs/20_9_el7/x86_64",
@@ -3245,26 +3225,6 @@
         },
         "name": "pth",
         "version": "2.0.7-23.el7",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "dracut",
-    "revision": "033-502.el7",
-    "@id": "http:fedora/dracut/033_502_el7/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "fedora",
-      "externalId": "dracut/033-502.el7/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "fedora",
-          "separator": "/"
-        },
-        "name": "dracut",
-        "version": "033-502.el7",
         "architecture": "x86_64"
       }
     },
@@ -7331,6 +7291,26 @@
     "relationship": []
   },
   {
+    "name": "dracut",
+    "revision": "033-502.el7_4.1",
+    "@id": "http:centos/dracut/033_502_el7_4_1/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "dracut/033-502.el7_4.1/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "centos",
+          "separator": "/"
+        },
+        "name": "dracut",
+        "version": "033-502.el7_4.1",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "libssh2",
     "revision": "1.4.3-10.el7_2.1",
     "@id": "http:centos/libssh2/1_4_3_10_el7_2_1/x86_64",
@@ -10791,26 +10771,6 @@
     "relationship": []
   },
   {
-    "name": "dracut",
-    "revision": "033-502.el7",
-    "@id": "http:redhat/dracut/033_502_el7/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "redhat",
-      "externalId": "dracut/033-502.el7/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "redhat",
-          "separator": "/"
-        },
-        "name": "dracut",
-        "version": "033-502.el7",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "elfutils-libelf",
     "revision": "0.166-2.el7",
     "@id": "http:fedora/elfutils_libelf/0_166_2_el7/x86_64",
@@ -11165,6 +11125,26 @@
         },
         "name": "systemd-sysv",
         "version": "219-42.el7_4.4",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "dracut",
+    "revision": "033-502.el7_4.1",
+    "@id": "http:redhat/dracut/033_502_el7_4_1/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "dracut/033-502.el7_4.1/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "redhat",
+          "separator": "/"
+        },
+        "name": "dracut",
+        "version": "033-502.el7_4.1",
         "architecture": "x86_64"
       }
     },
@@ -12285,6 +12265,26 @@
         },
         "name": "centos-release",
         "version": "7-3.1611.el7.centos",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "dracut",
+    "revision": "033-502.el7_4.1",
+    "@id": "http:fedora/dracut/033_502_el7_4_1/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "dracut/033-502.el7_4.1/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "fedora",
+          "separator": "/"
+        },
+        "name": "dracut",
+        "version": "033-502.el7_4.1",
         "architecture": "x86_64"
       }
     },
