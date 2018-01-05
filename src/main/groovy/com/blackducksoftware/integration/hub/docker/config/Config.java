@@ -192,6 +192,14 @@ public class Config {
     @Value("${inspector.repository:blackducksoftware}")
     private String inspectorRepository = "blackducksoftware";
 
+    @ValueDescription(description = "Remove target image after saving it?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${cleanup.target.image:false}")
+    private Boolean cleanupTargetImage = Boolean.FALSE;
+
+    @ValueDescription(description = "Remove inspector image after using it?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${cleanup.inspector.image:false}")
+    private Boolean cleanupInspectorImage = Boolean.FALSE;
+
     // Environment Variables
     @Value("${BD_HUB_PASSWORD:}")
     private String hubPasswordEnvVar = "";
@@ -434,6 +442,14 @@ public class Config {
         return identifyPkgMgr;
     }
 
+    public boolean isCleanupTargetImage() {
+        return cleanupTargetImage;
+    }
+
+    public boolean isCleanupInspectorImage() {
+        return cleanupInspectorImage;
+    }
+
     public void setDockerImageRepo(final String newValue) {
         optionsByFieldName.get("dockerImageRepo").setResolvedValue(newValue);
     }
@@ -496,5 +512,7 @@ public class Config {
         this.identifyPkgMgr = null;
         this.bdioPath = null;
         this.inspectorRepository = null;
+        this.cleanupInspectorImage = null;
+        this.cleanupTargetImage = null;
     }
 }

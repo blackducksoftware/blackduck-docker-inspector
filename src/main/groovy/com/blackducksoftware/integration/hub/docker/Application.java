@@ -352,13 +352,17 @@ public class Application {
 
         final String msg = String.format("Image inspection for %s will use docker image %s:%s", targetOs.toString(), runOnImageName, runOnImageTag);
         logger.info(msg);
+        String runOnImageId = null;
         try {
-            dockerClientManager.pullImage(runOnImageName, runOnImageTag);
+            runOnImageId = dockerClientManager.pullImage(runOnImageName, runOnImageTag);
         } catch (final Exception e) {
             logger.warn(String.format("Unable to pull docker image %s:%s; proceeding anyway since it may already exist locally", runOnImageName, runOnImageTag));
         }
         logger.debug(String.format("runInSubContainer(): Running subcontainer on image %s, repo %s, tag %s", config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag()));
         dockerClientManager.run(runOnImageName, runOnImageTag, dockerTarFile, true, config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag());
+        if (config.isCleanupInspectorImage()) {
+            dockerClientManager.removeImage(runOnImageId);
+        }
     }
 
     private String getHubProjectName(final Config config) {
