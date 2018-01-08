@@ -349,7 +349,6 @@ public class Application {
 
     private void inspectInSubContainer(final Config config, final File dockerTarFile, final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag)
             throws InterruptedException, IOException, HubIntegrationException, IllegalArgumentException, IllegalAccessException {
-
         final String msg = String.format("Image inspection for %s will use docker image %s:%s", targetOs.toString(), runOnImageName, runOnImageTag);
         logger.info(msg);
         String runOnImageId = null;
@@ -359,7 +358,9 @@ public class Application {
             logger.warn(String.format("Unable to pull docker image %s:%s; proceeding anyway since it may already exist locally", runOnImageName, runOnImageTag));
         }
         logger.debug(String.format("runInSubContainer(): Running subcontainer on image %s, repo %s, tag %s", config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag()));
-        dockerClientManager.run(runOnImageName, runOnImageTag, dockerTarFile, true, config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag());
+        final String containerId = dockerClientManager.run(runOnImageName, runOnImageTag, runOnImageId, dockerTarFile, true, config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag());
+        // TODO spin the rest off in it's own parallel thread
+        dockerClientManager.stopRemoveContainer(containerId);
         if (config.isCleanupInspectorImage()) {
             dockerClientManager.removeImage(runOnImageId);
         }
@@ -406,7 +407,6 @@ public class Application {
 
     private void verifyHubConnection() throws HubIntegrationException {
         hubClient.testHubConnection();
-        logger.info("Your Hub configuration is valid and a successful connection to the Hub was established.");
         return;
     }
 
