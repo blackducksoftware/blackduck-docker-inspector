@@ -26,6 +26,12 @@ package com.blackducksoftware.integration.hub.docker;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import javax.annotation.PostConstruct;
 
@@ -110,12 +116,12 @@ public class Application {
             }
             parseManifest(config, dissectedImage);
             extractLayers(config, dissectedImage);
-            inspect(config, dissectedImage);
+            final Future<String> deferredCleanup = inspect(config, dissectedImage);
             uploadBdio(config, dissectedImage);
             provideDockerTar(config, dissectedImage.getDockerTarFile());
             provideOutput(config);
             reportResults(config, dissectedImage);
-            cleanUp(config);
+            cleanUp(config, deferredCleanup);
         } catch (final Throwable e) {
             final String msg = String.format("Error inspecting image: %s", e.getMessage());
             logger.error(msg);
@@ -126,9 +132,16 @@ public class Application {
         }
     }
 
-    private void cleanUp(final Config config) throws IOException {
+    private void cleanUp(final Config config, final Future<String> deferredCleanup) throws IOException {
         if (config.isOnHost() && config.isInspect() && config.isCleanupWorkingDir()) {
             cleanupWorkingDirs();
+        }
+        if (deferredCleanup != null) {
+            try {
+                logger.info(String.format("Status from concurrent cleanup: %s", deferredCleanup.get(15, TimeUnit.SECONDS)));
+            } catch (InterruptedException | ExecutionException | TimeoutException e) {
+                logger.error(String.format("Error during concurrent cleanup: %s", e.getMessage()));
+            }
         }
     }
 
@@ -153,7 +166,8 @@ public class Application {
         }
     }
 
-    private void inspect(final Config config, final DissectedImage dissectedImage) throws IOException, HubIntegrationException, InterruptedException, CompressorException, IllegalAccessException {
+    private Future<String> inspect(final Config config, final DissectedImage dissectedImage) throws IOException, HubIntegrationException, InterruptedException, CompressorException, IllegalAccessException {
+        Future<String> deferredCleanup = null;
         if (config.isInspect()) {
             if (dissectedImage.getTargetImageFileSystemRootDir() == null) {
                 dissectedImage.setTargetImageFileSystemRootDir(hubDockerManager.extractDockerLayers(dissectedImage.getLayerTars(), dissectedImage.getLayerMappings()));
@@ -169,8 +183,9 @@ public class Application {
             createContainerFileSystemTarIfRequested(config, dissectedImage.getTargetImageFileSystemRootDir());
         } else if (config.isInspectInContainer()) {
             logger.info("Inspecting image in container");
-            inspectInSubContainer(config, dissectedImage.getDockerTarFile(), dissectedImage.getTargetOs(), dissectedImage.getRunOnImageName(), dissectedImage.getRunOnImageTag());
+            deferredCleanup = inspectInSubContainer(config, dissectedImage.getDockerTarFile(), dissectedImage.getTargetOs(), dissectedImage.getRunOnImageName(), dissectedImage.getRunOnImageTag());
         }
+        return deferredCleanup;
     }
 
     private void extractLayers(final Config config, final DissectedImage dissectedImage) throws IOException, HubIntegrationException {
@@ -347,7 +362,7 @@ public class Application {
         }
     }
 
-    private void inspectInSubContainer(final Config config, final File dockerTarFile, final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag)
+    private Future<String> inspectInSubContainer(final Config config, final File dockerTarFile, final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag)
             throws InterruptedException, IOException, HubIntegrationException, IllegalArgumentException, IllegalAccessException {
         final String msg = String.format("Image inspection for %s will use docker image %s:%s", targetOs.toString(), runOnImageName, runOnImageTag);
         logger.info(msg);
@@ -359,11 +374,13 @@ public class Application {
         }
         logger.debug(String.format("runInSubContainer(): Running subcontainer on image %s, repo %s, tag %s", config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag()));
         final String containerId = dockerClientManager.run(runOnImageName, runOnImageTag, runOnImageId, dockerTarFile, true, config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag());
+
         // TODO spin the rest off in it's own parallel thread
-        dockerClientManager.stopRemoveContainer(containerId);
-        if (config.isCleanupInspectorImage()) {
-            dockerClientManager.removeImage(runOnImageId);
-        }
+        final ContainerCleaner containerCleaner = new ContainerCleaner(config, dockerClientManager, runOnImageId, containerId);
+        final ExecutorService executor = Executors.newSingleThreadExecutor();
+        final Future<String> containerCleanerFuture = executor.submit(containerCleaner);
+        return containerCleanerFuture;
+
     }
 
     private String getHubProjectName(final Config config) {
