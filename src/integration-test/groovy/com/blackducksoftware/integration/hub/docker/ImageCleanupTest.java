@@ -55,65 +55,51 @@ public class ImageCleanupTest {
         fullCmd.add("--cleanup.target.image=true");
         fullCmd.add(String.format("--working.dir.path=%s", workingDirPath));
         fullCmd.add(String.format("--docker.image=%s", TARGET_IMAGE_NAME, TARGET_IMAGE_TAG));
-
-        System.out.println(String.format("Running image cleanup test with command %s", fullCmd.toString()));
-        ProcessBuilder pb = new ProcessBuilder(fullCmd);
-        final Map<String, String> env = pb.environment();
-        final String oldPath = System.getenv("PATH");
-        final String newPath = String.format("/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:%s", oldPath);
-        env.put("PATH", newPath);
-        final File outputFile = new File("test/imageCleanup_output.txt");
-        outputFile.delete();
-        pb.redirectErrorStream(true);
-        pb.redirectOutput(outputFile);
-        Process p = pb.start();
-        int retCode = p.waitFor();
-        if (retCode != 0) {
-            final String log = FileUtils.readFileToString(outputFile, StandardCharsets.UTF_8);
-            System.out.println(log);
-        }
-        assertEquals(0, retCode);
+        runCommand(fullCmd, true);
 
         // See what image was used
         List<String> grepCmd = new ArrayList<>();
         grepCmd.add("fgrep");
         grepCmd.add("inspectOnImageName");
         grepCmd.add("test/output/result.json");
-        System.out.println(String.format("Running command %s", grepCmd.toString()));
-        pb = new ProcessBuilder(grepCmd);
-
-        outputFile.delete();
-        pb.redirectErrorStream(true);
-        pb.redirectOutput(outputFile);
-        p = pb.start();
-        retCode = p.waitFor();
-        String log = FileUtils.readFileToString(outputFile, StandardCharsets.UTF_8);
-        assertEquals(0, retCode);
-        String[] parts = log.split("\"");
-        final String inspectOnImageName = parts[3];
+        final String inspectOnImageNameJsonLine = runCommand(grepCmd, true);
+        final String[] inspectOnImageNameJsonLineParts = inspectOnImageNameJsonLine.split("\"");
+        final String inspectOnImageName = inspectOnImageNameJsonLineParts[3];
         System.out.println(String.format("inspectOnImageName: %s", inspectOnImageName));
 
         grepCmd = new ArrayList<>();
         grepCmd.add("fgrep");
         grepCmd.add("inspectOnImageTag");
         grepCmd.add("test/output/result.json");
-        System.out.println(String.format("Running command %s", grepCmd.toString()));
-        pb = new ProcessBuilder(grepCmd);
-
-        outputFile.delete();
-        pb.redirectErrorStream(true);
-        pb.redirectOutput(outputFile);
-        p = pb.start();
-        retCode = p.waitFor();
-        log = FileUtils.readFileToString(outputFile, StandardCharsets.UTF_8);
-        assertEquals(0, retCode);
-        parts = log.split("\"");
-        final String inspectOnImageTag = parts[3];
+        final String inspectOnImageTagJsonLine = runCommand(grepCmd, true);
+        final String[] inspectOnImageTagJsonLineParts = inspectOnImageTagJsonLine.split("\"");
+        final String inspectOnImageTag = inspectOnImageTagJsonLineParts[3];
         System.out.println(String.format("inspectOnImageTag: %s", inspectOnImageTag));
 
         final List<String> dockerImageList = getDockerImageList();
         assertFalse(isImagePresent(dockerImageList, inspectOnImageName, inspectOnImageTag));
         assertFalse(isImagePresent(dockerImageList, TARGET_IMAGE_NAME, TARGET_IMAGE_TAG));
+    }
+
+    private String runCommand(final List<String> cmd, final boolean assertPasses) throws IOException, InterruptedException {
+        System.out.println(String.format("Running command %s", cmd.toString()));
+        final ProcessBuilder pb = new ProcessBuilder(cmd);
+        final Map<String, String> env = pb.environment();
+        final String oldPath = System.getenv("PATH");
+        final String newPath = String.format("/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:%s", oldPath);
+        env.put("PATH", newPath);
+        final File outputFile = File.createTempFile("temp_cmd_output", Long.toString(System.nanoTime()));
+        outputFile.delete();
+        pb.redirectErrorStream(true);
+        pb.redirectOutput(outputFile);
+        final Process p = pb.start();
+        final int retCode = p.waitFor();
+        final String log = FileUtils.readFileToString(outputFile, StandardCharsets.UTF_8);
+        if (assertPasses) {
+            assertEquals(0, retCode);
+        }
+        outputFile.delete();
+        return log;
     }
 
     private List<String> getDockerImageList() throws IOException, InterruptedException {
