@@ -35,7 +35,7 @@ public class ImageCleanupTest {
     }
 
     @Test
-    public void testUsernameProjectNameProjectVersionWithSpaces() throws IOException, InterruptedException {
+    public void test() throws IOException, InterruptedException {
         final String workingDirPath = "test/imageCleanup";
         try {
             FileUtils.deleteDirectory(new File(workingDirPath));
@@ -104,13 +104,19 @@ public class ImageCleanupTest {
 
     private List<String> getDockerImageList() throws IOException, InterruptedException {
         final List<String> dockerImagesCmd = new ArrayList<>();
-        dockerImagesCmd.add("/usr/local/bin/docker");
-        dockerImagesCmd.add("images");
+        dockerImagesCmd.add("bash");
+        dockerImagesCmd.add("-c");
+        dockerImagesCmd.add("docker images");
 
         System.out.println(String.format("Running command %s", dockerImagesCmd.toString()));
         final File dockerImagesoutputFile = new File("test/imageCleanup_dockerImagesOutput.txt");
         dockerImagesoutputFile.delete();
         final ProcessBuilder pb = new ProcessBuilder(dockerImagesCmd);
+        final Map<String, String> env = pb.environment();
+        final String oldPath = System.getenv("PATH");
+
+        final String newPath = String.format("/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:%s", oldPath);
+        env.put("PATH", newPath);
         final File outputFile = new File("test/imageCleanup_dockerImagesOutput.txt");
         outputFile.delete();
         pb.redirectErrorStream(true);
