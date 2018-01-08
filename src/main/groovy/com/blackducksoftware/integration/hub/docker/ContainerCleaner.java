@@ -6,20 +6,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.blackducksoftware.integration.hub.docker.client.DockerClientManager;
-import com.blackducksoftware.integration.hub.docker.config.Config;
 
 public class ContainerCleaner implements Callable<String> {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private final Config config;
+    private final boolean removeImage;
     private final DockerClientManager dockerClientManager;
     private final String imageId;
     private final String containerId;
 
-    public ContainerCleaner(final Config config, final DockerClientManager dockerClientManager, final String imageId, final String containerId) {
-        this.config = config;
+    public ContainerCleaner(final DockerClientManager dockerClientManager, final String imageId, final String containerId, final boolean removeImage) {
         this.dockerClientManager = dockerClientManager;
         this.imageId = imageId;
         this.containerId = containerId;
+        this.removeImage = removeImage;
     }
 
     @Override
@@ -28,7 +27,7 @@ public class ContainerCleaner implements Callable<String> {
         try {
             logger.info(String.format("Cleaning up container %s / image %s", containerId, imageId));
             dockerClientManager.stopRemoveContainer(containerId);
-            if (config.isCleanupInspectorImage()) {
+            if (removeImage) {
                 dockerClientManager.removeImage(imageId);
             }
             logger.debug(statusMessage);

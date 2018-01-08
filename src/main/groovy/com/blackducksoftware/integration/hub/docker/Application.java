@@ -138,6 +138,7 @@ public class Application {
         }
         if (deferredCleanup != null) {
             try {
+                logger.debug("Waiting for completion of concurrent inspector container/image cleanup");
                 logger.info(String.format("Status from concurrent cleanup: %s", deferredCleanup.get(15, TimeUnit.SECONDS)));
             } catch (InterruptedException | ExecutionException | TimeoutException e) {
                 logger.error(String.format("Error during concurrent cleanup: %s", e.getMessage()));
@@ -375,8 +376,8 @@ public class Application {
         logger.debug(String.format("runInSubContainer(): Running subcontainer on image %s, repo %s, tag %s", config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag()));
         final String containerId = dockerClientManager.run(runOnImageName, runOnImageTag, runOnImageId, dockerTarFile, true, config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag());
 
-        // TODO spin the rest off in it's own parallel thread
-        final ContainerCleaner containerCleaner = new ContainerCleaner(config, dockerClientManager, runOnImageId, containerId);
+        // spin the inspector container/image cleanup off in it's own parallel thread
+        final ContainerCleaner containerCleaner = new ContainerCleaner(dockerClientManager, runOnImageId, containerId, config.isCleanupInspectorImage());
         final ExecutorService executor = Executors.newSingleThreadExecutor();
         final Future<String> containerCleanerFuture = executor.submit(containerCleaner);
         return containerCleanerFuture;

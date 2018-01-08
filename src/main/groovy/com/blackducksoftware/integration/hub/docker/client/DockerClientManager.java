@@ -71,10 +71,10 @@ public class DockerClientManager {
     private static final String IMAGE_TAG_PROPERTY = "docker.image.tag";
     private static final String ON_HOST_PROPERTY = "on.host";
 
-    private static String INSPECT_PROPERTY = "inspect"; // true
-    private static String INSPECT_IN_CONTAINER_PROPERTY = "inspect.in.container"; // false
-    private static String UPLOAD_BDIO_PROPERTY = "upload.bdio"; // false
-    private static String DETECT_PKG_MGR_PROPERTY = "detect.pkg.mgr"; // true
+    private static final String INSPECT_PROPERTY = "inspect"; // true
+    private static final String INSPECT_IN_CONTAINER_PROPERTY = "inspect.in.container"; // false
+    private static final String UPLOAD_BDIO_PROPERTY = "upload.bdio"; // false
+    private static final String DETECT_PKG_MGR_PROPERTY = "detect.pkg.mgr"; // true
 
     private static final String OUTPUT_INCLUDE_DOCKER_TARFILE_PROPERTY = "output.include.dockertarfile";
     private static final String OUTPUT_INCLUDE_CONTAINER_FILE_SYSTEM_TARFILE_PROPERTY = "output.include.containerfilesystem";
