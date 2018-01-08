@@ -1,7 +1,7 @@
 package com.blackducksoftware.integration.hub.docker;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertFalse;
 
 import java.io.File;
 import java.io.IOException;
@@ -74,8 +74,6 @@ public class ImageCleanupTest {
         }
         assertEquals(0, retCode);
 
-        // TBD make sure images removed
-
         // See what image was used
         List<String> grepCmd = new ArrayList<>();
         grepCmd.add("fgrep");
@@ -113,6 +111,12 @@ public class ImageCleanupTest {
         final String inspectOnImageTag = parts[3];
         System.out.println(String.format("inspectOnImageTag: %s", inspectOnImageTag));
 
+        final List<String> dockerImageList = getDockerImageList();
+        assertFalse(isImagePresent(dockerImageList, inspectOnImageName, inspectOnImageTag));
+        assertFalse(isImagePresent(dockerImageList, TARGET_IMAGE_NAME, TARGET_IMAGE_TAG));
+    }
+
+    private List<String> getDockerImageList() throws IOException, InterruptedException {
         final List<String> dockerImagesCmd = new ArrayList<>();
         dockerImagesCmd.add("/usr/local/bin/docker");
         dockerImagesCmd.add("images");
@@ -120,67 +124,29 @@ public class ImageCleanupTest {
         System.out.println(String.format("Running command %s", dockerImagesCmd.toString()));
         final File dockerImagesoutputFile = new File("test/imageCleanup_dockerImagesOutput.txt");
         dockerImagesoutputFile.delete();
-        pb = new ProcessBuilder(dockerImagesCmd);
+        final ProcessBuilder pb = new ProcessBuilder(dockerImagesCmd);
+        final File outputFile = new File("test/imageCleanup_dockerImagesOutput.txt");
         outputFile.delete();
         pb.redirectErrorStream(true);
         pb.redirectOutput(dockerImagesoutputFile);
-        p = pb.start();
-        retCode = p.waitFor();
-        // if (retCode != 0) {
+        final Process p = pb.start();
+        final int retCode = p.waitFor();
         final String dockerImagesCommandOutput = FileUtils.readFileToString(dockerImagesoutputFile, StandardCharsets.UTF_8);
         System.out.println(dockerImagesCommandOutput);
-        // }
         assertEquals(0, retCode);
 
-        // Make sure runOn image is gone
-        final String runOnImageRegex = String.format("^%s +%s.*$", inspectOnImageName, inspectOnImageTag.replaceAll("\\.", "\\."));
+        final String[] linesArray = dockerImagesCommandOutput.split("\\r?\\n");
+        final List<String> linesList = Arrays.asList(linesArray);
+        return linesList;
+    }
 
-        grepCmd = new ArrayList<>();
-        grepCmd.add("egrep");
-        grepCmd.add(runOnImageRegex);
-        grepCmd.add(dockerImagesoutputFile.getAbsolutePath());
-        System.out.println(String.format("Running command %s", grepCmd.toString()));
-        pb = new ProcessBuilder(grepCmd);
-
-        outputFile.delete();
-        pb.redirectErrorStream(true);
-        pb.redirectOutput(outputFile);
-        p = pb.start();
-        retCode = p.waitFor();
-        log = FileUtils.readFileToString(outputFile, StandardCharsets.UTF_8);
-        System.out.println(String.format("log:%s", log));
-
-        System.out.println(String.format("Checking output for %s", runOnImageRegex));
-        if (log.trim().matches(runOnImageRegex)) {
-            fail("The runOn image still appears in the output of the docker images command");
-        } else {
-            System.out.println("The runOn image does not appear in the output of the docker images command. It apparently was cleaned up.");
+    private boolean isImagePresent(final List<String> dockerImageList, final String targetImageName, final String targetImageTag) {
+        final String imageRegex = String.format("^%s +%s.*$", targetImageName, targetImageTag.replaceAll("\\.", "\\."));
+        for (final String imageListLine : dockerImageList) {
+            if (imageListLine.matches(imageRegex)) {
+                return true;
+            }
         }
-
-        // make sure target image is gone
-        final String targetImageRegex = String.format("^%s +%s.*$", TARGET_IMAGE_NAME, TARGET_IMAGE_TAG.replaceAll("\\.", "\\."));
-
-        grepCmd = new ArrayList<>();
-        grepCmd.add("egrep");
-        grepCmd.add(targetImageRegex);
-        grepCmd.add(dockerImagesoutputFile.getAbsolutePath());
-        System.out.println(String.format("Running command %s", grepCmd.toString()));
-        pb = new ProcessBuilder(grepCmd);
-
-        outputFile.delete();
-        pb.redirectErrorStream(true);
-        pb.redirectOutput(outputFile);
-        p = pb.start();
-        retCode = p.waitFor();
-        log = FileUtils.readFileToString(outputFile, StandardCharsets.UTF_8);
-        System.out.println(String.format("log:%s", log));
-
-        System.out.println(String.format("Checking output for %s", targetImageRegex));
-        if (log.trim().matches(targetImageRegex)) {
-            fail("The target image still appears in the output of the docker images command");
-        } else {
-            System.out.println("The target image does not appear in the output of the docker images command. It apparently was cleaned up.");
-        }
-
+        return false;
     }
 }
