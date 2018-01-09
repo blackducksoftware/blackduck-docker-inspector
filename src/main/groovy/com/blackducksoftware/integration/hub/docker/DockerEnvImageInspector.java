@@ -49,7 +49,7 @@ import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.dockerclient.DockerClientManager;
 import com.blackducksoftware.integration.hub.docker.help.formatter.UsageFormatter;
 import com.blackducksoftware.integration.hub.docker.imageinspector.DissectedImage;
-import com.blackducksoftware.integration.hub.docker.imageinspector.HubDockerManager;
+import com.blackducksoftware.integration.hub.docker.imageinspector.ImageInspector;
 import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPaths;
@@ -75,7 +75,7 @@ public class DockerEnvImageInspector {
     private InspectorImages dockerImages;
 
     @Autowired
-    private HubDockerManager hubDockerManager;
+    private ImageInspector hubDockerManager;
 
     @Autowired
     private DockerClientManager dockerClientManager;

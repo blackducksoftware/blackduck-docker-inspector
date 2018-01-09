@@ -51,8 +51,8 @@ import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.google.gson.Gson;
 
 @Component
-public class HubDockerManager {
-    private final Logger logger = LoggerFactory.getLogger(HubDockerManager.class);
+public class ImageInspector {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private HubClient hubClient;

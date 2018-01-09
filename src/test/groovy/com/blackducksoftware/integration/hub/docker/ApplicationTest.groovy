@@ -9,7 +9,7 @@ import org.junit.Test
 
 import com.blackducksoftware.integration.hub.docker.dockerclient.DockerClientManager
 import com.blackducksoftware.integration.hub.docker.help.formatter.UsageFormatter
-import com.blackducksoftware.integration.hub.docker.imageinspector.HubDockerManager
+import com.blackducksoftware.integration.hub.docker.imageinspector.ImageInspector
 import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPaths
@@ -116,7 +116,7 @@ class ApplicationTest {
             },
             verifyHubConnection: {
             }
-        ] as HubDockerManager
+        ] as ImageInspector
         app.hubDockerManager.config = config
 
         app.programVersion = [

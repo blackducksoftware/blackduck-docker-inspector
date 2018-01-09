@@ -7,7 +7,7 @@ import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
 
-import com.blackducksoftware.integration.hub.docker.imageinspector.HubDockerManager
+import com.blackducksoftware.integration.hub.docker.imageinspector.ImageInspector
 import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.imageinspector.PackageManagerEnum
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config
@@ -91,7 +91,7 @@ class HubDockerManagerTest {
         extractor.init()
         extractors.add(extractor)
 
-        HubDockerManager mgr = new HubDockerManager()
+        ImageInspector mgr = new ImageInspector()
         String tempDirPath = TestUtils.createTempDirectory().getAbsolutePath()
         mgr.programPaths = [
             getHubDockerWorkingDirPath: { -> tempDirPath },
