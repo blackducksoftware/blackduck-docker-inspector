@@ -19,8 +19,8 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.blackducksoftware.integration.hub.docker.v2.ProgramVersion;
-import com.blackducksoftware.integration.hub.docker.v2.TestUtils;
+import com.blackducksoftware.integration.hub.docker.ProgramVersion;
+import com.blackducksoftware.integration.hub.docker.TestUtils;
 
 public class EndToEndTest {
 

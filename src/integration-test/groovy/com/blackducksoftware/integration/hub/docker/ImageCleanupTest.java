@@ -16,7 +16,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.blackducksoftware.integration.hub.docker.v2.ProgramVersion;
+import com.blackducksoftware.integration.hub.docker.ProgramVersion;
 
 public class ImageCleanupTest {
 

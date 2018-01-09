@@ -46,7 +46,7 @@ Properties applicationProperties = new Properties()
 applicationProperties.load(new FileInputStream("src/main/resources/application.properties"))
 String hubDockerPgmDir = '/opt/blackduck/hub-docker-inspector'
 
-springBoot { mainClass = 'com.blackducksoftware.integration.hub.docker.v2.DockerEnvImageInspector' }
+springBoot { mainClass = 'com.blackducksoftware.integration.hub.docker.DockerEnvImageInspector' }
 
 sourceSets {
 	main {
