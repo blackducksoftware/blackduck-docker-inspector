@@ -42,6 +42,7 @@ class ApplicationTest {
             getDockerTar: { "" },
             getDockerImage: { targetImageName },
             getDockerImageId: { "" },
+            getDockerTar: { "" },
             getTargetImageName: { "" },
             getDockerImageRepo: { targetImageName },
             getDockerImageTag : { "" },
@@ -112,8 +113,11 @@ class ApplicationTest {
             getLayerMappings: {String tarFileName, String dockerImageName, String dockerTagName ->
                 null},
             phoneHome: {
+            },
+            verifyHubConnection: {
             }
         ] as HubDockerManager
+        app.hubDockerManager.config = config
 
         app.programVersion = [
             getProgramVersion: {"1.2.3"}

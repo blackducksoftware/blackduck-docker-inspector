@@ -39,6 +39,7 @@ import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.bdio.BdioWriter;
+import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.imageinspector.hub.HubClient;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.DockerTarParser;
@@ -60,10 +61,17 @@ public class HubDockerManager {
     private ProgramPaths programPaths;
 
     @Autowired
+    private Config config;
+
+    @Autowired
     private List<Extractor> extractors;
 
     @Autowired
     private DockerTarParser tarParser;
+
+    public void setConfig(final Config config) {
+        this.config = config;
+    }
 
     public void init() {
         tarParser.setWorkingDirectory(new File(programPaths.getHubDockerWorkingDirPath()));
@@ -87,6 +95,39 @@ public class HubDockerManager {
 
     public List<ManifestLayerMapping> getLayerMappings(final String tarFileName, final String dockerImageName, final String dockerTagName) throws Exception {
         return tarParser.getLayerMappings(tarFileName, dockerImageName, dockerTagName);
+    }
+
+    public void verifyHubConnection() throws HubIntegrationException {
+        hubClient.testHubConnection();
+        return;
+    }
+
+    public void initImageName() throws HubIntegrationException {
+        logger.debug(String.format("initImageName(): dockerImage: %s, dockerTar: %s", config.getDockerImage(), config.getDockerTar()));
+        if (StringUtils.isNotBlank(config.getDockerImage())) {
+            final String[] imageNameAndTag = config.getDockerImage().split(":");
+            if ((imageNameAndTag.length > 0) && (StringUtils.isNotBlank(imageNameAndTag[0]))) {
+                config.setDockerImageRepo(imageNameAndTag[0]);
+            }
+            if ((imageNameAndTag.length > 1) && (StringUtils.isNotBlank(imageNameAndTag[1]))) {
+                config.setDockerImageTag(imageNameAndTag[1]);
+            } else {
+                config.setDockerImageTag("latest");
+            }
+        }
+        logger.debug(String.format("initImageName(): final: dockerImage: %s; dockerImageRepo: %s; dockerImageTag: %s", config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag()));
+    }
+
+    public void adjustImageNameTagFromLayerMappings(final List<ManifestLayerMapping> layerMappings) {
+        if ((layerMappings != null) && (layerMappings.size() == 1)) {
+            if (StringUtils.isBlank(config.getDockerImageRepo())) {
+                config.setDockerImageRepo(layerMappings.get(0).getImageName());
+            }
+            if (StringUtils.isBlank(config.getDockerImageTag())) {
+                config.setDockerImageTag(layerMappings.get(0).getTagName());
+            }
+        }
+        logger.debug(String.format("adjustImageNameTagFromLayerMappings(): final: dockerImage: %s; dockerImageRepo: %s; dockerImageTag: %s", config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag()));
     }
 
     public List<File> generateBdioFromImageFilesDir(final String dockerImageRepo, final String dockerImageTag, final List<ManifestLayerMapping> mappings, final String projectName, final String versionName, final File dockerTar,
