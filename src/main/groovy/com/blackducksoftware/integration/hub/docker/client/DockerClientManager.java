@@ -71,10 +71,10 @@ public class DockerClientManager {
     private static final String IMAGE_TAG_PROPERTY = "docker.image.tag";
     private static final String ON_HOST_PROPERTY = "on.host";
 
-    private static String INSPECT_PROPERTY = "inspect"; // true
-    private static String INSPECT_IN_CONTAINER_PROPERTY = "inspect.in.container"; // false
-    private static String UPLOAD_BDIO_PROPERTY = "upload.bdio"; // false
-    private static String DETECT_PKG_MGR_PROPERTY = "detect.pkg.mgr"; // true
+    private static final String INSPECT_PROPERTY = "inspect"; // true
+    private static final String INSPECT_IN_CONTAINER_PROPERTY = "inspect.in.container"; // false
+    private static final String UPLOAD_BDIO_PROPERTY = "upload.bdio"; // false
+    private static final String DETECT_PKG_MGR_PROPERTY = "detect.pkg.mgr"; // true
 
     private static final String OUTPUT_INCLUDE_DOCKER_TARFILE_PROPERTY = "output.include.dockertarfile";
     private static final String OUTPUT_INCLUDE_CONTAINER_FILE_SYSTEM_TARFILE_PROPERTY = "output.include.containerfilesystem";
@@ -193,19 +193,18 @@ public class DockerClientManager {
         return alreadyPulledImage;
     }
 
-    public void run(final String runOnImageName, final String runOnTagName, final File dockerTarFile, final boolean copyJar, final String targetImage, final String targetImageRepo, final String targetImageTag)
+    public String run(final String runOnImageName, final String runOnTagName, final String runOnImageId, final File dockerTarFile, final boolean copyJar, final String targetImage, final String targetImageRepo, final String targetImageTag)
             throws InterruptedException, IOException, HubIntegrationException, IllegalArgumentException, IllegalAccessException {
-
         final String hubPasswordString = hubPassword.get();
-        final String imageId = String.format("%s:%s", runOnImageName, runOnTagName);
-        logger.info(String.format("Running container based on image %s", imageId));
+        final String imageNameTag = String.format("%s:%s", runOnImageName, runOnTagName);
+        logger.info(String.format("Running container based on image %s", imageNameTag));
         final String extractorContainerName = programPaths.deriveContainerName(runOnImageName);
         logger.debug(String.format("Container name: %s", extractorContainerName));
         final DockerClient dockerClient = hubDockerClient.getDockerClient();
         final String tarFileDirInSubContainer = programPaths.getHubDockerTargetDirPathContainer();
         final String tarFilePathInSubContainer = programPaths.getHubDockerTargetDirPathContainer() + dockerTarFile.getName();
 
-        final String containerId = ensureContainerRunning(dockerClient, imageId, extractorContainerName, hubPasswordString);
+        final String containerId = ensureContainerRunning(dockerClient, imageNameTag, extractorContainerName, hubPasswordString);
         setPropertiesInSubContainer(dockerClient, containerId, tarFilePathInSubContainer, tarFileDirInSubContainer, dockerTarFile, targetImage, targetImageRepo, targetImageTag);
         if (copyJar) {
             copyFileToContainer(dockerClient, containerId, programPaths.getHubDockerJarPathHost(), programPaths.getHubDockerPgmDirPathContainer());
@@ -224,12 +223,13 @@ public class DockerClientManager {
         cmd.add(String.format("/opt/blackduck/hub-docker-inspector/%s", programPaths.getHubDockerJarFilenameHost()));
         cmd.add(String.format("--spring.config.location=%s", "/opt/blackduck/hub-docker-inspector/config/application.properties"));
         cmd.add(String.format("--docker.tar=%s", tarFilePathInSubContainer));
-        execCommandInContainer(dockerClient, imageId, containerId, cmd);
+        execCommandInContainer(dockerClient, imageNameTag, containerId, cmd);
         copyFileFromContainer(containerId, programPaths.getHubDockerOutputPathContainer() + ".", programPaths.getHubDockerOutputPathHost());
-        stopRemoveContainer(dockerClient, containerId);
+        return containerId;
     }
 
-    private void stopRemoveContainer(final DockerClient dockerClient, final String containerId) {
+    public void stopRemoveContainer(final String containerId) throws HubIntegrationException {
+        final DockerClient dockerClient = hubDockerClient.getDockerClient();
         stopContainer(dockerClient, containerId);
         removeContainer(dockerClient, containerId);
     }
