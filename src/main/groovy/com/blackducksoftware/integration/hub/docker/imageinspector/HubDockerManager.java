@@ -21,7 +21,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.blackducksoftware.integration.hub.docker;
+package com.blackducksoftware.integration.hub.docker.imageinspector;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -39,13 +39,13 @@ import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.bdio.BdioWriter;
-import com.blackducksoftware.integration.hub.docker.dockerclient.DockerClientManager;
-import com.blackducksoftware.integration.hub.docker.imageinspector.extractor.ExtractionDetails;
-import com.blackducksoftware.integration.hub.docker.imageinspector.extractor.Extractor;
+import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.imageinspector.hub.HubClient;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.DockerTarParser;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImageInfo;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping;
+import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor.ExtractionDetails;
+import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor.Extractor;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.google.gson.Gson;
 
@@ -60,9 +60,6 @@ public class HubDockerManager {
     private ProgramPaths programPaths;
 
     @Autowired
-    private DockerClientManager dockerClientManager;
-
-    @Autowired
     private List<Extractor> extractors;
 
     @Autowired
@@ -70,14 +67,6 @@ public class HubDockerManager {
 
     public void init() {
         tarParser.setWorkingDirectory(new File(programPaths.getHubDockerWorkingDirPath()));
-    }
-
-    public File getTarFileFromDockerImageById(final String imageId) throws IOException, HubIntegrationException {
-        return dockerClientManager.getTarFileFromDockerImageById(imageId);
-    }
-
-    public File getTarFileFromDockerImage(final String imageName, final String tagName) throws IOException, HubIntegrationException {
-        return dockerClientManager.getTarFileFromDockerImage(imageName, tagName);
     }
 
     public List<File> extractLayerTars(final File dockerTar) throws IOException {
@@ -111,10 +100,6 @@ public class HubDockerManager {
         final String architecture = getExtractorByPackageManager(imagePkgMgrInfo.getPkgMgr().getPackageManager()).deriveArchitecture(targetImageFileSystemRootDir);
         logger.debug(String.format("generateBdioFromImageFilesDir(): architecture: %s", architecture));
         return generateBdioFromPackageMgrDirs(dockerImageRepo, dockerImageTag, mappings, projectName, versionName, dockerTar.getName(), imagePkgMgrInfo, architecture);
-    }
-
-    public void phoneHome() {
-        hubClient.phoneHome(dockerClientManager.getDockerEngineVersion());
     }
 
     public void uploadBdioFiles(final List<File> bdioFiles) throws IntegrationException {

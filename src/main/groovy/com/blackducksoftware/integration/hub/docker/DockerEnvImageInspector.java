@@ -48,10 +48,14 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.dockerclient.DockerClientManager;
 import com.blackducksoftware.integration.hub.docker.help.formatter.UsageFormatter;
+import com.blackducksoftware.integration.hub.docker.imageinspector.DissectedImage;
+import com.blackducksoftware.integration.hub.docker.imageinspector.HubDockerManager;
+import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config;
+import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.imageinspector.hub.HubClient;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping;
-import com.blackducksoftware.integration.hub.docker.imageinspector.inspectorimage.DockerImages;
+import com.blackducksoftware.integration.hub.docker.imageinspector.inspectorimage.InspectorImages;
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.FileOperations;
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.FileSys;
 import com.blackducksoftware.integration.hub.docker.imageinspector.result.Result;
@@ -69,7 +73,7 @@ public class DockerEnvImageInspector {
     private HubClient hubClient;
 
     @Autowired
-    private DockerImages dockerImages;
+    private InspectorImages dockerImages;
 
     @Autowired
     private HubDockerManager hubDockerManager;
@@ -195,8 +199,8 @@ public class DockerEnvImageInspector {
                 dissectedImage.setTargetImageFileSystemRootDir(hubDockerManager.extractDockerLayers(dissectedImage.getLayerTars(), dissectedImage.getLayerMappings()));
                 dissectedImage.setTargetOs(hubDockerManager.detectOperatingSystem(dissectedImage.getTargetImageFileSystemRootDir()));
             }
-            dissectedImage.setRunOnImageName(dockerImages.getDockerImageName(dissectedImage.getTargetOs()));
-            dissectedImage.setRunOnImageTag(dockerImages.getDockerImageVersion(dissectedImage.getTargetOs()));
+            dissectedImage.setRunOnImageName(dockerImages.getInspectorImageName(dissectedImage.getTargetOs()));
+            dissectedImage.setRunOnImageTag(dockerImages.getInspectorImageTag(dissectedImage.getTargetOs()));
             logger.info(String.format("Identified target OS: %s; corresponding inspection image: %s:%s", dissectedImage.getTargetOs().name(), dissectedImage.getRunOnImageName(), dissectedImage.getRunOnImageTag()));
             if (StringUtils.isBlank(dissectedImage.getRunOnImageName()) || StringUtils.isBlank(dissectedImage.getRunOnImageTag())) {
                 throw new HubIntegrationException("Failed to identify inspection image name and/or tag");
@@ -407,7 +411,7 @@ public class DockerEnvImageInspector {
         }
         onHostStatic = config.isOnHost();
         if (config.isOnHost()) {
-            hubDockerManager.phoneHome();
+            hubClient.phoneHome(dockerClientManager.getDockerEngineVersion());
         }
         clearResult();
         initImageName(config);
@@ -460,9 +464,9 @@ public class DockerEnvImageInspector {
         if (StringUtils.isNotBlank(config.getDockerTar())) {
             dockerTarFile = new File(config.getDockerTar());
         } else if (StringUtils.isNotBlank(config.getDockerImageId())) {
-            dockerTarFile = hubDockerManager.getTarFileFromDockerImageById(config.getDockerImageId());
+            dockerTarFile = dockerClientManager.getTarFileFromDockerImageById(config.getDockerImageId());
         } else if (StringUtils.isNotBlank(config.getDockerImageRepo())) {
-            dockerTarFile = hubDockerManager.getTarFileFromDockerImage(config.getDockerImageRepo(), config.getDockerImageTag());
+            dockerTarFile = dockerClientManager.getTarFileFromDockerImage(config.getDockerImageRepo(), config.getDockerImageTag());
         }
         return dockerTarFile;
     }

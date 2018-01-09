@@ -21,7 +21,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.blackducksoftware.integration.hub.docker;
+package com.blackducksoftware.integration.hub.docker.imageinspector;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,8 +31,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.blackducksoftware.integration.hub.docker.imageinspector.extractor.Extractor;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImagePkgMgr;
+import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor.Extractor;
 
 @Component
 public class PackageManagerFiles {

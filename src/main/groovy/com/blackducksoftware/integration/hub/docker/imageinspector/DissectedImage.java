@@ -1,4 +1,4 @@
-package com.blackducksoftware.integration.hub.docker;
+package com.blackducksoftware.integration.hub.docker.imageinspector;
 
 import java.io.File;
 import java.util.List;

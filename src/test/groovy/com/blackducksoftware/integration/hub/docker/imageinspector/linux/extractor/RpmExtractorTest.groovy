@@ -1,4 +1,4 @@
-package com.blackducksoftware.integration.hub.docker.imageinspector.extractor;
+package com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor;
 
 
 import static org.junit.Assert.*
@@ -8,13 +8,13 @@ import org.junit.BeforeClass
 import org.junit.Test
 
 import com.blackducksoftware.integration.hub.bdio.BdioWriter
-import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
-import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 import com.blackducksoftware.integration.hub.docker.TestUtils
-import com.blackducksoftware.integration.hub.docker.imageinspector.executor.ExecutorMock
-import com.blackducksoftware.integration.hub.docker.imageinspector.extractor.ExtractionDetails
-import com.blackducksoftware.integration.hub.docker.imageinspector.extractor.RpmExtractor
+import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum
+import com.blackducksoftware.integration.hub.docker.imageinspector.PackageManagerEnum
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImagePkgMgr
+import com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor.ExecutorMock
+import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor.ExtractionDetails
+import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor.RpmExtractor
 import com.google.gson.Gson
 
 class RpmExtractorTest {

@@ -37,10 +37,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.blackducksoftware.integration.hub.docker.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config;
-import com.blackducksoftware.integration.hub.docker.imageinspector.executor.Executor;
+import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.imageinspector.hub.HubPassword;
+import com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor.Executor;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.CopyArchiveToContainerCmd;

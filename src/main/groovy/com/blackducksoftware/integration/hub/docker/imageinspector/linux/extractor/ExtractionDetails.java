@@ -21,36 +21,26 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.blackducksoftware.integration.hub.docker;
+package com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor;
 
-public enum PackageManagerEnum {
-    DPKG("/var/lib/dpkg", OperatingSystemEnum.UBUNTU),
-    RPM("/var/lib/rpm", OperatingSystemEnum.CENTOS),
-    APK("/lib/apk", OperatingSystemEnum.ALPINE);
+import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum;
 
-    private final String directory;
+public class ExtractionDetails {
+
     private final OperatingSystemEnum operatingSystem;
+    private final String architecture;
 
-    private PackageManagerEnum(final String directory, final OperatingSystemEnum operatingSystem) {
-        this.directory = directory;
+    public ExtractionDetails(final OperatingSystemEnum operatingSystem, final String architecture) {
         this.operatingSystem = operatingSystem;
-    }
-
-    public static PackageManagerEnum getPackageManagerEnumByName(String name) {
-        PackageManagerEnum result = null;
-        if (name != null) {
-            name = name.toUpperCase();
-            result = PackageManagerEnum.valueOf(name);
-        }
-        return result;
-    }
-
-    public String getDirectory() {
-        return directory;
+        this.architecture = architecture;
     }
 
     public OperatingSystemEnum getOperatingSystem() {
         return operatingSystem;
+    }
+
+    public String getArchitecture() {
+        return architecture;
     }
 
 }

@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum;
-import com.blackducksoftware.integration.hub.docker.ProgramPaths;
+import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum;
+import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.google.gson.Gson;
 

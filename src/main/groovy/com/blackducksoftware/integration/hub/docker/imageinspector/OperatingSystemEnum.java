@@ -21,26 +21,33 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.blackducksoftware.integration.hub.docker.imageinspector.extractor;
+package com.blackducksoftware.integration.hub.docker.imageinspector;
 
-import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum;
+public enum OperatingSystemEnum {
+    ALPINE("alpine"),
+    CENTOS("centos"),
+    DEBIAN("debian"),
+    FEDORA("fedora"),
+    UBUNTU("ubuntu"),
+    REDHAT("redhat"), // this may not be needed
+    RHEL("redhat");
 
-public class ExtractionDetails {
+    private final String forge;
 
-    private final OperatingSystemEnum operatingSystem;
-    private final String architecture;
-
-    public ExtractionDetails(final OperatingSystemEnum operatingSystem, final String architecture) {
-        this.operatingSystem = operatingSystem;
-        this.architecture = architecture;
+    private OperatingSystemEnum(final String forge) {
+        this.forge = forge;
     }
 
-    public OperatingSystemEnum getOperatingSystem() {
-        return operatingSystem;
+    public String getForge() {
+        return forge;
     }
 
-    public String getArchitecture() {
-        return architecture;
+    public static OperatingSystemEnum determineOperatingSystem(String operatingSystemName) {
+        OperatingSystemEnum result = null;
+        if (operatingSystemName != null) {
+            operatingSystemName = operatingSystemName.toUpperCase();
+            result = OperatingSystemEnum.valueOf(operatingSystemName);
+        }
+        return result;
     }
-
 }

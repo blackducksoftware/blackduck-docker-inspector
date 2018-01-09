@@ -7,18 +7,15 @@ import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
 
-import com.blackducksoftware.integration.hub.docker.DockerEnvImageInspector
-import com.blackducksoftware.integration.hub.docker.HubDockerManager
-import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
-import com.blackducksoftware.integration.hub.docker.ProgramPaths
-import com.blackducksoftware.integration.hub.docker.ProgramVersion
-import com.blackducksoftware.integration.hub.docker.TestUtils
 import com.blackducksoftware.integration.hub.docker.dockerclient.DockerClientManager
 import com.blackducksoftware.integration.hub.docker.help.formatter.UsageFormatter
+import com.blackducksoftware.integration.hub.docker.imageinspector.HubDockerManager
+import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config
+import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPaths
 import com.blackducksoftware.integration.hub.docker.imageinspector.hub.HubClient
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping
-import com.blackducksoftware.integration.hub.docker.imageinspector.inspectorimage.DockerImages
+import com.blackducksoftware.integration.hub.docker.imageinspector.inspectorimage.InspectorImages
 import com.blackducksoftware.integration.hub.docker.imageinspector.result.ResultFile
 import com.google.gson.Gson
 
@@ -56,7 +53,7 @@ class ApplicationTest {
 
         DockerEnvImageInspector app = new DockerEnvImageInspector()
         app.config = config
-        app.dockerImages = new DockerImages()
+        app.dockerImages = new InspectorImages()
         app.dockerImages.config = config
         ProgramVersion mockedProgramVersion = [
             getProgramVersion: { '1.2.3' }
@@ -100,7 +97,6 @@ class ApplicationTest {
         // TODO extractManifestFileContent value is set twice
         app.hubDockerManager = [
             init: { },
-            getTarFileFromDockerImage: { new File("src/test/resources/simple/layer.tar") },
             extractLayerTars: { File dockerTar -> layerTarFiles },
             cleanWorkingDirectory: {},
             generateBdioFromPackageMgrDirs: {null},
@@ -123,6 +119,8 @@ class ApplicationTest {
             getProgramVersion: {"1.2.3"}
         ] as ProgramVersion
         app.dockerClientManager = [
+            getTarFileFromDockerImage: { String name, String tag -> new File("src/test/resources/simple/layer.tar") },
+            getDockerEngineVersion: { -> "1" },
             pullImage: {String runOnImageName, String runOnImageVersion -> },
             run: {String runOnImageName, String runOnImageVersion, String runOnImageId, File dockerTarFile, boolean devMode, String image, String repo, String tag ->
                 invokedSubContainer = true}

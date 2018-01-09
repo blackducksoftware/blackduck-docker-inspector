@@ -23,14 +23,14 @@
  */
 package com.blackducksoftware.integration.hub.docker.imageinspector.inspectorimage;
 
-import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum;
+import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum;
 
-class DockerImage {
+class InspectorImage {
     private final OperatingSystemEnum os;
     private final String imageName;
     private final String imageVersion;
 
-    public DockerImage(final OperatingSystemEnum os, final String imageName, final String imageVersion) {
+    public InspectorImage(final OperatingSystemEnum os, final String imageName, final String imageVersion) {
         this.os = os;
         this.imageName = imageName;
         this.imageVersion = imageVersion;

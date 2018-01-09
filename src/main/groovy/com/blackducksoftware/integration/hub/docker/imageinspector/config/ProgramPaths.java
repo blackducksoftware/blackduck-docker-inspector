@@ -21,7 +21,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.blackducksoftware.integration.hub.docker;
+package com.blackducksoftware.integration.hub.docker.imageinspector.config;
 
 import java.io.File;
 import java.lang.management.ManagementFactory;
@@ -35,9 +35,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.blackducksoftware.integration.hub.docker.dockerclient.DockerClientManager;
-import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config;
 
 @Component
 public class ProgramPaths {
@@ -68,7 +65,7 @@ public class ProgramPaths {
     private String hubDockerPgmDirPathContainer;
     public static final String APPLICATION_PROPERTIES_FILENAME = "application.properties";
 
-    private final Logger logger = LoggerFactory.getLogger(ProgramPaths.class);
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private String hubDockerConfigDirPathHost;
     private String hubDockerConfigDirPathContainer;
@@ -162,7 +159,7 @@ public class ProgramPaths {
     }
 
     public String getQualifiedJarPath() {
-        return DockerClientManager.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        return this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
     }
 
     public String getHubDockerConfigDirPathHost() {

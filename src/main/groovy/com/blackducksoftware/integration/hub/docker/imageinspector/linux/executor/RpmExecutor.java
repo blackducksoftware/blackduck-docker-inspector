@@ -21,17 +21,17 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.blackducksoftware.integration.hub.docker.imageinspector.executor;
+package com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class ApkExecutor extends PkgMgrExecutor {
+public class RpmExecutor extends PkgMgrExecutor {
     @Override
     @PostConstruct
     public void init() {
-        initValues(null, "apk info -v");
+        initValues("rpm --rebuilddb", "rpm -qa");
     }
 }

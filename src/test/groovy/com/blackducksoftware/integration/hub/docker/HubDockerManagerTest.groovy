@@ -7,26 +7,24 @@ import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
 
-import com.blackducksoftware.integration.hub.docker.HubDockerManager
-import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
-import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
-import com.blackducksoftware.integration.hub.docker.ProgramPaths
-import com.blackducksoftware.integration.hub.docker.TestUtils
-import com.blackducksoftware.integration.hub.docker.dockerclient.DockerClientManager
+import com.blackducksoftware.integration.hub.docker.imageinspector.HubDockerManager
+import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum
+import com.blackducksoftware.integration.hub.docker.imageinspector.PackageManagerEnum
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.DockerInspectorOption
-import com.blackducksoftware.integration.hub.docker.imageinspector.executor.ApkExecutor
-import com.blackducksoftware.integration.hub.docker.imageinspector.executor.DpkgExecutor
-import com.blackducksoftware.integration.hub.docker.imageinspector.executor.Executor
-import com.blackducksoftware.integration.hub.docker.imageinspector.extractor.ApkExtractor
-import com.blackducksoftware.integration.hub.docker.imageinspector.extractor.DpkgExtractor
-import com.blackducksoftware.integration.hub.docker.imageinspector.extractor.Extractor
+import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPaths
 import com.blackducksoftware.integration.hub.docker.imageinspector.hub.HubClient
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.DockerTarParser
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImageInfo
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImagePkgMgr
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.FileOperations
+import com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor.ApkExecutor
+import com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor.DpkgExecutor
+import com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor.Executor
+import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor.ApkExtractor
+import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor.DpkgExtractor
+import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor.Extractor
 
 class HubDockerManagerTest {
 
@@ -103,9 +101,7 @@ class HubDockerManagerTest {
         mgr.programPaths.config = config;
         mgr.hubClient = [
         ] as HubClient
-        mgr.dockerClientManager = [
-            getTarFileFromDockerImage: {String name, String tag -> imageTarFile}
-        ] as DockerClientManager
+
         mgr.extractors = extractors
 
 
@@ -124,8 +120,6 @@ class HubDockerManagerTest {
         ] as DockerTarParser
 
         FileOperations.metaClass.static.findFileWithName = {File fileToSearch, String name -> etcDirs}
-
-        assertEquals("image.tar", mgr.getTarFileFromDockerImage(imageName, tagName).getName())
 
         List<ManifestLayerMapping> mappings = new ArrayList<ManifestLayerMapping>()
         List<String> layerIds = new ArrayList<>()

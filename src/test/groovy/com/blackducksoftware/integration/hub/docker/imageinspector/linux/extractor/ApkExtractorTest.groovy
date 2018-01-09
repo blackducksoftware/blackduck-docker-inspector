@@ -9,7 +9,7 @@
  * accordance with the terms of the license agreement you entered into
  * with Black Duck Software.
  */
-package com.blackducksoftware.integration.hub.docker.imageinspector.extractor
+package com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor
 
 
 import static org.junit.Assert.*
@@ -17,13 +17,13 @@ import static org.junit.Assert.*
 import org.junit.Test
 
 import com.blackducksoftware.integration.hub.bdio.BdioWriter
-import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
-import com.blackducksoftware.integration.hub.docker.PackageManagerEnum
 import com.blackducksoftware.integration.hub.docker.TestUtils
-import com.blackducksoftware.integration.hub.docker.imageinspector.executor.ExecutorMock
-import com.blackducksoftware.integration.hub.docker.imageinspector.extractor.ApkExtractor
-import com.blackducksoftware.integration.hub.docker.imageinspector.extractor.ExtractionDetails
+import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum
+import com.blackducksoftware.integration.hub.docker.imageinspector.PackageManagerEnum
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImagePkgMgr
+import com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor.ExecutorMock
+import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor.ApkExtractor
+import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor.ExtractionDetails
 import com.google.gson.Gson
 
 class ApkExtractorTest {

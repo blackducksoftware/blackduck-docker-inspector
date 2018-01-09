@@ -21,7 +21,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.blackducksoftware.integration.hub.docker.imageinspector.extractor;
+package com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,10 +38,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.hub.bdio.graph.MutableDependencyGraph;
-import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum;
-import com.blackducksoftware.integration.hub.docker.PackageManagerEnum;
-import com.blackducksoftware.integration.hub.docker.imageinspector.executor.ApkExecutor;
+import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum;
+import com.blackducksoftware.integration.hub.docker.imageinspector.PackageManagerEnum;
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.FileOperations;
+import com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor.ApkExecutor;
 
 @Component
 class ApkExtractor extends Extractor {

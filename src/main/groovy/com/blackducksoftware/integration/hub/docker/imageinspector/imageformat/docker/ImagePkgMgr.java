@@ -28,7 +28,7 @@ import java.io.File;
 import org.apache.commons.lang3.builder.RecursiveToStringStyle;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
-import com.blackducksoftware.integration.hub.docker.PackageManagerEnum;
+import com.blackducksoftware.integration.hub.docker.imageinspector.PackageManagerEnum;
 
 public class ImagePkgMgr {
 

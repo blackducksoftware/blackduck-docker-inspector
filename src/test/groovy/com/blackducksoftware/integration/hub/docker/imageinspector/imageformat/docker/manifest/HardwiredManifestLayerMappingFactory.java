@@ -2,7 +2,7 @@ package com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.
 
 import java.util.List;
 
-import com.blackducksoftware.integration.hub.docker.ProgramPaths;
+import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMappingFactory;
 

@@ -22,9 +22,9 @@ import java.nio.file.Paths
 import org.junit.Ignore
 import org.junit.Test
 
-import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
-import com.blackducksoftware.integration.hub.docker.ProgramPaths
 import com.blackducksoftware.integration.hub.docker.TestUtils
+import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum
+import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPaths
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.DockerTarParser
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImageInfo
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.HardwiredManifestFactory

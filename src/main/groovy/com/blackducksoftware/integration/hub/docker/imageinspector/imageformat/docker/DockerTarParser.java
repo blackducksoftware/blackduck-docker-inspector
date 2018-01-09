@@ -41,8 +41,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum;
-import com.blackducksoftware.integration.hub.docker.PackageManagerEnum;
+import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum;
+import com.blackducksoftware.integration.hub.docker.imageinspector.PackageManagerEnum;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.Manifest;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestFactory;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping;

@@ -1,4 +1,4 @@
-package com.blackducksoftware.integration.hub.docker.imageinspector.executor;
+package com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor;
 
 import java.io.IOException;
 
@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.blackducksoftware.integration.hub.docker.PackageManagerFiles;
+import com.blackducksoftware.integration.hub.docker.imageinspector.PackageManagerFiles;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImagePkgMgr;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 

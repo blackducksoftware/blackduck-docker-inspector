@@ -18,10 +18,10 @@ import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
 
-import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.ProgramVersion
+import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config
-import com.blackducksoftware.integration.hub.docker.imageinspector.inspectorimage.DockerImages
+import com.blackducksoftware.integration.hub.docker.imageinspector.inspectorimage.InspectorImages
 
 class DockerImagesTest {
 
@@ -39,23 +39,23 @@ class DockerImagesTest {
             getProgramVersion: { '1.2.3' }
         ] as ProgramVersion
 
-        DockerImages osMapper = new DockerImages()
+        InspectorImages osMapper = new InspectorImages()
         Config config = [
             getInspectorRepository: { "blackducksoftware" }
         ] as Config;
         osMapper.config = config
         osMapper.programVersion = mockedProgramVersion
-        assertEquals("blackducksoftware/hub-docker-inspector-centos", osMapper.getDockerImageName(OperatingSystemEnum.CENTOS))
-        assertEquals("1.2.3", osMapper.getDockerImageVersion(OperatingSystemEnum.CENTOS))
-        assertEquals(OperatingSystemEnum.CENTOS, osMapper.getDockerImageOs(OperatingSystemEnum.CENTOS))
+        assertEquals("blackducksoftware/hub-docker-inspector-centos", osMapper.getInspectorImageName(OperatingSystemEnum.CENTOS))
+        assertEquals("1.2.3", osMapper.getInspectorImageTag(OperatingSystemEnum.CENTOS))
+        assertEquals(OperatingSystemEnum.CENTOS, osMapper.getInspectorImageOs(OperatingSystemEnum.CENTOS))
 
-        assertEquals("blackducksoftware/hub-docker-inspector-ubuntu", osMapper.getDockerImageName(OperatingSystemEnum.UBUNTU))
-        assertEquals("1.2.3", osMapper.getDockerImageVersion(OperatingSystemEnum.UBUNTU))
-        assertEquals(OperatingSystemEnum.UBUNTU, osMapper.getDockerImageOs(OperatingSystemEnum.UBUNTU))
+        assertEquals("blackducksoftware/hub-docker-inspector-ubuntu", osMapper.getInspectorImageName(OperatingSystemEnum.UBUNTU))
+        assertEquals("1.2.3", osMapper.getInspectorImageTag(OperatingSystemEnum.UBUNTU))
+        assertEquals(OperatingSystemEnum.UBUNTU, osMapper.getInspectorImageOs(OperatingSystemEnum.UBUNTU))
 
-        assertEquals("blackducksoftware/hub-docker-inspector-alpine", osMapper.getDockerImageName(OperatingSystemEnum.ALPINE))
-        assertEquals("1.2.3", osMapper.getDockerImageVersion(OperatingSystemEnum.ALPINE))
-        assertEquals(OperatingSystemEnum.ALPINE, osMapper.getDockerImageOs(OperatingSystemEnum.ALPINE))
+        assertEquals("blackducksoftware/hub-docker-inspector-alpine", osMapper.getInspectorImageName(OperatingSystemEnum.ALPINE))
+        assertEquals("1.2.3", osMapper.getInspectorImageTag(OperatingSystemEnum.ALPINE))
+        assertEquals(OperatingSystemEnum.ALPINE, osMapper.getInspectorImageOs(OperatingSystemEnum.ALPINE))
     }
 
     @Test
@@ -64,13 +64,13 @@ class DockerImagesTest {
             getProgramVersion: { '1.2.3' }
         ] as ProgramVersion
 
-        DockerImages osMapper = new DockerImages()
+        InspectorImages osMapper = new InspectorImages()
         Config config = [
             getInspectorRepository: { "myrepo" }
         ] as Config;
         osMapper.config = config
         osMapper.programVersion = mockedProgramVersion
-        assertEquals("myrepo/hub-docker-inspector-centos", osMapper.getDockerImageName(OperatingSystemEnum.CENTOS))
+        assertEquals("myrepo/hub-docker-inspector-centos", osMapper.getInspectorImageName(OperatingSystemEnum.CENTOS))
     }
 
     @Test
@@ -79,13 +79,13 @@ class DockerImagesTest {
             getProgramVersion: { '1.2.3' }
         ] as ProgramVersion
 
-        DockerImages osMapper = new DockerImages()
+        InspectorImages osMapper = new InspectorImages()
         Config config = [
             getInspectorRepository: { "myrepo/" }
         ] as Config;
         osMapper.config = config
         osMapper.programVersion = mockedProgramVersion
-        assertEquals("myrepo/hub-docker-inspector-centos", osMapper.getDockerImageName(OperatingSystemEnum.CENTOS))
+        assertEquals("myrepo/hub-docker-inspector-centos", osMapper.getInspectorImageName(OperatingSystemEnum.CENTOS))
     }
 
     @Test
@@ -94,12 +94,12 @@ class DockerImagesTest {
             getProgramVersion: { '1.2.3' }
         ] as ProgramVersion
 
-        DockerImages osMapper = new DockerImages()
+        InspectorImages osMapper = new InspectorImages()
         Config config = [
             getInspectorRepository: { "" }
         ] as Config;
         osMapper.config = config
         osMapper.programVersion = mockedProgramVersion
-        assertEquals("hub-docker-inspector-centos", osMapper.getDockerImageName(OperatingSystemEnum.CENTOS))
+        assertEquals("hub-docker-inspector-centos", osMapper.getInspectorImageName(OperatingSystemEnum.CENTOS))
     }
 }

@@ -5,10 +5,10 @@ import static org.junit.Assert.*
 
 import org.junit.Test
 
-import com.blackducksoftware.integration.hub.docker.ProgramPaths
 import com.blackducksoftware.integration.hub.docker.TestUtils
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.DockerInspectorOption
+import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPaths
 
 class ProgramPathsTest {
 

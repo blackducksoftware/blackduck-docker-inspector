@@ -20,7 +20,7 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.blackducksoftware.integration.hub.docker.PackageManagerEnum;
+import com.blackducksoftware.integration.hub.docker.imageinspector.PackageManagerEnum;
 
 public class FileSys {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());

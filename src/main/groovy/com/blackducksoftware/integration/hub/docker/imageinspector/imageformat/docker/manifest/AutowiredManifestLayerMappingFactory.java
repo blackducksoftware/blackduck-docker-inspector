@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.blackducksoftware.integration.hub.docker.ProgramPaths;
+import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPaths;
 
 @Component
 public class AutowiredManifestLayerMappingFactory implements ManifestLayerMappingFactory {

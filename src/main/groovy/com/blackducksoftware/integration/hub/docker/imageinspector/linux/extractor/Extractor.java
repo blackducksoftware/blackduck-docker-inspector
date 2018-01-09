@@ -21,7 +21,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.blackducksoftware.integration.hub.docker.imageinspector.extractor;
+package com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,9 +37,9 @@ import com.blackducksoftware.integration.hub.bdio.model.Forge;
 import com.blackducksoftware.integration.hub.bdio.model.SimpleBdioDocument;
 import com.blackducksoftware.integration.hub.bdio.model.dependency.Dependency;
 import com.blackducksoftware.integration.hub.bdio.model.externalid.ExternalId;
-import com.blackducksoftware.integration.hub.docker.PackageManagerEnum;
-import com.blackducksoftware.integration.hub.docker.imageinspector.executor.PkgMgrExecutor;
+import com.blackducksoftware.integration.hub.docker.imageinspector.PackageManagerEnum;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImagePkgMgr;
+import com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor.PkgMgrExecutor;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 
 public abstract class Extractor {

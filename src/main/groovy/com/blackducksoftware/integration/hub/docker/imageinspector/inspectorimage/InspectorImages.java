@@ -33,13 +33,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.blackducksoftware.integration.hub.docker.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.docker.ProgramVersion;
+import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config;
 
 @Component
-public class DockerImages {
-    private final Logger logger = LoggerFactory.getLogger(DockerImages.class);
+public class InspectorImages {
+    private final Logger logger = LoggerFactory.getLogger(InspectorImages.class);
 
     @Autowired
     ProgramVersion programVersion;
@@ -47,7 +47,7 @@ public class DockerImages {
     @Autowired
     Config config;
 
-    private final Map<OperatingSystemEnum, DockerImage> dockerImageMap = new HashMap<>();
+    private final Map<OperatingSystemEnum, InspectorImage> inspectorImageMap = new HashMap<>();
     private boolean initialized = false;
 
     void init() throws IOException {
@@ -64,40 +64,40 @@ public class DockerImages {
         } else {
             repoWithSeparator = String.format("%s/", repo);
         }
-        dockerImageMap.put(OperatingSystemEnum.CENTOS, new DockerImage(OperatingSystemEnum.CENTOS, String.format("%shub-docker-inspector-centos", repoWithSeparator), programVersionString));
-        dockerImageMap.put(OperatingSystemEnum.FEDORA, new DockerImage(OperatingSystemEnum.CENTOS, String.format("%shub-docker-inspector-centos", repoWithSeparator), programVersionString));
-        dockerImageMap.put(OperatingSystemEnum.DEBIAN, new DockerImage(OperatingSystemEnum.UBUNTU, String.format("%shub-docker-inspector-ubuntu", repoWithSeparator), programVersionString));
-        dockerImageMap.put(OperatingSystemEnum.UBUNTU, new DockerImage(OperatingSystemEnum.UBUNTU, String.format("%shub-docker-inspector-ubuntu", repoWithSeparator), programVersionString));
-        dockerImageMap.put(OperatingSystemEnum.ALPINE, new DockerImage(OperatingSystemEnum.ALPINE, String.format("%shub-docker-inspector-alpine", repoWithSeparator), programVersionString));
+        inspectorImageMap.put(OperatingSystemEnum.CENTOS, new InspectorImage(OperatingSystemEnum.CENTOS, String.format("%shub-docker-inspector-centos", repoWithSeparator), programVersionString));
+        inspectorImageMap.put(OperatingSystemEnum.FEDORA, new InspectorImage(OperatingSystemEnum.CENTOS, String.format("%shub-docker-inspector-centos", repoWithSeparator), programVersionString));
+        inspectorImageMap.put(OperatingSystemEnum.DEBIAN, new InspectorImage(OperatingSystemEnum.UBUNTU, String.format("%shub-docker-inspector-ubuntu", repoWithSeparator), programVersionString));
+        inspectorImageMap.put(OperatingSystemEnum.UBUNTU, new InspectorImage(OperatingSystemEnum.UBUNTU, String.format("%shub-docker-inspector-ubuntu", repoWithSeparator), programVersionString));
+        inspectorImageMap.put(OperatingSystemEnum.ALPINE, new InspectorImage(OperatingSystemEnum.ALPINE, String.format("%shub-docker-inspector-alpine", repoWithSeparator), programVersionString));
         initialized = true;
     }
 
-    OperatingSystemEnum getDockerImageOs(final OperatingSystemEnum targetImageOs) throws IOException {
+    OperatingSystemEnum getInspectorImageOs(final OperatingSystemEnum targetImageOs) throws IOException {
         init();
-        logger.debug(String.format("getDockerImageOs(%s)", targetImageOs));
-        final DockerImage image = dockerImageMap.get(targetImageOs);
+        logger.debug(String.format("getInspectorImageOs(%s)", targetImageOs));
+        final InspectorImage image = inspectorImageMap.get(targetImageOs);
         if (image == null) {
             return null;
         }
         return image.getOs();
     }
 
-    public String getDockerImageName(final OperatingSystemEnum targetImageOs) throws IOException {
-        logger.debug(String.format("getDockerImageName(%s)", targetImageOs));
+    public String getInspectorImageName(final OperatingSystemEnum targetImageOs) throws IOException {
+        logger.debug(String.format("getInspectorImageName(%s)", targetImageOs));
         init();
-        logger.info(String.format("getDockerImageName(%s)", targetImageOs));
-        final DockerImage image = dockerImageMap.get(targetImageOs);
+        logger.info(String.format("getInspectorImageName(%s)", targetImageOs));
+        final InspectorImage image = inspectorImageMap.get(targetImageOs);
         if (image == null) {
             return null;
         }
         return image.getImageName();
     }
 
-    public String getDockerImageVersion(final OperatingSystemEnum targetImageOs) throws IOException {
-        logger.debug(String.format("getDockerImageVersion(%s)", targetImageOs));
+    public String getInspectorImageTag(final OperatingSystemEnum targetImageOs) throws IOException {
+        logger.debug(String.format("getInspectorImageTag(%s)", targetImageOs));
         init();
-        logger.info(String.format("getDockerImageVersion(%s)", targetImageOs));
-        final DockerImage image = dockerImageMap.get(targetImageOs);
+        logger.info(String.format("getInspectorImageTag(%s)", targetImageOs));
+        final InspectorImage image = inspectorImageMap.get(targetImageOs);
         if (image == null) {
             return null;
         }
