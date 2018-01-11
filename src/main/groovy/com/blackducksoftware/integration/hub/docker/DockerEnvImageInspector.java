@@ -416,7 +416,7 @@ public class DockerEnvImageInspector {
         imageInspector.initImageName();
         logger.info(String.format("Inspecting image:tag %s:%s", config.getDockerImageRepo(), config.getDockerImageTag()));
         if (config.isOnHost()) {
-            imageInspector.verifyHubConnection();
+            hubClient.testHubConnection();
         }
         imageInspector.init();
         FileOperations.removeFileOrDir(programPaths.getHubDockerWorkingDirPath());

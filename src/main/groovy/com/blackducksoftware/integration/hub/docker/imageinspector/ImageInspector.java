@@ -96,11 +96,6 @@ public class ImageInspector {
         return tarParser.getLayerMappings(tarFileName, dockerImageName, dockerTagName);
     }
 
-    public void verifyHubConnection() throws HubIntegrationException {
-        hubClient.testHubConnection();
-        return;
-    }
-
     public void initImageName() throws HubIntegrationException {
         logger.debug(String.format("initImageName(): dockerImage: %s, dockerTar: %s", config.getDockerImage(), config.getDockerTar()));
         if (StringUtils.isNotBlank(config.getDockerImage())) {
