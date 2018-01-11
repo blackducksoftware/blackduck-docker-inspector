@@ -12,6 +12,7 @@ import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 
 public abstract class PkgMgrExecutor extends Executor {
     private final Logger logger = LoggerFactory.getLogger(getClass());
+    private static final Long CMD_TIMEOUT = 120000L;
     private String upgradeCommand;
     private String listPackagesCommand;
 
@@ -34,13 +35,13 @@ public abstract class PkgMgrExecutor extends Executor {
         String[] results;
         logger.debug("Executing package manager");
         try {
-            results = executeCommand(listPackagesCommand);
+            results = executeCommand(listPackagesCommand, CMD_TIMEOUT);
             logger.info(String.format("Command %s executed successfully", listPackagesCommand));
         } catch (final Exception e) {
             if (!StringUtils.isBlank(upgradeCommand)) {
                 logger.warn(String.format("Error executing \"%s\": %s; Trying to upgrade package database by executing: %s", listPackagesCommand, e.getMessage(), upgradeCommand));
-                executeCommand(upgradeCommand);
-                results = executeCommand(listPackagesCommand);
+                executeCommand(upgradeCommand, CMD_TIMEOUT);
+                results = executeCommand(listPackagesCommand, CMD_TIMEOUT);
                 logger.info(String.format("Command %s executed successfully on 2nd attempt (after db upgrade)", listPackagesCommand));
             } else {
                 logger.error(String.format("Error executing \"%s\": %s; No upgrade command has been provided for this package manager", listPackagesCommand, e.getMessage()));

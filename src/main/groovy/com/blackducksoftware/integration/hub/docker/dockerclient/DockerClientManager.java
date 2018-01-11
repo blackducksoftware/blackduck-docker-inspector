@@ -346,7 +346,7 @@ public class DockerClientManager {
         logger.debug(String.format("Copying %s from container to %s via shell command", fromPath, toPath));
         final File toDir = new File(toPath);
         toDir.mkdirs();
-        executor.executeCommand(String.format("docker cp %s:%s %s", containerId, fromPath, toPath));
+        executor.executeCommand(String.format("docker cp %s:%s %s", containerId, fromPath, toPath), config.getCommandTimeout());
     }
 
     private void execCommandInContainer(final DockerClient dockerClient, final String imageId, final String containerId, final List<String> cmd) throws InterruptedException {

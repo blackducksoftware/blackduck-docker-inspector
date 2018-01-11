@@ -116,7 +116,6 @@ class ApplicationTest {
             verifyHubConnection: {
             }
         ] as ImageInspector
-        app.imageInspector.config = config
 
         app.programVersion = [
             getProgramVersion: {"1.2.3"}

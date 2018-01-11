@@ -7,7 +7,6 @@ import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
 
-import com.blackducksoftware.integration.hub.docker.hubclient.HubClient
 import com.blackducksoftware.integration.hub.docker.imageinspector.ImageInspector
 import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.imageinspector.PackageManagerEnum
@@ -99,8 +98,6 @@ class HubDockerManagerTest {
             getHubDockerOutputPathContainer: { -> tempDirPath }
         ] as ProgramPaths
         mgr.programPaths.config = config;
-        mgr.hubClient = [
-        ] as HubClient
 
         mgr.extractors = extractors
 

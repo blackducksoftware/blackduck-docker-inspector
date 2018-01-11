@@ -54,6 +54,7 @@ import com.blackducksoftware.integration.hub.docker.imageinspector.ImageInspecto
 import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPaths;
+import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping;
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.FileOperations;
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.FileSys;
 import com.blackducksoftware.integration.hub.docker.imageinspector.result.Result;
@@ -211,7 +212,7 @@ public class DockerEnvImageInspector {
             dissectedImage.setDockerTarFile(deriveDockerTarFile(config));
             dissectedImage.setLayerTars(imageInspector.extractLayerTars(dissectedImage.getDockerTarFile()));
             dissectedImage.setLayerMappings(imageInspector.getLayerMappings(dissectedImage.getDockerTarFile().getName(), config.getDockerImageRepo(), config.getDockerImageTag()));
-            imageInspector.adjustImageNameTagFromLayerMappings(dissectedImage.getLayerMappings());
+            adjustImageNameTagFromLayerMappings(dissectedImage.getLayerMappings());
         }
     }
 
@@ -426,7 +427,7 @@ public class DockerEnvImageInspector {
             hubClient.phoneHome(dockerClientManager.getDockerEngineVersion());
         }
         clearResult();
-        imageInspector.initImageName();
+        initImageName();
         logger.info(String.format("Inspecting image:tag %s:%s", config.getDockerImageRepo(), config.getDockerImageTag()));
         if (config.isOnHost()) {
             hubClient.testHubConnection();
@@ -448,5 +449,33 @@ public class DockerEnvImageInspector {
             dockerTarFile = dockerClientManager.getTarFileFromDockerImage(config.getDockerImageRepo(), config.getDockerImageTag());
         }
         return dockerTarFile;
+    }
+
+    private void adjustImageNameTagFromLayerMappings(final List<ManifestLayerMapping> layerMappings) {
+        if ((layerMappings != null) && (layerMappings.size() == 1)) {
+            if (StringUtils.isBlank(config.getDockerImageRepo())) {
+                config.setDockerImageRepo(layerMappings.get(0).getImageName());
+            }
+            if (StringUtils.isBlank(config.getDockerImageTag())) {
+                config.setDockerImageTag(layerMappings.get(0).getTagName());
+            }
+        }
+        logger.debug(String.format("adjustImageNameTagFromLayerMappings(): final: dockerImage: %s; dockerImageRepo: %s; dockerImageTag: %s", config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag()));
+    }
+
+    private void initImageName() throws HubIntegrationException {
+        logger.debug(String.format("initImageName(): dockerImage: %s, dockerTar: %s", config.getDockerImage(), config.getDockerTar()));
+        if (StringUtils.isNotBlank(config.getDockerImage())) {
+            final String[] imageNameAndTag = config.getDockerImage().split(":");
+            if ((imageNameAndTag.length > 0) && (StringUtils.isNotBlank(imageNameAndTag[0]))) {
+                config.setDockerImageRepo(imageNameAndTag[0]);
+            }
+            if ((imageNameAndTag.length > 1) && (StringUtils.isNotBlank(imageNameAndTag[1]))) {
+                config.setDockerImageTag(imageNameAndTag[1]);
+            } else {
+                config.setDockerImageTag("latest");
+            }
+        }
+        logger.debug(String.format("initImageName(): final: dockerImage: %s; dockerImageRepo: %s; dockerImageTag: %s", config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag()));
     }
 }
