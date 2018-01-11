@@ -96,7 +96,7 @@ class ApplicationTest {
         boolean invokedSubContainer = false
 
         // TODO extractManifestFileContent value is set twice
-        app.hubDockerManager = [
+        app.imageInspector = [
             init: { },
             extractLayerTars: { File dockerTar -> layerTarFiles },
             cleanWorkingDirectory: {},
@@ -117,7 +117,7 @@ class ApplicationTest {
             verifyHubConnection: {
             }
         ] as ImageInspector
-        app.hubDockerManager.config = config
+        app.imageInspector.config = config
 
         app.programVersion = [
             getProgramVersion: {"1.2.3"}
