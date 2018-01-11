@@ -15,7 +15,6 @@ import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSyst
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPaths
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping
-import com.blackducksoftware.integration.hub.docker.imageinspector.inspectorimage.InspectorImages
 import com.blackducksoftware.integration.hub.docker.imageinspector.result.ResultFile
 import com.google.gson.Gson
 

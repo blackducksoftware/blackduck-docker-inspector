@@ -21,7 +21,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.blackducksoftware.integration.hub.docker.imageinspector.inspectorimage;
+package com.blackducksoftware.integration.hub.docker;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -33,7 +33,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.blackducksoftware.integration.hub.docker.ProgramVersion;
 import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config;
 

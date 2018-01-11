@@ -21,7 +21,6 @@ import org.junit.Test
 import com.blackducksoftware.integration.hub.docker.ProgramVersion
 import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config
-import com.blackducksoftware.integration.hub.docker.imageinspector.inspectorimage.InspectorImages
 
 class DockerImagesTest {
 

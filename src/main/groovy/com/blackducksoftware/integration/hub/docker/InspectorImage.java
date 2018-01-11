@@ -21,7 +21,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.blackducksoftware.integration.hub.docker.imageinspector.inspectorimage;
+package com.blackducksoftware.integration.hub.docker;
 
 import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum;
 

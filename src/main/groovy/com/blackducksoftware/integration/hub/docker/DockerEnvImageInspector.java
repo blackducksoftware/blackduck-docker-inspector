@@ -54,7 +54,6 @@ import com.blackducksoftware.integration.hub.docker.imageinspector.ImageInspecto
 import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPaths;
-import com.blackducksoftware.integration.hub.docker.imageinspector.inspectorimage.InspectorImages;
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.FileOperations;
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.FileSys;
 import com.blackducksoftware.integration.hub.docker.imageinspector.result.Result;
