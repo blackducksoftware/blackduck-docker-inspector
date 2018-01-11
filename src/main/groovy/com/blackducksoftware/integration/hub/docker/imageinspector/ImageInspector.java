@@ -38,9 +38,9 @@ import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.bdio.BdioWriter;
+import com.blackducksoftware.integration.hub.docker.hubclient.HubClient;
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPaths;
-import com.blackducksoftware.integration.hub.docker.imageinspector.hub.HubClient;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.DockerTarParser;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImageInfo;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping;

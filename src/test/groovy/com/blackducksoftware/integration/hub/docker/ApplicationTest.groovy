@@ -9,11 +9,11 @@ import org.junit.Test
 
 import com.blackducksoftware.integration.hub.docker.dockerclient.DockerClientManager
 import com.blackducksoftware.integration.hub.docker.help.formatter.UsageFormatter
+import com.blackducksoftware.integration.hub.docker.hubclient.HubClient
 import com.blackducksoftware.integration.hub.docker.imageinspector.ImageInspector
 import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPaths
-import com.blackducksoftware.integration.hub.docker.imageinspector.hub.HubClient
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping
 import com.blackducksoftware.integration.hub.docker.imageinspector.inspectorimage.InspectorImages
 import com.blackducksoftware.integration.hub.docker.imageinspector.result.ResultFile

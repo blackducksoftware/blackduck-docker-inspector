@@ -1,4 +1,4 @@
-package com.blackducksoftware.integration.hub.docker.imageinspector.hub;
+package com.blackducksoftware.integration.hub.docker.hubclient;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

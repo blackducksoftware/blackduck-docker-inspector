@@ -7,13 +7,13 @@ import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
 
+import com.blackducksoftware.integration.hub.docker.hubclient.HubClient
 import com.blackducksoftware.integration.hub.docker.imageinspector.ImageInspector
 import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.imageinspector.PackageManagerEnum
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.DockerInspectorOption
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPaths
-import com.blackducksoftware.integration.hub.docker.imageinspector.hub.HubClient
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.DockerTarParser
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImageInfo
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImagePkgMgr

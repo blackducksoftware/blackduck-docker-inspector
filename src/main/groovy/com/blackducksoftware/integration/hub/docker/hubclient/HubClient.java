@@ -21,7 +21,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.blackducksoftware.integration.hub.docker.imageinspector.hub;
+package com.blackducksoftware.integration.hub.docker.hubclient;
 
 import java.io.File;
 import java.io.IOException;
