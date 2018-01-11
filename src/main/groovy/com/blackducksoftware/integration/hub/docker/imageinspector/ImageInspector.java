@@ -36,7 +36,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.bdio.BdioWriter;
 import com.blackducksoftware.integration.hub.docker.hubclient.HubClient;
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config;
@@ -135,19 +134,6 @@ public class ImageInspector {
         final String architecture = getExtractorByPackageManager(imagePkgMgrInfo.getPkgMgr().getPackageManager()).deriveArchitecture(targetImageFileSystemRootDir);
         logger.debug(String.format("generateBdioFromImageFilesDir(): architecture: %s", architecture));
         return generateBdioFromPackageMgrDirs(dockerImageRepo, dockerImageTag, mappings, projectName, versionName, dockerTar.getName(), imagePkgMgrInfo, architecture);
-    }
-
-    public void uploadBdioFiles(final List<File> bdioFiles) throws IntegrationException {
-        if (hubClient.isValid()) {
-            if (bdioFiles != null) {
-                for (final File file : bdioFiles) {
-                    hubClient.uploadBdioToHub(file);
-                }
-            }
-            logger.info(" ");
-            logger.info("Successfully uploaded all of the bdio files!");
-            logger.info(" ");
-        }
     }
 
     private File generateBdioFromPackageMgrDirs(final String dockerImageRepo, final String dockerImageTag, final List<ManifestLayerMapping> layerMappings, final String givenProjectName, final String givenVersionName,

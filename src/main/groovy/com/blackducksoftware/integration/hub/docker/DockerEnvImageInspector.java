@@ -303,9 +303,22 @@ public class DockerEnvImageInspector {
         } else {
             bdioFilename = bdioFiles.get(0).getName();
             logger.info(String.format("Uploading BDIO to Hub: %d files; first file: %s", bdioFiles.size(), bdioFiles.get(0).getAbsolutePath()));
-            imageInspector.uploadBdioFiles(bdioFiles);
+            uploadBdioFiles(bdioFiles);
         }
         return bdioFilename;
+    }
+
+    private void uploadBdioFiles(final List<File> bdioFiles) throws IntegrationException {
+        if (hubClient.isValid()) {
+            if (bdioFiles != null) {
+                for (final File file : bdioFiles) {
+                    hubClient.uploadBdioToHub(file);
+                }
+            }
+            logger.info(" ");
+            logger.info("Successfully uploaded all of the bdio files!");
+            logger.info(" ");
+        }
     }
 
     private int reportResult(final Config config, final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag, final String dockerTarfilename, final String bdioFilename) throws HubIntegrationException {
