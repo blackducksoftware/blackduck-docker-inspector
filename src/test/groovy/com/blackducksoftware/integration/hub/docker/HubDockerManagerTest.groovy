@@ -128,13 +128,10 @@ class HubDockerManagerTest {
         mapping.programPaths = new ProgramPaths()
         mappings.add(mapping)
         File imageFilesDir = new File("src/test/resources/imageDir")
-        List<File> bdioFiles = mgr.generateBdioFromImageFilesDir("root", "1.0", mappings, "testProjectName", "testProjectVersion", imageTarFile, imageFilesDir, os)
-        for (File bdioFile : bdioFiles) {
-            println "${bdioFile.getAbsolutePath()}"
-        }
+        File bdioFile = mgr.generateBdioFromImageFilesDir("root", "1.0", mappings, "testProjectName", "testProjectVersion", imageTarFile, imageFilesDir, os)
 
         File file1 = new File("src/test/resources/${imageName}_imageDir_testProjectName_testProjectVersion_bdio.jsonld")
-        File file2 = bdioFiles.get(0)
+        File file2 = bdioFile
         println "Comparing ${file2.getAbsolutePath()} to ${file1.getAbsolutePath()}"
         boolean filesAreEqual = TestUtils.contentEquals(file1, file2, [
             "\"@id\":",

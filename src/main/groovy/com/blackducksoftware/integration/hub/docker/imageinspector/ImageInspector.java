@@ -27,7 +27,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -130,7 +129,7 @@ public class ImageInspector {
         logger.debug(String.format("adjustImageNameTagFromLayerMappings(): final: dockerImage: %s; dockerImageRepo: %s; dockerImageTag: %s", config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag()));
     }
 
-    public List<File> generateBdioFromImageFilesDir(final String dockerImageRepo, final String dockerImageTag, final List<ManifestLayerMapping> mappings, final String projectName, final String versionName, final File dockerTar,
+    public File generateBdioFromImageFilesDir(final String dockerImageRepo, final String dockerImageTag, final List<ManifestLayerMapping> mappings, final String projectName, final String versionName, final File dockerTar,
             final File targetImageFileSystemRootDir, final OperatingSystemEnum osEnum) throws IOException, HubIntegrationException, InterruptedException {
         logger.debug(String.format("generateBdioFromImageFilesDir(): projectName: %s, versionName: %s", projectName, versionName));
         final ImageInfo imagePkgMgrInfo = tarParser.collectPkgMgrInfo(targetImageFileSystemRootDir, osEnum);
@@ -156,7 +155,7 @@ public class ImageInspector {
         }
     }
 
-    private List<File> generateBdioFromPackageMgrDirs(final String dockerImageRepo, final String dockerImageTag, final List<ManifestLayerMapping> layerMappings, final String givenProjectName, final String givenVersionName,
+    private File generateBdioFromPackageMgrDirs(final String dockerImageRepo, final String dockerImageTag, final List<ManifestLayerMapping> layerMappings, final String givenProjectName, final String givenVersionName,
             final String tarFileName, final ImageInfo imageInfo, final String architecture) throws FileNotFoundException, IOException, HubIntegrationException, InterruptedException {
         logger.trace("generateBdioFromPackageMgrDirs(): Purging/recreating output dir");
         final File outputDirectory = new File(programPaths.getHubDockerOutputPathContainer());
@@ -168,7 +167,6 @@ public class ImageInspector {
         }
         logger.trace(String.format("outputDirectory: exists: %b; isDirectory: %b; $ files: %d", outputDirectory.exists(), outputDirectory.isDirectory(), outputDirectory.listFiles().length));
 
-        final List<File> bdioFiles = new ArrayList<>();
         ManifestLayerMapping manifestMapping = null;
         for (final ManifestLayerMapping mapping : layerMappings) {
             if (StringUtils.compare(mapping.getTargetImageFileSystemRootDirName(), imageInfo.getFileSystemRootDirName()) == 0) {
@@ -189,7 +187,6 @@ public class ImageInspector {
         logger.info(String.format("Hub project: %s, version: %s; Code location : %s", finalProjectName, finalProjectVersionName, codeLocationName));
         final String bdioFilename = programPaths.getBdioFilename(manifestMapping.getImageName(), pkgMgrFilePath, finalProjectName, finalProjectVersionName);
         final File bdioOutputFile = new File(outputDirectory, bdioFilename);
-        bdioFiles.add(bdioOutputFile);
         try (FileOutputStream bdioOutputStream = new FileOutputStream(bdioOutputFile)) {
             try (BdioWriter bdioWriter = new BdioWriter(new Gson(), bdioOutputStream)) {
                 final Extractor extractor = getExtractorByPackageManager(imageInfo.getPkgMgr().getPackageManager());
@@ -198,7 +195,7 @@ public class ImageInspector {
             }
         }
 
-        return bdioFiles;
+        return bdioOutputFile;
     }
 
     private String deriveHubProject(final String imageName, final String projectName) {

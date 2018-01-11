@@ -179,10 +179,10 @@ public class DockerEnvImageInspector {
                 dissectedImage.setTargetOs(imageInspector.detectOperatingSystem(dissectedImage.getTargetImageFileSystemRootDir()));
             }
             logger.info(String.format("Target image tarfile: %s; target OS: %s", dissectedImage.getDockerTarFile().getAbsolutePath(), dissectedImage.getTargetOs().toString()));
-            final List<File> bdioFiles = imageInspector.generateBdioFromImageFilesDir(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), getHubProjectName(config), getHubProjectVersion(config),
+            final File bdioFile = imageInspector.generateBdioFromImageFilesDir(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), getHubProjectName(config), getHubProjectVersion(config),
                     dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs());
-            logger.info(String.format("%d BDIO Files generated", bdioFiles.size()));
-            dissectedImage.setBdioFilename(bdioFiles.size() == 1 ? bdioFiles.get(0).getName() : null);
+            logger.info(String.format("BDIO File generated: %s", bdioFile.getAbsolutePath()));
+            dissectedImage.setBdioFilename(bdioFile.getName());
             createContainerFileSystemTarIfRequested(config, dissectedImage.getTargetImageFileSystemRootDir());
         } else if (config.isInspectInContainer()) {
             logger.info("Inspecting image in container");
