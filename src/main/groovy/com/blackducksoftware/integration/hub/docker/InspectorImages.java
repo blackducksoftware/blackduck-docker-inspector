@@ -33,8 +33,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.blackducksoftware.integration.hub.docker.config.Config;
 import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum;
-import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config;
 
 @Component
 public class InspectorImages {

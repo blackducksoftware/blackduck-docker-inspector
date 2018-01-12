@@ -7,11 +7,11 @@ import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
 
+import com.blackducksoftware.integration.hub.docker.config.Config
+import com.blackducksoftware.integration.hub.docker.config.DockerInspectorOption
 import com.blackducksoftware.integration.hub.docker.imageinspector.ImageInspector
 import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.imageinspector.PackageManagerEnum
-import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config
-import com.blackducksoftware.integration.hub.docker.imageinspector.config.DockerInspectorOption
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPaths
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.DockerTarParser
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImageInfo
@@ -91,14 +91,12 @@ class HubDockerManagerTest {
         extractors.add(extractor)
 
         ImageInspector mgr = new ImageInspector()
+        mgr.tarParser = [
+            setWorkingDirectory: { File f ->
+            }
+        ] as DockerTarParser
         String tempDirPath = TestUtils.createTempDirectory().getAbsolutePath()
-        mgr.programPaths = [
-            getHubDockerWorkingDirPath: { -> tempDirPath },
-            getHubDockerOutputPath: { -> tempDirPath },
-            getHubDockerOutputPathContainer: { -> tempDirPath }
-        ] as ProgramPaths
-        mgr.programPaths.config = config;
-
+        mgr.init(tempDirPath, tempDirPath, "")
         mgr.extractors = extractors
 
 

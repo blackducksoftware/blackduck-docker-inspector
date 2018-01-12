@@ -4,7 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config;
+import com.blackducksoftware.integration.hub.docker.config.Config;
 
 @Component
 public class HubPassword {

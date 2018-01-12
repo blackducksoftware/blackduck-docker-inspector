@@ -36,7 +36,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
-import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config;
+import com.blackducksoftware.integration.hub.docker.config.Config;
 
 @PropertySource("classpath:application.properties")
 @Component

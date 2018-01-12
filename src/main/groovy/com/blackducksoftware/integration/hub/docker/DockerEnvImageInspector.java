@@ -46,13 +46,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
 import com.blackducksoftware.integration.exception.IntegrationException;
+import com.blackducksoftware.integration.hub.docker.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerclient.DockerClientManager;
 import com.blackducksoftware.integration.hub.docker.help.formatter.UsageFormatter;
 import com.blackducksoftware.integration.hub.docker.hubclient.HubClient;
 import com.blackducksoftware.integration.hub.docker.imageinspector.DissectedImage;
 import com.blackducksoftware.integration.hub.docker.imageinspector.ImageInspector;
 import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum;
-import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config;
+import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPathUtils;
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping;
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.FileOperations;
@@ -371,7 +372,7 @@ public class DockerEnvImageInspector {
     private void createContainerFileSystemTarIfRequested(final Config config, final File targetImageFileSystemRootDir) throws IOException, CompressorException {
         if (config.isOutputIncludeContainerfilesystem()) {
             final File outputDirectory = new File(programPaths.getHubDockerOutputPathContainer());
-            final String containerFileSystemTarFilename = programPaths.getContainerFileSystemTarFilename(config.getDockerImageRepo(), config.getDockerImageTag());
+            final String containerFileSystemTarFilename = ProgramPathUtils.getContainerFileSystemTarFilename(config.getDockerImageRepo(), config.getDockerImageTag());
             final File containerFileSystemTarFile = new File(outputDirectory, containerFileSystemTarFilename);
             logger.debug(String.format("Creating container filesystem tarfile %s from %s into %s", containerFileSystemTarFile.getAbsolutePath(), targetImageFileSystemRootDir.getAbsolutePath(), outputDirectory.getAbsolutePath()));
             final FileSys containerFileSys = new FileSys(targetImageFileSystemRootDir);
@@ -432,7 +433,7 @@ public class DockerEnvImageInspector {
         if (config.isOnHost()) {
             hubClient.testHubConnection();
         }
-        imageInspector.init();
+        imageInspector.init(programPaths.getHubDockerWorkingDirPath(), programPaths.getHubDockerOutputPath(), config.getHubCodelocationPrefix());
         FileOperations.removeFileOrDir(programPaths.getHubDockerWorkingDirPath());
 
         logger.debug(String.format("Upload BDIO is set to %b", config.isUploadBdio()));

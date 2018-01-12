@@ -1,4 +1,4 @@
-package com.blackducksoftware.integration.hub.docker.imageinspector.config
+package com.blackducksoftware.integration.hub.docker.config
 
 import static org.junit.Assert.*
 
@@ -7,7 +7,7 @@ import org.junit.BeforeClass
 import org.junit.Ignore
 import org.junit.Test
 
-import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config
+import com.blackducksoftware.integration.hub.docker.config.Config
 
 class ConfigTest {
 

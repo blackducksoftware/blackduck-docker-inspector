@@ -6,9 +6,9 @@ import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
 
+import com.blackducksoftware.integration.hub.docker.config.Config
+import com.blackducksoftware.integration.hub.docker.config.DockerInspectorOption
 import com.blackducksoftware.integration.hub.docker.help.formatter.UsageFormatter
-import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config
-import com.blackducksoftware.integration.hub.docker.imageinspector.config.DockerInspectorOption
 
 class UsageFormatterTest {
 

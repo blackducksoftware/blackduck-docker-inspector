@@ -29,12 +29,13 @@ import java.util.Date;
 
 import javax.annotation.PostConstruct;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.blackducksoftware.integration.hub.docker.config.Config;
 
 @Component
 public class ProgramPaths {
@@ -271,23 +272,8 @@ public class ProgramPaths {
         return String.format("%s_%s.tar", imageName, tagName);
     }
 
-    public String getContainerFileSystemTarFilename(final String imageName, final String tagName) {
-        return String.format("%s_%s_containerfilesystem.tar.gz", slashesToUnderscore(imageName), tagName);
-    }
-
     public String getTargetImageFileSystemRootDirName(final String imageName, final String imageTag) {
         return String.format("image_%s_v_%s", imageName.replaceAll("/", "_"), imageTag);
-    }
-
-    public String getCodeLocationName(final String imageName, final String imageTag, final String pkgMgrFilePath, final String pkgMgrName) {
-        if (!StringUtils.isBlank(config.getHubCodelocationPrefix())) {
-            return String.format("%s_%s_%s_%s_%s", config.getHubCodelocationPrefix(), slashesToUnderscore(imageName), imageTag, slashesToUnderscore(pkgMgrFilePath), pkgMgrName);
-        }
-        return String.format("%s_%s_%s_%s", slashesToUnderscore(imageName), imageTag, slashesToUnderscore(pkgMgrFilePath), pkgMgrName);
-    }
-
-    public String getBdioFilename(final String imageName, final String pkgMgrFilePath, final String hubProjectName, final String hubVersionName) {
-        return createBdioFilename(cleanImageName(imageName), cleanPath(pkgMgrFilePath), cleanHubProjectName(hubProjectName), hubVersionName);
     }
 
     public String deriveContainerName(final String imageName) {
@@ -307,55 +293,12 @@ public class ProgramPaths {
         return adjustedName;
     }
 
-    private String createBdioFilename(final String cleanImageName, final String cleanPkgMgrFilePath, final String cleanHubProjectName, final String hubVersionName) {
-        final String[] parts = new String[4];
-        parts[0] = cleanImageName;
-        parts[1] = cleanPkgMgrFilePath;
-        parts[2] = cleanHubProjectName;
-        parts[3] = hubVersionName;
-
-        String filename = generateFilename(cleanImageName, cleanPkgMgrFilePath, cleanHubProjectName, hubVersionName);
-        for (int i = 0; (filename.length() >= 255) && (i < 4); i++) {
-            parts[i] = DigestUtils.sha1Hex(parts[i]);
-            if (parts[i].length() > 15) {
-                parts[i] = parts[i].substring(0, 15);
-            }
-
-            filename = generateFilename(parts[0], parts[1], parts[2], parts[3]);
-        }
-        return filename;
-    }
-
-    private String generateFilename(final String cleanImageName, final String cleanPkgMgrFilePath, final String cleanHubProjectName, final String hubVersionName) {
-        return String.format("%s_%s_%s_%s_bdio.jsonld", cleanImageName, cleanPkgMgrFilePath, cleanHubProjectName, hubVersionName);
-    }
-
     void setCodeLocationPrefix(final String codeLocationPrefix) {
         config.setHubCodelocationPrefix(codeLocationPrefix);
     }
 
-    public String cleanHubProjectName(final String hubProjectName) {
-        return slashesToUnderscore(hubProjectName);
-    }
-
-    public String cleanImageName(final String imageName) {
-        return colonsToUnderscores(slashesToUnderscore(imageName));
-    }
-
-    public String cleanPath(final String path) {
-        return slashesToUnderscore(path);
-    }
-
-    private String slashesToUnderscore(final String imageName) {
-        return imageName.replaceAll("/", "_");
-    }
-
     private String atSignToUnderscore(final String imageName) {
         return imageName.replaceAll("@", "_");
-    }
-
-    private String colonsToUnderscores(final String imageName) {
-        return imageName.replaceAll(":", "_");
     }
 
     void setConfig(final Config config) {

@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.hub.docker.DockerEnvImageInspector;
-import com.blackducksoftware.integration.hub.docker.imageinspector.config.Config;
-import com.blackducksoftware.integration.hub.docker.imageinspector.config.DockerInspectorOption;
+import com.blackducksoftware.integration.hub.docker.config.Config;
+import com.blackducksoftware.integration.hub.docker.config.DockerInspectorOption;
 
 @Component
 public class UsageFormatter {
