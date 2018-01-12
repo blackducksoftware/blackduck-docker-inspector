@@ -62,10 +62,12 @@ public class DockerTarParser {
     private ManifestFactory manifestFactory;
 
     public void setWorkingDirectory(final File workingDirectory) {
+        logger.debug(String.format("working dir: %s", workingDirectory));
         this.workingDirectory = workingDirectory;
     }
 
     public File extractDockerLayers(final List<File> layerTars, final List<ManifestLayerMapping> manifestLayerMappings) throws IOException {
+        logger.debug(String.format("working dir: %s", workingDirectory));
         final File tarExtractionDirectory = getTarExtractionDirectory();
         final File targetImageFileSystemParentDir = new File(tarExtractionDirectory, TARGET_IMAGE_FILESYSTEM_PARENT_DIR);
         File targetImageFileSystemRootDir = null;
@@ -118,6 +120,7 @@ public class DockerTarParser {
     }
 
     public List<File> extractLayerTars(final File dockerTar) throws IOException {
+        logger.debug(String.format("working dir: %s", workingDirectory));
         final File tarExtractionDirectory = getTarExtractionDirectory();
         final List<File> untaredFiles = new ArrayList<>();
         final File outputDir = new File(tarExtractionDirectory, dockerTar.getName());
@@ -149,6 +152,7 @@ public class DockerTarParser {
 
     public List<ManifestLayerMapping> getLayerMappings(final String tarFileName, final String dockerImageName, final String dockerTagName) throws Exception {
         logger.debug(String.format("getLayerMappings(): dockerImageName: %s; dockerTagName: %s", dockerImageName, dockerTagName));
+        logger.debug(String.format("working dir: %s", workingDirectory));
         final Manifest manifest = manifestFactory.createManifest(getTarExtractionDirectory(), tarFileName);
         List<ManifestLayerMapping> mappings;
         try {

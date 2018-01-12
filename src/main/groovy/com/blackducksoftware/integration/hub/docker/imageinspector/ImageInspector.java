@@ -60,6 +60,7 @@ public class ImageInspector {
     private String codeLocationPrefix = null;
 
     public void init(final String workingDirPath, final String outputDirPath, final String codeLocationPrefix) {
+        logger.debug(String.format("working dir: %s", workingDirPath));
         tarParser.setWorkingDirectory(new File(workingDirPath));
         this.outputDirPath = outputDirPath;
         this.codeLocationPrefix = codeLocationPrefix;
