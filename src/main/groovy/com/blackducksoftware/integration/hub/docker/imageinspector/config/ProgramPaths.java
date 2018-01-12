@@ -268,14 +268,6 @@ public class ProgramPaths {
         this.hubDockerPgmDirPathHost = hubDockerPgmDirPath;
     }
 
-    public String getImageTarFilename(final String imageName, final String tagName) {
-        return String.format("%s_%s.tar", imageName, tagName);
-    }
-
-    public String getTargetImageFileSystemRootDirName(final String imageName, final String imageTag) {
-        return String.format("image_%s_v_%s", imageName.replaceAll("/", "_"), imageTag);
-    }
-
     public String deriveContainerName(final String imageName) {
         String extractorContainerName;
         final int slashIndex = imageName.lastIndexOf('/');

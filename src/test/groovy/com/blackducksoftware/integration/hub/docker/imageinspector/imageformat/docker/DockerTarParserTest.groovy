@@ -24,9 +24,6 @@ import org.junit.Test
 
 import com.blackducksoftware.integration.hub.docker.TestUtils
 import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum
-import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPaths
-import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.DockerTarParser
-import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImageInfo
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.HardwiredManifestFactory
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping
 
@@ -56,7 +53,7 @@ class DockerTarParserTest {
         List<ManifestLayerMapping> layerMappings = tarParser.getLayerMappings(dockerTar.getName(), IMAGE_NAME, IMAGE_TAG)
         assertEquals(1, layerMappings.size())
         assertEquals(2, layerMappings.get(0).layers.size())
-        File imageFilesDir = tarParser.extractDockerLayers(layerTars, layerMappings)
+        File imageFilesDir = tarParser.extractDockerLayers("imageName", "imageTag", layerTars, layerMappings)
         OperatingSystemEnum targetOsEnum = tarParser.detectOperatingSystem(imageFilesDir)
         ImageInfo tarExtractionResults = tarParser.collectPkgMgrInfo(imageFilesDir, targetOsEnum)
 
@@ -118,10 +115,9 @@ class DockerTarParserTest {
         List<String> layerIds = new ArrayList<>()
         layerIds.add(LAYER_ID)
         ManifestLayerMapping layerMapping = new ManifestLayerMapping(IMAGE_NAME, IMAGE_TAG, layerIds)
-        layerMapping.programPaths = new ProgramPaths()
         layerMappings.add(layerMapping)
 
-        File targetImageFileSystemRootDir = tarParser.extractDockerLayers(layerTars, layerMappings)
+        File targetImageFileSystemRootDir = tarParser.extractDockerLayers("blackducksoftware_centos_minus_vim_plus_bacula", "1.0", layerTars, layerMappings)
         assertEquals(tarExtractionDirectory.getAbsolutePath() + "/imageFiles/${targetImageFileSystemRootDirName}", targetImageFileSystemRootDir.getAbsolutePath())
 
         File dpkgStatusFile = new File(workingDirectory.getAbsolutePath() + "/tarExtraction/imageFiles/${targetImageFileSystemRootDirName}/var/lib/dpkg/status")

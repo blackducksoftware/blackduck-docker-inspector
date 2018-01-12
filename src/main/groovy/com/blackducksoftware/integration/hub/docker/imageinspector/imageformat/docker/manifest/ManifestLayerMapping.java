@@ -27,17 +27,11 @@ import java.util.List;
 
 import org.apache.commons.lang3.builder.RecursiveToStringStyle;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPaths;
 
 public class ManifestLayerMapping {
     private final String imageName;
     private final String tagName;
     private final List<String> layers;
-
-    @Autowired
-    private ProgramPaths programPaths;
 
     public ManifestLayerMapping(final String imageName, final String tagName, final List<String> layers) {
         this.imageName = imageName;
@@ -57,20 +51,8 @@ public class ManifestLayerMapping {
         return layers;
     }
 
-    public String getTargetImageFileSystemRootDirName() {
-        return getProgramPaths().getTargetImageFileSystemRootDirName(imageName, tagName);
-    }
-
     @Override
     public String toString() {
         return ReflectionToStringBuilder.toString(this, RecursiveToStringStyle.JSON_STYLE);
-    }
-
-    public ProgramPaths getProgramPaths() {
-        return programPaths;
-    }
-
-    public void setProgramPaths(ProgramPaths programPaths) {
-        this.programPaths = programPaths;
     }
 }

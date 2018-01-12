@@ -70,8 +70,8 @@ public class ImageInspector {
         return tarParser.extractLayerTars(dockerTar);
     }
 
-    public File extractDockerLayers(final List<File> layerTars, final List<ManifestLayerMapping> layerMappings) throws IOException {
-        return tarParser.extractDockerLayers(layerTars, layerMappings);
+    public File extractDockerLayers(final String imageName, final String imageTag, final List<File> layerTars, final List<ManifestLayerMapping> layerMappings) throws IOException {
+        return tarParser.extractDockerLayers(imageName, imageTag, layerTars, layerMappings);
     }
 
     public OperatingSystemEnum detectOperatingSystem(final String operatingSystem) {
@@ -110,10 +110,10 @@ public class ImageInspector {
             logger.warn(String.format("Error purging output dir: %s", outputDirectory.getAbsolutePath()));
         }
         logger.trace(String.format("outputDirectory: exists: %b; isDirectory: %b; $ files: %d", outputDirectory.exists(), outputDirectory.isDirectory(), outputDirectory.listFiles().length));
-
+        final String imageDirectoryName = Names.getTargetImageFileSystemRootDirName(dockerImageRepo, dockerImageTag);
         ManifestLayerMapping manifestMapping = null;
         for (final ManifestLayerMapping mapping : layerMappings) {
-            if (StringUtils.compare(mapping.getTargetImageFileSystemRootDirName(), imageInfo.getFileSystemRootDirName()) == 0) {
+            if (StringUtils.compare(imageDirectoryName, imageInfo.getFileSystemRootDirName()) == 0) {
                 manifestMapping = mapping;
             }
         }
@@ -121,7 +121,6 @@ public class ImageInspector {
             throw new HubIntegrationException(String.format("Mapping for %s not found in target image manifest file", imageInfo.getFileSystemRootDirName()));
         }
 
-        final String imageDirectoryName = manifestMapping.getTargetImageFileSystemRootDirName();
         String pkgMgrFilePath = imageInfo.getPkgMgr().getExtractedPackageManagerDirectory().getAbsolutePath();
         pkgMgrFilePath = pkgMgrFilePath.substring(pkgMgrFilePath.indexOf(imageDirectoryName) + imageDirectoryName.length() + 1);
 

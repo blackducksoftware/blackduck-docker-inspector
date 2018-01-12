@@ -41,6 +41,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.blackducksoftware.integration.hub.docker.imageinspector.Names;
 import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.docker.imageinspector.PackageManagerEnum;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.Manifest;
@@ -66,7 +67,7 @@ public class DockerTarParser {
         this.workingDirectory = workingDirectory;
     }
 
-    public File extractDockerLayers(final List<File> layerTars, final List<ManifestLayerMapping> manifestLayerMappings) throws IOException {
+    public File extractDockerLayers(final String imageName, final String imageTag, final List<File> layerTars, final List<ManifestLayerMapping> manifestLayerMappings) throws IOException {
         logger.debug(String.format("working dir: %s", workingDirectory));
         final File tarExtractionDirectory = getTarExtractionDirectory();
         final File targetImageFileSystemParentDir = new File(tarExtractionDirectory, TARGET_IMAGE_FILESYSTEM_PARENT_DIR);
@@ -76,7 +77,7 @@ public class DockerTarParser {
                 logger.trace(String.format("Looking for tar for layer: %s", layer));
                 final File layerTar = getLayerTar(layerTars, layer);
                 if (layerTar != null) {
-                    targetImageFileSystemRootDir = extractLayerTarToDir(targetImageFileSystemParentDir, layerTar, manifestLayerMapping);
+                    targetImageFileSystemRootDir = extractLayerTarToDir(imageName, imageTag, targetImageFileSystemParentDir, layerTar, manifestLayerMapping);
                 } else {
                     logger.error(String.format("Could not find the tar for layer %s", layer));
                 }
@@ -175,9 +176,9 @@ public class DockerTarParser {
         return tarExtractionDirectory;
     }
 
-    private File extractLayerTarToDir(final File imageFilesDir, final File layerTar, final ManifestLayerMapping mapping) throws IOException {
-        logger.trace(String.format("Extracting layer: %s into %s", layerTar.getAbsolutePath(), mapping.getTargetImageFileSystemRootDirName()));
-        final File targetImageFileSystemRoot = new File(imageFilesDir, mapping.getTargetImageFileSystemRootDirName());
+    private File extractLayerTarToDir(final String imageName, final String imageTag, final File imageFilesDir, final File layerTar, final ManifestLayerMapping mapping) throws IOException {
+        logger.trace(String.format("Extracting layer: %s into %s", layerTar.getAbsolutePath(), Names.getTargetImageFileSystemRootDirName(imageName, imageTag)));
+        final File targetImageFileSystemRoot = new File(imageFilesDir, Names.getTargetImageFileSystemRootDirName(imageName, imageTag));
         final DockerLayerTar dockerLayerTar = new DockerLayerTar(layerTar);
         dockerLayerTar.extractToDir(targetImageFileSystemRoot);
         return targetImageFileSystemRoot;

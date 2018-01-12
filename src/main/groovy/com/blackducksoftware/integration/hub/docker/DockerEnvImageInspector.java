@@ -130,8 +130,10 @@ public class DockerEnvImageInspector {
             logger.error(msg);
             final String trace = ExceptionUtils.getStackTrace(e);
             logger.debug(String.format("Stack trace: %s", trace));
-            resultFile.write(new Gson(), false, msg, dissectedImage.getTargetOs(), dissectedImage.getRunOnImageName(), dissectedImage.getRunOnImageTag(),
+            resultFile.write(new Gson(), programPaths.getHubDockerResultPath(), false, msg, dissectedImage.getTargetOs(), dissectedImage.getRunOnImageName(), dissectedImage.getRunOnImageTag(),
                     dissectedImage.getDockerTarFile() == null ? "" : dissectedImage.getDockerTarFile().getName(), dissectedImage.getBdioFilename());
+            // Gson gson, final String resultFilePath, final boolean succeeded, final String msg, final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag,
+            // final String dockerTarfilename, String bdioFilename
         }
     }
 
@@ -174,7 +176,7 @@ public class DockerEnvImageInspector {
         Future<String> deferredCleanup = null;
         if (config.isInspect()) {
             if (dissectedImage.getTargetImageFileSystemRootDir() == null) {
-                dissectedImage.setTargetImageFileSystemRootDir(imageInspector.extractDockerLayers(dissectedImage.getLayerTars(), dissectedImage.getLayerMappings()));
+                dissectedImage.setTargetImageFileSystemRootDir(imageInspector.extractDockerLayers(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerTars(), dissectedImage.getLayerMappings()));
             }
             if (dissectedImage.getTargetOs() == null) {
                 dissectedImage.setTargetOs(imageInspector.detectOperatingSystem(dissectedImage.getTargetImageFileSystemRootDir()));
@@ -196,7 +198,7 @@ public class DockerEnvImageInspector {
         if (config.isIdentifyPkgMgr()) {
             dissectedImage.setTargetOs(imageInspector.detectOperatingSystem(config.getLinuxDistro()));
             if (dissectedImage.getTargetOs() == null) {
-                dissectedImage.setTargetImageFileSystemRootDir(imageInspector.extractDockerLayers(dissectedImage.getLayerTars(), dissectedImage.getLayerMappings()));
+                dissectedImage.setTargetImageFileSystemRootDir(imageInspector.extractDockerLayers(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerTars(), dissectedImage.getLayerMappings()));
                 dissectedImage.setTargetOs(imageInspector.detectOperatingSystem(dissectedImage.getTargetImageFileSystemRootDir()));
             }
             dissectedImage.setRunOnImageName(dockerImages.getInspectorImageName(dissectedImage.getTargetOs()));
@@ -326,7 +328,7 @@ public class DockerEnvImageInspector {
     private int reportResult(final Config config, final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag, final String dockerTarfilename, final String bdioFilename) throws HubIntegrationException {
         final Gson gson = new Gson();
         if (config.isOnHost() && config.isInspectInContainer()) {
-            final Result resultReportedFromContainer = resultFile.read(gson);
+            final Result resultReportedFromContainer = resultFile.read(gson, programPaths.getHubDockerResultPath());
             if (!resultReportedFromContainer.isSucceeded()) {
                 logger.error(String.format("*** Failed: %s", resultReportedFromContainer.getMessage()));
                 return -1;
@@ -335,7 +337,7 @@ public class DockerEnvImageInspector {
                 return 0;
             }
         } else {
-            resultFile.write(gson, true, "Success", targetOs, runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename);
+            resultFile.write(gson, programPaths.getHubDockerResultPath(), true, "Success", targetOs, runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename);
             return 0;
         }
     }

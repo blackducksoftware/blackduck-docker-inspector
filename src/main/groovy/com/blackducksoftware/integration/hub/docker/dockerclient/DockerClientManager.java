@@ -39,6 +39,7 @@ import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.hub.docker.config.Config;
 import com.blackducksoftware.integration.hub.docker.hubclient.HubPassword;
+import com.blackducksoftware.integration.hub.docker.imageinspector.Names;
 import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor.Executor;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
@@ -111,14 +112,14 @@ public class DockerClientManager {
         final String imageName = imageNameTagParts[0];
         final String tagName = imageNameTagParts[1];
         logger.info(String.format("Converted image ID %s to image name:tag %s:%s", imageId, imageName, tagName));
-        final File imageTarFile = saveImageToDir(imageTarDirectory, imageName, tagName);
+        final File imageTarFile = saveImageToDir(imageTarDirectory, Names.getImageTarFilename(imageName, tagName), imageName, tagName);
         return imageTarFile;
     }
 
     public File getTarFileFromDockerImage(final String imageName, final String tagName) throws IOException, HubIntegrationException {
         final File imageTarDirectory = new File(new File(programPaths.getHubDockerWorkingDirPath()), "tarDirectory");
         final String targetImageId = pullImage(imageName, tagName);
-        final File imageTarFile = saveImageToDir(imageTarDirectory, imageName, tagName);
+        final File imageTarFile = saveImageToDir(imageTarDirectory, Names.getImageTarFilename(imageName, tagName), imageName, tagName);
         if (config.isCleanupTargetImage()) {
             removeImage(targetImageId);
         }
@@ -170,8 +171,8 @@ public class DockerClientManager {
         }
     }
 
-    private File saveImageToDir(final File imageTarDirectory, final String imageName, final String tagName) throws IOException, HubIntegrationException {
-        final File imageTarFile = new File(imageTarDirectory, programPaths.getImageTarFilename(imageName, tagName));
+    private File saveImageToDir(final File imageTarDirectory, final String imageTarFilename, final String imageName, final String tagName) throws IOException, HubIntegrationException {
+        final File imageTarFile = new File(imageTarDirectory, imageTarFilename);
         saveImageToFile(imageName, tagName, imageTarFile);
         return imageTarFile;
     }

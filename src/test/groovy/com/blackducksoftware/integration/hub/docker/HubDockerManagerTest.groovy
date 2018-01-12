@@ -12,7 +12,6 @@ import com.blackducksoftware.integration.hub.docker.config.DockerInspectorOption
 import com.blackducksoftware.integration.hub.docker.imageinspector.ImageInspector
 import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.imageinspector.PackageManagerEnum
-import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPaths
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.DockerTarParser
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImageInfo
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImagePkgMgr
@@ -120,10 +119,9 @@ class HubDockerManagerTest {
         List<String> layerIds = new ArrayList<>()
         layerIds.add("testLayerId")
         ManifestLayerMapping mapping = new ManifestLayerMapping(imageName, tagName, layerIds)
-        mapping.programPaths = new ProgramPaths()
         mappings.add(mapping)
         File imageFilesDir = new File("src/test/resources/imageDir")
-        File bdioFile = mgr.generateBdioFromImageFilesDir("root", "1.0", mappings, "testProjectName", "testProjectVersion", imageTarFile, imageFilesDir, os)
+        File bdioFile = mgr.generateBdioFromImageFilesDir(imageName, tagName, mappings, "testProjectName", "testProjectVersion", imageTarFile, imageFilesDir, os)
 
         File file1 = new File("src/test/resources/${imageName}_imageDir_testProjectName_testProjectVersion_bdio.jsonld")
         File file2 = bdioFile
