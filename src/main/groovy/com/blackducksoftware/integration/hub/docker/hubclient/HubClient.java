@@ -44,7 +44,7 @@ import com.blackducksoftware.integration.hub.builder.HubServerConfigBuilder;
 import com.blackducksoftware.integration.hub.dataservice.phonehome.PhoneHomeDataService;
 import com.blackducksoftware.integration.hub.docker.ProgramVersion;
 import com.blackducksoftware.integration.hub.docker.config.Config;
-import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPaths;
+import com.blackducksoftware.integration.hub.docker.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.blackducksoftware.integration.hub.global.HubServerConfig;
 import com.blackducksoftware.integration.hub.rest.CredentialsRestConnection;

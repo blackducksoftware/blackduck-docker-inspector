@@ -37,7 +37,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.hub.bdio.BdioWriter;
-import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPathUtils;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.DockerTarParser;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImageInfo;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping;
@@ -124,11 +123,11 @@ public class ImageInspector {
         String pkgMgrFilePath = imageInfo.getPkgMgr().getExtractedPackageManagerDirectory().getAbsolutePath();
         pkgMgrFilePath = pkgMgrFilePath.substring(pkgMgrFilePath.indexOf(imageDirectoryName) + imageDirectoryName.length() + 1);
 
-        final String codeLocationName = ProgramPathUtils.getCodeLocationName(codeLocationPrefix, manifestMapping.getImageName(), manifestMapping.getTagName(), pkgMgrFilePath, imageInfo.getPkgMgr().getPackageManager().toString());
+        final String codeLocationName = Names.getCodeLocationName(codeLocationPrefix, manifestMapping.getImageName(), manifestMapping.getTagName(), pkgMgrFilePath, imageInfo.getPkgMgr().getPackageManager().toString());
         final String finalProjectName = deriveHubProject(manifestMapping.getImageName(), givenProjectName);
         final String finalProjectVersionName = deriveHubProjectVersion(manifestMapping, givenVersionName);
         logger.info(String.format("Hub project: %s, version: %s; Code location : %s", finalProjectName, finalProjectVersionName, codeLocationName));
-        final String bdioFilename = ProgramPathUtils.getBdioFilename(manifestMapping.getImageName(), pkgMgrFilePath, finalProjectName, finalProjectVersionName);
+        final String bdioFilename = Names.getBdioFilename(manifestMapping.getImageName(), pkgMgrFilePath, finalProjectName, finalProjectVersionName);
         final File bdioOutputFile = new File(outputDirectory, bdioFilename);
         try (FileOutputStream bdioOutputStream = new FileOutputStream(bdioOutputFile)) {
             try (BdioWriter bdioWriter = new BdioWriter(new Gson(), bdioOutputStream)) {
@@ -144,7 +143,7 @@ public class ImageInspector {
     private String deriveHubProject(final String imageName, final String projectName) {
         String hubProjectName;
         if (StringUtils.isBlank(projectName)) {
-            hubProjectName = ProgramPathUtils.cleanImageName(imageName);
+            hubProjectName = Names.cleanImageName(imageName);
         } else {
             logger.debug("Using project from config property");
             hubProjectName = projectName;

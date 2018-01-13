@@ -7,11 +7,11 @@ import org.junit.Test
 
 import com.blackducksoftware.integration.hub.docker.config.Config
 import com.blackducksoftware.integration.hub.docker.config.DockerInspectorOption
-import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPathUtils
-import com.blackducksoftware.integration.hub.docker.imageinspector.config.ProgramPaths
+import com.blackducksoftware.integration.hub.docker.config.ProgramPaths
+import com.blackducksoftware.integration.hub.docker.imageinspector.Names
 
 class ProgramPathsTest {
-
+    // TODO Names tests belong in a diff pkg
     @Test
     public void testReleasedVersion() {
         doTest("hub-docker-1.0.0.jar", true)
@@ -78,9 +78,9 @@ class ProgramPathsTest {
         assertEquals("${installDirPath}/${jarFileName}".toString(), paths.getHubDockerJarPathActual())
 
         if (prefixCodeLocationName) {
-            assertEquals(prefix + "_imageName_imageTag_pkgMgrFilePath_pkgMgrName", ProgramPathUtils.getCodeLocationName(prefix, "imageName", "imageTag",  "pkgMgrFilePath",  "pkgMgrName"))
+            assertEquals(prefix + "_imageName_imageTag_pkgMgrFilePath_pkgMgrName", Names.getCodeLocationName(prefix, "imageName", "imageTag",  "pkgMgrFilePath",  "pkgMgrName"))
         } else {
-            assertEquals("imageName_imageTag_pkgMgrFilePath_pkgMgrName", ProgramPathUtils.getCodeLocationName(null, "imageName", "imageTag",  "pkgMgrFilePath",  "pkgMgrName"))
+            assertEquals("imageName_imageTag_pkgMgrFilePath_pkgMgrName", Names.getCodeLocationName(null, "imageName", "imageTag",  "pkgMgrFilePath",  "pkgMgrName"))
         }
     }
 }
