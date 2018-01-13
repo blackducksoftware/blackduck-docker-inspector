@@ -18,8 +18,6 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.blackducksoftware.integration.hub.docker.client.ProgramVersion;
-
 public class ArgsWithSpacesTest {
 
     private static final String USERNAME = "You Zer";
@@ -45,8 +43,8 @@ public class ArgsWithSpacesTest {
 
         final String programVersion = (new ProgramVersion()).getProgramVersion();
         final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--dry.run=true", String.format("--hub.username=\"%s\"", USERNAME), String.format("--hub.project.name=\"%s\"", PROJECT_NAME),
-                String.format("--hub.project.version=\"%s\"", PROJECT_VERSION), String.format("--jar.path=build/images/alpine/hub-docker-inspector/hub-docker-inspector-%s.jar", programVersion), "--output.path=test/output",
-                "--output.include.dockertarfile=true", "--output.include.containerfilesystem=true", "--hub.always.trust.cert=true");
+                String.format("--hub.project.version=\"%s\"", PROJECT_VERSION), String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", programVersion), "--output.path=test/output", "--output.include.dockertarfile=true",
+                "--output.include.containerfilesystem=true", "--hub.always.trust.cert=true");
         // Arrays.asList returns a fixed size list; need a variable sized list
         final List<String> fullCmd = new ArrayList<>();
         fullCmd.addAll(partialCmd);

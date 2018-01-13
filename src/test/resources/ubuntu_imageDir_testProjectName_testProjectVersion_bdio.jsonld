@@ -2,7 +2,7 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "ubuntu_1.0_var_lib_dpkg_DPKG",
-    "@id": "uuid:fb87b0c0-4a57-4af8-82ff-592d7fc32fb5",
+    "@id": "uuid:f1cf1bee-4007-4edb-9086-8fedc67f8512",
     "@type": "BillOfMaterials",
     "relationship": []
   },

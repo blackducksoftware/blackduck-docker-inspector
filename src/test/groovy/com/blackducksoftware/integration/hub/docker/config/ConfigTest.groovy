@@ -7,6 +7,8 @@ import org.junit.BeforeClass
 import org.junit.Ignore
 import org.junit.Test
 
+import com.blackducksoftware.integration.hub.docker.config.Config
+
 class ConfigTest {
 
     private static final String STRING_OPTION_VALUE = "This is a test value"

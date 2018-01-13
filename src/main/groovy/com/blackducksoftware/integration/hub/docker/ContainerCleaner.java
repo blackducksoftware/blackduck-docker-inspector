@@ -5,7 +5,7 @@ import java.util.concurrent.Callable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.blackducksoftware.integration.hub.docker.client.DockerClientManager;
+import com.blackducksoftware.integration.hub.docker.dockerclient.DockerClientManager;
 
 public class ContainerCleaner implements Callable<String> {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());

@@ -19,8 +19,6 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.blackducksoftware.integration.hub.docker.client.ProgramVersion;
-
 public class EndToEndTest {
 
     @BeforeClass
@@ -211,8 +209,8 @@ public class EndToEndTest {
         assertFalse(actualBdio.exists());
 
         final String programVersion = (new ProgramVersion()).getProgramVersion();
-        final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--dry.run=true", String.format("--jar.path=build/images/alpine/hub-docker-inspector/hub-docker-inspector-%s.jar", programVersion),
-                "--output.path=test/output", "--output.include.dockertarfile=true", "--output.include.containerfilesystem=true", "--hub.always.trust.cert=true");
+        final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--dry.run=true", String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", programVersion), "--output.path=test/output",
+                "--output.include.dockertarfile=true", "--output.include.containerfilesystem=true", "--hub.always.trust.cert=true");
         // Arrays.asList returns a fixed size list; need a variable sized list
         final List<String> fullCmd = new ArrayList<>();
         fullCmd.addAll(partialCmd);

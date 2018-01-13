@@ -42,11 +42,9 @@ def linuxFlavorsRpm = ["centos:7.3.1611"]
 def linuxFlavorsApk = ["alpine:3.5"]
 def linuxFlavors = linuxFlavorsDpkg + linuxFlavorsRpm + linuxFlavorsApk
 
-Properties applicationProperties = new Properties()
-applicationProperties.load(new FileInputStream("src/main/resources/application.properties"))
 String hubDockerPgmDir = '/opt/blackduck/hub-docker-inspector'
 
-springBoot { mainClass = 'com.blackducksoftware.integration.hub.docker.Application' }
+springBoot { mainClass = 'com.blackducksoftware.integration.hub.docker.DockerEnvImageInspector' }
 
 sourceSets {
 	main {

@@ -7,21 +7,22 @@ import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
 
-import com.blackducksoftware.integration.hub.docker.client.DockerClientManager
 import com.blackducksoftware.integration.hub.docker.config.Config
 import com.blackducksoftware.integration.hub.docker.config.DockerInspectorOption
-import com.blackducksoftware.integration.hub.docker.executor.ApkExecutor
-import com.blackducksoftware.integration.hub.docker.executor.DpkgExecutor
-import com.blackducksoftware.integration.hub.docker.executor.Executor
-import com.blackducksoftware.integration.hub.docker.extractor.ApkExtractor
-import com.blackducksoftware.integration.hub.docker.extractor.DpkgExtractor
-import com.blackducksoftware.integration.hub.docker.extractor.Extractor
-import com.blackducksoftware.integration.hub.docker.hub.HubClient
-import com.blackducksoftware.integration.hub.docker.linux.FileOperations
-import com.blackducksoftware.integration.hub.docker.tar.DockerTarParser
-import com.blackducksoftware.integration.hub.docker.tar.ImageInfo
-import com.blackducksoftware.integration.hub.docker.tar.ImagePkgMgr
-import com.blackducksoftware.integration.hub.docker.tar.manifest.ManifestLayerMapping
+import com.blackducksoftware.integration.hub.docker.imageinspector.ImageInspector
+import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum
+import com.blackducksoftware.integration.hub.docker.imageinspector.PackageManagerEnum
+import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.DockerTarParser
+import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImageInfo
+import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImagePkgMgr
+import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping
+import com.blackducksoftware.integration.hub.docker.imageinspector.linux.FileOperations
+import com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor.ApkExecutor
+import com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor.DpkgExecutor
+import com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor.Executor
+import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor.ApkExtractor
+import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor.DpkgExtractor
+import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor.Extractor
 
 class HubDockerManagerTest {
 
@@ -88,19 +89,13 @@ class HubDockerManagerTest {
         extractor.init()
         extractors.add(extractor)
 
-        HubDockerManager mgr = new HubDockerManager()
+        ImageInspector mgr = new ImageInspector()
+        mgr.tarParser = [
+            setWorkingDirectory: { File f ->
+            }
+        ] as DockerTarParser
         String tempDirPath = TestUtils.createTempDirectory().getAbsolutePath()
-        mgr.programPaths = [
-            getHubDockerWorkingDirPath: { -> tempDirPath },
-            getHubDockerOutputPath: { -> tempDirPath },
-            getHubDockerOutputPathContainer: { -> tempDirPath }
-        ] as ProgramPaths
-        mgr.programPaths.config = config;
-        mgr.hubClient = [
-        ] as HubClient
-        mgr.dockerClientManager = [
-            getTarFileFromDockerImage: {String name, String tag -> imageTarFile}
-        ] as DockerClientManager
+        mgr.init(tempDirPath, tempDirPath, "")
         mgr.extractors = extractors
 
 
@@ -120,22 +115,16 @@ class HubDockerManagerTest {
 
         FileOperations.metaClass.static.findFileWithName = {File fileToSearch, String name -> etcDirs}
 
-        assertEquals("image.tar", mgr.getTarFileFromDockerImage(imageName, tagName).getName())
-
         List<ManifestLayerMapping> mappings = new ArrayList<ManifestLayerMapping>()
         List<String> layerIds = new ArrayList<>()
         layerIds.add("testLayerId")
         ManifestLayerMapping mapping = new ManifestLayerMapping(imageName, tagName, layerIds)
-        mapping.programPaths = new ProgramPaths()
         mappings.add(mapping)
         File imageFilesDir = new File("src/test/resources/imageDir")
-        List<File> bdioFiles = mgr.generateBdioFromImageFilesDir("root", "1.0", mappings, "testProjectName", "testProjectVersion", imageTarFile, imageFilesDir, os)
-        for (File bdioFile : bdioFiles) {
-            println "${bdioFile.getAbsolutePath()}"
-        }
+        File bdioFile = mgr.generateBdioFromImageFilesDir(imageName, tagName, mappings, "testProjectName", "testProjectVersion", imageTarFile, imageFilesDir, os)
 
         File file1 = new File("src/test/resources/${imageName}_imageDir_testProjectName_testProjectVersion_bdio.jsonld")
-        File file2 = bdioFiles.get(0)
+        File file2 = bdioFile
         println "Comparing ${file2.getAbsolutePath()} to ${file1.getAbsolutePath()}"
         boolean filesAreEqual = TestUtils.contentEquals(file1, file2, [
             "\"@id\":",
