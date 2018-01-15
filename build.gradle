@@ -435,11 +435,6 @@ task integrationTest(type: Test, dependsOn: [pkg, buildTestTarfiles, itOnly]) {
 
 task all(dependsOn: [pushImages, integrationTest, artifactoryPublish]) {}
 
-repositories {
-    mavenCentral()
-    mavenLocal()
-}
-
 publishing {
     publications {
         mavenJava(MavenPublication) {
