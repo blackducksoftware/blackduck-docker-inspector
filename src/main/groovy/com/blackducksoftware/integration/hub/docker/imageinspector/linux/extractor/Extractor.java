@@ -66,9 +66,19 @@ public abstract class Extractor {
         return packageManagerEnum;
     }
 
-    public void extract(final String dockerImageRepo, final String dockerImageTag, final ImagePkgMgr imagePkgMgr, final BdioWriter bdioWriter, final ExtractionDetails extractionDetails, final String codeLocationName,
-            final String projectName, final String version) throws HubIntegrationException, IOException, InterruptedException {
+    public SimpleBdioDocument extract(final String dockerImageRepo, final String dockerImageTag, final ImagePkgMgr imagePkgMgr, final ExtractionDetails extractionDetails, final String codeLocationName, final String projectName,
+            final String version) throws HubIntegrationException, IOException, InterruptedException {
 
+        final SimpleBdioDocument bdioDocument = extractBdio(dockerImageRepo, dockerImageTag, imagePkgMgr, extractionDetails, codeLocationName, projectName, version);
+        return bdioDocument;
+    }
+
+    public void writeBdio(final BdioWriter bdioWriter, final SimpleBdioDocument bdioDocument) {
+        (new SimpleBdioFactory()).writeSimpleBdioDocument(bdioWriter, bdioDocument);
+    }
+
+    private SimpleBdioDocument extractBdio(final String dockerImageRepo, final String dockerImageTag, final ImagePkgMgr imagePkgMgr, final ExtractionDetails extractionDetails, final String codeLocationName, final String projectName,
+            final String version) throws HubIntegrationException, IOException, InterruptedException {
         final Forge forgeObject = new Forge(forges.get(0), "/");
         final ExternalId projectExternalId = (new SimpleBdioFactory()).createNameVersionExternalId(forgeObject, projectName, version);
         final SimpleBdioDocument bdioDocument = (new SimpleBdioFactory()).createSimpleBdioDocument(codeLocationName, projectName, version, projectExternalId);
@@ -78,7 +88,7 @@ public abstract class Extractor {
         logger.info(String.format("Found %s potential components", dependencies.getRootDependencies().size()));
 
         (new SimpleBdioFactory()).populateComponents(bdioDocument, projectExternalId, dependencies);
-        (new SimpleBdioFactory()).writeSimpleBdioDocument(bdioWriter, bdioDocument);
+        return bdioDocument;
     }
 
     public void createBdioComponent(final MutableDependencyGraph dependencies, final String name, final String version, final String externalId, final String arch) {

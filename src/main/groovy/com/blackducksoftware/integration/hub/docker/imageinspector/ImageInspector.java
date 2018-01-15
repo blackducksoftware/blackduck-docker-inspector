@@ -37,6 +37,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.hub.bdio.BdioWriter;
+import com.blackducksoftware.integration.hub.bdio.model.SimpleBdioDocument;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.DockerTarParser;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImageInfo;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping;
@@ -129,15 +130,20 @@ public class ImageInspector {
         logger.info(String.format("Hub project: %s, version: %s; Code location : %s", finalProjectName, finalProjectVersionName, codeLocationName));
         final String bdioFilename = Names.getBdioFilename(manifestMapping.getImageName(), pkgMgrFilePath, finalProjectName, finalProjectVersionName);
         final File bdioOutputFile = new File(outputDirectory, bdioFilename);
-        try (FileOutputStream bdioOutputStream = new FileOutputStream(bdioOutputFile)) {
-            try (BdioWriter bdioWriter = new BdioWriter(new Gson(), bdioOutputStream)) {
-                final Extractor extractor = getExtractorByPackageManager(imageInfo.getPkgMgr().getPackageManager());
-                final ExtractionDetails extractionDetails = new ExtractionDetails(imageInfo.getOperatingSystemEnum(), architecture);
-                extractor.extract(dockerImageRepo, dockerImageTag, imageInfo.getPkgMgr(), bdioWriter, extractionDetails, codeLocationName, finalProjectName, finalProjectVersionName);
-            }
-        }
+        final Extractor extractor = getExtractorByPackageManager(imageInfo.getPkgMgr().getPackageManager());
+        final ExtractionDetails extractionDetails = new ExtractionDetails(imageInfo.getOperatingSystemEnum(), architecture);
+        final SimpleBdioDocument bdioDocument = extractor.extract(dockerImageRepo, dockerImageTag, imageInfo.getPkgMgr(), extractionDetails, codeLocationName, finalProjectName, finalProjectVersionName);
+        writeBdioToFile(extractor, bdioDocument, bdioOutputFile);
 
         return bdioOutputFile;
+    }
+
+    private void writeBdioToFile(final Extractor extractor, final SimpleBdioDocument bdioDocument, final File bdioOutputFile) throws IOException, FileNotFoundException {
+        try (FileOutputStream bdioOutputStream = new FileOutputStream(bdioOutputFile)) {
+            try (BdioWriter bdioWriter = new BdioWriter(new Gson(), bdioOutputStream)) {
+                extractor.writeBdio(bdioWriter, bdioDocument);
+            }
+        }
     }
 
     private String deriveHubProject(final String imageName, final String projectName) {
