@@ -2,7 +2,7 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "blackducksoftware_whiteouttest_1.0_var_lib_dpkg_DPKG",
-    "@id": "uuid:23b82dfc-fbc8-4645-8eb6-6cee5fb3cbdd",
+    "@id": "uuid:272e28af-c664-4a52-871c-6b66fef9eaac",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -257,6 +257,10 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:ubuntu/libseccomp2/2_3_1_2_1ubuntu2_16_04_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:ubuntu/insserv/1_14_0_5ubuntu3/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -282,10 +286,6 @@
       },
       {
         "related": "http:debian/libffi6/3_2_1_4/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:ubuntu/libseccomp2/2_2_3_3ubuntu3/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -533,10 +533,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/libseccomp2/2_2_3_3ubuntu3/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:ubuntu/libkrb5support0/1_13_2_dfsg_5ubuntu2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -742,6 +738,10 @@
       },
       {
         "related": "http:debian/libnettle6/3_2_1ubuntu0_16_04_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:debian/libseccomp2/2_3_1_2_1ubuntu2_16_04_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -2219,6 +2219,26 @@
     "relationship": []
   },
   {
+    "name": "libseccomp2",
+    "revision": "2.3.1-2.1ubuntu2~16.04.1",
+    "@id": "http:ubuntu/libseccomp2/2_3_1_2_1ubuntu2_16_04_1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libseccomp2/2.3.1-2.1ubuntu2~16.04.1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/"
+        },
+        "name": "libseccomp2",
+        "version": "2.3.1-2.1ubuntu2~16.04.1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "insserv",
     "revision": "1.14.0-5ubuntu3",
     "@id": "http:ubuntu/insserv/1_14_0_5ubuntu3/amd64",
@@ -2353,26 +2373,6 @@
         },
         "name": "libffi6",
         "version": "3.2.1-4",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libseccomp2",
-    "revision": "2.2.3-3ubuntu3",
-    "@id": "http:ubuntu/libseccomp2/2_2_3_3ubuntu3/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libseccomp2/2.2.3-3ubuntu3/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "ubuntu",
-          "separator": "/"
-        },
-        "name": "libseccomp2",
-        "version": "2.2.3-3ubuntu3",
         "architecture": "amd64"
       }
     },
@@ -3599,26 +3599,6 @@
     "relationship": []
   },
   {
-    "name": "libseccomp2",
-    "revision": "2.2.3-3ubuntu3",
-    "@id": "http:debian/libseccomp2/2_2_3_3ubuntu3/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libseccomp2/2.2.3-3ubuntu3/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "debian",
-          "separator": "/"
-        },
-        "name": "libseccomp2",
-        "version": "2.2.3-3ubuntu3",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "libkrb5support0",
     "revision": "1.13.2+dfsg-5ubuntu2",
     "@id": "http:ubuntu/libkrb5support0/1_13_2_dfsg_5ubuntu2/amd64",
@@ -4653,6 +4633,26 @@
         },
         "name": "libnettle6",
         "version": "3.2-1ubuntu0.16.04.1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libseccomp2",
+    "revision": "2.3.1-2.1ubuntu2~16.04.1",
+    "@id": "http:debian/libseccomp2/2_3_1_2_1ubuntu2_16_04_1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libseccomp2/2.3.1-2.1ubuntu2~16.04.1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "debian",
+          "separator": "/"
+        },
+        "name": "libseccomp2",
+        "version": "2.3.1-2.1ubuntu2~16.04.1",
         "architecture": "amd64"
       }
     },
