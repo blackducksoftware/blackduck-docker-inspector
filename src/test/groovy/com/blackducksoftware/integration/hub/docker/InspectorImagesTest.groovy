@@ -22,7 +22,7 @@ import com.blackducksoftware.integration.hub.docker.ProgramVersion
 import com.blackducksoftware.integration.hub.docker.config.Config
 import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum
 
-class DockerImagesTest {
+class InspectorImagesTest {
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {

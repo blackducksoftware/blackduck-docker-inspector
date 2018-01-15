@@ -1,4 +1,4 @@
-package com.blackducksoftware.integration.hub.docker
+package com.blackducksoftware.integration.hub.docker.imageinspector
 
 
 class TestUtils {

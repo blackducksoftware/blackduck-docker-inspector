@@ -19,6 +19,8 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.blackducksoftware.integration.hub.docker.imageinspector.TestUtils;
+
 public class EndToEndTest {
 
     @BeforeClass

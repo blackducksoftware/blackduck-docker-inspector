@@ -1,4 +1,4 @@
-package com.blackducksoftware.integration.hub.docker;
+package com.blackducksoftware.integration.hub.docker.imageinspector;
 
 
 import static org.junit.Assert.*
@@ -24,7 +24,7 @@ import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extract
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor.DpkgExtractor
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor.Extractor
 
-class HubDockerManagerTest {
+class ImageInspectorTest {
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
@@ -89,14 +89,14 @@ class HubDockerManagerTest {
         extractor.init()
         extractors.add(extractor)
 
-        ImageInspector mgr = new ImageInspector()
-        mgr.tarParser = [
+        ImageInspector imageInspector = new ImageInspector()
+        imageInspector.tarParser = [
             setWorkingDirectory: { File f ->
             }
         ] as DockerTarParser
         String tempDirPath = TestUtils.createTempDirectory().getAbsolutePath()
-        mgr.init(tempDirPath, tempDirPath, "")
-        mgr.extractors = extractors
+        imageInspector.init(tempDirPath, tempDirPath, "")
+        imageInspector.extractors = extractors
 
 
 
@@ -109,7 +109,7 @@ class HubDockerManagerTest {
         etcApkArchFile.write 'amd64'
 
         etcDirs.add(etcDir)
-        mgr.tarParser = [
+        imageInspector.tarParser = [
             collectPkgMgrInfo: {File imageFilesDir, OperatingSystemEnum osEnum -> imageInfo}
         ] as DockerTarParser
 
@@ -121,7 +121,7 @@ class HubDockerManagerTest {
         ManifestLayerMapping mapping = new ManifestLayerMapping(imageName, tagName, layerIds)
         mappings.add(mapping)
         File imageFilesDir = new File("src/test/resources/imageDir")
-        File bdioFile = mgr.generateBdioFromImageFilesDir(imageName, tagName, mappings, "testProjectName", "testProjectVersion", imageTarFile, imageFilesDir, os)
+        File bdioFile = imageInspector.generateBdioFromImageFilesDir(imageName, tagName, mappings, "testProjectName", "testProjectVersion", imageTarFile, imageFilesDir, os)
 
         File file1 = new File("src/test/resources/${imageName}_imageDir_testProjectName_testProjectVersion_bdio.jsonld")
         File file2 = bdioFile
