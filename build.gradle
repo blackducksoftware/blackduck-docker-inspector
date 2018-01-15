@@ -57,7 +57,7 @@ sourceSets {
         groovy {
             compileClasspath += main.output + test.output
             runtimeClasspath += main.output + test.output
-            srcDir file('src/integration-test/groovy')
+            groovy.srcDir file('src/integration-test/groovy')
         }
         resources.srcDir file('src/integration-test/resources')
     }
@@ -429,16 +429,15 @@ task pushImages(dependsOn: [pkg, pushImageAlpine, pushImageCentos, pushImageUbun
 task buildTestTarfiles(dependsOn: [buildWhTestDockerTarfile, buildAggTestDockerTarfile, \
         buildAlpineTestDockerTarfile]) {}
 
-task integrationTest(type: Test, dependsOn: [pkg, buildTestTarfiles]) {
-    testClassesDir = sourceSets.integrationTest.output.classesDir
+task itOnly(type: Test) {
+    //testClassesDir = sourceSets.integrationTest.output.classesDir
+    testClassesDir = new File("build/classes/groovy/integrationTest")
     classpath = sourceSets.integrationTest.runtimeClasspath
     outputs.upToDateWhen { false }
+    mustRunAfter tasks.test
 }
 
-task itOnly(type: Test) {
-    testClassesDir = sourceSets.integrationTest.output.classesDir
-    classpath = sourceSets.integrationTest.runtimeClasspath
-    outputs.upToDateWhen { false }
+task integrationTest(type: Test, dependsOn: [pkg, buildTestTarfiles, itOnly]) {
 }
 
 task all(dependsOn: [pushImages, integrationTest, artifactoryPublish]) {}
@@ -486,4 +485,12 @@ dependencies {
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     
     integrationTestCompile 'org.assertj:assertj-core:3.0.0'
+    integrationTestCompile sourceSets.main.output
+    integrationTestCompile sourceSets.test.output
+    
+    integrationTestCompile configurations.compile
+    integrationTestCompile configurations.testCompile
+    
+    integrationTestCompile configurations.runtime
+    integrationTestCompile configurations.testRuntime
 }
