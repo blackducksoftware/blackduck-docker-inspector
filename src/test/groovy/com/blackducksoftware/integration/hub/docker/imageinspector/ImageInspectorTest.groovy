@@ -9,11 +9,8 @@ import org.junit.Test
 
 import com.blackducksoftware.integration.hub.docker.config.Config
 import com.blackducksoftware.integration.hub.docker.config.DockerInspectorOption
-import com.blackducksoftware.integration.hub.docker.imageinspector.ImageInspector
-import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum
-import com.blackducksoftware.integration.hub.docker.imageinspector.PackageManagerEnum
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.DockerTarParser
-import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImageInfo
+import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImageInfoParsed
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImagePkgMgr
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.FileOperations
@@ -81,7 +78,7 @@ class ImageInspectorTest {
 
         File imageTarFile = new File("test/image.tar")
         ImagePkgMgr imagePkgMgr = new ImagePkgMgr(new File("test/resources/imageDir/image_${imageName}_v_${tagName}/${pkgMgr.directory}"), pkgMgr)
-        ImageInfo imageInfo = new ImageInfo("image_${imageName}_v_${tagName}", os, imagePkgMgr)
+        ImageInfoParsed imageInfo = new ImageInfoParsed("image_${imageName}_v_${tagName}", os, imagePkgMgr)
 
         List<Extractor> extractors = new ArrayList<>()
         extractor.executor = executor
@@ -121,8 +118,8 @@ class ImageInspectorTest {
         ManifestLayerMapping mapping = new ManifestLayerMapping(imageName, tagName, layerIds)
         mappings.add(mapping)
         File imageFilesDir = new File("src/test/resources/imageDir")
-        File bdioFile = imageInspector.generateBdioFromImageFilesDir(imageName, tagName, mappings, "testProjectName", "testProjectVersion", imageTarFile, imageFilesDir, os)
-
+        ImageInfoDerived imageInfoDerived = imageInspector.generateBdioFromImageFilesDir(imageName, tagName, mappings, "testProjectName", "testProjectVersion", imageTarFile, imageFilesDir, os)
+        File bdioFile = imageInspector.writeBdioFile(imageInfoDerived)
         File file1 = new File("src/test/resources/${imageName}_imageDir_testProjectName_testProjectVersion_bdio.jsonld")
         File file2 = bdioFile
         println "Comparing ${file2.getAbsolutePath()} to ${file1.getAbsolutePath()}"

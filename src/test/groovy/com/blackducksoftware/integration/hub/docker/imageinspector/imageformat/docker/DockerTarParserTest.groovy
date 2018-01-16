@@ -55,7 +55,7 @@ class DockerTarParserTest {
         assertEquals(2, layerMappings.get(0).layers.size())
         File imageFilesDir = tarParser.extractDockerLayers("imageName", "imageTag", layerTars, layerMappings)
         OperatingSystemEnum targetOsEnum = tarParser.detectOperatingSystem(imageFilesDir)
-        ImageInfo tarExtractionResults = tarParser.collectPkgMgrInfo(imageFilesDir, targetOsEnum)
+        ImageInfoParsed tarExtractionResults = tarParser.collectPkgMgrInfo(imageFilesDir, targetOsEnum)
 
         boolean varLibRpmNameFound = false
         int numFilesFound = 0

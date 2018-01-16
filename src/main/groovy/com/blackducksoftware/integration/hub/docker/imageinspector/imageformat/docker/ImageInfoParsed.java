@@ -28,12 +28,12 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum;
 
-public class ImageInfo {
+public class ImageInfoParsed {
     private final String fileSystemRootDirName;
     private final OperatingSystemEnum operatingSystemEnum;
     private final ImagePkgMgr pkgMgr;
 
-    public ImageInfo(final String fileSystemRootDirName, final OperatingSystemEnum operatingSystemEnum, final ImagePkgMgr pkgMgr) {
+    public ImageInfoParsed(final String fileSystemRootDirName, final OperatingSystemEnum operatingSystemEnum, final ImagePkgMgr pkgMgr) {
         this.fileSystemRootDirName = fileSystemRootDirName;
         this.operatingSystemEnum = operatingSystemEnum;
         this.pkgMgr = pkgMgr;

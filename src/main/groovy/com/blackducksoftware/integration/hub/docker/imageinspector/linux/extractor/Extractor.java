@@ -54,7 +54,7 @@ public abstract class Extractor {
         return null;
     }
 
-    public abstract void extractComponents(MutableDependencyGraph dependencies, String dockerImageRepo, String dockerImageTag, ExtractionDetails extractionDetails, String[] packageList);
+    public abstract void extractComponents(MutableDependencyGraph dependencies, String dockerImageRepo, String dockerImageTag, String architecture, String[] packageList);
 
     void initValues(final PackageManagerEnum packageManagerEnum, final PkgMgrExecutor executor, final List<String> forges) {
         this.packageManagerEnum = packageManagerEnum;
@@ -66,25 +66,25 @@ public abstract class Extractor {
         return packageManagerEnum;
     }
 
-    public SimpleBdioDocument extract(final String dockerImageRepo, final String dockerImageTag, final ImagePkgMgr imagePkgMgr, final ExtractionDetails extractionDetails, final String codeLocationName, final String projectName,
-            final String version) throws HubIntegrationException, IOException, InterruptedException {
+    public SimpleBdioDocument extract(final String dockerImageRepo, final String dockerImageTag, final ImagePkgMgr imagePkgMgr, final String architecture, final String codeLocationName, final String projectName, final String version)
+            throws HubIntegrationException, IOException, InterruptedException {
 
-        final SimpleBdioDocument bdioDocument = extractBdio(dockerImageRepo, dockerImageTag, imagePkgMgr, extractionDetails, codeLocationName, projectName, version);
+        final SimpleBdioDocument bdioDocument = extractBdio(dockerImageRepo, dockerImageTag, imagePkgMgr, architecture, codeLocationName, projectName, version);
         return bdioDocument;
     }
 
-    public void writeBdio(final BdioWriter bdioWriter, final SimpleBdioDocument bdioDocument) {
+    public static void writeBdio(final BdioWriter bdioWriter, final SimpleBdioDocument bdioDocument) {
         (new SimpleBdioFactory()).writeSimpleBdioDocument(bdioWriter, bdioDocument);
     }
 
-    private SimpleBdioDocument extractBdio(final String dockerImageRepo, final String dockerImageTag, final ImagePkgMgr imagePkgMgr, final ExtractionDetails extractionDetails, final String codeLocationName, final String projectName,
-            final String version) throws HubIntegrationException, IOException, InterruptedException {
+    private SimpleBdioDocument extractBdio(final String dockerImageRepo, final String dockerImageTag, final ImagePkgMgr imagePkgMgr, final String architecture, final String codeLocationName, final String projectName, final String version)
+            throws HubIntegrationException, IOException, InterruptedException {
         final Forge forgeObject = new Forge(forges.get(0), "/");
         final ExternalId projectExternalId = (new SimpleBdioFactory()).createNameVersionExternalId(forgeObject, projectName, version);
         final SimpleBdioDocument bdioDocument = (new SimpleBdioFactory()).createSimpleBdioDocument(codeLocationName, projectName, version, projectExternalId);
         final MutableDependencyGraph dependencies = (new SimpleBdioFactory()).createMutableDependencyGraph();
 
-        extractComponents(dependencies, dockerImageRepo, dockerImageTag, extractionDetails, executor.runPackageManager(imagePkgMgr));
+        extractComponents(dependencies, dockerImageRepo, dockerImageTag, architecture, executor.runPackageManager(imagePkgMgr));
         logger.info(String.format("Found %s potential components", dependencies.getRootDependencies().size()));
 
         (new SimpleBdioFactory()).populateComponents(bdioDocument, projectExternalId, dependencies);

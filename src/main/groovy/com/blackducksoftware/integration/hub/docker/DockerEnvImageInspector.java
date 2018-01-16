@@ -52,6 +52,7 @@ import com.blackducksoftware.integration.hub.docker.dockerclient.DockerClientMan
 import com.blackducksoftware.integration.hub.docker.help.formatter.UsageFormatter;
 import com.blackducksoftware.integration.hub.docker.hubclient.HubClient;
 import com.blackducksoftware.integration.hub.docker.imageinspector.DissectedImage;
+import com.blackducksoftware.integration.hub.docker.imageinspector.ImageInfoDerived;
 import com.blackducksoftware.integration.hub.docker.imageinspector.ImageInspector;
 import com.blackducksoftware.integration.hub.docker.imageinspector.Names;
 import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum;
@@ -182,8 +183,9 @@ public class DockerEnvImageInspector {
                 dissectedImage.setTargetOs(imageInspector.detectOperatingSystem(dissectedImage.getTargetImageFileSystemRootDir()));
             }
             logger.info(String.format("Target image tarfile: %s; target OS: %s", dissectedImage.getDockerTarFile().getAbsolutePath(), dissectedImage.getTargetOs().toString()));
-            final File bdioFile = imageInspector.generateBdioFromImageFilesDir(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), getHubProjectName(config), getHubProjectVersion(config),
-                    dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs());
+            final ImageInfoDerived imageInfoDerived = imageInspector.generateBdioFromImageFilesDir(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), getHubProjectName(config),
+                    getHubProjectVersion(config), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs());
+            final File bdioFile = imageInspector.writeBdioFile(imageInfoDerived);
             logger.info(String.format("BDIO File generated: %s", bdioFile.getAbsolutePath()));
             dissectedImage.setBdioFilename(bdioFile.getName());
             createContainerFileSystemTarIfRequested(config, dissectedImage.getTargetImageFileSystemRootDir());
@@ -439,6 +441,8 @@ public class DockerEnvImageInspector {
         FileOperations.removeFileOrDir(programPaths.getHubDockerWorkingDirPath());
 
         logger.debug(String.format("Upload BDIO is set to %b", config.isUploadBdio()));
+        FileOperations.purgeDir(config.getOutputPath());
+
         return true;
     }
 

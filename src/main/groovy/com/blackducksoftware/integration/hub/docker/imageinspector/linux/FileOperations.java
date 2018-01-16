@@ -124,4 +124,20 @@ public class FileOperations {
         final boolean mkdirsResult = dir.mkdirs();
         logger.debug(String.format("\tmkdirs result: %b", mkdirsResult));
     }
+
+    public static File purgeDir(final String dirPath) {
+        logger.trace(String.format("Purging/recreating dir: %s", dirPath));
+        final File dir = new File(dirPath);
+        try {
+            FileUtils.deleteDirectory(dir);
+            dir.mkdirs();
+        } catch (final IOException e) {
+            logger.warn(String.format("Error purging dir: %s", dir.getAbsolutePath()));
+        }
+        logger.trace(String.format("dirPath %s: exists: %b; isDirectory: %b", dirPath, dir.exists(), dir.isDirectory()));
+        if (dir.listFiles() != null) {
+            logger.trace(String.format("dirPath %s: # files: %d", dirPath, dir.listFiles().length));
+        }
+        return dir;
+    }
 }

@@ -59,7 +59,7 @@ class ApkExtractor extends Extractor {
     }
 
     @Override
-    public void extractComponents(final MutableDependencyGraph dependencies, final String dockerImageRepo, final String dockerImageTag, final ExtractionDetails extractionDetails, final String[] packageList) {
+    public void extractComponents(final MutableDependencyGraph dependencies, final String dockerImageRepo, final String dockerImageTag, final String architecture, final String[] packageList) {
         for (final String packageLine : packageList) {
             if (!packageLine.toLowerCase().startsWith("warning")) {
                 logger.trace(String.format("packageLine: %s", packageLine));
@@ -78,9 +78,9 @@ class ApkExtractor extends Extractor {
                 logger.trace(String.format("component: %s", component));
                 // if a package starts with a period, we should ignore it because it is a virtual meta package and the version information is missing
                 if (!component.startsWith(".")) {
-                    final String externalId = String.format("%s/%s/%s", component, version, extractionDetails.getArchitecture());
+                    final String externalId = String.format("%s/%s/%s", component, version, architecture);
                     logger.debug(String.format("Constructed externalId: %s", externalId));
-                    createBdioComponent(dependencies, component, version, externalId, extractionDetails.getArchitecture());
+                    createBdioComponent(dependencies, component, version, externalId, architecture);
                 }
             }
         }

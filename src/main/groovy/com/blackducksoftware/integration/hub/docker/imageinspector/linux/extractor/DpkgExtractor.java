@@ -55,7 +55,7 @@ class DpkgExtractor extends Extractor {
     }
 
     @Override
-    public void extractComponents(final MutableDependencyGraph dependencies, final String dockerImageRepo, final String dockerImageTag, final ExtractionDetails extractionDetails, final String[] packageList) {
+    public void extractComponents(final MutableDependencyGraph dependencies, final String dockerImageRepo, final String dockerImageTag, final String givenArchitecture, final String[] packageList) {
         boolean startOfComponents = false;
         for (final String packageLine : packageList) {
 

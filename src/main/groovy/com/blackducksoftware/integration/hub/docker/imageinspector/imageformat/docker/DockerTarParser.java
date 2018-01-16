@@ -102,22 +102,24 @@ public class DockerTarParser {
         throw new HubIntegrationException("No package manager files were found, and no operating system name was provided.");
     }
 
-    public ImageInfo collectPkgMgrInfo(final File targetImageFileSystemRootDir, final OperatingSystemEnum osEnum) {
+    public ImageInfoParsed collectPkgMgrInfo(final File targetImageFileSystemRootDir, final OperatingSystemEnum osEnum) throws HubIntegrationException {
         logger.debug(String.format("Checking image file system at %s for package managers", targetImageFileSystemRootDir.getName()));
+        if (osEnum == null) {
+            throw new HubIntegrationException("Operating System value is null");
+        }
         for (final PackageManagerEnum packageManagerEnum : PackageManagerEnum.values()) {
             final File packageManagerDirectory = new File(targetImageFileSystemRootDir, packageManagerEnum.getDirectory());
             if (packageManagerDirectory.exists()) {
                 logger.info(String.format("Found package Manager Dir: %s", packageManagerDirectory.getAbsolutePath()));
                 final ImagePkgMgr targetImagePkgMgr = new ImagePkgMgr(packageManagerDirectory, packageManagerEnum);
-                final ImageInfo imagePkgMgrInfo = new ImageInfo(targetImageFileSystemRootDir.getName(), osEnum, targetImagePkgMgr);
+                final ImageInfoParsed imagePkgMgrInfo = new ImageInfoParsed(targetImageFileSystemRootDir.getName(), osEnum, targetImagePkgMgr);
                 return imagePkgMgrInfo;
             } else {
                 logger.debug(String.format("Package manager dir %s does not exist", packageManagerDirectory.getAbsolutePath()));
             }
         }
+        throw new HubIntegrationException("No package manager files found in this Docker image.");
 
-        logger.error("No package manager files found");
-        return new ImageInfo(targetImageFileSystemRootDir.getName(), osEnum, null);
     }
 
     public List<File> extractLayerTars(final File dockerTar) throws IOException {

@@ -60,7 +60,7 @@ class RpmExtractor extends Extractor {
     }
 
     @Override
-    public void extractComponents(final MutableDependencyGraph dependencies, final String dockerImageRepo, final String dockerImageTag, final ExtractionDetails extractionDetails, final String[] packageList) {
+    public void extractComponents(final MutableDependencyGraph dependencies, final String dockerImageRepo, final String dockerImageTag, final String architecture, final String[] packageList) {
         logger.debug("extractComponents: Received ${packageList.length} package lines");
         for (final String packageLine : packageList) {
             if (valid(packageLine)) {

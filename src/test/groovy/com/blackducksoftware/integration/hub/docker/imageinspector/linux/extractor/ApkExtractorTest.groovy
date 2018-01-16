@@ -17,13 +17,12 @@ import static org.junit.Assert.*
 import org.junit.Test
 
 import com.blackducksoftware.integration.hub.bdio.BdioWriter
+import com.blackducksoftware.integration.hub.bdio.model.SimpleBdioDocument
 import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum
 import com.blackducksoftware.integration.hub.docker.imageinspector.PackageManagerEnum
 import com.blackducksoftware.integration.hub.docker.imageinspector.TestUtils
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImagePkgMgr
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor.ExecutorMock
-import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor.ApkExtractor
-import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor.ExtractionDetails
 import com.google.gson.Gson
 
 class ApkExtractorTest {
@@ -52,9 +51,9 @@ class ApkExtractorTest {
         bdioOutputFile.getParentFile().mkdirs()
         BdioWriter bdioWriter = new BdioWriter(new Gson(), new FileWriter(bdioOutputFile))
 
-        ExtractionDetails extractionDetails = new ExtractionDetails(OperatingSystemEnum.ALPINE, 'x86')
         final ImagePkgMgr imagePkgMgr = new ImagePkgMgr(new File("nonexistentdir"), PackageManagerEnum.APK)
-        extractor.extract("root", "1.0", imagePkgMgr, bdioWriter, extractionDetails, "CodeLocationName", "Test", "1")
+        SimpleBdioDocument bdioDocument = extractor.extract("root", "1.0", imagePkgMgr, "x86", "CodeLocationName", "Test", "1")
+        extractor.writeBdio(bdioWriter, bdioDocument)
         bdioWriter.close()
 
         File file1 = new File("src/test/resources/testApkBdio1.jsonld");
