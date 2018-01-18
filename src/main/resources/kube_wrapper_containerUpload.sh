@@ -85,7 +85,7 @@ kubectl run "${identifyOnContainerName}" --image="${identifyOnImageName}:${ident
 waitForPodToStart "${identifyOnContainerName}"
 identifyPodName="${newPodName}"
 
-kubectl cp --container="${identifyOnContainerName}" build/libs/hub-docker-inspector-5.0.0-SNAPSHOT.jar "${identifyPodName}:/opt/blackduck/hub-docker-inspector"
+kubectl cp --container="${identifyOnContainerName}" build/libs/hub-docker-inspector-4.3.1-SNAPSHOT.jar "${identifyPodName}:/opt/blackduck/hub-docker-inspector"
 kubectl cp --container="${identifyOnContainerName}" "${targetImageDir}/${targetImageTarfile}" "${identifyPodName}:/opt/blackduck/hub-docker-inspector/target"
 
 #################################################################
@@ -97,7 +97,7 @@ echo "--------------------------------------------------------------"
 rm -rf "${outputDir}"
 mkdir "${outputDir}"
 kubectl exec -it "${identifyPodName}" -- \
-	java -Dfile.encoding=UTF-8 -jar /opt/blackduck/hub-docker-inspector/hub-docker-inspector-5.0.0-SNAPSHOT.jar \
+	java -Dfile.encoding=UTF-8 -jar /opt/blackduck/hub-docker-inspector/hub-docker-inspector-4.3.1-SNAPSHOT.jar \
 	--on.host=false \
 	--identify.pkg.mgr=true \
 	--inspect=false \
@@ -130,7 +130,7 @@ kubectl run "${inspectOnContainerName}" --image="${inspectOnImageName}:${inspect
 waitForPodToStart "${inspectOnContainerName}"
 inspectPodName="${newPodName}"
 
-kubectl cp --container="${inspectOnContainerName}" build/libs/hub-docker-inspector-5.0.0-SNAPSHOT.jar "${inspectPodName}:/opt/blackduck/hub-docker-inspector"
+kubectl cp --container="${inspectOnContainerName}" build/libs/hub-docker-inspector-4.3.1-SNAPSHOT.jar "${inspectPodName}:/opt/blackduck/hub-docker-inspector"
 kubectl cp --container="${inspectOnContainerName}" "${targetImageDir}/${targetImageTarfile}" "${inspectPodName}:/opt/blackduck/hub-docker-inspector/target"
 
 #################################################################
@@ -142,7 +142,7 @@ echo "--------------------------------------------------------------"
 rm -rf "${outputDir}"
 mkdir "${outputDir}"
 kubectl exec -it "${inspectPodName}" -- \
-	java -Dfile.encoding=UTF-8 -jar /opt/blackduck/hub-docker-inspector/hub-docker-inspector-5.0.0-SNAPSHOT.jar \
+	java -Dfile.encoding=UTF-8 -jar /opt/blackduck/hub-docker-inspector/hub-docker-inspector-4.3.1-SNAPSHOT.jar \
 	--on.host=false \
 	--identify.pkg.mgr=false \
 	--inspect=true \
@@ -175,10 +175,10 @@ kubectl run "${uploadOnContainerName}" --image="${inspectOnImageName}:${inspectO
 waitForPodToStart "${uploadOnContainerName}"
 uploadPodName="${newPodName}"
 
-kubectl cp --container="${uploadOnContainerName}" build/libs/hub-docker-inspector-5.0.0-SNAPSHOT.jar "${uploadPodName}:/opt/blackduck/hub-docker-inspector"
+kubectl cp --container="${uploadOnContainerName}" build/libs/hub-docker-inspector-4.3.1-SNAPSHOT.jar "${uploadPodName}:/opt/blackduck/hub-docker-inspector"
 kubectl cp --container="${uploadOnContainerName}" "${bdioFilePath}" "${uploadPodName}:/opt/blackduck/hub-docker-inspector/output"
 kubectl exec -it "${uploadPodName}" -- \
-	java -Dfile.encoding=UTF-8 -jar /opt/blackduck/hub-docker-inspector/hub-docker-inspector-5.0.0-SNAPSHOT.jar \
+	java -Dfile.encoding=UTF-8 -jar /opt/blackduck/hub-docker-inspector/hub-docker-inspector-4.3.1-SNAPSHOT.jar \
 	--on.host=false \
 	--identify.pkg.mgr=false \
 	--inspect=false \

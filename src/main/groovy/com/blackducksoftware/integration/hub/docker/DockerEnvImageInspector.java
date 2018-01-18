@@ -139,14 +139,14 @@ public class DockerEnvImageInspector {
         }
     }
 
-    private void cleanUp(final Config config, final Future<String> deferredCleanup) throws IOException {
-        if (config.isOnHost() && config.isInspect() && config.isCleanupWorkingDir()) {
+    private void cleanUp(final Config config, final Future<String> deferredCleanup) {
+        if (config.isOnHost() && config.isCleanupWorkingDir()) {
             cleanupWorkingDirs();
         }
         if (deferredCleanup != null) {
             try {
                 logger.debug("Waiting for completion of concurrent inspector container/image cleanup");
-                logger.info(String.format("Status from concurrent cleanup: %s", deferredCleanup.get(15, TimeUnit.SECONDS)));
+                logger.info(String.format("Status from concurrent cleanup: %s", deferredCleanup.get(30, TimeUnit.SECONDS)));
             } catch (InterruptedException | ExecutionException | TimeoutException e) {
                 logger.error(String.format("Error during concurrent cleanup: %s", e.getMessage()));
             }
@@ -222,11 +222,15 @@ public class DockerEnvImageInspector {
         }
     }
 
-    private void cleanupWorkingDirs() throws IOException {
+    private void cleanupWorkingDirs() {
         logger.debug(String.format("Removing %s, %s, %s", programPaths.getHubDockerWorkingDirPathHost(), programPaths.getHubDockerTargetDirPathHost(), programPaths.getHubDockerOutputPathHost()));
-        FileOperations.removeFileOrDir(programPaths.getHubDockerWorkingDirPathHost());
-        FileOperations.removeFileOrDir(programPaths.getHubDockerTargetDirPathHost());
-        FileOperations.removeFileOrDir(programPaths.getHubDockerOutputPathHost());
+        try {
+            FileOperations.removeFileOrDir(programPaths.getHubDockerWorkingDirPathHost());
+            FileOperations.removeFileOrDir(programPaths.getHubDockerTargetDirPathHost());
+            FileOperations.removeFileOrDir(programPaths.getHubDockerOutputPathHost());
+        } catch (final IOException e) {
+            logger.error(String.format("Error cleaning up working directories: %s", e.getMessage()));
+        }
     }
 
     private boolean helpInvoked() {
