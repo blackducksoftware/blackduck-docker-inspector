@@ -36,6 +36,7 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.blackducksoftware.integration.hub.docker.imageinspector.name.ImageNameResolver;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -71,8 +72,9 @@ public class Manifest {
                 continue;
             }
             logger.debug(String.format("foundRepoTag: %s", foundRepoTag));
-            final String[] foundRepoTagParts = foundRepoTag.split(":");
-            addMapping(mappings, image, foundRepoTagParts[0], foundRepoTagParts[1]);
+            final ImageNameResolver resolver = new ImageNameResolver(foundRepoTag);
+            logger.debug(String.format("translated repoTag to: repo: %s, tag: %s", resolver.getNewImageRepo().get(), resolver.getNewImageTag().get()));
+            addMapping(mappings, image, resolver.getNewImageRepo().get(), resolver.getNewImageTag().get());
         }
         return mappings;
     }

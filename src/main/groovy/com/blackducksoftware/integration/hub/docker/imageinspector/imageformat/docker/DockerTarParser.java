@@ -41,13 +41,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.blackducksoftware.integration.hub.docker.imageinspector.Names;
 import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.docker.imageinspector.PackageManagerEnum;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.Manifest;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestFactory;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping;
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.FileSys;
+import com.blackducksoftware.integration.hub.docker.imageinspector.name.Names;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 
 @Component

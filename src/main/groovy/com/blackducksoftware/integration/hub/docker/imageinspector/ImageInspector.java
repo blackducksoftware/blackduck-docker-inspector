@@ -42,6 +42,7 @@ import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.d
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping;
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.FileOperations;
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor.Extractor;
+import com.blackducksoftware.integration.hub.docker.imageinspector.name.Names;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.google.gson.Gson;
 
@@ -154,7 +155,7 @@ public class ImageInspector {
     private String deriveHubProject(final String imageName, final String projectName) {
         String hubProjectName;
         if (StringUtils.isBlank(projectName)) {
-            hubProjectName = Names.cleanImageName(imageName);
+            hubProjectName = Names.getHubProjectNameFromImageName(imageName);
         } else {
             logger.debug("Using project from config property");
             hubProjectName = projectName;

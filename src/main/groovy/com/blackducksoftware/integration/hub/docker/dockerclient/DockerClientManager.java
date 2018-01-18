@@ -40,8 +40,9 @@ import org.springframework.stereotype.Component;
 import com.blackducksoftware.integration.hub.docker.config.Config;
 import com.blackducksoftware.integration.hub.docker.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.hubclient.HubPassword;
-import com.blackducksoftware.integration.hub.docker.imageinspector.Names;
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor.Executor;
+import com.blackducksoftware.integration.hub.docker.imageinspector.name.ImageNameResolver;
+import com.blackducksoftware.integration.hub.docker.imageinspector.name.Names;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.CopyArchiveToContainerCmd;
@@ -108,9 +109,10 @@ public class DockerClientManager {
         if (repoTags.size() == 0) {
             throw new HubIntegrationException(String.format("Unable to get image name:tag for image ID %s", imageId));
         }
-        final String[] imageNameTagParts = repoTags.get(0).split(":");
-        final String imageName = imageNameTagParts[0];
-        final String tagName = imageNameTagParts[1];
+
+        final ImageNameResolver resolver = new ImageNameResolver(repoTags.get(0));
+        final String imageName = resolver.getNewImageRepo().get();
+        final String tagName = resolver.getNewImageTag().get();
         logger.info(String.format("Converted image ID %s to image name:tag %s:%s", imageId, imageName, tagName));
         final File imageTarFile = saveImageToDir(imageTarDirectory, Names.getImageTarFilename(imageName, tagName), imageName, tagName);
         return imageTarFile;
