@@ -20,7 +20,7 @@ plugins {
     id 'maven-publish'
 }
 
-version = '4.3.1-SNAPSHOT'
+version = '4.3.1'
 
 apply plugin: 'com.blackducksoftware.integration.solution'
 apply plugin: 'com.bmuschko.docker-remote-api'
