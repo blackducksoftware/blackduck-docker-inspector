@@ -167,11 +167,7 @@ public class EndToEndTest {
 
             outputTarFileName = String.format("test/output/%s", inspectTargetFileName);
         } else {
-            String inspectTargetFileName = String.format("%s_%s.tar", imageForBdioFilename, tagForBdioFilename);
-            if (inspectTarget.contains("/")) {
-                final int slashPos = inspectTarget.indexOf('/');
-                inspectTargetFileName = inspectTargetFileName.substring(slashPos + 1);
-            }
+            final String inspectTargetFileName = String.format("%s_%s.tar", imageForBdioFilename, tagForBdioFilename);
             outputTarFileName = String.format("test/output/%s", inspectTargetFileName);
         }
         final File outputTarFile = new File(outputTarFileName);
