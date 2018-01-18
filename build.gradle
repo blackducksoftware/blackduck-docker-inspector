@@ -368,13 +368,10 @@ task stopDockerContainerAlpine(type: Exec) {
 task stopDockerContainers(dependsOn: [stopDockerContainerUbuntu, stopDockerContainerCentos, stopDockerContainerAlpine]) {}
 
 task testPrep(dependsOn: [stopDockerContainers, removeDockerImage_ubuntu, removeDockerImage_centos, removeDockerImage_alpine, \
-    buildTestDockerTarfile, packageScript]) {
-	
+    packageScript]) {
 }
 
 compileJava.dependsOn writeVersionToPropertiesFile
-
-test.dependsOn testPrep
 
 task tagAlpineImageAsLatest(type: Exec, dependsOn: buildDockerImage_alpine) {
     commandLine 'docker', 'tag', "blackducksoftware/${hubDockerImageName}-alpine:${version}", "blackducksoftware/${hubDockerImageName}-alpine:latest"
@@ -419,18 +416,17 @@ task pkg(dependsOn: [buildDockerImages, packageScript]) {}
 task pushImages(dependsOn: [pkg, pushImageAlpine, pushImageCentos, pushImageUbuntu]) {
 }
 
-task buildTestTarfiles(dependsOn: [buildWhTestDockerTarfile, buildAggTestDockerTarfile, \
+task buildTestTarfiles(dependsOn: [buildTestDockerTarfile, buildWhTestDockerTarfile, buildAggTestDockerTarfile, \
         buildAlpineTestDockerTarfile]) {}
 
 task itOnly(type: Test) {
-    //testClassesDir = sourceSets.integrationTest.output.classesDir
     testClassesDir = new File("build/classes/groovy/integrationTest")
     classpath = sourceSets.integrationTest.runtimeClasspath
     outputs.upToDateWhen { false }
     mustRunAfter tasks.test
 }
 
-task integrationTest(type: Test, dependsOn: [pkg, buildTestTarfiles, itOnly]) {
+task integrationTest(type: Test, dependsOn: [pkg, testPrep, buildTestTarfiles, itOnly]) {
 }
 
 task all(dependsOn: [pushImages, integrationTest, artifactoryPublish]) {}
