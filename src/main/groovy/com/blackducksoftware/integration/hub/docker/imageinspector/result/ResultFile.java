@@ -32,7 +32,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum;
+import com.blackducksoftware.integration.hub.docker.imageinspector.lib.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.google.gson.Gson;
 

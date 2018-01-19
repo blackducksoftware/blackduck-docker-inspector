@@ -13,6 +13,10 @@ import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.d
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImageInfoParsed
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImagePkgMgr
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping
+import com.blackducksoftware.integration.hub.docker.imageinspector.lib.ImageInfoDerived
+import com.blackducksoftware.integration.hub.docker.imageinspector.lib.ImageInspector
+import com.blackducksoftware.integration.hub.docker.imageinspector.lib.OperatingSystemEnum
+import com.blackducksoftware.integration.hub.docker.imageinspector.lib.PackageManagerEnum
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.FileOperations
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor.ApkExecutor
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor.DpkgExecutor

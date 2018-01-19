@@ -21,33 +21,36 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.blackducksoftware.integration.hub.docker.imageinspector;
+package com.blackducksoftware.integration.hub.docker.imageinspector.lib;
 
-public enum OperatingSystemEnum {
-    ALPINE("alpine"),
-    CENTOS("centos"),
-    DEBIAN("debian"),
-    FEDORA("fedora"),
-    UBUNTU("ubuntu"),
-    REDHAT("redhat"), // this may not be needed
-    RHEL("redhat");
+public enum PackageManagerEnum {
+    DPKG("/var/lib/dpkg", OperatingSystemEnum.UBUNTU),
+    RPM("/var/lib/rpm", OperatingSystemEnum.CENTOS),
+    APK("/lib/apk", OperatingSystemEnum.ALPINE);
 
-    private final String forge;
+    private final String directory;
+    private final OperatingSystemEnum operatingSystem;
 
-    private OperatingSystemEnum(final String forge) {
-        this.forge = forge;
+    private PackageManagerEnum(final String directory, final OperatingSystemEnum operatingSystem) {
+        this.directory = directory;
+        this.operatingSystem = operatingSystem;
     }
 
-    public String getForge() {
-        return forge;
-    }
-
-    public static OperatingSystemEnum determineOperatingSystem(String operatingSystemName) {
-        OperatingSystemEnum result = null;
-        if (operatingSystemName != null) {
-            operatingSystemName = operatingSystemName.toUpperCase();
-            result = OperatingSystemEnum.valueOf(operatingSystemName);
+    public static PackageManagerEnum getPackageManagerEnumByName(String name) {
+        PackageManagerEnum result = null;
+        if (name != null) {
+            name = name.toUpperCase();
+            result = PackageManagerEnum.valueOf(name);
         }
         return result;
     }
+
+    public String getDirectory() {
+        return directory;
+    }
+
+    public OperatingSystemEnum getOperatingSystem() {
+        return operatingSystem;
+    }
+
 }

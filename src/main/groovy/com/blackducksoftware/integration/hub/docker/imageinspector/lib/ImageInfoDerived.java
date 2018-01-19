@@ -21,7 +21,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.blackducksoftware.integration.hub.docker.imageinspector;
+package com.blackducksoftware.integration.hub.docker.imageinspector.lib;
 
 import com.blackducksoftware.integration.hub.bdio.model.SimpleBdioDocument;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImageInfoParsed;

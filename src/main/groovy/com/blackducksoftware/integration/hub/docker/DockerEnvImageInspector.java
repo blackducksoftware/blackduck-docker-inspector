@@ -51,11 +51,11 @@ import com.blackducksoftware.integration.hub.docker.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.dockerclient.DockerClientManager;
 import com.blackducksoftware.integration.hub.docker.help.formatter.UsageFormatter;
 import com.blackducksoftware.integration.hub.docker.hubclient.HubClient;
-import com.blackducksoftware.integration.hub.docker.imageinspector.DissectedImage;
-import com.blackducksoftware.integration.hub.docker.imageinspector.ImageInfoDerived;
-import com.blackducksoftware.integration.hub.docker.imageinspector.ImageInspector;
-import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping;
+import com.blackducksoftware.integration.hub.docker.imageinspector.lib.DissectedImage;
+import com.blackducksoftware.integration.hub.docker.imageinspector.lib.ImageInfoDerived;
+import com.blackducksoftware.integration.hub.docker.imageinspector.lib.ImageInspector;
+import com.blackducksoftware.integration.hub.docker.imageinspector.lib.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.FileOperations;
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.FileSys;
 import com.blackducksoftware.integration.hub.docker.imageinspector.name.ImageNameResolver;
@@ -134,8 +134,6 @@ public class DockerEnvImageInspector {
             logger.debug(String.format("Stack trace: %s", trace));
             resultFile.write(new Gson(), programPaths.getHubDockerResultPath(), false, msg, dissectedImage.getTargetOs(), dissectedImage.getRunOnImageName(), dissectedImage.getRunOnImageTag(),
                     dissectedImage.getDockerTarFile() == null ? "" : dissectedImage.getDockerTarFile().getName(), dissectedImage.getBdioFilename());
-            // Gson gson, final String resultFilePath, final boolean succeeded, final String msg, final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag,
-            // final String dockerTarfilename, String bdioFilename
         }
     }
 

@@ -26,7 +26,7 @@ package com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.
 import org.apache.commons.lang3.builder.RecursiveToStringStyle;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
-import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum;
+import com.blackducksoftware.integration.hub.docker.imageinspector.lib.OperatingSystemEnum;
 
 public class ImageInfoParsed {
     private final String fileSystemRootDirName;

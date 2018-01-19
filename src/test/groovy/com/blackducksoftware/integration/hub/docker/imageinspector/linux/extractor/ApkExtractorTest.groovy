@@ -18,10 +18,10 @@ import org.junit.Test
 
 import com.blackducksoftware.integration.hub.bdio.BdioWriter
 import com.blackducksoftware.integration.hub.bdio.model.SimpleBdioDocument
-import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum
-import com.blackducksoftware.integration.hub.docker.imageinspector.PackageManagerEnum
 import com.blackducksoftware.integration.hub.docker.imageinspector.TestUtils
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImagePkgMgr
+import com.blackducksoftware.integration.hub.docker.imageinspector.lib.OperatingSystemEnum
+import com.blackducksoftware.integration.hub.docker.imageinspector.lib.PackageManagerEnum
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor.ExecutorMock
 import com.google.gson.Gson
 

@@ -29,8 +29,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.blackducksoftware.integration.hub.docker.imageinspector.PackageManagerFiles;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImagePkgMgr;
+import com.blackducksoftware.integration.hub.docker.imageinspector.lib.PackageManagerFiles;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 
 public abstract class PkgMgrExecutor extends Executor {

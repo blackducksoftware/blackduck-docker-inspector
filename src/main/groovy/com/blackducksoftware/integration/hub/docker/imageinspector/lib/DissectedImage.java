@@ -21,7 +21,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.blackducksoftware.integration.hub.docker.imageinspector;
+package com.blackducksoftware.integration.hub.docker.imageinspector.lib;
 
 import java.io.File;
 import java.util.List;

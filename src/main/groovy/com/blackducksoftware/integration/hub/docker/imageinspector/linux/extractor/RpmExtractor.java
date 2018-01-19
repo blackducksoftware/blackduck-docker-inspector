@@ -34,8 +34,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.hub.bdio.graph.MutableDependencyGraph;
-import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum;
-import com.blackducksoftware.integration.hub.docker.imageinspector.PackageManagerEnum;
+import com.blackducksoftware.integration.hub.docker.imageinspector.lib.OperatingSystemEnum;
+import com.blackducksoftware.integration.hub.docker.imageinspector.lib.PackageManagerEnum;
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor.RpmExecutor;
 
 @Component

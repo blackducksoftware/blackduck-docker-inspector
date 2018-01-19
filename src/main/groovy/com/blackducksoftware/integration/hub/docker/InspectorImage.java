@@ -23,7 +23,7 @@
  */
 package com.blackducksoftware.integration.hub.docker;
 
-import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum;
+import com.blackducksoftware.integration.hub.docker.imageinspector.lib.OperatingSystemEnum;
 
 class InspectorImage {
     private final OperatingSystemEnum os;

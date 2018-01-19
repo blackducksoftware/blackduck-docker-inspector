@@ -21,7 +21,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.blackducksoftware.integration.hub.docker.imageinspector;
+package com.blackducksoftware.integration.hub.docker.imageinspector.lib;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -82,7 +82,7 @@ public class ImageInspector {
         return tarParser.detectOperatingSystem(targetImageFileSystemRootDir);
     }
 
-    public List<ManifestLayerMapping> getLayerMappings(final String tarFileName, final String dockerImageName, final String dockerTagName) throws Exception {
+    public List<ManifestLayerMapping> getLayerMappings(final String tarFileName, final String dockerImageName, final String dockerTagName) throws HubIntegrationException {
         return tarParser.getLayerMappings(tarFileName, dockerImageName, dockerTagName);
     }
 

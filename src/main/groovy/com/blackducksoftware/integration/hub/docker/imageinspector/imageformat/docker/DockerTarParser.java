@@ -41,11 +41,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.blackducksoftware.integration.hub.docker.imageinspector.OperatingSystemEnum;
-import com.blackducksoftware.integration.hub.docker.imageinspector.PackageManagerEnum;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.Manifest;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestFactory;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping;
+import com.blackducksoftware.integration.hub.docker.imageinspector.lib.OperatingSystemEnum;
+import com.blackducksoftware.integration.hub.docker.imageinspector.lib.PackageManagerEnum;
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.FileSys;
 import com.blackducksoftware.integration.hub.docker.imageinspector.name.Names;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
@@ -153,7 +153,7 @@ public class DockerTarParser {
         return untaredFiles;
     }
 
-    public List<ManifestLayerMapping> getLayerMappings(final String tarFileName, final String dockerImageName, final String dockerTagName) throws Exception {
+    public List<ManifestLayerMapping> getLayerMappings(final String tarFileName, final String dockerImageName, final String dockerTagName) throws HubIntegrationException {
         logger.debug(String.format("getLayerMappings(): dockerImageName: %s; dockerTagName: %s", dockerImageName, dockerTagName));
         logger.debug(String.format("working dir: %s", workingDirectory));
         final Manifest manifest = manifestFactory.createManifest(getTarExtractionDirectory(), tarFileName);
@@ -161,8 +161,9 @@ public class DockerTarParser {
         try {
             mappings = manifest.getLayerMappings(dockerImageName, dockerTagName);
         } catch (final Exception e) {
-            logger.error(String.format("Could not parse the image manifest file : %s", e.getMessage()));
-            throw e;
+            final String msg = String.format("Could not parse the image manifest file : %s", e.getMessage());
+            logger.error(msg);
+            throw new HubIntegrationException(msg, e);
         }
         if (mappings.size() == 0) {
             final String msg = String.format("Could not find image %s:%s in tar file %s", dockerImageName, dockerTagName, tarFileName);
