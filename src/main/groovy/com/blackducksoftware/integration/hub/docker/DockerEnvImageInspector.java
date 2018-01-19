@@ -478,12 +478,8 @@ public class DockerEnvImageInspector {
     private void initImageName() throws HubIntegrationException {
         logger.debug(String.format("initImageName(): dockerImage: %s, dockerTar: %s", config.getDockerImage(), config.getDockerTar()));
         final ImageNameResolver resolver = new ImageNameResolver(config.getDockerImage());
-        if (resolver.getNewImageRepo().isPresent()) {
-            config.setDockerImageRepo(resolver.getNewImageRepo().get());
-        }
-        if (resolver.getNewImageTag().isPresent()) {
-            config.setDockerImageTag(resolver.getNewImageTag().get());
-        }
+        resolver.getNewImageRepo().ifPresent(repoName -> config.setDockerImageRepo(repoName));
+        resolver.getNewImageTag().ifPresent(tagName -> config.setDockerImageTag(tagName));
         logger.debug(String.format("initImageName(): final: dockerImage: %s; dockerImageRepo: %s; dockerImageTag: %s", config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag()));
     }
 }
