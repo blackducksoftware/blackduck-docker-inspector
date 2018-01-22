@@ -8,11 +8,14 @@ import org.junit.BeforeClass
 import org.junit.Ignore
 import org.junit.Test
 
-import com.blackducksoftware.integration.hub.docker.config.Config
-import com.blackducksoftware.integration.hub.docker.config.ProgramPaths
-import com.blackducksoftware.integration.hub.docker.dockerclient.DockerClientManager
-import com.blackducksoftware.integration.hub.docker.help.formatter.UsageFormatter
-import com.blackducksoftware.integration.hub.docker.hubclient.HubClient
+import com.blackducksoftware.integration.hub.docker.dockerinspector.DockerEnvImageInspector
+import com.blackducksoftware.integration.hub.docker.dockerinspector.InspectorImages
+import com.blackducksoftware.integration.hub.docker.dockerinspector.ProgramVersion
+import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config
+import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths
+import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.DockerClientManager
+import com.blackducksoftware.integration.hub.docker.dockerinspector.help.formatter.UsageFormatter
+import com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient.HubClient
 import com.blackducksoftware.integration.hub.docker.imageinspector.TestUtils
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping
 import com.blackducksoftware.integration.hub.docker.imageinspector.lib.ImageInspector

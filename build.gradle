@@ -37,7 +37,7 @@ def linuxFlavors = linuxFlavorsDpkg + linuxFlavorsRpm + linuxFlavorsApk
 
 String hubDockerPgmDir = '/opt/blackduck/hub-docker-inspector'
 
-springBoot { mainClass = 'com.blackducksoftware.integration.hub.docker.DockerEnvImageInspector' }
+springBoot { mainClass = 'com.blackducksoftware.integration.hub.docker.dockerinspector.DockerEnvImageInspector' }
 
 sourceSets {
 	main {

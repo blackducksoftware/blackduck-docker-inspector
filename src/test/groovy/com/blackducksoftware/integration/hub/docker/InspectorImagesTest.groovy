@@ -18,8 +18,9 @@ import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
 
-import com.blackducksoftware.integration.hub.docker.ProgramVersion
-import com.blackducksoftware.integration.hub.docker.config.Config
+import com.blackducksoftware.integration.hub.docker.dockerinspector.InspectorImages
+import com.blackducksoftware.integration.hub.docker.dockerinspector.ProgramVersion
+import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config
 import com.blackducksoftware.integration.hub.docker.imageinspector.lib.OperatingSystemEnum
 
 class InspectorImagesTest {

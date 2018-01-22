@@ -18,6 +18,8 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.blackducksoftware.integration.hub.docker.dockerinspector.ProgramVersion;
+
 public class ArgsWithSpacesTest {
 
     private static final String USERNAME = "You Zer";
