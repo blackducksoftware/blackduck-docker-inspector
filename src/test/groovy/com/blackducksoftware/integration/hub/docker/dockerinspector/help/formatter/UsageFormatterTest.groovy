@@ -1,4 +1,4 @@
-package com.blackducksoftware.integration.hub.docker.dockerinspector.dockerinspector.help.formatter
+package com.blackducksoftware.integration.hub.docker.dockerinspector.help.formatter
 
 import static org.junit.Assert.*
 
@@ -6,9 +6,8 @@ import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
 
-import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerinspector.config.Config
-import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerinspector.config.DockerInspectorOption
-import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerinspector.help.formatter.UsageFormatter
+import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config
+import com.blackducksoftware.integration.hub.docker.dockerinspector.config.DockerInspectorOption
 
 class UsageFormatterTest {
 

@@ -1,4 +1,4 @@
-package com.blackducksoftware.integration.hub.docker.dockerinspector.imageinspector.linux
+package com.blackducksoftware.integration.hub.docker.imageinspector.linux
 
 import static org.junit.Assert.*
 
@@ -9,8 +9,7 @@ import org.junit.BeforeClass
 import org.junit.Ignore
 import org.junit.Test
 
-import com.blackducksoftware.integration.hub.docker.dockerinspector.imageinspector.TestUtils
-import com.blackducksoftware.integration.hub.docker.dockerinspector.imageinspector.linux.FileOperations
+import com.blackducksoftware.integration.hub.docker.imageinspector.TestUtils
 
 class DirTest {
 

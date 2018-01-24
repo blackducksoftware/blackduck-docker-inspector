@@ -9,7 +9,7 @@
  * accordance with the terms of the license agreement you entered into
  * with Black Duck Software.
  */
-package com.blackducksoftware.integration.hub.docker.dockerinspector.dockerinspector;
+package com.blackducksoftware.integration.hub.docker.dockerinspector;
 
 
 import static org.junit.Assert.*
@@ -18,10 +18,8 @@ import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
 
-import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerinspector.InspectorImages
-import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerinspector.ProgramVersion
-import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerinspector.config.Config
-import com.blackducksoftware.integration.hub.docker.dockerinspector.imageinspector.lib.OperatingSystemEnum
+import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config
+import com.blackducksoftware.integration.hub.docker.imageinspector.lib.OperatingSystemEnum
 
 class InspectorImagesTest {
 

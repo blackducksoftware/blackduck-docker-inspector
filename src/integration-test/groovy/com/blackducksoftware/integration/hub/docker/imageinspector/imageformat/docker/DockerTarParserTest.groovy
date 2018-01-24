@@ -9,7 +9,7 @@
  * accordance with the terms of the license agreement you entered into
  * with Black Duck Software.
  */
-package com.blackducksoftware.integration.hub.docker.dockerinspector.imageinspector.imageformat.docker
+package com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker
 
 
 import static java.nio.file.StandardCopyOption.*;
@@ -22,10 +22,10 @@ import java.nio.file.Paths
 import org.junit.Ignore
 import org.junit.Test
 
-import com.blackducksoftware.integration.hub.docker.dockerinspector.imageinspector.TestUtils
-import com.blackducksoftware.integration.hub.docker.dockerinspector.imageinspector.imageformat.docker.manifest.HardwiredManifestFactory
-import com.blackducksoftware.integration.hub.docker.dockerinspector.imageinspector.imageformat.docker.manifest.ManifestLayerMapping
-import com.blackducksoftware.integration.hub.docker.dockerinspector.imageinspector.lib.OperatingSystemEnum
+import com.blackducksoftware.integration.hub.docker.imageinspector.TestUtils
+import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.HardwiredManifestFactory
+import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping
+import com.blackducksoftware.integration.hub.docker.imageinspector.lib.OperatingSystemEnum
 
 import groovy.io.FileType
 

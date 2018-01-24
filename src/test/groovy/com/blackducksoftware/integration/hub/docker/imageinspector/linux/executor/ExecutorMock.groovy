@@ -9,11 +9,10 @@
  * accordance with the terms of the license agreement you entered into
  * with Black Duck Software.
  */
-package com.blackducksoftware.integration.hub.docker.dockerinspector.imageinspector.linux.executor
+package com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor
 
 
-import com.blackducksoftware.integration.hub.docker.dockerinspector.imageinspector.imageformat.docker.ImagePkgMgr
-import com.blackducksoftware.integration.hub.docker.dockerinspector.imageinspector.linux.executor.PkgMgrExecutor
+import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImagePkgMgr
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException
 
 class ExecutorMock extends PkgMgrExecutor {

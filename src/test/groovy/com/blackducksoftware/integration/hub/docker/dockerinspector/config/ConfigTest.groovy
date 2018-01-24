@@ -1,4 +1,4 @@
-package com.blackducksoftware.integration.hub.docker.dockerinspector.dockerinspector.config
+package com.blackducksoftware.integration.hub.docker.dockerinspector.config
 
 import static org.junit.Assert.*
 
@@ -6,8 +6,6 @@ import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Ignore
 import org.junit.Test
-
-import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerinspector.config.Config
 
 class ConfigTest {
 
