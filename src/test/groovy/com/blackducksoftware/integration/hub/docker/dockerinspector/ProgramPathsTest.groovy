@@ -1,15 +1,15 @@
-package com.blackducksoftware.integration.hub.docker.dockerinspector
+package com.blackducksoftware.integration.hub.docker.dockerinspector.dockerinspector
 
 
 import static org.junit.Assert.*
 
 import org.junit.Test
 
-import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config
-import com.blackducksoftware.integration.hub.docker.dockerinspector.config.DockerInspectorOption
-import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths
-import com.blackducksoftware.integration.hub.docker.imageinspector.TestUtils
-import com.blackducksoftware.integration.hub.docker.imageinspector.name.Names
+import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerinspector.config.Config
+import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerinspector.config.DockerInspectorOption
+import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerinspector.config.ProgramPaths
+import com.blackducksoftware.integration.hub.docker.dockerinspector.imageinspector.TestUtils
+import com.blackducksoftware.integration.hub.docker.dockerinspector.imageinspector.name.Names
 
 class ProgramPathsTest {
     // TODO Names tests belong in a diff pkg

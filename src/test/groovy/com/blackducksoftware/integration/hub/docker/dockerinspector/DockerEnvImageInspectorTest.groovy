@@ -1,4 +1,4 @@
-package com.blackducksoftware.integration.hub.docker.dockerinspector;
+package com.blackducksoftware.integration.hub.docker.dockerinspector.dockerinspector;
 
 
 import static org.junit.Assert.*
@@ -8,19 +8,19 @@ import org.junit.BeforeClass
 import org.junit.Ignore
 import org.junit.Test
 
-import com.blackducksoftware.integration.hub.docker.dockerinspector.DockerEnvImageInspector
-import com.blackducksoftware.integration.hub.docker.dockerinspector.InspectorImages
-import com.blackducksoftware.integration.hub.docker.dockerinspector.ProgramVersion
-import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config
-import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths
-import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.DockerClientManager
-import com.blackducksoftware.integration.hub.docker.dockerinspector.help.formatter.UsageFormatter
-import com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient.HubClient
-import com.blackducksoftware.integration.hub.docker.imageinspector.TestUtils
-import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping
-import com.blackducksoftware.integration.hub.docker.imageinspector.lib.ImageInspector
-import com.blackducksoftware.integration.hub.docker.imageinspector.lib.OperatingSystemEnum
-import com.blackducksoftware.integration.hub.docker.imageinspector.result.ResultFile
+import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerinspector.DockerEnvImageInspector
+import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerinspector.InspectorImages
+import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerinspector.ProgramVersion
+import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerinspector.config.Config
+import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerinspector.config.ProgramPaths
+import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerinspector.dockerclient.DockerClientManager
+import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerinspector.help.formatter.UsageFormatter
+import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerinspector.hubclient.HubClient
+import com.blackducksoftware.integration.hub.docker.dockerinspector.imageinspector.TestUtils
+import com.blackducksoftware.integration.hub.docker.dockerinspector.imageinspector.imageformat.docker.manifest.ManifestLayerMapping
+import com.blackducksoftware.integration.hub.docker.dockerinspector.imageinspector.lib.ImageInspector
+import com.blackducksoftware.integration.hub.docker.dockerinspector.imageinspector.lib.OperatingSystemEnum
+import com.blackducksoftware.integration.hub.docker.dockerinspector.imageinspector.result.ResultFile
 import com.google.gson.Gson
 
 class DockerEnvImageInspectorTest {
