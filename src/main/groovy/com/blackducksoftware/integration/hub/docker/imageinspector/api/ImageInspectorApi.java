@@ -26,26 +26,29 @@ package com.blackducksoftware.integration.hub.docker.imageinspector.api;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.hub.bdio.model.SimpleBdioDocument;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping;
 import com.blackducksoftware.integration.hub.docker.imageinspector.lib.ImageInfoDerived;
 import com.blackducksoftware.integration.hub.docker.imageinspector.lib.ImageInspector;
 import com.blackducksoftware.integration.hub.docker.imageinspector.lib.OperatingSystemEnum;
-import com.blackducksoftware.integration.hub.docker.imageinspector.lib.PackageManagerEnum;
-import com.blackducksoftware.integration.hub.docker.imageinspector.linux.FileSys;
+import com.blackducksoftware.integration.hub.docker.imageinspector.linux.Os;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 
+@Component
 public class ImageInspectorApi {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private ImageInspector imageInspector;
+
+    @Autowired
+    private Os os;
 
     public SimpleBdioDocument getBdio(final String dockerTarfilePath, final String hubProjectName, final String hubProjectVersion, final String codeLocationPrefix) throws IOException, HubIntegrationException, InterruptedException {
         logger.info("getBdio()");
@@ -75,10 +78,10 @@ public class ImageInspectorApi {
         /// end parse manifest
         final File targetImageFileSystemRootDir = imageInspector.extractDockerLayers(imageRepo, imageTag, layerTars, tarfileMetadata);
         final OperatingSystemEnum targetOs = imageInspector.detectOperatingSystem(targetImageFileSystemRootDir);
-        final OperatingSystemEnum currentOs = deriveCurrentOs();
+        final OperatingSystemEnum currentOs = os.deriveCurrentOs();
         if (!targetOs.equals(currentOs)) {
             final ImageInspectorOsEnum neededInspectorOs = getImageInspectorOsEnum(targetOs);
-            final String msg = String.format("This docker tarfile needs to be inspectedd on %s", neededInspectorOs);
+            final String msg = String.format("This docker tarfile needs to be inspected on %s", neededInspectorOs);
             throw new WrongInspectorOsException(neededInspectorOs, msg);
         }
         final ImageInfoDerived imageInfoDerived = imageInspector.generateBdioFromImageFilesDir(imageRepo, imageTag, tarfileMetadata, hubProjectName, hubProjectVersion, dockerTarfile, targetImageFileSystemRootDir, targetOs);
@@ -94,21 +97,6 @@ public class ImageInspectorApi {
             throw new IOException("Could not create temp directory: " + temp.getAbsolutePath());
         }
         return (temp);
-    }
-
-    private OperatingSystemEnum deriveCurrentOs() throws HubIntegrationException {
-        OperatingSystemEnum osEnum = null;
-
-        final File rootDir = new File("/");
-        final FileSys rootFileSys = new FileSys(rootDir);
-        final Set<PackageManagerEnum> packageManagers = rootFileSys.getPackageManagers();
-        if (packageManagers.size() == 1) {
-            final PackageManagerEnum packageManager = packageManagers.iterator().next();
-            osEnum = packageManager.getOperatingSystem();
-            logger.debug(String.format("Current Operating System %s", osEnum.name()));
-            return osEnum;
-        }
-        throw new HubIntegrationException(String.format("Unable to determine current operating system; %d package managers found: %s", packageManagers.size(), packageManagers));
     }
 
     private ImageInspectorOsEnum getImageInspectorOsEnum(final OperatingSystemEnum osEnum) throws HubIntegrationException {

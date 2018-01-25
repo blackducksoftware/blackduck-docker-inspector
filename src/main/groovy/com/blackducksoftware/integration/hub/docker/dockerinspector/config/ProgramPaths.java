@@ -150,6 +150,9 @@ public class ProgramPaths {
         final String qualifiedJarPathString = getQualifiedJarPath();
         logger.debug(String.format("qualifiedJarPathString: %s", qualifiedJarPathString));
         final String prefix = FILE_URI_PREFIX;
+        if (!qualifiedJarPathString.contains(prefix)) {
+            return null;
+        }
         final int startIndex = qualifiedJarPathString.indexOf(prefix) + prefix.length();
         final int endIndex = qualifiedJarPathString.indexOf(JAR_FILE_SUFFIX) + JAR_FILE_SUFFIX.length();
         final String hubDockerJarPathActual = qualifiedJarPathString.substring(startIndex, endIndex);

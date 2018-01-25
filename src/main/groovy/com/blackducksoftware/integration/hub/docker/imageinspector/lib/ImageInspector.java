@@ -42,6 +42,7 @@ import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.d
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping;
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.FileOperations;
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor.Extractor;
+import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor.ExtractorManager;
 import com.blackducksoftware.integration.hub.docker.imageinspector.name.Names;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.google.gson.Gson;
@@ -51,7 +52,7 @@ public class ImageInspector {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private List<Extractor> extractors;
+    private ExtractorManager extractorManager;
 
     @Autowired
     private DockerTarParser tarParser;
@@ -175,7 +176,7 @@ public class ImageInspector {
     }
 
     private Extractor getExtractorByPackageManager(final PackageManagerEnum packageManagerEnum) throws HubIntegrationException {
-        for (final Extractor currentExtractor : extractors) {
+        for (final Extractor currentExtractor : extractorManager.getExtractors()) {
             if (currentExtractor.getPackageManagerEnum() == packageManagerEnum) {
                 return currentExtractor;
             }

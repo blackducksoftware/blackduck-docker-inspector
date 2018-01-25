@@ -24,6 +24,7 @@ import com.blackducksoftware.integration.hub.docker.imageinspector.linux.executo
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor.ApkExtractor
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor.DpkgExtractor
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor.Extractor
+import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor.ExtractorManager
 
 class ImageInspectorTest {
 
@@ -89,7 +90,9 @@ class ImageInspectorTest {
         extractor.executor.init()
         extractor.init()
         extractors.add(extractor)
-
+        ExtractorManager extractorManager = [
+            getExtractors: { return extractors }
+        ] as ExtractorManager
         ImageInspector imageInspector = new ImageInspector()
         imageInspector.tarParser = [
             setWorkingDirectory: { File f ->
@@ -97,7 +100,7 @@ class ImageInspectorTest {
         ] as DockerTarParser
         String tempDirPath = TestUtils.createTempDirectory().getAbsolutePath()
         imageInspector.init(tempDirPath, tempDirPath, "")
-        imageInspector.extractors = extractors
+        imageInspector.extractorManager = extractorManager
 
 
 
