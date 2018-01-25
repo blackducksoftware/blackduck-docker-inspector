@@ -22,6 +22,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.blackducksoftware.integration.hub.bdio.model.BdioProject;
 import com.blackducksoftware.integration.hub.bdio.model.SimpleBdioDocument;
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImagePkgMgr;
+import com.blackducksoftware.integration.hub.docker.imageinspector.lib.ImageInfoDerived;
 import com.blackducksoftware.integration.hub.docker.imageinspector.lib.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.docker.imageinspector.lib.PackageManagerEnum;
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.Os;
@@ -33,9 +34,19 @@ import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 @ContextConfiguration(classes = { AppConfig.class })
 public class ImageInspectorApiTest {
 
+    private static final String CODE_LOCATION_PREFIX = "testCodeLocationPrefix";
+
+    private static final String PROJECT_VERSION = "unitTest1";
+
+    private static final String PROJECT = "SB001";
+
+    private static final String TEST_ARCH = "testArch";
+
     private static final String IMAGE_TARFILE = "build/images/test/alpine.tar";
 
     private static final String MOCKED_PROJECT_ID = "mockedProjectId";
+    private static final String IMAGE_REPO = "alpine";
+    private static final String IMAGE_TAG = "latest";
 
     @Autowired
     private ImageInspectorApi imageInspectorApi;
@@ -59,7 +70,7 @@ public class ImageInspectorApiTest {
         assertNotNull(imageInspectorApi);
         Mockito.when(os.deriveCurrentOs()).thenReturn(null);
         try {
-            imageInspectorApi.getBdio(IMAGE_TARFILE, "SB001", "unitTest1", null);
+            imageInspectorApi.getBdio(IMAGE_TARFILE, PROJECT, PROJECT_VERSION, null);
             fail("Expected WrongInspectorOsException");
         } catch (final WrongInspectorOsException e) {
             System.out.println(String.format("Can't inspect on this OS; need to inspect on %s", e.getcorrectInspectorOs().name()));
@@ -73,7 +84,7 @@ public class ImageInspectorApiTest {
         Mockito.when(os.deriveCurrentOs()).thenReturn(OperatingSystemEnum.ALPINE);
         final List<Extractor> mockExtractors = new ArrayList<>();
         final Extractor mockExtractor = Mockito.mock(Extractor.class);
-        Mockito.when(mockExtractor.deriveArchitecture(Mockito.any(File.class))).thenReturn("testArch");
+        Mockito.when(mockExtractor.deriveArchitecture(Mockito.any(File.class))).thenReturn(TEST_ARCH);
         Mockito.when(mockExtractor.getPackageManagerEnum()).thenReturn(PackageManagerEnum.APK);
         final SimpleBdioDocument mockedBdioDocument = new SimpleBdioDocument();
         mockedBdioDocument.project = new BdioProject();
@@ -81,7 +92,22 @@ public class ImageInspectorApiTest {
         Mockito.when(mockExtractor.extract(Mockito.anyString(), Mockito.anyString(), Mockito.any(ImagePkgMgr.class), Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), Mockito.anyString())).thenReturn(mockedBdioDocument);
         mockExtractors.add(mockExtractor);
         Mockito.when(extractorManager.getExtractors()).thenReturn(mockExtractors);
-        final SimpleBdioDocument returnedBdioDocument = imageInspectorApi.getBdio(IMAGE_TARFILE, "SB001", "unitTest1", null);
+        final ImageInfoDerived imageInfo = imageInspectorApi.inspect(IMAGE_TARFILE, PROJECT, PROJECT_VERSION, CODE_LOCATION_PREFIX);
+        assertEquals(TEST_ARCH, imageInfo.getArchitecture());
+        assertEquals(String.format("%s_alpine_latest_lib_apk_APK", CODE_LOCATION_PREFIX), imageInfo.getCodeLocationName());
+        assertEquals(PROJECT, imageInfo.getFinalProjectName());
+        assertEquals(PROJECT_VERSION, imageInfo.getFinalProjectVersionName());
+        assertEquals(String.format("image_%s_v_%s", IMAGE_REPO, IMAGE_TAG), imageInfo.getImageDirName());
+        assertEquals(String.format("image_%s_v_%s", IMAGE_REPO, IMAGE_TAG), imageInfo.getImageInfoParsed().getFileSystemRootDirName());
+        assertEquals("ALPINE", imageInfo.getImageInfoParsed().getOperatingSystemEnum().name());
+        assertEquals("/lib/apk", imageInfo.getImageInfoParsed().getPkgMgr().getPackageManager().getDirectory());
+        assertEquals("apk", imageInfo.getImageInfoParsed().getPkgMgr().getExtractedPackageManagerDirectory().getName());
+        assertEquals(IMAGE_TAG, imageInfo.getManifestLayerMapping().getTagName());
+        assertEquals(IMAGE_REPO, imageInfo.getManifestLayerMapping().getImageName());
+        assertEquals("8925ab09eb6e0ccf350d7d374254a1372a626c90ecff7b387ac3967f4ad312e8", imageInfo.getManifestLayerMapping().getLayers().get(0));
+        assertEquals("lib/apk", imageInfo.getPkgMgrFilePath());
+
+        final SimpleBdioDocument returnedBdioDocument = imageInfo.getBdioDocument();
         assertEquals(MOCKED_PROJECT_ID, returnedBdioDocument.project.id);
     }
 }

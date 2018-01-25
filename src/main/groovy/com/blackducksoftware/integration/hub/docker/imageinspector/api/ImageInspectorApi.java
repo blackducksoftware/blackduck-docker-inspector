@@ -52,7 +52,7 @@ public class ImageInspectorApi {
 
     public SimpleBdioDocument getBdio(final String dockerTarfilePath, final String hubProjectName, final String hubProjectVersion, final String codeLocationPrefix) throws IOException, HubIntegrationException, InterruptedException {
         logger.info("getBdio()");
-        return inspect(dockerTarfilePath, hubProjectName, hubProjectVersion, codeLocationPrefix);
+        return getBdioDocument(dockerTarfilePath, hubProjectName, hubProjectVersion, codeLocationPrefix);
     }
 
     public File getBdioFile(final String dockerTarfilePath) throws WrongInspectorOsException {
@@ -60,7 +60,12 @@ public class ImageInspectorApi {
         return null;
     }
 
-    private SimpleBdioDocument inspect(final String dockerTarfilePath, final String hubProjectName, final String hubProjectVersion, final String codeLocationPrefix) throws IOException, HubIntegrationException, InterruptedException {
+    private SimpleBdioDocument getBdioDocument(final String dockerTarfilePath, final String hubProjectName, final String hubProjectVersion, final String codeLocationPrefix) throws IOException, HubIntegrationException, InterruptedException {
+        final ImageInfoDerived imageInfoDerived = inspect(dockerTarfilePath, hubProjectName, hubProjectVersion, codeLocationPrefix);
+        return imageInfoDerived.getBdioDocument();
+    }
+
+    ImageInfoDerived inspect(final String dockerTarfilePath, final String hubProjectName, final String hubProjectVersion, final String codeLocationPrefix) throws IOException, HubIntegrationException, InterruptedException {
         final File dockerTarfile = new File(dockerTarfilePath);
         final File tempDir = createTempDirectory();
         final File workingDir = new File(tempDir, "working");
@@ -85,7 +90,7 @@ public class ImageInspectorApi {
             throw new WrongInspectorOsException(neededInspectorOs, msg);
         }
         final ImageInfoDerived imageInfoDerived = imageInspector.generateBdioFromImageFilesDir(imageRepo, imageTag, tarfileMetadata, hubProjectName, hubProjectVersion, dockerTarfile, targetImageFileSystemRootDir, targetOs);
-        return imageInfoDerived.getBdioDocument();
+        return imageInfoDerived;
     }
 
     private File createTempDirectory() throws IOException {
