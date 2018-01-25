@@ -190,27 +190,9 @@ public class Config {
     @Value("${phone.home:true}")
     private Boolean phoneHome = Boolean.TRUE;
 
-    // Properties added for orchestration support
-    @ValueDescription(description = "Identify target image package manager?", defaultValue = "true", group = Config.GROUP_PRIVATE, deprecated = false)
-    @Value("${identify.pkg.mgr:true}")
-    private Boolean identifyPkgMgr = Boolean.TRUE;
-
-    @ValueDescription(description = "Inspect?", defaultValue = "false", group = Config.GROUP_PRIVATE, deprecated = false)
-    @Value("${inspect:false}")
-    private Boolean inspect = Boolean.FALSE;
-
-    @ValueDescription(description = "Launch container to inspect?", defaultValue = "true", group = Config.GROUP_PRIVATE, deprecated = false)
-    @Value("${inspect.in.container:true}")
-    private Boolean inspectInContainer = Boolean.TRUE;
-
     @ValueDescription(description = "Upload BDIO?", defaultValue = "true", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${upload.bdio:true}")
     private Boolean uploadBdio = Boolean.TRUE;
-
-    @ValueDescription(description = "Path to directory containing BDIO file to upload", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
-    @Value("${bdio.path:}")
-    private String bdioPath = "";
-    // End properties added for orchestration support
 
     @ValueDescription(description = "Repository name for the Hub Docker Inspector images", defaultValue = "blackducksoftware", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${inspector.repository:blackducksoftware}")
@@ -446,24 +428,12 @@ public class Config {
         return dockerInspectorJavaOptsValue;
     }
 
-    public boolean isInspect() {
-        return inspect;
-    }
-
-    public boolean isInspectInContainer() {
-        return inspectInContainer;
-    }
-
     public boolean isUploadBdio() {
         return uploadBdio;
     }
 
     public void setUploadBdio(final boolean value) {
         uploadBdio = value;
-    }
-
-    public boolean isIdentifyPkgMgr() {
-        return identifyPkgMgr;
     }
 
     public boolean isCleanupTargetImage() {
@@ -530,11 +500,7 @@ public class Config {
         this.phoneHome = null;
         this.scanCliOptsEnvVar = null;
         this.workingDirPath = null;
-        this.inspect = null;
-        this.inspectInContainer = null;
         this.uploadBdio = null;
-        this.identifyPkgMgr = null;
-        this.bdioPath = null;
         this.inspectorRepository = null;
         this.cleanupInspectorImage = null;
         this.cleanupTargetImage = null;
