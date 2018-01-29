@@ -39,7 +39,7 @@ import com.blackducksoftware.integration.hub.docker.imageinspector.lib.PackageMa
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor.DpkgExecutor;
 
 @Component
-class DpkgExtractor extends Extractor {
+public class DpkgExtractor extends Extractor {
     private final Logger logger = LoggerFactory.getLogger(DpkgExtractor.class);
 
     @Autowired

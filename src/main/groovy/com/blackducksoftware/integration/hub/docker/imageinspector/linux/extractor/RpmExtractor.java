@@ -39,7 +39,7 @@ import com.blackducksoftware.integration.hub.docker.imageinspector.lib.PackageMa
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor.RpmExecutor;
 
 @Component
-class RpmExtractor extends Extractor {
+public class RpmExtractor extends Extractor {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired

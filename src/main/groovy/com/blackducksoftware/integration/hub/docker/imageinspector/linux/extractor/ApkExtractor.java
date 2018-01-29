@@ -44,7 +44,7 @@ import com.blackducksoftware.integration.hub.docker.imageinspector.linux.FileOpe
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor.ApkExecutor;
 
 @Component
-class ApkExtractor extends Extractor {
+public class ApkExtractor extends Extractor {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
