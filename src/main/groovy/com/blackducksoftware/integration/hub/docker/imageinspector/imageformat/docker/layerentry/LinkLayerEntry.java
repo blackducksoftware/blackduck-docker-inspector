@@ -31,6 +31,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.builder.RecursiveToStringStyle;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.slf4j.Logger;
@@ -80,7 +81,7 @@ public class LinkLayerEntry implements LayerEntry {
             try {
                 Files.delete(startLink); // remove lower layer's version if exists
             } catch (final IOException e) {
-                // expected (most of the time)
+                logger.debug(String.format("Attempt to delete startLink (%s) failed with '%s', which is probably fine", startLink.toString(), e.getMessage()));
             }
             try {
                 Files.createSymbolicLink(startLink, endLink);
@@ -99,6 +100,7 @@ public class LinkLayerEntry implements LayerEntry {
 
             logger.trace(String.format("%s is a hard link: %s -> %s", layerEntry.getName(), startLink.toString(), endLink.toString()));
             final File targetFile = endLink.toFile();
+            FileUtils.deleteQuietly(startLink.toFile());
             if (!targetFile.exists()) {
                 logger.warn(String.format("Attempting to create a link to %s, but it does not exist", targetFile));
             }
