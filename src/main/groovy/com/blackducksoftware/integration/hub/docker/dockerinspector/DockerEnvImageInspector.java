@@ -146,9 +146,11 @@ public class DockerEnvImageInspector {
         if (deferredCleanup != null) {
             try {
                 logger.debug("Waiting for completion of concurrent inspector container/image cleanup");
-                logger.info(String.format("Status from concurrent cleanup: %s", deferredCleanup.get(30, TimeUnit.SECONDS)));
-            } catch (InterruptedException | ExecutionException | TimeoutException e) {
-                logger.error(String.format("Error during concurrent cleanup: %s", e.getMessage()));
+                logger.info(String.format("Status from concurrent cleanup: %s", deferredCleanup.get(120, TimeUnit.SECONDS)));
+            } catch (final TimeoutException e) {
+                logger.error("Container cleanup timed out; You may need to stop and/or remove hub-docker-inspector containers manually");
+            } catch (InterruptedException | ExecutionException e) {
+                logger.error(String.format("Error during concurrent cleanup: %s", e.getMessage()), e);
             }
         }
     }
