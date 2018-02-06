@@ -14,10 +14,10 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient
 import com.blackducksoftware.integration.hub.docker.dockerinspector.help.formatter.UsageFormatter
 import com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient.HubClient
 import com.blackducksoftware.integration.hub.docker.imageinspector.TestUtils
-import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping
-import com.blackducksoftware.integration.hub.docker.imageinspector.lib.ImageInspector
-import com.blackducksoftware.integration.hub.docker.imageinspector.lib.OperatingSystemEnum
-import com.blackducksoftware.integration.hub.docker.imageinspector.result.ResultFile
+import com.blackducksoftware.integration.hub.imageinspector.imageformat.docker.manifest.ManifestLayerMapping
+import com.blackducksoftware.integration.hub.imageinspector.lib.ImageInspector
+import com.blackducksoftware.integration.hub.imageinspector.lib.OperatingSystemEnum
+import com.blackducksoftware.integration.hub.imageinspector.result.ResultFile
 import com.google.gson.Gson
 
 class DockerEnvImageInspectorTest {

@@ -24,8 +24,10 @@ import org.junit.Test
 
 import com.blackducksoftware.integration.hub.docker.imageinspector.TestUtils
 import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.HardwiredManifestFactory
-import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping
-import com.blackducksoftware.integration.hub.docker.imageinspector.lib.OperatingSystemEnum
+import com.blackducksoftware.integration.hub.imageinspector.imageformat.docker.DockerTarParser
+import com.blackducksoftware.integration.hub.imageinspector.imageformat.docker.ImageInfoParsed
+import com.blackducksoftware.integration.hub.imageinspector.imageformat.docker.manifest.ManifestLayerMapping
+import com.blackducksoftware.integration.hub.imageinspector.lib.OperatingSystemEnum
 
 import groovy.io.FileType
 

@@ -34,7 +34,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
-import com.blackducksoftware.integration.hub.docker.imageinspector.lib.OperatingSystemEnum;
+import com.blackducksoftware.integration.hub.imageinspector.lib.OperatingSystemEnum;
 
 @Component
 public class InspectorImages {

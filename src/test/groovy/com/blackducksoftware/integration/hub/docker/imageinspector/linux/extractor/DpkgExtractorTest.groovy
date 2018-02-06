@@ -10,10 +10,11 @@ import org.junit.Test
 import com.blackducksoftware.integration.hub.bdio.BdioWriter
 import com.blackducksoftware.integration.hub.bdio.model.SimpleBdioDocument
 import com.blackducksoftware.integration.hub.docker.imageinspector.TestUtils
-import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImagePkgMgr
-import com.blackducksoftware.integration.hub.docker.imageinspector.lib.OperatingSystemEnum
-import com.blackducksoftware.integration.hub.docker.imageinspector.lib.PackageManagerEnum
 import com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor.ExecutorMock
+import com.blackducksoftware.integration.hub.imageinspector.imageformat.docker.ImagePkgMgr
+import com.blackducksoftware.integration.hub.imageinspector.lib.OperatingSystemEnum
+import com.blackducksoftware.integration.hub.imageinspector.lib.PackageManagerEnum
+import com.blackducksoftware.integration.hub.imageinspector.linux.extractor.DpkgExtractor
 import com.google.gson.Gson
 
 class DpkgExtractorTest {

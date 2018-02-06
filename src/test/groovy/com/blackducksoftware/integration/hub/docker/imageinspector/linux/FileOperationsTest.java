@@ -9,7 +9,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.blackducksoftware.integration.hub.docker.imageinspector.linux.FileOperations;
+import com.blackducksoftware.integration.hub.imageinspector.linux.FileOperations;
 
 public class FileOperationsTest {
 

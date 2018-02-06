@@ -9,7 +9,7 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Confi
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.DockerInspectorOption
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths
 import com.blackducksoftware.integration.hub.docker.imageinspector.TestUtils
-import com.blackducksoftware.integration.hub.docker.imageinspector.name.Names
+import com.blackducksoftware.integration.hub.imageinspector.name.Names
 
 class ProgramPathsTest {
     // TODO Names tests belong in a diff pkg

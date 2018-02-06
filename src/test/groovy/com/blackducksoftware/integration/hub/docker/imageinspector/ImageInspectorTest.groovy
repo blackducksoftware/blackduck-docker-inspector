@@ -9,22 +9,22 @@ import org.junit.Test
 
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.DockerInspectorOption
-import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.DockerTarParser
-import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImageInfoParsed
-import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImagePkgMgr
-import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping
-import com.blackducksoftware.integration.hub.docker.imageinspector.lib.ImageInfoDerived
-import com.blackducksoftware.integration.hub.docker.imageinspector.lib.ImageInspector
-import com.blackducksoftware.integration.hub.docker.imageinspector.lib.OperatingSystemEnum
-import com.blackducksoftware.integration.hub.docker.imageinspector.lib.PackageManagerEnum
-import com.blackducksoftware.integration.hub.docker.imageinspector.linux.FileOperations
-import com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor.ApkExecutor
-import com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor.DpkgExecutor
-import com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor.Executor
-import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor.ApkExtractor
-import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor.DpkgExtractor
-import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor.Extractor
-import com.blackducksoftware.integration.hub.docker.imageinspector.linux.extractor.ExtractorManager
+import com.blackducksoftware.integration.hub.imageinspector.imageformat.docker.DockerTarParser
+import com.blackducksoftware.integration.hub.imageinspector.imageformat.docker.ImageInfoParsed
+import com.blackducksoftware.integration.hub.imageinspector.imageformat.docker.ImagePkgMgr
+import com.blackducksoftware.integration.hub.imageinspector.imageformat.docker.manifest.ManifestLayerMapping
+import com.blackducksoftware.integration.hub.imageinspector.lib.ImageInfoDerived
+import com.blackducksoftware.integration.hub.imageinspector.lib.ImageInspector
+import com.blackducksoftware.integration.hub.imageinspector.lib.OperatingSystemEnum
+import com.blackducksoftware.integration.hub.imageinspector.lib.PackageManagerEnum
+import com.blackducksoftware.integration.hub.imageinspector.linux.FileOperations
+import com.blackducksoftware.integration.hub.imageinspector.linux.executor.ApkExecutor
+import com.blackducksoftware.integration.hub.imageinspector.linux.executor.DpkgExecutor
+import com.blackducksoftware.integration.hub.imageinspector.linux.executor.Executor
+import com.blackducksoftware.integration.hub.imageinspector.linux.extractor.ApkExtractor
+import com.blackducksoftware.integration.hub.imageinspector.linux.extractor.DpkgExtractor
+import com.blackducksoftware.integration.hub.imageinspector.linux.extractor.Extractor
+import com.blackducksoftware.integration.hub.imageinspector.linux.extractor.ExtractorManager
 
 class ImageInspectorTest {
 

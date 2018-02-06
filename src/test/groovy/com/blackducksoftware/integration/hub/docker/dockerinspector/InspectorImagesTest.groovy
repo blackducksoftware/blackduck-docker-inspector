@@ -19,7 +19,7 @@ import org.junit.BeforeClass
 import org.junit.Test
 
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config
-import com.blackducksoftware.integration.hub.docker.imageinspector.lib.OperatingSystemEnum
+import com.blackducksoftware.integration.hub.imageinspector.lib.OperatingSystemEnum
 
 class InspectorImagesTest {
 

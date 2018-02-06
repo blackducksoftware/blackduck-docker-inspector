@@ -11,7 +11,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.blackducksoftware.integration.hub.docker.imageinspector.linux.FileSys;
+import com.blackducksoftware.integration.hub.imageinspector.linux.FileSys;
 
 public class FileSysTest {
 

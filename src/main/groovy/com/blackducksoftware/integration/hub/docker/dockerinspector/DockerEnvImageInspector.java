@@ -52,22 +52,22 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Progr
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.DockerClientManager;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.help.formatter.UsageFormatter;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient.HubClient;
-import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestLayerMapping;
-import com.blackducksoftware.integration.hub.docker.imageinspector.lib.DissectedImage;
-import com.blackducksoftware.integration.hub.docker.imageinspector.lib.ImageInfoDerived;
-import com.blackducksoftware.integration.hub.docker.imageinspector.lib.ImageInspector;
-import com.blackducksoftware.integration.hub.docker.imageinspector.lib.OperatingSystemEnum;
-import com.blackducksoftware.integration.hub.docker.imageinspector.linux.FileOperations;
-import com.blackducksoftware.integration.hub.docker.imageinspector.linux.FileSys;
-import com.blackducksoftware.integration.hub.docker.imageinspector.name.ImageNameResolver;
-import com.blackducksoftware.integration.hub.docker.imageinspector.name.Names;
-import com.blackducksoftware.integration.hub.docker.imageinspector.result.Result;
-import com.blackducksoftware.integration.hub.docker.imageinspector.result.ResultFile;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
+import com.blackducksoftware.integration.hub.imageinspector.imageformat.docker.manifest.ManifestLayerMapping;
+import com.blackducksoftware.integration.hub.imageinspector.lib.DissectedImage;
+import com.blackducksoftware.integration.hub.imageinspector.lib.ImageInfoDerived;
+import com.blackducksoftware.integration.hub.imageinspector.lib.ImageInspector;
+import com.blackducksoftware.integration.hub.imageinspector.lib.OperatingSystemEnum;
+import com.blackducksoftware.integration.hub.imageinspector.linux.FileOperations;
+import com.blackducksoftware.integration.hub.imageinspector.linux.FileSys;
+import com.blackducksoftware.integration.hub.imageinspector.name.ImageNameResolver;
+import com.blackducksoftware.integration.hub.imageinspector.name.Names;
+import com.blackducksoftware.integration.hub.imageinspector.result.Result;
+import com.blackducksoftware.integration.hub.imageinspector.result.ResultFile;
 import com.google.gson.Gson;
 
 @SpringBootApplication
-@ComponentScan(basePackages = { "com.blackducksoftware.integration.hub.docker.imageinspector", "com.blackducksoftware.integration.hub.docker.dockerinspector" })
+@ComponentScan(basePackages = { "com.blackducksoftware.integration.hub.imageinspector", "com.blackducksoftware.integration.hub.docker.dockerinspector" })
 public class DockerEnvImageInspector {
     private static final Logger logger = LoggerFactory.getLogger(DockerEnvImageInspector.class);
 

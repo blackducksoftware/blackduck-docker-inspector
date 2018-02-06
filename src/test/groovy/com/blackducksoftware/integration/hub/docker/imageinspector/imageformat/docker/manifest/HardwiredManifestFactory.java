@@ -2,8 +2,8 @@ package com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.
 
 import java.io.File;
 
-import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.Manifest;
-import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.manifest.ManifestFactory;
+import com.blackducksoftware.integration.hub.imageinspector.imageformat.docker.manifest.Manifest;
+import com.blackducksoftware.integration.hub.imageinspector.imageformat.docker.manifest.ManifestFactory;
 
 public class HardwiredManifestFactory implements ManifestFactory {
 

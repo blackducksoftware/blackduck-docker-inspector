@@ -12,8 +12,9 @@
 package com.blackducksoftware.integration.hub.docker.imageinspector.linux.executor
 
 
-import com.blackducksoftware.integration.hub.docker.imageinspector.imageformat.docker.ImagePkgMgr
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException
+import com.blackducksoftware.integration.hub.imageinspector.imageformat.docker.ImagePkgMgr
+import com.blackducksoftware.integration.hub.imageinspector.linux.executor.PkgMgrExecutor
 
 class ExecutorMock extends PkgMgrExecutor {
 
