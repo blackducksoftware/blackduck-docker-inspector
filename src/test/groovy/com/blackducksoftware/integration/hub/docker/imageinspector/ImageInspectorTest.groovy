@@ -99,10 +99,7 @@ class ImageInspectorTest {
             }
         ] as DockerTarParser
         String tempDirPath = TestUtils.createTempDirectory().getAbsolutePath()
-        imageInspector.init(tempDirPath, tempDirPath, "")
         imageInspector.extractorManager = extractorManager
-
-
 
         List<File> etcDirs = new ArrayList<>()
         File etcDir = TestUtils.createTempDirectory()
@@ -125,8 +122,8 @@ class ImageInspectorTest {
         ManifestLayerMapping mapping = new ManifestLayerMapping(imageName, tagName, layerIds)
         mappings.add(mapping)
         File imageFilesDir = new File("src/test/resources/imageDir")
-        ImageInfoDerived imageInfoDerived = imageInspector.generateBdioFromImageFilesDir(imageName, tagName, mappings, "testProjectName", "testProjectVersion", imageTarFile, imageFilesDir, os)
-        File bdioFile = imageInspector.writeBdioFile(imageInfoDerived)
+        ImageInfoDerived imageInfoDerived = imageInspector.generateBdioFromImageFilesDir(imageName, tagName, mappings, "testProjectName", "testProjectVersion", imageTarFile, imageFilesDir, os, "")
+        File bdioFile = imageInspector.writeBdioFile(new File(tempDirPath), imageInfoDerived)
         File file1 = new File("src/test/resources/${imageName}_imageDir_testProjectName_testProjectVersion_bdio.jsonld")
         File file2 = bdioFile
         println "Comparing ${file2.getAbsolutePath()} to ${file1.getAbsolutePath()}"

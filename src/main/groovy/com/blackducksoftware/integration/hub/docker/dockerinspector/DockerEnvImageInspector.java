@@ -183,15 +183,16 @@ public class DockerEnvImageInspector {
             deferredCleanup = inspectInSubContainer(config, dissectedImage.getDockerTarFile(), dissectedImage.getTargetOs(), dissectedImage.getRunOnImageName(), dissectedImage.getRunOnImageTag());
         } else {
             if (dissectedImage.getTargetImageFileSystemRootDir() == null) {
-                dissectedImage.setTargetImageFileSystemRootDir(imageInspector.extractDockerLayers(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerTars(), dissectedImage.getLayerMappings()));
+                dissectedImage.setTargetImageFileSystemRootDir(
+                        imageInspector.extractDockerLayers(new File(programPaths.getHubDockerWorkingDirPath()), config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerTars(), dissectedImage.getLayerMappings()));
             }
             if (dissectedImage.getTargetOs() == null) {
                 dissectedImage.setTargetOs(imageInspector.detectOperatingSystem(dissectedImage.getTargetImageFileSystemRootDir()));
             }
             logger.info(String.format("Target image tarfile: %s; target OS: %s", dissectedImage.getDockerTarFile().getAbsolutePath(), dissectedImage.getTargetOs().toString()));
             final ImageInfoDerived imageInfoDerived = imageInspector.generateBdioFromImageFilesDir(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), getHubProjectName(config),
-                    getHubProjectVersion(config), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs());
-            final File bdioFile = imageInspector.writeBdioFile(imageInfoDerived);
+                    getHubProjectVersion(config), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs(), config.getHubCodelocationPrefix());
+            final File bdioFile = imageInspector.writeBdioFile(new File(programPaths.getHubDockerOutputPath()), imageInfoDerived);
             logger.info(String.format("BDIO File generated: %s", bdioFile.getAbsolutePath()));
             dissectedImage.setBdioFilename(bdioFile.getName());
             createContainerFileSystemTarIfRequested(config, dissectedImage.getTargetImageFileSystemRootDir());
@@ -202,7 +203,8 @@ public class DockerEnvImageInspector {
     private void extractLayers(final Config config, final DissectedImage dissectedImage) throws IOException, HubIntegrationException {
         dissectedImage.setTargetOs(imageInspector.detectOperatingSystem(config.getLinuxDistro()));
         if (dissectedImage.getTargetOs() == null) {
-            dissectedImage.setTargetImageFileSystemRootDir(imageInspector.extractDockerLayers(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerTars(), dissectedImage.getLayerMappings()));
+            dissectedImage.setTargetImageFileSystemRootDir(
+                    imageInspector.extractDockerLayers(new File(programPaths.getHubDockerWorkingDirPath()), config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerTars(), dissectedImage.getLayerMappings()));
             dissectedImage.setTargetOs(imageInspector.detectOperatingSystem(dissectedImage.getTargetImageFileSystemRootDir()));
         }
         dissectedImage.setRunOnImageName(dockerImages.getInspectorImageName(dissectedImage.getTargetOs()));
@@ -215,8 +217,8 @@ public class DockerEnvImageInspector {
 
     private void parseManifest(final Config config, final DissectedImage dissectedImage) throws IOException, HubIntegrationException, Exception {
         dissectedImage.setDockerTarFile(deriveDockerTarFile(config));
-        dissectedImage.setLayerTars(imageInspector.extractLayerTars(dissectedImage.getDockerTarFile()));
-        dissectedImage.setLayerMappings(imageInspector.getLayerMappings(dissectedImage.getDockerTarFile().getName(), config.getDockerImageRepo(), config.getDockerImageTag()));
+        dissectedImage.setLayerTars(imageInspector.extractLayerTars(new File(programPaths.getHubDockerWorkingDirPath()), dissectedImage.getDockerTarFile()));
+        dissectedImage.setLayerMappings(imageInspector.getLayerMappings(new File(programPaths.getHubDockerWorkingDirPath()), dissectedImage.getDockerTarFile().getName(), config.getDockerImageRepo(), config.getDockerImageTag()));
         adjustImageNameTagFromLayerMappings(dissectedImage.getLayerMappings());
     }
 
@@ -440,7 +442,6 @@ public class DockerEnvImageInspector {
         if (config.isOnHost()) {
             hubClient.testHubConnection();
         }
-        imageInspector.init(programPaths.getHubDockerWorkingDirPath(), programPaths.getHubDockerOutputPath(), config.getHubCodelocationPrefix());
         FileOperations.removeFileOrDir(programPaths.getHubDockerWorkingDirPath());
 
         logger.debug(String.format("Upload BDIO is set to %b", config.isUploadBdio()));

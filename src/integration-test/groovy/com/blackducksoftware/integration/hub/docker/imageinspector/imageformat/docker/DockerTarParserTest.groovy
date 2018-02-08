@@ -48,14 +48,13 @@ class DockerTarParserTest {
         println "workingDirectory: ${workingDirectory.getAbsolutePath()}"
 
         DockerTarParser tarParser = new DockerTarParser()
-        tarParser.workingDirectory = workingDirectory
         tarParser.manifestFactory = new HardwiredManifestFactory()
 
-        List<File> layerTars = tarParser.extractLayerTars(dockerTar)
-        List<ManifestLayerMapping> layerMappings = tarParser.getLayerMappings(dockerTar.getName(), IMAGE_NAME, IMAGE_TAG)
+        List<File> layerTars = tarParser.extractLayerTars(workingDirectory, dockerTar)
+        List<ManifestLayerMapping> layerMappings = tarParser.getLayerMappings(workingDirectory, dockerTar.getName(), IMAGE_NAME, IMAGE_TAG)
         assertEquals(1, layerMappings.size())
         assertEquals(2, layerMappings.get(0).layers.size())
-        File imageFilesDir = tarParser.extractDockerLayers("imageName", "imageTag", layerTars, layerMappings)
+        File imageFilesDir = tarParser.extractDockerLayers(workingDirectory, "imageName", "imageTag", layerTars, layerMappings)
         OperatingSystemEnum targetOsEnum = tarParser.detectOperatingSystem(imageFilesDir)
         ImageInfoParsed tarExtractionResults = tarParser.collectPkgMgrInfo(imageFilesDir, targetOsEnum)
 
@@ -110,7 +109,6 @@ class DockerTarParserTest {
         layerTars.add(dockerTar)
 
         DockerTarParser tarParser = new DockerTarParser()
-        tarParser.workingDirectory = workingDirectory
         tarParser.manifestFactory = new HardwiredManifestFactory()
 
         List<ManifestLayerMapping> layerMappings = new ArrayList<>()
@@ -119,7 +117,7 @@ class DockerTarParserTest {
         ManifestLayerMapping layerMapping = new ManifestLayerMapping(IMAGE_NAME, IMAGE_TAG, layerIds)
         layerMappings.add(layerMapping)
 
-        File targetImageFileSystemRootDir = tarParser.extractDockerLayers("blackducksoftware_centos_minus_vim_plus_bacula", "1.0", layerTars, layerMappings)
+        File targetImageFileSystemRootDir = tarParser.extractDockerLayers(workingDirectory, "blackducksoftware_centos_minus_vim_plus_bacula", "1.0", layerTars, layerMappings)
         assertEquals(tarExtractionDirectory.getAbsolutePath() + "/imageFiles/${targetImageFileSystemRootDirName}", targetImageFileSystemRootDir.getAbsolutePath())
 
         File dpkgStatusFile = new File(workingDirectory.getAbsolutePath() + "/tarExtraction/imageFiles/${targetImageFileSystemRootDirName}/var/lib/dpkg/status")
