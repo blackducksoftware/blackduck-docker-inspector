@@ -4,7 +4,7 @@ jdk:
 install: true
 
 script:
-  - ./gradlew clean build sonarqube
+  - ./gradlew clean build sonarqube -x test
   
 after_success:
   - bash <(curl -s https://copilot.blackducksoftware.com/ci/travis/scripts/upload)
