@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -196,6 +197,15 @@ public class DockerClientManager {
         return alreadyPulledImage;
     }
 
+    private void initContainerDirs(final DockerClient dockerClient, final String imageNameTag, final String containerId) throws InterruptedException {
+        logger.info(String.format("Creating hub-docker-inspector directories in container %s", containerId));
+        execCommandInContainer(dockerClient, imageNameTag, containerId, Arrays.asList("mkdir", "/opt/blackduck/hub-docker-inspector"));
+        execCommandInContainer(dockerClient, imageNameTag, containerId, Arrays.asList("mkdir", "/opt/blackduck/hub-docker-inspector/config"));
+        execCommandInContainer(dockerClient, imageNameTag, containerId, Arrays.asList("mkdir", "/opt/blackduck/hub-docker-inspector/working"));
+        execCommandInContainer(dockerClient, imageNameTag, containerId, Arrays.asList("mkdir", "/opt/blackduck/hub-docker-inspector/target"));
+        execCommandInContainer(dockerClient, imageNameTag, containerId, Arrays.asList("mkdir", "/opt/blackduck/hub-docker-inspector/output"));
+    }
+
     public String run(final String runOnImageName, final String runOnTagName, final String runOnImageId, final File dockerTarFile, final boolean copyJar, final String targetImage, final String targetImageRepo, final String targetImageTag)
             throws InterruptedException, IOException, HubIntegrationException, IllegalArgumentException, IllegalAccessException {
         final String hubPasswordString = hubPassword.get();
@@ -208,7 +218,15 @@ public class DockerClientManager {
         final String tarFilePathInSubContainer = programPaths.getHubDockerTargetDirPathContainer() + dockerTarFile.getName();
 
         final String containerId = ensureContainerRunning(dockerClient, imageNameTag, extractorContainerName, hubPasswordString);
-        setPropertiesInSubContainer(dockerClient, containerId, tarFilePathInSubContainer, tarFileDirInSubContainer, dockerTarFile, targetImage, targetImageRepo, targetImageTag);
+        try {
+            setPropertiesInSubContainer(dockerClient, containerId, tarFilePathInSubContainer, tarFileDirInSubContainer, dockerTarFile, targetImage, targetImageRepo, targetImageTag);
+        } catch (final NotFoundException e) {
+            logger.debug("Creation of properties file inside container failed; perhaps the container is not yet set up.");
+            // Perhaps this container isn't set up yet; do that, then retry
+            // TODO; is this the best way to do this??
+            initContainerDirs(dockerClient, imageNameTag, containerId);
+            setPropertiesInSubContainer(dockerClient, containerId, tarFilePathInSubContainer, tarFileDirInSubContainer, dockerTarFile, targetImage, targetImageRepo, targetImageTag);
+        }
         if (copyJar) {
             copyFileToContainer(dockerClient, containerId, programPaths.getHubDockerJarPathHost(), programPaths.getHubDockerPgmDirPathContainer());
         }
@@ -271,6 +289,7 @@ public class DockerClientManager {
 
     private void setPropertiesInSubContainer(final DockerClient dockerClient, final String containerId, final String tarFilePathInSubContainer, final String tarFileDirInSubContainer, final File dockerTarFile, final String targetImage,
             final String targetImageRepo, final String targetImageTag) throws IOException, IllegalArgumentException, IllegalAccessException {
+        logger.debug("Creating properties file inside container");
         hubDockerProperties.load();
         hubDockerProperties.set(IMAGE_TARFILE_PROPERTY, tarFilePathInSubContainer);
         hubDockerProperties.set(IMAGE_PROPERTY, targetImage);
@@ -371,10 +390,6 @@ public class DockerClientManager {
     private void copyFileToContainer(final DockerClient dockerClient, final String containerId, final String srcPath, final String destPath) throws IOException {
         logger.debug(String.format("Copying %s to container %s: %s", srcPath, containerId, destPath));
         final CopyArchiveToContainerCmd copyProperties = dockerClient.copyArchiveToContainerCmd(containerId).withHostResource(srcPath).withRemotePath(destPath);
-        execCopyTo(copyProperties);
-    }
-
-    private void execCopyTo(final CopyArchiveToContainerCmd copyProperties) throws IOException {
         copyProperties.exec();
     }
 
