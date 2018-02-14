@@ -23,6 +23,8 @@ import com.blackducksoftware.integration.hub.imageinspector.lib.OperatingSystemE
 
 class InspectorImagesTest {
 
+    private static final String PROGRAM_VERSION = "1.2.3"
+
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
     }
@@ -34,37 +36,41 @@ class InspectorImagesTest {
     @Test
     public void testBasic() {
         ProgramVersion mockedProgramVersion = [
-            getProgramVersion: { '1.2.3' }
+            getProgramVersion: { PROGRAM_VERSION }
         ] as ProgramVersion
 
         InspectorImages osMapper = new InspectorImages()
         Config config = [
-            getInspectorRepository: { "blackducksoftware" }
+            getInspectorRepository: { "blackducksoftware" },
+            getInspectorImageFamily: { "hub-docker-inspector" },
+            getInspectorImageVersion: { PROGRAM_VERSION }
         ] as Config;
         osMapper.config = config
         osMapper.programVersion = mockedProgramVersion
         assertEquals("blackducksoftware/hub-docker-inspector-centos", osMapper.getInspectorImageName(OperatingSystemEnum.CENTOS))
-        assertEquals("1.2.3", osMapper.getInspectorImageTag(OperatingSystemEnum.CENTOS))
+        assertEquals(PROGRAM_VERSION, osMapper.getInspectorImageTag(OperatingSystemEnum.CENTOS))
         assertEquals(OperatingSystemEnum.CENTOS, osMapper.getInspectorImageOs(OperatingSystemEnum.CENTOS))
 
         assertEquals("blackducksoftware/hub-docker-inspector-ubuntu", osMapper.getInspectorImageName(OperatingSystemEnum.UBUNTU))
-        assertEquals("1.2.3", osMapper.getInspectorImageTag(OperatingSystemEnum.UBUNTU))
+        assertEquals(PROGRAM_VERSION, osMapper.getInspectorImageTag(OperatingSystemEnum.UBUNTU))
         assertEquals(OperatingSystemEnum.UBUNTU, osMapper.getInspectorImageOs(OperatingSystemEnum.UBUNTU))
 
         assertEquals("blackducksoftware/hub-docker-inspector-alpine", osMapper.getInspectorImageName(OperatingSystemEnum.ALPINE))
-        assertEquals("1.2.3", osMapper.getInspectorImageTag(OperatingSystemEnum.ALPINE))
+        assertEquals(PROGRAM_VERSION, osMapper.getInspectorImageTag(OperatingSystemEnum.ALPINE))
         assertEquals(OperatingSystemEnum.ALPINE, osMapper.getInspectorImageOs(OperatingSystemEnum.ALPINE))
     }
 
     @Test
     public void testAlternateRepoWithoutSlash() {
         ProgramVersion mockedProgramVersion = [
-            getProgramVersion: { '1.2.3' }
+            getProgramVersion: { PROGRAM_VERSION }
         ] as ProgramVersion
 
         InspectorImages osMapper = new InspectorImages()
         Config config = [
-            getInspectorRepository: { "myrepo" }
+            getInspectorRepository: { "myrepo" },
+            getInspectorImageFamily: { "hub-docker-inspector" },
+            getInspectorImageVersion: { PROGRAM_VERSION }
         ] as Config;
         osMapper.config = config
         osMapper.programVersion = mockedProgramVersion
@@ -74,12 +80,14 @@ class InspectorImagesTest {
     @Test
     public void testAlternateRepoWithSlash() {
         ProgramVersion mockedProgramVersion = [
-            getProgramVersion: { '1.2.3' }
+            getProgramVersion: { PROGRAM_VERSION }
         ] as ProgramVersion
 
         InspectorImages osMapper = new InspectorImages()
         Config config = [
-            getInspectorRepository: { "myrepo/" }
+            getInspectorRepository: { "myrepo/" },
+            getInspectorImageFamily: { "hub-docker-inspector" },
+            getInspectorImageVersion: { PROGRAM_VERSION }
         ] as Config;
         osMapper.config = config
         osMapper.programVersion = mockedProgramVersion
@@ -89,12 +97,14 @@ class InspectorImagesTest {
     @Test
     public void testNoRepo() {
         ProgramVersion mockedProgramVersion = [
-            getProgramVersion: { '1.2.3' }
+            getProgramVersion: { PROGRAM_VERSION }
         ] as ProgramVersion
 
         InspectorImages osMapper = new InspectorImages()
         Config config = [
-            getInspectorRepository: { "" }
+            getInspectorRepository: { "" },
+            getInspectorImageFamily: { "hub-docker-inspector" },
+            getInspectorImageVersion: { PROGRAM_VERSION }
         ] as Config;
         osMapper.config = config
         osMapper.programVersion = mockedProgramVersion

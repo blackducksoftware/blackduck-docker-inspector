@@ -198,6 +198,14 @@ public class Config {
     @Value("${inspector.repository:blackducksoftware}")
     private String inspectorRepository = "blackducksoftware";
 
+    @ValueDescription(description = "Hub Docker Inspector image \"family\"", defaultValue = "hub-docker-inspector", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${inspector.image.family:hub-docker-inspector}")
+    private String inspectorImageFamily = "hub-docker-inspector";
+
+    @ValueDescription(description = "Hub Docker Inspector image version", defaultValue = "blackducksoftware", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${inspector.image.version:}")
+    private String inspectorImageVersion = "";
+
     @ValueDescription(description = "Remove target image after saving it?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${cleanup.target.image:false}")
     private Boolean cleanupTargetImage = Boolean.FALSE;
@@ -408,6 +416,14 @@ public class Config {
         return optionsByFieldName.get("inspectorRepository").getResolvedValue();
     }
 
+    public String getInspectorImageFamily() {
+        return optionsByFieldName.get("inspectorImageFamily").getResolvedValue();
+    }
+
+    public String getInspectorImageVersion() {
+        return optionsByFieldName.get("inspectorImageVersion").getResolvedValue();
+    }
+
     public String getCallerVersion() {
         return optionsByFieldName.get("callerVersion").getResolvedValue();
     }
@@ -504,5 +520,7 @@ public class Config {
         this.inspectorRepository = null;
         this.cleanupInspectorImage = null;
         this.cleanupTargetImage = null;
+        this.inspectorImageFamily = null;
+        this.inspectorImageVersion = null;
     }
 }

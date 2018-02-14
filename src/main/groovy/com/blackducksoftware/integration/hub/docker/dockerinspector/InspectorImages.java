@@ -53,7 +53,6 @@ public class InspectorImages {
         if (initialized) {
             return;
         }
-        final String programVersionString = programVersion.getProgramVersion();
         String repoWithSeparator = null;
         final String repo = config.getInspectorRepository();
         if (StringUtils.isBlank(repo)) {
@@ -63,11 +62,16 @@ public class InspectorImages {
         } else {
             repoWithSeparator = String.format("%s/", repo);
         }
-        inspectorImageMap.put(OperatingSystemEnum.CENTOS, new InspectorImage(OperatingSystemEnum.CENTOS, String.format("%shub-docker-inspector-centos", repoWithSeparator), programVersionString));
-        inspectorImageMap.put(OperatingSystemEnum.FEDORA, new InspectorImage(OperatingSystemEnum.CENTOS, String.format("%shub-docker-inspector-centos", repoWithSeparator), programVersionString));
-        inspectorImageMap.put(OperatingSystemEnum.DEBIAN, new InspectorImage(OperatingSystemEnum.UBUNTU, String.format("%shub-docker-inspector-ubuntu", repoWithSeparator), programVersionString));
-        inspectorImageMap.put(OperatingSystemEnum.UBUNTU, new InspectorImage(OperatingSystemEnum.UBUNTU, String.format("%shub-docker-inspector-ubuntu", repoWithSeparator), programVersionString));
-        inspectorImageMap.put(OperatingSystemEnum.ALPINE, new InspectorImage(OperatingSystemEnum.ALPINE, String.format("%shub-docker-inspector-alpine", repoWithSeparator), programVersionString));
+        final String inspectorImageFamily = config.getInspectorImageFamily();
+        String inspectorImageVersion = config.getInspectorImageVersion();
+        if (StringUtils.isBlank(inspectorImageVersion)) {
+            inspectorImageVersion = programVersion.getProgramVersion();
+        }
+        inspectorImageMap.put(OperatingSystemEnum.CENTOS, new InspectorImage(OperatingSystemEnum.CENTOS, String.format("%s%s-centos", repoWithSeparator, inspectorImageFamily), inspectorImageVersion));
+        inspectorImageMap.put(OperatingSystemEnum.FEDORA, new InspectorImage(OperatingSystemEnum.CENTOS, String.format("%s%s-centos", repoWithSeparator, inspectorImageFamily), inspectorImageVersion));
+        inspectorImageMap.put(OperatingSystemEnum.DEBIAN, new InspectorImage(OperatingSystemEnum.UBUNTU, String.format("%s%s-ubuntu", repoWithSeparator, inspectorImageFamily), inspectorImageVersion));
+        inspectorImageMap.put(OperatingSystemEnum.UBUNTU, new InspectorImage(OperatingSystemEnum.UBUNTU, String.format("%s%s-ubuntu", repoWithSeparator, inspectorImageFamily), inspectorImageVersion));
+        inspectorImageMap.put(OperatingSystemEnum.ALPINE, new InspectorImage(OperatingSystemEnum.ALPINE, String.format("%s%s-alpine", repoWithSeparator, inspectorImageFamily), inspectorImageVersion));
         initialized = true;
     }
 
