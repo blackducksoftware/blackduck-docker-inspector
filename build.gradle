@@ -27,6 +27,8 @@ repositories {
 }
 
 version = '4.3.2-SNAPSHOT'
+def inspectorImageFamily = 'hub-docker-inspector'
+def inspectorImageVersion = "${version}"
 
 apply plugin: 'com.blackducksoftware.integration.solution'
 apply plugin: 'com.bmuschko.docker-remote-api'
@@ -75,6 +77,8 @@ task writeVersionToPropertiesFile() {
 		versionPropertiesFile.delete()
 		versionPropertiesFile.createNewFile()
 		versionProperties.setProperty('program.version', version)
+		versionProperties.setProperty('inspector.image.family', inspectorImageFamily)
+		versionProperties.setProperty('inspector.image.version', inspectorImageVersion)
 		versionProperties.store(versionPropertiesFile.newWriter(), null)
 	}
 }

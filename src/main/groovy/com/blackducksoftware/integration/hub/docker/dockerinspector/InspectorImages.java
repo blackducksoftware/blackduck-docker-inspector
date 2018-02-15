@@ -62,10 +62,13 @@ public class InspectorImages {
         } else {
             repoWithSeparator = String.format("%s/", repo);
         }
-        final String inspectorImageFamily = config.getInspectorImageFamily();
+        String inspectorImageFamily = config.getInspectorImageFamily();
+        if (StringUtils.isBlank(inspectorImageFamily)) {
+            inspectorImageFamily = programVersion.getInspectorImageFamily();
+        }
         String inspectorImageVersion = config.getInspectorImageVersion();
         if (StringUtils.isBlank(inspectorImageVersion)) {
-            inspectorImageVersion = programVersion.getProgramVersion();
+            inspectorImageVersion = programVersion.getInspectorImageVersion();
         }
         inspectorImageMap.put(OperatingSystemEnum.CENTOS, new InspectorImage(OperatingSystemEnum.CENTOS, String.format("%s%s-centos", repoWithSeparator, inspectorImageFamily), inspectorImageVersion));
         inspectorImageMap.put(OperatingSystemEnum.FEDORA, new InspectorImage(OperatingSystemEnum.CENTOS, String.format("%s%s-centos", repoWithSeparator, inspectorImageFamily), inspectorImageVersion));

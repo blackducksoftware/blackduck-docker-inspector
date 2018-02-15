@@ -25,6 +25,8 @@ package com.blackducksoftware.integration.hub.docker.dockerinspector;
 
 import java.io.IOException;
 
+import javax.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -35,13 +37,27 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient
 public class ProgramVersion {
     private final Logger logger = LoggerFactory.getLogger(ProgramVersion.class);
     private String programVersion;
+    private String inspectorImageFamily;
+    private String inspectorImageVersion;
+
+    @PostConstruct
+    public void init() throws IOException {
+        final ClassPathPropertiesFile versionProperties = new ClassPathPropertiesFile("version.properties");
+        programVersion = versionProperties.getProperty("program.version");
+        inspectorImageFamily = versionProperties.getProperty("inspector.image.family");
+        inspectorImageVersion = versionProperties.getProperty("inspector.image.version");
+        logger.debug(String.format("programVersion: %s", programVersion));
+    }
 
     public String getProgramVersion() throws IOException {
-        if (programVersion == null) {
-            final ClassPathPropertiesFile versionProperties = new ClassPathPropertiesFile("version.properties");
-            programVersion = versionProperties.getProperty("program.version");
-            logger.debug(String.format("programVersion: %s", programVersion));
-        }
         return programVersion;
+    }
+
+    public String getInspectorImageFamily() throws IOException {
+        return inspectorImageFamily;
+    }
+
+    public String getInspectorImageVersion() throws IOException {
+        return inspectorImageVersion;
     }
 }

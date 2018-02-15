@@ -198,11 +198,11 @@ public class Config {
     @Value("${inspector.repository:blackducksoftware}")
     private String inspectorRepository = "blackducksoftware";
 
-    @ValueDescription(description = "Hub Docker Inspector image \"family\"", defaultValue = "hub-docker-inspector", group = Config.GROUP_PUBLIC, deprecated = false)
-    @Value("${inspector.image.family:hub-docker-inspector}")
-    private String inspectorImageFamily = "hub-docker-inspector";
+    @ValueDescription(description = "Hub Docker Inspector image \"family\"", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${inspector.image.family:}")
+    private String inspectorImageFamily = "";
 
-    @ValueDescription(description = "Hub Docker Inspector image version", defaultValue = "blackducksoftware", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Hub Docker Inspector image version", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${inspector.image.version:}")
     private String inspectorImageVersion = "";
 
