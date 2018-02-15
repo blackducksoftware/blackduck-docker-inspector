@@ -18,8 +18,6 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.blackducksoftware.integration.hub.docker.dockerinspector.ProgramVersion;
-
 public class ArgsWithSpacesTest {
 
     private static final String USERNAME = "You Zer";
@@ -43,7 +41,9 @@ public class ArgsWithSpacesTest {
             System.out.println(String.format("Unable to delete %s", workingDirPath));
         }
 
-        final String programVersion = (new ProgramVersion()).getProgramVersion();
+        final ProgramVersion pgmVerObj = new ProgramVersion();
+        pgmVerObj.init();
+        final String programVersion = pgmVerObj.getProgramVersion();
         final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--dry.run=true", String.format("--hub.username=\"%s\"", USERNAME), String.format("--hub.project.name=\"%s\"", PROJECT_NAME),
                 String.format("--hub.project.version=\"%s\"", PROJECT_VERSION), String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", programVersion), "--output.path=test/output", "--output.include.dockertarfile=true",
                 "--output.include.containerfilesystem=true", "--hub.always.trust.cert=true");
