@@ -210,6 +210,10 @@ public class Config {
     @Value("${cleanup.target.image:false}")
     private Boolean cleanupTargetImage = Boolean.FALSE;
 
+    @ValueDescription(description = "Stop inspector container after using it?", defaultValue = "true", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${cleanup.inspector.container:true}")
+    private Boolean cleanupInspectorContainer = Boolean.TRUE;
+
     @ValueDescription(description = "Remove inspector image after using it?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${cleanup.inspector.image:false}")
     private Boolean cleanupInspectorImage = Boolean.FALSE;
@@ -456,6 +460,10 @@ public class Config {
         return cleanupTargetImage;
     }
 
+    public boolean isCleanupInspectorContainer() {
+        return cleanupInspectorContainer;
+    }
+
     public boolean isCleanupInspectorImage() {
         return cleanupInspectorImage;
     }
@@ -518,6 +526,7 @@ public class Config {
         this.workingDirPath = null;
         this.uploadBdio = null;
         this.inspectorRepository = null;
+        this.cleanupInspectorContainer = null;
         this.cleanupInspectorImage = null;
         this.cleanupTargetImage = null;
         this.inspectorImageFamily = null;

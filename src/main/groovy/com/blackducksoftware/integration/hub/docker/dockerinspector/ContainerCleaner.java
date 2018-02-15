@@ -32,15 +32,17 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient
 
 public class ContainerCleaner implements Callable<String> {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final boolean stopContainer;
     private final boolean removeImage;
     private final DockerClientManager dockerClientManager;
     private final String imageId;
     private final String containerId;
 
-    public ContainerCleaner(final DockerClientManager dockerClientManager, final String imageId, final String containerId, final boolean removeImage) {
+    public ContainerCleaner(final DockerClientManager dockerClientManager, final String imageId, final String containerId, final boolean stopContainer, final boolean removeImage) {
         this.dockerClientManager = dockerClientManager;
         this.imageId = imageId;
         this.containerId = containerId;
+        this.stopContainer = stopContainer;
         this.removeImage = removeImage;
     }
 
@@ -48,10 +50,14 @@ public class ContainerCleaner implements Callable<String> {
     public String call() {
         String statusMessage = "Cleanup of container/image: Success";
         try {
-            logger.info(String.format("Cleaning up container %s / image %s", containerId, imageId));
-            dockerClientManager.stopRemoveContainer(containerId);
-            if (removeImage) {
-                dockerClientManager.removeImage(imageId);
+
+            if (stopContainer) {
+                logger.info(String.format("Stopping/removing container %s", containerId));
+                dockerClientManager.stopRemoveContainer(containerId);
+                if (removeImage) {
+                    logger.info(String.format("Removing image %s", imageId));
+                    dockerClientManager.removeImage(imageId);
+                }
             }
             logger.debug(statusMessage);
         } catch (final Throwable e) {

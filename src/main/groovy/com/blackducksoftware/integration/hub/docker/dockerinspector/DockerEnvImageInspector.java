@@ -403,7 +403,7 @@ public class DockerEnvImageInspector {
         final String containerId = dockerClientManager.run(runOnImageName, runOnImageTag, runOnImageId, dockerTarFile, true, config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag());
 
         // spin the inspector container/image cleanup off in it's own parallel thread
-        final ContainerCleaner containerCleaner = new ContainerCleaner(dockerClientManager, runOnImageId, containerId, config.isCleanupInspectorImage());
+        final ContainerCleaner containerCleaner = new ContainerCleaner(dockerClientManager, runOnImageId, containerId, config.isCleanupInspectorContainer(), config.isCleanupInspectorImage());
         final ExecutorService executor = Executors.newSingleThreadExecutor();
         final Future<String> containerCleanerFuture = executor.submit(containerCleaner);
         return containerCleanerFuture;
@@ -442,7 +442,6 @@ public class DockerEnvImageInspector {
         if (config.isOnHost()) {
             hubClient.testHubConnection();
         }
-        FileOperations.removeFileOrDir(programPaths.getHubDockerWorkingDirPath());
 
         logger.debug(String.format("Upload BDIO is set to %b", config.isUploadBdio()));
         FileOperations.purgeDir(config.getOutputPath());
