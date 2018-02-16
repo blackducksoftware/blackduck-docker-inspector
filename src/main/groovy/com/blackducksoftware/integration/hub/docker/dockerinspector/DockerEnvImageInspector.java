@@ -299,11 +299,7 @@ public class DockerEnvImageInspector {
     // TODO move this?
     private String uploadBdioFiles(final Config config) throws IntegrationException {
         String pathToDirContainingBdio = null;
-        if (StringUtils.isBlank(config.getBdioPath())) {
-            pathToDirContainingBdio = programPaths.getHubDockerOutputPath();
-        } else {
-            pathToDirContainingBdio = config.getBdioPath();
-        }
+        pathToDirContainingBdio = programPaths.getHubDockerOutputPath();
         logger.debug(String.format("Uploading BDIO files from %s", pathToDirContainingBdio));
         String bdioFilename = null;
         final List<File> bdioFiles = findBdioFiles(pathToDirContainingBdio);

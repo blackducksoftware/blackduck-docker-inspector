@@ -372,10 +372,6 @@ public class Config {
         return optionsByFieldName.get("outputPath").getResolvedValue();
     }
 
-    public String getBdioPath() {
-        return optionsByFieldName.get("bdioPath").getResolvedValue();
-    }
-
     public boolean isOutputIncludeDockertarfile() {
         return optionsByFieldName.get("outputIncludeDockertarfile").getResolvedValue().equals("true");
     }
