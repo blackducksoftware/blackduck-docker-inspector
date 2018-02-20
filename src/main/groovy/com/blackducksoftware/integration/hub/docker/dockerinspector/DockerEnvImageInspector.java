@@ -103,23 +103,18 @@ public class DockerEnvImageInspector {
     @Autowired
     private UsageFormatter usageFormatter;
 
-    private static int returnCode = -1;
-    private static boolean onHostStatic = true;
-
     public static void main(final String[] args) {
         new SpringApplicationBuilder(DockerEnvImageInspector.class).logStartupInfo(false).run(args);
-        if (onHostStatic) {
-            logger.info(String.format("Returning %d", returnCode));
-            System.exit(returnCode);
-        }
+        logger.warn("The program is not expected to get here.");
     }
 
     @PostConstruct
     public void inspectImage() {
+        int returnCode = -1;
         final DissectedImage dissectedImage = new DissectedImage();
         try {
             if (!initAndValidate(config)) {
-                return;
+                System.exit(0);
             }
             parseManifest(config, dissectedImage);
             extractLayers(config, dissectedImage);
@@ -127,7 +122,7 @@ public class DockerEnvImageInspector {
             uploadBdio(config, dissectedImage);
             provideDockerTar(config, dissectedImage.getDockerTarFile());
             provideOutput(config);
-            reportResults(config, dissectedImage);
+            returnCode = reportResults(config, dissectedImage);
             cleanUp(config, deferredCleanup);
         } catch (final Throwable e) {
             final String msg = String.format("Error inspecting image: %s", e.getMessage());
@@ -137,6 +132,8 @@ public class DockerEnvImageInspector {
             resultFile.write(new Gson(), programPaths.getHubDockerResultPath(), false, msg, dissectedImage.getTargetOs(), dissectedImage.getRunOnImageName(), dissectedImage.getRunOnImageTag(),
                     dissectedImage.getDockerTarFile() == null ? "" : dissectedImage.getDockerTarFile().getName(), dissectedImage.getBdioFilename());
         }
+        logger.info(String.format("Returning %d", returnCode));
+        System.exit(returnCode);
     }
 
     private void cleanUp(final Config config, final Future<String> deferredCleanup) {
@@ -155,12 +152,13 @@ public class DockerEnvImageInspector {
         }
     }
 
-    private void reportResults(final Config config, final DissectedImage dissectedImage) throws HubIntegrationException, IOException {
-        returnCode = reportResult(config, dissectedImage.getTargetOs(), dissectedImage.getRunOnImageName(), dissectedImage.getRunOnImageTag(), dissectedImage.getDockerTarFile() == null ? "" : dissectedImage.getDockerTarFile().getName(),
-                dissectedImage.getBdioFilename());
+    private int reportResults(final Config config, final DissectedImage dissectedImage) throws IOException, IntegrationException {
+        final int returnCode = reportResult(config, dissectedImage.getTargetOs(), dissectedImage.getRunOnImageName(), dissectedImage.getRunOnImageTag(),
+                dissectedImage.getDockerTarFile() == null ? "" : dissectedImage.getDockerTarFile().getName(), dissectedImage.getBdioFilename());
         if (config.isOnHost()) {
             copyResultToUserOutputDir();
         }
+        return returnCode;
     }
 
     private void provideOutput(final Config config) throws IOException {
@@ -176,7 +174,7 @@ public class DockerEnvImageInspector {
         }
     }
 
-    private Future<String> inspect(final Config config, final DissectedImage dissectedImage) throws IOException, HubIntegrationException, InterruptedException, CompressorException, IllegalAccessException {
+    private Future<String> inspect(final Config config, final DissectedImage dissectedImage) throws IOException, InterruptedException, CompressorException, IllegalAccessException, IntegrationException {
         Future<String> deferredCleanup = null;
         if (config.isOnHost()) {
             logger.info("Inspecting image in container");
@@ -200,7 +198,7 @@ public class DockerEnvImageInspector {
         return deferredCleanup;
     }
 
-    private void extractLayers(final Config config, final DissectedImage dissectedImage) throws IOException, HubIntegrationException {
+    private void extractLayers(final Config config, final DissectedImage dissectedImage) throws IOException, IntegrationException {
         dissectedImage.setTargetOs(imageInspector.detectOperatingSystem(config.getLinuxDistro()));
         if (dissectedImage.getTargetOs() == null) {
             dissectedImage.setTargetImageFileSystemRootDir(
@@ -328,7 +326,7 @@ public class DockerEnvImageInspector {
         }
     }
 
-    private int reportResult(final Config config, final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag, final String dockerTarfilename, final String bdioFilename) throws HubIntegrationException {
+    private int reportResult(final Config config, final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag, final String dockerTarfilename, final String bdioFilename) throws IntegrationException {
         final Gson gson = new Gson();
         if (config.isOnHost()) {
             final Result resultReportedFromContainer = resultFile.read(gson, programPaths.getHubDockerResultPath());
@@ -386,7 +384,7 @@ public class DockerEnvImageInspector {
     }
 
     private Future<String> inspectInSubContainer(final Config config, final File dockerTarFile, final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag)
-            throws InterruptedException, IOException, HubIntegrationException, IllegalArgumentException, IllegalAccessException {
+            throws InterruptedException, IOException, IllegalArgumentException, IllegalAccessException, IntegrationException {
         final String msg = String.format("Image inspection for %s will use docker image %s:%s", targetOs.toString(), runOnImageName, runOnImageTag);
         logger.info(msg);
         String runOnImageId = null;
@@ -418,7 +416,6 @@ public class DockerEnvImageInspector {
         logger.info(String.format("hub-docker-inspector %s", programVersion.getProgramVersion()));
         if (helpInvoked()) {
             showUsage();
-            returnCode = 0;
             return false;
         }
         logger.debug(String.format("running from dir: %s", System.getProperty("user.dir")));
@@ -428,7 +425,6 @@ public class DockerEnvImageInspector {
             logger.warn("dry.run is deprecated. Set upload.bdio=false instead");
             config.setUploadBdio(false);
         }
-        onHostStatic = config.isOnHost();
         if (config.isOnHost()) {
             hubClient.phoneHome(dockerClientManager.getDockerEngineVersion());
         }

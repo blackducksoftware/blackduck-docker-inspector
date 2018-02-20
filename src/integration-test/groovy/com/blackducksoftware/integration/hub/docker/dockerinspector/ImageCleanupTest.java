@@ -88,7 +88,7 @@ public class ImageCleanupTest {
         final String oldPath = System.getenv("PATH");
         final String newPath = String.format("/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:%s", oldPath);
         env.put("PATH", newPath);
-        final File outputFile = File.createTempFile("temp_cmd_output", Long.toString(System.nanoTime()));
+        final File outputFile = new File(String.format("test/temp_cmd_output_%s.txt", Long.toString(System.nanoTime())));
         outputFile.delete();
         pb.redirectErrorStream(true);
         pb.redirectOutput(outputFile);

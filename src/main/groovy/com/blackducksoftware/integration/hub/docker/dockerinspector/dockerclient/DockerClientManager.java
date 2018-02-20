@@ -37,6 +37,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient.HubPassword;
@@ -197,7 +198,7 @@ public class DockerClientManager {
     }
 
     public String run(final String runOnImageName, final String runOnTagName, final String runOnImageId, final File dockerTarFile, final boolean copyJar, final String targetImage, final String targetImageRepo, final String targetImageTag)
-            throws InterruptedException, IOException, HubIntegrationException, IllegalArgumentException, IllegalAccessException {
+            throws InterruptedException, IOException, IllegalArgumentException, IllegalAccessException, IntegrationException {
         final String hubPasswordString = hubPassword.get();
         final String imageNameTag = String.format("%s:%s", runOnImageName, runOnTagName);
         logger.info(String.format("Running container based on image %s", imageNameTag));
@@ -346,7 +347,7 @@ public class DockerClientManager {
     }
 
     // The docker api that does this corrupts the file, so we do it via a shell cmd
-    private void copyFileFromContainer(final String containerId, final String fromPath, final String toPath) throws HubIntegrationException, IOException, InterruptedException {
+    private void copyFileFromContainer(final String containerId, final String fromPath, final String toPath) throws IOException, InterruptedException, IntegrationException {
         logger.debug(String.format("Copying %s from container to %s via shell command", fromPath, toPath));
         final File toDir = new File(toPath);
         toDir.mkdirs();
