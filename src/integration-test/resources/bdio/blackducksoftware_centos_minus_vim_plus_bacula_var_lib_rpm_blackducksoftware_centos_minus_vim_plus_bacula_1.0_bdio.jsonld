@@ -2,7 +2,7 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "blackducksoftware_centos_minus_vim_plus_bacula_1.0_var_lib_rpm_RPM",
-    "@id": "uuid:e45407aa-cf78-4fb5-baf6-c150c9b13b74",
+    "@id": "uuid:748b174b-f33d-45c5-8ed2-58ee8c82622d",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -309,10 +309,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:fedora/systemd/219_42_el7_4_4/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:fedora/perl_threads_shared/1_43_6_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -381,10 +377,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:centos/systemd/219_42_el7_4_4/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:centos/expat/2_1_0_10_el7_3/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -394,6 +386,10 @@
       },
       {
         "related": "http:redhat/popt/1_13_16_el7/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:fedora/systemd_libs/219_42_el7_4_7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -529,10 +525,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:redhat/systemd_sysv/219_42_el7_4_4/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:fedora/perl_Date_Manip/6_41_2_el7/noarch",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -542,6 +534,10 @@
       },
       {
         "related": "http:centos/libdb/5_3_21_19_el7/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:centos/systemd_libs/219_42_el7_4_7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -681,10 +677,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:redhat/systemd/219_42_el7_4_4/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:redhat/perl_threads_shared/1_43_6_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -706,6 +698,10 @@
       },
       {
         "related": "http:fedora/perl_Socket/2_010_4_el7/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:fedora/systemd_sysv/219_42_el7_4_7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -757,15 +753,15 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:centos/systemd_sysv/219_42_el7_4_4/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:redhat/perl_Sys_MemInfo/0_91_7_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
         "related": "http:redhat/libselinux/2_5_6_el7/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:redhat/systemd_libs/219_42_el7_4_7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1385,6 +1381,10 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:fedora/systemd/219_42_el7_4_7/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:centos/yum_plugin_ovl/1_1_31_40_el7/noarch",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -1517,10 +1517,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:fedora/systemd_libs/219_42_el7_4_4/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:centos/ustr/1_0_4_16_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -1641,6 +1637,10 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:centos/systemd/219_42_el7_4_7/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:centos/libselinux/2_5_6_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -1689,15 +1689,15 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:redhat/systemd_sysv/219_42_el7_4_7/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:redhat/libidn/1_28_4_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
         "related": "http:redhat/libsepol/2_5_6_el7/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:centos/systemd_libs/219_42_el7_4_4/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1749,10 +1749,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:redhat/systemd_libs/219_42_el7_4_4/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:redhat/libgcrypt/1_5_3_13_el7_3_1/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -1790,10 +1786,6 @@
       },
       {
         "related": "http:fedora/chkconfig/1_7_2_1_el7/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:fedora/systemd_sysv/219_42_el7_4_4/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1857,6 +1849,10 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:redhat/systemd/219_42_el7_4_7/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:redhat/libuuid/2_23_2_33_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -1878,6 +1874,10 @@
       },
       {
         "related": "http:centos/python_kitchen/1_1_1_5_el7/noarch",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:centos/systemd_sysv/219_42_el7_4_7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -3691,26 +3691,6 @@
     "relationship": []
   },
   {
-    "name": "systemd",
-    "revision": "219-42.el7_4.4",
-    "@id": "http:fedora/systemd/219_42_el7_4_4/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "fedora",
-      "externalId": "systemd/219-42.el7_4.4/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "fedora",
-          "separator": "/"
-        },
-        "name": "systemd",
-        "version": "219-42.el7_4.4",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "perl-threads-shared",
     "revision": "1.43-6.el7",
     "@id": "http:fedora/perl_threads_shared/1_43_6_el7/x86_64",
@@ -4051,26 +4031,6 @@
     "relationship": []
   },
   {
-    "name": "systemd",
-    "revision": "219-42.el7_4.4",
-    "@id": "http:centos/systemd/219_42_el7_4_4/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "centos",
-      "externalId": "systemd/219-42.el7_4.4/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "centos",
-          "separator": "/"
-        },
-        "name": "systemd",
-        "version": "219-42.el7_4.4",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "expat",
     "revision": "2.1.0-10.el7_3",
     "@id": "http:centos/expat/2_1_0_10_el7_3/x86_64",
@@ -4125,6 +4085,26 @@
         },
         "name": "popt",
         "version": "1.13-16.el7",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "systemd-libs",
+    "revision": "219-42.el7_4.7",
+    "@id": "http:fedora/systemd_libs/219_42_el7_4_7/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "systemd-libs/219-42.el7_4.7/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "fedora",
+          "separator": "/"
+        },
+        "name": "systemd-libs",
+        "version": "219-42.el7_4.7",
         "architecture": "x86_64"
       }
     },
@@ -4791,26 +4771,6 @@
     "relationship": []
   },
   {
-    "name": "systemd-sysv",
-    "revision": "219-42.el7_4.4",
-    "@id": "http:redhat/systemd_sysv/219_42_el7_4_4/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "redhat",
-      "externalId": "systemd-sysv/219-42.el7_4.4/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "redhat",
-          "separator": "/"
-        },
-        "name": "systemd-sysv",
-        "version": "219-42.el7_4.4",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "perl-Date-Manip",
     "revision": "6.41-2.el7",
     "@id": "http:fedora/perl_Date_Manip/6_41_2_el7/noarch",
@@ -4865,6 +4825,26 @@
         },
         "name": "libdb",
         "version": "5.3.21-19.el7",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "systemd-libs",
+    "revision": "219-42.el7_4.7",
+    "@id": "http:centos/systemd_libs/219_42_el7_4_7/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "systemd-libs/219-42.el7_4.7/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "centos",
+          "separator": "/"
+        },
+        "name": "systemd-libs",
+        "version": "219-42.el7_4.7",
         "architecture": "x86_64"
       }
     },
@@ -5551,26 +5531,6 @@
     "relationship": []
   },
   {
-    "name": "systemd",
-    "revision": "219-42.el7_4.4",
-    "@id": "http:redhat/systemd/219_42_el7_4_4/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "redhat",
-      "externalId": "systemd/219-42.el7_4.4/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "redhat",
-          "separator": "/"
-        },
-        "name": "systemd",
-        "version": "219-42.el7_4.4",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "perl-threads-shared",
     "revision": "1.43-6.el7",
     "@id": "http:redhat/perl_threads_shared/1_43_6_el7/x86_64",
@@ -5685,6 +5645,26 @@
         },
         "name": "perl-Socket",
         "version": "2.010-4.el7",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "systemd-sysv",
+    "revision": "219-42.el7_4.7",
+    "@id": "http:fedora/systemd_sysv/219_42_el7_4_7/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "systemd-sysv/219-42.el7_4.7/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "fedora",
+          "separator": "/"
+        },
+        "name": "systemd-sysv",
+        "version": "219-42.el7_4.7",
         "architecture": "x86_64"
       }
     },
@@ -5931,26 +5911,6 @@
     "relationship": []
   },
   {
-    "name": "systemd-sysv",
-    "revision": "219-42.el7_4.4",
-    "@id": "http:centos/systemd_sysv/219_42_el7_4_4/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "centos",
-      "externalId": "systemd-sysv/219-42.el7_4.4/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "centos",
-          "separator": "/"
-        },
-        "name": "systemd-sysv",
-        "version": "219-42.el7_4.4",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "perl-Sys-MemInfo",
     "revision": "0.91-7.el7",
     "@id": "http:redhat/perl_Sys_MemInfo/0_91_7_el7/x86_64",
@@ -5985,6 +5945,26 @@
         },
         "name": "libselinux",
         "version": "2.5-6.el7",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "systemd-libs",
+    "revision": "219-42.el7_4.7",
+    "@id": "http:redhat/systemd_libs/219_42_el7_4_7/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "systemd-libs/219-42.el7_4.7/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "redhat",
+          "separator": "/"
+        },
+        "name": "systemd-libs",
+        "version": "219-42.el7_4.7",
         "architecture": "x86_64"
       }
     },
@@ -9071,6 +9051,26 @@
     "relationship": []
   },
   {
+    "name": "systemd",
+    "revision": "219-42.el7_4.7",
+    "@id": "http:fedora/systemd/219_42_el7_4_7/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "systemd/219-42.el7_4.7/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "fedora",
+          "separator": "/"
+        },
+        "name": "systemd",
+        "version": "219-42.el7_4.7",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "yum-plugin-ovl",
     "revision": "1.1.31-40.el7",
     "@id": "http:centos/yum_plugin_ovl/1_1_31_40_el7/noarch",
@@ -9731,26 +9731,6 @@
     "relationship": []
   },
   {
-    "name": "systemd-libs",
-    "revision": "219-42.el7_4.4",
-    "@id": "http:fedora/systemd_libs/219_42_el7_4_4/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "fedora",
-      "externalId": "systemd-libs/219-42.el7_4.4/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "fedora",
-          "separator": "/"
-        },
-        "name": "systemd-libs",
-        "version": "219-42.el7_4.4",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "ustr",
     "revision": "1.0.4-16.el7",
     "@id": "http:centos/ustr/1_0_4_16_el7/x86_64",
@@ -10351,6 +10331,26 @@
     "relationship": []
   },
   {
+    "name": "systemd",
+    "revision": "219-42.el7_4.7",
+    "@id": "http:centos/systemd/219_42_el7_4_7/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "systemd/219-42.el7_4.7/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "centos",
+          "separator": "/"
+        },
+        "name": "systemd",
+        "version": "219-42.el7_4.7",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "libselinux",
     "revision": "2.5-6.el7",
     "@id": "http:centos/libselinux/2_5_6_el7/x86_64",
@@ -10591,6 +10591,26 @@
     "relationship": []
   },
   {
+    "name": "systemd-sysv",
+    "revision": "219-42.el7_4.7",
+    "@id": "http:redhat/systemd_sysv/219_42_el7_4_7/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "systemd-sysv/219-42.el7_4.7/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "redhat",
+          "separator": "/"
+        },
+        "name": "systemd-sysv",
+        "version": "219-42.el7_4.7",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "libidn",
     "revision": "1.28-4.el7",
     "@id": "http:redhat/libidn/1_28_4_el7/x86_64",
@@ -10625,26 +10645,6 @@
         },
         "name": "libsepol",
         "version": "2.5-6.el7",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "systemd-libs",
-    "revision": "219-42.el7_4.4",
-    "@id": "http:centos/systemd_libs/219_42_el7_4_4/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "centos",
-      "externalId": "systemd-libs/219-42.el7_4.4/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "centos",
-          "separator": "/"
-        },
-        "name": "systemd-libs",
-        "version": "219-42.el7_4.4",
         "architecture": "x86_64"
       }
     },
@@ -10891,26 +10891,6 @@
     "relationship": []
   },
   {
-    "name": "systemd-libs",
-    "revision": "219-42.el7_4.4",
-    "@id": "http:redhat/systemd_libs/219_42_el7_4_4/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "redhat",
-      "externalId": "systemd-libs/219-42.el7_4.4/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "redhat",
-          "separator": "/"
-        },
-        "name": "systemd-libs",
-        "version": "219-42.el7_4.4",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "libgcrypt",
     "revision": "1.5.3-13.el7_3.1",
     "@id": "http:redhat/libgcrypt/1_5_3_13_el7_3_1/x86_64",
@@ -11105,26 +11085,6 @@
         },
         "name": "chkconfig",
         "version": "1.7.2-1.el7",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "systemd-sysv",
-    "revision": "219-42.el7_4.4",
-    "@id": "http:fedora/systemd_sysv/219_42_el7_4_4/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "fedora",
-      "externalId": "systemd-sysv/219-42.el7_4.4/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "fedora",
-          "separator": "/"
-        },
-        "name": "systemd-sysv",
-        "version": "219-42.el7_4.4",
         "architecture": "x86_64"
       }
     },
@@ -11431,6 +11391,26 @@
     "relationship": []
   },
   {
+    "name": "systemd",
+    "revision": "219-42.el7_4.7",
+    "@id": "http:redhat/systemd/219_42_el7_4_7/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "systemd/219-42.el7_4.7/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "redhat",
+          "separator": "/"
+        },
+        "name": "systemd",
+        "version": "219-42.el7_4.7",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "libuuid",
     "revision": "2.23.2-33.el7",
     "@id": "http:redhat/libuuid/2_23_2_33_el7/x86_64",
@@ -11546,6 +11526,26 @@
         "name": "python-kitchen",
         "version": "1.1.1-5.el7",
         "architecture": "noarch"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "systemd-sysv",
+    "revision": "219-42.el7_4.7",
+    "@id": "http:centos/systemd_sysv/219_42_el7_4_7/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "systemd-sysv/219-42.el7_4.7/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "centos",
+          "separator": "/"
+        },
+        "name": "systemd-sysv",
+        "version": "219-42.el7_4.7",
+        "architecture": "x86_64"
       }
     },
     "relationship": []

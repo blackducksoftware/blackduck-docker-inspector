@@ -2,7 +2,7 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "blackducksoftware_whiteouttest_1.0_var_lib_dpkg_DPKG",
-    "@id": "uuid:272e28af-c664-4a52-871c-6b66fef9eaac",
+    "@id": "uuid:ff8f0d9e-2793-4b7d-a63e-4df08bc0209d",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -45,7 +45,7 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/libtasn1_6/4_7_3ubuntu0_16_04_2/amd64",
+        "related": "http:debian/libtasn1_6/4_7_3ubuntu0_16_04_3/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -281,7 +281,7 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/libc6/2_23_0ubuntu9/amd64",
+        "related": "http:debian/libc_bin/2_23_0ubuntu10/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -318,6 +318,10 @@
       },
       {
         "related": "http:debian/libncurses5/6_0_20160213_1ubuntu1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:ubuntu/libc6/2_23_0ubuntu10/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -365,6 +369,10 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:ubuntu/multiarch_support/2_23_0ubuntu10/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:ubuntu/ca_certificates/20170717_16_04_1/all",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -406,6 +414,10 @@
       },
       {
         "related": "http:debian/libsmartcols1/2_27_1_6ubuntu3_3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:ubuntu/libc_bin/2_23_0ubuntu10/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -521,10 +533,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/libc6/2_23_0ubuntu9/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:debian/dpkg/1_18_4ubuntu1_3/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -566,6 +574,10 @@
       },
       {
         "related": "http:ubuntu/libhogweed4/3_2_1ubuntu0_16_04_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:debian/libc6/2_23_0ubuntu10/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -625,15 +637,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/multiarch_support/2_23_0ubuntu9/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:debian/base_passwd/3_5_39/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/libcurl3_gnutls/7_47_0_1ubuntu2_5/amd64",
+        "related": "http:debian/libcurl3_gnutls/7_47_0_1ubuntu2_6/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -650,10 +658,6 @@
       },
       {
         "related": "http:ubuntu/libkmod2/22_1ubuntu5/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:debian/libc_bin/2_23_0ubuntu9/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -710,6 +714,10 @@
       },
       {
         "related": "http:debian/procps/2_3_3_10_4ubuntu2_3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:debian/multiarch_support/2_23_0ubuntu10/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -821,6 +829,10 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:ubuntu/libtasn1_6/4_7_3ubuntu0_16_04_3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:debian/passwd/1_4_2_3_1ubuntu5_3/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -834,10 +846,6 @@
       },
       {
         "related": "http:ubuntu/init/1_29ubuntu4/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:ubuntu/libtasn1_6/4_7_3ubuntu0_16_04_2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -902,10 +910,6 @@
       },
       {
         "related": "http:debian/librtmp1/2_4_20151223_gitfa8646d_1ubuntu0_1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:ubuntu/libc_bin/2_23_0ubuntu9/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1017,15 +1021,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:ubuntu/libcurl3_gnutls/7_47_0_1ubuntu2_6/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:debian/base_files/9_4ubuntu4_5/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:ubuntu/multiarch_support/2_23_0ubuntu9/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:ubuntu/libcurl3_gnutls/7_47_0_1ubuntu2_5/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1160,19 +1160,19 @@
   },
   {
     "name": "libtasn1-6",
-    "revision": "4.7-3ubuntu0.16.04.2",
-    "@id": "http:debian/libtasn1_6/4_7_3ubuntu0_16_04_2/amd64",
+    "revision": "4.7-3ubuntu0.16.04.3",
+    "@id": "http:debian/libtasn1_6/4_7_3ubuntu0_16_04_3/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "libtasn1-6/4.7-3ubuntu0.16.04.2/amd64",
+      "externalId": "libtasn1-6/4.7-3ubuntu0.16.04.3/amd64",
       "externalIdMetaData": {
         "forge": {
           "name": "debian",
           "separator": "/"
         },
         "name": "libtasn1-6",
-        "version": "4.7-3ubuntu0.16.04.2",
+        "version": "4.7-3ubuntu0.16.04.3",
         "architecture": "amd64"
       }
     },
@@ -2339,20 +2339,20 @@
     "relationship": []
   },
   {
-    "name": "libc6",
-    "revision": "2.23-0ubuntu9",
-    "@id": "http:debian/libc6/2_23_0ubuntu9/amd64",
+    "name": "libc-bin",
+    "revision": "2.23-0ubuntu10",
+    "@id": "http:debian/libc_bin/2_23_0ubuntu10/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "libc6/2.23-0ubuntu9/amd64",
+      "externalId": "libc-bin/2.23-0ubuntu10/amd64",
       "externalIdMetaData": {
         "forge": {
           "name": "debian",
           "separator": "/"
         },
-        "name": "libc6",
-        "version": "2.23-0ubuntu9",
+        "name": "libc-bin",
+        "version": "2.23-0ubuntu10",
         "architecture": "amd64"
       }
     },
@@ -2533,6 +2533,26 @@
         },
         "name": "libncurses5",
         "version": "6.0+20160213-1ubuntu1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libc6",
+    "revision": "2.23-0ubuntu10",
+    "@id": "http:ubuntu/libc6/2_23_0ubuntu10/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libc6/2.23-0ubuntu10/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/"
+        },
+        "name": "libc6",
+        "version": "2.23-0ubuntu10",
         "architecture": "amd64"
       }
     },
@@ -2759,6 +2779,26 @@
     "relationship": []
   },
   {
+    "name": "multiarch-support",
+    "revision": "2.23-0ubuntu10",
+    "@id": "http:ubuntu/multiarch_support/2_23_0ubuntu10/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "multiarch-support/2.23-0ubuntu10/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/"
+        },
+        "name": "multiarch-support",
+        "version": "2.23-0ubuntu10",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "ca-certificates",
     "revision": "20170717~16.04.1",
     "@id": "http:ubuntu/ca_certificates/20170717_16_04_1/all",
@@ -2973,6 +3013,26 @@
         },
         "name": "libsmartcols1",
         "version": "2.27.1-6ubuntu3.3",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libc-bin",
+    "revision": "2.23-0ubuntu10",
+    "@id": "http:ubuntu/libc_bin/2_23_0ubuntu10/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libc-bin/2.23-0ubuntu10/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/"
+        },
+        "name": "libc-bin",
+        "version": "2.23-0ubuntu10",
         "architecture": "amd64"
       }
     },
@@ -3539,26 +3599,6 @@
     "relationship": []
   },
   {
-    "name": "libc6",
-    "revision": "2.23-0ubuntu9",
-    "@id": "http:ubuntu/libc6/2_23_0ubuntu9/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libc6/2.23-0ubuntu9/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "ubuntu",
-          "separator": "/"
-        },
-        "name": "libc6",
-        "version": "2.23-0ubuntu9",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "dpkg",
     "revision": "1.18.4ubuntu1.3",
     "@id": "http:debian/dpkg/1_18_4ubuntu1_3/amd64",
@@ -3773,6 +3813,26 @@
         },
         "name": "libhogweed4",
         "version": "3.2-1ubuntu0.16.04.1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libc6",
+    "revision": "2.23-0ubuntu10",
+    "@id": "http:debian/libc6/2_23_0ubuntu10/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libc6/2.23-0ubuntu10/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "debian",
+          "separator": "/"
+        },
+        "name": "libc6",
+        "version": "2.23-0ubuntu10",
         "architecture": "amd64"
       }
     },
@@ -4059,26 +4119,6 @@
     "relationship": []
   },
   {
-    "name": "multiarch-support",
-    "revision": "2.23-0ubuntu9",
-    "@id": "http:debian/multiarch_support/2_23_0ubuntu9/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "multiarch-support/2.23-0ubuntu9/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "debian",
-          "separator": "/"
-        },
-        "name": "multiarch-support",
-        "version": "2.23-0ubuntu9",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "base-passwd",
     "revision": "3.5.39",
     "@id": "http:debian/base_passwd/3_5_39/amd64",
@@ -4100,19 +4140,19 @@
   },
   {
     "name": "libcurl3-gnutls",
-    "revision": "7.47.0-1ubuntu2.5",
-    "@id": "http:debian/libcurl3_gnutls/7_47_0_1ubuntu2_5/amd64",
+    "revision": "7.47.0-1ubuntu2.6",
+    "@id": "http:debian/libcurl3_gnutls/7_47_0_1ubuntu2_6/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "libcurl3-gnutls/7.47.0-1ubuntu2.5/amd64",
+      "externalId": "libcurl3-gnutls/7.47.0-1ubuntu2.6/amd64",
       "externalIdMetaData": {
         "forge": {
           "name": "debian",
           "separator": "/"
         },
         "name": "libcurl3-gnutls",
-        "version": "7.47.0-1ubuntu2.5",
+        "version": "7.47.0-1ubuntu2.6",
         "architecture": "amd64"
       }
     },
@@ -4193,26 +4233,6 @@
         },
         "name": "libkmod2",
         "version": "22-1ubuntu5",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libc-bin",
-    "revision": "2.23-0ubuntu9",
-    "@id": "http:debian/libc_bin/2_23_0ubuntu9/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libc-bin/2.23-0ubuntu9/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "debian",
-          "separator": "/"
-        },
-        "name": "libc-bin",
-        "version": "2.23-0ubuntu9",
         "architecture": "amd64"
       }
     },
@@ -4493,6 +4513,26 @@
         },
         "name": "procps",
         "version": "2:3.3.10-4ubuntu2.3",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "multiarch-support",
+    "revision": "2.23-0ubuntu10",
+    "@id": "http:debian/multiarch_support/2_23_0ubuntu10/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "multiarch-support/2.23-0ubuntu10/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "debian",
+          "separator": "/"
+        },
+        "name": "multiarch-support",
+        "version": "2.23-0ubuntu10",
         "architecture": "amd64"
       }
     },
@@ -5039,6 +5079,26 @@
     "relationship": []
   },
   {
+    "name": "libtasn1-6",
+    "revision": "4.7-3ubuntu0.16.04.3",
+    "@id": "http:ubuntu/libtasn1_6/4_7_3ubuntu0_16_04_3/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libtasn1-6/4.7-3ubuntu0.16.04.3/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/"
+        },
+        "name": "libtasn1-6",
+        "version": "4.7-3ubuntu0.16.04.3",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "passwd",
     "revision": "1:4.2-3.1ubuntu5.3",
     "@id": "http:debian/passwd/1_4_2_3_1ubuntu5_3/amd64",
@@ -5113,26 +5173,6 @@
         },
         "name": "init",
         "version": "1.29ubuntu4",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libtasn1-6",
-    "revision": "4.7-3ubuntu0.16.04.2",
-    "@id": "http:ubuntu/libtasn1_6/4_7_3ubuntu0_16_04_2/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libtasn1-6/4.7-3ubuntu0.16.04.2/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "ubuntu",
-          "separator": "/"
-        },
-        "name": "libtasn1-6",
-        "version": "4.7-3ubuntu0.16.04.2",
         "architecture": "amd64"
       }
     },
@@ -5453,26 +5493,6 @@
         },
         "name": "librtmp1",
         "version": "2.4+20151223.gitfa8646d-1ubuntu0.1",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libc-bin",
-    "revision": "2.23-0ubuntu9",
-    "@id": "http:ubuntu/libc_bin/2_23_0ubuntu9/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libc-bin/2.23-0ubuntu9/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "ubuntu",
-          "separator": "/"
-        },
-        "name": "libc-bin",
-        "version": "2.23-0ubuntu9",
         "architecture": "amd64"
       }
     },
@@ -6019,6 +6039,26 @@
     "relationship": []
   },
   {
+    "name": "libcurl3-gnutls",
+    "revision": "7.47.0-1ubuntu2.6",
+    "@id": "http:ubuntu/libcurl3_gnutls/7_47_0_1ubuntu2_6/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libcurl3-gnutls/7.47.0-1ubuntu2.6/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/"
+        },
+        "name": "libcurl3-gnutls",
+        "version": "7.47.0-1ubuntu2.6",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "base-files",
     "revision": "9.4ubuntu4.5",
     "@id": "http:debian/base_files/9_4ubuntu4_5/amd64",
@@ -6033,46 +6073,6 @@
         },
         "name": "base-files",
         "version": "9.4ubuntu4.5",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "multiarch-support",
-    "revision": "2.23-0ubuntu9",
-    "@id": "http:ubuntu/multiarch_support/2_23_0ubuntu9/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "multiarch-support/2.23-0ubuntu9/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "ubuntu",
-          "separator": "/"
-        },
-        "name": "multiarch-support",
-        "version": "2.23-0ubuntu9",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libcurl3-gnutls",
-    "revision": "7.47.0-1ubuntu2.5",
-    "@id": "http:ubuntu/libcurl3_gnutls/7_47_0_1ubuntu2_5/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libcurl3-gnutls/7.47.0-1ubuntu2.5/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "ubuntu",
-          "separator": "/"
-        },
-        "name": "libcurl3-gnutls",
-        "version": "7.47.0-1ubuntu2.5",
         "architecture": "amd64"
       }
     },
