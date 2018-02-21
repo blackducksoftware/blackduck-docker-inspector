@@ -356,12 +356,24 @@ public class DockerEnvImageInspector {
     }
 
     private void clearResult() {
+        if (config.isOnHost()) {
+            // don't delete user's stuff
+            return;
+        }
         try {
             final File outputFile = new File(programPaths.getHubDockerResultPath());
             outputFile.delete();
         } catch (final Exception e) {
             logger.warn(String.format("Error clearing result file: %s", e.getMessage()));
         }
+    }
+
+    private void clearOutput(final Config config) {
+        if (config.isOnHost()) {
+            // don't delete user's stuff
+            return;
+        }
+        FileOperations.purgeDir(config.getOutputPath());
     }
 
     private void provideDockerTar(final Config config, final File dockerTarFile) throws IOException {
@@ -444,10 +456,7 @@ public class DockerEnvImageInspector {
         }
         imageInspector.init(programPaths.getHubDockerWorkingDirPath(), programPaths.getHubDockerOutputPath(), config.getHubCodelocationPrefix());
         FileOperations.removeFileOrDir(programPaths.getHubDockerWorkingDirPath());
-
-        logger.debug(String.format("Upload BDIO is set to %b", config.isUploadBdio()));
-        FileOperations.purgeDir(config.getOutputPath());
-
+        clearOutput(config);
         return true;
     }
 
