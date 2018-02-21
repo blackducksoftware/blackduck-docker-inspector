@@ -39,23 +39,24 @@ import org.springframework.stereotype.Component;
 import com.blackducksoftware.integration.exception.EncryptionException;
 import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.Credentials;
-import com.blackducksoftware.integration.hub.api.bom.BomImportService;
-import com.blackducksoftware.integration.hub.builder.HubServerConfigBuilder;
-import com.blackducksoftware.integration.hub.dataservice.phonehome.PhoneHomeDataService;
+import com.blackducksoftware.integration.hub.configuration.HubServerConfig;
+import com.blackducksoftware.integration.hub.configuration.HubServerConfigBuilder;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.ProgramVersion;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
-import com.blackducksoftware.integration.hub.global.HubServerConfig;
 import com.blackducksoftware.integration.hub.proxy.ProxyInfo;
 import com.blackducksoftware.integration.hub.rest.CredentialsRestConnection;
+import com.blackducksoftware.integration.hub.service.CodeLocationService;
 import com.blackducksoftware.integration.hub.service.HubServicesFactory;
+import com.blackducksoftware.integration.hub.service.PhoneHomeService;
 import com.blackducksoftware.integration.log.IntLogger;
 import com.blackducksoftware.integration.log.Slf4jIntLogger;
 import com.blackducksoftware.integration.phonehome.PhoneHomeClient;
 import com.blackducksoftware.integration.phonehome.PhoneHomeRequestBody;
 import com.blackducksoftware.integration.phonehome.PhoneHomeRequestBodyBuilder;
 import com.blackducksoftware.integration.phonehome.enums.BlackDuckName;
+import com.blackducksoftware.integration.util.CIEnvironmentVariables;
 
 @Component
 public class HubClient {
@@ -105,7 +106,7 @@ public class HubClient {
         final HubServerConfig hubServerConfig = createBuilder().build();
         final CredentialsRestConnection credentialsRestConnection = hubServerConfig.createCredentialsRestConnection(new Slf4jIntLogger(logger));
         final HubServicesFactory hubServicesFactory = new HubServicesFactory(credentialsRestConnection);
-        final BomImportService bomImportRequestService = hubServicesFactory.createBomImportService();
+        final CodeLocationService bomImportRequestService = hubServicesFactory.createCodeLocationService();
         bomImportRequestService.importBomFile(bdioFile);
         logger.info(String.format("Uploaded bdio file %s to %s", bdioFile.getName(), hubServerConfig.getHubUrl()));
     }
@@ -131,7 +132,8 @@ public class HubClient {
     private void phoneHomeNoHubConnection(final String dockerEngineVersion) {
         try {
             final IntLogger intLogger = new Slf4jIntLogger(logger);
-            final ProxyInfo proxyInfo = new ProxyInfo(config.getHubProxyHost(), Integer.parseInt(config.getHubProxyPort()), new Credentials(config.getHubProxyUsername(), config.getHubProxyPassword()), null);
+            // TODO add support for NTLM
+            final ProxyInfo proxyInfo = new ProxyInfo(config.getHubProxyHost(), Integer.parseInt(config.getHubProxyPort()), new Credentials(config.getHubProxyUsername(), config.getHubProxyPassword()), null, null, null);
             final boolean alwaysTrustServerCertificate = config.isHubAlwaysTrustCert();
             final PhoneHomeClient phClient = new PhoneHomeClient(intLogger, 15, proxyInfo, alwaysTrustServerCertificate);
             final Map<String, String> infoMap = new HashMap<>();
@@ -148,7 +150,7 @@ public class HubClient {
                 infoMap.put(PHONE_HOME_METADATA_NAME_CALLER_VERSION, config.getCallerVersion());
             }
             final PhoneHomeRequestBody phoneHomeRequestBody = new PhoneHomeRequestBody("None", "Integrations", infoMap);
-            phClient.postPhoneHomeRequest(phoneHomeRequestBody);
+            phClient.postPhoneHomeRequest(phoneHomeRequestBody, new CIEnvironmentVariables());
 
         } catch (final Throwable t) {
             logger.debug(String.format("Unable to phone home: %s", t.getMessage()));
@@ -159,7 +161,7 @@ public class HubClient {
         final HubServerConfig hubServerConfig = createBuilder().build();
         final CredentialsRestConnection restConnection = hubServerConfig.createCredentialsRestConnection(new Slf4jIntLogger(logger));
         final HubServicesFactory hubServicesFactory = new HubServicesFactory(restConnection);
-        final PhoneHomeDataService phoner = hubServicesFactory.createPhoneHomeDataService();
+        final PhoneHomeService phoner = hubServicesFactory.createPhoneHomeService();
         final PhoneHomeRequestBodyBuilder phoneHomeRequestBodyBuilder = phoner.createInitialPhoneHomeRequestBodyBuilder(THIRD_PARTY_NAME_DOCKER, dockerEngineVersion, programVersion.getProgramVersion());
         phoneHomeRequestBodyBuilder.setBlackDuckName(BlackDuckName.HUB);
         if (!StringUtils.isBlank(config.getCallerName())) {
