@@ -25,7 +25,6 @@ package com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -39,7 +38,8 @@ import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.exception.EncryptionException;
 import com.blackducksoftware.integration.exception.IntegrationException;
-import com.blackducksoftware.integration.hub.api.bom.BomImportRequestService;
+import com.blackducksoftware.integration.hub.Credentials;
+import com.blackducksoftware.integration.hub.api.bom.BomImportService;
 import com.blackducksoftware.integration.hub.builder.HubServerConfigBuilder;
 import com.blackducksoftware.integration.hub.dataservice.phonehome.PhoneHomeDataService;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.ProgramVersion;
@@ -47,8 +47,8 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Confi
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.blackducksoftware.integration.hub.global.HubServerConfig;
+import com.blackducksoftware.integration.hub.proxy.ProxyInfo;
 import com.blackducksoftware.integration.hub.rest.CredentialsRestConnection;
-import com.blackducksoftware.integration.hub.rest.UnauthenticatedRestConnection;
 import com.blackducksoftware.integration.hub.service.HubServicesFactory;
 import com.blackducksoftware.integration.log.IntLogger;
 import com.blackducksoftware.integration.log.Slf4jIntLogger;
@@ -105,7 +105,7 @@ public class HubClient {
         final HubServerConfig hubServerConfig = createBuilder().build();
         final CredentialsRestConnection credentialsRestConnection = hubServerConfig.createCredentialsRestConnection(new Slf4jIntLogger(logger));
         final HubServicesFactory hubServicesFactory = new HubServicesFactory(credentialsRestConnection);
-        final BomImportRequestService bomImportRequestService = hubServicesFactory.createBomImportRequestService();
+        final BomImportService bomImportRequestService = hubServicesFactory.createBomImportService();
         bomImportRequestService.importBomFile(bdioFile);
         logger.info(String.format("Uploaded bdio file %s to %s", bdioFile.getName(), hubServerConfig.getHubUrl()));
     }
@@ -131,8 +131,9 @@ public class HubClient {
     private void phoneHomeNoHubConnection(final String dockerEngineVersion) {
         try {
             final IntLogger intLogger = new Slf4jIntLogger(logger);
-            final UnauthenticatedRestConnection restConnection = new UnauthenticatedRestConnection(intLogger, new URL("http://www.google.com"), 15);
-            final PhoneHomeClient phClient = new PhoneHomeClient(intLogger, restConnection);
+            final ProxyInfo proxyInfo = new ProxyInfo(config.getHubProxyHost(), Integer.parseInt(config.getHubProxyPort()), new Credentials(config.getHubProxyUsername(), config.getHubProxyPassword()), null);
+            final boolean alwaysTrustServerCertificate = config.isHubAlwaysTrustCert();
+            final PhoneHomeClient phClient = new PhoneHomeClient(intLogger, 15, proxyInfo, alwaysTrustServerCertificate);
             final Map<String, String> infoMap = new HashMap<>();
             infoMap.put("blackDuckName", BlackDuckName.HUB.getName());
             infoMap.put("blackDuckVersion", "None");
