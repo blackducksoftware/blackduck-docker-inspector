@@ -176,7 +176,6 @@ public class HubClient {
     }
 
     private HubServerConfigBuilder createBuilder() {
-        final String hubPasswordString = hubPassword.get();
         String hubProxyHost = config.getHubProxyHost();
         String hubProxyPort = config.getHubProxyPort();
         String hubProxyUsername = config.getHubProxyUsername();
@@ -196,19 +195,20 @@ public class HubClient {
                 }
             }
         }
-
         final HubServerConfigBuilder hubServerConfigBuilder = new HubServerConfigBuilder();
         hubServerConfigBuilder.setHubUrl(config.getHubUrl());
-        hubServerConfigBuilder.setUsername(getHubUsername());
-        hubServerConfigBuilder.setPassword(hubPasswordString);
-
+        if (StringUtils.isNotBlank(config.getHubApiToken())) {
+            hubServerConfigBuilder.setApiToken(config.getHubApiToken());
+        } else {
+            hubServerConfigBuilder.setUsername(getHubUsername());
+            hubServerConfigBuilder.setPassword(hubPassword.get());
+        }
         hubServerConfigBuilder.setTimeout(config.getHubTimeout());
         hubServerConfigBuilder.setProxyHost(hubProxyHost);
         hubServerConfigBuilder.setProxyPort(hubProxyPort);
         hubServerConfigBuilder.setProxyUsername(hubProxyUsername);
         hubServerConfigBuilder.setProxyPassword(hubProxyPassword);
         hubServerConfigBuilder.setAlwaysTrustServerCertificate(config.isHubAlwaysTrustCert());
-
         return hubServerConfigBuilder;
     }
 
