@@ -39,14 +39,13 @@ import org.springframework.stereotype.Component;
 import com.blackducksoftware.integration.exception.EncryptionException;
 import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.Credentials;
-import com.blackducksoftware.integration.hub.configuration.HubServerConfig;
 import com.blackducksoftware.integration.hub.configuration.HubServerConfigBuilder;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.ProgramVersion;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.blackducksoftware.integration.hub.proxy.ProxyInfo;
-import com.blackducksoftware.integration.hub.rest.CredentialsRestConnection;
+import com.blackducksoftware.integration.hub.rest.RestConnection;
 import com.blackducksoftware.integration.hub.service.CodeLocationService;
 import com.blackducksoftware.integration.hub.service.HubServicesFactory;
 import com.blackducksoftware.integration.hub.service.PhoneHomeService;
@@ -81,7 +80,7 @@ public class HubClient {
     private ProgramPaths programPaths;
 
     public boolean isValid() {
-        return createBuilder().isValid();
+        return createHubServerConfigBuilder().isValid();
     }
 
     public void testHubConnection() throws HubIntegrationException {
@@ -90,11 +89,10 @@ public class HubClient {
             logger.debug("Upload of BDIO not enabled; skipping verification of Hub connection");
             return;
         }
-        final HubServerConfig hubServerConfig = createBuilder().build();
-        final CredentialsRestConnection credentialsRestConnection;
+        RestConnection restConnection;
         try {
-            credentialsRestConnection = hubServerConfig.createCredentialsRestConnection(new Slf4jIntLogger(logger));
-            credentialsRestConnection.connect();
+            restConnection = createRestConnection();
+            restConnection.connect();
         } catch (final IntegrationException e) {
             final String msg = String.format("Error connecting to Hub: %s", e.getMessage());
             throw new HubIntegrationException(msg);
@@ -103,12 +101,11 @@ public class HubClient {
     }
 
     public void uploadBdioToHub(final File bdioFile) throws IntegrationException {
-        final HubServerConfig hubServerConfig = createBuilder().build();
-        final CredentialsRestConnection credentialsRestConnection = hubServerConfig.createCredentialsRestConnection(new Slf4jIntLogger(logger));
-        final HubServicesFactory hubServicesFactory = new HubServicesFactory(credentialsRestConnection);
+        final RestConnection restConnection = createRestConnection();
+        final HubServicesFactory hubServicesFactory = new HubServicesFactory(restConnection);
         final CodeLocationService bomImportRequestService = hubServicesFactory.createCodeLocationService();
         bomImportRequestService.importBomFile(bdioFile);
-        logger.info(String.format("Uploaded bdio file %s to %s", bdioFile.getName(), hubServerConfig.getHubUrl()));
+        logger.info(String.format("Uploaded bdio file %s to %s", bdioFile.getName(), config.getHubUrl()));
     }
 
     private String getHubUsername() {
@@ -158,8 +155,7 @@ public class HubClient {
     }
 
     private void phoneHomeHubConnection(final String dockerEngineVersion) throws IOException, EncryptionException {
-        final HubServerConfig hubServerConfig = createBuilder().build();
-        final CredentialsRestConnection restConnection = hubServerConfig.createCredentialsRestConnection(new Slf4jIntLogger(logger));
+        final RestConnection restConnection = createRestConnection();
         final HubServicesFactory hubServicesFactory = new HubServicesFactory(restConnection);
         final PhoneHomeService phoner = hubServicesFactory.createPhoneHomeService();
         final PhoneHomeRequestBodyBuilder phoneHomeRequestBodyBuilder = phoner.createInitialPhoneHomeRequestBodyBuilder(THIRD_PARTY_NAME_DOCKER, dockerEngineVersion, programVersion.getProgramVersion());
@@ -175,7 +171,18 @@ public class HubClient {
         logger.trace("Attempt to phone home completed");
     }
 
-    private HubServerConfigBuilder createBuilder() {
+    private RestConnection createRestConnection() throws EncryptionException, IllegalStateException {
+        final HubServerConfigBuilder hubServerConfigBuilder = createHubServerConfigBuilder();
+        RestConnection restConnection;
+        if (StringUtils.isNotBlank(config.getHubApiToken())) {
+            restConnection = hubServerConfigBuilder.build().createApiTokenRestConnection(new Slf4jIntLogger(logger));
+        } else {
+            restConnection = hubServerConfigBuilder.build().createCredentialsRestConnection(new Slf4jIntLogger(logger));
+        }
+        return restConnection;
+    }
+
+    private HubServerConfigBuilder createHubServerConfigBuilder() {
         String hubProxyHost = config.getHubProxyHost();
         String hubProxyPort = config.getHubProxyPort();
         String hubProxyUsername = config.getHubProxyUsername();
@@ -197,12 +204,9 @@ public class HubClient {
         }
         final HubServerConfigBuilder hubServerConfigBuilder = new HubServerConfigBuilder();
         hubServerConfigBuilder.setHubUrl(config.getHubUrl());
-        if (StringUtils.isNotBlank(config.getHubApiToken())) {
-            hubServerConfigBuilder.setApiToken(config.getHubApiToken());
-        } else {
-            hubServerConfigBuilder.setUsername(getHubUsername());
-            hubServerConfigBuilder.setPassword(hubPassword.get());
-        }
+        hubServerConfigBuilder.setApiToken(config.getHubApiToken());
+        hubServerConfigBuilder.setUsername(getHubUsername());
+        hubServerConfigBuilder.setPassword(hubPassword.get());
         hubServerConfigBuilder.setTimeout(config.getHubTimeout());
         hubServerConfigBuilder.setProxyHost(hubProxyHost);
         hubServerConfigBuilder.setProxyPort(hubProxyPort);
