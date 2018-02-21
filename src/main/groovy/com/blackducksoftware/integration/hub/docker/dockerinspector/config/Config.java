@@ -55,6 +55,10 @@ public class Config {
     @Value("${hub.timeout:120}")
     private Integer hubTimeout = 120;
 
+    @ValueDescription(description = "Hub token", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${hub.api.token:}")
+    private String hubApiToken = "";
+
     @ValueDescription(description = "Hub Username", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${hub.username:}")
     private String hubUsername = "";
@@ -308,6 +312,10 @@ public class Config {
         return new Integer(optionsByFieldName.get("hubTimeout").getResolvedValue());
     }
 
+    public String getHubApiToken() {
+        return optionsByFieldName.get("hubApiToken").getResolvedValue();
+    }
+
     public String getHubUsername() {
         return optionsByFieldName.get("hubUsername").getResolvedValue();
     }
@@ -510,6 +518,7 @@ public class Config {
         this.hubTimeout = null;
         this.hubUrl = null;
         this.hubUsername = null;
+        this.hubApiToken = null;
         this.jarPath = null;
         this.linuxDistro = null;
         this.loggingLevel = null;
