@@ -71,7 +71,7 @@ public class HubClient {
     private Config config;
 
     @Autowired
-    private HubPassword hubPassword;
+    private HubSecrets hubSecrets;
 
     @Autowired
     private ProgramVersion programVersion;
@@ -173,13 +173,7 @@ public class HubClient {
 
     private RestConnection createRestConnection() throws EncryptionException, IllegalStateException {
         final HubServerConfigBuilder hubServerConfigBuilder = createHubServerConfigBuilder();
-        RestConnection restConnection;
-        if (StringUtils.isNotBlank(config.getHubApiToken())) {
-            restConnection = hubServerConfigBuilder.build().createApiTokenRestConnection(new Slf4jIntLogger(logger));
-        } else {
-            restConnection = hubServerConfigBuilder.build().createCredentialsRestConnection(new Slf4jIntLogger(logger));
-        }
-        return restConnection;
+        return hubServerConfigBuilder.build().createRestConnection(new Slf4jIntLogger(logger));
     }
 
     private HubServerConfigBuilder createHubServerConfigBuilder() {
@@ -204,9 +198,9 @@ public class HubClient {
         }
         final HubServerConfigBuilder hubServerConfigBuilder = new HubServerConfigBuilder();
         hubServerConfigBuilder.setHubUrl(config.getHubUrl());
-        hubServerConfigBuilder.setApiToken(config.getHubApiToken());
+        hubServerConfigBuilder.setApiToken(hubSecrets.getApiToken());
         hubServerConfigBuilder.setUsername(getHubUsername());
-        hubServerConfigBuilder.setPassword(hubPassword.get());
+        hubServerConfigBuilder.setPassword(hubSecrets.getPassword());
         hubServerConfigBuilder.setTimeout(config.getHubTimeout());
         hubServerConfigBuilder.setProxyHost(hubProxyHost);
         hubServerConfigBuilder.setProxyPort(hubProxyPort);

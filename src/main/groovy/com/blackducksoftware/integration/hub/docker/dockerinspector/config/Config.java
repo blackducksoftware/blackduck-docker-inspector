@@ -226,6 +226,9 @@ public class Config {
     @Value("${BD_HUB_PASSWORD:}")
     private String hubPasswordEnvVar = "";
 
+    @Value("${BD_HUB_TOKEN:}")
+    private String hubApiTokenEnvVar = "";
+
     @Value("${SCAN_CLI_OPTS:}")
     private String scanCliOptsEnvVar = "";
 
@@ -448,6 +451,10 @@ public class Config {
         return hubPasswordEnvVar;
     }
 
+    public String getHubApiTokenEnvVar() {
+        return hubApiTokenEnvVar;
+    }
+
     public String getDockerInspectorJavaOptsValue() {
         return dockerInspectorJavaOptsValue;
     }
@@ -509,6 +516,7 @@ public class Config {
         this.hubCodelocationPrefix = null;
         this.hubPassword = null;
         this.hubPasswordEnvVar = null;
+        this.hubApiTokenEnvVar = null;
         this.hubProjectName = null;
         this.hubProjectVersion = null;
         this.hubProxyHost = null;

@@ -40,7 +40,7 @@ import org.springframework.stereotype.Component;
 import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
-import com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient.HubPassword;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient.HubSecrets;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.blackducksoftware.integration.hub.imageinspector.linux.executor.Executor;
 import com.blackducksoftware.integration.hub.imageinspector.name.ImageNameResolver;
@@ -87,7 +87,7 @@ public class DockerClientManager {
     private HubDockerClient hubDockerClient;
 
     @Autowired
-    private HubPassword hubPassword;
+    private HubSecrets hubSecrets;
 
     @Autowired
     private Executor executor;
@@ -199,7 +199,6 @@ public class DockerClientManager {
 
     public String run(final String runOnImageName, final String runOnTagName, final String runOnImageId, final File dockerTarFile, final boolean copyJar, final String targetImage, final String targetImageRepo, final String targetImageTag)
             throws InterruptedException, IOException, IllegalArgumentException, IllegalAccessException, IntegrationException {
-        final String hubPasswordString = hubPassword.get();
         final String imageNameTag = String.format("%s:%s", runOnImageName, runOnTagName);
         logger.info(String.format("Running container based on image %s", imageNameTag));
         final String extractorContainerName = programPaths.deriveContainerName(runOnImageName);
@@ -208,7 +207,7 @@ public class DockerClientManager {
         final String tarFileDirInSubContainer = programPaths.getHubDockerTargetDirPathContainer();
         final String tarFilePathInSubContainer = programPaths.getHubDockerTargetDirPathContainer() + dockerTarFile.getName();
 
-        final String containerId = ensureContainerRunning(dockerClient, imageNameTag, extractorContainerName, hubPasswordString);
+        final String containerId = ensureContainerRunning(dockerClient, imageNameTag, extractorContainerName, hubSecrets.getPassword(), hubSecrets.getApiToken());
         setPropertiesInSubContainer(dockerClient, containerId, tarFilePathInSubContainer, tarFileDirInSubContainer, dockerTarFile, targetImage, targetImageRepo, targetImageTag);
         if (copyJar) {
             copyFileToContainer(dockerClient, containerId, programPaths.getHubDockerJarPathHost(), programPaths.getHubDockerPgmDirPathContainer());
@@ -296,7 +295,7 @@ public class DockerClientManager {
         copyFileToContainer(dockerClient, containerId, dockerTarFile.getAbsolutePath(), tarFileDirInSubContainer);
     }
 
-    private String ensureContainerRunning(final DockerClient dockerClient, final String imageId, final String extractorContainerName, final String hubPassword) {
+    private String ensureContainerRunning(final DockerClient dockerClient, final String imageId, final String extractorContainerName, final String hubPassword, final String hubApiToken) {
         String oldContainerId;
         final List<Container> containers = dockerClient.listContainersCmd().withShowAll(true).exec();
         final Container extractorContainer = getRunningContainer(containers, extractorContainerName);
@@ -312,12 +311,15 @@ public class DockerClientManager {
         }
         logger.debug(String.format("Creating container %s from image %s", extractorContainerName, imageId));
         final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageId).withStdinOpen(true).withTty(true).withName(extractorContainerName).withCmd("/bin/bash");
+        final List<String> envAssignments = new ArrayList<>();
+        envAssignments.add(String.format("BD_HUB_PASSWORD=%s", hubPassword));
+        envAssignments.add(String.format("BD_HUB_TOKEN=%s", hubApiToken));
         if ((StringUtils.isBlank(config.getHubProxyHost())) && (!StringUtils.isBlank(config.getScanCliOptsEnvVar()))) {
-            createContainerCmd.withEnv(String.format("BD_HUB_PASSWORD=%s", hubPassword), String.format("SCAN_CLI_OPTS=%s", config.getScanCliOptsEnvVar()));
+            envAssignments.add(String.format("SCAN_CLI_OPTS=%s", config.getScanCliOptsEnvVar()));
         } else {
-            createContainerCmd.withEnv(String.format("BD_HUB_PASSWORD=%s", hubPassword));
-        }
 
+        }
+        createContainerCmd.withEnv(envAssignments);
         final CreateContainerResponse containerResponse = createContainerCmd.exec();
         final String containerId = containerResponse.getId();
 
