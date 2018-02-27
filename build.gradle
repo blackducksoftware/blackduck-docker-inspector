@@ -380,8 +380,10 @@ task stopDockerContainerAlpine(type: Exec) {
 
 task stopDockerContainers(dependsOn: [stopDockerContainerUbuntu, stopDockerContainerCentos, stopDockerContainerAlpine]) {}
 
-task testPrep(dependsOn: [stopDockerContainers, removeDockerImage_ubuntu, removeDockerImage_centos, removeDockerImage_alpine, \
+task testPrep(type: Exec, dependsOn: [stopDockerContainers, removeDockerImage_ubuntu, removeDockerImage_centos, removeDockerImage_alpine, \
     packageScript]) {
+    ignoreExitValue true
+    commandLine 'mkdir', 'test'
 }
 
 compileJava.dependsOn writeVersionToPropertiesFile
