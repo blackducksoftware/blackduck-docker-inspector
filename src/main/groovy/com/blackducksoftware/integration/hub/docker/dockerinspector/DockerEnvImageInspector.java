@@ -349,15 +349,6 @@ public class DockerEnvImageInspector {
         return bdioFiles;
     }
 
-    private void clearResult() {
-        try {
-            final File outputFile = new File(programPaths.getHubDockerResultPath());
-            outputFile.delete();
-        } catch (final Exception e) {
-            logger.warn(String.format("Error clearing result file: %s", e.getMessage()));
-        }
-    }
-
     private void provideDockerTar(final Config config, final File dockerTarFile) throws IOException {
         if (config.isOutputIncludeDockertarfile()) {
             if (config.isOnHost()) {
@@ -428,16 +419,11 @@ public class DockerEnvImageInspector {
         if (config.isOnHost()) {
             hubClient.phoneHome(dockerClientManager.getDockerEngineVersion());
         }
-        clearResult();
         initImageName();
         logger.info(String.format("Inspecting image:tag %s:%s", config.getDockerImageRepo(), config.getDockerImageTag()));
         if (config.isOnHost()) {
             hubClient.testHubConnection();
         }
-
-        logger.debug(String.format("Upload BDIO is set to %b", config.isUploadBdio()));
-        FileOperations.purgeDir(config.getOutputPath());
-
         return true;
     }
 

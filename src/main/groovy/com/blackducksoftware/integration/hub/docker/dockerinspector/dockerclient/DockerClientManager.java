@@ -254,6 +254,7 @@ public class DockerClientManager {
     }
 
     public String getDockerEngineVersion() {
+        logger.info("Requesting version string from Docker engine");
         try {
             final DockerClient dockerClient = hubDockerClient.getDockerClient();
             final Info dockerInfo = dockerClient.infoCmd().exec();
