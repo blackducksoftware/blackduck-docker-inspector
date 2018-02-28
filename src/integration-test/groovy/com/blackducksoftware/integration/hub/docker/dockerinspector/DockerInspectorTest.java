@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -30,6 +31,11 @@ public class DockerInspectorTest {
             System.out.println(String.format("test dir created: %b", created));
         } catch (final Exception e) {
             System.out.println(String.format("mkdir test: %s", e.getMessage()));
+        }
+        final String javaHomePath = System.getenv("JAVA_HOME");
+        System.out.println(String.format("JAVA_HOME: %s", javaHomePath));
+        if (StringUtils.isNotBlank(javaHomePath)) {
+            CmdExecutor.execCmd(String.format("ls -lR %s", javaHomePath), 30, null);
         }
     }
 
