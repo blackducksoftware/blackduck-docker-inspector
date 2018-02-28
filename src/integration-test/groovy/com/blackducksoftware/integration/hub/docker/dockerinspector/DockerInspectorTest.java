@@ -25,6 +25,12 @@ public class DockerInspectorTest {
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
+        try {
+            final boolean created = (new File("test")).mkdir();
+            System.out.println(String.format("test dir created: %b", created));
+        } catch (final Exception e) {
+            System.out.println(String.format("mkdir test: %s", e.getMessage()));
+        }
     }
 
     @AfterClass
