@@ -186,6 +186,7 @@ function main() {
   local do_inspect=1
   local pull_from_remote=1
   local inspector_version=
+  local trust_cert=0
   while [[ $# -ge 1 ]]; do
     opt="$1"
     case $opt in
@@ -238,6 +239,9 @@ function main() {
       --no-inspect)
         do_inspect=0
         ;;
+      --insecure)
+      	trust_cert=1
+      	;;
       *)
 	    optional_args="${optional_args} $1"
         ;;
@@ -293,7 +297,12 @@ function main() {
       if [ -n "${hub_host}" ]; then
         hub_parameters="--host ${hub_host} --port $hub_port --scheme $hub_scheme"
       fi
-      "${THISDIR}"/scan.cli.sh $hub_parameters --username "$hub_user" $dry_run --project "$hub_project" --release "$hub_version" --name "$name_arg" $optional_args "${IMAGE_TARFILE}"
+      local scan_insecure_parameters=""
+      if [ $trust_cert -eq 1 ]; then
+      	echo "WARNING: Ignoring certificate errors"
+      	scan_insecure_parameters="--insecure"
+      fi
+      "${THISDIR}"/scan.cli.sh $hub_parameters --username "$hub_user" $dry_run --project "$hub_project" --release "$hub_version" --name "$name_arg" $scan_insecure_parameters $optional_args "${IMAGE_TARFILE}"
       cmd_status=$?
       if [ $cmd_status -ne 0 ]; then
         exit $cmd_status
@@ -301,7 +310,12 @@ function main() {
     fi
     if [ $do_inspect -eq 1 ]; then
       echo "Conduct  Inspection:"
-      "${INSPECTOR_SHELL_SCRIPT}" --hub.username="$hub_user" --hub.url=$HUB_URL --hub.project.name="$hub_project" --hub.project.version="$hub_version" "${IMAGE_TARFILE}"
+      local inspector_insecure_parameters=""
+      if [ $trust_cert -eq 1 ]; then
+      	echo "WARNING: Ignoring certificate errors"
+      	inspector_insecure_parameters="--hub.always.trust.cert=true"
+      fi
+      "${INSPECTOR_SHELL_SCRIPT}" --hub.username="$hub_user" --hub.url=$HUB_URL --hub.project.name="$hub_project" --hub.project.version="$hub_version" $inspector_insecure_parameters "${IMAGE_TARFILE}"
       cmd_status=$?
       if [ $cmd_status -ne 0 ]; then
         exit $cmd_status
