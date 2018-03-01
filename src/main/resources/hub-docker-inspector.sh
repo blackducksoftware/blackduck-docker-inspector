@@ -18,6 +18,50 @@ DOCKER_INSPECTOR_JAR_DIR=${DOCKER_INSPECTOR_JAR_DIR:-/tmp/hub-docker-inspector}
 # DOCKER_INSPECTOR_CURL_OPTS=--proxy http://myproxy:3128
 DOCKER_INSPECTOR_CURL_OPTS=${DOCKER_INSPECTOR_CURL_OPTS:-}
 
+#Getting the proxy settings from the environment
+PROXY_HOST=${BLACKDUCK_HUB_PROXY_HOST}
+PROXY_PORT=${BLACKDUCK_HUB_PROXY_PORT}
+PROXY_USERNAME=${BLACKDUCK_HUB_PROXY_USERNAME}
+PROXY_PASSWORD=${BLACKDUCK_HUB_PROXY_PASSWORD}
+
+SCRIPT_ARGS="$@"
+
+#Getting the proxy settings from the command line switches
+for i in "$SCRIPT_ARGS"
+do
+case $i in
+    --blackduck.hub.proxy.host=*)
+    PROXY_HOST="${i#*=}"
+    shift # past argument=value
+    ;;
+    --blackduck.hub.proxy.port=*)
+    PROXY_PORT="${i#*=}"
+    shift # past argument=value
+    ;;
+    --blackduck.hub.proxy.username=*)
+    PROXY_USERNAME="${i#*=}"
+    shift # past argument=value
+    ;;
+     --blackduck.hub.proxy.password=*)
+    PROXY_PASSWORD="${i#*=}"
+    shift # past argument=value
+    ;;
+    *)
+          # ignored option
+    ;;
+esac
+done
+
+#Putting together the Curl proxy options
+CURL_PROXY_OPTIONS=""
+if [ ! -z "${PROXY_HOST}" ]; then
+	CURL_PROXY_OPTIONS="--proxy ${PROXY_HOST}:${PROXY_PORT}"
+
+	if [ ! -z "${PROXY_USERNAME}" ]; then
+		CURL_PROXY_OPTIONS="${CURL_PROXY_OPTIONS} --proxy-anyauth --proxy-user ${PROXY_USERNAME}:${PROXY_PASSWORD}"
+	fi
+fi
+
 # DOCKER_INSPECTOR_VERSION should be set in your
 # environment if you wish to use a version different
 # from LATEST.
@@ -59,17 +103,17 @@ function printUsage() {
 
 # Write message to stdout
 log() {
-  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@"
+  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $SCRIPT_ARGS"
 }
 
 # Write warning to stdout
 warn() {
-  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: WARNING: $@"
+  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: WARNING: $SCRIPT_ARGS"
 }
 
 # Write error message to stderr
 err() {
-  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: ERROR: $@" >&2
+  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: ERROR: $SCRIPT_ARGS" >&2
 }
 
 function deriveCurrentVersionCommitId() {
@@ -84,7 +128,7 @@ function deriveCurrentVersionCommitId() {
 
 function deriveLatestVersionCommitId() {
 	log "Downloading ${latestCommitIdFileUrl} to ${localCommitIdFile}"
-	curl ${DOCKER_INSPECTOR_CURL_OPTS} -o "${localCommitIdFile}" "${latestCommitIdFileUrl}"
+	curl ${DOCKER_INSPECTOR_CURL_OPTS} ${CURL_PROXY_OPTIONS} -o "${localCommitIdFile}" "${latestCommitIdFileUrl}"
 	latestVersionCommitId=$( <"${localCommitIdFile}" )
 	log "The latest version of the hub-docker-inspector jar file: ${latestVersionCommitId}"
 }
@@ -128,7 +172,7 @@ function determineIsJarDownloadRequired() {
 
 function downloadJarIfRequired() {
 	if [ ${jarDownloadRequired} == true ]; then
-		curl ${DOCKER_INSPECTOR_CURL_OPTS} --fail -L -o "${downloadedJarPath}" "${selectedJarUrl}"
+		curl ${DOCKER_INSPECTOR_CURL_OPTS} ${CURL_PROXY_OPTIONS} --fail -L -o "${downloadedJarPath}" "${selectedJarUrl}"
 		if [[ $? -ne 0 ]]
 		then
 			err "Download of ${selectedJarUrl} failed."
@@ -149,7 +193,7 @@ function prepareLatestJar() {
 #
 function deriveLatestReleaseVersion() {
 	if [[ -z "${latestReleaseVersion}" ]]; then
-		latestReleaseVersion=$(curl https://test-repo.blackducksoftware.com/artifactory/bds-integrations-release/com/blackducksoftware/integration/hub-docker-inspector/maven-metadata.xml | grep latest | sed -e 's@<latest>@@' -e 's@</latest>@@' -e 's/^[ \t]*//')
+		latestReleaseVersion=$(curl ${DOCKER_INSPECTOR_CURL_OPTS} ${CURL_PROXY_OPTIONS} https://test-repo.blackducksoftware.com/artifactory/bds-integrations-release/com/blackducksoftware/integration/hub-docker-inspector/maven-metadata.xml | grep latest | sed -e 's@<latest>@@' -e 's@</latest>@@' -e 's/^[ \t]*//')
 	fi
 	echo "Latest release version: ${latestReleaseVersion}"
 }
@@ -175,7 +219,7 @@ function escapeSpaces() {
 # Look through args for ones this script needs to act on
 function preProcessOptions() {
 	cmdlineargindex=0
-	for cmdlinearg in "$@"
+	for cmdlinearg in "$SCRIPT_ARGS"
 	do
 		if [[ "${cmdlinearg}" == --jar.path=* ]]
 		then
@@ -260,7 +304,7 @@ if [ \( "$1" = -j \) -o \( "$1" = --pulljar \) ]
 then
 	deriveLatestReleasedFilename
     deriveJarDetails
-	curl ${DOCKER_INSPECTOR_CURL_OPTS} --fail -L -o "${latestReleasedFilename}" "${latestReleasedJarUrl}"
+	curl ${DOCKER_INSPECTOR_CURL_OPTS} ${CURL_PROXY_OPTIONS} --fail -L -o "${latestReleasedFilename}" "${latestReleasedJarUrl}"
 	if [[ $? -ne 0 ]]
 	then
 		err "Download of ${latestReleasedJarUrl} failed."
@@ -270,7 +314,7 @@ then
 	exit 0
 fi
 
-preProcessOptions "$@"
+preProcessOptions "$SCRIPT_ARGS"
 
 log "Jar dir: ${DOCKER_INSPECTOR_JAR_DIR}"
 mkdir -p "${DOCKER_INSPECTOR_JAR_DIR}"
