@@ -24,10 +24,8 @@ PROXY_PORT=${BLACKDUCK_HUB_PROXY_PORT}
 PROXY_USERNAME=${BLACKDUCK_HUB_PROXY_USERNAME}
 PROXY_PASSWORD=${BLACKDUCK_HUB_PROXY_PASSWORD}
 
-SCRIPT_ARGS="$@"
-
 #Getting the proxy settings from the command line switches
-for i in "$SCRIPT_ARGS"
+for i in "$@"
 do
 case $i in
     --blackduck.hub.proxy.host=*)
@@ -103,17 +101,17 @@ function printUsage() {
 
 # Write message to stdout
 log() {
-  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $SCRIPT_ARGS"
+  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@"
 }
 
 # Write warning to stdout
 warn() {
-  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: WARNING: $SCRIPT_ARGS"
+  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: WARNING: $@"
 }
 
 # Write error message to stderr
 err() {
-  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: ERROR: $SCRIPT_ARGS" >&2
+  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: ERROR: $@" >&2
 }
 
 function deriveCurrentVersionCommitId() {
@@ -219,7 +217,7 @@ function escapeSpaces() {
 # Look through args for ones this script needs to act on
 function preProcessOptions() {
 	cmdlineargindex=0
-	for cmdlinearg in "$SCRIPT_ARGS"
+	for cmdlinearg in "$@"
 	do
 		if [[ "${cmdlinearg}" == --jar.path=* ]]
 		then
@@ -314,7 +312,7 @@ then
 	exit 0
 fi
 
-preProcessOptions "$SCRIPT_ARGS"
+preProcessOptions "$@"
 
 log "Jar dir: ${DOCKER_INSPECTOR_JAR_DIR}"
 mkdir -p "${DOCKER_INSPECTOR_JAR_DIR}"
