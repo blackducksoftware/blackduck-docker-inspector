@@ -53,6 +53,7 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient
 import com.blackducksoftware.integration.hub.docker.dockerinspector.help.formatter.UsageFormatter;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient.HubClient;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
+import com.blackducksoftware.integration.hub.imageinspector.api.PkgMgrDataNotFoundException;
 import com.blackducksoftware.integration.hub.imageinspector.imageformat.docker.manifest.ManifestLayerMapping;
 import com.blackducksoftware.integration.hub.imageinspector.lib.DissectedImage;
 import com.blackducksoftware.integration.hub.imageinspector.lib.ImageInfoDerived;
@@ -124,6 +125,8 @@ public class DockerEnvImageInspector {
             provideOutput(config);
             returnCode = reportResults(config, dissectedImage);
             cleanUp(config, deferredCleanup);
+        } catch (final PkgMgrDataNotFoundException e) {
+            ////////// TODO; need to return container fs and empty bdio
         } catch (final Throwable e) {
             final String msg = String.format("Error inspecting image: %s", e.getMessage());
             logger.error(msg);
@@ -203,6 +206,7 @@ public class DockerEnvImageInspector {
         if (dissectedImage.getTargetOs() == null) {
             dissectedImage.setTargetImageFileSystemRootDir(
                     imageInspector.extractDockerLayers(new File(programPaths.getHubDockerWorkingDirPath()), config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerTars(), dissectedImage.getLayerMappings()));
+            /////////// TODO need to split this method here into (1) extract, and (2) detect pkgMgr/OS
             dissectedImage.setTargetOs(imageInspector.detectOperatingSystem(dissectedImage.getTargetImageFileSystemRootDir()));
         }
         dissectedImage.setRunOnImageName(dockerImages.getInspectorImageName(dissectedImage.getTargetOs()));
