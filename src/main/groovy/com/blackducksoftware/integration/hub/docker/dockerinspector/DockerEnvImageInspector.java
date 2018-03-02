@@ -24,6 +24,7 @@
 package com.blackducksoftware.integration.hub.docker.dockerinspector;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -118,15 +119,26 @@ public class DockerEnvImageInspector {
                 System.exit(0);
             }
             parseManifest(config, dissectedImage);
-            extractLayers(config, dissectedImage);
-            final Future<String> deferredCleanup = inspect(config, dissectedImage);
-            uploadBdio(config, dissectedImage);
-            provideDockerTar(config, dissectedImage.getDockerTarFile());
-            provideOutput(config);
-            returnCode = reportResults(config, dissectedImage);
-            cleanUp(config, deferredCleanup);
-        } catch (final PkgMgrDataNotFoundException e) {
-            ////////// TODO; need to return container fs and empty bdio
+            checkForGivenTargetOs(config, dissectedImage);
+            constructContainerFileSystem(config, dissectedImage);
+            try {
+                determineTargetOsFromContainerFileSystem(config, dissectedImage);
+                final Future<String> deferredCleanup = inspect(config, dissectedImage);
+                uploadBdio(config, dissectedImage);
+                provideDockerTar(config, dissectedImage.getDockerTarFile());
+                provideOutput(config);
+                returnCode = reportResults(config, dissectedImage);
+                cleanUp(config, deferredCleanup);
+            } catch (final PkgMgrDataNotFoundException e) {
+                ////////// TODO; need to return container fs and empty bdio
+                // TODO make sure you have an integration test for the scratch container scenario
+                logger.info("*** Pkg mgr not found; generating empty BDIO file");
+                final ImageInfoDerived imageInfoDerived = imageInspector.generateEmptyBdio(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), getHubProjectName(config),
+                        getHubProjectVersion(config), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs(), config.getHubCodelocationPrefix());
+                writeBdioFile(dissectedImage, imageInfoDerived);
+                createContainerFileSystemTarIfRequested(config, dissectedImage.getTargetImageFileSystemRootDir());
+                provideOutput(config);
+            }
         } catch (final Throwable e) {
             final String msg = String.format("Error inspecting image: %s", e.getMessage());
             logger.error(msg);
@@ -137,6 +149,10 @@ public class DockerEnvImageInspector {
         }
         logger.info(String.format("Returning %d", returnCode));
         System.exit(returnCode);
+    }
+
+    private void checkForGivenTargetOs(final Config config, final DissectedImage dissectedImage) {
+        dissectedImage.setTargetOs(imageInspector.detectOperatingSystem(config.getLinuxDistro()));
     }
 
     private void cleanUp(final Config config, final Future<String> deferredCleanup) {
@@ -193,20 +209,29 @@ public class DockerEnvImageInspector {
             logger.info(String.format("Target image tarfile: %s; target OS: %s", dissectedImage.getDockerTarFile().getAbsolutePath(), dissectedImage.getTargetOs().toString()));
             final ImageInfoDerived imageInfoDerived = imageInspector.generateBdioFromImageFilesDir(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), getHubProjectName(config),
                     getHubProjectVersion(config), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs(), config.getHubCodelocationPrefix());
-            final File bdioFile = imageInspector.writeBdioFile(new File(programPaths.getHubDockerOutputPath()), imageInfoDerived);
-            logger.info(String.format("BDIO File generated: %s", bdioFile.getAbsolutePath()));
-            dissectedImage.setBdioFilename(bdioFile.getName());
+            writeBdioFile(dissectedImage, imageInfoDerived);
             createContainerFileSystemTarIfRequested(config, dissectedImage.getTargetImageFileSystemRootDir());
         }
         return deferredCleanup;
     }
 
-    private void extractLayers(final Config config, final DissectedImage dissectedImage) throws IOException, IntegrationException {
-        dissectedImage.setTargetOs(imageInspector.detectOperatingSystem(config.getLinuxDistro()));
+    private void writeBdioFile(final DissectedImage dissectedImage, final ImageInfoDerived imageInfoDerived) throws FileNotFoundException, IOException {
+        final File bdioFile = imageInspector.writeBdioFile(new File(programPaths.getHubDockerOutputPath()), imageInfoDerived);
+        logger.info(String.format("BDIO File generated: %s", bdioFile.getAbsolutePath()));
+        dissectedImage.setBdioFilename(bdioFile.getName());
+    }
+
+    private void constructContainerFileSystem(final Config config, final DissectedImage dissectedImage) throws IOException, IntegrationException {
+        if (config.isOnHost() && dissectedImage.getTargetOs() != null && !config.isOutputIncludeContainerfilesystem()) {
+            // don't need to construct container File System
+            return;
+        }
+        dissectedImage.setTargetImageFileSystemRootDir(
+                imageInspector.extractDockerLayers(new File(programPaths.getHubDockerWorkingDirPath()), config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerTars(), dissectedImage.getLayerMappings()));
+    }
+
+    private void determineTargetOsFromContainerFileSystem(final Config config, final DissectedImage dissectedImage) throws IOException, IntegrationException {
         if (dissectedImage.getTargetOs() == null) {
-            dissectedImage.setTargetImageFileSystemRootDir(
-                    imageInspector.extractDockerLayers(new File(programPaths.getHubDockerWorkingDirPath()), config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerTars(), dissectedImage.getLayerMappings()));
-            /////////// TODO need to split this method here into (1) extract, and (2) detect pkgMgr/OS
             dissectedImage.setTargetOs(imageInspector.detectOperatingSystem(dissectedImage.getTargetImageFileSystemRootDir()));
         }
         dissectedImage.setRunOnImageName(dockerImages.getInspectorImageName(dissectedImage.getTargetOs()));
@@ -242,7 +267,7 @@ public class DockerEnvImageInspector {
             return false;
         }
         final String[] args = applicationArguments.getSourceArgs();
-        if (contains(args, "-h") || (contains(args, "--help"))) {
+        if (contains(args, "-h") || contains(args, "--help")) {
             logger.debug("Help argument passed");
             return true;
         }
@@ -444,7 +469,7 @@ public class DockerEnvImageInspector {
     }
 
     private void adjustImageNameTagFromLayerMappings(final List<ManifestLayerMapping> layerMappings) {
-        if ((layerMappings != null) && (layerMappings.size() == 1)) {
+        if (layerMappings != null && layerMappings.size() == 1) {
             if (StringUtils.isBlank(config.getDockerImageRepo())) {
                 config.setDockerImageRepo(layerMappings.get(0).getImageName());
             }
