@@ -130,7 +130,6 @@ public class DockerEnvImageInspector {
                 returnCode = reportResults(config, dissectedImage);
                 cleanUp(config, deferredCleanup);
             } catch (final PkgMgrDataNotFoundException e) {
-                ////////// TODO; need to return container fs and empty bdio
                 // TODO make sure you have an integration test for the scratch container scenario
                 logger.info("*** Pkg mgr not found; generating empty BDIO file");
                 final ImageInfoDerived imageInfoDerived = imageInspector.generateEmptyBdio(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), getHubProjectName(config),
@@ -138,6 +137,8 @@ public class DockerEnvImageInspector {
                 writeBdioFile(dissectedImage, imageInfoDerived);
                 createContainerFileSystemTarIfRequested(config, dissectedImage.getTargetImageFileSystemRootDir());
                 provideOutput(config);
+                returnCode = reportResultsPkgMgrDataNotFound(config, dissectedImage);
+                cleanUp(config, null);
             }
         } catch (final Throwable e) {
             final String msg = String.format("Error inspecting image: %s", e.getMessage());
@@ -171,9 +172,16 @@ public class DockerEnvImageInspector {
         }
     }
 
+    private int reportResultsPkgMgrDataNotFound(final Config config, final DissectedImage dissectedImage) throws IOException, IntegrationException {
+        reportResult(config, null, null, null,
+                dissectedImage.getDockerTarFile() == null ? "" : dissectedImage.getDockerTarFile().getName(), dissectedImage.getBdioFilename(), true);
+        copyResultToUserOutputDir();
+        return 0;
+    }
+
     private int reportResults(final Config config, final DissectedImage dissectedImage) throws IOException, IntegrationException {
         final int returnCode = reportResult(config, dissectedImage.getTargetOs(), dissectedImage.getRunOnImageName(), dissectedImage.getRunOnImageTag(),
-                dissectedImage.getDockerTarFile() == null ? "" : dissectedImage.getDockerTarFile().getName(), dissectedImage.getBdioFilename());
+                dissectedImage.getDockerTarFile() == null ? "" : dissectedImage.getDockerTarFile().getName(), dissectedImage.getBdioFilename(), false);
         if (config.isOnHost()) {
             copyResultToUserOutputDir();
         }
@@ -355,8 +363,13 @@ public class DockerEnvImageInspector {
         }
     }
 
-    private int reportResult(final Config config, final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag, final String dockerTarfilename, final String bdioFilename) throws IntegrationException {
+    private int reportResult(final Config config, final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag, final String dockerTarfilename, final String bdioFilename, final boolean forceSuccess)
+            throws IntegrationException {
         final Gson gson = new Gson();
+        if (forceSuccess) {
+            writeSuccessResultFile(gson, targetOs, runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename);
+            return 0;
+        }
         if (config.isOnHost()) {
             final Result resultReportedFromContainer = resultFile.read(gson, programPaths.getHubDockerResultPath());
             if (!resultReportedFromContainer.isSucceeded()) {
@@ -367,9 +380,13 @@ public class DockerEnvImageInspector {
                 return 0;
             }
         } else {
-            resultFile.write(gson, programPaths.getHubDockerResultPath(), true, "Success", targetOs, runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename);
+            writeSuccessResultFile(gson, targetOs, runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename);
             return 0;
         }
+    }
+
+    private void writeSuccessResultFile(final Gson gson, final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag, final String dockerTarfilename, final String bdioFilename) {
+        resultFile.write(gson, programPaths.getHubDockerResultPath(), true, "Success", targetOs, runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename);
     }
 
     private List<File> findBdioFiles(final String pathToDirContainingBdio) {
