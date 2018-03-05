@@ -394,7 +394,8 @@ public class DockerEnvImageInspector {
 
     private void createContainerFileSystemTarIfRequested(final Config config, final File targetImageFileSystemRootDir) throws IOException, CompressorException {
         if (config.isOutputIncludeContainerfilesystem()) {
-            final File outputDirectory = new File(programPaths.getHubDockerOutputPathContainer());
+            logger.info("Including container file system in output");
+            final File outputDirectory = new File(programPaths.getHubDockerOutputPath());
             final String containerFileSystemTarFilename = Names.getContainerFileSystemTarFilename(config.getDockerImageRepo(), config.getDockerImageTag());
             final File containerFileSystemTarFile = new File(outputDirectory, containerFileSystemTarFilename);
             logger.debug(String.format("Creating container filesystem tarfile %s from %s into %s", containerFileSystemTarFile.getAbsolutePath(), targetImageFileSystemRootDir.getAbsolutePath(), outputDirectory.getAbsolutePath()));
