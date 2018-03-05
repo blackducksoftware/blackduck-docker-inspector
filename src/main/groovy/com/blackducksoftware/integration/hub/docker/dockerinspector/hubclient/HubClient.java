@@ -129,7 +129,6 @@ public class HubClient {
     private void phoneHomeNoHubConnection(final String dockerEngineVersion) {
         try {
             final IntLogger intLogger = new Slf4jIntLogger(logger);
-            // TODO add support for NTLM
             final ProxyInfo proxyInfo = new ProxyInfo(config.getHubProxyHost(), Integer.parseInt(config.getHubProxyPort()), new Credentials(config.getHubProxyUsername(), config.getHubProxyPassword()), null, null, null);
             final boolean alwaysTrustServerCertificate = config.isHubAlwaysTrustCert();
             final PhoneHomeClient phClient = new PhoneHomeClient(intLogger, 15, proxyInfo, alwaysTrustServerCertificate);
@@ -181,17 +180,17 @@ public class HubClient {
         String hubProxyPort = config.getHubProxyPort();
         String hubProxyUsername = config.getHubProxyUsername();
         String hubProxyPassword = config.getHubProxyPassword();
-        if ((StringUtils.isBlank(config.getHubProxyHost())) && (!StringUtils.isBlank(config.getScanCliOptsEnvVar()))) {
+        if (StringUtils.isBlank(config.getHubProxyHost()) && !StringUtils.isBlank(config.getScanCliOptsEnvVar())) {
             final List<String> scanCliOpts = Arrays.asList(config.getScanCliOptsEnvVar().split("\\s"));
             for (String opt : scanCliOpts) {
                 opt = opt.trim();
-                if ((opt.startsWith("-Dhttp.proxy.host=")) || (opt.startsWith("-Dhttps.proxy.host=")) || (opt.startsWith("-Dhttp.proxyHost=")) || (opt.startsWith("-Dhttps.proxyHost="))) {
+                if (opt.startsWith("-Dhttp.proxy.host=") || opt.startsWith("-Dhttps.proxy.host=") || opt.startsWith("-Dhttp.proxyHost=") || opt.startsWith("-Dhttps.proxyHost=")) {
                     hubProxyHost = getValue(opt);
-                } else if ((opt.startsWith("-Dhttp.proxy.port=")) || (opt.startsWith("-Dhttps.proxy.port=")) || (opt.startsWith("-Dhttp.proxyPort=")) || (opt.startsWith("-Dhttps.proxyPort="))) {
+                } else if (opt.startsWith("-Dhttp.proxy.port=") || opt.startsWith("-Dhttps.proxy.port=") || opt.startsWith("-Dhttp.proxyPort=") || opt.startsWith("-Dhttps.proxyPort=")) {
                     hubProxyPort = getValue(opt);
-                } else if ((opt.startsWith("-Dhttp.proxy.username=")) || (opt.startsWith("-Dhttps.proxy.username=")) || (opt.startsWith("-Dhttp.proxyUser=")) || (opt.startsWith("-Dhttps.proxyUser="))) {
+                } else if (opt.startsWith("-Dhttp.proxy.username=") || opt.startsWith("-Dhttps.proxy.username=") || opt.startsWith("-Dhttp.proxyUser=") || opt.startsWith("-Dhttps.proxyUser=")) {
                     hubProxyUsername = getValue(opt);
-                } else if ((opt.startsWith("-Dhttp.proxy.password=")) || (opt.startsWith("-Dhttps.proxy.password=")) || (opt.startsWith("-Dhttp.proxyPassword=")) || (opt.startsWith("-Dhttps.proxyPassword="))) {
+                } else if (opt.startsWith("-Dhttp.proxy.password=") || opt.startsWith("-Dhttps.proxy.password=") || opt.startsWith("-Dhttp.proxyPassword=") || opt.startsWith("-Dhttps.proxyPassword=")) {
                     hubProxyPassword = getValue(opt);
                 }
             }

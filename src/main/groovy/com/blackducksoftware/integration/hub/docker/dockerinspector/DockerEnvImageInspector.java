@@ -130,8 +130,7 @@ public class DockerEnvImageInspector {
                 returnCode = reportResults(config, dissectedImage);
                 cleanUp(config, deferredCleanup);
             } catch (final PkgMgrDataNotFoundException e) {
-                // TODO make sure you have an integration test for the scratch container scenario
-                logger.info("*** Pkg mgr not found; generating empty BDIO file");
+                logger.info("Pkg mgr not found; generating empty BDIO file");
                 final ImageInfoDerived imageInfoDerived = imageInspector.generateEmptyBdio(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), getHubProjectName(config),
                         getHubProjectVersion(config), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs(), config.getHubCodelocationPrefix());
                 writeBdioFile(dissectedImage, imageInfoDerived);
@@ -331,7 +330,6 @@ public class DockerEnvImageInspector {
         FileOperations.copyFile(new File(programPaths.getHubDockerResultPathHost()), userOutputDir);
     }
 
-    // TODO move this?
     private String uploadBdioFiles(final Config config) throws IntegrationException {
         String pathToDirContainingBdio = null;
         pathToDirContainingBdio = programPaths.getHubDockerOutputPath();
