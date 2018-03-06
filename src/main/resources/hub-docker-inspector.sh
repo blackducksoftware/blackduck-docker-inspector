@@ -18,6 +18,11 @@ DOCKER_INSPECTOR_JAR_DIR=${DOCKER_INSPECTOR_JAR_DIR:-/tmp/hub-docker-inspector}
 # DOCKER_INSPECTOR_CURL_OPTS=--proxy http://myproxy:3128
 DOCKER_INSPECTOR_CURL_OPTS=${DOCKER_INSPECTOR_CURL_OPTS:-}
 
+# DOCKER_INSPECTOR_VERSION should be set in your
+# environment if you wish to use a version different
+# from LATEST.
+jarVersion=${DOCKER_INSPECTOR_VERSION}
+
 #Getting the proxy settings from the environment
 PROXY_HOST=${BLACKDUCK_HUB_PROXY_HOST}
 PROXY_PORT=${BLACKDUCK_HUB_PROXY_PORT}
@@ -59,11 +64,6 @@ if [ ! -z "${PROXY_HOST}" ]; then
 		CURL_PROXY_OPTIONS="${CURL_PROXY_OPTIONS} --proxy-anyauth --proxy-user ${PROXY_USERNAME}:${PROXY_PASSWORD}"
 	fi
 fi
-
-# DOCKER_INSPECTOR_VERSION should be set in your
-# environment if you wish to use a version different
-# from LATEST.
-jarVersion=${DOCKER_INSPECTOR_VERSION}
 
 ##################
 # Initialize
