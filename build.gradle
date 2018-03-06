@@ -30,8 +30,8 @@ repositories {
 }
 
 version = '4.4.0-SNAPSHOT'
-def inspectorImageFamily = 'hub-docker-inspector'
-def inspectorImageVersion = "${version}"
+def inspectorImageFamily = 'hub-imageinspector-ws'
+def inspectorImageVersion = "1.0.0"
 
 apply plugin: 'com.blackducksoftware.integration.solution'
 apply plugin: 'com.bmuschko.docker-remote-api'
