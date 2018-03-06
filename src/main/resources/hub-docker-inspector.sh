@@ -160,8 +160,11 @@ function determineIsJarDownloadRequired() {
 	jarDownloadRequired=true
 	if [ ! -f "${downloadedJarPath}" ]; then
 		log "You don't have a hub-docker-inspector jar file at ${downloadedJarPath}, so it will be downloaded."
+	elif [[ ! -z ${jarVersion} ]] && [[ ${jarVersion} != *"SNAPSHOT"* ]]; then
+	    log "You specified jar version ${jarVersion}, it's not a snapshot, and it exists at ${downloadedJarPath}; no need to download it."
+		jarDownloadRequired=false
 	elif [ "${currentVersionCommitId}" != "${latestVersionCommitId}" ] ; then
-		log "${downloadedJarPath} needs to be downloaded."
+		log "${downloadedJarPath} needs to be downloaded. (Snapshot versions are downloaded every time; Released versions are not.)"
 	else
 		log "${downloadedJarPath} is up-to-date."
 		jarDownloadRequired=false
