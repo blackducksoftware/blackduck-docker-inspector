@@ -134,6 +134,7 @@ public class DockerEnvImageInspector {
                 final ImageInfoDerived imageInfoDerived = imageInspector.generateEmptyBdio(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), getHubProjectName(config),
                         getHubProjectVersion(config), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs(), config.getHubCodelocationPrefix());
                 writeBdioFile(dissectedImage, imageInfoDerived);
+                uploadBdio(config, dissectedImage);
                 createContainerFileSystemTarIfRequested(config, dissectedImage.getTargetImageFileSystemRootDir());
                 provideOutput(config);
                 returnCode = reportResultsPkgMgrDataNotFound(config, dissectedImage);

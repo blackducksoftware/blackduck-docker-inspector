@@ -463,9 +463,9 @@ artifactory {
 
 dependencies {
     compile 'com.blackducksoftware.integration:hub-common:27.0.0'
-    compile 'com.blackducksoftware.integration:hub-imageinspector-lib:1.1.0-SNAPSHOT'
+    compile 'com.blackducksoftware.integration:hub-imageinspector-lib:1.1.0'
     
-    compile 'com.github.docker-java:docker-java:3.0.12'
+    compile 'com.github.docker-java:docker-java:3.0.14'
     compile 'org.apache.commons:commons-lang3:3.5'
     compile 'commons-io:commons-io:2.5'
     compile 'org.apache.commons:commons-collections4:4.1'
