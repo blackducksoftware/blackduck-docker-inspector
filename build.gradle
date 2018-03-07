@@ -29,7 +29,7 @@ repositories {
     }
 }
 
-version = '4.4.0-SNAPSHOT'
+version = '4.4.0'
 def inspectorImageFamily = 'hub-imageinspector-ws'
 def inspectorImageVersion = "1.0.0"
 
