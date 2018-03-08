@@ -7,8 +7,12 @@ Analyze your docker images, without running them!
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## Where can I get the latest release? ##
+To download the utility:
+```
+curl -O  https://blackducksoftware.github.io/hub-docker-inspector/hub-docker-inspector.sh
+chmod +x hub-docker-inspector.sh
+```
 You can download the latest source from GitHub: https://github.com/blackducksoftware/hub-docker-inspector. 
-You can download the latest release artifacts from GitHub: https://github.com/blackducksoftware/hub-docker-inspector/releases
 
 ## Documentation ##
 All documentation for hub-docker-inspector can be found on our public [Black Duck Confluence](https://blackducksoftware.atlassian.net/wiki/spaces/INTDOCS/pages/48435867/Hub+Docker+Inspector)
