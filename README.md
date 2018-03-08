@@ -1,5 +1,5 @@
 ## Overview ##
-Analyze your docker images, without running them!
+Analyze your docker images, without running them.
 
 # Build #
 [![Build Status](https://travis-ci.org/blackducksoftware/hub-docker-inspector.svg?branch=master)](https://travis-ci.org/blackducksoftware/hub-docker-inspector)
