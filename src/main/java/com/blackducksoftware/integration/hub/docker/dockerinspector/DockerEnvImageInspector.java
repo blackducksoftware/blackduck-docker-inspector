@@ -118,7 +118,10 @@ public class DockerEnvImageInspector {
             // TODO get BDIO via container (later: starting them if necessary)
             final File dockerTarFile = deriveDockerTarFile(config);
             final String dockerTarFilePathInContainer = toContainer(dockerTarFile.getCanonicalPath(), new File(config.getWorkingDirPath()).getCanonicalPath(), config.getWorkingDirPathImageInspector());
-            new WebServiceClient().getBdio(dockerTarFilePathInContainer);
+            if (StringUtils.isBlank(config.getImageInspectorUrl())) {
+                throw new IntegrationException("The imageinspector URL property must be set");
+            }
+            new ImageInspectorWebServiceClient().getBdio(config.getImageInspectorUrl(), dockerTarFilePathInContainer);
         } catch (final Throwable e) {
             final String msg = String.format("Error inspecting image: %s", e.getMessage());
             logger.error(msg);

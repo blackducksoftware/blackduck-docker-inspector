@@ -227,6 +227,10 @@ public class Config {
     @Value("${working.dir.path.imageinspector:}")
     private String workingDirPathImageInspector = "";
 
+    @ValueDescription(description = "The URL of the imageinspector container to use", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
+    @Value("${imageinspector.url:}")
+    private String imageInspectorUrl = "";
+
     // Environment Variables
     @Value("${BD_HUB_PASSWORD:}")
     private String hubPasswordEnvVar = "";
@@ -446,6 +450,10 @@ public class Config {
         return optionsByFieldName.get("workingDirPathImageInspector").getResolvedValue();
     }
 
+    public String getImageInspectorUrl() {
+        return optionsByFieldName.get("imageInspectorUrl").getResolvedValue();
+    }
+
     public String getCallerVersion() {
         return optionsByFieldName.get("callerVersion").getResolvedValue();
     }
@@ -556,5 +564,6 @@ public class Config {
         this.inspectorImageFamily = null;
         this.inspectorImageVersion = null;
         this.workingDirPathImageInspector = null;
+        this.imageInspectorUrl = null;
     }
 }
