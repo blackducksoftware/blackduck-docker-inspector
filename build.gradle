@@ -441,7 +441,7 @@ task itOnly(type: Test) {
     mustRunAfter tasks.test
 }
 
-task integrationTest(type: Test, dependsOn: [pkg, testPrep, buildTestTarfiles, itOnly]) {
+task integrationTest(type: Test, dependsOn: [build, pkg, testPrep, buildScript, buildTestTarfiles, itOnly]) {
 }
 
 task all(dependsOn: [pushImages, integrationTest, artifactoryPublish]) {}
