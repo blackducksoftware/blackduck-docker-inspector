@@ -178,6 +178,7 @@ public class Config {
     @Value("${docker.image.tag:}")
     private String dockerImageTag = "";
 
+    // TODO REMOVE
     @ValueDescription(description = "Running on host?", defaultValue = "true", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${on.host:true}")
     private Boolean onHost = Boolean.TRUE;
@@ -222,6 +223,10 @@ public class Config {
     @Value("${cleanup.inspector.image:false}")
     private Boolean cleanupInspectorImage = Boolean.FALSE;
 
+    @ValueDescription(description = "The working.dir.path as mounted in the imageinspector containers", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
+    @Value("${working.dir.path.imageinspector:}")
+    private String workingDirPathImageInspector = "";
+
     // Environment Variables
     @Value("${BD_HUB_PASSWORD:}")
     private String hubPasswordEnvVar = "";
@@ -253,7 +258,7 @@ public class Config {
         if (opt == null) {
             return false;
         }
-        return (Config.GROUP_PUBLIC.equals(opt.getGroup()));
+        return Config.GROUP_PUBLIC.equals(opt.getGroup());
     }
 
     public List<DockerInspectorOption> getPublicConfigOptions() throws IllegalArgumentException, IllegalAccessException {
@@ -291,6 +296,7 @@ public class Config {
                         final DockerInspectorOption opt = new DockerInspectorOption(propName, field.getName(), value, valueDescription.description(), field.getType(), valueDescription.defaultValue(), valueDescription.group(),
                                 valueDescription.deprecated());
                         optionsByKey.put(propName, opt);
+                        logger.trace(String.format("adding field name %s to optionsByFieldName", field.getName()));
                         optionsByFieldName.put(field.getName(), opt);
                         if (!Config.GROUP_PRIVATE.equals(valueDescription.group())) {
                             publicOptions.add(opt);
@@ -415,6 +421,7 @@ public class Config {
         return optionsByFieldName.get("dockerImageTag").getResolvedValue();
     }
 
+    // TODO REMOVE
     public boolean isOnHost() {
         return optionsByFieldName.get("onHost").getResolvedValue().equals("true");
     }
@@ -433,6 +440,10 @@ public class Config {
 
     public String getInspectorImageVersion() {
         return optionsByFieldName.get("inspectorImageVersion").getResolvedValue();
+    }
+
+    public String getWorkingDirPathImageInspector() {
+        return optionsByFieldName.get("workingDirPathImageInspector").getResolvedValue();
     }
 
     public String getCallerVersion() {
@@ -530,7 +541,7 @@ public class Config {
         this.jarPath = null;
         this.linuxDistro = null;
         this.loggingLevel = null;
-        this.onHost = null;
+        this.onHost = null; // TODO REMOVE
         this.outputIncludeContainerfilesystem = null;
         this.outputIncludeDockertarfile = null;
         this.outputPath = null;
@@ -544,5 +555,6 @@ public class Config {
         this.cleanupTargetImage = null;
         this.inspectorImageFamily = null;
         this.inspectorImageVersion = null;
+        this.workingDirPathImageInspector = null;
     }
 }

@@ -28,8 +28,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -54,7 +52,6 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient
 import com.blackducksoftware.integration.hub.docker.dockerinspector.help.formatter.UsageFormatter;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient.HubClient;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
-import com.blackducksoftware.integration.hub.imageinspector.api.PkgMgrDataNotFoundException;
 import com.blackducksoftware.integration.hub.imageinspector.imageformat.docker.manifest.ManifestLayerMapping;
 import com.blackducksoftware.integration.hub.imageinspector.lib.DissectedImage;
 import com.blackducksoftware.integration.hub.imageinspector.lib.ImageInfoDerived;
@@ -111,35 +108,17 @@ public class DockerEnvImageInspector {
     }
 
     @PostConstruct
-    public void inspectImage() {
-        int returnCode = -1;
+    public void newInspectImage() {
+        final int returnCode = -1;
         final DissectedImage dissectedImage = new DissectedImage();
         try {
             if (!initAndValidate(config)) {
                 System.exit(0);
             }
-            parseManifest(config, dissectedImage);
-            checkForGivenTargetOs(config, dissectedImage);
-            constructContainerFileSystem(config, dissectedImage);
-            try {
-                determineTargetOsFromContainerFileSystem(config, dissectedImage);
-                final Future<String> deferredCleanup = inspect(config, dissectedImage);
-                uploadBdio(config, dissectedImage);
-                provideDockerTar(config, dissectedImage.getDockerTarFile());
-                provideOutput(config);
-                returnCode = reportResults(config, dissectedImage);
-                cleanUp(config, deferredCleanup);
-            } catch (final PkgMgrDataNotFoundException e) {
-                logger.info("Pkg mgr not found; generating empty BDIO file");
-                final ImageInfoDerived imageInfoDerived = imageInspector.generateEmptyBdio(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), getHubProjectName(config),
-                        getHubProjectVersion(config), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs(), config.getHubCodelocationPrefix());
-                writeBdioFile(dissectedImage, imageInfoDerived);
-                uploadBdio(config, dissectedImage);
-                createContainerFileSystemTarIfRequested(config, dissectedImage.getTargetImageFileSystemRootDir());
-                provideOutput(config);
-                returnCode = reportResultsPkgMgrDataNotFound(config, dissectedImage);
-                cleanUp(config, null);
-            }
+            // TODO get BDIO via container (later: starting them if necessary)
+            final File dockerTarFile = deriveDockerTarFile(config);
+            final String dockerTarFilePathInContainer = toContainer(dockerTarFile.getCanonicalPath(), new File(config.getWorkingDirPath()).getCanonicalPath(), config.getWorkingDirPathImageInspector());
+            new WebServiceClient().getBdio(dockerTarFilePathInContainer);
         } catch (final Throwable e) {
             final String msg = String.format("Error inspecting image: %s", e.getMessage());
             logger.error(msg);
@@ -151,6 +130,111 @@ public class DockerEnvImageInspector {
         logger.info(String.format("Returning %d", returnCode));
         System.exit(returnCode);
     }
+
+    // TODO move to ProgramPaths or something
+    private String toContainer(final String localPath, final String workingDirPath, final String workingDirPathImageInspector) {
+        logger.info(String.format("*** localPath: %s", localPath));
+        if (StringUtils.isBlank(workingDirPathImageInspector)) {
+            logger.info(String.format("*** config.getWorkingDirPathImageInspector() is BLANK"));
+            return localPath;
+        }
+        final String trimmedWorkingDirPath = trimTrailingFileSeparator(workingDirPath);
+        final String trimmedWorkingDirPathImageInspector = trimTrailingFileSeparator(workingDirPathImageInspector);
+        logger.info(String.format("*** config.getWorkingDirPath(): %s", trimmedWorkingDirPath));
+        final String localRelPath = localPath.substring(trimmedWorkingDirPath.length());
+        logger.info(String.format("localRelPath: %s", localRelPath));
+        final String containerPath = String.format("%s%s", trimmedWorkingDirPathImageInspector, localRelPath);
+
+        return containerPath;
+    }
+
+    String trimTrailingFileSeparator(final String path) {
+        if (StringUtils.isBlank(path) || !path.endsWith("/")) {
+            return path;
+        }
+        return path.substring(0, path.length() - 1);
+    }
+
+    private boolean initAndValidate(final Config config) throws IOException, IntegrationException, IllegalArgumentException, IllegalAccessException {
+        logger.info(String.format("hub-docker-inspector %s", programVersion.getProgramVersion()));
+        if (helpInvoked()) {
+            showUsage();
+            return false;
+        }
+        logger.debug(String.format("running from dir: %s", System.getProperty("user.dir")));
+        logger.trace(String.format("dockerImageTag: %s", config.getDockerImageTag()));
+        if (config.isDryRun()) {
+            logger.error("dry.run is deprecated. Set upload.bdio=false instead");
+            return false;
+        }
+        hubClient.phoneHome(dockerClientManager.getDockerEngineVersion());
+        initImageName();
+        logger.info(String.format("Inspecting image:tag %s:%s", config.getDockerImageRepo(), config.getDockerImageTag()));
+        hubClient.testHubConnection();
+        return true;
+    }
+
+    private void initImageName() throws HubIntegrationException {
+        logger.debug(String.format("initImageName(): dockerImage: %s, dockerTar: %s", config.getDockerImage(), config.getDockerTar()));
+        final ImageNameResolver resolver = new ImageNameResolver(config.getDockerImage());
+        resolver.getNewImageRepo().ifPresent(repoName -> config.setDockerImageRepo(repoName));
+        resolver.getNewImageTag().ifPresent(tagName -> config.setDockerImageTag(tagName));
+        logger.debug(String.format("initImageName(): final: dockerImage: %s; dockerImageRepo: %s; dockerImageTag: %s", config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag()));
+    }
+
+    private File deriveDockerTarFile(final Config config) throws IOException, HubIntegrationException {
+        File dockerTarFile = null;
+        if (StringUtils.isNotBlank(config.getDockerTar())) {
+            dockerTarFile = new File(config.getDockerTar());
+        } else if (StringUtils.isNotBlank(config.getDockerImageId())) {
+            dockerTarFile = dockerClientManager.getTarFileFromDockerImageById(config.getDockerImageId());
+        } else if (StringUtils.isNotBlank(config.getDockerImageRepo())) {
+            dockerTarFile = dockerClientManager.getTarFileFromDockerImage(config.getDockerImageRepo(), config.getDockerImageTag());
+        }
+        return dockerTarFile;
+    }
+
+    /////////////////// Old / Suspect code: //////////////////
+    // public void inspectImage() {
+    // int returnCode = -1;
+    // final DissectedImage dissectedImage = new DissectedImage();
+    // try {
+    // if (!initAndValidate(config)) {
+    // System.exit(0);
+    // }
+    // parseManifest(config, dissectedImage);
+    // checkForGivenTargetOs(config, dissectedImage);
+    // constructContainerFileSystem(config, dissectedImage);
+    // try {
+    // determineTargetOsFromContainerFileSystem(config, dissectedImage);
+    // final Future<String> deferredCleanup = inspect(config, dissectedImage);
+    // uploadBdio(config, dissectedImage);
+    // provideDockerTar(config, dissectedImage.getDockerTarFile());
+    // provideOutput(config);
+    // returnCode = reportResults(config, dissectedImage);
+    // cleanUp(config, deferredCleanup);
+    // } catch (final PkgMgrDataNotFoundException e) {
+    // logger.info("Pkg mgr not found; generating empty BDIO file");
+    // final ImageInfoDerived imageInfoDerived = imageInspector.generateEmptyBdio(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), getHubProjectName(config),
+    // getHubProjectVersion(config), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs(), config.getHubCodelocationPrefix());
+    // writeBdioFile(dissectedImage, imageInfoDerived);
+    // uploadBdio(config, dissectedImage);
+    // createContainerFileSystemTarIfRequested(config, dissectedImage.getTargetImageFileSystemRootDir());
+    // provideOutput(config);
+    // returnCode = reportResultsPkgMgrDataNotFound(config, dissectedImage);
+    // cleanUp(config, null);
+    // }
+    // } catch (final Throwable e) {
+    // final String msg = String.format("Error inspecting image: %s", e.getMessage());
+    // logger.error(msg);
+    // final String trace = ExceptionUtils.getStackTrace(e);
+    // logger.debug(String.format("Stack trace: %s", trace));
+    // resultFile.write(new Gson(), programPaths.getHubDockerResultPath(), false, msg, dissectedImage.getTargetOs(), dissectedImage.getRunOnImageName(), dissectedImage.getRunOnImageTag(),
+    // dissectedImage.getDockerTarFile() == null ? "" : dissectedImage.getDockerTarFile().getName(), dissectedImage.getBdioFilename());
+    // }
+    // logger.info(String.format("Returning %d", returnCode));
+    // System.exit(returnCode);
+    // }
 
     private void checkForGivenTargetOs(final Config config, final DissectedImage dissectedImage) {
         dissectedImage.setTargetOs(imageInspector.detectOperatingSystem(config.getLinuxDistro()));
@@ -201,27 +285,27 @@ public class DockerEnvImageInspector {
         }
     }
 
-    private Future<String> inspect(final Config config, final DissectedImage dissectedImage) throws IOException, InterruptedException, CompressorException, IllegalAccessException, IntegrationException {
-        Future<String> deferredCleanup = null;
-        if (config.isOnHost()) {
-            logger.info("Inspecting image in container");
-            deferredCleanup = inspectInSubContainer(config, dissectedImage.getDockerTarFile(), dissectedImage.getTargetOs(), dissectedImage.getRunOnImageName(), dissectedImage.getRunOnImageTag());
-        } else {
-            if (dissectedImage.getTargetImageFileSystemRootDir() == null) {
-                dissectedImage.setTargetImageFileSystemRootDir(
-                        imageInspector.extractDockerLayers(new File(programPaths.getHubDockerWorkingDirPath()), config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerTars(), dissectedImage.getLayerMappings()));
-            }
-            if (dissectedImage.getTargetOs() == null) {
-                dissectedImage.setTargetOs(imageInspector.detectOperatingSystem(dissectedImage.getTargetImageFileSystemRootDir()));
-            }
-            logger.info(String.format("Target image tarfile: %s; target OS: %s", dissectedImage.getDockerTarFile().getAbsolutePath(), dissectedImage.getTargetOs().toString()));
-            final ImageInfoDerived imageInfoDerived = imageInspector.generateBdioFromImageFilesDir(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), getHubProjectName(config),
-                    getHubProjectVersion(config), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs(), config.getHubCodelocationPrefix());
-            writeBdioFile(dissectedImage, imageInfoDerived);
-            createContainerFileSystemTarIfRequested(config, dissectedImage.getTargetImageFileSystemRootDir());
-        }
-        return deferredCleanup;
-    }
+    // private Future<String> inspect(final Config config, final DissectedImage dissectedImage) throws IOException, InterruptedException, CompressorException, IllegalAccessException, IntegrationException {
+    // Future<String> deferredCleanup = null;
+    // if (config.isOnHost()) {
+    // logger.info("Inspecting image in container");
+    // deferredCleanup = inspectInSubContainer(config, dissectedImage);
+    // } else {
+    // if (dissectedImage.getTargetImageFileSystemRootDir() == null) {
+    // dissectedImage.setTargetImageFileSystemRootDir(
+    // imageInspector.extractDockerLayers(new File(programPaths.getHubDockerWorkingDirPath()), config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerTars(), dissectedImage.getLayerMappings()));
+    // }
+    // if (dissectedImage.getTargetOs() == null) {
+    // dissectedImage.setTargetOs(imageInspector.detectOperatingSystem(dissectedImage.getTargetImageFileSystemRootDir()));
+    // }
+    // logger.info(String.format("Target image tarfile: %s; target OS: %s", dissectedImage.getDockerTarFile().getAbsolutePath(), dissectedImage.getTargetOs().toString()));
+    // final ImageInfoDerived imageInfoDerived = imageInspector.generateBdioFromImageFilesDir(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), getHubProjectName(config),
+    // getHubProjectVersion(config), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs(), config.getHubCodelocationPrefix());
+    // writeBdioFile(dissectedImage, imageInfoDerived);
+    // createContainerFileSystemTarIfRequested(config, dissectedImage.getTargetImageFileSystemRootDir());
+    // }
+    // return deferredCleanup;
+    // }
 
     private void writeBdioFile(final DissectedImage dissectedImage, final ImageInfoDerived imageInfoDerived) throws FileNotFoundException, IOException {
         final File bdioFile = imageInspector.writeBdioFile(new File(programPaths.getHubDockerOutputPath()), imageInfoDerived);
@@ -250,12 +334,12 @@ public class DockerEnvImageInspector {
         }
     }
 
-    private void parseManifest(final Config config, final DissectedImage dissectedImage) throws IOException, HubIntegrationException, Exception {
-        dissectedImage.setDockerTarFile(deriveDockerTarFile(config));
-        dissectedImage.setLayerTars(imageInspector.extractLayerTars(new File(programPaths.getHubDockerWorkingDirPath()), dissectedImage.getDockerTarFile()));
-        dissectedImage.setLayerMappings(imageInspector.getLayerMappings(new File(programPaths.getHubDockerWorkingDirPath()), dissectedImage.getDockerTarFile().getName(), config.getDockerImageRepo(), config.getDockerImageTag()));
-        adjustImageNameTagFromLayerMappings(dissectedImage.getLayerMappings());
-    }
+    // private void parseManifest(final Config config, final DissectedImage dissectedImage) throws IOException, HubIntegrationException, Exception {
+    // dissectedImage.setDockerTarFile(deriveDockerTarFile(config));
+    // dissectedImage.setLayerTars(imageInspector.extractLayerTars(new File(programPaths.getHubDockerWorkingDirPath()), dissectedImage.getDockerTarFile()));
+    // dissectedImage.setLayerMappings(imageInspector.getLayerMappings(new File(programPaths.getHubDockerWorkingDirPath()), dissectedImage.getDockerTarFile().getName(), config.getDockerImageRepo(), config.getDockerImageTag()));
+    // adjustImageNameTagFromLayerMappings(dissectedImage.getLayerMappings());
+    // }
 
     private void cleanupWorkingDirs() {
         logger.debug(String.format("Removing %s, %s, %s", programPaths.getHubDockerWorkingDirPathHost(), programPaths.getHubDockerTargetDirPathHost(), programPaths.getHubDockerOutputPathHost()));
@@ -420,26 +504,13 @@ public class DockerEnvImageInspector {
         }
     }
 
-    private Future<String> inspectInSubContainer(final Config config, final File dockerTarFile, final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag)
-            throws InterruptedException, IOException, IllegalArgumentException, IllegalAccessException, IntegrationException {
-        final String msg = String.format("Image inspection for %s will use docker image %s:%s", targetOs.toString(), runOnImageName, runOnImageTag);
-        logger.info(msg);
-        String runOnImageId = null;
-        try {
-            runOnImageId = dockerClientManager.pullImage(runOnImageName, runOnImageTag);
-        } catch (final Exception e) {
-            logger.warn(String.format("Unable to pull docker image %s:%s; proceeding anyway since it may already exist locally", runOnImageName, runOnImageTag));
-        }
-        logger.debug(String.format("runInSubContainer(): Running subcontainer on image %s, repo %s, tag %s", config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag()));
-        final String containerId = dockerClientManager.run(runOnImageName, runOnImageTag, runOnImageId, dockerTarFile, true, config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag());
-
-        // spin the inspector container/image cleanup off in it's own parallel thread
-        final ContainerCleaner containerCleaner = new ContainerCleaner(dockerClientManager, runOnImageId, containerId, config.isCleanupInspectorContainer(), config.isCleanupInspectorImage());
-        final ExecutorService executor = Executors.newSingleThreadExecutor();
-        final Future<String> containerCleanerFuture = executor.submit(containerCleaner);
-        return containerCleanerFuture;
-
-    }
+    // TODO: In container scenario: do initial eval in container instead of on "host"?
+    // private Future<String> inspectInSubContainer(final Config config, final DissectedImage imageDetails)
+    // throws IntegrationException {
+    // // TODO choose implementation, but use injection
+    // final Inspector inspector = new DockerExecInspector();
+    // return inspector.inspectInSubContainer(config, imageDetails);
+    // }
 
     private String getHubProjectName(final Config config) {
         return programPaths.unEscape(config.getHubProjectName());
@@ -447,42 +518,6 @@ public class DockerEnvImageInspector {
 
     private String getHubProjectVersion(final Config config) {
         return programPaths.unEscape(config.getHubProjectVersion());
-    }
-
-    private boolean initAndValidate(final Config config) throws IOException, IntegrationException, IllegalArgumentException, IllegalAccessException {
-        logger.info(String.format("hub-docker-inspector %s", programVersion.getProgramVersion()));
-        if (helpInvoked()) {
-            showUsage();
-            return false;
-        }
-        logger.debug(String.format("running from dir: %s", System.getProperty("user.dir")));
-        logger.debug(String.format("Dry run mode is set to %b", config.isDryRun()));
-        logger.trace(String.format("dockerImageTag: %s", config.getDockerImageTag()));
-        if (config.isDryRun()) {
-            logger.warn("dry.run is deprecated. Set upload.bdio=false instead");
-            config.setUploadBdio(false);
-        }
-        if (config.isOnHost()) {
-            hubClient.phoneHome(dockerClientManager.getDockerEngineVersion());
-        }
-        initImageName();
-        logger.info(String.format("Inspecting image:tag %s:%s", config.getDockerImageRepo(), config.getDockerImageTag()));
-        if (config.isOnHost()) {
-            hubClient.testHubConnection();
-        }
-        return true;
-    }
-
-    private File deriveDockerTarFile(final Config config) throws IOException, HubIntegrationException {
-        File dockerTarFile = null;
-        if (StringUtils.isNotBlank(config.getDockerTar())) {
-            dockerTarFile = new File(config.getDockerTar());
-        } else if (StringUtils.isNotBlank(config.getDockerImageId())) {
-            dockerTarFile = dockerClientManager.getTarFileFromDockerImageById(config.getDockerImageId());
-        } else if (StringUtils.isNotBlank(config.getDockerImageRepo())) {
-            dockerTarFile = dockerClientManager.getTarFileFromDockerImage(config.getDockerImageRepo(), config.getDockerImageTag());
-        }
-        return dockerTarFile;
     }
 
     private void adjustImageNameTagFromLayerMappings(final List<ManifestLayerMapping> layerMappings) {
@@ -497,11 +532,4 @@ public class DockerEnvImageInspector {
         logger.debug(String.format("adjustImageNameTagFromLayerMappings(): final: dockerImage: %s; dockerImageRepo: %s; dockerImageTag: %s", config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag()));
     }
 
-    private void initImageName() throws HubIntegrationException {
-        logger.debug(String.format("initImageName(): dockerImage: %s, dockerTar: %s", config.getDockerImage(), config.getDockerTar()));
-        final ImageNameResolver resolver = new ImageNameResolver(config.getDockerImage());
-        resolver.getNewImageRepo().ifPresent(repoName -> config.setDockerImageRepo(repoName));
-        resolver.getNewImageTag().ifPresent(tagName -> config.setDockerImageTag(tagName));
-        logger.debug(String.format("initImageName(): final: dockerImage: %s; dockerImageRepo: %s; dockerImageTag: %s", config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag()));
-    }
 }
