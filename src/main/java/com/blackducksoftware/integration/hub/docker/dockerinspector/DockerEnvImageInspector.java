@@ -137,17 +137,21 @@ public class DockerEnvImageInspector {
     }
 
     // TODO move to ProgramPaths or something
+    /*
+     * Translate a local path to a container path ASSUMING the local working dir is mounted for the container as it's working dir. Find path to the given localPath RELATIVE to the local working dir. Convert that to the container's path by
+     * appending that relative path to the container's working dir
+     */
     private String toContainer(final String localPath, final String workingDirPath, final String workingDirPathImageInspector) {
-        logger.trace(String.format("localPath: %s", localPath));
+        logger.debug(String.format("localPath: %s", localPath));
         if (StringUtils.isBlank(workingDirPathImageInspector)) {
-            logger.trace(String.format("config.getWorkingDirPathImageInspector() is BLANK"));
+            logger.debug(String.format("config.getWorkingDirPathImageInspector() is BLANK"));
             return localPath;
         }
         final String trimmedWorkingDirPath = trimTrailingFileSeparator(workingDirPath);
         final String trimmedWorkingDirPathImageInspector = trimTrailingFileSeparator(workingDirPathImageInspector);
-        logger.trace(String.format("config.getWorkingDirPath(): %s", trimmedWorkingDirPath));
+        logger.debug(String.format("config.getWorkingDirPath(): %s", trimmedWorkingDirPath));
         final String localRelPath = localPath.substring(trimmedWorkingDirPath.length());
-        logger.trace(String.format("localRelPath: %s", localRelPath));
+        logger.debug(String.format("localRelPath: %s", localRelPath));
         final String containerPath = String.format("%s%s", trimmedWorkingDirPathImageInspector, localRelPath);
 
         return containerPath;

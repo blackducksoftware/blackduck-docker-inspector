@@ -4,21 +4,26 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.ProcessBuilder.Redirect;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.imageinspector.TestUtils;
 
 public class DockerInspectorTest {
@@ -79,27 +84,40 @@ public class DockerInspectorTest {
 
     @Test
     public void testWhiteout() throws IOException, InterruptedException {
-        testTar("whiteouttest.tar", "blackducksoftware_whiteouttest", "blackducksoftware/whiteouttest", "1.0", "1.0", "var_lib_dpkg", true);
+        testTar("build/images/test/whiteouttest.tar", "blackducksoftware_whiteouttest", "blackducksoftware/whiteouttest", "1.0", "1.0", "var_lib_dpkg", true, null, true);
     }
 
     @Test
     public void testAggregateTarfileImageOne() throws IOException, InterruptedException {
-        testTar("aggregated.tar", "blackducksoftware_whiteouttest", "blackducksoftware/whiteouttest", "1.0", "1.0", "var_lib_dpkg", true);
+        testTar("build/images/test/aggregated.tar", "blackducksoftware_whiteouttest", "blackducksoftware/whiteouttest", "1.0", "1.0", "var_lib_dpkg", true, null, true);
     }
 
     @Test
     public void testAggregateTarfileImageTwo() throws IOException, InterruptedException {
-        testTar("aggregated.tar", "blackducksoftware_centos_minus_vim_plus_bacula", "blackducksoftware/centos_minus_vim_plus_bacula", "1.0", "1.0", "var_lib_rpm", true);
+        testTar("build/images/test/aggregated.tar", "blackducksoftware_centos_minus_vim_plus_bacula", "blackducksoftware/centos_minus_vim_plus_bacula", "1.0", "1.0", "var_lib_rpm", true, null, true);
     }
 
     @Test
     public void testAlpineLatestTarRepoTagSpecified() throws IOException, InterruptedException {
-        testTar("alpine.tar", "alpine", "alpine", "latest", "latest", "lib_apk", false);
+        testTar("build/images/test/alpine.tar", "alpine", "alpine", "latest", "latest", "lib_apk", false, null, true);
     }
 
     @Test
     public void testAlpineLatestTarRepoTagNotSpecified() throws IOException, InterruptedException {
-        testTar("alpine.tar", "alpine", null, null, "latest", "lib_apk", false);
+        testTar("build/images/test/alpine.tar", "alpine", null, null, "latest", "lib_apk", false, null, true);
+    }
+
+    // TODO this requires (a) minikube installed, (b) II-ws containers already running
+    @Test
+    public void testAlpineExistingContainer() throws IOException, InterruptedException, IntegrationException {
+        execCmd("cp build/images/test/alpine.tar /Users/billings/tmp/working", 5000L);
+        final String kubeIp = execCmd("minikube ip", 2000L);
+        final List<String> additionalArgs = new ArrayList<>();
+        additionalArgs.add(String.format("--imageinspector.url=http://%s:8080", kubeIp));
+        // TODO TEMP hard coded path
+        additionalArgs.add("--working.dir.path=/Users/billings/tmp/working");
+        additionalArgs.add("--working.dir.path.imageinspector=/opt/blackduck/hub-imageinspector-ws/working");
+        testTar("/Users/billings/tmp/working/alpine.tar", "alpine", null, null, "latest", "lib_apk", false, additionalArgs, false);
     }
 
     @Test
@@ -118,6 +136,7 @@ public class DockerInspectorTest {
         fullCmd.addAll(partialCmd);
 
         System.out.println(String.format("Running --pulljar end to end test"));
+        // TODO eliminate redundancy w/ execCmd
         final ProcessBuilder pb = new ProcessBuilder(fullCmd);
         final Map<String, String> env = pb.environment();
         final String oldPath = System.getenv("PATH");
@@ -153,13 +172,15 @@ public class DockerInspectorTest {
     }
 
     private void testImage(final String inspectTarget, final String imageForBdioFilename, final String tagForBdioFilename, final String pkgMgrPathString, final boolean requireBdioMatch) throws IOException, InterruptedException {
-        test(imageForBdioFilename, pkgMgrPathString, null, null, tagForBdioFilename, inspectTarget, requireBdioMatch);
+        final String inspectTargetArg = String.format(String.format("--docker.image=%s", inspectTarget));
+        test(imageForBdioFilename, pkgMgrPathString, null, null, tagForBdioFilename, inspectTargetArg, requireBdioMatch, null, true);
     }
 
-    private void testTar(final String tarFilename, final String imageForBdioFilename, final String repo, final String tag, final String tagForBdioFilename, final String pkgMgrPathString, final boolean requireBdioMatch)
+    private void testTar(final String tarPath, final String imageForBdioFilename, final String repo, final String tag, final String tagForBdioFilename, final String pkgMgrPathString, final boolean requireBdioMatch,
+            final List<String> additionalArgs, final boolean needWorkingDir)
             throws IOException, InterruptedException {
-        final String inspectTarget = String.format(String.format("build/images/test/%s", tarFilename));
-        test(imageForBdioFilename, pkgMgrPathString, repo, tag, tagForBdioFilename, inspectTarget, requireBdioMatch);
+        final String inspectTarget = String.format(String.format("--docker.tar=%s", tarPath));
+        test(imageForBdioFilename, pkgMgrPathString, repo, tag, tagForBdioFilename, inspectTarget, requireBdioMatch, additionalArgs, needWorkingDir);
     }
 
     private File getOutputImageTarFile(final String inspectTarget, final String imageForBdioFilename, final String tagForBdioFilename) {
@@ -183,7 +204,9 @@ public class DockerInspectorTest {
         return outputTarFile;
     }
 
-    private void test(final String imageForBdioFilename, final String pkgMgrPathString, final String repo, final String tag, final String tagForBdioFilename, final String inspectTarget, final boolean requireBdioMatch)
+    // TODO wow, this is ugly
+    private void test(final String imageForBdioFilename, final String pkgMgrPathString, final String repo, final String tag, final String tagForBdioFilename, final String inspectTarget, final boolean requireBdioMatch,
+            final List<String> additionalArgs, final boolean needWorkingDir)
             throws IOException, InterruptedException {
         final String workingDirPath = "test/endToEnd";
         try {
@@ -212,7 +235,7 @@ public class DockerInspectorTest {
         final ProgramVersion pgmVerObj = new ProgramVersion();
         pgmVerObj.init();
         final String programVersion = pgmVerObj.getProgramVersion();
-        final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--dry.run=true", String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", programVersion), "--output.path=test/output",
+        final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--upload.bdio=false", String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", programVersion), "--output.path=test/output",
                 "--output.include.dockertarfile=true", "--output.include.containerfilesystem=true", "--hub.always.trust.cert=true");
         // Arrays.asList returns a fixed size list; need a variable sized list
         final List<String> fullCmd = new ArrayList<>();
@@ -224,8 +247,14 @@ public class DockerInspectorTest {
             fullCmd.add(String.format("--docker.image.tag=%s", tag));
         }
         fullCmd.add("--logging.level.com.blackducksoftware=DEBUG");
-        fullCmd.add(String.format("--working.dir.path=%s", workingDirPath));
+        if (needWorkingDir) {
+            fullCmd.add(String.format("--working.dir.path=%s", workingDirPath));
+        }
         fullCmd.add(inspectTarget);
+
+        if (additionalArgs != null && additionalArgs.size() > 0) {
+            fullCmd.addAll(additionalArgs);
+        }
 
         System.out.println(String.format("Running end to end test on %s with command %s", inspectTarget, fullCmd.toString()));
         final ProcessBuilder pb = new ProcessBuilder(fullCmd);
@@ -251,5 +280,49 @@ public class DockerInspectorTest {
 
         assertTrue(outputImageTarFile.exists());
         assertTrue(outputContainerFileSystemFile.exists());
+    }
+
+    private static String execCmd(final String cmd, final long timeout) throws IOException, InterruptedException, IntegrationException {
+        return execCmd(cmd, timeout, null);
+    }
+
+    private static String execCmd(final String cmd, final long timeout, final Map<String, String> env) throws IOException, InterruptedException, IntegrationException {
+        System.out.println(String.format("Executing: %s", cmd));
+        final ProcessBuilder pb = new ProcessBuilder("bash", "-c", cmd);
+        pb.redirectOutput(Redirect.PIPE);
+        pb.redirectError(Redirect.PIPE);
+        pb.environment().put("PATH", "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin");
+        if (env != null) {
+            pb.environment().putAll(env);
+        }
+        final Process p = pb.start();
+        final String stdoutString = toString(p.getInputStream());
+        final String stderrString = toString(p.getErrorStream());
+        final boolean finished = p.waitFor(timeout, TimeUnit.SECONDS);
+        if (!finished) {
+            throw new InterruptedException(String.format("Command '%s' timed out", cmd));
+        }
+
+        System.out.println(String.format("%s: stdout: %s", cmd, stdoutString));
+        System.out.println(String.format("%s: stderr: %s", cmd, stderrString));
+        final int retCode = p.exitValue();
+        if (retCode != 0) {
+            System.out.println(String.format("%s: retCode: %d", cmd, retCode));
+            throw new IntegrationException(String.format("Command '%s' failed: %s", cmd, stderrString));
+        }
+        return stdoutString;
+    }
+
+    private static String toString(final InputStream is) throws IOException {
+        final BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        final StringBuilder builder = new StringBuilder();
+        String line = null;
+        while ((line = reader.readLine()) != null) {
+            if (builder.length() > 0) {
+                builder.append("\n");
+            }
+            builder.append(line);
+        }
+        return builder.toString();
     }
 }
