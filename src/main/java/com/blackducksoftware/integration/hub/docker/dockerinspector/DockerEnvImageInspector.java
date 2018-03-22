@@ -23,7 +23,6 @@
  */
 package com.blackducksoftware.integration.hub.docker.dockerinspector;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -51,7 +50,6 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient.Hu
 import com.blackducksoftware.integration.hub.docker.dockerinspector.wsclient.RestClientInspector;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.blackducksoftware.integration.hub.imageinspector.api.PkgMgrDataNotFoundException;
-import com.blackducksoftware.integration.hub.imageinspector.imageformat.docker.manifest.ManifestLayerMapping;
 import com.blackducksoftware.integration.hub.imageinspector.lib.DissectedImage;
 import com.blackducksoftware.integration.hub.imageinspector.lib.ImageInfoDerived;
 import com.blackducksoftware.integration.hub.imageinspector.lib.ImageInspector;
@@ -118,9 +116,7 @@ public class DockerEnvImageInspector {
             if (!initAndValidate(config)) {
                 System.exit(0);
             }
-            parseManifest(config, dissectedImage);
-            checkForGivenTargetOs(config, dissectedImage);
-            constructContainerFileSystem(config, dissectedImage);
+
             try {
                 if (StringUtils.isBlank(config.getImageInspectorUrl())) {
                     returnCode = dockerExecInspector.getBdio(dissectedImage);
@@ -148,26 +144,6 @@ public class DockerEnvImageInspector {
         }
         logger.info(String.format("Returning %d", returnCode));
         System.exit(returnCode);
-    }
-
-    private void checkForGivenTargetOs(final Config config, final DissectedImage dissectedImage) {
-        dissectedImage.setTargetOs(imageInspector.detectOperatingSystem(config.getLinuxDistro()));
-    }
-
-    private void constructContainerFileSystem(final Config config, final DissectedImage dissectedImage) throws IOException, IntegrationException {
-        if (config.isOnHost() && dissectedImage.getTargetOs() != null && !config.isOutputIncludeContainerfilesystem()) {
-            // don't need to construct container File System
-            return;
-        }
-        dissectedImage.setTargetImageFileSystemRootDir(
-                imageInspector.extractDockerLayers(new File(programPaths.getHubDockerWorkingDirPath()), config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerTars(), dissectedImage.getLayerMappings()));
-    }
-
-    private void parseManifest(final Config config, final DissectedImage dissectedImage) throws IOException, HubIntegrationException, Exception {
-        dissectedImage.setDockerTarFile(deriveDockerTarFile(config));
-        dissectedImage.setLayerTars(imageInspector.extractLayerTars(new File(programPaths.getHubDockerWorkingDirPath()), dissectedImage.getDockerTarFile()));
-        dissectedImage.setLayerMappings(imageInspector.getLayerMappings(new File(programPaths.getHubDockerWorkingDirPath()), dissectedImage.getDockerTarFile().getName(), config.getDockerImageRepo(), config.getDockerImageTag()));
-        adjustImageNameTagFromLayerMappings(dissectedImage.getLayerMappings());
     }
 
     private boolean helpInvoked() {
@@ -224,30 +200,6 @@ public class DockerEnvImageInspector {
             hubClient.testHubConnection();
         }
         return true;
-    }
-
-    private File deriveDockerTarFile(final Config config) throws IOException, HubIntegrationException {
-        File dockerTarFile = null;
-        if (StringUtils.isNotBlank(config.getDockerTar())) {
-            dockerTarFile = new File(config.getDockerTar());
-        } else if (StringUtils.isNotBlank(config.getDockerImageId())) {
-            dockerTarFile = dockerClientManager.getTarFileFromDockerImageById(config.getDockerImageId());
-        } else if (StringUtils.isNotBlank(config.getDockerImageRepo())) {
-            dockerTarFile = dockerClientManager.getTarFileFromDockerImage(config.getDockerImageRepo(), config.getDockerImageTag());
-        }
-        return dockerTarFile;
-    }
-
-    private void adjustImageNameTagFromLayerMappings(final List<ManifestLayerMapping> layerMappings) {
-        if (layerMappings != null && layerMappings.size() == 1) {
-            if (StringUtils.isBlank(config.getDockerImageRepo())) {
-                config.setDockerImageRepo(layerMappings.get(0).getImageName());
-            }
-            if (StringUtils.isBlank(config.getDockerImageTag())) {
-                config.setDockerImageTag(layerMappings.get(0).getTagName());
-            }
-        }
-        logger.debug(String.format("adjustImageNameTagFromLayerMappings(): final: dockerImage: %s; dockerImageRepo: %s; dockerImageTag: %s", config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag()));
     }
 
     private void initImageName() throws HubIntegrationException {

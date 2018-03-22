@@ -25,6 +25,7 @@ package com.blackducksoftware.integration.hub.docker.dockerinspector.dockerexec;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -45,6 +46,7 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Confi
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.DockerClientManager;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
+import com.blackducksoftware.integration.hub.imageinspector.imageformat.docker.manifest.ManifestLayerMapping;
 import com.blackducksoftware.integration.hub.imageinspector.lib.DissectedImage;
 import com.blackducksoftware.integration.hub.imageinspector.lib.ImageInfoDerived;
 import com.blackducksoftware.integration.hub.imageinspector.lib.ImageInspector;
@@ -77,16 +79,62 @@ public class DockerExecInspector {
     @Autowired
     private Output output;
 
-    public int getBdio(final DissectedImage dissectedImage) throws IOException, IntegrationException, InterruptedException, CompressorException, IllegalAccessException {
-        int returnCode;
+    public int getBdio(final DissectedImage dissectedImage) throws IOException, IntegrationException, IllegalAccessException, InterruptedException, CompressorException {
+        parseManifest(config, dissectedImage);
+        checkForGivenTargetOs(config, dissectedImage);
+        constructContainerFileSystem(config, dissectedImage);
         determineTargetOsFromContainerFileSystem(config, dissectedImage);
         final Future<String> deferredCleanup = inspect(config, dissectedImage);
         output.uploadBdio(config, dissectedImage);
         provideDockerTar(config, dissectedImage.getDockerTarFile());
         output.provideOutput(config);
-        returnCode = output.reportResults(config, dissectedImage);
+        final int returnCode = output.reportResults(config, dissectedImage);
         output.cleanUp(config, deferredCleanup);
         return returnCode;
+    }
+
+    private void checkForGivenTargetOs(final Config config, final DissectedImage dissectedImage) {
+        dissectedImage.setTargetOs(imageInspector.detectOperatingSystem(config.getLinuxDistro()));
+    }
+
+    private void constructContainerFileSystem(final Config config, final DissectedImage dissectedImage) throws IOException, IntegrationException {
+        if (config.isOnHost() && dissectedImage.getTargetOs() != null && !config.isOutputIncludeContainerfilesystem()) {
+            // don't need to construct container File System
+            return;
+        }
+        dissectedImage.setTargetImageFileSystemRootDir(
+                imageInspector.extractDockerLayers(new File(programPaths.getHubDockerWorkingDirPath()), config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerTars(), dissectedImage.getLayerMappings()));
+    }
+
+    private void parseManifest(final Config config, final DissectedImage dissectedImage) throws IOException, IntegrationException {
+        dissectedImage.setDockerTarFile(deriveDockerTarFile(config));
+        dissectedImage.setLayerTars(imageInspector.extractLayerTars(new File(programPaths.getHubDockerWorkingDirPath()), dissectedImage.getDockerTarFile()));
+        dissectedImage.setLayerMappings(imageInspector.getLayerMappings(new File(programPaths.getHubDockerWorkingDirPath()), dissectedImage.getDockerTarFile().getName(), config.getDockerImageRepo(), config.getDockerImageTag()));
+        adjustImageNameTagFromLayerMappings(dissectedImage.getLayerMappings());
+    }
+
+    private File deriveDockerTarFile(final Config config) throws IOException, HubIntegrationException {
+        File dockerTarFile = null;
+        if (StringUtils.isNotBlank(config.getDockerTar())) {
+            dockerTarFile = new File(config.getDockerTar());
+        } else if (StringUtils.isNotBlank(config.getDockerImageId())) {
+            dockerTarFile = dockerClientManager.getTarFileFromDockerImageById(config.getDockerImageId());
+        } else if (StringUtils.isNotBlank(config.getDockerImageRepo())) {
+            dockerTarFile = dockerClientManager.getTarFileFromDockerImage(config.getDockerImageRepo(), config.getDockerImageTag());
+        }
+        return dockerTarFile;
+    }
+
+    private void adjustImageNameTagFromLayerMappings(final List<ManifestLayerMapping> layerMappings) {
+        if (layerMappings != null && layerMappings.size() == 1) {
+            if (StringUtils.isBlank(config.getDockerImageRepo())) {
+                config.setDockerImageRepo(layerMappings.get(0).getImageName());
+            }
+            if (StringUtils.isBlank(config.getDockerImageTag())) {
+                config.setDockerImageTag(layerMappings.get(0).getTagName());
+            }
+        }
+        logger.debug(String.format("adjustImageNameTagFromLayerMappings(): final: dockerImage: %s; dockerImageRepo: %s; dockerImageTag: %s", config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag()));
     }
 
     private Future<String> inspect(final Config config, final DissectedImage dissectedImage) throws IOException, InterruptedException, CompressorException, IllegalAccessException, IntegrationException {
