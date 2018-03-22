@@ -41,15 +41,17 @@ import com.blackducksoftware.integration.log.Slf4jIntLogger;
 public class ImageInspectorWebServiceClient {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public void getBdio(final String imageInspectorUrl, final String containerPathToTarfile) throws IntegrationException, MalformedURLException {
+    // TODO return something
+    public void getBdio(final String imageInspectorUrl, final String containerPathToTarfile, final boolean cleanup) throws IntegrationException, MalformedURLException {
         logger.info(String.format("ImageInspector URL: %s", imageInspectorUrl));
         final RestConnection restConnection = createConnection(imageInspectorUrl);
 
-        final String url = String.format("%s/getbdio?tarfile=%s", imageInspectorUrl, containerPathToTarfile);
+        final String url = String.format("%s/getbdio?tarfile=%s&cleanup=%b", imageInspectorUrl, containerPathToTarfile, cleanup);
         final Request request = new Request.Builder(url).method(HttpMethod.GET).build();
         try (Response response = restConnection.executeRequest(request)) {
+            logger.info(String.format("Response: HTTP status: %d", response.getStatusCode()));
             final String responseBody = response.getContentString();
-            logger.info(String.format("Response: %s", responseBody));
+            logger.info(String.format("Response: body: %s", responseBody));
         } catch (final IOException | IllegalArgumentException e) {
             throw new IntegrationException(e);
         }

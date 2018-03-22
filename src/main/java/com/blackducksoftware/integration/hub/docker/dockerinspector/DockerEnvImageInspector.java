@@ -109,7 +109,7 @@ public class DockerEnvImageInspector {
 
     @PostConstruct
     public void newInspectImage() {
-        final int returnCode = -1;
+        int returnCode = -1;
         final DissectedImage dissectedImage = new DissectedImage();
         try {
             if (!initAndValidate(config)) {
@@ -121,7 +121,9 @@ public class DockerEnvImageInspector {
             if (StringUtils.isBlank(config.getImageInspectorUrl())) {
                 throw new IntegrationException("The imageinspector URL property must be set");
             }
-            new ImageInspectorWebServiceClient().getBdio(config.getImageInspectorUrl(), dockerTarFilePathInContainer);
+            new ImageInspectorWebServiceClient().getBdio(config.getImageInspectorUrl(), dockerTarFilePathInContainer, config.isCleanupWorkingDir());
+            // TODO take what that returns and do something with it
+            returnCode = 0;
         } catch (final Throwable e) {
             final String msg = String.format("Error inspecting image: %s", e.getMessage());
             logger.error(msg);
@@ -136,16 +138,16 @@ public class DockerEnvImageInspector {
 
     // TODO move to ProgramPaths or something
     private String toContainer(final String localPath, final String workingDirPath, final String workingDirPathImageInspector) {
-        logger.info(String.format("*** localPath: %s", localPath));
+        logger.trace(String.format("localPath: %s", localPath));
         if (StringUtils.isBlank(workingDirPathImageInspector)) {
-            logger.info(String.format("*** config.getWorkingDirPathImageInspector() is BLANK"));
+            logger.trace(String.format("config.getWorkingDirPathImageInspector() is BLANK"));
             return localPath;
         }
         final String trimmedWorkingDirPath = trimTrailingFileSeparator(workingDirPath);
         final String trimmedWorkingDirPathImageInspector = trimTrailingFileSeparator(workingDirPathImageInspector);
-        logger.info(String.format("*** config.getWorkingDirPath(): %s", trimmedWorkingDirPath));
+        logger.trace(String.format("config.getWorkingDirPath(): %s", trimmedWorkingDirPath));
         final String localRelPath = localPath.substring(trimmedWorkingDirPath.length());
-        logger.info(String.format("localRelPath: %s", localRelPath));
+        logger.trace(String.format("localRelPath: %s", localRelPath));
         final String containerPath = String.format("%s%s", trimmedWorkingDirPathImageInspector, localRelPath);
 
         return containerPath;
