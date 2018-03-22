@@ -206,7 +206,7 @@ public class DockerInspectorTest {
     }
 
     // TODO wow, this is ugly
-    private void test(final String imageForBdioFilename, final String pkgMgrPathString, final String repo, final String tag, final String tagForBdioFilename, final String inspectTarget, final boolean requireBdioMatch,
+    private void test(final String imageForBdioFilename, final String pkgMgrPathString, final String repo, final String tag, final String tagForBdioFilename, final String inspectTargetArg, final boolean requireBdioMatch,
             final List<String> additionalArgs, final boolean needWorkingDir)
             throws IOException, InterruptedException {
         final String workingDirPath = "test/endToEnd";
@@ -221,6 +221,13 @@ public class DockerInspectorTest {
             assertTrue(expectedBdio.exists());
         }
 
+        String inspectTarget = null;
+        if (inspectTargetArg.startsWith("--docker.tar=")) {
+            inspectTarget = inspectTargetArg.substring("--docker.tar=".length());
+        }
+        if (inspectTargetArg.startsWith("--docker.image=")) {
+            inspectTarget = inspectTargetArg.substring("--docker.image=".length());
+        }
         final File outputImageTarFile = getOutputImageTarFile(inspectTarget, imageForBdioFilename, tagForBdioFilename);
         Files.deleteIfExists(outputImageTarFile.toPath());
         assertFalse(outputImageTarFile.exists());
@@ -251,7 +258,7 @@ public class DockerInspectorTest {
         if (needWorkingDir) {
             fullCmd.add(String.format("--working.dir.path=%s", workingDirPath));
         }
-        fullCmd.add(inspectTarget);
+        fullCmd.add(inspectTargetArg);
 
         if (additionalArgs != null && additionalArgs.size() > 0) {
             fullCmd.addAll(additionalArgs);
