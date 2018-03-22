@@ -277,6 +277,7 @@ public class DockerInspectorTest {
         final int retCode = p.waitFor();
         assertEquals(0, retCode);
         System.out.println("hub-docker-inspector done; verifying results...");
+        System.out.printf("Expecting output BDIO file: %s\n", actualBdio.getAbsolutePath());
         assertTrue(actualBdio.exists());
         if (requireBdioMatch) {
             final List<String> exceptLinesContainingThese = new ArrayList<>();

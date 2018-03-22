@@ -47,7 +47,7 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerexec.DockerExecInspector;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.help.formatter.UsageFormatter;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient.HubClient;
-import com.blackducksoftware.integration.hub.docker.dockerinspector.wsclient.RestClientInspector;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.RestClientInspector;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.blackducksoftware.integration.hub.imageinspector.api.PkgMgrDataNotFoundException;
 import com.blackducksoftware.integration.hub.imageinspector.lib.DissectedImage;
