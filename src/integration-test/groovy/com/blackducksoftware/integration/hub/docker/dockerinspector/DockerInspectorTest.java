@@ -108,6 +108,7 @@ public class DockerInspectorTest {
     }
 
     // TODO this requires (a) minikube installed, (b) II-ws containers already running
+    // TODO This should start the containers using only docker
     @Test
     public void testAlpineExistingContainer() throws IOException, InterruptedException, IntegrationException {
         execCmd("cp build/images/test/alpine.tar /Users/billings/tmp/working", 5000L);

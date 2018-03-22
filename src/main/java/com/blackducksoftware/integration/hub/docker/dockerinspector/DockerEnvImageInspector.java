@@ -117,7 +117,7 @@ public class DockerEnvImageInspector {
             }
             // TODO get BDIO via container (later: starting them if necessary)
             final File dockerTarFile = deriveDockerTarFile(config);
-            final String dockerTarFilePathInContainer = toContainer(dockerTarFile.getCanonicalPath(), new File(config.getWorkingDirPath()).getCanonicalPath(), config.getWorkingDirPathImageInspector());
+            final String dockerTarFilePathInContainer = getContainerPathToWorkingDirFile(dockerTarFile.getCanonicalPath(), new File(config.getWorkingDirPath()).getCanonicalPath(), config.getWorkingDirPathImageInspector());
             if (StringUtils.isBlank(config.getImageInspectorUrl())) {
                 throw new IntegrationException("The imageinspector URL property must be set");
             }
@@ -141,7 +141,7 @@ public class DockerEnvImageInspector {
      * Translate a local path to a container path ASSUMING the local working dir is mounted for the container as it's working dir. Find path to the given localPath RELATIVE to the local working dir. Convert that to the container's path by
      * appending that relative path to the container's working dir
      */
-    private String toContainer(final String localPath, final String workingDirPath, final String workingDirPathImageInspector) {
+    private String getContainerPathToWorkingDirFile(final String localPath, final String workingDirPath, final String workingDirPathImageInspector) {
         logger.debug(String.format("localPath: %s", localPath));
         if (StringUtils.isBlank(workingDirPathImageInspector)) {
             logger.debug(String.format("config.getWorkingDirPathImageInspector() is BLANK"));
