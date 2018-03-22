@@ -39,7 +39,8 @@ import org.springframework.stereotype.Component;
 import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.ContainerCleaner;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.InspectorImages;
-import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Util;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.common.HubProjectName;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Output;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.DockerClientManager;
@@ -71,17 +72,20 @@ public class DockerExecInspector {
     private InspectorImages dockerImages;
 
     @Autowired
-    private Util util; // TODO rethink/rename
+    private HubProjectName hubProjectName;
+
+    @Autowired
+    private Output output;
 
     public int getBdio(final DissectedImage dissectedImage) throws IOException, IntegrationException, InterruptedException, CompressorException, IllegalAccessException {
         int returnCode;
         determineTargetOsFromContainerFileSystem(config, dissectedImage);
         final Future<String> deferredCleanup = inspect(config, dissectedImage);
-        util.uploadBdio(config, dissectedImage);
+        output.uploadBdio(config, dissectedImage);
         provideDockerTar(config, dissectedImage.getDockerTarFile());
-        util.provideOutput(config);
-        returnCode = util.reportResults(config, dissectedImage);
-        util.cleanUp(config, deferredCleanup);
+        output.provideOutput(config);
+        returnCode = output.reportResults(config, dissectedImage);
+        output.cleanUp(config, deferredCleanup);
         return returnCode;
     }
 
@@ -99,10 +103,10 @@ public class DockerExecInspector {
                 dissectedImage.setTargetOs(imageInspector.detectOperatingSystem(dissectedImage.getTargetImageFileSystemRootDir()));
             }
             logger.info(String.format("Target image tarfile: %s; target OS: %s", dissectedImage.getDockerTarFile().getAbsolutePath(), dissectedImage.getTargetOs().toString()));
-            final ImageInfoDerived imageInfoDerived = imageInspector.generateBdioFromImageFilesDir(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), util.getHubProjectName(config),
-                    util.getHubProjectVersion(config), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs(), config.getHubCodelocationPrefix());
-            util.writeBdioFile(dissectedImage, imageInfoDerived);
-            util.createContainerFileSystemTarIfRequested(config, dissectedImage.getTargetImageFileSystemRootDir());
+            final ImageInfoDerived imageInfoDerived = imageInspector.generateBdioFromImageFilesDir(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), hubProjectName.getHubProjectName(config),
+                    hubProjectName.getHubProjectVersion(config), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs(), config.getHubCodelocationPrefix());
+            output.writeBdioFile(dissectedImage, imageInfoDerived);
+            output.createContainerFileSystemTarIfRequested(config, dissectedImage.getTargetImageFileSystemRootDir());
         }
         return deferredCleanup;
     }

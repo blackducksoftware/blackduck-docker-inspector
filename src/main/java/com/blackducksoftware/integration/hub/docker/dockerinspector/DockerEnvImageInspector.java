@@ -40,7 +40,8 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.ComponentScan;
 
 import com.blackducksoftware.integration.exception.IntegrationException;
-import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Util;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.common.HubProjectName;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Output;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.DockerClientManager;
@@ -72,7 +73,10 @@ public class DockerEnvImageInspector {
     private DockerClientManager dockerClientManager;
 
     @Autowired
-    private Util util; // TODO rethink/rename
+    private HubProjectName hubProjectName;
+
+    @Autowired
+    private Output output;
 
     @Autowired
     private ImageInspector imageInspector;
@@ -87,13 +91,13 @@ public class DockerEnvImageInspector {
     private ResultFile resultFile;
 
     @Autowired
-    ApplicationArguments applicationArguments;
+    private ApplicationArguments applicationArguments;
 
     @Autowired
     private Config config;
 
     @Autowired
-    DockerExecInspector dockerExecInspector;
+    private DockerExecInspector dockerExecInspector;
 
     @Autowired
     private RestClientInspector restClientInspector;
@@ -118,17 +122,21 @@ public class DockerEnvImageInspector {
             checkForGivenTargetOs(config, dissectedImage);
             constructContainerFileSystem(config, dissectedImage);
             try {
-                returnCode = dockerExecInspector.getBdio(dissectedImage);
+                if (StringUtils.isBlank(config.getImageInspectorUrl())) {
+                    returnCode = dockerExecInspector.getBdio(dissectedImage);
+                } else {
+                    returnCode = restClientInspector.getBdio(dissectedImage);
+                }
             } catch (final PkgMgrDataNotFoundException e) {
                 logger.info("Pkg mgr not found; generating empty BDIO file");
-                final ImageInfoDerived imageInfoDerived = imageInspector.generateEmptyBdio(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), util.getHubProjectName(config),
-                        util.getHubProjectVersion(config), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs(), config.getHubCodelocationPrefix());
-                util.writeBdioFile(dissectedImage, imageInfoDerived);
-                util.uploadBdio(config, dissectedImage);
-                util.createContainerFileSystemTarIfRequested(config, dissectedImage.getTargetImageFileSystemRootDir());
-                util.provideOutput(config);
-                returnCode = util.reportResultsPkgMgrDataNotFound(config, dissectedImage);
-                util.cleanUp(config, null);
+                final ImageInfoDerived imageInfoDerived = imageInspector.generateEmptyBdio(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), hubProjectName.getHubProjectName(config),
+                        hubProjectName.getHubProjectVersion(config), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs(), config.getHubCodelocationPrefix());
+                output.writeBdioFile(dissectedImage, imageInfoDerived);
+                output.uploadBdio(config, dissectedImage);
+                output.createContainerFileSystemTarIfRequested(config, dissectedImage.getTargetImageFileSystemRootDir());
+                output.provideOutput(config);
+                returnCode = output.reportResultsPkgMgrDataNotFound(config, dissectedImage);
+                output.cleanUp(config, null);
             }
         } catch (final Throwable e) {
             final String msg = String.format("Error inspecting image: %s", e.getMessage());
