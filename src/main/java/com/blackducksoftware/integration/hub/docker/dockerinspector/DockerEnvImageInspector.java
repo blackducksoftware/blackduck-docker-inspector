@@ -40,11 +40,11 @@ import org.springframework.context.annotation.ComponentScan;
 
 import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.common.HubProjectName;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Inspector;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Output;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.DockerClientManager;
-import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerexec.DockerExecInspector;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.help.formatter.UsageFormatter;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient.HubClient;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.RestClientInspector;
@@ -95,7 +95,7 @@ public class DockerEnvImageInspector {
     private Config config;
 
     @Autowired
-    private DockerExecInspector dockerExecInspector;
+    private Inspector dockerExecInspector;
 
     @Autowired
     private RestClientInspector restClientInspector;

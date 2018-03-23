@@ -41,6 +41,7 @@ import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.ContainerCleaner;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.InspectorImages;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.common.HubProjectName;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Inspector;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Output;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
@@ -55,7 +56,7 @@ import com.blackducksoftware.integration.hub.imageinspector.linux.FileOperations
 
 // TODO make this share an interface with RestClientInspector
 @Component
-public class DockerExecInspector {
+public class DockerExecInspector implements Inspector {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
@@ -79,18 +80,28 @@ public class DockerExecInspector {
     @Autowired
     private Output output;
 
-    public int getBdio(final DissectedImage dissectedImage) throws IOException, IntegrationException, IllegalAccessException, InterruptedException, CompressorException {
-        parseManifest(config, dissectedImage);
-        checkForGivenTargetOs(config, dissectedImage);
-        constructContainerFileSystem(config, dissectedImage);
-        determineTargetOsFromContainerFileSystem(config, dissectedImage);
-        final Future<String> deferredCleanup = inspect(config, dissectedImage);
-        output.uploadBdio(config, dissectedImage);
-        provideDockerTar(config, dissectedImage.getDockerTarFile());
-        output.provideOutput(config);
-        final int returnCode = output.reportResults(config, dissectedImage);
-        output.cleanUp(config, deferredCleanup);
-        return returnCode;
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.blackducksoftware.integration.hub.docker.dockerinspector.dockerexec.Inspector#getBdio(com.blackducksoftware.integration.hub.imageinspector.lib.DissectedImage)
+     */
+    @Override
+    public int getBdio(final DissectedImage dissectedImage) throws IntegrationException {
+        try {
+            parseManifest(config, dissectedImage);
+            checkForGivenTargetOs(config, dissectedImage);
+            constructContainerFileSystem(config, dissectedImage);
+            determineTargetOsFromContainerFileSystem(config, dissectedImage);
+            final Future<String> deferredCleanup = inspect(config, dissectedImage);
+            output.uploadBdio(config, dissectedImage);
+            provideDockerTar(config, dissectedImage.getDockerTarFile());
+            output.provideOutput(config);
+            final int returnCode = output.reportResults(config, dissectedImage);
+            output.cleanUp(config, deferredCleanup);
+            return returnCode;
+        } catch (IllegalAccessException | IOException | InterruptedException | CompressorException e) {
+            throw new IntegrationException(e.getMessage(), e);
+        }
     }
 
     private void checkForGivenTargetOs(final Config config, final DissectedImage dissectedImage) {

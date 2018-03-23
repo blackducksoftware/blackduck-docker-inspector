@@ -27,7 +27,6 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.FileUtils;
@@ -41,13 +40,13 @@ import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.bdio.BdioReader;
 import com.blackducksoftware.integration.hub.bdio.model.SimpleBdioDocument;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.common.DockerTarfile;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Inspector;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
-import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.blackducksoftware.integration.hub.imageinspector.lib.DissectedImage;
 import com.google.gson.Gson;
 
 @Component
-public class RestClientInspector {
+public class RestClientInspector implements Inspector {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
@@ -59,24 +58,28 @@ public class RestClientInspector {
     @Autowired
     private RestClient restClient;
 
-    public int getBdio(final DissectedImage dissectedImage) throws IOException, HubIntegrationException, IntegrationException, MalformedURLException {
-        int returnCode;
-        // TODO get BDIO via container (later: starting them if necessary)
-        final File dockerTarFile = dockerTarfile.deriveDockerTarFile(config);
-        final String dockerTarFilePathInContainer = getContainerPathToWorkingDirFile(dockerTarFile.getCanonicalPath(), new File(config.getWorkingDirPath()).getCanonicalPath(), config.getWorkingDirPathImageInspector());
-        if (StringUtils.isBlank(config.getImageInspectorUrl())) {
-            throw new IntegrationException("The imageinspector URL property must be set");
+    @Override
+    public int getBdio(final DissectedImage dissectedImage) throws IntegrationException {
+        try {
+            // TODO get BDIO via container (later: starting them if necessary)
+            final File dockerTarFile = dockerTarfile.deriveDockerTarFile(config);
+            final String dockerTarFilePathInContainer = getContainerPathToWorkingDirFile(dockerTarFile.getCanonicalPath(), new File(config.getWorkingDirPath()).getCanonicalPath(), config.getWorkingDirPathImageInspector());
+            if (StringUtils.isBlank(config.getImageInspectorUrl())) {
+                throw new IntegrationException("The imageinspector URL property must be set");
+            }
+            final String bdioString = restClient.getBdio(config.getImageInspectorUrl(), dockerTarFilePathInContainer, config.isCleanupWorkingDir());
+            if (StringUtils.isNotBlank(config.getOutputPath())) {
+                final String outputBdioFilename = deriveOutputBdioFilename(bdioString);
+                final File outputBdioFile = new File(config.getOutputPath(), outputBdioFilename);
+                logger.info(String.format("Writing BDIO to %s", outputBdioFile.getAbsolutePath()));
+                FileUtils.write(outputBdioFile, bdioString, StandardCharsets.UTF_8);
+            }
+            // TODO what about container FS?
+
+            return 0;
+        } catch (final IOException e) {
+            throw new IntegrationException(e.getMessage(), e);
         }
-        final String bdioString = restClient.getBdio(config.getImageInspectorUrl(), dockerTarFilePathInContainer, config.isCleanupWorkingDir());
-        if (StringUtils.isNotBlank(config.getOutputPath())) {
-            final String outputBdioFilename = deriveOutputBdioFilename(bdioString);
-            final File outputBdioFile = new File(config.getOutputPath(), outputBdioFilename);
-            logger.info(String.format("Writing BDIO to %s", outputBdioFile.getAbsolutePath()));
-            FileUtils.write(outputBdioFile, bdioString, StandardCharsets.UTF_8);
-        }
-        // TODO what about container FS?
-        returnCode = 0;
-        return returnCode;
     }
 
     private String deriveOutputBdioFilename(final String bdioString) throws IOException {
