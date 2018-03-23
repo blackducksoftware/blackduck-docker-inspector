@@ -94,7 +94,6 @@ public class DockerExecInspector implements Inspector {
             determineTargetOsFromContainerFileSystem(config, dissectedImage);
             final Future<String> deferredCleanup = inspect(config, dissectedImage);
             output.uploadBdio(config, dissectedImage);
-            provideDockerTar(config, dissectedImage.getDockerTarFile());
             output.provideOutput(config);
             final int returnCode = output.reportResults(config, dissectedImage);
             output.cleanUp(config, deferredCleanup);
@@ -189,20 +188,6 @@ public class DockerExecInspector implements Inspector {
         final Future<String> containerCleanerFuture = executor.submit(containerCleaner);
         return containerCleanerFuture;
 
-    }
-
-    private void provideDockerTar(final Config config, final File dockerTarFile) throws IOException {
-        if (config.isOutputIncludeDockertarfile()) {
-            if (config.isOnHost()) {
-                final File outputDirectory = new File(programPaths.getHubDockerOutputPathHost());
-                logger.debug(String.format("Copying %s to output dir %s", dockerTarFile.getAbsolutePath(), outputDirectory.getAbsolutePath()));
-                FileOperations.copyFile(dockerTarFile, outputDirectory);
-            } else {
-                final File outputDirectory = new File(programPaths.getHubDockerOutputPathContainer());
-                logger.debug(String.format("Moving %s to output dir %s", dockerTarFile.getAbsolutePath(), outputDirectory.getAbsolutePath()));
-                FileOperations.moveFile(dockerTarFile, outputDirectory);
-            }
-        }
     }
 
     private void determineTargetOsFromContainerFileSystem(final Config config, final DissectedImage dissectedImage) throws IOException, IntegrationException {

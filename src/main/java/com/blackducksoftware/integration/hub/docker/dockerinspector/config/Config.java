@@ -136,11 +136,6 @@ public class Config {
     @Value("${output.path:}")
     private String outputPath = "";
 
-    // Set to true to include the image tarfile in the output
-    @ValueDescription(description = "Include Docker tarfile in output?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
-    @Value("${output.include.dockertarfile:false}")
-    private Boolean outputIncludeDockertarfile = Boolean.FALSE;
-
     // Set to true to include the container file system tarfile in the output
     @ValueDescription(description = "Include container filesystem (a large file) in output?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${output.include.containerfilesystem:false}")
@@ -393,10 +388,6 @@ public class Config {
         return optionsByFieldName.get("outputPath").getResolvedValue();
     }
 
-    public boolean isOutputIncludeDockertarfile() {
-        return optionsByFieldName.get("outputIncludeDockertarfile").getResolvedValue().equals("true");
-    }
-
     public boolean isOutputIncludeContainerfilesystem() {
         return optionsByFieldName.get("outputIncludeContainerfilesystem").getResolvedValue().equals("true");
     }
@@ -551,7 +542,6 @@ public class Config {
         this.loggingLevel = null;
         this.onHost = null; // TODO REMOVE
         this.outputIncludeContainerfilesystem = null;
-        this.outputIncludeDockertarfile = null;
         this.outputPath = null;
         this.phoneHome = null;
         this.scanCliOptsEnvVar = null;

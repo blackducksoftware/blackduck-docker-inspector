@@ -230,9 +230,6 @@ public class DockerInspectorTest {
         if (inspectTargetArg.startsWith("--docker.image=")) {
             inspectTarget = inspectTargetArg.substring("--docker.image=".length());
         }
-        final File outputImageTarFile = getOutputImageTarFile(inspectTarget, imageForBdioFilename, tagForBdioFilename);
-        Files.deleteIfExists(outputImageTarFile.toPath());
-        assertFalse(outputImageTarFile.exists());
 
         final File outputContainerFileSystemFile = getOutputContainerFileSystemFile(imageForBdioFilename, tagForBdioFilename);
         Files.deleteIfExists(outputContainerFileSystemFile.toPath());
@@ -288,8 +285,6 @@ public class DockerInspectorTest {
             final boolean outputBdioMatches = TestUtils.contentEquals(expectedBdio, actualBdio, exceptLinesContainingThese);
             assertTrue(outputBdioMatches);
         }
-
-        assertTrue(outputImageTarFile.exists());
         assertTrue(outputContainerFileSystemFile.exists());
     }
 
