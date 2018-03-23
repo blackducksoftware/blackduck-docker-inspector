@@ -27,15 +27,19 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.DockerClientManager;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 
 @Component
 public class DockerTarfile {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private DockerClientManager dockerClientManager;
@@ -50,6 +54,18 @@ public class DockerTarfile {
             dockerTarFile = dockerClientManager.getTarFileFromDockerImage(config.getDockerImageRepo(), config.getDockerImageTag());
         }
         return dockerTarFile;
+    }
+
+    public String deriveContainerFileSystemTarGzFilename(final File dockerTarFile) throws IOException, IntegrationException {
+        final String dockerTarFilename = dockerTarFile.getName();
+        if (!dockerTarFilename.endsWith(".tar")) {
+            throw new IntegrationException(String.format("Expected %s to end with '.tar'", dockerTarFilename));
+        }
+        final String dockerTarFilenameBase = dockerTarFilename.substring(0, dockerTarFilename.length() - ".tar".length());
+        logger.info(String.format("dockerTarFilenameBase: %s", dockerTarFilenameBase));
+        final String containerFileSystemTarGzFilename = String.format("%s_containerfilesystem.tar.gz", dockerTarFilenameBase);
+        logger.info(String.format("containerFileSystemTarGzFilename: %s", containerFileSystemTarGzFilename));
+        return containerFileSystemTarGzFilename;
     }
 
 }

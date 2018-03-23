@@ -185,12 +185,7 @@ public class DockerEnvImageInspector {
             return false;
         }
         logger.debug(String.format("running from dir: %s", System.getProperty("user.dir")));
-        logger.debug(String.format("Dry run mode is set to %b", config.isDryRun()));
         logger.trace(String.format("dockerImageTag: %s", config.getDockerImageTag()));
-        if (config.isDryRun()) {
-            logger.warn("dry.run is deprecated. Set upload.bdio=false instead");
-            config.setUploadBdio(false);
-        }
         if (config.isOnHost()) {
             hubClient.phoneHome(dockerClientManager.getDockerEngineVersion());
         }

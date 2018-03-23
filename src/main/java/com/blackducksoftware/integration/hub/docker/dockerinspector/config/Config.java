@@ -126,11 +126,6 @@ public class Config {
     @Value("${logging.level.com.blackducksoftware:INFO}")
     private String loggingLevel = "";
 
-    // If dry.run=true, Hub Docker Inspector won't upload results to Hub
-    @ValueDescription(description = "Dry Run Mode. Use upload.bdio=false instead", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = true)
-    @Value("${dry.run:false}")
-    private Boolean dryRun = Boolean.FALSE;
-
     // Path on host of a directory into which the resulting output files will be copied
     @ValueDescription(description = "Path to directory for output files", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${output.path:}")
@@ -218,9 +213,13 @@ public class Config {
     @Value("${cleanup.inspector.image:false}")
     private Boolean cleanupInspectorImage = Boolean.FALSE;
 
-    @ValueDescription(description = "The working.dir.path as mounted in the imageinspector containers", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
-    @Value("${working.dir.path.imageinspector:}")
-    private String workingDirPathImageInspector = "";
+    @ValueDescription(description = "The host's path to the dir shared with the imageinspector containers. Only needed if using existing imageinspector containers", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
+    @Value("${shared.dir.path.local:}")
+    private String sharedDirPathLocal = "";
+
+    @ValueDescription(description = "The container's path to the shared directory. Only needed if using existing imageinspector containers", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
+    @Value("${shared.dir.path.imageinspector:}")
+    private String sharedDirPathImageInspector = "";
 
     @ValueDescription(description = "The URL of the imageinspector container to use", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${imageinspector.url:}")
@@ -376,14 +375,6 @@ public class Config {
         return new Long(optionsByFieldName.get("commandTimeout").getResolvedValue());
     }
 
-    public boolean isDryRun() {
-        final DockerInspectorOption opt = optionsByFieldName.get("dryRun");
-        logger.trace(String.format("dryRun opt: %s", opt));
-        final boolean value = opt.getResolvedValue().equals("true");
-        logger.trace(String.format("isDryRun() returning %b", value));
-        return value;
-    }
-
     public String getOutputPath() {
         return optionsByFieldName.get("outputPath").getResolvedValue();
     }
@@ -437,8 +428,12 @@ public class Config {
         return optionsByFieldName.get("inspectorImageVersion").getResolvedValue();
     }
 
-    public String getWorkingDirPathImageInspector() {
-        return optionsByFieldName.get("workingDirPathImageInspector").getResolvedValue();
+    public String getSharedDirPathImageInspector() {
+        return optionsByFieldName.get("sharedDirPathImageInspector").getResolvedValue();
+    }
+
+    public String getSharedDirPathLocal() {
+        return optionsByFieldName.get("sharedDirPathLocal").getResolvedValue();
     }
 
     public String getImageInspectorUrl() {
@@ -521,7 +516,6 @@ public class Config {
         this.dockerImageTag = null;
         this.dockerInspectorJavaOptsValue = null;
         this.dockerTar = null;
-        this.dryRun = null;
         this.hubAlwaysTrustCert = null;
         this.hubCodelocationPrefix = null;
         this.hubPassword = null;
@@ -553,7 +547,8 @@ public class Config {
         this.cleanupTargetImage = null;
         this.inspectorImageFamily = null;
         this.inspectorImageVersion = null;
-        this.workingDirPathImageInspector = null;
+        this.sharedDirPathImageInspector = null;
+        this.sharedDirPathLocal = null;
         this.imageInspectorUrl = null;
     }
 }

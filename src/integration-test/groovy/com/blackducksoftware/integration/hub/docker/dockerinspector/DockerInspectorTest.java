@@ -112,15 +112,15 @@ public class DockerInspectorTest {
     @Test
     public void testAlpineExistingContainer() throws IOException, InterruptedException, IntegrationException {
         // TODO path
-        execCmd("cp build/images/test/alpine36.tar /Users/billings/tmp/working", 5000L);
-        new File("/Users/billings/tmp/working/alpine36.tar").setReadable(true, false);
+        execCmd("cp build/images/test/alpine36.tar /Users/billings/tmp/shared/target", 5000L);
+        new File("/Users/billings/tmp/shared/target/alpine36.tar").setReadable(true, false);
         final String kubeIp = execCmd("minikube ip", 2000L);
         final List<String> additionalArgs = new ArrayList<>();
         additionalArgs.add(String.format("--imageinspector.url=http://%s:8080", kubeIp));
         // TODO TEMP hard coded path
-        additionalArgs.add("--working.dir.path=/Users/billings/tmp/working");
-        additionalArgs.add("--working.dir.path.imageinspector=/opt/blackduck/hub-imageinspector-ws/working");
-        testTar("/Users/billings/tmp/working/alpine36.tar", "alpine", null, null, "3.6", "lib_apk", true, additionalArgs, false);
+        additionalArgs.add("--shared.dir.path.local=/Users/billings/tmp/shared");
+        additionalArgs.add("--shared.dir.path.imageinspector=/opt/blackduck/hub-imageinspector-ws/shared");
+        testTar("/Users/billings/tmp/shared/target/alpine36.tar", "alpine", null, null, "3.6", "lib_apk", true, additionalArgs, false);
     }
 
     @Test
@@ -243,7 +243,7 @@ public class DockerInspectorTest {
         pgmVerObj.init();
         final String programVersion = pgmVerObj.getProgramVersion();
         final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--upload.bdio=false", String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", programVersion), "--output.path=test/output",
-                "--output.include.dockertarfile=true", "--output.include.containerfilesystem=true", "--hub.always.trust.cert=true");
+                "--output.include.containerfilesystem=true", "--hub.always.trust.cert=true");
         // Arrays.asList returns a fixed size list; need a variable sized list
         final List<String> fullCmd = new ArrayList<>();
         fullCmd.addAll(partialCmd);

@@ -56,18 +56,19 @@ public class RestClientInspector implements Inspector {
     private DockerTarfile dockerTarfile;
 
     @Autowired
-    private RestClient restClient;
+    private ImageInspectorClient restClient;
 
     @Override
     public int getBdio(final DissectedImage dissectedImage) throws IntegrationException {
         try {
             // TODO get BDIO via container (later: starting them if necessary)
             final File dockerTarFile = dockerTarfile.deriveDockerTarFile(config);
-            final String dockerTarFilePathInContainer = getContainerPathToWorkingDirFile(dockerTarFile.getCanonicalPath(), new File(config.getWorkingDirPath()).getCanonicalPath(), config.getWorkingDirPathImageInspector());
+            final String containerFileSystemFilename = dockerTarfile.deriveContainerFileSystemTarGzFilename(dockerTarFile);
+            final String dockerTarFilePathInContainer = getContainerPathToLocalFile(dockerTarFile.getCanonicalPath(), new File(config.getSharedDirPathLocal()).getCanonicalPath(), config.getSharedDirPathImageInspector());
             if (StringUtils.isBlank(config.getImageInspectorUrl())) {
                 throw new IntegrationException("The imageinspector URL property must be set");
             }
-            final String bdioString = restClient.getBdio(config.getImageInspectorUrl(), dockerTarFilePathInContainer, config.isCleanupWorkingDir());
+            final String bdioString = restClient.getBdio(config.getImageInspectorUrl(), dockerTarFilePathInContainer, containerFileSystemFilename, config.isCleanupWorkingDir());
             if (StringUtils.isNotBlank(config.getOutputPath())) {
                 final String outputBdioFilename = deriveOutputBdioFilename(bdioString);
                 final File outputBdioFile = new File(config.getOutputPath(), outputBdioFilename);
@@ -104,10 +105,10 @@ public class RestClientInspector implements Inspector {
 
     // TODO move to ProgramPaths or something
     /*
-     * Translate a local path to a container path ASSUMING the local working dir is mounted for the container as it's working dir. Find path to the given localPath RELATIVE to the local working dir. Convert that to the container's path by
-     * appending that relative path to the container's working dir
+     * Translate a local path (to a file within the dir shared with the container) to the equivalent path for the container. Find path to the given localPath RELATIVE to the local shared dir. Convert that to the container's path by
+     * appending that relative path to the container's path to the shared dir
      */
-    private String getContainerPathToWorkingDirFile(final String localPath, final String workingDirPath, final String workingDirPathImageInspector) {
+    private String getContainerPathToLocalFile(final String localPath, final String workingDirPath, final String workingDirPathImageInspector) {
         logger.debug(String.format("localPath: %s", localPath));
         if (StringUtils.isBlank(workingDirPathImageInspector)) {
             logger.debug(String.format("config.getWorkingDirPathImageInspector() is BLANK"));
@@ -119,7 +120,7 @@ public class RestClientInspector implements Inspector {
         final String localRelPath = localPath.substring(trimmedWorkingDirPath.length());
         logger.debug(String.format("localRelPath: %s", localRelPath));
         final String containerPath = String.format("%s%s", trimmedWorkingDirPathImageInspector, localRelPath);
-
+        logger.debug(String.format("containerPath: %s", containerPath));
         return containerPath;
     }
 
