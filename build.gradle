@@ -260,6 +260,10 @@ task buildAlpineTestDockerTarfile(type: Exec, dependsOn: pullAlpineLatest) {
     commandLine "docker", "save", "-o", "${buildDir}/images/test/alpine.tar", "alpine:latest"
 }
 
+task buildAlpine36TestDockerTarfile(type: Exec, dependsOn: pullAlpineLatest) {
+    commandLine "docker", "save", "-o", "${buildDir}/images/test/alpine36.tar", "alpine:3.6"
+}
+
 task buildAggTestDockerTarfile(type: Exec, dependsOn: [buildTestDockerImage, buildWhTestDockerImage]) {
     commandLine "docker", "save", "-o", "${buildDir}/images/test/aggregated.tar", "blackducksoftware/centos_minus_vim_plus_bacula:1.0", \
         "blackducksoftware/whiteouttest:1.0"
@@ -432,7 +436,7 @@ task pushImages(dependsOn: [pkg, pushImageAlpine, pushImageCentos, pushImageUbun
 }
 
 task buildTestTarfiles(dependsOn: [buildTestDockerTarfile, buildWhTestDockerTarfile, buildAggTestDockerTarfile, \
-        buildAlpineTestDockerTarfile]) {}
+        buildAlpineTestDockerTarfile, buildAlpine36TestDockerTarfile]) {}
 
 task itOnly(type: Test) {
     testClassesDir = new File("build/classes/groovy/integrationTest")

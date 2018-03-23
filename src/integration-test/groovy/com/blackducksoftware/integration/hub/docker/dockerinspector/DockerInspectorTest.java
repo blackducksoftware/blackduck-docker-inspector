@@ -111,14 +111,16 @@ public class DockerInspectorTest {
     // TODO This should start the containers using only docker
     @Test
     public void testAlpineExistingContainer() throws IOException, InterruptedException, IntegrationException {
-        execCmd("cp build/images/test/alpine.tar /Users/billings/tmp/working", 5000L);
+        // TODO path
+        execCmd("cp build/images/test/alpine36.tar /Users/billings/tmp/working", 5000L);
+        new File("/Users/billings/tmp/working/alpine36.tar").setReadable(true, false);
         final String kubeIp = execCmd("minikube ip", 2000L);
         final List<String> additionalArgs = new ArrayList<>();
         additionalArgs.add(String.format("--imageinspector.url=http://%s:8080", kubeIp));
         // TODO TEMP hard coded path
         additionalArgs.add("--working.dir.path=/Users/billings/tmp/working");
         additionalArgs.add("--working.dir.path.imageinspector=/opt/blackduck/hub-imageinspector-ws/working");
-        testTar("/Users/billings/tmp/working/alpine.tar", "alpine", null, null, "latest", "lib_apk", false, additionalArgs, false);
+        testTar("/Users/billings/tmp/working/alpine36.tar", "alpine", null, null, "3.6", "lib_apk", true, additionalArgs, false);
     }
 
     @Test
