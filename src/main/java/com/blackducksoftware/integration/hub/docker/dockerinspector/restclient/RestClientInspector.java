@@ -75,8 +75,13 @@ public class RestClientInspector implements Inspector {
                 logger.info(String.format("Writing BDIO to %s", outputBdioFile.getAbsolutePath()));
                 FileUtils.write(outputBdioFile, bdioString, StandardCharsets.UTF_8);
             }
-            // TODO what about container FS?
-
+            if (StringUtils.isNotBlank(config.getOutputPath())) {
+                final File actualLocalOutputDir = new File(config.getSharedDirPathLocal(), "output");
+                final File actualContainerFileSytemFile = new File(actualLocalOutputDir, containerFileSystemFilename);
+                final File userOutputDir = new File(config.getOutputPath());
+                final File userContainerFileSytemFile = new File(userOutputDir, containerFileSystemFilename);
+                FileUtils.copyFile(actualContainerFileSytemFile, userContainerFileSytemFile);
+            }
             return 0;
         } catch (final IOException e) {
             throw new IntegrationException(e.getMessage(), e);

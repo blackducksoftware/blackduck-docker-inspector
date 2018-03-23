@@ -107,20 +107,39 @@ public class DockerInspectorTest {
         testTar("build/images/test/alpine.tar", "alpine", null, null, "latest", "lib_apk", false, null, true);
     }
 
-    // TODO this requires (a) minikube installed, (b) II-ws containers already running
-    // TODO This should start the containers using only docker
     @Test
     public void testAlpineExistingContainer() throws IOException, InterruptedException, IntegrationException {
-        // TODO path
-        execCmd("cp build/images/test/alpine36.tar /Users/billings/tmp/shared/target", 5000L);
-        new File("/Users/billings/tmp/shared/target/alpine36.tar").setReadable(true, false);
-        final String kubeIp = execCmd("minikube ip", 2000L);
-        final List<String> additionalArgs = new ArrayList<>();
-        additionalArgs.add(String.format("--imageinspector.url=http://%s:8080", kubeIp));
-        // TODO TEMP hard coded path
-        additionalArgs.add("--shared.dir.path.local=/Users/billings/tmp/shared");
-        additionalArgs.add("--shared.dir.path.imageinspector=/opt/blackduck/hub-imageinspector-ws/shared");
-        testTar("/Users/billings/tmp/shared/target/alpine36.tar", "alpine", null, null, "3.6", "lib_apk", true, additionalArgs, false);
+        final File sharedDir = new File("build/shared");
+        final File targetDir = new File(sharedDir, "target");
+        final File outputDir = new File(sharedDir, "output");
+        targetDir.mkdirs();
+        outputDir.mkdirs();
+        outputDir.setWritable(true, false);
+        final File targetTar = new File(targetDir, "alpine36.tar");
+        FileUtils.copyFile(new File("build/images/test/alpine36.tar"), targetTar);
+        targetTar.setReadable(true, false);
+        // TODO too hard coded
+        // TODO use a diff port
+        execCmd("docker run -d -t --name testAlpineExistingContainer -p 8080:8080 -v \"$(pwd)\"/build/shared:/opt/blackduck/hub-imageinspector-ws/shared blackducksoftware/hub-imageinspector-ws-alpine:1.0.1-SNAPSHOT", 120000L);
+        try {
+            Thread.sleep(30000L);
+            execCmd("curl -i http://localhost:8080/health", 30000L);
+            final List<String> additionalArgs = new ArrayList<>();
+            additionalArgs.add("--imageinspector.url=http://localhost:8080");
+            // TODO TEMP hard coded path
+            additionalArgs.add(String.format("--shared.dir.path.local=%s", sharedDir.getAbsolutePath()));
+            additionalArgs.add(String.format("--shared.dir.path.imageinspector=/opt/blackduck/hub-imageinspector-ws/shared"));
+            testTar(targetTar.getAbsolutePath(), "alpine", null, null, "3.6", "lib_apk", true, additionalArgs, false);
+        } finally {
+            try {
+                execCmd("docker stop testAlpineExistingContainer", 120000L);
+            } catch (final Exception e) {
+            }
+            try {
+                execCmd("docker rm testAlpineExistingContainer", 120000L);
+            } catch (final Exception e) {
+            }
+        }
     }
 
     @Test
@@ -207,7 +226,7 @@ public class DockerInspectorTest {
         return outputTarFile;
     }
 
-    // TODO wow, this is ugly
+    // TODO wow, this is ugly; needs a major re-write
     private void test(final String imageForBdioFilename, final String pkgMgrPathString, final String repo, final String tag, final String tagForBdioFilename, final String inspectTargetArg, final boolean requireBdioMatch,
             final List<String> additionalArgs, final boolean needWorkingDir)
             throws IOException, InterruptedException {
@@ -223,9 +242,17 @@ public class DockerInspectorTest {
             assertTrue(expectedBdio.exists());
         }
 
+        // TODO find a better way; tar and image:tag should be separate; factor out the common code into methods both call
+        String tarFileBaseName = null;
         String inspectTarget = null;
         if (inspectTargetArg.startsWith("--docker.tar=")) {
             inspectTarget = inspectTargetArg.substring("--docker.tar=".length());
+            tarFileBaseName = inspectTarget.substring(0, inspectTarget.length() - ".tar".length());
+            final int lastSlash = tarFileBaseName.lastIndexOf('/');
+            if (lastSlash >= 0) {
+                tarFileBaseName = tarFileBaseName.substring(lastSlash + 1);
+            }
+            System.out.printf("tarFileBaseName: %s\n", tarFileBaseName);
         }
         if (inspectTargetArg.startsWith("--docker.image=")) {
             inspectTarget = inspectTargetArg.substring("--docker.image=".length());
@@ -285,7 +312,17 @@ public class DockerInspectorTest {
             final boolean outputBdioMatches = TestUtils.contentEquals(expectedBdio, actualBdio, exceptLinesContainingThese);
             assertTrue(outputBdioMatches);
         }
-        assertTrue(outputContainerFileSystemFile.exists());
+
+        // TODO this is so ugly
+        boolean containerFileSystemFound = false;
+        if (tarFileBaseName != null) {
+            final String alternativeOutputContainerFileSystemFilePath = String.format("test/output/%s_containerfilesystem.tar.gz", tarFileBaseName);
+            final File alternativeOutputContainerFileSystemFile = new File(alternativeOutputContainerFileSystemFilePath);
+            if (alternativeOutputContainerFileSystemFile.exists()) {
+                containerFileSystemFound = true;
+            }
+        }
+        assertTrue(containerFileSystemFound || outputContainerFileSystemFile.exists());
     }
 
     private static String execCmd(final String cmd, final long timeout) throws IOException, InterruptedException, IntegrationException {

@@ -47,7 +47,7 @@ public class ImageInspectorClient {
         logger.info(String.format("ImageInspector URL: %s", imageInspectorUrl));
         final RestConnection restConnection = createConnection(imageInspectorUrl);
         // TODO too hard coded
-        final String url = String.format("%s/getbdio?tarfile=%s&resultingcontainerfspath=/opt/blackduck/hub-imageinspector-ws/shared/target/%s&cleanup=%b", imageInspectorUrl, containerPathToTarfile, containerFileSystemFilename, cleanup);
+        final String url = String.format("%s/getbdio?tarfile=%s&resultingcontainerfspath=/opt/blackduck/hub-imageinspector-ws/shared/output/%s&cleanup=%b", imageInspectorUrl, containerPathToTarfile, containerFileSystemFilename, cleanup);
         final Request request = new Request.Builder(url).method(HttpMethod.GET).build();
         try (Response response = restConnection.executeRequest(request)) {
             logger.info(String.format("Response: HTTP status: %d", response.getStatusCode()));

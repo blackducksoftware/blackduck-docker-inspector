@@ -50,7 +50,7 @@ public class ImageCleanupTest {
         final ProgramVersion pgmVerObj = new ProgramVersion();
         pgmVerObj.init();
         final String programVersion = pgmVerObj.getProgramVersion();
-        final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--dry.run=true", String.format("--hub.username=\"%s\"", USERNAME), String.format("--hub.project.name=\"%s\"", PROJECT_NAME),
+        final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--upload.bdio=false", String.format("--hub.username=\"%s\"", USERNAME), String.format("--hub.project.name=\"%s\"", PROJECT_NAME),
                 String.format("--hub.project.version=\"%s\"", PROJECT_VERSION), String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", programVersion), "--output.path=test/output", "--output.include.dockertarfile=true",
                 "--output.include.containerfilesystem=true", "--hub.always.trust.cert=true", "--include.target.image=true", "--include.inspector.image=true");
         // Arrays.asList returns a fixed size list; need a variable sized list
