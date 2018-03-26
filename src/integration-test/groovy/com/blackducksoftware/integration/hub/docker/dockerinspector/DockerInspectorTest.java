@@ -26,6 +26,9 @@ import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.imageinspector.TestUtils;
 
 public class DockerInspectorTest {
+    private static String IMAGE_INSPECTOR_PORT_ON_HOST = "8080";
+    private static String IMAGE_INSPECTOR_REPO_BASE = "hub-imageinspector-ws";
+    private static String IMAGE_INSPECTOR_TAG = "1.0.1-SNAPSHOT";
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
@@ -110,7 +113,7 @@ public class DockerInspectorTest {
         final String repo = "alpine";
         final String tag = "latest";
         final File outputContainerFileSystemFile = getOutputContainerFileSystemFile(repo, tag);
-        testTar("build/images/test/alpine.tar", repo.replaceAll("/", "_"), repo, tag, tag, "var_lib_dpkg", true, null, true, outputContainerFileSystemFile);
+        testTar("build/images/test/alpine.tar", repo.replaceAll("/", "_"), repo, tag, tag, "lib_apk", true, null, true, outputContainerFileSystemFile);
     }
 
     @Test
@@ -134,15 +137,14 @@ public class DockerInspectorTest {
         final File targetTar = new File(targetDir, tarFileName);
         FileUtils.copyFile(new File(String.format("build/images/test/%s", tarFileName)), targetTar);
         targetTar.setReadable(true, false);
-        // TODO too hard coded
-        // TODO use a diff port
-        execCmd("docker run -d -t --name testAlpineExistingContainer -p 8080:8080 -v \"$(pwd)\"/build/shared:/opt/blackduck/hub-imageinspector-ws/shared blackducksoftware/hub-imageinspector-ws-alpine:1.0.1-SNAPSHOT", 120000L);
+        final String cmd = String.format("docker run -d -t --name testAlpineExistingContainer -p %s:8080 -v \"$(pwd)\"/build/shared:/opt/blackduck/hub-imageinspector-ws/shared blackducksoftware/%s-alpine:%s", IMAGE_INSPECTOR_PORT_ON_HOST,
+                IMAGE_INSPECTOR_REPO_BASE, IMAGE_INSPECTOR_TAG);
+        execCmd(cmd, 120000L);
         try {
             Thread.sleep(30000L);
             execCmd("curl -i http://localhost:8080/health", 30000L);
             final List<String> additionalArgs = new ArrayList<>();
             additionalArgs.add("--imageinspector.url=http://localhost:8080");
-            // TODO TEMP hard coded path
             additionalArgs.add(String.format("--shared.dir.path.local=%s", sharedDir.getAbsolutePath()));
             additionalArgs.add(String.format("--shared.dir.path.imageinspector=/opt/blackduck/hub-imageinspector-ws/shared"));
             final File outputContainerFileSystemFile = new File(String.format("test/output/%s_containerfilesystem.tar.gz", tarFileBaseName));
