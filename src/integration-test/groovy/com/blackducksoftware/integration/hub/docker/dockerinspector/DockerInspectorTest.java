@@ -1,6 +1,5 @@
 package com.blackducksoftware.integration.hub.docker.dockerinspector;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -43,67 +42,67 @@ public class DockerInspectorTest {
     }
 
     @Test
-    public void testUbuntu() throws IOException, InterruptedException {
+    public void testUbuntu() throws IOException, InterruptedException, IntegrationException {
         testImage("ubuntu:17.04", "ubuntu", "17.04", "var_lib_dpkg", true);
     }
 
     @Test
-    public void testAlpine() throws IOException, InterruptedException {
+    public void testAlpine() throws IOException, InterruptedException, IntegrationException {
         testImage("alpine:3.6", "alpine", "3.6", "lib_apk", true);
     }
 
     @Test
-    public void testAlpineLatest() throws IOException, InterruptedException {
+    public void testAlpineLatest() throws IOException, InterruptedException, IntegrationException {
         testImage("alpine", "alpine", "latest", "lib_apk", false);
     }
 
     @Test
-    public void testCentos() throws IOException, InterruptedException {
+    public void testCentos() throws IOException, InterruptedException, IntegrationException {
         testImage("centos:7.3.1611", "centos", "7.3.1611", "var_lib_rpm", true);
     }
 
     @Test
-    public void testHubWebapp() throws IOException, InterruptedException {
+    public void testHubWebapp() throws IOException, InterruptedException, IntegrationException {
         testImage("blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", "lib_apk", true);
     }
 
     @Test
-    public void testHubZookeeper() throws IOException, InterruptedException {
+    public void testHubZookeeper() throws IOException, InterruptedException, IntegrationException {
         testImage("blackducksoftware/hub-zookeeper:4.0.0", "blackducksoftware_hub-zookeeper", "4.0.0", "lib_apk", true);
     }
 
     @Test
-    public void testTomcat() throws IOException, InterruptedException {
+    public void testTomcat() throws IOException, InterruptedException, IntegrationException {
         testImage("tomcat:6.0.53-jre7", "tomcat", "6.0.53-jre7", "var_lib_dpkg", true);
     }
 
     @Test
-    public void testRhel() throws IOException, InterruptedException {
+    public void testRhel() throws IOException, InterruptedException, IntegrationException {
         testImage("dnplus/rhel:6.5", "dnplus_rhel", "6.5", "var_lib_rpm", true);
     }
 
     @Test
-    public void testWhiteout() throws IOException, InterruptedException {
+    public void testWhiteout() throws IOException, InterruptedException, IntegrationException {
         testTar("build/images/test/whiteouttest.tar", "blackducksoftware_whiteouttest", "blackducksoftware/whiteouttest", "1.0", "1.0", "var_lib_dpkg", true, null, true);
     }
 
     @Test
-    public void testAggregateTarfileImageOne() throws IOException, InterruptedException {
+    public void testAggregateTarfileImageOne() throws IOException, InterruptedException, IntegrationException {
         testTar("build/images/test/aggregated.tar", "blackducksoftware_whiteouttest", "blackducksoftware/whiteouttest", "1.0", "1.0", "var_lib_dpkg", true, null, true);
     }
 
     @Test
-    public void testAggregateTarfileImageTwo() throws IOException, InterruptedException {
+    public void testAggregateTarfileImageTwo() throws IOException, InterruptedException, IntegrationException {
         testTar("build/images/test/aggregated.tar", "blackducksoftware_centos_minus_vim_plus_bacula", "blackducksoftware/centos_minus_vim_plus_bacula", "1.0", "1.0", "var_lib_rpm", true, null, true);
     }
 
     @Test
-    public void testAlpineLatestTarRepoTagSpecified() throws IOException, InterruptedException {
+    public void testAlpineLatestTarRepoTagSpecified() throws IOException, InterruptedException, IntegrationException {
         testTar("build/images/test/alpine.tar", "alpine", "alpine", "latest", "latest", "lib_apk", false, null, true);
     }
 
     @Test
-    public void testAlpineLatestTarRepoTagNotSpecified() throws IOException, InterruptedException {
+    public void testAlpineLatestTarRepoTagNotSpecified() throws IOException, InterruptedException, IntegrationException {
         testTar("build/images/test/alpine.tar", "alpine", null, null, "latest", "lib_apk", false, null, true);
     }
 
@@ -143,7 +142,7 @@ public class DockerInspectorTest {
     }
 
     @Test
-    public void testPullJar() throws IOException, InterruptedException {
+    public void testPullJar() throws IOException, InterruptedException, IntegrationException {
         final File workingDir = new File("test/pulljar");
         FileUtils.deleteDirectory(workingDir);
         workingDir.mkdir();
@@ -158,19 +157,21 @@ public class DockerInspectorTest {
         fullCmd.addAll(partialCmd);
 
         System.out.println(String.format("Running --pulljar end to end test"));
+        execCmd(workingDir, String.join(" ", fullCmd), 30000L);
+
         // TODO eliminate redundancy w/ execCmd
-        final ProcessBuilder pb = new ProcessBuilder(fullCmd);
-        final Map<String, String> env = pb.environment();
-        final String oldPath = System.getenv("PATH");
-        final String newPath = String.format("/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:%s", oldPath);
-        System.out.println(String.format("Adjusted path: %s", newPath));
-        env.put("PATH", newPath);
-        pb.redirectErrorStream(true);
-        pb.redirectOutput(Redirect.INHERIT);
-        pb.directory(workingDir);
-        final Process p = pb.start();
-        final int retCode = p.waitFor();
-        assertEquals(0, retCode);
+        // final ProcessBuilder pb = new ProcessBuilder(fullCmd);
+        // final Map<String, String> env = pb.environment();
+        // final String oldPath = System.getenv("PATH");
+        // final String newPath = String.format("/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:%s", oldPath);
+        // System.out.println(String.format("Adjusted path: %s", newPath));
+        // env.put("PATH", newPath);
+        // pb.redirectErrorStream(true);
+        // pb.redirectOutput(Redirect.INHERIT);
+        // pb.directory(workingDir);
+        // final Process p = pb.start();
+        // final int retCode = p.waitFor();
+        // assertEquals(0, retCode);
         System.out.println("hub-docker-inspector --pulljar done; verifying results...");
 
         final File[] jarFilesAfter = workingDir.listFiles(jarFileFilter);
@@ -193,14 +194,15 @@ public class DockerInspectorTest {
         return jarFileFilter;
     }
 
-    private void testImage(final String inspectTarget, final String imageForBdioFilename, final String tagForBdioFilename, final String pkgMgrPathString, final boolean requireBdioMatch) throws IOException, InterruptedException {
+    private void testImage(final String inspectTarget, final String imageForBdioFilename, final String tagForBdioFilename, final String pkgMgrPathString, final boolean requireBdioMatch)
+            throws IOException, InterruptedException, IntegrationException {
         final String inspectTargetArg = String.format(String.format("--docker.image=%s", inspectTarget));
         test(imageForBdioFilename, pkgMgrPathString, null, null, tagForBdioFilename, inspectTargetArg, requireBdioMatch, null, true);
     }
 
     private void testTar(final String tarPath, final String imageForBdioFilename, final String repo, final String tag, final String tagForBdioFilename, final String pkgMgrPathString, final boolean requireBdioMatch,
             final List<String> additionalArgs, final boolean needWorkingDir)
-            throws IOException, InterruptedException {
+            throws IOException, InterruptedException, IntegrationException {
         final String inspectTarget = String.format(String.format("--docker.tar=%s", tarPath));
         test(imageForBdioFilename, pkgMgrPathString, repo, tag, tagForBdioFilename, inspectTarget, requireBdioMatch, additionalArgs, needWorkingDir);
     }
@@ -229,7 +231,7 @@ public class DockerInspectorTest {
     // TODO wow, this is ugly; needs a major re-write
     private void test(final String imageForBdioFilename, final String pkgMgrPathString, final String repo, final String tag, final String tagForBdioFilename, final String inspectTargetArg, final boolean requireBdioMatch,
             final List<String> additionalArgs, final boolean needWorkingDir)
-            throws IOException, InterruptedException {
+            throws IOException, InterruptedException, IntegrationException {
         final String workingDirPath = "test/endToEnd";
         try {
             FileUtils.deleteDirectory(new File(workingDirPath));
@@ -291,17 +293,20 @@ public class DockerInspectorTest {
         }
 
         System.out.println(String.format("Running end to end test on %s with command %s", inspectTarget, fullCmd.toString()));
-        final ProcessBuilder pb = new ProcessBuilder(fullCmd);
-        final Map<String, String> env = pb.environment();
-        final String oldPath = System.getenv("PATH");
-        final String newPath = String.format("/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:%s", oldPath);
-        System.out.println(String.format("Adjusted path: %s", newPath));
-        env.put("PATH", newPath);
-        pb.redirectErrorStream(true);
-        pb.redirectOutput(Redirect.INHERIT);
-        final Process p = pb.start();
-        final int retCode = p.waitFor();
-        assertEquals(0, retCode);
+        execCmd(String.join(" ", fullCmd), 30000L);
+
+        // final ProcessBuilder pb = new ProcessBuilder(fullCmd);
+        // final Map<String, String> env = pb.environment();
+        // final String oldPath = System.getenv("PATH");
+        // final String newPath = String.format("/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:%s", oldPath);
+        // System.out.println(String.format("Adjusted path: %s", newPath));
+        // env.put("PATH", newPath);
+        // pb.redirectErrorStream(true);
+        // pb.redirectOutput(Redirect.INHERIT);
+        // final Process p = pb.start();
+        // final int retCode = p.waitFor();
+        // assertEquals(0, retCode);
+
         System.out.println("hub-docker-inspector done; verifying results...");
         System.out.printf("Expecting output BDIO file: %s\n", actualBdio.getAbsolutePath());
         assertTrue(actualBdio.exists());
@@ -325,15 +330,22 @@ public class DockerInspectorTest {
         assertTrue(containerFileSystemFound || outputContainerFileSystemFile.exists());
     }
 
-    private static String execCmd(final String cmd, final long timeout) throws IOException, InterruptedException, IntegrationException {
-        return execCmd(cmd, timeout, null);
+    private static String execCmd(final File workingDir, final String cmd, final long timeout) throws IOException, InterruptedException, IntegrationException {
+        return execCmd(workingDir, cmd, timeout, null);
     }
 
-    private static String execCmd(final String cmd, final long timeout, final Map<String, String> env) throws IOException, InterruptedException, IntegrationException {
+    private static String execCmd(final String cmd, final long timeout) throws IOException, InterruptedException, IntegrationException {
+        return execCmd(null, cmd, timeout, null);
+    }
+
+    private static String execCmd(final File workingDir, final String cmd, final long timeout, final Map<String, String> env) throws IOException, InterruptedException, IntegrationException {
         System.out.println(String.format("Executing: %s", cmd));
         final ProcessBuilder pb = new ProcessBuilder("bash", "-c", cmd);
         pb.redirectOutput(Redirect.PIPE);
         pb.redirectError(Redirect.PIPE);
+        if (workingDir != null) {
+            pb.directory(workingDir);
+        }
         pb.environment().put("PATH", "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin");
         if (env != null) {
             pb.environment().putAll(env);
