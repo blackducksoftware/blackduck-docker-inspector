@@ -105,7 +105,7 @@ public class DockerInspectorTest {
         final String repo = "blackducksoftware/centos_minus_vim_plus_bacula";
         final String tag = "1.0";
         final File outputContainerFileSystemFile = getOutputContainerFileSystemFile(repo, tag);
-        testTar("build/images/test/aggregated.tar", repo.replaceAll("/", "_"), repo, tag, tag, "var_lib_dpkg", true, null, true, outputContainerFileSystemFile);
+        testTar("build/images/test/aggregated.tar", repo.replaceAll("/", "_"), repo, tag, tag, "var_lib_rpm", true, null, true, outputContainerFileSystemFile);
     }
 
     @Test
@@ -201,7 +201,7 @@ public class DockerInspectorTest {
     }
 
     private File getOutputContainerFileSystemFile(final String repo, final String tag) {
-        final String outputContainerFileSystemFileName = String.format("test/output/%s_%s_containerfilesystem.tar.gz", repo.replaceAll("/", "_"), tag);
+        final String outputContainerFileSystemFileName = String.format("test/output/%s_%s_containerfilesystem.tar.gz", repo.replaceAll("/", "_"), tag == null ? "latest" : tag);
         final File outputTarFile = new File(outputContainerFileSystemFileName);
         return outputTarFile;
     }
