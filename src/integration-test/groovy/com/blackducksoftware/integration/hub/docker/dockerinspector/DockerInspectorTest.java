@@ -83,27 +83,42 @@ public class DockerInspectorTest {
 
     @Test
     public void testWhiteout() throws IOException, InterruptedException, IntegrationException {
-        testTar("build/images/test/whiteouttest.tar", "blackducksoftware_whiteouttest", "blackducksoftware/whiteouttest", "1.0", "1.0", "var_lib_dpkg", true, null, true);
+        final String repo = "blackducksoftware/whiteouttest";
+        final String tag = "1.0";
+        final File outputContainerFileSystemFile = getOutputContainerFileSystemFile(repo, tag);
+        testTar("build/images/test/whiteouttest.tar", repo.replaceAll("/", "_"), repo, tag, tag, "var_lib_dpkg", true, null, true, outputContainerFileSystemFile);
     }
 
     @Test
     public void testAggregateTarfileImageOne() throws IOException, InterruptedException, IntegrationException {
-        testTar("build/images/test/aggregated.tar", "blackducksoftware_whiteouttest", "blackducksoftware/whiteouttest", "1.0", "1.0", "var_lib_dpkg", true, null, true);
+        final String repo = "blackducksoftware/whiteouttest";
+        final String tag = "1.0";
+        final File outputContainerFileSystemFile = getOutputContainerFileSystemFile(repo, tag);
+        testTar("build/images/test/aggregated.tar", repo.replaceAll("/", "_"), repo, tag, tag, "var_lib_dpkg", true, null, true, outputContainerFileSystemFile);
     }
 
     @Test
     public void testAggregateTarfileImageTwo() throws IOException, InterruptedException, IntegrationException {
-        testTar("build/images/test/aggregated.tar", "blackducksoftware_centos_minus_vim_plus_bacula", "blackducksoftware/centos_minus_vim_plus_bacula", "1.0", "1.0", "var_lib_rpm", true, null, true);
+        final String repo = "blackducksoftware/centos_minus_vim_plus_bacula";
+        final String tag = "1.0";
+        final File outputContainerFileSystemFile = getOutputContainerFileSystemFile(repo, tag);
+        testTar("build/images/test/aggregated.tar", repo.replaceAll("/", "_"), repo, tag, tag, "var_lib_dpkg", true, null, true, outputContainerFileSystemFile);
     }
 
     @Test
     public void testAlpineLatestTarRepoTagSpecified() throws IOException, InterruptedException, IntegrationException {
-        testTar("build/images/test/alpine.tar", "alpine", "alpine", "latest", "latest", "lib_apk", false, null, true);
+        final String repo = "alpine";
+        final String tag = "latest";
+        final File outputContainerFileSystemFile = getOutputContainerFileSystemFile(repo, tag);
+        testTar("build/images/test/alpine.tar", repo.replaceAll("/", "_"), repo, tag, tag, "var_lib_dpkg", true, null, true, outputContainerFileSystemFile);
     }
 
     @Test
     public void testAlpineLatestTarRepoTagNotSpecified() throws IOException, InterruptedException, IntegrationException {
-        testTar("build/images/test/alpine.tar", "alpine", null, null, "latest", "lib_apk", false, null, true);
+        final String repo = "alpine";
+        final String tag = null;
+        final File outputContainerFileSystemFile = getOutputContainerFileSystemFile(repo, tag);
+        testTar("build/images/test/alpine.tar", repo, null, null, "latest", "lib_apk", false, null, true, outputContainerFileSystemFile);
     }
 
     @Test
@@ -114,8 +129,10 @@ public class DockerInspectorTest {
         targetDir.mkdirs();
         outputDir.mkdirs();
         outputDir.setWritable(true, false);
-        final File targetTar = new File(targetDir, "alpine36.tar");
-        FileUtils.copyFile(new File("build/images/test/alpine36.tar"), targetTar);
+        final String tarFileBaseName = "alpine36";
+        final String tarFileName = String.format("%s.tar", tarFileBaseName);
+        final File targetTar = new File(targetDir, tarFileName);
+        FileUtils.copyFile(new File(String.format("build/images/test/%s", tarFileName)), targetTar);
         targetTar.setReadable(true, false);
         // TODO too hard coded
         // TODO use a diff port
@@ -128,7 +145,8 @@ public class DockerInspectorTest {
             // TODO TEMP hard coded path
             additionalArgs.add(String.format("--shared.dir.path.local=%s", sharedDir.getAbsolutePath()));
             additionalArgs.add(String.format("--shared.dir.path.imageinspector=/opt/blackduck/hub-imageinspector-ws/shared"));
-            testTar(targetTar.getAbsolutePath(), "alpine", null, null, "3.6", "lib_apk", true, additionalArgs, false);
+            final File outputContainerFileSystemFile = new File(String.format("test/output/%s_containerfilesystem.tar.gz", tarFileBaseName));
+            testTar(targetTar.getAbsolutePath(), "alpine", null, null, "3.6", "lib_apk", true, additionalArgs, false, outputContainerFileSystemFile);
         } finally {
             try {
                 execCmd("docker stop testAlpineExistingContainer", 120000L);
@@ -158,20 +176,6 @@ public class DockerInspectorTest {
 
         System.out.println(String.format("Running --pulljar end to end test"));
         execCmd(workingDir, String.join(" ", fullCmd), 30000L);
-
-        // TODO eliminate redundancy w/ execCmd
-        // final ProcessBuilder pb = new ProcessBuilder(fullCmd);
-        // final Map<String, String> env = pb.environment();
-        // final String oldPath = System.getenv("PATH");
-        // final String newPath = String.format("/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:%s", oldPath);
-        // System.out.println(String.format("Adjusted path: %s", newPath));
-        // env.put("PATH", newPath);
-        // pb.redirectErrorStream(true);
-        // pb.redirectOutput(Redirect.INHERIT);
-        // pb.directory(workingDir);
-        // final Process p = pb.start();
-        // final int retCode = p.waitFor();
-        // assertEquals(0, retCode);
         System.out.println("hub-docker-inspector --pulljar done; verifying results...");
 
         final File[] jarFilesAfter = workingDir.listFiles(jarFileFilter);
@@ -194,86 +198,26 @@ public class DockerInspectorTest {
         return jarFileFilter;
     }
 
-    private void testImage(final String inspectTarget, final String imageForBdioFilename, final String tagForBdioFilename, final String pkgMgrPathString, final boolean requireBdioMatch)
-            throws IOException, InterruptedException, IntegrationException {
-        final String inspectTargetArg = String.format(String.format("--docker.image=%s", inspectTarget));
-        test(imageForBdioFilename, pkgMgrPathString, null, null, tagForBdioFilename, inspectTargetArg, requireBdioMatch, null, true);
-    }
-
-    private void testTar(final String tarPath, final String imageForBdioFilename, final String repo, final String tag, final String tagForBdioFilename, final String pkgMgrPathString, final boolean requireBdioMatch,
-            final List<String> additionalArgs, final boolean needWorkingDir)
-            throws IOException, InterruptedException, IntegrationException {
-        final String inspectTarget = String.format(String.format("--docker.tar=%s", tarPath));
-        test(imageForBdioFilename, pkgMgrPathString, repo, tag, tagForBdioFilename, inspectTarget, requireBdioMatch, additionalArgs, needWorkingDir);
-    }
-
-    private File getOutputImageTarFile(final String inspectTarget, final String imageForBdioFilename, final String tagForBdioFilename) {
-        String outputTarFileName = null;
-
-        if (inspectTarget.endsWith(".tar")) {
-            final String inspectTargetFileName = inspectTarget.substring(18);
-
-            outputTarFileName = String.format("test/output/%s", inspectTargetFileName);
-        } else {
-            final String inspectTargetFileName = String.format("%s_%s.tar", imageForBdioFilename, tagForBdioFilename);
-            outputTarFileName = String.format("test/output/%s", inspectTargetFileName);
-        }
-        final File outputTarFile = new File(outputTarFileName);
-        return outputTarFile;
-    }
-
     private File getOutputContainerFileSystemFile(final String repo, final String tag) {
-        final String outputContainerFileSystemFileName = String.format("test/output/%s_%s_containerfilesystem.tar.gz", repo, tag);
+        final String outputContainerFileSystemFileName = String.format("test/output/%s_%s_containerfilesystem.tar.gz", repo.replaceAll("/", "_"), tag);
         final File outputTarFile = new File(outputContainerFileSystemFileName);
         return outputTarFile;
     }
 
-    // TODO wow, this is ugly; needs a major re-write
-    private void test(final String imageForBdioFilename, final String pkgMgrPathString, final String repo, final String tag, final String tagForBdioFilename, final String inspectTargetArg, final boolean requireBdioMatch,
-            final List<String> additionalArgs, final boolean needWorkingDir)
+    private void testTar(final String inspectTargetTarfile, final String imageForBdioFilename, final String repo, final String tag, final String tagForBdioFilename, final String pkgMgrPathString, final boolean requireBdioMatch,
+            final List<String> additionalArgs, final boolean needWorkingDir, final File outputContainerFileSystemFile)
             throws IOException, InterruptedException, IntegrationException {
-        final String workingDirPath = "test/endToEnd";
-        try {
-            FileUtils.deleteDirectory(new File(workingDirPath));
-        } catch (final Exception e) {
-            System.out.println(String.format("Unable to delete %s", workingDirPath));
-        }
 
-        final File expectedBdio = new File(String.format(String.format("src/integration-test/resources/bdio/%s_%s_%s_%s_bdio.jsonld", imageForBdioFilename, pkgMgrPathString, imageForBdioFilename, tagForBdioFilename)));
-        if (requireBdioMatch) {
-            assertTrue(expectedBdio.exists());
-        }
+        final String inspectTargetArg = String.format("--docker.tar=%s", inspectTargetTarfile);
 
-        // TODO find a better way; tar and image:tag should be separate; factor out the common code into methods both call
-        String tarFileBaseName = null;
-        String inspectTarget = null;
-        if (inspectTargetArg.startsWith("--docker.tar=")) {
-            inspectTarget = inspectTargetArg.substring("--docker.tar=".length());
-            tarFileBaseName = inspectTarget.substring(0, inspectTarget.length() - ".tar".length());
-            final int lastSlash = tarFileBaseName.lastIndexOf('/');
-            if (lastSlash >= 0) {
-                tarFileBaseName = tarFileBaseName.substring(lastSlash + 1);
-            }
-            System.out.printf("tarFileBaseName: %s\n", tarFileBaseName);
-        }
-        if (inspectTargetArg.startsWith("--docker.image=")) {
-            inspectTarget = inspectTargetArg.substring("--docker.image=".length());
-        }
-
-        final File outputContainerFileSystemFile = getOutputContainerFileSystemFile(imageForBdioFilename, tagForBdioFilename);
-        Files.deleteIfExists(outputContainerFileSystemFile.toPath());
-        assertFalse(outputContainerFileSystemFile.exists());
+        ensureFileDoesNotExist(outputContainerFileSystemFile);
 
         final File actualBdio = new File(String.format(String.format("test/output/%s_%s_%s_%s_bdio.jsonld", imageForBdioFilename, pkgMgrPathString, imageForBdioFilename, tagForBdioFilename)));
-        Files.deleteIfExists(actualBdio.toPath());
-        assertFalse(actualBdio.exists());
+        ensureFileDoesNotExist(actualBdio);
 
-        final ProgramVersion pgmVerObj = new ProgramVersion();
-        pgmVerObj.init();
-        final String programVersion = pgmVerObj.getProgramVersion();
-        final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--upload.bdio=false", String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", programVersion), "--output.path=test/output",
+        final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--upload.bdio=false", String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", getProgramVersion()), "--output.path=test/output",
                 "--output.include.containerfilesystem=true", "--hub.always.trust.cert=true");
-        // Arrays.asList returns a fixed size list; need a variable sized list
+
         final List<String> fullCmd = new ArrayList<>();
         fullCmd.addAll(partialCmd);
         if (repo != null) {
@@ -284,7 +228,9 @@ public class DockerInspectorTest {
         }
         fullCmd.add("--logging.level.com.blackducksoftware=DEBUG");
         if (needWorkingDir) {
-            fullCmd.add(String.format("--working.dir.path=%s", workingDirPath));
+            final File workingDir = new File("test/endToEnd");
+            deleteDirIfExists(workingDir);
+            fullCmd.add(String.format("--working.dir.path=%s", workingDir.getAbsolutePath()));
         }
         fullCmd.add(inspectTargetArg);
 
@@ -292,42 +238,81 @@ public class DockerInspectorTest {
             fullCmd.addAll(additionalArgs);
         }
 
-        System.out.println(String.format("Running end to end test on %s with command %s", inspectTarget, fullCmd.toString()));
+        System.out.println(String.format("Running end to end test on %s with command %s", inspectTargetTarfile, fullCmd.toString()));
         execCmd(String.join(" ", fullCmd), 30000L);
-
-        // final ProcessBuilder pb = new ProcessBuilder(fullCmd);
-        // final Map<String, String> env = pb.environment();
-        // final String oldPath = System.getenv("PATH");
-        // final String newPath = String.format("/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:%s", oldPath);
-        // System.out.println(String.format("Adjusted path: %s", newPath));
-        // env.put("PATH", newPath);
-        // pb.redirectErrorStream(true);
-        // pb.redirectOutput(Redirect.INHERIT);
-        // final Process p = pb.start();
-        // final int retCode = p.waitFor();
-        // assertEquals(0, retCode);
-
         System.out.println("hub-docker-inspector done; verifying results...");
         System.out.printf("Expecting output BDIO file: %s\n", actualBdio.getAbsolutePath());
         assertTrue(actualBdio.exists());
         if (requireBdioMatch) {
+            final File expectedBdio = new File(String.format(String.format("src/integration-test/resources/bdio/%s_%s_%s_%s_bdio.jsonld", imageForBdioFilename, pkgMgrPathString, imageForBdioFilename, tagForBdioFilename)));
             final List<String> exceptLinesContainingThese = new ArrayList<>();
             exceptLinesContainingThese.add("\"@id\":");
-
             final boolean outputBdioMatches = TestUtils.contentEquals(expectedBdio, actualBdio, exceptLinesContainingThese);
             assertTrue(outputBdioMatches);
         }
 
-        // TODO this is so ugly
-        boolean containerFileSystemFound = false;
-        if (tarFileBaseName != null) {
-            final String alternativeOutputContainerFileSystemFilePath = String.format("test/output/%s_containerfilesystem.tar.gz", tarFileBaseName);
-            final File alternativeOutputContainerFileSystemFile = new File(alternativeOutputContainerFileSystemFilePath);
-            if (alternativeOutputContainerFileSystemFile.exists()) {
-                containerFileSystemFound = true;
-            }
+        assertTrue(outputContainerFileSystemFile.exists());
+    }
+
+    private void testImage(final String inspectTargetImageRepoTag, final String repo, final String tag, final String pkgMgrPathString, final boolean requireBdioMatch)
+            throws IOException, InterruptedException, IntegrationException {
+        final File outputContainerFileSystemFile = getOutputContainerFileSystemFile(repo, tag);
+        final String inspectTargetArg = String.format("--docker.image=%s", inspectTargetImageRepoTag);
+        ensureFileDoesNotExist(outputContainerFileSystemFile);
+        final File actualBdio = new File(String.format(String.format("test/output/%s_%s_%s_%s_bdio.jsonld", repo, pkgMgrPathString, repo, tag)));
+        ensureFileDoesNotExist(actualBdio);
+
+        final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--upload.bdio=false", String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", getProgramVersion()), "--output.path=test/output",
+                "--output.include.containerfilesystem=true", "--hub.always.trust.cert=true");
+
+        final List<String> fullCmd = new ArrayList<>();
+        fullCmd.addAll(partialCmd);
+        if (repo != null) {
+            fullCmd.add(String.format("--docker.image.repo=%s", repo));
         }
-        assertTrue(containerFileSystemFound || outputContainerFileSystemFile.exists());
+        if (tag != null) {
+            fullCmd.add(String.format("--docker.image.tag=%s", tag));
+        }
+        fullCmd.add("--logging.level.com.blackducksoftware=DEBUG");
+        final File workingDir = new File("test/endToEnd");
+        deleteDirIfExists(workingDir);
+        fullCmd.add(String.format("--working.dir.path=%s", workingDir.getAbsolutePath()));
+        fullCmd.add(inspectTargetArg);
+
+        System.out.println(String.format("Running end to end test on %s with command %s", inspectTargetImageRepoTag, fullCmd.toString()));
+        execCmd(String.join(" ", fullCmd), 30000L);
+        System.out.println("hub-docker-inspector done; verifying results...");
+        System.out.printf("Expecting output BDIO file: %s\n", actualBdio.getAbsolutePath());
+        assertTrue(actualBdio.exists());
+        if (requireBdioMatch) {
+            final File expectedBdio = new File(String.format(String.format("src/integration-test/resources/bdio/%s_%s_%s_%s_bdio.jsonld", repo, pkgMgrPathString, repo, tag)));
+            final List<String> exceptLinesContainingThese = new ArrayList<>();
+            exceptLinesContainingThese.add("\"@id\":");
+            final boolean outputBdioMatches = TestUtils.contentEquals(expectedBdio, actualBdio, exceptLinesContainingThese);
+            assertTrue(outputBdioMatches);
+        }
+
+        assertTrue(outputContainerFileSystemFile.exists());
+    }
+
+    private String getProgramVersion() throws IOException {
+        final ProgramVersion pgmVerObj = new ProgramVersion();
+        pgmVerObj.init();
+        final String programVersion = pgmVerObj.getProgramVersion();
+        return programVersion;
+    }
+
+    private void ensureFileDoesNotExist(final File outputContainerFileSystemFile) throws IOException {
+        Files.deleteIfExists(outputContainerFileSystemFile.toPath());
+        assertFalse(outputContainerFileSystemFile.exists());
+    }
+
+    private void deleteDirIfExists(final File workingDir) {
+        try {
+            FileUtils.deleteDirectory(workingDir);
+        } catch (final Exception e) {
+            System.out.println(String.format("Unable to delete %s", workingDir.getAbsolutePath()));
+        }
     }
 
     private static String execCmd(final File workingDir, final String cmd, final long timeout) throws IOException, InterruptedException, IntegrationException {
