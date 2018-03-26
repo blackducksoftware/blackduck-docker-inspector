@@ -45,9 +45,12 @@ public class ImageInspectorClient {
 
     public String getBdio(final String imageInspectorUrl, final String containerPathToTarfile, final String containerFileSystemFilename, final boolean cleanup) throws IntegrationException, MalformedURLException {
         logger.info(String.format("ImageInspector URL: %s", imageInspectorUrl));
-        final RestConnection restConnection = createConnection(imageInspectorUrl);
+        // TODO with the redirect, a long timeout is required
+        final int timeoutSeconds = 120;
+        final RestConnection restConnection = createConnection(imageInspectorUrl, timeoutSeconds);
         // TODO too hard coded
         final String url = String.format("%s/getbdio?tarfile=%s&resultingcontainerfspath=/opt/blackduck/hub-imageinspector-ws/shared/output/%s&cleanup=%b", imageInspectorUrl, containerPathToTarfile, containerFileSystemFilename, cleanup);
+        logger.debug(String.format("*** Doing a GET (%d second timeout) on %s", timeoutSeconds, url));
         final Request request = new Request.Builder(url).method(HttpMethod.GET).build();
         try (Response response = restConnection.executeRequest(request)) {
             logger.info(String.format("Response: HTTP status: %d", response.getStatusCode()));
@@ -59,10 +62,10 @@ public class ImageInspectorClient {
         }
     }
 
-    private RestConnection createConnection(final String baseUrl) throws MalformedURLException {
+    private RestConnection createConnection(final String baseUrl, final int timeoutSeconds) throws MalformedURLException {
         final UnauthenticatedRestConnectionBuilder connectionBuilder = new UnauthenticatedRestConnectionBuilder();
         connectionBuilder.setBaseUrl(baseUrl);
-        connectionBuilder.setTimeout(30);
+        connectionBuilder.setTimeout(timeoutSeconds);
         final IntLogger intLogger = new Slf4jIntLogger(logger);
         connectionBuilder.setLogger(intLogger);
         connectionBuilder.setAlwaysTrustServerCertificate(false);

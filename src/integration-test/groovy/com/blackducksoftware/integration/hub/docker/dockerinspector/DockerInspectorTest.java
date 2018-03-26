@@ -26,7 +26,10 @@ import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.imageinspector.TestUtils;
 
 public class DockerInspectorTest {
-    private static String IMAGE_INSPECTOR_PORT_ON_HOST = "8080";
+    private static int IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE = 8080;
+    private static int IMAGE_INSPECTOR_PORT_IN_CONTAINER_ALPINE = 8080;
+    private static int IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS = 8081;
+    private static int IMAGE_INSPECTOR_PORT_IN_CONTAINER_CENTOS = 8081;
     private static String IMAGE_INSPECTOR_REPO_BASE = "hub-imageinspector-ws";
     private static String IMAGE_INSPECTOR_TAG = "1.0.1-SNAPSHOT";
 
@@ -38,10 +41,68 @@ public class DockerInspectorTest {
         } catch (final Exception e) {
             System.out.println(String.format("mkdir test: %s", e.getMessage()));
         }
+
+        startContainer("alpine", IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE, IMAGE_INSPECTOR_PORT_IN_CONTAINER_ALPINE);
+        startContainer("centos", IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS, IMAGE_INSPECTOR_PORT_IN_CONTAINER_CENTOS);
+
+        boolean alpineUp = false;
+        boolean centosUp = false;
+        for (int i = 0; i < 10; i++) {
+            Thread.sleep(10000L);
+            if (!alpineUp) {
+                alpineUp = isUp(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE);
+            }
+            if (!centosUp) {
+                centosUp = isUp(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS);
+            }
+            if (alpineUp && centosUp) {
+                break;
+            }
+        }
+        assertTrue(alpineUp && centosUp);
+    }
+
+    private static boolean isUp(final int port) {
+        String response;
+        try {
+            response = execCmd(String.format("curl -i http://localhost:%d/health", port), 30000L);
+        } catch (IOException | InterruptedException | IntegrationException e) {
+            return false;
+        }
+        if (response.startsWith("HTTP/1.1 200")) {
+            return true;
+        }
+        return false;
+    }
+
+    private static void startContainer(final String imageInspectorPlatform, final int portOnHost, final int portInContainer) throws IOException, InterruptedException, IntegrationException {
+        final String containerName = getContainerName(imageInspectorPlatform);
+        final String cmd = String.format("docker run -d -t --name %s -p %d:%d -v \"$(pwd)\"/build/shared:/opt/blackduck/hub-imageinspector-ws/shared blackducksoftware/%s-%s:%s",
+                containerName, portOnHost, portInContainer,
+                IMAGE_INSPECTOR_REPO_BASE, imageInspectorPlatform, IMAGE_INSPECTOR_TAG);
+        execCmd(cmd, 120000L);
+    }
+
+    private static String getContainerName(final String imageInspectorPlatform) {
+        return String.format("dockerInspectorTestImageInspector_%s", imageInspectorPlatform);
     }
 
     @AfterClass
     public static void tearDownAfterClass() throws Exception {
+        stopContainer("alpine");
+        stopContainer("centos");
+    }
+
+    private static void stopContainer(final String imageInspectorPlatform) {
+        final String containerName = getContainerName(imageInspectorPlatform);
+        try {
+            execCmd(String.format("docker stop %s", containerName), 120000L);
+        } catch (final Exception e) {
+        }
+        try {
+            execCmd(String.format("docker rm %s", containerName), 120000L);
+        } catch (final Exception e) {
+        }
     }
 
     @Test
@@ -125,40 +186,45 @@ public class DockerInspectorTest {
     }
 
     @Test
-    public void testAlpineExistingContainer() throws IOException, InterruptedException, IntegrationException {
+    public void testAlpineUsingExistingAlpineContainer() throws IOException, InterruptedException, IntegrationException {
+        final String targetRepo = "alpine";
+        final String targetTag = "3.6";
+        final String targetPkgMgrLib = "lib_apk";
+        final String tarFileBaseName = "alpine36";
+        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE;
+        final String imageInspectorPlatform = "alpine";
+        testUsingExistingContainer(targetRepo, targetTag, targetPkgMgrLib, tarFileBaseName, imageInspectorPlatform, portOnHost);
+    }
+
+    @Test
+    public void testCentosUsingExistingAlpineContainer() throws IOException, InterruptedException, IntegrationException {
+        final String targetRepo = "blackducksoftware/centos_minus_vim_plus_bacula";
+        final String targetTag = "1.0";
+        final String targetPkgMgrLib = "var_lib_rpm";
+        final String tarFileBaseName = "centos_minus_vim_plus_bacula";
+        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE;
+        final String imageInspectorPlatform = "alpine";
+        testUsingExistingContainer(targetRepo, targetTag, targetPkgMgrLib, tarFileBaseName, imageInspectorPlatform, portOnHost);
+    }
+
+    private void testUsingExistingContainer(final String targetRepo, final String targetTag, final String targetPkgMgrLib, final String tarFileBaseName, final String imageInspectorPlatform, final int portOnHost)
+            throws IOException, InterruptedException, IntegrationException {
         final File sharedDir = new File("build/shared");
         final File targetDir = new File(sharedDir, "target");
         final File outputDir = new File(sharedDir, "output");
         targetDir.mkdirs();
         outputDir.mkdirs();
         outputDir.setWritable(true, false);
-        final String tarFileBaseName = "alpine36";
         final String tarFileName = String.format("%s.tar", tarFileBaseName);
         final File targetTar = new File(targetDir, tarFileName);
         FileUtils.copyFile(new File(String.format("build/images/test/%s", tarFileName)), targetTar);
         targetTar.setReadable(true, false);
-        final String cmd = String.format("docker run -d -t --name testAlpineExistingContainer -p %s:8080 -v \"$(pwd)\"/build/shared:/opt/blackduck/hub-imageinspector-ws/shared blackducksoftware/%s-alpine:%s", IMAGE_INSPECTOR_PORT_ON_HOST,
-                IMAGE_INSPECTOR_REPO_BASE, IMAGE_INSPECTOR_TAG);
-        execCmd(cmd, 120000L);
-        try {
-            Thread.sleep(30000L);
-            execCmd("curl -i http://localhost:8080/health", 30000L);
-            final List<String> additionalArgs = new ArrayList<>();
-            additionalArgs.add("--imageinspector.url=http://localhost:8080");
-            additionalArgs.add(String.format("--shared.dir.path.local=%s", sharedDir.getAbsolutePath()));
-            additionalArgs.add(String.format("--shared.dir.path.imageinspector=/opt/blackduck/hub-imageinspector-ws/shared"));
-            final File outputContainerFileSystemFile = new File(String.format("test/output/%s_containerfilesystem.tar.gz", tarFileBaseName));
-            testTar(targetTar.getAbsolutePath(), "alpine", null, null, "3.6", "lib_apk", true, additionalArgs, false, outputContainerFileSystemFile);
-        } finally {
-            try {
-                execCmd("docker stop testAlpineExistingContainer", 120000L);
-            } catch (final Exception e) {
-            }
-            try {
-                execCmd("docker rm testAlpineExistingContainer", 120000L);
-            } catch (final Exception e) {
-            }
-        }
+        final List<String> additionalArgs = new ArrayList<>();
+        additionalArgs.add(String.format("--imageinspector.url=http://localhost:%d", portOnHost));
+        additionalArgs.add(String.format("--shared.dir.path.local=%s", sharedDir.getAbsolutePath()));
+        additionalArgs.add(String.format("--shared.dir.path.imageinspector=/opt/blackduck/hub-imageinspector-ws/shared"));
+        final File outputContainerFileSystemFile = new File(String.format("test/output/%s_containerfilesystem.tar.gz", tarFileBaseName));
+        testTar(targetTar.getAbsolutePath(), targetRepo, null, null, targetTag, targetPkgMgrLib, true, additionalArgs, false, outputContainerFileSystemFile);
     }
 
     @Test
@@ -214,7 +280,7 @@ public class DockerInspectorTest {
 
         ensureFileDoesNotExist(outputContainerFileSystemFile);
 
-        final File actualBdio = new File(String.format(String.format("test/output/%s_%s_%s_%s_bdio.jsonld", imageForBdioFilename, pkgMgrPathString, imageForBdioFilename, tagForBdioFilename)));
+        final File actualBdio = new File(String.format(String.format("test/output/%s_%s_%s_%s_bdio.jsonld", imageForBdioFilename.replaceAll("/", "_"), pkgMgrPathString, imageForBdioFilename.replaceAll("/", "_"), tagForBdioFilename)));
         ensureFileDoesNotExist(actualBdio);
 
         final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--upload.bdio=false", String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", getProgramVersion()), "--output.path=test/output",
@@ -241,7 +307,7 @@ public class DockerInspectorTest {
         }
 
         System.out.println(String.format("Running end to end test on %s with command %s", inspectTargetTarfile, fullCmd.toString()));
-        execCmd(String.join(" ", fullCmd), 30000L);
+        execCmd(String.join(" ", fullCmd), 240000L);
         System.out.println("hub-docker-inspector done; verifying results...");
         System.out.printf("Expecting output BDIO file: %s\n", actualBdio.getAbsolutePath());
         assertTrue(actualBdio.exists());
