@@ -88,15 +88,17 @@ public class RestClientInspector implements Inspector {
         }
     }
 
-    private String deriveOutputBdioFilename(final String bdioString) throws IOException {
+    private String deriveOutputBdioFilename(final String bdioString) throws IOException, IntegrationException {
         final SimpleBdioDocument bdioDocument = getSimpleBdioDocument(bdioString);
-        final String spdxName = bdioDocument.billOfMaterials.spdxName;
-        logger.info(String.format("*** spdxName: %s", spdxName));
-        // TODO: Wow, this is truly awful
-        final String[] parts = spdxName.split("_");
-        final String outputBdioFilename = String.format(String.format("%s_%s_%s_%s_%s_bdio.jsonld", parts[0], parts[2], parts[3], parts[0], parts[1]));
-        logger.debug(String.format("*** outputBdioFilename: %s", outputBdioFilename));
-        return outputBdioFilename;
+        final BdioFilename outputFilename = new BdioFilename(bdioDocument.billOfMaterials.spdxName, bdioDocument.project.name, bdioDocument.project.version, bdioDocument.project.bdioExternalIdentifier.externalIdMetaData.forge.getName());
+        return outputFilename.getBdioFilename();
+        // final String spdxName = bdioDocument.billOfMaterials.spdxName;
+        // logger.info(String.format("*** spdxName: %s", spdxName));
+        // // TODO: Wow, this is truly awful
+        // final String[] parts = spdxName.split("_");
+        // final String outputBdioFilename = String.format(String.format("%s_%s_%s_%s_%s_bdio.jsonld", parts[0], parts[2], parts[3], parts[0], parts[1]));
+        // logger.debug(String.format("*** outputBdioFilename: %s", outputBdioFilename));
+        // return outputBdioFilename;
     }
 
     private SimpleBdioDocument getSimpleBdioDocument(final String bdioString) throws IOException {
