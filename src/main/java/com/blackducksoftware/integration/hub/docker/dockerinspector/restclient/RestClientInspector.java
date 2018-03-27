@@ -61,7 +61,6 @@ public class RestClientInspector implements Inspector {
     @Override
     public int getBdio(final DissectedImage dissectedImage) throws IntegrationException {
         try {
-            // TODO get BDIO via container (later: starting them if necessary)
             final File dockerTarFile = dockerTarfile.deriveDockerTarFile(config);
             final String containerFileSystemFilename = dockerTarfile.deriveContainerFileSystemTarGzFilename(dockerTarFile);
             final String dockerTarFilePathInContainer = getContainerPathToLocalFile(dockerTarFile.getCanonicalPath(), new File(config.getSharedDirPathLocal()).getCanonicalPath(), config.getSharedDirPathImageInspector());
@@ -70,17 +69,17 @@ public class RestClientInspector implements Inspector {
             }
             final String bdioString = restClient.getBdio(config.getImageInspectorUrl(), dockerTarFilePathInContainer, containerFileSystemFilename, config.isCleanupWorkingDir());
             if (StringUtils.isNotBlank(config.getOutputPath())) {
+                final File userOutputDir = new File(config.getOutputPath());
+
                 final String outputBdioFilename = deriveOutputBdioFilename(bdioString);
-                final File outputBdioFile = new File(config.getOutputPath(), outputBdioFilename);
+                final File outputBdioFile = new File(userOutputDir, outputBdioFilename);
                 logger.info(String.format("Writing BDIO to %s", outputBdioFile.getAbsolutePath()));
                 FileUtils.write(outputBdioFile, bdioString, StandardCharsets.UTF_8);
-            }
-            if (StringUtils.isNotBlank(config.getOutputPath())) {
-                final File actualLocalOutputDir = new File(config.getSharedDirPathLocal(), "output");
-                final File actualContainerFileSytemFile = new File(actualLocalOutputDir, containerFileSystemFilename);
-                final File userOutputDir = new File(config.getOutputPath());
+
+                final File localPathToContainerOutputDir = new File(config.getSharedDirPathLocal(), "output");
+                final File localPathToContainerFileSytemFile = new File(localPathToContainerOutputDir, containerFileSystemFilename);
                 final File userContainerFileSytemFile = new File(userOutputDir, containerFileSystemFilename);
-                FileUtils.copyFile(actualContainerFileSytemFile, userContainerFileSytemFile);
+                FileUtils.copyFile(localPathToContainerFileSytemFile, userContainerFileSytemFile);
             }
             return 0;
         } catch (final IOException e) {
@@ -92,13 +91,6 @@ public class RestClientInspector implements Inspector {
         final SimpleBdioDocument bdioDocument = getSimpleBdioDocument(bdioString);
         final BdioFilename outputFilename = new BdioFilename(bdioDocument.billOfMaterials.spdxName, bdioDocument.project.name, bdioDocument.project.version, bdioDocument.project.bdioExternalIdentifier.externalIdMetaData.forge.getName());
         return outputFilename.getBdioFilename();
-        // final String spdxName = bdioDocument.billOfMaterials.spdxName;
-        // logger.info(String.format("*** spdxName: %s", spdxName));
-        // // TODO: Wow, this is truly awful
-        // final String[] parts = spdxName.split("_");
-        // final String outputBdioFilename = String.format(String.format("%s_%s_%s_%s_%s_bdio.jsonld", parts[0], parts[2], parts[3], parts[0], parts[1]));
-        // logger.debug(String.format("*** outputBdioFilename: %s", outputBdioFilename));
-        // return outputBdioFilename;
     }
 
     private SimpleBdioDocument getSimpleBdioDocument(final String bdioString) throws IOException {
