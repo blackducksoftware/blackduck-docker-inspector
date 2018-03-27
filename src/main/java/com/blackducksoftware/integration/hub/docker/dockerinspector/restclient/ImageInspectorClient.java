@@ -41,6 +41,11 @@ import com.blackducksoftware.integration.log.Slf4jIntLogger;
 
 @Component
 public class ImageInspectorClient {
+    private static final String CLEANUP_QUERY_PARAM = "cleanup";
+    private static final String CONTAINER_OUTPUT_PATH = "/opt/blackduck/hub-imageinspector-ws/shared/output";
+    private static final String RESULTING_CONTAINER_FS_PATH_QUERY_PARAM = "resultingcontainerfspath";
+    private static final String TARFILE_QUERY_PARAM = "tarfile";
+    private static final String GETBDIO_ENDPOINT = "getbdio";
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public String getBdio(final String imageInspectorUrl, final String containerPathToTarfile, final String containerFileSystemFilename, final boolean cleanup) throws IntegrationException, MalformedURLException {
@@ -48,9 +53,9 @@ public class ImageInspectorClient {
         // TODO with the redirect, a long timeout is required
         final int timeoutSeconds = 120;
         final RestConnection restConnection = createConnection(imageInspectorUrl, timeoutSeconds);
-        // TODO too hard coded
-        final String url = String.format("%s/getbdio?tarfile=%s&resultingcontainerfspath=/opt/blackduck/hub-imageinspector-ws/shared/output/%s&cleanup=%b", imageInspectorUrl, containerPathToTarfile, containerFileSystemFilename, cleanup);
-        logger.debug(String.format("*** Doing a GET (%d second timeout) on %s", timeoutSeconds, url));
+        final String url = String.format("%s/%s?%s=%s&%s=%s/%s&%s=%b",
+                imageInspectorUrl, GETBDIO_ENDPOINT, TARFILE_QUERY_PARAM, containerPathToTarfile, RESULTING_CONTAINER_FS_PATH_QUERY_PARAM, CONTAINER_OUTPUT_PATH, containerFileSystemFilename, CLEANUP_QUERY_PARAM, cleanup);
+        logger.debug(String.format("Doing a GET (%d second timeout) on %s", timeoutSeconds, url));
         final Request request = new Request.Builder(url).method(HttpMethod.GET).build();
         try (Response response = restConnection.executeRequest(request)) {
             logger.info(String.format("Response: HTTP status: %d", response.getStatusCode()));

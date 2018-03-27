@@ -52,9 +52,7 @@ import com.blackducksoftware.integration.hub.imageinspector.lib.DissectedImage;
 import com.blackducksoftware.integration.hub.imageinspector.lib.ImageInfoDerived;
 import com.blackducksoftware.integration.hub.imageinspector.lib.ImageInspector;
 import com.blackducksoftware.integration.hub.imageinspector.lib.OperatingSystemEnum;
-import com.blackducksoftware.integration.hub.imageinspector.linux.FileOperations;
 
-// TODO make this share an interface with RestClientInspector
 @Component
 public class DockerExecInspector implements Inspector {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());

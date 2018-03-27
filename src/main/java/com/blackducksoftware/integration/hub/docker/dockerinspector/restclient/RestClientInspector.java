@@ -58,12 +58,15 @@ public class RestClientInspector implements Inspector {
     @Autowired
     private ImageInspectorClient restClient;
 
+    @Autowired
+    private ContainerPath containerPath;
+
     @Override
     public int getBdio(final DissectedImage dissectedImage) throws IntegrationException {
         try {
             final File dockerTarFile = dockerTarfile.deriveDockerTarFile(config);
             final String containerFileSystemFilename = dockerTarfile.deriveContainerFileSystemTarGzFilename(dockerTarFile);
-            final String dockerTarFilePathInContainer = getContainerPathToLocalFile(dockerTarFile.getCanonicalPath(), new File(config.getSharedDirPathLocal()).getCanonicalPath(), config.getSharedDirPathImageInspector());
+            final String dockerTarFilePathInContainer = containerPath.getContainerPathToLocalFile(dockerTarFile.getCanonicalPath());
             if (StringUtils.isBlank(config.getImageInspectorUrl())) {
                 throw new IntegrationException("The imageinspector URL property must be set");
             }
@@ -102,31 +105,4 @@ public class RestClientInspector implements Inspector {
         return simpleBdioDocument;
     }
 
-    // TODO move to ProgramPaths or something
-    /*
-     * Translate a local path (to a file within the dir shared with the container) to the equivalent path for the container. Find path to the given localPath RELATIVE to the local shared dir. Convert that to the container's path by
-     * appending that relative path to the container's path to the shared dir
-     */
-    private String getContainerPathToLocalFile(final String localPath, final String workingDirPath, final String workingDirPathImageInspector) {
-        logger.debug(String.format("localPath: %s", localPath));
-        if (StringUtils.isBlank(workingDirPathImageInspector)) {
-            logger.debug(String.format("config.getWorkingDirPathImageInspector() is BLANK"));
-            return localPath;
-        }
-        final String trimmedWorkingDirPath = trimTrailingFileSeparator(workingDirPath);
-        final String trimmedWorkingDirPathImageInspector = trimTrailingFileSeparator(workingDirPathImageInspector);
-        logger.debug(String.format("config.getWorkingDirPath(): %s", trimmedWorkingDirPath));
-        final String localRelPath = localPath.substring(trimmedWorkingDirPath.length());
-        logger.debug(String.format("localRelPath: %s", localRelPath));
-        final String containerPath = String.format("%s%s", trimmedWorkingDirPathImageInspector, localRelPath);
-        logger.debug(String.format("containerPath: %s", containerPath));
-        return containerPath;
-    }
-
-    String trimTrailingFileSeparator(final String path) {
-        if (StringUtils.isBlank(path) || !path.endsWith("/")) {
-            return path;
-        }
-        return path.substring(0, path.length() - 1);
-    }
 }

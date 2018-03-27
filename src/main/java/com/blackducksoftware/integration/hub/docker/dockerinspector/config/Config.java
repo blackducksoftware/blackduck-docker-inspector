@@ -168,7 +168,6 @@ public class Config {
     @Value("${docker.image.tag:}")
     private String dockerImageTag = "";
 
-    // TODO REMOVE
     @ValueDescription(description = "Running on host?", defaultValue = "true", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${on.host:true}")
     private Boolean onHost = Boolean.TRUE;
@@ -407,7 +406,6 @@ public class Config {
         return optionsByFieldName.get("dockerImageTag").getResolvedValue();
     }
 
-    // TODO REMOVE
     public boolean isOnHost() {
         return optionsByFieldName.get("onHost").getResolvedValue().equals("true");
     }
@@ -534,7 +532,7 @@ public class Config {
         this.jarPath = null;
         this.linuxDistro = null;
         this.loggingLevel = null;
-        this.onHost = null; // TODO REMOVE
+        this.onHost = null;
         this.outputIncludeContainerfilesystem = null;
         this.outputPath = null;
         this.phoneHome = null;
