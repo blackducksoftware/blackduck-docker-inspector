@@ -30,6 +30,8 @@ public class DockerInspectorTest {
     private static int IMAGE_INSPECTOR_PORT_IN_CONTAINER_ALPINE = 8080;
     private static int IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS = 8081;
     private static int IMAGE_INSPECTOR_PORT_IN_CONTAINER_CENTOS = 8081;
+    private static int IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU = 8082;
+    private static int IMAGE_INSPECTOR_PORT_IN_CONTAINER_UBUNTU = 8082;
     private static String IMAGE_INSPECTOR_REPO_BASE = "hub-imageinspector-ws";
     private static String IMAGE_INSPECTOR_TAG = "1.0.1-SNAPSHOT";
 
@@ -44,9 +46,11 @@ public class DockerInspectorTest {
 
         startContainer("alpine", IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE, IMAGE_INSPECTOR_PORT_IN_CONTAINER_ALPINE);
         startContainer("centos", IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS, IMAGE_INSPECTOR_PORT_IN_CONTAINER_CENTOS);
+        startContainer("ubuntu", IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU, IMAGE_INSPECTOR_PORT_IN_CONTAINER_UBUNTU);
 
         boolean alpineUp = false;
         boolean centosUp = false;
+        boolean ubuntuUp = false;
         for (int i = 0; i < 10; i++) {
             Thread.sleep(10000L);
             if (!alpineUp) {
@@ -55,11 +59,14 @@ public class DockerInspectorTest {
             if (!centosUp) {
                 centosUp = isUp(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS);
             }
-            if (alpineUp && centosUp) {
+            if (!ubuntuUp) {
+                ubuntuUp = isUp(IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU);
+            }
+            if (alpineUp && centosUp && ubuntuUp) {
                 break;
             }
         }
-        assertTrue(alpineUp && centosUp);
+        assertTrue(alpineUp && centosUp && ubuntuUp);
     }
 
     private static boolean isUp(final int port) {
@@ -91,6 +98,7 @@ public class DockerInspectorTest {
     public static void tearDownAfterClass() throws Exception {
         stopContainer("alpine");
         stopContainer("centos");
+        stopContainer("ubuntu");
     }
 
     private static void stopContainer(final String imageInspectorPlatform) {
@@ -204,6 +212,17 @@ public class DockerInspectorTest {
         final String tarFileBaseName = "centos_minus_vim_plus_bacula";
         final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE;
         final String imageInspectorPlatform = "alpine";
+        testUsingExistingContainer(targetRepo, targetTag, targetPkgMgrLib, tarFileBaseName, imageInspectorPlatform, portOnHost);
+    }
+
+    @Test
+    public void testUbuntuUsingExistingCentosContainer() throws IOException, InterruptedException, IntegrationException {
+        final String targetRepo = "ubuntu";
+        final String targetTag = "14.04";
+        final String targetPkgMgrLib = "var_lib_dpkg";
+        final String tarFileBaseName = "ubuntu1404";
+        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS;
+        final String imageInspectorPlatform = "centos";
         testUsingExistingContainer(targetRepo, targetTag, targetPkgMgrLib, tarFileBaseName, imageInspectorPlatform, portOnHost);
     }
 

@@ -61,6 +61,10 @@ public class BdioFilename {
         if (PackageManagerEnum.DPKG.getOperatingSystem().name().equalsIgnoreCase(projectExternalIdMetaForgeName)) {
             return PackageManagerEnum.DPKG;
         }
+        // Unfortunately, this is how DPKG BDIO is generated
+        if ("debian".equalsIgnoreCase(projectExternalIdMetaForgeName)) {
+            return PackageManagerEnum.DPKG;
+        }
         throw new IntegrationException(String.format("Unrecognized forge name in BDIO result: %s", projectExternalIdMetaForgeName));
     }
 

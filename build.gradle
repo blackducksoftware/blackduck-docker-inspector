@@ -256,11 +256,23 @@ task pullAlpineLatest(type: Exec) {
     commandLine "docker", "pull", "alpine:latest"
 }
 
+task pullAlpine36(type: Exec) {
+    commandLine "docker", "pull", "alpine:3.6"
+}
+
+task pullUbuntu1404(type: Exec) {
+    commandLine "docker", "pull", "ubuntu:14.04"
+}
+
 task buildAlpineTestDockerTarfile(type: Exec, dependsOn: pullAlpineLatest) {
     commandLine "docker", "save", "-o", "${buildDir}/images/test/alpine.tar", "alpine:latest"
 }
 
-task buildAlpine36TestDockerTarfile(type: Exec, dependsOn: pullAlpineLatest) {
+task buildUbuntuTestDockerTarfile(type: Exec, dependsOn: pullUbuntu1404) {
+    commandLine "docker", "save", "-o", "${buildDir}/images/test/ubuntu1404.tar", "ubuntu:14.04"
+}
+
+task buildAlpine36TestDockerTarfile(type: Exec, dependsOn: pullAlpine36) {
     commandLine "docker", "save", "-o", "${buildDir}/images/test/alpine36.tar", "alpine:3.6"
 }
 
@@ -436,7 +448,7 @@ task pushImages(dependsOn: [pkg, pushImageAlpine, pushImageCentos, pushImageUbun
 }
 
 task buildTestTarfiles(dependsOn: [buildTestDockerTarfile, buildWhTestDockerTarfile, buildAggTestDockerTarfile, \
-        buildAlpineTestDockerTarfile, buildAlpine36TestDockerTarfile]) {}
+        buildAlpineTestDockerTarfile, buildAlpine36TestDockerTarfile, buildUbuntuTestDockerTarfile]) {}
 
 task itOnly(type: Test) {
     testClassesDir = new File("build/classes/groovy/integrationTest")
