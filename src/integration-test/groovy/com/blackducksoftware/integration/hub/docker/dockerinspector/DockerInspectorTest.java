@@ -174,7 +174,7 @@ public class DockerInspectorTest {
         final String repo = "alpine";
         final String tag = "latest";
         final File outputContainerFileSystemFile = getOutputContainerFileSystemFile(repo, tag);
-        testTar("build/images/test/alpine.tar", repo.replaceAll("/", "_"), repo, tag, tag, "lib_apk", true, null, true, outputContainerFileSystemFile);
+        testTar("build/images/test/alpine.tar", repo.replaceAll("/", "_"), repo, tag, tag, "lib_apk", false, null, true, outputContainerFileSystemFile);
     }
 
     @Test
