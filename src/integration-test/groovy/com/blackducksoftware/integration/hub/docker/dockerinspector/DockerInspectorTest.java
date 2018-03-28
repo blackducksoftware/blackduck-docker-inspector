@@ -411,7 +411,7 @@ public class DockerInspectorTest {
         return execCmd(null, cmd, timeout, null);
     }
 
-    private static String execCmd(final File workingDir, final String cmd, final long timeout, final Map<String, String> env) throws IOException, InterruptedException, IntegrationException {
+    private static String execCmd(final File workingDir, final String cmd, final long timeout, final Map<String, String> givenEnv) throws IOException, InterruptedException, IntegrationException {
         System.out.println(String.format("Executing: %s", cmd));
         final ProcessBuilder pb = new ProcessBuilder("bash", "-c", cmd);
         pb.redirectOutput(Redirect.PIPE);
@@ -419,9 +419,13 @@ public class DockerInspectorTest {
         if (workingDir != null) {
             pb.directory(workingDir);
         }
-        pb.environment().put("PATH", "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin");
-        if (env != null) {
-            pb.environment().putAll(env);
+        final Map<String, String> processEnv = pb.environment();
+        final String oldPath = System.getenv("PATH");
+        final String newPath = String.format("/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:%s", oldPath);
+        System.out.println(String.format("Adjusted path: %s", newPath));
+        processEnv.put("PATH", newPath);
+        if (givenEnv != null) {
+            pb.environment().putAll(givenEnv);
         }
         final Process p = pb.start();
         final String stdoutString = toString(p.getInputStream());
