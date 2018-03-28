@@ -74,6 +74,7 @@ public class TempTest {
 
     @Test
     public void testUbuntu() throws IOException, InterruptedException, IntegrationException {
+        execCmd("ls -ld test", 10000L);
         execCmd("ls -lR test", 10000L);
     }
 
