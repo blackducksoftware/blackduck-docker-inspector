@@ -72,20 +72,40 @@ public class DockerInspectorTest {
         }
         assertTrue(alpineUp && centosUp && ubuntuUp);
 
+        System.out.printf("Creating directories: test, test/shared, test/shared/target, test/shared/output\n");
+        final File testDir = new File("test");
+        try {
+            testDir.mkdir();
+        } catch (final Exception e) {
+            System.out.printf("Error creating directory: test: %s\n", e.getMessage());
+        }
+        try {
+            testDir.setWritable(true, false);
+        } catch (final Exception e) {
+            System.out.printf("Error making directory writeable: test: %s\n", e.getMessage());
+        }
         containerSharedDir = new File("test/shared");
         containerTargetDir = new File(containerSharedDir, "target");
         containerOutputDir = new File(containerSharedDir, "output");
         try {
-            containerTargetDir.mkdirs();
+            containerTargetDir.mkdir();
         } catch (final Exception e) {
+            System.out.printf("Error creating directory: test/target: %s\n", e.getMessage());
         }
         try {
-            containerOutputDir.mkdirs();
+            containerTargetDir.setWritable(true, false);
         } catch (final Exception e) {
+            System.out.printf("Error making directory writeable: test/target: %s\n", e.getMessage());
+        }
+        try {
+            containerOutputDir.mkdir();
+        } catch (final Exception e) {
+            System.out.printf("Error creating directory: test/output: %s\n", e.getMessage());
         }
         try {
             containerOutputDir.setWritable(true, false);
         } catch (final Exception e) {
+            System.out.printf("Error making directory writeable: test/output: %s\n", e.getMessage());
         }
     }
 
