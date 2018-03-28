@@ -35,6 +35,10 @@ public class DockerInspectorTest {
     private static String IMAGE_INSPECTOR_REPO_BASE = "hub-imageinspector-ws";
     private static String IMAGE_INSPECTOR_TAG = "1.0.1-SNAPSHOT";
 
+    private static File containerSharedDir;
+    private static File containerTargetDir;
+    private static File containerOutputDir;
+
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
         try {
@@ -67,6 +71,22 @@ public class DockerInspectorTest {
             }
         }
         assertTrue(alpineUp && centosUp && ubuntuUp);
+
+        containerSharedDir = new File("test/shared");
+        containerTargetDir = new File(containerSharedDir, "target");
+        containerOutputDir = new File(containerSharedDir, "output");
+        try {
+            containerTargetDir.mkdirs();
+        } catch (final Exception e) {
+        }
+        try {
+            containerOutputDir.mkdirs();
+        } catch (final Exception e) {
+        }
+        try {
+            containerOutputDir.setWritable(true, false);
+        } catch (final Exception e) {
+        }
     }
 
     private static boolean isUp(final int port) {
@@ -84,7 +104,7 @@ public class DockerInspectorTest {
 
     private static void startContainer(final String imageInspectorPlatform, final int portOnHost, final int portInContainer) throws IOException, InterruptedException, IntegrationException {
         final String containerName = getContainerName(imageInspectorPlatform);
-        final String cmd = String.format("docker run -d -t --name %s -p %d:%d -v \"$(pwd)\"/build/shared:/opt/blackduck/hub-imageinspector-ws/shared blackducksoftware/%s-%s:%s",
+        final String cmd = String.format("docker run -d -t --name %s -p %d:%d -v \"$(pwd)\"/test/shared:/opt/blackduck/hub-imageinspector-ws/shared blackducksoftware/%s-%s:%s",
                 containerName, portOnHost, portInContainer,
                 IMAGE_INSPECTOR_REPO_BASE, imageInspectorPlatform, IMAGE_INSPECTOR_TAG);
         execCmd(cmd, 120000L);
@@ -228,19 +248,14 @@ public class DockerInspectorTest {
 
     private void testUsingExistingContainer(final String targetRepo, final String targetTag, final String targetPkgMgrLib, final String tarFileBaseName, final String imageInspectorPlatform, final int portOnHost)
             throws IOException, InterruptedException, IntegrationException {
-        final File sharedDir = new File("build/shared");
-        final File targetDir = new File(sharedDir, "target");
-        final File outputDir = new File(sharedDir, "output");
-        targetDir.mkdirs();
-        outputDir.mkdirs();
-        outputDir.setWritable(true, false);
+
         final String tarFileName = String.format("%s.tar", tarFileBaseName);
-        final File targetTar = new File(targetDir, tarFileName);
+        final File targetTar = new File(containerTargetDir, tarFileName);
         FileUtils.copyFile(new File(String.format("build/images/test/%s", tarFileName)), targetTar);
         targetTar.setReadable(true, false);
         final List<String> additionalArgs = new ArrayList<>();
         additionalArgs.add(String.format("--imageinspector.url=http://localhost:%d", portOnHost));
-        additionalArgs.add(String.format("--shared.dir.path.local=%s", sharedDir.getAbsolutePath()));
+        additionalArgs.add(String.format("--shared.dir.path.local=%s", containerSharedDir.getAbsolutePath()));
         additionalArgs.add(String.format("--shared.dir.path.imageinspector=/opt/blackduck/hub-imageinspector-ws/shared"));
         final File outputContainerFileSystemFile = new File(String.format("test/output/%s_containerfilesystem.tar.gz", tarFileBaseName));
         testTar(targetTar.getAbsolutePath(), targetRepo, null, null, targetTag, targetPkgMgrLib, true, additionalArgs, false, outputContainerFileSystemFile);
