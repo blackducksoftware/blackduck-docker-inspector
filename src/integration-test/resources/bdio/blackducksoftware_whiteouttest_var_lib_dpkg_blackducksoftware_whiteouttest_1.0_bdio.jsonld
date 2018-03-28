@@ -2,7 +2,7 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "blackducksoftware_whiteouttest_1.0_var_lib_dpkg_DPKG",
-    "@id": "uuid:c42efa1f-6349-4a63-84c6-b946603604d2",
+    "@id": "uuid:eec01af6-0731-461e-bc30-f3af021e7925",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -298,10 +298,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/libssl1_0_0/1_0_2g_1ubuntu4_10/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:debian/sensible_utils/0_0_9ubuntu0_16_04_1/all",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -343,6 +339,10 @@
       },
       {
         "related": "http:debian/libsepol1/2_4_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:ubuntu/libssl1_0_0/1_0_2g_1ubuntu4_11/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -530,11 +530,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/libsasl2_modules_db/2_1_26_dfsg1_14build1/amd64",
+        "related": "http:debian/openssl/1_0_2g_1ubuntu4_11/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/openssl/1_0_2g_1ubuntu4_10/amd64",
+        "related": "http:debian/libsasl2_modules_db/2_1_26_dfsg1_14build1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -826,11 +826,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/libssl1_0_0/1_0_2g_1ubuntu4_10/amd64",
+        "related": "http:ubuntu/libpam_modules_bin/1_1_8_3_2ubuntu2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/libpam_modules_bin/1_1_8_3_2ubuntu2/amd64",
+        "related": "http:debian/libssl1_0_0/1_0_2g_1ubuntu4_11/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1026,7 +1026,7 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/openssl/1_0_2g_1ubuntu4_10/amd64",
+        "related": "http:ubuntu/openssl/1_0_2g_1ubuntu4_11/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -2488,27 +2488,6 @@
     "relationship": []
   },
   {
-    "name": "libssl1.0.0",
-    "revision": "1.0.2g-1ubuntu4.10",
-    "@id": "http:ubuntu/libssl1_0_0/1_0_2g_1ubuntu4_10/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libssl1.0.0/1.0.2g-1ubuntu4.10/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "ubuntu",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "libssl1.0.0",
-        "version": "1.0.2g-1ubuntu4.10",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "sensible-utils",
     "revision": "0.0.9ubuntu0.16.04.1",
     "@id": "http:debian/sensible_utils/0_0_9ubuntu0_16_04_1/all",
@@ -2734,6 +2713,27 @@
         },
         "name": "libsepol1",
         "version": "2.4-2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libssl1.0.0",
+    "revision": "1.0.2g-1ubuntu4.11",
+    "@id": "http:ubuntu/libssl1_0_0/1_0_2g_1ubuntu4_11/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libssl1.0.0/1.0.2g-1ubuntu4.11/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libssl1.0.0",
+        "version": "1.0.2g-1ubuntu4.11",
         "architecture": "amd64"
       }
     },
@@ -3706,6 +3706,27 @@
     "relationship": []
   },
   {
+    "name": "openssl",
+    "revision": "1.0.2g-1ubuntu4.11",
+    "@id": "http:debian/openssl/1_0_2g_1ubuntu4_11/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "openssl/1.0.2g-1ubuntu4.11/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "openssl",
+        "version": "1.0.2g-1ubuntu4.11",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "libsasl2-modules-db",
     "revision": "2.1.26.dfsg1-14build1",
     "@id": "http:debian/libsasl2_modules_db/2_1_26_dfsg1_14build1/amd64",
@@ -3721,27 +3742,6 @@
         },
         "name": "libsasl2-modules-db",
         "version": "2.1.26.dfsg1-14build1",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "openssl",
-    "revision": "1.0.2g-1ubuntu4.10",
-    "@id": "http:debian/openssl/1_0_2g_1ubuntu4_10/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "openssl/1.0.2g-1ubuntu4.10/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "debian",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "openssl",
-        "version": "1.0.2g-1ubuntu4.10",
         "architecture": "amd64"
       }
     },
@@ -5260,27 +5260,6 @@
     "relationship": []
   },
   {
-    "name": "libssl1.0.0",
-    "revision": "1.0.2g-1ubuntu4.10",
-    "@id": "http:debian/libssl1_0_0/1_0_2g_1ubuntu4_10/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libssl1.0.0/1.0.2g-1ubuntu4.10/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "debian",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "libssl1.0.0",
-        "version": "1.0.2g-1ubuntu4.10",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "libpam-modules-bin",
     "revision": "1.1.8-3.2ubuntu2",
     "@id": "http:ubuntu/libpam_modules_bin/1_1_8_3_2ubuntu2/amd64",
@@ -5296,6 +5275,27 @@
         },
         "name": "libpam-modules-bin",
         "version": "1.1.8-3.2ubuntu2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libssl1.0.0",
+    "revision": "1.0.2g-1ubuntu4.11",
+    "@id": "http:debian/libssl1_0_0/1_0_2g_1ubuntu4_11/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libssl1.0.0/1.0.2g-1ubuntu4.11/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libssl1.0.0",
+        "version": "1.0.2g-1ubuntu4.11",
         "architecture": "amd64"
       }
     },
@@ -6311,12 +6311,12 @@
   },
   {
     "name": "openssl",
-    "revision": "1.0.2g-1ubuntu4.10",
-    "@id": "http:ubuntu/openssl/1_0_2g_1ubuntu4_10/amd64",
+    "revision": "1.0.2g-1ubuntu4.11",
+    "@id": "http:ubuntu/openssl/1_0_2g_1ubuntu4_11/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "openssl/1.0.2g-1ubuntu4.10/amd64",
+      "externalId": "openssl/1.0.2g-1ubuntu4.11/amd64",
       "externalIdMetaData": {
         "forge": {
           "name": "ubuntu",
@@ -6324,7 +6324,7 @@
           "kbSeparator": "/"
         },
         "name": "openssl",
-        "version": "1.0.2g-1ubuntu4.10",
+        "version": "1.0.2g-1ubuntu4.11",
         "architecture": "amd64"
       }
     },
