@@ -88,6 +88,11 @@ public class DockerInspectorTest {
         containerTargetDir = new File(containerSharedDir, "target");
         containerOutputDir = new File(containerSharedDir, "output");
         try {
+            containerSharedDir.mkdir();
+        } catch (final Exception e) {
+            System.out.printf("Error creating directory: test/containerShared: %s\n", e.getMessage());
+        }
+        try {
             containerTargetDir.mkdir();
         } catch (final Exception e) {
             System.out.printf("Error creating directory: test/target: %s\n", e.getMessage());
