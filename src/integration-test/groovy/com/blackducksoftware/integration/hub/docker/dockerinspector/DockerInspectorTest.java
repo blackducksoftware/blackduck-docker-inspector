@@ -41,12 +41,6 @@ public class DockerInspectorTest {
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        try {
-            final boolean created = new File("test").mkdir();
-            System.out.println(String.format("test dir created: %b", created));
-        } catch (final Exception e) {
-            System.out.println(String.format("mkdir test: %s", e.getMessage()));
-        }
 
         startContainer("alpine", IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE, IMAGE_INSPECTOR_PORT_IN_CONTAINER_ALPINE);
         startContainer("centos", IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS, IMAGE_INSPECTOR_PORT_IN_CONTAINER_CENTOS);
@@ -90,27 +84,32 @@ public class DockerInspectorTest {
         try {
             containerSharedDir.mkdir();
         } catch (final Exception e) {
-            System.out.printf("Error creating directory: test/containerShared: %s\n", e.getMessage());
+            System.out.printf("Error creating directory: %s: %s\n", containerSharedDir.getAbsolutePath(), e.getMessage());
+        }
+        try {
+            containerSharedDir.setWritable(true, false);
+        } catch (final Exception e) {
+            System.out.printf("Error making directory writeable: %s: %s\n", containerSharedDir.getAbsolutePath(), e.getMessage());
         }
         try {
             containerTargetDir.mkdir();
         } catch (final Exception e) {
-            System.out.printf("Error creating directory: test/target: %s\n", e.getMessage());
+            System.out.printf("Error creating directory: %s: %s\n", containerTargetDir.getAbsolutePath(), e.getMessage());
         }
         try {
             containerTargetDir.setWritable(true, false);
         } catch (final Exception e) {
-            System.out.printf("Error making directory writeable: test/target: %s\n", e.getMessage());
+            System.out.printf("Error making directory writeable: %s: %s\n", containerTargetDir.getAbsolutePath(), e.getMessage());
         }
         try {
             containerOutputDir.mkdir();
         } catch (final Exception e) {
-            System.out.printf("Error creating directory: test/output: %s\n", e.getMessage());
+            System.out.printf("Error creating directory: %s: %s\n", containerOutputDir.getAbsolutePath(), e.getMessage());
         }
         try {
             containerOutputDir.setWritable(true, false);
         } catch (final Exception e) {
-            System.out.printf("Error making directory writeable: test/output: %s\n", e.getMessage());
+            System.out.printf("Error making directory writeable: %s: %s\n", containerOutputDir.getAbsolutePath(), e.getMessage());
         }
     }
 

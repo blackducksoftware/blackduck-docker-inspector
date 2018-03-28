@@ -65,26 +65,11 @@ sourceSets {
         }
         resources.srcDir file('src/integration-test/resources')
     }
-    //// TEMP start
-    integrationTestTemp {
-        groovy {
-            compileClasspath += main.output + test.output
-            runtimeClasspath += main.output + test.output
-            groovy.srcDir file('src/integration-test-temp/groovy')
-        }
-        resources.srcDir file('src/integration-test/resources')
-    }
-    //// TEMP end
 }
 
 configurations {
     integrationTestCompile.extendsFrom testCompile
     integrationTestRuntime.extendsFrom testRuntime
-    
-    //// TEMP start
-    integrationTestTempCompile.extendsFrom testCompile
-    integrationTestTempRuntime.extendsFrom testRuntime
-    //// TEMP end
 }
 
 task writeVersionToPropertiesFile() {
@@ -472,15 +457,6 @@ task itOnly(type: Test) {
     mustRunAfter tasks.test
 }
 
-//// TEMP start
-task tempIt(type: Test) {
-    testClassesDir = new File("build/classes/groovy/integrationTestTemp")
-    classpath = sourceSets.integrationTestTemp.runtimeClasspath
-    outputs.upToDateWhen { false }
-    mustRunAfter tasks.test
-}
-//// TEMP end
-
 task integrationTest(type: Test, dependsOn: [build, pkg, testPrep, buildScript, buildTestTarfiles, itOnly]) {
 }
 
@@ -525,16 +501,4 @@ dependencies {
     
     integrationTestCompile configurations.runtime
     integrationTestCompile configurations.testRuntime
-   
-    //// TEMP start
-    integrationTestTempCompile 'org.assertj:assertj-core:3.0.0'
-    integrationTestTempCompile sourceSets.main.output
-    integrationTestTempCompile sourceSets.test.output
-    
-    integrationTestTempCompile configurations.compile
-    integrationTestTempCompile configurations.testCompile
-    
-    integrationTestTempCompile configurations.runtime
-    integrationTestTempCompile configurations.testRuntime
-    //// TEMP end
 }
