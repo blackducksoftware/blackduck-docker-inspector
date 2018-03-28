@@ -72,7 +72,7 @@ public class DockerInspectorTest {
         }
         assertTrue(alpineUp && centosUp && ubuntuUp);
 
-        System.out.printf("Creating directories: test, test/shared, test/shared/target, test/shared/output\n");
+        System.out.printf("Creating directories: test, test/containerShared, test/containerShared/target, test/containerShared/output\n");
         final File testDir = new File("test");
         try {
             testDir.mkdir();
@@ -84,7 +84,7 @@ public class DockerInspectorTest {
         } catch (final Exception e) {
             System.out.printf("Error making directory writeable: test: %s\n", e.getMessage());
         }
-        containerSharedDir = new File("test/shared");
+        containerSharedDir = new File("test/containerShared");
         containerTargetDir = new File(containerSharedDir, "target");
         containerOutputDir = new File(containerSharedDir, "output");
         try {
@@ -124,7 +124,7 @@ public class DockerInspectorTest {
 
     private static void startContainer(final String imageInspectorPlatform, final int portOnHost, final int portInContainer) throws IOException, InterruptedException, IntegrationException {
         final String containerName = getContainerName(imageInspectorPlatform);
-        final String cmd = String.format("docker run -d -t --name %s -p %d:%d -v \"$(pwd)\"/test/shared:/opt/blackduck/hub-imageinspector-ws/shared blackducksoftware/%s-%s:%s",
+        final String cmd = String.format("docker run -d -t --name %s -p %d:%d -v \"$(pwd)\"/test/containerShared:/opt/blackduck/hub-imageinspector-ws/shared blackducksoftware/%s-%s:%s",
                 containerName, portOnHost, portInContainer,
                 IMAGE_INSPECTOR_REPO_BASE, imageInspectorPlatform, IMAGE_INSPECTOR_TAG);
         execCmd(cmd, 120000L);

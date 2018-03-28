@@ -30,7 +30,7 @@ public class TempTest {
             System.out.println(String.format("mkdir test: %s", e.getMessage()));
         }
         // TODO code below is redundant w/ code above
-        System.out.printf("=========================================== Creating directories: test, test/shared, test/shared/target, test/shared/output\n");
+        System.out.printf("=========================================== Creating directories: test, test/containerShared, test/containerShared/target, test/containerShared/output\n");
         final File testDir = new File("test");
         try {
             testDir.mkdir();
@@ -42,7 +42,7 @@ public class TempTest {
         } catch (final Exception e) {
             System.out.printf("Error making directory writeable: test: %s\n", e.getMessage());
         }
-        containerSharedDir = new File("test/shared");
+        containerSharedDir = new File("test/containerShared");
         containerTargetDir = new File(containerSharedDir, "target");
         containerOutputDir = new File(containerSharedDir, "output");
         try {
