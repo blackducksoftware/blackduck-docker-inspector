@@ -56,8 +56,11 @@ public class ContainerPath {
         final String trimmedWorkingDirPath = trimTrailingFileSeparator(workingDirPath);
         final String trimmedWorkingDirPathImageInspector = trimTrailingFileSeparator(workingDirPathImageInspector);
         logger.debug(String.format("config.getWorkingDirPath(): %s", trimmedWorkingDirPath));
-        final String localRelPath = localPath.substring(trimmedWorkingDirPath.length());
-        logger.debug(String.format("localRelPath: %s", localRelPath));
+        String localRelPath = localPath.substring(trimmedWorkingDirPath.length());
+        if (!localRelPath.startsWith("/")) {
+            localRelPath = String.format("/%s", localRelPath);
+        }
+        logger.debug(String.format("localRelPath (must start with /): %s", localRelPath));
         final String containerPath = String.format("%s%s", trimmedWorkingDirPathImageInspector, localRelPath);
         logger.debug(String.format("containerPath: %s", containerPath));
         return containerPath;
