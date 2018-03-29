@@ -187,7 +187,12 @@ public class DockerEnvImageInspector {
         logger.debug(String.format("running from dir: %s", System.getProperty("user.dir")));
         logger.trace(String.format("dockerImageTag: %s", config.getDockerImageTag()));
         if (config.isOnHost()) {
-            hubClient.phoneHome(dockerClientManager.getDockerEngineVersion());
+            try {
+                final String dockerEngineVersion = dockerClientManager.getDockerEngineVersion();
+                hubClient.phoneHome(dockerEngineVersion);
+            } catch (final Exception e) {
+                logger.warn(String.format("Unable to phone home: %s", e.getMessage()));
+            }
         }
         initImageName();
         logger.info(String.format("Inspecting image:tag %s:%s", config.getDockerImageRepo(), config.getDockerImageTag()));
