@@ -41,6 +41,7 @@ import com.blackducksoftware.integration.log.Slf4jIntLogger;
 
 @Component
 public class ImageInspectorClient {
+    private static final int INSPECT_TIMEOUT_SECONDS = 240;
     private static final String CLEANUP_QUERY_PARAM = "cleanup";
     private static final String CONTAINER_OUTPUT_PATH = "/opt/blackduck/hub-imageinspector-ws/shared/output";
     private static final String RESULTING_CONTAINER_FS_PATH_QUERY_PARAM = "resultingcontainerfspath";
@@ -51,7 +52,7 @@ public class ImageInspectorClient {
     public String getBdio(final String imageInspectorUrl, final String containerPathToTarfile, final String containerFileSystemFilename, final boolean cleanup) throws IntegrationException, MalformedURLException {
         logger.info(String.format("ImageInspector URL: %s", imageInspectorUrl));
         // TODO with the redirect, a long timeout is required
-        final int timeoutSeconds = 120;
+        final int timeoutSeconds = INSPECT_TIMEOUT_SECONDS;
         final RestConnection restConnection = createConnection(imageInspectorUrl, timeoutSeconds);
         String containerFileSystemQueryString = "";
         if (containerFileSystemFilename != null) {

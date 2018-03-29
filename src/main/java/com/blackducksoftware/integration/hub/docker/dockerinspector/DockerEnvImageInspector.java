@@ -188,7 +188,10 @@ public class DockerEnvImageInspector {
         logger.trace(String.format("dockerImageTag: %s", config.getDockerImageTag()));
         if (config.isOnHost()) {
             try {
-                final String dockerEngineVersion = dockerClientManager.getDockerEngineVersion();
+                String dockerEngineVersion = "None";
+                if (StringUtils.isBlank(config.getImageInspectorUrl())) {
+                    dockerEngineVersion = dockerClientManager.getDockerEngineVersion();
+                }
                 hubClient.phoneHome(dockerEngineVersion);
             } catch (final Exception e) {
                 logger.warn(String.format("Unable to phone home: %s", e.getMessage()));
