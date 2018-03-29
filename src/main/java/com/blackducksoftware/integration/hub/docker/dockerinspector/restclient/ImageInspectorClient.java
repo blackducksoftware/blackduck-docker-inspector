@@ -53,8 +53,12 @@ public class ImageInspectorClient {
         // TODO with the redirect, a long timeout is required
         final int timeoutSeconds = 120;
         final RestConnection restConnection = createConnection(imageInspectorUrl, timeoutSeconds);
-        final String url = String.format("%s/%s?%s=%s&%s=%s/%s&%s=%b",
-                imageInspectorUrl, GETBDIO_ENDPOINT, TARFILE_QUERY_PARAM, containerPathToTarfile, RESULTING_CONTAINER_FS_PATH_QUERY_PARAM, CONTAINER_OUTPUT_PATH, containerFileSystemFilename, CLEANUP_QUERY_PARAM, cleanup);
+        String containerFileSystemQueryString = "";
+        if (containerFileSystemFilename != null) {
+            containerFileSystemQueryString = String.format("&%s=%s/%s", RESULTING_CONTAINER_FS_PATH_QUERY_PARAM, CONTAINER_OUTPUT_PATH, containerFileSystemFilename);
+        }
+        final String url = String.format("%s/%s?%s=%s&%s=%b%s",
+                imageInspectorUrl, GETBDIO_ENDPOINT, TARFILE_QUERY_PARAM, containerPathToTarfile, CLEANUP_QUERY_PARAM, cleanup, containerFileSystemQueryString);
         logger.debug(String.format("Doing a GET (%d second timeout) on %s", timeoutSeconds, url));
         final Request request = new Request.Builder(url).method(HttpMethod.GET).build();
         try (Response response = restConnection.executeRequest(request)) {
