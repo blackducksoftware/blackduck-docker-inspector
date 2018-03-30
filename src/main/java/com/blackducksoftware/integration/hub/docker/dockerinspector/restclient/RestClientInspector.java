@@ -65,9 +65,7 @@ public class RestClientInspector implements Inspector {
     public int getBdio(final DissectedImage dissectedImage) throws IntegrationException {
         try {
             final File dockerTarFile = dockerTarfile.deriveDockerTarFile(config);
-            // TODO Getting it working without container FS first; enable this later
-            // final String containerFileSystemFilename = dockerTarfile.deriveContainerFileSystemTarGzFilename(dockerTarFile);
-            final String containerFileSystemFilename = null;
+            final String containerFileSystemFilename = dockerTarfile.deriveContainerFileSystemTarGzFilename(dockerTarFile);
             final String dockerTarFilePathInContainer = containerPath.getContainerPathToLocalFile(dockerTarFile.getCanonicalPath());
             if (StringUtils.isBlank(config.getImageInspectorUrl())) {
                 throw new IntegrationException("The imageinspector URL property must be set");
@@ -81,12 +79,12 @@ public class RestClientInspector implements Inspector {
                 logger.info(String.format("Writing BDIO to %s", outputBdioFile.getAbsolutePath()));
                 FileUtils.write(outputBdioFile, bdioString, StandardCharsets.UTF_8);
 
-                // final File localPathToContainerOutputDir = new File(config.getSharedDirPathLocal(), "output");
-                // final File localPathToContainerFileSytemFile = new File(localPathToContainerOutputDir, containerFileSystemFilename);
-                // final File userContainerFileSytemFile = new File(userOutputDir, containerFileSystemFilename);
-                // TODO Don't think I want to do any copying; it's already where it should be
-                // logger.debug(String.format("Copying %s to %s", localPathToContainerFileSytemFile.getAbsolutePath(), userContainerFileSytemFile.getAbsolutePath()));
-                // FileUtils.copyFile(localPathToContainerFileSytemFile, userContainerFileSytemFile);
+                final File localPathToContainerOutputDir = new File(config.getSharedDirPathLocal(), "output");
+                final File localPathToContainerFileSytemFile = new File(localPathToContainerOutputDir, containerFileSystemFilename);
+                final File userContainerFileSytemFile = new File(userOutputDir, containerFileSystemFilename);
+                // TODO This needs to be different inside hub-detect-ws container!
+                logger.debug(String.format("Copying %s to %s", localPathToContainerFileSytemFile.getAbsolutePath(), userContainerFileSytemFile.getAbsolutePath()));
+                FileUtils.copyFile(localPathToContainerFileSytemFile, userContainerFileSytemFile);
             }
             return 0;
         } catch (final IOException e) {
