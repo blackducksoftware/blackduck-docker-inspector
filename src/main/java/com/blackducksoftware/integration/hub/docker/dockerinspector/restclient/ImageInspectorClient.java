@@ -43,7 +43,7 @@ import com.blackducksoftware.integration.log.Slf4jIntLogger;
 public class ImageInspectorClient {
     private static final int INSPECT_TIMEOUT_SECONDS = 240;
     private static final String CLEANUP_QUERY_PARAM = "cleanup";
-    private static final String CONTAINER_OUTPUT_PATH = "/opt/blackduck/hub-imageinspector-ws/shared/output";
+    private static final String CONTAINER_OUTPUT_PATH = "/opt/blackduck/shared/output";
     private static final String RESULTING_CONTAINER_FS_PATH_QUERY_PARAM = "resultingcontainerfspath";
     private static final String TARFILE_QUERY_PARAM = "tarfile";
     private static final String GETBDIO_ENDPOINT = "getbdio";
