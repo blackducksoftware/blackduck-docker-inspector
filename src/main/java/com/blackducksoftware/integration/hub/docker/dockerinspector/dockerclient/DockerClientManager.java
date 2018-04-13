@@ -132,30 +132,21 @@ public class DockerClientManager {
     public String pullImage(final String imageName, final String tagName) throws HubIntegrationException {
         logger.info(String.format("Pulling image %s:%s", imageName, tagName));
         final DockerClient dockerClient = hubDockerClient.getDockerClient();
-        final Image alreadyPulledImage = getLocalImage(dockerClient, imageName, tagName);
-        if (alreadyPulledImage == null) {
-            // Only pull if we dont already have it
-            final PullImageCmd pull = dockerClient.pullImageCmd(imageName).withTag(tagName);
-
-            try {
-                pull.exec(new PullImageResultCallback()).awaitSuccess();
-            } catch (final NotFoundException e) {
-                final String msg = String.format("Pull failed: Image %s:%s not found. Please check the image name/tag", imageName, tagName);
-                logger.error(msg);
-                throw new HubIntegrationException(msg, e);
-
-            }
-            final Image justPulledImage = getLocalImage(dockerClient, imageName, tagName);
-            if (justPulledImage == null) {
-                final String msg = String.format("Pulled image %s:%s not found in image list.", imageName, tagName);
-                logger.error(msg);
-                throw new HubIntegrationException(msg);
-            }
-            return justPulledImage.getId();
-        } else {
-            logger.info("Image already pulled");
-            return alreadyPulledImage.getId();
+        final PullImageCmd pull = dockerClient.pullImageCmd(imageName).withTag(tagName);
+        try {
+            pull.exec(new PullImageResultCallback()).awaitSuccess();
+        } catch (final NotFoundException e) {
+            final String msg = String.format("Pull failed: Image %s:%s not found. Please check the image name/tag", imageName, tagName);
+            logger.error(msg);
+            throw new HubIntegrationException(msg, e);
         }
+        final Image justPulledImage = getLocalImage(dockerClient, imageName, tagName);
+        if (justPulledImage == null) {
+            final String msg = String.format("Pulled image %s:%s not found in image list.", imageName, tagName);
+            logger.error(msg);
+            throw new HubIntegrationException(msg);
+        }
+        return justPulledImage.getId();
     }
 
     public void removeImage(final String imageId) throws HubIntegrationException {
@@ -181,20 +172,26 @@ public class DockerClientManager {
     }
 
     private Image getLocalImage(final DockerClient dockerClient, final String imageName, final String tagName) {
-        Image alreadyPulledImage = null;
+        Image localImage = null;
         final List<Image> images = dockerClient.listImagesCmd().withImageNameFilter(imageName).exec();
         for (final Image image : images) {
+            if (image == null) {
+                continue;
+            }
             for (final String tag : image.getRepoTags()) {
+                if (tag == null) {
+                    continue;
+                }
                 if (tag.contains(tagName)) {
-                    alreadyPulledImage = image;
+                    localImage = image;
                     break;
                 }
             }
-            if (alreadyPulledImage != null) {
+            if (localImage != null) {
                 break;
             }
         }
-        return alreadyPulledImage;
+        return localImage;
     }
 
     public String run(final String runOnImageName, final String runOnTagName, final String runOnImageId, final File dockerTarFile, final boolean copyJar, final String targetImage, final String targetImageRepo, final String targetImageTag)
@@ -279,7 +276,7 @@ public class DockerClientManager {
         hubDockerProperties.set(IMAGE_REPO_PROPERTY, targetImageRepo);
         hubDockerProperties.set(IMAGE_TAG_PROPERTY, targetImageTag);
         hubDockerProperties.set(OUTPUT_INCLUDE_DOCKER_TARFILE_PROPERTY, "false");
-        hubDockerProperties.set(OUTPUT_INCLUDE_CONTAINER_FILE_SYSTEM_TARFILE_PROPERTY, (new Boolean(config.isOutputIncludeContainerfilesystem())).toString());
+        hubDockerProperties.set(OUTPUT_INCLUDE_CONTAINER_FILE_SYSTEM_TARFILE_PROPERTY, new Boolean(config.isOutputIncludeContainerfilesystem()).toString());
         hubDockerProperties.set(ON_HOST_PROPERTY, "false");
         hubDockerProperties.set(DETECT_PKG_MGR_PROPERTY, "true");
         hubDockerProperties.set(INSPECT_PROPERTY, "true");
@@ -315,7 +312,7 @@ public class DockerClientManager {
         final List<String> envAssignments = new ArrayList<>();
         envAssignments.add(String.format("BD_HUB_PASSWORD=%s", hubPassword));
         envAssignments.add(String.format("BD_HUB_TOKEN=%s", hubApiToken));
-        if ((StringUtils.isBlank(config.getHubProxyHost())) && (!StringUtils.isBlank(config.getScanCliOptsEnvVar()))) {
+        if (StringUtils.isBlank(config.getHubProxyHost()) && !StringUtils.isBlank(config.getScanCliOptsEnvVar())) {
             envAssignments.add(String.format("SCAN_CLI_OPTS=%s", config.getScanCliOptsEnvVar()));
         } else {
 
