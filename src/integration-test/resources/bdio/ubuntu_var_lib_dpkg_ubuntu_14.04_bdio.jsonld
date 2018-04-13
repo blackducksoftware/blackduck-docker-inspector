@@ -2,7 +2,7 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "ubuntu_14.04_var_lib_dpkg_DPKG",
-    "@id": "uuid:6e80b2d1-1de2-44cc-84b2-078441029fd0",
+    "@id": "uuid:31fa3864-7c9b-4fdf-bb5c-d12cd96e678a",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -182,11 +182,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/libuuid1/2_20_1_5_1ubuntu20_9/amd64",
+        "related": "http:debian/isc_dhcp_client/4_2_4_7ubuntu12_13/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/isc_dhcp_client/4_2_4_7ubuntu12_12/amd64",
+        "related": "http:debian/libuuid1/2_20_1_5_1ubuntu20_9/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -482,15 +482,15 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:debian/isc_dhcp_common/4_2_4_7ubuntu12_13/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:ubuntu/perl_modules/5_18_2_2ubuntu1_3/all",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
         "related": "http:debian/libpam_cap/1_2_24_0ubuntu2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:debian/isc_dhcp_common/4_2_4_7ubuntu12_12/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -594,7 +594,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/isc_dhcp_client/4_2_4_7ubuntu12_12/amd64",
+        "related": "http:ubuntu/isc_dhcp_client/4_2_4_7ubuntu12_13/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:debian/dpkg/1_17_5ubuntu5_8/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -659,10 +663,6 @@
       },
       {
         "related": "http:debian/debconf_i18n/1_5_51ubuntu2/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:debian/dpkg/1_17_5ubuntu5_7/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -966,7 +966,7 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/libssl1_0_0/1_0_1f_1ubuntu2_23/amd64",
+        "related": "http:debian/libssl1_0_0/1_0_1f_1ubuntu2_24/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1274,10 +1274,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/libssl1_0_0/1_0_1f_1ubuntu2_23/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:ubuntu/gzip/1_6_3ubuntu1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -1311,6 +1307,10 @@
       },
       {
         "related": "http:ubuntu/hostname/3_15ubuntu1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:ubuntu/libssl1_0_0/1_0_1f_1ubuntu2_24/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1358,15 +1358,15 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/isc_dhcp_common/4_2_4_7ubuntu12_12/amd64",
+        "related": "http:ubuntu/isc_dhcp_common/4_2_4_7ubuntu12_13/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:ubuntu/dpkg/1_17_5ubuntu5_8/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
         "related": "http:debian/debianutils/4_4/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:ubuntu/dpkg/1_17_5ubuntu5_7/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -2319,6 +2319,27 @@
     "relationship": []
   },
   {
+    "name": "isc-dhcp-client",
+    "revision": "4.2.4-7ubuntu12.13",
+    "@id": "http:debian/isc_dhcp_client/4_2_4_7ubuntu12_13/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "isc-dhcp-client/4.2.4-7ubuntu12.13/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "isc-dhcp-client",
+        "version": "4.2.4-7ubuntu12.13",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "libuuid1",
     "revision": "2.20.1-5.1ubuntu20.9",
     "@id": "http:debian/libuuid1/2_20_1_5_1ubuntu20_9/amd64",
@@ -2334,27 +2355,6 @@
         },
         "name": "libuuid1",
         "version": "2.20.1-5.1ubuntu20.9",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "isc-dhcp-client",
-    "revision": "4.2.4-7ubuntu12.12",
-    "@id": "http:debian/isc_dhcp_client/4_2_4_7ubuntu12_12/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "isc-dhcp-client/4.2.4-7ubuntu12.12/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "debian",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "isc-dhcp-client",
-        "version": "4.2.4-7ubuntu12.12",
         "architecture": "amd64"
       }
     },
@@ -3894,6 +3894,27 @@
     "relationship": []
   },
   {
+    "name": "isc-dhcp-common",
+    "revision": "4.2.4-7ubuntu12.13",
+    "@id": "http:debian/isc_dhcp_common/4_2_4_7ubuntu12_13/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "isc-dhcp-common/4.2.4-7ubuntu12.13/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "isc-dhcp-common",
+        "version": "4.2.4-7ubuntu12.13",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "perl-modules",
     "revision": "5.18.2-2ubuntu1.3",
     "@id": "http:ubuntu/perl_modules/5_18_2_2ubuntu1_3/all",
@@ -3930,27 +3951,6 @@
         },
         "name": "libpam-cap",
         "version": "1:2.24-0ubuntu2",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "isc-dhcp-common",
-    "revision": "4.2.4-7ubuntu12.12",
-    "@id": "http:debian/isc_dhcp_common/4_2_4_7ubuntu12_12/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "isc-dhcp-common/4.2.4-7ubuntu12.12/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "debian",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "isc-dhcp-common",
-        "version": "4.2.4-7ubuntu12.12",
         "architecture": "amd64"
       }
     },
@@ -4483,12 +4483,12 @@
   },
   {
     "name": "isc-dhcp-client",
-    "revision": "4.2.4-7ubuntu12.12",
-    "@id": "http:ubuntu/isc_dhcp_client/4_2_4_7ubuntu12_12/amd64",
+    "revision": "4.2.4-7ubuntu12.13",
+    "@id": "http:ubuntu/isc_dhcp_client/4_2_4_7ubuntu12_13/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "isc-dhcp-client/4.2.4-7ubuntu12.12/amd64",
+      "externalId": "isc-dhcp-client/4.2.4-7ubuntu12.13/amd64",
       "externalIdMetaData": {
         "forge": {
           "name": "ubuntu",
@@ -4496,7 +4496,28 @@
           "kbSeparator": "/"
         },
         "name": "isc-dhcp-client",
-        "version": "4.2.4-7ubuntu12.12",
+        "version": "4.2.4-7ubuntu12.13",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "dpkg",
+    "revision": "1.17.5ubuntu5.8",
+    "@id": "http:debian/dpkg/1_17_5ubuntu5_8/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "dpkg/1.17.5ubuntu5.8/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "dpkg",
+        "version": "1.17.5ubuntu5.8",
         "architecture": "amd64"
       }
     },
@@ -4834,27 +4855,6 @@
         "name": "debconf-i18n",
         "version": "1.5.51ubuntu2",
         "architecture": "all"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "dpkg",
-    "revision": "1.17.5ubuntu5.7",
-    "@id": "http:debian/dpkg/1_17_5ubuntu5_7/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "dpkg/1.17.5ubuntu5.7/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "debian",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "dpkg",
-        "version": "1.17.5ubuntu5.7",
-        "architecture": "amd64"
       }
     },
     "relationship": []
@@ -6436,12 +6436,12 @@
   },
   {
     "name": "libssl1.0.0",
-    "revision": "1.0.1f-1ubuntu2.23",
-    "@id": "http:debian/libssl1_0_0/1_0_1f_1ubuntu2_23/amd64",
+    "revision": "1.0.1f-1ubuntu2.24",
+    "@id": "http:debian/libssl1_0_0/1_0_1f_1ubuntu2_24/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "libssl1.0.0/1.0.1f-1ubuntu2.23/amd64",
+      "externalId": "libssl1.0.0/1.0.1f-1ubuntu2.24/amd64",
       "externalIdMetaData": {
         "forge": {
           "name": "debian",
@@ -6449,7 +6449,7 @@
           "kbSeparator": "/"
         },
         "name": "libssl1.0.0",
-        "version": "1.0.1f-1ubuntu2.23",
+        "version": "1.0.1f-1ubuntu2.24",
         "architecture": "amd64"
       }
     },
@@ -8052,27 +8052,6 @@
     "relationship": []
   },
   {
-    "name": "libssl1.0.0",
-    "revision": "1.0.1f-1ubuntu2.23",
-    "@id": "http:ubuntu/libssl1_0_0/1_0_1f_1ubuntu2_23/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libssl1.0.0/1.0.1f-1ubuntu2.23/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "ubuntu",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "libssl1.0.0",
-        "version": "1.0.1f-1ubuntu2.23",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "gzip",
     "revision": "1.6-3ubuntu1",
     "@id": "http:ubuntu/gzip/1_6_3ubuntu1/amd64",
@@ -8256,6 +8235,27 @@
         },
         "name": "hostname",
         "version": "3.15ubuntu1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libssl1.0.0",
+    "revision": "1.0.1f-1ubuntu2.24",
+    "@id": "http:ubuntu/libssl1_0_0/1_0_1f_1ubuntu2_24/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libssl1.0.0/1.0.1f-1ubuntu2.24/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libssl1.0.0",
+        "version": "1.0.1f-1ubuntu2.24",
         "architecture": "amd64"
       }
     },
@@ -8494,12 +8494,12 @@
   },
   {
     "name": "isc-dhcp-common",
-    "revision": "4.2.4-7ubuntu12.12",
-    "@id": "http:ubuntu/isc_dhcp_common/4_2_4_7ubuntu12_12/amd64",
+    "revision": "4.2.4-7ubuntu12.13",
+    "@id": "http:ubuntu/isc_dhcp_common/4_2_4_7ubuntu12_13/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "isc-dhcp-common/4.2.4-7ubuntu12.12/amd64",
+      "externalId": "isc-dhcp-common/4.2.4-7ubuntu12.13/amd64",
       "externalIdMetaData": {
         "forge": {
           "name": "ubuntu",
@@ -8507,7 +8507,28 @@
           "kbSeparator": "/"
         },
         "name": "isc-dhcp-common",
-        "version": "4.2.4-7ubuntu12.12",
+        "version": "4.2.4-7ubuntu12.13",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "dpkg",
+    "revision": "1.17.5ubuntu5.8",
+    "@id": "http:ubuntu/dpkg/1_17_5ubuntu5_8/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "dpkg/1.17.5ubuntu5.8/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "dpkg",
+        "version": "1.17.5ubuntu5.8",
         "architecture": "amd64"
       }
     },
@@ -8529,27 +8550,6 @@
         },
         "name": "debianutils",
         "version": "4.4",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "dpkg",
-    "revision": "1.17.5ubuntu5.7",
-    "@id": "http:ubuntu/dpkg/1_17_5ubuntu5_7/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "dpkg/1.17.5ubuntu5.7/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "ubuntu",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "dpkg",
-        "version": "1.17.5ubuntu5.7",
         "architecture": "amd64"
       }
     },

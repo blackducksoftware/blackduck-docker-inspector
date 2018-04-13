@@ -34,6 +34,7 @@ public class DockerInspectorTest {
     private static int IMAGE_INSPECTOR_PORT_IN_CONTAINER_UBUNTU = 8082;
     private static String IMAGE_INSPECTOR_REPO_BASE = "hub-imageinspector-ws";
     private static String IMAGE_INSPECTOR_TAG = "1.0.1-SNAPSHOT";
+    private static String CONTAINER_SHARED_DIR_PATH = "/opt/blackduck/shared";
 
     private static File containerSharedDir;
     private static File containerTargetDir;
@@ -128,8 +129,10 @@ public class DockerInspectorTest {
 
     private static void startContainer(final String imageInspectorPlatform, final int portOnHost, final int portInContainer) throws IOException, InterruptedException, IntegrationException {
         final String containerName = getContainerName(imageInspectorPlatform);
-        final String cmd = String.format("docker run -d -t --name %s -p %d:%d -v \"$(pwd)\"/test/containerShared:/opt/blackduck/hub-imageinspector-ws/shared blackducksoftware/%s-%s:%s",
-                containerName, portOnHost, portInContainer,
+        final String cmd = String.format("docker run -d -t --name %s -p %d:%d -v \"$(pwd)\"/test/containerShared:%s blackducksoftware/%s-%s:%s",
+                containerName, portOnHost,
+                portInContainer,
+                CONTAINER_SHARED_DIR_PATH,
                 IMAGE_INSPECTOR_REPO_BASE, imageInspectorPlatform, IMAGE_INSPECTOR_TAG);
         execCmd(cmd, 120000L);
     }
@@ -280,7 +283,7 @@ public class DockerInspectorTest {
         final List<String> additionalArgs = new ArrayList<>();
         additionalArgs.add(String.format("--imageinspector.url=http://localhost:%d", portOnHost));
         additionalArgs.add(String.format("--shared.dir.path.local=%s", containerSharedDir.getAbsolutePath()));
-        additionalArgs.add(String.format("--shared.dir.path.imageinspector=/opt/blackduck/hub-imageinspector-ws/shared"));
+        additionalArgs.add(String.format("--shared.dir.path.imageinspector=%s", CONTAINER_SHARED_DIR_PATH));
         final File outputContainerFileSystemFile = new File(String.format("test/output/%s_containerfilesystem.tar.gz", tarFileBaseName));
         testTar(targetTar.getAbsolutePath(), targetRepo, null, null, targetTag, targetPkgMgrLib, true, additionalArgs, false, outputContainerFileSystemFile);
     }
