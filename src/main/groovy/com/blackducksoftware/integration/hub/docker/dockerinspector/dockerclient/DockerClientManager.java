@@ -217,7 +217,7 @@ public class DockerClientManager {
         cmd.add("java");
         cmd.add("-Dfile.encoding=UTF-8");
         if (!StringUtils.isBlank(config.getDockerInspectorJavaOptsValue())) {
-            final String[] dockerInspectorJavaOptsParts = config.getDockerInspectorJavaOptsValue().split("\\b");
+            final String[] dockerInspectorJavaOptsParts = config.getDockerInspectorJavaOptsValue().split("\\p{Space}");
             for (int i = 0; i < dockerInspectorJavaOptsParts.length; i++) {
                 cmd.add(dockerInspectorJavaOptsParts[i]);
             }
@@ -279,7 +279,7 @@ public class DockerClientManager {
         hubDockerProperties.set(IMAGE_REPO_PROPERTY, targetImageRepo);
         hubDockerProperties.set(IMAGE_TAG_PROPERTY, targetImageTag);
         hubDockerProperties.set(OUTPUT_INCLUDE_DOCKER_TARFILE_PROPERTY, "false");
-        hubDockerProperties.set(OUTPUT_INCLUDE_CONTAINER_FILE_SYSTEM_TARFILE_PROPERTY, (new Boolean(config.isOutputIncludeContainerfilesystem())).toString());
+        hubDockerProperties.set(OUTPUT_INCLUDE_CONTAINER_FILE_SYSTEM_TARFILE_PROPERTY, new Boolean(config.isOutputIncludeContainerfilesystem()).toString());
         hubDockerProperties.set(ON_HOST_PROPERTY, "false");
         hubDockerProperties.set(DETECT_PKG_MGR_PROPERTY, "true");
         hubDockerProperties.set(INSPECT_PROPERTY, "true");
@@ -315,7 +315,7 @@ public class DockerClientManager {
         final List<String> envAssignments = new ArrayList<>();
         envAssignments.add(String.format("BD_HUB_PASSWORD=%s", hubPassword));
         envAssignments.add(String.format("BD_HUB_TOKEN=%s", hubApiToken));
-        if ((StringUtils.isBlank(config.getHubProxyHost())) && (!StringUtils.isBlank(config.getScanCliOptsEnvVar()))) {
+        if (StringUtils.isBlank(config.getHubProxyHost()) && !StringUtils.isBlank(config.getScanCliOptsEnvVar())) {
             envAssignments.add(String.format("SCAN_CLI_OPTS=%s", config.getScanCliOptsEnvVar()));
         } else {
 
