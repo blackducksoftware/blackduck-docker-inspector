@@ -214,7 +214,7 @@ public class DockerClientManager {
         cmd.add("java");
         cmd.add("-Dfile.encoding=UTF-8");
         if (!StringUtils.isBlank(config.getDockerInspectorJavaOptsValue())) {
-            final String[] dockerInspectorJavaOptsParts = config.getDockerInspectorJavaOptsValue().split("\\b");
+            final String[] dockerInspectorJavaOptsParts = config.getDockerInspectorJavaOptsValue().split("\\p{Space}");
             for (int i = 0; i < dockerInspectorJavaOptsParts.length; i++) {
                 cmd.add(dockerInspectorJavaOptsParts[i]);
             }
