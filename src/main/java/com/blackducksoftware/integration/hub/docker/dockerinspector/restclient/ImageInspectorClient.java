@@ -28,9 +28,11 @@ import java.net.MalformedURLException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.exception.IntegrationException;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.request.Request;
 import com.blackducksoftware.integration.hub.request.Response;
 import com.blackducksoftware.integration.hub.rest.HttpMethod;
@@ -41,7 +43,10 @@ import com.blackducksoftware.integration.log.Slf4jIntLogger;
 
 @Component
 public class ImageInspectorClient {
-    private static final int INSPECT_TIMEOUT_SECONDS = 240;
+
+    @Autowired
+    private Config config;
+
     private static final String CLEANUP_QUERY_PARAM = "cleanup";
     private static final String CONTAINER_OUTPUT_PATH = "/opt/blackduck/shared/output";
     private static final String RESULTING_CONTAINER_FS_PATH_QUERY_PARAM = "resultingcontainerfspath";
@@ -52,15 +57,15 @@ public class ImageInspectorClient {
     public String getBdio(final String imageInspectorUrl, final String containerPathToTarfile, final String containerFileSystemFilename, final boolean cleanup) throws IntegrationException, MalformedURLException {
         logger.info(String.format("ImageInspector URL: %s", imageInspectorUrl));
         // TODO with the redirect, a long timeout is required
-        final int timeoutSeconds = INSPECT_TIMEOUT_SECONDS;
-        final RestConnection restConnection = createConnection(imageInspectorUrl, timeoutSeconds);
+        final int serviceRequestTimeoutSeconds = (int) (config.getCommandTimeout() / 1000L);
+        final RestConnection restConnection = createConnection(imageInspectorUrl, serviceRequestTimeoutSeconds);
         String containerFileSystemQueryString = "";
         if (containerFileSystemFilename != null) {
             containerFileSystemQueryString = String.format("&%s=%s/%s", RESULTING_CONTAINER_FS_PATH_QUERY_PARAM, CONTAINER_OUTPUT_PATH, containerFileSystemFilename);
         }
         final String url = String.format("%s/%s?%s=%s&%s=%b%s",
                 imageInspectorUrl, GETBDIO_ENDPOINT, TARFILE_QUERY_PARAM, containerPathToTarfile, CLEANUP_QUERY_PARAM, cleanup, containerFileSystemQueryString);
-        logger.debug(String.format("Doing a GET (%d second timeout) on %s", timeoutSeconds, url));
+        logger.debug(String.format("Doing a GET (%d second timeout) on %s", serviceRequestTimeoutSeconds, url));
         final Request request = new Request.Builder(url).method(HttpMethod.GET).build();
         try (Response response = restConnection.executeRequest(request)) {
             logger.info(String.format("Response: HTTP status: %d", response.getStatusCode()));
