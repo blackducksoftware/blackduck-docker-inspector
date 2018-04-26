@@ -56,7 +56,6 @@ public class ImageInspectorClient {
 
     public String getBdio(final String imageInspectorUrl, final String containerPathToTarfile, final String containerFileSystemFilename, final boolean cleanup) throws IntegrationException, MalformedURLException {
         logger.info(String.format("ImageInspector URL: %s", imageInspectorUrl));
-        // TODO with the redirect, a long timeout is required
         final int serviceRequestTimeoutSeconds = (int) (config.getCommandTimeout() / 1000L);
         final RestConnection restConnection = createConnection(imageInspectorUrl, serviceRequestTimeoutSeconds);
         String containerFileSystemQueryString = "";

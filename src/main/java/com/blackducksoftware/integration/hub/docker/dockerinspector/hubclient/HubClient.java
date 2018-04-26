@@ -26,9 +26,7 @@ package com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -38,32 +36,24 @@ import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.exception.EncryptionException;
 import com.blackducksoftware.integration.exception.IntegrationException;
-import com.blackducksoftware.integration.hub.Credentials;
 import com.blackducksoftware.integration.hub.configuration.HubServerConfigBuilder;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.DockerEnvImageInspector;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.ProgramVersion;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
-import com.blackducksoftware.integration.hub.proxy.ProxyInfo;
 import com.blackducksoftware.integration.hub.rest.RestConnection;
 import com.blackducksoftware.integration.hub.service.CodeLocationService;
 import com.blackducksoftware.integration.hub.service.HubServicesFactory;
 import com.blackducksoftware.integration.hub.service.PhoneHomeService;
-import com.blackducksoftware.integration.log.IntLogger;
 import com.blackducksoftware.integration.log.Slf4jIntLogger;
-import com.blackducksoftware.integration.phonehome.PhoneHomeClient;
 import com.blackducksoftware.integration.phonehome.PhoneHomeRequestBody;
-import com.blackducksoftware.integration.phonehome.PhoneHomeRequestBodyBuilder;
-import com.blackducksoftware.integration.phonehome.enums.BlackDuckName;
-import com.blackducksoftware.integration.util.CIEnvironmentVariables;
 
 @Component
 public class HubClient {
     private static final String PHONE_HOME_METADATA_NAME_CALLER_VERSION = "callerVersion";
 
     private static final String PHONE_HOME_METADATA_NAME_CALLER_NAME = "callerName";
-
-    private static final String THIRD_PARTY_NAME_DOCKER = "Docker";
 
     private final Logger logger = LoggerFactory.getLogger(HubClient.class);
 
@@ -121,52 +111,22 @@ public class HubClient {
         try {
             phoneHomeHubConnection(dockerEngineVersion);
         } catch (final Throwable e) {
-            logger.debug(String.format("Attempt to phone home using Hub connection failed. Perhaps Hub credentials were not supplied. Error message: %s", e.getMessage()));
-            phoneHomeNoHubConnection(dockerEngineVersion);
-        }
-    }
-
-    private void phoneHomeNoHubConnection(final String dockerEngineVersion) {
-        try {
-            final IntLogger intLogger = new Slf4jIntLogger(logger);
-            final ProxyInfo proxyInfo = new ProxyInfo(config.getHubProxyHost(), Integer.parseInt(config.getHubProxyPort()), new Credentials(config.getHubProxyUsername(), config.getHubProxyPassword()), null, null, null);
-            final boolean alwaysTrustServerCertificate = config.isHubAlwaysTrustCert();
-            final PhoneHomeClient phClient = new PhoneHomeClient(intLogger, 15, proxyInfo, alwaysTrustServerCertificate);
-            final Map<String, String> infoMap = new HashMap<>();
-            infoMap.put("blackDuckName", BlackDuckName.HUB.getName());
-            infoMap.put("blackDuckVersion", "None");
-            infoMap.put("thirdPartyName", THIRD_PARTY_NAME_DOCKER);
-            infoMap.put("thirdPartyVersion", dockerEngineVersion);
-            infoMap.put("pluginVersion", programVersion.getProgramVersion());
-
-            if (!StringUtils.isBlank(config.getCallerName())) {
-                infoMap.put(PHONE_HOME_METADATA_NAME_CALLER_NAME, config.getCallerName());
-            }
-            if (!StringUtils.isBlank(config.getCallerVersion())) {
-                infoMap.put(PHONE_HOME_METADATA_NAME_CALLER_VERSION, config.getCallerVersion());
-            }
-            final PhoneHomeRequestBody phoneHomeRequestBody = new PhoneHomeRequestBody("None", "Integrations", infoMap);
-            phClient.postPhoneHomeRequest(phoneHomeRequestBody, new CIEnvironmentVariables());
-
-        } catch (final Throwable t) {
-            logger.debug(String.format("Unable to phone home: %s", t.getMessage()));
+            logger.debug(String.format("Attempt to phone home failed. This may simply be because Hub credentials were not supplied. Error message: %s", e.getMessage()));
         }
     }
 
     private void phoneHomeHubConnection(final String dockerEngineVersion) throws IOException, EncryptionException {
         final RestConnection restConnection = createRestConnection();
         final HubServicesFactory hubServicesFactory = new HubServicesFactory(restConnection);
-        final PhoneHomeService phoner = hubServicesFactory.createPhoneHomeService();
-        final PhoneHomeRequestBodyBuilder phoneHomeRequestBodyBuilder = phoner.createInitialPhoneHomeRequestBodyBuilder(THIRD_PARTY_NAME_DOCKER, dockerEngineVersion, programVersion.getProgramVersion());
-        phoneHomeRequestBodyBuilder.setBlackDuckName(BlackDuckName.HUB);
+        final PhoneHomeService phoneHomeService = hubServicesFactory.createPhoneHomeService();
+        final PhoneHomeRequestBody.Builder phoneHomeRequestBodyBuilder = phoneHomeService.createInitialPhoneHomeRequestBodyBuilder(DockerEnvImageInspector.PROGRAM_ID, programVersion.getProgramVersion());
         if (!StringUtils.isBlank(config.getCallerName())) {
-            phoneHomeRequestBodyBuilder.addToMetaDataMap(PHONE_HOME_METADATA_NAME_CALLER_NAME, config.getCallerName());
+            phoneHomeRequestBodyBuilder.addToMetaData(PHONE_HOME_METADATA_NAME_CALLER_NAME, config.getCallerName());
         }
         if (!StringUtils.isBlank(config.getCallerVersion())) {
-            phoneHomeRequestBodyBuilder.addToMetaDataMap(PHONE_HOME_METADATA_NAME_CALLER_VERSION, config.getCallerVersion());
+            phoneHomeRequestBodyBuilder.addToMetaData(PHONE_HOME_METADATA_NAME_CALLER_VERSION, config.getCallerVersion());
         }
-        final PhoneHomeRequestBody phoneHomeRequestBody = phoneHomeRequestBodyBuilder.buildObject();
-        phoner.phoneHome(phoneHomeRequestBody);
+        phoneHomeService.phoneHome(phoneHomeRequestBodyBuilder);
         logger.trace("Attempt to phone home completed");
     }
 

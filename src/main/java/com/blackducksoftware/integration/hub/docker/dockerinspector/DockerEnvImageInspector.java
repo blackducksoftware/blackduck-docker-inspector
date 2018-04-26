@@ -62,7 +62,8 @@ import com.google.gson.Gson;
 public class DockerEnvImageInspector {
     private static final Logger logger = LoggerFactory.getLogger(DockerEnvImageInspector.class);
 
-    public static final String PROGRAM_NAME = "hub-docker-inspector.sh"; // TODO unhardcode
+    public static final String PROGRAM_NAME = "hub-docker-inspector.sh";
+    public static final String PROGRAM_ID = "hub-docker-inspector";
 
     @Autowired
     private HubClient hubClient;
