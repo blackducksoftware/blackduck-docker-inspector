@@ -2,6 +2,12 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "dnplus_rhel_6.5_var_lib_rpm_RPM",
+    "creationInfo": {
+      "spdx:creator": [
+        "Tool: IntegrationBdio-13.0.0"
+      ],
+      "spdx:created": "2018-04-26T22:13:14.151Z"
+    },
     "@id": "uuid:18689d95-da9e-4f33-a95d-85004d738181",
     "@type": "BillOfMaterials",
     "relationship": []

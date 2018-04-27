@@ -2,6 +2,12 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "ubuntu_17.04_var_lib_dpkg_DPKG",
+    "creationInfo": {
+      "spdx:creator": [
+        "Tool: IntegrationBdio-13.0.0"
+      ],
+      "spdx:created": "2018-04-26T22:13:14.151Z"
+    },
     "@id": "uuid:b2311c76-7416-4fc4-9610-7a3a38cd8b76",
     "@type": "BillOfMaterials",
     "relationship": []

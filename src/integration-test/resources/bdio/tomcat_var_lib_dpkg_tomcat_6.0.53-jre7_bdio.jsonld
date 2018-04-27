@@ -2,6 +2,12 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "tomcat_6.0.53-jre7_var_lib_dpkg_DPKG",
+    "creationInfo": {
+      "spdx:creator": [
+        "Tool: IntegrationBdio-13.0.0"
+      ],
+      "spdx:created": "2018-04-26T22:13:14.151Z"
+    },
     "@id": "uuid:1278893f-25c7-47aa-b604-8334b8af2d9f",
     "@type": "BillOfMaterials",
     "relationship": []

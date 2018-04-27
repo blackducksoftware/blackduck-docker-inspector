@@ -2,6 +2,12 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "blackducksoftware_hub-webapp_4.0.0_lib_apk_APK",
+    "creationInfo": {
+      "spdx:creator": [
+        "Tool: IntegrationBdio-13.0.0"
+      ],
+      "spdx:created": "2018-04-26T22:13:14.151Z"
+    },
     "@id": "uuid:bbdadea2-9296-4d64-982b-9c94034f14c0",
     "@type": "BillOfMaterials",
     "relationship": []

@@ -33,7 +33,8 @@ public class DockerInspectorTest {
     private static int IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU = 8082;
     private static int IMAGE_INSPECTOR_PORT_IN_CONTAINER_UBUNTU = 8082;
     private static String IMAGE_INSPECTOR_REPO_BASE = "hub-imageinspector-ws";
-    private static String IMAGE_INSPECTOR_TAG = "1.0.1-SNAPSHOT";
+    // TODO this should be gotten from version.properties:inspector.image.version
+    private static String IMAGE_INSPECTOR_TAG = "1.1.1";
     private static String CONTAINER_SHARED_DIR_PATH = "/opt/blackduck/shared";
 
     private static File containerSharedDir;
@@ -377,6 +378,8 @@ public class DockerInspectorTest {
                     String.format(String.format("src/integration-test/resources/bdio/%s_%s_%s_%s_bdio.jsonld", imageForBdioFilename.replaceAll("/", "_"), pkgMgrPathString, imageForBdioFilename.replaceAll("/", "_"), tagForBdioFilename)));
             final List<String> exceptLinesContainingThese = new ArrayList<>();
             exceptLinesContainingThese.add("\"@id\":");
+            exceptLinesContainingThese.add("spdx:created");
+            exceptLinesContainingThese.add("Tool:");
             final boolean outputBdioMatches = TestUtils.contentEquals(expectedBdio, actualBdio, exceptLinesContainingThese);
             assertTrue(outputBdioMatches);
         }
@@ -418,6 +421,8 @@ public class DockerInspectorTest {
             final File expectedBdio = new File(String.format(String.format("src/integration-test/resources/bdio/%s_%s_%s_%s_bdio.jsonld", repo, pkgMgrPathString, repo, tag)));
             final List<String> exceptLinesContainingThese = new ArrayList<>();
             exceptLinesContainingThese.add("\"@id\":");
+            exceptLinesContainingThese.add("spdx:created");
+            exceptLinesContainingThese.add("Tool:");
             final boolean outputBdioMatches = TestUtils.contentEquals(expectedBdio, actualBdio, exceptLinesContainingThese);
             assertTrue(outputBdioMatches);
         }

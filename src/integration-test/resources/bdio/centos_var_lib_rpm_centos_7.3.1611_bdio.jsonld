@@ -2,6 +2,12 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "centos_7.3.1611_var_lib_rpm_RPM",
+    "creationInfo": {
+      "spdx:creator": [
+        "Tool: IntegrationBdio-13.0.0"
+      ],
+      "spdx:created": "2018-04-26T22:13:14.151Z"
+    },
     "@id": "uuid:8558a384-201b-4edf-873e-7037259c5dd7",
     "@type": "BillOfMaterials",
     "relationship": []

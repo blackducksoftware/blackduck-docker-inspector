@@ -2,7 +2,13 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "alpine_3.6_lib_apk_APK",
-    "@id": "uuid:13fad759-f880-49aa-88f1-d9521ef0ab05",
+    "creationInfo": {
+      "spdx:creator": [
+        "Tool: IntegrationBdio-13.0.0"
+      ],
+      "spdx:created": "2018-04-26T22:07:02.075Z"
+    },
+    "@id": "uuid:e948cea5-4ab9-4fcc-8310-76514d0a70ac",
     "@type": "BillOfMaterials",
     "relationship": []
   },

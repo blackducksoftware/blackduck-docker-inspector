@@ -2,6 +2,12 @@
   {
     "specVersion": "1.1.0",
     "spdx:name": "blackducksoftware_whiteouttest_1.0_var_lib_dpkg_DPKG",
+    "creationInfo": {
+      "spdx:creator": [
+        "Tool: IntegrationBdio-13.0.0"
+      ],
+      "spdx:created": "2018-04-26T22:13:14.151Z"
+    },
     "@id": "uuid:736a70aa-3fb6-4144-8551-a382dacd8adc",
     "@type": "BillOfMaterials",
     "relationship": []

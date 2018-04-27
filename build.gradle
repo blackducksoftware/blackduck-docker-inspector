@@ -30,7 +30,7 @@ repositories {
 
 version = '5.0.0-SNAPSHOT'
 def inspectorImageFamily = 'hub-imageinspector-ws'
-def inspectorImageVersion = "1.0.0"
+def inspectorImageVersion = "1.1.1"
 
 apply plugin: 'com.blackducksoftware.integration.solution'
 apply plugin: 'com.bmuschko.docker-remote-api'
@@ -478,7 +478,7 @@ artifactory {
 
 dependencies {
     compile 'com.blackducksoftware.integration:hub-common:30.0.2'
-    compile 'com.blackducksoftware.integration:hub-imageinspector-lib:1.1.0'
+    compile 'com.blackducksoftware.integration:hub-imageinspector-lib:2.0.1'
     
     compile 'com.github.docker-java:docker-java:3.0.14'
     compile 'org.apache.commons:commons-lang3:3.5'
