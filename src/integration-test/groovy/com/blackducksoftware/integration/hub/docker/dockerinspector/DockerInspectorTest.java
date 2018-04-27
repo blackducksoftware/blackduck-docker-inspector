@@ -32,17 +32,18 @@ public class DockerInspectorTest {
     private static int IMAGE_INSPECTOR_PORT_IN_CONTAINER_CENTOS = 8081;
     private static int IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU = 8082;
     private static int IMAGE_INSPECTOR_PORT_IN_CONTAINER_UBUNTU = 8082;
-    private static String IMAGE_INSPECTOR_REPO_BASE = "hub-imageinspector-ws";
-    // TODO this should be gotten from version.properties:inspector.image.version
-    private static String IMAGE_INSPECTOR_TAG = "1.1.1";
     private static String CONTAINER_SHARED_DIR_PATH = "/opt/blackduck/shared";
 
     private static File containerSharedDir;
     private static File containerTargetDir;
     private static File containerOutputDir;
 
+    private static ProgramVersion programVersion;
+
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
+        programVersion = new ProgramVersion();
+        programVersion.init();
 
         startContainer("alpine", IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE, IMAGE_INSPECTOR_PORT_IN_CONTAINER_ALPINE);
         startContainer("centos", IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS, IMAGE_INSPECTOR_PORT_IN_CONTAINER_CENTOS);
@@ -134,7 +135,7 @@ public class DockerInspectorTest {
                 containerName, portOnHost,
                 portInContainer,
                 CONTAINER_SHARED_DIR_PATH,
-                IMAGE_INSPECTOR_REPO_BASE, imageInspectorPlatform, IMAGE_INSPECTOR_TAG);
+                programVersion.getInspectorImageFamily(), imageInspectorPlatform, programVersion.getInspectorImageVersion());
         execCmd(cmd, 120000L);
     }
 
@@ -345,7 +346,8 @@ public class DockerInspectorTest {
         final File actualBdio = new File(String.format(String.format("test/output/%s_%s_%s_%s_bdio.jsonld", imageForBdioFilename.replaceAll("/", "_"), pkgMgrPathString, imageForBdioFilename.replaceAll("/", "_"), tagForBdioFilename)));
         ensureFileDoesNotExist(actualBdio);
 
-        final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--upload.bdio=false", String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", getProgramVersion()), "--output.path=test/output",
+        final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--upload.bdio=false", String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", programVersion.getProgramVersion()),
+                "--output.path=test/output",
                 "--output.include.containerfilesystem=true", "--hub.always.trust.cert=true");
 
         final List<String> fullCmd = new ArrayList<>();
@@ -395,7 +397,8 @@ public class DockerInspectorTest {
         final File actualBdio = new File(String.format(String.format("test/output/%s_%s_%s_%s_bdio.jsonld", repo, pkgMgrPathString, repo, tag)));
         ensureFileDoesNotExist(actualBdio);
 
-        final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--upload.bdio=false", String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", getProgramVersion()), "--output.path=test/output",
+        final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--upload.bdio=false", String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", programVersion.getProgramVersion()),
+                "--output.path=test/output",
                 "--output.include.containerfilesystem=true", "--hub.always.trust.cert=true");
 
         final List<String> fullCmd = new ArrayList<>();
@@ -428,13 +431,6 @@ public class DockerInspectorTest {
         }
 
         assertTrue(outputContainerFileSystemFile.exists());
-    }
-
-    private String getProgramVersion() throws IOException {
-        final ProgramVersion pgmVerObj = new ProgramVersion();
-        pgmVerObj.init();
-        final String programVersion = pgmVerObj.getProgramVersion();
-        return programVersion;
     }
 
     private void ensureFileDoesNotExist(final File outputContainerFileSystemFile) throws IOException {
