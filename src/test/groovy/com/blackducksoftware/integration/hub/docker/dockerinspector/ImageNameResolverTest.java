@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import com.blackducksoftware.integration.hub.imageinspector.name.ImageNameResolver;
 
-public class imageNameResolverTest {
+public class ImageNameResolverTest {
 
     @Test
     public void testNone() {
