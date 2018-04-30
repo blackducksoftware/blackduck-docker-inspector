@@ -28,7 +28,7 @@ repositories {
     }
 }
 
-version = '5.0.0-SNAPSHOT'
+version = '5.0.0'
 def inspectorImageFamily = 'hub-imageinspector-ws'
 def inspectorImageVersion = "1.1.1"
 
