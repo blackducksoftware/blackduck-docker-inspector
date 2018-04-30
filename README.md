@@ -17,7 +17,3 @@ You can download the latest source from GitHub: https://github.com/blackducksoft
 ## Documentation ##
 All documentation for hub-docker-inspector can be found on our public [Black Duck Confluence](https://blackducksoftware.atlassian.net/wiki/spaces/INTDOCS/pages/48435867/Hub+Docker+Inspector)
 
-## Package Managers ##
-- rpm
-- dpkg
-- apk
