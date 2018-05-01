@@ -23,6 +23,8 @@ DOCKER_INSPECTOR_CURL_OPTS=${DOCKER_INSPECTOR_CURL_OPTS:-}
 # from LATEST.
 jarVersion=${DOCKER_INSPECTOR_VERSION}
 
+JAVACMD=${JAVACMD:-java}
+
 #Getting the proxy settings from the environment
 PROXY_HOST=${BLACKDUCK_HUB_PROXY_HOST}
 PROXY_PORT=${BLACKDUCK_HUB_PROXY_PORT}
@@ -331,7 +333,7 @@ fi
 log "jarPath: ${jarPath}"
 log "Options: ${options[*]}"
 log "Jar dir: ${DOCKER_INSPECTOR_JAR_DIR}"
-java "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" ${options[*]} ${hubUsernameArgument} ${hubProjectNameArgument} ${hubProjectVersionArgument}
+${JAVACMD} "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" ${options[*]} ${hubUsernameArgument} ${hubProjectNameArgument} ${hubProjectVersionArgument}
 status=$?
 log "Return code: ${status}"
 exit ${status}
