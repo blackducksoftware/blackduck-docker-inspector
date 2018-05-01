@@ -79,13 +79,13 @@ public class RestClientInspector implements Inspector {
                 logger.info(String.format("Writing BDIO to %s", outputBdioFile.getAbsolutePath()));
                 FileUtils.write(outputBdioFile, bdioString, StandardCharsets.UTF_8);
 
-                if (config.isOnHost()) {
-                    final File localPathToContainerOutputDir = new File(config.getSharedDirPathLocal(), "output");
-                    final File localPathToContainerFileSytemFile = new File(localPathToContainerOutputDir, containerFileSystemFilename);
-                    final File userContainerFileSytemFile = new File(userOutputDir, containerFileSystemFilename);
-                    logger.debug(String.format("Copying %s to %s", localPathToContainerFileSytemFile.getAbsolutePath(), userContainerFileSytemFile.getAbsolutePath()));
-                    FileUtils.copyFile(localPathToContainerFileSytemFile, userContainerFileSytemFile);
-                }
+                final File localPathToContainerOutputDir = new File(config.getSharedDirPathLocal(), "output");
+                final File localPathToContainerFileSytemFile = new File(localPathToContainerOutputDir, containerFileSystemFilename);
+                final File userContainerFileSytemFile = new File(userOutputDir, containerFileSystemFilename);
+                logger.debug(String.format("Copying %s to %s", localPathToContainerFileSytemFile.getAbsolutePath(), userContainerFileSytemFile.getAbsolutePath()));
+                FileUtils.copyFile(localPathToContainerFileSytemFile, userContainerFileSytemFile);
+                logger.debug(String.format("Removing %s", localPathToContainerFileSytemFile.getAbsolutePath()));
+                FileUtils.forceDelete(localPathToContainerFileSytemFile);
             }
             return 0;
         } catch (final IOException e) {
