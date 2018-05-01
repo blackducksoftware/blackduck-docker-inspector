@@ -50,16 +50,6 @@ String hubDockerPgmDir = '/opt/blackduck/hub-docker-inspector'
 
 springBoot { mainClass = 'com.blackducksoftware.integration.hub.docker.dockerinspector.DockerEnvImageInspector' }
 
-// TODO pretty sure this can go
-sourceSets {
-	main {
-		resources {
-			srcDirs = ['src/main/resources']
-			includes = ['*.properties']
-		}
-	}
-}
-
 configurations {
     integrationTestCompile.extendsFrom testCompile
     integrationTestRuntime.extendsFrom testRuntime
@@ -359,7 +349,7 @@ task createRemoveDockerImageTasks() {
     }
 }
 
-task buildDockerImages(dependsOn: [buildDockerImage_ubuntu, buildDockerImage_centos, buildDockerImage_alpine]) {
+task buildImages(dependsOn: [buildDockerImage_ubuntu, buildDockerImage_centos, buildDockerImage_alpine]) {
 }
 
 task packageScript(type: Zip, dependsOn: buildScript) {
@@ -388,12 +378,6 @@ task stopDockerContainerAlpine(type: Exec) {
 }
 
 task stopDockerContainers(dependsOn: [stopDockerContainerUbuntu, stopDockerContainerCentos, stopDockerContainerAlpine]) {}
-
-task testPrep(type: Exec, dependsOn: [stopDockerContainers, removeDockerImage_ubuntu, removeDockerImage_centos, removeDockerImage_alpine, \
-    packageScript]) {
-    ignoreExitValue true
-    commandLine 'mkdir', 'test'
-}
 
 compileJava.dependsOn writeVersionToPropertiesFile
 
@@ -435,7 +419,7 @@ task checkVersion() {
     }
 }
 
-task pkg(dependsOn: [buildDockerImages, packageScript]) {}
+task pkg(dependsOn: [buildImages, packageScript]) {}
 
 task pushImages(dependsOn: [pkg, pushImageAlpine, pushImageCentos, pushImageUbuntu]) {
 }
@@ -443,11 +427,15 @@ task pushImages(dependsOn: [pkg, pushImageAlpine, pushImageCentos, pushImageUbun
 task buildTestTarfiles(dependsOn: [buildTestDockerTarfile, buildWhTestDockerTarfile, buildAggTestDockerTarfile, \
         buildAlpineTestDockerTarfile, buildAlpine36TestDockerTarfile, buildUbuntuTestDockerTarfile]) {}
 
-// TODO just add a dependsOn to testIntegration, then change jenkins job:
-task integrationTest(type: Test, dependsOn: [build, pkg, testPrep, buildScript, buildTestTarfiles, testIntegration]) {
+task testPrep(type: Exec, dependsOn: [stopDockerContainers, removeDockerImage_ubuntu, removeDockerImage_centos, removeDockerImage_alpine, \
+    packageScript, buildTestTarfiles]) {
+    ignoreExitValue true
+    commandLine 'mkdir', 'test'
 }
 
-task all(dependsOn: [pushImages, integrationTest, artifactoryPublish]) {}
+testIntegration.dependsOn testPrep
+
+task all(dependsOn: [pushImages, testIntegration, artifactoryPublish]) {}
 
 publishing {
     publications {
