@@ -17,7 +17,11 @@ import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
+import com.blackducksoftware.integration.test.annotation.IntegrationTest;
+
+@Category(IntegrationTest.class)
 public class ArgsWithSpacesTest {
 
     private static final String USERNAME = "You Zer";

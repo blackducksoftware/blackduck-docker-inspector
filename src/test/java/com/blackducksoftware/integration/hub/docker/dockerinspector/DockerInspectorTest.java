@@ -21,10 +21,13 @@ import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.imageinspector.TestUtils;
+import com.blackducksoftware.integration.test.annotation.IntegrationTest;
 
+@Category(IntegrationTest.class)
 public class DockerInspectorTest {
     private static int IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE = 8080;
     private static int IMAGE_INSPECTOR_PORT_IN_CONTAINER_ALPINE = 8080;
@@ -377,7 +380,7 @@ public class DockerInspectorTest {
         assertTrue(actualBdio.exists());
         if (requireBdioMatch) {
             final File expectedBdio = new File(
-                    String.format(String.format("src/integration-test/resources/bdio/%s_%s_%s_%s_bdio.jsonld", imageForBdioFilename.replaceAll("/", "_"), pkgMgrPathString, imageForBdioFilename.replaceAll("/", "_"), tagForBdioFilename)));
+                    String.format(String.format("src/test/resources/bdio/%s_%s_%s_%s_bdio.jsonld", imageForBdioFilename.replaceAll("/", "_"), pkgMgrPathString, imageForBdioFilename.replaceAll("/", "_"), tagForBdioFilename)));
             final List<String> exceptLinesContainingThese = new ArrayList<>();
             exceptLinesContainingThese.add("\"@id\":");
             exceptLinesContainingThese.add("spdx:created");
@@ -421,7 +424,7 @@ public class DockerInspectorTest {
         System.out.printf("Expecting output BDIO file: %s\n", actualBdio.getAbsolutePath());
         assertTrue(actualBdio.exists());
         if (requireBdioMatch) {
-            final File expectedBdio = new File(String.format(String.format("src/integration-test/resources/bdio/%s_%s_%s_%s_bdio.jsonld", repo, pkgMgrPathString, repo, tag)));
+            final File expectedBdio = new File(String.format(String.format("src/test/resources/bdio/%s_%s_%s_%s_bdio.jsonld", repo, pkgMgrPathString, repo, tag)));
             final List<String> exceptLinesContainingThese = new ArrayList<>();
             exceptLinesContainingThese.add("\"@id\":");
             exceptLinesContainingThese.add("spdx:created");

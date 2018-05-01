@@ -176,15 +176,21 @@ public class DockerClientManager {
         final List<Image> images = dockerClient.listImagesCmd().withImageNameFilter(imageName).exec();
         for (final Image image : images) {
             if (image == null) {
+                logger.warn("Encountered a null image in local docker registry");
                 continue;
             }
-            for (final String tag : image.getRepoTags()) {
-                if (tag == null) {
-                    continue;
-                }
-                if (tag.contains(tagName)) {
-                    localImage = image;
-                    break;
+            final String[] tags = image.getRepoTags();
+            if (tags == null) {
+                logger.warn("Encountered an image with a null tag list in local docker registry");
+            } else {
+                for (final String tag : tags) {
+                    if (tag == null) {
+                        continue;
+                    }
+                    if (tag.contains(tagName)) {
+                        localImage = image;
+                        break;
+                    }
                 }
             }
             if (localImage != null) {
