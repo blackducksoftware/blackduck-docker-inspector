@@ -65,7 +65,8 @@ public class ImageCleanupTest {
         fullCmd.add("--cleanup.target.image=true");
         fullCmd.add(String.format("--working.dir.path=%s", workingDirPath));
         fullCmd.add(String.format("--docker.image=%s", TARGET_IMAGE_NAME, TARGET_IMAGE_TAG));
-        runCommand(fullCmd, true);
+        final String log = runCommand(fullCmd, true);
+        System.out.println(log);
 
         // See what image was used
         List<String> grepCmd = new ArrayList<>();
@@ -85,7 +86,7 @@ public class ImageCleanupTest {
         final String[] inspectOnImageTagJsonLineParts = inspectOnImageTagJsonLine.split("\"");
         final String inspectOnImageTag = inspectOnImageTagJsonLineParts[3];
         System.out.println(String.format("inspectOnImageTag: %s", inspectOnImageTag));
-
+        Thread.sleep(10000L); // give docker a few seconds
         final List<String> dockerImageList = getDockerImageList();
         assertFalse(isImagePresent(dockerImageList, inspectOnImageName, inspectOnImageTag));
         assertFalse(isImagePresent(dockerImageList, TARGET_IMAGE_NAME, TARGET_IMAGE_TAG));
