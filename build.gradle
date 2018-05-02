@@ -427,7 +427,7 @@ task pushImages(dependsOn: [pkg, pushImageAlpine, pushImageCentos, pushImageUbun
 task buildTestTarfiles(dependsOn: [buildTestDockerTarfile, buildWhTestDockerTarfile, buildAggTestDockerTarfile, \
         buildAlpineTestDockerTarfile, buildAlpine36TestDockerTarfile, buildUbuntuTestDockerTarfile]) {}
 
-task testPrep(type: Exec, dependsOn: [stopDockerContainers, removeDockerImage_ubuntu, removeDockerImage_centos, removeDockerImage_alpine, \
+task testPrep(type: Exec, dependsOn: [build, stopDockerContainers, removeDockerImage_ubuntu, removeDockerImage_centos, removeDockerImage_alpine, \
     packageScript, buildTestTarfiles]) {
     ignoreExitValue true
     commandLine 'mkdir', 'test'
