@@ -150,40 +150,48 @@ public class Output {
             logger.debug("User has not specified an output path");
             return;
         }
-        logger.debug(String.format("Copying result file from %s to %s", programPaths.getHubDockerResultPathHost(), userOutputDirPath));
-        final File sourceResultFile = new File(programPaths.getHubDockerResultPathHost());
+        logger.debug(String.format("Copying result file from %s to %s", programPaths.getHubDockerHostResultPath(), userOutputDirPath));
+        final File sourceResultFile = new File(programPaths.getHubDockerHostResultPath());
         final File userOutputDir = new File(userOutputDirPath);
         final File targetFile = new File(userOutputDir, sourceResultFile.getName());
         logger.debug(String.format("Removing %s if it exists", targetFile.getAbsolutePath()));
         FileOperations.removeFileOrDirQuietly(targetFile.getAbsolutePath());
-        FileOperations.copyFile(new File(programPaths.getHubDockerResultPathHost()), userOutputDir);
+        FileOperations.copyFile(new File(programPaths.getHubDockerHostResultPath()), userOutputDir);
     }
 
     private int reportResult(final Config config, final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag, final String dockerTarfilename, final String bdioFilename, final boolean forceSuccess)
             throws IntegrationException {
         final Gson gson = new Gson();
         if (forceSuccess) {
-            writeSuccessResultFile(gson, targetOs, runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename);
+            writeSuccessResultFile(gson, programPaths.getHubDockerHostResultPath(), targetOs, runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename);
             return 0;
         }
         if (config.isOnHost()) {
-            final Result resultReportedFromContainer = resultFile.read(gson, programPaths.getHubDockerResultPath());
+            final Result resultReportedFromContainer = resultFile.read(gson, programPaths.getHubDockerContainerResultPathOnHost());
             if (!resultReportedFromContainer.isSucceeded()) {
                 logger.error(String.format("*** Failed: %s", resultReportedFromContainer.getMessage()));
+                writeFailureResultFile(gson, programPaths.getHubDockerHostResultPath(), targetOs, runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename, resultReportedFromContainer.getMessage());
                 return -1;
             } else {
                 logger.info("*** Succeeded");
+                writeSuccessResultFile(gson, programPaths.getHubDockerHostResultPath(), targetOs, runOnImageName, runOnImageTag, dockerTarfilename, resultReportedFromContainer.getBdioFilename());
                 return 0;
             }
         } else {
-            writeSuccessResultFile(gson, targetOs, runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename);
+            writeSuccessResultFile(gson, programPaths.getHubDockerContainerResultPathInContainer(), targetOs, runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename);
             return 0;
         }
 
     }
 
-    private void writeSuccessResultFile(final Gson gson, final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag, final String dockerTarfilename, final String bdioFilename) {
-        resultFile.write(gson, programPaths.getHubDockerResultPath(), true, "Success", targetOs, runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename);
+    private void writeSuccessResultFile(final Gson gson, final String resultFilePath, final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag, final String dockerTarfilename, final String bdioFilename) {
+        resultFile.write(gson, resultFilePath, true, "Success", targetOs, runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename);
+    }
+
+    private void writeFailureResultFile(final Gson gson, final String resultFilePath, final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag, final String dockerTarfilename, final String bdioFilename,
+            final String msg) {
+        resultFile.write(new Gson(), resultFilePath, false, msg, targetOs, runOnImageName, runOnImageTag,
+                dockerTarfilename, bdioFilename);
     }
 
     private void copyOutputToUserOutputDir() throws IOException {

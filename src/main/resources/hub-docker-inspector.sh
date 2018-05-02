@@ -7,9 +7,8 @@
 # with your Hub connection details (hub.url, hub.username, and hub.password),
 # and Docker Hub connection details (docker.registry.username and docker.registry.password).
 
-# To override the default location of /tmp/hub-docker-inspector, specify
-# your own DOCKER_INSPECTOR_JAR_DIR in your environment and
-# *that* location will be used.
+# To override the dir to which hub-docker-inspector.sh will download files,
+# set DOCKER_INSPECTOR_JAR_DIR
 DOCKER_INSPECTOR_JAR_DIR=${DOCKER_INSPECTOR_JAR_DIR:-/tmp/hub-docker-inspector}
 
 # If you want to pass any additional options to
@@ -24,6 +23,10 @@ DOCKER_INSPECTOR_CURL_OPTS=${DOCKER_INSPECTOR_CURL_OPTS:-}
 jarVersion=${DOCKER_INSPECTOR_VERSION}
 
 JAVACMD=${JAVACMD:-java}
+
+# To use an existing hub-docker-inspector jar instead of downloading one,
+# set DOCKER_INSPECTOR_JAR_PATH
+DOCKER_INSPECTOR_JAR_PATH=${DOCKER_INSPECTOR_JAR_PATH:-}
 
 #Getting the proxy settings from the environment
 PROXY_HOST=${BLACKDUCK_HUB_PROXY_HOST}
@@ -76,7 +79,7 @@ currentVersionCommitId=""
 version="@VERSION@"
 encodingSetting="-Dfile.encoding=UTF-8"
 userSpecifiedJarPath=""
-jarPathSpecifiedOnCmdLine=false
+jarPathSpecified=false
 latestReleaseVersion=
 hubUsernameArgument=""
 hubProjectNameArgument=""
@@ -228,7 +231,7 @@ function preProcessOptions() {
 		then
 			userSpecifiedJarPath=$(echo "${cmdlinearg}" | cut -d '=' -f 2)
 			userSpecifiedJarPath=$(expandPath "${userSpecifiedJarPath}")
-			jarPathSpecifiedOnCmdLine=true
+			jarPathSpecified=true
 		elif [[ "$cmdlinearg" == --hub.username=* ]]
                 then
                         hubUsername=$(echo "$cmdlinearg" | cut -d '=' -f 2)
@@ -317,12 +320,19 @@ then
 	exit 0
 fi
 
+if [ ! -z "${DOCKER_INSPECTOR_JAR_PATH}" ]; then
+	userSpecifiedJarPath="${DOCKER_INSPECTOR_JAR_PATH}"
+	userSpecifiedJarPath=$(expandPath "${userSpecifiedJarPath}")
+	log "DOCKER_INSPECTOR_JAR_PATH env var resolved to ${userSpecifiedJarPath}"
+	jarPathSpecified=true
+fi
+
 preProcessOptions "$@"
 
 log "Jar dir: ${DOCKER_INSPECTOR_JAR_DIR}"
 mkdir -p "${DOCKER_INSPECTOR_JAR_DIR}"
 
-if [[ ${jarPathSpecifiedOnCmdLine} == true ]]
+if [[ ${jarPathSpecified} == true ]]
 then
 	jarPath="${userSpecifiedJarPath}"
 else

@@ -3,19 +3,13 @@ package com.blackducksoftware.integration.hub.docker.dockerinspector;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.lang.ProcessBuilder.Redirect;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
@@ -24,7 +18,6 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import com.blackducksoftware.integration.exception.IntegrationException;
-import com.blackducksoftware.integration.hub.docker.imageinspector.TestUtils;
 import com.blackducksoftware.integration.test.annotation.IntegrationTest;
 
 @Category(IntegrationTest.class)
@@ -122,7 +115,7 @@ public class DockerInspectorTest {
     private static boolean isUp(final int port) {
         String response;
         try {
-            response = execCmd(String.format("curl -i http://localhost:%d/health", port), 30000L);
+            response = TestUtils.execCmd(String.format("curl -i http://localhost:%d/health", port), 30000L);
         } catch (IOException | InterruptedException | IntegrationException e) {
             return false;
         }
@@ -139,7 +132,7 @@ public class DockerInspectorTest {
                 portInContainer,
                 CONTAINER_SHARED_DIR_PATH,
                 programVersion.getInspectorImageFamily(), imageInspectorPlatform, programVersion.getInspectorImageVersion());
-        execCmd(cmd, 120000L);
+        TestUtils.execCmd(cmd, 120000L);
     }
 
     private static String getContainerName(final String imageInspectorPlatform) {
@@ -156,11 +149,11 @@ public class DockerInspectorTest {
     private static void stopContainer(final String imageInspectorPlatform) {
         final String containerName = getContainerName(imageInspectorPlatform);
         try {
-            execCmd(String.format("docker stop %s", containerName), 120000L);
+            TestUtils.execCmd(String.format("docker stop %s", containerName), 120000L);
         } catch (final Exception e) {
         }
         try {
-            execCmd(String.format("docker rm %s", containerName), 120000L);
+            TestUtils.execCmd(String.format("docker rm %s", containerName), 120000L);
         } catch (final Exception e) {
         }
     }
@@ -309,7 +302,7 @@ public class DockerInspectorTest {
         fullCmd.addAll(partialCmd);
 
         System.out.println(String.format("Running --pulljar end to end test"));
-        execCmd(workingDir, String.join(" ", fullCmd), 30000L);
+        TestUtils.execCmd(workingDir, String.join(" ", fullCmd), 30000L);
         System.out.println("hub-docker-inspector --pulljar done; verifying results...");
 
         final File[] jarFilesAfter = workingDir.listFiles(jarFileFilter);
@@ -364,7 +357,7 @@ public class DockerInspectorTest {
         fullCmd.add("--logging.level.com.blackducksoftware=DEBUG");
         if (needWorkingDir) {
             final File workingDir = new File("test/endToEnd");
-            deleteDirIfExists(workingDir);
+            TestUtils.deleteDirIfExists(workingDir);
             fullCmd.add(String.format("--working.dir.path=%s", workingDir.getAbsolutePath()));
         }
         fullCmd.add(inspectTargetArg);
@@ -374,7 +367,7 @@ public class DockerInspectorTest {
         }
 
         System.out.println(String.format("Running end to end test on %s with command %s", inspectTargetTarfile, fullCmd.toString()));
-        execCmd(String.join(" ", fullCmd), 240000L);
+        TestUtils.execCmd(String.join(" ", fullCmd), 240000L);
         System.out.println("hub-docker-inspector done; verifying results...");
         System.out.printf("Expecting output BDIO file: %s\n", actualBdio.getAbsolutePath());
         assertTrue(actualBdio.exists());
@@ -414,12 +407,12 @@ public class DockerInspectorTest {
         }
         fullCmd.add("--logging.level.com.blackducksoftware=DEBUG");
         final File workingDir = new File("test/endToEnd");
-        deleteDirIfExists(workingDir);
+        TestUtils.deleteDirIfExists(workingDir);
         fullCmd.add(String.format("--working.dir.path=%s", workingDir.getAbsolutePath()));
         fullCmd.add(inspectTargetArg);
 
         System.out.println(String.format("Running end to end test on %s with command %s", inspectTargetImageRepoTag, fullCmd.toString()));
-        execCmd(String.join(" ", fullCmd), 30000L);
+        TestUtils.execCmd(String.join(" ", fullCmd), 30000L);
         System.out.println("hub-docker-inspector done; verifying results...");
         System.out.printf("Expecting output BDIO file: %s\n", actualBdio.getAbsolutePath());
         assertTrue(actualBdio.exists());
@@ -441,66 +434,4 @@ public class DockerInspectorTest {
         assertFalse(outputContainerFileSystemFile.exists());
     }
 
-    private void deleteDirIfExists(final File workingDir) {
-        try {
-            FileUtils.deleteDirectory(workingDir);
-        } catch (final Exception e) {
-            System.out.println(String.format("Unable to delete %s", workingDir.getAbsolutePath()));
-        }
-    }
-
-    private static String execCmd(final File workingDir, final String cmd, final long timeout) throws IOException, InterruptedException, IntegrationException {
-        return execCmd(workingDir, cmd, timeout, null);
-    }
-
-    private static String execCmd(final String cmd, final long timeout) throws IOException, InterruptedException, IntegrationException {
-        return execCmd(null, cmd, timeout, null);
-    }
-
-    private static String execCmd(final File workingDir, final String cmd, final long timeout, final Map<String, String> givenEnv) throws IOException, InterruptedException, IntegrationException {
-        System.out.println(String.format("Executing: %s", cmd));
-        final ProcessBuilder pb = new ProcessBuilder("bash", "-c", cmd);
-        pb.redirectOutput(Redirect.PIPE);
-        pb.redirectError(Redirect.PIPE);
-        if (workingDir != null) {
-            pb.directory(workingDir);
-        }
-        final Map<String, String> processEnv = pb.environment();
-        final String oldPath = System.getenv("PATH");
-        final String newPath = String.format("/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:%s", oldPath);
-        System.out.println(String.format("Adjusted path: %s", newPath));
-        processEnv.put("PATH", newPath);
-        if (givenEnv != null) {
-            pb.environment().putAll(givenEnv);
-        }
-        final Process p = pb.start();
-        final String stdoutString = toString(p.getInputStream());
-        final String stderrString = toString(p.getErrorStream());
-        final boolean finished = p.waitFor(timeout, TimeUnit.SECONDS);
-        if (!finished) {
-            throw new InterruptedException(String.format("Command '%s' timed out", cmd));
-        }
-
-        System.out.println(String.format("%s: stdout: %s", cmd, stdoutString));
-        System.out.println(String.format("%s: stderr: %s", cmd, stderrString));
-        final int retCode = p.exitValue();
-        if (retCode != 0) {
-            System.out.println(String.format("%s: retCode: %d", cmd, retCode));
-            throw new IntegrationException(String.format("Command '%s' failed: %s", cmd, stderrString));
-        }
-        return stdoutString;
-    }
-
-    private static String toString(final InputStream is) throws IOException {
-        final BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-        final StringBuilder builder = new StringBuilder();
-        String line = null;
-        while ((line = reader.readLine()) != null) {
-            if (builder.length() > 0) {
-                builder.append("\n");
-            }
-            builder.append(line);
-        }
-        return builder.toString();
-    }
 }

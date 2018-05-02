@@ -45,8 +45,8 @@ public class ProgramPaths {
     private static final String JAR_FILE_SUFFIX = ".jar";
 
     private static final String FILE_URI_PREFIX = "file:";
-
-    private static final String RESULT_JSON_FILENAME = "result.json";
+    private static final String HOST_RESULT_JSON_FILENAME = "result.json";
+    private static final String CONTAINER_RESULT_JSON_FILENAME = "containerResult.json";
 
     private static final String OUTPUT_DIR = "output";
 
@@ -79,8 +79,9 @@ public class ProgramPaths {
     private String hubDockerWorkingDirPathContainer;
     private String hubDockerOutputPathHost;
     private String hubDockerOutputPathContainer;
-    private String hubDockerResultPathHost;
-    private String hubDockerResultPathContainer;
+    private String hubDockerContainerResultPathOnHost;
+    private String hubDockerContainerResultPathInContainer;
+    private String hubDockerHostResultPath;
     private String cleanedProcessId;
 
     private String getProgramDirPathHost() {
@@ -116,8 +117,9 @@ public class ProgramPaths {
         hubDockerWorkingDirPathContainer = hubDockerPgmDirPathContainer + WORKING_DIR + "/";
         hubDockerOutputPathHost = adjustWithProcessId(hubDockerPgmDirPathHost + OUTPUT_DIR) + "/";
         hubDockerOutputPathContainer = getProgramDirPathContainer() + OUTPUT_DIR + "/";
-        hubDockerResultPathHost = hubDockerOutputPathHost + RESULT_JSON_FILENAME;
-        hubDockerResultPathContainer = hubDockerOutputPathContainer + RESULT_JSON_FILENAME;
+        hubDockerContainerResultPathOnHost = hubDockerOutputPathHost + CONTAINER_RESULT_JSON_FILENAME;
+        hubDockerContainerResultPathInContainer = hubDockerOutputPathContainer + CONTAINER_RESULT_JSON_FILENAME;
+        hubDockerHostResultPath = hubDockerOutputPathHost + HOST_RESULT_JSON_FILENAME;
 
     }
 
@@ -128,7 +130,7 @@ public class ProgramPaths {
             return processId;
         } catch (final Throwable t) {
             logger.debug("Unable to get process ID from system");
-            final long currentMillisecond = (new Date()).getTime();
+            final long currentMillisecond = new Date().getTime();
             processId = Long.toString(currentMillisecond);
         }
         return processId;
@@ -245,20 +247,24 @@ public class ProgramPaths {
         return hubDockerOutputPathHost;
     }
 
-    public String getHubDockerResultPath() {
+    public String getHubDockerContainerResultPath() {
         if (config.isOnHost()) {
-            return getHubDockerResultPathHost();
+            return getHubDockerContainerResultPathOnHost();
         } else {
-            return getHubDockerResultPathContainer();
+            return getHubDockerContainerResultPathInContainer();
         }
     }
 
-    public String getHubDockerResultPathHost() {
-        return hubDockerResultPathHost;
+    public String getHubDockerContainerResultPathOnHost() {
+        return hubDockerContainerResultPathOnHost;
     }
 
-    public String getHubDockerResultPathContainer() {
-        return hubDockerResultPathContainer;
+    public String getHubDockerContainerResultPathInContainer() {
+        return hubDockerContainerResultPathInContainer;
+    }
+
+    public String getHubDockerHostResultPath() {
+        return hubDockerHostResultPath;
     }
 
     public String getHubDockerOutputPathContainer() {

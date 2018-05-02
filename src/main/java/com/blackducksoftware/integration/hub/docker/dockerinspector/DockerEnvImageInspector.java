@@ -140,7 +140,7 @@ public class DockerEnvImageInspector {
             logger.error(msg);
             final String trace = ExceptionUtils.getStackTrace(e);
             logger.debug(String.format("Stack trace: %s", trace));
-            resultFile.write(new Gson(), programPaths.getHubDockerResultPath(), false, msg, dissectedImage.getTargetOs(), dissectedImage.getRunOnImageName(), dissectedImage.getRunOnImageTag(),
+            resultFile.write(new Gson(), programPaths.getHubDockerHostResultPath(), false, msg, dissectedImage.getTargetOs(), dissectedImage.getRunOnImageName(), dissectedImage.getRunOnImageTag(),
                     dissectedImage.getDockerTarFile() == null ? "" : dissectedImage.getDockerTarFile().getName(), dissectedImage.getBdioFilename());
         }
         logger.info(String.format("Returning %d", returnCode));

@@ -15,7 +15,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
-import com.blackducksoftware.integration.hub.docker.imageinspector.TestUtils;
 
 @RunWith(SpringRunner.class)
 public class ProgramPathsTest {
