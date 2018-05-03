@@ -54,13 +54,20 @@ public class CalledFromDetectTest {
         detectOutputFile.setWritable(true);
         detectScriptFile.deleteOnExit();
 
-        // TODO neaten this up
-        final String detectWrapperScriptString = String.format(
-                "#\n%s\nenv\n%s --detect.docker.inspector.path=%s/build/hub-docker-inspector.sh --blackduck.hub.offline.mode=true --detect.docker.image=alpine:latest --detect.hub.signature.scanner.disabled=true --logging.level.com.blackducksoftware.integration=DEBUG --detect.docker.passthrough.cleanup.inspector.container=false --detect.cleanup=false > %s",
-                String.format("export DETECT_DOCKER_PASSTHROUGH_DOCKER_INSPECTOR_JAR_PATH=%s/build/libs/hub-docker-inspector-%s.jar", System.getProperty("user.dir"), programVersion.getProgramVersion()),
-                detectScriptFile.getAbsolutePath(),
-                System.getProperty("user.dir"),
-                detectOutputFile.getAbsolutePath());
+        final StringBuffer sb = new StringBuffer();
+        sb.append("#\n");
+        sb.append(String.format("export DETECT_DOCKER_PASSTHROUGH_DOCKER_INSPECTOR_JAR_PATH=%s/build/libs/hub-docker-inspector-%s.jar\n", System.getProperty("user.dir"), programVersion.getProgramVersion()));
+        sb.append(detectScriptFile.getAbsolutePath());
+        sb.append(String.format(" --detect.docker.inspector.path=%s/build/hub-docker-inspector.sh", System.getProperty("user.dir")));
+        sb.append(" --blackduck.hub.offline.mode=true");
+        sb.append(" --detect.docker.image=alpine:latest");
+        sb.append(" --detect.hub.signature.scanner.disabled=true");
+        sb.append(String.format(" --logging.level.com.blackducksoftware.integration=%s", "DEBUG"));
+        sb.append(String.format(" --detect.docker.passthrough.cleanup.inspector.container=%b", true));
+        sb.append(String.format(" --detect.cleanup=%b", false));
+        sb.append(String.format(" > %s", detectOutputFile.getAbsolutePath()));
+        sb.append("");
+        final String detectWrapperScriptString = sb.toString();
         System.out.printf("Detect wrapper script content:\n%s\n", detectWrapperScriptString);
         final File detectWrapperScriptFile = File.createTempFile("detectWrapper", ".sh");
         detectWrapperScriptFile.setExecutable(true);
