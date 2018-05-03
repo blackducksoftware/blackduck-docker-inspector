@@ -230,7 +230,7 @@ public class DockerClientManager {
         cmd.add(String.format("--spring.config.location=%s", "/opt/blackduck/hub-docker-inspector/config/application.properties"));
         cmd.add(String.format("--docker.tar=%s", tarFilePathInSubContainer));
         execCommandInContainer(dockerClient, imageNameTag, containerId, cmd);
-        copyFileFromContainer(containerId, programPaths.getHubDockerOutputPathContainer() + ".", programPaths.getHubDockerOutputPathHost());
+        copyFileFromContainer(dockerClient, containerId, programPaths.getHubDockerOutputPathContainer() + ".", programPaths.getHubDockerOutputPathHost());
         return containerId;
     }
 
@@ -299,6 +299,7 @@ public class DockerClientManager {
         copyFileToContainer(dockerClient, containerId, dockerTarFile.getAbsolutePath(), tarFileDirInSubContainer);
     }
 
+    // TODO : we should always spin up a new container now, right? This "is it running" check doesn't seem to work anyway
     private String ensureContainerRunning(final DockerClient dockerClient, final String imageId, final String extractorContainerName, final String hubPassword, final String hubApiToken) {
         String oldContainerId;
         final List<Container> containers = dockerClient.listContainersCmd().withShowAll(true).exec();
@@ -353,11 +354,32 @@ public class DockerClientManager {
     }
 
     // The docker api that does this corrupts the file, so we do it via a shell cmd
-    private void copyFileFromContainer(final String containerId, final String fromPath, final String toPath) throws IOException, InterruptedException, IntegrationException {
+    private void copyFileFromContainer(final DockerClient dockerClient, final String containerId, final String fromPath, String toPath) throws IOException, InterruptedException, IntegrationException {
+
+        // TEMP Experiemnt;;;;;;; trying disabling this:
+        toPath = String.format("/private%s", toPath);
+
         logger.debug(String.format("Copying %s from container to %s via shell command", fromPath, toPath));
         final File toDir = new File(toPath);
-        toDir.mkdirs();
+        final boolean dirCreated = toDir.mkdirs();
+        logger.debug(String.format("Output dir %s created: %b", toPath, dirCreated));
+
         executor.executeCommand(String.format("docker cp %s:%s %s", containerId, fromPath, toPath), config.getCommandTimeout());
+
+        // TODO TEMP TEST
+        final String[] lsOutput = executor.executeCommand(String.format("ls -lrt %s", toPath), config.getCommandTimeout());
+        logger.debug(String.format("******* lsOutput: %s: %s", toPath, String.join("\n", lsOutput)));
+
+        // TODO NONE of this worked:
+        // TODO trying api again
+        // logger.debug(String.format("Copying from container %s: %s -> %s via api", containerId, fromPath, toPath));
+        // final CopyArchiveFromContainerCmd copyFromCmd = dockerClient.copyArchiveFromContainerCmd(containerId, fromPath);
+        // copyFromCmd.withHostPath(toPath);
+        // copyFromCmd.exec();
+
+        // TODO TEMP TEST
+        // lsOutput = executor.executeCommand(String.format("ls -lrt %s", toPath), config.getCommandTimeout());
+        // logger.debug(String.format("******* lsOutput: %s: %s", toPath, String.join("\n", lsOutput)));
     }
 
     private void execCommandInContainer(final DockerClient dockerClient, final String imageId, final String containerId, final List<String> cmd) throws InterruptedException {
