@@ -1,5 +1,7 @@
 package com.blackducksoftware.integration.hub.docker.dockerinspector;
 
+import static org.junit.Assert.assertTrue;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -36,6 +38,10 @@ public class CalledFromDetectTest {
 
     @Test
     public void test() throws IOException, InterruptedException, IntegrationException {
+
+        final File resultsFile = new File(String.format("%s/blackduck/docker/result.json", System.getProperty("user.home")));
+        resultsFile.delete();
+
         final String cmdGetDetectScriptString = "curl -s https://blackducksoftware.github.io/hub-detect/hub-detect.sh";
         final String detectScriptString = executeCmd(cmdGetDetectScriptString);
         final File detectScriptFile = File.createTempFile("latestDetect", ".sh");
@@ -66,7 +72,11 @@ public class CalledFromDetectTest {
         final String detectOutputString = FileUtils.readFileToString(detectOutputFile, StandardCharsets.UTF_8);
         System.out.printf("Detect output: %s", detectOutputString);
 
-        // assertTrue(detectOutputString.contains("tbd"));
+        assertTrue(resultsFile.exists());
+        final String dockerInspectorResultsFileContents = FileUtils.readFileToString(resultsFile, StandardCharsets.UTF_8);
+        assertTrue(dockerInspectorResultsFileContents.contains("\"succeeded\": true"));
+        assertTrue(detectOutputString.contains("DOCKER: SUCCESS"));
+        assertTrue(detectOutputString.contains("Overall Status: SUCCESS"));
     }
 
     private String executeCmd(final String cmdString) throws IOException, InterruptedException {
