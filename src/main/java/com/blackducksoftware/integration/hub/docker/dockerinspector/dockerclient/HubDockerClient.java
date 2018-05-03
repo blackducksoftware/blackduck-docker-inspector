@@ -33,7 +33,7 @@ import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.DockerClientConfig;
 
 @Component
-class HubDockerClient {
+public class HubDockerClient {
 
     private DockerClient dockerClient;
 

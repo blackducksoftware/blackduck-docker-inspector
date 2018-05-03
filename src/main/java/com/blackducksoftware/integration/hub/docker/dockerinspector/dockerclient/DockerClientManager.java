@@ -24,11 +24,15 @@
 package com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
+import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -230,7 +234,7 @@ public class DockerClientManager {
         cmd.add(String.format("--spring.config.location=%s", "/opt/blackduck/hub-docker-inspector/config/application.properties"));
         cmd.add(String.format("--docker.tar=%s", tarFilePathInSubContainer));
         execCommandInContainer(dockerClient, imageNameTag, containerId, cmd);
-        copyFileFromContainer(dockerClient, containerId, programPaths.getHubDockerOutputPathContainer() + ".", programPaths.getHubDockerOutputPathHost());
+        copyDirContentsFromContainer(dockerClient, containerId, programPaths.getHubDockerOutputPathContainer() + ".", programPaths.getHubDockerOutputPathHost());
         return containerId;
     }
 
@@ -353,33 +357,29 @@ public class DockerClientManager {
         return extractorContainer;
     }
 
-    // The docker api that does this corrupts the file, so we do it via a shell cmd
-    private void copyFileFromContainer(final DockerClient dockerClient, final String containerId, final String fromPath, String toPath) throws IOException, InterruptedException, IntegrationException {
-
-        // TEMP Experiemnt;;;;;;; trying disabling this:
-        toPath = String.format("/private%s", toPath);
-
-        logger.debug(String.format("Copying %s from container to %s via shell command", fromPath, toPath));
-        final File toDir = new File(toPath);
+    private void copyDirContentsFromContainer(final DockerClient dockerClient, final String containerId, final String fromPath, final String toDirPath) throws IOException, InterruptedException, IntegrationException {
+        final File toDir = new File(toDirPath);
         final boolean dirCreated = toDir.mkdirs();
-        logger.debug(String.format("Output dir %s created: %b", toPath, dirCreated));
-
-        executor.executeCommand(String.format("docker cp %s:%s %s", containerId, fromPath, toPath), config.getCommandTimeout());
-
-        // TODO TEMP TEST
-        final String[] lsOutput = executor.executeCommand(String.format("ls -lrt %s", toPath), config.getCommandTimeout());
-        logger.debug(String.format("******* lsOutput: %s: %s", toPath, String.join("\n", lsOutput)));
-
-        // TODO NONE of this worked:
-        // TODO trying api again
-        // logger.debug(String.format("Copying from container %s: %s -> %s via api", containerId, fromPath, toPath));
-        // final CopyArchiveFromContainerCmd copyFromCmd = dockerClient.copyArchiveFromContainerCmd(containerId, fromPath);
-        // copyFromCmd.withHostPath(toPath);
-        // copyFromCmd.exec();
-
-        // TODO TEMP TEST
-        // lsOutput = executor.executeCommand(String.format("ls -lrt %s", toPath), config.getCommandTimeout());
-        // logger.debug(String.format("******* lsOutput: %s: %s", toPath, String.join("\n", lsOutput)));
+        logger.debug(String.format("Output dir %s created: %b", toDirPath, dirCreated));
+        final InputStream copyResponse = dockerClient.copyArchiveFromContainerCmd(containerId, fromPath).exec();
+        try (TarArchiveInputStream tarInputStream = new TarArchiveInputStream(copyResponse)) {
+            TarArchiveEntry nextTarEntry = tarInputStream.getNextTarEntry();
+            while (nextTarEntry != null) {
+                final String entryName = nextTarEntry.getName();
+                logger.debug(String.format("Entry: %s", entryName));
+                final int indexFirstSeparator = entryName.indexOf('/');
+                if (indexFirstSeparator >= 0 && indexFirstSeparator + 1 < entryName.length()) {
+                    final String targetFilename = entryName.substring(indexFirstSeparator + 1);
+                    logger.debug(String.format("\tTarget filename: %s", targetFilename));
+                    final File destFile = new File(toDir, targetFilename);
+                    logger.debug(String.format("\tdestFile: %s", destFile.getAbsolutePath()));
+                    try (final OutputStream out = new FileOutputStream(destFile)) {
+                        IOUtils.copy(tarInputStream, out);
+                    }
+                }
+                nextTarEntry = tarInputStream.getNextTarEntry();
+            }
+        }
     }
 
     private void execCommandInContainer(final DockerClient dockerClient, final String imageId, final String containerId, final List<String> cmd) throws InterruptedException {
