@@ -2,10 +2,8 @@ package com.blackducksoftware.integration.hub.docker.dockerinspector;
 
 import static org.junit.Assert.assertTrue;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.FileUtils;
@@ -22,6 +20,9 @@ import com.google.common.io.Files;
 public class CalledFromDetectTest {
     private static ProgramVersion programVersion;
     private static File executionDir;
+
+    private static long ONE_MINUTE_IN_MS = 1L * 60L * 1000L;
+    private static long FIVE_MINUTES_IN_MS = 5L * 60L * 1000L;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
@@ -46,7 +47,7 @@ public class CalledFromDetectTest {
         resultsFile.delete();
 
         final String cmdGetDetectScriptString = "curl -s https://blackducksoftware.github.io/hub-detect/hub-detect.sh";
-        final String detectScriptString = executeCmd(cmdGetDetectScriptString);
+        final String detectScriptString = TestUtils.execCmd(executionDir, cmdGetDetectScriptString, ONE_MINUTE_IN_MS);
         final File detectScriptFile = File.createTempFile("latestDetect", ".sh");
         detectScriptFile.setExecutable(true);
         detectScriptFile.deleteOnExit();
@@ -77,7 +78,7 @@ public class CalledFromDetectTest {
         detectScriptFile.deleteOnExit();
         System.out.printf("script file: %s\n", detectWrapperScriptFile.getAbsolutePath());
         FileUtils.write(detectWrapperScriptFile, detectWrapperScriptString, StandardCharsets.UTF_8);
-        final String wrapperScriptOutput = executeCmd(detectWrapperScriptFile.getAbsolutePath());
+        final String wrapperScriptOutput = TestUtils.execCmd(executionDir, detectWrapperScriptFile.getAbsolutePath(), FIVE_MINUTES_IN_MS);
         System.out.printf("Wrapper script output:\n%s\n", wrapperScriptOutput);
         final String detectOutputString = FileUtils.readFileToString(detectOutputFile, StandardCharsets.UTF_8);
         System.out.printf("Detect output: %s", detectOutputString);
@@ -87,37 +88,5 @@ public class CalledFromDetectTest {
         assertTrue(dockerInspectorResultsFileContents.contains("\"succeeded\": true"));
         assertTrue(detectOutputString.contains("DOCKER: SUCCESS"));
         assertTrue(detectOutputString.contains("Overall Status: SUCCESS"));
-    }
-
-    private String executeCmd(final String cmdString) throws IOException, InterruptedException {
-        System.out.printf("Executing: %s\n", cmdString);
-        final Process p = Runtime.getRuntime()
-                .exec(cmdString, null, executionDir);
-
-        final BufferedReader stdoutReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-        final BufferedReader stderrReader = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-        print("stderr", stderrReader);
-        final String stdout = getString(stdoutReader);
-        final int returnValue = p.waitFor();
-        System.out.printf("Return value: %d\n", returnValue);
-        return stdout;
-    }
-
-    private void print(final String tag, final BufferedReader stdoutReader) throws IOException {
-        final BufferedReader reader = stdoutReader;
-        String line = null;
-        while ((line = reader.readLine()) != null) {
-            System.out.printf("%s: %s\n", tag, line);
-        }
-    }
-
-    private String getString(final BufferedReader stdoutReader) throws IOException {
-        final BufferedReader reader = stdoutReader;
-        String line = null;
-        final StringBuffer sb = new StringBuffer();
-        while ((line = reader.readLine()) != null) {
-            sb.append(line + "\n");
-        }
-        return sb.toString();
     }
 }
