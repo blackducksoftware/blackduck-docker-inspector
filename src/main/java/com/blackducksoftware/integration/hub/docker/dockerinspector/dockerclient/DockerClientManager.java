@@ -303,7 +303,6 @@ public class DockerClientManager {
         copyFileToContainer(dockerClient, containerId, dockerTarFile.getAbsolutePath(), tarFileDirInSubContainer);
     }
 
-    // TODO : we should always spin up a new container now, right? This "is it running" check doesn't seem to work anyway
     private String ensureContainerRunning(final DockerClient dockerClient, final String imageId, final String extractorContainerName, final String hubPassword, final String hubApiToken) {
         String oldContainerId;
         final List<Container> containers = dockerClient.listContainersCmd().withShowAll(true).exec();
