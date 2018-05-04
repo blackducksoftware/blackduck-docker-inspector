@@ -362,8 +362,8 @@ public class DockerClientManager {
         logger.debug(String.format("Output dir %s created: %b", toDirPath, dirCreated));
         final InputStream copyResponse = dockerClient.copyArchiveFromContainerCmd(containerId, fromPath).exec();
         try (TarArchiveInputStream tarInputStream = new TarArchiveInputStream(copyResponse)) {
-            TarArchiveEntry nextTarEntry = tarInputStream.getNextTarEntry();
-            while (nextTarEntry != null) {
+            TarArchiveEntry nextTarEntry;
+            while ((nextTarEntry = tarInputStream.getNextTarEntry()) != null) {
                 final String entryName = nextTarEntry.getName();
                 logger.debug(String.format("Entry: %s", entryName));
                 final int indexFirstSeparator = entryName.indexOf('/');
@@ -376,7 +376,6 @@ public class DockerClientManager {
                         IOUtils.copy(tarInputStream, out);
                     }
                 }
-                nextTarEntry = tarInputStream.getNextTarEntry();
             }
         }
     }

@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -33,11 +32,6 @@ public class CalledFromDetectTest {
         final File fakeDockerExe = new File(executionDir, "docker");
         fakeDockerExe.createNewFile();
         fakeDockerExe.setExecutable(true, false);
-    }
-
-    @AfterClass
-    public static void tearDownAfterClass() {
-
     }
 
     @Test
