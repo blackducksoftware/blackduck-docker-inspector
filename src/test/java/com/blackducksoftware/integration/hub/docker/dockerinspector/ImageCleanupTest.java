@@ -26,6 +26,7 @@ public class ImageCleanupTest {
     private static final String PROJECT_NAME = "Pro Ject";
     private static final String PROJECT_VERSION = "Ver Sion";
     private static final String TARGET_IMAGE_NAME = "alpine";
+    private static final String INSPECTOR_IMAGE_SUFFIX = "alpine";
     private static final String TARGET_IMAGE_TAG = "latest";
 
     @BeforeClass
@@ -53,11 +54,29 @@ public class ImageCleanupTest {
 
         final ProgramVersion pgmVerObj = new ProgramVersion();
         pgmVerObj.init();
+
+        // IFF inspector image is absent or can be removed: expect it to be gone at end
+        boolean expectInspectOnImageRemoved = true;
+        final String inspectOnImageRepoName = String.format("blackducksoftware/%s-%s", pgmVerObj.getInspectorImageFamily(), INSPECTOR_IMAGE_SUFFIX);
+        final String inspectOnImageTag = pgmVerObj.getInspectorImageVersion();
+        List<String> dockerImageList = getDockerImageList();
+        if (isImagePresent(dockerImageList, inspectOnImageRepoName, inspectOnImageTag)) {
+            final String runOnImageRepoAndTag = String.format("%s:%s", inspectOnImageRepoName, inspectOnImageTag);
+            System.out.printf("RunOn image %s exists locally; will try to remove it\n", runOnImageRepoAndTag);
+            final List<String> dockerRmiCmd = Arrays.asList("bash", "-c", String.format("docker rmi %s", runOnImageRepoAndTag));
+            final String log = runCommand(dockerRmiCmd, false);
+            System.out.println(log);
+            dockerImageList = getDockerImageList();
+            if (isImagePresent(dockerImageList, inspectOnImageRepoName, inspectOnImageTag)) {
+                System.out.printf("InspectOn Image %s already exists and can't be removed, so won't expect DI to remove it when finished\n", runOnImageRepoAndTag);
+                expectInspectOnImageRemoved = false;
+            }
+        }
+
         final String programVersion = pgmVerObj.getProgramVersion();
         final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--upload.bdio=false", String.format("--hub.username=\"%s\"", USERNAME), String.format("--hub.project.name=\"%s\"", PROJECT_NAME),
                 String.format("--hub.project.version=\"%s\"", PROJECT_VERSION), String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", programVersion), "--output.path=test/output", "--output.include.dockertarfile=true",
                 "--output.include.containerfilesystem=true", "--hub.always.trust.cert=true", "--include.target.image=true", "--include.inspector.image=true");
-        // Arrays.asList returns a fixed size list; need a variable sized list
         final List<String> fullCmd = new ArrayList<>();
         fullCmd.addAll(partialCmd);
         fullCmd.add("--logging.level.com.blackducksoftware=DEBUG");
@@ -67,29 +86,11 @@ public class ImageCleanupTest {
         fullCmd.add(String.format("--docker.image=%s", TARGET_IMAGE_NAME, TARGET_IMAGE_TAG));
         final String log = runCommand(fullCmd, true);
         System.out.println(log);
-
-        // See what image was used
-        List<String> grepCmd = new ArrayList<>();
-        grepCmd.add("fgrep");
-        grepCmd.add("inspectOnImageName");
-        grepCmd.add("test/output/result.json");
-        final String inspectOnImageNameJsonLine = runCommand(grepCmd, true);
-        final String[] inspectOnImageNameJsonLineParts = inspectOnImageNameJsonLine.split("\"");
-        final String inspectOnImageName = inspectOnImageNameJsonLineParts[3];
-        System.out.println(String.format("inspectOnImageName: %s", inspectOnImageName));
-
-        grepCmd = new ArrayList<>();
-        grepCmd.add("fgrep");
-        grepCmd.add("inspectOnImageTag");
-        grepCmd.add("test/output/result.json");
-        final String inspectOnImageTagJsonLine = runCommand(grepCmd, true);
-        final String[] inspectOnImageTagJsonLineParts = inspectOnImageTagJsonLine.split("\"");
-        final String inspectOnImageTag = inspectOnImageTagJsonLineParts[3];
-        System.out.println(String.format("inspectOnImageTag: %s", inspectOnImageTag));
         Thread.sleep(10000L); // give docker a few seconds
-        getDockerContainerList(); // TODO TEMP for troubleshooting jenkins job
-        final List<String> dockerImageList = getDockerImageList();
-        assertFalse(isImagePresent(dockerImageList, inspectOnImageName, inspectOnImageTag));
+        dockerImageList = getDockerImageList();
+        if (expectInspectOnImageRemoved) {
+            assertFalse(isImagePresent(dockerImageList, inspectOnImageRepoName, inspectOnImageTag));
+        }
         assertFalse(isImagePresent(dockerImageList, TARGET_IMAGE_NAME, TARGET_IMAGE_TAG));
     }
 
@@ -159,12 +160,15 @@ public class ImageCleanupTest {
     }
 
     private boolean isImagePresent(final List<String> dockerImageList, final String targetImageName, final String targetImageTag) {
+        System.out.printf("Checking docker image list for image %s:%s\n", targetImageName, targetImageTag);
         final String imageRegex = String.format("^%s +%s.*$", targetImageName, targetImageTag.replaceAll("\\.", "\\."));
         for (final String imageListLine : dockerImageList) {
             if (imageListLine.matches(imageRegex)) {
+                System.out.println("\tFound it");
                 return true;
             }
         }
+        System.out.println("\tDid not find it");
         return false;
     }
 }
