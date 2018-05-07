@@ -456,7 +456,8 @@ dependencies {
     compile 'com.blackducksoftware.integration:hub-common:30.0.2'
     compile 'com.blackducksoftware.integration:hub-imageinspector-lib:2.0.1'
     
-    compile 'com.github.docker-java:docker-java:3.0.14'
+    compile 'com.github.docker-java:docker-java:3.1.0-rc-2'
+
     compile 'org.apache.commons:commons-lang3:3.5'
     compile 'commons-io:commons-io:2.5'
     compile 'org.apache.commons:commons-collections4:4.1'
@@ -465,14 +466,4 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter'
     
     testCompile 'org.springframework.boot:spring-boot-starter-test'
-    
-    integrationTestCompile 'org.assertj:assertj-core:3.0.0'
-    integrationTestCompile sourceSets.main.output
-    integrationTestCompile sourceSets.test.output
-    
-    integrationTestCompile configurations.compile
-    integrationTestCompile configurations.testCompile
-    
-    integrationTestCompile configurations.runtime
-    integrationTestCompile configurations.testRuntime
 }
