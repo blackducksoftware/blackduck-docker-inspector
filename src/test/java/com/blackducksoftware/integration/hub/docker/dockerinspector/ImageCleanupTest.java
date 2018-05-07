@@ -87,6 +87,7 @@ public class ImageCleanupTest {
         final String inspectOnImageTag = inspectOnImageTagJsonLineParts[3];
         System.out.println(String.format("inspectOnImageTag: %s", inspectOnImageTag));
         Thread.sleep(10000L); // give docker a few seconds
+        getDockerContainerList(); // TODO TEMP for troubleshooting jenkins job
         final List<String> dockerImageList = getDockerImageList();
         assertFalse(isImagePresent(dockerImageList, inspectOnImageName, inspectOnImageTag));
         assertFalse(isImagePresent(dockerImageList, TARGET_IMAGE_NAME, TARGET_IMAGE_TAG));
@@ -118,9 +119,25 @@ public class ImageCleanupTest {
         dockerImagesCmd.add("bash");
         dockerImagesCmd.add("-c");
         dockerImagesCmd.add("docker images");
+        final String description = "dockerImages";
 
+        return getCmdOutputLines(dockerImagesCmd, description);
+    }
+
+    private List<String> getDockerContainerList() throws IOException, InterruptedException {
+        final List<String> dockerImagesCmd = new ArrayList<>();
+        dockerImagesCmd.add("bash");
+        dockerImagesCmd.add("-c");
+        dockerImagesCmd.add("docker ps -a");
+        final String description = "dockerContainers";
+
+        return getCmdOutputLines(dockerImagesCmd, description);
+    }
+
+    private List<String> getCmdOutputLines(final List<String> dockerImagesCmd, final String description) throws IOException, InterruptedException {
+        final String outputFilename = String.format("test/imageCleanup_%sOutput.txt", description);
         System.out.println(String.format("Running command %s", dockerImagesCmd.toString()));
-        final File dockerImagesoutputFile = new File("test/imageCleanup_dockerImagesOutput.txt");
+        final File dockerImagesoutputFile = new File(outputFilename);
         dockerImagesoutputFile.delete();
         final ProcessBuilder pb = new ProcessBuilder(dockerImagesCmd);
         final Map<String, String> env = pb.environment();
@@ -128,14 +145,12 @@ public class ImageCleanupTest {
 
         final String newPath = String.format("/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:%s", oldPath);
         env.put("PATH", newPath);
-        final File outputFile = new File("test/imageCleanup_dockerImagesOutput.txt");
-        outputFile.delete();
         pb.redirectErrorStream(true);
         pb.redirectOutput(dockerImagesoutputFile);
         final Process p = pb.start();
         final int retCode = p.waitFor();
         final String dockerImagesCommandOutput = FileUtils.readFileToString(dockerImagesoutputFile, StandardCharsets.UTF_8);
-        System.out.println(dockerImagesCommandOutput);
+        System.out.printf("%s: %s\n", description, dockerImagesCommandOutput);
         assertEquals(0, retCode);
 
         final String[] linesArray = dockerImagesCommandOutput.split("\\r?\\n");
