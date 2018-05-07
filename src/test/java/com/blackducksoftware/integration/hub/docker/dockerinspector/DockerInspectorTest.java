@@ -141,20 +141,49 @@ public class DockerInspectorTest {
 
     @AfterClass
     public static void tearDownAfterClass() throws Exception {
-        stopContainer("alpine");
-        stopContainer("centos");
-        stopContainer("ubuntu");
+        stopRemoveContainer("alpine");
+        stopRemoveContainer("centos");
+        stopRemoveContainer("ubuntu");
+        Thread.sleep(10000L);
+        ensureContainerRemoved("alpine");
+        ensureContainerRemoved("centos");
+        ensureContainerRemoved("ubuntu");
     }
 
-    private static void stopContainer(final String imageInspectorPlatform) {
+    private static void stopRemoveContainer(final String imageInspectorPlatform) {
         final String containerName = getContainerName(imageInspectorPlatform);
         try {
             TestUtils.execCmd(String.format("docker stop %s", containerName), 120000L);
         } catch (final Exception e) {
+            System.out.printf("Error stopping container %s: %s\n", containerName, e.getMessage());
         }
         try {
             TestUtils.execCmd(String.format("docker rm %s", containerName), 120000L);
         } catch (final Exception e) {
+            System.out.printf("Error removing container %s: %s\n", containerName, e.getMessage());
+        }
+    }
+
+    private static void ensureContainerRemoved(final String imageInspectorPlatform) {
+        final String containerName = getContainerName(imageInspectorPlatform);
+        String dockerPsResponse;
+        boolean containerStillExists = true;
+        for (int tryCount = 0; tryCount < 20; tryCount++) {
+            System.out.printf("Checking to see if container %s was removed\n", containerName);
+            try {
+                dockerPsResponse = TestUtils.execCmd("docker ps -a", 120000L);
+                if (!dockerPsResponse.contains(containerName)) {
+                    containerStillExists = false;
+                    System.out.printf("Container %s was removed\n", containerName);
+                    break;
+                }
+                Thread.sleep(5000L);
+            } catch (final Exception e) {
+                System.out.printf("Error stopping container %s: %s\n", containerName, e.getMessage());
+            }
+        }
+        if (containerStillExists) {
+            System.out.printf("ERROR: Failed to remove container %s\n", containerName);
         }
     }
 
