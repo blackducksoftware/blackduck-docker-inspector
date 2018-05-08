@@ -24,15 +24,11 @@
 package com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
-import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -46,7 +42,6 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Confi
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient.HubSecrets;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
-import com.blackducksoftware.integration.hub.imageinspector.linux.executor.Executor;
 import com.blackducksoftware.integration.hub.imageinspector.name.ImageNameResolver;
 import com.blackducksoftware.integration.hub.imageinspector.name.Names;
 import com.github.dockerjava.api.DockerClient;
@@ -63,6 +58,7 @@ import com.github.dockerjava.api.command.RemoveImageCmd;
 import com.github.dockerjava.api.command.SaveImageCmd;
 import com.github.dockerjava.api.command.StopContainerCmd;
 import com.github.dockerjava.api.exception.NotFoundException;
+import com.github.dockerjava.api.model.Bind;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.Image;
 import com.github.dockerjava.api.model.Info;
@@ -92,9 +88,6 @@ public class DockerClientManager {
 
     @Autowired
     private HubSecrets hubSecrets;
-
-    @Autowired
-    private Executor executor;
 
     @Autowired
     private ProgramPaths programPaths;
@@ -234,7 +227,7 @@ public class DockerClientManager {
         cmd.add(String.format("--spring.config.location=%s", "/opt/blackduck/hub-docker-inspector/config/application.properties"));
         cmd.add(String.format("--docker.tar=%s", tarFilePathInSubContainer));
         execCommandInContainer(dockerClient, imageNameTag, containerId, cmd);
-        copyDirContentsFromContainer(dockerClient, containerId, programPaths.getHubDockerOutputPathContainer() + ".", programPaths.getHubDockerOutputPathHost());
+        logger.debug(String.format("Container's output files are in %s because it was mounted under the container's output dir", programPaths.getHubDockerOutputPathHost()));
         return containerId;
     }
 
@@ -318,14 +311,13 @@ public class DockerClientManager {
             dockerClient.removeContainerCmd(oldContainerId).exec();
         }
         logger.debug(String.format("Creating container %s from image %s", extractorContainerName, imageId));
-        final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageId).withStdinOpen(true).withTty(true).withName(extractorContainerName).withCmd("/bin/bash");
+        final Bind bind = createBindMount(programPaths.getHubDockerOutputPathHost(), programPaths.getHubDockerOutputPathContainer());
+        final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageId).withStdinOpen(true).withTty(true).withName(extractorContainerName).withBinds(bind).withCmd("/bin/bash");
         final List<String> envAssignments = new ArrayList<>();
         envAssignments.add(String.format("BD_HUB_PASSWORD=%s", hubPassword));
         envAssignments.add(String.format("BD_HUB_TOKEN=%s", hubApiToken));
         if (StringUtils.isBlank(config.getHubProxyHost()) && !StringUtils.isBlank(config.getScanCliOptsEnvVar())) {
             envAssignments.add(String.format("SCAN_CLI_OPTS=%s", config.getScanCliOptsEnvVar()));
-        } else {
-
         }
         createContainerCmd.withEnv(envAssignments);
         final CreateContainerResponse containerResponse = createContainerCmd.exec();
@@ -335,6 +327,13 @@ public class DockerClientManager {
         logger.info(String.format("Started container %s from image %s", containerId, imageId));
 
         return containerId;
+    }
+
+    private Bind createBindMount(final String pathOnHost, final String pathOnContainer) {
+        logger.debug(String.format("Mounting host:%s to container:%s", pathOnHost, pathOnContainer));
+        final File hostOutputDir = new File(pathOnHost);
+        final Bind bind = Bind.parse(String.format("%s:%s:rw", hostOutputDir.getAbsolutePath(), pathOnContainer));
+        return bind;
     }
 
     private Container getRunningContainer(final List<Container> containers, final String extractorContainerName) {
@@ -354,30 +353,6 @@ public class DockerClientManager {
             }
         }
         return extractorContainer;
-    }
-
-    private void copyDirContentsFromContainer(final DockerClient dockerClient, final String containerId, final String fromPath, final String toDirPath) throws IOException, InterruptedException, IntegrationException {
-        final File toDir = new File(toDirPath);
-        final boolean dirCreated = toDir.mkdirs();
-        logger.debug(String.format("Output dir %s created: %b", toDirPath, dirCreated));
-        final InputStream copyResponse = dockerClient.copyArchiveFromContainerCmd(containerId, fromPath).exec();
-        try (TarArchiveInputStream tarInputStream = new TarArchiveInputStream(copyResponse)) {
-            TarArchiveEntry nextTarEntry;
-            while ((nextTarEntry = tarInputStream.getNextTarEntry()) != null) {
-                final String entryName = nextTarEntry.getName();
-                logger.debug(String.format("Entry: %s", entryName));
-                final int indexFirstSeparator = entryName.indexOf('/');
-                if (indexFirstSeparator >= 0 && indexFirstSeparator + 1 < entryName.length()) {
-                    final String targetFilename = entryName.substring(indexFirstSeparator + 1);
-                    logger.debug(String.format("\tTarget filename: %s", targetFilename));
-                    final File destFile = new File(toDir, targetFilename);
-                    logger.debug(String.format("\tdestFile: %s", destFile.getAbsolutePath()));
-                    try (final OutputStream out = new FileOutputStream(destFile)) {
-                        IOUtils.copy(tarInputStream, out);
-                    }
-                }
-            }
-        }
     }
 
     private void execCommandInContainer(final DockerClient dockerClient, final String imageId, final String containerId, final List<String> cmd) throws InterruptedException {

@@ -108,6 +108,7 @@ public class ImageCleanupTest {
         final Process p = pb.start();
         final int retCode = p.waitFor();
         final String log = FileUtils.readFileToString(outputFile, StandardCharsets.UTF_8);
+        System.out.println(log);
         if (assertPasses) {
             assertEquals(0, retCode);
         }
