@@ -28,9 +28,9 @@ public class DockerInspectorTest {
     private static int IMAGE_INSPECTOR_PORT_IN_CONTAINER_CENTOS = 8081;
     private static int IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU = 8082;
     private static int IMAGE_INSPECTOR_PORT_IN_CONTAINER_UBUNTU = 8082;
-    private static String CONTAINER_SHARED_DIR_PATH = "/opt/blackduck/shared";
+    private static String SHARED_DIR_PATH_IN_CONTAINER = "/opt/blackduck/shared";
 
-    private static File containerSharedDir;
+    private static File dirSharedWithContainer;
     private static File containerTargetDir;
     private static File containerOutputDir;
 
@@ -67,48 +67,39 @@ public class DockerInspectorTest {
 
         System.out.printf("Creating directories: test, test/containerShared, test/containerShared/target, test/containerShared/output\n");
         final File testDir = new File("test");
+        dirSharedWithContainer = new File("test/containerShared");
+        containerTargetDir = new File(dirSharedWithContainer, "target");
+        containerOutputDir = new File(dirSharedWithContainer, "output");
+
+        createWriteableDirTolerantly(testDir);
+        createWriteableDirTolerantly(dirSharedWithContainer);
+        createWriteableDirTolerantly(containerTargetDir);
+        createWriteableDirTolerantly(containerOutputDir);
+    }
+
+    private static void createWriteableDirTolerantly(final File dir) {
+        createDirTolerantly(dir);
+        setWriteExecutePermissionsTolerantly(dir);
+    }
+
+    private static void createDirTolerantly(final File dir) {
         try {
-            testDir.mkdir();
+            dir.mkdirs();
         } catch (final Exception e) {
-            System.out.printf("Error creating directory: test: %s\n", e.getMessage());
+            System.out.printf("Error creating directory %s: %s\n", dir.getAbsoluteFile(), e.getMessage());
+        }
+    }
+
+    private static void setWriteExecutePermissionsTolerantly(final File file) {
+        try {
+            file.setWritable(true, false);
+        } catch (final Exception e) {
+            System.out.printf("Error making directory %s writeable: %s\n", file.getAbsolutePath(), e.getMessage());
         }
         try {
-            testDir.setWritable(true, false);
+            file.setExecutable(true, false);
         } catch (final Exception e) {
-            System.out.printf("Error making directory writeable: test: %s\n", e.getMessage());
-        }
-        containerSharedDir = new File("test/containerShared");
-        containerTargetDir = new File(containerSharedDir, "target");
-        containerOutputDir = new File(containerSharedDir, "output");
-        try {
-            containerSharedDir.mkdir();
-        } catch (final Exception e) {
-            System.out.printf("Error creating directory: %s: %s\n", containerSharedDir.getAbsolutePath(), e.getMessage());
-        }
-        try {
-            containerSharedDir.setWritable(true, false);
-        } catch (final Exception e) {
-            System.out.printf("Error making directory writeable: %s: %s\n", containerSharedDir.getAbsolutePath(), e.getMessage());
-        }
-        try {
-            containerTargetDir.mkdir();
-        } catch (final Exception e) {
-            System.out.printf("Error creating directory: %s: %s\n", containerTargetDir.getAbsolutePath(), e.getMessage());
-        }
-        try {
-            containerTargetDir.setWritable(true, false);
-        } catch (final Exception e) {
-            System.out.printf("Error making directory writeable: %s: %s\n", containerTargetDir.getAbsolutePath(), e.getMessage());
-        }
-        try {
-            containerOutputDir.mkdir();
-        } catch (final Exception e) {
-            System.out.printf("Error creating directory: %s: %s\n", containerOutputDir.getAbsolutePath(), e.getMessage());
-        }
-        try {
-            containerOutputDir.setWritable(true, false);
-        } catch (final Exception e) {
-            System.out.printf("Error making directory writeable: %s: %s\n", containerOutputDir.getAbsolutePath(), e.getMessage());
+            System.out.printf("Error making directory %s writeable: %s\n", file.getAbsolutePath(), e.getMessage());
         }
     }
 
@@ -130,7 +121,7 @@ public class DockerInspectorTest {
         final String cmd = String.format("docker run -d -t --name %s -p %d:%d -v \"$(pwd)\"/test/containerShared:%s blackducksoftware/%s-%s:%s",
                 containerName, portOnHost,
                 portInContainer,
-                CONTAINER_SHARED_DIR_PATH,
+                SHARED_DIR_PATH_IN_CONTAINER,
                 programVersion.getInspectorImageFamily(), imageInspectorPlatform, programVersion.getInspectorImageVersion());
         TestUtils.execCmd(cmd, 120000L);
     }
@@ -309,8 +300,8 @@ public class DockerInspectorTest {
         targetTar.setReadable(true, false);
         final List<String> additionalArgs = new ArrayList<>();
         additionalArgs.add(String.format("--imageinspector.url=http://localhost:%d", portOnHost));
-        additionalArgs.add(String.format("--shared.dir.path.local=%s", containerSharedDir.getAbsolutePath()));
-        additionalArgs.add(String.format("--shared.dir.path.imageinspector=%s", CONTAINER_SHARED_DIR_PATH));
+        additionalArgs.add(String.format("--shared.dir.path.local=%s", dirSharedWithContainer.getAbsolutePath()));
+        additionalArgs.add(String.format("--shared.dir.path.imageinspector=%s", SHARED_DIR_PATH_IN_CONTAINER));
         final File outputContainerFileSystemFile = new File(String.format("test/output/%s_containerfilesystem.tar.gz", tarFileBaseName));
         testTar(targetTar.getAbsolutePath(), targetRepo, null, null, targetTag, targetPkgMgrLib, true, additionalArgs, false, outputContainerFileSystemFile);
     }
