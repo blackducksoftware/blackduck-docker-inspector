@@ -76,6 +76,15 @@ public class Output {
         }
     }
 
+    public void ensureWriteability(final Config config) {
+        if (config.isOnHost()) {
+            final File outputDir = new File(programPaths.getHubDockerOutputPathHost());
+            final boolean dirCreated = outputDir.mkdirs();
+            final boolean dirMadeWriteable = outputDir.setWritable(true, false);
+            logger.debug(String.format("Output dir: %s; created: %b; successfully made writeable: %b", outputDir.getAbsolutePath(), dirCreated, dirMadeWriteable));
+        }
+    }
+
     public void writeBdioFile(final DissectedImage dissectedImage, final ImageInfoDerived imageInfoDerived) throws FileNotFoundException, IOException {
         final File bdioFile = imageInspector.writeBdioFile(new File(programPaths.getHubDockerOutputPath()), imageInfoDerived);
         logger.info(String.format("BDIO File generated: %s", bdioFile.getAbsolutePath()));

@@ -86,6 +86,7 @@ public class DockerExecInspector implements Inspector {
     @Override
     public int getBdio(final DissectedImage dissectedImage) throws IntegrationException {
         try {
+            output.ensureWriteability(config);
             parseManifest(config, dissectedImage);
             checkForGivenTargetOs(config, dissectedImage);
             constructContainerFileSystem(config, dissectedImage);
