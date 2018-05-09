@@ -7,9 +7,11 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.attribute.PosixFilePermission;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
@@ -65,7 +67,6 @@ public class DockerInspectorTest {
         }
         assertTrue(alpineUp && centosUp && ubuntuUp);
 
-        System.out.printf("Creating directories: test, test/containerShared, test/containerShared/target, test/containerShared/output\n");
         final File testDir = new File("test");
         dirSharedWithContainer = new File("test/containerShared");
         containerTargetDir = new File(dirSharedWithContainer, "target");
@@ -78,8 +79,20 @@ public class DockerInspectorTest {
     }
 
     private static void createWriteableDirTolerantly(final File dir) {
+        System.out.printf("Creating and setting a+wx permission on: %s\n", dir.getAbsolutePath());
         createDirTolerantly(dir);
         setWriteExecutePermissionsTolerantly(dir);
+        logPermissions(dir);
+    }
+
+    private static void logPermissions(final File dir) {
+        Set<PosixFilePermission> perms = null;
+        try {
+            perms = Files.getPosixFilePermissions(dir.toPath());
+            System.out.printf("* Dir %s now has perms: %s\n", dir.getAbsolutePath(), perms.toString());
+        } catch (final IOException e) {
+            System.out.printf("Unable to read back perms for dir %s: %s\n", dir.getAbsolutePath(), e.getMessage());
+        }
     }
 
     private static void createDirTolerantly(final File dir) {
