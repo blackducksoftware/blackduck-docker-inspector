@@ -101,6 +101,9 @@ public class DockerInspectorTest {
         } catch (final Exception e) {
             System.out.printf("Error creating directory %s: %s\n", dir.getAbsoluteFile(), e.getMessage());
         }
+        if (!dir.exists()) {
+            System.out.printf("ERROR: Attempted to create directory %s, but it still does not exist\n", dir.getAbsoluteFile());
+        }
     }
 
     private static void setWriteExecutePermissionsTolerantly(final File file) {
