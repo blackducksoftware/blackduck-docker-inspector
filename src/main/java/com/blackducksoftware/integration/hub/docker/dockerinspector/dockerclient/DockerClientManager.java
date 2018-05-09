@@ -331,11 +331,8 @@ public class DockerClientManager {
 
     private Bind createBindMount(final String pathOnHost, final String pathOnContainer) {
         logger.debug(String.format("Mounting host:%s to container:%s", pathOnHost, pathOnContainer));
-        ///////////// TODO this is done in DockerExecInspector, so should not be necessary here
         final File hostOutputDir = new File(pathOnHost);
-        hostOutputDir.setWritable(true, false);
-        /////////////////////////
-        final Bind bind = Bind.parse(String.format("%s:%s:rw", hostOutputDir.getAbsolutePath(), pathOnContainer));
+        final Bind bind = Bind.parse(String.format("%s:%s:rwx", hostOutputDir.getAbsolutePath(), pathOnContainer));
         return bind;
     }
 

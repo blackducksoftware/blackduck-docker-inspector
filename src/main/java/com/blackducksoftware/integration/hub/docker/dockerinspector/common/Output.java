@@ -80,8 +80,11 @@ public class Output {
         if (config.isOnHost()) {
             final File outputDir = new File(programPaths.getHubDockerOutputPathHost());
             final boolean dirCreated = outputDir.mkdirs();
+            //// TODO write and execute permission may not be needed, since its mounted for container as rwx
             final boolean dirMadeWriteable = outputDir.setWritable(true, false);
-            logger.debug(String.format("Output dir: %s; created: %b; successfully made writeable: %b", outputDir.getAbsolutePath(), dirCreated, dirMadeWriteable));
+            final boolean dirMadeExecutable = outputDir.setExecutable(true, false);
+            //////////////
+            logger.debug(String.format("Output dir: %s; created: %b; successfully made writeable: %b; make executable: %b", outputDir.getAbsolutePath(), dirCreated, dirMadeWriteable, dirMadeExecutable));
         }
     }
 
