@@ -67,8 +67,8 @@ public class DockerInspectorTest {
         }
         assertTrue(alpineUp && centosUp && ubuntuUp);
 
-        final File testDir = new File("test");
-        dirSharedWithContainer = new File("test/containerShared");
+        final File testDir = new File(TestUtils.TEST_DIR_REL_PATH);
+        dirSharedWithContainer = new File(testDir, "containerShared");
         containerTargetDir = new File(dirSharedWithContainer, "target");
         containerOutputDir = new File(dirSharedWithContainer, "output");
 
@@ -134,9 +134,10 @@ public class DockerInspectorTest {
 
     private static void startContainer(final String imageInspectorPlatform, final int portOnHost, final int portInContainer) throws IOException, InterruptedException, IntegrationException {
         final String containerName = getContainerName(imageInspectorPlatform);
-        final String cmd = String.format("docker run -d -t --name %s -p %d:%d -v \"$(pwd)\"/test/containerShared:%s blackducksoftware/%s-%s:%s",
+        final String cmd = String.format("docker run -d -t --name %s -p %d:%d -v \"$(pwd)\"/%s/containerShared:%s blackducksoftware/%s-%s:%s",
                 containerName, portOnHost,
                 portInContainer,
+                TestUtils.TEST_DIR_REL_PATH,
                 SHARED_DIR_PATH_IN_CONTAINER,
                 programVersion.getInspectorImageFamily(), imageInspectorPlatform, programVersion.getInspectorImageVersion());
         TestUtils.execCmd(cmd, 120000L);
@@ -318,21 +319,21 @@ public class DockerInspectorTest {
         additionalArgs.add(String.format("--imageinspector.url=http://localhost:%d", portOnHost));
         additionalArgs.add(String.format("--shared.dir.path.local=%s", dirSharedWithContainer.getAbsolutePath()));
         additionalArgs.add(String.format("--shared.dir.path.imageinspector=%s", SHARED_DIR_PATH_IN_CONTAINER));
-        final File outputContainerFileSystemFile = new File(String.format("test/output/%s_containerfilesystem.tar.gz", tarFileBaseName));
+        final File outputContainerFileSystemFile = new File(String.format("%s/output/%s_containerfilesystem.tar.gz", TestUtils.TEST_DIR_REL_PATH, tarFileBaseName));
         testTar(targetTar.getAbsolutePath(), targetRepo, null, null, targetTag, targetPkgMgrLib, true, additionalArgs, false, outputContainerFileSystemFile);
     }
 
     @Test
     public void testPullJar() throws IOException, InterruptedException, IntegrationException {
-        final File workingDir = new File("test/pulljar");
+        final File workingDir = new File(String.format("%s/pulljar", TestUtils.TEST_DIR_REL_PATH));
         FileUtils.deleteDirectory(workingDir);
-        workingDir.mkdir();
+        workingDir.mkdirs();
         System.out.println(String.format("workingDir: %s", workingDir.getAbsolutePath()));
         final FilenameFilter jarFileFilter = getJarFilenameFilter();
         final File[] jarFilesBefore = workingDir.listFiles(jarFileFilter);
         assertTrue(String.format("%s should be an empty directory", workingDir.getAbsolutePath()), jarFilesBefore.length == 0);
 
-        final List<String> partialCmd = Arrays.asList("../../build/hub-docker-inspector.sh", "--pulljar");
+        final List<String> partialCmd = Arrays.asList("../../hub-docker-inspector.sh", "--pulljar");
         // Arrays.asList returns a fixed size list; need a variable sized list
         final List<String> fullCmd = new ArrayList<>();
         fullCmd.addAll(partialCmd);
@@ -362,7 +363,7 @@ public class DockerInspectorTest {
     }
 
     private File getOutputContainerFileSystemFile(final String repo, final String tag) {
-        final String outputContainerFileSystemFileName = String.format("test/output/%s_%s_containerfilesystem.tar.gz", repo.replaceAll("/", "_"), tag == null ? "latest" : tag);
+        final String outputContainerFileSystemFileName = String.format("%s/output/%s_%s_containerfilesystem.tar.gz", TestUtils.TEST_DIR_REL_PATH, repo.replaceAll("/", "_"), tag == null ? "latest" : tag);
         final File outputTarFile = new File(outputContainerFileSystemFileName);
         return outputTarFile;
     }
@@ -375,11 +376,12 @@ public class DockerInspectorTest {
 
         ensureFileDoesNotExist(outputContainerFileSystemFile);
 
-        final File actualBdio = new File(String.format(String.format("test/output/%s_%s_%s_%s_bdio.jsonld", imageForBdioFilename.replaceAll("/", "_"), pkgMgrPathString, imageForBdioFilename.replaceAll("/", "_"), tagForBdioFilename)));
+        final File actualBdio = new File(
+                String.format(String.format("%s/output/%s_%s_%s_%s_bdio.jsonld", TestUtils.TEST_DIR_REL_PATH, imageForBdioFilename.replaceAll("/", "_"), pkgMgrPathString, imageForBdioFilename.replaceAll("/", "_"), tagForBdioFilename)));
         ensureFileDoesNotExist(actualBdio);
 
         final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--upload.bdio=false", String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", programVersion.getProgramVersion()),
-                "--output.path=test/output",
+                String.format("--output.path=%s/output", TestUtils.TEST_DIR_REL_PATH),
                 "--output.include.containerfilesystem=true", "--hub.always.trust.cert=true");
 
         final List<String> fullCmd = new ArrayList<>();
@@ -392,7 +394,7 @@ public class DockerInspectorTest {
         }
         fullCmd.add("--logging.level.com.blackducksoftware=DEBUG");
         if (needWorkingDir) {
-            final File workingDir = new File("test/endToEnd");
+            final File workingDir = new File(String.format("%s/endToEnd", TestUtils.TEST_DIR_REL_PATH));
             TestUtils.deleteDirIfExists(workingDir);
             fullCmd.add(String.format("--working.dir.path=%s", workingDir.getAbsolutePath()));
         }
@@ -426,11 +428,11 @@ public class DockerInspectorTest {
         final File outputContainerFileSystemFile = getOutputContainerFileSystemFile(repo, tag);
         final String inspectTargetArg = String.format("--docker.image=%s", inspectTargetImageRepoTag);
         ensureFileDoesNotExist(outputContainerFileSystemFile);
-        final File actualBdio = new File(String.format(String.format("test/output/%s_%s_%s_%s_bdio.jsonld", repo, pkgMgrPathString, repo, tag)));
+        final File actualBdio = new File(String.format(String.format("%s/output/%s_%s_%s_%s_bdio.jsonld", TestUtils.TEST_DIR_REL_PATH, repo, pkgMgrPathString, repo, tag)));
         ensureFileDoesNotExist(actualBdio);
 
         final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--upload.bdio=false", String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", programVersion.getProgramVersion()),
-                "--output.path=test/output",
+                String.format("--output.path=%s/output", TestUtils.TEST_DIR_REL_PATH),
                 "--output.include.containerfilesystem=true", "--hub.always.trust.cert=true");
 
         final List<String> fullCmd = new ArrayList<>();
@@ -442,7 +444,7 @@ public class DockerInspectorTest {
             fullCmd.add(String.format("--docker.image.tag=%s", tag));
         }
         fullCmd.add("--logging.level.com.blackducksoftware=DEBUG");
-        final File workingDir = new File("test/endToEnd");
+        final File workingDir = new File(String.format("%s/endToEnd", TestUtils.TEST_DIR_REL_PATH));
         TestUtils.deleteDirIfExists(workingDir);
         fullCmd.add(String.format("--working.dir.path=%s", workingDir.getAbsolutePath()));
         fullCmd.add(inspectTargetArg);

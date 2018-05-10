@@ -31,7 +31,7 @@ public class ArgsWithSpacesTest {
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
         try {
-            final boolean created = new File("test").mkdir();
+            final boolean created = new File(TestUtils.TEST_DIR_REL_PATH).mkdirs();
             System.out.println(String.format("test dir created: %b", created));
         } catch (final Exception e) {
             System.out.println(String.format("mkdir test: %s", e.getMessage()));
@@ -44,7 +44,7 @@ public class ArgsWithSpacesTest {
 
     @Test
     public void testUsernameProjectNameProjectVersionWithSpaces() throws IOException, InterruptedException {
-        final String workingDirPath = "test/argsWithSpaces";
+        final String workingDirPath = String.format("%s/argsWithSpaces", TestUtils.TEST_DIR_REL_PATH);
         try {
             FileUtils.deleteDirectory(new File(workingDirPath));
         } catch (final Exception e) {
@@ -55,7 +55,8 @@ public class ArgsWithSpacesTest {
         pgmVerObj.init();
         final String programVersion = pgmVerObj.getProgramVersion();
         final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--upload.bdio=false", String.format("--hub.username=\"%s\"", USERNAME), String.format("--hub.project.name=\"%s\"", PROJECT_NAME),
-                String.format("--hub.project.version=\"%s\"", PROJECT_VERSION), String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", programVersion), "--output.path=test/output", "--output.include.dockertarfile=true",
+                String.format("--hub.project.version=\"%s\"", PROJECT_VERSION), String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", programVersion), String.format("--output.path=%s/output", TestUtils.TEST_DIR_REL_PATH),
+                "--output.include.dockertarfile=true",
                 "--output.include.containerfilesystem=true", "--hub.always.trust.cert=true");
         // Arrays.asList returns a fixed size list; need a variable sized list
         final List<String> fullCmd = new ArrayList<>();
@@ -71,7 +72,7 @@ public class ArgsWithSpacesTest {
         final String newPath = String.format("/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:%s", oldPath);
         System.out.println(String.format("Adjusted path: %s", newPath));
         env.put("PATH", newPath);
-        final File outputFile = new File("test/argsWithSpaces_output.txt");
+        final File outputFile = new File(String.format("%s/argsWithSpaces_output.txt", TestUtils.TEST_DIR_REL_PATH));
         outputFile.delete();
         pb.redirectErrorStream(true);
         pb.redirectOutput(outputFile);

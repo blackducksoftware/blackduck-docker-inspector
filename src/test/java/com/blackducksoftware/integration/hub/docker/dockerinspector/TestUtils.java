@@ -16,6 +16,8 @@ import org.apache.commons.io.FileUtils;
 import com.blackducksoftware.integration.exception.IntegrationException;
 
 public class TestUtils {
+    public final static String TEST_DIR_REL_PATH = "build/test";
+
     public static File createTempDirectory() throws IOException {
         final File temp = File.createTempFile("temp", Long.toString(System.nanoTime()));
         if (!temp.delete()) {

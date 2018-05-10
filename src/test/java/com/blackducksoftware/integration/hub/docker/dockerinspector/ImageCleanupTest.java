@@ -32,10 +32,10 @@ public class ImageCleanupTest {
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
         try {
-            final boolean created = new File("test").mkdir();
+            final boolean created = new File(TestUtils.TEST_DIR_REL_PATH).mkdirs();
             System.out.println(String.format("test dir created: %b", created));
         } catch (final Exception e) {
-            System.out.println(String.format("mkdir test: %s", e.getMessage()));
+            System.out.println(String.format("mkdir %s: %s", TestUtils.TEST_DIR_REL_PATH, e.getMessage()));
         }
     }
 
@@ -45,7 +45,7 @@ public class ImageCleanupTest {
 
     @Test
     public void test() throws IOException, InterruptedException {
-        final String workingDirPath = "test/imageCleanup";
+        final String workingDirPath = String.format("%s/imageCleanup", TestUtils.TEST_DIR_REL_PATH);
         try {
             FileUtils.deleteDirectory(new File(workingDirPath));
         } catch (final Exception e) {
@@ -75,7 +75,8 @@ public class ImageCleanupTest {
 
         final String programVersion = pgmVerObj.getProgramVersion();
         final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--upload.bdio=false", String.format("--hub.username=\"%s\"", USERNAME), String.format("--hub.project.name=\"%s\"", PROJECT_NAME),
-                String.format("--hub.project.version=\"%s\"", PROJECT_VERSION), String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", programVersion), "--output.path=test/output", "--output.include.dockertarfile=true",
+                String.format("--hub.project.version=\"%s\"", PROJECT_VERSION), String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", programVersion), String.format("--output.path=%s/output", TestUtils.TEST_DIR_REL_PATH),
+                "--output.include.dockertarfile=true",
                 "--output.include.containerfilesystem=true", "--hub.always.trust.cert=true", "--include.target.image=true", "--include.inspector.image=true");
         final List<String> fullCmd = new ArrayList<>();
         fullCmd.addAll(partialCmd);
@@ -101,7 +102,7 @@ public class ImageCleanupTest {
         final String oldPath = System.getenv("PATH");
         final String newPath = String.format("/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:%s", oldPath);
         env.put("PATH", newPath);
-        final File outputFile = new File(String.format("test/temp_cmd_output_%s.txt", Long.toString(System.nanoTime())));
+        final File outputFile = new File(String.format("%s/temp_cmd_output_%s.txt", TestUtils.TEST_DIR_REL_PATH, Long.toString(System.nanoTime())));
         outputFile.delete();
         pb.redirectErrorStream(true);
         pb.redirectOutput(outputFile);
@@ -137,7 +138,7 @@ public class ImageCleanupTest {
     }
 
     private List<String> getCmdOutputLines(final List<String> dockerImagesCmd, final String description) throws IOException, InterruptedException {
-        final String outputFilename = String.format("test/imageCleanup_%sOutput.txt", description);
+        final String outputFilename = String.format("%s/imageCleanup_%sOutput.txt", TestUtils.TEST_DIR_REL_PATH, description);
         System.out.println(String.format("Running command %s", dockerImagesCmd.toString()));
         final File dockerImagesoutputFile = new File(outputFilename);
         dockerImagesoutputFile.delete();
