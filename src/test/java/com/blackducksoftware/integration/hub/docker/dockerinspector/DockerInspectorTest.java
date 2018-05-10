@@ -333,7 +333,8 @@ public class DockerInspectorTest {
         final File[] jarFilesBefore = workingDir.listFiles(jarFileFilter);
         assertTrue(String.format("%s should be an empty directory", workingDir.getAbsolutePath()), jarFilesBefore.length == 0);
 
-        final List<String> partialCmd = Arrays.asList("../../hub-docker-inspector.sh", "--pulljar");
+        final File script = new File("build/hub-docker-inspector.sh");
+        final List<String> partialCmd = Arrays.asList(script.getAbsolutePath(), "--pulljar");
         // Arrays.asList returns a fixed size list; need a variable sized list
         final List<String> fullCmd = new ArrayList<>();
         fullCmd.addAll(partialCmd);
