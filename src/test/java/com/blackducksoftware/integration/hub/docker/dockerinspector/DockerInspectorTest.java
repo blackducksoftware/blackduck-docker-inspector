@@ -78,75 +78,6 @@ public class DockerInspectorTest {
         createWriteableDirTolerantly(containerOutputDir);
     }
 
-    private static void createWriteableDirTolerantly(final File dir) {
-        System.out.printf("Creating and setting a+wx permission on: %s\n", dir.getAbsolutePath());
-        createDirTolerantly(dir);
-        setWriteExecutePermissionsTolerantly(dir);
-        logPermissions(dir);
-    }
-
-    private static void logPermissions(final File dir) {
-        Set<PosixFilePermission> perms = null;
-        try {
-            perms = Files.getPosixFilePermissions(dir.toPath());
-            System.out.printf("* Dir %s now has perms: %s\n", dir.getAbsolutePath(), perms.toString());
-        } catch (final IOException e) {
-            System.out.printf("Unable to read back perms for dir %s: %s\n", dir.getAbsolutePath(), e.getMessage());
-        }
-    }
-
-    private static void createDirTolerantly(final File dir) {
-        try {
-            dir.mkdirs();
-        } catch (final Exception e) {
-            System.out.printf("Error creating directory %s: %s\n", dir.getAbsoluteFile(), e.getMessage());
-        }
-        if (!dir.exists()) {
-            System.out.printf("ERROR: Attempted to create directory %s, but it still does not exist\n", dir.getAbsoluteFile());
-        }
-    }
-
-    private static void setWriteExecutePermissionsTolerantly(final File file) {
-        try {
-            file.setWritable(true, false);
-        } catch (final Exception e) {
-            System.out.printf("Error making directory %s writeable: %s\n", file.getAbsolutePath(), e.getMessage());
-        }
-        try {
-            file.setExecutable(true, false);
-        } catch (final Exception e) {
-            System.out.printf("Error making directory %s writeable: %s\n", file.getAbsolutePath(), e.getMessage());
-        }
-    }
-
-    private static boolean isUp(final int port) {
-        String response;
-        try {
-            response = TestUtils.execCmd(String.format("curl -i http://localhost:%d/health", port), 30000L);
-        } catch (IOException | InterruptedException | IntegrationException e) {
-            return false;
-        }
-        if (response.startsWith("HTTP/1.1 200")) {
-            return true;
-        }
-        return false;
-    }
-
-    private static void startContainer(final String imageInspectorPlatform, final int portOnHost, final int portInContainer) throws IOException, InterruptedException, IntegrationException {
-        final String containerName = getContainerName(imageInspectorPlatform);
-        final String cmd = String.format("docker run -d -t --name %s -p %d:%d -v \"$(pwd)\"/%s/containerShared:%s blackducksoftware/%s-%s:%s",
-                containerName, portOnHost,
-                portInContainer,
-                TestUtils.TEST_DIR_REL_PATH,
-                SHARED_DIR_PATH_IN_CONTAINER,
-                programVersion.getInspectorImageFamily(), imageInspectorPlatform, programVersion.getInspectorImageVersion());
-        TestUtils.execCmd(cmd, 120000L);
-    }
-
-    private static String getContainerName(final String imageInspectorPlatform) {
-        return String.format("dockerInspectorTestImageInspector_%s", imageInspectorPlatform);
-    }
-
     @AfterClass
     public static void tearDownAfterClass() throws Exception {
         stopRemoveContainer("alpine");
@@ -156,43 +87,6 @@ public class DockerInspectorTest {
         ensureContainerRemoved("alpine");
         ensureContainerRemoved("centos");
         ensureContainerRemoved("ubuntu");
-    }
-
-    private static void stopRemoveContainer(final String imageInspectorPlatform) {
-        final String containerName = getContainerName(imageInspectorPlatform);
-        try {
-            TestUtils.execCmd(String.format("docker stop %s", containerName), 120000L);
-        } catch (final Exception e) {
-            System.out.printf("Error stopping container %s: %s\n", containerName, e.getMessage());
-        }
-        try {
-            TestUtils.execCmd(String.format("docker rm %s", containerName), 120000L);
-        } catch (final Exception e) {
-            System.out.printf("Error removing container %s: %s\n", containerName, e.getMessage());
-        }
-    }
-
-    private static void ensureContainerRemoved(final String imageInspectorPlatform) {
-        final String containerName = getContainerName(imageInspectorPlatform);
-        String dockerPsResponse;
-        boolean containerStillExists = true;
-        for (int tryCount = 0; tryCount < 20; tryCount++) {
-            System.out.printf("Checking to see if container %s was removed\n", containerName);
-            try {
-                dockerPsResponse = TestUtils.execCmd("docker ps -a", 120000L);
-                if (!dockerPsResponse.contains(containerName)) {
-                    containerStillExists = false;
-                    System.out.printf("Container %s was removed\n", containerName);
-                    break;
-                }
-                Thread.sleep(5000L);
-            } catch (final Exception e) {
-                System.out.printf("Error stopping container %s: %s\n", containerName, e.getMessage());
-            }
-        }
-        if (containerStillExists) {
-            System.out.printf("ERROR: Failed to remove container %s\n", containerName);
-        }
     }
 
     @Test
@@ -308,21 +202,6 @@ public class DockerInspectorTest {
         testUsingExistingContainer(targetRepo, targetTag, targetPkgMgrLib, tarFileBaseName, imageInspectorPlatform, portOnHost);
     }
 
-    private void testUsingExistingContainer(final String targetRepo, final String targetTag, final String targetPkgMgrLib, final String tarFileBaseName, final String imageInspectorPlatform, final int portOnHost)
-            throws IOException, InterruptedException, IntegrationException {
-
-        final String tarFileName = String.format("%s.tar", tarFileBaseName);
-        final File targetTar = new File(containerTargetDir, tarFileName);
-        FileUtils.copyFile(new File(String.format("build/images/test/%s", tarFileName)), targetTar);
-        targetTar.setReadable(true, false);
-        final List<String> additionalArgs = new ArrayList<>();
-        additionalArgs.add(String.format("--imageinspector.url=http://localhost:%d", portOnHost));
-        additionalArgs.add(String.format("--shared.dir.path.local=%s", dirSharedWithContainer.getAbsolutePath()));
-        additionalArgs.add(String.format("--shared.dir.path.imageinspector=%s", SHARED_DIR_PATH_IN_CONTAINER));
-        final File outputContainerFileSystemFile = new File(String.format("%s/output/%s_containerfilesystem.tar.gz", TestUtils.TEST_DIR_REL_PATH, tarFileBaseName));
-        testTar(targetTar.getAbsolutePath(), targetRepo, null, null, targetTag, targetPkgMgrLib, true, additionalArgs, false, outputContainerFileSystemFile);
-    }
-
     @Test
     public void testPullJar() throws IOException, InterruptedException, IntegrationException {
         final File workingDir = new File(String.format("%s/pulljar", TestUtils.TEST_DIR_REL_PATH));
@@ -350,6 +229,21 @@ public class DockerInspectorTest {
             jarFile.delete();
         }
         assertTrue("Expected a single pulled jar file", foundOne);
+    }
+
+    private void testUsingExistingContainer(final String targetRepo, final String targetTag, final String targetPkgMgrLib, final String tarFileBaseName, final String imageInspectorPlatform, final int portOnHost)
+            throws IOException, InterruptedException, IntegrationException {
+
+        final String tarFileName = String.format("%s.tar", tarFileBaseName);
+        final File targetTar = new File(containerTargetDir, tarFileName);
+        FileUtils.copyFile(new File(String.format("build/images/test/%s", tarFileName)), targetTar);
+        targetTar.setReadable(true, false);
+        final List<String> additionalArgs = new ArrayList<>();
+        additionalArgs.add(String.format("--imageinspector.url=http://localhost:%d", portOnHost));
+        additionalArgs.add(String.format("--shared.dir.path.local=%s", dirSharedWithContainer.getAbsolutePath()));
+        additionalArgs.add(String.format("--shared.dir.path.imageinspector=%s", SHARED_DIR_PATH_IN_CONTAINER));
+        final File outputContainerFileSystemFile = new File(String.format("%s/output/%s_containerfilesystem.tar.gz", TestUtils.TEST_DIR_REL_PATH, tarFileBaseName));
+        testTar(targetTar.getAbsolutePath(), targetRepo, null, null, targetTag, targetPkgMgrLib, true, additionalArgs, false, outputContainerFileSystemFile);
     }
 
     private FilenameFilter getJarFilenameFilter() {
@@ -381,32 +275,33 @@ public class DockerInspectorTest {
                 String.format(String.format("%s/output/%s_%s_%s_%s_bdio.jsonld", TestUtils.TEST_DIR_REL_PATH, imageForBdioFilename.replaceAll("/", "_"), pkgMgrPathString, imageForBdioFilename.replaceAll("/", "_"), tagForBdioFilename)));
         ensureFileDoesNotExist(actualBdio);
 
-        final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--upload.bdio=false", String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", programVersion.getProgramVersion()),
-                String.format("--output.path=%s/output", TestUtils.TEST_DIR_REL_PATH),
-                "--output.include.containerfilesystem=true", "--hub.always.trust.cert=true");
-
-        final List<String> fullCmd = new ArrayList<>();
-        fullCmd.addAll(partialCmd);
+        final List<String> cmd = new ArrayList<>();
+        cmd.add("build/hub-docker-inspector.sh");
+        cmd.add("--upload.bdio=false");
+        cmd.add(String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", programVersion.getProgramVersion()));
+        cmd.add(String.format("--output.path=%s/output", TestUtils.TEST_DIR_REL_PATH));
+        cmd.add("--output.include.containerfilesystem=true");
+        cmd.add("--hub.always.trust.cert=true");
         if (repo != null) {
-            fullCmd.add(String.format("--docker.image.repo=%s", repo));
+            cmd.add(String.format("--docker.image.repo=%s", repo));
         }
         if (tag != null) {
-            fullCmd.add(String.format("--docker.image.tag=%s", tag));
+            cmd.add(String.format("--docker.image.tag=%s", tag));
         }
-        fullCmd.add("--logging.level.com.blackducksoftware=DEBUG");
+        cmd.add("--logging.level.com.blackducksoftware=DEBUG");
         if (needWorkingDir) {
             final File workingDir = new File(String.format("%s/endToEnd", TestUtils.TEST_DIR_REL_PATH));
             TestUtils.deleteDirIfExists(workingDir);
-            fullCmd.add(String.format("--working.dir.path=%s", workingDir.getAbsolutePath()));
+            cmd.add(String.format("--working.dir.path=%s", workingDir.getAbsolutePath()));
         }
-        fullCmd.add(inspectTargetArg);
+        cmd.add(inspectTargetArg);
 
         if (additionalArgs != null && additionalArgs.size() > 0) {
-            fullCmd.addAll(additionalArgs);
+            cmd.addAll(additionalArgs);
         }
 
-        System.out.println(String.format("Running end to end test on %s with command %s", inspectTargetTarfile, fullCmd.toString()));
-        TestUtils.execCmd(String.join(" ", fullCmd), 240000L);
+        System.out.println(String.format("Running end to end test on %s with command %s", inspectTargetTarfile, cmd.toString()));
+        TestUtils.execCmd(String.join(" ", cmd), 240000L);
         System.out.println("hub-docker-inspector done; verifying results...");
         System.out.printf("Expecting output BDIO file: %s\n", actualBdio.getAbsolutePath());
         assertTrue(actualBdio.exists());
@@ -432,26 +327,27 @@ public class DockerInspectorTest {
         final File actualBdio = new File(String.format(String.format("%s/output/%s_%s_%s_%s_bdio.jsonld", TestUtils.TEST_DIR_REL_PATH, repo, pkgMgrPathString, repo, tag)));
         ensureFileDoesNotExist(actualBdio);
 
-        final List<String> partialCmd = Arrays.asList("build/hub-docker-inspector.sh", "--upload.bdio=false", String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", programVersion.getProgramVersion()),
-                String.format("--output.path=%s/output", TestUtils.TEST_DIR_REL_PATH),
-                "--output.include.containerfilesystem=true", "--hub.always.trust.cert=true");
-
-        final List<String> fullCmd = new ArrayList<>();
-        fullCmd.addAll(partialCmd);
+        final List<String> cmd = new ArrayList<>();
+        cmd.add("build/hub-docker-inspector.sh");
+        cmd.add("--upload.bdio=false");
+        cmd.add(String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", programVersion.getProgramVersion()));
+        cmd.add(String.format("--output.path=%s/output", TestUtils.TEST_DIR_REL_PATH));
+        cmd.add("--output.include.containerfilesystem=true");
+        cmd.add("--hub.always.trust.cert=true");
         if (repo != null) {
-            fullCmd.add(String.format("--docker.image.repo=%s", repo));
+            cmd.add(String.format("--docker.image.repo=%s", repo));
         }
         if (tag != null) {
-            fullCmd.add(String.format("--docker.image.tag=%s", tag));
+            cmd.add(String.format("--docker.image.tag=%s", tag));
         }
-        fullCmd.add("--logging.level.com.blackducksoftware=DEBUG");
+        cmd.add("--logging.level.com.blackducksoftware=DEBUG");
         final File workingDir = new File(String.format("%s/endToEnd", TestUtils.TEST_DIR_REL_PATH));
         TestUtils.deleteDirIfExists(workingDir);
-        fullCmd.add(String.format("--working.dir.path=%s", workingDir.getAbsolutePath()));
-        fullCmd.add(inspectTargetArg);
+        cmd.add(String.format("--working.dir.path=%s", workingDir.getAbsolutePath()));
+        cmd.add(inspectTargetArg);
 
-        System.out.println(String.format("Running end to end test on %s with command %s", inspectTargetImageRepoTag, fullCmd.toString()));
-        TestUtils.execCmd(String.join(" ", fullCmd), 30000L);
+        System.out.println(String.format("Running end to end test on %s with command %s", inspectTargetImageRepoTag, cmd.toString()));
+        TestUtils.execCmd(String.join(" ", cmd), 30000L);
         System.out.println("hub-docker-inspector done; verifying results...");
         System.out.printf("Expecting output BDIO file: %s\n", actualBdio.getAbsolutePath());
         assertTrue(actualBdio.exists());
@@ -471,6 +367,112 @@ public class DockerInspectorTest {
     private void ensureFileDoesNotExist(final File outputContainerFileSystemFile) throws IOException {
         Files.deleteIfExists(outputContainerFileSystemFile.toPath());
         assertFalse(outputContainerFileSystemFile.exists());
+    }
+
+    private static void createWriteableDirTolerantly(final File dir) {
+        System.out.printf("Creating and setting a+wx permission on: %s\n", dir.getAbsolutePath());
+        createDirTolerantly(dir);
+        setWriteExecutePermissionsTolerantly(dir);
+        logPermissions(dir);
+    }
+
+    private static void logPermissions(final File dir) {
+        Set<PosixFilePermission> perms = null;
+        try {
+            perms = Files.getPosixFilePermissions(dir.toPath());
+            System.out.printf("* Dir %s now has perms: %s\n", dir.getAbsolutePath(), perms.toString());
+        } catch (final IOException e) {
+            System.out.printf("Unable to read back perms for dir %s: %s\n", dir.getAbsolutePath(), e.getMessage());
+        }
+    }
+
+    private static void createDirTolerantly(final File dir) {
+        try {
+            dir.mkdirs();
+        } catch (final Exception e) {
+            System.out.printf("Error creating directory %s: %s\n", dir.getAbsoluteFile(), e.getMessage());
+        }
+        if (!dir.exists()) {
+            System.out.printf("ERROR: Attempted to create directory %s, but it still does not exist\n", dir.getAbsoluteFile());
+        }
+    }
+
+    private static void setWriteExecutePermissionsTolerantly(final File file) {
+        try {
+            file.setWritable(true, false);
+        } catch (final Exception e) {
+            System.out.printf("Error making directory %s writeable: %s\n", file.getAbsolutePath(), e.getMessage());
+        }
+        try {
+            file.setExecutable(true, false);
+        } catch (final Exception e) {
+            System.out.printf("Error making directory %s writeable: %s\n", file.getAbsolutePath(), e.getMessage());
+        }
+    }
+
+    private static boolean isUp(final int port) {
+        String response;
+        try {
+            response = TestUtils.execCmd(String.format("curl -i http://localhost:%d/health", port), 30000L);
+        } catch (IOException | InterruptedException | IntegrationException e) {
+            return false;
+        }
+        if (response.startsWith("HTTP/1.1 200")) {
+            return true;
+        }
+        return false;
+    }
+
+    private static void startContainer(final String imageInspectorPlatform, final int portOnHost, final int portInContainer) throws IOException, InterruptedException, IntegrationException {
+        final String containerName = getContainerName(imageInspectorPlatform);
+        final String cmd = String.format("docker run -d -t --name %s -p %d:%d -v \"$(pwd)\"/%s/containerShared:%s blackducksoftware/%s-%s:%s",
+                containerName, portOnHost,
+                portInContainer,
+                TestUtils.TEST_DIR_REL_PATH,
+                SHARED_DIR_PATH_IN_CONTAINER,
+                programVersion.getInspectorImageFamily(), imageInspectorPlatform, programVersion.getInspectorImageVersion());
+        TestUtils.execCmd(cmd, 120000L);
+    }
+
+    private static String getContainerName(final String imageInspectorPlatform) {
+        return String.format("dockerInspectorTestImageInspector_%s", imageInspectorPlatform);
+    }
+
+    private static void stopRemoveContainer(final String imageInspectorPlatform) {
+        final String containerName = getContainerName(imageInspectorPlatform);
+        try {
+            TestUtils.execCmd(String.format("docker stop %s", containerName), 120000L);
+        } catch (final Exception e) {
+            System.out.printf("Error stopping container %s: %s\n", containerName, e.getMessage());
+        }
+        try {
+            TestUtils.execCmd(String.format("docker rm %s", containerName), 120000L);
+        } catch (final Exception e) {
+            System.out.printf("Error removing container %s: %s\n", containerName, e.getMessage());
+        }
+    }
+
+    private static void ensureContainerRemoved(final String imageInspectorPlatform) {
+        final String containerName = getContainerName(imageInspectorPlatform);
+        String dockerPsResponse;
+        boolean containerStillExists = true;
+        for (int tryCount = 0; tryCount < 20; tryCount++) {
+            System.out.printf("Checking to see if container %s was removed\n", containerName);
+            try {
+                dockerPsResponse = TestUtils.execCmd("docker ps -a", 120000L);
+                if (!dockerPsResponse.contains(containerName)) {
+                    containerStillExists = false;
+                    System.out.printf("Container %s was removed\n", containerName);
+                    break;
+                }
+                Thread.sleep(5000L);
+            } catch (final Exception e) {
+                System.out.printf("Error stopping container %s: %s\n", containerName, e.getMessage());
+            }
+        }
+        if (containerStillExists) {
+            System.out.printf("ERROR: Failed to remove container %s\n", containerName);
+        }
     }
 
 }
