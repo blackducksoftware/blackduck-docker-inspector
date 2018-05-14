@@ -41,7 +41,7 @@ public class CalledFromDetectTest {
         resultsFile.delete();
 
         final String cmdGetDetectScriptString = "curl -s https://blackducksoftware.github.io/hub-detect/hub-detect.sh";
-        final String detectScriptString = TestUtils.execCmd(executionDir, cmdGetDetectScriptString, ONE_MINUTE_IN_MS);
+        final String detectScriptString = TestUtils.execCmd(executionDir, cmdGetDetectScriptString, ONE_MINUTE_IN_MS, true);
         final File detectScriptFile = File.createTempFile("latestDetect", ".sh");
         detectScriptFile.setExecutable(true);
         detectScriptFile.deleteOnExit();
@@ -72,7 +72,7 @@ public class CalledFromDetectTest {
         detectScriptFile.deleteOnExit();
         System.out.printf("script file: %s\n", detectWrapperScriptFile.getAbsolutePath());
         FileUtils.write(detectWrapperScriptFile, detectWrapperScriptString, StandardCharsets.UTF_8);
-        final String wrapperScriptOutput = TestUtils.execCmd(executionDir, detectWrapperScriptFile.getAbsolutePath(), FIVE_MINUTES_IN_MS);
+        final String wrapperScriptOutput = TestUtils.execCmd(executionDir, detectWrapperScriptFile.getAbsolutePath(), FIVE_MINUTES_IN_MS, true);
         System.out.printf("Wrapper script output:\n%s\n", wrapperScriptOutput);
         final String detectOutputString = FileUtils.readFileToString(detectOutputFile, StandardCharsets.UTF_8);
         System.out.printf("Detect output: %s", detectOutputString);

@@ -46,6 +46,10 @@ public class DockerInspectorTest {
         programVersion = new ProgramVersion();
         programVersion.init();
         printDockerVersion();
+        System.out.printf("Running containers:\n%s\n", getRunningContainers(false));
+        System.out.printf("All containers:\n%s\n", getAllContainers(false));
+        removeDockerInspectorContainers();
+        System.out.printf("All containers:\n%s\n", getAllContainers(false));
         startContainer("alpine", IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE, IMAGE_INSPECTOR_PORT_IN_CONTAINER_ALPINE);
         startContainer("centos", IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS, IMAGE_INSPECTOR_PORT_IN_CONTAINER_CENTOS);
         startContainer("ubuntu", IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU, IMAGE_INSPECTOR_PORT_IN_CONTAINER_UBUNTU);
@@ -239,7 +243,7 @@ public class DockerInspectorTest {
         fullCmd.addAll(partialCmd);
 
         System.out.println(String.format("Running --pulljar end to end test"));
-        TestUtils.execCmd(workingDir, String.join(" ", fullCmd), 30000L);
+        TestUtils.execCmd(workingDir, String.join(" ", fullCmd), 30000L, true);
         System.out.println("hub-docker-inspector --pulljar done; verifying results...");
 
         final File[] jarFilesAfter = workingDir.listFiles(jarFileFilter);
@@ -321,7 +325,7 @@ public class DockerInspectorTest {
         }
 
         System.out.println(String.format("Running end to end test on %s with command %s", inspectTargetTarfile, cmd.toString()));
-        TestUtils.execCmd(String.join(" ", cmd), 240000L);
+        TestUtils.execCmd(String.join(" ", cmd), 240000L, true);
         System.out.println("hub-docker-inspector done; verifying results...");
         System.out.printf("Expecting output BDIO file: %s\n", actualBdio.getAbsolutePath());
         assertTrue(actualBdio.exists());
@@ -367,7 +371,7 @@ public class DockerInspectorTest {
         cmd.add(inspectTargetArg);
 
         System.out.println(String.format("Running end to end test on %s with command %s", inspectTargetImageRepoTag, cmd.toString()));
-        TestUtils.execCmd(String.join(" ", cmd), 30000L);
+        TestUtils.execCmd(String.join(" ", cmd), 30000L, true);
         System.out.println("hub-docker-inspector done; verifying results...");
         System.out.printf("Expecting output BDIO file: %s\n", actualBdio.getAbsolutePath());
         assertTrue(actualBdio.exists());
@@ -433,7 +437,7 @@ public class DockerInspectorTest {
     private static boolean isUp(final int port) {
         String response;
         try {
-            response = TestUtils.execCmd(String.format("curl -i http://localhost:%d/health", port), 30000L);
+            response = TestUtils.execCmd(String.format("curl -i http://localhost:%d/health", port), 30000L, true);
         } catch (IOException | InterruptedException | IntegrationException e) {
             return false;
         }
@@ -451,7 +455,7 @@ public class DockerInspectorTest {
                 TestUtils.TEST_DIR_REL_PATH,
                 SHARED_DIR_PATH_IN_CONTAINER,
                 programVersion.getInspectorImageFamily(), imageInspectorPlatform, programVersion.getInspectorImageVersion());
-        TestUtils.execCmd(cmd, 120000L);
+        TestUtils.execCmd(cmd, 120000L, true);
     }
 
     private static String getContainerName(final String imageInspectorPlatform) {
@@ -460,7 +464,7 @@ public class DockerInspectorTest {
 
     private static void printDockerVersion() {
         try {
-            TestUtils.execCmd("docker version", 20000L);
+            TestUtils.execCmd("docker version", 20000L, true);
         } catch (final Exception e) {
             System.out.printf("Error running docker version command: %s\n", e.getMessage());
         }
@@ -469,7 +473,7 @@ public class DockerInspectorTest {
     private static void stopContainer(final String imageInspectorPlatform) {
         final String containerName = getContainerName(imageInspectorPlatform);
         try {
-            TestUtils.execCmd(String.format("docker stop %s", containerName), 120000L);
+            TestUtils.execCmd(String.format("docker stop %s", containerName), 120000L, true);
         } catch (final Exception e) {
             System.out.printf("Error stopping container %s: %s\n", containerName, e.getMessage());
         }
@@ -478,7 +482,7 @@ public class DockerInspectorTest {
     private static void removeContainer(final String imageInspectorPlatform) {
         final String containerName = getContainerName(imageInspectorPlatform);
         try {
-            TestUtils.execCmd(String.format("docker rm -f %s", containerName), 120000L);
+            TestUtils.execCmd(String.format("docker rm -f %s", containerName), 120000L, true);
         } catch (final Exception e) {
             System.out.printf("Error removing container %s: %s\n", containerName, e.getMessage());
         }
@@ -491,7 +495,7 @@ public class DockerInspectorTest {
         for (int tryCount = 0; tryCount < 20; tryCount++) {
             System.out.printf("Checking to see if container %s was removed\n", containerName);
             try {
-                dockerPsResponse = TestUtils.execCmd("docker ps -a", 120000L);
+                dockerPsResponse = getAllContainers(true);
                 if (!dockerPsResponse.contains(containerName)) {
                     containerStillExists = false;
                     System.out.printf("Container %s was removed\n", containerName);
@@ -504,6 +508,34 @@ public class DockerInspectorTest {
         }
         if (containerStillExists) {
             System.out.printf("ERROR: Failed to remove container %s\n", containerName);
+        }
+    }
+
+    private static String getAllContainers(final boolean logStdout) throws IOException, InterruptedException, IntegrationException {
+        return TestUtils.execCmd("docker ps -a", 120000L, logStdout);
+    }
+
+    private static String getRunningContainers(final boolean logStdout) throws IOException, InterruptedException, IntegrationException {
+        return TestUtils.execCmd("docker ps", 120000L, logStdout);
+    }
+
+    private static void removeDockerInspectorContainers() throws IOException, InterruptedException, IntegrationException {
+        System.out.println("Stopping/Removing docker inspector containers");
+        final String psAllOutput = TestUtils.execCmd("docker ps -a", 120000L, false);
+        final String[] lines = psAllOutput.split("\n");
+        for (final String line : lines) {
+            System.out.printf("Line: %s\n", line);
+            if (line.startsWith("CONTAINER")) {
+                continue;
+            }
+            final String[] fields = line.split("\\s+");
+            final String containerName = fields[fields.length - 1];
+            System.out.printf("Container name: %s\n", containerName);
+            if (containerName.startsWith("hub-imageinspector-ws-alpine_") || containerName.startsWith("hub-imageinspector-ws-centos_") || containerName.startsWith("hub-imageinspector-ws-ubuntu_")) {
+                TestUtils.execCmd(String.format("docker stop %s", containerName), 120000L, false);
+                Thread.sleep(10000L);
+                TestUtils.execCmd(String.format("docker rm -f %s", containerName), 120000L, false);
+            }
         }
     }
 

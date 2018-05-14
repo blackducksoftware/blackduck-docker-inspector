@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.blackducksoftware.integration.exception.IntegrationException;
 
@@ -74,15 +75,15 @@ public class TestUtils {
         return true;
     }
 
-    public static String execCmd(final File workingDir, final String cmd, final long timeout) throws IOException, InterruptedException, IntegrationException {
-        return execCmd(workingDir, cmd, timeout, null);
+    public static String execCmd(final File workingDir, final String cmd, final long timeout, final boolean logStdout) throws IOException, InterruptedException, IntegrationException {
+        return execCmd(workingDir, cmd, timeout, null, logStdout);
     }
 
-    public static String execCmd(final String cmd, final long timeout) throws IOException, InterruptedException, IntegrationException {
-        return execCmd(null, cmd, timeout, null);
+    public static String execCmd(final String cmd, final long timeout, final boolean logStdout) throws IOException, InterruptedException, IntegrationException {
+        return execCmd(null, cmd, timeout, null, logStdout);
     }
 
-    private static String execCmd(final File workingDir, final String cmd, final long timeout, final Map<String, String> givenEnv) throws IOException, InterruptedException, IntegrationException {
+    private static String execCmd(final File workingDir, final String cmd, final long timeout, final Map<String, String> givenEnv, final boolean logStdout) throws IOException, InterruptedException, IntegrationException {
         System.out.println(String.format("Executing: %s", cmd));
         final ProcessBuilder pb = new ProcessBuilder("bash", "-c", cmd);
         pb.redirectOutput(Redirect.PIPE);
@@ -105,9 +106,12 @@ public class TestUtils {
         if (!finished) {
             throw new InterruptedException(String.format("Command '%s' timed out", cmd));
         }
-
-        System.out.println(String.format("%s: stdout: %s", cmd, stdoutString));
-        System.out.println(String.format("%s: stderr: %s", cmd, stderrString));
+        if (logStdout) {
+            System.out.println(String.format("%s: stdout: %s", cmd, stdoutString));
+        }
+        if (StringUtils.isNotBlank(stdoutString)) {
+            System.out.println(String.format("%s: stderr: %s", cmd, stderrString));
+        }
         final int retCode = p.exitValue();
         if (retCode != 0) {
             System.out.println(String.format("%s: retCode: %d", cmd, retCode));
