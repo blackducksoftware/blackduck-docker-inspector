@@ -42,7 +42,7 @@ public class DockerInspectorTest {
     public static void setUpBeforeClass() throws Exception {
         programVersion = new ProgramVersion();
         programVersion.init();
-
+        cleanUpContainers();
         startContainer("alpine", IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE, IMAGE_INSPECTOR_PORT_IN_CONTAINER_ALPINE);
         startContainer("centos", IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS, IMAGE_INSPECTOR_PORT_IN_CONTAINER_CENTOS);
         startContainer("ubuntu", IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU, IMAGE_INSPECTOR_PORT_IN_CONTAINER_UBUNTU);
@@ -80,9 +80,17 @@ public class DockerInspectorTest {
 
     @AfterClass
     public static void tearDownAfterClass() throws Exception {
-        stopRemoveContainer("alpine");
-        stopRemoveContainer("centos");
-        stopRemoveContainer("ubuntu");
+        cleanUpContainers();
+    }
+
+    private static void cleanUpContainers() throws InterruptedException {
+        stopContainer("alpine");
+        stopContainer("centos");
+        stopContainer("ubuntu");
+        Thread.sleep(30000L);
+        removeContainer("alpine");
+        removeContainer("centos");
+        removeContainer("ubuntu");
         Thread.sleep(10000L);
         ensureContainerRemoved("alpine");
         ensureContainerRemoved("centos");
@@ -438,13 +446,17 @@ public class DockerInspectorTest {
         return String.format("dockerInspectorTestImageInspector_%s", imageInspectorPlatform);
     }
 
-    private static void stopRemoveContainer(final String imageInspectorPlatform) {
+    private static void stopContainer(final String imageInspectorPlatform) {
         final String containerName = getContainerName(imageInspectorPlatform);
         try {
             TestUtils.execCmd(String.format("docker stop %s", containerName), 120000L);
         } catch (final Exception e) {
             System.out.printf("Error stopping container %s: %s\n", containerName, e.getMessage());
         }
+    }
+
+    private static void removeContainer(final String imageInspectorPlatform) {
+        final String containerName = getContainerName(imageInspectorPlatform);
         try {
             TestUtils.execCmd(String.format("docker rm %s", containerName), 120000L);
         } catch (final Exception e) {
