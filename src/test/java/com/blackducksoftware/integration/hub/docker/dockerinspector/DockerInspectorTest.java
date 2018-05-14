@@ -458,7 +458,7 @@ public class DockerInspectorTest {
     private static void removeContainer(final String imageInspectorPlatform) {
         final String containerName = getContainerName(imageInspectorPlatform);
         try {
-            TestUtils.execCmd(String.format("docker rm %s", containerName), 120000L);
+            TestUtils.execCmd(String.format("docker rm -f %s", containerName), 120000L);
         } catch (final Exception e) {
             System.out.printf("Error removing container %s: %s\n", containerName, e.getMessage());
         }

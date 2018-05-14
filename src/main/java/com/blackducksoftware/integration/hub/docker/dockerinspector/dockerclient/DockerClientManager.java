@@ -246,7 +246,7 @@ public class DockerClientManager {
 
     private void stopContainer(final DockerClient dockerClient, final String containerId) {
         final Long timeoutMilliseconds = config.getCommandTimeout();
-        final int timeoutSeconds = (int) (timeoutMilliseconds / 1000L);
+        final int timeoutSeconds = (int) (timeoutMilliseconds / 60000L);
         logger.info(String.format("Stopping container %s", containerId));
         final StopContainerCmd stopCmd = dockerClient.stopContainerCmd(containerId).withTimeout(timeoutSeconds);
         stopCmd.exec();
