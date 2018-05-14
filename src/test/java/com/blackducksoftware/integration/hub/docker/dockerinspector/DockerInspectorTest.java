@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.attribute.PosixFilePermission;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -37,12 +38,14 @@ public class DockerInspectorTest {
     private static File containerOutputDir;
 
     private static ProgramVersion programVersion;
+    private static String dateTimeStamp;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
+        dateTimeStamp = getTimestamp();
         programVersion = new ProgramVersion();
         programVersion.init();
-        cleanUpContainers();
+        printDockerVersion();
         startContainer("alpine", IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE, IMAGE_INSPECTOR_PORT_IN_CONTAINER_ALPINE);
         startContainer("centos", IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS, IMAGE_INSPECTOR_PORT_IN_CONTAINER_CENTOS);
         startContainer("ubuntu", IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU, IMAGE_INSPECTOR_PORT_IN_CONTAINER_UBUNTU);
@@ -76,6 +79,15 @@ public class DockerInspectorTest {
         createWriteableDirTolerantly(dirSharedWithContainer);
         createWriteableDirTolerantly(containerTargetDir);
         createWriteableDirTolerantly(containerOutputDir);
+    }
+
+    private static String getTimestamp() {
+        String timestamp = Long.toString(new Date().getTime());
+        final int len = timestamp.length();
+        if (len > 8) {
+            timestamp = timestamp.substring(len - 8);
+        }
+        return timestamp;
     }
 
     @AfterClass
@@ -443,7 +455,15 @@ public class DockerInspectorTest {
     }
 
     private static String getContainerName(final String imageInspectorPlatform) {
-        return String.format("dockerInspectorTestImageInspector_%s", imageInspectorPlatform);
+        return String.format("dockerInspectorTestImageInspector_%s_%s", imageInspectorPlatform, dateTimeStamp);
+    }
+
+    private static void printDockerVersion() {
+        try {
+            TestUtils.execCmd("docker version", 20000L);
+        } catch (final Exception e) {
+            System.out.printf("Error running docker version command: %s\n", e.getMessage());
+        }
     }
 
     private static void stopContainer(final String imageInspectorPlatform) {
