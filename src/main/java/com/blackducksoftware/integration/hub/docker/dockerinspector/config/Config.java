@@ -224,6 +224,10 @@ public class Config {
     @Value("${imageinspector.url:}")
     private String imageInspectorUrl = "";
 
+    @ValueDescription(description = "Start ImageInspector services (containers) as needed?", defaultValue = "false", group = Config.GROUP_PRIVATE, deprecated = false)
+    @Value("${imageinspector.service.start:false}")
+    private Boolean imageInspectorServiceStart = Boolean.FALSE;
+
     // Environment Variables
     @Value("${BD_HUB_PASSWORD:}")
     private String hubPasswordEnvVar = "";
@@ -463,23 +467,27 @@ public class Config {
     }
 
     public boolean isUploadBdio() {
-        return uploadBdio;
+        return optionsByFieldName.get("uploadBdio").getResolvedValue().equals("true");
     }
 
     public void setUploadBdio(final boolean value) {
-        uploadBdio = value;
+        optionsByFieldName.get("uploadBdio").setResolvedValue(Boolean.toString(value));
     }
 
     public boolean isCleanupTargetImage() {
-        return cleanupTargetImage;
+        return optionsByFieldName.get("cleanupTargetImage").getResolvedValue().equals("true");
     }
 
     public boolean isCleanupInspectorContainer() {
-        return cleanupInspectorContainer;
+        return optionsByFieldName.get("cleanupInspectorContainer").getResolvedValue().equals("true");
     }
 
     public boolean isCleanupInspectorImage() {
-        return cleanupInspectorImage;
+        return optionsByFieldName.get("cleanupInspectorImage").getResolvedValue().equals("true");
+    }
+
+    public boolean isImageInspectorServiceStart() {
+        return optionsByFieldName.get("imageInspectorServiceStart").getResolvedValue().equals("true");
     }
 
     public void setDockerImageRepo(final String newValue) {
@@ -548,5 +556,6 @@ public class Config {
         this.sharedDirPathImageInspector = null;
         this.sharedDirPathLocal = null;
         this.imageInspectorUrl = null;
+        this.imageInspectorServiceStart = null;
     }
 }

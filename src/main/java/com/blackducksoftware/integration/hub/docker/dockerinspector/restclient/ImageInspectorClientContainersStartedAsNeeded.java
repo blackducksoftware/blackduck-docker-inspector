@@ -25,12 +25,31 @@ package com.blackducksoftware.integration.hub.docker.dockerinspector.restclient;
 
 import java.net.MalformedURLException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.blackducksoftware.integration.exception.IntegrationException;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 
-public interface ImageInspectorClient {
+@Component
+public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspectorClient {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    String getBdio(String containerPathToTarfile, String containerFileSystemFilename, boolean cleanup) throws IntegrationException, MalformedURLException;
+    @Autowired
+    private Config config;
 
-    boolean isApplicable();
+    @Override
+    public boolean isApplicable() {
+        final boolean answer = config.isImageInspectorServiceStart();
+        logger.debug(String.format("isApplicable() returning %b", answer));
+        return answer;
+    }
 
+    @Override
+    public String getBdio(final String containerPathToTarfile, final String containerFileSystemFilename, final boolean cleanup) throws IntegrationException, MalformedURLException {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

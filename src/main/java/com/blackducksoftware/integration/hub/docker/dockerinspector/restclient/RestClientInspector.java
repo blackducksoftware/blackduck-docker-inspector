@@ -28,6 +28,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -56,13 +57,14 @@ public class RestClientInspector implements Inspector {
     private DockerTarfile dockerTarfile;
 
     @Autowired
-    private ImageInspectorClient restClient;
+    private List<ImageInspectorClient> imageInspectorClients;
 
     @Autowired
     private ContainerPath containerPath;
 
     @Override
     public int getBdio(final DissectedImage dissectedImage) throws IntegrationException {
+        final ImageInspectorClient restClient = chooseImageInspectorClient();
         try {
             final File dockerTarFile = dockerTarfile.deriveDockerTarFile(config);
             final String containerFileSystemFilename = dockerTarfile.deriveContainerFileSystemTarGzFilename(dockerTarFile);
@@ -70,7 +72,7 @@ public class RestClientInspector implements Inspector {
             if (StringUtils.isBlank(config.getImageInspectorUrl())) {
                 throw new IntegrationException("The imageinspector URL property must be set");
             }
-            final String bdioString = restClient.getBdio(config.getImageInspectorUrl(), dockerTarFilePathInContainer, containerFileSystemFilename, config.isCleanupWorkingDir());
+            final String bdioString = restClient.getBdio(dockerTarFilePathInContainer, containerFileSystemFilename, config.isCleanupWorkingDir());
             if (StringUtils.isNotBlank(config.getOutputPath())) {
                 final File userOutputDir = new File(config.getOutputPath());
 
@@ -91,6 +93,15 @@ public class RestClientInspector implements Inspector {
         } catch (final IOException e) {
             throw new IntegrationException(e.getMessage(), e);
         }
+    }
+
+    private ImageInspectorClient chooseImageInspectorClient() throws IntegrationException {
+        for (final ImageInspectorClient client : imageInspectorClients) {
+            if (client.isApplicable()) {
+                return client;
+            }
+        }
+        throw new IntegrationException("Invalid configuration: Need to provide URL to existing ImageInspector services, or request that containers be started as-needed");
     }
 
     private String deriveOutputBdioFilename(final String bdioString) throws IOException, IntegrationException {
