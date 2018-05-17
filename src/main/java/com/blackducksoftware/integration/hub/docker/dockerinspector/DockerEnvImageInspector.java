@@ -119,7 +119,8 @@ public class DockerEnvImageInspector {
             }
 
             try {
-                if (StringUtils.isBlank(config.getImageInspectorUrl())) {
+                // TODO rethink this selection; see how ImageInspectorClients are selected
+                if (!config.isImageInspectorServiceStart() && StringUtils.isBlank(config.getImageInspectorUrl())) {
                     returnCode = dockerExecInspector.getBdio(dissectedImage);
                 } else {
                     returnCode = restClientInspector.getBdio(dissectedImage);

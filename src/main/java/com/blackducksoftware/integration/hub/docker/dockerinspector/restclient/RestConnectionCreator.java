@@ -39,13 +39,13 @@ public class RestConnectionCreator {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public RestConnection createNonRedirectingConnection(final String baseUrl, final int timeoutSeconds) throws MalformedURLException {
-        final RestConnection connection = createConnection(baseUrl, timeoutSeconds);
+        final RestConnection connection = createRedirectingConnection(baseUrl, timeoutSeconds);
         connection.getClientBuilder().disableRedirectHandling();
         return connection;
 
     }
 
-    public RestConnection createConnection(final String baseUrl, final int timeoutSeconds) throws MalformedURLException {
+    public RestConnection createRedirectingConnection(final String baseUrl, final int timeoutSeconds) throws MalformedURLException {
         final UnauthenticatedRestConnectionBuilder connectionBuilder = new UnauthenticatedRestConnectionBuilder();
         connectionBuilder.setBaseUrl(baseUrl);
         connectionBuilder.setTimeout(timeoutSeconds);

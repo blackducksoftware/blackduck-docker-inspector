@@ -27,6 +27,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,18 +43,15 @@ public class InspectorImages {
     private final Logger logger = LoggerFactory.getLogger(InspectorImages.class);
 
     @Autowired
-    ProgramVersion programVersion;
+    private ProgramVersion programVersion;
 
     @Autowired
-    Config config;
+    private Config config;
 
     private final Map<OperatingSystemEnum, InspectorImage> inspectorImageMap = new HashMap<>();
-    private boolean initialized = false;
 
+    @PostConstruct
     void init() throws IOException {
-        if (initialized) {
-            return;
-        }
         String repoWithSeparator = null;
         final String repo = config.getInspectorRepository();
         if (StringUtils.isBlank(repo)) {
@@ -75,11 +74,9 @@ public class InspectorImages {
         inspectorImageMap.put(OperatingSystemEnum.DEBIAN, new InspectorImage(OperatingSystemEnum.UBUNTU, String.format("%s%s-ubuntu", repoWithSeparator, inspectorImageFamily), inspectorImageVersion));
         inspectorImageMap.put(OperatingSystemEnum.UBUNTU, new InspectorImage(OperatingSystemEnum.UBUNTU, String.format("%s%s-ubuntu", repoWithSeparator, inspectorImageFamily), inspectorImageVersion));
         inspectorImageMap.put(OperatingSystemEnum.ALPINE, new InspectorImage(OperatingSystemEnum.ALPINE, String.format("%s%s-alpine", repoWithSeparator, inspectorImageFamily), inspectorImageVersion));
-        initialized = true;
     }
 
     OperatingSystemEnum getInspectorImageOs(final OperatingSystemEnum targetImageOs) throws IOException {
-        init();
         logger.debug(String.format("getInspectorImageOs(%s)", targetImageOs));
         final InspectorImage image = inspectorImageMap.get(targetImageOs);
         if (image == null) {
@@ -90,8 +87,6 @@ public class InspectorImages {
 
     public String getInspectorImageName(final OperatingSystemEnum targetImageOs) throws IOException {
         logger.debug(String.format("getInspectorImageName(%s)", targetImageOs));
-        init();
-        logger.info(String.format("getInspectorImageName(%s)", targetImageOs));
         final InspectorImage image = inspectorImageMap.get(targetImageOs);
         if (image == null) {
             return null;
@@ -101,7 +96,6 @@ public class InspectorImages {
 
     public String getInspectorImageTag(final OperatingSystemEnum targetImageOs) throws IOException {
         logger.debug(String.format("getInspectorImageTag(%s)", targetImageOs));
-        init();
         logger.info(String.format("getInspectorImageTag(%s)", targetImageOs));
         final InspectorImage image = inspectorImageMap.get(targetImageOs);
         if (image == null) {

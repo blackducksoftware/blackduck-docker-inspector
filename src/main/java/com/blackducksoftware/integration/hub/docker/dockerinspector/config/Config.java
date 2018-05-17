@@ -41,6 +41,7 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.help.ValueDe
 
 @Component
 public class Config {
+    private static final String INSPECTOR_OS_UBUNTU = "ubuntu";
     private final static String GROUP_PUBLIC = "public";
     private final static String GROUP_PRIVATE = "private";
 
@@ -224,9 +225,27 @@ public class Config {
     @Value("${imageinspector.url:}")
     private String imageInspectorUrl = "";
 
+    // Properties for pull/start services/containers as needed mode:
+
     @ValueDescription(description = "Start ImageInspector services (containers) as needed?", defaultValue = "false", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${imageinspector.service.start:false}")
     private Boolean imageInspectorServiceStart = Boolean.FALSE;
+
+    @ValueDescription(description = "alpine image inspector port", defaultValue = "9000", group = Config.GROUP_PRIVATE, deprecated = false)
+    @Value("${imageinspector.port.alpine:9000}")
+    private String imageInspectorPortAlpine = "9000";
+
+    @ValueDescription(description = "centos image inspector port", defaultValue = "9001", group = Config.GROUP_PRIVATE, deprecated = false)
+    @Value("$imageinspector.port.centos:9001}")
+    private String imageInspectorPortCentos = "9001";
+
+    @ValueDescription(description = "ubuntu image inspector port", defaultValue = "9002", group = Config.GROUP_PRIVATE, deprecated = false)
+    @Value("${imageinspector.port.ubuntu:9002}")
+    private String imageInspectorPortUbuntu = "9002";
+
+    @ValueDescription(description = "Default image inspector OS", defaultValue = "ubuntu", group = Config.GROUP_PRIVATE, deprecated = false)
+    @Value("${imageinspector.default:ubuntu}")
+    private String imageInspectorDefault = INSPECTOR_OS_UBUNTU;
 
     // Environment Variables
     @Value("${BD_HUB_PASSWORD:}")
@@ -442,6 +461,22 @@ public class Config {
         return optionsByFieldName.get("imageInspectorUrl").getResolvedValue();
     }
 
+    public Integer getImageInspectorPortAlpine() {
+        return new Integer(optionsByFieldName.get("imageInspectorPortAlpine").getResolvedValue());
+    }
+
+    public Integer getImageInspectorPortCentos() {
+        return new Integer(optionsByFieldName.get("imageInspectorPortCentos").getResolvedValue());
+    }
+
+    public Integer getImageInspectorPortUbuntu() {
+        return new Integer(optionsByFieldName.get("imageInspectorPortUbuntu").getResolvedValue());
+    }
+
+    public String getImageInspectorDefault() {
+        return optionsByFieldName.get("imageInspectorDefault").getResolvedValue();
+    }
+
     public String getCallerVersion() {
         return optionsByFieldName.get("callerVersion").getResolvedValue();
     }
@@ -557,5 +592,9 @@ public class Config {
         this.sharedDirPathLocal = null;
         this.imageInspectorUrl = null;
         this.imageInspectorServiceStart = null;
+        this.imageInspectorPortAlpine = null;
+        this.imageInspectorPortCentos = null;
+        this.imageInspectorPortUbuntu = null;
+        this.imageInspectorDefault = null;
     }
 }

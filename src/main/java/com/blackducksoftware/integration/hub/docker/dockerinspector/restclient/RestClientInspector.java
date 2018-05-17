@@ -69,9 +69,10 @@ public class RestClientInspector implements Inspector {
             final File dockerTarFile = dockerTarfile.deriveDockerTarFile(config);
             final String containerFileSystemFilename = dockerTarfile.deriveContainerFileSystemTarGzFilename(dockerTarFile);
             final String dockerTarFilePathInContainer = containerPath.getContainerPathToLocalFile(dockerTarFile.getCanonicalPath());
-            if (StringUtils.isBlank(config.getImageInspectorUrl())) {
-                throw new IntegrationException("The imageinspector URL property must be set");
-            }
+            // TODO remove
+            // if (StringUtils.isBlank(config.getImageInspectorUrl())) {
+            // throw new IntegrationException("The imageinspector URL property must be set");
+            // }
             final String bdioString = restClient.getBdio(dockerTarFilePathInContainer, containerFileSystemFilename, config.isCleanupWorkingDir());
             if (StringUtils.isNotBlank(config.getOutputPath())) {
                 final File userOutputDir = new File(config.getOutputPath());

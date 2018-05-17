@@ -10,9 +10,9 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
@@ -31,7 +31,7 @@ public class UsageFormatterTest {
     public void test() throws IllegalArgumentException, IllegalAccessException, IOException {
         final List<DockerInspectorOption> configOptions = new ArrayList<>();
         configOptions.add(new DockerInspectorOption("hub.url", "hubUrl", "testHubUrl", "Hub URL", String.class, "", "public", false));
-        BDDMockito.given(config.getPublicConfigOptions()).willReturn(configOptions);
+        Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
 
         final List<String> usageStrings = usageFormatter.getStringList();
         assertTrue(usageStrings.size() >= 16);

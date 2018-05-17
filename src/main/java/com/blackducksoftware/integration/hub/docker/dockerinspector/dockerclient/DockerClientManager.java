@@ -41,6 +41,7 @@ import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient.HubSecrets;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.ImageInspectorServices;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.blackducksoftware.integration.hub.imageinspector.name.ImageNameResolver;
 import com.blackducksoftware.integration.hub.imageinspector.name.Names;
@@ -60,8 +61,11 @@ import com.github.dockerjava.api.command.StopContainerCmd;
 import com.github.dockerjava.api.exception.NotFoundException;
 import com.github.dockerjava.api.model.Bind;
 import com.github.dockerjava.api.model.Container;
+import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.Image;
 import com.github.dockerjava.api.model.Info;
+import com.github.dockerjava.api.model.PortBinding;
+import com.github.dockerjava.api.model.Ports.Binding;
 import com.github.dockerjava.core.command.ExecStartResultCallback;
 import com.github.dockerjava.core.command.PullImageResultCallback;
 
@@ -97,6 +101,9 @@ public class DockerClientManager {
 
     @Autowired
     private Config config;
+
+    @Autowired
+    private ImageInspectorServices imageInspectorServices;
 
     public File getTarFileFromDockerImageById(final String imageId) throws HubIntegrationException, IOException {
         final File imageTarDirectory = new File(new File(programPaths.getHubDockerWorkingDirPath()), "tarDirectory");
@@ -162,6 +169,79 @@ public class DockerClientManager {
         }
     }
 
+    public String runByExec(final String runOnImageName, final String runOnTagName, final String runOnImageId, final File dockerTarFile, final boolean copyJar, final String targetImage, final String targetImageRepo,
+            final String targetImageTag)
+            throws InterruptedException, IOException, IllegalArgumentException, IllegalAccessException, IntegrationException {
+        final String imageNameTag = String.format("%s:%s", runOnImageName, runOnTagName);
+        logger.info(String.format("Running container based on image %s", imageNameTag));
+        final String extractorContainerName = programPaths.deriveContainerName(runOnImageName);
+        logger.debug(String.format("Container name: %s", extractorContainerName));
+        final DockerClient dockerClient = hubDockerClient.getDockerClient();
+        final String tarFileDirInSubContainer = programPaths.getHubDockerTargetDirPathContainer();
+        final String tarFilePathInSubContainer = programPaths.getHubDockerTargetDirPathContainer() + dockerTarFile.getName();
+
+        final String containerId = prepareContainerForExec(dockerClient, imageNameTag, extractorContainerName, hubSecrets.getPassword(), hubSecrets.getApiToken());
+        setPropertiesInSubContainer(dockerClient, containerId, tarFilePathInSubContainer, tarFileDirInSubContainer, dockerTarFile, targetImage, targetImageRepo, targetImageTag);
+        if (copyJar) {
+            copyFileToContainer(dockerClient, containerId, programPaths.getHubDockerJarPathHost(), programPaths.getHubDockerPgmDirPathContainer());
+        }
+
+        final List<String> cmd = new ArrayList<>();
+        cmd.add("java");
+        cmd.add("-Dfile.encoding=UTF-8");
+        if (!StringUtils.isBlank(config.getDockerInspectorJavaOptsValue())) {
+            final String[] dockerInspectorJavaOptsParts = config.getDockerInspectorJavaOptsValue().split("\\p{Space}");
+            for (int i = 0; i < dockerInspectorJavaOptsParts.length; i++) {
+                cmd.add(dockerInspectorJavaOptsParts[i]);
+            }
+        }
+        cmd.add("-jar");
+        cmd.add(String.format("/opt/blackduck/hub-docker-inspector/%s", programPaths.getHubDockerJarFilenameHost()));
+        cmd.add(String.format("--spring.config.location=%s", "/opt/blackduck/hub-docker-inspector/config/application.properties"));
+        cmd.add(String.format("--docker.tar=%s", tarFilePathInSubContainer));
+        execCommandInContainer(dockerClient, imageNameTag, containerId, cmd);
+        logger.debug(String.format("Container's output files are in %s because it was mounted under the container's output dir", programPaths.getHubDockerOutputPathHost()));
+        return containerId;
+    }
+
+    public String startContainerAsService(final String imageId, final String containerName) throws IntegrationException {
+        logger.debug(String.format("Staring image ID %s --> container name: %s", imageId, containerName));
+        final DockerClient dockerClient = hubDockerClient.getDockerClient();
+        stopRemoveContainerIfExists(dockerClient, containerName);
+
+        logger.debug(String.format("Creating container %s from image %s", containerName, imageId));
+
+        final String cmd = String.format("java -jar /opt/blackduck/hub-imageinspector-ws/hub-imageinspector-ws.jar --server.port=%d --current.linux.distro=%s", 8082,
+                imageInspectorServices.getDefaultImageInspectorDistroName());
+        // TODO The host port is: imageInspectorServices.getDefaultImageInspectorPort()
+        // TODO but the server port is 8080, 8081, or 8082
+        // TODO withExposedPorts()
+        // TODO withPortBindings()
+        final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageId).withName(containerName).withCmd(cmd.split(" "));
+        final ExposedPort exposedPort = new ExposedPort(8082); // TODO
+        createContainerCmd.withExposedPorts(exposedPort);
+        final PortBinding portBinding = new PortBinding(Binding.bindPort(imageInspectorServices.getDefaultImageInspectorPort()), exposedPort);
+        createContainerCmd.withPortBindings(portBinding);
+        final List<String> envAssignments = new ArrayList<>();
+        if (StringUtils.isBlank(config.getHubProxyHost()) && !StringUtils.isBlank(config.getScanCliOptsEnvVar())) {
+            envAssignments.add(String.format("SCAN_CLI_OPTS=%s", config.getScanCliOptsEnvVar()));
+        }
+        createContainerCmd.withEnv(envAssignments);
+        final CreateContainerResponse containerResponse = createContainerCmd.exec();
+        final String containerId = containerResponse.getId();
+
+        dockerClient.startContainerCmd(containerId).exec();
+        logger.info(String.format("Started container %s from image %s", containerId, imageId));
+
+        return containerId;
+    }
+
+    public void stopRemoveContainer(final String containerId) throws HubIntegrationException {
+        final DockerClient dockerClient = hubDockerClient.getDockerClient();
+        stopContainer(dockerClient, containerId);
+        removeContainer(dockerClient, containerId);
+    }
+
     private File saveImageToDir(final File imageTarDirectory, final String imageTarFilename, final String imageName, final String tagName) throws IOException, HubIntegrationException {
         final File imageTarFile = new File(imageTarDirectory, imageTarFilename);
         saveImageToFile(imageName, tagName, imageTarFile);
@@ -195,46 +275,6 @@ public class DockerClientManager {
             }
         }
         return localImage;
-    }
-
-    public String run(final String runOnImageName, final String runOnTagName, final String runOnImageId, final File dockerTarFile, final boolean copyJar, final String targetImage, final String targetImageRepo, final String targetImageTag)
-            throws InterruptedException, IOException, IllegalArgumentException, IllegalAccessException, IntegrationException {
-        final String imageNameTag = String.format("%s:%s", runOnImageName, runOnTagName);
-        logger.info(String.format("Running container based on image %s", imageNameTag));
-        final String extractorContainerName = programPaths.deriveContainerName(runOnImageName);
-        logger.debug(String.format("Container name: %s", extractorContainerName));
-        final DockerClient dockerClient = hubDockerClient.getDockerClient();
-        final String tarFileDirInSubContainer = programPaths.getHubDockerTargetDirPathContainer();
-        final String tarFilePathInSubContainer = programPaths.getHubDockerTargetDirPathContainer() + dockerTarFile.getName();
-
-        final String containerId = ensureContainerRunning(dockerClient, imageNameTag, extractorContainerName, hubSecrets.getPassword(), hubSecrets.getApiToken());
-        setPropertiesInSubContainer(dockerClient, containerId, tarFilePathInSubContainer, tarFileDirInSubContainer, dockerTarFile, targetImage, targetImageRepo, targetImageTag);
-        if (copyJar) {
-            copyFileToContainer(dockerClient, containerId, programPaths.getHubDockerJarPathHost(), programPaths.getHubDockerPgmDirPathContainer());
-        }
-
-        final List<String> cmd = new ArrayList<>();
-        cmd.add("java");
-        cmd.add("-Dfile.encoding=UTF-8");
-        if (!StringUtils.isBlank(config.getDockerInspectorJavaOptsValue())) {
-            final String[] dockerInspectorJavaOptsParts = config.getDockerInspectorJavaOptsValue().split("\\p{Space}");
-            for (int i = 0; i < dockerInspectorJavaOptsParts.length; i++) {
-                cmd.add(dockerInspectorJavaOptsParts[i]);
-            }
-        }
-        cmd.add("-jar");
-        cmd.add(String.format("/opt/blackduck/hub-docker-inspector/%s", programPaths.getHubDockerJarFilenameHost()));
-        cmd.add(String.format("--spring.config.location=%s", "/opt/blackduck/hub-docker-inspector/config/application.properties"));
-        cmd.add(String.format("--docker.tar=%s", tarFilePathInSubContainer));
-        execCommandInContainer(dockerClient, imageNameTag, containerId, cmd);
-        logger.debug(String.format("Container's output files are in %s because it was mounted under the container's output dir", programPaths.getHubDockerOutputPathHost()));
-        return containerId;
-    }
-
-    public void stopRemoveContainer(final String containerId) throws HubIntegrationException {
-        final DockerClient dockerClient = hubDockerClient.getDockerClient();
-        stopContainer(dockerClient, containerId);
-        removeContainer(dockerClient, containerId);
     }
 
     private void removeContainer(final DockerClient dockerClient, final String containerId) {
@@ -296,7 +336,31 @@ public class DockerClientManager {
         copyFileToContainer(dockerClient, containerId, dockerTarFile.getAbsolutePath(), tarFileDirInSubContainer);
     }
 
-    private String ensureContainerRunning(final DockerClient dockerClient, final String imageId, final String extractorContainerName, final String hubPassword, final String hubApiToken) {
+    private String prepareContainerForExec(final DockerClient dockerClient, final String imageId, final String extractorContainerName, final String hubPassword, final String hubApiToken) {
+        stopRemoveContainerIfExists(dockerClient, extractorContainerName);
+        logger.debug(String.format("Creating container %s from image %s", extractorContainerName, imageId));
+        final Bind bind = createBindMount(programPaths.getHubDockerOutputPathHost(), programPaths.getHubDockerOutputPathContainer());
+        final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageId).withStdinOpen(true).withTty(true).withName(extractorContainerName).withBinds(bind).withCmd("/bin/bash");
+
+        // TODO remove env var stuff
+        final List<String> envAssignments = new ArrayList<>();
+        envAssignments.add(String.format("BD_HUB_PASSWORD=%s", hubPassword));
+        envAssignments.add(String.format("BD_HUB_TOKEN=%s", hubApiToken));
+        if (StringUtils.isBlank(config.getHubProxyHost()) && !StringUtils.isBlank(config.getScanCliOptsEnvVar())) {
+            envAssignments.add(String.format("SCAN_CLI_OPTS=%s", config.getScanCliOptsEnvVar()));
+        }
+        createContainerCmd.withEnv(envAssignments);
+        ///////////////
+        final CreateContainerResponse containerResponse = createContainerCmd.exec();
+        final String containerId = containerResponse.getId();
+
+        dockerClient.startContainerCmd(containerId).exec();
+        logger.info(String.format("Started container %s from image %s", containerId, imageId));
+
+        return containerId;
+    }
+
+    private void stopRemoveContainerIfExists(final DockerClient dockerClient, final String extractorContainerName) {
         String oldContainerId;
         final List<Container> containers = dockerClient.listContainersCmd().withShowAll(true).exec();
         final Container extractorContainer = getRunningContainer(containers, extractorContainerName);
@@ -310,23 +374,6 @@ public class DockerClientManager {
             logger.debug("The extractor container exists; removing it");
             dockerClient.removeContainerCmd(oldContainerId).exec();
         }
-        logger.debug(String.format("Creating container %s from image %s", extractorContainerName, imageId));
-        final Bind bind = createBindMount(programPaths.getHubDockerOutputPathHost(), programPaths.getHubDockerOutputPathContainer());
-        final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageId).withStdinOpen(true).withTty(true).withName(extractorContainerName).withBinds(bind).withCmd("/bin/bash");
-        final List<String> envAssignments = new ArrayList<>();
-        envAssignments.add(String.format("BD_HUB_PASSWORD=%s", hubPassword));
-        envAssignments.add(String.format("BD_HUB_TOKEN=%s", hubApiToken));
-        if (StringUtils.isBlank(config.getHubProxyHost()) && !StringUtils.isBlank(config.getScanCliOptsEnvVar())) {
-            envAssignments.add(String.format("SCAN_CLI_OPTS=%s", config.getScanCliOptsEnvVar()));
-        }
-        createContainerCmd.withEnv(envAssignments);
-        final CreateContainerResponse containerResponse = createContainerCmd.exec();
-        final String containerId = containerResponse.getId();
-
-        dockerClient.startContainerCmd(containerId).exec();
-        logger.info(String.format("Started container %s from image %s", containerId, imageId));
-
-        return containerId;
     }
 
     private Bind createBindMount(final String pathOnHost, final String pathOnContainer) {
