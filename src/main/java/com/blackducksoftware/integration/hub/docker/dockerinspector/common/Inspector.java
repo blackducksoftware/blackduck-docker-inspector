@@ -28,6 +28,8 @@ import com.blackducksoftware.integration.hub.imageinspector.lib.DissectedImage;
 
 public interface Inspector {
 
+    boolean isApplicable();
+
     int getBdio(DissectedImage dissectedImage) throws IntegrationException;
 
 }

@@ -67,6 +67,14 @@ public class RestClientInspector implements Inspector {
     private ContainerPath containerPath;
 
     @Override
+    public boolean isApplicable() {
+        if (config.isImageInspectorServiceStart() || StringUtils.isNotBlank(config.getImageInspectorUrl())) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public int getBdio(final DissectedImage dissectedImage) throws IntegrationException {
         final ImageInspectorClient restClient = chooseImageInspectorClient();
         try {

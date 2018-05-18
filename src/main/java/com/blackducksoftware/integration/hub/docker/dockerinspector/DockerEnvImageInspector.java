@@ -40,14 +40,13 @@ import org.springframework.context.annotation.ComponentScan;
 
 import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.common.HubProjectName;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Inspector;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Output;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.DockerClientManager;
-import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerexec.DockerExecInspector;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.help.formatter.UsageFormatter;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient.HubClient;
-import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.RestClientInspector;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.blackducksoftware.integration.hub.imageinspector.api.PkgMgrDataNotFoundException;
 import com.blackducksoftware.integration.hub.imageinspector.lib.DissectedImage;
@@ -96,10 +95,7 @@ public class DockerEnvImageInspector {
     private Config config;
 
     @Autowired
-    private DockerExecInspector dockerExecInspector;
-
-    @Autowired
-    private RestClientInspector restClientInspector;
+    private List<Inspector> inspectors;
 
     @Autowired
     private UsageFormatter usageFormatter;
@@ -117,14 +113,9 @@ public class DockerEnvImageInspector {
             if (!initAndValidate(config)) {
                 System.exit(0);
             }
-
             try {
-                // TODO rethink this selection; see how ImageInspectorClients are selected; combine into one decision
-                if (!config.isImageInspectorServiceStart() && StringUtils.isBlank(config.getImageInspectorUrl())) {
-                    returnCode = dockerExecInspector.getBdio(dissectedImage);
-                } else {
-                    returnCode = restClientInspector.getBdio(dissectedImage);
-                }
+                final Inspector inspector = chooseInspector();
+                returnCode = inspector.getBdio(dissectedImage);
             } catch (final PkgMgrDataNotFoundException e) {
                 logger.info("Pkg mgr not found; generating empty BDIO file");
                 final ImageInfoDerived imageInfoDerived = imageInspector.generateEmptyBdio(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), hubProjectName.getHubProjectName(config),
@@ -146,6 +137,15 @@ public class DockerEnvImageInspector {
         }
         logger.info(String.format("Returning %d", returnCode));
         System.exit(returnCode);
+    }
+
+    private Inspector chooseInspector() throws IntegrationException {
+        for (final Inspector inspector : inspectors) {
+            if (inspector.isApplicable()) {
+                return inspector;
+            }
+        }
+        throw new IntegrationException("Invalid configuration: Unable to identify which inspector mode to execute");
     }
 
     private boolean helpInvoked() {

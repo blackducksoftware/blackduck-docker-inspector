@@ -82,11 +82,14 @@ public class DockerExecInspector implements Inspector {
     @Autowired
     private Output output;
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see com.blackducksoftware.integration.hub.docker.dockerinspector.dockerexec.Inspector#getBdio(com.blackducksoftware.integration.hub.imageinspector.lib.DissectedImage)
-     */
+    @Override
+    public boolean isApplicable() {
+        if (!config.isImageInspectorServiceStart() && StringUtils.isBlank(config.getImageInspectorUrl())) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public int getBdio(final DissectedImage dissectedImage) throws IntegrationException {
         try {

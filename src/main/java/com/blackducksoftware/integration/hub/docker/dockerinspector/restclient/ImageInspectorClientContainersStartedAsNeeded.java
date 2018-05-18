@@ -120,7 +120,7 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
 
         final String containerName = programPaths.deriveContainerName(imageInspectorRepo);
         final String containerId = dockerClientManager.startContainerAsService(imageId, containerName);
-        // TODO will need containerId later to stop/remove it?
+        // TODO will need containerId later to stop/remove it since we launched it
 
         for (int tryIndex = 0; tryIndex < MAX_CONTAINER_START_TRY_COUNT && !serviceIsUp; tryIndex++) {
             try {
