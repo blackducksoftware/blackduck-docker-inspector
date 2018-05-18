@@ -52,18 +52,31 @@ public class DockerTarfile {
     @Autowired
     private ProgramPaths programPaths;
 
-    // TODO refactor this method
     public File deriveDockerTarFile() throws IOException, HubIntegrationException {
-        logger.debug(String.format("*** programPaths.getHubDockerTargetDirPathHost(): %s", programPaths.getHubDockerTargetDirPathHost()));
-        File finalDockerTarfile = null;
+        logger.debug(String.format("programPaths.getHubDockerTargetDirPath(): %s", programPaths.getHubDockerTargetDirPath()));
         if (StringUtils.isNotBlank(config.getDockerTar())) {
-            final File givenDockerTarfile = new File(config.getDockerTar());
-            logger.debug(String.format("Given docker tarfile: %s", givenDockerTarfile.getCanonicalPath()));
+            return deriveDockerTarFileGivenTarfile();
+        } else {
+            return deriveDockerTarFileGivenImageSpec();
+        }
 
-            // TODO make it clearer what's going on (ideally eliminate the conditional with better design)
-            if (!config.isOnHost() || StringUtils.isNotBlank(config.getImageInspectorUrl())) {
-                return givenDockerTarfile;
-            }
+    }
+
+    private File deriveDockerTarFileGivenTarfile() throws IOException {
+        File finalDockerTarfile = null;
+        final File givenDockerTarfile = new File(config.getDockerTar());
+        logger.debug(String.format("Given docker tarfile: %s", givenDockerTarfile.getCanonicalPath()));
+        // When in container: no copy needed
+        if (!config.isOnHost()) {
+            return givenDockerTarfile;
+        }
+        // TODO: actually, don't need this. The not-on-host check takes care of it
+        // In orchestration environments: user gives us the final tarfile location in the shared dir; no copy needed
+        if (StringUtils.isNotBlank(config.getImageInspectorUrl())) {
+            return givenDockerTarfile;
+        }
+        if (config.isImageInspectorServiceStart()) {
+            // Copy the tarfile to the target dir
             finalDockerTarfile = new File(programPaths.getHubDockerTargetDirPath(), givenDockerTarfile.getName());
             logger.debug(String.format("Required docker tarfile location: %s", finalDockerTarfile.getCanonicalPath()));
             if (!finalDockerTarfile.getCanonicalPath().equals(givenDockerTarfile.getCanonicalPath())) {
@@ -74,7 +87,11 @@ public class DockerTarfile {
             }
             return finalDockerTarfile;
         }
-        // Given image:tag
+        return givenDockerTarfile;
+    }
+
+    private File deriveDockerTarFileGivenImageSpec() throws HubIntegrationException, IOException {
+        File finalDockerTarfile = null;
         final File imageTarDirectory = new File(programPaths.getHubDockerTargetDirPath());
         if (StringUtils.isNotBlank(config.getDockerImageId())) {
             finalDockerTarfile = dockerClientManager.getTarFileFromDockerImageById(config.getDockerImageId(), imageTarDirectory);
