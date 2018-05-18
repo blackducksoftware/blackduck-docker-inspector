@@ -70,7 +70,7 @@ public class RestClientInspector implements Inspector {
     public int getBdio(final DissectedImage dissectedImage) throws IntegrationException {
         final ImageInspectorClient restClient = chooseImageInspectorClient();
         try {
-            final File dockerTarFile = dockerTarfile.deriveDockerTarFile(config);
+            final File dockerTarFile = dockerTarfile.deriveDockerTarFile();
             final String containerFileSystemFilename = dockerTarfile.deriveContainerFileSystemTarGzFilename(dockerTarFile);
             logger.debug(String.format("**** Given docker tar file path: %s", dockerTarFile.getCanonicalPath()));
             final String dockerTarFilePathInContainer = containerPath.getContainerPathToLocalFile(dockerTarFile.getCanonicalPath());

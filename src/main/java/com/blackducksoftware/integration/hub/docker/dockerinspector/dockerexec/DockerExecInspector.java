@@ -120,7 +120,7 @@ public class DockerExecInspector implements Inspector {
     }
 
     private void parseManifest(final Config config, final DissectedImage dissectedImage) throws IOException, IntegrationException {
-        dissectedImage.setDockerTarFile(dockerTarfile.deriveDockerTarFile(config));
+        dissectedImage.setDockerTarFile(dockerTarfile.deriveDockerTarFile());
         dissectedImage.setLayerTars(imageInspector.extractLayerTars(new File(programPaths.getHubDockerWorkingDirPath()), dissectedImage.getDockerTarFile()));
         dissectedImage.setLayerMappings(imageInspector.getLayerMappings(new File(programPaths.getHubDockerWorkingDirPath()), dissectedImage.getDockerTarFile().getName(), config.getDockerImageRepo(), config.getDockerImageTag()));
         adjustImageNameTagFromLayerMappings(dissectedImage.getLayerMappings());

@@ -43,18 +43,26 @@ public class DockerTarfile {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
+    private Config config;
+
+    @Autowired
     private DockerClientManager dockerClientManager;
 
     @Autowired
     private ProgramPaths programPaths;
 
-    public File deriveDockerTarFile(final Config config) throws IOException, HubIntegrationException {
+    public File deriveDockerTarFile() throws IOException, HubIntegrationException {
+        logger.debug(String.format("*** programPaths.getHubDockerTargetDirPathHost(): %s", programPaths.getHubDockerTargetDirPathHost()));
+        // TODO why is config passed, and other dependencies injected; pick one
         File dockerTarFile = null;
         if (StringUtils.isNotBlank(config.getDockerTar())) {
             // TODO This won't work for as-needed mode; there, will have to copy tar to shared dir
+            // TODO: The final tar file dir should be determined by ProgramPaths (using config)
             dockerTarFile = new File(config.getDockerTar());
             return dockerTarFile;
         }
+        // TODO: The final tar file dir should be determined by ProgramPaths (using config)
+        // This is fine for exec only
         final File imageTarDirectory = new File(new File(programPaths.getHubDockerWorkingDirPath()), "tarDirectory");
         if (StringUtils.isNotBlank(config.getDockerImageId())) {
             dockerTarFile = dockerClientManager.getTarFileFromDockerImageById(config.getDockerImageId(), imageTarDirectory);
