@@ -34,6 +34,7 @@ import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.DockerClientManager;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 
@@ -44,14 +45,21 @@ public class DockerTarfile {
     @Autowired
     private DockerClientManager dockerClientManager;
 
+    @Autowired
+    private ProgramPaths programPaths;
+
     public File deriveDockerTarFile(final Config config) throws IOException, HubIntegrationException {
         File dockerTarFile = null;
         if (StringUtils.isNotBlank(config.getDockerTar())) {
+            // TODO This won't work for as-needed mode; there, will have to copy tar to shared dir
             dockerTarFile = new File(config.getDockerTar());
-        } else if (StringUtils.isNotBlank(config.getDockerImageId())) {
-            dockerTarFile = dockerClientManager.getTarFileFromDockerImageById(config.getDockerImageId());
+            return dockerTarFile;
+        }
+        final File imageTarDirectory = new File(new File(programPaths.getHubDockerWorkingDirPath()), "tarDirectory");
+        if (StringUtils.isNotBlank(config.getDockerImageId())) {
+            dockerTarFile = dockerClientManager.getTarFileFromDockerImageById(config.getDockerImageId(), imageTarDirectory);
         } else if (StringUtils.isNotBlank(config.getDockerImageRepo())) {
-            dockerTarFile = dockerClientManager.getTarFileFromDockerImage(config.getDockerImageRepo(), config.getDockerImageTag());
+            dockerTarFile = dockerClientManager.getTarFileFromDockerImage(config.getDockerImageRepo(), config.getDockerImageTag(), imageTarDirectory);
         }
         return dockerTarFile;
     }

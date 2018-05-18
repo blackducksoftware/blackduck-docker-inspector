@@ -40,11 +40,11 @@ import org.springframework.context.annotation.ComponentScan;
 
 import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.common.HubProjectName;
-import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Inspector;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Output;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.DockerClientManager;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerexec.DockerExecInspector;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.help.formatter.UsageFormatter;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient.HubClient;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.RestClientInspector;
@@ -96,7 +96,7 @@ public class DockerEnvImageInspector {
     private Config config;
 
     @Autowired
-    private Inspector dockerExecInspector;
+    private DockerExecInspector dockerExecInspector;
 
     @Autowired
     private RestClientInspector restClientInspector;
@@ -119,7 +119,7 @@ public class DockerEnvImageInspector {
             }
 
             try {
-                // TODO rethink this selection; see how ImageInspectorClients are selected
+                // TODO rethink this selection; see how ImageInspectorClients are selected; combine into one decision
                 if (!config.isImageInspectorServiceStart() && StringUtils.isBlank(config.getImageInspectorUrl())) {
                     returnCode = dockerExecInspector.getBdio(dissectedImage);
                 } else {

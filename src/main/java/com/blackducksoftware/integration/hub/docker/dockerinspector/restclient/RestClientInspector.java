@@ -43,6 +43,7 @@ import com.blackducksoftware.integration.hub.bdio.model.SimpleBdioDocument;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.common.DockerTarfile;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Inspector;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.imageinspector.lib.DissectedImage;
 import com.google.gson.Gson;
 
@@ -52,6 +53,9 @@ public class RestClientInspector implements Inspector {
 
     @Autowired
     private Config config;
+
+    @Autowired
+    private ProgramPaths programPaths;
 
     @Autowired
     private DockerTarfile dockerTarfile;
@@ -68,7 +72,11 @@ public class RestClientInspector implements Inspector {
         try {
             final File dockerTarFile = dockerTarfile.deriveDockerTarFile(config);
             final String containerFileSystemFilename = dockerTarfile.deriveContainerFileSystemTarGzFilename(dockerTarFile);
+            logger.debug(String.format("**** Given docker tar file path: %s", dockerTarFile.getCanonicalPath()));
             final String dockerTarFilePathInContainer = containerPath.getContainerPathToLocalFile(dockerTarFile.getCanonicalPath());
+            logger.debug(String.format("**** Derived container docker tar file path: %s", dockerTarFilePathInContainer));
+            logger.debug(String.format("**** HubDockerWorkingDirPathHost: %s", programPaths.getHubDockerWorkingDirPathHost()));
+            logger.debug(String.format("**** HubDockerWorkingDirPathContainer: %s", programPaths.getHubDockerWorkingDirPathContainer()));
             // TODO remove
             // if (StringUtils.isBlank(config.getImageInspectorUrl())) {
             // throw new IntegrationException("The imageinspector URL property must be set");

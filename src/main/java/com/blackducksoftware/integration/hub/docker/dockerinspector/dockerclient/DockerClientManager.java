@@ -105,8 +105,8 @@ public class DockerClientManager {
     @Autowired
     private ImageInspectorServices imageInspectorServices;
 
-    public File getTarFileFromDockerImageById(final String imageId) throws HubIntegrationException, IOException {
-        final File imageTarDirectory = new File(new File(programPaths.getHubDockerWorkingDirPath()), "tarDirectory");
+    public File getTarFileFromDockerImageById(final String imageId, final File imageTarDirectory) throws HubIntegrationException, IOException {
+
         final DockerClient dockerClient = hubDockerClient.getDockerClient();
         final InspectImageCmd inspectImageCmd = dockerClient.inspectImageCmd(imageId);
         final InspectImageResponse imageDetails = inspectImageCmd.exec();
@@ -123,8 +123,7 @@ public class DockerClientManager {
         return imageTarFile;
     }
 
-    public File getTarFileFromDockerImage(final String imageName, final String tagName) throws IOException, HubIntegrationException {
-        final File imageTarDirectory = new File(new File(programPaths.getHubDockerWorkingDirPath()), "tarDirectory");
+    public File getTarFileFromDockerImage(final String imageName, final String tagName, final File imageTarDirectory) throws IOException, HubIntegrationException {
         final String targetImageId = pullImage(imageName, tagName);
         final File imageTarFile = saveImageToDir(imageTarDirectory, Names.getImageTarFilename(imageName, tagName), imageName, tagName);
         if (config.isCleanupTargetImage()) {
@@ -333,6 +332,8 @@ public class DockerClientManager {
 
         logger.trace(String.format("Docker image tar file: %s", dockerTarFile.getAbsolutePath()));
         logger.trace(String.format("Docker image tar file path in sub-container: %s", tarFilePathInSubContainer));
+        // TODO This operation should not be in a method with this name
+        // TODO Might make sense to move it next to the other call to copyFileToContainer() (that copies the jar file)
         copyFileToContainer(dockerClient, containerId, dockerTarFile.getAbsolutePath(), tarFileDirInSubContainer);
     }
 

@@ -40,6 +40,7 @@ import org.springframework.stereotype.Component;
 import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.ContainerCleaner;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.InspectorImages;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.common.DockerTarfile;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.common.HubProjectName;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Inspector;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Output;
@@ -71,6 +72,9 @@ public class DockerExecInspector implements Inspector {
 
     @Autowired
     private InspectorImages dockerImages;
+
+    @Autowired
+    private DockerTarfile dockerTarfile;
 
     @Autowired
     private HubProjectName hubProjectName;
@@ -116,22 +120,10 @@ public class DockerExecInspector implements Inspector {
     }
 
     private void parseManifest(final Config config, final DissectedImage dissectedImage) throws IOException, IntegrationException {
-        dissectedImage.setDockerTarFile(deriveDockerTarFile(config));
+        dissectedImage.setDockerTarFile(dockerTarfile.deriveDockerTarFile(config));
         dissectedImage.setLayerTars(imageInspector.extractLayerTars(new File(programPaths.getHubDockerWorkingDirPath()), dissectedImage.getDockerTarFile()));
         dissectedImage.setLayerMappings(imageInspector.getLayerMappings(new File(programPaths.getHubDockerWorkingDirPath()), dissectedImage.getDockerTarFile().getName(), config.getDockerImageRepo(), config.getDockerImageTag()));
         adjustImageNameTagFromLayerMappings(dissectedImage.getLayerMappings());
-    }
-
-    private File deriveDockerTarFile(final Config config) throws IOException, HubIntegrationException {
-        File dockerTarFile = null;
-        if (StringUtils.isNotBlank(config.getDockerTar())) {
-            dockerTarFile = new File(config.getDockerTar());
-        } else if (StringUtils.isNotBlank(config.getDockerImageId())) {
-            dockerTarFile = dockerClientManager.getTarFileFromDockerImageById(config.getDockerImageId());
-        } else if (StringUtils.isNotBlank(config.getDockerImageRepo())) {
-            dockerTarFile = dockerClientManager.getTarFileFromDockerImage(config.getDockerImageRepo(), config.getDockerImageTag());
-        }
-        return dockerTarFile;
     }
 
     private void adjustImageNameTagFromLayerMappings(final List<ManifestLayerMapping> layerMappings) {

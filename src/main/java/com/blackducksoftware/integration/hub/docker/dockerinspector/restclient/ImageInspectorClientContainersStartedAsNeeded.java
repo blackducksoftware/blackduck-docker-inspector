@@ -87,6 +87,14 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         }
         ensureServiceReady(restConnection, imageInspectorUrl);
 
+        //////////////////////////
+        // TODO: it's a little weird that at this point the tar file still needs to be put where the container can see it
+        // TODO: Not sure whether (a) copying the tar in, or (b) mounting it in, makes more sense
+        // final String tarFileDirInSubContainer = programPaths.getHubDockerTargetDirPathContainer();
+        // final String tarFilePathInSubContainer = programPaths.getHubDockerTargetDirPathContainer() + dockerTarFile.getName();
+        // copyFileToContainer(dockerClient, containerId, dockerTarFile.getAbsolutePath(), tarFileDirInSubContainer);
+        ///////////////////////
+
         logger.debug(String.format("Sending getBdio request to: %s", imageInspectorUrl));
         return restRequestor.executeGetBdioRequest(restConnection, imageInspectorUrl, containerPathToTarfile, containerFileSystemFilename, cleanup);
     }
