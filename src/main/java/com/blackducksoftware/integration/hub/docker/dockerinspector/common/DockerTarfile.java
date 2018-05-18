@@ -26,6 +26,7 @@ package com.blackducksoftware.integration.hub.docker.dockerinspector.common;
 import java.io.File;
 import java.io.IOException;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,25 +52,36 @@ public class DockerTarfile {
     @Autowired
     private ProgramPaths programPaths;
 
+    // TODO refactor this method
     public File deriveDockerTarFile() throws IOException, HubIntegrationException {
         logger.debug(String.format("*** programPaths.getHubDockerTargetDirPathHost(): %s", programPaths.getHubDockerTargetDirPathHost()));
-        // TODO why is config passed, and other dependencies injected; pick one
-        File dockerTarFile = null;
+        File finalDockerTarfile = null;
         if (StringUtils.isNotBlank(config.getDockerTar())) {
-            // TODO This won't work for as-needed mode; there, will have to copy tar to shared dir
-            // TODO: The final tar file dir should be determined by ProgramPaths (using config)
-            dockerTarFile = new File(config.getDockerTar());
-            return dockerTarFile;
+            final File givenDockerTarfile = new File(config.getDockerTar());
+            logger.debug(String.format("Given docker tarfile: %s", givenDockerTarfile.getCanonicalPath()));
+
+            // TODO make it clearer what's going on (ideally eliminate the conditional with better design)
+            if (!config.isOnHost() || StringUtils.isNotBlank(config.getImageInspectorUrl())) {
+                return givenDockerTarfile;
+            }
+            finalDockerTarfile = new File(programPaths.getHubDockerTargetDirPath(), givenDockerTarfile.getName());
+            logger.debug(String.format("Required docker tarfile location: %s", finalDockerTarfile.getCanonicalPath()));
+            if (!finalDockerTarfile.getCanonicalPath().equals(givenDockerTarfile.getCanonicalPath())) {
+                logger.debug(String.format("Copying %s to %s", givenDockerTarfile.getCanonicalPath(), finalDockerTarfile.getCanonicalPath()));
+                // This copy isn't strictly necessary in the "exec" scenario; only the start-containers-as-needed scenario
+                // But it doesn't seem worth complicating the code to avoid it, especially hopefully exec mode can eventually be removed
+                FileUtils.copyFile(givenDockerTarfile, finalDockerTarfile);
+            }
+            return finalDockerTarfile;
         }
-        // TODO: The final tar file dir should be determined by ProgramPaths (using config)
-        // This is fine for exec only
-        final File imageTarDirectory = new File(new File(programPaths.getHubDockerWorkingDirPath()), "tarDirectory");
+        // Given image:tag
+        final File imageTarDirectory = new File(programPaths.getHubDockerTargetDirPath());
         if (StringUtils.isNotBlank(config.getDockerImageId())) {
-            dockerTarFile = dockerClientManager.getTarFileFromDockerImageById(config.getDockerImageId(), imageTarDirectory);
+            finalDockerTarfile = dockerClientManager.getTarFileFromDockerImageById(config.getDockerImageId(), imageTarDirectory);
         } else if (StringUtils.isNotBlank(config.getDockerImageRepo())) {
-            dockerTarFile = dockerClientManager.getTarFileFromDockerImage(config.getDockerImageRepo(), config.getDockerImageTag(), imageTarDirectory);
+            finalDockerTarfile = dockerClientManager.getTarFileFromDockerImage(config.getDockerImageRepo(), config.getDockerImageTag(), imageTarDirectory);
         }
-        return dockerTarFile;
+        return finalDockerTarfile;
     }
 
     public String deriveContainerFileSystemTarGzFilename(final File dockerTarFile) throws IOException, IntegrationException {

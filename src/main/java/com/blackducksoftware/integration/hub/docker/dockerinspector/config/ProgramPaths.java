@@ -204,6 +204,14 @@ public class ProgramPaths {
         return hubDockerTargetDirPathContainer;
     }
 
+    public String getHubDockerTargetDirPath() {
+        if (config.isOnHost()) {
+            return getHubDockerTargetDirPathHost();
+        } else {
+            return getHubDockerTargetDirPathContainer();
+        }
+    }
+
     public String getHubDockerPgmDirPathHost() {
         return hubDockerPgmDirPathHost;
     }
