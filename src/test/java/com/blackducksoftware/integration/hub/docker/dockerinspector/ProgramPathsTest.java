@@ -1,16 +1,15 @@
 package com.blackducksoftware.integration.hub.docker.dockerinspector;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
@@ -41,14 +40,15 @@ public class ProgramPathsTest {
         if (!installDirPath.endsWith("/")) {
             installDirPath = String.format("%s/", installDirPath);
         }
-        BDDMockito.given(config.getWorkingDirPath()).willReturn(installDirPath);
+        Mockito.when(config.getWorkingDirPath()).thenReturn(installDirPath);
 
         programPaths.init();
 
-        assertTrue(programPaths.getHubDockerConfigDirPathHost().startsWith(String.format("%sconfig_", installDirPath)));
-        assertTrue(programPaths.getHubDockerConfigFilePathHost().startsWith(String.format("%sconfig_", installDirPath)));
-        assertTrue(programPaths.getHubDockerConfigFilePathHost().endsWith(String.format("/application.properties")));
-        assertTrue(programPaths.getHubDockerTargetDirPathHost().startsWith(String.format("%starget_", installDirPath)));
         assertEquals(String.format("%s", installDirPath), programPaths.getHubDockerPgmDirPathHost());
+        final String runDirPath = programPaths.getHubDockerRunDirPathHost();
+        assertEquals(String.format("%sconfig/", runDirPath), programPaths.getHubDockerConfigDirPathHost());
+        assertEquals(String.format("%sconfig/application.properties", runDirPath), programPaths.getHubDockerConfigFilePathHost());
+        assertEquals(String.format("%starget/", runDirPath), programPaths.getHubDockerTargetDirPathHost());
+
     }
 }

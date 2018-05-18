@@ -48,6 +48,8 @@ public class ProgramPaths {
     private static final String HOST_RESULT_JSON_FILENAME = "result.json";
     private static final String CONTAINER_RESULT_JSON_FILENAME = "containerResult.json";
 
+    private static final String RUNDIR_BASENAME = "run";
+
     private static final String OUTPUT_DIR = "output";
 
     private static final String WORKING_DIR = "working";
@@ -62,6 +64,9 @@ public class ProgramPaths {
 
     private String hubDockerPgmDirPathHost;
     private String hubDockerPgmDirPathContainer;
+
+    private String hubDockerRunDirPathHost;
+
     public static final String APPLICATION_PROPERTIES_FILENAME = "application.properties";
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -85,6 +90,7 @@ public class ProgramPaths {
     private String cleanedProcessId;
 
     private String getProgramDirPathHost() {
+        // TODO should be able to eliminate the need for this adjustment:
         if (!config.getWorkingDirPath().endsWith("/")) {
             config.setWorkingDirPath(String.format("%s/", config.getWorkingDirPath()));
         }
@@ -104,18 +110,22 @@ public class ProgramPaths {
             hubDockerPgmDirPathHost = getProgramDirPathHost();
         }
         logger.debug(String.format("hubDockerPgmDirPathHost: %s", hubDockerPgmDirPathHost));
+        final File runDirHost = new File(hubDockerPgmDirPathHost, adjustWithProcessId(RUNDIR_BASENAME));
+        hubDockerRunDirPathHost = runDirHost.getAbsolutePath() + "/";
+        logger.debug(String.format("hubDockerRunDirPathHost: %s", hubDockerRunDirPathHost));
+
         hubDockerJarPathHost = hubDockerJarPathActual;
         hubDockerPgmDirPathContainer = getProgramDirPathContainer();
-        hubDockerConfigDirPathHost = adjustWithProcessId(hubDockerPgmDirPathHost + CONFIG_DIR) + "/";
+        hubDockerConfigDirPathHost = new File(runDirHost, CONFIG_DIR).getAbsolutePath() + "/";
         hubDockerConfigDirPathContainer = hubDockerPgmDirPathContainer + CONFIG_DIR + "/";
         hubDockerTempDirPathContainer = hubDockerPgmDirPathContainer + TEMP_DIR + "/";
         hubDockerConfigFilePathHost = hubDockerConfigDirPathHost + APPLICATION_PROPERTIES_FILENAME;
         hubDockerConfigFilePathContainer = hubDockerConfigDirPathContainer + APPLICATION_PROPERTIES_FILENAME;
-        hubDockerTargetDirPathHost = adjustWithProcessId(hubDockerPgmDirPathHost + TARGET_DIR) + "/";
+        hubDockerTargetDirPathHost = new File(runDirHost, TARGET_DIR).getAbsolutePath() + "/";
         hubDockerTargetDirPathContainer = hubDockerPgmDirPathContainer + TARGET_DIR + "/";
-        hubDockerWorkingDirPathHost = adjustWithProcessId(hubDockerPgmDirPathHost + WORKING_DIR) + "/";
+        hubDockerWorkingDirPathHost = new File(runDirHost, WORKING_DIR).getAbsolutePath() + "/";
         hubDockerWorkingDirPathContainer = hubDockerPgmDirPathContainer + WORKING_DIR + "/";
-        hubDockerOutputPathHost = adjustWithProcessId(hubDockerPgmDirPathHost + OUTPUT_DIR) + "/";
+        hubDockerOutputPathHost = new File(runDirHost, OUTPUT_DIR).getAbsolutePath() + "/";
         hubDockerOutputPathContainer = getProgramDirPathContainer() + OUTPUT_DIR + "/";
         hubDockerContainerResultPathOnHost = hubDockerOutputPathHost + CONTAINER_RESULT_JSON_FILENAME;
         hubDockerContainerResultPathInContainer = hubDockerOutputPathContainer + CONTAINER_RESULT_JSON_FILENAME;
@@ -196,6 +206,10 @@ public class ProgramPaths {
 
     public String getHubDockerPgmDirPathHost() {
         return hubDockerPgmDirPathHost;
+    }
+
+    public String getHubDockerRunDirPathHost() {
+        return hubDockerRunDirPathHost;
     }
 
     public String getHubDockerPgmDirPathContainer() {
