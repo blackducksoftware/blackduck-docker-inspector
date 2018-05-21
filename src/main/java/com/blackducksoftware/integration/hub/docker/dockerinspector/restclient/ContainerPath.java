@@ -41,17 +41,23 @@ public class ContainerPath {
     @Autowired
     private Config config;
 
+    // TODO Should this be in ProgramPaths? Or at least delegated to from there?
+
     /*
      * Translate a local path (to a file within the dir shared with the container) to the equivalent path for the container. Find path to the given localPath RELATIVE to the local shared dir. Convert that to the container's path by
      * appending that relative path to the container's path to the shared dir
      */
-    public String getContainerPathToLocalFile(final String localPath) throws IOException {
+    public String getContainerPathToLocalFile(final String localPath, final String containerTargetDirPathDefault) throws IOException {
         logger.debug(String.format("localPath: %s", localPath));
         final String workingDirPath = new File(config.getSharedDirPathLocal()).getCanonicalPath();
         final String workingDirPathImageInspector = config.getSharedDirPathImageInspector();
         if (StringUtils.isBlank(workingDirPathImageInspector)) {
             logger.debug(String.format("config.getWorkingDirPathImageInspector() is BLANK"));
-            return localPath;
+            if (StringUtils.isNotBlank(containerTargetDirPathDefault)) {
+                return getContainerTargetFilePath(containerTargetDirPathDefault, localPath);
+            } else {
+                return localPath;
+            }
         }
         final String trimmedWorkingDirPath = trimTrailingFileSeparator(workingDirPath);
         final String trimmedWorkingDirPathImageInspector = trimTrailingFileSeparator(workingDirPathImageInspector);
@@ -64,6 +70,14 @@ public class ContainerPath {
         final String containerPath = String.format("%s%s", trimmedWorkingDirPathImageInspector, localRelPath);
         logger.debug(String.format("containerPath: %s", containerPath));
         return containerPath;
+    }
+
+    private String getContainerTargetFilePath(final String containerTargetDirPathDefault, final String localPath) {
+        final File localFile = new File(localPath);
+        final File containerTargetDir = new File(containerTargetDirPathDefault);
+        final File containerTargetFile = new File(containerTargetDir, localFile.getName());
+        final String containerTargetFilePath = containerTargetFile.getAbsolutePath();
+        return containerTargetFilePath;
     }
 
     private String trimTrailingFileSeparator(final String path) {

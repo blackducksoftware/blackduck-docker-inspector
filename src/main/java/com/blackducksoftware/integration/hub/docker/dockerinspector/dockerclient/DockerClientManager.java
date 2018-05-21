@@ -27,7 +27,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -72,6 +74,8 @@ import com.github.dockerjava.core.command.PullImageResultCallback;
 @Component
 public class DockerClientManager {
 
+    private static final String IMAGEINSPECTOR_APP_NAME_LABEL_VALUE = "hub-imageinspector-ws";
+    private static final String CONTAINER_APPNAME_LABEL_KEY = "app";
     private static final String IMAGE_TARFILE_PROPERTY = "docker.tar";
     private static final String IMAGE_PROPERTY = "docker.image";
     private static final String IMAGE_REPO_PROPERTY = "docker.image.repo";
@@ -216,7 +220,9 @@ public class DockerClientManager {
         // TODO but the server port is 8080, 8081, or 8082
         // TODO withExposedPorts()
         // TODO withPortBindings()
-        final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageId).withName(containerName).withCmd(cmd.split(" "));
+        final Map<String, String> labels = new HashMap<>(1);
+        labels.put(CONTAINER_APPNAME_LABEL_KEY, IMAGEINSPECTOR_APP_NAME_LABEL_VALUE);
+        final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageId).withName(containerName).withLabels(labels).withCmd(cmd.split(" "));
         final ExposedPort exposedPort = new ExposedPort(8082); // TODO
         createContainerCmd.withExposedPorts(exposedPort);
         final PortBinding portBinding = new PortBinding(Binding.bindPort(imageInspectorServices.getDefaultImageInspectorPort()), exposedPort);
@@ -309,6 +315,13 @@ public class DockerClientManager {
         }
     }
 
+    public void copyFileToContainer(final DockerClient dockerClient, final String containerId, final String srcPath, final String destPath) throws IOException {
+        logger.debug(String.format("Copying %s to container %s:%s", srcPath, containerId, destPath));
+        try (final CopyArchiveToContainerCmd copyCmd = dockerClient.copyArchiveToContainerCmd(containerId).withHostResource(srcPath).withRemotePath(destPath)) {
+            copyCmd.exec();
+        }
+    }
+
     private void setPropertiesInSubContainer(final DockerClient dockerClient, final String containerId, final String tarFilePathInSubContainer, final String tarFileDirInSubContainer, final File dockerTarFile, final String targetImage,
             final String targetImageRepo, final String targetImageTag) throws IOException, IllegalArgumentException, IllegalAccessException {
         logger.debug("Creating properties file inside container");
@@ -363,8 +376,8 @@ public class DockerClientManager {
 
     private void stopRemoveContainerIfExists(final DockerClient dockerClient, final String extractorContainerName) {
         String oldContainerId;
-        final List<Container> containers = dockerClient.listContainersCmd().withShowAll(true).exec();
-        final Container extractorContainer = getRunningContainer(containers, extractorContainerName);
+
+        final Container extractorContainer = getRunningContainerByContainerName(dockerClient, extractorContainerName);
         if (extractorContainer != null) {
             logger.debug(String.format("Extractor container status: %s", extractorContainer.getStatus()));
             oldContainerId = extractorContainer.getId();
@@ -384,8 +397,23 @@ public class DockerClientManager {
         return bind;
     }
 
-    private Container getRunningContainer(final List<Container> containers, final String extractorContainerName) {
+    public Container getRunningContainerByAppName(final DockerClient dockerClient, final String targetAppName) throws HubIntegrationException {
+        final List<Container> containers = dockerClient.listContainersCmd().withShowAll(true).exec();
+        for (final Container container : containers) {
+            logger.debug(String.format("*** Checking container %s to see if it has label app = %s", container.getNames()[0], targetAppName));
+            final String containerAppName = container.getLabels().get(CONTAINER_APPNAME_LABEL_KEY);
+            logger.debug(String.format("*** Comparing app name %s to %s", targetAppName, containerAppName));
+            if (targetAppName.equals(containerAppName)) {
+                logger.debug("\tIt's a match");
+                return container;
+            }
+        }
+        throw new HubIntegrationException(String.format("No running container found with app = %s", targetAppName));
+    }
+
+    private Container getRunningContainerByContainerName(final DockerClient dockerClient, final String extractorContainerName) {
         Container extractorContainer = null;
+        final List<Container> containers = dockerClient.listContainersCmd().withShowAll(true).exec();
         for (final Container container : containers) {
             for (final String name : container.getNames()) {
                 // name prefixed with '/' for some reason
@@ -417,12 +445,6 @@ public class DockerClientManager {
         logger.info("Invoking container appropriate for this target image");
         dockerClient.execStartCmd(execCreateCmdResponse.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
         logger.info("The container execution has completed");
-    }
-
-    private void copyFileToContainer(final DockerClient dockerClient, final String containerId, final String srcPath, final String destPath) throws IOException {
-        logger.debug(String.format("Copying %s to container %s: %s", srcPath, containerId, destPath));
-        final CopyArchiveToContainerCmd copyProperties = dockerClient.copyArchiveToContainerCmd(containerId).withHostResource(srcPath).withRemotePath(destPath);
-        copyProperties.exec();
     }
 
     private void saveImageToFile(final String imageName, final String tagName, final File imageTarFile) throws IOException, HubIntegrationException {

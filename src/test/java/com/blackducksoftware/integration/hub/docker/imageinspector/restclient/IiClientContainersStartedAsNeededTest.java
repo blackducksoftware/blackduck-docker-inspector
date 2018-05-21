@@ -14,12 +14,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.InspectorImages;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.DockerClientManager;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.HubDockerClient;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.ImageInspectorClientContainersStartedAsNeeded;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.ImageInspectorServices;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.RestConnectionCreator;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.RestRequestor;
 import com.blackducksoftware.integration.hub.imageinspector.lib.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.rest.RestConnection;
+import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.model.Container;
 
 @RunWith(SpringRunner.class)
 public class IiClientContainersStartedAsNeededTest {
@@ -42,12 +46,25 @@ public class IiClientContainersStartedAsNeededTest {
     @Mock
     private InspectorImages inspectorImages;
 
+    @Mock
+    private DockerClientManager dockerClientManager;
+
+    @Mock
+    private HubDockerClient hubDockerClient;
+
     @Test
     public void test() throws IntegrationException, IOException {
         Mockito.when(config.isImageInspectorServiceStart()).thenReturn(true);
         Mockito.when(imageInspectorPorts.getDefaultImageInspectorPort()).thenReturn(8080);
         Mockito.when(config.getCommandTimeout()).thenReturn(5000L);
         Mockito.when(config.getImageInspectorDefault()).thenReturn("ubuntu");
+
+        final Container targetContainer = Mockito.mock(Container.class);
+        Mockito.when(targetContainer.getImage()).thenReturn("target");
+        Mockito.when(dockerClientManager.getRunningContainerByAppName(Mockito.any(DockerClient.class), Mockito.anyString())).thenReturn(targetContainer);
+
+        final DockerClient dockerClient = Mockito.mock(DockerClient.class);
+        Mockito.when(hubDockerClient.getDockerClient()).thenReturn(dockerClient);
 
         final RestConnection restConnection = Mockito.mock(RestConnection.class);
         Mockito.when(restConnectionCreator.createNonRedirectingConnection(Mockito.anyString(), Mockito.anyInt())).thenReturn(restConnection);
@@ -60,7 +77,7 @@ public class IiClientContainersStartedAsNeededTest {
         Mockito.when(inspectorImages.getInspectorImageTag(Mockito.any(OperatingSystemEnum.class))).thenReturn("1.1.1");
 
         assertEquals(true, imageInspectorClientContainersStartedAsNeeded.isApplicable());
-        assertEquals("testResult", imageInspectorClientContainersStartedAsNeeded.getBdio("/tmp/t.tar", "containerFileSystemFilename", true));
+        assertEquals("testResult", imageInspectorClientContainersStartedAsNeeded.getBdio("/tmp/t.tar", "/tmp/t.tar", "containerFileSystemFilename", true));
     }
 
 }

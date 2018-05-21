@@ -23,6 +23,7 @@
  */
 package com.blackducksoftware.integration.hub.docker.dockerinspector.restclient;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
@@ -36,8 +37,10 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.InspectorIma
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.DockerClientManager;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.HubDockerClient;
 import com.blackducksoftware.integration.hub.imageinspector.lib.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.rest.RestConnection;
+import com.github.dockerjava.api.model.Container;
 
 @Component
 public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspectorClient {
@@ -65,6 +68,9 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
     @Autowired
     private ProgramPaths programPaths;
 
+    @Autowired
+    private HubDockerClient hubDockerClient;
+
     @Override
     public boolean isApplicable() {
         final boolean answer = config.isImageInspectorServiceStart();
@@ -73,8 +79,8 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
     }
 
     @Override
-    public String getBdio(final String containerPathToTarfile, final String containerFileSystemFilename, final boolean cleanup) throws IntegrationException {
-
+    public String getBdio(final String hostPathToTarfile, final String containerPathToTarfile, final String containerFileSystemFilename, final boolean cleanup) throws IntegrationException {
+        logger.debug(String.format("*** getBdio(): containerPathToTarfile: %s", containerPathToTarfile));
         final String imageInspectorUrl = String.format("http://localhost:%d", imageInspectorServices.getDefaultImageInspectorPort());
         logger.info(String.format("ImageInspector URL: %s", imageInspectorUrl));
         final int serviceRequestTimeoutSeconds = (int) (config.getCommandTimeout() / 1000L);
@@ -85,7 +91,7 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         } catch (final MalformedURLException e) {
             throw new IntegrationException(String.format("Error creating connection for URL: %s, timeout: %d", imageInspectorUrl, serviceRequestTimeoutSeconds), e);
         }
-        ensureServiceReady(restConnection, imageInspectorUrl);
+        final String containerId = ensureServiceReady(restConnection, imageInspectorUrl);
 
         //////////////////////////
         // TODO: it's a little weird that at this point the tar file still needs to be put where the container can see it
@@ -94,15 +100,22 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         // final String tarFilePathInSubContainer = programPaths.getHubDockerTargetDirPathContainer() + dockerTarFile.getName();
         // copyFileToContainer(dockerClient, containerId, dockerTarFile.getAbsolutePath(), tarFileDirInSubContainer);
         ///////////////////////
-
+        final File containerDockerTarfile = new File(containerPathToTarfile);
+        final String containerDestDirPath = containerDockerTarfile.getParent();
+        try {
+            dockerClientManager.copyFileToContainer(hubDockerClient.getDockerClient(), containerId, hostPathToTarfile, containerDestDirPath);
+        } catch (final IOException e) {
+            throw new IntegrationException(String.format("Error copying file %s to %s:%s", hostPathToTarfile, containerId, containerDestDirPath), e);
+        }
         logger.debug(String.format("Sending getBdio request to: %s", imageInspectorUrl));
         return restRequestor.executeGetBdioRequest(restConnection, imageInspectorUrl, containerPathToTarfile, containerFileSystemFilename, cleanup);
     }
 
-    private void ensureServiceReady(final RestConnection restConnection, final String imageInspectorUrl) throws IntegrationException {
+    private String ensureServiceReady(final RestConnection restConnection, final String imageInspectorUrl) throws IntegrationException {
         boolean serviceIsUp = checkServiceHealth(restConnection, imageInspectorUrl);
         if (serviceIsUp) {
-            return;
+            final Container container = dockerClientManager.getRunningContainerByAppName(hubDockerClient.getDockerClient(), "hub-imageinspector-ws");
+            return container.getId();
         }
 
         // Need to fire up container
@@ -136,6 +149,7 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         if (!serviceIsUp) {
             throw new IntegrationException(String.format("Tried to start image imspector container %s:%s, but service %s never came online", imageInspectorRepo, imageInspectorTag, imageInspectorUrl));
         }
+        return containerId;
     }
 
     private boolean checkServiceHealth(final RestConnection restConnection, final String imageInspectorUrl) throws IntegrationException {
