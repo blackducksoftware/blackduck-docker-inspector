@@ -23,11 +23,14 @@
  */
 package com.blackducksoftware.integration.hub.docker.dockerinspector.restclient;
 
+import java.util.Locale;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
+import com.blackducksoftware.integration.hub.imageinspector.api.ImageInspectorOsEnum;
 
 @Component
 public class ImageInspectorServices {
@@ -49,7 +52,11 @@ public class ImageInspectorServices {
         throw new IntegrationException(String.format("Invalid value for property image.inspector.default: %s", inspectorOsName));
     }
 
-    public String getDefaultImageInspectorDistroName() {
-        return config.getImageInspectorDefault();
+    public ImageInspectorOsEnum getDefaultImageInspectorOs() {
+        return ImageInspectorOsEnum.valueOf(config.getImageInspectorDefault().toUpperCase(Locale.US));
+    }
+
+    public String getDefaultImageInspectorOsName() {
+        return getDefaultImageInspectorOs().name().toLowerCase(Locale.US);
     }
 }

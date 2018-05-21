@@ -20,6 +20,7 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.I
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.ImageInspectorServices;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.RestConnectionCreator;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.RestRequestor;
+import com.blackducksoftware.integration.hub.imageinspector.api.ImageInspectorOsEnum;
 import com.blackducksoftware.integration.hub.imageinspector.lib.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.rest.RestConnection;
 import com.github.dockerjava.api.DockerClient;
@@ -61,7 +62,7 @@ public class IiClientContainersStartedAsNeededTest {
 
         final Container targetContainer = Mockito.mock(Container.class);
         Mockito.when(targetContainer.getImage()).thenReturn("target");
-        Mockito.when(dockerClientManager.getRunningContainerByAppName(Mockito.any(DockerClient.class), Mockito.anyString())).thenReturn(targetContainer);
+        Mockito.when(dockerClientManager.getRunningContainerByAppName(Mockito.any(DockerClient.class), Mockito.anyString(), Mockito.any(ImageInspectorOsEnum.class))).thenReturn(targetContainer);
 
         final DockerClient dockerClient = Mockito.mock(DockerClient.class);
         Mockito.when(hubDockerClient.getDockerClient()).thenReturn(dockerClient);

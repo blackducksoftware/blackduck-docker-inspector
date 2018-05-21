@@ -44,6 +44,7 @@ import com.github.dockerjava.api.model.Container;
 
 @Component
 public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspectorClient {
+    private static final String HUB_IMAGEINSPECTOR_WS_APPNAME = "hub-imageinspector-ws";
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final int MAX_CONTAINER_START_TRY_COUNT = 10;
 
@@ -109,12 +110,13 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         }
         logger.debug(String.format("Sending getBdio request to: %s", imageInspectorUrl));
         return restRequestor.executeGetBdioRequest(restConnection, imageInspectorUrl, containerPathToTarfile, containerFileSystemFilename, cleanup);
+        // TODO: If get a redirect, grab the OS out of the body, and fire up THAT container (if it's not running)
     }
 
     private String ensureServiceReady(final RestConnection restConnection, final String imageInspectorUrl) throws IntegrationException {
         boolean serviceIsUp = checkServiceHealth(restConnection, imageInspectorUrl);
         if (serviceIsUp) {
-            final Container container = dockerClientManager.getRunningContainerByAppName(hubDockerClient.getDockerClient(), "hub-imageinspector-ws");
+            final Container container = dockerClientManager.getRunningContainerByAppName(hubDockerClient.getDockerClient(), HUB_IMAGEINSPECTOR_WS_APPNAME, imageInspectorServices.getDefaultImageInspectorOs());
             return container.getId();
         }
 
@@ -132,7 +134,7 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         final String imageId = dockerClientManager.pullImage(imageInspectorRepo, imageInspectorTag);
 
         final String containerName = programPaths.deriveContainerName(imageInspectorRepo);
-        final String containerId = dockerClientManager.startContainerAsService(imageId, containerName);
+        final String containerId = dockerClientManager.startContainerAsService(imageId, containerName, imageInspectorServices.getDefaultImageInspectorOsName());
         // TODO will need containerId later to stop/remove it since we launched it
 
         for (int tryIndex = 0; tryIndex < MAX_CONTAINER_START_TRY_COUNT && !serviceIsUp; tryIndex++) {

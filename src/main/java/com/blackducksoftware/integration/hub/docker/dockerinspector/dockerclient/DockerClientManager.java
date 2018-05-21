@@ -45,6 +45,7 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Progr
 import com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient.HubSecrets;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.ImageInspectorServices;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
+import com.blackducksoftware.integration.hub.imageinspector.api.ImageInspectorOsEnum;
 import com.blackducksoftware.integration.hub.imageinspector.name.ImageNameResolver;
 import com.blackducksoftware.integration.hub.imageinspector.name.Names;
 import com.github.dockerjava.api.DockerClient;
@@ -73,9 +74,11 @@ import com.github.dockerjava.core.command.PullImageResultCallback;
 
 @Component
 public class DockerClientManager {
-
-    private static final String IMAGEINSPECTOR_APP_NAME_LABEL_VALUE = "hub-imageinspector-ws";
     private static final String CONTAINER_APPNAME_LABEL_KEY = "app";
+    private static final String IMAGEINSPECTOR_APP_NAME_LABEL_VALUE = "hub-imageinspector-ws";
+
+    private static final String CONTAINER_OS_LABEL_KEY = "os";
+
     private static final String IMAGE_TARFILE_PROPERTY = "docker.tar";
     private static final String IMAGE_PROPERTY = "docker.image";
     private static final String IMAGE_REPO_PROPERTY = "docker.image.repo";
@@ -207,7 +210,7 @@ public class DockerClientManager {
         return containerId;
     }
 
-    public String startContainerAsService(final String imageId, final String containerName) throws IntegrationException {
+    public String startContainerAsService(final String imageId, final String containerName, final String imageInspectorOsName) throws IntegrationException {
         logger.debug(String.format("Staring image ID %s --> container name: %s", imageId, containerName));
         final DockerClient dockerClient = hubDockerClient.getDockerClient();
         stopRemoveContainerIfExists(dockerClient, containerName);
@@ -215,13 +218,14 @@ public class DockerClientManager {
         logger.debug(String.format("Creating container %s from image %s", containerName, imageId));
 
         final String cmd = String.format("java -jar /opt/blackduck/hub-imageinspector-ws/hub-imageinspector-ws.jar --server.port=%d --current.linux.distro=%s", 8082,
-                imageInspectorServices.getDefaultImageInspectorDistroName());
+                imageInspectorOsName);
         // TODO The host port is: imageInspectorServices.getDefaultImageInspectorPort()
         // TODO but the server port is 8080, 8081, or 8082
         // TODO withExposedPorts()
         // TODO withPortBindings()
         final Map<String, String> labels = new HashMap<>(1);
         labels.put(CONTAINER_APPNAME_LABEL_KEY, IMAGEINSPECTOR_APP_NAME_LABEL_VALUE);
+        labels.put(CONTAINER_OS_LABEL_KEY, imageInspectorOsName);
         final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageId).withName(containerName).withLabels(labels).withCmd(cmd.split(" "));
         final ExposedPort exposedPort = new ExposedPort(8082); // TODO
         createContainerCmd.withExposedPorts(exposedPort);
@@ -397,18 +401,19 @@ public class DockerClientManager {
         return bind;
     }
 
-    public Container getRunningContainerByAppName(final DockerClient dockerClient, final String targetAppName) throws HubIntegrationException {
+    public Container getRunningContainerByAppName(final DockerClient dockerClient, final String targetAppName, final ImageInspectorOsEnum targetInspectorOs) throws HubIntegrationException {
         final List<Container> containers = dockerClient.listContainersCmd().withShowAll(true).exec();
         for (final Container container : containers) {
-            logger.debug(String.format("*** Checking container %s to see if it has label app = %s", container.getNames()[0], targetAppName));
+            logger.debug(String.format("*** Checking container %s to see if it has labels app = %s, os = %s", container.getNames()[0], targetAppName, targetInspectorOs.name()));
             final String containerAppName = container.getLabels().get(CONTAINER_APPNAME_LABEL_KEY);
-            logger.debug(String.format("*** Comparing app name %s to %s", targetAppName, containerAppName));
-            if (targetAppName.equals(containerAppName)) {
+            final String containerOsName = container.getLabels().get(CONTAINER_OS_LABEL_KEY);
+            logger.debug(String.format("*** Comparing app name %s to %s, os name %s to %s", targetAppName, containerAppName, targetInspectorOs.name(), containerOsName));
+            if (targetAppName.equals(containerAppName) && targetInspectorOs.name().equalsIgnoreCase(containerOsName)) {
                 logger.debug("\tIt's a match");
                 return container;
             }
         }
-        throw new HubIntegrationException(String.format("No running container found with app = %s", targetAppName));
+        throw new HubIntegrationException(String.format("No running container found with app = %s, os = %s", targetAppName, targetInspectorOs.name()));
     }
 
     private Container getRunningContainerByContainerName(final DockerClient dockerClient, final String extractorContainerName) {
