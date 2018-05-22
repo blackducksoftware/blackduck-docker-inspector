@@ -40,30 +40,44 @@ public class ImageInspectorServices {
     @Autowired
     private Config config;
 
-    public int getImageInspectorPort(final OperatingSystemEnum imageInspectorOs) throws HubIntegrationException {
+    public int getImageInspectorHostPort(final OperatingSystemEnum imageInspectorOs) throws HubIntegrationException {
         final String imageInspectorOsName = imageInspectorOs.name();
         if ("alpine".equalsIgnoreCase(imageInspectorOsName)) {
-            return config.getImageInspectorPortAlpine();
+            return config.getImageInspectorHostPortAlpine();
         }
         if ("centos".equalsIgnoreCase(imageInspectorOsName)) {
-            return config.getImageInspectorPortCentos();
+            return config.getImageInspectorHostPortCentos();
         }
-        if ("alpine".equalsIgnoreCase(imageInspectorOsName)) {
-            return config.getImageInspectorPortUbuntu();
+        if ("ubuntu".equalsIgnoreCase(imageInspectorOsName)) {
+            return config.getImageInspectorHostPortUbuntu();
         }
-        throw new HubIntegrationException(String.format("Unrecognized ImageInspector OS name: %s", imageInspectorOs));
+        throw new HubIntegrationException(String.format("Unrecognized ImageInspector OS name: %s", imageInspectorOsName));
     }
 
-    public int getDefaultImageInspectorPort() throws IntegrationException {
+    public int getImageInspectorContainerPort(final OperatingSystemEnum imageInspectorOs) throws HubIntegrationException {
+        final String imageInspectorOsName = imageInspectorOs.name();
+        if ("alpine".equalsIgnoreCase(imageInspectorOsName)) {
+            return config.getImageInspectorContainerPortAlpine();
+        }
+        if ("centos".equalsIgnoreCase(imageInspectorOsName)) {
+            return config.getImageInspectorContainerPortCentos();
+        }
+        if ("ubuntu".equalsIgnoreCase(imageInspectorOsName)) {
+            return config.getImageInspectorContainerPortUbuntu();
+        }
+        throw new HubIntegrationException(String.format("Unrecognized ImageInspector OS name: %s", imageInspectorOsName));
+    }
+
+    public int getDefaultImageInspectorHostPort() throws IntegrationException {
         final String inspectorOsName = config.getImageInspectorDefault();
         if ("alpine".equalsIgnoreCase(inspectorOsName)) {
-            return config.getImageInspectorPortAlpine();
+            return config.getImageInspectorHostPortAlpine();
         }
         if ("centos".equalsIgnoreCase(inspectorOsName)) {
-            return config.getImageInspectorPortCentos();
+            return config.getImageInspectorHostPortCentos();
         }
         if ("ubuntu".equalsIgnoreCase(inspectorOsName)) {
-            return config.getImageInspectorPortUbuntu();
+            return config.getImageInspectorHostPortUbuntu();
         }
         throw new IntegrationException(String.format("Invalid value for property image.inspector.default: %s", inspectorOsName));
     }
@@ -73,8 +87,7 @@ public class ImageInspectorServices {
     }
 
     public String getDefaultImageInspectorOsName() {
-        // TODO should be able to eliminate the toLower
-        return getDefaultImageInspectorOs().name().toLowerCase(Locale.US);
+        return getDefaultImageInspectorOs().name();
     }
 
 }

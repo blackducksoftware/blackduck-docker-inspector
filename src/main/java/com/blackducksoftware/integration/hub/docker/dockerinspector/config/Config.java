@@ -231,17 +231,29 @@ public class Config {
     @Value("${imageinspector.service.start:false}")
     private Boolean imageInspectorServiceStart = Boolean.FALSE;
 
-    @ValueDescription(description = "alpine image inspector port", defaultValue = "9000", group = Config.GROUP_PRIVATE, deprecated = false)
-    @Value("${imageinspector.port.alpine:9000}")
-    private String imageInspectorPortAlpine = "9000";
+    @ValueDescription(description = "alpine image inspector container port", defaultValue = "8080", group = Config.GROUP_PRIVATE, deprecated = false)
+    @Value("${imageinspector.container.port.alpine:8080}")
+    private String imageInspectorContainerPortAlpine = "8080";
 
-    @ValueDescription(description = "centos image inspector port", defaultValue = "9001", group = Config.GROUP_PRIVATE, deprecated = false)
-    @Value("$imageinspector.port.centos:9001}")
-    private String imageInspectorPortCentos = "9001";
+    @ValueDescription(description = "centos image inspector container port", defaultValue = "8081", group = Config.GROUP_PRIVATE, deprecated = false)
+    @Value("$imageinspector.container.port.centos:8081}")
+    private String imageInspectorContainerPortCentos = "8081";
 
-    @ValueDescription(description = "ubuntu image inspector port", defaultValue = "9002", group = Config.GROUP_PRIVATE, deprecated = false)
-    @Value("${imageinspector.port.ubuntu:9002}")
-    private String imageInspectorPortUbuntu = "9002";
+    @ValueDescription(description = "ubuntu image inspector container port", defaultValue = "8082", group = Config.GROUP_PRIVATE, deprecated = false)
+    @Value("${imageinspector.container.port.ubuntu:8082}")
+    private String imageInspectorContainerPortUbuntu = "8082";
+
+    @ValueDescription(description = "alpine image inspector host port", defaultValue = "9000", group = Config.GROUP_PRIVATE, deprecated = false)
+    @Value("${imageinspector.host.port.alpine:9000}")
+    private String imageInspectorHostPortAlpine = "9000";
+
+    @ValueDescription(description = "centos image inspector host port", defaultValue = "9001", group = Config.GROUP_PRIVATE, deprecated = false)
+    @Value("$imageinspector.host.port.centos:9001}")
+    private String imageInspectorHostPortCentos = "9001";
+
+    @ValueDescription(description = "ubuntu image inspector host port", defaultValue = "9002", group = Config.GROUP_PRIVATE, deprecated = false)
+    @Value("${imageinspector.host.port.ubuntu:9002}")
+    private String imageInspectorHostPortUbuntu = "9002";
 
     @ValueDescription(description = "Default image inspector OS", defaultValue = "ubuntu", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${imageinspector.default:ubuntu}")
@@ -461,16 +473,28 @@ public class Config {
         return optionsByFieldName.get("imageInspectorUrl").getResolvedValue();
     }
 
-    public Integer getImageInspectorPortAlpine() {
-        return new Integer(optionsByFieldName.get("imageInspectorPortAlpine").getResolvedValue());
+    public Integer getImageInspectorContainerPortAlpine() {
+        return new Integer(optionsByFieldName.get("imageInspectorContainerPortAlpine").getResolvedValue());
     }
 
-    public Integer getImageInspectorPortCentos() {
-        return new Integer(optionsByFieldName.get("imageInspectorPortCentos").getResolvedValue());
+    public Integer getImageInspectorContainerPortCentos() {
+        return new Integer(optionsByFieldName.get("imageInspectorContainerPortCentos").getResolvedValue());
     }
 
-    public Integer getImageInspectorPortUbuntu() {
-        return new Integer(optionsByFieldName.get("imageInspectorPortUbuntu").getResolvedValue());
+    public Integer getImageInspectorContainerPortUbuntu() {
+        return new Integer(optionsByFieldName.get("imageInspectorContainerPortUbuntu").getResolvedValue());
+    }
+
+    public Integer getImageInspectorHostPortAlpine() {
+        return new Integer(optionsByFieldName.get("imageInspectorHostPortAlpine").getResolvedValue());
+    }
+
+    public Integer getImageInspectorHostPortCentos() {
+        return new Integer(optionsByFieldName.get("imageInspectorHostPortCentos").getResolvedValue());
+    }
+
+    public Integer getImageInspectorHostPortUbuntu() {
+        return new Integer(optionsByFieldName.get("imageInspectorHostPortUbuntu").getResolvedValue());
     }
 
     public String getImageInspectorDefault() {
@@ -592,9 +616,13 @@ public class Config {
         this.sharedDirPathLocal = null;
         this.imageInspectorUrl = null;
         this.imageInspectorServiceStart = null;
-        this.imageInspectorPortAlpine = null;
-        this.imageInspectorPortCentos = null;
-        this.imageInspectorPortUbuntu = null;
+        this.imageInspectorContainerPortAlpine = null;
+        this.imageInspectorContainerPortCentos = null;
+        this.imageInspectorContainerPortUbuntu = null;
+
+        this.imageInspectorHostPortAlpine = null;
+        this.imageInspectorHostPortCentos = null;
+        this.imageInspectorHostPortUbuntu = null;
         this.imageInspectorDefault = null;
     }
 }

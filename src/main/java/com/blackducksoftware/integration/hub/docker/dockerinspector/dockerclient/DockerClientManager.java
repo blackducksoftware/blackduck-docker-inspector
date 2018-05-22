@@ -46,6 +46,7 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient.Hu
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.ImageInspectorServices;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.blackducksoftware.integration.hub.imageinspector.api.ImageInspectorOsEnum;
+import com.blackducksoftware.integration.hub.imageinspector.lib.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.imageinspector.name.ImageNameResolver;
 import com.blackducksoftware.integration.hub.imageinspector.name.Names;
 import com.github.dockerjava.api.DockerClient;
@@ -210,13 +211,13 @@ public class DockerClientManager {
         return containerId;
     }
 
-    public String startContainerAsService(final String imageId, final String containerName, final String imageInspectorOsName, final int containerPort, final int hostPort) throws IntegrationException {
+    public String startContainerAsService(final String imageId, final String containerName, final OperatingSystemEnum inspectorOs, final int containerPort, final int hostPort) throws IntegrationException {
         logger.debug(String.format("Staring image ID %s --> container name: %s", imageId, containerName));
         final DockerClient dockerClient = hubDockerClient.getDockerClient();
         stopRemoveContainerIfExists(dockerClient, containerName);
 
         logger.debug(String.format("Creating container %s from image %s", containerName, imageId));
-
+        final String imageInspectorOsName = inspectorOs.name();
         final String cmd = String.format("java -jar /opt/blackduck/hub-imageinspector-ws/hub-imageinspector-ws.jar --server.port=%d --current.linux.distro=%s", containerPort,
                 imageInspectorOsName);
         // TODO The host port is: imageInspectorServices.getDefaultImageInspectorPort()

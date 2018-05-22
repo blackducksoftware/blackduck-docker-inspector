@@ -88,7 +88,7 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         logger.debug(String.format("getBdio(): containerPathToTarfile: %s", containerPathToTarfile));
 
         // First, try the default inspector service (which will return either the BDIO, or a redirect)
-        final String imageInspectorUrl = deriveInspectorUrl(imageInspectorServices.getDefaultImageInspectorPort());
+        final String imageInspectorUrl = deriveInspectorUrl(imageInspectorServices.getDefaultImageInspectorHostPort());
         final int serviceRequestTimeoutSeconds = deriveTimeoutSeconds();
         final RestConnection restConnection = createRestConnection(imageInspectorUrl, serviceRequestTimeoutSeconds);
         final OperatingSystemEnum inspectorOs = OperatingSystemEnum.determineOperatingSystem(config.getImageInspectorDefault());
@@ -111,7 +111,7 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
             logger.debug(String.format("Header: %s=%s", key, headers.get(key)));
         }
         final OperatingSystemEnum correctedInspectorOs = OperatingSystemEnum.determineOperatingSystem(correctImageInspectorOsName);
-        final String correctedImageInspectorUrl = deriveInspectorUrl(imageInspectorServices.getImageInspectorPort(correctedInspectorOs));
+        final String correctedImageInspectorUrl = deriveInspectorUrl(imageInspectorServices.getImageInspectorHostPort(correctedInspectorOs));
         final RestConnection correctedRestConnection = createRestConnection(correctedImageInspectorUrl, serviceRequestTimeoutSeconds);
 
         final String correctedContainerId = ensureServiceReady(correctedRestConnection, correctedImageInspectorUrl, correctedInspectorOs);
@@ -161,7 +161,6 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         }
 
         // Need to fire up container
-
         final String imageInspectorRepo;
         final String imageInspectorTag;
         try {
@@ -172,10 +171,10 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         }
         logger.debug(String.format("Need to pull/run %s:%s", imageInspectorRepo, imageInspectorTag));
         final String imageId = dockerClientManager.pullImage(imageInspectorRepo, imageInspectorTag);
-        final int containerPort = 8080;
-        final int hostPort = imageInspectorServices.getImageInspectorPort(inspectorOs);
+        final int containerPort = imageInspectorServices.getImageInspectorContainerPort(inspectorOs);
+        final int hostPort = imageInspectorServices.getImageInspectorHostPort(inspectorOs);
         final String containerName = programPaths.deriveContainerName(imageInspectorRepo);
-        final String containerId = dockerClientManager.startContainerAsService(imageId, containerName, imageInspectorServices.getDefaultImageInspectorOsName(), containerPort, hostPort);
+        final String containerId = dockerClientManager.startContainerAsService(imageId, containerName, inspectorOs, containerPort, hostPort);
         // TODO will need containerId later to stop/remove it since we launched it
 
         for (int tryIndex = 0; tryIndex < MAX_CONTAINER_START_TRY_COUNT && !serviceIsUp; tryIndex++) {
