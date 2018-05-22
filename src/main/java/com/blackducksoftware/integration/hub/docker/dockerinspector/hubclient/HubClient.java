@@ -42,12 +42,12 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.ProgramVersi
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
-import com.blackducksoftware.integration.hub.rest.RestConnection;
 import com.blackducksoftware.integration.hub.service.CodeLocationService;
 import com.blackducksoftware.integration.hub.service.HubServicesFactory;
 import com.blackducksoftware.integration.hub.service.PhoneHomeService;
 import com.blackducksoftware.integration.log.Slf4jIntLogger;
 import com.blackducksoftware.integration.phonehome.PhoneHomeRequestBody;
+import com.blackducksoftware.integration.rest.connection.RestConnection;
 
 @Component
 public class HubClient {

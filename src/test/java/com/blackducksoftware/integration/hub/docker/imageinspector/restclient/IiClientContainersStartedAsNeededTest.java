@@ -22,7 +22,7 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.R
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.RestRequestor;
 import com.blackducksoftware.integration.hub.imageinspector.api.ImageInspectorOsEnum;
 import com.blackducksoftware.integration.hub.imageinspector.lib.OperatingSystemEnum;
-import com.blackducksoftware.integration.hub.rest.RestConnection;
+import com.blackducksoftware.integration.rest.connection.RestConnection;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.model.Container;
 

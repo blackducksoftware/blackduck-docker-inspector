@@ -29,17 +29,26 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.blackducksoftware.integration.hub.rest.RestConnection;
-import com.blackducksoftware.integration.hub.rest.UnauthenticatedRestConnectionBuilder;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.connection.NonRedirectingUnauthenticatedRestConnectionBuilder;
 import com.blackducksoftware.integration.log.IntLogger;
 import com.blackducksoftware.integration.log.Slf4jIntLogger;
+import com.blackducksoftware.integration.rest.connection.RestConnection;
+import com.blackducksoftware.integration.rest.connection.UnauthenticatedRestConnectionBuilder;
 
 @Component
 public class RestConnectionCreator {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public RestConnection createNonRedirectingConnection(final String baseUrl, final int timeoutSeconds) throws MalformedURLException {
-        final RestConnection connection = createRedirectingConnection(baseUrl, timeoutSeconds);
+        final NonRedirectingUnauthenticatedRestConnectionBuilder connectionBuilder = new NonRedirectingUnauthenticatedRestConnectionBuilder();
+        connectionBuilder.setBaseUrl(baseUrl);
+        connectionBuilder.setTimeout(timeoutSeconds);
+        final IntLogger intLogger = new Slf4jIntLogger(logger);
+        connectionBuilder.setLogger(intLogger);
+        // TODO: always trust?
+        connectionBuilder.setAlwaysTrustServerCertificate(false);
+        final RestConnection connection = connectionBuilder.build();
+        // TODO: Push this down into UnauthenticatedRestConnectionBuilder
         connection.getClientBuilder().disableRedirectHandling();
         return connection;
 
@@ -51,6 +60,7 @@ public class RestConnectionCreator {
         connectionBuilder.setTimeout(timeoutSeconds);
         final IntLogger intLogger = new Slf4jIntLogger(logger);
         connectionBuilder.setLogger(intLogger);
+        // TODO: always trust?
         connectionBuilder.setAlwaysTrustServerCertificate(false);
         final RestConnection connection = connectionBuilder.build();
         return connection;

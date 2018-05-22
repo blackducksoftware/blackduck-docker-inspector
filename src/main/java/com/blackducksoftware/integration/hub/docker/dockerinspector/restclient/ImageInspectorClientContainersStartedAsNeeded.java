@@ -38,8 +38,10 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Confi
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.DockerClientManager;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.HubDockerClient;
+import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.blackducksoftware.integration.hub.imageinspector.lib.OperatingSystemEnum;
-import com.blackducksoftware.integration.hub.rest.RestConnection;
+import com.blackducksoftware.integration.rest.connection.RestConnection;
+import com.blackducksoftware.integration.rest.exception.IntegrationRestException;
 import com.github.dockerjava.api.model.Container;
 
 @Component
@@ -81,10 +83,39 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
 
     @Override
     public String getBdio(final String hostPathToTarfile, final String containerPathToTarfile, final String containerFileSystemFilename, final boolean cleanup) throws IntegrationException {
-        logger.debug(String.format("*** getBdio(): containerPathToTarfile: %s", containerPathToTarfile));
-        final String imageInspectorUrl = String.format("http://localhost:%d", imageInspectorServices.getDefaultImageInspectorPort());
+        logger.debug(String.format("getBdio(): containerPathToTarfile: %s", containerPathToTarfile));
+
+        // First, try the default inspector service (which will return either the BDIO, or a redirect)
+        final String imageInspectorUrl = deriveInspectorUrl(imageInspectorServices.getDefaultImageInspectorPort());
+        final int serviceRequestTimeoutSeconds = deriveTimeoutSeconds();
+        final RestConnection restConnection = createRestConnection(imageInspectorUrl, serviceRequestTimeoutSeconds);
+        final String containerId = ensureServiceReady(restConnection, imageInspectorUrl);
+        copyFileToContainer(hostPathToTarfile, containerId, containerPathToTarfile);
+        logger.debug(String.format("Sending getBdio request to: %s", imageInspectorUrl));
+        try {
+            final String bdio = restRequestor.executeGetBdioRequest(restConnection, imageInspectorUrl, containerPathToTarfile, containerFileSystemFilename, cleanup);
+            return bdio;
+        } catch (final IntegrationRestException restException) {
+            // TODO: If get a redirect, grab the OS out of the body, and fire up THAT container (if it's not running)
+            logger.debug(String.format("*** IntegrationRestException thrown: %s", restException.getMessage()));
+            logger.debug(String.format("HttpStatusCode: %d", restException.getHttpStatusCode()));
+            logger.debug(String.format("HttpStatusMessage: %s", restException.getHttpStatusMessage()));
+            throw restException;
+        }
+
+    }
+
+    private int deriveTimeoutSeconds() {
+        return (int) (config.getCommandTimeout() / 1000L);
+    }
+
+    private String deriveInspectorUrl(final int inspectorPort) {
+        final String imageInspectorUrl = String.format("http://localhost:%d", inspectorPort);
         logger.info(String.format("ImageInspector URL: %s", imageInspectorUrl));
-        final int serviceRequestTimeoutSeconds = (int) (config.getCommandTimeout() / 1000L);
+        return imageInspectorUrl;
+    }
+
+    private RestConnection createRestConnection(final String imageInspectorUrl, final int serviceRequestTimeoutSeconds) throws IntegrationException {
         logger.debug(String.format("Creating a rest connection (%d second timeout) for URL: %s", serviceRequestTimeoutSeconds, imageInspectorUrl));
         RestConnection restConnection;
         try {
@@ -92,15 +123,10 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         } catch (final MalformedURLException e) {
             throw new IntegrationException(String.format("Error creating connection for URL: %s, timeout: %d", imageInspectorUrl, serviceRequestTimeoutSeconds), e);
         }
-        final String containerId = ensureServiceReady(restConnection, imageInspectorUrl);
+        return restConnection;
+    }
 
-        //////////////////////////
-        // TODO: it's a little weird that at this point the tar file still needs to be put where the container can see it
-        // TODO: Not sure whether (a) copying the tar in, or (b) mounting it in, makes more sense
-        // final String tarFileDirInSubContainer = programPaths.getHubDockerTargetDirPathContainer();
-        // final String tarFilePathInSubContainer = programPaths.getHubDockerTargetDirPathContainer() + dockerTarFile.getName();
-        // copyFileToContainer(dockerClient, containerId, dockerTarFile.getAbsolutePath(), tarFileDirInSubContainer);
-        ///////////////////////
+    private void copyFileToContainer(final String hostPathToTarfile, final String containerId, final String containerPathToTarfile) throws HubIntegrationException, IntegrationException {
         final File containerDockerTarfile = new File(containerPathToTarfile);
         final String containerDestDirPath = containerDockerTarfile.getParent();
         try {
@@ -108,9 +134,6 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         } catch (final IOException e) {
             throw new IntegrationException(String.format("Error copying file %s to %s:%s", hostPathToTarfile, containerId, containerDestDirPath), e);
         }
-        logger.debug(String.format("Sending getBdio request to: %s", imageInspectorUrl));
-        return restRequestor.executeGetBdioRequest(restConnection, imageInspectorUrl, containerPathToTarfile, containerFileSystemFilename, cleanup);
-        // TODO: If get a redirect, grab the OS out of the body, and fire up THAT container (if it's not running)
     }
 
     private String ensureServiceReady(final RestConnection restConnection, final String imageInspectorUrl) throws IntegrationException {
@@ -130,7 +153,7 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         } catch (final IOException e) {
             throw new IntegrationException(String.format("Error getting image inspector container repo/tag for default inspector OS: %s", inspectorOs.name()), e);
         }
-        logger.debug(String.format("*** NEED TO PULL/RUN %s:%s", imageInspectorRepo, imageInspectorTag));
+        logger.debug(String.format("Need to pull/run %s:%s", imageInspectorRepo, imageInspectorTag));
         final String imageId = dockerClientManager.pullImage(imageInspectorRepo, imageInspectorTag);
 
         final String containerName = programPaths.deriveContainerName(imageInspectorRepo);

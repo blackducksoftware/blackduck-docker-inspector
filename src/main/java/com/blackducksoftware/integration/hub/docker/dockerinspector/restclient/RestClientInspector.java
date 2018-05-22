@@ -81,11 +81,11 @@ public class RestClientInspector implements Inspector {
         try {
             final File dockerTarFile = dockerTarfile.deriveDockerTarFile();
             final String containerFileSystemFilename = dockerTarfile.deriveContainerFileSystemTarGzFilename(dockerTarFile);
-            logger.debug(String.format("**** Given docker tar file path: %s", dockerTarFile.getCanonicalPath()));
+            logger.debug(String.format("Given docker tar file path: %s", dockerTarFile.getCanonicalPath()));
             final String dockerTarFilePathInContainer = containerPath.getContainerPathToLocalFile(dockerTarFile.getCanonicalPath(), DEFAULT_IMAGEINSPECTOR_TARGET_DIR_PATH);
-            logger.debug(String.format("**** Derived container docker tar file path: %s", dockerTarFilePathInContainer));
-            logger.debug(String.format("**** HubDockerWorkingDirPathHost: %s", programPaths.getHubDockerWorkingDirPathHost()));
-            logger.debug(String.format("**** HubDockerWorkingDirPathContainer: %s", programPaths.getHubDockerWorkingDirPathContainer()));
+            logger.debug(String.format("Derived container docker tar file path: %s", dockerTarFilePathInContainer));
+            logger.debug(String.format("HubDockerWorkingDirPathHost: %s", programPaths.getHubDockerWorkingDirPathHost()));
+            logger.debug(String.format("HubDockerWorkingDirPathContainer: %s", programPaths.getHubDockerWorkingDirPathContainer()));
             final String bdioString = restClient.getBdio(dockerTarFile.getCanonicalPath(), dockerTarFilePathInContainer, containerFileSystemFilename, config.isCleanupWorkingDir());
             if (StringUtils.isNotBlank(config.getOutputPath())) {
                 final File userOutputDir = new File(config.getOutputPath());

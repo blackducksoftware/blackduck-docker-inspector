@@ -33,7 +33,7 @@ import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
-import com.blackducksoftware.integration.hub.rest.RestConnection;
+import com.blackducksoftware.integration.rest.connection.RestConnection;
 
 @Component
 public class ImageInspectorClientExistingServices implements ImageInspectorClient {
