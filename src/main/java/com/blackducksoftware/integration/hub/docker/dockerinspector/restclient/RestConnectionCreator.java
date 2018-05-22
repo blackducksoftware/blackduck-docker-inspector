@@ -39,6 +39,7 @@ import com.blackducksoftware.integration.rest.connection.UnauthenticatedRestConn
 public class RestConnectionCreator {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    // TODO make sure restConnections get closed
     public RestConnection createNonRedirectingConnection(final String baseUrl, final int timeoutSeconds) throws MalformedURLException {
         final NonRedirectingUnauthenticatedRestConnectionBuilder connectionBuilder = new NonRedirectingUnauthenticatedRestConnectionBuilder();
         connectionBuilder.setBaseUrl(baseUrl);
@@ -48,8 +49,8 @@ public class RestConnectionCreator {
         // TODO: always trust?
         connectionBuilder.setAlwaysTrustServerCertificate(false);
         final RestConnection connection = connectionBuilder.build();
-        // TODO: Push this down into UnauthenticatedRestConnectionBuilder
-        connection.getClientBuilder().disableRedirectHandling();
+        // TODO: I pushed this down into UnauthenticatedRestConnectionBuilder
+        // connection.getClientBuilder().disableRedirectHandling();
         return connection;
 
     }

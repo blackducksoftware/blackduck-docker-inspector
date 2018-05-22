@@ -33,6 +33,7 @@ import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.response.SimpleResponse;
 import com.blackducksoftware.integration.rest.connection.RestConnection;
 
 @Component
@@ -66,6 +67,7 @@ public class ImageInspectorClientExistingServices implements ImageInspectorClien
         final int serviceRequestTimeoutSeconds = (int) (config.getCommandTimeout() / 1000L);
         logger.debug(String.format("Creating a rest connection (%d second timeout) for URL: %s", serviceRequestTimeoutSeconds, imageInspectorUrl));
         final RestConnection restConnection = restConnectionCreator.createRedirectingConnection(imageInspectorUrl, serviceRequestTimeoutSeconds);
-        return restRequester.executeGetBdioRequest(restConnection, imageInspectorUrl, containerPathToTarfile, containerFileSystemFilename, cleanup);
+        final SimpleResponse response = restRequester.executeGetBdioRequest(restConnection, imageInspectorUrl, containerPathToTarfile, containerFileSystemFilename, cleanup);
+        return response.getBody();
     }
 }

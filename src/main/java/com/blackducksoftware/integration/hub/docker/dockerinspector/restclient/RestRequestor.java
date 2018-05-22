@@ -30,6 +30,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.exception.IntegrationException;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.response.SimpleResponse;
 import com.blackducksoftware.integration.rest.HttpMethod;
 import com.blackducksoftware.integration.rest.connection.RestConnection;
 import com.blackducksoftware.integration.rest.request.Request;
@@ -44,7 +45,7 @@ public class RestRequestor {
     private static final String TARFILE_QUERY_PARAM = "tarfile";
     private static final String GETBDIO_ENDPOINT = "getbdio";
 
-    public String executeGetBdioRequest(final RestConnection restConnection, final String imageInspectorUrl, final String containerPathToTarfile, final String containerFileSystemFilename, final boolean cleanup)
+    public SimpleResponse executeGetBdioRequest(final RestConnection restConnection, final String imageInspectorUrl, final String containerPathToTarfile, final String containerFileSystemFilename, final boolean cleanup)
             throws IntegrationException {
 
         String containerFileSystemQueryString = "";
@@ -56,7 +57,7 @@ public class RestRequestor {
         logger.debug(String.format("Doing a GET on %s", url));
         final Request request = new Request.Builder(url).method(HttpMethod.GET).build();
         try (Response response = restConnection.executeRequest(request)) {
-            return getResponseBody(response);
+            return new SimpleResponse(response.getStatusCode(), response.getHeaders(), getResponseBody(response));
         } catch (final IOException | IllegalArgumentException e) {
             throw new IntegrationException(e);
         }

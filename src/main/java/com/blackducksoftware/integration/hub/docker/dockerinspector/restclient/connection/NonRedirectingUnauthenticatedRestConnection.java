@@ -42,6 +42,8 @@ public class NonRedirectingUnauthenticatedRestConnection extends Unauthenticated
 
     public NonRedirectingUnauthenticatedRestConnection(final IntLogger logger, final URL hubBaseUrl, final int timeout, final ProxyInfo proxyInfo) {
         super(logger, hubBaseUrl, timeout, proxyInfo);
+        logger.debug("*** Disabling redirect handling on this rest connection");
+        getClientBuilder().disableRedirectHandling();
     }
 
     @Override
@@ -57,7 +59,7 @@ public class NonRedirectingUnauthenticatedRestConnection extends Unauthenticated
     }
 
     private Response handleClientExecution(final HttpUriRequest request, final int retryCount) throws IntegrationException {
-        logger.debug("*** MY handleClientExecution() CALLED!!");
+        logger.debug(String.format("*** NonRedirectingUnauthenticatedRestConnection.handleClientExecution() called: %s", request.getURI().toString()));
         if (getClient() != null) {
             try {
                 final URI uri = request.getURI();
@@ -69,7 +71,7 @@ public class NonRedirectingUnauthenticatedRestConnection extends Unauthenticated
                 final CloseableHttpResponse response = getClient().execute(request);
                 final int statusCode = response.getStatusLine().getStatusCode();
                 final String statusMessage = response.getStatusLine().getReasonPhrase();
-                if (statusCode < RestConstants.OK_200 || statusCode >= RestConstants.MULT_CHOICE_300) {
+                if (statusCode < RestConstants.OK_200 || statusCode >= RestConstants.BAD_REQUEST_400) {
                     try {
                         if (statusCode == RestConstants.UNAUTHORIZED_401 && retryCount < 2) {
                             connect();

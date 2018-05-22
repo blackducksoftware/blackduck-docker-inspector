@@ -30,13 +30,29 @@ import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
+import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.blackducksoftware.integration.hub.imageinspector.api.ImageInspectorOsEnum;
+import com.blackducksoftware.integration.hub.imageinspector.lib.OperatingSystemEnum;
 
 @Component
 public class ImageInspectorServices {
 
     @Autowired
     private Config config;
+
+    public int getImageInspectorPort(final OperatingSystemEnum imageInspectorOs) throws HubIntegrationException {
+        final String imageInspectorOsName = imageInspectorOs.name();
+        if ("alpine".equalsIgnoreCase(imageInspectorOsName)) {
+            return config.getImageInspectorPortAlpine();
+        }
+        if ("centos".equalsIgnoreCase(imageInspectorOsName)) {
+            return config.getImageInspectorPortCentos();
+        }
+        if ("alpine".equalsIgnoreCase(imageInspectorOsName)) {
+            return config.getImageInspectorPortUbuntu();
+        }
+        throw new HubIntegrationException(String.format("Unrecognized ImageInspector OS name: %s", imageInspectorOs));
+    }
 
     public int getDefaultImageInspectorPort() throws IntegrationException {
         final String inspectorOsName = config.getImageInspectorDefault();
@@ -57,6 +73,8 @@ public class ImageInspectorServices {
     }
 
     public String getDefaultImageInspectorOsName() {
+        // TODO should be able to eliminate the toLower
         return getDefaultImageInspectorOs().name().toLowerCase(Locale.US);
     }
+
 }

@@ -210,14 +210,14 @@ public class DockerClientManager {
         return containerId;
     }
 
-    public String startContainerAsService(final String imageId, final String containerName, final String imageInspectorOsName) throws IntegrationException {
+    public String startContainerAsService(final String imageId, final String containerName, final String imageInspectorOsName, final int containerPort, final int hostPort) throws IntegrationException {
         logger.debug(String.format("Staring image ID %s --> container name: %s", imageId, containerName));
         final DockerClient dockerClient = hubDockerClient.getDockerClient();
         stopRemoveContainerIfExists(dockerClient, containerName);
 
         logger.debug(String.format("Creating container %s from image %s", containerName, imageId));
 
-        final String cmd = String.format("java -jar /opt/blackduck/hub-imageinspector-ws/hub-imageinspector-ws.jar --server.port=%d --current.linux.distro=%s", 8082,
+        final String cmd = String.format("java -jar /opt/blackduck/hub-imageinspector-ws/hub-imageinspector-ws.jar --server.port=%d --current.linux.distro=%s", containerPort,
                 imageInspectorOsName);
         // TODO The host port is: imageInspectorServices.getDefaultImageInspectorPort()
         // TODO but the server port is 8080, 8081, or 8082
@@ -227,9 +227,9 @@ public class DockerClientManager {
         labels.put(CONTAINER_APPNAME_LABEL_KEY, IMAGEINSPECTOR_APP_NAME_LABEL_VALUE);
         labels.put(CONTAINER_OS_LABEL_KEY, imageInspectorOsName);
         final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageId).withName(containerName).withLabels(labels).withCmd(cmd.split(" "));
-        final ExposedPort exposedPort = new ExposedPort(8082); // TODO
+        final ExposedPort exposedPort = new ExposedPort(containerPort); // TODO
         createContainerCmd.withExposedPorts(exposedPort);
-        final PortBinding portBinding = new PortBinding(Binding.bindPort(imageInspectorServices.getDefaultImageInspectorPort()), exposedPort);
+        final PortBinding portBinding = new PortBinding(Binding.bindPort(hostPort), exposedPort);
         createContainerCmd.withPortBindings(portBinding);
         final List<String> envAssignments = new ArrayList<>();
         if (StringUtils.isBlank(config.getHubProxyHost()) && !StringUtils.isBlank(config.getScanCliOptsEnvVar())) {
