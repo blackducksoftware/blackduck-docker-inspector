@@ -31,6 +31,11 @@ public class DockerInspectorTest {
     private static int IMAGE_INSPECTOR_PORT_IN_CONTAINER_CENTOS = 8081;
     private static int IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU = 8082;
     private static int IMAGE_INSPECTOR_PORT_IN_CONTAINER_UBUNTU = 8082;
+
+    private static int START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE = 8100;
+    private static int START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS = 8101;
+    private static int START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU = 8102;
+
     private static String SHARED_DIR_PATH_IN_CONTAINER = "/opt/blackduck/shared";
 
     private static File dirSharedWithContainer;
@@ -340,6 +345,9 @@ public class DockerInspectorTest {
         cmd.add(inspectTargetArg);
         if (startContainersAsNeeded) {
             cmd.add("--imageinspector.service.start=true");
+            cmd.add(String.format("--imageinspector.host.port.alpine=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE));
+            cmd.add(String.format("--imageinspector.host.port.centos=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS));
+            cmd.add(String.format("--imageinspector.host.port.ubuntu=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU));
         }
         if (additionalArgs != null && additionalArgs.size() > 0) {
             cmd.addAll(additionalArgs);
@@ -387,6 +395,9 @@ public class DockerInspectorTest {
         cmd.add("--logging.level.com.blackducksoftware=DEBUG");
         if (startContainersAsNeeded) {
             cmd.add("--imageinspector.service.start=true");
+            cmd.add(String.format("--imageinspector.host.port.alpine=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE));
+            cmd.add(String.format("--imageinspector.host.port.centos=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS));
+            cmd.add(String.format("--imageinspector.host.port.ubuntu=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU));
         }
         final File workingDir = new File(String.format("%s/endToEnd", TestUtils.TEST_DIR_REL_PATH));
         TestUtils.deleteDirIfExists(workingDir);
