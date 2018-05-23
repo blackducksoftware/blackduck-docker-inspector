@@ -266,6 +266,10 @@ public class ProgramPaths {
     }
 
     public String getHubDockerOutputPathHost() {
+        if (StringUtils.isNotBlank(config.getImageInspectorUrl())) {
+            final File outputDir = new File(config.getSharedDirPathLocal(), OUTPUT_DIR);
+            return outputDir.getAbsolutePath();
+        }
         return hubDockerOutputPathHost;
     }
 

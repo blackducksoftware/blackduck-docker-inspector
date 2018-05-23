@@ -85,20 +85,11 @@ public class RestClientInspector implements Inspector {
             final String bdioString = restClient.getBdio(dockerTarFile.getCanonicalPath(), dockerTarFilePathInContainer, containerFileSystemFilename, config.isCleanupWorkingDir());
             if (StringUtils.isNotBlank(config.getOutputPath())) {
                 final File userOutputDir = new File(config.getOutputPath());
-
                 final String outputBdioFilename = deriveOutputBdioFilename(bdioString);
                 final File outputBdioFile = new File(userOutputDir, outputBdioFilename);
                 logger.info(String.format("Writing BDIO to %s", outputBdioFile.getAbsolutePath()));
                 FileUtils.write(outputBdioFile, bdioString, StandardCharsets.UTF_8);
-
-                // TODO this method of getting localPathToContainerOutputDir is OK for orchestration,
-                // not for cmd-line-util; Changing it from:
-                // new File(config.getSharedDirPathLocal(), "output")
-                // to:
-                // new File(programPaths.getHubDockerOutputPathHost());
-                // Which may break the hub-detect-ws scenario
                 final File localPathToContainerOutputDir = new File(programPaths.getHubDockerOutputPathHost());
-
                 final File localPathToContainerFileSytemFile = new File(localPathToContainerOutputDir, containerFileSystemFilename);
                 final File userContainerFileSytemFile = new File(userOutputDir, containerFileSystemFilename);
                 logger.debug(String.format("Copying %s to %s", localPathToContainerFileSytemFile.getAbsolutePath(), userContainerFileSytemFile.getAbsolutePath()));
