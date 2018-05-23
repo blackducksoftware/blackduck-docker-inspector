@@ -217,15 +217,11 @@ public class DockerClientManager {
         final String imageInspectorOsName = inspectorOs.name();
         final String cmd = String.format("java -jar /opt/blackduck/hub-imageinspector-ws/hub-imageinspector-ws.jar --server.port=%d --current.linux.distro=%s", containerPort,
                 imageInspectorOsName);
-        // TODO The host port is: imageInspectorServices.getDefaultImageInspectorPort()
-        // TODO but the server port is 8080, 8081, or 8082
-        // TODO withExposedPorts()
-        // TODO withPortBindings()
         final Map<String, String> labels = new HashMap<>(1);
         labels.put(CONTAINER_APPNAME_LABEL_KEY, IMAGEINSPECTOR_APP_NAME_LABEL_VALUE);
         labels.put(CONTAINER_OS_LABEL_KEY, imageInspectorOsName);
         final Bind bind = createBindMount(programPaths.getHubDockerOutputPathHost(), containerPathToOutputDir);
-        logger.debug(String.format("*** Binding host %s to container %s", programPaths.getHubDockerOutputPathHost(), programPaths.getHubDockerOutputPathContainer()));
+        logger.debug(String.format("Binding host %s to container %s", programPaths.getHubDockerOutputPathHost(), programPaths.getHubDockerOutputPathContainer()));
         final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageId).withName(containerName).withBinds(bind).withLabels(labels).withCmd(cmd.split(" "));
         final ExposedPort exposedPort = new ExposedPort(containerPort);
         createContainerCmd.withExposedPorts(exposedPort);

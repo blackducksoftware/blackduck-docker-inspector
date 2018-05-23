@@ -50,11 +50,11 @@ public class ProgramPaths {
 
     private static final String RUNDIR_BASENAME = "run";
 
-    private static final String OUTPUT_DIR = "output";
+    public static final String OUTPUT_DIR = "output";
 
     private static final String WORKING_DIR = "working";
 
-    private static final String TARGET_DIR = "target";
+    public static final String TARGET_DIR = "target";
 
     private static final String TEMP_DIR = "temp";
 

@@ -54,15 +54,15 @@ public class ContainerPathsTargetDirCopiedFromHost implements ContainerPaths {
     @Override
     public String getContainerPathToOutputFile(final String outputFilename) {
         final File containerOutputDir = new File(getContainerPathToOutputDir());
-        logger.debug(String.format("****** containerOutputDir: %s", containerOutputDir.getAbsolutePath()));
+        logger.debug(String.format("containerOutputDir: %s", containerOutputDir.getAbsolutePath()));
         final File containerFileSystemFileInContainer = new File(containerOutputDir, outputFilename);
-        logger.debug(String.format("****** containerFileSystemFileInContainer: %s", containerFileSystemFileInContainer.getAbsolutePath()));
+        logger.debug(String.format("containerFileSystemFileInContainer: %s", containerFileSystemFileInContainer.getAbsolutePath()));
         return containerFileSystemFileInContainer.getAbsolutePath();
     }
 
     @Override
     public String getContainerPathToSharedDir() {
-        logger.debug(String.format("*** getContainerPathToSharedDir() returning %s", config.getSharedDirPathImageInspector()));
+        logger.debug(String.format("getContainerPathToSharedDir() returning %s", config.getSharedDirPathImageInspector()));
         return config.getSharedDirPathImageInspector();
     }
 
@@ -71,7 +71,7 @@ public class ContainerPathsTargetDirCopiedFromHost implements ContainerPaths {
         // TODO is, or should, this (be) done in ProgramPaths?
         final File sharedDir = new File(getContainerPathToSharedDir());
         final File outputDir = new File(sharedDir, "output");
-        logger.debug(String.format("*** getContainerPathToOutputDir() returning %s", outputDir.getAbsolutePath()));
+        logger.debug(String.format("getContainerPathToOutputDir() returning %s", outputDir.getAbsolutePath()));
         return outputDir.getAbsolutePath();
     }
 
@@ -80,7 +80,7 @@ public class ContainerPathsTargetDirCopiedFromHost implements ContainerPaths {
         // TODO is, or should, this (be) done in ProgramPaths?
         final File sharedDir = new File(getContainerPathToSharedDir());
         final File targetDir = new File(sharedDir, "target");
-        logger.debug(String.format("*** getContainerPathToTargetDir() returning %s", targetDir.getAbsolutePath()));
+        logger.debug(String.format("getContainerPathToTargetDir() returning %s", targetDir.getAbsolutePath()));
         return targetDir.getAbsolutePath();
     }
 }

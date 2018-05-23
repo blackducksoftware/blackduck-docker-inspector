@@ -99,7 +99,7 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         copyFileToContainer(hostPathToTarfile, containerId, containerPathToTarfile);
 
         final String containerFileSystemOutputFilePath = getContainerPaths().getContainerPathToOutputFile(containerFileSystemFilename);
-        logger.debug(String.format("****** containerFileSystemOutputFilePath: %s", containerFileSystemOutputFilePath));
+        logger.debug(String.format("containerFileSystemOutputFilePath: %s", containerFileSystemOutputFilePath));
 
         logger.debug(String.format("Sending getBdio request to: %s", imageInspectorUrl));
         final SimpleResponse response = restRequestor.executeGetBdioRequest(restConnection, imageInspectorUrl, containerPathToTarfile, containerFileSystemOutputFilePath, cleanup);

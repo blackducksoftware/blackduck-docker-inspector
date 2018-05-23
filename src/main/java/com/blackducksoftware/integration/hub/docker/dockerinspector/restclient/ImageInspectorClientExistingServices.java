@@ -71,7 +71,7 @@ public class ImageInspectorClientExistingServices implements ImageInspectorClien
         logger.debug(String.format("Creating a rest connection (%d second timeout) for URL: %s", serviceRequestTimeoutSeconds, imageInspectorUrl));
         final RestConnection restConnection = restConnectionCreator.createRedirectingConnection(imageInspectorUrl, serviceRequestTimeoutSeconds);
         final String containerFileSystemOutputFilePath = getContainerPaths().getContainerPathToOutputFile(containerFileSystemFilename);
-        logger.debug(String.format("****** containerFileSystemOutputFilePath: %s", containerFileSystemOutputFilePath));
+        logger.debug(String.format("containerFileSystemOutputFilePath: %s", containerFileSystemOutputFilePath));
         final SimpleResponse response = restRequester.executeGetBdioRequest(restConnection, imageInspectorUrl, containerPathToTarfile, containerFileSystemOutputFilePath, cleanup);
         return response.getBody();
     }

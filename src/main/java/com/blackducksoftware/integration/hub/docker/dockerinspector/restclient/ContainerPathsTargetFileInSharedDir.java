@@ -33,6 +33,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 
 @Component
 public class ContainerPathsTargetFileInSharedDir implements ContainerPaths {
@@ -63,63 +64,51 @@ public class ContainerPathsTargetFileInSharedDir implements ContainerPaths {
                 return localPath;
             }
         }
-        final String trimmedWorkingDirPath = trimTrailingFileSeparator(workingDirPath);
-        final String trimmedWorkingDirPathImageInspector = trimTrailingFileSeparator(workingDirPathImageInspector);
-        logger.debug(String.format("config.getWorkingDirPath(): %s", trimmedWorkingDirPath));
-        String localRelPath = localPath.substring(trimmedWorkingDirPath.length());
-        if (!localRelPath.startsWith("/")) {
-            localRelPath = String.format("/%s", localRelPath);
-        }
-        logger.debug(String.format("localRelPath (must start with /): %s", localRelPath));
-        final String containerPath = String.format("%s%s", trimmedWorkingDirPathImageInspector, localRelPath);
-        logger.debug(String.format("containerPath: %s", containerPath));
-        return containerPath;
+        logger.debug(String.format("config.getWorkingDirPath(): %s", workingDirPath));
+        final String localRelPath = localPath.substring(workingDirPath.length());
+        logger.debug(String.format("localRelPath: %s", localRelPath));
+        final File containerFile = getFileInDir(workingDirPathImageInspector, localRelPath);
+        logger.debug(String.format("containerPath: %s", containerFile.getAbsolutePath()));
+        return containerFile.getAbsolutePath();
     }
 
     @Override
     public String getContainerPathToOutputFile(final String outputFilename) {
-        final File containerOutputDir = new File(getContainerPathToOutputDir());
-        final File containerFileSystemFileInContainer = new File(containerOutputDir, outputFilename);
+        final File containerFileSystemFileInContainer = getFileInDir(getContainerPathToOutputDir(), outputFilename);
         return containerFileSystemFileInContainer.getAbsolutePath();
+    }
+
+    private File getFileInDir(final String dirPath, final String filename) {
+        final File containerOutputDir = new File(dirPath);
+        final File containerFileSystemFileInContainer = new File(containerOutputDir, filename);
+        return containerFileSystemFileInContainer;
     }
 
     @Override
     public String getContainerPathToSharedDir() {
-        logger.debug(String.format("*** getContainerPathToSharedDir() returning %s", config.getSharedDirPathImageInspector()));
+        logger.debug(String.format("getContainerPathToSharedDir() returning %s", config.getSharedDirPathImageInspector()));
         return config.getSharedDirPathImageInspector();
     }
 
     @Override
     public String getContainerPathToOutputDir() {
         // TODO is, or should, this (be) done in ProgramPaths?
-        final File sharedDir = new File(getContainerPathToSharedDir());
-        final File outputDir = new File(sharedDir, "output");
-        logger.debug(String.format("*** getContainerPathToOutputDir() returning %s", outputDir.getAbsolutePath()));
+        final File outputDir = getFileInDir(getContainerPathToSharedDir(), ProgramPaths.OUTPUT_DIR);
+        logger.debug(String.format("getContainerPathToOutputDir() returning %s", outputDir.getAbsolutePath()));
         return outputDir.getAbsolutePath();
     }
 
     @Override
     public String getContainerPathToTargetDir() {
-        // TODO is, or should, this (be) done in ProgramPaths?
-        final File sharedDir = new File(getContainerPathToSharedDir());
-        final File targetDir = new File(sharedDir, "target");
-        logger.debug(String.format("*** getContainerPathToTargetDir() returning %s", targetDir.getAbsolutePath()));
+        final File targetDir = getFileInDir(getContainerPathToSharedDir(), ProgramPaths.TARGET_DIR);
+        logger.debug(String.format("getContainerPathToTargetDir() returning %s", targetDir.getAbsolutePath()));
         return targetDir.getAbsolutePath();
     }
 
     private String getContainerTargetFilePath(final String containerTargetDirPathDefault, final String localPath) {
         final File localFile = new File(localPath);
-        final File containerTargetDir = new File(containerTargetDirPathDefault);
-        final File containerTargetFile = new File(containerTargetDir, localFile.getName());
+        final File containerTargetFile = getFileInDir(containerTargetDirPathDefault, localFile.getName());
         final String containerTargetFilePath = containerTargetFile.getAbsolutePath();
         return containerTargetFilePath;
-    }
-
-    // TODO use File or Path to construct paths, not this garbage
-    private String trimTrailingFileSeparator(final String path) {
-        if (StringUtils.isBlank(path) || !path.endsWith("/")) {
-            return path;
-        }
-        return path.substring(0, path.length() - 1);
     }
 }
