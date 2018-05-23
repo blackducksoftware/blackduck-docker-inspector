@@ -217,9 +217,9 @@ public class Config {
     @Value("${shared.dir.path.local:}")
     private String sharedDirPathLocal = "";
 
-    @ValueDescription(description = "The container's path to the shared directory. Only needed if using existing imageinspector containers", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
-    @Value("${shared.dir.path.imageinspector:}")
-    private String sharedDirPathImageInspector = "";
+    @ValueDescription(description = "The container's path to the shared directory. Only needed if using existing imageinspector containers", defaultValue = "/opt/blackduck/hub-imageinspector-ws/shared", group = Config.GROUP_PRIVATE, deprecated = false)
+    @Value("${shared.dir.path.imageinspector:/opt/blackduck/hub-imageinspector-ws/shared}")
+    private String sharedDirPathImageInspector = "/opt/blackduck/hub-imageinspector-ws/shared";
 
     @ValueDescription(description = "The URL of the imageinspector container to use", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${imageinspector.url:}")

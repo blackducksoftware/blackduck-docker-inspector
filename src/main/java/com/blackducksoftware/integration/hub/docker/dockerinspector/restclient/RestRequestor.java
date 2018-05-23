@@ -25,6 +25,7 @@ package com.blackducksoftware.integration.hub.docker.dockerinspector.restclient;
 
 import java.io.IOException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -40,17 +41,16 @@ import com.blackducksoftware.integration.rest.request.Response;
 public class RestRequestor {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private static final String CLEANUP_QUERY_PARAM = "cleanup";
-    private static final String CONTAINER_OUTPUT_PATH = "/opt/blackduck/shared/output";
     private static final String RESULTING_CONTAINER_FS_PATH_QUERY_PARAM = "resultingcontainerfspath";
     private static final String TARFILE_QUERY_PARAM = "tarfile";
     private static final String GETBDIO_ENDPOINT = "getbdio";
 
-    public SimpleResponse executeGetBdioRequest(final RestConnection restConnection, final String imageInspectorUrl, final String containerPathToTarfile, final String containerFileSystemFilename, final boolean cleanup)
+    public SimpleResponse executeGetBdioRequest(final RestConnection restConnection, final String imageInspectorUrl, final String containerPathToTarfile, final String containerPathToContainerFileSystemFile, final boolean cleanup)
             throws IntegrationException {
 
         String containerFileSystemQueryString = "";
-        if (containerFileSystemFilename != null) {
-            containerFileSystemQueryString = String.format("&%s=%s/%s", RESULTING_CONTAINER_FS_PATH_QUERY_PARAM, CONTAINER_OUTPUT_PATH, containerFileSystemFilename);
+        if (StringUtils.isNotBlank(containerPathToContainerFileSystemFile)) {
+            containerFileSystemQueryString = String.format("&%s=%s", RESULTING_CONTAINER_FS_PATH_QUERY_PARAM, containerPathToContainerFileSystemFile);
         }
         final String url = String.format("%s/%s?%s=%s&%s=%b%s",
                 imageInspectorUrl, GETBDIO_ENDPOINT, TARFILE_QUERY_PARAM, containerPathToTarfile, CLEANUP_QUERY_PARAM, cleanup, containerFileSystemQueryString);

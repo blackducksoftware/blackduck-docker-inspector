@@ -43,7 +43,6 @@ import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient.HubSecrets;
-import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.ImageInspectorServices;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.blackducksoftware.integration.hub.imageinspector.api.ImageInspectorOsEnum;
 import com.blackducksoftware.integration.hub.imageinspector.lib.OperatingSystemEnum;
@@ -109,9 +108,6 @@ public class DockerClientManager {
 
     @Autowired
     private Config config;
-
-    @Autowired
-    private ImageInspectorServices imageInspectorServices;
 
     public File getTarFileFromDockerImageById(final String imageId, final File imageTarDirectory) throws HubIntegrationException, IOException {
 
@@ -211,7 +207,8 @@ public class DockerClientManager {
         return containerId;
     }
 
-    public String startContainerAsService(final String imageId, final String containerName, final OperatingSystemEnum inspectorOs, final int containerPort, final int hostPort) throws IntegrationException {
+    public String startContainerAsService(final String imageId, final String containerName, final OperatingSystemEnum inspectorOs, final int containerPort, final int hostPort, final String containerPathToOutputDir)
+            throws IntegrationException {
         logger.debug(String.format("Staring image ID %s --> container name: %s", imageId, containerName));
         final DockerClient dockerClient = hubDockerClient.getDockerClient();
         stopRemoveContainerIfExists(dockerClient, containerName);
@@ -227,8 +224,10 @@ public class DockerClientManager {
         final Map<String, String> labels = new HashMap<>(1);
         labels.put(CONTAINER_APPNAME_LABEL_KEY, IMAGEINSPECTOR_APP_NAME_LABEL_VALUE);
         labels.put(CONTAINER_OS_LABEL_KEY, imageInspectorOsName);
-        final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageId).withName(containerName).withLabels(labels).withCmd(cmd.split(" "));
-        final ExposedPort exposedPort = new ExposedPort(containerPort); // TODO
+        final Bind bind = createBindMount(programPaths.getHubDockerOutputPathHost(), containerPathToOutputDir);
+        logger.debug(String.format("*** Binding host %s to container %s", programPaths.getHubDockerOutputPathHost(), programPaths.getHubDockerOutputPathContainer()));
+        final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageId).withName(containerName).withBinds(bind).withLabels(labels).withCmd(cmd.split(" "));
+        final ExposedPort exposedPort = new ExposedPort(containerPort);
         createContainerCmd.withExposedPorts(exposedPort);
         final PortBinding portBinding = new PortBinding(Binding.bindPort(hostPort), exposedPort);
         createContainerCmd.withPortBindings(portBinding);

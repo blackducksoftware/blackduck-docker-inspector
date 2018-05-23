@@ -48,6 +48,9 @@ public class ImageInspectorClientExistingServices implements ImageInspectorClien
     @Autowired
     private RestConnectionCreator restConnectionCreator;
 
+    @Autowired
+    private ContainerPathsTargetFileInSharedDir containerPathsExistingServices;
+
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
@@ -67,7 +70,13 @@ public class ImageInspectorClientExistingServices implements ImageInspectorClien
         final int serviceRequestTimeoutSeconds = (int) (config.getCommandTimeout() / 1000L);
         logger.debug(String.format("Creating a rest connection (%d second timeout) for URL: %s", serviceRequestTimeoutSeconds, imageInspectorUrl));
         final RestConnection restConnection = restConnectionCreator.createRedirectingConnection(imageInspectorUrl, serviceRequestTimeoutSeconds);
-        final SimpleResponse response = restRequester.executeGetBdioRequest(restConnection, imageInspectorUrl, containerPathToTarfile, containerFileSystemFilename, cleanup);
+        final String containerFileSystemOutputFilePath = getContainerPaths().getContainerPathToOutputFile(containerFileSystemFilename);
+        final SimpleResponse response = restRequester.executeGetBdioRequest(restConnection, imageInspectorUrl, containerPathToTarfile, containerFileSystemOutputFilePath, cleanup);
         return response.getBody();
+    }
+
+    @Override
+    public ContainerPaths getContainerPaths() {
+        return containerPathsExistingServices;
     }
 }

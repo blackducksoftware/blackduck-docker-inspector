@@ -74,6 +74,9 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
     private ProgramPaths programPaths;
 
     @Autowired
+    private ContainerPathsTargetDirCopiedFromHost containerPathsContainersStartedAsNeeded;
+
+    @Autowired
     private HubDockerClient hubDockerClient;
 
     @Override
@@ -95,8 +98,9 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         final String containerId = ensureServiceReady(restConnection, imageInspectorUrl, inspectorOs);
         copyFileToContainer(hostPathToTarfile, containerId, containerPathToTarfile);
         logger.debug(String.format("Sending getBdio request to: %s", imageInspectorUrl));
-
-        final SimpleResponse response = restRequestor.executeGetBdioRequest(restConnection, imageInspectorUrl, containerPathToTarfile, containerFileSystemFilename, cleanup);
+        final File containerOutputDir = new File(getContainerPaths().getContainerPathToOutputDir());
+        final File containerFileSystemFileInContainer = new File(containerOutputDir, containerFileSystemFilename);
+        final SimpleResponse response = restRequestor.executeGetBdioRequest(restConnection, imageInspectorUrl, containerPathToTarfile, containerFileSystemFileInContainer.getAbsolutePath(), cleanup);
         if (response.getStatusCode() < RestConstants.MULT_CHOICE_300) {
             final String bdio = response.getBody();
             return bdio;
@@ -120,6 +124,11 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         final SimpleResponse responseFromCorrectedContainer = restRequestor.executeGetBdioRequest(correctedRestConnection, correctedImageInspectorUrl, containerPathToTarfile, containerFileSystemFilename, cleanup);
         final String bdioFromCorrectedContainer = responseFromCorrectedContainer.getBody();
         return bdioFromCorrectedContainer;
+    }
+
+    @Override
+    public ContainerPaths getContainerPaths() {
+        return containerPathsContainersStartedAsNeeded;
     }
 
     private int deriveTimeoutSeconds() {
@@ -174,7 +183,8 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         final int containerPort = imageInspectorServices.getImageInspectorContainerPort(inspectorOs);
         final int hostPort = imageInspectorServices.getImageInspectorHostPort(inspectorOs);
         final String containerName = programPaths.deriveContainerName(imageInspectorRepo);
-        final String containerId = dockerClientManager.startContainerAsService(imageId, containerName, inspectorOs, containerPort, hostPort);
+        final String containerId = dockerClientManager.startContainerAsService(imageId, containerName, inspectorOs, containerPort, hostPort,
+                containerPathsContainersStartedAsNeeded.getContainerPathToOutputDir());
         // TODO will need containerId later to stop/remove it since we launched it
 
         for (int tryIndex = 0; tryIndex < MAX_CONTAINER_START_TRY_COUNT && !serviceIsUp; tryIndex++) {

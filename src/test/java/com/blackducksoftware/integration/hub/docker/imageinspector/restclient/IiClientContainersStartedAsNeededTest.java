@@ -16,6 +16,7 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.InspectorIma
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.DockerClientManager;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.HubDockerClient;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.ContainerPathsTargetDirCopiedFromHost;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.ImageInspectorClientContainersStartedAsNeeded;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.ImageInspectorServices;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.RestConnectionCreator;
@@ -55,6 +56,9 @@ public class IiClientContainersStartedAsNeededTest {
     @Mock
     private HubDockerClient hubDockerClient;
 
+    @Mock
+    private ContainerPathsTargetDirCopiedFromHost containerPaths;
+
     @Test
     public void test() throws IntegrationException, IOException {
         Mockito.when(config.isImageInspectorServiceStart()).thenReturn(true);
@@ -77,6 +81,7 @@ public class IiClientContainersStartedAsNeededTest {
         final SimpleResponse response = new SimpleResponse(RestConstants.OK_200, null, "testResult");
         Mockito.when(restRequestor.executeGetBdioRequest(Mockito.any(RestConnection.class), Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), Mockito.anyBoolean())).thenReturn(response);
 
+        Mockito.when(containerPaths.getContainerPathToOutputDir()).thenReturn("/opt/blackduck/hub-imageinspector-ws/shared/output");
         Mockito.when(inspectorImages.getInspectorImageName(Mockito.any(OperatingSystemEnum.class))).thenReturn("blackduck/hub-imageinspector-ws");
         Mockito.when(inspectorImages.getInspectorImageTag(Mockito.any(OperatingSystemEnum.class))).thenReturn("1.1.1");
 

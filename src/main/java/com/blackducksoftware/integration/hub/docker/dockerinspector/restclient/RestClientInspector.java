@@ -50,7 +50,6 @@ import com.google.gson.Gson;
 @Component
 public class RestClientInspector implements Inspector {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private static final String DEFAULT_IMAGEINSPECTOR_TARGET_DIR_PATH = "/opt/blackduck/hub-imageinspector-ws/shared/target";
 
     @Autowired
     private Config config;
@@ -63,9 +62,6 @@ public class RestClientInspector implements Inspector {
 
     @Autowired
     private List<ImageInspectorClient> imageInspectorClients;
-
-    @Autowired
-    private ContainerPath containerPath;
 
     @Override
     public boolean isApplicable() {
@@ -82,7 +78,7 @@ public class RestClientInspector implements Inspector {
             final File dockerTarFile = dockerTarfile.deriveDockerTarFile();
             final String containerFileSystemFilename = dockerTarfile.deriveContainerFileSystemTarGzFilename(dockerTarFile);
             logger.debug(String.format("Given docker tar file path: %s", dockerTarFile.getCanonicalPath()));
-            final String dockerTarFilePathInContainer = containerPath.getContainerPathToLocalFile(dockerTarFile.getCanonicalPath(), DEFAULT_IMAGEINSPECTOR_TARGET_DIR_PATH);
+            final String dockerTarFilePathInContainer = restClient.getContainerPaths().getContainerPathToLocalFile(dockerTarFile.getCanonicalPath());
             logger.debug(String.format("Derived container docker tar file path: %s", dockerTarFilePathInContainer));
             logger.debug(String.format("HubDockerWorkingDirPathHost: %s", programPaths.getHubDockerWorkingDirPathHost()));
             logger.debug(String.format("HubDockerWorkingDirPathContainer: %s", programPaths.getHubDockerWorkingDirPathContainer()));

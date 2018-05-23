@@ -23,15 +23,22 @@
  */
 package com.blackducksoftware.integration.hub.docker.dockerinspector.restclient;
 
-import java.net.MalformedURLException;
+import java.io.IOException;
 
-import com.blackducksoftware.integration.exception.IntegrationException;
+public interface ContainerPaths {
 
-public interface ImageInspectorClient {
+    /*
+     * Translate a local path (to a file within the dir shared with the container) to the equivalent path for the container. Find path to the given localPath RELATIVE to the local shared dir. Convert that to the container's path by
+     * appending that relative path to the container's path to the shared dir
+     */
+    String getContainerPathToLocalFile(String localPath) throws IOException;
 
-    String getBdio(String hostPathToTarFile, String containerPathToTarfile, String containerFileSystemFilename, boolean cleanup) throws IntegrationException, MalformedURLException;
+    String getContainerPathToOutputFile(String outputFilename);
 
-    boolean isApplicable();
+    String getContainerPathToSharedDir();
 
-    ContainerPaths getContainerPaths();
+    String getContainerPathToOutputDir();
+
+    String getContainerPathToTargetDir();
+
 }
