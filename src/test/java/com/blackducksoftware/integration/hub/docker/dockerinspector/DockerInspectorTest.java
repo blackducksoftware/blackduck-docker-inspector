@@ -115,42 +115,52 @@ public class DockerInspectorTest {
 
     @Test
     public void testUbuntu() throws IOException, InterruptedException, IntegrationException {
-        testImage("ubuntu:17.04", "ubuntu", "17.04", "var_lib_dpkg", true);
+        testImage("ubuntu:17.04", "ubuntu", "17.04", "var_lib_dpkg", true, false);
+    }
+
+    @Test
+    public void testUbuntuStartContainer() throws IOException, InterruptedException, IntegrationException {
+        testImage("ubuntu:17.04", "ubuntu", "17.04", "var_lib_dpkg", true, true);
     }
 
     @Test
     public void testAlpine() throws IOException, InterruptedException, IntegrationException {
-        testImage("alpine:3.6", "alpine", "3.6", "lib_apk", true);
+        testImage("alpine:3.6", "alpine", "3.6", "lib_apk", true, false);
+    }
+
+    @Test
+    public void testAlpineStartContainer() throws IOException, InterruptedException, IntegrationException {
+        testImage("alpine:3.6", "alpine", "3.6", "lib_apk", true, true);
     }
 
     @Test
     public void testAlpineLatest() throws IOException, InterruptedException, IntegrationException {
-        testImage("alpine", "alpine", "latest", "lib_apk", false);
+        testImage("alpine", "alpine", "latest", "lib_apk", false, false);
     }
 
     @Test
     public void testCentos() throws IOException, InterruptedException, IntegrationException {
-        testImage("centos:7.3.1611", "centos", "7.3.1611", "var_lib_rpm", true);
+        testImage("centos:7.3.1611", "centos", "7.3.1611", "var_lib_rpm", true, false);
     }
 
     @Test
     public void testHubWebapp() throws IOException, InterruptedException, IntegrationException {
-        testImage("blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", "lib_apk", true);
+        testImage("blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", "lib_apk", true, false);
     }
 
     @Test
     public void testHubZookeeper() throws IOException, InterruptedException, IntegrationException {
-        testImage("blackducksoftware/hub-zookeeper:4.0.0", "blackducksoftware_hub-zookeeper", "4.0.0", "lib_apk", true);
+        testImage("blackducksoftware/hub-zookeeper:4.0.0", "blackducksoftware_hub-zookeeper", "4.0.0", "lib_apk", true, false);
     }
 
     @Test
     public void testTomcat() throws IOException, InterruptedException, IntegrationException {
-        testImage("tomcat:6.0.53-jre7", "tomcat", "6.0.53-jre7", "var_lib_dpkg", true);
+        testImage("tomcat:6.0.53-jre7", "tomcat", "6.0.53-jre7", "var_lib_dpkg", true, false);
     }
 
     @Test
     public void testRhel() throws IOException, InterruptedException, IntegrationException {
-        testImage("dnplus/rhel:6.5", "dnplus_rhel", "6.5", "var_lib_rpm", true);
+        testImage("dnplus/rhel:6.5", "dnplus_rhel", "6.5", "var_lib_rpm", true, false);
     }
 
     @Test
@@ -158,7 +168,15 @@ public class DockerInspectorTest {
         final String repo = "blackducksoftware/whiteouttest";
         final String tag = "1.0";
         final File outputContainerFileSystemFile = getOutputContainerFileSystemFile(repo, tag);
-        testTar("build/images/test/whiteouttest.tar", repo.replaceAll("/", "_"), repo, tag, tag, "var_lib_dpkg", true, null, true, outputContainerFileSystemFile);
+        testTar("build/images/test/whiteouttest.tar", repo.replaceAll("/", "_"), repo, tag, tag, "var_lib_dpkg", true, false, null, true, outputContainerFileSystemFile);
+    }
+
+    @Test
+    public void testWhiteoutStartContainer() throws IOException, InterruptedException, IntegrationException {
+        final String repo = "blackducksoftware/whiteouttest";
+        final String tag = "1.0";
+        final File outputContainerFileSystemFile = getOutputContainerFileSystemFile(repo, tag);
+        testTar("build/images/test/whiteouttest.tar", repo.replaceAll("/", "_"), repo, tag, tag, "var_lib_dpkg", true, true, null, true, outputContainerFileSystemFile);
     }
 
     @Test
@@ -166,7 +184,7 @@ public class DockerInspectorTest {
         final String repo = "blackducksoftware/whiteouttest";
         final String tag = "1.0";
         final File outputContainerFileSystemFile = getOutputContainerFileSystemFile(repo, tag);
-        testTar("build/images/test/aggregated.tar", repo.replaceAll("/", "_"), repo, tag, tag, "var_lib_dpkg", true, null, true, outputContainerFileSystemFile);
+        testTar("build/images/test/aggregated.tar", repo.replaceAll("/", "_"), repo, tag, tag, "var_lib_dpkg", true, false, null, true, outputContainerFileSystemFile);
     }
 
     @Test
@@ -174,7 +192,7 @@ public class DockerInspectorTest {
         final String repo = "blackducksoftware/centos_minus_vim_plus_bacula";
         final String tag = "1.0";
         final File outputContainerFileSystemFile = getOutputContainerFileSystemFile(repo, tag);
-        testTar("build/images/test/aggregated.tar", repo.replaceAll("/", "_"), repo, tag, tag, "var_lib_rpm", true, null, true, outputContainerFileSystemFile);
+        testTar("build/images/test/aggregated.tar", repo.replaceAll("/", "_"), repo, tag, tag, "var_lib_rpm", true, false, null, true, outputContainerFileSystemFile);
     }
 
     @Test
@@ -182,7 +200,7 @@ public class DockerInspectorTest {
         final String repo = "alpine";
         final String tag = "latest";
         final File outputContainerFileSystemFile = getOutputContainerFileSystemFile(repo, tag);
-        testTar("build/images/test/alpine.tar", repo.replaceAll("/", "_"), repo, tag, tag, "lib_apk", false, null, true, outputContainerFileSystemFile);
+        testTar("build/images/test/alpine.tar", repo.replaceAll("/", "_"), repo, tag, tag, "lib_apk", false, false, null, true, outputContainerFileSystemFile);
     }
 
     @Test
@@ -190,7 +208,7 @@ public class DockerInspectorTest {
         final String repo = "alpine";
         final String tag = null;
         final File outputContainerFileSystemFile = getOutputContainerFileSystemFile(repo, tag);
-        testTar("build/images/test/alpine.tar", repo, null, null, "latest", "lib_apk", false, null, true, outputContainerFileSystemFile);
+        testTar("build/images/test/alpine.tar", repo, null, null, "latest", "lib_apk", false, false, null, true, outputContainerFileSystemFile);
     }
 
     @Test
@@ -267,7 +285,7 @@ public class DockerInspectorTest {
         additionalArgs.add(String.format("--shared.dir.path.local=%s", dirSharedWithContainer.getAbsolutePath()));
         additionalArgs.add(String.format("--shared.dir.path.imageinspector=%s", SHARED_DIR_PATH_IN_CONTAINER));
         final File outputContainerFileSystemFile = new File(String.format("%s/output/%s_containerfilesystem.tar.gz", TestUtils.TEST_DIR_REL_PATH, tarFileBaseName));
-        testTar(targetTar.getAbsolutePath(), targetRepo, null, null, targetTag, targetPkgMgrLib, true, additionalArgs, false, outputContainerFileSystemFile);
+        testTar(targetTar.getAbsolutePath(), targetRepo, null, null, targetTag, targetPkgMgrLib, true, false, additionalArgs, false, outputContainerFileSystemFile);
     }
 
     private FilenameFilter getJarFilenameFilter() {
@@ -288,6 +306,7 @@ public class DockerInspectorTest {
     }
 
     private void testTar(final String inspectTargetTarfile, final String imageForBdioFilename, final String repo, final String tag, final String tagForBdioFilename, final String pkgMgrPathString, final boolean requireBdioMatch,
+            final boolean startContainersAsNeeded,
             final List<String> additionalArgs, final boolean needWorkingDir, final File outputContainerFileSystemFile)
             throws IOException, InterruptedException, IntegrationException {
 
@@ -319,11 +338,12 @@ public class DockerInspectorTest {
             cmd.add(String.format("--working.dir.path=%s", workingDir.getAbsolutePath()));
         }
         cmd.add(inspectTargetArg);
-
+        if (startContainersAsNeeded) {
+            cmd.add("--imageinspector.service.start=true");
+        }
         if (additionalArgs != null && additionalArgs.size() > 0) {
             cmd.addAll(additionalArgs);
         }
-
         System.out.println(String.format("Running end to end test on %s with command %s", inspectTargetTarfile, cmd.toString()));
         TestUtils.execCmd(String.join(" ", cmd), 240000L, true);
         System.out.println("hub-docker-inspector done; verifying results...");
@@ -343,7 +363,7 @@ public class DockerInspectorTest {
         assertTrue(outputContainerFileSystemFile.exists());
     }
 
-    private void testImage(final String inspectTargetImageRepoTag, final String repo, final String tag, final String pkgMgrPathString, final boolean requireBdioMatch)
+    private void testImage(final String inspectTargetImageRepoTag, final String repo, final String tag, final String pkgMgrPathString, final boolean requireBdioMatch, final boolean startContainersAsNeeded)
             throws IOException, InterruptedException, IntegrationException {
         final File outputContainerFileSystemFile = getOutputContainerFileSystemFile(repo, tag);
         final String inspectTargetArg = String.format("--docker.image=%s", inspectTargetImageRepoTag);
@@ -365,6 +385,9 @@ public class DockerInspectorTest {
             cmd.add(String.format("--docker.image.tag=%s", tag));
         }
         cmd.add("--logging.level.com.blackducksoftware=DEBUG");
+        if (startContainersAsNeeded) {
+            cmd.add("--imageinspector.service.start=true");
+        }
         final File workingDir = new File(String.format("%s/endToEnd", TestUtils.TEST_DIR_REL_PATH));
         TestUtils.deleteDirIfExists(workingDir);
         cmd.add(String.format("--working.dir.path=%s", workingDir.getAbsolutePath()));

@@ -50,7 +50,18 @@ public class SimpleResponse {
         return headers;
     }
 
+    public String getWarningHeaderValue() {
+        final String warningHeaderValue = getHeaders().get("Warning");
+        if (warningHeaderValue == null) {
+            return "";
+        }
+        return warningHeaderValue;
+    }
+
     public String getBody() {
+        if (body == null) {
+            return "";
+        }
         return body;
     }
 
