@@ -78,8 +78,15 @@ public class NonRedirectingUnauthenticatedRestConnection extends Unauthenticated
                             final HttpUriRequest newRequest = copyHttpRequest(request);
                             return handleClientExecution(newRequest, retryCount + 1);
                         } else {
+                            String warningHeaderValue;
+                            String responseBody;
+                            try (Response resp = new Response(response)) {
+                                warningHeaderValue = resp.getHeaderValue("Warning");
+                                responseBody = resp.getContentString();
+                            }
                             throw new IntegrationRestException(statusCode, statusMessage,
-                                    String.format("There was a problem trying to %s this item: %s. Error: %s %s", request.getMethod(), urlString, statusCode, statusMessage));
+                                    String.format("There was a problem trying to %s this item: %s. Error: %s %s; Warning header: '%s'; Body: '%s'", request.getMethod(), urlString, statusCode, statusMessage, warningHeaderValue,
+                                            responseBody));
                         }
                     } finally {
                         response.close();

@@ -97,10 +97,12 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         final OperatingSystemEnum inspectorOs = OperatingSystemEnum.determineOperatingSystem(config.getImageInspectorDefault());
         final String containerId = ensureServiceReady(restConnection, imageInspectorUrl, inspectorOs);
         copyFileToContainer(hostPathToTarfile, containerId, containerPathToTarfile);
+
+        final String containerFileSystemOutputFilePath = getContainerPaths().getContainerPathToOutputFile(containerFileSystemFilename);
+        logger.debug(String.format("****** containerFileSystemOutputFilePath: %s", containerFileSystemOutputFilePath));
+
         logger.debug(String.format("Sending getBdio request to: %s", imageInspectorUrl));
-        final File containerOutputDir = new File(getContainerPaths().getContainerPathToOutputDir());
-        final File containerFileSystemFileInContainer = new File(containerOutputDir, containerFileSystemFilename);
-        final SimpleResponse response = restRequestor.executeGetBdioRequest(restConnection, imageInspectorUrl, containerPathToTarfile, containerFileSystemFileInContainer.getAbsolutePath(), cleanup);
+        final SimpleResponse response = restRequestor.executeGetBdioRequest(restConnection, imageInspectorUrl, containerPathToTarfile, containerFileSystemOutputFilePath, cleanup);
         if (response.getStatusCode() < RestConstants.MULT_CHOICE_300) {
             final String bdio = response.getBody();
             return bdio;
@@ -121,7 +123,7 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         final String correctedContainerId = ensureServiceReady(correctedRestConnection, correctedImageInspectorUrl, correctedInspectorOs);
         copyFileToContainer(hostPathToTarfile, correctedContainerId, containerPathToTarfile);
         logger.debug(String.format("Sending getBdio request to: %s", correctedImageInspectorUrl));
-        final SimpleResponse responseFromCorrectedContainer = restRequestor.executeGetBdioRequest(correctedRestConnection, correctedImageInspectorUrl, containerPathToTarfile, containerFileSystemFilename, cleanup);
+        final SimpleResponse responseFromCorrectedContainer = restRequestor.executeGetBdioRequest(correctedRestConnection, correctedImageInspectorUrl, containerPathToTarfile, containerFileSystemOutputFilePath, cleanup);
         final String bdioFromCorrectedContainer = responseFromCorrectedContainer.getBody();
         return bdioFromCorrectedContainer;
     }

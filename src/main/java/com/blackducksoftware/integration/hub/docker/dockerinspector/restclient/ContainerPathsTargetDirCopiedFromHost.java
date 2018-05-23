@@ -50,11 +50,13 @@ public class ContainerPathsTargetDirCopiedFromHost implements ContainerPaths {
         return containerTargetFile.getAbsolutePath();
     }
 
-    // TODO this could be shared across both implementations; methods are identical
+    // TODO this could be shared across both implementations; methods are identical (I think)
     @Override
     public String getContainerPathToOutputFile(final String outputFilename) {
         final File containerOutputDir = new File(getContainerPathToOutputDir());
+        logger.debug(String.format("****** containerOutputDir: %s", containerOutputDir.getAbsolutePath()));
         final File containerFileSystemFileInContainer = new File(containerOutputDir, outputFilename);
+        logger.debug(String.format("****** containerFileSystemFileInContainer: %s", containerFileSystemFileInContainer.getAbsolutePath()));
         return containerFileSystemFileInContainer.getAbsolutePath();
     }
 
