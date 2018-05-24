@@ -228,6 +228,20 @@ public class DockerInspectorTest {
     }
 
     @Test
+    public void testWhiteoutUsingExistingAlpineContainer() throws IOException, InterruptedException, IntegrationException {
+        final String targetRepo = "blackducksoftware/whiteouttest";
+        final String targetTag = "1.0";
+        // final File outputContainerFileSystemFile = getOutputContainerFileSystemFile(repo, tag);
+        // testTar("build/images/test/whiteouttest.tar", repo.replaceAll("/", "_"), repo, tag, tag, "var_lib_dpkg", true, false, null, true, outputContainerFileSystemFile);
+
+        final String targetPkgMgrLib = "var_lib_dpkg";
+        final String tarFileBaseName = "whiteouttest";
+        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE;
+        final String imageInspectorPlatform = "alpine";
+        testUsingExistingContainer(targetRepo, targetTag, targetPkgMgrLib, tarFileBaseName, imageInspectorPlatform, portOnHost);
+    }
+
+    @Test
     public void testCentosUsingExistingAlpineContainer() throws IOException, InterruptedException, IntegrationException {
         final String targetRepo = "blackducksoftware/centos_minus_vim_plus_bacula";
         final String targetTag = "1.0";
@@ -368,7 +382,7 @@ public class DockerInspectorTest {
             assertTrue(outputBdioMatches);
         }
 
-        assertTrue(outputContainerFileSystemFile.exists());
+        assertTrue(String.format("%s does not exist", outputContainerFileSystemFile.getAbsolutePath()), outputContainerFileSystemFile.exists());
     }
 
     private void testImage(final String inspectTargetImageRepoTag, final String repo, final String tag, final String pkgMgrPathString, final boolean requireBdioMatch, final boolean startContainersAsNeeded)
