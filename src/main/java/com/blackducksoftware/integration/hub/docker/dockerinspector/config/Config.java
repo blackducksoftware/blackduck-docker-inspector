@@ -25,10 +25,10 @@ package com.blackducksoftware.integration.hub.docker.dockerinspector.config;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.annotation.PostConstruct;
 
@@ -221,42 +221,42 @@ public class Config {
     @Value("${shared.dir.path.imageinspector:/opt/blackduck/hub-imageinspector-ws/shared}")
     private String sharedDirPathImageInspector = "/opt/blackduck/hub-imageinspector-ws/shared";
 
-    @ValueDescription(description = "The URL of the imageinspector container to use", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
-    @Value("${imageinspector.url:}")
+    @ValueDescription(description = "The URL of the (already running) imageinspector service to use", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
+    @Value("${imageinspector.service.url:}")
     private String imageInspectorUrl = "";
 
     // Properties for pull/start services/containers as needed mode:
 
-    @ValueDescription(description = "Start ImageInspector services (containers) as needed?", defaultValue = "false", group = Config.GROUP_PRIVATE, deprecated = false)
+    @ValueDescription(description = "Start ImageInspector services (containers) as needed?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${imageinspector.service.start:false}")
     private Boolean imageInspectorServiceStart = Boolean.FALSE;
 
     @ValueDescription(description = "alpine image inspector container port", defaultValue = "8080", group = Config.GROUP_PRIVATE, deprecated = false)
-    @Value("${imageinspector.container.port.alpine:8080}")
+    @Value("${imageinspector.service.container.port.alpine:8080}")
     private String imageInspectorContainerPortAlpine = "8080";
 
     @ValueDescription(description = "centos image inspector container port", defaultValue = "8081", group = Config.GROUP_PRIVATE, deprecated = false)
-    @Value("$imageinspector.container.port.centos:8081}")
+    @Value("$imageinspector.service.container.port.centos:8081}")
     private String imageInspectorContainerPortCentos = "8081";
 
     @ValueDescription(description = "ubuntu image inspector container port", defaultValue = "8082", group = Config.GROUP_PRIVATE, deprecated = false)
-    @Value("${imageinspector.container.port.ubuntu:8082}")
+    @Value("${imageinspector.service.container.port.ubuntu:8082}")
     private String imageInspectorContainerPortUbuntu = "8082";
 
-    @ValueDescription(description = "alpine image inspector host port", defaultValue = "9000", group = Config.GROUP_PRIVATE, deprecated = false)
-    @Value("${imageinspector.host.port.alpine:9000}")
+    @ValueDescription(description = "alpine image inspector host port", defaultValue = "9000", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${imageinspector.service.port.alpine:9000}")
     private String imageInspectorHostPortAlpine = "9000";
 
-    @ValueDescription(description = "centos image inspector host port", defaultValue = "9001", group = Config.GROUP_PRIVATE, deprecated = false)
-    @Value("$imageinspector.host.port.centos:9001}")
+    @ValueDescription(description = "centos image inspector host port", defaultValue = "9001", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${imageinspector.service.port.centos:9001}")
     private String imageInspectorHostPortCentos = "9001";
 
-    @ValueDescription(description = "ubuntu image inspector host port", defaultValue = "9002", group = Config.GROUP_PRIVATE, deprecated = false)
-    @Value("${imageinspector.host.port.ubuntu:9002}")
+    @ValueDescription(description = "ubuntu image inspector host port", defaultValue = "9002", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${imageinspector.service.port.ubuntu:9002}")
     private String imageInspectorHostPortUbuntu = "9002";
 
-    @ValueDescription(description = "Default image inspector OS", defaultValue = "ubuntu", group = Config.GROUP_PRIVATE, deprecated = false)
-    @Value("${imageinspector.default:ubuntu}")
+    @ValueDescription(description = "Default image inspector Linus distro (alpine, centos, or ubuntu)", defaultValue = "ubuntu", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${imageinspector.service.distro.default:ubuntu}")
     private String imageInspectorDefault = INSPECTOR_OS_UBUNTU;
 
     // Environment Variables
@@ -272,10 +272,10 @@ public class Config {
     @Value("${DOCKER_INSPECTOR_JAVA_OPTS:}")
     private String dockerInspectorJavaOptsValue = "";
 
-    private List<DockerInspectorOption> publicOptions;
+    private TreeSet<DockerInspectorOption> publicOptions;
     private Map<String, DockerInspectorOption> optionsByKey;
     private Map<String, DockerInspectorOption> optionsByFieldName;
-    private List<String> allKeys;
+    private TreeSet<String> allKeys;
 
     public String get(final String key) throws IllegalArgumentException, IllegalAccessException {
         final DockerInspectorOption opt = optionsByKey.get(key);
@@ -293,19 +293,19 @@ public class Config {
         return Config.GROUP_PUBLIC.equals(opt.getGroup());
     }
 
-    public List<DockerInspectorOption> getPublicConfigOptions() throws IllegalArgumentException, IllegalAccessException {
+    public SortedSet<DockerInspectorOption> getPublicConfigOptions() throws IllegalArgumentException, IllegalAccessException {
         return publicOptions;
     }
 
-    public List<String> getAllKeys() throws IllegalArgumentException, IllegalAccessException {
+    public SortedSet<String> getAllKeys() throws IllegalArgumentException, IllegalAccessException {
         return allKeys;
     }
 
     @PostConstruct
     public void init() throws IllegalArgumentException, IllegalAccessException {
         final Object configObject = this;
-        publicOptions = new ArrayList<>();
-        allKeys = new ArrayList<>();
+        publicOptions = new TreeSet<>();
+        allKeys = new TreeSet<>();
         optionsByKey = new HashMap<>();
         optionsByFieldName = new HashMap<>();
         for (final Field field : configObject.getClass().getDeclaredFields()) {

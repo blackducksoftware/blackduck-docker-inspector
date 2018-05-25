@@ -4,8 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
@@ -29,7 +30,7 @@ public class UsageFormatterTest {
 
     @Test
     public void test() throws IllegalArgumentException, IllegalAccessException, IOException {
-        final List<DockerInspectorOption> configOptions = new ArrayList<>();
+        final SortedSet<DockerInspectorOption> configOptions = new TreeSet<>();
         configOptions.add(new DockerInspectorOption("hub.url", "hubUrl", "testHubUrl", "Hub URL", String.class, "", "public", false));
         Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
 

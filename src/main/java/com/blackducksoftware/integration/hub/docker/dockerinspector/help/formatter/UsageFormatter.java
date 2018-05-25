@@ -26,6 +26,7 @@ package com.blackducksoftware.integration.hub.docker.dockerinspector.help.format
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.SortedSet;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +59,7 @@ public class UsageFormatter {
         usage.add("  ./hub-docker-inspector.sh --hub.url=http://hub.mydomain.com:8080/ --hub.username=myusername --docker.image=ubuntu:latest");
         usage.add("");
         usage.add(String.format("Available properties:"));
-        final List<DockerInspectorOption> configOptions = config.getPublicConfigOptions();
+        final SortedSet<DockerInspectorOption> configOptions = config.getPublicConfigOptions();
         for (final DockerInspectorOption opt : configOptions) {
             final StringBuilder usageLine = new StringBuilder(String.format("  %s [%s]: %s", opt.getKey(), opt.getValueTypeString(), opt.getDescription()));
             if (!StringUtils.isBlank(opt.getDefaultValue())) {

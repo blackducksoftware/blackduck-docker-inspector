@@ -301,7 +301,7 @@ public class DockerInspectorTest {
         FileUtils.copyFile(new File(String.format("build/images/test/%s", tarFileName)), targetTar);
         targetTar.setReadable(true, false);
         final List<String> additionalArgs = new ArrayList<>();
-        additionalArgs.add(String.format("--imageinspector.url=http://localhost:%d", portOnHost));
+        additionalArgs.add(String.format("--imageinspector.service.url=http://localhost:%d", portOnHost));
         additionalArgs.add(String.format("--shared.dir.path.local=%s", dirSharedWithContainer.getAbsolutePath()));
         additionalArgs.add(String.format("--shared.dir.path.imageinspector=%s", SHARED_DIR_PATH_IN_CONTAINER));
         final File outputContainerFileSystemFile = new File(String.format("%s/output/%s_containerfilesystem.tar.gz", TestUtils.TEST_DIR_REL_PATH, tarFileBaseName));
@@ -366,9 +366,9 @@ public class DockerInspectorTest {
         cmd.add(inspectTargetArg);
         if (startContainersAsNeeded) {
             cmd.add("--imageinspector.service.start=true");
-            cmd.add(String.format("--imageinspector.host.port.alpine=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE));
-            cmd.add(String.format("--imageinspector.host.port.centos=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS));
-            cmd.add(String.format("--imageinspector.host.port.ubuntu=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU));
+            cmd.add(String.format("--imageinspector.service.port.alpine=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE));
+            cmd.add(String.format("--imageinspector.service.port.centos=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS));
+            cmd.add(String.format("--imageinspector.service.port.ubuntu=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU));
         }
         if (additionalArgs != null && additionalArgs.size() > 0) {
             cmd.addAll(additionalArgs);
@@ -416,9 +416,9 @@ public class DockerInspectorTest {
         cmd.add("--logging.level.com.blackducksoftware=DEBUG");
         if (startContainersAsNeeded) {
             cmd.add("--imageinspector.service.start=true");
-            cmd.add(String.format("--imageinspector.host.port.alpine=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE));
-            cmd.add(String.format("--imageinspector.host.port.centos=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS));
-            cmd.add(String.format("--imageinspector.host.port.ubuntu=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU));
+            cmd.add(String.format("--imageinspector.service.port.alpine=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE));
+            cmd.add(String.format("--imageinspector.service.port.centos=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS));
+            cmd.add(String.format("--imageinspector.service.port.ubuntu=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU));
         }
         final File workingDir = new File(String.format("%s/endToEnd", TestUtils.TEST_DIR_REL_PATH));
         TestUtils.deleteDirIfExists(workingDir);

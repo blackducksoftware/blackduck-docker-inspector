@@ -28,7 +28,7 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DockerInspectorOption {
+public class DockerInspectorOption implements Comparable<DockerInspectorOption> {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final String key;
@@ -99,5 +99,40 @@ public class DockerInspectorOption {
     @Override
     public String toString() {
         return ReflectionToStringBuilder.toString(this, RecursiveToStringStyle.JSON_STYLE);
+    }
+
+    @Override
+    public int compareTo(final DockerInspectorOption o) {
+        return this.getKey().compareTo(o.getKey());
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (key == null ? 0 : key.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final DockerInspectorOption other = (DockerInspectorOption) obj;
+        if (key == null) {
+            if (other.key != null) {
+                return false;
+            }
+        } else if (!key.equals(other.key)) {
+            return false;
+        }
+        return true;
     }
 }
