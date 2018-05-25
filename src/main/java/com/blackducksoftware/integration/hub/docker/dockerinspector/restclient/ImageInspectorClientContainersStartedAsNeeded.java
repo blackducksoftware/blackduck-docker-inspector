@@ -130,12 +130,19 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
             final SimpleResponse responseFromCorrectedContainer = restRequestor.executeGetBdioRequest(correctedRestConnection, correctedImageInspectorUrl, containerPathToTarfile, containerFileSystemOutputFilePath, cleanup);
             final int statusCode = responseFromCorrectedContainer.getStatusCode();
             if (statusCode != RestConstants.OK_200) {
+                if (logger.isDebugEnabled()) {
+                    dockerClientManager.logServiceLogAsDebug(correctedContainerId);
+                } else {
+                    logger.error(String.format("Request to image inspector service failed. To see image inspector service logs, set the Docker Inspector logging level to DEBUG, or execute the following command: 'docker logs %s'",
+                            correctedContainerId));
+                }
                 final String warningHeaderValue = responseFromCorrectedContainer.getWarningHeaderValue();
                 final String responseBody = responseFromCorrectedContainer.getBody();
                 throw new IntegrationRestException(statusCode, warningHeaderValue,
                         String.format("There was a problem trying to getBdio. Error: %d; Warning header: '%s'; Body: '%s'", statusCode, warningHeaderValue,
                                 responseBody));
             }
+            logger.debug(String.format("If you want the log from the image inspector service, execute this command: docker logs %s", correctedContainerId));
             bdioFromCorrectedContainer = responseFromCorrectedContainer.getBody();
             return bdioFromCorrectedContainer;
         } finally {

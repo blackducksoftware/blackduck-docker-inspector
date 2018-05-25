@@ -65,11 +65,13 @@ import com.github.dockerjava.api.exception.NotFoundException;
 import com.github.dockerjava.api.model.Bind;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.ExposedPort;
+import com.github.dockerjava.api.model.Frame;
 import com.github.dockerjava.api.model.Image;
 import com.github.dockerjava.api.model.Info;
 import com.github.dockerjava.api.model.PortBinding;
 import com.github.dockerjava.api.model.Ports.Binding;
 import com.github.dockerjava.core.command.ExecStartResultCallback;
+import com.github.dockerjava.core.command.LogContainerResultCallback;
 import com.github.dockerjava.core.command.PullImageResultCallback;
 
 @Component
@@ -247,6 +249,53 @@ public class DockerClientManager {
         removeContainer(dockerClient, containerId);
     }
 
+    public void logServiceLogAsDebug(final String containerId) {
+        final StringBuilder stringBuilder = new StringBuilder();
+        final StringBuilderLogReader callback = new StringBuilderLogReader(stringBuilder);
+        DockerClient dockerClient;
+        try {
+            dockerClient = hubDockerClient.getDockerClient();
+        } catch (final HubIntegrationException e1) {
+            logger.debug(String.format("Error getting docker client: %s", e1.getMessage()));
+            try {
+                callback.close();
+            } catch (final IOException e) {
+            }
+            return;
+        }
+        try {
+            dockerClient.logContainerCmd(containerId)
+                    .withStdErr(true)
+                    .withStdOut(true)
+                    .withTailAll()
+                    .exec(callback)
+                    .awaitCompletion();
+        } catch (final InterruptedException e) {
+            logger.debug(String.format("Error getting container log: %s", e.getMessage()));
+        }
+
+        final String log = callback.builder.toString();
+        logger.debug(String.format("Image inspector service log:\n%s", log));
+        try {
+            callback.close();
+        } catch (final IOException e) {
+        }
+    }
+
+    private static class StringBuilderLogReader extends LogContainerResultCallback {
+        public StringBuilder builder;
+
+        public StringBuilderLogReader(final StringBuilder builder) {
+            this.builder = builder;
+        }
+
+        @Override
+        public void onNext(final Frame item) {
+            builder.append(new String(item.getPayload()).trim());
+            super.onNext(item);
+        }
+    }
+
     private File saveImageToDir(final File imageTarDirectory, final String imageTarFilename, final String imageName, final String tagName) throws IOException, HubIntegrationException {
         final File imageTarFile = new File(imageTarDirectory, imageTarFilename);
         saveImageToFile(imageName, tagName, imageTarFile);
@@ -400,10 +449,10 @@ public class DockerClientManager {
     public Container getRunningContainerByAppName(final DockerClient dockerClient, final String targetAppName, final ImageInspectorOsEnum targetInspectorOs) throws HubIntegrationException {
         final List<Container> containers = dockerClient.listContainersCmd().withShowAll(true).exec();
         for (final Container container : containers) {
-            logger.debug(String.format("*** Checking container %s to see if it has labels app = %s, os = %s", container.getNames()[0], targetAppName, targetInspectorOs.name()));
+            logger.debug(String.format("Checking container %s to see if it has labels app = %s, os = %s", container.getNames()[0], targetAppName, targetInspectorOs.name()));
             final String containerAppName = container.getLabels().get(CONTAINER_APPNAME_LABEL_KEY);
             final String containerOsName = container.getLabels().get(CONTAINER_OS_LABEL_KEY);
-            logger.debug(String.format("*** Comparing app name %s to %s, os name %s to %s", targetAppName, containerAppName, targetInspectorOs.name(), containerOsName));
+            logger.debug(String.format("Comparing app name %s to %s, os name %s to %s", targetAppName, containerAppName, targetInspectorOs.name(), containerOsName));
             if (targetAppName.equals(containerAppName) && targetInspectorOs.name().equalsIgnoreCase(containerOsName)) {
                 logger.debug("\tIt's a match");
                 return container;
