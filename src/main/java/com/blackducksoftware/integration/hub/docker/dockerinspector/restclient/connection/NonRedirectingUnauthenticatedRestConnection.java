@@ -70,6 +70,7 @@ public class NonRedirectingUnauthenticatedRestConnection extends Unauthenticated
                 logRequestHeaders(request);
                 final CloseableHttpResponse response = getClient().execute(request);
                 final int statusCode = response.getStatusLine().getStatusCode();
+                logger.debug(String.format("statusCode: %s", statusCode));
                 final String statusMessage = response.getStatusLine().getReasonPhrase();
                 if (statusCode < RestConstants.OK_200 || statusCode >= RestConstants.BAD_REQUEST_400) {
                     try {

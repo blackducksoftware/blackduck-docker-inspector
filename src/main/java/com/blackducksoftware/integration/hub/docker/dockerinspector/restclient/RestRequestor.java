@@ -23,8 +23,6 @@
  */
 package com.blackducksoftware.integration.hub.docker.dockerinspector.restclient;
 
-import java.io.IOException;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,11 +52,13 @@ public class RestRequestor {
         }
         final String url = String.format("%s/%s?%s=%s&%s=%b%s",
                 imageInspectorUrl, GETBDIO_ENDPOINT, TARFILE_QUERY_PARAM, containerPathToTarfile, CLEANUP_QUERY_PARAM, cleanup, containerFileSystemQueryString);
-        logger.debug(String.format("Doing a GET on %s", url));
+        logger.info(String.format("Doing a GET on %s", url));
         final Request request = new Request.Builder(url).method(HttpMethod.GET).build();
         try (Response response = restConnection.executeRequest(request)) {
+            logger.info(String.format("Response: HTTP status: %d", response.getStatusCode()));
             return new SimpleResponse(response.getStatusCode(), response.getHeaders(), getResponseBody(response));
-        } catch (final IOException | IllegalArgumentException e) {
+        } catch (final Exception e) {
+            logger.info(String.format("GET on %s failed: %s", url, e.getMessage()));
             throw new IntegrationException(e);
         }
     }
@@ -69,19 +69,20 @@ public class RestRequestor {
             endpoint = endpoint.substring(1);
         }
         final String url = String.format("%s/%s", imageInspectorUrl, endpoint);
-        logger.debug(String.format("Doing a GET on %s", url));
+        logger.info(String.format("Doing a GET on %s", url));
         final Request request = new Request.Builder(url).method(HttpMethod.GET).build();
         try (Response response = restConnection.executeRequest(request)) {
+            logger.info(String.format("Response: HTTP status: %d", response.getStatusCode()));
             return getResponseBody(response);
-        } catch (final IOException | IllegalArgumentException e) {
+        } catch (final Exception e) {
+            logger.info(String.format("GET on %s failed: %s", url, e.getMessage()));
             throw new IntegrationException(e);
         }
     }
 
     private String getResponseBody(final Response response) throws IntegrationException {
-        logger.info(String.format("Response: HTTP status: %d", response.getStatusCode()));
         final String responseBody = response.getContentString();
-        logger.info(String.format("Response: body: %s", responseBody));
+        logger.trace(String.format("Response: body: %s", responseBody));
         return responseBody;
     }
 }
