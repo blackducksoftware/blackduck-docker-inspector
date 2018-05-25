@@ -222,7 +222,7 @@ public class DockerClientManager {
         final Map<String, String> labels = new HashMap<>(1);
         labels.put(CONTAINER_APPNAME_LABEL_KEY, IMAGEINSPECTOR_APP_NAME_LABEL_VALUE);
         labels.put(CONTAINER_OS_LABEL_KEY, imageInspectorOsName);
-        final Bind bind = createBindMount(programPaths.getHubDockerOutputPathHost(), containerPathToOutputDir);
+        final Bind bind = createBindMount(config.getSharedDirPathLocal(), config.getSharedDirPathImageInspector());
         logger.debug(String.format("Binding host %s to container %s", programPaths.getHubDockerOutputPathHost(), programPaths.getHubDockerOutputPathContainer()));
         final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageId).withName(containerName).withBinds(bind).withLabels(labels).withCmd(cmd.split(" "));
         final ExposedPort exposedPort = new ExposedPort(containerPort);
@@ -291,7 +291,7 @@ public class DockerClientManager {
 
         @Override
         public void onNext(final Frame item) {
-            builder.append(new String(item.getPayload()).trim());
+            builder.append(new String(item.getPayload()));
             super.onNext(item);
         }
     }

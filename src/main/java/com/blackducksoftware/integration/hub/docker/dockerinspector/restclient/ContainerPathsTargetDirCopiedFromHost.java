@@ -33,6 +33,9 @@ import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 
+//////////////////////////////
+// TODO obsolete???
+//////////////////////////////
 @Component
 public class ContainerPathsTargetDirCopiedFromHost implements ContainerPaths {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());

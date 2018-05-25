@@ -75,7 +75,7 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
     private ProgramPaths programPaths;
 
     @Autowired
-    private ContainerPathsTargetDirCopiedFromHost containerPathsContainersStartedAsNeeded;
+    private ContainerPathsTargetFileInSharedDir containerPaths;
 
     @Autowired
     private HubDockerClient hubDockerClient;
@@ -100,7 +100,7 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
             final RestConnection restConnection = createRestConnection(imageInspectorUrl, serviceRequestTimeoutSeconds);
             final OperatingSystemEnum inspectorOs = OperatingSystemEnum.determineOperatingSystem(config.getImageInspectorDefault());
             serviceContainerId = ensureServiceReady(restConnection, imageInspectorUrl, inspectorOs);
-            copyFileToContainer(hostPathToTarfile, serviceContainerId, containerPathToTarfile);
+            // TODO: Eliminate? copyFileToContainer(hostPathToTarfile, serviceContainerId, containerPathToTarfile);
 
             final String containerFileSystemOutputFilePath = getContainerPaths().getContainerPathToOutputFile(containerFileSystemFilename);
             logger.debug(String.format("containerFileSystemOutputFilePath: %s", containerFileSystemOutputFilePath));
@@ -127,15 +127,16 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
             correctedContainerId = ensureServiceReady(correctedRestConnection, correctedImageInspectorUrl, correctedInspectorOs);
             copyFileToContainer(hostPathToTarfile, correctedContainerId, containerPathToTarfile);
             logger.debug(String.format("Sending getBdio request to: %s", correctedImageInspectorUrl));
-            final SimpleResponse responseFromCorrectedContainer = restRequestor.executeGetBdioRequest(correctedRestConnection, correctedImageInspectorUrl, containerPathToTarfile, containerFileSystemOutputFilePath, cleanup);
+            SimpleResponse responseFromCorrectedContainer = null;
+            try {
+                responseFromCorrectedContainer = restRequestor.executeGetBdioRequest(correctedRestConnection, correctedImageInspectorUrl, containerPathToTarfile, containerFileSystemOutputFilePath, cleanup);
+            } catch (final IntegrationException e) {
+                logServiceError(correctedContainerId);
+                throw e;
+            }
             final int statusCode = responseFromCorrectedContainer.getStatusCode();
             if (statusCode != RestConstants.OK_200) {
-                if (logger.isDebugEnabled()) {
-                    dockerClientManager.logServiceLogAsDebug(correctedContainerId);
-                } else {
-                    logger.error(String.format("Request to image inspector service failed. To see image inspector service logs, set the Docker Inspector logging level to DEBUG, or execute the following command: 'docker logs %s'",
-                            correctedContainerId));
-                }
+                logServiceError(correctedContainerId);
                 final String warningHeaderValue = responseFromCorrectedContainer.getWarningHeaderValue();
                 final String responseBody = responseFromCorrectedContainer.getBody();
                 throw new IntegrationRestException(statusCode, warningHeaderValue,
@@ -158,9 +159,18 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
 
     }
 
+    private void logServiceError(final String correctedContainerId) {
+        if (logger.isDebugEnabled()) {
+            dockerClientManager.logServiceLogAsDebug(correctedContainerId);
+        } else {
+            logger.error(String.format("Request to image inspector service failed. To see image inspector service logs, set the Docker Inspector logging level to DEBUG, or execute the following command: 'docker logs %s'",
+                    correctedContainerId));
+        }
+    }
+
     @Override
     public ContainerPaths getContainerPaths() {
-        return containerPathsContainersStartedAsNeeded;
+        return containerPaths;
     }
 
     private int deriveTimeoutSeconds() {
@@ -216,7 +226,7 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         final int hostPort = imageInspectorServices.getImageInspectorHostPort(inspectorOs);
         final String containerName = programPaths.deriveContainerName(imageInspectorRepo);
         final String containerId = dockerClientManager.startContainerAsService(imageId, containerName, inspectorOs, containerPort, hostPort,
-                containerPathsContainersStartedAsNeeded.getContainerPathToOutputDir());
+                containerPaths.getContainerPathToOutputDir());
         for (int tryIndex = 0; tryIndex < MAX_CONTAINER_START_TRY_COUNT && !serviceIsUp; tryIndex++) {
             try {
                 // TODO sleep time configurable?

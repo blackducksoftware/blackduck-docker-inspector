@@ -71,10 +71,11 @@ public class DockerTarfile {
         }
         // TODO: actually, don't need this. The not-on-host check takes care of it
         // In orchestration environments: user gives us the final tarfile location in the shared dir; no copy needed
-        if (StringUtils.isNotBlank(config.getImageInspectorUrl())) {
-            return givenDockerTarfile;
-        }
+        // if (StringUtils.isNotBlank(config.getImageInspectorUrl())) {
+        // return givenDockerTarfile;
+        // }
         if (config.isImageInspectorServiceStart()) {
+            // TODO: move this code into a start-as-needed-specific class?
             // Copy the tarfile to the target dir
             finalDockerTarfile = new File(programPaths.getHubDockerTargetDirPath(), givenDockerTarfile.getName());
             logger.debug(String.format("Required docker tarfile location: %s", finalDockerTarfile.getCanonicalPath()));

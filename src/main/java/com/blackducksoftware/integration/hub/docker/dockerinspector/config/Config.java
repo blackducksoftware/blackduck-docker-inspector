@@ -213,9 +213,9 @@ public class Config {
     @Value("${cleanup.inspector.image:false}")
     private Boolean cleanupInspectorImage = Boolean.FALSE;
 
-    @ValueDescription(description = "The host's path to the dir shared with the imageinspector containers. Only needed if using existing imageinspector containers", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
-    @Value("${shared.dir.path.local:}")
-    private String sharedDirPathLocal = "";
+    @ValueDescription(description = "The host's path to the dir shared with the imageinspector containers. Only needed if using existing imageinspector containers", defaultValue = "/tmp/hub-docker-inspector-files/shared", group = Config.GROUP_PRIVATE, deprecated = false)
+    @Value("${shared.dir.path.local:/tmp/hub-docker-inspector-files/shared}")
+    private String sharedDirPathLocal = "/tmp/hub-docker-inspector-files/shared";
 
     @ValueDescription(description = "The container's path to the shared directory. Only needed if using existing imageinspector containers", defaultValue = "/opt/blackduck/hub-imageinspector-ws/shared", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${shared.dir.path.imageinspector:/opt/blackduck/hub-imageinspector-ws/shared}")

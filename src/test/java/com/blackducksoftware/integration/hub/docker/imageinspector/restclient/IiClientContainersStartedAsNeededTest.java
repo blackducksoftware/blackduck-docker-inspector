@@ -16,7 +16,7 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.InspectorIma
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.DockerClientManager;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.HubDockerClient;
-import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.ContainerPathsTargetDirCopiedFromHost;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.ContainerPathsTargetFileInSharedDir;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.ImageInspectorClientContainersStartedAsNeeded;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.ImageInspectorServices;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.RestConnectionCreator;
@@ -57,7 +57,7 @@ public class IiClientContainersStartedAsNeededTest {
     private HubDockerClient hubDockerClient;
 
     @Mock
-    private ContainerPathsTargetDirCopiedFromHost containerPaths;
+    private ContainerPathsTargetFileInSharedDir containerPaths;
 
     @Test
     public void test() throws IntegrationException, IOException {

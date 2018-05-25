@@ -37,6 +37,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ProgramPaths {
+    private static final String SHARED_DIR = "shared";
+
     @Autowired
     private Config config;
 
@@ -90,10 +92,17 @@ public class ProgramPaths {
     private String cleanedProcessId;
 
     private String getProgramDirPathHost() {
+        if (config.isImageInspectorServiceStart()) {
+            final File workingDir = new File(config.getWorkingDirPath());
+            final File sharedDir = new File(workingDir, SHARED_DIR);
+            logger.debug(String.format("*** getProgramDirPathHost(): returning %s", sharedDir.getAbsolutePath()));
+            return sharedDir.getAbsolutePath();
+        }
         // TODO should be able to eliminate the need for this adjustment:
         if (!config.getWorkingDirPath().endsWith("/")) {
             config.setWorkingDirPath(String.format("%s/", config.getWorkingDirPath()));
         }
+        logger.debug(String.format("*** getProgramDirPathHost(): returning %s", config.getWorkingDirPath()));
         return config.getWorkingDirPath();
     }
 
