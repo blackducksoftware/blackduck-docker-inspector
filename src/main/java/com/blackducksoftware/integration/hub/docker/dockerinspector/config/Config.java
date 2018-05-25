@@ -236,7 +236,7 @@ public class Config {
     private String imageInspectorContainerPortAlpine = "8080";
 
     @ValueDescription(description = "centos image inspector container port", defaultValue = "8081", group = Config.GROUP_PRIVATE, deprecated = false)
-    @Value("$imageinspector.service.container.port.centos:8081}")
+    @Value("${imageinspector.service.container.port.centos:8081}")
     private String imageInspectorContainerPortCentos = "8081";
 
     @ValueDescription(description = "ubuntu image inspector container port", defaultValue = "8082", group = Config.GROUP_PRIVATE, deprecated = false)

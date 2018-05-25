@@ -150,6 +150,11 @@ public class DockerInspectorTest {
     }
 
     @Test
+    public void testCentosStartContainer() throws IOException, InterruptedException, IntegrationException {
+        testImage("centos:7.3.1611", "centos", "7.3.1611", "var_lib_rpm", true, true);
+    }
+
+    @Test
     public void testHubWebapp() throws IOException, InterruptedException, IntegrationException {
         testImage("blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", "lib_apk", true, false);
     }
