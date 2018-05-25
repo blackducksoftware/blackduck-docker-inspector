@@ -45,6 +45,7 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Inspe
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.imageinspector.lib.DissectedImage;
+import com.blackducksoftware.integration.hub.imageinspector.name.Names;
 import com.google.gson.Gson;
 
 @Component
@@ -76,7 +77,7 @@ public class RestClientInspector implements Inspector {
         final ImageInspectorClient restClient = chooseImageInspectorClient();
         try {
             final File dockerTarFile = dockerTarfile.deriveDockerTarFile();
-            final String containerFileSystemFilename = dockerTarfile.deriveContainerFileSystemTarGzFilename(dockerTarFile);
+            final String containerFileSystemFilename = Names.getContainerFileSystemTarFilename(config.getDockerImage(), config.getDockerTar());
             logger.debug(String.format("Given docker tar file path: %s", dockerTarFile.getCanonicalPath()));
             final String dockerTarFilePathInContainer = restClient.getContainerPaths().getContainerPathToLocalFile(dockerTarFile.getCanonicalPath());
             logger.debug(String.format("Derived container docker tar file path: %s", dockerTarFilePathInContainer));

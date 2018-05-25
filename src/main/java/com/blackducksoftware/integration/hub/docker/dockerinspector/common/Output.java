@@ -105,7 +105,8 @@ public class Output {
         if (config.isOutputIncludeContainerfilesystem()) {
             logger.info("Including container file system in output");
             final File outputDirectory = new File(programPaths.getHubDockerOutputPath());
-            final String containerFileSystemTarFilename = Names.getContainerFileSystemTarFilename(config.getDockerImageRepo(), config.getDockerImageTag());
+            logger.debug(String.format("outputDirectory: %s", outputDirectory.getAbsolutePath()));
+            final String containerFileSystemTarFilename = Names.getContainerFileSystemTarFilename(config.getDockerImage(), config.getDockerTar());
             final File containerFileSystemTarFile = new File(outputDirectory, containerFileSystemTarFilename);
             logger.debug(String.format("Creating container filesystem tarfile %s from %s into %s", containerFileSystemTarFile.getAbsolutePath(), targetImageFileSystemRootDir.getAbsolutePath(), outputDirectory.getAbsolutePath()));
             final FileSys containerFileSys = new FileSys(targetImageFileSystemRootDir);

@@ -21,6 +21,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import com.blackducksoftware.integration.exception.IntegrationException;
+import com.blackducksoftware.integration.hub.imageinspector.name.Names;
 import com.blackducksoftware.integration.test.annotation.IntegrationTest;
 
 @Category(IntegrationTest.class)
@@ -172,7 +173,7 @@ public class DockerInspectorTest {
     public void testWhiteout() throws IOException, InterruptedException, IntegrationException {
         final String repo = "blackducksoftware/whiteouttest";
         final String tag = "1.0";
-        final File outputContainerFileSystemFile = getOutputContainerFileSystemFile(repo, tag);
+        final File outputContainerFileSystemFile = getOutputContainerFileSystemFileFromTarFilename("whiteouttest.tar");
         testTar("build/images/test/whiteouttest.tar", repo.replaceAll("/", "_"), repo, tag, tag, "var_lib_dpkg", true, false, null, true, outputContainerFileSystemFile);
     }
 
@@ -180,7 +181,7 @@ public class DockerInspectorTest {
     public void testWhiteoutStartContainer() throws IOException, InterruptedException, IntegrationException {
         final String repo = "blackducksoftware/whiteouttest";
         final String tag = "1.0";
-        final File outputContainerFileSystemFile = getOutputContainerFileSystemFile(repo, tag);
+        final File outputContainerFileSystemFile = getOutputContainerFileSystemFileFromTarFilename("whiteouttest.tar");
         testTar("build/images/test/whiteouttest.tar", repo.replaceAll("/", "_"), repo, tag, tag, "var_lib_dpkg", true, true, null, true, outputContainerFileSystemFile);
     }
 
@@ -188,7 +189,7 @@ public class DockerInspectorTest {
     public void testAggregateTarfileImageOne() throws IOException, InterruptedException, IntegrationException {
         final String repo = "blackducksoftware/whiteouttest";
         final String tag = "1.0";
-        final File outputContainerFileSystemFile = getOutputContainerFileSystemFile(repo, tag);
+        final File outputContainerFileSystemFile = getOutputContainerFileSystemFileFromTarFilename("aggregated.tar");
         testTar("build/images/test/aggregated.tar", repo.replaceAll("/", "_"), repo, tag, tag, "var_lib_dpkg", true, false, null, true, outputContainerFileSystemFile);
     }
 
@@ -196,7 +197,7 @@ public class DockerInspectorTest {
     public void testAggregateTarfileImageTwo() throws IOException, InterruptedException, IntegrationException {
         final String repo = "blackducksoftware/centos_minus_vim_plus_bacula";
         final String tag = "1.0";
-        final File outputContainerFileSystemFile = getOutputContainerFileSystemFile(repo, tag);
+        final File outputContainerFileSystemFile = getOutputContainerFileSystemFileFromTarFilename("aggregated.tar");
         testTar("build/images/test/aggregated.tar", repo.replaceAll("/", "_"), repo, tag, tag, "var_lib_rpm", true, false, null, true, outputContainerFileSystemFile);
     }
 
@@ -204,7 +205,7 @@ public class DockerInspectorTest {
     public void testAlpineLatestTarRepoTagSpecified() throws IOException, InterruptedException, IntegrationException {
         final String repo = "alpine";
         final String tag = "latest";
-        final File outputContainerFileSystemFile = getOutputContainerFileSystemFile(repo, tag);
+        final File outputContainerFileSystemFile = getOutputContainerFileSystemFileFromTarFilename("alpine.tar");
         testTar("build/images/test/alpine.tar", repo.replaceAll("/", "_"), repo, tag, tag, "lib_apk", false, false, null, true, outputContainerFileSystemFile);
     }
 
@@ -212,8 +213,8 @@ public class DockerInspectorTest {
     public void testAlpineLatestTarRepoTagNotSpecified() throws IOException, InterruptedException, IntegrationException {
         final String repo = "alpine";
         final String tag = null;
-        final File outputContainerFileSystemFile = getOutputContainerFileSystemFile(repo, tag);
-        testTar("build/images/test/alpine.tar", repo, null, null, "latest", "lib_apk", false, false, null, true, outputContainerFileSystemFile);
+        final File outputContainerFileSystemFile = getOutputContainerFileSystemFileFromTarFilename("alpine.tar");
+        testTar("build/images/test/alpine.tar", repo, tag, null, "latest", "lib_apk", false, false, null, true, outputContainerFileSystemFile);
     }
 
     @Test
@@ -318,10 +319,16 @@ public class DockerInspectorTest {
         return jarFileFilter;
     }
 
-    private File getOutputContainerFileSystemFile(final String repo, final String tag) {
-        final String outputContainerFileSystemFileName = String.format("%s/output/%s_%s_containerfilesystem.tar.gz", TestUtils.TEST_DIR_REL_PATH, repo.replaceAll("/", "_"), tag == null ? "latest" : tag);
-        final File outputTarFile = new File(outputContainerFileSystemFileName);
-        return outputTarFile;
+    private File getOutputContainerFileSystemFileFromTarFilename(final String tarFilename) {
+        final String path = String.format("%s/output/%s", TestUtils.TEST_DIR_REL_PATH, Names.getContainerFileSystemTarFilename(null, tarFilename));
+        System.out.println(String.format("Expecting output container filesystem file at: %s", path));
+        return new File(path);
+    }
+
+    private File getOutputContainerFileSystemFileFromImageSpec(final String imageNameTag) {
+        final String path = String.format("%s/output/%s", TestUtils.TEST_DIR_REL_PATH, Names.getContainerFileSystemTarFilename(imageNameTag, null));
+        System.out.println(String.format("Expecting output container filesystem file at: %s", path));
+        return new File(path);
     }
 
     private void testTar(final String inspectTargetTarfile, final String imageForBdioFilename, final String repo, final String tag, final String tagForBdioFilename, final String pkgMgrPathString, final boolean requireBdioMatch,
@@ -387,7 +394,7 @@ public class DockerInspectorTest {
 
     private void testImage(final String inspectTargetImageRepoTag, final String repo, final String tag, final String pkgMgrPathString, final boolean requireBdioMatch, final boolean startContainersAsNeeded)
             throws IOException, InterruptedException, IntegrationException {
-        final File outputContainerFileSystemFile = getOutputContainerFileSystemFile(repo, tag);
+        final File outputContainerFileSystemFile = getOutputContainerFileSystemFileFromImageSpec(inspectTargetImageRepoTag);
         final String inspectTargetArg = String.format("--docker.image=%s", inspectTargetImageRepoTag);
         ensureFileDoesNotExist(outputContainerFileSystemFile);
         final File actualBdio = new File(String.format(String.format("%s/output/%s_%s_%s_%s_bdio.jsonld", TestUtils.TEST_DIR_REL_PATH, repo, pkgMgrPathString, repo, tag)));
