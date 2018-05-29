@@ -49,7 +49,7 @@ public class ImageInspectorClientExistingServices implements ImageInspectorClien
     private RestConnectionCreator restConnectionCreator;
 
     @Autowired
-    private ContainerPathsTargetFileInSharedDir containerPaths;
+    private ContainerPaths containerPaths;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 

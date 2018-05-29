@@ -75,7 +75,7 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
     private ProgramPaths programPaths;
 
     @Autowired
-    private ContainerPathsTargetFileInSharedDir containerPaths;
+    private ContainerPaths containerPaths;
 
     @Autowired
     private HubDockerClient hubDockerClient;
