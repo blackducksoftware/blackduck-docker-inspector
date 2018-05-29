@@ -50,6 +50,7 @@ public class RestRequestor {
         if (StringUtils.isNotBlank(containerPathToContainerFileSystemFile)) {
             containerFileSystemQueryString = String.format("&%s=%s", RESULTING_CONTAINER_FS_PATH_QUERY_PARAM, containerPathToContainerFileSystemFile);
         }
+        // TODO pass logging level so container logs at the user-requested level
         final String url = String.format("%s/%s?%s=%s&%s=%b%s",
                 imageInspectorUrl, GETBDIO_ENDPOINT, TARFILE_QUERY_PARAM, containerPathToTarfile, CLEANUP_QUERY_PARAM, cleanup, containerFileSystemQueryString);
         logger.info(String.format("Doing a getBdio request on %s", url));

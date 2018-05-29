@@ -45,6 +45,7 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Inspe
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.imageinspector.lib.DissectedImage;
+import com.blackducksoftware.integration.hub.imageinspector.linux.FileOperations;
 import com.blackducksoftware.integration.hub.imageinspector.name.Names;
 import com.google.gson.Gson;
 
@@ -102,9 +103,19 @@ public class RestClientInspector implements Inspector {
                 logger.debug(String.format("Removing %s", localPathToContainerFileSytemFile.getAbsolutePath()));
                 FileUtils.forceDelete(localPathToContainerFileSytemFile);
             }
+            cleanup();
             return 0;
         } catch (final IOException e) {
             throw new IntegrationException(e.getMessage(), e);
+        }
+    }
+
+    private void cleanup() {
+        logger.debug(String.format("Removing %s", programPaths.getHubDockerRunDirPathHost()));
+        try {
+            FileOperations.removeFileOrDir(programPaths.getHubDockerRunDirPathHost());
+        } catch (final IOException e) {
+            logger.error(String.format("Error cleaning up working directories: %s", e.getMessage()));
         }
     }
 
