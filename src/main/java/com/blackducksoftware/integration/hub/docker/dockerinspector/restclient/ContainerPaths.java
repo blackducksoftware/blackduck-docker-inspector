@@ -68,7 +68,7 @@ public class ContainerPaths {
                 return localPathToTargetFile;
             }
         }
-        logger.debug(String.format("*** config.getSharedDirPathLocal(): %s", sharedDirPathLocal));
+        logger.debug(String.format("config.getSharedDirPathLocal(): %s", sharedDirPathLocal));
         final String localRelPath = localPathToTargetFile.substring(sharedDirPathLocal.length());
         logger.debug(String.format("localRelPath: %s", localRelPath));
         final File containerFile = getFileInDir(sharedDirPathImageInspector, localRelPath);
@@ -91,7 +91,7 @@ public class ContainerPaths {
         final File containerSharedDir = new File(getContainerPathToSharedDir());
         final File containerRunDir = new File(containerSharedDir, programPaths.getHubDockerRunDirName());
         final File containerOutputDir = new File(containerRunDir, ProgramPaths.OUTPUT_DIR);
-        logger.debug(String.format("*** getContainerPathToOutputDir() returning %s", containerOutputDir.getAbsolutePath()));
+        logger.debug(String.format("getContainerPathToOutputDir() returning %s", containerOutputDir.getAbsolutePath()));
         return containerOutputDir.getAbsolutePath();
     }
 
