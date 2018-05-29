@@ -88,8 +88,8 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
     }
 
     @Override
-    public String getBdio(final String hostPathToTarfile, final String containerPathToTarfile, final String containerFileSystemFilename, final boolean cleanup) throws IntegrationException {
-        logger.debug(String.format("getBdio(): containerPathToTarfile: %s", containerPathToTarfile));
+    public String getBdio(final String hostPathToTarfile, final String containerPathToInputDockerTarfile, final String containerPathToOutputFileSystemFile, final boolean cleanup) throws IntegrationException {
+        logger.debug(String.format("getBdio(): containerPathToTarfile: %s", containerPathToInputDockerTarfile));
         String bdioFromCorrectedContainer = null;
         String serviceContainerId = null;
         String correctedContainerId = null;
@@ -100,13 +100,8 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
             final RestConnection restConnection = createRestConnection(imageInspectorUrl, serviceRequestTimeoutSeconds);
             final OperatingSystemEnum inspectorOs = OperatingSystemEnum.determineOperatingSystem(config.getImageInspectorDefault());
             serviceContainerId = ensureServiceReady(restConnection, imageInspectorUrl, inspectorOs);
-            // TODO: Eliminate? copyFileToContainer(hostPathToTarfile, serviceContainerId, containerPathToTarfile);
-
-            final String containerFileSystemOutputFilePath = getContainerPaths().getContainerPathToOutputFile(containerFileSystemFilename);
-            logger.debug(String.format("containerFileSystemOutputFilePath: %s", containerFileSystemOutputFilePath));
-
             logger.debug(String.format("Sending getBdio request to: %s", imageInspectorUrl));
-            final SimpleResponse response = restRequestor.executeGetBdioRequest(restConnection, imageInspectorUrl, containerPathToTarfile, containerFileSystemOutputFilePath, cleanup);
+            final SimpleResponse response = restRequestor.executeGetBdioRequest(restConnection, imageInspectorUrl, containerPathToInputDockerTarfile, containerPathToOutputFileSystemFile, cleanup);
             if (response.getStatusCode() < RestConstants.MULT_CHOICE_300) {
                 final String bdio = response.getBody();
                 return bdio;
@@ -125,11 +120,10 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
             final RestConnection correctedRestConnection = createRestConnection(correctedImageInspectorUrl, serviceRequestTimeoutSeconds);
 
             correctedContainerId = ensureServiceReady(correctedRestConnection, correctedImageInspectorUrl, correctedInspectorOs);
-            copyFileToContainer(hostPathToTarfile, correctedContainerId, containerPathToTarfile);
             logger.debug(String.format("Sending getBdio request to: %s", correctedImageInspectorUrl));
             SimpleResponse responseFromCorrectedContainer = null;
             try {
-                responseFromCorrectedContainer = restRequestor.executeGetBdioRequest(correctedRestConnection, correctedImageInspectorUrl, containerPathToTarfile, containerFileSystemOutputFilePath, cleanup);
+                responseFromCorrectedContainer = restRequestor.executeGetBdioRequest(correctedRestConnection, correctedImageInspectorUrl, containerPathToInputDockerTarfile, containerPathToOutputFileSystemFile, cleanup);
             } catch (final IntegrationException e) {
                 logServiceError(correctedContainerId);
                 throw e;

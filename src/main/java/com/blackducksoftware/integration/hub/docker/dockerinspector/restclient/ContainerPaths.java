@@ -31,7 +31,7 @@ public interface ContainerPaths {
      * Translate a local path (to a file within the dir shared with the container) to the equivalent path for the container. Find path to the given localPath RELATIVE to the local shared dir. Convert that to the container's path by
      * appending that relative path to the container's path to the shared dir
      */
-    String getContainerPathToLocalFile(String localPath) throws IOException;
+    String getContainerPathToTargetFile(String localPathToTargetFile) throws IOException;
 
     String getContainerPathToOutputFile(String outputFilename);
 

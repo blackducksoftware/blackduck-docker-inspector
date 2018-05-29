@@ -44,7 +44,7 @@ public class ContainerPathsTargetDirCopiedFromHost implements ContainerPaths {
     private Config config;
 
     @Override
-    public String getContainerPathToLocalFile(final String localPath) throws IOException {
+    public String getContainerPathToTargetFile(final String localPath) throws IOException {
         logger.debug(String.format("local file path: %s", localPath));
         final File localFile = new File(localPath);
         final File containerTargetDir = new File(getContainerPathToTargetDir());

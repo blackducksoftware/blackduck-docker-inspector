@@ -211,7 +211,7 @@ public class DockerClientManager {
 
     public String startContainerAsService(final String imageId, final String containerName, final OperatingSystemEnum inspectorOs, final int containerPort, final int hostPort, final String containerPathToOutputDir)
             throws IntegrationException {
-        logger.debug(String.format("Staring image ID %s --> container name: %s", imageId, containerName));
+        logger.debug(String.format("Starting image ID %s --> container name: %s", imageId, containerName));
         final DockerClient dockerClient = hubDockerClient.getDockerClient();
         stopRemoveContainerIfExists(dockerClient, containerName);
 
@@ -222,8 +222,10 @@ public class DockerClientManager {
         final Map<String, String> labels = new HashMap<>(1);
         labels.put(CONTAINER_APPNAME_LABEL_KEY, IMAGEINSPECTOR_APP_NAME_LABEL_VALUE);
         labels.put(CONTAINER_OS_LABEL_KEY, imageInspectorOsName);
+
+        // TODO OLD: logger.debug(String.format("Binding host %s to container %s", programPaths.getHubDockerOutputPathHost(), programPaths.getHubDockerOutputPathContainer()));
         final Bind bind = createBindMount(config.getSharedDirPathLocal(), config.getSharedDirPathImageInspector());
-        logger.debug(String.format("Binding host %s to container %s", programPaths.getHubDockerOutputPathHost(), programPaths.getHubDockerOutputPathContainer()));
+
         final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageId).withName(containerName).withBinds(bind).withLabels(labels).withCmd(cmd.split(" "));
         final ExposedPort exposedPort = new ExposedPort(containerPort);
         createContainerCmd.withExposedPorts(exposedPort);

@@ -29,7 +29,7 @@ import com.blackducksoftware.integration.exception.IntegrationException;
 
 public interface ImageInspectorClient {
 
-    String getBdio(String hostPathToTarFile, String containerPathToTarfile, String containerFileSystemFilename, boolean cleanup) throws IntegrationException, MalformedURLException;
+    String getBdio(String hostPathToTarFile, String containerPathToInputDockerTarfile, String containerPathToOutputFileSystemFile, boolean cleanup) throws IntegrationException, MalformedURLException;
 
     boolean isApplicable();
 

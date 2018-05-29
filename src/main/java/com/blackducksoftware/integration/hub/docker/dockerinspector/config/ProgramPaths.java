@@ -67,6 +67,7 @@ public class ProgramPaths {
     private String hubDockerPgmDirPathHost;
     private String hubDockerPgmDirPathContainer;
 
+    private String hubDockerRunDirName;
     private String hubDockerRunDirPathHost;
 
     public static final String APPLICATION_PROPERTIES_FILENAME = "application.properties";
@@ -119,7 +120,8 @@ public class ProgramPaths {
             hubDockerPgmDirPathHost = getProgramDirPathHost();
         }
         logger.debug(String.format("hubDockerPgmDirPathHost: %s", hubDockerPgmDirPathHost));
-        final File runDirHost = new File(hubDockerPgmDirPathHost, adjustWithProcessId(RUNDIR_BASENAME));
+        hubDockerRunDirName = adjustWithProcessId(RUNDIR_BASENAME);
+        final File runDirHost = new File(hubDockerPgmDirPathHost, hubDockerRunDirName);
         hubDockerRunDirPathHost = runDirHost.getAbsolutePath() + "/";
         logger.debug(String.format("hubDockerRunDirPathHost: %s", hubDockerRunDirPathHost));
 
@@ -223,6 +225,10 @@ public class ProgramPaths {
 
     public String getHubDockerPgmDirPathHost() {
         return hubDockerPgmDirPathHost;
+    }
+
+    public String getHubDockerRunDirName() {
+        return hubDockerRunDirName;
     }
 
     public String getHubDockerRunDirPathHost() {

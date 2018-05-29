@@ -42,6 +42,9 @@ public class ContainerPathsTargetFileInSharedDir implements ContainerPaths {
     @Autowired
     private Config config;
 
+    @Autowired
+    private ProgramPaths programPaths;
+
     // TODO Rethink distribution of responsibility across Config, ContainerPath and ProgramPaths
     // TODO Should this be in ProgramPaths? Or at least delegated to from there?
 
@@ -50,24 +53,26 @@ public class ContainerPathsTargetFileInSharedDir implements ContainerPaths {
      * appending that relative path to the container's path to the shared dir
      */
     @Override
-    public String getContainerPathToLocalFile(final String localPath) throws IOException {
+    public String getContainerPathToTargetFile(final String localPathToTargetFile) throws IOException {
 
-        logger.debug(String.format("localPath: %s", localPath));
-        final String workingDirPath = new File(config.getSharedDirPathLocal()).getCanonicalPath();
-        final String workingDirPathImageInspector = config.getSharedDirPathImageInspector();
-        if (StringUtils.isBlank(workingDirPathImageInspector)) {
-            logger.debug(String.format("config.getWorkingDirPathImageInspector() is BLANK"));
+        logger.debug(String.format("localPathToTargetFile: %s", localPathToTargetFile));
+        final String sharedDirPathLocal = new File(config.getSharedDirPathLocal()).getCanonicalPath();
+        final String sharedDirPathImageInspector = config.getSharedDirPathImageInspector();
+        if (StringUtils.isBlank(sharedDirPathImageInspector)) {
+            // TODO is this even a real scenario??
+            logger.debug(String.format("config.getSharedDirPathImageInspector() is BLANK"));
             final String containerTargetDirPathDefault = getContainerPathToTargetDir();
             if (StringUtils.isNotBlank(containerTargetDirPathDefault)) {
-                return getContainerTargetFilePath(containerTargetDirPathDefault, localPath);
+                return getContainerTargetFilePath(containerTargetDirPathDefault, localPathToTargetFile);
             } else {
-                return localPath;
+                // TODO this should throw an exception... localPath will never work!
+                return localPathToTargetFile;
             }
         }
-        logger.debug(String.format("config.getWorkingDirPath(): %s", workingDirPath));
-        final String localRelPath = localPath.substring(workingDirPath.length());
+        logger.debug(String.format("*** config.getSharedDirPathLocal(): %s", sharedDirPathLocal));
+        final String localRelPath = localPathToTargetFile.substring(sharedDirPathLocal.length());
         logger.debug(String.format("localRelPath: %s", localRelPath));
-        final File containerFile = getFileInDir(workingDirPathImageInspector, localRelPath);
+        final File containerFile = getFileInDir(sharedDirPathImageInspector, localRelPath);
         logger.debug(String.format("containerPath: %s", containerFile.getAbsolutePath()));
         return containerFile.getAbsolutePath();
     }
@@ -92,10 +97,12 @@ public class ContainerPathsTargetFileInSharedDir implements ContainerPaths {
 
     @Override
     public String getContainerPathToOutputDir() {
-        // TODO is, or should, this (be) done in ProgramPaths?
-        final File outputDir = getFileInDir(getContainerPathToSharedDir(), ProgramPaths.OUTPUT_DIR);
-        logger.debug(String.format("getContainerPathToOutputDir() returning %s", outputDir.getAbsolutePath()));
-        return outputDir.getAbsolutePath();
+        // TODO refactor some of this out; should be sharable
+        final File containerSharedDir = new File(getContainerPathToSharedDir());
+        final File containerRunDir = new File(containerSharedDir, programPaths.getHubDockerRunDirName());
+        final File containerOutputDir = new File(containerRunDir, ProgramPaths.OUTPUT_DIR);
+        logger.debug(String.format("*** getContainerPathToOutputDir() returning %s", containerOutputDir.getAbsolutePath()));
+        return containerOutputDir.getAbsolutePath();
     }
 
     @Override
