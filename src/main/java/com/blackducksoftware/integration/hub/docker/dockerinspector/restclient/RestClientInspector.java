@@ -96,6 +96,8 @@ public class RestClientInspector implements Inspector {
                 logger.info(String.format("Writing BDIO to %s", outputBdioFile.getAbsolutePath()));
                 FileUtils.write(outputBdioFile, bdioString, StandardCharsets.UTF_8);
                 final File localPathToContainerOutputDir = new File(programPaths.getHubDockerOutputPathHost());
+                logger.debug(String.format("localPathToContainerOutputDir: %s", localPathToContainerOutputDir.getAbsolutePath()));
+                logger.debug(String.format("containerFileSystemFilename: %s", containerFileSystemFilename));
                 final File localPathToContainerFileSytemFile = new File(localPathToContainerOutputDir, containerFileSystemFilename);
                 final File userContainerFileSytemFile = new File(userOutputDir, containerFileSystemFilename);
                 logger.debug(String.format("Copying %s to %s", localPathToContainerFileSytemFile.getAbsolutePath(), userContainerFileSytemFile.getAbsolutePath()));

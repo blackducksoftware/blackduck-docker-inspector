@@ -424,10 +424,11 @@ public class DockerInspectorTest {
             cmd.add(String.format("--imageinspector.service.port.alpine=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE));
             cmd.add(String.format("--imageinspector.service.port.centos=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS));
             cmd.add(String.format("--imageinspector.service.port.ubuntu=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU));
+        } else {
+            final File workingDir = new File(String.format("%s/endToEnd", TestUtils.TEST_DIR_REL_PATH));
+            TestUtils.deleteDirIfExists(workingDir);
+            cmd.add(String.format("--working.dir.path=%s", workingDir.getAbsolutePath()));
         }
-        final File workingDir = new File(String.format("%s/endToEnd", TestUtils.TEST_DIR_REL_PATH));
-        TestUtils.deleteDirIfExists(workingDir);
-        cmd.add(String.format("--working.dir.path=%s", workingDir.getAbsolutePath()));
         cmd.add(inspectTargetArg);
 
         System.out.println(String.format("Running end to end test on %s with command %s", inspectTargetImageRepoTag, cmd.toString()));
