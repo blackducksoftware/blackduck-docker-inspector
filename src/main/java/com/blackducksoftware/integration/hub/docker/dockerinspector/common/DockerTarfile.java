@@ -26,7 +26,6 @@ package com.blackducksoftware.integration.hub.docker.dockerinspector.common;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,40 +53,10 @@ public class DockerTarfile {
     public File deriveDockerTarFile() throws IOException, HubIntegrationException {
         logger.debug(String.format("programPaths.getHubDockerTargetDirPath(): %s", programPaths.getHubDockerTargetDirPath()));
         if (StringUtils.isNotBlank(config.getDockerTar())) {
-            return deriveDockerTarFileGivenTarfile();
+            return new File(config.getDockerTar());
         } else {
             return deriveDockerTarFileGivenImageSpec();
         }
-
-    }
-
-    private File deriveDockerTarFileGivenTarfile() throws IOException {
-        File finalDockerTarfile = null;
-        final File givenDockerTarfile = new File(config.getDockerTar());
-        logger.debug(String.format("Given docker tarfile: %s", givenDockerTarfile.getCanonicalPath()));
-        // When in container: no copy needed
-        if (!config.isOnHost()) {
-            return givenDockerTarfile;
-        }
-        // TODO: actually, don't need this. The not-on-host check takes care of it
-        // In orchestration environments: user gives us the final tarfile location in the shared dir; no copy needed
-        // if (StringUtils.isNotBlank(config.getImageInspectorUrl())) {
-        // return givenDockerTarfile;
-        // }
-        if (config.isImageInspectorServiceStart()) {
-            // TODO: move this code into a start-as-needed-specific class?
-            // Copy the tarfile to the target dir
-            finalDockerTarfile = new File(programPaths.getHubDockerTargetDirPath(), givenDockerTarfile.getName());
-            logger.debug(String.format("Required docker tarfile location: %s", finalDockerTarfile.getCanonicalPath()));
-            if (!finalDockerTarfile.getCanonicalPath().equals(givenDockerTarfile.getCanonicalPath())) {
-                logger.debug(String.format("Copying %s to %s", givenDockerTarfile.getCanonicalPath(), finalDockerTarfile.getCanonicalPath()));
-                // This copy isn't strictly necessary in the "exec" scenario; only the start-containers-as-needed scenario
-                // But it doesn't seem worth complicating the code to avoid it, especially hopefully exec mode can eventually be removed
-                FileUtils.copyFile(givenDockerTarfile, finalDockerTarfile);
-            }
-            return finalDockerTarfile;
-        }
-        return givenDockerTarfile;
     }
 
     private File deriveDockerTarFileGivenImageSpec() throws HubIntegrationException, IOException {

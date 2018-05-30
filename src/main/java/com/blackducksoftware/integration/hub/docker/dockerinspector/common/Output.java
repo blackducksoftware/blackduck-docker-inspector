@@ -59,6 +59,9 @@ public class Output {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
+    private Config config;
+
+    @Autowired
     private HubClient hubClient;
 
     @Autowired
@@ -70,20 +73,18 @@ public class Output {
     @Autowired
     private ResultFile resultFile;
 
-    public void provideOutput(final Config config) throws IOException {
+    public void provideOutput() throws IOException {
         if (config.isOnHost()) {
             copyOutputToUserOutputDir();
         }
     }
 
-    public void ensureWriteability(final Config config) {
+    public void ensureWriteability() {
         if (config.isOnHost()) {
             final File outputDir = new File(programPaths.getHubDockerOutputPathHost());
             final boolean dirCreated = outputDir.mkdirs();
-            //// TODO write and execute permission may not be needed, since its mounted for container as rwx
             final boolean dirMadeWriteable = outputDir.setWritable(true, false);
             final boolean dirMadeExecutable = outputDir.setExecutable(true, false);
-            //////////////
             logger.debug(String.format("Output dir: %s; created: %b; successfully made writeable: %b; make executable: %b", outputDir.getAbsolutePath(), dirCreated, dirMadeWriteable, dirMadeExecutable));
         }
     }
@@ -94,14 +95,14 @@ public class Output {
         dissectedImage.setBdioFilename(bdioFile.getName());
     }
 
-    public void uploadBdio(final Config config, final DissectedImage dissectedImage) throws IntegrationException {
+    public void uploadBdio(final DissectedImage dissectedImage) throws IntegrationException {
         if (config.isUploadBdio()) {
             logger.info("Uploading BDIO to Hub");
-            dissectedImage.setBdioFilename(uploadBdioFiles(config));
+            dissectedImage.setBdioFilename(uploadBdioFiles());
         }
     }
 
-    public void createContainerFileSystemTarIfRequested(final Config config, final File targetImageFileSystemRootDir) throws IOException, CompressorException {
+    public void createContainerFileSystemTarIfRequested(final File targetImageFileSystemRootDir) throws IOException, CompressorException {
         if (config.isOutputIncludeContainerfilesystem()) {
             logger.info("Including container file system in output");
             final File outputDirectory = new File(programPaths.getHubDockerOutputPath());
@@ -114,7 +115,7 @@ public class Output {
         }
     }
 
-    public void cleanUp(final Config config, final Future<String> deferredCleanup) {
+    public void cleanUp(final Future<String> deferredCleanup) {
         if (config.isOnHost() && config.isCleanupWorkingDir()) {
             cleanupWorkingDirs();
         }
@@ -130,15 +131,15 @@ public class Output {
         }
     }
 
-    public int reportResultsPkgMgrDataNotFound(final Config config, final DissectedImage dissectedImage) throws IOException, IntegrationException {
-        reportResult(config, null, null, null,
+    public int reportResultsPkgMgrDataNotFound(final DissectedImage dissectedImage) throws IOException, IntegrationException {
+        reportResult(null, null, null,
                 dissectedImage.getDockerTarFile() == null ? "" : dissectedImage.getDockerTarFile().getName(), dissectedImage.getBdioFilename(), true);
         copyResultToUserOutputDir();
         return 0;
     }
 
-    public int reportResults(final Config config, final DissectedImage dissectedImage) throws IOException, IntegrationException {
-        final int returnCode = reportResult(config, dissectedImage.getTargetOs(), dissectedImage.getRunOnImageName(), dissectedImage.getRunOnImageTag(),
+    public int reportResults(final DissectedImage dissectedImage) throws IOException, IntegrationException {
+        final int returnCode = reportResult(dissectedImage.getTargetOs(), dissectedImage.getRunOnImageName(), dissectedImage.getRunOnImageTag(),
                 dissectedImage.getDockerTarFile() == null ? "" : dissectedImage.getDockerTarFile().getName(), dissectedImage.getBdioFilename(), false);
         if (config.isOnHost()) {
             copyResultToUserOutputDir();
@@ -172,7 +173,7 @@ public class Output {
         FileOperations.copyFile(new File(programPaths.getHubDockerHostResultPath()), userOutputDir);
     }
 
-    private int reportResult(final Config config, final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag, final String dockerTarfilename, final String bdioFilename, final boolean forceSuccess)
+    private int reportResult(final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag, final String dockerTarfilename, final String bdioFilename, final boolean forceSuccess)
             throws IntegrationException {
         final Gson gson = new Gson();
         if (forceSuccess) {
@@ -223,7 +224,7 @@ public class Output {
         FileOperations.copyDirContentsToDir(programPaths.getHubDockerOutputPathHost(), userOutputDir.getAbsolutePath(), true);
     }
 
-    private String uploadBdioFiles(final Config config) throws IntegrationException {
+    private String uploadBdioFiles() throws IntegrationException {
         String pathToDirContainingBdio = null;
         pathToDirContainingBdio = programPaths.getHubDockerOutputPath();
         logger.debug(String.format("Uploading BDIO files from %s", pathToDirContainingBdio));

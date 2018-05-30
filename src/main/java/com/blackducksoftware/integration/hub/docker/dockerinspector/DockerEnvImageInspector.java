@@ -121,11 +121,11 @@ public class DockerEnvImageInspector {
                 final ImageInfoDerived imageInfoDerived = imageInspector.generateEmptyBdio(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), hubProjectName.getHubProjectName(config),
                         hubProjectName.getHubProjectVersion(config), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs(), config.getHubCodelocationPrefix());
                 output.writeBdioFile(dissectedImage, imageInfoDerived);
-                output.uploadBdio(config, dissectedImage);
-                output.createContainerFileSystemTarIfRequested(config, dissectedImage.getTargetImageFileSystemRootDir());
-                output.provideOutput(config);
-                returnCode = output.reportResultsPkgMgrDataNotFound(config, dissectedImage);
-                output.cleanUp(config, null);
+                output.uploadBdio(dissectedImage);
+                output.createContainerFileSystemTarIfRequested(dissectedImage.getTargetImageFileSystemRootDir());
+                output.provideOutput();
+                returnCode = output.reportResultsPkgMgrDataNotFound(dissectedImage);
+                output.cleanUp(null);
             }
         } catch (final Throwable e) {
             final String msg = String.format("Error inspecting image: %s", e.getMessage());

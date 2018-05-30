@@ -97,10 +97,6 @@ public class ProgramPaths {
             logger.debug(String.format("getProgramDirPathHost(): returning %s", sharedDir.getAbsolutePath()));
             return sharedDir.getAbsolutePath();
         }
-        // TODO should be able to eliminate the need for this adjustment:
-        if (!config.getWorkingDirPath().endsWith("/")) {
-            config.setWorkingDirPath(String.format("%s/", config.getWorkingDirPath()));
-        }
         logger.debug(String.format("getProgramDirPathHost(): returning %s", config.getWorkingDirPath()));
         return config.getWorkingDirPath();
     }

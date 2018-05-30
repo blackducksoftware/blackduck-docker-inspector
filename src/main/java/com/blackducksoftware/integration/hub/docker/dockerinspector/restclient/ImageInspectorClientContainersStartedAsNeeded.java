@@ -23,7 +23,6 @@
  */
 package com.blackducksoftware.integration.hub.docker.dockerinspector.restclient;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Map;
@@ -40,7 +39,6 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Progr
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.DockerClientManager;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.HubDockerClient;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.response.SimpleResponse;
-import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.blackducksoftware.integration.hub.imageinspector.lib.OperatingSystemEnum;
 import com.blackducksoftware.integration.rest.RestConstants;
 import com.blackducksoftware.integration.rest.connection.RestConnection;
@@ -162,11 +160,6 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         }
     }
 
-    @Override
-    public ContainerPaths getContainerPaths() {
-        return containerPaths;
-    }
-
     private int deriveTimeoutSeconds() {
         return (int) (config.getCommandTimeout() / 1000L);
     }
@@ -186,16 +179,6 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
             throw new IntegrationException(String.format("Error creating connection for URL: %s, timeout: %d", imageInspectorUrl, serviceRequestTimeoutSeconds), e);
         }
         return restConnection;
-    }
-
-    private void copyFileToContainer(final String hostPathToTarfile, final String containerId, final String containerPathToTarfile) throws HubIntegrationException, IntegrationException {
-        final File containerDockerTarfile = new File(containerPathToTarfile);
-        final String containerDestDirPath = containerDockerTarfile.getParent();
-        try {
-            dockerClientManager.copyFileToContainer(hubDockerClient.getDockerClient(), containerId, hostPathToTarfile, containerDestDirPath);
-        } catch (final IOException e) {
-            throw new IntegrationException(String.format("Error copying file %s to %s:%s", hostPathToTarfile, containerId, containerDestDirPath), e);
-        }
     }
 
     private String ensureServiceReady(final RestConnection restConnection, final String imageInspectorUrl, final OperatingSystemEnum inspectorOs) throws IntegrationException {
@@ -223,9 +206,9 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
                 containerPaths.getContainerPathToOutputDir());
         for (int tryIndex = 0; tryIndex < MAX_CONTAINER_START_TRY_COUNT && !serviceIsUp; tryIndex++) {
             try {
-                // TODO sleep time configurable?
-                logger.debug("Pausing 10 seconds to give service time to start up");
-                Thread.sleep(10000L);
+                final long timeoutMilliseconds = config.getCommandTimeout();
+                logger.debug(String.format("Pausing %d seconds to give service time to start up", (int) (timeoutMilliseconds / 1000L)));
+                Thread.sleep(timeoutMilliseconds);
             } catch (final InterruptedException e) {
                 logger.error(String.format("Interrupted exception thrown while pausing so image imspector container based on image %s:%s could start", imageInspectorRepo, imageInspectorTag), e);
             }

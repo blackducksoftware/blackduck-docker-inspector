@@ -26,7 +26,6 @@ package com.blackducksoftware.integration.hub.docker.dockerinspector.restclient;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,17 +56,6 @@ public class ContainerPaths {
         logger.debug(String.format("localPathToTargetFile: %s", localPathToTargetFile));
         final String sharedDirPathLocal = new File(config.getSharedDirPathLocal()).getCanonicalPath();
         final String sharedDirPathImageInspector = config.getSharedDirPathImageInspector();
-        if (StringUtils.isBlank(sharedDirPathImageInspector)) {
-            // TODO is this even a real scenario??
-            logger.debug(String.format("config.getSharedDirPathImageInspector() is BLANK"));
-            final String containerTargetDirPathDefault = getContainerPathToTargetDir();
-            if (StringUtils.isNotBlank(containerTargetDirPathDefault)) {
-                return getContainerTargetFilePath(containerTargetDirPathDefault, localPathToTargetFile);
-            } else {
-                // TODO this should throw an exception... localPath will never work!
-                return localPathToTargetFile;
-            }
-        }
         logger.debug(String.format("config.getSharedDirPathLocal(): %s", sharedDirPathLocal));
         final String localRelPath = localPathToTargetFile.substring(sharedDirPathLocal.length());
         logger.debug(String.format("localRelPath: %s", localRelPath));
@@ -77,40 +65,23 @@ public class ContainerPaths {
     }
 
     public String getContainerPathToOutputFile(final String outputFilename) {
-        final File containerFileSystemFileInContainer = getFileInDir(getContainerPathToOutputDir(), outputFilename);
+        final File containerFileSystemFileInContainer = new File(getContainerOutputDir(), outputFilename);
         return containerFileSystemFileInContainer.getAbsolutePath();
     }
 
-    public String getContainerPathToSharedDir() {
-        logger.debug(String.format("getContainerPathToSharedDir() returning %s", config.getSharedDirPathImageInspector()));
-        return config.getSharedDirPathImageInspector();
-    }
-
     public String getContainerPathToOutputDir() {
-        // TODO refactor some of this out; should be sharable
-        final File containerSharedDir = new File(getContainerPathToSharedDir());
-        final File containerRunDir = new File(containerSharedDir, programPaths.getHubDockerRunDirName());
-        final File containerOutputDir = new File(containerRunDir, ProgramPaths.OUTPUT_DIR);
-        logger.debug(String.format("getContainerPathToOutputDir() returning %s", containerOutputDir.getAbsolutePath()));
-        return containerOutputDir.getAbsolutePath();
+        return getContainerOutputDir().getAbsolutePath();
     }
 
-    public String getContainerPathToTargetDir() {
-        final File targetDir = getFileInDir(getContainerPathToSharedDir(), ProgramPaths.TARGET_DIR);
-        logger.debug(String.format("getContainerPathToTargetDir() returning %s", targetDir.getAbsolutePath()));
-        return targetDir.getAbsolutePath();
+    private File getContainerOutputDir() {
+        final File containerRunDir = getFileInDir(config.getSharedDirPathImageInspector(), programPaths.getHubDockerRunDirName());
+        final File containerOutputDir = new File(containerRunDir, ProgramPaths.OUTPUT_DIR);
+        return containerOutputDir;
     }
 
     private File getFileInDir(final String dirPath, final String filename) {
         final File containerOutputDir = new File(dirPath);
         final File containerFileSystemFileInContainer = new File(containerOutputDir, filename);
         return containerFileSystemFileInContainer;
-    }
-
-    private String getContainerTargetFilePath(final String containerTargetDirPathDefault, final String localPath) {
-        final File localFile = new File(localPath);
-        final File containerTargetFile = getFileInDir(containerTargetDirPathDefault, localFile.getName());
-        final String containerTargetFilePath = containerTargetFile.getAbsolutePath();
-        return containerTargetFilePath;
     }
 }

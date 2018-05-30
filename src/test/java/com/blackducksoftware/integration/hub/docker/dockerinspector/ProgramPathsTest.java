@@ -36,10 +36,7 @@ public class ProgramPathsTest {
 
     private void doTest(final String jarFileName, final boolean prefixCodeLocationName) throws IllegalArgumentException, IllegalAccessException, IOException {
         final File installDir = TestUtils.createTempDirectory();
-        String installDirPath = installDir.getAbsolutePath();
-        if (!installDirPath.endsWith("/")) {
-            installDirPath = String.format("%s/", installDirPath);
-        }
+        final String installDirPath = installDir.getAbsolutePath();
         Mockito.when(config.getWorkingDirPath()).thenReturn(installDirPath);
 
         programPaths.init();

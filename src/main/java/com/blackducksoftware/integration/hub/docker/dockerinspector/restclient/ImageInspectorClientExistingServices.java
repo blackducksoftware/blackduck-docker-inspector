@@ -48,9 +48,6 @@ public class ImageInspectorClientExistingServices implements ImageInspectorClien
     @Autowired
     private RestConnectionCreator restConnectionCreator;
 
-    @Autowired
-    private ContainerPaths containerPaths;
-
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
@@ -73,10 +70,5 @@ public class ImageInspectorClientExistingServices implements ImageInspectorClien
         logger.debug(String.format("containerPathToFileSystemFile: %s", containerPathToOutputFileSystemFile));
         final SimpleResponse response = restRequester.executeGetBdioRequest(restConnection, imageInspectorUrl, containerPathToInputDockerTarfile, containerPathToOutputFileSystemFile, cleanup);
         return response.getBody();
-    }
-
-    @Override
-    public ContainerPaths getContainerPaths() {
-        return containerPaths;
     }
 }

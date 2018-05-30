@@ -32,6 +32,4 @@ public interface ImageInspectorClient {
     String getBdio(String hostPathToTarFile, String containerPathToInputDockerTarfile, String containerPathToOutputFileSystemFile, boolean cleanup) throws IntegrationException, MalformedURLException;
 
     boolean isApplicable();
-
-    ContainerPaths getContainerPaths();
 }

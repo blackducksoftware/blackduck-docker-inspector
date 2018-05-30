@@ -65,6 +65,9 @@ public class RestClientInspector implements Inspector {
     @Autowired
     private List<ImageInspectorClient> imageInspectorClients;
 
+    @Autowired
+    private ContainerPaths containerPaths;
+
     @Override
     public boolean isApplicable() {
         if (config.isImageInspectorServiceStart() || StringUtils.isNotBlank(config.getImageInspectorUrl())) {
@@ -75,20 +78,18 @@ public class RestClientInspector implements Inspector {
 
     @Override
     public int getBdio(final DissectedImage dissectedImage) throws IntegrationException {
-        final ImageInspectorClient restClient = chooseImageInspectorClient();
+        final ImageInspectorClient imageInspectorClient = chooseImageInspectorClient();
         try {
-            final File dockerTarFile = dockerTarfile.deriveDockerTarFile();
+            final File origDockerTarFile = dockerTarfile.deriveDockerTarFile();
+            final File finalDockerTarfile = prepareDockerTarfile(origDockerTarFile);
             final String containerFileSystemFilename = Names.getContainerFileSystemTarFilename(config.getDockerImage(), config.getDockerTar());
-            logger.debug(String.format("Given docker tar file path: %s", dockerTarFile.getCanonicalPath()));
-
-            // TODO shouldn't this be done in the restClient??
-            final String dockerTarFilePathInContainer = restClient.getContainerPaths().getContainerPathToTargetFile(dockerTarFile.getCanonicalPath());
-            final String containerFileSystemPathInContainer = restClient.getContainerPaths().getContainerPathToOutputFile(containerFileSystemFilename);
-
+            logger.debug(String.format("Given docker tar file path: %s", finalDockerTarfile.getCanonicalPath()));
+            final String dockerTarFilePathInContainer = containerPaths.getContainerPathToTargetFile(finalDockerTarfile.getCanonicalPath());
+            final String containerFileSystemPathInContainer = containerPaths.getContainerPathToOutputFile(containerFileSystemFilename);
             logger.debug(String.format("Derived container docker tar file path: %s", dockerTarFilePathInContainer));
             logger.debug(String.format("HubDockerWorkingDirPathHost: %s", programPaths.getHubDockerWorkingDirPathHost()));
             logger.debug(String.format("HubDockerWorkingDirPathContainer: %s", programPaths.getHubDockerWorkingDirPathContainer()));
-            final String bdioString = restClient.getBdio(dockerTarFile.getCanonicalPath(), dockerTarFilePathInContainer, containerFileSystemPathInContainer, config.isCleanupWorkingDir());
+            final String bdioString = imageInspectorClient.getBdio(finalDockerTarfile.getCanonicalPath(), dockerTarFilePathInContainer, containerFileSystemPathInContainer, config.isCleanupWorkingDir());
             if (StringUtils.isNotBlank(config.getOutputPath())) {
                 final File userOutputDir = new File(config.getOutputPath());
                 final String outputBdioFilename = deriveOutputBdioFilename(bdioString);
@@ -110,6 +111,23 @@ public class RestClientInspector implements Inspector {
         } catch (final IOException e) {
             throw new IntegrationException(e.getMessage(), e);
         }
+    }
+
+    private File prepareDockerTarfile(final File givenDockerTarfile) throws IOException {
+        if (!config.isOnHost()) {
+            return givenDockerTarfile;
+        }
+        if (!config.isImageInspectorServiceStart()) {
+            return givenDockerTarfile;
+        }
+        // Copy the tarfile to the shared/target dir
+        final File finalDockerTarfile = new File(programPaths.getHubDockerTargetDirPath(), givenDockerTarfile.getName());
+        logger.debug(String.format("Required docker tarfile location: %s", finalDockerTarfile.getCanonicalPath()));
+        if (!finalDockerTarfile.getCanonicalPath().equals(givenDockerTarfile.getCanonicalPath())) {
+            logger.debug(String.format("Copying %s to %s", givenDockerTarfile.getCanonicalPath(), finalDockerTarfile.getCanonicalPath()));
+            FileUtils.copyFile(givenDockerTarfile, finalDockerTarfile);
+        }
+        return finalDockerTarfile;
     }
 
     private void cleanup() {

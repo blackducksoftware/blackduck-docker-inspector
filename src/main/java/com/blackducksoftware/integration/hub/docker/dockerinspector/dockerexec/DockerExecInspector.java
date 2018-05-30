@@ -93,16 +93,16 @@ public class DockerExecInspector implements Inspector {
     @Override
     public int getBdio(final DissectedImage dissectedImage) throws IntegrationException {
         try {
-            output.ensureWriteability(config);
+            output.ensureWriteability();
             parseManifest(config, dissectedImage);
             checkForGivenTargetOs(config, dissectedImage);
             constructContainerFileSystem(config, dissectedImage);
             determineTargetOsFromContainerFileSystem(config, dissectedImage);
             final Future<String> deferredCleanup = inspect(config, dissectedImage);
-            output.uploadBdio(config, dissectedImage);
-            output.provideOutput(config);
-            final int returnCode = output.reportResults(config, dissectedImage);
-            output.cleanUp(config, deferredCleanup);
+            output.uploadBdio(dissectedImage);
+            output.provideOutput();
+            final int returnCode = output.reportResults(dissectedImage);
+            output.cleanUp(deferredCleanup);
             return returnCode;
         } catch (IllegalAccessException | IOException | InterruptedException | CompressorException e) {
             throw new IntegrationException(e.getMessage(), e);
@@ -158,7 +158,7 @@ public class DockerExecInspector implements Inspector {
             final ImageInfoDerived imageInfoDerived = imageInspector.generateBdioFromImageFilesDir(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), hubProjectName.getHubProjectName(config),
                     hubProjectName.getHubProjectVersion(config), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs(), config.getHubCodelocationPrefix());
             output.writeBdioFile(dissectedImage, imageInfoDerived);
-            output.createContainerFileSystemTarIfRequested(config, dissectedImage.getTargetImageFileSystemRootDir());
+            output.createContainerFileSystemTarIfRequested(dissectedImage.getTargetImageFileSystemRootDir());
         }
         return deferredCleanup;
     }
