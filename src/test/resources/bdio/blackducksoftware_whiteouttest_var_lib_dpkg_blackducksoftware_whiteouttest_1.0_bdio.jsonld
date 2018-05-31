@@ -4,25 +4,25 @@
     "spdx:name": "blackducksoftware_whiteouttest_1.0_var_lib_dpkg_DPKG",
     "creationInfo": {
       "spdx:creator": [
-        "Tool: IntegrationBdio-13.0.0"
+        "Tool: IntegrationBdio-14.0.0"
       ],
-      "spdx:created": "2018-05-17T12:23:11.068Z"
+      "spdx:created": "2018-05-31T21:50:39.211Z"
     },
-    "@id": "uuid:f3be86d9-e9d6-453c-9d5c-5278c30bc902",
+    "@id": "uuid:7173d279-927a-42c8-9664-d56d12b870c4",
     "@type": "BillOfMaterials",
     "relationship": []
   },
   {
     "name": "blackducksoftware_whiteouttest",
     "revision": "1.0",
-    "@id": "http:debian/blackducksoftware_whiteouttest/1_0",
+    "@id": "http:ubuntu/blackducksoftware_whiteouttest/1_0",
     "@type": "Project",
     "externalIdentifier": {
-      "externalSystemTypeId": "debian",
+      "externalSystemTypeId": "ubuntu",
       "externalId": "blackducksoftware_whiteouttest/1.0",
       "externalIdMetaData": {
         "forge": {
-          "name": "debian",
+          "name": "ubuntu",
           "separator": "/",
           "kbSeparator": "/"
         },

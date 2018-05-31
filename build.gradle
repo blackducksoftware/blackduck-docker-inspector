@@ -21,7 +21,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'io.spring.dependency-management'
 
 repositories {
-    //mavenLocal()
+    mavenLocal()
     jcenter()
     mavenCentral()
     //maven {
@@ -31,7 +31,7 @@ repositories {
 
 version = '6.0.0-SNAPSHOT'
 def inspectorImageFamily = 'hub-imageinspector-ws'
-def inspectorImageVersion = "2.1.0"
+def inspectorImageVersion = "2.1.1-SNAPSHOT"
 
 apply plugin: 'com.blackducksoftware.integration.solution'
 apply plugin: 'com.bmuschko.docker-remote-api'
@@ -454,7 +454,7 @@ artifactory {
 
 dependencies {
     compile 'com.blackducksoftware.integration:hub-common:33.0.0'
-    compile 'com.blackducksoftware.integration:hub-imageinspector-lib:3.0.1'
+    compile 'com.blackducksoftware.integration:hub-imageinspector-lib:3.0.2-SNAPSHOT'
     
     compile 'com.github.docker-java:docker-java:3.1.0-rc-2'
 

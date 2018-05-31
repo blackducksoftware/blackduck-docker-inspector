@@ -23,10 +23,15 @@
  */
 package com.blackducksoftware.integration.hub.docker.dockerinspector.restclient;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.imageinspector.lib.PackageManagerEnum;
 
 public class BdioFilename {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final String spdxName;
     private final String projectExternalIdMetaName;
     private final String projectExternalIdMetaVersion;
@@ -59,10 +64,6 @@ public class BdioFilename {
             return PackageManagerEnum.RPM;
         }
         if (PackageManagerEnum.DPKG.getOperatingSystem().name().equalsIgnoreCase(projectExternalIdMetaForgeName)) {
-            return PackageManagerEnum.DPKG;
-        }
-        // Unfortunately, this is how DPKG BDIO is generated
-        if ("debian".equalsIgnoreCase(projectExternalIdMetaForgeName)) {
             return PackageManagerEnum.DPKG;
         }
         throw new IntegrationException(String.format("Unrecognized forge name in BDIO result: %s", projectExternalIdMetaForgeName));
