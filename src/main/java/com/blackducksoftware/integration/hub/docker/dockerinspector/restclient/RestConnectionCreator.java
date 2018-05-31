@@ -39,29 +39,26 @@ import com.blackducksoftware.integration.rest.connection.UnauthenticatedRestConn
 public class RestConnectionCreator {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    // TODO make sure restConnections get closed
+    // Be sure to close the rest connection
     public RestConnection createNonRedirectingConnection(final String baseUrl, final int timeoutSeconds) throws MalformedURLException {
         final NonRedirectingUnauthenticatedRestConnectionBuilder connectionBuilder = new NonRedirectingUnauthenticatedRestConnectionBuilder();
         connectionBuilder.setBaseUrl(baseUrl);
         connectionBuilder.setTimeout(timeoutSeconds);
         final IntLogger intLogger = new Slf4jIntLogger(logger);
         connectionBuilder.setLogger(intLogger);
-        // TODO: always trust?
         connectionBuilder.setAlwaysTrustServerCertificate(false);
         final RestConnection connection = connectionBuilder.build();
-        // TODO: I pushed this down into UnauthenticatedRestConnectionBuilder
-        // connection.getClientBuilder().disableRedirectHandling();
         return connection;
 
     }
 
+    // Be sure to close the rest connection
     public RestConnection createRedirectingConnection(final String baseUrl, final int timeoutSeconds) throws MalformedURLException {
         final UnauthenticatedRestConnectionBuilder connectionBuilder = new UnauthenticatedRestConnectionBuilder();
         connectionBuilder.setBaseUrl(baseUrl);
         connectionBuilder.setTimeout(timeoutSeconds);
         final IntLogger intLogger = new Slf4jIntLogger(logger);
         connectionBuilder.setLogger(intLogger);
-        // TODO: always trust?
         connectionBuilder.setAlwaysTrustServerCertificate(false);
         final RestConnection connection = connectionBuilder.build();
         return connection;

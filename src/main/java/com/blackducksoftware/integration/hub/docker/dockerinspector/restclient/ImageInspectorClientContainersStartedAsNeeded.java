@@ -48,8 +48,9 @@ import com.github.dockerjava.api.model.Container;
 @Component
 public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspectorClient {
     private static final String HUB_IMAGEINSPECTOR_WS_APPNAME = "hub-imageinspector-ws";
+    private static final long CONTAINER_START_WAIT_MILLISECONDS = 2000L;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private final int MAX_CONTAINER_START_TRY_COUNT = 10;
+    private final int MAX_CONTAINER_START_TRY_COUNT = 30;
 
     @Autowired
     private Config config;
@@ -91,15 +92,17 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         String bdioFromCorrectedContainer = null;
         String serviceContainerId = null;
         String correctedContainerId = null;
+        RestConnection initialRestConnection = null;
+        RestConnection correctedRestConnection = null;
         try {
             // First, try the default inspector service (which will return either the BDIO, or a redirect)
             final String imageInspectorUrl = deriveInspectorUrl(imageInspectorServices.getDefaultImageInspectorHostPort());
             final int serviceRequestTimeoutSeconds = deriveTimeoutSeconds();
-            final RestConnection restConnection = createRestConnection(imageInspectorUrl, serviceRequestTimeoutSeconds);
+            initialRestConnection = createRestConnection(imageInspectorUrl, serviceRequestTimeoutSeconds);
             final OperatingSystemEnum inspectorOs = OperatingSystemEnum.determineOperatingSystem(config.getImageInspectorDefault());
-            serviceContainerId = ensureServiceReady(restConnection, imageInspectorUrl, inspectorOs);
+            serviceContainerId = ensureServiceReady(initialRestConnection, imageInspectorUrl, inspectorOs);
             logger.debug(String.format("Sending getBdio request to: %s", imageInspectorUrl));
-            final SimpleResponse response = restRequestor.executeGetBdioRequest(restConnection, imageInspectorUrl, containerPathToInputDockerTarfile, containerPathToOutputFileSystemFile, cleanup);
+            final SimpleResponse response = restRequestor.executeGetBdioRequest(initialRestConnection, imageInspectorUrl, containerPathToInputDockerTarfile, containerPathToOutputFileSystemFile, cleanup);
             if (response.getStatusCode() < RestConstants.MULT_CHOICE_300) {
                 final String bdio = response.getBody();
                 return bdio;
@@ -115,7 +118,7 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
             }
             final OperatingSystemEnum correctedInspectorOs = OperatingSystemEnum.determineOperatingSystem(correctImageInspectorOsName);
             final String correctedImageInspectorUrl = deriveInspectorUrl(imageInspectorServices.getImageInspectorHostPort(correctedInspectorOs));
-            final RestConnection correctedRestConnection = createRestConnection(correctedImageInspectorUrl, serviceRequestTimeoutSeconds);
+            correctedRestConnection = createRestConnection(correctedImageInspectorUrl, serviceRequestTimeoutSeconds);
 
             correctedContainerId = ensureServiceReady(correctedRestConnection, correctedImageInspectorUrl, correctedInspectorOs);
             logger.debug(String.format("Sending getBdio request to: %s", correctedImageInspectorUrl));
@@ -139,6 +142,20 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
             bdioFromCorrectedContainer = responseFromCorrectedContainer.getBody();
             return bdioFromCorrectedContainer;
         } finally {
+            if (initialRestConnection != null) {
+                try {
+                    initialRestConnection.close();
+                } catch (final Exception initialRestConnectionCloseException) {
+                    logger.warn(String.format("Error closing initial rest connection: %s", initialRestConnectionCloseException.getMessage()));
+                }
+            }
+            if (correctedRestConnection != null) {
+                try {
+                    correctedRestConnection.close();
+                } catch (final Exception correctedRestConnectionCloseException) {
+                    logger.warn(String.format("Error closing corrected rest connection: %s", correctedRestConnectionCloseException.getMessage()));
+                }
+            }
             if (config.isCleanupInspectorContainer()) {
                 if (serviceContainerId != null) {
                     dockerClientManager.stopRemoveContainer(serviceContainerId);
@@ -206,7 +223,7 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
                 containerPaths.getContainerPathToOutputDir());
         for (int tryIndex = 0; tryIndex < MAX_CONTAINER_START_TRY_COUNT && !serviceIsUp; tryIndex++) {
             try {
-                final long timeoutMilliseconds = config.getCommandTimeout();
+                final long timeoutMilliseconds = CONTAINER_START_WAIT_MILLISECONDS;
                 logger.debug(String.format("Pausing %d seconds to give service time to start up", (int) (timeoutMilliseconds / 1000L)));
                 Thread.sleep(timeoutMilliseconds);
             } catch (final InterruptedException e) {

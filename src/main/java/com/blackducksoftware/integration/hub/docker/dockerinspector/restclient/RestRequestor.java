@@ -38,10 +38,13 @@ import com.blackducksoftware.integration.rest.request.Response;
 @Component
 public class RestRequestor {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final String LOGGING_LEVEL_QUERY_PARAM = "logginglevel";
     private static final String CLEANUP_QUERY_PARAM = "cleanup";
     private static final String RESULTING_CONTAINER_FS_PATH_QUERY_PARAM = "resultingcontainerfspath";
     private static final String TARFILE_QUERY_PARAM = "tarfile";
     private static final String GETBDIO_ENDPOINT = "getbdio";
+
+    private static final String BASE_LOGGER_NAME = "com.blackducksoftware";
 
     public SimpleResponse executeGetBdioRequest(final RestConnection restConnection, final String imageInspectorUrl, final String containerPathToTarfile, final String containerPathToContainerFileSystemFile, final boolean cleanup)
             throws IntegrationException {
@@ -50,9 +53,8 @@ public class RestRequestor {
         if (StringUtils.isNotBlank(containerPathToContainerFileSystemFile)) {
             containerFileSystemQueryString = String.format("&%s=%s", RESULTING_CONTAINER_FS_PATH_QUERY_PARAM, containerPathToContainerFileSystemFile);
         }
-        // TODO pass logging level so container logs at the user-requested level
-        final String url = String.format("%s/%s?%s=%s&%s=%b%s",
-                imageInspectorUrl, GETBDIO_ENDPOINT, TARFILE_QUERY_PARAM, containerPathToTarfile, CLEANUP_QUERY_PARAM, cleanup, containerFileSystemQueryString);
+        final String url = String.format("%s/%s?%s=%s&%s=%s&%s=%b%s",
+                imageInspectorUrl, GETBDIO_ENDPOINT, LOGGING_LEVEL_QUERY_PARAM, getLoggingLevel(), TARFILE_QUERY_PARAM, containerPathToTarfile, CLEANUP_QUERY_PARAM, cleanup, containerFileSystemQueryString);
         logger.info(String.format("Doing a getBdio request on %s", url));
         final Request request = new Request.Builder(url).method(HttpMethod.GET).build();
         try (Response response = restConnection.executeRequest(request)) {
@@ -79,6 +81,19 @@ public class RestRequestor {
             logger.info(String.format("GET on %s failed: %s", url, e.getMessage()));
             throw new IntegrationException(e);
         }
+    }
+
+    private String getLoggingLevel() {
+        logger.info("Getting logging level");
+        String loggingLevel = "DEBUG";
+        try {
+            final ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) org.slf4j.LoggerFactory.getLogger(BASE_LOGGER_NAME);
+            loggingLevel = root.getLevel().toString();
+            logger.debug(String.format("Logging level: %s", loggingLevel));
+        } catch (final Exception e) {
+            logger.error(String.format("Error getting logging level: %s", e.getMessage()));
+        }
+        return loggingLevel;
     }
 
     private String getResponseBody(final Response response) throws IntegrationException {
