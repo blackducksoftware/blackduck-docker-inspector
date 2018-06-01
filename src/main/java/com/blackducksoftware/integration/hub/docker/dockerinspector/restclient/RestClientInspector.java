@@ -103,8 +103,6 @@ public class RestClientInspector implements Inspector {
                 final File userContainerFileSytemFile = new File(userOutputDir, containerFileSystemFilename);
                 logger.debug(String.format("Copying %s to %s", localPathToContainerFileSytemFile.getAbsolutePath(), userContainerFileSytemFile.getAbsolutePath()));
                 FileUtils.copyFile(localPathToContainerFileSytemFile, userContainerFileSytemFile);
-                logger.debug(String.format("Removing %s", localPathToContainerFileSytemFile.getAbsolutePath()));
-                FileUtils.forceDelete(localPathToContainerFileSytemFile);
             }
             cleanup();
             return 0;
