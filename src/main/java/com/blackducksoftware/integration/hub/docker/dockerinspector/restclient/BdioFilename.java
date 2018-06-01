@@ -56,13 +56,13 @@ public class BdioFilename {
     }
 
     private PackageManagerEnum getPkgMgrName(final String projectExternalIdMetaForgeName) throws IntegrationException {
-        if (PackageManagerEnum.APK.getOperatingSystem().name().equalsIgnoreCase(projectExternalIdMetaForgeName)) {
+        if (PackageManagerEnum.APK.getForge().getName().equalsIgnoreCase(projectExternalIdMetaForgeName)) {
             return PackageManagerEnum.APK;
         }
-        if (PackageManagerEnum.RPM.getOperatingSystem().name().equalsIgnoreCase(projectExternalIdMetaForgeName)) {
+        if (PackageManagerEnum.RPM.getForge().getName().equalsIgnoreCase(projectExternalIdMetaForgeName)) {
             return PackageManagerEnum.RPM;
         }
-        if (PackageManagerEnum.DPKG.getOperatingSystem().name().equalsIgnoreCase(projectExternalIdMetaForgeName)) {
+        if (PackageManagerEnum.DPKG.getForge().getName().equalsIgnoreCase(projectExternalIdMetaForgeName)) {
             return PackageManagerEnum.DPKG;
         }
         throw new IntegrationException(String.format("Unrecognized forge name in BDIO result: %s", projectExternalIdMetaForgeName));
