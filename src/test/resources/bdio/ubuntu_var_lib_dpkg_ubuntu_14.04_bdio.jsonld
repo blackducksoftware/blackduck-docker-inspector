@@ -6,23 +6,23 @@
       "spdx:creator": [
         "Tool: IntegrationBdio-13.0.0"
       ],
-      "spdx:created": "2018-06-01T16:48:32.422Z"
+      "spdx:created": "2018-04-29T23:56:33.821Z"
     },
-    "@id": "uuid:3f82313c-f671-4932-901d-a921d9fa32af",
+    "@id": "uuid:22ed49fa-7f85-4c47-bc0d-75df800c6911",
     "@type": "BillOfMaterials",
     "relationship": []
   },
   {
     "name": "ubuntu",
     "revision": "14.04",
-    "@id": "http:ubuntu/ubuntu/14_04",
+    "@id": "http:debian/ubuntu/14_04",
     "@type": "Project",
     "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
+      "externalSystemTypeId": "debian",
       "externalId": "ubuntu/14.04",
       "externalIdMetaData": {
         "forge": {
-          "name": "ubuntu",
+          "name": "debian",
           "separator": "/",
           "kbSeparator": "/"
         },

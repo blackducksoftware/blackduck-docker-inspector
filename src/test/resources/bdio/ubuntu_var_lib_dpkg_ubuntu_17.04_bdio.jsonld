@@ -4,25 +4,25 @@
     "spdx:name": "ubuntu_17.04_var_lib_dpkg_DPKG",
     "creationInfo": {
       "spdx:creator": [
-        "Tool: IntegrationBdio-14.0.0"
+        "Tool: IntegrationBdio-13.0.0"
       ],
-      "spdx:created": "2018-05-31T21:19:27.121Z"
+      "spdx:created": "2018-04-26T22:13:14.151Z"
     },
-    "@id": "uuid:1c5a1cd2-cb17-4797-95f0-c85011aaf52d",
+    "@id": "uuid:b2311c76-7416-4fc4-9610-7a3a38cd8b76",
     "@type": "BillOfMaterials",
     "relationship": []
   },
   {
     "name": "ubuntu",
     "revision": "17.04",
-    "@id": "http:ubuntu/ubuntu/17_04",
+    "@id": "http:debian/ubuntu/17_04",
     "@type": "Project",
     "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
+      "externalSystemTypeId": "debian",
       "externalId": "ubuntu/17.04",
       "externalIdMetaData": {
         "forge": {
-          "name": "ubuntu",
+          "name": "debian",
           "separator": "/",
           "kbSeparator": "/"
         },

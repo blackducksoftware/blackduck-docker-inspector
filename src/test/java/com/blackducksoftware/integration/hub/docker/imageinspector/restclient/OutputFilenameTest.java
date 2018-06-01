@@ -23,7 +23,7 @@ public class OutputFilenameTest {
 
     @Test
     public void testUbuntu() throws IntegrationException {
-        final BdioFilename outputFilename = new BdioFilename("ubuntu_latest_var_lib_dpkg_DPKG", "ubuntu", "latest", "ubuntu");
+        final BdioFilename outputFilename = new BdioFilename("ubuntu_latest_var_lib_dpkg_DPKG", "ubuntu", "latest", "debian");
         assertEquals("ubuntu_var_lib_dpkg_ubuntu_latest_bdio.jsonld", outputFilename.getBdioFilename());
     }
 }
