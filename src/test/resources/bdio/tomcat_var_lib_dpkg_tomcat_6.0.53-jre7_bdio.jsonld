@@ -4,25 +4,25 @@
     "spdx:name": "tomcat_6.0.53-jre7_var_lib_dpkg_DPKG",
     "creationInfo": {
       "spdx:creator": [
-        "Tool: IntegrationBdio-13.0.0"
+        "Tool: IntegrationBdio-14.0.0"
       ],
-      "spdx:created": "2018-04-26T22:13:14.151Z"
+      "spdx:created": "2018-06-01T16:25:24.958Z"
     },
-    "@id": "uuid:1278893f-25c7-47aa-b604-8334b8af2d9f",
+    "@id": "uuid:c3a45538-4b04-4875-a963-2aacaa638381",
     "@type": "BillOfMaterials",
     "relationship": []
   },
   {
     "name": "tomcat",
     "revision": "6.0.53-jre7",
-    "@id": "http:debian/tomcat/6_0_53_jre7",
+    "@id": "http:ubuntu/tomcat/6_0_53_jre7",
     "@type": "Project",
     "externalIdentifier": {
-      "externalSystemTypeId": "debian",
+      "externalSystemTypeId": "ubuntu",
       "externalId": "tomcat/6.0.53-jre7",
       "externalIdMetaData": {
         "forge": {
-          "name": "debian",
+          "name": "ubuntu",
           "separator": "/",
           "kbSeparator": "/"
         },

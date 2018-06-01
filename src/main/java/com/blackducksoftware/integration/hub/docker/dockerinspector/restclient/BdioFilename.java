@@ -56,7 +56,6 @@ public class BdioFilename {
     }
 
     private PackageManagerEnum getPkgMgrName(final String projectExternalIdMetaForgeName) throws IntegrationException {
-        // TODO this capability belongs in PackageManagerEnum
         if (PackageManagerEnum.APK.getOperatingSystem().name().equalsIgnoreCase(projectExternalIdMetaForgeName)) {
             return PackageManagerEnum.APK;
         }
@@ -68,5 +67,4 @@ public class BdioFilename {
         }
         throw new IntegrationException(String.format("Unrecognized forge name in BDIO result: %s", projectExternalIdMetaForgeName));
     }
-
 }

@@ -187,6 +187,7 @@ public class DockerClientManager {
 
         final String containerId = prepareContainerForExec(dockerClient, imageNameTag, extractorContainerName, hubSecrets.getPassword(), hubSecrets.getApiToken());
         setPropertiesInSubContainer(dockerClient, containerId, tarFilePathInSubContainer, tarFileDirInSubContainer, dockerTarFile, targetImage, targetImageRepo, targetImageTag);
+        copyFileToContainer(dockerClient, containerId, dockerTarFile.getAbsolutePath(), tarFileDirInSubContainer);
         if (copyJar) {
             copyFileToContainer(dockerClient, containerId, programPaths.getHubDockerJarPathHost(), programPaths.getHubDockerPgmDirPathContainer());
         }
@@ -222,10 +223,7 @@ public class DockerClientManager {
         final Map<String, String> labels = new HashMap<>(1);
         labels.put(CONTAINER_APPNAME_LABEL_KEY, IMAGEINSPECTOR_APP_NAME_LABEL_VALUE);
         labels.put(CONTAINER_OS_LABEL_KEY, imageInspectorOsName);
-
-        // TODO OLD: logger.debug(String.format("Binding host %s to container %s", programPaths.getHubDockerOutputPathHost(), programPaths.getHubDockerOutputPathContainer()));
         final Bind bind = createBindMount(config.getSharedDirPathLocal(), config.getSharedDirPathImageInspector());
-
         final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageId).withName(containerName).withBinds(bind).withLabels(labels).withCmd(cmd.split(" "));
         final ExposedPort exposedPort = new ExposedPort(containerPort);
         createContainerCmd.withExposedPorts(exposedPort);
@@ -396,9 +394,6 @@ public class DockerClientManager {
 
         logger.trace(String.format("Docker image tar file: %s", dockerTarFile.getAbsolutePath()));
         logger.trace(String.format("Docker image tar file path in sub-container: %s", tarFilePathInSubContainer));
-        // TODO This operation should not be in a method with this name
-        // TODO Might make sense to move it next to the other call to copyFileToContainer() (that copies the jar file)
-        copyFileToContainer(dockerClient, containerId, dockerTarFile.getAbsolutePath(), tarFileDirInSubContainer);
     }
 
     private String prepareContainerForExec(final DockerClient dockerClient, final String imageId, final String extractorContainerName, final String hubPassword, final String hubApiToken) {
@@ -406,22 +401,10 @@ public class DockerClientManager {
         logger.debug(String.format("Creating container %s from image %s", extractorContainerName, imageId));
         final Bind bind = createBindMount(programPaths.getHubDockerOutputPathHost(), programPaths.getHubDockerOutputPathContainer());
         final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageId).withStdinOpen(true).withTty(true).withName(extractorContainerName).withBinds(bind).withCmd("/bin/bash");
-
-        // TODO remove env var stuff
-        final List<String> envAssignments = new ArrayList<>();
-        envAssignments.add(String.format("BD_HUB_PASSWORD=%s", hubPassword));
-        envAssignments.add(String.format("BD_HUB_TOKEN=%s", hubApiToken));
-        if (StringUtils.isBlank(config.getHubProxyHost()) && !StringUtils.isBlank(config.getScanCliOptsEnvVar())) {
-            envAssignments.add(String.format("SCAN_CLI_OPTS=%s", config.getScanCliOptsEnvVar()));
-        }
-        createContainerCmd.withEnv(envAssignments);
-        ///////////////
         final CreateContainerResponse containerResponse = createContainerCmd.exec();
         final String containerId = containerResponse.getId();
-
         dockerClient.startContainerCmd(containerId).exec();
         logger.info(String.format("Started container %s from image %s", containerId, imageId));
-
         return containerId;
     }
 
