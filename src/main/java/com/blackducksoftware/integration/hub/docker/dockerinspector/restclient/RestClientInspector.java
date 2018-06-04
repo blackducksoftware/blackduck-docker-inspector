@@ -42,6 +42,7 @@ import com.blackducksoftware.integration.hub.bdio.BdioReader;
 import com.blackducksoftware.integration.hub.bdio.model.SimpleBdioDocument;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.common.DockerTarfile;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Inspector;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Output;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.imageinspector.lib.DissectedImage;
@@ -68,6 +69,9 @@ public class RestClientInspector implements Inspector {
     @Autowired
     private ContainerPaths containerPaths;
 
+    @Autowired
+    private Output output;
+
     @Override
     public boolean isApplicable() {
         if (config.isImageInspectorServiceStart() || StringUtils.isNotBlank(config.getImageInspectorUrl())) {
@@ -80,6 +84,7 @@ public class RestClientInspector implements Inspector {
     public int getBdio(final DissectedImage dissectedImage) throws IntegrationException {
         final ImageInspectorClient imageInspectorClient = chooseImageInspectorClient();
         try {
+            output.ensureWriteability();
             final File origDockerTarFile = dockerTarfile.deriveDockerTarFile();
             final File finalDockerTarfile = prepareDockerTarfile(origDockerTarFile);
             final String containerFileSystemFilename = Names.getContainerFileSystemTarFilename(config.getDockerImage(), config.getDockerTar());
@@ -92,15 +97,13 @@ public class RestClientInspector implements Inspector {
                 final File userOutputDir = new File(config.getOutputPath());
                 final String outputBdioFilename = deriveOutputBdioFilename(bdioString);
                 final File outputBdioFile = new File(userOutputDir, outputBdioFilename);
+                logger.info("Writing contents of container output dir to user output dir");
+                output.provideOutput();
+
                 logger.info(String.format("Writing BDIO to %s", outputBdioFile.getAbsolutePath()));
+                // TODO Look at Output.writeBdioFile() and ImageInspector.writeBdioFile() method.
+                // Think about this code and those methods, and come up with a consistent approach
                 FileUtils.write(outputBdioFile, bdioString, StandardCharsets.UTF_8);
-                final File localPathToContainerOutputDir = new File(programPaths.getHubDockerOutputPathHost());
-                logger.debug(String.format("localPathToContainerOutputDir: %s", localPathToContainerOutputDir.getAbsolutePath()));
-                logger.debug(String.format("containerFileSystemFilename: %s", containerFileSystemFilename));
-                final File localPathToContainerFileSytemFile = new File(localPathToContainerOutputDir, containerFileSystemFilename);
-                final File userContainerFileSytemFile = new File(userOutputDir, containerFileSystemFilename);
-                logger.debug(String.format("Copying %s to %s", localPathToContainerFileSytemFile.getAbsolutePath(), userContainerFileSytemFile.getAbsolutePath()));
-                FileUtils.copyFile(localPathToContainerFileSytemFile, userContainerFileSytemFile);
             }
             cleanup();
             return 0;
