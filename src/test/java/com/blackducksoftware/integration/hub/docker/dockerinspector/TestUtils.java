@@ -107,10 +107,10 @@ public class TestUtils {
             throw new InterruptedException(String.format("Command '%s' timed out", cmd));
         }
         if (logStdout) {
-            System.out.println(String.format("%s: stdout: %s", cmd, stdoutString));
+            System.out.println(String.format("%s: stdout: '%s'", cmd, stdoutString));
         }
         if (StringUtils.isNotBlank(stdoutString)) {
-            System.out.println(String.format("%s: stderr: %s", cmd, stderrString));
+            System.out.println(String.format("%s: stderr: '%s'", cmd, stderrString));
         }
         final int retCode = p.exitValue();
         if (retCode != 0) {

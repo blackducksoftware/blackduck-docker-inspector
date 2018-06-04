@@ -28,7 +28,7 @@ public class CmdExecutor {
         final int retCode = p.exitValue();
         if (retCode != 0) {
             final String stderr = toString(p.getErrorStream());
-            System.out.println(String.format("%s: stderr: %s", cmd, stderr));
+            System.out.println(String.format("%s: stderr: '%s'", cmd, stderr));
             throw new IntegrationException(String.format("Command failed: %s", stderr));
         }
         return toString(p.getInputStream());
