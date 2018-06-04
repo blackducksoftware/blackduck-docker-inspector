@@ -87,8 +87,6 @@ public class RestClientInspector implements Inspector {
             final String dockerTarFilePathInContainer = containerPaths.getContainerPathToTargetFile(finalDockerTarfile.getCanonicalPath());
             final String containerFileSystemPathInContainer = containerPaths.getContainerPathToOutputFile(containerFileSystemFilename);
             logger.debug(String.format("Derived container docker tar file path: %s", dockerTarFilePathInContainer));
-            logger.debug(String.format("HubDockerWorkingDirPathHost: %s", programPaths.getHubDockerWorkingDirPathHost()));
-            logger.debug(String.format("HubDockerWorkingDirPathContainer: %s", programPaths.getHubDockerWorkingDirPathContainer()));
             final String bdioString = imageInspectorClient.getBdio(finalDockerTarfile.getCanonicalPath(), dockerTarFilePathInContainer, containerFileSystemPathInContainer, config.isCleanupWorkingDir());
             if (StringUtils.isNotBlank(config.getOutputPath())) {
                 final File userOutputDir = new File(config.getOutputPath());
