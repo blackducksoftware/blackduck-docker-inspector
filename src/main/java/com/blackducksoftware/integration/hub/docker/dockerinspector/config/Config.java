@@ -190,15 +190,15 @@ public class Config {
     @Value("${upload.bdio:true}")
     private Boolean uploadBdio = Boolean.TRUE;
 
-    @ValueDescription(description = "Repository name for the Hub Docker Inspector images", defaultValue = "blackducksoftware", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Repository name for the Hub Docker Inspector images", defaultValue = "blackducksoftware", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${inspector.repository:blackducksoftware}")
     private String inspectorRepository = "blackducksoftware";
 
-    @ValueDescription(description = "Hub Docker Inspector image \"family\"", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Hub Docker Inspector image \"family\"", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${inspector.image.family:}")
     private String inspectorImageFamily = "";
 
-    @ValueDescription(description = "Hub Docker Inspector image version", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Hub Docker Inspector image version", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${inspector.image.version:}")
     private String inspectorImageVersion = "";
 
