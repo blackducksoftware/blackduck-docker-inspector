@@ -162,11 +162,11 @@ public class Config {
     @Value("${docker.image.id:}")
     private String dockerImageId = "";
 
-    @ValueDescription(description = "Docker Image Repo", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
+    @ValueDescription(description = "Docker Image Repo; Use with docker.image.tag to select one image from a tarfile", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${docker.image.repo:}")
     private String dockerImageRepo = "";
 
-    @ValueDescription(description = "Docker Image Tag", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
+    @ValueDescription(description = "Docker Image Tag; Use with docker.image.repo to select one image from a tarfile", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${docker.image.tag:}")
     private String dockerImageTag = "";
 
