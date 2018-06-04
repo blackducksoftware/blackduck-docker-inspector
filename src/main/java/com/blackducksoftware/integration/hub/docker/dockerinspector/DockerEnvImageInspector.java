@@ -141,7 +141,7 @@ public class DockerEnvImageInspector {
     }
 
     private void logMsgAboutRestClientMode() {
-        if (!config.isImageInspectorServiceStart() && StringUtils.isBlank(config.getImageInspectorUrl())) {
+        if (config.isOnHost() && !config.isImageInspectorServiceStart() && StringUtils.isBlank(config.getImageInspectorUrl())) {
             final StringBuilder sb = new StringBuilder();
             sb.append("\n========\n");
             sb.append("Please start using 'REST client mode' (see the Docker Inspector Rest Client Mode page in the Hub Docker Inspector documentation)\n");
