@@ -80,7 +80,8 @@ public class RestClientInspector implements Inspector {
         return false;
     }
 
-    // TODO This class does not use DissectedImage; re-think the i/f
+    // TODO It's totally stupid that this method takes DissectedImage, but this will
+    // get resolved when DockerExecInspector is retired/removed
     @Override
     public int getBdio(final DissectedImage dissectedImage) throws IntegrationException {
         final ImageInspectorClient imageInspectorClient = chooseImageInspectorClient();
