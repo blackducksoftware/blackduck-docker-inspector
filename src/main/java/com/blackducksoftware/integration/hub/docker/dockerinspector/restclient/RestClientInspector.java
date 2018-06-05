@@ -80,6 +80,7 @@ public class RestClientInspector implements Inspector {
         return false;
     }
 
+    // TODO This class does not use DissectedImage; re-think the i/f
     @Override
     public int getBdio(final DissectedImage dissectedImage) throws IntegrationException {
         final ImageInspectorClient imageInspectorClient = chooseImageInspectorClient();
