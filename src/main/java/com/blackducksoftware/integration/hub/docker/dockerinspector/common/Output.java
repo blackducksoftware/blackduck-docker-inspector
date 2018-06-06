@@ -26,6 +26,7 @@ package com.blackducksoftware.integration.hub.docker.dockerinspector.common;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -33,6 +34,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import org.apache.commons.compress.compressors.CompressorException;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,12 +76,6 @@ public class Output {
     @Autowired
     private ResultFile resultFile;
 
-    public void provideOutput() throws IOException {
-        if (config.isOnHost()) {
-            copyOutputToUserOutputDir();
-        }
-    }
-
     public void ensureWriteability() {
         if (config.isOnHost()) {
             final File outputDir = new File(programPaths.getHubDockerOutputPathHost());
@@ -86,6 +83,23 @@ public class Output {
             final boolean dirMadeWriteable = outputDir.setWritable(true, false);
             final boolean dirMadeExecutable = outputDir.setExecutable(true, false);
             logger.debug(String.format("Output dir: %s; created: %b; successfully made writeable: %b; make executable: %b", outputDir.getAbsolutePath(), dirCreated, dirMadeWriteable, dirMadeExecutable));
+        }
+    }
+
+    public void provideOutput() throws IOException {
+        if (config.isOnHost()) {
+            copyOutputToUserOutputDir();
+        }
+    }
+
+    public void provideBdioFileOutput(final String bdioString, final String outputBdioFilename) throws IOException, IntegrationException {
+        if (StringUtils.isNotBlank(config.getOutputPath())) {
+            logger.info("Writing contents of container output dir to user output dir");
+            provideOutput();
+            final File userOutputDir = new File(config.getOutputPath());
+            final File outputBdioFile = new File(userOutputDir, outputBdioFilename);
+            logger.info(String.format("Writing BDIO to %s", outputBdioFile.getAbsolutePath()));
+            FileUtils.write(outputBdioFile, bdioString, StandardCharsets.UTF_8);
         }
     }
 

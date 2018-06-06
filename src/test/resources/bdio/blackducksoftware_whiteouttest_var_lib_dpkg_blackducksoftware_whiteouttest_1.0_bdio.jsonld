@@ -4,11 +4,11 @@
     "spdx:name": "blackducksoftware_whiteouttest_1.0_var_lib_dpkg_DPKG",
     "creationInfo": {
       "spdx:creator": [
-        "Tool: IntegrationBdio-13.0.0"
+        "Tool: IntegrationBdio-14.0.0"
       ],
-      "spdx:created": "2018-05-17T12:23:11.068Z"
+      "spdx:created": "2018-06-05T22:32:24.424Z"
     },
-    "@id": "uuid:f3be86d9-e9d6-453c-9d5c-5278c30bc902",
+    "@id": "uuid:36e3aa51-fe1d-4476-a36b-74116630a55a",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -45,10 +45,6 @@
       },
       {
         "related": "http:ubuntu/libtasn1_6/4_7_3ubuntu0_16_04_3/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:debian/procps/2_3_3_10_4ubuntu2_3/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -148,6 +144,10 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:debian/procps/2_3_3_10_4ubuntu2_4/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:debian/multiarch_support/2_23_0ubuntu10/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -164,7 +164,7 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/libprocps4/2_3_3_10_4ubuntu2_3/amd64",
+        "related": "http:ubuntu/libprocps4/2_3_3_10_4ubuntu2_4/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -632,15 +632,15 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/procps/2_3_3_10_4ubuntu2_3/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:debian/libcap2_bin/1_2_24_12/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
         "related": "http:ubuntu/libpam0g/1_1_8_3_2ubuntu2_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:ubuntu/procps/2_3_3_10_4ubuntu2_4/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -740,11 +740,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/libprocps4/2_3_3_10_4ubuntu2_3/amd64",
+        "related": "http:debian/passwd/1_4_2_3_1ubuntu5_3/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/passwd/1_4_2_3_1ubuntu5_3/amd64",
+        "related": "http:debian/libprocps4/2_3_3_10_4ubuntu2_4/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1144,27 +1144,6 @@
         },
         "name": "libtasn1-6",
         "version": "4.7-3ubuntu0.16.04.3",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "procps",
-    "revision": "2:3.3.10-4ubuntu2.3",
-    "@id": "http:debian/procps/2_3_3_10_4ubuntu2_3/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "procps/2:3.3.10-4ubuntu2.3/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "debian",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "procps",
-        "version": "2:3.3.10-4ubuntu2.3",
         "architecture": "amd64"
       }
     },
@@ -1675,6 +1654,27 @@
     "relationship": []
   },
   {
+    "name": "procps",
+    "revision": "2:3.3.10-4ubuntu2.4",
+    "@id": "http:debian/procps/2_3_3_10_4ubuntu2_4/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "procps/2:3.3.10-4ubuntu2.4/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "procps",
+        "version": "2:3.3.10-4ubuntu2.4",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "multiarch-support",
     "revision": "2.23-0ubuntu10",
     "@id": "http:debian/multiarch_support/2_23_0ubuntu10/amd64",
@@ -1760,12 +1760,12 @@
   },
   {
     "name": "libprocps4",
-    "revision": "2:3.3.10-4ubuntu2.3",
-    "@id": "http:ubuntu/libprocps4/2_3_3_10_4ubuntu2_3/amd64",
+    "revision": "2:3.3.10-4ubuntu2.4",
+    "@id": "http:ubuntu/libprocps4/2_3_3_10_4ubuntu2_4/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "libprocps4/2:3.3.10-4ubuntu2.3/amd64",
+      "externalId": "libprocps4/2:3.3.10-4ubuntu2.4/amd64",
       "externalIdMetaData": {
         "forge": {
           "name": "ubuntu",
@@ -1773,7 +1773,7 @@
           "kbSeparator": "/"
         },
         "name": "libprocps4",
-        "version": "2:3.3.10-4ubuntu2.3",
+        "version": "2:3.3.10-4ubuntu2.4",
         "architecture": "amd64"
       }
     },
@@ -4216,27 +4216,6 @@
     "relationship": []
   },
   {
-    "name": "procps",
-    "revision": "2:3.3.10-4ubuntu2.3",
-    "@id": "http:ubuntu/procps/2_3_3_10_4ubuntu2_3/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "procps/2:3.3.10-4ubuntu2.3/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "ubuntu",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "procps",
-        "version": "2:3.3.10-4ubuntu2.3",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "libcap2-bin",
     "revision": "1:2.24-12",
     "@id": "http:debian/libcap2_bin/1_2_24_12/amd64",
@@ -4273,6 +4252,27 @@
         },
         "name": "libpam0g",
         "version": "1.1.8-3.2ubuntu2.1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "procps",
+    "revision": "2:3.3.10-4ubuntu2.4",
+    "@id": "http:ubuntu/procps/2_3_3_10_4ubuntu2_4/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "procps/2:3.3.10-4ubuntu2.4/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "procps",
+        "version": "2:3.3.10-4ubuntu2.4",
         "architecture": "amd64"
       }
     },
@@ -4783,27 +4783,6 @@
     "relationship": []
   },
   {
-    "name": "libprocps4",
-    "revision": "2:3.3.10-4ubuntu2.3",
-    "@id": "http:debian/libprocps4/2_3_3_10_4ubuntu2_3/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libprocps4/2:3.3.10-4ubuntu2.3/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "debian",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "libprocps4",
-        "version": "2:3.3.10-4ubuntu2.3",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "passwd",
     "revision": "1:4.2-3.1ubuntu5.3",
     "@id": "http:debian/passwd/1_4_2_3_1ubuntu5_3/amd64",
@@ -4819,6 +4798,27 @@
         },
         "name": "passwd",
         "version": "1:4.2-3.1ubuntu5.3",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libprocps4",
+    "revision": "2:3.3.10-4ubuntu2.4",
+    "@id": "http:debian/libprocps4/2_3_3_10_4ubuntu2_4/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libprocps4/2:3.3.10-4ubuntu2.4/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libprocps4",
+        "version": "2:3.3.10-4ubuntu2.4",
         "architecture": "amd64"
       }
     },

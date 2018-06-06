@@ -26,6 +26,7 @@ package com.blackducksoftware.integration.hub.docker.dockerinspector.restclient;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +40,7 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Progr
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.DockerClientManager;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.HubDockerClient;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.response.SimpleResponse;
+import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.blackducksoftware.integration.hub.imageinspector.lib.OperatingSystemEnum;
 import com.blackducksoftware.integration.rest.RestConstants;
 import com.blackducksoftware.integration.rest.connection.RestConnection;
@@ -89,83 +91,71 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
     @Override
     public String getBdio(final String hostPathToTarfile, final String containerPathToInputDockerTarfile, final String containerPathToOutputFileSystemFile, final boolean cleanup) throws IntegrationException {
         logger.debug(String.format("getBdio(): containerPathToTarfile: %s", containerPathToInputDockerTarfile));
-        String bdioFromCorrectedContainer = null;
-        String serviceContainerId = null;
-        String correctedContainerId = null;
-        RestConnection initialRestConnection = null;
-        RestConnection correctedRestConnection = null;
-        try {
-            // First, try the default inspector service (which will return either the BDIO, or a redirect)
-            final String imageInspectorUrl = deriveInspectorUrl(imageInspectorServices.getDefaultImageInspectorHostPort());
-            final int serviceRequestTimeoutSeconds = deriveTimeoutSeconds();
-            initialRestConnection = createRestConnection(imageInspectorUrl, serviceRequestTimeoutSeconds);
-            final OperatingSystemEnum inspectorOs = OperatingSystemEnum.determineOperatingSystem(config.getImageInspectorDefault());
-            serviceContainerId = ensureServiceReady(initialRestConnection, imageInspectorUrl, inspectorOs);
-            logger.debug(String.format("Sending getBdio request to: %s", imageInspectorUrl));
-            final SimpleResponse response = restRequestor.executeGetBdioRequest(initialRestConnection, imageInspectorUrl, containerPathToInputDockerTarfile, containerPathToOutputFileSystemFile, cleanup);
-            if (response.getStatusCode() < RestConstants.MULT_CHOICE_300) {
-                final String bdio = response.getBody();
-                return bdio;
-            }
 
-            // Handle redirect, starting container if it's not running
-            logger.debug(String.format("Response StatusCode: %d", response.getStatusCode()));
-            final String correctImageInspectorOsName = response.getBody().trim();
-            logger.debug(String.format("correctImageInspectorOs: %s", correctImageInspectorOsName));
+        // First, try the default inspector service (which will return either the BDIO, or a redirect)
+        final OperatingSystemEnum inspectorOs = OperatingSystemEnum.determineOperatingSystem(config.getImageInspectorDefault());
+        final String imageInspectorUrl = deriveInspectorUrl(imageInspectorServices.getDefaultImageInspectorHostPort());
+        final SimpleResponse response = getResponse(imageInspectorUrl, inspectorOs, containerPathToInputDockerTarfile, containerPathToOutputFileSystemFile, cleanup,
+                statusCode -> statusCode != RestConstants.OK_200 && statusCode != RestConstants.MOVED_TEMP_302 && statusCode != RestConstants.MOVED_PERM_301);
+        if (response.getStatusCode() == RestConstants.OK_200) {
+            return response.getBody();
+        }
+        final String correctImageInspectorOsName = response.getBody().trim();
+        logger.debug(String.format("correctImageInspectorOs: %s", correctImageInspectorOsName));
+
+        // Handle redirect
+        final OperatingSystemEnum correctedInspectorOs = OperatingSystemEnum.determineOperatingSystem(correctImageInspectorOsName);
+        final String correctedImageInspectorUrl = deriveInspectorUrl(imageInspectorServices.getImageInspectorHostPort(correctedInspectorOs));
+        final SimpleResponse responseFromCorrectedContainer = getResponse(correctedImageInspectorUrl, correctedInspectorOs, containerPathToInputDockerTarfile, containerPathToOutputFileSystemFile, cleanup,
+                statusCode -> statusCode != RestConstants.OK_200);
+        return responseFromCorrectedContainer.getBody();
+    }
+
+    private SimpleResponse getResponse(final String imageInspectorUrl, final OperatingSystemEnum inspectorOs, final String containerPathToInputDockerTarfile,
+            final String containerPathToOutputFileSystemFile, final boolean cleanup, final Predicate<Integer> failureTest) throws IntegrationException, HubIntegrationException {
+        SimpleResponse response = null;
+        String serviceContainerId = null;
+        RestConnection restConnection = null;
+        try {
+            restConnection = createRestConnection(imageInspectorUrl, deriveTimeoutSeconds());
+            serviceContainerId = ensureServiceReady(restConnection, imageInspectorUrl, inspectorOs);
+            logger.debug(String.format("Sending getBdio request to: %s", imageInspectorUrl));
+            try {
+                response = restRequestor.executeGetBdioRequest(restConnection, imageInspectorUrl, containerPathToInputDockerTarfile, containerPathToOutputFileSystemFile, cleanup);
+            } catch (final IntegrationException e) {
+                logServiceError(serviceContainerId);
+                throw e;
+            }
+            final int statusCode = response.getStatusCode();
+            logger.debug(String.format("Response StatusCode: %d", statusCode));
             final Map<String, String> headers = response.getHeaders();
             for (final String key : headers.keySet()) {
                 logger.debug(String.format("Header: %s=%s", key, headers.get(key)));
             }
-            final OperatingSystemEnum correctedInspectorOs = OperatingSystemEnum.determineOperatingSystem(correctImageInspectorOsName);
-            final String correctedImageInspectorUrl = deriveInspectorUrl(imageInspectorServices.getImageInspectorHostPort(correctedInspectorOs));
-            correctedRestConnection = createRestConnection(correctedImageInspectorUrl, serviceRequestTimeoutSeconds);
-
-            correctedContainerId = ensureServiceReady(correctedRestConnection, correctedImageInspectorUrl, correctedInspectorOs);
-            logger.debug(String.format("Sending getBdio request to: %s", correctedImageInspectorUrl));
-            SimpleResponse responseFromCorrectedContainer = null;
-            try {
-                responseFromCorrectedContainer = restRequestor.executeGetBdioRequest(correctedRestConnection, correctedImageInspectorUrl, containerPathToInputDockerTarfile, containerPathToOutputFileSystemFile, cleanup);
-            } catch (final IntegrationException e) {
-                logServiceError(correctedContainerId);
-                throw e;
-            }
-            final int statusCode = responseFromCorrectedContainer.getStatusCode();
-            if (statusCode != RestConstants.OK_200) {
-                logServiceError(correctedContainerId);
-                final String warningHeaderValue = responseFromCorrectedContainer.getWarningHeaderValue();
-                final String responseBody = responseFromCorrectedContainer.getBody();
+            logger.debug(String.format("If you want the log from the image inspector service, execute this command: docker logs %s", serviceContainerId));
+            if (failureTest.test(statusCode)) {
+                logServiceError(serviceContainerId);
+                final String warningHeaderValue = response.getWarningHeaderValue();
+                final String responseBody = response.getBody();
                 throw new IntegrationRestException(statusCode, warningHeaderValue,
                         String.format("There was a problem trying to getBdio. Error: %d; Warning header: '%s'; Body: '%s'", statusCode, warningHeaderValue,
                                 responseBody));
             }
-            logger.debug(String.format("If you want the log from the image inspector service, execute this command: docker logs %s", correctedContainerId));
-            bdioFromCorrectedContainer = responseFromCorrectedContainer.getBody();
-            return bdioFromCorrectedContainer;
         } finally {
-            if (initialRestConnection != null) {
+            if (restConnection != null) {
                 try {
-                    initialRestConnection.close();
+                    restConnection.close();
                 } catch (final Exception initialRestConnectionCloseException) {
                     logger.warn(String.format("Error closing initial rest connection: %s", initialRestConnectionCloseException.getMessage()));
-                }
-            }
-            if (correctedRestConnection != null) {
-                try {
-                    correctedRestConnection.close();
-                } catch (final Exception correctedRestConnectionCloseException) {
-                    logger.warn(String.format("Error closing corrected rest connection: %s", correctedRestConnectionCloseException.getMessage()));
                 }
             }
             if (config.isCleanupInspectorContainer()) {
                 if (serviceContainerId != null) {
                     dockerClientManager.stopRemoveContainer(serviceContainerId);
                 }
-                if (correctedContainerId != null) {
-                    dockerClientManager.stopRemoveContainer(correctedContainerId);
-                }
             }
         }
-
+        return response;
     }
 
     private void logServiceError(final String correctedContainerId) {
@@ -204,8 +194,7 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
             final Container container = dockerClientManager.getRunningContainerByAppName(hubDockerClient.getDockerClient(), HUB_IMAGEINSPECTOR_WS_APPNAME, imageInspectorServices.getDefaultImageInspectorOs());
             return container.getId();
         }
-
-        // Need to fire up container
+        // Need to spin up container
         final String imageInspectorRepo;
         final String imageInspectorTag;
         try {
@@ -221,6 +210,15 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         final String containerName = programPaths.deriveContainerName(imageInspectorRepo);
         final String containerId = dockerClientManager.startContainerAsService(imageId, containerName, inspectorOs, containerPort, hostPort,
                 containerPaths.getContainerPathToOutputDir());
+        serviceIsUp = startService(restConnection, imageInspectorUrl, imageInspectorRepo, imageInspectorTag);
+        if (!serviceIsUp) {
+            throw new IntegrationException(String.format("Tried to start image imspector container %s:%s, but service %s never came online", imageInspectorRepo, imageInspectorTag, imageInspectorUrl));
+        }
+        return containerId;
+    }
+
+    private boolean startService(final RestConnection restConnection, final String imageInspectorUrl, final String imageInspectorRepo, final String imageInspectorTag) throws IntegrationException {
+        boolean serviceIsUp = false;
         for (int tryIndex = 0; tryIndex < MAX_CONTAINER_START_TRY_COUNT && !serviceIsUp; tryIndex++) {
             try {
                 final long timeoutMilliseconds = CONTAINER_START_WAIT_MILLISECONDS;
@@ -232,10 +230,7 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
             logger.debug(String.format("Checking service %s to see if it is up; attempt %d of %d", imageInspectorUrl, tryIndex + 1, MAX_CONTAINER_START_TRY_COUNT));
             serviceIsUp = checkServiceHealth(restConnection, imageInspectorUrl);
         }
-        if (!serviceIsUp) {
-            throw new IntegrationException(String.format("Tried to start image imspector container %s:%s, but service %s never came online", imageInspectorRepo, imageInspectorTag, imageInspectorUrl));
-        }
-        return containerId;
+        return serviceIsUp;
     }
 
     private boolean checkServiceHealth(final RestConnection restConnection, final String imageInspectorUrl) throws IntegrationException {

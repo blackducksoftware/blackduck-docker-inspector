@@ -27,7 +27,6 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -80,8 +79,8 @@ public class RestClientInspector implements Inspector {
         return false;
     }
 
-    // TODO It's totally stupid that this method takes DissectedImage, but this will
-    // get resolved when DockerExecInspector is retired/removed
+    // TODO This implementation doesn't use DissectedImage, but that will
+    // get resolved when DockerExecInspector (and the Inspector interface) are retired/removed
     @Override
     public int getBdio(final DissectedImage dissectedImage) throws IntegrationException {
         final ImageInspectorClient imageInspectorClient = chooseImageInspectorClient();
@@ -95,18 +94,7 @@ public class RestClientInspector implements Inspector {
             final String containerFileSystemPathInContainer = containerPaths.getContainerPathToOutputFile(containerFileSystemFilename);
             logger.debug(String.format("Derived container docker tar file path: %s", dockerTarFilePathInContainer));
             final String bdioString = imageInspectorClient.getBdio(finalDockerTarfile.getCanonicalPath(), dockerTarFilePathInContainer, containerFileSystemPathInContainer, config.isCleanupWorkingDir());
-            if (StringUtils.isNotBlank(config.getOutputPath())) {
-                final File userOutputDir = new File(config.getOutputPath());
-                final String outputBdioFilename = deriveOutputBdioFilename(bdioString);
-                final File outputBdioFile = new File(userOutputDir, outputBdioFilename);
-                logger.info("Writing contents of container output dir to user output dir");
-                output.provideOutput();
-
-                logger.info(String.format("Writing BDIO to %s", outputBdioFile.getAbsolutePath()));
-                // TODO Look at Output.writeBdioFile() and ImageInspector.writeBdioFile() method.
-                // Think about this code and those methods, and come up with a consistent approach
-                FileUtils.write(outputBdioFile, bdioString, StandardCharsets.UTF_8);
-            }
+            output.provideBdioFileOutput(bdioString, deriveOutputBdioFilename(bdioString));
             cleanup();
             return 0;
         } catch (final IOException e) {
