@@ -77,7 +77,6 @@ public class InspectorImages {
     }
 
     OperatingSystemEnum getInspectorImageOs(final OperatingSystemEnum targetImageOs) throws IOException {
-        logger.debug(String.format("getInspectorImageOs(%s)", targetImageOs));
         final InspectorImage image = inspectorImageMap.get(targetImageOs);
         if (image == null) {
             return null;
@@ -86,7 +85,6 @@ public class InspectorImages {
     }
 
     public String getInspectorImageName(final OperatingSystemEnum targetImageOs) throws IOException {
-        logger.debug(String.format("getInspectorImageName(%s)", targetImageOs));
         final InspectorImage image = inspectorImageMap.get(targetImageOs);
         if (image == null) {
             return null;
@@ -95,8 +93,6 @@ public class InspectorImages {
     }
 
     public String getInspectorImageTag(final OperatingSystemEnum targetImageOs) throws IOException {
-        logger.debug(String.format("getInspectorImageTag(%s)", targetImageOs));
-        logger.info(String.format("getInspectorImageTag(%s)", targetImageOs));
         final InspectorImage image = inspectorImageMap.get(targetImageOs);
         if (image == null) {
             return null;

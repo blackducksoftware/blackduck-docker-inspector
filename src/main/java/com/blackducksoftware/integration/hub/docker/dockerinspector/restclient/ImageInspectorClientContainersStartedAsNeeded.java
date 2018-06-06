@@ -101,7 +101,7 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
             return response.getBody();
         }
         final String correctImageInspectorOsName = response.getBody().trim();
-        logger.debug(String.format("correctImageInspectorOs: %s", correctImageInspectorOsName));
+        logger.info(String.format("This image needs to be inspected on %s", correctImageInspectorOsName));
 
         // Handle redirect
         final OperatingSystemEnum correctedInspectorOs = OperatingSystemEnum.determineOperatingSystem(correctImageInspectorOsName);
@@ -119,8 +119,8 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         try {
             restConnection = createRestConnection(imageInspectorUrl, deriveTimeoutSeconds());
             serviceContainerId = ensureServiceReady(restConnection, imageInspectorUrl, inspectorOs);
-            logger.debug(String.format("Sending getBdio request to: %s", imageInspectorUrl));
             try {
+                logger.info(String.format("Sending getBdio request to: %s (%s)", imageInspectorUrl, inspectorOs.name()));
                 response = restRequestor.executeGetBdioRequest(restConnection, imageInspectorUrl, containerPathToInputDockerTarfile, containerPathToOutputFileSystemFile, cleanup);
             } catch (final IntegrationException e) {
                 logServiceError(serviceContainerId);
@@ -132,7 +132,7 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
             for (final String key : headers.keySet()) {
                 logger.debug(String.format("Header: %s=%s", key, headers.get(key)));
             }
-            logger.debug(String.format("If you want the log from the image inspector service, execute this command: docker logs %s", serviceContainerId));
+            logger.debug(String.format("If you want the log from the image inspector service, execute this command: docker logs %s. If the container is no longer running, set cleanup.inspector.container=true", serviceContainerId));
             if (failureTest.test(statusCode)) {
                 logServiceError(serviceContainerId);
                 final String warningHeaderValue = response.getWarningHeaderValue();
@@ -173,7 +173,7 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
 
     private String deriveInspectorUrl(final int inspectorPort) {
         final String imageInspectorUrl = String.format("http://localhost:%d", inspectorPort);
-        logger.info(String.format("ImageInspector URL: %s", imageInspectorUrl));
+        logger.debug(String.format("ImageInspector URL: %s", imageInspectorUrl));
         return imageInspectorUrl;
     }
 
@@ -194,16 +194,19 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
             final Container container = dockerClientManager.getRunningContainerByAppName(hubDockerClient.getDockerClient(), HUB_IMAGEINSPECTOR_WS_APPNAME, imageInspectorServices.getDefaultImageInspectorOs());
             return container.getId();
         }
-        // Need to spin up container
+        logger.info(String.format("Service %s (%s) is not running; starting it...", imageInspectorUrl, inspectorOs.name()));
+        if (config.isCleanupInspectorContainer()) {
+            logger.info("(Image inspection may complete faster if you set cleanup.inspector.container=false)");
+        }
         final String imageInspectorRepo;
         final String imageInspectorTag;
         try {
             imageInspectorRepo = inspectorImages.getInspectorImageName(inspectorOs);
             imageInspectorTag = inspectorImages.getInspectorImageTag(inspectorOs);
         } catch (final IOException e) {
-            throw new IntegrationException(String.format("Error getting image inspector container repo/tag for default inspector OS: %s", inspectorOs.name()), e);
+            throw new IntegrationException(String.format("Error getting image inspector container repo/tag for %s inspector: %s", inspectorOs.name()), e);
         }
-        logger.debug(String.format("Need to pull/run %s:%s", imageInspectorRepo, imageInspectorTag));
+        logger.debug(String.format("Need to pull/run image %s:%s to start the %s service", imageInspectorRepo, imageInspectorTag, imageInspectorUrl));
         final String imageId = dockerClientManager.pullImage(imageInspectorRepo, imageInspectorTag);
         final int containerPort = imageInspectorServices.getImageInspectorContainerPort(inspectorOs);
         final int hostPort = imageInspectorServices.getImageInspectorHostPort(inspectorOs);

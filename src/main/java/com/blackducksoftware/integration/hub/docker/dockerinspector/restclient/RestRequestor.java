@@ -55,10 +55,10 @@ public class RestRequestor {
         }
         final String url = String.format("%s/%s?%s=%s&%s=%s&%s=%b%s",
                 imageInspectorUrl, GETBDIO_ENDPOINT, LOGGING_LEVEL_QUERY_PARAM, getLoggingLevel(), TARFILE_QUERY_PARAM, containerPathToTarfile, CLEANUP_QUERY_PARAM, cleanup, containerFileSystemQueryString);
-        logger.info(String.format("Doing a getBdio request on %s", url));
+        logger.debug(String.format("Doing a getBdio request on %s", url));
         final Request request = new Request.Builder(url).method(HttpMethod.GET).build();
         try (Response response = restConnection.executeRequest(request)) {
-            logger.info(String.format("Response: HTTP status: %d", response.getStatusCode()));
+            logger.debug(String.format("Response: HTTP status: %d", response.getStatusCode()));
             return new SimpleResponse(response.getStatusCode(), response.getHeaders(), getResponseBody(response));
         } catch (final Exception e) {
             logger.info(String.format("getBdio request on %s failed: %s", url, e.getMessage()));
@@ -72,19 +72,18 @@ public class RestRequestor {
             endpoint = endpoint.substring(1);
         }
         final String url = String.format("%s/%s", imageInspectorUrl, endpoint);
-        logger.info(String.format("Doing a GET on %s", url));
+        logger.debug(String.format("Doing a GET on %s", url));
         final Request request = new Request.Builder(url).method(HttpMethod.GET).build();
         try (Response response = restConnection.executeRequest(request)) {
-            logger.info(String.format("Response: HTTP status: %d", response.getStatusCode()));
+            logger.debug(String.format("Response: HTTP status: %d", response.getStatusCode()));
             return getResponseBody(response);
         } catch (final Exception e) {
-            logger.info(String.format("GET on %s failed: %s", url, e.getMessage()));
+            logger.debug(String.format("GET on %s failed: %s", url, e.getMessage()));
             throw new IntegrationException(e);
         }
     }
 
     private String getLoggingLevel() {
-        logger.info("Getting logging level");
         String loggingLevel = "DEBUG";
         try {
             final ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) org.slf4j.LoggerFactory.getLogger(BASE_LOGGER_NAME);

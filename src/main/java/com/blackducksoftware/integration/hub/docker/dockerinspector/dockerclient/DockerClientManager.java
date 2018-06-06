@@ -124,7 +124,7 @@ public class DockerClientManager {
         final ImageNameResolver resolver = new ImageNameResolver(repoTags.get(0));
         final String imageName = resolver.getNewImageRepo().get();
         final String tagName = resolver.getNewImageTag().get();
-        logger.info(String.format("Converted image ID %s to image name:tag %s:%s", imageId, imageName, tagName));
+        logger.debug(String.format("Converted image ID %s to image name:tag %s:%s", imageId, imageName, tagName));
         final File imageTarFile = saveImageToDir(imageTarDirectory, Names.getImageTarFilename(imageName, tagName), imageName, tagName);
         return imageTarFile;
     }
@@ -168,7 +168,7 @@ public class DockerClientManager {
             final RemoveImageCmd rmCmd = dockerClient.removeImageCmd(imageId);
             logger.info(String.format("Removing image %s", imageId));
             rmCmd.exec();
-            logger.info(String.format("Image %s removed", imageId));
+            logger.debug(String.format("Image %s removed", imageId));
         } catch (final Throwable e) {
             logger.warn(String.format("Unable to remove image with ID %s: %s", imageId, e.getMessage()));
         }
@@ -212,7 +212,8 @@ public class DockerClientManager {
 
     public String startContainerAsService(final String imageId, final String containerName, final OperatingSystemEnum inspectorOs, final int containerPort, final int hostPort, final String containerPathToOutputDir)
             throws IntegrationException {
-        logger.debug(String.format("Starting image ID %s --> container name: %s", imageId, containerName));
+        logger.info(String.format("Starting container: %s", containerName));
+        logger.debug(String.format("\tImage ID: %s", imageId));
         final DockerClient dockerClient = hubDockerClient.getDockerClient();
         stopRemoveContainerIfExists(dockerClient, containerName);
 
@@ -238,7 +239,7 @@ public class DockerClientManager {
         final String containerId = containerResponse.getId();
 
         dockerClient.startContainerCmd(containerId).exec();
-        logger.info(String.format("Started container %s from image %s", containerId, imageId));
+        logger.debug(String.format("Started container %s from image %s", containerId, imageId));
 
         return containerId;
     }
@@ -333,22 +334,22 @@ public class DockerClientManager {
 
     private void removeContainer(final DockerClient dockerClient, final String containerId) {
         final RemoveContainerCmd rmCmd = dockerClient.removeContainerCmd(containerId);
-        logger.info(String.format("Removing container %s", containerId));
+        logger.debug(String.format("Removing container %s", containerId));
         rmCmd.exec();
-        logger.info(String.format("Container %s removed", containerId));
+        logger.debug(String.format("Container %s removed", containerId));
     }
 
     private void stopContainer(final DockerClient dockerClient, final String containerId) {
         final Long timeoutMilliseconds = config.getCommandTimeout();
         final int timeoutSeconds = (int) (timeoutMilliseconds / 60000L);
-        logger.info(String.format("Stopping container %s", containerId));
+        logger.debug(String.format("Stopping container %s", containerId));
         final StopContainerCmd stopCmd = dockerClient.stopContainerCmd(containerId).withTimeout(timeoutSeconds);
         stopCmd.exec();
-        logger.info(String.format("Container %s stopped", containerId));
+        logger.debug(String.format("Container %s stopped", containerId));
     }
 
     public String getDockerEngineVersion() {
-        logger.info("Requesting version string from Docker engine");
+        logger.debug("Requesting version string from Docker engine");
         try {
             final DockerClient dockerClient = hubDockerClient.getDockerClient();
             final Info dockerInfo = dockerClient.infoCmd().exec();
@@ -404,7 +405,7 @@ public class DockerClientManager {
         final CreateContainerResponse containerResponse = createContainerCmd.exec();
         final String containerId = containerResponse.getId();
         dockerClient.startContainerCmd(containerId).exec();
-        logger.info(String.format("Started container %s from image %s", containerId, imageId));
+        logger.debug(String.format("Started container %s from image %s", containerId, imageId));
         return containerId;
     }
 
@@ -477,9 +478,9 @@ public class DockerClientManager {
         }
         execCreateCmd.withCmd(cmdArr);
         final ExecCreateCmdResponse execCreateCmdResponse = execCreateCmd.exec();
-        logger.info("Invoking container appropriate for this target image");
+        logger.debug("Invoking container appropriate for this target image");
         dockerClient.execStartCmd(execCreateCmdResponse.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-        logger.info("The container execution has completed");
+        logger.debug("The container execution has completed");
     }
 
     private void saveImageToFile(final String imageName, final String tagName, final File imageTarFile) throws IOException, HubIntegrationException {
