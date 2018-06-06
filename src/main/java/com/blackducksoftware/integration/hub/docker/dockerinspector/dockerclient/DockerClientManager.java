@@ -45,7 +45,6 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Progr
 import com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient.HubSecrets;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.blackducksoftware.integration.hub.imageinspector.api.ImageInspectorOsEnum;
-import com.blackducksoftware.integration.hub.imageinspector.lib.OperatingSystemEnum;
 import com.blackducksoftware.integration.hub.imageinspector.name.ImageNameResolver;
 import com.blackducksoftware.integration.hub.imageinspector.name.Names;
 import com.github.dockerjava.api.DockerClient;
@@ -210,7 +209,7 @@ public class DockerClientManager {
         return containerId;
     }
 
-    public String startContainerAsService(final String imageId, final String containerName, final OperatingSystemEnum inspectorOs, final int containerPort, final int hostPort, final String containerPathToOutputDir)
+    public String startContainerAsService(final String imageId, final String containerName, final ImageInspectorOsEnum inspectorOs, final int containerPort, final int hostPort, final String containerPathToOutputDir)
             throws IntegrationException {
         logger.info(String.format("Starting container: %s", containerName));
         logger.debug(String.format("\tImage ID: %s", imageId));

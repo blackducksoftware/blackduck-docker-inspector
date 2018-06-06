@@ -32,7 +32,6 @@ import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.blackducksoftware.integration.hub.imageinspector.api.ImageInspectorOsEnum;
-import com.blackducksoftware.integration.hub.imageinspector.lib.OperatingSystemEnum;
 
 @Component
 public class ImageInspectorServices {
@@ -40,7 +39,7 @@ public class ImageInspectorServices {
     @Autowired
     private Config config;
 
-    public int getImageInspectorHostPort(final OperatingSystemEnum imageInspectorOs) throws HubIntegrationException {
+    public int getImageInspectorHostPort(final ImageInspectorOsEnum imageInspectorOs) throws HubIntegrationException {
         final String imageInspectorOsName = imageInspectorOs.name();
         if ("alpine".equalsIgnoreCase(imageInspectorOsName)) {
             return config.getImageInspectorHostPortAlpine();
@@ -54,7 +53,7 @@ public class ImageInspectorServices {
         throw new HubIntegrationException(String.format("Unrecognized ImageInspector OS name: %s", imageInspectorOsName));
     }
 
-    public int getImageInspectorContainerPort(final OperatingSystemEnum imageInspectorOs) throws HubIntegrationException {
+    public int getImageInspectorContainerPort(final ImageInspectorOsEnum imageInspectorOs) throws HubIntegrationException {
         final String imageInspectorOsName = imageInspectorOs.name();
         if ("alpine".equalsIgnoreCase(imageInspectorOsName)) {
             return config.getImageInspectorContainerPortAlpine();

@@ -44,6 +44,7 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Inspe
 import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Output;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
+import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.blackducksoftware.integration.hub.imageinspector.lib.DissectedImage;
 import com.blackducksoftware.integration.hub.imageinspector.linux.FileOperations;
 import com.blackducksoftware.integration.hub.imageinspector.name.Names;
@@ -86,13 +87,10 @@ public class RestClientInspector implements Inspector {
         final ImageInspectorClient imageInspectorClient = chooseImageInspectorClient();
         try {
             output.ensureWriteability();
-            final File origDockerTarFile = dockerTarfile.deriveDockerTarFile();
-            final File finalDockerTarfile = prepareDockerTarfile(origDockerTarFile);
+            final File finalDockerTarfile = prepareDockerTarfile();
             final String containerFileSystemFilename = Names.getContainerFileSystemTarFilename(config.getDockerImage(), config.getDockerTar());
-            logger.debug(String.format("Given docker tar file path: %s", finalDockerTarfile.getCanonicalPath()));
             final String dockerTarFilePathInContainer = containerPaths.getContainerPathToTargetFile(finalDockerTarfile.getCanonicalPath());
             final String containerFileSystemPathInContainer = containerPaths.getContainerPathToOutputFile(containerFileSystemFilename);
-            logger.debug(String.format("Derived container docker tar file path: %s", dockerTarFilePathInContainer));
             final String bdioString = imageInspectorClient.getBdio(finalDockerTarfile.getCanonicalPath(), dockerTarFilePathInContainer, containerFileSystemPathInContainer, config.isCleanupWorkingDir());
             output.provideBdioFileOutput(bdioString, deriveOutputBdioFilename(bdioString));
             cleanup();
@@ -102,7 +100,8 @@ public class RestClientInspector implements Inspector {
         }
     }
 
-    private File prepareDockerTarfile(final File givenDockerTarfile) throws IOException {
+    private File prepareDockerTarfile() throws IOException, HubIntegrationException {
+        final File givenDockerTarfile = dockerTarfile.deriveDockerTarFile();
         if (!config.isOnHost()) {
             return givenDockerTarfile;
         }
@@ -116,6 +115,7 @@ public class RestClientInspector implements Inspector {
             logger.debug(String.format("Copying %s to %s", givenDockerTarfile.getCanonicalPath(), finalDockerTarfile.getCanonicalPath()));
             FileUtils.copyFile(givenDockerTarfile, finalDockerTarfile);
         }
+        logger.debug(String.format("Final docker tar file path: %s", finalDockerTarfile.getCanonicalPath()));
         return finalDockerTarfile;
     }
 

@@ -41,7 +41,7 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.HubDockerClient;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.response.SimpleResponse;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
-import com.blackducksoftware.integration.hub.imageinspector.lib.OperatingSystemEnum;
+import com.blackducksoftware.integration.hub.imageinspector.api.ImageInspectorOsEnum;
 import com.blackducksoftware.integration.rest.RestConstants;
 import com.blackducksoftware.integration.rest.connection.RestConnection;
 import com.blackducksoftware.integration.rest.exception.IntegrationRestException;
@@ -93,7 +93,7 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         logger.debug(String.format("getBdio(): containerPathToTarfile: %s", containerPathToInputDockerTarfile));
 
         // First, try the default inspector service (which will return either the BDIO, or a redirect)
-        final OperatingSystemEnum inspectorOs = OperatingSystemEnum.determineOperatingSystem(config.getImageInspectorDefault());
+        final ImageInspectorOsEnum inspectorOs = ImageInspectorOsEnum.determineOperatingSystem(config.getImageInspectorDefault());
         final String imageInspectorUrl = deriveInspectorUrl(imageInspectorServices.getDefaultImageInspectorHostPort());
         final SimpleResponse response = getResponse(imageInspectorUrl, inspectorOs, containerPathToInputDockerTarfile, containerPathToOutputFileSystemFile, cleanup,
                 statusCode -> statusCode != RestConstants.OK_200 && statusCode != RestConstants.MOVED_TEMP_302 && statusCode != RestConstants.MOVED_PERM_301);
@@ -102,16 +102,17 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         }
         final String correctImageInspectorOsName = response.getBody().trim();
         logger.info(String.format("This image needs to be inspected on %s", correctImageInspectorOsName));
+        logger.info("(Image inspection may complete faster if you align the value of property imageinspector.service.distro.default with the images you inspect most frequently)");
 
         // Handle redirect
-        final OperatingSystemEnum correctedInspectorOs = OperatingSystemEnum.determineOperatingSystem(correctImageInspectorOsName);
+        final ImageInspectorOsEnum correctedInspectorOs = ImageInspectorOsEnum.determineOperatingSystem(correctImageInspectorOsName);
         final String correctedImageInspectorUrl = deriveInspectorUrl(imageInspectorServices.getImageInspectorHostPort(correctedInspectorOs));
         final SimpleResponse responseFromCorrectedContainer = getResponse(correctedImageInspectorUrl, correctedInspectorOs, containerPathToInputDockerTarfile, containerPathToOutputFileSystemFile, cleanup,
                 statusCode -> statusCode != RestConstants.OK_200);
         return responseFromCorrectedContainer.getBody();
     }
 
-    private SimpleResponse getResponse(final String imageInspectorUrl, final OperatingSystemEnum inspectorOs, final String containerPathToInputDockerTarfile,
+    private SimpleResponse getResponse(final String imageInspectorUrl, final ImageInspectorOsEnum inspectorOs, final String containerPathToInputDockerTarfile,
             final String containerPathToOutputFileSystemFile, final boolean cleanup, final Predicate<Integer> failureTest) throws IntegrationException, HubIntegrationException {
         SimpleResponse response = null;
         String serviceContainerId = null;
@@ -188,10 +189,10 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         return restConnection;
     }
 
-    private String ensureServiceReady(final RestConnection restConnection, final String imageInspectorUrl, final OperatingSystemEnum inspectorOs) throws IntegrationException {
+    private String ensureServiceReady(final RestConnection restConnection, final String imageInspectorUrl, final ImageInspectorOsEnum inspectorOs) throws IntegrationException {
         boolean serviceIsUp = checkServiceHealth(restConnection, imageInspectorUrl);
         if (serviceIsUp) {
-            final Container container = dockerClientManager.getRunningContainerByAppName(hubDockerClient.getDockerClient(), HUB_IMAGEINSPECTOR_WS_APPNAME, imageInspectorServices.getDefaultImageInspectorOs());
+            final Container container = dockerClientManager.getRunningContainerByAppName(hubDockerClient.getDockerClient(), HUB_IMAGEINSPECTOR_WS_APPNAME, inspectorOs);
             return container.getId();
         }
         logger.info(String.format("Service %s (%s) is not running; starting it...", imageInspectorUrl, inspectorOs.name()));
@@ -201,8 +202,8 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         final String imageInspectorRepo;
         final String imageInspectorTag;
         try {
-            imageInspectorRepo = inspectorImages.getInspectorImageName(inspectorOs);
-            imageInspectorTag = inspectorImages.getInspectorImageTag(inspectorOs);
+            imageInspectorRepo = inspectorImages.getInspectorImageName(inspectorOs.getRawOs());
+            imageInspectorTag = inspectorImages.getInspectorImageTag(inspectorOs.getRawOs());
         } catch (final IOException e) {
             throw new IntegrationException(String.format("Error getting image inspector container repo/tag for %s inspector: %s", inspectorOs.name()), e);
         }
