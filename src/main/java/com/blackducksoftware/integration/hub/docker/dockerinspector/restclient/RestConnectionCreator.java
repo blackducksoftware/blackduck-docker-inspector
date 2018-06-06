@@ -54,6 +54,7 @@ public class RestConnectionCreator {
 
     // Be sure to close the rest connection
     public RestConnection createRedirectingConnection(final String baseUrl, final int timeoutSeconds) throws MalformedURLException {
+        logger.debug(String.format("Creating a rest connection (%d second timeout) for URL: %s", timeoutSeconds, baseUrl));
         final UnauthenticatedRestConnectionBuilder connectionBuilder = new UnauthenticatedRestConnectionBuilder();
         connectionBuilder.setBaseUrl(baseUrl);
         connectionBuilder.setTimeout(timeoutSeconds);
