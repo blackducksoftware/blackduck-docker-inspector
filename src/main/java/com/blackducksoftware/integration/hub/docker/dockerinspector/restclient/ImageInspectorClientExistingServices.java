@@ -24,6 +24,8 @@
 package com.blackducksoftware.integration.hub.docker.dockerinspector.restclient;
 
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -62,10 +64,15 @@ public class ImageInspectorClientExistingServices implements ImageInspectorClien
 
     @Override
     public String getBdio(final String hostPathToTarfile, final String containerPathToInputDockerTarfile, final String containerPathToOutputFileSystemFile, final boolean cleanup) throws IntegrationException, MalformedURLException {
-        final String imageInspectorUrl = config.getImageInspectorUrl();
+        URI imageInspectorUri;
+        try {
+            imageInspectorUri = new URI(config.getImageInspectorUrl());
+        } catch (final URISyntaxException e) {
+            throw new IntegrationException(String.format("Error constructing URI from %s: %s", config.getImageInspectorUrl(), e.getMessage()), e);
+        }
         final int serviceRequestTimeoutSeconds = (int) (config.getCommandTimeout() / 1000L);
-        final RestConnection restConnection = restConnectionCreator.createRedirectingConnection(imageInspectorUrl, serviceRequestTimeoutSeconds);
-        final SimpleResponse response = restRequester.executeGetBdioRequest(restConnection, imageInspectorUrl, containerPathToInputDockerTarfile, containerPathToOutputFileSystemFile, cleanup);
+        final RestConnection restConnection = restConnectionCreator.createRedirectingConnection(imageInspectorUri, serviceRequestTimeoutSeconds);
+        final SimpleResponse response = restRequester.executeGetBdioRequest(restConnection, imageInspectorUri, containerPathToInputDockerTarfile, containerPathToOutputFileSystemFile, cleanup);
         return response.getBody();
     }
 }

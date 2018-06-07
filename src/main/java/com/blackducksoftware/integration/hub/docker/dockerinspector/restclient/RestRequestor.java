@@ -23,6 +23,8 @@
  */
 package com.blackducksoftware.integration.hub.docker.dockerinspector.restclient;
 
+import java.net.URI;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,15 +48,14 @@ public class RestRequestor {
 
     private static final String BASE_LOGGER_NAME = "com.blackducksoftware";
 
-    public SimpleResponse executeGetBdioRequest(final RestConnection restConnection, final String imageInspectorUrl, final String containerPathToTarfile, final String containerPathToContainerFileSystemFile, final boolean cleanup)
+    public SimpleResponse executeGetBdioRequest(final RestConnection restConnection, final URI imageInspectorUri, final String containerPathToTarfile, final String containerPathToContainerFileSystemFile, final boolean cleanup)
             throws IntegrationException {
-
         String containerFileSystemQueryString = "";
         if (StringUtils.isNotBlank(containerPathToContainerFileSystemFile)) {
             containerFileSystemQueryString = String.format("&%s=%s", RESULTING_CONTAINER_FS_PATH_QUERY_PARAM, containerPathToContainerFileSystemFile);
         }
         final String url = String.format("%s/%s?%s=%s&%s=%s&%s=%b%s",
-                imageInspectorUrl, GETBDIO_ENDPOINT, LOGGING_LEVEL_QUERY_PARAM, getLoggingLevel(), TARFILE_QUERY_PARAM, containerPathToTarfile, CLEANUP_QUERY_PARAM, cleanup, containerFileSystemQueryString);
+                imageInspectorUri.toString(), GETBDIO_ENDPOINT, LOGGING_LEVEL_QUERY_PARAM, getLoggingLevel(), TARFILE_QUERY_PARAM, containerPathToTarfile, CLEANUP_QUERY_PARAM, cleanup, containerFileSystemQueryString);
         logger.debug(String.format("Doing a getBdio request on %s", url));
         final Request request = new Request.Builder(url).method(HttpMethod.GET).build();
         try (Response response = restConnection.executeRequest(request)) {
@@ -66,12 +67,12 @@ public class RestRequestor {
         }
     }
 
-    public String executeSimpleGetRequest(final RestConnection restConnection, final String imageInspectorUrl, String endpoint)
+    public String executeSimpleGetRequest(final RestConnection restConnection, final URI imageInspectorUri, String endpoint)
             throws IntegrationException {
         if (endpoint.startsWith("/")) {
             endpoint = endpoint.substring(1);
         }
-        final String url = String.format("%s/%s", imageInspectorUrl, endpoint);
+        final String url = String.format("%s/%s", imageInspectorUri.toString(), endpoint);
         logger.debug(String.format("Doing a GET on %s", url));
         final Request request = new Request.Builder(url).method(HttpMethod.GET).build();
         try (Response response = restConnection.executeRequest(request)) {

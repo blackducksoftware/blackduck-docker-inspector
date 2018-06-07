@@ -3,6 +3,7 @@ package com.blackducksoftware.integration.hub.docker.imageinspector.restclient;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
+import java.net.URI;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -74,12 +75,12 @@ public class IiClientContainersStartedAsNeededTest {
         Mockito.when(hubDockerClient.getDockerClient()).thenReturn(dockerClient);
 
         final RestConnection restConnection = Mockito.mock(RestConnection.class);
-        Mockito.when(restConnectionCreator.createNonRedirectingConnection(Mockito.anyString(), Mockito.anyInt())).thenReturn(restConnection);
+        Mockito.when(restConnectionCreator.createNonRedirectingConnection(Mockito.any(URI.class), Mockito.anyInt())).thenReturn(restConnection);
 
-        Mockito.when(restRequestor.executeSimpleGetRequest(Mockito.any(RestConnection.class), Mockito.anyString(), Mockito.anyString())).thenReturn("{\"status\":\"UP\"}");
+        Mockito.when(restRequestor.executeSimpleGetRequest(Mockito.any(RestConnection.class), Mockito.any(URI.class), Mockito.anyString())).thenReturn("{\"status\":\"UP\"}");
         // Mockito.when(restRequestor.executeSimpleGetRequest(Mockito.any(RestConnection.class), Mockito.anyString(), Mockito.anyString())).thenReturn("testResponse");
         final SimpleResponse response = new SimpleResponse(RestConstants.OK_200, null, "testResult");
-        Mockito.when(restRequestor.executeGetBdioRequest(Mockito.any(RestConnection.class), Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), Mockito.anyBoolean())).thenReturn(response);
+        Mockito.when(restRequestor.executeGetBdioRequest(Mockito.any(RestConnection.class), Mockito.any(URI.class), Mockito.anyString(), Mockito.anyString(), Mockito.anyBoolean())).thenReturn(response);
 
         Mockito.when(containerPaths.getContainerPathToOutputDir()).thenReturn("/opt/blackduck/hub-imageinspector-ws/shared/output");
         Mockito.when(inspectorImages.getInspectorImageName(Mockito.any(OperatingSystemEnum.class))).thenReturn("blackduck/hub-imageinspector-ws");

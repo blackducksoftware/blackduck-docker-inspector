@@ -156,7 +156,7 @@ public class HubClient {
             }
         }
         final HubServerConfigBuilder hubServerConfigBuilder = new HubServerConfigBuilder();
-        hubServerConfigBuilder.setHubUrl(config.getHubUrl());
+        hubServerConfigBuilder.setUrl(config.getHubUrl());
         hubServerConfigBuilder.setApiToken(hubSecrets.getApiToken());
         hubServerConfigBuilder.setUsername(getHubUsername());
         hubServerConfigBuilder.setPassword(hubSecrets.getPassword());
@@ -165,7 +165,7 @@ public class HubClient {
         hubServerConfigBuilder.setProxyPort(hubProxyPort);
         hubServerConfigBuilder.setProxyUsername(hubProxyUsername);
         hubServerConfigBuilder.setProxyPassword(hubProxyPassword);
-        hubServerConfigBuilder.setAlwaysTrustServerCertificate(config.isHubAlwaysTrustCert());
+        hubServerConfigBuilder.setTrustCert(config.isHubAlwaysTrustCert());
         return hubServerConfigBuilder;
     }
 

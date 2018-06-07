@@ -25,6 +25,8 @@ package com.blackducksoftware.integration.hub.docker.dockerinspector.restclient;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Map;
 import java.util.function.Predicate;
 
@@ -53,6 +55,8 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
     private static final long CONTAINER_START_WAIT_MILLISECONDS = 2000L;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final int MAX_CONTAINER_START_TRY_COUNT = 30;
+    private final String II_SERVICE_URI_SCHEME = "http";
+    private final String II_SERVICE_HOST = "localhost";
 
     @Autowired
     private Config config;
@@ -90,13 +94,12 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
 
     @Override
     public String getBdio(final String hostPathToTarfile, final String containerPathToInputDockerTarfile, final String containerPathToOutputFileSystemFile, final boolean cleanup) throws IntegrationException {
-        logger.debug(String.format("getBdio(): containerPathToTarfile: %s", containerPathToInputDockerTarfile));
-
         // First, try the default inspector service (which will return either the BDIO, or a redirect)
         final ImageInspectorOsEnum inspectorOs = ImageInspectorOsEnum.determineOperatingSystem(config.getImageInspectorDefault());
-        final String imageInspectorUrl = deriveInspectorUrl(imageInspectorServices.getDefaultImageInspectorHostPort());
-        final SimpleResponse response = getResponse(imageInspectorUrl, inspectorOs, containerPathToInputDockerTarfile, containerPathToOutputFileSystemFile, cleanup,
-                statusCode -> statusCode != RestConstants.OK_200 && statusCode != RestConstants.MOVED_TEMP_302 && statusCode != RestConstants.MOVED_PERM_301);
+        final URI imageInspectorUri = deriveInspectorUri(imageInspectorServices.getDefaultImageInspectorHostPort());
+        final Predicate<Integer> initialRequestFailureCriteria = statusCode -> statusCode != RestConstants.OK_200 && statusCode != RestConstants.MOVED_TEMP_302 && statusCode != RestConstants.MOVED_PERM_301;
+        final SimpleResponse response = getResponseFromService(imageInspectorUri, inspectorOs, containerPathToInputDockerTarfile, containerPathToOutputFileSystemFile, cleanup,
+                initialRequestFailureCriteria);
         if (response.getStatusCode() == RestConstants.OK_200) {
             return response.getBody();
         }
@@ -106,23 +109,24 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
 
         // Handle redirect
         final ImageInspectorOsEnum correctedInspectorOs = ImageInspectorOsEnum.determineOperatingSystem(correctImageInspectorOsName);
-        final String correctedImageInspectorUrl = deriveInspectorUrl(imageInspectorServices.getImageInspectorHostPort(correctedInspectorOs));
-        final SimpleResponse responseFromCorrectedContainer = getResponse(correctedImageInspectorUrl, correctedInspectorOs, containerPathToInputDockerTarfile, containerPathToOutputFileSystemFile, cleanup,
-                statusCode -> statusCode != RestConstants.OK_200);
+        final URI correctedImageInspectorUri = deriveInspectorUri(imageInspectorServices.getImageInspectorHostPort(correctedInspectorOs));
+        final Predicate<Integer> correctedRequestFailureCriteria = statusCode -> statusCode != RestConstants.OK_200;
+        final SimpleResponse responseFromCorrectedContainer = getResponseFromService(correctedImageInspectorUri, correctedInspectorOs, containerPathToInputDockerTarfile, containerPathToOutputFileSystemFile, cleanup,
+                correctedRequestFailureCriteria);
         return responseFromCorrectedContainer.getBody();
     }
 
-    private SimpleResponse getResponse(final String imageInspectorUrl, final ImageInspectorOsEnum inspectorOs, final String containerPathToInputDockerTarfile,
+    private SimpleResponse getResponseFromService(final URI imageInspectorUri, final ImageInspectorOsEnum inspectorOs, final String containerPathToInputDockerTarfile,
             final String containerPathToOutputFileSystemFile, final boolean cleanup, final Predicate<Integer> failureTest) throws IntegrationException, HubIntegrationException {
         SimpleResponse response = null;
         String serviceContainerId = null;
         RestConnection restConnection = null;
         try {
-            restConnection = createRestConnection(imageInspectorUrl, deriveTimeoutSeconds());
-            serviceContainerId = ensureServiceReady(restConnection, imageInspectorUrl, inspectorOs);
+            restConnection = createRestConnection(imageInspectorUri, deriveTimeoutSeconds());
+            serviceContainerId = ensureServiceReady(restConnection, imageInspectorUri, inspectorOs);
             try {
-                logger.info(String.format("Sending getBdio request to: %s (%s)", imageInspectorUrl, inspectorOs.name()));
-                response = restRequestor.executeGetBdioRequest(restConnection, imageInspectorUrl, containerPathToInputDockerTarfile, containerPathToOutputFileSystemFile, cleanup);
+                logger.info(String.format("Sending getBdio request to: %s (%s)", imageInspectorUri.toString(), inspectorOs.name()));
+                response = restRequestor.executeGetBdioRequest(restConnection, imageInspectorUri, containerPathToInputDockerTarfile, containerPathToOutputFileSystemFile, cleanup);
             } catch (final IntegrationException e) {
                 logServiceError(serviceContainerId);
                 throw e;
@@ -172,30 +176,36 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         return (int) (config.getCommandTimeout() / 1000L);
     }
 
-    private String deriveInspectorUrl(final int inspectorPort) {
-        final String imageInspectorUrl = String.format("http://localhost:%d", inspectorPort);
-        logger.debug(String.format("ImageInspector URL: %s", imageInspectorUrl));
-        return imageInspectorUrl;
+    private URI deriveInspectorUri(final int inspectorPort) throws IntegrationException {
+        URI imageInspectorUri;
+        try {
+            imageInspectorUri = new URI(II_SERVICE_URI_SCHEME, null, II_SERVICE_HOST, inspectorPort,
+                    null, null, null);
+        } catch (final URISyntaxException e) {
+            throw new IntegrationException(String.format("Error deriving inspector URL: %s", e.getMessage()), e);
+        }
+        logger.debug(String.format("ImageInspector URL: %s", imageInspectorUri.toString()));
+        return imageInspectorUri;
     }
 
-    private RestConnection createRestConnection(final String imageInspectorUrl, final int serviceRequestTimeoutSeconds) throws IntegrationException {
-        logger.debug(String.format("Creating a rest connection (%d second timeout) for URL: %s", serviceRequestTimeoutSeconds, imageInspectorUrl));
+    private RestConnection createRestConnection(final URI imageInspectorUri, final int serviceRequestTimeoutSeconds) throws IntegrationException {
+        logger.debug(String.format("Creating a rest connection (%d second timeout) for URL: %s", serviceRequestTimeoutSeconds, imageInspectorUri.toString()));
         RestConnection restConnection;
         try {
-            restConnection = restConnectionCreator.createNonRedirectingConnection(imageInspectorUrl, serviceRequestTimeoutSeconds);
+            restConnection = restConnectionCreator.createNonRedirectingConnection(imageInspectorUri, serviceRequestTimeoutSeconds);
         } catch (final MalformedURLException e) {
-            throw new IntegrationException(String.format("Error creating connection for URL: %s, timeout: %d", imageInspectorUrl, serviceRequestTimeoutSeconds), e);
+            throw new IntegrationException(String.format("Error creating connection for URL: %s, timeout: %d", imageInspectorUri.toString(), serviceRequestTimeoutSeconds), e);
         }
         return restConnection;
     }
 
-    private String ensureServiceReady(final RestConnection restConnection, final String imageInspectorUrl, final ImageInspectorOsEnum inspectorOs) throws IntegrationException {
-        boolean serviceIsUp = checkServiceHealth(restConnection, imageInspectorUrl);
+    private String ensureServiceReady(final RestConnection restConnection, final URI imageInspectorUri, final ImageInspectorOsEnum inspectorOs) throws IntegrationException {
+        boolean serviceIsUp = checkServiceHealth(restConnection, imageInspectorUri);
         if (serviceIsUp) {
             final Container container = dockerClientManager.getRunningContainerByAppName(hubDockerClient.getDockerClient(), HUB_IMAGEINSPECTOR_WS_APPNAME, inspectorOs);
             return container.getId();
         }
-        logger.info(String.format("Service %s (%s) is not running; starting it...", imageInspectorUrl, inspectorOs.name()));
+        logger.info(String.format("Service %s (%s) is not running; starting it...", imageInspectorUri.toString(), inspectorOs.name()));
         if (config.isCleanupInspectorContainer()) {
             logger.info("(Image inspection may complete faster if you set cleanup.inspector.container=false)");
         }
@@ -207,21 +217,21 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         } catch (final IOException e) {
             throw new IntegrationException(String.format("Error getting image inspector container repo/tag for %s inspector: %s", inspectorOs.name()), e);
         }
-        logger.debug(String.format("Need to pull/run image %s:%s to start the %s service", imageInspectorRepo, imageInspectorTag, imageInspectorUrl));
+        logger.debug(String.format("Need to pull/run image %s:%s to start the %s service", imageInspectorRepo, imageInspectorTag, imageInspectorUri.toString()));
         final String imageId = dockerClientManager.pullImage(imageInspectorRepo, imageInspectorTag);
         final int containerPort = imageInspectorServices.getImageInspectorContainerPort(inspectorOs);
         final int hostPort = imageInspectorServices.getImageInspectorHostPort(inspectorOs);
         final String containerName = programPaths.deriveContainerName(imageInspectorRepo);
         final String containerId = dockerClientManager.startContainerAsService(imageId, containerName, inspectorOs, containerPort, hostPort,
                 containerPaths.getContainerPathToOutputDir());
-        serviceIsUp = startService(restConnection, imageInspectorUrl, imageInspectorRepo, imageInspectorTag);
+        serviceIsUp = startService(restConnection, imageInspectorUri, imageInspectorRepo, imageInspectorTag);
         if (!serviceIsUp) {
-            throw new IntegrationException(String.format("Tried to start image imspector container %s:%s, but service %s never came online", imageInspectorRepo, imageInspectorTag, imageInspectorUrl));
+            throw new IntegrationException(String.format("Tried to start image imspector container %s:%s, but service %s never came online", imageInspectorRepo, imageInspectorTag, imageInspectorUri.toString()));
         }
         return containerId;
     }
 
-    private boolean startService(final RestConnection restConnection, final String imageInspectorUrl, final String imageInspectorRepo, final String imageInspectorTag) throws IntegrationException {
+    private boolean startService(final RestConnection restConnection, final URI imageInspectorUri, final String imageInspectorRepo, final String imageInspectorTag) throws IntegrationException {
         boolean serviceIsUp = false;
         for (int tryIndex = 0; tryIndex < MAX_CONTAINER_START_TRY_COUNT && !serviceIsUp; tryIndex++) {
             try {
@@ -231,17 +241,17 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
             } catch (final InterruptedException e) {
                 logger.error(String.format("Interrupted exception thrown while pausing so image imspector container based on image %s:%s could start", imageInspectorRepo, imageInspectorTag), e);
             }
-            logger.debug(String.format("Checking service %s to see if it is up; attempt %d of %d", imageInspectorUrl, tryIndex + 1, MAX_CONTAINER_START_TRY_COUNT));
-            serviceIsUp = checkServiceHealth(restConnection, imageInspectorUrl);
+            logger.debug(String.format("Checking service %s to see if it is up; attempt %d of %d", imageInspectorUri.toString(), tryIndex + 1, MAX_CONTAINER_START_TRY_COUNT));
+            serviceIsUp = checkServiceHealth(restConnection, imageInspectorUri);
         }
         return serviceIsUp;
     }
 
-    private boolean checkServiceHealth(final RestConnection restConnection, final String imageInspectorUrl) throws IntegrationException {
-        logger.debug(String.format("Sending request for health check to: %s", imageInspectorUrl));
+    private boolean checkServiceHealth(final RestConnection restConnection, final URI imageInspectorUri) throws IntegrationException {
+        logger.debug(String.format("Sending request for health check to: %s", imageInspectorUri));
         String healthCheckResponse;
         try {
-            healthCheckResponse = restRequestor.executeSimpleGetRequest(restConnection, imageInspectorUrl, "health");
+            healthCheckResponse = restRequestor.executeSimpleGetRequest(restConnection, imageInspectorUri, "health");
         } catch (final IntegrationException e) {
             logger.debug(String.format("Health check failed: %s", e.getMessage()));
             return false;

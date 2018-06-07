@@ -24,6 +24,7 @@
 package com.blackducksoftware.integration.hub.docker.dockerinspector.restclient;
 
 import java.net.MalformedURLException;
+import java.net.URI;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,9 +41,9 @@ public class RestConnectionCreator {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // Be sure to close the rest connection
-    public RestConnection createNonRedirectingConnection(final String baseUrl, final int timeoutSeconds) throws MalformedURLException {
+    public RestConnection createNonRedirectingConnection(final URI baseUri, final int timeoutSeconds) throws MalformedURLException {
         final NonRedirectingUnauthenticatedRestConnectionBuilder connectionBuilder = new NonRedirectingUnauthenticatedRestConnectionBuilder();
-        connectionBuilder.setBaseUrl(baseUrl);
+        connectionBuilder.setBaseUrl(baseUri.toString());
         connectionBuilder.setTimeout(timeoutSeconds);
         final IntLogger intLogger = new Slf4jIntLogger(logger);
         connectionBuilder.setLogger(intLogger);
@@ -53,10 +54,10 @@ public class RestConnectionCreator {
     }
 
     // Be sure to close the rest connection
-    public RestConnection createRedirectingConnection(final String baseUrl, final int timeoutSeconds) throws MalformedURLException {
-        logger.debug(String.format("Creating a rest connection (%d second timeout) for URL: %s", timeoutSeconds, baseUrl));
+    public RestConnection createRedirectingConnection(final URI baseUri, final int timeoutSeconds) throws MalformedURLException {
+        logger.debug(String.format("Creating a rest connection (%d second timeout) for URL: %s", timeoutSeconds, baseUri.toString()));
         final UnauthenticatedRestConnectionBuilder connectionBuilder = new UnauthenticatedRestConnectionBuilder();
-        connectionBuilder.setBaseUrl(baseUrl);
+        connectionBuilder.setBaseUrl(baseUri.toString());
         connectionBuilder.setTimeout(timeoutSeconds);
         final IntLogger intLogger = new Slf4jIntLogger(logger);
         connectionBuilder.setLogger(intLogger);
