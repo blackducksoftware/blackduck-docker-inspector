@@ -49,7 +49,6 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Progr
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.DockerClientManager;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.blackducksoftware.integration.hub.imageinspector.imageformat.docker.manifest.ManifestLayerMapping;
-import com.blackducksoftware.integration.hub.imageinspector.lib.DissectedImage;
 import com.blackducksoftware.integration.hub.imageinspector.lib.ImageInfoDerived;
 import com.blackducksoftware.integration.hub.imageinspector.lib.ImageInspector;
 import com.blackducksoftware.integration.hub.imageinspector.lib.OperatingSystemEnum;

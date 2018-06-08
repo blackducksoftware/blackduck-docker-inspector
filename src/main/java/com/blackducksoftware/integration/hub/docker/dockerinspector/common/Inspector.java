@@ -24,7 +24,7 @@
 package com.blackducksoftware.integration.hub.docker.dockerinspector.common;
 
 import com.blackducksoftware.integration.exception.IntegrationException;
-import com.blackducksoftware.integration.hub.imageinspector.lib.DissectedImage;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerexec.DissectedImage;
 
 public interface Inspector {
 
