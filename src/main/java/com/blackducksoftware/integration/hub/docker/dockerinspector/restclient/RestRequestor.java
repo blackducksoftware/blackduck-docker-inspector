@@ -85,13 +85,13 @@ public class RestRequestor {
     }
 
     private String getLoggingLevel() {
-        String loggingLevel = "DEBUG";
+        String loggingLevel = "INFO";
         try {
             final ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) org.slf4j.LoggerFactory.getLogger(BASE_LOGGER_NAME);
             loggingLevel = root.getLevel().toString();
             logger.debug(String.format("Logging level: %s", loggingLevel));
         } catch (final Exception e) {
-            logger.error(String.format("Error getting logging level: %s", e.getMessage()));
+            logger.debug(String.format("No logging level set. Defaulting to %s", loggingLevel));
         }
         return loggingLevel;
     }
