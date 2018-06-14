@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -128,11 +129,20 @@ public class DockerClientManager {
         return imageTarFile;
     }
 
-    public File getTarFileFromDockerImage(final String imageName, final String tagName, final File imageTarDirectory) throws IOException, HubIntegrationException {
-        final String targetImageId = pullImage(imageName, tagName);
+    public File getTarFileFromDockerImage(final String imageName, final String tagName, final File imageTarDirectory) throws HubIntegrationException, IOException {
+        Optional<String> targetImageId = Optional.empty();
+        try {
+            targetImageId = Optional.ofNullable(pullImage(imageName, tagName));
+        } catch (final Exception e) {
+            logger.info(String.format("Unable to pull %s:%s; Proceeding anyway since the image might be in local docker image cache. Error on pull: %s", imageName, tagName, e.getMessage()));
+        }
         final File imageTarFile = saveImageToDir(imageTarDirectory, Names.getImageTarFilename(imageName, tagName), imageName, tagName);
-        if (config.isCleanupTargetImage()) {
-            removeImage(targetImageId);
+        if (config.isCleanupTargetImage() && targetImageId.isPresent()) {
+            try {
+                removeImage(targetImageId.get());
+            } catch (final HubIntegrationException e) {
+                logger.warn(String.format("Unable to remove target image with ID %s: %s", targetImageId.get(), e.getMessage()));
+            }
         }
         return imageTarFile;
     }
@@ -144,9 +154,7 @@ public class DockerClientManager {
         try {
             pull.exec(new PullImageResultCallback()).awaitSuccess();
         } catch (final NotFoundException e) {
-            final String msg = String.format("Pull failed: Image %s:%s not found. Please check the image name/tag", imageName, tagName);
-            logger.error(msg);
-            throw new HubIntegrationException(msg, e);
+            throw new HubIntegrationException(String.format("Pull failed: Image %s:%s not found. Please check the image name/tag. Error: %s", imageName, tagName, e.getMessage()), e);
         }
         final Image justPulledImage = getLocalImage(dockerClient, imageName, tagName);
         if (justPulledImage == null) {
