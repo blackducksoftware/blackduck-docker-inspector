@@ -17,6 +17,7 @@ import com.google.common.io.Files;
 
 @Category(IntegrationTest.class)
 public class CalledFromDetectTest {
+    private static final String TEXT_PRECEDING_RESULTS_FILE_DIR_PATH = " to ";
     private static ProgramVersion programVersion;
     private static File executionDir;
 
@@ -36,9 +37,6 @@ public class CalledFromDetectTest {
 
     @Test
     public void test() throws IOException, InterruptedException, IntegrationException {
-
-        final File resultsFile = new File(String.format("%s/blackduck/docker/result.json", System.getProperty("user.home")));
-        resultsFile.delete();
 
         final String cmdGetDetectScriptString = "curl -s https://blackducksoftware.github.io/hub-detect/hub-detect.sh";
         final String detectScriptString = TestUtils.execCmd(executionDir, cmdGetDetectScriptString, ONE_MINUTE_IN_MS, true);
@@ -77,10 +75,33 @@ public class CalledFromDetectTest {
         final String detectOutputString = FileUtils.readFileToString(detectOutputFile, StandardCharsets.UTF_8);
         System.out.printf("Detect output: %s", detectOutputString);
 
+        final File resultsFile = getResultsFile(detectOutputString);
         assertTrue(resultsFile.exists());
         final String dockerInspectorResultsFileContents = FileUtils.readFileToString(resultsFile, StandardCharsets.UTF_8);
         assertTrue(dockerInspectorResultsFileContents.contains("\"succeeded\": true"));
+
         assertTrue(detectOutputString.contains("DOCKER: SUCCESS"));
         assertTrue(detectOutputString.contains("Overall Status: SUCCESS"));
+    }
+
+    private File getResultsFile(final String detectOutputString) throws IntegrationException {
+        final String resultsFileDirPath = getResultsFileDirPath(detectOutputString);
+        final File resultsFileDir = new File(resultsFileDirPath);
+        final File resultsFile = new File(resultsFileDir, "result.json");
+        return resultsFile;
+    }
+
+    private String getResultsFileDirPath(final String detectOutputString) throws IntegrationException {
+        for (final String line : detectOutputString.split("\n")) {
+            // if (line.matches(".*FileOperations\\s+: Copying .*result\\.json to .*")) {
+            if (line.matches(".*FileOperations\\s+: Copying.*output/result\\.json to .*")) {
+                System.out.printf("found line: %s\n", line);
+                final int resultsFileDirPathStart = line.indexOf(TEXT_PRECEDING_RESULTS_FILE_DIR_PATH) + TEXT_PRECEDING_RESULTS_FILE_DIR_PATH.length();
+                final String resultsFileDirPath = line.substring(resultsFileDirPathStart);
+                System.out.printf("Results file dir path: %s\n", resultsFileDirPath);
+                return resultsFileDirPath;
+            }
+        }
+        throw new IntegrationException("Results file dir path not found");
     }
 }
