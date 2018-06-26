@@ -237,9 +237,6 @@ public class DockerInspectorTest {
     public void testWhiteoutUsingExistingAlpineContainer() throws IOException, InterruptedException, IntegrationException {
         final String targetRepo = "blackducksoftware/whiteouttest";
         final String targetTag = "1.0";
-        // final File outputContainerFileSystemFile = getOutputContainerFileSystemFile(repo, tag);
-        // testTar("build/images/test/whiteouttest.tar", repo.replaceAll("/", "_"), repo, tag, tag, "var_lib_dpkg", true, false, null, true, outputContainerFileSystemFile);
-
         final String targetPkgMgrLib = "var_lib_dpkg";
         final String tarFileBaseName = "whiteouttest";
         final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE;
