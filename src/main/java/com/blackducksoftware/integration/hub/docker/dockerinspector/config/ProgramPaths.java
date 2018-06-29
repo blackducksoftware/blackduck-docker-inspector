@@ -151,11 +151,6 @@ public class ProgramPaths {
         return processId;
     }
 
-    public String unEscape(final String origString) {
-        final String unEscapedString = origString.replaceAll("%20", " ");
-        return unEscapedString;
-    }
-
     public String getUserOutputDir() {
         if (StringUtils.isBlank(config.getOutputPath())) {
             return null;

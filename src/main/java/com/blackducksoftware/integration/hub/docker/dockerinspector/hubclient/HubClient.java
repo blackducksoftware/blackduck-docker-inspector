@@ -99,7 +99,7 @@ public class HubClient {
     }
 
     private String getHubUsername() {
-        return programPaths.unEscape(config.getHubUsername());
+        return config.getHubUsername();
     }
 
     public void phoneHome(final String dockerEngineVersion) {

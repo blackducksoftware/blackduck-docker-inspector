@@ -359,7 +359,7 @@ public class Config {
     }
 
     public String getHubUsername() {
-        return optionsByFieldName.get("hubUsername").getResolvedValue();
+        return unEscape(optionsByFieldName.get("hubUsername").getResolvedValue());
     }
 
     public String getHubPassword() {
@@ -387,11 +387,11 @@ public class Config {
     }
 
     public String getHubProjectName() {
-        return optionsByFieldName.get("hubProjectName").getResolvedValue();
+        return unEscape(optionsByFieldName.get("hubProjectName").getResolvedValue());
     }
 
     public String getHubProjectVersion() {
-        return optionsByFieldName.get("hubProjectVersion").getResolvedValue();
+        return unEscape(optionsByFieldName.get("hubProjectVersion").getResolvedValue());
     }
 
     public String getWorkingDirPath() {
@@ -430,7 +430,7 @@ public class Config {
     }
 
     public String getDockerTar() {
-        return optionsByFieldName.get("dockerTar").getResolvedValue();
+        return unEscape(optionsByFieldName.get("dockerTar").getResolvedValue());
     }
 
     public String getDockerImageId() {
@@ -571,6 +571,13 @@ public class Config {
 
     public void setLoggingLevel(final String newValue) {
         optionsByFieldName.get("loggingLevel").setResolvedValue(newValue);
+    }
+
+    private String unEscape(final String origString) {
+        logger.trace(String.format("origString: %s", origString));
+        final String unEscapedString = origString.replaceAll("%20", " ");
+        logger.trace(String.format("unEscapedString: %s", unEscapedString));
+        return unEscapedString;
     }
 
     // This is here to prevent eclipse from making config property members final

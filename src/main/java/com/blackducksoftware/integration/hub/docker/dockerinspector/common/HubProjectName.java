@@ -36,11 +36,11 @@ public class HubProjectName {
     private ProgramPaths programPaths;
 
     public String getHubProjectName(final Config config) {
-        return programPaths.unEscape(config.getHubProjectName());
+        return config.getHubProjectName();
     }
 
     public String getHubProjectVersion(final Config config) {
-        return programPaths.unEscape(config.getHubProjectVersion());
+        return config.getHubProjectVersion();
     }
 
 }

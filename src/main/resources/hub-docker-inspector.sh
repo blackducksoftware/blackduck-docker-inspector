@@ -84,6 +84,7 @@ latestReleaseVersion=
 hubUsernameArgument=""
 hubProjectNameArgument=""
 hubProjectVersionArgument=""
+dockerTarArgument=""
 
 function printUsage() {
 	echo ""
@@ -247,6 +248,11 @@ function preProcessOptions() {
                         hubProjectVersion=$(echo "$cmdlinearg" | cut -d '=' -f 2)
                         hubProjectVersionEscaped=$(escapeSpaces "${hubProjectVersion}")
                         hubProjectVersionArgument="--hub.project.version=${hubProjectVersionEscaped}"
+                elif [[ "$cmdlinearg" == --docker.tar=* ]]
+                then
+                        dockerTar=$(echo "$cmdlinearg" | cut -d '=' -f 2)
+                        dockerTarEscaped=$(escapeSpaces "${dockerTar}")
+                        dockerTarArgument="--docker.tar=${dockerTarEscaped}"
 		elif [[ "${cmdlinearg}" == --spring.config.location=* ]]
 		then
 			# Once IDETECT-339 is done/released, this clause can go away
@@ -343,7 +349,7 @@ fi
 log "jarPath: ${jarPath}"
 log "Options: ${options[*]}"
 log "Jar dir: ${DOCKER_INSPECTOR_JAR_DIR}"
-${JAVACMD} "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" ${options[*]} ${hubUsernameArgument} ${hubProjectNameArgument} ${hubProjectVersionArgument}
+${JAVACMD} "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" ${options[*]} ${hubUsernameArgument} ${hubProjectNameArgument} ${hubProjectVersionArgument} ${dockerTarArgument}
 status=$?
 log "Return code: ${status}"
 exit ${status}
