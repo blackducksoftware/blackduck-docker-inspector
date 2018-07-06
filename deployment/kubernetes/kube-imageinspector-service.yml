@@ -2,7 +2,7 @@
 #
 # You'll definitely want to change the path to your shared directory (search for "hostPath").
 # You may also want to adjust the service port value (default: 9000), 
-# and the three hostPort values (defaults: 9000, 9001, 9002).
+# and the three hostPort values (defaults: 9000, 9001, 9002) and liveness port values.
 # If you change hostPort values, make the same changes in all three occurrences of args:
 # "--inspector.port.alpine=9000", "--inspector.port.centos=9001", "--inspector.port.ubuntu=9002"
 #
