@@ -1,0 +1,107 @@
+# Create the imageinspector webservice.
+#
+# You'll definitely want to change the path to your shared directory (search for "hostPath").
+# You may also want to adjust the service port value (default: 9000), 
+# and the three hostPort values (defaults: 9000, 9001, 9002).
+# If you change hostPort values, make the same changes in all three occurrences of args:
+# "--inspector.port.alpine=9000", "--inspector.port.centos=9001", "--inspector.port.ubuntu=9002"
+#
+apiVersion: v1
+kind: Service
+metadata:
+  name: hub-imageinspector-ws
+  namespace: hub-imageinspector-ws
+  labels:
+    app: hub-imageinspector-ws
+spec:
+  ports:
+  - port: 9000
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    app: hub-imageinspector-ws
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hub-imageinspector-ws
+  namespace: hub-imageinspector-ws
+  labels:
+    app: hub-imageinspector-ws
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hub-imageinspector-ws
+  template:
+    metadata:
+      labels:
+        app: hub-imageinspector-ws
+    spec:
+      containers:
+      - name: hub-imageinspector-ws-alpine
+        image: blackducksoftware/hub-imageinspector-ws-alpine:2.1.3
+        command: ["java"]
+        args: ["-jar", "/opt/blackduck/hub-imageinspector-ws/hub-imageinspector-ws.jar", "--server.port=8080", "--current.linux.distro=alpine", "--inspector.port.alpine=9000", "--inspector.port.centos=9001", "--inspector.port.ubuntu=9002"]
+        volumeMounts:
+        - name: blackduck-shared-dir
+          mountPath: /opt/blackduck/shared
+        ports:
+        - containerPort: 8080
+          hostPort: 9000
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 9000
+          initialDelaySeconds: 120
+          periodSeconds: 960
+          timeoutSeconds: 480
+        resources:
+          limits:
+            memory: 1Gi
+      - name: hub-imageinspector-ws-centos
+        image: blackducksoftware/hub-imageinspector-ws-centos:2.1.3
+        command: ["java"]
+        args: ["-jar", "/opt/blackduck/hub-imageinspector-ws/hub-imageinspector-ws.jar", "--server.port=8081", "--current.linux.distro=centos", "--inspector.port.alpine=9000", "--inspector.port.centos=9001", "--inspector.port.ubuntu=9002"]
+        volumeMounts:
+        - name: blackduck-shared-dir
+          mountPath: /opt/blackduck/shared
+        ports:
+        - containerPort: 8081
+          hostPort: 9001
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 9001
+          initialDelaySeconds: 120
+          periodSeconds: 960
+          timeoutSeconds: 480
+        resources:
+          limits:
+            memory: 1Gi
+      - name: hub-imageinspector-ws-ubuntu
+        image: blackducksoftware/hub-imageinspector-ws-ubuntu:2.1.3
+        command: ["java"]
+        args: ["-jar", "/opt/blackduck/hub-imageinspector-ws/hub-imageinspector-ws.jar", "--server.port=8082", "--current.linux.distro=ubuntu", "--inspector.port.alpine=9000", "--inspector.port.centos=9001", "--inspector.port.ubuntu=9002"]
+        volumeMounts:
+        - name: blackduck-shared-dir
+          mountPath: /opt/blackduck/shared
+        ports:
+        - containerPort: 8082
+          hostPort: 9002
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 9002
+          initialDelaySeconds: 120
+          periodSeconds: 960
+          timeoutSeconds: 480
+        resources:
+          limits:
+            memory: 1Gi
+      volumes:
+      - name: blackduck-shared-dir
+        hostPath:
+          path: /your/dir/shared
+          type: Directory
