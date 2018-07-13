@@ -54,10 +54,7 @@ public class ImageInspectorClientExistingServices implements ImageInspectorClien
 
     @Override
     public boolean isApplicable() {
-        boolean answer = false;
-        if (StringUtils.isNotBlank(config.getImageInspectorUrl())) {
-            answer = true;
-        }
+        final boolean answer = !config.isImageInspectorServiceStart() && StringUtils.isNotBlank(config.getImageInspectorUrl());
         logger.debug(String.format("isApplicable() returning %b", answer));
         return answer;
     }

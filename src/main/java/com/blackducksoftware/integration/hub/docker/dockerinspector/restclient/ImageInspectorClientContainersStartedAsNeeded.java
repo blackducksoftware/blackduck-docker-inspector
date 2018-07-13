@@ -30,6 +30,7 @@ import java.net.URISyntaxException;
 import java.util.Map;
 import java.util.function.Predicate;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -179,8 +180,15 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
     private URI deriveInspectorUri(final int inspectorPort) throws IntegrationException {
         URI imageInspectorUri;
         try {
-            imageInspectorUri = new URI(II_SERVICE_URI_SCHEME, null, II_SERVICE_HOST, inspectorPort,
-                    null, null, null);
+            if (StringUtils.isNotBlank(config.getImageInspectorUrl())) {
+                final URI serviceUri = new URI(config.getImageInspectorUrl());
+                imageInspectorUri = new URI(serviceUri.getScheme(), serviceUri.getUserInfo(), serviceUri.getHost(), inspectorPort, serviceUri.getPath(), serviceUri.getQuery(), serviceUri.getFragment());
+                logger.debug(String.format("Adjusted image inspector url from %s to %s", config.getImageInspectorUrl(), imageInspectorUri.toString()));
+            } else {
+                logger.debug(String.format("Will construct image inspector url for: %s", II_SERVICE_HOST));
+                imageInspectorUri = new URI(II_SERVICE_URI_SCHEME, null, II_SERVICE_HOST, inspectorPort,
+                        null, null, null);
+            }
         } catch (final URISyntaxException e) {
             throw new IntegrationException(String.format("Error deriving inspector URL: %s", e.getMessage()), e);
         }

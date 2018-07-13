@@ -62,6 +62,7 @@ import com.github.dockerjava.api.command.RemoveImageCmd;
 import com.github.dockerjava.api.command.SaveImageCmd;
 import com.github.dockerjava.api.command.StopContainerCmd;
 import com.github.dockerjava.api.exception.NotFoundException;
+import com.github.dockerjava.api.model.AccessMode;
 import com.github.dockerjava.api.model.Bind;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.ExposedPort;
@@ -70,6 +71,7 @@ import com.github.dockerjava.api.model.Image;
 import com.github.dockerjava.api.model.Info;
 import com.github.dockerjava.api.model.PortBinding;
 import com.github.dockerjava.api.model.Ports.Binding;
+import com.github.dockerjava.api.model.Volume;
 import com.github.dockerjava.core.command.ExecStartResultCallback;
 import com.github.dockerjava.core.command.LogContainerResultCallback;
 import com.github.dockerjava.core.command.PullImageResultCallback;
@@ -434,8 +436,9 @@ public class DockerClientManager {
 
     private Bind createBindMount(final String pathOnHost, final String pathOnContainer) {
         logger.debug(String.format("Mounting host:%s to container:%s", pathOnHost, pathOnContainer));
-        final File hostOutputDir = new File(pathOnHost);
-        final Bind bind = Bind.parse(String.format("%s:%s:rwx", hostOutputDir.getAbsolutePath(), pathOnContainer));
+        final File dirOnHost = new File(pathOnHost);
+        final Volume volume = new Volume(pathOnContainer);
+        final Bind bind = new Bind(dirOnHost.getAbsolutePath(), volume, AccessMode.rw);
         return bind;
     }
 
