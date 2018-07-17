@@ -140,6 +140,11 @@ public class DockerInspectorTest {
     }
 
     @Test
+    public void testBusyboxStartContainer() throws IOException, InterruptedException, IntegrationException {
+        testImage("busybox:latest", "busybox", "latest", "lib_apk", true, true);
+    }
+
+    @Test
     public void testAlpineLatest() throws IOException, InterruptedException, IntegrationException {
         testImage("alpine", "alpine", "latest", "lib_apk", false, false);
     }

@@ -1,0 +1,35 @@
+[
+  {
+    "specVersion": "1.1.0",
+    "spdx:name": "busybox_latest_noPkgMgr_noPkgMgr",
+    "creationInfo": {
+      "spdx:creator": [
+        "Tool: IntegrationBdio-13.0.0"
+      ],
+      "spdx:created": "2018-07-17T18:27:10.474Z"
+    },
+    "@id": "uuid:aef81b52-ae0c-4a11-a9ab-62b00c709f50",
+    "@type": "BillOfMaterials",
+    "relationship": []
+  },
+  {
+    "name": "busybox",
+    "revision": "latest",
+    "@id": "http:alpine/busybox/latest",
+    "@type": "Project",
+    "externalIdentifier": {
+      "externalSystemTypeId": "alpine",
+      "externalId": "busybox/latest",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "busybox",
+        "version": "latest"
+      }
+    },
+    "relationship": []
+  }
+]
