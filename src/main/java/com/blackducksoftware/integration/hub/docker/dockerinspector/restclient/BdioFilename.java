@@ -25,6 +25,7 @@ package com.blackducksoftware.integration.hub.docker.dockerinspector.restclient;
 
 import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.imageinspector.lib.PackageManagerEnum;
+import com.google.common.base.Optional;
 
 public class BdioFilename {
 
@@ -47,20 +48,24 @@ public class BdioFilename {
     }
 
     private String getPkgMgrLibDir(final String projectExternalIdMetaForgeName, final String spdxName) throws IntegrationException {
-        final PackageManagerEnum pkgMgr = getPkgMgrName(projectExternalIdMetaForgeName);
-        return pkgMgr.getDirectory().substring(1).replaceAll("/", "_");
+        final Optional<PackageManagerEnum> pkgMgr = getPkgMgrName(projectExternalIdMetaForgeName);
+        if (pkgMgr.isPresent()) {
+            return pkgMgr.get().getDirectory().substring(1).replaceAll("/", "_");
+        } else {
+            return "noPkgMgr";
+        }
     }
 
-    private PackageManagerEnum getPkgMgrName(final String projectExternalIdMetaForgeName) throws IntegrationException {
+    private Optional<PackageManagerEnum> getPkgMgrName(final String projectExternalIdMetaForgeName) throws IntegrationException {
         if (PackageManagerEnum.APK.getForge().getName().equalsIgnoreCase(projectExternalIdMetaForgeName)) {
-            return PackageManagerEnum.APK;
+            return Optional.of(PackageManagerEnum.APK);
         }
         if (PackageManagerEnum.RPM.getForge().getName().equalsIgnoreCase(projectExternalIdMetaForgeName)) {
-            return PackageManagerEnum.RPM;
+            return Optional.of(PackageManagerEnum.RPM);
         }
         if (PackageManagerEnum.DPKG.getForge().getName().equalsIgnoreCase(projectExternalIdMetaForgeName)) {
-            return PackageManagerEnum.DPKG;
+            return Optional.of(PackageManagerEnum.DPKG);
         }
-        throw new IntegrationException(String.format("Unrecognized forge name in BDIO result: %s", projectExternalIdMetaForgeName));
+        return Optional.absent();
     }
 }

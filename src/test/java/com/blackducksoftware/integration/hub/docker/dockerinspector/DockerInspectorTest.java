@@ -120,7 +120,7 @@ public class DockerInspectorTest {
     }
 
     @Test
-    public void testUbuntu() throws IOException, InterruptedException, IntegrationException {
+    public void testUbuntuExec() throws IOException, InterruptedException, IntegrationException {
         testImage("ubuntu:17.04", "ubuntu", "17.04", "var_lib_dpkg", true, false);
     }
 
@@ -130,7 +130,7 @@ public class DockerInspectorTest {
     }
 
     @Test
-    public void testAlpine() throws IOException, InterruptedException, IntegrationException {
+    public void testAlpineExec() throws IOException, InterruptedException, IntegrationException {
         testImage("alpine:3.6", "alpine", "3.6", "lib_apk", true, false);
     }
 
@@ -140,17 +140,27 @@ public class DockerInspectorTest {
     }
 
     @Test
-    public void testBusyboxStartContainer() throws IOException, InterruptedException, IntegrationException {
-        testImage("busybox:latest", "busybox", "latest", "lib_apk", true, true);
+    public void testBusyboxExec() throws IOException, InterruptedException, IntegrationException {
+        testImage("busybox:latest", "busybox", "latest", "noPkgMgr", true, false);
     }
 
     @Test
-    public void testAlpineLatest() throws IOException, InterruptedException, IntegrationException {
+    public void testBusyboxStartContainer() throws IOException, InterruptedException, IntegrationException {
+        testImage("busybox:latest", "busybox", "latest", "noPkgMgr", true, true);
+    }
+
+    @Test
+    public void testAlpineLatestExec() throws IOException, InterruptedException, IntegrationException {
         testImage("alpine", "alpine", "latest", "lib_apk", false, false);
     }
 
     @Test
-    public void testCentos() throws IOException, InterruptedException, IntegrationException {
+    public void testAlpineLatestStartContainer() throws IOException, InterruptedException, IntegrationException {
+        testImage("alpine", "alpine", "latest", "lib_apk", false, true);
+    }
+
+    @Test
+    public void testCentosExec() throws IOException, InterruptedException, IntegrationException {
         testImage("centos:7.3.1611", "centos", "7.3.1611", "var_lib_rpm", true, false);
     }
 
@@ -160,27 +170,47 @@ public class DockerInspectorTest {
     }
 
     @Test
-    public void testHubWebapp() throws IOException, InterruptedException, IntegrationException {
+    public void testHubWebappExec() throws IOException, InterruptedException, IntegrationException {
         testImage("blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", "lib_apk", true, false);
     }
 
     @Test
-    public void testHubZookeeper() throws IOException, InterruptedException, IntegrationException {
+    public void testHubWebappStartContainer() throws IOException, InterruptedException, IntegrationException {
+        testImage("blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", "lib_apk", true, true);
+    }
+
+    @Test
+    public void testHubZookeeperExec() throws IOException, InterruptedException, IntegrationException {
         testImage("blackducksoftware/hub-zookeeper:4.0.0", "blackducksoftware_hub-zookeeper", "4.0.0", "lib_apk", true, false);
     }
 
     @Test
-    public void testTomcat() throws IOException, InterruptedException, IntegrationException {
+    public void testHubZookeeperStartContainer() throws IOException, InterruptedException, IntegrationException {
+        testImage("blackducksoftware/hub-zookeeper:4.0.0", "blackducksoftware_hub-zookeeper", "4.0.0", "lib_apk", true, true);
+    }
+
+    @Test
+    public void testTomcatExec() throws IOException, InterruptedException, IntegrationException {
         testImage("tomcat:6.0.53-jre7", "tomcat", "6.0.53-jre7", "var_lib_dpkg", true, false);
     }
 
     @Test
-    public void testRhel() throws IOException, InterruptedException, IntegrationException {
+    public void testTomcatStartContainer() throws IOException, InterruptedException, IntegrationException {
+        testImage("tomcat:6.0.53-jre7", "tomcat", "6.0.53-jre7", "var_lib_dpkg", true, true);
+    }
+
+    @Test
+    public void testRhelExec() throws IOException, InterruptedException, IntegrationException {
         testImage("dnplus/rhel:6.5", "dnplus_rhel", "6.5", "var_lib_rpm", true, false);
     }
 
     @Test
-    public void testWhiteout() throws IOException, InterruptedException, IntegrationException {
+    public void testRhelStartContainer() throws IOException, InterruptedException, IntegrationException {
+        testImage("dnplus/rhel:6.5", "dnplus_rhel", "6.5", "var_lib_rpm", true, true);
+    }
+
+    @Test
+    public void testWhiteoutExec() throws IOException, InterruptedException, IntegrationException {
         final String repo = "blackducksoftware/whiteouttest";
         final String tag = "1.0";
         final File outputContainerFileSystemFile = getOutputContainerFileSystemFileFromTarFilename("whiteouttest.tar");
@@ -196,7 +226,7 @@ public class DockerInspectorTest {
     }
 
     @Test
-    public void testAggregateTarfileImageOne() throws IOException, InterruptedException, IntegrationException {
+    public void testAggregateTarfileImageOneExec() throws IOException, InterruptedException, IntegrationException {
         final String repo = "blackducksoftware/whiteouttest";
         final String tag = "1.0";
         final File outputContainerFileSystemFile = getOutputContainerFileSystemFileFromTarFilename("aggregated.tar");
@@ -204,7 +234,15 @@ public class DockerInspectorTest {
     }
 
     @Test
-    public void testAggregateTarfileImageTwo() throws IOException, InterruptedException, IntegrationException {
+    public void testAggregateTarfileImageOneStartContainer() throws IOException, InterruptedException, IntegrationException {
+        final String repo = "blackducksoftware/whiteouttest";
+        final String tag = "1.0";
+        final File outputContainerFileSystemFile = getOutputContainerFileSystemFileFromTarFilename("aggregated.tar");
+        testTar("build/images/test/aggregated.tar", repo.replaceAll("/", "_"), repo, tag, tag, "var_lib_dpkg", true, true, null, true, outputContainerFileSystemFile);
+    }
+
+    @Test
+    public void testAggregateTarfileImageTwoExec() throws IOException, InterruptedException, IntegrationException {
         final String repo = "blackducksoftware/centos_minus_vim_plus_bacula";
         final String tag = "1.0";
         final File outputContainerFileSystemFile = getOutputContainerFileSystemFileFromTarFilename("aggregated.tar");
@@ -212,19 +250,43 @@ public class DockerInspectorTest {
     }
 
     @Test
-    public void testAlpineLatestTarRepoTagSpecified() throws IOException, InterruptedException, IntegrationException {
-        final String repo = "alpine";
-        final String tag = "latest";
-        final File outputContainerFileSystemFile = getOutputContainerFileSystemFileFromTarFilename("alpine.tar");
-        testTar("build/images/test/alpine.tar", repo.replaceAll("/", "_"), repo, tag, tag, "lib_apk", false, false, null, true, outputContainerFileSystemFile);
+    public void testAggregateTarfileImageTwoStartContainer() throws IOException, InterruptedException, IntegrationException {
+        final String repo = "blackducksoftware/centos_minus_vim_plus_bacula";
+        final String tag = "1.0";
+        final File outputContainerFileSystemFile = getOutputContainerFileSystemFileFromTarFilename("aggregated.tar");
+        testTar("build/images/test/aggregated.tar", repo.replaceAll("/", "_"), repo, tag, tag, "var_lib_rpm", true, true, null, true, outputContainerFileSystemFile);
     }
 
     @Test
-    public void testAlpineLatestTarRepoTagNotSpecified() throws IOException, InterruptedException, IntegrationException {
+    public void testAlpineLatestTarRepoTagSpecifiedExec() throws IOException, InterruptedException, IntegrationException {
+        final String repo = "alpine";
+        final String tag = "latest";
+        final File outputContainerFileSystemFile = getOutputContainerFileSystemFileFromTarFilename("alpine.tar");
+        testTar("build/images/test/alpine.tar", repo.replaceAll("/", "_"), repo, tag, tag, "lib_apk", false, true, null, true, outputContainerFileSystemFile);
+    }
+
+    @Test
+    public void testAlpineLatestTarRepoTagSpecifiedStartContainer() throws IOException, InterruptedException, IntegrationException {
+        final String repo = "alpine";
+        final String tag = "latest";
+        final File outputContainerFileSystemFile = getOutputContainerFileSystemFileFromTarFilename("alpine.tar");
+        testTar("build/images/test/alpine.tar", repo.replaceAll("/", "_"), repo, tag, tag, "lib_apk", false, true, null, true, outputContainerFileSystemFile);
+    }
+
+    @Test
+    public void testAlpineLatestTarRepoTagNotSpecifiedExec() throws IOException, InterruptedException, IntegrationException {
         final String repo = "alpine";
         final String tag = null;
         final File outputContainerFileSystemFile = getOutputContainerFileSystemFileFromTarFilename("alpine.tar");
         testTar("build/images/test/alpine.tar", repo, tag, null, "latest", "lib_apk", false, false, null, true, outputContainerFileSystemFile);
+    }
+
+    @Test
+    public void testAlpineLatestTarRepoTagNotSpecifiedStartContainer() throws IOException, InterruptedException, IntegrationException {
+        final String repo = "alpine";
+        final String tag = null;
+        final File outputContainerFileSystemFile = getOutputContainerFileSystemFileFromTarFilename("alpine.tar");
+        testTar("build/images/test/alpine.tar", repo, tag, null, "latest", "lib_apk", false, true, null, true, outputContainerFileSystemFile);
     }
 
     @Test

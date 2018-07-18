@@ -80,7 +80,8 @@ public class IiClientContainersStartedAsNeededTest {
         Mockito.when(restRequestor.executeSimpleGetRequest(Mockito.any(RestConnection.class), Mockito.any(URI.class), Mockito.anyString())).thenReturn("{\"status\":\"UP\"}");
         // Mockito.when(restRequestor.executeSimpleGetRequest(Mockito.any(RestConnection.class), Mockito.anyString(), Mockito.anyString())).thenReturn("testResponse");
         final SimpleResponse response = new SimpleResponse(RestConstants.OK_200, null, "testResult");
-        Mockito.when(restRequestor.executeGetBdioRequest(Mockito.any(RestConnection.class), Mockito.any(URI.class), Mockito.anyString(), Mockito.anyString(), Mockito.anyBoolean())).thenReturn(response);
+        Mockito.when(restRequestor.executeGetBdioRequest(Mockito.any(RestConnection.class), Mockito.any(URI.class), Mockito.anyString(), Mockito.anyString(), Mockito.anyBoolean(),
+                Mockito.anyString(), Mockito.anyString())).thenReturn(response);
 
         Mockito.when(containerPaths.getContainerPathToOutputDir()).thenReturn("/opt/blackduck/hub-imageinspector-ws/shared/output");
         Mockito.when(inspectorImages.getInspectorImageName(Mockito.any(OperatingSystemEnum.class))).thenReturn("blackduck/hub-imageinspector-ws");

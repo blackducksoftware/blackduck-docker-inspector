@@ -6,23 +6,23 @@
       "spdx:creator": [
         "Tool: IntegrationBdio-13.0.0"
       ],
-      "spdx:created": "2018-07-17T18:27:10.474Z"
+      "spdx:created": "2018-07-18T22:10:10.380Z"
     },
-    "@id": "uuid:aef81b52-ae0c-4a11-a9ab-62b00c709f50",
+    "@id": "uuid:572a1a61-6994-4543-b516-234960cabfd7",
     "@type": "BillOfMaterials",
     "relationship": []
   },
   {
     "name": "busybox",
     "revision": "latest",
-    "@id": "http:alpine/busybox/latest",
+    "@id": "http:unknown/busybox/latest",
     "@type": "Project",
     "externalIdentifier": {
-      "externalSystemTypeId": "alpine",
+      "externalSystemTypeId": "unknown",
       "externalId": "busybox/latest",
       "externalIdMetaData": {
         "forge": {
-          "name": "alpine",
+          "name": "unknown",
           "separator": "/",
           "kbSeparator": "/"
         },

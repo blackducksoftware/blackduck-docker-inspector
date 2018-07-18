@@ -127,7 +127,8 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
             serviceContainerId = ensureServiceReady(restConnection, imageInspectorUri, inspectorOs);
             try {
                 logger.info(String.format("Sending getBdio request to: %s (%s)", imageInspectorUri.toString(), inspectorOs.name()));
-                response = restRequestor.executeGetBdioRequest(restConnection, imageInspectorUri, containerPathToInputDockerTarfile, containerPathToOutputFileSystemFile, cleanup);
+                response = restRequestor.executeGetBdioRequest(restConnection, imageInspectorUri, containerPathToInputDockerTarfile, containerPathToOutputFileSystemFile, cleanup,
+                        config.getDockerImageRepo(), config.getDockerImageTag());
             } catch (final IntegrationException e) {
                 logServiceError(serviceContainerId);
                 throw e;

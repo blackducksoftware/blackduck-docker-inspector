@@ -43,19 +43,31 @@ public class RestRequestor {
     private static final String LOGGING_LEVEL_QUERY_PARAM = "logginglevel";
     private static final String CLEANUP_QUERY_PARAM = "cleanup";
     private static final String RESULTING_CONTAINER_FS_PATH_QUERY_PARAM = "resultingcontainerfspath";
+    private static final String IMAGE_REPO_QUERY_PARAM = "imagerepo";
+    private static final String IMAGE_TAG_QUERY_PARAM = "imagetag";
     private static final String TARFILE_QUERY_PARAM = "tarfile";
     private static final String GETBDIO_ENDPOINT = "getbdio";
 
     private static final String BASE_LOGGER_NAME = "com.blackducksoftware";
 
-    public SimpleResponse executeGetBdioRequest(final RestConnection restConnection, final URI imageInspectorUri, final String containerPathToTarfile, final String containerPathToContainerFileSystemFile, final boolean cleanup)
+    public SimpleResponse executeGetBdioRequest(final RestConnection restConnection, final URI imageInspectorUri, final String containerPathToTarfile, final String containerPathToContainerFileSystemFile, final boolean cleanup,
+            final String givenImageRepo, final String givenImageTag)
             throws IntegrationException {
         String containerFileSystemQueryString = "";
         if (StringUtils.isNotBlank(containerPathToContainerFileSystemFile)) {
             containerFileSystemQueryString = String.format("&%s=%s", RESULTING_CONTAINER_FS_PATH_QUERY_PARAM, containerPathToContainerFileSystemFile);
         }
-        final String url = String.format("%s/%s?%s=%s&%s=%s&%s=%b%s",
-                imageInspectorUri.toString(), GETBDIO_ENDPOINT, LOGGING_LEVEL_QUERY_PARAM, getLoggingLevel(), TARFILE_QUERY_PARAM, containerPathToTarfile, CLEANUP_QUERY_PARAM, cleanup, containerFileSystemQueryString);
+        String imageRepoQueryString = "";
+        if (StringUtils.isNotBlank(givenImageRepo)) {
+            imageRepoQueryString = String.format("&%s=%s", IMAGE_REPO_QUERY_PARAM, givenImageRepo);
+        }
+        String imageTagQueryString = "";
+        if (StringUtils.isNotBlank(givenImageTag)) {
+            imageTagQueryString = String.format("&%s=%s", IMAGE_TAG_QUERY_PARAM, givenImageTag);
+        }
+        final String url = String.format("%s/%s?%s=%s&%s=%s&%s=%b%s%s%s",
+                imageInspectorUri.toString(), GETBDIO_ENDPOINT, LOGGING_LEVEL_QUERY_PARAM, getLoggingLevel(), TARFILE_QUERY_PARAM, containerPathToTarfile, CLEANUP_QUERY_PARAM, cleanup, containerFileSystemQueryString,
+                imageRepoQueryString, imageTagQueryString);
         logger.debug(String.format("Doing a getBdio request on %s", url));
         final Request request = new Request.Builder(url).method(HttpMethod.GET).build();
         try (Response response = restConnection.executeRequest(request)) {
