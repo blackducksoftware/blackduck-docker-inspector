@@ -36,13 +36,6 @@ apply plugin: 'com.bmuschko.docker-remote-api'
 import com.bmuschko.gradle.docker.tasks.image.Dockerfile
 import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 
-String hubDockerImageName = 'hub-docker-inspector'
-
-def linuxFlavorsDpkg = ["ubuntu:16.04"]
-def linuxFlavorsRpm = ["centos:7.3.1611"]
-def linuxFlavorsApk = ["alpine:3.5"]
-def linuxFlavors = linuxFlavorsDpkg + linuxFlavorsRpm + linuxFlavorsApk
-
 String hubDockerPgmDir = '/opt/blackduck/hub-docker-inspector'
 
 springBoot { mainClass = 'com.blackducksoftware.integration.hub.docker.dockerinspector.DockerEnvImageInspector' }
@@ -74,92 +67,10 @@ task produceFinalZip(type: Zip, dependsOn: [build, writeVersionToPropertiesFile]
     }
 }
 
-String getNameWithoutVersion(String linuxFlavor) {
-    String linuxFlavorDirName = linuxFlavor
-    int colonIndex = linuxFlavor.indexOf(':')
-    if (colonIndex >= 0) {
-        linuxFlavorDirName = linuxFlavor.subSequence(0, colonIndex)
-    }
-    linuxFlavorDirName
-}
-
-task createAddZipTasks() {
-    linuxFlavors.eachWithIndex {linuxFlavor, index ->
-        String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
-        println "linuxFlavorDirName: ${linuxFlavorDirName}"
-        task "addFinalZipTo${linuxFlavorDirName}ImageBuildDir"(type: Copy, dependsOn: produceFinalZip) {
-            def zipFile = file("${buildDir}/distributions/${project.name}-${version}.zip")
-            def outputDir = file("${buildDir}/images/${linuxFlavorDirName}/${hubDockerImageName}")
-            from zipTree(zipFile)
-            into outputDir
-        }
-    }
-}
-
 task buildScript(type: Copy) {
 	from 'src/main/resources/hub-docker-inspector.sh'
 	into 'build'
 	filter(ReplaceTokens, tokens: [VERSION: version])
-}
-
-task "addApplicationPropertiesFileToUbuntuImageBuildDir"(type: Copy, dependsOn: build) {
-			from 'src/main/resources/application.properties'
-			into "${buildDir}/images/ubuntu/${hubDockerImageName}/template"
-}
-
-task createApkDockerfileTasks() {
-    linuxFlavorsApk.eachWithIndex {linuxFlavor, index ->
-        String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
-        task "create${linuxFlavorDirName}Dockerfile"(type: Dockerfile) {
-            destFile = project.file("${buildDir}/images/${linuxFlavorDirName}/${hubDockerImageName}/Dockerfile")
-            println "destFile: ${destFile}"
-            from linuxFlavor
-            maintainer 'Black Duck Software'
-            environmentVariable('LANG', 'en_US.UTF-8')
-			
-            runCommand 'apk update && apk add bash && apk add openjdk8-jre'
-            
-            runCommand 'mkdir /opt'
-            runCommand 'mkdir /opt/blackduck'
-            runCommand "mkdir ${hubDockerPgmDir}"
-            runCommand "mkdir ${hubDockerPgmDir}/config"
-            runCommand "mkdir ${hubDockerPgmDir}/working"
-            runCommand "mkdir ${hubDockerPgmDir}/target"
-			runCommand "mkdir ${hubDockerPgmDir}/output"
-            addFile('config', "${hubDockerPgmDir}/config")
-            addFile("${project.name}-${version}.jar", "/opt/blackduck/${hubDockerImageName}/${project.name}.jar")
-            runCommand "chown -R 10001 ${hubDockerPgmDir}"
-            runCommand "chmod -R g+w /lib/apk"
-            user '10001'
-        }
-    }
-}
-
-task createRpmDockerfileTasks() {
-    linuxFlavorsRpm.eachWithIndex {linuxFlavor, index ->
-        String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
-        task "create${linuxFlavorDirName}Dockerfile"(type: Dockerfile) {
-            destFile = project.file("${buildDir}/images/${linuxFlavorDirName}/${hubDockerImageName}/Dockerfile")
-            println "destFile: ${destFile}"
-            from linuxFlavor
-            maintainer 'Black Duck Software'
-			environmentVariable('LANG', 'en_US.UTF-8')
-			
-            runCommand 'yum update -y && yum install -y java-1.8.0-openjdk && yum clean all -y'
-            
-            runCommand 'mkdir /opt/blackduck'
-            runCommand "mkdir ${hubDockerPgmDir}"
-            runCommand "mkdir ${hubDockerPgmDir}/config"
-            runCommand "mkdir ${hubDockerPgmDir}/working"
-            runCommand "mkdir ${hubDockerPgmDir}/target"
-			runCommand "mkdir ${hubDockerPgmDir}/output"
-            addFile('config', "${hubDockerPgmDir}/config")
-            addFile("${project.name}-${version}.jar", "/opt/blackduck/${hubDockerImageName}/${project.name}.jar")
-            runCommand "chown -R 10001 ${hubDockerPgmDir}"
-            runCommand "chmod -R g+w /var/lib"
-            user '10001'
-        }
-    }
 }
 
 task removeTestImage(type: Exec) {
@@ -215,21 +126,12 @@ task removeWhBaseImage(type: Exec) {
     commandLine "docker", "rmi", "ubuntu:16.04"
 }
 
-task listImages(type: Exec) {
-    commandLine "docker", "images"
-}
-
-task buildWhTestDockerImage(type: Exec, dependsOn: [removeWhBaseImage, removeWhImage, listImages, createWhTestDockerfile]) {
+task buildWhTestDockerImage(type: Exec, dependsOn: [removeWhBaseImage, removeWhImage, createWhTestDockerfile]) {
     commandLine "docker", "build", "--no-cache", "--tag", "blackducksoftware/whiteouttest:1.0", "${buildDir}/images/test/whiteouttest"
 }
 
 task buildWhTestDockerTarfile(type: Exec, dependsOn: buildWhTestDockerImage) {
     commandLine "docker", "save", "-o", "${buildDir}/images/test/whiteouttest.tar", "blackducksoftware/whiteouttest:1.0"
-}
-
-task removeAlpineImage(type: Exec) {
-    ignoreExitValue true
-    commandLine "docker", "rmi", "alpine:latest"
 }
 
 task pullAlpineLatest(type: Exec) {
@@ -261,94 +163,6 @@ task buildAggTestDockerTarfile(type: Exec, dependsOn: [buildTestDockerImage, bui
         "blackducksoftware/whiteouttest:1.0"
 }
 
-task createDpkgDockerfileTasks() {
-    linuxFlavorsDpkg.eachWithIndex {linuxFlavor, index ->
-        String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
-        task "create${linuxFlavorDirName}Dockerfile"(type: Dockerfile) {
-            destFile = project.file("${buildDir}/images/${linuxFlavorDirName}/${hubDockerImageName}/Dockerfile")
-            println "destFile: ${destFile}"
-            from linuxFlavor
-            maintainer 'Black Duck Software'
-			environmentVariable('LANG', 'en_US.UTF-8')
-			
-            runCommand 'apt-get update -y && \
-                apt install -y openjdk-8-jdk vim && \
-                apt-get install -y locales && apt-get -y clean'
-			runCommand 'locale-gen "en_US.UTF-8"'
-            
-            runCommand 'mkdir /opt/blackduck'
-            runCommand "mkdir ${hubDockerPgmDir}"
-            runCommand "mkdir ${hubDockerPgmDir}/config"
-            runCommand "mkdir ${hubDockerPgmDir}/working"
-			runCommand "mkdir ${hubDockerPgmDir}/temp"
-            runCommand "mkdir ${hubDockerPgmDir}/target"
-			runCommand "mkdir ${hubDockerPgmDir}/output"
-            addFile('config', "${hubDockerPgmDir}/config")
-            addFile("${project.name}-${version}.jar", "/opt/blackduck/${hubDockerImageName}/${project.name}.jar")
-            runCommand "chown -R 10001 ${hubDockerPgmDir}"
-            runCommand "chmod -R g+w /var/lib/dpkg"
-            user '10001'
-        }
-    }
-}
-
-task createDockerfiles(dependsOn: [createubuntuDockerfile, createcentosDockerfile, createalpineDockerfile]) {
-}
-
-task buildImageDirs(dependsOn: [addFinalZipToubuntuImageBuildDir, addFinalZipTocentosImageBuildDir, addFinalZipToalpineImageBuildDir,
-	addApplicationPropertiesFileToUbuntuImageBuildDir, createDockerfiles]) {
-}
-
-task createBuildDockerImageTasks() {
-    linuxFlavors.eachWithIndex {linuxFlavor, index ->
-        String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
-        def taskName = "buildDockerImage_${linuxFlavorDirName}"
-        String suffix = getSuffix(linuxFlavorDirName)
-        println "creating task ${taskName}"
-        task "${taskName}"(type: Exec, dependsOn: ["removeDockerImage_${linuxFlavorDirName}", buildImageDirs]) {
-            commandLine "docker", "build", "--tag", "blackducksoftware/${hubDockerImageName}${suffix}:${version}", \
-                "${buildDir}/images/${linuxFlavorDirName}/${hubDockerImageName}"
-        }
-    }
-}
-
-task dockerLogin(type: Exec) {
-    commandLine "docker", "login", "--username", "$System.env.DOCKER_HUB_USER", "--password", "$System.env.DOCKER_HUB_PASSWORD"
-}
-
-task pushImageAlpine(type: Exec, dependsOn: [buildDockerImage_alpine, dockerLogin]) {
-	commandLine "docker", "push", "blackducksoftware/hub-docker-inspector-alpine:${version}"
-}
-
-task pushImageCentos(type: Exec, dependsOn: [buildDockerImage_centos, dockerLogin]) {
-	commandLine "docker", "push", "blackducksoftware/hub-docker-inspector-centos:${version}"
-}
-
-task pushImageUbuntu(type: Exec, dependsOn: [buildDockerImage_ubuntu, dockerLogin]) {
-	commandLine "docker", "push", "blackducksoftware/hub-docker-inspector-ubuntu:${version}"
-}
-
-private String getSuffix(String linuxFlavorName) {
-    String suffix = "-${linuxFlavorName}"
-    suffix
-}
-
-task createRemoveDockerImageTasks() {
-    linuxFlavors.eachWithIndex {linuxFlavor, index ->
-        String linuxFlavorDirName = getNameWithoutVersion(linuxFlavor)
-        def taskName = "removeDockerImage_${linuxFlavorDirName}"
-        String suffix = getSuffix(linuxFlavorDirName)
-        println "creating task ${taskName}"
-        task "${taskName}"(type: Exec) {
-			ignoreExitValue true
-            commandLine "docker", "rmi", "blackducksoftware/${hubDockerImageName}${suffix}:${version}"
-        }
-    }
-}
-
-task buildImages(dependsOn: [buildDockerImage_ubuntu, buildDockerImage_centos, buildDockerImage_alpine]) {
-}
-
 task packageScript(type: Zip, dependsOn: buildScript) {
 	archiveName("${baseName}-${version}-script.${extension}")
 	from("${projectDir}/src/main/resources") {
@@ -359,52 +173,7 @@ task packageScript(type: Zip, dependsOn: buildScript) {
 	}
 }
 
-task stopDockerContainerUbuntu(type: Exec) {
-	ignoreExitValue true
-	commandLine 'docker', 'stop', 'hub-docker-inspector-ubuntu'
-}
-
-task stopDockerContainerCentos(type: Exec) {
-    ignoreExitValue true
-    commandLine 'docker', 'stop', 'hub-docker-inspector-centos'
-}
-
-task stopDockerContainerAlpine(type: Exec) {
-    ignoreExitValue true
-    commandLine 'docker', 'stop', 'hub-docker-inspector-alpine'
-}
-
-task stopDockerContainers(dependsOn: [stopDockerContainerUbuntu, stopDockerContainerCentos, stopDockerContainerAlpine]) {}
-
 compileJava.dependsOn writeVersionToPropertiesFile
-
-task tagAlpineImageAsLatest(type: Exec, dependsOn: buildDockerImage_alpine) {
-    commandLine 'docker', 'tag', "blackducksoftware/${hubDockerImageName}-alpine:${version}", "blackducksoftware/${hubDockerImageName}-alpine:latest"
-}
-
-task tagCentosImageAsLatest(type: Exec, dependsOn: buildDockerImage_centos) {
-    commandLine 'docker', 'tag', "blackducksoftware/${hubDockerImageName}-centos:${version}", "blackducksoftware/${hubDockerImageName}-centos:latest"
-}
-
-task tagUbuntuImageAsLatest(type: Exec, dependsOn: buildDockerImage_ubuntu) {
-    commandLine 'docker', 'tag', "blackducksoftware/${hubDockerImageName}-ubuntu:${version}", "blackducksoftware/${hubDockerImageName}-ubuntu:latest"
-}
-
-task tagDockerImagesAsLatest(dependsOn: [tagAlpineImageAsLatest, tagUbuntuImageAsLatest, tagCentosImageAsLatest]) {
-    
-}
-
-task releaseUbuntuImage(type: Exec, dependsOn: [pushImageUbuntu, tagUbuntuImageAsLatest]) {
-    commandLine 'docker', 'push', "blackducksoftware/${hubDockerImageName}-ubuntu:latest"
-}
-
-task releaseCentosImage(type: Exec, dependsOn: [pushImageCentos, tagCentosImageAsLatest]) {
-    commandLine 'docker', 'push', "blackducksoftware/${hubDockerImageName}-centos:latest"
-}
-
-task releaseAlpineImage(type: Exec, dependsOn: [pushImageAlpine, tagAlpineImageAsLatest]) {
-    commandLine 'docker', 'push', "blackducksoftware/${hubDockerImageName}-alpine:latest"
-}
 
 task checkVersion() {
     doFirst {
@@ -416,23 +185,19 @@ task checkVersion() {
     }
 }
 
-task pkg(dependsOn: [buildImages, packageScript]) {}
-
-task pushImages(dependsOn: [pkg, pushImageAlpine, pushImageCentos, pushImageUbuntu]) {
-}
+task pkg(dependsOn: [packageScript]) {}
 
 task buildTestTarfiles(dependsOn: [buildTestDockerTarfile, buildWhTestDockerTarfile, buildAggTestDockerTarfile, \
         buildAlpineTestDockerTarfile, buildAlpine36TestDockerTarfile, buildUbuntuTestDockerTarfile]) {}
 
-task testPrep(type: Exec, dependsOn: [build, stopDockerContainers, removeDockerImage_ubuntu, removeDockerImage_centos, removeDockerImage_alpine, \
-    packageScript, buildTestTarfiles]) {
+task testPrep(type: Exec, dependsOn: [build, packageScript, buildTestTarfiles]) {
     ignoreExitValue true
     commandLine 'mkdir', 'test'
 }
 
 testIntegration.dependsOn testPrep
 
-task all(dependsOn: [pushImages, testIntegration, artifactoryPublish]) {}
+task all(dependsOn: [testIntegration, artifactoryPublish]) {}
 
 publishing {
     publications {
