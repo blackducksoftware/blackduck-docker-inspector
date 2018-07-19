@@ -70,8 +70,8 @@ public class ImageInspectorClientExistingServices implements ImageInspectorClien
         }
         final int serviceRequestTimeoutSeconds = (int) (config.getCommandTimeout() / 1000L);
         final RestConnection restConnection = restConnectionCreator.createRedirectingConnection(imageInspectorUri, serviceRequestTimeoutSeconds);
-        final SimpleResponse response = restRequester.executeGetBdioRequest(restConnection, imageInspectorUri, containerPathToInputDockerTarfile, containerPathToOutputFileSystemFile, cleanup,
-                givenImageRepo, givenImageTag);
+        final SimpleResponse response = restRequester.executeGetBdioRequest(restConnection, imageInspectorUri, containerPathToInputDockerTarfile,
+                givenImageRepo, givenImageTag, containerPathToOutputFileSystemFile, cleanup);
         return response.getBody();
     }
 }

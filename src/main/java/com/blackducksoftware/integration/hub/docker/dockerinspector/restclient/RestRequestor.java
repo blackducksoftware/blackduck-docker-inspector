@@ -50,8 +50,8 @@ public class RestRequestor {
 
     private static final String BASE_LOGGER_NAME = "com.blackducksoftware";
 
-    public SimpleResponse executeGetBdioRequest(final RestConnection restConnection, final URI imageInspectorUri, final String containerPathToTarfile, final String containerPathToContainerFileSystemFile, final boolean cleanup,
-            final String givenImageRepo, final String givenImageTag)
+    public SimpleResponse executeGetBdioRequest(final RestConnection restConnection, final URI imageInspectorUri, final String containerPathToTarfile,
+            final String givenImageRepo, final String givenImageTag, final String containerPathToContainerFileSystemFile, final boolean cleanup)
             throws IntegrationException {
         String containerFileSystemQueryString = "";
         if (StringUtils.isNotBlank(containerPathToContainerFileSystemFile)) {
