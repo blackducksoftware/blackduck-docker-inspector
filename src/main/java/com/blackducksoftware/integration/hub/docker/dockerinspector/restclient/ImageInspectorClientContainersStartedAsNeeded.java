@@ -94,12 +94,13 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
     }
 
     @Override
-    public String getBdio(final String hostPathToTarfile, final String containerPathToInputDockerTarfile, final String containerPathToOutputFileSystemFile, final boolean cleanup) throws IntegrationException {
+    public String getBdio(final String hostPathToTarfile, final String containerPathToInputDockerTarfile, final String givenImageRepo, final String givenImageTag, final String containerPathToOutputFileSystemFile, final boolean cleanup)
+            throws IntegrationException {
         // First, try the default inspector service (which will return either the BDIO, or a redirect)
         final ImageInspectorOsEnum inspectorOs = ImageInspectorOsEnum.determineOperatingSystem(config.getImageInspectorDefault());
         final URI imageInspectorUri = deriveInspectorUri(imageInspectorServices.getDefaultImageInspectorHostPort());
         final Predicate<Integer> initialRequestFailureCriteria = statusCode -> statusCode != RestConstants.OK_200 && statusCode != RestConstants.MOVED_TEMP_302 && statusCode != RestConstants.MOVED_PERM_301;
-        final SimpleResponse response = getResponseFromService(imageInspectorUri, inspectorOs, containerPathToInputDockerTarfile, containerPathToOutputFileSystemFile, cleanup,
+        final SimpleResponse response = getResponseFromService(imageInspectorUri, inspectorOs, containerPathToInputDockerTarfile, givenImageRepo, givenImageTag, containerPathToOutputFileSystemFile, cleanup,
                 initialRequestFailureCriteria);
         if (response.getStatusCode() == RestConstants.OK_200) {
             return response.getBody();
@@ -112,12 +113,14 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
         final ImageInspectorOsEnum correctedInspectorOs = ImageInspectorOsEnum.determineOperatingSystem(correctImageInspectorOsName);
         final URI correctedImageInspectorUri = deriveInspectorUri(imageInspectorServices.getImageInspectorHostPort(correctedInspectorOs));
         final Predicate<Integer> correctedRequestFailureCriteria = statusCode -> statusCode != RestConstants.OK_200;
-        final SimpleResponse responseFromCorrectedContainer = getResponseFromService(correctedImageInspectorUri, correctedInspectorOs, containerPathToInputDockerTarfile, containerPathToOutputFileSystemFile, cleanup,
+        final SimpleResponse responseFromCorrectedContainer = getResponseFromService(correctedImageInspectorUri, correctedInspectorOs, containerPathToInputDockerTarfile, givenImageRepo, givenImageTag, containerPathToOutputFileSystemFile,
+                cleanup,
                 correctedRequestFailureCriteria);
         return responseFromCorrectedContainer.getBody();
     }
 
     private SimpleResponse getResponseFromService(final URI imageInspectorUri, final ImageInspectorOsEnum inspectorOs, final String containerPathToInputDockerTarfile,
+            final String givenImageRepo, final String givenImageTag,
             final String containerPathToOutputFileSystemFile, final boolean cleanup, final Predicate<Integer> failureTest) throws IntegrationException, HubIntegrationException {
         SimpleResponse response = null;
         String serviceContainerId = null;
@@ -128,7 +131,7 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
             try {
                 logger.info(String.format("Sending getBdio request to: %s (%s)", imageInspectorUri.toString(), inspectorOs.name()));
                 response = restRequestor.executeGetBdioRequest(restConnection, imageInspectorUri, containerPathToInputDockerTarfile, containerPathToOutputFileSystemFile, cleanup,
-                        config.getDockerImageRepo(), config.getDockerImageTag());
+                        givenImageRepo, givenImageTag);
             } catch (final IntegrationException e) {
                 logServiceError(serviceContainerId);
                 throw e;

@@ -88,7 +88,7 @@ public class IiClientContainersStartedAsNeededTest {
         Mockito.when(inspectorImages.getInspectorImageTag(Mockito.any(OperatingSystemEnum.class))).thenReturn("1.1.1");
 
         assertEquals(true, imageInspectorClientContainersStartedAsNeeded.isApplicable());
-        assertEquals("testResult", imageInspectorClientContainersStartedAsNeeded.getBdio("/tmp/t.tar", "/tmp/t.tar", "containerFileSystemFilename", true));
+        assertEquals("testResult", imageInspectorClientContainersStartedAsNeeded.getBdio("/tmp/t.tar", "/tmp/t.tar", null, null, "containerFileSystemFilename", true));
     }
 
 }

@@ -91,7 +91,8 @@ public class RestClientInspector implements Inspector {
             final String containerFileSystemFilename = Names.getContainerFileSystemTarFilename(config.getDockerImage(), config.getDockerTar());
             final String dockerTarFilePathInContainer = containerPaths.getContainerPathToTargetFile(finalDockerTarfile.getCanonicalPath());
             final String containerFileSystemPathInContainer = containerPaths.getContainerPathToOutputFile(containerFileSystemFilename);
-            final String bdioString = imageInspectorClient.getBdio(finalDockerTarfile.getCanonicalPath(), dockerTarFilePathInContainer, containerFileSystemPathInContainer, config.isCleanupWorkingDir());
+            final String bdioString = imageInspectorClient.getBdio(finalDockerTarfile.getCanonicalPath(), dockerTarFilePathInContainer, config.getDockerImageRepo(), config.getDockerImageTag(), containerFileSystemPathInContainer,
+                    config.isCleanupWorkingDir());
             output.provideBdioFileOutput(bdioString, deriveOutputBdioFilename(bdioString));
             cleanup();
             return 0;
