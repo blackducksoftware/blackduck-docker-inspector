@@ -312,10 +312,14 @@ function main() {
       echo "Conduct  Inspection:"
       local inspector_insecure_parameters=""
       if [ $trust_cert -eq 1 ]; then
-      	echo "WARNING: Ignoring certificate errors"
+		echo "WARNING: Ignoring certificate errors"
       	inspector_insecure_parameters="--hub.always.trust.cert=true"
       fi
-      "${INSPECTOR_SHELL_SCRIPT}" --hub.username="$hub_user" --hub.url=$HUB_URL --hub.project.name="$hub_project" --hub.project.version="$hub_version" $inspector_insecure_parameters "${IMAGE_TARFILE}"
+      if [ -z "${dry_run}" ]; then
+        "${INSPECTOR_SHELL_SCRIPT}" --hub.username="$hub_user" --hub.url=$HUB_URL --hub.project.name="$hub_project" --hub.project.version="$hub_version" $inspector_insecure_parameters "${IMAGE_TARFILE}"
+      else
+        "${INSPECTOR_SHELL_SCRIPT}" --hub.project.name="$hub_project" --hub.project.version="$hub_version" $inspector_insecure_parameters "${IMAGE_TARFILE}"
+      fi
       cmd_status=$?
       if [ $cmd_status -ne 0 ]; then
         exit $cmd_status
