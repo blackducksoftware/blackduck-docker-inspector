@@ -91,36 +91,37 @@ public abstract class ImageInspectorClient {
             throws IntegrationException {
         // First, try the default inspector service (which will return either the BDIO, or a redirect)
         final ImageInspectorOsEnum inspectorOs = ImageInspectorOsEnum.determineOperatingSystem(config.getImageInspectorDefaultDistro());
-        final URI imageInspectorUri = deriveInspectorUri(imageInspectorServices.getDefaultImageInspectorHostPortBasedOnDistro());
+        final URI imageInspectorBaseUri = deriveInspectorBaseUri();
         final Predicate<Integer> initialRequestFailureCriteria = statusCode -> statusCode != RestConstants.OK_200 && statusCode != RestConstants.MOVED_TEMP_302 && statusCode != RestConstants.MOVED_PERM_301;
-        final SimpleResponse response = getResponseFromService(imageInspectorUri, inspectorOs, containerPathToInputDockerTarfile, givenImageRepo, givenImageTag, containerPathToOutputFileSystemFile, cleanup,
+        final SimpleResponse response = getResponseFromService(imageInspectorBaseUri, inspectorOs, containerPathToInputDockerTarfile, givenImageRepo, givenImageTag, containerPathToOutputFileSystemFile, cleanup,
                 initialRequestFailureCriteria);
         if (response.getStatusCode() == RestConstants.OK_200) {
             return response.getBody();
         }
-        final String correctImageInspectorOsName = response.getBody().trim();
-        logger.info(String.format("This image needs to be inspected on %s", correctImageInspectorOsName));
-        logger.info("(Image inspection may complete faster if you align the value of property imageinspector.service.distro.default with the images you inspect most frequently)");
-
         // Handle redirect
+        final String redirectUrlString = response.getHeaders().get("Location");
+        final String correctImageInspectorOsName = response.getBody().trim();
+        logger.info(String.format("This image needs to be inspected on %s using service url %s", correctImageInspectorOsName, redirectUrlString));
+        logger.info("(Image inspection may complete faster if you align the default image inspector service with the images you inspect most frequently)");
+        final URI correctedImageInspectorBaseUri = deriveInspectorBaseUri(redirectUrlString);
         final ImageInspectorOsEnum correctedInspectorOs = ImageInspectorOsEnum.determineOperatingSystem(correctImageInspectorOsName);
-        final URI correctedImageInspectorUri = deriveInspectorUri(imageInspectorServices.getImageInspectorHostPort(correctedInspectorOs));
         final Predicate<Integer> correctedRequestFailureCriteria = statusCode -> statusCode != RestConstants.OK_200;
-        final SimpleResponse responseFromCorrectedContainer = getResponseFromService(correctedImageInspectorUri, correctedInspectorOs, containerPathToInputDockerTarfile, givenImageRepo, givenImageTag, containerPathToOutputFileSystemFile,
+        final SimpleResponse responseFromCorrectedContainer = getResponseFromService(correctedImageInspectorBaseUri, correctedInspectorOs, containerPathToInputDockerTarfile, givenImageRepo, givenImageTag,
+                containerPathToOutputFileSystemFile,
                 cleanup,
                 correctedRequestFailureCriteria);
         return responseFromCorrectedContainer.getBody();
     }
 
-    private SimpleResponse getResponseFromService(final URI imageInspectorUri, final ImageInspectorOsEnum inspectorOs, final String containerPathToInputDockerTarfile,
+    private SimpleResponse getResponseFromService(final URI imageInspectorBaseUri, final ImageInspectorOsEnum inspectorOs, final String containerPathToInputDockerTarfile,
             final String givenImageRepo, final String givenImageTag,
             final String containerPathToOutputFileSystemFile, final boolean cleanup, final Predicate<Integer> failureTest) throws IntegrationException, HubIntegrationException {
         SimpleResponse response = null;
         String serviceContainerId = null;
         RestConnection restConnection = null;
         try {
-            restConnection = createRestConnection(imageInspectorUri, deriveTimeoutSeconds());
-            final boolean serviceIsUp = checkServiceHealth(restConnection, imageInspectorUri);
+            restConnection = createRestConnection(imageInspectorBaseUri, deriveTimeoutSeconds());
+            final boolean serviceIsUp = checkServiceHealth(restConnection, imageInspectorBaseUri);
             if (serviceIsUp) {
                 Optional<Container> container = Optional.empty();
                 // TODO: don't like this check (too obscure). Need a better way to distinguish docker from non-docker(=cloud)
@@ -131,11 +132,11 @@ public abstract class ImageInspectorClient {
                     serviceContainerId = container.get().getId();
                 }
             } else {
-                serviceContainerId = startService(restConnection, imageInspectorUri, inspectorOs);
+                serviceContainerId = startService(restConnection, imageInspectorBaseUri, inspectorOs);
             }
             try {
-                logger.info(String.format("Sending getBdio request to: %s (%s)", imageInspectorUri.toString(), inspectorOs.name()));
-                response = restRequestor.executeGetBdioRequest(restConnection, imageInspectorUri, containerPathToInputDockerTarfile,
+                logger.info(String.format("Sending getBdio request to: %s (%s)", imageInspectorBaseUri.toString(), inspectorOs.name()));
+                response = restRequestor.executeGetBdioRequest(restConnection, imageInspectorBaseUri, containerPathToInputDockerTarfile,
                         givenImageRepo, givenImageTag, containerPathToOutputFileSystemFile, cleanup);
             } catch (final IntegrationException e) {
                 logServiceError(serviceContainerId);
@@ -185,23 +186,39 @@ public abstract class ImageInspectorClient {
         return (int) (config.getCommandTimeout() / 1000L);
     }
 
-    private URI deriveInspectorUri(final int inspectorPort) throws IntegrationException {
+    private URI deriveInspectorBaseUri(final String fullUrlString) throws IntegrationException {
+        URI imageInspectorUri;
+        try {
+            final URI fullUri = new URI(fullUrlString);
+            imageInspectorUri = new URI(fullUri.getScheme(), null, fullUri.getHost(), fullUri.getPort(), null, null, null);
+        } catch (final URISyntaxException e) {
+            throw new IntegrationException(String.format("Error parsing inspector URL %s: %s", fullUrlString, e.getMessage()), e);
+        }
+        logger.debug(String.format("ImageInspector URL: %s", imageInspectorUri.toString()));
+        return imageInspectorUri;
+    }
+
+    private URI deriveInspectorBaseUri() throws IntegrationException {
         URI imageInspectorUri;
         try {
             if (StringUtils.isNotBlank(config.getImageInspectorUrl())) {
-                final URI serviceUri = new URI(config.getImageInspectorUrl());
-                imageInspectorUri = new URI(serviceUri.getScheme(), serviceUri.getUserInfo(), serviceUri.getHost(), inspectorPort, serviceUri.getPath(), serviceUri.getQuery(), serviceUri.getFragment());
-                logger.debug(String.format("Adjusted image inspector url from %s to %s", config.getImageInspectorUrl(), imageInspectorUri.toString()));
+                imageInspectorUri = new URI(config.getImageInspectorUrl());
+                logger.debug(String.format("Using given image inspector url %s", imageInspectorUri.toString()));
             } else {
+                // TODO this code belongs in ImageInspectorClientStartServices
                 logger.debug(String.format("Will construct image inspector url for: %s", II_SERVICE_HOST));
-                imageInspectorUri = new URI(II_SERVICE_URI_SCHEME, null, II_SERVICE_HOST, inspectorPort,
-                        null, null, null);
+                imageInspectorUri = createLocalHostUri(imageInspectorServices.getDefaultImageInspectorHostPortBasedOnDistro());
             }
         } catch (final URISyntaxException e) {
             throw new IntegrationException(String.format("Error deriving inspector URL: %s", e.getMessage()), e);
         }
         logger.debug(String.format("ImageInspector URL: %s", imageInspectorUri.toString()));
         return imageInspectorUri;
+    }
+
+    private URI createLocalHostUri(final int inspectorPort) throws URISyntaxException {
+        return new URI(II_SERVICE_URI_SCHEME, null, II_SERVICE_HOST, inspectorPort,
+                null, null, null);
     }
 
     private RestConnection createRestConnection(final URI imageInspectorUri, final int serviceRequestTimeoutSeconds) throws IntegrationException {
@@ -238,13 +255,20 @@ public abstract class ImageInspectorClient {
         return containerId;
     }
 
+    // TODO the stuff that pulls and starts should be in ImageInspectorClientStartServices
     private String pullImageStartContainer(final ImageInspectorOsEnum inspectorOs, final String imageInspectorRepo, final String imageInspectorTag) throws HubIntegrationException, IntegrationException {
         final String imageId = dockerClientManager.pullImage(imageInspectorRepo, imageInspectorTag);
         final int containerPort = imageInspectorServices.getImageInspectorContainerPort(inspectorOs);
         final int hostPort = imageInspectorServices.getImageInspectorHostPort(inspectorOs);
         final String containerName = programPaths.deriveContainerName(imageInspectorRepo);
-        final String containerId = dockerClientManager.startContainerAsService(imageId, containerName, inspectorOs, containerPort, hostPort,
-                containerPaths.getContainerPathToOutputDir());
+        String containerId;
+        try {
+            containerId = dockerClientManager.startContainerAsService(imageId, containerName, inspectorOs, containerPort, hostPort,
+                    containerPaths.getContainerPathToOutputDir(), createLocalHostUri(config.getImageInspectorHostPortAlpine()).toString(),
+                    createLocalHostUri(config.getImageInspectorHostPortCentos()).toString(), createLocalHostUri(config.getImageInspectorHostPortUbuntu()).toString());
+        } catch (final URISyntaxException e) {
+            throw new HubIntegrationException(String.format("Error deriving image inspector URL from port: %s", e.getMessage()), e);
+        }
         return containerId;
     }
 
