@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -69,7 +70,7 @@ public class IiClientContainersStartedAsNeededTest {
 
         final Container targetContainer = Mockito.mock(Container.class);
         Mockito.when(targetContainer.getImage()).thenReturn("target");
-        Mockito.when(dockerClientManager.getRunningContainerByAppName(Mockito.any(DockerClient.class), Mockito.anyString(), Mockito.any(ImageInspectorOsEnum.class))).thenReturn(targetContainer);
+        Mockito.when(dockerClientManager.getRunningContainerByAppName(Mockito.any(DockerClient.class), Mockito.anyString(), Mockito.any(ImageInspectorOsEnum.class))).thenReturn(Optional.of(targetContainer));
 
         final DockerClient dockerClient = Mockito.mock(DockerClient.class);
         Mockito.when(hubDockerClient.getDockerClient()).thenReturn(dockerClient);

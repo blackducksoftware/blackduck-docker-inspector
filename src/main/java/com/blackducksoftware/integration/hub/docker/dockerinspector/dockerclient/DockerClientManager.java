@@ -442,7 +442,7 @@ public class DockerClientManager {
         return bind;
     }
 
-    public Container getRunningContainerByAppName(final DockerClient dockerClient, final String targetAppName, final ImageInspectorOsEnum targetInspectorOs) throws HubIntegrationException {
+    public Optional<Container> getRunningContainerByAppName(final DockerClient dockerClient, final String targetAppName, final ImageInspectorOsEnum targetInspectorOs) {
         final List<Container> containers = dockerClient.listContainersCmd().withShowAll(true).exec();
         for (final Container container : containers) {
             logger.debug(String.format("Checking container %s to see if it has labels app = %s, os = %s", container.getNames()[0], targetAppName, targetInspectorOs.name()));
@@ -451,10 +451,10 @@ public class DockerClientManager {
             logger.debug(String.format("Comparing app name %s to %s, os name %s to %s", targetAppName, containerAppName, targetInspectorOs.name(), containerOsName));
             if (targetAppName.equals(containerAppName) && targetInspectorOs.name().equalsIgnoreCase(containerOsName)) {
                 logger.debug("\tIt's a match");
-                return container;
+                return Optional.of(container);
             }
         }
-        throw new HubIntegrationException(String.format("No running container found with app = %s, os = %s", targetAppName, targetInspectorOs.name()));
+        return Optional.empty();
     }
 
     private Container getRunningContainerByContainerName(final DockerClient dockerClient, final String extractorContainerName) {

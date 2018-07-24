@@ -373,6 +373,10 @@ public class DockerInspectorTest {
         additionalArgs.add(String.format("--imageinspector.service.url=http://localhost:%d", portOnHost));
         additionalArgs.add(String.format("--shared.dir.path.local=%s", dirSharedWithContainer.getAbsolutePath()));
         additionalArgs.add(String.format("--shared.dir.path.imageinspector=%s", SHARED_DIR_PATH_IN_CONTAINER));
+        additionalArgs.add(String.format("--imageinspector.service.port.alpine=%d", IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE));
+        additionalArgs.add(String.format("--imageinspector.service.port.centos=%d", IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS));
+        additionalArgs.add(String.format("--imageinspector.service.port.ubuntu=%d", IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU));
+
         final File outputContainerFileSystemFile = new File(String.format("%s/output/%s_containerfilesystem.tar.gz", TestUtils.TEST_DIR_REL_PATH, tarFileBaseName));
         testTar(targetTar.getAbsolutePath(), targetRepo, null, null, targetTag, targetPkgMgrLib, true, false, additionalArgs, false, outputContainerFileSystemFile);
     }
