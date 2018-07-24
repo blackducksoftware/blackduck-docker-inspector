@@ -51,7 +51,7 @@ import com.blackducksoftware.integration.rest.exception.IntegrationRestException
 import com.github.dockerjava.api.model.Container;
 
 @Component
-public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspectorClient {
+public class ImageInspectorClientStartServices implements ImageInspectorClient {
     private static final String HUB_IMAGEINSPECTOR_WS_APPNAME = "hub-imageinspector-ws";
     private static final long CONTAINER_START_WAIT_MILLISECONDS = 2000L;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
