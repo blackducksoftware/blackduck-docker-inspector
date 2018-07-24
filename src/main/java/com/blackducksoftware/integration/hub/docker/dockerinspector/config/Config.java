@@ -256,9 +256,10 @@ public class Config {
     @Value("${imageinspector.service.port.ubuntu:9002}")
     private String imageInspectorHostPortUbuntu = "9002";
 
+    // In "start containers" mode, default is specified by distro; in "use existing", it's specified by URL
     @ValueDescription(description = "Default image inspector Linus distro (alpine, centos, or ubuntu)", defaultValue = "ubuntu", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${imageinspector.service.distro.default:ubuntu}")
-    private String imageInspectorDefault = INSPECTOR_OS_UBUNTU;
+    private String imageInspectorDefaultDistro = INSPECTOR_OS_UBUNTU;
 
     // Environment Variables
     @Value("${BD_HUB_PASSWORD:}")
@@ -501,8 +502,8 @@ public class Config {
         return new Integer(optionsByFieldName.get("imageInspectorHostPortUbuntu").getResolvedValue());
     }
 
-    public String getImageInspectorDefault() {
-        return optionsByFieldName.get("imageInspectorDefault").getResolvedValue();
+    public String getImageInspectorDefaultDistro() {
+        return optionsByFieldName.get("imageInspectorDefaultDistro").getResolvedValue();
     }
 
     public String getCallerVersion() {
@@ -634,6 +635,6 @@ public class Config {
         this.imageInspectorHostPortAlpine = null;
         this.imageInspectorHostPortCentos = null;
         this.imageInspectorHostPortUbuntu = null;
-        this.imageInspectorDefault = null;
+        this.imageInspectorDefaultDistro = null;
     }
 }

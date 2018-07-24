@@ -63,9 +63,9 @@ public class IiClientContainersStartedAsNeededTest {
     @Test
     public void test() throws IntegrationException, IOException {
         Mockito.when(config.isImageInspectorServiceStart()).thenReturn(true);
-        Mockito.when(imageInspectorPorts.getDefaultImageInspectorHostPort()).thenReturn(8080);
+        Mockito.when(imageInspectorPorts.getDefaultImageInspectorHostPortBasedOnDistro()).thenReturn(8080);
         Mockito.when(config.getCommandTimeout()).thenReturn(5000L);
-        Mockito.when(config.getImageInspectorDefault()).thenReturn("ubuntu");
+        Mockito.when(config.getImageInspectorDefaultDistro()).thenReturn("ubuntu");
 
         final Container targetContainer = Mockito.mock(Container.class);
         Mockito.when(targetContainer.getImage()).thenReturn("target");
