@@ -97,8 +97,8 @@ public class ImageInspectorClientContainersStartedAsNeeded implements ImageInspe
     public String getBdio(final String hostPathToTarfile, final String containerPathToInputDockerTarfile, final String givenImageRepo, final String givenImageTag, final String containerPathToOutputFileSystemFile, final boolean cleanup)
             throws IntegrationException {
         // First, try the default inspector service (which will return either the BDIO, or a redirect)
-        final ImageInspectorOsEnum inspectorOs = ImageInspectorOsEnum.determineOperatingSystem(config.getImageInspectorDefault());
-        final URI imageInspectorUri = deriveInspectorUri(imageInspectorServices.getDefaultImageInspectorHostPort());
+        final ImageInspectorOsEnum inspectorOs = ImageInspectorOsEnum.determineOperatingSystem(config.getImageInspectorDefaultDistro());
+        final URI imageInspectorUri = deriveInspectorUri(imageInspectorServices.getDefaultImageInspectorHostPortBasedOnDistro());
         final Predicate<Integer> initialRequestFailureCriteria = statusCode -> statusCode != RestConstants.OK_200 && statusCode != RestConstants.MOVED_TEMP_302 && statusCode != RestConstants.MOVED_PERM_301;
         final SimpleResponse response = getResponseFromService(imageInspectorUri, inspectorOs, containerPathToInputDockerTarfile, givenImageRepo, givenImageTag, containerPathToOutputFileSystemFile, cleanup,
                 initialRequestFailureCriteria);
