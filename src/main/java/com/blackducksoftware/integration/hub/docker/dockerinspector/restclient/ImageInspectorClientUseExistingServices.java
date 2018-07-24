@@ -39,7 +39,7 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.r
 import com.blackducksoftware.integration.rest.connection.RestConnection;
 
 @Component
-public class ImageInspectorClientExistingServices implements ImageInspectorClient {
+public class ImageInspectorClientUseExistingServices implements ImageInspectorClient {
 
     @Autowired
     private Config config;

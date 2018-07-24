@@ -18,7 +18,7 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Confi
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.DockerClientManager;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.HubDockerClient;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.ContainerPaths;
-import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.ImageInspectorClientContainersStartedAsNeeded;
+import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.ImageInspectorClientStartServices;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.ImageInspectorServices;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.RestConnectionCreator;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.RestRequestor;
@@ -34,7 +34,7 @@ import com.github.dockerjava.api.model.Container;
 public class IiClientContainersStartedAsNeededTest {
 
     @InjectMocks
-    private ImageInspectorClientContainersStartedAsNeeded imageInspectorClientContainersStartedAsNeeded;
+    private ImageInspectorClientStartServices imageInspectorClientContainersStartedAsNeeded;
 
     @Mock
     private Config config;
