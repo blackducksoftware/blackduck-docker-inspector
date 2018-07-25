@@ -1,0 +1,35 @@
+# Create the build machine
+#
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: build-machine
+  namespace: hub-imageinspector-ws
+  labels:
+    app: build-machine
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: build-machine
+  template:
+    metadata:
+      labels:
+        app: build-machine
+    spec:
+      containers:
+      - name: build-machine
+        image: ubuntu:latest
+        command: ["bash"]
+        args: ["-c", "trap : TERM INT; sleep infinity & wait"]
+        volumeMounts:
+        - name: blackduck-shared-dir
+          mountPath: /opt/blackduck/shared
+        resources:
+          limits:
+            memory: 1Gi
+      volumes:
+      - name: blackduck-shared-dir
+        hostPath:
+          path: /your/dir/shared
+          type: Directory

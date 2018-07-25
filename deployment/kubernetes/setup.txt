@@ -1,0 +1,37 @@
+#
+# Instructions for setting up a simple "detect invoking docker inspector" test environment in
+# a Kubernetes cluster using the provided sample yaml files.
+# Hopefully this is useful as an example of how to run detect + docker inspector in a Kubernetes cluster.
+#
+# This method deploys the three image inspector services, each in its own pod, each running on port 80.
+# It then deploys an extremely simple "build machine" inside the cluster, and runs detect from that
+# build machine.
+#
+curl -O https://raw.githubusercontent.com/blackducksoftware/hub-docker-inspector/master/deployment/kubernetes/kube-imageinspector-namespace.yml
+curl -O https://raw.githubusercontent.com/blackducksoftware/hub-docker-inspector/master/deployment/kubernetes/kube-imageinspector-service.yml
+curl -O https://raw.githubusercontent.com/blackducksoftware/hub-docker-inspector/master/deployment/kubernetes/kube-buildmachine.yml
+
+# Edit kube-buildmachine.yml: adjust path to volume (search for hostPath)
+# Edit kube-imageinspector-service.yml: adjust path to volume (search for hostPath)
+
+kubectl create -f kube-imageinspector-namespace.yml
+kubectl create -f kube-imageinspector-service.yml
+kubectl create -f kube-buildmachine.yml
+
+curl -O https://blackducksoftware.github.io/hub-detect/hub-detect.sh
+chmod +x hub-detect.sh
+
+buildmachinepod=$(kubectl --namespace hub-imageinspector-ws get pods|grep build-machine|cut -d' ' -f1)
+kubectl --namespace hub-imageinspector-ws cp ./hub-detect.sh ${buildmachinepod}:/tmp -c build-machine
+kubectl --namespace hub-imageinspector-ws exec ${buildmachinepod} -c build-machine -- apt-get update -y
+kubectl --namespace hub-imageinspector-ws exec ${buildmachinepod} -c build-machine -- apt-get install -y openjdk-8-jdk vim curl dnsutils
+kubectl --namespace hub-imageinspector-ws exec ${buildmachinepod} -c build-machine -- apt-get -y clean
+kubectl --namespace hub-imageinspector-ws exec ${buildmachinepod} -c build-machine -- touch /usr/local/bin/docker
+kubectl --namespace hub-imageinspector-ws exec ${buildmachinepod} -c build-machine -- chmod a+rx /usr/local/bin/docker
+
+# adjust the path in the next two commands
+mkdir -p /your/dir/shared/target
+docker save -o /your/dir/shared/target/alpine.tar alpine:latest
+
+# To test:
+kubectl --namespace hub-imageinspector-ws exec ${buildmachinepod} -c build-machine -- /tmp/hub-detect.sh --blackduck.hub.offline.mode=true --detect.hub.signature.scanner.disabled=true --detect.docker.tar=/opt/blackduck/shared/target/alpine.tar --detect.docker.passthrough.imageinspector.service.url=http://hub-imageinspector-ws-ubuntu.hub-imageinspector-ws --detect.docker.passthrough.shared.dir.path.local=/opt/blackduck/shared/ --detect.docker.passthrough.shared.dir.path.imageinspector=/opt/blackduck/shared
