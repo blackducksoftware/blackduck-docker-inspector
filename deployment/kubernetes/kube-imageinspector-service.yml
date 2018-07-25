@@ -1,6 +1,6 @@
 # Create the imageinspector webservice.
 #
-# You'll want to change the path to your shared directory (search for "hostPath").
+# You'll want to change the path to your shared directory in 3 places (search for "hostPath").
 #
 apiVersion: v1
 kind: Service

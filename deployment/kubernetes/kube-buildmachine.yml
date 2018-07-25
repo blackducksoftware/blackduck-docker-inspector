@@ -1,5 +1,7 @@
 # Create the build machine
 #
+# You'll want to change the path to your shared directory (search for "hostPath").
+#
 apiVersion: apps/v1
 kind: Deployment
 metadata:

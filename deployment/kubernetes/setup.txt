@@ -7,12 +7,18 @@
 # It then deploys an extremely simple "build machine" inside the cluster, and runs detect from that
 # build machine.
 #
+
+# You'll need a dir (/your/dir/shared) that will be mounted and
+# shared across pods.
+# Adjust the path in this command:
+mkdir -p /your/dir/shared/target
+
 curl -O https://raw.githubusercontent.com/blackducksoftware/hub-docker-inspector/master/deployment/kubernetes/kube-imageinspector-namespace.yml
 curl -O https://raw.githubusercontent.com/blackducksoftware/hub-docker-inspector/master/deployment/kubernetes/kube-imageinspector-service.yml
 curl -O https://raw.githubusercontent.com/blackducksoftware/hub-docker-inspector/master/deployment/kubernetes/kube-buildmachine.yml
 
 # Edit kube-buildmachine.yml: adjust path to volume (search for hostPath)
-# Edit kube-imageinspector-service.yml: adjust path to volume (search for hostPath)
+# Edit kube-imageinspector-service.yml: adjust path to volume in 3 places (search for hostPath)
 
 kubectl create -f kube-imageinspector-namespace.yml
 kubectl create -f kube-imageinspector-service.yml
@@ -26,11 +32,12 @@ kubectl --namespace hub-imageinspector-ws cp ./hub-detect.sh ${buildmachinepod}:
 kubectl --namespace hub-imageinspector-ws exec ${buildmachinepod} -c build-machine -- apt-get update -y
 kubectl --namespace hub-imageinspector-ws exec ${buildmachinepod} -c build-machine -- apt-get install -y openjdk-8-jdk vim curl dnsutils
 kubectl --namespace hub-imageinspector-ws exec ${buildmachinepod} -c build-machine -- apt-get -y clean
+
+# These commands work around a detect requirement that a docker executable be present
 kubectl --namespace hub-imageinspector-ws exec ${buildmachinepod} -c build-machine -- touch /usr/local/bin/docker
 kubectl --namespace hub-imageinspector-ws exec ${buildmachinepod} -c build-machine -- chmod a+rx /usr/local/bin/docker
 
-# adjust the path in the next two commands
-mkdir -p /your/dir/shared/target
+# adjust the path in this command:
 docker save -o /your/dir/shared/target/alpine.tar alpine:latest
 
 # To test:
