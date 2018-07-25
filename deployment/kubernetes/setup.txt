@@ -50,3 +50,11 @@ kubectl --namespace hub-imageinspector-ws exec ${buildmachinepod} -c build-machi
 # --detect.docker.passthrough.imageinspector.service.url=http://hub-imageinspector-ws-ubuntu.hub-imageinspector-ws # image inspector service url (http://servicename.namespace)
 # --detect.docker.passthrough.shared.dir.path.local=/opt/blackduck/shared/ # build machine's path to shared dir
 # --detect.docker.passthrough.shared.dir.path.imageinspector=/opt/blackduck/shared # image inspector pods' path to shared dir
+
+# You can direct requests to any the three image inspector services (hub-imageinspector-ws-alpine, hub-imageinspector-ws-centos, hub-imageinspector-ws-ubuntu)
+# by specifying that service in the --detect.docker.passthrough.imageinspector.service.url argument.
+# For best performance, direct requests to the service that uses the same package manager database
+# format as the images you inspect most frequently:
+# alpine -> alpine
+# centos, fedora, redhat -> centos
+# ubuntu, debian -> ubuntu
