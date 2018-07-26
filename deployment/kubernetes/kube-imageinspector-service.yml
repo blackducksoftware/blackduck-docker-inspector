@@ -39,7 +39,7 @@ spec:
         runAsUser: 1001
       containers:
       - name: hub-imageinspector-ws-alpine
-        image: blackducksoftware/hub-imageinspector-ws-alpine:2.2.0-SNAPSHOT
+        image: blackducksoftware/hub-imageinspector-ws-alpine:2.2.0
         command: ["java"]
         args: ["-jar", "/opt/blackduck/hub-imageinspector-ws/hub-imageinspector-ws.jar", "--server.port=8080", "--current.linux.distro=alpine", "--inspector.url.alpine=http://hub-imageinspector-ws-alpine.hub-imageinspector-ws", "--inspector.url.centos=http://hub-imageinspector-ws-centos.hub-imageinspector-ws", "--inspector.url.ubuntu=http://hub-imageinspector-ws-ubuntu.hub-imageinspector-ws"]
         volumeMounts:
@@ -100,7 +100,7 @@ spec:
         runAsUser: 1001
       containers:
       - name: hub-imageinspector-ws-centos
-        image: blackducksoftware/hub-imageinspector-ws-centos:2.2.0-SNAPSHOT
+        image: blackducksoftware/hub-imageinspector-ws-centos:2.2.0
         command: ["java"]
         args: ["-jar", "/opt/blackduck/hub-imageinspector-ws/hub-imageinspector-ws.jar", "--server.port=8081", "--current.linux.distro=centos", "--inspector.url.alpine=http://hub-imageinspector-ws-alpine.hub-imageinspector-ws", "--inspector.url.centos=http://hub-imageinspector-ws-centos.hub-imageinspector-ws", "--inspector.url.ubuntu=http://hub-imageinspector-ws-ubuntu.hub-imageinspector-ws"]
         volumeMounts:
@@ -161,7 +161,7 @@ spec:
         runAsUser: 1001
       containers:
       - name: hub-imageinspector-ws-ubuntu
-        image: blackducksoftware/hub-imageinspector-ws-ubuntu:2.2.0-SNAPSHOT
+        image: blackducksoftware/hub-imageinspector-ws-ubuntu:2.2.0
         command: ["java"]
         args: ["-jar", "/opt/blackduck/hub-imageinspector-ws/hub-imageinspector-ws.jar", "--server.port=8082", "--current.linux.distro=ubuntu", "--inspector.url.alpine=http://hub-imageinspector-ws-alpine.hub-imageinspector-ws", "--inspector.url.centos=http://hub-imageinspector-ws-centos.hub-imageinspector-ws", "--inspector.url.ubuntu=http://hub-imageinspector-ws-ubuntu.hub-imageinspector-ws"]
         volumeMounts:

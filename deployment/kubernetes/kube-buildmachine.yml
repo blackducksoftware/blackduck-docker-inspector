@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: build-machine
-        image: ubuntu:latest
+        image: buildmachine:1
         command: ["bash"]
         args: ["-c", "trap : TERM INT; sleep infinity & wait"]
         volumeMounts:

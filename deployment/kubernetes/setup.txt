@@ -17,6 +17,13 @@ curl -O https://raw.githubusercontent.com/blackducksoftware/hub-docker-inspector
 curl -O https://raw.githubusercontent.com/blackducksoftware/hub-docker-inspector/master/deployment/kubernetes/kube-imageinspector-service.yml
 curl -O https://raw.githubusercontent.com/blackducksoftware/hub-docker-inspector/master/deployment/kubernetes/kube-buildmachine.yml
 
+# Build a simplified simulation of a build machine
+mkdir image
+cd image
+curl -O https://raw.githubusercontent.com/blackducksoftware/hub-docker-inspector/master/deployment/kubernetes/Dockerfile
+docker build --tag buildmachine:1 .
+cd ..
+
 # Edit kube-buildmachine.yml: adjust path to volume (search for hostPath)
 # Edit kube-imageinspector-service.yml: adjust path to volume in 3 places (search for hostPath)
 
@@ -29,15 +36,9 @@ chmod +x hub-detect.sh
 
 buildmachinepod=$(kubectl --namespace hub-imageinspector-ws get pods|grep build-machine|cut -d' ' -f1)
 kubectl --namespace hub-imageinspector-ws cp ./hub-detect.sh ${buildmachinepod}:/tmp -c build-machine
-kubectl --namespace hub-imageinspector-ws exec ${buildmachinepod} -c build-machine -- apt-get update -y
-kubectl --namespace hub-imageinspector-ws exec ${buildmachinepod} -c build-machine -- apt-get install -y openjdk-8-jdk vim curl dnsutils
-kubectl --namespace hub-imageinspector-ws exec ${buildmachinepod} -c build-machine -- apt-get -y clean
 
-# These commands work around a detect requirement that a docker executable be present
-kubectl --namespace hub-imageinspector-ws exec ${buildmachinepod} -c build-machine -- touch /usr/local/bin/docker
-kubectl --namespace hub-imageinspector-ws exec ${buildmachinepod} -c build-machine -- chmod a+rx /usr/local/bin/docker
-
-# adjust the path in this command:
+# adjust the path in the docker save command:
+docker pull alpine:latest
 docker save -o /your/dir/shared/target/alpine.tar alpine:latest
 
 # To test:
