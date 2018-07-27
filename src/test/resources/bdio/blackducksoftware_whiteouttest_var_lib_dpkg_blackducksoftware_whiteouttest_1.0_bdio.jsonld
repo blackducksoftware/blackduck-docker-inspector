@@ -4,11 +4,11 @@
     "spdx:name": "blackducksoftware_whiteouttest_1.0_var_lib_dpkg_DPKG",
     "creationInfo": {
       "spdx:creator": [
-        "Tool: IntegrationBdio-14.0.0"
+        "Tool: IntegrationBdio-13.0.0"
       ],
-      "spdx:created": "2018-07-17T14:42:52.297Z"
+      "spdx:created": "2018-07-27T16:53:03.242Z"
     },
-    "@id": "uuid:0615f8ac-0d9e-4e62-8fe6-b51bf778089b",
+    "@id": "uuid:d811e86e-f10a-40d7-b284-9b02b25e72ee",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -80,10 +80,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/libblkid1/2_27_1_6ubuntu3_4/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:debian/libgcc1/1_6_0_1_0ubuntu1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -104,6 +100,10 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:ubuntu/libblkid1/2_27_1_6ubuntu3_6/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:ubuntu/libheimbase1_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -113,10 +113,6 @@
       },
       {
         "related": "http:ubuntu/gcc_6_base/6_0_1_0ubuntu1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:debian/bsdutils/1_2_27_1_6ubuntu3_4/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -133,6 +129,10 @@
       },
       {
         "related": "http:ubuntu/libgcrypt20/1_6_5_2ubuntu0_5/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:debian/bsdutils/1_2_27_1_6ubuntu3_6/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -168,6 +168,10 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:ubuntu/mount/2_27_1_6ubuntu3_6/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:ubuntu/diffutils/1_3_3_3/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -181,10 +185,6 @@
       },
       {
         "related": "http:debian/base_passwd/3_5_39/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:ubuntu/mount/2_27_1_6ubuntu3_4/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -348,15 +348,15 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/libsmartcols1/2_27_1_6ubuntu3_4/amd64",
+        "related": "http:ubuntu/libsmartcols1/2_27_1_6ubuntu3_6/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:debian/libfdisk1/2_27_1_6ubuntu3_6/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
         "related": "http:ubuntu/libldap_2_4_2/2_4_42_dfsg_2ubuntu3_3/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:debian/base_files/9_4ubuntu4_6/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -392,10 +392,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/libfdisk1/2_27_1_6ubuntu3_4/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:ubuntu/krb5_locales/1_13_2_dfsg_5ubuntu2/all",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -424,7 +420,7 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/util_linux/2_27_1_6ubuntu3_4/amd64",
+        "related": "http:debian/libmount1/2_27_1_6ubuntu3_6/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -440,15 +436,15 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/libmount1/2_27_1_6ubuntu3_4/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:ubuntu/libdb5_3/5_3_28_11ubuntu0_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
         "related": "http:debian/systemd_sysv/229_4ubuntu21_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:debian/util_linux/2_27_1_6ubuntu3_6/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -504,7 +500,7 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/libuuid1/2_27_1_6ubuntu3_4/amd64",
+        "related": "http:debian/libuuid1/2_27_1_6ubuntu3_6/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -552,11 +548,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/dpkg/1_18_4ubuntu1_4/amd64",
+        "related": "http:ubuntu/bsdutils/1_2_27_1_6ubuntu3_6/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/bsdutils/1_2_27_1_6ubuntu3_4/amd64",
+        "related": "http:ubuntu/dpkg/1_18_4ubuntu1_4/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -616,6 +612,10 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:ubuntu/libmount1/2_27_1_6ubuntu3_6/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:debian/libpam_runtime/1_1_8_3_2ubuntu2_1/all",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -640,11 +640,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/libblkid1/2_27_1_6ubuntu3_4/amd64",
+        "related": "http:ubuntu/libseccomp2/2_3_1_2_1ubuntu2_16_04_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/libseccomp2/2_3_1_2_1ubuntu2_16_04_1/amd64",
+        "related": "http:debian/libblkid1/2_27_1_6ubuntu3_6/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -656,11 +656,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/libudev1/229_4ubuntu21_2/amd64",
+        "related": "http:debian/mount/2_27_1_6ubuntu3_6/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/mount/2_27_1_6ubuntu3_4/amd64",
+        "related": "http:debian/libudev1/229_4ubuntu21_2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -704,10 +704,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/libfdisk1/2_27_1_6ubuntu3_4/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:debian/libheimntlm0_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -721,6 +717,10 @@
       },
       {
         "related": "http:ubuntu/base_passwd/3_5_39/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:debian/base_files/9_4ubuntu4_7/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -856,7 +856,7 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/base_files/9_4ubuntu4_6/amd64",
+        "related": "http:ubuntu/base_files/9_4ubuntu4_7/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -884,11 +884,15 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/libsmartcols1/2_27_1_6ubuntu3_4/amd64",
+        "related": "http:debian/libsmartcols1/2_27_1_6ubuntu3_6/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
         "related": "http:debian/krb5_locales/1_13_2_dfsg_5ubuntu2/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:ubuntu/libfdisk1/2_27_1_6ubuntu3_6/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -964,10 +968,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/libmount1/2_27_1_6ubuntu3_4/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:debian/libdb5_3/5_3_28_11ubuntu0_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -1028,7 +1028,7 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/libuuid1/2_27_1_6ubuntu3_4/amd64",
+        "related": "http:ubuntu/libuuid1/2_27_1_6ubuntu3_6/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1052,15 +1052,15 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:ubuntu/util_linux/2_27_1_6ubuntu3_6/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:ubuntu/libk5crypto3/1_13_2_dfsg_5ubuntu2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
         "related": "http:ubuntu/librtmp1/2_4_20151223_gitfa8646d_1ubuntu0_1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:ubuntu/util_linux/2_27_1_6ubuntu3_4/amd64",
         "relationshipType": "DYNAMIC_LINK"
       }
     ]
@@ -1318,27 +1318,6 @@
     "relationship": []
   },
   {
-    "name": "libblkid1",
-    "revision": "2.27.1-6ubuntu3.4",
-    "@id": "http:ubuntu/libblkid1/2_27_1_6ubuntu3_4/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libblkid1/2.27.1-6ubuntu3.4/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "ubuntu",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "libblkid1",
-        "version": "2.27.1-6ubuntu3.4",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "libgcc1",
     "revision": "1:6.0.1-0ubuntu1",
     "@id": "http:debian/libgcc1/1_6_0_1_0ubuntu1/amd64",
@@ -1444,6 +1423,27 @@
     "relationship": []
   },
   {
+    "name": "libblkid1",
+    "revision": "2.27.1-6ubuntu3.6",
+    "@id": "http:ubuntu/libblkid1/2_27_1_6ubuntu3_6/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libblkid1/2.27.1-6ubuntu3.6/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libblkid1",
+        "version": "2.27.1-6ubuntu3.6",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "libheimbase1-heimdal",
     "revision": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
     "@id": "http:ubuntu/libheimbase1_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
@@ -1501,27 +1501,6 @@
         },
         "name": "gcc-6-base",
         "version": "6.0.1-0ubuntu1",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "bsdutils",
-    "revision": "1:2.27.1-6ubuntu3.4",
-    "@id": "http:debian/bsdutils/1_2_27_1_6ubuntu3_4/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "bsdutils/1:2.27.1-6ubuntu3.4/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "debian",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "bsdutils",
-        "version": "1:2.27.1-6ubuntu3.4",
         "architecture": "amd64"
       }
     },
@@ -1606,6 +1585,27 @@
         },
         "name": "libgcrypt20",
         "version": "1.6.5-2ubuntu0.5",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "bsdutils",
+    "revision": "1:2.27.1-6ubuntu3.6",
+    "@id": "http:debian/bsdutils/1_2_27_1_6ubuntu3_6/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "bsdutils/1:2.27.1-6ubuntu3.6/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "bsdutils",
+        "version": "1:2.27.1-6ubuntu3.6",
         "architecture": "amd64"
       }
     },
@@ -1780,6 +1780,27 @@
     "relationship": []
   },
   {
+    "name": "mount",
+    "revision": "2.27.1-6ubuntu3.6",
+    "@id": "http:ubuntu/mount/2_27_1_6ubuntu3_6/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "mount/2.27.1-6ubuntu3.6/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "mount",
+        "version": "2.27.1-6ubuntu3.6",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "diffutils",
     "revision": "1:3.3-3",
     "@id": "http:ubuntu/diffutils/1_3_3_3/amd64",
@@ -1858,27 +1879,6 @@
         },
         "name": "base-passwd",
         "version": "3.5.39",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "mount",
-    "revision": "2.27.1-6ubuntu3.4",
-    "@id": "http:ubuntu/mount/2_27_1_6ubuntu3_4/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "mount/2.27.1-6ubuntu3.4/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "ubuntu",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "mount",
-        "version": "2.27.1-6ubuntu3.4",
         "architecture": "amd64"
       }
     },
@@ -2726,12 +2726,12 @@
   },
   {
     "name": "libsmartcols1",
-    "revision": "2.27.1-6ubuntu3.4",
-    "@id": "http:ubuntu/libsmartcols1/2_27_1_6ubuntu3_4/amd64",
+    "revision": "2.27.1-6ubuntu3.6",
+    "@id": "http:ubuntu/libsmartcols1/2_27_1_6ubuntu3_6/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "libsmartcols1/2.27.1-6ubuntu3.4/amd64",
+      "externalId": "libsmartcols1/2.27.1-6ubuntu3.6/amd64",
       "externalIdMetaData": {
         "forge": {
           "name": "ubuntu",
@@ -2739,7 +2739,28 @@
           "kbSeparator": "/"
         },
         "name": "libsmartcols1",
-        "version": "2.27.1-6ubuntu3.4",
+        "version": "2.27.1-6ubuntu3.6",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libfdisk1",
+    "revision": "2.27.1-6ubuntu3.6",
+    "@id": "http:debian/libfdisk1/2_27_1_6ubuntu3_6/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libfdisk1/2.27.1-6ubuntu3.6/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libfdisk1",
+        "version": "2.27.1-6ubuntu3.6",
         "architecture": "amd64"
       }
     },
@@ -2761,27 +2782,6 @@
         },
         "name": "libldap-2.4-2",
         "version": "2.4.42+dfsg-2ubuntu3.3",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "base-files",
-    "revision": "9.4ubuntu4.6",
-    "@id": "http:debian/base_files/9_4ubuntu4_6/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "base-files/9.4ubuntu4.6/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "debian",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "base-files",
-        "version": "9.4ubuntu4.6",
         "architecture": "amd64"
       }
     },
@@ -2956,27 +2956,6 @@
     "relationship": []
   },
   {
-    "name": "libfdisk1",
-    "revision": "2.27.1-6ubuntu3.4",
-    "@id": "http:debian/libfdisk1/2_27_1_6ubuntu3_4/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libfdisk1/2.27.1-6ubuntu3.4/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "debian",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "libfdisk1",
-        "version": "2.27.1-6ubuntu3.4",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "krb5-locales",
     "revision": "1.13.2+dfsg-5ubuntu2",
     "@id": "http:ubuntu/krb5_locales/1_13_2_dfsg_5ubuntu2/all",
@@ -3124,21 +3103,21 @@
     "relationship": []
   },
   {
-    "name": "util-linux",
-    "revision": "2.27.1-6ubuntu3.4",
-    "@id": "http:debian/util_linux/2_27_1_6ubuntu3_4/amd64",
+    "name": "libmount1",
+    "revision": "2.27.1-6ubuntu3.6",
+    "@id": "http:debian/libmount1/2_27_1_6ubuntu3_6/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "util-linux/2.27.1-6ubuntu3.4/amd64",
+      "externalId": "libmount1/2.27.1-6ubuntu3.6/amd64",
       "externalIdMetaData": {
         "forge": {
           "name": "debian",
           "separator": "/",
           "kbSeparator": "/"
         },
-        "name": "util-linux",
-        "version": "2.27.1-6ubuntu3.4",
+        "name": "libmount1",
+        "version": "2.27.1-6ubuntu3.6",
         "architecture": "amd64"
       }
     },
@@ -3208,27 +3187,6 @@
     "relationship": []
   },
   {
-    "name": "libmount1",
-    "revision": "2.27.1-6ubuntu3.4",
-    "@id": "http:debian/libmount1/2_27_1_6ubuntu3_4/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libmount1/2.27.1-6ubuntu3.4/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "debian",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "libmount1",
-        "version": "2.27.1-6ubuntu3.4",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "libdb5.3",
     "revision": "5.3.28-11ubuntu0.1",
     "@id": "http:ubuntu/libdb5_3/5_3_28_11ubuntu0_1/amd64",
@@ -3265,6 +3223,27 @@
         },
         "name": "systemd-sysv",
         "version": "229-4ubuntu21.2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "util-linux",
+    "revision": "2.27.1-6ubuntu3.6",
+    "@id": "http:debian/util_linux/2_27_1_6ubuntu3_6/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "util-linux/2.27.1-6ubuntu3.6/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "util-linux",
+        "version": "2.27.1-6ubuntu3.6",
         "architecture": "amd64"
       }
     },
@@ -3545,12 +3524,12 @@
   },
   {
     "name": "libuuid1",
-    "revision": "2.27.1-6ubuntu3.4",
-    "@id": "http:debian/libuuid1/2_27_1_6ubuntu3_4/amd64",
+    "revision": "2.27.1-6ubuntu3.6",
+    "@id": "http:debian/libuuid1/2_27_1_6ubuntu3_6/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "libuuid1/2.27.1-6ubuntu3.4/amd64",
+      "externalId": "libuuid1/2.27.1-6ubuntu3.6/amd64",
       "externalIdMetaData": {
         "forge": {
           "name": "debian",
@@ -3558,7 +3537,7 @@
           "kbSeparator": "/"
         },
         "name": "libuuid1",
-        "version": "2.27.1-6ubuntu3.4",
+        "version": "2.27.1-6ubuntu3.6",
         "architecture": "amd64"
       }
     },
@@ -3796,6 +3775,27 @@
     "relationship": []
   },
   {
+    "name": "bsdutils",
+    "revision": "1:2.27.1-6ubuntu3.6",
+    "@id": "http:ubuntu/bsdutils/1_2_27_1_6ubuntu3_6/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "bsdutils/1:2.27.1-6ubuntu3.6/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "bsdutils",
+        "version": "1:2.27.1-6ubuntu3.6",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "dpkg",
     "revision": "1.18.4ubuntu1.4",
     "@id": "http:ubuntu/dpkg/1_18_4ubuntu1_4/amd64",
@@ -3811,27 +3811,6 @@
         },
         "name": "dpkg",
         "version": "1.18.4ubuntu1.4",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "bsdutils",
-    "revision": "1:2.27.1-6ubuntu3.4",
-    "@id": "http:ubuntu/bsdutils/1_2_27_1_6ubuntu3_4/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "bsdutils/1:2.27.1-6ubuntu3.4/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "ubuntu",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "bsdutils",
-        "version": "1:2.27.1-6ubuntu3.4",
         "architecture": "amd64"
       }
     },
@@ -4132,6 +4111,27 @@
     "relationship": []
   },
   {
+    "name": "libmount1",
+    "revision": "2.27.1-6ubuntu3.6",
+    "@id": "http:ubuntu/libmount1/2_27_1_6ubuntu3_6/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libmount1/2.27.1-6ubuntu3.6/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libmount1",
+        "version": "2.27.1-6ubuntu3.6",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "libpam-runtime",
     "revision": "1.1.8-3.2ubuntu2.1",
     "@id": "http:debian/libpam_runtime/1_1_8_3_2ubuntu2_1/all",
@@ -4258,27 +4258,6 @@
     "relationship": []
   },
   {
-    "name": "libblkid1",
-    "revision": "2.27.1-6ubuntu3.4",
-    "@id": "http:debian/libblkid1/2_27_1_6ubuntu3_4/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libblkid1/2.27.1-6ubuntu3.4/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "debian",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "libblkid1",
-        "version": "2.27.1-6ubuntu3.4",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "libseccomp2",
     "revision": "2.3.1-2.1ubuntu2~16.04.1",
     "@id": "http:ubuntu/libseccomp2/2_3_1_2_1ubuntu2_16_04_1/amd64",
@@ -4294,6 +4273,27 @@
         },
         "name": "libseccomp2",
         "version": "2.3.1-2.1ubuntu2~16.04.1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libblkid1",
+    "revision": "2.27.1-6ubuntu3.6",
+    "@id": "http:debian/libblkid1/2_27_1_6ubuntu3_6/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libblkid1/2.27.1-6ubuntu3.6/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libblkid1",
+        "version": "2.27.1-6ubuntu3.6",
         "architecture": "amd64"
       }
     },
@@ -4342,6 +4342,27 @@
     "relationship": []
   },
   {
+    "name": "mount",
+    "revision": "2.27.1-6ubuntu3.6",
+    "@id": "http:debian/mount/2_27_1_6ubuntu3_6/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "mount/2.27.1-6ubuntu3.6/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "mount",
+        "version": "2.27.1-6ubuntu3.6",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "libudev1",
     "revision": "229-4ubuntu21.2",
     "@id": "http:debian/libudev1/229_4ubuntu21_2/amd64",
@@ -4357,27 +4378,6 @@
         },
         "name": "libudev1",
         "version": "229-4ubuntu21.2",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "mount",
-    "revision": "2.27.1-6ubuntu3.4",
-    "@id": "http:debian/mount/2_27_1_6ubuntu3_4/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "mount/2.27.1-6ubuntu3.4/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "debian",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "mount",
-        "version": "2.27.1-6ubuntu3.4",
         "architecture": "amd64"
       }
     },
@@ -4594,27 +4594,6 @@
     "relationship": []
   },
   {
-    "name": "libfdisk1",
-    "revision": "2.27.1-6ubuntu3.4",
-    "@id": "http:ubuntu/libfdisk1/2_27_1_6ubuntu3_4/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libfdisk1/2.27.1-6ubuntu3.4/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "ubuntu",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "libfdisk1",
-        "version": "2.27.1-6ubuntu3.4",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "libheimntlm0-heimdal",
     "revision": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
     "@id": "http:debian/libheimntlm0_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
@@ -4693,6 +4672,27 @@
         },
         "name": "base-passwd",
         "version": "3.5.39",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "base-files",
+    "revision": "9.4ubuntu4.7",
+    "@id": "http:debian/base_files/9_4ubuntu4_7/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "base-files/9.4ubuntu4.7/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "base-files",
+        "version": "9.4ubuntu4.7",
         "architecture": "amd64"
       }
     },
@@ -5393,12 +5393,12 @@
   },
   {
     "name": "base-files",
-    "revision": "9.4ubuntu4.6",
-    "@id": "http:ubuntu/base_files/9_4ubuntu4_6/amd64",
+    "revision": "9.4ubuntu4.7",
+    "@id": "http:ubuntu/base_files/9_4ubuntu4_7/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "base-files/9.4ubuntu4.6/amd64",
+      "externalId": "base-files/9.4ubuntu4.7/amd64",
       "externalIdMetaData": {
         "forge": {
           "name": "ubuntu",
@@ -5406,7 +5406,7 @@
           "kbSeparator": "/"
         },
         "name": "base-files",
-        "version": "9.4ubuntu4.6",
+        "version": "9.4ubuntu4.7",
         "architecture": "amd64"
       }
     },
@@ -5540,12 +5540,12 @@
   },
   {
     "name": "libsmartcols1",
-    "revision": "2.27.1-6ubuntu3.4",
-    "@id": "http:debian/libsmartcols1/2_27_1_6ubuntu3_4/amd64",
+    "revision": "2.27.1-6ubuntu3.6",
+    "@id": "http:debian/libsmartcols1/2_27_1_6ubuntu3_6/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "libsmartcols1/2.27.1-6ubuntu3.4/amd64",
+      "externalId": "libsmartcols1/2.27.1-6ubuntu3.6/amd64",
       "externalIdMetaData": {
         "forge": {
           "name": "debian",
@@ -5553,7 +5553,7 @@
           "kbSeparator": "/"
         },
         "name": "libsmartcols1",
-        "version": "2.27.1-6ubuntu3.4",
+        "version": "2.27.1-6ubuntu3.6",
         "architecture": "amd64"
       }
     },
@@ -5576,6 +5576,27 @@
         "name": "krb5-locales",
         "version": "1.13.2+dfsg-5ubuntu2",
         "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libfdisk1",
+    "revision": "2.27.1-6ubuntu3.6",
+    "@id": "http:ubuntu/libfdisk1/2_27_1_6ubuntu3_6/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libfdisk1/2.27.1-6ubuntu3.6/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libfdisk1",
+        "version": "2.27.1-6ubuntu3.6",
+        "architecture": "amd64"
       }
     },
     "relationship": []
@@ -5959,27 +5980,6 @@
     "relationship": []
   },
   {
-    "name": "libmount1",
-    "revision": "2.27.1-6ubuntu3.4",
-    "@id": "http:ubuntu/libmount1/2_27_1_6ubuntu3_4/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libmount1/2.27.1-6ubuntu3.4/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "ubuntu",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "libmount1",
-        "version": "2.27.1-6ubuntu3.4",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "libdb5.3",
     "revision": "5.3.28-11ubuntu0.1",
     "@id": "http:debian/libdb5_3/5_3_28_11ubuntu0_1/amd64",
@@ -6296,12 +6296,12 @@
   },
   {
     "name": "libuuid1",
-    "revision": "2.27.1-6ubuntu3.4",
-    "@id": "http:ubuntu/libuuid1/2_27_1_6ubuntu3_4/amd64",
+    "revision": "2.27.1-6ubuntu3.6",
+    "@id": "http:ubuntu/libuuid1/2_27_1_6ubuntu3_6/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "ubuntu",
-      "externalId": "libuuid1/2.27.1-6ubuntu3.4/amd64",
+      "externalId": "libuuid1/2.27.1-6ubuntu3.6/amd64",
       "externalIdMetaData": {
         "forge": {
           "name": "ubuntu",
@@ -6309,7 +6309,7 @@
           "kbSeparator": "/"
         },
         "name": "libuuid1",
-        "version": "2.27.1-6ubuntu3.4",
+        "version": "2.27.1-6ubuntu3.6",
         "architecture": "amd64"
       }
     },
@@ -6421,6 +6421,27 @@
     "relationship": []
   },
   {
+    "name": "util-linux",
+    "revision": "2.27.1-6ubuntu3.6",
+    "@id": "http:ubuntu/util_linux/2_27_1_6ubuntu3_6/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "util-linux/2.27.1-6ubuntu3.6/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "util-linux",
+        "version": "2.27.1-6ubuntu3.6",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "libk5crypto3",
     "revision": "1.13.2+dfsg-5ubuntu2",
     "@id": "http:ubuntu/libk5crypto3/1_13_2_dfsg_5ubuntu2/amd64",
@@ -6457,27 +6478,6 @@
         },
         "name": "librtmp1",
         "version": "2.4+20151223.gitfa8646d-1ubuntu0.1",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "util-linux",
-    "revision": "2.27.1-6ubuntu3.4",
-    "@id": "http:ubuntu/util_linux/2_27_1_6ubuntu3_4/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "util-linux/2.27.1-6ubuntu3.4/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "ubuntu",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "util-linux",
-        "version": "2.27.1-6ubuntu3.4",
         "architecture": "amd64"
       }
     },
