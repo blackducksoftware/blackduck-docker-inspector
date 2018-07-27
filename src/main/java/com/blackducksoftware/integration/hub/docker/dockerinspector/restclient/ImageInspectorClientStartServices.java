@@ -98,9 +98,9 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
             throws IntegrationException {
         // First, try the default inspector service (which will return either the BDIO, or a redirect)
         final ImageInspectorOsEnum inspectorOs = ImageInspectorOsEnum.determineOperatingSystem(config.getImageInspectorDefaultDistro());
-        final URI imageInspectorUri = deriveInspectorUri(imageInspectorServices.getDefaultImageInspectorHostPortBasedOnDistro());
+        final URI imageInspectorBaseUri = deriveInspectorBaseUri(imageInspectorServices.getDefaultImageInspectorHostPortBasedOnDistro());
         final Predicate<Integer> initialRequestFailureCriteria = statusCode -> statusCode != RestConstants.OK_200 && statusCode != RestConstants.MOVED_TEMP_302 && statusCode != RestConstants.MOVED_PERM_301;
-        final SimpleResponse response = getResponseFromService(imageInspectorUri, inspectorOs, containerPathToInputDockerTarfile, givenImageRepo, givenImageTag, containerPathToOutputFileSystemFile, cleanup,
+        final SimpleResponse response = getResponseFromService(imageInspectorBaseUri, inspectorOs, containerPathToInputDockerTarfile, givenImageRepo, givenImageTag, containerPathToOutputFileSystemFile, cleanup,
                 initialRequestFailureCriteria);
         if (response.getStatusCode() == RestConstants.OK_200) {
             return response.getBody();
@@ -111,9 +111,10 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
 
         // Handle redirect
         final ImageInspectorOsEnum correctedInspectorOs = ImageInspectorOsEnum.determineOperatingSystem(correctImageInspectorOsName);
-        final URI correctedImageInspectorUri = deriveInspectorUri(imageInspectorServices.getImageInspectorHostPort(correctedInspectorOs));
+        final URI correctedImageInspectorBaseUri = deriveInspectorBaseUri(imageInspectorServices.getImageInspectorHostPort(correctedInspectorOs));
         final Predicate<Integer> correctedRequestFailureCriteria = statusCode -> statusCode != RestConstants.OK_200;
-        final SimpleResponse responseFromCorrectedContainer = getResponseFromService(correctedImageInspectorUri, correctedInspectorOs, containerPathToInputDockerTarfile, givenImageRepo, givenImageTag, containerPathToOutputFileSystemFile,
+        final SimpleResponse responseFromCorrectedContainer = getResponseFromService(correctedImageInspectorBaseUri, correctedInspectorOs, containerPathToInputDockerTarfile, givenImageRepo, givenImageTag,
+                containerPathToOutputFileSystemFile,
                 cleanup,
                 correctedRequestFailureCriteria);
         return responseFromCorrectedContainer.getBody();
@@ -181,7 +182,7 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         return (int) (config.getCommandTimeout() / 1000L);
     }
 
-    private URI deriveInspectorUri(final int inspectorPort) throws IntegrationException {
+    private URI deriveInspectorBaseUri(final int inspectorPort) throws IntegrationException {
         URI imageInspectorUri;
         try {
             if (StringUtils.isNotBlank(config.getImageInspectorUrl())) {
@@ -235,7 +236,9 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         final int hostPort = imageInspectorServices.getImageInspectorHostPort(inspectorOs);
         final String containerName = programPaths.deriveContainerName(imageInspectorRepo);
         final String containerId = dockerClientManager.startContainerAsService(imageId, containerName, inspectorOs, containerPort, hostPort,
-                containerPaths.getContainerPathToOutputDir());
+                containerPaths.getContainerPathToOutputDir(),
+                deriveInspectorBaseUri(config.getImageInspectorHostPortAlpine()).toString(), deriveInspectorBaseUri(config.getImageInspectorHostPortCentos()).toString(),
+                deriveInspectorBaseUri(config.getImageInspectorHostPortUbuntu()).toString());
         serviceIsUp = startService(restConnection, imageInspectorUri, imageInspectorRepo, imageInspectorTag);
         if (!serviceIsUp) {
             throw new IntegrationException(String.format("Tried to start image imspector container %s:%s, but service %s never came online", imageInspectorRepo, imageInspectorTag, imageInspectorUri.toString()));
