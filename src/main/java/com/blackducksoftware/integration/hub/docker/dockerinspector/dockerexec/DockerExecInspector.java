@@ -109,7 +109,11 @@ public class DockerExecInspector implements Inspector {
     }
 
     private void checkForGivenTargetOs(final Config config, final DissectedImage dissectedImage) {
-        dissectedImage.setTargetOs(imageInspector.detectOperatingSystem(config.getLinuxDistro()));
+        OperatingSystemEnum osEnum = null;
+        if (StringUtils.isNotBlank(config.getLinuxDistro())) {
+            osEnum = OperatingSystemEnum.determineOperatingSystem(config.getLinuxDistro());
+        }
+        dissectedImage.setTargetOs(osEnum);
     }
 
     private void constructContainerFileSystem(final Config config, final DissectedImage dissectedImage) throws IOException, IntegrationException {
@@ -154,8 +158,8 @@ public class DockerExecInspector implements Inspector {
                 dissectedImage.setTargetOs(imageInspector.detectInspectorOperatingSystem(dissectedImage.getTargetImageFileSystemRootDir()));
             }
             logger.info(String.format("Target image tarfile: %s; target OS: %s", dissectedImage.getDockerTarFile().getAbsolutePath(), dissectedImage.getTargetOs().toString()));
-            final ImageInfoDerived imageInfoDerived = imageInspector.generateBdioFromImageFilesDir(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), hubProjectName.getHubProjectName(config),
-                    hubProjectName.getHubProjectVersion(config), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs(), config.getHubCodelocationPrefix());
+            final ImageInfoDerived imageInfoDerived = imageInspector.generateBdioFromImageFilesDir(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), null, hubProjectName.getHubProjectName(config),
+                    hubProjectName.getHubProjectVersion(config), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), config.getHubCodelocationPrefix());
             output.writeBdioFile(dissectedImage, imageInfoDerived);
             output.createContainerFileSystemTarIfRequested(dissectedImage.getTargetImageFileSystemRootDir());
         }

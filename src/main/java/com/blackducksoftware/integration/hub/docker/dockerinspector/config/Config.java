@@ -261,6 +261,10 @@ public class Config {
     @Value("${imageinspector.service.distro.default:ubuntu}")
     private String imageInspectorDefaultDistro = INSPECTOR_OS_UBUNTU;
 
+    @ValueDescription(description = "Disable the use of preferred forge (such as @ubuntu) in BDIO components? (Only recommended when needed to be backward compatible with older Knowledge Bases)", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${bdio.preferred.forge.disabled:false}")
+    private Boolean bdioPreferredForgeDisabled = Boolean.FALSE;
+
     // Environment Variables
     @Value("${BD_HUB_PASSWORD:}")
     private String hubPasswordEnvVar = "";
@@ -506,6 +510,10 @@ public class Config {
         return optionsByFieldName.get("imageInspectorDefaultDistro").getResolvedValue();
     }
 
+    public boolean isBdioPreferredForgeDisabled() {
+        return optionsByFieldName.get("bdioPreferredForgeDisabled").getResolvedValue().equals("true");
+    }
+
     public String getCallerVersion() {
         return optionsByFieldName.get("callerVersion").getResolvedValue();
     }
@@ -636,5 +644,7 @@ public class Config {
         this.imageInspectorHostPortCentos = null;
         this.imageInspectorHostPortUbuntu = null;
         this.imageInspectorDefaultDistro = null;
+
+        this.bdioPreferredForgeDisabled = null;
     }
 }

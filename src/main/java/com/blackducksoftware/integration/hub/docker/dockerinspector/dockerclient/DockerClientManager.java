@@ -220,7 +220,7 @@ public class DockerClientManager {
     }
 
     public String startContainerAsService(final String imageId, final String containerName, final ImageInspectorOsEnum inspectorOs, final int containerPort, final int hostPort, final String containerPathToOutputDir,
-            final String inspectorUrlAlpine, final String inspectorUrlCentos, final String inspectorUrlUbuntu)
+            final String inspectorUrlAlpine, final String inspectorUrlCentos, final String inspectorUrlUbuntu, final boolean bdioPreferredForgeDisabled)
             throws IntegrationException {
         logger.info(String.format("Starting container: %s", containerName));
         logger.debug(String.format("\tImage ID: %s", imageId));
@@ -229,9 +229,10 @@ public class DockerClientManager {
 
         logger.debug(String.format("Creating container %s from image %s", containerName, imageId));
         final String imageInspectorOsName = inspectorOs.name();
-        final String cmd = String.format("java -jar /opt/blackduck/hub-imageinspector-ws/hub-imageinspector-ws.jar --server.port=%d --current.linux.distro=%s --inspector.url.alpine=%s --inspector.url.centos=%s --inspector.url.ubuntu=%s",
+        final String cmd = String.format(
+                "java -jar /opt/blackduck/hub-imageinspector-ws/hub-imageinspector-ws.jar --server.port=%d --current.linux.distro=%s --inspector.url.alpine=%s --inspector.url.centos=%s --inspector.url.ubuntu=%s --bdio.preferred.forge.disabled=%b",
                 containerPort,
-                imageInspectorOsName, inspectorUrlAlpine, inspectorUrlCentos, inspectorUrlUbuntu);
+                imageInspectorOsName, inspectorUrlAlpine, inspectorUrlCentos, inspectorUrlUbuntu, bdioPreferredForgeDisabled);
         logger.debug(String.format("Starting service with cmd: %s", cmd));
         final Map<String, String> labels = new HashMap<>(1);
         labels.put(CONTAINER_APPNAME_LABEL_KEY, IMAGEINSPECTOR_APP_NAME_LABEL_VALUE);

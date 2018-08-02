@@ -238,7 +238,8 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         final String containerId = dockerClientManager.startContainerAsService(imageId, containerName, inspectorOs, containerPort, hostPort,
                 containerPaths.getContainerPathToOutputDir(),
                 deriveInspectorBaseUri(config.getImageInspectorHostPortAlpine()).toString(), deriveInspectorBaseUri(config.getImageInspectorHostPortCentos()).toString(),
-                deriveInspectorBaseUri(config.getImageInspectorHostPortUbuntu()).toString());
+                deriveInspectorBaseUri(config.getImageInspectorHostPortUbuntu()).toString(),
+                config.isBdioPreferredForgeDisabled());
         serviceIsUp = startService(restConnection, imageInspectorUri, imageInspectorRepo, imageInspectorTag);
         if (!serviceIsUp) {
             throw new IntegrationException(String.format("Tried to start image imspector container %s:%s, but service %s never came online", imageInspectorRepo, imageInspectorTag, imageInspectorUri.toString()));
