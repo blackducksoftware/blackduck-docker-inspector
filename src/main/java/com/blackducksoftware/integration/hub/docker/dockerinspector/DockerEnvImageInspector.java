@@ -144,10 +144,10 @@ public class DockerEnvImageInspector {
         if (config.isOnHost() && !config.isImageInspectorServiceStart() && StringUtils.isBlank(config.getImageInspectorUrl())) {
             final StringBuilder sb = new StringBuilder();
             sb.append("\n========\n");
-            sb.append("Please start using 'REST client mode' (see the Docker Inspector Rest Client Mode page in the Hub Docker Inspector documentation)\n");
+            sb.append("Please start using 'HTTP client mode' (see the Docker Inspector HTTP Client Mode page in the Hub Docker Inspector documentation)\n");
             sb.append("to help ensure a smooth transition to future versions. ");
-            sb.append("REST client mode will eventually replace the current default Docker exec mode.\n");
-            sb.append("To use REST client mode now:\n");
+            sb.append("HTTP client mode will eventually replace the current default Docker exec mode.\n");
+            sb.append("To use HTTP client mode now:\n");
             sb.append("\tIf you are using Docker Inspector directly: set property imageinspector.service.start=true\n");
             sb.append("\tIf you are using Detect: set property detect.docker.passthrough.imageinspector.service.start=true\n");
             sb.append("See the documentation for information on how to avoid port conflicts.\n");
