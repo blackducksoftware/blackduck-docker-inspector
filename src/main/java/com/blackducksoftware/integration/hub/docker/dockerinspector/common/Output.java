@@ -92,15 +92,19 @@ public class Output {
         }
     }
 
-    public void provideBdioFileOutput(final String bdioString, final String outputBdioFilename) throws IOException, IntegrationException {
+    public File provideBdioFileOutput(final String bdioString, final String outputBdioFilename) throws IOException, IntegrationException {
+        // if user specified an output dir, use that; else use the temp output dir
+        File outputDir;
         if (StringUtils.isNotBlank(config.getOutputPath())) {
-            logger.info("Writing contents of container output dir to user output dir");
+            outputDir = new File(config.getOutputPath());
             provideOutput();
-            final File userOutputDir = new File(config.getOutputPath());
-            final File outputBdioFile = new File(userOutputDir, outputBdioFilename);
-            logger.info(String.format("Writing BDIO to %s", outputBdioFile.getAbsolutePath()));
-            FileUtils.write(outputBdioFile, bdioString, StandardCharsets.UTF_8);
+        } else {
+            outputDir = new File(programPaths.getHubDockerOutputPathHost());
         }
+        final File outputBdioFile = new File(outputDir, outputBdioFilename);
+        logger.info(String.format("Writing BDIO to %s", outputBdioFile.getAbsolutePath()));
+        FileUtils.write(outputBdioFile, bdioString, StandardCharsets.UTF_8);
+        return outputBdioFile;
     }
 
     public void writeBdioFile(final DissectedImage dissectedImage, final ImageInfoDerived imageInfoDerived) throws FileNotFoundException, IOException {
