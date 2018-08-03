@@ -98,7 +98,9 @@ public class RestClientInspector implements Inspector {
             final String bdioString = imageInspectorClient.getBdio(finalDockerTarfile.getCanonicalPath(), dockerTarFilePathInContainer, config.getDockerImageRepo(), config.getDockerImageTag(), containerFileSystemPathInContainer,
                     config.isCleanupWorkingDir());
             final File bdioFile = output.provideBdioFileOutput(bdioString, deriveOutputBdioFilename(bdioString));
-            hubClient.uploadBdioToHub(bdioFile);
+            if (config.isUploadBdio()) {
+                hubClient.uploadBdioToHub(bdioFile);
+            }
             cleanup();
             return 0;
         } catch (final IOException e) {
