@@ -257,7 +257,7 @@ public class Config {
     private String imageInspectorHostPortUbuntu = "9002";
 
     // In "start containers" mode, default is specified by distro; in "use existing", it's specified by URL
-    @ValueDescription(description = "Default image inspector Linus distro (alpine, centos, or ubuntu)", defaultValue = "ubuntu", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Default image inspector Linux distro (alpine, centos, or ubuntu)", defaultValue = "ubuntu", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${imageinspector.service.distro.default:ubuntu}")
     private String imageInspectorDefaultDistro = INSPECTOR_OS_UBUNTU;
 
