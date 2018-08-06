@@ -143,7 +143,8 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
             for (final String key : headers.keySet()) {
                 logger.debug(String.format("Header: %s=%s", key, headers.get(key)));
             }
-            logger.debug(String.format("If you want the log from the image inspector service, execute this command: docker logs %s. If the container is no longer running, set cleanup.inspector.container=true", serviceContainerId));
+            logger.debug(String.format("If you want the log from the image inspector service, execute this command: docker logs %s. If the container is no longer running, set cleanup.inspector.container=false and run again",
+                    serviceContainerId));
             if (failureTest.test(statusCode)) {
                 logServiceError(serviceContainerId);
                 final String warningHeaderValue = response.getWarningHeaderValue();
