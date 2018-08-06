@@ -60,12 +60,14 @@ public class DockerTarfile {
     }
 
     private File deriveDockerTarFileGivenImageSpec() throws HubIntegrationException, IOException {
-        File finalDockerTarfile = null;
+        File finalDockerTarfile;
         final File imageTarDirectory = new File(programPaths.getHubDockerTargetDirPath());
         if (StringUtils.isNotBlank(config.getDockerImageId())) {
             finalDockerTarfile = dockerClientManager.getTarFileFromDockerImageById(config.getDockerImageId(), imageTarDirectory);
         } else if (StringUtils.isNotBlank(config.getDockerImageRepo())) {
             finalDockerTarfile = dockerClientManager.getTarFileFromDockerImage(config.getDockerImageRepo(), config.getDockerImageTag(), imageTarDirectory);
+        } else {
+            throw new HubIntegrationException("You must specify a docker image");
         }
         return finalDockerTarfile;
     }
