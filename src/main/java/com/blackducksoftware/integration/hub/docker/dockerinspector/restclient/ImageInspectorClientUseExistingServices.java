@@ -23,6 +23,8 @@
  */
 package com.blackducksoftware.integration.hub.docker.dockerinspector.restclient;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -57,6 +59,11 @@ public class ImageInspectorClientUseExistingServices implements ImageInspectorCl
         final boolean answer = !config.isImageInspectorServiceStart() && StringUtils.isNotBlank(config.getImageInspectorUrl());
         logger.debug(String.format("isApplicable() returning %b", answer));
         return answer;
+    }
+
+    @Override
+    public File copyTarfileToSharedDir(final File givenDockerTarfile) throws IOException {
+        return givenDockerTarfile;
     }
 
     @Override

@@ -23,11 +23,15 @@
  */
 package com.blackducksoftware.integration.hub.docker.dockerinspector.restclient;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 
 import com.blackducksoftware.integration.exception.IntegrationException;
 
 public interface ImageInspectorClient {
+
+    File copyTarfileToSharedDir(final File givenDockerTarfile) throws IOException;
 
     String getBdio(String hostPathToTarFile, String containerPathToInputDockerTarfile, String givenImageRepo, String givenImageTag, String containerPathToOutputFileSystemFile, boolean cleanup)
             throws IntegrationException, MalformedURLException;

@@ -29,7 +29,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -91,7 +90,7 @@ public class RestClientInspector implements Inspector {
         final ImageInspectorClient imageInspectorClient = chooseImageInspectorClient();
         try {
             output.ensureWriteability();
-            final File finalDockerTarfile = prepareDockerTarfile();
+            final File finalDockerTarfile = prepareDockerTarfile(imageInspectorClient);
             final String containerFileSystemFilename = Names.getContainerFileSystemTarFilename(config.getDockerImage(), config.getDockerTar());
             final String dockerTarFilePathInContainer = containerPaths.getContainerPathToTargetFile(finalDockerTarfile.getCanonicalPath());
             final String containerFileSystemPathInContainer = containerPaths.getContainerPathToOutputFile(containerFileSystemFilename);
@@ -108,22 +107,9 @@ public class RestClientInspector implements Inspector {
         }
     }
 
-    private File prepareDockerTarfile() throws IOException, HubIntegrationException {
+    private File prepareDockerTarfile(final ImageInspectorClient imageInspectorClient) throws IOException, HubIntegrationException {
         final File givenDockerTarfile = dockerTarfile.deriveDockerTarFile();
-        if (!config.isOnHost()) {
-            return givenDockerTarfile;
-        }
-        if (!config.isImageInspectorServiceStart()) {
-            return givenDockerTarfile;
-        }
-        // Copy the tarfile to the shared/target dir
-        final File finalDockerTarfile = new File(programPaths.getHubDockerTargetDirPath(), givenDockerTarfile.getName());
-        logger.debug(String.format("Required docker tarfile location: %s", finalDockerTarfile.getCanonicalPath()));
-        if (!finalDockerTarfile.getCanonicalPath().equals(givenDockerTarfile.getCanonicalPath())) {
-            logger.debug(String.format("Copying %s to %s", givenDockerTarfile.getCanonicalPath(), finalDockerTarfile.getCanonicalPath()));
-            FileUtils.copyFile(givenDockerTarfile, finalDockerTarfile);
-        }
-        logger.debug(String.format("Final docker tar file path: %s", finalDockerTarfile.getCanonicalPath()));
+        final File finalDockerTarfile = imageInspectorClient.copyTarfileToSharedDir(givenDockerTarfile);
         return finalDockerTarfile;
     }
 

@@ -23,6 +23,7 @@
  */
 package com.blackducksoftware.integration.hub.docker.dockerinspector.restclient;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -30,6 +31,7 @@ import java.net.URISyntaxException;
 import java.util.Map;
 import java.util.function.Predicate;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -91,6 +93,19 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         final boolean answer = config.isImageInspectorServiceStart();
         logger.debug(String.format("isApplicable() returning %b", answer));
         return answer;
+    }
+
+    @Override
+    public File copyTarfileToSharedDir(final File givenDockerTarfile) throws IOException {
+        // Copy the tarfile to the shared/target dir
+        final File finalDockerTarfile = new File(programPaths.getHubDockerTargetDirPath(), givenDockerTarfile.getName());
+        logger.debug(String.format("Required docker tarfile location: %s", finalDockerTarfile.getCanonicalPath()));
+        if (!finalDockerTarfile.getCanonicalPath().equals(givenDockerTarfile.getCanonicalPath())) {
+            logger.debug(String.format("Copying %s to %s", givenDockerTarfile.getCanonicalPath(), finalDockerTarfile.getCanonicalPath()));
+            FileUtils.copyFile(givenDockerTarfile, finalDockerTarfile);
+        }
+        logger.debug(String.format("Final docker tar file path: %s", finalDockerTarfile.getCanonicalPath()));
+        return finalDockerTarfile;
     }
 
     @Override
