@@ -25,7 +25,7 @@ repositories {
     mavenCentral()
 }
 
-version = '6.1.0'
+version = '6.1.1-SNAPSHOT'
 def inspectorImageFamily = 'hub-imageinspector-ws'
 def inspectorImageVersion = "2.2.0"
 
