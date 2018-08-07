@@ -1,33 +1,33 @@
 [
   {
     "specVersion": "1.1.0",
-    "spdx:name": "alpine_3.6_lib_apk_APK",
+    "spdx:name": "null_null_lib_apk_APK",
     "creationInfo": {
       "spdx:creator": [
-        "Tool: IntegrationBdio-14.0.0"
+        "Tool: IntegrationBdio-13.0.0"
       ],
-      "spdx:created": "2018-07-11T16:07:18.643Z"
+      "spdx:created": "2018-08-07T19:29:43.999Z"
     },
-    "@id": "uuid:3bf76d94-2499-40cf-b8d1-0f47f7d3bc12",
+    "@id": "uuid:c8879601-d23e-43e7-b0bd-590bb3f38ba2",
     "@type": "BillOfMaterials",
     "relationship": []
   },
   {
-    "name": "alpine",
-    "revision": "3.6",
-    "@id": "http:alpine/alpine/3_6",
+    "name": "null",
+    "revision": "null",
+    "@id": "http:alpine/null/null",
     "@type": "Project",
     "externalIdentifier": {
       "externalSystemTypeId": "alpine",
-      "externalId": "alpine/3.6",
+      "externalId": "null/null",
       "externalIdMetaData": {
         "forge": {
           "name": "alpine",
           "separator": "/",
           "kbSeparator": "/"
         },
-        "name": "alpine",
-        "version": "3.6"
+        "name": "null",
+        "version": "null"
       }
     },
     "relationship": [

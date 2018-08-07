@@ -3,9 +3,11 @@ package com.blackducksoftware.integration.hub.docker.dockerinspector;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.attribute.PosixFilePermission;
 import java.util.ArrayList;
@@ -15,14 +17,18 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import com.blackducksoftware.integration.exception.IntegrationException;
+import com.blackducksoftware.integration.hub.bdio.BdioReader;
+import com.blackducksoftware.integration.hub.bdio.model.SimpleBdioDocument;
 import com.blackducksoftware.integration.hub.imageinspector.name.Names;
 import com.blackducksoftware.integration.test.annotation.IntegrationTest;
+import com.google.gson.Gson;
 
 @Category(IntegrationTest.class)
 public class DockerInspectorTest {
@@ -121,92 +127,92 @@ public class DockerInspectorTest {
 
     @Test
     public void testUbuntuExec() throws IOException, InterruptedException, IntegrationException {
-        testImage("ubuntu:17.04", "ubuntu", "17.04", "var_lib_dpkg", true, false);
+        testImage("ubuntu:17.04", "ubuntu", "17.04", "var_lib_dpkg", false, false, "dpkg", 10);
     }
 
     @Test
     public void testUbuntuStartContainer() throws IOException, InterruptedException, IntegrationException {
-        testImage("ubuntu:17.04", "ubuntu", "17.04", "var_lib_dpkg", true, true);
+        testImage("ubuntu:17.04", "ubuntu", "17.04", "var_lib_dpkg", false, true, "dpkg", 10);
     }
 
     @Test
     public void testAlpineExec() throws IOException, InterruptedException, IntegrationException {
-        testImage("alpine:3.6", "alpine", "3.6", "lib_apk", true, false);
+        testImage("alpine:3.6", "alpine", "3.6", "lib_apk", false, false, "apk-", 5);
     }
 
     @Test
     public void testAlpineStartContainer() throws IOException, InterruptedException, IntegrationException {
-        testImage("alpine:3.6", "alpine", "3.6", "lib_apk", true, true);
+        testImage("alpine:3.6", "alpine", "3.6", "lib_apk", false, true, "apk-", 5);
     }
 
     @Test
     public void testBusyboxExec() throws IOException, InterruptedException, IntegrationException {
-        testImage("busybox:latest", "busybox", "latest", "noPkgMgr", true, false);
+        testImage("busybox:latest", "busybox", "latest", "noPkgMgr", false, false, null, 0);
     }
 
     @Test
     public void testBusyboxStartContainer() throws IOException, InterruptedException, IntegrationException {
-        testImage("busybox:latest", "busybox", "latest", "noPkgMgr", true, true);
+        testImage("busybox:latest", "busybox", "latest", "noPkgMgr", false, true, null, 0);
     }
 
     @Test
     public void testAlpineLatestExec() throws IOException, InterruptedException, IntegrationException {
-        testImage("alpine", "alpine", "latest", "lib_apk", false, false);
+        testImage("alpine", "alpine", "latest", "lib_apk", false, false, "apk-", 5);
     }
 
     @Test
     public void testAlpineLatestStartContainer() throws IOException, InterruptedException, IntegrationException {
-        testImage("alpine", "alpine", "latest", "lib_apk", false, true);
+        testImage("alpine", "alpine", "latest", "lib_apk", false, true, "apk-", 5);
     }
 
     @Test
     public void testCentosExec() throws IOException, InterruptedException, IntegrationException {
-        testImage("centos:7.3.1611", "centos", "7.3.1611", "var_lib_rpm", true, false);
+        testImage("centos:7.3.1611", "centos", "7.3.1611", "var_lib_rpm", false, false, "rpm", 15);
     }
 
     @Test
     public void testCentosStartContainer() throws IOException, InterruptedException, IntegrationException {
-        testImage("centos:7.3.1611", "centos", "7.3.1611", "var_lib_rpm", true, true);
+        testImage("centos:7.3.1611", "centos", "7.3.1611", "var_lib_rpm", false, true, "rpm", 15);
     }
 
     @Test
     public void testHubWebappExec() throws IOException, InterruptedException, IntegrationException {
-        testImage("blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", "lib_apk", true, false);
+        testImage("blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", "lib_apk", true, false, "apk-", 5);
     }
 
     @Test
     public void testHubWebappStartContainer() throws IOException, InterruptedException, IntegrationException {
-        testImage("blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", "lib_apk", true, true);
+        testImage("blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", "lib_apk", true, true, "apk-", 5);
     }
 
     @Test
     public void testHubZookeeperExec() throws IOException, InterruptedException, IntegrationException {
-        testImage("blackducksoftware/hub-zookeeper:4.0.0", "blackducksoftware_hub-zookeeper", "4.0.0", "lib_apk", true, false);
+        testImage("blackducksoftware/hub-zookeeper:4.0.0", "blackducksoftware_hub-zookeeper", "4.0.0", "lib_apk", true, false, "apk-", 5);
     }
 
     @Test
     public void testHubZookeeperStartContainer() throws IOException, InterruptedException, IntegrationException {
-        testImage("blackducksoftware/hub-zookeeper:4.0.0", "blackducksoftware_hub-zookeeper", "4.0.0", "lib_apk", true, true);
+        testImage("blackducksoftware/hub-zookeeper:4.0.0", "blackducksoftware_hub-zookeeper", "4.0.0", "lib_apk", true, true, "apk-", 5);
     }
 
     @Test
     public void testTomcatExec() throws IOException, InterruptedException, IntegrationException {
-        testImage("tomcat:6.0.53-jre7", "tomcat", "6.0.53-jre7", "var_lib_dpkg", true, false);
+        testImage("tomcat:6.0.53-jre7", "tomcat", "6.0.53-jre7", "var_lib_dpkg", false, false, "dpkg", 5);
     }
 
     @Test
     public void testTomcatStartContainer() throws IOException, InterruptedException, IntegrationException {
-        testImage("tomcat:6.0.53-jre7", "tomcat", "6.0.53-jre7", "var_lib_dpkg", true, true);
+        testImage("tomcat:6.0.53-jre7", "tomcat", "6.0.53-jre7", "var_lib_dpkg", false, true, "dpkg", 5);
     }
 
     @Test
     public void testRhelExec() throws IOException, InterruptedException, IntegrationException {
-        testImage("dnplus/rhel:6.5", "dnplus_rhel", "6.5", "var_lib_rpm", true, false);
+        testImage("dnplus/rhel:6.5", "dnplus_rhel", "6.5", "var_lib_rpm", false, false, "rpm", 10);
     }
 
     @Test
     public void testRhelStartContainer() throws IOException, InterruptedException, IntegrationException {
-        testImage("dnplus/rhel:6.5", "dnplus_rhel", "6.5", "var_lib_rpm", true, true);
+        testImage("dnplus/rhel:6.5", "dnplus_rhel", "6.5", "var_lib_rpm", false, true, "rpm", 10);
     }
 
     @Test
@@ -291,8 +297,8 @@ public class DockerInspectorTest {
 
     @Test
     public void testAlpineUsingExistingAlpineContainer() throws IOException, InterruptedException, IntegrationException {
-        final String targetRepo = "alpine";
-        final String targetTag = "3.6";
+        final String targetRepo = "null";
+        final String targetTag = "null";
         final String targetPkgMgrLib = "lib_apk";
         final String tarFileBaseName = "alpine36";
         final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE;
@@ -324,8 +330,8 @@ public class DockerInspectorTest {
 
     @Test
     public void testUbuntuUsingExistingCentosContainer() throws IOException, InterruptedException, IntegrationException {
-        final String targetRepo = "ubuntu";
-        final String targetTag = "14.04";
+        final String targetRepo = "null"; // the image in this tarfile is not tagged
+        final String targetTag = "null";
         final String targetPkgMgrLib = "var_lib_dpkg";
         final String tarFileBaseName = "ubuntu1404";
         final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS;
@@ -461,7 +467,8 @@ public class DockerInspectorTest {
         assertTrue(String.format("%s does not exist", outputContainerFileSystemFile.getAbsolutePath()), outputContainerFileSystemFile.exists());
     }
 
-    private void testImage(final String inspectTargetImageRepoTag, final String repo, final String tag, final String pkgMgrPathString, final boolean requireBdioMatch, final boolean startContainersAsNeeded)
+    private void testImage(final String inspectTargetImageRepoTag, final String repo, final String tag, final String pkgMgrPathString, final boolean requireBdioMatch, final boolean startContainersAsNeeded,
+            final String outputBomMustContainComponentPrefix, final int minNumberOfComponentsExpected)
             throws IOException, InterruptedException, IntegrationException {
         final File outputContainerFileSystemFile = getOutputContainerFileSystemFileFromImageSpec(inspectTargetImageRepoTag);
         final String inspectTargetArg = String.format("--docker.image=%s", inspectTargetImageRepoTag);
@@ -510,8 +517,28 @@ public class DockerInspectorTest {
             final boolean outputBdioMatches = TestUtils.contentEquals(expectedBdio, actualBdio, exceptLinesContainingThese);
             assertTrue(outputBdioMatches);
         }
-
+        if (StringUtils.isNotBlank(outputBomMustContainComponentPrefix)) {
+            boolean componentFound = false;
+            final SimpleBdioDocument doc = createBdioDocumentFromFile(actualBdio);
+            assertTrue(doc.components.size() >= minNumberOfComponentsExpected);
+            for (int i = 0; i < doc.components.size(); i++) {
+                System.out.printf("\tComponent: %s / %s\n", doc.components.get(i).name, doc.components.get(i).version);
+                if (doc.components.get(i).name.startsWith(outputBomMustContainComponentPrefix)) {
+                    componentFound = true;
+                }
+            }
+            assertTrue(componentFound);
+        }
         assertTrue(outputContainerFileSystemFile.exists());
+    }
+
+    private SimpleBdioDocument createBdioDocumentFromFile(final File bdioFile) throws IOException {
+        final InputStream reader = new ByteArrayInputStream(FileUtils.readFileToByteArray(bdioFile));
+        SimpleBdioDocument doc = null;
+        try (BdioReader bdioReader = new BdioReader(new Gson(), reader)) {
+            doc = bdioReader.readSimpleBdioDocument();
+            return doc;
+        }
     }
 
     private void ensureFileDoesNotExist(final File outputContainerFileSystemFile) throws IOException {

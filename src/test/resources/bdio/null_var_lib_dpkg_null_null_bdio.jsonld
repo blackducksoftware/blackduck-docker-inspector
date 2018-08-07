@@ -1,33 +1,33 @@
 [
   {
     "specVersion": "1.1.0",
-    "spdx:name": "ubuntu_14.04_var_lib_dpkg_DPKG",
+    "spdx:name": "null_null_var_lib_dpkg_DPKG",
     "creationInfo": {
       "spdx:creator": [
         "Tool: IntegrationBdio-13.0.0"
       ],
-      "spdx:created": "2018-07-17T14:39:17.681Z"
+      "spdx:created": "2018-08-07T18:03:45.579Z"
     },
-    "@id": "uuid:ca94ea4a-97b8-4808-8c12-95d9088c6042",
+    "@id": "uuid:ed3fc4da-bed5-4f2a-af6a-70550ca7bcc5",
     "@type": "BillOfMaterials",
     "relationship": []
   },
   {
-    "name": "ubuntu",
-    "revision": "14.04",
-    "@id": "http:debian/ubuntu/14_04",
+    "name": "null",
+    "revision": "null",
+    "@id": "http:debian/null/null",
     "@type": "Project",
     "externalIdentifier": {
       "externalSystemTypeId": "debian",
-      "externalId": "ubuntu/14.04",
+      "externalId": "null/null",
       "externalIdMetaData": {
         "forge": {
           "name": "debian",
           "separator": "/",
           "kbSeparator": "/"
         },
-        "name": "ubuntu",
-        "version": "14.04"
+        "name": "null",
+        "version": "null"
       }
     },
     "relationship": [
