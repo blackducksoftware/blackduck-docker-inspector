@@ -217,49 +217,45 @@ artifactory {
 
 final String airGapFolder = "${buildDir}/airgap"
 
-task downloadDockerImages() {
-    dependsOn downloadDockerInspectorScript
+task pullSaveInspectorImages() {
     doLast {
-        def dockerVersionProps = new Properties()
-        def dockerInspectorVersionFile = new File("src/main/resources/version.properties")
-        dockerInspectorVersionFile.withInputStream { dockerVersionProps.load(it) }
-        def inspectorImageFamily = dockerVersionProps.getProperty("inspector.image.family")
-        def inspectorImageVersion = dockerVersionProps.getProperty("inspector.image.version")
-
+    	exec {
+            commandLine 'mkdir', '-p', "${airGapFolder}"
+    	}
         exec {
             commandLine 'docker', 'pull', "blackducksoftware/${inspectorImageFamily}-ubuntu:${inspectorImageVersion}"
         }
         exec {
-            commandLine 'docker', 'save', '-o', "${dockerAirGapPath}/${inspectorImageFamily}-ubuntu.tar", "blackducksoftware/${inspectorImageFamily}-ubuntu:${inspectorImageVersion}"
+            commandLine 'docker', 'save', '-o', "${airGapFolder}/${inspectorImageFamily}-ubuntu.tar", "blackducksoftware/${inspectorImageFamily}-ubuntu:${inspectorImageVersion}"
         }
 
         exec {
             commandLine 'docker', 'pull', "blackducksoftware/${inspectorImageFamily}-centos:${inspectorImageVersion}"
         }
         exec {
-            commandLine 'docker', 'save', '-o', "${dockerAirGapPath}/${inspectorImageFamily}-centos.tar", "blackducksoftware/${inspectorImageFamily}-centos:${inspectorImageVersion}"
+            commandLine 'docker', 'save', '-o', "${airGapFolder}/${inspectorImageFamily}-centos.tar", "blackducksoftware/${inspectorImageFamily}-centos:${inspectorImageVersion}"
         }
 
         exec {
             commandLine 'docker', 'pull', "blackducksoftware/${inspectorImageFamily}-alpine:${inspectorImageVersion}"
         }
         exec {
-            commandLine 'docker', 'save', '-o', "${dockerAirGapPath}/${inspectorImageFamily}-alpine.tar", "blackducksoftware/${inspectorImageFamily}-alpine:${inspectorImageVersion}"
+            commandLine 'docker', 'save', '-o', "${airGapFolder}/${inspectorImageFamily}-alpine.tar", "blackducksoftware/${inspectorImageFamily}-alpine:${inspectorImageVersion}"
         }
     }
 }
 
-task createAirGapZip(type: Zip, dependsOn: [build, writeVersionToPropertiesFile, buildScript, buildImages, downloadDockerImages, tarImages]) {
+task createAirGapZip(type: Zip, dependsOn: [build, writeVersionToPropertiesFile, buildScript, pullSaveInspectorImages]) {
     from("${buildDir}/libs") { include '*.jar' }
-    from("${buildDir}/imagetars") { include '*.tar' }
-    from("${projectDir}/src/main/resources")  { include '*.properties' }
+    from("${buildDir}") { include 'hub-docker-inspector.sh' }
+    from("${projectDir}/src/main/resources")  { include 'application.properties' }
     archiveName("airgap.zip")
-    destinationDir(file("${buildDir}/airgap"))
+    destinationDir(file("${airGapFolder}"))
 }
 
 dependencies {
     compile 'com.blackducksoftware.integration:hub-common:33.0.0'
-    compile 'com.blackducksoftware.integration:hub-imageinspector-lib:4.0.1-SNAPSHOT'
+    compile 'com.blackducksoftware.integration:hub-imageinspector-lib:4.0.1'
     
     compile 'com.github.docker-java:docker-java:3.1.0-rc-2'
 
