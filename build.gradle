@@ -196,27 +196,11 @@ task testPrep(type: Exec, dependsOn: [build, packageScript, buildTestTarfiles]) 
 
 testIntegration.dependsOn testPrep
 
-task all(dependsOn: [testIntegration, artifactoryPublish]) {}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            def artifactName = "${buildDir}/libs/${project.name}-${version}.jar"
-            artifact (artifactName)
-        }
-    }
-}
-
-artifactory {
-    publish {
-        defaults { publications ('mavenJava') }
-    }
-}
-
 // airgap
 
 final String airGapFolder = "${buildDir}/airgap"
 final String airGapZipName = "${project.name}-${version}-air-gap.zip"
+final String artifactoryIntegrationPath = "com/blackducksoftware/integration"
 
 task pullSaveInspectorImages() {
     doLast {
@@ -236,6 +220,34 @@ task createAirGapZip(type: Zip, dependsOn: [build, writeVersionToPropertiesFile,
     from("${buildDir}") { include 'hub-docker-inspector.sh' }
     archiveName("${airGapZipName}")
     destinationDir(file("${airGapFolder}"))
+}
+
+task publishAirGapZip() {
+    //dependsOn createAirGapZip
+    doLast {
+        exec {
+            commandLine 'curl', '--insecure','-u', "${project.ext.artifactoryDeployerUsername}:${project.ext.artifactoryDeployerPassword}", '-X', 'PUT', "${project.ext.artifactoryUrl}/${project.ext.artifactoryRepo}/${artifactoryIntegrationPath}/${project.name}/${version}/${airGapZipName}", '-T', "${airGapFolder}/${airGapZipName}", '-f'
+        }
+    }
+}
+
+// end airgap
+
+task all(dependsOn: [testIntegration, createAirGapZip, artifactoryPublish]) {}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            def artifactName = "${buildDir}/libs/${project.name}-${version}.jar"
+            artifact (artifactName)
+        }
+    }
+}
+
+artifactory {
+    publish {
+        defaults { publications ('mavenJava') }
+    }
 }
 
 dependencies {
