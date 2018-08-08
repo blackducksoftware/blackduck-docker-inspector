@@ -35,7 +35,10 @@ apply plugin: 'com.bmuschko.docker-remote-api'
 import com.bmuschko.gradle.docker.tasks.image.Dockerfile
 import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 
-String hubDockerPgmDir = '/opt/blackduck/hub-docker-inspector'
+final String hubDockerPgmDir = '/opt/blackduck/hub-docker-inspector'
+final String airGapFolder = "${buildDir}/airgap"
+final String airGapZipName = "${project.name}-${version}-air-gap.zip"
+final String artifactoryIntegrationPath = "com/blackducksoftware/integration"
 
 springBoot { mainClass = 'com.blackducksoftware.integration.hub.docker.dockerinspector.DockerEnvImageInspector' }
 
@@ -196,12 +199,6 @@ task testPrep(type: Exec, dependsOn: [build, packageScript, buildTestTarfiles]) 
 
 testIntegration.dependsOn testPrep
 
-// airgap
-
-final String airGapFolder = "${buildDir}/airgap"
-final String airGapZipName = "${project.name}-${version}-air-gap.zip"
-final String artifactoryIntegrationPath = "com/blackducksoftware/integration"
-
 task pullSaveInspectorImages() {
     doLast {
     	exec { commandLine 'mkdir', '-p', "${airGapFolder}" }
@@ -230,8 +227,6 @@ task publishAirGapZip() {
         }
     }
 }
-
-// end airgap
 
 task all(dependsOn: [testIntegration, artifactoryPublish, createAirGapZip, publishAirGapZip]) {}
 
