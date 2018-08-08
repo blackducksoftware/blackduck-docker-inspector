@@ -35,7 +35,10 @@ apply plugin: 'com.bmuschko.docker-remote-api'
 import com.bmuschko.gradle.docker.tasks.image.Dockerfile
 import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 
-String hubDockerPgmDir = '/opt/blackduck/hub-docker-inspector'
+final String hubDockerPgmDir = '/opt/blackduck/hub-docker-inspector'
+final String airGapFolder = "${buildDir}/airgap"
+final String airGapZipName = "${project.name}-${version}-air-gap.zip"
+final String artifactoryIntegrationPath = "com/blackducksoftware/integration"
 
 springBoot { mainClass = 'com.blackducksoftware.integration.hub.docker.dockerinspector.DockerEnvImageInspector' }
 
@@ -196,7 +199,36 @@ task testPrep(type: Exec, dependsOn: [build, packageScript, buildTestTarfiles]) 
 
 testIntegration.dependsOn testPrep
 
-task all(dependsOn: [testIntegration, artifactoryPublish]) {}
+task pullSaveInspectorImages() {
+    doLast {
+    	exec { commandLine 'mkdir', '-p', "${airGapFolder}" }
+        exec { commandLine 'docker', 'pull', "blackducksoftware/${inspectorImageFamily}-ubuntu:${inspectorImageVersion}" }
+        exec { commandLine 'docker', 'save', '-o', "${airGapFolder}/${inspectorImageFamily}-ubuntu.tar", "blackducksoftware/${inspectorImageFamily}-ubuntu:${inspectorImageVersion}" }
+        exec { commandLine 'docker', 'pull', "blackducksoftware/${inspectorImageFamily}-centos:${inspectorImageVersion}" }
+        exec { commandLine 'docker', 'save', '-o', "${airGapFolder}/${inspectorImageFamily}-centos.tar", "blackducksoftware/${inspectorImageFamily}-centos:${inspectorImageVersion}" }
+        exec { commandLine 'docker', 'pull', "blackducksoftware/${inspectorImageFamily}-alpine:${inspectorImageVersion}" }
+        exec { commandLine 'docker', 'save', '-o', "${airGapFolder}/${inspectorImageFamily}-alpine.tar", "blackducksoftware/${inspectorImageFamily}-alpine:${inspectorImageVersion}" }
+    }
+}
+
+task createAirGapZip(type: Zip, dependsOn: [build, writeVersionToPropertiesFile, buildScript, pullSaveInspectorImages]) {
+    from("${buildDir}/libs") { include "${project.name}-${version}.jar" }
+    from("${airGapFolder}") { include '*.tar' }
+    from("${buildDir}") { include 'hub-docker-inspector.sh' }
+    archiveName("${airGapZipName}")
+    destinationDir(file("${airGapFolder}"))
+}
+
+task publishAirGapZip() {
+    dependsOn createAirGapZip
+    doLast {
+        exec {
+            commandLine 'curl', '--insecure','-u', "${project.ext.artifactoryDeployerUsername}:${project.ext.artifactoryDeployerPassword}", '-X', 'PUT', "${project.ext.artifactoryUrl}/${project.ext.artifactoryRepo}/${artifactoryIntegrationPath}/${project.name}/${version}/${airGapZipName}", '-T', "${airGapFolder}/${airGapZipName}", '-f'
+        }
+    }
+}
+
+task all(dependsOn: [testIntegration, artifactoryPublish, createAirGapZip, publishAirGapZip]) {}
 
 publishing {
     publications {

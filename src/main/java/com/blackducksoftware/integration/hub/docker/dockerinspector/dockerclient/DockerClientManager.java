@@ -183,7 +183,7 @@ public class DockerClientManager {
         }
     }
 
-    public String runByExec(final String runOnImageName, final String runOnTagName, final String runOnImageId, final File dockerTarFile, final boolean copyJar, final String targetImage, final String targetImageRepo,
+    public String runByExec(final String runOnImageName, final String runOnTagName, final File dockerTarFile, final boolean copyJar, final String targetImage, final String targetImageRepo,
             final String targetImageTag)
             throws InterruptedException, IOException, IllegalArgumentException, IllegalAccessException, IntegrationException {
         final String imageNameTag = String.format("%s:%s", runOnImageName, runOnTagName);
@@ -219,15 +219,17 @@ public class DockerClientManager {
         return containerId;
     }
 
-    public String startContainerAsService(final String imageId, final String containerName, final ImageInspectorOsEnum inspectorOs, final int containerPort, final int hostPort, final String containerPathToOutputDir,
+    public String startContainerAsService(final String runOnImageName, final String runOnTagName, final String containerName, final ImageInspectorOsEnum inspectorOs, final int containerPort, final int hostPort,
+            final String containerPathToOutputDir,
             final String inspectorUrlAlpine, final String inspectorUrlCentos, final String inspectorUrlUbuntu)
             throws IntegrationException {
+        final String imageNameTag = String.format("%s:%s", runOnImageName, runOnTagName);
         logger.info(String.format("Starting container: %s", containerName));
-        logger.debug(String.format("\tImage ID: %s", imageId));
+        logger.debug(String.format("\timageNameTag: %s", imageNameTag));
         final DockerClient dockerClient = hubDockerClient.getDockerClient();
         stopRemoveContainerIfExists(dockerClient, containerName);
 
-        logger.debug(String.format("Creating container %s from image %s", containerName, imageId));
+        logger.debug(String.format("Creating container %s from image %s", containerName, imageNameTag));
         final String imageInspectorOsName = inspectorOs.name();
         final String cmd = String.format("java -jar /opt/blackduck/hub-imageinspector-ws/hub-imageinspector-ws.jar --server.port=%d --current.linux.distro=%s --inspector.url.alpine=%s --inspector.url.centos=%s --inspector.url.ubuntu=%s",
                 containerPort,
@@ -237,7 +239,7 @@ public class DockerClientManager {
         labels.put(CONTAINER_APPNAME_LABEL_KEY, IMAGEINSPECTOR_APP_NAME_LABEL_VALUE);
         labels.put(CONTAINER_OS_LABEL_KEY, imageInspectorOsName);
         final Bind bind = createBindMount(config.getSharedDirPathLocal(), config.getSharedDirPathImageInspector());
-        final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageId).withName(containerName).withBinds(bind).withLabels(labels).withCmd(cmd.split(" "));
+        final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageNameTag).withName(containerName).withBinds(bind).withLabels(labels).withCmd(cmd.split(" "));
         final ExposedPort exposedPort = new ExposedPort(containerPort);
         createContainerCmd.withExposedPorts(exposedPort);
         final PortBinding portBinding = new PortBinding(Binding.bindPort(hostPort), exposedPort);
@@ -251,7 +253,7 @@ public class DockerClientManager {
         final String containerId = containerResponse.getId();
 
         dockerClient.startContainerCmd(containerId).exec();
-        logger.debug(String.format("Started container %s from image %s", containerId, imageId));
+        logger.debug(String.format("Started container %s from image %s", containerId, imageNameTag));
 
         return containerId;
     }
@@ -409,15 +411,15 @@ public class DockerClientManager {
         logger.trace(String.format("Docker image tar file path in sub-container: %s", tarFilePathInSubContainer));
     }
 
-    private String prepareContainerForExec(final DockerClient dockerClient, final String imageId, final String extractorContainerName, final String hubPassword, final String hubApiToken) {
+    private String prepareContainerForExec(final DockerClient dockerClient, final String imageNameTag, final String extractorContainerName, final String hubPassword, final String hubApiToken) {
         stopRemoveContainerIfExists(dockerClient, extractorContainerName);
-        logger.debug(String.format("Creating container %s from image %s", extractorContainerName, imageId));
+        logger.debug(String.format("Creating container %s from image %s", extractorContainerName, imageNameTag));
         final Bind bind = createBindMount(programPaths.getHubDockerOutputPathHost(), programPaths.getHubDockerOutputPathContainer());
-        final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageId).withStdinOpen(true).withTty(true).withName(extractorContainerName).withBinds(bind).withCmd("/bin/bash");
+        final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageNameTag).withStdinOpen(true).withTty(true).withName(extractorContainerName).withBinds(bind).withCmd("/bin/bash");
         final CreateContainerResponse containerResponse = createContainerCmd.exec();
         final String containerId = containerResponse.getId();
         dockerClient.startContainerCmd(containerId).exec();
-        logger.debug(String.format("Started container %s from image %s", containerId, imageId));
+        logger.debug(String.format("Started container %s from image %s", containerId, imageNameTag));
         return containerId;
     }
 

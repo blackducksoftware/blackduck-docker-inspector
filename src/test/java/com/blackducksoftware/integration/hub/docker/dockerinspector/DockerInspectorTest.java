@@ -5,13 +5,11 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.attribute.PosixFilePermission;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -339,35 +337,6 @@ public class DockerInspectorTest {
         testUsingExistingContainer(targetRepo, targetTag, targetPkgMgrLib, tarFileBaseName, imageInspectorPlatform, portOnHost);
     }
 
-    @Test
-    public void testPullJar() throws IOException, InterruptedException, IntegrationException {
-        final File workingDir = new File(String.format("%s/pulljar", TestUtils.TEST_DIR_REL_PATH));
-        FileUtils.deleteDirectory(workingDir);
-        workingDir.mkdirs();
-        System.out.println(String.format("workingDir: %s", workingDir.getAbsolutePath()));
-        final FilenameFilter jarFileFilter = getJarFilenameFilter();
-        final File[] jarFilesBefore = workingDir.listFiles(jarFileFilter);
-        assertTrue(String.format("%s should be an empty directory", workingDir.getAbsolutePath()), jarFilesBefore.length == 0);
-
-        final File script = new File("build/hub-docker-inspector.sh");
-        final List<String> partialCmd = Arrays.asList(script.getAbsolutePath(), "--pulljar");
-        // Arrays.asList returns a fixed size list; need a variable sized list
-        final List<String> fullCmd = new ArrayList<>();
-        fullCmd.addAll(partialCmd);
-
-        System.out.println(String.format("Running --pulljar end to end test"));
-        TestUtils.execCmd(workingDir, String.join(" ", fullCmd), 30000L, true);
-        System.out.println("hub-docker-inspector --pulljar done; verifying results...");
-
-        final File[] jarFilesAfter = workingDir.listFiles(jarFileFilter);
-        final boolean foundOne = jarFilesAfter.length == 1;
-        for (final File jarFile : jarFilesAfter) {
-            System.out.println(String.format("Found jar file: %s", jarFile.getName()));
-            jarFile.delete();
-        }
-        assertTrue("Expected a single pulled jar file", foundOne);
-    }
-
     private void testUsingExistingContainer(final String targetRepo, final String targetTag, final String targetPkgMgrLib, final String tarFileBaseName, final String imageInspectorPlatform, final int portOnHost)
             throws IOException, InterruptedException, IntegrationException {
 
@@ -381,17 +350,6 @@ public class DockerInspectorTest {
         additionalArgs.add(String.format("--shared.dir.path.imageinspector=%s", SHARED_DIR_PATH_IN_CONTAINER));
         final File outputContainerFileSystemFile = new File(String.format("%s/output/%s_containerfilesystem.tar.gz", TestUtils.TEST_DIR_REL_PATH, tarFileBaseName));
         testTar(targetTar.getAbsolutePath(), targetRepo, null, null, targetTag, targetPkgMgrLib, true, false, additionalArgs, false, outputContainerFileSystemFile);
-    }
-
-    private FilenameFilter getJarFilenameFilter() {
-        final FilenameFilter jarFileFilter = (dir, name) -> {
-            if (name.endsWith(".jar")) {
-                return true;
-            } else {
-                return false;
-            }
-        };
-        return jarFileFilter;
     }
 
     private File getOutputContainerFileSystemFileFromTarFilename(final String tarFilename) {

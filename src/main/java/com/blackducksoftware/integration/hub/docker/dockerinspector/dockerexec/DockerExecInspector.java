@@ -166,14 +166,9 @@ public class DockerExecInspector implements Inspector {
             throws InterruptedException, IOException, IllegalArgumentException, IllegalAccessException, IntegrationException {
         final String msg = String.format("Image inspection for %s will use docker image %s:%s", targetOs.toString(), runOnImageName, runOnImageTag);
         logger.info(msg);
-        String runOnImageId = null;
-        try {
-            runOnImageId = dockerClientManager.pullImage(runOnImageName, runOnImageTag);
-        } catch (final Exception e) {
-            logger.warn(String.format("Unable to pull docker image %s:%s; proceeding anyway since it may already exist locally", runOnImageName, runOnImageTag));
-        }
+        String runOnImageId = pullImageTolerantly(runOnImageName, runOnImageTag);
         logger.debug(String.format("runInSubContainer(): Running subcontainer on image %s, repo %s, tag %s", config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag()));
-        final String containerId = dockerClientManager.runByExec(runOnImageName, runOnImageTag, runOnImageId, dockerTarFile, true, config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag());
+        final String containerId = dockerClientManager.runByExec(runOnImageName, runOnImageTag, dockerTarFile, true, config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag());
 
         // spin the inspector container/image cleanup off in it's own parallel thread
         final ContainerCleaner containerCleaner = new ContainerCleaner(dockerClientManager, runOnImageId, containerId, config.isCleanupInspectorContainer(), config.isCleanupInspectorImage());
@@ -181,6 +176,16 @@ public class DockerExecInspector implements Inspector {
         final Future<String> containerCleanerFuture = executor.submit(containerCleaner);
         return containerCleanerFuture;
 
+    }
+
+    private String pullImageTolerantly(final String runOnImageName, final String runOnImageTag) {
+        String runOnImageId = null;
+        try {
+            runOnImageId = dockerClientManager.pullImage(runOnImageName, runOnImageTag);
+        } catch (final Exception e) {
+            logger.warn(String.format("Unable to pull docker image %s:%s; proceeding anyway since it may already exist locally", runOnImageName, runOnImageTag));
+        }
+        return runOnImageId;
     }
 
     private void determineTargetOsFromContainerFileSystem(final Config config, final DissectedImage dissectedImage) throws IOException, IntegrationException {
