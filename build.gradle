@@ -223,7 +223,7 @@ task createAirGapZip(type: Zip, dependsOn: [build, writeVersionToPropertiesFile,
 }
 
 task publishAirGapZip() {
-    //dependsOn createAirGapZip
+    dependsOn createAirGapZip
     doLast {
         exec {
             commandLine 'curl', '--insecure','-u', "${project.ext.artifactoryDeployerUsername}:${project.ext.artifactoryDeployerPassword}", '-X', 'PUT', "${project.ext.artifactoryUrl}/${project.ext.artifactoryRepo}/${artifactoryIntegrationPath}/${project.name}/${version}/${airGapZipName}", '-T', "${airGapFolder}/${airGapZipName}", '-f'
@@ -233,7 +233,7 @@ task publishAirGapZip() {
 
 // end airgap
 
-task all(dependsOn: [testIntegration, createAirGapZip, artifactoryPublish]) {}
+task all(dependsOn: [testIntegration, artifactoryPublish, createAirGapZip, publishAirGapZip]) {}
 
 publishing {
     publications {
