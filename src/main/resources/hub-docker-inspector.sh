@@ -142,11 +142,15 @@ function deriveJarDetails() {
 	if [ -z "${jarVersion}" ]; then
 	  deriveLatestReleaseVersion
 	  latestReleasedJarUrl="https://test-repo.blackducksoftware.com/artifactory/bds-integrations-release/com/blackducksoftware/integration/hub-docker-inspector/${latestReleaseVersion}/hub-docker-inspector-${latestReleaseVersion}.jar"
-	
+	  latestReleasedAirGapZipUrl="https://test-repo.blackducksoftware.com/artifactory/bds-integrations-release/com/blackducksoftware/integration/hub-docker-inspector/${latestReleaseVersion}/hub-docker-inspector-${latestReleaseVersion}=air-gap.zip"
       selectedJarUrl="${latestReleasedJarUrl}"
+      selectedAirGapUrl="${latestReleasedAirGapZipUrl}"
       deriveLatestReleasedFilename
+      deriveLatestReleasedAirGapZipFilename
       selectedJarFilename="${latestReleasedFilename}"
+      selectedAirGapZipFilename="${latestReleasedAirGapZipFilename}"
       downloadedJarPath="${DOCKER_INSPECTOR_JAR_DIR}/${selectedJarFilename}"
+      downloadedAirGapZipPath="${DOCKER_INSPECTOR_JAR_DIR}/${selectedAirGapZipFilename}"
     else
       log "Will download hub-docker-inspector-${jarVersion}.jar"
       rm -f "${localCommitIdFile}" # Local commit ID won't apply to this jar
@@ -156,10 +160,14 @@ function deriveJarDetails() {
       	selectedRepoKey="bds-integrations-release"
       fi
       selectedJarUrl="https://test-repo.blackducksoftware.com/artifactory/${selectedRepoKey}/com/blackducksoftware/integration/hub-docker-inspector/${jarVersion}/hub-docker-inspector-${jarVersion}.jar"
+      selectedAirGapZipUrl="https://test-repo.blackducksoftware.com/artifactory/${selectedRepoKey}/com/blackducksoftware/integration/hub-docker-inspector/${jarVersion}/hub-docker-inspector-${jarVersion}-air-gap.zip"
       downloadedJarPath="${DOCKER_INSPECTOR_JAR_DIR}/hub-docker-inspector-${jarVersion}.jar"
+      downloadedAirGapZipPath="${DOCKER_INSPECTOR_JAR_DIR}/hub-docker-inspector-${jarVersion}-air-gap.zip"
     fi
     log "Selected jar: ${selectedJarUrl}"
     log "  local path: ${downloadedJarPath}"
+    log "Selected Air Gap Zip: ${selectedAirGapZipUrl}"
+    log "  local path: ${downloadedAirGapZipPath}"
 }
 
 function determineIsJarDownloadRequired() {
@@ -211,6 +219,14 @@ function deriveLatestReleasedFilename() {
 	deriveLatestReleaseVersion
     latestReleasedFilename=hub-docker-inspector-${latestReleaseVersion}.jar
     log "Latest released jar filename: ${latestReleasedFilename}"
+}
+
+#
+function deriveLatestReleasedAirGapZipFilename() {
+	log "Deriving name of latest released AirGap Zip file"
+	deriveLatestReleaseVersion
+    latestReleasedAirGapZipFilename=hub-docker-inspector-${latestReleaseVersion}-air-gap.zip
+    log "Latest released AirGap Zip filename: ${latestReleasedAirGapZipFilename}"
 }
 
 # Expand tilde
@@ -323,6 +339,20 @@ then
 		exit -1
 	fi
 	log "Saved ${latestReleasedJarUrl} to $(pwd)"
+	exit 0
+fi
+
+if [ \( "$1" = -a \) -o \( "$1" = --pullairgapzip \) ]
+then
+	deriveLatestReleasedAirGapZipFilename
+    deriveJarDetails
+	curl ${DOCKER_INSPECTOR_CURL_OPTS} ${CURL_PROXY_OPTIONS} --fail -L -o "${latestReleasedAirGapZipFilename}" "${latestReleasedAirGapZipUrl}"
+	if [[ $? -ne 0 ]]
+	then
+		err "Download of ${latestReleasedAirGapZipUrl} failed."
+		exit -1
+	fi
+	log "Saved ${latestReleasedAirGapZipUrl} to $(pwd)"
 	exit 0
 fi
 
