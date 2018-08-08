@@ -142,7 +142,7 @@ function deriveJarDetails() {
 	if [ -z "${jarVersion}" ]; then
 	  deriveLatestReleaseVersion
 	  latestReleasedJarUrl="https://test-repo.blackducksoftware.com/artifactory/bds-integrations-release/com/blackducksoftware/integration/hub-docker-inspector/${latestReleaseVersion}/hub-docker-inspector-${latestReleaseVersion}.jar"
-	  latestReleasedAirGapZipUrl="https://test-repo.blackducksoftware.com/artifactory/bds-integrations-release/com/blackducksoftware/integration/hub-docker-inspector/${latestReleaseVersion}/hub-docker-inspector-${latestReleaseVersion}=air-gap.zip"
+	  latestReleasedAirGapZipUrl="https://test-repo.blackducksoftware.com/artifactory/bds-integrations-release/com/blackducksoftware/integration/hub-docker-inspector/${latestReleaseVersion}/hub-docker-inspector-${latestReleaseVersion}-air-gap.zip"
       selectedJarUrl="${latestReleasedJarUrl}"
       selectedAirGapUrl="${latestReleasedAirGapZipUrl}"
       deriveLatestReleasedFilename
