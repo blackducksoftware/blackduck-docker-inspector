@@ -1,0 +1,33 @@
+final String airGapFolder = "${buildDir}/airgap"
+final String airGapZipName = "${project.name}-${version}-air-gap.zip"
+final String artifactoryIntegrationPath = "com/blackducksoftware/integration"
+
+task pullSaveInspectorImages() {
+    doLast {
+    	exec { commandLine 'mkdir', '-p', "${airGapFolder}" }
+        exec { commandLine 'docker', 'pull', "blackducksoftware/${project.ext.inspectorImageFamily}-ubuntu:${project.ext.inspectorImageVersion}" }
+        exec { commandLine 'docker', 'save', '-o', "${airGapFolder}/${project.ext.inspectorImageFamily}-ubuntu.tar", "blackducksoftware/${project.ext.inspectorImageFamily}-ubuntu:${project.ext.inspectorImageVersion}" }
+        exec { commandLine 'docker', 'pull', "blackducksoftware/${project.ext.inspectorImageFamily}-centos:${project.ext.inspectorImageVersion}" }
+        exec { commandLine 'docker', 'save', '-o', "${airGapFolder}/${project.ext.inspectorImageFamily}-centos.tar", "blackducksoftware/${project.ext.inspectorImageFamily}-centos:${project.ext.inspectorImageVersion}" }
+        exec { commandLine 'docker', 'pull', "blackducksoftware/${project.ext.inspectorImageFamily}-alpine:${project.ext.inspectorImageVersion}" }
+        exec { commandLine 'docker', 'save', '-o', "${airGapFolder}/${project.ext.inspectorImageFamily}-alpine.tar", "blackducksoftware/${project.ext.inspectorImageFamily}-alpine:${project.ext.inspectorImageVersion}" }
+    }
+}
+
+task createAirGapZip(type: Zip, dependsOn: [build, pullSaveInspectorImages]) {
+    from("${buildDir}/libs") { include "${project.name}-${version}.jar" }
+    from("${airGapFolder}") { include '*.tar' }
+    from("${buildDir}") { include 'hub-docker-inspector.sh' }
+    archiveName("${airGapZipName}")
+    destinationDir(file("${airGapFolder}"))
+}
+
+task publishAirGapZip() {
+    dependsOn createAirGapZip
+    doLast {
+        exec {
+            commandLine 'curl', '--insecure','-u', "${project.ext.artifactoryDeployerUsername}:${project.ext.artifactoryDeployerPassword}", '-X', 'PUT', "${project.ext.artifactoryUrl}/${project.ext.artifactoryRepo}/${artifactoryIntegrationPath}/${project.name}/${version}/${airGapZipName}", '-T', "${airGapFolder}/${airGapZipName}", '-f'
+        }
+    }
+}
+
