@@ -247,11 +247,20 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
             throw new IntegrationException(String.format("Error getting image inspector container repo/tag for %s inspector: %s", inspectorOs.name()), e);
         }
         logger.debug(String.format("Need to pull/run image %s:%s to start the %s service", imageInspectorRepo, imageInspectorTag, imageInspectorUri.toString()));
-        final String imageId = dockerClientManager.pullImage(imageInspectorRepo, imageInspectorTag);
+
+        // final String imageId = dockerClientManager.pullImage(imageInspectorRepo, imageInspectorTag);
+        String imageId = null;
+        try {
+            imageId = dockerClientManager.pullImage(imageInspectorRepo, imageInspectorTag);
+            logger.debug(String.format("Pulled image ID %s", imageId));
+        } catch (final Exception e) {
+            logger.warn(String.format("Unable to pull docker image %s:%s; proceeding anyway since it may already exist locally", imageInspectorRepo, imageInspectorTag));
+        }
+
         final int containerPort = imageInspectorServices.getImageInspectorContainerPort(inspectorOs);
         final int hostPort = imageInspectorServices.getImageInspectorHostPort(inspectorOs);
         final String containerName = programPaths.deriveContainerName(imageInspectorRepo);
-        final String containerId = dockerClientManager.startContainerAsService(imageId, containerName, inspectorOs, containerPort, hostPort,
+        final String containerId = dockerClientManager.startContainerAsService(imageInspectorRepo, imageInspectorTag, containerName, inspectorOs, containerPort, hostPort,
                 containerPaths.getContainerPathToOutputDir(),
                 deriveInspectorBaseUri(config.getImageInspectorHostPortAlpine()).toString(), deriveInspectorBaseUri(config.getImageInspectorHostPortCentos()).toString(),
                 deriveInspectorBaseUri(config.getImageInspectorHostPortUbuntu()).toString());

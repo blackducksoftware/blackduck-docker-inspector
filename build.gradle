@@ -216,40 +216,25 @@ artifactory {
 // airgap
 
 final String airGapFolder = "${buildDir}/airgap"
+final String airGapZipName = "${project.name}-${version}-air-gap.zip"
 
 task pullSaveInspectorImages() {
     doLast {
-    	exec {
-            commandLine 'mkdir', '-p', "${airGapFolder}"
-    	}
-        exec {
-            commandLine 'docker', 'pull', "blackducksoftware/${inspectorImageFamily}-ubuntu:${inspectorImageVersion}"
-        }
-        exec {
-            commandLine 'docker', 'save', '-o', "${airGapFolder}/${inspectorImageFamily}-ubuntu.tar", "blackducksoftware/${inspectorImageFamily}-ubuntu:${inspectorImageVersion}"
-        }
-
-        exec {
-            commandLine 'docker', 'pull', "blackducksoftware/${inspectorImageFamily}-centos:${inspectorImageVersion}"
-        }
-        exec {
-            commandLine 'docker', 'save', '-o', "${airGapFolder}/${inspectorImageFamily}-centos.tar", "blackducksoftware/${inspectorImageFamily}-centos:${inspectorImageVersion}"
-        }
-
-        exec {
-            commandLine 'docker', 'pull', "blackducksoftware/${inspectorImageFamily}-alpine:${inspectorImageVersion}"
-        }
-        exec {
-            commandLine 'docker', 'save', '-o', "${airGapFolder}/${inspectorImageFamily}-alpine.tar", "blackducksoftware/${inspectorImageFamily}-alpine:${inspectorImageVersion}"
-        }
+    	exec { commandLine 'mkdir', '-p', "${airGapFolder}" }
+        exec { commandLine 'docker', 'pull', "blackducksoftware/${inspectorImageFamily}-ubuntu:${inspectorImageVersion}" }
+        exec { commandLine 'docker', 'save', '-o', "${airGapFolder}/${inspectorImageFamily}-ubuntu.tar", "blackducksoftware/${inspectorImageFamily}-ubuntu:${inspectorImageVersion}" }
+        exec { commandLine 'docker', 'pull', "blackducksoftware/${inspectorImageFamily}-centos:${inspectorImageVersion}" }
+        exec { commandLine 'docker', 'save', '-o', "${airGapFolder}/${inspectorImageFamily}-centos.tar", "blackducksoftware/${inspectorImageFamily}-centos:${inspectorImageVersion}" }
+        exec { commandLine 'docker', 'pull', "blackducksoftware/${inspectorImageFamily}-alpine:${inspectorImageVersion}" }
+        exec { commandLine 'docker', 'save', '-o', "${airGapFolder}/${inspectorImageFamily}-alpine.tar", "blackducksoftware/${inspectorImageFamily}-alpine:${inspectorImageVersion}" }
     }
 }
 
 task createAirGapZip(type: Zip, dependsOn: [build, writeVersionToPropertiesFile, buildScript, pullSaveInspectorImages]) {
-    from("${buildDir}/libs") { include '*.jar' }
+    from("${buildDir}/libs") { include "${project.name}-${version}.jar" }
+    from("${airGapFolder}") { include '*.tar' }
     from("${buildDir}") { include 'hub-docker-inspector.sh' }
-    from("${projectDir}/src/main/resources")  { include 'application.properties' }
-    archiveName("airgap.zip")
+    archiveName("${airGapZipName}")
     destinationDir(file("${airGapFolder}"))
 }
 
