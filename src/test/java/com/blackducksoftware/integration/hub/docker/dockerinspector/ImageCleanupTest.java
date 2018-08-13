@@ -127,16 +127,6 @@ public class ImageCleanupTest {
         return getCmdOutputLines(dockerImagesCmd, description);
     }
 
-    private List<String> getDockerContainerList() throws IOException, InterruptedException {
-        final List<String> dockerImagesCmd = new ArrayList<>();
-        dockerImagesCmd.add("bash");
-        dockerImagesCmd.add("-c");
-        dockerImagesCmd.add("docker ps -a");
-        final String description = "dockerContainers";
-
-        return getCmdOutputLines(dockerImagesCmd, description);
-    }
-
     private List<String> getCmdOutputLines(final List<String> dockerImagesCmd, final String description) throws IOException, InterruptedException {
         final String outputFilename = String.format("%s/imageCleanup_%sOutput.txt", TestUtils.TEST_DIR_REL_PATH, description);
         System.out.println(String.format("Running command %s", dockerImagesCmd.toString()));
