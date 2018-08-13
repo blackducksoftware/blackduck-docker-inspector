@@ -77,6 +77,7 @@ latestCommitIdFileUrl="https://blackducksoftware.github.io/hub-docker-inspector/
 localCommitIdFile="${DOCKER_INSPECTOR_JAR_DIR}/hub-docker-inspector-latest-commit-id.txt"
 currentVersionCommitId=""
 version="@VERSION@"
+inspectorImageFamily="@INSPECTOR_IMAGE_FAMILY@"
 encodingSetting="-Dfile.encoding=UTF-8"
 userSpecifiedJarPath=""
 jarPathSpecified=false
@@ -325,6 +326,12 @@ fi
 if [ \( "$1" = -v \) -o \( "$1" = --version \) ]
 then
 	echo "$(basename $0) ${version}"
+	exit 0
+fi
+
+if [ "$1" = --inspectorimagefamily ]
+then
+	echo ${inspectorImageFamily}
 	exit 0
 fi
 
