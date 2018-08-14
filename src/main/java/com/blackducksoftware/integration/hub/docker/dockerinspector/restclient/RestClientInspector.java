@@ -35,9 +35,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.blackducksoftware.integration.exception.IntegrationException;
-import com.blackducksoftware.integration.hub.bdio.BdioReader;
-import com.blackducksoftware.integration.hub.bdio.model.SimpleBdioDocument;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.common.DockerTarfile;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Inspector;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Output;
@@ -46,9 +43,12 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Progr
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerexec.DissectedImage;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient.HubClient;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
-import com.blackducksoftware.integration.hub.imageinspector.linux.FileOperations;
-import com.blackducksoftware.integration.hub.imageinspector.name.Names;
 import com.google.gson.Gson;
+import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
+import com.synopsys.integration.blackduck.imageinspector.name.Names;
+import com.synopsys.integration.exception.IntegrationException;
+import com.synopsys.integration.hub.bdio.BdioReader;
+import com.synopsys.integration.hub.bdio.model.SimpleBdioDocument;
 
 @Component
 public class RestClientInspector implements Inspector {

@@ -41,21 +41,21 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerexec.DissectedImage;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient.HubClient;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
-import com.blackducksoftware.integration.hub.imageinspector.lib.ImageInfoDerived;
-import com.blackducksoftware.integration.hub.imageinspector.lib.ImageInspector;
-import com.blackducksoftware.integration.hub.imageinspector.lib.OperatingSystemEnum;
-import com.blackducksoftware.integration.hub.imageinspector.linux.FileOperations;
-import com.blackducksoftware.integration.hub.imageinspector.linux.FileSys;
-import com.blackducksoftware.integration.hub.imageinspector.name.Names;
-import com.blackducksoftware.integration.hub.imageinspector.result.Result;
-import com.blackducksoftware.integration.hub.imageinspector.result.ResultFile;
 import com.google.gson.Gson;
+import com.synopsys.integration.blackduck.imageinspector.lib.ImageInfoDerived;
+import com.synopsys.integration.blackduck.imageinspector.lib.ImageInspector;
+import com.synopsys.integration.blackduck.imageinspector.lib.OperatingSystemEnum;
+import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
+import com.synopsys.integration.blackduck.imageinspector.linux.FileSys;
+import com.synopsys.integration.blackduck.imageinspector.name.Names;
+import com.synopsys.integration.blackduck.imageinspector.result.Result;
+import com.synopsys.integration.blackduck.imageinspector.result.ResultFile;
+import com.synopsys.integration.exception.IntegrationException;
 
 @Component
 public class Output {

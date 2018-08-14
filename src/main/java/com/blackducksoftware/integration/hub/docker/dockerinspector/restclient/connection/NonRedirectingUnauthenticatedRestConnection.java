@@ -30,13 +30,13 @@ import java.net.URL;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
 
-import com.blackducksoftware.integration.exception.IntegrationException;
-import com.blackducksoftware.integration.log.IntLogger;
 import com.blackducksoftware.integration.rest.RestConstants;
 import com.blackducksoftware.integration.rest.connection.UnauthenticatedRestConnection;
 import com.blackducksoftware.integration.rest.exception.IntegrationRestException;
 import com.blackducksoftware.integration.rest.proxy.ProxyInfo;
 import com.blackducksoftware.integration.rest.request.Response;
+import com.synopsys.integration.exception.IntegrationException;
+import com.synopsys.integration.log.IntLogger;
 
 public class NonRedirectingUnauthenticatedRestConnection extends UnauthenticatedRestConnection {
 

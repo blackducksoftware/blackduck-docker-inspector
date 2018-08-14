@@ -27,7 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-import com.blackducksoftware.integration.exception.IntegrationException;
+import com.synopsys.integration.exception.IntegrationException;
 
 public interface ImageInspectorClient {
 

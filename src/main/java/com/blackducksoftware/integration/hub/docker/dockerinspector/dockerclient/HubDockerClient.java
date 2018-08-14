@@ -25,19 +25,19 @@ package com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclien
 
 import org.springframework.stereotype.Component;
 
-import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DefaultDockerClientConfig.Builder;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.DockerClientConfig;
+import com.synopsys.integration.exception.IntegrationException;
 
 @Component
 public class HubDockerClient {
 
     private DockerClient dockerClient;
 
-    public DockerClient getDockerClient() throws HubIntegrationException {
+    public DockerClient getDockerClient() throws IntegrationException {
         if (dockerClient == null) {
             final Builder builder = DefaultDockerClientConfig.createDefaultConfigBuilder();
             final DockerClientConfig config = builder.build();

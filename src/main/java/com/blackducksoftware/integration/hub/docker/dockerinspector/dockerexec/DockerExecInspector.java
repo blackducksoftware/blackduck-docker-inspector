@@ -37,21 +37,20 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.ContainerCleaner;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.InspectorImages;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.common.DockerTarfile;
-import com.blackducksoftware.integration.hub.docker.dockerinspector.common.HubProjectName;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Inspector;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Output;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.DockerClientManager;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
-import com.blackducksoftware.integration.hub.imageinspector.imageformat.docker.manifest.ManifestLayerMapping;
-import com.blackducksoftware.integration.hub.imageinspector.lib.ImageInfoDerived;
-import com.blackducksoftware.integration.hub.imageinspector.lib.ImageInspector;
-import com.blackducksoftware.integration.hub.imageinspector.lib.OperatingSystemEnum;
+import com.synopsys.integration.blackduck.imageinspector.imageformat.docker.manifest.ManifestLayerMapping;
+import com.synopsys.integration.blackduck.imageinspector.lib.ImageInfoDerived;
+import com.synopsys.integration.blackduck.imageinspector.lib.ImageInspector;
+import com.synopsys.integration.blackduck.imageinspector.lib.OperatingSystemEnum;
+import com.synopsys.integration.exception.IntegrationException;
 
 @Component
 public class DockerExecInspector implements Inspector {
@@ -74,9 +73,6 @@ public class DockerExecInspector implements Inspector {
 
     @Autowired
     private DockerTarfile dockerTarfile;
-
-    @Autowired
-    private HubProjectName hubProjectName;
 
     @Autowired
     private Output output;

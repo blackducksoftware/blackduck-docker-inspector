@@ -26,8 +26,8 @@ package com.blackducksoftware.integration.hub.docker.dockerinspector.dockerexec;
 import java.io.File;
 import java.util.List;
 
-import com.blackducksoftware.integration.hub.imageinspector.imageformat.docker.manifest.ManifestLayerMapping;
-import com.blackducksoftware.integration.hub.imageinspector.lib.OperatingSystemEnum;
+import com.synopsys.integration.blackduck.imageinspector.imageformat.docker.manifest.ManifestLayerMapping;
+import com.synopsys.integration.blackduck.imageinspector.lib.OperatingSystemEnum;
 
 public class DissectedImage {
     private File dockerTarFile = null;

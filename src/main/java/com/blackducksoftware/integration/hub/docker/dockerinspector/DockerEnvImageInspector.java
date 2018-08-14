@@ -38,8 +38,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.ComponentScan;
 
-import com.blackducksoftware.integration.exception.IntegrationException;
-import com.blackducksoftware.integration.hub.docker.dockerinspector.common.HubProjectName;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Inspector;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Output;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
@@ -48,13 +46,13 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerexec.DissectedImage;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.help.formatter.UsageFormatter;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient.HubClient;
-import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
-import com.blackducksoftware.integration.hub.imageinspector.api.PkgMgrDataNotFoundException;
-import com.blackducksoftware.integration.hub.imageinspector.lib.ImageInfoDerived;
-import com.blackducksoftware.integration.hub.imageinspector.lib.ImageInspector;
-import com.blackducksoftware.integration.hub.imageinspector.name.ImageNameResolver;
-import com.blackducksoftware.integration.hub.imageinspector.result.ResultFile;
 import com.google.gson.Gson;
+import com.synopsys.integration.blackduck.imageinspector.api.PkgMgrDataNotFoundException;
+import com.synopsys.integration.blackduck.imageinspector.lib.ImageInfoDerived;
+import com.synopsys.integration.blackduck.imageinspector.lib.ImageInspector;
+import com.synopsys.integration.blackduck.imageinspector.name.ImageNameResolver;
+import com.synopsys.integration.blackduck.imageinspector.result.ResultFile;
+import com.synopsys.integration.exception.IntegrationException;
 
 @SpringBootApplication
 @ComponentScan(basePackages = { "com.blackducksoftware.integration.hub.imageinspector", "com.blackducksoftware.integration.hub.docker.dockerinspector" })
@@ -69,9 +67,6 @@ public class DockerEnvImageInspector {
 
     @Autowired
     private DockerClientManager dockerClientManager;
-
-    @Autowired
-    private HubProjectName hubProjectName;
 
     @Autowired
     private Output output;
@@ -119,8 +114,8 @@ public class DockerEnvImageInspector {
                 returnCode = inspector.getBdio(dissectedImage);
             } catch (final PkgMgrDataNotFoundException e) {
                 logger.info("Pkg mgr not found; generating empty BDIO file");
-                final ImageInfoDerived imageInfoDerived = imageInspector.generateEmptyBdio(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), hubProjectName.getHubProjectName(config),
-                        hubProjectName.getHubProjectVersion(config), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs(), config.getHubCodelocationPrefix());
+                final ImageInfoDerived imageInfoDerived = imageInspector.generateEmptyBdio(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), config.getHubProjectName(),
+                        config.getHubProjectVersion(), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs(), config.getHubCodelocationPrefix());
                 output.writeBdioFile(dissectedImage, imageInfoDerived);
                 output.uploadBdio(dissectedImage);
                 output.createContainerFileSystemTarIfRequested(dissectedImage.getTargetImageFileSystemRootDir());
@@ -224,7 +219,7 @@ public class DockerEnvImageInspector {
         return true;
     }
 
-    private void initImageName() throws HubIntegrationException {
+    private void initImageName() throws IntegrationException {
         logger.debug(String.format("initImageName(): dockerImage: %s, dockerTar: %s", config.getDockerImage(), config.getDockerTar()));
         final ImageNameResolver resolver = new ImageNameResolver(config.getDockerImage());
         resolver.getNewImageRepo().ifPresent(repoName -> config.setDockerImageRepo(repoName));

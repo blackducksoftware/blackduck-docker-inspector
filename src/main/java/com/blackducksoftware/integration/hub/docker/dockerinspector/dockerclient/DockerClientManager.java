@@ -40,14 +40,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient.HubSecrets;
 import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
-import com.blackducksoftware.integration.hub.imageinspector.api.ImageInspectorOsEnum;
-import com.blackducksoftware.integration.hub.imageinspector.name.ImageNameResolver;
-import com.blackducksoftware.integration.hub.imageinspector.name.Names;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.CopyArchiveToContainerCmd;
 import com.github.dockerjava.api.command.CreateContainerCmd;
@@ -75,6 +71,10 @@ import com.github.dockerjava.api.model.Volume;
 import com.github.dockerjava.core.command.ExecStartResultCallback;
 import com.github.dockerjava.core.command.LogContainerResultCallback;
 import com.github.dockerjava.core.command.PullImageResultCallback;
+import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
+import com.synopsys.integration.blackduck.imageinspector.name.ImageNameResolver;
+import com.synopsys.integration.blackduck.imageinspector.name.Names;
+import com.synopsys.integration.exception.IntegrationException;
 
 @Component
 public class DockerClientManager {
@@ -113,7 +113,7 @@ public class DockerClientManager {
     @Autowired
     private Config config;
 
-    public File getTarFileFromDockerImageById(final String imageId, final File imageTarDirectory) throws HubIntegrationException, IOException {
+    public File getTarFileFromDockerImageById(final String imageId, final File imageTarDirectory) throws IntegrationException, IOException {
 
         final DockerClient dockerClient = hubDockerClient.getDockerClient();
         final InspectImageCmd inspectImageCmd = dockerClient.inspectImageCmd(imageId);
@@ -149,7 +149,7 @@ public class DockerClientManager {
         return imageTarFile;
     }
 
-    public String pullImage(final String imageName, final String tagName) throws HubIntegrationException {
+    public String pullImage(final String imageName, final String tagName) throws IntegrationException {
         logger.info(String.format("Pulling image %s:%s", imageName, tagName));
         final DockerClient dockerClient = hubDockerClient.getDockerClient();
         final PullImageCmd pull = dockerClient.pullImageCmd(imageName).withTag(tagName);
@@ -167,7 +167,7 @@ public class DockerClientManager {
         return justPulledImage.getId();
     }
 
-    public void removeImage(final String imageId) throws HubIntegrationException {
+    public void removeImage(final String imageId) throws IntegrationException {
         if (imageId == null) {
             logger.debug("removeImage(): given imageId is null; not doing anything");
             return;
@@ -258,7 +258,7 @@ public class DockerClientManager {
         return containerId;
     }
 
-    public void stopRemoveContainer(final String containerId) throws HubIntegrationException {
+    public void stopRemoveContainer(final String containerId) throws IntegrationException {
         final DockerClient dockerClient = hubDockerClient.getDockerClient();
         stopContainer(dockerClient, containerId);
         removeContainer(dockerClient, containerId);
@@ -270,7 +270,7 @@ public class DockerClientManager {
         DockerClient dockerClient;
         try {
             dockerClient = hubDockerClient.getDockerClient();
-        } catch (final HubIntegrationException e1) {
+        } catch (final IntegrationException e1) {
             logger.debug(String.format("Error getting docker client: %s", e1.getMessage()));
             try {
                 callback.close();
@@ -374,7 +374,7 @@ public class DockerClientManager {
             } else {
                 return engineVersion;
             }
-        } catch (final HubIntegrationException e) {
+        } catch (final IntegrationException e) {
             return "Unknown";
         }
     }
@@ -498,7 +498,7 @@ public class DockerClientManager {
         logger.debug("The container execution has completed");
     }
 
-    private void saveImageToFile(final String imageName, final String tagName, final File imageTarFile) throws IOException, HubIntegrationException {
+    private void saveImageToFile(final String imageName, final String tagName, final File imageTarFile) throws IOException, IntegrationException {
         InputStream tarInputStream = null;
         try {
             logger.info(String.format("Saving the docker image to : %s", imageTarFile.getCanonicalPath()));
