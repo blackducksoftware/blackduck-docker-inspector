@@ -40,7 +40,7 @@ apply from: 'airgap.gradle'
 
 final String hubDockerPgmDir = '/opt/blackduck/hub-docker-inspector'
 
-springBoot { mainClass = 'com.blackducksoftware.integration.hub.docker.dockerinspector.DockerEnvImageInspector' }
+springBoot { mainClass = 'com.synopsys.integration.blackduck.dockerinspector.DockerEnvImageInspector' }
 
 configurations {
     integrationTestCompile.extendsFrom testCompile
