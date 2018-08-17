@@ -18,7 +18,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorOption;
-import com.synopsys.integration.blackduck.dockerinspector.help.formatter.UsageFormatter;
 
 @RunWith(SpringRunner.class)
 public class UsageFormatterTest {
@@ -32,7 +31,7 @@ public class UsageFormatterTest {
     @Test
     public void test() throws IllegalArgumentException, IllegalAccessException, IOException {
         final SortedSet<DockerInspectorOption> configOptions = new TreeSet<>();
-        configOptions.add(new DockerInspectorOption("hub.url", "hubUrl", "testHubUrl", "Hub URL", String.class, "", "public", false));
+        configOptions.add(new DockerInspectorOption("blackduck.url", "blackDuckUrl", "testBlackDuckUrl", "Black Duck URL", String.class, "", "public", false));
         Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
 
         final List<String> usageStrings = usageFormatter.getStringList();
@@ -40,7 +39,7 @@ public class UsageFormatterTest {
         assertEquals("Usage: blackduck-docker-inspector.sh <options>", usageStrings.get(0));
         assertEquals("options: any supported property can be set by adding to the command line", usageStrings.get(1));
         final String usageString = StringUtils.join(usageStrings, ";");
-        assertTrue(usageString.contains("hub.url [String]: Hub URL"));
+        assertTrue(usageString.contains("blackduck.url [String]: Black Duck URL"));
     }
 
 }

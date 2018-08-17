@@ -39,6 +39,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.ComponentScan;
 
 import com.google.gson.Gson;
+import com.synopsys.integration.blackduck.dockerinspector.blackduckclient.BlackDuckClient;
 import com.synopsys.integration.blackduck.dockerinspector.common.Inspector;
 import com.synopsys.integration.blackduck.dockerinspector.common.Output;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
@@ -46,7 +47,6 @@ import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
 import com.synopsys.integration.blackduck.dockerinspector.dockerexec.DissectedImage;
 import com.synopsys.integration.blackduck.dockerinspector.help.formatter.UsageFormatter;
-import com.synopsys.integration.blackduck.dockerinspector.hubclient.HubClient;
 import com.synopsys.integration.blackduck.imageinspector.api.PkgMgrDataNotFoundException;
 import com.synopsys.integration.blackduck.imageinspector.lib.ImageInfoDerived;
 import com.synopsys.integration.blackduck.imageinspector.lib.ImageInspector;
@@ -63,7 +63,7 @@ public class DockerEnvImageInspector {
     public static final String PROGRAM_ID = "blackduck-docker-inspector";
 
     @Autowired
-    private HubClient hubClient;
+    private BlackDuckClient hubClient;
 
     @Autowired
     private DockerClientManager dockerClientManager;
@@ -114,8 +114,8 @@ public class DockerEnvImageInspector {
                 returnCode = inspector.getBdio(dissectedImage);
             } catch (final PkgMgrDataNotFoundException e) {
                 logger.info("Pkg mgr not found; generating empty BDIO file");
-                final ImageInfoDerived imageInfoDerived = imageInspector.generateEmptyBdio(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), config.getHubProjectName(),
-                        config.getHubProjectVersion(), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs(), config.getHubCodelocationPrefix());
+                final ImageInfoDerived imageInfoDerived = imageInspector.generateEmptyBdio(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), config.getBlackDuckProjectName(),
+                        config.getBlackDuckProjectVersion(), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs(), config.getBlackDuckCodelocationPrefix());
                 output.writeBdioFile(dissectedImage, imageInfoDerived);
                 output.uploadBdio(dissectedImage);
                 output.createContainerFileSystemTarIfRequested(dissectedImage.getTargetImageFileSystemRootDir());
@@ -128,7 +128,7 @@ public class DockerEnvImageInspector {
             logger.error(msg);
             final String trace = ExceptionUtils.getStackTrace(e);
             logger.debug(String.format("Stack trace: %s", trace));
-            resultFile.write(new Gson(), programPaths.getHubDockerHostResultPath(), false, msg, dissectedImage.getTargetOs(), dissectedImage.getRunOnImageName(), dissectedImage.getRunOnImageTag(),
+            resultFile.write(new Gson(), programPaths.getDockerInspectorHostResultPath(), false, msg, dissectedImage.getTargetOs(), dissectedImage.getRunOnImageName(), dissectedImage.getRunOnImageTag(),
                     dissectedImage.getDockerTarFile() == null ? "" : dissectedImage.getDockerTarFile().getName(), dissectedImage.getBdioFilename());
         }
         logger.info(String.format("Returning %d", returnCode));

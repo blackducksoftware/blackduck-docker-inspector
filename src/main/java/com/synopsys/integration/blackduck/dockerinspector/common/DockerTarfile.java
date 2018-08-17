@@ -52,7 +52,7 @@ public class DockerTarfile {
     private ProgramPaths programPaths;
 
     public File deriveDockerTarFile() throws IOException, IntegrationException {
-        logger.debug(String.format("programPaths.getHubDockerTargetDirPath(): %s", programPaths.getHubDockerTargetDirPath()));
+        logger.debug(String.format("programPaths.getDockerInspectorTargetDirPath(): %s", programPaths.getDockerInspectorTargetDirPath()));
         if (StringUtils.isNotBlank(config.getDockerTar())) {
             return new File(config.getDockerTar());
         } else {
@@ -62,7 +62,7 @@ public class DockerTarfile {
 
     private File deriveDockerTarFileGivenImageSpec() throws IntegrationException, IOException {
         File finalDockerTarfile;
-        final File imageTarDirectory = new File(programPaths.getHubDockerTargetDirPath());
+        final File imageTarDirectory = new File(programPaths.getDockerInspectorTargetDirPath());
         if (StringUtils.isNotBlank(config.getDockerImageId())) {
             finalDockerTarfile = dockerClientManager.getTarFileFromDockerImageById(config.getDockerImageId(), imageTarDirectory);
         } else if (StringUtils.isNotBlank(config.getDockerImageRepo())) {

@@ -67,9 +67,9 @@ import com.github.dockerjava.api.model.Volume;
 import com.github.dockerjava.core.command.ExecStartResultCallback;
 import com.github.dockerjava.core.command.LogContainerResultCallback;
 import com.github.dockerjava.core.command.PullImageResultCallback;
+import com.synopsys.integration.blackduck.dockerinspector.blackduckclient.BlackDuckSecrets;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
-import com.synopsys.integration.blackduck.dockerinspector.hubclient.HubSecrets;
 import com.synopsys.integration.blackduck.exception.HubIntegrationException;
 import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 import com.synopsys.integration.blackduck.imageinspector.name.ImageNameResolver;
@@ -100,7 +100,7 @@ public class DockerClientManager {
     private HubDockerClient hubDockerClient;
 
     @Autowired
-    private HubSecrets hubSecrets;
+    private BlackDuckSecrets hubSecrets;
 
     @Autowired
     private ProgramPaths programPaths;
@@ -189,14 +189,14 @@ public class DockerClientManager {
         final String extractorContainerName = programPaths.deriveContainerName(runOnImageName);
         logger.debug(String.format("Container name: %s", extractorContainerName));
         final DockerClient dockerClient = hubDockerClient.getDockerClient();
-        final String tarFileDirInSubContainer = programPaths.getHubDockerTargetDirPathContainer();
-        final String tarFilePathInSubContainer = programPaths.getHubDockerTargetDirPathContainer() + dockerTarFile.getName();
+        final String tarFileDirInSubContainer = programPaths.getDockerInspectorTargetDirPathContainer();
+        final String tarFilePathInSubContainer = programPaths.getDockerInspectorTargetDirPathContainer() + dockerTarFile.getName();
 
         final String containerId = prepareContainerForExec(dockerClient, imageNameTag, extractorContainerName, hubSecrets.getPassword(), hubSecrets.getApiToken());
         setPropertiesInSubContainer(dockerClient, containerId, tarFilePathInSubContainer, tarFileDirInSubContainer, dockerTarFile, targetImage, targetImageRepo, targetImageTag);
         copyFileToContainer(dockerClient, containerId, dockerTarFile.getAbsolutePath(), tarFileDirInSubContainer);
         if (copyJar) {
-            copyFileToContainer(dockerClient, containerId, programPaths.getHubDockerJarPathHost(), programPaths.getHubDockerPgmDirPathContainer());
+            copyFileToContainer(dockerClient, containerId, programPaths.getDockerInspectorJarPathHost(), programPaths.getDockerInspectorPgmDirPathContainer());
         }
 
         final List<String> cmd = new ArrayList<>();
@@ -210,11 +210,11 @@ public class DockerClientManager {
         }
         cmd.add("-jar");
         // TODO use Path to construct paths
-        cmd.add(String.format("%s/%s", programPaths.getHubDockerPgmDirPathContainer(), programPaths.getHubDockerJarFilenameHost()));
-        cmd.add(String.format("--spring.config.location=%s/config/application.properties", programPaths.getHubDockerPgmDirPathContainer()));
+        cmd.add(String.format("%s/%s", programPaths.getDockerInspectorPgmDirPathContainer(), programPaths.getDockerInspectorJarFilenameHost()));
+        cmd.add(String.format("--spring.config.location=%s/config/application.properties", programPaths.getDockerInspectorPgmDirPathContainer()));
         cmd.add(String.format("--docker.tar=%s", tarFilePathInSubContainer));
         execCommandInContainer(dockerClient, imageNameTag, containerId, cmd);
-        logger.debug(String.format("Container's output files are in %s because it was mounted under the container's output dir", programPaths.getHubDockerOutputPathHost()));
+        logger.debug(String.format("Container's output files are in %s because it was mounted under the container's output dir", programPaths.getDockerInspectorOutputPathHost()));
         return containerId;
     }
 
@@ -247,7 +247,7 @@ public class DockerClientManager {
         final PortBinding portBinding = new PortBinding(Binding.bindPort(hostPort), exposedPort);
         createContainerCmd.withPortBindings(portBinding);
         final List<String> envAssignments = new ArrayList<>();
-        if (StringUtils.isBlank(config.getHubProxyHost()) && !StringUtils.isBlank(config.getScanCliOptsEnvVar())) {
+        if (StringUtils.isBlank(config.getBlackDuckProxyHost()) && !StringUtils.isBlank(config.getScanCliOptsEnvVar())) {
             envAssignments.add(String.format("SCAN_CLI_OPTS=%s", config.getScanCliOptsEnvVar()));
         }
         createContainerCmd.withEnv(envAssignments);
@@ -404,10 +404,10 @@ public class DockerClientManager {
         hubDockerProperties.set(INSPECT_IN_CONTAINER_PROPERTY, "false");
         hubDockerProperties.set(UPLOAD_BDIO_PROPERTY, "false");
 
-        final String pathToPropertiesFileForSubContainer = String.format("%s%s", programPaths.getHubDockerTargetDirPathHost(), ProgramPaths.APPLICATION_PROPERTIES_FILENAME);
+        final String pathToPropertiesFileForSubContainer = String.format("%s%s", programPaths.getDockerInspectorTargetDirPathHost(), ProgramPaths.APPLICATION_PROPERTIES_FILENAME);
         hubDockerProperties.save(pathToPropertiesFileForSubContainer);
 
-        copyFileToContainer(dockerClient, containerId, pathToPropertiesFileForSubContainer, programPaths.getHubDockerConfigDirPathContainer());
+        copyFileToContainer(dockerClient, containerId, pathToPropertiesFileForSubContainer, programPaths.getDockerInspectorConfigDirPathContainer());
 
         logger.trace(String.format("Docker image tar file: %s", dockerTarFile.getAbsolutePath()));
         logger.trace(String.format("Docker image tar file path in sub-container: %s", tarFilePathInSubContainer));
@@ -416,7 +416,7 @@ public class DockerClientManager {
     private String prepareContainerForExec(final DockerClient dockerClient, final String imageNameTag, final String extractorContainerName, final String hubPassword, final String hubApiToken) {
         stopRemoveContainerIfExists(dockerClient, extractorContainerName);
         logger.debug(String.format("Creating container %s from image %s", extractorContainerName, imageNameTag));
-        final Bind bind = createBindMount(programPaths.getHubDockerOutputPathHost(), programPaths.getHubDockerOutputPathContainer());
+        final Bind bind = createBindMount(programPaths.getDockerInspectorOutputPathHost(), programPaths.getDockerInspectorOutputPathContainer());
         final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageNameTag).withStdinOpen(true).withTty(true).withName(extractorContainerName).withBinds(bind).withCmd("/bin/bash");
         final CreateContainerResponse containerResponse = createContainerCmd.exec();
         final String containerId = containerResponse.getId();

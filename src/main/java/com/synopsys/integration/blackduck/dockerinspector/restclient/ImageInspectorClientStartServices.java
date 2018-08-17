@@ -97,7 +97,7 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
     @Override
     public File copyTarfileToSharedDir(final File givenDockerTarfile) throws IOException {
         // Copy the tarfile to the shared/target dir
-        final File finalDockerTarfile = new File(programPaths.getHubDockerTargetDirPath(), givenDockerTarfile.getName());
+        final File finalDockerTarfile = new File(programPaths.getDockerInspectorTargetDirPath(), givenDockerTarfile.getName());
         logger.debug(String.format("Required docker tarfile location: %s", finalDockerTarfile.getCanonicalPath()));
         if (!finalDockerTarfile.getCanonicalPath().equals(givenDockerTarfile.getCanonicalPath())) {
             logger.debug(String.format("Copying %s to %s", givenDockerTarfile.getCanonicalPath(), finalDockerTarfile.getCanonicalPath()));

@@ -75,7 +75,7 @@ public class ContainerPaths {
     }
 
     private File getContainerOutputDir() {
-        final File containerRunDir = getFileInDir(config.getSharedDirPathImageInspector(), programPaths.getHubDockerRunDirName());
+        final File containerRunDir = getFileInDir(config.getSharedDirPathImageInspector(), programPaths.getDockerInspectorRunDirName());
         final File containerOutputDir = new File(containerRunDir, ProgramPaths.OUTPUT_DIR);
         return containerOutputDir;
     }

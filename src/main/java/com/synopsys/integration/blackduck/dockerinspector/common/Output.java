@@ -42,10 +42,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
+import com.synopsys.integration.blackduck.dockerinspector.blackduckclient.BlackDuckClient;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.dockerexec.DissectedImage;
-import com.synopsys.integration.blackduck.dockerinspector.hubclient.HubClient;
 import com.synopsys.integration.blackduck.exception.HubIntegrationException;
 import com.synopsys.integration.blackduck.imageinspector.lib.ImageInfoDerived;
 import com.synopsys.integration.blackduck.imageinspector.lib.ImageInspector;
@@ -65,7 +65,7 @@ public class Output {
     private Config config;
 
     @Autowired
-    private HubClient hubClient;
+    private BlackDuckClient hubClient;
 
     @Autowired
     private ProgramPaths programPaths;
@@ -78,7 +78,7 @@ public class Output {
 
     public void ensureWriteability() {
         if (config.isOnHost()) {
-            final File outputDir = new File(programPaths.getHubDockerOutputPathHost());
+            final File outputDir = new File(programPaths.getDockerInspectorOutputPathHost());
             final boolean dirCreated = outputDir.mkdirs();
             final boolean dirMadeWriteable = outputDir.setWritable(true, false);
             final boolean dirMadeExecutable = outputDir.setExecutable(true, false);
@@ -99,7 +99,7 @@ public class Output {
             outputDir = new File(config.getOutputPath());
             provideOutput();
         } else {
-            outputDir = new File(programPaths.getHubDockerOutputPathHost());
+            outputDir = new File(programPaths.getDockerInspectorOutputPathHost());
         }
         final File outputBdioFile = new File(outputDir, outputBdioFilename);
         logger.info(String.format("Writing BDIO to %s", outputBdioFile.getAbsolutePath()));
@@ -108,7 +108,7 @@ public class Output {
     }
 
     public void writeBdioFile(final DissectedImage dissectedImage, final ImageInfoDerived imageInfoDerived) throws FileNotFoundException, IOException {
-        final File bdioFile = imageInspector.writeBdioFile(new File(programPaths.getHubDockerOutputPath()), imageInfoDerived);
+        final File bdioFile = imageInspector.writeBdioFile(new File(programPaths.getDockerInspectorOutputPath()), imageInfoDerived);
         logger.info(String.format("BDIO File generated: %s", bdioFile.getAbsolutePath()));
         dissectedImage.setBdioFilename(bdioFile.getName());
     }
@@ -123,7 +123,7 @@ public class Output {
     public void createContainerFileSystemTarIfRequested(final File targetImageFileSystemRootDir) throws IOException, CompressorException {
         if (config.isOutputIncludeContainerfilesystem()) {
             logger.info("Including container file system in output");
-            final File outputDirectory = new File(programPaths.getHubDockerOutputPath());
+            final File outputDirectory = new File(programPaths.getDockerInspectorOutputPath());
             logger.debug(String.format("outputDirectory: %s", outputDirectory.getAbsolutePath()));
             final String containerFileSystemTarFilename = Names.getContainerFileSystemTarFilename(config.getDockerImage(), config.getDockerTar());
             final File containerFileSystemTarFile = new File(outputDirectory, containerFileSystemTarFilename);
@@ -166,11 +166,11 @@ public class Output {
     }
 
     private void cleanupWorkingDirs() {
-        logger.debug(String.format("Removing %s, %s, %s", programPaths.getHubDockerWorkingDirPathHost(), programPaths.getHubDockerTargetDirPathHost(), programPaths.getHubDockerOutputPathHost()));
+        logger.debug(String.format("Removing %s, %s, %s", programPaths.getDockerInspectorWorkingDirPathHost(), programPaths.getDockerInspectorTargetDirPathHost(), programPaths.getDockerInspectorOutputPathHost()));
         try {
-            FileOperations.removeFileOrDir(programPaths.getHubDockerWorkingDirPathHost());
-            FileOperations.removeFileOrDir(programPaths.getHubDockerTargetDirPathHost());
-            FileOperations.removeFileOrDir(programPaths.getHubDockerOutputPathHost());
+            FileOperations.removeFileOrDir(programPaths.getDockerInspectorWorkingDirPathHost());
+            FileOperations.removeFileOrDir(programPaths.getDockerInspectorTargetDirPathHost());
+            FileOperations.removeFileOrDir(programPaths.getDockerInspectorOutputPathHost());
         } catch (final IOException e) {
             logger.error(String.format("Error cleaning up working directories: %s", e.getMessage()));
         }
@@ -182,35 +182,35 @@ public class Output {
             logger.debug("User has not specified an output path");
             return;
         }
-        logger.debug(String.format("Copying result file from %s to %s", programPaths.getHubDockerHostResultPath(), userOutputDirPath));
-        final File sourceResultFile = new File(programPaths.getHubDockerHostResultPath());
+        logger.debug(String.format("Copying result file from %s to %s", programPaths.getDockerInspectorHostResultPath(), userOutputDirPath));
+        final File sourceResultFile = new File(programPaths.getDockerInspectorHostResultPath());
         final File userOutputDir = new File(userOutputDirPath);
         final File targetFile = new File(userOutputDir, sourceResultFile.getName());
         logger.debug(String.format("Removing %s if it exists", targetFile.getAbsolutePath()));
         FileOperations.removeFileOrDirQuietly(targetFile.getAbsolutePath());
-        FileOperations.copyFile(new File(programPaths.getHubDockerHostResultPath()), userOutputDir);
+        FileOperations.copyFile(new File(programPaths.getDockerInspectorHostResultPath()), userOutputDir);
     }
 
     private int reportResult(final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag, final String dockerTarfilename, final String bdioFilename, final boolean forceSuccess)
             throws IntegrationException {
         final Gson gson = new Gson();
         if (forceSuccess) {
-            writeSuccessResultFile(gson, programPaths.getHubDockerHostResultPath(), targetOs, runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename);
+            writeSuccessResultFile(gson, programPaths.getDockerInspectorHostResultPath(), targetOs, runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename);
             return 0;
         }
         if (config.isOnHost()) {
-            final Result resultReportedFromContainer = resultFile.read(gson, programPaths.getHubDockerContainerResultPathOnHost());
+            final Result resultReportedFromContainer = resultFile.read(gson, programPaths.getDockerInspectorContainerResultPathOnHost());
             if (!resultReportedFromContainer.isSucceeded()) {
                 logger.error(String.format("*** Failed: %s", resultReportedFromContainer.getMessage()));
-                writeFailureResultFile(gson, programPaths.getHubDockerHostResultPath(), targetOs, runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename, resultReportedFromContainer.getMessage());
+                writeFailureResultFile(gson, programPaths.getDockerInspectorHostResultPath(), targetOs, runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename, resultReportedFromContainer.getMessage());
                 return -1;
             } else {
                 logger.info("*** Succeeded");
-                writeSuccessResultFile(gson, programPaths.getHubDockerHostResultPath(), targetOs, runOnImageName, runOnImageTag, dockerTarfilename, resultReportedFromContainer.getBdioFilename());
+                writeSuccessResultFile(gson, programPaths.getDockerInspectorHostResultPath(), targetOs, runOnImageName, runOnImageTag, dockerTarfilename, resultReportedFromContainer.getBdioFilename());
                 return 0;
             }
         } else {
-            writeSuccessResultFile(gson, programPaths.getHubDockerContainerResultPathInContainer(), targetOs, runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename);
+            writeSuccessResultFile(gson, programPaths.getDockerInspectorContainerResultPathInContainer(), targetOs, runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename);
             return 0;
         }
 
@@ -232,19 +232,19 @@ public class Output {
             logger.debug("User has not specified an output path");
             return;
         }
-        final File srcDir = new File(programPaths.getHubDockerOutputPathHost());
+        final File srcDir = new File(programPaths.getDockerInspectorOutputPathHost());
         if (!srcDir.exists()) {
             logger.info(String.format("Output source dir %s does not exist", srcDir.getAbsolutePath()));
             return;
         }
-        logger.info(String.format("Copying output from %s to %s", programPaths.getHubDockerOutputPathHost(), userOutputDirPath));
+        logger.info(String.format("Copying output from %s to %s", programPaths.getDockerInspectorOutputPathHost(), userOutputDirPath));
         final File userOutputDir = new File(userOutputDirPath);
-        FileOperations.copyDirContentsToDir(programPaths.getHubDockerOutputPathHost(), userOutputDir.getAbsolutePath(), true);
+        FileOperations.copyDirContentsToDir(programPaths.getDockerInspectorOutputPathHost(), userOutputDir.getAbsolutePath(), true);
     }
 
     private String uploadBdioFiles() throws IntegrationException {
         String pathToDirContainingBdio = null;
-        pathToDirContainingBdio = programPaths.getHubDockerOutputPath();
+        pathToDirContainingBdio = programPaths.getDockerInspectorOutputPath();
         logger.debug(String.format("Uploading BDIO files from %s", pathToDirContainingBdio));
         String bdioFilename = null;
         final List<File> bdioFiles = findBdioFiles(pathToDirContainingBdio);

@@ -36,13 +36,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
+import com.synopsys.integration.blackduck.dockerinspector.blackduckclient.BlackDuckClient;
 import com.synopsys.integration.blackduck.dockerinspector.common.DockerTarfile;
 import com.synopsys.integration.blackduck.dockerinspector.common.Inspector;
 import com.synopsys.integration.blackduck.dockerinspector.common.Output;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.dockerexec.DissectedImage;
-import com.synopsys.integration.blackduck.dockerinspector.hubclient.HubClient;
 import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
 import com.synopsys.integration.blackduck.imageinspector.name.Names;
 import com.synopsys.integration.exception.IntegrationException;
@@ -57,7 +57,7 @@ public class RestClientInspector implements Inspector {
     private Config config;
 
     @Autowired
-    private HubClient hubClient;
+    private BlackDuckClient hubClient;
 
     @Autowired
     private ProgramPaths programPaths;
@@ -113,9 +113,9 @@ public class RestClientInspector implements Inspector {
     }
 
     private void cleanup() {
-        logger.debug(String.format("Removing %s", programPaths.getHubDockerRunDirPathHost()));
+        logger.debug(String.format("Removing %s", programPaths.getDockerInspectorRunDirPathHost()));
         try {
-            FileOperations.removeFileOrDir(programPaths.getHubDockerRunDirPathHost());
+            FileOperations.removeFileOrDir(programPaths.getDockerInspectorRunDirPathHost());
         } catch (final IOException e) {
             logger.error(String.format("Error cleaning up working directories: %s", e.getMessage()));
         }

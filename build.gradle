@@ -38,8 +38,6 @@ import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 
 apply from: 'airgap.gradle'
 
-final String hubDockerPgmDir = '/opt/blackduck/hub-docker-inspector'
-
 springBoot { mainClass = 'com.synopsys.integration.blackduck.dockerinspector.DockerEnvImageInspector' }
 
 configurations {
@@ -70,7 +68,7 @@ task produceFinalZip(type: Zip, dependsOn: [build, writeVersionToPropertiesFile]
 }
 
 task buildScript(type: Copy) {
-	from 'src/main/resources/hub-docker-inspector.sh'
+	from 'src/main/resources/blackduck-docker-inspector.sh'
 	into 'build'
 	filter(ReplaceTokens, tokens: [VERSION: version, INSPECTOR_IMAGE_FAMILY: project.ext.inspectorImageFamily])
 }
@@ -171,7 +169,7 @@ task packageScript(type: Zip, dependsOn: buildScript) {
 		include 'application.properties'
 	}
 	from("${projectDir}/build") {
-		include 'hub-docker-inspector.sh'
+		include 'blackduck-docker-inspector.sh'
 	}
 }
 

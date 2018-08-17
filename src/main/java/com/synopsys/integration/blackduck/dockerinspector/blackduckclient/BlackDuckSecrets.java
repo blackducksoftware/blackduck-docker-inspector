@@ -21,7 +21,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.synopsys.integration.blackduck.dockerinspector.hubclient;
+package com.synopsys.integration.blackduck.dockerinspector.blackduckclient;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,23 +30,23 @@ import org.springframework.stereotype.Component;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 
 @Component
-public class HubSecrets {
+public class BlackDuckSecrets {
 
     @Autowired
     private Config config;
 
     public String getPassword() {
-        String hubPassword = config.getHubPasswordEnvVar();
-        if (!StringUtils.isBlank(config.getHubPassword())) {
-            hubPassword = config.getHubPassword();
+        String blackDuckPassword = config.getBlackDuckPasswordEnvVar();
+        if (!StringUtils.isBlank(config.getBlackDuckPassword())) {
+            blackDuckPassword = config.getBlackDuckPassword();
         }
-        return hubPassword;
+        return blackDuckPassword;
     }
 
     public String getApiToken() {
-        String hubApiToken = config.getHubApiTokenEnvVar();
-        if (!StringUtils.isBlank(config.getHubApiToken())) {
-            hubApiToken = config.getHubApiToken();
+        String hubApiToken = config.getBlackDuckApiTokenEnvVar();
+        if (!StringUtils.isBlank(config.getBlackDuckApiToken())) {
+            hubApiToken = config.getBlackDuckApiToken();
         }
         return hubApiToken;
     }

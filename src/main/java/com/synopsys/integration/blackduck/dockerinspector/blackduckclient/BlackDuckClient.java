@@ -21,7 +21,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.synopsys.integration.blackduck.dockerinspector.hubclient;
+package com.synopsys.integration.blackduck.dockerinspector.blackduckclient;
 
 import java.io.File;
 import java.io.IOException;
@@ -54,18 +54,18 @@ import com.synopsys.integration.phonehome.PhoneHomeRequestBody;
 import com.synopsys.integration.phonehome.PhoneHomeService;
 
 @Component
-public class HubClient {
+public class BlackDuckClient {
     private static final String PHONE_HOME_METADATA_NAME_CALLER_VERSION = "callerVersion";
 
     private static final String PHONE_HOME_METADATA_NAME_CALLER_NAME = "callerName";
 
-    private final Logger logger = LoggerFactory.getLogger(HubClient.class);
+    private final Logger logger = LoggerFactory.getLogger(BlackDuckClient.class);
 
     @Autowired
     private Config config;
 
     @Autowired
-    private HubSecrets hubSecrets;
+    private BlackDuckSecrets hubSecrets;
 
     @Autowired
     private ProgramVersion programVersion;
@@ -96,11 +96,11 @@ public class HubClient {
         final HubServicesFactory hubServicesFactory = new HubServicesFactory(new Gson(), new JsonParser(), restConnection, new Slf4jIntLogger(logger));
         final CodeLocationService bomImportRequestService = hubServicesFactory.createCodeLocationService();
         bomImportRequestService.importBomFile(bdioFile);
-        logger.info(String.format("Uploaded bdio file %s to %s", bdioFile.getName(), config.getHubUrl()));
+        logger.info(String.format("Uploaded bdio file %s to %s", bdioFile.getName(), config.getBlackDuckUrl()));
     }
 
     private String getHubUsername() {
-        return config.getHubUsername();
+        return config.getBlackDuckUsername();
     }
 
     public void phoneHome(final String dockerEngineVersion) {
@@ -127,7 +127,7 @@ public class HubClient {
         if (!StringUtils.isBlank(config.getCallerVersion())) {
             phoneHomeRequestBodyBuilder.addToMetaData(PHONE_HOME_METADATA_NAME_CALLER_VERSION, config.getCallerVersion());
         }
-        final PhoneHomeCallable phoneHomeCallable = hubServicesFactory.createBlackDuckPhoneHomeCallable(new URL(config.getHubUrl()), DockerEnvImageInspector.PROGRAM_ID, programVersion.getProgramVersion(), phoneHomeRequestBodyBuilder);
+        final PhoneHomeCallable phoneHomeCallable = hubServicesFactory.createBlackDuckPhoneHomeCallable(new URL(config.getBlackDuckUrl()), DockerEnvImageInspector.PROGRAM_ID, programVersion.getProgramVersion(), phoneHomeRequestBodyBuilder);
         phoneHomeService.phoneHome(phoneHomeCallable);
         logger.trace("Attempt to phone home completed");
     }
@@ -138,11 +138,11 @@ public class HubClient {
     }
 
     private HubServerConfigBuilder createHubServerConfigBuilder() {
-        String hubProxyHost = config.getHubProxyHost();
-        String hubProxyPort = config.getHubProxyPort();
-        String hubProxyUsername = config.getHubProxyUsername();
-        String hubProxyPassword = config.getHubProxyPassword();
-        if (StringUtils.isBlank(config.getHubProxyHost()) && !StringUtils.isBlank(config.getScanCliOptsEnvVar())) {
+        String hubProxyHost = config.getBlackDuckProxyHost();
+        String hubProxyPort = config.getBlackDuckProxyPort();
+        String hubProxyUsername = config.getBlackDuckProxyUsername();
+        String hubProxyPassword = config.getBlackDuckProxyPassword();
+        if (StringUtils.isBlank(config.getBlackDuckProxyHost()) && !StringUtils.isBlank(config.getScanCliOptsEnvVar())) {
             final List<String> scanCliOpts = Arrays.asList(config.getScanCliOptsEnvVar().split("\\s"));
             for (String opt : scanCliOpts) {
                 opt = opt.trim();
@@ -158,16 +158,16 @@ public class HubClient {
             }
         }
         final HubServerConfigBuilder hubServerConfigBuilder = new HubServerConfigBuilder();
-        hubServerConfigBuilder.setUrl(config.getHubUrl());
+        hubServerConfigBuilder.setUrl(config.getBlackDuckUrl());
         hubServerConfigBuilder.setApiToken(hubSecrets.getApiToken());
         hubServerConfigBuilder.setUsername(getHubUsername());
         hubServerConfigBuilder.setPassword(hubSecrets.getPassword());
-        hubServerConfigBuilder.setTimeout(config.getHubTimeout());
+        hubServerConfigBuilder.setTimeout(config.getBlackDuckTimeout());
         hubServerConfigBuilder.setProxyHost(hubProxyHost);
         hubServerConfigBuilder.setProxyPort(hubProxyPort);
         hubServerConfigBuilder.setProxyUsername(hubProxyUsername);
         hubServerConfigBuilder.setProxyPassword(hubProxyPassword);
-        hubServerConfigBuilder.setTrustCert(config.isHubAlwaysTrustCert());
+        hubServerConfigBuilder.setTrustCert(config.isBlackDuckAlwaysTrustCert());
         return hubServerConfigBuilder;
     }
 

@@ -114,13 +114,13 @@ public class DockerExecInspector implements Inspector {
             return;
         }
         dissectedImage.setTargetImageFileSystemRootDir(
-                imageInspector.extractDockerLayers(new File(programPaths.getHubDockerWorkingDirPath()), config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerTars(), dissectedImage.getLayerMappings()));
+                imageInspector.extractDockerLayers(new File(programPaths.getDockerInspectorWorkingDirPath()), config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerTars(), dissectedImage.getLayerMappings()));
     }
 
     private void parseManifest(final Config config, final DissectedImage dissectedImage) throws IOException, IntegrationException {
         dissectedImage.setDockerTarFile(dockerTarfile.deriveDockerTarFile());
-        dissectedImage.setLayerTars(imageInspector.extractLayerTars(new File(programPaths.getHubDockerWorkingDirPath()), dissectedImage.getDockerTarFile()));
-        dissectedImage.setLayerMappings(imageInspector.getLayerMappings(new File(programPaths.getHubDockerWorkingDirPath()), dissectedImage.getDockerTarFile().getName(), config.getDockerImageRepo(), config.getDockerImageTag()));
+        dissectedImage.setLayerTars(imageInspector.extractLayerTars(new File(programPaths.getDockerInspectorWorkingDirPath()), dissectedImage.getDockerTarFile()));
+        dissectedImage.setLayerMappings(imageInspector.getLayerMappings(new File(programPaths.getDockerInspectorWorkingDirPath()), dissectedImage.getDockerTarFile().getName(), config.getDockerImageRepo(), config.getDockerImageTag()));
         adjustImageNameTagFromLayerMappings(dissectedImage.getLayerMappings());
     }
 
@@ -144,14 +144,14 @@ public class DockerExecInspector implements Inspector {
         } else {
             if (dissectedImage.getTargetImageFileSystemRootDir() == null) {
                 dissectedImage.setTargetImageFileSystemRootDir(
-                        imageInspector.extractDockerLayers(new File(programPaths.getHubDockerWorkingDirPath()), config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerTars(), dissectedImage.getLayerMappings()));
+                        imageInspector.extractDockerLayers(new File(programPaths.getDockerInspectorWorkingDirPath()), config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerTars(), dissectedImage.getLayerMappings()));
             }
             if (dissectedImage.getTargetOs() == null) {
                 dissectedImage.setTargetOs(imageInspector.detectInspectorOperatingSystem(dissectedImage.getTargetImageFileSystemRootDir()));
             }
             logger.info(String.format("Target image tarfile: %s; target OS: %s", dissectedImage.getDockerTarFile().getAbsolutePath(), dissectedImage.getTargetOs().toString()));
-            final ImageInfoDerived imageInfoDerived = imageInspector.generateBdioFromImageFilesDir(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), config.getHubProjectName(),
-                    config.getHubProjectVersion(), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs(), config.getHubCodelocationPrefix());
+            final ImageInfoDerived imageInfoDerived = imageInspector.generateBdioFromImageFilesDir(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), config.getBlackDuckProjectName(),
+                    config.getBlackDuckProjectVersion(), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs(), config.getBlackDuckCodelocationPrefix());
             output.writeBdioFile(dissectedImage, imageInfoDerived);
             output.createContainerFileSystemTarIfRequested(dissectedImage.getTargetImageFileSystemRootDir());
         }

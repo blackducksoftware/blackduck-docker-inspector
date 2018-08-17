@@ -22,7 +22,6 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import com.google.gson.Gson;
-import com.synopsys.integration.blackduck.dockerinspector.ProgramVersion;
 import com.synopsys.integration.blackduck.imageinspector.name.Names;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.hub.bdio.BdioReader;
@@ -175,22 +174,22 @@ public class DockerInspectorTest {
     }
 
     @Test
-    public void testHubWebappExec() throws IOException, InterruptedException, IntegrationException {
+    public void testBlackDuckWebappExec() throws IOException, InterruptedException, IntegrationException {
         testImage("blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", "lib_apk", true, false, "apk-", 5);
     }
 
     @Test
-    public void testHubWebappStartContainer() throws IOException, InterruptedException, IntegrationException {
+    public void testBlackDuckWebappStartContainer() throws IOException, InterruptedException, IntegrationException {
         testImage("blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", "lib_apk", true, true, "apk-", 5);
     }
 
     @Test
-    public void testHubZookeeperExec() throws IOException, InterruptedException, IntegrationException {
+    public void testBlackDuckZookeeperExec() throws IOException, InterruptedException, IntegrationException {
         testImage("blackducksoftware/hub-zookeeper:4.0.0", "blackducksoftware_hub-zookeeper", "4.0.0", "lib_apk", true, false, "apk-", 5);
     }
 
     @Test
-    public void testHubZookeeperStartContainer() throws IOException, InterruptedException, IntegrationException {
+    public void testBlackDuckZookeeperStartContainer() throws IOException, InterruptedException, IntegrationException {
         testImage("blackducksoftware/hub-zookeeper:4.0.0", "blackducksoftware_hub-zookeeper", "4.0.0", "lib_apk", true, true, "apk-", 5);
     }
 
@@ -379,19 +378,19 @@ public class DockerInspectorTest {
         ensureFileDoesNotExist(actualBdio);
 
         final List<String> cmd = new ArrayList<>();
-        cmd.add("build/hub-docker-inspector.sh");
+        cmd.add("build/blackduck-docker-inspector.sh");
         cmd.add("--upload.bdio=false");
         cmd.add(String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", programVersion.getProgramVersion()));
         cmd.add(String.format("--output.path=%s/output", TestUtils.TEST_DIR_REL_PATH));
         cmd.add("--output.include.containerfilesystem=true");
-        cmd.add("--hub.always.trust.cert=true");
+        cmd.add("--blackduck.always.trust.cert=true");
         if (repo != null) {
             cmd.add(String.format("--docker.image.repo=%s", repo));
         }
         if (tag != null) {
             cmd.add(String.format("--docker.image.tag=%s", tag));
         }
-        cmd.add("--logging.level.com.blackducksoftware=DEBUG");
+        cmd.add("--logging.level.com.synopsys=DEBUG");
         if (needWorkingDir) {
             final File workingDir = new File(String.format("%s/endToEnd", TestUtils.TEST_DIR_REL_PATH));
             TestUtils.deleteDirIfExists(workingDir);
@@ -409,7 +408,7 @@ public class DockerInspectorTest {
         }
         System.out.println(String.format("Running end to end test on %s with command %s", inspectTargetTarfile, cmd.toString()));
         TestUtils.execCmd(String.join(" ", cmd), 240000L, true);
-        System.out.println("hub-docker-inspector done; verifying results...");
+        System.out.println("blackduck-docker-inspector done; verifying results...");
         System.out.printf("Expecting output BDIO file: %s\n", actualBdio.getAbsolutePath());
         assertTrue(actualBdio.exists());
         if (requireBdioMatch) {
@@ -436,19 +435,19 @@ public class DockerInspectorTest {
         ensureFileDoesNotExist(actualBdio);
 
         final List<String> cmd = new ArrayList<>();
-        cmd.add("build/hub-docker-inspector.sh");
+        cmd.add("build/blackduck-docker-inspector.sh");
         cmd.add("--upload.bdio=false");
         cmd.add(String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", programVersion.getProgramVersion()));
         cmd.add(String.format("--output.path=%s/output", TestUtils.TEST_DIR_REL_PATH));
         cmd.add("--output.include.containerfilesystem=true");
-        cmd.add("--hub.always.trust.cert=true");
+        cmd.add("--blackduck.always.trust.cert=true");
         if (repo != null) {
             cmd.add(String.format("--docker.image.repo=%s", repo));
         }
         if (tag != null) {
             cmd.add(String.format("--docker.image.tag=%s", tag));
         }
-        cmd.add("--logging.level.com.blackducksoftware=TRACE");
+        cmd.add("--logging.level.com.synopsys=DEBUG");
         if (startContainersAsNeeded) {
             cmd.add("--imageinspector.service.start=true");
             cmd.add(String.format("--imageinspector.service.port.alpine=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE));
@@ -464,7 +463,7 @@ public class DockerInspectorTest {
 
         System.out.println(String.format("Running end to end test on %s with command %s", inspectTargetImageRepoTag, cmd.toString()));
         TestUtils.execCmd(String.join(" ", cmd), 30000L, true);
-        System.out.println("hub-docker-inspector done; verifying results...");
+        System.out.println("blackduck-docker-inspector done; verifying results...");
         System.out.printf("Expecting output BDIO file: %s\n", actualBdio.getAbsolutePath());
         assertTrue(actualBdio.exists());
         if (requireBdioMatch) {
@@ -643,7 +642,7 @@ public class DockerInspectorTest {
             final String[] fields = line.split("\\s+");
             final String containerName = fields[fields.length - 1];
             System.out.printf("Container name: %s\n", containerName);
-            if (containerName.startsWith("hub-imageinspector-ws-alpine_") || containerName.startsWith("hub-imageinspector-ws-centos_") || containerName.startsWith("hub-imageinspector-ws-ubuntu_")) {
+            if (containerName.startsWith("blackduck-imageinspector-alpine_") || containerName.startsWith("blackduck-imageinspector-centos_") || containerName.startsWith("blackduck-imageinspector-ubuntu_")) {
                 TestUtils.execCmd(String.format("docker stop %s", containerName), 120000L, false);
                 Thread.sleep(10000L);
                 TestUtils.execCmd(String.format("docker rm -f %s", containerName), 120000L, false);

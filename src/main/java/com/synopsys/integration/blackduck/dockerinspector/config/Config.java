@@ -50,62 +50,62 @@ public class Config {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    // Black Duck Hub connection details
-    @ValueDescription(description = "Hub URL", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
-    @Value("${hub.url:}")
-    private String hubUrl = "";
+    // Black Duck connection details
+    @ValueDescription(description = "Black Duck URL", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${blackduck.url:}")
+    private String blackDuckUrl = "";
 
-    @ValueDescription(description = "Hub Timeout in seconds", defaultValue = "120", group = Config.GROUP_PUBLIC, deprecated = false)
-    @Value("${hub.timeout:120}")
-    private Integer hubTimeout = 120;
+    @ValueDescription(description = "Black Duck Timeout in seconds", defaultValue = "120", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${blackduck.timeout:120}")
+    private Integer blackDuckTimeout = 120;
 
-    @ValueDescription(description = "Hub token", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
-    @Value("${hub.api.token:}")
-    private String hubApiToken = "";
+    @ValueDescription(description = "Black Duck token", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${blackduck.api.token:}")
+    private String blackDuckApiToken = "";
 
-    @ValueDescription(description = "Hub Username", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
-    @Value("${hub.username:}")
-    private String hubUsername = "";
+    @ValueDescription(description = "Black Duck Username", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${blackduck.username:}")
+    private String blackDuckUsername = "";
 
-    @ValueDescription(description = "Hub Password", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
-    @Value("${hub.password:}")
-    private String hubPassword = "";
+    @ValueDescription(description = "Black Duck Password", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${blackduck.password:}")
+    private String blackDuckPassword = "";
 
-    // The properties in this section must be set if you must connect to the Hub through a proxy
-    @ValueDescription(description = "Hub Proxy Host", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
-    @Value("${hub.proxy.host:}")
-    private String hubProxyHost = "";
+    // The properties in this section must be set if you must connect to the Black Duck through a proxy
+    @ValueDescription(description = "Black Duck Proxy Host", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${blackduck.proxy.host:}")
+    private String blackDuckProxyHost = "";
 
-    @ValueDescription(description = "Hub Proxy Port", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
-    @Value("${hub.proxy.port:}")
-    private String hubProxyPort = "";
+    @ValueDescription(description = "Black Duck Proxy Port", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${blackduck.proxy.port:}")
+    private String blackDuckProxyPort = "";
 
-    @ValueDescription(description = "Hub Proxy Username", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
-    @Value("${hub.proxy.username:}")
-    private String hubProxyUsername = "";
+    @ValueDescription(description = "Black Duck Proxy Username", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${blackduck.proxy.username:}")
+    private String blackDuckProxyUsername = "";
 
-    @ValueDescription(description = "Hub Proxy Password", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
-    @Value("${hub.proxy.password:}")
-    private String hubProxyPassword = "";
+    @ValueDescription(description = "Black Duck Proxy Password", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${blackduck.proxy.password:}")
+    private String blackDuckProxyPassword = "";
 
-    // If using an https Hub server, you can choose to always trust the server certificates
-    @ValueDescription(description = "Hub Always Trust Cert?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
-    @Value("${hub.always.trust.cert:false}")
-    private Boolean hubAlwaysTrustCert = Boolean.FALSE;
+    // If using an https Black Duck server, you can choose to always trust the server certificates
+    @ValueDescription(description = "Black Duck Always Trust Cert?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${blackduck.always.trust.cert:false}")
+    private Boolean blackDuckAlwaysTrustCert = Boolean.FALSE;
 
     // The default project name will be the Docker image name
-    @ValueDescription(description = "Hub Project Name", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
-    @Value("${hub.project.name:}")
-    private String hubProjectName = "";
+    @ValueDescription(description = "Black Duck Project Name", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${blackduck.project.name:}")
+    private String blackDuckProjectName = "";
 
     // The default version name will be Docker image tag
-    @ValueDescription(description = "Hub Project Version", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
-    @Value("${hub.project.version:}")
-    private String hubProjectVersion = "";
+    @ValueDescription(description = "Black Duck Project Version", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${blackduck.project.version:}")
+    private String blackDuckProjectVersion = "";
 
     // Working directory
-    @ValueDescription(description = "Working Directory Path", defaultValue = "/tmp/hub-docker-inspector-files", group = Config.GROUP_PUBLIC, deprecated = false)
-    @Value("${working.dir.path:/tmp/hub-docker-inspector-files}")
+    @ValueDescription(description = "Working Directory Path", defaultValue = "/tmp/blackduck-docker-inspector-files", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${working.dir.path:/tmp/blackduck-docker-inspector-files}")
     private String workingDirPath = "";
 
     // If false, will leave behind the files created in the working dir
@@ -113,7 +113,7 @@ public class Config {
     @Value("${cleanup.working.dir:true}")
     private Boolean cleanupWorkingDir = Boolean.TRUE;
 
-    // If Hub Docker Inspector cannot derive it automatically,
+    // If Docker Inspector cannot derive it automatically,
     // use linux.distro to specify the target image linux distribution
     // (ubuntu, debian, busybox, centos, fedora, redhat, alpine)
     @ValueDescription(description = "Linux Distribution Name", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
@@ -141,13 +141,13 @@ public class Config {
     private Boolean outputIncludeContainerfilesystem = Boolean.FALSE;
 
     // If you want to add a prefix to the code location name, specify it here
-    @ValueDescription(description = "Hub CodeLocation prefix", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
-    @Value("${hub.codelocation.prefix:}")
-    private String hubCodelocationPrefix = "";
+    @ValueDescription(description = "Black Duck CodeLocation prefix", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${blackduck.codelocation.prefix:}")
+    private String blackDuckCodelocationPrefix = "";
 
-    // Path to the hub-docker-inspector .jar file
-    // Only used by hub-docker-inspector.sh
-    @ValueDescription(description = "Hub Docker Inspector .jar file path", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    // Path to the blackduck-docker-inspector .jar file
+    // Only used by blackduck-docker-inspector.sh
+    @ValueDescription(description = "Black Duck Docker Inspector .jar file path", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${jar.path:}")
     private String jarPath = "";
 
@@ -192,15 +192,15 @@ public class Config {
     @Value("${upload.bdio:true}")
     private Boolean uploadBdio = Boolean.TRUE;
 
-    @ValueDescription(description = "Repository name for the Hub Docker Inspector images", defaultValue = "blackducksoftware", group = Config.GROUP_PRIVATE, deprecated = false)
+    @ValueDescription(description = "Repository name for the Docker Inspector images", defaultValue = "blackducksoftware", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${inspector.repository:blackducksoftware}")
     private String inspectorRepository = "blackducksoftware";
 
-    @ValueDescription(description = "Hub Docker Inspector image \"family\"", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
+    @ValueDescription(description = "Docker Inspector image \"family\"", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${inspector.image.family:}")
     private String inspectorImageFamily = "";
 
-    @ValueDescription(description = "Hub Docker Inspector image version", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
+    @ValueDescription(description = "Docker Inspector image version", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${inspector.image.version:}")
     private String inspectorImageVersion = "";
 
@@ -216,9 +216,9 @@ public class Config {
     @Value("${cleanup.inspector.image:false}")
     private Boolean cleanupInspectorImage = Boolean.FALSE;
 
-    @ValueDescription(description = "The host's path to the dir shared with the imageinspector containers. Only needed if using existing imageinspector containers", defaultValue = "/tmp/hub-docker-inspector-files/shared", group = Config.GROUP_PRIVATE, deprecated = false)
-    @Value("${shared.dir.path.local:/tmp/hub-docker-inspector-files/shared}")
-    private String sharedDirPathLocal = "/tmp/hub-docker-inspector-files/shared";
+    @ValueDescription(description = "The host's path to the dir shared with the imageinspector containers. Only needed if using existing imageinspector containers", defaultValue = "/tmp/blackduck-docker-inspector-files/shared", group = Config.GROUP_PRIVATE, deprecated = false)
+    @Value("${shared.dir.path.local:/tmp/blackduck-docker-inspector-files/shared}")
+    private String sharedDirPathLocal = "/tmp/blackduck-docker-inspector-files/shared";
 
     @ValueDescription(description = "The container's path to the shared directory. Only needed if using existing imageinspector containers", defaultValue = "/opt/blackduck/blackduck-imageinspector/shared", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${shared.dir.path.imageinspector:/opt/blackduck/blackduck-imageinspector/shared}")
@@ -265,10 +265,16 @@ public class Config {
 
     // Environment Variables
     @Value("${BD_HUB_PASSWORD:}")
-    private String hubPasswordEnvVar = "";
+    private final String blackDuckLegacyPasswordEnvVar = "";
 
     @Value("${BD_HUB_TOKEN:}")
-    private String hubApiTokenEnvVar = "";
+    private final String blackDuckLegacyApiTokenEnvVar = "";
+
+    @Value("${BD_PASSWORD:}")
+    private String blackDuckPasswordEnvVar = "";
+
+    @Value("${BD_TOKEN:}")
+    private String blackDuckApiTokenEnvVar = "";
 
     @Value("${SCAN_CLI_OPTS:}")
     private String scanCliOptsEnvVar = "";
@@ -349,52 +355,52 @@ public class Config {
         return optionsByFieldName.get("loggingLevel").getResolvedValue();
     }
 
-    public String getHubUrl() {
-        return optionsByFieldName.get("hubUrl").getResolvedValue();
+    public String getBlackDuckUrl() {
+        return optionsByFieldName.get("blackDuckUrl").getResolvedValue();
     }
 
-    public Integer getHubTimeout() {
-        return new Integer(optionsByFieldName.get("hubTimeout").getResolvedValue());
+    public Integer getBlackDuckTimeout() {
+        return new Integer(optionsByFieldName.get("blackDuckTimeout").getResolvedValue());
     }
 
-    public String getHubApiToken() {
-        return optionsByFieldName.get("hubApiToken").getResolvedValue();
+    public String getBlackDuckApiToken() {
+        return optionsByFieldName.get("blackDuckApiToken").getResolvedValue();
     }
 
-    public String getHubUsername() {
-        return unEscape(optionsByFieldName.get("hubUsername").getResolvedValue());
+    public String getBlackDuckUsername() {
+        return unEscape(optionsByFieldName.get("blackDuckUsername").getResolvedValue());
     }
 
-    public String getHubPassword() {
-        return optionsByFieldName.get("hubPassword").getResolvedValue();
+    public String getBlackDuckPassword() {
+        return optionsByFieldName.get("blackDuckPassword").getResolvedValue();
     }
 
-    public String getHubProxyHost() {
-        return optionsByFieldName.get("hubProxyHost").getResolvedValue();
+    public String getBlackDuckProxyHost() {
+        return optionsByFieldName.get("blackDuckProxyHost").getResolvedValue();
     }
 
-    public String getHubProxyPort() {
-        return optionsByFieldName.get("hubProxyPort").getResolvedValue();
+    public String getBlackDuckProxyPort() {
+        return optionsByFieldName.get("blackDuckProxyPort").getResolvedValue();
     }
 
-    public String getHubProxyUsername() {
-        return optionsByFieldName.get("hubProxyUsername").getResolvedValue();
+    public String getBlackDuckProxyUsername() {
+        return optionsByFieldName.get("blackDuckProxyUsername").getResolvedValue();
     }
 
-    public String getHubProxyPassword() {
-        return optionsByFieldName.get("hubProxyPassword").getResolvedValue();
+    public String getBlackDuckProxyPassword() {
+        return optionsByFieldName.get("blackDuckProxyPassword").getResolvedValue();
     }
 
-    public boolean isHubAlwaysTrustCert() {
-        return optionsByFieldName.get("hubAlwaysTrustCert").getResolvedValue().equals("true");
+    public boolean isBlackDuckAlwaysTrustCert() {
+        return optionsByFieldName.get("blackDuckAlwaysTrustCert").getResolvedValue().equals("true");
     }
 
-    public String getHubProjectName() {
-        return unEscape(optionsByFieldName.get("hubProjectName").getResolvedValue());
+    public String getBlackDuckProjectName() {
+        return unEscape(optionsByFieldName.get("blackDuckProjectName").getResolvedValue());
     }
 
-    public String getHubProjectVersion() {
-        return unEscape(optionsByFieldName.get("hubProjectVersion").getResolvedValue());
+    public String getBlackDuckProjectVersion() {
+        return unEscape(optionsByFieldName.get("blackDuckProjectVersion").getResolvedValue());
     }
 
     public String getWorkingDirPath() {
@@ -424,8 +430,8 @@ public class Config {
         return optionsByFieldName.get("outputIncludeContainerfilesystem").getResolvedValue().equals("true");
     }
 
-    public String getHubCodelocationPrefix() {
-        return optionsByFieldName.get("hubCodelocationPrefix").getResolvedValue();
+    public String getBlackDuckCodelocationPrefix() {
+        return optionsByFieldName.get("blackDuckCodelocationPrefix").getResolvedValue();
     }
 
     public String getDockerImage() {
@@ -520,12 +526,18 @@ public class Config {
         return scanCliOptsEnvVar;
     }
 
-    public String getHubPasswordEnvVar() {
-        return hubPasswordEnvVar;
+    public String getBlackDuckPasswordEnvVar() {
+        if (StringUtils.isBlank(blackDuckPasswordEnvVar)) {
+            return blackDuckLegacyPasswordEnvVar;
+        }
+        return blackDuckPasswordEnvVar;
     }
 
-    public String getHubApiTokenEnvVar() {
-        return hubApiTokenEnvVar;
+    public String getBlackDuckApiTokenEnvVar() {
+        if (StringUtils.isBlank(blackDuckApiToken)) {
+            return blackDuckLegacyApiTokenEnvVar;
+        }
+        return blackDuckApiTokenEnvVar;
     }
 
     public String getDockerInspectorJavaOptsValue() {
@@ -568,8 +580,8 @@ public class Config {
         optionsByFieldName.get("workingDirPath").setResolvedValue(newValue);
     }
 
-    public void setHubCodelocationPrefix(final String newValue) {
-        optionsByFieldName.get("hubCodelocationPrefix").setResolvedValue(newValue);
+    public void setBlackDuckCodelocationPrefix(final String newValue) {
+        optionsByFieldName.get("blackDuckCodelocationPrefix").setResolvedValue(newValue);
     }
 
     public void setLoggingLevel(final String newValue) {
@@ -595,21 +607,21 @@ public class Config {
         this.dockerImageTag = null;
         this.dockerInspectorJavaOptsValue = null;
         this.dockerTar = null;
-        this.hubAlwaysTrustCert = null;
-        this.hubCodelocationPrefix = null;
-        this.hubPassword = null;
-        this.hubPasswordEnvVar = null;
-        this.hubApiTokenEnvVar = null;
-        this.hubProjectName = null;
-        this.hubProjectVersion = null;
-        this.hubProxyHost = null;
-        this.hubProxyPassword = null;
-        this.hubProxyPort = null;
-        this.hubProxyUsername = null;
-        this.hubTimeout = null;
-        this.hubUrl = null;
-        this.hubUsername = null;
-        this.hubApiToken = null;
+        this.blackDuckAlwaysTrustCert = null;
+        this.blackDuckCodelocationPrefix = null;
+        this.blackDuckPassword = null;
+        this.blackDuckPasswordEnvVar = null;
+        this.blackDuckApiTokenEnvVar = null;
+        this.blackDuckProjectName = null;
+        this.blackDuckProjectVersion = null;
+        this.blackDuckProxyHost = null;
+        this.blackDuckProxyPassword = null;
+        this.blackDuckProxyPort = null;
+        this.blackDuckProxyUsername = null;
+        this.blackDuckTimeout = null;
+        this.blackDuckUrl = null;
+        this.blackDuckUsername = null;
+        this.blackDuckApiToken = null;
         this.jarPath = null;
         this.linuxDistro = null;
         this.loggingLevel = null;
