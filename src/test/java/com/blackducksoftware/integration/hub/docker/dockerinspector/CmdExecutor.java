@@ -8,7 +8,7 @@ import java.lang.ProcessBuilder.Redirect;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import com.blackducksoftware.integration.exception.IntegrationException;
+import com.synopsys.integration.exception.IntegrationException;
 
 public class CmdExecutor {
     public static String execCmd(final String cmd, final long timeoutSeconds, final Map<String, String> env) throws IOException, InterruptedException, IntegrationException {

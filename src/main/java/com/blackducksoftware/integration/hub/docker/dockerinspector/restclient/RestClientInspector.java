@@ -42,7 +42,6 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Confi
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerexec.DissectedImage;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient.HubClient;
-import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.google.gson.Gson;
 import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
 import com.synopsys.integration.blackduck.imageinspector.name.Names;
@@ -107,7 +106,7 @@ public class RestClientInspector implements Inspector {
         }
     }
 
-    private File prepareDockerTarfile(final ImageInspectorClient imageInspectorClient) throws IOException, HubIntegrationException {
+    private File prepareDockerTarfile(final ImageInspectorClient imageInspectorClient) throws IOException, IntegrationException {
         final File givenDockerTarfile = dockerTarfile.deriveDockerTarFile();
         final File finalDockerTarfile = imageInspectorClient.copyTarfileToSharedDir(givenDockerTarfile);
         return finalDockerTarfile;

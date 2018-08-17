@@ -23,9 +23,9 @@
  */
 package com.blackducksoftware.integration.hub.docker.dockerinspector.restclient;
 
-import com.blackducksoftware.integration.exception.IntegrationException;
-import com.blackducksoftware.integration.hub.imageinspector.lib.PackageManagerEnum;
 import com.google.common.base.Optional;
+import com.synopsys.integration.blackduck.imageinspector.lib.PackageManagerEnum;
+import com.synopsys.integration.exception.IntegrationException;
 
 public class BdioFilename {
 

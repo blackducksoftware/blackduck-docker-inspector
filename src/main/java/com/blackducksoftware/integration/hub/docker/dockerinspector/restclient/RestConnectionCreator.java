@@ -31,10 +31,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.connection.NonRedirectingUnauthenticatedRestConnectionBuilder;
-import com.blackducksoftware.integration.log.IntLogger;
-import com.blackducksoftware.integration.log.Slf4jIntLogger;
-import com.blackducksoftware.integration.rest.connection.RestConnection;
-import com.blackducksoftware.integration.rest.connection.UnauthenticatedRestConnectionBuilder;
+import com.synopsys.integration.log.IntLogger;
+import com.synopsys.integration.log.Slf4jIntLogger;
+import com.synopsys.integration.rest.connection.RestConnection;
+import com.synopsys.integration.rest.connection.UnauthenticatedRestConnectionBuilder;
 
 @Component
 public class RestConnectionCreator {

@@ -30,12 +30,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.response.SimpleResponse;
-import com.blackducksoftware.integration.rest.HttpMethod;
-import com.blackducksoftware.integration.rest.connection.RestConnection;
-import com.blackducksoftware.integration.rest.request.Request;
-import com.blackducksoftware.integration.rest.request.Response;
+import com.synopsys.integration.exception.IntegrationException;
+import com.synopsys.integration.rest.HttpMethod;
+import com.synopsys.integration.rest.connection.RestConnection;
+import com.synopsys.integration.rest.request.Request;
+import com.synopsys.integration.rest.request.Response;
 
 @Component
 public class RestRequestor {

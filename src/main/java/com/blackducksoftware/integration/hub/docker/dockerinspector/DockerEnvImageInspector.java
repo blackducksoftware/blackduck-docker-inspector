@@ -55,7 +55,7 @@ import com.synopsys.integration.blackduck.imageinspector.result.ResultFile;
 import com.synopsys.integration.exception.IntegrationException;
 
 @SpringBootApplication
-@ComponentScan(basePackages = { "com.blackducksoftware.integration.hub.imageinspector", "com.blackducksoftware.integration.hub.docker.dockerinspector" })
+@ComponentScan(basePackages = { "com.synopsys.integration.blackduck.imageinspector", "com.blackducksoftware.integration.hub.docker.dockerinspector" })
 public class DockerEnvImageInspector {
     private static final Logger logger = LoggerFactory.getLogger(DockerEnvImageInspector.class);
 

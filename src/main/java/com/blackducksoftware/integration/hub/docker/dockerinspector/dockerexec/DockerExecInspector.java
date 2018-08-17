@@ -45,7 +45,7 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.common.Outpu
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.DockerClientManager;
-import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
+import com.synopsys.integration.blackduck.exception.HubIntegrationException;
 import com.synopsys.integration.blackduck.imageinspector.imageformat.docker.manifest.ManifestLayerMapping;
 import com.synopsys.integration.blackduck.imageinspector.lib.ImageInfoDerived;
 import com.synopsys.integration.blackduck.imageinspector.lib.ImageInspector;
@@ -150,8 +150,8 @@ public class DockerExecInspector implements Inspector {
                 dissectedImage.setTargetOs(imageInspector.detectInspectorOperatingSystem(dissectedImage.getTargetImageFileSystemRootDir()));
             }
             logger.info(String.format("Target image tarfile: %s; target OS: %s", dissectedImage.getDockerTarFile().getAbsolutePath(), dissectedImage.getTargetOs().toString()));
-            final ImageInfoDerived imageInfoDerived = imageInspector.generateBdioFromImageFilesDir(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), hubProjectName.getHubProjectName(config),
-                    hubProjectName.getHubProjectVersion(config), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs(), config.getHubCodelocationPrefix());
+            final ImageInfoDerived imageInfoDerived = imageInspector.generateBdioFromImageFilesDir(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), config.getHubProjectName(),
+                    config.getHubProjectVersion(), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs(), config.getHubCodelocationPrefix());
             output.writeBdioFile(dissectedImage, imageInfoDerived);
             output.createContainerFileSystemTarIfRequested(dissectedImage.getTargetImageFileSystemRootDir());
         }
@@ -162,7 +162,7 @@ public class DockerExecInspector implements Inspector {
             throws InterruptedException, IOException, IllegalArgumentException, IllegalAccessException, IntegrationException {
         final String msg = String.format("Image inspection for %s will use docker image %s:%s", targetOs.toString(), runOnImageName, runOnImageTag);
         logger.info(msg);
-        String runOnImageId = pullImageTolerantly(runOnImageName, runOnImageTag);
+        final String runOnImageId = pullImageTolerantly(runOnImageName, runOnImageTag);
         logger.debug(String.format("runInSubContainer(): Running subcontainer on image %s, repo %s, tag %s", config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag()));
         final String containerId = dockerClientManager.runByExec(runOnImageName, runOnImageTag, dockerTarFile, true, config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag());
 

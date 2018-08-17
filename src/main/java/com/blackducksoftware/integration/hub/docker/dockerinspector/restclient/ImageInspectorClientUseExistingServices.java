@@ -35,10 +35,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.response.SimpleResponse;
-import com.blackducksoftware.integration.rest.connection.RestConnection;
+import com.synopsys.integration.exception.IntegrationException;
+import com.synopsys.integration.rest.connection.RestConnection;
 
 @Component
 public class ImageInspectorClientUseExistingServices implements ImageInspectorClient {

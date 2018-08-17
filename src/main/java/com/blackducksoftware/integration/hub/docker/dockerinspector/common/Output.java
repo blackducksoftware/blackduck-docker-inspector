@@ -45,8 +45,8 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Confi
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerexec.DissectedImage;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient.HubClient;
-import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.google.gson.Gson;
+import com.synopsys.integration.blackduck.exception.HubIntegrationException;
 import com.synopsys.integration.blackduck.imageinspector.lib.ImageInfoDerived;
 import com.synopsys.integration.blackduck.imageinspector.lib.ImageInspector;
 import com.synopsys.integration.blackduck.imageinspector.lib.OperatingSystemEnum;

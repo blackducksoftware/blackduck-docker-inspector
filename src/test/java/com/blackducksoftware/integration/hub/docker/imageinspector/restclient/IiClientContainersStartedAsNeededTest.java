@@ -12,7 +12,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.InspectorImages;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.DockerClientManager;
@@ -23,12 +22,13 @@ import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.I
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.RestConnectionCreator;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.RestRequestor;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.response.SimpleResponse;
-import com.blackducksoftware.integration.hub.imageinspector.api.ImageInspectorOsEnum;
-import com.blackducksoftware.integration.hub.imageinspector.lib.OperatingSystemEnum;
-import com.blackducksoftware.integration.rest.RestConstants;
-import com.blackducksoftware.integration.rest.connection.RestConnection;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.model.Container;
+import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
+import com.synopsys.integration.blackduck.imageinspector.lib.OperatingSystemEnum;
+import com.synopsys.integration.exception.IntegrationException;
+import com.synopsys.integration.rest.RestConstants;
+import com.synopsys.integration.rest.connection.RestConnection;
 
 @RunWith(SpringRunner.class)
 public class IiClientContainersStartedAsNeededTest {

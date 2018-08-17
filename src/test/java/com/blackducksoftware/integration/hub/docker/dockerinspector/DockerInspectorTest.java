@@ -21,12 +21,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
-import com.blackducksoftware.integration.exception.IntegrationException;
-import com.blackducksoftware.integration.hub.bdio.BdioReader;
-import com.blackducksoftware.integration.hub.bdio.model.SimpleBdioDocument;
-import com.blackducksoftware.integration.hub.imageinspector.name.Names;
-import com.blackducksoftware.integration.test.annotation.IntegrationTest;
 import com.google.gson.Gson;
+import com.synopsys.integration.blackduck.imageinspector.name.Names;
+import com.synopsys.integration.exception.IntegrationException;
+import com.synopsys.integration.hub.bdio.BdioReader;
+import com.synopsys.integration.hub.bdio.model.SimpleBdioDocument;
+import com.synopsys.integration.test.annotation.IntegrationTest;
 
 @Category(IntegrationTest.class)
 public class DockerInspectorTest {
@@ -447,7 +447,7 @@ public class DockerInspectorTest {
         if (tag != null) {
             cmd.add(String.format("--docker.image.tag=%s", tag));
         }
-        cmd.add("--logging.level.com.blackducksoftware=DEBUG");
+        cmd.add("--logging.level.com.blackducksoftware=TRACE");
         if (startContainersAsNeeded) {
             cmd.add("--imageinspector.service.start=true");
             cmd.add(String.format("--imageinspector.service.port.alpine=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE));

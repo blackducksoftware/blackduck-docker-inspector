@@ -12,7 +12,7 @@ import org.mockito.Mockito;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
-import com.blackducksoftware.integration.hub.imageinspector.lib.OperatingSystemEnum;
+import com.synopsys.integration.blackduck.imageinspector.lib.OperatingSystemEnum;
 
 @RunWith(SpringRunner.class)
 public class InspectorImagesTest {

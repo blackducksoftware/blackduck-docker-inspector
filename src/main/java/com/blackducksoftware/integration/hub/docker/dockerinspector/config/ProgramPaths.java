@@ -41,10 +41,7 @@ public class ProgramPaths {
     @Autowired
     private Config config;
 
-    private static final String CONTAINER_JAR_PATH = "/opt/blackduck/hub-docker-inspector/hub-docker-inspector.jar";
-
     private static final String JAR_FILE_SUFFIX = ".jar";
-
     private static final String FILE_URI_PREFIX = "file:";
     private static final String HOST_RESULT_JSON_FILENAME = "result.json";
     private static final String CONTAINER_RESULT_JSON_FILENAME = "containerResult.json";
@@ -61,7 +58,8 @@ public class ProgramPaths {
 
     private static final String CONFIG_DIR = "config";
 
-    private static final String CONTAINER_PROGRAM_DIR = "/opt/blackduck/hub-docker-inspector/";
+    private static final String CONTAINER_PROGRAM_DIR = String.format("%s/blackduck-docker-inspector/", Config.CONTAINER_BLACKDUCK_DIR);
+    private static final String CONTAINER_JAR_PATH = String.format("%s/hub-docker-inspector.jar", CONTAINER_PROGRAM_DIR);
 
     private String hubDockerPgmDirPathHost;
     private String hubDockerPgmDirPathContainer;
@@ -101,10 +99,6 @@ public class ProgramPaths {
         return config.getWorkingDirPath();
     }
 
-    private String getProgramDirPathContainer() {
-        return CONTAINER_PROGRAM_DIR;
-    }
-
     @PostConstruct
     public void init() {
         cleanedProcessId = atSignToUnderscore(getProcessIdOrGenerateUniqueId());
@@ -120,7 +114,7 @@ public class ProgramPaths {
         logger.debug(String.format("hubDockerRunDirPathHost: %s", hubDockerRunDirPathHost));
 
         hubDockerJarPathHost = hubDockerJarPathActual;
-        hubDockerPgmDirPathContainer = getProgramDirPathContainer();
+        hubDockerPgmDirPathContainer = CONTAINER_PROGRAM_DIR;
         hubDockerConfigDirPathHost = new File(runDirHost, CONFIG_DIR).getAbsolutePath() + "/";
         hubDockerConfigDirPathContainer = hubDockerPgmDirPathContainer + CONFIG_DIR + "/";
         hubDockerTempDirPathContainer = hubDockerPgmDirPathContainer + TEMP_DIR + "/";
@@ -131,7 +125,7 @@ public class ProgramPaths {
         hubDockerWorkingDirPathHost = new File(runDirHost, WORKING_DIR).getAbsolutePath() + "/";
         hubDockerWorkingDirPathContainer = hubDockerPgmDirPathContainer + WORKING_DIR + "/";
         hubDockerOutputPathHost = new File(runDirHost, OUTPUT_DIR).getAbsolutePath() + "/";
-        hubDockerOutputPathContainer = getProgramDirPathContainer() + OUTPUT_DIR + "/";
+        hubDockerOutputPathContainer = CONTAINER_PROGRAM_DIR + OUTPUT_DIR + "/";
         hubDockerContainerResultPathOnHost = hubDockerOutputPathHost + CONTAINER_RESULT_JSON_FILENAME;
         hubDockerContainerResultPathInContainer = hubDockerOutputPathContainer + CONTAINER_RESULT_JSON_FILENAME;
         hubDockerHostResultPath = hubDockerOutputPathHost + HOST_RESULT_JSON_FILENAME;

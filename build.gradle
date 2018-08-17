@@ -23,6 +23,7 @@ apply plugin: 'io.spring.dependency-management'
 repositories {
     jcenter()
     mavenCentral()
+    maven {url "https://oss.sonatype.org/content/repositories/snapshots/"}
 }
 
 version = '7.0.0-SNAPSHOT'
@@ -216,7 +217,7 @@ artifactory {
 }
 
 dependencies {
-    compile 'com.blackducksoftware.integration:hub-common:33.0.0'
+    compile 'com.blackducksoftware.integration:hub-common:37.0.0-SNAPSHOT'
     compile 'com.blackducksoftware.integration:hub-imageinspector-lib:5.0.0-SNAPSHOT'
     
     compile 'com.github.docker-java:docker-java:3.1.0-rc-2'

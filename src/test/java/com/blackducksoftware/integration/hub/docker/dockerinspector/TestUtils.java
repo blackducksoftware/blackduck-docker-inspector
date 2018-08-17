@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import com.blackducksoftware.integration.exception.IntegrationException;
+import com.synopsys.integration.exception.IntegrationException;
 
 public class TestUtils {
     public final static String TEST_DIR_REL_PATH = "test";

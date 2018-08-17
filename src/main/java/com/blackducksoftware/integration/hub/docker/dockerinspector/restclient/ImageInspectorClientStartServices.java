@@ -38,23 +38,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.InspectorImages;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.DockerClientManager;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.HubDockerClient;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.response.SimpleResponse;
-import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
-import com.blackducksoftware.integration.hub.imageinspector.api.ImageInspectorOsEnum;
-import com.blackducksoftware.integration.rest.RestConstants;
-import com.blackducksoftware.integration.rest.connection.RestConnection;
-import com.blackducksoftware.integration.rest.exception.IntegrationRestException;
 import com.github.dockerjava.api.model.Container;
+import com.synopsys.integration.blackduck.exception.HubIntegrationException;
+import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
+import com.synopsys.integration.exception.IntegrationException;
+import com.synopsys.integration.rest.RestConstants;
+import com.synopsys.integration.rest.connection.RestConnection;
+import com.synopsys.integration.rest.exception.IntegrationRestException;
 
 @Component
 public class ImageInspectorClientStartServices implements ImageInspectorClient {
-    private static final String HUB_IMAGEINSPECTOR_WS_APPNAME = "hub-imageinspector-ws";
     private static final long CONTAINER_START_WAIT_MILLISECONDS = 2000L;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final int MAX_CONTAINER_START_TRY_COUNT = 30;
@@ -231,7 +230,7 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
     private String ensureServiceReady(final RestConnection restConnection, final URI imageInspectorUri, final ImageInspectorOsEnum inspectorOs) throws IntegrationException {
         boolean serviceIsUp = checkServiceHealth(restConnection, imageInspectorUri);
         if (serviceIsUp) {
-            final Container container = dockerClientManager.getRunningContainerByAppName(hubDockerClient.getDockerClient(), HUB_IMAGEINSPECTOR_WS_APPNAME, inspectorOs);
+            final Container container = dockerClientManager.getRunningContainerByAppName(hubDockerClient.getDockerClient(), Config.IMAGEINSPECTOR_WS_APPNAME, inspectorOs);
             return container.getId();
         }
         logger.info(String.format("Service %s (%s) is not running; starting it...", imageInspectorUri.toString(), inspectorOs.name()));
@@ -252,6 +251,8 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         final int hostPort = imageInspectorServices.getImageInspectorHostPort(inspectorOs);
         final String containerName = programPaths.deriveContainerName(imageInspectorRepo);
         final String containerId = dockerClientManager.startContainerAsService(imageInspectorRepo, imageInspectorTag, containerName, inspectorOs, containerPort, hostPort,
+                Config.IMAGEINSPECTOR_WS_APPNAME,
+                String.format("%s/%s/%s.jar", Config.CONTAINER_BLACKDUCK_DIR, Config.IMAGEINSPECTOR_WS_APPNAME, Config.IMAGEINSPECTOR_WS_APPNAME),
                 containerPaths.getContainerPathToOutputDir(),
                 deriveInspectorBaseUri(config.getImageInspectorHostPortAlpine()).toString(), deriveInspectorBaseUri(config.getImageInspectorHostPortCentos()).toString(),
                 deriveInspectorBaseUri(config.getImageInspectorHostPortUbuntu()).toString());

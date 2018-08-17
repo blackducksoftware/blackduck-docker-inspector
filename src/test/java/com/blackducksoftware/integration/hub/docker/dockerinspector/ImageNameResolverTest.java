@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.blackducksoftware.integration.hub.imageinspector.name.ImageNameResolver;
+import com.synopsys.integration.blackduck.imageinspector.name.ImageNameResolver;
 
 public class ImageNameResolverTest {
 

@@ -30,13 +30,13 @@ import java.net.URL;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
 
-import com.blackducksoftware.integration.rest.RestConstants;
-import com.blackducksoftware.integration.rest.connection.UnauthenticatedRestConnection;
-import com.blackducksoftware.integration.rest.exception.IntegrationRestException;
-import com.blackducksoftware.integration.rest.proxy.ProxyInfo;
-import com.blackducksoftware.integration.rest.request.Response;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.log.IntLogger;
+import com.synopsys.integration.rest.RestConstants;
+import com.synopsys.integration.rest.connection.UnauthenticatedRestConnection;
+import com.synopsys.integration.rest.exception.IntegrationRestException;
+import com.synopsys.integration.rest.proxy.ProxyInfo;
+import com.synopsys.integration.rest.request.Response;
 
 public class NonRedirectingUnauthenticatedRestConnection extends UnauthenticatedRestConnection {
 
@@ -64,7 +64,7 @@ public class NonRedirectingUnauthenticatedRestConnection extends Unauthenticated
             try {
                 final URI uri = request.getURI();
                 final String urlString = request.getURI().toString();
-                if (alwaysTrustServerCertificate && uri.getScheme().equalsIgnoreCase("https") && logger != null) {
+                if (isAlwaysTrustServerCertificate() && uri.getScheme().equalsIgnoreCase("https") && logger != null) {
                     logger.debug("Automatically trusting the certificate for " + urlString);
                 }
                 logRequestHeaders(request);

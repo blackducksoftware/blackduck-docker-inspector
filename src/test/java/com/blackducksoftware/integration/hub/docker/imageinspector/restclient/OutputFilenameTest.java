@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.blackducksoftware.integration.exception.IntegrationException;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.BdioFilename;
+import com.synopsys.integration.exception.IntegrationException;
 
 public class OutputFilenameTest {
 

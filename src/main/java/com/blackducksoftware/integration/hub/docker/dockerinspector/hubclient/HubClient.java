@@ -25,8 +25,10 @@ package com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.Executors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -34,20 +36,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.blackducksoftware.integration.hub.configuration.HubServerConfigBuilder;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.DockerEnvImageInspector;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.ProgramVersion;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
-import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
-import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
-import com.blackducksoftware.integration.hub.service.CodeLocationService;
-import com.blackducksoftware.integration.hub.service.HubServicesFactory;
-import com.blackducksoftware.integration.hub.service.PhoneHomeService;
-import com.blackducksoftware.integration.phonehome.PhoneHomeRequestBody;
-import com.blackducksoftware.integration.rest.connection.RestConnection;
+import com.google.gson.Gson;
+import com.google.gson.JsonParser;
+import com.synopsys.integration.blackduck.configuration.HubServerConfigBuilder;
+import com.synopsys.integration.blackduck.exception.HubIntegrationException;
+import com.synopsys.integration.blackduck.rest.BlackduckRestConnection;
+import com.synopsys.integration.blackduck.service.CodeLocationService;
+import com.synopsys.integration.blackduck.service.HubServicesFactory;
 import com.synopsys.integration.exception.EncryptionException;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.log.Slf4jIntLogger;
+import com.synopsys.integration.phonehome.PhoneHomeCallable;
+import com.synopsys.integration.phonehome.PhoneHomeRequestBody;
+import com.synopsys.integration.phonehome.PhoneHomeService;
 
 @Component
 public class HubClient {
@@ -66,9 +70,6 @@ public class HubClient {
     @Autowired
     private ProgramVersion programVersion;
 
-    @Autowired
-    private ProgramPaths programPaths;
-
     public boolean isValid() {
         return createHubServerConfigBuilder().isValid();
     }
@@ -79,7 +80,7 @@ public class HubClient {
             logger.debug("Upload of BDIO not enabled; skipping verification of Hub connection");
             return;
         }
-        RestConnection restConnection;
+        BlackduckRestConnection restConnection;
         try {
             restConnection = createRestConnection();
             restConnection.connect();
@@ -91,8 +92,8 @@ public class HubClient {
     }
 
     public void uploadBdioToHub(final File bdioFile) throws IntegrationException {
-        final RestConnection restConnection = createRestConnection();
-        final HubServicesFactory hubServicesFactory = new HubServicesFactory(restConnection);
+        final BlackduckRestConnection restConnection = createRestConnection();
+        final HubServicesFactory hubServicesFactory = new HubServicesFactory(new Gson(), new JsonParser(), restConnection, new Slf4jIntLogger(logger));
         final CodeLocationService bomImportRequestService = hubServicesFactory.createCodeLocationService();
         bomImportRequestService.importBomFile(bdioFile);
         logger.info(String.format("Uploaded bdio file %s to %s", bdioFile.getName(), config.getHubUrl()));
@@ -116,21 +117,22 @@ public class HubClient {
     }
 
     private void phoneHomeHubConnection(final String dockerEngineVersion) throws IOException, EncryptionException {
-        final RestConnection restConnection = createRestConnection();
-        final HubServicesFactory hubServicesFactory = new HubServicesFactory(restConnection);
-        final PhoneHomeService phoneHomeService = hubServicesFactory.createPhoneHomeService();
-        final PhoneHomeRequestBody.Builder phoneHomeRequestBodyBuilder = phoneHomeService.createInitialPhoneHomeRequestBodyBuilder(DockerEnvImageInspector.PROGRAM_ID, programVersion.getProgramVersion());
+        final BlackduckRestConnection restConnection = createRestConnection();
+        final HubServicesFactory hubServicesFactory = new HubServicesFactory(HubServicesFactory.createDefaultGson(), HubServicesFactory.createDefaultJsonParser(), restConnection, new Slf4jIntLogger(logger));
+        final PhoneHomeService phoneHomeService = hubServicesFactory.createPhoneHomeService(Executors.newSingleThreadExecutor());
+        final PhoneHomeRequestBody.Builder phoneHomeRequestBodyBuilder = new PhoneHomeRequestBody.Builder();
         if (!StringUtils.isBlank(config.getCallerName())) {
             phoneHomeRequestBodyBuilder.addToMetaData(PHONE_HOME_METADATA_NAME_CALLER_NAME, config.getCallerName());
         }
         if (!StringUtils.isBlank(config.getCallerVersion())) {
             phoneHomeRequestBodyBuilder.addToMetaData(PHONE_HOME_METADATA_NAME_CALLER_VERSION, config.getCallerVersion());
         }
-        phoneHomeService.phoneHome(phoneHomeRequestBodyBuilder);
+        final PhoneHomeCallable phoneHomeCallable = hubServicesFactory.createBlackDuckPhoneHomeCallable(new URL(config.getHubUrl()), DockerEnvImageInspector.PROGRAM_ID, programVersion.getProgramVersion(), phoneHomeRequestBodyBuilder);
+        phoneHomeService.phoneHome(phoneHomeCallable);
         logger.trace("Attempt to phone home completed");
     }
 
-    private RestConnection createRestConnection() throws EncryptionException, IllegalStateException {
+    private BlackduckRestConnection createRestConnection() throws EncryptionException, IllegalStateException {
         final HubServerConfigBuilder hubServerConfigBuilder = createHubServerConfigBuilder();
         return hubServerConfigBuilder.build().createRestConnection(new Slf4jIntLogger(logger));
     }

@@ -35,7 +35,8 @@ import org.springframework.stereotype.Component;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.dockerclient.DockerClientManager;
-import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
+import com.synopsys.integration.blackduck.exception.HubIntegrationException;
+import com.synopsys.integration.exception.IntegrationException;
 
 @Component
 public class DockerTarfile {
@@ -50,7 +51,7 @@ public class DockerTarfile {
     @Autowired
     private ProgramPaths programPaths;
 
-    public File deriveDockerTarFile() throws IOException, HubIntegrationException {
+    public File deriveDockerTarFile() throws IOException, IntegrationException {
         logger.debug(String.format("programPaths.getHubDockerTargetDirPath(): %s", programPaths.getHubDockerTargetDirPath()));
         if (StringUtils.isNotBlank(config.getDockerTar())) {
             return new File(config.getDockerTar());
@@ -59,7 +60,7 @@ public class DockerTarfile {
         }
     }
 
-    private File deriveDockerTarFileGivenImageSpec() throws HubIntegrationException, IOException {
+    private File deriveDockerTarFileGivenImageSpec() throws IntegrationException, IOException {
         File finalDockerTarfile;
         final File imageTarDirectory = new File(programPaths.getHubDockerTargetDirPath());
         if (StringUtils.isNotBlank(config.getDockerImageId())) {

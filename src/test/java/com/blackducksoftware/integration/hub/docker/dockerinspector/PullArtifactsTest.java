@@ -15,8 +15,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
-import com.blackducksoftware.integration.exception.IntegrationException;
-import com.blackducksoftware.integration.test.annotation.IntegrationTest;
+import com.synopsys.integration.exception.IntegrationException;
+import com.synopsys.integration.test.annotation.IntegrationTest;
 
 @Category(IntegrationTest.class)
 public class PullArtifactsTest {

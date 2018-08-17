@@ -43,7 +43,6 @@ import org.springframework.stereotype.Component;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.Config;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.config.ProgramPaths;
 import com.blackducksoftware.integration.hub.docker.dockerinspector.hubclient.HubSecrets;
-import com.blackducksoftware.integration.hub.exception.HubIntegrationException;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.CopyArchiveToContainerCmd;
 import com.github.dockerjava.api.command.CreateContainerCmd;
@@ -71,6 +70,7 @@ import com.github.dockerjava.api.model.Volume;
 import com.github.dockerjava.core.command.ExecStartResultCallback;
 import com.github.dockerjava.core.command.LogContainerResultCallback;
 import com.github.dockerjava.core.command.PullImageResultCallback;
+import com.synopsys.integration.blackduck.exception.HubIntegrationException;
 import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 import com.synopsys.integration.blackduck.imageinspector.name.ImageNameResolver;
 import com.synopsys.integration.blackduck.imageinspector.name.Names;
@@ -79,8 +79,6 @@ import com.synopsys.integration.exception.IntegrationException;
 @Component
 public class DockerClientManager {
     private static final String CONTAINER_APPNAME_LABEL_KEY = "app";
-    private static final String IMAGEINSPECTOR_APP_NAME_LABEL_VALUE = "hub-imageinspector-ws";
-
     private static final String CONTAINER_OS_LABEL_KEY = "os";
 
     private static final String IMAGE_TARFILE_PROPERTY = "docker.tar";
@@ -131,7 +129,7 @@ public class DockerClientManager {
         return imageTarFile;
     }
 
-    public File getTarFileFromDockerImage(final String imageName, final String tagName, final File imageTarDirectory) throws HubIntegrationException, IOException {
+    public File getTarFileFromDockerImage(final String imageName, final String tagName, final File imageTarDirectory) throws IntegrationException, IOException {
         Optional<String> targetImageId = Optional.empty();
         try {
             targetImageId = Optional.ofNullable(pullImage(imageName, tagName));
@@ -211,8 +209,9 @@ public class DockerClientManager {
             }
         }
         cmd.add("-jar");
-        cmd.add(String.format("/opt/blackduck/hub-docker-inspector/%s", programPaths.getHubDockerJarFilenameHost()));
-        cmd.add(String.format("--spring.config.location=%s", "/opt/blackduck/hub-docker-inspector/config/application.properties"));
+        // TODO use Path to construct paths
+        cmd.add(String.format("%s/%s", programPaths.getHubDockerPgmDirPathContainer(), programPaths.getHubDockerJarFilenameHost()));
+        cmd.add(String.format("--spring.config.location=%s/config/application.properties", programPaths.getHubDockerPgmDirPathContainer()));
         cmd.add(String.format("--docker.tar=%s", tarFilePathInSubContainer));
         execCommandInContainer(dockerClient, imageNameTag, containerId, cmd);
         logger.debug(String.format("Container's output files are in %s because it was mounted under the container's output dir", programPaths.getHubDockerOutputPathHost()));
@@ -220,6 +219,8 @@ public class DockerClientManager {
     }
 
     public String startContainerAsService(final String runOnImageName, final String runOnTagName, final String containerName, final ImageInspectorOsEnum inspectorOs, final int containerPort, final int hostPort,
+            final String appNameLabelValue,
+            final String jarPath,
             final String containerPathToOutputDir,
             final String inspectorUrlAlpine, final String inspectorUrlCentos, final String inspectorUrlUbuntu)
             throws IntegrationException {
@@ -231,12 +232,13 @@ public class DockerClientManager {
 
         logger.debug(String.format("Creating container %s from image %s", containerName, imageNameTag));
         final String imageInspectorOsName = inspectorOs.name();
-        final String cmd = String.format("java -jar /opt/blackduck/hub-imageinspector-ws/hub-imageinspector-ws.jar --server.port=%d --current.linux.distro=%s --inspector.url.alpine=%s --inspector.url.centos=%s --inspector.url.ubuntu=%s",
+        final String cmd = String.format("java -jar %s --server.port=%d --current.linux.distro=%s --inspector.url.alpine=%s --inspector.url.centos=%s --inspector.url.ubuntu=%s",
+                jarPath,
                 containerPort,
                 imageInspectorOsName, inspectorUrlAlpine, inspectorUrlCentos, inspectorUrlUbuntu);
         logger.debug(String.format("Starting service with cmd: %s", cmd));
         final Map<String, String> labels = new HashMap<>(1);
-        labels.put(CONTAINER_APPNAME_LABEL_KEY, IMAGEINSPECTOR_APP_NAME_LABEL_VALUE);
+        labels.put(CONTAINER_APPNAME_LABEL_KEY, appNameLabelValue);
         labels.put(CONTAINER_OS_LABEL_KEY, imageInspectorOsName);
         final Bind bind = createBindMount(config.getSharedDirPathLocal(), config.getSharedDirPathImageInspector());
         final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageNameTag).withName(containerName).withBinds(bind).withLabels(labels).withCmd(cmd.split(" "));
@@ -311,7 +313,7 @@ public class DockerClientManager {
         }
     }
 
-    private File saveImageToDir(final File imageTarDirectory, final String imageTarFilename, final String imageName, final String tagName) throws IOException, HubIntegrationException {
+    private File saveImageToDir(final File imageTarDirectory, final String imageTarFilename, final String imageName, final String tagName) throws IOException, IntegrationException {
         final File imageTarFile = new File(imageTarDirectory, imageTarFilename);
         saveImageToFile(imageName, tagName, imageTarFile);
         return imageTarFile;

@@ -23,9 +23,9 @@
  */
 package com.blackducksoftware.integration.hub.docker.dockerinspector.restclient.connection;
 
-import com.blackducksoftware.integration.rest.connection.AbstractRestConnectionBuilder;
-import com.blackducksoftware.integration.rest.connection.UnauthenticatedRestConnectionValidator;
-import com.blackducksoftware.integration.rest.proxy.ProxyInfo;
+import com.synopsys.integration.rest.connection.AbstractRestConnectionBuilder;
+import com.synopsys.integration.rest.connection.UnauthenticatedRestConnectionValidator;
+import com.synopsys.integration.rest.proxy.ProxyInfo;
 import com.synopsys.integration.validator.AbstractValidator;
 
 public class NonRedirectingUnauthenticatedRestConnectionBuilder extends AbstractRestConnectionBuilder<NonRedirectingUnauthenticatedRestConnection> {
