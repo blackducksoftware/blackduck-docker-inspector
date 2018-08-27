@@ -214,7 +214,7 @@ public class Config {
     @Value("${cleanup.inspector.image:false}")
     private Boolean cleanupInspectorImage = Boolean.FALSE;
 
-    @ValueDescription(description = "The host's path to the dir shared with the imageinspector containers. Only needed if using existing imageinspector containers", defaultValue = "/tmp/hub-docker-inspector-files/shared", group = Config.GROUP_PRIVATE, deprecated = false)
+    @ValueDescription(description = "The host's path to the dir shared with the imageinspector containers. Only needed if using existing imageinspector containers", defaultValue = "/tmp/hub-docker-inspector-files/shared", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${shared.dir.path.local:/tmp/hub-docker-inspector-files/shared}")
     private String sharedDirPathLocal = "/tmp/hub-docker-inspector-files/shared";
 
@@ -222,7 +222,7 @@ public class Config {
     @Value("${shared.dir.path.imageinspector:/opt/blackduck/hub-imageinspector-ws/shared}")
     private String sharedDirPathImageInspector = "/opt/blackduck/hub-imageinspector-ws/shared";
 
-    @ValueDescription(description = "The URL of the (already running) imageinspector service to use", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
+    @ValueDescription(description = "The URL of the (already running) imageinspector service to use", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${imageinspector.service.url:}")
     private String imageInspectorUrl = "";
 
@@ -232,15 +232,15 @@ public class Config {
     @Value("${imageinspector.service.start:false}")
     private Boolean imageInspectorServiceStart = Boolean.FALSE;
 
-    @ValueDescription(description = "alpine image inspector container port", defaultValue = "8080", group = Config.GROUP_PRIVATE, deprecated = false)
+    @ValueDescription(description = "alpine image inspector container port", defaultValue = "8080", group = Config.GROUP_PRIVATE, deprecated = true)
     @Value("${imageinspector.service.container.port.alpine:8080}")
     private String imageInspectorContainerPortAlpine = "8080";
 
-    @ValueDescription(description = "centos image inspector container port", defaultValue = "8081", group = Config.GROUP_PRIVATE, deprecated = false)
+    @ValueDescription(description = "centos image inspector container port", defaultValue = "8081", group = Config.GROUP_PRIVATE, deprecated = true)
     @Value("${imageinspector.service.container.port.centos:8081}")
     private String imageInspectorContainerPortCentos = "8081";
 
-    @ValueDescription(description = "ubuntu image inspector container port", defaultValue = "8082", group = Config.GROUP_PRIVATE, deprecated = false)
+    @ValueDescription(description = "ubuntu image inspector container port", defaultValue = "8082", group = Config.GROUP_PRIVATE, deprecated = true)
     @Value("${imageinspector.service.container.port.ubuntu:8082}")
     private String imageInspectorContainerPortUbuntu = "8082";
 
