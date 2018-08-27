@@ -57,7 +57,7 @@ public class RestClientInspector implements Inspector {
     private Config config;
 
     @Autowired
-    private BlackDuckClient hubClient;
+    private BlackDuckClient blackDuckClient;
 
     @Autowired
     private ProgramPaths programPaths;
@@ -97,7 +97,7 @@ public class RestClientInspector implements Inspector {
                     config.isCleanupWorkingDir());
             final File bdioFile = output.provideBdioFileOutput(bdioString, deriveOutputBdioFilename(bdioString));
             if (config.isUploadBdio()) {
-                hubClient.uploadBdioToHub(bdioFile);
+                blackDuckClient.uploadBdio(bdioFile);
             }
             cleanup();
             return 0;

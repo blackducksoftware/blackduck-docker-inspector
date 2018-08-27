@@ -12,17 +12,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.model.Container;
 import com.synopsys.integration.blackduck.dockerinspector.InspectorImages;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
-import com.synopsys.integration.blackduck.dockerinspector.dockerclient.HubDockerClient;
-import com.synopsys.integration.blackduck.dockerinspector.restclient.ContainerPaths;
-import com.synopsys.integration.blackduck.dockerinspector.restclient.ImageInspectorClientStartServices;
-import com.synopsys.integration.blackduck.dockerinspector.restclient.ImageInspectorServices;
-import com.synopsys.integration.blackduck.dockerinspector.restclient.RestConnectionCreator;
-import com.synopsys.integration.blackduck.dockerinspector.restclient.RestRequestor;
 import com.synopsys.integration.blackduck.dockerinspector.restclient.response.SimpleResponse;
 import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 import com.synopsys.integration.blackduck.imageinspector.lib.OperatingSystemEnum;
@@ -55,9 +48,6 @@ public class IiClientContainersStartedAsNeededTest {
     private DockerClientManager dockerClientManager;
 
     @Mock
-    private HubDockerClient hubDockerClient;
-
-    @Mock
     private ContainerPaths containerPaths;
 
     @Test
@@ -69,10 +59,7 @@ public class IiClientContainersStartedAsNeededTest {
 
         final Container targetContainer = Mockito.mock(Container.class);
         Mockito.when(targetContainer.getImage()).thenReturn("target");
-        Mockito.when(dockerClientManager.getRunningContainerByAppName(Mockito.any(DockerClient.class), Mockito.anyString(), Mockito.any(ImageInspectorOsEnum.class))).thenReturn(targetContainer);
-
-        final DockerClient dockerClient = Mockito.mock(DockerClient.class);
-        Mockito.when(hubDockerClient.getDockerClient()).thenReturn(dockerClient);
+        Mockito.when(dockerClientManager.getRunningContainerByAppName(Mockito.anyString(), Mockito.any(ImageInspectorOsEnum.class))).thenReturn(targetContainer);
 
         final RestConnection restConnection = Mockito.mock(RestConnection.class);
         Mockito.when(restConnectionCreator.createNonRedirectingConnection(Mockito.any(URI.class), Mockito.anyInt())).thenReturn(restConnection);

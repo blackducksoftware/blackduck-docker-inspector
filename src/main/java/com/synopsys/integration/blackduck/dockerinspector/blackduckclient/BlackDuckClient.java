@@ -91,7 +91,7 @@ public class BlackDuckClient {
         logger.info("Successful connection to the Hub.");
     }
 
-    public void uploadBdioToHub(final File bdioFile) throws IntegrationException {
+    public void uploadBdio(final File bdioFile) throws IntegrationException {
         final BlackduckRestConnection restConnection = createRestConnection();
         final HubServicesFactory hubServicesFactory = new HubServicesFactory(new Gson(), new JsonParser(), restConnection, new Slf4jIntLogger(logger));
         final CodeLocationService bomImportRequestService = hubServicesFactory.createCodeLocationService();

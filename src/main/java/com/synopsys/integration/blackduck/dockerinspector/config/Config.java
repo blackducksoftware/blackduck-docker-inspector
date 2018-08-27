@@ -534,7 +534,7 @@ public class Config {
     }
 
     public String getBlackDuckApiTokenEnvVar() {
-        if (StringUtils.isBlank(blackDuckApiToken)) {
+        if (StringUtils.isBlank(blackDuckApiTokenEnvVar)) {
             return blackDuckLegacyApiTokenEnvVar;
         }
         return blackDuckApiTokenEnvVar;

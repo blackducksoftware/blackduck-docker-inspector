@@ -65,7 +65,7 @@ public class Output {
     private Config config;
 
     @Autowired
-    private BlackDuckClient hubClient;
+    private BlackDuckClient blackDuckClient;
 
     @Autowired
     private ProgramPaths programPaths;
@@ -115,7 +115,7 @@ public class Output {
 
     public void uploadBdio(final DissectedImage dissectedImage) throws IntegrationException {
         if (config.isUploadBdio()) {
-            logger.info("Uploading BDIO to Hub");
+            logger.info("Uploading BDIO to Black Duck");
             dissectedImage.setBdioFilename(uploadBdioFiles());
         }
     }
@@ -142,7 +142,7 @@ public class Output {
                 logger.debug("Waiting for completion of concurrent inspector container/image cleanup");
                 logger.info(String.format("Status from concurrent cleanup: %s", deferredCleanup.get(120, TimeUnit.SECONDS)));
             } catch (final TimeoutException e) {
-                logger.error("Container cleanup timed out; You may need to stop and/or remove hub-docker-inspector containers manually");
+                logger.error("Container cleanup timed out; You may need to stop and/or remove image inspector containers manually");
             } catch (InterruptedException | ExecutionException e) {
                 logger.error(String.format("Error during concurrent cleanup: %s", e.getMessage()), e);
             }
@@ -254,17 +254,17 @@ public class Output {
             throw new HubIntegrationException(String.format("Found %d BDIO files in %s", bdioFiles.size(), pathToDirContainingBdio));
         } else {
             bdioFilename = bdioFiles.get(0).getName();
-            logger.info(String.format("Uploading BDIO to Hub: %d files; first file: %s", bdioFiles.size(), bdioFiles.get(0).getAbsolutePath()));
+            logger.info(String.format("Uploading BDIO to Black Duck: %d files; first file: %s", bdioFiles.size(), bdioFiles.get(0).getAbsolutePath()));
             uploadBdioFiles(bdioFiles);
         }
         return bdioFilename;
     }
 
     private void uploadBdioFiles(final List<File> bdioFiles) throws IntegrationException {
-        if (hubClient.isValid()) {
+        if (blackDuckClient.isValid()) {
             if (bdioFiles != null) {
                 for (final File file : bdioFiles) {
-                    hubClient.uploadBdioToHub(file);
+                    blackDuckClient.uploadBdio(file);
                 }
             }
             logger.info(" ");

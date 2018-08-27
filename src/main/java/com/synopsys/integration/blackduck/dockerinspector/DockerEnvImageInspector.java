@@ -63,7 +63,7 @@ public class DockerEnvImageInspector {
     public static final String PROGRAM_ID = "blackduck-docker-inspector";
 
     @Autowired
-    private BlackDuckClient hubClient;
+    private BlackDuckClient blackDuckClient;
 
     @Autowired
     private DockerClientManager dockerClientManager;
@@ -139,7 +139,7 @@ public class DockerEnvImageInspector {
         if (config.isOnHost() && !config.isImageInspectorServiceStart() && StringUtils.isBlank(config.getImageInspectorUrl())) {
             final StringBuilder sb = new StringBuilder();
             sb.append("\n========\n");
-            sb.append("Please start using 'HTTP client mode' (see the Docker Inspector HTTP Client Mode page in the Hub Docker Inspector documentation)\n");
+            sb.append("Please start using 'HTTP client mode' (see the Docker Inspector HTTP Client Mode page in the Black Duck Docker Inspector documentation)\n");
             sb.append("to help ensure a smooth transition to future versions. ");
             sb.append("HTTP client mode will eventually replace the current default Docker exec mode.\n");
             sb.append("To use HTTP client mode now:\n");
@@ -193,7 +193,7 @@ public class DockerEnvImageInspector {
     }
 
     private boolean initAndValidate(final Config config) throws IOException, IntegrationException, IllegalArgumentException, IllegalAccessException {
-        logger.info(String.format("hub-docker-inspector %s", programVersion.getProgramVersion()));
+        logger.info(String.format("Black Duck Docker Inspector %s", programVersion.getProgramVersion()));
         if (helpInvoked()) {
             showUsage();
             return false;
@@ -206,7 +206,7 @@ public class DockerEnvImageInspector {
                 if (StringUtils.isBlank(config.getImageInspectorUrl())) {
                     dockerEngineVersion = dockerClientManager.getDockerEngineVersion();
                 }
-                hubClient.phoneHome(dockerEngineVersion);
+                blackDuckClient.phoneHome(dockerEngineVersion);
             } catch (final Exception e) {
                 logger.warn(String.format("Unable to phone home: %s", e.getMessage()));
             }
@@ -214,7 +214,7 @@ public class DockerEnvImageInspector {
         initImageName();
         logger.info(String.format("Inspecting image:tag %s:%s", config.getDockerImageRepo(), config.getDockerImageTag()));
         if (config.isOnHost()) {
-            hubClient.testHubConnection();
+            blackDuckClient.testHubConnection();
         }
         return true;
     }

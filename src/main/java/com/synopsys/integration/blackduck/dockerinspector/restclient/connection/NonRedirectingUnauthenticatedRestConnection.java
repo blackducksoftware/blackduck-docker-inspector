@@ -40,8 +40,8 @@ import com.synopsys.integration.rest.request.Response;
 
 public class NonRedirectingUnauthenticatedRestConnection extends UnauthenticatedRestConnection {
 
-    public NonRedirectingUnauthenticatedRestConnection(final IntLogger logger, final URL hubBaseUrl, final int timeout, final ProxyInfo proxyInfo) {
-        super(logger, hubBaseUrl, timeout, proxyInfo);
+    public NonRedirectingUnauthenticatedRestConnection(final IntLogger logger, final URL blackDuckBaseUrl, final int timeout, final ProxyInfo proxyInfo) {
+        super(logger, blackDuckBaseUrl, timeout, proxyInfo);
         logger.debug("Disabling redirect handling on this rest connection");
         getClientBuilder().disableRedirectHandling();
     }

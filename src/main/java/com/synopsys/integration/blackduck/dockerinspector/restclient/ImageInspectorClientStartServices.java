@@ -43,7 +43,6 @@ import com.synopsys.integration.blackduck.dockerinspector.InspectorImages;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
-import com.synopsys.integration.blackduck.dockerinspector.dockerclient.HubDockerClient;
 import com.synopsys.integration.blackduck.dockerinspector.restclient.response.SimpleResponse;
 import com.synopsys.integration.blackduck.exception.HubIntegrationException;
 import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
@@ -83,9 +82,6 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
 
     @Autowired
     private ContainerPaths containerPaths;
-
-    @Autowired
-    private HubDockerClient hubDockerClient;
 
     @Override
     public boolean isApplicable() {
@@ -230,7 +226,7 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
     private String ensureServiceReady(final RestConnection restConnection, final URI imageInspectorUri, final ImageInspectorOsEnum inspectorOs) throws IntegrationException {
         boolean serviceIsUp = checkServiceHealth(restConnection, imageInspectorUri);
         if (serviceIsUp) {
-            final Container container = dockerClientManager.getRunningContainerByAppName(hubDockerClient.getDockerClient(), Config.IMAGEINSPECTOR_WS_APPNAME, inspectorOs);
+            final Container container = dockerClientManager.getRunningContainerByAppName(Config.IMAGEINSPECTOR_WS_APPNAME, inspectorOs);
             return container.getId();
         }
         logger.info(String.format("Service %s (%s) is not running; starting it...", imageInspectorUri.toString(), inspectorOs.name()));
