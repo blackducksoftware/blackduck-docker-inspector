@@ -4,11 +4,11 @@
     "spdx:name": "blackducksoftware_centos_minus_vim_plus_bacula_1.0_var_lib_rpm_RPM",
     "creationInfo": {
       "spdx:creator": [
-        "Tool: IntegrationBdio-13.0.0"
+        "Tool: IntegrationBdio-16.0.0"
       ],
-      "spdx:created": "2018-05-10T15:38:50.465Z"
+      "spdx:created": "2018-08-27T20:57:03.790Z"
     },
-    "@id": "uuid:dc4648c5-4850-495a-b41e-d7667413c949",
+    "@id": "uuid:67a33431-c250-4e7d-883e-35253290a43d",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -404,6 +404,10 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:redhat/logwatch/7_4_0_35_20130522svn140_el7_5/noarch",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:fedora/dbus_libs/1_6_12_17_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -568,7 +572,7 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:fedora/systemd_sysv/219_57_el7/x86_64",
+        "related": "http:redhat/systemd_libs/219_57_el7_5_1/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -628,10 +632,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:fedora/mariadb_libs/5_5_56_2_el7/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:redhat/filesystem/3_2_21_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -641,6 +641,10 @@
       },
       {
         "related": "http:fedora/libcap/2_22_8_el7/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:centos/systemd/219_57_el7_5_1/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -661,10 +665,6 @@
       },
       {
         "related": "http:redhat/rpm/4_11_3_21_el7/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:redhat/logwatch/7_4_0_34_20130522svn140_el7/noarch",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -764,6 +764,10 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:centos/mariadb_libs/5_5_60_1_el7_5/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:redhat/pcre/8_32_15_el7_2_1/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -788,11 +792,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:centos/mariadb_libs/5_5_56_2_el7/x86_64",
+        "related": "http:fedora/ncurses_libs/5_9_13_20130511_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:fedora/ncurses_libs/5_9_13_20130511_el7/x86_64",
+        "related": "http:fedora/systemd/219_57_el7_5_1/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -852,10 +856,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:fedora/systemd/219_57_el7/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:redhat/xz/5_2_2_1_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -877,6 +877,10 @@
       },
       {
         "related": "http:redhat/procps_ng/3_3_10_10_el7/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:fedora/mariadb_libs/5_5_60_1_el7_5/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -904,6 +908,10 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:centos/systemd_sysv/219_57_el7_5_1/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:centos/openldap/2_4_40_13_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -917,6 +925,10 @@
       },
       {
         "related": "http:centos/pyliblzma/0_5_3_11_el7/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:centos/postgresql_libs/9_2_24_1_el7_5/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -949,10 +961,6 @@
       },
       {
         "related": "http:centos/perl_podlators/2_5_1_3_el7/noarch",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:centos/systemd/219_57_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1012,11 +1020,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:redhat/systemd_libs/219_57_el7/x86_64",
+        "related": "http:centos/perl_HTTP_Tiny/0_033_3_el7/noarch",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:centos/perl_HTTP_Tiny/0_033_3_el7/noarch",
+        "related": "http:fedora/postgresql_libs/9_2_24_1_el7_5/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1048,6 +1056,10 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:fedora/systemd_sysv/219_57_el7_5_1/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:redhat/perl_Encode/2_51_7_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -1065,10 +1077,6 @@
       },
       {
         "related": "http:redhat/device_mapper_libs/1_02_135_1_el7_3_1/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:centos/postgresql_libs/9_2_23_3_el7_4/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1101,10 +1109,6 @@
       },
       {
         "related": "http:redhat/pyxattr/0_5_1_5_el7/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:fedora/postgresql_libs/9_2_23_3_el7_4/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1157,10 +1161,6 @@
       },
       {
         "related": "http:centos/python_urlgrabber/3_10_8_el7/noarch",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:centos/systemd_sysv/219_57_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1228,7 +1228,15 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:fedora/logwatch/7_4_0_35_20130522svn140_el7_5/noarch",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:fedora/chkconfig/1_7_2_1_el7/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:redhat/mariadb_libs/5_5_60_1_el7_5/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1261,10 +1269,6 @@
       },
       {
         "related": "http:redhat/mt_st/1_1_14_el7/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:centos/logwatch/7_4_0_34_20130522svn140_el7/noarch",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1560,6 +1564,10 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:redhat/systemd/219_57_el7_5_1/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:redhat/sqlite/3_7_17_8_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -1776,10 +1784,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:redhat/systemd/219_57_el7/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:fedora/dbus_glib/0_100_7_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -1872,7 +1876,7 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:redhat/systemd_sysv/219_57_el7/x86_64",
+        "related": "http:fedora/systemd_libs/219_57_el7_5_1/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1901,6 +1905,10 @@
       },
       {
         "related": "http:fedora/perl_Encode/2_51_7_el7/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:centos/systemd_libs/219_57_el7_5_1/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -2036,10 +2044,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:redhat/postgresql_libs/9_2_23_3_el7_4/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:centos/libutempter/1_1_6_4_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -2049,10 +2053,6 @@
       },
       {
         "related": "http:centos/gzip/1_5_8_el7/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:centos/systemd_libs/219_57_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -2084,7 +2084,7 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:fedora/systemd_libs/219_57_el7/x86_64",
+        "related": "http:redhat/systemd_sysv/219_57_el7_5_1/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -2101,6 +2101,10 @@
       },
       {
         "related": "http:fedora/libutempter/1_1_6_4_el7/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:redhat/postgresql_libs/9_2_24_1_el7_5/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -2160,10 +2164,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:fedora/logwatch/7_4_0_34_20130522svn140_el7/noarch",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:fedora/libblkid/2_23_2_33_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -2189,6 +2189,10 @@
       },
       {
         "related": "http:redhat/ncurses_libs/5_9_13_20130511_el7/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:centos/logwatch/7_4_0_35_20130522svn140_el7_5/noarch",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -2257,10 +2261,6 @@
       },
       {
         "related": "http:redhat/gdbm/1_10_8_el7/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:redhat/mariadb_libs/5_5_56_2_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -4243,6 +4243,27 @@
     "relationship": []
   },
   {
+    "name": "logwatch",
+    "revision": "7.4.0-35.20130522svn140.el7_5",
+    "@id": "http:redhat/logwatch/7_4_0_35_20130522svn140_el7_5/noarch",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "logwatch/7.4.0-35.20130522svn140.el7_5/noarch",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "redhat",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "logwatch",
+        "version": "7.4.0-35.20130522svn140.el7_5",
+        "architecture": "noarch"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "dbus-libs",
     "revision": "1.6.12-17.el7",
     "@id": "http:fedora/dbus_libs/1_6_12_17_el7/x86_64",
@@ -5104,21 +5125,21 @@
     "relationship": []
   },
   {
-    "name": "systemd-sysv",
-    "revision": "219-57.el7",
-    "@id": "http:fedora/systemd_sysv/219_57_el7/x86_64",
+    "name": "systemd-libs",
+    "revision": "219-57.el7_5.1",
+    "@id": "http:redhat/systemd_libs/219_57_el7_5_1/x86_64",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "fedora",
-      "externalId": "systemd-sysv/219-57.el7/x86_64",
+      "externalSystemTypeId": "redhat",
+      "externalId": "systemd-libs/219-57.el7_5.1/x86_64",
       "externalIdMetaData": {
         "forge": {
-          "name": "fedora",
+          "name": "redhat",
           "separator": "/",
           "kbSeparator": "/"
         },
-        "name": "systemd-sysv",
-        "version": "219-57.el7",
+        "name": "systemd-libs",
+        "version": "219-57.el7_5.1",
         "architecture": "x86_64"
       }
     },
@@ -5419,27 +5440,6 @@
     "relationship": []
   },
   {
-    "name": "mariadb-libs",
-    "revision": "5.5.56-2.el7",
-    "@id": "http:fedora/mariadb_libs/5_5_56_2_el7/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "fedora",
-      "externalId": "mariadb-libs/5.5.56-2.el7/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "fedora",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "mariadb-libs",
-        "version": "5.5.56-2.el7",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "filesystem",
     "revision": "3.2-21.el7",
     "@id": "http:redhat/filesystem/3_2_21_el7/x86_64",
@@ -5497,6 +5497,27 @@
         },
         "name": "libcap",
         "version": "2.22-8.el7",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "systemd",
+    "revision": "219-57.el7_5.1",
+    "@id": "http:centos/systemd/219_57_el7_5_1/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "systemd/219-57.el7_5.1/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "centos",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "systemd",
+        "version": "219-57.el7_5.1",
         "architecture": "x86_64"
       }
     },
@@ -5603,27 +5624,6 @@
         "name": "rpm",
         "version": "4.11.3-21.el7",
         "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "logwatch",
-    "revision": "7.4.0-34.20130522svn140.el7",
-    "@id": "http:redhat/logwatch/7_4_0_34_20130522svn140_el7/noarch",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "redhat",
-      "externalId": "logwatch/7.4.0-34.20130522svn140.el7/noarch",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "redhat",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "logwatch",
-        "version": "7.4.0-34.20130522svn140.el7",
-        "architecture": "noarch"
       }
     },
     "relationship": []
@@ -6133,6 +6133,27 @@
     "relationship": []
   },
   {
+    "name": "mariadb-libs",
+    "revision": "5.5.60-1.el7_5",
+    "@id": "http:centos/mariadb_libs/5_5_60_1_el7_5/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "mariadb-libs/5.5.60-1.el7_5/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "centos",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "mariadb-libs",
+        "version": "5.5.60-1.el7_5",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "pcre",
     "revision": "8.32-15.el7_2.1",
     "@id": "http:redhat/pcre/8_32_15_el7_2_1/x86_64",
@@ -6259,27 +6280,6 @@
     "relationship": []
   },
   {
-    "name": "mariadb-libs",
-    "revision": "5.5.56-2.el7",
-    "@id": "http:centos/mariadb_libs/5_5_56_2_el7/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "centos",
-      "externalId": "mariadb-libs/5.5.56-2.el7/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "centos",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "mariadb-libs",
-        "version": "5.5.56-2.el7",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "ncurses-libs",
     "revision": "5.9-13.20130511.el7",
     "@id": "http:fedora/ncurses_libs/5_9_13_20130511_el7/x86_64",
@@ -6295,6 +6295,27 @@
         },
         "name": "ncurses-libs",
         "version": "5.9-13.20130511.el7",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "systemd",
+    "revision": "219-57.el7_5.1",
+    "@id": "http:fedora/systemd/219_57_el7_5_1/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "systemd/219-57.el7_5.1/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "fedora",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "systemd",
+        "version": "219-57.el7_5.1",
         "architecture": "x86_64"
       }
     },
@@ -6595,27 +6616,6 @@
     "relationship": []
   },
   {
-    "name": "systemd",
-    "revision": "219-57.el7",
-    "@id": "http:fedora/systemd/219_57_el7/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "fedora",
-      "externalId": "systemd/219-57.el7/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "fedora",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "systemd",
-        "version": "219-57.el7",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "xz",
     "revision": "5.2.2-1.el7",
     "@id": "http:redhat/xz/5_2_2_1_el7/x86_64",
@@ -6736,6 +6736,27 @@
         },
         "name": "procps-ng",
         "version": "3.3.10-10.el7",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "mariadb-libs",
+    "revision": "5.5.60-1.el7_5",
+    "@id": "http:fedora/mariadb_libs/5_5_60_1_el7_5/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "mariadb-libs/5.5.60-1.el7_5/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "fedora",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "mariadb-libs",
+        "version": "5.5.60-1.el7_5",
         "architecture": "x86_64"
       }
     },
@@ -6868,6 +6889,27 @@
     "relationship": []
   },
   {
+    "name": "systemd-sysv",
+    "revision": "219-57.el7_5.1",
+    "@id": "http:centos/systemd_sysv/219_57_el7_5_1/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "systemd-sysv/219-57.el7_5.1/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "centos",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "systemd-sysv",
+        "version": "219-57.el7_5.1",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "openldap",
     "revision": "2.4.40-13.el7",
     "@id": "http:centos/openldap/2_4_40_13_el7/x86_64",
@@ -6946,6 +6988,27 @@
         },
         "name": "pyliblzma",
         "version": "0.5.3-11.el7",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "postgresql-libs",
+    "revision": "9.2.24-1.el7_5",
+    "@id": "http:centos/postgresql_libs/9_2_24_1_el7_5/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "postgresql-libs/9.2.24-1.el7_5/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "centos",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "postgresql-libs",
+        "version": "9.2.24-1.el7_5",
         "architecture": "x86_64"
       }
     },
@@ -7115,27 +7178,6 @@
         "name": "perl-podlators",
         "version": "2.5.1-3.el7",
         "architecture": "noarch"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "systemd",
-    "revision": "219-57.el7",
-    "@id": "http:centos/systemd/219_57_el7/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "centos",
-      "externalId": "systemd/219-57.el7/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "centos",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "systemd",
-        "version": "219-57.el7",
-        "architecture": "x86_64"
       }
     },
     "relationship": []
@@ -7435,27 +7477,6 @@
     "relationship": []
   },
   {
-    "name": "systemd-libs",
-    "revision": "219-57.el7",
-    "@id": "http:redhat/systemd_libs/219_57_el7/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "redhat",
-      "externalId": "systemd-libs/219-57.el7/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "redhat",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "systemd-libs",
-        "version": "219-57.el7",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "perl-HTTP-Tiny",
     "revision": "0.033-3.el7",
     "@id": "http:centos/perl_HTTP_Tiny/0_033_3_el7/noarch",
@@ -7472,6 +7493,27 @@
         "name": "perl-HTTP-Tiny",
         "version": "0.033-3.el7",
         "architecture": "noarch"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "postgresql-libs",
+    "revision": "9.2.24-1.el7_5",
+    "@id": "http:fedora/postgresql_libs/9_2_24_1_el7_5/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "postgresql-libs/9.2.24-1.el7_5/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "fedora",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "postgresql-libs",
+        "version": "9.2.24-1.el7_5",
+        "architecture": "x86_64"
       }
     },
     "relationship": []
@@ -7624,6 +7666,27 @@
     "relationship": []
   },
   {
+    "name": "systemd-sysv",
+    "revision": "219-57.el7_5.1",
+    "@id": "http:fedora/systemd_sysv/219_57_el7_5_1/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "systemd-sysv/219-57.el7_5.1/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "fedora",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "systemd-sysv",
+        "version": "219-57.el7_5.1",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "perl-Encode",
     "revision": "2.51-7.el7",
     "@id": "http:redhat/perl_Encode/2_51_7_el7/x86_64",
@@ -7723,27 +7786,6 @@
         },
         "name": "device-mapper-libs",
         "version": "1.02.135-1.el7_3.1",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "postgresql-libs",
-    "revision": "9.2.23-3.el7_4",
-    "@id": "http:centos/postgresql_libs/9_2_23_3_el7_4/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "centos",
-      "externalId": "postgresql-libs/9.2.23-3.el7_4/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "centos",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "postgresql-libs",
-        "version": "9.2.23-3.el7_4",
         "architecture": "x86_64"
       }
     },
@@ -7912,27 +7954,6 @@
         },
         "name": "pyxattr",
         "version": "0.5.1-5.el7",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "postgresql-libs",
-    "revision": "9.2.23-3.el7_4",
-    "@id": "http:fedora/postgresql_libs/9_2_23_3_el7_4/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "fedora",
-      "externalId": "postgresql-libs/9.2.23-3.el7_4/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "fedora",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "postgresql-libs",
-        "version": "9.2.23-3.el7_4",
         "architecture": "x86_64"
       }
     },
@@ -8207,27 +8228,6 @@
         "name": "python-urlgrabber",
         "version": "3.10-8.el7",
         "architecture": "noarch"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "systemd-sysv",
-    "revision": "219-57.el7",
-    "@id": "http:centos/systemd_sysv/219_57_el7/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "centos",
-      "externalId": "systemd-sysv/219-57.el7/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "centos",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "systemd-sysv",
-        "version": "219-57.el7",
-        "architecture": "x86_64"
       }
     },
     "relationship": []
@@ -8569,6 +8569,27 @@
     "relationship": []
   },
   {
+    "name": "logwatch",
+    "revision": "7.4.0-35.20130522svn140.el7_5",
+    "@id": "http:fedora/logwatch/7_4_0_35_20130522svn140_el7_5/noarch",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "fedora",
+      "externalId": "logwatch/7.4.0-35.20130522svn140.el7_5/noarch",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "fedora",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "logwatch",
+        "version": "7.4.0-35.20130522svn140.el7_5",
+        "architecture": "noarch"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "chkconfig",
     "revision": "1.7.2-1.el7",
     "@id": "http:fedora/chkconfig/1_7_2_1_el7/x86_64",
@@ -8584,6 +8605,27 @@
         },
         "name": "chkconfig",
         "version": "1.7.2-1.el7",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "mariadb-libs",
+    "revision": "5.5.60-1.el7_5",
+    "@id": "http:redhat/mariadb_libs/5_5_60_1_el7_5/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "mariadb-libs/5.5.60-1.el7_5/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "redhat",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "mariadb-libs",
+        "version": "5.5.60-1.el7_5",
         "architecture": "x86_64"
       }
     },
@@ -8753,27 +8795,6 @@
         "name": "mt-st",
         "version": "1.1-14.el7",
         "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "logwatch",
-    "revision": "7.4.0-34.20130522svn140.el7",
-    "@id": "http:centos/logwatch/7_4_0_34_20130522svn140_el7/noarch",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "centos",
-      "externalId": "logwatch/7.4.0-34.20130522svn140.el7/noarch",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "centos",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "logwatch",
-        "version": "7.4.0-34.20130522svn140.el7",
-        "architecture": "noarch"
       }
     },
     "relationship": []
@@ -10312,6 +10333,27 @@
     "relationship": []
   },
   {
+    "name": "systemd",
+    "revision": "219-57.el7_5.1",
+    "@id": "http:redhat/systemd/219_57_el7_5_1/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "systemd/219-57.el7_5.1/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "redhat",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "systemd",
+        "version": "219-57.el7_5.1",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "sqlite",
     "revision": "3.7.17-8.el7",
     "@id": "http:redhat/sqlite/3_7_17_8_el7/x86_64",
@@ -11446,27 +11488,6 @@
     "relationship": []
   },
   {
-    "name": "systemd",
-    "revision": "219-57.el7",
-    "@id": "http:redhat/systemd/219_57_el7/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "redhat",
-      "externalId": "systemd/219-57.el7/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "redhat",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "systemd",
-        "version": "219-57.el7",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "dbus-glib",
     "revision": "0.100-7.el7",
     "@id": "http:fedora/dbus_glib/0_100_7_el7/x86_64",
@@ -11950,21 +11971,21 @@
     "relationship": []
   },
   {
-    "name": "systemd-sysv",
-    "revision": "219-57.el7",
-    "@id": "http:redhat/systemd_sysv/219_57_el7/x86_64",
+    "name": "systemd-libs",
+    "revision": "219-57.el7_5.1",
+    "@id": "http:fedora/systemd_libs/219_57_el7_5_1/x86_64",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "redhat",
-      "externalId": "systemd-sysv/219-57.el7/x86_64",
+      "externalSystemTypeId": "fedora",
+      "externalId": "systemd-libs/219-57.el7_5.1/x86_64",
       "externalIdMetaData": {
         "forge": {
-          "name": "redhat",
+          "name": "fedora",
           "separator": "/",
           "kbSeparator": "/"
         },
-        "name": "systemd-sysv",
-        "version": "219-57.el7",
+        "name": "systemd-libs",
+        "version": "219-57.el7_5.1",
         "architecture": "x86_64"
       }
     },
@@ -12112,6 +12133,27 @@
         },
         "name": "perl-Encode",
         "version": "2.51-7.el7",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "systemd-libs",
+    "revision": "219-57.el7_5.1",
+    "@id": "http:centos/systemd_libs/219_57_el7_5_1/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "systemd-libs/219-57.el7_5.1/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "centos",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "systemd-libs",
+        "version": "219-57.el7_5.1",
         "architecture": "x86_64"
       }
     },
@@ -12811,27 +12853,6 @@
     "relationship": []
   },
   {
-    "name": "postgresql-libs",
-    "revision": "9.2.23-3.el7_4",
-    "@id": "http:redhat/postgresql_libs/9_2_23_3_el7_4/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "redhat",
-      "externalId": "postgresql-libs/9.2.23-3.el7_4/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "redhat",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "postgresql-libs",
-        "version": "9.2.23-3.el7_4",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "libutempter",
     "revision": "1.1.6-4.el7",
     "@id": "http:centos/libutempter/1_1_6_4_el7/x86_64",
@@ -12889,27 +12910,6 @@
         },
         "name": "gzip",
         "version": "1.5-8.el7",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "systemd-libs",
-    "revision": "219-57.el7",
-    "@id": "http:centos/systemd_libs/219_57_el7/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "centos",
-      "externalId": "systemd-libs/219-57.el7/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "centos",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "systemd-libs",
-        "version": "219-57.el7",
         "architecture": "x86_64"
       }
     },
@@ -13063,21 +13063,21 @@
     "relationship": []
   },
   {
-    "name": "systemd-libs",
-    "revision": "219-57.el7",
-    "@id": "http:fedora/systemd_libs/219_57_el7/x86_64",
+    "name": "systemd-sysv",
+    "revision": "219-57.el7_5.1",
+    "@id": "http:redhat/systemd_sysv/219_57_el7_5_1/x86_64",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "fedora",
-      "externalId": "systemd-libs/219-57.el7/x86_64",
+      "externalSystemTypeId": "redhat",
+      "externalId": "systemd-sysv/219-57.el7_5.1/x86_64",
       "externalIdMetaData": {
         "forge": {
-          "name": "fedora",
+          "name": "redhat",
           "separator": "/",
           "kbSeparator": "/"
         },
-        "name": "systemd-libs",
-        "version": "219-57.el7",
+        "name": "systemd-sysv",
+        "version": "219-57.el7_5.1",
         "architecture": "x86_64"
       }
     },
@@ -13162,6 +13162,27 @@
         },
         "name": "libutempter",
         "version": "1.1.6-4.el7",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "postgresql-libs",
+    "revision": "9.2.24-1.el7_5",
+    "@id": "http:redhat/postgresql_libs/9_2_24_1_el7_5/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "redhat",
+      "externalId": "postgresql-libs/9.2.24-1.el7_5/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "redhat",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "postgresql-libs",
+        "version": "9.2.24-1.el7_5",
         "architecture": "x86_64"
       }
     },
@@ -13462,27 +13483,6 @@
     "relationship": []
   },
   {
-    "name": "logwatch",
-    "revision": "7.4.0-34.20130522svn140.el7",
-    "@id": "http:fedora/logwatch/7_4_0_34_20130522svn140_el7/noarch",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "fedora",
-      "externalId": "logwatch/7.4.0-34.20130522svn140.el7/noarch",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "fedora",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "logwatch",
-        "version": "7.4.0-34.20130522svn140.el7",
-        "architecture": "noarch"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "libblkid",
     "revision": "2.23.2-33.el7",
     "@id": "http:fedora/libblkid/2_23_2_33_el7/x86_64",
@@ -13625,6 +13625,27 @@
         "name": "ncurses-libs",
         "version": "5.9-13.20130511.el7",
         "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "logwatch",
+    "revision": "7.4.0-35.20130522svn140.el7_5",
+    "@id": "http:centos/logwatch/7_4_0_35_20130522svn140_el7_5/noarch",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "centos",
+      "externalId": "logwatch/7.4.0-35.20130522svn140.el7_5/noarch",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "centos",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "logwatch",
+        "version": "7.4.0-35.20130522svn140.el7_5",
+        "architecture": "noarch"
       }
     },
     "relationship": []
@@ -13981,27 +14002,6 @@
         },
         "name": "gdbm",
         "version": "1.10-8.el7",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "mariadb-libs",
-    "revision": "5.5.56-2.el7",
-    "@id": "http:redhat/mariadb_libs/5_5_56_2_el7/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "redhat",
-      "externalId": "mariadb-libs/5.5.56-2.el7/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "redhat",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "mariadb-libs",
-        "version": "5.5.56-2.el7",
         "architecture": "x86_64"
       }
     },
