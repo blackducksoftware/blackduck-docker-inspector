@@ -232,15 +232,15 @@ public class Config {
     @Value("${imageinspector.service.start:false}")
     private Boolean imageInspectorServiceStart = Boolean.FALSE;
 
-    @ValueDescription(description = "alpine image inspector container port", defaultValue = "8080", group = Config.GROUP_PRIVATE, deprecated = true)
+    @ValueDescription(description = "alpine image inspector container port", defaultValue = "8080", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${imageinspector.service.container.port.alpine:8080}")
     private String imageInspectorContainerPortAlpine = "8080";
 
-    @ValueDescription(description = "centos image inspector container port", defaultValue = "8081", group = Config.GROUP_PRIVATE, deprecated = true)
+    @ValueDescription(description = "centos image inspector container port", defaultValue = "8081", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${imageinspector.service.container.port.centos:8081}")
     private String imageInspectorContainerPortCentos = "8081";
 
-    @ValueDescription(description = "ubuntu image inspector container port", defaultValue = "8082", group = Config.GROUP_PRIVATE, deprecated = true)
+    @ValueDescription(description = "ubuntu image inspector container port", defaultValue = "8082", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${imageinspector.service.container.port.ubuntu:8082}")
     private String imageInspectorContainerPortUbuntu = "8082";
 
