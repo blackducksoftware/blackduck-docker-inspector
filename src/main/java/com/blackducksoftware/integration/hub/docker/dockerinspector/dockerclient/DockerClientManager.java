@@ -290,7 +290,7 @@ public class DockerClientManager {
         }
 
         final String log = callback.builder.toString();
-        logger.debug(String.format("Image inspector service log:\n%s", log));
+        logger.debug(String.format("Image inspector service log:\n%s\n==================================\n", log));
         try {
             callback.close();
         } catch (final IOException e) {
