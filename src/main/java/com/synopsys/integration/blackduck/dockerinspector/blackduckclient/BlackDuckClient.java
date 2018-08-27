@@ -65,19 +65,19 @@ public class BlackDuckClient {
     private Config config;
 
     @Autowired
-    private BlackDuckSecrets hubSecrets;
+    private BlackDuckSecrets blackDuckSecrets;
 
     @Autowired
     private ProgramVersion programVersion;
 
     public boolean isValid() {
-        return createHubServerConfigBuilder().isValid();
+        return createBlackDuckServerConfigBuilder().isValid();
     }
 
-    public void testHubConnection() throws HubIntegrationException {
-        logger.trace(String.format("Hub username: %s", getHubUsername())); // ArgsWithSpacesTest tests this in output
+    public void testBlackDuckConnection() throws HubIntegrationException {
+        logger.trace(String.format("Black Duck username: %s", getBlackDuckUsername())); // ArgsWithSpacesTest tests this in output
         if (!config.isUploadBdio()) {
-            logger.debug("Upload of BDIO not enabled; skipping verification of Hub connection");
+            logger.debug("Upload of BDIO not enabled; skipping verification of Black Duck connection");
             return;
         }
         BlackduckRestConnection restConnection;
@@ -85,21 +85,21 @@ public class BlackDuckClient {
             restConnection = createRestConnection();
             restConnection.connect();
         } catch (final IntegrationException e) {
-            final String msg = String.format("Error connecting to Hub: %s", e.getMessage());
+            final String msg = String.format("Error connecting to Black Duck: %s", e.getMessage());
             throw new HubIntegrationException(msg);
         }
-        logger.info("Successful connection to the Hub.");
+        logger.info("Successful connection to Black Duck.");
     }
 
     public void uploadBdio(final File bdioFile) throws IntegrationException {
         final BlackduckRestConnection restConnection = createRestConnection();
-        final HubServicesFactory hubServicesFactory = new HubServicesFactory(new Gson(), new JsonParser(), restConnection, new Slf4jIntLogger(logger));
-        final CodeLocationService bomImportRequestService = hubServicesFactory.createCodeLocationService();
+        final HubServicesFactory blackDuckServicesFactory = new HubServicesFactory(new Gson(), new JsonParser(), restConnection, new Slf4jIntLogger(logger));
+        final CodeLocationService bomImportRequestService = blackDuckServicesFactory.createCodeLocationService();
         bomImportRequestService.importBomFile(bdioFile);
         logger.info(String.format("Uploaded bdio file %s to %s", bdioFile.getName(), config.getBlackDuckUrl()));
     }
 
-    private String getHubUsername() {
+    private String getBlackDuckUsername() {
         return config.getBlackDuckUsername();
     }
 
@@ -110,16 +110,16 @@ public class BlackDuckClient {
         }
         logger.debug("Attempting to phone home");
         try {
-            phoneHomeHubConnection(dockerEngineVersion);
+            phoneHomeBlackDuckConnection(dockerEngineVersion);
         } catch (final Throwable e) {
-            logger.debug(String.format("Attempt to phone home failed. This may simply be because Hub credentials were not supplied. Error message: %s", e.getMessage()));
+            logger.debug(String.format("Attempt to phone home failed. This may simply be because Black Duck credentials were not supplied. Error message: %s", e.getMessage()));
         }
     }
 
-    private void phoneHomeHubConnection(final String dockerEngineVersion) throws IOException, EncryptionException {
+    private void phoneHomeBlackDuckConnection(final String dockerEngineVersion) throws IOException, EncryptionException {
         final BlackduckRestConnection restConnection = createRestConnection();
-        final HubServicesFactory hubServicesFactory = new HubServicesFactory(HubServicesFactory.createDefaultGson(), HubServicesFactory.createDefaultJsonParser(), restConnection, new Slf4jIntLogger(logger));
-        final PhoneHomeService phoneHomeService = hubServicesFactory.createPhoneHomeService(Executors.newSingleThreadExecutor());
+        final HubServicesFactory blackDuckServicesFactory = new HubServicesFactory(HubServicesFactory.createDefaultGson(), HubServicesFactory.createDefaultJsonParser(), restConnection, new Slf4jIntLogger(logger));
+        final PhoneHomeService phoneHomeService = blackDuckServicesFactory.createPhoneHomeService(Executors.newSingleThreadExecutor());
         final PhoneHomeRequestBody.Builder phoneHomeRequestBodyBuilder = new PhoneHomeRequestBody.Builder();
         if (!StringUtils.isBlank(config.getCallerName())) {
             phoneHomeRequestBodyBuilder.addToMetaData(PHONE_HOME_METADATA_NAME_CALLER_NAME, config.getCallerName());
@@ -127,48 +127,49 @@ public class BlackDuckClient {
         if (!StringUtils.isBlank(config.getCallerVersion())) {
             phoneHomeRequestBodyBuilder.addToMetaData(PHONE_HOME_METADATA_NAME_CALLER_VERSION, config.getCallerVersion());
         }
-        final PhoneHomeCallable phoneHomeCallable = hubServicesFactory.createBlackDuckPhoneHomeCallable(new URL(config.getBlackDuckUrl()), DockerEnvImageInspector.PROGRAM_ID, programVersion.getProgramVersion(), phoneHomeRequestBodyBuilder);
+        final PhoneHomeCallable phoneHomeCallable = blackDuckServicesFactory.createBlackDuckPhoneHomeCallable(new URL(config.getBlackDuckUrl()), DockerEnvImageInspector.PROGRAM_ID, programVersion.getProgramVersion(),
+                phoneHomeRequestBodyBuilder);
         phoneHomeService.phoneHome(phoneHomeCallable);
         logger.trace("Attempt to phone home completed");
     }
 
     private BlackduckRestConnection createRestConnection() throws EncryptionException, IllegalStateException {
-        final HubServerConfigBuilder hubServerConfigBuilder = createHubServerConfigBuilder();
-        return hubServerConfigBuilder.build().createRestConnection(new Slf4jIntLogger(logger));
+        final HubServerConfigBuilder blackDuckServerConfigBuilder = createBlackDuckServerConfigBuilder();
+        return blackDuckServerConfigBuilder.build().createRestConnection(new Slf4jIntLogger(logger));
     }
 
-    private HubServerConfigBuilder createHubServerConfigBuilder() {
-        String hubProxyHost = config.getBlackDuckProxyHost();
-        String hubProxyPort = config.getBlackDuckProxyPort();
-        String hubProxyUsername = config.getBlackDuckProxyUsername();
-        String hubProxyPassword = config.getBlackDuckProxyPassword();
+    private HubServerConfigBuilder createBlackDuckServerConfigBuilder() {
+        String blackDuckProxyHost = config.getBlackDuckProxyHost();
+        String blackDuckProxyPort = config.getBlackDuckProxyPort();
+        String blackDuckProxyUsername = config.getBlackDuckProxyUsername();
+        String blackDuckProxyPassword = config.getBlackDuckProxyPassword();
         if (StringUtils.isBlank(config.getBlackDuckProxyHost()) && !StringUtils.isBlank(config.getScanCliOptsEnvVar())) {
             final List<String> scanCliOpts = Arrays.asList(config.getScanCliOptsEnvVar().split("\\s"));
             for (String opt : scanCliOpts) {
                 opt = opt.trim();
                 if (opt.startsWith("-Dhttp.proxy.host=") || opt.startsWith("-Dhttps.proxy.host=") || opt.startsWith("-Dhttp.proxyHost=") || opt.startsWith("-Dhttps.proxyHost=")) {
-                    hubProxyHost = getValue(opt);
+                    blackDuckProxyHost = getValue(opt);
                 } else if (opt.startsWith("-Dhttp.proxy.port=") || opt.startsWith("-Dhttps.proxy.port=") || opt.startsWith("-Dhttp.proxyPort=") || opt.startsWith("-Dhttps.proxyPort=")) {
-                    hubProxyPort = getValue(opt);
+                    blackDuckProxyPort = getValue(opt);
                 } else if (opt.startsWith("-Dhttp.proxy.username=") || opt.startsWith("-Dhttps.proxy.username=") || opt.startsWith("-Dhttp.proxyUser=") || opt.startsWith("-Dhttps.proxyUser=")) {
-                    hubProxyUsername = getValue(opt);
+                    blackDuckProxyUsername = getValue(opt);
                 } else if (opt.startsWith("-Dhttp.proxy.password=") || opt.startsWith("-Dhttps.proxy.password=") || opt.startsWith("-Dhttp.proxyPassword=") || opt.startsWith("-Dhttps.proxyPassword=")) {
-                    hubProxyPassword = getValue(opt);
+                    blackDuckProxyPassword = getValue(opt);
                 }
             }
         }
-        final HubServerConfigBuilder hubServerConfigBuilder = new HubServerConfigBuilder();
-        hubServerConfigBuilder.setUrl(config.getBlackDuckUrl());
-        hubServerConfigBuilder.setApiToken(hubSecrets.getApiToken());
-        hubServerConfigBuilder.setUsername(getHubUsername());
-        hubServerConfigBuilder.setPassword(hubSecrets.getPassword());
-        hubServerConfigBuilder.setTimeout(config.getBlackDuckTimeout());
-        hubServerConfigBuilder.setProxyHost(hubProxyHost);
-        hubServerConfigBuilder.setProxyPort(hubProxyPort);
-        hubServerConfigBuilder.setProxyUsername(hubProxyUsername);
-        hubServerConfigBuilder.setProxyPassword(hubProxyPassword);
-        hubServerConfigBuilder.setTrustCert(config.isBlackDuckAlwaysTrustCert());
-        return hubServerConfigBuilder;
+        final HubServerConfigBuilder blackDuckServerConfigBuilder = new HubServerConfigBuilder();
+        blackDuckServerConfigBuilder.setUrl(config.getBlackDuckUrl());
+        blackDuckServerConfigBuilder.setApiToken(blackDuckSecrets.getApiToken());
+        blackDuckServerConfigBuilder.setUsername(getBlackDuckUsername());
+        blackDuckServerConfigBuilder.setPassword(blackDuckSecrets.getPassword());
+        blackDuckServerConfigBuilder.setTimeout(config.getBlackDuckTimeout());
+        blackDuckServerConfigBuilder.setProxyHost(blackDuckProxyHost);
+        blackDuckServerConfigBuilder.setProxyPort(blackDuckProxyPort);
+        blackDuckServerConfigBuilder.setProxyUsername(blackDuckProxyUsername);
+        blackDuckServerConfigBuilder.setProxyPassword(blackDuckProxyPassword);
+        blackDuckServerConfigBuilder.setTrustCert(config.isBlackDuckAlwaysTrustCert());
+        return blackDuckServerConfigBuilder;
     }
 
     private String getValue(final String nameEqualsValue) {

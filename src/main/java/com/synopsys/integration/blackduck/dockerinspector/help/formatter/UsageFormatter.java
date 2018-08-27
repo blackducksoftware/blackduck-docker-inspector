@@ -53,10 +53,10 @@ public class UsageFormatter {
         usage.add("application.properties (in the current directory) a line of the form:");
         usage.add("<property name>=<value>");
         usage.add("");
-        usage.add("For greater security, the Hub password can be set via the environment variable BD_HUB_PASSWORD.");
+        usage.add("For greater security, the Black Duck password can be set via the environment variable BD_PASSWORD.");
         usage.add("For example:");
-        usage.add("  export BD_HUB_PASSWORD=mypassword");
-        usage.add("  ./hub-docker-inspector.sh --hub.url=http://hub.mydomain.com:8080/ --hub.username=myusername --docker.image=ubuntu:latest");
+        usage.add("  export BD_PASSWORD=mypassword");
+        usage.add("  ./hub-docker-inspector.sh --blackduck.url=http://blackduck.mydomain.com:8080/ --blackduck.username=myusername --docker.image=ubuntu:latest");
         usage.add("");
         usage.add(String.format("Available properties:"));
         final SortedSet<DockerInspectorOption> configOptions = config.getPublicConfigOptions();

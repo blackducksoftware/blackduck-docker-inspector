@@ -101,13 +101,13 @@ public class DockerClientManager {
     private final Logger logger = LoggerFactory.getLogger(DockerClientManager.class);
 
     @Autowired
-    private BlackDuckSecrets hubSecrets;
+    private BlackDuckSecrets blackDuckSecrets;
 
     @Autowired
     private ProgramPaths programPaths;
 
     @Autowired
-    private HubDockerProperties hubDockerProperties;
+    private BlackDuckDockerProperties blackDuckDockerProperties;
 
     @Autowired
     private Config config;
@@ -204,7 +204,7 @@ public class DockerClientManager {
         final String tarFileDirInSubContainer = programPaths.getDockerInspectorTargetDirPathContainer();
         final String tarFilePathInSubContainer = programPaths.getDockerInspectorTargetDirPathContainer() + dockerTarFile.getName();
 
-        final String containerId = prepareContainerForExec(dockerClient, imageNameTag, extractorContainerName, hubSecrets.getPassword(), hubSecrets.getApiToken());
+        final String containerId = prepareContainerForExec(dockerClient, imageNameTag, extractorContainerName, blackDuckSecrets.getPassword(), blackDuckSecrets.getApiToken());
         setPropertiesInSubContainer(dockerClient, containerId, tarFilePathInSubContainer, tarFileDirInSubContainer, dockerTarFile, targetImage, targetImageRepo, targetImageTag);
         copyFileToContainer(containerId, dockerTarFile.getAbsolutePath(), tarFileDirInSubContainer);
         if (copyJar) {
@@ -404,21 +404,21 @@ public class DockerClientManager {
     private void setPropertiesInSubContainer(final DockerClient dockerClient, final String containerId, final String tarFilePathInSubContainer, final String tarFileDirInSubContainer, final File dockerTarFile, final String targetImage,
             final String targetImageRepo, final String targetImageTag) throws IOException, IllegalArgumentException, IllegalAccessException, IntegrationException {
         logger.debug("Creating properties file inside container");
-        hubDockerProperties.load();
-        hubDockerProperties.set(IMAGE_TARFILE_PROPERTY, tarFilePathInSubContainer);
-        hubDockerProperties.set(IMAGE_PROPERTY, targetImage);
-        hubDockerProperties.set(IMAGE_REPO_PROPERTY, targetImageRepo);
-        hubDockerProperties.set(IMAGE_TAG_PROPERTY, targetImageTag);
-        hubDockerProperties.set(OUTPUT_INCLUDE_DOCKER_TARFILE_PROPERTY, "false");
-        hubDockerProperties.set(OUTPUT_INCLUDE_CONTAINER_FILE_SYSTEM_TARFILE_PROPERTY, new Boolean(config.isOutputIncludeContainerfilesystem()).toString());
-        hubDockerProperties.set(ON_HOST_PROPERTY, "false");
-        hubDockerProperties.set(DETECT_PKG_MGR_PROPERTY, "true");
-        hubDockerProperties.set(INSPECT_PROPERTY, "true");
-        hubDockerProperties.set(INSPECT_IN_CONTAINER_PROPERTY, "false");
-        hubDockerProperties.set(UPLOAD_BDIO_PROPERTY, "false");
+        blackDuckDockerProperties.load();
+        blackDuckDockerProperties.set(IMAGE_TARFILE_PROPERTY, tarFilePathInSubContainer);
+        blackDuckDockerProperties.set(IMAGE_PROPERTY, targetImage);
+        blackDuckDockerProperties.set(IMAGE_REPO_PROPERTY, targetImageRepo);
+        blackDuckDockerProperties.set(IMAGE_TAG_PROPERTY, targetImageTag);
+        blackDuckDockerProperties.set(OUTPUT_INCLUDE_DOCKER_TARFILE_PROPERTY, "false");
+        blackDuckDockerProperties.set(OUTPUT_INCLUDE_CONTAINER_FILE_SYSTEM_TARFILE_PROPERTY, new Boolean(config.isOutputIncludeContainerfilesystem()).toString());
+        blackDuckDockerProperties.set(ON_HOST_PROPERTY, "false");
+        blackDuckDockerProperties.set(DETECT_PKG_MGR_PROPERTY, "true");
+        blackDuckDockerProperties.set(INSPECT_PROPERTY, "true");
+        blackDuckDockerProperties.set(INSPECT_IN_CONTAINER_PROPERTY, "false");
+        blackDuckDockerProperties.set(UPLOAD_BDIO_PROPERTY, "false");
 
         final String pathToPropertiesFileForSubContainer = String.format("%s%s", programPaths.getDockerInspectorTargetDirPathHost(), ProgramPaths.APPLICATION_PROPERTIES_FILENAME);
-        hubDockerProperties.save(pathToPropertiesFileForSubContainer);
+        blackDuckDockerProperties.save(pathToPropertiesFileForSubContainer);
 
         copyFileToContainer(containerId, pathToPropertiesFileForSubContainer, programPaths.getDockerInspectorConfigDirPathContainer());
 
@@ -426,7 +426,7 @@ public class DockerClientManager {
         logger.trace(String.format("Docker image tar file path in sub-container: %s", tarFilePathInSubContainer));
     }
 
-    private String prepareContainerForExec(final DockerClient dockerClient, final String imageNameTag, final String extractorContainerName, final String hubPassword, final String hubApiToken) {
+    private String prepareContainerForExec(final DockerClient dockerClient, final String imageNameTag, final String extractorContainerName, final String blackDuckPassword, final String blackDuckApiToken) {
         stopRemoveContainerIfExists(dockerClient, extractorContainerName);
         logger.debug(String.format("Creating container %s from image %s", extractorContainerName, imageNameTag));
         final Bind bind = createBindMount(programPaths.getDockerInspectorOutputPathHost(), programPaths.getDockerInspectorOutputPathContainer());

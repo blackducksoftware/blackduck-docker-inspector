@@ -44,10 +44,10 @@ public class BlackDuckSecrets {
     }
 
     public String getApiToken() {
-        String hubApiToken = config.getBlackDuckApiTokenEnvVar();
+        String blackDuckApiToken = config.getBlackDuckApiTokenEnvVar();
         if (!StringUtils.isBlank(config.getBlackDuckApiToken())) {
-            hubApiToken = config.getBlackDuckApiToken();
+            blackDuckApiToken = config.getBlackDuckApiToken();
         }
-        return hubApiToken;
+        return blackDuckApiToken;
     }
 }

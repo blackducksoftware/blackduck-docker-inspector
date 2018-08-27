@@ -214,7 +214,7 @@ public class DockerEnvImageInspector {
         initImageName();
         logger.info(String.format("Inspecting image:tag %s:%s", config.getDockerImageRepo(), config.getDockerImageTag()));
         if (config.isOnHost()) {
-            blackDuckClient.testHubConnection();
+            blackDuckClient.testBlackDuckConnection();
         }
         return true;
     }

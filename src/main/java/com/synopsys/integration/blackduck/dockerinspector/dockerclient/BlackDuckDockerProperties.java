@@ -40,7 +40,7 @@ import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 
 @PropertySource("classpath:application.properties")
 @Component
-class HubDockerProperties {
+class BlackDuckDockerProperties {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
