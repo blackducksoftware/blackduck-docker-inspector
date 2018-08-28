@@ -220,9 +220,11 @@ public class DockerClientManager {
                 cmd.add(dockerInspectorJavaOptsParts[i]);
             }
         }
+        final File pgmDirPathInContainer = new File(programPaths.getDockerInspectorPgmDirPathContainer());
+        final File jarFileInContainer = new File(pgmDirPathInContainer, programPaths.getDockerInspectorJarFilenameHost());
         cmd.add("-jar");
-        // TODO use Path to construct paths
-        cmd.add(String.format("%s/%s", programPaths.getDockerInspectorPgmDirPathContainer(), programPaths.getDockerInspectorJarFilenameHost()));
+        cmd.add(jarFileInContainer.getAbsolutePath());
+
         cmd.add(String.format("--spring.config.location=%s/config/application.properties", programPaths.getDockerInspectorPgmDirPathContainer()));
         cmd.add(String.format("--docker.tar=%s", tarFilePathInSubContainer));
         execCommandInContainer(dockerClient, imageNameTag, containerId, cmd);
