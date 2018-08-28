@@ -12,7 +12,6 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import com.google.common.io.Files;
-import com.synopsys.integration.blackduck.dockerinspector.ProgramVersion;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.test.annotation.IntegrationTest;
 
@@ -40,7 +39,7 @@ public class CalledFromDetectTest {
     public void test() throws IOException, InterruptedException, IntegrationException {
 
         final String cmdGetDetectScriptString = "curl -s https://blackducksoftware.github.io/hub-detect/hub-detect.sh";
-        final String detectScriptString = TestUtils.execCmd(executionDir, cmdGetDetectScriptString, ONE_MINUTE_IN_MS, true);
+        final String detectScriptString = TestUtils.execCmd(executionDir, cmdGetDetectScriptString, ONE_MINUTE_IN_MS, true, null);
         final File detectScriptFile = File.createTempFile("latestDetect", ".sh");
         detectScriptFile.setExecutable(true);
         detectScriptFile.deleteOnExit();
@@ -71,7 +70,7 @@ public class CalledFromDetectTest {
         detectScriptFile.deleteOnExit();
         System.out.printf("script file: %s\n", detectWrapperScriptFile.getAbsolutePath());
         FileUtils.write(detectWrapperScriptFile, detectWrapperScriptString, StandardCharsets.UTF_8);
-        final String wrapperScriptOutput = TestUtils.execCmd(executionDir, detectWrapperScriptFile.getAbsolutePath(), FIVE_MINUTES_IN_MS, true);
+        final String wrapperScriptOutput = TestUtils.execCmd(executionDir, detectWrapperScriptFile.getAbsolutePath(), FIVE_MINUTES_IN_MS, true, null);
         System.out.printf("Wrapper script output:\n%s\n", wrapperScriptOutput);
         final String detectOutputString = FileUtils.readFileToString(detectOutputFile, StandardCharsets.UTF_8);
         System.out.printf("Detect output: %s", detectOutputString);

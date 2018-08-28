@@ -75,12 +75,12 @@ public class TestUtils {
         return true;
     }
 
-    public static String execCmd(final File workingDir, final String cmd, final long timeout, final boolean logStdout) throws IOException, InterruptedException, IntegrationException {
-        return execCmd(workingDir, cmd, timeout, null, logStdout);
+    public static String execCmd(final File workingDir, final String cmd, final long timeout, final boolean logStdout, final Map<String, String> givenEnv) throws IOException, InterruptedException, IntegrationException {
+        return execCmd(workingDir, cmd, timeout, givenEnv, logStdout);
     }
 
-    public static String execCmd(final String cmd, final long timeout, final boolean logStdout) throws IOException, InterruptedException, IntegrationException {
-        return execCmd(null, cmd, timeout, null, logStdout);
+    public static String execCmd(final String cmd, final long timeout, final boolean logStdout, final Map<String, String> givenEnv) throws IOException, InterruptedException, IntegrationException {
+        return execCmd(null, cmd, timeout, givenEnv, logStdout);
     }
 
     private static String execCmd(final File workingDir, final String cmd, final long timeout, final Map<String, String> givenEnv, final boolean logStdout) throws IOException, InterruptedException, IntegrationException {

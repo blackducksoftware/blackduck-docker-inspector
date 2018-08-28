@@ -56,7 +56,7 @@ public class PullArtifactsTest {
         fullCmd.addAll(partialCmd);
 
         System.out.println(String.format("Running %s end to end test", cmdLineOption));
-        TestUtils.execCmd(workingDir, String.join(" ", fullCmd), 30000L, true);
+        TestUtils.execCmd(workingDir, String.join(" ", fullCmd), 30000L, true, null);
         System.out.printf("hub-docker-inspector %s done; verifying results...\n", cmdLineOption);
 
         final File[] filesAfter = workingDir.listFiles(fileFilter);

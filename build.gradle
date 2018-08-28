@@ -217,7 +217,7 @@ artifactory {
 
 dependencies {
     compile 'com.blackducksoftware.integration:hub-common:37.0.0'
-    compile 'com.blackducksoftware.integration:hub-imageinspector-lib:5.0.0-SNAPSHOT'
+    compile 'com.blackducksoftware.integration:hub-imageinspector-lib:5.0.0'
     
     compile 'com.github.docker-java:docker-java:3.1.0-rc-2'
 
@@ -229,4 +229,6 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter'
     
     testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile 'io.fabric8:kubernetes-client:3.1.8'
+    testCompile 'io.fabric8:kubernetes-model:2.0.8'
 }

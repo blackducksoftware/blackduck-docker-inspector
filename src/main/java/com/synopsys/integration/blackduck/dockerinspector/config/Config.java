@@ -216,7 +216,7 @@ public class Config {
     @Value("${cleanup.inspector.image:false}")
     private Boolean cleanupInspectorImage = Boolean.FALSE;
 
-    @ValueDescription(description = "The host's path to the dir shared with the imageinspector containers. Only needed if using existing imageinspector containers", defaultValue = "/tmp/blackduck-docker-inspector-files/shared", group = Config.GROUP_PRIVATE, deprecated = false)
+    @ValueDescription(description = "The host's path to the dir shared with the imageinspector containers. Only needed if using existing imageinspector containers", defaultValue = "/tmp/blackduck-docker-inspector-files/shared", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${shared.dir.path.local:/tmp/blackduck-docker-inspector-files/shared}")
     private String sharedDirPathLocal = "/tmp/blackduck-docker-inspector-files/shared";
 
@@ -224,7 +224,7 @@ public class Config {
     @Value("${shared.dir.path.imageinspector:/opt/blackduck/blackduck-imageinspector/shared}")
     private String sharedDirPathImageInspector = "/opt/blackduck/blackduck-imageinspector/shared";
 
-    @ValueDescription(description = "The URL of the (already running) imageinspector service to use", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
+    @ValueDescription(description = "The URL of the (already running) imageinspector service to use", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${imageinspector.service.url:}")
     private String imageInspectorUrl = "";
 
