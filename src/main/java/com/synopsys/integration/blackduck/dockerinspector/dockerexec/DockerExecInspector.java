@@ -88,6 +88,7 @@ public class DockerExecInspector implements Inspector {
     @Override
     public int getBdio(final DissectedImage dissectedImage) throws IntegrationException {
         try {
+            logMsgAboutHttpClientMode();
             output.ensureWriteability();
             parseManifest(config, dissectedImage);
             checkForGivenTargetOs(config, dissectedImage);
@@ -101,6 +102,21 @@ public class DockerExecInspector implements Inspector {
             return returnCode;
         } catch (IllegalAccessException | IOException | InterruptedException | CompressorException e) {
             throw new IntegrationException(e.getMessage(), e);
+        }
+    }
+
+    private void logMsgAboutHttpClientMode() {
+        if (config.isOnHost()) {
+            final StringBuilder sb = new StringBuilder();
+            sb.append("\n========\n");
+            sb.append("This mode (\"docker exec\" mode) is deprecated and will be removed from a future version.\n");
+            sb.append("Please start using 'HTTP client mode' as soon as possible.\n");
+            sb.append("To use HTTP client mode:\n");
+            sb.append("\tIf you are using Docker Inspector directly: do not set property imageinspector.service.start\n");
+            sb.append("\tIf you are using Detect: do not set property detect.docker.passthrough.imageinspector.service.start\n");
+            sb.append("See the documentation for information on how to avoid port conflicts.\n");
+            sb.append("========");
+            logger.warn(sb.toString());
         }
     }
 
@@ -144,7 +160,8 @@ public class DockerExecInspector implements Inspector {
         } else {
             if (dissectedImage.getTargetImageFileSystemRootDir() == null) {
                 dissectedImage.setTargetImageFileSystemRootDir(
-                        imageInspector.extractDockerLayers(new File(programPaths.getDockerInspectorWorkingDirPath()), config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerTars(), dissectedImage.getLayerMappings()));
+                        imageInspector.extractDockerLayers(new File(programPaths.getDockerInspectorWorkingDirPath()), config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerTars(),
+                                dissectedImage.getLayerMappings()));
             }
             if (dissectedImage.getTargetOs() == null) {
                 dissectedImage.setTargetOs(imageInspector.detectInspectorOperatingSystem(dissectedImage.getTargetImageFileSystemRootDir()));

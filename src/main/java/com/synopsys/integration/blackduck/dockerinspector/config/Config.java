@@ -230,9 +230,9 @@ public class Config {
 
     // Properties for pull/start services/containers as needed mode:
 
-    @ValueDescription(description = "Start ImageInspector services (containers) as needed?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
-    @Value("${imageinspector.service.start:false}")
-    private Boolean imageInspectorServiceStart = Boolean.FALSE;
+    @ValueDescription(description = "Start ImageInspector services (containers) as needed?", defaultValue = "true", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${imageinspector.service.start:true}")
+    private Boolean imageInspectorServiceStart = Boolean.TRUE;
 
     @ValueDescription(description = "alpine image inspector container port", defaultValue = "8080", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${imageinspector.service.container.port.alpine:8080}")
