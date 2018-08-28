@@ -365,7 +365,7 @@ public class DockerInspectorTest {
     }
 
     private void testTar(final String inspectTargetTarfile, final String imageForBdioFilename, final String repo, final String tag, final String tagForBdioFilename, final String pkgMgrPathString, final boolean requireBdioMatch,
-            final boolean startContainersAsNeeded,
+            final boolean testStartServiceModeUsingCustomPorts,
             final List<String> additionalArgs, final boolean needWorkingDir, final File outputContainerFileSystemFile)
             throws IOException, InterruptedException, IntegrationException {
 
@@ -397,11 +397,13 @@ public class DockerInspectorTest {
             cmd.add(String.format("--working.dir.path=%s", workingDir.getAbsolutePath()));
         }
         cmd.add(inspectTargetArg);
-        if (startContainersAsNeeded) {
-            cmd.add("--imageinspector.service.start=true");
+        if (testStartServiceModeUsingCustomPorts) {
+            // --imageinspector.service.start=true is left to default (true)
             cmd.add(String.format("--imageinspector.service.port.alpine=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE));
             cmd.add(String.format("--imageinspector.service.port.centos=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS));
             cmd.add(String.format("--imageinspector.service.port.ubuntu=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU));
+        } else {
+            cmd.add("--imageinspector.service.start=false");
         }
         if (additionalArgs != null && additionalArgs.size() > 0) {
             cmd.addAll(additionalArgs);
