@@ -29,6 +29,7 @@ repositories {
 version = '7.0.0-SNAPSHOT'
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
 project.ext.inspectorImageVersion = "3.0.0-SNAPSHOT"
+project.group = 'com.synopsys.integration'
 
 apply plugin: 'com.blackducksoftware.integration.solution'
 apply plugin: 'com.bmuschko.docker-remote-api'

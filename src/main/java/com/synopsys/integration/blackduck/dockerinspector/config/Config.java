@@ -127,7 +127,7 @@ public class Config {
 
     // Logging level: ERROR, WARN, INFO, DEBUG, TRACE
     @ValueDescription(description = "Logging Level (WARN, INFO, DEBUG, TRACE)", defaultValue = "INFO", group = Config.GROUP_PUBLIC, deprecated = false)
-    @Value("${logging.level.com.blackducksoftware:INFO}")
+    @Value("${logging.level.com.synopsys:INFO}")
     private String loggingLevel = "";
 
     // Path on host of a directory into which the resulting output files will be copied
@@ -265,10 +265,10 @@ public class Config {
 
     // Environment Variables
     @Value("${BD_HUB_PASSWORD:}")
-    private final String blackDuckLegacyPasswordEnvVar = "";
+    private String blackDuckLegacyPasswordEnvVar = "";
 
     @Value("${BD_HUB_TOKEN:}")
-    private final String blackDuckLegacyApiTokenEnvVar = "";
+    private String blackDuckLegacyApiTokenEnvVar = "";
 
     @Value("${BD_PASSWORD:}")
     private String blackDuckPasswordEnvVar = "";
@@ -323,7 +323,7 @@ public class Config {
             if (declaredAnnotations.length > 0) {
                 for (final Annotation annotation : declaredAnnotations) {
                     if (annotation.annotationType().getName().equals(ValueDescription.class.getName())) {
-                        logger.debug(String.format("ValueDescription annotated config object field: %s", field.getName()));
+                        logger.trace(String.format("ValueDescription annotated config object field: %s", field.getName()));
                         final String propMappingString = field.getAnnotation(Value.class).value();
                         final String propName = SpringValueUtils.springKeyFromValueAnnotation(propMappingString);
                         final Object fieldValueObject = field.get(configObject);
@@ -343,7 +343,7 @@ public class Config {
                         if (!Config.GROUP_PRIVATE.equals(valueDescription.group())) {
                             publicOptions.add(opt);
                         } else {
-                            logger.debug(String.format("private prop: propName: %s, fieldName: %s, group: %s, description: %s", propName, field.getName(), valueDescription.group(), valueDescription.description()));
+                            logger.trace(String.format("private prop: propName: %s, fieldName: %s, group: %s, description: %s", propName, field.getName(), valueDescription.group(), valueDescription.description()));
                         }
                     }
                 }
@@ -612,6 +612,8 @@ public class Config {
         this.blackDuckPassword = null;
         this.blackDuckPasswordEnvVar = null;
         this.blackDuckApiTokenEnvVar = null;
+        this.blackDuckLegacyApiTokenEnvVar = null;
+        this.blackDuckLegacyPasswordEnvVar = null;
         this.blackDuckProjectName = null;
         this.blackDuckProjectVersion = null;
         this.blackDuckProxyHost = null;

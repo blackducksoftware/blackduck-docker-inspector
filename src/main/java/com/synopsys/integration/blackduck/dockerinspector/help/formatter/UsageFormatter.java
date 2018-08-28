@@ -56,7 +56,7 @@ public class UsageFormatter {
         usage.add("For greater security, the Black Duck password can be set via the environment variable BD_PASSWORD.");
         usage.add("For example:");
         usage.add("  export BD_PASSWORD=mypassword");
-        usage.add("  ./hub-docker-inspector.sh --blackduck.url=http://blackduck.mydomain.com:8080/ --blackduck.username=myusername --docker.image=ubuntu:latest");
+        usage.add("  ./blackduck-docker-inspector.sh --blackduck.url=http://blackduck.mydomain.com:8080/ --blackduck.username=myusername --docker.image=ubuntu:latest");
         usage.add("");
         usage.add(String.format("Available properties:"));
         final SortedSet<DockerInspectorOption> configOptions = config.getPublicConfigOptions();
