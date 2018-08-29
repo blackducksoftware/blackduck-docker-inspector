@@ -368,9 +368,6 @@ public class Config {
     }
 
     public String getBlackDuckUsername() {
-        logger.info(String.format("*** getBlackDuckUsername(): field: %s", blackDuckUsername));
-        logger.info(String.format("*** getBlackDuckUsername(): from options: %s", optionsByFieldName.get("blackDuckUsername").getResolvedValue()));
-        logger.info(String.format("*** getBlackDuckUsername(): unEscaped: %s", unEscape(optionsByFieldName.get("blackDuckUsername").getResolvedValue())));
         return unEscape(optionsByFieldName.get("blackDuckUsername").getResolvedValue());
     }
 

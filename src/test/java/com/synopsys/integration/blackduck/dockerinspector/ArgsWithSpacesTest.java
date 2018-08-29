@@ -54,8 +54,8 @@ public class ArgsWithSpacesTest {
         final ProgramVersion pgmVerObj = new ProgramVersion();
         pgmVerObj.init();
         final String programVersion = pgmVerObj.getProgramVersion();
-        final List<String> partialCmd = Arrays.asList("build/blackduck-docker-inspector.sh", "--upload.bdio=false", String.format("--blackduck.username=\"%s\"", USERNAME), String.format("--blackduck.project.name=\"%s\"", PROJECT_NAME),
-                String.format("--blackduck.project.version=\"%s\"", PROJECT_VERSION), String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", programVersion), String.format("--output.path=%s/output", TestUtils.TEST_DIR_REL_PATH),
+        final List<String> partialCmd = Arrays.asList("build/blackduck-docker-inspector.sh", "--upload.bdio=false", String.format("--blackduck.username=%s", USERNAME), String.format("--blackduck.project.name=%s", PROJECT_NAME),
+                String.format("--blackduck.project.version=%s", PROJECT_VERSION), String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", programVersion), String.format("--output.path=%s/output", TestUtils.TEST_DIR_REL_PATH),
                 "--output.include.dockertarfile=true",
                 "--output.include.containerfilesystem=true", "--blackduck.always.trust.cert=true");
         // Arrays.asList returns a fixed size list; need a variable sized list
@@ -94,10 +94,10 @@ public class ArgsWithSpacesTest {
                 if (line.contains("Black Duck username:") || line.contains("Black Duck project:")) {
                     System.out.println(line);
                 }
-                if (line.endsWith(String.format("Black Duck username: \"%s\"", USERNAME))) {
+                if (line.endsWith(String.format("Black Duck username: %s", USERNAME))) {
                     foundUsernameCount++;
                 }
-                if (line.contains(String.format("Black Duck project: \"%s\", version: \"%s\";", PROJECT_NAME, PROJECT_VERSION))) {
+                if (line.contains(String.format("Black Duck project: %s, version: %s;", PROJECT_NAME, PROJECT_VERSION))) {
                     foundProjectNameVersionCount++;
                 }
             }
