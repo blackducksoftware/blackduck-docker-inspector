@@ -7,13 +7,7 @@ buildscript {
         maven { url 'https://plugins.gradle.org/m2/' }
     }
     dependencies {
-        configurations.all {
-            resolutionStrategy {
-                force 'com.blackducksoftware.integration:integration-test-common:3.1.3'
-                force 'com.blackducksoftware.integration:integration-common-rest:10.1.1'
-            }
-        }
-        classpath 'com.blackducksoftware.integration:common-gradle-plugin:0.0.38'
+        classpath 'com.blackducksoftware.integration:common-gradle-plugin:0.0.+'
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.11.RELEASE")
         classpath 'com.bmuschko:gradle-docker-plugin:3.0.6'
     }
@@ -29,11 +23,13 @@ apply plugin: 'io.spring.dependency-management'
 repositories {
     jcenter()
     mavenCentral()
+    maven {url "https://oss.sonatype.org/content/repositories/snapshots/"}
 }
 
-version = '6.3.2-SNAPSHOT'
-project.ext.inspectorImageFamily = "hub-imageinspector-ws"
-project.ext.inspectorImageVersion = "2.2.1"
+version = '7.0.0-SNAPSHOT'
+project.ext.inspectorImageFamily = "blackduck-imageinspector"
+project.ext.inspectorImageVersion = "3.0.0-SNAPSHOT"
+project.group = 'com.synopsys.integration'
 
 apply plugin: 'com.blackducksoftware.integration.solution'
 apply plugin: 'com.bmuschko.docker-remote-api'
@@ -43,9 +39,7 @@ import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 
 apply from: 'airgap.gradle'
 
-final String hubDockerPgmDir = '/opt/blackduck/hub-docker-inspector'
-
-springBoot { mainClass = 'com.blackducksoftware.integration.hub.docker.dockerinspector.DockerEnvImageInspector' }
+springBoot { mainClass = 'com.synopsys.integration.blackduck.dockerinspector.DockerEnvImageInspector' }
 
 configurations {
     integrationTestCompile.extendsFrom testCompile
@@ -75,7 +69,7 @@ task produceFinalZip(type: Zip, dependsOn: [build, writeVersionToPropertiesFile]
 }
 
 task buildScript(type: Copy) {
-	from 'src/main/resources/hub-docker-inspector.sh'
+	from 'src/main/resources/blackduck-docker-inspector.sh'
 	into 'build'
 	filter(ReplaceTokens, tokens: [VERSION: version, INSPECTOR_IMAGE_FAMILY: project.ext.inspectorImageFamily])
 }
@@ -176,7 +170,7 @@ task packageScript(type: Zip, dependsOn: buildScript) {
 		include 'application.properties'
 	}
 	from("${projectDir}/build") {
-		include 'hub-docker-inspector.sh'
+		include 'blackduck-docker-inspector.sh'
 	}
 }
 
@@ -222,8 +216,8 @@ artifactory {
 }
 
 dependencies {
-    compile 'com.blackducksoftware.integration:hub-common:33.0.0'
-    compile 'com.blackducksoftware.integration:hub-imageinspector-lib:4.0.1'
+    compile 'com.blackducksoftware.integration:hub-common:37.0.0'
+    compile 'com.blackducksoftware.integration:hub-imageinspector-lib:5.0.0'
     
     compile 'com.github.docker-java:docker-java:3.1.0-rc-2'
 
@@ -235,11 +229,6 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter'
     
     testCompile 'org.springframework.boot:spring-boot-starter-test'
-}
-
-configurations.all {
-    resolutionStrategy {
-        force 'com.blackducksoftware.integration:integration-test-common:3.1.3'
-        force 'com.blackducksoftware.integration:integration-common-rest:10.1.1'
-    }
+    testCompile 'io.fabric8:kubernetes-client:3.1.8'
+    testCompile 'io.fabric8:kubernetes-model:2.0.8'
 }
