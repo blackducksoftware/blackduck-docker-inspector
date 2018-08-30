@@ -91,11 +91,6 @@ public class TestUtils {
         if (workingDir != null) {
             pb.directory(workingDir);
         }
-        final Map<String, String> processEnv = pb.environment();
-        final String oldPath = System.getenv("PATH");
-        final String newPath = String.format("%s:/usr/local/bin", oldPath);
-        System.out.println(String.format("Adjusted path: %s", newPath));
-        processEnv.put("PATH", newPath);
         if (givenEnv != null) {
             pb.environment().putAll(givenEnv);
         }

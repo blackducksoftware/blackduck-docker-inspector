@@ -11,7 +11,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
@@ -67,11 +66,6 @@ public class ArgsWithSpacesTest {
 
         System.out.println(String.format("Running args-with-spaces test with command %s", fullCmd.toString()));
         final ProcessBuilder pb = new ProcessBuilder(fullCmd);
-        final Map<String, String> env = pb.environment();
-        final String oldPath = System.getenv("PATH");
-        final String newPath = String.format("%s:/usr/local/bin", oldPath);
-        System.out.println(String.format("Adjusted path: %s", newPath));
-        env.put("PATH", newPath);
         final File outputFile = new File(String.format("%s/argsWithSpaces_output.txt", TestUtils.TEST_DIR_REL_PATH));
         outputFile.delete();
         pb.redirectErrorStream(true);

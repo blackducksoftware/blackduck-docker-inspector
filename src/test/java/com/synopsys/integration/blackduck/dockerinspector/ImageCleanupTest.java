@@ -9,7 +9,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
@@ -98,10 +97,6 @@ public class ImageCleanupTest {
     private String runCommand(final List<String> cmd, final boolean assertPasses) throws IOException, InterruptedException {
         System.out.println(String.format("Running command %s", cmd.toString()));
         final ProcessBuilder pb = new ProcessBuilder(cmd);
-        final Map<String, String> env = pb.environment();
-        final String oldPath = System.getenv("PATH");
-        final String newPath = String.format("%s:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin", oldPath);
-        env.put("PATH", newPath);
         final File outputFile = new File(String.format("%s/temp_cmd_output_%s.txt", TestUtils.TEST_DIR_REL_PATH, Long.toString(System.nanoTime())));
         outputFile.delete();
         pb.redirectErrorStream(true);
@@ -133,11 +128,6 @@ public class ImageCleanupTest {
         final File dockerImagesoutputFile = new File(outputFilename);
         dockerImagesoutputFile.delete();
         final ProcessBuilder pb = new ProcessBuilder(dockerImagesCmd);
-        final Map<String, String> env = pb.environment();
-        final String oldPath = System.getenv("PATH");
-
-        final String newPath = String.format("/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:%s", oldPath);
-        env.put("PATH", newPath);
         pb.redirectErrorStream(true);
         pb.redirectOutput(dockerImagesoutputFile);
         final Process p = pb.start();
