@@ -100,7 +100,7 @@ public class ImageCleanupTest {
         final ProcessBuilder pb = new ProcessBuilder(cmd);
         final Map<String, String> env = pb.environment();
         final String oldPath = System.getenv("PATH");
-        final String newPath = String.format("/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:%s", oldPath);
+        final String newPath = String.format("%s:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin", oldPath);
         env.put("PATH", newPath);
         final File outputFile = new File(String.format("%s/temp_cmd_output_%s.txt", TestUtils.TEST_DIR_REL_PATH, Long.toString(System.nanoTime())));
         outputFile.delete();
