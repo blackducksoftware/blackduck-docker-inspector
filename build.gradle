@@ -28,7 +28,7 @@ repositories {
 
 version = '7.0.0-SNAPSHOT'
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
-project.ext.inspectorImageVersion = "3.0.0-SNAPSHOT"
+project.ext.inspectorImageVersion = "3.0.0"
 project.group = 'com.synopsys.integration'
 
 apply plugin: 'com.blackducksoftware.integration.solution'
