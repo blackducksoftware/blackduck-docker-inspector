@@ -120,6 +120,9 @@ public class RestClientInspector implements Inspector {
         if (StringUtils.isNotBlank(config.getBlackDuckProjectVersion())) {
             bdioDocument.project.version = config.getBlackDuckProjectVersion();
         }
+        if (StringUtils.isNotBlank(config.getBlackDuckCodelocationPrefix())) {
+            bdioDocument.billOfMaterials.spdxName = String.format("%s_%s", config.getBlackDuckCodelocationPrefix(), bdioDocument.billOfMaterials.spdxName);
+        }
     }
 
     private SimpleBdioDocument toBdioDocument(final String bdioString) throws IOException {
