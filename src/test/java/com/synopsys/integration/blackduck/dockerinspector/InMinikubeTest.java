@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -21,7 +22,7 @@ import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClient;
 
 @Category(IntegrationTest.class)
-// @Ignore
+@Ignore
 public class InMinikubeTest {
     private static KubernetesClient client;
     private static String clusterIp;
