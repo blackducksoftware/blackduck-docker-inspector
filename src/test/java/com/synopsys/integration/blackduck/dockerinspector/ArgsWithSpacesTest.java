@@ -69,7 +69,7 @@ public class ArgsWithSpacesTest {
         final ProcessBuilder pb = new ProcessBuilder(fullCmd);
         final Map<String, String> env = pb.environment();
         final String oldPath = System.getenv("PATH");
-        final String newPath = String.format("/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:%s", oldPath);
+        final String newPath = String.format("%s:/usr/local/bin", oldPath);
         System.out.println(String.format("Adjusted path: %s", newPath));
         env.put("PATH", newPath);
         final File outputFile = new File(String.format("%s/argsWithSpaces_output.txt", TestUtils.TEST_DIR_REL_PATH));
