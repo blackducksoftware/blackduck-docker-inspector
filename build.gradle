@@ -74,6 +74,12 @@ task buildScript(type: Copy) {
 	filter(ReplaceTokens, tokens: [VERSION: version, INSPECTOR_IMAGE_FAMILY: project.ext.inspectorImageFamily])
 }
 
+task createVersionedScript(type: Copy) {
+    from 'build/blackduck-docker-inspector.sh'
+    into 'build'
+    rename('blackduck-docker-inspector.sh', "blackduck-docker-inspector-${version}.sh")
+}
+
 task removeTestImage(type: Exec) {
     ignoreExitValue true
     commandLine "docker", "rmi", "blackducksoftware/centos_minus_vim_plus_bacula:1.0"
@@ -164,16 +170,6 @@ task buildAggTestDockerTarfile(type: Exec, dependsOn: [buildTestDockerImage, bui
         "blackducksoftware/whiteouttest:1.0"
 }
 
-task packageScript(type: Zip, dependsOn: buildScript) {
-	archiveName("${baseName}-${version}-script.${extension}")
-	from("${projectDir}/src/main/resources") {
-		include 'application.properties'
-	}
-	from("${projectDir}/build") {
-		include 'blackduck-docker-inspector.sh'
-	}
-}
-
 compileJava.dependsOn writeVersionToPropertiesFile
 
 task checkVersion() {
@@ -186,12 +182,10 @@ task checkVersion() {
     }
 }
 
-task pkg(dependsOn: [packageScript]) {}
-
 task buildTestTarfiles(dependsOn: [buildTestDockerTarfile, buildWhTestDockerTarfile, buildAggTestDockerTarfile, \
         buildAlpineTestDockerTarfile, buildAlpine36TestDockerTarfile, buildUbuntuTestDockerTarfile]) {}
 
-task testPrep(type: Exec, dependsOn: [build, packageScript, buildTestTarfiles]) {
+task testPrep(type: Exec, dependsOn: [build, buildTestTarfiles]) {
     ignoreExitValue true
     commandLine 'mkdir', 'test'
 }
