@@ -185,7 +185,7 @@ task checkVersion() {
 task buildTestTarfiles(dependsOn: [buildTestDockerTarfile, buildWhTestDockerTarfile, buildAggTestDockerTarfile, \
         buildAlpineTestDockerTarfile, buildAlpine36TestDockerTarfile, buildUbuntuTestDockerTarfile]) {}
 
-task testPrep(type: Exec, dependsOn: [build, buildTestTarfiles]) {
+task testPrep(type: Exec, dependsOn: [build, buildTestTarfiles, buildScript, createVersionedScript]) {
     ignoreExitValue true
     commandLine 'mkdir', 'test'
 }
