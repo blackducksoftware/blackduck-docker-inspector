@@ -27,6 +27,8 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Reader;
+import java.io.StringReader;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -74,6 +76,9 @@ public class RestClientInspector implements Inspector {
     @Autowired
     private Output output;
 
+    @Autowired
+    private Gson gson;
+
     @Override
     public boolean isApplicable() {
         if (config.isImageInspectorServiceStart() || StringUtils.isNotBlank(config.getImageInspectorUrl())) {
@@ -95,7 +100,9 @@ public class RestClientInspector implements Inspector {
             final String containerFileSystemPathInContainer = containerPaths.getContainerPathToOutputFile(containerFileSystemFilename);
             final String bdioString = imageInspectorClient.getBdio(finalDockerTarfile.getCanonicalPath(), dockerTarFilePathInContainer, config.getDockerImageRepo(), config.getDockerImageTag(), containerFileSystemPathInContainer,
                     config.isCleanupWorkingDir());
-            final File bdioFile = output.provideBdioFileOutput(bdioString, deriveOutputBdioFilename(bdioString));
+            final SimpleBdioDocument bdioDocument = toBdioDocument(bdioString);
+            adjustBdio(bdioDocument);
+            final File bdioFile = output.provideBdioFileOutput(bdioDocument, deriveOutputBdioFilename(bdioString));
             if (config.isUploadBdio()) {
                 blackDuckClient.uploadBdio(bdioFile);
             }
@@ -103,6 +110,24 @@ public class RestClientInspector implements Inspector {
             return 0;
         } catch (final IOException e) {
             throw new IntegrationException(e.getMessage(), e);
+        }
+    }
+
+    private void adjustBdio(final SimpleBdioDocument bdioDocument) {
+        if (StringUtils.isNotBlank(config.getBlackDuckProjectName())) {
+            bdioDocument.project.name = config.getBlackDuckProjectName();
+        }
+        if (StringUtils.isNotBlank(config.getBlackDuckProjectVersion())) {
+            bdioDocument.project.version = config.getBlackDuckProjectVersion();
+        }
+    }
+
+    private SimpleBdioDocument toBdioDocument(final String bdioString) throws IOException {
+        final Reader reader = new StringReader(bdioString);
+        SimpleBdioDocument doc = null;
+        try (BdioReader bdioReader = new BdioReader(gson, reader)) {
+            doc = bdioReader.readSimpleBdioDocument();
+            return doc;
         }
     }
 

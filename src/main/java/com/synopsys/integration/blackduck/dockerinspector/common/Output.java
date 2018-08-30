@@ -25,8 +25,8 @@ package com.synopsys.integration.blackduck.dockerinspector.common;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -34,7 +34,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import org.apache.commons.compress.compressors.CompressorException;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,6 +55,8 @@ import com.synopsys.integration.blackduck.imageinspector.name.Names;
 import com.synopsys.integration.blackduck.imageinspector.result.Result;
 import com.synopsys.integration.blackduck.imageinspector.result.ResultFile;
 import com.synopsys.integration.exception.IntegrationException;
+import com.synopsys.integration.hub.bdio.BdioWriter;
+import com.synopsys.integration.hub.bdio.model.SimpleBdioDocument;
 
 @Component
 public class Output {
@@ -76,6 +77,9 @@ public class Output {
     @Autowired
     private ResultFile resultFile;
 
+    @Autowired
+    private Gson gson;
+
     public void ensureWriteability() {
         if (config.isOnHost()) {
             final File outputDir = new File(programPaths.getDockerInspectorOutputPathHost());
@@ -92,7 +96,7 @@ public class Output {
         }
     }
 
-    public File provideBdioFileOutput(final String bdioString, final String outputBdioFilename) throws IOException, IntegrationException {
+    public File provideBdioFileOutput(final SimpleBdioDocument bdioDocument, final String outputBdioFilename) throws IOException, IntegrationException {
         // if user specified an output dir, use that; else use the temp output dir
         File outputDir;
         if (StringUtils.isNotBlank(config.getOutputPath())) {
@@ -102,8 +106,11 @@ public class Output {
             outputDir = new File(programPaths.getDockerInspectorOutputPathHost());
         }
         final File outputBdioFile = new File(outputDir, outputBdioFilename);
+        final FileOutputStream outputBdioStream = new FileOutputStream(outputBdioFile);
         logger.info(String.format("Writing BDIO to %s", outputBdioFile.getAbsolutePath()));
-        FileUtils.write(outputBdioFile, bdioString, StandardCharsets.UTF_8);
+        try (BdioWriter bdioWriter = new BdioWriter(gson, outputBdioStream)) {
+            bdioWriter.writeSimpleBdioDocument(bdioDocument);
+        }
         return outputBdioFile;
     }
 
