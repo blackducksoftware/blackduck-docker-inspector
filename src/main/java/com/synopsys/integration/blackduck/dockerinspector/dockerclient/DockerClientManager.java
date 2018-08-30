@@ -164,9 +164,11 @@ public class DockerClientManager {
         final DockerClient dockerClient = getDockerClient();
         final PullImageCmd pull = dockerClient.pullImageCmd(imageName).withTag(tagName);
         try {
-            pull.exec(new PullImageResultCallback()).awaitSuccess();
+            pull.exec(new PullImageResultCallback()).awaitCompletion();
         } catch (final NotFoundException e) {
             throw new HubIntegrationException(String.format("Pull failed: Image %s:%s not found. Please check the image name/tag. Error: %s", imageName, tagName, e.getMessage()), e);
+        } catch (final InterruptedException e) {
+            throw new HubIntegrationException(String.format("Pull was interrupted: Image %s:%s not found. Error: %s", imageName, tagName, e.getMessage()), e);
         }
         final Image justPulledImage = getLocalImage(dockerClient, imageName, tagName);
         if (justPulledImage == null) {
