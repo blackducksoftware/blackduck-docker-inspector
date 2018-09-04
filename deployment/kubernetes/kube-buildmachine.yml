@@ -6,7 +6,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: build-machine
-  namespace: hub-imageinspector-ws
+  namespace: blackduck-imageinspector
   labels:
     app: build-machine
 spec:
@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: build-machine
-        image: buildmachine:1
+        image: buildmachine:2.0.0
         command: ["bash"]
         args: ["-c", "trap : TERM INT; sleep infinity & wait"]
         volumeMounts:

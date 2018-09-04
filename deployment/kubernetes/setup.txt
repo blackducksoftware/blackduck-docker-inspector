@@ -21,7 +21,7 @@ curl -O https://raw.githubusercontent.com/blackducksoftware/hub-docker-inspector
 mkdir image
 cd image
 curl -O https://raw.githubusercontent.com/blackducksoftware/hub-docker-inspector/master/deployment/kubernetes/Dockerfile
-docker build --tag buildmachine:1 .
+docker build --tag buildmachine:2.0.0 .
 cd ..
 
 # Edit kube-buildmachine.yml: adjust path to volume (search for hostPath)
@@ -34,25 +34,25 @@ kubectl create -f kube-buildmachine.yml
 curl -O https://blackducksoftware.github.io/hub-detect/hub-detect.sh
 chmod +x hub-detect.sh
 
-buildmachinepod=$(kubectl --namespace hub-imageinspector-ws get pods|grep build-machine|cut -d' ' -f1)
-kubectl --namespace hub-imageinspector-ws cp ./hub-detect.sh ${buildmachinepod}:/tmp -c build-machine
+buildmachinepod=$(kubectl --namespace blackduck-imageinspector get pods|grep build-machine|cut -d' ' -f1)
+kubectl --namespace blackduck-imageinspector cp ./hub-detect.sh ${buildmachinepod}:/tmp -c build-machine
 
 # adjust the path in the docker save command:
 docker pull alpine:latest
 docker save -o /your/dir/shared/target/alpine.tar alpine:latest
 
 # To test:
-kubectl --namespace hub-imageinspector-ws exec ${buildmachinepod} -c build-machine -- /tmp/hub-detect.sh --blackduck.hub.offline.mode=true --detect.hub.signature.scanner.disabled=true --detect.docker.tar=/opt/blackduck/shared/target/alpine.tar --detect.docker.passthrough.imageinspector.service.url=http://hub-imageinspector-ws-ubuntu.hub-imageinspector-ws --detect.docker.passthrough.shared.dir.path.local=/opt/blackduck/shared/ --detect.docker.passthrough.shared.dir.path.imageinspector=/opt/blackduck/shared
+kubectl --namespace blackduck-imageinspector exec ${buildmachinepod} -c build-machine -- /tmp/hub-detect.sh --blackduck.hub.offline.mode=true --detect.hub.signature.scanner.disabled=true --detect.docker.tar=/opt/blackduck/shared/target/alpine.tar --detect.docker.passthrough.imageinspector.service.url=http://blackduck-imageinspector-ubuntu.blackduck-imageinspector --detect.docker.passthrough.shared.dir.path.local=/opt/blackduck/shared/ --detect.docker.passthrough.shared.dir.path.imageinspector=/opt/blackduck/shared
 
 # Notes on the detect arguments used in the command above:
 # --blackduck.hub.offline.mode=true # this disables communication with the Hub, to simplify the test
 # --detect.hub.signature.scanner.disabled=true # this disables the signature scanner, to simplify the test
 # --detect.docker.tar=/opt/blackduck/shared/target/alpine.tar # path to docker tarfile, in the shared volume
-# --detect.docker.passthrough.imageinspector.service.url=http://hub-imageinspector-ws-ubuntu.hub-imageinspector-ws # image inspector service url (http://servicename.namespace)
+# --detect.docker.passthrough.imageinspector.service.url=http://blackduck-imageinspector-ubuntu.blackduck-imageinspector # image inspector service url (http://servicename.namespace)
 # --detect.docker.passthrough.shared.dir.path.local=/opt/blackduck/shared/ # build machine's path to shared dir
 # --detect.docker.passthrough.shared.dir.path.imageinspector=/opt/blackduck/shared # image inspector pods' path to shared dir
 
-# You can direct requests to any the three image inspector services (hub-imageinspector-ws-alpine, hub-imageinspector-ws-centos, hub-imageinspector-ws-ubuntu)
+# You can direct requests to any the three image inspector services (blackduck-imageinspector-alpine, blackduck-imageinspector-centos, blackduck-imageinspector-ubuntu)
 # by specifying that service in the --detect.docker.passthrough.imageinspector.service.url argument.
 # For best performance, direct requests to the service that uses the same package manager database
 # format as the images you inspect most frequently:

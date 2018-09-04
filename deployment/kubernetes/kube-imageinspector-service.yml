@@ -5,43 +5,43 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: hub-imageinspector-ws-alpine
-  namespace: hub-imageinspector-ws
+  name: blackduck-imageinspector-alpine
+  namespace: blackduck-imageinspector
   labels:
-    app: hub-imageinspector-ws-alpine
+    app: blackduck-imageinspector-alpine
 spec:
   ports:
   - port: 80
     targetPort: 8080
     protocol: TCP
   selector:
-    app: hub-imageinspector-ws-alpine
+    app: blackduck-imageinspector-alpine
   type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hub-imageinspector-ws-alpine
-  namespace: hub-imageinspector-ws
+  name: blackduck-imageinspector-alpine
+  namespace: blackduck-imageinspector
   labels:
-    app: hub-imageinspector-ws-alpine
+    app: blackduck-imageinspector-alpine
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hub-imageinspector-ws-alpine
+      app: blackduck-imageinspector-alpine
   template:
     metadata:
       labels:
-        app: hub-imageinspector-ws-alpine
+        app: blackduck-imageinspector-alpine
     spec:
       securityContext:
         runAsUser: 1001
       containers:
-      - name: hub-imageinspector-ws-alpine
-        image: blackducksoftware/hub-imageinspector-ws-alpine:2.2.0
+      - name: blackduck-imageinspector-alpine
+        image: blackducksoftware/blackduck-imageinspector-alpine:3.0.0
         command: ["java"]
-        args: ["-jar", "/opt/blackduck/hub-imageinspector-ws/hub-imageinspector-ws.jar", "--server.port=8080", "--current.linux.distro=alpine", "--inspector.url.alpine=http://hub-imageinspector-ws-alpine.hub-imageinspector-ws", "--inspector.url.centos=http://hub-imageinspector-ws-centos.hub-imageinspector-ws", "--inspector.url.ubuntu=http://hub-imageinspector-ws-ubuntu.hub-imageinspector-ws"]
+        args: ["-jar", "/opt/blackduck/blackduck-imageinspector/blackduck-imageinspector.jar", "--server.port=8080", "--current.linux.distro=alpine", "--inspector.url.alpine=http://blackduck-imageinspector-alpine.blackduck-imageinspector", "--inspector.url.centos=http://blackduck-imageinspector-centos.blackduck-imageinspector", "--inspector.url.ubuntu=http://blackduck-imageinspector-ubuntu.blackduck-imageinspector"]
         volumeMounts:
         - name: blackduck-shared-dir
           mountPath: /opt/blackduck/shared
@@ -66,43 +66,43 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: hub-imageinspector-ws-centos
-  namespace: hub-imageinspector-ws
+  name: blackduck-imageinspector-centos
+  namespace: blackduck-imageinspector
   labels:
-    app: hub-imageinspector-ws-centos
+    app: blackduck-imageinspector-centos
 spec:
   ports:
   - port: 80
     targetPort: 8081
     protocol: TCP
   selector:
-    app: hub-imageinspector-ws-centos
+    app: blackduck-imageinspector-centos
   type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hub-imageinspector-ws-centos
-  namespace: hub-imageinspector-ws
+  name: blackduck-imageinspector-centos
+  namespace: blackduck-imageinspector
   labels:
-    app: hub-imageinspector-ws-centos
+    app: blackduck-imageinspector-centos
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hub-imageinspector-ws-centos
+      app: blackduck-imageinspector-centos
   template:
     metadata:
       labels:
-        app: hub-imageinspector-ws-centos
+        app: blackduck-imageinspector-centos
     spec:
       securityContext:
         runAsUser: 1001
       containers:
-      - name: hub-imageinspector-ws-centos
-        image: blackducksoftware/hub-imageinspector-ws-centos:2.2.0
+      - name: blackduck-imageinspector-centos
+        image: blackducksoftware/blackduck-imageinspector-centos:3.0.0
         command: ["java"]
-        args: ["-jar", "/opt/blackduck/hub-imageinspector-ws/hub-imageinspector-ws.jar", "--server.port=8081", "--current.linux.distro=centos", "--inspector.url.alpine=http://hub-imageinspector-ws-alpine.hub-imageinspector-ws", "--inspector.url.centos=http://hub-imageinspector-ws-centos.hub-imageinspector-ws", "--inspector.url.ubuntu=http://hub-imageinspector-ws-ubuntu.hub-imageinspector-ws"]
+        args: ["-jar", "/opt/blackduck/blackduck-imageinspector/blackduck-imageinspector.jar", "--server.port=8081", "--current.linux.distro=centos", "--inspector.url.alpine=http://blackduck-imageinspector-alpine.blackduck-imageinspector", "--inspector.url.centos=http://blackduck-imageinspector-centos.blackduck-imageinspector", "--inspector.url.ubuntu=http://blackduck-imageinspector-ubuntu.blackduck-imageinspector"]
         volumeMounts:
         - name: blackduck-shared-dir
           mountPath: /opt/blackduck/shared
@@ -127,43 +127,43 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: hub-imageinspector-ws-ubuntu
-  namespace: hub-imageinspector-ws
+  name: blackduck-imageinspector-ubuntu
+  namespace: blackduck-imageinspector
   labels:
-    app: hub-imageinspector-ws-ubuntu
+    app: blackduck-imageinspector-ubuntu
 spec:
   ports:
   - port: 80
     targetPort: 8082
     protocol: TCP
   selector:
-    app: hub-imageinspector-ws-ubuntu
+    app: blackduck-imageinspector-ubuntu
   type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hub-imageinspector-ws-ubuntu
-  namespace: hub-imageinspector-ws
+  name: blackduck-imageinspector-ubuntu
+  namespace: blackduck-imageinspector
   labels:
-    app: hub-imageinspector-ws-ubuntu
+    app: blackduck-imageinspector-ubuntu
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hub-imageinspector-ws-ubuntu
+      app: blackduck-imageinspector-ubuntu
   template:
     metadata:
       labels:
-        app: hub-imageinspector-ws-ubuntu
+        app: blackduck-imageinspector-ubuntu
     spec:
       securityContext:
         runAsUser: 1001
       containers:
-      - name: hub-imageinspector-ws-ubuntu
-        image: blackducksoftware/hub-imageinspector-ws-ubuntu:2.2.0
+      - name: blackduck-imageinspector-ubuntu
+        image: blackducksoftware/blackduck-imageinspector-ubuntu:3.0.0
         command: ["java"]
-        args: ["-jar", "/opt/blackduck/hub-imageinspector-ws/hub-imageinspector-ws.jar", "--server.port=8082", "--current.linux.distro=ubuntu", "--inspector.url.alpine=http://hub-imageinspector-ws-alpine.hub-imageinspector-ws", "--inspector.url.centos=http://hub-imageinspector-ws-centos.hub-imageinspector-ws", "--inspector.url.ubuntu=http://hub-imageinspector-ws-ubuntu.hub-imageinspector-ws"]
+        args: ["-jar", "/opt/blackduck/blackduck-imageinspector/blackduck-imageinspector.jar", "--server.port=8082", "--current.linux.distro=ubuntu", "--inspector.url.alpine=http://blackduck-imageinspector-alpine.blackduck-imageinspector", "--inspector.url.centos=http://blackduck-imageinspector-centos.blackduck-imageinspector", "--inspector.url.ubuntu=http://blackduck-imageinspector-ubuntu.blackduck-imageinspector"]
         volumeMounts:
         - name: blackduck-shared-dir
           mountPath: /opt/blackduck/shared
