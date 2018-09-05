@@ -1,5 +1,5 @@
 /**
- * hub-docker-inspector
+ * blackduck-docker-inspector
  *
  * Copyright (C) 2018 Black Duck Software, Inc.
  * http://www.blackducksoftware.com/
@@ -59,7 +59,7 @@ public class ProgramPaths {
     private static final String CONFIG_DIR = "config";
 
     private static final String CONTAINER_PROGRAM_DIR = String.format("%s/blackduck-docker-inspector/", Config.CONTAINER_BLACKDUCK_DIR);
-    private static final String CONTAINER_JAR_PATH = String.format("%s/hub-docker-inspector.jar", CONTAINER_PROGRAM_DIR);
+    private static final String CONTAINER_JAR_PATH = String.format("%s/blackduck-docker-inspector.jar", CONTAINER_PROGRAM_DIR);
 
     private String dockerInspectorPgmDirPathHost;
     private String dockerInspectorPgmDirPathContainer;

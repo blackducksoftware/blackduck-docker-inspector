@@ -70,8 +70,8 @@ public class IiClientContainersStartedAsNeededTest {
         Mockito.when(restRequestor.executeGetBdioRequest(Mockito.any(RestConnection.class), Mockito.any(URI.class), Mockito.anyString(), Mockito.anyString(),
                 Mockito.anyString(), Mockito.anyString(), Mockito.anyBoolean())).thenReturn(response);
 
-        Mockito.when(containerPaths.getContainerPathToOutputDir()).thenReturn("/opt/blackduck/hub-imageinspector-ws/shared/output");
-        Mockito.when(inspectorImages.getInspectorImageName(Mockito.any(OperatingSystemEnum.class))).thenReturn("blackduck/hub-imageinspector-ws");
+        Mockito.when(containerPaths.getContainerPathToOutputDir()).thenReturn("/opt/blackduck/blackduck-imageinspector/shared/output");
+        Mockito.when(inspectorImages.getInspectorImageName(Mockito.any(OperatingSystemEnum.class))).thenReturn("blackduck/blackduck-imageinspector");
         Mockito.when(inspectorImages.getInspectorImageTag(Mockito.any(OperatingSystemEnum.class))).thenReturn("1.1.1");
 
         assertEquals(true, imageInspectorClientContainersStartedAsNeeded.isApplicable());

@@ -40,7 +40,7 @@ public class IntegrationTestCommon {
         final List<String> cmd = new ArrayList<>();
         cmd.add("build/blackduck-docker-inspector.sh");
         cmd.add("--upload.bdio=false");
-        cmd.add(String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", programVersion.getProgramVersion()));
+        cmd.add(String.format("--jar.path=build/libs/blackduck-docker-inspector-%s.jar", programVersion.getProgramVersion()));
         cmd.add(String.format("--output.path=%s/output", TestUtils.TEST_DIR_REL_PATH));
         cmd.add("--output.include.containerfilesystem=true");
         cmd.add("--blackduck.always.trust.cert=true");
@@ -114,7 +114,7 @@ public class IntegrationTestCommon {
         final List<String> cmd = new ArrayList<>();
         cmd.add("build/blackduck-docker-inspector.sh");
         cmd.add("--upload.bdio=false");
-        cmd.add(String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", programVersion.getProgramVersion()));
+        cmd.add(String.format("--jar.path=build/libs/blackduck-docker-inspector-%s.jar", programVersion.getProgramVersion()));
         cmd.add(String.format("--output.path=%s/output", TestUtils.TEST_DIR_REL_PATH));
         cmd.add("--output.include.containerfilesystem=true");
         cmd.add("--blackduck.always.trust.cert=true");

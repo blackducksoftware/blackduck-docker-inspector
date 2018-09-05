@@ -54,7 +54,8 @@ public class ArgsWithSpacesTest {
         pgmVerObj.init();
         final String programVersion = pgmVerObj.getProgramVersion();
         final List<String> partialCmd = Arrays.asList("build/blackduck-docker-inspector.sh", "--upload.bdio=false", String.format("--blackduck.username=%s", USERNAME), String.format("--blackduck.project.name=%s", PROJECT_NAME),
-                String.format("--blackduck.project.version=%s", PROJECT_VERSION), String.format("--jar.path=build/libs/hub-docker-inspector-%s.jar", programVersion), String.format("--output.path=%s/output", TestUtils.TEST_DIR_REL_PATH),
+                String.format("--blackduck.project.version=%s", PROJECT_VERSION), String.format("--jar.path=build/libs/blackduck-docker-inspector-%s.jar", programVersion),
+                String.format("--output.path=%s/output", TestUtils.TEST_DIR_REL_PATH),
                 "--output.include.dockertarfile=true",
                 "--output.include.containerfilesystem=true", "--blackduck.always.trust.cert=true");
         // Arrays.asList returns a fixed size list; need a variable sized list

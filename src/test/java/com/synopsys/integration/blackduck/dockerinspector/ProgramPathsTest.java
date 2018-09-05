@@ -26,12 +26,12 @@ public class ProgramPathsTest {
 
     @Test
     public void testReleasedVersion() throws IllegalArgumentException, IllegalAccessException, IOException {
-        doTest("hub-docker-1.0.0.jar", true);
+        doTest("blackduck-docker-inspector-1.0.0.jar", true);
     }
 
     @Test
     public void testSnapshotVersion() throws IllegalArgumentException, IllegalAccessException, IOException {
-        doTest("hub-docker-0.0.1-SNAPSHOT.jar", false);
+        doTest("blackduck-docker-inspector-0.0.1-SNAPSHOT.jar", false);
     }
 
     private void doTest(final String jarFileName, final boolean prefixCodeLocationName) throws IllegalArgumentException, IllegalAccessException, IOException {

@@ -1,5 +1,5 @@
 /**
- * hub-docker-inspector
+ * blackduck-docker-inspector
  *
  * Copyright (C) 2018 Black Duck Software, Inc.
  * http://www.blackducksoftware.com/
@@ -71,7 +71,7 @@ public class UsageFormatter {
             usage.add(usageLine.toString());
         }
         usage.add("");
-        usage.add("Documentation: https://blackducksoftware.atlassian.net/wiki/spaces/INTDOCS/pages/48435867/Hub+Docker+Inspector");
+        usage.add("Documentation: https://blackducksoftware.atlassian.net/wiki/spaces/INTDOCS/pages/48435867/Black+Duck+Docker+Inspector");
         return usage;
     }
 }

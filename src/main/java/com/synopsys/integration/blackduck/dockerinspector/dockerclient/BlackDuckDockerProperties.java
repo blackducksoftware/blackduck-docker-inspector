@@ -1,5 +1,5 @@
 /**
- * hub-docker-inspector
+ * blackduck-docker-inspector
  *
  * Copyright (C) 2018 Black Duck Software, Inc.
  * http://www.blackducksoftware.com/
@@ -61,7 +61,7 @@ class BlackDuckDockerProperties {
     }
 
     private String getValueObscuredIfSensitive(final String key, final String value) {
-        if ((!StringUtils.isBlank(value)) && (key.endsWith(".password"))) {
+        if (!StringUtils.isBlank(value) && key.endsWith(".password")) {
             return "********";
         }
         return value;

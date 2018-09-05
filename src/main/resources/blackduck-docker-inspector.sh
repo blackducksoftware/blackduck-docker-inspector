@@ -4,8 +4,7 @@
 # to inspect the given Docker image.
 #
 # Run this script from the directory that contains the application.properties, configured
-# with your Hub connection details (blackduck.url, blackduck.username, and blackduck.password),
-# and Docker Hub connection details (docker.registry.username and docker.registry.password).
+# with any properties you're not setting via the command line.
 
 # To override the dir to which blackduck-docker-inspector.sh will download files,
 # set DOCKER_INSPECTOR_JAR_DIR
@@ -29,10 +28,10 @@ JAVACMD=${JAVACMD:-java}
 DOCKER_INSPECTOR_JAR_PATH=${DOCKER_INSPECTOR_JAR_PATH:-}
 
 #Getting the proxy settings from the environment
-PROXY_HOST=${BLACKDUCK_HUB_PROXY_HOST}
-PROXY_PORT=${BLACKDUCK_HUB_PROXY_PORT}
-PROXY_USERNAME=${BLACKDUCK_HUB_PROXY_USERNAME}
-PROXY_PASSWORD=${BLACKDUCK_HUB_PROXY_PASSWORD}
+PROXY_HOST=${BLACKDUCK_PROXY_HOST}
+PROXY_PORT=${BLACKDUCK_PROXY_PORT}
+PROXY_USERNAME=${BLACKDUCK_PROXY_USERNAME}
+PROXY_PASSWORD=${BLACKDUCK_PROXY_PASSWORD}
 
 #Getting the proxy settings from the command line switches
 for i in "$@"
@@ -73,7 +72,7 @@ fi
 ##################
 # Initialize
 ##################
-latestCommitIdFileUrl="https://blackducksoftware.github.io/hub-docker-inspector/latest-commit-id.txt"
+latestCommitIdFileUrl="https://blackducksoftware.github.io/blackduck-docker-inspector/latest-commit-id.txt"
 localCommitIdFile="${DOCKER_INSPECTOR_JAR_DIR}/blackduck-docker-inspector-latest-commit-id.txt"
 currentVersionCommitId=""
 version="@VERSION@"
@@ -82,9 +81,9 @@ encodingSetting="-Dfile.encoding=UTF-8"
 userSpecifiedJarPath=""
 jarPathSpecified=false
 latestReleaseVersion=
-hubUsernameArgument=""
-hubProjectNameArgument=""
-hubProjectVersionArgument=""
+blackduckUsernameArgument=""
+blackduckProjectNameArgument=""
+blackduckProjectVersionArgument=""
 dockerTarArgument=""
 
 function printUsage() {
@@ -94,16 +93,15 @@ function printUsage() {
     echo "  --<property name>=<value>"
     echo ""
     echo "Run this command from the directory that contains the application.properties,"
-    echo "configured with your Hub connection details (blackduck.url, blackduck.username, and blackduck.password),"
-	echo "and Docker Hub connection details (docker.registry.username and docker.registry.password)."
+    echo "configured with any properties not set via the command line."
 	echo ""
-	echo "For greater security, the Hub password can be set via the environment variable BD_HUB_PASSWORD"
+	echo "For greater security, the Black Duck password can be set via the environment variable BD_PASSWORD"
 	echo ""
 	echo "For example:"
-	echo "  export BD_HUB_PASSWORD=mypassword"
+	echo "  export BD_PASSWORD=mypassword"
 	echo "  $0 --blackduck.url=http://blackduck.mydomain.com:8080/ --blackduck.username=myusername ubuntu"
 	echo ""
-	echo "Documentation: https://blackducksoftware.atlassian.net/wiki/spaces/INTDOCS/pages/48435867/Hub+Docker+Inspector"
+	echo "Documentation: https://blackducksoftware.atlassian.net/wiki/spaces/INTDOCS/pages/48435867/Black+Duck+Docker+Inspector"
 }
 
 # Write message to stdout
@@ -142,8 +140,8 @@ function deriveJarDetails() {
 	# If the user specified a version: get that
 	if [ -z "${jarVersion}" ]; then
 	  deriveLatestReleaseVersion
-	  latestReleasedJarUrl="https://test-repo.blackducksoftware.com/artifactory/bds-integrations-release/com/synopsys/integration/hub-docker-inspector/${latestReleaseVersion}/hub-docker-inspector-${latestReleaseVersion}.jar"
-	  latestReleasedAirGapZipUrl="https://test-repo.blackducksoftware.com/artifactory/bds-integrations-release/com/synopsys/integration/hub-docker-inspector/${latestReleaseVersion}/hub-docker-inspector-${latestReleaseVersion}-air-gap.zip"
+	  latestReleasedJarUrl="https://test-repo.blackducksoftware.com/artifactory/bds-integrations-release/com/synopsys/integration/blackduck-docker-inspector/${latestReleaseVersion}/blackduck-docker-inspector-${latestReleaseVersion}.jar"
+	  latestReleasedAirGapZipUrl="https://test-repo.blackducksoftware.com/artifactory/bds-integrations-release/com/synopsys/integration/blackduck-docker-inspector/${latestReleaseVersion}/blackduck-docker-inspector-${latestReleaseVersion}-air-gap.zip"
       selectedJarUrl="${latestReleasedJarUrl}"
       selectedAirGapUrl="${latestReleasedAirGapZipUrl}"
       deriveLatestReleasedFilename
@@ -153,17 +151,17 @@ function deriveJarDetails() {
       downloadedJarPath="${DOCKER_INSPECTOR_JAR_DIR}/${selectedJarFilename}"
       downloadedAirGapZipPath="${DOCKER_INSPECTOR_JAR_DIR}/${selectedAirGapZipFilename}"
     else
-      log "Will download hub-docker-inspector-${jarVersion}.jar"
+      log "Will download blackduck-docker-inspector-${jarVersion}.jar"
       rm -f "${localCommitIdFile}" # Local commit ID won't apply to this jar
       if [[ $jarVersion == *"SNAPSHOT"* ]]; then
       	selectedRepoKey="bds-integrations-snapshot"
       else
       	selectedRepoKey="bds-integrations-release"
       fi
-      selectedJarUrl="https://test-repo.blackducksoftware.com/artifactory/${selectedRepoKey}/com/synopsys/integration/hub-docker-inspector/${jarVersion}/hub-docker-inspector-${jarVersion}.jar"
-      selectedAirGapZipUrl="https://test-repo.blackducksoftware.com/artifactory/${selectedRepoKey}/com/synopsys/integration/hub-docker-inspector/${jarVersion}/hub-docker-inspector-${jarVersion}-air-gap.zip"
-      downloadedJarPath="${DOCKER_INSPECTOR_JAR_DIR}/hub-docker-inspector-${jarVersion}.jar"
-      downloadedAirGapZipPath="${DOCKER_INSPECTOR_JAR_DIR}/hub-docker-inspector-${jarVersion}-air-gap.zip"
+      selectedJarUrl="https://test-repo.blackducksoftware.com/artifactory/${selectedRepoKey}/com/synopsys/integration/blackduck-docker-inspector/${jarVersion}/blackduck-docker-inspector-${jarVersion}.jar"
+      selectedAirGapZipUrl="https://test-repo.blackducksoftware.com/artifactory/${selectedRepoKey}/com/synopsys/integration/blackduck-docker-inspector/${jarVersion}/blackduck-docker-inspector-${jarVersion}-air-gap.zip"
+      downloadedJarPath="${DOCKER_INSPECTOR_JAR_DIR}/blackduck-docker-inspector-${jarVersion}.jar"
+      downloadedAirGapZipPath="${DOCKER_INSPECTOR_JAR_DIR}/blackduck-docker-inspector-${jarVersion}-air-gap.zip"
     fi
     log "Selected jar: ${selectedJarUrl}"
     log "  local path: ${downloadedJarPath}"
@@ -209,7 +207,7 @@ function prepareLatestJar() {
 #
 function deriveLatestReleaseVersion() {
 	if [[ -z "${latestReleaseVersion}" ]]; then
-		latestReleaseVersion=$(curl ${DOCKER_INSPECTOR_CURL_OPTS} ${CURL_PROXY_OPTIONS} https://test-repo.blackducksoftware.com/artifactory/bds-integrations-release/com/synopsys/integration/hub-docker-inspector/maven-metadata.xml | grep latest | sed -e 's@<latest>@@' -e 's@</latest>@@' -e 's/^[ \t]*//')
+		latestReleaseVersion=$(curl ${DOCKER_INSPECTOR_CURL_OPTS} ${CURL_PROXY_OPTIONS} https://test-repo.blackducksoftware.com/artifactory/bds-integrations-release/com/synopsys/integration/blackduck-docker-inspector/maven-metadata.xml | grep latest | sed -e 's@<latest>@@' -e 's@</latest>@@' -e 's/^[ \t]*//')
 	fi
 	echo "Latest release version: ${latestReleaseVersion}"
 }
@@ -218,7 +216,7 @@ function deriveLatestReleaseVersion() {
 function deriveLatestReleasedFilename() {
 	log "Deriving name of latest released jar file"
 	deriveLatestReleaseVersion
-    latestReleasedFilename=hub-docker-inspector-${latestReleaseVersion}.jar
+    latestReleasedFilename=blackduck-docker-inspector-${latestReleaseVersion}.jar
     log "Latest released jar filename: ${latestReleasedFilename}"
 }
 
@@ -226,7 +224,7 @@ function deriveLatestReleasedFilename() {
 function deriveLatestReleasedAirGapZipFilename() {
 	log "Deriving name of latest released AirGap Zip file"
 	deriveLatestReleaseVersion
-    latestReleasedAirGapZipFilename=hub-docker-inspector-${latestReleaseVersion}-air-gap.zip
+    latestReleasedAirGapZipFilename=blackduck-docker-inspector-${latestReleaseVersion}-air-gap.zip
     log "Latest released AirGap Zip filename: ${latestReleasedAirGapZipFilename}"
 }
 
@@ -252,19 +250,19 @@ function preProcessOptions() {
 			jarPathSpecified=true
 		elif [[ "$cmdlinearg" == --blackduck.username=* ]]
                 then
-                        hubUsername=$(echo "$cmdlinearg" | cut -d '=' -f 2)
-                        hubUsernameEscaped=$(escapeSpaces "${hubUsername}")
-                        hubUsernameArgument="--blackduck.username=${hubUsernameEscaped}"
+                        blackduckUsername=$(echo "$cmdlinearg" | cut -d '=' -f 2)
+                        blackduckUsernameEscaped=$(escapeSpaces "${blackduckUsername}")
+                        blackduckUsernameArgument="--blackduck.username=${blackduckUsernameEscaped}"
                 elif [[ "$cmdlinearg" == --blackduck.project.name=* ]]
                 then
-                        hubProjectName=$(echo "$cmdlinearg" | cut -d '=' -f 2)
-                        hubProjectNameEscaped=$(escapeSpaces "${hubProjectName}")
-                        hubProjectNameArgument="--blackduck.project.name=${hubProjectNameEscaped}"
+                        blackduckProjectName=$(echo "$cmdlinearg" | cut -d '=' -f 2)
+                        blackduckProjectNameEscaped=$(escapeSpaces "${blackduckProjectName}")
+                        blackduckProjectNameArgument="--blackduck.project.name=${blackduckProjectNameEscaped}"
                 elif [[ "$cmdlinearg" == --blackduck.project.version=* ]]
                 then
-                        hubProjectVersion=$(echo "$cmdlinearg" | cut -d '=' -f 2)
-                        hubProjectVersionEscaped=$(escapeSpaces "${hubProjectVersion}")
-                        hubProjectVersionArgument="--blackduck.project.version=${hubProjectVersionEscaped}"
+                        blackduckProjectVersion=$(echo "$cmdlinearg" | cut -d '=' -f 2)
+                        blackduckProjectVersionEscaped=$(escapeSpaces "${blackduckProjectVersion}")
+                        blackduckProjectVersionArgument="--blackduck.project.version=${blackduckProjectVersionEscaped}"
                 elif [[ "$cmdlinearg" == --docker.tar=* ]]
                 then
                         dockerTar=$(echo "$cmdlinearg" | cut -d '=' -f 2)
@@ -386,7 +384,7 @@ fi
 log "jarPath: ${jarPath}"
 log "Options: ${options[*]}"
 log "Jar dir: ${DOCKER_INSPECTOR_JAR_DIR}"
-${JAVACMD} "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" ${options[*]} ${hubUsernameArgument} ${hubProjectNameArgument} ${hubProjectVersionArgument} ${dockerTarArgument}
+${JAVACMD} "${encodingSetting}" ${DOCKER_INSPECTOR_JAVA_OPTS} -jar "${jarPath}" ${options[*]} ${blackduckUsernameArgument} ${blackduckProjectNameArgument} ${blackduckProjectVersionArgument} ${dockerTarArgument}
 status=$?
 log "Return code: ${status}"
 exit ${status}
