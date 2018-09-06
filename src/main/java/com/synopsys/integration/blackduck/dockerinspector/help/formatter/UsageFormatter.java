@@ -71,7 +71,7 @@ public class UsageFormatter {
             usage.add(usageLine.toString());
         }
         usage.add("");
-        usage.add("Documentation: https://blackducksoftware.atlassian.net/wiki/spaces/INTDOCS/pages/48435867/Black+Duck+Docker+Inspector");
+        usage.add("Documentation is under Package Managers > Black Duck Docker Inspector at: https://blackducksoftware.atlassian.net/wiki/spaces/INTDOCS");
         return usage;
     }
 }
