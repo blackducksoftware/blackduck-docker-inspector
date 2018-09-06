@@ -1,6 +1,6 @@
 final String airGapFolder = "${buildDir}/airgap"
 final String airGapZipName = "${project.name}-${version}-air-gap.zip"
-final String artifactoryIntegrationPath = "com/blackducksoftware/integration"
+final String artifactoryIntegrationPath = "com/synopsys/integration"
 
 task pullSaveInspectorImages() {
     doLast {
