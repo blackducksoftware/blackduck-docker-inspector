@@ -101,7 +101,7 @@ function printUsage() {
 	echo "  export BD_PASSWORD=mypassword"
 	echo "  $0 --blackduck.url=http://blackduck.mydomain.com:8080/ --blackduck.username=myusername ubuntu"
 	echo ""
-	echo "Documentation: https://blackducksoftware.atlassian.net/wiki/spaces/INTDOCS/pages/48435867/Black+Duck+Docker+Inspector"
+	echo "Documentation is under Package Managers > Black Duck Docker Inspector at: https://blackducksoftware.atlassian.net/wiki/spaces/INTDOCS"
 }
 
 # Write message to stdout
