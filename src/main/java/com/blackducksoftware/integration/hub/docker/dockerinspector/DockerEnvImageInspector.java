@@ -110,7 +110,7 @@ public class DockerEnvImageInspector {
         int returnCode = -1;
         final DissectedImage dissectedImage = new DissectedImage();
         try {
-            logMsgAboutRestClientMode();
+            logDeprecatedMsg();
             if (!initAndValidate(config)) {
                 System.exit(0);
             }
@@ -140,18 +140,14 @@ public class DockerEnvImageInspector {
         System.exit(returnCode);
     }
 
-    private void logMsgAboutRestClientMode() {
-        if (config.isOnHost() && !config.isImageInspectorServiceStart() && StringUtils.isBlank(config.getImageInspectorUrl())) {
+    private void logDeprecatedMsg() {
+        if (config.isOnHost()) {
             final StringBuilder sb = new StringBuilder();
-            sb.append("\n========\n");
-            sb.append("Please start using 'HTTP client mode' (see the Docker Inspector HTTP Client Mode page in the Hub Docker Inspector documentation)\n");
-            sb.append("to help ensure a smooth transition to future versions. ");
-            sb.append("HTTP client mode will eventually replace the current default Docker exec mode.\n");
-            sb.append("To use HTTP client mode now:\n");
-            sb.append("\tIf you are using Docker Inspector directly: set property imageinspector.service.start=true\n");
-            sb.append("\tIf you are using Detect: set property detect.docker.passthrough.imageinspector.service.start=true\n");
-            sb.append("See the documentation for information on how to avoid port conflicts.\n");
-            sb.append("========");
+            sb.append("\n\n========\n");
+            sb.append("This version of the Docker Inspector is out of date, and will not auto-update to the latest.\n");
+            sb.append("Please start using Black Duck Docker Inspector 7 or later.\n");
+            sb.append("For details see https://blackducksoftware.atlassian.net/wiki/spaces/INTDOCS/pages/48435867/Black+Duck+Docker+Inspector\n");
+            sb.append("========\n");
             logger.warn(sb.toString());
         }
     }
