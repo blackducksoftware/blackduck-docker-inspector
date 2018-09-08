@@ -31,7 +31,7 @@ repositories {
     mavenCentral()
 }
 
-version = '6.3.2'
+version = '6.3.3-SNAPSHOT'
 project.ext.inspectorImageFamily = "hub-imageinspector-ws"
 project.ext.inspectorImageVersion = "2.2.1"
 
