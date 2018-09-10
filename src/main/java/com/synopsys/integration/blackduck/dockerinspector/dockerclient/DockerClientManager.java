@@ -248,8 +248,9 @@ public class DockerClientManager {
 
         logger.debug(String.format("Creating container %s from image %s", containerName, imageNameTag));
         final String imageInspectorOsName = inspectorOs.name();
-        final String cmd = String.format("java -jar %s --server.port=%d --current.linux.distro=%s --inspector.url.alpine=%s --inspector.url.centos=%s --inspector.url.ubuntu=%s",
+        final String cmd = String.format("java -jar %s --logging.level.com.synopsys=%s --server.port=%d --current.linux.distro=%s --inspector.url.alpine=%s --inspector.url.centos=%s --inspector.url.ubuntu=%s",
                 jarPath,
+                getLoggingLevelString(),
                 containerPort,
                 imageInspectorOsName, inspectorUrlAlpine, inspectorUrlCentos, inspectorUrlUbuntu);
         logger.debug(String.format("Starting service with cmd: %s", cmd));
@@ -313,6 +314,16 @@ public class DockerClientManager {
             callback.close();
         } catch (final IOException e) {
         }
+    }
+
+    private String getLoggingLevelString() {
+        if (logger.isTraceEnabled()) {
+            return "TRACE";
+        }
+        if (logger.isDebugEnabled()) {
+            return "DEBUG";
+        }
+        return "INFO";
     }
 
     private static class StringBuilderLogReader extends LogContainerResultCallback {
