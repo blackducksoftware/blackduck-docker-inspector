@@ -144,6 +144,7 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
                 logger.info(String.format("Sending getBdio request to: %s (%s)", imageInspectorUri.toString(), inspectorOs.name()));
                 response = restRequestor.executeGetBdioRequest(restConnection, imageInspectorUri, containerPathToInputDockerTarfile,
                         givenImageRepo, givenImageTag, containerPathToOutputFileSystemFile, cleanup);
+                logServiceLogIfDebug(serviceContainerDetails.getContainerId());
             } catch (final IntegrationException e) {
                 logServiceError(serviceContainerDetails.getContainerId());
                 throw e;
@@ -194,12 +195,19 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
     }
 
     private void logServiceError(final String correctedContainerId) {
-        if (logger.isDebugEnabled()) {
-            dockerClientManager.logServiceLogAsDebug(correctedContainerId);
-        } else {
+        final boolean serviceLogLogged = logServiceLogIfDebug(correctedContainerId);
+        if (!serviceLogLogged) {
             logger.error(String.format("Request to image inspector service failed. To see image inspector service logs, set the Docker Inspector logging level to DEBUG, or execute the following command: 'docker logs %s'",
                     correctedContainerId));
         }
+    }
+
+    private boolean logServiceLogIfDebug(final String correctedContainerId) {
+        if (logger.isDebugEnabled()) {
+            dockerClientManager.logServiceLogAsDebug(correctedContainerId);
+            return true;
+        }
+        return false;
     }
 
     private int deriveTimeoutSeconds() {
