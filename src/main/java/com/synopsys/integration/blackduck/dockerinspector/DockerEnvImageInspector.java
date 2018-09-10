@@ -103,15 +103,18 @@ public class DockerEnvImageInspector {
     @PostConstruct
     public void inspectImage() {
         int returnCode = -1;
+        // TODO: dissectedImage is only used in docker exec mode
         final DissectedImage dissectedImage = new DissectedImage();
         try {
             if (!initAndValidate(config)) {
                 System.exit(0);
             }
             try {
+                // TODO: This choice goes away when docker exec mode goes away
                 final Inspector inspector = chooseInspector();
                 returnCode = inspector.getBdio(dissectedImage);
             } catch (final PkgMgrDataNotFoundException e) {
+                // TODO: This exception is only thrown in docker exec mode
                 logger.info("Pkg mgr not found; generating empty BDIO file");
                 final ImageInfoDerived imageInfoDerived = imageInspector.generateEmptyBdio(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), config.getBlackDuckProjectName(),
                         config.getBlackDuckProjectVersion(), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs(), config.getBlackDuckCodelocationPrefix());

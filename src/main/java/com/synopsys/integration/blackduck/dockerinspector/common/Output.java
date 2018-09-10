@@ -81,6 +81,7 @@ public class Output {
     private Gson gson;
 
     public void ensureWriteability() {
+        // TODO all isOnHost tests go away when docker exec mode goes away
         if (config.isOnHost()) {
             final File outputDir = new File(programPaths.getDockerInspectorOutputPathHost());
             final boolean dirCreated = outputDir.mkdirs();
@@ -90,6 +91,7 @@ public class Output {
         }
     }
 
+    // TODO this becomes a private method when docker exec mode goes away
     public void provideOutput() throws IOException {
         if (config.isOnHost()) {
             copyOutputToUserOutputDir();
@@ -114,12 +116,14 @@ public class Output {
         return outputBdioFile;
     }
 
+    // TODO This method is only used in docker exec mode
     public void writeBdioFile(final DissectedImage dissectedImage, final ImageInfoDerived imageInfoDerived) throws FileNotFoundException, IOException {
         final File bdioFile = imageInspector.writeBdioFile(new File(programPaths.getDockerInspectorOutputPath()), imageInfoDerived);
         logger.info(String.format("BDIO File generated: %s", bdioFile.getAbsolutePath()));
         dissectedImage.setBdioFilename(bdioFile.getName());
     }
 
+    // TODO This method is only used in docker exec mode
     public void uploadBdio(final DissectedImage dissectedImage) throws IntegrationException {
         if (config.isUploadBdio()) {
             logger.info("Uploading BDIO to Black Duck");
@@ -127,6 +131,7 @@ public class Output {
         }
     }
 
+    // TODO this method is only used in docker exec mode
     public void createContainerFileSystemTarIfRequested(final File targetImageFileSystemRootDir) throws IOException, CompressorException {
         if (config.isOutputIncludeContainerfilesystem()) {
             logger.info("Including container file system in output");
@@ -140,6 +145,7 @@ public class Output {
         }
     }
 
+    // TODO for docker exec mode only
     public void cleanUp(final Future<String> deferredCleanup) {
         if (config.isOnHost() && config.isCleanupWorkingDir()) {
             cleanupWorkingDirs();
@@ -156,6 +162,7 @@ public class Output {
         }
     }
 
+    // TODO docker exec mode only
     public int reportResultsPkgMgrDataNotFound(final DissectedImage dissectedImage) throws IOException, IntegrationException {
         reportResult(null, null, null,
                 dissectedImage.getDockerTarFile() == null ? "" : dissectedImage.getDockerTarFile().getName(), dissectedImage.getBdioFilename(), true);
@@ -163,6 +170,7 @@ public class Output {
         return 0;
     }
 
+    // TODO docker exec mode only
     public int reportResults(final DissectedImage dissectedImage) throws IOException, IntegrationException {
         final int returnCode = reportResult(dissectedImage.getTargetOs(), dissectedImage.getRunOnImageName(), dissectedImage.getRunOnImageTag(),
                 dissectedImage.getDockerTarFile() == null ? "" : dissectedImage.getDockerTarFile().getName(), dissectedImage.getBdioFilename(), false);
@@ -172,6 +180,7 @@ public class Output {
         return returnCode;
     }
 
+    // TODO docker exec mode only
     private void cleanupWorkingDirs() {
         logger.debug(String.format("Removing %s, %s, %s", programPaths.getDockerInspectorWorkingDirPathHost(), programPaths.getDockerInspectorTargetDirPathHost(), programPaths.getDockerInspectorOutputPathHost()));
         try {
