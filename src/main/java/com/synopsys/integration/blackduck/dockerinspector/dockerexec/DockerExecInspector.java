@@ -120,8 +120,16 @@ public class DockerExecInspector implements Inspector {
         }
     }
 
+    private OperatingSystemEnum detectOperatingSystem(final String operatingSystem) {
+        OperatingSystemEnum osEnum = null;
+        if (StringUtils.isNotBlank(operatingSystem)) {
+            osEnum = OperatingSystemEnum.determineOperatingSystem(operatingSystem);
+        }
+        return osEnum;
+    }
+
     private void checkForGivenTargetOs(final Config config, final DissectedImage dissectedImage) {
-        dissectedImage.setTargetOs(imageInspector.detectOperatingSystem(config.getLinuxDistro()));
+        dissectedImage.setTargetOs(detectOperatingSystem(config.getLinuxDistro()));
     }
 
     private void constructContainerFileSystem(final Config config, final DissectedImage dissectedImage) throws IOException, IntegrationException {
@@ -168,7 +176,7 @@ public class DockerExecInspector implements Inspector {
             }
             logger.info(String.format("Target image tarfile: %s; target OS: %s", dissectedImage.getDockerTarFile().getAbsolutePath(), dissectedImage.getTargetOs().toString()));
             final ImageInfoDerived imageInfoDerived = imageInspector.generateBdioFromImageFilesDir(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), config.getBlackDuckProjectName(),
-                    config.getBlackDuckProjectVersion(), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), dissectedImage.getTargetOs(), config.getBlackDuckCodelocationPrefix());
+                    config.getBlackDuckProjectVersion(), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), config.getBlackDuckCodelocationPrefix(), false);
             output.writeBdioFile(dissectedImage, imageInfoDerived);
             output.createContainerFileSystemTarIfRequested(dissectedImage.getTargetImageFileSystemRootDir());
         }
