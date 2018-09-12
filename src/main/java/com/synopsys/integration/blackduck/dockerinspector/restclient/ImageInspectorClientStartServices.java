@@ -105,13 +105,14 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
     }
 
     @Override
-    public String getBdio(final String hostPathToTarfile, final String containerPathToInputDockerTarfile, final String givenImageRepo, final String givenImageTag, final String containerPathToOutputFileSystemFile, final boolean cleanup)
+    public String getBdio(final String hostPathToTarfile, final String containerPathToInputDockerTarfile, final String givenImageRepo, final String givenImageTag, final String containerPathToOutputFileSystemFile, final boolean cleanup,
+            final boolean forgeDerivedFromDistro)
             throws IntegrationException {
         // First, try the default inspector service (which will return either the BDIO, or a redirect)
         final ImageInspectorOsEnum inspectorOs = ImageInspectorOsEnum.determineOperatingSystem(config.getImageInspectorDefaultDistro());
         final URI imageInspectorBaseUri = deriveInspectorBaseUri(imageInspectorServices.getDefaultImageInspectorHostPortBasedOnDistro());
         final Predicate<Integer> initialRequestFailureCriteria = statusCode -> statusCode != RestConstants.OK_200 && statusCode != RestConstants.MOVED_TEMP_302 && statusCode != RestConstants.MOVED_PERM_301;
-        final SimpleResponse response = getResponseFromService(imageInspectorBaseUri, inspectorOs, containerPathToInputDockerTarfile, givenImageRepo, givenImageTag, containerPathToOutputFileSystemFile, cleanup,
+        final SimpleResponse response = getResponseFromService(imageInspectorBaseUri, inspectorOs, containerPathToInputDockerTarfile, givenImageRepo, givenImageTag, containerPathToOutputFileSystemFile, cleanup, forgeDerivedFromDistro,
                 initialRequestFailureCriteria);
         if (response.getStatusCode() == RestConstants.OK_200) {
             return response.getBody();
@@ -126,14 +127,14 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         final Predicate<Integer> correctedRequestFailureCriteria = statusCode -> statusCode != RestConstants.OK_200;
         final SimpleResponse responseFromCorrectedContainer = getResponseFromService(correctedImageInspectorBaseUri, correctedInspectorOs, containerPathToInputDockerTarfile, givenImageRepo, givenImageTag,
                 containerPathToOutputFileSystemFile,
-                cleanup,
+                cleanup, forgeDerivedFromDistro,
                 correctedRequestFailureCriteria);
         return responseFromCorrectedContainer.getBody();
     }
 
     private SimpleResponse getResponseFromService(final URI imageInspectorUri, final ImageInspectorOsEnum inspectorOs, final String containerPathToInputDockerTarfile,
             final String givenImageRepo, final String givenImageTag,
-            final String containerPathToOutputFileSystemFile, final boolean cleanup, final Predicate<Integer> failureTest) throws IntegrationException, HubIntegrationException {
+            final String containerPathToOutputFileSystemFile, final boolean cleanup, final boolean forgeDerivedFromDistro, final Predicate<Integer> failureTest) throws IntegrationException, HubIntegrationException {
         SimpleResponse response = null;
         ContainerDetails serviceContainerDetails = null;
         RestConnection restConnection = null;
@@ -143,7 +144,7 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
             try {
                 logger.info(String.format("Sending getBdio request to: %s (%s)", imageInspectorUri.toString(), inspectorOs.name()));
                 response = restRequestor.executeGetBdioRequest(restConnection, imageInspectorUri, containerPathToInputDockerTarfile,
-                        givenImageRepo, givenImageTag, containerPathToOutputFileSystemFile, cleanup);
+                        givenImageRepo, givenImageTag, containerPathToOutputFileSystemFile, cleanup, forgeDerivedFromDistro);
                 logServiceLogIfDebug(serviceContainerDetails.getContainerId());
             } catch (final IntegrationException e) {
                 logServiceError(serviceContainerDetails.getContainerId());

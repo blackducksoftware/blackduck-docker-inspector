@@ -42,6 +42,7 @@ public class RestRequestor {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private static final String LOGGING_LEVEL_QUERY_PARAM = "logginglevel";
     private static final String CLEANUP_QUERY_PARAM = "cleanup";
+    private static final String FORGE_DERIVED_FROM_DISTRO_QUERY_PARAM = "forgederivedfromdistro";
     private static final String RESULTING_CONTAINER_FS_PATH_QUERY_PARAM = "resultingcontainerfspath";
     private static final String IMAGE_REPO_QUERY_PARAM = "imagerepo";
     private static final String IMAGE_TAG_QUERY_PARAM = "imagetag";
@@ -51,7 +52,8 @@ public class RestRequestor {
     private static final String BASE_LOGGER_NAME = "com.blackducksoftware";
 
     public SimpleResponse executeGetBdioRequest(final RestConnection restConnection, final URI imageInspectorUri, final String containerPathToTarfile,
-            final String givenImageRepo, final String givenImageTag, final String containerPathToContainerFileSystemFile, final boolean cleanup)
+            final String givenImageRepo, final String givenImageTag, final String containerPathToContainerFileSystemFile, final boolean cleanup,
+            final boolean forgeDerivedFromDistro)
             throws IntegrationException {
         String containerFileSystemQueryString = "";
         if (StringUtils.isNotBlank(containerPathToContainerFileSystemFile)) {
@@ -65,9 +67,13 @@ public class RestRequestor {
         if (StringUtils.isNotBlank(givenImageTag)) {
             imageTagQueryString = String.format("&%s=%s", IMAGE_TAG_QUERY_PARAM, givenImageTag);
         }
-        final String url = String.format("%s/%s?%s=%s&%s=%s&%s=%b%s%s%s",
+        String forgeDerivedFromDistroQueryString = "";
+        if (forgeDerivedFromDistro) {
+            forgeDerivedFromDistroQueryString = String.format("&%s=true", FORGE_DERIVED_FROM_DISTRO_QUERY_PARAM);
+        }
+        final String url = String.format("%s/%s?%s=%s&%s=%s&%s=%b%s%s%s%s",
                 imageInspectorUri.toString(), GETBDIO_ENDPOINT, LOGGING_LEVEL_QUERY_PARAM, getLoggingLevel(), TARFILE_QUERY_PARAM, containerPathToTarfile, CLEANUP_QUERY_PARAM, cleanup, containerFileSystemQueryString,
-                imageRepoQueryString, imageTagQueryString);
+                imageRepoQueryString, imageTagQueryString, forgeDerivedFromDistroQueryString);
         logger.debug(String.format("Doing a getBdio request on %s", url));
         final Request request = new Request.Builder(url).method(HttpMethod.GET).build();
         try (Response response = restConnection.executeRequest(request)) {

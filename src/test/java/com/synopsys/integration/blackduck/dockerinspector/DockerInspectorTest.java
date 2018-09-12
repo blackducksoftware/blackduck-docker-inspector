@@ -113,92 +113,97 @@ public class DockerInspectorTest {
 
     @Test
     public void testUbuntuExec() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "ubuntu:17.04", "ubuntu", "17.04", "var_lib_dpkg", false, false, "dpkg", 10, null, null);
+        IntegrationTestCommon.testImage(programVersion, "ubuntu:17.04", "ubuntu", "17.04", "var_lib_dpkg", false, false, false, "dpkg", 10, null, null);
     }
 
     @Test
     public void testUbuntuStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "ubuntu:17.04", "ubuntu", "17.04", "var_lib_dpkg", false, true, "dpkg", 10, null, null);
+        IntegrationTestCommon.testImage(programVersion, "ubuntu:17.04", "ubuntu", "17.04", "var_lib_dpkg", false, true, false, "dpkg", 10, null, null);
     }
 
     @Test
     public void testAlpineExec() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "alpine:3.6", "alpine", "3.6", "lib_apk", false, false, "apk-", 5, null, null);
+        IntegrationTestCommon.testImage(programVersion, "alpine:3.6", "alpine", "3.6", "lib_apk", false, false, false, "apk-", 5, null, null);
     }
 
     @Test
     public void testAlpineStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "alpine:3.6", "alpine", "3.6", "lib_apk", false, true, "apk-", 5, null, null);
+        IntegrationTestCommon.testImage(programVersion, "alpine:3.6", "alpine", "3.6", "lib_apk", false, true, false, "apk-", 5, null, null);
+    }
+
+    @Test
+    public void testAlpineStartContainerForgeFromDistro() throws IOException, InterruptedException, IntegrationException {
+        IntegrationTestCommon.testImage(programVersion, "alpine:3.6", "alpine", "3.6", "lib_apk", false, true, true, "apk-", 5, null, null);
     }
 
     @Test
     public void testBusyboxExec() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "busybox:latest", "busybox", "latest", "noPkgMgr", false, false, null, 0, null, null);
+        IntegrationTestCommon.testImage(programVersion, "busybox:latest", "busybox", "latest", "noPkgMgr", false, false, false, null, 0, null, null);
     }
 
     @Test
     public void testBusyboxStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "busybox:latest", "busybox", "latest", "noPkgMgr", false, true, null, 0, null, null);
+        IntegrationTestCommon.testImage(programVersion, "busybox:latest", "busybox", "latest", "noPkgMgr", false, true, false, null, 0, null, null);
     }
 
     @Test
     public void testAlpineLatestExec() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "alpine", "alpine", "latest", "lib_apk", false, false, "apk-", 5, null, null);
+        IntegrationTestCommon.testImage(programVersion, "alpine", "alpine", "latest", "lib_apk", false, false, false, "apk-", 5, null, null);
     }
 
     @Test
     public void testAlpineLatestStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "alpine", "alpine", "latest", "lib_apk", false, true, "apk-", 5, null, null);
+        IntegrationTestCommon.testImage(programVersion, "alpine", "alpine", "latest", "lib_apk", false, true, false, "apk-", 5, null, null);
     }
 
     @Test
     public void testCentosExec() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "centos:7.3.1611", "centos", "7.3.1611", "var_lib_rpm", false, false, "rpm", 15, null, null);
+        IntegrationTestCommon.testImage(programVersion, "centos:7.3.1611", "centos", "7.3.1611", "var_lib_rpm", false, false, false, "rpm", 15, null, null);
     }
 
     @Test
     public void testCentosStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "centos:7.3.1611", "centos", "7.3.1611", "var_lib_rpm", false, true, "rpm", 15, null, null);
+        IntegrationTestCommon.testImage(programVersion, "centos:7.3.1611", "centos", "7.3.1611", "var_lib_rpm", false, true, false, "rpm", 15, null, null);
     }
 
     @Test
     public void testBlackDuckWebappExec() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", "lib_apk", true, false, "apk-", 5, null, null);
+        IntegrationTestCommon.testImage(programVersion, "blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", "lib_apk", true, false, false, "apk-", 5, null, null);
     }
 
     @Test
     public void testBlackDuckWebappStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", "lib_apk", true, true, "apk-", 5, null, null);
+        IntegrationTestCommon.testImage(programVersion, "blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", "lib_apk", true, true, false, "apk-", 5, null, null);
     }
 
     @Test
     public void testBlackDuckZookeeperExec() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "blackducksoftware/hub-zookeeper:4.0.0", "blackducksoftware_hub-zookeeper", "4.0.0", "lib_apk", true, false, "apk-", 5, null, null);
+        IntegrationTestCommon.testImage(programVersion, "blackducksoftware/hub-zookeeper:4.0.0", "blackducksoftware_hub-zookeeper", "4.0.0", "lib_apk", true, false, false, "apk-", 5, null, null);
     }
 
     @Test
     public void testBlackDuckZookeeperStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "blackducksoftware/hub-zookeeper:4.0.0", "blackducksoftware_hub-zookeeper", "4.0.0", "lib_apk", true, true, "apk-", 5, null, null);
+        IntegrationTestCommon.testImage(programVersion, "blackducksoftware/hub-zookeeper:4.0.0", "blackducksoftware_hub-zookeeper", "4.0.0", "lib_apk", true, true, false, "apk-", 5, null, null);
     }
 
     @Test
     public void testTomcatExec() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "tomcat:6.0.53-jre7", "tomcat", "6.0.53-jre7", "var_lib_dpkg", false, false, "dpkg", 5, null, null);
+        IntegrationTestCommon.testImage(programVersion, "tomcat:6.0.53-jre7", "tomcat", "6.0.53-jre7", "var_lib_dpkg", false, false, false, "dpkg", 5, null, null);
     }
 
     @Test
     public void testTomcatStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "tomcat:6.0.53-jre7", "tomcat", "6.0.53-jre7", "var_lib_dpkg", false, true, "dpkg", 5, null, null);
+        IntegrationTestCommon.testImage(programVersion, "tomcat:6.0.53-jre7", "tomcat", "6.0.53-jre7", "var_lib_dpkg", false, true, false, "dpkg", 5, null, null);
     }
 
     @Test
     public void testRhelExec() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "dnplus/rhel:6.5", "dnplus_rhel", "6.5", "var_lib_rpm", false, false, "rpm", 10, null, null);
+        IntegrationTestCommon.testImage(programVersion, "dnplus/rhel:6.5", "dnplus_rhel", "6.5", "var_lib_rpm", false, false, false, "rpm", 10, null, null);
     }
 
     @Test
     public void testRhelStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "dnplus/rhel:6.5", "dnplus_rhel", "6.5", "var_lib_rpm", false, true, "rpm", 10, null, null);
+        IntegrationTestCommon.testImage(programVersion, "dnplus/rhel:6.5", "dnplus_rhel", "6.5", "var_lib_rpm", false, true, false, "rpm", 10, null, null);
     }
 
     @Test

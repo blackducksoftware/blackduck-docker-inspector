@@ -102,7 +102,7 @@ public class RestClientInspector implements Inspector {
                 containerFileSystemPathInContainer = containerPaths.getContainerPathToOutputFile(containerFileSystemFilename);
             }
             final String bdioString = imageInspectorClient.getBdio(finalDockerTarfile.getCanonicalPath(), dockerTarFilePathInContainer, config.getDockerImageRepo(), config.getDockerImageTag(), containerFileSystemPathInContainer,
-                    config.isCleanupWorkingDir());
+                    config.isCleanupWorkingDir(), config.isForgeDerivedFromDistro());
             final SimpleBdioDocument bdioDocument = toBdioDocument(bdioString);
             adjustBdio(bdioDocument);
             final File bdioFile = output.provideBdioFileOutput(bdioDocument, deriveOutputBdioFilename(bdioString));

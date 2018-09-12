@@ -263,6 +263,10 @@ public class Config {
     @Value("${imageinspector.service.distro.default:ubuntu}")
     private String imageInspectorDefaultDistro = INSPECTOR_OS_UBUNTU;
 
+    @ValueDescription(description = "Let the KB derive the component (package) forge from the Linux distro?)", defaultValue = "false", group = Config.GROUP_PRIVATE, deprecated = false)
+    @Value("${bdio.component.forge.derived.from.distro:false}")
+    private Boolean forgeDerivedFromDistro = Boolean.FALSE;
+
     // Environment Variables
     @Value("${BD_HUB_PASSWORD:}")
     private String blackDuckLegacyPasswordEnvVar = "";
@@ -568,6 +572,10 @@ public class Config {
         return optionsByFieldName.get("imageInspectorServiceStart").getResolvedValue().equals("true");
     }
 
+    public boolean isForgeDerivedFromDistro() {
+        return optionsByFieldName.get("forgeDerivedFromDistro").getResolvedValue().equals("true");
+    }
+
     public void setDockerImageRepo(final String newValue) {
         optionsByFieldName.get("dockerImageRepo").setResolvedValue(newValue);
     }
@@ -652,5 +660,7 @@ public class Config {
         this.imageInspectorHostPortCentos = null;
         this.imageInspectorHostPortUbuntu = null;
         this.imageInspectorDefaultDistro = null;
+
+        this.forgeDerivedFromDistro = null;
     }
 }

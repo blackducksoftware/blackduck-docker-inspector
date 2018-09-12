@@ -28,7 +28,7 @@ public class IntegrationTestCommon {
     public static int START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU = 8102;
 
     public static void testImage(final ProgramVersion programVersion, final String inspectTargetImageRepoTag, final String repo, final String tag, final String pkgMgrPathString, final boolean requireBdioMatch,
-            final boolean startContainersAsNeeded,
+            final boolean startContainersAsNeeded, final boolean forgeDerivedFromDistro,
             final String outputBomMustContainComponentPrefix, final int minNumberOfComponentsExpected, final List<String> additionalArgs, final Map<String, String> givenEnv)
             throws IOException, InterruptedException, IntegrationException {
         final File outputContainerFileSystemFile = getOutputContainerFileSystemFileFromImageSpec(inspectTargetImageRepoTag);
@@ -50,7 +50,7 @@ public class IntegrationTestCommon {
         if (tag != null) {
             cmd.add(String.format("--docker.image.tag=%s", tag));
         }
-        cmd.add("--logging.level.com.synopsys=DEBUG");
+        cmd.add("--logging.level.com.synopsys=TRACE");
         if (startContainersAsNeeded) {
             // --imageinspector.service.start=true is left to default (true)
             cmd.add(String.format("--imageinspector.service.port.alpine=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE));
@@ -62,6 +62,9 @@ public class IntegrationTestCommon {
             final File workingDir = new File(String.format("%s/endToEnd", TestUtils.TEST_DIR_REL_PATH));
             TestUtils.deleteDirIfExists(workingDir);
             cmd.add(String.format("--working.dir.path=%s", workingDir.getAbsolutePath()));
+        }
+        if (forgeDerivedFromDistro) {
+            cmd.add("--bdio.component.forge.derived.from.distro=true");
         }
         cmd.add(inspectTargetArg);
         if (additionalArgs != null) {
