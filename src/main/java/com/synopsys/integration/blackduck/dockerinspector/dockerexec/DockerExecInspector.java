@@ -172,7 +172,7 @@ public class DockerExecInspector implements Inspector {
                                 dissectedImage.getLayerMappings()));
             }
             if (dissectedImage.getTargetOs() == null) {
-                dissectedImage.setTargetOs(imageInspector.detectInspectorOperatingSystem(dissectedImage.getTargetImageFileSystemRootDir()));
+                dissectedImage.setTargetOs(imageInspector.detectInspectorOperatingSystem(dissectedImage.getTargetImageFileSystemRootDir()).getPkgMgr().getPackageManager().getInspectorOperatingSystem());
             }
             logger.info(String.format("Target image tarfile: %s; target OS: %s", dissectedImage.getDockerTarFile().getAbsolutePath(), dissectedImage.getTargetOs().toString()));
             final ImageInfoDerived imageInfoDerived = imageInspector.generateBdioFromImageFilesDir(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), config.getBlackDuckProjectName(),
@@ -211,7 +211,7 @@ public class DockerExecInspector implements Inspector {
 
     private void determineTargetOsFromContainerFileSystem(final Config config, final DissectedImage dissectedImage) throws IOException, IntegrationException {
         if (dissectedImage.getTargetOs() == null) {
-            dissectedImage.setTargetOs(imageInspector.detectInspectorOperatingSystem(dissectedImage.getTargetImageFileSystemRootDir()));
+            dissectedImage.setTargetOs(imageInspector.detectInspectorOperatingSystem(dissectedImage.getTargetImageFileSystemRootDir()).getPkgMgr().getPackageManager().getInspectorOperatingSystem());
         }
         dissectedImage.setRunOnImageName(dockerImages.getInspectorImageName(dissectedImage.getTargetOs()));
         dissectedImage.setRunOnImageTag(dockerImages.getInspectorImageTag(dissectedImage.getTargetOs()));

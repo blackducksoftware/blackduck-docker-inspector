@@ -50,7 +50,7 @@ import com.synopsys.integration.blackduck.imageinspector.lib.ImageInfoDerived;
 import com.synopsys.integration.blackduck.imageinspector.lib.ImageInspector;
 import com.synopsys.integration.blackduck.imageinspector.lib.OperatingSystemEnum;
 import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
-import com.synopsys.integration.blackduck.imageinspector.linux.FileSys;
+import com.synopsys.integration.blackduck.imageinspector.linux.LinuxFileSystem;
 import com.synopsys.integration.blackduck.imageinspector.name.Names;
 import com.synopsys.integration.blackduck.imageinspector.result.Result;
 import com.synopsys.integration.blackduck.imageinspector.result.ResultFile;
@@ -135,7 +135,7 @@ public class Output {
             final String containerFileSystemTarFilename = Names.getContainerFileSystemTarFilename(config.getDockerImage(), config.getDockerTar());
             final File containerFileSystemTarFile = new File(outputDirectory, containerFileSystemTarFilename);
             logger.debug(String.format("Creating container filesystem tarfile %s from %s into %s", containerFileSystemTarFile.getAbsolutePath(), targetImageFileSystemRootDir.getAbsolutePath(), outputDirectory.getAbsolutePath()));
-            final FileSys containerFileSys = new FileSys(targetImageFileSystemRootDir);
+            final LinuxFileSystem containerFileSys = new LinuxFileSystem(targetImageFileSystemRootDir);
             containerFileSys.createTarGz(containerFileSystemTarFile);
         }
     }
