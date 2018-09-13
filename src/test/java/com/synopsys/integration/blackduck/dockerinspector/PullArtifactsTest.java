@@ -12,7 +12,6 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -30,13 +29,11 @@ public class PullArtifactsTest {
     public static void tearDownAfterClass() throws Exception {
     }
 
-    @Ignore
     @Test
     public void testPullJar() throws IOException, InterruptedException, IntegrationException {
         testPullOperation("jar", "jar");
     }
 
-    @Ignore
     @Test
     public void testPullAirGapZip() throws IOException, InterruptedException, IntegrationException {
         testPullOperation("airgapzip", "zip");
