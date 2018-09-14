@@ -45,13 +45,13 @@ public class RestRequestor {
             final boolean forgeDerivedFromDistro)
             throws IntegrationException {
         final String url = new ImageInspectorUrlBuilder()
-                .setImageInspectorUri(imageInspectorUri)
-                .setContainerPathToTarfile(containerPathToTarfile)
-                .setGivenImageRepo(givenImageRepo)
-                .setGivenImageTag(givenImageTag)
-                .setContainerPathToContainerFileSystemFile(containerPathToContainerFileSystemFile)
-                .setCleanup(cleanup)
-                .setForgeDerivedFromDistro(forgeDerivedFromDistro)
+                .imageInspectorUri(imageInspectorUri)
+                .containerPathToTarfile(containerPathToTarfile)
+                .givenImageRepo(givenImageRepo)
+                .givenImageTag(givenImageTag)
+                .containerPathToContainerFileSystemFile(containerPathToContainerFileSystemFile)
+                .cleanup(cleanup)
+                .forgeDerivedFromDistro(forgeDerivedFromDistro)
                 .build();
         logger.debug(String.format("Doing a getBdio request on %s", url));
         final Request request = new Request.Builder(url).method(HttpMethod.GET).build();

@@ -26,13 +26,13 @@ public class ImageInspectorUrlBuilderTest {
     @Test
     public void testComplete() throws IntegrationException, URISyntaxException {
         final String url = new ImageInspectorUrlBuilder()
-                .setImageInspectorUri(new URI("https://www.google.com"))
-                .setContainerPathToTarfile("test_containerPathToTarfile")
-                .setGivenImageRepo("test_givenImageRepo")
-                .setGivenImageTag("test_givenImageTag")
-                .setContainerPathToContainerFileSystemFile("test_containerPathToContainerFileSystemFile")
-                .setCleanup(true)
-                .setForgeDerivedFromDistro(true)
+                .imageInspectorUri(new URI("https://www.google.com"))
+                .containerPathToTarfile("test_containerPathToTarfile")
+                .givenImageRepo("test_givenImageRepo")
+                .givenImageTag("test_givenImageTag")
+                .containerPathToContainerFileSystemFile("test_containerPathToContainerFileSystemFile")
+                .cleanup(true)
+                .forgeDerivedFromDistro(true)
                 .build();
         assertEquals(
                 "https://www.google.com/getbdio?logginglevel=INFO&tarfile=test_containerPathToTarfile&cleanup=true&resultingcontainerfspath=test_containerPathToContainerFileSystemFile&imagerepo=test_givenImageRepo&imagetag=test_givenImageTag&forgederivedfromdistro=true",

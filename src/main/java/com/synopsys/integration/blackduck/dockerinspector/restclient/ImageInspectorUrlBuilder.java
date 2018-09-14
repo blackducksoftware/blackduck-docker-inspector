@@ -1,3 +1,26 @@
+/**
+ * blackduck-docker-inspector
+ *
+ * Copyright (C) 2018 Black Duck Software, Inc.
+ * http://www.blackducksoftware.com/
+ *
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements. See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership. The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
 package com.synopsys.integration.blackduck.dockerinspector.restclient;
 
 import java.net.URI;
@@ -28,37 +51,37 @@ public class ImageInspectorUrlBuilder {
     private boolean cleanup = true;
     private boolean forgeDerivedFromDistro = false;
 
-    public ImageInspectorUrlBuilder setImageInspectorUri(final URI imageInspectorUri) {
+    public ImageInspectorUrlBuilder imageInspectorUri(final URI imageInspectorUri) {
         this.imageInspectorUri = imageInspectorUri;
         return this;
     }
 
-    public ImageInspectorUrlBuilder setContainerPathToTarfile(final String containerPathToTarfile) {
+    public ImageInspectorUrlBuilder containerPathToTarfile(final String containerPathToTarfile) {
         this.containerPathToTarfile = containerPathToTarfile;
         return this;
     }
 
-    public ImageInspectorUrlBuilder setGivenImageRepo(final String givenImageRepo) {
+    public ImageInspectorUrlBuilder givenImageRepo(final String givenImageRepo) {
         this.givenImageRepo = givenImageRepo;
         return this;
     }
 
-    public ImageInspectorUrlBuilder setGivenImageTag(final String givenImageTag) {
+    public ImageInspectorUrlBuilder givenImageTag(final String givenImageTag) {
         this.givenImageTag = givenImageTag;
         return this;
     }
 
-    public ImageInspectorUrlBuilder setContainerPathToContainerFileSystemFile(final String containerPathToContainerFileSystemFile) {
+    public ImageInspectorUrlBuilder containerPathToContainerFileSystemFile(final String containerPathToContainerFileSystemFile) {
         this.containerPathToContainerFileSystemFile = containerPathToContainerFileSystemFile;
         return this;
     }
 
-    public ImageInspectorUrlBuilder setCleanup(final boolean cleanup) {
+    public ImageInspectorUrlBuilder cleanup(final boolean cleanup) {
         this.cleanup = cleanup;
         return this;
     }
 
-    public ImageInspectorUrlBuilder setForgeDerivedFromDistro(final boolean forgeDerivedFromDistro) {
+    public ImageInspectorUrlBuilder forgeDerivedFromDistro(final boolean forgeDerivedFromDistro) {
         this.forgeDerivedFromDistro = forgeDerivedFromDistro;
         return this;
     }
