@@ -4,11 +4,11 @@
     "spdx:name": "blackducksoftware_whiteouttest_1.0_var_lib_dpkg_DPKG",
     "creationInfo": {
       "spdx:creator": [
-        "Tool: IntegrationBdio-13.0.0"
+        "Tool: IntegrationBdio-16.0.1"
       ],
-      "spdx:created": "2018-07-27T16:53:03.242Z"
+      "spdx:created": "2018-09-17T15:12:14.109Z"
     },
-    "@id": "uuid:d811e86e-f10a-40d7-b284-9b02b25e72ee",
+    "@id": "uuid:61d339dd-535b-405d-bc07-bf2eb4c0790a",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -488,15 +488,15 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:debian/libcurl3_gnutls/7_47_0_1ubuntu2_8/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:ubuntu/e2fslibs/1_42_13_1ubuntu1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
         "related": "http:ubuntu/libpam_modules_bin/1_1_8_3_2ubuntu2_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:debian/libcurl3_gnutls/7_47_0_1ubuntu2_9/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -948,11 +948,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/libcurl3_gnutls/7_47_0_1ubuntu2_8/amd64",
+        "related": "http:ubuntu/libsemanage_common/2_3_1build3/all",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/libsemanage_common/2_3_1build3/all",
+        "related": "http:ubuntu/libcurl3_gnutls/7_47_0_1ubuntu2_9/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -3460,27 +3460,6 @@
     "relationship": []
   },
   {
-    "name": "libcurl3-gnutls",
-    "revision": "7.47.0-1ubuntu2.8",
-    "@id": "http:debian/libcurl3_gnutls/7_47_0_1ubuntu2_8/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "debian",
-      "externalId": "libcurl3-gnutls/7.47.0-1ubuntu2.8/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "debian",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "libcurl3-gnutls",
-        "version": "7.47.0-1ubuntu2.8",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "e2fslibs",
     "revision": "1.42.13-1ubuntu1",
     "@id": "http:ubuntu/e2fslibs/1_42_13_1ubuntu1/amd64",
@@ -3517,6 +3496,27 @@
         },
         "name": "libpam-modules-bin",
         "version": "1.1.8-3.2ubuntu2.1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcurl3-gnutls",
+    "revision": "7.47.0-1ubuntu2.9",
+    "@id": "http:debian/libcurl3_gnutls/7_47_0_1ubuntu2_9/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "libcurl3-gnutls/7.47.0-1ubuntu2.9/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libcurl3-gnutls",
+        "version": "7.47.0-1ubuntu2.9",
         "architecture": "amd64"
       }
     },
@@ -5875,27 +5875,6 @@
     "relationship": []
   },
   {
-    "name": "libcurl3-gnutls",
-    "revision": "7.47.0-1ubuntu2.8",
-    "@id": "http:ubuntu/libcurl3_gnutls/7_47_0_1ubuntu2_8/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "ubuntu",
-      "externalId": "libcurl3-gnutls/7.47.0-1ubuntu2.8/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "ubuntu",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "libcurl3-gnutls",
-        "version": "7.47.0-1ubuntu2.8",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "libsemanage-common",
     "revision": "2.3-1build3",
     "@id": "http:ubuntu/libsemanage_common/2_3_1build3/all",
@@ -5912,6 +5891,27 @@
         "name": "libsemanage-common",
         "version": "2.3-1build3",
         "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcurl3-gnutls",
+    "revision": "7.47.0-1ubuntu2.9",
+    "@id": "http:ubuntu/libcurl3_gnutls/7_47_0_1ubuntu2_9/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "ubuntu",
+      "externalId": "libcurl3-gnutls/7.47.0-1ubuntu2.9/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libcurl3-gnutls",
+        "version": "7.47.0-1ubuntu2.9",
+        "architecture": "amd64"
       }
     },
     "relationship": []
