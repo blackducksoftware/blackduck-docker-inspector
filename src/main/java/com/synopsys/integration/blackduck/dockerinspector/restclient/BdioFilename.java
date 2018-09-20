@@ -28,7 +28,6 @@ import com.synopsys.integration.blackduck.imageinspector.lib.PackageManagerEnum;
 import com.synopsys.integration.exception.IntegrationException;
 
 public class BdioFilename {
-
     private final String spdxName;
     private final String projectExternalIdMetaName;
     private final String projectExternalIdMetaVersion;

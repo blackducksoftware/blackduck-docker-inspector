@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.synopsys.integration.blackduck.dockerinspector.restclient.BdioFilename;
 import com.synopsys.integration.exception.IntegrationException;
 
 public class OutputFilenameTest {
@@ -23,7 +22,13 @@ public class OutputFilenameTest {
 
     @Test
     public void testUbuntu() throws IntegrationException {
-        final BdioFilename outputFilename = new BdioFilename("ubuntu_latest_var_lib_dpkg_DPKG", "ubuntu", "latest", "debian");
+        final BdioFilename outputFilename = new BdioFilename("ubuntu_latest_var_lib_dpkg_DPKG", "ubuntu", "latest", "ubuntu");
         assertEquals("ubuntu_var_lib_dpkg_ubuntu_latest_bdio.jsonld", outputFilename.getBdioFilename());
+    }
+
+    @Test
+    public void testBusybox() throws IntegrationException {
+        final BdioFilename outputFilename = new BdioFilename("busybox_latest_noPkgMgr_noPkgMgr", "busybox", "latest", "unknown");
+        assertEquals("busybox_noPkgMgr_busybox_latest_bdio.jsonld", outputFilename.getBdioFilename());
     }
 }

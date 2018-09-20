@@ -50,7 +50,7 @@ public class IntegrationTestCommon {
         if (tag != null) {
             cmd.add(String.format("--docker.image.tag=%s", tag));
         }
-        cmd.add("--logging.level.com.synopsys=TRACE");
+        cmd.add("--logging.level.com.synopsys=DEBUG");
         if (startContainersAsNeeded) {
             // --imageinspector.service.start=true is left to default (true)
             cmd.add(String.format("--imageinspector.service.port.alpine=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE));

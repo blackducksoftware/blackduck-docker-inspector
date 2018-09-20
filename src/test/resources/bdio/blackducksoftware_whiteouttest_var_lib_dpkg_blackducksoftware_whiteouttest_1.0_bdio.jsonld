@@ -6,23 +6,23 @@
       "spdx:creator": [
         "Tool: IntegrationBdio-16.0.1"
       ],
-      "spdx:created": "2018-09-17T15:12:14.109Z"
+      "spdx:created": "2018-09-20T16:57:13.397Z"
     },
-    "@id": "uuid:61d339dd-535b-405d-bc07-bf2eb4c0790a",
+    "@id": "uuid:bc5eb8c6-2229-4b5a-a080-2ad1d6d257e5",
     "@type": "BillOfMaterials",
     "relationship": []
   },
   {
     "name": "blackducksoftware_whiteouttest",
     "revision": "1.0",
-    "@id": "http:debian/blackducksoftware_whiteouttest/1_0",
+    "@id": "http:ubuntu/blackducksoftware_whiteouttest/1_0",
     "@type": "Project",
     "externalIdentifier": {
-      "externalSystemTypeId": "debian",
+      "externalSystemTypeId": "ubuntu",
       "externalId": "blackducksoftware_whiteouttest/1.0",
       "externalIdMetaData": {
         "forge": {
-          "name": "debian",
+          "name": "ubuntu",
           "separator": "/",
           "kbSeparator": "/"
         },

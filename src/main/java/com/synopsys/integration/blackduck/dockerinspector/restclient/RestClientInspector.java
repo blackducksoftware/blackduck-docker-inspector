@@ -144,6 +144,9 @@ public class RestClientInspector implements Inspector {
     }
 
     private void cleanup() {
+        if (!config.isCleanupWorkingDir()) {
+            return;
+        }
         logger.debug(String.format("Removing %s", programPaths.getDockerInspectorRunDirPathHost()));
         try {
             FileOperations.removeFileOrDir(programPaths.getDockerInspectorRunDirPathHost());
@@ -162,6 +165,7 @@ public class RestClientInspector implements Inspector {
     }
 
     private String deriveOutputBdioFilename(final String bdioString) throws IOException, IntegrationException {
+        logger.trace(String.format("bdioString: %s", bdioString));
         final SimpleBdioDocument bdioDocument = getSimpleBdioDocument(bdioString);
         final BdioFilename outputFilename = new BdioFilename(bdioDocument.billOfMaterials.spdxName, bdioDocument.project.name, bdioDocument.project.version, bdioDocument.project.bdioExternalIdentifier.externalIdMetaData.forge.getName());
         return outputFilename.getBdioFilename();
