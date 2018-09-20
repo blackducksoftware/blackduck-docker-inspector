@@ -4,25 +4,25 @@
     "spdx:name": "null_null_var_lib_dpkg_DPKG",
     "creationInfo": {
       "spdx:creator": [
-        "Tool: IntegrationBdio-13.0.0"
+        "Tool: IntegrationBdio-16.0.0"
       ],
-      "spdx:created": "2018-08-07T18:03:45.579Z"
+      "spdx:created": "2018-09-20T18:41:19.318Z"
     },
-    "@id": "uuid:ed3fc4da-bed5-4f2a-af6a-70550ca7bcc5",
+    "@id": "uuid:31f77479-ec46-422e-afd6-b24a8e9344c3",
     "@type": "BillOfMaterials",
     "relationship": []
   },
   {
     "name": "null",
     "revision": "null",
-    "@id": "http:debian/null/null",
+    "@id": "http:ubuntu/null/null",
     "@type": "Project",
     "externalIdentifier": {
-      "externalSystemTypeId": "debian",
+      "externalSystemTypeId": "ubuntu",
       "externalId": "null/null",
       "externalIdMetaData": {
         "forge": {
-          "name": "debian",
+          "name": "ubuntu",
           "separator": "/",
           "kbSeparator": "/"
         },
