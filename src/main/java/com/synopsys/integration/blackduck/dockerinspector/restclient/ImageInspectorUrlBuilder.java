@@ -36,7 +36,6 @@ public class ImageInspectorUrlBuilder {
     private static final String GETBDIO_ENDPOINT = "getbdio";
     private static final String LOGGING_LEVEL_QUERY_PARAM = "logginglevel";
     private static final String CLEANUP_QUERY_PARAM = "cleanup";
-    private static final String FORGE_DERIVED_FROM_DISTRO_QUERY_PARAM = "forgederivedfromdistro";
     private static final String RESULTING_CONTAINER_FS_PATH_QUERY_PARAM = "resultingcontainerfspath";
     private static final String IMAGE_REPO_QUERY_PARAM = "imagerepo";
     private static final String IMAGE_TAG_QUERY_PARAM = "imagetag";
@@ -49,7 +48,6 @@ public class ImageInspectorUrlBuilder {
     private String givenImageTag = null;
     private String containerPathToContainerFileSystemFile = null;
     private boolean cleanup = true;
-    private boolean forgeDerivedFromDistro = false;
 
     public ImageInspectorUrlBuilder imageInspectorUri(final URI imageInspectorUri) {
         this.imageInspectorUri = imageInspectorUri;
@@ -81,11 +79,6 @@ public class ImageInspectorUrlBuilder {
         return this;
     }
 
-    public ImageInspectorUrlBuilder forgeDerivedFromDistro(final boolean forgeDerivedFromDistro) {
-        this.forgeDerivedFromDistro = forgeDerivedFromDistro;
-        return this;
-    }
-
     public String build() throws IntegrationException {
         if (imageInspectorUri == null) {
             throw new IntegrationException("imageInspectorUri not specified");
@@ -109,9 +102,6 @@ public class ImageInspectorUrlBuilder {
         }
         if (StringUtils.isNotBlank(givenImageTag)) {
             urlSb.append(String.format("&%s=%s", IMAGE_TAG_QUERY_PARAM, givenImageTag));
-        }
-        if (forgeDerivedFromDistro) {
-            urlSb.append(String.format("&%s=true", FORGE_DERIVED_FROM_DISTRO_QUERY_PARAM));
         }
         final String url = urlSb.toString();
         return url;

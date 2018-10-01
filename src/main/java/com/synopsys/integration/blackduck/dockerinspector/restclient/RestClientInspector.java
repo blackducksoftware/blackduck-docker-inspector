@@ -102,7 +102,7 @@ public class RestClientInspector implements Inspector {
                 containerFileSystemPathInContainer = containerPaths.getContainerPathToOutputFile(containerFileSystemFilename);
             }
             final String bdioString = imageInspectorClient.getBdio(finalDockerTarfile.getCanonicalPath(), dockerTarFilePathInContainer, config.getDockerImageRepo(), config.getDockerImageTag(), containerFileSystemPathInContainer,
-                    config.isCleanupWorkingDir(), config.isForgeDerivedFromDistro());
+                    config.isCleanupWorkingDir());
             final SimpleBdioDocument bdioDocument = toBdioDocument(bdioString);
             adjustBdio(bdioDocument);
             final File bdioFile = output.provideBdioFileOutput(bdioDocument, deriveOutputBdioFilename(bdioString));
@@ -167,7 +167,7 @@ public class RestClientInspector implements Inspector {
     private String deriveOutputBdioFilename(final String bdioString) throws IOException, IntegrationException {
         logger.trace(String.format("bdioString: %s", bdioString));
         final SimpleBdioDocument bdioDocument = getSimpleBdioDocument(bdioString);
-        final BdioFilename outputFilename = new BdioFilename(bdioDocument.billOfMaterials.spdxName, bdioDocument.project.name, bdioDocument.project.version, bdioDocument.project.bdioExternalIdentifier.externalIdMetaData.forge.getName());
+        final BdioFilename outputFilename = new BdioFilename(bdioDocument.billOfMaterials.spdxName);
         return outputFilename.getBdioFilename();
     }
 

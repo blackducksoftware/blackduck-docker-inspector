@@ -32,10 +32,9 @@ public class ImageInspectorUrlBuilderTest {
                 .givenImageTag("test_givenImageTag")
                 .containerPathToContainerFileSystemFile("test_containerPathToContainerFileSystemFile")
                 .cleanup(true)
-                .forgeDerivedFromDistro(true)
                 .build();
         assertEquals(
-                "https://www.google.com/getbdio?logginglevel=INFO&tarfile=test_containerPathToTarfile&cleanup=true&resultingcontainerfspath=test_containerPathToContainerFileSystemFile&imagerepo=test_givenImageRepo&imagetag=test_givenImageTag&forgederivedfromdistro=true",
+                "https://www.google.com/getbdio?logginglevel=INFO&tarfile=test_containerPathToTarfile&cleanup=true&resultingcontainerfspath=test_containerPathToContainerFileSystemFile&imagerepo=test_givenImageRepo&imagetag=test_givenImageTag",
                 url);
     }
 }

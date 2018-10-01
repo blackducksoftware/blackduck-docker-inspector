@@ -6,7 +6,6 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.synopsys.integration.blackduck.dockerinspector.restclient.BdioFilename;
 import com.synopsys.integration.exception.IntegrationException;
 
 public class BdioFilenameTest {
@@ -21,13 +20,7 @@ public class BdioFilenameTest {
 
     @Test
     public void testAlpine() throws IntegrationException {
-        final BdioFilename bdioFilename = new BdioFilename("alpine_3.6_lib_apk_APK", "alpine", "3.6", "alpine");
-        assertEquals("alpine_lib_apk_alpine_3.6_bdio.jsonld", bdioFilename.getBdioFilename());
-    }
-
-    @Test
-    public void testEmpty() throws IntegrationException {
-        final BdioFilename bdioFilename = new BdioFilename("tbd", "busybox", "1.0", "unknown");
-        assertEquals("busybox_noPkgMgr_busybox_1.0_bdio.jsonld", bdioFilename.getBdioFilename());
+        final BdioFilename bdioFilename = new BdioFilename("alpine_3.6_APK");
+        assertEquals("alpine_3.6_APK_bdio.jsonld", bdioFilename.getBdioFilename());
     }
 }

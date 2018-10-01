@@ -27,14 +27,14 @@ public class IntegrationTestCommon {
     private static int START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS = 8101;
     public static int START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU = 8102;
 
-    public static void testImage(final ProgramVersion programVersion, final String inspectTargetImageRepoTag, final String repo, final String tag, final String pkgMgrPathString, final boolean requireBdioMatch,
+    public static void testImage(final ProgramVersion programVersion, final String inspectTargetImageRepoTag, final String repo, final String tag, final String bdioFilename, final boolean requireBdioMatch,
             final boolean startContainersAsNeeded, final boolean forgeDerivedFromDistro,
             final String outputBomMustContainComponentPrefix, final int minNumberOfComponentsExpected, final List<String> additionalArgs, final Map<String, String> givenEnv)
             throws IOException, InterruptedException, IntegrationException {
         final File outputContainerFileSystemFile = getOutputContainerFileSystemFileFromImageSpec(inspectTargetImageRepoTag);
         final String inspectTargetArg = String.format("--docker.image=%s", inspectTargetImageRepoTag);
         ensureFileDoesNotExist(outputContainerFileSystemFile);
-        final File actualBdio = new File(String.format(String.format("%s/output/%s_%s_%s_%s_bdio.jsonld", TestUtils.TEST_DIR_REL_PATH, repo, pkgMgrPathString, repo, tag)));
+        final File actualBdio = new File(String.format(String.format("%s/output/%s", TestUtils.TEST_DIR_REL_PATH, bdioFilename)));
         ensureFileDoesNotExist(actualBdio);
 
         final List<String> cmd = new ArrayList<>();
@@ -77,7 +77,7 @@ public class IntegrationTestCommon {
         System.out.printf("Expecting output BDIO file: %s\n", actualBdio.getAbsolutePath());
         assertTrue(actualBdio.exists());
         if (requireBdioMatch) {
-            final File expectedBdio = new File(String.format(String.format("src/test/resources/bdio/%s_%s_%s_%s_bdio.jsonld", repo, pkgMgrPathString, repo, tag)));
+            final File expectedBdio = new File(String.format(String.format("src/test/resources/bdio/%s", bdioFilename)));
             final List<String> exceptLinesContainingThese = new ArrayList<>();
             exceptLinesContainingThese.add("\"@id\":");
             exceptLinesContainingThese.add("spdx:created");
@@ -100,7 +100,7 @@ public class IntegrationTestCommon {
         assertTrue(outputContainerFileSystemFile.exists());
     }
 
-    public static void testTar(final ProgramVersion programVersion, final String inspectTargetTarfile, final String imageForBdioFilename, final String repo, final String tag, final String tagForBdioFilename, final String pkgMgrPathString,
+    public static void testTar(final ProgramVersion programVersion, final String inspectTargetTarfile, final String bdioFilename, final String repo, final String tag,
             final boolean requireBdioMatch,
             final boolean testStartServiceModeUsingCustomPorts,
             final List<String> additionalArgs, final boolean needWorkingDir, final File outputContainerFileSystemFile, final Map<String, String> givenEnv)
@@ -111,7 +111,7 @@ public class IntegrationTestCommon {
         ensureFileDoesNotExist(outputContainerFileSystemFile);
 
         final File actualBdio = new File(
-                String.format(String.format("%s/output/%s_%s_%s_%s_bdio.jsonld", TestUtils.TEST_DIR_REL_PATH, imageForBdioFilename.replaceAll("/", "_"), pkgMgrPathString, imageForBdioFilename.replaceAll("/", "_"), tagForBdioFilename)));
+                String.format(String.format("%s/output/%s", TestUtils.TEST_DIR_REL_PATH, bdioFilename)));
         ensureFileDoesNotExist(actualBdio);
 
         final List<String> cmd = new ArrayList<>();
@@ -153,7 +153,7 @@ public class IntegrationTestCommon {
         assertTrue(actualBdio.exists());
         if (requireBdioMatch) {
             final File expectedBdio = new File(
-                    String.format(String.format("src/test/resources/bdio/%s_%s_%s_%s_bdio.jsonld", imageForBdioFilename.replaceAll("/", "_"), pkgMgrPathString, imageForBdioFilename.replaceAll("/", "_"), tagForBdioFilename)));
+                    String.format(String.format("src/test/resources/bdio/%s", bdioFilename)));
             final List<String> exceptLinesContainingThese = new ArrayList<>();
             exceptLinesContainingThese.add("\"@id\":");
             exceptLinesContainingThese.add("spdx:created");
