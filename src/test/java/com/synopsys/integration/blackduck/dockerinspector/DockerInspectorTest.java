@@ -111,7 +111,7 @@ public class DockerInspectorTest {
         ensureContainerRemoved("ubuntu");
     }
 
-    @Test
+    @Test // OK
     public void testUbuntuExec() throws IOException, InterruptedException, IntegrationException {
         IntegrationTestCommon.testImage(programVersion, "ubuntu:17.04", "ubuntu", "17.04", "ubuntu_var_lib_dpkg_ubuntu_17.04_bdio.jsonld", false, false, false, "dpkg", 10, null, null);
     }
@@ -198,12 +198,12 @@ public class DockerInspectorTest {
         IntegrationTestCommon.testImage(programVersion, "tomcat:6.0.53-jre7", "tomcat", "6.0.53-jre7", "tomcat_6.0.53-jre7_DPKG_bdio.jsonld", false, true, false, "dpkg", 5, null, null);
     }
 
-    @Test
+    @Test // OK
     public void testRhelExec() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "dnplus/rhel:6.5", "dnplus_rhel", "6.5", "dnplus_rhel_var_lib_dpkg_dnplus_rhel_6.5_bdio.jsonld", false, false, false, "rpm", 10, null, null);
+        IntegrationTestCommon.testImage(programVersion, "dnplus/rhel:6.5", "dnplus_rhel", "6.5", "dnplus_rhel_var_lib_rpm_dnplus_rhel_6.5_bdio.jsonld", false, false, false, "rpm", 10, null, null);
     }
 
-    @Test
+    @Test // OK
     public void testRhelStartContainer() throws IOException, InterruptedException, IntegrationException {
         IntegrationTestCommon.testImage(programVersion, "dnplus/rhel:6.5", "dnplus_rhel", "6.5", "dnplus_rhel_6.5_RPM_bdio.jsonld", false, true, false, "rpm", 10, null, null);
     }
@@ -259,7 +259,7 @@ public class DockerInspectorTest {
         final String repo = "blackducksoftware/centos_minus_vim_plus_bacula";
         final String tag = "1.0";
         final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("aggregated.tar");
-        IntegrationTestCommon.testTar(programVersion, "build/images/test/aggregated.tar", "blackducksoftware_centos_minus_vim_plus_bacula_1.0_RPM", repo, tag, true, true, null, true,
+        IntegrationTestCommon.testTar(programVersion, "build/images/test/aggregated.tar", "blackducksoftware_centos_minus_vim_plus_bacula_1.0_RPM_bdio.jsonld", repo, tag, true, true, null, true,
                 outputContainerFileSystemFile, null);
     }
 
@@ -279,7 +279,7 @@ public class DockerInspectorTest {
         IntegrationTestCommon.testTar(programVersion, "build/images/test/alpine.tar", "alpine_latest_APK_bdio.jsonld", repo, tag, false, true, null, true, outputContainerFileSystemFile, null);
     }
 
-    @Test // TODO
+    @Test // OK
     public void testAlpineLatestTarRepoTagNotSpecifiedExec() throws IOException, InterruptedException, IntegrationException {
         final String repo = "alpine";
         final String tag = "latest";
@@ -287,7 +287,7 @@ public class DockerInspectorTest {
         IntegrationTestCommon.testTar(programVersion, "build/images/test/alpine.tar", "alpine_lib_apk_alpine_latest_bdio.jsonld", repo, tag, false, false, null, true, outputContainerFileSystemFile, null);
     }
 
-    @Test // TODO
+    @Test // OK
     public void testAlpineLatestTarRepoTagNotSpecifiedStartContainer() throws IOException, InterruptedException, IntegrationException {
         final String repo = "alpine";
         final String tag = "latest";
@@ -313,7 +313,7 @@ public class DockerInspectorTest {
         testUsingExistingContainer(targetRepo, targetTag, tarFileBaseName, "blackducksoftware_whiteouttest_1.0_DPKG_bdio.jsonld", portOnHost);
     }
 
-    @Test
+    @Test // OK
     public void testCentosUsingExistingAlpineContainer() throws IOException, InterruptedException, IntegrationException {
         final String targetRepo = "blackducksoftware/centos_minus_vim_plus_bacula";
         final String targetTag = "1.0";
@@ -322,7 +322,7 @@ public class DockerInspectorTest {
         testUsingExistingContainer(targetRepo, targetTag, tarFileBaseName, "blackducksoftware_centos_minus_vim_plus_bacula_1.0_RPM_bdio.jsonld", portOnHost);
     }
 
-    @Test
+    @Test // OK
     public void testUbuntuUsingExistingCentosContainer() throws IOException, InterruptedException, IntegrationException {
         final String targetRepo = null; // the image in this tarfile is not tagged
         final String targetTag = null;

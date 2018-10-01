@@ -150,7 +150,7 @@ public class IntegrationTestCommon {
         TestUtils.execCmd(String.join(" ", cmd), 240000L, true, givenEnv);
         System.out.println("blackduck-docker-inspector done; verifying results...");
         System.out.printf("Expecting output BDIO file: %s\n", actualBdio.getAbsolutePath());
-        assertTrue(actualBdio.exists());
+        assertTrue(String.format("%s does not exist", actualBdio.getAbsolutePath()), actualBdio.exists());
         if (requireBdioMatch) {
             final File expectedBdio = new File(
                     String.format(String.format("src/test/resources/bdio/%s", bdioFilename)));
@@ -159,7 +159,7 @@ public class IntegrationTestCommon {
             exceptLinesContainingThese.add("spdx:created");
             exceptLinesContainingThese.add("Tool:");
             final boolean outputBdioMatches = TestUtils.contentEquals(expectedBdio, actualBdio, exceptLinesContainingThese);
-            assertTrue(outputBdioMatches);
+            assertTrue("BDIO produced does not match expected BDIO", outputBdioMatches);
         }
 
         assertTrue(String.format("%s does not exist", outputContainerFileSystemFile.getAbsolutePath()), outputContainerFileSystemFile.exists());
