@@ -111,17 +111,17 @@ public class DockerInspectorTest {
         ensureContainerRemoved("ubuntu");
     }
 
-    @Test // OK
+    @Test
     public void testUbuntuExec() throws IOException, InterruptedException, IntegrationException {
         IntegrationTestCommon.testImage(programVersion, "ubuntu:17.04", "ubuntu", "17.04", "ubuntu_var_lib_dpkg_ubuntu_17.04_bdio.jsonld", false, false, false, "dpkg", 10, null, null);
     }
 
-    @Test // OK
+    @Test
     public void testUbuntuStartContainer() throws IOException, InterruptedException, IntegrationException {
         IntegrationTestCommon.testImage(programVersion, "ubuntu:17.04", "ubuntu", "17.04", "ubuntu_17.04_DPKG_bdio.jsonld", false, true, false, "dpkg", 10, null, null);
     }
 
-    @Test // OK
+    @Test
     public void testAlpineExec() throws IOException, InterruptedException, IntegrationException {
         IntegrationTestCommon.testImage(programVersion, "alpine:3.6", "alpine", "3.6", "alpine_lib_apk_alpine_3.6_bdio.jsonld", false, false, false, "apk-", 5, null, null);
     }
@@ -131,7 +131,7 @@ public class DockerInspectorTest {
         IntegrationTestCommon.testImage(programVersion, "alpine:3.6", "alpine", "3.6", "alpine_3.6_APK_bdio.jsonld", false, true, false, "apk-", 5, null, null);
     }
 
-    @Test // OK
+    @Test
     public void testAlpineStartContainerForgeFromDistro() throws IOException, InterruptedException, IntegrationException {
         IntegrationTestCommon.testImage(programVersion, "alpine:3.6", "alpine", "3.6", "alpine_3.6_APK_bdio.jsonld", false, true, true, "apk-", 5, null, null);
     }
@@ -151,7 +151,7 @@ public class DockerInspectorTest {
         IntegrationTestCommon.testImage(programVersion, "alpine", "alpine", "latest", "alpine_lib_apk_alpine_latest_bdio.jsonld", false, false, false, "apk-", 5, null, null);
     }
 
-    @Test // OK
+    @Test
     public void testAlpineLatestStartContainer() throws IOException, InterruptedException, IntegrationException {
         IntegrationTestCommon.testImage(programVersion, "alpine", "alpine", "latest", "alpine_latest_APK_bdio.jsonld", false, true, false, "apk-", 5, null, null);
     }
@@ -172,7 +172,7 @@ public class DockerInspectorTest {
                 false, "apk-", 5, null, null);
     }
 
-    @Test // OK
+    @Test
     public void testBlackDuckWebappStartContainer() throws IOException, InterruptedException, IntegrationException {
         IntegrationTestCommon.testImage(programVersion, "blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", "blackducksoftware_hub-webapp_4.0.0_APK_bdio.jsonld", true, true, false, "apk-", 5, null, null);
     }
@@ -198,12 +198,12 @@ public class DockerInspectorTest {
         IntegrationTestCommon.testImage(programVersion, "tomcat:6.0.53-jre7", "tomcat", "6.0.53-jre7", "tomcat_6.0.53-jre7_DPKG_bdio.jsonld", false, true, false, "dpkg", 5, null, null);
     }
 
-    @Test // OK
+    @Test
     public void testRhelExec() throws IOException, InterruptedException, IntegrationException {
         IntegrationTestCommon.testImage(programVersion, "dnplus/rhel:6.5", "dnplus_rhel", "6.5", "dnplus_rhel_var_lib_rpm_dnplus_rhel_6.5_bdio.jsonld", false, false, false, "rpm", 10, null, null);
     }
 
-    @Test // OK
+    @Test
     public void testRhelStartContainer() throws IOException, InterruptedException, IntegrationException {
         IntegrationTestCommon.testImage(programVersion, "dnplus/rhel:6.5", "dnplus_rhel", "6.5", "dnplus_rhel_6.5_RPM_bdio.jsonld", false, true, false, "rpm", 10, null, null);
     }
@@ -263,7 +263,7 @@ public class DockerInspectorTest {
                 outputContainerFileSystemFile, null);
     }
 
-    @Test // OK
+    @Test
     public void testAlpineLatestTarRepoTagSpecifiedExec() throws IOException, InterruptedException, IntegrationException {
         final String repo = "alpine";
         final String tag = "latest";
@@ -271,7 +271,7 @@ public class DockerInspectorTest {
         IntegrationTestCommon.testTar(programVersion, "build/images/test/alpine.tar", "alpine_lib_apk_alpine_latest_bdio.jsonld", repo, tag, false, false, null, true, outputContainerFileSystemFile, null);
     }
 
-    @Test // OK
+    @Test
     public void testAlpineLatestTarRepoTagSpecifiedStartContainer() throws IOException, InterruptedException, IntegrationException {
         final String repo = "alpine";
         final String tag = "latest";
@@ -279,7 +279,7 @@ public class DockerInspectorTest {
         IntegrationTestCommon.testTar(programVersion, "build/images/test/alpine.tar", "alpine_latest_APK_bdio.jsonld", repo, tag, false, true, null, true, outputContainerFileSystemFile, null);
     }
 
-    @Test // OK
+    @Test
     public void testAlpineLatestTarRepoTagNotSpecifiedExec() throws IOException, InterruptedException, IntegrationException {
         final String repo = "alpine";
         final String tag = "latest";
@@ -287,7 +287,7 @@ public class DockerInspectorTest {
         IntegrationTestCommon.testTar(programVersion, "build/images/test/alpine.tar", "alpine_lib_apk_alpine_latest_bdio.jsonld", repo, tag, false, false, null, true, outputContainerFileSystemFile, null);
     }
 
-    @Test // OK
+    @Test
     public void testAlpineLatestTarRepoTagNotSpecifiedStartContainer() throws IOException, InterruptedException, IntegrationException {
         final String repo = "alpine";
         final String tag = "latest";
@@ -295,7 +295,7 @@ public class DockerInspectorTest {
         IntegrationTestCommon.testTar(programVersion, "build/images/test/alpine.tar", "alpine_latest_APK_bdio.jsonld", repo, tag, false, true, null, true, outputContainerFileSystemFile, null);
     }
 
-    @Test // OK
+    @Test
     public void testAlpineUsingExistingAlpineContainer() throws IOException, InterruptedException, IntegrationException {
         final String targetRepo = null;
         final String targetTag = null;
@@ -304,7 +304,7 @@ public class DockerInspectorTest {
         testUsingExistingContainer(targetRepo, targetTag, tarFileBaseName, "null_null_APK_bdio.jsonld", portOnHost);
     }
 
-    @Test // OK
+    @Test
     public void testWhiteoutUsingExistingAlpineContainer() throws IOException, InterruptedException, IntegrationException {
         final String targetRepo = "blackducksoftware/whiteouttest";
         final String targetTag = "1.0";
@@ -313,7 +313,7 @@ public class DockerInspectorTest {
         testUsingExistingContainer(targetRepo, targetTag, tarFileBaseName, "blackducksoftware_whiteouttest_1.0_DPKG_bdio.jsonld", portOnHost);
     }
 
-    @Test // OK
+    @Test
     public void testCentosUsingExistingAlpineContainer() throws IOException, InterruptedException, IntegrationException {
         final String targetRepo = "blackducksoftware/centos_minus_vim_plus_bacula";
         final String targetTag = "1.0";
@@ -322,7 +322,7 @@ public class DockerInspectorTest {
         testUsingExistingContainer(targetRepo, targetTag, tarFileBaseName, "blackducksoftware_centos_minus_vim_plus_bacula_1.0_RPM_bdio.jsonld", portOnHost);
     }
 
-    @Test // OK
+    @Test
     public void testUbuntuUsingExistingCentosContainer() throws IOException, InterruptedException, IntegrationException {
         final String targetRepo = null; // the image in this tarfile is not tagged
         final String targetTag = null;
