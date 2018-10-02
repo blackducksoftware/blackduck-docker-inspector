@@ -41,8 +41,7 @@ public class RestRequestor {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public SimpleResponse executeGetBdioRequest(final RestConnection restConnection, final URI imageInspectorUri, final String containerPathToTarfile,
-            final String givenImageRepo, final String givenImageTag, final String containerPathToContainerFileSystemFile, final boolean cleanup,
-            final boolean forgeDerivedFromDistro)
+            final String givenImageRepo, final String givenImageTag, final String containerPathToContainerFileSystemFile, final boolean cleanup)
             throws IntegrationException {
         final String url = new ImageInspectorUrlBuilder()
                 .imageInspectorUri(imageInspectorUri)
@@ -51,7 +50,6 @@ public class RestRequestor {
                 .givenImageTag(givenImageTag)
                 .containerPathToContainerFileSystemFile(containerPathToContainerFileSystemFile)
                 .cleanup(cleanup)
-                .forgeDerivedFromDistro(forgeDerivedFromDistro)
                 .build();
         logger.debug(String.format("Doing a getBdio request on %s", url));
         final Request request = new Request.Builder(url).method(HttpMethod.GET).build();
