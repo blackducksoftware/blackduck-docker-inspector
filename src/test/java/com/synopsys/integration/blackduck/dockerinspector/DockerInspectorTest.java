@@ -158,12 +158,12 @@ public class DockerInspectorTest {
 
     @Test
     public void testCentosExec() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "centos:7.3.1611", "centos", "7.3.1611", "centos_var_lib_rpm_centos_7.3.1611_bdio.jsonld", false, false, false, "rpm", 15, null, null);
+        IntegrationTestCommon.testImage(programVersion, "centos:7.3.1611", "centos", "7.3.1611", "centos_var_lib_rpm_centos_7.3.1611_bdio.jsonld", false, false, false, "1:openssl-libs", 15, null, null);
     }
 
     @Test
     public void testCentosStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "centos:7.3.1611", "centos", "7.3.1611", "centos_7.3.1611_RPM_bdio.jsonld", false, true, false, "rpm", 15, null, null);
+        IntegrationTestCommon.testImage(programVersion, "centos:7.3.1611", "centos", "7.3.1611", "centos_7.3.1611_RPM_bdio.jsonld", false, true, false, "1:openssl-libs", 15, null, null);
     }
 
     @Test

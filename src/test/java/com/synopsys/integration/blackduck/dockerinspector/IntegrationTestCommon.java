@@ -51,6 +51,7 @@ public class IntegrationTestCommon {
             cmd.add(String.format("--docker.image.tag=%s", tag));
         }
         cmd.add("--logging.level.com.synopsys=DEBUG");
+        cmd.add("--logging.level.com.blackducksoftware=DEBUG");
         if (startContainersAsNeeded) {
             // --imageinspector.service.start=true is left to default (true)
             cmd.add(String.format("--imageinspector.service.port.alpine=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE));
@@ -128,6 +129,7 @@ public class IntegrationTestCommon {
             cmd.add(String.format("--docker.image.tag=%s", tag));
         }
         cmd.add("--logging.level.com.synopsys=DEBUG");
+        cmd.add("--logging.level.com.blackducksoftware=DEBUG");
         if (needWorkingDir) {
             final File workingDir = new File(String.format("%s/endToEnd", TestUtils.TEST_DIR_REL_PATH));
             TestUtils.deleteDirIfExists(workingDir);
