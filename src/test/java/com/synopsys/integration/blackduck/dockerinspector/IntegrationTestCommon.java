@@ -129,7 +129,6 @@ public class IntegrationTestCommon {
             cmd.add(String.format("--docker.image.tag=%s", tag));
         }
         cmd.add("--logging.level.com.synopsys=DEBUG");
-        cmd.add("--logging.level.com.blackducksoftware=DEBUG");
         if (needWorkingDir) {
             final File workingDir = new File(String.format("%s/endToEnd", TestUtils.TEST_DIR_REL_PATH));
             TestUtils.deleteDirIfExists(workingDir);
