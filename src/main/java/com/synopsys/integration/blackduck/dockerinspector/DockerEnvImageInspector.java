@@ -105,11 +105,11 @@ public class DockerEnvImageInspector {
         int returnCode = -1;
         final DissectedImage dissectedImage = new DissectedImage();
         try {
-            if (!initAndValidate(config)) {
+            final Inspector inspector = chooseInspector();
+            if (!initAndValidate(config, inspector.getClass().getName())) {
                 System.exit(0);
             }
             try {
-                final Inspector inspector = chooseInspector();
                 returnCode = inspector.getBdio(dissectedImage);
             } catch (final PkgMgrDataNotFoundException e) {
                 logger.info("Pkg mgr not found; generating empty BDIO file");
@@ -175,7 +175,7 @@ public class DockerEnvImageInspector {
         System.out.println("----------");
     }
 
-    private boolean initAndValidate(final Config config) throws IOException, IntegrationException, IllegalArgumentException, IllegalAccessException {
+    private boolean initAndValidate(final Config config, final String inspectorName) throws IOException, IntegrationException, IllegalArgumentException, IllegalAccessException {
         logger.info(String.format("Black Duck Docker Inspector %s", programVersion.getProgramVersion()));
         if (helpInvoked()) {
             showUsage();
@@ -190,7 +190,7 @@ public class DockerEnvImageInspector {
                 if (StringUtils.isBlank(config.getImageInspectorUrl())) {
                     dockerEngineVersion = dockerClientManager.getDockerEngineVersion();
                 }
-                blackDuckClient.phoneHome(dockerEngineVersion);
+                blackDuckClient.phoneHome(dockerEngineVersion, inspectorName);
             } catch (final Exception e) {
                 logger.warn(String.format("Unable to phone home: %s", e.getMessage()));
             }

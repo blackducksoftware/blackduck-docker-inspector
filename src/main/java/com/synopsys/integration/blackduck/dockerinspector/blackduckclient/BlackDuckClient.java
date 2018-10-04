@@ -56,8 +56,9 @@ import com.synopsys.integration.phonehome.PhoneHomeService;
 @Component
 public class BlackDuckClient {
     private static final String PHONE_HOME_METADATA_NAME_CALLER_VERSION = "callerVersion";
-
     private static final String PHONE_HOME_METADATA_NAME_CALLER_NAME = "callerName";
+    private static final String PHONE_HOME_METADATA_NAME_INSPECTOR_NAME = "inspectorName";
+    private static final String PHONE_HOME_METADATA_NAME_DOCKER_ENGINE_VERSION = "dockerEngineVersion";
 
     private final Logger logger = LoggerFactory.getLogger(BlackDuckClient.class);
 
@@ -103,24 +104,30 @@ public class BlackDuckClient {
         return config.getBlackDuckUsername();
     }
 
-    public void phoneHome(final String dockerEngineVersion) {
+    public void phoneHome(final String dockerEngineVersion, final String inspectorName) {
         if (!config.isPhoneHome()) {
             logger.debug("PhoneHome disabled");
             return;
         }
         logger.debug("Attempting to phone home");
         try {
-            phoneHomeBlackDuckConnection(dockerEngineVersion);
+            phoneHomeBlackDuckConnection(dockerEngineVersion, inspectorName);
         } catch (final Throwable e) {
             logger.debug(String.format("Attempt to phone home failed. This may simply be because Black Duck credentials were not supplied. Error message: %s", e.getMessage()));
         }
     }
 
-    private void phoneHomeBlackDuckConnection(final String dockerEngineVersion) throws IOException, EncryptionException {
+    private void phoneHomeBlackDuckConnection(final String dockerEngineVersion, final String inspectorName) throws IOException, EncryptionException {
         final BlackduckRestConnection restConnection = createRestConnection();
         final HubServicesFactory blackDuckServicesFactory = new HubServicesFactory(HubServicesFactory.createDefaultGson(), HubServicesFactory.createDefaultJsonParser(), restConnection, new Slf4jIntLogger(logger));
         final PhoneHomeService phoneHomeService = blackDuckServicesFactory.createPhoneHomeService(Executors.newSingleThreadExecutor());
         final PhoneHomeRequestBody.Builder phoneHomeRequestBodyBuilder = new PhoneHomeRequestBody.Builder();
+        if (!StringUtils.isBlank(inspectorName)) {
+            phoneHomeRequestBodyBuilder.addToMetaData(PHONE_HOME_METADATA_NAME_INSPECTOR_NAME, inspectorName);
+        }
+        if (!StringUtils.isBlank(dockerEngineVersion)) {
+            phoneHomeRequestBodyBuilder.addToMetaData(PHONE_HOME_METADATA_NAME_DOCKER_ENGINE_VERSION, dockerEngineVersion);
+        }
         if (!StringUtils.isBlank(config.getCallerName())) {
             phoneHomeRequestBodyBuilder.addToMetaData(PHONE_HOME_METADATA_NAME_CALLER_NAME, config.getCallerName());
         }
