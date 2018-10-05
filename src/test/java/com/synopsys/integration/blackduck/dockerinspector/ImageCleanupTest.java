@@ -92,7 +92,7 @@ public class ImageCleanupTest {
         if (expectInspectOnImageRemoved) {
             assertFalse(isImagePresent(dockerImageList, inspectOnImageRepoName, inspectOnImageTag));
         }
-        assertFalse(isImagePresent(dockerImageList, TARGET_IMAGE_NAME, TARGET_IMAGE_TAG));
+        assertFalse(String.format("Target image %s:%s was not removed", TARGET_IMAGE_NAME, TARGET_IMAGE_TAG), isImagePresent(dockerImageList, TARGET_IMAGE_NAME, TARGET_IMAGE_TAG));
     }
 
     private String runCommand(final List<String> cmd, final boolean assertPasses) throws IOException, InterruptedException {
