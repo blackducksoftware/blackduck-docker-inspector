@@ -263,6 +263,10 @@ public class Config {
     @Value("${imageinspector.service.distro.default:ubuntu}")
     private String imageInspectorDefaultDistro = INSPECTOR_OS_UBUNTU;
 
+    @ValueDescription(description = "Make no attempts to access network-based resources (the Black Duck server, docker repository)", defaultValue = "true", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${offline.mode:false}")
+    private Boolean offlineMode = Boolean.FALSE;
+
     // Environment Variables
     @Value("${BD_HUB_PASSWORD:}")
     private String blackDuckLegacyPasswordEnvVar = "";
@@ -568,6 +572,10 @@ public class Config {
         return optionsByFieldName.get("imageInspectorServiceStart").getResolvedValue().equals("true");
     }
 
+    public boolean isOfflineMode() {
+        return optionsByFieldName.get("offlineMode").getResolvedValue().equals("true");
+    }
+
     public void setDockerImageRepo(final String newValue) {
         optionsByFieldName.get("dockerImageRepo").setResolvedValue(newValue);
     }
@@ -647,10 +655,10 @@ public class Config {
         this.imageInspectorContainerPortAlpine = null;
         this.imageInspectorContainerPortCentos = null;
         this.imageInspectorContainerPortUbuntu = null;
-
         this.imageInspectorHostPortAlpine = null;
         this.imageInspectorHostPortCentos = null;
         this.imageInspectorHostPortUbuntu = null;
         this.imageInspectorDefaultDistro = null;
+        this.offlineMode = null;
     }
 }

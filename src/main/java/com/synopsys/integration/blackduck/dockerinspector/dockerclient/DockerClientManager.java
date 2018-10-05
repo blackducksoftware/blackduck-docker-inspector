@@ -74,6 +74,7 @@ import com.github.dockerjava.core.command.PullImageResultCallback;
 import com.synopsys.integration.blackduck.dockerinspector.blackduckclient.BlackDuckSecrets;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
+import com.synopsys.integration.blackduck.dockerinspector.exception.DisabledException;
 import com.synopsys.integration.blackduck.exception.HubIntegrationException;
 import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 import com.synopsys.integration.blackduck.imageinspector.name.ImageNameResolver;
@@ -145,6 +146,8 @@ public class DockerClientManager {
         Optional<String> targetImageId = Optional.empty();
         try {
             targetImageId = Optional.ofNullable(pullImage(imageName, tagName));
+        } catch (final DisabledException disabledException) {
+            logger.info("Image pulling is disabled in offline mode");
         } catch (final Exception e) {
             logger.info(String.format("Unable to pull %s:%s; Proceeding anyway since the image might be in local docker image cache. Error on pull: %s", imageName, tagName, e.getMessage()));
         }
@@ -160,6 +163,9 @@ public class DockerClientManager {
     }
 
     public String pullImage(final String imageName, final String tagName) throws IntegrationException {
+        if (config.isOfflineMode()) {
+            throw new DisabledException("Image pulling is disabled in offline mode");
+        }
         logger.info(String.format("Pulling image %s:%s", imageName, tagName));
         final DockerClient dockerClient = getDockerClient();
         final PullImageCmd pull = dockerClient.pullImageCmd(imageName).withTag(tagName);

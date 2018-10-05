@@ -77,8 +77,8 @@ public class BlackDuckClient {
 
     public void testBlackDuckConnection() throws HubIntegrationException {
         logger.trace(String.format("Black Duck username: %s", getBlackDuckUsername())); // ArgsWithSpacesTest tests this in output
-        if (!config.isUploadBdio()) {
-            logger.debug("Upload of BDIO not enabled; skipping verification of Black Duck connection");
+        if (!config.isUploadBdio() || config.isOfflineMode()) {
+            logger.debug("Upload of BDIO disabled or offline mode is enabled; skipping verification of Black Duck connection");
             return;
         }
         BlackduckRestConnection restConnection;
@@ -93,6 +93,10 @@ public class BlackDuckClient {
     }
 
     public void uploadBdio(final File bdioFile) throws IntegrationException {
+        if (config.isOfflineMode()) {
+            logger.info("Upload of BDIO has been disabled by offline mode");
+            return;
+        }
         final BlackduckRestConnection restConnection = createRestConnection();
         final HubServicesFactory blackDuckServicesFactory = new HubServicesFactory(new Gson(), new JsonParser(), restConnection, new Slf4jIntLogger(logger));
         final CodeLocationService bomImportRequestService = blackDuckServicesFactory.createCodeLocationService();
@@ -105,7 +109,7 @@ public class BlackDuckClient {
     }
 
     public void phoneHome(final String dockerEngineVersion, final String inspectorName) {
-        if (!config.isPhoneHome()) {
+        if (!config.isPhoneHome() || config.isOfflineMode()) {
             logger.debug("PhoneHome disabled");
             return;
         }
