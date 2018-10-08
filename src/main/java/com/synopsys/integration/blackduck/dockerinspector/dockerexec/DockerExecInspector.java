@@ -175,7 +175,7 @@ public class DockerExecInspector implements Inspector {
                 dissectedImage.setTargetOs(imageInspector.detectInspectorOperatingSystem(dissectedImage.getTargetImageFileSystemRootDir()).getPkgMgr().getPackageManager().getInspectorOperatingSystem());
             }
             logger.info(String.format("Target image tarfile: %s; target OS: %s", dissectedImage.getDockerTarFile().getAbsolutePath(), dissectedImage.getTargetOs().toString()));
-            final ImageInfoDerived imageInfoDerived = imageInspector.generateBdioFromImageFilesDir(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), config.getBlackDuckProjectName(),
+            final ImageInfoDerived imageInfoDerived = imageInspector.generateBdioFromImageFilesDir(null, config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), config.getBlackDuckProjectName(),
                     config.getBlackDuckProjectVersion(), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), config.getBlackDuckCodelocationPrefix());
             output.writeBdioFile(dissectedImage, imageInfoDerived);
             output.createContainerFileSystemTarIfRequested(dissectedImage.getTargetImageFileSystemRootDir());
