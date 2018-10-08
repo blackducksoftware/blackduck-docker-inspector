@@ -263,7 +263,7 @@ public class Config {
     @Value("${imageinspector.service.distro.default:ubuntu}")
     private String imageInspectorDefaultDistro = INSPECTOR_OS_UBUNTU;
 
-    @ValueDescription(description = "Make no attempts to access network-based resources (the Black Duck server, docker repository)", defaultValue = "true", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Make no attempts to access network-based resources (the Black Duck server, docker repository)", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${offline.mode:false}")
     private Boolean offlineMode = Boolean.FALSE;
 
