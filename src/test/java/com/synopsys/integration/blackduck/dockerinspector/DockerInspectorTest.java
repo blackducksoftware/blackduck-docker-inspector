@@ -209,6 +209,15 @@ public class DockerInspectorTest {
     }
 
     @Test
+    public void testNonLinuxStartContainer() throws IOException, InterruptedException, IntegrationException {
+        final String repo = "osless";
+        final String tag = "1.0";
+        final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("osless.tar");
+        IntegrationTestCommon.testTar(programVersion, "src/test/resources/osless.tar", "osless_1.0_noPkgMgr_bdio.jsonld", repo, tag, true, true, null, true,
+                outputContainerFileSystemFile, null);
+    }
+
+    @Test
     public void testWhiteoutExec() throws IOException, InterruptedException, IntegrationException {
         final String repo = "blackducksoftware/whiteouttest";
         final String tag = "1.0";
