@@ -99,10 +99,8 @@ public class IntegrationTestCommon {
         cmd.add("-jar");
         cmd.add(DETECT_JAR_PATH);
         cmd.add(String.format("--detect.docker.inspector.path=build/libs/blackduck-docker-inspector-%s.jar", programVersion.getProgramVersion()));
-        ////////// cmd.add("--detect.cleanup=false");
         cmd.add("--blackduck.offline.mode=true");
         cmd.add("--detect.blackduck.signature.scanner.disabled=true");
-        // cmd.add(String.format("--output.path=%s/output", TestUtils.TEST_DIR_REL_PATH));
         if (repo != null) {
             cmd.add(String.format("--detect.docker.passthrough.docker.image.repo=%s", repo));
         }
@@ -170,11 +168,8 @@ public class IntegrationTestCommon {
             throws IOException, InterruptedException, IntegrationException {
 
         final String inspectTargetArg = String.format("--docker.tar=%s", inspectTargetTarfile);
-
         ensureFileDoesNotExist(outputContainerFileSystemFile);
 
-        // final File actualBdio = new File(
-        // String.format(String.format("%s/output/%s", TestUtils.TEST_DIR_REL_PATH, bdioFilename)));
         final File actualBdio;
         if (mode == Mode.DETECT) {
             actualBdio = new File(String.format(String.format("%s/blackduck/bdio/%s", System.getProperty("user.home"), bdioFilename)));
@@ -184,42 +179,6 @@ public class IntegrationTestCommon {
         ensureFileDoesNotExist(actualBdio);
 
         final List<String> cmd = createCmd(programVersion, mode, inspectTargetArg, repo, tag, additionalArgs);
-        // final List<String> cmd = new ArrayList<>();
-        // cmd.add("build/blackduck-docker-inspector.sh");
-        // cmd.add("--upload.bdio=false");
-        // cmd.add(String.format("--jar.path=build/libs/blackduck-docker-inspector-%s.jar", programVersion.getProgramVersion()));
-        // cmd.add(String.format("--output.path=%s/output", TestUtils.TEST_DIR_REL_PATH));
-        // cmd.add("--output.include.containerfilesystem=true");
-        // cmd.add("--blackduck.always.trust.cert=true");
-        // if (repo != null) {
-        // cmd.add(String.format("--docker.image.repo=%s", repo));
-        // }
-        // if (tag != null) {
-        // cmd.add(String.format("--docker.image.tag=%s", tag));
-        // }
-        // cmd.add("--logging.level.com.synopsys=DEBUG");
-        // if (needWorkingDir) {
-        // final File workingDir = new File(String.format("%s/endToEnd", TestUtils.TEST_DIR_REL_PATH));
-        // TestUtils.deleteDirIfExists(workingDir);
-        // cmd.add(String.format("--working.dir.path=%s", workingDir.getAbsolutePath()));
-        // }
-        // cmd.add(inspectTargetArg);
-        // if (mode == Mode.SPECIFY_II_DETAILS) {
-        // // --imageinspector.service.start=true is left to default (true)
-        // cmd.add(String.format("--imageinspector.service.port.alpine=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE));
-        // cmd.add(String.format("--imageinspector.service.port.centos=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS));
-        // cmd.add(String.format("--imageinspector.service.port.ubuntu=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU));
-        // cmd.add(String.format("--shared.dir.path.local=%s/containerShared", TestUtils.TEST_DIR_REL_PATH));
-        // } else if (mode == Mode.NO_SERVICE_START) {
-        // cmd.add("--imageinspector.service.start=false");
-        // } else if (mode == Mode.DEFAULT) {
-        // // Proceed with defaults
-        // } else {
-        // throw new UnsupportedOperationException(String.format("Unknown mode: %s", mode.toString()));
-        // }
-        // if (additionalArgs != null && additionalArgs.size() > 0) {
-        // cmd.addAll(additionalArgs);
-        // }
         System.out.println(String.format("Running end to end test on %s with command %s", inspectTargetTarfile, cmd.toString()));
         TestUtils.execCmd(String.join(" ", cmd), 240000L, true, givenEnv);
         System.out.println("blackduck-docker-inspector done; verifying results...");

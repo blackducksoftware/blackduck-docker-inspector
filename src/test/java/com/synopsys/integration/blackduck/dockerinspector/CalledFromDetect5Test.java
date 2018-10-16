@@ -43,7 +43,7 @@ public class CalledFromDetect5Test {
 
     @Test
     public void testAlpineLatest() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "alpine", "alpine", "latest", "blackduck_docker_inspector_alpine_latest_alpine_latest_docker_docker.jsonld", false, Mode.DETECT, "apk-", 5, null, null);
+        IntegrationTestCommon.testImage(programVersion, "alpine", "alpine", "latest", "blackduck_docker_inspector_alpine_latest_alpine_docker_docker.jsonld", false, Mode.DETECT, "apk-", 5, null, null);
     }
 
     @Test
@@ -53,20 +53,22 @@ public class CalledFromDetect5Test {
 
     @Test
     public void testBlackDuckWebapp() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", "blackduck_docker_inspector_hub-webapp_4_0_0_hub-webapp_4_0_0_docker_docker.jsonld", true, Mode.DETECT,
+        IntegrationTestCommon.testImage(programVersion, "blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0",
+                "blackduck_docker_inspector_blackducksoftware_hub_webapp_4_0_0_blackducksoftware_hub_webapp_4_0_0_docker_docker.jsonld", true, Mode.DETECT,
                 "apk-", 5, null, null);
     }
 
     @Test
     public void testBlackDuckZookeeper() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "blackducksoftware/hub-zookeeper:4.0.0", "blackducksoftware_hub-zookeeper", "4.0.0", "blackduck_docker_inspector_hub-zookeeper_4_0_0_hub-zookeeper_4_0_0_docker_docker.jsonld", true,
+        IntegrationTestCommon.testImage(programVersion, "blackducksoftware/hub-zookeeper:4.0.0", "blackducksoftware_hub-zookeeper", "4.0.0",
+                "blackduck_docker_inspector_blackducksoftware_hub_zookeeper_4_0_0_blackducksoftware_hub_zookeeper_4_0_0_docker_docker.jsonld", true,
                 Mode.DETECT, "apk-", 5,
                 null, null);
     }
 
     @Test
     public void testTomcat() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "tomcat:6.0.53-jre7", "tomcat", "6.0.53-jre7", "blackduck_docker_inspector_tomcat_6_0_53-jre7_tomcat_6_0_53-jre7_docker_docker.jsonld", false, Mode.DETECT, "dpkg", 5, null, null);
+        IntegrationTestCommon.testImage(programVersion, "tomcat:6.0.53-jre7", "tomcat", "6.0.53-jre7", "blackduck_docker_inspector_tomcat_6_0_53_jre7_tomcat_6_0_53_jre7_docker_docker.jsonld", false, Mode.DETECT, "dpkg", 5, null, null);
     }
 
     @Test
