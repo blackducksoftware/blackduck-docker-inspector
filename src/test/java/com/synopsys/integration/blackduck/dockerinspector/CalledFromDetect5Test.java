@@ -88,7 +88,7 @@ public class CalledFromDetect5Test {
         final String repo = "blackducksoftware/whiteouttest";
         final String tag = "1.0";
         final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("whiteouttest.tar");
-        IntegrationTestCommon.testTar(programVersion, "build/images/test/whiteouttest.tar", "blackducksoftware_whiteouttest_1.0_DPKG_bdio.jsonld", repo, tag, true, Mode.DETECT, null, true,
+        IntegrationTestCommon.testTar(programVersion, "build/images/test/whiteouttest.tar", "blackduck_docker_inspector_blackducksoftware_whiteouttest_1_0_whiteouttest_tar_docker_docker.jsonld", repo, tag, true, Mode.DETECT, null, true,
                 outputContainerFileSystemFile, null);
     }
 
@@ -97,7 +97,7 @@ public class CalledFromDetect5Test {
         final String repo = "blackducksoftware/whiteouttest";
         final String tag = "1.0";
         final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("aggregated.tar");
-        IntegrationTestCommon.testTar(programVersion, "build/images/test/aggregated.tar", "blackducksoftware_whiteouttest_1.0_DPKG_bdio.jsonld", repo, tag, true, Mode.DETECT, null, true,
+        IntegrationTestCommon.testTar(programVersion, "build/images/test/aggregated.tar", "blackduck_docker_inspector_blackducksoftware_whiteouttest_1_0_aggregated_tar_docker_docker.jsonld", repo, tag, true, Mode.DETECT, null, true,
                 outputContainerFileSystemFile, null);
     }
 
@@ -106,7 +106,8 @@ public class CalledFromDetect5Test {
         final String repo = "blackducksoftware/centos_minus_vim_plus_bacula";
         final String tag = "1.0";
         final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("aggregated.tar");
-        IntegrationTestCommon.testTar(programVersion, "build/images/test/aggregated.tar", "blackducksoftware_centos_minus_vim_plus_bacula_1.0_RPM_bdio.jsonld", repo, tag, true, Mode.DETECT, null, true,
+        IntegrationTestCommon.testTar(programVersion, "build/images/test/aggregated.tar", "blackduck_docker_inspector_blackducksoftware_centos_minus_vim_plus_bacula_1_0_aggregated_tar_docker_docker.jsonld", repo, tag, true, Mode.DETECT,
+                null, true,
                 outputContainerFileSystemFile, null);
     }
 
@@ -115,7 +116,8 @@ public class CalledFromDetect5Test {
         final String repo = "alpine";
         final String tag = "latest";
         final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("alpine.tar");
-        IntegrationTestCommon.testTar(programVersion, "build/images/test/alpine.tar", "alpine_latest_APK_bdio.jsonld", repo, tag, false, Mode.DETECT, null, true, outputContainerFileSystemFile, null);
+        IntegrationTestCommon.testTar(programVersion, "build/images/test/alpine.tar", "blackduck_docker_inspector_alpine_latest_alpine_tar_docker_docker.jsonld", repo, tag, false, Mode.DETECT, null, true, outputContainerFileSystemFile,
+                null);
     }
 
     @Test
@@ -123,6 +125,7 @@ public class CalledFromDetect5Test {
         final String repo = "alpine";
         final String tag = "latest";
         final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("alpine.tar");
-        IntegrationTestCommon.testTar(programVersion, "build/images/test/alpine.tar", "alpine_latest_APK_bdio.jsonld", repo, tag, false, Mode.DETECT, null, true, outputContainerFileSystemFile, null);
+        IntegrationTestCommon.testTar(programVersion, "build/images/test/alpine.tar", "blackduck_docker_inspector_alpine_latest_alpine_tar_docker_docker.jsonld", repo, tag, false, Mode.DETECT, null, true, outputContainerFileSystemFile,
+                null);
     }
 }

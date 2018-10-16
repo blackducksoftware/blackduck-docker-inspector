@@ -1,21 +1,22 @@
 [
   {
     "specVersion": "1.1.0",
-    "spdx:name": "osless_1.0_noPkgMgr",
+    "spdx:name": "blackduck-docker-inspector/osless/1.0/osless.tar docker/docker",
     "creationInfo": {
       "spdx:creator": [
-        "Tool: IntegrationBdio-16.0.0"
+        "Tool: HubDetect-5.0.0-SNAPSHOT",
+        "Tool: IntegrationBdio-16.1.1"
       ],
-      "spdx:created": "2018-10-08T14:55:32.180Z"
+      "spdx:created": "2018-10-16T18:53:56.012Z"
     },
-    "@id": "uuid:404106c5-b158-4056-8893-e81a551cfceb",
+    "@id": "uuid:b303bfa2-5c61-41ab-9b5c-dfc9b89bf40b",
     "@type": "BillOfMaterials",
     "relationship": []
   },
   {
     "name": "osless",
     "revision": "1.0",
-    "@id": "http:/osless/1_0",
+    "@id": "http:/osless_1_0",
     "@type": "Project",
     "externalIdentifier": {
       "externalId": "osless/1.0",
@@ -24,8 +25,7 @@
           "separator": "/",
           "kbSeparator": "/"
         },
-        "name": "osless",
-        "version": "1.0"
+        "path": "osless/1.0"
       }
     },
     "relationship": []

@@ -99,7 +99,7 @@ public class IntegrationTestCommon {
         cmd.add("-jar");
         cmd.add(DETECT_JAR_PATH);
         cmd.add(String.format("--detect.docker.inspector.path=build/libs/blackduck-docker-inspector-%s.jar", programVersion.getProgramVersion()));
-        cmd.add("--detect.cleanup=false");
+        ////////// cmd.add("--detect.cleanup=false");
         cmd.add("--blackduck.offline.mode=true");
         cmd.add("--detect.blackduck.signature.scanner.disabled=true");
         // cmd.add(String.format("--output.path=%s/output", TestUtils.TEST_DIR_REL_PATH));
@@ -237,7 +237,9 @@ public class IntegrationTestCommon {
             assertTrue("BDIO produced does not match expected BDIO", outputBdioMatches);
         }
 
-        assertTrue(String.format("%s does not exist", outputContainerFileSystemFile.getAbsolutePath()), outputContainerFileSystemFile.exists());
+        if (mode != Mode.DETECT) {
+            assertTrue(String.format("%s does not exist", outputContainerFileSystemFile.getAbsolutePath()), outputContainerFileSystemFile.exists());
+        }
     }
 
     public static File getOutputContainerFileSystemFileFromTarFilename(final String tarFilename) {
