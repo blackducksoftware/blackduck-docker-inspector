@@ -85,7 +85,7 @@ public class NonRedirectingUnauthenticatedRestConnection extends Unauthenticated
                                 warningHeaderValue = resp.getHeaderValue("Warning");
                                 responseBody = resp.getContentString();
                             }
-                            throw new IntegrationRestException(statusCode, statusMessage,
+                            throw new IntegrationRestException(statusCode, statusMessage, responseBody,
                                     String.format("There was a problem trying to %s this item: %s. Error: %s %s; Warning header: '%s'; Body: '%s'", request.getMethod(), urlString, statusCode, statusMessage, warningHeaderValue,
                                             responseBody));
                         }

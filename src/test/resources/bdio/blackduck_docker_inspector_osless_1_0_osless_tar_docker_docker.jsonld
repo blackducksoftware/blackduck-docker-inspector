@@ -1,0 +1,33 @@
+[
+  {
+    "specVersion": "1.1.0",
+    "spdx:name": "osless_1.0_noPkgMgr",
+    "creationInfo": {
+      "spdx:creator": [
+        "Tool: IntegrationBdio-16.0.0"
+      ],
+      "spdx:created": "2018-10-08T14:55:32.180Z"
+    },
+    "@id": "uuid:404106c5-b158-4056-8893-e81a551cfceb",
+    "@type": "BillOfMaterials",
+    "relationship": []
+  },
+  {
+    "name": "osless",
+    "revision": "1.0",
+    "@id": "http:/osless/1_0",
+    "@type": "Project",
+    "externalIdentifier": {
+      "externalId": "osless/1.0",
+      "externalIdMetaData": {
+        "forge": {
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "osless",
+        "version": "1.0"
+      }
+    },
+    "relationship": []
+  }
+]

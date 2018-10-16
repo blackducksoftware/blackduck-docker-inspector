@@ -161,7 +161,7 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
                 logServiceError(serviceContainerDetails.getContainerId());
                 final String warningHeaderValue = response.getWarningHeaderValue();
                 final String responseBody = response.getBody();
-                throw new IntegrationRestException(statusCode, warningHeaderValue,
+                throw new IntegrationRestException(statusCode, warningHeaderValue, responseBody,
                         String.format("There was a problem trying to getBdio. Error: %d; Warning header: '%s'; Body: '%s'", statusCode, warningHeaderValue,
                                 responseBody));
             }

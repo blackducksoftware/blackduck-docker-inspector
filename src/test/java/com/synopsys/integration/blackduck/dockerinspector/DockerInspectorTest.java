@@ -17,6 +17,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
+import com.synopsys.integration.blackduck.dockerinspector.IntegrationTestCommon.Mode;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.test.annotation.IntegrationTest;
 
@@ -113,99 +114,96 @@ public class DockerInspectorTest {
 
     @Test
     public void testUbuntuExec() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "ubuntu:17.04", "ubuntu", "17.04", "ubuntu_var_lib_dpkg_ubuntu_17.04_bdio.jsonld", false, false, false, "dpkg", 10, null, null);
+        IntegrationTestCommon.testImage(programVersion, "ubuntu:17.04", "ubuntu", "17.04", "ubuntu_var_lib_dpkg_ubuntu_17.04_bdio.jsonld", false, Mode.NO_SERVICE_START, "dpkg", 10, null, null);
     }
 
     @Test
     public void testUbuntuStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "ubuntu:17.04", "ubuntu", "17.04", "ubuntu_17.04_DPKG_bdio.jsonld", false, true, false, "dpkg", 10, null, null);
+        IntegrationTestCommon.testImage(programVersion, "ubuntu:17.04", "ubuntu", "17.04", "ubuntu_17.04_DPKG_bdio.jsonld", false, Mode.DEFAULT, "dpkg", 10, null, null);
     }
 
     @Test
     public void testAlpineExec() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "alpine:3.6", "alpine", "3.6", "alpine_lib_apk_alpine_3.6_bdio.jsonld", false, false, false, "apk-", 5, null, null);
+        IntegrationTestCommon.testImage(programVersion, "alpine:3.6", "alpine", "3.6", "alpine_lib_apk_alpine_3.6_bdio.jsonld", false, Mode.NO_SERVICE_START, "apk-", 5, null, null);
     }
 
     @Test
     public void testAlpineStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "alpine:3.6", "alpine", "3.6", "alpine_3.6_APK_bdio.jsonld", false, true, false, "apk-", 5, null, null);
-    }
-
-    @Test
-    public void testAlpineStartContainerForgeFromDistro() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "alpine:3.6", "alpine", "3.6", "alpine_3.6_APK_bdio.jsonld", false, true, true, "apk-", 5, null, null);
+        IntegrationTestCommon.testImage(programVersion, "alpine:3.6", "alpine", "3.6", "alpine_3.6_APK_bdio.jsonld", false, Mode.SPECIFY_II_DETAILS, "apk-", 5, null, null);
     }
 
     @Test
     public void testBusyboxExec() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "busybox:latest", "busybox", "latest", "busybox_noPkgMgr_busybox_latest_bdio.jsonld", false, false, false, null, 0, null, null);
+        IntegrationTestCommon.testImage(programVersion, "busybox:latest", "busybox", "latest", "busybox_noPkgMgr_busybox_latest_bdio.jsonld", false, Mode.NO_SERVICE_START, null, 0, null, null);
     }
 
     @Test
     public void testBusyboxStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "busybox:latest", "busybox", "latest", "busybox_latest_noPkgMgr_bdio.jsonld", false, true, false, null, 0, null, null);
+        IntegrationTestCommon.testImage(programVersion, "busybox:latest", "busybox", "latest", "busybox_latest_noPkgMgr_bdio.jsonld", false, Mode.SPECIFY_II_DETAILS, null, 0, null, null);
     }
 
     @Test
     public void testAlpineLatestExec() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "alpine", "alpine", "latest", "alpine_lib_apk_alpine_latest_bdio.jsonld", false, false, false, "apk-", 5, null, null);
+        IntegrationTestCommon.testImage(programVersion, "alpine", "alpine", "latest", "alpine_lib_apk_alpine_latest_bdio.jsonld", false, Mode.NO_SERVICE_START, "apk-", 5, null, null);
     }
 
     @Test
     public void testAlpineLatestStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "alpine", "alpine", "latest", "alpine_latest_APK_bdio.jsonld", false, true, false, "apk-", 5, null, null);
+        IntegrationTestCommon.testImage(programVersion, "alpine", "alpine", "latest", "alpine_latest_APK_bdio.jsonld", false, Mode.DEFAULT, "apk-", 5, null, null);
     }
 
     @Test
     public void testCentosExec() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "centos:7.3.1611", "centos", "7.3.1611", "centos_var_lib_rpm_centos_7.3.1611_bdio.jsonld", false, false, false, "1:openssl-libs", 15, null, null);
+        IntegrationTestCommon.testImage(programVersion, "centos:7.3.1611", "centos", "7.3.1611", "centos_var_lib_rpm_centos_7.3.1611_bdio.jsonld", false, Mode.NO_SERVICE_START, "1:openssl-libs", 15, null, null);
     }
 
     @Test
     public void testCentosStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "centos:7.3.1611", "centos", "7.3.1611", "centos_7.3.1611_RPM_bdio.jsonld", false, true, false, "1:openssl-libs", 15, null, null);
+        IntegrationTestCommon.testImage(programVersion, "centos:7.3.1611", "centos", "7.3.1611", "centos_7.3.1611_RPM_bdio.jsonld", false, Mode.SPECIFY_II_DETAILS, "1:openssl-libs", 15, null, null);
     }
 
     @Test
     public void testBlackDuckWebappExec() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", "blackducksoftware_hub-webapp_lib_apk_blackducksoftware_hub-webapp_4.0.0_bdio.jsonld", true, false,
-                false, "apk-", 5, null, null);
+        IntegrationTestCommon.testImage(programVersion, "blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", "blackducksoftware_hub-webapp_lib_apk_blackducksoftware_hub-webapp_4.0.0_bdio.jsonld", true,
+                Mode.NO_SERVICE_START,
+                "apk-", 5, null, null);
     }
 
     @Test
     public void testBlackDuckWebappStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", "blackducksoftware_hub-webapp_4.0.0_APK_bdio.jsonld", true, true, false, "apk-", 5, null, null);
+        IntegrationTestCommon.testImage(programVersion, "blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", "blackducksoftware_hub-webapp_4.0.0_APK_bdio.jsonld", true, Mode.DEFAULT, "apk-", 5, null, null);
     }
 
     @Test
     public void testBlackDuckZookeeperExec() throws IOException, InterruptedException, IntegrationException {
         IntegrationTestCommon.testImage(programVersion, "blackducksoftware/hub-zookeeper:4.0.0", "blackducksoftware_hub-zookeeper", "4.0.0", "blackducksoftware_hub-zookeeper_lib_apk_blackducksoftware_hub-zookeeper_4.0.0_bdio.jsonld", true,
-                false, false, "apk-", 5, null, null);
+                Mode.NO_SERVICE_START, "apk-", 5, null, null);
     }
 
     @Test
     public void testBlackDuckZookeeperStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "blackducksoftware/hub-zookeeper:4.0.0", "blackducksoftware_hub-zookeeper", "4.0.0", "blackducksoftware_hub-zookeeper_4.0.0_APK_bdio.jsonld", true, true, false, "apk-", 5, null, null);
+        IntegrationTestCommon.testImage(programVersion, "blackducksoftware/hub-zookeeper:4.0.0", "blackducksoftware_hub-zookeeper", "4.0.0", "blackducksoftware_hub-zookeeper_4.0.0_APK_bdio.jsonld", true, Mode.SPECIFY_II_DETAILS, "apk-", 5,
+                null, null);
     }
 
     @Test
     public void testTomcatExec() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "tomcat:6.0.53-jre7", "tomcat", "6.0.53-jre7", "tomcat_var_lib_dpkg_tomcat_6.0.53-jre7_bdio.jsonld", false, false, false, "dpkg", 5, null, null);
+        IntegrationTestCommon.testImage(programVersion, "tomcat:6.0.53-jre7", "tomcat", "6.0.53-jre7", "tomcat_var_lib_dpkg_tomcat_6.0.53-jre7_bdio.jsonld", false, Mode.NO_SERVICE_START, "dpkg", 5, null, null);
     }
 
     @Test
     public void testTomcatStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "tomcat:6.0.53-jre7", "tomcat", "6.0.53-jre7", "tomcat_6.0.53-jre7_DPKG_bdio.jsonld", false, true, false, "dpkg", 5, null, null);
+        IntegrationTestCommon.testImage(programVersion, "tomcat:6.0.53-jre7", "tomcat", "6.0.53-jre7", "tomcat_6.0.53-jre7_DPKG_bdio.jsonld", false, Mode.DEFAULT, "dpkg", 5, null, null);
     }
 
     @Test
     public void testRhelExec() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "dnplus/rhel:6.5", "dnplus_rhel", "6.5", "dnplus_rhel_var_lib_rpm_dnplus_rhel_6.5_bdio.jsonld", false, false, false, "rpm", 10, null, null);
+        IntegrationTestCommon.testImage(programVersion, "dnplus/rhel:6.5", "dnplus_rhel", "6.5", "dnplus_rhel_var_lib_rpm_dnplus_rhel_6.5_bdio.jsonld", false, Mode.NO_SERVICE_START, "rpm", 10, null, null);
     }
 
     @Test
     public void testRhelStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(programVersion, "dnplus/rhel:6.5", "dnplus_rhel", "6.5", "dnplus_rhel_6.5_RPM_bdio.jsonld", false, true, false, "rpm", 10, null, null);
+        IntegrationTestCommon.testImage(programVersion, "dnplus/rhel:6.5", "dnplus_rhel", "6.5", "dnplus_rhel_6.5_RPM_bdio.jsonld", false, Mode.SPECIFY_II_DETAILS, "rpm", 10, null, null);
     }
 
     @Test
@@ -213,7 +211,7 @@ public class DockerInspectorTest {
         final String repo = "osless";
         final String tag = "1.0";
         final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("osless.tar");
-        IntegrationTestCommon.testTar(programVersion, "src/test/resources/osless.tar", "osless_1.0_noPkgMgr_bdio.jsonld", repo, tag, true, true, null, true,
+        IntegrationTestCommon.testTar(programVersion, "src/test/resources/osless.tar", "osless_1.0_noPkgMgr_bdio.jsonld", repo, tag, true, Mode.DEFAULT, null, true,
                 outputContainerFileSystemFile, null);
     }
 
@@ -223,7 +221,7 @@ public class DockerInspectorTest {
         final String tag = "1.0";
         final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("whiteouttest.tar");
         IntegrationTestCommon.testTar(programVersion, "build/images/test/whiteouttest.tar", "blackducksoftware_whiteouttest_var_lib_dpkg_blackducksoftware_whiteouttest_1.0_bdio.jsonld", repo, tag, true,
-                false, null, true,
+                Mode.NO_SERVICE_START, null, true,
                 outputContainerFileSystemFile, null);
     }
 
@@ -232,7 +230,7 @@ public class DockerInspectorTest {
         final String repo = "blackducksoftware/whiteouttest";
         final String tag = "1.0";
         final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("whiteouttest.tar");
-        IntegrationTestCommon.testTar(programVersion, "build/images/test/whiteouttest.tar", "blackducksoftware_whiteouttest_1.0_DPKG_bdio.jsonld", repo, tag, true, true, null, true,
+        IntegrationTestCommon.testTar(programVersion, "build/images/test/whiteouttest.tar", "blackducksoftware_whiteouttest_1.0_DPKG_bdio.jsonld", repo, tag, true, Mode.SPECIFY_II_DETAILS, null, true,
                 outputContainerFileSystemFile, null);
     }
 
@@ -241,7 +239,7 @@ public class DockerInspectorTest {
         final String repo = "blackducksoftware/whiteouttest";
         final String tag = "1.0";
         final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("aggregated.tar");
-        IntegrationTestCommon.testTar(programVersion, "build/images/test/aggregated.tar", "blackducksoftware_whiteouttest_var_lib_dpkg_blackducksoftware_whiteouttest_1.0_bdio.jsonld", repo, tag, true, false,
+        IntegrationTestCommon.testTar(programVersion, "build/images/test/aggregated.tar", "blackducksoftware_whiteouttest_var_lib_dpkg_blackducksoftware_whiteouttest_1.0_bdio.jsonld", repo, tag, true, Mode.NO_SERVICE_START,
                 null, true, outputContainerFileSystemFile, null);
     }
 
@@ -250,7 +248,7 @@ public class DockerInspectorTest {
         final String repo = "blackducksoftware/whiteouttest";
         final String tag = "1.0";
         final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("aggregated.tar");
-        IntegrationTestCommon.testTar(programVersion, "build/images/test/aggregated.tar", "blackducksoftware_whiteouttest_1.0_DPKG_bdio.jsonld", repo, tag, true, true, null, true,
+        IntegrationTestCommon.testTar(programVersion, "build/images/test/aggregated.tar", "blackducksoftware_whiteouttest_1.0_DPKG_bdio.jsonld", repo, tag, true, Mode.SPECIFY_II_DETAILS, null, true,
                 outputContainerFileSystemFile, null);
     }
 
@@ -260,7 +258,7 @@ public class DockerInspectorTest {
         final String tag = "1.0";
         final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("aggregated.tar");
         IntegrationTestCommon.testTar(programVersion, "build/images/test/aggregated.tar",
-                "blackducksoftware_centos_minus_vim_plus_bacula_var_lib_rpm_blackducksoftware_centos_minus_vim_plus_bacula_1.0_bdio.jsonld", repo, tag, true, false, null, true, outputContainerFileSystemFile, null);
+                "blackducksoftware_centos_minus_vim_plus_bacula_var_lib_rpm_blackducksoftware_centos_minus_vim_plus_bacula_1.0_bdio.jsonld", repo, tag, true, Mode.NO_SERVICE_START, null, true, outputContainerFileSystemFile, null);
     }
 
     @Test
@@ -268,7 +266,7 @@ public class DockerInspectorTest {
         final String repo = "blackducksoftware/centos_minus_vim_plus_bacula";
         final String tag = "1.0";
         final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("aggregated.tar");
-        IntegrationTestCommon.testTar(programVersion, "build/images/test/aggregated.tar", "blackducksoftware_centos_minus_vim_plus_bacula_1.0_RPM_bdio.jsonld", repo, tag, true, true, null, true,
+        IntegrationTestCommon.testTar(programVersion, "build/images/test/aggregated.tar", "blackducksoftware_centos_minus_vim_plus_bacula_1.0_RPM_bdio.jsonld", repo, tag, true, Mode.SPECIFY_II_DETAILS, null, true,
                 outputContainerFileSystemFile, null);
     }
 
@@ -277,7 +275,7 @@ public class DockerInspectorTest {
         final String repo = "alpine";
         final String tag = "latest";
         final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("alpine.tar");
-        IntegrationTestCommon.testTar(programVersion, "build/images/test/alpine.tar", "alpine_lib_apk_alpine_latest_bdio.jsonld", repo, tag, false, false, null, true, outputContainerFileSystemFile, null);
+        IntegrationTestCommon.testTar(programVersion, "build/images/test/alpine.tar", "alpine_lib_apk_alpine_latest_bdio.jsonld", repo, tag, false, Mode.NO_SERVICE_START, null, true, outputContainerFileSystemFile, null);
     }
 
     @Test
@@ -285,7 +283,7 @@ public class DockerInspectorTest {
         final String repo = "alpine";
         final String tag = "latest";
         final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("alpine.tar");
-        IntegrationTestCommon.testTar(programVersion, "build/images/test/alpine.tar", "alpine_latest_APK_bdio.jsonld", repo, tag, false, true, null, true, outputContainerFileSystemFile, null);
+        IntegrationTestCommon.testTar(programVersion, "build/images/test/alpine.tar", "alpine_latest_APK_bdio.jsonld", repo, tag, false, Mode.DEFAULT, null, true, outputContainerFileSystemFile, null);
     }
 
     @Test
@@ -293,7 +291,7 @@ public class DockerInspectorTest {
         final String repo = "alpine";
         final String tag = "latest";
         final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("alpine.tar");
-        IntegrationTestCommon.testTar(programVersion, "build/images/test/alpine.tar", "alpine_lib_apk_alpine_latest_bdio.jsonld", repo, tag, false, false, null, true, outputContainerFileSystemFile, null);
+        IntegrationTestCommon.testTar(programVersion, "build/images/test/alpine.tar", "alpine_lib_apk_alpine_latest_bdio.jsonld", repo, tag, false, Mode.NO_SERVICE_START, null, true, outputContainerFileSystemFile, null);
     }
 
     @Test
@@ -301,7 +299,7 @@ public class DockerInspectorTest {
         final String repo = "alpine";
         final String tag = "latest";
         final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("alpine.tar");
-        IntegrationTestCommon.testTar(programVersion, "build/images/test/alpine.tar", "alpine_latest_APK_bdio.jsonld", repo, tag, false, true, null, true, outputContainerFileSystemFile, null);
+        IntegrationTestCommon.testTar(programVersion, "build/images/test/alpine.tar", "alpine_latest_APK_bdio.jsonld", repo, tag, false, Mode.SPECIFY_II_DETAILS, null, true, outputContainerFileSystemFile, null);
     }
 
     @Test
@@ -352,7 +350,7 @@ public class DockerInspectorTest {
         additionalArgs.add(String.format("--shared.dir.path.local=%s", dirSharedWithContainer.getAbsolutePath()));
         additionalArgs.add(String.format("--shared.dir.path.imageinspector=%s", SHARED_DIR_PATH_IN_CONTAINER));
         final File outputContainerFileSystemFile = new File(String.format("%s/output/%s_containerfilesystem.tar.gz", TestUtils.TEST_DIR_REL_PATH, tarFileBaseName));
-        IntegrationTestCommon.testTar(programVersion, targetTar.getAbsolutePath(), bdioFilename, targetRepo, targetTag, true, false, additionalArgs, false, outputContainerFileSystemFile, null);
+        IntegrationTestCommon.testTar(programVersion, targetTar.getAbsolutePath(), bdioFilename, targetRepo, targetTag, true, Mode.NO_SERVICE_START, additionalArgs, false, outputContainerFileSystemFile, null);
     }
 
     private static void createWriteableDirTolerantly(final File dir) {

@@ -114,7 +114,7 @@ public class DockerEnvImageInspector {
             } catch (final PkgMgrDataNotFoundException e) {
                 logger.info("Pkg mgr not found; generating empty BDIO file");
                 final ImageInfoDerived imageInfoDerived = imageInspector.generateEmptyBdio(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), config.getBlackDuckProjectName(),
-                        config.getBlackDuckProjectVersion(), dissectedImage.getDockerTarFile(), dissectedImage.getTargetImageFileSystemRootDir(), config.getBlackDuckCodelocationPrefix());
+                        config.getBlackDuckProjectVersion(), dissectedImage.getTargetImageFileSystemRootDir(), config.getBlackDuckCodelocationPrefix());
                 output.writeBdioFile(dissectedImage, imageInfoDerived);
                 output.uploadBdio(dissectedImage);
                 output.createContainerFileSystemTarIfRequested(dissectedImage.getTargetImageFileSystemRootDir());
