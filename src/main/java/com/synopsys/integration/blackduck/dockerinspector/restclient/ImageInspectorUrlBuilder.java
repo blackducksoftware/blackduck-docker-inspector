@@ -23,7 +23,9 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.restclient;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URLEncoder;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -92,10 +94,10 @@ public class ImageInspectorUrlBuilder {
         urlSb.append(GETBDIO_ENDPOINT);
         urlSb.append("?");
         urlSb.append(String.format("%s=%s", LOGGING_LEVEL_QUERY_PARAM, getLoggingLevel()));
-        urlSb.append(String.format("&%s=%s", TARFILE_QUERY_PARAM, containerPathToTarfile));
+        urlSb.append(String.format("&%s=%s", TARFILE_QUERY_PARAM, urlEncode(containerPathToTarfile)));
         urlSb.append(String.format("&%s=%b", CLEANUP_QUERY_PARAM, cleanup));
         if (StringUtils.isNotBlank(containerPathToContainerFileSystemFile)) {
-            urlSb.append(String.format("&%s=%s", RESULTING_CONTAINER_FS_PATH_QUERY_PARAM, containerPathToContainerFileSystemFile));
+            urlSb.append(String.format("&%s=%s", RESULTING_CONTAINER_FS_PATH_QUERY_PARAM, urlEncode(containerPathToContainerFileSystemFile)));
         }
         if (StringUtils.isNotBlank(givenImageRepo)) {
             urlSb.append(String.format("&%s=%s", IMAGE_REPO_QUERY_PARAM, givenImageRepo));
@@ -105,6 +107,14 @@ public class ImageInspectorUrlBuilder {
         }
         final String url = urlSb.toString();
         return url;
+    }
+
+    private String urlEncode(final String s) throws IntegrationException {
+        try {
+            return URLEncoder.encode(s, "UTF-8");
+        } catch (final UnsupportedEncodingException e) {
+            throw new IntegrationException(String.format("Error URL encoding: %s", s));
+        }
     }
 
     private String getLoggingLevel() {
