@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -13,6 +14,7 @@ import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.test.annotation.IntegrationTest;
 
 @Category(IntegrationTest.class)
+@Ignore
 public class CalledFromDetect5Test {
     // TODO eventually we'll get detect jar from artifactory
     private static String DETECT_JAR_PATH = "../d/hub-detect/hub-detect/build/libs/hub-detect-5.0.0-SNAPSHOT.jar";
