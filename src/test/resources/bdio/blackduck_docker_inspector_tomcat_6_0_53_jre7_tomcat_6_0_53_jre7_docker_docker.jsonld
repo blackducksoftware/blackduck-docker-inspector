@@ -1,0 +1,5561 @@
+[
+  {
+    "specVersion": "1.1.0",
+    "spdx:name": "blackduck-docker-inspector/tomcat/6.0.53-jre7/tomcat:6.0.53-jre7 docker/docker",
+    "creationInfo": {
+      "spdx:creator": [
+        "Tool: HubDetect-5.0.0-SNAPSHOT",
+        "Tool: IntegrationBdio-16.1.1"
+      ],
+      "spdx:created": "2018-10-16T21:13:02.383Z"
+    },
+    "@id": "uuid:28184eee-3625-4e4a-986b-0839e24c5e8f",
+    "@type": "BillOfMaterials",
+    "relationship": []
+  },
+  {
+    "name": "tomcat",
+    "revision": "6.0.53-jre7",
+    "@id": "http:debian/tomcat_6_0_53_jre7",
+    "@type": "Project",
+    "externalIdentifier": {
+      "externalSystemTypeId": "debian",
+      "externalId": "tomcat/6.0.53-jre7",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "path": "tomcat/6.0.53-jre7"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:@debian/x11_common/1_7_7_7/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libclass_c3_xs_perl/0_13_2_b1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/mawk/1_3_3_17/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libdebconfclient0/0_192/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libx11_6/2_1_6_2_3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/sysvinit_utils/2_88dsf_59/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/netbase/5_3/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/base_files/8_deb8u9/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libxtst6/2_1_2_2_1_b1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libaudit1/1_2_4_1_b1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libdbus_1_3/1_8_22_0_deb8u1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libsemanage_common/2_3_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/systemd/215_17_deb8u7/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/login/1_4_2_3_deb8u4/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/liblcms2_2/2_6_3_deb8u1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libapr1/1_5_1_3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/sgml_base/1_26_nmu4/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libcgi_pm_perl/4_09_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/liblog_message_simple_perl/0_10_2/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libc_bin/2_19_18_deb8u10/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/inetutils_ping/2_1_9_2_39_3a460_3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libtinfo5/5_9_20140913_1_b1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/gzip/1_6_4/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libsndfile1/1_0_25_9_1_deb8u1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libffi6/3_1_2_deb8u1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libvorbisenc2/1_3_4_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libp11_kit0/0_20_7_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/xml_core/0_13_nmu2/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libpod_latex_perl/0_61_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libavahi_common_data/0_6_31_5/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/readline_common/6_3_8/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/gcc_4_8_base/4_8_4_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/gnupg/1_4_18_7_deb8u3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libssh2_1/1_4_3_4_1_deb8u1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libtext_charwidth_perl/0_04_7_b3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libtasn1_6/4_2_3_deb8u3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/lsb_base/4_1_Debian13_nmu1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libk5crypto3/1_12_1_dfsg_19_deb8u2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/wget/1_16_1_deb8u2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/tzdata_java/2017b_0_deb8u1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libhogweed2/2_7_1_5_deb8u2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/findutils/4_4_2_9_b1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libblkid1/2_25_2_6/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libmodule_build_perl/0_421000_2_deb8u1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libpcsclite1/1_8_13_1_deb8u1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libjson_c2/0_11_4/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/mount/2_25_2_6/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libpulse0/5_0_13/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libncursesw5/5_9_20140913_1_b1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libsqlite3_0/3_8_7_1_1_deb8u2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libtext_iconv_perl/1_7_5_b2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libxau6/1_1_0_8_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libjpeg62_turbo/1_1_3_1_12/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libc6/2_19_18_deb8u10/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libprocps3/2_3_3_9_9/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libattr1/1_2_4_47_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/ca_certificates/20141019_deb8u3/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libss2/1_42_12_2_b1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libgssapi_krb5_2/1_12_1_dfsg_19_deb8u2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libapt_pkg4_12/1_0_9_8_4/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/bzip2/1_0_6_7_b3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libmodule_signature_perl/0_73_1_deb8u2/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/zlib1g/1_1_2_8_dfsg_2_b1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/udev/215_17_deb8u7/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/bash/4_3_11_deb8u1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/lksctp_tools/1_0_16_dfsg_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libregexp_common_perl/2013031301_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/tar/1_27_1_2_deb8u1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/ncurses_bin/5_9_20140913_1_b1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/sensible_utils/0_0_9/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libsasl2_2/2_1_26_dfsg1_13_deb8u1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libusb_0_1_4/2_0_1_12_25/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libclass_c3_perl/0_26_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/procps/2_3_3_9_9/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libnettle4/2_7_1_5_deb8u2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/util_linux/2_25_2_6/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/insserv/1_14_0_5/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/e2fsprogs/1_42_12_2_b1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libbz2_1_0/1_0_6_7_b3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libsub_exporter_perl/0_986_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libuuid1/2_25_2_6/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libice6/2_1_0_9_1_b1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libxcb1/1_10_3_b1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libasyncns0/0_8_5/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/fonts_dejavu_core/2_34_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libogg0/1_3_2_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/dbus/1_8_22_0_deb8u1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libstdc__6/4_9_2_10/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/debconf/1_5_56_deb8u1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libpcre3/2_8_35_3_3_deb8u4/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/rename/0_20_3/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libpam0g/1_1_8_3_1_deb8u2_b1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/multiarch_support/2_19_18_deb8u10/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libgpg_error0/1_17_3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libgmp10/2_6_0_0_dfsg_6/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/perl_modules/5_20_2_3_deb8u8/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/iproute2/3_16_0_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/liblocale_gettext_perl/1_05_8_b1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libkrb5support0/1_12_1_dfsg_19_deb8u2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libarchive_extract_perl/0_72_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libpod_readme_perl/0_11_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libalgorithm_c3_perl/0_09_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/tcpd/7_6_q_25/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/shared_mime_info/1_3_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/initscripts/2_88dsf_59/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libacl1/2_2_52_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libxml2/2_9_1_dfsg1_5_deb8u4/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/sysv_rc/2_88dsf_59/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/apt/1_0_9_8_4/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libcups2/1_7_5_11_deb8u1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/fontconfig_config/2_11_0_6_3_deb8u1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libwrap0/7_6_q_25/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libgcc1/1_4_9_2_10/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libavahi_common3/0_6_31_5/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/perl_base/5_20_2_3_deb8u8/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libflac8/1_3_0_3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libtext_wrapi18n_perl/0_06_7/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libkeyutils1/1_5_9_5_b1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/ca_certificates_java/20140324/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libtext_soundex_perl/3_4_1_b2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libmount1/2_25_2_6/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/liblzma5/5_1_1alpha_20120614_2_b3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libslang2/2_3_0_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/xz_utils/5_1_1alpha_20120614_2_b3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libfreetype6/2_5_2_3_deb8u2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/dpkg/1_17_27/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/curl/7_38_0_4_deb8u5/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/dmsetup/2_1_02_90_2_2_deb8u1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/grep/2_20_4_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libcap2_bin/1_2_24_8/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/debconf_i18n/1_5_56_deb8u1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libcpan_meta_perl/2_142690_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libpng12_0/1_2_50_2_deb8u3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libncurses5/5_9_20140913_1_b1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/tzdata/2017b_0_deb8u1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/gcc_4_9_base/4_9_2_10/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libreadline6/6_3_8_b3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libssl1_1/1_1_0f_3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libssl1_0_0/1_0_1t_1_deb8u6/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libkrb5_3/1_12_1_dfsg_19_deb8u2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libpam_modules_bin/1_1_8_3_1_deb8u2_b1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libglib2_0_data/2_42_1_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/ucf/3_0030/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libcap2/1_2_24_8/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/init/1_22/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libpam_runtime/1_1_8_3_1_deb8u2/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libselinux1/2_3_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libxdmcp6/1_1_1_1_1_b1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libcurl3/7_38_0_4_deb8u5/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libparams_util_perl/1_07_2_b1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/ncurses_base/5_9_20140913_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/dash/0_5_7_4_b1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libsystemd0/215_17_deb8u7/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libldap_2_4_2/2_4_40_dfsg_1_deb8u3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/hostname/3_15/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libicu52/52_1_8_deb8u5/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libdb5_3/5_3_28_9/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libdata_section_perl/0_200006_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/diffutils/1_3_3_1_b1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libgnutls_deb0_28/3_3_8_6_deb8u7/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/bsdutils/1_2_25_2_6/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libcomerr2/1_42_12_2_b1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libavahi_client3/0_6_31_5/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/gpgv/1_4_18_7_deb8u3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/passwd/1_4_2_3_deb8u4/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/librtmp1/2_4_20150115_gita107cef_1_deb8u1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libustr_1_0_1/1_0_4_3_b2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libfontconfig1/2_11_0_6_3_deb8u1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libgcrypt20/1_6_3_2_deb8u4/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libidn11/1_29_1_deb8u2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libpackage_constants_perl/0_04_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libaudit_common/1_2_4_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libfcgi_perl/0_77_1_deb8u1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libsemanage1/2_3_1_b1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libgdbm3/1_8_3_13_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libcgi_fast_perl/1_2_04_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libudev1/215_17_deb8u7/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libnss3/2_3_26_1_debu8u2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libdata_optlist_perl/0_109_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libpsl0/0_5_1_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libsoftware_license_perl/0_103010_3/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libsasl2_modules_db/2_1_26_dfsg1_13_deb8u1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/base_passwd/3_5_37/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/java_common/0_52/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libx11_data/2_1_6_2_3/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libkmod2/18_3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libterm_ui_perl/0_42_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/e2fslibs/1_42_12_2_b1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/openssl/1_1_0f_3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/liblog_message_perl/0_8_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/adduser/3_113_nmu3/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/unzip/6_0_16_deb8u3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/openjdk_7_jre_headless/7u131_2_6_9_2_deb8u1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/sed/4_2_2_4_deb8u1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/acl/2_2_52_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libglib2_0_0/2_42_1_1_b1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/debianutils/4_4_b1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libtext_template_perl/1_46_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libdevmapper1_02_1/2_1_02_90_2_2_deb8u1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libexpat1/2_1_0_6_deb8u4/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libpam_modules/1_1_8_3_1_deb8u2_b1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libxi6/2_1_7_4_1_b2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/systemd_sysv/215_17_deb8u7/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/coreutils/8_23_4/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/startpar/0_59_3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libx11_xcb1/2_1_6_2_3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libmodule_pluggable_perl/5_1_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libcryptsetup4/2_1_6_6_5/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/perl/5_20_2_3_deb8u8/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libxext6/2_1_3_3_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libnspr4/2_4_12_1_debu8u1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libsepol1/2_3_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libvorbis0a/1_3_4_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libcap_ng0/0_7_4_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libsctp1/1_0_16_dfsg_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/debian_archive_keyring/2017_5_deb8u1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libsmartcols1/2_25_2_6/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libsm6/2_1_2_2_1_b1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libsub_install_perl/0_928_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/libmro_compat_perl/0_12_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@debian/xdg_user_dirs/0_15_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "x11-common",
+    "revision": "1:7.7+7",
+    "@id": "http:@debian/x11_common/1_7_7_7/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "x11-common/1:7.7+7/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "x11-common",
+        "version": "1:7.7+7",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libclass-c3-xs-perl",
+    "revision": "0.13-2+b1",
+    "@id": "http:@debian/libclass_c3_xs_perl/0_13_2_b1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libclass-c3-xs-perl/0.13-2+b1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libclass-c3-xs-perl",
+        "version": "0.13-2+b1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "mawk",
+    "revision": "1.3.3-17",
+    "@id": "http:@debian/mawk/1_3_3_17/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "mawk/1.3.3-17/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "mawk",
+        "version": "1.3.3-17",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libdebconfclient0",
+    "revision": "0.192",
+    "@id": "http:@debian/libdebconfclient0/0_192/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libdebconfclient0/0.192/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libdebconfclient0",
+        "version": "0.192",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libx11-6",
+    "revision": "2:1.6.2-3",
+    "@id": "http:@debian/libx11_6/2_1_6_2_3/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libx11-6/2:1.6.2-3/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libx11-6",
+        "version": "2:1.6.2-3",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "sysvinit-utils",
+    "revision": "2.88dsf-59",
+    "@id": "http:@debian/sysvinit_utils/2_88dsf_59/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "sysvinit-utils/2.88dsf-59/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "sysvinit-utils",
+        "version": "2.88dsf-59",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "netbase",
+    "revision": "5.3",
+    "@id": "http:@debian/netbase/5_3/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "netbase/5.3/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "netbase",
+        "version": "5.3",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "base-files",
+    "revision": "8+deb8u9",
+    "@id": "http:@debian/base_files/8_deb8u9/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "base-files/8+deb8u9/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "base-files",
+        "version": "8+deb8u9",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libxtst6",
+    "revision": "2:1.2.2-1+b1",
+    "@id": "http:@debian/libxtst6/2_1_2_2_1_b1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libxtst6/2:1.2.2-1+b1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libxtst6",
+        "version": "2:1.2.2-1+b1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libaudit1",
+    "revision": "1:2.4-1+b1",
+    "@id": "http:@debian/libaudit1/1_2_4_1_b1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libaudit1/1:2.4-1+b1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libaudit1",
+        "version": "1:2.4-1+b1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libdbus-1-3",
+    "revision": "1.8.22-0+deb8u1",
+    "@id": "http:@debian/libdbus_1_3/1_8_22_0_deb8u1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libdbus-1-3/1.8.22-0+deb8u1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libdbus-1-3",
+        "version": "1.8.22-0+deb8u1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsemanage-common",
+    "revision": "2.3-1",
+    "@id": "http:@debian/libsemanage_common/2_3_1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libsemanage-common/2.3-1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libsemanage-common",
+        "version": "2.3-1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "systemd",
+    "revision": "215-17+deb8u7",
+    "@id": "http:@debian/systemd/215_17_deb8u7/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "systemd/215-17+deb8u7/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "systemd",
+        "version": "215-17+deb8u7",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "login",
+    "revision": "1:4.2-3+deb8u4",
+    "@id": "http:@debian/login/1_4_2_3_deb8u4/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "login/1:4.2-3+deb8u4/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "login",
+        "version": "1:4.2-3+deb8u4",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "liblcms2-2",
+    "revision": "2.6-3+deb8u1",
+    "@id": "http:@debian/liblcms2_2/2_6_3_deb8u1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "liblcms2-2/2.6-3+deb8u1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "liblcms2-2",
+        "version": "2.6-3+deb8u1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libapr1",
+    "revision": "1.5.1-3",
+    "@id": "http:@debian/libapr1/1_5_1_3/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libapr1/1.5.1-3/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libapr1",
+        "version": "1.5.1-3",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "sgml-base",
+    "revision": "1.26+nmu4",
+    "@id": "http:@debian/sgml_base/1_26_nmu4/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "sgml-base/1.26+nmu4/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "sgml-base",
+        "version": "1.26+nmu4",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcgi-pm-perl",
+    "revision": "4.09-1",
+    "@id": "http:@debian/libcgi_pm_perl/4_09_1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libcgi-pm-perl/4.09-1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libcgi-pm-perl",
+        "version": "4.09-1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "liblog-message-simple-perl",
+    "revision": "0.10-2",
+    "@id": "http:@debian/liblog_message_simple_perl/0_10_2/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "liblog-message-simple-perl/0.10-2/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "liblog-message-simple-perl",
+        "version": "0.10-2",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libc-bin",
+    "revision": "2.19-18+deb8u10",
+    "@id": "http:@debian/libc_bin/2_19_18_deb8u10/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libc-bin/2.19-18+deb8u10/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libc-bin",
+        "version": "2.19-18+deb8u10",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "inetutils-ping",
+    "revision": "2:1.9.2.39.3a460-3",
+    "@id": "http:@debian/inetutils_ping/2_1_9_2_39_3a460_3/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "inetutils-ping/2:1.9.2.39.3a460-3/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "inetutils-ping",
+        "version": "2:1.9.2.39.3a460-3",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libtinfo5",
+    "revision": "5.9+20140913-1+b1",
+    "@id": "http:@debian/libtinfo5/5_9_20140913_1_b1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libtinfo5/5.9+20140913-1+b1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libtinfo5",
+        "version": "5.9+20140913-1+b1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "gzip",
+    "revision": "1.6-4",
+    "@id": "http:@debian/gzip/1_6_4/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "gzip/1.6-4/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "gzip",
+        "version": "1.6-4",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsndfile1",
+    "revision": "1.0.25-9.1+deb8u1",
+    "@id": "http:@debian/libsndfile1/1_0_25_9_1_deb8u1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libsndfile1/1.0.25-9.1+deb8u1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libsndfile1",
+        "version": "1.0.25-9.1+deb8u1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libffi6",
+    "revision": "3.1-2+deb8u1",
+    "@id": "http:@debian/libffi6/3_1_2_deb8u1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libffi6/3.1-2+deb8u1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libffi6",
+        "version": "3.1-2+deb8u1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libvorbisenc2",
+    "revision": "1.3.4-2",
+    "@id": "http:@debian/libvorbisenc2/1_3_4_2/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libvorbisenc2/1.3.4-2/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libvorbisenc2",
+        "version": "1.3.4-2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libp11-kit0",
+    "revision": "0.20.7-1",
+    "@id": "http:@debian/libp11_kit0/0_20_7_1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libp11-kit0/0.20.7-1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libp11-kit0",
+        "version": "0.20.7-1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "xml-core",
+    "revision": "0.13+nmu2",
+    "@id": "http:@debian/xml_core/0_13_nmu2/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "xml-core/0.13+nmu2/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "xml-core",
+        "version": "0.13+nmu2",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpod-latex-perl",
+    "revision": "0.61-1",
+    "@id": "http:@debian/libpod_latex_perl/0_61_1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libpod-latex-perl/0.61-1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libpod-latex-perl",
+        "version": "0.61-1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libavahi-common-data",
+    "revision": "0.6.31-5",
+    "@id": "http:@debian/libavahi_common_data/0_6_31_5/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libavahi-common-data/0.6.31-5/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libavahi-common-data",
+        "version": "0.6.31-5",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "readline-common",
+    "revision": "6.3-8",
+    "@id": "http:@debian/readline_common/6_3_8/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "readline-common/6.3-8/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "readline-common",
+        "version": "6.3-8",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "gcc-4.8-base",
+    "revision": "4.8.4-1",
+    "@id": "http:@debian/gcc_4_8_base/4_8_4_1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "gcc-4.8-base/4.8.4-1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "gcc-4.8-base",
+        "version": "4.8.4-1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "gnupg",
+    "revision": "1.4.18-7+deb8u3",
+    "@id": "http:@debian/gnupg/1_4_18_7_deb8u3/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "gnupg/1.4.18-7+deb8u3/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "gnupg",
+        "version": "1.4.18-7+deb8u3",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libssh2-1",
+    "revision": "1.4.3-4.1+deb8u1",
+    "@id": "http:@debian/libssh2_1/1_4_3_4_1_deb8u1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libssh2-1/1.4.3-4.1+deb8u1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libssh2-1",
+        "version": "1.4.3-4.1+deb8u1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libtext-charwidth-perl",
+    "revision": "0.04-7+b3",
+    "@id": "http:@debian/libtext_charwidth_perl/0_04_7_b3/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libtext-charwidth-perl/0.04-7+b3/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libtext-charwidth-perl",
+        "version": "0.04-7+b3",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libtasn1-6",
+    "revision": "4.2-3+deb8u3",
+    "@id": "http:@debian/libtasn1_6/4_2_3_deb8u3/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libtasn1-6/4.2-3+deb8u3/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libtasn1-6",
+        "version": "4.2-3+deb8u3",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "lsb-base",
+    "revision": "4.1+Debian13+nmu1",
+    "@id": "http:@debian/lsb_base/4_1_Debian13_nmu1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "lsb-base/4.1+Debian13+nmu1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "lsb-base",
+        "version": "4.1+Debian13+nmu1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libk5crypto3",
+    "revision": "1.12.1+dfsg-19+deb8u2",
+    "@id": "http:@debian/libk5crypto3/1_12_1_dfsg_19_deb8u2/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libk5crypto3/1.12.1+dfsg-19+deb8u2/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libk5crypto3",
+        "version": "1.12.1+dfsg-19+deb8u2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "wget",
+    "revision": "1.16-1+deb8u2",
+    "@id": "http:@debian/wget/1_16_1_deb8u2/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "wget/1.16-1+deb8u2/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "wget",
+        "version": "1.16-1+deb8u2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "tzdata-java",
+    "revision": "2017b-0+deb8u1",
+    "@id": "http:@debian/tzdata_java/2017b_0_deb8u1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "tzdata-java/2017b-0+deb8u1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "tzdata-java",
+        "version": "2017b-0+deb8u1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libhogweed2",
+    "revision": "2.7.1-5+deb8u2",
+    "@id": "http:@debian/libhogweed2/2_7_1_5_deb8u2/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libhogweed2/2.7.1-5+deb8u2/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libhogweed2",
+        "version": "2.7.1-5+deb8u2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "findutils",
+    "revision": "4.4.2-9+b1",
+    "@id": "http:@debian/findutils/4_4_2_9_b1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "findutils/4.4.2-9+b1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "findutils",
+        "version": "4.4.2-9+b1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libblkid1",
+    "revision": "2.25.2-6",
+    "@id": "http:@debian/libblkid1/2_25_2_6/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libblkid1/2.25.2-6/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libblkid1",
+        "version": "2.25.2-6",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libmodule-build-perl",
+    "revision": "0.421000-2+deb8u1",
+    "@id": "http:@debian/libmodule_build_perl/0_421000_2_deb8u1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libmodule-build-perl/0.421000-2+deb8u1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libmodule-build-perl",
+        "version": "0.421000-2+deb8u1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpcsclite1",
+    "revision": "1.8.13-1+deb8u1",
+    "@id": "http:@debian/libpcsclite1/1_8_13_1_deb8u1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libpcsclite1/1.8.13-1+deb8u1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libpcsclite1",
+        "version": "1.8.13-1+deb8u1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libjson-c2",
+    "revision": "0.11-4",
+    "@id": "http:@debian/libjson_c2/0_11_4/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libjson-c2/0.11-4/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libjson-c2",
+        "version": "0.11-4",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "mount",
+    "revision": "2.25.2-6",
+    "@id": "http:@debian/mount/2_25_2_6/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "mount/2.25.2-6/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "mount",
+        "version": "2.25.2-6",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpulse0",
+    "revision": "5.0-13",
+    "@id": "http:@debian/libpulse0/5_0_13/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libpulse0/5.0-13/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libpulse0",
+        "version": "5.0-13",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libncursesw5",
+    "revision": "5.9+20140913-1+b1",
+    "@id": "http:@debian/libncursesw5/5_9_20140913_1_b1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libncursesw5/5.9+20140913-1+b1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libncursesw5",
+        "version": "5.9+20140913-1+b1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsqlite3-0",
+    "revision": "3.8.7.1-1+deb8u2",
+    "@id": "http:@debian/libsqlite3_0/3_8_7_1_1_deb8u2/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libsqlite3-0/3.8.7.1-1+deb8u2/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libsqlite3-0",
+        "version": "3.8.7.1-1+deb8u2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libtext-iconv-perl",
+    "revision": "1.7-5+b2",
+    "@id": "http:@debian/libtext_iconv_perl/1_7_5_b2/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libtext-iconv-perl/1.7-5+b2/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libtext-iconv-perl",
+        "version": "1.7-5+b2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libxau6",
+    "revision": "1:1.0.8-1",
+    "@id": "http:@debian/libxau6/1_1_0_8_1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libxau6/1:1.0.8-1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libxau6",
+        "version": "1:1.0.8-1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libjpeg62-turbo",
+    "revision": "1:1.3.1-12",
+    "@id": "http:@debian/libjpeg62_turbo/1_1_3_1_12/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libjpeg62-turbo/1:1.3.1-12/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libjpeg62-turbo",
+        "version": "1:1.3.1-12",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libc6",
+    "revision": "2.19-18+deb8u10",
+    "@id": "http:@debian/libc6/2_19_18_deb8u10/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libc6/2.19-18+deb8u10/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libc6",
+        "version": "2.19-18+deb8u10",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libprocps3",
+    "revision": "2:3.3.9-9",
+    "@id": "http:@debian/libprocps3/2_3_3_9_9/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libprocps3/2:3.3.9-9/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libprocps3",
+        "version": "2:3.3.9-9",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libattr1",
+    "revision": "1:2.4.47-2",
+    "@id": "http:@debian/libattr1/1_2_4_47_2/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libattr1/1:2.4.47-2/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libattr1",
+        "version": "1:2.4.47-2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "ca-certificates",
+    "revision": "20141019+deb8u3",
+    "@id": "http:@debian/ca_certificates/20141019_deb8u3/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "ca-certificates/20141019+deb8u3/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "ca-certificates",
+        "version": "20141019+deb8u3",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libss2",
+    "revision": "1.42.12-2+b1",
+    "@id": "http:@debian/libss2/1_42_12_2_b1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libss2/1.42.12-2+b1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libss2",
+        "version": "1.42.12-2+b1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libgssapi-krb5-2",
+    "revision": "1.12.1+dfsg-19+deb8u2",
+    "@id": "http:@debian/libgssapi_krb5_2/1_12_1_dfsg_19_deb8u2/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libgssapi-krb5-2/1.12.1+dfsg-19+deb8u2/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libgssapi-krb5-2",
+        "version": "1.12.1+dfsg-19+deb8u2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libapt-pkg4.12",
+    "revision": "1.0.9.8.4",
+    "@id": "http:@debian/libapt_pkg4_12/1_0_9_8_4/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libapt-pkg4.12/1.0.9.8.4/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libapt-pkg4.12",
+        "version": "1.0.9.8.4",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "bzip2",
+    "revision": "1.0.6-7+b3",
+    "@id": "http:@debian/bzip2/1_0_6_7_b3/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "bzip2/1.0.6-7+b3/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "bzip2",
+        "version": "1.0.6-7+b3",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libmodule-signature-perl",
+    "revision": "0.73-1+deb8u2",
+    "@id": "http:@debian/libmodule_signature_perl/0_73_1_deb8u2/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libmodule-signature-perl/0.73-1+deb8u2/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libmodule-signature-perl",
+        "version": "0.73-1+deb8u2",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "zlib1g",
+    "revision": "1:1.2.8.dfsg-2+b1",
+    "@id": "http:@debian/zlib1g/1_1_2_8_dfsg_2_b1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "zlib1g/1:1.2.8.dfsg-2+b1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "zlib1g",
+        "version": "1:1.2.8.dfsg-2+b1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "udev",
+    "revision": "215-17+deb8u7",
+    "@id": "http:@debian/udev/215_17_deb8u7/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "udev/215-17+deb8u7/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "udev",
+        "version": "215-17+deb8u7",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "bash",
+    "revision": "4.3-11+deb8u1",
+    "@id": "http:@debian/bash/4_3_11_deb8u1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "bash/4.3-11+deb8u1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "bash",
+        "version": "4.3-11+deb8u1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "lksctp-tools",
+    "revision": "1.0.16+dfsg-2",
+    "@id": "http:@debian/lksctp_tools/1_0_16_dfsg_2/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "lksctp-tools/1.0.16+dfsg-2/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "lksctp-tools",
+        "version": "1.0.16+dfsg-2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libregexp-common-perl",
+    "revision": "2013031301-1",
+    "@id": "http:@debian/libregexp_common_perl/2013031301_1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libregexp-common-perl/2013031301-1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libregexp-common-perl",
+        "version": "2013031301-1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "tar",
+    "revision": "1.27.1-2+deb8u1",
+    "@id": "http:@debian/tar/1_27_1_2_deb8u1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "tar/1.27.1-2+deb8u1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "tar",
+        "version": "1.27.1-2+deb8u1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "ncurses-bin",
+    "revision": "5.9+20140913-1+b1",
+    "@id": "http:@debian/ncurses_bin/5_9_20140913_1_b1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "ncurses-bin/5.9+20140913-1+b1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "ncurses-bin",
+        "version": "5.9+20140913-1+b1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "sensible-utils",
+    "revision": "0.0.9",
+    "@id": "http:@debian/sensible_utils/0_0_9/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "sensible-utils/0.0.9/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "sensible-utils",
+        "version": "0.0.9",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsasl2-2",
+    "revision": "2.1.26.dfsg1-13+deb8u1",
+    "@id": "http:@debian/libsasl2_2/2_1_26_dfsg1_13_deb8u1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libsasl2-2/2.1.26.dfsg1-13+deb8u1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libsasl2-2",
+        "version": "2.1.26.dfsg1-13+deb8u1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libusb-0.1-4",
+    "revision": "2:0.1.12-25",
+    "@id": "http:@debian/libusb_0_1_4/2_0_1_12_25/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libusb-0.1-4/2:0.1.12-25/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libusb-0.1-4",
+        "version": "2:0.1.12-25",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libclass-c3-perl",
+    "revision": "0.26-1",
+    "@id": "http:@debian/libclass_c3_perl/0_26_1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libclass-c3-perl/0.26-1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libclass-c3-perl",
+        "version": "0.26-1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "procps",
+    "revision": "2:3.3.9-9",
+    "@id": "http:@debian/procps/2_3_3_9_9/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "procps/2:3.3.9-9/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "procps",
+        "version": "2:3.3.9-9",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libnettle4",
+    "revision": "2.7.1-5+deb8u2",
+    "@id": "http:@debian/libnettle4/2_7_1_5_deb8u2/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libnettle4/2.7.1-5+deb8u2/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libnettle4",
+        "version": "2.7.1-5+deb8u2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "util-linux",
+    "revision": "2.25.2-6",
+    "@id": "http:@debian/util_linux/2_25_2_6/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "util-linux/2.25.2-6/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "util-linux",
+        "version": "2.25.2-6",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "insserv",
+    "revision": "1.14.0-5",
+    "@id": "http:@debian/insserv/1_14_0_5/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "insserv/1.14.0-5/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "insserv",
+        "version": "1.14.0-5",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "e2fsprogs",
+    "revision": "1.42.12-2+b1",
+    "@id": "http:@debian/e2fsprogs/1_42_12_2_b1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "e2fsprogs/1.42.12-2+b1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "e2fsprogs",
+        "version": "1.42.12-2+b1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libbz2-1.0",
+    "revision": "1.0.6-7+b3",
+    "@id": "http:@debian/libbz2_1_0/1_0_6_7_b3/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libbz2-1.0/1.0.6-7+b3/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libbz2-1.0",
+        "version": "1.0.6-7+b3",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsub-exporter-perl",
+    "revision": "0.986-1",
+    "@id": "http:@debian/libsub_exporter_perl/0_986_1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libsub-exporter-perl/0.986-1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libsub-exporter-perl",
+        "version": "0.986-1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libuuid1",
+    "revision": "2.25.2-6",
+    "@id": "http:@debian/libuuid1/2_25_2_6/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libuuid1/2.25.2-6/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libuuid1",
+        "version": "2.25.2-6",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libice6",
+    "revision": "2:1.0.9-1+b1",
+    "@id": "http:@debian/libice6/2_1_0_9_1_b1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libice6/2:1.0.9-1+b1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libice6",
+        "version": "2:1.0.9-1+b1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libxcb1",
+    "revision": "1.10-3+b1",
+    "@id": "http:@debian/libxcb1/1_10_3_b1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libxcb1/1.10-3+b1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libxcb1",
+        "version": "1.10-3+b1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libasyncns0",
+    "revision": "0.8-5",
+    "@id": "http:@debian/libasyncns0/0_8_5/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libasyncns0/0.8-5/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libasyncns0",
+        "version": "0.8-5",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "fonts-dejavu-core",
+    "revision": "2.34-1",
+    "@id": "http:@debian/fonts_dejavu_core/2_34_1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "fonts-dejavu-core/2.34-1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "fonts-dejavu-core",
+        "version": "2.34-1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libogg0",
+    "revision": "1.3.2-1",
+    "@id": "http:@debian/libogg0/1_3_2_1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libogg0/1.3.2-1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libogg0",
+        "version": "1.3.2-1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "dbus",
+    "revision": "1.8.22-0+deb8u1",
+    "@id": "http:@debian/dbus/1_8_22_0_deb8u1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "dbus/1.8.22-0+deb8u1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "dbus",
+        "version": "1.8.22-0+deb8u1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libstdc++6",
+    "revision": "4.9.2-10",
+    "@id": "http:@debian/libstdc__6/4_9_2_10/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libstdc++6/4.9.2-10/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libstdc++6",
+        "version": "4.9.2-10",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "debconf",
+    "revision": "1.5.56+deb8u1",
+    "@id": "http:@debian/debconf/1_5_56_deb8u1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "debconf/1.5.56+deb8u1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "debconf",
+        "version": "1.5.56+deb8u1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpcre3",
+    "revision": "2:8.35-3.3+deb8u4",
+    "@id": "http:@debian/libpcre3/2_8_35_3_3_deb8u4/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libpcre3/2:8.35-3.3+deb8u4/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libpcre3",
+        "version": "2:8.35-3.3+deb8u4",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "rename",
+    "revision": "0.20-3",
+    "@id": "http:@debian/rename/0_20_3/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "rename/0.20-3/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "rename",
+        "version": "0.20-3",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpam0g",
+    "revision": "1.1.8-3.1+deb8u2+b1",
+    "@id": "http:@debian/libpam0g/1_1_8_3_1_deb8u2_b1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libpam0g/1.1.8-3.1+deb8u2+b1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libpam0g",
+        "version": "1.1.8-3.1+deb8u2+b1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "multiarch-support",
+    "revision": "2.19-18+deb8u10",
+    "@id": "http:@debian/multiarch_support/2_19_18_deb8u10/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "multiarch-support/2.19-18+deb8u10/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "multiarch-support",
+        "version": "2.19-18+deb8u10",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libgpg-error0",
+    "revision": "1.17-3",
+    "@id": "http:@debian/libgpg_error0/1_17_3/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libgpg-error0/1.17-3/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libgpg-error0",
+        "version": "1.17-3",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libgmp10",
+    "revision": "2:6.0.0+dfsg-6",
+    "@id": "http:@debian/libgmp10/2_6_0_0_dfsg_6/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libgmp10/2:6.0.0+dfsg-6/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libgmp10",
+        "version": "2:6.0.0+dfsg-6",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "perl-modules",
+    "revision": "5.20.2-3+deb8u8",
+    "@id": "http:@debian/perl_modules/5_20_2_3_deb8u8/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "perl-modules/5.20.2-3+deb8u8/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "perl-modules",
+        "version": "5.20.2-3+deb8u8",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "iproute2",
+    "revision": "3.16.0-2",
+    "@id": "http:@debian/iproute2/3_16_0_2/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "iproute2/3.16.0-2/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "iproute2",
+        "version": "3.16.0-2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "liblocale-gettext-perl",
+    "revision": "1.05-8+b1",
+    "@id": "http:@debian/liblocale_gettext_perl/1_05_8_b1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "liblocale-gettext-perl/1.05-8+b1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "liblocale-gettext-perl",
+        "version": "1.05-8+b1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libkrb5support0",
+    "revision": "1.12.1+dfsg-19+deb8u2",
+    "@id": "http:@debian/libkrb5support0/1_12_1_dfsg_19_deb8u2/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libkrb5support0/1.12.1+dfsg-19+deb8u2/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libkrb5support0",
+        "version": "1.12.1+dfsg-19+deb8u2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libarchive-extract-perl",
+    "revision": "0.72-1",
+    "@id": "http:@debian/libarchive_extract_perl/0_72_1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libarchive-extract-perl/0.72-1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libarchive-extract-perl",
+        "version": "0.72-1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpod-readme-perl",
+    "revision": "0.11-1",
+    "@id": "http:@debian/libpod_readme_perl/0_11_1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libpod-readme-perl/0.11-1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libpod-readme-perl",
+        "version": "0.11-1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libalgorithm-c3-perl",
+    "revision": "0.09-1",
+    "@id": "http:@debian/libalgorithm_c3_perl/0_09_1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libalgorithm-c3-perl/0.09-1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libalgorithm-c3-perl",
+        "version": "0.09-1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "tcpd",
+    "revision": "7.6.q-25",
+    "@id": "http:@debian/tcpd/7_6_q_25/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "tcpd/7.6.q-25/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "tcpd",
+        "version": "7.6.q-25",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "shared-mime-info",
+    "revision": "1.3-1",
+    "@id": "http:@debian/shared_mime_info/1_3_1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "shared-mime-info/1.3-1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "shared-mime-info",
+        "version": "1.3-1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "initscripts",
+    "revision": "2.88dsf-59",
+    "@id": "http:@debian/initscripts/2_88dsf_59/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "initscripts/2.88dsf-59/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "initscripts",
+        "version": "2.88dsf-59",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libacl1",
+    "revision": "2.2.52-2",
+    "@id": "http:@debian/libacl1/2_2_52_2/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libacl1/2.2.52-2/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libacl1",
+        "version": "2.2.52-2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libxml2",
+    "revision": "2.9.1+dfsg1-5+deb8u4",
+    "@id": "http:@debian/libxml2/2_9_1_dfsg1_5_deb8u4/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libxml2/2.9.1+dfsg1-5+deb8u4/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libxml2",
+        "version": "2.9.1+dfsg1-5+deb8u4",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "sysv-rc",
+    "revision": "2.88dsf-59",
+    "@id": "http:@debian/sysv_rc/2_88dsf_59/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "sysv-rc/2.88dsf-59/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "sysv-rc",
+        "version": "2.88dsf-59",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "apt",
+    "revision": "1.0.9.8.4",
+    "@id": "http:@debian/apt/1_0_9_8_4/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "apt/1.0.9.8.4/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "apt",
+        "version": "1.0.9.8.4",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcups2",
+    "revision": "1.7.5-11+deb8u1",
+    "@id": "http:@debian/libcups2/1_7_5_11_deb8u1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libcups2/1.7.5-11+deb8u1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libcups2",
+        "version": "1.7.5-11+deb8u1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "fontconfig-config",
+    "revision": "2.11.0-6.3+deb8u1",
+    "@id": "http:@debian/fontconfig_config/2_11_0_6_3_deb8u1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "fontconfig-config/2.11.0-6.3+deb8u1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "fontconfig-config",
+        "version": "2.11.0-6.3+deb8u1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libwrap0",
+    "revision": "7.6.q-25",
+    "@id": "http:@debian/libwrap0/7_6_q_25/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libwrap0/7.6.q-25/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libwrap0",
+        "version": "7.6.q-25",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libgcc1",
+    "revision": "1:4.9.2-10",
+    "@id": "http:@debian/libgcc1/1_4_9_2_10/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libgcc1/1:4.9.2-10/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libgcc1",
+        "version": "1:4.9.2-10",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libavahi-common3",
+    "revision": "0.6.31-5",
+    "@id": "http:@debian/libavahi_common3/0_6_31_5/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libavahi-common3/0.6.31-5/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libavahi-common3",
+        "version": "0.6.31-5",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "perl-base",
+    "revision": "5.20.2-3+deb8u8",
+    "@id": "http:@debian/perl_base/5_20_2_3_deb8u8/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "perl-base/5.20.2-3+deb8u8/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "perl-base",
+        "version": "5.20.2-3+deb8u8",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libflac8",
+    "revision": "1.3.0-3",
+    "@id": "http:@debian/libflac8/1_3_0_3/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libflac8/1.3.0-3/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libflac8",
+        "version": "1.3.0-3",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libtext-wrapi18n-perl",
+    "revision": "0.06-7",
+    "@id": "http:@debian/libtext_wrapi18n_perl/0_06_7/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libtext-wrapi18n-perl/0.06-7/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libtext-wrapi18n-perl",
+        "version": "0.06-7",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libkeyutils1",
+    "revision": "1.5.9-5+b1",
+    "@id": "http:@debian/libkeyutils1/1_5_9_5_b1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libkeyutils1/1.5.9-5+b1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libkeyutils1",
+        "version": "1.5.9-5+b1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "ca-certificates-java",
+    "revision": "20140324",
+    "@id": "http:@debian/ca_certificates_java/20140324/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "ca-certificates-java/20140324/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "ca-certificates-java",
+        "version": "20140324",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libtext-soundex-perl",
+    "revision": "3.4-1+b2",
+    "@id": "http:@debian/libtext_soundex_perl/3_4_1_b2/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libtext-soundex-perl/3.4-1+b2/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libtext-soundex-perl",
+        "version": "3.4-1+b2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libmount1",
+    "revision": "2.25.2-6",
+    "@id": "http:@debian/libmount1/2_25_2_6/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libmount1/2.25.2-6/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libmount1",
+        "version": "2.25.2-6",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "liblzma5",
+    "revision": "5.1.1alpha+20120614-2+b3",
+    "@id": "http:@debian/liblzma5/5_1_1alpha_20120614_2_b3/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "liblzma5/5.1.1alpha+20120614-2+b3/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "liblzma5",
+        "version": "5.1.1alpha+20120614-2+b3",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libslang2",
+    "revision": "2.3.0-2",
+    "@id": "http:@debian/libslang2/2_3_0_2/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libslang2/2.3.0-2/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libslang2",
+        "version": "2.3.0-2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "xz-utils",
+    "revision": "5.1.1alpha+20120614-2+b3",
+    "@id": "http:@debian/xz_utils/5_1_1alpha_20120614_2_b3/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "xz-utils/5.1.1alpha+20120614-2+b3/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "xz-utils",
+        "version": "5.1.1alpha+20120614-2+b3",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libfreetype6",
+    "revision": "2.5.2-3+deb8u2",
+    "@id": "http:@debian/libfreetype6/2_5_2_3_deb8u2/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libfreetype6/2.5.2-3+deb8u2/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libfreetype6",
+        "version": "2.5.2-3+deb8u2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "dpkg",
+    "revision": "1.17.27",
+    "@id": "http:@debian/dpkg/1_17_27/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "dpkg/1.17.27/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "dpkg",
+        "version": "1.17.27",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "curl",
+    "revision": "7.38.0-4+deb8u5",
+    "@id": "http:@debian/curl/7_38_0_4_deb8u5/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "curl/7.38.0-4+deb8u5/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "curl",
+        "version": "7.38.0-4+deb8u5",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "dmsetup",
+    "revision": "2:1.02.90-2.2+deb8u1",
+    "@id": "http:@debian/dmsetup/2_1_02_90_2_2_deb8u1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "dmsetup/2:1.02.90-2.2+deb8u1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "dmsetup",
+        "version": "2:1.02.90-2.2+deb8u1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "grep",
+    "revision": "2.20-4.1",
+    "@id": "http:@debian/grep/2_20_4_1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "grep/2.20-4.1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "grep",
+        "version": "2.20-4.1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcap2-bin",
+    "revision": "1:2.24-8",
+    "@id": "http:@debian/libcap2_bin/1_2_24_8/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libcap2-bin/1:2.24-8/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libcap2-bin",
+        "version": "1:2.24-8",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "debconf-i18n",
+    "revision": "1.5.56+deb8u1",
+    "@id": "http:@debian/debconf_i18n/1_5_56_deb8u1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "debconf-i18n/1.5.56+deb8u1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "debconf-i18n",
+        "version": "1.5.56+deb8u1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcpan-meta-perl",
+    "revision": "2.142690-1",
+    "@id": "http:@debian/libcpan_meta_perl/2_142690_1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libcpan-meta-perl/2.142690-1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libcpan-meta-perl",
+        "version": "2.142690-1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpng12-0",
+    "revision": "1.2.50-2+deb8u3",
+    "@id": "http:@debian/libpng12_0/1_2_50_2_deb8u3/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libpng12-0/1.2.50-2+deb8u3/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libpng12-0",
+        "version": "1.2.50-2+deb8u3",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libncurses5",
+    "revision": "5.9+20140913-1+b1",
+    "@id": "http:@debian/libncurses5/5_9_20140913_1_b1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libncurses5/5.9+20140913-1+b1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libncurses5",
+        "version": "5.9+20140913-1+b1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "tzdata",
+    "revision": "2017b-0+deb8u1",
+    "@id": "http:@debian/tzdata/2017b_0_deb8u1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "tzdata/2017b-0+deb8u1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "tzdata",
+        "version": "2017b-0+deb8u1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "gcc-4.9-base",
+    "revision": "4.9.2-10",
+    "@id": "http:@debian/gcc_4_9_base/4_9_2_10/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "gcc-4.9-base/4.9.2-10/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "gcc-4.9-base",
+        "version": "4.9.2-10",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libreadline6",
+    "revision": "6.3-8+b3",
+    "@id": "http:@debian/libreadline6/6_3_8_b3/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libreadline6/6.3-8+b3/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libreadline6",
+        "version": "6.3-8+b3",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libssl1.1",
+    "revision": "1.1.0f-3",
+    "@id": "http:@debian/libssl1_1/1_1_0f_3/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libssl1.1/1.1.0f-3/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libssl1.1",
+        "version": "1.1.0f-3",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libssl1.0.0",
+    "revision": "1.0.1t-1+deb8u6",
+    "@id": "http:@debian/libssl1_0_0/1_0_1t_1_deb8u6/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libssl1.0.0/1.0.1t-1+deb8u6/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libssl1.0.0",
+        "version": "1.0.1t-1+deb8u6",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libkrb5-3",
+    "revision": "1.12.1+dfsg-19+deb8u2",
+    "@id": "http:@debian/libkrb5_3/1_12_1_dfsg_19_deb8u2/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libkrb5-3/1.12.1+dfsg-19+deb8u2/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libkrb5-3",
+        "version": "1.12.1+dfsg-19+deb8u2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpam-modules-bin",
+    "revision": "1.1.8-3.1+deb8u2+b1",
+    "@id": "http:@debian/libpam_modules_bin/1_1_8_3_1_deb8u2_b1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libpam-modules-bin/1.1.8-3.1+deb8u2+b1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libpam-modules-bin",
+        "version": "1.1.8-3.1+deb8u2+b1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libglib2.0-data",
+    "revision": "2.42.1-1",
+    "@id": "http:@debian/libglib2_0_data/2_42_1_1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libglib2.0-data/2.42.1-1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libglib2.0-data",
+        "version": "2.42.1-1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "ucf",
+    "revision": "3.0030",
+    "@id": "http:@debian/ucf/3_0030/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "ucf/3.0030/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "ucf",
+        "version": "3.0030",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcap2",
+    "revision": "1:2.24-8",
+    "@id": "http:@debian/libcap2/1_2_24_8/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libcap2/1:2.24-8/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libcap2",
+        "version": "1:2.24-8",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "init",
+    "revision": "1.22",
+    "@id": "http:@debian/init/1_22/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "init/1.22/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "init",
+        "version": "1.22",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpam-runtime",
+    "revision": "1.1.8-3.1+deb8u2",
+    "@id": "http:@debian/libpam_runtime/1_1_8_3_1_deb8u2/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libpam-runtime/1.1.8-3.1+deb8u2/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libpam-runtime",
+        "version": "1.1.8-3.1+deb8u2",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libselinux1",
+    "revision": "2.3-2",
+    "@id": "http:@debian/libselinux1/2_3_2/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libselinux1/2.3-2/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libselinux1",
+        "version": "2.3-2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libxdmcp6",
+    "revision": "1:1.1.1-1+b1",
+    "@id": "http:@debian/libxdmcp6/1_1_1_1_1_b1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libxdmcp6/1:1.1.1-1+b1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libxdmcp6",
+        "version": "1:1.1.1-1+b1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcurl3",
+    "revision": "7.38.0-4+deb8u5",
+    "@id": "http:@debian/libcurl3/7_38_0_4_deb8u5/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libcurl3/7.38.0-4+deb8u5/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libcurl3",
+        "version": "7.38.0-4+deb8u5",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libparams-util-perl",
+    "revision": "1.07-2+b1",
+    "@id": "http:@debian/libparams_util_perl/1_07_2_b1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libparams-util-perl/1.07-2+b1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libparams-util-perl",
+        "version": "1.07-2+b1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "ncurses-base",
+    "revision": "5.9+20140913-1",
+    "@id": "http:@debian/ncurses_base/5_9_20140913_1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "ncurses-base/5.9+20140913-1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "ncurses-base",
+        "version": "5.9+20140913-1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "dash",
+    "revision": "0.5.7-4+b1",
+    "@id": "http:@debian/dash/0_5_7_4_b1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "dash/0.5.7-4+b1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "dash",
+        "version": "0.5.7-4+b1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsystemd0",
+    "revision": "215-17+deb8u7",
+    "@id": "http:@debian/libsystemd0/215_17_deb8u7/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libsystemd0/215-17+deb8u7/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libsystemd0",
+        "version": "215-17+deb8u7",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libldap-2.4-2",
+    "revision": "2.4.40+dfsg-1+deb8u3",
+    "@id": "http:@debian/libldap_2_4_2/2_4_40_dfsg_1_deb8u3/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libldap-2.4-2/2.4.40+dfsg-1+deb8u3/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libldap-2.4-2",
+        "version": "2.4.40+dfsg-1+deb8u3",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "hostname",
+    "revision": "3.15",
+    "@id": "http:@debian/hostname/3_15/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "hostname/3.15/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "hostname",
+        "version": "3.15",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libicu52",
+    "revision": "52.1-8+deb8u5",
+    "@id": "http:@debian/libicu52/52_1_8_deb8u5/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libicu52/52.1-8+deb8u5/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libicu52",
+        "version": "52.1-8+deb8u5",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libdb5.3",
+    "revision": "5.3.28-9",
+    "@id": "http:@debian/libdb5_3/5_3_28_9/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libdb5.3/5.3.28-9/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libdb5.3",
+        "version": "5.3.28-9",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libdata-section-perl",
+    "revision": "0.200006-1",
+    "@id": "http:@debian/libdata_section_perl/0_200006_1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libdata-section-perl/0.200006-1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libdata-section-perl",
+        "version": "0.200006-1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "diffutils",
+    "revision": "1:3.3-1+b1",
+    "@id": "http:@debian/diffutils/1_3_3_1_b1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "diffutils/1:3.3-1+b1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "diffutils",
+        "version": "1:3.3-1+b1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libgnutls-deb0-28",
+    "revision": "3.3.8-6+deb8u7",
+    "@id": "http:@debian/libgnutls_deb0_28/3_3_8_6_deb8u7/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libgnutls-deb0-28/3.3.8-6+deb8u7/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libgnutls-deb0-28",
+        "version": "3.3.8-6+deb8u7",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "bsdutils",
+    "revision": "1:2.25.2-6",
+    "@id": "http:@debian/bsdutils/1_2_25_2_6/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "bsdutils/1:2.25.2-6/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "bsdutils",
+        "version": "1:2.25.2-6",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcomerr2",
+    "revision": "1.42.12-2+b1",
+    "@id": "http:@debian/libcomerr2/1_42_12_2_b1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libcomerr2/1.42.12-2+b1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libcomerr2",
+        "version": "1.42.12-2+b1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libavahi-client3",
+    "revision": "0.6.31-5",
+    "@id": "http:@debian/libavahi_client3/0_6_31_5/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libavahi-client3/0.6.31-5/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libavahi-client3",
+        "version": "0.6.31-5",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "gpgv",
+    "revision": "1.4.18-7+deb8u3",
+    "@id": "http:@debian/gpgv/1_4_18_7_deb8u3/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "gpgv/1.4.18-7+deb8u3/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "gpgv",
+        "version": "1.4.18-7+deb8u3",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "passwd",
+    "revision": "1:4.2-3+deb8u4",
+    "@id": "http:@debian/passwd/1_4_2_3_deb8u4/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "passwd/1:4.2-3+deb8u4/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "passwd",
+        "version": "1:4.2-3+deb8u4",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "librtmp1",
+    "revision": "2.4+20150115.gita107cef-1+deb8u1",
+    "@id": "http:@debian/librtmp1/2_4_20150115_gita107cef_1_deb8u1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "librtmp1/2.4+20150115.gita107cef-1+deb8u1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "librtmp1",
+        "version": "2.4+20150115.gita107cef-1+deb8u1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libustr-1.0-1",
+    "revision": "1.0.4-3+b2",
+    "@id": "http:@debian/libustr_1_0_1/1_0_4_3_b2/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libustr-1.0-1/1.0.4-3+b2/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libustr-1.0-1",
+        "version": "1.0.4-3+b2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libfontconfig1",
+    "revision": "2.11.0-6.3+deb8u1",
+    "@id": "http:@debian/libfontconfig1/2_11_0_6_3_deb8u1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libfontconfig1/2.11.0-6.3+deb8u1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libfontconfig1",
+        "version": "2.11.0-6.3+deb8u1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libgcrypt20",
+    "revision": "1.6.3-2+deb8u4",
+    "@id": "http:@debian/libgcrypt20/1_6_3_2_deb8u4/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libgcrypt20/1.6.3-2+deb8u4/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libgcrypt20",
+        "version": "1.6.3-2+deb8u4",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libidn11",
+    "revision": "1.29-1+deb8u2",
+    "@id": "http:@debian/libidn11/1_29_1_deb8u2/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libidn11/1.29-1+deb8u2/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libidn11",
+        "version": "1.29-1+deb8u2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpackage-constants-perl",
+    "revision": "0.04-1",
+    "@id": "http:@debian/libpackage_constants_perl/0_04_1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libpackage-constants-perl/0.04-1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libpackage-constants-perl",
+        "version": "0.04-1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libaudit-common",
+    "revision": "1:2.4-1",
+    "@id": "http:@debian/libaudit_common/1_2_4_1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libaudit-common/1:2.4-1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libaudit-common",
+        "version": "1:2.4-1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libfcgi-perl",
+    "revision": "0.77-1+deb8u1",
+    "@id": "http:@debian/libfcgi_perl/0_77_1_deb8u1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libfcgi-perl/0.77-1+deb8u1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libfcgi-perl",
+        "version": "0.77-1+deb8u1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsemanage1",
+    "revision": "2.3-1+b1",
+    "@id": "http:@debian/libsemanage1/2_3_1_b1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libsemanage1/2.3-1+b1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libsemanage1",
+        "version": "2.3-1+b1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libgdbm3",
+    "revision": "1.8.3-13.1",
+    "@id": "http:@debian/libgdbm3/1_8_3_13_1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libgdbm3/1.8.3-13.1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libgdbm3",
+        "version": "1.8.3-13.1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcgi-fast-perl",
+    "revision": "1:2.04-1",
+    "@id": "http:@debian/libcgi_fast_perl/1_2_04_1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libcgi-fast-perl/1:2.04-1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libcgi-fast-perl",
+        "version": "1:2.04-1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libudev1",
+    "revision": "215-17+deb8u7",
+    "@id": "http:@debian/libudev1/215_17_deb8u7/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libudev1/215-17+deb8u7/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libudev1",
+        "version": "215-17+deb8u7",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libnss3",
+    "revision": "2:3.26-1+debu8u2",
+    "@id": "http:@debian/libnss3/2_3_26_1_debu8u2/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libnss3/2:3.26-1+debu8u2/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libnss3",
+        "version": "2:3.26-1+debu8u2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libdata-optlist-perl",
+    "revision": "0.109-1",
+    "@id": "http:@debian/libdata_optlist_perl/0_109_1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libdata-optlist-perl/0.109-1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libdata-optlist-perl",
+        "version": "0.109-1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpsl0",
+    "revision": "0.5.1-1",
+    "@id": "http:@debian/libpsl0/0_5_1_1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libpsl0/0.5.1-1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libpsl0",
+        "version": "0.5.1-1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsoftware-license-perl",
+    "revision": "0.103010-3",
+    "@id": "http:@debian/libsoftware_license_perl/0_103010_3/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libsoftware-license-perl/0.103010-3/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libsoftware-license-perl",
+        "version": "0.103010-3",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsasl2-modules-db",
+    "revision": "2.1.26.dfsg1-13+deb8u1",
+    "@id": "http:@debian/libsasl2_modules_db/2_1_26_dfsg1_13_deb8u1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libsasl2-modules-db/2.1.26.dfsg1-13+deb8u1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libsasl2-modules-db",
+        "version": "2.1.26.dfsg1-13+deb8u1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "base-passwd",
+    "revision": "3.5.37",
+    "@id": "http:@debian/base_passwd/3_5_37/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "base-passwd/3.5.37/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "base-passwd",
+        "version": "3.5.37",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "java-common",
+    "revision": "0.52",
+    "@id": "http:@debian/java_common/0_52/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "java-common/0.52/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "java-common",
+        "version": "0.52",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libx11-data",
+    "revision": "2:1.6.2-3",
+    "@id": "http:@debian/libx11_data/2_1_6_2_3/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libx11-data/2:1.6.2-3/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libx11-data",
+        "version": "2:1.6.2-3",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libkmod2",
+    "revision": "18-3",
+    "@id": "http:@debian/libkmod2/18_3/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libkmod2/18-3/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libkmod2",
+        "version": "18-3",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libterm-ui-perl",
+    "revision": "0.42-1",
+    "@id": "http:@debian/libterm_ui_perl/0_42_1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libterm-ui-perl/0.42-1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libterm-ui-perl",
+        "version": "0.42-1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "e2fslibs",
+    "revision": "1.42.12-2+b1",
+    "@id": "http:@debian/e2fslibs/1_42_12_2_b1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "e2fslibs/1.42.12-2+b1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "e2fslibs",
+        "version": "1.42.12-2+b1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "openssl",
+    "revision": "1.1.0f-3",
+    "@id": "http:@debian/openssl/1_1_0f_3/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "openssl/1.1.0f-3/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "openssl",
+        "version": "1.1.0f-3",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "liblog-message-perl",
+    "revision": "0.8-1",
+    "@id": "http:@debian/liblog_message_perl/0_8_1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "liblog-message-perl/0.8-1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "liblog-message-perl",
+        "version": "0.8-1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "adduser",
+    "revision": "3.113+nmu3",
+    "@id": "http:@debian/adduser/3_113_nmu3/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "adduser/3.113+nmu3/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "adduser",
+        "version": "3.113+nmu3",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "unzip",
+    "revision": "6.0-16+deb8u3",
+    "@id": "http:@debian/unzip/6_0_16_deb8u3/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "unzip/6.0-16+deb8u3/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "unzip",
+        "version": "6.0-16+deb8u3",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "openjdk-7-jre-headless",
+    "revision": "7u131-2.6.9-2~deb8u1",
+    "@id": "http:@debian/openjdk_7_jre_headless/7u131_2_6_9_2_deb8u1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "openjdk-7-jre-headless/7u131-2.6.9-2~deb8u1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "openjdk-7-jre-headless",
+        "version": "7u131-2.6.9-2~deb8u1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "sed",
+    "revision": "4.2.2-4+deb8u1",
+    "@id": "http:@debian/sed/4_2_2_4_deb8u1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "sed/4.2.2-4+deb8u1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "sed",
+        "version": "4.2.2-4+deb8u1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "acl",
+    "revision": "2.2.52-2",
+    "@id": "http:@debian/acl/2_2_52_2/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "acl/2.2.52-2/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "acl",
+        "version": "2.2.52-2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libglib2.0-0",
+    "revision": "2.42.1-1+b1",
+    "@id": "http:@debian/libglib2_0_0/2_42_1_1_b1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libglib2.0-0/2.42.1-1+b1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libglib2.0-0",
+        "version": "2.42.1-1+b1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "debianutils",
+    "revision": "4.4+b1",
+    "@id": "http:@debian/debianutils/4_4_b1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "debianutils/4.4+b1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "debianutils",
+        "version": "4.4+b1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libtext-template-perl",
+    "revision": "1.46-1",
+    "@id": "http:@debian/libtext_template_perl/1_46_1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libtext-template-perl/1.46-1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libtext-template-perl",
+        "version": "1.46-1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libdevmapper1.02.1",
+    "revision": "2:1.02.90-2.2+deb8u1",
+    "@id": "http:@debian/libdevmapper1_02_1/2_1_02_90_2_2_deb8u1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libdevmapper1.02.1/2:1.02.90-2.2+deb8u1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libdevmapper1.02.1",
+        "version": "2:1.02.90-2.2+deb8u1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libexpat1",
+    "revision": "2.1.0-6+deb8u4",
+    "@id": "http:@debian/libexpat1/2_1_0_6_deb8u4/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libexpat1/2.1.0-6+deb8u4/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libexpat1",
+        "version": "2.1.0-6+deb8u4",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libpam-modules",
+    "revision": "1.1.8-3.1+deb8u2+b1",
+    "@id": "http:@debian/libpam_modules/1_1_8_3_1_deb8u2_b1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libpam-modules/1.1.8-3.1+deb8u2+b1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libpam-modules",
+        "version": "1.1.8-3.1+deb8u2+b1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libxi6",
+    "revision": "2:1.7.4-1+b2",
+    "@id": "http:@debian/libxi6/2_1_7_4_1_b2/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libxi6/2:1.7.4-1+b2/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libxi6",
+        "version": "2:1.7.4-1+b2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "systemd-sysv",
+    "revision": "215-17+deb8u7",
+    "@id": "http:@debian/systemd_sysv/215_17_deb8u7/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "systemd-sysv/215-17+deb8u7/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "systemd-sysv",
+        "version": "215-17+deb8u7",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "coreutils",
+    "revision": "8.23-4",
+    "@id": "http:@debian/coreutils/8_23_4/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "coreutils/8.23-4/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "coreutils",
+        "version": "8.23-4",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "startpar",
+    "revision": "0.59-3",
+    "@id": "http:@debian/startpar/0_59_3/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "startpar/0.59-3/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "startpar",
+        "version": "0.59-3",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libx11-xcb1",
+    "revision": "2:1.6.2-3",
+    "@id": "http:@debian/libx11_xcb1/2_1_6_2_3/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libx11-xcb1/2:1.6.2-3/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libx11-xcb1",
+        "version": "2:1.6.2-3",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libmodule-pluggable-perl",
+    "revision": "5.1-1",
+    "@id": "http:@debian/libmodule_pluggable_perl/5_1_1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libmodule-pluggable-perl/5.1-1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libmodule-pluggable-perl",
+        "version": "5.1-1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcryptsetup4",
+    "revision": "2:1.6.6-5",
+    "@id": "http:@debian/libcryptsetup4/2_1_6_6_5/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libcryptsetup4/2:1.6.6-5/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libcryptsetup4",
+        "version": "2:1.6.6-5",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "perl",
+    "revision": "5.20.2-3+deb8u8",
+    "@id": "http:@debian/perl/5_20_2_3_deb8u8/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "perl/5.20.2-3+deb8u8/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "perl",
+        "version": "5.20.2-3+deb8u8",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libxext6",
+    "revision": "2:1.3.3-1",
+    "@id": "http:@debian/libxext6/2_1_3_3_1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libxext6/2:1.3.3-1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libxext6",
+        "version": "2:1.3.3-1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libnspr4",
+    "revision": "2:4.12-1+debu8u1",
+    "@id": "http:@debian/libnspr4/2_4_12_1_debu8u1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libnspr4/2:4.12-1+debu8u1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libnspr4",
+        "version": "2:4.12-1+debu8u1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsepol1",
+    "revision": "2.3-2",
+    "@id": "http:@debian/libsepol1/2_3_2/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libsepol1/2.3-2/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libsepol1",
+        "version": "2.3-2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libvorbis0a",
+    "revision": "1.3.4-2",
+    "@id": "http:@debian/libvorbis0a/1_3_4_2/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libvorbis0a/1.3.4-2/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libvorbis0a",
+        "version": "1.3.4-2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libcap-ng0",
+    "revision": "0.7.4-2",
+    "@id": "http:@debian/libcap_ng0/0_7_4_2/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libcap-ng0/0.7.4-2/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libcap-ng0",
+        "version": "0.7.4-2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsctp1",
+    "revision": "1.0.16+dfsg-2",
+    "@id": "http:@debian/libsctp1/1_0_16_dfsg_2/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libsctp1/1.0.16+dfsg-2/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libsctp1",
+        "version": "1.0.16+dfsg-2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "debian-archive-keyring",
+    "revision": "2017.5~deb8u1",
+    "@id": "http:@debian/debian_archive_keyring/2017_5_deb8u1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "debian-archive-keyring/2017.5~deb8u1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "debian-archive-keyring",
+        "version": "2017.5~deb8u1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsmartcols1",
+    "revision": "2.25.2-6",
+    "@id": "http:@debian/libsmartcols1/2_25_2_6/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libsmartcols1/2.25.2-6/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libsmartcols1",
+        "version": "2.25.2-6",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsm6",
+    "revision": "2:1.2.2-1+b1",
+    "@id": "http:@debian/libsm6/2_1_2_2_1_b1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libsm6/2:1.2.2-1+b1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libsm6",
+        "version": "2:1.2.2-1+b1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsub-install-perl",
+    "revision": "0.928-1",
+    "@id": "http:@debian/libsub_install_perl/0_928_1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libsub-install-perl/0.928-1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libsub-install-perl",
+        "version": "0.928-1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libmro-compat-perl",
+    "revision": "0.12-1",
+    "@id": "http:@debian/libmro_compat_perl/0_12_1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "libmro-compat-perl/0.12-1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libmro-compat-perl",
+        "version": "0.12-1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "xdg-user-dirs",
+    "revision": "0.15-2",
+    "@id": "http:@debian/xdg_user_dirs/0_15_2/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@debian",
+      "externalId": "xdg-user-dirs/0.15-2/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@debian",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "xdg-user-dirs",
+        "version": "0.15-2",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  }
+]
