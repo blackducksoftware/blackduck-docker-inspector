@@ -99,6 +99,7 @@ public class DockerClientManager {
 
     private static final String OUTPUT_INCLUDE_DOCKER_TARFILE_PROPERTY = "output.include.dockertarfile";
     private static final String OUTPUT_INCLUDE_CONTAINER_FILE_SYSTEM_TARFILE_PROPERTY = "output.include.containerfilesystem";
+    private static final String SHA256_PREFIX = "@sha256:";
     private final Logger logger = LoggerFactory.getLogger(DockerClientManager.class);
 
     @Autowired
@@ -144,6 +145,7 @@ public class DockerClientManager {
 
     public File getTarFileFromDockerImage(final String imageName, final String tagName, final File imageTarDirectory) throws IntegrationException, IOException {
         Optional<String> targetImageId = Optional.empty();
+        logger.trace(String.format("getTarFileFromDockerImage(): imageName: %s; tagName: %s", imageName, tagName));
         try {
             targetImageId = Optional.ofNullable(pullImage(imageName, tagName));
         } catch (final DisabledException disabledException) {
@@ -353,32 +355,43 @@ public class DockerClientManager {
     }
 
     private Image getLocalImage(final DockerClient dockerClient, final String imageName, final String tagName) {
-        Image localImage = null;
         final List<Image> images = dockerClient.listImagesCmd().withImageNameFilter(imageName).exec();
         for (final Image image : images) {
-            if (image == null) {
-                logger.warn("Encountered a null image in local docker registry");
-                continue;
-            }
-            final String[] tags = image.getRepoTags();
-            if (tags == null) {
-                logger.warn("Encountered an image with a null tag list in local docker registry");
-            } else {
-                for (final String tag : tags) {
-                    if (tag == null) {
-                        continue;
-                    }
-                    if (tag.contains(tagName)) {
-                        localImage = image;
-                        break;
-                    }
-                }
-            }
-            if (localImage != null) {
-                break;
+            if (isTargetImage(dockerClient, imageName, tagName, image)) {
+                return image;
             }
         }
-        return localImage;
+        return null;
+    }
+
+    private boolean isTargetImage(DockerClient dockerClient, String targetImageName, String targetImageTag, Image imageToCheck) {
+        if (imageToCheck == null) {
+            logger.warn("Encountered a null image in local docker registry");
+            return false;
+        }
+        final String[] tags = imageToCheck.getRepoTags();
+        if (tags == null) {
+            logger.debug("Encountered an image with a null tag list in local docker registry; checking digests");
+            InspectImageResponse inspectResponse = dockerClient.inspectImageCmd(imageToCheck.getId()).exec();
+            List<String> digests = inspectResponse.getRepoDigests();
+            for (String digest : digests) {
+                logger.trace(String.format("digest: %s", digest));
+                if (digest.equals(String.format("%s%s", targetImageName, targetImageTag))) {
+                    logger.trace("Found target image in local repo by digest");
+                    return true;
+                }
+            }
+        } else {
+            for (final String tag : tags) {
+                if (tag == null) {
+                    continue;
+                }
+                if (tag.contains(targetImageTag)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private void removeContainer(final DockerClient dockerClient, final String containerId) {
@@ -538,9 +551,15 @@ public class DockerClientManager {
     private void saveImageToFile(final String imageName, final String tagName, final File imageTarFile) throws IOException, IntegrationException {
         InputStream tarInputStream = null;
         try {
-            logger.info(String.format("Saving the docker image to : %s", imageTarFile.getCanonicalPath()));
             final DockerClient dockerClient = getDockerClient();
-            final String imageToSave = String.format("%s:%s", imageName, tagName);
+            final String imageToSave;
+            if (imageName.contains(SHA256_PREFIX)) {
+                int atShaIndex = imageName.lastIndexOf(SHA256_PREFIX);
+                imageToSave = imageName.substring(0, atShaIndex);
+            } else {
+                imageToSave = String.format("%s:%s", imageName, tagName);
+            }
+            logger.info(String.format("Saving the docker image '%s' to : %s", imageToSave, imageTarFile.getCanonicalPath()));
             final SaveImageCmd saveCommand = dockerClient.saveImageCmd(imageToSave);
             tarInputStream = saveCommand.exec();
             FileUtils.copyInputStreamToFile(tarInputStream, imageTarFile);
