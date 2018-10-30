@@ -12,3 +12,6 @@
 /testing/
 /testBdio
 /test/
+/*.iml
+/.idea/
+/out/
