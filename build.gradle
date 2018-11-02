@@ -211,6 +211,7 @@ artifactory {
 
 dependencies {
     compile 'com.blackducksoftware.integration:hub-common:38.4.0'
+    compile 'com.blackducksoftware.integration:integration-common:13.2.0'
     compile 'com.blackducksoftware.integration:hub-imageinspector-lib:7.0.4'
     
     compile 'com.github.docker-java:docker-java:3.1.0-rc-2'
