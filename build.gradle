@@ -28,7 +28,7 @@ repositories {
 
 version = '7.2.2-SNAPSHOT'
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
-project.ext.inspectorImageVersion = "4.0.4-SNAPSHOT"
+project.ext.inspectorImageVersion = "4.0.4"
 project.group = 'com.synopsys.integration'
 
 apply plugin: 'com.blackducksoftware.integration.solution'
@@ -215,7 +215,7 @@ dependencies {
     // TODO TEMP:
     compile 'com.blackducksoftware.integration:integration-common:13.2.0'
 
-    compile 'com.blackducksoftware.integration:hub-imageinspector-lib:7.0.5-SNAPSHOT'
+    compile 'com.blackducksoftware.integration:hub-imageinspector-lib:7.0.5'
     
     compile 'com.github.docker-java:docker-java:3.1.0-rc-2'
 
