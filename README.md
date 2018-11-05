@@ -15,5 +15,5 @@ chmod +x blackduck-docker-inspector.sh
 You can download the latest source from GitHub: https://github.com/blackducksoftware/blackduck-docker-inspector. 
 
 ## Documentation ##
-All documentation for blackduck-docker-inspector can be found on our public [Black Duck Confluence](https://blackducksoftware.atlassian.net/wiki/spaces/INTDOCS/pages/48435867/Black+Duck+Docker+Inspector)
+All documentation for blackduck-docker-inspector can be found on our public [Confluence](https://synopsys.atlassian.net/wiki/spaces/INTDOCS/pages/622613/Black+Duck+Docker+Inspector)
 
