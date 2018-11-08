@@ -24,6 +24,7 @@
 package com.synopsys.integration.blackduck.dockerinspector.dockerexec;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.synopsys.integration.blackduck.imageinspector.imageformat.docker.manifest.ManifestLayerMapping;
@@ -62,7 +63,10 @@ public class DissectedImage {
         return layerMappings;
     }
 
-    public void setLayerMappings(final List<ManifestLayerMapping> layerMappings) {
+    public void setLayerMappings(final ManifestLayerMapping layerMapping) {
+        // TODO temp hack; will go away when exec mode goes away
+        List<ManifestLayerMapping> layerMappings = new ArrayList<>(1);
+        layerMappings.add(layerMapping);
         this.layerMappings = layerMappings;
     }
 

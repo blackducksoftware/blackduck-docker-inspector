@@ -50,9 +50,11 @@ import com.synopsys.integration.blackduck.dockerinspector.help.formatter.UsageFo
 import com.synopsys.integration.blackduck.imageinspector.api.PkgMgrDataNotFoundException;
 import com.synopsys.integration.blackduck.imageinspector.lib.ImageInfoDerived;
 import com.synopsys.integration.blackduck.imageinspector.lib.ImageInspector;
+import com.synopsys.integration.blackduck.imageinspector.linux.extractor.BdioGenerator;
 import com.synopsys.integration.blackduck.imageinspector.name.ImageNameResolver;
 import com.synopsys.integration.blackduck.imageinspector.result.ResultFile;
 import com.synopsys.integration.exception.IntegrationException;
+import com.synopsys.integration.hub.bdio.SimpleBdioFactory;
 
 @SpringBootApplication
 @ComponentScan(basePackages = { "com.synopsys.integration.blackduck.imageinspector", "com.synopsys.integration.blackduck.dockerinspector" })
@@ -71,6 +73,7 @@ public class DockerEnvImageInspector {
     @Autowired
     private Output output;
 
+    // TODO: eliminate dependency on this:
     @Autowired
     private ImageInspector imageInspector;
 
@@ -113,7 +116,8 @@ public class DockerEnvImageInspector {
                 returnCode = inspector.getBdio(dissectedImage);
             } catch (final PkgMgrDataNotFoundException e) {
                 logger.info("Pkg mgr not found; generating empty BDIO file");
-                final ImageInfoDerived imageInfoDerived = imageInspector.generateEmptyBdio(config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings(), config.getBlackDuckProjectName(),
+                // TODO: eliminate dependency on imageInspector:
+                final ImageInfoDerived imageInfoDerived = imageInspector.generateEmptyBdio(new BdioGenerator(new SimpleBdioFactory()), config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMappings().get(0), config.getBlackDuckProjectName(),
                         config.getBlackDuckProjectVersion(), dissectedImage.getTargetImageFileSystemRootDir(), config.getBlackDuckCodelocationPrefix());
                 output.writeBdioFile(dissectedImage, imageInfoDerived);
                 output.uploadBdio(dissectedImage);
