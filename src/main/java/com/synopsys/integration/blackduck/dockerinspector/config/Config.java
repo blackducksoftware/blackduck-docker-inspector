@@ -125,6 +125,11 @@ public class Config {
     @Value("${command.timeout:120000}")
     private Long commandTimeout = 120000L;
 
+    // Timeout for http requests to image inspector services
+    @ValueDescription(description = "HTTP Service Request Timeout (Milliseconds)", defaultValue = "120000", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${service.timeout:120000}")
+    private Long serviceTimeout = 120000L;
+
     // Logging level: ERROR, WARN, INFO, DEBUG, TRACE
     @ValueDescription(description = "Logging Level (WARN, INFO, DEBUG, TRACE)", defaultValue = "INFO", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${logging.level.com.synopsys:INFO}")
@@ -426,6 +431,10 @@ public class Config {
         return new Long(optionsByFieldName.get("commandTimeout").getResolvedValue());
     }
 
+    public Long getServiceTimeout() {
+        return new Long(optionsByFieldName.get("serviceTimeout").getResolvedValue());
+    }
+
     public String getOutputPath() {
         return optionsByFieldName.get("outputPath").getResolvedValue();
     }
@@ -609,6 +618,7 @@ public class Config {
         this.callerVersion = null;
         this.cleanupWorkingDir = null;
         this.commandTimeout = null;
+        this.serviceTimeout = null;
         this.dockerImage = null;
         this.dockerImageId = null;
         this.dockerImageRepo = null;

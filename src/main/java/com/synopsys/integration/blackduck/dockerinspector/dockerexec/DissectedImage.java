@@ -33,7 +33,7 @@ import com.synopsys.integration.blackduck.imageinspector.lib.OperatingSystemEnum
 public class DissectedImage {
     private File dockerTarFile = null;
     private List<File> layerTars = null;
-    private List<ManifestLayerMapping> layerMappings = null;
+    private ManifestLayerMapping layerMapping = null;
     private File targetImageFileSystemRootDir = null;
     private OperatingSystemEnum targetOs = null;
     private String runOnImageName = null;
@@ -59,15 +59,12 @@ public class DissectedImage {
         this.layerTars = layerTars;
     }
 
-    public List<ManifestLayerMapping> getLayerMappings() {
-        return layerMappings;
+    public ManifestLayerMapping getLayerMapping() {
+        return layerMapping;
     }
 
     public void setLayerMappings(final ManifestLayerMapping layerMapping) {
-        // TODO temp hack; will go away when exec mode goes away
-        List<ManifestLayerMapping> layerMappings = new ArrayList<>(1);
-        layerMappings.add(layerMapping);
-        this.layerMappings = layerMappings;
+        this.layerMapping = layerMapping;
     }
 
     public File getTargetImageFileSystemRootDir() {

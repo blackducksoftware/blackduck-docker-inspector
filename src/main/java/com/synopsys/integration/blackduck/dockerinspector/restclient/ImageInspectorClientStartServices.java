@@ -211,7 +211,7 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
     }
 
     private int deriveTimeoutSeconds() {
-        return (int) (config.getCommandTimeout() / 1000L);
+        return (int) (config.getServiceTimeout() / 1000L);
     }
 
     private URI deriveInspectorBaseUri(final int inspectorPort) throws IntegrationException {
