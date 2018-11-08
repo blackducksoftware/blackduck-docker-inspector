@@ -7,7 +7,7 @@ buildscript {
         maven { url 'https://plugins.gradle.org/m2/' }
     }
     dependencies {
-        classpath 'com.blackducksoftware.integration:common-gradle-plugin:0.0.+'
+        classpath 'com.blackducksoftware.integration:common-gradle-plugin:0.0.39'
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.11.RELEASE")
         classpath 'com.bmuschko:gradle-docker-plugin:3.0.6'
     }
@@ -28,7 +28,7 @@ repositories {
 
 version = '7.2.3-SNAPSHOT'
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
-project.ext.inspectorImageVersion = "4.0.4"
+project.ext.inspectorImageVersion = "4.0.5-SNAPSHOT"
 project.group = 'com.synopsys.integration'
 
 apply plugin: 'com.blackducksoftware.integration.solution'
@@ -212,7 +212,7 @@ artifactory {
 dependencies {
     compile 'com.blackducksoftware.integration:hub-common:38.4.0'
     compile 'com.blackducksoftware.integration:integration-common:13.2.0'
-    compile 'com.blackducksoftware.integration:hub-imageinspector-lib:7.0.5'
+    compile 'com.blackducksoftware.integration:hub-imageinspector-lib:7.0.6-SNAPSHOT'
     
     compile 'com.github.docker-java:docker-java:3.1.0-rc-2'
 
