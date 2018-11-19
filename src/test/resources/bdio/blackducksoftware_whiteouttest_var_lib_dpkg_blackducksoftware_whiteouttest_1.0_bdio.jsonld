@@ -6,9 +6,9 @@
       "spdx:creator": [
         "Tool: IntegrationBdio-16.1.1"
       ],
-      "spdx:created": "2018-11-02T14:37:50.198Z"
+      "spdx:created": "2018-11-19T16:48:50.792Z"
     },
-    "@id": "uuid:11e34d0d-d4b6-40d9-9727-416d45170621",
+    "@id": "uuid:48e8a892-4733-4341-afb9-1e9cc45eba16",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -180,6 +180,10 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:@ubuntu/libsasl2_modules_db/2_1_26_dfsg1_14ubuntu0_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:@ubuntu/libpam_modules/1_1_8_3_2ubuntu2_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -233,6 +237,10 @@
       },
       {
         "related": "http:@ubuntu/libapparmor1/2_10_95_0ubuntu2_9/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libsasl2_modules/2_1_26_dfsg1_14ubuntu0_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -376,6 +384,10 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:@ubuntu/libsasl2_2/2_1_26_dfsg1_14ubuntu0_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:@ubuntu/libdebconfclient0/0_198ubuntu1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -452,10 +464,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libsasl2_modules_db/2_1_26_dfsg1_14build1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:@ubuntu/lsb_base/9_20160110ubuntu0_2/all",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -469,10 +477,6 @@
       },
       {
         "related": "http:@ubuntu/ncurses_base/6_0_20160213_1ubuntu1/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libsasl2_modules/2_1_26_dfsg1_14build1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -493,10 +497,6 @@
       },
       {
         "related": "http:@ubuntu/libfdisk1/2_27_1_6ubuntu3_6/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libsasl2_2/2_1_26_dfsg1_14build1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1327,6 +1327,27 @@
     "relationship": []
   },
   {
+    "name": "libsasl2-modules-db",
+    "revision": "2.1.26.dfsg1-14ubuntu0.1",
+    "@id": "http:@ubuntu/libsasl2_modules_db/2_1_26_dfsg1_14ubuntu0_1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@ubuntu",
+      "externalId": "libsasl2-modules-db/2.1.26.dfsg1-14ubuntu0.1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@ubuntu",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libsasl2-modules-db",
+        "version": "2.1.26.dfsg1-14ubuntu0.1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "libpam-modules",
     "revision": "1.1.8-3.2ubuntu2.1",
     "@id": "http:@ubuntu/libpam_modules/1_1_8_3_2ubuntu2_1/amd64",
@@ -1615,6 +1636,27 @@
         },
         "name": "libapparmor1",
         "version": "2.10.95-0ubuntu2.9",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsasl2-modules",
+    "revision": "2.1.26.dfsg1-14ubuntu0.1",
+    "@id": "http:@ubuntu/libsasl2_modules/2_1_26_dfsg1_14ubuntu0_1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@ubuntu",
+      "externalId": "libsasl2-modules/2.1.26.dfsg1-14ubuntu0.1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@ubuntu",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libsasl2-modules",
+        "version": "2.1.26.dfsg1-14ubuntu0.1",
         "architecture": "amd64"
       }
     },
@@ -2356,6 +2398,27 @@
     "relationship": []
   },
   {
+    "name": "libsasl2-2",
+    "revision": "2.1.26.dfsg1-14ubuntu0.1",
+    "@id": "http:@ubuntu/libsasl2_2/2_1_26_dfsg1_14ubuntu0_1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@ubuntu",
+      "externalId": "libsasl2-2/2.1.26.dfsg1-14ubuntu0.1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@ubuntu",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libsasl2-2",
+        "version": "2.1.26.dfsg1-14ubuntu0.1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "libdebconfclient0",
     "revision": "0.198ubuntu1",
     "@id": "http:@ubuntu/libdebconfclient0/0_198ubuntu1/amd64",
@@ -2755,27 +2818,6 @@
     "relationship": []
   },
   {
-    "name": "libsasl2-modules-db",
-    "revision": "2.1.26.dfsg1-14build1",
-    "@id": "http:@ubuntu/libsasl2_modules_db/2_1_26_dfsg1_14build1/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@ubuntu",
-      "externalId": "libsasl2-modules-db/2.1.26.dfsg1-14build1/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "@ubuntu",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "libsasl2-modules-db",
-        "version": "2.1.26.dfsg1-14build1",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "lsb-base",
     "revision": "9.20160110ubuntu0.2",
     "@id": "http:@ubuntu/lsb_base/9_20160110ubuntu0_2/all",
@@ -2855,27 +2897,6 @@
         "name": "ncurses-base",
         "version": "6.0+20160213-1ubuntu1",
         "architecture": "all"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libsasl2-modules",
-    "revision": "2.1.26.dfsg1-14build1",
-    "@id": "http:@ubuntu/libsasl2_modules/2_1_26_dfsg1_14build1/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@ubuntu",
-      "externalId": "libsasl2-modules/2.1.26.dfsg1-14build1/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "@ubuntu",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "libsasl2-modules",
-        "version": "2.1.26.dfsg1-14build1",
-        "architecture": "amd64"
       }
     },
     "relationship": []
@@ -2980,27 +3001,6 @@
         },
         "name": "libfdisk1",
         "version": "2.27.1-6ubuntu3.6",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libsasl2-2",
-    "revision": "2.1.26.dfsg1-14build1",
-    "@id": "http:@ubuntu/libsasl2_2/2_1_26_dfsg1_14build1/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@ubuntu",
-      "externalId": "libsasl2-2/2.1.26.dfsg1-14build1/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "@ubuntu",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "libsasl2-2",
-        "version": "2.1.26.dfsg1-14build1",
         "architecture": "amd64"
       }
     },
