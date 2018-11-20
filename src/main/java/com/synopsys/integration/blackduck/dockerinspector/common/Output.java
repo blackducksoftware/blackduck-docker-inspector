@@ -51,6 +51,7 @@ import com.synopsys.integration.blackduck.imageinspector.lib.ImageInspector;
 import com.synopsys.integration.blackduck.imageinspector.lib.OperatingSystemEnum;
 import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
 import com.synopsys.integration.blackduck.imageinspector.linux.LinuxFileSystem;
+import com.synopsys.integration.blackduck.imageinspector.linux.extractor.BdioGenerator;
 import com.synopsys.integration.blackduck.imageinspector.name.Names;
 import com.synopsys.integration.blackduck.imageinspector.result.Result;
 import com.synopsys.integration.blackduck.imageinspector.result.ResultFile;
@@ -73,6 +74,9 @@ public class Output {
 
     @Autowired
     private ImageInspector imageInspector;
+
+    @Autowired
+    private BdioGenerator bdioGenerator;
 
     @Autowired
     private ResultFile resultFile;
@@ -115,7 +119,7 @@ public class Output {
     }
 
     public void writeBdioFile(final DissectedImage dissectedImage, final ImageInfoDerived imageInfoDerived) throws FileNotFoundException, IOException {
-        final File bdioFile = imageInspector.writeBdioFile(new File(programPaths.getDockerInspectorOutputPath()), imageInfoDerived);
+        final File bdioFile = imageInspector.writeBdioFile(bdioGenerator, new File(programPaths.getDockerInspectorOutputPath()), imageInfoDerived);
         logger.info(String.format("BDIO File generated: %s", bdioFile.getAbsolutePath()));
         dissectedImage.setBdioFilename(bdioFile.getName());
     }
