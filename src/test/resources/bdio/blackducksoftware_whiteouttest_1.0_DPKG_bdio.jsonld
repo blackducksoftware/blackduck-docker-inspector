@@ -6,9 +6,9 @@
       "spdx:creator": [
         "Tool: IntegrationBdio-16.1.1"
       ],
-      "spdx:created": "2018-11-19T17:14:18.047Z"
+      "spdx:created": "2018-11-25T22:51:12.551Z"
     },
-    "@id": "uuid:e3353954-72af-4a3a-8dc5-e3de0d9b579c",
+    "@id": "uuid:3194f78b-4691-4311-9faf-bf3ee14119fc",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -488,7 +488,7 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libldap_2_4_2/2_4_42_dfsg_2ubuntu3_3/amd64",
+        "related": "http:@ubuntu/libldap_2_4_2/2_4_42_dfsg_2ubuntu3_4/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -2945,12 +2945,12 @@
   },
   {
     "name": "libldap-2.4-2",
-    "revision": "2.4.42+dfsg-2ubuntu3.3",
-    "@id": "http:@ubuntu/libldap_2_4_2/2_4_42_dfsg_2ubuntu3_3/amd64",
+    "revision": "2.4.42+dfsg-2ubuntu3.4",
+    "@id": "http:@ubuntu/libldap_2_4_2/2_4_42_dfsg_2ubuntu3_4/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
-      "externalId": "libldap-2.4-2/2.4.42+dfsg-2ubuntu3.3/amd64",
+      "externalId": "libldap-2.4-2/2.4.42+dfsg-2ubuntu3.4/amd64",
       "externalIdMetaData": {
         "forge": {
           "name": "@ubuntu",
@@ -2958,7 +2958,7 @@
           "kbSeparator": "/"
         },
         "name": "libldap-2.4-2",
-        "version": "2.4.42+dfsg-2ubuntu3.3",
+        "version": "2.4.42+dfsg-2ubuntu3.4",
         "architecture": "amd64"
       }
     },
