@@ -23,13 +23,12 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.common;
 
-import com.synopsys.integration.blackduck.dockerinspector.dockerexec.DissectedImage;
 import com.synopsys.integration.exception.IntegrationException;
 
 public interface Inspector {
 
     boolean isApplicable();
 
-    int getBdio(DissectedImage dissectedImage) throws IntegrationException;
+    int getBdio() throws IntegrationException;
 
 }

@@ -90,7 +90,7 @@ public class RestClientInspector implements Inspector {
     // TODO This implementation doesn't use DissectedImage, but that will
     // get resolved when DockerExecInspector (and the Inspector interface) are retired/removed
     @Override
-    public int getBdio(final DissectedImage dissectedImage) throws IntegrationException {
+    public int getBdio() throws IntegrationException {
         final ImageInspectorClient imageInspectorClient = chooseImageInspectorClient();
         try {
             output.ensureWriteability();

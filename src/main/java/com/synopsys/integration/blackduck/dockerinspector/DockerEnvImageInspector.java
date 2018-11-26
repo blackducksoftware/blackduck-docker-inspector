@@ -50,6 +50,7 @@ import com.synopsys.integration.blackduck.dockerinspector.help.formatter.UsageFo
 import com.synopsys.integration.blackduck.imageinspector.api.PkgMgrDataNotFoundException;
 import com.synopsys.integration.blackduck.imageinspector.lib.ImageInfoDerived;
 import com.synopsys.integration.blackduck.imageinspector.lib.ImageInspector;
+import com.synopsys.integration.blackduck.imageinspector.lib.OperatingSystemEnum;
 import com.synopsys.integration.blackduck.imageinspector.linux.extractor.BdioGenerator;
 import com.synopsys.integration.blackduck.imageinspector.name.ImageNameResolver;
 import com.synopsys.integration.blackduck.imageinspector.result.ResultFile;
@@ -106,33 +107,19 @@ public class DockerEnvImageInspector {
     @PostConstruct
     public void inspectImage() {
         int returnCode = -1;
-        final DissectedImage dissectedImage = new DissectedImage();
         try {
             final Inspector inspector = chooseInspector();
             if (!initAndValidate(config, inspector.getClass().getName())) {
                 System.exit(0);
             }
-            try {
-                returnCode = inspector.getBdio(dissectedImage);
-            } catch (final PkgMgrDataNotFoundException e) {
-                logger.info("Pkg mgr not found; generating empty BDIO file");
-                // TODO: eliminate dependency on imageInspector:
-                final ImageInfoDerived imageInfoDerived = imageInspector.generateEmptyBdio(new BdioGenerator(new SimpleBdioFactory()), config.getDockerImageRepo(), config.getDockerImageTag(), dissectedImage.getLayerMapping(), config.getBlackDuckProjectName(),
-                        config.getBlackDuckProjectVersion(), dissectedImage.getTargetImageFileSystemRootDir(), config.getBlackDuckCodelocationPrefix());
-                output.writeBdioFile(dissectedImage, imageInfoDerived);
-                output.uploadBdio(dissectedImage);
-                output.createContainerFileSystemTarIfRequested(dissectedImage.getTargetImageFileSystemRootDir());
-                output.provideOutput();
-                returnCode = output.reportResultsPkgMgrDataNotFound(dissectedImage);
-                output.cleanUp(null);
-            }
+            returnCode = inspector.getBdio();
         } catch (final Throwable e) {
             final String msg = String.format("Error inspecting image: %s", e.getMessage());
             logger.error(msg);
             final String trace = ExceptionUtils.getStackTrace(e);
             logger.debug(String.format("Stack trace: %s", trace));
-            resultFile.write(new Gson(), programPaths.getDockerInspectorHostResultPath(), false, msg, dissectedImage.getTargetOs(), dissectedImage.getRunOnImageName(), dissectedImage.getRunOnImageTag(),
-                    dissectedImage.getDockerTarFile() == null ? "" : dissectedImage.getDockerTarFile().getName(), dissectedImage.getBdioFilename());
+            resultFile.write(new Gson(), programPaths.getDockerInspectorHostResultPath(), false, msg, OperatingSystemEnum.UBUNTU, "unknown", "unknown",
+                    "unknown", "unknown");
         }
         logger.info(String.format("Returning %d", returnCode));
         System.exit(returnCode);
