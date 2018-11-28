@@ -45,17 +45,11 @@ import com.synopsys.integration.blackduck.dockerinspector.common.Output;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
-import com.synopsys.integration.blackduck.dockerinspector.dockerexec.DissectedImage;
 import com.synopsys.integration.blackduck.dockerinspector.help.formatter.UsageFormatter;
-import com.synopsys.integration.blackduck.imageinspector.api.PkgMgrDataNotFoundException;
-import com.synopsys.integration.blackduck.imageinspector.lib.ImageInfoDerived;
-import com.synopsys.integration.blackduck.imageinspector.lib.ImageInspector;
 import com.synopsys.integration.blackduck.imageinspector.lib.OperatingSystemEnum;
-import com.synopsys.integration.blackduck.imageinspector.linux.extractor.BdioGenerator;
 import com.synopsys.integration.blackduck.imageinspector.name.ImageNameResolver;
 import com.synopsys.integration.blackduck.imageinspector.result.ResultFile;
 import com.synopsys.integration.exception.IntegrationException;
-import com.synopsys.integration.hub.bdio.SimpleBdioFactory;
 
 @SpringBootApplication
 @ComponentScan(basePackages = { "com.synopsys.integration.blackduck.imageinspector", "com.synopsys.integration.blackduck.dockerinspector" })
@@ -74,9 +68,6 @@ public class DockerEnvImageInspector {
     @Autowired
     private Output output;
 
-    // TODO: eliminate dependency on this:
-    @Autowired
-    private ImageInspector imageInspector;
 
     @Autowired
     private ProgramVersion programVersion;

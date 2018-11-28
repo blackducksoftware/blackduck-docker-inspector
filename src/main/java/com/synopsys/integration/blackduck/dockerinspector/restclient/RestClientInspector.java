@@ -31,6 +31,7 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -149,9 +150,21 @@ public class RestClientInspector implements Inspector {
         }
         logger.debug(String.format("Removing %s", programPaths.getDockerInspectorRunDirPathHost()));
         try {
-            FileOperations.removeFileOrDir(programPaths.getDockerInspectorRunDirPathHost());
+            removeFileOrDir(programPaths.getDockerInspectorRunDirPathHost());
         } catch (final IOException e) {
             logger.error(String.format("Error cleaning up working directories: %s", e.getMessage()));
+        }
+    }
+
+    private void removeFileOrDir(final String fileOrDirPath) throws IOException {
+        logger.info(String.format("Removing file or dir: %s", fileOrDirPath));
+        final File fileOrDir = new File(fileOrDirPath);
+        if (fileOrDir.exists()) {
+            if (fileOrDir.isDirectory()) {
+                FileUtils.deleteDirectory(fileOrDir);
+            } else {
+                FileUtils.deleteQuietly(fileOrDir);
+            }
         }
     }
 
