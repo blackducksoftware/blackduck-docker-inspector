@@ -13,14 +13,14 @@
 # Adjust the path in this command:
 mkdir -p /your/dir/shared/target
 
-curl -O https://raw.githubusercontent.com/blackducksoftware/hub-docker-inspector/master/deployment/kubernetes/kube-imageinspector-namespace.yml
-curl -O https://raw.githubusercontent.com/blackducksoftware/hub-docker-inspector/master/deployment/kubernetes/kube-imageinspector-service.yml
-curl -O https://raw.githubusercontent.com/blackducksoftware/hub-docker-inspector/master/deployment/kubernetes/kube-buildmachine.yml
+curl -O https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/kubernetes/kube-imageinspector-namespace.yml
+curl -O https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/kubernetes/kube-imageinspector-service.yml
+curl -O https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/kubernetes/kube-buildmachine.yml
 
 # Build a simplified simulation of a build machine
 mkdir image
 cd image
-curl -O https://raw.githubusercontent.com/blackducksoftware/hub-docker-inspector/master/deployment/kubernetes/Dockerfile
+curl -O https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/kubernetes/Dockerfile
 docker build --tag buildmachine:2.0.0 .
 cd ..
 
