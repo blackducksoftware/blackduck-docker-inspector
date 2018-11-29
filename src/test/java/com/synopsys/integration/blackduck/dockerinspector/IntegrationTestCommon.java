@@ -18,8 +18,8 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.gson.Gson;
 import com.synopsys.integration.blackduck.imageinspector.name.Names;
 import com.synopsys.integration.exception.IntegrationException;
-import com.synopsys.integration.hub.bdio.BdioReader;
-import com.synopsys.integration.hub.bdio.model.SimpleBdioDocument;
+import com.synopsys.integration.bdio.BdioReader;
+import com.synopsys.integration.bdio.model.SimpleBdioDocument;
 
 public class IntegrationTestCommon {
     private static int START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE = 8100;

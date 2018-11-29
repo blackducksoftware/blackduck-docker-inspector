@@ -45,12 +45,10 @@ import com.synopsys.integration.blackduck.dockerinspector.common.Inspector;
 import com.synopsys.integration.blackduck.dockerinspector.common.Output;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
-import com.synopsys.integration.blackduck.dockerinspector.dockerexec.DissectedImage;
-import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
 import com.synopsys.integration.blackduck.imageinspector.name.Names;
 import com.synopsys.integration.exception.IntegrationException;
-import com.synopsys.integration.hub.bdio.BdioReader;
-import com.synopsys.integration.hub.bdio.model.SimpleBdioDocument;
+import com.synopsys.integration.bdio.BdioReader;
+import com.synopsys.integration.bdio.model.SimpleBdioDocument;
 
 @Component
 public class RestClientInspector implements Inspector {
@@ -88,8 +86,6 @@ public class RestClientInspector implements Inspector {
         return false;
     }
 
-    // TODO This implementation doesn't use DissectedImage, but that will
-    // get resolved when DockerExecInspector (and the Inspector interface) are retired/removed
     @Override
     public int getBdio() throws IntegrationException {
         final ImageInspectorClient imageInspectorClient = chooseImageInspectorClient();
