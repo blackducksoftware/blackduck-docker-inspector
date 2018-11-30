@@ -37,6 +37,8 @@ public class ImageInspectorUrlBuilder {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private static final String GETBDIO_ENDPOINT = "getbdio";
     private static final String LOGGING_LEVEL_QUERY_PARAM = "logginglevel";
+    private static final String ORGANIZE_COMPONENTS_BY_LAYER_QUERY_PARAM = "organizecomponentsbylayer";
+    private static final String INCLUDE_REMOVED_COMPONENTS_QUERY_PARAM = "includeremovedcomponents";
     private static final String CLEANUP_QUERY_PARAM = "cleanup";
     private static final String RESULTING_CONTAINER_FS_PATH_QUERY_PARAM = "resultingcontainerfspath";
     private static final String IMAGE_REPO_QUERY_PARAM = "imagerepo";
@@ -49,6 +51,8 @@ public class ImageInspectorUrlBuilder {
     private String givenImageRepo = null;
     private String givenImageTag = null;
     private String containerPathToContainerFileSystemFile = null;
+    private boolean organizeComponentsByLayer = false;
+    private boolean includeRemovedComponents = false;
     private boolean cleanup = true;
 
     public ImageInspectorUrlBuilder imageInspectorUri(final URI imageInspectorUri) {
@@ -76,6 +80,16 @@ public class ImageInspectorUrlBuilder {
         return this;
     }
 
+    public ImageInspectorUrlBuilder organizeComponentsByLayer(final boolean organizeComponentsByLayer) {
+        this.organizeComponentsByLayer = organizeComponentsByLayer;
+        return this;
+    }
+
+    public ImageInspectorUrlBuilder includeRemovedComponents(final boolean includeRemovedComponents) {
+        this.includeRemovedComponents = includeRemovedComponents;
+        return this;
+    }
+
     public ImageInspectorUrlBuilder cleanup(final boolean cleanup) {
         this.cleanup = cleanup;
         return this;
@@ -95,6 +109,8 @@ public class ImageInspectorUrlBuilder {
         urlSb.append("?");
         urlSb.append(String.format("%s=%s", LOGGING_LEVEL_QUERY_PARAM, getLoggingLevel()));
         urlSb.append(String.format("&%s=%s", TARFILE_QUERY_PARAM, urlEncode(containerPathToTarfile)));
+        urlSb.append(String.format("&%s=%b", ORGANIZE_COMPONENTS_BY_LAYER_QUERY_PARAM, organizeComponentsByLayer));
+        urlSb.append(String.format("&%s=%b", INCLUDE_REMOVED_COMPONENTS_QUERY_PARAM, includeRemovedComponents));
         urlSb.append(String.format("&%s=%b", CLEANUP_QUERY_PARAM, cleanup));
         if (StringUtils.isNotBlank(containerPathToContainerFileSystemFile)) {
             urlSb.append(String.format("&%s=%s", RESULTING_CONTAINER_FS_PATH_QUERY_PARAM, urlEncode(containerPathToContainerFileSystemFile)));

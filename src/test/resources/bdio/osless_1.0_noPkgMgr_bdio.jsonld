@@ -4,25 +4,25 @@
     "spdx:name": "osless_1.0_noPkgMgr",
     "creationInfo": {
       "spdx:creator": [
-        "Tool: IntegrationBdio-16.1.1"
+        "Tool: IntegrationBdio-16.2.1"
       ],
-      "spdx:created": "2018-11-05T17:18:31.061Z"
+      "spdx:created": "2018-11-30T20:27:34.459Z"
     },
-    "@id": "uuid:70eb5003-61c6-4082-838c-c1dc230f26e2",
+    "@id": "uuid:243c3681-b290-4c75-84ea-8bad62855677",
     "@type": "BillOfMaterials",
     "relationship": []
   },
   {
     "name": "osless",
     "revision": "1.0",
-    "@id": "http:/osless/1_0",
+    "@id": "http:none/osless/1_0",
     "@type": "Project",
     "externalIdentifier": {
-      "externalSystemTypeId": "",
+      "externalSystemTypeId": "none",
       "externalId": "osless/1.0",
       "externalIdMetaData": {
         "forge": {
-          "name": "",
+          "name": "none",
           "separator": "/",
           "kbSeparator": "/"
         },

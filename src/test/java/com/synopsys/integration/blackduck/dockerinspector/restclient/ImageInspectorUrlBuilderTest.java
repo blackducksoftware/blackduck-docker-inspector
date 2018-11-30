@@ -31,10 +31,12 @@ public class ImageInspectorUrlBuilderTest {
                 .givenImageRepo("test_givenImageRepo")
                 .givenImageTag("test_givenImageTag")
                 .containerPathToContainerFileSystemFile("test_containerPathToContainerFileSystemFile")
+                               .organizeComponentsByLayer(false)
+                               .includeRemovedComponents(false)
                 .cleanup(true)
                 .build();
         assertEquals(
-                "https://www.google.com/getbdio?logginglevel=INFO&tarfile=test_containerPathToTarfile&cleanup=true&resultingcontainerfspath=test_containerPathToContainerFileSystemFile&imagerepo=test_givenImageRepo&imagetag=test_givenImageTag",
+                "https://www.google.com/getbdio?logginglevel=INFO&tarfile=test_containerPathToTarfile&organizecomponentsbylayer=false&includeremovedcomponents=false&cleanup=true&resultingcontainerfspath=test_containerPathToContainerFileSystemFile&imagerepo=test_givenImageRepo&imagetag=test_givenImageTag",
                 url);
     }
 }

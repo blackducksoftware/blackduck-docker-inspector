@@ -67,7 +67,9 @@ public class ImageInspectorClientUseExistingServices implements ImageInspectorCl
     }
 
     @Override
-    public String getBdio(final String hostPathToTarfile, final String containerPathToInputDockerTarfile, final String givenImageRepo, final String givenImageTag, final String containerPathToOutputFileSystemFile, final boolean cleanup)
+    public String getBdio(final String hostPathToTarfile, final String containerPathToInputDockerTarfile, final String givenImageRepo, final String givenImageTag, final String containerPathToOutputFileSystemFile,
+        final boolean organizeComponentsByLayer, final boolean includeRemovedComponents,
+        final boolean cleanup)
             throws IntegrationException, MalformedURLException {
         URI imageInspectorUri;
         try {
@@ -78,7 +80,7 @@ public class ImageInspectorClientUseExistingServices implements ImageInspectorCl
         final int serviceRequestTimeoutSeconds = (int) (config.getCommandTimeout() / 1000L);
         final RestConnection restConnection = restConnectionCreator.createRedirectingConnection(imageInspectorUri, serviceRequestTimeoutSeconds);
         final SimpleResponse response = restRequester.executeGetBdioRequest(restConnection, imageInspectorUri, containerPathToInputDockerTarfile,
-                givenImageRepo, givenImageTag, containerPathToOutputFileSystemFile, cleanup);
+                givenImageRepo, givenImageTag, containerPathToOutputFileSystemFile, organizeComponentsByLayer, includeRemovedComponents, cleanup);
         return response.getBody();
     }
 }

@@ -221,6 +221,15 @@ public class Config {
     @Value("${cleanup.inspector.image:false}")
     private Boolean cleanupInspectorImage = Boolean.FALSE;
 
+
+    @ValueDescription(description = "In generated BDIO, organize components by layer?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${bdio.organize.components.by.layer:false}")
+    private Boolean organizeComponentsByLayer = Boolean.FALSE;
+
+    @ValueDescription(description = "In generated BDIO, include removed components?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${bdio.include.removed.components:false}")
+    private Boolean includeRemovedComponents = Boolean.FALSE;
+
     @ValueDescription(description = "The host's path to the dir shared with the imageinspector containers. Only needed if using existing imageinspector containers", defaultValue = "/tmp/blackduck-docker-inspector-files/shared", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${shared.dir.path.local:/tmp/blackduck-docker-inspector-files/shared}")
     private String sharedDirPathLocal = "/tmp/blackduck-docker-inspector-files/shared";
@@ -577,6 +586,14 @@ public class Config {
         return optionsByFieldName.get("cleanupInspectorImage").getResolvedValue().equals("true");
     }
 
+    public boolean isOrganizeComponentsByLayer() {
+        return optionsByFieldName.get("organizeComponentsByLayer").getResolvedValue().equals("true");
+    }
+
+    public boolean isIncludeRemovedComponents() {
+        return optionsByFieldName.get("includeRemovedComponents").getResolvedValue().equals("true");
+    }
+
     public boolean isImageInspectorServiceStart() {
         return optionsByFieldName.get("imageInspectorServiceStart").getResolvedValue().equals("true");
     }
@@ -655,6 +672,8 @@ public class Config {
         this.inspectorRepository = null;
         this.cleanupInspectorContainer = null;
         this.cleanupInspectorImage = null;
+        this.organizeComponentsByLayer = null;
+        this.includeRemovedComponents = null;
         this.cleanupTargetImage = null;
         this.inspectorImageFamily = null;
         this.inspectorImageVersion = null;

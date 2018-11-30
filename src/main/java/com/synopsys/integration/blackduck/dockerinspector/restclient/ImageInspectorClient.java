@@ -33,7 +33,8 @@ public interface ImageInspectorClient {
 
     File copyTarfileToSharedDir(final File givenDockerTarfile) throws IOException;
 
-    String getBdio(String hostPathToTarFile, String containerPathToInputDockerTarfile, String givenImageRepo, String givenImageTag, String containerPathToOutputFileSystemFile, boolean cleanup)
+    String getBdio(String hostPathToTarFile, String containerPathToInputDockerTarfile, String givenImageRepo, String givenImageTag, String containerPathToOutputFileSystemFile,
+        final boolean organizeComponentsByLayer, final boolean includeRemovedComponents, boolean cleanup)
             throws IntegrationException, MalformedURLException;
 
     boolean isApplicable();
