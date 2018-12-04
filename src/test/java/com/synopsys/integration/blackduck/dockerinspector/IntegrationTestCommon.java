@@ -130,7 +130,6 @@ public class IntegrationTestCommon {
         cmd.add(String.format("--jar.path=build/libs/blackduck-docker-inspector-%s.jar", programVersion.getProgramVersion()));
         cmd.add(String.format("--output.path=%s/output", TestUtils.TEST_DIR_REL_PATH));
         cmd.add("--output.include.containerfilesystem=true");
-        cmd.add("--blackduck.always.trust.cert=true");
         if (repo != null) {
             cmd.add(String.format("--docker.image.repo=%s", repo));
         }
@@ -138,7 +137,6 @@ public class IntegrationTestCommon {
             cmd.add(String.format("--docker.image.tag=%s", tag));
         }
         cmd.add("--logging.level.com.synopsys=DEBUG");
-        cmd.add("--logging.level.com.blackducksoftware=DEBUG");
         if (mode == Mode.SPECIFY_II_DETAILS) {
             // --imageinspector.service.start=true is left to default (true)
             cmd.add(String.format("--imageinspector.service.port.alpine=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE));

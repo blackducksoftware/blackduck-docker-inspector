@@ -113,6 +113,15 @@ public class DockerInspectorTest {
     }
 
     @Test
+    public void testUbuntuStartContainerLayeredIncludeRemoved() throws IOException, InterruptedException, IntegrationException {
+        List<String> additionalArgs = new ArrayList<>();
+        additionalArgs.add("--bdio.organize.components.by.layer=true");
+        additionalArgs.add("--bdio.include.removed.components=true");
+        additionalArgs.add("--blackduck.codelocation.prefix=layeredIncludeRemoved");
+        IntegrationTestCommon.testImage(programVersion, "ubuntu:14.04", "ubuntu", "14.04", "ubuntu_14.04_DPKG_bdio.jsonld", true, Mode.DEFAULT, null, "dpkg", 10, additionalArgs, null);
+    }
+
+    @Test
     public void testUbuntuStartContainer() throws IOException, InterruptedException, IntegrationException {
         IntegrationTestCommon.testImage(programVersion, "ubuntu:17.04", "ubuntu", "17.04", "ubuntu_17.04_DPKG_bdio.jsonld", false, Mode.DEFAULT, null, "dpkg", 10, null, null);
     }
