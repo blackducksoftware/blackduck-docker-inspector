@@ -42,7 +42,7 @@ docker pull alpine:latest
 docker save -o /your/dir/shared/target/alpine.tar alpine:latest
 
 # To test:
-kubectl --namespace blackduck-imageinspector exec ${buildmachinepod} -c build-machine -- /tmp/hub-detect.sh --blackduck.hub.offline.mode=true --detect.hub.signature.scanner.disabled=true --detect.docker.tar=/opt/blackduck/shared/target/alpine.tar --detect.docker.passthrough.imageinspector.service.url=http://blackduck-imageinspector-ubuntu.blackduck-imageinspector --detect.docker.passthrough.shared.dir.path.local=/opt/blackduck/shared/ --detect.docker.passthrough.shared.dir.path.imageinspector=/opt/blackduck/shared
+kubectl --namespace blackduck-imageinspector exec ${buildmachinepod} -c build-machine -- /tmp/hub-detect.sh --blackduck.hub.offline.mode=true --detect.hub.signature.scanner.disabled=true --detect.docker.tar=/opt/blackduck/shared/target/alpine.tar --detect.docker.passthrough.imageinspector.service.url=http://blackduck-imageinspector-ubuntu.blackduck-imageinspector --detect.docker.passthrough.shared.dir.path.local=/opt/blackduck/shared/ --detect.docker.passthrough.shared.dir.path.imageinspector=/opt/blackduck/shared --detect.docker.passthrough.imageinspector.service.start=false
 
 # Notes on the detect arguments used in the command above:
 # --blackduck.hub.offline.mode=true # this disables communication with the Hub, to simplify the test
