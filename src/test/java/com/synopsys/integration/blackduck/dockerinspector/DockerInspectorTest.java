@@ -112,6 +112,8 @@ public class DockerInspectorTest {
         ensureContainerRemoved("ubuntu");
     }
 
+    // TODO: This should use a base image fetched by sha, saved to .tar by build.
+    // Also, there are two more combinations of bdio.organize.components.by.layer/bdio.include.removed.components to test
     @Test
     public void testUbuntuStartContainerLayeredIncludeRemoved() throws IOException, InterruptedException, IntegrationException {
         List<String> additionalArgs = new ArrayList<>();
