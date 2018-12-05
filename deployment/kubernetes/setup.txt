@@ -41,7 +41,13 @@ kubectl --namespace blackduck-imageinspector cp ./hub-detect.sh ${buildmachinepo
 docker pull alpine:latest
 docker save -o /your/dir/shared/target/alpine.tar alpine:latest
 
-# To test:
+# At this point you can verify that the three imageinspector services are available using curl from the build machine.
+# You should get a response (including "status": "UP") from these three curl commands that hit each service's healthcheck endpoint:
+kubectl --namespace blackduck-imageinspector exec ${buildmachinepod} -c build-machine -- curl http://blackduck-imageinspector-alpine.blackduck-imageinspector/health
+kubectl --namespace blackduck-imageinspector exec ${buildmachinepod} -c build-machine -- curl http://blackduck-imageinspector-centos.blackduck-imageinspector/health
+kubectl --namespace blackduck-imageinspector exec ${buildmachinepod} -c build-machine -- curl http://blackduck-imageinspector-ubuntu.blackduck-imageinspector/health
+
+# To test detect / docker inspector:
 kubectl --namespace blackduck-imageinspector exec ${buildmachinepod} -c build-machine -- /tmp/hub-detect.sh --blackduck.hub.offline.mode=true --detect.hub.signature.scanner.disabled=true --detect.docker.tar=/opt/blackduck/shared/target/alpine.tar --detect.docker.passthrough.imageinspector.service.url=http://blackduck-imageinspector-ubuntu.blackduck-imageinspector --detect.docker.passthrough.shared.dir.path.local=/opt/blackduck/shared/ --detect.docker.passthrough.shared.dir.path.imageinspector=/opt/blackduck/shared --detect.docker.passthrough.imageinspector.service.start=false
 
 # Notes on the detect arguments used in the command above:
