@@ -6,9 +6,9 @@
       "spdx:creator": [
         "Tool: IntegrationBdio-16.1.1"
       ],
-      "spdx:created": "2018-11-25T22:51:12.551Z"
+      "spdx:created": "2018-12-07T20:34:02.234Z"
     },
-    "@id": "uuid:3194f78b-4691-4311-9faf-bf3ee14119fc",
+    "@id": "uuid:20383565-744f-4799-87b2-45fe8c606467",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -216,7 +216,7 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libssl1_0_0/1_0_2g_1ubuntu4_13/amd64",
+        "related": "http:@ubuntu/libssl1_0_0/1_0_2g_1ubuntu4_14/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -472,7 +472,7 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/openssl/1_0_2g_1ubuntu4_13/amd64",
+        "related": "http:@ubuntu/openssl/1_0_2g_1ubuntu4_14/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1517,12 +1517,12 @@
   },
   {
     "name": "libssl1.0.0",
-    "revision": "1.0.2g-1ubuntu4.13",
-    "@id": "http:@ubuntu/libssl1_0_0/1_0_2g_1ubuntu4_13/amd64",
+    "revision": "1.0.2g-1ubuntu4.14",
+    "@id": "http:@ubuntu/libssl1_0_0/1_0_2g_1ubuntu4_14/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
-      "externalId": "libssl1.0.0/1.0.2g-1ubuntu4.13/amd64",
+      "externalId": "libssl1.0.0/1.0.2g-1ubuntu4.14/amd64",
       "externalIdMetaData": {
         "forge": {
           "name": "@ubuntu",
@@ -1530,7 +1530,7 @@
           "kbSeparator": "/"
         },
         "name": "libssl1.0.0",
-        "version": "1.0.2g-1ubuntu4.13",
+        "version": "1.0.2g-1ubuntu4.14",
         "architecture": "amd64"
       }
     },
@@ -2861,12 +2861,12 @@
   },
   {
     "name": "openssl",
-    "revision": "1.0.2g-1ubuntu4.13",
-    "@id": "http:@ubuntu/openssl/1_0_2g_1ubuntu4_13/amd64",
+    "revision": "1.0.2g-1ubuntu4.14",
+    "@id": "http:@ubuntu/openssl/1_0_2g_1ubuntu4_14/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
-      "externalId": "openssl/1.0.2g-1ubuntu4.13/amd64",
+      "externalId": "openssl/1.0.2g-1ubuntu4.14/amd64",
       "externalIdMetaData": {
         "forge": {
           "name": "@ubuntu",
@@ -2874,7 +2874,7 @@
           "kbSeparator": "/"
         },
         "name": "openssl",
-        "version": "1.0.2g-1ubuntu4.13",
+        "version": "1.0.2g-1ubuntu4.14",
         "architecture": "amd64"
       }
     },
