@@ -54,7 +54,7 @@ public class CalledFromDetectTest {
         sb.append(String.format(" --detect.docker.inspector.path=%s/build/libs/blackduck-docker-inspector-%s.jar", System.getProperty("user.dir"), programVersion.getProgramVersion()));
         sb.append(" --blackduck.offline.mode=true");
         sb.append(" --detect.docker.image=alpine:latest");
-        sb.append(" --detect.blackduck.signature.scanner.disabled=true");
+        sb.append(" --detect.tools.excluded=SIGNATURE_SCAN,POLARIS");
         sb.append(" --detect.docker.path.required=false");
         sb.append(String.format(" --logging.level.com.blackducksoftware.integration=%s", "DEBUG"));
         sb.append(String.format(" --detect.docker.passthrough.cleanup.inspector.container=%b", true));
