@@ -122,7 +122,7 @@ public class DockerEnvImageInspector {
                 return inspector;
             }
         }
-        throw new IntegrationException("Invalid configuration: Unable to identify which inspector mode to execute");
+        throw new IntegrationException("Invalid configuration: Unable to identify which inspector mode to execute. Please either set property imageinspector.service.start to true (the default), or provide a value for property imageinspector.service.url");
     }
 
     private boolean helpInvoked() {
