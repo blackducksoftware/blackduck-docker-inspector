@@ -16,8 +16,6 @@ import com.google.common.io.Files;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.test.annotation.IntegrationTest;
 
-// TODO restore this
-@Ignore
 @Category(IntegrationTest.class)
 public class CalledFromDetectTest {
     private static final String TEXT_PRECEDING_BDIO_FILE_DIR_PATH = "Writing BDIO to ";
@@ -33,9 +31,6 @@ public class CalledFromDetectTest {
         programVersion.init();
         executionDir = Files.createTempDir();
         executionDir.deleteOnExit();
-        final File fakeDockerExe = new File(executionDir, "docker");
-        fakeDockerExe.createNewFile();
-        fakeDockerExe.setExecutable(true, false);
     }
 
     @Test
@@ -55,17 +50,17 @@ public class CalledFromDetectTest {
 
         final StringBuffer sb = new StringBuffer();
         sb.append("#\n");
-        sb.append(String.format("export DETECT_DOCKER_PASSTHROUGH_DOCKER_INSPECTOR_JAR_PATH=%s/build/libs/blackduck-docker-inspector-%s.jar\n", System.getProperty("user.dir"), programVersion.getProgramVersion()));
         sb.append(detectScriptFile.getAbsolutePath());
-        sb.append(String.format(" --detect.docker.inspector.path=%s/build/blackduck-docker-inspector.sh", System.getProperty("user.dir")));
-        sb.append(" --blackduck.blackduck.offline.mode=true");
+        sb.append(String.format(" --detect.docker.inspector.path=%s/build/libs/blackduck-docker-inspector-%s.jar", System.getProperty("user.dir"), programVersion.getProgramVersion()));
+        sb.append(" --blackduck.offline.mode=true");
         sb.append(" --detect.docker.image=alpine:latest");
         sb.append(" --detect.blackduck.signature.scanner.disabled=true");
-        sb.append(String.format(" --detect.docker.passthrough.logging.level.com.synopsys=%s", "DEBUG"));
+        sb.append(" --detect.docker.path.required=false");
+        sb.append(String.format(" --logging.level.com.blackducksoftware.integration=%s", "DEBUG"));
         sb.append(String.format(" --detect.docker.passthrough.cleanup.inspector.container=%b", true));
         sb.append(String.format(" --detect.cleanup=%b", false));
         sb.append(String.format(" > %s", detectOutputFile.getAbsolutePath()));
-        sb.append("");
+
         final String detectWrapperScriptString = sb.toString();
         System.out.printf("Detect wrapper script content:\n%s\n", detectWrapperScriptString);
         final File detectWrapperScriptFile = File.createTempFile("detectWrapper", ".sh");
@@ -81,7 +76,7 @@ public class CalledFromDetectTest {
         final File bdioFile = getBdioFile(detectOutputString);
         assertTrue(bdioFile.exists());
         final String dockerInspectorBdioFileContents = FileUtils.readFileToString(bdioFile, StandardCharsets.UTF_8);
-        assertTrue(dockerInspectorBdioFileContents.contains("\"spdx:name\": \"alpine_latest_lib_apk_APK\","));
+        assertTrue(dockerInspectorBdioFileContents.contains("\"spdx:name\": \"alpine_latest_APK\","));
 
         assertTrue(detectOutputString.contains("DOCKER: SUCCESS"));
         assertTrue(detectOutputString.contains("Overall Status: SUCCESS"));
