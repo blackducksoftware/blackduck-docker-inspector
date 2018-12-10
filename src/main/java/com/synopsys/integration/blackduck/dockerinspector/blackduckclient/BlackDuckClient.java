@@ -71,10 +71,6 @@ public class BlackDuckClient {
     @Autowired
     private ProgramVersion programVersion;
 
-    public boolean isValid() {
-        return createBlackDuckServerConfigBuilder().isValid();
-    }
-
     public void testBlackDuckConnection() throws HubIntegrationException {
         logger.trace(String.format("Black Duck username: %s", getBlackDuckUsername())); // ArgsWithSpacesTest tests this in output
         if (!config.isUploadBdio() || config.isOfflineMode()) {

@@ -212,7 +212,7 @@ artifactory {
 }
 
 dependencies {
-    compile 'com.blackducksoftware.integration:hub-common:38.4.0'
+    compile 'com.blackducksoftware.integration:hub-common:38.7.0'
     compile 'com.blackducksoftware.integration:integration-common:13.2.0'
     compile 'com.blackducksoftware.integration:hub-imageinspector-lib:8.1.0'
     
