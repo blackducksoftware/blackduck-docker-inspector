@@ -59,6 +59,8 @@ public class BlackDuckClient {
     private static final String PHONE_HOME_METADATA_NAME_CALLER_NAME = "callerName";
     private static final String PHONE_HOME_METADATA_NAME_INSPECTOR_NAME = "inspectorName";
     private static final String PHONE_HOME_METADATA_NAME_DOCKER_ENGINE_VERSION = "dockerEngineVersion";
+    private static final String PHONE_HOME_METADATA_NAME_BDIO_BY_LAYER = "bdioOrganizeComponentsByLayer";
+    private static final String PHONE_HOME_METADATA_NAME_BDIO_INCLUDE_REMOVED = "bdioIncludeRemovedComponents";
 
     private final Logger logger = LoggerFactory.getLogger(BlackDuckClient.class);
 
@@ -134,6 +136,8 @@ public class BlackDuckClient {
         if (!StringUtils.isBlank(config.getCallerVersion())) {
             phoneHomeRequestBodyBuilder.addToMetaData(PHONE_HOME_METADATA_NAME_CALLER_VERSION, config.getCallerVersion());
         }
+        phoneHomeRequestBodyBuilder.addToMetaData(PHONE_HOME_METADATA_NAME_BDIO_BY_LAYER, String.valueOf(config.isOrganizeComponentsByLayer()));
+        phoneHomeRequestBodyBuilder.addToMetaData(PHONE_HOME_METADATA_NAME_BDIO_INCLUDE_REMOVED, String.valueOf(config.isIncludeRemovedComponents()));
         final PhoneHomeCallable phoneHomeCallable = blackDuckServicesFactory.createBlackDuckPhoneHomeCallable(new URL(config.getBlackDuckUrl()), DockerEnvImageInspector.PROGRAM_ID, programVersion.getProgramVersion(),
                 phoneHomeRequestBodyBuilder);
         phoneHomeService.phoneHome(phoneHomeCallable);
