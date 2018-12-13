@@ -1,11 +1,16 @@
 #
-# Instructions for setting up a simple "detect invoking docker inspector" test environment in
+# An example of how you could set up a simple "detect invoking docker inspector" test environment in
 # a Kubernetes cluster using the provided sample yaml files.
-# Hopefully this is useful as an example of how to run detect + docker inspector in a Kubernetes cluster.
+# Hopefully this is useful as an example of how to run detect + docker inspector in a Kubernetes cluster,
+# and provides ideas on how you could deploy detect / docker inspector in your environment.
 #
 # This method deploys the three image inspector services, each in its own pod, each running on port 80.
 # It then deploys an extremely simple "build machine" inside the cluster, and runs detect from that
 # build machine.
+#
+# Because in this example the services reside in different pods, the shared volume is a hostPath.
+# As an alternative, if the build machine and the three imageinspector services run
+# in the same pod, you can use an emptyDir for the shared volume.
 #
 
 # You'll need a dir (/your/dir/shared) that will be mounted and

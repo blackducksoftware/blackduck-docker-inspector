@@ -1,0 +1,66 @@
+#
+# An example of how you could set up a simple "detect invoking docker inspector" test environment in
+# an OpenShift cluster using the provided sample yaml files.
+# Hopefully this is useful as an example of how to run detect + docker inspector in an OpenShift cluster,
+# and provides ideas on how you could deploy detect / docker inspector in your environment.
+#
+# This method deploys a simple build machine (that runs detect) and
+# three image inspector services, all in the same pod. Because all
+# four of these containers reside in the same pod, the shared directory 
+# can be (and is in this example) and emptyDir.
+#
+
+# Build buildmachine image
+mkdir image
+cd image
+curl -O https://raw.githubusercontent.com/blackducksoftware/hub-docker-inspector/master/deployment/openshift/Dockerfile
+docker build --tag buildmachine:1 .
+cd ..
+
+curl -O https://raw.githubusercontent.com/blackducksoftware/hub-docker-inspector/master/deployment/openshift/os-imageinspector-project.yml
+curl -O https://raw.githubusercontent.com/blackducksoftware/hub-docker-inspector/master/deployment/openshift/os-build-pod.yml
+oc create -f os-imageinspector-project.yml
+oc project blackduck-imageinspector
+oc create -f os-build-pod.yml
+
+# Get ip address for pod-internal URLs
+podInternalIpAddress=$(oc describe pod blackduck-imageinspector|grep '^Node:'|awk '{print $2}'|sed 's/localhost.//')
+
+# Do a health check on each imageinspector service
+oc exec blackduck-imageinspector -c build-machine -- curl http://${podInternalIpAddress}:9000/health
+oc exec blackduck-imageinspector -c build-machine -- curl http://${podInternalIpAddress}:9001/health
+oc exec blackduck-imageinspector -c build-machine -- curl http://${podInternalIpAddress}:9002/health
+
+curl -O https://blackducksoftware.github.io/hub-detect/hub-detect.sh
+chmod +x hub-detect.sh
+
+oc cp ./hub-detect.sh blackduck-imageinspector:/tmp -c build-machine
+
+docker pull alpine:latest
+docker save -o alpine.tar alpine:latest
+oc exec blackduck-imageinspector -c build-machine mkdir /opt/blackduck/shared/target
+oc cp alpine.tar blackduck-imageinspector:/opt/blackduck/shared/target/alpine.tar -c build-machine
+oc exec blackduck-imageinspector -c build-machine -- chmod a+r /opt/blackduck/shared/target/alpine.tar
+
+
+# To test:
+oc exec blackduck-imageinspector -c build-machine -- bash -c "export DETECT_JAVA_OPTS=-Duser.home=/opt/blackduck/detect; env; /tmp/hub-detect.sh --blackduck.offline.mode=true --detect.tools.excluded=SIGNATURE_SCAN,POLARIS --detect.docker.tar=/opt/blackduck/shared/target/alpine.tar --detect.docker.passthrough.imageinspector.service.url=http://${podInternalIpAddress}:9000 --detect.docker.passthrough.shared.dir.path.local=/opt/blackduck/shared/ --detect.docker.passthrough.shared.dir.path.imageinspector=/opt/blackduck/shared --logging.level.com.blackducksoftware.integration=INFO --detect.docker.passthrough.imageinspector.service.start=false"
+
+# To get log from alpine service:
+oc logs blackduck-imageinspector -c hub-imageinspector-ws-alpine
+
+# Notes on the detect arguments used in the command above:
+# --blackduck.offline.mode=true # this disables communication with the Black Duck server, to simplify the test
+# --detect.tools.excluded=SIGNATURE_SCAN,POLARIS # this disables the signature scanner, to simplify the test
+# --detect.docker.tar=/opt/blackduck/shared/target/alpine.tar # path to docker tarfile, in the shared volume
+# --detect.docker.passthrough.imageinspector.service.url=http://${iiroute} # image inspector service url
+# --detect.docker.passthrough.shared.dir.path.local=/opt/blackduck/shared/ # build machine's path to shared dir
+# --detect.docker.passthrough.shared.dir.path.imageinspector=/opt/blackduck/shared # image inspector pods' path to shared dir
+
+# You can direct requests to any the three image inspector services (hub-imageinspector-ws-alpine, hub-imageinspector-ws-centos, hub-imageinspector-ws-ubuntu)
+# by specifying that service in the --detect.docker.passthrough.imageinspector.service.url argument.
+# For best performance, direct requests to the service that uses the same package manager database
+# format as the images you inspect most frequently:
+# alpine -> alpine
+# centos, fedora, redhat -> centos
+# ubuntu, debian -> ubuntu
