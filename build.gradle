@@ -225,6 +225,7 @@ dependencies {
 
     compile 'org.springframework.boot:spring-boot-starter'
     
+    testCompile 'com.blackducksoftware.integration:integration-test-common:4.0.7-SNAPSHOT'
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'io.fabric8:kubernetes-client:3.1.8'
     testCompile 'io.fabric8:kubernetes-model:2.0.8'
