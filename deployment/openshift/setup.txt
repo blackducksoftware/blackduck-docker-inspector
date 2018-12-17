@@ -13,15 +13,16 @@
 # Build buildmachine image
 mkdir image
 cd image
-curl -O https://raw.githubusercontent.com/blackducksoftware/hub-docker-inspector/master/deployment/openshift/Dockerfile
+curl -O https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/openshift/Dockerfile
 docker build --tag buildmachine:1 .
 cd ..
 
-curl -O https://raw.githubusercontent.com/blackducksoftware/hub-docker-inspector/master/deployment/openshift/project.yml
-curl -O https://raw.githubusercontent.com/blackducksoftware/hub-docker-inspector/master/deployment/openshift/pod.yml
+curl -O https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/openshift/project.yml
+curl -O https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/openshift/pod.yml
 oc create -f project.yml
 oc project blackduck-imageinspector
 oc create -f pod.yml
+# You can do an "oc get pods" to see when the pod is finished initializing
 
 # Do a health check on each imageinspector service
 oc exec blackduck-imageinspector -c build-machine -- curl http://localhost:8080/health
