@@ -17,19 +17,16 @@ curl -O https://raw.githubusercontent.com/blackducksoftware/hub-docker-inspector
 docker build --tag buildmachine:1 .
 cd ..
 
-curl -O https://raw.githubusercontent.com/blackducksoftware/hub-docker-inspector/master/deployment/openshift/os-imageinspector-project.yml
-curl -O https://raw.githubusercontent.com/blackducksoftware/hub-docker-inspector/master/deployment/openshift/os-build-pod.yml
-oc create -f os-imageinspector-project.yml
+curl -O https://raw.githubusercontent.com/blackducksoftware/hub-docker-inspector/master/deployment/openshift/project.yml
+curl -O https://raw.githubusercontent.com/blackducksoftware/hub-docker-inspector/master/deployment/openshift/pod.yml
+oc create -f project.yml
 oc project blackduck-imageinspector
-oc create -f os-build-pod.yml
-
-# Get ip address for pod-internal URLs
-podInternalIpAddress=$(oc describe pod blackduck-imageinspector|grep '^Node:'|awk '{print $2}'|sed 's/localhost.//')
+oc create -f pod.yml
 
 # Do a health check on each imageinspector service
-oc exec blackduck-imageinspector -c build-machine -- curl http://${podInternalIpAddress}:9000/health
-oc exec blackduck-imageinspector -c build-machine -- curl http://${podInternalIpAddress}:9001/health
-oc exec blackduck-imageinspector -c build-machine -- curl http://${podInternalIpAddress}:9002/health
+oc exec blackduck-imageinspector -c build-machine -- curl http://localhost:8080/health
+oc exec blackduck-imageinspector -c build-machine -- curl http://localhost:8081/health
+oc exec blackduck-imageinspector -c build-machine -- curl http://localhost:8082/health
 
 curl -O https://blackducksoftware.github.io/hub-detect/hub-detect.sh
 chmod +x hub-detect.sh
@@ -44,7 +41,7 @@ oc exec blackduck-imageinspector -c build-machine -- chmod a+r /opt/blackduck/sh
 
 
 # To test:
-oc exec blackduck-imageinspector -c build-machine -- bash -c "export DETECT_JAVA_OPTS=-Duser.home=/opt/blackduck/detect; env; /tmp/hub-detect.sh --blackduck.offline.mode=true --detect.tools.excluded=SIGNATURE_SCAN,POLARIS --detect.docker.tar=/opt/blackduck/shared/target/alpine.tar --detect.docker.passthrough.imageinspector.service.url=http://${podInternalIpAddress}:9000 --detect.docker.passthrough.shared.dir.path.local=/opt/blackduck/shared/ --detect.docker.passthrough.shared.dir.path.imageinspector=/opt/blackduck/shared --logging.level.com.blackducksoftware.integration=INFO --detect.docker.passthrough.imageinspector.service.start=false"
+oc exec blackduck-imageinspector -c build-machine -- bash -c "export DETECT_JAVA_OPTS=-Duser.home=/opt/blackduck/detect; env; /tmp/hub-detect.sh --blackduck.offline.mode=true --detect.tools.excluded=SIGNATURE_SCAN,POLARIS --detect.docker.tar=/opt/blackduck/shared/target/alpine.tar --detect.docker.passthrough.imageinspector.service.url=http://localhost:8082 --detect.docker.passthrough.shared.dir.path.local=/opt/blackduck/shared/ --detect.docker.passthrough.shared.dir.path.imageinspector=/opt/blackduck/shared --logging.level.com.blackducksoftware.integration=INFO --detect.docker.passthrough.imageinspector.service.start=false"
 
 # To get log from alpine service:
 oc logs blackduck-imageinspector -c hub-imageinspector-ws-alpine
@@ -53,12 +50,13 @@ oc logs blackduck-imageinspector -c hub-imageinspector-ws-alpine
 # --blackduck.offline.mode=true # this disables communication with the Black Duck server, to simplify the test
 # --detect.tools.excluded=SIGNATURE_SCAN,POLARIS # this disables the signature scanner, to simplify the test
 # --detect.docker.tar=/opt/blackduck/shared/target/alpine.tar # path to docker tarfile, in the shared volume
-# --detect.docker.passthrough.imageinspector.service.url=http://${iiroute} # image inspector service url
+# --detect.docker.passthrough.imageinspector.service.url=http://localhost:8082 # image inspector service url
 # --detect.docker.passthrough.shared.dir.path.local=/opt/blackduck/shared/ # build machine's path to shared dir
 # --detect.docker.passthrough.shared.dir.path.imageinspector=/opt/blackduck/shared # image inspector pods' path to shared dir
 
-# You can direct requests to any the three image inspector services (hub-imageinspector-ws-alpine, hub-imageinspector-ws-centos, hub-imageinspector-ws-ubuntu)
-# by specifying that service in the --detect.docker.passthrough.imageinspector.service.url argument.
+# You can direct requests to any the three image inspector services: hub-imageinspector-ws-alpine (port 8080), hub-imageinspector-ws-centos (port 8081),
+# hub-imageinspector-ws-ubuntu (port 8082).
+# You specify the service in the --detect.docker.passthrough.imageinspector.service.url argument.
 # For best performance, direct requests to the service that uses the same package manager database
 # format as the images you inspect most frequently:
 # alpine -> alpine

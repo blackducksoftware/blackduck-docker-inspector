@@ -1,20 +1,4 @@
 apiVersion: v1
-kind: Service
-metadata:
-  name: blackduck-imageinspector-alpine
-  project: blackduck-imageinspector
-  labels:
-    app: blackduck-imageinspector
-spec:
-  ports:
-  - port: 9000
-    targetPort: 8080
-    protocol: TCP
-  selector:
-    app: blackduck-imageinspector
-  type: NodePort
----
-apiVersion: v1
 kind: Pod
 metadata:
   name: blackduck-imageinspector
@@ -36,14 +20,13 @@ spec:
   - name: blackduck-imageinspector-alpine
     image: blackducksoftware/blackduck-imageinspector-alpine:4.3.0
     command: ["java"]
-    args: ["-jar", "/opt/blackduck/blackduck-imageinspector/blackduck-imageinspector.jar", "--server.port=8080", "--current.linux.distro=alpine", "--inspector.port.alpine=9000", "--inspector.port.centos=9001", "--inspector.port.ubuntu=9002"]
+    args: ["-jar", "/opt/blackduck/blackduck-imageinspector/blackduck-imageinspector.jar", "--server.port=8080", "--current.linux.distro=alpine", "--inspector.port.alpine=8080", "--inspector.port.centos=8081", "--inspector.port.ubuntu=8082"]
     ports:
     - containerPort: 8080
-      hostPort: 9000
     livenessProbe:
       httpGet:
         path: /health
-        port: 9000
+        port: 8080
       initialDelaySeconds: 120
       periodSeconds: 960
       timeoutSeconds: 480
@@ -56,14 +39,13 @@ spec:
   - name: blackduck-imageinspector-centos
     image: blackducksoftware/blackduck-imageinspector-centos:4.3.0
     command: ["java"]
-    args: ["-jar", "/opt/blackduck/blackduck-imageinspector/blackduck-imageinspector.jar", "--server.port=8081", "--current.linux.distro=centos", "--inspector.port.alpine=9000", "--inspector.port.centos=9001", "--inspector.port.ubuntu=9002"]
+    args: ["-jar", "/opt/blackduck/blackduck-imageinspector/blackduck-imageinspector.jar", "--server.port=8081", "--current.linux.distro=centos", "--inspector.port.alpine=8080", "--inspector.port.centos=8081", "--inspector.port.ubuntu=8082"]
     ports:
     - containerPort: 8081
-      hostPort: 9001
     livenessProbe:
       httpGet:
         path: /health
-        port: 9001
+        port: 8081
       initialDelaySeconds: 120
       periodSeconds: 960
       timeoutSeconds: 480
@@ -76,14 +58,13 @@ spec:
   - name: blackduck-imageinspector-ubuntu
     image: blackducksoftware/blackduck-imageinspector-ubuntu:4.3.0
     command: ["java"]
-    args: ["-jar", "/opt/blackduck/blackduck-imageinspector/blackduck-imageinspector.jar", "--server.port=8082", "--current.linux.distro=ubuntu", "--inspector.port.alpine=9000", "--inspector.port.centos=9001", "--inspector.port.ubuntu=9002"]
+    args: ["-jar", "/opt/blackduck/blackduck-imageinspector/blackduck-imageinspector.jar", "--server.port=8082", "--current.linux.distro=ubuntu", "--inspector.port.alpine=8080", "--inspector.port.centos=8081", "--inspector.port.ubuntu=8082"]
     ports:
     - containerPort: 8082
-      hostPort: 9002
     livenessProbe:
       httpGet:
         path: /health
-        port: 9002
+        port: 8082
       initialDelaySeconds: 120
       periodSeconds: 960
       timeoutSeconds: 480
