@@ -1,0 +1,79 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: blackduck-imageinspector
+  project: blackduck-imageinspector
+  labels:
+    app: blackduck-imageinspector
+spec:
+  containers:
+  - name: build-machine
+    image: buildmachine:1
+    command: ["bash"]
+    args: ["-c", "trap : TERM INT; sleep infinity & wait"]
+    volumeMounts:
+    - name: blackduck
+      mountPath: /opt/blackduck/shared
+    resources:
+      limits:
+        memory: 1Gi
+  - name: blackduck-imageinspector-alpine
+    image: blackducksoftware/blackduck-imageinspector-alpine:4.3.0
+    command: ["java"]
+    args: ["-jar", "/opt/blackduck/blackduck-imageinspector/blackduck-imageinspector.jar", "--server.port=8080", "--current.linux.distro=alpine", "--inspector.port.alpine=8080", "--inspector.port.centos=8081", "--inspector.port.ubuntu=8082"]
+    ports:
+    - containerPort: 8080
+    livenessProbe:
+      httpGet:
+        path: /health
+        port: 8080
+      initialDelaySeconds: 120
+      periodSeconds: 960
+      timeoutSeconds: 480
+    resources:
+      limits:
+        memory: 1Gi
+    volumeMounts:
+      - mountPath: /opt/blackduck/shared
+        name: blackduck
+  - name: blackduck-imageinspector-centos
+    image: blackducksoftware/blackduck-imageinspector-centos:4.3.0
+    command: ["java"]
+    args: ["-jar", "/opt/blackduck/blackduck-imageinspector/blackduck-imageinspector.jar", "--server.port=8081", "--current.linux.distro=centos", "--inspector.port.alpine=8080", "--inspector.port.centos=8081", "--inspector.port.ubuntu=8082"]
+    ports:
+    - containerPort: 8081
+    livenessProbe:
+      httpGet:
+        path: /health
+        port: 8081
+      initialDelaySeconds: 120
+      periodSeconds: 960
+      timeoutSeconds: 480
+    resources:
+      limits:
+        memory: 1Gi
+    volumeMounts:
+      - mountPath: /opt/blackduck/shared
+        name: blackduck
+  - name: blackduck-imageinspector-ubuntu
+    image: blackducksoftware/blackduck-imageinspector-ubuntu:4.3.0
+    command: ["java"]
+    args: ["-jar", "/opt/blackduck/blackduck-imageinspector/blackduck-imageinspector.jar", "--server.port=8082", "--current.linux.distro=ubuntu", "--inspector.port.alpine=8080", "--inspector.port.centos=8081", "--inspector.port.ubuntu=8082"]
+    ports:
+    - containerPort: 8082
+    livenessProbe:
+      httpGet:
+        path: /health
+        port: 8082
+      initialDelaySeconds: 120
+      periodSeconds: 960
+      timeoutSeconds: 480
+    resources:
+      limits:
+        memory: 1Gi
+    volumeMounts:
+      - mountPath: /opt/blackduck/shared
+        name: blackduck
+  volumes:
+    - emptyDir: {}
+      name: blackduck
