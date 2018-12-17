@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.concurrent.Executors;
 
 import org.apache.commons.lang3.StringUtils;
+import org.bouncycastle.openssl.EncryptionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,10 +44,9 @@ import com.synopsys.integration.blackduck.dockerinspector.DockerEnvImageInspecto
 import com.synopsys.integration.blackduck.dockerinspector.ProgramVersion;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.exception.HubIntegrationException;
-import com.synopsys.integration.blackduck.rest.BlackduckRestConnection;
+import com.synopsys.integration.rest.connection.RestConnection;
 import com.synopsys.integration.blackduck.service.CodeLocationService;
 import com.synopsys.integration.blackduck.service.HubServicesFactory;
-import com.synopsys.integration.exception.EncryptionException;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.log.Slf4jIntLogger;
 import com.synopsys.integration.phonehome.PhoneHomeCallable;
@@ -79,7 +79,7 @@ public class BlackDuckClient {
             logger.debug("Upload of BDIO disabled or offline mode is enabled; skipping verification of Black Duck connection");
             return;
         }
-        BlackduckRestConnection restConnection;
+        RestConnection restConnection;
         try {
             restConnection = createRestConnection();
             restConnection.connect();
@@ -95,7 +95,7 @@ public class BlackDuckClient {
             logger.info("Upload of BDIO has been disabled by offline mode");
             return;
         }
-        final BlackduckRestConnection restConnection = createRestConnection();
+        final RestConnection restConnection = createRestConnection();
         final HubServicesFactory blackDuckServicesFactory = new HubServicesFactory(new Gson(), new JsonParser(), restConnection, new Slf4jIntLogger(logger));
         final CodeLocationService bomImportRequestService = blackDuckServicesFactory.createCodeLocationService();
         bomImportRequestService.importBomFile(bdioFile);
@@ -144,7 +144,7 @@ public class BlackDuckClient {
         logger.trace("Attempt to phone home completed");
     }
 
-    private BlackduckRestConnection createRestConnection() throws EncryptionException, IllegalStateException {
+    private RestConnection createRestConnection() throws IllegalStateException {
         final HubServerConfigBuilder blackDuckServerConfigBuilder = createBlackDuckServerConfigBuilder();
         return blackDuckServerConfigBuilder.build().createRestConnection(new Slf4jIntLogger(logger));
     }

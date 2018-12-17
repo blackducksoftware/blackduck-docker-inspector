@@ -7,16 +7,15 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
+
 
 import com.google.common.io.Files;
 import com.synopsys.integration.exception.IntegrationException;
-import com.synopsys.integration.test.annotation.IntegrationTest;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
 
-@Category(IntegrationTest.class)
+@Tag("integration")
 public class CalledFromDetectTest {
     private static final String TEXT_PRECEDING_BDIO_FILE_DIR_PATH = "Writing BDIO to ";
     private static ProgramVersion programVersion;
@@ -25,7 +24,7 @@ public class CalledFromDetectTest {
     private static long ONE_MINUTE_IN_MS = 1L * 60L * 1000L;
     private static long FIVE_MINUTES_IN_MS = 5L * 60L * 1000L;
 
-    @BeforeClass
+    @BeforeAll
     public static void setUpBeforeClass() throws Exception {
         programVersion = new ProgramVersion();
         programVersion.init();
