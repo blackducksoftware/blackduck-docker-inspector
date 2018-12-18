@@ -23,6 +23,11 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.dockerclient;
 
+import com.github.dockerjava.api.model.HostConfig;
+import com.github.dockerjava.api.model.PortBinding;
+import com.github.dockerjava.api.model.Ports;
+import com.github.dockerjava.api.model.Ports.Binding;
+import com.github.dockerjava.api.model.Version;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -61,8 +66,6 @@ import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.Frame;
 import com.github.dockerjava.api.model.Image;
 import com.github.dockerjava.api.model.Info;
-import com.github.dockerjava.api.model.PortBinding;
-import com.github.dockerjava.api.model.Ports.Binding;
 import com.github.dockerjava.api.model.Volume;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DefaultDockerClientConfig.Builder;
@@ -122,6 +125,15 @@ public class DockerClientManager {
             dockerClient = DockerClientBuilder.getInstance(config).build();
         }
         return dockerClient;
+    }
+
+    public String getDockerJavaLibraryVersion() {
+        try {
+            final Version version = getDockerClient().versionCmd().exec();
+            return String.format("docker-java library version: %s; API version: %s", version.getApiVersion(), version.getVersion());
+        } catch (Exception e) {
+            return String.format("docker-java library version: <unknown>; Error getting version: %s", e.getMessage());
+        }
     }
 
     public File getTarFileFromDockerImageById(final String imageId, final File imageTarDirectory) throws IntegrationException, IOException {
@@ -263,12 +275,18 @@ public class DockerClientManager {
         final Map<String, String> labels = new HashMap<>(1);
         labels.put(CONTAINER_APPNAME_LABEL_KEY, appNameLabelValue);
         labels.put(CONTAINER_OS_LABEL_KEY, imageInspectorOsName);
-        final Bind bind = createBindMount(config.getSharedDirPathLocal(), config.getSharedDirPathImageInspector());
-        final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageNameTag).withName(containerName).withBinds(bind).withLabels(labels).withCmd(cmd.split(" "));
+        final Bind bindMount = createBindMount(config.getSharedDirPathLocal(), config.getSharedDirPathImageInspector());
         final ExposedPort exposedPort = new ExposedPort(containerPort);
-        createContainerCmd.withExposedPorts(exposedPort);
-        final PortBinding portBinding = new PortBinding(Binding.bindPort(hostPort), exposedPort);
-        createContainerCmd.withPortBindings(portBinding);
+        final Ports portBindings = new Ports();
+        portBindings.bind(exposedPort, Binding.bindPort(hostPort));
+        HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(portBindings).withBinds(bindMount);
+        final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageNameTag)
+            .withName(containerName)
+            .withLabels(labels)
+            .withExposedPorts(exposedPort)
+            .withHostConfig(hostConfig)
+            .withCmd(cmd.split(" "));
+
         final List<String> envAssignments = new ArrayList<>();
         if (StringUtils.isBlank(config.getBlackDuckProxyHost()) && !StringUtils.isBlank(config.getScanCliOptsEnvVar())) {
             envAssignments.add(String.format("SCAN_CLI_OPTS=%s", config.getScanCliOptsEnvVar()));
@@ -451,7 +469,14 @@ public class DockerClientManager {
         stopRemoveContainerIfExists(dockerClient, extractorContainerName);
         logger.debug(String.format("Creating container %s from image %s", extractorContainerName, imageNameTag));
         final Bind bind = createBindMount(programPaths.getDockerInspectorOutputPathHost(), programPaths.getDockerInspectorOutputPathContainer());
-        final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageNameTag).withStdinOpen(true).withTty(true).withName(extractorContainerName).withBinds(bind).withCmd("/bin/bash");
+        HostConfig hostConfig = HostConfig.newHostConfig().withBinds(bind);
+        final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageNameTag)
+            .withStdinOpen(true)
+            .withTty(true)
+            .withName(extractorContainerName)
+            .withHostConfig(hostConfig)
+            .withCmd("/bin/bash");
+
         final CreateContainerResponse containerResponse = createContainerCmd.exec();
         final String containerId = containerResponse.getId();
         dockerClient.startContainerCmd(containerId).exec();
