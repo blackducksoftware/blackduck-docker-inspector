@@ -28,7 +28,7 @@ repositories {
     maven {url "https://oss.sonatype.org/content/repositories/snapshots/"}
 }
 
-version = '7.2.4'
+version = '7.2.5-SNAPSHOT'
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
 project.ext.inspectorImageVersion = "4.1.1"
 project.group = 'com.synopsys.integration'
