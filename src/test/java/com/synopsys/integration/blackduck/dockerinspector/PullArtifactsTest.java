@@ -10,22 +10,22 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
 
 import com.synopsys.integration.exception.IntegrationException;
-import com.synopsys.integration.test.annotation.IntegrationTest;
 
-@Category(IntegrationTest.class)
+
+@Tag("integration")
 public class PullArtifactsTest {
 
-    @BeforeClass
+    @BeforeAll
     public static void setUpBeforeClass() throws Exception {
     }
 
-    @AfterClass
+    @AfterAll
     public static void tearDownAfterClass() throws Exception {
     }
 

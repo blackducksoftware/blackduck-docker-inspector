@@ -212,7 +212,7 @@ artifactory {
 }
 
 dependencies {
-    implementation 'com.blackducksoftware.integration:hub-common:40.0.0-SNAPSHOT'
+    implementation 'com.blackducksoftware.integration:blackduck-common:40.0.0-SNAPSHOT'
     //implementation 'com.blackducksoftware.integration:integration-common:13.2.0'
     implementation 'com.blackducksoftware.integration:hub-imageinspector-lib:8.1.0'
     

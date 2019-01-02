@@ -58,7 +58,7 @@ public class RestRequestor {
                 .build();
         logger.debug(String.format("Doing a getBdio request on %s", url));
         final Request request = new Request.Builder(url).method(HttpMethod.GET).build();
-        try (Response response = restConnection.executeRequest(request)) {
+        try (Response response = restConnection.execute(request)) {
             logger.debug(String.format("Response: HTTP status: %d", response.getStatusCode()));
             return new SimpleResponse(response.getStatusCode(), response.getHeaders(), getResponseBody(response));
         } catch (final Exception e) {
@@ -75,7 +75,7 @@ public class RestRequestor {
         final String url = String.format("%s/%s", imageInspectorUri.toString(), endpoint);
         logger.debug(String.format("Doing a GET on %s", url));
         final Request request = new Request.Builder(url).method(HttpMethod.GET).build();
-        try (Response response = restConnection.executeRequest(request)) {
+        try (Response response = restConnection.execute(request)) {
             logger.debug(String.format("Response: HTTP status: %d", response.getStatusCode()));
             return getResponseBody(response);
         } catch (final Exception e) {

@@ -23,33 +23,38 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.restclient.connection;
 
-import com.synopsys.integration.rest.connection.AbstractRestConnectionBuilder;
-import com.synopsys.integration.rest.connection.UnauthenticatedRestConnectionValidator;
-import com.synopsys.integration.rest.proxy.ProxyInfo;
-import com.synopsys.integration.validator.AbstractValidator;
 
-public class NonRedirectingUnauthenticatedRestConnectionBuilder extends AbstractRestConnectionBuilder<NonRedirectingUnauthenticatedRestConnection> {
 
-    @Override
-    public AbstractValidator createValidator() {
-        final UnauthenticatedRestConnectionValidator validator = new UnauthenticatedRestConnectionValidator();
-        validator.setBaseUrl(getBaseUrl());
-        validator.setTimeout(getTimeout());
-        validator.setProxyHost(getProxyHost());
-        validator.setProxyPort(getProxyPort());
-        validator.setProxyUsername(getProxyUsername());
-        validator.setProxyPassword(getProxyPassword());
-        validator.setProxyIgnoreHosts(getProxyIgnoreHosts());
-        validator.setProxyNtlmDomain(getProxyNtlmDomain());
-        validator.setProxyNtlmWorkstation(getProxyNtlmWorkstation());
-        validator.setLogger(getLogger());
-        validator.setCommonRequestHeaders(getCommonRequestHeaders());
-        return validator;
-    }
+public class NonRedirectingUnauthenticatedRestConnectionBuilder /* extends RestConnectionBuilder<NonRedirectingUnauthenticatedRestConnection> */ {
 
-    @Override
-    public NonRedirectingUnauthenticatedRestConnection createConnection(final ProxyInfo proxyInfo) {
-        return new NonRedirectingUnauthenticatedRestConnection(getLogger(), getBaseConnectionUrl(), getTimeout(), proxyInfo);
-    }
+//    @Override
+//    protected NonRedirectingUnauthenticatedRestConnection buildWithoutValidation() {
+//        final Optional<URL> url = getURL();
+//
+//        return new NonRedirectingUnauthenticatedRestConnection(getLogger(), url.orElse(null), getTimeout(), getProxyInfo());
+//    }
+
+    // TODO remove this whole class:
+//    @Override
+//    public AbstractValidator createValidator() {
+//        final UnauthenticatedRestConnectionValidator validator = new UnauthenticatedRestConnectionValidator();
+//        validator.setBaseUrl(getBaseUrl());
+//        validator.setTimeout(getTimeout());
+//        validator.setProxyHost(getProxyHost());
+//        validator.setProxyPort(getProxyPort());
+//        validator.setProxyUsername(getProxyUsername());
+//        validator.setProxyPassword(getProxyPassword());
+//        validator.setProxyIgnoreHosts(getProxyIgnoreHosts());
+//        validator.setProxyNtlmDomain(getProxyNtlmDomain());
+//        validator.setProxyNtlmWorkstation(getProxyNtlmWorkstation());
+//        validator.setLogger(getLogger());
+//        validator.setCommonRequestHeaders(getCommonRequestHeaders());
+//        return validator;
+//    }
+//
+//    @Override
+//    public NonRedirectingUnauthenticatedRestConnection createConnection(final ProxyInfo proxyInfo) {
+//        return new NonRedirectingUnauthenticatedRestConnection(getLogger(), getBaseConnectionUrl(), getTimeout(), proxyInfo);
+//    }
 
 }

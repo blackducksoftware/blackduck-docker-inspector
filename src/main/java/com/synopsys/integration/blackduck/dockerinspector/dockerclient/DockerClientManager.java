@@ -75,7 +75,7 @@ import com.synopsys.integration.blackduck.dockerinspector.blackduckclient.BlackD
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.exception.DisabledException;
-import com.synopsys.integration.blackduck.exception.HubIntegrationException;
+import com.synopsys.integration.blackduck.exception.BlackDuckIntegrationException;
 import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 import com.synopsys.integration.blackduck.imageinspector.name.ImageNameResolver;
 import com.synopsys.integration.blackduck.imageinspector.name.Names;
@@ -131,7 +131,7 @@ public class DockerClientManager {
         final InspectImageResponse imageDetails = inspectImageCmd.exec();
         final List<String> repoTags = imageDetails.getRepoTags();
         if (repoTags.size() == 0) {
-            throw new HubIntegrationException(String.format("Unable to get image name:tag for image ID %s", imageId));
+            throw new BlackDuckIntegrationException(String.format("Unable to get image name:tag for image ID %s", imageId));
         }
 
         final ImageNameResolver resolver = new ImageNameResolver(repoTags.get(0));
@@ -155,7 +155,7 @@ public class DockerClientManager {
         if (config.isCleanupTargetImage() && targetImageId.isPresent()) {
             try {
                 removeImage(targetImageId.get());
-            } catch (final HubIntegrationException e) {
+            } catch (final BlackDuckIntegrationException e) {
                 logger.warn(String.format("Unable to remove target image with ID %s: %s", targetImageId.get(), e.getMessage()));
             }
         }
@@ -172,15 +172,15 @@ public class DockerClientManager {
         try {
             pull.exec(new PullImageResultCallback()).awaitCompletion();
         } catch (final NotFoundException e) {
-            throw new HubIntegrationException(String.format("Pull failed: Image %s:%s not found. Please check the image name/tag. Error: %s", imageName, tagName, e.getMessage()), e);
+            throw new BlackDuckIntegrationException(String.format("Pull failed: Image %s:%s not found. Please check the image name/tag. Error: %s", imageName, tagName, e.getMessage()), e);
         } catch (final InterruptedException e) {
-            throw new HubIntegrationException(String.format("Pull was interrupted: Image %s:%s not found. Error: %s", imageName, tagName, e.getMessage()), e);
+            throw new BlackDuckIntegrationException(String.format("Pull was interrupted: Image %s:%s not found. Error: %s", imageName, tagName, e.getMessage()), e);
         }
         final Image justPulledImage = getLocalImage(dockerClient, imageName, tagName);
         if (justPulledImage == null) {
             final String msg = String.format("Pulled image %s:%s not found in image list.", imageName, tagName);
             logger.error(msg);
-            throw new HubIntegrationException(msg);
+            throw new BlackDuckIntegrationException(msg);
         }
         return justPulledImage.getId();
     }
@@ -496,7 +496,7 @@ public class DockerClientManager {
                 return container;
             }
         }
-        throw new HubIntegrationException(String.format("No running container found with app = %s, os = %s", targetAppName, targetInspectorOs.name()));
+        throw new BlackDuckIntegrationException(String.format("No running container found with app = %s, os = %s", targetAppName, targetInspectorOs.name()));
     }
 
     private Container getRunningContainerByContainerName(final DockerClient dockerClient, final String extractorContainerName) {

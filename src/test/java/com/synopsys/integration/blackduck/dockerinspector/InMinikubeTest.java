@@ -9,20 +9,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
-
 import com.synopsys.integration.blackduck.dockerinspector.IntegrationTestCommon.Mode;
 import com.synopsys.integration.exception.IntegrationException;
-import com.synopsys.integration.test.annotation.IntegrationTest;
 
 import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClient;
+import org.junit.Ignore;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
-@Category(IntegrationTest.class)
+@Tag("integration")
 @Ignore
 public class InMinikubeTest {
     private static KubernetesClient client;
@@ -31,7 +29,7 @@ public class InMinikubeTest {
     private static ProgramVersion programVersion;
     private static Map<String, String> minikubeDockerEnv = new HashMap<>();
 
-    @BeforeClass
+    @BeforeAll
     public static void setUpBeforeClass() throws Exception {
         programVersion = new ProgramVersion();
         programVersion.init();
@@ -65,7 +63,7 @@ public class InMinikubeTest {
 
     }
 
-    @AfterClass
+    @AfterAll
     public static void tearDownAfterClass() {
         if (client != null) {
             client.close();

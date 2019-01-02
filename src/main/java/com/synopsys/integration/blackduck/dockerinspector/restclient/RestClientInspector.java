@@ -105,7 +105,7 @@ public class RestClientInspector implements Inspector {
             adjustBdio(bdioDocument);
             final File bdioFile = output.provideBdioFileOutput(bdioDocument, deriveOutputBdioFilename(bdioString));
             if (config.isUploadBdio()) {
-                blackDuckClient.uploadBdio(bdioFile);
+                blackDuckClient.uploadBdio(bdioFile, bdioDocument.billOfMaterials.spdxName);
             }
             cleanup();
             return 0;

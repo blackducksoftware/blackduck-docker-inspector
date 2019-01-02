@@ -12,16 +12,15 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
 import com.synopsys.integration.blackduck.dockerinspector.IntegrationTestCommon.Mode;
 import com.synopsys.integration.exception.IntegrationException;
-import com.synopsys.integration.test.annotation.IntegrationTest;
 
-@Category(IntegrationTest.class)
+@Tag("integration")
 public class DockerInspectorTest {
     private static int IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE = 8080;
     private static int IMAGE_INSPECTOR_PORT_IN_CONTAINER_ALPINE = 8080;
@@ -39,7 +38,7 @@ public class DockerInspectorTest {
     private static ProgramVersion programVersion;
     private static String dateTimeStamp;
 
-    @BeforeClass
+    @BeforeAll
     public static void setUpBeforeClass() throws Exception {
         dateTimeStamp = getTimestamp();
         programVersion = new ProgramVersion();
@@ -93,7 +92,7 @@ public class DockerInspectorTest {
         return timestamp;
     }
 
-    @AfterClass
+    @AfterAll
     public static void tearDownAfterClass() throws Exception {
         cleanUpContainers();
     }

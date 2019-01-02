@@ -29,7 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
-import com.synopsys.integration.blackduck.exception.HubIntegrationException;
+import com.synopsys.integration.blackduck.exception.BlackDuckIntegrationException;
 import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 import com.synopsys.integration.exception.IntegrationException;
 
@@ -39,7 +39,7 @@ public class ImageInspectorServices {
     @Autowired
     private Config config;
 
-    public int getImageInspectorHostPort(final ImageInspectorOsEnum imageInspectorOs) throws HubIntegrationException {
+    public int getImageInspectorHostPort(final ImageInspectorOsEnum imageInspectorOs) throws BlackDuckIntegrationException {
         if (ImageInspectorOsEnum.ALPINE.equals(imageInspectorOs)) {
             return config.getImageInspectorHostPortAlpine();
         }
@@ -49,10 +49,10 @@ public class ImageInspectorServices {
         if (ImageInspectorOsEnum.UBUNTU.equals(imageInspectorOs)) {
             return config.getImageInspectorHostPortUbuntu();
         }
-        throw new HubIntegrationException(String.format("Unrecognized ImageInspector OS: %s", imageInspectorOs.toString()));
+        throw new BlackDuckIntegrationException(String.format("Unrecognized ImageInspector OS: %s", imageInspectorOs.toString()));
     }
 
-    public int getImageInspectorContainerPort(final ImageInspectorOsEnum imageInspectorOs) throws HubIntegrationException {
+    public int getImageInspectorContainerPort(final ImageInspectorOsEnum imageInspectorOs) throws BlackDuckIntegrationException {
         if (ImageInspectorOsEnum.ALPINE.equals(imageInspectorOs)) {
             return config.getImageInspectorContainerPortAlpine();
         }
@@ -62,7 +62,7 @@ public class ImageInspectorServices {
         if (ImageInspectorOsEnum.UBUNTU.equals(imageInspectorOs)) {
             return config.getImageInspectorContainerPortUbuntu();
         }
-        throw new HubIntegrationException(String.format("Unrecognized ImageInspector OS: %s", imageInspectorOs));
+        throw new BlackDuckIntegrationException(String.format("Unrecognized ImageInspector OS: %s", imageInspectorOs));
     }
 
     public int getDefaultImageInspectorHostPortBasedOnDistro() throws IntegrationException {

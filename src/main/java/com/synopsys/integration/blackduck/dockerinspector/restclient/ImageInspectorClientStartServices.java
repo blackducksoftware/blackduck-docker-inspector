@@ -45,7 +45,7 @@ import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
 import com.synopsys.integration.blackduck.dockerinspector.restclient.response.SimpleResponse;
-import com.synopsys.integration.blackduck.exception.HubIntegrationException;
+import com.synopsys.integration.blackduck.exception.BlackDuckIntegrationException;
 import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.rest.RestConstants;
@@ -137,7 +137,7 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
     private SimpleResponse getResponseFromService(final URI imageInspectorUri, final ImageInspectorOsEnum inspectorOs, final String containerPathToInputDockerTarfile,
         final String givenImageRepo, final String givenImageTag,
         final String containerPathToOutputFileSystemFile, final boolean organizeComponentsByLayer, final boolean includeRemovedComponents, final boolean cleanup, final Predicate<Integer> failureTest)
-        throws IntegrationException, HubIntegrationException {
+        throws IntegrationException, BlackDuckIntegrationException {
         SimpleResponse response = null;
         ContainerDetails serviceContainerDetails = null;
         RestConnection restConnection = null;
@@ -174,13 +174,6 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
                 logger.trace("Service connection/image/container cleanup: serviceContainerDetails is null");
             } else {
                 logger.trace(String.format("Service connection/image/container cleanup: image id: %s, container id: %s", serviceContainerDetails.getImageId(), serviceContainerDetails.getContainerId()));
-            }
-            if (restConnection != null) {
-                try {
-                    restConnection.close();
-                } catch (final Exception initialRestConnectionCloseException) {
-                    logger.warn(String.format("Error closing initial rest connection: %s", initialRestConnectionCloseException.getMessage()));
-                }
             }
             if (config.isCleanupInspectorContainer()) {
                 if (serviceContainerDetails != null) {

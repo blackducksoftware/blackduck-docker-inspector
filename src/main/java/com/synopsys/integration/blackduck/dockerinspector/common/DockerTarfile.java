@@ -35,7 +35,7 @@ import org.springframework.stereotype.Component;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
-import com.synopsys.integration.blackduck.exception.HubIntegrationException;
+import com.synopsys.integration.blackduck.exception.BlackDuckIntegrationException;
 import com.synopsys.integration.exception.IntegrationException;
 
 @Component
@@ -68,7 +68,7 @@ public class DockerTarfile {
         } else if (StringUtils.isNotBlank(config.getDockerImageRepo())) {
             finalDockerTarfile = dockerClientManager.getTarFileFromDockerImage(config.getDockerImageRepo(), config.getDockerImageTag(), imageTarDirectory);
         } else {
-            throw new HubIntegrationException("You must specify a docker image");
+            throw new BlackDuckIntegrationException("You must specify a docker image");
         }
         return finalDockerTarfile;
     }
