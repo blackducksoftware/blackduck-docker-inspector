@@ -86,7 +86,7 @@ public class Output {
         }
     }
 
-    public File provideBdioFileOutput(final SimpleBdioDocument bdioDocument, final String outputBdioFilename) throws IOException, IntegrationException {
+    public File provideBdioFileOutput(final SimpleBdioDocument bdioDocument) throws IOException, IntegrationException {
         // if user specified an output dir, use that; else use the temp output dir
         File outputDir;
         if (StringUtils.isNotBlank(config.getOutputPath())) {
@@ -95,7 +95,8 @@ public class Output {
         } else {
             outputDir = new File(programPaths.getDockerInspectorOutputPathHost());
         }
-        final File outputBdioFile = new File(outputDir, outputBdioFilename);
+        final String bdioFilename = String.format("%s_bdio.jsonld", bdioDocument.billOfMaterials.spdxName);
+        final File outputBdioFile = new File(outputDir, bdioFilename);
         final FileOutputStream outputBdioStream = new FileOutputStream(outputBdioFile);
         logger.info(String.format("Writing BDIO to %s", outputBdioFile.getAbsolutePath()));
         try (BdioWriter bdioWriter = new BdioWriter(gson, outputBdioStream)) {

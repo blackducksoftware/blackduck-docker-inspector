@@ -101,9 +101,10 @@ public class RestClientInspector implements Inspector {
             final String bdioString = imageInspectorClient.getBdio(finalDockerTarfile.getCanonicalPath(), dockerTarFilePathInContainer, config.getDockerImageRepo(), config.getDockerImageTag(), containerFileSystemPathInContainer,
                 config.isOrganizeComponentsByLayer(), config.isIncludeRemovedComponents(),
                 config.isCleanupWorkingDir());
+            logger.debug(String.format("bdioString: %s", bdioString));
             final SimpleBdioDocument bdioDocument = toBdioDocument(bdioString);
             adjustBdio(bdioDocument);
-            final File bdioFile = output.provideBdioFileOutput(bdioDocument, deriveOutputBdioFilename(bdioString));
+            final File bdioFile = output.provideBdioFileOutput(bdioDocument);
             if (config.isUploadBdio()) {
                 blackDuckClient.uploadBdio(bdioFile, bdioDocument.billOfMaterials.spdxName);
             }
@@ -172,13 +173,6 @@ public class RestClientInspector implements Inspector {
             }
         }
         throw new IntegrationException("Invalid configuration: Need to provide URL to existing ImageInspector services, or request that containers be started as-needed");
-    }
-
-    private String deriveOutputBdioFilename(final String bdioString) throws IOException, IntegrationException {
-        logger.trace(String.format("bdioString: %s", bdioString));
-        final SimpleBdioDocument bdioDocument = getSimpleBdioDocument(bdioString);
-        final BdioFilename outputFilename = new BdioFilename(bdioDocument.billOfMaterials.spdxName);
-        return outputFilename.getBdioFilename();
     }
 
     private SimpleBdioDocument getSimpleBdioDocument(final String bdioString) throws IOException {

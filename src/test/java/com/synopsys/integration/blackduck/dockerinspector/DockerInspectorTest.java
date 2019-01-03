@@ -121,8 +121,7 @@ public class DockerInspectorTest {
         additionalArgs.add("--bdio.organize.components.by.layer=true");
         additionalArgs.add("--bdio.include.removed.components=true");
         additionalArgs.add("--blackduck.codelocation.prefix=layeredIncludeRemoved");
-        additionalArgs.add("--blackduck.codelocation.prefix=layered");
-        IntegrationTestCommon.testTar(programVersion, "build/images/test/whiteouttest.tar", "blackducksoftware_whiteouttest_1.0_DPKG_bdio.jsonld", repo, tag, true, Mode.SPECIFY_II_DETAILS, null, additionalArgs, true,
+        IntegrationTestCommon.testTar(programVersion, "build/images/test/whiteouttest.tar", "layeredIncludeRemoved_blackducksoftware_whiteouttest_1.0_DPKG_bdio.jsonld", repo, tag, true, Mode.SPECIFY_II_DETAILS, null, additionalArgs, true,
             outputContainerFileSystemFile, null);
     }
 
