@@ -15,13 +15,6 @@ buildscript {
     }
 }
 
-// TODO: Can these plugins be combined with the set below?
-apply plugin: 'java'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'maven'
-apply plugin: 'maven-publish'
-apply plugin: 'io.spring.dependency-management'
-
 repositories {
     jcenter()
     mavenCentral()
@@ -33,6 +26,11 @@ project.ext.inspectorImageFamily = "blackduck-imageinspector"
 project.ext.inspectorImageVersion = "4.3.0"
 project.group = 'com.synopsys.integration'
 
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'io.spring.dependency-management'
 apply plugin: 'com.blackducksoftware.integration.solution'
 apply plugin: 'com.bmuschko.docker-remote-api'
 
