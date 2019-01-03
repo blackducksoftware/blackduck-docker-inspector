@@ -192,7 +192,7 @@ task testPrep(type: Exec, dependsOn: [build, buildTestTarfiles, buildScript, cre
     commandLine 'mkdir', 'test'
 }
 
-testAll.dependsOn testPrep
+testIntegration.dependsOn testPrep
 
 task all(dependsOn: [testIntegration, artifactoryPublish, publishAirGapZip]) {}
 
