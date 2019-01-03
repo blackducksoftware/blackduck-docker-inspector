@@ -110,18 +110,16 @@ public class DockerInspectorTest {
         ensureContainerRemoved("centos");
         ensureContainerRemoved("ubuntu");
     }
-
+    
     // TODO: there are two more combinations of bdio.organize.components.by.layer/bdio.include.removed.components to test
     @Test
     public void testWhiteoutStartContainerLayeredIncludeRemoved() throws IOException, InterruptedException, IntegrationException {
         List<String> additionalArgs = new ArrayList<>();
-        final String repo = "blackducksoftware/whiteouttest";
-        final String tag = "1.0";
-        final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("whiteouttest.tar");
+        final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("ubuntu1404.tar");
         additionalArgs.add("--bdio.organize.components.by.layer=true");
         additionalArgs.add("--bdio.include.removed.components=true");
         additionalArgs.add("--blackduck.codelocation.prefix=layeredIncludeRemoved");
-        IntegrationTestCommon.testTar(programVersion, "build/images/test/whiteouttest.tar", "layeredIncludeRemoved_blackducksoftware_whiteouttest_1.0_DPKG_bdio.jsonld", repo, tag, true, Mode.SPECIFY_II_DETAILS, null, additionalArgs, true,
+        IntegrationTestCommon.testTar(programVersion, "build/images/test/ubuntu1404.tar", "layeredIncludeRemoved_null_null_DPKG_bdio.jsonld", null, null, true, Mode.SPECIFY_II_DETAILS, null, additionalArgs, true,
             outputContainerFileSystemFile, null);
     }
 
