@@ -15,8 +15,8 @@ buildscript {
     }
 }
 
+// TODO: Can these plugins be combined with the set below?
 apply plugin: 'java'
-apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
@@ -37,13 +37,14 @@ apply plugin: 'com.blackducksoftware.integration.solution'
 apply plugin: 'com.bmuschko.docker-remote-api'
 
 import com.bmuschko.gradle.docker.tasks.image.Dockerfile
+// TODO: This can go:
 import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 
 apply from: 'airgap.gradle'
 
 springBoot { mainClass = 'com.synopsys.integration.blackduck.dockerinspector.DockerEnvImageInspector' }
 
-// TODO suspect this can go:
+// TODO if we s/compile/implementation/, can this go?:
 configurations {
     integrationTestCompile.extendsFrom testCompile
     integrationTestRuntime.extendsFrom testRuntime

@@ -14,14 +14,14 @@ import com.synopsys.integration.exception.IntegrationException;
 
 import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClient;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-@Tag("integration")
-@Ignore
+@Disabled
+@Tag("minikube")
 public class InMinikubeTest {
     private static KubernetesClient client;
     private static String clusterIp;

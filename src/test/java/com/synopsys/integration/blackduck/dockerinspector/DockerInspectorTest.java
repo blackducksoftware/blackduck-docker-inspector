@@ -111,15 +111,19 @@ public class DockerInspectorTest {
         ensureContainerRemoved("ubuntu");
     }
 
-    // TODO: This should use a base image fetched by sha, saved to .tar by build.
-    // Also, there are two more combinations of bdio.organize.components.by.layer/bdio.include.removed.components to test
+    // TODO: there are two more combinations of bdio.organize.components.by.layer/bdio.include.removed.components to test
     @Test
-    public void testUbuntuStartContainerLayeredIncludeRemoved() throws IOException, InterruptedException, IntegrationException {
+    public void testWhiteoutStartContainerLayeredIncludeRemoved() throws IOException, InterruptedException, IntegrationException {
         List<String> additionalArgs = new ArrayList<>();
+        final String repo = "blackducksoftware/whiteouttest";
+        final String tag = "1.0";
+        final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("whiteouttest.tar");
         additionalArgs.add("--bdio.organize.components.by.layer=true");
         additionalArgs.add("--bdio.include.removed.components=true");
         additionalArgs.add("--blackduck.codelocation.prefix=layeredIncludeRemoved");
-        IntegrationTestCommon.testImage(programVersion, "ubuntu:14.04", "ubuntu", "14.04", "ubuntu_14.04_DPKG_bdio.jsonld", true, Mode.DEFAULT, null, "dpkg", 10, additionalArgs, null);
+        additionalArgs.add("--blackduck.codelocation.prefix=layered");
+        IntegrationTestCommon.testTar(programVersion, "build/images/test/whiteouttest.tar", "blackducksoftware_whiteouttest_1.0_DPKG_bdio.jsonld", repo, tag, true, Mode.SPECIFY_II_DETAILS, null, additionalArgs, true,
+            outputContainerFileSystemFile, null);
     }
 
     @Test
