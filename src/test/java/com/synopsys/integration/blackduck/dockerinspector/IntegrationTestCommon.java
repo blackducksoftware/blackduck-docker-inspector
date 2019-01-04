@@ -149,7 +149,8 @@ public class IntegrationTestCommon {
             TestUtils.deleteDirIfExists(workingDir);
             cmd.add(String.format("--working.dir.path=%s", workingDir.getAbsolutePath()));
         } else if (mode == Mode.DEFAULT) {
-            // Proceed with defaults
+            // Proceed with defaults (mostly)
+            cmd.add(String.format("--shared.dir.path.local=%s/containerShared", TestUtils.TEST_DIR_REL_PATH));
         } else {
             throw new UnsupportedOperationException(String.format("Unexpected mode: %s", mode.toString()));
         }
