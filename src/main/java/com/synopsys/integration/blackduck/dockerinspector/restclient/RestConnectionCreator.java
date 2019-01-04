@@ -23,7 +23,7 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.restclient;
 
-import com.synopsys.integration.blackduck.dockerinspector.restclient.connection.NonRedirectingUnauthenticatedRestConnection;
+import com.synopsys.integration.blackduck.dockerinspector.restclient.connection.NonRedirectingRestConnection;
 import com.synopsys.integration.rest.proxy.ProxyInfo;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -45,7 +45,7 @@ public class RestConnectionCreator {
     public RestConnection createNonRedirectingConnection(final URI baseUri, final int timeoutSeconds) throws MalformedURLException {
         logger.debug(String.format("Creating a rest connection (%d second timeout) for URL: %s", timeoutSeconds, baseUri.toString()));
         final IntLogger intLogger = new Slf4jIntLogger(logger);
-        RestConnection connection = new NonRedirectingUnauthenticatedRestConnection(intLogger, timeoutSeconds, false, ProxyInfo.NO_PROXY_INFO);
+        RestConnection connection = new NonRedirectingRestConnection(intLogger, timeoutSeconds, false, ProxyInfo.NO_PROXY_INFO);
 
 
 //        final NonRedirectingUnauthenticatedRestConnectionBuilder connectionBuilder = new NonRedirectingUnauthenticatedRestConnectionBuilder();

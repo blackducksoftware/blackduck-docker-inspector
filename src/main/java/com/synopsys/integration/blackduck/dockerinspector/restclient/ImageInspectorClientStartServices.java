@@ -118,6 +118,9 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         if (response.getStatusCode() == RestConstants.OK_200) {
             return response.getBody();
         }
+        if (response.getStatusCode() >= RestConstants.BAD_REQUEST_400) {
+            throw new IntegrationException(String.format("getBdio request returned status: %d: %s", response.getStatusCode(), response.getBody()));
+        }
         final String correctImageInspectorOsName = response.getBody().trim();
         logger.info(String.format("This image needs to be inspected on %s", correctImageInspectorOsName));
         logger.info("(Image inspection may complete faster if you align the value of property imageinspector.service.distro.default with the images you inspect most frequently)");
