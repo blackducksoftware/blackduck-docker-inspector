@@ -63,7 +63,6 @@ public class BlackDuckClient {
 
   private static final String PHONE_HOME_METADATA_NAME_CALLER_VERSION = "callerVersion";
   private static final String PHONE_HOME_METADATA_NAME_CALLER_NAME = "callerName";
-  private static final String PHONE_HOME_METADATA_NAME_INSPECTOR_NAME = "inspectorName";
   private static final String PHONE_HOME_METADATA_NAME_DOCKER_ENGINE_VERSION = "dockerEngineVersion";
   private static final String PHONE_HOME_METADATA_NAME_BDIO_BY_LAYER = "bdioOrganizeComponentsByLayer";
   private static final String PHONE_HOME_METADATA_NAME_BDIO_INCLUDE_REMOVED = "bdioIncludeRemovedComponents";
@@ -138,14 +137,14 @@ public class BlackDuckClient {
     return config.getBlackDuckUsername();
   }
 
-  public void phoneHome(final String dockerEngineVersion, final String inspectorName) {
+  public void phoneHome(final String dockerEngineVersion) {
     if (!config.isPhoneHome() || config.isOfflineMode()) {
       logger.debug("PhoneHome disabled");
       return;
     }
     logger.debug("Attempting to phone home");
     try {
-      phoneHomeBlackDuckConnection(dockerEngineVersion, inspectorName);
+      phoneHomeBlackDuckConnection(dockerEngineVersion);
     } catch (final Throwable e) {
       logger.debug(String.format(
           "Attempt to phone home failed. This may simply be because Black Duck credentials were not supplied. Error message: %s",
@@ -153,8 +152,7 @@ public class BlackDuckClient {
     }
   }
 
-  private void phoneHomeBlackDuckConnection(final String dockerEngineVersion,
-      final String inspectorName) throws IOException {
+  private void phoneHomeBlackDuckConnection(final String dockerEngineVersion) throws IOException {
 
     final BlackDuckRestConnection restConnection = createRestConnection(intLogger);
     final BlackDuckServicesFactory blackDuckServicesFactory = createBlackDuckServicesFactory(
@@ -162,10 +160,6 @@ public class BlackDuckClient {
         restConnection);
 
     Map<String, String> metaDataMap = new HashMap<>();
-    if (!StringUtils.isBlank(inspectorName)) {
-      metaDataMap
-          .put(PHONE_HOME_METADATA_NAME_INSPECTOR_NAME, inspectorName);
-    }
     if (!StringUtils.isBlank(dockerEngineVersion)) {
       metaDataMap
           .put(PHONE_HOME_METADATA_NAME_DOCKER_ENGINE_VERSION, dockerEngineVersion);

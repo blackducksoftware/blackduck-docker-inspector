@@ -41,7 +41,6 @@ import org.springframework.stereotype.Component;
 import com.google.gson.Gson;
 import com.synopsys.integration.blackduck.dockerinspector.blackduckclient.BlackDuckClient;
 import com.synopsys.integration.blackduck.dockerinspector.common.DockerTarfile;
-import com.synopsys.integration.blackduck.dockerinspector.common.Inspector;
 import com.synopsys.integration.blackduck.dockerinspector.common.Output;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
@@ -51,7 +50,7 @@ import com.synopsys.integration.bdio.BdioReader;
 import com.synopsys.integration.bdio.model.SimpleBdioDocument;
 
 @Component
-public class RestClientInspector implements Inspector {
+public class RestClientInspector {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
@@ -78,15 +77,6 @@ public class RestClientInspector implements Inspector {
     @Autowired
     private Gson gson;
 
-    @Override
-    public boolean isApplicable() {
-        if (config.isImageInspectorServiceStart() || StringUtils.isNotBlank(config.getImageInspectorUrl())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
     public int getBdio() throws IntegrationException {
         final ImageInspectorClient imageInspectorClient = chooseImageInspectorClient();
         try {

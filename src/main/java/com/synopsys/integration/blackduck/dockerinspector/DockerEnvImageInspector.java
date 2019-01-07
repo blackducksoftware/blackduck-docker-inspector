@@ -23,6 +23,7 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector;
 
+import com.synopsys.integration.blackduck.dockerinspector.restclient.RestClientInspector;
 import java.io.IOException;
 import java.util.List;
 
@@ -40,7 +41,6 @@ import org.springframework.context.annotation.ComponentScan;
 
 import com.google.gson.Gson;
 import com.synopsys.integration.blackduck.dockerinspector.blackduckclient.BlackDuckClient;
-import com.synopsys.integration.blackduck.dockerinspector.common.Inspector;
 import com.synopsys.integration.blackduck.dockerinspector.common.Output;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
@@ -85,7 +85,7 @@ public class DockerEnvImageInspector {
     private Config config;
 
     @Autowired
-    private List<Inspector> inspectors;
+    private RestClientInspector inspector;
 
     @Autowired
     private UsageFormatter usageFormatter;
@@ -99,8 +99,7 @@ public class DockerEnvImageInspector {
     public void inspectImage() {
         int returnCode = -1;
         try {
-            final Inspector inspector = chooseInspector();
-            if (!initAndValidate(config, inspector.getClass().getName())) {
+            if (!initAndValidate(config)) {
                 System.exit(0);
             }
             returnCode = inspector.getBdio();
@@ -114,15 +113,6 @@ public class DockerEnvImageInspector {
         }
         logger.info(String.format("Returning %d", returnCode));
         System.exit(returnCode);
-    }
-
-    private Inspector chooseInspector() throws IntegrationException {
-        for (final Inspector inspector : inspectors) {
-            if (inspector.isApplicable()) {
-                return inspector;
-            }
-        }
-        throw new IntegrationException("Invalid configuration: Unable to identify which inspector mode to execute. Please either set property imageinspector.service.start to true (the default), or provide a value for property imageinspector.service.url");
     }
 
     private boolean helpInvoked() {
@@ -157,7 +147,7 @@ public class DockerEnvImageInspector {
         System.out.println("----------");
     }
 
-    private boolean initAndValidate(final Config config, final String inspectorName) throws IOException, IntegrationException, IllegalArgumentException, IllegalAccessException {
+    private boolean initAndValidate(final Config config) throws IOException, IntegrationException, IllegalArgumentException, IllegalAccessException {
         logger.info(String.format("Black Duck Docker Inspector %s", programVersion.getProgramVersion()));
         if (helpInvoked()) {
             showUsage();
@@ -172,7 +162,7 @@ public class DockerEnvImageInspector {
                 if (StringUtils.isBlank(config.getImageInspectorUrl())) {
                     dockerEngineVersion = dockerClientManager.getDockerEngineVersion();
                 }
-                blackDuckClient.phoneHome(dockerEngineVersion, inspectorName);
+                blackDuckClient.phoneHome(dockerEngineVersion);
             } catch (final Exception e) {
                 logger.warn(String.format("Unable to phone home: %s", e.getMessage()));
             }

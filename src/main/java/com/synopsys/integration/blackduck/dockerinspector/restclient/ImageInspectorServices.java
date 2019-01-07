@@ -82,9 +82,4 @@ public class ImageInspectorServices {
     public ImageInspectorOsEnum getDefaultImageInspectorOs() {
         return ImageInspectorOsEnum.valueOf(config.getImageInspectorDefaultDistro().toUpperCase(Locale.US));
     }
-
-    public String getDefaultImageInspectorOsName() {
-        return getDefaultImageInspectorOs().name();
-    }
-
 }
