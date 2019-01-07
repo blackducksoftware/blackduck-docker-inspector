@@ -111,7 +111,6 @@ public class DockerInspectorTest {
         ensureContainerRemoved("ubuntu");
     }
     
-    // TODO: there are two more combinations of bdio.organize.components.by.layer/bdio.include.removed.components to test
     @Test
     public void testWhiteoutStartContainerLayeredIncludeRemoved() throws IOException, InterruptedException, IntegrationException {
         List<String> additionalArgs = new ArrayList<>();
