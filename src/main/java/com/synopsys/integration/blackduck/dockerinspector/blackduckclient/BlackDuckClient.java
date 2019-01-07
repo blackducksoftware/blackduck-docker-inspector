@@ -33,16 +33,24 @@ import com.synopsys.integration.blackduck.codelocation.bdioupload.UploadBatchOut
 import com.synopsys.integration.blackduck.codelocation.bdioupload.UploadTarget;
 import com.synopsys.integration.blackduck.configuration.BlackDuckServerConfigBuilder;
 import com.synopsys.integration.blackduck.exception.BlackDuckIntegrationException;
+import com.synopsys.integration.blackduck.phonehome.BlackDuckPhoneHomeHelper;
 import com.synopsys.integration.blackduck.rest.BlackDuckRestConnection;
 import com.synopsys.integration.blackduck.service.BlackDuckServicesFactory;
+import com.synopsys.integration.log.IntLogger;
+import com.synopsys.integration.phonehome.PhoneHomeClient;
+import com.synopsys.integration.phonehome.google.analytics.GoogleAnalyticsConstants;
+import com.synopsys.integration.rest.connection.RestConnection;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executors;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.bouncycastle.openssl.EncryptionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -109,9 +117,9 @@ public class BlackDuckClient {
     }
     logger.info("Uploading BDIO files.");
     final BlackDuckRestConnection restConnection = createRestConnection();
-    final BlackDuckServicesFactory blackDuckServicesFactory = new BlackDuckServicesFactory(
-        new Gson(), BlackDuckServicesFactory.createDefaultObjectMapper(), restConnection,
-        new Slf4jIntLogger(logger));
+    final BlackDuckServicesFactory blackDuckServicesFactory = createBlackDuckServicesFactory(
+        new Slf4jIntLogger(logger),
+        restConnection);
     final BdioUploadService bdioUploadService = blackDuckServicesFactory.createBdioUploadService();
 
     UploadBatch uploadBatch = new UploadBatch();
@@ -127,6 +135,13 @@ public class BlackDuckClient {
             o.getResponse().orElse("unknown"))));
     logger.info(
         String.format("Uploaded bdio file %s to %s", bdioFile.getName(), config.getBlackDuckUrl()));
+  }
+
+  private BlackDuckServicesFactory createBlackDuckServicesFactory(final IntLogger intLogger,
+      BlackDuckRestConnection restConnection) {
+    return new BlackDuckServicesFactory(
+        new Gson(), BlackDuckServicesFactory.createDefaultObjectMapper(), restConnection,
+        intLogger);
   }
 
   private String getBlackDuckUsername() {
@@ -150,43 +165,39 @@ public class BlackDuckClient {
 
   private void phoneHomeBlackDuckConnection(final String dockerEngineVersion,
       final String inspectorName) throws IOException, EncryptionException {
-    logger.trace("*************************** Phone home temporarily disabled");
-    return;
 
-    // TODO:
-//    final BlackduckRestConnection restConnection = createRestConnection();
-//    final HubServicesFactory blackDuckServicesFactory = new HubServicesFactory(
-//        HubServicesFactory.createDefaultGson(), HubServicesFactory.createDefaultJsonParser(),
-//        restConnection, new Slf4jIntLogger(logger));
-//    final PhoneHomeService phoneHomeService = blackDuckServicesFactory
-//        .createPhoneHomeService(Executors.newSingleThreadExecutor());
-//    final PhoneHomeRequestBody.Builder phoneHomeRequestBodyBuilder = new PhoneHomeRequestBody.Builder();
-//    if (!StringUtils.isBlank(inspectorName)) {
-//      phoneHomeRequestBodyBuilder
-//          .addToMetaData(PHONE_HOME_METADATA_NAME_INSPECTOR_NAME, inspectorName);
-//    }
-//    if (!StringUtils.isBlank(dockerEngineVersion)) {
-//      phoneHomeRequestBodyBuilder
-//          .addToMetaData(PHONE_HOME_METADATA_NAME_DOCKER_ENGINE_VERSION, dockerEngineVersion);
-//    }
-//    if (!StringUtils.isBlank(config.getCallerName())) {
-//      phoneHomeRequestBodyBuilder
-//          .addToMetaData(PHONE_HOME_METADATA_NAME_CALLER_NAME, config.getCallerName());
-//    }
-//    if (!StringUtils.isBlank(config.getCallerVersion())) {
-//      phoneHomeRequestBodyBuilder
-//          .addToMetaData(PHONE_HOME_METADATA_NAME_CALLER_VERSION, config.getCallerVersion());
-//    }
-//    phoneHomeRequestBodyBuilder.addToMetaData(PHONE_HOME_METADATA_NAME_BDIO_BY_LAYER,
-//        String.valueOf(config.isOrganizeComponentsByLayer()));
-//    phoneHomeRequestBodyBuilder.addToMetaData(PHONE_HOME_METADATA_NAME_BDIO_INCLUDE_REMOVED,
-//        String.valueOf(config.isIncludeRemovedComponents()));
-//    final PhoneHomeCallable phoneHomeCallable = blackDuckServicesFactory
-//        .createBlackDuckPhoneHomeCallable(new URL(config.getBlackDuckUrl()),
-//            DockerEnvImageInspector.PROGRAM_ID, programVersion.getProgramVersion(),
-//            phoneHomeRequestBodyBuilder);
-//    phoneHomeService.phoneHome(phoneHomeCallable);
-//    logger.trace("Attempt to phone home completed");
+    IntLogger intLogger = new Slf4jIntLogger(logger);
+
+    final BlackDuckRestConnection restConnection = createRestConnection();
+    final BlackDuckServicesFactory blackDuckServicesFactory = createBlackDuckServicesFactory(
+        intLogger,
+        restConnection);
+
+    Map<String, String> metaDataMap = new HashMap<>();
+    if (!StringUtils.isBlank(inspectorName)) {
+      metaDataMap
+          .put(PHONE_HOME_METADATA_NAME_INSPECTOR_NAME, inspectorName);
+    }
+    if (!StringUtils.isBlank(dockerEngineVersion)) {
+      metaDataMap
+          .put(PHONE_HOME_METADATA_NAME_DOCKER_ENGINE_VERSION, dockerEngineVersion);
+    }
+    if (!StringUtils.isBlank(config.getCallerName())) {
+      metaDataMap
+          .put(PHONE_HOME_METADATA_NAME_CALLER_NAME, config.getCallerName());
+    }
+    if (!StringUtils.isBlank(config.getCallerVersion())) {
+      metaDataMap
+          .put(PHONE_HOME_METADATA_NAME_CALLER_VERSION, config.getCallerVersion());
+    }
+    metaDataMap.put(PHONE_HOME_METADATA_NAME_BDIO_BY_LAYER,
+        String.valueOf(config.isOrganizeComponentsByLayer()));
+    metaDataMap.put(PHONE_HOME_METADATA_NAME_BDIO_INCLUDE_REMOVED,
+        String.valueOf(config.isIncludeRemovedComponents()));
+
+    BlackDuckPhoneHomeHelper.createPhoneHomeHelper(blackDuckServicesFactory).handlePhoneHome(
+        DockerEnvImageInspector.PROGRAM_ID, programVersion.getProgramVersion(), metaDataMap);
+    logger.trace("Attempt to phone home completed");
   }
 
   private BlackDuckRestConnection createRestConnection() throws IllegalStateException {
