@@ -37,37 +37,26 @@ import com.synopsys.integration.blackduck.phonehome.BlackDuckPhoneHomeHelper;
 import com.synopsys.integration.blackduck.rest.BlackDuckRestConnection;
 import com.synopsys.integration.blackduck.service.BlackDuckServicesFactory;
 import com.synopsys.integration.log.IntLogger;
-import com.synopsys.integration.phonehome.PhoneHomeClient;
-import com.synopsys.integration.phonehome.google.analytics.GoogleAnalyticsConstants;
-import com.synopsys.integration.rest.connection.RestConnection;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Executors;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.bouncycastle.openssl.EncryptionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonParser;
 
 import com.synopsys.integration.blackduck.dockerinspector.DockerEnvImageInspector;
 import com.synopsys.integration.blackduck.dockerinspector.ProgramVersion;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
-import com.synopsys.integration.blackduck.service.CodeLocationService;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.log.Slf4jIntLogger;
-import com.synopsys.integration.phonehome.PhoneHomeRequestBody;
-import com.synopsys.integration.phonehome.PhoneHomeService;
 
 @Component
 public class BlackDuckClient {
@@ -80,6 +69,7 @@ public class BlackDuckClient {
   private static final String PHONE_HOME_METADATA_NAME_BDIO_INCLUDE_REMOVED = "bdioIncludeRemovedComponents";
 
   private final Logger logger = LoggerFactory.getLogger(BlackDuckClient.class);
+  private final IntLogger intLogger = new Slf4jIntLogger(logger);
 
   @Autowired
   private Config config;
@@ -100,7 +90,7 @@ public class BlackDuckClient {
     }
     BlackDuckRestConnection restConnection;
     try {
-      restConnection = createRestConnection();
+      restConnection = createRestConnection(intLogger);
       restConnection.attemptAuthentication();
     } catch (final IntegrationException | IOException e) {
       final String msg = String.format("Error connecting to Black Duck: %s", e.getMessage());
@@ -116,9 +106,9 @@ public class BlackDuckClient {
       return;
     }
     logger.info("Uploading BDIO files.");
-    final BlackDuckRestConnection restConnection = createRestConnection();
+    final BlackDuckRestConnection restConnection = createRestConnection(intLogger);
     final BlackDuckServicesFactory blackDuckServicesFactory = createBlackDuckServicesFactory(
-        new Slf4jIntLogger(logger),
+        intLogger,
         restConnection);
     final BdioUploadService bdioUploadService = blackDuckServicesFactory.createBdioUploadService();
 
@@ -164,11 +154,9 @@ public class BlackDuckClient {
   }
 
   private void phoneHomeBlackDuckConnection(final String dockerEngineVersion,
-      final String inspectorName) throws IOException, EncryptionException {
+      final String inspectorName) throws IOException {
 
-    IntLogger intLogger = new Slf4jIntLogger(logger);
-
-    final BlackDuckRestConnection restConnection = createRestConnection();
+    final BlackDuckRestConnection restConnection = createRestConnection(intLogger);
     final BlackDuckServicesFactory blackDuckServicesFactory = createBlackDuckServicesFactory(
         intLogger,
         restConnection);
@@ -200,9 +188,9 @@ public class BlackDuckClient {
     logger.trace("Attempt to phone home completed");
   }
 
-  private BlackDuckRestConnection createRestConnection() throws IllegalStateException {
+  private BlackDuckRestConnection createRestConnection(final IntLogger intLogger) throws IllegalStateException {
     final BlackDuckServerConfigBuilder blackDuckServerConfigBuilder = createBlackDuckServerConfigBuilder();
-    return blackDuckServerConfigBuilder.build().createRestConnection(new Slf4jIntLogger(logger));
+    return blackDuckServerConfigBuilder.build().createRestConnection(intLogger);
   }
 
   private BlackDuckServerConfigBuilder createBlackDuckServerConfigBuilder() {
