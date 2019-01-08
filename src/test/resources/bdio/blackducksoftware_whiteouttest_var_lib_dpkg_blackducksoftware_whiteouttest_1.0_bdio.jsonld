@@ -6,9 +6,9 @@
       "spdx:creator": [
         "Tool: IntegrationBdio-16.1.1"
       ],
-      "spdx:created": "2018-12-07T21:59:41.757Z"
+      "spdx:created": "2019-01-08T20:26:20.125Z"
     },
-    "@id": "uuid:83b2154a-d138-4d9d-b12d-fd1477cb09c6",
+    "@id": "uuid:0665c17f-e6d0-4bdc-8ba0-4050dda68314",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -292,11 +292,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/ca_certificates/20170717_16_04_1/all",
+        "related": "http:@ubuntu/base_passwd/3_5_39/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/base_passwd/3_5_39/amd64",
+        "related": "http:@ubuntu/ca_certificates/20170717_16_04_2/all",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1915,27 +1915,6 @@
     "relationship": []
   },
   {
-    "name": "ca-certificates",
-    "revision": "20170717~16.04.1",
-    "@id": "http:@ubuntu/ca_certificates/20170717_16_04_1/all",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@ubuntu",
-      "externalId": "ca-certificates/20170717~16.04.1/all",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "@ubuntu",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "ca-certificates",
-        "version": "20170717~16.04.1",
-        "architecture": "all"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "base-passwd",
     "revision": "3.5.39",
     "@id": "http:@ubuntu/base_passwd/3_5_39/amd64",
@@ -1952,6 +1931,27 @@
         "name": "base-passwd",
         "version": "3.5.39",
         "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "ca-certificates",
+    "revision": "20170717~16.04.2",
+    "@id": "http:@ubuntu/ca_certificates/20170717_16_04_2/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@ubuntu",
+      "externalId": "ca-certificates/20170717~16.04.2/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@ubuntu",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "ca-certificates",
+        "version": "20170717~16.04.2",
+        "architecture": "all"
       }
     },
     "relationship": []
