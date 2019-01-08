@@ -4,11 +4,11 @@
     "spdx:name": "blackducksoftware_whiteouttest_1.0_DPKG",
     "creationInfo": {
       "spdx:creator": [
-        "Tool: IntegrationBdio-16.2.1"
+        "Tool: IntegrationBdio-16.3.1"
       ],
-      "spdx:created": "2019-01-03T19:22:48.535Z"
+      "spdx:created": "2019-01-08T20:36:34.613Z"
     },
-    "@id": "uuid:a1354bca-c595-4534-bd49-bd955c187292",
+    "@id": "uuid:e230ac80-28ea-4089-ab20-ab3cde66ac37",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -516,10 +516,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/ca_certificates/20170717_16_04_1/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:@ubuntu/adduser/3_113_nmu3ubuntu4/all",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -529,6 +525,10 @@
       },
       {
         "related": "http:@ubuntu/sensible_utils/0_0_9ubuntu0_16_04_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/ca_certificates/20170717_16_04_2/all",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -3091,27 +3091,6 @@
     "relationship": []
   },
   {
-    "name": "ca-certificates",
-    "revision": "20170717~16.04.1",
-    "@id": "http:@ubuntu/ca_certificates/20170717_16_04_1/all",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@ubuntu",
-      "externalId": "ca-certificates/20170717~16.04.1/all",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "@ubuntu",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "ca-certificates",
-        "version": "20170717~16.04.1",
-        "architecture": "all"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "adduser",
     "revision": "3.113+nmu3ubuntu4",
     "@id": "http:@ubuntu/adduser/3_113_nmu3ubuntu4/all",
@@ -3169,6 +3148,27 @@
         },
         "name": "sensible-utils",
         "version": "0.0.9ubuntu0.16.04.1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "ca-certificates",
+    "revision": "20170717~16.04.2",
+    "@id": "http:@ubuntu/ca_certificates/20170717_16_04_2/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@ubuntu",
+      "externalId": "ca-certificates/20170717~16.04.2/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@ubuntu",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "ca-certificates",
+        "version": "20170717~16.04.2",
         "architecture": "all"
       }
     },
