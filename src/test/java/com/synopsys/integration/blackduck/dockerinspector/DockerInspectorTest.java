@@ -112,7 +112,7 @@ public class DockerInspectorTest {
     }
     
     @Test
-    public void testWhiteoutStartContainerLayeredIncludeRemoved() throws IOException, InterruptedException, IntegrationException {
+    public void testUbuntu1404StartContainerLayeredIncludeRemoved() throws IOException, InterruptedException, IntegrationException {
         List<String> additionalArgs = new ArrayList<>();
         final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("ubuntu1404.tar");
         additionalArgs.add("--bdio.organize.components.by.layer=true");
