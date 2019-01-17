@@ -108,6 +108,11 @@ public class Config {
     @Value("${working.dir.path:/tmp/blackduck-docker-inspector-files}")
     private String workingDirPath = "";
 
+    // Path to additional system properties (an alternative to java -D)
+    @ValueDescription(description = "Path to a properties file containing additional system properties (an alternative to java -D)", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${system.properties.path:}")
+    private String systemPropertiesPath = "";
+
     // If false, will leave behind the files created in the working dir
     @ValueDescription(description = "Cleanup Working Dir?", defaultValue = "true", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${cleanup.working.dir:true}")
@@ -419,6 +424,10 @@ public class Config {
         return optionsByFieldName.get("workingDirPath").getResolvedValue();
     }
 
+    public String getSystemPropertiesPath() {
+        return optionsByFieldName.get("systemPropertiesPath").getResolvedValue();
+    }
+
     public boolean isCleanupWorkingDir() {
         return optionsByFieldName.get("cleanupWorkingDir").getResolvedValue().equals("true");
     }
@@ -651,6 +660,7 @@ public class Config {
         this.phoneHome = null;
         this.scanCliOptsEnvVar = null;
         this.workingDirPath = null;
+        this.systemPropertiesPath = null;
         this.uploadBdio = null;
         this.inspectorRepository = null;
         this.cleanupInspectorContainer = null;
