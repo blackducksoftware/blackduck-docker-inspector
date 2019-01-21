@@ -23,7 +23,7 @@ repositories {
 
 version = '8.0.0-SNAPSHOT'
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
-project.ext.inspectorImageVersion = "4.3.1"
+project.ext.inspectorImageVersion = "4.3.2"
 project.group = 'com.synopsys.integration'
 
 apply plugin: 'java'
@@ -213,7 +213,7 @@ artifactory {
 
 dependencies {
     compile 'com.blackducksoftware.integration:blackduck-common:40.0.0'
-    compile 'com.blackducksoftware.integration:hub-imageinspector-lib:8.1.1'
+    compile 'com.blackducksoftware.integration:hub-imageinspector-lib:8.1.2'
     
     compile 'com.github.docker-java:docker-java:3.1.0-rc-2'
     compile 'org.springframework.boot:spring-boot-starter'
