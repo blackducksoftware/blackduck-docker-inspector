@@ -215,7 +215,8 @@ dependencies {
     compile 'com.blackducksoftware.integration:blackduck-common:40.0.0'
     compile 'com.blackducksoftware.integration:hub-imageinspector-lib:8.1.2'
     
-    compile 'com.github.docker-java:docker-java:3.1.0-rc-2'
+    compile 'com.github.docker-java:docker-java:3.1.0-rc-7'
+
     compile 'org.springframework.boot:spring-boot-starter'
     
     testCompile 'org.springframework.boot:spring-boot-starter-test'

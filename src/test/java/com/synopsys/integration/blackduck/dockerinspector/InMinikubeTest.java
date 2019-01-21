@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -42,7 +43,9 @@ public class InMinikubeTest {
         final String[] ipOutput = TestUtils.execCmd("minikube ip", 10, true, null).split("\n");
         clusterIp = ipOutput[0];
         final String serviceUrlArg = String.format("--imageinspector.service.url=http://%s:%d", clusterIp, IntegrationTestCommon.START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU);
-        additionalArgsWithServiceUrl = Arrays.asList(serviceUrlArg);
+        additionalArgsWithServiceUrl = new ArrayList<>(2);
+        additionalArgsWithServiceUrl.add(serviceUrlArg);
+        additionalArgsWithServiceUrl.add("--shared.dir.path.local=test/containerShared");
         client = new DefaultKubernetesClient();
         try {
             System.out.printf("API version: %s\n", client.getApiVersion());
