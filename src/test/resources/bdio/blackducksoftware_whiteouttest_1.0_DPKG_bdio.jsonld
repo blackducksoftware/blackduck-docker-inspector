@@ -6,9 +6,9 @@
       "spdx:creator": [
         "Tool: IntegrationBdio-16.3.1"
       ],
-      "spdx:created": "2019-01-08T20:36:34.613Z"
+      "spdx:created": "2019-01-21T22:40:30.227Z"
     },
-    "@id": "uuid:e230ac80-28ea-4089-ab20-ab3cde66ac37",
+    "@id": "uuid:c8d9e0ff-1a5d-41e6-8f97-6f3b4466eee2",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -280,7 +280,15 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:@ubuntu/libk5crypto3/1_13_2_dfsg_5ubuntu2_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:@ubuntu/init_system_helpers/1_29ubuntu4/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libkrb5_3/1_13_2_dfsg_5ubuntu2_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -292,19 +300,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libk5crypto3/1_13_2_dfsg_5ubuntu2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:@ubuntu/bash/4_3_14ubuntu1_2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
         "related": "http:@ubuntu/libgcc1/1_6_0_1_0ubuntu1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libkrb5_3/1_13_2_dfsg_5ubuntu2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -344,19 +344,15 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libgssapi_krb5_2/1_13_2_dfsg_5ubuntu2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:@ubuntu/libaudit_common/1_2_4_5_1ubuntu2_1/all",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libacl1/2_2_52_3/amd64",
+        "related": "http:@ubuntu/krb5_locales/1_13_2_dfsg_5ubuntu2_1/all",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/krb5_locales/1_13_2_dfsg_5ubuntu2/all",
+        "related": "http:@ubuntu/libacl1/2_2_52_3/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -432,15 +428,19 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libkrb5support0/1_13_2_dfsg_5ubuntu2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:@ubuntu/libnettle6/3_2_1ubuntu0_16_04_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:@ubuntu/libkrb5support0/1_13_2_dfsg_5ubuntu2_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:@ubuntu/procps/2_3_3_10_4ubuntu2_4/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libgssapi_krb5_2/1_13_2_dfsg_5ubuntu2_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1852,6 +1852,27 @@
     "relationship": []
   },
   {
+    "name": "libk5crypto3",
+    "revision": "1.13.2+dfsg-5ubuntu2.1",
+    "@id": "http:@ubuntu/libk5crypto3/1_13_2_dfsg_5ubuntu2_1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@ubuntu",
+      "externalId": "libk5crypto3/1.13.2+dfsg-5ubuntu2.1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@ubuntu",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libk5crypto3",
+        "version": "1.13.2+dfsg-5ubuntu2.1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "init-system-helpers",
     "revision": "1.29ubuntu4",
     "@id": "http:@ubuntu/init_system_helpers/1_29ubuntu4/all",
@@ -1868,6 +1889,27 @@
         "name": "init-system-helpers",
         "version": "1.29ubuntu4",
         "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libkrb5-3",
+    "revision": "1.13.2+dfsg-5ubuntu2.1",
+    "@id": "http:@ubuntu/libkrb5_3/1_13_2_dfsg_5ubuntu2_1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@ubuntu",
+      "externalId": "libkrb5-3/1.13.2+dfsg-5ubuntu2.1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@ubuntu",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libkrb5-3",
+        "version": "1.13.2+dfsg-5ubuntu2.1",
+        "architecture": "amd64"
       }
     },
     "relationship": []
@@ -1915,27 +1957,6 @@
     "relationship": []
   },
   {
-    "name": "libk5crypto3",
-    "revision": "1.13.2+dfsg-5ubuntu2",
-    "@id": "http:@ubuntu/libk5crypto3/1_13_2_dfsg_5ubuntu2/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@ubuntu",
-      "externalId": "libk5crypto3/1.13.2+dfsg-5ubuntu2/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "@ubuntu",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "libk5crypto3",
-        "version": "1.13.2+dfsg-5ubuntu2",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "bash",
     "revision": "4.3-14ubuntu1.2",
     "@id": "http:@ubuntu/bash/4_3_14ubuntu1_2/amd64",
@@ -1972,27 +1993,6 @@
         },
         "name": "libgcc1",
         "version": "1:6.0.1-0ubuntu1",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libkrb5-3",
-    "revision": "1.13.2+dfsg-5ubuntu2",
-    "@id": "http:@ubuntu/libkrb5_3/1_13_2_dfsg_5ubuntu2/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@ubuntu",
-      "externalId": "libkrb5-3/1.13.2+dfsg-5ubuntu2/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "@ubuntu",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "libkrb5-3",
-        "version": "1.13.2+dfsg-5ubuntu2",
         "architecture": "amd64"
       }
     },
@@ -2188,27 +2188,6 @@
     "relationship": []
   },
   {
-    "name": "libgssapi-krb5-2",
-    "revision": "1.13.2+dfsg-5ubuntu2",
-    "@id": "http:@ubuntu/libgssapi_krb5_2/1_13_2_dfsg_5ubuntu2/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@ubuntu",
-      "externalId": "libgssapi-krb5-2/1.13.2+dfsg-5ubuntu2/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "@ubuntu",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "libgssapi-krb5-2",
-        "version": "1.13.2+dfsg-5ubuntu2",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "libaudit-common",
     "revision": "1:2.4.5-1ubuntu2.1",
     "@id": "http:@ubuntu/libaudit_common/1_2_4_5_1ubuntu2_1/all",
@@ -2224,6 +2203,27 @@
         },
         "name": "libaudit-common",
         "version": "1:2.4.5-1ubuntu2.1",
+        "architecture": "all"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "krb5-locales",
+    "revision": "1.13.2+dfsg-5ubuntu2.1",
+    "@id": "http:@ubuntu/krb5_locales/1_13_2_dfsg_5ubuntu2_1/all",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@ubuntu",
+      "externalId": "krb5-locales/1.13.2+dfsg-5ubuntu2.1/all",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@ubuntu",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "krb5-locales",
+        "version": "1.13.2+dfsg-5ubuntu2.1",
         "architecture": "all"
       }
     },
@@ -2246,27 +2246,6 @@
         "name": "libacl1",
         "version": "2.2.52-3",
         "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "krb5-locales",
-    "revision": "1.13.2+dfsg-5ubuntu2",
-    "@id": "http:@ubuntu/krb5_locales/1_13_2_dfsg_5ubuntu2/all",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@ubuntu",
-      "externalId": "krb5-locales/1.13.2+dfsg-5ubuntu2/all",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "@ubuntu",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "krb5-locales",
-        "version": "1.13.2+dfsg-5ubuntu2",
-        "architecture": "all"
       }
     },
     "relationship": []
@@ -2650,27 +2629,6 @@
     "relationship": []
   },
   {
-    "name": "libkrb5support0",
-    "revision": "1.13.2+dfsg-5ubuntu2",
-    "@id": "http:@ubuntu/libkrb5support0/1_13_2_dfsg_5ubuntu2/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@ubuntu",
-      "externalId": "libkrb5support0/1.13.2+dfsg-5ubuntu2/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "@ubuntu",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "libkrb5support0",
-        "version": "1.13.2+dfsg-5ubuntu2",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "libnettle6",
     "revision": "3.2-1ubuntu0.16.04.1",
     "@id": "http:@ubuntu/libnettle6/3_2_1ubuntu0_16_04_1/amd64",
@@ -2692,6 +2650,27 @@
     "relationship": []
   },
   {
+    "name": "libkrb5support0",
+    "revision": "1.13.2+dfsg-5ubuntu2.1",
+    "@id": "http:@ubuntu/libkrb5support0/1_13_2_dfsg_5ubuntu2_1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@ubuntu",
+      "externalId": "libkrb5support0/1.13.2+dfsg-5ubuntu2.1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@ubuntu",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libkrb5support0",
+        "version": "1.13.2+dfsg-5ubuntu2.1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "procps",
     "revision": "2:3.3.10-4ubuntu2.4",
     "@id": "http:@ubuntu/procps/2_3_3_10_4ubuntu2_4/amd64",
@@ -2707,6 +2686,27 @@
         },
         "name": "procps",
         "version": "2:3.3.10-4ubuntu2.4",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libgssapi-krb5-2",
+    "revision": "1.13.2+dfsg-5ubuntu2.1",
+    "@id": "http:@ubuntu/libgssapi_krb5_2/1_13_2_dfsg_5ubuntu2_1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@ubuntu",
+      "externalId": "libgssapi-krb5-2/1.13.2+dfsg-5ubuntu2.1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@ubuntu",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libgssapi-krb5-2",
+        "version": "1.13.2+dfsg-5ubuntu2.1",
         "architecture": "amd64"
       }
     },
