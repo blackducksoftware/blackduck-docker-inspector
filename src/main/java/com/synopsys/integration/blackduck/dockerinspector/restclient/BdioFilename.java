@@ -23,8 +23,6 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.restclient;
 
-import com.synopsys.integration.exception.IntegrationException;
-
 public class BdioFilename {
     private final String spdxName;
 
@@ -32,7 +30,7 @@ public class BdioFilename {
         this.spdxName = spdxName;
     }
 
-    public String getBdioFilename() throws IntegrationException {
+    public String getBdioFilename() {
         final String bdioFilename = String.format("%s_bdio.jsonld", spdxName);
         return bdioFilename;
     }

@@ -64,10 +64,6 @@ public class DockerInspectorOption implements Comparable<DockerInspectorOption> 
         return valueTypeString;
     }
 
-    public String getGroup() {
-        return group;
-    }
-
     public String getDefaultValue() {
         return defaultValue;
     }

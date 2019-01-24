@@ -41,8 +41,6 @@ public class ProgramPaths {
     @Autowired
     private Config config;
 
-    private static final String JAR_FILE_SUFFIX = ".jar";
-    private static final String FILE_URI_PREFIX = "file:";
     private static final String HOST_RESULT_JSON_FILENAME = "result.json";
     private static final String RUNDIR_BASENAME = "run";
     public static final String OUTPUT_DIR = "output";
@@ -62,15 +60,10 @@ public class ProgramPaths {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private String dockerInspectorConfigDirPathHost;
-    private String dockerInspectorConfigDirPathContainer;
     private String dockerInspectorConfigFilePathHost;
     private String dockerInspectorTargetDirPathHost;
     private String dockerInspectorTargetDirPathContainer;
-    private String dockerInspectorJarPathActual;
-    private String dockerInspectorJarPathHost;
     private String dockerInspectorOutputPathHost;
-    private String dockerInspectorOutputPathContainer;
-
     private String dockerInspectorHostResultPath;
     private String cleanedProcessId;
 
@@ -88,7 +81,6 @@ public class ProgramPaths {
     public void init() {
         cleanedProcessId = atSignToUnderscore(getProcessIdOrGenerateUniqueId());
         logger.info(String.format("Process name: %s", cleanedProcessId));
-        dockerInspectorJarPathActual = deriveJarPath();
         if (StringUtils.isBlank(dockerInspectorPgmDirPathHost)) {
             dockerInspectorPgmDirPathHost = getProgramDirPathHost();
         }
@@ -98,15 +90,12 @@ public class ProgramPaths {
         dockerInspectorRunDirPathHost = runDirHost.getAbsolutePath() + "/";
         logger.debug(String.format("dockerInspectorRunDirPathHost: %s", dockerInspectorRunDirPathHost));
 
-        dockerInspectorJarPathHost = dockerInspectorJarPathActual;
         dockerInspectorPgmDirPathContainer = CONTAINER_PROGRAM_DIR;
         dockerInspectorConfigDirPathHost = new File(runDirHost, CONFIG_DIR).getAbsolutePath() + "/";
-        dockerInspectorConfigDirPathContainer = dockerInspectorPgmDirPathContainer + CONFIG_DIR + "/";
         dockerInspectorConfigFilePathHost = dockerInspectorConfigDirPathHost + APPLICATION_PROPERTIES_FILENAME;
         dockerInspectorTargetDirPathHost = new File(runDirHost, TARGET_DIR).getAbsolutePath() + "/";
         dockerInspectorTargetDirPathContainer = dockerInspectorPgmDirPathContainer + TARGET_DIR + "/";
         dockerInspectorOutputPathHost = new File(runDirHost, OUTPUT_DIR).getAbsolutePath() + "/";
-        dockerInspectorOutputPathContainer = CONTAINER_PROGRAM_DIR + OUTPUT_DIR + "/";
         dockerInspectorHostResultPath = dockerInspectorOutputPathHost + HOST_RESULT_JSON_FILENAME;
     }
 
@@ -130,30 +119,8 @@ public class ProgramPaths {
         return config.getOutputPath();
     }
 
-    private String deriveJarPath() {
-        final String qualifiedJarPathString = getQualifiedJarPath();
-        logger.debug(String.format("qualifiedJarPathString: %s", qualifiedJarPathString));
-        final String prefix = FILE_URI_PREFIX;
-        if (!qualifiedJarPathString.contains(prefix)) {
-            return null;
-        }
-        final int startIndex = qualifiedJarPathString.indexOf(prefix) + prefix.length();
-        final int endIndex = qualifiedJarPathString.indexOf(JAR_FILE_SUFFIX) + JAR_FILE_SUFFIX.length();
-        final String dockerInspectorJarPathActual = qualifiedJarPathString.substring(startIndex, endIndex);
-        logger.debug(String.format("dockerInspectorJarPathActual: %s", dockerInspectorJarPathActual));
-        return dockerInspectorJarPathActual;
-    }
-
-    public String getQualifiedJarPath() {
-        return this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
-    }
-
     public String getDockerInspectorConfigDirPathHost() {
         return dockerInspectorConfigDirPathHost;
-    }
-
-    public String getDockerInspectorConfigDirPathContainer() {
-        return dockerInspectorConfigDirPathContainer;
     }
 
     public String getDockerInspectorConfigFilePathHost() {
@@ -188,19 +155,6 @@ public class ProgramPaths {
         return dockerInspectorRunDirPathHost;
     }
 
-    public String getDockerInspectorPgmDirPathContainer() {
-        return dockerInspectorPgmDirPathContainer;
-    }
-
-    public String getDockerInspectorJarPathHost() {
-        return dockerInspectorJarPathHost;
-    }
-
-    public String getDockerInspectorJarFilenameHost() {
-        final File jarFile = new File(dockerInspectorJarPathHost);
-        return jarFile.getName();
-    }
-
     public String getDockerInspectorOutputPathHost() {
         if (StringUtils.isNotBlank(config.getImageInspectorUrl())) {
             final File outputDir = new File(this.getDockerInspectorRunDirPathHost(), OUTPUT_DIR);
@@ -211,10 +165,6 @@ public class ProgramPaths {
 
     public String getDockerInspectorHostResultPath() {
         return dockerInspectorHostResultPath;
-    }
-
-    public String getDockerInspectorOutputPathContainer() {
-        return dockerInspectorOutputPathContainer;
     }
 
     public String deriveContainerName(final String imageName) {

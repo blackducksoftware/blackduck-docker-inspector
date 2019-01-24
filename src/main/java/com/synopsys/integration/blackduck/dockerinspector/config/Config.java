@@ -231,7 +231,6 @@ public class Config {
     @Value("${cleanup.inspector.image:false}")
     private Boolean cleanupInspectorImage = Boolean.FALSE;
 
-
     @ValueDescription(description = "In generated BDIO, organize components by layer?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${bdio.organize.components.by.layer:false}")
     private Boolean organizeComponentsByLayer = Boolean.FALSE;
@@ -323,20 +322,8 @@ public class Config {
         return opt.getResolvedValue();
     }
 
-    public boolean isPublic(final String key) throws IllegalArgumentException, IllegalAccessException {
-        final DockerInspectorOption opt = optionsByKey.get(key);
-        if (opt == null) {
-            return false;
-        }
-        return Config.GROUP_PUBLIC.equals(opt.getGroup());
-    }
-
     public SortedSet<DockerInspectorOption> getPublicConfigOptions() throws IllegalArgumentException, IllegalAccessException {
         return publicOptions;
-    }
-
-    public SortedSet<String> getAllKeys() throws IllegalArgumentException, IllegalAccessException {
-        return allKeys;
     }
 
     @PostConstruct
@@ -377,10 +364,6 @@ public class Config {
                 }
             }
         }
-    }
-
-    public String getLoggingLevel() {
-        return optionsByFieldName.get("loggingLevel").getResolvedValue();
     }
 
     public String getBlackDuckUrl() {
@@ -444,10 +427,6 @@ public class Config {
 
     public boolean isCleanupWorkingDir() {
         return optionsByFieldName.get("cleanupWorkingDir").getResolvedValue().equals("true");
-    }
-
-    public String getLinuxDistro() {
-        return optionsByFieldName.get("linuxDistro").getResolvedValue();
     }
 
     public Long getCommandTimeout() {
@@ -578,10 +557,6 @@ public class Config {
             return blackDuckLegacyApiTokenEnvVar;
         }
         return blackDuckApiTokenEnvVar;
-    }
-
-    public String getDockerInspectorJavaOptsValue() {
-        return dockerInspectorJavaOptsValue;
     }
 
     public boolean isUploadBdio() {
