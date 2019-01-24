@@ -46,15 +46,6 @@ public class RestConnectionCreator {
         logger.debug(String.format("Creating a rest connection (%d second timeout) for URL: %s", timeoutSeconds, baseUri.toString()));
         final IntLogger intLogger = new Slf4jIntLogger(logger);
         RestConnection connection = new NonRedirectingRestConnection(intLogger, timeoutSeconds, false, ProxyInfo.NO_PROXY_INFO);
-
-
-//        final NonRedirectingUnauthenticatedRestConnectionBuilder connectionBuilder = new NonRedirectingUnauthenticatedRestConnectionBuilder();
-//        connectionBuilder.setBaseUrl(baseUri.toString());
-//        connectionBuilder.setTimeout(timeoutSeconds);
-//        final IntLogger intLogger = new Slf4jIntLogger(logger);
-//        connectionBuilder.setLogger(intLogger);
-//        connectionBuilder.setAlwaysTrustServerCertificate(false);
-//        final RestConnection connection = connectionBuilder.build();
         return connection;
 
     }
@@ -64,15 +55,6 @@ public class RestConnectionCreator {
         logger.debug(String.format("Creating a rest connection (%d second timeout) for URL: %s", timeoutSeconds, baseUri.toString()));
         final IntLogger intLogger = new Slf4jIntLogger(logger);
         RestConnection connection = new RestConnection(intLogger, timeoutSeconds, false, ProxyInfo.NO_PROXY_INFO);
-
-
-//        final UnauthenticatedRestConnectionBuilder connectionBuilder = new UnauthenticatedRestConnectionBuilder();
-//        connectionBuilder.setBaseUrl(baseUri.toString());
-//        connectionBuilder.setTimeout(timeoutSeconds);
-//        final IntLogger intLogger = new Slf4jIntLogger(logger);
-//        connectionBuilder.setLogger(intLogger);
-//        connectionBuilder.setAlwaysTrustServerCertificate(false);
-//        final RestConnection connection = connectionBuilder.build();
         return connection;
     }
 }

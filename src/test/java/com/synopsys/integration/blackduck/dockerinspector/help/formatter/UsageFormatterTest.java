@@ -31,7 +31,7 @@ public class UsageFormatterTest {
     @Test
     public void test() throws IllegalArgumentException, IllegalAccessException, IOException {
         final SortedSet<DockerInspectorOption> configOptions = new TreeSet<>();
-        configOptions.add(new DockerInspectorOption("blackduck.url", "blackDuckUrl", "testBlackDuckUrl", "Black Duck URL", String.class, "", "public", false));
+        configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", "public", false));
         Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
 
         final List<String> usageStrings = usageFormatter.getStringList();

@@ -49,7 +49,7 @@ public class InspectorImages {
 
     @PostConstruct
     void init() throws IOException {
-        String repoWithSeparator = null;
+        String repoWithSeparator;
         final String repo = config.getInspectorRepository();
         if (StringUtils.isBlank(repo)) {
             repoWithSeparator = "";
@@ -73,7 +73,7 @@ public class InspectorImages {
         inspectorImageMap.put(OperatingSystemEnum.ALPINE, new InspectorImage(OperatingSystemEnum.ALPINE, String.format("%s%s-alpine", repoWithSeparator, inspectorImageFamily), inspectorImageVersion));
     }
 
-    OperatingSystemEnum getInspectorImageOs(final OperatingSystemEnum targetImageOs) throws IOException {
+    OperatingSystemEnum getInspectorImageOs(final OperatingSystemEnum targetImageOs) {
         final InspectorImage image = inspectorImageMap.get(targetImageOs);
         if (image == null) {
             return null;
@@ -81,7 +81,7 @@ public class InspectorImages {
         return image.getOs();
     }
 
-    public String getInspectorImageName(final OperatingSystemEnum targetImageOs) throws IOException {
+    public String getInspectorImageName(final OperatingSystemEnum targetImageOs) {
         final InspectorImage image = inspectorImageMap.get(targetImageOs);
         if (image == null) {
             return null;
@@ -89,7 +89,7 @@ public class InspectorImages {
         return image.getImageName();
     }
 
-    public String getInspectorImageTag(final OperatingSystemEnum targetImageOs) throws IOException {
+    public String getInspectorImageTag(final OperatingSystemEnum targetImageOs) {
         final InspectorImage image = inspectorImageMap.get(targetImageOs);
         if (image == null) {
             return null;

@@ -88,37 +88,14 @@ import com.synopsys.integration.exception.IntegrationException;
 public class DockerClientManager {
     private static final String CONTAINER_APPNAME_LABEL_KEY = "app";
     private static final String CONTAINER_OS_LABEL_KEY = "os";
-
-    private static final String IMAGE_TARFILE_PROPERTY = "docker.tar";
-    private static final String IMAGE_PROPERTY = "docker.image";
-    private static final String IMAGE_REPO_PROPERTY = "docker.image.repo";
-    private static final String IMAGE_TAG_PROPERTY = "docker.image.tag";
-    private static final String ON_HOST_PROPERTY = "on.host";
-
-    private static final String INSPECT_PROPERTY = "inspect"; // true
-    private static final String INSPECT_IN_CONTAINER_PROPERTY = "inspect.in.container"; // false
-    private static final String UPLOAD_BDIO_PROPERTY = "upload.bdio"; // false
-    private static final String DETECT_PKG_MGR_PROPERTY = "detect.pkg.mgr"; // true
-
-    private static final String OUTPUT_INCLUDE_DOCKER_TARFILE_PROPERTY = "output.include.dockertarfile";
-    private static final String OUTPUT_INCLUDE_CONTAINER_FILE_SYSTEM_TARFILE_PROPERTY = "output.include.containerfilesystem";
     private final Logger logger = LoggerFactory.getLogger(DockerClientManager.class);
-
-    @Autowired
-    private BlackDuckSecrets blackDuckSecrets;
-
-    @Autowired
-    private ProgramPaths programPaths;
-
-    @Autowired
-    private BlackDuckDockerProperties blackDuckDockerProperties;
 
     @Autowired
     private Config config;
 
     private DockerClient dockerClient;
 
-    private DockerClient getDockerClient() throws IntegrationException {
+    private DockerClient getDockerClient() {
         if (dockerClient == null) {
             final Builder builder = DefaultDockerClientConfig.createDefaultConfigBuilder();
             final DockerClientConfig config = builder.build();
@@ -213,51 +190,10 @@ public class DockerClientManager {
         }
     }
 
-    public String runByExec(final String runOnImageName, final String runOnTagName, final File dockerTarFile, final boolean copyJar, final String targetImage, final String targetImageRepo,
-            final String targetImageTag)
-            throws InterruptedException, IOException, IllegalArgumentException, IllegalAccessException, IntegrationException {
-        final String imageNameTag = String.format("%s:%s", runOnImageName, runOnTagName);
-        logger.info(String.format("Running container based on image %s", imageNameTag));
-        final String extractorContainerName = programPaths.deriveContainerName(runOnImageName);
-        logger.debug(String.format("Container name: %s", extractorContainerName));
-        final DockerClient dockerClient = getDockerClient();
-        final String tarFileDirInSubContainer = programPaths.getDockerInspectorTargetDirPathContainer();
-        final String tarFilePathInSubContainer = programPaths.getDockerInspectorTargetDirPathContainer() + dockerTarFile.getName();
-
-        final String containerId = prepareContainerForExec(dockerClient, imageNameTag, extractorContainerName, blackDuckSecrets.getPassword(), blackDuckSecrets.getApiToken());
-        setPropertiesInSubContainer(dockerClient, containerId, tarFilePathInSubContainer, tarFileDirInSubContainer, dockerTarFile, targetImage, targetImageRepo, targetImageTag);
-        copyFileToContainer(containerId, dockerTarFile.getAbsolutePath(), tarFileDirInSubContainer);
-        if (copyJar) {
-            copyFileToContainer(containerId, programPaths.getDockerInspectorJarPathHost(), programPaths.getDockerInspectorPgmDirPathContainer());
-        }
-
-        final List<String> cmd = new ArrayList<>();
-        cmd.add("java");
-        cmd.add("-Dfile.encoding=UTF-8");
-        if (!StringUtils.isBlank(config.getDockerInspectorJavaOptsValue())) {
-            final String[] dockerInspectorJavaOptsParts = config.getDockerInspectorJavaOptsValue().split("\\p{Space}");
-            for (int i = 0; i < dockerInspectorJavaOptsParts.length; i++) {
-                cmd.add(dockerInspectorJavaOptsParts[i]);
-            }
-        }
-        final File pgmDirPathInContainer = new File(programPaths.getDockerInspectorPgmDirPathContainer());
-        final File jarFileInContainer = new File(pgmDirPathInContainer, programPaths.getDockerInspectorJarFilenameHost());
-        cmd.add("-jar");
-        cmd.add(jarFileInContainer.getAbsolutePath());
-
-        cmd.add(String.format("--spring.config.location=%s/config/application.properties", programPaths.getDockerInspectorPgmDirPathContainer()));
-        cmd.add(String.format("--docker.tar=%s", tarFilePathInSubContainer));
-        execCommandInContainer(dockerClient, imageNameTag, containerId, cmd);
-        logger.debug(String.format("Container's output files are in %s because it was mounted under the container's output dir", programPaths.getDockerInspectorOutputPathHost()));
-        return containerId;
-    }
-
     public String startContainerAsService(final String runOnImageName, final String runOnTagName, final String containerName, final ImageInspectorOsEnum inspectorOs, final int containerPort, final int hostPort,
             final String appNameLabelValue,
             final String jarPath,
-            final String containerPathToOutputDir,
-            final String inspectorUrlAlpine, final String inspectorUrlCentos, final String inspectorUrlUbuntu)
-            throws IntegrationException {
+            final String inspectorUrlAlpine, final String inspectorUrlCentos, final String inspectorUrlUbuntu) {
         final String imageNameTag = String.format("%s:%s", runOnImageName, runOnTagName);
         logger.info(String.format("Starting container: %s", containerName));
         logger.debug(String.format("\timageNameTag: %s", imageNameTag));
@@ -313,7 +249,7 @@ public class DockerClientManager {
         DockerClient dockerClient;
         try {
             dockerClient = getDockerClient();
-        } catch (final IntegrationException e1) {
+        } catch (final Exception e1) {
             logger.debug(String.format("Error getting docker client: %s", e1.getMessage()));
             try {
                 callback.close();
@@ -427,61 +363,9 @@ public class DockerClientManager {
             } else {
                 return engineVersion;
             }
-        } catch (final IntegrationException e) {
+        } catch (final Exception e) {
             return "Unknown";
         }
-    }
-
-    public void copyFileToContainer(final String containerId, final String srcPath, final String destPath) throws IOException, IntegrationException {
-        logger.debug(String.format("Copying %s to container %s:%s", srcPath, containerId, destPath));
-        final DockerClient dockerClient = getDockerClient();
-        try (final CopyArchiveToContainerCmd copyCmd = dockerClient.copyArchiveToContainerCmd(containerId).withHostResource(srcPath).withRemotePath(destPath)) {
-            copyCmd.exec();
-        }
-    }
-
-    private void setPropertiesInSubContainer(final DockerClient dockerClient, final String containerId, final String tarFilePathInSubContainer, final String tarFileDirInSubContainer, final File dockerTarFile, final String targetImage,
-            final String targetImageRepo, final String targetImageTag) throws IOException, IllegalArgumentException, IllegalAccessException, IntegrationException {
-        logger.debug("Creating properties file inside container");
-        blackDuckDockerProperties.load();
-        blackDuckDockerProperties.set(IMAGE_TARFILE_PROPERTY, tarFilePathInSubContainer);
-        blackDuckDockerProperties.set(IMAGE_PROPERTY, targetImage);
-        blackDuckDockerProperties.set(IMAGE_REPO_PROPERTY, targetImageRepo);
-        blackDuckDockerProperties.set(IMAGE_TAG_PROPERTY, targetImageTag);
-        blackDuckDockerProperties.set(OUTPUT_INCLUDE_DOCKER_TARFILE_PROPERTY, "false");
-        blackDuckDockerProperties.set(OUTPUT_INCLUDE_CONTAINER_FILE_SYSTEM_TARFILE_PROPERTY, new Boolean(config.isOutputIncludeContainerfilesystem()).toString());
-        blackDuckDockerProperties.set(ON_HOST_PROPERTY, "false");
-        blackDuckDockerProperties.set(DETECT_PKG_MGR_PROPERTY, "true");
-        blackDuckDockerProperties.set(INSPECT_PROPERTY, "true");
-        blackDuckDockerProperties.set(INSPECT_IN_CONTAINER_PROPERTY, "false");
-        blackDuckDockerProperties.set(UPLOAD_BDIO_PROPERTY, "false");
-
-        final String pathToPropertiesFileForSubContainer = String.format("%s%s", programPaths.getDockerInspectorTargetDirPathHost(), ProgramPaths.APPLICATION_PROPERTIES_FILENAME);
-        blackDuckDockerProperties.save(pathToPropertiesFileForSubContainer);
-
-        copyFileToContainer(containerId, pathToPropertiesFileForSubContainer, programPaths.getDockerInspectorConfigDirPathContainer());
-
-        logger.trace(String.format("Docker image tar file: %s", dockerTarFile.getAbsolutePath()));
-        logger.trace(String.format("Docker image tar file path in sub-container: %s", tarFilePathInSubContainer));
-    }
-
-    private String prepareContainerForExec(final DockerClient dockerClient, final String imageNameTag, final String extractorContainerName, final String blackDuckPassword, final String blackDuckApiToken) {
-        stopRemoveContainerIfExists(dockerClient, extractorContainerName);
-        logger.debug(String.format("Creating container %s from image %s", extractorContainerName, imageNameTag));
-        final Bind bind = createBindMount(programPaths.getDockerInspectorOutputPathHost(), programPaths.getDockerInspectorOutputPathContainer());
-        HostConfig hostConfig = HostConfig.newHostConfig().withBinds(bind);
-        final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageNameTag)
-            .withStdinOpen(true)
-            .withTty(true)
-            .withName(extractorContainerName)
-            .withHostConfig(hostConfig)
-            .withCmd("/bin/bash");
-
-        final CreateContainerResponse containerResponse = createContainerCmd.exec();
-        final String containerId = containerResponse.getId();
-        dockerClient.startContainerCmd(containerId).exec();
-        logger.debug(String.format("Started container %s from image %s", containerId, imageNameTag));
-        return containerId;
     }
 
     private void stopRemoveContainerIfExists(final DockerClient dockerClient, final String extractorContainerName) {
@@ -542,22 +426,6 @@ public class DockerClientManager {
             }
         }
         return extractorContainer;
-    }
-
-    private void execCommandInContainer(final DockerClient dockerClient, final String imageId, final String containerId, final List<String> cmd) throws InterruptedException {
-        logger.info(String.format("Running %s in container %s from image %s", cmd.get(0), containerId, imageId));
-        final ExecCreateCmd execCreateCmd = dockerClient.execCreateCmd(containerId).withAttachStdout(true).withAttachStderr(true);
-        // final String[] cmdArr = (String[]) cmd.toArray();
-        final String[] cmdArr = new String[cmd.size()];
-        for (int i = 0; i < cmd.size(); i++) {
-            logger.debug(String.format("cmdArr[%d]=%s", i, cmd.get(i)));
-            cmdArr[i] = cmd.get(i);
-        }
-        execCreateCmd.withCmd(cmdArr);
-        final ExecCreateCmdResponse execCreateCmdResponse = execCreateCmd.exec();
-        logger.debug("Invoking container appropriate for this target image");
-        dockerClient.execStartCmd(execCreateCmdResponse.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-        logger.debug("The container execution has completed");
     }
 
     private void saveImageToFile(final String imageName, final String tagName, final File imageTarFile) throws IOException, IntegrationException {

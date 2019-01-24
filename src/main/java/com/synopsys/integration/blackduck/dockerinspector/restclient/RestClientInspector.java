@@ -23,10 +23,8 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.restclient;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.List;
@@ -166,14 +164,4 @@ public class RestClientInspector {
         }
         throw new IntegrationException("Invalid configuration: Need to provide URL to existing ImageInspector services, or request that containers be started as-needed");
     }
-
-    private SimpleBdioDocument getSimpleBdioDocument(final String bdioString) throws IOException {
-        final InputStream bdioInputStream = new ByteArrayInputStream(bdioString.getBytes());
-        SimpleBdioDocument simpleBdioDocument = null;
-        try (BdioReader bdioReader = new BdioReader(new Gson(), bdioInputStream)) {
-            simpleBdioDocument = bdioReader.readSimpleBdioDocument();
-        }
-        return simpleBdioDocument;
-    }
-
 }

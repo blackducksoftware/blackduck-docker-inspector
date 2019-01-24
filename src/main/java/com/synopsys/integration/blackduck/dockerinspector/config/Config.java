@@ -363,7 +363,7 @@ public class Config {
                         logger.trace(String.format("adding prop key %s [value: %s]", propName, value));
                         allKeys.add(propName);
                         final ValueDescription valueDescription = field.getAnnotation(ValueDescription.class);
-                        final DockerInspectorOption opt = new DockerInspectorOption(propName, field.getName(), value, valueDescription.description(), field.getType(), valueDescription.defaultValue(), valueDescription.group(),
+                        final DockerInspectorOption opt = new DockerInspectorOption(propName, value, valueDescription.description(), field.getType(), valueDescription.defaultValue(), valueDescription.group(),
                                 valueDescription.deprecated());
                         optionsByKey.put(propName, opt);
                         logger.trace(String.format("adding field name %s to optionsByFieldName", field.getName()));

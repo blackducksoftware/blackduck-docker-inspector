@@ -81,9 +81,6 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
     @Autowired
     private ProgramPaths programPaths;
 
-    @Autowired
-    private ContainerPaths containerPaths;
-
     @Override
     public boolean isApplicable() {
         final boolean answer = config.isImageInspectorServiceStart();
@@ -258,12 +255,8 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         }
         final String imageInspectorRepo;
         final String imageInspectorTag;
-        try {
-            imageInspectorRepo = inspectorImages.getInspectorImageName(inspectorOs.getRawOs());
-            imageInspectorTag = inspectorImages.getInspectorImageTag(inspectorOs.getRawOs());
-        } catch (final IOException e) {
-            throw new IntegrationException(String.format("Error getting image inspector container repo/tag for %s inspector: %s", inspectorOs.name()), e);
-        }
+        imageInspectorRepo = inspectorImages.getInspectorImageName(inspectorOs.getRawOs());
+        imageInspectorTag = inspectorImages.getInspectorImageTag(inspectorOs.getRawOs());
         logger.debug(String.format("Need to pull/run image %s:%s to start the %s service", imageInspectorRepo, imageInspectorTag, imageInspectorUri.toString()));
         final Optional<String> imageId = pullImageTolerantly(imageInspectorRepo, imageInspectorTag);
         final int containerPort = imageInspectorServices.getImageInspectorContainerPort(inspectorOs);
@@ -272,7 +265,6 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         final String containerId = dockerClientManager.startContainerAsService(imageInspectorRepo, imageInspectorTag, containerName, inspectorOs, containerPort, hostPort,
             Config.IMAGEINSPECTOR_WS_APPNAME,
             String.format("%s/%s/%s.jar", Config.CONTAINER_BLACKDUCK_DIR, Config.IMAGEINSPECTOR_WS_APPNAME, Config.IMAGEINSPECTOR_WS_APPNAME),
-            containerPaths.getContainerPathToOutputDir(),
             deriveInspectorBaseUri(config.getImageInspectorHostPortAlpine()).toString(), deriveInspectorBaseUri(config.getImageInspectorHostPortCentos()).toString(),
             deriveInspectorBaseUri(config.getImageInspectorHostPortUbuntu()).toString());
         final ContainerDetails containerDetails = new ContainerDetails(imageId.orElse(null), containerId);

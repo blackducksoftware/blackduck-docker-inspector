@@ -40,8 +40,4 @@ public class ClassPathPropertiesFile {
     public String getProperty(final String key) {
         return props.getProperty(key);
     }
-
-    public Set<Object> keySet() {
-        return props.keySet();
-    }
 }

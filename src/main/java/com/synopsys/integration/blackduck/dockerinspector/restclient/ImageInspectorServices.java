@@ -78,8 +78,4 @@ public class ImageInspectorServices {
         }
         throw new IntegrationException(String.format("Invalid value for property image.inspector.default: %s", inspectorOsName));
     }
-
-    public ImageInspectorOsEnum getDefaultImageInspectorOs() {
-        return ImageInspectorOsEnum.valueOf(config.getImageInspectorDefaultDistro().toUpperCase(Locale.US));
-    }
 }

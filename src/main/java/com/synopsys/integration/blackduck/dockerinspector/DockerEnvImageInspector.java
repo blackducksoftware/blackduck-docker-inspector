@@ -70,10 +70,6 @@ public class DockerEnvImageInspector {
     private DockerClientManager dockerClientManager;
 
     @Autowired
-    private Output output;
-
-
-    @Autowired
     private ProgramVersion programVersion;
 
     @Autowired

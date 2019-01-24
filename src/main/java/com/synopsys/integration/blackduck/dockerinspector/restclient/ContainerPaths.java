@@ -70,10 +70,6 @@ public class ContainerPaths {
         return containerFileSystemFileInContainer.getAbsolutePath();
     }
 
-    public String getContainerPathToOutputDir() {
-        return getContainerOutputDir().getAbsolutePath();
-    }
-
     private File getContainerOutputDir() {
         final File containerRunDir = getFileInDir(config.getSharedDirPathImageInspector(), programPaths.getDockerInspectorRunDirName());
         final File containerOutputDir = new File(containerRunDir, ProgramPaths.OUTPUT_DIR);

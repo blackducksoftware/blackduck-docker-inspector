@@ -53,19 +53,7 @@ public class Output {
     private Config config;
 
     @Autowired
-    private BlackDuckClient blackDuckClient;
-
-    @Autowired
     private ProgramPaths programPaths;
-
-    @Autowired
-    private ImageInspector imageInspector;
-
-    @Autowired
-    private BdioGenerator bdioGenerator;
-
-    @Autowired
-    private ResultFile resultFile;
 
     @Autowired
     private Gson gson;

@@ -49,15 +49,15 @@ public class ProgramVersion {
         logger.debug(String.format("programVersion: %s", programVersion));
     }
 
-    public String getProgramVersion() throws IOException {
+    public String getProgramVersion() {
         return programVersion;
     }
 
-    public String getInspectorImageFamily() throws IOException {
+    public String getInspectorImageFamily() {
         return inspectorImageFamily;
     }
 
-    public String getInspectorImageVersion() throws IOException {
+    public String getInspectorImageVersion() {
         return inspectorImageVersion;
     }
 }

@@ -44,22 +44,12 @@ public class ProgramPaths {
     private static final String JAR_FILE_SUFFIX = ".jar";
     private static final String FILE_URI_PREFIX = "file:";
     private static final String HOST_RESULT_JSON_FILENAME = "result.json";
-    private static final String CONTAINER_RESULT_JSON_FILENAME = "containerResult.json";
-
     private static final String RUNDIR_BASENAME = "run";
-
     public static final String OUTPUT_DIR = "output";
-
-    private static final String WORKING_DIR = "working";
-
     public static final String TARGET_DIR = "target";
-
-    private static final String TEMP_DIR = "temp";
-
     private static final String CONFIG_DIR = "config";
 
     private static final String CONTAINER_PROGRAM_DIR = String.format("%s/blackduck-docker-inspector/", Config.CONTAINER_BLACKDUCK_DIR);
-    private static final String CONTAINER_JAR_PATH = String.format("%s/blackduck-docker-inspector.jar", CONTAINER_PROGRAM_DIR);
 
     private String dockerInspectorPgmDirPathHost;
     private String dockerInspectorPgmDirPathContainer;
@@ -73,19 +63,14 @@ public class ProgramPaths {
 
     private String dockerInspectorConfigDirPathHost;
     private String dockerInspectorConfigDirPathContainer;
-    private String dockerInspectorTempDirPathContainer;
     private String dockerInspectorConfigFilePathHost;
-    private String dockerInspectorConfigFilePathContainer;
     private String dockerInspectorTargetDirPathHost;
     private String dockerInspectorTargetDirPathContainer;
     private String dockerInspectorJarPathActual;
     private String dockerInspectorJarPathHost;
-    private String dockerInspectorWorkingDirPathHost;
-    private String dockerInspectorWorkingDirPathContainer;
     private String dockerInspectorOutputPathHost;
     private String dockerInspectorOutputPathContainer;
-    private String dockerInspectorContainerResultPathOnHost;
-    private String dockerInspectorContainerResultPathInContainer;
+
     private String dockerInspectorHostResultPath;
     private String cleanedProcessId;
 
@@ -117,23 +102,16 @@ public class ProgramPaths {
         dockerInspectorPgmDirPathContainer = CONTAINER_PROGRAM_DIR;
         dockerInspectorConfigDirPathHost = new File(runDirHost, CONFIG_DIR).getAbsolutePath() + "/";
         dockerInspectorConfigDirPathContainer = dockerInspectorPgmDirPathContainer + CONFIG_DIR + "/";
-        dockerInspectorTempDirPathContainer = dockerInspectorPgmDirPathContainer + TEMP_DIR + "/";
         dockerInspectorConfigFilePathHost = dockerInspectorConfigDirPathHost + APPLICATION_PROPERTIES_FILENAME;
-        dockerInspectorConfigFilePathContainer = dockerInspectorConfigDirPathContainer + APPLICATION_PROPERTIES_FILENAME;
         dockerInspectorTargetDirPathHost = new File(runDirHost, TARGET_DIR).getAbsolutePath() + "/";
         dockerInspectorTargetDirPathContainer = dockerInspectorPgmDirPathContainer + TARGET_DIR + "/";
-        dockerInspectorWorkingDirPathHost = new File(runDirHost, WORKING_DIR).getAbsolutePath() + "/";
-        dockerInspectorWorkingDirPathContainer = dockerInspectorPgmDirPathContainer + WORKING_DIR + "/";
         dockerInspectorOutputPathHost = new File(runDirHost, OUTPUT_DIR).getAbsolutePath() + "/";
         dockerInspectorOutputPathContainer = CONTAINER_PROGRAM_DIR + OUTPUT_DIR + "/";
-        dockerInspectorContainerResultPathOnHost = dockerInspectorOutputPathHost + CONTAINER_RESULT_JSON_FILENAME;
-        dockerInspectorContainerResultPathInContainer = dockerInspectorOutputPathContainer + CONTAINER_RESULT_JSON_FILENAME;
         dockerInspectorHostResultPath = dockerInspectorOutputPathHost + HOST_RESULT_JSON_FILENAME;
-
     }
 
     private String getProcessIdOrGenerateUniqueId() {
-        String processId = null;
+        String processId;
         try {
             processId = ManagementFactory.getRuntimeMXBean().getName();
             return processId;
@@ -174,20 +152,12 @@ public class ProgramPaths {
         return dockerInspectorConfigDirPathHost;
     }
 
-    public String getDockerInspectorTempDirPathContainer() {
-        return dockerInspectorTempDirPathContainer;
-    }
-
     public String getDockerInspectorConfigDirPathContainer() {
         return dockerInspectorConfigDirPathContainer;
     }
 
     public String getDockerInspectorConfigFilePathHost() {
         return dockerInspectorConfigFilePathHost;
-    }
-
-    public String getDockerInspectorConfigFilePathContainer() {
-        return dockerInspectorConfigFilePathContainer;
     }
 
     public String getDockerInspectorTargetDirPathHost() {
@@ -231,38 +201,6 @@ public class ProgramPaths {
         return jarFile.getName();
     }
 
-    public String getDockerInspectorJarPathContainer() {
-        return CONTAINER_JAR_PATH;
-    }
-
-    public String getDockerInspectorJarPathActual() {
-        return dockerInspectorJarPathActual;
-    }
-
-    public String getDockerInspectorWorkingDirPath() {
-        if (config.isOnHost()) {
-            return getDockerInspectorWorkingDirPathHost();
-        } else {
-            return getDockerInspectorWorkingDirPathContainer();
-        }
-    }
-
-    public String getDockerInspectorWorkingDirPathHost() {
-        return dockerInspectorWorkingDirPathHost;
-    }
-
-    public String getDockerInspectorWorkingDirPathContainer() {
-        return dockerInspectorWorkingDirPathContainer;
-    }
-
-    public String getDockerInspectorOutputPath() {
-        if (config.isOnHost()) {
-            return getDockerInspectorOutputPathHost();
-        } else {
-            return getDockerInspectorOutputPathContainer();
-        }
-    }
-
     public String getDockerInspectorOutputPathHost() {
         if (StringUtils.isNotBlank(config.getImageInspectorUrl())) {
             final File outputDir = new File(this.getDockerInspectorRunDirPathHost(), OUTPUT_DIR);
@@ -271,32 +209,12 @@ public class ProgramPaths {
         return dockerInspectorOutputPathHost;
     }
 
-    public String getDockerInspectorContainerResultPath() {
-        if (config.isOnHost()) {
-            return getDockerInspectorContainerResultPathOnHost();
-        } else {
-            return getDockerInspectorContainerResultPathInContainer();
-        }
-    }
-
-    public String getDockerInspectorContainerResultPathOnHost() {
-        return dockerInspectorContainerResultPathOnHost;
-    }
-
-    public String getDockerInspectorContainerResultPathInContainer() {
-        return dockerInspectorContainerResultPathInContainer;
-    }
-
     public String getDockerInspectorHostResultPath() {
         return dockerInspectorHostResultPath;
     }
 
     public String getDockerInspectorOutputPathContainer() {
         return dockerInspectorOutputPathContainer;
-    }
-
-    public void setDockerInspectorPgmDirPathHost(final String dockerInspectorPgmDirPath) {
-        this.dockerInspectorPgmDirPathHost = dockerInspectorPgmDirPath;
     }
 
     public String deriveContainerName(final String imageName) {
