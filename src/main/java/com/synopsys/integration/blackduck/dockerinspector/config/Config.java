@@ -155,6 +155,11 @@ public class Config {
     @Value("${blackduck.codelocation.prefix:}")
     private String blackDuckCodelocationPrefix = "";
 
+    // If you want to set the code location name, specify it here
+    @ValueDescription(description = "Black Duck CodeLocation name", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${blackduck.codelocation.name:}")
+    private String blackDuckCodelocationName = "";
+
     // Path to the blackduck-docker-inspector .jar file
     // Only used by blackduck-docker-inspector.sh
     @ValueDescription(description = "Black Duck Docker Inspector .jar file path", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
@@ -465,6 +470,10 @@ public class Config {
         return optionsByFieldName.get("blackDuckCodelocationPrefix").getResolvedValue();
     }
 
+    public String getBlackDuckCodelocationName() {
+        return optionsByFieldName.get("blackDuckCodelocationName").getResolvedValue();
+    }
+
     public String getDockerImage() {
         return optionsByFieldName.get("dockerImage").getResolvedValue();
     }
@@ -579,10 +588,6 @@ public class Config {
         return optionsByFieldName.get("uploadBdio").getResolvedValue().equals("true");
     }
 
-    public void setUploadBdio(final boolean value) {
-        optionsByFieldName.get("uploadBdio").setResolvedValue(Boolean.toString(value));
-    }
-
     public boolean isCleanupTargetImage() {
         return optionsByFieldName.get("cleanupTargetImage").getResolvedValue().equals("true");
     }
@@ -619,18 +624,6 @@ public class Config {
         optionsByFieldName.get("dockerImageTag").setResolvedValue(newValue);
     }
 
-    public void setWorkingDirPath(final String newValue) {
-        optionsByFieldName.get("workingDirPath").setResolvedValue(newValue);
-    }
-
-    public void setBlackDuckCodelocationPrefix(final String newValue) {
-        optionsByFieldName.get("blackDuckCodelocationPrefix").setResolvedValue(newValue);
-    }
-
-    public void setLoggingLevel(final String newValue) {
-        optionsByFieldName.get("loggingLevel").setResolvedValue(newValue);
-    }
-
     private String unEscape(final String origString) {
         logger.trace(String.format("origString: %s", origString));
         final String unEscapedString = origString.replaceAll("%20", " ");
@@ -653,6 +646,7 @@ public class Config {
         this.dockerTar = null;
         this.blackDuckAlwaysTrustCert = null;
         this.blackDuckCodelocationPrefix = null;
+        this.blackDuckCodelocationName = null;
         this.blackDuckPassword = null;
         this.blackDuckPasswordEnvVar = null;
         this.blackDuckApiTokenEnvVar = null;

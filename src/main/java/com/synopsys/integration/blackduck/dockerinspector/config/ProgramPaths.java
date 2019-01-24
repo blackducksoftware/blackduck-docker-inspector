@@ -316,10 +316,6 @@ public class ProgramPaths {
         return adjustedName;
     }
 
-    void setCodeLocationPrefix(final String codeLocationPrefix) {
-        config.setBlackDuckCodelocationPrefix(codeLocationPrefix);
-    }
-
     private String atSignToUnderscore(final String imageName) {
         return imageName.replaceAll("@", "_");
     }

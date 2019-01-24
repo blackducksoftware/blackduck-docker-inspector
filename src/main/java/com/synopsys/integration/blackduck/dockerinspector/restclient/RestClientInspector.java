@@ -112,7 +112,9 @@ public class RestClientInspector {
         if (StringUtils.isNotBlank(config.getBlackDuckProjectVersion())) {
             bdioDocument.project.version = config.getBlackDuckProjectVersion();
         }
-        if (StringUtils.isNotBlank(config.getBlackDuckCodelocationPrefix())) {
+        if (StringUtils.isNotBlank(config.getBlackDuckCodelocationName())) {
+            bdioDocument.billOfMaterials.spdxName = config.getBlackDuckCodelocationName();
+        } else if (StringUtils.isNotBlank(config.getBlackDuckCodelocationPrefix())) {
             bdioDocument.billOfMaterials.spdxName = String.format("%s_%s", config.getBlackDuckCodelocationPrefix(), bdioDocument.billOfMaterials.spdxName);
         }
     }
