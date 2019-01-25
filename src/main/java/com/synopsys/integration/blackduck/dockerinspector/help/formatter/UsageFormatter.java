@@ -32,7 +32,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.synopsys.integration.blackduck.dockerinspector.DockerEnvImageInspector;
+import com.synopsys.integration.blackduck.dockerinspector.DockerInspector;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorOption;
 
@@ -44,7 +44,7 @@ public class UsageFormatter {
 
     public List<String> getStringList() throws IllegalArgumentException, IllegalAccessException, IOException {
         final List<String> usage = new ArrayList<>();
-        usage.add(String.format("Usage: %s <options>", DockerEnvImageInspector.PROGRAM_NAME));
+        usage.add(String.format("Usage: %s <options>", DockerInspector.PROGRAM_NAME));
         usage.add("options: any supported property can be set by adding to the command line");
         usage.add("an option of the form:");
         usage.add("--<property name>=<value>");

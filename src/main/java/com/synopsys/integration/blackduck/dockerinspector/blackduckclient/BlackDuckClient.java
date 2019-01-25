@@ -52,7 +52,7 @@ import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
 
-import com.synopsys.integration.blackduck.dockerinspector.DockerEnvImageInspector;
+import com.synopsys.integration.blackduck.dockerinspector.DockerInspector;
 import com.synopsys.integration.blackduck.dockerinspector.ProgramVersion;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.exception.IntegrationException;
@@ -174,7 +174,7 @@ public class BlackDuckClient {
         String.valueOf(config.isIncludeRemovedComponents()));
 
     BlackDuckPhoneHomeHelper.createPhoneHomeHelper(blackDuckServicesFactory).handlePhoneHome(
-        DockerEnvImageInspector.PROGRAM_ID, programVersion.getProgramVersion(), metaDataMap);
+        DockerInspector.PROGRAM_ID, programVersion.getProgramVersion(), metaDataMap);
     logger.trace("Attempt to phone home completed");
   }
 

@@ -24,13 +24,9 @@
 package com.synopsys.integration.blackduck.dockerinspector;
 
 import com.synopsys.integration.blackduck.dockerinspector.restclient.RestClientInspector;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
-import java.util.Properties;
 import javax.annotation.PostConstruct;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
@@ -56,8 +52,8 @@ import com.synopsys.integration.exception.IntegrationException;
 
 @SpringBootApplication
 @ComponentScan(basePackages = { "com.synopsys.integration.blackduck.imageinspector", "com.synopsys.integration.blackduck.dockerinspector" })
-public class DockerEnvImageInspector {
-    private static final Logger logger = LoggerFactory.getLogger(DockerEnvImageInspector.class);
+public class DockerInspector {
+    private static final Logger logger = LoggerFactory.getLogger(DockerInspector.class);
 
     public static final String PROGRAM_NAME = "blackduck-docker-inspector.sh";
     public static final String PROGRAM_ID = "blackduck-docker-inspector";
@@ -89,8 +85,11 @@ public class DockerEnvImageInspector {
     @Autowired
     private UsageFormatter usageFormatter;
 
+    @Autowired
+    private DockerInspectorSystemProperties dockerInspectorSystemProperties;
+
     public static void main(final String[] args) {
-        new SpringApplicationBuilder(DockerEnvImageInspector.class).logStartupInfo(false).run(args);
+        new SpringApplicationBuilder(DockerInspector.class).logStartupInfo(false).run(args);
         logger.warn("The program is not expected to get here.");
     }
 
@@ -152,7 +151,7 @@ public class DockerEnvImageInspector {
             showUsage();
             return false;
         }
-        augmentSystemProperties();
+        dockerInspectorSystemProperties.augmentSystemProperties(config.getSystemPropertiesPath());
         logger.debug(String.format("running from dir: %s", System.getProperty("user.dir")));
         logger.trace(String.format("dockerImageTag: %s", config.getDockerImageTag()));
         logger.trace(String.format("Black Duck project: %s, version: %s;", config.getBlackDuckProjectName(), config.getBlackDuckProjectVersion()));
@@ -180,28 +179,5 @@ public class DockerEnvImageInspector {
         resolver.getNewImageRepo().ifPresent(repoName -> config.setDockerImageRepo(repoName));
         resolver.getNewImageTag().ifPresent(tagName -> config.setDockerImageTag(tagName));
         logger.debug(String.format("initImageName(): final: dockerImage: %s; dockerImageRepo: %s; dockerImageTag: %s", config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag()));
-    }
-
-    private void augmentSystemProperties() throws IntegrationException {
-        final String additionalSystemPropertiesPath = config.getSystemPropertiesPath();
-        if (StringUtils.isNotBlank(additionalSystemPropertiesPath)) {
-            logger.debug(String.format("Reading user-provided additional System properties: %s", additionalSystemPropertiesPath));
-            File additionalSystemPropertiesFile = new File(additionalSystemPropertiesPath);
-            Properties additionalSystemProperties = new Properties();
-            InputStream additionalSystemPropertiesInputStream = null;
-            try {
-                additionalSystemPropertiesInputStream = new FileInputStream(additionalSystemPropertiesFile);
-                additionalSystemProperties.load(additionalSystemPropertiesInputStream);
-                for (Object key : additionalSystemProperties.keySet()) {
-                    String keyString = (String) key;
-                    String value = additionalSystemProperties.getProperty(keyString);
-                    logger.trace(String.format("additional system property: %s", keyString));
-                    System.setProperty(keyString, value);
-                }
-            } catch (IOException e) {
-                final String msg = String.format("Error loading additional system properties from %s: %s", additionalSystemPropertiesPath, e.getMessage());
-                throw new IntegrationException(msg);
-            }
-        }
     }
 }
