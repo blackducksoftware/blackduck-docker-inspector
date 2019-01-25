@@ -40,7 +40,7 @@ import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 
 apply from: 'airgap.gradle'
 
-springBoot { mainClass = 'com.synopsys.integration.blackduck.dockerinspector.DockerEnvImageInspector' }
+springBoot { mainClass = 'com.synopsys.integration.blackduck.dockerinspector.DockerInspector' }
 
 // TODO if we s/compile/implementation/, can this go?:
 configurations {

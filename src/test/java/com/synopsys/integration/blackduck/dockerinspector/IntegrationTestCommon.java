@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import java.util.Random;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -33,7 +34,7 @@ public class IntegrationTestCommon {
         DETECT
     }
 
-    public static void testImage(final ProgramVersion programVersion, final String inspectTargetImageRepoTag, final String repo, final String tag, final String bdioFilename, final boolean requireBdioMatch,
+    public static void testImage(final Random random, final ProgramVersion programVersion, final String inspectTargetImageRepoTag, final String repo, final String tag, final String bdioFilename, final boolean requireBdioMatch,
             final Mode mode, final String detectJarPath,
             final String outputBomMustContainComponentPrefix, final int minNumberOfComponentsExpected, final List<String> additionalArgs, final Map<String, String> givenEnv)
             throws IOException, InterruptedException, IntegrationException {
@@ -48,7 +49,7 @@ public class IntegrationTestCommon {
         }
         ensureFileDoesNotExist(actualBdio);
 
-        final List<String> cmd = createCmd(programVersion, mode, detectJarPath, inspectTargetArg, repo, tag, additionalArgs);
+        final List<String> cmd = createCmd(random, programVersion, mode, detectJarPath, inspectTargetArg, repo, tag, additionalArgs);
 
         System.out.println(String.format("Running end to end test on %s with command %s", inspectTargetImageRepoTag, cmd.toString()));
         TestUtils.execCmd(String.join(" ", cmd), 30000L, true, givenEnv);
@@ -81,12 +82,12 @@ public class IntegrationTestCommon {
         }
     }
 
-    private static List<String> createCmd(final ProgramVersion programVersion, final Mode mode, final String detectJarPath, final String inspectTargetArg, final String repo, final String tag, final List<String> additionalArgs)
+    private static List<String> createCmd(final Random random, final ProgramVersion programVersion, final Mode mode, final String detectJarPath, final String inspectTargetArg, final String repo, final String tag, final List<String> additionalArgs)
             throws IOException {
         if (mode == Mode.DETECT) {
             return createDetectCmd(programVersion, mode, detectJarPath, inspectTargetArg, repo, tag, additionalArgs);
         } else {
-            return createDockerInspectorCmd(programVersion, mode, inspectTargetArg, repo, tag, additionalArgs);
+            return createDockerInspectorCmd(random, programVersion, mode, inspectTargetArg, repo, tag, additionalArgs);
         }
     }
 
@@ -123,11 +124,17 @@ public class IntegrationTestCommon {
         return cmd;
     }
 
-    private static List<String> createDockerInspectorCmd(final ProgramVersion programVersion, final Mode mode, final String inspectTargetArg, final String repo, final String tag, final List<String> additionalArgs) throws IOException {
+    private static List<String> createDockerInspectorCmd(final Random random, final ProgramVersion programVersion, final Mode mode, final String inspectTargetArg, final String repo, final String tag, final List<String> additionalArgs) throws IOException {
         final List<String> cmd = new ArrayList<>();
-        cmd.add("build/blackduck-docker-inspector.sh");
+        if (random.nextBoolean()) {
+            cmd.add("build/blackduck-docker-inspector.sh");
+            cmd.add(String.format("--jar.path=build/libs/blackduck-docker-inspector-%s.jar", programVersion.getProgramVersion()));
+        } else {
+            cmd.add("java");
+            cmd.add("-jar");
+            cmd.add(String.format("build/libs/blackduck-docker-inspector-%s.jar", programVersion.getProgramVersion()));
+        }
         cmd.add("--upload.bdio=false");
-        cmd.add(String.format("--jar.path=build/libs/blackduck-docker-inspector-%s.jar", programVersion.getProgramVersion()));
         cmd.add(String.format("--output.path=%s/output", TestUtils.TEST_DIR_REL_PATH));
         cmd.add("--output.include.containerfilesystem=true");
         if (repo != null) {
@@ -161,7 +168,7 @@ public class IntegrationTestCommon {
         return cmd;
     }
 
-    public static void testTar(final ProgramVersion programVersion, final String inspectTargetTarfile, final String bdioFilename, final String repo, final String tag,
+    public static void testTar(final Random random, final ProgramVersion programVersion, final String inspectTargetTarfile, final String bdioFilename, final String repo, final String tag,
             final boolean requireBdioMatch,
             final Mode mode, final String detectJarPath,
             final List<String> additionalArgs, final boolean needWorkingDir, final File outputContainerFileSystemFile, final Map<String, String> givenEnv)
@@ -178,7 +185,7 @@ public class IntegrationTestCommon {
         }
         ensureFileDoesNotExist(actualBdio);
 
-        final List<String> cmd = createCmd(programVersion, mode, detectJarPath, inspectTargetArg, repo, tag, additionalArgs);
+        final List<String> cmd = createCmd(random, programVersion, mode, detectJarPath, inspectTargetArg, repo, tag, additionalArgs);
         System.out.println(String.format("Running end to end test on %s with command %s", inspectTargetTarfile, cmd.toString()));
         TestUtils.execCmd(String.join(" ", cmd), 240000L, true, givenEnv);
         System.out.println("blackduck-docker-inspector done; verifying results...");
