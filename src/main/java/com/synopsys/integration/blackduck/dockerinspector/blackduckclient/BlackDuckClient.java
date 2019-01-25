@@ -138,10 +138,6 @@ public class BlackDuckClient {
   }
 
   public void phoneHome(final String dockerEngineVersion) {
-    if (!config.isPhoneHome() || config.isOfflineMode()) {
-      logger.debug("PhoneHome disabled");
-      return;
-    }
     logger.debug("Attempting to phone home");
     try {
       phoneHomeBlackDuckConnection(dockerEngineVersion);

@@ -45,7 +45,6 @@ import org.springframework.context.annotation.ComponentScan;
 
 import com.google.gson.Gson;
 import com.synopsys.integration.blackduck.dockerinspector.blackduckclient.BlackDuckClient;
-import com.synopsys.integration.blackduck.dockerinspector.common.Output;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
@@ -108,7 +107,7 @@ public class DockerEnvImageInspector {
             logger.error(msg);
             final String trace = ExceptionUtils.getStackTrace(e);
             logger.debug(String.format("Stack trace: %s", trace));
-            resultFile.write(new Gson(), programPaths.getDockerInspectorHostResultPath(), false, msg, OperatingSystemEnum.UBUNTU, "unknown", "unknown",
+            resultFile.write(new Gson(), programPaths.getDockerInspectorResultPath(), false, msg, OperatingSystemEnum.UBUNTU, "unknown", "unknown",
                     "unknown", "unknown");
         }
         logger.info(String.format("Returning %d", returnCode));
@@ -157,7 +156,8 @@ public class DockerEnvImageInspector {
         logger.debug(String.format("running from dir: %s", System.getProperty("user.dir")));
         logger.trace(String.format("dockerImageTag: %s", config.getDockerImageTag()));
         logger.trace(String.format("Black Duck project: %s, version: %s;", config.getBlackDuckProjectName(), config.getBlackDuckProjectVersion()));
-        if (config.isOnHost()) {
+        if (config.isPhoneHome() && !config.isOfflineMode()) {
+            logger.debug("PhoneHome enabled");
             try {
                 String dockerEngineVersion = "None";
                 if (StringUtils.isBlank(config.getImageInspectorUrl())) {
@@ -170,9 +170,7 @@ public class DockerEnvImageInspector {
         }
         initImageName();
         logger.info(String.format("Inspecting image:tag %s:%s", config.getDockerImageRepo(), config.getDockerImageTag()));
-        if (config.isOnHost()) {
-            blackDuckClient.testBlackDuckConnection();
-        }
+        blackDuckClient.testBlackDuckConnection();
         return true;
     }
 

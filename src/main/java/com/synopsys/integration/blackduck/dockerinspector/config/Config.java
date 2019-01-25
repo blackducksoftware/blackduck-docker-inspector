@@ -187,10 +187,6 @@ public class Config {
     @Value("${docker.image.tag:}")
     private String dockerImageTag = "";
 
-    @ValueDescription(description = "Running on host?", defaultValue = "true", group = Config.GROUP_PRIVATE, deprecated = false)
-    @Value("${on.host:true}")
-    private Boolean onHost = Boolean.TRUE;
-
     @ValueDescription(description = "Caller Name", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${caller.name:}")
     private String callerName = "";
@@ -473,10 +469,6 @@ public class Config {
         return optionsByFieldName.get("dockerImageTag").getResolvedValue();
     }
 
-    public boolean isOnHost() {
-        return optionsByFieldName.get("onHost").getResolvedValue().equals("true");
-    }
-
     public String getCallerName() {
         return optionsByFieldName.get("callerName").getResolvedValue();
     }
@@ -640,7 +632,6 @@ public class Config {
         this.jarPath = null;
         this.linuxDistro = null;
         this.loggingLevel = null;
-        this.onHost = null;
         this.outputIncludeContainerfilesystem = null;
         this.outputPath = null;
         this.phoneHome = null;

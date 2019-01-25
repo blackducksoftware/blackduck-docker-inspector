@@ -35,12 +35,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
-import com.synopsys.integration.blackduck.dockerinspector.blackduckclient.BlackDuckClient;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
-import com.synopsys.integration.blackduck.imageinspector.lib.ImageInspector;
-import com.synopsys.integration.blackduck.imageinspector.linux.extractor.BdioGenerator;
-import com.synopsys.integration.blackduck.imageinspector.result.ResultFile;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.bdio.BdioWriter;
 import com.synopsys.integration.bdio.model.SimpleBdioDocument;
@@ -59,19 +55,15 @@ public class Output {
     private Gson gson;
 
     public void ensureWriteability() {
-        if (config.isOnHost()) {
-            final File outputDir = new File(programPaths.getDockerInspectorOutputPathHost());
-            final boolean dirCreated = outputDir.mkdirs();
-            final boolean dirMadeWriteable = outputDir.setWritable(true, false);
-            final boolean dirMadeExecutable = outputDir.setExecutable(true, false);
-            logger.debug(String.format("Output dir: %s; created: %b; successfully made writeable: %b; make executable: %b", outputDir.getAbsolutePath(), dirCreated, dirMadeWriteable, dirMadeExecutable));
-        }
+        final File outputDir = new File(programPaths.getDockerInspectorOutputPath());
+        final boolean dirCreated = outputDir.mkdirs();
+        final boolean dirMadeWriteable = outputDir.setWritable(true, false);
+        final boolean dirMadeExecutable = outputDir.setExecutable(true, false);
+        logger.debug(String.format("Output dir: %s; created: %b; successfully made writeable: %b; make executable: %b", outputDir.getAbsolutePath(), dirCreated, dirMadeWriteable, dirMadeExecutable));
     }
 
     public void provideOutput() throws IOException {
-        if (config.isOnHost()) {
-            copyOutputToUserOutputDir();
-        }
+        copyOutputToUserOutputDir();
     }
 
     public File provideBdioFileOutput(final SimpleBdioDocument bdioDocument) throws IOException, IntegrationException {
@@ -81,7 +73,7 @@ public class Output {
             outputDir = new File(config.getOutputPath());
             provideOutput();
         } else {
-            outputDir = new File(programPaths.getDockerInspectorOutputPathHost());
+            outputDir = new File(programPaths.getDockerInspectorOutputPath());
         }
         final String bdioFilename = String.format("%s_bdio.jsonld", bdioDocument.billOfMaterials.spdxName);
         final File outputBdioFile = new File(outputDir, bdioFilename);
@@ -99,14 +91,14 @@ public class Output {
             logger.debug("User has not specified an output path");
             return;
         }
-        final File srcDir = new File(programPaths.getDockerInspectorOutputPathHost());
+        final File srcDir = new File(programPaths.getDockerInspectorOutputPath());
         if (!srcDir.exists()) {
             logger.info(String.format("Output source dir %s does not exist", srcDir.getAbsolutePath()));
             return;
         }
-        logger.info(String.format("Copying output from %s to %s", programPaths.getDockerInspectorOutputPathHost(), userOutputDirPath));
+        logger.info(String.format("Copying output from %s to %s", programPaths.getDockerInspectorOutputPath(), userOutputDirPath));
         final File userOutputDir = new File(userOutputDirPath);
-        copyDirContentsToDir(programPaths.getDockerInspectorOutputPathHost(), userOutputDir.getAbsolutePath(), true);
+        copyDirContentsToDir(programPaths.getDockerInspectorOutputPath(), userOutputDir.getAbsolutePath(), true);
     }
 
     private void copyDirContentsToDir(final String fromDirPath, final String toDirPath, final boolean createIfNecessary) throws IOException {

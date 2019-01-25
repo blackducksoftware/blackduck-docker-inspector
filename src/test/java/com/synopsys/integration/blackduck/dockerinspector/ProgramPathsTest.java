@@ -41,11 +41,11 @@ public class ProgramPathsTest {
 
         programPaths.init();
 
-        assertEquals(String.format("%s", installDirPath), programPaths.getDockerInspectorPgmDirPathHost());
-        final String runDirPath = programPaths.getDockerInspectorRunDirPathHost();
-        assertEquals(String.format("%sconfig/", runDirPath), programPaths.getDockerInspectorConfigDirPathHost());
-        assertEquals(String.format("%sconfig/application.properties", runDirPath), programPaths.getDockerInspectorConfigFilePathHost());
-        assertEquals(String.format("%starget/", runDirPath), programPaths.getDockerInspectorTargetDirPathHost());
+        assertEquals(String.format("%s", installDirPath), programPaths.getDockerInspectorPgmDirPath());
+        final String runDirPath = programPaths.getDockerInspectorRunDirPath();
+        assertEquals(String.format("%sconfig/", runDirPath), programPaths.getDockerInspectorConfigDirPath());
+        assertEquals(String.format("%sconfig/application.properties", runDirPath), programPaths.getDockerInspectorConfigFilePath());
+        assertEquals(String.format("%starget/", runDirPath), programPaths.getDockerInspectorTargetDirPath());
 
     }
 }

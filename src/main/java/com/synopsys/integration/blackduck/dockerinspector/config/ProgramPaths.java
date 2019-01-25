@@ -46,34 +46,28 @@ public class ProgramPaths {
     public static final String OUTPUT_DIR = "output";
     public static final String TARGET_DIR = "target";
     private static final String CONFIG_DIR = "config";
-
-    private static final String CONTAINER_PROGRAM_DIR = String.format("%s/blackduck-docker-inspector/", Config.CONTAINER_BLACKDUCK_DIR);
-
-    private String dockerInspectorPgmDirPathHost;
-    private String dockerInspectorPgmDirPathContainer;
-
+    private String dockerInspectorPgmDirPath;
     private String dockerInspectorRunDirName;
-    private String dockerInspectorRunDirPathHost;
+    private String dockerInspectorRunDirPath;
 
     public static final String APPLICATION_PROPERTIES_FILENAME = "application.properties";
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private String dockerInspectorConfigDirPathHost;
-    private String dockerInspectorConfigFilePathHost;
-    private String dockerInspectorTargetDirPathHost;
-    private String dockerInspectorTargetDirPathContainer;
-    private String dockerInspectorOutputPathHost;
-    private String dockerInspectorHostResultPath;
+    private String dockerInspectorConfigDirPath;
+    private String dockerInspectorConfigFilePath;
+    private String dockerInspectorTargetDirPath;
+    private String dockerInspectorOutputPath;
+    private String dockerInspectorResultPath;
     private String cleanedProcessId;
 
-    private String getProgramDirPathHost() {
+    private String getProgramDirPath() {
         if (config.isImageInspectorServiceStart()) {
             final File sharedDir = new File(config.getWorkingDirPath());
-            logger.debug(String.format("getProgramDirPathHost(): returning %s", sharedDir.getAbsolutePath()));
+            logger.debug(String.format("getProgramDirPath(): returning %s", sharedDir.getAbsolutePath()));
             return sharedDir.getAbsolutePath();
         }
-        logger.debug(String.format("getProgramDirPathHost(): returning %s", config.getWorkingDirPath()));
+        logger.debug(String.format("getProgramDirPath(): returning %s", config.getWorkingDirPath()));
         return config.getWorkingDirPath();
     }
 
@@ -81,22 +75,19 @@ public class ProgramPaths {
     public void init() {
         cleanedProcessId = atSignToUnderscore(getProcessIdOrGenerateUniqueId());
         logger.info(String.format("Process name: %s", cleanedProcessId));
-        if (StringUtils.isBlank(dockerInspectorPgmDirPathHost)) {
-            dockerInspectorPgmDirPathHost = getProgramDirPathHost();
+        if (StringUtils.isBlank(dockerInspectorPgmDirPath)) {
+            dockerInspectorPgmDirPath = getProgramDirPath();
         }
-        logger.debug(String.format("dockerInspectorPgmDirPathHost: %s", dockerInspectorPgmDirPathHost));
+        logger.debug(String.format("dockerInspectorPgmDirPath: %s", dockerInspectorPgmDirPath));
         dockerInspectorRunDirName = adjustWithProcessId(RUNDIR_BASENAME);
-        final File runDirHost = new File(dockerInspectorPgmDirPathHost, dockerInspectorRunDirName);
-        dockerInspectorRunDirPathHost = runDirHost.getAbsolutePath() + "/";
-        logger.debug(String.format("dockerInspectorRunDirPathHost: %s", dockerInspectorRunDirPathHost));
-
-        dockerInspectorPgmDirPathContainer = CONTAINER_PROGRAM_DIR;
-        dockerInspectorConfigDirPathHost = new File(runDirHost, CONFIG_DIR).getAbsolutePath() + "/";
-        dockerInspectorConfigFilePathHost = dockerInspectorConfigDirPathHost + APPLICATION_PROPERTIES_FILENAME;
-        dockerInspectorTargetDirPathHost = new File(runDirHost, TARGET_DIR).getAbsolutePath() + "/";
-        dockerInspectorTargetDirPathContainer = dockerInspectorPgmDirPathContainer + TARGET_DIR + "/";
-        dockerInspectorOutputPathHost = new File(runDirHost, OUTPUT_DIR).getAbsolutePath() + "/";
-        dockerInspectorHostResultPath = dockerInspectorOutputPathHost + HOST_RESULT_JSON_FILENAME;
+        final File runDir = new File(dockerInspectorPgmDirPath, dockerInspectorRunDirName);
+        dockerInspectorRunDirPath = runDir.getAbsolutePath() + "/";
+        logger.debug(String.format("dockerInspectorRunDirPath: %s", dockerInspectorRunDirPath));
+        dockerInspectorConfigDirPath = new File(runDir, CONFIG_DIR).getAbsolutePath() + "/";
+        dockerInspectorConfigFilePath = dockerInspectorConfigDirPath + APPLICATION_PROPERTIES_FILENAME;
+        dockerInspectorTargetDirPath = new File(runDir, TARGET_DIR).getAbsolutePath() + "/";
+        dockerInspectorOutputPath = new File(runDir, OUTPUT_DIR).getAbsolutePath() + "/";
+        dockerInspectorResultPath = dockerInspectorOutputPath + HOST_RESULT_JSON_FILENAME;
     }
 
     private String getProcessIdOrGenerateUniqueId() {
@@ -119,52 +110,40 @@ public class ProgramPaths {
         return config.getOutputPath();
     }
 
-    public String getDockerInspectorConfigDirPathHost() {
-        return dockerInspectorConfigDirPathHost;
+    public String getDockerInspectorConfigDirPath() {
+        return dockerInspectorConfigDirPath;
     }
 
-    public String getDockerInspectorConfigFilePathHost() {
-        return dockerInspectorConfigFilePathHost;
-    }
-
-    public String getDockerInspectorTargetDirPathHost() {
-        return dockerInspectorTargetDirPathHost;
-    }
-
-    public String getDockerInspectorTargetDirPathContainer() {
-        return dockerInspectorTargetDirPathContainer;
+    public String getDockerInspectorConfigFilePath() {
+        return dockerInspectorConfigFilePath;
     }
 
     public String getDockerInspectorTargetDirPath() {
-        if (config.isOnHost()) {
-            return getDockerInspectorTargetDirPathHost();
-        } else {
-            return getDockerInspectorTargetDirPathContainer();
-        }
+        return dockerInspectorTargetDirPath;
     }
 
-    public String getDockerInspectorPgmDirPathHost() {
-        return dockerInspectorPgmDirPathHost;
+    public String getDockerInspectorPgmDirPath() {
+        return dockerInspectorPgmDirPath;
     }
 
     public String getDockerInspectorRunDirName() {
         return dockerInspectorRunDirName;
     }
 
-    public String getDockerInspectorRunDirPathHost() {
-        return dockerInspectorRunDirPathHost;
+    public String getDockerInspectorRunDirPath() {
+        return dockerInspectorRunDirPath;
     }
 
-    public String getDockerInspectorOutputPathHost() {
+    public String getDockerInspectorOutputPath() {
         if (StringUtils.isNotBlank(config.getImageInspectorUrl())) {
-            final File outputDir = new File(this.getDockerInspectorRunDirPathHost(), OUTPUT_DIR);
+            final File outputDir = new File(this.getDockerInspectorRunDirPath(), OUTPUT_DIR);
             return outputDir.getAbsolutePath();
         }
-        return dockerInspectorOutputPathHost;
+        return dockerInspectorOutputPath;
     }
 
-    public String getDockerInspectorHostResultPath() {
-        return dockerInspectorHostResultPath;
+    public String getDockerInspectorResultPath() {
+        return dockerInspectorResultPath;
     }
 
     public String deriveContainerName(final String imageName) {

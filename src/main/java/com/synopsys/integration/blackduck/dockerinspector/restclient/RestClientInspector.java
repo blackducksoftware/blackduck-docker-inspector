@@ -136,9 +136,9 @@ public class RestClientInspector {
         if (!config.isCleanupWorkingDir()) {
             return;
         }
-        logger.debug(String.format("Removing %s", programPaths.getDockerInspectorRunDirPathHost()));
+        logger.debug(String.format("Removing %s", programPaths.getDockerInspectorRunDirPath()));
         try {
-            removeFileOrDir(programPaths.getDockerInspectorRunDirPathHost());
+            removeFileOrDir(programPaths.getDockerInspectorRunDirPath());
         } catch (final IOException e) {
             logger.error(String.format("Error cleaning up working directories: %s", e.getMessage()));
         }
