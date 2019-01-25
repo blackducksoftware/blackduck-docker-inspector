@@ -23,6 +23,7 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.restclient;
 
+import com.synopsys.integration.rest.client.IntHttpClient;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -49,7 +50,6 @@ import com.synopsys.integration.blackduck.exception.BlackDuckIntegrationExceptio
 import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.rest.RestConstants;
-import com.synopsys.integration.rest.connection.RestConnection;
 import com.synopsys.integration.rest.exception.IntegrationRestException;
 
 @Component
@@ -142,7 +142,7 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         throws IntegrationException, BlackDuckIntegrationException {
         SimpleResponse response = null;
         ContainerDetails serviceContainerDetails = null;
-        RestConnection restConnection = null;
+        IntHttpClient restConnection = null;
         try {
             restConnection = createRestConnection(imageInspectorUri, deriveTimeoutSeconds());
             serviceContainerDetails = ensureServiceReady(restConnection, imageInspectorUri, inspectorOs);
@@ -232,9 +232,9 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         return imageInspectorUri;
     }
 
-    private RestConnection createRestConnection(final URI imageInspectorUri, final int serviceRequestTimeoutSeconds) throws IntegrationException {
+    private IntHttpClient createRestConnection(final URI imageInspectorUri, final int serviceRequestTimeoutSeconds) throws IntegrationException {
         logger.debug(String.format("Creating a rest connection (%d second timeout) for URL: %s", serviceRequestTimeoutSeconds, imageInspectorUri.toString()));
-        RestConnection restConnection;
+        IntHttpClient restConnection;
         try {
             restConnection = restConnectionCreator.createNonRedirectingConnection(imageInspectorUri, serviceRequestTimeoutSeconds);
         } catch (final MalformedURLException e) {
@@ -243,7 +243,7 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         return restConnection;
     }
 
-    private ContainerDetails ensureServiceReady(final RestConnection restConnection, final URI imageInspectorUri, final ImageInspectorOsEnum inspectorOs) throws IntegrationException {
+    private ContainerDetails ensureServiceReady(final IntHttpClient restConnection, final URI imageInspectorUri, final ImageInspectorOsEnum inspectorOs) throws IntegrationException {
         boolean serviceIsUp = checkServiceHealth(restConnection, imageInspectorUri);
         if (serviceIsUp) {
             final Container container = dockerClientManager.getRunningContainerByAppName(Config.IMAGEINSPECTOR_WS_APPNAME, inspectorOs);
@@ -287,7 +287,8 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         return imageId;
     }
 
-    private boolean startService(final RestConnection restConnection, final URI imageInspectorUri, final String imageInspectorRepo, final String imageInspectorTag) throws IntegrationException {
+    // TODO rename rest connection to http client
+    private boolean startService(final IntHttpClient restConnection, final URI imageInspectorUri, final String imageInspectorRepo, final String imageInspectorTag) throws IntegrationException {
         boolean serviceIsUp = false;
         for (int tryIndex = 0; tryIndex < MAX_CONTAINER_START_TRY_COUNT && !serviceIsUp; tryIndex++) {
             try {
@@ -303,7 +304,7 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         return serviceIsUp;
     }
 
-    private boolean checkServiceHealth(final RestConnection restConnection, final URI imageInspectorUri) throws IntegrationException {
+    private boolean checkServiceHealth(final IntHttpClient restConnection, final URI imageInspectorUri) throws IntegrationException {
         logger.debug(String.format("Sending request for health check to: %s", imageInspectorUri));
         String healthCheckResponse;
         try {

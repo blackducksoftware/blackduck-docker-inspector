@@ -24,6 +24,7 @@
 package com.synopsys.integration.blackduck.dockerinspector.restclient;
 
 import com.synopsys.integration.blackduck.dockerinspector.restclient.connection.NonRedirectingRestConnection;
+import com.synopsys.integration.rest.client.IntHttpClient;
 import com.synopsys.integration.rest.proxy.ProxyInfo;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -34,7 +35,6 @@ import org.springframework.stereotype.Component;
 
 import com.synopsys.integration.log.IntLogger;
 import com.synopsys.integration.log.Slf4jIntLogger;
-import com.synopsys.integration.rest.connection.RestConnection;
 
 
 @Component
@@ -42,19 +42,19 @@ public class RestConnectionCreator {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // Be sure to close the rest connection
-    public RestConnection createNonRedirectingConnection(final URI baseUri, final int timeoutSeconds) throws MalformedURLException {
+    public IntHttpClient createNonRedirectingConnection(final URI baseUri, final int timeoutSeconds) throws MalformedURLException {
         logger.debug(String.format("Creating a rest connection (%d second timeout) for URL: %s", timeoutSeconds, baseUri.toString()));
         final IntLogger intLogger = new Slf4jIntLogger(logger);
-        RestConnection connection = new NonRedirectingRestConnection(intLogger, timeoutSeconds, false, ProxyInfo.NO_PROXY_INFO);
+        IntHttpClient connection = new NonRedirectingRestConnection(intLogger, timeoutSeconds, false, ProxyInfo.NO_PROXY_INFO);
         return connection;
 
     }
 
     // Be sure to close the rest connection
-    public RestConnection createRedirectingConnection(final URI baseUri, final int timeoutSeconds) throws MalformedURLException {
+    public IntHttpClient createRedirectingConnection(final URI baseUri, final int timeoutSeconds) throws MalformedURLException {
         logger.debug(String.format("Creating a rest connection (%d second timeout) for URL: %s", timeoutSeconds, baseUri.toString()));
         final IntLogger intLogger = new Slf4jIntLogger(logger);
-        RestConnection connection = new RestConnection(intLogger, timeoutSeconds, false, ProxyInfo.NO_PROXY_INFO);
+        IntHttpClient connection = new IntHttpClient(intLogger, timeoutSeconds, false, ProxyInfo.NO_PROXY_INFO);
         return connection;
     }
 }

@@ -38,7 +38,7 @@ import org.springframework.stereotype.Component;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.restclient.response.SimpleResponse;
 import com.synopsys.integration.exception.IntegrationException;
-import com.synopsys.integration.rest.connection.RestConnection;
+import com.synopsys.integration.rest.client.IntHttpClient;
 
 @Component
 public class ImageInspectorClientUseExistingServices implements ImageInspectorClient {
@@ -78,7 +78,7 @@ public class ImageInspectorClientUseExistingServices implements ImageInspectorCl
             throw new IntegrationException(String.format("Error constructing URI from %s: %s", config.getImageInspectorUrl(), e.getMessage()), e);
         }
         final int serviceRequestTimeoutSeconds = (int) (config.getCommandTimeout() / 1000L);
-        final RestConnection restConnection = restConnectionCreator.createRedirectingConnection(imageInspectorUri, serviceRequestTimeoutSeconds);
+        final IntHttpClient restConnection = restConnectionCreator.createRedirectingConnection(imageInspectorUri, serviceRequestTimeoutSeconds);
         final SimpleResponse response = restRequester.executeGetBdioRequest(restConnection, imageInspectorUri, containerPathToInputDockerTarfile,
                 givenImageRepo, givenImageTag, containerPathToOutputFileSystemFile, organizeComponentsByLayer, includeRemovedComponents, cleanup);
         return response.getBody();

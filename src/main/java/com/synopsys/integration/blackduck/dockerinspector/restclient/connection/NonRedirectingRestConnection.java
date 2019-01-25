@@ -23,13 +23,13 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.restclient.connection;
 
-import com.synopsys.integration.rest.connection.ReconnectingRestConnection;
+import com.synopsys.integration.rest.client.IntHttpClient;
 import com.synopsys.integration.log.IntLogger;
-import com.synopsys.integration.rest.connection.RestConnection;
 import com.synopsys.integration.rest.proxy.ProxyInfo;
 
+// TODO rename to http client
 public class NonRedirectingRestConnection extends
-    RestConnection {
+    IntHttpClient {
 
     public NonRedirectingRestConnection(final IntLogger logger, final int timeout, final boolean trustCert, final ProxyInfo proxyInfo) {
         super(logger, timeout, trustCert, proxyInfo);

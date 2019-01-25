@@ -23,6 +23,7 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.restclient;
 
+import com.synopsys.integration.rest.client.IntHttpClient;
 import java.net.URI;
 
 import org.slf4j.Logger;
@@ -32,7 +33,6 @@ import org.springframework.stereotype.Component;
 import com.synopsys.integration.blackduck.dockerinspector.restclient.response.SimpleResponse;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.rest.HttpMethod;
-import com.synopsys.integration.rest.connection.RestConnection;
 import com.synopsys.integration.rest.request.Request;
 import com.synopsys.integration.rest.request.Response;
 
@@ -40,7 +40,7 @@ import com.synopsys.integration.rest.request.Response;
 public class RestRequestor {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public SimpleResponse executeGetBdioRequest(final RestConnection restConnection, final URI imageInspectorUri, final String containerPathToTarfile,
+    public SimpleResponse executeGetBdioRequest(final IntHttpClient restConnection, final URI imageInspectorUri, final String containerPathToTarfile,
             final String givenImageRepo, final String givenImageTag, final String containerPathToContainerFileSystemFile,
         final boolean organizeComponentsByLayer,
         final boolean includeRemovedComponents,
@@ -67,7 +67,7 @@ public class RestRequestor {
         }
     }
 
-    public String executeSimpleGetRequest(final RestConnection restConnection, final URI imageInspectorUri, String endpoint)
+    public String executeSimpleGetRequest(final IntHttpClient restConnection, final URI imageInspectorUri, String endpoint)
             throws IntegrationException {
         if (endpoint.startsWith("/")) {
             endpoint = endpoint.substring(1);
