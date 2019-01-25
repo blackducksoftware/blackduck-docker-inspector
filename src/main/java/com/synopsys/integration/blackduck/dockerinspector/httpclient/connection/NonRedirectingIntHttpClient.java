@@ -21,19 +21,18 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.synopsys.integration.blackduck.dockerinspector.restclient.connection;
+package com.synopsys.integration.blackduck.dockerinspector.httpclient.connection;
 
 import com.synopsys.integration.rest.client.IntHttpClient;
 import com.synopsys.integration.log.IntLogger;
 import com.synopsys.integration.rest.proxy.ProxyInfo;
 
-// TODO rename to http client
-public class NonRedirectingRestConnection extends
+public class NonRedirectingIntHttpClient extends
     IntHttpClient {
 
-    public NonRedirectingRestConnection(final IntLogger logger, final int timeout, final boolean trustCert, final ProxyInfo proxyInfo) {
+    public NonRedirectingIntHttpClient(final IntLogger logger, final int timeout, final boolean trustCert, final ProxyInfo proxyInfo) {
         super(logger, timeout, trustCert, proxyInfo);
-        logger.debug("Disabling redirect handling on this rest connection");
+        logger.debug("Disabling redirect handling on this HTTP client");
         getClientBuilder().disableRedirectHandling();
     }
 }

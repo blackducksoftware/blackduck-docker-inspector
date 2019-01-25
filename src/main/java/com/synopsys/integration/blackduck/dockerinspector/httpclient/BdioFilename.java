@@ -21,22 +21,17 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.synopsys.integration.blackduck.dockerinspector.restclient;
+package com.synopsys.integration.blackduck.dockerinspector.httpclient;
 
-public class ContainerDetails {
-    private final String imageId;
-    private final String containerId;
+public class BdioFilename {
+    private final String spdxName;
 
-    public ContainerDetails(final String imageId, final String containerId) {
-        this.imageId = imageId;
-        this.containerId = containerId;
+    public BdioFilename(final String spdxName) {
+        this.spdxName = spdxName;
     }
 
-    public String getImageId() {
-        return imageId;
-    }
-
-    public String getContainerId() {
-        return containerId;
+    public String getBdioFilename() {
+        final String bdioFilename = String.format("%s_bdio.jsonld", spdxName);
+        return bdioFilename;
     }
 }

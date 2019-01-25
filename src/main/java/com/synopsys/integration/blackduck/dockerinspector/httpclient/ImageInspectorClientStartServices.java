@@ -21,7 +21,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.synopsys.integration.blackduck.dockerinspector.restclient;
+package com.synopsys.integration.blackduck.dockerinspector.httpclient;
 
 import com.synopsys.integration.rest.client.IntHttpClient;
 import java.io.File;
@@ -45,7 +45,7 @@ import com.synopsys.integration.blackduck.dockerinspector.InspectorImages;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
-import com.synopsys.integration.blackduck.dockerinspector.restclient.response.SimpleResponse;
+import com.synopsys.integration.blackduck.dockerinspector.httpclient.response.SimpleResponse;
 import com.synopsys.integration.blackduck.exception.BlackDuckIntegrationException;
 import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 import com.synopsys.integration.exception.IntegrationException;
@@ -70,7 +70,7 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
     private RestConnectionCreator restConnectionCreator;
 
     @Autowired
-    private RestRequestor restRequestor;
+    private HttpRequestor httpRequestor;
 
     @Autowired
     private InspectorImages inspectorImages;
@@ -148,7 +148,7 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
             serviceContainerDetails = ensureServiceReady(restConnection, imageInspectorUri, inspectorOs);
             try {
                 logger.info(String.format("Sending getBdio request to: %s (%s)", imageInspectorUri.toString(), inspectorOs.name()));
-                response = restRequestor.executeGetBdioRequest(restConnection, imageInspectorUri, containerPathToInputDockerTarfile,
+                response = httpRequestor.executeGetBdioRequest(restConnection, imageInspectorUri, containerPathToInputDockerTarfile,
                     givenImageRepo, givenImageTag, containerPathToOutputFileSystemFile, organizeComponentsByLayer, includeRemovedComponents, cleanup);
                 logServiceLogIfDebug(serviceContainerDetails.getContainerId());
             } catch (final IntegrationException e) {
@@ -287,8 +287,7 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         return imageId;
     }
 
-    // TODO rename rest connection to http client
-    private boolean startService(final IntHttpClient restConnection, final URI imageInspectorUri, final String imageInspectorRepo, final String imageInspectorTag) throws IntegrationException {
+    private boolean startService(final IntHttpClient httpClient, final URI imageInspectorUri, final String imageInspectorRepo, final String imageInspectorTag) throws IntegrationException {
         boolean serviceIsUp = false;
         for (int tryIndex = 0; tryIndex < MAX_CONTAINER_START_TRY_COUNT && !serviceIsUp; tryIndex++) {
             try {
@@ -299,16 +298,17 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
                 logger.error(String.format("Interrupted exception thrown while pausing so image imspector container based on image %s:%s could start", imageInspectorRepo, imageInspectorTag), e);
             }
             logger.debug(String.format("Checking service %s to see if it is up; attempt %d of %d", imageInspectorUri.toString(), tryIndex + 1, MAX_CONTAINER_START_TRY_COUNT));
-            serviceIsUp = checkServiceHealth(restConnection, imageInspectorUri);
+            serviceIsUp = checkServiceHealth(httpClient, imageInspectorUri);
         }
         return serviceIsUp;
     }
 
-    private boolean checkServiceHealth(final IntHttpClient restConnection, final URI imageInspectorUri) throws IntegrationException {
+    private boolean checkServiceHealth(final IntHttpClient httpClient, final URI imageInspectorUri) throws IntegrationException {
         logger.debug(String.format("Sending request for health check to: %s", imageInspectorUri));
         String healthCheckResponse;
         try {
-            healthCheckResponse = restRequestor.executeSimpleGetRequest(restConnection, imageInspectorUri, "health");
+            healthCheckResponse = httpRequestor
+                .executeSimpleGetRequest(httpClient, imageInspectorUri, "health");
         } catch (final IntegrationException e) {
             logger.debug(String.format("Health check failed: %s", e.getMessage()));
             return false;

@@ -21,9 +21,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.synopsys.integration.blackduck.dockerinspector.restclient;
-
-import java.util.Locale;
+package com.synopsys.integration.blackduck.dockerinspector.httpclient;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

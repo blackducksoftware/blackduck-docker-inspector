@@ -1,4 +1,4 @@
-package com.synopsys.integration.blackduck.dockerinspector.restclient;
+package com.synopsys.integration.blackduck.dockerinspector.httpclient;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;

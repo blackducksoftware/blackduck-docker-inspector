@@ -1,4 +1,4 @@
-package com.synopsys.integration.blackduck.dockerinspector.restclient;
+package com.synopsys.integration.blackduck.dockerinspector.httpclient;
 
 import static org.junit.Assert.assertEquals;
 
@@ -17,7 +17,7 @@ import com.github.dockerjava.api.model.Container;
 import com.synopsys.integration.blackduck.dockerinspector.InspectorImages;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
-import com.synopsys.integration.blackduck.dockerinspector.restclient.response.SimpleResponse;
+import com.synopsys.integration.blackduck.dockerinspector.httpclient.response.SimpleResponse;
 import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 import com.synopsys.integration.blackduck.imageinspector.lib.OperatingSystemEnum;
 import com.synopsys.integration.exception.IntegrationException;
@@ -39,7 +39,7 @@ public class IiClientContainersStartedAsNeededTest {
     private RestConnectionCreator restConnectionCreator;
 
     @Mock
-    private RestRequestor restRequestor;
+    private HttpRequestor httpRequestor;
 
     @Mock
     private InspectorImages inspectorImages;
@@ -64,10 +64,11 @@ public class IiClientContainersStartedAsNeededTest {
         final IntHttpClient restConnection = Mockito.mock(IntHttpClient.class);
         Mockito.when(restConnectionCreator.createNonRedirectingConnection(Mockito.any(URI.class), Mockito.anyInt())).thenReturn(restConnection);
 
-        Mockito.when(restRequestor.executeSimpleGetRequest(Mockito.any(IntHttpClient.class), Mockito.any(URI.class), Mockito.anyString())).thenReturn("{\"status\":\"UP\"}");
+        Mockito.when(httpRequestor.executeSimpleGetRequest(Mockito.any(IntHttpClient.class), Mockito.any(URI.class), Mockito.anyString())).thenReturn("{\"status\":\"UP\"}");
         // Mockito.when(restRequestor.executeSimpleGetRequest(Mockito.any(RestConnection.class), Mockito.anyString(), Mockito.anyString())).thenReturn("testResponse");
         final SimpleResponse response = new SimpleResponse(RestConstants.OK_200, null, "testResult");
-        Mockito.when(restRequestor.executeGetBdioRequest(Mockito.any(IntHttpClient.class), Mockito.any(URI.class), Mockito.anyString(), Mockito.anyString(),
+        Mockito.when(httpRequestor
+            .executeGetBdioRequest(Mockito.any(IntHttpClient.class), Mockito.any(URI.class), Mockito.anyString(), Mockito.anyString(),
                 Mockito.anyString(), Mockito.anyString(), Mockito.anyBoolean(), Mockito.anyBoolean(), Mockito.anyBoolean())).thenReturn(response);
 
         Mockito.when(inspectorImages.getInspectorImageName(Mockito.any(OperatingSystemEnum.class))).thenReturn("blackduck/blackduck-imageinspector");

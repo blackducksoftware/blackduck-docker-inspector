@@ -23,7 +23,7 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector;
 
-import com.synopsys.integration.blackduck.dockerinspector.restclient.RestClientInspector;
+import com.synopsys.integration.blackduck.dockerinspector.httpclient.RestClientInspector;
 import java.io.IOException;
 import java.util.List;
 

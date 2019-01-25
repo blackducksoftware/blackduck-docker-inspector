@@ -21,7 +21,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.synopsys.integration.blackduck.dockerinspector.restclient.response;
+package com.synopsys.integration.blackduck.dockerinspector.httpclient.response;
 
 import java.util.HashMap;
 import java.util.Map;

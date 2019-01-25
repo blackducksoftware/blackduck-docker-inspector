@@ -21,7 +21,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.synopsys.integration.blackduck.dockerinspector.restclient;
+package com.synopsys.integration.blackduck.dockerinspector.httpclient;
 
 import com.synopsys.integration.rest.client.IntHttpClient;
 import java.net.URI;
@@ -30,17 +30,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.synopsys.integration.blackduck.dockerinspector.restclient.response.SimpleResponse;
+import com.synopsys.integration.blackduck.dockerinspector.httpclient.response.SimpleResponse;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.rest.HttpMethod;
 import com.synopsys.integration.rest.request.Request;
 import com.synopsys.integration.rest.request.Response;
 
 @Component
-public class RestRequestor {
+public class HttpRequestor {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public SimpleResponse executeGetBdioRequest(final IntHttpClient restConnection, final URI imageInspectorUri, final String containerPathToTarfile,
+    public SimpleResponse executeGetBdioRequest(final IntHttpClient httpClient, final URI imageInspectorUri, final String containerPathToTarfile,
             final String givenImageRepo, final String givenImageTag, final String containerPathToContainerFileSystemFile,
         final boolean organizeComponentsByLayer,
         final boolean includeRemovedComponents,
@@ -58,7 +58,7 @@ public class RestRequestor {
                 .build();
         logger.debug(String.format("Doing a getBdio request on %s", url));
         final Request request = new Request.Builder(url).method(HttpMethod.GET).build();
-        try (Response response = restConnection.execute(request)) {
+        try (Response response = httpClient.execute(request)) {
             logger.debug(String.format("Response: HTTP status: %d", response.getStatusCode()));
             return new SimpleResponse(response.getStatusCode(), response.getHeaders(), getResponseBody(response));
         } catch (final Exception e) {
@@ -67,7 +67,7 @@ public class RestRequestor {
         }
     }
 
-    public String executeSimpleGetRequest(final IntHttpClient restConnection, final URI imageInspectorUri, String endpoint)
+    public String executeSimpleGetRequest(final IntHttpClient httpClient, final URI imageInspectorUri, String endpoint)
             throws IntegrationException {
         if (endpoint.startsWith("/")) {
             endpoint = endpoint.substring(1);
@@ -75,7 +75,7 @@ public class RestRequestor {
         final String url = String.format("%s/%s", imageInspectorUri.toString(), endpoint);
         logger.debug(String.format("Doing a GET on %s", url));
         final Request request = new Request.Builder(url).method(HttpMethod.GET).build();
-        try (Response response = restConnection.execute(request)) {
+        try (Response response = httpClient.execute(request)) {
             logger.debug(String.format("Response: HTTP status: %d", response.getStatusCode()));
             return getResponseBody(response);
         } catch (final Exception e) {

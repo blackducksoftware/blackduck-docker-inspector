@@ -21,7 +21,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.synopsys.integration.blackduck.dockerinspector.restclient;
+package com.synopsys.integration.blackduck.dockerinspector.httpclient;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,7 +36,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
-import com.synopsys.integration.blackduck.dockerinspector.restclient.response.SimpleResponse;
+import com.synopsys.integration.blackduck.dockerinspector.httpclient.response.SimpleResponse;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.rest.client.IntHttpClient;
 
@@ -47,7 +47,7 @@ public class ImageInspectorClientUseExistingServices implements ImageInspectorCl
     private Config config;
 
     @Autowired
-    private RestRequestor restRequester;
+    private HttpRequestor restRequester;
 
     @Autowired
     private RestConnectionCreator restConnectionCreator;
