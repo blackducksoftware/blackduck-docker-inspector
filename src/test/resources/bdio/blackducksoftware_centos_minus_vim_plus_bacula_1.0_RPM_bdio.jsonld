@@ -6,9 +6,9 @@
       "spdx:creator": [
         "Tool: IntegrationBdio-16.1.1"
       ],
-      "spdx:created": "2019-01-17T21:19:16.360Z"
+      "spdx:created": "2019-01-25T00:01:39.877Z"
     },
-    "@id": "uuid:34a63331-1921-49c3-a581-d0816eb9ace0",
+    "@id": "uuid:d3dc8c42-eacf-493e-b1ad-94fd85bdc94f",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -105,10 +105,6 @@
       },
       {
         "related": "http:@centos/p11_kit/0_20_7_3_el7/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@centos/4_perl_macros/5_16_3_293_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -212,7 +208,7 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@centos/4_perl_libs/5_16_3_293_el7/x86_64",
+        "related": "http:@centos/1_perl_Pod_Escapes/1_04_294_el7_6/noarch",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -265,6 +261,10 @@
       },
       {
         "related": "http:@centos/nspr/4_11_0_1_el7_2/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@centos/4_perl_libs/5_16_3_294_el7_6/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -392,6 +392,10 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:@centos/4_perl/5_16_3_294_el7_6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:@centos/pygobject3_base/3_14_0_3_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -412,15 +416,15 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:@centos/4_perl_macros/5_16_3_294_el7_6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:@centos/libuuid/2_23_2_33_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
         "related": "http:@centos/hostname/3_13_3_el7/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@centos/4_perl/5_16_3_293_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -529,10 +533,6 @@
       },
       {
         "related": "http:@centos/elfutils_libs/0_166_2_el7/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@centos/1_perl_Pod_Escapes/1_04_293_el7/noarch",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1193,27 +1193,6 @@
     "relationship": []
   },
   {
-    "name": "4:perl-macros",
-    "revision": "5.16.3-293.el7",
-    "@id": "http:@centos/4_perl_macros/5_16_3_293_el7/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@centos",
-      "externalId": "4:perl-macros/5.16.3-293.el7/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "@centos",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "4:perl-macros",
-        "version": "5.16.3-293.el7",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "qrencode-libs",
     "revision": "3.4.1-3.el7",
     "@id": "http:@centos/qrencode_libs/3_4_1_3_el7/x86_64",
@@ -1739,22 +1718,22 @@
     "relationship": []
   },
   {
-    "name": "4:perl-libs",
-    "revision": "5.16.3-293.el7",
-    "@id": "http:@centos/4_perl_libs/5_16_3_293_el7/x86_64",
+    "name": "1:perl-Pod-Escapes",
+    "revision": "1.04-294.el7_6",
+    "@id": "http:@centos/1_perl_Pod_Escapes/1_04_294_el7_6/noarch",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@centos",
-      "externalId": "4:perl-libs/5.16.3-293.el7/x86_64",
+      "externalId": "1:perl-Pod-Escapes/1.04-294.el7_6/noarch",
       "externalIdMetaData": {
         "forge": {
           "name": "@centos",
           "separator": "/",
           "kbSeparator": "/"
         },
-        "name": "4:perl-libs",
-        "version": "5.16.3-293.el7",
-        "architecture": "x86_64"
+        "name": "1:perl-Pod-Escapes",
+        "version": "1.04-294.el7_6",
+        "architecture": "noarch"
       }
     },
     "relationship": []
@@ -2027,6 +2006,27 @@
         },
         "name": "nspr",
         "version": "4.11.0-1.el7_2",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "4:perl-libs",
+    "revision": "5.16.3-294.el7_6",
+    "@id": "http:@centos/4_perl_libs/5_16_3_294_el7_6/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@centos",
+      "externalId": "4:perl-libs/5.16.3-294.el7_6/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@centos",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "4:perl-libs",
+        "version": "5.16.3-294.el7_6",
         "architecture": "x86_64"
       }
     },
@@ -2684,6 +2684,27 @@
     "relationship": []
   },
   {
+    "name": "4:perl",
+    "revision": "5.16.3-294.el7_6",
+    "@id": "http:@centos/4_perl/5_16_3_294_el7_6/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@centos",
+      "externalId": "4:perl/5.16.3-294.el7_6/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@centos",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "4:perl",
+        "version": "5.16.3-294.el7_6",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "pygobject3-base",
     "revision": "3.14.0-3.el7",
     "@id": "http:@centos/pygobject3_base/3_14_0_3_el7/x86_64",
@@ -2789,6 +2810,27 @@
     "relationship": []
   },
   {
+    "name": "4:perl-macros",
+    "revision": "5.16.3-294.el7_6",
+    "@id": "http:@centos/4_perl_macros/5_16_3_294_el7_6/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@centos",
+      "externalId": "4:perl-macros/5.16.3-294.el7_6/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@centos",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "4:perl-macros",
+        "version": "5.16.3-294.el7_6",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "libuuid",
     "revision": "2.23.2-33.el7",
     "@id": "http:@centos/libuuid/2_23_2_33_el7/x86_64",
@@ -2825,27 +2867,6 @@
         },
         "name": "hostname",
         "version": "3.13-3.el7",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "4:perl",
-    "revision": "5.16.3-293.el7",
-    "@id": "http:@centos/4_perl/5_16_3_293_el7/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@centos",
-      "externalId": "4:perl/5.16.3-293.el7/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "@centos",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "4:perl",
-        "version": "5.16.3-293.el7",
         "architecture": "x86_64"
       }
     },
@@ -3414,27 +3435,6 @@
         "name": "elfutils-libs",
         "version": "0.166-2.el7",
         "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "1:perl-Pod-Escapes",
-    "revision": "1.04-293.el7",
-    "@id": "http:@centos/1_perl_Pod_Escapes/1_04_293_el7/noarch",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@centos",
-      "externalId": "1:perl-Pod-Escapes/1.04-293.el7/noarch",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "@centos",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "1:perl-Pod-Escapes",
-        "version": "1.04-293.el7",
-        "architecture": "noarch"
       }
     },
     "relationship": []
