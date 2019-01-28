@@ -39,7 +39,7 @@ spec:
         runAsUser: 1001
       containers:
       - name: blackduck-imageinspector-alpine
-        image: blackducksoftware/blackduck-imageinspector-alpine:4.3.0
+        image: blackducksoftware/blackduck-imageinspector-alpine:4.3.3
         command: ["java"]
         args: ["-jar", "/opt/blackduck/blackduck-imageinspector/blackduck-imageinspector.jar", "--server.port=8080", "--current.linux.distro=alpine", "--inspector.url.alpine=http://blackduck-imageinspector-alpine.blackduck-imageinspector", "--inspector.url.centos=http://blackduck-imageinspector-centos.blackduck-imageinspector", "--inspector.url.ubuntu=http://blackduck-imageinspector-ubuntu.blackduck-imageinspector"]
         volumeMounts:
@@ -100,7 +100,7 @@ spec:
         runAsUser: 1001
       containers:
       - name: blackduck-imageinspector-centos
-        image: blackducksoftware/blackduck-imageinspector-centos:4.3.0
+        image: blackducksoftware/blackduck-imageinspector-centos:4.3.3
         command: ["java"]
         args: ["-jar", "/opt/blackduck/blackduck-imageinspector/blackduck-imageinspector.jar", "--server.port=8081", "--current.linux.distro=centos", "--inspector.url.alpine=http://blackduck-imageinspector-alpine.blackduck-imageinspector", "--inspector.url.centos=http://blackduck-imageinspector-centos.blackduck-imageinspector", "--inspector.url.ubuntu=http://blackduck-imageinspector-ubuntu.blackduck-imageinspector"]
         volumeMounts:
@@ -161,7 +161,7 @@ spec:
         runAsUser: 1001
       containers:
       - name: blackduck-imageinspector-ubuntu
-        image: blackducksoftware/blackduck-imageinspector-ubuntu:4.3.0
+        image: blackducksoftware/blackduck-imageinspector-ubuntu:4.3.3
         command: ["java"]
         args: ["-jar", "/opt/blackduck/blackduck-imageinspector/blackduck-imageinspector.jar", "--server.port=8082", "--current.linux.distro=ubuntu", "--inspector.url.alpine=http://blackduck-imageinspector-alpine.blackduck-imageinspector", "--inspector.url.centos=http://blackduck-imageinspector-centos.blackduck-imageinspector", "--inspector.url.ubuntu=http://blackduck-imageinspector-ubuntu.blackduck-imageinspector"]
         volumeMounts:
