@@ -136,49 +136,52 @@ public class DockerInspectorTest {
     }
 
     @Test
-    public void testBusyboxStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "busybox:latest", "busybox", "latest", "busybox_latest_noPkgMgr_bdio.jsonld", false, Mode.SPECIFY_II_DETAILS, null, null, 0, null, null);
-    }
-
-    @Test
-    public void testAlpineLatestStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "alpine", "alpine", "latest", "alpine_latest_APK_bdio.jsonld", false, Mode.DEFAULT, null, "apk-", 5, null, null);
-    }
-
-    @Test
     public void testCentosStartContainer() throws IOException, InterruptedException, IntegrationException {
         IntegrationTestCommon.testImage(random, programVersion, "centos:7.3.1611", "centos", "7.3.1611", "centos_7.3.1611_RPM_bdio.jsonld", false, Mode.SPECIFY_II_DETAILS, null, "1:openssl-libs", 15, null, null);
     }
 
     @Test
-    public void testBlackDuckWebappStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", "blackducksoftware_hub-webapp_4.0.0_APK_bdio.jsonld", true, Mode.DEFAULT, null, "apk-", 5, null, null);
+    public void testBusybox() throws IOException, InterruptedException, IntegrationException {
+        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE;
+        testImageUsingExistingContainer("busybox:latest", "busybox_latest_noPkgMgr_bdio.jsonld", portOnHost, true, 0, null);
     }
 
     @Test
-    public void testBlackDuckZookeeperStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "blackducksoftware/hub-zookeeper:4.0.0", "blackducksoftware_hub-zookeeper", "4.0.0", "blackducksoftware_hub-zookeeper_4.0.0_APK_bdio.jsonld", true, Mode.SPECIFY_II_DETAILS, null,
-                "apk-", 5,
-                null, null);
+    public void testAlpineLatest() throws IOException, InterruptedException, IntegrationException {
+        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE;
+        testImageUsingExistingContainer("alpine", "alpine_latest_APK_bdio.jsonld", portOnHost, false, 5, "apk-");
     }
 
     @Test
-    public void testTomcatStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "tomcat:6.0.53-jre7", "tomcat", "6.0.53-jre7", "tomcat_6.0.53-jre7_DPKG_bdio.jsonld", false, Mode.DEFAULT, null, "dpkg", 5, null, null);
+    public void testBlackDuckWebapp() throws IOException, InterruptedException, IntegrationException {
+        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE;
+        testImageUsingExistingContainer("blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp_4.0.0_APK_bdio.jsonld", portOnHost, true, 0, null);
     }
 
     @Test
-    public void testRhelStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "dnplus/rhel:6.5", "dnplus_rhel", "6.5", "dnplus_rhel_6.5_RPM_bdio.jsonld", false, Mode.SPECIFY_II_DETAILS, null, "rpm", 10, null, null);
+    public void testBlackDuckZookeeper() throws IOException, InterruptedException, IntegrationException {
+            final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE;
+            testImageUsingExistingContainer("blackducksoftware/hub-zookeeper:4.0.0", "blackducksoftware_hub-zookeeper_4.0.0_APK_bdio.jsonld", portOnHost, true, 0, null);
     }
 
     @Test
-    public void testNonLinuxStartContainer() throws IOException, InterruptedException, IntegrationException {
+    public void testTomcat() throws IOException, InterruptedException, IntegrationException {
+        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU;
+        testImageUsingExistingContainer("tomcat:6.0.53-jre7", "tomcat_6.0.53-jre7_DPKG_bdio.jsonld", portOnHost, false, 5, "dpkg");
+    }
+
+    @Test
+    public void testRhel() throws IOException, InterruptedException, IntegrationException {
+        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS;
+        testImageUsingExistingContainer("dnplus/rhel:6.5", "dnplus_rhel_6.5_RPM_bdio.jsonld", portOnHost, false, 10, "rpm");
+    }
+
+    @Test
+    public void testNonLinux() throws IOException, InterruptedException, IntegrationException {
         final String repo = "osless";
         final String tag = "1.0";
-        final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("osless.tar");
-        IntegrationTestCommon.testTar(random, programVersion, "src/test/resources/osless.tar", "osless_1.0_noPkgMgr_bdio.jsonld", repo, tag, true, Mode.DEFAULT, null, null, true,
-                outputContainerFileSystemFile, null);
+        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS;
+        testTarUsingExistingContainer(repo, tag, "src/test/resources/osless.tar", "osless_1.0_noPkgMgr_bdio.jsonld", portOnHost);
     }
 
     @Test
@@ -228,18 +231,16 @@ public class DockerInspectorTest {
     public void testAlpineUsingExistingAlpineContainer() throws IOException, InterruptedException, IntegrationException {
         final String targetRepo = null;
         final String targetTag = null;
-        final String tarFileBaseName = "alpine36";
         final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE;
-        testUsingExistingContainer(targetRepo, targetTag, tarFileBaseName, "null_null_APK_bdio.jsonld", portOnHost);
+        testTarUsingExistingContainer(targetRepo, targetTag,  "build/images/test/alpine36.tar","null_null_APK_bdio.jsonld", portOnHost);
     }
 
     @Test
     public void testWhiteoutUsingExistingAlpineContainer() throws IOException, InterruptedException, IntegrationException {
         final String targetRepo = "blackducksoftware/whiteouttest";
         final String targetTag = "1.0";
-        final String tarFileBaseName = "whiteouttest";
         final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE;
-        testUsingExistingContainer(targetRepo, targetTag, tarFileBaseName, "blackducksoftware_whiteouttest_1.0_DPKG_bdio.jsonld", portOnHost);
+        testTarUsingExistingContainer(targetRepo, targetTag,  "build/images/test//whiteouttest.tar", "blackducksoftware_whiteouttest_1.0_DPKG_bdio.jsonld", portOnHost);
     }
 
     @Test
@@ -248,31 +249,42 @@ public class DockerInspectorTest {
         final String targetTag = "1.0";
         final String tarFileBaseName = "centos_minus_vim_plus_bacula";
         final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE;
-        testUsingExistingContainer(targetRepo, targetTag, tarFileBaseName, "blackducksoftware_centos_minus_vim_plus_bacula_1.0_RPM_bdio.jsonld", portOnHost);
+        testTarUsingExistingContainer(targetRepo, targetTag,  "build/images/test/centos_minus_vim_plus_bacula.tar","blackducksoftware_centos_minus_vim_plus_bacula_1.0_RPM_bdio.jsonld", portOnHost);
     }
 
     @Test
     public void testUbuntuUsingExistingCentosContainer() throws IOException, InterruptedException, IntegrationException {
         final String targetRepo = null; // the image in this tarfile is not tagged
         final String targetTag = null;
-        final String tarFileBaseName = "ubuntu1404";
         final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS;
-        testUsingExistingContainer(targetRepo, targetTag, tarFileBaseName, "null_null_DPKG_bdio.jsonld", portOnHost);
+        testTarUsingExistingContainer(targetRepo, targetTag,  "build/images/test/ubuntu1404.tar","null_null_DPKG_bdio.jsonld", portOnHost);
     }
 
-    private void testUsingExistingContainer(final String targetRepo, final String targetTag, final String tarFileBaseName, final String bdioFilename, final int portOnHost)
+    private void testTarUsingExistingContainer(final String targetRepo, final String targetTag, final String tarFilePath, final String bdioFilename, final int portOnHost)
             throws IOException, InterruptedException, IntegrationException {
-
-        final String tarFileName = String.format("%s.tar", tarFileBaseName);
-        final File targetTar = new File(containerTargetDir, tarFileName);
-        FileUtils.copyFile(new File(String.format("build/images/test/%s", tarFileName)), targetTar);
-        targetTar.setReadable(true, false);
+        final File targetTar = new File(tarFilePath);
+        final String tarFileName = targetTar.getName();
+        final String tarFileBaseName = tarFileName.substring(0, tarFileName.length()-".tar".length());
+        final File targetTarInSharedDir = new File(containerTargetDir, tarFileName);
+        FileUtils.copyFile(targetTar, targetTarInSharedDir);
+        targetTarInSharedDir.setReadable(true, false);
         final List<String> additionalArgs = new ArrayList<>();
         additionalArgs.add(String.format("--imageinspector.service.url=http://localhost:%d", portOnHost));
         additionalArgs.add(String.format("--shared.dir.path.local=%s", dirSharedWithContainer.getAbsolutePath()));
         additionalArgs.add(String.format("--shared.dir.path.imageinspector=%s", SHARED_DIR_PATH_IN_CONTAINER));
         final File outputContainerFileSystemFile = new File(String.format("%s/output/%s_containerfilesystem.tar.gz", TestUtils.TEST_DIR_REL_PATH, tarFileBaseName));
-        IntegrationTestCommon.testTar(random, programVersion, targetTar.getAbsolutePath(), bdioFilename, targetRepo, targetTag, true, Mode.NO_SERVICE_START, null, additionalArgs, false, outputContainerFileSystemFile, null);
+        IntegrationTestCommon.testTar(random, programVersion, targetTarInSharedDir.getAbsolutePath(), bdioFilename, targetRepo, targetTag, true, Mode.NO_SERVICE_START, null, additionalArgs, false, outputContainerFileSystemFile, null);
+    }
+
+    private void testImageUsingExistingContainer(final String inspectTargetImageRepoTag, final String bdioFilename, final int portOnHost, final boolean requireBdioMatch, final int minNumberOfComponentsExpected, final String outputBomMustContainComponentPrefix)
+        throws IOException, InterruptedException, IntegrationException {
+
+        final List<String> additionalArgs = new ArrayList<>();
+        additionalArgs.add(String.format("--imageinspector.service.url=http://localhost:%d", portOnHost));
+        additionalArgs.add(String.format("--shared.dir.path.local=%s", dirSharedWithContainer.getAbsolutePath()));
+        additionalArgs.add(String.format("--shared.dir.path.imageinspector=%s", SHARED_DIR_PATH_IN_CONTAINER));
+        IntegrationTestCommon.testImage(random, programVersion, inspectTargetImageRepoTag, null, null, bdioFilename, requireBdioMatch,
+            Mode.NO_SERVICE_START, null, outputBomMustContainComponentPrefix, minNumberOfComponentsExpected, additionalArgs, null);
     }
 
     private static void createWriteableDirTolerantly(final File dir) {
