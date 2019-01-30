@@ -92,7 +92,7 @@ public class RestClientInspector {
             logger.debug(String.format("bdioString: %s", bdioString));
             final SimpleBdioDocument bdioDocument = toBdioDocument(bdioString);
             adjustBdio(bdioDocument);
-            final File bdioFile = output.provideBdioFileOutput(bdioDocument);
+            final File bdioFile = output.addBdioFileToOutput(bdioDocument);
             if (config.isUploadBdio()) {
                 blackDuckClient.uploadBdio(bdioFile, bdioDocument.billOfMaterials.spdxName);
             }

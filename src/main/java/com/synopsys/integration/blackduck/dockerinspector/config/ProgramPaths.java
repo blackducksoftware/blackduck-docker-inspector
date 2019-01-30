@@ -27,6 +27,7 @@ import java.io.File;
 import java.lang.management.ManagementFactory;
 import java.util.Date;
 
+import java.util.Optional;
 import javax.annotation.PostConstruct;
 
 import org.apache.commons.lang3.StringUtils;
@@ -57,18 +58,14 @@ public class ProgramPaths {
     private String dockerInspectorConfigDirPath;
     private String dockerInspectorConfigFilePath;
     private String dockerInspectorTargetDirPath;
-    private String dockerInspectorOutputPath;
+    private String dockerInspectorDefaultOutputPath;
     private String dockerInspectorResultPath;
     private String cleanedProcessId;
 
     private String getProgramDirPath() {
-        if (config.isImageInspectorServiceStart()) {
-            final File sharedDir = new File(config.getWorkingDirPath());
-            logger.debug(String.format("getProgramDirPath(): returning %s", sharedDir.getAbsolutePath()));
-            return sharedDir.getAbsolutePath();
-        }
+        final File workingDir = new File(config.getWorkingDirPath());
         logger.debug(String.format("getProgramDirPath(): returning %s", config.getWorkingDirPath()));
-        return config.getWorkingDirPath();
+        return workingDir.getAbsolutePath();
     }
 
     @PostConstruct
@@ -86,8 +83,8 @@ public class ProgramPaths {
         dockerInspectorConfigDirPath = new File(runDir, CONFIG_DIR).getAbsolutePath() + "/";
         dockerInspectorConfigFilePath = dockerInspectorConfigDirPath + APPLICATION_PROPERTIES_FILENAME;
         dockerInspectorTargetDirPath = new File(runDir, TARGET_DIR).getAbsolutePath() + "/";
-        dockerInspectorOutputPath = new File(runDir, OUTPUT_DIR).getAbsolutePath() + "/";
-        dockerInspectorResultPath = dockerInspectorOutputPath + HOST_RESULT_JSON_FILENAME;
+        dockerInspectorDefaultOutputPath = new File(runDir, OUTPUT_DIR).getAbsolutePath() + "/";
+        dockerInspectorResultPath = dockerInspectorDefaultOutputPath + HOST_RESULT_JSON_FILENAME;
     }
 
     private String getProcessIdOrGenerateUniqueId() {
@@ -103,7 +100,7 @@ public class ProgramPaths {
         return processId;
     }
 
-    public String getUserOutputDir() {
+    public String getUserOutputDirPath() {
         if (StringUtils.isBlank(config.getOutputPath())) {
             return null;
         }
@@ -134,12 +131,8 @@ public class ProgramPaths {
         return dockerInspectorRunDirPath;
     }
 
-    public String getDockerInspectorOutputPath() {
-        if (StringUtils.isNotBlank(config.getImageInspectorUrl())) {
-            final File outputDir = new File(this.getDockerInspectorRunDirPath(), OUTPUT_DIR);
-            return outputDir.getAbsolutePath();
-        }
-        return dockerInspectorOutputPath;
+    public String getDockerInspectorDefaultOutputPath() {
+        return dockerInspectorDefaultOutputPath;
     }
 
     public String getDockerInspectorResultPath() {

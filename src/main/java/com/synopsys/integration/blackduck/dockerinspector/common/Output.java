@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import java.util.Optional;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -55,25 +56,21 @@ public class Output {
     private Gson gson;
 
     public void ensureWriteability() {
-        final File outputDir = new File(programPaths.getDockerInspectorOutputPath());
+        final File outputDir = new File(programPaths.getDockerInspectorDefaultOutputPath());
         final boolean dirCreated = outputDir.mkdirs();
         final boolean dirMadeWriteable = outputDir.setWritable(true, false);
         final boolean dirMadeExecutable = outputDir.setExecutable(true, false);
         logger.debug(String.format("Output dir: %s; created: %b; successfully made writeable: %b; make executable: %b", outputDir.getAbsolutePath(), dirCreated, dirMadeWriteable, dirMadeExecutable));
     }
 
-    public void provideOutput() throws IOException {
-        copyOutputToUserOutputDir();
-    }
-
-    public File provideBdioFileOutput(final SimpleBdioDocument bdioDocument) throws IOException, IntegrationException {
+    public File addBdioFileToOutput(final SimpleBdioDocument bdioDocument) throws IOException, IntegrationException {
         // if user specified an output dir, use that; else use the temp output dir
         File outputDir;
         if (StringUtils.isNotBlank(config.getOutputPath())) {
             outputDir = new File(config.getOutputPath());
-            provideOutput();
+            copyOutputToUserProvidedOutputDir();
         } else {
-            outputDir = new File(programPaths.getDockerInspectorOutputPath());
+            outputDir = new File(programPaths.getDockerInspectorDefaultOutputPath());
         }
         final String bdioFilename = String.format("%s_bdio.jsonld", bdioDocument.billOfMaterials.spdxName);
         final File outputBdioFile = new File(outputDir, bdioFilename);
@@ -85,20 +82,20 @@ public class Output {
         return outputBdioFile;
     }
 
-    private void copyOutputToUserOutputDir() throws IOException {
-        final String userOutputDirPath = programPaths.getUserOutputDir();
+    private void copyOutputToUserProvidedOutputDir() throws IOException {
+        final String userOutputDirPath = programPaths.getUserOutputDirPath();
         if (userOutputDirPath == null) {
             logger.debug("User has not specified an output path");
             return;
         }
-        final File srcDir = new File(programPaths.getDockerInspectorOutputPath());
+        final File srcDir = new File(programPaths.getDockerInspectorDefaultOutputPath());
         if (!srcDir.exists()) {
             logger.info(String.format("Output source dir %s does not exist", srcDir.getAbsolutePath()));
             return;
         }
-        logger.info(String.format("Copying output from %s to %s", programPaths.getDockerInspectorOutputPath(), userOutputDirPath));
+        logger.info(String.format("Copying output from %s to %s", programPaths.getDockerInspectorDefaultOutputPath(), userOutputDirPath));
         final File userOutputDir = new File(userOutputDirPath);
-        copyDirContentsToDir(programPaths.getDockerInspectorOutputPath(), userOutputDir.getAbsolutePath(), true);
+        copyDirContentsToDir(programPaths.getDockerInspectorDefaultOutputPath(), userOutputDir.getAbsolutePath(), true);
     }
 
     private void copyDirContentsToDir(final String fromDirPath, final String toDirPath, final boolean createIfNecessary) throws IOException {
@@ -109,5 +106,4 @@ public class Output {
         }
         FileUtils.copyDirectory(srcDir, destDir);
     }
-
 }
