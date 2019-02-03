@@ -4,11 +4,11 @@
     "spdx:name": "layeredIncludeRemoved_null_null_DPKG",
     "creationInfo": {
       "spdx:creator": [
-        "Tool: IntegrationBdio-16.3.1"
+        "Tool: IntegrationBdio-16.4.0"
       ],
-      "spdx:created": "2019-01-21T23:05:10.599Z"
+      "spdx:created": "2019-02-03T22:15:25.490Z"
     },
-    "@id": "uuid:f8357f3c-8abf-4be9-b98b-f8878580557b",
+    "@id": "uuid:0e8a34db-a7c3-4da3-95b8-2fd9452d98a3",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -32,44 +32,42 @@
     },
     "relationship": [
       {
-        "related": "http:none/Layer04_sha256_73dd5183c549685de3be83f6628895d36c6244cfc21f21aad10765c9b528a90b/none/none",
+        "related": "http:DOCKER_INSPECTOR/Layer00_sha256_93da31b6a5499e9b86dcd8ea0cf6b5d0fa9ed5b9beaedceee5b58218b494e80e",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:none/Layer01_sha256_d196bfd70d49b469a01bd45e6070b70ea9116783112da44f61d10958dbc7de10/none/none",
+        "related": "http:DOCKER_INSPECTOR/Layer01_sha256_d196bfd70d49b469a01bd45e6070b70ea9116783112da44f61d10958dbc7de10",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:none/Layer03_sha256_8f6a7ca929441c126e8faf4b0891d6b95876be80a7f8bec993e3bc56160e71ee/none/none",
+        "related": "http:DOCKER_INSPECTOR/Layer02_sha256_2f19e981cedab782dc2ab39a6e8e9782ff714bef28c043efbdc34f2afcd057c5",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:none/Layer02_sha256_2f19e981cedab782dc2ab39a6e8e9782ff714bef28c043efbdc34f2afcd057c5/none/none",
+        "related": "http:DOCKER_INSPECTOR/Layer03_sha256_8f6a7ca929441c126e8faf4b0891d6b95876be80a7f8bec993e3bc56160e71ee",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:none/Layer00_sha256_93da31b6a5499e9b86dcd8ea0cf6b5d0fa9ed5b9beaedceee5b58218b494e80e/none/none",
+        "related": "http:DOCKER_INSPECTOR/Layer04_sha256_73dd5183c549685de3be83f6628895d36c6244cfc21f21aad10765c9b528a90b",
         "relationshipType": "DYNAMIC_LINK"
       }
     ]
   },
   {
-    "name": "Layer04_sha256_73dd5183c549685de3be83f6628895d36c6244cfc21f21aad10765c9b528a90b",
-    "revision": "none",
-    "@id": "http:none/Layer04_sha256_73dd5183c549685de3be83f6628895d36c6244cfc21f21aad10765c9b528a90b/none/none",
+    "name": "Layer00_sha256_93da31b6a5499e9b86dcd8ea0cf6b5d0fa9ed5b9beaedceee5b58218b494e80e",
+    "revision": "",
+    "@id": "http:DOCKER_INSPECTOR/Layer00_sha256_93da31b6a5499e9b86dcd8ea0cf6b5d0fa9ed5b9beaedceee5b58218b494e80e",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "none",
-      "externalId": "Layer04_sha256_73dd5183c549685de3be83f6628895d36c6244cfc21f21aad10765c9b528a90b/none/none",
+      "externalSystemTypeId": "docker_inspector",
+      "externalId": "Layer00_sha256_93da31b6a5499e9b86dcd8ea0cf6b5d0fa9ed5b9beaedceee5b58218b494e80e",
       "externalIdMetaData": {
         "forge": {
-          "name": "none",
+          "name": "DOCKER_INSPECTOR",
           "separator": "/",
           "kbSeparator": "/"
         },
-        "name": "Layer04_sha256_73dd5183c549685de3be83f6628895d36c6244cfc21f21aad10765c9b528a90b",
-        "version": "none",
-        "architecture": "none"
+        "path": "Layer00_sha256_93da31b6a5499e9b86dcd8ea0cf6b5d0fa9ed5b9beaedceee5b58218b494e80e"
       }
     },
     "relationship": [
@@ -4677,779 +4675,19 @@
   },
   {
     "name": "Layer01_sha256_d196bfd70d49b469a01bd45e6070b70ea9116783112da44f61d10958dbc7de10",
-    "revision": "none",
-    "@id": "http:none/Layer01_sha256_d196bfd70d49b469a01bd45e6070b70ea9116783112da44f61d10958dbc7de10/none/none",
+    "revision": "",
+    "@id": "http:DOCKER_INSPECTOR/Layer01_sha256_d196bfd70d49b469a01bd45e6070b70ea9116783112da44f61d10958dbc7de10",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "none",
-      "externalId": "Layer01_sha256_d196bfd70d49b469a01bd45e6070b70ea9116783112da44f61d10958dbc7de10/none/none",
+      "externalSystemTypeId": "docker_inspector",
+      "externalId": "Layer01_sha256_d196bfd70d49b469a01bd45e6070b70ea9116783112da44f61d10958dbc7de10",
       "externalIdMetaData": {
         "forge": {
-          "name": "none",
+          "name": "DOCKER_INSPECTOR",
           "separator": "/",
           "kbSeparator": "/"
         },
-        "name": "Layer01_sha256_d196bfd70d49b469a01bd45e6070b70ea9116783112da44f61d10958dbc7de10",
-        "version": "none",
-        "architecture": "none"
-      }
-    },
-    "relationship": [
-      {
-        "related": "http:@ubuntu/ubuntu_minimal/1_325/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/sysv_rc/2_88dsf_41ubuntu6_3/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/util_linux/2_20_1_5_1ubuntu20_9/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libustr_1_0_1/1_0_4_3ubuntu2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libdebconfclient0/0_187ubuntu1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/initramfs_tools/0_103ubuntu4_11/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libterm_ui_perl/0_42_1/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libapt_pkg4_12/1_0_1ubuntu2_18/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/multiarch_support/2_19_0ubuntu6_14/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/liblockfile1/1_09_6ubuntu1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libgnutls_openssl27/2_12_23_12ubuntu2_8/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libpam0g/1_1_8_1ubuntu2_2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libfribidi0/0_19_6_1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libgpg_error0/1_12_0_2ubuntu1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/initscripts/2_88dsf_41ubuntu6_3/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libdevmapper1_02_1/2_1_02_77_6ubuntu2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/diffutils/1_3_3_1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/bsdutils/1_2_20_1_5_1ubuntu20_9/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/sed/4_2_2_4ubuntu1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libstdc__6/4_8_4_2ubuntu1_14_04_4/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libcgmanager0/0_24_0ubuntu7_5/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libgnutls26/2_12_23_12ubuntu2_8/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libtext_iconv_perl/1_7_5build2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/mount/2_20_1_5_1ubuntu20_9/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libpcre3/1_8_31_2ubuntu2_3/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/e2fsprogs/1_42_9_3ubuntu1_3/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libsepol1/2_2_1ubuntu0_1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/vim_common/2_7_4_052_1ubuntu3_1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libudev1/204_5ubuntu20_28/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/eject/2_1_5_deb1_cvs20081104_13_1ubuntu0_14_04_1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/hostname/3_15ubuntu1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/perl_modules/5_18_2_2ubuntu1_6/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/locales/2_13_git20120306_12_1/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/ncurses_bin/5_9_20140118_1ubuntu1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/iproute2/3_12_0_2ubuntu1_2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libgcc1/1_4_9_3_0ubuntu4/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libgdbm3/1_8_3_12build1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libkmod2/15_0ubuntu7/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/gpgv/1_4_16_1ubuntu2_5/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libmodule_pluggable_perl/5_1_1/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/logrotate/3_8_7_1ubuntu1_2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/dash/0_5_7_4ubuntu1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/udev/204_5ubuntu20_28/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/dmsetup/2_1_02_77_6ubuntu2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/passwd/1_4_1_5_1_1ubuntu9_5/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/coreutils/8_21_1ubuntu5_4/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libpam_cap/1_2_24_0ubuntu2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libbsd0/0_6_0_2ubuntu1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/makedev/2_3_1_93ubuntu2_ubuntu14_04_1/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libjson0/0_11_3ubuntu1_2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/liblog_message_simple_perl/0_10_1/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/whiptail/0_52_15_2ubuntu5/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/mountall/2_53/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/lsb_release/4_1_Debian11ubuntu6_2/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libnewt0_52/0_52_15_2ubuntu5/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/ncurses_base/5_9_20140118_1ubuntu1/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libklibc/2_0_3_0ubuntu1_14_04_3/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libapt_inst1_5/1_0_1ubuntu2_18/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/ntpdate/1_4_2_6_p5_dfsg_3ubuntu2_14_04_13/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/base_files/7_2ubuntu5_5/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/python3/3_4_0_0ubuntu2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/module_init_tools/15_0ubuntu7/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libblkid1/2_20_1_5_1ubuntu20_9/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/klibc_utils/2_0_3_0ubuntu1_14_04_3/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libprocps3/1_3_3_9_1ubuntu2_3/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/kbd/1_15_5_1ubuntu1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libncurses5/5_9_20140118_1ubuntu1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libpng12_0/1_2_50_1ubuntu2_14_04_3/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libcap2_bin/1_2_24_0ubuntu2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/mime_support/3_54ubuntu1_1/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/netcat_openbsd/1_105_7ubuntu1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/kmod/15_0ubuntu7/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libaudit_common/1_2_3_2_2ubuntu1/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/plymouth/0_8_8_0ubuntu17_2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libtext_soundex_perl/3_4_1build1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/file/1_5_14_2ubuntu3_4/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/debconf/1_5_51ubuntu2/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/netbase/5_2/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libss2/1_42_9_3ubuntu1_3/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libcap2/1_2_24_0ubuntu2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libusb_0_1_4/2_0_1_12_23_3ubuntu1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/upstart/1_12_1_0ubuntu4_2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libdrm2/2_4_67_1ubuntu0_14_04_2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/sudo/1_8_9p5_1ubuntu1_4/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/isc_dhcp_common/4_2_4_7ubuntu12_13/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/liblockfile_bin/1_09_6ubuntu1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libnih_dbus1/1_0_3_4ubuntu25/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/dpkg/1_17_5ubuntu5_8/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/lockfile_progs/0_1_17/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libarchive_extract_perl/0_70_1/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/debconf_i18n/1_5_51ubuntu2/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libsemanage_common/2_2_1/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libc6/2_19_0ubuntu6_14/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/xkb_data/2_10_1_1ubuntu1/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/lsb_base/4_1_Debian11ubuntu6_2/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/isc_dhcp_client/4_2_4_7ubuntu12_13/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/procps/1_3_3_9_1ubuntu2_3/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libpython3_4_minimal/3_4_3_1ubuntu1_14_04_6/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/gcc_4_8_base/4_8_4_2ubuntu1_14_04_4/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libpam_modules_bin/1_1_8_1ubuntu2_2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libtasn1_6/3_4_3ubuntu0_6/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/e2fslibs/1_42_9_3ubuntu1_3/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/debianutils/4_4/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libpam_modules/1_1_8_1ubuntu2_2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libmount1/2_20_1_5_1ubuntu20_9/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libselinux1/2_2_2_1ubuntu0_1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/perl/5_18_2_2ubuntu1_6/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libdb5_3/5_3_28_3ubuntu3_1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/python3_minimal/3_4_0_0ubuntu2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libtext_charwidth_perl/0_04_7build3/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libsqlite3_0/3_8_2_1ubuntu2_1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/ubuntu_keyring/2012_05_19/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/ucf/3_0027_nmu1/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/iputils_ping/3_20121221_4ubuntu1_1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/zlib1g/1_1_2_8_dfsg_1ubuntu1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/sysvinit_utils/2_88dsf_41ubuntu6_3/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libuuid1/2_20_1_5_1ubuntu20_9/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/sensible_utils/0_0_9ubuntu0_14_04_1/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/bash/4_3_7ubuntu1_7/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libc_bin/2_19_0ubuntu6_14/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/tar/1_27_1_1ubuntu0_1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libjson_c2/0_11_3ubuntu1_2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/cpio/2_11_dfsg_1ubuntu1_2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/dh_python/1_20140128_1ubuntu8_2/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libpod_latex_perl/0_61_1/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libpython3_stdlib/3_4_0_0ubuntu2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libexpat1/2_1_0_4ubuntu1_4/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libtext_wrapi18n_perl/0_06_7/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/apt/1_0_1ubuntu2_18/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libgcrypt11/1_5_3_2ubuntu4_6/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libssl1_0_0/1_0_1f_1ubuntu2_26/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/apt_utils/1_0_1ubuntu2_18/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/liblocale_gettext_perl/1_05_7build3/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libacl1/2_2_52_1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/net_tools/1_60_25ubuntu2_1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/python3_4/3_4_3_1ubuntu1_14_04_6/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/grep/2_16_1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/initramfs_tools_bin/0_103ubuntu4_11/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/insserv/1_14_0_5ubuntu2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/findutils/4_4_2_7/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/mawk/1_3_3_17ubuntu2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/gnupg/1_4_16_1ubuntu2_5/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/cron/3_0pl1_124ubuntu2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/less/458_2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libreadline6/6_3_4ubuntu2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/perl_base/5_18_2_2ubuntu1_6/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/vim_tiny/2_7_4_052_1ubuntu3_1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/gcc_4_9_base/4_9_3_0ubuntu4/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libslang2/2_2_4_15ubuntu1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/gzip/1_6_3ubuntu1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libpython3_4_stdlib/3_4_3_1ubuntu1_14_04_6/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libtinfo5/5_9_20140118_1ubuntu1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/tzdata/2017c_0ubuntu0_14_04/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libncursesw5/5_9_20140118_1ubuntu1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/readline_common/6_3_4ubuntu2/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/python3_4_minimal/3_4_3_1ubuntu1_14_04_6/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/bzip2/1_0_6_5/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libnih1/1_0_3_4ubuntu25/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/ifupdown/0_7_47_2ubuntu4_5/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libaudit1/1_2_3_2_2ubuntu1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libbz2_1_0/1_0_6_5/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libmpdec2/2_4_0_6/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libpam_runtime/1_1_8_1ubuntu2_2/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libattr1/1_2_4_47_1ubuntu1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libdbus_1_3/1_6_18_0ubuntu4_5/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libmagic1/1_5_14_2ubuntu3_4/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libcomerr2/1_42_9_3ubuntu1_3/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libestr0/0_1_9_0ubuntu2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libffi6/3_1_rc1_r3_0_13_12ubuntu0_2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libsemanage1/2_2_1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/ureadahead/0_100_0_16/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/base_passwd/3_5_33/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/busybox_initramfs/1_1_21_0_1ubuntu1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/rsyslog/7_4_4_1ubuntu2_7/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/login/1_4_1_5_1_1ubuntu9_5/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/liblzma5/5_1_1alpha_20120614_2ubuntu2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/keyboard_configuration/1_70ubuntu8/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libp11_kit0/0_20_2_2ubuntu2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libpopt0/1_16_8ubuntu1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/adduser/3_113_nmu3ubuntu3/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/init_system_helpers/1_14ubuntu1/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/console_setup/1_70ubuntu8/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/resolvconf/1_69ubuntu1_4/all",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libplymouth2/0_8_8_0ubuntu17_2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      }
-    ]
-  },
-  {
-    "name": "Layer03_sha256_8f6a7ca929441c126e8faf4b0891d6b95876be80a7f8bec993e3bc56160e71ee",
-    "revision": "none",
-    "@id": "http:none/Layer03_sha256_8f6a7ca929441c126e8faf4b0891d6b95876be80a7f8bec993e3bc56160e71ee/none/none",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "none",
-      "externalId": "Layer03_sha256_8f6a7ca929441c126e8faf4b0891d6b95876be80a7f8bec993e3bc56160e71ee/none/none",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "none",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "Layer03_sha256_8f6a7ca929441c126e8faf4b0891d6b95876be80a7f8bec993e3bc56160e71ee",
-        "version": "none",
-        "architecture": "none"
+        "path": "Layer01_sha256_d196bfd70d49b469a01bd45e6070b70ea9116783112da44f61d10958dbc7de10"
       }
     },
     "relationship": [
@@ -6193,21 +5431,19 @@
   },
   {
     "name": "Layer02_sha256_2f19e981cedab782dc2ab39a6e8e9782ff714bef28c043efbdc34f2afcd057c5",
-    "revision": "none",
-    "@id": "http:none/Layer02_sha256_2f19e981cedab782dc2ab39a6e8e9782ff714bef28c043efbdc34f2afcd057c5/none/none",
+    "revision": "",
+    "@id": "http:DOCKER_INSPECTOR/Layer02_sha256_2f19e981cedab782dc2ab39a6e8e9782ff714bef28c043efbdc34f2afcd057c5",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "none",
-      "externalId": "Layer02_sha256_2f19e981cedab782dc2ab39a6e8e9782ff714bef28c043efbdc34f2afcd057c5/none/none",
+      "externalSystemTypeId": "docker_inspector",
+      "externalId": "Layer02_sha256_2f19e981cedab782dc2ab39a6e8e9782ff714bef28c043efbdc34f2afcd057c5",
       "externalIdMetaData": {
         "forge": {
-          "name": "none",
+          "name": "DOCKER_INSPECTOR",
           "separator": "/",
           "kbSeparator": "/"
         },
-        "name": "Layer02_sha256_2f19e981cedab782dc2ab39a6e8e9782ff714bef28c043efbdc34f2afcd057c5",
-        "version": "none",
-        "architecture": "none"
+        "path": "Layer02_sha256_2f19e981cedab782dc2ab39a6e8e9782ff714bef28c043efbdc34f2afcd057c5"
       }
     },
     "relationship": [
@@ -6950,22 +6186,776 @@
     ]
   },
   {
-    "name": "Layer00_sha256_93da31b6a5499e9b86dcd8ea0cf6b5d0fa9ed5b9beaedceee5b58218b494e80e",
-    "revision": "none",
-    "@id": "http:none/Layer00_sha256_93da31b6a5499e9b86dcd8ea0cf6b5d0fa9ed5b9beaedceee5b58218b494e80e/none/none",
+    "name": "Layer03_sha256_8f6a7ca929441c126e8faf4b0891d6b95876be80a7f8bec993e3bc56160e71ee",
+    "revision": "",
+    "@id": "http:DOCKER_INSPECTOR/Layer03_sha256_8f6a7ca929441c126e8faf4b0891d6b95876be80a7f8bec993e3bc56160e71ee",
     "@type": "Component",
     "externalIdentifier": {
-      "externalSystemTypeId": "none",
-      "externalId": "Layer00_sha256_93da31b6a5499e9b86dcd8ea0cf6b5d0fa9ed5b9beaedceee5b58218b494e80e/none/none",
+      "externalSystemTypeId": "docker_inspector",
+      "externalId": "Layer03_sha256_8f6a7ca929441c126e8faf4b0891d6b95876be80a7f8bec993e3bc56160e71ee",
       "externalIdMetaData": {
         "forge": {
-          "name": "none",
+          "name": "DOCKER_INSPECTOR",
           "separator": "/",
           "kbSeparator": "/"
         },
-        "name": "Layer00_sha256_93da31b6a5499e9b86dcd8ea0cf6b5d0fa9ed5b9beaedceee5b58218b494e80e",
-        "version": "none",
-        "architecture": "none"
+        "path": "Layer03_sha256_8f6a7ca929441c126e8faf4b0891d6b95876be80a7f8bec993e3bc56160e71ee"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:@ubuntu/ubuntu_minimal/1_325/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/sysv_rc/2_88dsf_41ubuntu6_3/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/util_linux/2_20_1_5_1ubuntu20_9/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libustr_1_0_1/1_0_4_3ubuntu2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libdebconfclient0/0_187ubuntu1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/initramfs_tools/0_103ubuntu4_11/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libterm_ui_perl/0_42_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libapt_pkg4_12/1_0_1ubuntu2_18/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/multiarch_support/2_19_0ubuntu6_14/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/liblockfile1/1_09_6ubuntu1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libgnutls_openssl27/2_12_23_12ubuntu2_8/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libpam0g/1_1_8_1ubuntu2_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libfribidi0/0_19_6_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libgpg_error0/1_12_0_2ubuntu1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/initscripts/2_88dsf_41ubuntu6_3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libdevmapper1_02_1/2_1_02_77_6ubuntu2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/diffutils/1_3_3_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/bsdutils/1_2_20_1_5_1ubuntu20_9/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/sed/4_2_2_4ubuntu1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libstdc__6/4_8_4_2ubuntu1_14_04_4/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libcgmanager0/0_24_0ubuntu7_5/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libgnutls26/2_12_23_12ubuntu2_8/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libtext_iconv_perl/1_7_5build2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/mount/2_20_1_5_1ubuntu20_9/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libpcre3/1_8_31_2ubuntu2_3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/e2fsprogs/1_42_9_3ubuntu1_3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libsepol1/2_2_1ubuntu0_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/vim_common/2_7_4_052_1ubuntu3_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libudev1/204_5ubuntu20_28/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/eject/2_1_5_deb1_cvs20081104_13_1ubuntu0_14_04_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/hostname/3_15ubuntu1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/perl_modules/5_18_2_2ubuntu1_6/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/locales/2_13_git20120306_12_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/ncurses_bin/5_9_20140118_1ubuntu1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/iproute2/3_12_0_2ubuntu1_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libgcc1/1_4_9_3_0ubuntu4/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libgdbm3/1_8_3_12build1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libkmod2/15_0ubuntu7/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/gpgv/1_4_16_1ubuntu2_5/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libmodule_pluggable_perl/5_1_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/logrotate/3_8_7_1ubuntu1_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/dash/0_5_7_4ubuntu1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/udev/204_5ubuntu20_28/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/dmsetup/2_1_02_77_6ubuntu2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/passwd/1_4_1_5_1_1ubuntu9_5/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/coreutils/8_21_1ubuntu5_4/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libpam_cap/1_2_24_0ubuntu2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libbsd0/0_6_0_2ubuntu1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/makedev/2_3_1_93ubuntu2_ubuntu14_04_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libjson0/0_11_3ubuntu1_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/liblog_message_simple_perl/0_10_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/whiptail/0_52_15_2ubuntu5/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/mountall/2_53/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/lsb_release/4_1_Debian11ubuntu6_2/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libnewt0_52/0_52_15_2ubuntu5/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/ncurses_base/5_9_20140118_1ubuntu1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libklibc/2_0_3_0ubuntu1_14_04_3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libapt_inst1_5/1_0_1ubuntu2_18/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/ntpdate/1_4_2_6_p5_dfsg_3ubuntu2_14_04_13/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/base_files/7_2ubuntu5_5/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/python3/3_4_0_0ubuntu2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/module_init_tools/15_0ubuntu7/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libblkid1/2_20_1_5_1ubuntu20_9/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/klibc_utils/2_0_3_0ubuntu1_14_04_3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libprocps3/1_3_3_9_1ubuntu2_3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/kbd/1_15_5_1ubuntu1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libncurses5/5_9_20140118_1ubuntu1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libpng12_0/1_2_50_1ubuntu2_14_04_3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libcap2_bin/1_2_24_0ubuntu2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/mime_support/3_54ubuntu1_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/netcat_openbsd/1_105_7ubuntu1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/kmod/15_0ubuntu7/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libaudit_common/1_2_3_2_2ubuntu1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/plymouth/0_8_8_0ubuntu17_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libtext_soundex_perl/3_4_1build1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/file/1_5_14_2ubuntu3_4/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/debconf/1_5_51ubuntu2/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/netbase/5_2/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libss2/1_42_9_3ubuntu1_3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libcap2/1_2_24_0ubuntu2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libusb_0_1_4/2_0_1_12_23_3ubuntu1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/upstart/1_12_1_0ubuntu4_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libdrm2/2_4_67_1ubuntu0_14_04_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/sudo/1_8_9p5_1ubuntu1_4/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/isc_dhcp_common/4_2_4_7ubuntu12_13/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/liblockfile_bin/1_09_6ubuntu1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libnih_dbus1/1_0_3_4ubuntu25/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/dpkg/1_17_5ubuntu5_8/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/lockfile_progs/0_1_17/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libarchive_extract_perl/0_70_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/debconf_i18n/1_5_51ubuntu2/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libsemanage_common/2_2_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libc6/2_19_0ubuntu6_14/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/xkb_data/2_10_1_1ubuntu1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/lsb_base/4_1_Debian11ubuntu6_2/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/isc_dhcp_client/4_2_4_7ubuntu12_13/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/procps/1_3_3_9_1ubuntu2_3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libpython3_4_minimal/3_4_3_1ubuntu1_14_04_6/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/gcc_4_8_base/4_8_4_2ubuntu1_14_04_4/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libpam_modules_bin/1_1_8_1ubuntu2_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libtasn1_6/3_4_3ubuntu0_6/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/e2fslibs/1_42_9_3ubuntu1_3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/debianutils/4_4/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libpam_modules/1_1_8_1ubuntu2_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libmount1/2_20_1_5_1ubuntu20_9/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libselinux1/2_2_2_1ubuntu0_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/perl/5_18_2_2ubuntu1_6/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libdb5_3/5_3_28_3ubuntu3_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/python3_minimal/3_4_0_0ubuntu2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libtext_charwidth_perl/0_04_7build3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libsqlite3_0/3_8_2_1ubuntu2_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/ubuntu_keyring/2012_05_19/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/ucf/3_0027_nmu1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/iputils_ping/3_20121221_4ubuntu1_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/zlib1g/1_1_2_8_dfsg_1ubuntu1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/sysvinit_utils/2_88dsf_41ubuntu6_3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libuuid1/2_20_1_5_1ubuntu20_9/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/sensible_utils/0_0_9ubuntu0_14_04_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/bash/4_3_7ubuntu1_7/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libc_bin/2_19_0ubuntu6_14/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/tar/1_27_1_1ubuntu0_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libjson_c2/0_11_3ubuntu1_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/cpio/2_11_dfsg_1ubuntu1_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/dh_python/1_20140128_1ubuntu8_2/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libpod_latex_perl/0_61_1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libpython3_stdlib/3_4_0_0ubuntu2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libexpat1/2_1_0_4ubuntu1_4/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libtext_wrapi18n_perl/0_06_7/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/apt/1_0_1ubuntu2_18/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libgcrypt11/1_5_3_2ubuntu4_6/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libssl1_0_0/1_0_1f_1ubuntu2_26/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/apt_utils/1_0_1ubuntu2_18/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/liblocale_gettext_perl/1_05_7build3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libacl1/2_2_52_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/net_tools/1_60_25ubuntu2_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/python3_4/3_4_3_1ubuntu1_14_04_6/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/grep/2_16_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/initramfs_tools_bin/0_103ubuntu4_11/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/insserv/1_14_0_5ubuntu2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/findutils/4_4_2_7/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/mawk/1_3_3_17ubuntu2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/gnupg/1_4_16_1ubuntu2_5/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/cron/3_0pl1_124ubuntu2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/less/458_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libreadline6/6_3_4ubuntu2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/perl_base/5_18_2_2ubuntu1_6/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/vim_tiny/2_7_4_052_1ubuntu3_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/gcc_4_9_base/4_9_3_0ubuntu4/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libslang2/2_2_4_15ubuntu1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/gzip/1_6_3ubuntu1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libpython3_4_stdlib/3_4_3_1ubuntu1_14_04_6/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libtinfo5/5_9_20140118_1ubuntu1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/tzdata/2017c_0ubuntu0_14_04/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libncursesw5/5_9_20140118_1ubuntu1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/readline_common/6_3_4ubuntu2/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/python3_4_minimal/3_4_3_1ubuntu1_14_04_6/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/bzip2/1_0_6_5/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libnih1/1_0_3_4ubuntu25/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/ifupdown/0_7_47_2ubuntu4_5/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libaudit1/1_2_3_2_2ubuntu1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libbz2_1_0/1_0_6_5/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libmpdec2/2_4_0_6/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libpam_runtime/1_1_8_1ubuntu2_2/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libattr1/1_2_4_47_1ubuntu1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libdbus_1_3/1_6_18_0ubuntu4_5/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libmagic1/1_5_14_2ubuntu3_4/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libcomerr2/1_42_9_3ubuntu1_3/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libestr0/0_1_9_0ubuntu2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libffi6/3_1_rc1_r3_0_13_12ubuntu0_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libsemanage1/2_2_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/ureadahead/0_100_0_16/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/base_passwd/3_5_33/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/busybox_initramfs/1_1_21_0_1ubuntu1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/rsyslog/7_4_4_1ubuntu2_7/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/login/1_4_1_5_1_1ubuntu9_5/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/liblzma5/5_1_1alpha_20120614_2ubuntu2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/keyboard_configuration/1_70ubuntu8/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libp11_kit0/0_20_2_2ubuntu2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libpopt0/1_16_8ubuntu1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/adduser/3_113_nmu3ubuntu3/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/init_system_helpers/1_14ubuntu1/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/console_setup/1_70ubuntu8/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/resolvconf/1_69ubuntu1_4/all",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libplymouth2/0_8_8_0ubuntu17_2/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "Layer04_sha256_73dd5183c549685de3be83f6628895d36c6244cfc21f21aad10765c9b528a90b",
+    "revision": "",
+    "@id": "http:DOCKER_INSPECTOR/Layer04_sha256_73dd5183c549685de3be83f6628895d36c6244cfc21f21aad10765c9b528a90b",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "docker_inspector",
+      "externalId": "Layer04_sha256_73dd5183c549685de3be83f6628895d36c6244cfc21f21aad10765c9b528a90b",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "DOCKER_INSPECTOR",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "path": "Layer04_sha256_73dd5183c549685de3be83f6628895d36c6244cfc21f21aad10765c9b528a90b"
       }
     },
     "relationship": [
