@@ -422,17 +422,13 @@ public class DockerClientManager {
         return extractorContainer;
     }
 
-    private void saveImageToFile(final String imageName, final String tagName, final File imageTarFile) throws IOException, IntegrationException {
-        InputStream tarInputStream = null;
-        try {
+    private void saveImageToFile(final String imageName, final String tagName, final File imageTarFile) throws IOException {
             logger.info(String.format("Saving the docker image to : %s", imageTarFile.getCanonicalPath()));
             final DockerClient dockerClient = getDockerClient();
             final String imageToSave = String.format("%s:%s", imageName, tagName);
             final SaveImageCmd saveCommand = dockerClient.saveImageCmd(imageToSave);
-            tarInputStream = saveCommand.exec();
+        try (InputStream tarInputStream = saveCommand.exec()) {
             FileUtils.copyInputStreamToFile(tarInputStream, imageTarFile);
-        } finally {
-            IOUtils.closeQuietly(tarInputStream);
         }
     }
 }

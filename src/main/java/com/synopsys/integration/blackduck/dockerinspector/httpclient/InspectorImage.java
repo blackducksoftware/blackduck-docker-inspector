@@ -21,7 +21,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.synopsys.integration.blackduck.dockerinspector;
+package com.synopsys.integration.blackduck.dockerinspector.httpclient;
 
 import com.synopsys.integration.blackduck.imageinspector.api.OperatingSystemEnum;
 

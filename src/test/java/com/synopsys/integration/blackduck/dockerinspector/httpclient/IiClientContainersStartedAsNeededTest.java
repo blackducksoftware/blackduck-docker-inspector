@@ -14,7 +14,6 @@ import org.mockito.Mockito;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.github.dockerjava.api.model.Container;
-import com.synopsys.integration.blackduck.dockerinspector.InspectorImages;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
 import com.synopsys.integration.blackduck.dockerinspector.httpclient.response.SimpleResponse;

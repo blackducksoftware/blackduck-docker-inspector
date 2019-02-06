@@ -41,7 +41,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.github.dockerjava.api.model.Container;
-import com.synopsys.integration.blackduck.dockerinspector.InspectorImages;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
@@ -80,6 +79,9 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
 
     @Autowired
     private ProgramPaths programPaths;
+
+    @Autowired
+    private ContainerName containerNameManager;
 
     @Override
     public boolean isApplicable() {
@@ -261,7 +263,7 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         final Optional<String> imageId = pullImageTolerantly(imageInspectorRepo, imageInspectorTag);
         final int containerPort = imageInspectorServices.getImageInspectorContainerPort(inspectorOs);
         final int hostPort = imageInspectorServices.getImageInspectorHostPort(inspectorOs);
-        final String containerName = programPaths.deriveContainerName(imageInspectorRepo);
+        final String containerName = containerNameManager.deriveContainerNameFromImageInspectorRepo(imageInspectorRepo);
         final String containerId = dockerClientManager.startContainerAsService(imageInspectorRepo, imageInspectorTag, containerName, inspectorOs, containerPort, hostPort,
             Config.IMAGEINSPECTOR_WS_APPNAME,
             String.format("%s/%s/%s.jar", Config.CONTAINER_BLACKDUCK_DIR, Config.IMAGEINSPECTOR_WS_APPNAME, Config.IMAGEINSPECTOR_WS_APPNAME),

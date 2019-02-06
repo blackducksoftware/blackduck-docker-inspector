@@ -23,11 +23,9 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.config;
 
+import com.synopsys.integration.blackduck.dockerinspector.common.ProcessId;
 import java.io.File;
-import java.lang.management.ManagementFactory;
-import java.util.Date;
 
-import java.util.Optional;
 import javax.annotation.PostConstruct;
 
 import org.apache.commons.lang3.StringUtils;
@@ -42,10 +40,13 @@ public class ProgramPaths {
     @Autowired
     private Config config;
 
+    @Autowired
+    private ProcessId processId;
+
     private static final String HOST_RESULT_JSON_FILENAME = "result.json";
     private static final String RUNDIR_BASENAME = "run";
     public static final String OUTPUT_DIR = "output";
-    public static final String TARGET_DIR = "target";
+    private static final String TARGET_DIR = "target";
     private static final String CONFIG_DIR = "config";
     private String dockerInspectorPgmDirPath;
     private String dockerInspectorRunDirName;
@@ -60,7 +61,6 @@ public class ProgramPaths {
     private String dockerInspectorTargetDirPath;
     private String dockerInspectorDefaultOutputPath;
     private String dockerInspectorResultPath;
-    private String cleanedProcessId;
 
     private String getProgramDirPath() {
         final File workingDir = new File(config.getWorkingDirPath());
@@ -70,13 +70,9 @@ public class ProgramPaths {
 
     @PostConstruct
     public void init() {
-        cleanedProcessId = atSignToUnderscore(getProcessIdOrGenerateUniqueId());
-        logger.info(String.format("Process name: %s", cleanedProcessId));
-        if (StringUtils.isBlank(dockerInspectorPgmDirPath)) {
-            dockerInspectorPgmDirPath = getProgramDirPath();
-        }
+        dockerInspectorPgmDirPath = getProgramDirPath();
         logger.debug(String.format("dockerInspectorPgmDirPath: %s", dockerInspectorPgmDirPath));
-        dockerInspectorRunDirName = adjustWithProcessId(RUNDIR_BASENAME);
+        dockerInspectorRunDirName = processId.addProcessIdToName(RUNDIR_BASENAME);
         final File runDir = new File(dockerInspectorPgmDirPath, dockerInspectorRunDirName);
         dockerInspectorRunDirPath = runDir.getAbsolutePath() + "/";
         logger.debug(String.format("dockerInspectorRunDirPath: %s", dockerInspectorRunDirPath));
@@ -85,19 +81,6 @@ public class ProgramPaths {
         dockerInspectorTargetDirPath = new File(runDir, TARGET_DIR).getAbsolutePath() + "/";
         dockerInspectorDefaultOutputPath = new File(runDir, OUTPUT_DIR).getAbsolutePath() + "/";
         dockerInspectorResultPath = dockerInspectorDefaultOutputPath + HOST_RESULT_JSON_FILENAME;
-    }
-
-    private String getProcessIdOrGenerateUniqueId() {
-        String processId;
-        try {
-            processId = ManagementFactory.getRuntimeMXBean().getName();
-            return processId;
-        } catch (final Throwable t) {
-            logger.debug("Unable to get process ID from system");
-            final long currentMillisecond = new Date().getTime();
-            processId = Long.toString(currentMillisecond);
-        }
-        return processId;
     }
 
     public String getUserOutputDirPath() {
@@ -137,27 +120,6 @@ public class ProgramPaths {
 
     public String getDockerInspectorResultPath() {
         return dockerInspectorResultPath;
-    }
-
-    public String deriveContainerName(final String imageName) {
-        String extractorContainerName;
-        final int slashIndex = imageName.lastIndexOf('/');
-        if (slashIndex < 0) {
-            extractorContainerName = String.format("%s-extractor", imageName);
-        } else {
-            extractorContainerName = imageName.substring(slashIndex + 1);
-        }
-        return adjustWithProcessId(extractorContainerName);
-    }
-
-    private String adjustWithProcessId(final String origName) {
-        final String adjustedName = String.format("%s_%s", origName, cleanedProcessId);
-        logger.debug(String.format("Adjusted %s to %s", origName, adjustedName));
-        return adjustedName;
-    }
-
-    private String atSignToUnderscore(final String imageName) {
-        return imageName.replaceAll("@", "_");
     }
 
     void setConfig(final Config config) {
