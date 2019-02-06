@@ -2,6 +2,7 @@ package com.synopsys.integration.blackduck.dockerinspector.httpclient;
 
 import static org.junit.Assert.assertEquals;
 
+import com.synopsys.integration.blackduck.dockerinspector.common.BdioFilename;
 import org.junit.Test;
 
 import com.synopsys.integration.exception.IntegrationException;

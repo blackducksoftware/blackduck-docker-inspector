@@ -38,11 +38,11 @@ import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
 import com.synopsys.integration.blackduck.dockerinspector.blackduckclient.BlackDuckClient;
-import com.synopsys.integration.blackduck.dockerinspector.common.DockerTarfile;
+import com.synopsys.integration.blackduck.dockerinspector.common.ImageTarFilename;
 import com.synopsys.integration.blackduck.dockerinspector.common.Output;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
-import com.synopsys.integration.blackduck.imageinspector.name.Names;
+import com.synopsys.integration.blackduck.imageinspector.api.name.Names;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.bdio.BdioReader;
 import com.synopsys.integration.bdio.model.SimpleBdioDocument;
@@ -61,7 +61,7 @@ public class RestClientInspector {
     private ProgramPaths programPaths;
 
     @Autowired
-    private DockerTarfile dockerTarfile;
+    private ImageTarFilename dockerTarfile;
 
     @Autowired
     private List<ImageInspectorClient> imageInspectorClients;
@@ -78,7 +78,7 @@ public class RestClientInspector {
     public int getBdio() throws IntegrationException {
         final ImageInspectorClient imageInspectorClient = chooseImageInspectorClient();
         try {
-            output.ensureWriteability();
+            output.ensureOutputDirIsWriteable();
             final File finalDockerTarfile = prepareDockerTarfile(imageInspectorClient);
             final String containerFileSystemFilename = Names.getContainerFileSystemTarFilename(config.getDockerImage(), config.getDockerTar());
             final String dockerTarFilePathInContainer = containerPaths.getContainerPathToTargetFile(finalDockerTarfile.getCanonicalPath());
@@ -127,7 +127,7 @@ public class RestClientInspector {
     }
 
     private File prepareDockerTarfile(final ImageInspectorClient imageInspectorClient) throws IOException, IntegrationException {
-        final File givenDockerTarfile = dockerTarfile.deriveDockerTarFile();
+        final File givenDockerTarfile = dockerTarfile.deriveDockerTarFileFromConfig();
         final File finalDockerTarfile = imageInspectorClient.copyTarfileToSharedDir(givenDockerTarfile);
         return finalDockerTarfile;
     }

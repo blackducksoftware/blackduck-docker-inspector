@@ -23,7 +23,7 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector;
 
-import java.io.IOException;
+import com.synopsys.integration.blackduck.imageinspector.api.OperatingSystemEnum;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,7 +34,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
-import com.synopsys.integration.blackduck.imageinspector.lib.OperatingSystemEnum;
 
 @Component
 public class InspectorImages {
@@ -48,7 +47,7 @@ public class InspectorImages {
     private final Map<OperatingSystemEnum, InspectorImage> inspectorImageMap = new HashMap<>();
 
     @PostConstruct
-    void init() throws IOException {
+    void init() {
         String repoWithSeparator;
         final String repo = config.getInspectorRepository();
         if (StringUtils.isBlank(repo)) {

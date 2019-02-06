@@ -23,7 +23,7 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector;
 
-import com.synopsys.integration.blackduck.imageinspector.lib.OperatingSystemEnum;
+import com.synopsys.integration.blackduck.imageinspector.api.OperatingSystemEnum;
 
 public class InspectorImage {
     private final OperatingSystemEnum os;

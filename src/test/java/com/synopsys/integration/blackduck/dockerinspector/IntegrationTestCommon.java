@@ -17,7 +17,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.gson.Gson;
-import com.synopsys.integration.blackduck.imageinspector.name.Names;
+import com.synopsys.integration.blackduck.imageinspector.api.name.Names;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.bdio.BdioReader;
 import com.synopsys.integration.bdio.model.SimpleBdioDocument;

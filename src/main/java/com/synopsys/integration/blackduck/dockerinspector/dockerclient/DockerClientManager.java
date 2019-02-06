@@ -23,34 +23,9 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.dockerclient;
 
-import com.github.dockerjava.api.model.HostConfig;
-import com.github.dockerjava.api.model.PortBinding;
-import com.github.dockerjava.api.model.Ports;
-import com.github.dockerjava.api.model.Ports.Binding;
-import com.github.dockerjava.api.model.Version;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.github.dockerjava.api.DockerClient;
-import com.github.dockerjava.api.command.CopyArchiveToContainerCmd;
 import com.github.dockerjava.api.command.CreateContainerCmd;
 import com.github.dockerjava.api.command.CreateContainerResponse;
-import com.github.dockerjava.api.command.ExecCreateCmd;
-import com.github.dockerjava.api.command.ExecCreateCmdResponse;
 import com.github.dockerjava.api.command.InspectImageCmd;
 import com.github.dockerjava.api.command.InspectImageResponse;
 import com.github.dockerjava.api.command.PullImageCmd;
@@ -64,25 +39,41 @@ import com.github.dockerjava.api.model.Bind;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.Frame;
+import com.github.dockerjava.api.model.HostConfig;
 import com.github.dockerjava.api.model.Image;
 import com.github.dockerjava.api.model.Info;
+import com.github.dockerjava.api.model.Ports;
+import com.github.dockerjava.api.model.Ports.Binding;
+import com.github.dockerjava.api.model.Version;
 import com.github.dockerjava.api.model.Volume;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DefaultDockerClientConfig.Builder;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.DockerClientConfig;
-import com.github.dockerjava.core.command.ExecStartResultCallback;
 import com.github.dockerjava.core.command.LogContainerResultCallback;
 import com.github.dockerjava.core.command.PullImageResultCallback;
-import com.synopsys.integration.blackduck.dockerinspector.blackduckclient.BlackDuckSecrets;
+import com.synopsys.integration.blackduck.dockerinspector.common.ImageTarFilename;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
-import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.exception.DisabledException;
 import com.synopsys.integration.blackduck.exception.BlackDuckIntegrationException;
 import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
-import com.synopsys.integration.blackduck.imageinspector.name.ImageNameResolver;
-import com.synopsys.integration.blackduck.imageinspector.name.Names;
+import com.synopsys.integration.blackduck.imageinspector.api.name.ImageNameResolver;
 import com.synopsys.integration.exception.IntegrationException;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
 public class DockerClientManager {
@@ -92,6 +83,9 @@ public class DockerClientManager {
 
     @Autowired
     private Config config;
+
+    @Autowired
+    private ImageTarFilename dockerTarfile;
 
     private DockerClient dockerClient;
 
@@ -127,7 +121,7 @@ public class DockerClientManager {
         final String imageName = resolver.getNewImageRepo().get();
         final String tagName = resolver.getNewImageTag().get();
         logger.debug(String.format("Converted image ID %s to image name:tag %s:%s", imageId, imageName, tagName));
-        final File imageTarFile = saveImageToDir(imageTarDirectory, Names.getImageTarFilename(imageName, tagName), imageName, tagName);
+        final File imageTarFile = saveImageToDir(imageTarDirectory, dockerTarfile.deriveImageTarFilenameFromImageTag(imageName, tagName), imageName, tagName);
         return imageTarFile;
     }
 
@@ -140,7 +134,7 @@ public class DockerClientManager {
         } catch (final Exception e) {
             logger.info(String.format("Unable to pull %s:%s; Proceeding anyway since the image might be in local docker image cache. Error on pull: %s", imageName, tagName, e.getMessage()));
         }
-        final File imageTarFile = saveImageToDir(imageTarDirectory, Names.getImageTarFilename(imageName, tagName), imageName, tagName);
+        final File imageTarFile = saveImageToDir(imageTarDirectory, dockerTarfile.deriveImageTarFilenameFromImageTag(imageName, tagName), imageName, tagName);
         if (config.isCleanupTargetImage() && targetImageId.isPresent()) {
             try {
                 removeImage(targetImageId.get());

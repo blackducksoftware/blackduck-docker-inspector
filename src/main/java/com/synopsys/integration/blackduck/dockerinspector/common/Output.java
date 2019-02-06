@@ -27,7 +27,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import java.util.Optional;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -55,7 +54,7 @@ public class Output {
     @Autowired
     private Gson gson;
 
-    public void ensureWriteability() {
+    public void ensureOutputDirIsWriteable() {
         final File outputDir = new File(programPaths.getDockerInspectorDefaultOutputPath());
         final boolean dirCreated = outputDir.mkdirs();
         final boolean dirMadeWriteable = outputDir.setWritable(true, false);
@@ -63,7 +62,7 @@ public class Output {
         logger.debug(String.format("Output dir: %s; created: %b; successfully made writeable: %b; make executable: %b", outputDir.getAbsolutePath(), dirCreated, dirMadeWriteable, dirMadeExecutable));
     }
 
-    public File addBdioFileToOutput(final SimpleBdioDocument bdioDocument) throws IOException, IntegrationException {
+    public File addBdioFileToOutput(final SimpleBdioDocument bdioDocument) throws IOException {
         // if user specified an output dir, use that; else use the temp output dir
         File outputDir;
         if (StringUtils.isNotBlank(config.getOutputPath())) {
@@ -72,7 +71,7 @@ public class Output {
         } else {
             outputDir = new File(programPaths.getDockerInspectorDefaultOutputPath());
         }
-        final String bdioFilename = String.format("%s_bdio.jsonld", bdioDocument.billOfMaterials.spdxName);
+        final String bdioFilename = new BdioFilename(bdioDocument.billOfMaterials.spdxName).getBdioFilename();
         final File outputBdioFile = new File(outputDir, bdioFilename);
         final FileOutputStream outputBdioStream = new FileOutputStream(outputBdioFile);
         logger.info(String.format("Writing BDIO to %s", outputBdioFile.getAbsolutePath()));

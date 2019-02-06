@@ -39,7 +39,7 @@ import com.synopsys.integration.blackduck.exception.BlackDuckIntegrationExceptio
 import com.synopsys.integration.exception.IntegrationException;
 
 @Component
-public class DockerTarfile {
+public class ImageTarFilename {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
@@ -51,13 +51,29 @@ public class DockerTarfile {
     @Autowired
     private ProgramPaths programPaths;
 
-    public File deriveDockerTarFile() throws IOException, IntegrationException {
+    public String deriveImageTarFilenameFromImageTag(final String imageName, final String tagName) {
+        return String.format("%s_%s.tar", cleanImageName(imageName), tagName);
+    }
+
+    public File deriveDockerTarFileFromConfig() throws IOException, IntegrationException {
         logger.debug(String.format("programPaths.getDockerInspectorTargetDirPath(): %s", programPaths.getDockerInspectorTargetDirPath()));
         if (StringUtils.isNotBlank(config.getDockerTar())) {
             return new File(config.getDockerTar());
         } else {
             return deriveDockerTarFileGivenImageSpec();
         }
+    }
+
+    private String cleanImageName(final String imageName) {
+        return colonsToUnderscores(slashesToUnderscore(imageName));
+    }
+
+    private String colonsToUnderscores(final String imageName) {
+        return imageName.replaceAll(":", "_");
+    }
+
+    private String slashesToUnderscore(final String givenString) {
+        return givenString.replaceAll("/", "_");
     }
 
     private File deriveDockerTarFileGivenImageSpec() throws IntegrationException, IOException {

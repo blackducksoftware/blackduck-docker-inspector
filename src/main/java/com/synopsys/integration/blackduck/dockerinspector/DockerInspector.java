@@ -24,6 +24,7 @@
 package com.synopsys.integration.blackduck.dockerinspector;
 
 import com.synopsys.integration.blackduck.dockerinspector.httpclient.RestClientInspector;
+import com.synopsys.integration.blackduck.imageinspector.api.OperatingSystemEnum;
 import java.io.IOException;
 import java.util.List;
 
@@ -45,9 +46,7 @@ import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
 import com.synopsys.integration.blackduck.dockerinspector.help.formatter.UsageFormatter;
-import com.synopsys.integration.blackduck.imageinspector.lib.OperatingSystemEnum;
-import com.synopsys.integration.blackduck.imageinspector.name.ImageNameResolver;
-import com.synopsys.integration.blackduck.imageinspector.result.ResultFile;
+import com.synopsys.integration.blackduck.imageinspector.api.name.ImageNameResolver;
 import com.synopsys.integration.exception.IntegrationException;
 
 @SpringBootApplication
@@ -173,7 +172,7 @@ public class DockerInspector {
         return true;
     }
 
-    private void initImageName() throws IntegrationException {
+    private void initImageName() {
         logger.debug(String.format("initImageName(): dockerImage: %s, dockerTar: %s", config.getDockerImage(), config.getDockerTar()));
         final ImageNameResolver resolver = new ImageNameResolver(config.getDockerImage());
         resolver.getNewImageRepo().ifPresent(repoName -> config.setDockerImageRepo(repoName));

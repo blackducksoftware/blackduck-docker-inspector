@@ -4,11 +4,11 @@
     "spdx:name": "blackducksoftware_whiteouttest_1.0_DPKG",
     "creationInfo": {
       "spdx:creator": [
-        "Tool: IntegrationBdio-16.3.1"
+        "Tool: IntegrationBdio-16.4.0"
       ],
-      "spdx:created": "2019-01-21T22:40:30.227Z"
+      "spdx:created": "2019-02-06T21:27:14.531Z"
     },
-    "@id": "uuid:c8d9e0ff-1a5d-41e6-8f97-6f3b4466eee2",
+    "@id": "uuid:04d4b470-e082-4a94-8cd9-87d0203efb44",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -396,7 +396,7 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libcurl3_gnutls/7_47_0_1ubuntu2_11/amd64",
+        "related": "http:@ubuntu/libcurl3_gnutls/7_47_0_1ubuntu2_12/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -2462,12 +2462,12 @@
   },
   {
     "name": "libcurl3-gnutls",
-    "revision": "7.47.0-1ubuntu2.11",
-    "@id": "http:@ubuntu/libcurl3_gnutls/7_47_0_1ubuntu2_11/amd64",
+    "revision": "7.47.0-1ubuntu2.12",
+    "@id": "http:@ubuntu/libcurl3_gnutls/7_47_0_1ubuntu2_12/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
-      "externalId": "libcurl3-gnutls/7.47.0-1ubuntu2.11/amd64",
+      "externalId": "libcurl3-gnutls/7.47.0-1ubuntu2.12/amd64",
       "externalIdMetaData": {
         "forge": {
           "name": "@ubuntu",
@@ -2475,7 +2475,7 @@
           "kbSeparator": "/"
         },
         "name": "libcurl3-gnutls",
-        "version": "7.47.0-1ubuntu2.11",
+        "version": "7.47.0-1ubuntu2.12",
         "architecture": "amd64"
       }
     },

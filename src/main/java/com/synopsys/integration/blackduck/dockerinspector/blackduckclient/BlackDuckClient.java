@@ -87,10 +87,10 @@ public class BlackDuckClient {
           "Upload of BDIO disabled or offline mode is enabled; skipping verification of Black Duck connection");
       return;
     }
-    BlackDuckHttpClient restConnection;
+    BlackDuckHttpClient httpConnection;
     try {
-      restConnection = createRestConnection(intLogger);
-      restConnection.attemptAuthentication();
+      httpConnection = createHttpConnection(intLogger);
+      httpConnection.attemptAuthentication();
     } catch (final IntegrationException e) {
       final String msg = String.format("Error connecting to Black Duck: %s", e.getMessage());
       throw new BlackDuckIntegrationException(msg);
@@ -105,10 +105,10 @@ public class BlackDuckClient {
       return;
     }
     logger.info("Uploading BDIO files.");
-    final BlackDuckHttpClient restConnection = createRestConnection(intLogger);
+    final BlackDuckHttpClient httpConnection = createHttpConnection(intLogger);
     final BlackDuckServicesFactory blackDuckServicesFactory = createBlackDuckServicesFactory(
         intLogger,
-        restConnection);
+        httpConnection);
     final BdioUploadService bdioUploadService = blackDuckServicesFactory.createBdioUploadService();
 
     UploadBatch uploadBatch = new UploadBatch();
@@ -127,9 +127,9 @@ public class BlackDuckClient {
   }
 
   private BlackDuckServicesFactory createBlackDuckServicesFactory(final IntLogger intLogger,
-      BlackDuckHttpClient restConnection) {
+      BlackDuckHttpClient httpConnection) {
     return new BlackDuckServicesFactory(
-        new Gson(), BlackDuckServicesFactory.createDefaultObjectMapper(), restConnection,
+        new Gson(), BlackDuckServicesFactory.createDefaultObjectMapper(), httpConnection,
         intLogger);
   }
 
@@ -150,10 +150,10 @@ public class BlackDuckClient {
 
   private void phoneHomeBlackDuckConnection(final String dockerEngineVersion) throws IOException {
 
-    final BlackDuckHttpClient restConnection = createRestConnection(intLogger);
+    final BlackDuckHttpClient httpConnection = createHttpConnection(intLogger);
     final BlackDuckServicesFactory blackDuckServicesFactory = createBlackDuckServicesFactory(
         intLogger,
-        restConnection);
+        httpConnection);
 
     Map<String, String> metaDataMap = new HashMap<>();
     if (!StringUtils.isBlank(dockerEngineVersion)) {
@@ -178,7 +178,7 @@ public class BlackDuckClient {
     logger.trace("Attempt to phone home completed");
   }
 
-  private BlackDuckHttpClient createRestConnection(final IntLogger intLogger) throws IllegalStateException {
+  private BlackDuckHttpClient createHttpConnection(final IntLogger intLogger) throws IllegalStateException {
     final BlackDuckServerConfigBuilder blackDuckServerConfigBuilder = createBlackDuckServerConfigBuilder();
     return blackDuckServerConfigBuilder.build().createBlackDuckHttpClient(intLogger);
   }
