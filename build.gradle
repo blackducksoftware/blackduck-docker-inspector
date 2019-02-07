@@ -35,8 +35,6 @@ apply plugin: 'com.blackducksoftware.integration.solution'
 apply plugin: 'com.bmuschko.docker-remote-api'
 
 import com.bmuschko.gradle.docker.tasks.image.Dockerfile
-// TODO: This can go:
-import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 
 apply from: 'airgap.gradle'
 
