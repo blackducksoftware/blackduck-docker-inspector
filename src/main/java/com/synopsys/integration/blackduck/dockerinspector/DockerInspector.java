@@ -23,7 +23,10 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector;
 
+import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorSystemProperties;
 import com.synopsys.integration.blackduck.dockerinspector.httpclient.RestClientInspector;
+import com.synopsys.integration.blackduck.dockerinspector.output.ResultFile;
+import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.blackduck.imageinspector.api.OperatingSystemEnum;
 import java.io.IOException;
 import java.util.List;
@@ -45,7 +48,7 @@ import com.synopsys.integration.blackduck.dockerinspector.blackduckclient.BlackD
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
-import com.synopsys.integration.blackduck.dockerinspector.help.formatter.UsageFormatter;
+import com.synopsys.integration.blackduck.dockerinspector.config.UsageFormatter;
 import com.synopsys.integration.blackduck.imageinspector.api.name.ImageNameResolver;
 import com.synopsys.integration.exception.IntegrationException;
 

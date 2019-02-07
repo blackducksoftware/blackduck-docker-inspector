@@ -21,7 +21,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.synopsys.integration.blackduck.dockerinspector.dockerclient;
+package com.synopsys.integration.blackduck.dockerinspector.programversion;
 
 import java.io.IOException;
 import java.io.InputStream;

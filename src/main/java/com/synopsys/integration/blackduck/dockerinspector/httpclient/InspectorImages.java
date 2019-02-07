@@ -23,7 +23,7 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.httpclient;
 
-import com.synopsys.integration.blackduck.dockerinspector.ProgramVersion;
+import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.blackduck.imageinspector.api.OperatingSystemEnum;
 import java.util.HashMap;
 import java.util.Map;

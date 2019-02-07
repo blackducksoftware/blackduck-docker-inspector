@@ -21,7 +21,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.synopsys.integration.blackduck.dockerinspector.common;
+package com.synopsys.integration.blackduck.dockerinspector;
 
 import java.lang.management.ManagementFactory;
 import java.util.Date;

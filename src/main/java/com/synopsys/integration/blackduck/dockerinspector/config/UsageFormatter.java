@@ -21,7 +21,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.synopsys.integration.blackduck.dockerinspector.help.formatter;
+package com.synopsys.integration.blackduck.dockerinspector.config;
 
 import java.io.IOException;
 import java.util.ArrayList;

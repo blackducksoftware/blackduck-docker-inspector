@@ -2,6 +2,7 @@ package com.synopsys.integration.blackduck.dockerinspector;
 
 import static org.junit.Assert.assertTrue;
 
+import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -17,7 +18,7 @@ import org.junit.jupiter.api.Tag;
 
 @Tag("integration")
 public class CalledFromDetectTest {
-    private static final String TEXT_PRECEDING_BDIO_FILE_DIR_PATH = "Writing BDIO to ";
+    private static final String TEXT_PRECEDING_BDIO_FILE_DIR_PATH = "BDIO Generated: ";
     private static ProgramVersion programVersion;
     private static File executionDir;
 
@@ -75,7 +76,7 @@ public class CalledFromDetectTest {
         final File bdioFile = getBdioFile(detectOutputString);
         assertTrue(bdioFile.exists());
         final String dockerInspectorBdioFileContents = FileUtils.readFileToString(bdioFile, StandardCharsets.UTF_8);
-        assertTrue(dockerInspectorBdioFileContents.contains("\"spdx:name\": \"alpine_latest_APK\","));
+        assertTrue(dockerInspectorBdioFileContents.contains("\"externalId\": \"alpine/latest\","));
 
         assertTrue(detectOutputString.contains("DOCKER: SUCCESS"));
         assertTrue(detectOutputString.contains("Overall Status: SUCCESS"));
@@ -89,7 +90,7 @@ public class CalledFromDetectTest {
 
     private String getBdioFilePath(final String detectOutputString) throws IntegrationException {
         for (final String line : detectOutputString.split("\n")) {
-            if (line.matches(".*Output\\s+: Writing BDIO to .*")) {
+            if (line.matches(String.format(".*%s.*", TEXT_PRECEDING_BDIO_FILE_DIR_PATH))) {
                 System.out.printf("found line: %s\n", line);
                 final int bdioFilePathStart = line.indexOf(TEXT_PRECEDING_BDIO_FILE_DIR_PATH) + TEXT_PRECEDING_BDIO_FILE_DIR_PATH.length();
                 final String bdioFilePath = line.substring(bdioFilePathStart);

@@ -21,32 +21,17 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.synopsys.integration.blackduck.dockerinspector;
+package com.synopsys.integration.blackduck.dockerinspector.output;
 
-import com.google.gson.Gson;
-import com.google.gson.stream.JsonWriter;
-import java.io.Closeable;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.nio.charset.StandardCharsets;
+public class BdioFilename {
+    private final String spdxName;
 
-public class ResultWriter implements Closeable {
-    private final Gson gson;
-    private final JsonWriter jsonWriter;
-
-    public ResultWriter(final Gson gson, final OutputStream outputStream) throws IOException {
-        this.gson = gson;
-        this.jsonWriter = new JsonWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
-        jsonWriter.setIndent("  ");
+    public BdioFilename(final String spdxName) {
+        this.spdxName = spdxName;
     }
 
-    public void writeResult(final Result result) {
-        gson.toJson(result, result.getClass(), jsonWriter);
-    }
-
-    @Override
-    public void close() throws IOException {
-        jsonWriter.close();
+    public String getBdioFilename() {
+        final String bdioFilename = String.format("%s_bdio.jsonld", spdxName);
+        return bdioFilename;
     }
 }

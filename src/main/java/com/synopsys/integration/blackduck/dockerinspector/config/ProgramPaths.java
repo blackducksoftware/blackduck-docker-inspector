@@ -23,7 +23,7 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.config;
 
-import com.synopsys.integration.blackduck.dockerinspector.common.ProcessId;
+import com.synopsys.integration.blackduck.dockerinspector.ProcessId;
 import java.io.File;
 
 import javax.annotation.PostConstruct;
@@ -43,7 +43,7 @@ public class ProgramPaths {
     @Autowired
     private ProcessId processId;
 
-    private static final String HOST_RESULT_JSON_FILENAME = "result.json";
+    private static final String HOST_RESULT_JSON_FILENAME = "output.json";
     private static final String RUNDIR_BASENAME = "run";
     public static final String OUTPUT_DIR = "output";
     private static final String TARGET_DIR = "target";

@@ -21,7 +21,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.synopsys.integration.blackduck.dockerinspector.common;
+package com.synopsys.integration.blackduck.dockerinspector.output;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -37,12 +37,11 @@ import org.springframework.stereotype.Component;
 import com.google.gson.Gson;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
-import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.bdio.BdioWriter;
 import com.synopsys.integration.bdio.model.SimpleBdioDocument;
 
 @Component
-public class Output {
+public class OutputDir {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
@@ -62,7 +61,7 @@ public class Output {
         logger.debug(String.format("Output dir: %s; created: %b; successfully made writeable: %b; make executable: %b", outputDir.getAbsolutePath(), dirCreated, dirMadeWriteable, dirMadeExecutable));
     }
 
-    public File addBdioFileToOutput(final SimpleBdioDocument bdioDocument) throws IOException {
+    public File addBdioFileToOutputDir(final SimpleBdioDocument bdioDocument) throws IOException {
         // if user specified an output dir, use that; else use the temp output dir
         File outputDir;
         if (StringUtils.isNotBlank(config.getOutputPath())) {

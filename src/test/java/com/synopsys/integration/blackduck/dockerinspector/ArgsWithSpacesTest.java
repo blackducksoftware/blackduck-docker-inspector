@@ -2,6 +2,7 @@ package com.synopsys.integration.blackduck.dockerinspector;
 
 import static org.junit.Assert.assertEquals;
 
+import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;

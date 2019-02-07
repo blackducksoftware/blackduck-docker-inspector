@@ -2,6 +2,7 @@ package com.synopsys.integration.blackduck.dockerinspector;
 
 import static org.junit.Assert.assertTrue;
 
+import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;

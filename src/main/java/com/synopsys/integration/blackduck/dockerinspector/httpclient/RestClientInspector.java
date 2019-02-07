@@ -38,8 +38,8 @@ import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
 import com.synopsys.integration.blackduck.dockerinspector.blackduckclient.BlackDuckClient;
-import com.synopsys.integration.blackduck.dockerinspector.common.ImageTarFilename;
-import com.synopsys.integration.blackduck.dockerinspector.common.Output;
+import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarFilename;
+import com.synopsys.integration.blackduck.dockerinspector.output.OutputDir;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.imageinspector.api.name.Names;
@@ -70,7 +70,7 @@ public class RestClientInspector {
     private ContainerPaths containerPaths;
 
     @Autowired
-    private Output output;
+    private OutputDir output;
 
     @Autowired
     private Gson gson;
@@ -92,7 +92,7 @@ public class RestClientInspector {
             logger.debug(String.format("bdioString: %s", bdioString));
             final SimpleBdioDocument bdioDocument = toBdioDocument(bdioString);
             adjustBdio(bdioDocument);
-            final File bdioFile = output.addBdioFileToOutput(bdioDocument);
+            final File bdioFile = output.addBdioFileToOutputDir(bdioDocument);
             if (config.isUploadBdio()) {
                 blackDuckClient.uploadBdio(bdioFile, bdioDocument.billOfMaterials.spdxName);
             }

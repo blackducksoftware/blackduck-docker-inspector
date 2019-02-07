@@ -21,7 +21,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.synopsys.integration.blackduck.dockerinspector;
+package com.synopsys.integration.blackduck.dockerinspector.output;
 
 import com.google.gson.Gson;
 import com.synopsys.integration.blackduck.imageinspector.api.OperatingSystemEnum;
@@ -48,7 +48,7 @@ public class ResultFile {
                 }
             }
         } catch (final Exception e) {
-            logger.error(String.format("Error writing result file: %s", e.getMessage()));
+            logger.error(String.format("Error writing output file: %s", e.getMessage()));
         }
     }
 }

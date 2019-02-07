@@ -53,7 +53,7 @@ import org.springframework.stereotype.Component;
 import com.google.gson.Gson;
 
 import com.synopsys.integration.blackduck.dockerinspector.DockerInspector;
-import com.synopsys.integration.blackduck.dockerinspector.ProgramVersion;
+import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.log.Slf4jIntLogger;
@@ -120,7 +120,7 @@ public class BlackDuckClient {
     final CodeLocationCreationData<UploadBatchOutput> bdioUploadResults = bdioUploadService
         .uploadBdio(uploadRequest);
     bdioUploadResults.getOutput().getOutputs().stream().forEach(o -> logger.debug(String
-        .format("\tUpload %s: result: %s\n", o.getCodeLocationName(),
+        .format("\tUpload %s: output: %s\n", o.getCodeLocationName(),
             o.getResponse().orElse("unknown"))));
     logger.info(
         String.format("Uploaded bdio file %s to %s", bdioFile.getName(), config.getBlackDuckUrl()));

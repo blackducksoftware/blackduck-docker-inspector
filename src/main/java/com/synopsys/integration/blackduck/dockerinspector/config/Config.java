@@ -38,8 +38,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.synopsys.integration.blackduck.dockerinspector.help.ValueDescription;
-
 @Component
 public class Config {
     public static final String IMAGEINSPECTOR_WS_APPNAME = "blackduck-imageinspector";

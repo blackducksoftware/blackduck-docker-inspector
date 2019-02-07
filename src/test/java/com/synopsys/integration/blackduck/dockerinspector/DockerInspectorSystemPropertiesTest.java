@@ -2,6 +2,7 @@ package com.synopsys.integration.blackduck.dockerinspector;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorSystemProperties;
 import com.synopsys.integration.exception.IntegrationException;
 import java.io.File;
 import java.io.IOException;

@@ -2,8 +2,7 @@ package com.synopsys.integration.blackduck.dockerinspector.httpclient;
 
 import static org.junit.Assert.assertEquals;
 
-import com.synopsys.integration.blackduck.dockerinspector.ProgramVersion;
-import com.synopsys.integration.blackduck.dockerinspector.httpclient.InspectorImages;
+import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import java.io.IOException;
 
 import org.junit.Test;
