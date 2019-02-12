@@ -66,7 +66,7 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
     private ImageInspectorServices imageInspectorServices;
 
     @Autowired
-    private RestConnectionCreator restConnectionCreator;
+    private HttpConnectionCreator httpConnectionCreator;
 
     @Autowired
     private HttpRequestor httpRequestor;
@@ -238,7 +238,8 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         logger.debug(String.format("Creating a rest connection (%d second timeout) for URL: %s", serviceRequestTimeoutSeconds, imageInspectorUri.toString()));
         IntHttpClient restConnection;
         try {
-            restConnection = restConnectionCreator.createNonRedirectingConnection(imageInspectorUri, serviceRequestTimeoutSeconds);
+            restConnection = httpConnectionCreator
+                .createNonRedirectingConnection(imageInspectorUri, serviceRequestTimeoutSeconds);
         } catch (final MalformedURLException e) {
             throw new IntegrationException(String.format("Error creating connection for URL: %s, timeout: %d", imageInspectorUri.toString(), serviceRequestTimeoutSeconds), e);
         }

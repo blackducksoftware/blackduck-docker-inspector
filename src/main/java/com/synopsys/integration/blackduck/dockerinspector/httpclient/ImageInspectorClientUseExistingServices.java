@@ -50,7 +50,7 @@ public class ImageInspectorClientUseExistingServices implements ImageInspectorCl
     private HttpRequestor restRequester;
 
     @Autowired
-    private RestConnectionCreator restConnectionCreator;
+    private HttpConnectionCreator httpConnectionCreator;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -78,7 +78,8 @@ public class ImageInspectorClientUseExistingServices implements ImageInspectorCl
             throw new IntegrationException(String.format("Error constructing URI from %s: %s", config.getImageInspectorUrl(), e.getMessage()), e);
         }
         final int serviceRequestTimeoutSeconds = (int) (config.getCommandTimeout() / 1000L);
-        final IntHttpClient restConnection = restConnectionCreator.createRedirectingConnection(imageInspectorUri, serviceRequestTimeoutSeconds);
+        final IntHttpClient restConnection = httpConnectionCreator
+            .createRedirectingConnection(imageInspectorUri, serviceRequestTimeoutSeconds);
         final SimpleResponse response = restRequester.executeGetBdioRequest(restConnection, imageInspectorUri, containerPathToInputDockerTarfile,
                 givenImageRepo, givenImageTag, containerPathToOutputFileSystemFile, organizeComponentsByLayer, includeRemovedComponents, cleanup);
         return response.getBody();

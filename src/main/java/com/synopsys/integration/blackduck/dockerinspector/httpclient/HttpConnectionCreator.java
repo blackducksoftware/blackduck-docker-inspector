@@ -38,7 +38,7 @@ import com.synopsys.integration.log.Slf4jIntLogger;
 
 
 @Component
-public class RestConnectionCreator {
+public class HttpConnectionCreator {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // Be sure to close the rest connection

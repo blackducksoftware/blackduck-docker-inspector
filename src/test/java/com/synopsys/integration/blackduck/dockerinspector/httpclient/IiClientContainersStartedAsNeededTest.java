@@ -35,7 +35,7 @@ public class IiClientContainersStartedAsNeededTest {
     private ImageInspectorServices imageInspectorPorts;
 
     @Mock
-    private RestConnectionCreator restConnectionCreator;
+    private HttpConnectionCreator httpConnectionCreator;
 
     @Mock
     private HttpRequestor httpRequestor;
@@ -61,7 +61,8 @@ public class IiClientContainersStartedAsNeededTest {
         Mockito.when(dockerClientManager.getRunningContainerByAppName(Mockito.anyString(), Mockito.any(ImageInspectorOsEnum.class))).thenReturn(targetContainer);
 
         final IntHttpClient restConnection = Mockito.mock(IntHttpClient.class);
-        Mockito.when(restConnectionCreator.createNonRedirectingConnection(Mockito.any(URI.class), Mockito.anyInt())).thenReturn(restConnection);
+        Mockito.when(
+            httpConnectionCreator.createNonRedirectingConnection(Mockito.any(URI.class), Mockito.anyInt())).thenReturn(restConnection);
 
         Mockito.when(httpRequestor.executeSimpleGetRequest(Mockito.any(IntHttpClient.class), Mockito.any(URI.class), Mockito.anyString())).thenReturn("{\"status\":\"UP\"}");
         // Mockito.when(restRequestor.executeSimpleGetRequest(Mockito.any(RestConnection.class), Mockito.anyString(), Mockito.anyString())).thenReturn("testResponse");

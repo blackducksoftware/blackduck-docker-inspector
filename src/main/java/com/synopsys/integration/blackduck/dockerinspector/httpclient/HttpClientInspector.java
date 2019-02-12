@@ -48,7 +48,7 @@ import com.synopsys.integration.bdio.BdioReader;
 import com.synopsys.integration.bdio.model.SimpleBdioDocument;
 
 @Component
-public class RestClientInspector {
+public class HttpClientInspector {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired

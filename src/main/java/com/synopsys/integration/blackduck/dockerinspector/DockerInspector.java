@@ -24,7 +24,7 @@
 package com.synopsys.integration.blackduck.dockerinspector;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorSystemProperties;
-import com.synopsys.integration.blackduck.dockerinspector.httpclient.RestClientInspector;
+import com.synopsys.integration.blackduck.dockerinspector.httpclient.HttpClientInspector;
 import com.synopsys.integration.blackduck.dockerinspector.output.ResultFile;
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.blackduck.imageinspector.api.OperatingSystemEnum;
@@ -82,7 +82,7 @@ public class DockerInspector {
     private Config config;
 
     @Autowired
-    private RestClientInspector inspector;
+    private HttpClientInspector inspector;
 
     @Autowired
     private UsageFormatter usageFormatter;
