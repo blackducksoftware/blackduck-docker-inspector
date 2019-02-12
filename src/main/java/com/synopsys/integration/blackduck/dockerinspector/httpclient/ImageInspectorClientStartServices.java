@@ -23,6 +23,7 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.httpclient;
 
+import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.rest.client.IntHttpClient;
 import java.io.File;
 import java.io.IOException;
@@ -53,14 +54,15 @@ import com.synopsys.integration.rest.exception.IntegrationRestException;
 
 @Component
 public class ImageInspectorClientStartServices implements ImageInspectorClient {
-    private static final long CONTAINER_START_WAIT_MILLISECONDS = 2000L;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private final int MAX_CONTAINER_START_TRY_COUNT = 30;
     private final String II_SERVICE_URI_SCHEME = "http";
     private final String II_SERVICE_HOST = "localhost";
 
     @Autowired
     private Config config;
+
+    @Autowired
+    private ProgramVersion programVersion;
 
     @Autowired
     private ImageInspectorServices imageInspectorServices;
@@ -246,8 +248,8 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         return restConnection;
     }
 
-    private ContainerDetails ensureServiceReady(final IntHttpClient restConnection, final URI imageInspectorUri, final ImageInspectorOsEnum inspectorOs) throws IntegrationException {
-        boolean serviceIsUp = checkServiceHealth(restConnection, imageInspectorUri);
+    private ContainerDetails ensureServiceReady(final IntHttpClient httpClient, final URI imageInspectorUri, final ImageInspectorOsEnum inspectorOs) throws IntegrationException {
+        boolean serviceIsUp = imageInspectorServices.checkServiceHealth(httpClient, imageInspectorUri);
         if (serviceIsUp) {
             final Container container = dockerClientManager.getRunningContainerByAppName(Config.IMAGEINSPECTOR_WS_APPNAME, inspectorOs);
             return new ContainerDetails(null, container.getId());
@@ -271,12 +273,21 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
             deriveInspectorBaseUri(config.getImageInspectorHostPortAlpine()).toString(), deriveInspectorBaseUri(config.getImageInspectorHostPortCentos()).toString(),
             deriveInspectorBaseUri(config.getImageInspectorHostPortUbuntu()).toString());
         final ContainerDetails containerDetails = new ContainerDetails(imageId.orElse(null), containerId);
-        serviceIsUp = startService(restConnection, imageInspectorUri, imageInspectorRepo, imageInspectorTag);
+        serviceIsUp = imageInspectorServices.startService(httpClient, imageInspectorUri, imageInspectorRepo, imageInspectorTag);
         if (!serviceIsUp) {
             dockerClientManager.logServiceLogAsDebug(containerId);
             throw new IntegrationException(String.format("Tried to start image imspector container %s:%s, but service %s never came online", imageInspectorRepo, imageInspectorTag, imageInspectorUri.toString()));
         }
+        checkServiceVersion(httpClient, imageInspectorUri);
         return containerDetails;
+    }
+
+    private void checkServiceVersion(IntHttpClient httpClient, URI imageInspectorUri) {
+        final String serviceVersion = imageInspectorServices.getServiceVersion(httpClient, imageInspectorUri);
+        final String expectedServiceVersion = programVersion.getInspectorImageVersion();
+        if (!serviceVersion.equals(expectedServiceVersion)) {
+            logger.warn(String.format("Expected service version %s; Service reported version %s", expectedServiceVersion, serviceVersion));
+        }
     }
 
     private Optional<String> pullImageTolerantly(final String imageInspectorRepo, final String imageInspectorTag) {
@@ -290,34 +301,4 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         return imageId;
     }
 
-    private boolean startService(final IntHttpClient httpClient, final URI imageInspectorUri, final String imageInspectorRepo, final String imageInspectorTag) throws IntegrationException {
-        boolean serviceIsUp = false;
-        for (int tryIndex = 0; tryIndex < MAX_CONTAINER_START_TRY_COUNT && !serviceIsUp; tryIndex++) {
-            try {
-                final long timeoutMilliseconds = CONTAINER_START_WAIT_MILLISECONDS;
-                logger.debug(String.format("Pausing %d seconds to give service time to start up", (int) (timeoutMilliseconds / 1000L)));
-                Thread.sleep(timeoutMilliseconds);
-            } catch (final InterruptedException e) {
-                logger.error(String.format("Interrupted exception thrown while pausing so image imspector container based on image %s:%s could start", imageInspectorRepo, imageInspectorTag), e);
-            }
-            logger.debug(String.format("Checking service %s to see if it is up; attempt %d of %d", imageInspectorUri.toString(), tryIndex + 1, MAX_CONTAINER_START_TRY_COUNT));
-            serviceIsUp = checkServiceHealth(httpClient, imageInspectorUri);
-        }
-        return serviceIsUp;
-    }
-
-    private boolean checkServiceHealth(final IntHttpClient httpClient, final URI imageInspectorUri) throws IntegrationException {
-        logger.debug(String.format("Sending request for health check to: %s", imageInspectorUri));
-        String healthCheckResponse;
-        try {
-            healthCheckResponse = httpRequestor
-                .executeSimpleGetRequest(httpClient, imageInspectorUri, "health");
-        } catch (final IntegrationException e) {
-            logger.debug(String.format("Health check failed: %s", e.getMessage()));
-            return false;
-        }
-        logger.debug(String.format("ImageInspector health check response: %s", healthCheckResponse));
-        final boolean serviceIsUp = healthCheckResponse.contains("\"status\":\"UP\"");
-        return serviceIsUp;
-    }
 }

@@ -2,10 +2,12 @@ package com.synopsys.integration.blackduck.dockerinspector.httpclient;
 
 import static org.junit.Assert.assertEquals;
 
+import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.rest.client.IntHttpClient;
 import java.io.IOException;
 import java.net.URI;
 
+import java.net.URL;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -14,6 +16,7 @@ import org.mockito.Mockito;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.github.dockerjava.api.model.Container;
+import com.synopsys.integration.rest.client.IntHttpClient;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
 import com.synopsys.integration.blackduck.dockerinspector.httpclient.response.SimpleResponse;
@@ -32,7 +35,7 @@ public class IiClientContainersStartedAsNeededTest {
     private Config config;
 
     @Mock
-    private ImageInspectorServices imageInspectorPorts;
+    private ImageInspectorServices imageInspectorServices;
 
     @Mock
     private HttpConnectionCreator httpConnectionCreator;
@@ -47,14 +50,23 @@ public class IiClientContainersStartedAsNeededTest {
     private DockerClientManager dockerClientManager;
 
     @Mock
-    private ContainerPaths containerPaths;
+    private ProgramVersion programVersion;
+
+
+    @Mock
+    private ContainerName containerName;
 
     @Test
     public void test() throws IntegrationException, IOException {
         Mockito.when(config.isImageInspectorServiceStart()).thenReturn(true);
-        Mockito.when(imageInspectorPorts.getDefaultImageInspectorHostPortBasedOnDistro()).thenReturn(8080);
+        Mockito.when(imageInspectorServices.getDefaultImageInspectorHostPortBasedOnDistro()).thenReturn(8080);
         Mockito.when(config.getCommandTimeout()).thenReturn(5000L);
         Mockito.when(config.getImageInspectorDefaultDistro()).thenReturn("ubuntu");
+        Mockito.when(containerName.deriveContainerNameFromImageInspectorRepo(Mockito.anyString())).thenReturn("testContainerName");
+        Mockito.when(imageInspectorServices.getServiceVersion(Mockito.any(IntHttpClient.class), Mockito.any(URI.class))).thenReturn("actualServiceVersion");
+        Mockito.when(programVersion.getInspectorImageVersion()).thenReturn("expectedServiceVersion");
+        Mockito.when(imageInspectorServices.startService(Mockito.any(IntHttpClient.class), Mockito.any(
+            URI.class), Mockito.anyString(), Mockito.anyString())).thenReturn(true);
 
         final Container targetContainer = Mockito.mock(Container.class);
         Mockito.when(targetContainer.getImage()).thenReturn("target");
