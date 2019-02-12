@@ -63,8 +63,8 @@ public class IiClientContainersStartedAsNeededTest {
         Mockito.when(config.getCommandTimeout()).thenReturn(5000L);
         Mockito.when(config.getImageInspectorDefaultDistro()).thenReturn("ubuntu");
         Mockito.when(containerName.deriveContainerNameFromImageInspectorRepo(Mockito.anyString())).thenReturn("testContainerName");
-        Mockito.when(imageInspectorServices.getServiceVersion(Mockito.any(IntHttpClient.class), Mockito.any(URI.class))).thenReturn("actualServiceVersion");
-        Mockito.when(programVersion.getInspectorImageVersion()).thenReturn("expectedServiceVersion");
+        Mockito.when(imageInspectorServices.getServiceVersion(Mockito.any(IntHttpClient.class), Mockito.any(URI.class))).thenReturn("1.1.1");
+        Mockito.when(programVersion.getInspectorImageVersion()).thenReturn("2.2.2");
         Mockito.when(imageInspectorServices.startService(Mockito.any(IntHttpClient.class), Mockito.any(
             URI.class), Mockito.anyString(), Mockito.anyString())).thenReturn(true);
 

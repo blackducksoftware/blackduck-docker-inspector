@@ -286,7 +286,7 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         final String serviceVersion = imageInspectorServices.getServiceVersion(httpClient, imageInspectorUri);
         final String expectedServiceVersion = programVersion.getInspectorImageVersion();
         if (!serviceVersion.equals(expectedServiceVersion)) {
-            logger.warn(String.format("Expected service version %s; Service reported version %s", expectedServiceVersion, serviceVersion));
+            logger.warn(String.format("Expected image inspector service version %s, but the running image inspector service is version %s; This version of Docker Inspector is designed to work with image inspector service version %s. Please stop and remove all running image inspector containers.", expectedServiceVersion, serviceVersion, expectedServiceVersion));
         }
     }
 
