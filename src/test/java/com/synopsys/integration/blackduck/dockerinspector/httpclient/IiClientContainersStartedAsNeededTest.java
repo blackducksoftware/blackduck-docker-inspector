@@ -16,12 +16,10 @@ import org.mockito.Mockito;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.github.dockerjava.api.model.Container;
-import com.synopsys.integration.rest.client.IntHttpClient;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
 import com.synopsys.integration.blackduck.dockerinspector.httpclient.response.SimpleResponse;
 import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
-import com.synopsys.integration.blackduck.imageinspector.api.OperatingSystemEnum;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.rest.RestConstants;
 
@@ -83,8 +81,8 @@ public class IiClientContainersStartedAsNeededTest {
             .executeGetBdioRequest(Mockito.any(IntHttpClient.class), Mockito.any(URI.class), Mockito.anyString(), Mockito.anyString(),
                 Mockito.anyString(), Mockito.anyString(), Mockito.anyBoolean(), Mockito.anyBoolean(), Mockito.anyBoolean())).thenReturn(response);
 
-        Mockito.when(inspectorImages.getInspectorImageName(Mockito.any(OperatingSystemEnum.class))).thenReturn("blackduck/blackduck-imageinspector");
-        Mockito.when(inspectorImages.getInspectorImageTag(Mockito.any(OperatingSystemEnum.class))).thenReturn("1.1.1");
+        Mockito.when(inspectorImages.getInspectorImageName(Mockito.any(ImageInspectorOsEnum.class))).thenReturn("blackduck/blackduck-imageinspector");
+        Mockito.when(inspectorImages.getInspectorImageTag(Mockito.any(ImageInspectorOsEnum.class))).thenReturn("1.1.1");
 
         assertEquals(true, imageInspectorClientContainersStartedAsNeeded.isApplicable());
         assertEquals("testResult", imageInspectorClientContainersStartedAsNeeded.getBdio("/tmp/t.tar", null, null, "/tmp/t.tar", "containerFileSystemFilename", true, false, false));

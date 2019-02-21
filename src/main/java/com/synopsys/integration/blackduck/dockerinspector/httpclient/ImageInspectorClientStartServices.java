@@ -260,8 +260,8 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         }
         final String imageInspectorRepo;
         final String imageInspectorTag;
-        imageInspectorRepo = inspectorImages.getInspectorImageName(inspectorOs.getRawOs());
-        imageInspectorTag = inspectorImages.getInspectorImageTag(inspectorOs.getRawOs());
+        imageInspectorRepo = inspectorImages.getInspectorImageName(inspectorOs);
+        imageInspectorTag = inspectorImages.getInspectorImageTag(inspectorOs);
         logger.debug(String.format("Need to pull/run image %s:%s to start the %s service", imageInspectorRepo, imageInspectorTag, imageInspectorUri.toString()));
         final Optional<String> imageId = pullImageTolerantly(imageInspectorRepo, imageInspectorTag);
         final int containerPort = imageInspectorServices.getImageInspectorContainerPort(inspectorOs);

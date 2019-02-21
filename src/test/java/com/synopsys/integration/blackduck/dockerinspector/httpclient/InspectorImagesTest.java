@@ -3,6 +3,7 @@ package com.synopsys.integration.blackduck.dockerinspector.httpclient;
 import static org.junit.Assert.assertEquals;
 
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
+import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 import java.io.IOException;
 
 import org.junit.Test;
@@ -13,7 +14,6 @@ import org.mockito.Mockito;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
-import com.synopsys.integration.blackduck.imageinspector.api.OperatingSystemEnum;
 
 @RunWith(SpringRunner.class)
 public class InspectorImagesTest {
@@ -37,49 +37,46 @@ public class InspectorImagesTest {
         Mockito.when(programVersion.getProgramVersion()).thenReturn(PROGRAM_VERSION);
         osMapper.init();
 
-        assertEquals("blackducksoftware/blackduck-imageinspector-centos", osMapper.getInspectorImageName(OperatingSystemEnum.CENTOS));
-        assertEquals(PROGRAM_VERSION, osMapper.getInspectorImageTag(OperatingSystemEnum.CENTOS));
-        assertEquals(OperatingSystemEnum.CENTOS, osMapper.getInspectorImageOs(OperatingSystemEnum.CENTOS));
+        assertEquals("blackducksoftware/blackduck-imageinspector-centos", osMapper.getInspectorImageName(ImageInspectorOsEnum.CENTOS));
+        assertEquals(PROGRAM_VERSION, osMapper.getInspectorImageTag(ImageInspectorOsEnum.CENTOS));
 
-        assertEquals("blackducksoftware/blackduck-imageinspector-ubuntu", osMapper.getInspectorImageName(OperatingSystemEnum.UBUNTU));
-        assertEquals(PROGRAM_VERSION, osMapper.getInspectorImageTag(OperatingSystemEnum.UBUNTU));
-        assertEquals(OperatingSystemEnum.UBUNTU, osMapper.getInspectorImageOs(OperatingSystemEnum.UBUNTU));
+        assertEquals("blackducksoftware/blackduck-imageinspector-ubuntu", osMapper.getInspectorImageName(ImageInspectorOsEnum.UBUNTU));
+        assertEquals(PROGRAM_VERSION, osMapper.getInspectorImageTag(ImageInspectorOsEnum.UBUNTU));
 
-        assertEquals("blackducksoftware/blackduck-imageinspector-alpine", osMapper.getInspectorImageName(OperatingSystemEnum.ALPINE));
-        assertEquals(PROGRAM_VERSION, osMapper.getInspectorImageTag(OperatingSystemEnum.ALPINE));
-        assertEquals(OperatingSystemEnum.ALPINE, osMapper.getInspectorImageOs(OperatingSystemEnum.ALPINE));
+        assertEquals("blackducksoftware/blackduck-imageinspector-alpine", osMapper.getInspectorImageName(ImageInspectorOsEnum.ALPINE));
+        assertEquals(PROGRAM_VERSION, osMapper.getInspectorImageTag(ImageInspectorOsEnum.ALPINE));
     }
 
     @Test
-    public void testAlternateRepoWithoutSlash() throws IOException {
+    public void testAlternateRepoWithoutSlash() {
         Mockito.when(config.getInspectorRepository()).thenReturn("myrepo");
         Mockito.when(config.getInspectorImageFamily()).thenReturn("blackduck-imageinspector");
         Mockito.when(config.getInspectorImageVersion()).thenReturn(PROGRAM_VERSION);
         Mockito.when(programVersion.getProgramVersion()).thenReturn(PROGRAM_VERSION);
         osMapper.init();
 
-        assertEquals("myrepo/blackduck-imageinspector-centos", osMapper.getInspectorImageName(OperatingSystemEnum.CENTOS));
+        assertEquals("myrepo/blackduck-imageinspector-centos", osMapper.getInspectorImageName(ImageInspectorOsEnum.CENTOS));
     }
 
     @Test
-    public void testAlternateRepoWithSlash() throws IOException {
+    public void testAlternateRepoWithSlash() {
         Mockito.when(config.getInspectorRepository()).thenReturn("myrepo/");
         Mockito.when(config.getInspectorImageFamily()).thenReturn("blackduck-imageinspector");
         Mockito.when(config.getInspectorImageVersion()).thenReturn(PROGRAM_VERSION);
         Mockito.when(programVersion.getProgramVersion()).thenReturn(PROGRAM_VERSION);
         osMapper.init();
 
-        assertEquals("myrepo/blackduck-imageinspector-centos", osMapper.getInspectorImageName(OperatingSystemEnum.CENTOS));
+        assertEquals("myrepo/blackduck-imageinspector-centos", osMapper.getInspectorImageName(ImageInspectorOsEnum.CENTOS));
     }
 
     @Test
-    public void testNoRepo() throws IOException {
+    public void testNoRepo() {
         Mockito.when(config.getInspectorRepository()).thenReturn("");
         Mockito.when(config.getInspectorImageFamily()).thenReturn("blackduck-imageinspector");
         Mockito.when(config.getInspectorImageVersion()).thenReturn(PROGRAM_VERSION);
         Mockito.when(programVersion.getProgramVersion()).thenReturn(PROGRAM_VERSION);
         osMapper.init();
 
-        assertEquals("blackduck-imageinspector-centos", osMapper.getInspectorImageName(OperatingSystemEnum.CENTOS));
+        assertEquals("blackduck-imageinspector-centos", osMapper.getInspectorImageName(ImageInspectorOsEnum.CENTOS));
     }
 }

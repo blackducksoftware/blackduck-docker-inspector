@@ -24,7 +24,7 @@
 package com.synopsys.integration.blackduck.dockerinspector.httpclient;
 
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
-import com.synopsys.integration.blackduck.imageinspector.api.OperatingSystemEnum;
+import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,7 +45,7 @@ public class InspectorImages {
     @Autowired
     private Config config;
 
-    private final Map<OperatingSystemEnum, InspectorImage> inspectorImageMap = new HashMap<>();
+    private final Map<ImageInspectorOsEnum, InspectorImage> inspectorImageMap = new HashMap<>();
 
     @PostConstruct
     void init() {
@@ -66,22 +66,12 @@ public class InspectorImages {
         if (StringUtils.isBlank(inspectorImageVersion)) {
             inspectorImageVersion = programVersion.getInspectorImageVersion();
         }
-        inspectorImageMap.put(OperatingSystemEnum.CENTOS, new InspectorImage(OperatingSystemEnum.CENTOS, String.format("%s%s-centos", repoWithSeparator, inspectorImageFamily), inspectorImageVersion));
-        inspectorImageMap.put(OperatingSystemEnum.FEDORA, new InspectorImage(OperatingSystemEnum.CENTOS, String.format("%s%s-centos", repoWithSeparator, inspectorImageFamily), inspectorImageVersion));
-        inspectorImageMap.put(OperatingSystemEnum.DEBIAN, new InspectorImage(OperatingSystemEnum.UBUNTU, String.format("%s%s-ubuntu", repoWithSeparator, inspectorImageFamily), inspectorImageVersion));
-        inspectorImageMap.put(OperatingSystemEnum.UBUNTU, new InspectorImage(OperatingSystemEnum.UBUNTU, String.format("%s%s-ubuntu", repoWithSeparator, inspectorImageFamily), inspectorImageVersion));
-        inspectorImageMap.put(OperatingSystemEnum.ALPINE, new InspectorImage(OperatingSystemEnum.ALPINE, String.format("%s%s-alpine", repoWithSeparator, inspectorImageFamily), inspectorImageVersion));
+        inspectorImageMap.put(ImageInspectorOsEnum.CENTOS, new InspectorImage(ImageInspectorOsEnum.CENTOS, String.format("%s%s-centos", repoWithSeparator, inspectorImageFamily), inspectorImageVersion));
+        inspectorImageMap.put(ImageInspectorOsEnum.UBUNTU, new InspectorImage(ImageInspectorOsEnum.UBUNTU, String.format("%s%s-ubuntu", repoWithSeparator, inspectorImageFamily), inspectorImageVersion));
+        inspectorImageMap.put(ImageInspectorOsEnum.ALPINE, new InspectorImage(ImageInspectorOsEnum.ALPINE, String.format("%s%s-alpine", repoWithSeparator, inspectorImageFamily), inspectorImageVersion));
     }
 
-    OperatingSystemEnum getInspectorImageOs(final OperatingSystemEnum targetImageOs) {
-        final InspectorImage image = inspectorImageMap.get(targetImageOs);
-        if (image == null) {
-            return null;
-        }
-        return image.getOs();
-    }
-
-    public String getInspectorImageName(final OperatingSystemEnum targetImageOs) {
+    public String getInspectorImageName(final ImageInspectorOsEnum targetImageOs) {
         final InspectorImage image = inspectorImageMap.get(targetImageOs);
         if (image == null) {
             return null;
@@ -89,7 +79,7 @@ public class InspectorImages {
         return image.getImageName();
     }
 
-    public String getInspectorImageTag(final OperatingSystemEnum targetImageOs) {
+    public String getInspectorImageTag(final ImageInspectorOsEnum targetImageOs) {
         final InspectorImage image = inspectorImageMap.get(targetImageOs);
         if (image == null) {
             return null;

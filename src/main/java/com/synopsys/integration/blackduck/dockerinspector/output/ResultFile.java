@@ -24,7 +24,7 @@
 package com.synopsys.integration.blackduck.dockerinspector.output;
 
 import com.google.gson.Gson;
-import com.synopsys.integration.blackduck.imageinspector.api.OperatingSystemEnum;
+import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 import java.io.File;
 import java.io.FileOutputStream;
 import org.slf4j.Logger;
@@ -35,7 +35,7 @@ import org.springframework.stereotype.Component;
 public class ResultFile {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public void write(final Gson gson, final String resultFilePath, final boolean succeeded, final String msg, final OperatingSystemEnum targetOs, final String runOnImageName, final String runOnImageTag, final String dockerTarfilename,
+    public void write(final Gson gson, final String resultFilePath, final boolean succeeded, final String msg, final ImageInspectorOsEnum targetOs, final String runOnImageName, final String runOnImageTag, final String dockerTarfilename,
             final String bdioFilename) {
         final String runOnOsName = targetOs == null ? "" : targetOs.name().toLowerCase();
         final Result result = new Result(succeeded, msg, runOnOsName, runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename);

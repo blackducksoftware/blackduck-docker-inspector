@@ -27,7 +27,7 @@ import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspector
 import com.synopsys.integration.blackduck.dockerinspector.httpclient.HttpClientInspector;
 import com.synopsys.integration.blackduck.dockerinspector.output.ResultFile;
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
-import com.synopsys.integration.blackduck.imageinspector.api.OperatingSystemEnum;
+import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 import java.io.IOException;
 import java.util.List;
 
@@ -108,7 +108,7 @@ public class DockerInspector {
             logger.error(msg);
             final String trace = ExceptionUtils.getStackTrace(e);
             logger.debug(String.format("Stack trace: %s", trace));
-            resultFile.write(new Gson(), programPaths.getDockerInspectorResultPath(), false, msg, OperatingSystemEnum.UBUNTU, "unknown", "unknown",
+            resultFile.write(new Gson(), programPaths.getDockerInspectorResultPath(), false, msg, ImageInspectorOsEnum.UBUNTU, "unknown", "unknown",
                     "unknown", "unknown");
         }
         logger.info(String.format("Returning %d", returnCode));
