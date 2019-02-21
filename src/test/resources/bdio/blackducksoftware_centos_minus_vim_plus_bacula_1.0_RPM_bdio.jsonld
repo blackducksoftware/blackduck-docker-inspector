@@ -6,9 +6,9 @@
       "spdx:creator": [
         "Tool: IntegrationBdio-16.1.1"
       ],
-      "spdx:created": "2019-02-03T19:05:11.199Z"
+      "spdx:created": "2019-02-21T15:11:44.752Z"
     },
-    "@id": "uuid:b7b028b4-9945-43b6-ae7f-4785bbee778b",
+    "@id": "uuid:b33ac71b-3381-4367-89fc-32b272a76356",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -124,6 +124,10 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:@centos/systemd/219_62_el7_6_5/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:@centos/elfutils_libelf/0_166_2_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -137,10 +141,6 @@
       },
       {
         "related": "http:@centos/lz4/1_7_5_2_el7/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@centos/systemd/219_62_el7_6_3/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -372,11 +372,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@centos/systemd_libs/219_62_el7_6_3/x86_64",
+        "related": "http:@centos/gpgme/1_3_2_5_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@centos/gpgme/1_3_2_5_el7/x86_64",
+        "related": "http:@centos/systemd_libs/219_62_el7_6_5/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -620,10 +620,6 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@centos/systemd_sysv/219_62_el7_6_3/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
         "related": "http:@centos/libacl/2_2_51_12_el7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
@@ -633,6 +629,10 @@
       },
       {
         "related": "http:@centos/coreutils/8_22_18_el7/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@centos/systemd_sysv/219_62_el7_6_5/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1277,6 +1277,27 @@
     "relationship": []
   },
   {
+    "name": "systemd",
+    "revision": "219-62.el7_6.5",
+    "@id": "http:@centos/systemd/219_62_el7_6_5/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@centos",
+      "externalId": "systemd/219-62.el7_6.5/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@centos",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "systemd",
+        "version": "219-62.el7_6.5",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "elfutils-libelf",
     "revision": "0.166-2.el7",
     "@id": "http:@centos/elfutils_libelf/0_166_2_el7/x86_64",
@@ -1355,27 +1376,6 @@
         },
         "name": "lz4",
         "version": "1.7.5-2.el7",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "systemd",
-    "revision": "219-62.el7_6.3",
-    "@id": "http:@centos/systemd/219_62_el7_6_3/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@centos",
-      "externalId": "systemd/219-62.el7_6.3/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "@centos",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "systemd",
-        "version": "219-62.el7_6.3",
         "architecture": "x86_64"
       }
     },
@@ -2579,27 +2579,6 @@
     "relationship": []
   },
   {
-    "name": "systemd-libs",
-    "revision": "219-62.el7_6.3",
-    "@id": "http:@centos/systemd_libs/219_62_el7_6_3/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@centos",
-      "externalId": "systemd-libs/219-62.el7_6.3/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "@centos",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "systemd-libs",
-        "version": "219-62.el7_6.3",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "gpgme",
     "revision": "1.3.2-5.el7",
     "@id": "http:@centos/gpgme/1_3_2_5_el7/x86_64",
@@ -2615,6 +2594,27 @@
         },
         "name": "gpgme",
         "version": "1.3.2-5.el7",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "systemd-libs",
+    "revision": "219-62.el7_6.5",
+    "@id": "http:@centos/systemd_libs/219_62_el7_6_5/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@centos",
+      "externalId": "systemd-libs/219-62.el7_6.5/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@centos",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "systemd-libs",
+        "version": "219-62.el7_6.5",
         "architecture": "x86_64"
       }
     },
@@ -3881,27 +3881,6 @@
     "relationship": []
   },
   {
-    "name": "systemd-sysv",
-    "revision": "219-62.el7_6.3",
-    "@id": "http:@centos/systemd_sysv/219_62_el7_6_3/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@centos",
-      "externalId": "systemd-sysv/219-62.el7_6.3/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "@centos",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "systemd-sysv",
-        "version": "219-62.el7_6.3",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "libacl",
     "revision": "2.2.51-12.el7",
     "@id": "http:@centos/libacl/2_2_51_12_el7/x86_64",
@@ -3959,6 +3938,27 @@
         },
         "name": "coreutils",
         "version": "8.22-18.el7",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "systemd-sysv",
+    "revision": "219-62.el7_6.5",
+    "@id": "http:@centos/systemd_sysv/219_62_el7_6_5/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@centos",
+      "externalId": "systemd-sysv/219-62.el7_6.5/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@centos",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "systemd-sysv",
+        "version": "219-62.el7_6.5",
         "architecture": "x86_64"
       }
     },
