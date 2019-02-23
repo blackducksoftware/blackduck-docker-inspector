@@ -88,7 +88,7 @@ public class HttpClientInspector {
             }
             final String bdioString = imageInspectorClient.getBdio(finalDockerTarfile.getCanonicalPath(), dockerTarFilePathInContainer, config.getDockerImageRepo(), config.getDockerImageTag(), containerFileSystemPathInContainer,
                 config.isOrganizeComponentsByLayer(), config.isIncludeRemovedComponents(),
-                config.isCleanupWorkingDir());
+                config.isCleanupWorkingDir(), config.getDockerBaseImageTopLayerId());
             logger.debug(String.format("bdioString: %s", bdioString));
             final SimpleBdioDocument bdioDocument = toBdioDocument(bdioString);
             adjustBdio(bdioDocument);

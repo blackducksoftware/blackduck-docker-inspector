@@ -181,6 +181,10 @@ public class Config {
     @Value("${docker.image.repo:}")
     private String dockerImageRepo = "";
 
+    @ValueDescription(description = "To ignore components from base image layers: specify the ID (from docker inspect <image:tag>: last of RootFS.Layers) of the top layer of the base image", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${docker.base.image.top.layer.id:}")
+    private String dockerBaseImageTopLayerId = "";
+
     @ValueDescription(description = "Docker Image Tag; Use with docker.image.repo to select one image from a tarfile", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${docker.image.tag:}")
     private String dockerImageTag = "";
@@ -463,6 +467,10 @@ public class Config {
         return optionsByFieldName.get("dockerImageRepo").getResolvedValue();
     }
 
+    public String getDockerBaseImageTopLayerId() {
+        return optionsByFieldName.get("dockerBaseImageTopLayerId").getResolvedValue();
+    }
+
     public String getDockerImageTag() {
         return optionsByFieldName.get("dockerImageTag").getResolvedValue();
     }
@@ -606,6 +614,7 @@ public class Config {
         this.dockerImage = null;
         this.dockerImageId = null;
         this.dockerImageRepo = null;
+        this.dockerBaseImageTopLayerId = null;
         this.dockerImageTag = null;
         this.dockerInspectorJavaOptsValue = null;
         this.dockerTar = null;

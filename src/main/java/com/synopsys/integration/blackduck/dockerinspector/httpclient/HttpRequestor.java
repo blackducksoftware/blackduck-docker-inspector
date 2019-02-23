@@ -44,7 +44,8 @@ public class HttpRequestor {
             final String givenImageRepo, final String givenImageTag, final String containerPathToContainerFileSystemFile,
         final boolean organizeComponentsByLayer,
         final boolean includeRemovedComponents,
-        final boolean cleanup)
+        final boolean cleanup,
+        final String baseImageTopLayerId)
             throws IntegrationException {
         final String url = new ImageInspectorUrlBuilder()
                 .imageInspectorUri(imageInspectorUri)
@@ -55,6 +56,7 @@ public class HttpRequestor {
                                .organizeComponentsByLayer(organizeComponentsByLayer)
                                .includeRemovedComponents(includeRemovedComponents)
                 .cleanup(cleanup)
+                               .baseImageTopLayerId(baseImageTopLayerId)
                 .build();
         logger.debug(String.format("Doing a getBdio request on %s", url));
         final Request request = new Request.Builder(url).method(HttpMethod.GET).build();
