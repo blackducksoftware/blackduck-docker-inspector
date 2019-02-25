@@ -181,8 +181,8 @@ public class Config {
     @Value("${docker.image.repo:}")
     private String dockerImageRepo = "";
 
-    @ValueDescription(description = "To ignore components from base image layers: specify the ID (from docker inspect <image:tag>: last of RootFS.Layers) of the top layer of the base image", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
-    @Value("${docker.base.image.top.layer.id:}")
+    @ValueDescription(description = "To ignore components from platform layers: specify the ID (from docker inspect <image:tag>: last of RootFS.Layers) of the top layer of the platform image", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${docker.platform.top.layer.id:}")
     private String dockerBaseImageTopLayerId = "";
 
     @ValueDescription(description = "Docker Image Tag; Use with docker.image.repo to select one image from a tarfile", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
@@ -229,11 +229,11 @@ public class Config {
     @Value("${cleanup.inspector.image:false}")
     private Boolean cleanupInspectorImage = Boolean.FALSE;
 
-    @ValueDescription(description = "In generated BDIO, organize components by layer?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "In generated BDIO, organize components by layer?", defaultValue = "false", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${bdio.organize.components.by.layer:false}")
     private Boolean organizeComponentsByLayer = Boolean.FALSE;
 
-    @ValueDescription(description = "In generated BDIO, include removed components?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "In generated BDIO, include removed components?", defaultValue = "false", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${bdio.include.removed.components:false}")
     private Boolean includeRemovedComponents = Boolean.FALSE;
 
