@@ -183,7 +183,7 @@ public class Config {
 
     @ValueDescription(description = "To ignore components from platform layers: specify the ID (from docker inspect <image:tag>: last of RootFS.Layers) of the top layer of the platform image", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${docker.platform.top.layer.id:}")
-    private String dockerBaseImageTopLayerId = "";
+    private String dockerPlatformTopLayerId = "";
 
     @ValueDescription(description = "Docker Image Tag; Use with docker.image.repo to select one image from a tarfile", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${docker.image.tag:}")
@@ -467,8 +467,8 @@ public class Config {
         return optionsByFieldName.get("dockerImageRepo").getResolvedValue();
     }
 
-    public String getDockerBaseImageTopLayerId() {
-        return optionsByFieldName.get("dockerBaseImageTopLayerId").getResolvedValue();
+    public String getDockerPlatformTopLayerId() {
+        return optionsByFieldName.get("dockerPlatformTopLayerId").getResolvedValue();
     }
 
     public String getDockerImageTag() {
@@ -614,7 +614,7 @@ public class Config {
         this.dockerImage = null;
         this.dockerImageId = null;
         this.dockerImageRepo = null;
-        this.dockerBaseImageTopLayerId = null;
+        this.dockerPlatformTopLayerId = null;
         this.dockerImageTag = null;
         this.dockerInspectorJavaOptsValue = null;
         this.dockerTar = null;

@@ -44,14 +44,14 @@ public class ImageInspectorUrlBuilder {
     private static final String IMAGE_REPO_QUERY_PARAM = "imagerepo";
     private static final String IMAGE_TAG_QUERY_PARAM = "imagetag";
     private static final String TARFILE_QUERY_PARAM = "tarfile";
-    private static final String BASE_IMAGE_TOP_LAYER_ID_PARAM = "baseimagetoplayerid";
+    private static final String PLATFORM_TOP_LAYER_ID_PARAM = "platformtoplayerid";
     private static final String BASE_LOGGER_NAME = "com.synopsys";
 
     private URI imageInspectorUri = null;
     private String containerPathToTarfile = null;
     private String givenImageRepo = null;
     private String givenImageTag = null;
-    private String baseImageTopLayerId = null;
+    private String platformTopLayerId = null;
     private String containerPathToContainerFileSystemFile = null;
     private boolean organizeComponentsByLayer = false;
     private boolean includeRemovedComponents = false;
@@ -77,8 +77,8 @@ public class ImageInspectorUrlBuilder {
         return this;
     }
 
-    public ImageInspectorUrlBuilder baseImageTopLayerId(final String baseImageTopLayerId) {
-        this.baseImageTopLayerId = baseImageTopLayerId;
+    public ImageInspectorUrlBuilder platformTopLayerId(final String platformTopLayerId) {
+        this.platformTopLayerId = platformTopLayerId;
         return this;
     }
 
@@ -128,8 +128,8 @@ public class ImageInspectorUrlBuilder {
         if (StringUtils.isNotBlank(givenImageTag)) {
             urlSb.append(String.format("&%s=%s", IMAGE_TAG_QUERY_PARAM, givenImageTag));
         }
-        if (StringUtils.isNotBlank(baseImageTopLayerId)) {
-            urlSb.append(String.format("&%s=%s", BASE_IMAGE_TOP_LAYER_ID_PARAM, baseImageTopLayerId));
+        if (StringUtils.isNotBlank(platformTopLayerId)) {
+            urlSb.append(String.format("&%s=%s", PLATFORM_TOP_LAYER_ID_PARAM, platformTopLayerId));
         }
         final String url = urlSb.toString();
         return url;

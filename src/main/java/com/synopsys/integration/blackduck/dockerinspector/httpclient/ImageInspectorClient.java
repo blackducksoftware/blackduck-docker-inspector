@@ -35,7 +35,7 @@ public interface ImageInspectorClient {
 
     String getBdio(String hostPathToTarFile, String containerPathToInputDockerTarfile, String givenImageRepo, String givenImageTag, String containerPathToOutputFileSystemFile,
         final boolean organizeComponentsByLayer, final boolean includeRemovedComponents, final boolean cleanup,
-        final String baseImageTopLayerId)
+        final String platformTopLayerId)
             throws IntegrationException, MalformedURLException;
 
     boolean isApplicable();
