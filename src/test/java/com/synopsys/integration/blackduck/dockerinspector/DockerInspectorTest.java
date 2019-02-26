@@ -256,6 +256,17 @@ public class DockerInspectorTest {
         testTarUsingExistingContainer(targetRepo, targetTag,  "build/images/test/ubuntu1404.tar",portOnHost, null, true, "null_null_DPKG");
     }
 
+
+    @Test
+    public void testExcludePlatformComponents() throws IOException, InterruptedException, IntegrationException {
+        final String repo = "blackducksoftware/centos_minus_vim_plus_bacula";
+        final String tag = "1.0";
+        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU;
+        List<String> additionalArgs = new ArrayList<>();
+        additionalArgs.add("--docker.platform.top.layer.id=sha256:1bcfbfaf95f95ea8a28711c83085dbbeceefa11576e1c889304aa5bacbaa6ac2");
+        testTarUsingExistingContainer(repo, tag, "build/images/test/aggregated.tar", portOnHost, additionalArgs, true, "blackducksoftware_centos_minus_vim_plus_bacula_1.0_app_RPM");
+    }
+
     private void testTarUsingExistingContainer(final String targetRepo, final String targetTag, final String tarFilePath, final int portOnHost,
         List<String> additionalArgs, final boolean requireBdioMatch, final String codelocationName)
             throws IOException, InterruptedException, IntegrationException {
