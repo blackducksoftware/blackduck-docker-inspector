@@ -6,9 +6,9 @@
       "spdx:creator": [
         "Tool: IntegrationBdio-16.4.0"
       ],
-      "spdx:created": "2019-02-06T21:27:14.531Z"
+      "spdx:created": "2019-02-26T22:55:47.065Z"
     },
-    "@id": "uuid:04d4b470-e082-4a94-8cd9-87d0203efb44",
+    "@id": "uuid:e87a8d59-0cb5-4c0a-9a11-e9fc1576d07e",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -221,10 +221,6 @@
       },
       {
         "related": "http:@ubuntu/libhogweed4/3_2_1ubuntu0_16_04_1/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:@ubuntu/libsqlite3_0/3_11_0_1ubuntu1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -473,6 +469,10 @@
       },
       {
         "related": "http:@ubuntu/libsasl2_2/2_1_26_dfsg1_14ubuntu0_1/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:@ubuntu/libsqlite3_0/3_11_0_1ubuntu1_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1552,27 +1552,6 @@
         },
         "name": "libhogweed4",
         "version": "3.2-1ubuntu0.16.04.1",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libsqlite3-0",
-    "revision": "3.11.0-1ubuntu1",
-    "@id": "http:@ubuntu/libsqlite3_0/3_11_0_1ubuntu1/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@ubuntu",
-      "externalId": "libsqlite3-0/3.11.0-1ubuntu1/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "@ubuntu",
-          "separator": "/",
-          "kbSeparator": "/"
-        },
-        "name": "libsqlite3-0",
-        "version": "3.11.0-1ubuntu1",
         "architecture": "amd64"
       }
     },
@@ -2875,6 +2854,27 @@
         },
         "name": "libsasl2-2",
         "version": "2.1.26.dfsg1-14ubuntu0.1",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "libsqlite3-0",
+    "revision": "3.11.0-1ubuntu1.1",
+    "@id": "http:@ubuntu/libsqlite3_0/3_11_0_1ubuntu1_1/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@ubuntu",
+      "externalId": "libsqlite3-0/3.11.0-1ubuntu1.1/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "@ubuntu",
+          "separator": "/",
+          "kbSeparator": "/"
+        },
+        "name": "libsqlite3-0",
+        "version": "3.11.0-1ubuntu1.1",
         "architecture": "amd64"
       }
     },
