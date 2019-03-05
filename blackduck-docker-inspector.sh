@@ -140,8 +140,8 @@ function deriveJarDetails() {
 	# If the user specified a version: get that
 	if [ -z "${jarVersion}" ]; then
 	  deriveLatestReleaseVersion
-	  latestReleasedJarUrl="https://test-repo.blackducksoftware.com/artifactory/bds-integrations-release/com/synopsys/integration/blackduck-docker-inspector/${latestReleaseVersion}/blackduck-docker-inspector-${latestReleaseVersion}.jar"
-	  latestReleasedAirGapZipUrl="https://test-repo.blackducksoftware.com/artifactory/bds-integrations-release/com/synopsys/integration/blackduck-docker-inspector/${latestReleaseVersion}/blackduck-docker-inspector-${latestReleaseVersion}-air-gap.zip"
+	  latestReleasedJarUrl="https://repo.blackducksoftware.com/artifactory/bds-integrations-release/com/synopsys/integration/blackduck-docker-inspector/${latestReleaseVersion}/blackduck-docker-inspector-${latestReleaseVersion}.jar"
+	  latestReleasedAirGapZipUrl="https://repo.blackducksoftware.com/artifactory/bds-integrations-release/com/synopsys/integration/blackduck-docker-inspector/${latestReleaseVersion}/blackduck-docker-inspector-${latestReleaseVersion}-air-gap.zip"
       selectedJarUrl="${latestReleasedJarUrl}"
       selectedAirGapUrl="${latestReleasedAirGapZipUrl}"
       deriveLatestReleasedFilename
@@ -158,8 +158,8 @@ function deriveJarDetails() {
       else
       	selectedRepoKey="bds-integrations-release"
       fi
-      selectedJarUrl="https://test-repo.blackducksoftware.com/artifactory/${selectedRepoKey}/com/synopsys/integration/blackduck-docker-inspector/${jarVersion}/blackduck-docker-inspector-${jarVersion}.jar"
-      selectedAirGapZipUrl="https://test-repo.blackducksoftware.com/artifactory/${selectedRepoKey}/com/synopsys/integration/blackduck-docker-inspector/${jarVersion}/blackduck-docker-inspector-${jarVersion}-air-gap.zip"
+      selectedJarUrl="https://repo.blackducksoftware.com/artifactory/${selectedRepoKey}/com/synopsys/integration/blackduck-docker-inspector/${jarVersion}/blackduck-docker-inspector-${jarVersion}.jar"
+      selectedAirGapZipUrl="https://repo.blackducksoftware.com/artifactory/${selectedRepoKey}/com/synopsys/integration/blackduck-docker-inspector/${jarVersion}/blackduck-docker-inspector-${jarVersion}-air-gap.zip"
       downloadedJarPath="${DOCKER_INSPECTOR_JAR_DIR}/blackduck-docker-inspector-${jarVersion}.jar"
       downloadedAirGapZipPath="${DOCKER_INSPECTOR_JAR_DIR}/blackduck-docker-inspector-${jarVersion}-air-gap.zip"
     fi
@@ -207,7 +207,7 @@ function prepareLatestJar() {
 #
 function deriveLatestReleaseVersion() {
 	if [[ -z "${latestReleaseVersion}" ]]; then
-		latestReleaseVersion=$(curl ${DOCKER_INSPECTOR_CURL_OPTS} ${CURL_PROXY_OPTIONS} https://test-repo.blackducksoftware.com/artifactory/bds-integrations-release/com/synopsys/integration/blackduck-docker-inspector/maven-metadata.xml | grep latest | sed -e 's@<latest>@@' -e 's@</latest>@@' -e 's/^[ \t]*//')
+		latestReleaseVersion=$(curl ${DOCKER_INSPECTOR_CURL_OPTS} ${CURL_PROXY_OPTIONS} https://repo.blackducksoftware.com/artifactory/bds-integrations-release/com/synopsys/integration/blackduck-docker-inspector/maven-metadata.xml | grep latest | sed -e 's@<latest>@@' -e 's@</latest>@@' -e 's/^[ \t]*//')
 	fi
 	echo "Latest release version: ${latestReleaseVersion}"
 }
