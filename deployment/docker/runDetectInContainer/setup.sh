@@ -102,6 +102,7 @@ while [ "$ubuntuServiceIsUp" == "false" ]; do
 done
 
 cd image
+curl -O https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/docker/runDetectInContainer/image/Dockerfile
 curl -O https://detect.synopsys.com/detect.sh
 chmod +x detect.sh
 docker build -t detect:1.0 .
