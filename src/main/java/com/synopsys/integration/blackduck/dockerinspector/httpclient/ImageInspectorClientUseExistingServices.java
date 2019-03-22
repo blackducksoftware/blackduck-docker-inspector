@@ -77,12 +77,16 @@ public class ImageInspectorClientUseExistingServices implements ImageInspectorCl
         } catch (final URISyntaxException e) {
             throw new IntegrationException(String.format("Error constructing URI from %s: %s", config.getImageInspectorUrl(), e.getMessage()), e);
         }
-        final int serviceRequestTimeoutSeconds = (int) (config.getCommandTimeout() / 1000L);
+        final int serviceRequestTimeoutSeconds = deriveTimeoutSeconds();
         final IntHttpClient restConnection = httpConnectionCreator
             .createRedirectingConnection(imageInspectorUri, serviceRequestTimeoutSeconds);
         final SimpleResponse response = restRequester.executeGetBdioRequest(restConnection, imageInspectorUri, containerPathToInputDockerTarfile,
                 givenImageRepo, givenImageTag, containerPathToOutputFileSystemFile, organizeComponentsByLayer, includeRemovedComponents, cleanup,
             platformTopLayerId);
         return response.getBody();
+    }
+
+    private int deriveTimeoutSeconds() {
+        return (int) (config.getServiceTimeout() / 1000L);
     }
 }
