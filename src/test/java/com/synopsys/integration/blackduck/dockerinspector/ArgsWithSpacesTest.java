@@ -2,6 +2,7 @@ package com.synopsys.integration.blackduck.dockerinspector;
 
 import static org.junit.Assert.assertEquals;
 
+import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,21 +14,19 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
-import com.synopsys.integration.test.annotation.IntegrationTest;
-
-@Category(IntegrationTest.class)
+@Tag("integration")
 public class ArgsWithSpacesTest {
 
     private static final String USERNAME = "You Zer";
     private static final String PROJECT_NAME = "Pro Ject";
     private static final String PROJECT_VERSION = "Ver Sion";
 
-    @BeforeClass
+    @BeforeAll
     public static void setUpBeforeClass() throws Exception {
         try {
             final boolean created = new File(TestUtils.TEST_DIR_REL_PATH).mkdirs();
@@ -37,7 +36,7 @@ public class ArgsWithSpacesTest {
         }
     }
 
-    @AfterClass
+    @AfterAll
     public static void tearDownAfterClass() throws Exception {
     }
 

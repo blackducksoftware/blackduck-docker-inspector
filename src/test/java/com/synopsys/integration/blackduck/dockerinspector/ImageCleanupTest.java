@@ -3,6 +3,7 @@ package com.synopsys.integration.blackduck.dockerinspector;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
+import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -11,14 +12,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
-import com.synopsys.integration.test.annotation.IntegrationTest;
-
-@Category(IntegrationTest.class)
+@Tag("integration")
 public class ImageCleanupTest {
 
     private static final String USERNAME = "You Zer";
@@ -26,9 +25,9 @@ public class ImageCleanupTest {
     private static final String PROJECT_VERSION = "Ver Sion";
     private static final String TARGET_IMAGE_NAME = "alpine";
     private static final String INSPECTOR_IMAGE_SUFFIX = "alpine";
-    private static final String TARGET_IMAGE_TAG = "latest";
+    private static final String TARGET_IMAGE_TAG = "2.6";
 
-    @BeforeClass
+    @BeforeAll
     public static void setUpBeforeClass() throws Exception {
         try {
             final boolean created = new File(TestUtils.TEST_DIR_REL_PATH).mkdirs();
@@ -38,7 +37,7 @@ public class ImageCleanupTest {
         }
     }
 
-    @AfterClass
+    @AfterAll
     public static void tearDownAfterClass() throws Exception {
     }
 

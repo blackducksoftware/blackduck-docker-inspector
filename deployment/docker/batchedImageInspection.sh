@@ -12,7 +12,7 @@
 # This path cannot have any symbolic links in it
 ####################################################################
 localSharedDirPath=/blackduck/shared
-imageInspectorVersion=4.3.0
+imageInspectorVersion=4.3.3
 blackDuckUrl=https://blackduck.yourdomain.com
 blackDuckUsername=yourblackduckusername
 blackDuckPassword=yourblackduckpassword

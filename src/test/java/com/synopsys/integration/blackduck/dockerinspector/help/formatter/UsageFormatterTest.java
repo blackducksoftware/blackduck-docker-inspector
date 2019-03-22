@@ -3,6 +3,7 @@ package com.synopsys.integration.blackduck.dockerinspector.help.formatter;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import com.synopsys.integration.blackduck.dockerinspector.config.UsageFormatter;
 import java.io.IOException;
 import java.util.List;
 import java.util.SortedSet;
@@ -31,7 +32,7 @@ public class UsageFormatterTest {
     @Test
     public void test() throws IllegalArgumentException, IllegalAccessException, IOException {
         final SortedSet<DockerInspectorOption> configOptions = new TreeSet<>();
-        configOptions.add(new DockerInspectorOption("blackduck.url", "blackDuckUrl", "testBlackDuckUrl", "Black Duck URL", String.class, "", "public", false));
+        configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", "public", false));
         Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
 
         final List<String> usageStrings = usageFormatter.getStringList();

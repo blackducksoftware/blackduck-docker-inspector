@@ -18,7 +18,7 @@ spec:
       limits:
         memory: 1Gi
   - name: blackduck-imageinspector-alpine
-    image: blackducksoftware/blackduck-imageinspector-alpine:4.3.0
+    image: blackducksoftware/blackduck-imageinspector-alpine:4.3.3
     command: ["java"]
     args: ["-jar", "/opt/blackduck/blackduck-imageinspector/blackduck-imageinspector.jar", "--server.port=8080", "--current.linux.distro=alpine", "--inspector.port.alpine=8080", "--inspector.port.centos=8081", "--inspector.port.ubuntu=8082"]
     ports:
@@ -37,7 +37,7 @@ spec:
       - mountPath: /opt/blackduck/shared
         name: blackduck
   - name: blackduck-imageinspector-centos
-    image: blackducksoftware/blackduck-imageinspector-centos:4.3.0
+    image: blackducksoftware/blackduck-imageinspector-centos:4.3.3
     command: ["java"]
     args: ["-jar", "/opt/blackduck/blackduck-imageinspector/blackduck-imageinspector.jar", "--server.port=8081", "--current.linux.distro=centos", "--inspector.port.alpine=8080", "--inspector.port.centos=8081", "--inspector.port.ubuntu=8082"]
     ports:
@@ -56,7 +56,7 @@ spec:
       - mountPath: /opt/blackduck/shared
         name: blackduck
   - name: blackduck-imageinspector-ubuntu
-    image: blackducksoftware/blackduck-imageinspector-ubuntu:4.3.0
+    image: blackducksoftware/blackduck-imageinspector-ubuntu:4.3.3
     command: ["java"]
     args: ["-jar", "/opt/blackduck/blackduck-imageinspector/blackduck-imageinspector.jar", "--server.port=8082", "--current.linux.distro=ubuntu", "--inspector.port.alpine=8080", "--inspector.port.centos=8081", "--inspector.port.ubuntu=8082"]
     ports:

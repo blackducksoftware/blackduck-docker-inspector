@@ -38,8 +38,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.synopsys.integration.blackduck.dockerinspector.help.ValueDescription;
-
 @Component
 public class Config {
     public static final String IMAGEINSPECTOR_WS_APPNAME = "blackduck-imageinspector";
@@ -155,6 +153,11 @@ public class Config {
     @Value("${blackduck.codelocation.prefix:}")
     private String blackDuckCodelocationPrefix = "";
 
+    // If you want to set the code location name, specify it here
+    @ValueDescription(description = "Black Duck CodeLocation name", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${blackduck.codelocation.name:}")
+    private String blackDuckCodelocationName = "";
+
     // Path to the blackduck-docker-inspector .jar file
     // Only used by blackduck-docker-inspector.sh
     @ValueDescription(description = "Black Duck Docker Inspector .jar file path", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
@@ -178,13 +181,13 @@ public class Config {
     @Value("${docker.image.repo:}")
     private String dockerImageRepo = "";
 
+    @ValueDescription(description = "To ignore components from platform layers: specify the ID (from docker inspect <image:tag>: last of RootFS.Layers) of the top layer of the platform image", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${docker.platform.top.layer.id:}")
+    private String dockerPlatformTopLayerId = "";
+
     @ValueDescription(description = "Docker Image Tag; Use with docker.image.repo to select one image from a tarfile", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${docker.image.tag:}")
     private String dockerImageTag = "";
-
-    @ValueDescription(description = "Running on host?", defaultValue = "true", group = Config.GROUP_PRIVATE, deprecated = false)
-    @Value("${on.host:true}")
-    private Boolean onHost = Boolean.TRUE;
 
     @ValueDescription(description = "Caller Name", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${caller.name:}")
@@ -225,6 +228,14 @@ public class Config {
     @ValueDescription(description = "Remove inspector image after using it?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${cleanup.inspector.image:false}")
     private Boolean cleanupInspectorImage = Boolean.FALSE;
+
+    @ValueDescription(description = "In generated BDIO, organize components by layer?", defaultValue = "false", group = Config.GROUP_PRIVATE, deprecated = false)
+    @Value("${bdio.organize.components.by.layer:false}")
+    private Boolean organizeComponentsByLayer = Boolean.FALSE;
+
+    @ValueDescription(description = "In generated BDIO, include removed components?", defaultValue = "false", group = Config.GROUP_PRIVATE, deprecated = false)
+    @Value("${bdio.include.removed.components:false}")
+    private Boolean includeRemovedComponents = Boolean.FALSE;
 
     @ValueDescription(description = "The host's path to the dir shared with the imageinspector containers. Only needed if using existing imageinspector containers", defaultValue = "/tmp/blackduck-docker-inspector-files/shared", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${shared.dir.path.local:/tmp/blackduck-docker-inspector-files/shared}")
@@ -309,20 +320,8 @@ public class Config {
         return opt.getResolvedValue();
     }
 
-    public boolean isPublic(final String key) throws IllegalArgumentException, IllegalAccessException {
-        final DockerInspectorOption opt = optionsByKey.get(key);
-        if (opt == null) {
-            return false;
-        }
-        return Config.GROUP_PUBLIC.equals(opt.getGroup());
-    }
-
     public SortedSet<DockerInspectorOption> getPublicConfigOptions() throws IllegalArgumentException, IllegalAccessException {
         return publicOptions;
-    }
-
-    public SortedSet<String> getAllKeys() throws IllegalArgumentException, IllegalAccessException {
-        return allKeys;
     }
 
     @PostConstruct
@@ -349,7 +348,7 @@ public class Config {
                         logger.trace(String.format("adding prop key %s [value: %s]", propName, value));
                         allKeys.add(propName);
                         final ValueDescription valueDescription = field.getAnnotation(ValueDescription.class);
-                        final DockerInspectorOption opt = new DockerInspectorOption(propName, field.getName(), value, valueDescription.description(), field.getType(), valueDescription.defaultValue(), valueDescription.group(),
+                        final DockerInspectorOption opt = new DockerInspectorOption(propName, value, valueDescription.description(), field.getType(), valueDescription.defaultValue(), valueDescription.group(),
                                 valueDescription.deprecated());
                         optionsByKey.put(propName, opt);
                         logger.trace(String.format("adding field name %s to optionsByFieldName", field.getName()));
@@ -363,10 +362,6 @@ public class Config {
                 }
             }
         }
-    }
-
-    public String getLoggingLevel() {
-        return optionsByFieldName.get("loggingLevel").getResolvedValue();
     }
 
     public String getBlackDuckUrl() {
@@ -432,10 +427,6 @@ public class Config {
         return optionsByFieldName.get("cleanupWorkingDir").getResolvedValue().equals("true");
     }
 
-    public String getLinuxDistro() {
-        return optionsByFieldName.get("linuxDistro").getResolvedValue();
-    }
-
     public Long getCommandTimeout() {
         return new Long(optionsByFieldName.get("commandTimeout").getResolvedValue());
     }
@@ -456,6 +447,10 @@ public class Config {
         return optionsByFieldName.get("blackDuckCodelocationPrefix").getResolvedValue();
     }
 
+    public String getBlackDuckCodelocationName() {
+        return optionsByFieldName.get("blackDuckCodelocationName").getResolvedValue();
+    }
+
     public String getDockerImage() {
         return optionsByFieldName.get("dockerImage").getResolvedValue();
     }
@@ -472,12 +467,12 @@ public class Config {
         return optionsByFieldName.get("dockerImageRepo").getResolvedValue();
     }
 
-    public String getDockerImageTag() {
-        return optionsByFieldName.get("dockerImageTag").getResolvedValue();
+    public String getDockerPlatformTopLayerId() {
+        return optionsByFieldName.get("dockerPlatformTopLayerId").getResolvedValue();
     }
 
-    public boolean isOnHost() {
-        return optionsByFieldName.get("onHost").getResolvedValue().equals("true");
+    public String getDockerImageTag() {
+        return optionsByFieldName.get("dockerImageTag").getResolvedValue();
     }
 
     public String getCallerName() {
@@ -562,16 +557,8 @@ public class Config {
         return blackDuckApiTokenEnvVar;
     }
 
-    public String getDockerInspectorJavaOptsValue() {
-        return dockerInspectorJavaOptsValue;
-    }
-
     public boolean isUploadBdio() {
         return optionsByFieldName.get("uploadBdio").getResolvedValue().equals("true");
-    }
-
-    public void setUploadBdio(final boolean value) {
-        optionsByFieldName.get("uploadBdio").setResolvedValue(Boolean.toString(value));
     }
 
     public boolean isCleanupTargetImage() {
@@ -584,6 +571,14 @@ public class Config {
 
     public boolean isCleanupInspectorImage() {
         return optionsByFieldName.get("cleanupInspectorImage").getResolvedValue().equals("true");
+    }
+
+    public boolean isOrganizeComponentsByLayer() {
+        return optionsByFieldName.get("organizeComponentsByLayer").getResolvedValue().equals("true");
+    }
+
+    public boolean isIncludeRemovedComponents() {
+        return optionsByFieldName.get("includeRemovedComponents").getResolvedValue().equals("true");
     }
 
     public boolean isImageInspectorServiceStart() {
@@ -600,18 +595,6 @@ public class Config {
 
     public void setDockerImageTag(final String newValue) {
         optionsByFieldName.get("dockerImageTag").setResolvedValue(newValue);
-    }
-
-    public void setWorkingDirPath(final String newValue) {
-        optionsByFieldName.get("workingDirPath").setResolvedValue(newValue);
-    }
-
-    public void setBlackDuckCodelocationPrefix(final String newValue) {
-        optionsByFieldName.get("blackDuckCodelocationPrefix").setResolvedValue(newValue);
-    }
-
-    public void setLoggingLevel(final String newValue) {
-        optionsByFieldName.get("loggingLevel").setResolvedValue(newValue);
     }
 
     private String unEscape(final String origString) {
@@ -631,11 +614,13 @@ public class Config {
         this.dockerImage = null;
         this.dockerImageId = null;
         this.dockerImageRepo = null;
+        this.dockerPlatformTopLayerId = null;
         this.dockerImageTag = null;
         this.dockerInspectorJavaOptsValue = null;
         this.dockerTar = null;
         this.blackDuckAlwaysTrustCert = null;
         this.blackDuckCodelocationPrefix = null;
+        this.blackDuckCodelocationName = null;
         this.blackDuckPassword = null;
         this.blackDuckPasswordEnvVar = null;
         this.blackDuckApiTokenEnvVar = null;
@@ -654,7 +639,6 @@ public class Config {
         this.jarPath = null;
         this.linuxDistro = null;
         this.loggingLevel = null;
-        this.onHost = null;
         this.outputIncludeContainerfilesystem = null;
         this.outputPath = null;
         this.phoneHome = null;
@@ -665,6 +649,8 @@ public class Config {
         this.inspectorRepository = null;
         this.cleanupInspectorContainer = null;
         this.cleanupInspectorImage = null;
+        this.organizeComponentsByLayer = null;
+        this.includeRemovedComponents = null;
         this.cleanupTargetImage = null;
         this.inspectorImageFamily = null;
         this.inspectorImageVersion = null;

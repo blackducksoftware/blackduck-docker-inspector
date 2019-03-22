@@ -24,6 +24,9 @@ public class ProgramPathsTest {
     @Mock
     private Config config;
 
+    @Mock
+    private ProcessId processId;
+
     @Test
     public void testReleasedVersion() throws IllegalArgumentException, IllegalAccessException, IOException {
         doTest("blackduck-docker-inspector-1.0.0.jar", true);
@@ -38,14 +41,14 @@ public class ProgramPathsTest {
         final File installDir = TestUtils.createTempDirectory();
         final String installDirPath = installDir.getAbsolutePath();
         Mockito.when(config.getWorkingDirPath()).thenReturn(installDirPath);
-
+        Mockito.when(processId.addProcessIdToName(Mockito.anyString())).thenReturn("test");
         programPaths.init();
 
-        assertEquals(String.format("%s", installDirPath), programPaths.getDockerInspectorPgmDirPathHost());
-        final String runDirPath = programPaths.getDockerInspectorRunDirPathHost();
-        assertEquals(String.format("%sconfig/", runDirPath), programPaths.getDockerInspectorConfigDirPathHost());
-        assertEquals(String.format("%sconfig/application.properties", runDirPath), programPaths.getDockerInspectorConfigFilePathHost());
-        assertEquals(String.format("%starget/", runDirPath), programPaths.getDockerInspectorTargetDirPathHost());
+        assertEquals(installDirPath, programPaths.getDockerInspectorPgmDirPath());
+        final String runDirPath = programPaths.getDockerInspectorRunDirPath();
+        assertEquals(String.format("%sconfig/", runDirPath), programPaths.getDockerInspectorConfigDirPath());
+        assertEquals(String.format("%sconfig/application.properties", runDirPath), programPaths.getDockerInspectorConfigFilePath());
+        assertEquals(String.format("%starget/", runDirPath), programPaths.getDockerInspectorTargetDirPath());
 
     }
 }
