@@ -66,6 +66,7 @@ public class BlackDuckClient {
   private static final String PHONE_HOME_METADATA_NAME_DOCKER_ENGINE_VERSION = "dockerEngineVersion";
   private static final String PHONE_HOME_METADATA_NAME_BDIO_BY_LAYER = "bdioOrganizeComponentsByLayer";
   private static final String PHONE_HOME_METADATA_NAME_BDIO_INCLUDE_REMOVED = "bdioIncludeRemovedComponents";
+  private static final String PHONE_HOME_METADATA_NAME_PLATFORM_TOP_LAYER_ID_SPECIFIED = "platformTopLayerIdSpecified";
 
   private final Logger logger = LoggerFactory.getLogger(BlackDuckClient.class);
   private final IntLogger intLogger = new Slf4jIntLogger(logger);
@@ -156,15 +157,15 @@ public class BlackDuckClient {
         httpConnection);
 
     Map<String, String> metaDataMap = new HashMap<>();
-    if (!StringUtils.isBlank(dockerEngineVersion)) {
+    if (StringUtils.isNotBlank(dockerEngineVersion)) {
       metaDataMap
           .put(PHONE_HOME_METADATA_NAME_DOCKER_ENGINE_VERSION, dockerEngineVersion);
     }
-    if (!StringUtils.isBlank(config.getCallerName())) {
+    if (StringUtils.isNotBlank(config.getCallerName())) {
       metaDataMap
           .put(PHONE_HOME_METADATA_NAME_CALLER_NAME, config.getCallerName());
     }
-    if (!StringUtils.isBlank(config.getCallerVersion())) {
+    if (StringUtils.isNotBlank(config.getCallerVersion())) {
       metaDataMap
           .put(PHONE_HOME_METADATA_NAME_CALLER_VERSION, config.getCallerVersion());
     }
@@ -172,6 +173,10 @@ public class BlackDuckClient {
         String.valueOf(config.isOrganizeComponentsByLayer()));
     metaDataMap.put(PHONE_HOME_METADATA_NAME_BDIO_INCLUDE_REMOVED,
         String.valueOf(config.isIncludeRemovedComponents()));
+    if (StringUtils.isNotBlank(config.getDockerPlatformTopLayerId())) {
+        metaDataMap
+          .put(PHONE_HOME_METADATA_NAME_PLATFORM_TOP_LAYER_ID_SPECIFIED, "true");
+    }
 
     BlackDuckPhoneHomeHelper.createPhoneHomeHelper(blackDuckServicesFactory).handlePhoneHome(
         DockerInspector.PROGRAM_ID, programVersion.getProgramVersion(), metaDataMap);
