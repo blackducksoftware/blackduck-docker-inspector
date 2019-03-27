@@ -29,10 +29,10 @@ oc exec blackduck-imageinspector -c build-machine -- curl http://localhost:8080/
 oc exec blackduck-imageinspector -c build-machine -- curl http://localhost:8081/health
 oc exec blackduck-imageinspector -c build-machine -- curl http://localhost:8082/health
 
-curl -O https://blackducksoftware.github.io/hub-detect/hub-detect.sh
-chmod +x hub-detect.sh
+curl -O https://detect.synopsys.com/detect.sh
+chmod +x detect.sh
 
-oc cp ./hub-detect.sh blackduck-imageinspector:/tmp -c build-machine
+oc cp ./detect.sh blackduck-imageinspector:/tmp -c build-machine
 
 docker pull alpine:latest
 docker save -o alpine.tar alpine:latest
@@ -42,7 +42,7 @@ oc exec blackduck-imageinspector -c build-machine -- chmod a+r /opt/blackduck/sh
 
 
 # To test:
-oc exec blackduck-imageinspector -c build-machine -- bash -c "export DETECT_JAVA_OPTS=-Duser.home=/opt/blackduck/detect; env; /tmp/hub-detect.sh --blackduck.offline.mode=true --detect.tools.excluded=SIGNATURE_SCAN,POLARIS --detect.docker.tar=/opt/blackduck/shared/target/alpine.tar --detect.docker.passthrough.imageinspector.service.url=http://localhost:8082 --detect.docker.passthrough.shared.dir.path.local=/opt/blackduck/shared/ --detect.docker.passthrough.shared.dir.path.imageinspector=/opt/blackduck/shared --logging.level.com.blackducksoftware.integration=INFO --detect.docker.passthrough.imageinspector.service.start=false"
+oc exec blackduck-imageinspector -c build-machine -- bash -c "export DETECT_JAVA_OPTS=-Duser.home=/opt/blackduck/detect; env; /tmp/detect.sh --blackduck.offline.mode=true --detect.tools.excluded=SIGNATURE_SCAN,POLARIS --detect.docker.tar=/opt/blackduck/shared/target/alpine.tar --detect.docker.passthrough.imageinspector.service.url=http://localhost:8082 --detect.docker.passthrough.shared.dir.path.local=/opt/blackduck/shared/ --detect.docker.passthrough.shared.dir.path.imageinspector=/opt/blackduck/shared --logging.level.com.blackducksoftware.integration=INFO --detect.docker.passthrough.imageinspector.service.start=false"
 
 # To get log from alpine service:
 oc logs blackduck-imageinspector -c hub-imageinspector-ws-alpine

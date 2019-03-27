@@ -22,13 +22,13 @@ cd image
 docker build -t mavenproject:1 .
 cd ..
 
-curl -O https://blackducksoftware.github.io/hub-detect/hub-detect.sh
-chmod +x hub-detect.sh
-./hub-detect.sh --blackduck.offline.mode=true --detect.docker.image=mavenproject:1 --detect.docker.passthrough.output.path=/tmp/output --detect.tools.excluded=SIGNATURE_SCAN,POLARIS
+curl -O https://detect.synopsys.com/detect.sh
+chmod +x detect.sh
+./detect.sh --blackduck.offline.mode=true --detect.docker.image=mavenproject:1 --detect.docker.passthrough.output.path=/tmp/output --detect.tools.excluded=SIGNATURE_SCAN,POLARIS
 rm -rf containerfilesystem
 mkdir -p containerfilesystem
 cd containerfilesystem
 tar xvf /tmp/output/mavenproject_1_containerfilesystem.tar.gz
 
 cd image_mavenproject_v_1/home/my-app
-../../../../hub-detect.sh --blackduck.offline.mode=true --detect.tools.excluded=SIGNATURE_SCAN,POLARIS
+../../../../detect.sh --blackduck.offline.mode=true --detect.tools.excluded=SIGNATURE_SCAN,POLARIS
