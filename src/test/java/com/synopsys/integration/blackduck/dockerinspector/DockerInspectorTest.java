@@ -137,7 +137,7 @@ public class DockerInspectorTest {
 
     @Test
     public void testCentosStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "centos:7.3.1611", "centos", "7.3.1611", false, Mode.SPECIFY_II_DETAILS, null, "1:openssl-libs", 15, null, null, "centos_7.3.1611_RPM");
+        IntegrationTestCommon.testImage(random, programVersion, "centos:7.3.1611", "centos", "7.3.1611", false, Mode.SPECIFY_II_DETAILS, null, "openssl-libs", 15, null, null, "centos_7.3.1611_RPM");
     }
 
     @Test

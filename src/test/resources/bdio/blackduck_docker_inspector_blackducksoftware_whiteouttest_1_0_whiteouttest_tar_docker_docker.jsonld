@@ -32,519 +32,519 @@
     },
     "relationship": [
       {
-        "related": "http:@ubuntu/libheimntlm0_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
+        "related": "http:_ubuntu/libheimntlm0_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libroken18_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
+        "related": "http:_ubuntu/libroken18_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libkrb5_26_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
+        "related": "http:_ubuntu/libkrb5_26_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/gzip/1_6_4ubuntu1/amd64",
+        "related": "http:_ubuntu/gzip/1_6_4ubuntu1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libustr_1_0_1/1_0_4_5/amd64",
+        "related": "http:_ubuntu/libustr_1_0_1/1_0_4_5/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libasn1_8_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
+        "related": "http:_ubuntu/libasn1_8_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libkmod2/22_1ubuntu5/amd64",
+        "related": "http:_ubuntu/libkmod2/22_1ubuntu5/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/ncurses_bin/6_0_20160213_1ubuntu1/amd64",
+        "related": "http:_ubuntu/ncurses_bin/6_0_20160213_1ubuntu1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/util_linux/2_27_1_6ubuntu3_6/amd64",
+        "related": "http:_ubuntu/util_linux/2_27_1_6ubuntu3_6/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libk5crypto3/1_13_2_dfsg_5ubuntu2/amd64",
+        "related": "http:_ubuntu/libk5crypto3/1_13_2_dfsg_5ubuntu2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/krb5_locales/1_13_2_dfsg_5ubuntu2/all",
+        "related": "http:_ubuntu/krb5_locales/1_13_2_dfsg_5ubuntu2/all",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libidn11/1_32_3ubuntu1_2/amd64",
+        "related": "http:_ubuntu/libidn11/1_32_3ubuntu1_2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/mount/2_27_1_6ubuntu3_6/amd64",
+        "related": "http:_ubuntu/mount/2_27_1_6ubuntu3_6/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/hostname/3_16ubuntu2/amd64",
+        "related": "http:_ubuntu/hostname/3_16ubuntu2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libkrb5_3/1_13_2_dfsg_5ubuntu2/amd64",
+        "related": "http:_ubuntu/libkrb5_3/1_13_2_dfsg_5ubuntu2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libkrb5support0/1_13_2_dfsg_5ubuntu2/amd64",
+        "related": "http:_ubuntu/libkrb5support0/1_13_2_dfsg_5ubuntu2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libhcrypto4_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
+        "related": "http:_ubuntu/libhcrypto4_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libgcc1/1_6_0_1_0ubuntu1/amd64",
+        "related": "http:_ubuntu/libgcc1/1_6_0_1_0ubuntu1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/e2fsprogs/1_42_13_1ubuntu1/amd64",
+        "related": "http:_ubuntu/e2fsprogs/1_42_13_1ubuntu1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/dash/0_5_8_2_1ubuntu2/amd64",
+        "related": "http:_ubuntu/dash/0_5_8_2_1ubuntu2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libcap2_bin/1_2_24_12/amd64",
+        "related": "http:_ubuntu/libcap2_bin/1_2_24_12/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/liblzma5/5_1_1alpha_20120614_2ubuntu2/amd64",
+        "related": "http:_ubuntu/liblzma5/5_1_1alpha_20120614_2ubuntu2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libhogweed4/3_2_1ubuntu0_16_04_1/amd64",
+        "related": "http:_ubuntu/libhogweed4/3_2_1ubuntu0_16_04_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/passwd/1_4_2_3_1ubuntu5_3/amd64",
+        "related": "http:_ubuntu/passwd/1_4_2_3_1ubuntu5_3/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libc6/2_23_0ubuntu10/amd64",
+        "related": "http:_ubuntu/libc6/2_23_0ubuntu10/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/bash/4_3_14ubuntu1_2/amd64",
+        "related": "http:_ubuntu/bash/4_3_14ubuntu1_2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/zlib1g/1_1_2_8_dfsg_2ubuntu4_1/amd64",
+        "related": "http:_ubuntu/zlib1g/1_1_2_8_dfsg_2ubuntu4_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/init_system_helpers/1_29ubuntu4/all",
+        "related": "http:_ubuntu/init_system_helpers/1_29ubuntu4/all",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libpcre3/2_8_38_3_1/amd64",
+        "related": "http:_ubuntu/libpcre3/2_8_38_3_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/init/1_29ubuntu4/amd64",
+        "related": "http:_ubuntu/init/1_29ubuntu4/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libwind0_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
+        "related": "http:_ubuntu/libwind0_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/sensible_utils/0_0_9ubuntu0_16_04_1/all",
+        "related": "http:_ubuntu/sensible_utils/0_0_9ubuntu0_16_04_1/all",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libncurses5/6_0_20160213_1ubuntu1/amd64",
+        "related": "http:_ubuntu/libncurses5/6_0_20160213_1ubuntu1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libpam0g/1_1_8_3_2ubuntu2_1/amd64",
+        "related": "http:_ubuntu/libpam0g/1_1_8_3_2ubuntu2_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/perl_base/5_22_1_9ubuntu0_5/amd64",
+        "related": "http:_ubuntu/perl_base/5_22_1_9ubuntu0_5/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libkeyutils1/1_5_9_8ubuntu1/amd64",
+        "related": "http:_ubuntu/libkeyutils1/1_5_9_8ubuntu1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/systemd/229_4ubuntu21_2/amd64",
+        "related": "http:_ubuntu/systemd/229_4ubuntu21_2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libpam_modules/1_1_8_3_2ubuntu2_1/amd64",
+        "related": "http:_ubuntu/libpam_modules/1_1_8_3_2ubuntu2_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libhx509_5_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
+        "related": "http:_ubuntu/libhx509_5_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libaudit_common/1_2_4_5_1ubuntu2_1/all",
+        "related": "http:_ubuntu/libaudit_common/1_2_4_5_1ubuntu2_1/all",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/bsdutils/1_2_27_1_6ubuntu3_6/amd64",
+        "related": "http:_ubuntu/bsdutils/1_2_27_1_6ubuntu3_6/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libsmartcols1/2_27_1_6ubuntu3_6/amd64",
+        "related": "http:_ubuntu/libsmartcols1/2_27_1_6ubuntu3_6/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libselinux1/2_4_3build2/amd64",
+        "related": "http:_ubuntu/libselinux1/2_4_3build2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/debconf/1_5_58ubuntu1/all",
+        "related": "http:_ubuntu/debconf/1_5_58ubuntu1/all",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libss2/1_42_13_1ubuntu1/amd64",
+        "related": "http:_ubuntu/libss2/1_42_13_1ubuntu1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libssl1_0_0/1_0_2g_1ubuntu4_13/amd64",
+        "related": "http:_ubuntu/libssl1_0_0/1_0_2g_1ubuntu4_13/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libsemanage1/2_3_1build3/amd64",
+        "related": "http:_ubuntu/libsemanage1/2_3_1build3/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/login/1_4_2_3_1ubuntu5_3/amd64",
+        "related": "http:_ubuntu/login/1_4_2_3_1ubuntu5_3/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libffi6/3_2_1_4/amd64",
+        "related": "http:_ubuntu/libffi6/3_2_1_4/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libcryptsetup4/2_1_6_6_5ubuntu2_1/amd64",
+        "related": "http:_ubuntu/libcryptsetup4/2_1_6_6_5ubuntu2_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libapparmor1/2_10_95_0ubuntu2_9/amd64",
+        "related": "http:_ubuntu/libapparmor1/2_10_95_0ubuntu2_9/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/mawk/1_3_3_17ubuntu2/amd64",
+        "related": "http:_ubuntu/mawk/1_3_3_17ubuntu2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/base_files/9_4ubuntu4_7/amd64",
+        "related": "http:_ubuntu/base_files/9_4ubuntu4_7/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/sed/4_2_2_7/amd64",
+        "related": "http:_ubuntu/sed/4_2_2_7/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/adduser/3_113_nmu3ubuntu4/all",
+        "related": "http:_ubuntu/adduser/3_113_nmu3ubuntu4/all",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libstdc__6/5_4_0_6ubuntu1_16_04_10/amd64",
+        "related": "http:_ubuntu/libstdc__6/5_4_0_6ubuntu1_16_04_10/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/tar/1_28_2_1ubuntu0_1/amd64",
+        "related": "http:_ubuntu/tar/1_28_2_1ubuntu0_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libsemanage_common/2_3_1build3/all",
+        "related": "http:_ubuntu/libsemanage_common/2_3_1build3/all",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libgnutls30/3_4_10_4ubuntu1_4/amd64",
+        "related": "http:_ubuntu/libgnutls30/3_4_10_4ubuntu1_4/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/grep/2_25_1_16_04_1/amd64",
+        "related": "http:_ubuntu/grep/2_25_1_16_04_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libheimbase1_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
+        "related": "http:_ubuntu/libheimbase1_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/systemd_sysv/229_4ubuntu21_2/amd64",
+        "related": "http:_ubuntu/systemd_sysv/229_4ubuntu21_2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/ca_certificates/20170717_16_04_1/all",
+        "related": "http:_ubuntu/ca_certificates/20170717_16_04_1/all",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/base_passwd/3_5_39/amd64",
+        "related": "http:_ubuntu/base_passwd/3_5_39/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libbz2_1_0/1_0_6_8/amd64",
+        "related": "http:_ubuntu/libbz2_1_0/1_0_6_8/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libmount1/2_27_1_6ubuntu3_6/amd64",
+        "related": "http:_ubuntu/libmount1/2_27_1_6ubuntu3_6/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/readline_common/6_3_8ubuntu2/all",
+        "related": "http:_ubuntu/readline_common/6_3_8ubuntu2/all",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/gpgv/1_4_20_1ubuntu3_2/amd64",
+        "related": "http:_ubuntu/gpgv/1_4_20_1ubuntu3_2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/diffutils/1_3_3_3/amd64",
+        "related": "http:_ubuntu/diffutils/1_3_3_3/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libaudit1/1_2_4_5_1ubuntu2_1/amd64",
+        "related": "http:_ubuntu/libaudit1/1_2_4_5_1ubuntu2_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/makedev/2_3_1_93ubuntu2_ubuntu16_04_1/all",
+        "related": "http:_ubuntu/makedev/2_3_1_93ubuntu2_ubuntu16_04_1/all",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libcap2/1_2_24_12/amd64",
+        "related": "http:_ubuntu/libcap2/1_2_24_12/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/multiarch_support/2_23_0ubuntu10/amd64",
+        "related": "http:_ubuntu/multiarch_support/2_23_0ubuntu10/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libgmp10/2_6_1_0_dfsg_2/amd64",
+        "related": "http:_ubuntu/libgmp10/2_6_1_0_dfsg_2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libreadline6/6_3_8ubuntu2/amd64",
+        "related": "http:_ubuntu/libreadline6/6_3_8ubuntu2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libgcrypt20/1_6_5_2ubuntu0_5/amd64",
+        "related": "http:_ubuntu/libgcrypt20/1_6_5_2ubuntu0_5/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libapt_pkg5_0/1_2_27/amd64",
+        "related": "http:_ubuntu/libapt_pkg5_0/1_2_27/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libusb_0_1_4/2_0_1_12_28/amd64",
+        "related": "http:_ubuntu/libusb_0_1_4/2_0_1_12_28/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libtasn1_6/4_7_3ubuntu0_16_04_3/amd64",
+        "related": "http:_ubuntu/libtasn1_6/4_7_3ubuntu0_16_04_3/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/dpkg/1_18_4ubuntu1_4/amd64",
+        "related": "http:_ubuntu/dpkg/1_18_4ubuntu1_4/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libsqlite3_0/3_11_0_1ubuntu1/amd64",
+        "related": "http:_ubuntu/libsqlite3_0/3_11_0_1ubuntu1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libuuid1/2_27_1_6ubuntu3_6/amd64",
+        "related": "http:_ubuntu/libuuid1/2_27_1_6ubuntu3_6/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/liblz4_1/0_0_r131_2ubuntu2/amd64",
+        "related": "http:_ubuntu/liblz4_1/0_0_r131_2ubuntu2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/gcc_5_base/5_4_0_6ubuntu1_16_04_10/amd64",
+        "related": "http:_ubuntu/gcc_5_base/5_4_0_6ubuntu1_16_04_10/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/findutils/4_6_0_git_20160126_2/amd64",
+        "related": "http:_ubuntu/findutils/4_6_0_git_20160126_2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libdebconfclient0/0_198ubuntu1/amd64",
+        "related": "http:_ubuntu/libdebconfclient0/0_198ubuntu1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libgpg_error0/1_21_2ubuntu1/amd64",
+        "related": "http:_ubuntu/libgpg_error0/1_21_2ubuntu1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/e2fslibs/1_42_13_1ubuntu1/amd64",
+        "related": "http:_ubuntu/e2fslibs/1_42_13_1ubuntu1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libattr1/1_2_4_47_2/amd64",
+        "related": "http:_ubuntu/libattr1/1_2_4_47_2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libtinfo5/6_0_20160213_1ubuntu1/amd64",
+        "related": "http:_ubuntu/libtinfo5/6_0_20160213_1ubuntu1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libprocps4/2_3_3_10_4ubuntu2_4/amd64",
+        "related": "http:_ubuntu/libprocps4/2_3_3_10_4ubuntu2_4/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libgssapi3_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
+        "related": "http:_ubuntu/libgssapi3_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libsepol1/2_4_2/amd64",
+        "related": "http:_ubuntu/libsepol1/2_4_2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libncursesw5/6_0_20160213_1ubuntu1/amd64",
+        "related": "http:_ubuntu/libncursesw5/6_0_20160213_1ubuntu1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/sysvinit_utils/2_88dsf_59_3ubuntu2/amd64",
+        "related": "http:_ubuntu/sysvinit_utils/2_88dsf_59_3ubuntu2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/procps/2_3_3_10_4ubuntu2_4/amd64",
+        "related": "http:_ubuntu/procps/2_3_3_10_4ubuntu2_4/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/librtmp1/2_4_20151223_gitfa8646d_1ubuntu0_1/amd64",
+        "related": "http:_ubuntu/librtmp1/2_4_20151223_gitfa8646d_1ubuntu0_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libacl1/2_2_52_3/amd64",
+        "related": "http:_ubuntu/libacl1/2_2_52_3/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libsystemd0/229_4ubuntu21_2/amd64",
+        "related": "http:_ubuntu/libsystemd0/229_4ubuntu21_2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libpam_modules_bin/1_1_8_3_2ubuntu2_1/amd64",
+        "related": "http:_ubuntu/libpam_modules_bin/1_1_8_3_2ubuntu2_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/gcc_6_base/6_0_1_0ubuntu1/amd64",
+        "related": "http:_ubuntu/gcc_6_base/6_0_1_0ubuntu1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libp11_kit0/0_23_2_5_ubuntu16_04_1/amd64",
+        "related": "http:_ubuntu/libp11_kit0/0_23_2_5_ubuntu16_04_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/apt/1_2_27/amd64",
+        "related": "http:_ubuntu/apt/1_2_27/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/ubuntu_keyring/2012_05_19/all",
+        "related": "http:_ubuntu/ubuntu_keyring/2012_05_19/all",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libsasl2_modules_db/2_1_26_dfsg1_14build1/amd64",
+        "related": "http:_ubuntu/libsasl2_modules_db/2_1_26_dfsg1_14build1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/lsb_base/9_20160110ubuntu0_2/all",
+        "related": "http:_ubuntu/lsb_base/9_20160110ubuntu0_2/all",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libudev1/229_4ubuntu21_2/amd64",
+        "related": "http:_ubuntu/libudev1/229_4ubuntu21_2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/openssl/1_0_2g_1ubuntu4_13/amd64",
+        "related": "http:_ubuntu/openssl/1_0_2g_1ubuntu4_13/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/ncurses_base/6_0_20160213_1ubuntu1/all",
+        "related": "http:_ubuntu/ncurses_base/6_0_20160213_1ubuntu1/all",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libsasl2_modules/2_1_26_dfsg1_14build1/amd64",
+        "related": "http:_ubuntu/libsasl2_modules/2_1_26_dfsg1_14build1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libseccomp2/2_3_1_2_1ubuntu2_16_04_1/amd64",
+        "related": "http:_ubuntu/libseccomp2/2_3_1_2_1ubuntu2_16_04_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libblkid1/2_27_1_6ubuntu3_6/amd64",
+        "related": "http:_ubuntu/libblkid1/2_27_1_6ubuntu3_6/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libldap_2_4_2/2_4_42_dfsg_2ubuntu3_3/amd64",
+        "related": "http:_ubuntu/libldap_2_4_2/2_4_42_dfsg_2ubuntu3_3/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libgssapi_krb5_2/1_13_2_dfsg_5ubuntu2/amd64",
+        "related": "http:_ubuntu/libgssapi_krb5_2/1_13_2_dfsg_5ubuntu2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libfdisk1/2_27_1_6ubuntu3_6/amd64",
+        "related": "http:_ubuntu/libfdisk1/2_27_1_6ubuntu3_6/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libsasl2_2/2_1_26_dfsg1_14build1/amd64",
+        "related": "http:_ubuntu/libsasl2_2/2_1_26_dfsg1_14build1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libdb5_3/5_3_28_11ubuntu0_1/amd64",
+        "related": "http:_ubuntu/libdb5_3/5_3_28_11ubuntu0_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libcurl3_gnutls/7_47_0_1ubuntu2_9/amd64",
+        "related": "http:_ubuntu/libcurl3_gnutls/7_47_0_1ubuntu2_9/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libnettle6/3_2_1ubuntu0_16_04_1/amd64",
+        "related": "http:_ubuntu/libnettle6/3_2_1ubuntu0_16_04_1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libpam_runtime/1_1_8_3_2ubuntu2_1/all",
+        "related": "http:_ubuntu/libpam_runtime/1_1_8_3_2ubuntu2_1/all",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/sysv_rc/2_88dsf_59_3ubuntu2/all",
+        "related": "http:_ubuntu/sysv_rc/2_88dsf_59_3ubuntu2/all",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/coreutils/8_25_2ubuntu3_16_04/amd64",
+        "related": "http:_ubuntu/coreutils/8_25_2ubuntu3_16_04/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libdevmapper1_02_1/2_1_02_110_1ubuntu10/amd64",
+        "related": "http:_ubuntu/libdevmapper1_02_1/2_1_02_110_1ubuntu10/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libcomerr2/1_42_13_1ubuntu1/amd64",
+        "related": "http:_ubuntu/libcomerr2/1_42_13_1ubuntu1/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/gnupg/1_4_20_1ubuntu3_2/amd64",
+        "related": "http:_ubuntu/gnupg/1_4_20_1ubuntu3_2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/insserv/1_14_0_5ubuntu3/amd64",
+        "related": "http:_ubuntu/insserv/1_14_0_5ubuntu3/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/initscripts/2_88dsf_59_3ubuntu2/amd64",
+        "related": "http:_ubuntu/initscripts/2_88dsf_59_3ubuntu2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/debianutils/4_7/amd64",
+        "related": "http:_ubuntu/debianutils/4_7/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:@ubuntu/libc_bin/2_23_0ubuntu10/amd64",
+        "related": "http:_ubuntu/libc_bin/2_23_0ubuntu10/amd64",
         "relationshipType": "DYNAMIC_LINK"
       }
     ]
@@ -552,7 +552,7 @@
   {
     "name": "libheimntlm0-heimdal",
     "revision": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-    "@id": "http:@ubuntu/libheimntlm0_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
+    "@id": "http:_ubuntu/libheimntlm0_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -573,7 +573,7 @@
   {
     "name": "libroken18-heimdal",
     "revision": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-    "@id": "http:@ubuntu/libroken18_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
+    "@id": "http:_ubuntu/libroken18_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -594,7 +594,7 @@
   {
     "name": "libkrb5-26-heimdal",
     "revision": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-    "@id": "http:@ubuntu/libkrb5_26_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
+    "@id": "http:_ubuntu/libkrb5_26_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -615,7 +615,7 @@
   {
     "name": "gzip",
     "revision": "1.6-4ubuntu1",
-    "@id": "http:@ubuntu/gzip/1_6_4ubuntu1/amd64",
+    "@id": "http:_ubuntu/gzip/1_6_4ubuntu1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -636,7 +636,7 @@
   {
     "name": "libustr-1.0-1",
     "revision": "1.0.4-5",
-    "@id": "http:@ubuntu/libustr_1_0_1/1_0_4_5/amd64",
+    "@id": "http:_ubuntu/libustr_1_0_1/1_0_4_5/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -657,7 +657,7 @@
   {
     "name": "libasn1-8-heimdal",
     "revision": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-    "@id": "http:@ubuntu/libasn1_8_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
+    "@id": "http:_ubuntu/libasn1_8_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -678,7 +678,7 @@
   {
     "name": "libkmod2",
     "revision": "22-1ubuntu5",
-    "@id": "http:@ubuntu/libkmod2/22_1ubuntu5/amd64",
+    "@id": "http:_ubuntu/libkmod2/22_1ubuntu5/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -699,7 +699,7 @@
   {
     "name": "ncurses-bin",
     "revision": "6.0+20160213-1ubuntu1",
-    "@id": "http:@ubuntu/ncurses_bin/6_0_20160213_1ubuntu1/amd64",
+    "@id": "http:_ubuntu/ncurses_bin/6_0_20160213_1ubuntu1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -720,7 +720,7 @@
   {
     "name": "util-linux",
     "revision": "2.27.1-6ubuntu3.6",
-    "@id": "http:@ubuntu/util_linux/2_27_1_6ubuntu3_6/amd64",
+    "@id": "http:_ubuntu/util_linux/2_27_1_6ubuntu3_6/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -741,7 +741,7 @@
   {
     "name": "libk5crypto3",
     "revision": "1.13.2+dfsg-5ubuntu2",
-    "@id": "http:@ubuntu/libk5crypto3/1_13_2_dfsg_5ubuntu2/amd64",
+    "@id": "http:_ubuntu/libk5crypto3/1_13_2_dfsg_5ubuntu2/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -762,7 +762,7 @@
   {
     "name": "krb5-locales",
     "revision": "1.13.2+dfsg-5ubuntu2",
-    "@id": "http:@ubuntu/krb5_locales/1_13_2_dfsg_5ubuntu2/all",
+    "@id": "http:_ubuntu/krb5_locales/1_13_2_dfsg_5ubuntu2/all",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -783,7 +783,7 @@
   {
     "name": "libidn11",
     "revision": "1.32-3ubuntu1.2",
-    "@id": "http:@ubuntu/libidn11/1_32_3ubuntu1_2/amd64",
+    "@id": "http:_ubuntu/libidn11/1_32_3ubuntu1_2/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -804,7 +804,7 @@
   {
     "name": "mount",
     "revision": "2.27.1-6ubuntu3.6",
-    "@id": "http:@ubuntu/mount/2_27_1_6ubuntu3_6/amd64",
+    "@id": "http:_ubuntu/mount/2_27_1_6ubuntu3_6/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -825,7 +825,7 @@
   {
     "name": "hostname",
     "revision": "3.16ubuntu2",
-    "@id": "http:@ubuntu/hostname/3_16ubuntu2/amd64",
+    "@id": "http:_ubuntu/hostname/3_16ubuntu2/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -846,7 +846,7 @@
   {
     "name": "libkrb5-3",
     "revision": "1.13.2+dfsg-5ubuntu2",
-    "@id": "http:@ubuntu/libkrb5_3/1_13_2_dfsg_5ubuntu2/amd64",
+    "@id": "http:_ubuntu/libkrb5_3/1_13_2_dfsg_5ubuntu2/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -867,7 +867,7 @@
   {
     "name": "libkrb5support0",
     "revision": "1.13.2+dfsg-5ubuntu2",
-    "@id": "http:@ubuntu/libkrb5support0/1_13_2_dfsg_5ubuntu2/amd64",
+    "@id": "http:_ubuntu/libkrb5support0/1_13_2_dfsg_5ubuntu2/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -888,7 +888,7 @@
   {
     "name": "libhcrypto4-heimdal",
     "revision": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-    "@id": "http:@ubuntu/libhcrypto4_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
+    "@id": "http:_ubuntu/libhcrypto4_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -909,7 +909,7 @@
   {
     "name": "libgcc1",
     "revision": "1:6.0.1-0ubuntu1",
-    "@id": "http:@ubuntu/libgcc1/1_6_0_1_0ubuntu1/amd64",
+    "@id": "http:_ubuntu/libgcc1/1_6_0_1_0ubuntu1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -930,7 +930,7 @@
   {
     "name": "e2fsprogs",
     "revision": "1.42.13-1ubuntu1",
-    "@id": "http:@ubuntu/e2fsprogs/1_42_13_1ubuntu1/amd64",
+    "@id": "http:_ubuntu/e2fsprogs/1_42_13_1ubuntu1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -951,7 +951,7 @@
   {
     "name": "dash",
     "revision": "0.5.8-2.1ubuntu2",
-    "@id": "http:@ubuntu/dash/0_5_8_2_1ubuntu2/amd64",
+    "@id": "http:_ubuntu/dash/0_5_8_2_1ubuntu2/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -972,7 +972,7 @@
   {
     "name": "libcap2-bin",
     "revision": "1:2.24-12",
-    "@id": "http:@ubuntu/libcap2_bin/1_2_24_12/amd64",
+    "@id": "http:_ubuntu/libcap2_bin/1_2_24_12/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -993,7 +993,7 @@
   {
     "name": "liblzma5",
     "revision": "5.1.1alpha+20120614-2ubuntu2",
-    "@id": "http:@ubuntu/liblzma5/5_1_1alpha_20120614_2ubuntu2/amd64",
+    "@id": "http:_ubuntu/liblzma5/5_1_1alpha_20120614_2ubuntu2/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1014,7 +1014,7 @@
   {
     "name": "libhogweed4",
     "revision": "3.2-1ubuntu0.16.04.1",
-    "@id": "http:@ubuntu/libhogweed4/3_2_1ubuntu0_16_04_1/amd64",
+    "@id": "http:_ubuntu/libhogweed4/3_2_1ubuntu0_16_04_1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1035,7 +1035,7 @@
   {
     "name": "passwd",
     "revision": "1:4.2-3.1ubuntu5.3",
-    "@id": "http:@ubuntu/passwd/1_4_2_3_1ubuntu5_3/amd64",
+    "@id": "http:_ubuntu/passwd/1_4_2_3_1ubuntu5_3/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1056,7 +1056,7 @@
   {
     "name": "libc6",
     "revision": "2.23-0ubuntu10",
-    "@id": "http:@ubuntu/libc6/2_23_0ubuntu10/amd64",
+    "@id": "http:_ubuntu/libc6/2_23_0ubuntu10/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1077,7 +1077,7 @@
   {
     "name": "bash",
     "revision": "4.3-14ubuntu1.2",
-    "@id": "http:@ubuntu/bash/4_3_14ubuntu1_2/amd64",
+    "@id": "http:_ubuntu/bash/4_3_14ubuntu1_2/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1098,7 +1098,7 @@
   {
     "name": "zlib1g",
     "revision": "1:1.2.8.dfsg-2ubuntu4.1",
-    "@id": "http:@ubuntu/zlib1g/1_1_2_8_dfsg_2ubuntu4_1/amd64",
+    "@id": "http:_ubuntu/zlib1g/1_1_2_8_dfsg_2ubuntu4_1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1119,7 +1119,7 @@
   {
     "name": "init-system-helpers",
     "revision": "1.29ubuntu4",
-    "@id": "http:@ubuntu/init_system_helpers/1_29ubuntu4/all",
+    "@id": "http:_ubuntu/init_system_helpers/1_29ubuntu4/all",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1140,7 +1140,7 @@
   {
     "name": "libpcre3",
     "revision": "2:8.38-3.1",
-    "@id": "http:@ubuntu/libpcre3/2_8_38_3_1/amd64",
+    "@id": "http:_ubuntu/libpcre3/2_8_38_3_1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1161,7 +1161,7 @@
   {
     "name": "init",
     "revision": "1.29ubuntu4",
-    "@id": "http:@ubuntu/init/1_29ubuntu4/amd64",
+    "@id": "http:_ubuntu/init/1_29ubuntu4/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1182,7 +1182,7 @@
   {
     "name": "libwind0-heimdal",
     "revision": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-    "@id": "http:@ubuntu/libwind0_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
+    "@id": "http:_ubuntu/libwind0_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1203,7 +1203,7 @@
   {
     "name": "sensible-utils",
     "revision": "0.0.9ubuntu0.16.04.1",
-    "@id": "http:@ubuntu/sensible_utils/0_0_9ubuntu0_16_04_1/all",
+    "@id": "http:_ubuntu/sensible_utils/0_0_9ubuntu0_16_04_1/all",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1224,7 +1224,7 @@
   {
     "name": "libncurses5",
     "revision": "6.0+20160213-1ubuntu1",
-    "@id": "http:@ubuntu/libncurses5/6_0_20160213_1ubuntu1/amd64",
+    "@id": "http:_ubuntu/libncurses5/6_0_20160213_1ubuntu1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1245,7 +1245,7 @@
   {
     "name": "libpam0g",
     "revision": "1.1.8-3.2ubuntu2.1",
-    "@id": "http:@ubuntu/libpam0g/1_1_8_3_2ubuntu2_1/amd64",
+    "@id": "http:_ubuntu/libpam0g/1_1_8_3_2ubuntu2_1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1266,7 +1266,7 @@
   {
     "name": "perl-base",
     "revision": "5.22.1-9ubuntu0.5",
-    "@id": "http:@ubuntu/perl_base/5_22_1_9ubuntu0_5/amd64",
+    "@id": "http:_ubuntu/perl_base/5_22_1_9ubuntu0_5/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1287,7 +1287,7 @@
   {
     "name": "libkeyutils1",
     "revision": "1.5.9-8ubuntu1",
-    "@id": "http:@ubuntu/libkeyutils1/1_5_9_8ubuntu1/amd64",
+    "@id": "http:_ubuntu/libkeyutils1/1_5_9_8ubuntu1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1308,7 +1308,7 @@
   {
     "name": "systemd",
     "revision": "229-4ubuntu21.2",
-    "@id": "http:@ubuntu/systemd/229_4ubuntu21_2/amd64",
+    "@id": "http:_ubuntu/systemd/229_4ubuntu21_2/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1329,7 +1329,7 @@
   {
     "name": "libpam-modules",
     "revision": "1.1.8-3.2ubuntu2.1",
-    "@id": "http:@ubuntu/libpam_modules/1_1_8_3_2ubuntu2_1/amd64",
+    "@id": "http:_ubuntu/libpam_modules/1_1_8_3_2ubuntu2_1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1350,7 +1350,7 @@
   {
     "name": "libhx509-5-heimdal",
     "revision": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-    "@id": "http:@ubuntu/libhx509_5_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
+    "@id": "http:_ubuntu/libhx509_5_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1371,7 +1371,7 @@
   {
     "name": "libaudit-common",
     "revision": "1:2.4.5-1ubuntu2.1",
-    "@id": "http:@ubuntu/libaudit_common/1_2_4_5_1ubuntu2_1/all",
+    "@id": "http:_ubuntu/libaudit_common/1_2_4_5_1ubuntu2_1/all",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1392,7 +1392,7 @@
   {
     "name": "bsdutils",
     "revision": "1:2.27.1-6ubuntu3.6",
-    "@id": "http:@ubuntu/bsdutils/1_2_27_1_6ubuntu3_6/amd64",
+    "@id": "http:_ubuntu/bsdutils/1_2_27_1_6ubuntu3_6/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1413,7 +1413,7 @@
   {
     "name": "libsmartcols1",
     "revision": "2.27.1-6ubuntu3.6",
-    "@id": "http:@ubuntu/libsmartcols1/2_27_1_6ubuntu3_6/amd64",
+    "@id": "http:_ubuntu/libsmartcols1/2_27_1_6ubuntu3_6/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1434,7 +1434,7 @@
   {
     "name": "libselinux1",
     "revision": "2.4-3build2",
-    "@id": "http:@ubuntu/libselinux1/2_4_3build2/amd64",
+    "@id": "http:_ubuntu/libselinux1/2_4_3build2/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1455,7 +1455,7 @@
   {
     "name": "debconf",
     "revision": "1.5.58ubuntu1",
-    "@id": "http:@ubuntu/debconf/1_5_58ubuntu1/all",
+    "@id": "http:_ubuntu/debconf/1_5_58ubuntu1/all",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1476,7 +1476,7 @@
   {
     "name": "libss2",
     "revision": "1.42.13-1ubuntu1",
-    "@id": "http:@ubuntu/libss2/1_42_13_1ubuntu1/amd64",
+    "@id": "http:_ubuntu/libss2/1_42_13_1ubuntu1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1497,7 +1497,7 @@
   {
     "name": "libssl1.0.0",
     "revision": "1.0.2g-1ubuntu4.13",
-    "@id": "http:@ubuntu/libssl1_0_0/1_0_2g_1ubuntu4_13/amd64",
+    "@id": "http:_ubuntu/libssl1_0_0/1_0_2g_1ubuntu4_13/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1518,7 +1518,7 @@
   {
     "name": "libsemanage1",
     "revision": "2.3-1build3",
-    "@id": "http:@ubuntu/libsemanage1/2_3_1build3/amd64",
+    "@id": "http:_ubuntu/libsemanage1/2_3_1build3/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1539,7 +1539,7 @@
   {
     "name": "login",
     "revision": "1:4.2-3.1ubuntu5.3",
-    "@id": "http:@ubuntu/login/1_4_2_3_1ubuntu5_3/amd64",
+    "@id": "http:_ubuntu/login/1_4_2_3_1ubuntu5_3/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1560,7 +1560,7 @@
   {
     "name": "libffi6",
     "revision": "3.2.1-4",
-    "@id": "http:@ubuntu/libffi6/3_2_1_4/amd64",
+    "@id": "http:_ubuntu/libffi6/3_2_1_4/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1581,7 +1581,7 @@
   {
     "name": "libcryptsetup4",
     "revision": "2:1.6.6-5ubuntu2.1",
-    "@id": "http:@ubuntu/libcryptsetup4/2_1_6_6_5ubuntu2_1/amd64",
+    "@id": "http:_ubuntu/libcryptsetup4/2_1_6_6_5ubuntu2_1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1602,7 +1602,7 @@
   {
     "name": "libapparmor1",
     "revision": "2.10.95-0ubuntu2.9",
-    "@id": "http:@ubuntu/libapparmor1/2_10_95_0ubuntu2_9/amd64",
+    "@id": "http:_ubuntu/libapparmor1/2_10_95_0ubuntu2_9/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1623,7 +1623,7 @@
   {
     "name": "mawk",
     "revision": "1.3.3-17ubuntu2",
-    "@id": "http:@ubuntu/mawk/1_3_3_17ubuntu2/amd64",
+    "@id": "http:_ubuntu/mawk/1_3_3_17ubuntu2/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1644,7 +1644,7 @@
   {
     "name": "base-files",
     "revision": "9.4ubuntu4.7",
-    "@id": "http:@ubuntu/base_files/9_4ubuntu4_7/amd64",
+    "@id": "http:_ubuntu/base_files/9_4ubuntu4_7/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1665,7 +1665,7 @@
   {
     "name": "sed",
     "revision": "4.2.2-7",
-    "@id": "http:@ubuntu/sed/4_2_2_7/amd64",
+    "@id": "http:_ubuntu/sed/4_2_2_7/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1686,7 +1686,7 @@
   {
     "name": "adduser",
     "revision": "3.113+nmu3ubuntu4",
-    "@id": "http:@ubuntu/adduser/3_113_nmu3ubuntu4/all",
+    "@id": "http:_ubuntu/adduser/3_113_nmu3ubuntu4/all",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1707,7 +1707,7 @@
   {
     "name": "libstdc++6",
     "revision": "5.4.0-6ubuntu1~16.04.10",
-    "@id": "http:@ubuntu/libstdc__6/5_4_0_6ubuntu1_16_04_10/amd64",
+    "@id": "http:_ubuntu/libstdc__6/5_4_0_6ubuntu1_16_04_10/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1728,7 +1728,7 @@
   {
     "name": "tar",
     "revision": "1.28-2.1ubuntu0.1",
-    "@id": "http:@ubuntu/tar/1_28_2_1ubuntu0_1/amd64",
+    "@id": "http:_ubuntu/tar/1_28_2_1ubuntu0_1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1749,7 +1749,7 @@
   {
     "name": "libsemanage-common",
     "revision": "2.3-1build3",
-    "@id": "http:@ubuntu/libsemanage_common/2_3_1build3/all",
+    "@id": "http:_ubuntu/libsemanage_common/2_3_1build3/all",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1770,7 +1770,7 @@
   {
     "name": "libgnutls30",
     "revision": "3.4.10-4ubuntu1.4",
-    "@id": "http:@ubuntu/libgnutls30/3_4_10_4ubuntu1_4/amd64",
+    "@id": "http:_ubuntu/libgnutls30/3_4_10_4ubuntu1_4/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1791,7 +1791,7 @@
   {
     "name": "grep",
     "revision": "2.25-1~16.04.1",
-    "@id": "http:@ubuntu/grep/2_25_1_16_04_1/amd64",
+    "@id": "http:_ubuntu/grep/2_25_1_16_04_1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1812,7 +1812,7 @@
   {
     "name": "libheimbase1-heimdal",
     "revision": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-    "@id": "http:@ubuntu/libheimbase1_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
+    "@id": "http:_ubuntu/libheimbase1_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1833,7 +1833,7 @@
   {
     "name": "systemd-sysv",
     "revision": "229-4ubuntu21.2",
-    "@id": "http:@ubuntu/systemd_sysv/229_4ubuntu21_2/amd64",
+    "@id": "http:_ubuntu/systemd_sysv/229_4ubuntu21_2/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1854,7 +1854,7 @@
   {
     "name": "ca-certificates",
     "revision": "20170717~16.04.1",
-    "@id": "http:@ubuntu/ca_certificates/20170717_16_04_1/all",
+    "@id": "http:_ubuntu/ca_certificates/20170717_16_04_1/all",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1875,7 +1875,7 @@
   {
     "name": "base-passwd",
     "revision": "3.5.39",
-    "@id": "http:@ubuntu/base_passwd/3_5_39/amd64",
+    "@id": "http:_ubuntu/base_passwd/3_5_39/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1896,7 +1896,7 @@
   {
     "name": "libbz2-1.0",
     "revision": "1.0.6-8",
-    "@id": "http:@ubuntu/libbz2_1_0/1_0_6_8/amd64",
+    "@id": "http:_ubuntu/libbz2_1_0/1_0_6_8/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1917,7 +1917,7 @@
   {
     "name": "libmount1",
     "revision": "2.27.1-6ubuntu3.6",
-    "@id": "http:@ubuntu/libmount1/2_27_1_6ubuntu3_6/amd64",
+    "@id": "http:_ubuntu/libmount1/2_27_1_6ubuntu3_6/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1938,7 +1938,7 @@
   {
     "name": "readline-common",
     "revision": "6.3-8ubuntu2",
-    "@id": "http:@ubuntu/readline_common/6_3_8ubuntu2/all",
+    "@id": "http:_ubuntu/readline_common/6_3_8ubuntu2/all",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1959,7 +1959,7 @@
   {
     "name": "gpgv",
     "revision": "1.4.20-1ubuntu3.2",
-    "@id": "http:@ubuntu/gpgv/1_4_20_1ubuntu3_2/amd64",
+    "@id": "http:_ubuntu/gpgv/1_4_20_1ubuntu3_2/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -1980,7 +1980,7 @@
   {
     "name": "diffutils",
     "revision": "1:3.3-3",
-    "@id": "http:@ubuntu/diffutils/1_3_3_3/amd64",
+    "@id": "http:_ubuntu/diffutils/1_3_3_3/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2001,7 +2001,7 @@
   {
     "name": "libaudit1",
     "revision": "1:2.4.5-1ubuntu2.1",
-    "@id": "http:@ubuntu/libaudit1/1_2_4_5_1ubuntu2_1/amd64",
+    "@id": "http:_ubuntu/libaudit1/1_2_4_5_1ubuntu2_1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2022,7 +2022,7 @@
   {
     "name": "makedev",
     "revision": "2.3.1-93ubuntu2~ubuntu16.04.1",
-    "@id": "http:@ubuntu/makedev/2_3_1_93ubuntu2_ubuntu16_04_1/all",
+    "@id": "http:_ubuntu/makedev/2_3_1_93ubuntu2_ubuntu16_04_1/all",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2043,7 +2043,7 @@
   {
     "name": "libcap2",
     "revision": "1:2.24-12",
-    "@id": "http:@ubuntu/libcap2/1_2_24_12/amd64",
+    "@id": "http:_ubuntu/libcap2/1_2_24_12/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2064,7 +2064,7 @@
   {
     "name": "multiarch-support",
     "revision": "2.23-0ubuntu10",
-    "@id": "http:@ubuntu/multiarch_support/2_23_0ubuntu10/amd64",
+    "@id": "http:_ubuntu/multiarch_support/2_23_0ubuntu10/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2085,7 +2085,7 @@
   {
     "name": "libgmp10",
     "revision": "2:6.1.0+dfsg-2",
-    "@id": "http:@ubuntu/libgmp10/2_6_1_0_dfsg_2/amd64",
+    "@id": "http:_ubuntu/libgmp10/2_6_1_0_dfsg_2/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2106,7 +2106,7 @@
   {
     "name": "libreadline6",
     "revision": "6.3-8ubuntu2",
-    "@id": "http:@ubuntu/libreadline6/6_3_8ubuntu2/amd64",
+    "@id": "http:_ubuntu/libreadline6/6_3_8ubuntu2/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2127,7 +2127,7 @@
   {
     "name": "libgcrypt20",
     "revision": "1.6.5-2ubuntu0.5",
-    "@id": "http:@ubuntu/libgcrypt20/1_6_5_2ubuntu0_5/amd64",
+    "@id": "http:_ubuntu/libgcrypt20/1_6_5_2ubuntu0_5/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2148,7 +2148,7 @@
   {
     "name": "libapt-pkg5.0",
     "revision": "1.2.27",
-    "@id": "http:@ubuntu/libapt_pkg5_0/1_2_27/amd64",
+    "@id": "http:_ubuntu/libapt_pkg5_0/1_2_27/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2169,7 +2169,7 @@
   {
     "name": "libusb-0.1-4",
     "revision": "2:0.1.12-28",
-    "@id": "http:@ubuntu/libusb_0_1_4/2_0_1_12_28/amd64",
+    "@id": "http:_ubuntu/libusb_0_1_4/2_0_1_12_28/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2190,7 +2190,7 @@
   {
     "name": "libtasn1-6",
     "revision": "4.7-3ubuntu0.16.04.3",
-    "@id": "http:@ubuntu/libtasn1_6/4_7_3ubuntu0_16_04_3/amd64",
+    "@id": "http:_ubuntu/libtasn1_6/4_7_3ubuntu0_16_04_3/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2211,7 +2211,7 @@
   {
     "name": "dpkg",
     "revision": "1.18.4ubuntu1.4",
-    "@id": "http:@ubuntu/dpkg/1_18_4ubuntu1_4/amd64",
+    "@id": "http:_ubuntu/dpkg/1_18_4ubuntu1_4/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2232,7 +2232,7 @@
   {
     "name": "libsqlite3-0",
     "revision": "3.11.0-1ubuntu1",
-    "@id": "http:@ubuntu/libsqlite3_0/3_11_0_1ubuntu1/amd64",
+    "@id": "http:_ubuntu/libsqlite3_0/3_11_0_1ubuntu1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2253,7 +2253,7 @@
   {
     "name": "libuuid1",
     "revision": "2.27.1-6ubuntu3.6",
-    "@id": "http:@ubuntu/libuuid1/2_27_1_6ubuntu3_6/amd64",
+    "@id": "http:_ubuntu/libuuid1/2_27_1_6ubuntu3_6/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2274,7 +2274,7 @@
   {
     "name": "liblz4-1",
     "revision": "0.0~r131-2ubuntu2",
-    "@id": "http:@ubuntu/liblz4_1/0_0_r131_2ubuntu2/amd64",
+    "@id": "http:_ubuntu/liblz4_1/0_0_r131_2ubuntu2/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2295,7 +2295,7 @@
   {
     "name": "gcc-5-base",
     "revision": "5.4.0-6ubuntu1~16.04.10",
-    "@id": "http:@ubuntu/gcc_5_base/5_4_0_6ubuntu1_16_04_10/amd64",
+    "@id": "http:_ubuntu/gcc_5_base/5_4_0_6ubuntu1_16_04_10/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2316,7 +2316,7 @@
   {
     "name": "findutils",
     "revision": "4.6.0+git+20160126-2",
-    "@id": "http:@ubuntu/findutils/4_6_0_git_20160126_2/amd64",
+    "@id": "http:_ubuntu/findutils/4_6_0_git_20160126_2/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2337,7 +2337,7 @@
   {
     "name": "libdebconfclient0",
     "revision": "0.198ubuntu1",
-    "@id": "http:@ubuntu/libdebconfclient0/0_198ubuntu1/amd64",
+    "@id": "http:_ubuntu/libdebconfclient0/0_198ubuntu1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2358,7 +2358,7 @@
   {
     "name": "libgpg-error0",
     "revision": "1.21-2ubuntu1",
-    "@id": "http:@ubuntu/libgpg_error0/1_21_2ubuntu1/amd64",
+    "@id": "http:_ubuntu/libgpg_error0/1_21_2ubuntu1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2379,7 +2379,7 @@
   {
     "name": "e2fslibs",
     "revision": "1.42.13-1ubuntu1",
-    "@id": "http:@ubuntu/e2fslibs/1_42_13_1ubuntu1/amd64",
+    "@id": "http:_ubuntu/e2fslibs/1_42_13_1ubuntu1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2400,7 +2400,7 @@
   {
     "name": "libattr1",
     "revision": "1:2.4.47-2",
-    "@id": "http:@ubuntu/libattr1/1_2_4_47_2/amd64",
+    "@id": "http:_ubuntu/libattr1/1_2_4_47_2/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2421,7 +2421,7 @@
   {
     "name": "libtinfo5",
     "revision": "6.0+20160213-1ubuntu1",
-    "@id": "http:@ubuntu/libtinfo5/6_0_20160213_1ubuntu1/amd64",
+    "@id": "http:_ubuntu/libtinfo5/6_0_20160213_1ubuntu1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2442,7 +2442,7 @@
   {
     "name": "libprocps4",
     "revision": "2:3.3.10-4ubuntu2.4",
-    "@id": "http:@ubuntu/libprocps4/2_3_3_10_4ubuntu2_4/amd64",
+    "@id": "http:_ubuntu/libprocps4/2_3_3_10_4ubuntu2_4/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2463,7 +2463,7 @@
   {
     "name": "libgssapi3-heimdal",
     "revision": "1.7~git20150920+dfsg-4ubuntu1.16.04.1",
-    "@id": "http:@ubuntu/libgssapi3_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
+    "@id": "http:_ubuntu/libgssapi3_heimdal/1_7_git20150920_dfsg_4ubuntu1_16_04_1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2484,7 +2484,7 @@
   {
     "name": "libsepol1",
     "revision": "2.4-2",
-    "@id": "http:@ubuntu/libsepol1/2_4_2/amd64",
+    "@id": "http:_ubuntu/libsepol1/2_4_2/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2505,7 +2505,7 @@
   {
     "name": "libncursesw5",
     "revision": "6.0+20160213-1ubuntu1",
-    "@id": "http:@ubuntu/libncursesw5/6_0_20160213_1ubuntu1/amd64",
+    "@id": "http:_ubuntu/libncursesw5/6_0_20160213_1ubuntu1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2526,7 +2526,7 @@
   {
     "name": "sysvinit-utils",
     "revision": "2.88dsf-59.3ubuntu2",
-    "@id": "http:@ubuntu/sysvinit_utils/2_88dsf_59_3ubuntu2/amd64",
+    "@id": "http:_ubuntu/sysvinit_utils/2_88dsf_59_3ubuntu2/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2547,7 +2547,7 @@
   {
     "name": "procps",
     "revision": "2:3.3.10-4ubuntu2.4",
-    "@id": "http:@ubuntu/procps/2_3_3_10_4ubuntu2_4/amd64",
+    "@id": "http:_ubuntu/procps/2_3_3_10_4ubuntu2_4/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2568,7 +2568,7 @@
   {
     "name": "librtmp1",
     "revision": "2.4+20151223.gitfa8646d-1ubuntu0.1",
-    "@id": "http:@ubuntu/librtmp1/2_4_20151223_gitfa8646d_1ubuntu0_1/amd64",
+    "@id": "http:_ubuntu/librtmp1/2_4_20151223_gitfa8646d_1ubuntu0_1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2589,7 +2589,7 @@
   {
     "name": "libacl1",
     "revision": "2.2.52-3",
-    "@id": "http:@ubuntu/libacl1/2_2_52_3/amd64",
+    "@id": "http:_ubuntu/libacl1/2_2_52_3/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2610,7 +2610,7 @@
   {
     "name": "libsystemd0",
     "revision": "229-4ubuntu21.2",
-    "@id": "http:@ubuntu/libsystemd0/229_4ubuntu21_2/amd64",
+    "@id": "http:_ubuntu/libsystemd0/229_4ubuntu21_2/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2631,7 +2631,7 @@
   {
     "name": "libpam-modules-bin",
     "revision": "1.1.8-3.2ubuntu2.1",
-    "@id": "http:@ubuntu/libpam_modules_bin/1_1_8_3_2ubuntu2_1/amd64",
+    "@id": "http:_ubuntu/libpam_modules_bin/1_1_8_3_2ubuntu2_1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2652,7 +2652,7 @@
   {
     "name": "gcc-6-base",
     "revision": "6.0.1-0ubuntu1",
-    "@id": "http:@ubuntu/gcc_6_base/6_0_1_0ubuntu1/amd64",
+    "@id": "http:_ubuntu/gcc_6_base/6_0_1_0ubuntu1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2673,7 +2673,7 @@
   {
     "name": "libp11-kit0",
     "revision": "0.23.2-5~ubuntu16.04.1",
-    "@id": "http:@ubuntu/libp11_kit0/0_23_2_5_ubuntu16_04_1/amd64",
+    "@id": "http:_ubuntu/libp11_kit0/0_23_2_5_ubuntu16_04_1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2694,7 +2694,7 @@
   {
     "name": "apt",
     "revision": "1.2.27",
-    "@id": "http:@ubuntu/apt/1_2_27/amd64",
+    "@id": "http:_ubuntu/apt/1_2_27/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2715,7 +2715,7 @@
   {
     "name": "ubuntu-keyring",
     "revision": "2012.05.19",
-    "@id": "http:@ubuntu/ubuntu_keyring/2012_05_19/all",
+    "@id": "http:_ubuntu/ubuntu_keyring/2012_05_19/all",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2736,7 +2736,7 @@
   {
     "name": "libsasl2-modules-db",
     "revision": "2.1.26.dfsg1-14build1",
-    "@id": "http:@ubuntu/libsasl2_modules_db/2_1_26_dfsg1_14build1/amd64",
+    "@id": "http:_ubuntu/libsasl2_modules_db/2_1_26_dfsg1_14build1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2757,7 +2757,7 @@
   {
     "name": "lsb-base",
     "revision": "9.20160110ubuntu0.2",
-    "@id": "http:@ubuntu/lsb_base/9_20160110ubuntu0_2/all",
+    "@id": "http:_ubuntu/lsb_base/9_20160110ubuntu0_2/all",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2778,7 +2778,7 @@
   {
     "name": "libudev1",
     "revision": "229-4ubuntu21.2",
-    "@id": "http:@ubuntu/libudev1/229_4ubuntu21_2/amd64",
+    "@id": "http:_ubuntu/libudev1/229_4ubuntu21_2/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2799,7 +2799,7 @@
   {
     "name": "openssl",
     "revision": "1.0.2g-1ubuntu4.13",
-    "@id": "http:@ubuntu/openssl/1_0_2g_1ubuntu4_13/amd64",
+    "@id": "http:_ubuntu/openssl/1_0_2g_1ubuntu4_13/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2820,7 +2820,7 @@
   {
     "name": "ncurses-base",
     "revision": "6.0+20160213-1ubuntu1",
-    "@id": "http:@ubuntu/ncurses_base/6_0_20160213_1ubuntu1/all",
+    "@id": "http:_ubuntu/ncurses_base/6_0_20160213_1ubuntu1/all",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2841,7 +2841,7 @@
   {
     "name": "libsasl2-modules",
     "revision": "2.1.26.dfsg1-14build1",
-    "@id": "http:@ubuntu/libsasl2_modules/2_1_26_dfsg1_14build1/amd64",
+    "@id": "http:_ubuntu/libsasl2_modules/2_1_26_dfsg1_14build1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2862,7 +2862,7 @@
   {
     "name": "libseccomp2",
     "revision": "2.3.1-2.1ubuntu2~16.04.1",
-    "@id": "http:@ubuntu/libseccomp2/2_3_1_2_1ubuntu2_16_04_1/amd64",
+    "@id": "http:_ubuntu/libseccomp2/2_3_1_2_1ubuntu2_16_04_1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2883,7 +2883,7 @@
   {
     "name": "libblkid1",
     "revision": "2.27.1-6ubuntu3.6",
-    "@id": "http:@ubuntu/libblkid1/2_27_1_6ubuntu3_6/amd64",
+    "@id": "http:_ubuntu/libblkid1/2_27_1_6ubuntu3_6/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2904,7 +2904,7 @@
   {
     "name": "libldap-2.4-2",
     "revision": "2.4.42+dfsg-2ubuntu3.3",
-    "@id": "http:@ubuntu/libldap_2_4_2/2_4_42_dfsg_2ubuntu3_3/amd64",
+    "@id": "http:_ubuntu/libldap_2_4_2/2_4_42_dfsg_2ubuntu3_3/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2925,7 +2925,7 @@
   {
     "name": "libgssapi-krb5-2",
     "revision": "1.13.2+dfsg-5ubuntu2",
-    "@id": "http:@ubuntu/libgssapi_krb5_2/1_13_2_dfsg_5ubuntu2/amd64",
+    "@id": "http:_ubuntu/libgssapi_krb5_2/1_13_2_dfsg_5ubuntu2/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2946,7 +2946,7 @@
   {
     "name": "libfdisk1",
     "revision": "2.27.1-6ubuntu3.6",
-    "@id": "http:@ubuntu/libfdisk1/2_27_1_6ubuntu3_6/amd64",
+    "@id": "http:_ubuntu/libfdisk1/2_27_1_6ubuntu3_6/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2967,7 +2967,7 @@
   {
     "name": "libsasl2-2",
     "revision": "2.1.26.dfsg1-14build1",
-    "@id": "http:@ubuntu/libsasl2_2/2_1_26_dfsg1_14build1/amd64",
+    "@id": "http:_ubuntu/libsasl2_2/2_1_26_dfsg1_14build1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -2988,7 +2988,7 @@
   {
     "name": "libdb5.3",
     "revision": "5.3.28-11ubuntu0.1",
-    "@id": "http:@ubuntu/libdb5_3/5_3_28_11ubuntu0_1/amd64",
+    "@id": "http:_ubuntu/libdb5_3/5_3_28_11ubuntu0_1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -3009,7 +3009,7 @@
   {
     "name": "libcurl3-gnutls",
     "revision": "7.47.0-1ubuntu2.9",
-    "@id": "http:@ubuntu/libcurl3_gnutls/7_47_0_1ubuntu2_9/amd64",
+    "@id": "http:_ubuntu/libcurl3_gnutls/7_47_0_1ubuntu2_9/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -3030,7 +3030,7 @@
   {
     "name": "libnettle6",
     "revision": "3.2-1ubuntu0.16.04.1",
-    "@id": "http:@ubuntu/libnettle6/3_2_1ubuntu0_16_04_1/amd64",
+    "@id": "http:_ubuntu/libnettle6/3_2_1ubuntu0_16_04_1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -3051,7 +3051,7 @@
   {
     "name": "libpam-runtime",
     "revision": "1.1.8-3.2ubuntu2.1",
-    "@id": "http:@ubuntu/libpam_runtime/1_1_8_3_2ubuntu2_1/all",
+    "@id": "http:_ubuntu/libpam_runtime/1_1_8_3_2ubuntu2_1/all",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -3072,7 +3072,7 @@
   {
     "name": "sysv-rc",
     "revision": "2.88dsf-59.3ubuntu2",
-    "@id": "http:@ubuntu/sysv_rc/2_88dsf_59_3ubuntu2/all",
+    "@id": "http:_ubuntu/sysv_rc/2_88dsf_59_3ubuntu2/all",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -3093,7 +3093,7 @@
   {
     "name": "coreutils",
     "revision": "8.25-2ubuntu3~16.04",
-    "@id": "http:@ubuntu/coreutils/8_25_2ubuntu3_16_04/amd64",
+    "@id": "http:_ubuntu/coreutils/8_25_2ubuntu3_16_04/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -3114,7 +3114,7 @@
   {
     "name": "libdevmapper1.02.1",
     "revision": "2:1.02.110-1ubuntu10",
-    "@id": "http:@ubuntu/libdevmapper1_02_1/2_1_02_110_1ubuntu10/amd64",
+    "@id": "http:_ubuntu/libdevmapper1_02_1/2_1_02_110_1ubuntu10/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -3135,7 +3135,7 @@
   {
     "name": "libcomerr2",
     "revision": "1.42.13-1ubuntu1",
-    "@id": "http:@ubuntu/libcomerr2/1_42_13_1ubuntu1/amd64",
+    "@id": "http:_ubuntu/libcomerr2/1_42_13_1ubuntu1/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -3156,7 +3156,7 @@
   {
     "name": "gnupg",
     "revision": "1.4.20-1ubuntu3.2",
-    "@id": "http:@ubuntu/gnupg/1_4_20_1ubuntu3_2/amd64",
+    "@id": "http:_ubuntu/gnupg/1_4_20_1ubuntu3_2/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -3177,7 +3177,7 @@
   {
     "name": "insserv",
     "revision": "1.14.0-5ubuntu3",
-    "@id": "http:@ubuntu/insserv/1_14_0_5ubuntu3/amd64",
+    "@id": "http:_ubuntu/insserv/1_14_0_5ubuntu3/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -3198,7 +3198,7 @@
   {
     "name": "initscripts",
     "revision": "2.88dsf-59.3ubuntu2",
-    "@id": "http:@ubuntu/initscripts/2_88dsf_59_3ubuntu2/amd64",
+    "@id": "http:_ubuntu/initscripts/2_88dsf_59_3ubuntu2/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -3219,7 +3219,7 @@
   {
     "name": "debianutils",
     "revision": "4.7",
-    "@id": "http:@ubuntu/debianutils/4_7/amd64",
+    "@id": "http:_ubuntu/debianutils/4_7/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
@@ -3240,7 +3240,7 @@
   {
     "name": "libc-bin",
     "revision": "2.23-0ubuntu10",
-    "@id": "http:@ubuntu/libc_bin/2_23_0ubuntu10/amd64",
+    "@id": "http:_ubuntu/libc_bin/2_23_0ubuntu10/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",

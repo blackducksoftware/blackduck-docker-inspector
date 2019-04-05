@@ -71,6 +71,7 @@ public class IntegrationTestCommon {
             boolean componentFound = false;
             final SimpleBdioDocument doc = createBdioDocumentFromFile(actualBdio);
             assertTrue(doc.components.size() >= minNumberOfComponentsExpected);
+            System.out.printf("Looking for component name starting with: %s\n", outputBomMustContainComponentPrefix);
             for (int i = 0; i < doc.components.size(); i++) {
                 System.out.printf("\tComponent: %s / %s\n", doc.components.get(i).name, doc.components.get(i).version);
                 if (doc.components.get(i).name.startsWith(outputBomMustContainComponentPrefix)) {
@@ -78,6 +79,7 @@ public class IntegrationTestCommon {
                 }
             }
             assertTrue(componentFound);
+            System.out.printf("Found it\n");
         }
         if (mode != Mode.DETECT) {
             assertTrue(outputContainerFileSystemFile.exists());
