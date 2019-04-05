@@ -23,6 +23,7 @@
 package com.synopsys.integration.blackduck.dockerinspector.blackduckclient;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.synopsys.integration.blackduck.codelocation.CodeLocationCreationData;
 import com.synopsys.integration.blackduck.codelocation.bdioupload.BdioUploadCodeLocationCreationRequest;
 import com.synopsys.integration.blackduck.codelocation.bdioupload.BdioUploadService;
@@ -42,6 +43,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -56,6 +58,8 @@ import com.synopsys.integration.blackduck.dockerinspector.programversion.Program
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.log.Slf4jIntLogger;
+import com.synopsys.integration.util.IntEnvironmentVariables;
+import com.synopsys.integration.util.NoThreadExecutorService;
 
 @Component
 public class BlackDuckClient {
@@ -128,9 +132,9 @@ public class BlackDuckClient {
 
   private BlackDuckServicesFactory createBlackDuckServicesFactory(final IntLogger intLogger,
       BlackDuckHttpClient httpConnection) {
-    return new BlackDuckServicesFactory(
-        new Gson(), BlackDuckServicesFactory.createDefaultObjectMapper(), httpConnection,
-        intLogger);
+    final IntEnvironmentVariables intEnvironmentVariables = new IntEnvironmentVariables();
+    ExecutorService executorService = new NoThreadExecutorService();
+      return new BlackDuckServicesFactory(intEnvironmentVariables, new Gson(), BlackDuckServicesFactory.createDefaultObjectMapper(), executorService, httpConnection, intLogger);
   }
 
   private String getBlackDuckUsername() {
