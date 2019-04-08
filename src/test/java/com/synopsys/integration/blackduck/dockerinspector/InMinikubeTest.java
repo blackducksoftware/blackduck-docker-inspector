@@ -79,49 +79,49 @@ public class InMinikubeTest {
 
     @Test
     public void testUbuntuStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "ubuntu:17.04", "ubuntu", "17.04",  false, Mode.DEFAULT, null, "dpkg", 10, additionalArgsWithServiceUrl, minikubeDockerEnv, "ubuntu_17.04_DPKG");
+        IntegrationTestCommon.testImage(random, programVersion, "ubuntu:17.04", "ubuntu", "17.04",  false, Mode.DEFAULT, null, "dpkg", null, 10, additionalArgsWithServiceUrl, minikubeDockerEnv, "ubuntu_17.04_DPKG");
     }
 
     @Test
     public void testAlpineStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "alpine:3.6", "alpine", "3.6", false, Mode.DEFAULT, null, "apk-", 5, additionalArgsWithServiceUrl, minikubeDockerEnv, "alpine_3.6_APK");
+        IntegrationTestCommon.testImage(random, programVersion, "alpine:3.6", "alpine", "3.6", false, Mode.DEFAULT, null, "apk-", null, 5, additionalArgsWithServiceUrl, minikubeDockerEnv, "alpine_3.6_APK");
     }
 
     @Test
     public void testBusyboxStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "busybox:latest", "busybox", "latest",  false, Mode.DEFAULT, null, null, 0, additionalArgsWithServiceUrl, minikubeDockerEnv, "busybox_latest_noPkgMgr");
+        IntegrationTestCommon.testImage(random, programVersion, "busybox:latest", "busybox", "latest",  false, Mode.DEFAULT, null, null, null, 0, additionalArgsWithServiceUrl, minikubeDockerEnv, "busybox_latest_noPkgMgr");
     }
 
     @Test
     public void testAlpineLatestStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "alpine", "alpine", "latest", false, Mode.DEFAULT, null, "apk-", 5, additionalArgsWithServiceUrl, minikubeDockerEnv, "alpine_latest_APK");
+        IntegrationTestCommon.testImage(random, programVersion, "alpine", "alpine", "latest", false, Mode.DEFAULT, null, "apk-", null, 5, additionalArgsWithServiceUrl, minikubeDockerEnv, "alpine_latest_APK");
     }
 
     @Test
     public void testCentosStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "centos:7.3.1611", "centos", "7.3.1611", false, Mode.DEFAULT, null, "rpm", 15, additionalArgsWithServiceUrl, minikubeDockerEnv, "centos_7.3.1611_RPM");
+        IntegrationTestCommon.testImage(random, programVersion, "centos:7.3.1611", "centos", "7.3.1611", false, Mode.DEFAULT, null, "rpm", null, 15, additionalArgsWithServiceUrl, minikubeDockerEnv, "centos_7.3.1611_RPM");
     }
 
     @Test
     public void testBlackDuckWebappStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", true, Mode.DEFAULT, null, "apk-", 5,
+        IntegrationTestCommon.testImage(random, programVersion, "blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", true, Mode.DEFAULT, null, "apk-", null, 5,
                 additionalArgsWithServiceUrl, minikubeDockerEnv, "blackducksoftware_hub-webapp_4.0.0_APK");
     }
 
     @Test
     public void testBlackDuckZookeeperStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "blackducksoftware/hub-zookeeper:4.0.0", "blackducksoftware_hub-zookeeper", "4.0.0", true, Mode.DEFAULT, null, "apk-", 5,
+        IntegrationTestCommon.testImage(random, programVersion, "blackducksoftware/hub-zookeeper:4.0.0", "blackducksoftware_hub-zookeeper", "4.0.0", true, Mode.DEFAULT, null, "apk-", null, 5,
                 additionalArgsWithServiceUrl, minikubeDockerEnv, "blackducksoftware_hub-zookeeper_4.0.0_APK");
     }
 
     @Test
     public void testTomcatStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "tomcat:6.0.53-jre7", "tomcat", "6.0.53-jre7", false, Mode.DEFAULT, null, "dpkg", 5, additionalArgsWithServiceUrl, minikubeDockerEnv, "tomcat_6.0.53-jre7_DPKG");
+        IntegrationTestCommon.testImage(random, programVersion, "tomcat:6.0.53-jre7", "tomcat", "6.0.53-jre7", false, Mode.DEFAULT, null, "dpkg", null, 5, additionalArgsWithServiceUrl, minikubeDockerEnv, "tomcat_6.0.53-jre7_DPKG");
     }
 
     @Test
     public void testRhelStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "dnplus/rhel:6.5", "dnplus_rhel", "6.5", false, Mode.DEFAULT, null, "rpm", 10, additionalArgsWithServiceUrl, minikubeDockerEnv, "dnplus_rhel_6.5_RPM");
+        IntegrationTestCommon.testImage(random, programVersion, "dnplus/rhel:6.5", "dnplus_rhel", "6.5", false, Mode.DEFAULT, null, "rpm", null, 10, additionalArgsWithServiceUrl, minikubeDockerEnv, "dnplus_rhel_6.5_RPM");
     }
 
     @Test

@@ -37,7 +37,8 @@ public class IntegrationTestCommon {
 
     public static void testImage(final Random random, final ProgramVersion programVersion, final String inspectTargetImageRepoTag, final String repo, final String tag, final boolean requireBdioMatch,
             final Mode mode, final String detectJarPath,
-            final String outputBomMustContainComponentPrefix, final int minNumberOfComponentsExpected, final List<String> additionalArgs, final Map<String, String> givenEnv,
+            final String outputBomMustContainComponentPrefix, final String outputBomMustContainExternalSystemTypeId,
+            final int minNumberOfComponentsExpected, final List<String> additionalArgs, final Map<String, String> givenEnv,
             final String codeLocationName)
             throws IOException, InterruptedException, IntegrationException {
         final File outputContainerFileSystemFile = getOutputContainerFileSystemFileFromImageSpec(inspectTargetImageRepoTag);
@@ -67,15 +68,29 @@ public class IntegrationTestCommon {
             final boolean outputBdioMatches = TestUtils.contentEquals(expectedBdio, actualBdio, exceptLinesContainingThese);
             assertTrue(outputBdioMatches);
         }
+        final SimpleBdioDocument doc = createBdioDocumentFromFile(actualBdio);
+        assertTrue(doc.components.size() >= minNumberOfComponentsExpected);
         if (StringUtils.isNotBlank(outputBomMustContainComponentPrefix)) {
-            boolean componentFound = false;
-            final SimpleBdioDocument doc = createBdioDocumentFromFile(actualBdio);
-            assertTrue(doc.components.size() >= minNumberOfComponentsExpected);
             System.out.printf("Looking for component name starting with: %s\n", outputBomMustContainComponentPrefix);
+            boolean componentFound = false;
             for (int i = 0; i < doc.components.size(); i++) {
                 System.out.printf("\tComponent: %s / %s\n", doc.components.get(i).name, doc.components.get(i).version);
                 if (doc.components.get(i).name.startsWith(outputBomMustContainComponentPrefix)) {
                     componentFound = true;
+                    break;
+                }
+            }
+            assertTrue(componentFound);
+            System.out.printf("Found it\n");
+        }
+        if (StringUtils.isNotBlank(outputBomMustContainExternalSystemTypeId)) {
+            System.out.printf("Looking for component with externalSystemTypeId: %s\n", outputBomMustContainExternalSystemTypeId);
+            boolean componentFound = false;
+            for (int i = 0; i < doc.components.size(); i++) {
+                System.out.printf("\tComponent: %s / %s; externalSystemTypeId: %s\n", doc.components.get(i).name, doc.components.get(i).version, doc.components.get(i).bdioExternalIdentifier.forge);
+                if (doc.components.get(i).bdioExternalIdentifier.forge.equals(outputBomMustContainExternalSystemTypeId)) {
+                    componentFound = true;
+                    break;
                 }
             }
             assertTrue(componentFound);

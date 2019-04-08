@@ -127,53 +127,59 @@ public class DockerInspectorTest {
 
     @Test
     public void testUbuntuStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "ubuntu:17.04", "ubuntu", "17.04", false, Mode.DEFAULT, null, "dpkg", 10, null, null, "ubuntu_17.04_DPKG");
+        IntegrationTestCommon.testImage(random, programVersion, "ubuntu:17.04", "ubuntu", "17.04", false, Mode.DEFAULT, null, "dpkg", null, 10, null, null, "ubuntu_17.04_DPKG");
     }
 
     @Test
     public void testAlpineStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "alpine:3.6", "alpine", "3.6", false, Mode.SPECIFY_II_DETAILS, null, "apk-", 5, null, null, "alpine_3.6_APK");
+        IntegrationTestCommon.testImage(random, programVersion, "alpine:3.6", "alpine", "3.6", false, Mode.SPECIFY_II_DETAILS, null, "apk-", null, 5, null, null, "alpine_3.6_APK");
     }
 
     @Test
     public void testCentosStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "centos:7.3.1611", "centos", "7.3.1611", false, Mode.SPECIFY_II_DETAILS, null, "openssl-libs", 15, null, null, "centos_7.3.1611_RPM");
+        IntegrationTestCommon.testImage(random, programVersion, "centos:7.3.1611", "centos", "7.3.1611", false, Mode.SPECIFY_II_DETAILS, null, "openssl-libs", null, 15, null, null, "centos_7.3.1611_RPM");
     }
 
     @Test
     public void testBusybox() throws IOException, InterruptedException, IntegrationException {
         final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE;
-        testImageUsingExistingContainer("busybox:latest", portOnHost, true, 0, null, "busybox_latest_noPkgMgr");
+        testImageUsingExistingContainer("busybox:latest", portOnHost, true, 0, null, null, "busybox_latest_noPkgMgr");
     }
 
     @Test
     public void testAlpineLatest() throws IOException, InterruptedException, IntegrationException {
         final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE;
-        testImageUsingExistingContainer("alpine", portOnHost, false, 5, "apk-", "alpine_latest_APK");
+        testImageUsingExistingContainer("alpine", portOnHost, false, 5, "apk-", null, "alpine_latest_APK");
     }
 
     @Test
     public void testBlackDuckWebapp() throws IOException, InterruptedException, IntegrationException {
         final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE;
-        testImageUsingExistingContainer("blackducksoftware/hub-webapp:4.0.0", portOnHost, true, 0, null, "blackducksoftware_hub-webapp_4.0.0_APK");
+        testImageUsingExistingContainer("blackducksoftware/hub-webapp:4.0.0", portOnHost, true, 0, null, null, "blackducksoftware_hub-webapp_4.0.0_APK");
     }
 
     @Test
     public void testBlackDuckZookeeper() throws IOException, InterruptedException, IntegrationException {
             final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE;
-            testImageUsingExistingContainer("blackducksoftware/hub-zookeeper:4.0.0", portOnHost, true, 0, null, "blackducksoftware_hub-zookeeper_4.0.0_APK");
+            testImageUsingExistingContainer("blackducksoftware/hub-zookeeper:4.0.0", portOnHost, true, 0, null, null, "blackducksoftware_hub-zookeeper_4.0.0_APK");
     }
 
     @Test
     public void testTomcat() throws IOException, InterruptedException, IntegrationException {
         final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU;
-        testImageUsingExistingContainer("tomcat:6.0.53-jre7", portOnHost, false, 5, "dpkg", "tomcat_6.0.53-jre7_DPKG");
+        testImageUsingExistingContainer("tomcat:6.0.53-jre7", portOnHost, false, 5, "dpkg", null, "tomcat_6.0.53-jre7_DPKG");
     }
 
     @Test
     public void testRhel() throws IOException, InterruptedException, IntegrationException {
         final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS;
-        testImageUsingExistingContainer("dnplus/rhel:6.5", portOnHost, false, 10, "rpm", "dnplus_rhel_6.5_RPM");
+        testImageUsingExistingContainer("dnplus/rhel:6.5", portOnHost, false, 10, "rpm", null, "dnplus_rhel_6.5_RPM");
+    }
+
+    @Test
+    public void testOpenSuseForge() throws IOException, InterruptedException, IntegrationException {
+        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS;
+        testImageUsingExistingContainer("opensuse/portus:2.4", portOnHost, false, 10, null, "@opensuse", "opensuse_portus_opensuse_2.4_RPM");
     }
 
     @Test
@@ -286,7 +292,10 @@ public class DockerInspectorTest {
         IntegrationTestCommon.testTar(random, programVersion, targetTarInSharedDir.getAbsolutePath(), targetRepo, targetTag, requireBdioMatch, Mode.NO_SERVICE_START, null, additionalArgs, outputContainerFileSystemFile, null, codelocationName);
     }
 
-    private void testImageUsingExistingContainer(final String inspectTargetImageRepoTag, final int portOnHost, final boolean requireBdioMatch, final int minNumberOfComponentsExpected, final String outputBomMustContainComponentPrefix, final String codelocationName)
+    private void testImageUsingExistingContainer(final String inspectTargetImageRepoTag, final int portOnHost, final boolean requireBdioMatch, final int minNumberOfComponentsExpected,
+        final String outputBomMustContainComponentPrefix,
+        final String outputBomMustContainExternalSystemTypeId,
+        final String codelocationName)
         throws IOException, InterruptedException, IntegrationException {
 
         final List<String> additionalArgs = new ArrayList<>();
@@ -294,7 +303,7 @@ public class DockerInspectorTest {
         additionalArgs.add(String.format("--shared.dir.path.local=%s", dirSharedWithContainer.getAbsolutePath()));
         additionalArgs.add(String.format("--shared.dir.path.imageinspector=%s", SHARED_DIR_PATH_IN_CONTAINER));
         IntegrationTestCommon.testImage(random, programVersion, inspectTargetImageRepoTag, null, null, requireBdioMatch,
-            Mode.NO_SERVICE_START, null, outputBomMustContainComponentPrefix, minNumberOfComponentsExpected, additionalArgs, null, codelocationName);
+            Mode.NO_SERVICE_START, null, outputBomMustContainComponentPrefix, outputBomMustContainExternalSystemTypeId, minNumberOfComponentsExpected, additionalArgs, null, codelocationName);
     }
 
     private static void createWriteableDirTolerantly(final File dir) {
