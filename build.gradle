@@ -24,7 +24,7 @@ repositories {
 
 version = '8.0.1-SNAPSHOT'
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
-project.ext.inspectorImageVersion = "4.4.3"
+project.ext.inspectorImageVersion = "4.4.4"
 project.group = 'com.synopsys.integration'
 
 apply plugin: 'java'
