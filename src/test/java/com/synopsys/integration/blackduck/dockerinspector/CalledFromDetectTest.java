@@ -36,7 +36,7 @@ public class CalledFromDetectTest {
     @Test
     public void test() throws IOException, InterruptedException, IntegrationException {
 
-        final String cmdGetDetectScriptString = "curl -s https://blackducksoftware.github.io/hub-detect/hub-detect.sh";
+        final String cmdGetDetectScriptString = "curl -s https://detect.synopsys.com/detect.sh";
         final String detectScriptString = TestUtils.execCmd(executionDir, cmdGetDetectScriptString, ONE_MINUTE_IN_MS, true, null);
         final File detectScriptFile = File.createTempFile("latestDetect", ".sh");
         detectScriptFile.setExecutable(true);
