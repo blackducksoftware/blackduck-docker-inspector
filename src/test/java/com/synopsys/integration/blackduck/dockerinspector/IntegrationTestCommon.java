@@ -85,15 +85,15 @@ public class IntegrationTestCommon {
         }
         if (StringUtils.isNotBlank(outputBomMustContainExternalSystemTypeId)) {
             System.out.printf("Looking for component with externalSystemTypeId: %s\n", outputBomMustContainExternalSystemTypeId);
-            boolean componentFound = false;
+            boolean externalSystemTypeIdFound = false;
             for (int i = 0; i < doc.components.size(); i++) {
                 System.out.printf("\tComponent: %s / %s; externalSystemTypeId: %s\n", doc.components.get(i).name, doc.components.get(i).version, doc.components.get(i).bdioExternalIdentifier.forge);
                 if (doc.components.get(i).bdioExternalIdentifier.forge.equals(outputBomMustContainExternalSystemTypeId)) {
-                    componentFound = true;
+                    externalSystemTypeIdFound = true;
                     break;
                 }
             }
-            assertTrue(componentFound);
+            assertTrue(externalSystemTypeIdFound);
             System.out.printf("Found it\n");
         }
         if (mode != Mode.DETECT) {

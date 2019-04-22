@@ -177,6 +177,12 @@ public class DockerInspectorTest {
     }
 
     @Test
+    public void testFedora() throws IOException, InterruptedException, IntegrationException {
+        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS;
+        testImageUsingExistingContainer("fedora:latest", portOnHost, false, 10, "fedora-", "@fedora", "fedora_latest_RPM");
+    }
+
+    @Test
     public void testOpenSuseForge() throws IOException, InterruptedException, IntegrationException {
         final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS;
         testImageUsingExistingContainer("opensuse/portus:2.4", portOnHost, false, 10, null, "@opensuse", "opensuse_portus_opensuse_2.4_RPM");
