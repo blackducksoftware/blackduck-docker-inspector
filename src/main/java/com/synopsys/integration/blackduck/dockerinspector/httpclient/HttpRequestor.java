@@ -24,6 +24,7 @@ package com.synopsys.integration.blackduck.dockerinspector.httpclient;
 
 import com.synopsys.integration.rest.client.IntHttpClient;
 import java.net.URI;
+import java.util.concurrent.TimeoutException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,8 +63,15 @@ public class HttpRequestor {
         try (Response response = httpClient.execute(request)) {
             logger.debug(String.format("Response: HTTP status: %d", response.getStatusCode()));
             return new SimpleResponse(response.getStatusCode(), response.getHeaders(), getResponseBody(response));
+        } catch (final IntegrationException ie) {
+            if ((ie.getCause() != null) && (ie.getCause() instanceof java.net.SocketTimeoutException)) {
+                logger.error(String.format("getBdio request on %s failed: The request to the image inspector service timed out. You might need to increase the value of the service timeout property.", url));
+            } else {
+                logger.error(String.format("getBdio request on %s failed: %s", url, ie.getMessage()));
+            }
+            throw ie;
         } catch (final Exception e) {
-            logger.info(String.format("getBdio request on %s failed: %s", url, e.getMessage()));
+            logger.error(String.format("getBdio request on %s failed: %s", url, e.getMessage()));
             throw new IntegrationException(e);
         }
     }
