@@ -121,7 +121,7 @@ public class DockerInspector {
             return false;
         }
         final String[] args = applicationArguments.getSourceArgs();
-        if (contains(args, "-h") || contains(args, "--help")) {
+        if (contains(args, "-h") || contains(args, "--help") || contains(args, "--help=true")) {
             logger.debug("Help argument passed");
             return true;
         }
