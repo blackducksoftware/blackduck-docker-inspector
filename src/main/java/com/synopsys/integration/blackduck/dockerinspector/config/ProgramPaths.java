@@ -35,12 +35,18 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ProgramPaths {
-
-    @Autowired
     private Config config;
+    private ProcessId processId;
 
     @Autowired
-    private ProcessId processId;
+    public void setConfig(final Config config) {
+        this.config = config;
+    }
+
+    @Autowired
+    public void setProcessId(final ProcessId processId) {
+        this.processId = processId;
+    }
 
     private static final String HOST_RESULT_JSON_FILENAME = "output.json";
     private static final String RUNDIR_BASENAME = "run";
@@ -120,9 +126,5 @@ public class ProgramPaths {
 
     public String getDockerInspectorResultPath() {
         return dockerInspectorResultPath;
-    }
-
-    void setConfig(final Config config) {
-        this.config = config;
     }
 }

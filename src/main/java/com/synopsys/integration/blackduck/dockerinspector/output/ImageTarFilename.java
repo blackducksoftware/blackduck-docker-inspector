@@ -40,15 +40,24 @@ import com.synopsys.integration.exception.IntegrationException;
 @Component
 public class ImageTarFilename {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    @Autowired
     private Config config;
-
-    @Autowired
     private DockerClientManager dockerClientManager;
+    private ProgramPaths programPaths;
 
     @Autowired
-    private ProgramPaths programPaths;
+    public void setConfig(final Config config) {
+        this.config = config;
+    }
+
+    @Autowired
+    public void setDockerClientManager(final DockerClientManager dockerClientManager) {
+        this.dockerClientManager = dockerClientManager;
+    }
+
+    @Autowired
+    public void setProgramPaths(final ProgramPaths programPaths) {
+        this.programPaths = programPaths;
+    }
 
     public String deriveImageTarFilenameFromImageTag(final String imageName, final String tagName) {
         return String.format("%s_%s.tar", cleanImageName(imageName), tagName);

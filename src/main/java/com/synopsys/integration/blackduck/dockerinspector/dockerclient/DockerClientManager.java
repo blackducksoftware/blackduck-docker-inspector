@@ -35,6 +35,7 @@ import com.github.dockerjava.api.command.StopContainerCmd;
 import com.github.dockerjava.api.exception.NotFoundException;
 import com.github.dockerjava.api.model.AccessMode;
 import com.github.dockerjava.api.model.Bind;
+import com.github.dockerjava.api.model.BuildResponseItem;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.Frame;
@@ -49,6 +50,7 @@ import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DefaultDockerClientConfig.Builder;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.DockerClientConfig;
+import com.github.dockerjava.core.command.BuildImageResultCallback;
 import com.github.dockerjava.core.command.LogContainerResultCallback;
 import com.github.dockerjava.core.command.PullImageResultCallback;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarFilename;
@@ -66,6 +68,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -78,12 +82,18 @@ public class DockerClientManager {
     private static final String CONTAINER_APPNAME_LABEL_KEY = "app";
     private static final String CONTAINER_OS_LABEL_KEY = "os";
     private final Logger logger = LoggerFactory.getLogger(DockerClientManager.class);
-
-    @Autowired
     private Config config;
+    private ImageTarFilename imageTarFilename;
 
     @Autowired
-    private ImageTarFilename dockerTarfile;
+    public void setConfig(final Config config) {
+        this.config = config;
+    }
+
+    @Autowired
+    public void setImageTarFilename(final ImageTarFilename imageTarFilename) {
+        this.imageTarFilename = imageTarFilename;
+    }
 
     private DockerClient dockerClient;
 
@@ -119,7 +129,7 @@ public class DockerClientManager {
         final String imageName = resolver.getNewImageRepo().get();
         final String tagName = resolver.getNewImageTag().get();
         logger.debug(String.format("Converted image ID %s to image name:tag %s:%s", imageId, imageName, tagName));
-        final File imageTarFile = saveImageToDir(imageTarDirectory, dockerTarfile.deriveImageTarFilenameFromImageTag(imageName, tagName), imageName, tagName);
+        final File imageTarFile = saveImageToDir(imageTarDirectory, imageTarFilename.deriveImageTarFilenameFromImageTag(imageName, tagName), imageName, tagName);
         return imageTarFile;
     }
 
@@ -132,7 +142,7 @@ public class DockerClientManager {
         } catch (final Exception e) {
             logger.info(String.format("Unable to pull %s:%s; Proceeding anyway since the image might be in local docker image cache. Error on pull: %s", imageName, tagName, e.getMessage()));
         }
-        final File imageTarFile = saveImageToDir(imageTarDirectory, dockerTarfile.deriveImageTarFilenameFromImageTag(imageName, tagName), imageName, tagName);
+        final File imageTarFile = saveImageToDir(imageTarDirectory, imageTarFilename.deriveImageTarFilenameFromImageTag(imageName, tagName), imageName, tagName);
         if (config.isCleanupTargetImage() && targetImageId.isPresent()) {
             try {
                 removeImage(targetImageId.get());
@@ -233,6 +243,24 @@ public class DockerClientManager {
         final DockerClient dockerClient = getDockerClient();
         stopContainer(dockerClient, containerId);
         removeContainer(dockerClient, containerId);
+    }
+
+    public String buildImage(final File dockerBuildDir, final Set<String> tags) {
+        final DockerClient dockerClient = getDockerClient();
+
+        BuildImageResultCallback callback = new BuildImageResultCallback() {
+            @Override
+            public void onNext(BuildResponseItem item) {
+                System.out.println("BuildResponseItem: " + item);
+                super.onNext(item);
+            }
+        };
+
+        final String imageId = dockerClient.buildImageCmd(dockerBuildDir)
+                                   .withTags(tags)
+                                   .exec(callback).awaitImageId();
+        logger.info(String.format("*** built image: %s", imageId));
+        return imageId;
     }
 
     public void logServiceLogAsDebug(final String containerId) {
