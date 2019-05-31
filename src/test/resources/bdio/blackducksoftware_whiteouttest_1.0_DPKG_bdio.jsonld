@@ -6,9 +6,9 @@
       "spdx:creator": [
         "Tool: IntegrationBdio-17.1.2"
       ],
-      "spdx:created": "2019-05-23T16:00:39.340Z"
+      "spdx:created": "2019-05-31T14:23:26.325Z"
     },
-    "@id": "uuid:9c7b6bf3-2823-4715-a1ae-8a9728778557",
+    "@id": "uuid:e10c805f-6ba9-4ee3-aa62-bee5ecd1a26a",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -509,7 +509,7 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/libgnutls30/3_4_10_4ubuntu1_4/amd64",
+        "related": "http:ubuntu/libgnutls30/3_4_10_4ubuntu1_5/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -3170,12 +3170,12 @@
   },
   {
     "name": "libgnutls30",
-    "revision": "3.4.10-4ubuntu1.4",
-    "@id": "http:ubuntu/libgnutls30/3_4_10_4ubuntu1_4/amd64",
+    "revision": "3.4.10-4ubuntu1.5",
+    "@id": "http:ubuntu/libgnutls30/3_4_10_4ubuntu1_5/amd64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@ubuntu",
-      "externalId": "libgnutls30/3.4.10-4ubuntu1.4/amd64",
+      "externalId": "libgnutls30/3.4.10-4ubuntu1.5/amd64",
       "externalIdMetaData": {
         "forge": {
           "name": "ubuntu",
@@ -3184,7 +3184,7 @@
           "usePreferredNamespaceAlias": true
         },
         "name": "libgnutls30",
-        "version": "3.4.10-4ubuntu1.4",
+        "version": "3.4.10-4ubuntu1.5",
         "architecture": "amd64"
       }
     },
