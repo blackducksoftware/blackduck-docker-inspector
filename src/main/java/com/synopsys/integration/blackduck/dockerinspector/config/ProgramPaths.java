@@ -47,6 +47,7 @@ public class ProgramPaths {
     public static final String OUTPUT_DIR = "output";
     private static final String TARGET_DIR = "target";
     private static final String CONFIG_DIR = "config";
+    private static final String SQUASHED_IMAGE_DIR = "squashedImage";
     private String dockerInspectorPgmDirPath;
     private String dockerInspectorRunDirName;
     private String dockerInspectorRunDirPath;
