@@ -38,8 +38,8 @@ public class SquashedImageTest {
         final File tempTarFile = new File(testWorkingDir, "tempContainerFileSystem.tar");
         final File squashingWorkingDir = new File(testWorkingDir, "squashingCode");
         squashingWorkingDir.mkdirs();
-        final File squashedImageTarGz = new File("test/output/squashing/test_squashedimage.tar.gz");
-
+        final File squashedImageTarGz = new File("test/output/squashingTest/test_squashedimage.tar.gz");
+        
         squashedImage.createSquashedImageTarGz(targetImageFileSystemTarGz, squashedImageTarGz, tempTarFile, squashingWorkingDir);
 
         final File unpackedSquashedImage = new File(testWorkingDir, "squashedImageUnpacked");

@@ -263,6 +263,10 @@ public class DockerClientManager {
         return imageId;
     }
 
+    public void isImageExists(final String repo, final String tag) {
+        final DockerClient dockerClient = getDockerClient();
+//        dockerClient.listImagesCmd().withImageNameFilter(repo).exec().w;
+    }
     public void logServiceLogAsDebug(final String containerId) {
         final StringBuilder stringBuilder = new StringBuilder();
         final StringBuilderLogReader callback = new StringBuilderLogReader(stringBuilder);
@@ -321,7 +325,9 @@ public class DockerClientManager {
     }
 
     private File saveImageToDir(final File imageTarDirectory, final String imageTarFilename, final String imageName, final String tagName) throws IOException, IntegrationException {
+        imageTarDirectory.mkdirs();
         final File imageTarFile = new File(imageTarDirectory, imageTarFilename);
+        imageTarFile.delete();
         saveImageToFile(imageName, tagName, imageTarFile);
         return imageTarFile;
     }
