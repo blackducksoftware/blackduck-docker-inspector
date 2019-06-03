@@ -142,10 +142,15 @@ public class Config {
     @Value("${output.path:}")
     private String outputPath = "";
 
-    // Set to true to include the container file system tarfile in the output
+    // Set to true to include the container file system tarfile (compressed) in the output
     @ValueDescription(description = "Include container filesystem (a large file) in output?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${output.include.containerfilesystem:false}")
     private Boolean outputIncludeContainerfilesystem = Boolean.FALSE;
+
+    // Set to true to include the squashed image tarfile (compressed) in the output
+    @ValueDescription(description = "Include container filesystem (a large file) in output?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${output.include.squashedimage:false}")
+    private Boolean outputIncludeSquashedImage = Boolean.FALSE;
 
     // If you want to add a prefix to the code location name, specify it here
     @ValueDescription(description = "Black Duck CodeLocation prefix", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
@@ -442,6 +447,10 @@ public class Config {
         return optionsByFieldName.get("outputIncludeContainerfilesystem").getResolvedValue().equals("true");
     }
 
+    public boolean isOutputIncludeSquashedImage() {
+        return optionsByFieldName.get("outputIncludeSquashedImage").getResolvedValue().equals("true");
+    }
+
     public String getBlackDuckCodelocationPrefix() {
         return optionsByFieldName.get("blackDuckCodelocationPrefix").getResolvedValue();
     }
@@ -639,6 +648,7 @@ public class Config {
         this.linuxDistro = null;
         this.loggingLevel = null;
         this.outputIncludeContainerfilesystem = null;
+        this.outputIncludeSquashedImage = null;
         this.outputPath = null;
         this.phoneHome = null;
         this.scanCliOptsEnvVar = null;

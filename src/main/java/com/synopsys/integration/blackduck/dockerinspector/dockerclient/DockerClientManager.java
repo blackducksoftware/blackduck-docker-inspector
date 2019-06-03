@@ -35,6 +35,7 @@ import com.github.dockerjava.api.command.StopContainerCmd;
 import com.github.dockerjava.api.exception.NotFoundException;
 import com.github.dockerjava.api.model.AccessMode;
 import com.github.dockerjava.api.model.Bind;
+import com.github.dockerjava.api.model.BuildResponseItem;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.Frame;
@@ -49,6 +50,7 @@ import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DefaultDockerClientConfig.Builder;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.DockerClientConfig;
+import com.github.dockerjava.core.command.BuildImageResultCallback;
 import com.github.dockerjava.core.command.LogContainerResultCallback;
 import com.github.dockerjava.core.command.PullImageResultCallback;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarFilename;
@@ -66,6 +68,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -78,12 +82,18 @@ public class DockerClientManager {
     private static final String CONTAINER_APPNAME_LABEL_KEY = "app";
     private static final String CONTAINER_OS_LABEL_KEY = "os";
     private final Logger logger = LoggerFactory.getLogger(DockerClientManager.class);
-
-    @Autowired
     private Config config;
+    private ImageTarFilename imageTarFilename;
 
     @Autowired
-    private ImageTarFilename dockerTarfile;
+    public void setConfig(final Config config) {
+        this.config = config;
+    }
+
+    @Autowired
+    public void setImageTarFilename(final ImageTarFilename imageTarFilename) {
+        this.imageTarFilename = imageTarFilename;
+    }
 
     private DockerClient dockerClient;
 
@@ -119,7 +129,7 @@ public class DockerClientManager {
         final String imageName = resolver.getNewImageRepo().get();
         final String tagName = resolver.getNewImageTag().get();
         logger.debug(String.format("Converted image ID %s to image name:tag %s:%s", imageId, imageName, tagName));
-        final File imageTarFile = saveImageToDir(imageTarDirectory, dockerTarfile.deriveImageTarFilenameFromImageTag(imageName, tagName), imageName, tagName);
+        final File imageTarFile = saveImageToDir(imageTarDirectory, imageTarFilename.deriveImageTarFilenameFromImageTag(imageName, tagName), imageName, tagName);
         return imageTarFile;
     }
 
@@ -132,7 +142,7 @@ public class DockerClientManager {
         } catch (final Exception e) {
             logger.info(String.format("Unable to pull %s:%s; Proceeding anyway since the image might be in local docker image cache. Error on pull: %s", imageName, tagName, e.getMessage()));
         }
-        final File imageTarFile = saveImageToDir(imageTarDirectory, dockerTarfile.deriveImageTarFilenameFromImageTag(imageName, tagName), imageName, tagName);
+        final File imageTarFile = saveImageToDir(imageTarDirectory, imageTarFilename.deriveImageTarFilenameFromImageTag(imageName, tagName), imageName, tagName);
         if (config.isCleanupTargetImage() && targetImageId.isPresent()) {
             try {
                 removeImage(targetImageId.get());
@@ -157,13 +167,13 @@ public class DockerClientManager {
         } catch (final InterruptedException e) {
             throw new BlackDuckIntegrationException(String.format("Pull was interrupted: Image %s:%s not found. Error: %s", imageName, tagName, e.getMessage()), e);
         }
-        final Image justPulledImage = getLocalImage(dockerClient, imageName, tagName);
-        if (justPulledImage == null) {
+        final Optional<Image> justPulledImage = getLocalImage(dockerClient, imageName, tagName);
+        if (!justPulledImage.isPresent()) {
             final String msg = String.format("Pulled image %s:%s not found in image list.", imageName, tagName);
             logger.error(msg);
             throw new BlackDuckIntegrationException(msg);
         }
-        return justPulledImage.getId();
+        return justPulledImage.get().getId();
     }
 
     public void removeImage(final String imageId) throws IntegrationException {
@@ -235,6 +245,26 @@ public class DockerClientManager {
         removeContainer(dockerClient, containerId);
     }
 
+    public String buildImage(final File dockerBuildDir, final Set<String> tags) {
+        final DockerClient dockerClient = getDockerClient();
+
+        BuildImageResultCallback callback = new BuildImageResultCallback();
+        final String imageId = dockerClient.buildImageCmd(dockerBuildDir)
+                                   .withTags(tags)
+                                   .exec(callback).awaitImageId();
+        logger.debug(String.format("Built image: %s", imageId));
+        return imageId;
+    }
+
+    public Optional<String> lookupImageIdByRepoTag(final String repo, final String tag) {
+        Optional<String> imageId = Optional.empty();
+        final DockerClient dockerClient = getDockerClient();
+        Optional<Image> image = getLocalImage(dockerClient, repo, tag);
+        if (image.isPresent()) {
+            imageId = Optional.of(image.get().getId());
+        }
+        return imageId;
+    }
     public void logServiceLogAsDebug(final String containerId) {
         final StringBuilder stringBuilder = new StringBuilder();
         final StringBuilderLogReader callback = new StringBuilderLogReader(stringBuilder);
@@ -293,38 +323,41 @@ public class DockerClientManager {
     }
 
     private File saveImageToDir(final File imageTarDirectory, final String imageTarFilename, final String imageName, final String tagName) throws IOException, IntegrationException {
+        imageTarDirectory.mkdirs();
         final File imageTarFile = new File(imageTarDirectory, imageTarFilename);
+        imageTarFile.delete();
         saveImageToFile(imageName, tagName, imageTarFile);
         return imageTarFile;
     }
 
-    private Image getLocalImage(final DockerClient dockerClient, final String imageName, final String tagName) {
-        Image localImage = null;
+    private Optional<Image> getLocalImage(final DockerClient dockerClient, final String imageName, final String tagName) {
+        final String nonNullTagName = tagName == null ? "" : tagName;
         final List<Image> images = dockerClient.listImagesCmd().withImageNameFilter(imageName).exec();
         for (final Image image : images) {
+            logger.debug(String.format("getLocalImage(%s, %s) examining %s", imageName, nonNullTagName, image.getId()));
             if (image == null) {
                 logger.warn("Encountered a null image in local docker registry");
                 continue;
             }
-            final String[] tags = image.getRepoTags();
-            if (tags == null) {
+            final String[] repoTagList = image.getRepoTags();
+            if (repoTagList == null) {
                 logger.warn("Encountered an image with a null tag list in local docker registry");
             } else {
-                for (final String tag : tags) {
-                    if (tag == null) {
+                for (final String repoTag : repoTagList) {
+                    logger.debug(String.format("getLocalImage(%s, %s) examining %s", imageName, nonNullTagName, repoTag));
+                    if (repoTag == null) {
                         continue;
                     }
-                    if (tag.contains(tagName)) {
-                        localImage = image;
-                        break;
+                    final String colonTagString = String.format(":%s", nonNullTagName);
+                    logger.debug(String.format("getLocalImage(%s, %s) checking to see if %s ends with %s", imageName, nonNullTagName, repoTag, colonTagString));
+                    if (repoTag.endsWith(colonTagString)) {
+                        logger.debug(String.format("getLocalImage(%s, %s) found image id %s", imageName, nonNullTagName, image.getId()));
+                        return Optional.of(image);
                     }
                 }
             }
-            if (localImage != null) {
-                break;
-            }
         }
-        return localImage;
+        return Optional.empty();
     }
 
     private void removeContainer(final DockerClient dockerClient, final String containerId) {

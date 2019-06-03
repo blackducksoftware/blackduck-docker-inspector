@@ -62,7 +62,7 @@ public class ContainerPaths {
 
     public String getContainerPathToOutputFile(final String outputFilename) {
         final File containerFileSystemFileInContainer = new File(getContainerOutputDir(), outputFilename);
-        logger.debug(String.format("Derived container docker tar file path: %s", containerFileSystemFileInContainer.getAbsolutePath()));
+        logger.debug(String.format("Image inspector container's path to the target container file system file: %s", containerFileSystemFileInContainer.getAbsolutePath()));
         return containerFileSystemFileInContainer.getAbsolutePath();
     }
 
