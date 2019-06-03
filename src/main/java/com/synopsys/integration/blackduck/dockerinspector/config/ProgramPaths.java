@@ -53,7 +53,9 @@ public class ProgramPaths {
     public static final String OUTPUT_DIR = "output";
     private static final String TARGET_DIR = "target";
     private static final String CONFIG_DIR = "config";
-    private static final String SQUASHED_IMAGE_DIR = "squashedImage";
+    private static final String SQUASHED_IMAGE_DIR = "squashedImageBuildDir";
+    private static final String SQUASHED_IMAGE_TARFILE_DIR = "squashedImageTarDir";
+    private static final String SQUASHED_IMAGE_TARFILE_NAME = "squashedImage.tar";
     private String dockerInspectorPgmDirPath;
     private String dockerInspectorRunDirName;
     private String dockerInspectorRunDirPath;
@@ -65,6 +67,8 @@ public class ProgramPaths {
     private String dockerInspectorConfigDirPath;
     private String dockerInspectorConfigFilePath;
     private String dockerInspectorTargetDirPath;
+    private String dockerInspectorSquashedImageDirPath;
+    private String dockerInspectorSquashedImageTarFilePath;
     private String dockerInspectorDefaultOutputPath;
     private String dockerInspectorResultPath;
 
@@ -85,6 +89,9 @@ public class ProgramPaths {
         dockerInspectorConfigDirPath = new File(runDir, CONFIG_DIR).getAbsolutePath() + "/";
         dockerInspectorConfigFilePath = dockerInspectorConfigDirPath + APPLICATION_PROPERTIES_FILENAME;
         dockerInspectorTargetDirPath = new File(runDir, TARGET_DIR).getAbsolutePath() + "/";
+        dockerInspectorSquashedImageDirPath = new File(runDir, SQUASHED_IMAGE_DIR).getAbsolutePath() + "/";
+        final File dockerInspectorSquashedImageTarFileDir = new File(runDir, SQUASHED_IMAGE_TARFILE_DIR);
+        dockerInspectorSquashedImageTarFilePath = new File(dockerInspectorSquashedImageTarFileDir, SQUASHED_IMAGE_TARFILE_NAME).getAbsolutePath();
         dockerInspectorDefaultOutputPath = new File(runDir, OUTPUT_DIR).getAbsolutePath() + "/";
         dockerInspectorResultPath = dockerInspectorDefaultOutputPath + HOST_RESULT_JSON_FILENAME;
     }
@@ -107,6 +114,12 @@ public class ProgramPaths {
     public String getDockerInspectorTargetDirPath() {
         return dockerInspectorTargetDirPath;
     }
+
+    public String getDockerInspectorSquashedImageDirPath() {
+        return dockerInspectorSquashedImageDirPath;
+    }
+
+    public String getDockerInspectorSquashedImageTarFilePath() { return dockerInspectorSquashedImageTarFilePath; }
 
     public String getDockerInspectorPgmDirPath() {
         return dockerInspectorPgmDirPath;

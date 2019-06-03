@@ -25,6 +25,7 @@ package com.synopsys.integration.blackduck.dockerinspector.output;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Optional;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -38,9 +39,11 @@ import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.bdio.BdioWriter;
 import com.synopsys.integration.bdio.model.SimpleBdioDocument;
+import com.synopsys.integration.blackduck.imageinspector.api.name.Names;
+import com.synopsys.integration.exception.IntegrationException;
 
 @Component
-public class OutputDir {
+public class Output {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
@@ -48,6 +51,9 @@ public class OutputDir {
 
     @Autowired
     private ProgramPaths programPaths;
+
+    @Autowired
+    private SquashedImage squashedImage;
 
     @Autowired
     private Gson gson;
@@ -60,7 +66,7 @@ public class OutputDir {
         logger.debug(String.format("Output dir: %s; created: %b; successfully made writeable: %b; make executable: %b", outputDir.getAbsolutePath(), dirCreated, dirMadeWriteable, dirMadeExecutable));
     }
 
-    public File addBdioFileToOutputDir(final SimpleBdioDocument bdioDocument) throws IOException {
+    public File addOutputToOutputDir(final SimpleBdioDocument bdioDocument) throws IOException, IntegrationException {
         // if user specified an output dir, use that; else use the temp output dir
         File outputDir;
         if (StringUtils.isNotBlank(config.getOutputPath())) {
@@ -76,7 +82,51 @@ public class OutputDir {
         try (BdioWriter bdioWriter = new BdioWriter(gson, outputBdioStream)) {
             bdioWriter.writeSimpleBdioDocument(bdioDocument);
         }
+        final String containerFileSystemFilename = Names.getContainerFileSystemTarFilename(config.getDockerImage(), config.getDockerTar());
+        final File containerFileSystemFile = new File(outputDir, containerFileSystemFilename);
+        addSquashedImage(outputDir, containerFileSystemFile);
+        removeContainerFileSystemIfNotRequested(containerFileSystemFile);
         return outputBdioFile;
+    }
+
+    private void addSquashedImage(final File outputDir, final File containerFileSystemFile) throws IntegrationException {
+        if (!config.isOutputIncludeSquashedImage()) {
+            return;
+        }
+        if (!containerFileSystemFile.exists()) {
+            throw new IntegrationException(String.format("Squashed image requested, but container file system not generated, so can't generate squashed image"));
+        }
+        logger.debug(String.format("adding squashed image to output in %s", outputDir.getAbsolutePath()));
+        final String squashedImageFilename = deriveSquashedImageFilename(containerFileSystemFile.getName());
+        final File squashedImageFile = new File(outputDir, squashedImageFilename);
+        final File tempTarFile = new File(programPaths.getDockerInspectorSquashedImageTarFilePath());
+        tempTarFile.getParentFile().mkdirs();
+        logger.debug(String.format("Temp tarfile: %s", tempTarFile.getAbsolutePath()));
+        final File tempWorkingDir = new File(programPaths.getDockerInspectorSquashedImageDirPath());
+        tempWorkingDir.mkdirs();
+        logger.debug(String.format("Temp working dir: %s", tempWorkingDir.getAbsolutePath()));
+        try {
+            squashedImage.createSquashedImageTarGz(containerFileSystemFile, squashedImageFile, tempTarFile, tempWorkingDir);
+        } catch (IOException e) {
+            throw new IntegrationException(String.format("Error generating squashed image: %s", e.getMessage()), e);
+        }
+    }
+
+    private String deriveSquashedImageFilename(final String containerFileSystemFilename) throws IntegrationException {
+        if (!containerFileSystemFilename.contains("containerfilesystem")) {
+            logger.warn(String.format("Unable to generate squashed image filename from container file system filename %s; using the default name"));
+            return "target_squashedimage.tar.gz";
+        }
+        final String squashedImageFilename = containerFileSystemFilename.replace("containerfilesystem", "squashedimage");
+        logger.debug(String.format("Generated squashed image filename %s from container file system name %s", squashedImageFilename, containerFileSystemFilename));
+        return squashedImageFilename;
+    }
+
+    private void removeContainerFileSystemIfNotRequested(final File containerFileSystemFile) {
+        if (!config.isOutputIncludeContainerfilesystem()) {
+            logger.debug(String.format("Target image file system file %s was generated only for generation of the squashed image; deleting it", containerFileSystemFile.getName()));
+            containerFileSystemFile.delete();
+        }
     }
 
     private void copyOutputToUserProvidedOutputDir() throws IOException {
@@ -90,7 +140,7 @@ public class OutputDir {
             logger.info(String.format("Output source dir %s does not exist", srcDir.getAbsolutePath()));
             return;
         }
-        logger.info(String.format("Copying output from %s to %s", programPaths.getDockerInspectorDefaultOutputPath(), userOutputDirPath));
+        logger.info(String.format("Copying output from %s to %s", srcDir.getAbsolutePath(), userOutputDirPath));
         final File userOutputDir = new File(userOutputDirPath);
         copyDirContentsToDir(programPaths.getDockerInspectorDefaultOutputPath(), userOutputDir.getAbsolutePath(), true);
     }

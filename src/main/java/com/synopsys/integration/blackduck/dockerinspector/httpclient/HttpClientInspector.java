@@ -38,7 +38,7 @@ import org.springframework.stereotype.Component;
 import com.google.gson.Gson;
 import com.synopsys.integration.blackduck.dockerinspector.blackduckclient.BlackDuckClient;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarFilename;
-import com.synopsys.integration.blackduck.dockerinspector.output.OutputDir;
+import com.synopsys.integration.blackduck.dockerinspector.output.Output;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.imageinspector.api.name.Names;
@@ -69,7 +69,7 @@ public class HttpClientInspector {
     private ContainerPaths containerPaths;
 
     @Autowired
-    private OutputDir output;
+    private Output output;
 
     @Autowired
     private Gson gson;
@@ -82,7 +82,7 @@ public class HttpClientInspector {
             final String containerFileSystemFilename = Names.getContainerFileSystemTarFilename(config.getDockerImage(), config.getDockerTar());
             final String dockerTarFilePathInContainer = containerPaths.getContainerPathToTargetFile(finalDockerTarfile.getCanonicalPath());
             String containerFileSystemPathInContainer = null;
-            if (config.isOutputIncludeContainerfilesystem()) {
+            if (config.isOutputIncludeContainerfilesystem() || config.isOutputIncludeSquashedImage()) {
                 containerFileSystemPathInContainer = containerPaths.getContainerPathToOutputFile(containerFileSystemFilename);
             }
             final String bdioString = imageInspectorClient.getBdio(finalDockerTarfile.getCanonicalPath(), dockerTarFilePathInContainer, config.getDockerImageRepo(), config.getDockerImageTag(), containerFileSystemPathInContainer,
@@ -91,7 +91,7 @@ public class HttpClientInspector {
             logger.debug(String.format("bdioString: %s", bdioString));
             final SimpleBdioDocument bdioDocument = toBdioDocument(bdioString);
             adjustBdio(bdioDocument);
-            final File bdioFile = output.addBdioFileToOutputDir(bdioDocument);
+            final File bdioFile = output.addOutputToOutputDir(bdioDocument);
             if (config.isUploadBdio()) {
                 blackDuckClient.uploadBdio(bdioFile, bdioDocument.billOfMaterials.spdxName);
             }

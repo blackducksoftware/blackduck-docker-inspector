@@ -4,7 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.synopsys.integration.blackduck.dockerinspector.ProcessId;
@@ -12,12 +15,14 @@ import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
 import com.synopsys.integration.exception.IntegrationException;
 
+@Tag("integration")
 public class SquashedImageTest {
+    private static SquashedImage squashedImage;
+    private static DockerClientManager dockerClientManager;
 
-    @Test
-    public void testCreateSquashedImageTarGz() throws IOException, IntegrationException {
-
-        final DockerClientManager dockerClientManager = new DockerClientManager();
+    @BeforeAll
+    public static void setUp() {
+        dockerClientManager = new DockerClientManager();
         final ImageTarFilename imageTarFilename = new ImageTarFilename();
         final ProgramPaths programPaths = new ProgramPaths();
         final ProcessId processId = new ProcessId();
@@ -30,8 +35,12 @@ public class SquashedImageTest {
         dockerClientManager.setConfig(null);
         dockerClientManager.setImageTarFilename(imageTarFilename);
 
-        final SquashedImage squashedImage = new SquashedImage();
+        squashedImage = new SquashedImage();
         squashedImage.setDockerClientManager(dockerClientManager);
+    }
+
+    @Test
+    public void testCreateSquashedImageTarGz() throws IOException, IntegrationException {
 
         final File targetImageFileSystemTarGz = new File("src/test/resources/test_containerfilesystem.tar.gz");
         final File testWorkingDir = new File("test/output/squashingTest");
@@ -47,5 +56,15 @@ public class SquashedImageTest {
         CompressedFile.gunZipUnTarFile(squashedImageTarGz, tempTarFile, unpackedSquashedImage);
         final File expectedFile = new File(unpackedSquashedImage, "manifest.json");
         assertTrue(expectedFile.isFile());
+
+        expectedFile.delete();
+    }
+
+    @Test
+    public void testGenerateUniqueImageRepoTag() throws IntegrationException {
+        final String generatedRepTag = squashedImage.generateUniqueImageRepoTag();
+
+        assertTrue(generatedRepTag.startsWith("dockerinspectorsquashed-"));
+        assertTrue(generatedRepTag.endsWith(":1"));
     }
 }
