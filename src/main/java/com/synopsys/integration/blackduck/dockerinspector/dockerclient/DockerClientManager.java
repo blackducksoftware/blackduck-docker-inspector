@@ -167,13 +167,13 @@ public class DockerClientManager {
         } catch (final InterruptedException e) {
             throw new BlackDuckIntegrationException(String.format("Pull was interrupted: Image %s:%s not found. Error: %s", imageName, tagName, e.getMessage()), e);
         }
-        final Image justPulledImage = getLocalImage(dockerClient, imageName, tagName);
-        if (justPulledImage == null) {
+        final Optional<Image> justPulledImage = getLocalImage(dockerClient, imageName, tagName);
+        if (!justPulledImage.isPresent()) {
             final String msg = String.format("Pulled image %s:%s not found in image list.", imageName, tagName);
             logger.error(msg);
             throw new BlackDuckIntegrationException(msg);
         }
-        return justPulledImage.getId();
+        return justPulledImage.get().getId();
     }
 
     public void removeImage(final String imageId) throws IntegrationException {
@@ -257,21 +257,15 @@ public class DockerClientManager {
     }
 
     public Optional<String> lookupImageIdByRepoTag(final String repo, final String tag) {
+        Optional<String> imageId = Optional.empty();
         final String notNullTag = tag == null ? "" : tag;
         final String targetRepoTag = String.format("%s:%s", repo, notNullTag);
         final DockerClient dockerClient = getDockerClient();
-        final List<Image> foundImages = dockerClient.listImagesCmd().withImageNameFilter(repo).exec();
-        for (Image foundImage : foundImages) {
-            logger.debug(String.format("lookupImageIdByRepoTag: Found image id: %s", foundImage.getId()));
-            final String[] foundImageRepoTags = foundImage.getRepoTags();
-            for (String foundImageRepoTag : foundImageRepoTags) {
-                logger.debug(String.format("Image repoTag: %s", foundImageRepoTag));
-                if (targetRepoTag.equals(foundImageRepoTag)) {
-                    return Optional.of(foundImage.getId());
-                }
-            }
+        Optional<Image> image = getLocalImage(dockerClient, repo, tag);
+        if (image.isPresent()) {
+            imageId = Optional.of(image.get().getId());
         }
-        return Optional.empty();
+        return imageId;
     }
     public void logServiceLogAsDebug(final String containerId) {
         final StringBuilder stringBuilder = new StringBuilder();
@@ -338,33 +332,33 @@ public class DockerClientManager {
         return imageTarFile;
     }
 
-    private Image getLocalImage(final DockerClient dockerClient, final String imageName, final String tagName) {
-        Image localImage = null;
+    private Optional<Image> getLocalImage(final DockerClient dockerClient, final String imageName, final String tagName) {
         final List<Image> images = dockerClient.listImagesCmd().withImageNameFilter(imageName).exec();
         for (final Image image : images) {
+            logger.debug(String.format("getLocalImage(%s, %s) examining %s", imageName, tagName, image.getId()));
             if (image == null) {
                 logger.warn("Encountered a null image in local docker registry");
                 continue;
             }
-            final String[] tags = image.getRepoTags();
-            if (tags == null) {
+            final String[] repoTagList = image.getRepoTags();
+            if (repoTagList == null) {
                 logger.warn("Encountered an image with a null tag list in local docker registry");
             } else {
-                for (final String tag : tags) {
-                    if (tag == null) {
+                for (final String repoTag : repoTagList) {
+                    logger.debug(String.format("getLocalImage(%s, %s) examining %s", imageName, tagName, repoTag));
+                    if (repoTag == null) {
                         continue;
                     }
-                    if (tag.contains(tagName)) {
-                        localImage = image;
-                        break;
+                    final String colonTagString = String.format(":%s", tagName);
+                    logger.debug(String.format("getLocalImage(%s, %s) checking to see if %s ends with %s", imageName, tagName, repoTag, colonTagString));
+                    if (repoTag.endsWith(colonTagString)) {
+                        logger.debug(String.format("getLocalImage(%s, %s) found image id %s", imageName, tagName, image.getId()));
+                        return Optional.of(image);
                     }
                 }
             }
-            if (localImage != null) {
-                break;
-            }
         }
-        return localImage;
+        return Optional.empty();
     }
 
     private void removeContainer(final DockerClient dockerClient, final String containerId) {
