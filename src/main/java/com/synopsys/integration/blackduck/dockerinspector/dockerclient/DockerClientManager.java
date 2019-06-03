@@ -263,9 +263,22 @@ public class DockerClientManager {
         return imageId;
     }
 
-    public void isImageExists(final String repo, final String tag) {
+    public Optional<String> lookupImageIdForRepoTag(final String repo, final String tag) {
+        final String notNullTag = tag == null ? "" : tag;
+        final String targetRepoTag = String.format("%s:%s", repo, notNullTag);
         final DockerClient dockerClient = getDockerClient();
-//        dockerClient.listImagesCmd().withImageNameFilter(repo).exec().w;
+        final List<Image> foundImages = dockerClient.listImagesCmd().withImageNameFilter(repo).exec();
+        for (Image foundImage : foundImages) {
+            logger.info(String.format("*** image id: %s", foundImage.getId()));
+            final String[] foundImageRepoTags = foundImage.getRepoTags();
+            for (String foundImageRepoTag : foundImageRepoTags) {
+                logger.info(String.format("*** image repoTag: %s", foundImageRepoTag));
+                if (targetRepoTag.equals(foundImageRepoTag)) {
+                    return Optional.of(foundImage.getId());
+                }
+            }
+        }
+        return Optional.empty();
     }
     public void logServiceLogAsDebug(final String containerId) {
         final StringBuilder stringBuilder = new StringBuilder();
