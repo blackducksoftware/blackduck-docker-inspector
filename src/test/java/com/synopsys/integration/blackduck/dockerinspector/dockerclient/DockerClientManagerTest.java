@@ -1,5 +1,6 @@
 package com.synopsys.integration.blackduck.dockerinspector.dockerclient;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
@@ -10,22 +11,47 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
-import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarFilename;
+import com.synopsys.integration.exception.IntegrationException;
 
 @Tag("integration")
 public class DockerClientManagerTest {
+    private final static String imageRepo = "dockerclientmanagertest";
+    private final static String imageTag = "dockerclientmanagertest";
+
+    private static DockerClientManager dockerClientManager;
+
+    @BeforeAll
+    public static void setUp() {
+        dockerClientManager = new DockerClientManager();
+        dockerClientManager.setImageTarFilename(new ImageTarFilename());
+    }
+
+    @AfterAll
+    public static void tearDown() {
+        final Optional<String> foundImageIdInitial = dockerClientManager.lookupImageIdForRepoTag(imageRepo, imageTag);
+        if (foundImageIdInitial.isPresent()) {
+            try {
+                dockerClientManager.removeImage(foundImageIdInitial.get());
+            } catch (IntegrationException e) {
+            }
+        }
+    }
 
     @Test
-    public void test() throws IOException {
-        DockerClientManager dockerClientManager = new DockerClientManager();
-        dockerClientManager.setImageTarFilename(new ImageTarFilename());
-        final Config config = Mockito.mock(Config.class);
-        dockerClientManager.setConfig(config);
+    public void test() throws IOException, IntegrationException {
+
+        final Optional<String> foundImageIdInitial = dockerClientManager.lookupImageIdForRepoTag(imageRepo, imageTag);
+        if (foundImageIdInitial.isPresent()) {
+            dockerClientManager.removeImage(foundImageIdInitial.get());
+        }
+        final Optional<String> foundImageIdShouldBeEmpty = dockerClientManager.lookupImageIdForRepoTag(imageRepo, imageTag);
+        assertFalse(foundImageIdShouldBeEmpty.isPresent());
 
         final File testWorkingDir = new File("test/output/dockerClientManagerTest");
         final File dockerfile = new File(testWorkingDir, "Dockerfile");
@@ -35,11 +61,11 @@ public class DockerClientManagerTest {
         FileUtils.writeStringToFile(dockerfile, dockerfileContents, StandardCharsets.UTF_8);
 
         final Set<String> tags = new HashSet<>();
-        tags.add("ttttaa:ttttaa"); // TODO
+        tags.add(String.format("%s:%s", imageRepo, imageTag));
         final String createdImageId = dockerClientManager.buildImage(testWorkingDir, tags);
         System.out.printf("Created image %s\n", createdImageId);
 
-        final Optional<String> foundImageId = dockerClientManager.lookupImageIdForRepoTag("ttttaa", "ttttaa");
+        final Optional<String> foundImageId = dockerClientManager.lookupImageIdForRepoTag(imageRepo, imageTag);
 
         assertTrue(foundImageId.isPresent());
         System.out.printf("Found image id: %s\n", foundImageId.get());
