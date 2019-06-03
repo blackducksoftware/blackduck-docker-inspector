@@ -258,8 +258,6 @@ public class DockerClientManager {
 
     public Optional<String> lookupImageIdByRepoTag(final String repo, final String tag) {
         Optional<String> imageId = Optional.empty();
-        final String notNullTag = tag == null ? "" : tag;
-        final String targetRepoTag = String.format("%s:%s", repo, notNullTag);
         final DockerClient dockerClient = getDockerClient();
         Optional<Image> image = getLocalImage(dockerClient, repo, tag);
         if (image.isPresent()) {
@@ -333,9 +331,10 @@ public class DockerClientManager {
     }
 
     private Optional<Image> getLocalImage(final DockerClient dockerClient, final String imageName, final String tagName) {
+        final String nonNullTagName = tagName == null ? "" : tagName;
         final List<Image> images = dockerClient.listImagesCmd().withImageNameFilter(imageName).exec();
         for (final Image image : images) {
-            logger.debug(String.format("getLocalImage(%s, %s) examining %s", imageName, tagName, image.getId()));
+            logger.debug(String.format("getLocalImage(%s, %s) examining %s", imageName, nonNullTagName, image.getId()));
             if (image == null) {
                 logger.warn("Encountered a null image in local docker registry");
                 continue;
@@ -345,14 +344,14 @@ public class DockerClientManager {
                 logger.warn("Encountered an image with a null tag list in local docker registry");
             } else {
                 for (final String repoTag : repoTagList) {
-                    logger.debug(String.format("getLocalImage(%s, %s) examining %s", imageName, tagName, repoTag));
+                    logger.debug(String.format("getLocalImage(%s, %s) examining %s", imageName, nonNullTagName, repoTag));
                     if (repoTag == null) {
                         continue;
                     }
-                    final String colonTagString = String.format(":%s", tagName);
-                    logger.debug(String.format("getLocalImage(%s, %s) checking to see if %s ends with %s", imageName, tagName, repoTag, colonTagString));
+                    final String colonTagString = String.format(":%s", nonNullTagName);
+                    logger.debug(String.format("getLocalImage(%s, %s) checking to see if %s ends with %s", imageName, nonNullTagName, repoTag, colonTagString));
                     if (repoTag.endsWith(colonTagString)) {
-                        logger.debug(String.format("getLocalImage(%s, %s) found image id %s", imageName, tagName, image.getId()));
+                        logger.debug(String.format("getLocalImage(%s, %s) found image id %s", imageName, nonNullTagName, image.getId()));
                         return Optional.of(image);
                     }
                 }
