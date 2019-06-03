@@ -76,7 +76,7 @@ public class SquashedImage {
         } finally {
             logger.debug(String.format("Removing temporary squashed image: %s", imageRepoTag));
             final String[] imageRepoTagParts = imageRepoTag.split(":");
-            final Optional<String> imageId = dockerClientManager.lookupImageIdForRepoTag(imageRepoTagParts[0], imageRepoTagParts[1]);
+            final Optional<String> imageId = dockerClientManager.lookupImageIdByRepoTag(imageRepoTagParts[0], imageRepoTagParts[1]);
             if (imageId.isPresent()) {
                 dockerClientManager.removeImage(imageId.get());
             } else {
@@ -92,7 +92,7 @@ public class SquashedImage {
             final String imageRepoCandidate = String.format("%s-%d", IMAGE_REPO_PREFIX, randomImageRepoIndex);
             final String imageRepoTagCandidate = String.format("%s:%s", imageRepoCandidate, IMAGE_TAG);
             logger.debug(String.format("Squashed image repo:name candidate: %s", imageRepoTagCandidate));
-            final Optional<String> foundImageId = dockerClientManager.lookupImageIdForRepoTag(imageRepoCandidate, IMAGE_TAG);
+            final Optional<String> foundImageId = dockerClientManager.lookupImageIdByRepoTag(imageRepoCandidate, IMAGE_TAG);
             if (!foundImageId.isPresent()) {
                 return imageRepoTagCandidate;
             } else {

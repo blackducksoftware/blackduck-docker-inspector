@@ -248,14 +248,7 @@ public class DockerClientManager {
     public String buildImage(final File dockerBuildDir, final Set<String> tags) {
         final DockerClient dockerClient = getDockerClient();
 
-        BuildImageResultCallback callback = new BuildImageResultCallback() {
-            @Override
-            public void onNext(BuildResponseItem item) {
-                //System.out.println("BuildResponseItem: " + item);
-                super.onNext(item);
-            }
-        };
-
+        BuildImageResultCallback callback = new BuildImageResultCallback();
         final String imageId = dockerClient.buildImageCmd(dockerBuildDir)
                                    .withTags(tags)
                                    .exec(callback).awaitImageId();
@@ -263,13 +256,13 @@ public class DockerClientManager {
         return imageId;
     }
 
-    public Optional<String> lookupImageIdForRepoTag(final String repo, final String tag) {
+    public Optional<String> lookupImageIdByRepoTag(final String repo, final String tag) {
         final String notNullTag = tag == null ? "" : tag;
         final String targetRepoTag = String.format("%s:%s", repo, notNullTag);
         final DockerClient dockerClient = getDockerClient();
         final List<Image> foundImages = dockerClient.listImagesCmd().withImageNameFilter(repo).exec();
         for (Image foundImage : foundImages) {
-            logger.debug(String.format("lookupImageIdForRepoTag: Found image id: %s", foundImage.getId()));
+            logger.debug(String.format("lookupImageIdByRepoTag: Found image id: %s", foundImage.getId()));
             final String[] foundImageRepoTags = foundImage.getRepoTags();
             for (String foundImageRepoTag : foundImageRepoTags) {
                 logger.debug(String.format("Image repoTag: %s", foundImageRepoTag));

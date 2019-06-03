@@ -34,7 +34,7 @@ public class DockerClientManagerTest {
 
     @AfterAll
     public static void tearDown() {
-        final Optional<String> foundImageIdInitial = dockerClientManager.lookupImageIdForRepoTag(imageRepo, imageTag);
+        final Optional<String> foundImageIdInitial = dockerClientManager.lookupImageIdByRepoTag(imageRepo, imageTag);
         if (foundImageIdInitial.isPresent()) {
             try {
                 dockerClientManager.removeImage(foundImageIdInitial.get());
@@ -46,11 +46,11 @@ public class DockerClientManagerTest {
     @Test
     public void test() throws IOException, IntegrationException {
 
-        final Optional<String> foundImageIdInitial = dockerClientManager.lookupImageIdForRepoTag(imageRepo, imageTag);
+        final Optional<String> foundImageIdInitial = dockerClientManager.lookupImageIdByRepoTag(imageRepo, imageTag);
         if (foundImageIdInitial.isPresent()) {
             dockerClientManager.removeImage(foundImageIdInitial.get());
         }
-        final Optional<String> foundImageIdShouldBeEmpty = dockerClientManager.lookupImageIdForRepoTag(imageRepo, imageTag);
+        final Optional<String> foundImageIdShouldBeEmpty = dockerClientManager.lookupImageIdByRepoTag(imageRepo, imageTag);
         assertFalse(foundImageIdShouldBeEmpty.isPresent());
 
         final File testWorkingDir = new File("test/output/dockerClientManagerTest");
@@ -65,7 +65,7 @@ public class DockerClientManagerTest {
         final String createdImageId = dockerClientManager.buildImage(testWorkingDir, tags);
         System.out.printf("Created image %s\n", createdImageId);
 
-        final Optional<String> foundImageId = dockerClientManager.lookupImageIdForRepoTag(imageRepo, imageTag);
+        final Optional<String> foundImageId = dockerClientManager.lookupImageIdByRepoTag(imageRepo, imageTag);
 
         assertTrue(foundImageId.isPresent());
         System.out.printf("Found image id: %s\n", foundImageId.get());
