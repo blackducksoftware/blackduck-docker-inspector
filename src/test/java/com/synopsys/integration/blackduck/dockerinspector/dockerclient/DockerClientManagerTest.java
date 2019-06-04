@@ -54,6 +54,7 @@ public class DockerClientManagerTest {
         assertFalse(foundImageIdShouldBeEmpty.isPresent());
 
         final File testWorkingDir = new File("test/output/dockerClientManagerTest");
+        testWorkingDir.mkdirs();
         final File dockerfile = new File(testWorkingDir, "Dockerfile");
         final File imageContents = new File(testWorkingDir, "test.txt");
         imageContents.createNewFile();
