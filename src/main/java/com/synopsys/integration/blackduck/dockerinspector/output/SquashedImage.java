@@ -61,7 +61,7 @@ public class SquashedImage {
         containerFileSystemDir.mkdirs();
         CompressedFile.gunZipUnTarFile(targetImageFileSystemTarGz, tempTarFile, containerFileSystemDir);
         final File dockerfile = new File(dockerBuildDir, "Dockerfile");
-        final String dockerfileContents = String.format("FROM scratch\nCOPY %s .\n", containerFileSystemDir.getName());
+        final String dockerfileContents = String.format("FROM scratch\nCOPY %s/* .\n", containerFileSystemDir.getName());
         FileUtils.writeStringToFile(dockerfile, dockerfileContents, StandardCharsets.UTF_8);
 
         final String imageRepoTag = generateUniqueImageRepoTag();
