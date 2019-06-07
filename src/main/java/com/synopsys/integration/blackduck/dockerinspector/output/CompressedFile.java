@@ -45,21 +45,24 @@ public class CompressedFile {
     }
 
     public static void unTarFile(final File tarFile, final File destinationDir) throws IOException {
-        try (final TarArchiveInputStream fin = new TarArchiveInputStream(new FileInputStream(tarFile))) {
-            TarArchiveEntry entry;
-            while ((entry = fin.getNextTarEntry()) != null) {
-                if (entry.isDirectory()) {
-                    continue;
+        try (final FileInputStream fis = new FileInputStream(tarFile)) {
+            try (final TarArchiveInputStream tarIs = new TarArchiveInputStream(fis)) {
+                TarArchiveEntry entry;
+                while ((entry = tarIs.getNextTarEntry()) != null) {
+                    if (entry.isDirectory()) {
+                        continue;
+                    }
+                    final File curfile = new File(destinationDir, entry.getName());
+                    final File parent = curfile.getParentFile();
+                    if (!parent.exists()) {
+                        parent.mkdirs();
+                    }
+                    try (FileOutputStream fos = new FileOutputStream(curfile)) {
+                        IOUtils.copy(tarIs, fos);
+                    }
                 }
-                final File curfile = new File(destinationDir, entry.getName());
-                final File parent = curfile.getParentFile();
-                if (!parent.exists()) {
-                    parent.mkdirs();
-                }
-                IOUtils.copy(fin, new FileOutputStream(curfile));
             }
         }
-
     }
 
     public static void gZipFile(final File fileToCompress, final File compressedFile) throws IOException {

@@ -130,7 +130,7 @@ public class InMinikubeTest {
         final String tag = "1.0";
         final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("whiteouttest.tar");
         IntegrationTestCommon.testTar(random, programVersion, "build/images/test/whiteouttest.tar", repo, tag, true, Mode.DEFAULT, null, additionalArgsWithServiceUrl,
-                outputContainerFileSystemFile,
+                outputContainerFileSystemFile, null,
                 minikubeDockerEnv, "blackducksoftware_whiteouttest_1.0_DPKG");
     }
 
@@ -140,7 +140,7 @@ public class InMinikubeTest {
         final String tag = "1.0";
         final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("aggregated.tar");
         IntegrationTestCommon.testTar(random, programVersion, "build/images/test/aggregated.tar", repo, tag, true, Mode.SPECIFY_II_DETAILS, null, additionalArgsWithServiceUrl,
-                outputContainerFileSystemFile,
+                outputContainerFileSystemFile, null,
                 minikubeDockerEnv, "blackducksoftware_whiteouttest_1.0_DPKG");
     }
 
@@ -150,7 +150,7 @@ public class InMinikubeTest {
         final String tag = "1.0";
         final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("aggregated.tar");
         IntegrationTestCommon.testTar(random, programVersion, "build/images/test/aggregated.tar", repo, tag, true, Mode.DEFAULT, null, additionalArgsWithServiceUrl,
-                outputContainerFileSystemFile,
+                outputContainerFileSystemFile, null,
                 minikubeDockerEnv, "blackducksoftware_centos_minus_vim_plus_bacula_1.0_RPM");
     }
 
@@ -159,7 +159,7 @@ public class InMinikubeTest {
         final String repo = "alpine";
         final String tag = "latest";
         final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("alpine.tar");
-        IntegrationTestCommon.testTar(random, programVersion, "build/images/test/alpine.tar", repo, tag, false, Mode.SPECIFY_II_DETAILS, null, additionalArgsWithServiceUrl, outputContainerFileSystemFile,
+        IntegrationTestCommon.testTar(random, programVersion, "build/images/test/alpine.tar", repo, tag, false, Mode.SPECIFY_II_DETAILS, null, additionalArgsWithServiceUrl, outputContainerFileSystemFile, null,
                 minikubeDockerEnv, "alpine_latest_APK");
     }
 
@@ -168,7 +168,7 @@ public class InMinikubeTest {
         final String repo = "alpine";
         final String tag = "latest";
         final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("alpine.tar");
-        IntegrationTestCommon.testTar(random, programVersion, "build/images/test/alpine.tar", repo, tag, false, Mode.DEFAULT, null, additionalArgsWithServiceUrl, outputContainerFileSystemFile,
+        IntegrationTestCommon.testTar(random, programVersion, "build/images/test/alpine.tar", repo, tag, false, Mode.DEFAULT, null, additionalArgsWithServiceUrl, outputContainerFileSystemFile, null,
                 minikubeDockerEnv, "alpine_latest_APK");
     }
 }

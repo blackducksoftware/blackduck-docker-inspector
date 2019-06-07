@@ -195,11 +195,14 @@ public class IntegrationTestCommon {
     public static void testTar(final Random random, final ProgramVersion programVersion, final String inspectTargetTarfile, final String repo, final String tag,
             final boolean requireBdioMatch,
             final Mode mode, final String detectJarPath,
-            final List<String> additionalArgs, final File outputContainerFileSystemFile, final Map<String, String> givenEnv, final String codelocationName)
+            final List<String> additionalArgs, final File outputContainerFileSystemFile, final File outputSquashedImageFile, final Map<String, String> givenEnv, final String codelocationName)
             throws IOException, InterruptedException, IntegrationException {
 
         final String inspectTargetArg = String.format("--docker.tar=%s", inspectTargetTarfile);
         ensureFileDoesNotExist(outputContainerFileSystemFile);
+        if (outputSquashedImageFile != null) {
+            ensureFileDoesNotExist(outputSquashedImageFile);
+        }
 
         final File actualBdio;
         if (mode == Mode.DETECT) {
@@ -229,6 +232,9 @@ public class IntegrationTestCommon {
 
         if (mode != Mode.DETECT) {
             assertTrue(String.format("%s does not exist", outputContainerFileSystemFile.getAbsolutePath()), outputContainerFileSystemFile.exists());
+        }
+        if (outputSquashedImageFile != null) {
+            assertTrue(String.format("%s does not exist", outputSquashedImageFile.getAbsolutePath()), outputSquashedImageFile.exists());
         }
     }
 
