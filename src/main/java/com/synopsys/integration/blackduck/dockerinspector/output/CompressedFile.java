@@ -36,6 +36,8 @@ import org.apache.commons.compress.utils.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.synopsys.integration.blackduck.imageinspector.imageformat.docker.DockerLayerTarExtractor;
+
 public class CompressedFile {
     private static final Logger logger = LoggerFactory.getLogger(CompressedFile.class);
 
@@ -45,24 +47,8 @@ public class CompressedFile {
     }
 
     public static void unTarFile(final File tarFile, final File destinationDir) throws IOException {
-        try (final FileInputStream fis = new FileInputStream(tarFile)) {
-            try (final TarArchiveInputStream tarIs = new TarArchiveInputStream(fis)) {
-                TarArchiveEntry entry;
-                while ((entry = tarIs.getNextTarEntry()) != null) {
-                    if (entry.isDirectory()) {
-                        continue;
-                    }
-                    final File curfile = new File(destinationDir, entry.getName());
-                    final File parent = curfile.getParentFile();
-                    if (!parent.exists()) {
-                        parent.mkdirs();
-                    }
-                    try (FileOutputStream fos = new FileOutputStream(curfile)) {
-                        IOUtils.copy(tarIs, fos);
-                    }
-                }
-            }
-        }
+        final DockerLayerTarExtractor tarExtractor = new DockerLayerTarExtractor();
+        tarExtractor.extractLayerTarToDir(tarFile, destinationDir);
     }
 
     public static void gZipFile(final File fileToCompress, final File compressedFile) throws IOException {

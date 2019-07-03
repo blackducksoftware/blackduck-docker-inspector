@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import com.synopsys.integration.blackduck.dockerinspector.ProcessId;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
+import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
 import com.synopsys.integration.exception.IntegrationException;
 
 @Tag("integration")
@@ -37,6 +38,7 @@ public class SquashedImageTest {
 
         squashedImage = new SquashedImage();
         squashedImage.setDockerClientManager(dockerClientManager);
+        squashedImage.setFileOperations(new FileOperations());
     }
 
     @Test

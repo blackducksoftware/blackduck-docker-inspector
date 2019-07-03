@@ -36,6 +36,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
+import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
 import com.synopsys.integration.exception.IntegrationException;
 
 @Component
@@ -47,10 +48,16 @@ public class SquashedImage {
     private static final int MAX_IMAGE_REPO_INDEX = 10000;
 
     private DockerClientManager dockerClientManager;
+    private FileOperations fileOperations;
 
     @Autowired
     public void setDockerClientManager(final DockerClientManager dockerClientManager) {
         this.dockerClientManager = dockerClientManager;
+    }
+
+    @Autowired
+    public void setFileOperations(final FileOperations fileOperations) {
+        this.fileOperations = fileOperations;
     }
 
     public void createSquashedImageTarGz(final File targetImageFileSystemTarGz, final File squashedImageTarGz,
@@ -60,6 +67,7 @@ public class SquashedImage {
         final File containerFileSystemDir = new File(dockerBuildDir, "containerFileSystem");
         containerFileSystemDir.mkdirs();
         CompressedFile.gunZipUnTarFile(targetImageFileSystemTarGz, tempTarFile, containerFileSystemDir);
+        fileOperations.pruneDanglingSymLinksRecursively(containerFileSystemDir);
         final File dockerfile = new File(dockerBuildDir, "Dockerfile");
         final String dockerfileContents = String.format("FROM scratch\nCOPY %s/* .\n", containerFileSystemDir.getName());
         FileUtils.writeStringToFile(dockerfile, dockerfileContents, StandardCharsets.UTF_8);
