@@ -40,7 +40,9 @@ import com.synopsys.integration.rest.request.Response;
 public class HttpRequestor {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public SimpleResponse executeGetBdioRequest(final IntHttpClient httpClient, final URI imageInspectorUri, final String containerPathToTarfile,
+    public SimpleResponse executeGetBdioRequest(final IntHttpClient httpClient, final URI imageInspectorUri,
+        final String containerPathToTarfile,
+            final String containerFileSystemExcludedPaths,
             final String givenImageRepo, final String givenImageTag, final String containerPathToContainerFileSystemFile,
         final boolean organizeComponentsByLayer,
         final boolean includeRemovedComponents,
@@ -53,6 +55,7 @@ public class HttpRequestor {
                 .givenImageRepo(givenImageRepo)
                 .givenImageTag(givenImageTag)
                 .containerPathToContainerFileSystemFile(containerPathToContainerFileSystemFile)
+                               .containerFileSystemExcludedPaths(containerFileSystemExcludedPaths)
                                .organizeComponentsByLayer(organizeComponentsByLayer)
                                .includeRemovedComponents(includeRemovedComponents)
                 .cleanup(cleanup)

@@ -79,14 +79,14 @@ public class IiClientContainersStartedAsNeededTest {
         final SimpleResponse response = new SimpleResponse(RestConstants.OK_200, null, "testResult");
         Mockito.when(httpRequestor
             .executeGetBdioRequest(Mockito.any(IntHttpClient.class), Mockito.any(URI.class), Mockito.anyString(), Mockito.anyString(),
-                Mockito.anyString(), Mockito.anyString(), Mockito.anyBoolean(), Mockito.anyBoolean(), Mockito.anyBoolean(),
+                Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), Mockito.anyBoolean(), Mockito.anyBoolean(), Mockito.anyBoolean(),
                 Mockito.anyString())).thenReturn(response);
 
         Mockito.when(inspectorImages.getInspectorImageName(Mockito.any(ImageInspectorOsEnum.class))).thenReturn("blackduck/blackduck-imageinspector");
         Mockito.when(inspectorImages.getInspectorImageTag(Mockito.any(ImageInspectorOsEnum.class))).thenReturn("1.1.1");
 
         assertEquals(true, imageInspectorClientContainersStartedAsNeeded.isApplicable());
-        assertEquals("testResult", imageInspectorClientContainersStartedAsNeeded.getBdio("/tmp/t.tar", null, null, "/tmp/t.tar", "containerFileSystemFilename", true, false, false,
+        assertEquals("testResult", imageInspectorClientContainersStartedAsNeeded.getBdio("/tmp/t.tar", null, null, "/tmp/t.tar", "containerFileSystemFilename", null, true, false, false,
             null));
     }
 
