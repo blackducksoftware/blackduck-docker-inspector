@@ -2,6 +2,7 @@ package com.synopsys.integration.blackduck.dockerinspector;
 
 import static org.junit.Assert.assertTrue;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import java.io.File;
 import java.io.IOException;
@@ -122,8 +123,21 @@ public class DockerInspectorTest {
         additionalArgs.add("--bdio.include.removed.components=true");
         additionalArgs.add("--blackduck.codelocation.prefix=layeredIncludeRemoved");
         final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU;
-        testTarUsingExistingContainer(null, null, "build/images/test/ubuntu1404.tar", portOnHost, additionalArgs, true, "testUbuntu1404LayeredIncludeRemoved", true);
+
+        final TestConfig testConfig = new TestConfigBuilder()
+            .setTarFilePath("build/images/test/ubuntu1404.tar")
+            .setPortOnHost(portOnHost)
+            .setAdditionalArgs(additionalArgs)
+            .setRequireBdioMatch(true)
+            .setCodelocationName("testUbuntu1404LayeredIncludeRemoved")
+            .setTestSquashedImageGeneration(true)
+            .build();
+
+        testTarUsingExistingContainer(testConfig);
     }
+
+
+    // TODO NEED TESTS THAT EXCLUDE PATHS, BOTH START CONTAINER AND EXISTING, BOTH WITH REDIRECTS
 
     @Test
     public void testUbuntuStartContainer() throws IOException, InterruptedException, IntegrationException {
@@ -190,117 +204,186 @@ public class DockerInspectorTest {
 
     @Test
     public void testNonLinux() throws IOException, InterruptedException, IntegrationException {
-        final String repo = "osless";
-        final String tag = "1.0";
-        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS;
-        testTarUsingExistingContainer(repo, tag, "src/test/resources/osless.tar", portOnHost, null, true, "osless_1.0_noPkgMgr", false);
+        final TestConfig testConfig = new TestConfigBuilder()
+                                          .setTarFilePath("src/test/resources/osless.tar")
+                                          .setTargetRepo("osless")
+                                          .setTargetTag("1.0")
+                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
+                                          .setRequireBdioMatch(true)
+                                          .setCodelocationName("osless_1.0_noPkgMgr")
+                                          .build();
+
+        testTarUsingExistingContainer(testConfig);
     }
 
     @Test
     public void testWhiteout() throws IOException, InterruptedException, IntegrationException {
-        final String repo = "blackducksoftware/whiteouttest";
-        final String tag = "1.0";
-        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS;
-        testTarUsingExistingContainer(repo, tag, "build/images/test/whiteouttest.tar", portOnHost, null, true, "blackducksoftware_whiteouttest_1.0_DPKG", false);
+        final TestConfig testConfig = new TestConfigBuilder()
+                                          .setTarFilePath("build/images/test/whiteouttest.tar")
+                                          .setTargetRepo("blackducksoftware/whiteouttest")
+                                          .setTargetTag("1.0")
+                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
+                                          .setRequireBdioMatch(true)
+                                          .setCodelocationName("blackducksoftware_whiteouttest_1.0_DPKG")
+                                          .build();
+
+        testTarUsingExistingContainer(testConfig);
     }
 
     @Test
     public void testAggregateTarfileImageOne() throws IOException, InterruptedException, IntegrationException {
-        final String repo = "blackducksoftware/whiteouttest";
-        final String tag = "1.0";
-        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS;
-        testTarUsingExistingContainer(repo, tag, "build/images/test/aggregated.tar", portOnHost, null, true, "blackducksoftware_whiteouttest_1.0_DPKG", false);
+        final TestConfig testConfig = new TestConfigBuilder()
+                                          .setTarFilePath("build/images/test/aggregated.tar")
+                                          .setTargetRepo("blackducksoftware/whiteouttest")
+                                          .setTargetTag("1.0")
+                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
+                                          .setRequireBdioMatch(true)
+                                          .setCodelocationName("blackducksoftware_whiteouttest_1.0_DPKG")
+                                          .build();
+
+        testTarUsingExistingContainer(testConfig);
     }
 
     @Test
     public void testAggregateTarfileImageTwo() throws IOException, InterruptedException, IntegrationException {
-        final String repo = "blackducksoftware/centos_minus_vim_plus_bacula";
-        final String tag = "1.0";
-        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS;
-        testTarUsingExistingContainer(repo, tag, "build/images/test/aggregated.tar", portOnHost, null, true, "blackducksoftware_centos_minus_vim_plus_bacula_1.0_RPM", false);
+        final TestConfig testConfig = new TestConfigBuilder()
+                                          .setTarFilePath("build/images/test/aggregated.tar")
+                                          .setTargetRepo("blackducksoftware/centos_minus_vim_plus_bacula")
+                                          .setTargetTag("1.0")
+                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
+                                          .setRequireBdioMatch(true)
+                                          .setCodelocationName("blackducksoftware_centos_minus_vim_plus_bacula_1.0_RPM")
+                                          .build();
+
+        testTarUsingExistingContainer(testConfig);
     }
 
     @Test
     public void testAlpineLatestTarRepoTagSpecified() throws IOException, InterruptedException, IntegrationException {
-        final String repo = "alpine";
-        final String tag = "latest";
-        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE;
-        testTarUsingExistingContainer(repo, tag, "build/images/test/alpine.tar", portOnHost, null, false, "alpine_latest_APK", false);
+        final TestConfig testConfig = new TestConfigBuilder()
+            .setTarFilePath("build/images/test/alpine.tar")
+            .setTargetRepo("alpine")
+            .setTargetTag("latest")
+            .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
+            .setRequireBdioMatch(false)
+            .setCodelocationName("alpine_latest_APK")
+            .build();
+
+        testTarUsingExistingContainer(testConfig);
     }
 
     @Test
     public void testAlpineLatestTarRepoTagNotSpecified() throws IOException, InterruptedException, IntegrationException {
-        final String repo = null;
-        final String tag = null;
-        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE;
-        testTarUsingExistingContainer(repo, tag, "build/images/test/alpine.tar", portOnHost, null, false, "alpine_latest_APK", false);
+        final TestConfig testConfig = new TestConfigBuilder()
+                                          .setTarFilePath("build/images/test/alpine.tar")
+                                          .setTargetRepo(null)
+                                          .setTargetTag(null)
+                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
+                                          .setRequireBdioMatch(false)
+                                          .setCodelocationName("alpine_latest_APK")
+                                          .build();
+
+        testTarUsingExistingContainer(testConfig);
     }
 
     @Test
     public void testAlpineUsingExistingAlpineContainer() throws IOException, InterruptedException, IntegrationException {
-        final String targetRepo = null;
-        final String targetTag = null;
-        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE;
-        testTarUsingExistingContainer(targetRepo, targetTag,  "build/images/test/alpine36.tar",portOnHost, null, true, "null_null_APK", false);
+        final TestConfig testConfig = new TestConfigBuilder()
+                                          .setTarFilePath("build/images/test/alpine36.tar")
+                                          .setTargetRepo(null)
+                                          .setTargetTag(null)
+                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
+                                          .setRequireBdioMatch(true)
+                                          .setCodelocationName("null_null_APK")
+                                          .build();
+
+        testTarUsingExistingContainer(testConfig);
     }
 
     @Test
     public void testWhiteoutUsingExistingAlpineContainer() throws IOException, InterruptedException, IntegrationException {
-        final String targetRepo = "blackducksoftware/whiteouttest";
-        final String targetTag = "1.0";
-        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE;
-        testTarUsingExistingContainer(targetRepo, targetTag,  "build/images/test//whiteouttest.tar", portOnHost, null, true, "blackducksoftware_whiteouttest_1.0_DPKG", false);
+        final TestConfig testConfig = new TestConfigBuilder()
+                                          .setTarFilePath("build/images/test//whiteouttest.tar")
+                                          .setTargetRepo("blackducksoftware/whiteouttest")
+                                          .setTargetTag("1.0")
+                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
+                                          .setRequireBdioMatch(true)
+                                          .setCodelocationName("blackducksoftware_whiteouttest_1.0_DPKG")
+                                          .build();
+
+        testTarUsingExistingContainer(testConfig);
     }
 
     @Test
     public void testCentosUsingExistingAlpineContainer() throws IOException, InterruptedException, IntegrationException {
-        final String targetRepo = "blackducksoftware/centos_minus_vim_plus_bacula";
-        final String targetTag = "1.0";
-        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE;
-        testTarUsingExistingContainer(targetRepo, targetTag,  "build/images/test/centos_minus_vim_plus_bacula.tar",portOnHost, null, true, "blackducksoftware_centos_minus_vim_plus_bacula_1.0_RPM", false);
+        final TestConfig testConfig = new TestConfigBuilder()
+                                          .setTarFilePath("build/images/test/centos_minus_vim_plus_bacula.tar")
+                                          .setTargetRepo("blackducksoftware/centos_minus_vim_plus_bacula")
+                                          .setTargetTag("1.0")
+                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
+                                          .setRequireBdioMatch(true)
+                                          .setCodelocationName("blackducksoftware_centos_minus_vim_plus_bacula_1.0_RPM")
+                                          .build();
+
+
+        testTarUsingExistingContainer(testConfig);
     }
 
     @Test
     public void testUbuntuUsingExistingCentosContainer() throws IOException, InterruptedException, IntegrationException {
-        final String targetRepo = null; // the image in this tarfile is not tagged
-        final String targetTag = null;
-        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS;
-        testTarUsingExistingContainer(targetRepo, targetTag,  "build/images/test/ubuntu1404.tar",portOnHost, null, true, "null_null_DPKG", false);
+        final TestConfig testConfig = new TestConfigBuilder()
+                                          .setTarFilePath("build/images/test/ubuntu1404.tar")
+                                          .setTargetRepo(null)
+                                          .setTargetTag(null)
+                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
+                                          .setRequireBdioMatch(true)
+                                          .setCodelocationName("null_null_DPKG")
+                                          .build();
+
+        testTarUsingExistingContainer(testConfig);
     }
 
 
     @Test
     public void testExcludePlatformComponents() throws IOException, InterruptedException, IntegrationException {
-        final String repo = "blackducksoftware/centos_minus_vim_plus_bacula";
-        final String tag = "1.0";
-        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU;
         List<String> additionalArgs = new ArrayList<>();
         additionalArgs.add("--docker.platform.top.layer.id=sha256:1bcfbfaf95f95ea8a28711c83085dbbeceefa11576e1c889304aa5bacbaa6ac2");
-        testTarUsingExistingContainer(repo, tag, "build/images/test/aggregated.tar", portOnHost, additionalArgs, true, "blackducksoftware_centos_minus_vim_plus_bacula_1.0_app_RPM", false);
+
+        final TestConfig testConfig = new TestConfigBuilder()
+                                          .setTarFilePath("build/images/test/aggregated.tar")
+                                          .setTargetRepo("blackducksoftware/centos_minus_vim_plus_bacula")
+                                          .setTargetTag("1.0")
+                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU)
+                                          .setRequireBdioMatch(true)
+                                          .setCodelocationName("blackducksoftware_centos_minus_vim_plus_bacula_1.0_app_RPM")
+                                          .setAdditionalArgs(additionalArgs)
+                                          .build();
+
+        testTarUsingExistingContainer(testConfig);
     }
 
-    private void testTarUsingExistingContainer(final String targetRepo, final String targetTag, final String tarFilePath, final int portOnHost,
-        List<String> additionalArgs, final boolean requireBdioMatch, final String codelocationName, final boolean testSquashedImageGeneration)
+    private void testTarUsingExistingContainer(final TestConfig testConfig)
             throws IOException, InterruptedException, IntegrationException {
-        final File targetTar = new File(tarFilePath);
+        final File targetTar = new File(testConfig.getTarFilePath());
         final String tarFileName = targetTar.getName();
         final String tarFileBaseName = tarFileName.substring(0, tarFileName.length()-".tar".length());
         final File targetTarInSharedDir = new File(containerTargetDir, tarFileName);
         FileUtils.copyFile(targetTar, targetTarInSharedDir);
         targetTarInSharedDir.setReadable(true, false);
+        List<String> additionalArgs = testConfig.getAdditionalArgs();
         if (additionalArgs == null) {
             additionalArgs = new ArrayList<>();
         }
-        additionalArgs.add(String.format("--imageinspector.service.url=http://localhost:%d", portOnHost));
+        additionalArgs.add(String.format("--imageinspector.service.url=http://localhost:%d", testConfig.getPortOnHost()));
         additionalArgs.add(String.format("--shared.dir.path.local=%s", dirSharedWithContainer.getAbsolutePath()));
         additionalArgs.add(String.format("--shared.dir.path.imageinspector=%s", SHARED_DIR_PATH_IN_CONTAINER));
         final File outputContainerFileSystemFile = new File(String.format("%s/output/%s_containerfilesystem.tar.gz", TestUtils.TEST_DIR_REL_PATH, tarFileBaseName));
         File outputSquashedImageFile = null;
-        if (testSquashedImageGeneration) {
+        if (testConfig.isTestSquashedImageGeneration()) {
             outputSquashedImageFile = new File(String.format("%s/output/%s_squashedimage.tar.gz", TestUtils.TEST_DIR_REL_PATH, tarFileBaseName));
             additionalArgs.add("--output.include.squashedimage=true");
         }
-        IntegrationTestCommon.testTar(random, programVersion, targetTarInSharedDir.getAbsolutePath(), targetRepo, targetTag, requireBdioMatch, Mode.NO_SERVICE_START, null, additionalArgs, outputContainerFileSystemFile, outputSquashedImageFile, null, codelocationName);
+        IntegrationTestCommon.testTar(random, programVersion, targetTarInSharedDir.getAbsolutePath(), testConfig.getTargetRepo(), testConfig.getTargetTag(), testConfig.isRequireBdioMatch(), Mode.NO_SERVICE_START, null, additionalArgs, outputContainerFileSystemFile, outputSquashedImageFile, null, testConfig.getCodelocationName());
     }
 
     private void testImageUsingExistingContainer(final String inspectTargetImageRepoTag, final int portOnHost, final boolean requireBdioMatch, final int minNumberOfComponentsExpected,
@@ -463,4 +546,167 @@ public class DockerInspectorTest {
         }
     }
 
+    private class TestConfigBuilder {
+        private String inspectTargetImageRepoTag;
+        private String tarFilePath;
+        private String targetRepo; // tarfile image selector
+        private String targetTag;  // tarfile image selector
+        private int portOnHost;
+        private boolean requireBdioMatch;
+        private int minNumberOfComponentsExpected;
+        private String outputBomMustContainComponentPrefix;
+        private String outputBomMustContainExternalSystemTypeId;
+        private String codelocationName;
+        private List<String> additionalArgs;
+        private boolean testSquashedImageGeneration;
+
+        public TestConfigBuilder setInspectTargetImageRepoTag(final String inspectTargetImageRepoTag) {
+            this.inspectTargetImageRepoTag = inspectTargetImageRepoTag;
+            return this;
+        }
+
+        public TestConfigBuilder setTarFilePath(final String tarFilePath) {
+            this.tarFilePath = tarFilePath;
+            return this;
+        }
+
+        public TestConfigBuilder setTargetRepo(final String targetRepo) {
+            this.targetRepo = targetRepo;
+            return this;
+        }
+
+        public TestConfigBuilder setTargetTag(final String targetTag) {
+            this.targetTag = targetTag;
+            return this;
+        }
+
+        public TestConfigBuilder setPortOnHost(final int portOnHost) {
+            this.portOnHost = portOnHost;
+            return this;
+        }
+
+        public TestConfigBuilder setRequireBdioMatch(final boolean requireBdioMatch) {
+            this.requireBdioMatch = requireBdioMatch;
+            return this;
+        }
+
+        public TestConfigBuilder setMinNumberOfComponentsExpected(final int minNumberOfComponentsExpected) {
+            this.minNumberOfComponentsExpected = minNumberOfComponentsExpected;
+            return this;
+        }
+
+        public TestConfigBuilder setOutputBomMustContainComponentPrefix(final String outputBomMustContainComponentPrefix) {
+            this.outputBomMustContainComponentPrefix = outputBomMustContainComponentPrefix;
+            return this;
+        }
+
+        public TestConfigBuilder setOutputBomMustContainExternalSystemTypeId(final String outputBomMustContainExternalSystemTypeId) {
+            this.outputBomMustContainExternalSystemTypeId = outputBomMustContainExternalSystemTypeId;
+            return this;
+        }
+
+        public TestConfigBuilder setCodelocationName(final String codelocationName) {
+            this.codelocationName = codelocationName;
+            return this;
+        }
+
+        public TestConfigBuilder setAdditionalArgs(final List<String> additionalArgs) {
+            this.additionalArgs = additionalArgs;
+            return this;
+        }
+
+        public TestConfigBuilder setTestSquashedImageGeneration(final boolean testSquashedImageGeneration) {
+            this.testSquashedImageGeneration = testSquashedImageGeneration;
+            return this;
+        }
+
+        public TestConfig build() throws IntegrationException {
+            if ((inspectTargetImageRepoTag == null) && (tarFilePath == null)) {
+                throw new IntegrationException("Invalid TestConfig");
+            }
+            return new TestConfig(inspectTargetImageRepoTag, tarFilePath, targetRepo, targetTag, portOnHost, requireBdioMatch, minNumberOfComponentsExpected,
+            outputBomMustContainComponentPrefix,
+            outputBomMustContainExternalSystemTypeId, codelocationName, additionalArgs, testSquashedImageGeneration);
+        }
+    }
+
+    private class TestConfig {
+        private final String inspectTargetImageRepoTag;
+        private final String tarFilePath;
+        private final String targetRepo; // tarfile image selector
+        private final String targetTag;  // tarfile image selector
+        private final int portOnHost;
+        private final boolean requireBdioMatch;
+        private final int minNumberOfComponentsExpected;
+        private final String outputBomMustContainComponentPrefix;
+        private final String outputBomMustContainExternalSystemTypeId;
+        private final String codelocationName;
+        private final List<String> additionalArgs;
+        private final boolean testSquashedImageGeneration;
+
+        public TestConfig(final String inspectTargetImageRepoTag, final String tarFilePath, final String targetRepo, final String targetTag, final int portOnHost, final boolean requireBdioMatch, final int minNumberOfComponentsExpected,
+            final String outputBomMustContainComponentPrefix,
+            final String outputBomMustContainExternalSystemTypeId, final String codelocationName, final List<String> additionalArgs, final boolean testSquashedImageGeneration) {
+            this.inspectTargetImageRepoTag = inspectTargetImageRepoTag;
+            this.tarFilePath = tarFilePath;
+            this.targetRepo = targetRepo;
+            this.targetTag = targetTag;
+            this.portOnHost = portOnHost;
+            this.requireBdioMatch = requireBdioMatch;
+            this.minNumberOfComponentsExpected = minNumberOfComponentsExpected;
+            this.outputBomMustContainComponentPrefix = outputBomMustContainComponentPrefix;
+            this.outputBomMustContainExternalSystemTypeId = outputBomMustContainExternalSystemTypeId;
+            this.codelocationName = codelocationName;
+            this.additionalArgs = additionalArgs;
+            this.testSquashedImageGeneration = testSquashedImageGeneration;
+        }
+
+        public String getInspectTargetImageRepoTag() {
+            return inspectTargetImageRepoTag;
+        }
+
+        public String getTarFilePath() {
+            return tarFilePath;
+        }
+
+        public String getTargetRepo() {
+            return targetRepo;
+        }
+
+        public String getTargetTag() {
+            return targetTag;
+        }
+
+        public int getPortOnHost() {
+            return portOnHost;
+        }
+
+        public boolean isRequireBdioMatch() {
+            return requireBdioMatch;
+        }
+
+        public int getMinNumberOfComponentsExpected() {
+            return minNumberOfComponentsExpected;
+        }
+
+        public String getOutputBomMustContainComponentPrefix() {
+            return outputBomMustContainComponentPrefix;
+        }
+
+        public String getOutputBomMustContainExternalSystemTypeId() {
+            return outputBomMustContainExternalSystemTypeId;
+        }
+
+        public String getCodelocationName() {
+            return codelocationName;
+        }
+
+        public List<String> getAdditionalArgs() {
+            return additionalArgs;
+        }
+
+        public boolean isTestSquashedImageGeneration() {
+            return testSquashedImageGeneration;
+        }
+    }
 }
