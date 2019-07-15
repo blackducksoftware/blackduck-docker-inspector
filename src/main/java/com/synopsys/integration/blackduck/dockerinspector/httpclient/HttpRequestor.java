@@ -42,8 +42,9 @@ public class HttpRequestor {
 
     public SimpleResponse executeGetBdioRequest(final IntHttpClient httpClient, final URI imageInspectorUri,
         final String containerPathToTarfile,
-            final String containerFileSystemExcludedPaths,
-            final String givenImageRepo, final String givenImageTag, final String containerPathToContainerFileSystemFile,
+            final String givenImageRepo, final String givenImageTag,
+        final String containerPathToContainerFileSystemFile,
+        final String containerFileSystemExcludedPaths,
         final boolean organizeComponentsByLayer,
         final boolean includeRemovedComponents,
         final boolean cleanup,
