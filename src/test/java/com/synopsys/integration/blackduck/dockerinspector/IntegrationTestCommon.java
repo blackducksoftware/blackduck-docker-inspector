@@ -3,7 +3,6 @@ package com.synopsys.integration.blackduck.dockerinspector;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -11,56 +10,46 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import java.util.Random;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.gson.Gson;
-import com.synopsys.integration.blackduck.imageinspector.api.name.Names;
-import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.bdio.BdioReader;
 import com.synopsys.integration.bdio.model.SimpleBdioDocument;
+import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
+import com.synopsys.integration.blackduck.imageinspector.api.name.Names;
+import com.synopsys.integration.exception.IntegrationException;
 
 public class IntegrationTestCommon {
     private static int START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE = 8100;
     private static int START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS = 8101;
     public static int START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU = 8102;
 
-    public enum Mode {
-        NO_SERVICE_START,
-        DEFAULT,
-        SPECIFY_II_DETAILS,
-        DETECT
-    }
-
-    public static void testImage(final Random random, final ProgramVersion programVersion, final String inspectTargetImageRepoTag, final String repo, final String tag, final boolean requireBdioMatch,
-            final Mode mode, final String detectJarPath,
-            final String outputBomMustContainComponentPrefix, final String outputBomMustContainExternalSystemTypeId,
-            final int minNumberOfComponentsExpected, final List<String> additionalArgs, final Map<String, String> givenEnv,
-            final String codeLocationName)
-            throws IOException, InterruptedException, IntegrationException {
-        final File outputContainerFileSystemFile = getOutputContainerFileSystemFileFromImageSpec(inspectTargetImageRepoTag);
-        final String inspectTargetArg = String.format("--docker.image=%s", inspectTargetImageRepoTag);
+    public static void testImage(final Random random, final ProgramVersion programVersion, final String detectJarPath, final TestConfig testConfig)
+        throws IOException, InterruptedException, IntegrationException {
+        final File outputContainerFileSystemFile = getOutputContainerFileSystemFileFromImageSpec(testConfig.getInspectTargetImageRepoTag());
+        final String inspectTargetArg = String.format("--docker.image=%s", testConfig.getInspectTargetImageRepoTag());
         ensureFileDoesNotExist(outputContainerFileSystemFile);
         final File actualBdio;
-        if (mode == Mode.DETECT) {
-            actualBdio = new File(String.format(String.format("%s/blackduck/bdio/%s_bdio.jsonld", System.getProperty("user.home"), codeLocationName)));
+        if (testConfig.getMode() == TestConfig.Mode.DETECT) {
+            actualBdio = new File(String.format(String.format("%s/blackduck/bdio/%s_bdio.jsonld", System.getProperty("user.home"), testConfig.getCodelocationName())));
         } else {
-            actualBdio = new File(String.format(String.format("%s/output/%s_bdio.jsonld", TestUtils.TEST_DIR_REL_PATH, codeLocationName)));
+            actualBdio = new File(String.format(String.format("%s/output/%s_bdio.jsonld", TestUtils.TEST_DIR_REL_PATH, testConfig.getCodelocationName())));
         }
         ensureFileDoesNotExist(actualBdio);
 
-        final List<String> cmd = createCmd(random, programVersion, mode, detectJarPath, inspectTargetArg, repo, tag, codeLocationName, additionalArgs);
+        final List<String> cmd = createCmd(random, programVersion, testConfig.getMode(), detectJarPath, inspectTargetArg, testConfig.getTargetRepo(), testConfig.getTargetTag(), testConfig.getCodelocationName(),
+            testConfig.getAdditionalArgs());
 
-        System.out.println(String.format("Running end to end test on %s with command %s", inspectTargetImageRepoTag, cmd.toString()));
-        TestUtils.execCmd(String.join(" ", cmd), 30000L, true, givenEnv);
+        System.out.println(String.format("Running end to end test on %s with command %s", testConfig.getInspectTargetImageRepoTag(), cmd.toString()));
+        TestUtils.execCmd(String.join(" ", cmd), 30000L, true, testConfig.getEnv());
         System.out.println("blackduck-docker-inspector done; verifying results...");
         System.out.printf("Expecting output BDIO file: %s\n", actualBdio.getAbsolutePath());
         assertTrue(actualBdio.exists());
-        if (requireBdioMatch) {
-            final File expectedBdio = new File(String.format(String.format("src/test/resources/bdio/%s_bdio.jsonld", codeLocationName)));
+        if (testConfig.isRequireBdioMatch()) {
+            final File expectedBdio = new File(String.format(String.format("src/test/resources/bdio/%s_bdio.jsonld", testConfig.getCodelocationName())));
             final List<String> exceptLinesContainingThese = new ArrayList<>();
             exceptLinesContainingThese.add("\"@id\":");
             exceptLinesContainingThese.add("spdx:created");
@@ -69,13 +58,13 @@ public class IntegrationTestCommon {
             assertTrue(outputBdioMatches);
         }
         final SimpleBdioDocument doc = createBdioDocumentFromFile(actualBdio);
-        assertTrue(doc.components.size() >= minNumberOfComponentsExpected);
-        if (StringUtils.isNotBlank(outputBomMustContainComponentPrefix)) {
-            System.out.printf("Looking for component name starting with: %s\n", outputBomMustContainComponentPrefix);
+        assertTrue(doc.components.size() >= testConfig.getMinNumberOfComponentsExpected());
+        if (StringUtils.isNotBlank(testConfig.getOutputBomMustContainComponentPrefix())) {
+            System.out.printf("Looking for component name starting with: %s\n", testConfig.getOutputBomMustContainComponentPrefix());
             boolean componentFound = false;
             for (int i = 0; i < doc.components.size(); i++) {
                 System.out.printf("\tComponent: %s / %s\n", doc.components.get(i).name, doc.components.get(i).version);
-                if (doc.components.get(i).name.startsWith(outputBomMustContainComponentPrefix)) {
+                if (doc.components.get(i).name.startsWith(testConfig.getOutputBomMustContainComponentPrefix())) {
                     componentFound = true;
                     break;
                 }
@@ -83,12 +72,12 @@ public class IntegrationTestCommon {
             assertTrue(componentFound);
             System.out.printf("Found it\n");
         }
-        if (StringUtils.isNotBlank(outputBomMustContainExternalSystemTypeId)) {
-            System.out.printf("Looking for component with externalSystemTypeId: %s\n", outputBomMustContainExternalSystemTypeId);
+        if (StringUtils.isNotBlank(testConfig.getOutputBomMustContainExternalSystemTypeId())) {
+            System.out.printf("Looking for component with externalSystemTypeId: %s\n", testConfig.getOutputBomMustContainExternalSystemTypeId());
             boolean externalSystemTypeIdFound = false;
             for (int i = 0; i < doc.components.size(); i++) {
                 System.out.printf("\tComponent: %s / %s; externalSystemTypeId: %s\n", doc.components.get(i).name, doc.components.get(i).version, doc.components.get(i).bdioExternalIdentifier.forge);
-                if (doc.components.get(i).bdioExternalIdentifier.forge.equals(outputBomMustContainExternalSystemTypeId)) {
+                if (doc.components.get(i).bdioExternalIdentifier.forge.equals(testConfig.getOutputBomMustContainExternalSystemTypeId())) {
                     externalSystemTypeIdFound = true;
                     break;
                 }
@@ -96,24 +85,29 @@ public class IntegrationTestCommon {
             assertTrue(externalSystemTypeIdFound);
             System.out.printf("Found it\n");
         }
-        if (mode != Mode.DETECT) {
+        if (testConfig.getMode() != TestConfig.Mode.DETECT) {
             assertTrue(outputContainerFileSystemFile.exists());
+        }
+        if ((testConfig.getMinContainerFileSystemFileSize() > 0) || (testConfig.getMaxContainerFileSystemFileSize() > 0)) {
+            final long actualContainerFileSystemFileSize = outputContainerFileSystemFile.length();
+            assertTrue(actualContainerFileSystemFileSize >= testConfig.getMinContainerFileSystemFileSize());
+            assertTrue(actualContainerFileSystemFileSize <= testConfig.getMaxContainerFileSystemFileSize());
         }
     }
 
-    private static List<String> createCmd(final Random random, final ProgramVersion programVersion, final Mode mode, final String detectJarPath, final String inspectTargetArg, final String repo, final String tag,
-            final String codelocationName, final List<String> additionalArgs)
-            throws IOException {
-        if (mode == Mode.DETECT) {
+    private static List<String> createCmd(final Random random, final ProgramVersion programVersion, final TestConfig.Mode mode, final String detectJarPath, final String inspectTargetArg, final String repo, final String tag,
+        final String codelocationName, final List<String> additionalArgs)
+        throws IOException {
+        if (mode == TestConfig.Mode.DETECT) {
             return createDetectCmd(programVersion, mode, detectJarPath, inspectTargetArg, repo, tag, codelocationName, additionalArgs);
         } else {
             return createDockerInspectorCmd(random, programVersion, mode, inspectTargetArg, repo, tag, codelocationName, additionalArgs);
         }
     }
 
-    private static List<String> createDetectCmd(final ProgramVersion programVersion, final Mode mode, final String detectJarPath, final String inspectTargetArg, final String repo, final String tag,
-            final String codelocationName, final List<String> additionalArgs)
-            throws IOException {
+    private static List<String> createDetectCmd(final ProgramVersion programVersion, final TestConfig.Mode mode, final String detectJarPath, final String inspectTargetArg, final String repo, final String tag,
+        final String codelocationName, final List<String> additionalArgs)
+        throws IOException {
         if (StringUtils.isBlank(detectJarPath)) {
             throw new UnsupportedOperationException("Detect jar path must be provided");
         }
@@ -146,8 +140,8 @@ public class IntegrationTestCommon {
         return cmd;
     }
 
-    private static List<String> createDockerInspectorCmd(final Random random, final ProgramVersion programVersion, final Mode mode, final String inspectTargetArg, final String repo, final String tag,
-            final String codelocationName, final List<String> additionalArgs) throws IOException {
+    private static List<String> createDockerInspectorCmd(final Random random, final ProgramVersion programVersion, final TestConfig.Mode mode, final String inspectTargetArg, final String repo, final String tag,
+        final String codelocationName, final List<String> additionalArgs) throws IOException {
         final List<String> cmd = new ArrayList<>();
         if (random.nextBoolean()) {
             cmd.add("build/blackduck-docker-inspector.sh");
@@ -168,18 +162,18 @@ public class IntegrationTestCommon {
             cmd.add(String.format("--docker.image.tag=%s", tag));
         }
         cmd.add("--logging.level.com.synopsys=DEBUG");
-        if (mode == Mode.SPECIFY_II_DETAILS) {
+        if (mode == TestConfig.Mode.SPECIFY_II_DETAILS) {
             // --imageinspector.service.start=true is left to default (true)
             cmd.add(String.format("--imageinspector.service.port.alpine=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE));
             cmd.add(String.format("--imageinspector.service.port.centos=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS));
             cmd.add(String.format("--imageinspector.service.port.ubuntu=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU));
             cmd.add(String.format("--shared.dir.path.local=%s/containerShared", TestUtils.TEST_DIR_REL_PATH));
-        } else if (mode == Mode.NO_SERVICE_START) {
+        } else if (mode == TestConfig.Mode.NO_SERVICE_START) {
             cmd.add("--imageinspector.service.start=false");
             final File workingDir = new File(String.format("%s/endToEnd", TestUtils.TEST_DIR_REL_PATH));
             TestUtils.deleteDirIfExists(workingDir);
             cmd.add(String.format("--working.dir.path=%s", workingDir.getAbsolutePath()));
-        } else if (mode == Mode.DEFAULT) {
+        } else if (mode == TestConfig.Mode.DEFAULT) {
             // Proceed with defaults (mostly)
             cmd.add(String.format("--shared.dir.path.local=%s/containerShared", TestUtils.TEST_DIR_REL_PATH));
         } else {
@@ -192,35 +186,41 @@ public class IntegrationTestCommon {
         return cmd;
     }
 
-    public static void testTar(final Random random, final ProgramVersion programVersion, final String inspectTargetTarfile, final String repo, final String tag,
-            final boolean requireBdioMatch,
-            final Mode mode, final String detectJarPath,
-            final List<String> additionalArgs, final File outputContainerFileSystemFile, final File outputSquashedImageFile, final Map<String, String> givenEnv, final String codelocationName)
-            throws IOException, InterruptedException, IntegrationException {
+    public static void testTar(final Random random, final ProgramVersion programVersion, final String detectJarPath,
+        final TestConfig testConfig)
+        throws IOException, InterruptedException, IntegrationException {
 
-        final String inspectTargetArg = String.format("--docker.tar=%s", inspectTargetTarfile);
-        ensureFileDoesNotExist(outputContainerFileSystemFile);
-        if (outputSquashedImageFile != null) {
-            ensureFileDoesNotExist(outputSquashedImageFile);
+        final File targetTarFile;
+        if (testConfig.getTargetTarInSharedDir() != null) {
+            targetTarFile = testConfig.getTargetTarInSharedDir();
+        } else {
+            targetTarFile = new File(testConfig.getTarFilePath());
+        }
+
+        final String inspectTargetArg = String.format("--docker.tar=%s", targetTarFile);
+        ensureFileDoesNotExist(testConfig.getOutputContainerFileSystemFile());
+        if (testConfig.getOutputSquashedImageFile() != null) {
+            ensureFileDoesNotExist(testConfig.getOutputSquashedImageFile());
         }
 
         final File actualBdio;
-        if (mode == Mode.DETECT) {
-            actualBdio = new File(String.format(String.format("%s/blackduck/bdio/%s_bdio.jsonld", System.getProperty("user.home"), codelocationName)));
+        if (testConfig.getMode() == TestConfig.Mode.DETECT) {
+            actualBdio = new File(String.format(String.format("%s/blackduck/bdio/%s_bdio.jsonld", System.getProperty("user.home"), testConfig.getCodelocationName())));
         } else {
-            actualBdio = new File(String.format(String.format("%s/output/%s_bdio.jsonld", TestUtils.TEST_DIR_REL_PATH, codelocationName)));
+            actualBdio = new File(String.format(String.format("%s/output/%s_bdio.jsonld", TestUtils.TEST_DIR_REL_PATH, testConfig.getCodelocationName())));
         }
         ensureFileDoesNotExist(actualBdio);
 
-        final List<String> cmd = createCmd(random, programVersion, mode, detectJarPath, inspectTargetArg, repo, tag, codelocationName, additionalArgs);
-        System.out.println(String.format("Running end to end test on %s with command %s", inspectTargetTarfile, cmd.toString()));
-        TestUtils.execCmd(String.join(" ", cmd), 240000L, true, givenEnv);
+        final List<String> cmd = createCmd(random, programVersion, testConfig.getMode(), detectJarPath, inspectTargetArg, testConfig.getTargetRepo(), testConfig.getTargetTag(), testConfig.getCodelocationName(),
+            testConfig.getAdditionalArgs());
+        System.out.println(String.format("Running end to end test on %s with command %s", targetTarFile, cmd.toString()));
+        TestUtils.execCmd(String.join(" ", cmd), 240000L, true, testConfig.getEnv());
         System.out.println("blackduck-docker-inspector done; verifying results...");
         System.out.printf("Expecting output BDIO file: %s\n", actualBdio.getAbsolutePath());
         assertTrue(String.format("%s does not exist", actualBdio.getAbsolutePath()), actualBdio.exists());
-        if (requireBdioMatch) {
+        if (testConfig.isRequireBdioMatch()) {
             final File expectedBdio = new File(
-                    String.format(String.format("src/test/resources/bdio/%s_bdio.jsonld", codelocationName)));
+                String.format(String.format("src/test/resources/bdio/%s_bdio.jsonld", testConfig.getCodelocationName())));
             final List<String> exceptLinesContainingThese = new ArrayList<>();
             exceptLinesContainingThese.add("\"@id\":");
             exceptLinesContainingThese.add("spdx:name");
@@ -230,11 +230,16 @@ public class IntegrationTestCommon {
             assertTrue("BDIO produced does not match expected BDIO", outputBdioMatches);
         }
 
-        if (mode != Mode.DETECT) {
-            assertTrue(String.format("%s does not exist", outputContainerFileSystemFile.getAbsolutePath()), outputContainerFileSystemFile.exists());
+        if (testConfig.getMode() != TestConfig.Mode.DETECT) {
+            assertTrue(String.format("%s does not exist", testConfig.getOutputContainerFileSystemFile().getAbsolutePath()), testConfig.getOutputContainerFileSystemFile().exists());
         }
-        if (outputSquashedImageFile != null) {
-            assertTrue(String.format("%s does not exist", outputSquashedImageFile.getAbsolutePath()), outputSquashedImageFile.exists());
+        if (testConfig.getOutputSquashedImageFile() != null) {
+            assertTrue(String.format("%s does not exist", testConfig.getOutputSquashedImageFile().getAbsolutePath()), testConfig.getOutputSquashedImageFile().exists());
+        }
+        if ((testConfig.getMinContainerFileSystemFileSize() > 0) || (testConfig.getMaxContainerFileSystemFileSize() > 0)) {
+            final long actualContainerFileSystemFileSize = testConfig.getOutputContainerFileSystemFile().length();
+            assertTrue(actualContainerFileSystemFileSize >= testConfig.getMinContainerFileSystemFileSize());
+            assertTrue(actualContainerFileSystemFileSize <= testConfig.getMaxContainerFileSystemFileSize());
         }
     }
 

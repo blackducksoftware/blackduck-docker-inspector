@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.synopsys.integration.blackduck.dockerinspector.IntegrationTestCommon.Mode;
 import com.synopsys.integration.exception.IntegrationException;
 
 import io.fabric8.kubernetes.client.DefaultKubernetesClient;
@@ -79,96 +78,244 @@ public class InMinikubeTest {
 
     @Test
     public void testUbuntuStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "ubuntu:17.04", "ubuntu", "17.04",  false, Mode.DEFAULT, null, "dpkg", null, 10, additionalArgsWithServiceUrl, minikubeDockerEnv, "ubuntu_17.04_DPKG");
+        final TestConfig testConfig = (new TestConfigBuilder())
+            .setInspectTargetImageRepoTag("ubuntu:17.04")
+            .setTargetRepo("ubuntu")
+            .setTargetTag("17.04")
+            .setRequireBdioMatch(false)
+            .setMode(TestConfig.Mode.DEFAULT)
+            .setOutputBomMustContainComponentPrefix("dpkg")
+            .setMinNumberOfComponentsExpected(10)
+            .setAdditionalArgs(additionalArgsWithServiceUrl)
+            .setEnv(minikubeDockerEnv)
+            .setCodelocationName("ubuntu_17.04_DPKG")
+                                          .build();
+        IntegrationTestCommon.testImage(random, programVersion, null, testConfig);
     }
 
     @Test
     public void testAlpineStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "alpine:3.6", "alpine", "3.6", false, Mode.DEFAULT, null, "apk-", null, 5, additionalArgsWithServiceUrl, minikubeDockerEnv, "alpine_3.6_APK");
+        final TestConfig testConfig = (new TestConfigBuilder())
+                                          .setInspectTargetImageRepoTag("alpine:3.6")
+                                          .setTargetRepo("alpine")
+                                          .setTargetTag("3.6")
+                                          .setRequireBdioMatch(false)
+                                          .setMode(TestConfig.Mode.DEFAULT)
+                                          .setOutputBomMustContainComponentPrefix("apk-")
+                                          .setMinNumberOfComponentsExpected(5)
+                                          .setAdditionalArgs(additionalArgsWithServiceUrl)
+                                          .setEnv(minikubeDockerEnv)
+                                          .setCodelocationName("alpine_3.6_APK")
+                                          .build();
+        IntegrationTestCommon.testImage(random, programVersion, null, testConfig);
     }
 
     @Test
     public void testBusyboxStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "busybox:latest", "busybox", "latest",  false, Mode.DEFAULT, null, null, null, 0, additionalArgsWithServiceUrl, minikubeDockerEnv, "busybox_latest_noPkgMgr");
+        final TestConfig testConfig = (new TestConfigBuilder())
+                                          .setInspectTargetImageRepoTag("busybox:latest")
+                                          .setTargetRepo("busybox")
+                                          .setTargetTag("latest")
+                                          .setRequireBdioMatch(false)
+                                          .setMode(TestConfig.Mode.DEFAULT)
+                                          .setOutputBomMustContainComponentPrefix(null)
+                                          .setMinNumberOfComponentsExpected(0)
+                                          .setAdditionalArgs(additionalArgsWithServiceUrl)
+                                          .setEnv(minikubeDockerEnv)
+                                          .setCodelocationName("busybox_latest_noPkgMgr")
+                                          .build();
+        IntegrationTestCommon.testImage(random, programVersion, null, testConfig);
     }
 
     @Test
     public void testAlpineLatestStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "alpine", "alpine", "latest", false, Mode.DEFAULT, null, "apk-", null, 5, additionalArgsWithServiceUrl, minikubeDockerEnv, "alpine_latest_APK");
+        final TestConfig testConfig = (new TestConfigBuilder())
+                                          .setInspectTargetImageRepoTag("alpine")
+                                          .setTargetRepo("alpine")
+                                          .setTargetTag("latest")
+                                          .setRequireBdioMatch(false)
+                                          .setMode(TestConfig.Mode.DEFAULT)
+                                          .setOutputBomMustContainComponentPrefix("apk-")
+                                          .setMinNumberOfComponentsExpected(5)
+                                          .setAdditionalArgs(additionalArgsWithServiceUrl)
+                                          .setEnv(minikubeDockerEnv)
+                                          .setCodelocationName("alpine_latest_APK")
+                                          .build();
+        IntegrationTestCommon.testImage(random, programVersion, null, testConfig);
     }
 
     @Test
     public void testCentosStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "centos:7.3.1611", "centos", "7.3.1611", false, Mode.DEFAULT, null, "rpm", null, 15, additionalArgsWithServiceUrl, minikubeDockerEnv, "centos_7.3.1611_RPM");
+        final TestConfig testConfig = (new TestConfigBuilder())
+                                          .setInspectTargetImageRepoTag("centos:7.3.1611")
+                                          .setTargetRepo("centos")
+                                          .setTargetTag("7.3.1611")
+                                          .setRequireBdioMatch(false)
+                                          .setMode(TestConfig.Mode.DEFAULT)
+                                          .setOutputBomMustContainComponentPrefix("rpm")
+                                          .setMinNumberOfComponentsExpected(15)
+                                          .setAdditionalArgs(additionalArgsWithServiceUrl)
+                                          .setEnv(minikubeDockerEnv)
+                                          .setCodelocationName("centos_7.3.1611_RPM")
+                                          .build();
+        IntegrationTestCommon.testImage(random, programVersion, null, testConfig);
     }
 
     @Test
     public void testBlackDuckWebappStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "blackducksoftware/hub-webapp:4.0.0", "blackducksoftware_hub-webapp", "4.0.0", true, Mode.DEFAULT, null, "apk-", null, 5,
-                additionalArgsWithServiceUrl, minikubeDockerEnv, "blackducksoftware_hub-webapp_4.0.0_APK");
+        final TestConfig testConfig = (new TestConfigBuilder())
+                                          .setInspectTargetImageRepoTag("blackducksoftware/hub-webapp:4.0.0")
+                                          .setTargetRepo("blackducksoftware_hub-webapp")
+                                          .setTargetTag("4.0.0")
+                                          .setRequireBdioMatch(true)
+                                          .setMode(TestConfig.Mode.DEFAULT)
+                                          .setOutputBomMustContainComponentPrefix("apk-")
+                                          .setMinNumberOfComponentsExpected(5)
+                                          .setAdditionalArgs(additionalArgsWithServiceUrl)
+                                          .setEnv(minikubeDockerEnv)
+                                          .setCodelocationName("blackducksoftware_hub-webapp_4.0.0_APK")
+                                          .build();
+        IntegrationTestCommon.testImage(random, programVersion, null, testConfig);
     }
 
     @Test
     public void testBlackDuckZookeeperStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "blackducksoftware/hub-zookeeper:4.0.0", "blackducksoftware_hub-zookeeper", "4.0.0", true, Mode.DEFAULT, null, "apk-", null, 5,
-                additionalArgsWithServiceUrl, minikubeDockerEnv, "blackducksoftware_hub-zookeeper_4.0.0_APK");
+        final TestConfig testConfig = (new TestConfigBuilder())
+                                          .setInspectTargetImageRepoTag("blackducksoftware/hub-zookeeper:4.0.0")
+                                          .setTargetRepo("blackducksoftware_hub-zookeeper")
+                                          .setTargetTag("4.0.0")
+                                          .setRequireBdioMatch(true)
+                                          .setMode(TestConfig.Mode.DEFAULT)
+                                          .setOutputBomMustContainComponentPrefix("apk-")
+                                          .setMinNumberOfComponentsExpected(5)
+                                          .setAdditionalArgs(additionalArgsWithServiceUrl)
+                                          .setEnv(minikubeDockerEnv)
+                                          .setCodelocationName("blackducksoftware_hub-zookeeper_4.0.0_APK")
+                                          .build();
+        IntegrationTestCommon.testImage(random, programVersion, null, testConfig);
     }
 
     @Test
     public void testTomcatStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "tomcat:6.0.53-jre7", "tomcat", "6.0.53-jre7", false, Mode.DEFAULT, null, "dpkg", null, 5, additionalArgsWithServiceUrl, minikubeDockerEnv, "tomcat_6.0.53-jre7_DPKG");
+        final TestConfig testConfig = (new TestConfigBuilder())
+                                          .setInspectTargetImageRepoTag("tomcat:6.0.53-jre7")
+                                          .setTargetRepo("tomcat")
+                                          .setTargetTag("6.0.53-jre7")
+                                          .setRequireBdioMatch(false)
+                                          .setMode(TestConfig.Mode.DEFAULT)
+                                          .setOutputBomMustContainComponentPrefix("dpkg")
+                                          .setMinNumberOfComponentsExpected(5)
+                                          .setAdditionalArgs(additionalArgsWithServiceUrl)
+                                          .setEnv(minikubeDockerEnv)
+                                          .setCodelocationName("tomcat_6.0.53-jre7_DPKG")
+                                          .build();
+        IntegrationTestCommon.testImage(random, programVersion, null, testConfig);
     }
 
     @Test
     public void testRhelStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "dnplus/rhel:6.5", "dnplus_rhel", "6.5", false, Mode.DEFAULT, null, "rpm", null, 10, additionalArgsWithServiceUrl, minikubeDockerEnv, "dnplus_rhel_6.5_RPM");
+        final TestConfig testConfig = (new TestConfigBuilder())
+                                          .setInspectTargetImageRepoTag("dnplus/rhel:6.5")
+                                          .setTargetRepo("dnplus_rhel")
+                                          .setTargetTag("6.5")
+                                          .setRequireBdioMatch(false)
+                                          .setMode(TestConfig.Mode.DEFAULT)
+                                          .setOutputBomMustContainComponentPrefix("rpm")
+                                          .setMinNumberOfComponentsExpected(10)
+                                          .setAdditionalArgs(additionalArgsWithServiceUrl)
+                                          .setEnv(minikubeDockerEnv)
+                                          .setCodelocationName("dnplus_rhel_6.5_RPM")
+                                          .build();
+        IntegrationTestCommon.testImage(random, programVersion, null, testConfig);
     }
 
     @Test
     public void testWhiteoutStartContainer() throws IOException, InterruptedException, IntegrationException {
-        final String repo = "blackducksoftware/whiteouttest";
-        final String tag = "1.0";
         final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("whiteouttest.tar");
-        IntegrationTestCommon.testTar(random, programVersion, "build/images/test/whiteouttest.tar", repo, tag, true, Mode.DEFAULT, null, additionalArgsWithServiceUrl,
-                outputContainerFileSystemFile, null,
-                minikubeDockerEnv, "blackducksoftware_whiteouttest_1.0_DPKG");
+        final TestConfig testConfig = (new TestConfigBuilder())
+                                          .setTarFilePath("build/images/test/whiteouttest.tar")
+                                          .setTargetRepo("blackducksoftware/whiteouttest")
+                                          .setTargetTag("1.0")
+                                          .setRequireBdioMatch(true)
+                                          .setMode(TestConfig.Mode.DEFAULT)
+                                          .setAdditionalArgs(additionalArgsWithServiceUrl)
+                                          .setEnv(minikubeDockerEnv)
+                                          .setCodelocationName("blackducksoftware_whiteouttest_1.0_DPKG")
+                                          .setOutputContainerFileSystemFile(outputContainerFileSystemFile)
+                                          .build();
+
+        IntegrationTestCommon.testTar(random, programVersion, null, testConfig);
     }
 
     @Test
     public void testAggregateTarfileImageOneStartContainer() throws IOException, InterruptedException, IntegrationException {
-        final String repo = "blackducksoftware/whiteouttest";
-        final String tag = "1.0";
         final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("aggregated.tar");
-        IntegrationTestCommon.testTar(random, programVersion, "build/images/test/aggregated.tar", repo, tag, true, Mode.SPECIFY_II_DETAILS, null, additionalArgsWithServiceUrl,
-                outputContainerFileSystemFile, null,
-                minikubeDockerEnv, "blackducksoftware_whiteouttest_1.0_DPKG");
+        final TestConfig testConfig = (new TestConfigBuilder())
+                                          .setTarFilePath("build/images/test/aggregated.tar")
+                                          .setTargetRepo("blackducksoftware/whiteouttest")
+                                          .setTargetTag("1.0")
+                                          .setRequireBdioMatch(true)
+                                          .setMode(TestConfig.Mode.SPECIFY_II_DETAILS)
+                                          .setAdditionalArgs(additionalArgsWithServiceUrl)
+                                          .setEnv(minikubeDockerEnv)
+                                          .setCodelocationName("blackducksoftware_whiteouttest_1.0_DPKG")
+                                          .setOutputContainerFileSystemFile(outputContainerFileSystemFile)
+                                          .build();
+
+        IntegrationTestCommon.testTar(random, programVersion, null, testConfig);
     }
 
     @Test
     public void testAggregateTarfileImageTwoStartContainer() throws IOException, InterruptedException, IntegrationException {
-        final String repo = "blackducksoftware/centos_minus_vim_plus_bacula";
-        final String tag = "1.0";
         final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("aggregated.tar");
-        IntegrationTestCommon.testTar(random, programVersion, "build/images/test/aggregated.tar", repo, tag, true, Mode.DEFAULT, null, additionalArgsWithServiceUrl,
-                outputContainerFileSystemFile, null,
-                minikubeDockerEnv, "blackducksoftware_centos_minus_vim_plus_bacula_1.0_RPM");
+        final TestConfig testConfig = (new TestConfigBuilder())
+                                          .setTarFilePath("build/images/test/aggregated.tar")
+                                          .setTargetRepo("blackducksoftware/centos_minus_vim_plus_bacula")
+                                          .setTargetTag("1.0")
+                                          .setRequireBdioMatch(true)
+                                          .setMode(TestConfig.Mode.DEFAULT)
+                                          .setAdditionalArgs(additionalArgsWithServiceUrl)
+                                          .setEnv(minikubeDockerEnv)
+                                          .setCodelocationName("blackducksoftware_centos_minus_vim_plus_bacula_1.0_RPM")
+                                          .setOutputContainerFileSystemFile(outputContainerFileSystemFile)
+                                          .build();
+
+        IntegrationTestCommon.testTar(random, programVersion, null, testConfig);
     }
 
     @Test
     public void testAlpineLatestTarRepoTagSpecifiedStartContainer() throws IOException, InterruptedException, IntegrationException {
-        final String repo = "alpine";
-        final String tag = "latest";
         final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("alpine.tar");
-        IntegrationTestCommon.testTar(random, programVersion, "build/images/test/alpine.tar", repo, tag, false, Mode.SPECIFY_II_DETAILS, null, additionalArgsWithServiceUrl, outputContainerFileSystemFile, null,
-                minikubeDockerEnv, "alpine_latest_APK");
+        final TestConfig testConfig = (new TestConfigBuilder())
+                                          .setTarFilePath("build/images/test/alpine.tar")
+                                          .setTargetRepo("alpine")
+                                          .setTargetTag("latest")
+                                          .setRequireBdioMatch(false)
+                                          .setMode(TestConfig.Mode.SPECIFY_II_DETAILS)
+                                          .setAdditionalArgs(additionalArgsWithServiceUrl)
+                                          .setEnv(minikubeDockerEnv)
+                                          .setCodelocationName("alpine_latest_APK")
+                                          .setOutputContainerFileSystemFile(outputContainerFileSystemFile)
+                                          .build();
+
+        IntegrationTestCommon.testTar(random, programVersion, null, testConfig);
     }
 
     @Test
     public void testAlpineLatestTarRepoTagNotSpecifiedStartContainer() throws IOException, InterruptedException, IntegrationException {
-        final String repo = "alpine";
-        final String tag = "latest";
         final File outputContainerFileSystemFile = IntegrationTestCommon.getOutputContainerFileSystemFileFromTarFilename("alpine.tar");
-        IntegrationTestCommon.testTar(random, programVersion, "build/images/test/alpine.tar", repo, tag, false, Mode.DEFAULT, null, additionalArgsWithServiceUrl, outputContainerFileSystemFile, null,
-                minikubeDockerEnv, "alpine_latest_APK");
+        final TestConfig testConfig = (new TestConfigBuilder())
+                                          .setTarFilePath("build/images/test/alpine.tar")
+                                          .setTargetRepo("alpine")
+                                          .setTargetTag("latest")
+                                          .setRequireBdioMatch(false)
+                                          .setMode(TestConfig.Mode.DEFAULT)
+                                          .setAdditionalArgs(additionalArgsWithServiceUrl)
+                                          .setEnv(minikubeDockerEnv)
+                                          .setCodelocationName("alpine_latest_APK")
+                                          .setOutputContainerFileSystemFile(outputContainerFileSystemFile)
+                                          .build();
+
+        IntegrationTestCommon.testTar(random, programVersion, null, testConfig);
     }
 }

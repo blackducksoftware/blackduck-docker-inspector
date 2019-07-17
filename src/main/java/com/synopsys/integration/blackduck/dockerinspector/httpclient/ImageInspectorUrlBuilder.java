@@ -40,6 +40,7 @@ public class ImageInspectorUrlBuilder {
     private static final String INCLUDE_REMOVED_COMPONENTS_QUERY_PARAM = "includeremovedcomponents";
     private static final String CLEANUP_QUERY_PARAM = "cleanup";
     private static final String RESULTING_CONTAINER_FS_PATH_QUERY_PARAM = "resultingcontainerfspath";
+    private static final String CONTAINER_FILESYSTEM_EXCLUDED_PATHS_PARAM = "resultingcontainerfsexcludedpaths";
     private static final String IMAGE_REPO_QUERY_PARAM = "imagerepo";
     private static final String IMAGE_TAG_QUERY_PARAM = "imagetag";
     private static final String TARFILE_QUERY_PARAM = "tarfile";
@@ -52,6 +53,7 @@ public class ImageInspectorUrlBuilder {
     private String givenImageTag = null;
     private String platformTopLayerId = null;
     private String containerPathToContainerFileSystemFile = null;
+    private String containerFileSystemExcludedPaths = null;
     private boolean organizeComponentsByLayer = false;
     private boolean includeRemovedComponents = false;
     private boolean cleanup = true;
@@ -83,6 +85,11 @@ public class ImageInspectorUrlBuilder {
 
     public ImageInspectorUrlBuilder containerPathToContainerFileSystemFile(final String containerPathToContainerFileSystemFile) {
         this.containerPathToContainerFileSystemFile = containerPathToContainerFileSystemFile;
+        return this;
+    }
+
+    public ImageInspectorUrlBuilder containerFileSystemExcludedPaths(final String containerFileSystemExcludedPaths) {
+        this.containerFileSystemExcludedPaths = containerFileSystemExcludedPaths;
         return this;
     }
 
@@ -120,6 +127,9 @@ public class ImageInspectorUrlBuilder {
         urlSb.append(String.format("&%s=%b", CLEANUP_QUERY_PARAM, cleanup));
         if (StringUtils.isNotBlank(containerPathToContainerFileSystemFile)) {
             urlSb.append(String.format("&%s=%s", RESULTING_CONTAINER_FS_PATH_QUERY_PARAM, urlEncode(containerPathToContainerFileSystemFile)));
+        }
+        if (StringUtils.isNotBlank(containerFileSystemExcludedPaths)) {
+            urlSb.append(String.format("&%s=%s", CONTAINER_FILESYSTEM_EXCLUDED_PATHS_PARAM, urlEncode(containerFileSystemExcludedPaths)));
         }
         if (StringUtils.isNotBlank(givenImageRepo)) {
             urlSb.append(String.format("&%s=%s", IMAGE_REPO_QUERY_PARAM, givenImageRepo));

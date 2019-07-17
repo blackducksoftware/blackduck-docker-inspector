@@ -104,7 +104,8 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
     }
 
     @Override
-    public String getBdio(final String hostPathToTarfile, final String containerPathToInputDockerTarfile, final String givenImageRepo, final String givenImageTag, final String containerPathToOutputFileSystemFile,
+    public String getBdio(final String hostPathToTarfile, final String containerPathToInputDockerTarfile, final String givenImageRepo, final String givenImageTag,
+        final String containerPathToOutputFileSystemFile, final String containerFileSystemExcludedPaths,
         final boolean organizeComponentsByLayer, final boolean includeRemovedComponents, final boolean cleanup,
         final String platformTopLayerId)
         throws IntegrationException {
@@ -114,7 +115,11 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         final ImageInspectorOsEnum inspectorOs = ImageInspectorOsEnum.determineOperatingSystem(config.getImageInspectorDefaultDistro());
         final URI imageInspectorBaseUri = deriveInspectorBaseUri(imageInspectorServices.getDefaultImageInspectorHostPortBasedOnDistro());
         final Predicate<Integer> initialRequestFailureCriteria = statusCode -> statusCode != RestConstants.OK_200 && statusCode != RestConstants.MOVED_TEMP_302 && statusCode != RestConstants.MOVED_PERM_301;
-        final SimpleResponse response = getResponseFromService(imageInspectorBaseUri, inspectorOs, containerPathToInputDockerTarfile, givenImageRepo, givenImageTag, containerPathToOutputFileSystemFile, organizeComponentsByLayer,
+        final SimpleResponse response = getResponseFromService(imageInspectorBaseUri, inspectorOs,
+            containerPathToInputDockerTarfile,
+            givenImageRepo, givenImageTag,
+            containerPathToOutputFileSystemFile, containerFileSystemExcludedPaths,
+            organizeComponentsByLayer,
             includeRemovedComponents, cleanup, platformTopLayerId,
             initialRequestFailureCriteria);
         if (response.getStatusCode() == RestConstants.OK_200) {
@@ -131,17 +136,20 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         final ImageInspectorOsEnum correctedInspectorOs = ImageInspectorOsEnum.determineOperatingSystem(correctImageInspectorOsName);
         final URI correctedImageInspectorBaseUri = deriveInspectorBaseUri(imageInspectorServices.getImageInspectorHostPort(correctedInspectorOs));
         final Predicate<Integer> correctedRequestFailureCriteria = statusCode -> statusCode != RestConstants.OK_200;
-        final SimpleResponse responseFromCorrectedContainer = getResponseFromService(correctedImageInspectorBaseUri, correctedInspectorOs, containerPathToInputDockerTarfile, givenImageRepo, givenImageTag,
-            containerPathToOutputFileSystemFile,
+        final SimpleResponse responseFromCorrectedContainer = getResponseFromService(correctedImageInspectorBaseUri, correctedInspectorOs, containerPathToInputDockerTarfile,
+            givenImageRepo, givenImageTag,
+            containerPathToOutputFileSystemFile, containerFileSystemExcludedPaths,
             organizeComponentsByLayer, includeRemovedComponents,
             cleanup, platformTopLayerId,
             correctedRequestFailureCriteria);
         return responseFromCorrectedContainer.getBody();
     }
 
-    private SimpleResponse getResponseFromService(final URI imageInspectorUri, final ImageInspectorOsEnum inspectorOs, final String containerPathToInputDockerTarfile,
+    private SimpleResponse getResponseFromService(final URI imageInspectorUri, final ImageInspectorOsEnum inspectorOs,
+        final String containerPathToInputDockerTarfile,
         final String givenImageRepo, final String givenImageTag,
-        final String containerPathToOutputFileSystemFile, final boolean organizeComponentsByLayer, final boolean includeRemovedComponents, final boolean cleanup, final String platformTopLayerId, final Predicate<Integer> failureTest)
+        final String containerPathToOutputFileSystemFile, final String containerFileSystemExcludedPaths,
+        final boolean organizeComponentsByLayer, final boolean includeRemovedComponents, final boolean cleanup, final String platformTopLayerId, final Predicate<Integer> failureTest)
         throws IntegrationException {
         SimpleResponse response = null;
         ContainerDetails serviceContainerDetails = null;
@@ -152,7 +160,9 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
             try {
                 logger.info(String.format("Sending getBdio request to: %s (%s)", imageInspectorUri.toString(), inspectorOs.name()));
                 response = httpRequestor.executeGetBdioRequest(restConnection, imageInspectorUri, containerPathToInputDockerTarfile,
-                    givenImageRepo, givenImageTag, containerPathToOutputFileSystemFile, organizeComponentsByLayer, includeRemovedComponents, cleanup,
+                    givenImageRepo, givenImageTag,
+                    containerPathToOutputFileSystemFile, containerFileSystemExcludedPaths,
+                    organizeComponentsByLayer, includeRemovedComponents, cleanup,
                     platformTopLayerId);
                 logServiceLogIfDebug(serviceContainerDetails.getContainerId());
             } catch (final IntegrationException e) {

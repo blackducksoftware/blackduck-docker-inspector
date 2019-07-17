@@ -152,6 +152,11 @@ public class Config {
     @Value("${output.include.squashedimage:false}")
     private Boolean outputIncludeSquashedImage = Boolean.FALSE;
 
+    // If you want dirs/files/links omitted from the container filesystem, specify the list of absolute paths here (e.g. /etc)
+    @ValueDescription(description = "Comma-separated list of directories/files/links (specified as absolute paths) to exclude from the container filesystem", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${output.containerfilesystem.excluded.paths:}")
+    private String containerFileSystemExcludedPaths = "";
+
     // If you want to add a prefix to the code location name, specify it here
     @ValueDescription(description = "Black Duck CodeLocation prefix", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${blackduck.codelocation.prefix:}")
@@ -455,6 +460,10 @@ public class Config {
         return optionsByFieldName.get("blackDuckCodelocationPrefix").getResolvedValue();
     }
 
+    public String getContainerFileSystemExcludedPaths() {
+        return optionsByFieldName.get("containerFileSystemExcludedPaths").getResolvedValue();
+    }
+
     public String getBlackDuckCodelocationName() {
         return optionsByFieldName.get("blackDuckCodelocationName").getResolvedValue();
     }
@@ -649,6 +658,7 @@ public class Config {
         this.loggingLevel = null;
         this.outputIncludeContainerfilesystem = null;
         this.outputIncludeSquashedImage = null;
+        this.containerFileSystemExcludedPaths = null;
         this.outputPath = null;
         this.phoneHome = null;
         this.scanCliOptsEnvVar = null;

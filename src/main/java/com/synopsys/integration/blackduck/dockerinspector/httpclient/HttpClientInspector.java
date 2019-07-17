@@ -85,7 +85,8 @@ public class HttpClientInspector {
             if (config.isOutputIncludeContainerfilesystem() || config.isOutputIncludeSquashedImage()) {
                 containerFileSystemPathInContainer = containerPaths.getContainerPathToOutputFile(containerFileSystemFilename);
             }
-            final String bdioString = imageInspectorClient.getBdio(finalDockerTarfile.getCanonicalPath(), dockerTarFilePathInContainer, config.getDockerImageRepo(), config.getDockerImageTag(), containerFileSystemPathInContainer,
+            final String bdioString = imageInspectorClient.getBdio(finalDockerTarfile.getCanonicalPath(), dockerTarFilePathInContainer, config.getDockerImageRepo(), config.getDockerImageTag(),
+                containerFileSystemPathInContainer, config.getContainerFileSystemExcludedPaths(),
                 config.isOrganizeComponentsByLayer(), config.isIncludeRemovedComponents(),
                 config.isCleanupWorkingDir(), config.getDockerPlatformTopLayerId());
             logger.debug(String.format("bdioString: %s", bdioString));
