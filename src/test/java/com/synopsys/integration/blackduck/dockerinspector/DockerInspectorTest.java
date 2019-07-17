@@ -2,7 +2,7 @@ package com.synopsys.integration.blackduck.dockerinspector;
 
 import static org.junit.Assert.assertTrue;
 
-import com.sun.xml.internal.bind.v2.TODO;
+
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import java.io.File;
 import java.io.IOException;
@@ -20,7 +20,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import com.synopsys.integration.blackduck.dockerinspector.IntegrationTestCommon.Mode;
 import com.synopsys.integration.exception.IntegrationException;
 
 @Tag("integration")
@@ -137,69 +136,164 @@ public class DockerInspectorTest {
     }
 
 
-    // TODO NEED TESTS THAT EXCLUDE PATHS, BOTH START CONTAINER AND EXISTING, BOTH WITH REDIRECTS
+    //TODO NEED TESTS THAT EXCLUDE PATHS, BOTH START CONTAINER AND EXISTING, BOTH WITH REDIRECTS
+    //TODO: Use TestConfig for all tests
 
     @Test
     public void testUbuntuStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "ubuntu:17.04", "ubuntu", "17.04", false, Mode.DEFAULT, null, "dpkg", null, 10, null, null, "ubuntu_17.04_DPKG");
+        final TestConfig testConfig = (new TestConfigBuilder())
+                                          .setInspectTargetImageRepoTag("ubuntu:17.04")
+                                          .setTargetRepo("ubuntu")
+                                          .setTargetTag("17.04")
+                                          .setRequireBdioMatch(false)
+                                          .setMode(TestConfig.Mode.DEFAULT)
+                                          .setOutputBomMustContainComponentPrefix("dpkg")
+                                          .setMinNumberOfComponentsExpected(10)
+                                          .setCodelocationName("ubuntu_17.04_DPKG")
+                                          .build();
+        IntegrationTestCommon.testImage(random, programVersion, null, testConfig);
     }
 
     @Test
     public void testAlpineStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "alpine:3.6", "alpine", "3.6", false, Mode.SPECIFY_II_DETAILS, null, "apk-", null, 5, null, null, "alpine_3.6_APK");
+        final TestConfig testConfig = (new TestConfigBuilder())
+                                          .setInspectTargetImageRepoTag("alpine:3.6")
+                                          .setTargetRepo("alpine")
+                                          .setTargetTag("3.6")
+                                          .setRequireBdioMatch(false)
+                                          .setMode(TestConfig.Mode.SPECIFY_II_DETAILS)
+                                          .setOutputBomMustContainComponentPrefix("apk-")
+                                          .setMinNumberOfComponentsExpected(5)
+                                          .setCodelocationName("alpine_3.6_APK")
+                                          .build();
+        IntegrationTestCommon.testImage(random, programVersion, null, testConfig);
     }
 
     @Test
     public void testCentosStartContainer() throws IOException, InterruptedException, IntegrationException {
-        IntegrationTestCommon.testImage(random, programVersion, "centos:7.3.1611", "centos", "7.3.1611", false, Mode.SPECIFY_II_DETAILS, null, "openssl-libs", null, 15, null, null, "centos_7.3.1611_RPM");
+        final TestConfig testConfig = (new TestConfigBuilder())
+                                          .setInspectTargetImageRepoTag("centos:7.3.1611")
+                                          .setTargetRepo("centos")
+                                          .setTargetTag("7.3.1611")
+                                          .setRequireBdioMatch(false)
+                                          .setMode(TestConfig.Mode.SPECIFY_II_DETAILS)
+                                          .setOutputBomMustContainComponentPrefix("openssl-libs")
+                                          .setMinNumberOfComponentsExpected(15)
+                                          .setCodelocationName("centos_7.3.1611_RPM")
+                                          .build();
+        IntegrationTestCommon.testImage(random, programVersion, null, testConfig);
     }
 
     @Test
     public void testBusybox() throws IOException, InterruptedException, IntegrationException {
-        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE;
-        testImageUsingExistingContainer("busybox:latest", portOnHost, true, 0, null, null, "busybox_latest_noPkgMgr");
+        final TestConfig testConfig = (new TestConfigBuilder())
+            .setInspectTargetImageRepoTag("busybox:latest")
+            .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
+            .setRequireBdioMatch(true)
+            .setMinNumberOfComponentsExpected(0)
+            .setCodelocationName("busybox_latest_noPkgMgr")
+                                          .build();
+
+        testImageUsingExistingContainer(testConfig);
     }
 
     @Test
     public void testAlpineLatest() throws IOException, InterruptedException, IntegrationException {
-        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE;
-        testImageUsingExistingContainer("alpine", portOnHost, false, 5, "apk-", null, "alpine_latest_APK");
+        final TestConfig testConfig = (new TestConfigBuilder())
+                                          .setInspectTargetImageRepoTag("alpine")
+                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
+                                          .setRequireBdioMatch(false)
+                                          .setMinNumberOfComponentsExpected(5)
+                                          .setOutputBomMustContainComponentPrefix("apk-")
+                                          .setCodelocationName("alpine_latest_APK")
+                                          .build();
+
+        testImageUsingExistingContainer(testConfig);
     }
 
     @Test
     public void testBlackDuckWebapp() throws IOException, InterruptedException, IntegrationException {
-        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE;
-        testImageUsingExistingContainer("blackducksoftware/hub-webapp:4.0.0", portOnHost, true, 0, null, null, "blackducksoftware_hub-webapp_4.0.0_APK");
+        final TestConfig testConfig = (new TestConfigBuilder())
+                                          .setInspectTargetImageRepoTag("blackducksoftware/hub-webapp:4.0.0")
+                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
+                                          .setRequireBdioMatch(true)
+                                          .setMinNumberOfComponentsExpected(0)
+                                          .setOutputBomMustContainComponentPrefix(null)
+                                          .setCodelocationName("blackducksoftware_hub-webapp_4.0.0_APK")
+                                          .build();
+
+        testImageUsingExistingContainer(testConfig);
     }
 
     @Test
     public void testBlackDuckZookeeper() throws IOException, InterruptedException, IntegrationException {
-            final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE;
-            testImageUsingExistingContainer("blackducksoftware/hub-zookeeper:4.0.0", portOnHost, true, 0, null, null, "blackducksoftware_hub-zookeeper_4.0.0_APK");
+        final TestConfig testConfig = (new TestConfigBuilder())
+                                          .setInspectTargetImageRepoTag("blackducksoftware/hub-zookeeper:4.0.0")
+                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
+                                          .setRequireBdioMatch(true)
+                                          .setMinNumberOfComponentsExpected(0)
+                                          .setOutputBomMustContainComponentPrefix(null)
+                                          .setCodelocationName("blackducksoftware_hub-zookeeper_4.0.0_APK")
+                                          .build();
+
+            testImageUsingExistingContainer(testConfig);
     }
 
     @Test
     public void testTomcat() throws IOException, InterruptedException, IntegrationException {
-        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU;
-        testImageUsingExistingContainer("tomcat:6.0.53-jre7", portOnHost, false, 5, "dpkg", null, "tomcat_6.0.53-jre7_DPKG");
+        final TestConfig testConfig = (new TestConfigBuilder())
+                                          .setInspectTargetImageRepoTag("tomcat:6.0.53-jre7")
+                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU)
+                                          .setRequireBdioMatch(false)
+                                          .setMinNumberOfComponentsExpected(5)
+                                          .setOutputBomMustContainComponentPrefix("dpkg")
+                                          .setCodelocationName("tomcat_6.0.53-jre7_DPKG")
+                                          .build();
+
+        testImageUsingExistingContainer(testConfig);
     }
 
     @Test
     public void testRhel() throws IOException, InterruptedException, IntegrationException {
-        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS;
-        testImageUsingExistingContainer("dnplus/rhel:6.5", portOnHost, false, 10, "rpm", null, "dnplus_rhel_6.5_RPM");
+        final TestConfig testConfig = (new TestConfigBuilder())
+                                          .setInspectTargetImageRepoTag("dnplus/rhel:6.5")
+                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
+                                          .setRequireBdioMatch(false)
+                                          .setMinNumberOfComponentsExpected(10)
+                                          .setOutputBomMustContainComponentPrefix("rpm")
+                                          .setCodelocationName("dnplus_rhel_6.5_RPM")
+                                          .build();
+
+        testImageUsingExistingContainer(testConfig);
     }
 
     @Test
     public void testFedora() throws IOException, InterruptedException, IntegrationException {
-        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS;
-        testImageUsingExistingContainer("fedora:latest", portOnHost, false, 10, "fedora-", "@fedora", "fedora_latest_RPM");
+        final TestConfig testConfig = (new TestConfigBuilder())
+                                          .setInspectTargetImageRepoTag("fedora:latest")
+                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
+                                          .setRequireBdioMatch(false)
+                                          .setMinNumberOfComponentsExpected(10)
+                                          .setOutputBomMustContainComponentPrefix("fedora-")
+                                          .setOutputBomMustContainExternalSystemTypeId("@fedora")
+                                          .setCodelocationName("fedora_latest_RPM")
+                                          .build();
+
+        testImageUsingExistingContainer(testConfig);
     }
 
     @Test
     public void testOpenSuseForge() throws IOException, InterruptedException, IntegrationException {
-        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS;
-        testImageUsingExistingContainer("opensuse/portus:2.4", portOnHost, false, 10, null, "@opensuse", "opensuse_portus_opensuse_2.4_RPM");
+        final TestConfig testConfig = (new TestConfigBuilder())
+                                          .setInspectTargetImageRepoTag("opensuse/portus:2.4")
+                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
+                                          .setRequireBdioMatch(false)
+                                          .setMinNumberOfComponentsExpected(10)
+                                          .setOutputBomMustContainExternalSystemTypeId("@opensuse")
+                                          .setCodelocationName("opensuse_portus_opensuse_2.4_RPM")
+                                          .build();
+
+        testImageUsingExistingContainer(testConfig);
     }
 
     @Test
@@ -370,6 +464,8 @@ public class DockerInspectorTest {
         final File targetTarInSharedDir = new File(containerTargetDir, tarFileName);
         FileUtils.copyFile(targetTar, targetTarInSharedDir);
         targetTarInSharedDir.setReadable(true, false);
+        testConfig.setTargetTarInSharedDir(targetTarInSharedDir);
+
         List<String> additionalArgs = testConfig.getAdditionalArgs();
         if (additionalArgs == null) {
             additionalArgs = new ArrayList<>();
@@ -383,21 +479,22 @@ public class DockerInspectorTest {
             outputSquashedImageFile = new File(String.format("%s/output/%s_squashedimage.tar.gz", TestUtils.TEST_DIR_REL_PATH, tarFileBaseName));
             additionalArgs.add("--output.include.squashedimage=true");
         }
-        IntegrationTestCommon.testTar(random, programVersion, targetTarInSharedDir.getAbsolutePath(), testConfig.getTargetRepo(), testConfig.getTargetTag(), testConfig.isRequireBdioMatch(), Mode.NO_SERVICE_START, null, additionalArgs, outputContainerFileSystemFile, outputSquashedImageFile, null, testConfig.getCodelocationName());
+        testConfig.setMode(TestConfig.Mode.NO_SERVICE_START);
+
+        IntegrationTestCommon.testTar(random, programVersion, null, testConfig);
     }
 
-    private void testImageUsingExistingContainer(final String inspectTargetImageRepoTag, final int portOnHost, final boolean requireBdioMatch, final int minNumberOfComponentsExpected,
-        final String outputBomMustContainComponentPrefix,
-        final String outputBomMustContainExternalSystemTypeId,
-        final String codelocationName)
+    private void testImageUsingExistingContainer(final TestConfig testConfig)
         throws IOException, InterruptedException, IntegrationException {
 
         final List<String> additionalArgs = new ArrayList<>();
-        additionalArgs.add(String.format("--imageinspector.service.url=http://localhost:%d", portOnHost));
+        additionalArgs.add(String.format("--imageinspector.service.url=http://localhost:%d", testConfig.getPortOnHost()));
         additionalArgs.add(String.format("--shared.dir.path.local=%s", dirSharedWithContainer.getAbsolutePath()));
         additionalArgs.add(String.format("--shared.dir.path.imageinspector=%s", SHARED_DIR_PATH_IN_CONTAINER));
-        IntegrationTestCommon.testImage(random, programVersion, inspectTargetImageRepoTag, null, null, requireBdioMatch,
-            Mode.NO_SERVICE_START, null, outputBomMustContainComponentPrefix, outputBomMustContainExternalSystemTypeId, minNumberOfComponentsExpected, additionalArgs, null, codelocationName);
+
+        testConfig.setMode(TestConfig.Mode.NO_SERVICE_START);
+        testConfig.setAdditionalArgs(additionalArgs);
+        IntegrationTestCommon.testImage(random, programVersion, null, testConfig);
     }
 
     private static void createWriteableDirTolerantly(final File dir) {
@@ -543,170 +640,6 @@ public class DockerInspectorTest {
                 Thread.sleep(10000L);
                 TestUtils.execCmd(String.format("docker rm -f %s", containerName), 120000L, false, null);
             }
-        }
-    }
-
-    private class TestConfigBuilder {
-        private String inspectTargetImageRepoTag;
-        private String tarFilePath;
-        private String targetRepo; // tarfile image selector
-        private String targetTag;  // tarfile image selector
-        private int portOnHost;
-        private boolean requireBdioMatch;
-        private int minNumberOfComponentsExpected;
-        private String outputBomMustContainComponentPrefix;
-        private String outputBomMustContainExternalSystemTypeId;
-        private String codelocationName;
-        private List<String> additionalArgs;
-        private boolean testSquashedImageGeneration;
-
-        public TestConfigBuilder setInspectTargetImageRepoTag(final String inspectTargetImageRepoTag) {
-            this.inspectTargetImageRepoTag = inspectTargetImageRepoTag;
-            return this;
-        }
-
-        public TestConfigBuilder setTarFilePath(final String tarFilePath) {
-            this.tarFilePath = tarFilePath;
-            return this;
-        }
-
-        public TestConfigBuilder setTargetRepo(final String targetRepo) {
-            this.targetRepo = targetRepo;
-            return this;
-        }
-
-        public TestConfigBuilder setTargetTag(final String targetTag) {
-            this.targetTag = targetTag;
-            return this;
-        }
-
-        public TestConfigBuilder setPortOnHost(final int portOnHost) {
-            this.portOnHost = portOnHost;
-            return this;
-        }
-
-        public TestConfigBuilder setRequireBdioMatch(final boolean requireBdioMatch) {
-            this.requireBdioMatch = requireBdioMatch;
-            return this;
-        }
-
-        public TestConfigBuilder setMinNumberOfComponentsExpected(final int minNumberOfComponentsExpected) {
-            this.minNumberOfComponentsExpected = minNumberOfComponentsExpected;
-            return this;
-        }
-
-        public TestConfigBuilder setOutputBomMustContainComponentPrefix(final String outputBomMustContainComponentPrefix) {
-            this.outputBomMustContainComponentPrefix = outputBomMustContainComponentPrefix;
-            return this;
-        }
-
-        public TestConfigBuilder setOutputBomMustContainExternalSystemTypeId(final String outputBomMustContainExternalSystemTypeId) {
-            this.outputBomMustContainExternalSystemTypeId = outputBomMustContainExternalSystemTypeId;
-            return this;
-        }
-
-        public TestConfigBuilder setCodelocationName(final String codelocationName) {
-            this.codelocationName = codelocationName;
-            return this;
-        }
-
-        public TestConfigBuilder setAdditionalArgs(final List<String> additionalArgs) {
-            this.additionalArgs = additionalArgs;
-            return this;
-        }
-
-        public TestConfigBuilder setTestSquashedImageGeneration(final boolean testSquashedImageGeneration) {
-            this.testSquashedImageGeneration = testSquashedImageGeneration;
-            return this;
-        }
-
-        public TestConfig build() throws IntegrationException {
-            if ((inspectTargetImageRepoTag == null) && (tarFilePath == null)) {
-                throw new IntegrationException("Invalid TestConfig");
-            }
-            return new TestConfig(inspectTargetImageRepoTag, tarFilePath, targetRepo, targetTag, portOnHost, requireBdioMatch, minNumberOfComponentsExpected,
-            outputBomMustContainComponentPrefix,
-            outputBomMustContainExternalSystemTypeId, codelocationName, additionalArgs, testSquashedImageGeneration);
-        }
-    }
-
-    private class TestConfig {
-        private final String inspectTargetImageRepoTag;
-        private final String tarFilePath;
-        private final String targetRepo; // tarfile image selector
-        private final String targetTag;  // tarfile image selector
-        private final int portOnHost;
-        private final boolean requireBdioMatch;
-        private final int minNumberOfComponentsExpected;
-        private final String outputBomMustContainComponentPrefix;
-        private final String outputBomMustContainExternalSystemTypeId;
-        private final String codelocationName;
-        private final List<String> additionalArgs;
-        private final boolean testSquashedImageGeneration;
-
-        public TestConfig(final String inspectTargetImageRepoTag, final String tarFilePath, final String targetRepo, final String targetTag, final int portOnHost, final boolean requireBdioMatch, final int minNumberOfComponentsExpected,
-            final String outputBomMustContainComponentPrefix,
-            final String outputBomMustContainExternalSystemTypeId, final String codelocationName, final List<String> additionalArgs, final boolean testSquashedImageGeneration) {
-            this.inspectTargetImageRepoTag = inspectTargetImageRepoTag;
-            this.tarFilePath = tarFilePath;
-            this.targetRepo = targetRepo;
-            this.targetTag = targetTag;
-            this.portOnHost = portOnHost;
-            this.requireBdioMatch = requireBdioMatch;
-            this.minNumberOfComponentsExpected = minNumberOfComponentsExpected;
-            this.outputBomMustContainComponentPrefix = outputBomMustContainComponentPrefix;
-            this.outputBomMustContainExternalSystemTypeId = outputBomMustContainExternalSystemTypeId;
-            this.codelocationName = codelocationName;
-            this.additionalArgs = additionalArgs;
-            this.testSquashedImageGeneration = testSquashedImageGeneration;
-        }
-
-        public String getInspectTargetImageRepoTag() {
-            return inspectTargetImageRepoTag;
-        }
-
-        public String getTarFilePath() {
-            return tarFilePath;
-        }
-
-        public String getTargetRepo() {
-            return targetRepo;
-        }
-
-        public String getTargetTag() {
-            return targetTag;
-        }
-
-        public int getPortOnHost() {
-            return portOnHost;
-        }
-
-        public boolean isRequireBdioMatch() {
-            return requireBdioMatch;
-        }
-
-        public int getMinNumberOfComponentsExpected() {
-            return minNumberOfComponentsExpected;
-        }
-
-        public String getOutputBomMustContainComponentPrefix() {
-            return outputBomMustContainComponentPrefix;
-        }
-
-        public String getOutputBomMustContainExternalSystemTypeId() {
-            return outputBomMustContainExternalSystemTypeId;
-        }
-
-        public String getCodelocationName() {
-            return codelocationName;
-        }
-
-        public List<String> getAdditionalArgs() {
-            return additionalArgs;
-        }
-
-        public boolean isTestSquashedImageGeneration() {
-            return testSquashedImageGeneration;
         }
     }
 }
