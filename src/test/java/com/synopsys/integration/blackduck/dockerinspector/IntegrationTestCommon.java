@@ -88,6 +88,11 @@ public class IntegrationTestCommon {
         if (testConfig.getMode() != TestConfig.Mode.DETECT) {
             assertTrue(outputContainerFileSystemFile.exists());
         }
+        if ((testConfig.getMinContainerFileSystemFileSize() > 0) || (testConfig.getMaxContainerFileSystemFileSize() > 0)) {
+            final long actualContainerFileSystemFileSize = outputContainerFileSystemFile.length();
+            assertTrue(actualContainerFileSystemFileSize >= testConfig.getMinContainerFileSystemFileSize());
+            assertTrue(actualContainerFileSystemFileSize <= testConfig.getMaxContainerFileSystemFileSize());
+        }
     }
 
     private static List<String> createCmd(final Random random, final ProgramVersion programVersion, final TestConfig.Mode mode, final String detectJarPath, final String inspectTargetArg, final String repo, final String tag,
@@ -181,10 +186,6 @@ public class IntegrationTestCommon {
         return cmd;
     }
 
-    //    public static void testTar(final Random random, final ProgramVersion programVersion, final String inspectTargetTarfile, final String repo, final String tag,
-    //            final boolean requireBdioMatch,
-    //            final TestConfig.Mode mode, final String detectJarPath,
-    //            final List<String> additionalArgs, final File outputContainerFileSystemFile, final File outputSquashedImageFile, final Map<String, String> givenEnv, final String codelocationName)
     public static void testTar(final Random random, final ProgramVersion programVersion, final String detectJarPath,
         final TestConfig testConfig)
         throws IOException, InterruptedException, IntegrationException {
@@ -234,6 +235,11 @@ public class IntegrationTestCommon {
         }
         if (testConfig.getOutputSquashedImageFile() != null) {
             assertTrue(String.format("%s does not exist", testConfig.getOutputSquashedImageFile().getAbsolutePath()), testConfig.getOutputSquashedImageFile().exists());
+        }
+        if ((testConfig.getMinContainerFileSystemFileSize() > 0) || (testConfig.getMaxContainerFileSystemFileSize() > 0)) {
+            final long actualContainerFileSystemFileSize = testConfig.getOutputContainerFileSystemFile().length();
+            assertTrue(actualContainerFileSystemFileSize >= testConfig.getMinContainerFileSystemFileSize());
+            assertTrue(actualContainerFileSystemFileSize <= testConfig.getMaxContainerFileSystemFileSize());
         }
     }
 

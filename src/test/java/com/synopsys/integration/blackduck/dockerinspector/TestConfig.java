@@ -22,6 +22,8 @@ public class TestConfig {
     private File outputContainerFileSystemFile;
     private File outputSquashedImageFile;
     private File targetTarInSharedDir;
+    private long minContainerFileSystemFileSize;
+    private long maxContainerFileSystemFileSize;
 
 
     public enum Mode {
@@ -34,7 +36,8 @@ public class TestConfig {
     public TestConfig(final Mode mode, final String inspectTargetImageRepoTag, final String tarFilePath, final String targetRepo, final String targetTag, final int portOnHost, final boolean requireBdioMatch, final int minNumberOfComponentsExpected,
         final String outputBomMustContainComponentPrefix,
         final String outputBomMustContainExternalSystemTypeId, final String codelocationName, final List<String> additionalArgs, final Map<String, String> env, final boolean testSquashedImageGeneration,
-        final File outputContainerFileSystemFile, final File outputSquashedImageFile, final File targetTarInSharedDir) {
+        final File outputContainerFileSystemFile, final File outputSquashedImageFile, final File targetTarInSharedDir,
+        final long minContainerFileSystemFileSize, final long maxContainerFileSystemFileSize) {
         this.mode = mode;
         this.inspectTargetImageRepoTag = inspectTargetImageRepoTag;
         this.tarFilePath = tarFilePath;
@@ -52,6 +55,8 @@ public class TestConfig {
         this.outputContainerFileSystemFile = outputContainerFileSystemFile;
         this.outputSquashedImageFile = outputSquashedImageFile;
         this.targetTarInSharedDir = targetTarInSharedDir;
+        this.minContainerFileSystemFileSize = minContainerFileSystemFileSize;
+        this.maxContainerFileSystemFileSize = maxContainerFileSystemFileSize;
     }
 
     public Mode getMode() {
@@ -122,6 +127,14 @@ public class TestConfig {
         return targetTarInSharedDir;
     }
 
+    public long getMinContainerFileSystemFileSize() {
+        return minContainerFileSystemFileSize;
+    }
+
+    public long getMaxContainerFileSystemFileSize() {
+        return maxContainerFileSystemFileSize;
+    }
+
     public void setInspectTargetImageRepoTag(final String inspectTargetImageRepoTag) {
         this.inspectTargetImageRepoTag = inspectTargetImageRepoTag;
     }
@@ -188,5 +201,13 @@ public class TestConfig {
 
     public void setTargetTarInSharedDir(final File targetTarInSharedDir) {
         this.targetTarInSharedDir = targetTarInSharedDir;
+    }
+
+    public void setMinContainerFileSystemFileSize(final long minContainerFileSystemFileSize) {
+        this.minContainerFileSystemFileSize = minContainerFileSystemFileSize;
+    }
+
+    public void setMaxContainerFileSystemFileSize(final long maxContainerFileSystemFileSize) {
+        this.maxContainerFileSystemFileSize = maxContainerFileSystemFileSize;
     }
 }

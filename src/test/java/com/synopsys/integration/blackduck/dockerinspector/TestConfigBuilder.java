@@ -24,6 +24,8 @@ public class TestConfigBuilder {
     private File outputContainerFileSystemFile;
     private File outputSquashedImageFile;
     private File targetTarInSharedDir;
+    private long minContainerFileSystemFileSize;
+    private long maxContainerFileSystemFileSize;
 
     public TestConfigBuilder setMode(final TestConfig.Mode mode) {
         this.mode = mode;
@@ -110,6 +112,16 @@ public class TestConfigBuilder {
         return this;
     }
 
+    public TestConfigBuilder setMinContainerFileSystemFileSize(final long minContainerFileSystemFileSize) {
+        this.minContainerFileSystemFileSize = minContainerFileSystemFileSize;
+        return this;
+    }
+
+    public TestConfigBuilder setMaxContainerFileSystemFileSize(final long maxContainerFileSystemFileSize) {
+        this.maxContainerFileSystemFileSize = maxContainerFileSystemFileSize;
+        return this;
+    }
+
     public TestConfig build() throws IntegrationException {
         if ((inspectTargetImageRepoTag == null) && (tarFilePath == null)) {
             throw new IntegrationException("Invalid TestConfig");
@@ -117,7 +129,7 @@ public class TestConfigBuilder {
         return new TestConfig(mode, inspectTargetImageRepoTag, tarFilePath, targetRepo, targetTag, portOnHost, requireBdioMatch, minNumberOfComponentsExpected,
             outputBomMustContainComponentPrefix,
             outputBomMustContainExternalSystemTypeId, codelocationName, additionalArgs, env, testSquashedImageGeneration,
-            outputContainerFileSystemFile, outputSquashedImageFile, targetTarInSharedDir);
+            outputContainerFileSystemFile, outputSquashedImageFile, targetTarInSharedDir, minContainerFileSystemFileSize, maxContainerFileSystemFileSize);
     }
 }
 

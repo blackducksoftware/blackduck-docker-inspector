@@ -135,10 +135,6 @@ public class DockerInspectorTest {
         testTarUsingExistingContainer(testConfig);
     }
 
-
-    //TODO NEED TESTS THAT EXCLUDE PATHS, BOTH START CONTAINER AND EXISTING, BOTH WITH REDIRECTS
-    //TODO: Use TestConfig for all tests
-
     @Test
     public void testUbuntuStartContainer() throws IOException, InterruptedException, IntegrationException {
         final TestConfig testConfig = (new TestConfigBuilder())
@@ -456,6 +452,63 @@ public class DockerInspectorTest {
         testTarUsingExistingContainer(testConfig);
     }
 
+    @Test
+    public void testExcludeDirectoriesRedirect() throws IOException, InterruptedException, IntegrationException {
+        List<String> additionalArgs = new ArrayList<>();
+        additionalArgs.add("--output.containerfilesystem.excluded.paths=/bin,/dev,/home,/lib,/media,/mnt,/opt,/proc,/root,/run,/sbin,/srv,/sys,/tmp,/usr,/var");
+
+        final TestConfig testConfig = new TestConfigBuilder()
+                                          .setTarFilePath("build/images/test/alpine.tar")
+                                          .setTargetRepo(null)
+                                          .setTargetTag(null)
+                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU)
+                                          .setRequireBdioMatch(false)
+                                          .setCodelocationName("alpine_latest_APK")
+                                          .setAdditionalArgs(additionalArgs)
+                                          .setMinContainerFileSystemFileSize(100000)
+                                          .setMaxContainerFileSystemFileSize(200000)
+                                          .build();
+
+        testTarUsingExistingContainer(testConfig);
+    }
+
+    @Test
+    public void testExcludeDirectoriesNoRedirect() throws IOException, InterruptedException, IntegrationException {
+        List<String> additionalArgs = new ArrayList<>();
+        additionalArgs.add("--output.containerfilesystem.excluded.paths=/bin,/dev,/home,/lib,/media,/mnt,/opt,/proc,/root,/run,/sbin,/srv,/sys,/tmp,/usr,/var");
+
+        final TestConfig testConfig = new TestConfigBuilder()
+                                          .setTarFilePath("build/images/test/alpine.tar")
+                                          .setTargetRepo(null)
+                                          .setTargetTag(null)
+                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
+                                          .setRequireBdioMatch(false)
+                                          .setCodelocationName("alpine_latest_APK")
+                                          .setAdditionalArgs(additionalArgs)
+                                          .setMinContainerFileSystemFileSize(100000)
+                                          .setMaxContainerFileSystemFileSize(200000)
+                                          .build();
+
+        testTarUsingExistingContainer(testConfig);
+    }
+
+    @Test
+    public void testExcludeDirectoriesStartContainer() throws IOException, InterruptedException, IntegrationException {
+        List<String> additionalArgs = new ArrayList<>();
+        additionalArgs.add("--output.containerfilesystem.excluded.paths=/bin,/dev,/home,/lib,/media,/mnt,/opt,/proc,/root,/run,/sbin,/srv,/sys,/tmp,/usr,/var");
+        final TestConfig testConfig = (new TestConfigBuilder())
+                                          .setInspectTargetImageRepoTag("alpine:latest")
+                                          .setTargetRepo(null)
+                                          .setTargetTag(null)
+                                          .setRequireBdioMatch(false)
+                                          .setCodelocationName("alpine_latest_APK")
+                                          .setAdditionalArgs(additionalArgs)
+                                          .setMinContainerFileSystemFileSize(100000)
+                                          .setMaxContainerFileSystemFileSize(200000)
+                                          .build();
+        IntegrationTestCommon.testImage(random, programVersion, null, testConfig);
+    }
+
     private void testTarUsingExistingContainer(final TestConfig testConfig)
             throws IOException, InterruptedException, IntegrationException {
         final File targetTar = new File(testConfig.getTarFilePath());
@@ -469,15 +522,18 @@ public class DockerInspectorTest {
         List<String> additionalArgs = testConfig.getAdditionalArgs();
         if (additionalArgs == null) {
             additionalArgs = new ArrayList<>();
+            testConfig.setAdditionalArgs(additionalArgs);
         }
         additionalArgs.add(String.format("--imageinspector.service.url=http://localhost:%d", testConfig.getPortOnHost()));
         additionalArgs.add(String.format("--shared.dir.path.local=%s", dirSharedWithContainer.getAbsolutePath()));
         additionalArgs.add(String.format("--shared.dir.path.imageinspector=%s", SHARED_DIR_PATH_IN_CONTAINER));
         final File outputContainerFileSystemFile = new File(String.format("%s/output/%s_containerfilesystem.tar.gz", TestUtils.TEST_DIR_REL_PATH, tarFileBaseName));
+        testConfig.setOutputContainerFileSystemFile(outputContainerFileSystemFile);
         File outputSquashedImageFile = null;
         if (testConfig.isTestSquashedImageGeneration()) {
             outputSquashedImageFile = new File(String.format("%s/output/%s_squashedimage.tar.gz", TestUtils.TEST_DIR_REL_PATH, tarFileBaseName));
             additionalArgs.add("--output.include.squashedimage=true");
+            testConfig.setOutputSquashedImageFile(outputSquashedImageFile);
         }
         testConfig.setMode(TestConfig.Mode.NO_SERVICE_START);
 
