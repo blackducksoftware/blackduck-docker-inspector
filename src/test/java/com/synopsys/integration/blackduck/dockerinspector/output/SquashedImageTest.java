@@ -1,11 +1,16 @@
 package com.synopsys.integration.blackduck.dockerinspector.output;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Optional;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -46,6 +51,7 @@ public class SquashedImageTest {
 
         final File targetImageFileSystemTarGz = new File("src/test/resources/test_containerfilesystem.tar.gz");
         final File testWorkingDir = new File("test/output/squashingTest");
+        FileUtils.deleteDirectory(testWorkingDir);
         final File tempTarFile = new File(testWorkingDir, "tempContainerFileSystem.tar");
         final File squashingWorkingDir = new File(testWorkingDir, "squashingCode");
         squashingWorkingDir.mkdirs();
@@ -53,13 +59,34 @@ public class SquashedImageTest {
 
         squashedImage.createSquashedImageTarGz(targetImageFileSystemTarGz, squashedImageTarGz, tempTarFile, squashingWorkingDir);
 
-        final File unpackedSquashedImage = new File(testWorkingDir, "squashedImageUnpacked");
-        unpackedSquashedImage.mkdirs();
-        CompressedFile.gunZipUnTarFile(squashedImageTarGz, tempTarFile, unpackedSquashedImage);
-        final File expectedFile = new File(unpackedSquashedImage, "manifest.json");
-        assertTrue(expectedFile.isFile());
+        final File unpackedSquashedImageDir = new File(testWorkingDir, "squashedImageUnpacked");
+        unpackedSquashedImageDir.mkdirs();
+        CompressedFile.gunZipUnTarFile(squashedImageTarGz, tempTarFile, unpackedSquashedImageDir);
+        final File manifestFile = new File(unpackedSquashedImageDir, "manifest.json");
+        assertTrue(manifestFile.isFile());
 
-        expectedFile.delete();
+        // Find the one layer dir in image
+        File layerDir = null;
+        for (final File imageFile : unpackedSquashedImageDir.listFiles()) {
+            if (imageFile.isDirectory()) {
+                layerDir = imageFile;
+                break;
+            }
+        }
+        assertNotNull(layerDir);
+
+        // Untar the one layer.tar file in image
+        final File layerTar = layerDir.listFiles()[0];
+        final File layerUnpackedDir = new File(squashingWorkingDir, "squashedImageLayerUnpacked");
+        CompressedFile.unTarFile(layerTar, layerUnpackedDir);
+
+        // Verify that the symlink made it into the squashed image
+        final File symLink = new File(layerUnpackedDir, "usr/share/apk/keys/aarch64/alpine-devel@lists.alpinelinux.org-58199dcc.rsa.pub");
+        assertTrue(symLink.exists());
+        final Path symLinkPath = symLink.toPath();
+        assertTrue(Files.isSymbolicLink(symLinkPath));
+        final Path symLinkTargetPath = Files.readSymbolicLink(symLinkPath);
+        assertEquals("../alpine-devel@lists.alpinelinux.org-58199dcc.rsa.pub", symLinkTargetPath.toString());
     }
 
     @Test
