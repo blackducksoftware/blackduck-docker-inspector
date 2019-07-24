@@ -56,7 +56,7 @@ public class CalledFromDetectTest {
         sb.append(" --detect.docker.image=alpine:latest");
         sb.append(" --detect.tools.excluded=SIGNATURE_SCAN,POLARIS");
         sb.append(" --detect.docker.path.required=false");
-        sb.append(String.format(" --logging.level.com.blackducksoftware.integration=%s", "DEBUG"));
+        sb.append(String.format(" --logging.level.com.synopsys.integration=%s", "DEBUG"));
         sb.append(String.format(" --detect.docker.passthrough.cleanup.inspector.container=%b", true));
         sb.append(String.format(" --detect.cleanup=%b", false));
         sb.append(String.format(" > %s", detectOutputFile.getAbsolutePath()));
