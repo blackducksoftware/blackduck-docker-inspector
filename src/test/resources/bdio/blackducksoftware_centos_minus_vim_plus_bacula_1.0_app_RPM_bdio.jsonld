@@ -6,9 +6,9 @@
       "spdx:creator": [
         "Tool: IntegrationBdio-17.1.2"
       ],
-      "spdx:created": "2019-07-08T15:25:06.772Z"
+      "spdx:created": "2019-08-05T16:51:32.504Z"
     },
-    "@id": "uuid:1e926dc2-fca1-4ca7-aa57-14c81292b454",
+    "@id": "uuid:b2521db2-0a0b-4070-99fb-e48a936fbbde",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -65,11 +65,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:centos/perl/4_5_16_3_294_el7_6/x86_64",
+        "related": "http:centos/systemd_libs/219_62_el7_6_9/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:centos/systemd_libs/219_62_el7_6_7/x86_64",
+        "related": "http:centos/perl/4_5_16_3_294_el7_6/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -90,10 +90,6 @@
       },
       {
         "related": "http:centos/bacula_storage/5_2_13_23_1_el7/x86_64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:centos/systemd/219_62_el7_6_7/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -142,6 +138,10 @@
       },
       {
         "related": "http:centos/perl_Date_Manip/6_41_2_el7/noarch",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:centos/systemd/219_62_el7_6_9/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -229,11 +229,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:centos/systemd_sysv/219_62_el7_6_7/x86_64",
+        "related": "http:centos/mariadb_libs/1_5_5_60_1_el7_5/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:centos/mariadb_libs/1_5_5_60_1_el7_5/x86_64",
+        "related": "http:centos/systemd_sysv/219_62_el7_6_9/x86_64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -419,6 +419,28 @@
     "relationship": []
   },
   {
+    "name": "systemd-libs",
+    "revision": "219-62.el7_6.9",
+    "@id": "http:centos/systemd_libs/219_62_el7_6_9/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@centos",
+      "externalId": "systemd-libs/219-62.el7_6.9/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "centos",
+          "separator": "/",
+          "kbSeparator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "name": "systemd-libs",
+        "version": "219-62.el7_6.9",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "perl",
     "revision": "4:5.16.3-294.el7_6",
     "@id": "http:centos/perl/4_5_16_3_294_el7_6/x86_64",
@@ -435,28 +457,6 @@
         },
         "name": "perl",
         "version": "4:5.16.3-294.el7_6",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "systemd-libs",
-    "revision": "219-62.el7_6.7",
-    "@id": "http:centos/systemd_libs/219_62_el7_6_7/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@centos",
-      "externalId": "systemd-libs/219-62.el7_6.7/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "centos",
-          "separator": "/",
-          "kbSeparator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "name": "systemd-libs",
-        "version": "219-62.el7_6.7",
         "architecture": "x86_64"
       }
     },
@@ -567,28 +567,6 @@
         },
         "name": "bacula-storage",
         "version": "5.2.13-23.1.el7",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "systemd",
-    "revision": "219-62.el7_6.7",
-    "@id": "http:centos/systemd/219_62_el7_6_7/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@centos",
-      "externalId": "systemd/219-62.el7_6.7/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "centos",
-          "separator": "/",
-          "kbSeparator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "name": "systemd",
-        "version": "219-62.el7_6.7",
         "architecture": "x86_64"
       }
     },
@@ -854,6 +832,28 @@
         "name": "perl-Date-Manip",
         "version": "6.41-2.el7",
         "architecture": "noarch"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "systemd",
+    "revision": "219-62.el7_6.9",
+    "@id": "http:centos/systemd/219_62_el7_6_9/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@centos",
+      "externalId": "systemd/219-62.el7_6.9/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "centos",
+          "separator": "/",
+          "kbSeparator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "name": "systemd",
+        "version": "219-62.el7_6.9",
+        "architecture": "x86_64"
       }
     },
     "relationship": []
@@ -1321,28 +1321,6 @@
     "relationship": []
   },
   {
-    "name": "systemd-sysv",
-    "revision": "219-62.el7_6.7",
-    "@id": "http:centos/systemd_sysv/219_62_el7_6_7/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@centos",
-      "externalId": "systemd-sysv/219-62.el7_6.7/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "centos",
-          "separator": "/",
-          "kbSeparator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "name": "systemd-sysv",
-        "version": "219-62.el7_6.7",
-        "architecture": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
     "name": "mariadb-libs",
     "revision": "1:5.5.60-1.el7_5",
     "@id": "http:centos/mariadb_libs/1_5_5_60_1_el7_5/x86_64",
@@ -1359,6 +1337,28 @@
         },
         "name": "mariadb-libs",
         "version": "1:5.5.60-1.el7_5",
+        "architecture": "x86_64"
+      }
+    },
+    "relationship": []
+  },
+  {
+    "name": "systemd-sysv",
+    "revision": "219-62.el7_6.9",
+    "@id": "http:centos/systemd_sysv/219_62_el7_6_9/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@centos",
+      "externalId": "systemd-sysv/219-62.el7_6.9/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "centos",
+          "separator": "/",
+          "kbSeparator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "name": "systemd-sysv",
+        "version": "219-62.el7_6.9",
         "architecture": "x86_64"
       }
     },
