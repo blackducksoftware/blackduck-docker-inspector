@@ -275,7 +275,7 @@ public class DockerClientManager {
             logger.debug(String.format("Error getting docker client: %s", e1.getMessage()));
             try {
                 callback.close();
-            } catch (final IOException e) {
+            } catch (final Exception e) {
             }
             return;
         }
@@ -286,15 +286,15 @@ public class DockerClientManager {
                     .withTailAll()
                     .exec(callback)
                     .awaitCompletion();
-        } catch (final InterruptedException e) {
+            final String log = callback.builder.toString();
+            logger.debug(String.format("Image inspector service log:\n%s\n==================================\n", log));
+        } catch (final Exception e) {
             logger.debug(String.format("Error getting container log: %s", e.getMessage()));
         }
 
-        final String log = callback.builder.toString();
-        logger.debug(String.format("Image inspector service log:\n%s\n==================================\n", log));
         try {
             callback.close();
-        } catch (final IOException e) {
+        } catch (final Exception e) {
         }
     }
 
