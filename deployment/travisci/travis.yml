@@ -43,19 +43,19 @@ script:
   - docker save -o /tmp/blackduck/shared/target/alpine.tar alpine:latest
   - chmod a+r /tmp/blackduck/shared/target/alpine.tar
   # Run Detect
-  - /tmp/blackduck/detect.sh --blackduck.offline.mode=true --detect.tools.excluded=SIGNATURE_SCAN --detect.docker.tar=/tmp/blackduck/shared/target/alpine.tar --detect.docker.passthrough.imageinspector.service.url=http://localhost:9000 --imageinspector.service.distro.default=alpine --detect.docker.passthrough.shared.dir.path.local=/tmp/blackduck/shared --detect.docker.passthrough.shared.dir.path.imageinspector=/opt/blackduck/blackduck-imageinspector/shared --detect.docker.passthrough.imageinspector.service.start=false --logging.level.com.synopsys.integration=INFO --detect.source.path=/tmp/blackduck/empty
+  - /tmp/blackduck/detect.sh --blackduck.offline.mode=true --detect.tools.excluded=SIGNATURE_SCAN --detect.docker.tar=/tmp/blackduck/shared/target/alpine.tar --detect.docker.passthrough.imageinspector.service.url=http://localhost:9000 --imageinspector.service.distro.default=alpine --detect.docker.passthrough.shared.dir.path.local=/tmp/blackduck/shared --detect.docker.passthrough.shared.dir.path.imageinspector=/opt/blackduck/blackduck-imageinspector/shared --detect.docker.passthrough.imageinspector.service.start=false --logging.level.com.synopsys.integration=INFO --detect.tools=DOCKER
   # Pull/save target image
   - docker pull centos:latest
   - docker save -o /tmp/blackduck/shared/target/centos.tar centos:latest
   - chmod a+r /tmp/blackduck/shared/target/centos.tar
   # Run Detect
-  - /tmp/blackduck/detect.sh --blackduck.offline.mode=true --detect.tools.excluded=SIGNATURE_SCAN --detect.docker.tar=/tmp/blackduck/shared/target/centos.tar --detect.docker.passthrough.imageinspector.service.url=http://localhost:9000 --imageinspector.service.distro.default=alpine --detect.docker.passthrough.shared.dir.path.local=/tmp/blackduck/shared --detect.docker.passthrough.shared.dir.path.imageinspector=/opt/blackduck/blackduck-imageinspector/shared --detect.docker.passthrough.imageinspector.service.start=false --logging.level.com.synopsys.integration=INFO --detect.source.path=/tmp/blackduck/empty
+  - /tmp/blackduck/detect.sh --blackduck.offline.mode=true --detect.tools.excluded=SIGNATURE_SCAN --detect.docker.tar=/tmp/blackduck/shared/target/centos.tar --detect.docker.passthrough.imageinspector.service.url=http://localhost:9000 --imageinspector.service.distro.default=alpine --detect.docker.passthrough.shared.dir.path.local=/tmp/blackduck/shared --detect.docker.passthrough.shared.dir.path.imageinspector=/opt/blackduck/blackduck-imageinspector/shared --detect.docker.passthrough.imageinspector.service.start=false --logging.level.com.synopsys.integration=INFO --detect.tools=DOCKER
   # Pull/save target image
   - docker pull ubuntu:latest
   - docker save -o /tmp/blackduck/shared/target/ubuntu.tar ubuntu:latest
   - chmod a+r /tmp/blackduck/shared/target/ubuntu.tar
   # Run Detect
-  - /tmp/blackduck/detect.sh --blackduck.offline.mode=true --detect.tools.excluded=SIGNATURE_SCAN --detect.docker.tar=/tmp/blackduck/shared/target/ubuntu.tar --detect.docker.passthrough.imageinspector.service.url=http://localhost:9000 --imageinspector.service.distro.default=alpine --detect.docker.passthrough.shared.dir.path.local=/tmp/blackduck/shared --detect.docker.passthrough.shared.dir.path.imageinspector=/opt/blackduck/blackduck-imageinspector/shared --detect.docker.passthrough.imageinspector.service.start=false --logging.level.com.synopsys.integration=INFO --detect.source.path=/tmp/blackduck/empty
+  - /tmp/blackduck/detect.sh --blackduck.offline.mode=true --detect.tools.excluded=SIGNATURE_SCAN --detect.docker.tar=/tmp/blackduck/shared/target/ubuntu.tar --detect.docker.passthrough.imageinspector.service.url=http://localhost:9000 --imageinspector.service.distro.default=alpine --detect.docker.passthrough.shared.dir.path.local=/tmp/blackduck/shared --detect.docker.passthrough.shared.dir.path.imageinspector=/opt/blackduck/blackduck-imageinspector/shared --detect.docker.passthrough.imageinspector.service.start=false --logging.level.com.synopsys.integration=INFO --detect.tools=DOCKER
 
 after_script:
   - docker stop blackduck-imageinspector-alpine
