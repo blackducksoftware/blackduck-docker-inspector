@@ -1,0 +1,57 @@
+language: java
+
+services:
+  - docker
+
+install:
+  # Install Detect
+  - curl -O https://detect.synopsys.com/detect.sh
+  - chmod +x detect.sh
+  - mkdir /tmp/blackduck
+  - mkdir /tmp/blackduck/empty
+  - mv detect.sh /tmp/blackduck
+  # Create dirs for docker inspector
+  - mkdir -p /tmp/blackduck/shared/target
+  - chmod -R 777 /tmp/blackduck/shared
+  # Pull imageinspector services
+  - docker pull blackducksoftware/blackduck-imageinspector-alpine:4.5.0
+  - docker pull blackducksoftware/blackduck-imageinspector-centos:4.5.0
+  - docker pull blackducksoftware/blackduck-imageinspector-ubuntu:4.5.0
+  # Start imageinspector services
+  - docker run -d --user 1001 -p 9000:8081 --label "app=blackduck-imageinspector" --label="os=ALPINE" -v /tmp/blackduck/shared:/opt/blackduck/blackduck-imageinspector/shared --name blackduck-imageinspector-alpine blackducksoftware/blackduck-imageinspector-alpine:4.5.0 java -jar /opt/blackduck/blackduck-imageinspector/blackduck-imageinspector.jar --server.port=8081 --current.linux.distro=alpine --inspector.url.alpine=http://localhost:9000 --inspector.url.centos=http://localhost:9001 --inspector.url.ubuntu=http://localhost:9002
+  - docker run -d --user 1001 -p 9001:8081 --label "app=blackduck-imageinspector" --label="os=CENTOS" -v /tmp/blackduck/shared:/opt/blackduck/blackduck-imageinspector/shared --name blackduck-imageinspector-centos blackducksoftware/blackduck-imageinspector-centos:4.5.0 java -jar /opt/blackduck/blackduck-imageinspector/blackduck-imageinspector.jar --server.port=8081 --current.linux.distro=centos --inspector.url.alpine=http://localhost:9000 --inspector.url.centos=http://localhost:9001 --inspector.url.ubuntu=http://localhost:9002
+  - docker run -d --user 1001 -p 9002:8081 --label "app=blackduck-imageinspector" --label="os=UBUNTU" -v /tmp/blackduck/shared:/opt/blackduck/blackduck-imageinspector/shared --name blackduck-imageinspector-ubuntu blackducksoftware/blackduck-imageinspector-ubuntu:4.5.0 java -jar /opt/blackduck/blackduck-imageinspector/blackduck-imageinspector.jar --server.port=8081 --current.linux.distro=ubuntu --inspector.url.alpine=http://localhost:9000 --inspector.url.centos=http://localhost:9001 --inspector.url.ubuntu=http://localhost:9002
+  # Pause to give imageinspector services time to start up
+  - sleep 60
+  - curl http://localhost:9000/health
+  - curl http://localhost:9001/health
+  - curl http://localhost:9002/health
+
+script:
+  # Pull/save target image
+  - docker pull alpine:latest
+  - docker save -o /tmp/blackduck/shared/target/alpine.tar alpine:latest
+  - chmod a+r /tmp/blackduck/shared/target/alpine.tar
+  # Run Detect
+  - /tmp/blackduck/detect.sh --blackduck.offline.mode=true --detect.tools.excluded=SIGNATURE_SCAN --detect.docker.tar=/tmp/blackduck/shared/target/alpine.tar --detect.docker.passthrough.imageinspector.service.url=http://localhost:9000 --imageinspector.service.distro.default=alpine --detect.docker.passthrough.shared.dir.path.local=/tmp/blackduck/shared --detect.docker.passthrough.shared.dir.path.imageinspector=/opt/blackduck/blackduck-imageinspector/shared --detect.docker.passthrough.imageinspector.service.start=false --logging.level.com.synopsys.integration=INFO --detect.source.path=/tmp/blackduck/empty
+  # Pull/save target image
+  - docker pull centos:latest
+  - docker save -o /tmp/blackduck/shared/target/centos.tar centos:latest
+  - chmod a+r /tmp/blackduck/shared/target/centos.tar
+  # Run Detect
+  - /tmp/blackduck/detect.sh --blackduck.offline.mode=true --detect.tools.excluded=SIGNATURE_SCAN --detect.docker.tar=/tmp/blackduck/shared/target/centos.tar --detect.docker.passthrough.imageinspector.service.url=http://localhost:9000 --imageinspector.service.distro.default=alpine --detect.docker.passthrough.shared.dir.path.local=/tmp/blackduck/shared --detect.docker.passthrough.shared.dir.path.imageinspector=/opt/blackduck/blackduck-imageinspector/shared --detect.docker.passthrough.imageinspector.service.start=false --logging.level.com.synopsys.integration=INFO --detect.source.path=/tmp/blackduck/empty
+  # Pull/save target image
+  - docker pull ubuntu:latest
+  - docker save -o /tmp/blackduck/shared/target/ubuntu.tar ubuntu:latest
+  - chmod a+r /tmp/blackduck/shared/target/ubuntu.tar
+  # Run Detect
+  - /tmp/blackduck/detect.sh --blackduck.offline.mode=true --detect.tools.excluded=SIGNATURE_SCAN --detect.docker.tar=/tmp/blackduck/shared/target/ubuntu.tar --detect.docker.passthrough.imageinspector.service.url=http://localhost:9000 --imageinspector.service.distro.default=alpine --detect.docker.passthrough.shared.dir.path.local=/tmp/blackduck/shared --detect.docker.passthrough.shared.dir.path.imageinspector=/opt/blackduck/blackduck-imageinspector/shared --detect.docker.passthrough.imageinspector.service.start=false --logging.level.com.synopsys.integration=INFO --detect.source.path=/tmp/blackduck/empty
+
+after_script:
+  - docker stop blackduck-imageinspector-alpine
+  - docker rm blackduck-imageinspector-alpine
+  - docker stop blackduck-imageinspector-centos
+  - docker rm blackduck-imageinspector-centos
+  - docker stop blackduck-imageinspector-ubuntu
+  - docker rm blackduck-imageinspector-ubuntu
+  - rm -rf /tmp/blackduck
