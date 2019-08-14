@@ -26,7 +26,7 @@ task publishAirGapZip() {
     dependsOn createAirGapZip
     doLast {
         exec {
-            commandLine 'curl', '--insecure','-u', "${project.ext.artifactoryDeployerUsername}:${project.ext.artifactoryDeployerPassword}", '-X', 'PUT', "${project.ext.artifactoryUrl}/${project.ext.artifactoryRepo}/${artifactoryIntegrationPath}/${project.name}/${version}/${airGapZipName}", '-T', "${airGapFolder}/${airGapZipName}", '-f'
+            commandLine 'curl', '--insecure','-u', "${project.ext.artifactoryDeployerUsername}:${project.ext.artifactoryDeployerPassword}", '-X', 'PUT', "${project.ext.deployArtifactoryUrl}/${project.ext.artifactoryRepo}/${artifactoryIntegrationPath}/${project.name}/${version}/${airGapZipName}", '-T', "${airGapFolder}/${airGapZipName}", '-f'
         }
     }
 }
