@@ -1,3 +1,13 @@
+#
+# This .travis.yml file is intended to illustrate how you could
+# use Travis CI's Docker capabilities to start imageinspector services
+# and run Detect to inspect Docker images in a Travis build.
+#
+# The code below takes some shortcuts around some of the other challenges,
+# such as testing the services (using the /health endpoint) to determine
+# when they are up and ready to accept requests. (There's almost surely 
+# a better approach than the sleep 60.)
+#
 language: java
 
 services:
