@@ -1,13 +1,13 @@
 #!/bin/bash
 
 ####################################################################
-# This script demonstrates how you can use detect / docker inspector
-# running inside a docker container.
+# This script demonstrates how you could run Detect / Docker
+$ Inspector from GitLab CI.
 ####################################################################
 
 ####################################################################
-# ==> Adjust the value of hostSharedDirPath
-# This path cannot have any symbolic links in it
+# ==> Adjust these values, avoiding the use of paths that contain
+# symbolic links.
 ####################################################################
 hostSharedDirPath=~/blackduck/shared
 imageInspectorVersion=4.5.0
