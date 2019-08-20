@@ -118,7 +118,7 @@ public class HelpText {
                      "Most of the sample deployments use Detect simply because that is the most common use case.");
         usage.add("");
         usage.add("Each sample deployment follows one of the two approaches described above, and are labelled accordingly below:\n" +
-                     "1. Command Line Utility (#1 above)\n" +
+                     "1. Utility (#1 above) (= Command Line Utility)\n" +
                      "2. Toolkit (#2 above)");
         usage.add("");
         usage.add("The challenges involved in deploying Docker Inspector using the 'toolkit' approach are:\n" +
@@ -127,13 +127,14 @@ public class HelpText {
         usage.add("");
         usage.add("These deployment samples are intended to show how these challenges could be met. They are not intended to be used as-is in production. You should understand the code before you use it. They do not represent the only way to deploy in each environment.\n");
         usage.add("");
-        usage.add("Environment\t\tApproach\t\tDeployment Notes\t\t\t\tSample Deployment (curl this URL)");
+        usage.add("Environment\t\t\tApproach\tDeployment Notes\t\t\t\tSample Deployment (curl this URL)");
         usage.add("");
-        usage.add("Kubernetes\t\tToolkit\t\t\tSeparate pods; hostPath volume; service URLs\thttps://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/kubernetes/setup.txt");
-        usage.add("OpenShift\t\tToolkit\t\t\tSingle pod; emptyDir volume; localhost URLs\thttps://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/openshift/setup.txt");
-        usage.add("Travis CI\t\tToolkit\t\t\tdocker service; localhost URLs\t\t\thttps://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/travisci/travis.yml");
-        usage.add("GitLab CI\t\tToolkit\t\t\tshell executoer; localhost URLs\t\t\thttps://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/gitlabci/setup.sh");
-        usage.add("Circle CI\t\tCommand Line Utility\t\t\t\t\t\t\thttps://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/circleci/config.yml");
+        usage.add("Kubernetes\t\t\tToolkit\t\tSeparate pods; hostPath volume; service URLs\thttps://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/kubernetes/setup.txt");
+        usage.add("OpenShift\t\t\tToolkit\t\tSingle pod; emptyDir volume; localhost URLs\thttps://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/openshift/setup.txt");
+        usage.add("Travis CI\t\t\tToolkit\t\tdocker service; localhost URLs\t\t\thttps://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/travisci/travis.yml");
+        usage.add("GitLab CI\t\t\tToolkit\t\tshell executoer; localhost URLs\t\t\thttps://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/gitlabci/setup.sh");
+        usage.add("Circle CI\t\t\tUtility\t\t\t\t\t\t\t\thttps://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/circleci/config.yml");
+        usage.add("Docker (Detect in container)\tToolkit\t\tlocalhost URLs\t\t\t\t\thttps://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/docker/runDetectInContainer/setup.sh");
         usage.add("");
         return usage;
     }
