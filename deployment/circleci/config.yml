@@ -1,0 +1,10 @@
+version: 2
+jobs:
+  build:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Run Detect
+          command: |
+              bash <(curl -s https://blackducksoftware.github.io/hub-detect/hub-detect.sh) --detect.docker.image=alpine:latest --detect.tools.excluded=SIGNATURE_SCAN,POLARIS --blackduck.offline.mode=true

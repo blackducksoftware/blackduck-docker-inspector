@@ -3,7 +3,7 @@ package com.synopsys.integration.blackduck.dockerinspector.help.formatter;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import com.synopsys.integration.blackduck.dockerinspector.config.UsageFormatter;
+import com.synopsys.integration.blackduck.dockerinspector.help.HelpText;
 import java.io.IOException;
 import java.util.List;
 import java.util.SortedSet;
@@ -19,12 +19,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorOption;
+import com.synopsys.integration.blackduck.dockerinspector.help.HelpTopic;
 
 @RunWith(SpringRunner.class)
-public class UsageFormatterTest {
+public class HelpTextTest {
 
     @InjectMocks
-    private UsageFormatter usageFormatter;
+    private HelpText helpText;
 
     @Mock
     private Config config;
@@ -35,7 +36,7 @@ public class UsageFormatterTest {
         configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", "public", false));
         Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
 
-        final List<String> usageStrings = usageFormatter.getStringList();
+        final List<String> usageStrings = helpText.getStringList(HelpTopic.OVERVIEW);
         assertTrue(usageStrings.size() >= 16);
         assertEquals("Usage: blackduck-docker-inspector.sh <options>", usageStrings.get(0));
         assertEquals("options: any supported property can be set by adding to the command line", usageStrings.get(1));
