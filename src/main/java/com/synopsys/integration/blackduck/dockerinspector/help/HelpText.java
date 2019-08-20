@@ -100,7 +100,7 @@ public class HelpText {
                       "In this mode Docker Inspector does require access to a Docker Engine (very similar to the way the Docker client requires\n" +
                       "access to a Docker Engine) so it can pull and run Docker images (it uses the https://github.com/docker-java/docker-java\n" +
                       "library to perform Docker operations via the Docker Engine).\n\n" +
-                      "In this mode, Docker Inspector automatically pulls, runs, stops, and removes the container-based imageinspector services\n" +
+                      "In this mode, Docker Inspector automatically pulls, runs, stops, and removes the container-based image inspector services\n" +
                       "on which it depends. It accesses the services they provide via HTTP GET operations.\n\n" +
                       "This is the default mode, and the simplest to use.\n\n" +
                       "The documentation under Package Managers > Black Duck Docker Inspector at: https://synopsys.atlassian.net/wiki/spaces/INTDOCS\n" +
@@ -111,6 +111,20 @@ public class HelpText {
                       "(a) share a mounted volume (either persistent or temporary) that they will use to pass large files between containers, and\n" +
                       "(b) be able to reach each other via HTTP GET operations using base URLs that you will provide.");
         usage.add("");
+        usage.add("Image Inspector Services\n\n" +
+                      "Docker Inspector consists of a command line utility (provided in a Java .jar, but sometimes invoked via a bash script)\n" +
+                      "and three image inspector services.\n\n" +
+                      "The required Docker operations (if any) are performed by the command line utility, while the image inspector services\n" +
+                     "perform the work of unpacking the target Docker image, extracting the Linux package manager database,\n" +
+                     "and running the Linux package manager against that database in order to extract installed packages\n" +
+                     "and translate them to components (actually externalIds) for Black Duck. If the image inspector service\n" +
+                     "finds in the target image a package manager database that is incompatible with its own package manager utility\n" +
+                     "(this happens when, for example, you run Docker Inspector on an Alpine image, but the request goes to the\n" +
+                     "Ubuntu image inspector service), the image inspector service will redirect the request to the appropriate\n" +
+                     "image inspector service. You can change the default image inspector service to reduce the likelihood\n" +
+                      "of redirects (resulting in shorter execution times). For example, if most of your target images are Alpine\n" +
+                      "you can set imageinspector.service.distro.default to alpine.\n\n" +
+                     "The image inspector service containers are downloaded from Docker Hub (blackducksoftware/blackduck-imageinspector-*).");
         usage.add("");
         usage.add("Deployment samples for commonly-used environments:");
         usage.add("");
@@ -122,7 +136,7 @@ public class HelpText {
                      "2. Toolkit (#2 above)");
         usage.add("");
         usage.add("The challenges involved in deploying Docker Inspector using the 'toolkit' approach are:\n" +
-                     "1. Starting the four containers (one for Detect / Docker Inspector, plus three imageinspector containers) such that they all share a common mounted volume\n" +
+                     "1. Starting the four containers (one for Detect / Docker Inspector, plus three image inspector containers) such that they all share a common mounted volume\n" +
                      "2. Ensuring that the containers can reach each other via HTTP GET operations using base URLs that your provide.");
         usage.add("");
         usage.add("These deployment samples are intended to show how these challenges could be met. They are not intended to be used as-is in production. You should understand the code before you use it. They do not represent the only way to deploy in each environment.\n");
