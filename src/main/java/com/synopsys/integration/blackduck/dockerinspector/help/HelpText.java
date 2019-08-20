@@ -132,7 +132,7 @@ public class HelpText {
         usage.add("OpenShift\t\tToolkit\t\t\tSingle pod; emptyDir volume; localhost URLs\thttps://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/openshift/setup.txt");
         usage.add("Travis CI\t\tToolkit\t\t\tdocker service; localhost URLs\t\t\thttps://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/travisci/travis.yml");
         usage.add("GitLab CI\t\tToolkit\t\t\tshell executoer; localhost URLs\t\t\thttps://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/gitlabci/setup.sh");
-        usage.add("Circle CI\t\tCommand Line Utility\t\t\t\t\t\t\tTBD");
+        usage.add("Circle CI\t\tCommand Line Utility\t\t\t\t\t\t\thttps://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/circleci/config.yml");
         usage.add("");
         return usage;
     }
