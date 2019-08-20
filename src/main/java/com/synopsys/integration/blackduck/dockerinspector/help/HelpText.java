@@ -104,27 +104,28 @@ public class HelpText {
                       "on which it depends. It accesses the services they provide via HTTP GET operations.\n\n" +
                       "This is the default mode, and the simplest to use.\n\n" +
                       "The documentation under Package Managers > Black Duck Docker Inspector at: https://synopsys.atlassian.net/wiki/spaces/INTDOCS\n" +
-                      "provides all the information that is required to run Docker Inspector in this mode.\n\n" +
+                      "provides all the information that is normally required to run Docker Inspector in this mode.\n\n" +
                       "2. A container orchestration platform such as Kubernetes, OpenShift, etc.\n\n" +
                       "In this scenario, Docker Inspector is a toolkit consisting of a command line utility (that you will run in one container), plus\n" +
                       "three container-based services (which you must start). These four containers must:\n" +
                       "(a) share a mounted volume (either persistent or temporary) that they will use to pass large files between containers, and\n" +
-                      "(b) must be able to reach each other via HTTP GET operations using base URLs that you will provide.\n");
+                      "(b) be able to reach each other via HTTP GET operations using base URLs that you will provide.");
         usage.add("");
-        usage.add("Deployment samples for commonly-used environments:\n\n");
+        usage.add("");
+        usage.add("Deployment samples for commonly-used environments:");
         usage.add("");
         usage.add("Your deployment approach will be the same whether you are invoking Docker Inspector directly, or invoking it via Detect.\n" +
                      "Most of the sample deployments use Detect simply because that is the most common use case.");
         usage.add("");
         usage.add("Each sample deployment follows one of the two approaches described above, and are labelled accordingly below:\n" +
                      "1. Command Line Utility (#1 above)\n" +
-                     "2. Toolkit (#2 above)\n");
+                     "2. Toolkit (#2 above)");
         usage.add("");
         usage.add("The challenges involved in deploying Docker Inspector using the 'toolkit' approach are:\n" +
-                     "1. Starting containers such that they all share a common mounted volume\n" +
-                     "2. Ensuring that the containers can reach each other via HTTP GET operations.");
+                     "1. Starting the four containers (one for Detect / Docker Inspector, plus three imageinspector containers) such that they all share a common mounted volume\n" +
+                     "2. Ensuring that the containers can reach each other via HTTP GET operations using base URLs that your provide.");
         usage.add("");
-        usage.add("These deployment samples are intended to show how these challenges could be met. They are not intended to be used as-is in production.\n");
+        usage.add("These deployment samples are intended to show how these challenges could be met. They are not intended to be used as-is in production. You should understand the code before you use it. They do not represent the only way to deploy in each environment.\n");
         usage.add("");
         usage.add("Environment\t\tApproach\t\tDeployment Notes\t\t\t\tSample Deployment (curl this URL)");
         usage.add("");
