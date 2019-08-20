@@ -139,7 +139,8 @@ public class HelpText {
                      "1. Starting the four containers (one for Detect / Docker Inspector, plus three image inspector containers) such that they all share a common mounted volume\n" +
                      "2. Ensuring that the containers can reach each other via HTTP GET operations using base URLs that your provide.");
         usage.add("");
-        usage.add("These deployment samples are intended to show how these challenges could be met. They are not intended to be used as-is in production. You should understand the code before you use it. They do not represent the only way to deploy in each environment.\n");
+        usage.add("These deployment samples are intended to show how these challenges could be met. They are not intended to be used as-is in production.\n" +
+                      "You should understand the code before you use it. They do not represent the only way to deploy in each environment.\n");
         usage.add("");
         usage.add("Environment\t\t\tApproach\tDeployment Notes\t\t\t\tSample Deployment (curl this URL)");
         usage.add("");
