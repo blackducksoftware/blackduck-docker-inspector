@@ -3,8 +3,6 @@ package com.synopsys.integration.blackduck.dockerinspector.help;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import com.synopsys.integration.blackduck.dockerinspector.help.HelpText;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -23,7 +21,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorOption;
-import com.synopsys.integration.blackduck.dockerinspector.help.HelpTopic;
 
 @RunWith(SpringRunner.class)
 public class HelpTextTest {
@@ -36,35 +33,39 @@ public class HelpTextTest {
 
     @Test
     public void testTextOverview() throws IllegalArgumentException, IllegalAccessException, IOException {
+        final String usageString = helpText.get("overview");
+        assertTrue(usageString.length() >= 100);
+        assertTrue(usageString.contains("Usage: blackduck-docker-inspector.sh <options>"));
+        assertTrue(usageString.contains("options: any supported property can be set by adding to the command line"));
+    }
+
+    @Test
+    public void testTextProperties() throws IllegalArgumentException, IllegalAccessException, IOException {
         final SortedSet<DockerInspectorOption> configOptions = new TreeSet<>();
         configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", "public", false));
         Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
 
-        final List<String> usageStrings = helpText.getStringList(HelpTopic.OVERVIEW);
-        assertTrue(usageStrings.size() >= 16);
-        assertEquals("Usage: blackduck-docker-inspector.sh <options>", usageStrings.get(0));
-        assertEquals("options: any supported property can be set by adding to the command line", usageStrings.get(1));
-        final String usageString = StringUtils.join(usageStrings, ";");
+        final String usageString = helpText.get("properties");
         assertTrue(usageString.contains("blackduck.url [String]: Black Duck URL"));
     }
 
     @Test
     public void testHtmlDeployment() throws IllegalArgumentException, IllegalAccessException, IOException {
-//        final SortedSet<DockerInspectorOption> configOptions = new TreeSet<>();
-//        configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", "public", false));
-//        Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
+        final String deploymentHtml = helpText.get("deployment.html");
+        assertTrue(deploymentHtml.contains("<p>The challenges involved in deploying Docker Inspector using the 'toolkit' approach are:</p>"));
+    }
 
-        final String deploymentHtml = helpText.getHtml(HelpTopic.DEPLOYMENT);
-        System.out.printf("deploymentHtml: %s\n", deploymentHtml);
+    @Test
+    public void testHtmlProperties() throws IllegalArgumentException, IllegalAccessException, IOException {
+        final SortedSet<DockerInspectorOption> configOptions = new TreeSet<>();
+        configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", "public", false));
+        Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
 
-        final File outputFile = new File("test/output/deployment.html");
-        FileUtils.writeStringToFile(outputFile, deploymentHtml, StandardCharsets.UTF_8);
-
-//        assertTrue(usageStrings.size() >= 16);
-//        assertEquals("Usage: blackduck-docker-inspector.sh <options>", usageStrings.get(0));
-//        assertEquals("options: any supported property can be set by adding to the command line", usageStrings.get(1));
-//        final String usageString = StringUtils.join(usageStrings, ";");
-//        assertTrue(usageString.contains("blackduck.url [String]: Black Duck URL"));
+        final String deploymentHtml = helpText.get("properties.html");
+        assertTrue(deploymentHtml.contains("<h1>Available properties:</h1>\n"
+                                               + "<ul>\n"
+                                               + "<li>blackduck.url [String]: Black Duck URL</li>\n"
+                                               + "</ul>\n"));
     }
 
 }

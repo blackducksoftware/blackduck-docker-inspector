@@ -22,7 +22,7 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.help;
 
-public enum HelpTopic {
-    OVERVIEW,
-    DEPLOYMENT
+public enum HelpFormat {
+    MARKDOWN,
+    HTML
 }

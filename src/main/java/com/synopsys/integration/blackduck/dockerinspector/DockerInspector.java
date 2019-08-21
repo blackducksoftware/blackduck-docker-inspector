@@ -23,14 +23,12 @@
 package com.synopsys.integration.blackduck.dockerinspector;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorSystemProperties;
-import com.synopsys.integration.blackduck.dockerinspector.help.HelpTopic;
 import com.synopsys.integration.blackduck.dockerinspector.httpclient.HttpClientInspector;
 import com.synopsys.integration.blackduck.dockerinspector.output.ResultFile;
 import com.synopsys.integration.blackduck.dockerinspector.programarguments.ArgumentParser;
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 import java.io.IOException;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 
@@ -130,17 +128,10 @@ public class DockerInspector {
         return false;
     }
 
-    private HelpTopic getHelpTopic() {
+    private String getHelpTopic() {
         final ArgumentParser argumentParser = new ArgumentParser(applicationArguments.getSourceArgs());
         final String helpTopicName = argumentParser.findValueForCommand("-h", "--help");
-        if (helpTopicName == null) {
-            return HelpTopic.OVERVIEW;
-        }
-        if ("deployment".equalsIgnoreCase(helpTopicName)) {
-            return HelpTopic.DEPLOYMENT;
-        }
-        logger.warn(String.format("Unknown help topic: %s", helpTopicName));
-        return HelpTopic.OVERVIEW;
+        return helpTopicName;
     }
 
     private boolean contains(final String[] stringsToSearch, final String targetString) {
@@ -152,12 +143,10 @@ public class DockerInspector {
         return false;
     }
 
-    private void showHelp(final HelpTopic helpTopic) throws IllegalArgumentException, IllegalAccessException, IOException {
-        final List<String> usage = helpText.getStringList(helpTopic);
+    private void showHelp(final String helpTopic) throws IllegalArgumentException, IllegalAccessException, IOException {
+        final String usage = helpText.get(helpTopic);
         System.out.println("----------");
-        for (final String line : usage) {
-            System.out.println(line);
-        }
+        System.out.println(usage);
         System.out.println("----------");
     }
 
