@@ -1,13 +1,13 @@
 # Deploying Docker Inspector
 
-Black Duck Docker Inspector can be run in either of the following environments:
+Black Duck Docker Inspector can be run in either of the following modes:
 
-1. A Linux machine (or Linux VM) with Docker.
-2. A container orchestration platform such as Kubernetes, OpenShift, etc.
+1. Host mode, on a Linux machine (or Linux VM) with Docker.
+2. Container mode, inside a container running on an orchestration platform such as Kubernetes, OpenShift, etc.
 
-Each environment is discussed in detail below.
+Each mode is discussed in detail below.
 
-## Deploying on Linux machine (or Linux VM) with Docker
+## Using host mode on Linux machine (or Linux VM) with Docker
 
 In this scenario, Docker Inspector is a command line utility that automatically pulls/runs and uses container-based services 
 (and cleans them up when it's done). The Docker command, if installed on the machine, can be very useful for troubleshooting, but is not actually
@@ -25,7 +25,7 @@ This is the default mode, and the simplest to use.
 The documentation under Package Managers > Black Duck Docker Inspector at: https://synopsys.atlassian.net/wiki/spaces/INTDOCS
 provides all the information that is normally required to run Docker Inspector in this mode.
 
-## Deploying in a container orchestration platform such as Kubernetes, OpenShift, etc.
+## Using container mode in a container orchestration platform such as Kubernetes, OpenShift, etc.
 
 In this scenario, Docker Inspector is a toolkit consisting of a command line utility (that you will run in one container), plus
 three container-based services (which you must start). These four containers must:

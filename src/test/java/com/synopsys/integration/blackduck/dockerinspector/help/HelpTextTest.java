@@ -35,8 +35,8 @@ public class HelpTextTest {
     public void testTextOverview() throws IllegalArgumentException, IllegalAccessException, IOException {
         final String usageString = helpText.get("overview");
         assertTrue(usageString.length() >= 100);
-        assertTrue(usageString.contains("Usage: blackduck-docker-inspector.sh <options>"));
-        assertTrue(usageString.contains("options: any supported property can be set by adding to the command line"));
+        assertTrue(usageString.contains("Usage: blackduck-docker-inspector.sh <Docker Inspector arguments>"));
+        assertTrue(usageString.contains("Docker Inspector arguments: any supported property can be set by adding to the command line"));
     }
 
     @Test
