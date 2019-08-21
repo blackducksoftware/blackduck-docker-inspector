@@ -22,6 +22,10 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.help;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedSet;
@@ -33,6 +37,10 @@ import org.springframework.stereotype.Component;
 import com.synopsys.integration.blackduck.dockerinspector.DockerInspector;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorOption;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.data.MutableDataSet;
 
 @Component
 public class HelpText {
@@ -51,7 +59,40 @@ public class HelpText {
         }
     }
 
-    public List<String> getStringListOverview() throws IllegalArgumentException, IllegalAccessException {
+    public String getHtml(final HelpTopic helpTopic) throws IllegalArgumentException, IOException {
+        switch (helpTopic) {
+            case DEPLOYMENT:
+                return getHtmlDeployment();
+            default:
+                throw new UnsupportedOperationException(String.format("Help topic %s has not been implemented", helpTopic.toString()));
+        }
+    }
+
+    private String getHtmlDeployment() throws IOException {
+        MutableDataSet options = new MutableDataSet();
+        Parser parser = Parser.builder(options).build();
+        HtmlRenderer renderer = HtmlRenderer.builder(options).build();
+
+        final InputStream helpFileInputStream = this.getClass().getResourceAsStream("/help/deployment.md");
+        final String helpFileContents = readFromInputStream(helpFileInputStream);
+        Node document = parser.parse(helpFileContents);
+        String html = renderer.render(document);
+        return html;
+    }
+
+    private String readFromInputStream(InputStream inputStream) throws IOException {
+        final StringBuilder resultStringBuilder = new StringBuilder();
+        try (final BufferedReader br
+                 = new BufferedReader(new InputStreamReader(inputStream))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                resultStringBuilder.append(line).append("\n");
+            }
+        }
+        return resultStringBuilder.toString();
+    }
+
+    private List<String> getStringListOverview() throws IllegalArgumentException, IllegalAccessException {
         final List<String> usage = new ArrayList<>();
         usage.add(String.format("Usage: %s <options>", DockerInspector.PROGRAM_NAME));
         usage.add("options: any supported property can be set by adding to the command line");
