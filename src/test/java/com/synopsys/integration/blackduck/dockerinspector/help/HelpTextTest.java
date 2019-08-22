@@ -1,17 +1,11 @@
 package com.synopsys.integration.blackduck.dockerinspector.help;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -51,7 +45,8 @@ public class HelpTextTest {
 
     @Test
     public void testHtmlDeployment() throws IllegalArgumentException, IllegalAccessException, IOException {
-        final String deploymentHtml = helpText.get("deployment.html");
+        Mockito.when(config.getHelpOutputFormat()).thenReturn("html");
+        final String deploymentHtml = helpText.get("deployment");
         assertTrue(deploymentHtml.contains("<p>The challenges involved in deploying Docker Inspector using the 'toolkit' approach are:</p>"));
     }
 
@@ -60,8 +55,9 @@ public class HelpTextTest {
         final SortedSet<DockerInspectorOption> configOptions = new TreeSet<>();
         configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", "public", false));
         Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
+        Mockito.when(config.getHelpOutputFormat()).thenReturn("HtmL");
 
-        final String deploymentHtml = helpText.get("properties.html");
+        final String deploymentHtml = helpText.get("properties");
         assertTrue(deploymentHtml.contains("<h1>Available properties:</h1>\n"
                                                + "<ul>\n"
                                                + "<li>blackduck.url [String]: Black Duck URL</li>\n"

@@ -29,6 +29,8 @@ import java.io.InputStreamReader;
 import java.util.SortedSet;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -41,9 +43,12 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 
 @Component
 public class HelpText {
-    private static final String DOT_HTML_SUFFIX = ".html";
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    // These two help topics are special; this class doesn't need to know about the rest
     private static final String HELP_TOPIC_NAME_OVERVIEW = "overview";
     private static final String HELP_TOPIC_NAME_PROPERTIES = "properties";
+
     private final Parser parser;
     private final HtmlRenderer renderer;
 
@@ -58,12 +63,23 @@ public class HelpText {
 
     public String get(String givenHelpTopicName) throws IllegalArgumentException, IOException, IllegalAccessException {
         String helpTopicName = nonNullHelpTopic(givenHelpTopicName);
-        HelpFormat helpFormat = HelpFormat.MARKDOWN;
-        if (helpTopicName.endsWith(DOT_HTML_SUFFIX)) {
-            helpFormat = HelpFormat.HTML;
-            helpTopicName = helpTopicName.substring(0, helpTopicName.length() - DOT_HTML_SUFFIX.length());
-        }
+        HelpFormat helpFormat = getHelpFormat();
         return get(helpTopicName, helpFormat);
+    }
+
+    private HelpFormat getHelpFormat() {
+        final String givenHelpFormatName = config.getHelpOutputFormat();
+        if (StringUtils.isBlank(givenHelpFormatName)) {
+            return HelpFormat.MARKDOWN;
+        }
+        HelpFormat helpFormat;
+        try {
+            helpFormat = HelpFormat.valueOf(config.getHelpOutputFormat().toUpperCase());
+        } catch (IllegalArgumentException e) {
+            logger.warn(String.format("Invalid help format requested: %s; using MARKDOWN (text) instead", config.getHelpOutputFormat()));
+            helpFormat = HelpFormat.MARKDOWN;
+        }
+        return helpFormat;
     }
 
     private String get(String helpTopicName, HelpFormat helpFormat) throws IllegalArgumentException, IOException, IllegalAccessException {
