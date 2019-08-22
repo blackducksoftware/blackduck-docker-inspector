@@ -59,7 +59,7 @@ public class HelpWriter {
             throw new HelpGenerationException(String.format("Error generating help: %s", e.getMessage()), e);
         }
     }
-
+    
     private List<String> deriveHelpTopicList(final String helpTopicsString) {
         if (StringUtils.isBlank(helpTopicsString)) {
             return Arrays.asList("");

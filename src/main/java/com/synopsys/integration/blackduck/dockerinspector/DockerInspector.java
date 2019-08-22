@@ -166,11 +166,7 @@ public class DockerInspector {
         if (config.isPhoneHome() && !config.isOfflineMode()) {
             logger.debug("PhoneHome enabled");
             try {
-                String dockerEngineVersion = "None";
-                if (StringUtils.isBlank(config.getImageInspectorUrl())) {
-                    dockerEngineVersion = dockerClientManager.getDockerEngineVersion();
-                }
-                blackDuckClient.phoneHome(dockerEngineVersion);
+                blackDuckClient.phoneHome(deriveDockerEngineVersion(config));
             } catch (final Exception e) {
                 logger.warn(String.format("Unable to phone home: %s", e.getMessage()));
             }
@@ -179,6 +175,14 @@ public class DockerInspector {
         logger.info(String.format("Inspecting image:tag %s:%s", config.getDockerImageRepo(), config.getDockerImageTag()));
         blackDuckClient.testBlackDuckConnection();
         return true;
+    }
+
+    private String deriveDockerEngineVersion(final Config config) {
+        String dockerEngineVersion = "None";
+        if (StringUtils.isBlank(config.getImageInspectorUrl())) {
+            dockerEngineVersion = dockerClientManager.getDockerEngineVersion();
+        }
+        return dockerEngineVersion;
     }
 
     private void initImageName() {
