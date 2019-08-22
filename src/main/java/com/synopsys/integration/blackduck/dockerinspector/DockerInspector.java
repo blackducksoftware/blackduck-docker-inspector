@@ -23,6 +23,8 @@
 package com.synopsys.integration.blackduck.dockerinspector;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorSystemProperties;
+import com.synopsys.integration.blackduck.dockerinspector.exception.HelpGenerationException;
+import com.synopsys.integration.blackduck.dockerinspector.help.HelpWriter;
 import com.synopsys.integration.blackduck.dockerinspector.httpclient.HttpClientInspector;
 import com.synopsys.integration.blackduck.dockerinspector.output.ResultFile;
 import com.synopsys.integration.blackduck.dockerinspector.programarguments.ArgumentParser;
@@ -47,7 +49,6 @@ import com.synopsys.integration.blackduck.dockerinspector.blackduckclient.BlackD
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
-import com.synopsys.integration.blackduck.dockerinspector.help.HelpText;
 import com.synopsys.integration.blackduck.imageinspector.api.name.ImageNameResolver;
 import com.synopsys.integration.exception.IntegrationException;
 
@@ -84,7 +85,7 @@ public class DockerInspector {
     private HttpClientInspector inspector;
 
     @Autowired
-    private HelpText helpText;
+    private HelpWriter helpWriter;
 
     @Autowired
     private DockerInspectorSystemProperties dockerInspectorSystemProperties;
@@ -103,7 +104,13 @@ public class DockerInspector {
             }
             returnCode = inspector.getBdio();
         } catch (final Throwable e) {
-            final String msg = String.format("Error inspecting image: %s", e.getMessage());
+            final String msgBase;
+            if (e instanceof HelpGenerationException) {
+                msgBase = "Error generating help";
+            } else {
+                msgBase = "Error inspecting image";
+            }
+            final String msg = String.format("%s: %s", msgBase, e.getMessage());
             logger.error(msg);
             final String trace = ExceptionUtils.getStackTrace(e);
             logger.debug(String.format("Stack trace: %s", trace));
@@ -128,10 +135,13 @@ public class DockerInspector {
         return false;
     }
 
-    private String getHelpTopic() {
+    private String getHelpTopics() {
         final ArgumentParser argumentParser = new ArgumentParser(applicationArguments.getSourceArgs());
-        final String helpTopicName = argumentParser.findValueForCommand("-h", "--help");
-        return helpTopicName;
+        final String argFollowingHelpFlag = argumentParser.findValueForCommand("-h", "--help");
+        if (StringUtils.isBlank(argFollowingHelpFlag) || argFollowingHelpFlag.startsWith("-")) {
+            return null;
+        }
+        return argFollowingHelpFlag;
     }
 
     private boolean contains(final String[] stringsToSearch, final String targetString) {
@@ -143,17 +153,10 @@ public class DockerInspector {
         return false;
     }
 
-    private void showHelp(final String helpTopic) throws IllegalArgumentException, IllegalAccessException, IOException {
-        final String usage = helpText.get(helpTopic);
-        System.out.println("----------");
-        System.out.println(usage);
-        System.out.println("----------");
-    }
-
     private boolean initAndValidate(final Config config) throws IOException, IntegrationException, IllegalArgumentException, IllegalAccessException {
         logger.info(String.format("Black Duck Docker Inspector %s", programVersion.getProgramVersion()));
         if (helpInvoked()) {
-            showHelp(getHelpTopic());
+            helpWriter.write(getHelpTopics());
             return false;
         }
         dockerInspectorSystemProperties.augmentSystemProperties(config.getSystemPropertiesPath());

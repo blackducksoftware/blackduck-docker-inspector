@@ -304,7 +304,7 @@ public class Config {
     private String helpOutputFormat = HelpFormat.MARKDOWN.name();
 
     @ValueDescription(description = "The path to a file to which help output will be written. If not set, help will be written to stdout. If set, the directory must exist; the file will be created if it does not exist.", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
-    @Value("${help.output.file.path:}")
+    @Value("${help.output.path:}")
     private String helpOutputFilePath = "";
 
     // Environment Variables

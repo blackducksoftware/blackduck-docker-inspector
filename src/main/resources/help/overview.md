@@ -105,5 +105,8 @@ Other help topics available:
 * advanced
 * deployment
 
-To display a help topic, run Docker Inspector with:
-    -h <help topic>
+To display a help topic, run Docker Inspector with either -h or --help followed by a topic. For example:
+    -h properties
+    
+To display multiple help topics, use a comma-separated list of help topics. For example:
+    -h overview,properties,running
