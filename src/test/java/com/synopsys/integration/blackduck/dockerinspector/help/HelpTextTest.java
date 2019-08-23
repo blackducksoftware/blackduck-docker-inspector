@@ -30,7 +30,7 @@ public class HelpTextTest {
         final String usageString = helpText.get("overview");
         assertTrue(usageString.length() >= 100);
         assertTrue(usageString.contains("Usage: blackduck-docker-inspector.sh <Docker Inspector arguments>"));
-        assertTrue(usageString.contains("Docker Inspector arguments: any supported property can be set by adding to the command line"));
+        assertTrue(usageString.contains("Any supported property can be set by adding to the command line"));
     }
 
     @Test
