@@ -97,12 +97,14 @@ There are other alternative methods for setting properties. For more information
 
 # Help
 
-Other help topics available:
+Available help topics:
+* overview (this page)
 * running
 * properties
 * architecture
 * advanced
 * deployment
+* troubleshooting
 * releasenotes
 
 To display a help topic, run Docker Inspector with either -h or --help followed by a topic. For example:
