@@ -1,5 +1,20 @@
 # Overview
 
+Black Duck Docker Inspector inspects Docker images to discover packages (components).
+It utilizes the appropriate Linux package manager to provide a list of
+the installed (by the package manager) packages, and create a Black Duck project with a Bill of Materials (BOM) consisting of those packages as components.
+Because it relies on the Linux package manager as its source, the discovered packages are limited to those installed and managed using the Linux package manager.
+
+Black Duck Docker Inspector can inspect Docker images that support dpkg, rpm, or apk package manager formats.
+
+After running the Black Duck Docker Inspector on an image, navigate to Black Duck to view the Bill of Materials (BOM) created by 
+Black Duck Docker Inspector.
+
+Docker Inspector has two modes:
+
+* Host mode, for running on a Linux machine (or VM) where Docker Inspector can perform Docker operations via a Docker engine
+* Container mode, for running in a container (started by Docker, Kubernetes, OpenShift, etc.)
+
 ## Host mode
 
 Host mode (the default mode) is designed for Linux machines (and VMs) where it can perform Docker operations via a Docker engine.
@@ -13,41 +28,19 @@ Black Duck Docker Inspector can pull the target image; in other words, the Docke
 as Docker Hub. Alternatively, you can save an image to a .tar file by using the Docker Save command. Then, run Black Duck Docker Inspector
 on the .tar file. Docker Inspector supports Docker Image Specification v1.2.0 format .tar files.
 
-In either scenario, Black Duck Docker Inspector utilizes the appropriate standard Linux package manager (dpkg, rpm, and apk) to discover
-the installed open source packages, and create a Black Duck project with a Bill of Materials (BOM) consisting of those packages as components.
-Therefore the discovered packages are limited to those installed and managed using the Linux package manager.
-
-Black Duck Docker Inspector can inspect Docker images that support dpkg, rpm, or apk package manager formats.
-
-After running the Black Duck Docker Inspector, navigate to Black Duck to view the Bill of Materials (BOM) created by 
-Black Duck Docker Inspector.
-
-Black Duck Docker Inspector can:
-
-* Inspect any Linux Docker image using its package manager (dpkg, rpm, or apk).
-* Produce a Black Duck Bill of Materials based on the output without running the image.
-
 ## Container mode
 
 Container mode is designed for container orchestration environments (Kubernetes, OpenShift, etc.) where Docker Inspector will run
-inside a container, where it cannot perform Docker operations. For information on container mode, refer to the deployment help topic.
+inside a container, where it cannot perform Docker operations. For information on running Docker Inspector in container mode, refer to the *deployment* help topic.
 
 # Requirements
-
-Docker Inspector can run in a variety of container environments such as Docker, Kubernetes, and OpenShift, but requires different
-setup and configuration for different environments. By default, Docker Inspector expects that it is running on a Linux server or
-virtual machine (not a container), that is configured for and has access to a Docker engine that it uses to pull images, start
-containers, and other activities. For information on running Docker Inspector in other environments; for example, Kubernetes,
-OpenShift, within a container, and others, refer to the deployment help topic.
 
 Requirements for Black Duck Docker Inspector are:
 
 * The current version of Black Duck. Visit [this page](https://github.com/blackducksoftware/hub/releases) to determine the current version. 
 * Linux.
 * Access to the internet. For information on running without access to the internet, refer to Air Gap mode..
-* Either one of the following:
-    * Host mode: Access to a Docker Engine (version 17.09 or higher).
-    * Container mode: A container application environment as described in the GitHub wiki.
+
 * The curl utility.
 * Bash.
 * Java version 8.  Other versions of Java are not currently supported.
@@ -57,14 +50,20 @@ Requirements for Black Duck Docker Inspector are:
         curl -O  https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh
         chmod +x blackduck-docker-inspector.sh
 
+* In host mode: Access to a Docker Engine (version 17.09 or higher).
+* In container mode: You must start the Docker Inspector container that meets the requirements above, and three container-based services. 
+All four of these containers must share a mounted volume and be able to reach each other via HTTP GET operations using base URLs
+that you provide.
+    
 # Getting started
 
-The following command format will always run the latest version of Docker Inspector:
+The following command format will always fetch and run the latest version of Docker Inspector:
 
     bash <(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) <Docker Inspector arguments>
 
 For example:
 
+    bash <(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) --help
     bash <(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) --upload.bdio=false --docker.image=ubuntu
 
 An alternative is to download and run the latest Docker Inspector script:
@@ -80,12 +79,13 @@ Another alternative is to download the Docker Inspector .jar (using the script) 
     curl -O  https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh
     chmod +x blackduck-docker-inspector.sh
     ./blackduck-docker-inspector.sh --pulljar
-    java -jar blackduck-docker-inspector-8.1.3.jar <Docker Inspector arguments>
+    java -jar blackduck-docker-inspector-<version>.jar <Docker Inspector arguments>
 
-# Usage
+# Passing arguments to Docker Inspector
 
 Usage: blackduck-docker-inspector.sh <Docker Inspector arguments>
-Docker Inspector arguments: any supported property can be set by adding to the command line
+Docker Inspector arguments consist of property assignments. 
+Any supported property can be set by adding to the command line
 a property assignment of the form:
 	--<property name>=<value>
 
@@ -93,10 +93,9 @@ Alternatively, any supported property can be set by adding to a text file named
 application.properties (in the current directory) a line of the form:
 <property name>=<value>
 
-For greater security, the Black Duck password can be set via the environment variable BD_PASSWORD.
-For example:
-  export BD_PASSWORD=mypassword
-  ./blackduck-docker-inspector.sh --blackduck.url=http://blackduck.mydomain.com:8080/ --blackduck.username=myusername --docker.image=ubuntu:latest
+There are other alternative methods for setting properties. For more information, refer to the *running* help topic.
+
+# Help
 
 Other help topics available:
 * running
@@ -104,6 +103,7 @@ Other help topics available:
 * architecture
 * advanced
 * deployment
+* releasenotes
 
 To display a help topic, run Docker Inspector with either -h or --help followed by a topic. For example:
     -h properties

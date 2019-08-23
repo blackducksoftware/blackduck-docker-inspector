@@ -75,3 +75,9 @@ Travis CI			Toolkit		docker service; localhost URLs			https://raw.githubusercont
 GitLab CI			Toolkit		shell executoer; localhost URLs			https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/gitlabci/setup.sh
 Circle CI			Utility								https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/circleci/config.yml
 Docker (Detect in container)	Toolkit		localhost URLs					https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/docker/runDetectInContainer/setup.sh
+
+## Running Detect on a project directory that exists within a Docker image
+
+## Running the signature scanner on a specific directory within a Docker image
+
+## Inspecting multiple images more efficiently (using host mode)
