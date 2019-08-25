@@ -64,4 +64,18 @@ public class HelpTextTest {
                                                + "</ul>\n"));
     }
 
+    @Test
+    public void testHtmlAll() throws IllegalArgumentException, IllegalAccessException, IOException {
+        final SortedSet<DockerInspectorOption> configOptions = new TreeSet<>();
+        configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", "public", false));
+        Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
+        Mockito.when(config.getHelpOutputFormat()).thenReturn("HtmL");
+
+        final String deploymentHtml = helpText.get("all");
+        assertTrue(deploymentHtml.contains("<h1>Available properties:</h1>\n"
+                                               + "<ul>\n"
+                                               + "<li>blackduck.url [String]: Black Duck URL</li>\n"
+                                               + "</ul>\n"));
+    }
+
 }

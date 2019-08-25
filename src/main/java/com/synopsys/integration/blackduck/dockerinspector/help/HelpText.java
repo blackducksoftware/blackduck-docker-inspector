@@ -26,6 +26,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.SortedSet;
 
 import org.apache.commons.lang3.StringUtils;
@@ -36,18 +39,22 @@ import org.springframework.stereotype.Component;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorOption;
+import com.vladsch.flexmark.ext.toc.SimTocExtension;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 
 @Component
 public class HelpText {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    // These two help topics are special; this class doesn't need to know about the rest
+    // These help topics are special; this class doesn't need to know about the rest
     private static final String HELP_TOPIC_NAME_OVERVIEW = "overview";
     private static final String HELP_TOPIC_NAME_PROPERTIES = "properties";
+    private static final String HELP_TOPIC_NAME_ALL = "all";
+    private static final String ALL_HELP_TOPICS = "overview,architecture,running,properties,advanced,deployment,troubleshooting,releasenotes";
 
     private final Parser parser;
     private final HtmlRenderer renderer;
@@ -56,13 +63,17 @@ public class HelpText {
     private Config config;
 
     public HelpText() {
-        final MutableDataSet options = new MutableDataSet();
+        // From https://github.com/vsch/flexmark-java/blob/master/flexmark-ext-toc/src/test/java/com/vladsch/flexmark/ext/toc/ComboSimTocSpecTest.java
+        final DataHolder options = new MutableDataSet()
+                                       .set(HtmlRenderer.INDENT_SIZE, 2)
+                                       .set(HtmlRenderer.RENDER_HEADER_ID, true)
+                                       .set(Parser.EXTENSIONS, Collections.singletonList(SimTocExtension.create()));
         parser = Parser.builder(options).build();
         renderer = HtmlRenderer.builder(options).build();
     }
 
     public String get(String givenHelpTopicName) throws IllegalArgumentException, IOException, IllegalAccessException {
-        String helpTopicName = nonNullHelpTopic(givenHelpTopicName);
+        String helpTopicName = translateGivenTopicName(givenHelpTopicName);
         HelpFormat helpFormat = getHelpFormat();
         return get(helpTopicName, helpFormat);
     }
@@ -82,20 +93,37 @@ public class HelpText {
         return helpFormat;
     }
 
-    private String get(String helpTopicName, HelpFormat helpFormat) throws IllegalArgumentException, IOException, IllegalAccessException {
-        switch (helpFormat) {
-            case MARKDOWN:
-                return getMarkdownForHelpTopic(helpTopicName);
-            case HTML:
-                return getHtmlForTopic(helpTopicName);
-            default:
-                throw new UnsupportedOperationException(String.format("Help format %s not supported", helpFormat.name()));
+    private String get(String helpTopicNames, HelpFormat helpFormat) throws IllegalArgumentException, IOException, IllegalAccessException {
+        final List<String> helpTopics = deriveHelpTopicList(helpTopicNames);
+        final StringBuilder sb = new StringBuilder();
+        for (final String helpTopicName : helpTopics) {
+            switch (helpFormat) {
+                case MARKDOWN:
+                    sb.append(getMarkdownForHelpTopic(helpTopicName));
+                    break;
+                case HTML:
+                    sb.append(getHtmlForTopic(helpTopicName));
+                    break;
+                default:
+                    throw new UnsupportedOperationException(String.format("Help format %s not supported", helpFormat.name()));
+            }
         }
+        return sb.toString();
     }
 
-    private String nonNullHelpTopic(final String givenHelpTopic) {
+    private List<String> deriveHelpTopicList(final String helpTopicsString) {
+        if (StringUtils.isBlank(helpTopicsString)) {
+            return Arrays.asList("");
+        }
+        return Arrays.asList(helpTopicsString.split(","));
+    }
+
+    private String translateGivenTopicName(final String givenHelpTopic) {
         if (givenHelpTopic == null) {
             return HELP_TOPIC_NAME_OVERVIEW;
+        }
+        if (HELP_TOPIC_NAME_ALL.equalsIgnoreCase(givenHelpTopic)) {
+            return ALL_HELP_TOPICS;
         }
         return givenHelpTopic;
     }

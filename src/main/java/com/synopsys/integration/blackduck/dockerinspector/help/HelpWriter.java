@@ -24,7 +24,6 @@ package com.synopsys.integration.blackduck.dockerinspector.help;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
@@ -51,20 +50,10 @@ public class HelpWriter {
     public void write(final String helpTopicsString) throws HelpGenerationException {
         try {
             final PrintStream printStream = derivePrintStream();
-            final List<String> helpTopics = deriveHelpTopicList(helpTopicsString);
-            for (final String helpTopicName : helpTopics) {
-                printStream.println(helpText.get(helpTopicName));
-            }
+            printStream.println(helpText.get(helpTopicsString));
         } catch (Exception e) {
             throw new HelpGenerationException(String.format("Error generating help: %s", e.getMessage()), e);
         }
-    }
-
-    private List<String> deriveHelpTopicList(final String helpTopicsString) {
-        if (StringUtils.isBlank(helpTopicsString)) {
-            return Arrays.asList("");
-        }
-        return Arrays.asList(helpTopicsString.split(","));
     }
 
     private PrintStream derivePrintStream() throws FileNotFoundException {
