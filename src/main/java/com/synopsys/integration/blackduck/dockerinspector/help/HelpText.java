@@ -288,8 +288,6 @@ public class HelpText {
                     // test the node to see if it needs overriding
                     NodeRendererContext subContext = context.getDelegatedSubContext(true);
                     subContext.delegateRender();
-                    String tocText = subContext.getHtmlWriter().toString(0);
-                    html.append(tocText);
                     html.tagLineIndent("div", () -> html.append(subContext.getHtmlWriter()));
                 }
             }));
