@@ -170,6 +170,7 @@ public class HelpText {
         }
     }
 
+    // TODO KILL
     private String getHtmlForTopic(final String helpTopicName) throws IOException, IllegalAccessException {
         if (HELP_TOPIC_NAME_PROPERTIES.equalsIgnoreCase(helpTopicName)) {
             return markdownToHtml(getMarkdownForProperties());
@@ -183,8 +184,16 @@ public class HelpText {
 
     private String markdownToHtml(final String markdown) {
         final Node document = PARSER.parse(markdown);
-        final String html = RENDERER.render(document);
-        return html;
+        final String bodyHtml = RENDERER.render(document);
+        // TODO use String.format
+        final String fullHtml = "<!DOCTYPE html><html><head><meta charset=\"UTF-8\">\n" +
+                   "" +  // add your stylesheets, scripts styles etc.
+                   // uncomment line below for adding style for custom embedded fonts
+                   // nonLatinFonts +
+                   "</head><body>\n" + bodyHtml +
+                   "\n</body></html>";
+
+        return fullHtml;
     }
 
     private String getStringFromHelpFile(final String helpTopicName) throws IOException {
@@ -231,7 +240,7 @@ public class HelpText {
     }
 
     private String getMarkdownForProgram() {
-        return String.format("[TOC]\n\n# %s %s\n\n", programVersion.getProgramNamePretty(), programVersion.getProgramVersion());
+        return String.format("# %s %s\n\n[TOC]\n\n", programVersion.getProgramNamePretty(), programVersion.getProgramVersion());
     }
 
     static class CustomExtension implements HtmlRendererExtension {
@@ -280,14 +289,7 @@ public class HelpText {
                     NodeRendererContext subContext = context.getDelegatedSubContext(true);
                     subContext.delegateRender();
                     String tocText = subContext.getHtmlWriter().toString(0);
-
-                    // output to separate stream
-                    System.out.println("---- TOC HTML --------------------");
-                    System.out.print(tocText);
-                    System.out.println("----------------------------------\n");
-
                     html.append(tocText);
-
                     html.tagLineIndent("div", () -> html.append(subContext.getHtmlWriter()));
                 }
             }));
