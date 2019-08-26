@@ -62,10 +62,7 @@ public class HelpTextTest {
         Mockito.when(config.getHelpOutputFormat()).thenReturn("HtmL");
 
         final String deploymentHtml = helpText.get("properties");
-        assertTrue(deploymentHtml.contains("<h2>Available properties:</h2>\n"
-                                               + "<ul>\n"
-                                               + "<li>blackduck.url [String]: Black Duck URL</li>\n"
-                                               + "</ul>\n"));
+        verifyPropertiesHtml(deploymentHtml);
     }
 
     @Test
@@ -74,21 +71,26 @@ public class HelpTextTest {
         configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", "public", false));
         Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
         Mockito.when(config.getHelpOutputFormat()).thenReturn("HtmL");
+        Mockito.when(programVersion.getProgramNamePretty()).thenReturn("Black Duck Docker Inspector");
         Mockito.when(programVersion.getProgramVersion()).thenReturn("1.2.3");
 
         final String deploymentHtml = helpText.get("all");
-        assertTrue(deploymentHtml.contains("<h1>Black Duck Docker Inspector 1.2.3</h1>\n"
-                                               + "<h2>Overview</h2>"));
-        assertTrue(deploymentHtml.contains("<h2>Architecture</h2>"));
-        assertTrue(deploymentHtml.contains("<h2>Running Docker Inspector</h2>"));
-        assertTrue(deploymentHtml.contains("<h2>Available properties:</h2>\n"
-                                               + "<ul>\n"
-                                               + "<li>blackduck.url [String]: Black Duck URL</li>\n"
-                                               + "</ul>\n"));
-        assertTrue(deploymentHtml.contains("<h2>Advanced topics</h2>"));
-        assertTrue(deploymentHtml.contains("<h2>Deploying Docker Inspector</h2>"));
-        assertTrue(deploymentHtml.contains("<h2>Troubleshooting</h2>"));
-        assertTrue(deploymentHtml.contains("<h2>Release notes</h2>"));
+        System.out.println("DUMPING HTML OUTPUT:");
+        System.out.println(deploymentHtml);
+        assertTrue(deploymentHtml.contains(">Black Duck Docker Inspector 1.2.3"));
+        assertTrue(deploymentHtml.contains(">Overview"));
+        assertTrue(deploymentHtml.contains(">Architecture</h2>"));
+        assertTrue(deploymentHtml.contains(">Running Docker Inspector</h2>"));
+        verifyPropertiesHtml(deploymentHtml);
+        assertTrue(deploymentHtml.contains(">Advanced topics<"));
+        assertTrue(deploymentHtml.contains(">Deploying Docker Inspector<"));
+        assertTrue(deploymentHtml.contains(">Troubleshooting<"));
+        assertTrue(deploymentHtml.contains(">Release notes<"));
+    }
+
+    private void verifyPropertiesHtml(final String deploymentHtml) {
+        assertTrue(deploymentHtml.contains(">Available properties:<"));
+        assertTrue(deploymentHtml.contains(">blackduck.url [String]: Black Duck URL<"));
     }
 
 }

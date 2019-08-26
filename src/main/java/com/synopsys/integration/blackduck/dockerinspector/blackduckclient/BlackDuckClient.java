@@ -182,7 +182,7 @@ public class BlackDuckClient {
     }
 
     BlackDuckPhoneHomeHelper.createPhoneHomeHelper(blackDuckServicesFactory).handlePhoneHome(
-        DockerInspector.PROGRAM_ID, programVersion.getProgramVersion(), metaDataMap);
+        programVersion.getProgramId(), programVersion.getProgramVersion(), metaDataMap);
     logger.trace("Attempt to phone home completed");
   }
 

@@ -27,8 +27,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.SortedSet;
 
 import org.apache.commons.lang3.StringUtils;
@@ -41,18 +42,30 @@ import com.synopsys.integration.blackduck.dockerinspector.DockerInspector;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorOption;
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
-import com.vladsch.flexmark.ext.toc.SimTocExtension;
-import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.ext.toc.TocBlock;
+import com.vladsch.flexmark.ext.toc.TocExtension;
+import com.vladsch.flexmark.ext.toc.internal.TocNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.html.HtmlRenderer.Builder;
+import com.vladsch.flexmark.html.HtmlRenderer.HtmlRendererExtension;
+import com.vladsch.flexmark.html.HtmlWriter;
+import com.vladsch.flexmark.html.renderer.DelegatingNodeRendererFactory;
+import com.vladsch.flexmark.html.renderer.NodeRenderer;
+import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
+import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 
 @Component
 public class HelpText {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    // TODO
+    // TODO: auto generate "all"?
     private static final String HELP_TOPIC_NAME_PROGRAM_NAMEVERSION = "program";
     private static final String HELP_TOPIC_NAME_OVERVIEW = "overview";
     private static final String HELP_TOPIC_NAME_PROPERTIES = "properties";
@@ -60,8 +73,8 @@ public class HelpText {
     private static final String ALL_HELP_TOPICS = String.format("%s,%s,architecture,running,%s,advanced,deployment,troubleshooting,releasenotes",
         HELP_TOPIC_NAME_PROGRAM_NAMEVERSION, HELP_TOPIC_NAME_OVERVIEW, HELP_TOPIC_NAME_PROPERTIES);
 
-    private final Parser parser;
-    private final HtmlRenderer renderer;
+//    private final Parser parser;
+//    private final HtmlRenderer renderer;
 
     @Autowired
     private Config config;
@@ -69,15 +82,28 @@ public class HelpText {
     @Autowired
     private ProgramVersion programVersion;
 
+    static final DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(
+        TocExtension.create(),
+        CustomExtension.create()
+    ));
+
+    static final Parser PARSER = Parser.builder(OPTIONS).build();
+    static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).indentSize(2).build();
+
+    // TODO look for old references to topics that are named topic, here and in DockerInspector.java
+
     public HelpText() {
         // From https://github.com/vsch/flexmark-java/blob/master/flexmark-ext-toc/src/test/java/com/vladsch/flexmark/ext/toc/ComboSimTocSpecTest.java
 //        final DataHolder options = new MutableDataSet()
 //                                       .set(HtmlRenderer.INDENT_SIZE, 2)
 //                                       .set(HtmlRenderer.RENDER_HEADER_ID, true)
 //                                       .set(Parser.EXTENSIONS, Collections.singletonList(SimTocExtension.create()));
-        final MutableDataSet options = new MutableDataSet();
-        parser = Parser.builder(options).build();
-        renderer = HtmlRenderer.builder(options).build();
+
+
+
+        // TODO clean this up
+//        parser = PARSER;
+//        renderer = RENDERER;
     }
 
     public String get(String givenHelpTopicName) throws IllegalArgumentException, IOException, IllegalAccessException {
@@ -103,20 +129,18 @@ public class HelpText {
 
     private String get(String helpTopicNames, HelpFormat helpFormat) throws IllegalArgumentException, IOException, IllegalAccessException {
         final List<String> helpTopics = deriveHelpTopicList(helpTopicNames);
-        final StringBuilder sb = new StringBuilder();
+        final StringBuilder markdownSb = new StringBuilder();
         for (final String helpTopicName : helpTopics) {
-            switch (helpFormat) {
-                case MARKDOWN:
-                    sb.append(getMarkdownForHelpTopic(helpTopicName));
-                    break;
-                case HTML:
-                    sb.append(getHtmlForTopic(helpTopicName));
-                    break;
-                default:
-                    throw new UnsupportedOperationException(String.format("Help format %s not supported", helpFormat.name()));
-            }
+            markdownSb.append(getMarkdownForHelpTopic(helpTopicName));
         }
-        return sb.toString();
+        switch (helpFormat) {
+            case MARKDOWN:
+                return markdownSb.toString();
+            case HTML:
+                return markdownToHtml(markdownSb.toString());
+            default:
+                throw new UnsupportedOperationException(String.format("Help format %s not supported", helpFormat.name()));
+        }
     }
 
     private List<String> deriveHelpTopicList(final String helpTopicsString) {
@@ -158,8 +182,8 @@ public class HelpText {
     }
 
     private String markdownToHtml(final String markdown) {
-        final Node document = parser.parse(markdown);
-        final String html = renderer.render(document);
+        final Node document = PARSER.parse(markdown);
+        final String html = RENDERER.render(document);
         return html;
     }
 
@@ -207,6 +231,68 @@ public class HelpText {
     }
 
     private String getMarkdownForProgram() {
-        return String.format("# %s %s\n", DockerInspector.PROGRAM_NAME_PRETTY, programVersion.getProgramVersion());
+        return String.format("[TOC]\n\n# %s %s\n\n", programVersion.getProgramNamePretty(), programVersion.getProgramVersion());
+    }
+
+    static class CustomExtension implements HtmlRendererExtension {
+        @Override
+        public void rendererOptions(MutableDataHolder options) {
+
+        }
+
+        @Override
+        public void extend(Builder rendererBuilder, String rendererType) {
+            rendererBuilder.nodeRendererFactory(new CustomNodeRenderer.Factory());
+        }
+
+        static Extension create() {
+            return new CustomExtension();
+        }
+    }
+
+    static class CustomNodeRenderer implements NodeRenderer {
+        public static class Factory implements DelegatingNodeRendererFactory {
+            @Override
+            public NodeRenderer apply(DataHolder options) {
+                return new CustomNodeRenderer();
+            }
+
+            @Override
+            public Set<Class<? extends NodeRendererFactory>> getDelegates() {
+                Set<Class<? extends NodeRendererFactory>> set = new HashSet<Class<? extends NodeRendererFactory>>();
+                // add node renderer factory classes to which this renderer will delegate some of its rendering
+                // core node renderer is assumed to have all depend it so there is no need to add it
+                set.add(TocNodeRenderer.Factory.class);
+                return set;
+
+                // return null if renderer does not delegate or delegates only to core node renderer
+                //return null;
+            }
+
+        }
+        @Override
+        public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
+            HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+            set.add(new NodeRenderingHandler<TocBlock>(TocBlock.class, new com.vladsch.flexmark.html.CustomNodeRenderer<TocBlock>() {
+                @Override
+                public void render(TocBlock node, NodeRendererContext context, HtmlWriter html) {
+                    // test the node to see if it needs overriding
+                    NodeRendererContext subContext = context.getDelegatedSubContext(true);
+                    subContext.delegateRender();
+                    String tocText = subContext.getHtmlWriter().toString(0);
+
+                    // output to separate stream
+                    System.out.println("---- TOC HTML --------------------");
+                    System.out.print(tocText);
+                    System.out.println("----------------------------------\n");
+
+                    html.append(tocText);
+
+                    html.tagLineIndent("div", () -> html.append(subContext.getHtmlWriter()));
+                }
+            }));
+
+            return set;
+        }
     }
 }
