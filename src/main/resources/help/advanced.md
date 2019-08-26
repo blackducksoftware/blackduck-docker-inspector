@@ -1,6 +1,6 @@
-# Advanced topics
+## Advanced topics
 
-## Isolation application components
+### Isolation application components
 
 If you are interested in components from the application layers of your image, but not interested in components
 from the underlying platform layers, you can exclude components from platform layers from the results.
@@ -20,7 +20,7 @@ For example:
 
 ./blackduck-docker-inspector.sh ... --docker.platform.top.layer.id=sha256:b079b3fa8d1b4b30a71a6e81763ed3da1327abaf0680ed3ed9f00ad1d5de5e7c
 
-## Concurrent execution
+### Concurrent execution
 
 You can inspect multiple images in parallel on the same computer when you directly invoke the .jar file. For example:
 
@@ -39,7 +39,7 @@ You can inspect multiple images in parallel on the same computer when you direct
     java -jar ./blackduck-docker-inspector-${inspectorVersion}.jar --blackduck.url=<Black Duck url> --blackduck.username=<Black Duck username> --docker.image=alpine:3.4  &
     java -jar ./blackduck-docker-inspector-${inspectorVersion}.jar --blackduck.url=<Black Duck url> --blackduck.username=<Black Duck username> --docker.image=alpine:3.3  &
 
-## Alternative methods for setting property values
+### Alternative methods for setting property values
 
 Docker Inspector gets its property values from
 [Spring Boot's configuration mechanism](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html).
@@ -47,7 +47,7 @@ Docker Inspector users can leverage Spring Boot capabilities beyond command line
 and environment variables (for example: hierarchy of property files, and placeholders)
 to manage properties in more sophisticated ways.
 
-## Passing passwords (etc.) in a more secure way
+### Passing passwords (etc.) in a more secure way
 
 For greater security, sensitive property values such as passwords can be set via the environment variables
 using one of the Spring Boot configuration mechanisms mentioned above.
@@ -59,7 +59,7 @@ For example, instead of passing --blackduck.password=mypassword on the command l
 Refer to [Spring Boot's configuration mechanism](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html)
 for more information on using this capability.
 
-## Air Gap mode
+### Air Gap mode
 
 In Black Duck Docker Inspector versions 6.2.0 and higher, Black Duck provides an archive containing all files needed
 to run Black Duck Docker Inspector without access to the internet. To download the Air Gap archive, run the command:
@@ -77,7 +77,7 @@ To run in Air Gap mode, use the command:
 
     ./blackduck-docker-inspector.sh --upload.bdio=false --jar.path=./blackduck-docker-inspector<version>.jar --docker.tar=<tarfile>
 
-## Configuring Docker Inspector for your Docker Engine and Registry
+### Configuring Docker Inspector for your Docker Engine and Registry
 
 If you invoke Docker Inspector with an image reference (a repo:tag value vs. a .tar file),
 it uses the docker-java library (https://github.com/docker-java/docker-java) to access the Docker registry to pull the image.
@@ -105,7 +105,7 @@ in a file (e.g. mydockerproperties.properties) and use
 
 to point Docker Inspector to those property settings.
 
-## Running Docker Inspector on Open Container Initiative (OCI) images
+### Running Docker Inspector on Open Container Initiative (OCI) images
 
 When given a docker image (--docker.image=repo:tag), Docker Inspector uses the
 [docker-java library](https://github.com/docker-java/docker-java)
@@ -127,4 +127,4 @@ will convert an OCI image directory alpine-oci to a Docker Image Specification v
 alpine-docker.tar that Docker Inspector can process when passed in with the
 --docker.tar=alpine-docker.tar command line argument.
 
-## Troubleshooting and workarounds
+### Troubleshooting and workarounds

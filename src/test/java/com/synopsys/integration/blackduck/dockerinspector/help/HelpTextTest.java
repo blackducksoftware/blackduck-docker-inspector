@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorOption;
+import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 
 @RunWith(SpringRunner.class)
 public class HelpTextTest {
@@ -24,6 +25,9 @@ public class HelpTextTest {
 
     @Mock
     private Config config;
+
+    @Mock
+    private ProgramVersion programVersion;
 
     @Test
     public void testTextOverview() throws IllegalArgumentException, IllegalAccessException, IOException {
@@ -58,7 +62,7 @@ public class HelpTextTest {
         Mockito.when(config.getHelpOutputFormat()).thenReturn("HtmL");
 
         final String deploymentHtml = helpText.get("properties");
-        assertTrue(deploymentHtml.contains("<h1>Available properties:</h1>\n"
+        assertTrue(deploymentHtml.contains("<h2>Available properties:</h2>\n"
                                                + "<ul>\n"
                                                + "<li>blackduck.url [String]: Black Duck URL</li>\n"
                                                + "</ul>\n"));
@@ -70,12 +74,21 @@ public class HelpTextTest {
         configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", "public", false));
         Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
         Mockito.when(config.getHelpOutputFormat()).thenReturn("HtmL");
+        Mockito.when(programVersion.getProgramVersion()).thenReturn("1.2.3");
 
         final String deploymentHtml = helpText.get("all");
-        assertTrue(deploymentHtml.contains("<h1>Available properties:</h1>\n"
+        assertTrue(deploymentHtml.contains("<h1>Black Duck Docker Inspector 1.2.3</h1>\n"
+                                               + "<h2>Overview</h2>"));
+        assertTrue(deploymentHtml.contains("<h2>Architecture</h2>"));
+        assertTrue(deploymentHtml.contains("<h2>Running Docker Inspector</h2>"));
+        assertTrue(deploymentHtml.contains("<h2>Available properties:</h2>\n"
                                                + "<ul>\n"
                                                + "<li>blackduck.url [String]: Black Duck URL</li>\n"
                                                + "</ul>\n"));
+        assertTrue(deploymentHtml.contains("<h2>Advanced topics</h2>"));
+        assertTrue(deploymentHtml.contains("<h2>Deploying Docker Inspector</h2>"));
+        assertTrue(deploymentHtml.contains("<h2>Troubleshooting</h2>"));
+        assertTrue(deploymentHtml.contains("<h2>Release notes</h2>"));
     }
 
 }

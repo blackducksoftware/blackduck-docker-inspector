@@ -1,4 +1,4 @@
-# Architecture
+## Architecture
 
 Docker Inspector uses up to three container-based image inspector services (one for each of the supported Linux package manager database formats).
 
@@ -10,9 +10,9 @@ between the Docker Inspector utility and the three service containers.
 In container mode, you will start the container running Docker Inspector and the three image inspector container-based services such that
 all four containers share a mounted volume and can communicate with each other via HTTP GET operations using base URLs that you will provide. For information on how to do this, refer to the *deployment* help topic.
 
-## Execution phases
+### Execution phases
 
-### Host mode
+#### Host mode
 
 In host mode, Docker Inspector performs the following steps on the host:
 
@@ -33,7 +33,7 @@ The following steps are performed back on the host when the request to the image
 1. Copies the output files to the output directory.
 1. Stops/removes the image inspector container (this can be disabled).
 
-### Container mode
+#### Container mode
 
 In container mode, you start four containers in such a way that they share a mounted volume and can reach each other via HTTP GET operations using
 base URLs that you provide:

@@ -1,4 +1,4 @@
-# Overview
+## Overview
 
 Black Duck Docker Inspector inspects Docker images to discover packages (components).
 It utilizes the appropriate Linux package manager to provide a list of
@@ -10,14 +10,14 @@ Black Duck Docker Inspector can inspect Docker images that support dpkg, rpm, or
 After running the Black Duck Docker Inspector on an image, navigate to Black Duck to view the Bill of Materials (BOM) created by 
 Black Duck Docker Inspector.
 
-## Modes of operation
+### Modes of operation
 
 Docker Inspector has two modes:
 
 * Host mode, for running on a Linux machine (or VM) where Docker Inspector can perform Docker operations via a Docker engine
 * Container mode, for running in a container (started by Docker, Kubernetes, OpenShift, etc.)
 
-### Host mode
+#### Host mode
 
 Host mode (the default mode) is designed for Linux machines (and VMs) where it can perform Docker operations via a Docker engine.
 
@@ -30,12 +30,12 @@ Black Duck Docker Inspector can pull the target image; in other words, the Docke
 as Docker Hub. Alternatively, you can save an image to a .tar file by using the Docker Save command. Then, run Black Duck Docker Inspector
 on the .tar file. Docker Inspector supports Docker Image Specification v1.2.0 format .tar files.
 
-### Container mode
+#### Container mode
 
 Container mode is designed for container orchestration environments (Kubernetes, OpenShift, etc.) where Docker Inspector will run
 inside a container, where it cannot perform Docker operations. For information on running Docker Inspector in container mode, refer to the *deployment* help topic.
 
-## Requirements
+### Requirements
 
 Requirements for Black Duck Docker Inspector are:
 
@@ -57,7 +57,7 @@ Requirements for Black Duck Docker Inspector are:
 All four of these containers must share a mounted volume and be able to reach each other via HTTP GET operations using base URLs
 that you provide.
     
-## Getting started
+### Getting started
 
 The following command format will always fetch and run the latest version of Docker Inspector:
 
@@ -83,7 +83,7 @@ Another alternative is to download the Docker Inspector .jar (using the script) 
     ./blackduck-docker-inspector.sh --pulljar
     java -jar blackduck-docker-inspector-<version>.jar <Docker Inspector arguments>
 
-## Passing arguments to Docker Inspector
+### Passing arguments to Docker Inspector
 
 Usage: blackduck-docker-inspector.sh <Docker Inspector arguments>
 Docker Inspector arguments consist of property assignments. 
@@ -97,7 +97,7 @@ application.properties (in the current directory) a line of the form:
 
 There are other alternative methods for setting properties. For more information, refer to the *running* help topic.
 
-## Help
+### Help
 
 Available help topics:
 * overview (this page)

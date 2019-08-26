@@ -57,6 +57,7 @@ import com.synopsys.integration.exception.IntegrationException;
 public class DockerInspector {
     private static final Logger logger = LoggerFactory.getLogger(DockerInspector.class);
 
+    public static final String PROGRAM_NAME_PRETTY = "Black Duck Docker Inspector";
     public static final String PROGRAM_NAME = "blackduck-docker-inspector.sh";
     public static final String PROGRAM_ID = "blackduck-docker-inspector";
 

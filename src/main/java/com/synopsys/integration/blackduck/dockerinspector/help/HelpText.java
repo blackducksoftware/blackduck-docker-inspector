@@ -37,8 +37,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.synopsys.integration.blackduck.dockerinspector.DockerInspector;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorOption;
+import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.vladsch.flexmark.ext.toc.SimTocExtension;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.html.HtmlRenderer;
@@ -50,17 +52,22 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 public class HelpText {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    // These help topics are special; this class doesn't need to know about the rest
+    // TODO
+    private static final String HELP_TOPIC_NAME_PROGRAM_NAMEVERSION = "program";
     private static final String HELP_TOPIC_NAME_OVERVIEW = "overview";
     private static final String HELP_TOPIC_NAME_PROPERTIES = "properties";
     private static final String HELP_TOPIC_NAME_ALL = "all";
-    private static final String ALL_HELP_TOPICS = "overview,architecture,running,properties,advanced,deployment,troubleshooting,releasenotes";
+    private static final String ALL_HELP_TOPICS = String.format("%s,%s,architecture,running,%s,advanced,deployment,troubleshooting,releasenotes",
+        HELP_TOPIC_NAME_PROGRAM_NAMEVERSION, HELP_TOPIC_NAME_OVERVIEW, HELP_TOPIC_NAME_PROPERTIES);
 
     private final Parser parser;
     private final HtmlRenderer renderer;
 
     @Autowired
     private Config config;
+
+    @Autowired
+    private ProgramVersion programVersion;
 
     public HelpText() {
         // From https://github.com/vsch/flexmark-java/blob/master/flexmark-ext-toc/src/test/java/com/vladsch/flexmark/ext/toc/ComboSimTocSpecTest.java
@@ -132,6 +139,8 @@ public class HelpText {
     private String getMarkdownForHelpTopic(final String helpTopicName) throws IllegalArgumentException, IOException, IllegalAccessException {
         if (HELP_TOPIC_NAME_PROPERTIES.equalsIgnoreCase(helpTopicName)) {
             return getMarkdownForProperties();
+        } else if (HELP_TOPIC_NAME_PROGRAM_NAMEVERSION.equalsIgnoreCase(helpTopicName)) {
+            return getMarkdownForProgram();
         } else {
             return getStringFromHelpFile(helpTopicName.toLowerCase());
         }
@@ -140,6 +149,8 @@ public class HelpText {
     private String getHtmlForTopic(final String helpTopicName) throws IOException, IllegalAccessException {
         if (HELP_TOPIC_NAME_PROPERTIES.equalsIgnoreCase(helpTopicName)) {
             return markdownToHtml(getMarkdownForProperties());
+        } else if (HELP_TOPIC_NAME_PROGRAM_NAMEVERSION.equalsIgnoreCase(helpTopicName)) {
+            return markdownToHtml(getMarkdownForProgram());
         } else {
             final String helpFileContents = getStringFromHelpFile(helpTopicName);
             return markdownToHtml(helpFileContents);
@@ -179,7 +190,7 @@ public class HelpText {
 
     private String getMarkdownForProperties() throws IllegalAccessException {
         final StringBuilder usage = new StringBuilder();
-        usage.append("# Available properties:\n");
+        usage.append("## Available properties:\n");
         final SortedSet<DockerInspectorOption> configOptions = config.getPublicConfigOptions();
         for (final DockerInspectorOption opt : configOptions) {
             final StringBuilder usageLine = new StringBuilder(String.format("* %s [%s]: %s", opt.getKey(), opt.getValueTypeString(), opt.getDescription()));
@@ -195,4 +206,7 @@ public class HelpText {
         return usage.toString();
     }
 
+    private String getMarkdownForProgram() {
+        return String.format("# %s %s\n", DockerInspector.PROGRAM_NAME_PRETTY, programVersion.getProgramVersion());
+    }
 }

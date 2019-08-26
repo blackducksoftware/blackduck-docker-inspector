@@ -1,4 +1,4 @@
-# Deploying Docker Inspector
+## Deploying Docker Inspector
 
 Black Duck Docker Inspector can be run in either of the following modes:
 
@@ -7,7 +7,7 @@ Black Duck Docker Inspector can be run in either of the following modes:
 
 Each mode is discussed in detail below.
 
-## Using host mode on Linux machine (or Linux VM) with Docker
+### Using host mode on Linux machine (or Linux VM) with Docker
 
 In this scenario, Docker Inspector is a command line utility that automatically pulls/runs and uses container-based services 
 (and cleans them up when it's done). The Docker command, if installed on the machine, can be very useful for troubleshooting, but is not actually
@@ -25,7 +25,7 @@ This is the default mode, and the simplest to use.
 The documentation under Package Managers > Black Duck Docker Inspector at: https://synopsys.atlassian.net/wiki/spaces/INTDOCS
 provides all the information that is normally required to run Docker Inspector in this mode.
 
-## Using container mode in a container orchestration platform such as Kubernetes, OpenShift, etc.
+### Using container mode in a container orchestration platform such as Kubernetes, OpenShift, etc.
 
 In this scenario, Docker Inspector is a toolkit consisting of a command line utility (that you will run in one container), plus
 three container-based services (which you must start). These four containers must:
@@ -76,8 +76,8 @@ GitLab CI			Toolkit		shell executoer; localhost URLs			https://raw.githubusercon
 Circle CI			Utility								https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/circleci/config.yml
 Docker (Detect in container)	Toolkit		localhost URLs					https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/docker/runDetectInContainer/setup.sh
 
-## Running Detect on a project directory that exists within a Docker image
+### Running Detect on a project directory that exists within a Docker image
 
-## Running the signature scanner on a specific directory within a Docker image
+### Running the signature scanner on a specific directory within a Docker image
 
-## Inspecting multiple images more efficiently (using host mode)
+### Inspecting multiple images more efficiently (using host mode)
