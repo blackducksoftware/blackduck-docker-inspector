@@ -1,5 +1,9 @@
 # Release Notes
 
+## Version 8.1.4
+### New features
+* Added a GitLab continuous integration deployment example.
+
 ## Version 8.1.3
 ### New features
 * Added a Travis continuous integration deployment example.

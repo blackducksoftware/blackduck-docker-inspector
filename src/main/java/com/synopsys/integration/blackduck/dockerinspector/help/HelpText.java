@@ -64,10 +64,11 @@ public class HelpText {
 
     public HelpText() {
         // From https://github.com/vsch/flexmark-java/blob/master/flexmark-ext-toc/src/test/java/com/vladsch/flexmark/ext/toc/ComboSimTocSpecTest.java
-        final DataHolder options = new MutableDataSet()
-                                       .set(HtmlRenderer.INDENT_SIZE, 2)
-                                       .set(HtmlRenderer.RENDER_HEADER_ID, true)
-                                       .set(Parser.EXTENSIONS, Collections.singletonList(SimTocExtension.create()));
+//        final DataHolder options = new MutableDataSet()
+//                                       .set(HtmlRenderer.INDENT_SIZE, 2)
+//                                       .set(HtmlRenderer.RENDER_HEADER_ID, true)
+//                                       .set(Parser.EXTENSIONS, Collections.singletonList(SimTocExtension.create()));
+        final MutableDataSet options = new MutableDataSet();
         parser = Parser.builder(options).build();
         renderer = HtmlRenderer.builder(options).build();
     }
