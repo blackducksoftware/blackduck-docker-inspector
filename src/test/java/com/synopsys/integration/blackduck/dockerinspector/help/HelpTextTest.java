@@ -21,9 +21,6 @@ import com.synopsys.integration.blackduck.dockerinspector.programversion.Program
 @RunWith(SpringRunner.class)
 public class HelpTextTest {
 
-    @InjectMocks
-    private HelpText helpText;
-
     @Mock
     private Config config;
 
@@ -31,12 +28,19 @@ public class HelpTextTest {
     private ProgramVersion programVersion;
 
     @Mock
-    private HelpTopicInterpreter helpTopicInterpreter;
+    private HelpTopicParser helpTopicParser;
+
+    @Mock
+    private HelpFormatParser helpFormatParser;
+
+    @InjectMocks
+    private HelpText helpText;
 
     @Test
     public void testTextOverview() throws IllegalArgumentException, IllegalAccessException, IOException {
-        Mockito.when(helpTopicInterpreter.translateGivenTopicNames("overview")).thenReturn("overview");
-        Mockito.when(helpTopicInterpreter.deriveHelpTopicList("overview")).thenReturn(Arrays.asList("overview"));
+        Mockito.when(helpTopicParser.translateGivenTopicNames("overview")).thenReturn("overview");
+        Mockito.when(helpTopicParser.deriveHelpTopicList("overview")).thenReturn(Arrays.asList("overview"));
+        Mockito.when(helpFormatParser.getHelpFormat()).thenReturn(HelpFormat.MARKDOWN);
 
         final String usageString = helpText.get("overview");
 
@@ -47,8 +51,9 @@ public class HelpTextTest {
 
     @Test
     public void testTextProperties() throws IllegalArgumentException, IllegalAccessException, IOException {
-        Mockito.when(helpTopicInterpreter.translateGivenTopicNames("properties")).thenReturn("properties");
-        Mockito.when(helpTopicInterpreter.deriveHelpTopicList("properties")).thenReturn(Arrays.asList("properties"));
+        Mockito.when(helpTopicParser.translateGivenTopicNames("properties")).thenReturn("properties");
+        Mockito.when(helpTopicParser.deriveHelpTopicList("properties")).thenReturn(Arrays.asList("properties"));
+        Mockito.when(helpFormatParser.getHelpFormat()).thenReturn(HelpFormat.MARKDOWN);
         final SortedSet<DockerInspectorOption> configOptions = new TreeSet<>();
         configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", "public", false));
         Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
@@ -60,8 +65,9 @@ public class HelpTextTest {
 
     @Test
     public void testHtmlDeployment() throws IllegalArgumentException, IllegalAccessException, IOException {
-        Mockito.when(helpTopicInterpreter.translateGivenTopicNames("deployment")).thenReturn("deployment");
-        Mockito.when(helpTopicInterpreter.deriveHelpTopicList("deployment")).thenReturn(Arrays.asList("deployment"));
+        Mockito.when(helpTopicParser.translateGivenTopicNames("deployment")).thenReturn("deployment");
+        Mockito.when(helpTopicParser.deriveHelpTopicList("deployment")).thenReturn(Arrays.asList("deployment"));
+        Mockito.when(helpFormatParser.getHelpFormat()).thenReturn(HelpFormat.HTML);
         Mockito.when(config.getHelpOutputFormat()).thenReturn("html");
 
         final String deploymentHtml = helpText.get("deployment");
@@ -71,8 +77,9 @@ public class HelpTextTest {
 
     @Test
     public void testHtmlProperties() throws IllegalArgumentException, IllegalAccessException, IOException {
-        Mockito.when(helpTopicInterpreter.translateGivenTopicNames("properties")).thenReturn("properties");
-        Mockito.when(helpTopicInterpreter.deriveHelpTopicList("properties")).thenReturn(Arrays.asList("properties"));
+        Mockito.when(helpTopicParser.translateGivenTopicNames("properties")).thenReturn("properties");
+        Mockito.when(helpTopicParser.deriveHelpTopicList("properties")).thenReturn(Arrays.asList("properties"));
+        Mockito.when(helpFormatParser.getHelpFormat()).thenReturn(HelpFormat.HTML);
         final SortedSet<DockerInspectorOption> configOptions = new TreeSet<>();
         configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", "public", false));
         Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
@@ -85,8 +92,9 @@ public class HelpTextTest {
 
     @Test
     public void testHtmlAll() throws IllegalArgumentException, IllegalAccessException, IOException {
-        Mockito.when(helpTopicInterpreter.translateGivenTopicNames("all")).thenReturn("all");
-        Mockito.when(helpTopicInterpreter.deriveHelpTopicList("all")).thenReturn(Arrays.asList("program", "overview", "architecture", "running", "advanced", "deployment", "troubleshooting", "releasenotes", "properties"));
+        Mockito.when(helpTopicParser.translateGivenTopicNames("all")).thenReturn("all");
+        Mockito.when(helpTopicParser.deriveHelpTopicList("all")).thenReturn(Arrays.asList("program", "overview", "architecture", "running", "advanced", "deployment", "troubleshooting", "releasenotes", "properties"));
+        Mockito.when(helpFormatParser.getHelpFormat()).thenReturn(HelpFormat.HTML);
         final SortedSet<DockerInspectorOption> configOptions = new TreeSet<>();
         configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", "public", false));
         Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);

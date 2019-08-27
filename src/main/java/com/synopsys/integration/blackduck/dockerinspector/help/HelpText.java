@@ -60,7 +60,10 @@ public class HelpText {
     private ProgramVersion programVersion;
 
     @Autowired
-    private HelpTopicInterpreter helpTopicInterpreter;
+    private HelpTopicParser helpTopicParser;
+
+    @Autowired
+    private HelpFormatParser helpFormatParser;
 
     // TODO look for old references to topics that are named topic in DockerInspector.java
 
@@ -74,28 +77,13 @@ public class HelpText {
     }
 
     public String get(String givenHelpTopicNames) throws IllegalArgumentException, IOException, IllegalAccessException {
-        String helpTopicNames = helpTopicInterpreter.translateGivenTopicNames(givenHelpTopicNames);
-        HelpFormat helpFormat = getHelpFormat();
+        String helpTopicNames = helpTopicParser.translateGivenTopicNames(givenHelpTopicNames);
+        HelpFormat helpFormat = helpFormatParser.getHelpFormat();
         return get(helpTopicNames, helpFormat);
     }
 
-    private HelpFormat getHelpFormat() {
-        final String givenHelpFormatName = config.getHelpOutputFormat();
-        if (StringUtils.isBlank(givenHelpFormatName)) {
-            return HelpFormat.MARKDOWN;
-        }
-        HelpFormat helpFormat;
-        try {
-            helpFormat = HelpFormat.valueOf(config.getHelpOutputFormat().toUpperCase());
-        } catch (IllegalArgumentException e) {
-            logger.warn(String.format("Invalid help format requested: %s; using MARKDOWN (text) instead", config.getHelpOutputFormat()));
-            helpFormat = HelpFormat.MARKDOWN;
-        }
-        return helpFormat;
-    }
-
     private String get(String helpTopicNames, HelpFormat helpFormat) throws IllegalArgumentException, IOException, IllegalAccessException {
-        final List<String> helpTopics = helpTopicInterpreter.deriveHelpTopicList(helpTopicNames);
+        final List<String> helpTopics = helpTopicParser.deriveHelpTopicList(helpTopicNames);
         final StringBuilder markdownSb = new StringBuilder();
         for (final String helpTopicName : helpTopics) {
             markdownSb.append(getMarkdownForHelpTopic(helpTopicName));
@@ -112,9 +100,9 @@ public class HelpText {
     }
 
     private String getMarkdownForHelpTopic(final String helpTopicName) throws IllegalArgumentException, IOException, IllegalAccessException {
-        if (helpTopicInterpreter.HELP_TOPIC_NAME_PROPERTIES.equalsIgnoreCase(helpTopicName)) {
+        if (helpTopicParser.HELP_TOPIC_NAME_PROPERTIES.equalsIgnoreCase(helpTopicName)) {
             return getMarkdownForProperties();
-        } else if (helpTopicInterpreter.HELP_TOPIC_NAME_PROGRAM_NAMEVERSION.equalsIgnoreCase(helpTopicName)) {
+        } else if (helpTopicParser.HELP_TOPIC_NAME_PROGRAM_NAMEVERSION.equalsIgnoreCase(helpTopicName)) {
             return getMarkdownForProgram();
         } else {
             return getStringFromHelpFile(helpTopicName.toLowerCase());
@@ -131,7 +119,7 @@ public class HelpText {
     private String getStringFromHelpFile(final String helpTopicName) throws IOException {
         InputStream helpFileInputStream = getInputStreamForHelpTopic(helpTopicName);
         if (helpFileInputStream == null) {
-            helpFileInputStream = getInputStreamForHelpTopic(helpTopicInterpreter.HELP_TOPIC_NAME_OVERVIEW);
+            helpFileInputStream = getInputStreamForHelpTopic(helpTopicParser.HELP_TOPIC_NAME_OVERVIEW);
         }
         return readFromInputStream(helpFileInputStream);
     }

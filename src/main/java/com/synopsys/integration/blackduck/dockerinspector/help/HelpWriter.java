@@ -28,6 +28,8 @@ import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.naming.OperationNotSupportedException;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,25 +49,33 @@ public class HelpWriter {
     @Autowired
     private HelpText helpText;
 
-    public void write(final String helpTopicsString) throws HelpGenerationException {
+    @Autowired
+    private HelpFilename helpFilename;
+
+    public void write(final String helpTopicNames) throws HelpGenerationException {
         try {
             final PrintStream printStream = derivePrintStream();
-            printStream.println(helpText.get(helpTopicsString));
+            printStream.println(helpText.get(helpTopicNames));
         } catch (Exception e) {
             throw new HelpGenerationException(String.format("Error generating help: %s", e.getMessage()), e);
         }
     }
 
-    private PrintStream derivePrintStream() throws FileNotFoundException {
-        final String helpOutputFilePath = config.getHelpOutputFilePath();
-        final PrintStream printStream;
-        if (StringUtils.isBlank(helpOutputFilePath)) {
-            printStream = System.out;
-        } else {
-            final File helpOutputFile = new File(helpOutputFilePath);
-            logger.info(String.format("Writing help output to: %s", helpOutputFilePath));
-            printStream = new PrintStream(helpOutputFile);
+    private PrintStream derivePrintStream() throws FileNotFoundException, OperationNotSupportedException {
+        final String givenHelpOutputFilePath = config.getHelpOutputFilePath();
+        if (StringUtils.isBlank(givenHelpOutputFilePath)) {
+            return System.out;
         }
+
+        final File givenHelpOutputLocation = new File(givenHelpOutputFilePath);
+        final File finalHelpOutputFile;
+        if (givenHelpOutputLocation.isDirectory()) {
+            finalHelpOutputFile = new File(givenHelpOutputLocation, helpFilename.getDefaultHelpFilename());
+        } else {
+            finalHelpOutputFile = givenHelpOutputLocation;
+        }
+        logger.info(String.format("Writing help output to: %s", finalHelpOutputFile.getAbsolutePath()));
+        final PrintStream printStream = new PrintStream(finalHelpOutputFile);
         return printStream;
     }
 }
