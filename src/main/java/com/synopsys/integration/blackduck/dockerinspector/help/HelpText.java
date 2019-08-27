@@ -31,8 +31,6 @@ import java.util.List;
 import java.util.SortedSet;
 
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -48,8 +46,6 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 
 @Component
 public class HelpText {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
     private final Parser parser;
     private final HtmlRenderer renderer;
 
@@ -65,35 +61,36 @@ public class HelpText {
     @Autowired
     private HelpFormatParser helpFormatParser;
 
-    // TODO look for old references to topics that are named topic in DockerInspector.java
-
     public HelpText() {
-        final DataHolder options = new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(
-            TocExtension.create()
-        ));
-
+        final DataHolder options = new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(TocExtension.create()));
         parser = Parser.builder(options).build();
         renderer = HtmlRenderer.builder(options).indentSize(2).build();
     }
 
     public String get(String givenHelpTopicNames) throws IllegalArgumentException, IOException, IllegalAccessException {
-        String helpTopicNames = helpTopicParser.translateGivenTopicNames(givenHelpTopicNames);
-        HelpFormat helpFormat = helpFormatParser.getHelpFormat();
-        return get(helpTopicNames, helpFormat);
+        final String helpTopicNames = helpTopicParser.translateGivenTopicNames(givenHelpTopicNames);
+        final String markdownContent = collectMarkdownContent(helpTopicNames);
+        final HelpFormat helpFormat = helpFormatParser.getHelpFormat();
+        final String formattedHelp = translateMarkdownToGivenFormat(markdownContent, helpFormat);
+        return formattedHelp;
     }
 
-    private String get(String helpTopicNames, HelpFormat helpFormat) throws IllegalArgumentException, IOException, IllegalAccessException {
+    private String collectMarkdownContent(final String helpTopicNames) throws IOException, IllegalAccessException {
         final List<String> helpTopics = helpTopicParser.deriveHelpTopicList(helpTopicNames);
-        final StringBuilder markdownSb = new StringBuilder();
+        final StringBuilder markdownContent = new StringBuilder();
         for (final String helpTopicName : helpTopics) {
-            markdownSb.append(getMarkdownForHelpTopic(helpTopicName));
-            markdownSb.append("\n");
+            markdownContent.append(getMarkdownForHelpTopic(helpTopicName));
+            markdownContent.append("\n");
         }
+        return markdownContent.toString();
+    }
+
+    private String translateMarkdownToGivenFormat(final String markdownContent, final HelpFormat helpFormat) {
         switch (helpFormat) {
             case MARKDOWN:
-                return markdownSb.toString();
+                return markdownContent;
             case HTML:
-                return markdownToHtml(markdownSb.toString());
+                return markdownToHtml(markdownContent);
             default:
                 throw new UnsupportedOperationException(String.format("Help format %s not supported", helpFormat.name()));
         }
@@ -105,7 +102,7 @@ public class HelpText {
         } else if (helpTopicParser.HELP_TOPIC_NAME_PROGRAM_NAMEVERSION.equalsIgnoreCase(helpTopicName)) {
             return getMarkdownForProgram();
         } else {
-            return getStringFromHelpFile(helpTopicName.toLowerCase());
+            return getStringFromHelpFile(helpTopicName);
         }
     }
 
@@ -125,7 +122,7 @@ public class HelpText {
     }
 
     private InputStream getInputStreamForHelpTopic(final String helpTopicName) {
-        final String pathRelToClasspath = String.format("/help/%s.md", helpTopicName);
+        final String pathRelToClasspath = String.format("/help/%s.md", helpTopicName.toLowerCase());
         return this.getClass().getResourceAsStream(pathRelToClasspath);
     }
 

@@ -66,7 +66,6 @@ public class HelpWriter {
         if (StringUtils.isBlank(givenHelpOutputFilePath)) {
             return System.out;
         }
-
         final File givenHelpOutputLocation = new File(givenHelpOutputFilePath);
         final File finalHelpOutputFile;
         if (givenHelpOutputLocation.isDirectory()) {
