@@ -17,13 +17,6 @@ public class HelpTopicInterpreter {
     private static final String ALL_HELP_TOPICS = String.format("%s,%s,architecture,running,%s,advanced,deployment,troubleshooting,releasenotes",
         HELP_TOPIC_NAME_PROGRAM_NAMEVERSION, HELP_TOPIC_NAME_OVERVIEW, HELP_TOPIC_NAME_PROPERTIES);
 
-    public List<String> deriveHelpTopicList(final String helpTopicNames) {
-        if (StringUtils.isBlank(helpTopicNames)) {
-            return Arrays.asList("");
-        }
-        return Arrays.asList(helpTopicNames.split(","));
-    }
-
     public String translateGivenTopicNames(final String givenHelpTopics) {
         if (StringUtils.isBlank(givenHelpTopics)) {
             return HELP_TOPIC_NAME_OVERVIEW;
@@ -32,5 +25,12 @@ public class HelpTopicInterpreter {
             return ALL_HELP_TOPICS;
         }
         return givenHelpTopics;
+    }
+
+    public List<String> deriveHelpTopicList(final String helpTopicNames) {
+        if (StringUtils.isBlank(helpTopicNames)) {
+            return Arrays.asList("");
+        }
+        return Arrays.asList(helpTopicNames.split(","));
     }
 }
