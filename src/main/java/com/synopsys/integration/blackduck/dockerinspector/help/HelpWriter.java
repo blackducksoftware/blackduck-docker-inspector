@@ -25,8 +25,6 @@ package com.synopsys.integration.blackduck.dockerinspector.help;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
-import java.util.Arrays;
-import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
 
