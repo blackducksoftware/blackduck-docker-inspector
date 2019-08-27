@@ -108,13 +108,16 @@ public class HelpTextTest {
         System.out.println(deploymentHtml);
         assertTrue(deploymentHtml.contains(">Black Duck Docker Inspector 1.2.3"));
         assertTrue(deploymentHtml.contains(">Overview"));
-        assertTrue(deploymentHtml.contains(">Architecture</h2>"));
-        assertTrue(deploymentHtml.contains(">Running Docker Inspector</h2>"));
+        assertTrue(deploymentHtml.contains(">Architecture<"));
+        assertTrue(deploymentHtml.contains(">Running Docker Inspector<"));
         verifyPropertiesHtml(deploymentHtml);
         assertTrue(deploymentHtml.contains(">Advanced topics<"));
         assertTrue(deploymentHtml.contains(">Deploying Docker Inspector<"));
         assertTrue(deploymentHtml.contains(">Troubleshooting<"));
         assertTrue(deploymentHtml.contains(">Release notes<"));
+
+        // verify TOC is present
+        assertTrue(deploymentHtml.contains("<a href=\"#architecture\">Architecture</a>"));
     }
 
     private void verifyPropertiesHtml(final String deploymentHtml) {
