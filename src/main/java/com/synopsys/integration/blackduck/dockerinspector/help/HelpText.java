@@ -38,7 +38,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.synopsys.integration.blackduck.dockerinspector.DockerInspector;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorOption;
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
@@ -83,8 +82,7 @@ public class HelpText {
     private ProgramVersion programVersion;
 
     static final DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(
-        TocExtension.create(),
-        CustomExtension.create()
+        TocExtension.create()
     ));
 
     static final Parser PARSER = Parser.builder(OPTIONS).build();
@@ -93,13 +91,6 @@ public class HelpText {
     // TODO look for old references to topics that are named topic, here and in DockerInspector.java
 
     public HelpText() {
-        // From https://github.com/vsch/flexmark-java/blob/master/flexmark-ext-toc/src/test/java/com/vladsch/flexmark/ext/toc/ComboSimTocSpecTest.java
-//        final DataHolder options = new MutableDataSet()
-//                                       .set(HtmlRenderer.INDENT_SIZE, 2)
-//                                       .set(HtmlRenderer.RENDER_HEADER_ID, true)
-//                                       .set(Parser.EXTENSIONS, Collections.singletonList(SimTocExtension.create()));
-
-
 
         // TODO clean this up
 //        parser = PARSER;
@@ -170,18 +161,6 @@ public class HelpText {
         }
     }
 
-    // TODO KILL
-    private String getHtmlForTopic(final String helpTopicName) throws IOException, IllegalAccessException {
-        if (HELP_TOPIC_NAME_PROPERTIES.equalsIgnoreCase(helpTopicName)) {
-            return markdownToHtml(getMarkdownForProperties());
-        } else if (HELP_TOPIC_NAME_PROGRAM_NAMEVERSION.equalsIgnoreCase(helpTopicName)) {
-            return markdownToHtml(getMarkdownForProgram());
-        } else {
-            final String helpFileContents = getStringFromHelpFile(helpTopicName);
-            return markdownToHtml(helpFileContents);
-        }
-    }
-
     private String markdownToHtml(final String markdown) {
         final Node document = PARSER.parse(markdown);
         final String bodyHtml = RENDERER.render(document);
@@ -241,58 +220,5 @@ public class HelpText {
 
     private String getMarkdownForProgram() {
         return String.format("# %s %s\n\n[TOC]\n\n", programVersion.getProgramNamePretty(), programVersion.getProgramVersion());
-    }
-
-    static class CustomExtension implements HtmlRendererExtension {
-        @Override
-        public void rendererOptions(MutableDataHolder options) {
-
-        }
-
-        @Override
-        public void extend(Builder rendererBuilder, String rendererType) {
-            rendererBuilder.nodeRendererFactory(new CustomNodeRenderer.Factory());
-        }
-
-        static Extension create() {
-            return new CustomExtension();
-        }
-    }
-
-    static class CustomNodeRenderer implements NodeRenderer {
-        public static class Factory implements DelegatingNodeRendererFactory {
-            @Override
-            public NodeRenderer apply(DataHolder options) {
-                return new CustomNodeRenderer();
-            }
-
-            @Override
-            public Set<Class<? extends NodeRendererFactory>> getDelegates() {
-                Set<Class<? extends NodeRendererFactory>> set = new HashSet<Class<? extends NodeRendererFactory>>();
-                // add node renderer factory classes to which this renderer will delegate some of its rendering
-                // core node renderer is assumed to have all depend it so there is no need to add it
-                set.add(TocNodeRenderer.Factory.class);
-                return set;
-
-                // return null if renderer does not delegate or delegates only to core node renderer
-                //return null;
-            }
-
-        }
-        @Override
-        public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-            HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-            set.add(new NodeRenderingHandler<TocBlock>(TocBlock.class, new com.vladsch.flexmark.html.CustomNodeRenderer<TocBlock>() {
-                @Override
-                public void render(TocBlock node, NodeRendererContext context, HtmlWriter html) {
-                    // test the node to see if it needs overriding
-                    NodeRendererContext subContext = context.getDelegatedSubContext(true);
-                    subContext.delegateRender();
-                    html.tagLineIndent("div", () -> html.append(subContext.getHtmlWriter()));
-                }
-            }));
-
-            return set;
-        }
     }
 }
