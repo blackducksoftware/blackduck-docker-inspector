@@ -3,6 +3,7 @@ package com.synopsys.integration.blackduck.dockerinspector.help;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -29,9 +30,16 @@ public class HelpTextTest {
     @Mock
     private ProgramVersion programVersion;
 
+    @Mock
+    private HelpTopicInterpreter helpTopicInterpreter;
+
     @Test
     public void testTextOverview() throws IllegalArgumentException, IllegalAccessException, IOException {
+        Mockito.when(helpTopicInterpreter.translateGivenTopicNames("overview")).thenReturn("overview");
+        Mockito.when(helpTopicInterpreter.deriveHelpTopicList("overview")).thenReturn(Arrays.asList("overview"));
+
         final String usageString = helpText.get("overview");
+
         assertTrue(usageString.length() >= 100);
         assertTrue(usageString.contains("Usage: blackduck-docker-inspector.sh <Docker Inspector arguments>"));
         assertTrue(usageString.contains("Any supported property can be set by adding to the command line"));
@@ -39,34 +47,46 @@ public class HelpTextTest {
 
     @Test
     public void testTextProperties() throws IllegalArgumentException, IllegalAccessException, IOException {
+        Mockito.when(helpTopicInterpreter.translateGivenTopicNames("properties")).thenReturn("properties");
+        Mockito.when(helpTopicInterpreter.deriveHelpTopicList("properties")).thenReturn(Arrays.asList("properties"));
         final SortedSet<DockerInspectorOption> configOptions = new TreeSet<>();
         configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", "public", false));
         Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
 
         final String usageString = helpText.get("properties");
+
         assertTrue(usageString.contains("blackduck.url [String]: Black Duck URL"));
     }
 
     @Test
     public void testHtmlDeployment() throws IllegalArgumentException, IllegalAccessException, IOException {
+        Mockito.when(helpTopicInterpreter.translateGivenTopicNames("deployment")).thenReturn("deployment");
+        Mockito.when(helpTopicInterpreter.deriveHelpTopicList("deployment")).thenReturn(Arrays.asList("deployment"));
         Mockito.when(config.getHelpOutputFormat()).thenReturn("html");
+
         final String deploymentHtml = helpText.get("deployment");
+
         assertTrue(deploymentHtml.contains("<p>The challenges involved in deploying Docker Inspector using the 'toolkit' approach are:</p>"));
     }
 
     @Test
     public void testHtmlProperties() throws IllegalArgumentException, IllegalAccessException, IOException {
+        Mockito.when(helpTopicInterpreter.translateGivenTopicNames("properties")).thenReturn("properties");
+        Mockito.when(helpTopicInterpreter.deriveHelpTopicList("properties")).thenReturn(Arrays.asList("properties"));
         final SortedSet<DockerInspectorOption> configOptions = new TreeSet<>();
         configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", "public", false));
         Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
         Mockito.when(config.getHelpOutputFormat()).thenReturn("HtmL");
 
         final String deploymentHtml = helpText.get("properties");
+
         verifyPropertiesHtml(deploymentHtml);
     }
 
     @Test
     public void testHtmlAll() throws IllegalArgumentException, IllegalAccessException, IOException {
+        Mockito.when(helpTopicInterpreter.translateGivenTopicNames("all")).thenReturn("all");
+        Mockito.when(helpTopicInterpreter.deriveHelpTopicList("all")).thenReturn(Arrays.asList("program", "overview", "architecture", "running", "advanced", "deployment", "troubleshooting", "releasenotes", "properties"));
         final SortedSet<DockerInspectorOption> configOptions = new TreeSet<>();
         configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", "public", false));
         Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
@@ -75,6 +95,7 @@ public class HelpTextTest {
         Mockito.when(programVersion.getProgramVersion()).thenReturn("1.2.3");
 
         final String deploymentHtml = helpText.get("all");
+
         System.out.println("DUMPING HTML OUTPUT:");
         System.out.println(deploymentHtml);
         assertTrue(deploymentHtml.contains(">Black Duck Docker Inspector 1.2.3"));

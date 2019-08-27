@@ -27,9 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.SortedSet;
 
 import org.apache.commons.lang3.StringUtils;
@@ -41,39 +39,19 @@ import org.springframework.stereotype.Component;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorOption;
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
-import com.vladsch.flexmark.ext.toc.TocBlock;
 import com.vladsch.flexmark.ext.toc.TocExtension;
-import com.vladsch.flexmark.ext.toc.internal.TocNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.html.HtmlRenderer.Builder;
-import com.vladsch.flexmark.html.HtmlRenderer.HtmlRendererExtension;
-import com.vladsch.flexmark.html.HtmlWriter;
-import com.vladsch.flexmark.html.renderer.DelegatingNodeRendererFactory;
-import com.vladsch.flexmark.html.renderer.NodeRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
-import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 
 @Component
 public class HelpText {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    // TODO: auto generate "all"?
-    private static final String HELP_TOPIC_NAME_PROGRAM_NAMEVERSION = "program";
-    private static final String HELP_TOPIC_NAME_OVERVIEW = "overview";
-    private static final String HELP_TOPIC_NAME_PROPERTIES = "properties";
-    private static final String HELP_TOPIC_NAME_ALL = "all";
-    private static final String ALL_HELP_TOPICS = String.format("%s,%s,architecture,running,%s,advanced,deployment,troubleshooting,releasenotes",
-        HELP_TOPIC_NAME_PROGRAM_NAMEVERSION, HELP_TOPIC_NAME_OVERVIEW, HELP_TOPIC_NAME_PROPERTIES);
-
-//    private final Parser parser;
-//    private final HtmlRenderer renderer;
+    private final Parser parser;
+    private final HtmlRenderer renderer;
 
     @Autowired
     private Config config;
@@ -81,26 +59,24 @@ public class HelpText {
     @Autowired
     private ProgramVersion programVersion;
 
-    static final DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(
-        TocExtension.create()
-    ));
+    @Autowired
+    private HelpTopicInterpreter helpTopicInterpreter;
 
-    static final Parser PARSER = Parser.builder(OPTIONS).build();
-    static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).indentSize(2).build();
-
-    // TODO look for old references to topics that are named topic, here and in DockerInspector.java
+    // TODO look for old references to topics that are named topic in DockerInspector.java
 
     public HelpText() {
+        final DataHolder options = new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(
+            TocExtension.create()
+        ));
 
-        // TODO clean this up
-//        parser = PARSER;
-//        renderer = RENDERER;
+        parser = Parser.builder(options).build();
+        renderer = HtmlRenderer.builder(options).indentSize(2).build();
     }
 
-    public String get(String givenHelpTopicName) throws IllegalArgumentException, IOException, IllegalAccessException {
-        String helpTopicName = translateGivenTopicName(givenHelpTopicName);
+    public String get(String givenHelpTopicNames) throws IllegalArgumentException, IOException, IllegalAccessException {
+        String helpTopicNames = helpTopicInterpreter.translateGivenTopicNames(givenHelpTopicNames);
         HelpFormat helpFormat = getHelpFormat();
-        return get(helpTopicName, helpFormat);
+        return get(helpTopicNames, helpFormat);
     }
 
     private HelpFormat getHelpFormat() {
@@ -119,10 +95,11 @@ public class HelpText {
     }
 
     private String get(String helpTopicNames, HelpFormat helpFormat) throws IllegalArgumentException, IOException, IllegalAccessException {
-        final List<String> helpTopics = deriveHelpTopicList(helpTopicNames);
+        final List<String> helpTopics = helpTopicInterpreter.deriveHelpTopicList(helpTopicNames);
         final StringBuilder markdownSb = new StringBuilder();
         for (final String helpTopicName : helpTopics) {
             markdownSb.append(getMarkdownForHelpTopic(helpTopicName));
+            markdownSb.append("\n");
         }
         switch (helpFormat) {
             case MARKDOWN:
@@ -134,27 +111,10 @@ public class HelpText {
         }
     }
 
-    private List<String> deriveHelpTopicList(final String helpTopicsString) {
-        if (StringUtils.isBlank(helpTopicsString)) {
-            return Arrays.asList("");
-        }
-        return Arrays.asList(helpTopicsString.split(","));
-    }
-
-    private String translateGivenTopicName(final String givenHelpTopic) {
-        if (givenHelpTopic == null) {
-            return HELP_TOPIC_NAME_OVERVIEW;
-        }
-        if (HELP_TOPIC_NAME_ALL.equalsIgnoreCase(givenHelpTopic)) {
-            return ALL_HELP_TOPICS;
-        }
-        return givenHelpTopic;
-    }
-
     private String getMarkdownForHelpTopic(final String helpTopicName) throws IllegalArgumentException, IOException, IllegalAccessException {
-        if (HELP_TOPIC_NAME_PROPERTIES.equalsIgnoreCase(helpTopicName)) {
+        if (helpTopicInterpreter.HELP_TOPIC_NAME_PROPERTIES.equalsIgnoreCase(helpTopicName)) {
             return getMarkdownForProperties();
-        } else if (HELP_TOPIC_NAME_PROGRAM_NAMEVERSION.equalsIgnoreCase(helpTopicName)) {
+        } else if (helpTopicInterpreter.HELP_TOPIC_NAME_PROGRAM_NAMEVERSION.equalsIgnoreCase(helpTopicName)) {
             return getMarkdownForProgram();
         } else {
             return getStringFromHelpFile(helpTopicName.toLowerCase());
@@ -162,23 +122,16 @@ public class HelpText {
     }
 
     private String markdownToHtml(final String markdown) {
-        final Node document = PARSER.parse(markdown);
-        final String bodyHtml = RENDERER.render(document);
-        // TODO use String.format
-        final String fullHtml = "<!DOCTYPE html><html><head><meta charset=\"UTF-8\">\n" +
-                   "" +  // add your stylesheets, scripts styles etc.
-                   // uncomment line below for adding style for custom embedded fonts
-                   // nonLatinFonts +
-                   "</head><body>\n" + bodyHtml +
-                   "\n</body></html>";
-
+        final Node document = parser.parse(markdown);
+        final String bodyHtml = renderer.render(document);
+        final String fullHtml = String.format("<!DOCTYPE html><html><head><meta charset=\"UTF-8\">\n</head>\n<body>\n%s\n</body>\n</html>", bodyHtml);
         return fullHtml;
     }
 
     private String getStringFromHelpFile(final String helpTopicName) throws IOException {
         InputStream helpFileInputStream = getInputStreamForHelpTopic(helpTopicName);
         if (helpFileInputStream == null) {
-            helpFileInputStream = getInputStreamForHelpTopic(HELP_TOPIC_NAME_OVERVIEW);
+            helpFileInputStream = getInputStreamForHelpTopic(helpTopicInterpreter.HELP_TOPIC_NAME_OVERVIEW);
         }
         return readFromInputStream(helpFileInputStream);
     }
