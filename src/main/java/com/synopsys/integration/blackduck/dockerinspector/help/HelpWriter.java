@@ -36,6 +36,8 @@ import org.springframework.stereotype.Component;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.exception.HelpGenerationException;
+import com.synopsys.integration.blackduck.dockerinspector.help.format.Converter;
+import com.synopsys.integration.blackduck.dockerinspector.help.format.HelpConverterFactory;
 
 @Component
 public class HelpWriter {
@@ -50,10 +52,14 @@ public class HelpWriter {
     @Autowired
     private HelpFilename helpFilename;
 
+    @Autowired
+    private HelpConverterFactory helpConverterFactory;
+
     public void write(final String helpTopicNames) throws HelpGenerationException {
         try {
+            final Converter converter = helpConverterFactory.createConverter();
             final PrintStream printStream = derivePrintStream();
-            printStream.println(helpText.get(helpTopicNames));
+            printStream.println(helpText.get(converter, helpTopicNames));
         } catch (Exception e) {
             throw new HelpGenerationException(String.format("Error generating help: %s", e.getMessage()), e);
         }

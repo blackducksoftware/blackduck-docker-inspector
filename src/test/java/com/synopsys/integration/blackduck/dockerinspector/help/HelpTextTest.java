@@ -16,6 +16,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorOption;
+import com.synopsys.integration.blackduck.dockerinspector.help.format.Converter;
+import com.synopsys.integration.blackduck.dockerinspector.help.format.MarkdownToHtmlConverter;
+import com.synopsys.integration.blackduck.dockerinspector.help.format.MarkdownToMarkdownConverter;
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 
 @RunWith(SpringRunner.class)
@@ -41,8 +44,9 @@ public class HelpTextTest {
         Mockito.when(helpTopicParser.translateGivenTopicNames("overview")).thenReturn("overview");
         Mockito.when(helpTopicParser.deriveHelpTopicList("overview")).thenReturn(Arrays.asList("overview"));
         Mockito.when(helpFormatParser.getHelpFormat()).thenReturn(HelpFormat.MARKDOWN);
+        final Converter converter = new MarkdownToMarkdownConverter();
 
-        final String usageString = helpText.get("overview");
+        final String usageString = helpText.get(converter, "overview");
 
         assertTrue(usageString.length() >= 100);
         assertTrue(usageString.contains("Usage: blackduck-docker-inspector.sh <Docker Inspector arguments>"));
@@ -57,8 +61,9 @@ public class HelpTextTest {
         final SortedSet<DockerInspectorOption> configOptions = new TreeSet<>();
         configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", "public", false));
         Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
+        final Converter converter = new MarkdownToMarkdownConverter();
 
-        final String usageString = helpText.get("properties");
+        final String usageString = helpText.get(converter, "properties");
 
         assertTrue(usageString.contains("blackduck.url [String]: Black Duck URL"));
     }
@@ -69,8 +74,9 @@ public class HelpTextTest {
         Mockito.when(helpTopicParser.deriveHelpTopicList("deployment")).thenReturn(Arrays.asList("deployment"));
         Mockito.when(helpFormatParser.getHelpFormat()).thenReturn(HelpFormat.HTML);
         Mockito.when(config.getHelpOutputFormat()).thenReturn("html");
+        final Converter converter = new MarkdownToHtmlConverter();
 
-        final String deploymentHtml = helpText.get("deployment");
+        final String deploymentHtml = helpText.get(converter, "deployment");
 
         assertTrue(deploymentHtml.contains("<p>The challenges involved in deploying Docker Inspector using the 'toolkit' approach are:</p>"));
     }
@@ -84,8 +90,9 @@ public class HelpTextTest {
         configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", "public", false));
         Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
         Mockito.when(config.getHelpOutputFormat()).thenReturn("HtmL");
+        final Converter converter = new MarkdownToHtmlConverter();
 
-        final String deploymentHtml = helpText.get("properties");
+        final String deploymentHtml = helpText.get(converter, "properties");
 
         verifyPropertiesHtml(deploymentHtml);
     }
@@ -101,8 +108,9 @@ public class HelpTextTest {
         Mockito.when(config.getHelpOutputFormat()).thenReturn("HtmL");
         Mockito.when(programVersion.getProgramNamePretty()).thenReturn("Black Duck Docker Inspector");
         Mockito.when(programVersion.getProgramVersion()).thenReturn("1.2.3");
+        final Converter converter = new MarkdownToHtmlConverter();
 
-        final String deploymentHtml = helpText.get("all");
+        final String deploymentHtml = helpText.get(converter, "all");
 
         System.out.println("DUMPING HTML OUTPUT:");
         System.out.println(deploymentHtml);

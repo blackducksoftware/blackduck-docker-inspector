@@ -25,12 +25,13 @@ package com.synopsys.integration.blackduck.dockerinspector;
 import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorSystemProperties;
 import com.synopsys.integration.blackduck.dockerinspector.exception.HelpGenerationException;
 import com.synopsys.integration.blackduck.dockerinspector.help.HelpWriter;
+import com.synopsys.integration.blackduck.dockerinspector.help.format.Converter;
+import com.synopsys.integration.blackduck.dockerinspector.help.format.HelpConverterFactory;
 import com.synopsys.integration.blackduck.dockerinspector.httpclient.HttpClientInspector;
 import com.synopsys.integration.blackduck.dockerinspector.output.ResultFile;
 import com.synopsys.integration.blackduck.dockerinspector.programarguments.ArgumentParser;
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
-import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 
@@ -150,7 +151,7 @@ public class DockerInspector {
         return false;
     }
 
-    private boolean initAndValidate(final Config config) throws IOException, IntegrationException, IllegalArgumentException, IllegalAccessException {
+    private boolean initAndValidate(final Config config) throws IntegrationException, IllegalArgumentException {
         logger.info(String.format("Black Duck Docker Inspector %s", programVersion.getProgramVersion()));
         if (helpInvoked()) {
             helpWriter.write(getHelpTopics());

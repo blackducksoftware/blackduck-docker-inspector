@@ -26,7 +26,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.List;
 import java.util.SortedSet;
 
@@ -37,17 +36,11 @@ import org.springframework.stereotype.Component;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorOption;
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
-import com.vladsch.flexmark.ext.toc.TocExtension;
-import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.data.MutableDataSet;
+
+import com.synopsys.integration.blackduck.dockerinspector.help.format.Converter;
 
 @Component
 public class HelpText {
-    private final Parser parser;
-    private final HtmlRenderer renderer;
 
     @Autowired
     private Config config;
@@ -58,20 +51,11 @@ public class HelpText {
     @Autowired
     private HelpTopicParser helpTopicParser;
 
-    @Autowired
-    private HelpFormatParser helpFormatParser;
 
-    public HelpText() {
-        final DataHolder options = new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(TocExtension.create()));
-        parser = Parser.builder(options).build();
-        renderer = HtmlRenderer.builder(options).indentSize(2).build();
-    }
-
-    public String get(String givenHelpTopicNames) throws IllegalArgumentException, IOException, IllegalAccessException {
+    public String get(final Converter converter, final String givenHelpTopicNames) throws IllegalArgumentException, IOException, IllegalAccessException {
         final String helpTopicNames = helpTopicParser.translateGivenTopicNames(givenHelpTopicNames);
         final String markdownContent = collectMarkdownContent(helpTopicNames);
-        final HelpFormat helpFormat = helpFormatParser.getHelpFormat();
-        final String formattedHelp = translateMarkdownToGivenFormat(markdownContent, helpFormat);
+        final String formattedHelp = converter.convert(markdownContent);
         return formattedHelp;
     }
 
@@ -85,17 +69,6 @@ public class HelpText {
         return markdownContent.toString();
     }
 
-    private String translateMarkdownToGivenFormat(final String markdownContent, final HelpFormat helpFormat) {
-        switch (helpFormat) {
-            case MARKDOWN:
-                return markdownContent;
-            case HTML:
-                return markdownToHtml(markdownContent);
-            default:
-                throw new UnsupportedOperationException(String.format("Help format %s not supported", helpFormat.name()));
-        }
-    }
-
     private String getMarkdownForHelpTopic(final String helpTopicName) throws IllegalArgumentException, IOException, IllegalAccessException {
         if (helpTopicParser.HELP_TOPIC_NAME_PROPERTIES.equalsIgnoreCase(helpTopicName)) {
             return getMarkdownForProperties();
@@ -104,13 +77,6 @@ public class HelpText {
         } else {
             return getStringFromHelpFile(helpTopicName);
         }
-    }
-
-    private String markdownToHtml(final String markdown) {
-        final Node document = parser.parse(markdown);
-        final String bodyHtml = renderer.render(document);
-        final String fullHtml = String.format("<!DOCTYPE html><html><head><meta charset=\"UTF-8\">\n</head>\n<body>\n%s\n</body>\n</html>", bodyHtml);
-        return fullHtml;
     }
 
     private String getStringFromHelpFile(final String helpTopicName) throws IOException {
