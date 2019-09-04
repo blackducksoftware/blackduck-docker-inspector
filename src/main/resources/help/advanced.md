@@ -35,9 +35,9 @@ You can inspect multiple images in parallel on the same computer when you direct
     ./blackduck-docker-inspector.sh --pulljar
  
     # Execute multiple inspections in parallel
-    java -jar ./blackduck-docker-inspector-${inspectorVersion}.jar --blackduck.url=<Black Duck url> --blackduck.username=<Black Duck username> --docker.image=alpine:3.5  &
-    java -jar ./blackduck-docker-inspector-${inspectorVersion}.jar --blackduck.url=<Black Duck url> --blackduck.username=<Black Duck username> --docker.image=alpine:3.4  &
-    java -jar ./blackduck-docker-inspector-${inspectorVersion}.jar --blackduck.url=<Black Duck url> --blackduck.username=<Black Duck username> --docker.image=alpine:3.3  &
+    java -jar ./blackduck-docker-inspector-${r"${inspectorVersion}"}.jar --blackduck.url=<Black Duck url> --blackduck.username=<Black Duck username> --docker.image=alpine:3.5  &
+    java -jar ./blackduck-docker-inspector-${r"${inspectorVersion}"}.jar --blackduck.url=<Black Duck url> --blackduck.username=<Black Duck username> --docker.image=alpine:3.4  &
+    java -jar ./blackduck-docker-inspector-${r"${inspectorVersion}"}.jar --blackduck.url=<Black Duck url> --blackduck.username=<Black Duck username> --docker.image=alpine:3.3  &
 
 ### Alternative methods for setting property values
 

@@ -40,7 +40,7 @@ refer to the *deployment* help topic.
 
 Requirements for Black Duck Docker Inspector are:
 
-* The current version of Black Duck. Visit [this page](https://github.com/blackducksoftware/hub/releases) to determine the current version. 
+* The current version of Black Duck. Visit [this page](${blackduck_release_page}) to determine the current version. 
 * Linux.
 * Access to the internet. For information on running without access to the internet, refer to Air Gap mode..
 * curl.

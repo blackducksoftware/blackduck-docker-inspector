@@ -218,6 +218,8 @@ dependencies {
 
     compile 'org.springframework.boot:spring-boot-starter'
     compile 'com.vladsch.flexmark:flexmark-all:0.50.26'
+
+    compile group: 'org.freemarker', name: 'freemarker', version: '2.3.29'
     
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'io.fabric8:kubernetes-client:3.1.8'

@@ -22,10 +22,7 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.help;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.List;
 import java.util.SortedSet;
 
@@ -38,6 +35,9 @@ import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspector
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 
 import com.synopsys.integration.blackduck.dockerinspector.help.format.Converter;
+import com.synopsys.integration.exception.IntegrationException;
+
+import com.synopsys.integration.exception.IntegrationException;
 
 @Component
 public class HelpText {
@@ -51,15 +51,18 @@ public class HelpText {
     @Autowired
     private HelpTopicParser helpTopicParser;
 
+    @Autowired
+    private HelpReader helpReader;
 
-    public String get(final Converter converter, final String givenHelpTopicNames) throws IllegalArgumentException, IOException, IllegalAccessException {
+
+    public String get(final Converter converter, final String givenHelpTopicNames) throws IntegrationException, IllegalAccessException {
         final String helpTopicNames = helpTopicParser.translateGivenTopicNames(givenHelpTopicNames);
         final String markdownContent = collectMarkdownContent(helpTopicNames);
         final String formattedHelp = converter.convert(markdownContent);
         return formattedHelp;
     }
 
-    private String collectMarkdownContent(final String helpTopicNames) throws IOException, IllegalAccessException {
+    private String collectMarkdownContent(final String helpTopicNames) throws IntegrationException, IllegalAccessException {
         final List<String> helpTopics = helpTopicParser.deriveHelpTopicList(helpTopicNames);
         final StringBuilder markdownContent = new StringBuilder();
         for (final String helpTopicName : helpTopics) {
@@ -69,39 +72,14 @@ public class HelpText {
         return markdownContent.toString();
     }
 
-    private String getMarkdownForHelpTopic(final String helpTopicName) throws IllegalArgumentException, IOException, IllegalAccessException {
+    private String getMarkdownForHelpTopic(final String helpTopicName) throws IntegrationException, IllegalAccessException {
         if (helpTopicParser.HELP_TOPIC_NAME_PROPERTIES.equalsIgnoreCase(helpTopicName)) {
             return getMarkdownForProperties();
         } else if (helpTopicParser.HELP_TOPIC_NAME_PROGRAM_NAMEVERSION.equalsIgnoreCase(helpTopicName)) {
             return getMarkdownForProgram();
         } else {
-            return getStringFromHelpFile(helpTopicName);
+            return helpReader.getStringFromHelpFile(helpTopicName);
         }
-    }
-
-    private String getStringFromHelpFile(final String helpTopicName) throws IOException {
-        InputStream helpFileInputStream = getInputStreamForHelpTopic(helpTopicName);
-        if (helpFileInputStream == null) {
-            helpFileInputStream = getInputStreamForHelpTopic(helpTopicParser.HELP_TOPIC_NAME_OVERVIEW);
-        }
-        return readFromInputStream(helpFileInputStream);
-    }
-
-    private InputStream getInputStreamForHelpTopic(final String helpTopicName) {
-        final String pathRelToClasspath = String.format("/help/%s.md", helpTopicName.toLowerCase());
-        return this.getClass().getResourceAsStream(pathRelToClasspath);
-    }
-
-    private String readFromInputStream(InputStream inputStream) throws IOException {
-        final StringBuilder resultStringBuilder = new StringBuilder();
-        try (final BufferedReader br
-                 = new BufferedReader(new InputStreamReader(inputStream))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                resultStringBuilder.append(line).append("\n");
-            }
-        }
-        return resultStringBuilder.toString();
     }
 
     private String getMarkdownForProperties() throws IllegalAccessException {
