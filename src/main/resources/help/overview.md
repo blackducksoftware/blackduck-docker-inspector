@@ -2,10 +2,10 @@
 
 Black Duck Docker Inspector inspects Docker images to discover packages (components).
 It utilizes the appropriate Linux package manager to provide a list of
-the installed (by the package manager) packages, and create a Black Duck project with a Bill of Materials (BOM) consisting of those packages as components.
+the installed (by the package manager) packages, and creates a Black Duck project with a Bill of Materials (BOM) consisting of those packages as components.
 Because it relies on the Linux package manager as its source, the discovered packages are limited to those installed and managed using the Linux package manager.
 
-Black Duck Docker Inspector can inspect Docker images that support dpkg, rpm, or apk package manager formats.
+Black Duck Docker Inspector can inspect Linux Docker images that support dpkg, rpm, or apk package manager formats.
 
 After running the Black Duck Docker Inspector on an image, navigate to Black Duck to view the Bill of Materials (BOM) created by 
 Black Duck Docker Inspector.
@@ -19,7 +19,7 @@ Docker Inspector has two modes:
 
 #### Host mode
 
-Host mode (the default mode) is designed for Linux machines (and VMs) where it can perform Docker operations via a Docker engine.
+Host mode (the default mode) is for Linux machines (and VMs) where Docker Inspector can perform Docker operations via a Docker engine.
 
 In host mode, Black Duck Docker Inspector is a utility that automates the process of using Black Duck to discover security, license, and operational risks
 associated with Linux-based Docker images. It discovers components using the target Docker image's package manager; therefore, the results
@@ -32,8 +32,9 @@ on the .tar file. Docker Inspector supports Docker Image Specification v1.2.0 fo
 
 #### Container mode
 
-Container mode is designed for container orchestration environments (Kubernetes, OpenShift, etc.) where Docker Inspector will run
-inside a container, where it cannot perform Docker operations. For information on running Docker Inspector in container mode, refer to the *deployment* help topic.
+Container mode is for container orchestration environments (Kubernetes, OpenShift, etc.) where Docker Inspector will run
+inside a container, where it cannot perform Docker operations. For information on running Docker Inspector in container mode,
+refer to the *deployment* help topic.
 
 ### Requirements
 
@@ -42,18 +43,13 @@ Requirements for Black Duck Docker Inspector are:
 * The current version of Black Duck. Visit [this page](https://github.com/blackducksoftware/hub/releases) to determine the current version. 
 * Linux.
 * Access to the internet. For information on running without access to the internet, refer to Air Gap mode..
-
-* The curl utility.
-* Bash.
-* Java version 8.  Other versions of Java are not currently supported.
+* curl.
+* bash.
+* Java version 8.
 * Three available ports for the image inspector services.  By default, these ports are 9000, 9001, and 9002.
-* The blackduck-docker-inspector.sh script, downloadable at https://github.com/blackducksoftware/blackduck-docker-inspector/tree/gh-pages You can download the latest version of blackduck-docker-inspector.sh using the following commands:
-
-        curl -O  https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh
-        chmod +x blackduck-docker-inspector.sh
-
 * In host mode: Access to a Docker Engine (version 17.09 or higher).
-* In container mode: You must start the Docker Inspector container that meets the requirements above, and three container-based services. 
+* In container mode: You must start the Docker Inspector container that meets the requirements above, and three container-based
+"image inspector" services. 
 All four of these containers must share a mounted volume and be able to reach each other via HTTP GET operations using base URLs
 that you provide.
     
@@ -78,9 +74,7 @@ The advantage of using the Docker Inspector script is that it will ensure you al
 
 Another alternative is to download the Docker Inspector .jar (using the script) and run the .jar directly:
 
-    curl -O  https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh
-    chmod +x blackduck-docker-inspector.sh
-    ./blackduck-docker-inspector.sh --pulljar
+    bash <(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) --pulljar
     java -jar blackduck-docker-inspector-<version>.jar <Docker Inspector arguments>
 
 ### Passing arguments to Docker Inspector

@@ -126,5 +126,3 @@ to convert them to Docker Image Specification v1.2.0 files. For example:
 will convert an OCI image directory alpine-oci to a Docker Image Specification v1.2.0 format file
 alpine-docker.tar that Docker Inspector can process when passed in with the
 --docker.tar=alpine-docker.tar command line argument.
-
-### Troubleshooting and workarounds
