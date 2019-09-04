@@ -25,8 +25,8 @@ For example:
 You can inspect multiple images in parallel on the same computer when you directly invoke the .jar file. For example:
 
     # Get the latest blackduck-docker-inspector.sh
-    curl -O  https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh
-    chmod +x ./blackduck-docker-inspector.sh
+    curl -O  ${script_url_base}/${script_name}
+    chmod +x ./${script_name}
  
     # Determine the current Black Duck Docker Inspector version
     inspectorVersion=$(grep "^version=" blackduck-docker-inspector.sh|cut -d'"' -f2)
