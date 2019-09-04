@@ -27,10 +27,10 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.synopsys.integration.exception.IntegrationException;
@@ -46,25 +46,22 @@ public class HelpReader {
 
     private final Configuration cfg;
 
-    private final Map<String, Object> variableData;
+    private Map<String, Object> variableData;
 
     public HelpReader() {
         cfg = new Configuration(Configuration.VERSION_2_3_29);
-        cfg.setClassForTemplateLoading(this.getClass(), "/help");
+        cfg.setClassForTemplateLoading(this.getClass(), "/help/content");
         cfg.setDefaultEncoding("UTF-8");
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
         cfg.setLogTemplateExceptions(false);
         cfg.setWrapUncheckedExceptions(true);
         cfg.setFallbackOnNullLoopVariable(false);
-
-        // TODO TEMP
-        variableData = new HashMap<>();
-        variableData.put("blackduck_release_page", "https://github.com/blackducksoftware/hub/releases");
     }
 
     public String getStringFromHelpFile(final String givenHelpTopicName) throws IntegrationException {
         final String helpTopicName = ensureNotNull(givenHelpTopicName);
         try {
+            ensureVariableDataLoaded();
             Template template = createFreemarkerTemplate(helpTopicName);
             final String helpFileContents = populateVariableValuesInHelpContent(template);
             return helpFileContents;
@@ -72,6 +69,17 @@ public class HelpReader {
             final String msg = String.format("Error processing help file for help topic: %s", helpTopicName);
             logger.error(msg, e);
             throw new IntegrationException(msg, e);
+        }
+    }
+
+    private void ensureVariableDataLoaded() throws IOException {
+        if (variableData == null) {
+            variableData = new HashMap<>();
+            final Properties properties = new Properties();
+            properties.load(this.getClass().getResourceAsStream("/help/data/help.properties"));
+            for (final String propertyName : properties.stringPropertyNames()) {
+                variableData.put(propertyName, properties.getProperty(propertyName));
+            }
         }
     }
 
