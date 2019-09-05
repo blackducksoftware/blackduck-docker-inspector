@@ -57,29 +57,29 @@ that you provide.
 
 The following command format will always fetch and run the latest version of Docker Inspector:
 
-    bash <(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) <Docker Inspector arguments>
+    bash <(curl -s https://${source_repo_organization}.github.io/${project_name}/${script_name}) <Docker Inspector arguments>
 
 For example:
 
-    bash <(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) --help
-    bash <(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) --upload.bdio=false --docker.image=ubuntu
+    bash <(curl -s https://${source_repo_organization}.github.io/${project_name}/${script_name}) --help
+    bash <(curl -s https://${source_repo_organization}.github.io/${project_name}/${script_name}) --upload.bdio=false --docker.image=ubuntu
 
 An alternative is to download and run the latest Docker Inspector script:
 
-    curl -O  https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh
-    chmod +x blackduck-docker-inspector.sh
-    ./blackduck-docker-inspector.sh <Docker Inspector arguments>
+    curl -O  https://${source_repo_organization}.github.io/${project_name}/${script_name}
+    chmod +x ${script_name}
+    ./${script_name} <Docker Inspector arguments>
 
 The advantage of using the Docker Inspector script is that it will ensure you always run the latest version of the Docker Inspector .jar.
 
 Another alternative is to download the Docker Inspector .jar (using the script) and run the .jar directly:
 
-    bash <(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) --pulljar
-    java -jar blackduck-docker-inspector-<version>.jar <Docker Inspector arguments>
+    bash <(curl -s https://${source_repo_organization}.github.io/${project_name}/${script_name}) --pulljar
+    java -jar ${project_name}-<version>.jar <Docker Inspector arguments>
 
 ### Passing arguments to Docker Inspector
 
-Usage: blackduck-docker-inspector.sh <Docker Inspector arguments>
+Usage: ${script_name} <Docker Inspector arguments>
 Docker Inspector arguments consist of property assignments. 
 Any supported property can be set by adding to the command line
 a property assignment of the form:

@@ -61,7 +61,7 @@ image inspector service. You can change the default image inspector service to r
 of redirects (resulting in shorter execution times). For example, if most of your target images are Alpine
 you can set imageinspector.service.distro.default to alpine.
 
-The image inspector service containers are downloaded from Docker Hub (blackducksoftware/blackduck-imageinspector-*).
+The image inspector service containers are downloaded from Docker Hub (${image_repo_organization}/blackduck-imageinspector-*).
 
 <a name="deploymentsamples"></a>
 ### Deployment samples for commonly-used environments
@@ -87,7 +87,7 @@ Approach: Toolkit
 Deployment notes: Each image inspector service runs in a separate pod.
 The shared volume is a hostPath volume. The containers communicate via service URLs.
 
-Download: curl -O https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/kubernetes/setup.txt
+Download: curl -O https://raw.githubusercontent.com/${source_repo_organization}/${project_name}/master/deployment/kubernetes/setup.txt
 
 #### OpenShift
 
@@ -96,7 +96,7 @@ Approach: Toolkit
 Deployment notes: All image inspector services run in a single pod. The shared volume is an emptyDir volume.
 The containers communicate via localhost URLs.
 
-Download: curl -O https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/openshift/setup.txt
+Download: curl -O https://raw.githubusercontent.com/${source_repo_organization}/${project_name}/master/deployment/openshift/setup.txt
 
 #### Travis CI
 
@@ -105,7 +105,7 @@ Approach: Toolkit
 Deployment notes: Uses the Travis CI docker service.
 The containers communicate via localhost URLs.
 
-Download: curl -O https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/travisci/travis.yml
+Download: curl -O https://raw.githubusercontent.com/${source_repo_organization}/${project_name}/master/deployment/travisci/travis.yml
 
 #### GitLab CI
 
@@ -114,7 +114,7 @@ Approach: Toolkit
 Deployment notes: Uses the GitLab CI shell executor.
 The containers communicate via localhost URLs.
 
-Download: curl -O https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/gitlabci/setup.sh
+Download: curl -O https://raw.githubusercontent.com/${source_repo_organization}/${project_name}/master/deployment/gitlabci/setup.sh
 
 #### Circle CI
 
@@ -122,7 +122,7 @@ Approach: Utility
 
 Deployment notes: 
 
-Download: curl -O https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/circleci/config.yml
+Download: curl -O https://raw.githubusercontent.com/${source_repo_organization}/${project_name}/master/deployment/circleci/config.yml
 
 #### Docker (Detect running in container)
 
@@ -130,7 +130,7 @@ Approach: Toolkit
 
 Deployment notes: The containers communicate via localhost URLs.
 
-Download: https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/docker/runDetectInContainer/setup.sh			
+Download: https://raw.githubusercontent.com/${source_repo_organization}/${project_name}/master/deployment/docker/runDetectInContainer/setup.sh			
 
 <a name="deploymentother"></a>
 ### Other deployment tips
@@ -175,8 +175,8 @@ Detect performs these actions without running the image/container.
 
 To see a simple example that illustrates this approach, use the following commands to download these sample files:
 ```
-curl -O https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/docker/runDetectInImageDir/runDetectInImageDir.sh
-curl -O https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/docker/runDetectInImageDir/Dockerfile
+curl -O https://raw.githubusercontent.com/${source_repo_organization}/${project_name}/master/deployment/docker/runDetectInImageDir/runDetectInImageDir.sh
+curl -O https://raw.githubusercontent.com/${source_repo_organization}/${project_name}/master/deployment/docker/runDetectInImageDir/Dockerfile
 ```
 
 Please review the script before running it to make sure the side effects
@@ -232,7 +232,7 @@ image inspector services.
 
 The following script illustrates how this could be done in a Docker environment:
 ```
-curl -O https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/docker/batchedImageInspection.sh
+curl -O https://raw.githubusercontent.com/${source_repo_organization}/${project_name}/master/deployment/docker/batchedImageInspection.sh
 ```
 
 To keep the example simple, this script only starts the alpine image inspector service.

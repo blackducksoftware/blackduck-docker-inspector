@@ -24,7 +24,7 @@ which will not be acceptable in some environments.
 
 On your non-Linux computer, run:
 
-    docker run -it -d --name inspectorhost --privileged blackducksoftware/blackduck-imageinspector-ubuntu:3.0.0
+    docker run -it -d --name inspectorhost --privileged ${image_repo_organization}/blackduck-imageinspector-ubuntu:3.0.0
     docker attach inspectorhost
 
 Then, in the inspectorhost container, run:
@@ -37,9 +37,9 @@ Then, in the inspectorhost container, run:
     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
     apt-get install -y docker-ce
     dockerd --storage-driver=vfs  &
-    curl -O https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh; chmod +x blackduck-docker-inspector.sh; chmod +x blackduck-docker-inspector.sh
+    curl -O https://${source_repo_organization}.github.io/${project_name}/${script_name}; chmod +x ${script_name}; chmod +x ${script_name}
     dockerd --storage-driver=vfs 2> dockerd_stderr.log > dockerd_stdout.log &
-    ./blackduck-docker-inspector.sh  ...
+    ./${script_name}  ...
 
 It's possible that additional steps such as configuration of dockerd, logging into the Docker registry,
 and others, are required to give Docker running inside the inspectorhost container access to the Docker
@@ -69,7 +69,7 @@ Possible cause: SELinux policy configuration.
 Solution/workaround: Add the svirt_sandbox_file_t label to Docker Inspector's shared directory.
 This enables the Docker Inspector services running in Docker containers to write to it:
                      
-    sudo chcon -Rt svirt_sandbox_file_t /tmp/blackduck-docker-inspector-files/shared/
+    sudo chcon -Rt svirt_sandbox_file_t /tmp/${project_name}-files/shared/
 
 ### Problem: The image inspector service cannot read from the mounted volume
 

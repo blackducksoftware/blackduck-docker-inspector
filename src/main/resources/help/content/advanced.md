@@ -18,26 +18,26 @@ sha256:b079b3fa8d1b4b30a71a6e81763ed3da1327abaf0680ed3ed9f00ad1d5de5e7c.
 Set the value of the Docker Inspector property docker.platform.top.layer.id to the platform top layer ID.
 For example:
 
-./blackduck-docker-inspector.sh ... --docker.platform.top.layer.id=sha256:b079b3fa8d1b4b30a71a6e81763ed3da1327abaf0680ed3ed9f00ad1d5de5e7c
+./${script_name} ... --docker.platform.top.layer.id=sha256:b079b3fa8d1b4b30a71a6e81763ed3da1327abaf0680ed3ed9f00ad1d5de5e7c
 
 ### Concurrent execution
 
 You can inspect multiple images in parallel on the same computer when you directly invoke the .jar file. For example:
 
-    # Get the latest blackduck-docker-inspector.sh
+    # Get the latest ${script_name}
     curl -O  ${script_url_base}/${script_name}
     chmod +x ./${script_name}
  
     # Determine the current Black Duck Docker Inspector version
-    inspectorVersion=$(grep "^version=" blackduck-docker-inspector.sh|cut -d'"' -f2)
+    inspectorVersion=$(grep "^version=" ${script_name}|cut -d'"' -f2)
  
     # Download the latest Black Duck Docker Inspector .jar file to the current dir
-    ./blackduck-docker-inspector.sh --pulljar
+    ./${script_name} --pulljar
  
     # Execute multiple inspections in parallel
-    java -jar ./blackduck-docker-inspector-${r"${inspectorVersion}"}.jar --blackduck.url=<Black Duck url> --blackduck.username=<Black Duck username> --docker.image=alpine:3.5  &
-    java -jar ./blackduck-docker-inspector-${r"${inspectorVersion}"}.jar --blackduck.url=<Black Duck url> --blackduck.username=<Black Duck username> --docker.image=alpine:3.4  &
-    java -jar ./blackduck-docker-inspector-${r"${inspectorVersion}"}.jar --blackduck.url=<Black Duck url> --blackduck.username=<Black Duck username> --docker.image=alpine:3.3  &
+    java -jar ./${project_name}-${r"${inspectorVersion}"}.jar --blackduck.url=<Black Duck url> --blackduck.username=<Black Duck username> --docker.image=alpine:3.5  &
+    java -jar ./${project_name}-${r"${inspectorVersion}"}.jar --blackduck.url=<Black Duck url> --blackduck.username=<Black Duck username> --docker.image=alpine:3.4  &
+    java -jar ./${project_name}-${r"${inspectorVersion}"}.jar --blackduck.url=<Black Duck url> --blackduck.username=<Black Duck username> --docker.image=alpine:3.3  &
 
 ### Alternative methods for setting property values
 
@@ -54,7 +54,7 @@ using one of the Spring Boot configuration mechanisms mentioned above.
 
 For example, instead of passing --blackduck.password=mypassword on the command line, you can do the following:
   export BLACKDUCK_PASSWORD=mypassword
-  ./blackduck-docker-inspector.sh --blackduck.url=http://blackduck.mydomain.com:8080/ --blackduck.username=myusername --docker.image=ubuntu:latest
+  ./${script_name} --blackduck.url=http://blackduck.mydomain.com:8080/ --blackduck.username=myusername --docker.image=ubuntu:latest
 
 Refer to [Spring Boot's configuration mechanism](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html)
 for more information on using this capability.
@@ -64,18 +64,18 @@ for more information on using this capability.
 In Black Duck Docker Inspector versions 6.2.0 and higher, Black Duck provides an archive containing all files needed
 to run Black Duck Docker Inspector without access to the internet. To download the Air Gap archive, run the command:
 
-    ./blackduck-docker-inspector.sh --pullairgapzip
+    ./${script_name} --pullairgapzip
     
 To create the Docker images from the Air Gap archive required by Black Duck Docker Inspector, run the commands:
 
-    unzip blackduck-docker-inspector-<version>-air-gap.zip
+    unzip ${project_name}-<version>-air-gap.zip
     docker load -i blackduck-imageinspector-ws-alpine.tar
     docker load -i blackduck-imageinspector-ws-centos.tar
     docker load -i blackduck-imageinspector-ws-ubuntu.tar
     
 To run in Air Gap mode, use the command:
 
-    ./blackduck-docker-inspector.sh --upload.bdio=false --jar.path=./blackduck-docker-inspector<version>.jar --docker.tar=<tarfile>
+    ./${script_name} --upload.bdio=false --jar.path=./${project_name}-<version>.jar --docker.tar=<tarfile>
 
 ### Configuring Docker Inspector for your Docker Engine and Registry
 
