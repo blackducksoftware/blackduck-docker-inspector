@@ -334,7 +334,7 @@ public class DockerClientManager {
         final String nonNullTagName = tagName == null ? "" : tagName;
         final List<Image> images = dockerClient.listImagesCmd().withImageNameFilter(imageName).exec();
         for (final Image image : images) {
-            logger.debug(String.format("getLocalImage(%s, %s) examining %s", imageName, nonNullTagName, image.getId()));
+            logger.trace(String.format("getLocalImage(%s, %s) examining %s", imageName, nonNullTagName, image.getId()));
             if (image == null) {
                 logger.warn("Encountered a null image in local docker registry");
                 continue;
@@ -344,14 +344,14 @@ public class DockerClientManager {
                 logger.warn("Encountered an image with a null tag list in local docker registry");
             } else {
                 for (final String repoTag : repoTagList) {
-                    logger.debug(String.format("getLocalImage(%s, %s) examining %s", imageName, nonNullTagName, repoTag));
+                    logger.trace(String.format("getLocalImage(%s, %s) examining %s", imageName, nonNullTagName, repoTag));
                     if (repoTag == null) {
                         continue;
                     }
                     final String colonTagString = String.format(":%s", nonNullTagName);
-                    logger.debug(String.format("getLocalImage(%s, %s) checking to see if %s ends with %s", imageName, nonNullTagName, repoTag, colonTagString));
+                    logger.trace(String.format("getLocalImage(%s, %s) checking to see if %s ends with %s", imageName, nonNullTagName, repoTag, colonTagString));
                     if (repoTag.endsWith(colonTagString)) {
-                        logger.debug(String.format("getLocalImage(%s, %s) found image id %s", imageName, nonNullTagName, image.getId()));
+                        logger.trace(String.format("getLocalImage(%s, %s) found image id %s", imageName, nonNullTagName, image.getId()));
                         return Optional.of(image);
                     }
                 }
@@ -439,7 +439,7 @@ public class DockerClientManager {
         for (final Container container : containers) {
             for (final String name : container.getNames()) {
                 // name prefixed with '/' for some reason
-                logger.debug(String.format("Checking running container %s to see if it is %s", name, extractorContainerName));
+                logger.trace(String.format("Checking running container %s to see if it is %s", name, extractorContainerName));
                 if (name.contains(extractorContainerName)) {
                     logger.debug("The extractor container already exists");
                     extractorContainer = container;

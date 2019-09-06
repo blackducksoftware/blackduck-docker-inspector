@@ -89,7 +89,7 @@ public class HttpClientInspector {
                 containerFileSystemPathInContainer, config.getContainerFileSystemExcludedPaths(),
                 config.isOrganizeComponentsByLayer(), config.isIncludeRemovedComponents(),
                 config.isCleanupWorkingDir(), config.getDockerPlatformTopLayerId());
-            logger.debug(String.format("bdioString: %s", bdioString));
+            logger.trace(String.format("bdioString: %s", bdioString));
             final SimpleBdioDocument bdioDocument = toBdioDocument(bdioString);
             adjustBdio(bdioDocument);
             final File bdioFile = output.addOutputToOutputDir(bdioDocument);
