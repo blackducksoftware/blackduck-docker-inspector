@@ -1,5 +1,9 @@
 ## Release notes
 
+#### Version 8.1.5
+##### New features
+* Fixed an issue that could cause Docker Inspector to incorrectly identify the package manager of the target image.
+
 #### Version 8.1.4
 ##### New features
 * Added a GitLab continuous integration deployment example.
