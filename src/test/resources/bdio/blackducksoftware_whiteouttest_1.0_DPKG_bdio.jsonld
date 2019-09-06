@@ -6,9 +6,9 @@
       "spdx:creator": [
         "Tool: IntegrationBdio-17.1.2"
       ],
-      "spdx:created": "2019-08-05T16:36:05.777Z"
+      "spdx:created": "2019-09-03T15:44:31.043Z"
     },
-    "@id": "uuid:78fa88f6-0512-4f7c-800e-e4711745f35a",
+    "@id": "uuid:35bb5a1d-be8e-4f4a-9337-927816fee112",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -277,11 +277,11 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/bash/4_3_14ubuntu1_2/amd64",
+        "related": "http:ubuntu/libldap_2_4_2/2_4_42_dfsg_2ubuntu3_7/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
-        "related": "http:ubuntu/libldap_2_4_2/2_4_42_dfsg_2ubuntu3_6/amd64",
+        "related": "http:ubuntu/bash/4_3_14ubuntu1_2/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -1893,6 +1893,28 @@
     "relationship": []
   },
   {
+    "name": "libldap-2.4-2",
+    "revision": "2.4.42+dfsg-2ubuntu3.7",
+    "@id": "http:ubuntu/libldap_2_4_2/2_4_42_dfsg_2ubuntu3_7/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@ubuntu",
+      "externalId": "libldap-2.4-2/2.4.42+dfsg-2ubuntu3.7/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/",
+          "kbSeparator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "name": "libldap-2.4-2",
+        "version": "2.4.42+dfsg-2ubuntu3.7",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "bash",
     "revision": "4.3-14ubuntu1.2",
     "@id": "http:ubuntu/bash/4_3_14ubuntu1_2/amd64",
@@ -1909,28 +1931,6 @@
         },
         "name": "bash",
         "version": "4.3-14ubuntu1.2",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libldap-2.4-2",
-    "revision": "2.4.42+dfsg-2ubuntu3.6",
-    "@id": "http:ubuntu/libldap_2_4_2/2_4_42_dfsg_2ubuntu3_6/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@ubuntu",
-      "externalId": "libldap-2.4-2/2.4.42+dfsg-2ubuntu3.6/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "ubuntu",
-          "separator": "/",
-          "kbSeparator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "name": "libldap-2.4-2",
-        "version": "2.4.42+dfsg-2ubuntu3.6",
         "architecture": "amd64"
       }
     },
