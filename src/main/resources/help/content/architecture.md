@@ -15,8 +15,8 @@ the imageinspector.service.distro.default property.
 
 In host mode (the default), Docker Inspector automatically uses the Docker engine to pull as
 needed from Docker Hub
-three images: ${image_repo_organization}/blackduck-imageinspector-alpine, 
-${image_repo_organization}/blackduck-imageinspector-centos, and ${image_repo_organization}/blackduck-imageinspector-ubuntu.
+three images: ${image_repo_organization}/${inspector_image_name_base}-alpine, 
+${image_repo_organization}/${inspector_image_name_base}-centos, and ${image_repo_organization}/${inspector_image_name_base}-ubuntu.
 Docker Inspector starts those services as needed,
 and stops and removes the containers when Docker Inspector exits. It uses a shared volume to share files, such as the target Docker image,
 between the Docker Inspector utility and the three service containers.

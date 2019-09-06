@@ -88,7 +88,7 @@ public class HelpTextTest {
 
         final String deploymentHtml = helpText.get(converter, "deployment");
 
-        assertTrue(deploymentHtml.contains("<p>The challenges involved in deploying Docker Inspector using the 'toolkit' approach are:</p>"));
+        assertTrue(deploymentHtml.contains("<p>Black Duck Docker Inspector can be run in either of the following modes:</p>"));
     }
 
     @Test

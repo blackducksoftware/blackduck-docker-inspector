@@ -24,7 +24,7 @@ which will not be acceptable in some environments.
 
 On your non-Linux computer, run:
 
-    docker run -it -d --name inspectorhost --privileged ${image_repo_organization}/blackduck-imageinspector-ubuntu:3.0.0
+    docker run -it -d --name inspectorhost --privileged ${image_repo_organization}/${inspector_image_name_base}-ubuntu:3.0.0
     docker attach inspectorhost
 
 Then, in the inspectorhost container, run:
@@ -37,7 +37,7 @@ Then, in the inspectorhost container, run:
     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
     apt-get install -y docker-ce
     dockerd --storage-driver=vfs  &
-    curl -O https://${source_repo_organization}.github.io/${project_name}/${script_name}; chmod +x ${script_name}; chmod +x ${script_name}
+    curl -O ${script_hosting_scheme}://${source_repo_organization}.${script_hosting_domain}/${project_name}/${script_name}; chmod +x ${script_name}
     dockerd --storage-driver=vfs 2> dockerd_stderr.log > dockerd_stdout.log &
     ./${script_name}  ...
 
@@ -53,14 +53,14 @@ Possible cause: Black Duck Docker Inspector is built using the Spring Boot appli
 Spring Boot provides a variety of ways to set property values. This can produce unexpected results if,
 for example, you have an environment variable whose name maps to a Black Duck Docker Inspector property name.
 Refer to the
-[Spring Boot documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html)
+[Spring Boot documentation](${spring_boot_config_doc_url})
 for more details.
 
 ### Problem: The image inspector service cannot write to the mounted volume; SELinux is enabled
 
 When this happens, the following error may appear in the container log: 
 
-    Exception thrown while getting image packages: Error inspecting image: /opt/blackduck/blackduck-imageinspector/shared/run_.../output/..._containerfilesystem.tar.gz (Permission denied)
+    Exception thrown while getting image packages: Error inspecting image: ${container_image_inspector_dir_path}/shared/run_.../output/..._containerfilesystem.tar.gz (Permission denied)
     ...
     Caused by: java.io.FileNotFoundException: /opt/blackduck/hub-imageinspector-ws/shared/run_.../output/..._containerfilesystem.tar.gz (Permission denied)
 
@@ -75,7 +75,7 @@ This enables the Docker Inspector services running in Docker containers to write
 
 When this happens, the following error may appear in the container log: 
 
-    Error inspecting image: /opt/blackduck/blackduck-imageinspector/shared/run_.../<image>.tar (Permission denied)
+    Error inspecting image: ${container_image_inspector_dir_path}/shared/run_.../<image>.tar (Permission denied)
     
 Possible cause: The Linux umask value on the machine running Docker Inspector is too restrictive.
 
