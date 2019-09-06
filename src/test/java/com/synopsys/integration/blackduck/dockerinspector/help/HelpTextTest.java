@@ -1,6 +1,7 @@
 package com.synopsys.integration.blackduck.dockerinspector.help;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,14 +53,12 @@ public class HelpTextTest {
         Mockito.when(helpTopicParser.deriveHelpTopicList("overview")).thenReturn(Arrays.asList("overview"));
         Mockito.when(helpFormatParser.getHelpFormat()).thenReturn(HelpFormat.MARKDOWN);
         final Converter converter = new MarkdownToMarkdownConverter();
-        final String overviewHelpString = FileUtils.readFileToString(new File("src/main/resources/help/content/overview.md"), StandardCharsets.UTF_8);
-        Mockito.when(helpReader.getStringFromHelpFile("overview")).thenReturn(overviewHelpString);
+        final String actualHelpString = "help line 1\nhelp line 2";
+        Mockito.when(helpReader.getStringFromHelpFile("overview")).thenReturn(actualHelpString);
 
-        final String usageString = helpText.get(converter, "overview");
+        final String returnedHelpString = helpText.get(converter, "overview");
 
-        assertTrue(usageString.length() >= 100);
-        assertTrue(usageString.contains("Usage: blackduck-docker-inspector.sh <Docker Inspector arguments>"));
-        assertTrue(usageString.contains("Any supported property can be set by adding to the command line"));
+        assertTrue(returnedHelpString.contains(actualHelpString));
     }
 
     @Test
