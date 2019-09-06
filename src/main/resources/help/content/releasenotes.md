@@ -1,7 +1,11 @@
 ## Release notes
 
+#### Version 8.1.6
+##### Changed feature
+* Adjusted logging to ensure that sensitive information does not appear in a debug log.
+
 #### Version 8.1.5
-##### New features
+##### Resolved issues
 * Fixed an issue that could cause Docker Inspector to incorrectly identify the package manager of the target image.
 
 #### Version 8.1.4
