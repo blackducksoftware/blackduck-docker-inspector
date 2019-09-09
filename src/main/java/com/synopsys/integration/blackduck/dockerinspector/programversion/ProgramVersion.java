@@ -32,6 +32,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ProgramVersion {
+    private static final String PROGRAM_NAME_PRETTY = "Black Duck Docker Inspector";
+    private static final String PROGRAM_ID = "blackduck-docker-inspector";
     private final Logger logger = LoggerFactory.getLogger(ProgramVersion.class);
     private String programVersion;
     private String inspectorImageFamily;
@@ -46,6 +48,13 @@ public class ProgramVersion {
         logger.debug(String.format("programVersion: %s", programVersion));
     }
 
+    public String getProgramNamePretty() {
+        return PROGRAM_NAME_PRETTY;
+    }
+
+    public String getProgramId() {
+        return PROGRAM_ID;
+    }
     public String getProgramVersion() {
         return programVersion;
     }

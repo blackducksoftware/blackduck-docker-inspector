@@ -20,9 +20,17 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.synopsys.integration.blackduck.dockerinspector.help;
+package com.synopsys.integration.blackduck.dockerinspector.exception;
 
-public enum HelpTopic {
-    OVERVIEW,
-    DEPLOYMENT
+import com.synopsys.integration.exception.IntegrationException;
+
+public class HelpGenerationException extends IntegrationException {
+
+    public HelpGenerationException(final String message) {
+        super(message);
+    }
+
+    public HelpGenerationException(final String message, final Throwable cause) {
+        super(message, cause);
+    }
 }

@@ -24,7 +24,7 @@ repositories {
 
 version = '8.2.0-SNAPSHOT'
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
-project.ext.inspectorImageVersion = "4.5.0"
+project.ext.inspectorImageVersion = "4.5.2"
 project.group = 'com.synopsys.integration'
 
 apply plugin: 'java'
@@ -73,6 +73,11 @@ task buildScript(type: Copy) {
 	from 'src/main/resources/blackduck-docker-inspector.sh'
 	into 'build'
 	filter(ReplaceTokens, tokens: [VERSION: version, INSPECTOR_IMAGE_FAMILY: project.ext.inspectorImageFamily])
+}
+
+task generateHelpHtml(type: Exec) {
+    ignoreExitValue true
+    commandLine "java", "-jar", "${buildDir}/libs/${project.name}-${version}.jar", "--help", "all", "--help.output.format=html", "--help.output.path=build"
 }
 
 task createVersionedScript(type: Copy) {
@@ -172,6 +177,7 @@ task buildAggTestDockerTarfile(type: Exec, dependsOn: [buildTestDockerImage, bui
 }
 
 compileJava.dependsOn writeVersionToPropertiesFile
+build.dependsOn generateHelpHtml
 
 task checkVersion() {
     doFirst {
@@ -212,11 +218,14 @@ artifactory {
 
 dependencies {
     compile 'com.blackducksoftware.integration:blackduck-common:42.3.0'
-    compile 'com.blackducksoftware.integration:hub-imageinspector-lib:10.0.0'
+    compile 'com.blackducksoftware.integration:hub-imageinspector-lib:10.0.4'
     
     compile 'com.github.docker-java:docker-java:3.1.5'
 
     compile 'org.springframework.boot:spring-boot-starter'
+    compile 'com.vladsch.flexmark:flexmark-all:0.50.26'
+
+    compile group: 'org.freemarker', name: 'freemarker', version: '2.3.29'
     
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'io.fabric8:kubernetes-client:3.1.8'
