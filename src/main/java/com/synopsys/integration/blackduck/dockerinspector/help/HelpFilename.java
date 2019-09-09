@@ -51,6 +51,6 @@ public class HelpFilename {
             default:
                 throw new OperationNotSupportedException(String.format("Unsupported help format: %s", helpFormat));
         }
-        return String.format("%s_%s_help.%s", programVersion.getProgramId(), programVersion.getProgramVersion(), fileExtension);
+        return String.format("%s-%s-help.%s", programVersion.getProgramId(), programVersion.getProgramVersion(), fileExtension);
     }
 }

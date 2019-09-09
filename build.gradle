@@ -75,6 +75,11 @@ task buildScript(type: Copy) {
 	filter(ReplaceTokens, tokens: [VERSION: version, INSPECTOR_IMAGE_FAMILY: project.ext.inspectorImageFamily])
 }
 
+task generateHelpHtml(type: Exec) {
+    ignoreExitValue true
+    commandLine "java", "-jar", "${buildDir}/libs/${project.name}-${version}.jar", "--help", "all", "--help.output.format=html", "--help.output.path=build"
+}
+
 task createVersionedScript(type: Copy) {
     from 'build/blackduck-docker-inspector.sh'
     into 'build'
@@ -172,6 +177,7 @@ task buildAggTestDockerTarfile(type: Exec, dependsOn: [buildTestDockerImage, bui
 }
 
 compileJava.dependsOn writeVersionToPropertiesFile
+build.dependsOn generateHelpHtml
 
 task checkVersion() {
     doFirst {

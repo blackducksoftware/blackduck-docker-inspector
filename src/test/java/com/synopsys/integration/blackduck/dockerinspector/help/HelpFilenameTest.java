@@ -33,7 +33,7 @@ public class HelpFilenameTest {
 
         final String derivedhelpFilename = helpFilename.getDefaultHelpFilename();
 
-        assertEquals("blackduck-docker-inspector_1.2.3_help.html", derivedhelpFilename);
+        assertEquals("blackduck-docker-inspector-1.2.3-help.html", derivedhelpFilename);
     }
 
     @Test
@@ -44,6 +44,6 @@ public class HelpFilenameTest {
 
         final String derivedhelpFilename = helpFilename.getDefaultHelpFilename();
 
-        assertEquals("blackduck-docker-inspector_1.2.3_help.md", derivedhelpFilename);
+        assertEquals("blackduck-docker-inspector-1.2.3-help.md", derivedhelpFilename);
     }
 }
