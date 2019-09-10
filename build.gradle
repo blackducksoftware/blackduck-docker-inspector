@@ -226,6 +226,10 @@ dependencies {
     compile 'com.vladsch.flexmark:flexmark-all:0.50.26'
     compile group: 'org.freemarker', name: 'freemarker', version: '2.3.29'
 
+    // Adding activation avoids this runtime error: WARNING: HK2 failure has been detected in a code that does not run in an active Jersey Error scope. ...
+    // java.lang.NoClassDefFoundError: javax/activation/DataSource
+    compile group: 'javax.activation', name: 'activation', version: '1.1.1'
+
     runtime 'org.springframework.boot:spring-boot-properties-migrator'
     
     testCompile 'org.springframework.boot:spring-boot-starter-test'
