@@ -45,7 +45,7 @@ Requirements for Black Duck Docker Inspector are:
 * Access to the internet. For information on running without access to the internet, refer to Air Gap mode..
 * curl.
 * bash.
-* Java version 8.
+* Java (JRE) version 8 or 11.
 * Three available ports for the image inspector services.  By default, these ports are 9000, 9001, and 9002.
 * In host mode: Access to a Docker Engine (version 17.09 or higher).
 * In container mode: You must start the Docker Inspector container that meets the requirements above, and three container-based
@@ -102,9 +102,19 @@ Available help topics:
 * deployment
 * troubleshooting
 * releasenotes
+* all
 
 To display a help topic, run Docker Inspector with either -h or --help followed by a topic. For example:
     -h properties
     
 To display multiple help topics, use a comma-separated list of help topics. For example:
     -h overview,properties,running
+
+To display all help topics, use topic "all":
+    -h all
+
+To change the format of the help output to HTML, add --help.output.format=html:
+    -h all --help.output.format=html
+
+To write help to a file, add --help.output.path={directory or file path}:
+    -h all --help.output.format=html --help.output.path=.

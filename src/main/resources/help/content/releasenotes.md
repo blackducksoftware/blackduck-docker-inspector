@@ -2,9 +2,10 @@
 
 #### Version 8.2.0
 ##### Changed feature
-* Expanded help contentent.
+* Added support for Java 11.
 * Added the ability to generate help by topic (--help {topic}).
 * Added the ability to generate help in HTML.
+* Added the ability to write help output to a given file.
 
 #### Version 8.1.6
 ##### Changed feature
