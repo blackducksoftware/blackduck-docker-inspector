@@ -99,7 +99,7 @@ refer to the <em>deployment</em> help topic.</p>
   <li>Access to the internet. For information on running without access to the internet, refer to Air Gap mode..</li>
   <li>curl.</li>
   <li>bash.</li>
-  <li>Java version 8.</li>
+  <li>Java (JRE) version 8 or 11.</li>
   <li>Three available ports for the image inspector services.  By default, these ports are 9000, 9001, and 9002.</li>
   <li>In host mode: Access to a Docker Engine (version 17.09 or higher).</li>
   <li>In container mode: You must start the Docker Inspector container that meets the requirements above, and three container-based
@@ -109,7 +109,7 @@ refer to the <em>deployment</em> help topic.</p>
 </ul>
 <h3 id="getting-started">Getting started</h3>
 <p>The following command format will always fetch and run the latest version of Docker Inspector:</p>
-<pre><code>bash &lt;(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) &lt;Docker Inspector arguments&gt;
+<pre><code>bash &lt;(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) {Docker Inspector arguments}
 </code></pre>
 <p>For example:</p>
 <pre><code>bash &lt;(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) --help
@@ -118,22 +118,22 @@ bash &lt;(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector
 <p>An alternative is to download and run the latest Docker Inspector script:</p>
 <pre><code>curl -O  https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh
 chmod +x blackduck-docker-inspector.sh
-./blackduck-docker-inspector.sh &lt;Docker Inspector arguments&gt;
+./blackduck-docker-inspector.sh {Docker Inspector arguments}
 </code></pre>
 <p>The advantage of using the Docker Inspector script is that it will ensure you always run the latest version of the Docker Inspector .jar.</p>
 <p>Another alternative is to download the Docker Inspector .jar (using the script) and run the .jar directly:</p>
 <pre><code>bash &lt;(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) --pulljar
-java -jar blackduck-docker-inspector-&lt;version&gt;.jar &lt;Docker Inspector arguments&gt;
+java -jar blackduck-docker-inspector-{version}.jar {Docker Inspector arguments}
 </code></pre>
 <h3 id="passing-arguments-to-docker-inspector">Passing arguments to Docker Inspector</h3>
-<p>Usage: blackduck-docker-inspector.sh <Docker Inspector arguments>
+<p>Usage: blackduck-docker-inspector.sh {Docker Inspector arguments}
 Docker Inspector arguments consist of property assignments.
 Any supported property can be set by adding to the command line
 a property assignment of the form:
---<property name>=<value></p>
+--{property name}={value}</p>
 <p>Alternatively, any supported property can be set by adding to a text file named
 application.properties (in the current directory) a line of the form:
-<property name>=<value></p>
+{property name}={value}</p>
 <p>There are other alternative methods for setting properties. For more information, refer to the <em>running</em> help topic.</p>
 <h3 id="help">Help</h3>
 <p>Available help topics:</p>
@@ -146,11 +146,18 @@ application.properties (in the current directory) a line of the form:
   <li>deployment</li>
   <li>troubleshooting</li>
   <li>releasenotes</li>
+  <li>all</li>
 </ul>
 <p>To display a help topic, run Docker Inspector with either -h or --help followed by a topic. For example:
 -h properties</p>
 <p>To display multiple help topics, use a comma-separated list of help topics. For example:
 -h overview,properties,running</p>
+<p>To display all help topics, use topic &quot;all&quot;:
+-h all</p>
+<p>To change the format of the help output to HTML, add --help.output.format=html:
+-h all --help.output.format=html</p>
+<p>To write help to a file, add --help.output.path={directory or file path}:
+-h all --help.output.format=html --help.output.path=.</p>
 <h2 id="architecture">Architecture</h2>
 <p>Docker Inspector uses up to three container-based image inspector services
 (one for each of the supported Linux package manager database formats).</p>
@@ -226,8 +233,8 @@ base URLs that you provide:</p>
 <p>By default, blackduck-docker-inspector.sh runs the latest version of
 Docker Inspector (by downloading, if necessary, and running the latest Docker Inspector .jar).
 To run a specific version of Docker Inspector instead:</p>
-<pre><code>export DOCKER_INSPECTOR_VERSION=&lt;version&gt;
-./blackduck-docker-inspector.sh &lt;Docker Inspector arguments&gt;
+<pre><code>export DOCKER_INSPECTOR_VERSION={version}
+./blackduck-docker-inspector.sh {Docker Inspector arguments}
 </code></pre>
 <p>For example:</p>
 <pre><code>export DOCKER_INSPECTOR_VERSION=8.1.0
@@ -238,17 +245,17 @@ To run a specific version of Docker Inspector instead:</p>
 version of Docker Inspector. However, sometimes it is better to run the .jar directly.</p>
 <p>You can download any version of the Docker Inspector .jar from https://sig-repo.synopsys.com/webapp/#/artifacts/browse/tree/General/bds-integrations-release/com/synopsys/integration/blackduck-docker-inspector.</p>
 <p>Use the java command to run it:</p>
-<pre><code>java -jar blackduck-docker-inspector-&lt;version&gt;.jar &lt;Docker Inspector arguments&gt;
+<pre><code>java -jar blackduck-docker-inspector-{version}.jar {Docker Inspector arguments}
 </code></pre>
 <h3 id="inspecting-an-image-by-image-repotag">Inspecting an image by image repo:tag</h3>
 <p>To run Docker Inspector on Docker image from your local cache or a registry:</p>
-<pre><code>./blackduck-docker-inspector.sh --docker.image=&lt;repo&gt;:&lt;tag&gt;
+<pre><code>./blackduck-docker-inspector.sh --docker.image={repo}:{tag}
 </code></pre>
-<p>If you omit the :<tag>, it will default to :latest.</p>
+<p>If you omit the :{tag}, it will default to :latest.</p>
 <h3 id="inspecting-an-image-saved-to-a-tar-file">Inspecting an image saved to a .tar file</h3>
 <p>To run Docker Inspector on a Docker image .tar file:</p>
-<pre><code>docker save -o &lt;name&gt;.tar &lt;repo&gt;:&lt;tag&gt;
-./blackduck-docker-inspector.sh --docker.tar=&lt;name&gt;.tar
+<pre><code>docker save -o {name}.tar {repo}:{tag}
+./blackduck-docker-inspector.sh --docker.tar={name}.tar
 </code></pre>
 <p>If your tar file contains multiple images, Docker Inspector can only inspect one of them.
 You can specify which image you want to inspect using --docker.image.repo and --docker.image.tag. For example, to select ubuntu:latest
@@ -333,9 +340,9 @@ inspectorVersion=$(grep &quot;^version=&quot; blackduck-docker-inspector.sh|cut 
 ./blackduck-docker-inspector.sh --pulljar
 
 # Execute multiple inspections in parallel
-java -jar ./blackduck-docker-inspector-${inspectorVersion}.jar --blackduck.url=&lt;Black Duck url&gt; --blackduck.username=&lt;Black Duck username&gt; --docker.image=alpine:3.5  &amp;
-java -jar ./blackduck-docker-inspector-${inspectorVersion}.jar --blackduck.url=&lt;Black Duck url&gt; --blackduck.username=&lt;Black Duck username&gt; --docker.image=alpine:3.4  &amp;
-java -jar ./blackduck-docker-inspector-${inspectorVersion}.jar --blackduck.url=&lt;Black Duck url&gt; --blackduck.username=&lt;Black Duck username&gt; --docker.image=alpine:3.3  &amp;
+java -jar ./blackduck-docker-inspector-${inspectorVersion}.jar --blackduck.url={Black Duck url} --blackduck.username={Black Duck username} --docker.image=alpine:3.5  &amp;
+java -jar ./blackduck-docker-inspector-${inspectorVersion}.jar --blackduck.url={Black Duck url} --blackduck.username={Black Duck username} --docker.image=alpine:3.4  &amp;
+java -jar ./blackduck-docker-inspector-${inspectorVersion}.jar --blackduck.url={Black Duck url} --blackduck.username={Black Duck username} --docker.image=alpine:3.3  &amp;
 </code></pre>
 <h3 id="alternative-methods-for-setting-property-values">Alternative methods for setting property values</h3>
 <p>Docker Inspector gets its property values from
@@ -357,13 +364,13 @@ to run Black Duck Docker Inspector without access to the internet. To download t
 <pre><code>./blackduck-docker-inspector.sh --pullairgapzip
 </code></pre>
 <p>To create the Docker images from the Air Gap archive required by Black Duck Docker Inspector, run the commands:</p>
-<pre><code>unzip blackduck-docker-inspector-&lt;version&gt;-air-gap.zip
+<pre><code>unzip blackduck-docker-inspector-{version}-air-gap.zip
 docker load -i blackduck-imageinspector-alpine.tar
 docker load -i blackduck-imageinspector-centos.tar
 docker load -i blackduck-imageinspector-ubuntu.tar
 </code></pre>
 <p>To run in Air Gap mode, use the command:</p>
-<pre><code>./blackduck-docker-inspector.sh --upload.bdio=false --jar.path=./blackduck-docker-inspector-&lt;version&gt;.jar --docker.tar=&lt;tarfile&gt;
+<pre><code>./blackduck-docker-inspector.sh --upload.bdio=false --jar.path=./blackduck-docker-inspector-{version}.jar --docker.tar={tarfile}
 </code></pre>
 <h3 id="configuring-docker-inspector-for-your-docker-engine-and-registry">Configuring Docker Inspector for your Docker Engine and Registry</h3>
 <p>If you invoke Docker Inspector with an image reference (a repo:tag value vs. a .tar file),
@@ -442,7 +449,7 @@ here at a very high level is how it could be done:</p>
 </ol>
 <pre><code>--upload.bdio=false                        # disable BDIO upload
 --output.include.containerfilesystem=true  # tell DI to output the container file system
---output.path=&lt;your output dir&gt;            # tell DI where to put the output
+--output.path={your output dir}            # tell DI where to put the output
 </code></pre>
 <ol start="2">
   <li>Locate the container file system in the output dir (*.tar.gz) and untar it</li>
@@ -524,7 +531,7 @@ The containers communicate via localhost URLs.</p>
 <p>If you invoke Docker Inspector with an image reference (vs. an image that has been saved to a .tar file),
 it uses the docker-java library (https://github.com/docker-java/docker-java) to access the Docker registry
 to pull the image.</p>
-<p>If ?docker pull <targetimage>? works from the command line, then docker inspector should also be able
+<p>If ?docker pull {targetimage}? works from the command line, then docker inspector should also be able
 to pull that image, because docker-java can be configured the same way as the docker command line utility.</p>
 <p>But there are also other ways to configure docker-java. Details on how to configure docker-java
 (and therefore Docker Inspector) for your Docker registry can
@@ -598,7 +605,7 @@ This enables the Docker Inspector services running in Docker containers to write
 </code></pre>
 <h3 id="problem-the-image-inspector-service-cannot-read-from-the-mounted-volume">Problem: The image inspector service cannot read from the mounted volume</h3>
 <p>When this happens, the following error may appear in the container log:</p>
-<pre><code>Error inspecting image: /shared/run_.../&lt;image&gt;.tar (Permission denied)
+<pre><code>Error inspecting image: /shared/run_.../{image}.tar (Permission denied)
 </code></pre>
 <p>Possible cause: The Linux umask value on the machine running Docker Inspector is too restrictive.</p>
 <p>Solution/workaround: Set umask to 022 when running Docker Inspector. The cause could be a umask value
@@ -606,8 +613,16 @@ that prevents read access to the file, or read or execute access to the director
 Docker Inspector requires an umask value that does not remove read permissions from files,
 and does not remove read or execute permissions from directories. For example, a umask of 022 works.</p>
 <h2 id="release-notes">Release notes</h2>
-<h4 id="version-816">Version 8.1.6</h4>
+<h4 id="version-820">Version 8.2.0</h4>
 <h5 id="changed-feature">Changed feature</h5>
+<ul>
+  <li>Added support for Java 11.</li>
+  <li>Added the ability to generate help by topic (--help {topic}).</li>
+  <li>Added the ability to generate help in HTML.</li>
+  <li>Added the ability to write help output to a given file.</li>
+</ul>
+<h4 id="version-816">Version 8.1.6</h4>
+<h5 id="changed-feature-1">Changed feature</h5>
 <ul>
   <li>Adjusted logging to ensure that sensitive information does not appear in a debug log.</li>
 </ul>
@@ -751,7 +766,7 @@ and does not remove read or execute permissions from directories. For example, a
 <ul>
   <li>Resolved an issue that could cause DEBUG-level warnings to be logged while inspecting images with file paths containing non-ASCII characters.</li>
   <li>Improved logging for when the image inspector service is started but never comes online.</li>
-  <li>In http client mode &gt; start service mode: if a health check fails, Docker Inspector now performs a &lt;docker_logs&gt;container operation to reveal the root problem.</li>
+  <li>In http client mode &gt; start service mode: if a health check fails, Docker Inspector now performs a &quot;docker logs&quot; operation on the container to reveal the root problem.</li>
   <li>Orchestration platform properties are now included in the --help output.</li>
 </ul>
 <h4 id="version-630">Version 6.3.0</h4>
@@ -809,7 +824,7 @@ and does not remove read or execute permissions from directories. For example, a
 <h5 id="changed-features-4">Changed features</h5>
 <ul>
   <li>The available properties list included in the usage message, which displays when using the command line argument --help, is now sorted alphabetically.</li>
-  <li>The format of the (optional) container filesystem output file name has changed.  The new container system file name is <image name><em><image tag></em> containerfilesystem.tar.gz or <image tarfilename>.tar.gz, depending on how the target image is specified.</li>
+  <li>The format of the (optional) container filesystem output file name has changed.  The new container system file name is {image name}<em>{image tag}</em> containerfilesystem.tar.gz or {image tarfilename}.tar.gz, depending on how the target image is specified.</li>
 </ul>
 <h4 id="version-510">Version 5.1.0</h4>
 <h5 id="new-features-11">New features</h5>
@@ -886,7 +901,7 @@ and does not remove read or execute permissions from directories. For example, a
 <h4 id="version-403">Version 4.0.3</h4>
 <h5 id="resolved-issues-27">Resolved issues</h5>
 <ul>
-  <li>Resolved an issue wherein after importing a certificate, Hub Docker Inspector may incorrectly display the error message Error inspecting image: Please import the certificate for <hub url> into your Java keystore.</li>
+  <li>Resolved an issue wherein after importing a certificate, Hub Docker Inspector may incorrectly display the error message Error inspecting image: Please import the certificate for {hub url} into your Java keystore.</li>
 </ul>
 <h4 id="version-402">Version 4.0.2</h4>
 <h5 id="resolved-issues-28">Resolved issues</h5>
