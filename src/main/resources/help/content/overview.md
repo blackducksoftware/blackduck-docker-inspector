@@ -57,7 +57,7 @@ that you provide.
 
 The following command format will always fetch and run the latest version of Docker Inspector:
 
-    bash <(curl -s ${script_hosting_scheme}://${source_repo_organization}.${script_hosting_domain}/${project_name}/${script_name}) <Docker Inspector arguments>
+    bash <(curl -s ${script_hosting_scheme}://${source_repo_organization}.${script_hosting_domain}/${project_name}/${script_name}) {Docker Inspector arguments}
 
 For example:
 
@@ -68,26 +68,26 @@ An alternative is to download and run the latest Docker Inspector script:
 
     curl -O  ${script_hosting_scheme}://${source_repo_organization}.${script_hosting_domain}/${project_name}/${script_name}
     chmod +x ${script_name}
-    ./${script_name} <Docker Inspector arguments>
+    ./${script_name} {Docker Inspector arguments}
 
 The advantage of using the Docker Inspector script is that it will ensure you always run the latest version of the Docker Inspector .jar.
 
 Another alternative is to download the Docker Inspector .jar (using the script) and run the .jar directly:
 
     bash <(curl -s ${script_hosting_scheme}://${source_repo_organization}.${script_hosting_domain}/${project_name}/${script_name}) --pulljar
-    java -jar ${project_name}-<version>.jar <Docker Inspector arguments>
+    java -jar ${project_name}-{version}.jar {Docker Inspector arguments}
 
 ### Passing arguments to Docker Inspector
 
-Usage: ${script_name} <Docker Inspector arguments>
+Usage: ${script_name} {Docker Inspector arguments}
 Docker Inspector arguments consist of property assignments. 
 Any supported property can be set by adding to the command line
 a property assignment of the form:
-	--<property name>=<value>
+	--{property name}={value}
 
 Alternatively, any supported property can be set by adding to a text file named
 application.properties (in the current directory) a line of the form:
-<property name>=<value>
+{property name}={value}
 
 There are other alternative methods for setting properties. For more information, refer to the *running* help topic.
 

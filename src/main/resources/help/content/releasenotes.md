@@ -1,5 +1,11 @@
 ## Release notes
 
+#### Version 8.2.0
+##### Changed feature
+* Expanded help contentent.
+* Added the ability to generate help by topic (--help {topic}).
+* Added the ability to generate help in HTML.
+
 #### Version 8.1.6
 ##### Changed feature
 * Adjusted logging to ensure that sensitive information does not appear in a debug log.
@@ -112,7 +118,7 @@
 ##### Resolved issues
 * Resolved an issue that could cause DEBUG-level warnings to be logged while inspecting images with file paths containing non-ASCII characters.
 * Improved logging for when the image inspector service is started but never comes online.
-* In http client mode > start service mode: if a health check fails, Docker Inspector now performs a <docker_logs>container operation to reveal the root problem.
+* In http client mode > start service mode: if a health check fails, Docker Inspector now performs a "docker logs" operation on the container to reveal the root problem.
 * Orchestration platform properties are now included in the --help output.
 
 #### Version 6.3.0
@@ -156,7 +162,7 @@
 * Added REST client mode.
 ##### Changed features
 * The available properties list included in the usage message, which displays when using the command line argument --help, is now sorted alphabetically.
-* The format of the (optional) container filesystem output file name has changed.  The new container system file name is <image name>_<image tag>_ containerfilesystem.tar.gz or <image tarfilename>.tar.gz, depending on how the target image is specified.
+* The format of the (optional) container filesystem output file name has changed.  The new container system file name is {image name}_{image tag}_ containerfilesystem.tar.gz or {image tarfilename}.tar.gz, depending on how the target image is specified.
 
 #### Version 5.1.0
 ##### New features
@@ -215,7 +221,7 @@
 
 #### Version 4.0.3
 ##### Resolved issues
-* Resolved an issue wherein after importing a certificate, Hub Docker Inspector may incorrectly display the error message Error inspecting image: Please import the certificate for <hub url> into your Java keystore.
+* Resolved an issue wherein after importing a certificate, Hub Docker Inspector may incorrectly display the error message Error inspecting image: Please import the certificate for {hub url} into your Java keystore.
 
 #### Version 4.0.2
 ##### Resolved issues

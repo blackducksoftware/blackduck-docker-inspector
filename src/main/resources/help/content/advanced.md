@@ -35,9 +35,9 @@ You can inspect multiple images in parallel on the same computer when you direct
     ./${script_name} --pulljar
  
     # Execute multiple inspections in parallel
-    java -jar ./${project_name}-${r"${inspectorVersion}"}.jar --blackduck.url=<Black Duck url> --blackduck.username=<Black Duck username> --docker.image=alpine:3.5  &
-    java -jar ./${project_name}-${r"${inspectorVersion}"}.jar --blackduck.url=<Black Duck url> --blackduck.username=<Black Duck username> --docker.image=alpine:3.4  &
-    java -jar ./${project_name}-${r"${inspectorVersion}"}.jar --blackduck.url=<Black Duck url> --blackduck.username=<Black Duck username> --docker.image=alpine:3.3  &
+    java -jar ./${project_name}-${r"${inspectorVersion}"}.jar --blackduck.url={Black Duck url} --blackduck.username={Black Duck username} --docker.image=alpine:3.5  &
+    java -jar ./${project_name}-${r"${inspectorVersion}"}.jar --blackduck.url={Black Duck url} --blackduck.username={Black Duck username} --docker.image=alpine:3.4  &
+    java -jar ./${project_name}-${r"${inspectorVersion}"}.jar --blackduck.url={Black Duck url} --blackduck.username={Black Duck username} --docker.image=alpine:3.3  &
 
 ### Alternative methods for setting property values
 
@@ -68,14 +68,14 @@ to run Black Duck Docker Inspector without access to the internet. To download t
     
 To create the Docker images from the Air Gap archive required by Black Duck Docker Inspector, run the commands:
 
-    unzip ${project_name}-<version>-air-gap.zip
+    unzip ${project_name}-{version}-air-gap.zip
     docker load -i ${inspector_image_name_base}-alpine.tar
     docker load -i ${inspector_image_name_base}-centos.tar
     docker load -i ${inspector_image_name_base}-ubuntu.tar
     
 To run in Air Gap mode, use the command:
 
-    ./${script_name} --upload.bdio=false --jar.path=./${project_name}-<version>.jar --docker.tar=<tarfile>
+    ./${script_name} --upload.bdio=false --jar.path=./${project_name}-{version}.jar --docker.tar={tarfile}
 
 ### Configuring Docker Inspector for your Docker Engine and Registry
 
@@ -177,7 +177,7 @@ Include the following Docker Inspector properties:
 ```
 --upload.bdio=false                        # disable BDIO upload
 --output.include.containerfilesystem=true  # tell DI to output the container file system
---output.path=<your output dir>            # tell DI where to put the output
+--output.path={your output dir}            # tell DI where to put the output
 ```
 2. Locate the container file system in the output dir (*.tar.gz) and untar it
 3. cd into the directory (within the untar’d container file system) that you want to scan.

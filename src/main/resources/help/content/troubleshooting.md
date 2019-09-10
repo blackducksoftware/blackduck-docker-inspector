@@ -75,7 +75,7 @@ This enables the Docker Inspector services running in Docker containers to write
 
 When this happens, the following error may appear in the container log: 
 
-    Error inspecting image: ${container_image_inspector_dir_path}/shared/run_.../<image>.tar (Permission denied)
+    Error inspecting image: ${container_image_inspector_dir_path}/shared/run_.../{image}.tar (Permission denied)
     
 Possible cause: The Linux umask value on the machine running Docker Inspector is too restrictive.
 
