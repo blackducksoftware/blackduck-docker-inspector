@@ -61,7 +61,7 @@ public class IiClientContainersStartedAsNeededTest {
         Mockito.when(config.getCommandTimeout()).thenReturn(5000L);
         Mockito.when(config.getImageInspectorDefaultDistro()).thenReturn("ubuntu");
         Mockito.when(containerName.deriveContainerNameFromImageInspectorRepo(Mockito.anyString())).thenReturn("testContainerName");
-        Mockito.when(imageInspectorServices.getServiceVersion(Mockito.any(IntHttpClient.class), Mockito.any(URI.class))).thenReturn("1.1.1");
+        Mockito.when(imageInspectorServices.getServiceVersion(Mockito.any(IntHttpClient.class), Mockito.any(URI.class))).thenReturn("2.2.2");
         Mockito.when(programVersion.getInspectorImageVersion()).thenReturn("2.2.2");
         Mockito.when(imageInspectorServices.startService(Mockito.any(IntHttpClient.class), Mockito.any(
             URI.class), Mockito.anyString(), Mockito.anyString())).thenReturn(true);
@@ -78,16 +78,15 @@ public class IiClientContainersStartedAsNeededTest {
         // Mockito.when(restRequestor.executeSimpleGetRequest(Mockito.any(RestConnection.class), Mockito.anyString(), Mockito.anyString())).thenReturn("testResponse");
         final SimpleResponse response = new SimpleResponse(RestConstants.OK_200, null, "testResult");
         Mockito.when(httpRequestor
-            .executeGetBdioRequest(Mockito.any(IntHttpClient.class), Mockito.any(URI.class), Mockito.anyString(), Mockito.anyString(),
-                Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), Mockito.anyBoolean(), Mockito.anyBoolean(), Mockito.anyBoolean(),
-                Mockito.anyString())).thenReturn(response);
+            .executeGetBdioRequest(Mockito.any(IntHttpClient.class), Mockito.any(URI.class), Mockito.anyString(), Mockito.isNull(),
+                Mockito.isNull(), Mockito.isNull(), Mockito.anyString(), Mockito.anyBoolean(), Mockito.anyBoolean(), Mockito.anyBoolean(),
+                Mockito.isNull())).thenReturn(response);
 
         Mockito.when(inspectorImages.getInspectorImageName(Mockito.any(ImageInspectorOsEnum.class))).thenReturn("blackduck/blackduck-imageinspector");
         Mockito.when(inspectorImages.getInspectorImageTag(Mockito.any(ImageInspectorOsEnum.class))).thenReturn("1.1.1");
 
         assertEquals(true, imageInspectorClientContainersStartedAsNeeded.isApplicable());
-        assertEquals("testResult", imageInspectorClientContainersStartedAsNeeded.getBdio("/tmp/t.tar", null, null, "/tmp/t.tar", "containerFileSystemFilename", null, true, false, false,
-            null));
+        assertEquals("testResult", imageInspectorClientContainersStartedAsNeeded.getBdio("/tmp/t.tar", "/tmp/t.tar", null, null, null, "containerFileSystemFilename", false, true, false, null));
     }
 
 }

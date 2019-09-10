@@ -10,7 +10,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.blackducksoftware.integration:common-gradle-plugin:0.0.+'
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.11.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.6.RELEASE")
         classpath 'com.bmuschko:gradle-docker-plugin:3.0.6'
     }
 }
@@ -39,7 +39,7 @@ import com.bmuschko.gradle.docker.tasks.image.Dockerfile
 
 apply from: 'airgap.gradle'
 
-springBoot { mainClass = 'com.synopsys.integration.blackduck.dockerinspector.DockerInspector' }
+springBoot { mainClassName = 'com.synopsys.integration.blackduck.dockerinspector.DockerInspector' }
 
 // TODO if we s/compile/implementation/, can this go?:
 configurations {
@@ -224,8 +224,9 @@ dependencies {
 
     compile 'org.springframework.boot:spring-boot-starter'
     compile 'com.vladsch.flexmark:flexmark-all:0.50.26'
-
     compile group: 'org.freemarker', name: 'freemarker', version: '2.3.29'
+
+    runtime 'org.springframework.boot:spring-boot-properties-migrator'
     
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'io.fabric8:kubernetes-client:3.1.8'
