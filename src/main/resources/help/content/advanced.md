@@ -1,6 +1,6 @@
 ## Advanced topics
 
-### Isolation application components
+### Isolating application components
 
 If you are interested in components from the application layers of your image, but not interested in components
 from the underlying platform layers, you can exclude components from platform layers from the results.
