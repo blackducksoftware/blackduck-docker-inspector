@@ -37,6 +37,7 @@ import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
 import com.synopsys.integration.blackduck.dockerinspector.blackduckclient.BlackDuckClient;
+import com.synopsys.integration.blackduck.dockerinspector.output.ContainerFilesystemFilename;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarFilename;
 import com.synopsys.integration.blackduck.dockerinspector.output.Output;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
@@ -74,12 +75,15 @@ public class HttpClientInspector {
     @Autowired
     private Gson gson;
 
+    @Autowired
+    private ContainerFilesystemFilename containerFilesystemFilename;
+
     public int getBdio() throws IntegrationException {
         final ImageInspectorClient imageInspectorClient = chooseImageInspectorClient();
         try {
             output.ensureOutputDirIsWriteable();
             final File finalDockerTarfile = prepareDockerTarfile(imageInspectorClient);
-            final String containerFileSystemFilename = Names.getContainerFileSystemTarFilename(config.getDockerImage(), config.getDockerTar());
+            final String containerFileSystemFilename = containerFilesystemFilename.deriveContainerFilesystemFilename();
             final String dockerTarFilePathInContainer = containerPaths.getContainerPathToTargetFile(finalDockerTarfile.getCanonicalPath());
             String containerFileSystemPathInContainer = null;
             if (config.isOutputIncludeContainerfilesystem() || config.isOutputIncludeSquashedImage()) {

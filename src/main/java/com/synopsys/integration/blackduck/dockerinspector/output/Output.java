@@ -58,6 +58,9 @@ public class Output {
     @Autowired
     private Gson gson;
 
+    @Autowired
+    private ContainerFilesystemFilename containerFilesystemFilename;
+
     public void ensureOutputDirIsWriteable() {
         final File outputDir = new File(programPaths.getDockerInspectorDefaultOutputPath());
         final boolean dirCreated = outputDir.mkdirs();
@@ -82,7 +85,7 @@ public class Output {
         try (BdioWriter bdioWriter = new BdioWriter(gson, outputBdioStream)) {
             bdioWriter.writeSimpleBdioDocument(bdioDocument);
         }
-        final String containerFileSystemFilename = Names.getContainerFileSystemTarFilename(config.getDockerImage(), config.getDockerTar());
+        final String containerFileSystemFilename = containerFilesystemFilename.deriveContainerFilesystemFilename();
         final File containerFileSystemFile = new File(outputDir, containerFileSystemFilename);
         addSquashedImage(outputDir, containerFileSystemFile);
         removeContainerFileSystemIfNotRequested(containerFileSystemFile);
