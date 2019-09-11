@@ -272,12 +272,7 @@ function preProcessOptions() {
                         dockerTarArgument="--docker.tar=${dockerTarEscaped}"
 		elif [[ "${cmdlinearg}" == --spring.config.location=* ]]
 		then
-			# Once IDETECT-339 is done/released, this clause can go away
 			springConfigLocation=$(echo "${cmdlinearg}" | cut -d '=' -f 2)
-			if ! [[ "${springConfigLocation}" == file:* ]]
-			then
-				springConfigLocation="file:${springConfigLocation}"
-			fi
 			if ! [[ "${springConfigLocation}" == */application.properties ]]
 			then
 				if [[ "${springConfigLocation}" == */ ]]
@@ -289,25 +284,7 @@ function preProcessOptions() {
 			fi
 			options[${cmdlineargindex}]="--spring.config.location=${springConfigLocation}"
 		else
-			if [[ "${cmdlineargindex}" -eq $(( $# - 1)) ]]
-			then
-				if [[ "${cmdlinearg}" =~ ^-.* ]]
-				then
-					options[${cmdlineargindex}]="${cmdlinearg}"
-				else
-					image="${cmdlinearg}"
-					if [[ "${image}" == *.tar ]]
-					then
-						warn "This command line format is deprecated. Please replace the final argument ${image} with --docker.tar=${image}"
-						options[${cmdlineargindex}]="--docker.tar=${cmdlinearg}"
-					else
-						warn "This command line format is deprecated. Please replace the final argument ${image} with --docker.image=${image}"
-						options[${cmdlineargindex}]="--docker.image=${cmdlinearg}"
-					fi
-				fi
-			else
-				options[${cmdlineargindex}]="${cmdlinearg}"
-			fi
+			options[${cmdlineargindex}]="${cmdlinearg}"
 		fi
 		(( cmdlineargindex += 1 ))
 	done
