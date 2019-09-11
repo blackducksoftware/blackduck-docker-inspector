@@ -140,6 +140,17 @@ public class IntegrationTestCommon {
         return cmd;
     }
 
+    public static List<String> createSimpleDockerInspectorScriptCmd(final ProgramVersion programVersion, final List<String> args) {
+        final List<String> cmd = new ArrayList<>();
+
+        cmd.add("build/blackduck-docker-inspector.sh");
+        cmd.add(String.format("--jar.path=build/libs/blackduck-docker-inspector-%s.jar", programVersion.getProgramVersion()));
+        if (args != null) {
+            cmd.addAll(args);
+        }
+        return cmd;
+    }
+
     private static List<String> createDockerInspectorCmd(final Random random, final ProgramVersion programVersion, final TestConfig.Mode mode, final String inspectTargetArg, final String repo, final String tag,
         final String codelocationName, final List<String> additionalArgs) throws IOException {
         final List<String> cmd = new ArrayList<>();
