@@ -6,9 +6,9 @@
       "spdx:creator": [
         "Tool: IntegrationBdio-17.1.2"
       ],
-      "spdx:created": "2019-09-03T15:44:31.043Z"
+      "spdx:created": "2019-09-11T14:50:33.792Z"
     },
-    "@id": "uuid:35bb5a1d-be8e-4f4a-9337-927816fee112",
+    "@id": "uuid:340a2752-56ec-48d8-a0e1-e6b256896775",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -65,15 +65,15 @@
         "relationshipType": "DYNAMIC_LINK"
       },
       {
+        "related": "http:ubuntu/libcurl3_gnutls/7_47_0_1ubuntu2_14/amd64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
         "related": "http:ubuntu/libbz2_1_0/1_0_6_8/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
         "related": "http:ubuntu/systemd_sysv/229_4ubuntu21_2/amd64",
-        "relationshipType": "DYNAMIC_LINK"
-      },
-      {
-        "related": "http:ubuntu/libcurl3_gnutls/7_47_0_1ubuntu2_13/amd64",
         "relationshipType": "DYNAMIC_LINK"
       },
       {
@@ -727,6 +727,28 @@
     "relationship": []
   },
   {
+    "name": "libcurl3-gnutls",
+    "revision": "7.47.0-1ubuntu2.14",
+    "@id": "http:ubuntu/libcurl3_gnutls/7_47_0_1ubuntu2_14/amd64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@ubuntu",
+      "externalId": "libcurl3-gnutls/7.47.0-1ubuntu2.14/amd64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "ubuntu",
+          "separator": "/",
+          "kbSeparator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "name": "libcurl3-gnutls",
+        "version": "7.47.0-1ubuntu2.14",
+        "architecture": "amd64"
+      }
+    },
+    "relationship": []
+  },
+  {
     "name": "libbz2-1.0",
     "revision": "1.0.6-8",
     "@id": "http:ubuntu/libbz2_1_0/1_0_6_8/amd64",
@@ -765,28 +787,6 @@
         },
         "name": "systemd-sysv",
         "version": "229-4ubuntu21.2",
-        "architecture": "amd64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libcurl3-gnutls",
-    "revision": "7.47.0-1ubuntu2.13",
-    "@id": "http:ubuntu/libcurl3_gnutls/7_47_0_1ubuntu2_13/amd64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@ubuntu",
-      "externalId": "libcurl3-gnutls/7.47.0-1ubuntu2.13/amd64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "ubuntu",
-          "separator": "/",
-          "kbSeparator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "name": "libcurl3-gnutls",
-        "version": "7.47.0-1ubuntu2.13",
         "architecture": "amd64"
       }
     },
