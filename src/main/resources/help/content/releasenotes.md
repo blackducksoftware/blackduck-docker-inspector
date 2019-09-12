@@ -1,7 +1,12 @@
 ## Release notes
 
+#### Version 8.2.1
+##### Resolved issues
+* Fixed an issue that causes blackduck-docker-inspector.sh to display the help overview even when a different help topic is requested.
+* Fixed an issue that causes Docker Inspector to return the full container filesystem even when only application components are requested (docker.platform.top.layer.id is specified).
+
 #### Version 8.2.0
-##### Changed feature
+##### New features
 * Added support for Java 11.
 * Added the ability to generate help by topic (--help {topic}).
 * Added the ability to generate help in HTML.

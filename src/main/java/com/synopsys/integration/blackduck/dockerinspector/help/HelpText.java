@@ -84,7 +84,7 @@ public class HelpText {
 
     private String getMarkdownForProperties() throws IllegalAccessException {
         final StringBuilder usage = new StringBuilder();
-        usage.append("## Available properties:\n");
+        usage.append("## Properties\n");
         final SortedSet<DockerInspectorOption> configOptions = config.getPublicConfigOptions();
         for (final DockerInspectorOption opt : configOptions) {
             final StringBuilder usageLine = new StringBuilder(String.format("* %s [%s]: %s", opt.getKey(), opt.getValueTypeString(), opt.getDescription()));

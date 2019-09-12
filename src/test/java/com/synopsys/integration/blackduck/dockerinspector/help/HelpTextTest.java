@@ -154,7 +154,7 @@ public class HelpTextTest {
     }
 
     private void verifyPropertiesHtml(final String deploymentHtml) {
-        assertTrue(deploymentHtml.contains(">Available properties:<"));
+        assertTrue(deploymentHtml.contains(">Properties<"));
         assertTrue(deploymentHtml.contains(">blackduck.url [String]: Black Duck URL<"));
     }
 
