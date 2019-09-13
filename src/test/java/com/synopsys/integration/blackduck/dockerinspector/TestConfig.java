@@ -24,6 +24,7 @@ public class TestConfig {
     private File targetTarInSharedDir;
     private long minContainerFileSystemFileSize;
     private long maxContainerFileSystemFileSize;
+    private boolean appOnlyMode;
 
 
     public enum Mode {
@@ -37,7 +38,7 @@ public class TestConfig {
         final String outputBomMustContainComponentPrefix,
         final String outputBomMustContainExternalSystemTypeId, final String codelocationName, final List<String> additionalArgs, final Map<String, String> env, final boolean testSquashedImageGeneration,
         final File outputContainerFileSystemFile, final File outputSquashedImageFile, final File targetTarInSharedDir,
-        final long minContainerFileSystemFileSize, final long maxContainerFileSystemFileSize) {
+        final long minContainerFileSystemFileSize, final long maxContainerFileSystemFileSize, final boolean appOnlyMode) {
         this.mode = mode;
         this.inspectTargetImageRepoTag = inspectTargetImageRepoTag;
         this.tarFilePath = tarFilePath;
@@ -57,6 +58,7 @@ public class TestConfig {
         this.targetTarInSharedDir = targetTarInSharedDir;
         this.minContainerFileSystemFileSize = minContainerFileSystemFileSize;
         this.maxContainerFileSystemFileSize = maxContainerFileSystemFileSize;
+        this.appOnlyMode = appOnlyMode;
     }
 
     public Mode getMode() {
@@ -135,6 +137,10 @@ public class TestConfig {
         return maxContainerFileSystemFileSize;
     }
 
+    public boolean isAppOnlyMode() {
+        return appOnlyMode;
+    }
+
     public void setInspectTargetImageRepoTag(final String inspectTargetImageRepoTag) {
         this.inspectTargetImageRepoTag = inspectTargetImageRepoTag;
     }
@@ -209,5 +215,9 @@ public class TestConfig {
 
     public void setMaxContainerFileSystemFileSize(final long maxContainerFileSystemFileSize) {
         this.maxContainerFileSystemFileSize = maxContainerFileSystemFileSize;
+    }
+
+    public void setAppOnlyMode(final boolean appOnlyMode) {
+        this.appOnlyMode = appOnlyMode;
     }
 }

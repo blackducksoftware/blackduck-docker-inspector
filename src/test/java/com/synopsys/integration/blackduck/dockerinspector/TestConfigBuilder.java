@@ -26,6 +26,12 @@ public class TestConfigBuilder {
     private File targetTarInSharedDir;
     private long minContainerFileSystemFileSize;
     private long maxContainerFileSystemFileSize;
+    private boolean appOnlyMode;
+
+    public TestConfigBuilder setAppOnlyMode(final boolean appOnlyMode) {
+        this.appOnlyMode = appOnlyMode;
+        return this;
+    }
 
     public TestConfigBuilder setMode(final TestConfig.Mode mode) {
         this.mode = mode;
@@ -129,7 +135,8 @@ public class TestConfigBuilder {
         return new TestConfig(mode, inspectTargetImageRepoTag, tarFilePath, targetRepo, targetTag, portOnHost, requireBdioMatch, minNumberOfComponentsExpected,
             outputBomMustContainComponentPrefix,
             outputBomMustContainExternalSystemTypeId, codelocationName, additionalArgs, env, testSquashedImageGeneration,
-            outputContainerFileSystemFile, outputSquashedImageFile, targetTarInSharedDir, minContainerFileSystemFileSize, maxContainerFileSystemFileSize);
+            outputContainerFileSystemFile, outputSquashedImageFile, targetTarInSharedDir, minContainerFileSystemFileSize, maxContainerFileSystemFileSize,
+            appOnlyMode);
     }
 }
 

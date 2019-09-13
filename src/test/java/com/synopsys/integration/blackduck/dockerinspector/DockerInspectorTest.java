@@ -447,6 +447,7 @@ public class DockerInspectorTest {
                                           .setRequireBdioMatch(true)
                                           .setCodelocationName("blackducksoftware_centos_minus_vim_plus_bacula_1.0_app_RPM")
                                           .setAdditionalArgs(additionalArgs)
+                                          .setAppOnlyMode(true)
                                           .build();
 
         testTarUsingExistingContainer(testConfig);
@@ -527,7 +528,12 @@ public class DockerInspectorTest {
         additionalArgs.add(String.format("--imageinspector.service.url=http://localhost:%d", testConfig.getPortOnHost()));
         additionalArgs.add(String.format("--shared.dir.path.local=%s", dirSharedWithContainer.getAbsolutePath()));
         additionalArgs.add(String.format("--shared.dir.path.imageinspector=%s", SHARED_DIR_PATH_IN_CONTAINER));
-        final File outputContainerFileSystemFile = new File(String.format("%s/output/%s_containerfilesystem.tar.gz", TestUtils.TEST_DIR_REL_PATH, tarFileBaseName));
+        final File outputContainerFileSystemFile;
+        if (testConfig.isAppOnlyMode()) {
+            outputContainerFileSystemFile = new File(String.format("%s/output/%s_app_containerfilesystem.tar.gz", TestUtils.TEST_DIR_REL_PATH, tarFileBaseName));
+        } else {
+            outputContainerFileSystemFile = new File(String.format("%s/output/%s_containerfilesystem.tar.gz", TestUtils.TEST_DIR_REL_PATH, tarFileBaseName));
+        }
         testConfig.setOutputContainerFileSystemFile(outputContainerFileSystemFile);
         File outputSquashedImageFile = null;
         if (testConfig.isTestSquashedImageGeneration()) {
