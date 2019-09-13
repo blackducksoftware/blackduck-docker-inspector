@@ -6,20 +6,20 @@
       "spdx:creator": [
         "Tool: IntegrationBdio-17.1.2"
       ],
-      "spdx:created": "2019-08-05T16:51:32.504Z"
+      "spdx:created": "2019-09-13T15:17:27.452Z"
     },
-    "@id": "uuid:b2521db2-0a0b-4070-99fb-e48a936fbbde",
+    "@id": "uuid:34a2eb13-cd65-489a-8ec3-7b4636fa7901",
     "@type": "BillOfMaterials",
     "relationship": []
   },
   {
-    "name": "blackducksoftware_centos_minus_vim_plus_bacula",
+    "name": "blackducksoftware_centos_minus_vim_plus_bacula_app",
     "revision": "1.0",
-    "@id": "http:centos/blackducksoftware_centos_minus_vim_plus_bacula/1_0",
+    "@id": "http:centos/blackducksoftware_centos_minus_vim_plus_bacula_app/1_0",
     "@type": "Project",
     "externalIdentifier": {
       "externalSystemTypeId": "centos",
-      "externalId": "blackducksoftware_centos_minus_vim_plus_bacula/1.0",
+      "externalId": "blackducksoftware_centos_minus_vim_plus_bacula_app/1.0",
       "externalIdMetaData": {
         "forge": {
           "name": "centos",
@@ -27,7 +27,7 @@
           "kbSeparator": "/",
           "usePreferredNamespaceAlias": false
         },
-        "name": "blackducksoftware_centos_minus_vim_plus_bacula",
+        "name": "blackducksoftware_centos_minus_vim_plus_bacula_app",
         "version": "1.0"
       }
     },
