@@ -139,7 +139,8 @@ public class HelpTextTest {
 
         System.out.println("DUMPING HTML OUTPUT:");
         System.out.println(deploymentHtml);
-        assertTrue(deploymentHtml.contains(">Black Duck Docker Inspector 1.2.3"));
+        assertTrue(deploymentHtml.contains(">Black Duck Docker Inspector"));
+        assertTrue(deploymentHtml.contains("1.2.3"));
         assertTrue(deploymentHtml.contains(">Overview"));
         assertTrue(deploymentHtml.contains(">Architecture<"));
         assertTrue(deploymentHtml.contains(">Running Docker Inspector<"));

@@ -70,20 +70,25 @@ task produceFinalZip(type: Zip, dependsOn: [build, writeVersionToPropertiesFile]
 }
 
 task buildScript(type: Copy) {
-	from 'src/main/resources/blackduck-docker-inspector.sh'
+	from "src/main/resources/${project.name}.sh"
 	into 'build'
 	filter(ReplaceTokens, tokens: [VERSION: version, INSPECTOR_IMAGE_FAMILY: project.ext.inspectorImageFamily])
 }
 
-task generateHelpHtml(type: Exec) {
+task generateHelpHtmlVersioned(type: Exec) {
     ignoreExitValue true
     commandLine "java", "-jar", "${buildDir}/libs/${project.name}-${version}.jar", "--help", "all", "--help.output.format=html", "--help.output.path=build"
 }
 
+task generateHelpHtmlLatest(type: Exec) {
+    ignoreExitValue true
+    commandLine "java", "-jar", "${buildDir}/libs/${project.name}-${version}.jar", "--help", "all", "--help.output.format=html", "--help.output.path=build/${project.name}-help.html"
+}
+
 task createVersionedScript(type: Copy) {
-    from 'build/blackduck-docker-inspector.sh'
+    from "build/${project.name}.sh"
     into 'build'
-    rename('blackduck-docker-inspector.sh', "blackduck-docker-inspector-${version}.sh")
+    rename("${project.name}.sh", "${project.name}-${version}.sh")
 }
 
 task removeTestImage(type: Exec) {
@@ -177,7 +182,8 @@ task buildAggTestDockerTarfile(type: Exec, dependsOn: [buildTestDockerImage, bui
 }
 
 compileJava.dependsOn writeVersionToPropertiesFile
-build.dependsOn generateHelpHtml
+build.dependsOn generateHelpHtmlVersioned
+build.dependsOn generateHelpHtmlLatest
 
 task checkVersion() {
     doFirst {
