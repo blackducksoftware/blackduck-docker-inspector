@@ -116,7 +116,7 @@ If you invoke Docker Inspector with an image reference (vs. an image that has be
 it uses the docker-java library (${docker_java_project_url}) to access the Docker registry
 to pull the image. 
 
-If “docker pull {targetimage}” works from the command line, then docker inspector should also be able
+If *docker pull {targetimage}* works from the command line, then docker inspector should also be able
 to pull that image, because docker-java can be configured the same way as the docker command line utility. 
 
 But there are also other ways to configure docker-java. Details on how to configure docker-java
@@ -127,9 +127,9 @@ Docker Inspector does not override any of the configuration settings in the code
 so any of the other methods (properties, system properties, system environment) should work.
 
 If you choose to use environment variables, and you are calling Docker Inspector from Detect,
-you will need to prefix the environment variable names with "DETECT_DOCKER_PASSTHROUGH_" to
+you will need to prefix the environment variable names with *DETECT_DOCKER_PASSTHROUGH_* to
 instruct detect to pass them on to Docker inspector.
-So in that scenario, instead of "export SOMENAME=value", use "export DETECT_DOCKER_PASSTHROUGH_SOMENAME=value".
+So in that scenario, instead of *export SOMENAME=value*, use *export DETECT_DOCKER_PASSTHROUGH_SOMENAME=value*.
 
 If you choose to use system properties (normally set using java -D),
 and you are calling Docker Inspector from Detect, you will need to
