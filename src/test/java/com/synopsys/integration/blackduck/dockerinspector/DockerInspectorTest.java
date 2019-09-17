@@ -313,7 +313,10 @@ public class DockerInspectorTest {
                                           .setTargetRepo("blackducksoftware/whiteouttest")
                                           .setTargetTag("1.0")
                                           .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
-                                          .setRequireBdioMatch(true)
+                                          .setRequireBdioMatch(false)
+                                          .setMinNumberOfComponentsExpected(10)
+                                          .setOutputBomMustContainComponentPrefix("libc-bin")
+                                          .setOutputBomMustNotContainComponentPrefix("curl")
                                           .setCodelocationName("blackducksoftware_whiteouttest_1.0_DPKG")
                                           .build();
 
@@ -327,7 +330,10 @@ public class DockerInspectorTest {
                                           .setTargetRepo("blackducksoftware/whiteouttest")
                                           .setTargetTag("1.0")
                                           .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
-                                          .setRequireBdioMatch(true)
+                                          .setRequireBdioMatch(false)
+                                          .setMinNumberOfComponentsExpected(10)
+                                          .setOutputBomMustContainComponentPrefix("libc-bin")
+                                          .setOutputBomMustNotContainComponentPrefix("curl")
                                           .setCodelocationName("blackducksoftware_whiteouttest_1.0_DPKG")
                                           .build();
 
@@ -341,7 +347,10 @@ public class DockerInspectorTest {
                                           .setTargetRepo("blackducksoftware/centos_minus_vim_plus_bacula")
                                           .setTargetTag("1.0")
                                           .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
-                                          .setRequireBdioMatch(true)
+                                          .setRequireBdioMatch(false)
+                                          .setMinNumberOfComponentsExpected(10)
+                                          .setOutputBomMustContainComponentPrefix("openssl-libs")
+                                          .setOutputBomMustNotContainComponentPrefix("vim-minimal")
                                           .setCodelocationName("blackducksoftware_centos_minus_vim_plus_bacula_1.0_RPM")
                                           .build();
 
@@ -356,6 +365,7 @@ public class DockerInspectorTest {
             .setTargetTag("latest")
             .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
             .setRequireBdioMatch(false)
+            .setMinNumberOfComponentsExpected(5)
             .setCodelocationName("alpine_latest_APK")
             .build();
 
@@ -370,6 +380,7 @@ public class DockerInspectorTest {
                                           .setTargetTag(null)
                                           .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
                                           .setRequireBdioMatch(false)
+                                          .setMinNumberOfComponentsExpected(5)
                                           .setCodelocationName("alpine_latest_APK")
                                           .build();
 
@@ -383,7 +394,9 @@ public class DockerInspectorTest {
                                           .setTargetRepo(null)
                                           .setTargetTag(null)
                                           .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
-                                          .setRequireBdioMatch(true)
+                                          .setRequireBdioMatch(false)
+                                          .setMinNumberOfComponentsExpected(5)
+                                          .setOutputBomMustContainComponentPrefix("busybox")
                                           .setCodelocationName("null_null_APK")
                                           .build();
 
@@ -397,7 +410,9 @@ public class DockerInspectorTest {
                                           .setTargetRepo("blackducksoftware/whiteouttest")
                                           .setTargetTag("1.0")
                                           .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
-                                          .setRequireBdioMatch(true)
+                                          .setRequireBdioMatch(false)
+                                          .setMinNumberOfComponentsExpected(5)
+                                          .setOutputBomMustContainComponentPrefix("busybox")
                                           .setCodelocationName("blackducksoftware_whiteouttest_1.0_DPKG")
                                           .build();
 
@@ -411,7 +426,10 @@ public class DockerInspectorTest {
                                           .setTargetRepo("blackducksoftware/centos_minus_vim_plus_bacula")
                                           .setTargetTag("1.0")
                                           .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
-                                          .setRequireBdioMatch(true)
+                                          .setRequireBdioMatch(false)
+                                          .setMinNumberOfComponentsExpected(5)
+                                          .setOutputBomMustContainComponentPrefix("openssl-libs")
+                                          .setOutputBomMustNotContainComponentPrefix("vim-minimal")
                                           .setCodelocationName("blackducksoftware_centos_minus_vim_plus_bacula_1.0_RPM")
                                           .build();
 
@@ -426,7 +444,9 @@ public class DockerInspectorTest {
                                           .setTargetRepo(null)
                                           .setTargetTag(null)
                                           .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
-                                          .setRequireBdioMatch(true)
+                                          .setRequireBdioMatch(false)
+                                          .setOutputBomMustContainComponentPrefix("libsystemd0")
+                                          .setMinNumberOfComponentsExpected(10)
                                           .setCodelocationName("null_null_DPKG")
                                           .build();
 
@@ -444,7 +464,10 @@ public class DockerInspectorTest {
                                           .setTargetRepo("blackducksoftware/centos_minus_vim_plus_bacula")
                                           .setTargetTag("1.0")
                                           .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU)
-                                          .setRequireBdioMatch(true)
+                                          .setRequireBdioMatch(false)
+                                          .setMinNumberOfComponentsExpected(10)
+                                          .setOutputBomMustContainComponentPrefix("openssl-libs")
+                                          .setOutputBomMustNotContainComponentPrefix("vim-minimal")
                                           .setCodelocationName("blackducksoftware_centos_minus_vim_plus_bacula_1.0_app_RPM")
                                           .setAdditionalArgs(additionalArgs)
                                           .setAppOnlyMode(true)
@@ -464,6 +487,7 @@ public class DockerInspectorTest {
                                           .setTargetTag(null)
                                           .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU)
                                           .setRequireBdioMatch(false)
+                                          .setMinNumberOfComponentsExpected(5)
                                           .setCodelocationName("alpine_latest_APK")
                                           .setAdditionalArgs(additionalArgs)
                                           .setMinContainerFileSystemFileSize(100000)
@@ -484,6 +508,7 @@ public class DockerInspectorTest {
                                           .setTargetTag(null)
                                           .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
                                           .setRequireBdioMatch(false)
+                                          .setMinNumberOfComponentsExpected(5)
                                           .setCodelocationName("alpine_latest_APK")
                                           .setAdditionalArgs(additionalArgs)
                                           .setMinContainerFileSystemFileSize(100000)
@@ -502,6 +527,7 @@ public class DockerInspectorTest {
                                           .setTargetRepo(null)
                                           .setTargetTag(null)
                                           .setRequireBdioMatch(false)
+                                          .setMinNumberOfComponentsExpected(5)
                                           .setCodelocationName("alpine_latest_APK")
                                           .setAdditionalArgs(additionalArgs)
                                           .setMinContainerFileSystemFileSize(100000)

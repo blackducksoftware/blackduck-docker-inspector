@@ -16,6 +16,7 @@ public class TestConfigBuilder {
     private boolean requireBdioMatch;
     private int minNumberOfComponentsExpected;
     private String outputBomMustContainComponentPrefix;
+    private String outputBomMustNotContainComponentPrefix;
     private String outputBomMustContainExternalSystemTypeId;
     private String codelocationName;
     private List<String> additionalArgs;
@@ -78,6 +79,11 @@ public class TestConfigBuilder {
         return this;
     }
 
+    public TestConfigBuilder setOutputBomMustNotContainComponentPrefix(final String outputBomMustNotContainComponentPrefix) {
+        this.outputBomMustNotContainComponentPrefix = outputBomMustNotContainComponentPrefix;
+        return this;
+    }
+
     public TestConfigBuilder setOutputBomMustContainExternalSystemTypeId(final String outputBomMustContainExternalSystemTypeId) {
         this.outputBomMustContainExternalSystemTypeId = outputBomMustContainExternalSystemTypeId;
         return this;
@@ -133,7 +139,7 @@ public class TestConfigBuilder {
             throw new IntegrationException("Invalid TestConfig");
         }
         return new TestConfig(mode, inspectTargetImageRepoTag, tarFilePath, targetRepo, targetTag, portOnHost, requireBdioMatch, minNumberOfComponentsExpected,
-            outputBomMustContainComponentPrefix,
+            outputBomMustContainComponentPrefix, outputBomMustNotContainComponentPrefix,
             outputBomMustContainExternalSystemTypeId, codelocationName, additionalArgs, env, testSquashedImageGeneration,
             outputContainerFileSystemFile, outputSquashedImageFile, targetTarInSharedDir, minContainerFileSystemFileSize, maxContainerFileSystemFileSize,
             appOnlyMode);

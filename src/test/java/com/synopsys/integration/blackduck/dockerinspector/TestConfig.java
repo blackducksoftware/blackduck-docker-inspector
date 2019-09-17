@@ -13,6 +13,7 @@ public class TestConfig {
     private boolean requireBdioMatch;
     private int minNumberOfComponentsExpected;
     private String outputBomMustContainComponentPrefix;
+    private String outputBomMustNotContainComponentPrefix;
     private String outputBomMustContainExternalSystemTypeId;
     private String codelocationName;
     private List<String> additionalArgs;
@@ -36,6 +37,7 @@ public class TestConfig {
 
     public TestConfig(final Mode mode, final String inspectTargetImageRepoTag, final String tarFilePath, final String targetRepo, final String targetTag, final int portOnHost, final boolean requireBdioMatch, final int minNumberOfComponentsExpected,
         final String outputBomMustContainComponentPrefix,
+        final String outputBomMustNotContainComponentPrefix,
         final String outputBomMustContainExternalSystemTypeId, final String codelocationName, final List<String> additionalArgs, final Map<String, String> env, final boolean testSquashedImageGeneration,
         final File outputContainerFileSystemFile, final File outputSquashedImageFile, final File targetTarInSharedDir,
         final long minContainerFileSystemFileSize, final long maxContainerFileSystemFileSize, final boolean appOnlyMode) {
@@ -48,6 +50,7 @@ public class TestConfig {
         this.requireBdioMatch = requireBdioMatch;
         this.minNumberOfComponentsExpected = minNumberOfComponentsExpected;
         this.outputBomMustContainComponentPrefix = outputBomMustContainComponentPrefix;
+        this.outputBomMustNotContainComponentPrefix = outputBomMustNotContainComponentPrefix;
         this.outputBomMustContainExternalSystemTypeId = outputBomMustContainExternalSystemTypeId;
         this.codelocationName = codelocationName;
         this.additionalArgs = additionalArgs;
@@ -95,6 +98,10 @@ public class TestConfig {
 
     public String getOutputBomMustContainComponentPrefix() {
         return outputBomMustContainComponentPrefix;
+    }
+
+    public String getOutputBomMustNotContainComponentPrefix() {
+        return outputBomMustNotContainComponentPrefix;
     }
 
     public String getOutputBomMustContainExternalSystemTypeId() {
@@ -171,6 +178,10 @@ public class TestConfig {
 
     public void setOutputBomMustContainComponentPrefix(final String outputBomMustContainComponentPrefix) {
         this.outputBomMustContainComponentPrefix = outputBomMustContainComponentPrefix;
+    }
+
+    public void setOutputBomMustNotContainComponentPrefix(final String outputBomMustNotContainComponentPrefix) {
+        this.outputBomMustNotContainComponentPrefix = outputBomMustNotContainComponentPrefix;
     }
 
     public void setOutputBomMustContainExternalSystemTypeId(final String outputBomMustContainExternalSystemTypeId) {

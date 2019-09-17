@@ -72,6 +72,19 @@ public class IntegrationTestCommon {
             assertTrue(componentFound);
             System.out.printf("Found it\n");
         }
+        if (StringUtils.isNotBlank(testConfig.getOutputBomMustNotContainComponentPrefix())) {
+            System.out.printf("Making sure there is no component name starting with: %s\n", testConfig.getOutputBomMustNotContainComponentPrefix());
+            boolean componentFound = false;
+            for (int i = 0; i < doc.components.size(); i++) {
+                System.out.printf("\tComponent: %s / %s\n", doc.components.get(i).name, doc.components.get(i).version);
+                if (doc.components.get(i).name.startsWith(testConfig.getOutputBomMustNotContainComponentPrefix())) {
+                    componentFound = true;
+                    break;
+                }
+            }
+            assertFalse(componentFound);
+            System.out.printf("It's not there\n");
+        }
         if (StringUtils.isNotBlank(testConfig.getOutputBomMustContainExternalSystemTypeId())) {
             System.out.printf("Looking for component with externalSystemTypeId: %s\n", testConfig.getOutputBomMustContainExternalSystemTypeId());
             boolean externalSystemTypeIdFound = false;
