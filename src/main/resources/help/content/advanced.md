@@ -190,3 +190,16 @@ Include the following Docker Inspector properties:
 2. Locate the container file system in the output dir (*.tar.gz) and untar it
 3. cd into the directory (within the untar’d container file system) that you want to scan.
 4. Invoke detect there.
+
+#### Excluding files/directories from the returned container file system (which excludes them from Detect's signature scan)
+
+If you want to exclude certain files and/ or directories from the returned file system, you can
+specify that list of directories with the `--output.containerfilesystem.excluded.paths`
+property.
+
+For example, if you are invoking Docker Inspector from Detect, and want Detect
+to exclude the /etc and /usr/bin directories from the signature scan, you
+could run Detect like this:
+```
+./detect.sh --detect.docker.image=ubuntu:latest --detect.docker.passthrough.output.containerfilesystem.excluded.paths=/etc,/usr/bin
+```
