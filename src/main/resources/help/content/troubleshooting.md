@@ -83,3 +83,16 @@ Solution/workaround: Set umask to 022 when running Docker Inspector. The cause c
 that prevents read access to the file, or read or execute access to the directory.
 Docker Inspector requires an umask value that does not remove read permissions from files,
 and does not remove read or execute permissions from directories. For example, a umask of 022 works.
+
+### Problem: Docker Inspector cannot perform any Docker operations because the remote access port is not enabled on the Docker engine
+
+When this happens, the following error may appear in the log:
+
+    Error inspecting image: Could not initialize class org.newsclub.net.unix.NativeUnixSocket
+    Stack trace: java.lang.NoClassDefFoundError: Could not initialize class org.newsclub.net.unix.NativeUnixSocket
+
+Possible cause: The tcp socket (for remote access) is not enabled on the Docker engine. For more information, refer to the [Docker documentation](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-socket-option).
+
+Solution/workaround: Follow the instructions in the [Docker documentation](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-socket-option) to
+open the tcp port on the Docker engine.
+
