@@ -140,7 +140,8 @@ public class IntegrationTestCommon {
         }
         cmd.add("--logging.level.com.blackducksoftware.integration=DEBUG");
         cmd.add("--detect.excluded.bom.tool.types=gradle");
-
+        cmd.add("--detect.docker.passthrough.service.timeout=800000");
+        cmd.add("--detect.docker.passthrough.command.timeout=800000");
         final String adjustedTargetArg = inspectTargetArg.replace("--docker.", "--detect.docker.");
         cmd.add(adjustedTargetArg);
 
@@ -186,6 +187,8 @@ public class IntegrationTestCommon {
             cmd.add(String.format("--docker.image.tag=%s", tag));
         }
         cmd.add("--logging.level.com.synopsys=DEBUG");
+        cmd.add("--service.timeout=800000");
+        cmd.add("--command.timeout=800000");
         if (mode == TestConfig.Mode.SPECIFY_II_DETAILS) {
             // --imageinspector.service.start=true is left to default (true)
             cmd.add(String.format("--imageinspector.service.port.alpine=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE));
