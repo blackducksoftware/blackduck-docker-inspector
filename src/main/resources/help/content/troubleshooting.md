@@ -88,6 +88,11 @@ and does not remove read or execute permissions from directories. For example, a
 
 When this happens, the following error may appear in the log:
 
+    Error inspecting image: java.io.IOException: Couldn't load native library
+    Stack trace: javax.ws.rs.ProcessingException: java.io.IOException: Couldn't load native library
+
+In older versions of Docker Inspector (prior to 8.2.0), the logged error was:
+
     Error inspecting image: Could not initialize class org.newsclub.net.unix.NativeUnixSocket
     Stack trace: java.lang.NoClassDefFoundError: Could not initialize class org.newsclub.net.unix.NativeUnixSocket
 
