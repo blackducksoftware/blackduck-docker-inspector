@@ -37,8 +37,8 @@ import com.synopsys.integration.exception.IntegrationException;
 @Component
 public class ImageInspectorServices {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private static final long CONTAINER_START_WAIT_MILLISECONDS = 2000L;
-    private final int MAX_CONTAINER_START_TRY_COUNT = 30;
+    private static final long CONTAINER_START_WAIT_MILLISECONDS = 5000L;
+    private final int MAX_CONTAINER_START_TRY_COUNT = 60;
 
     @Autowired
     private Config config;
