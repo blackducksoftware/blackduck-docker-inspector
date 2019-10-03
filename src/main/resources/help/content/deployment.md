@@ -11,7 +11,7 @@ Each mode is discussed in detail below.
 
 ### Important notes regarding deployment sample code
 
-The deployment samples provided are intended to possible approaches to the challenges
+The deployment samples provided are intended to illustrate possible approaches to the challenges
 involved in deploying Docker Inspector. They are not intended to be used as-is in production.
 You should understand the code before you use it. They do not represent the only way to deploy in each environment.
 
