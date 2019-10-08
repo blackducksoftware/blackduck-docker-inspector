@@ -135,7 +135,7 @@ will convert an OCI image directory alpine-oci to a Docker Image Specification v
 alpine-docker.tar that Docker Inspector can process when passed in with the
 --docker.tar=alpine-docker.tar command line argument.
 
-#### Inspecting multiple images more efficiently (using host mode)
+### Inspecting multiple images more efficiently
 
 By default, docker inspector will start, use, and then stop/remove either one or two containerized
 image inspector services per run (per target image inspected). This may be appropriate when scanning
@@ -156,7 +156,7 @@ In general, you will likely also need to start two more services: the ubuntu ima
 (for inspecting images built from rpm-based linux distros). It doesn't matter which service receives
 the request; any service will redirect if necessary.
 
-#### Running Detect on a project directory that exists within a Docker image
+### Running Detect on a project directory that exists within a Docker image
 
 When you want to run Detect on a directory that exists within a docker image, you can use the following approach:
 1. Run Detect on the image to generate the container filesystem for the image.
@@ -174,7 +174,7 @@ Please review the script before running it to make sure the side effects
 (files and directories that it creates) are OK.
 You'll need to make the script executable before you run it. 
 
-#### Running the signature scanner on a specific directory within a Docker image
+### Running the signature scanner on a specific directory within a Docker image
 
 If you want to scan (with iScan) a specific directory within an image,
 here at a very high level is how it could be done:
@@ -191,7 +191,7 @@ Include the following Docker Inspector properties:
 3. cd into the directory (within the untar’d container file system) that you want to scan.
 4. Invoke detect there.
 
-#### Excluding files/directories from the returned container file system (which excludes them from Detect's signature scan)
+### Excluding files/directories from the returned container file system (which excludes them from Detect's signature scan)
 
 If you want to exclude certain files and/ or directories from the returned file system, you can
 specify that list of directories with the `--output.containerfilesystem.excluded.paths`
