@@ -37,8 +37,7 @@ import com.synopsys.integration.exception.IntegrationException;
 @Component
 public class ImageInspectorServices {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private static final long CONTAINER_START_WAIT_MILLISECONDS = 5000L;
-    private final int MAX_CONTAINER_START_TRY_COUNT = 60;
+    private final int MAX_CONTAINER_START_TRY_COUNT = 30;
 
     @Autowired
     private Config config;
@@ -89,9 +88,9 @@ public class ImageInspectorServices {
 
     public boolean startService(final IntHttpClient httpClient, final URI imageInspectorUri, final String imageInspectorRepo, final String imageInspectorTag) {
         boolean serviceIsUp = false;
+        final long timeoutMilliseconds = config.getServiceTimeout() / MAX_CONTAINER_START_TRY_COUNT;
         for (int tryIndex = 0; tryIndex < MAX_CONTAINER_START_TRY_COUNT && !serviceIsUp; tryIndex++) {
             try {
-                final long timeoutMilliseconds = CONTAINER_START_WAIT_MILLISECONDS;
                 logger.debug(String.format("Pausing %d seconds to give service time to start up", (int) (timeoutMilliseconds / 1000L)));
                 Thread.sleep(timeoutMilliseconds);
             } catch (final InterruptedException e) {

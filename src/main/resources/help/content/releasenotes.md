@@ -1,5 +1,10 @@
 ## Release notes
 
+#### Version 8.2.2
+##### Resolved issues
+* Increased the default value of service.timeout from 4 minutes to 10 minutes.
+* The time Docker Inspector will wait for an image inspector service to come online is now controlled via the service.timeout property.
+
 #### Version 8.2.1
 ##### Resolved issues
 * Fixed an issue that causes blackduck-docker-inspector.sh to display the help overview even when a different help topic is requested.
