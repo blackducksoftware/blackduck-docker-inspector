@@ -129,6 +129,12 @@ public class SquashedImage {
         preTarImage.writeToTar(squashedImageTar);
 
         CompressedFile.gZipFile(squashedImageTar, squashedImageTarGz);
+
+        final File versionFile = new File(layerDir, "VERSION");
+        FileUtils.writeStringToFile(versionFile, "1.0", StandardCharsets.UTF_8);
+
+        final File jsonFile = new File(layerDir, "json");
+        FileUtils.writeStringToFile(jsonFile, "{\"id\":\"00d3ac8e0d1124c22545747a7c54c48368a870550d5cef139278314ad704e663\",\"created\":\"2019-10-09T15:42:04.067613755Z\",\"container_config\":{\"Hostname\":\"\",\"Domainname\":\"\",\"User\":\"\",\"AttachStdin\":false,\"AttachStdout\":false,\"AttachStderr\":false,\"Tty\":false,\"OpenStdin\":false,\"StdinOnce\":false,\"Env\":[\"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\"],\"Cmd\":[\"/bin/sh\",\"-c\",\"#(nop) COPY dir:2667d8ef8d59ebd8b1266eb50abf1338967aa1340d0baa44138af01f3e42245d in . \"],\"Image\":\"\",\"Volumes\":null,\"WorkingDir\":\"\",\"Entrypoint\":null,\"OnBuild\":null,\"Labels\":null},\"docker_version\":\"19.03.2\",\"config\":{\"Hostname\":\"\",\"Domainname\":\"\",\"User\":\"\",\"AttachStdin\":false,\"AttachStdout\":false,\"AttachStderr\":false,\"Tty\":false,\"OpenStdin\":false,\"StdinOnce\":false,\"Env\":[\"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\"],\"Cmd\":null,\"Image\":\"\",\"Volumes\":null,\"WorkingDir\":\"\",\"Entrypoint\":null,\"OnBuild\":null,\"Labels\":null},\"architecture\":\"amd64\",\"os\":\"linux\"}", StandardCharsets.UTF_8);
     }
 
     String generateUniqueImageRepoTag() throws IntegrationException {
