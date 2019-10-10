@@ -37,6 +37,7 @@ import org.springframework.stereotype.Component;
 
 import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
 import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
+import com.synopsys.integration.blackduck.imageinspector.linux.LinuxFileSystem;
 import com.synopsys.integration.exception.IntegrationException;
 
 @Component
@@ -60,7 +61,7 @@ public class SquashedImage {
         this.fileOperations = fileOperations;
     }
 
-    public void createSquashedImageTarGz(final File targetImageFileSystemTarGz, final File squashedImageTarGz,
+    public void createSquashedImageTarGzORIGINAL(final File targetImageFileSystemTarGz, final File squashedImageTarGz,
         final File tempTarFile, final File tempWorkingDir) throws IOException, IntegrationException {
         logger.info(String.format("Transforming container filesystem %s to squashed image %s", targetImageFileSystemTarGz, squashedImageTarGz));
         final File dockerBuildDir = tempWorkingDir;
@@ -91,6 +92,43 @@ public class SquashedImage {
                 logger.warn(String.format("Unable to remove temporary squashed image because image %s was not found", imageRepoTag));
             }
         }
+    }
+
+    public void createSquashedImageTarGz(final File targetImageFileSystemTarGz, final File squashedImageTarGz,
+        final File tempTarFile, final File tempWorkingDir) throws IOException, IntegrationException {
+        logger.info(String.format("Transforming container filesystem %s to squashed image %s", targetImageFileSystemTarGz, squashedImageTarGz));
+        final File preTarImageDir = new File(tempWorkingDir, "preTarImageDir");
+
+        final File imageJsonFile = new File(preTarImageDir, "62dba2907d08c02d77092f407ef77aa748fa9f89f7672d430d326f9f24a9ae33.json");
+        FileUtils.writeStringToFile(imageJsonFile, "{\"architecture\":\"amd64\",\"config\":{\"Hostname\":\"\",\"Domainname\":\"\",\"User\":\"\",\"AttachStdin\":false,\"AttachStdout\":false,\"AttachStderr\":false,\"Tty\":false,\"OpenStdin\":false,\"StdinOnce\":false,\"Env\":[\"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\"],\"Cmd\":null,\"Image\":\"\",\"Volumes\":null,\"WorkingDir\":\"\",\"Entrypoint\":null,\"OnBuild\":null,\"Labels\":null},\"container_config\":{\"Hostname\":\"\",\"Domainname\":\"\",\"User\":\"\",\"AttachStdin\":false,\"AttachStdout\":false,\"AttachStderr\":false,\"Tty\":false,\"OpenStdin\":false,\"StdinOnce\":false,\"Env\":[\"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\"],\"Cmd\":[\"/bin/sh\",\"-c\",\"#(nop) COPY dir:2667d8ef8d59ebd8b1266eb50abf1338967aa1340d0baa44138af01f3e42245d in . \"],\"Image\":\"\",\"Volumes\":null,\"WorkingDir\":\"\",\"Entrypoint\":null,\"OnBuild\":null,\"Labels\":null},\"created\":\"2019-10-09T15:42:04.067613755Z\",\"docker_version\":\"19.03.2\",\"history\":[{\"created\":\"2019-10-09T15:42:04.067613755Z\",\"created_by\":\"/bin/sh -c #(nop) COPY dir:2667d8ef8d59ebd8b1266eb50abf1338967aa1340d0baa44138af01f3e42245d in . \"}],\"os\":\"linux\",\"rootfs\":{\"type\":\"layers\",\"diff_ids\":[\"sha256:82a2c5b99771f499619ffc14c56c247655c0ec46cb2444bd6fa3984cb08a3f69\"]}}", StandardCharsets.UTF_8);
+
+        final File manifestFile = new File(preTarImageDir, "manifest.json");
+        FileUtils.writeStringToFile(manifestFile, "[{\"Config\":\"62dba2907d08c02d77092f407ef77aa748fa9f89f7672d430d326f9f24a9ae33.json\",\"RepoTags\":[\"dockerinspectorsquashed-9079:1\"],\"Layers\":[\"00d3ac8e0d1124c22545747a7c54c48368a870550d5cef139278314ad704e663/layer.tar\"]}]\n", StandardCharsets.UTF_8);
+
+        final File repositoriesFile = new File(preTarImageDir, "repositories");
+        FileUtils.writeStringToFile(repositoriesFile, "{\"dockerinspectorsquashed-9079\":{\"1\":\"00d3ac8e0d1124c22545747a7c54c48368a870550d5cef139278314ad704e663\"}}\n", StandardCharsets.UTF_8);
+
+        final File layerDir = new File(preTarImageDir, "00d3ac8e0d1124c22545747a7c54c48368a870550d5cef139278314ad704e663");
+        layerDir.mkdir();
+
+        final File layerTarFile = new File(layerDir, "layer.tar");
+        final File layerTarStagingDir = new File(tempWorkingDir, "layerTarStagingDir");
+        final File containerFileSystemDir = new File(layerTarStagingDir, "containerFileSystem");
+        containerFileSystemDir.mkdir();
+        CompressedFile.gunZipUnTarFile(targetImageFileSystemTarGz, tempTarFile, containerFileSystemDir);
+        final File[] containerFileSystemDirFiles = containerFileSystemDir.listFiles();
+        final File containerFilesSystemRoot = containerFileSystemDirFiles[0];
+        fileOperations.pruneDanglingSymLinksRecursively(containerFilesSystemRoot);
+        //final File containerFileSystemRootDir = new File(containerFileSystemDir, "containerfsdir");
+        final LinuxFileSystem containerFileSystem = new LinuxFileSystem(containerFilesSystemRoot, new FileOperations());
+        containerFileSystem.writeToTar(layerTarFile);
+
+        final LinuxFileSystem preTarImage = new LinuxFileSystem(preTarImageDir, new FileOperations());
+        final String squashedImageTarfileName = String.format("%s_notYetGZipped", targetImageFileSystemTarGz.getName());
+        final File squashedImageTar = new File(tempWorkingDir, squashedImageTarfileName);
+        preTarImage.writeToTar(squashedImageTar);
+
+        CompressedFile.gZipFile(squashedImageTar, squashedImageTarGz);
     }
 
     String generateUniqueImageRepoTag() throws IntegrationException {
