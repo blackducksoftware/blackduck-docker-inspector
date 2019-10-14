@@ -22,6 +22,13 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.util.Optional;
+
 import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorSystemProperties;
 import com.synopsys.integration.blackduck.dockerinspector.exception.HelpGenerationException;
 import com.synopsys.integration.blackduck.dockerinspector.help.HelpWriter;
@@ -149,10 +156,10 @@ public class DockerInspector {
         return false;
     }
 
-    private boolean initAndValidate(final Config config) throws IntegrationException, IllegalArgumentException {
+    private boolean initAndValidate(final Config config) throws IntegrationException, IllegalArgumentException, FileNotFoundException {
         logger.info(String.format("Black Duck Docker Inspector %s", programVersion.getProgramVersion()));
         if (helpInvoked()) {
-            helpWriter.write(getHelpTopics());
+            provideHelp(config);
             return false;
         }
         dockerInspectorSystemProperties.augmentSystemProperties(config.getSystemPropertiesPath());
@@ -171,6 +178,32 @@ public class DockerInspector {
         logger.info(String.format("Inspecting image:tag %s:%s", config.getDockerImageRepo(), config.getDockerImageTag()));
         blackDuckClient.testBlackDuckConnection();
         return true;
+    }
+
+    private void provideHelp(final Config config) throws FileNotFoundException, HelpGenerationException {
+        final String givenHelpOutputFilePath = config.getHelpOutputFilePath();
+        final Optional<PrintStream> helpPrintStream = deriveHelpPrintStream(givenHelpOutputFilePath);
+        if (helpPrintStream.isPresent()) {
+            helpWriter.writeToPrintStream(helpPrintStream.get(), getHelpTopics());
+        } else {
+            helpWriter.writeFilesToDir(new File(givenHelpOutputFilePath), getHelpTopics());
+        }
+    }
+
+    private Optional<PrintStream> deriveHelpPrintStream(final String givenHelpOutputFilePath) throws FileNotFoundException {
+        final PrintStream helpPrintStream;
+        if (StringUtils.isBlank(givenHelpOutputFilePath)) {
+            helpPrintStream = System.out;
+        } else {
+            final File helpOutputFile = new File(givenHelpOutputFilePath);
+            if ((!helpOutputFile.isDirectory())) {
+                helpPrintStream = new PrintStream(
+                    new FileOutputStream(helpOutputFile));
+            } else {
+                return Optional.empty();
+            }
+        }
+        return Optional.of(helpPrintStream);
     }
 
     private String deriveDockerEngineVersion(final Config config) {

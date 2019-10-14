@@ -34,7 +34,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.synopsys.integration.blackduck.dockerinspector.programversion.ClassPathPropertiesFile;
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.exception.IntegrationException;
 
@@ -64,7 +63,7 @@ public class HelpReader {
         cfg.setFallbackOnNullLoopVariable(false);
     }
 
-    public String getStringFromHelpFile(final String givenHelpTopicName) throws IntegrationException {
+    public String getVariableSubstitutedTextFromHelpFile(final String givenHelpTopicName) throws IntegrationException {
         final String helpTopicName = ensureNotNull(givenHelpTopicName);
         try {
             ensureVariableDataLoaded();

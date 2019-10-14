@@ -45,7 +45,7 @@ public class HelpTextTest {
         Mockito.when(helpTopicParser.translateGivenTopicNames("overview")).thenReturn("overview");
         Mockito.when(helpTopicParser.deriveHelpTopicList("overview")).thenReturn(Arrays.asList("overview"));
         final String actualHelpString = "help line 1\nhelp line 2";
-        Mockito.when(helpReader.getStringFromHelpFile("overview")).thenReturn(actualHelpString);
+        Mockito.when(helpReader.getVariableSubstitutedTextFromHelpFile("overview")).thenReturn(actualHelpString);
 
         final String returnedHelpString = helpText.getMarkdownForTopic("overview");
 
@@ -70,7 +70,7 @@ public class HelpTextTest {
         Mockito.when(helpTopicParser.translateGivenTopicNames("deployment")).thenReturn("deployment");
         Mockito.when(helpTopicParser.deriveHelpTopicList("deployment")).thenReturn(Arrays.asList("deployment"));
         final String deploymentHelpString = FileUtils.readFileToString(new File("src/main/resources/help/content/deployment.md"), StandardCharsets.UTF_8);
-        Mockito.when(helpReader.getStringFromHelpFile("deployment")).thenReturn(deploymentHelpString);
+        Mockito.when(helpReader.getVariableSubstitutedTextFromHelpFile("deployment")).thenReturn(deploymentHelpString);
 
         final String deploymentHtml = helpText.getMarkdownForTopic("deployment");
 
@@ -88,19 +88,19 @@ public class HelpTextTest {
         Mockito.when(programVersion.getProgramVersion()).thenReturn("1.2.3");
 
         String helpString = FileUtils.readFileToString(new File("src/main/resources/help/content/overview.md"), StandardCharsets.UTF_8);
-        Mockito.when(helpReader.getStringFromHelpFile("overview")).thenReturn(helpString);
+        Mockito.when(helpReader.getVariableSubstitutedTextFromHelpFile("overview")).thenReturn(helpString);
         helpString = FileUtils.readFileToString(new File("src/main/resources/help/content/architecture.md"), StandardCharsets.UTF_8);
-        Mockito.when(helpReader.getStringFromHelpFile("architecture")).thenReturn(helpString);
+        Mockito.when(helpReader.getVariableSubstitutedTextFromHelpFile("architecture")).thenReturn(helpString);
         helpString = FileUtils.readFileToString(new File("src/main/resources/help/content/running.md"), StandardCharsets.UTF_8);
-        Mockito.when(helpReader.getStringFromHelpFile("running")).thenReturn(helpString);
+        Mockito.when(helpReader.getVariableSubstitutedTextFromHelpFile("running")).thenReturn(helpString);
         helpString = FileUtils.readFileToString(new File("src/main/resources/help/content/advanced.md"), StandardCharsets.UTF_8);
-        Mockito.when(helpReader.getStringFromHelpFile("advanced")).thenReturn(helpString);
+        Mockito.when(helpReader.getVariableSubstitutedTextFromHelpFile("advanced")).thenReturn(helpString);
         helpString = FileUtils.readFileToString(new File("src/main/resources/help/content/deployment.md"), StandardCharsets.UTF_8);
-        Mockito.when(helpReader.getStringFromHelpFile("deployment")).thenReturn(helpString);
+        Mockito.when(helpReader.getVariableSubstitutedTextFromHelpFile("deployment")).thenReturn(helpString);
         helpString = FileUtils.readFileToString(new File("src/main/resources/help/content/troubleshooting.md"), StandardCharsets.UTF_8);
-        Mockito.when(helpReader.getStringFromHelpFile("troubleshooting")).thenReturn(helpString);
+        Mockito.when(helpReader.getVariableSubstitutedTextFromHelpFile("troubleshooting")).thenReturn(helpString);
         helpString = FileUtils.readFileToString(new File("src/main/resources/help/content/releasenotes.md"), StandardCharsets.UTF_8);
-        Mockito.when(helpReader.getStringFromHelpFile("releasenotes")).thenReturn(helpString);
+        Mockito.when(helpReader.getVariableSubstitutedTextFromHelpFile("releasenotes")).thenReturn(helpString);
 
         final String deploymentHtml = helpText.getMarkdownForTopics("all");
 

@@ -22,8 +22,6 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.help;
 
-import javax.naming.OperationNotSupportedException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -36,7 +34,7 @@ public class HelpFilename {
     private ProgramVersion programVersion;
 
 
-    public String getDefaultFinalFilename() throws OperationNotSupportedException {
+    public String getDefaultFinalFilename() {
         return String.format("%s-%s-help.md", programVersion.getProgramId(), programVersion.getProgramVersion());
     }
 }

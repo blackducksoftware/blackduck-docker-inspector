@@ -27,21 +27,17 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.exception.HelpGenerationException;
+import com.synopsys.integration.exception.IntegrationException;
 
 @Component
 public class HelpWriter {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    @Autowired
-    private Config config;
 
     @Autowired
     private HelpText helpText;
@@ -49,13 +45,12 @@ public class HelpWriter {
     @Autowired
     private HelpTopicParser helpTopicParser;
 
-    public void write(final String helpTopicNames) throws HelpGenerationException {
+    public void writeFilesToDir(final File outputDir, final String helpTopicNames) throws HelpGenerationException {
         try {
-            final String expandedTopicNames = helpTopicParser.translateGivenTopicNames(helpTopicNames);
-            final List<String> helpTopics = helpTopicParser.deriveHelpTopicList(expandedTopicNames);
+            final List<String> helpTopics = getTopicList(helpTopicNames);
             for (final String helpTopicName : helpTopics) {
                 final String markdownFilename = String.format("%s.md", helpTopicName);
-                try (final PrintStream printStreamMarkdown = derivePrintStream(markdownFilename)) {
+                try (final PrintStream printStreamMarkdown = derivePrintStream(outputDir, markdownFilename)) {
                     printStreamMarkdown.println(helpText.getMarkdownForTopic(helpTopicName));
                 }
             }
@@ -64,18 +59,24 @@ public class HelpWriter {
         }
     }
 
-    private PrintStream derivePrintStream(final String filename) throws FileNotFoundException {
-        final String givenHelpOutputFilePath = config.getHelpOutputFilePath();
-        if (StringUtils.isBlank(givenHelpOutputFilePath)) {
-            return System.out;
+    public void writeToPrintStream(final PrintStream printStream, final String helpTopicNames) throws HelpGenerationException {
+        try {
+            final List<String> helpTopics = getTopicList(helpTopicNames);
+            for (final String helpTopicName : helpTopics) {
+                printStream.println(helpText.getMarkdownForTopic(helpTopicName));
+            }
+        } catch (Exception e) {
+            throw new HelpGenerationException(String.format("Error generating help: %s", e.getMessage()), e);
         }
-        final File givenHelpOutputLocation = new File(givenHelpOutputFilePath);
-        final File finalHelpOutputFile;
-        if (givenHelpOutputLocation.isDirectory()) {
-            finalHelpOutputFile = new File(givenHelpOutputLocation, filename);
-        } else {
-            finalHelpOutputFile = givenHelpOutputLocation;
-        }
+    }
+
+    private List<String> getTopicList(final String helpTopicNames) {
+        final String expandedTopicNames = helpTopicParser.translateGivenTopicNames(helpTopicNames);
+        return helpTopicParser.deriveHelpTopicList(expandedTopicNames);
+    }
+
+    private PrintStream derivePrintStream(final File outputDir, final String markdownFilename) throws FileNotFoundException, IntegrationException {
+        final File finalHelpOutputFile = new File(outputDir, markdownFilename);
         logger.info(String.format("Writing help output to: %s", finalHelpOutputFile.getAbsolutePath()));
         final PrintStream printStream = new PrintStream(finalHelpOutputFile);
         return printStream;

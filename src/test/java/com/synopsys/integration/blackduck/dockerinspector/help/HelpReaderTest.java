@@ -27,7 +27,7 @@ public class HelpReaderTest {
     public void test() throws IntegrationException {
         Mockito.when(programVersion.getProgramVersion()).thenReturn(TEST_PROGRAM_VERSION);
 
-        final String helpFileContents = helpReader.getStringFromHelpFile("overview");
+        final String helpFileContents = helpReader.getVariableSubstitutedTextFromHelpFile("overview");
 
         assertTrue(helpFileContents.contains("The current version of Black Duck. Visit [this page](https://github.com/blackducksoftware/hub/releases) to determine the current version."));
         assertTrue(helpFileContents.contains(TEST_PROGRAM_VERSION));
