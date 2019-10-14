@@ -33,6 +33,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import com.synopsys.integration.blackduck.dockerinspector.programversion.ClassPathPropertiesFile;
 import com.synopsys.integration.exception.IntegrationException;
 
 import freemarker.template.Configuration;
@@ -75,10 +76,24 @@ public class HelpReader {
     private void ensureVariableDataLoaded() throws IOException {
         if (variableData == null) {
             variableData = new HashMap<>();
-            final Properties properties = new Properties();
-            properties.load(this.getClass().getResourceAsStream("/help/data/help.properties"));
-            for (final String propertyName : properties.stringPropertyNames()) {
-                variableData.put(propertyName, properties.getProperty(propertyName));
+            // TODO it's odd having two different loading methods, but ClassPathPropertiesFile
+            // doesn't work with the /help/data/help.properties path
+            final Properties helpProperties = new Properties();
+            helpProperties.load(this.getClass().getResourceAsStream("/help/data/help.properties"));
+
+            final ClassPathPropertiesFile classPathPropertiesFileProgram = new ClassPathPropertiesFile("version.properties");
+            final Properties programProperties = classPathPropertiesFileProgram.getProperties();
+
+            for (final Object rawKey : programProperties.keySet()) {
+                // TODO avoidable?
+                final String key = (String) rawKey;
+                final String value = programProperties.getProperty(key);
+                final String adjustedKey = key.replaceAll("\\.", "_");
+                helpProperties.put(adjustedKey, value);
+            }
+
+            for (final String propertyName : helpProperties.stringPropertyNames()) {
+                variableData.put(propertyName, helpProperties.getProperty(propertyName));
             }
         }
     }

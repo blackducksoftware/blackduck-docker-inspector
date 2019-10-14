@@ -36,6 +36,10 @@ public class ClassPathPropertiesFile {
         props.load(stream);
     }
 
+    public Properties getProperties() {
+        return props;
+    }
+
     public String getProperty(final String key) {
         return props.getProperty(key);
     }
