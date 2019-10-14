@@ -35,26 +35,8 @@ public class HelpFilename {
     @Autowired
     private ProgramVersion programVersion;
 
-    @Autowired
-    private HelpFormatParser helpFormatParser;
 
     public String getDefaultFinalFilename() throws OperationNotSupportedException {
-        final HelpFormat helpFormat = helpFormatParser.getHelpFormat();
-        final String fileExtension;
-        switch (helpFormat) {
-            case HTML:
-                fileExtension = "html";
-                break;
-            case MARKDOWN:
-                fileExtension = "md";
-                break;
-            default:
-                throw new OperationNotSupportedException(String.format("Unsupported help format: %s", helpFormat));
-        }
-        return String.format("%s-%s-help.%s", programVersion.getProgramId(), programVersion.getProgramVersion(), fileExtension);
-    }
-
-    public String getDefaultMarkdownFilename() throws OperationNotSupportedException {
-        return String.format("%s-%s-help.%s", programVersion.getProgramId(), programVersion.getProgramVersion(), "md");
+        return String.format("%s-%s-help.md", programVersion.getProgramId(), programVersion.getProgramVersion());
     }
 }

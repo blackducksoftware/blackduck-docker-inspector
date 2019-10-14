@@ -30,13 +30,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class HelpTopicParser {
-    
-    public static final String HELP_TOPIC_NAME_PROGRAM_NAMEVERSION = "program";
+
     public static final String HELP_TOPIC_NAME_OVERVIEW = "overview";
     public static final String HELP_TOPIC_NAME_PROPERTIES = "properties";
     private static final String HELP_TOPIC_NAME_ALL = "all";
-    private static final String ALL_HELP_TOPICS = String.format("%s,%s,architecture,running,%s,advanced,deployment,troubleshooting,releasenotes",
-        HELP_TOPIC_NAME_PROGRAM_NAMEVERSION, HELP_TOPIC_NAME_OVERVIEW, HELP_TOPIC_NAME_PROPERTIES);
+    private static final String ALL_HELP_TOPICS = String.format("%s,architecture,running,%s,advanced,deployment,troubleshooting,releasenotes",
+        HELP_TOPIC_NAME_OVERVIEW, HELP_TOPIC_NAME_PROPERTIES);
 
     public String translateGivenTopicNames(final String givenHelpTopics) {
         if (StringUtils.isBlank(givenHelpTopics)) {

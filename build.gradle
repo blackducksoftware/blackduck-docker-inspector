@@ -95,13 +95,8 @@ task docsPrep(type: Exec) {
 
 task generateHelpHtmlVersioned(type: Exec, dependsOn: docsPrep) {
     ignoreExitValue true
-    commandLine "java", "-jar", "${buildDir}/libs/${project.name}-${version}.jar", "--help", "all", "--help.output.format=markdown", "--help.output.path=docs/generated"
+    commandLine "java", "-jar", "${buildDir}/libs/${project.name}-${version}.jar", "--help", "all", "--help.output.path=docs/generated"
 }
-
-//task generateHelpHtmlLatest(type: Exec, dependsOn: docsPrep) {
-//    ignoreExitValue true
-//    commandLine "java", "-jar", "${buildDir}/libs/${project.name}-${version}.jar", "--help", "all", "--help.output.format=markdown", "--help.output.path=build/${project.name}-help.md"
-//}
 
 def outputPath = "docs/generated"
 def templatePath = "docs/templates"
@@ -110,12 +105,6 @@ def staticPath = "docs/static"
 task docs(dependsOn: build) {
     doLast {
         def output = file(outputPath)
-        //if (output.exists()) {
-            //println "Cleaning existing output directory: ${output}"
-            //output.deleteDir()
-        //}
-        //output.mkdirs()
-
         exec {
             commandLine 'mkdocs', 'build'
             workingDir "docs"
@@ -222,7 +211,6 @@ task buildAggTestDockerTarfile(type: Exec, dependsOn: [buildTestDockerImage, bui
 clean.dependsOn docsClean
 compileJava.dependsOn writeVersionToPropertiesFile
 build.dependsOn generateHelpHtmlVersioned
-//build.dependsOn generateHelpHtmlLatest
 
 task checkVersion() {
     doFirst {

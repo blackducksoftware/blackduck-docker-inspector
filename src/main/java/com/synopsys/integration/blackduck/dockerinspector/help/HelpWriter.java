@@ -27,8 +27,6 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.List;
 
-import javax.naming.OperationNotSupportedException;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,8 +35,6 @@ import org.springframework.stereotype.Component;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.exception.HelpGenerationException;
-import com.synopsys.integration.blackduck.dockerinspector.help.format.Converter;
-import com.synopsys.integration.blackduck.dockerinspector.help.format.HelpConverterFactory;
 
 @Component
 public class HelpWriter {
@@ -53,41 +49,16 @@ public class HelpWriter {
     @Autowired
     private HelpTopicParser helpTopicParser;
 
-    @Autowired
-    private HelpFilename helpFilename;
-
-    @Autowired
-    private HelpConverterFactory helpConverterFactory;
-
     public void write(final String helpTopicNames) throws HelpGenerationException {
         try {
-            ////// TODO individual files
-            logger.info("*** writing individual files");
-            logger.info(String.format("*** helpTopicNames: %s", helpTopicNames));
             final String expandedTopicNames = helpTopicParser.translateGivenTopicNames(helpTopicNames);
-            logger.info(String.format("*** translatedTopicNames: %s", expandedTopicNames));
             final List<String> helpTopics = helpTopicParser.deriveHelpTopicList(expandedTopicNames);
             for (final String helpTopicName : helpTopics) {
-                logger.info(String.format("*** writing file for: %s", helpTopicName));
                 final String markdownFilename = String.format("%s.md", helpTopicName);
-                logger.info(String.format("*** writing to: %s", markdownFilename));
                 try (final PrintStream printStreamMarkdown = derivePrintStream(markdownFilename)) {
-                    printStreamMarkdown.println(helpText.getMarkdownForHelpTopic(helpTopicName));
+                    printStreamMarkdown.println(helpText.getMarkdownForTopic(helpTopicName));
                 }
             }
-            ///////////////////////////
-
-            /////// consolidated file
-//            final String markdownContent = helpText.getMarkdown(helpTopicNames);
-            /////// TODO
-//            try (final PrintStream printStreamMarkdown = derivePrintStream(helpFilename.getDefaultMarkdownFilename())) {
-//                printStreamMarkdown.println(markdownContent);
-//            }
-
-//            try (final PrintStream printStreamFinal = derivePrintStream(helpFilename.getDefaultFinalFilename())) {
-//                final Converter converter = helpConverterFactory.createConverter();
-//                printStreamFinal.println(helpText.getConverted(converter, markdownContent));
-//            }
         } catch (Exception e) {
             throw new HelpGenerationException(String.format("Error generating help: %s", e.getMessage()), e);
         }

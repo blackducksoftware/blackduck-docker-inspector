@@ -19,28 +19,13 @@ public class HelpFilenameTest {
     @Mock
     private ProgramVersion programVersion;
 
-    @Mock
-    private HelpFormatParser helpFormatParser;
-
     @InjectMocks
     private HelpFilename helpFilename;
-
-    @Test
-    public void testHtml() throws OperationNotSupportedException {
-        Mockito.when(programVersion.getProgramId()).thenReturn("blackduck-docker-inspector");
-        Mockito.when(programVersion.getProgramVersion()).thenReturn("1.2.3");
-        Mockito.when(helpFormatParser.getHelpFormat()).thenReturn(HelpFormat.HTML);
-
-        final String derivedhelpFilename = helpFilename.getDefaultFinalFilename();
-
-        assertEquals("blackduck-docker-inspector-1.2.3-help.html", derivedhelpFilename);
-    }
 
     @Test
     public void testMarkdown() throws OperationNotSupportedException {
         Mockito.when(programVersion.getProgramId()).thenReturn("blackduck-docker-inspector");
         Mockito.when(programVersion.getProgramVersion()).thenReturn("1.2.3");
-        Mockito.when(helpFormatParser.getHelpFormat()).thenReturn(HelpFormat.MARKDOWN);
 
         final String derivedhelpFilename = helpFilename.getDefaultFinalFilename();
 
