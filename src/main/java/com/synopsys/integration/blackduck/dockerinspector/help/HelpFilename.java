@@ -38,7 +38,7 @@ public class HelpFilename {
     @Autowired
     private HelpFormatParser helpFormatParser;
 
-    public String getDefaultHelpFilename() throws OperationNotSupportedException {
+    public String getDefaultFinalFilename() throws OperationNotSupportedException {
         final HelpFormat helpFormat = helpFormatParser.getHelpFormat();
         final String fileExtension;
         switch (helpFormat) {
@@ -52,5 +52,9 @@ public class HelpFilename {
                 throw new OperationNotSupportedException(String.format("Unsupported help format: %s", helpFormat));
         }
         return String.format("%s-%s-help.%s", programVersion.getProgramId(), programVersion.getProgramVersion(), fileExtension);
+    }
+
+    public String getDefaultMarkdownFilename() throws OperationNotSupportedException {
+        return String.format("%s-%s-help.%s", programVersion.getProgramId(), programVersion.getProgramVersion(), "md");
     }
 }

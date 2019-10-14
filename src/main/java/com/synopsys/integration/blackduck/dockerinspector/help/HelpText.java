@@ -54,12 +54,30 @@ public class HelpText {
     @Autowired
     private HelpReader helpReader;
 
+    public String get(final Converter converter, final String givenHelpTopicNames) throws IllegalAccessException, IntegrationException {
+        return getConverted(converter, getMarkdown(givenHelpTopicNames));
 
-    public String get(final Converter converter, final String givenHelpTopicNames) throws IntegrationException, IllegalAccessException {
+    }
+
+    public String getMarkdown(final String givenHelpTopicNames) throws IntegrationException, IllegalAccessException {
         final String helpTopicNames = helpTopicParser.translateGivenTopicNames(givenHelpTopicNames);
         final String markdownContent = collectMarkdownContent(helpTopicNames);
+        return markdownContent;
+    }
+
+    public String getConverted(final Converter converter, final String markdownContent) throws IntegrationException, IllegalAccessException {
         final String formattedHelp = converter.convert(markdownContent);
         return formattedHelp;
+    }
+
+    public String getMarkdownForHelpTopic(final String helpTopicName) throws IntegrationException, IllegalAccessException {
+        if (helpTopicParser.HELP_TOPIC_NAME_PROPERTIES.equalsIgnoreCase(helpTopicName)) {
+            return getMarkdownForProperties();
+        } else if (helpTopicParser.HELP_TOPIC_NAME_PROGRAM_NAMEVERSION.equalsIgnoreCase(helpTopicName)) {
+            return getMarkdownForProgram();
+        } else {
+            return helpReader.getStringFromHelpFile(helpTopicName);
+        }
     }
 
     private String collectMarkdownContent(final String helpTopicNames) throws IntegrationException, IllegalAccessException {
@@ -72,19 +90,9 @@ public class HelpText {
         return markdownContent.toString();
     }
 
-    private String getMarkdownForHelpTopic(final String helpTopicName) throws IntegrationException, IllegalAccessException {
-        if (helpTopicParser.HELP_TOPIC_NAME_PROPERTIES.equalsIgnoreCase(helpTopicName)) {
-            return getMarkdownForProperties();
-        } else if (helpTopicParser.HELP_TOPIC_NAME_PROGRAM_NAMEVERSION.equalsIgnoreCase(helpTopicName)) {
-            return getMarkdownForProgram();
-        } else {
-            return helpReader.getStringFromHelpFile(helpTopicName);
-        }
-    }
-
     private String getMarkdownForProperties() throws IllegalAccessException {
         final StringBuilder usage = new StringBuilder();
-        usage.append("## Properties\n");
+        //////////////////////usage.append("## Properties\n");
         final SortedSet<DockerInspectorOption> configOptions = config.getPublicConfigOptions();
         for (final DockerInspectorOption opt : configOptions) {
             final StringBuilder usageLine = new StringBuilder(String.format("* %s [%s]: %s", opt.getKey(), opt.getValueTypeString(), opt.getDescription()));

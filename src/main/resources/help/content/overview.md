@@ -1,5 +1,3 @@
-## Overview
-
 Black Duck Docker Inspector inspects Docker images to discover packages (components).
 It utilizes the appropriate Linux package manager to provide a list of
 the installed (by the package manager) packages, and creates a Black Duck project with a Bill of Materials (BOM) consisting of those packages as components.

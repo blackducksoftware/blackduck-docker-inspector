@@ -1,5 +1,3 @@
-## Running Docker Inspector
-
 ### Running a specific version
 
 By default, ${script_name} runs the latest version of

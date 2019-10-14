@@ -12,6 +12,7 @@ buildscript {
         classpath 'com.blackducksoftware.integration:common-gradle-plugin:0.0.+'
         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.6.RELEASE")
         classpath 'com.bmuschko:gradle-docker-plugin:3.0.6'
+        classpath 'org.freemarker:freemarker:2.3.26-incubating'
     }
 }
 
@@ -75,14 +76,44 @@ task buildScript(type: Copy) {
 	filter(ReplaceTokens, tokens: [VERSION: version, INSPECTOR_IMAGE_FAMILY: project.ext.inspectorImageFamily])
 }
 
-task generateHelpHtmlVersioned(type: Exec) {
+task docsClean(type: Exec) {
     ignoreExitValue true
-    commandLine "java", "-jar", "${buildDir}/libs/${project.name}-${version}.jar", "--help", "all", "--help.output.format=html", "--help.output.path=build"
+    commandLine 'rm', '-rf', 'docs/generated'
 }
 
-task generateHelpHtmlLatest(type: Exec) {
+task docsPrep(type: Exec) {
     ignoreExitValue true
-    commandLine "java", "-jar", "${buildDir}/libs/${project.name}-${version}.jar", "--help", "all", "--help.output.format=html", "--help.output.path=build/${project.name}-help.html"
+    commandLine 'mkdir', 'docs/generated'
+}
+
+task generateHelpHtmlVersioned(type: Exec, dependsOn: [docsClean, docsPrep]) {
+    ignoreExitValue true
+    commandLine "java", "-jar", "${buildDir}/libs/${project.name}-${version}.jar", "--help", "all", "--help.output.format=markdown", "--help.output.path=docs/generated"
+}
+
+//task generateHelpHtmlLatest(type: Exec, dependsOn: docsPrep) {
+//    ignoreExitValue true
+//    commandLine "java", "-jar", "${buildDir}/libs/${project.name}-${version}.jar", "--help", "all", "--help.output.format=markdown", "--help.output.path=build/${project.name}-help.md"
+//}
+
+def outputPath = "docs/generated"
+def templatePath = "docs/templates"
+def staticPath = "docs/static"
+
+task docs(dependsOn: build) {
+    doLast {
+        def output = file(outputPath)
+        //if (output.exists()) {
+            //println "Cleaning existing output directory: ${output}"
+            //output.deleteDir()
+        //}
+        //output.mkdirs()
+
+        exec {
+            commandLine 'mkdocs', 'build'
+            workingDir "docs"
+        }
+    }
 }
 
 task createVersionedScript(type: Copy) {
@@ -181,9 +212,10 @@ task buildAggTestDockerTarfile(type: Exec, dependsOn: [buildTestDockerImage, bui
         "blackducksoftware/whiteouttest:1.0"
 }
 
+clean.dependsOn docsClean
 compileJava.dependsOn writeVersionToPropertiesFile
 build.dependsOn generateHelpHtmlVersioned
-build.dependsOn generateHelpHtmlLatest
+//build.dependsOn generateHelpHtmlLatest
 
 task checkVersion() {
     doFirst {

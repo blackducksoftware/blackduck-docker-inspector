@@ -1,5 +1,3 @@
-## Deploying Docker Inspector
-
 ### Deployment overview
 
 Black Duck Docker Inspector can be run in either of the following modes:

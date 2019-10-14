@@ -25,6 +25,7 @@ package com.synopsys.integration.blackduck.dockerinspector.help;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
 
@@ -50,6 +51,9 @@ public class HelpWriter {
     private HelpText helpText;
 
     @Autowired
+    private HelpTopicParser helpTopicParser;
+
+    @Autowired
     private HelpFilename helpFilename;
 
     @Autowired
@@ -57,15 +61,39 @@ public class HelpWriter {
 
     public void write(final String helpTopicNames) throws HelpGenerationException {
         try {
-            final Converter converter = helpConverterFactory.createConverter();
-            final PrintStream printStream = derivePrintStream();
-            printStream.println(helpText.get(converter, helpTopicNames));
+            ////// TODO individual files
+            logger.info("*** writing individual files");
+            logger.info(String.format("*** helpTopicNames: %s", helpTopicNames));
+            final String expandedTopicNames = helpTopicParser.translateGivenTopicNames(helpTopicNames);
+            logger.info(String.format("*** translatedTopicNames: %s", expandedTopicNames));
+            final List<String> helpTopics = helpTopicParser.deriveHelpTopicList(expandedTopicNames);
+            for (final String helpTopicName : helpTopics) {
+                logger.info(String.format("*** writing file for: %s", helpTopicName));
+                final String markdownFilename = String.format("%s.md", helpTopicName);
+                logger.info(String.format("*** writing to: %s", markdownFilename));
+                try (final PrintStream printStreamMarkdown = derivePrintStream(markdownFilename)) {
+                    printStreamMarkdown.println(helpText.getMarkdownForHelpTopic(helpTopicName));
+                }
+            }
+            ///////////////////////////
+
+            /////// consolidated file
+//            final String markdownContent = helpText.getMarkdown(helpTopicNames);
+            /////// TODO
+//            try (final PrintStream printStreamMarkdown = derivePrintStream(helpFilename.getDefaultMarkdownFilename())) {
+//                printStreamMarkdown.println(markdownContent);
+//            }
+
+//            try (final PrintStream printStreamFinal = derivePrintStream(helpFilename.getDefaultFinalFilename())) {
+//                final Converter converter = helpConverterFactory.createConverter();
+//                printStreamFinal.println(helpText.getConverted(converter, markdownContent));
+//            }
         } catch (Exception e) {
             throw new HelpGenerationException(String.format("Error generating help: %s", e.getMessage()), e);
         }
     }
 
-    private PrintStream derivePrintStream() throws FileNotFoundException, OperationNotSupportedException {
+    private PrintStream derivePrintStream(final String filename) throws FileNotFoundException {
         final String givenHelpOutputFilePath = config.getHelpOutputFilePath();
         if (StringUtils.isBlank(givenHelpOutputFilePath)) {
             return System.out;
@@ -73,7 +101,7 @@ public class HelpWriter {
         final File givenHelpOutputLocation = new File(givenHelpOutputFilePath);
         final File finalHelpOutputFile;
         if (givenHelpOutputLocation.isDirectory()) {
-            finalHelpOutputFile = new File(givenHelpOutputLocation, helpFilename.getDefaultHelpFilename());
+            finalHelpOutputFile = new File(givenHelpOutputLocation, filename);
         } else {
             finalHelpOutputFile = givenHelpOutputLocation;
         }

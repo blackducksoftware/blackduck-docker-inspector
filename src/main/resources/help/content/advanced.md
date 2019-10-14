@@ -1,5 +1,3 @@
-## Advanced topics
-
 ### Isolating application components
 
 If you are interested in components from the application layers of your image, but not interested in components

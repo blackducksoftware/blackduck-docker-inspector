@@ -31,7 +31,7 @@ public class HelpFilenameTest {
         Mockito.when(programVersion.getProgramVersion()).thenReturn("1.2.3");
         Mockito.when(helpFormatParser.getHelpFormat()).thenReturn(HelpFormat.HTML);
 
-        final String derivedhelpFilename = helpFilename.getDefaultHelpFilename();
+        final String derivedhelpFilename = helpFilename.getDefaultFinalFilename();
 
         assertEquals("blackduck-docker-inspector-1.2.3-help.html", derivedhelpFilename);
     }
@@ -42,7 +42,7 @@ public class HelpFilenameTest {
         Mockito.when(programVersion.getProgramVersion()).thenReturn("1.2.3");
         Mockito.when(helpFormatParser.getHelpFormat()).thenReturn(HelpFormat.MARKDOWN);
 
-        final String derivedhelpFilename = helpFilename.getDefaultHelpFilename();
+        final String derivedhelpFilename = helpFilename.getDefaultFinalFilename();
 
         assertEquals("blackduck-docker-inspector-1.2.3-help.md", derivedhelpFilename);
     }
