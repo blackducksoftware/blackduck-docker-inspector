@@ -26,8 +26,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.util.Optional;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorSystemProperties;
 import com.synopsys.integration.blackduck.dockerinspector.exception.HelpGenerationException;
@@ -182,28 +180,18 @@ public class DockerInspector {
 
     private void provideHelp(final Config config) throws FileNotFoundException, HelpGenerationException {
         final String givenHelpOutputFilePath = config.getHelpOutputFilePath();
-        final Optional<PrintStream> helpPrintStream = deriveHelpPrintStream(givenHelpOutputFilePath);
-        if (helpPrintStream.isPresent()) {
-            helpWriter.writeToPrintStream(helpPrintStream.get(), getHelpTopics());
-        } else {
-            helpWriter.writeFilesToDir(new File(givenHelpOutputFilePath), getHelpTopics());
-        }
-    }
-
-    private Optional<PrintStream> deriveHelpPrintStream(final String givenHelpOutputFilePath) throws FileNotFoundException {
-        final PrintStream helpPrintStream;
         if (StringUtils.isBlank(givenHelpOutputFilePath)) {
-            helpPrintStream = System.out;
+            helpWriter.writeToPrintStream(System.out, getHelpTopics());
         } else {
             final File helpOutputFile = new File(givenHelpOutputFilePath);
             if ((!helpOutputFile.isDirectory())) {
-                helpPrintStream = new PrintStream(
-                    new FileOutputStream(helpOutputFile));
+                try (final PrintStream helpPrintStream = new PrintStream(new FileOutputStream(helpOutputFile))) {
+                    helpWriter.writeToPrintStream(helpPrintStream, getHelpTopics());
+                }
             } else {
-                return Optional.empty();
+                helpWriter.writeFilesToDir(new File(givenHelpOutputFilePath), getHelpTopics());
             }
         }
-        return Optional.of(helpPrintStream);
     }
 
     private String deriveDockerEngineVersion(final Config config) {
