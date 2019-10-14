@@ -1,3 +1,5 @@
+### Architecture overview
+
 Docker Inspector uses up to three container-based image inspector services
 (one for each of the supported Linux package manager database formats).
 

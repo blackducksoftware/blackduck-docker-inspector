@@ -92,7 +92,13 @@ public class HelpText {
 
     private String getMarkdownForProperties() throws IllegalAccessException {
         final StringBuilder usage = new StringBuilder();
-        //////////////////////usage.append("## Properties\n");
+        usage.append("You can configure Docker Inspector by setting any of the following properties. " +
+                         "Properties are typically set via the command line by adding a command line " +
+                         "argument of the form:\n\n" +
+                         "    --{property name}={property value}\n" +
+                         "\n\n" +
+                        "See the Advanced section for other ways to set properties.\n\n" +
+                        "Available properties:\n\n");
         final SortedSet<DockerInspectorOption> configOptions = config.getPublicConfigOptions();
         for (final DockerInspectorOption opt : configOptions) {
             final StringBuilder usageLine = new StringBuilder(String.format("* %s [%s]: %s", opt.getKey(), opt.getValueTypeString(), opt.getDescription()));

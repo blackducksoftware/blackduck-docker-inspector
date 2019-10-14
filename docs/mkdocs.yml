@@ -15,10 +15,10 @@ theme:
 docs_dir: 'generated'
 nav:
      - Overview: overview.md
+     - Architecture: architecture.md
      - Running: running.md
      - Properties: properties.md
      - Advanced: advanced.md
-     - Architecture: architecture.md
-     - Deployment: deployment.md
+     - Deploying: deployment.md
      - Troubleshooting: troubleshooting.md
      - Release Notes: releasenotes.md

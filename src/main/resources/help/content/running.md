@@ -1,3 +1,27 @@
+### Running the latest version
+
+The following command format will always fetch and run the latest version of Docker Inspector:
+
+    bash <(curl -s ${script_hosting_scheme}://${source_repo_organization}.${script_hosting_domain}/${project_name}/${script_name}) {Docker Inspector arguments}
+
+For example:
+
+    bash <(curl -s ${script_hosting_scheme}://${source_repo_organization}.${script_hosting_domain}/${project_name}/${script_name}) --help
+    bash <(curl -s ${script_hosting_scheme}://${source_repo_organization}.${script_hosting_domain}/${project_name}/${script_name}) --upload.bdio=false --docker.image=ubuntu
+
+An alternative is to download and run the latest Docker Inspector script:
+
+    curl -O  ${script_hosting_scheme}://${source_repo_organization}.${script_hosting_domain}/${project_name}/${script_name}
+    chmod +x ${script_name}
+    ./${script_name} {Docker Inspector arguments}
+
+The advantage of using the Docker Inspector script is that it will ensure you always run the latest version of the Docker Inspector .jar.
+
+Another alternative is to download the Docker Inspector .jar (using the script) and run the .jar directly:
+
+    bash <(curl -s ${script_hosting_scheme}://${source_repo_organization}.${script_hosting_domain}/${project_name}/${script_name}) --pulljar
+    java -jar ${project_name}-{version}.jar {Docker Inspector arguments}
+
 ### Running a specific version
 
 By default, ${script_name} runs the latest version of
