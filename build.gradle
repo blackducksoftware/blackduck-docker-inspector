@@ -76,17 +76,24 @@ task buildScript(type: Copy) {
 	filter(ReplaceTokens, tokens: [VERSION: version, INSPECTOR_IMAGE_FAMILY: project.ext.inspectorImageFamily])
 }
 
-task docsClean(type: Exec) {
+task docsGeneratedClean(type: Exec) {
     ignoreExitValue true
     commandLine 'rm', '-rf', 'docs/generated'
 }
+
+task docsSiteClean(type: Exec) {
+    ignoreExitValue true
+    commandLine 'rm', '-rf', 'docs/site'
+}
+
+task docsClean(dependsOn: [docsSiteClean, docsGeneratedClean]) {}
 
 task docsPrep(type: Exec) {
     ignoreExitValue true
     commandLine 'mkdir', 'docs/generated'
 }
 
-task generateHelpHtmlVersioned(type: Exec, dependsOn: [docsClean, docsPrep]) {
+task generateHelpHtmlVersioned(type: Exec, dependsOn: docsPrep) {
     ignoreExitValue true
     commandLine "java", "-jar", "${buildDir}/libs/${project.name}-${version}.jar", "--help", "all", "--help.output.format=markdown", "--help.output.path=docs/generated"
 }
