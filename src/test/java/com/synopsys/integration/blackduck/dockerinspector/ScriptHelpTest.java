@@ -21,7 +21,7 @@ public class ScriptHelpTest {
         programVersion.init();
         final List<String> cmd = IntegrationTestCommon.createSimpleDockerInspectorScriptCmd(programVersion, Arrays.asList("-h"));
         final String stdOut = TestUtils.execCmd(String.join(" ", cmd), 240000L, true, null);
-        assertTrue(stdOut.contains("## Overview"));
+        assertTrue(stdOut.contains("Black Duck Docker Inspector inspects Docker images to discover"));
     }
 
     @Test
@@ -30,7 +30,7 @@ public class ScriptHelpTest {
         programVersion.init();
         final List<String> cmd = IntegrationTestCommon.createSimpleDockerInspectorScriptCmd(programVersion, Arrays.asList("-h", "running"));
         final String stdOut = TestUtils.execCmd(String.join(" ", cmd), 240000L, true, null);
-        assertTrue(stdOut.contains("## Running Docker Inspector"));
-        assertTrue(stdOut.contains("### Running the .jar file"));
+        assertTrue(stdOut.contains("Running the latest version"));
+        assertTrue(stdOut.contains("Running a specific version"));
     }
 }
