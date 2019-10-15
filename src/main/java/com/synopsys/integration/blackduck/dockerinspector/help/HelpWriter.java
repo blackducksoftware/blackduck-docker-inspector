@@ -45,11 +45,11 @@ public class HelpWriter {
     @Autowired
     private HelpTopicParser helpTopicParser;
 
-    public void writeFilesToDir(final File outputDir, final String helpTopicNames) throws HelpGenerationException {
+    public void writeIndividualFilesToDir(final File outputDir, final String helpTopicNames) throws HelpGenerationException {
         try {
             final List<String> helpTopics = getTopicList(helpTopicNames);
             for (final String helpTopicName : helpTopics) {
-                final String markdownFilename = String.format("%s.md", helpTopicName);
+                final String markdownFilename = deriveMarkdownFilename(helpTopicName);
                 try (final PrintStream printStreamMarkdown = derivePrintStream(outputDir, markdownFilename)) {
                     printStreamMarkdown.println(helpText.getMarkdownForTopic(helpTopicName));
                 }
@@ -59,7 +59,7 @@ public class HelpWriter {
         }
     }
 
-    public void writeToPrintStream(final PrintStream printStream, final String helpTopicNames) throws HelpGenerationException {
+    public void concatinateContentToPrintStream(final PrintStream printStream, final String helpTopicNames) throws HelpGenerationException {
         try {
             final List<String> helpTopics = getTopicList(helpTopicNames);
             for (final String helpTopicName : helpTopics) {
@@ -75,7 +75,11 @@ public class HelpWriter {
         return helpTopicParser.deriveHelpTopicList(expandedTopicNames);
     }
 
-    private PrintStream derivePrintStream(final File outputDir, final String markdownFilename) throws FileNotFoundException, IntegrationException {
+    private String deriveMarkdownFilename(final String helpTopicName) {
+        return String.format("%s.md", helpTopicName);
+    }
+
+    private PrintStream derivePrintStream(final File outputDir, final String markdownFilename) throws FileNotFoundException {
         final File finalHelpOutputFile = new File(outputDir, markdownFilename);
         logger.info(String.format("Writing help output to: %s", finalHelpOutputFile.getAbsolutePath()));
         final PrintStream printStream = new PrintStream(finalHelpOutputFile);

@@ -181,15 +181,15 @@ public class DockerInspector {
     private void provideHelp(final Config config) throws FileNotFoundException, HelpGenerationException {
         final String givenHelpOutputFilePath = config.getHelpOutputFilePath();
         if (StringUtils.isBlank(givenHelpOutputFilePath)) {
-            helpWriter.writeToPrintStream(System.out, getHelpTopics());
+            helpWriter.concatinateContentToPrintStream(System.out, getHelpTopics());
         } else {
             final File helpOutputFile = new File(givenHelpOutputFilePath);
             if ((!helpOutputFile.isDirectory())) {
                 try (final PrintStream helpPrintStream = new PrintStream(new FileOutputStream(helpOutputFile))) {
-                    helpWriter.writeToPrintStream(helpPrintStream, getHelpTopics());
+                    helpWriter.concatinateContentToPrintStream(helpPrintStream, getHelpTopics());
                 }
             } else {
-                helpWriter.writeFilesToDir(new File(givenHelpOutputFilePath), getHelpTopics());
+                helpWriter.writeIndividualFilesToDir(new File(givenHelpOutputFilePath), getHelpTopics());
             }
         }
     }

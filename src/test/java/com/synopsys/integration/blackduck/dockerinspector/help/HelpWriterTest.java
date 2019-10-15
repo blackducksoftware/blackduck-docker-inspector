@@ -16,7 +16,6 @@ import org.mockito.Mockito;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
-import com.synopsys.integration.blackduck.dockerinspector.exception.HelpGenerationException;
 import com.synopsys.integration.exception.IntegrationException;
 
 @RunWith(SpringRunner.class)
@@ -47,7 +46,7 @@ public class HelpWriterTest {
 
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try (final PrintStream ps = new PrintStream(baos, true, StandardCharsets.UTF_8.name())) {
-            helpWriter.writeToPrintStream(ps, "all");
+            helpWriter.concatinateContentToPrintStream(ps, "all");
         }
 
         final String helpContent = new String(baos.toByteArray(), StandardCharsets.UTF_8);
