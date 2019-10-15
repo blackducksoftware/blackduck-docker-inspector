@@ -17,8 +17,7 @@ public class HelpFileCreationTest {
     public void test() throws IOException {
         final ProgramVersion programVersion = new ProgramVersion();
         programVersion.init();
-        final String expectedFilePath = String.format("build/%s-%s-help.html", programVersion.getProgramId(), programVersion.getProgramVersion());
-        final File helpFile = new File(expectedFilePath);
+        final File helpFile = new File("docs/generated/overview.md");
         assertTrue(helpFile.exists());
     }
 }
