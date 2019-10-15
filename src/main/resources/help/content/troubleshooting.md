@@ -1,4 +1,4 @@
-## Troubleshooting
+### Troubleshooting overview
 
 To troubleshoot issues with Docker Inspector, run with DEBUG logging:
 

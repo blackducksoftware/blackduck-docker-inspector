@@ -37,8 +37,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.synopsys.integration.blackduck.dockerinspector.help.HelpFormat;
-
 @Component
 public class Config {
     public static final String IMAGEINSPECTOR_WS_APPNAME = "blackduck-imageinspector";
@@ -299,11 +297,7 @@ public class Config {
     @Value("${offline.mode:false}")
     private Boolean offlineMode = Boolean.FALSE;
 
-    @ValueDescription(description = "The format for help output: MARKDOWN (text), or HTML", defaultValue = "MARKDOWN", group = Config.GROUP_PUBLIC, deprecated = false)
-    @Value("${help.output.format:MARKDOWN}")
-    private String helpOutputFormat = HelpFormat.MARKDOWN.name();
-
-    @ValueDescription(description = "The path to a file or directory to which help output will be written. " +
+    @ValueDescription(description = "The path to a file or directory to which help output will be written in markdown format. " +
                                         "If not set, help will be written to stdout. If set, the directory must exist; the file will be created if it does not exist. " +
                                         "If the path to a directory is provided, Docker Inspector will generate the filename automatically",
         defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
@@ -561,10 +555,6 @@ public class Config {
         return optionsByFieldName.get("imageInspectorDefaultDistro").getResolvedValue();
     }
 
-    public String getHelpOutputFormat() {
-        return optionsByFieldName.get("helpOutputFormat").getResolvedValue();
-    }
-
     public String getHelpOutputFilePath() {
         return optionsByFieldName.get("helpOutputFilePath").getResolvedValue();
     }
@@ -705,7 +695,6 @@ public class Config {
         this.imageInspectorHostPortCentos = null;
         this.imageInspectorHostPortUbuntu = null;
         this.imageInspectorDefaultDistro = null;
-        this.helpOutputFormat = null;
         this.helpOutputFilePath = null;
         this.offlineMode = null;
     }

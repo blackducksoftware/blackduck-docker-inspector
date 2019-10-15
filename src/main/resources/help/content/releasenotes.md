@@ -1,5 +1,3 @@
-## Release notes
-
 #### Version 8.2.2
 ##### Resolved issues
 * Increased the default value of service.timeout from 4 minutes to 10 minutes.

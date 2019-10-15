@@ -1,4 +1,4 @@
-## Advanced topics
+This section covers a variety of advanced topics.
 
 ### Isolating application components
 

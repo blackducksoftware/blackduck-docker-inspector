@@ -22,11 +22,14 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+
 import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorSystemProperties;
 import com.synopsys.integration.blackduck.dockerinspector.exception.HelpGenerationException;
 import com.synopsys.integration.blackduck.dockerinspector.help.HelpWriter;
-import com.synopsys.integration.blackduck.dockerinspector.help.format.Converter;
-import com.synopsys.integration.blackduck.dockerinspector.help.format.HelpConverterFactory;
 import com.synopsys.integration.blackduck.dockerinspector.httpclient.HttpClientInspector;
 import com.synopsys.integration.blackduck.dockerinspector.output.ResultFile;
 import com.synopsys.integration.blackduck.dockerinspector.programarguments.ArgumentParser;
@@ -151,10 +154,10 @@ public class DockerInspector {
         return false;
     }
 
-    private boolean initAndValidate(final Config config) throws IntegrationException, IllegalArgumentException {
+    private boolean initAndValidate(final Config config) throws IntegrationException, IllegalArgumentException, FileNotFoundException {
         logger.info(String.format("Black Duck Docker Inspector %s", programVersion.getProgramVersion()));
         if (helpInvoked()) {
-            helpWriter.write(getHelpTopics());
+            provideHelp(config);
             return false;
         }
         dockerInspectorSystemProperties.augmentSystemProperties(config.getSystemPropertiesPath());
@@ -173,6 +176,22 @@ public class DockerInspector {
         logger.info(String.format("Inspecting image:tag %s:%s", config.getDockerImageRepo(), config.getDockerImageTag()));
         blackDuckClient.testBlackDuckConnection();
         return true;
+    }
+
+    private void provideHelp(final Config config) throws FileNotFoundException, HelpGenerationException {
+        final String givenHelpOutputFilePath = config.getHelpOutputFilePath();
+        if (StringUtils.isBlank(givenHelpOutputFilePath)) {
+            helpWriter.concatinateContentToPrintStream(System.out, getHelpTopics());
+        } else {
+            final File helpOutputFile = new File(givenHelpOutputFilePath);
+            if ((!helpOutputFile.isDirectory())) {
+                try (final PrintStream helpPrintStream = new PrintStream(new FileOutputStream(helpOutputFile))) {
+                    helpWriter.concatinateContentToPrintStream(helpPrintStream, getHelpTopics());
+                }
+            } else {
+                helpWriter.writeIndividualFilesToDir(new File(givenHelpOutputFilePath), getHelpTopics());
+            }
+        }
     }
 
     private String deriveDockerEngineVersion(final Config config) {

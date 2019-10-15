@@ -1,7 +1,6 @@
 package com.synopsys.integration.blackduck.dockerinspector.help;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,9 +19,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorOption;
-import com.synopsys.integration.blackduck.dockerinspector.help.format.Converter;
-import com.synopsys.integration.blackduck.dockerinspector.help.format.MarkdownToHtmlConverter;
-import com.synopsys.integration.blackduck.dockerinspector.help.format.MarkdownToMarkdownConverter;
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.exception.IntegrationException;
 
@@ -39,123 +35,83 @@ public class HelpTextTest {
     private HelpTopicParser helpTopicParser;
 
     @Mock
-    private HelpFormatParser helpFormatParser;
-
-    @Mock
     private HelpReader helpReader;
 
     @InjectMocks
     private HelpText helpText;
 
     @Test
-    public void testTextOverview() throws IntegrationException, IllegalAccessException, IOException {
+    public void testOverview() throws IntegrationException, IllegalAccessException, IOException {
         Mockito.when(helpTopicParser.translateGivenTopicNames("overview")).thenReturn("overview");
         Mockito.when(helpTopicParser.deriveHelpTopicList("overview")).thenReturn(Arrays.asList("overview"));
-        Mockito.when(helpFormatParser.getHelpFormat()).thenReturn(HelpFormat.MARKDOWN);
-        final Converter converter = new MarkdownToMarkdownConverter();
         final String actualHelpString = "help line 1\nhelp line 2";
-        Mockito.when(helpReader.getStringFromHelpFile("overview")).thenReturn(actualHelpString);
+        Mockito.when(helpReader.getVariableSubstitutedTextFromHelpFile("overview")).thenReturn(actualHelpString);
 
-        final String returnedHelpString = helpText.get(converter, "overview");
+        final String returnedHelpString = helpText.getMarkdownForTopic("overview");
 
         assertTrue(returnedHelpString.contains(actualHelpString));
     }
 
     @Test
-    public void testTextProperties() throws IntegrationException, IllegalArgumentException, IllegalAccessException {
+    public void testProperties() throws IntegrationException, IllegalArgumentException, IllegalAccessException {
         Mockito.when(helpTopicParser.translateGivenTopicNames("properties")).thenReturn("properties");
         Mockito.when(helpTopicParser.deriveHelpTopicList("properties")).thenReturn(Arrays.asList("properties"));
-        Mockito.when(helpFormatParser.getHelpFormat()).thenReturn(HelpFormat.MARKDOWN);
         final SortedSet<DockerInspectorOption> configOptions = new TreeSet<>();
         configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", "public", false));
         Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
-        final Converter converter = new MarkdownToMarkdownConverter();
 
-        final String usageString = helpText.get(converter, "properties");
+        final String usageString = helpText.getMarkdownForTopic("properties");
 
         assertTrue(usageString.contains("blackduck.url [String]: Black Duck URL"));
     }
 
     @Test
-    public void testHtmlDeployment() throws IntegrationException, IllegalArgumentException, IllegalAccessException, IOException {
+    public void testDeployment() throws IntegrationException, IllegalArgumentException, IllegalAccessException, IOException {
         Mockito.when(helpTopicParser.translateGivenTopicNames("deployment")).thenReturn("deployment");
         Mockito.when(helpTopicParser.deriveHelpTopicList("deployment")).thenReturn(Arrays.asList("deployment"));
-        Mockito.when(helpFormatParser.getHelpFormat()).thenReturn(HelpFormat.HTML);
-        Mockito.when(config.getHelpOutputFormat()).thenReturn("html");
-        final Converter converter = new MarkdownToHtmlConverter();
         final String deploymentHelpString = FileUtils.readFileToString(new File("src/main/resources/help/content/deployment.md"), StandardCharsets.UTF_8);
-        Mockito.when(helpReader.getStringFromHelpFile("deployment")).thenReturn(deploymentHelpString);
+        Mockito.when(helpReader.getVariableSubstitutedTextFromHelpFile("deployment")).thenReturn(deploymentHelpString);
 
-        final String deploymentHtml = helpText.get(converter, "deployment");
+        final String deploymentHtml = helpText.getMarkdownForTopic("deployment");
 
-        assertTrue(deploymentHtml.contains("<p>Black Duck Docker Inspector can be run in either of the following modes:</p>"));
+        assertTrue(deploymentHtml.contains("Black Duck Docker Inspector can be run in either of the following modes:"));
     }
 
     @Test
-    public void testHtmlProperties() throws IntegrationException, IllegalArgumentException, IllegalAccessException {
-        Mockito.when(helpTopicParser.translateGivenTopicNames("properties")).thenReturn("properties");
-        Mockito.when(helpTopicParser.deriveHelpTopicList("properties")).thenReturn(Arrays.asList("properties"));
-        Mockito.when(helpFormatParser.getHelpFormat()).thenReturn(HelpFormat.HTML);
+    public void testAll() throws IntegrationException, IllegalArgumentException, IllegalAccessException, IOException {
+        Mockito.when(helpTopicParser.translateGivenTopicNames("all")).thenReturn("overview,architecture,running,properties,advanced,deployment,troubleshooting,releasenotes");
+        Mockito.when(helpTopicParser.deriveHelpTopicList("overview,architecture,running,properties,advanced,deployment,troubleshooting,releasenotes")).thenReturn(Arrays.asList("overview", "architecture", "running", "properties", "advanced", "deployment", "troubleshooting", "releasenotes"));
         final SortedSet<DockerInspectorOption> configOptions = new TreeSet<>();
         configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", "public", false));
         Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
-        Mockito.when(config.getHelpOutputFormat()).thenReturn("HtmL");
-        final Converter converter = new MarkdownToHtmlConverter();
-
-        final String deploymentHtml = helpText.get(converter, "properties");
-
-        verifyPropertiesHtml(deploymentHtml);
-    }
-
-    @Test
-    public void testHtmlAll() throws IntegrationException, IllegalArgumentException, IllegalAccessException, IOException {
-        Mockito.when(helpTopicParser.translateGivenTopicNames("all")).thenReturn("all");
-        Mockito.when(helpTopicParser.deriveHelpTopicList("all")).thenReturn(Arrays.asList("program", "overview", "architecture", "running", "advanced", "deployment", "troubleshooting", "releasenotes", "properties"));
-        Mockito.when(helpFormatParser.getHelpFormat()).thenReturn(HelpFormat.HTML);
-        final SortedSet<DockerInspectorOption> configOptions = new TreeSet<>();
-        configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", "public", false));
-        Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
-        Mockito.when(config.getHelpOutputFormat()).thenReturn("HtmL");
         Mockito.when(programVersion.getProgramNamePretty()).thenReturn("Black Duck Docker Inspector");
         Mockito.when(programVersion.getProgramVersion()).thenReturn("1.2.3");
-        final Converter converter = new MarkdownToHtmlConverter();
 
         String helpString = FileUtils.readFileToString(new File("src/main/resources/help/content/overview.md"), StandardCharsets.UTF_8);
-        Mockito.when(helpReader.getStringFromHelpFile("overview")).thenReturn(helpString);
+        Mockito.when(helpReader.getVariableSubstitutedTextFromHelpFile("overview")).thenReturn(helpString);
         helpString = FileUtils.readFileToString(new File("src/main/resources/help/content/architecture.md"), StandardCharsets.UTF_8);
-        Mockito.when(helpReader.getStringFromHelpFile("architecture")).thenReturn(helpString);
+        Mockito.when(helpReader.getVariableSubstitutedTextFromHelpFile("architecture")).thenReturn(helpString);
         helpString = FileUtils.readFileToString(new File("src/main/resources/help/content/running.md"), StandardCharsets.UTF_8);
-        Mockito.when(helpReader.getStringFromHelpFile("running")).thenReturn(helpString);
+        Mockito.when(helpReader.getVariableSubstitutedTextFromHelpFile("running")).thenReturn(helpString);
         helpString = FileUtils.readFileToString(new File("src/main/resources/help/content/advanced.md"), StandardCharsets.UTF_8);
-        Mockito.when(helpReader.getStringFromHelpFile("advanced")).thenReturn(helpString);
+        Mockito.when(helpReader.getVariableSubstitutedTextFromHelpFile("advanced")).thenReturn(helpString);
         helpString = FileUtils.readFileToString(new File("src/main/resources/help/content/deployment.md"), StandardCharsets.UTF_8);
-        Mockito.when(helpReader.getStringFromHelpFile("deployment")).thenReturn(helpString);
+        Mockito.when(helpReader.getVariableSubstitutedTextFromHelpFile("deployment")).thenReturn(helpString);
         helpString = FileUtils.readFileToString(new File("src/main/resources/help/content/troubleshooting.md"), StandardCharsets.UTF_8);
-        Mockito.when(helpReader.getStringFromHelpFile("troubleshooting")).thenReturn(helpString);
+        Mockito.when(helpReader.getVariableSubstitutedTextFromHelpFile("troubleshooting")).thenReturn(helpString);
         helpString = FileUtils.readFileToString(new File("src/main/resources/help/content/releasenotes.md"), StandardCharsets.UTF_8);
-        Mockito.when(helpReader.getStringFromHelpFile("releasenotes")).thenReturn(helpString);
+        Mockito.when(helpReader.getVariableSubstitutedTextFromHelpFile("releasenotes")).thenReturn(helpString);
 
-        final String deploymentHtml = helpText.get(converter, "all");
+        final String deploymentHtml = helpText.getMarkdownForTopics("all");
 
-        System.out.println("DUMPING HTML OUTPUT:");
-        System.out.println(deploymentHtml);
-        assertTrue(deploymentHtml.contains(">Black Duck Docker Inspector"));
-        assertTrue(deploymentHtml.contains("1.2.3"));
-        assertTrue(deploymentHtml.contains(">Overview"));
-        assertTrue(deploymentHtml.contains(">Architecture<"));
-        assertTrue(deploymentHtml.contains(">Running Docker Inspector<"));
-        verifyPropertiesHtml(deploymentHtml);
-        assertTrue(deploymentHtml.contains(">Advanced topics<"));
-        assertTrue(deploymentHtml.contains(">Deploying Docker Inspector<"));
-        assertTrue(deploymentHtml.contains(">Troubleshooting<"));
-        assertTrue(deploymentHtml.contains(">Release notes<"));
-
-        // verify TOC is present
-        assertTrue(deploymentHtml.contains("<a href=\"#architecture\">Architecture</a>"));
+        // Due to simplified mocking, variables will not have been substituted (tested elsewhere). Testing aggregation here.
+        assertTrue(deploymentHtml.contains("_This help content was generated"));
+        assertTrue(deploymentHtml.contains("Modes of operation"));
+        assertTrue(deploymentHtml.contains("Please review the script before running it to make sure"));
+        assertTrue(deploymentHtml.contains("Version 8.2.2"));
     }
 
     private void verifyPropertiesHtml(final String deploymentHtml) {
-        assertTrue(deploymentHtml.contains(">Properties<"));
         assertTrue(deploymentHtml.contains(">blackduck.url [String]: Black Duck URL<"));
     }
 

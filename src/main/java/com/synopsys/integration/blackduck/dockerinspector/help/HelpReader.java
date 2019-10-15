@@ -31,8 +31,10 @@ import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.exception.IntegrationException;
 
 import freemarker.template.Configuration;
@@ -43,6 +45,9 @@ import freemarker.template.TemplateExceptionHandler;
 @Component
 public class HelpReader {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private ProgramVersion programVersion;
 
     private final Configuration cfg;
 
@@ -58,7 +63,7 @@ public class HelpReader {
         cfg.setFallbackOnNullLoopVariable(false);
     }
 
-    public String getStringFromHelpFile(final String givenHelpTopicName) throws IntegrationException {
+    public String getVariableSubstitutedTextFromHelpFile(final String givenHelpTopicName) throws IntegrationException {
         final String helpTopicName = ensureNotNull(givenHelpTopicName);
         try {
             ensureVariableDataLoaded();
@@ -75,10 +80,11 @@ public class HelpReader {
     private void ensureVariableDataLoaded() throws IOException {
         if (variableData == null) {
             variableData = new HashMap<>();
-            final Properties properties = new Properties();
-            properties.load(this.getClass().getResourceAsStream("/help/data/help.properties"));
-            for (final String propertyName : properties.stringPropertyNames()) {
-                variableData.put(propertyName, properties.getProperty(propertyName));
+            variableData.put("program_version", programVersion.getProgramVersion());
+            final Properties helpProperties = new Properties();
+            helpProperties.load(this.getClass().getResourceAsStream("/help/data/help.properties"));
+            for (final String propertyName : helpProperties.stringPropertyNames()) {
+                variableData.put(propertyName, helpProperties.getProperty(propertyName));
             }
         }
     }

@@ -12,6 +12,7 @@ buildscript {
         classpath 'com.blackducksoftware.integration:common-gradle-plugin:0.0.+'
         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.6.RELEASE")
         classpath 'com.bmuschko:gradle-docker-plugin:3.0.6'
+        classpath 'org.freemarker:freemarker:2.3.26-incubating'
     }
 }
 
@@ -75,14 +76,40 @@ task buildScript(type: Copy) {
 	filter(ReplaceTokens, tokens: [VERSION: version, INSPECTOR_IMAGE_FAMILY: project.ext.inspectorImageFamily])
 }
 
-task generateHelpHtmlVersioned(type: Exec) {
+task docsGeneratedClean(type: Exec) {
     ignoreExitValue true
-    commandLine "java", "-jar", "${buildDir}/libs/${project.name}-${version}.jar", "--help", "all", "--help.output.format=html", "--help.output.path=build"
+    commandLine 'rm', '-rf', 'docs/generated'
 }
 
-task generateHelpHtmlLatest(type: Exec) {
+task docsSiteClean(type: Exec) {
     ignoreExitValue true
-    commandLine "java", "-jar", "${buildDir}/libs/${project.name}-${version}.jar", "--help", "all", "--help.output.format=html", "--help.output.path=build/${project.name}-help.html"
+    commandLine 'rm', '-rf', 'docs/site'
+}
+
+task docsClean(dependsOn: [docsSiteClean, docsGeneratedClean]) {}
+
+task docsPrep(type: Exec) {
+    ignoreExitValue true
+    commandLine 'mkdir', 'docs/generated'
+}
+
+task generateHelpHtmlVersioned(type: Exec, dependsOn: docsPrep) {
+    ignoreExitValue true
+    commandLine "java", "-jar", "${buildDir}/libs/${project.name}-${version}.jar", "--help", "all", "--help.output.path=docs/generated"
+}
+
+def outputPath = "docs/generated"
+def templatePath = "docs/templates"
+def staticPath = "docs/static"
+
+task docs(dependsOn: build) {
+    doLast {
+        def output = file(outputPath)
+        exec {
+            commandLine 'mkdocs', 'build'
+            workingDir "docs"
+        }
+    }
 }
 
 task createVersionedScript(type: Copy) {
@@ -181,9 +208,9 @@ task buildAggTestDockerTarfile(type: Exec, dependsOn: [buildTestDockerImage, bui
         "blackducksoftware/whiteouttest:1.0"
 }
 
+clean.dependsOn docsClean
 compileJava.dependsOn writeVersionToPropertiesFile
 build.dependsOn generateHelpHtmlVersioned
-build.dependsOn generateHelpHtmlLatest
 
 task checkVersion() {
     doFirst {
@@ -229,7 +256,6 @@ dependencies {
     compile 'com.github.docker-java:docker-java:3.1.5'
 
     compile 'org.springframework.boot:spring-boot-starter'
-    compile 'com.vladsch.flexmark:flexmark-all:0.50.26'
     compile group: 'org.freemarker', name: 'freemarker', version: '2.3.29'
 
     // Adding activation avoids this runtime error: WARNING: HK2 failure has been detected in a code that does not run in an active Jersey Error scope. ...
