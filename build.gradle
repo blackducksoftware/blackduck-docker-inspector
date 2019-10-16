@@ -93,7 +93,7 @@ task docsPrep(type: Exec) {
     commandLine 'mkdir', 'docs/generated'
 }
 
-task generateHelpHtmlVersioned(type: Exec, dependsOn: docsPrep) {
+task generateHelpMarkdown(type: Exec, dependsOn: docsPrep) {
     ignoreExitValue true
     commandLine "java", "-jar", "${buildDir}/libs/${project.name}-${version}.jar", "--help", "all", "--help.output.path=docs/generated"
 }
@@ -210,7 +210,7 @@ task buildAggTestDockerTarfile(type: Exec, dependsOn: [buildTestDockerImage, bui
 
 clean.dependsOn docsClean
 compileJava.dependsOn writeVersionToPropertiesFile
-build.dependsOn generateHelpHtmlVersioned
+build.dependsOn generateHelpMarkdown
 
 task checkVersion() {
     doFirst {
