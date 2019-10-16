@@ -5,7 +5,7 @@ It utilizes the appropriate Linux package manager to provide a list of
 the installed (by the package manager) packages, and creates a Black Duck project with a Bill of Materials (BOM) consisting of those packages as components.
 Because it relies on the Linux package manager as its source, the discovered packages are limited to those installed and managed using the Linux package manager.
 
-Black Duck Docker Inspector can inspect Linux Docker images that support dpkg, rpm, or apk package manager formats.
+Black Duck Docker Inspector can inspect Linux Docker images that use dpkg, rpm, or apk package manager formats.
 
 After running the Black Duck Docker Inspector on an image, navigate to Black Duck to view the Bill of Materials (BOM) created by 
 Black Duck Docker Inspector.
@@ -34,7 +34,7 @@ on the .tar file. Docker Inspector supports Docker Image Specification v1.2.0 fo
 
 Container mode is for container orchestration environments (Kubernetes, OpenShift, etc.) where Docker Inspector will run
 inside a container, where it cannot perform Docker operations. For information on running Docker Inspector in container mode,
-refer to the *deployment* help topic.
+refer to the *Deploying* section.
 
 ### Requirements
 
