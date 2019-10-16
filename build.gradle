@@ -102,7 +102,7 @@ def outputPath = "docs/generated"
 def templatePath = "docs/templates"
 def staticPath = "docs/static"
 
-task docs(dependsOn: build) {
+task docs() {
     doLast {
         def output = file(outputPath)
         exec {
