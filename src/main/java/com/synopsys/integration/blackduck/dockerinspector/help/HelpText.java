@@ -70,14 +70,14 @@ public class HelpText {
         return markdownContent.toString();
     }
 
-    private String getMarkdownForProperties() throws IllegalAccessException {
+    private String getMarkdownForProperties() throws IllegalAccessException, IntegrationException {
         final StringBuilder usage = new StringBuilder();
         usage.append("You can configure Docker Inspector by setting any of the following properties. " +
                          "Properties are typically set via the command line by adding a command line " +
                          "argument of the form:\n\n" +
                          "    --{property name}={property value}\n" +
                          "\n\n" +
-                        "See the Advanced section for other ways to set properties.\n\n" +
+                        "See the [Advanced](advanced.md) for other ways to set properties.\n\n" +
                         "Available properties:\n\n");
         usage.append("Property name | Type | Description | Default value\n");
         usage.append("------------- | ---- | ----------- | -------------\n");
@@ -91,7 +91,7 @@ public class HelpText {
             }
             usageLine.append("| ");
             if (opt.isDeprecated()) {
-                usageLine.append("DEPRECATED");
+                throw new IntegrationException("Need to add a column in help for property deprecation status");
             }
             usage.append(usageLine.toString());
             usage.append("\n");
