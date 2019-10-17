@@ -23,7 +23,7 @@ between the Docker Inspector utility and the three service containers.
 
 In container mode, you will start the container running Docker Inspector and the three image inspector container-based services such that
 all four containers share a mounted volume and can communicate with each other via HTTP GET operations using base URLs that you will provide.
-For information on how to do this, refer to the *deployment* help topic.
+For information on how to do this, refer to [Deployment](deployment.md).
 
 ### Execution phases
 

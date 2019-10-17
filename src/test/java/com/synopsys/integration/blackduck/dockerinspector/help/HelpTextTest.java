@@ -10,6 +10,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -62,7 +63,9 @@ public class HelpTextTest {
 
         final String usageString = helpText.getMarkdownForTopic("properties");
 
-        assertTrue(usageString.contains("blackduck.url [String]: Black Duck URL"));
+        assertTrue(usageString.contains("Property name | Type | Description | Default value\n"));
+        assertTrue(usageString.contains("-------------\n"));
+        assertTrue(usageString.contains("blackduck.url | String | Black Duck URL |  |"));
     }
 
     @Test

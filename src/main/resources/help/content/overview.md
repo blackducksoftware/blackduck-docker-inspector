@@ -34,7 +34,7 @@ on the .tar file. Docker Inspector supports Docker Image Specification v1.2.0 fo
 
 Container mode is for container orchestration environments (Kubernetes, OpenShift, etc.) where Docker Inspector will run
 inside a container, where it cannot perform Docker operations. For information on running Docker Inspector in container mode,
-refer to the *Deploying* section.
+refer to [Deploying](deployment.md).
 
 ### Requirements
 
@@ -42,7 +42,7 @@ Requirements for Black Duck Docker Inspector are:
 
 * The current version of Black Duck. Visit [this page](${blackduck_release_page}) to determine the current version. 
 * Linux.
-* Access to the internet. For information on running without access to the internet, refer to Air Gap mode..
+* Access to the internet. For information on running without access to the internet, refer to [Air Gap mode](advanced.md#air-gap-mode).
 * curl.
 * bash.
 * Java (JRE) version 8 or 11.
@@ -79,21 +79,28 @@ Another alternative is to download the Docker Inspector .jar (using the script) 
 
 ### Passing arguments to Docker Inspector
 
-Usage: ${script_name} {Docker Inspector arguments}
-Docker Inspector arguments consist of property assignments. 
-Any supported property can be set by adding to the command line
+Running Docker Inspector typically involves invoking the script or .jar with some command line arguments:
+
+    ${script_name} {Docker Inspector arguments}
+    
+Docker Inspector command line arguments consist of property assignments. Any supported property can be set by adding to the command line
 a property assignment of the form:
+
 	--{property name}={value}
 
 Alternatively, any supported property can be set by adding to a text file named
 application.properties (in the current directory) a line of the form:
-{property name}={value}
 
-There are other alternative methods for setting properties. For more information, refer to the *running* help topic.
+    {property name}={value}
+
+An application.properties file can contain multiple property assignments.
+
+There are other alternative methods for setting properties. For more information, refer to [Running](running.md).
 
 ### Help
 
 Available help topics:
+
 * overview (this page)
 * architecture
 * running
@@ -105,16 +112,23 @@ Available help topics:
 * all
 
 To display a help topic, run Docker Inspector with either -h or --help followed by a topic. For example:
+
     -h properties
     
 To display multiple help topics, use a comma-separated list of help topics. For example:
+
     -h overview,properties,running
 
 To display all help topics, use topic "all":
+
     -h all
 
 To change the format of the help output to HTML, add --help.output.format=html:
+
     -h all --help.output.format=html
 
 To write help to a file, add --help.output.path={directory or file path}:
+
     -h all --help.output.format=html --help.output.path=.
+
+
