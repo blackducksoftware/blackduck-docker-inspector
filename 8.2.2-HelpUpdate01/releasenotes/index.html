@@ -1,0 +1,4099 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+    
+    
+      
+        <title>Release Notes - Black Duck Docker Inspector</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.30686662.css">
+      
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#version-822" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href=".." title="Black Duck Docker Inspector" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Black Duck Docker Inspector
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Release Notes
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href=".." title="Black Duck Docker Inspector" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Black Duck Docker Inspector
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../overview/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../architecture/" title="Architecture" class="md-nav__link">
+      Architecture
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../running/" title="Running" class="md-nav__link">
+      Running
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../properties/" title="Properties" class="md-nav__link">
+      Properties
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../advanced/" title="Advanced" class="md-nav__link">
+      Advanced
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../deployment/" title="Deploying" class="md-nav__link">
+      Deploying
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../troubleshooting/" title="Troubleshooting" class="md-nav__link">
+      Troubleshooting
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Release Notes
+      </label>
+    
+    <a href="./" title="Release Notes" class="md-nav__link md-nav__link--active">
+      Release Notes
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#version-822" class="md-nav__link">
+    Version 8.2.2
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-821" class="md-nav__link">
+    Version 8.2.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_1" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-820" class="md-nav__link">
+    Version 8.2.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-816" class="md-nav__link">
+    Version 8.1.6
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed-feature" class="md-nav__link">
+    Changed feature
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-815" class="md-nav__link">
+    Version 8.1.5
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_2" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-814" class="md-nav__link">
+    Version 8.1.4
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_1" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-813" class="md-nav__link">
+    Version 8.1.3
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_2" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-812" class="md-nav__link">
+    Version 8.1.2
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed-features" class="md-nav__link">
+    Changed features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-811" class="md-nav__link">
+    Version 8.1.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_3" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-810" class="md-nav__link">
+    Version 8.1.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_4" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-features_3" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-802" class="md-nav__link">
+    Version 8.0.2
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_5" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-801" class="md-nav__link">
+    Version 8.0.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_6" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-features_4" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-800" class="md-nav__link">
+    Version 8.0.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_5" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removed-features" class="md-nav__link">
+    Removed features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-733" class="md-nav__link">
+    Version 7.3.3
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_7" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-732" class="md-nav__link">
+    Version 7.3.2
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_8" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-731" class="md-nav__link">
+    Version 7.3.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_9" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-730" class="md-nav__link">
+    Version 7.3.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_6" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-724" class="md-nav__link">
+    Version 7.2.4
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_10" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-723" class="md-nav__link">
+    Version 7.2.3
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed-features_1" class="md-nav__link">
+    Changed features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-722" class="md-nav__link">
+    Version 7.2.2
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_11" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-721" class="md-nav__link">
+    Version 7.2.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_12" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-720" class="md-nav__link">
+    Version 7.2.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_7" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_13" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-710" class="md-nav__link">
+    Version 7.1.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed-features_2" class="md-nav__link">
+    Changed features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-701" class="md-nav__link">
+    Version 7.0.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_14" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-700" class="md-nav__link">
+    Version 7.0.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed-features_3" class="md-nav__link">
+    Changed features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_15" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-631" class="md-nav__link">
+    Version 6.3.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_16" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-630" class="md-nav__link">
+    Version 6.3.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_8" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-620" class="md-nav__link">
+    Version 6.2.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_17" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-features_9" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-610" class="md-nav__link">
+    Version 6.1.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_18" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-604" class="md-nav__link">
+    Version 6.0.4
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_19" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-603" class="md-nav__link">
+    Version 6.0.3
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_20" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-602" class="md-nav__link">
+    Version 6.0.2
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_21" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-601" class="md-nav__link">
+    Version 6.0.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_22" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-features_10" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-600" class="md-nav__link">
+    Version 6.0.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_11" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed-features_4" class="md-nav__link">
+    Changed features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-510" class="md-nav__link">
+    Version 5.1.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_12" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_23" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-500" class="md-nav__link">
+    Version 5.0.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#removed-features_1" class="md-nav__link">
+    Removed features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_24" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-441" class="md-nav__link">
+    Version 4.4.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_25" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-440" class="md-nav__link">
+    Version 4.4.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_13" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_26" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed-features_5" class="md-nav__link">
+    Changed features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-432" class="md-nav__link">
+    Version 4.3.2
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_27" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-431" class="md-nav__link">
+    Version 4.3.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_28" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-430" class="md-nav__link">
+    Version 4.3.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_14" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-420" class="md-nav__link">
+    Version 4.2.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_15" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-410" class="md-nav__link">
+    Version 4.1.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_16" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-403" class="md-nav__link">
+    Version 4.0.3
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_29" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-402" class="md-nav__link">
+    Version 4.0.2
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_30" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-401" class="md-nav__link">
+    Version 4.0.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_31" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-400" class="md-nav__link">
+    Version 4.0.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_17" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removed-features_2" class="md-nav__link">
+    Removed features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-321" class="md-nav__link">
+    Version 3.2.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_32" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-320" class="md-nav__link">
+    Version 3.2.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_18" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-312" class="md-nav__link">
+    Version 3.1.2
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_33" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-311" class="md-nav__link">
+    Version 3.1.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_34" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-310" class="md-nav__link">
+    Version 3.1.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_19" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_35" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-300" class="md-nav__link">
+    Version 3.0.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_20" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removed-features_3" class="md-nav__link">
+    Removed features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_36" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-212" class="md-nav__link">
+    Version 2.1.2
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_37" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-211" class="md-nav__link">
+    Version 2.1.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_38" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-210" class="md-nav__link">
+    Version 2.1.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_21" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-200" class="md-nav__link">
+    Version 2.0.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_39" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-121" class="md-nav__link">
+    Version 1.2.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_40" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-120" class="md-nav__link">
+    Version 1.2.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_41" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues-causing-hub-docker-inspector-to-fail-when-the-current-directory-path-or-the-given-tar-file-path-contained-spaces" class="md-nav__link">
+    Resolved issues causing Hub Docker Inspector to fail when the current directory path or the given .tar file path contained spaces.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-111" class="md-nav__link">
+    Version 1.1.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_42" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-110" class="md-nav__link">
+    Version 1.1.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_43" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-issues" class="md-nav__link">
+    Known issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-102" class="md-nav__link">
+    Version 1.0.2
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_44" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-issues_1" class="md-nav__link">
+    Known issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-101" class="md-nav__link">
+    Version 1.0.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_45" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-issues_2" class="md-nav__link">
+    Known issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-100" class="md-nav__link">
+    Version 1.0.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_46" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-issues_3" class="md-nav__link">
+    Known issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-014" class="md-nav__link">
+    Version 0.1.4
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_47" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-issues_4" class="md-nav__link">
+    Known issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-013" class="md-nav__link">
+    Version 0.1.3
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_48" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-issues_5" class="md-nav__link">
+    Known issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-012" class="md-nav__link">
+    Version 0.1.2
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_49" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-issues_6" class="md-nav__link">
+    Known issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-011" class="md-nav__link">
+    Version 0.1.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_50" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-issues_7" class="md-nav__link">
+    Known issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-010" class="md-nav__link">
+    Version 0.1.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_22" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_51" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-issues_8" class="md-nav__link">
+    Known issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-004" class="md-nav__link">
+    Version 0.0.4
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#known-issues_9" class="md-nav__link">
+    Known issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#version-822" class="md-nav__link">
+    Version 8.2.2
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-821" class="md-nav__link">
+    Version 8.2.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_1" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-820" class="md-nav__link">
+    Version 8.2.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-816" class="md-nav__link">
+    Version 8.1.6
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed-feature" class="md-nav__link">
+    Changed feature
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-815" class="md-nav__link">
+    Version 8.1.5
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_2" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-814" class="md-nav__link">
+    Version 8.1.4
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_1" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-813" class="md-nav__link">
+    Version 8.1.3
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_2" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-812" class="md-nav__link">
+    Version 8.1.2
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed-features" class="md-nav__link">
+    Changed features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-811" class="md-nav__link">
+    Version 8.1.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_3" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-810" class="md-nav__link">
+    Version 8.1.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_4" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-features_3" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-802" class="md-nav__link">
+    Version 8.0.2
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_5" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-801" class="md-nav__link">
+    Version 8.0.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_6" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-features_4" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-800" class="md-nav__link">
+    Version 8.0.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_5" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removed-features" class="md-nav__link">
+    Removed features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-733" class="md-nav__link">
+    Version 7.3.3
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_7" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-732" class="md-nav__link">
+    Version 7.3.2
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_8" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-731" class="md-nav__link">
+    Version 7.3.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_9" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-730" class="md-nav__link">
+    Version 7.3.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_6" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-724" class="md-nav__link">
+    Version 7.2.4
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_10" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-723" class="md-nav__link">
+    Version 7.2.3
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed-features_1" class="md-nav__link">
+    Changed features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-722" class="md-nav__link">
+    Version 7.2.2
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_11" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-721" class="md-nav__link">
+    Version 7.2.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_12" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-720" class="md-nav__link">
+    Version 7.2.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_7" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_13" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-710" class="md-nav__link">
+    Version 7.1.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed-features_2" class="md-nav__link">
+    Changed features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-701" class="md-nav__link">
+    Version 7.0.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_14" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-700" class="md-nav__link">
+    Version 7.0.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed-features_3" class="md-nav__link">
+    Changed features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_15" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-631" class="md-nav__link">
+    Version 6.3.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_16" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-630" class="md-nav__link">
+    Version 6.3.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_8" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-620" class="md-nav__link">
+    Version 6.2.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_17" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-features_9" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-610" class="md-nav__link">
+    Version 6.1.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_18" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-604" class="md-nav__link">
+    Version 6.0.4
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_19" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-603" class="md-nav__link">
+    Version 6.0.3
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_20" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-602" class="md-nav__link">
+    Version 6.0.2
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_21" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-601" class="md-nav__link">
+    Version 6.0.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_22" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-features_10" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-600" class="md-nav__link">
+    Version 6.0.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_11" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed-features_4" class="md-nav__link">
+    Changed features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-510" class="md-nav__link">
+    Version 5.1.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_12" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_23" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-500" class="md-nav__link">
+    Version 5.0.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#removed-features_1" class="md-nav__link">
+    Removed features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_24" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-441" class="md-nav__link">
+    Version 4.4.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_25" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-440" class="md-nav__link">
+    Version 4.4.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_13" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_26" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed-features_5" class="md-nav__link">
+    Changed features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-432" class="md-nav__link">
+    Version 4.3.2
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_27" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-431" class="md-nav__link">
+    Version 4.3.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_28" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-430" class="md-nav__link">
+    Version 4.3.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_14" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-420" class="md-nav__link">
+    Version 4.2.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_15" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-410" class="md-nav__link">
+    Version 4.1.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_16" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-403" class="md-nav__link">
+    Version 4.0.3
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_29" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-402" class="md-nav__link">
+    Version 4.0.2
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_30" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-401" class="md-nav__link">
+    Version 4.0.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_31" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-400" class="md-nav__link">
+    Version 4.0.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_17" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removed-features_2" class="md-nav__link">
+    Removed features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-321" class="md-nav__link">
+    Version 3.2.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_32" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-320" class="md-nav__link">
+    Version 3.2.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_18" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-312" class="md-nav__link">
+    Version 3.1.2
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_33" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-311" class="md-nav__link">
+    Version 3.1.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_34" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-310" class="md-nav__link">
+    Version 3.1.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_19" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_35" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-300" class="md-nav__link">
+    Version 3.0.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_20" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removed-features_3" class="md-nav__link">
+    Removed features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_36" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-212" class="md-nav__link">
+    Version 2.1.2
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_37" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-211" class="md-nav__link">
+    Version 2.1.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_38" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-210" class="md-nav__link">
+    Version 2.1.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_21" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-200" class="md-nav__link">
+    Version 2.0.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_39" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-121" class="md-nav__link">
+    Version 1.2.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_40" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-120" class="md-nav__link">
+    Version 1.2.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_41" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues-causing-hub-docker-inspector-to-fail-when-the-current-directory-path-or-the-given-tar-file-path-contained-spaces" class="md-nav__link">
+    Resolved issues causing Hub Docker Inspector to fail when the current directory path or the given .tar file path contained spaces.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-111" class="md-nav__link">
+    Version 1.1.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_42" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-110" class="md-nav__link">
+    Version 1.1.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_43" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-issues" class="md-nav__link">
+    Known issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-102" class="md-nav__link">
+    Version 1.0.2
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_44" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-issues_1" class="md-nav__link">
+    Known issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-101" class="md-nav__link">
+    Version 1.0.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_45" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-issues_2" class="md-nav__link">
+    Known issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-100" class="md-nav__link">
+    Version 1.0.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_46" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-issues_3" class="md-nav__link">
+    Known issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-014" class="md-nav__link">
+    Version 0.1.4
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_47" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-issues_4" class="md-nav__link">
+    Known issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-013" class="md-nav__link">
+    Version 0.1.3
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_48" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-issues_5" class="md-nav__link">
+    Known issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-012" class="md-nav__link">
+    Version 0.1.2
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_49" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-issues_6" class="md-nav__link">
+    Known issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-011" class="md-nav__link">
+    Version 0.1.1
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_50" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-issues_7" class="md-nav__link">
+    Known issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-010" class="md-nav__link">
+    Version 0.1.0
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_22" class="md-nav__link">
+    New features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolved-issues_51" class="md-nav__link">
+    Resolved issues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-issues_8" class="md-nav__link">
+    Known issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-004" class="md-nav__link">
+    Version 0.0.4
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#known-issues_9" class="md-nav__link">
+    Known issues
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Release Notes</h1>
+                
+                <h4 id="version-822">Version 8.2.2</h4>
+<h5 id="resolved-issues">Resolved issues</h5>
+<ul>
+<li>Increased the default value of service.timeout from 4 minutes to 10 minutes.</li>
+<li>The time Docker Inspector will wait for an image inspector service to come online is now controlled via the service.timeout property.</li>
+</ul>
+<h4 id="version-821">Version 8.2.1</h4>
+<h5 id="resolved-issues_1">Resolved issues</h5>
+<ul>
+<li>Fixed an issue that causes blackduck-docker-inspector.sh to display the help overview even when a different help topic is requested.</li>
+<li>Fixed an issue that causes Docker Inspector to return the full container filesystem even when only application components are requested (docker.platform.top.layer.id is specified).</li>
+</ul>
+<h4 id="version-820">Version 8.2.0</h4>
+<h5 id="new-features">New features</h5>
+<ul>
+<li>Added support for Java 11.</li>
+<li>Added the ability to generate help by topic (--help {topic}).</li>
+<li>Added the ability to generate help in HTML.</li>
+<li>Added the ability to write help output to a given file.</li>
+</ul>
+<h4 id="version-816">Version 8.1.6</h4>
+<h5 id="changed-feature">Changed feature</h5>
+<ul>
+<li>Adjusted logging to ensure that sensitive information does not appear in a debug log.</li>
+</ul>
+<h4 id="version-815">Version 8.1.5</h4>
+<h5 id="resolved-issues_2">Resolved issues</h5>
+<ul>
+<li>Fixed an issue that could cause Docker Inspector to incorrectly identify the package manager of the target image.</li>
+</ul>
+<h4 id="version-814">Version 8.1.4</h4>
+<h5 id="new-features_1">New features</h5>
+<ul>
+<li>Added a GitLab continuous integration deployment example.</li>
+</ul>
+<h4 id="version-813">Version 8.1.3</h4>
+<h5 id="new-features_2">New features</h5>
+<ul>
+<li>Added a Travis continuous integration deployment example.</li>
+</ul>
+<h4 id="version-812">Version 8.1.2</h4>
+<h5 id="changed-features">Changed features</h5>
+<ul>
+<li>Updated Blackduck-docker-inspector.sh to download the Docker Inspector .jar file from the new Artifactory repository at sig-repo.synopsys.com.</li>
+</ul>
+<h4 id="version-811">Version 8.1.1</h4>
+<h5 id="resolved-issues_3">Resolved issues</h5>
+<ul>
+<li>Resolved an issue that caused Docker Inspector to fail when it was unable to read the image inspector container's log.</li>
+</ul>
+<h4 id="version-810">Version 8.1.0</h4>
+<h5 id="resolved-issues_4">Resolved issues</h5>
+<ul>
+<li>Resolved an issue that could cause a No such file error on a file named classes.jsa when inspecting images containing Java.</li>
+</ul>
+<h5 id="new-features_3">New features</h5>
+<ul>
+<li>Added the property: output.containerfilesystem.excluded.paths.</li>
+<li>Added the command line --help=true switch for invoking help.</li>
+<li>Added the property output.include.squashedimage.</li>
+</ul>
+<h4 id="version-802">Version 8.0.2</h4>
+<h5 id="resolved-issues_5">Resolved issues</h5>
+<ul>
+<li>Resolved an issue that could cause missing components on Fedora-based Docker images.</li>
+</ul>
+<h4 id="version-801">Version 8.0.1</h4>
+<h5 id="resolved-issues_6">Resolved issues</h5>
+<ul>
+<li>Resolved an issue that could cause OpenSUSE components to be omitted from the Bill Of Materials. </li>
+</ul>
+<h5 id="new-features_4">New features</h5>
+<ul>
+<li>Increased default image Inspector service timeout from two minutes to four minutes.</li>
+</ul>
+<h4 id="version-800">Version 8.0.0</h4>
+<h5 id="new-features_5">New features</h5>
+<ul>
+<li>Added the ability to collect only those components added to the image package manager database by your application layers, versus the platform layers on which your application is built.</li>
+<li>Added the ability to provide the full code location name.</li>
+</ul>
+<h5 id="removed-features">Removed features</h5>
+<ul>
+<li>Docker exec mode (deprecated in Docker Inspector 7.0.0) is removed. Docker Inspector now supports HTTP client mode only.</li>
+</ul>
+<h4 id="version-733">Version 7.3.3</h4>
+<h5 id="resolved-issues_7">Resolved issues</h5>
+<ul>
+<li>Resolved an issue that could prevent controlling the image inspector HTTP request service timeout through the service.timeout property.</li>
+</ul>
+<h4 id="version-732">Version 7.3.2</h4>
+<h5 id="resolved-issues_8">Resolved issues</h5>
+<ul>
+<li>Resolved an issue that could cause RPM packages containing a value in the epoch field to be missing from the Black Duck Bill of Materials (BOM).</li>
+</ul>
+<h4 id="version-731">Version 7.3.1</h4>
+<h5 id="resolved-issues_9">Resolved issues</h5>
+<ul>
+<li>Resolved an issue that may cause Hub Detect versions 5.2.0 and higher to fail with an error message of DOCKER extraction failed: null when invoking Docker Inspector on a non-Linux Docker image. </li>
+</ul>
+<h4 id="version-730">Version 7.3.0</h4>
+<h5 id="new-features_6">New features</h5>
+<ul>
+<li>Added the property system.properties.path.</li>
+</ul>
+<h4 id="version-724">Version 7.2.4</h4>
+<h5 id="resolved-issues_10">Resolved issues</h5>
+<ul>
+<li>Resolved an issue that may cause Docker Inspector to fail with an error message of Error inspecting image: Failed to parse docker configuration file (Unrecognized field "identitytoken").</li>
+</ul>
+<h4 id="version-723">Version 7.2.3</h4>
+<h5 id="changed-features_1">Changed features</h5>
+<ul>
+<li>When constructing the container file system with the logging level set to DEBUG or TRACE : after applying each image layer, Docker Inspector now logs contents of the layer's metadata (json) file and the list of components.</li>
+</ul>
+<h4 id="version-722">Version 7.2.2</h4>
+<h5 id="resolved-issues_11">Resolved issues</h5>
+<ul>
+<li>Resolved an issue that may cause Black Duck input/output data (BDIO) uploads to fail for openSUSE and Red Hat Docker images.</li>
+</ul>
+<h4 id="version-721">Version 7.2.1</h4>
+<h5 id="resolved-issues_12">Resolved issues</h5>
+<ul>
+<li>Resolved an issue that may cause the Bill of Materials (BOM) creation to fail with an error message of Error in MAPPING_COMPONENTS displayed on the Black Duck Scans page for certain images.</li>
+</ul>
+<h4 id="version-720">Version 7.2.0</h4>
+<h5 id="new-features_7">New features</h5>
+<ul>
+<li>Added offline mode.</li>
+</ul>
+<h5 id="resolved-issues_13">Resolved issues</h5>
+<ul>
+<li>Fixed an issue that may generate a warning message of Error creating hard link to be logged when inspecting certain images.</li>
+<li>Fixed an issue that may generate a warning message of Error removing whited-out file .../.wh..opq to be logged when inspecting images with opaque directory whiteout files.</li>
+<li>Reduced the disk space used in the working directory within the Inspector containers.</li>
+</ul>
+<h4 id="version-710">Version 7.1.0</h4>
+<h5 id="changed-features_2">Changed features</h5>
+<ul>
+<li>Modified the format of the generated external identifiers to take advantage of the Black Duck KnowledgeBase preferred alias namespace feature.</li>
+<li>Modified the format of the generated external identifiers to include the epoch, when applicable, for RPM packages.</li>
+</ul>
+<h4 id="version-701">Version 7.0.1</h4>
+<h5 id="resolved-issues_14">Resolved issues</h5>
+<ul>
+<li>When the logging level is set to DEBUG or higher, the contents of the image inspector service log are now included in the log output.</li>
+<li>The image inspector service is now started with the same logging level as Black Duck Docker Inspector.</li>
+</ul>
+<h4 id="version-700">Version 7.0.0</h4>
+<h5 id="changed-features_3">Changed features</h5>
+<ul>
+<li>Hub Docker Inspector is now renamed to Black Duck Docker Inspector. The shell script, .jar filename, properties, and code blocks are updated accordingly.</li>
+<li>Black Duck Docker Inspector now runs in HTTP mode by default.</li>
+</ul>
+<h5 id="resolved-issues_15">Resolved issues</h5>
+<ul>
+<li>HTTP client mode: Resolved an issue that prevents removal of the image inspector image upon completion.</li>
+<li>HTTP client mode: Resolved an issue with user-specified Black Duck project names and version names.</li>
+<li>HTTP client mode: Resolved an issue that caused the container filesystem to be provided even when it was not requested.</li>
+</ul>
+<h4 id="version-631">Version 6.3.1</h4>
+<h5 id="resolved-issues_16">Resolved issues</h5>
+<ul>
+<li>Resolved an issue that could cause DEBUG-level warnings to be logged while inspecting images with file paths containing non-ASCII characters.</li>
+<li>Improved logging for when the image inspector service is started but never comes online.</li>
+<li>In http client mode &gt; start service mode: if a health check fails, Docker Inspector now performs a "docker logs" operation on the container to reveal the root problem.</li>
+<li>Orchestration platform properties are now included in the --help output.</li>
+</ul>
+<h4 id="version-630">Version 6.3.0</h4>
+<h5 id="new-features_8">New features</h5>
+<ul>
+<li>Added the --inspectorimagefamily command line argument, which prints the Inspector image family name.</li>
+</ul>
+<h4 id="version-620">Version 6.2.0</h4>
+<h5 id="resolved-issues_17">Resolved issues</h5>
+<ul>
+<li>Resolved an issue that caused Docker Inspector to fail when the image repository contained a : character and the image tag was not specified.</li>
+</ul>
+<h5 id="new-features_9">New features</h5>
+<ul>
+<li>Added the --pullairgapzip option.</li>
+<li>Improved multiple error messages.</li>
+</ul>
+<h4 id="version-610">Version 6.1.0</h4>
+<h5 id="resolved-issues_18">Resolved issues</h5>
+<ul>
+<li>Added support for running on container application platforms such as Kubernetes and OpenShift.</li>
+<li>Renamed Rest Client Mode to HTTP Client Mode.</li>
+<li>Resolved an issue that prevented BDIO (Black Duck Input/Output data) from being uploaded to the Hub. This issue only affected HTTP client mode.</li>
+<li>Resolved an issue that caused Docker Inspector to fail when inspecting an image containing no package manager. This issue only affected HTTP client node.</li>
+</ul>
+<h4 id="version-604">Version 6.0.4</h4>
+<h5 id="resolved-issues_19">Resolved issues</h5>
+<ul>
+<li>Resolved an issue wherein Hub Docker Inspector may fail if the target docker tarfile path contained spaces.</li>
+</ul>
+<h4 id="version-603">Version 6.0.3</h4>
+<h5 id="resolved-issues_20">Resolved issues</h5>
+<ul>
+<li>Resolved an issue causing Hub Docker Inspector to produce an unnecessarily large container filesystem output file.</li>
+</ul>
+<h4 id="version-602">Version 6.0.2</h4>
+<h5 id="resolved-issues_21">Resolved issues</h5>
+<ul>
+<li>Resolved an issue causing Hub Docker Inspector to fail when the image exists in the local cache but not the registry.</li>
+</ul>
+<h4 id="version-601">Version 6.0.1</h4>
+<h5 id="resolved-issues_22">Resolved issues</h5>
+<ul>
+<li>Removed extraneous and possibly misleading log messages.</li>
+</ul>
+<h5 id="new-features_10">New features</h5>
+<ul>
+<li>Added the properties docker.image.repo and docker.image.tag to the usage message generated when using the command line argument --help.</li>
+</ul>
+<h4 id="version-600">Version 6.0.0</h4>
+<h5 id="new-features_11">New features</h5>
+<ul>
+<li>Added REST client mode.</li>
+</ul>
+<h5 id="changed-features_4">Changed features</h5>
+<ul>
+<li>The available properties list included in the usage message, which displays when using the command line argument --help, is now sorted alphabetically.</li>
+<li>The format of the (optional) container filesystem output file name has changed.  The new container system file name is {image name}<em>{image tag}</em> containerfilesystem.tar.gz or {image tarfilename}.tar.gz, depending on how the target image is specified.</li>
+</ul>
+<h4 id="version-510">Version 5.1.0</h4>
+<h5 id="new-features_12">New features</h5>
+<ul>
+<li>Added support for the JAVACMD environment variable.</li>
+</ul>
+<h5 id="resolved-issues_23">Resolved issues</h5>
+<ul>
+<li>Improved performance and reliability.</li>
+</ul>
+<h4 id="version-500">Version 5.0.0</h4>
+<h5 id="removed-features_1">Removed features</h5>
+<ul>
+<li>The dry.run property is removed. Instead of setting dry.run to true, you can now set upload.bdio to false.</li>
+<li>The output.include.dockertarfile property is removed. Instead, consider using the property output.include.containerfilesystem.</li>
+</ul>
+<h5 id="resolved-issues_24">Resolved issues</h5>
+<ul>
+<li>Resolved an issue that could cause Hub Docker Inspector to fail when the local Docker registry contains unnamed images.</li>
+</ul>
+<h4 id="version-441">Version 4.4.1</h4>
+<h5 id="resolved-issues_25">Resolved issues</h5>
+<ul>
+<li>Resolved an issue that could cause Hub Docker Inspector to fail to connect to Hub versions 4.5 or higher.</li>
+</ul>
+<h4 id="version-440">Version 4.4.0</h4>
+<h5 id="new-features_13">New features</h5>
+<ul>
+<li>Added the property cleanup.inspector.container.</li>
+<li>Added the ability to provide a Hub user access (API) token instead of username and password.</li>
+</ul>
+<h5 id="resolved-issues_26">Resolved issues</h5>
+<ul>
+<li>Resolved an issue that caused Hub Docker Inspector to fail when the target image did not include a supported package manager database, such as an image based on the scratch image, with no Linux operating system installed. In this case, Hub Docker Inspector now succeeds, producing a Bill Of Materials (BDIO) file containing zero components.</li>
+<li>Resolved an issue that could cause hard link creation error messages to display in the log.</li>
+<li>Resolved an issue that could cause Hub Docker Inspector to fail to stop and also fail to remove the inspector Docker container.</li>
+<li>Resolved an issue that could cause Hub Docker Inspector to unnecessarily download its .jar file when the environment variable DOCKER_INSPECTOR_VERSION is set.</li>
+</ul>
+<h5 id="changed-features_5">Changed features</h5>
+<ul>
+<li>The base name of the Inspector images and containers has changed from hub-docker-inspector to hub-imageinspector-ws.</li>
+</ul>
+<h4 id="version-432">Version 4.3.2</h4>
+<h5 id="resolved-issues_27">Resolved issues</h5>
+<ul>
+<li>Resolved an issue that caused Hub Docker Inspector to remove existing files from the output directory.</li>
+</ul>
+<h4 id="version-431">Version 4.3.1</h4>
+<h5 id="resolved-issues_28">Resolved issues</h5>
+<ul>
+<li>Resolved an issue that caused Hub Docker Inspector to fail when the target image repository URL included a port number.</li>
+<li>Resolved an issue that caused files to be left in the working directory even when cleanup.working.dir was set to true, which is the default value.</li>
+<li>Resolved an issue that caused the output Docker .tar filename to be shortened when the image repository name included a forward-slash character ('/').</li>
+<li>Resolved an issue wherein the log file may show a connection to the Hub when in fact there was no connection.</li>
+</ul>
+<h4 id="version-430">Version 4.3.0</h4>
+<h5 id="new-features_14">New features</h5>
+<ul>
+<li>Added the property upload.bdio. It replaces the now-deprecated property dry.run.</li>
+<li>Added the property cleanup.target.image.</li>
+<li>Added the property cleanup.inspector.image.</li>
+</ul>
+<h4 id="version-420">Version 4.2.0</h4>
+<h5 id="new-features_15">New features</h5>
+<ul>
+<li>Added the property inspector.repository.</li>
+</ul>
+<h4 id="version-410">Version 4.1.0</h4>
+<h5 id="new-features_16">New features</h5>
+<ul>
+<li>Directly invoking the .jar file now provides the ability to run multiple instances of Hub Docker Inspector on the same machine.</li>
+<li>Hub Docker Inspector stops and removes the Hub Docker Inspector container upon completion.</li>
+</ul>
+<h4 id="version-403">Version 4.0.3</h4>
+<h5 id="resolved-issues_29">Resolved issues</h5>
+<ul>
+<li>Resolved an issue wherein after importing a certificate, Hub Docker Inspector may incorrectly display the error message Error inspecting image: Please import the certificate for {hub url} into your Java keystore.</li>
+</ul>
+<h4 id="version-402">Version 4.0.2</h4>
+<h5 id="resolved-issues_30">Resolved issues</h5>
+<ul>
+<li>Added additional detail, including the list of supported properties, to the output of the  --help function.</li>
+</ul>
+<h4 id="version-401">Version 4.0.1</h4>
+<h5 id="resolved-issues_31">Resolved issues</h5>
+<ul>
+<li>Resolved an issue which caused the --pulljar function to fail.</li>
+</ul>
+<h4 id="version-400">Version 4.0.0</h4>
+<h5 id="new-features_17">New features</h5>
+<ul>
+<li>All arguments, including the target Docker image or tarfile, are now passed as property values. The order is no longer important.</li>
+<li>All access to web servers (the Hub, Docker registry) is performed from your computer instead of a Docker container. This enables access to Docker images that exist only on your computer, and can help avoid certificate issues.  It also reduces challenges when accessing Docker registries.</li>
+<li>Added the property cleanup.working.dir.</li>
+</ul>
+<h5 id="removed-features_2">Removed features</h5>
+<ul>
+<li>The property dev.mode is removed. Now, when property jar.path is set, the jar file is always copied into the Docker container.</li>
+<li>Hub Docker Inspector no longer prompts for the Hub password. If dry.run mode is disabled, which is the default, the Hub password is now required. </li>
+<li>The no.prompt property is removed.</li>
+<li>Removed support for the old format of the --spring.config.location command line argument value.</li>
+</ul>
+<h4 id="version-321">Version 3.2.1</h4>
+<h5 id="resolved-issues_32">Resolved issues</h5>
+<ul>
+<li>Resolved an issue with project names and versions that contain embedded spaces.</li>
+</ul>
+<h4 id="version-320">Version 3.2.0</h4>
+<h5 id="new-features_18">New features</h5>
+<ul>
+<li>Added support for a new format of the --spring.config.location command line argument value.</li>
+</ul>
+<h4 id="version-312">Version 3.1.2</h4>
+<h5 id="resolved-issues_33">Resolved issues</h5>
+<ul>
+<li>Resolved an issue which caused Hub Docker Inspector to fail when a Hub username containing spaces was provided through the command line.</li>
+</ul>
+<h4 id="version-311">Version 3.1.1</h4>
+<h5 id="resolved-issues_34">Resolved issues</h5>
+<ul>
+<li>Resolved an issue causing Hub Docker Inspector to fail when the .jar file path contained spaces.</li>
+<li>Resolved an issue causing Hub Docker Inspector to fail when the path of the current working directory contained spaces.</li>
+<li>Resolved an issue that could cause Hub Docker Inspector to continue executing after a failure.</li>
+</ul>
+<h4 id="version-310">Version 3.1.0</h4>
+<h5 id="new-features_19">New features</h5>
+<ul>
+<li>Hub Docker Inspector now performs the BDIO upload from your computer. Previously, this was done from a Docker container.  This eliminates the need to set the hub.always.trust.cert property to true when the Hub server certificate is installed on your computer.  This refers to your actual personal computer, and not to the local Hub server instance.</li>
+</ul>
+<h5 id="resolved-issues_35">Resolved issues</h5>
+<ul>
+<li>Resolved an issue that could cause BDIO upload to fail when the BDIO filename is longer than 255 characters.</li>
+<li>Resolved an issue that could cause Hub Docker Inspector to incorrectly report the success/fail status.</li>
+</ul>
+<h4 id="version-300">Version 3.0.0</h4>
+<h5 id="new-features_20">New features</h5>
+<ul>
+<li>The first phase of processing, which is determining the operating system / package manager of the target image, now runs on your computer. Previously, it ran within a Docker container. The second phase of processing, determining the installed packages, still runs within a Docker container.</li>
+<li>When invoked on an image instead of a tar file, Hub Docker Inspector now uses the docker process (dockerd) running on your computer to pull the target image.</li>
+<li>The process within the Hub Docker Inspector container now runs as a non-root user.</li>
+</ul>
+<h5 id="removed-features_3">Removed features</h5>
+<ul>
+<li>The output no longer includes a JSON file containing the dependency node tree.</li>
+<li>Properties, arguments, and environment variables used to configure Docker; for example, docker.registry, docker.registry.username, and others, are no longer required.  These are removed.</li>
+</ul>
+<h5 id="resolved-issues_36">Resolved issues</h5>
+<ul>
+<li>The output.include.tarfile property name is changed to output.include.dockertarfile.</li>
+<li>The script hub-docker-inspector.sh returns 0 when it succeeds, and a non-zero value when it fails.</li>
+</ul>
+<h4 id="version-212">Version 2.1.2</h4>
+<h5 id="resolved-issues_37">Resolved issues</h5>
+<ul>
+<li>Resolved an issue which caused Hub Docker Inspector to produce an incorrect JSON dependency node type.</li>
+</ul>
+<h4 id="version-211">Version 2.1.1</h4>
+<h5 id="resolved-issues_38">Resolved issues</h5>
+<ul>
+<li>Resolved an issue which caused Hub Docker Inspector to produce an incorrect JSON dependency node name/version.</li>
+</ul>
+<h4 id="version-210">Version 2.1.0</h4>
+<h5 id="new-features_21">New features</h5>
+<ul>
+<li>Added the output.include.containerfilesystem property.</li>
+</ul>
+<h4 id="version-200">Version 2.0.0</h4>
+<h5 id="resolved-issues_39">Resolved issues</h5>
+<ul>
+<li>When inspecting a tar file that contains multiple images/versions, Hub Docker Inspector now requires the docker.image.repo and docker.image.tag properties. These properties specify which image from the tar file are inspected.</li>
+<li>When not in dry run mode and no Hub password is provided, Hub Docker Inspector now prompts for it. This behavior is disabled using the no.prompt property.</li>
+<li>Changed property bdio.output.path to output.path.</li>
+<li>When the output.path property is set, the output now includes a JSON file containing the dependency node tree, in addition to the BDIO file.</li>
+<li>Added the output.include.tarfile property.</li>
+<li>Added the hub.codelocation.prefix property.</li>
+<li>Resolved an issue that may produce inaccurate results for packages maintained by multiple Linux projects.</li>
+<li>Improved the error message displayed when the user provides an incorrect Hub password.</li>
+</ul>
+<h4 id="version-121">Version 1.2.1</h4>
+<h5 id="resolved-issues_40">Resolved issues</h5>
+<ul>
+<li>Resolved an issue which caused Hub Docker Inspector to fail when running on Windows.</li>
+</ul>
+<h4 id="version-120">Version 1.2.0</h4>
+<h5 id="resolved-issues_41">Resolved issues</h5>
+<ul>
+<li>Added the runon property.</li>
+<li>Added support for the DOCKER_INSPECTOR_JAVA_OPTS environment variable.</li>
+</ul>
+<h5 id="resolved-issues-causing-hub-docker-inspector-to-fail-when-the-current-directory-path-or-the-given-tar-file-path-contained-spaces">Resolved issues causing Hub Docker Inspector to fail when the current directory path or the given .tar file path contained spaces.</h5>
+<h4 id="version-111">Version 1.1.1</h4>
+<h5 id="resolved-issues_42">Resolved issues</h5>
+<ul>
+<li>Resolved an issue wherein output results may not be entirely consistent.</li>
+</ul>
+<h4 id="version-110">Version 1.1.0</h4>
+<h5 id="resolved-issues_43">Resolved issues</h5>
+<ul>
+<li>Added dry.run and bdio.output.path properties.</li>
+<li>Removed install.dir and working.directory properties</li>
+<li>Added the ability to specify dockerd command line options.</li>
+</ul>
+<h5 id="known-issues">Known issues</h5>
+<ul>
+<li>When you inspect the same image twice and specify different Hub project names or versions, the first project version's Bill of Materials (BOM) is cleared.</li>
+</ul>
+<h4 id="version-102">Version 1.0.2</h4>
+<h5 id="resolved-issues_44">Resolved issues</h5>
+<ul>
+<li>Added improvements to the way the Docker image files are extracted which reduces spurious error messages.</li>
+<li>Hub Docker Inspector now automatically upgrades the Hub Docker Inspector container when appropriate.</li>
+</ul>
+<h5 id="known-issues_1">Known issues</h5>
+<ul>
+<li>When you inspect the same image twice and specify different Hub project names or versions, the first project version's Bill of Materials (BOM) is cleared.</li>
+</ul>
+<h4 id="version-101">Version 1.0.1</h4>
+<h5 id="resolved-issues_45">Resolved issues</h5>
+<ul>
+<li>Hub Docker Inspector now terminates earlier if Hub details are invalid.</li>
+<li>Added improvements to the way the Docker image files are extracted which reduces spurious error messages.</li>
+<li>Added support for Hub project names containing the "/" character.</li>
+</ul>
+<h5 id="known-issues_2">Known issues</h5>
+<ul>
+<li>When you inspect the same image twice and specify different Hub project names or versions, the first project version's Bill of Materials (BOM) is cleared.</li>
+</ul>
+<h4 id="version-100">Version 1.0.0</h4>
+<h5 id="resolved-issues_46">Resolved issues</h5>
+<ul>
+<li>Additional security for the SCAN_CLI_OPTS environment variable.</li>
+</ul>
+<h5 id="known-issues_3">Known issues</h5>
+<ul>
+<li>When you inspect the same image twice and specify different Hub project versions, the first project version's Bill of Materials (BOM) is cleared.</li>
+</ul>
+<h4 id="version-014">Version 0.1.4</h4>
+<h5 id="resolved-issues_47">Resolved issues</h5>
+<ul>
+<li>Resolved an issue that may produce inaccurate results caused by incorrectly ordered image layers.</li>
+<li>Added the ability to get an application.properties file template.</li>
+<li>Additional security for the BD_HUB_PASSWORD environment variable.</li>
+<li>DPKG systems: Now omits packages that are included in the dpkg list, but are not currently installed.</li>
+</ul>
+<h5 id="known-issues_4">Known issues</h5>
+<ul>
+<li>The proxy password provided to Hub Docker Inspector is not secure in this version. If you communicate with the Hub server using a proxy, do not deploy in a production environment requiring password security.</li>
+<li>When you inspect the same image twice and specify different Hub project versions, the first project version's Bill of Materials (BOM) is cleared.</li>
+</ul>
+<h4 id="version-013">Version 0.1.3</h4>
+<h5 id="resolved-issues_48">Resolved issues</h5>
+<ul>
+<li>Resolved an issue which caused a 401 error when the password was specified both by the BD_HUB_PASSWORD environment variable and the --hub.password command line argument. In versions 0.1.3 and higher, if both are set, the command line argument overrides the environment variable.</li>
+</ul>
+<h5 id="known-issues_5">Known issues</h5>
+<ul>
+<li>The passwords provided to Hub Docker Inspector are not encrypted in this version. Do not use in a production environment where the provided passwords must be kept secure.</li>
+<li>When you inspect the same image twice and specify different Hub project versions, the first project version's Bill of Materials (BOM) is cleared.</li>
+</ul>
+<h4 id="version-012">Version 0.1.2</h4>
+<h5 id="resolved-issues_49">Resolved issues</h5>
+<ul>
+<li>Resolved an issue which caused a 403 error when uploading BDIO files to Hub 4.0.</li>
+</ul>
+<h5 id="known-issues_6">Known issues</h5>
+<ul>
+<li>The passwords provided to Hub Docker Inspector are not encrypted in this version. Do not use in a production environment where the provided passwords must be kept secure.</li>
+<li>When you inspect an image after changing your Hub project version, the previous version's Bill of Materials is cleared.</li>
+</ul>
+<h4 id="version-011">Version 0.1.1</h4>
+<h5 id="resolved-issues_50">Resolved issues</h5>
+<ul>
+<li>Resolved an issue which resulted in the following error while processing some images: Error extracting files from layer tar: groovy.lang.MissingPropertyException: No such property: getMessage for class: java.nio.file.FileAlreadyExistsException.</li>
+</ul>
+<h5 id="known-issues_7">Known issues</h5>
+<ul>
+<li>The passwords provided to Hub Docker Inspector are not encrypted in this version. Do not use in a production environment where the provided passwords must be kept secure.</li>
+<li>When you inspect an image again after changing your Hub project version, the previous version's BOM is cleared.</li>
+</ul>
+<h4 id="version-010">Version 0.1.0</h4>
+<h5 id="new-features_22">New features</h5>
+<ul>
+<li>New --runon option allows you to instruct the utility to run directly on either CentOS or Alpine. If you are:</li>
+<li>Running the utility on a RedHat (RHEL) system</li>
+<li>Inspecting an image based on an operating system that uses either RPM or APK package manager</li>
+<li>Geting a no space left on device error</li>
+<li>Then use this option to instruct the utility to run on a platform that supports the target image package manager. For target images that use RPM, specify a value of centos. For images that use APK, specify a value of alpine. This option only works if the image is provided as a tarfile. For example:
+./hub-docker-inspector --runon=centos myRedHatImage.tar</li>
+</ul>
+<h5 id="resolved-issues_51">Resolved issues</h5>
+<ul>
+<li>Resolved an issue which failed to inspect older versions of CentOS with the error message: RpmExecutor : error: db5 error(30969) from dbenv&gt;open: BDB0091 DB_VERSION_MISMATCH: Database environment version mismatch.</li>
+<li>Resolved an issue which in some cases produced file or link-related error messages when unpacking images. These generally do not interfere with the ability to produce the Hub project or Bill of Materials.</li>
+</ul>
+<h5 id="known-issues_8">Known issues</h5>
+<ul>
+<li>The passwords provided to Hub Docker Inspector are not encrypted in this version. Do not use in a production environment where the provided passwords must be kept secure.</li>
+<li>When you inspect an image again after changing your Hub project version, the previous version's BOM is cleared.</li>
+<li>Cannot be run from a directory containing spaces in the name.</li>
+</ul>
+<h4 id="version-004">Version 0.0.4</h4>
+<h5 id="known-issues_9">Known issues</h5>
+<ul>
+<li>The passwords provided to Hub Docker Inspector are not encrypted in this version. Do not use in a production environment where the provided passwords must be kept secure.</li>
+<li>When you inspect an image again after changing the Hub project version, the previous version's BOM is cleared.</li>
+<li>Cannot be run from a directory containing spaces in the name.</li>
+<li>Fails to inspect older versions of CentOS with error message: RpmExecutor : error: db5 error(30969) from dbenv&gt;open: BDB0091 DB_VERSION_MISMATCH: Database environment version mismatch.</li>
+<li>Will in some cases produce file or link-related error messages unpacking images. These generally do not interfere with the ability to produce the Hub project or Bill of Materials.</li>
+</ul>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../troubleshooting/" title="Troubleshooting" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Troubleshooting
+              </span>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.c648116f.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      
+    
+  </body>
+</html>
