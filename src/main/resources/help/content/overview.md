@@ -1,4 +1,4 @@
-_Help version: ${program_version}._
+_Help version: ${program_version}
 
 ${solution_name} inspects Docker images to discover packages (components).
 It utilizes the appropriate Linux package manager to provide a list of
