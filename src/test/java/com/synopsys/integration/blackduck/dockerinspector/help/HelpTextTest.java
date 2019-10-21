@@ -10,7 +10,6 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -77,7 +76,7 @@ public class HelpTextTest {
 
         final String deploymentHtml = helpText.getMarkdownForTopic("deployment");
 
-        assertTrue(deploymentHtml.contains("Black Duck Docker Inspector can be run in either of the following modes:"));
+        assertTrue(deploymentHtml.contains("${solution_name} can be run in either of the following modes:"));
     }
 
     @Test
@@ -105,17 +104,12 @@ public class HelpTextTest {
         helpString = FileUtils.readFileToString(new File("src/main/resources/help/content/releasenotes.md"), StandardCharsets.UTF_8);
         Mockito.when(helpReader.getVariableSubstitutedTextFromHelpFile("releasenotes")).thenReturn(helpString);
 
-        final String deploymentHtml = helpText.getMarkdownForTopics("all");
+        final String allHelpMarkdown = helpText.getMarkdownForTopics("all");
 
         // Due to simplified mocking, variables will not have been substituted (tested elsewhere). Testing aggregation here.
-        assertTrue(deploymentHtml.contains("_This help content was generated"));
-        assertTrue(deploymentHtml.contains("Modes of operation"));
-        assertTrue(deploymentHtml.contains("Please review the script before running it to make sure"));
-        assertTrue(deploymentHtml.contains("Version 8.2.2"));
+        assertTrue(allHelpMarkdown.contains("_Help version:"));
+        assertTrue(allHelpMarkdown.contains("Modes of operation"));
+        assertTrue(allHelpMarkdown.contains("Please review the script before running it to make sure"));
+        assertTrue(allHelpMarkdown.contains("Version 8.2.2"));
     }
-
-    private void verifyPropertiesHtml(final String deploymentHtml) {
-        assertTrue(deploymentHtml.contains(">blackduck.url [String]: Black Duck URL<"));
-    }
-
 }
