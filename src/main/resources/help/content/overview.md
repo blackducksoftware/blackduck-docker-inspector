@@ -43,15 +43,15 @@ Requirements for ${solution_name} are:
 * The current version of Black Duck. Visit [this page](${blackduck_release_page}) to determine the current version. 
 * Linux.
 * Access to the internet. For information on running without access to the internet, refer to [Air Gap mode](advanced.md#air-gap-mode).
-* curl.
-* bash.
 * Java (JRE) version 8 or 11.
 * Three available ports for the image inspector services.  By default, these ports are 9000, 9001, and 9002.
+* When invoking ${solution_name} via ${script_name}:
+    - curl
+    - bash
 * In host mode: Access to a Docker Engine (version 17.09 or higher).
 * In container mode: You must start the ${solution_name} container that meets the requirements above, and three container-based
-"image inspector" services. 
-All four of these containers must share a mounted volume and be able to reach each other via HTTP GET operations using base URLs
-that you provide.
+"image inspector" services. All four of these containers must share a mounted volume and be able to reach each other via HTTP GET operations using base URLs
+that you provide. For more information, refer to [Deploying](deployment.md).
     
 ### Getting started
 
