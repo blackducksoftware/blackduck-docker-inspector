@@ -1,35 +1,35 @@
 ### Running the latest version
 
-The following command format will always fetch and run the latest version of Docker Inspector:
+The following command format will always fetch and run the latest version of ${solution_name}:
 
-    bash <(curl -s ${script_hosting_scheme}://${source_repo_organization}.${script_hosting_domain}/${project_name}/${script_name}) {Docker Inspector arguments}
+    bash <(curl -s ${script_hosting_scheme}://${source_repo_organization}.${script_hosting_domain}/${project_name}/${script_name}) {${solution_name} arguments}
 
 For example:
 
     bash <(curl -s ${script_hosting_scheme}://${source_repo_organization}.${script_hosting_domain}/${project_name}/${script_name}) --help
     bash <(curl -s ${script_hosting_scheme}://${source_repo_organization}.${script_hosting_domain}/${project_name}/${script_name}) --upload.bdio=false --docker.image=ubuntu
 
-An alternative is to download and run the latest Docker Inspector script:
+An alternative is to download and run the latest ${solution_name} script:
 
     curl -O  ${script_hosting_scheme}://${source_repo_organization}.${script_hosting_domain}/${project_name}/${script_name}
     chmod +x ${script_name}
-    ./${script_name} {Docker Inspector arguments}
+    ./${script_name} {${solution_name} arguments}
 
-The advantage of using the Docker Inspector script is that it will ensure you always run the latest version of the Docker Inspector .jar.
+The advantage of using the ${solution_name} script is that it will ensure you always run the latest version of the ${solution_name} .jar.
 
-Another alternative is to download the Docker Inspector .jar (using the script) and run the .jar directly:
+Another alternative is to download the ${solution_name} .jar (using the script) and run the .jar directly:
 
     bash <(curl -s ${script_hosting_scheme}://${source_repo_organization}.${script_hosting_domain}/${project_name}/${script_name}) --pulljar
-    java -jar ${project_name}-{version}.jar {Docker Inspector arguments}
+    java -jar ${project_name}-{version}.jar {${solution_name} arguments}
 
 ### Running a specific version
 
 By default, ${script_name} runs the latest version of
-Docker Inspector (by downloading, if necessary, and running the latest Docker Inspector .jar).
-To run a specific version of Docker Inspector instead:
+${solution_name} (by downloading, if necessary, and running the latest ${solution_name} .jar).
+To run a specific version of ${solution_name} instead:
 
     export DOCKER_INSPECTOR_VERSION={version}
-    ./${script_name} {Docker Inspector arguments}
+    ./${script_name} {${solution_name} arguments}
 
 For example:
 
@@ -39,17 +39,17 @@ For example:
 ### Running the .jar file
 
 The advantage of running ${project_name}.jar is that it ensures you alway run the latest
-version of Docker Inspector. However, sometimes it is better to run the .jar directly.
+version of ${solution_name}. However, sometimes it is better to run the .jar directly.
 
-You can download any version of the Docker Inspector .jar from ${binary_repo_url_base}/webapp/#/artifacts/browse/tree/General/bds-integrations-release/com/synopsys/integration/${project_name}.
+You can download any version of the ${solution_name} .jar from ${binary_repo_url_base}/webapp/#/artifacts/browse/tree/General/bds-integrations-release/com/synopsys/integration/${project_name}.
 
 Use the java command to run it:
 
-    java -jar ${project_name}-{version}.jar {Docker Inspector arguments}
+    java -jar ${project_name}-{version}.jar {${solution_name} arguments}
 
 ### Inspecting an image by image repo:tag
 
-To run Docker Inspector on Docker image from your local cache or a registry:
+To run ${solution_name} on Docker image from your local cache or a registry:
 
     ./${script_name} --docker.image={repo}:{tag}
 
@@ -57,12 +57,12 @@ If you omit the :{tag}, it will default to :latest.
 
 ### Inspecting an image saved to a .tar file
 
-To run Docker Inspector on a Docker image .tar file:
+To run ${solution_name} on a Docker image .tar file:
 
     docker save -o {name}.tar {repo}:{tag}
     ./${script_name} --docker.tar={name}.tar
     
-If your tar file contains multiple images, Docker Inspector can only inspect one of them.
+If your tar file contains multiple images, ${solution_name} can only inspect one of them.
 You can specify which image you want to inspect using --docker.image.repo and --docker.image.tag. For example, to select ubuntu:latest
 from a .tar file that contains ubuntu:latest and other images:
 

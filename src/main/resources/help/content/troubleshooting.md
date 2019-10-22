@@ -1,6 +1,6 @@
 ### Troubleshooting overview
 
-To troubleshoot issues with Docker Inspector, run with DEBUG logging:
+To troubleshoot issues with ${solution_name}, run with DEBUG logging:
 
     --logging.level.com.synopsys=DEBUG
     
@@ -14,9 +14,9 @@ Solution/workaround: Set the character encoding to UTF-8 when invoking java:
                      
     java -Dfile.encoding=UTF-8 ...
     
-### Problem: You must run Black Duck Docker Inspector on a non-Linux computer.
+### Problem: You must run ${solution_name} on a non-Linux computer.
 
-Solution/workaround: You may be able to run Black Duck Docker Inspector within a Linux Docker container running on
+Solution/workaround: You may be able to run ${solution_name} within a Linux Docker container running on
 your non-Linux computer using the following process.
 
 Warning: This method involves running a privileged container
@@ -43,15 +43,15 @@ Then, in the inspectorhost container, run:
 
 It's possible that additional steps such as configuration of dockerd, logging into the Docker registry,
 and others, are required to give Docker running inside the inspectorhost container access to the Docker
-images that Black Duck Docker Inspector must pull. One way to reduce extra steps is to save the target
+images that ${solution_name} must pull. One way to reduce extra steps is to save the target
 Docker image as a .tar file on your computer,
-use docker cp to copy it into the container, and run Black Duck Docker Inspector on that .tar file.
+use docker cp to copy it into the container, and run ${solution_name} on that .tar file.
 
 ### Problem: Property values being set in unexpected ways.
 
-Possible cause: Black Duck Docker Inspector is built using the Spring Boot application framework.
+Possible cause: ${solution_name} is built using the Spring Boot application framework.
 Spring Boot provides a variety of ways to set property values. This can produce unexpected results if,
-for example, you have an environment variable whose name maps to a Black Duck Docker Inspector property name.
+for example, you have an environment variable whose name maps to a ${solution_name} property name.
 Refer to the
 [Spring Boot documentation](${spring_boot_config_doc_url})
 for more details.
@@ -66,8 +66,8 @@ When this happens, the following error may appear in the container log:
 
 Possible cause: SELinux policy configuration.
 
-Solution/workaround: Add the svirt_sandbox_file_t label to Docker Inspector's shared directory.
-This enables the Docker Inspector services running in Docker containers to write to it:
+Solution/workaround: Add the svirt_sandbox_file_t label to ${solution_name}'s shared directory.
+This enables the ${solution_name} services running in Docker containers to write to it:
                      
     sudo chcon -Rt svirt_sandbox_file_t /tmp/${project_name}-files/shared/
 
@@ -77,21 +77,21 @@ When this happens, the following error may appear in the container log:
 
     Error inspecting image: ${container_image_inspector_dir_path}/shared/run_.../{image}.tar (Permission denied)
     
-Possible cause: The Linux umask value on the machine running Docker Inspector is too restrictive.
+Possible cause: The Linux umask value on the machine running ${solution_name} is too restrictive.
 
-Solution/workaround: Set umask to 022 when running Docker Inspector. The cause could be a umask value
+Solution/workaround: Set umask to 022 when running ${solution_name}. The cause could be a umask value
 that prevents read access to the file, or read or execute access to the directory.
-Docker Inspector requires an umask value that does not remove read permissions from files,
+${solution_name} requires an umask value that does not remove read permissions from files,
 and does not remove read or execute permissions from directories. For example, a umask of 022 works.
 
-### Problem: Docker Inspector cannot perform any Docker operations because the remote access port is not enabled on the Docker engine
+### Problem: ${solution_name} cannot perform any Docker operations because the remote access port is not enabled on the Docker engine
 
 When this happens, the following error may appear in the log:
 
     Error inspecting image: java.io.IOException: Couldn't load native library
     Stack trace: javax.ws.rs.ProcessingException: java.io.IOException: Couldn't load native library
 
-In older versions of Docker Inspector (prior to 8.2.0), the logged error was:
+In older versions of ${solution_name} (prior to 8.2.0), the logged error was:
 
     Error inspecting image: Could not initialize class org.newsclub.net.unix.NativeUnixSocket
     Stack trace: java.lang.NoClassDefFoundError: Could not initialize class org.newsclub.net.unix.NativeUnixSocket

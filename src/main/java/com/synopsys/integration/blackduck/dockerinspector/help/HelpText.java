@@ -70,23 +70,28 @@ public class HelpText {
         return markdownContent.toString();
     }
 
-    private String getMarkdownForProperties() throws IllegalAccessException {
+    private String getMarkdownForProperties() throws IllegalAccessException, IntegrationException {
         final StringBuilder usage = new StringBuilder();
         usage.append("You can configure Docker Inspector by setting any of the following properties. " +
                          "Properties are typically set via the command line by adding a command line " +
                          "argument of the form:\n\n" +
                          "    --{property name}={property value}\n" +
                          "\n\n" +
-                        "See the Advanced section for other ways to set properties.\n\n" +
+                        "See the [Advanced](advanced.md) for other ways to set properties.\n\n" +
                         "Available properties:\n\n");
+        usage.append("Property name | Type | Description | Default value\n");
+        usage.append("------------- | ---- | ----------- | -------------\n");
         final SortedSet<DockerInspectorOption> configOptions = config.getPublicConfigOptions();
         for (final DockerInspectorOption opt : configOptions) {
-            final StringBuilder usageLine = new StringBuilder(String.format("* %s [%s]: %s", opt.getKey(), opt.getValueTypeString(), opt.getDescription()));
+            final StringBuilder usageLine = new StringBuilder(String.format("%s | %s | %s | ", opt.getKey(), opt.getValueTypeString(), opt.getDescription()));
             if (!StringUtils.isBlank(opt.getDefaultValue())) {
-                usageLine.append(String.format("; default: %s", opt.getDefaultValue()));
+                usageLine.append(opt.getDefaultValue());
+            } else {
+                usageLine.append(" ");
             }
+            usageLine.append("| ");
             if (opt.isDeprecated()) {
-                usageLine.append(String.format("; [DEPRECATED]"));
+                throw new IntegrationException("Need to add a column in help for property deprecation status");
             }
             usage.append(usageLine.toString());
             usage.append("\n");
