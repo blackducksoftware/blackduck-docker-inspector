@@ -44,6 +44,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.Banner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.ComponentScan;
@@ -92,7 +94,10 @@ public class DockerInspector {
     private DockerInspectorSystemProperties dockerInspectorSystemProperties;
 
     public static void main(final String[] args) {
-        new SpringApplicationBuilder(DockerInspector.class).logStartupInfo(false).run(args);
+        final SpringApplicationBuilder appBuilder = new SpringApplicationBuilder(DockerInspector.class);
+        appBuilder.logStartupInfo(false);
+        appBuilder.bannerMode(Banner.Mode.OFF);
+        appBuilder.run(args);
         logger.warn("The program is not expected to get here.");
     }
 

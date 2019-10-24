@@ -37,7 +37,7 @@ public class ProcessId {
   @PostConstruct
   public void init() {
     cleanedProcessId = atSignToUnderscore(getProcessIdOrGenerateUniqueId());
-    logger.info(String.format("Process name: %s", cleanedProcessId));
+    logger.debug(String.format("Process name: %s", cleanedProcessId));
   }
 
   public String addProcessIdToName(final String origName) {
