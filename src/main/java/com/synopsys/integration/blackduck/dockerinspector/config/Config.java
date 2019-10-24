@@ -304,6 +304,11 @@ public class Config {
     @Value("${help.output.path:}")
     private String helpOutputFilePath = "";
 
+    @ValueDescription(description = "The path to the directory that contains help source files in Markdown format (with .md extensions)",
+        defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
+    @Value("${help.input.path:}")
+    private String helpInputFilePath = "";
+
     // Environment Variables
     @Value("${BD_HUB_PASSWORD:}")
     private String blackDuckLegacyPasswordEnvVar = "";
@@ -559,6 +564,10 @@ public class Config {
         return optionsByFieldName.get("helpOutputFilePath").getResolvedValue();
     }
 
+    public String getHelpInputFilePath() {
+        return optionsByFieldName.get("helpInputFilePath").getResolvedValue();
+    }
+
     public String getCallerVersion() {
         return optionsByFieldName.get("callerVersion").getResolvedValue();
     }
@@ -696,6 +705,7 @@ public class Config {
         this.imageInspectorHostPortUbuntu = null;
         this.imageInspectorDefaultDistro = null;
         this.helpOutputFilePath = null;
+        this.helpInputFilePath = null;
         this.offlineMode = null;
     }
 }

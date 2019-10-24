@@ -22,6 +22,7 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.help;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -29,11 +30,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.exception.IntegrationException;
 
@@ -49,24 +52,16 @@ public class HelpReader {
     @Autowired
     private ProgramVersion programVersion;
 
-    private final Configuration cfg;
+    @Autowired
+    private Config config;
 
+    private Configuration freemarkerConfig = null;
     private Map<String, Object> variableData;
-
-    public HelpReader() {
-        cfg = new Configuration(Configuration.VERSION_2_3_29);
-        cfg.setClassForTemplateLoading(this.getClass(), "/help/content");
-        cfg.setDefaultEncoding("UTF-8");
-        cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
-        cfg.setLogTemplateExceptions(false);
-        cfg.setWrapUncheckedExceptions(true);
-        cfg.setFallbackOnNullLoopVariable(false);
-    }
 
     public String getVariableSubstitutedTextFromHelpFile(final String givenHelpTopicName) throws IntegrationException {
         final String helpTopicName = ensureNotNull(givenHelpTopicName);
         try {
-            ensureVariableDataLoaded();
+            init();
             Template template = createFreemarkerTemplate(helpTopicName);
             final String helpFileContents = populateVariableValuesInHelpContent(template);
             return helpFileContents;
@@ -74,6 +69,29 @@ public class HelpReader {
             final String msg = String.format("Error processing help file for help topic: %s", helpTopicName);
             logger.error(msg, e);
             throw new IntegrationException(msg, e);
+        }
+    }
+
+    private void init() throws IOException {
+        ensureConfigInitialized();
+        ensureVariableDataLoaded();
+    }
+
+    private void ensureConfigInitialized() throws IOException {
+        if (freemarkerConfig == null) {
+            freemarkerConfig = new Configuration(Configuration.VERSION_2_3_29);
+            freemarkerConfig.setDefaultEncoding("UTF-8");
+            freemarkerConfig.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
+            freemarkerConfig.setLogTemplateExceptions(false);
+            freemarkerConfig.setWrapUncheckedExceptions(true);
+            freemarkerConfig.setFallbackOnNullLoopVariable(false);
+
+            if (StringUtils.isNotBlank(config.getHelpInputFilePath())) {
+                final File contentDir = new File(config.getHelpInputFilePath());
+                freemarkerConfig.setDirectoryForTemplateLoading(contentDir);
+            } else {
+                freemarkerConfig.setClassForTemplateLoading(this.getClass(), "/help/content");
+            }
         }
     }
 
@@ -105,10 +123,10 @@ public class HelpReader {
     private Template createFreemarkerTemplate(final String helpTopicName) throws IOException {
         Template template;
         try {
-            template = cfg.getTemplate(String.format("/%s.md", helpTopicName.toLowerCase()));
+            template = freemarkerConfig.getTemplate(String.format("/%s.md", helpTopicName.toLowerCase()));
         } catch (IOException e) {
             logger.info(String.format("Help topic %s not found; providing %s instead", helpTopicName, HelpTopicParser.HELP_TOPIC_NAME_OVERVIEW));
-            template = cfg.getTemplate(String.format("/%s.md", HelpTopicParser.HELP_TOPIC_NAME_OVERVIEW));
+            template = freemarkerConfig.getTemplate(String.format("/%s.md", HelpTopicParser.HELP_TOPIC_NAME_OVERVIEW));
         } return template;
     }
 }
