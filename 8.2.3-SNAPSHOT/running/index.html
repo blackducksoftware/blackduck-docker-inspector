@@ -395,29 +395,29 @@
                   <h1>Running</h1>
                 
                 <h3 id="running-the-latest-version">Running the latest version</h3>
-<p>The following command format will always fetch and run the latest version of Docker Inspector:</p>
-<pre><code>bash &lt;(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) {Docker Inspector arguments}
+<p>The following command format will always fetch and run the latest version of Black Duck Docker Inspector:</p>
+<pre><code>bash &lt;(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) {Black Duck Docker Inspector arguments}
 </code></pre>
 <p>For example:</p>
 <pre><code>bash &lt;(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) --help
 bash &lt;(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) --upload.bdio=false --docker.image=ubuntu
 </code></pre>
-<p>An alternative is to download and run the latest Docker Inspector script:</p>
+<p>An alternative is to download and run the latest Black Duck Docker Inspector script:</p>
 <pre><code>curl -O  https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh
 chmod +x blackduck-docker-inspector.sh
-./blackduck-docker-inspector.sh {Docker Inspector arguments}
+./blackduck-docker-inspector.sh {Black Duck Docker Inspector arguments}
 </code></pre>
-<p>The advantage of using the Docker Inspector script is that it will ensure you always run the latest version of the Docker Inspector .jar.</p>
-<p>Another alternative is to download the Docker Inspector .jar (using the script) and run the .jar directly:</p>
+<p>The advantage of using the Black Duck Docker Inspector script is that it will ensure you always run the latest version of the Black Duck Docker Inspector .jar.</p>
+<p>Another alternative is to download the Black Duck Docker Inspector .jar (using the script) and run the .jar directly:</p>
 <pre><code>bash &lt;(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) --pulljar
-java -jar blackduck-docker-inspector-{version}.jar {Docker Inspector arguments}
+java -jar blackduck-docker-inspector-{version}.jar {Black Duck Docker Inspector arguments}
 </code></pre>
 <h3 id="running-a-specific-version">Running a specific version</h3>
 <p>By default, blackduck-docker-inspector.sh runs the latest version of
-Docker Inspector (by downloading, if necessary, and running the latest Docker Inspector .jar).
-To run a specific version of Docker Inspector instead:</p>
+Black Duck Docker Inspector (by downloading, if necessary, and running the latest Black Duck Docker Inspector .jar).
+To run a specific version of Black Duck Docker Inspector instead:</p>
 <pre><code>export DOCKER_INSPECTOR_VERSION={version}
-./blackduck-docker-inspector.sh {Docker Inspector arguments}
+./blackduck-docker-inspector.sh {Black Duck Docker Inspector arguments}
 </code></pre>
 <p>For example:</p>
 <pre><code>export DOCKER_INSPECTOR_VERSION=8.1.0
@@ -425,22 +425,22 @@ To run a specific version of Docker Inspector instead:</p>
 </code></pre>
 <h3 id="running-the-jar-file">Running the .jar file</h3>
 <p>The advantage of running blackduck-docker-inspector.jar is that it ensures you alway run the latest
-version of Docker Inspector. However, sometimes it is better to run the .jar directly.</p>
-<p>You can download any version of the Docker Inspector .jar from https://sig-repo.synopsys.com/webapp/#/artifacts/browse/tree/General/bds-integrations-release/com/synopsys/integration/blackduck-docker-inspector.</p>
+version of Black Duck Docker Inspector. However, sometimes it is better to run the .jar directly.</p>
+<p>You can download any version of the Black Duck Docker Inspector .jar from https://sig-repo.synopsys.com/webapp/#/artifacts/browse/tree/General/bds-integrations-release/com/synopsys/integration/blackduck-docker-inspector.</p>
 <p>Use the java command to run it:</p>
-<pre><code>java -jar blackduck-docker-inspector-{version}.jar {Docker Inspector arguments}
+<pre><code>java -jar blackduck-docker-inspector-{version}.jar {Black Duck Docker Inspector arguments}
 </code></pre>
 <h3 id="inspecting-an-image-by-image-repotag">Inspecting an image by image repo:tag</h3>
-<p>To run Docker Inspector on Docker image from your local cache or a registry:</p>
+<p>To run Black Duck Docker Inspector on Docker image from your local cache or a registry:</p>
 <pre><code>./blackduck-docker-inspector.sh --docker.image={repo}:{tag}
 </code></pre>
 <p>If you omit the :{tag}, it will default to :latest.</p>
 <h3 id="inspecting-an-image-saved-to-a-tar-file">Inspecting an image saved to a .tar file</h3>
-<p>To run Docker Inspector on a Docker image .tar file:</p>
+<p>To run Black Duck Docker Inspector on a Docker image .tar file:</p>
 <pre><code>docker save -o {name}.tar {repo}:{tag}
 ./blackduck-docker-inspector.sh --docker.tar={name}.tar
 </code></pre>
-<p>If your tar file contains multiple images, Docker Inspector can only inspect one of them.
+<p>If your tar file contains multiple images, Black Duck Docker Inspector can only inspect one of them.
 You can specify which image you want to inspect using --docker.image.repo and --docker.image.tag. For example, to select ubuntu:latest
 from a .tar file that contains ubuntu:latest and other images:</p>
 <pre><code>./blackduck-docker-inspector.sh --docker.tar=multipleimages.tar --docker.image.repo=ubuntu --docker.image.tag=latest

@@ -393,30 +393,30 @@
                   <h1>Architecture</h1>
                 
                 <h3 id="architecture-overview">Architecture overview</h3>
-<p>Docker Inspector uses up to three container-based image inspector services
+<p>Black Duck Docker Inspector uses up to three container-based image inspector services
 (one for each of the supported Linux package manager database formats).</p>
 <p>The three image inspector services provide coverage of the three package manager database formats: dpkg, rpm, and apk.
-By default, Docker Inspector submits its request (to inspect the target image) to the dpkg (ubuntu) image inspector service. Any service will
+By default, Black Duck Docker Inspector submits its request (to inspect the target image) to the dpkg (ubuntu) image inspector service. Any service will
 redirect to the appropriate image inspector service if it cannot handle the request itself. For example,
 if the target image is a Red Hat image, the ubuntu inspector service (which cannot inspect a Red Hat image)
 will redirect to the centos inspector
 service (which can). If you know
 that most of your images have either rpm or apk databases, you can improve performance by configuring
-Docker Inspector to send requests to the centos (rpm) or alpine (apk) image inspector service using
+Black Duck Docker Inspector to send requests to the centos (rpm) or alpine (apk) image inspector service using
 the imageinspector.service.distro.default property.</p>
-<p>In host mode (the default), Docker Inspector automatically uses the Docker engine to pull as
+<p>In host mode (the default), Black Duck Docker Inspector automatically uses the Docker engine to pull as
 needed from Docker Hub
 three images: blackducksoftware/blackduck-imageinspector-alpine, 
 blackducksoftware/blackduck-imageinspector-centos, and blackducksoftware/blackduck-imageinspector-ubuntu.
-Docker Inspector starts those services as needed,
-and stops and removes the containers when Docker Inspector exits. It uses a shared volume to share files, such as the target Docker image,
-between the Docker Inspector utility and the three service containers.</p>
-<p>In container mode, you will start the container running Docker Inspector and the three image inspector container-based services such that
+Black Duck Docker Inspector starts those services as needed,
+and stops and removes the containers when Black Duck Docker Inspector exits. It uses a shared volume to share files, such as the target Docker image,
+between the Black Duck Docker Inspector utility and the three service containers.</p>
+<p>In container mode, you will start the container running Black Duck Docker Inspector and the three image inspector container-based services such that
 all four containers share a mounted volume and can communicate with each other via HTTP GET operations using base URLs that you will provide.
-For information on how to do this, refer to the <em>deployment</em> help topic.</p>
+For information on how to do this, refer to <a href="../deployment/">Deployment</a>.</p>
 <h3 id="execution-phases">Execution phases</h3>
 <h4 id="host-mode">Host mode</h4>
-<p>In host mode, Docker Inspector performs the following steps on the host:</p>
+<p>In host mode, Black Duck Docker Inspector performs the following steps on the host:</p>
 <ol>
 <li>Pulls and saves the target image to a .tar file (if you passed the image by repo:tag).</li>
 <li>Checks to see if the default image inspector service is running. If not, it pulls the image inspector image and
@@ -441,11 +441,11 @@ installed packages.</li>
 <p>In container mode, you start four containers in such a way that they share a mounted volume and can reach each other via HTTP GET operations using
 base URLs that you provide:</p>
 <ul>
-<li>One container for Docker Inspector</li>
+<li>One container for Black Duck Docker Inspector</li>
 <li>One container for each of the three image inspector services (alpine, centos, and ubuntu)</li>
 </ul>
 <p>In container mode, you must provide the image in a docker saved .tar file.</p>
-<p>Docker Inspector:</p>
+<p>Black Duck Docker Inspector:</p>
 <ol>
 <li>Requests the Black Duck input/output (BDIO) file and container file system using HTTP from the default image inspector service using a 
 base URL that you have provided.</li>
@@ -457,7 +457,7 @@ base URL that you have provided.</li>
 <li>Runs the image inspector's Linux package manager on the target image package manager database.</li>
 <li>Produces and returns a BDIO (.jsonld) file consisting of a list of target image packages and, optionally, the container filesystem.</li>
 </ol>
-<p>The following steps are performed back in the Docker Inspector container when the request to the image inspector service returns:</p>
+<p>The following steps are performed back in the Black Duck Docker Inspector container when the request to the image inspector service returns:</p>
 <ol>
 <li>Uploads the BDIO file to Black Duck (this can be disabled).</li>
 <li>Copies the output files to the output directory.</li>

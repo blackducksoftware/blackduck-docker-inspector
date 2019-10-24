@@ -307,8 +307,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#problem-docker-inspector-cannot-perform-any-docker-operations-because-the-remote-access-port-is-not-enabled-on-the-docker-engine" class="md-nav__link">
-    Problem: Docker Inspector cannot perform any Docker operations because the remote access port is not enabled on the Docker engine
+  <a href="#problem-black-duck-docker-inspector-cannot-perform-any-docker-operations-because-the-remote-access-port-is-not-enabled-on-the-docker-engine" class="md-nav__link">
+    Problem: Black Duck Docker Inspector cannot perform any Docker operations because the remote access port is not enabled on the Docker engine
   </a>
   
 </li>
@@ -397,8 +397,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#problem-docker-inspector-cannot-perform-any-docker-operations-because-the-remote-access-port-is-not-enabled-on-the-docker-engine" class="md-nav__link">
-    Problem: Docker Inspector cannot perform any Docker operations because the remote access port is not enabled on the Docker engine
+  <a href="#problem-black-duck-docker-inspector-cannot-perform-any-docker-operations-because-the-remote-access-port-is-not-enabled-on-the-docker-engine" class="md-nav__link">
+    Problem: Black Duck Docker Inspector cannot perform any Docker operations because the remote access port is not enabled on the Docker engine
   </a>
   
 </li>
@@ -423,7 +423,7 @@
                   <h1>Troubleshooting</h1>
                 
                 <h3 id="troubleshooting-overview">Troubleshooting overview</h3>
-<p>To troubleshoot issues with Docker Inspector, run with DEBUG logging:</p>
+<p>To troubleshoot issues with Black Duck Docker Inspector, run with DEBUG logging:</p>
 <pre><code>--logging.level.com.synopsys=DEBUG
 </code></pre>
 <p>Here are suggestions related to specific problems:</p>
@@ -468,30 +468,30 @@ Refer to the
 for more details.</p>
 <h3 id="problem-the-image-inspector-service-cannot-write-to-the-mounted-volume-selinux-is-enabled">Problem: The image inspector service cannot write to the mounted volume; SELinux is enabled</h3>
 <p>When this happens, the following error may appear in the container log: </p>
-<pre><code>Exception thrown while getting image packages: Error inspecting image: /shared/run_.../output/..._containerfilesystem.tar.gz (Permission denied)
+<pre><code>Exception thrown while getting image packages: Error inspecting image: /opt/blackduck/shared/run_.../output/..._containerfilesystem.tar.gz (Permission denied)
 ...
 Caused by: java.io.FileNotFoundException: /opt/blackduck/hub-imageinspector-ws/shared/run_.../output/..._containerfilesystem.tar.gz (Permission denied)
 </code></pre>
 <p>Possible cause: SELinux policy configuration.</p>
-<p>Solution/workaround: Add the svirt_sandbox_file_t label to Docker Inspector's shared directory.
-This enables the Docker Inspector services running in Docker containers to write to it:</p>
+<p>Solution/workaround: Add the svirt_sandbox_file_t label to Black Duck Docker Inspector's shared directory.
+This enables the Black Duck Docker Inspector services running in Docker containers to write to it:</p>
 <pre><code>sudo chcon -Rt svirt_sandbox_file_t /tmp/blackduck-docker-inspector-files/shared/
 </code></pre>
 <h3 id="problem-the-image-inspector-service-cannot-read-from-the-mounted-volume">Problem: The image inspector service cannot read from the mounted volume</h3>
 <p>When this happens, the following error may appear in the container log: </p>
-<pre><code>Error inspecting image: /shared/run_.../{image}.tar (Permission denied)
+<pre><code>Error inspecting image: /opt/blackduck/shared/run_.../{image}.tar (Permission denied)
 </code></pre>
-<p>Possible cause: The Linux umask value on the machine running Docker Inspector is too restrictive.</p>
-<p>Solution/workaround: Set umask to 022 when running Docker Inspector. The cause could be a umask value
+<p>Possible cause: The Linux umask value on the machine running Black Duck Docker Inspector is too restrictive.</p>
+<p>Solution/workaround: Set umask to 022 when running Black Duck Docker Inspector. The cause could be a umask value
 that prevents read access to the file, or read or execute access to the directory.
-Docker Inspector requires an umask value that does not remove read permissions from files,
+Black Duck Docker Inspector requires an umask value that does not remove read permissions from files,
 and does not remove read or execute permissions from directories. For example, a umask of 022 works.</p>
-<h3 id="problem-docker-inspector-cannot-perform-any-docker-operations-because-the-remote-access-port-is-not-enabled-on-the-docker-engine">Problem: Docker Inspector cannot perform any Docker operations because the remote access port is not enabled on the Docker engine</h3>
+<h3 id="problem-black-duck-docker-inspector-cannot-perform-any-docker-operations-because-the-remote-access-port-is-not-enabled-on-the-docker-engine">Problem: Black Duck Docker Inspector cannot perform any Docker operations because the remote access port is not enabled on the Docker engine</h3>
 <p>When this happens, the following error may appear in the log:</p>
 <pre><code>Error inspecting image: java.io.IOException: Couldn't load native library
 Stack trace: javax.ws.rs.ProcessingException: java.io.IOException: Couldn't load native library
 </code></pre>
-<p>In older versions of Docker Inspector (prior to 8.2.0), the logged error was:</p>
+<p>In older versions of Black Duck Docker Inspector (prior to 8.2.0), the logged error was:</p>
 <pre><code>Error inspecting image: Could not initialize class org.newsclub.net.unix.NativeUnixSocket
 Stack trace: java.lang.NoClassDefFoundError: Could not initialize class org.newsclub.net.unix.NativeUnixSocket
 </code></pre>

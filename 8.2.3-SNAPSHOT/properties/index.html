@@ -281,55 +281,290 @@
                 <p>You can configure Docker Inspector by setting any of the following properties. Properties are typically set via the command line by adding a command line argument of the form:</p>
 <pre><code>--{property name}={property value}
 </code></pre>
-<p>See the Advanced section for other ways to set properties.</p>
+<p>See the <a href="../advanced/">Advanced</a> for other ways to set properties.</p>
 <p>Available properties:</p>
-<ul>
-<li>blackduck.always.trust.cert [Boolean]: Black Duck Always Trust Cert?; default: false</li>
-<li>blackduck.api.token [String]: Black Duck token</li>
-<li>blackduck.codelocation.name [String]: Black Duck CodeLocation name</li>
-<li>blackduck.codelocation.prefix [String]: Black Duck CodeLocation prefix</li>
-<li>blackduck.password [String]: Black Duck Password</li>
-<li>blackduck.project.name [String]: Black Duck Project Name</li>
-<li>blackduck.project.version [String]: Black Duck Project Version</li>
-<li>blackduck.proxy.host [String]: Black Duck Proxy Host</li>
-<li>blackduck.proxy.password [String]: Black Duck Proxy Password</li>
-<li>blackduck.proxy.port [String]: Black Duck Proxy Port</li>
-<li>blackduck.proxy.username [String]: Black Duck Proxy Username</li>
-<li>blackduck.timeout [Integer]: Black Duck Timeout in seconds; default: 120</li>
-<li>blackduck.url [String]: Black Duck URL</li>
-<li>blackduck.username [String]: Black Duck Username</li>
-<li>cleanup.inspector.container [Boolean]: Stop inspector container after using it?; default: true</li>
-<li>cleanup.inspector.image [Boolean]: Remove inspector image after using it?; default: false</li>
-<li>cleanup.target.image [Boolean]: Remove target image after saving it?; default: false</li>
-<li>cleanup.working.dir [Boolean]: Cleanup Working Dir?; default: true</li>
-<li>command.timeout [Long]: Command Timeout (Milliseconds); default: 120000</li>
-<li>docker.image [String]: Docker Image name:tag</li>
-<li>docker.image.id [String]: docker.image.id</li>
-<li>docker.image.repo [String]: Docker Image Repo; Use with docker.image.tag to select one image from a tarfile</li>
-<li>docker.image.tag [String]: Docker Image Tag; Use with docker.image.repo to select one image from a tarfile</li>
-<li>docker.platform.top.layer.id [String]: To ignore components from platform layers: specify the ID (from docker inspect <image:tag>: last of RootFS.Layers) of the top layer of the platform image</li>
-<li>docker.tar [String]: Docker tarfile path</li>
-<li>help.output.path [String]: The path to a file or directory to which help output will be written in markdown format. If not set, help will be written to stdout. If set, the directory must exist; the file will be created if it does not exist. If the path to a directory is provided, Docker Inspector will generate the filename automatically</li>
-<li>imageinspector.service.distro.default [String]: Default image inspector Linux distro (alpine, centos, or ubuntu); default: ubuntu</li>
-<li>imageinspector.service.port.alpine [String]: alpine image inspector host port; default: 9000</li>
-<li>imageinspector.service.port.centos [String]: centos image inspector host port; default: 9001</li>
-<li>imageinspector.service.port.ubuntu [String]: ubuntu image inspector host port; default: 9002</li>
-<li>imageinspector.service.start [Boolean]: Start ImageInspector services (containers) as needed?; default: true</li>
-<li>imageinspector.service.url [String]: The URL of the (already running) imageinspector service to use</li>
-<li>jar.path [String]: Black Duck Docker Inspector .jar file path</li>
-<li>linux.distro [String]: Linux Distribution Name</li>
-<li>logging.level.com.synopsys [String]: Logging Level (WARN, INFO, DEBUG, TRACE); default: INFO</li>
-<li>offline.mode [Boolean]: Make no attempts to access network-based resources (the Black Duck server, docker repository); default: false</li>
-<li>output.containerfilesystem.excluded.paths [String]: Comma-separated list of directories/files/links (specified as absolute paths) to exclude from the container filesystem</li>
-<li>output.include.containerfilesystem [Boolean]: Include container filesystem (a large file) in output?; default: false</li>
-<li>output.include.squashedimage [Boolean]: Include container filesystem (a large file) in output?; default: false</li>
-<li>output.path [String]: Path to directory for output files</li>
-<li>service.timeout [Long]: HTTP Service Request Timeout (Milliseconds); default: 600000</li>
-<li>shared.dir.path.local [String]: The host's path to the dir shared with the imageinspector containers. Only needed if using existing imageinspector containers; default: /tmp/blackduck-docker-inspector-files/shared</li>
-<li>system.properties.path [String]: Path to a properties file containing additional system properties (an alternative to java -D)</li>
-<li>upload.bdio [Boolean]: Upload BDIO?; default: true</li>
-<li>working.dir.path [String]: Working Directory Path; default: /tmp/blackduck-docker-inspector-files</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>Property name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>blackduck.always.trust.cert</td>
+<td>Boolean</td>
+<td>Black Duck Always Trust Cert?</td>
+<td>false</td>
+</tr>
+<tr>
+<td>blackduck.api.token</td>
+<td>String</td>
+<td>Black Duck token</td>
+<td></td>
+</tr>
+<tr>
+<td>blackduck.codelocation.name</td>
+<td>String</td>
+<td>Black Duck CodeLocation name</td>
+<td></td>
+</tr>
+<tr>
+<td>blackduck.codelocation.prefix</td>
+<td>String</td>
+<td>Black Duck CodeLocation prefix</td>
+<td></td>
+</tr>
+<tr>
+<td>blackduck.password</td>
+<td>String</td>
+<td>Black Duck Password</td>
+<td></td>
+</tr>
+<tr>
+<td>blackduck.project.name</td>
+<td>String</td>
+<td>Black Duck Project Name</td>
+<td></td>
+</tr>
+<tr>
+<td>blackduck.project.version</td>
+<td>String</td>
+<td>Black Duck Project Version</td>
+<td></td>
+</tr>
+<tr>
+<td>blackduck.proxy.host</td>
+<td>String</td>
+<td>Black Duck Proxy Host</td>
+<td></td>
+</tr>
+<tr>
+<td>blackduck.proxy.password</td>
+<td>String</td>
+<td>Black Duck Proxy Password</td>
+<td></td>
+</tr>
+<tr>
+<td>blackduck.proxy.port</td>
+<td>String</td>
+<td>Black Duck Proxy Port</td>
+<td></td>
+</tr>
+<tr>
+<td>blackduck.proxy.username</td>
+<td>String</td>
+<td>Black Duck Proxy Username</td>
+<td></td>
+</tr>
+<tr>
+<td>blackduck.timeout</td>
+<td>Integer</td>
+<td>Black Duck Timeout in seconds</td>
+<td>120</td>
+</tr>
+<tr>
+<td>blackduck.url</td>
+<td>String</td>
+<td>Black Duck URL</td>
+<td></td>
+</tr>
+<tr>
+<td>blackduck.username</td>
+<td>String</td>
+<td>Black Duck Username</td>
+<td></td>
+</tr>
+<tr>
+<td>cleanup.inspector.container</td>
+<td>Boolean</td>
+<td>Stop inspector container after using it?</td>
+<td>true</td>
+</tr>
+<tr>
+<td>cleanup.inspector.image</td>
+<td>Boolean</td>
+<td>Remove inspector image after using it?</td>
+<td>false</td>
+</tr>
+<tr>
+<td>cleanup.target.image</td>
+<td>Boolean</td>
+<td>Remove target image after saving it?</td>
+<td>false</td>
+</tr>
+<tr>
+<td>cleanup.working.dir</td>
+<td>Boolean</td>
+<td>Cleanup Working Dir?</td>
+<td>true</td>
+</tr>
+<tr>
+<td>command.timeout</td>
+<td>Long</td>
+<td>Command Timeout (Milliseconds)</td>
+<td>120000</td>
+</tr>
+<tr>
+<td>docker.image</td>
+<td>String</td>
+<td>Docker Image name:tag</td>
+<td></td>
+</tr>
+<tr>
+<td>docker.image.id</td>
+<td>String</td>
+<td>docker.image.id</td>
+<td></td>
+</tr>
+<tr>
+<td>docker.image.repo</td>
+<td>String</td>
+<td>Docker Image Repo; Use with docker.image.tag to select one image from a tarfile</td>
+<td></td>
+</tr>
+<tr>
+<td>docker.image.tag</td>
+<td>String</td>
+<td>Docker Image Tag; Use with docker.image.repo to select one image from a tarfile</td>
+<td></td>
+</tr>
+<tr>
+<td>docker.platform.top.layer.id</td>
+<td>String</td>
+<td>To ignore components from platform layers: specify the ID (from docker inspect <image:tag>: last of RootFS.Layers) of the top layer of the platform image</td>
+<td></td>
+</tr>
+<tr>
+<td>docker.tar</td>
+<td>String</td>
+<td>Docker tarfile path</td>
+<td></td>
+</tr>
+<tr>
+<td>help.output.path</td>
+<td>String</td>
+<td>The path to a file or directory to which help output will be written in markdown format. If not set, help will be written to stdout. If set, the directory must exist; the file will be created if it does not exist. If the path to a directory is provided, Docker Inspector will generate the filename automatically</td>
+<td></td>
+</tr>
+<tr>
+<td>imageinspector.service.distro.default</td>
+<td>String</td>
+<td>Default image inspector Linux distro (alpine, centos, or ubuntu)</td>
+<td>ubuntu</td>
+</tr>
+<tr>
+<td>imageinspector.service.port.alpine</td>
+<td>String</td>
+<td>alpine image inspector host port</td>
+<td>9000</td>
+</tr>
+<tr>
+<td>imageinspector.service.port.centos</td>
+<td>String</td>
+<td>centos image inspector host port</td>
+<td>9001</td>
+</tr>
+<tr>
+<td>imageinspector.service.port.ubuntu</td>
+<td>String</td>
+<td>ubuntu image inspector host port</td>
+<td>9002</td>
+</tr>
+<tr>
+<td>imageinspector.service.start</td>
+<td>Boolean</td>
+<td>Start ImageInspector services (containers) as needed?</td>
+<td>true</td>
+</tr>
+<tr>
+<td>imageinspector.service.url</td>
+<td>String</td>
+<td>The URL of the (already running) imageinspector service to use</td>
+<td></td>
+</tr>
+<tr>
+<td>jar.path</td>
+<td>String</td>
+<td>Black Duck Docker Inspector .jar file path</td>
+<td></td>
+</tr>
+<tr>
+<td>linux.distro</td>
+<td>String</td>
+<td>Linux Distribution Name</td>
+<td></td>
+</tr>
+<tr>
+<td>logging.level.com.synopsys</td>
+<td>String</td>
+<td>Logging Level (WARN, INFO, DEBUG, TRACE)</td>
+<td>INFO</td>
+</tr>
+<tr>
+<td>offline.mode</td>
+<td>Boolean</td>
+<td>Make no attempts to access network-based resources (the Black Duck server, docker repository)</td>
+<td>false</td>
+</tr>
+<tr>
+<td>output.containerfilesystem.excluded.paths</td>
+<td>String</td>
+<td>Comma-separated list of directories/files/links (specified as absolute paths) to exclude from the container filesystem</td>
+<td></td>
+</tr>
+<tr>
+<td>output.include.containerfilesystem</td>
+<td>Boolean</td>
+<td>Include container filesystem (a large file) in output?</td>
+<td>false</td>
+</tr>
+<tr>
+<td>output.include.squashedimage</td>
+<td>Boolean</td>
+<td>Include container filesystem (a large file) in output?</td>
+<td>false</td>
+</tr>
+<tr>
+<td>output.path</td>
+<td>String</td>
+<td>Path to directory for output files</td>
+<td></td>
+</tr>
+<tr>
+<td>service.timeout</td>
+<td>Long</td>
+<td>HTTP Service Request Timeout (Milliseconds)</td>
+<td>600000</td>
+</tr>
+<tr>
+<td>shared.dir.path.local</td>
+<td>String</td>
+<td>The host's path to the dir shared with the imageinspector containers. Only needed if using existing imageinspector containers</td>
+<td>/tmp/blackduck-docker-inspector-files/shared</td>
+</tr>
+<tr>
+<td>system.properties.path</td>
+<td>String</td>
+<td>Path to a properties file containing additional system properties (an alternative to java -D)</td>
+<td></td>
+</tr>
+<tr>
+<td>upload.bdio</td>
+<td>Boolean</td>
+<td>Upload BDIO?</td>
+<td>true</td>
+</tr>
+<tr>
+<td>working.dir.path</td>
+<td>String</td>
+<td>Working Directory Path</td>
+<td>/tmp/blackduck-docker-inspector-files</td>
+</tr>
+</tbody>
+</table>
                 
                   
                 

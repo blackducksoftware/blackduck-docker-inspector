@@ -330,8 +330,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuring-docker-inspector-for-your-docker-registry" class="md-nav__link">
-    Configuring Docker Inspector for your Docker Registry
+  <a href="#configuring-black-duck-docker-inspector-for-your-docker-registry" class="md-nav__link">
+    Configuring Black Duck Docker Inspector for your Docker Registry
   </a>
   
 </li>
@@ -467,8 +467,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuring-docker-inspector-for-your-docker-registry" class="md-nav__link">
-    Configuring Docker Inspector for your Docker Registry
+  <a href="#configuring-black-duck-docker-inspector-for-your-docker-registry" class="md-nav__link">
+    Configuring Black Duck Docker Inspector for your Docker Registry
   </a>
   
 </li>
@@ -501,34 +501,34 @@
 <p>Each mode is discussed in detail below.</p>
 <h3 id="important-notes-regarding-deployment-sample-code">Important notes regarding deployment sample code</h3>
 <p>The deployment samples provided are intended to illustrate possible approaches to the challenges
-involved in deploying Docker Inspector. They are not intended to be used as-is in production.
+involved in deploying Black Duck Docker Inspector. They are not intended to be used as-is in production.
 You should understand the code before you use it. They do not represent the only way to deploy in each environment.</p>
-<p>Your deployment approach will be the same whether you are invoking Docker Inspector directly, or invoking it via Detect.
+<p>Your deployment approach will be the same whether you are invoking Black Duck Docker Inspector directly, or invoking it via Detect.
 Most of the sample deployments use Detect simply because that is the most common use case.</p>
 <h3 id="using-host-mode-on-linux-machine-or-linux-vm-with-docker">Using host mode on Linux machine (or Linux VM) with Docker</h3>
-<p>In this scenario, Docker Inspector is a command line utility that automatically pulls/runs and uses container-based services 
+<p>In this scenario, Black Duck Docker Inspector is a command line utility that automatically pulls/runs and uses container-based services 
 (and cleans them up when it's done). The Docker command, if installed on the machine, can be very useful for troubleshooting, but is not actually
-required or used by Docker Inspector.</p>
-<p>In this mode Docker Inspector does require access to a Docker Engine (very similar to the way the Docker client requires
+required or used by Black Duck Docker Inspector.</p>
+<p>In this mode Black Duck Docker Inspector does require access to a Docker Engine (very similar to the way the Docker client requires
 access to a Docker Engine) so it can pull and run Docker images (it uses the https://github.com/docker-java/docker-java
 library to perform Docker operations via the Docker Engine).</p>
-<p>In this mode, Docker Inspector automatically pulls, runs, stops, and removes the container-based image inspector services
+<p>In this mode, Black Duck Docker Inspector automatically pulls, runs, stops, and removes the container-based image inspector services
 on which it depends. It accesses the services they provide via HTTP GET operations.</p>
 <p>This is the default mode, and the simplest to use.</p>
 <h3 id="using-container-mode-in-a-container-orchestration-platform-such-as-kubernetes-openshift-etc">Using container mode in a container orchestration platform such as Kubernetes, OpenShift, etc.</h3>
-<p>In this scenario, Docker Inspector is a toolkit consisting of a command line utility (that you will run in one container), plus
+<p>In this scenario, Black Duck Docker Inspector is a toolkit consisting of a command line utility (that you will run in one container), plus
 three container-based services (which you must start). These four containers must:
 (a) share a mounted volume (either persistent or temporary) that they will use to pass large files between containers, and
 (b) be able to reach each other via HTTP GET operations using base URLs that you will provide.</p>
 <h3 id="image-inspector-services">Image Inspector Services</h3>
-<p>Docker Inspector consists of a command line utility (provided in a Java .jar, but sometimes invoked via a bash script)
+<p>Black Duck Docker Inspector consists of a command line utility (provided in a Java .jar, but sometimes invoked via a bash script)
 and three image inspector services.</p>
 <p>The required Docker operations (if any) are performed by the command line utility, while the image inspector services
 perform the work of unpacking the target Docker image, extracting the Linux package manager database,
 and running the Linux package manager against that database in order to extract installed packages
 and translate them to components (actually externalIds) for Black Duck. If the image inspector service
 finds in the target image a package manager database that is incompatible with its own package manager utility
-(this happens when, for example, you run Docker Inspector on an Alpine image, but the request goes to the
+(this happens when, for example, you run Black Duck Docker Inspector on an Alpine image, but the request goes to the
 Ubuntu image inspector service), the image inspector service will redirect the request to the appropriate
 image inspector service. You can change the default image inspector service to reduce the likelihood
 of redirects (resulting in shorter execution times). For example, if most of your target images are Alpine
@@ -562,28 +562,28 @@ The containers communicate via localhost URLs.</p>
 <p>Approach: Toolkit</p>
 <p>Deployment notes: The containers communicate via localhost URLs.</p>
 <p>Download: https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/docker/runDetectInContainer/setup.sh         </p>
-<h3 id="configuring-docker-inspector-for-your-docker-registry">Configuring Docker Inspector for your Docker Registry</h3>
-<p>If you invoke Docker Inspector with an image reference (vs. an image that has been saved to a .tar file),
+<h3 id="configuring-black-duck-docker-inspector-for-your-docker-registry">Configuring Black Duck Docker Inspector for your Docker Registry</h3>
+<p>If you invoke Black Duck Docker Inspector with an image reference (vs. an image that has been saved to a .tar file),
 it uses the docker-java library (https://github.com/docker-java/docker-java) to access the Docker registry
 to pull the image. </p>
-<p>If <em>docker pull {targetimage}</em> works from the command line, then docker inspector should also be able
+<p>If <em>docker pull {targetimage}</em> works from the command line, then Black Duck Docker Inspector should also be able
 to pull that image, because docker-java can be configured the same way as the docker command line utility. </p>
 <p>But there are also other ways to configure docker-java. Details on how to configure docker-java
-(and therefore Docker Inspector) for your Docker registry can
+(and therefore Black Duck Docker Inspector) for your Docker registry can
 be found at: https://github.com/docker-java/docker-java#Configuration.</p>
-<p>Docker Inspector does not override any of the configuration settings in the code,
+<p>Black Duck Docker Inspector does not override any of the configuration settings in the code,
 so any of the other methods (properties, system properties, system environment) should work.</p>
-<p>If you choose to use environment variables, and you are calling Docker Inspector from Detect,
+<p>If you choose to use environment variables, and you are calling Black Duck Docker Inspector from Detect,
 you will need to prefix the environment variable names with <em>DETECT_DOCKER_PASSTHROUGH_</em> to
-instruct detect to pass them on to Docker inspector.
+instruct detect to pass them on to Black Duck Docker Inspector.
 So in that scenario, instead of <em>export SOMENAME=value</em>, use <em>export DETECT_DOCKER_PASSTHROUGH_SOMENAME=value</em>.</p>
 <p>If you choose to use system properties (normally set using java -D),
-and you are calling Docker Inspector from Detect, you will need to
+and you are calling Black Duck Docker Inspector from Detect, you will need to
 put the properties in a file (e.g. mydockerproperties.properties) and use </p>
 <pre><code>--detect.docker.passthrough.system.properties.path=mydockerproperties.properties
 </code></pre>
 
-<p>to point Docker Inspector to those property settings.</p>
+<p>to point Black Duck Docker Inspector to those property settings.</p>
                 
                   
                 
