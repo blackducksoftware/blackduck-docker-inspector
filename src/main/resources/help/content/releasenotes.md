@@ -1,3 +1,7 @@
+#### Version 8.2.3
+##### Resolved issues
+* Eliminated the Spring banner from the log to facilitate piping help output through a Markdown formatter
+
 #### Version 8.2.2
 ##### Resolved issues
 * Increased the default value of service.timeout from 4 minutes to 10 minutes.
