@@ -36,7 +36,7 @@
     
     
       
-        <title>Overview - Black Duck Docker Inspector</title>
+        <title>Architecture - Black Duck Docker Inspector</title>
       
     
     
@@ -75,7 +75,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#modes-of-operation" tabindex="1" class="md-skip">
+      <a href="#architecture-overview" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -101,7 +101,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                Overview
+                Architecture
               
             </span>
           
@@ -168,6 +168,18 @@
       
       
 
+
+  <li class="md-nav__item">
+    <a href="../overview/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+    
+      
+      
+      
+
   
 
 
@@ -177,11 +189,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Overview
+        Architecture
       </label>
     
-    <a href="./" title="Overview" class="md-nav__link md-nav__link--active">
-      Overview
+    <a href="./" title="Architecture" class="md-nav__link md-nav__link--active">
+      Architecture
     </a>
     
       
@@ -193,8 +205,15 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#modes-of-operation" class="md-nav__link">
-    Modes of operation
+  <a href="#architecture-overview" class="md-nav__link">
+    Architecture overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#execution-phases" class="md-nav__link">
+    Execution phases
   </a>
   
     <nav class="md-nav">
@@ -219,34 +238,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
-    Requirements
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#getting-started" class="md-nav__link">
-    Getting started
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#passing-arguments-to-black-duck-docker-inspector" class="md-nav__link">
-    Passing arguments to Black Duck Docker Inspector
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#help" class="md-nav__link">
-    Help
-  </a>
-  
-</li>
-      
       
       
       
@@ -255,18 +246,6 @@
   
 </nav>
     
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../architecture/" title="Architecture" class="md-nav__link">
-      Architecture
-    </a>
   </li>
 
     
@@ -361,8 +340,15 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#modes-of-operation" class="md-nav__link">
-    Modes of operation
+  <a href="#architecture-overview" class="md-nav__link">
+    Architecture overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#execution-phases" class="md-nav__link">
+    Execution phases
   </a>
   
     <nav class="md-nav">
@@ -387,34 +373,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
-    Requirements
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#getting-started" class="md-nav__link">
-    Getting started
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#passing-arguments-to-black-duck-docker-inspector" class="md-nav__link">
-    Passing arguments to Black Duck Docker Inspector
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#help" class="md-nav__link">
-    Help
-  </a>
-  
-</li>
-      
       
       
       
@@ -432,112 +390,78 @@
               
                 
                 
-                  <h1>Overview</h1>
+                  <h1>Architecture</h1>
                 
-                <p><em>Help version: 8.2.3</em></p>
-<p>Black Duck Docker Inspector inspects Docker images to discover packages (components).
-It utilizes the appropriate Linux package manager to provide a list of
-the installed (by the package manager) packages, and creates a Black Duck project with a Bill of Materials (BOM) consisting of those packages as components.
-Because it relies on the Linux package manager as its source, the discovered packages are limited to those installed and managed using the Linux package manager.</p>
-<p>Black Duck Docker Inspector can inspect Linux Docker images that use dpkg, rpm, or apk package manager formats.</p>
-<p>After running the Black Duck Docker Inspector on an image, navigate to Black Duck to view the Bill of Materials (BOM) created by 
-Black Duck Docker Inspector.</p>
-<h3 id="modes-of-operation">Modes of operation</h3>
-<p>Black Duck Docker Inspector has two modes:</p>
-<ul>
-<li>Host mode, for running on a Linux machine (or VM) where Black Duck Docker Inspector can perform Docker operations via a Docker engine</li>
-<li>Container mode, for running in a container (started by Docker, Kubernetes, OpenShift, etc.)</li>
-</ul>
+                <h3 id="architecture-overview">Architecture overview</h3>
+<p>Black Duck Docker Inspector uses up to three container-based image inspector services
+(one for each of the supported Linux package manager database formats).</p>
+<p>The three image inspector services provide coverage of the three package manager database formats: dpkg, rpm, and apk.
+By default, Black Duck Docker Inspector submits its request (to inspect the target image) to the dpkg (ubuntu) image inspector service. Any service will
+redirect to the appropriate image inspector service if it cannot handle the request itself. For example,
+if the target image is a Red Hat image, the ubuntu inspector service (which cannot inspect a Red Hat image)
+will redirect to the centos inspector
+service (which can). If you know
+that most of your images have either rpm or apk databases, you can improve performance by configuring
+Black Duck Docker Inspector to send requests to the centos (rpm) or alpine (apk) image inspector service using
+the imageinspector.service.distro.default property.</p>
+<p>In host mode (the default), Black Duck Docker Inspector automatically uses the Docker engine to pull as
+needed from Docker Hub
+three images: blackducksoftware/blackduck-imageinspector-alpine, 
+blackducksoftware/blackduck-imageinspector-centos, and blackducksoftware/blackduck-imageinspector-ubuntu.
+Black Duck Docker Inspector starts those services as needed,
+and stops and removes the containers when Black Duck Docker Inspector exits. It uses a shared volume to share files, such as the target Docker image,
+between the Black Duck Docker Inspector utility and the three service containers.</p>
+<p>In container mode, you will start the container running Black Duck Docker Inspector and the three image inspector container-based services such that
+all four containers share a mounted volume and can communicate with each other via HTTP GET operations using base URLs that you will provide.
+For information on how to do this, refer to <a href="../deployment/">Deployment</a>.</p>
+<h3 id="execution-phases">Execution phases</h3>
 <h4 id="host-mode">Host mode</h4>
-<p>Host mode (the default mode) is for Linux machines (and VMs) where Black Duck Docker Inspector can perform Docker operations via a Docker engine.</p>
-<p>In host mode, Black Duck Docker Inspector is a utility that automates the process of using Black Duck to discover security, license, and operational risks
-associated with Linux-based Docker images. It discovers components using the target Docker image's package manager; therefore, the results
-are limited to those components (packages) of which the package manager is aware. Black Duck Docker Inspector does this without running
-the image, so it is safe to run on untrusted images.</p>
-<p>Black Duck Docker Inspector can pull the target image; in other words, the Docker image you want to inspect, from a Docker registry such
-as Docker Hub. Alternatively, you can save an image to a .tar file by using the Docker Save command. Then, run Black Duck Docker Inspector
-on the .tar file. Black Duck Docker Inspector supports Docker Image Specification v1.2.0 format .tar files.</p>
+<p>In host mode, Black Duck Docker Inspector performs the following steps on the host:</p>
+<ol>
+<li>Pulls and saves the target image to a .tar file (if you passed the image by repo:tag).</li>
+<li>Checks to see if the default image inspector service is running. If not, it pulls the image inspector image and
+starts a container, mounting a shared volume.</li>
+<li>Requests the Black Duck input/output (BDIO) file and container file system by sending an HTTP GET request to the image inspector service.</li>
+</ol>
+<p>The following steps are performed inside the image inspector container:</p>
+<ol>
+<li>Builds the container file system that a container would have if you ran the target image. (It does not run the target image.)</li>
+<li>Determines the target image package manager database format, and redirects to a different image inspector service if necessary.</li>
+<li>Runs the image inspector's Linux package manager on the target image package manager database to get the list of
+installed packages.</li>
+<li>Produces and returns a BDIO (.jsonld) file consisting of a list of target image packages and, optionally, the container filesystem.</li>
+</ol>
+<p>The following steps are performed back on the host when the request to the image inspector service returns:</p>
+<ol>
+<li>Uploads the BDIO file to Black Duck (this can be disabled).</li>
+<li>Copies the output files to the output directory.</li>
+<li>Stops/removes the image inspector container (this can be disabled).</li>
+</ol>
 <h4 id="container-mode">Container mode</h4>
-<p>Container mode is for container orchestration environments (Kubernetes, OpenShift, etc.) where Black Duck Docker Inspector will run
-inside a container, where it cannot perform Docker operations. For information on running Black Duck Docker Inspector in container mode,
-refer to <a href="../deployment/">Deploying</a>.</p>
-<h3 id="requirements">Requirements</h3>
-<p>Requirements for Black Duck Docker Inspector are:</p>
+<p>In container mode, you start four containers in such a way that they share a mounted volume and can reach each other via HTTP GET operations using
+base URLs that you provide:</p>
 <ul>
-<li>The current version of Black Duck. Visit <a href="https://github.com/blackducksoftware/hub/releases">this page</a> to determine the current version. </li>
-<li>Linux.</li>
-<li>Access to the internet. For information on running without access to the internet, refer to <a href="../advanced/#air-gap-mode">Air Gap mode</a>.</li>
-<li>Java (JRE) version 8 or 11.</li>
-<li>Three available ports for the image inspector services.  By default, these ports are 9000, 9001, and 9002.</li>
-<li>When invoking Black Duck Docker Inspector via blackduck-docker-inspector.sh:<ul>
-<li>curl</li>
-<li>bash</li>
+<li>One container for Black Duck Docker Inspector</li>
+<li>One container for each of the three image inspector services (alpine, centos, and ubuntu)</li>
 </ul>
-</li>
-<li>In host mode: Access to a Docker Engine (version 17.09 or higher).</li>
-<li>In container mode: You must start the Black Duck Docker Inspector container that meets the requirements above, and three container-based
-"image inspector" services. All four of these containers must share a mounted volume and be able to reach each other via HTTP GET operations using base URLs
-that you provide. For more information, refer to <a href="../deployment/">Deploying</a>.</li>
-</ul>
-<h3 id="getting-started">Getting started</h3>
-<p>The following command format will always fetch and run the latest version of Black Duck Docker Inspector:</p>
-<pre><code>bash &lt;(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) {Black Duck Docker Inspector arguments}
-</code></pre>
-<p>For example:</p>
-<pre><code>bash &lt;(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) --help
-bash &lt;(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) --upload.bdio=false --docker.image=ubuntu
-</code></pre>
-<p>An alternative is to download and run the latest Black Duck Docker Inspector script:</p>
-<pre><code>curl -O  https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh
-chmod +x blackduck-docker-inspector.sh
-./blackduck-docker-inspector.sh {Black Duck Docker Inspector arguments}
-</code></pre>
-<p>The advantage of using the Black Duck Docker Inspector script is that it will ensure you always run the latest version of the Black Duck Docker Inspector .jar.</p>
-<p>Another alternative is to download the Black Duck Docker Inspector .jar (using the script) and run the .jar directly:</p>
-<pre><code>bash &lt;(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) --pulljar
-java -jar blackduck-docker-inspector-{version}.jar {Black Duck Docker Inspector arguments}
-</code></pre>
-<h3 id="passing-arguments-to-black-duck-docker-inspector">Passing arguments to Black Duck Docker Inspector</h3>
-<p>Running Black Duck Docker Inspector typically involves invoking the script or .jar with some command line arguments:</p>
-<pre><code>blackduck-docker-inspector.sh {Black Duck Docker Inspector arguments}
-</code></pre>
-<p>Black Duck Docker Inspector command line arguments consist of property assignments. Any supported property can be set by adding to the command line
-a property assignment of the form:</p>
-<pre><code>--{property name}={value}
-</code></pre>
-<p>Alternatively, any supported property can be set by adding to a text file named
-application.properties (in the current directory) a line of the form:</p>
-<pre><code>{property name}={value}
-</code></pre>
-<p>An application.properties file can contain multiple property assignments.</p>
-<p>There are other alternative methods for setting properties. For more information, refer to <a href="../running/">Running</a>.</p>
-<h3 id="help">Help</h3>
-<p>Available help topics:</p>
-<ul>
-<li>overview (this page)</li>
-<li>architecture</li>
-<li>running</li>
-<li>properties</li>
-<li>advanced</li>
-<li>deployment</li>
-<li>troubleshooting</li>
-<li>releasenotes</li>
-<li>all</li>
-</ul>
-<p>To display a help topic, run Black Duck Docker Inspector with either -h or --help followed by a topic. For example:</p>
-<pre><code>-h properties
-</code></pre>
-<p>To display multiple help topics, use a comma-separated list of help topics. For example:</p>
-<pre><code>-h overview,properties,running
-</code></pre>
-<p>To display all help topics, use topic "all":</p>
-<pre><code>-h all
-</code></pre>
-<p>To write help to a file, add --help.output.path={directory or file path}:</p>
-<pre><code>-h all --help.output.format=html --help.output.path=.
-</code></pre>
-<p>Help content is output in Markdown format, which can be formatted ("pretty printed")
-using tools like mdless (https://brettterpstra.com/2015/08/21/mdless-better-markdown-in-terminal/).</p>
+<p>In container mode, you must provide the image in a docker saved .tar file.</p>
+<p>Black Duck Docker Inspector:</p>
+<ol>
+<li>Requests the Black Duck input/output (BDIO) file and container file system using HTTP from the default image inspector service using a 
+base URL that you have provided.</li>
+</ol>
+<p>The following steps are performed inside the image inspector container:</p>
+<ol>
+<li>Builds the container file system that a container would have if you ran the target image. (It does not run the target image.)</li>
+<li>Determines the target image package manager database format, and redirects to a different image inspector service if necessary.</li>
+<li>Runs the image inspector's Linux package manager on the target image package manager database.</li>
+<li>Produces and returns a BDIO (.jsonld) file consisting of a list of target image packages and, optionally, the container filesystem.</li>
+</ol>
+<p>The following steps are performed back in the Black Duck Docker Inspector container when the request to the image inspector service returns:</p>
+<ol>
+<li>Uploads the BDIO file to Black Duck (this can be disabled).</li>
+<li>Copies the output files to the output directory.</li>
+</ol>
                 
                   
                 
@@ -558,14 +482,28 @@ using tools like mdless (https://brettterpstra.com/2015/08/21/mdless-better-mark
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
+          <a href="../overview/" title="Overview" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Overview
+              </span>
+            </div>
+          </a>
         
-          <a href="../architecture/" title="Architecture" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+        
+          <a href="../running/" title="Running" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Architecture
+                Running
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
