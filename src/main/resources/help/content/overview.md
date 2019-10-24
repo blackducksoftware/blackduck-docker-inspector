@@ -123,12 +123,9 @@ To display all help topics, use topic "all":
 
     -h all
 
-To change the format of the help output to HTML, add --help.output.format=html:
-
-    -h all --help.output.format=html
-
 To write help to a file, add --help.output.path={directory or file path}:
 
     -h all --help.output.format=html --help.output.path=.
 
-
+Help content is output in Markdown format, which can be formatted ("pretty printed")
+using tools like mdless (https://brettterpstra.com/2015/08/21/mdless-better-markdown-in-terminal/).
