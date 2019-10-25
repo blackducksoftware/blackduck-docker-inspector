@@ -91,7 +91,7 @@ To run in Air Gap mode, use the command:
 If you invoke ${solution_name} with an image reference (a repo:tag value vs. a .tar file),
 it uses the docker-java library (${docker_java_project_url}) to access the Docker registry to pull the image.
 
-If “docker pull ” works from the command line, then ${solution_name} should also be able to pull that image,
+If `docker pull` works from the command line, then ${solution_name} should also be able to pull that image,
 because docker-java can be configured the same way as the docker command line utility.
 
 But there are also other ways to configure docker-java. Details on how to configure docker-java
