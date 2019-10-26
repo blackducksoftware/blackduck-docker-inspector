@@ -551,7 +551,7 @@ docker load -i blackduck-imageinspector-ubuntu.tar
 <h3 id="configuring-black-duck-docker-inspector-for-your-docker-engine-and-registry">Configuring Black Duck Docker Inspector for your Docker Engine and Registry</h3>
 <p>If you invoke Black Duck Docker Inspector with an image reference (a repo:tag value vs. a .tar file),
 it uses the docker-java library (https://github.com/docker-java/docker-java) to access the Docker registry to pull the image.</p>
-<p>If ?docker pull ? works from the command line, then Black Duck Docker Inspector should also be able to pull that image,
+<p>If <code>docker pull</code> works from the command line, then Black Duck Docker Inspector should also be able to pull that image,
 because docker-java can be configured the same way as the docker command line utility.</p>
 <p>But there are also other ways to configure docker-java. Details on how to configure docker-java
 (and therefore Black Duck Docker Inspector) for your Docker registry can be found at:
