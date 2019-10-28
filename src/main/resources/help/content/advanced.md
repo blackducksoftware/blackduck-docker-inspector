@@ -188,7 +188,7 @@ Include the following ${solution_name} properties:
 --output.path={your output dir}            # tell DI where to put the output
 ```
 2. Locate the container file system in the output dir (*.tar.gz) and untar it
-3. cd into the directory (within the untar’d container file system) that you want to scan.
+3. cd into the directory (within the untar'd container file system) that you want to scan.
 4. Invoke detect there.
 
 ### Excluding files/directories from the returned container file system (which excludes them from Detect's signature scan)
