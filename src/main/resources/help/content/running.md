@@ -38,7 +38,7 @@ For example:
 
 ### Running the .jar file
 
-The advantage of running ${project_name}.jar is that it ensures that you always run the latest
+The advantage of running ${script_name} is that it ensures that you always run the latest
 version of ${solution_name}. However, sometimes it is better to run the .jar directly.
 
 You can download any version of the ${solution_name} .jar from ${binary_repo_url_base}/webapp/#/artifacts/browse/tree/General/bds-integrations-release/com/synopsys/integration/${project_name}.
