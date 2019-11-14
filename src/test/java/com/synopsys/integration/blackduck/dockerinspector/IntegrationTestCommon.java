@@ -54,6 +54,7 @@ public class IntegrationTestCommon {
             exceptLinesContainingThese.add("\"@id\":");
             exceptLinesContainingThese.add("spdx:created");
             exceptLinesContainingThese.add("Tool:");
+            exceptLinesContainingThese.add("kbSeparator");
             final boolean outputBdioMatches = TestUtils.contentEquals(expectedBdio, actualBdio, exceptLinesContainingThese);
             assertTrue(outputBdioMatches);
         }
@@ -253,6 +254,7 @@ public class IntegrationTestCommon {
             exceptLinesContainingThese.add("spdx:name");
             exceptLinesContainingThese.add("spdx:created");
             exceptLinesContainingThese.add("Tool:");
+            exceptLinesContainingThese.add("kbSeparator");
             final boolean outputBdioMatches = TestUtils.contentEquals(expectedBdio, actualBdio, exceptLinesContainingThese);
             assertTrue("BDIO produced does not match expected BDIO", outputBdioMatches);
         }

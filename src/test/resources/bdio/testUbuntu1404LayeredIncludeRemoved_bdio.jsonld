@@ -6,9 +6,9 @@
       "spdx:creator": [
         "Tool: IntegrationBdio-17.1.2"
       ],
-      "spdx:created": "2019-04-05T15:34:39.300Z"
+      "spdx:created": "2019-11-14T18:02:54.011Z"
     },
-    "@id": "uuid:744d3f6f-2373-4b89-ae01-acc840d7f4b3",
+    "@id": "uuid:fbf9052c-1f44-4243-ae40-0440df5a2954",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -24,7 +24,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": false
         },
         "name": "null",
@@ -65,8 +64,7 @@
       "externalIdMetaData": {
         "forge": {
           "name": "DOCKER_INSPECTOR",
-          "separator": "/",
-          "kbSeparator": "/"
+          "separator": "/"
         },
         "path": "Layer00_sha256_93da31b6a5499e9b86dcd8ea0cf6b5d0fa9ed5b9beaedceee5b58218b494e80e"
       }
@@ -822,7 +820,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "locales",
@@ -844,7 +841,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "dmsetup",
@@ -866,7 +862,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libgcc1",
@@ -888,7 +883,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "python3.4-minimal",
@@ -910,7 +904,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "logrotate",
@@ -932,7 +925,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libslang2",
@@ -954,7 +946,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "python3",
@@ -976,7 +967,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libffi6",
@@ -998,7 +988,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "debconf",
@@ -1020,7 +1009,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "iproute2",
@@ -1042,7 +1030,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "ntpdate",
@@ -1064,7 +1051,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "xkb-data",
@@ -1086,7 +1072,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "lsb-release",
@@ -1108,7 +1093,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libmagic1",
@@ -1130,7 +1114,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libklibc",
@@ -1152,7 +1135,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libpam-runtime",
@@ -1174,7 +1156,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "ncurses-base",
@@ -1196,7 +1177,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "upstart",
@@ -1218,7 +1198,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "dash",
@@ -1240,7 +1219,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libnewt0.52",
@@ -1262,7 +1240,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "e2fsprogs",
@@ -1284,7 +1261,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "debconf-i18n",
@@ -1306,7 +1282,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libplymouth2",
@@ -1328,7 +1303,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "adduser",
@@ -1350,7 +1324,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "login",
@@ -1372,7 +1345,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libarchive-extract-perl",
@@ -1394,7 +1366,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libcap2-bin",
@@ -1416,7 +1387,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libapt-inst1.5",
@@ -1438,7 +1408,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "keyboard-configuration",
@@ -1460,7 +1429,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libstdc++6",
@@ -1482,7 +1450,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libfribidi0",
@@ -1504,7 +1471,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libp11-kit0",
@@ -1526,7 +1492,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libcgmanager0",
@@ -1548,7 +1513,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "whiptail",
@@ -1570,7 +1534,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "gcc-4.9-base",
@@ -1592,7 +1555,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "mawk",
@@ -1614,7 +1576,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "mountall",
@@ -1636,7 +1597,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "base-files",
@@ -1658,7 +1618,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libdebconfclient0",
@@ -1680,7 +1639,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libbz2-1.0",
@@ -1702,7 +1660,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libgpg-error0",
@@ -1724,7 +1681,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "sysvinit-utils",
@@ -1746,7 +1702,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libprocps3",
@@ -1768,7 +1723,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libgnutls-openssl27",
@@ -1790,7 +1744,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libpam0g",
@@ -1812,7 +1765,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "readline-common",
@@ -1834,7 +1786,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "ucf",
@@ -1856,7 +1807,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libncursesw5",
@@ -1878,7 +1828,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "diffutils",
@@ -1900,7 +1849,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libtext-soundex-perl",
@@ -1922,7 +1870,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "liblockfile1",
@@ -1944,7 +1891,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "mount",
@@ -1966,7 +1912,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libjson-c2",
@@ -1988,7 +1933,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "liblzma5",
@@ -2010,7 +1954,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libtext-iconv-perl",
@@ -2032,7 +1975,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libmodule-pluggable-perl",
@@ -2054,7 +1996,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "busybox-initramfs",
@@ -2076,7 +2017,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libaudit1",
@@ -2098,7 +2038,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "vim-common",
@@ -2120,7 +2059,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "ifupdown",
@@ -2142,7 +2080,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libgcrypt11",
@@ -2164,7 +2101,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "hostname",
@@ -2186,7 +2122,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "e2fslibs",
@@ -2208,7 +2143,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libestr0",
@@ -2230,7 +2164,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "bzip2",
@@ -2252,7 +2185,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "gcc-4.8-base",
@@ -2274,7 +2206,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "bash",
@@ -2296,7 +2227,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "sysv-rc",
@@ -2318,7 +2248,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libexpat1",
@@ -2340,7 +2269,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libacl1",
@@ -2362,7 +2290,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libpopt0",
@@ -2384,7 +2311,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "rsyslog",
@@ -2406,7 +2332,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "passwd",
@@ -2428,7 +2353,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "apt-utils",
@@ -2450,7 +2374,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "net-tools",
@@ -2472,7 +2395,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libsemanage1",
@@ -2494,7 +2416,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "debianutils",
@@ -2516,7 +2437,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "init-system-helpers",
@@ -2538,7 +2458,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "coreutils",
@@ -2560,7 +2479,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "resolvconf",
@@ -2582,7 +2500,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "insserv",
@@ -2604,7 +2521,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "cron",
@@ -2626,7 +2542,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "console-setup",
@@ -2648,7 +2563,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "base-passwd",
@@ -2670,7 +2584,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libreadline6",
@@ -2692,7 +2605,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "python3-minimal",
@@ -2714,7 +2626,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libpython3.4-minimal",
@@ -2736,7 +2647,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "ncurses-bin",
@@ -2758,7 +2668,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libustr-1.0-1",
@@ -2780,7 +2689,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libpam-modules-bin",
@@ -2802,7 +2710,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "initramfs-tools",
@@ -2824,7 +2731,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libnih1",
@@ -2846,7 +2752,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "initscripts",
@@ -2868,7 +2773,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "gzip",
@@ -2890,7 +2794,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "ubuntu-keyring",
@@ -2912,7 +2815,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libsqlite3-0",
@@ -2934,7 +2836,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "tzdata",
@@ -2956,7 +2857,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "perl-base",
@@ -2978,7 +2878,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libtinfo5",
@@ -3000,7 +2899,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libpython3.4-stdlib",
@@ -3022,7 +2920,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libdrm2",
@@ -3044,7 +2941,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "cpio",
@@ -3066,7 +2962,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "ureadahead",
@@ -3088,7 +2983,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "vim-tiny",
@@ -3110,7 +3004,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libc-bin",
@@ -3132,7 +3025,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libdbus-1-3",
@@ -3154,7 +3046,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libtext-wrapi18n-perl",
@@ -3176,7 +3067,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libattr1",
@@ -3198,7 +3088,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "file",
@@ -3220,7 +3109,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "zlib1g",
@@ -3242,7 +3130,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "apt",
@@ -3264,7 +3151,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "gnupg",
@@ -3286,7 +3172,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "findutils",
@@ -3308,7 +3193,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libjson0",
@@ -3330,7 +3214,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "makedev",
@@ -3352,7 +3235,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "liblog-message-simple-perl",
@@ -3374,7 +3256,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libmount1",
@@ -3396,7 +3277,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "kbd",
@@ -3418,7 +3298,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "initramfs-tools-bin",
@@ -3440,7 +3319,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libselinux1",
@@ -3462,7 +3340,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libkmod2",
@@ -3484,7 +3361,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libblkid1",
@@ -3506,7 +3382,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libcomerr2",
@@ -3528,7 +3403,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "less",
@@ -3550,7 +3424,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "perl",
@@ -3572,7 +3445,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libtasn1-6",
@@ -3594,7 +3466,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "module-init-tools",
@@ -3616,7 +3487,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "plymouth",
@@ -3638,7 +3508,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "lsb-base",
@@ -3660,7 +3529,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libpng12-0",
@@ -3682,7 +3550,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libmpdec2",
@@ -3704,7 +3571,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "procps",
@@ -3726,7 +3592,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "kmod",
@@ -3748,7 +3613,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "bsdutils",
@@ -3770,7 +3634,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "mime-support",
@@ -3792,7 +3655,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libpcre3",
@@ -3814,7 +3676,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libtext-charwidth-perl",
@@ -3836,7 +3697,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libgnutls26",
@@ -3858,7 +3718,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "sudo",
@@ -3880,7 +3739,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libapt-pkg4.12",
@@ -3902,7 +3760,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "lockfile-progs",
@@ -3924,7 +3781,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libss2",
@@ -3946,7 +3802,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "isc-dhcp-common",
@@ -3968,7 +3823,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "gpgv",
@@ -3990,7 +3844,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libudev1",
@@ -4012,7 +3865,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "liblockfile-bin",
@@ -4034,7 +3886,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libuuid1",
@@ -4056,7 +3907,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libcap2",
@@ -4078,7 +3928,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libpod-latex-perl",
@@ -4100,7 +3949,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libterm-ui-perl",
@@ -4122,7 +3970,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "perl-modules",
@@ -4144,7 +3991,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libnih-dbus1",
@@ -4166,7 +4012,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "udev",
@@ -4188,7 +4033,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "python3.4",
@@ -4210,7 +4054,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "eject",
@@ -4232,7 +4075,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libbsd0",
@@ -4254,7 +4096,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libpam-cap",
@@ -4276,7 +4117,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libsemanage-common",
@@ -4298,7 +4138,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libc6",
@@ -4320,7 +4159,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "grep",
@@ -4342,7 +4180,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "liblocale-gettext-perl",
@@ -4364,7 +4201,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libdb5.3",
@@ -4386,7 +4222,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "multiarch-support",
@@ -4408,7 +4243,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "netcat-openbsd",
@@ -4430,7 +4264,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "dpkg",
@@ -4452,7 +4285,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libssl1.0.0",
@@ -4474,7 +4306,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libpam-modules",
@@ -4496,7 +4327,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "dh-python",
@@ -4518,7 +4348,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libgdbm3",
@@ -4540,7 +4369,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libpython3-stdlib",
@@ -4562,7 +4390,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libusb-0.1-4",
@@ -4584,7 +4411,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "sensible-utils",
@@ -4606,7 +4432,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "util-linux",
@@ -4628,7 +4453,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "sed",
@@ -4650,7 +4474,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libaudit-common",
@@ -4672,7 +4495,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "ubuntu-minimal",
@@ -4694,7 +4516,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "tar",
@@ -4716,7 +4537,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libncurses5",
@@ -4738,7 +4558,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libdevmapper1.02.1",
@@ -4760,7 +4579,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libsepol1",
@@ -4782,7 +4600,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "isc-dhcp-client",
@@ -4804,7 +4621,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "klibc-utils",
@@ -4826,7 +4642,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "netbase",
@@ -4848,7 +4663,6 @@
         "forge": {
           "name": "ubuntu",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "iputils-ping",
@@ -4869,8 +4683,7 @@
       "externalIdMetaData": {
         "forge": {
           "name": "DOCKER_INSPECTOR",
-          "separator": "/",
-          "kbSeparator": "/"
+          "separator": "/"
         },
         "path": "Layer01_sha256_d196bfd70d49b469a01bd45e6070b70ea9116783112da44f61d10958dbc7de10"
       }
@@ -5625,8 +5438,7 @@
       "externalIdMetaData": {
         "forge": {
           "name": "DOCKER_INSPECTOR",
-          "separator": "/",
-          "kbSeparator": "/"
+          "separator": "/"
         },
         "path": "Layer02_sha256_2f19e981cedab782dc2ab39a6e8e9782ff714bef28c043efbdc34f2afcd057c5"
       }
@@ -6381,8 +6193,7 @@
       "externalIdMetaData": {
         "forge": {
           "name": "DOCKER_INSPECTOR",
-          "separator": "/",
-          "kbSeparator": "/"
+          "separator": "/"
         },
         "path": "Layer03_sha256_8f6a7ca929441c126e8faf4b0891d6b95876be80a7f8bec993e3bc56160e71ee"
       }
@@ -7137,8 +6948,7 @@
       "externalIdMetaData": {
         "forge": {
           "name": "DOCKER_INSPECTOR",
-          "separator": "/",
-          "kbSeparator": "/"
+          "separator": "/"
         },
         "path": "Layer04_sha256_73dd5183c549685de3be83f6628895d36c6244cfc21f21aad10765c9b528a90b"
       }

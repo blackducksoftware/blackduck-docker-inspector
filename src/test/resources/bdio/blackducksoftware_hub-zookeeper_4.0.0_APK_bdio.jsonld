@@ -6,9 +6,9 @@
       "spdx:creator": [
         "Tool: IntegrationBdio-17.1.2"
       ],
-      "spdx:created": "2019-04-05T15:30:49.398Z"
+      "spdx:created": "2019-11-14T18:23:40.332Z"
     },
-    "@id": "uuid:b685b798-ce72-4ae1-b422-70825716238d",
+    "@id": "uuid:f6fb4227-0426-4498-bc0c-b5405ef2d8c8",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -24,7 +24,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": false
         },
         "name": "blackducksoftware_hub-zookeeper",
@@ -266,7 +265,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libxdmcp",
@@ -288,7 +286,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "readline",
@@ -310,7 +307,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "p11-kit",
@@ -332,7 +328,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "ncurses-terminfo",
@@ -354,7 +349,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "giflib",
@@ -376,7 +370,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "lksctp-tools",
@@ -398,7 +391,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "openjdk8-jre",
@@ -420,7 +412,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libressl2.4-libcrypto",
@@ -442,7 +433,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "lcms2",
@@ -464,7 +454,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "krb5-conf",
@@ -486,7 +475,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "p11-kit-trust",
@@ -508,7 +496,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libxcb",
@@ -530,7 +517,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "java-cacerts",
@@ -552,7 +538,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "ncurses-libs",
@@ -574,7 +559,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "apk-tools",
@@ -596,7 +580,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "krb5-libs",
@@ -618,7 +601,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "openjdk8-jre-lib",
@@ -640,7 +622,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libffi",
@@ -662,7 +643,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "ca-certificates",
@@ -684,7 +664,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libx11",
@@ -706,7 +685,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "nspr",
@@ -728,7 +706,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libtasn1",
@@ -750,7 +727,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libverto",
@@ -772,7 +748,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libxrender",
@@ -794,7 +769,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "bash",
@@ -816,7 +790,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "musl-utils",
@@ -838,7 +811,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "openjdk8-jre-base",
@@ -860,7 +832,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libjpeg-turbo",
@@ -882,7 +853,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "keyutils-libs",
@@ -904,7 +874,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "alpine-baselayout",
@@ -926,7 +895,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "alpine-keys",
@@ -948,7 +916,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "busybox",
@@ -970,7 +937,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "freetype",
@@ -992,7 +958,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libgcc",
@@ -1014,7 +979,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libxi",
@@ -1036,7 +1000,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libc-utils",
@@ -1058,7 +1021,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libxau",
@@ -1080,7 +1042,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "zlib",
@@ -1102,7 +1063,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libstdc++",
@@ -1124,7 +1084,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "scanelf",
@@ -1146,7 +1105,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libcom_err",
@@ -1168,7 +1126,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libbz2",
@@ -1190,7 +1147,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "alsa-lib",
@@ -1212,7 +1168,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "java-common",
@@ -1234,7 +1189,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "sqlite-libs",
@@ -1256,7 +1210,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "ncurses-terminfo-base",
@@ -1278,7 +1231,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "su-exec",
@@ -1300,7 +1252,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "pcsc-lite-libs",
@@ -1322,7 +1273,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "musl",
@@ -1344,7 +1294,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libxext",
@@ -1366,7 +1315,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libressl2.4-libssl",
@@ -1388,7 +1336,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libxtst",
@@ -1410,7 +1357,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libxcomposite",
@@ -1432,7 +1378,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "libpng",
@@ -1454,7 +1399,6 @@
         "forge": {
           "name": "alpine",
           "separator": "/",
-          "kbSeparator": "/",
           "usePreferredNamespaceAlias": true
         },
         "name": "nss",

@@ -4,11 +4,11 @@
     "spdx:name": "busybox_latest_noPkgMgr",
     "creationInfo": {
       "spdx:creator": [
-        "Tool: IntegrationBdio-16.4.0"
+        "Tool: IntegrationBdio-17.1.2"
       ],
-      "spdx:created": "2019-01-28T19:11:45.504Z"
+      "spdx:created": "2019-11-14T18:28:45.608Z"
     },
-    "@id": "uuid:f9695147-012a-4c46-9823-6d2baa88661b",
+    "@id": "uuid:a77b20c4-b67f-42d8-96a2-9e28c36226f0",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -23,8 +23,7 @@
       "externalIdMetaData": {
         "forge": {
           "name": "none",
-          "separator": "/",
-          "kbSeparator": "/"
+          "separator": "/"
         },
         "name": "busybox",
         "version": "latest"
