@@ -3,24 +3,24 @@ _Help version: ${program_version}_
 
 ${solution_name} inspects Docker images to discover packages (components).
 It utilizes the appropriate Linux package manager to provide a list of
-the installed (by the package manager) packages, and creates a Black Duck project with a Bill of Materials (BOM) consisting of those packages as components.
+the packages installed by the package manager, and creates a Black Duck project with a Bill of Materials (BOM) consisting of those packages as components.
 Because it relies on the Linux package manager as its source, the discovered packages are limited to those installed and managed using the Linux package manager.
 
-${solution_name} can inspect Linux Docker images that use dpkg, rpm, or apk package manager formats.
+${solution_name} can inspect Linux Docker images that use DPKG, RPM, or APK package manager formats.
 
-After running the ${solution_name} on an image, navigate to Black Duck to view the Bill of Materials (BOM) created by 
+After running the ${solution_name} on an image, navigate to Black Duck to view the BOM created by 
 ${solution_name}.
 
 ### Modes of operation
 
 ${solution_name} has two modes:
 
-* Host mode, for running on a Linux machine (or VM) where ${solution_name} can perform Docker operations via a Docker engine
-* Container mode, for running in a container (started by Docker, Kubernetes, OpenShift, etc.)
+* Host mode, for running on a Linux machine/Linux virtual machine (VM) where ${solution_name} can perform Docker operations using a Docker engine.
+* Container mode, for running in a container, started by Docker, Kubernetes, OpenShift, and others.
 
 #### Host mode
 
-Host mode (the default mode) is for Linux machines (and VMs) where ${solution_name} can perform Docker operations via a Docker engine.
+Host mode (default) is for Linux machines/VMs where ${solution_name} can perform Docker operations using a Docker engine.
 
 In host mode, ${solution_name} is a utility that automates the process of using Black Duck to discover security, license, and operational risks
 associated with Linux-based Docker images. It discovers components using the target Docker image's package manager; therefore, the results
@@ -28,13 +28,13 @@ are limited to those components (packages) of which the package manager is aware
 the image, so it is safe to run on untrusted images.
 
 ${solution_name} can pull the target image; in other words, the Docker image you want to inspect, from a Docker registry such
-as Docker Hub. Alternatively, you can save an image to a .tar file by using the Docker Save command. Then, run ${solution_name}
+as Docker Hub. Alternatively, you can save an image to a .tar file by using the Docker *Save* command. Then, run ${solution_name}
 on the .tar file. ${solution_name} supports Docker Image Specification v1.2.0 format .tar files.
 
 #### Container mode
 
-Container mode is for container orchestration environments (Kubernetes, OpenShift, etc.) where ${solution_name} will run
-inside a container, where it cannot perform Docker operations. For information on running ${solution_name} in container mode,
+Container mode is for container orchestration environments; for example, Kubernetes, OpenShift, and others, where ${solution_name} runs
+inside a container where it cannot perform Docker operations. For information on running ${solution_name} in container mode,
 refer to [Deploying](deployment.md).
 
 ### Requirements
@@ -44,19 +44,19 @@ Requirements for ${solution_name} are:
 * The current version of Black Duck. Visit [this page](${blackduck_release_page}) to determine the current version. 
 * Linux.
 * Access to the internet. For information on running without access to the internet, refer to [Air Gap mode](advanced.md#air-gap-mode).
-* Java (JRE) version 8 or 11.
+* Java (JRE) versions 8 or 11.
 * Three available ports for the image inspector services.  By default, these ports are 9000, 9001, and 9002.
-* When invoking ${solution_name} via ${script_name}:
+* When invoking ${solution_name} using ${script_name}:
     - curl
     - bash
-* In host mode: Access to a Docker Engine (version 17.09 or higher).
-* In container mode: You must start the ${solution_name} container that meets the requirements above, and three container-based
-"image inspector" services. All four of these containers must share a mounted volume and be able to reach each other via HTTP GET operations using base URLs
+* In host mode: Access to a Docker engine; versions 17.09 or higher.
+* In container mode: You must start the ${solution_name} container that meets the preceding requirements, and three container-based
+"image inspector" services. All four of these containers must share a mounted volume and be able to reach each other through HTTP GET operations using base URLs
 that you provide. For more information, refer to [Deploying](deployment.md).
     
 ### Getting started
 
-The following command format will always fetch and run the latest version of ${solution_name}:
+The following command format always fetches and runs the latest version of ${solution_name}:
 
     bash <(curl -s ${script_hosting_scheme}://${source_repo_organization}.${script_hosting_domain}/${project_name}/${script_name}) {${solution_name} arguments}
 
@@ -71,7 +71,7 @@ An alternative is to download and run the latest ${solution_name} script:
     chmod +x ${script_name}
     ./${script_name} {${solution_name} arguments}
 
-The advantage of using the ${solution_name} script is that it will ensure you always run the latest version of the ${solution_name} .jar.
+The advantage of using the ${solution_name} script is that it ensures you always run the latest version of the ${solution_name} .jar.
 
 Another alternative is to download the ${solution_name} .jar (using the script) and run the .jar directly:
 
@@ -90,11 +90,11 @@ a property assignment of the form:
 	--{property name}={value}
 
 Alternatively, any supported property can be set by adding to a text file named
-application.properties (in the current directory) a line of the form:
+*application.properties* in the current directory a line of the form:
 
     {property name}={value}
 
-An application.properties file can contain multiple property assignments.
+An *pplication.properties* file can contain multiple property assignments.
 
 There are other alternative methods for setting properties. For more information, refer to [Running](running.md).
 
@@ -112,7 +112,7 @@ Available help topics:
 * releasenotes
 * all
 
-To display a help topic, run ${solution_name} with either -h or --help followed by a topic. For example:
+To display a help topic, run ${solution_name} with either *-h* or *--help* followed by a topic. For example:
 
     -h properties
     
@@ -120,11 +120,11 @@ To display multiple help topics, use a comma-separated list of help topics. For 
 
     -h overview,properties,running
 
-To display all help topics, use topic "all":
+To display all help topics, use topic *all*:
 
     -h all
 
-To write help to a file, add --help.output.path={directory or file path}:
+To write help to a file, add *--help.output.path={directory or file path}*:
 
     -h all --help.output.format=html --help.output.path=.
 

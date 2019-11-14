@@ -1,16 +1,16 @@
 #### Version 8.2.3
 ##### Resolved issues
-* Eliminated the Spring banner from the log to facilitate piping help output through a Markdown formatter
+* Eliminated the Spring banner from the log to facilitate piping help output through a Markdown formatter.
 
 #### Version 8.2.2
 ##### Resolved issues
-* Increased the default value of service.timeout from 4 minutes to 10 minutes.
-* The time Docker Inspector will wait for an image inspector service to come online is now controlled via the service.timeout property.
+* Increased the default value of *service.timeout* from four minutes to ten minutes.
+* The time Docker Inspector waits for an image inspector service to come online is now controlled using the *service.timeout* property.
 
 #### Version 8.2.1
 ##### Resolved issues
-* Fixed an issue that causes blackduck-docker-inspector.sh to display the help overview even when a different help topic is requested.
-* Fixed an issue that causes Docker Inspector to return the full container filesystem even when only application components are requested (docker.platform.top.layer.id is specified).
+* Resolved an issue that caused *blackduck-docker-inspector.sh* to display the help overview even when a different help topic is requested.
+* Resolved an issue that caused Docker Inspector to return the full container filesystem even when only application components are requested (*docker.platform.top.layer.id* is specified).
 
 #### Version 8.2.0
 ##### New features
@@ -21,11 +21,11 @@
 
 #### Version 8.1.6
 ##### Changed feature
-* Adjusted logging to ensure that sensitive information does not appear in a debug log.
+* Adjusted logging to ensure that sensitive information does not display in a debug log.
 
 #### Version 8.1.5
 ##### Resolved issues
-* Fixed an issue that could cause Docker Inspector to incorrectly identify the package manager of the target image.
+* Resolved an issue that could cause Docker Inspector to incorrectly identify the package manager of the target image.
 
 #### Version 8.1.4
 ##### New features
@@ -37,19 +37,19 @@
 
 #### Version 8.1.2
 ##### Changed features
-* Updated Blackduck-docker-inspector.sh to download the Docker Inspector .jar file from the new Artifactory repository at sig-repo.synopsys.com.
+* Updated *blackduck-docker-inspector.sh* to download the Docker Inspector .jar file from the new Artifactory repository at sig-repo.synopsys.com.
 
 #### Version 8.1.1
 ##### Resolved issues
-* Resolved an issue that caused Docker Inspector to fail when it was unable to read the image inspector container's log.
+* Resolved an issue that caused Docker Inspector to fail when it was unable to read the image inspector container log.
 
 #### Version 8.1.0
 ##### Resolved issues
-* Resolved an issue that could cause a No such file error on a file named classes.jsa when inspecting images containing Java.
+* Resolved an issue that could cause a *No such file* error on files named *classes.jsa* when inspecting images containing Java.
 ##### New features
-* Added the property: output.containerfilesystem.excluded.paths.
-* Added the command line --help=true switch for invoking help.
-* Added the property output.include.squashedimage.
+* Added the property *output.containerfilesystem.excluded.paths*.
+* Added the command line switch *--help=true* for invoking help.
+* Added the property *output.include.squashedimage*.
 
 #### Version 8.0.2
 ##### Resolved issues
@@ -70,7 +70,7 @@
 
 #### Version 7.3.3
 ##### Resolved issues
-* Resolved an issue that could prevent controlling the image inspector HTTP request service timeout through the service.timeout property.
+* Resolved an issue that could prevent controlling the image inspector HTTP request service timeout through the property *service.timeout*.
 
 #### Version 7.3.2
 ##### Resolved issues
@@ -78,34 +78,34 @@
 
 #### Version 7.3.1
 ##### Resolved issues
-* Resolved an issue that may cause Hub Detect versions 5.2.0 and higher to fail with an error message of DOCKER extraction failed: null when invoking Docker Inspector on a non-Linux Docker image. 
+* Resolved an issue that could cause Hub Detect versions 5.2.0 and higher to fail with an error message of *DOCKER extraction failed: null* when invoking Docker Inspector on a non-Linux Docker image. 
 
 #### Version 7.3.0
 ##### New features
-* Added the property system.properties.path.
+* Added the property *system.properties.path*.
 
 #### Version 7.2.4
 ##### Resolved issues
-* Resolved an issue that may cause Docker Inspector to fail with an error message of Error inspecting image: Failed to parse docker configuration file (Unrecognized field "identitytoken").
+* Resolved an issue that could cause Docker Inspector to fail with an error message of *Error inspecting image: Failed to parse docker configuration file (Unrecognized field "identitytoken")*.
 
 #### Version 7.2.3
 ##### Changed features
-* When constructing the container file system with the logging level set to DEBUG or TRACE : after applying each image layer, Docker Inspector now logs contents of the layer's metadata (json) file and the list of components.
+* When constructing the container file system with the logging level set to DEBUG or TRACE: after applying each image layer, Docker Inspector now logs contents of the layer's metadata (json) file and the list of components.
 
 #### Version 7.2.2
 ##### Resolved issues
-* Resolved an issue that may cause Black Duck input/output data (BDIO) uploads to fail for openSUSE and Red Hat Docker images.
+* Resolved an issue that could cause Black Duck input/output data (BDIO) uploads to fail for openSUSE and Red Hat Docker images.
 
 #### Version 7.2.1
 ##### Resolved issues
-* Resolved an issue that may cause the Bill of Materials (BOM) creation to fail with an error message of Error in MAPPING_COMPONENTS displayed on the Black Duck Scans page for certain images.
+* Resolved an issue that could cause the Black Duck BOM creation to fail with an error message of *Error in MAPPING_COMPONENTS* displayed on the Black Duck Scans page for certain images.
 
 #### Version 7.2.0
 ##### New features
 * Added offline mode.
 ##### Resolved issues
-* Fixed an issue that may generate a warning message of Error creating hard link to be logged when inspecting certain images.
-* Fixed an issue that may generate a warning message of Error removing whited-out file .../.wh..opq to be logged when inspecting images with opaque directory whiteout files.
+* Resolved an issue that could generate a warning message of *Error creating hard link* to be logged when inspecting certain images.
+* Resolved an issue that could generate a warning message of *Error removing whited-out file .../.wh..opq* to be logged when inspecting images with opaque directory whiteout files.
 * Reduced the disk space used in the working directory within the Inspector containers.
 
 #### Version 7.1.0
@@ -131,30 +131,30 @@
 ##### Resolved issues
 * Resolved an issue that could cause DEBUG-level warnings to be logged while inspecting images with file paths containing non-ASCII characters.
 * Improved logging for when the image inspector service is started but never comes online.
-* In http client mode > start service mode: if a health check fails, Docker Inspector now performs a "docker logs" operation on the container to reveal the root problem.
-* Orchestration platform properties are now included in the --help output.
+* In http client mode > start service mode: if a health check fails, Docker Inspector now performs a *docker logs* operation on the container to reveal the root problem.
+* Orchestration platform properties are now included in the *--help* output.
 
 #### Version 6.3.0
 ##### New features
-* Added the --inspectorimagefamily command line argument, which prints the Inspector image family name.
+* Added the *--inspectorimagefamily* command line argument, which prints the Inspector image family name.
 
 #### Version 6.2.0
 ##### Resolved issues
 * Resolved an issue that caused Docker Inspector to fail when the image repository contained a : character and the image tag was not specified.
 ##### New features
-* Added the --pullairgapzip option.
-* Improved multiple error messages.
+* Added the *--pullairgapzip* option.
+* Improved error messages.
 
 #### Version 6.1.0
 ##### Resolved issues
 * Added support for running on container application platforms such as Kubernetes and OpenShift.
 * Renamed Rest Client Mode to HTTP Client Mode.
-* Resolved an issue that prevented BDIO (Black Duck Input/Output data) from being uploaded to the Hub. This issue only affected HTTP client mode.
-* Resolved an issue that caused Docker Inspector to fail when inspecting an image containing no package manager. This issue only affected HTTP client node.
+* Resolved an issue that prevented BDIO (Black Duck Input/Output data) from being uploaded to the Hub. This issue only impacted HTTP client mode.
+* Resolved an issue that caused Docker Inspector to fail when inspecting an image containing no package manager. This issue only impacted HTTP client node.
 
 #### Version 6.0.4
 ##### Resolved issues
-* Resolved an issue wherein Hub Docker Inspector may fail if the target docker tarfile path contained spaces.
+* Resolved an issue wherein Hub Docker Inspector may fail if the target Docker tarfile path contained spaces.
 
 #### Version 6.0.3
 ##### Resolved issues
@@ -168,11 +168,11 @@
 ##### Resolved issues
 * Removed extraneous and possibly misleading log messages.
 ##### New features
-* Added the properties docker.image.repo and docker.image.tag to the usage message generated when using the command line argument --help.
+* Added the properties *docker.image.repo* and *docker.image.tag* to the usage message generated when using the command line argument *--help*.
 
 #### Version 6.0.0
 ##### New features
 * Added REST client mode.
 ##### Changed features
-* The available properties list included in the usage message, which displays when using the command line argument --help, is now sorted alphabetically.
-* The format of the (optional) container filesystem output file name has changed.  The new container system file name is {image name}_{image tag}_ containerfilesystem.tar.gz or {image tarfilename}.tar.gz, depending on how the target image is specified.
+* The available properties list included in the usage message, which displays when using the command line argument *--help*, is now sorted alphabetically.
+* The format of the (optional) container filesystem output file name has changed.  The new container system file name is *{image name}_{image tag}_ containerfilesystem.tar.gz* or *{image tarfilename}.tar.gz*, depending on how the target image is specified.
