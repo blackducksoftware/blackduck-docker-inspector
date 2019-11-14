@@ -6,9 +6,9 @@
       "spdx:creator": [
         "Tool: IntegrationBdio-17.1.2"
       ],
-      "spdx:created": "2019-04-05T15:36:00.666Z"
+      "spdx:created": "2019-11-14T20:10:26.046Z"
     },
-    "@id": "uuid:875b31b7-4423-41bd-8527-d603ec3479d8",
+    "@id": "uuid:a8569002-5f47-4e46-a35c-d256a772d523",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -23,8 +23,7 @@
       "externalIdMetaData": {
         "forge": {
           "name": "none",
-          "separator": "/",
-          "kbSeparator": "/"
+          "separator": "/"
         },
         "name": "osless",
         "version": "1.0"
