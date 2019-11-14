@@ -407,7 +407,7 @@ bash &lt;(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector
 chmod +x blackduck-docker-inspector.sh
 ./blackduck-docker-inspector.sh {Black Duck Docker Inspector arguments}
 </code></pre>
-<p>The advantage of using the Black Duck Docker Inspector script is that it will ensure you always run the latest version of the Black Duck Docker Inspector .jar.</p>
+<p>The advantage of using the Black Duck Docker Inspector script is that ensures that you always run the latest version of the Black Duck Docker Inspector .jar.</p>
 <p>Another alternative is to download the Black Duck Docker Inspector .jar (using the script) and run the .jar directly:</p>
 <pre><code>bash &lt;(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) --pulljar
 java -jar blackduck-docker-inspector-{version}.jar {Black Duck Docker Inspector arguments}
@@ -424,7 +424,7 @@ To run a specific version of Black Duck Docker Inspector instead:</p>
 ./blackduck-docker-inspector.sh --upload.bdio=false --docker.image=ubuntu:latest
 </code></pre>
 <h3 id="running-the-jar-file">Running the .jar file</h3>
-<p>The advantage of running blackduck-docker-inspector.jar is that it ensures you alway run the latest
+<p>The advantage of running blackduck-docker-inspector.sh is that it ensures that you always run the latest
 version of Black Duck Docker Inspector. However, sometimes it is better to run the .jar directly.</p>
 <p>You can download any version of the Black Duck Docker Inspector .jar from https://sig-repo.synopsys.com/webapp/#/artifacts/browse/tree/General/bds-integrations-release/com/synopsys/integration/blackduck-docker-inspector.</p>
 <p>Use the java command to run it:</p>
