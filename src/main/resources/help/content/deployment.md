@@ -16,15 +16,15 @@ You should understand the code before you use it. They do not represent the only
 Your deployment approach is the same whether you are invoking ${solution_name} directly, or invoking it using Detect.
 Most of the sample deployments use Detect simply because that is the most common use case.
 
-### Using host mode on Linux/Linux VM with Docker
+### Using host mode on a Linux machine or Linux VM with Docker
 
 In this scenario, ${solution_name} is a command line utility that automatically pulls/runs and uses container-based services,  
 and cleans them up when it's done. The Docker command, if installed on the machine, can be very useful for troubleshooting, but is not actually
 required or used by ${solution_name}.
 
-In this mode, ${solution_name} does require access to a Docker engine, similar to the way the Docker client requires
-access to a Docker engine, so it can pull and run Docker images. It uses the ${docker_java_project_url}
-library to perform Docker operations using the Docker engine.
+In this mode, ${solution_name} does require access to a Docker Engine, similar to the way the Docker client requires
+access to a Docker Engine, so it can pull and run Docker images. It uses the ${docker_java_project_url}
+library to perform Docker operations using the Docker Engine.
 
 In this mode, ${solution_name} automatically pulls, runs, stops, and removes the container-based image inspector services
 on which it depends. It accesses the services they provide through HTTP GET operations.
@@ -52,7 +52,7 @@ when you run ${solution_name} on an Alpine image, but the request goes to the
 Ubuntu image inspector service, the image inspector service redirects the request to the appropriate
 image inspector service. You can change the default image inspector service to reduce the likelihood
 of redirects, resulting in shorter execution times. For example, if most of your target images are Alpine
-you can set *imageinspector.service.distro.default* to Alpine.
+you can set *imageinspector.service.distro.default* to alpine.
 
 The image inspector service containers are downloaded from Docker Hub (${image_repo_organization}/${inspector_image_name_base}-*).
 
@@ -78,7 +78,7 @@ Download: curl -O ${source_raw_content_url_base}/${source_repo_organization}/${p
 
 Approach: Toolkit
 
-Deployment notes: Uses the Travis continuous integration (CI) docker service.
+Deployment notes: Uses the Travis CI docker service.
 The containers communicate through localhost URLs.
 
 Download: curl -O ${source_raw_content_url_base}/${source_repo_organization}/${project_name}/master/deployment/travisci/travis.yml
@@ -111,13 +111,13 @@ Download: ${source_raw_content_url_base}/${source_repo_organization}/${project_n
 ### Configuring ${solution_name} for your Docker registry
 
 If you invoke ${solution_name} with an image reference, versus an image that has been saved to a .tar file,
-it uses the Docker-Java library (${docker_java_project_url}) to access the Docker registry
+it uses the docker-Java library (${docker_java_project_url}) to access the Docker registry
 to pull the image. 
 
 If *docker pull {targetimage}* works from the command line, then ${solution_name} is also able
-to pull that image, because Docker-Java can be configured the same way as the Docker command line utility. 
+to pull that image, because docker-Java can be configured the same way as the Docker command line utility. 
 
-There are other ways to configure Docker-Java. For more information on configuring Docker-Java
+There are other ways to configure docker-Java. For more information on configuring docker-Java
 and ${solution_name} for your Docker registry, refer to: ${docker_java_project_url}#Configuration.
 
 ${solution_name} does not override any of the configuration settings in the code,

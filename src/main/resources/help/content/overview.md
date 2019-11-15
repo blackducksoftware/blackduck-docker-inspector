@@ -15,12 +15,12 @@ ${solution_name}.
 
 ${solution_name} has two modes:
 
-* Host mode, for running on a Linux machine/Linux virtual machine (VM) where ${solution_name} can perform Docker operations using a Docker engine.
+* Host mode, for running on a Linux machine/Linux virtual machine (VM) where ${solution_name} can perform Docker operations using a Docker Engine.
 * Container mode, for running in a container, started by Docker, Kubernetes, OpenShift, and others.
 
 #### Host mode
 
-Host mode (default) is for Linux machines/VMs where ${solution_name} can perform Docker operations using a Docker engine.
+Host mode (default) is for Linux machines/VMs where ${solution_name} can perform Docker operations using a Docker Engine.
 
 In host mode, ${solution_name} is a utility that automates the process of using Black Duck to discover security, license, and operational risks
 associated with Linux-based Docker images. It discovers components using the target Docker image's package manager; therefore, the results
@@ -28,7 +28,7 @@ are limited to those components (packages) of which the package manager is aware
 the image, so it is safe to run on untrusted images.
 
 ${solution_name} can pull the target image; in other words, the Docker image you want to inspect, from a Docker registry such
-as Docker Hub. Alternatively, you can save an image to a .tar file by using the Docker *Save* command. Then, run ${solution_name}
+as Docker Hub. Alternatively, you can save an image to a .tar file by using the *docker save* command. Then, run ${solution_name}
 on the .tar file. ${solution_name} supports Docker Image Specification v1.2.0 format .tar files.
 
 #### Container mode
@@ -49,7 +49,7 @@ Requirements for ${solution_name} are:
 * When invoking ${solution_name} using ${script_name}:
     - curl
     - bash
-* In host mode: Access to a Docker engine; versions 17.09 or higher.
+* In host mode: Access to a Docker Engine; versions 17.09 or higher.
 * In container mode: You must start the ${solution_name} container that meets the preceding requirements, and three container-based
 "image inspector" services. All four of these containers must share a mounted volume and be able to reach each other through HTTP GET operations using base URLs
 that you provide. For more information, refer to [Deploying](deployment.md).
@@ -94,7 +94,7 @@ Alternatively, any supported property can be set by adding to a text file named
 
     {property name}={value}
 
-An *pplication.properties* file can contain multiple property assignments.
+An *application.properties* file can contain multiple property assignments.
 
 There are other alternative methods for setting properties. For more information, refer to [Running](running.md).
 

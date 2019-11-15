@@ -1,10 +1,10 @@
 ### Architecture overview
 
 ${solution_name} uses up to three container-based image inspector services, 
-one for each of the supported Linux package manager database format).
+one for each of the supported Linux package manager database formats).
 
-The three image inspector services provide coverage of the three package manager database formats: dpkg, rpm, and apk.
-By default, ${solution_name} submits its request to inspect the target image to the dpkg (Ubuntu) image inspector service. Any service 
+The three image inspector services provide coverage of the three package manager database formats: DPKG, RPM, and APK.
+By default, ${solution_name} submits its request to inspect the target image to the DPKG (Ubuntu) image inspector service. Any service 
 redirects to the appropriate image inspector service if it cannot handle the request. For example,
 if the target image is a Red Hat image, the Ubuntu inspector service, which cannot inspect a Red Hat image, 
 redirects to the CentOS inspector
@@ -58,7 +58,7 @@ base URLs that you provide:
 * One container for ${solution_name}.
 * One container for each of the three image inspector services: Alpine, CentOS, and Ubuntu.
 
-In container mode, you must provide the image in a Docker-saved .tar file.
+In container mode, you must provide the image in a .tar file created with the *docker save* command.
 
 ${solution_name}:
 
