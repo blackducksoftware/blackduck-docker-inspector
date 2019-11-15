@@ -109,7 +109,7 @@ public class HelpTextTest {
         // Due to simplified mocking, variables will not have been substituted (tested elsewhere). Testing aggregation here.
         assertTrue(allHelpMarkdown.contains("_Help version:"));
         assertTrue(allHelpMarkdown.contains("Modes of operation"));
-        assertTrue(allHelpMarkdown.contains("Please review the script before running it to make sure"));
+        assertTrue(allHelpMarkdown.contains("Review the script before running it to make sure the side effects"));
         assertTrue(allHelpMarkdown.contains("Version 8.2.2"));
     }
 }
