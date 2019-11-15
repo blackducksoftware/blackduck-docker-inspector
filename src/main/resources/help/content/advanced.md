@@ -92,7 +92,7 @@ If you invoke ${solution_name} with an image reference (a repo:tag value versus 
 it uses the docker-java library (${docker_java_project_url}) to access the Docker registry to pull the image.
 
 If *docker pull* works from the command line, then ${solution_name} should also be able to pull that image,
-because docker-java can be configured the same way as the Docker command line utility.
+because docker-java can be configured the same way as the Docker command line utility (*docker*).
 
 There are also other ways to configure docker-java. For more information on configuring docker-java
 (and therefore ${solution_name}) for your Docker registry, refer to:
@@ -120,7 +120,7 @@ When given a Docker image (--docker.image=repo:tag), ${solution_name} uses the
 [docker-java library](${docker_java_project_url})
 equivalent of [docker save](https://docs.docker.com/engine/reference/commandline/save/)
 to save the image to a tar file. In this scenario, ${solution_name}
-should be able to pull, save, and inspect any image that could be pulled using a *Docker pull* command.
+should be able to pull, save, and inspect any image that could be pulled using a *docker pull* command.
 Since ${solution_name} uses the docker-java library, the Docker client executable does not actually need
 to be installed.
 

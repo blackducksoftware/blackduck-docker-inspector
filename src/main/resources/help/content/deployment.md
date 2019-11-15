@@ -111,13 +111,13 @@ Download: ${source_raw_content_url_base}/${source_repo_organization}/${project_n
 ### Configuring ${solution_name} for your Docker registry
 
 If you invoke ${solution_name} with an image reference, versus an image that has been saved to a .tar file,
-it uses the docker-Java library (${docker_java_project_url}) to access the Docker registry
+it uses the docker-java library (${docker_java_project_url}) to access the Docker registry
 to pull the image. 
 
 If *docker pull {targetimage}* works from the command line, then ${solution_name} is also able
-to pull that image, because docker-Java can be configured the same way as the Docker command line utility. 
+to pull that image, because docker-java can be configured the same way as the Docker command line utility. 
 
-There are other ways to configure docker-Java. For more information on configuring docker-Java
+There are other ways to configure docker-java. For more information on configuring docker-java
 and ${solution_name} for your Docker registry, refer to: ${docker_java_project_url}#Configuration.
 
 ${solution_name} does not override any of the configuration settings in the code,
