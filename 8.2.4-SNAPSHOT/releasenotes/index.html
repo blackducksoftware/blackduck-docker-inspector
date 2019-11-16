@@ -1839,19 +1839,19 @@
                 <h4 id="version-823">Version 8.2.3</h4>
 <h5 id="resolved-issues">Resolved issues</h5>
 <ul>
-<li>Eliminated the Spring banner from the log to facilitate piping help output through a Markdown formatter</li>
+<li>Eliminated the Spring banner from the log to facilitate piping help output through a Markdown formatter.</li>
 </ul>
 <h4 id="version-822">Version 8.2.2</h4>
 <h5 id="resolved-issues_1">Resolved issues</h5>
 <ul>
-<li>Increased the default value of service.timeout from 4 minutes to 10 minutes.</li>
-<li>The time Docker Inspector will wait for an image inspector service to come online is now controlled via the service.timeout property.</li>
+<li>Increased the default value of <em>service.timeout</em> from four minutes to ten minutes.</li>
+<li>The time Docker Inspector waits for an image inspector service to come online is now controlled using the <em>service.timeout</em> property.</li>
 </ul>
 <h4 id="version-821">Version 8.2.1</h4>
 <h5 id="resolved-issues_2">Resolved issues</h5>
 <ul>
-<li>Fixed an issue that causes blackduck-docker-inspector.sh to display the help overview even when a different help topic is requested.</li>
-<li>Fixed an issue that causes Docker Inspector to return the full container filesystem even when only application components are requested (docker.platform.top.layer.id is specified).</li>
+<li>Resolved an issue that caused <em>blackduck-docker-inspector.sh</em> to display the help overview even when a different help topic is requested.</li>
+<li>Resolved an issue that caused Docker Inspector to return the full container filesystem even when only application components are requested (<em>docker.platform.top.layer.id</em> is specified).</li>
 </ul>
 <h4 id="version-820">Version 8.2.0</h4>
 <h5 id="new-features">New features</h5>
@@ -1864,12 +1864,12 @@
 <h4 id="version-816">Version 8.1.6</h4>
 <h5 id="changed-feature">Changed feature</h5>
 <ul>
-<li>Adjusted logging to ensure that sensitive information does not appear in a debug log.</li>
+<li>Adjusted logging to ensure that sensitive information does not display in a debug log.</li>
 </ul>
 <h4 id="version-815">Version 8.1.5</h4>
 <h5 id="resolved-issues_3">Resolved issues</h5>
 <ul>
-<li>Fixed an issue that could cause Docker Inspector to incorrectly identify the package manager of the target image.</li>
+<li>Resolved an issue that could cause Docker Inspector to incorrectly identify the package manager of the target image.</li>
 </ul>
 <h4 id="version-814">Version 8.1.4</h4>
 <h5 id="new-features_1">New features</h5>
@@ -1884,23 +1884,23 @@
 <h4 id="version-812">Version 8.1.2</h4>
 <h5 id="changed-features">Changed features</h5>
 <ul>
-<li>Updated Blackduck-docker-inspector.sh to download the Docker Inspector .jar file from the new Artifactory repository at sig-repo.synopsys.com.</li>
+<li>Updated <em>blackduck-docker-inspector.sh</em> to download the Docker Inspector .jar file from the new Artifactory repository at sig-repo.synopsys.com.</li>
 </ul>
 <h4 id="version-811">Version 8.1.1</h4>
 <h5 id="resolved-issues_4">Resolved issues</h5>
 <ul>
-<li>Resolved an issue that caused Docker Inspector to fail when it was unable to read the image inspector container's log.</li>
+<li>Resolved an issue that caused Docker Inspector to fail when it was unable to read the image inspector container log.</li>
 </ul>
 <h4 id="version-810">Version 8.1.0</h4>
 <h5 id="resolved-issues_5">Resolved issues</h5>
 <ul>
-<li>Resolved an issue that could cause a No such file error on a file named classes.jsa when inspecting images containing Java.</li>
+<li>Resolved an issue that could cause a <em>No such file</em> error on files named <em>classes.jsa</em> when inspecting images containing Java.</li>
 </ul>
 <h5 id="new-features_3">New features</h5>
 <ul>
-<li>Added the property: output.containerfilesystem.excluded.paths.</li>
-<li>Added the command line --help=true switch for invoking help.</li>
-<li>Added the property output.include.squashedimage.</li>
+<li>Added the property <em>output.containerfilesystem.excluded.paths</em>.</li>
+<li>Added the command line switch <em>--help=true</em> for invoking help.</li>
+<li>Added the property <em>output.include.squashedimage</em>.</li>
 </ul>
 <h4 id="version-802">Version 8.0.2</h4>
 <h5 id="resolved-issues_6">Resolved issues</h5>
@@ -1929,7 +1929,7 @@
 <h4 id="version-733">Version 7.3.3</h4>
 <h5 id="resolved-issues_8">Resolved issues</h5>
 <ul>
-<li>Resolved an issue that could prevent controlling the image inspector HTTP request service timeout through the service.timeout property.</li>
+<li>Resolved an issue that could prevent controlling the image inspector HTTP request service timeout through the property <em>service.timeout</em>.</li>
 </ul>
 <h4 id="version-732">Version 7.3.2</h4>
 <h5 id="resolved-issues_9">Resolved issues</h5>
@@ -1939,32 +1939,32 @@
 <h4 id="version-731">Version 7.3.1</h4>
 <h5 id="resolved-issues_10">Resolved issues</h5>
 <ul>
-<li>Resolved an issue that may cause Hub Detect versions 5.2.0 and higher to fail with an error message of DOCKER extraction failed: null when invoking Docker Inspector on a non-Linux Docker image. </li>
+<li>Resolved an issue that could cause Hub Detect versions 5.2.0 and higher to fail with an error message of <em>DOCKER extraction failed: null</em> when invoking Docker Inspector on a non-Linux Docker image. </li>
 </ul>
 <h4 id="version-730">Version 7.3.0</h4>
 <h5 id="new-features_6">New features</h5>
 <ul>
-<li>Added the property system.properties.path.</li>
+<li>Added the property <em>system.properties.path</em>.</li>
 </ul>
 <h4 id="version-724">Version 7.2.4</h4>
 <h5 id="resolved-issues_11">Resolved issues</h5>
 <ul>
-<li>Resolved an issue that may cause Docker Inspector to fail with an error message of Error inspecting image: Failed to parse docker configuration file (Unrecognized field "identitytoken").</li>
+<li>Resolved an issue that could cause Docker Inspector to fail with an error message of <em>Error inspecting image: Failed to parse docker configuration file (Unrecognized field "identitytoken")</em>.</li>
 </ul>
 <h4 id="version-723">Version 7.2.3</h4>
 <h5 id="changed-features_1">Changed features</h5>
 <ul>
-<li>When constructing the container file system with the logging level set to DEBUG or TRACE : after applying each image layer, Docker Inspector now logs contents of the layer's metadata (json) file and the list of components.</li>
+<li>When constructing the container file system with the logging level set to DEBUG or TRACE: after applying each image layer, Docker Inspector now logs contents of the layer's metadata (json) file and the list of components.</li>
 </ul>
 <h4 id="version-722">Version 7.2.2</h4>
 <h5 id="resolved-issues_12">Resolved issues</h5>
 <ul>
-<li>Resolved an issue that may cause Black Duck input/output data (BDIO) uploads to fail for openSUSE and Red Hat Docker images.</li>
+<li>Resolved an issue that could cause Black Duck input/output data (BDIO) uploads to fail for openSUSE and Red Hat Docker images.</li>
 </ul>
 <h4 id="version-721">Version 7.2.1</h4>
 <h5 id="resolved-issues_13">Resolved issues</h5>
 <ul>
-<li>Resolved an issue that may cause the Bill of Materials (BOM) creation to fail with an error message of Error in MAPPING_COMPONENTS displayed on the Black Duck Scans page for certain images.</li>
+<li>Resolved an issue that could cause the Black Duck BOM creation to fail with an error message of <em>Error in MAPPING_COMPONENTS</em> displayed on the Black Duck Scans page for certain images.</li>
 </ul>
 <h4 id="version-720">Version 7.2.0</h4>
 <h5 id="new-features_7">New features</h5>
@@ -1973,8 +1973,8 @@
 </ul>
 <h5 id="resolved-issues_14">Resolved issues</h5>
 <ul>
-<li>Fixed an issue that may generate a warning message of Error creating hard link to be logged when inspecting certain images.</li>
-<li>Fixed an issue that may generate a warning message of Error removing whited-out file .../.wh..opq to be logged when inspecting images with opaque directory whiteout files.</li>
+<li>Resolved an issue that could generate a warning message of <em>Error creating hard link</em> to be logged when inspecting certain images.</li>
+<li>Resolved an issue that could generate a warning message of <em>Error removing whited-out file .../.wh..opq</em> to be logged when inspecting images with opaque directory whiteout files.</li>
 <li>Reduced the disk space used in the working directory within the Inspector containers.</li>
 </ul>
 <h4 id="version-710">Version 7.1.0</h4>
@@ -2006,13 +2006,13 @@
 <ul>
 <li>Resolved an issue that could cause DEBUG-level warnings to be logged while inspecting images with file paths containing non-ASCII characters.</li>
 <li>Improved logging for when the image inspector service is started but never comes online.</li>
-<li>In http client mode &gt; start service mode: if a health check fails, Docker Inspector now performs a "docker logs" operation on the container to reveal the root problem.</li>
-<li>Orchestration platform properties are now included in the --help output.</li>
+<li>In http client mode &gt; start service mode: if a health check fails, Docker Inspector now performs a <em>docker logs</em> operation on the container to reveal the root problem.</li>
+<li>Orchestration platform properties are now included in the <em>--help</em> output.</li>
 </ul>
 <h4 id="version-630">Version 6.3.0</h4>
 <h5 id="new-features_8">New features</h5>
 <ul>
-<li>Added the --inspectorimagefamily command line argument, which prints the Inspector image family name.</li>
+<li>Added the <em>--inspectorimagefamily</em> command line argument, which prints the Inspector image family name.</li>
 </ul>
 <h4 id="version-620">Version 6.2.0</h4>
 <h5 id="resolved-issues_18">Resolved issues</h5>
@@ -2021,21 +2021,21 @@
 </ul>
 <h5 id="new-features_9">New features</h5>
 <ul>
-<li>Added the --pullairgapzip option.</li>
-<li>Improved multiple error messages.</li>
+<li>Added the <em>--pullairgapzip</em> option.</li>
+<li>Improved error messages.</li>
 </ul>
 <h4 id="version-610">Version 6.1.0</h4>
 <h5 id="resolved-issues_19">Resolved issues</h5>
 <ul>
 <li>Added support for running on container application platforms such as Kubernetes and OpenShift.</li>
 <li>Renamed Rest Client Mode to HTTP Client Mode.</li>
-<li>Resolved an issue that prevented BDIO (Black Duck Input/Output data) from being uploaded to the Hub. This issue only affected HTTP client mode.</li>
-<li>Resolved an issue that caused Docker Inspector to fail when inspecting an image containing no package manager. This issue only affected HTTP client node.</li>
+<li>Resolved an issue that prevented BDIO (Black Duck Input/Output data) from being uploaded to the Hub. This issue only impacted HTTP client mode.</li>
+<li>Resolved an issue that caused Docker Inspector to fail when inspecting an image containing no package manager. This issue only impacted HTTP client node.</li>
 </ul>
 <h4 id="version-604">Version 6.0.4</h4>
 <h5 id="resolved-issues_20">Resolved issues</h5>
 <ul>
-<li>Resolved an issue wherein Hub Docker Inspector may fail if the target docker tarfile path contained spaces.</li>
+<li>Resolved an issue wherein Hub Docker Inspector may fail if the target Docker tarfile path contained spaces.</li>
 </ul>
 <h4 id="version-603">Version 6.0.3</h4>
 <h5 id="resolved-issues_21">Resolved issues</h5>
@@ -2054,7 +2054,7 @@
 </ul>
 <h5 id="new-features_10">New features</h5>
 <ul>
-<li>Added the properties docker.image.repo and docker.image.tag to the usage message generated when using the command line argument --help.</li>
+<li>Added the properties <em>docker.image.repo</em> and <em>docker.image.tag</em> to the usage message generated when using the command line argument <em>--help</em>.</li>
 </ul>
 <h4 id="version-600">Version 6.0.0</h4>
 <h5 id="new-features_11">New features</h5>
@@ -2063,8 +2063,8 @@
 </ul>
 <h5 id="changed-features_4">Changed features</h5>
 <ul>
-<li>The available properties list included in the usage message, which displays when using the command line argument --help, is now sorted alphabetically.</li>
-<li>The format of the (optional) container filesystem output file name has changed.  The new container system file name is {image name}<em>{image tag}</em> containerfilesystem.tar.gz or {image tarfilename}.tar.gz, depending on how the target image is specified.</li>
+<li>The available properties list included in the usage message, which displays when using the command line argument <em>--help</em>, is now sorted alphabetically.</li>
+<li>The format of the (optional) container filesystem output file name has changed.  The new container system file name is <em>{image name}<em>{image tag}</em> containerfilesystem.tar.gz</em> or <em>{image tarfilename}.tar.gz</em>, depending on how the target image is specified.</li>
 </ul>
                 
                   

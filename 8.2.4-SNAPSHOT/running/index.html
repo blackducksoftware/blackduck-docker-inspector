@@ -395,7 +395,7 @@
                   <h1>Running</h1>
                 
                 <h3 id="running-the-latest-version">Running the latest version</h3>
-<p>The following command format will always fetch and run the latest version of Black Duck Docker Inspector:</p>
+<p>The following command format always fetches and runs the latest version of Black Duck Docker Inspector:</p>
 <pre><code>bash &lt;(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) {Black Duck Docker Inspector arguments}
 </code></pre>
 <p>For example:</p>
@@ -407,15 +407,15 @@ bash &lt;(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector
 chmod +x blackduck-docker-inspector.sh
 ./blackduck-docker-inspector.sh {Black Duck Docker Inspector arguments}
 </code></pre>
-<p>The advantage of using the Black Duck Docker Inspector script is that ensures that you always run the latest version of the Black Duck Docker Inspector .jar.</p>
+<p>The advantage of using the Black Duck Docker Inspector script is that it ensures that you are always running the latest version of the Black Duck Docker Inspector .jar.</p>
 <p>Another alternative is to download the Black Duck Docker Inspector .jar (using the script) and run the .jar directly:</p>
 <pre><code>bash &lt;(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) --pulljar
 java -jar blackduck-docker-inspector-{version}.jar {Black Duck Docker Inspector arguments}
 </code></pre>
 <h3 id="running-a-specific-version">Running a specific version</h3>
 <p>By default, blackduck-docker-inspector.sh runs the latest version of
-Black Duck Docker Inspector (by downloading, if necessary, and running the latest Black Duck Docker Inspector .jar).
-To run a specific version of Black Duck Docker Inspector instead:</p>
+Black Duck Docker Inspector by downloading, if necessary, and running the latest Black Duck Docker Inspector .jar.
+To run a specific version of Black Duck Docker Inspector:</p>
 <pre><code>export DOCKER_INSPECTOR_VERSION={version}
 ./blackduck-docker-inspector.sh {Black Duck Docker Inspector arguments}
 </code></pre>
@@ -427,22 +427,22 @@ To run a specific version of Black Duck Docker Inspector instead:</p>
 <p>The advantage of running blackduck-docker-inspector.sh is that it ensures that you always run the latest
 version of Black Duck Docker Inspector. However, sometimes it is better to run the .jar directly.</p>
 <p>You can download any version of the Black Duck Docker Inspector .jar from https://sig-repo.synopsys.com/webapp/#/artifacts/browse/tree/General/bds-integrations-release/com/synopsys/integration/blackduck-docker-inspector.</p>
-<p>Use the java command to run it:</p>
+<p>Use this Java command to run it:</p>
 <pre><code>java -jar blackduck-docker-inspector-{version}.jar {Black Duck Docker Inspector arguments}
 </code></pre>
 <h3 id="inspecting-an-image-by-image-repotag">Inspecting an image by image repo:tag</h3>
-<p>To run Black Duck Docker Inspector on Docker image from your local cache or a registry:</p>
+<p>To run Black Duck Docker Inspector on a Docker image from your local cache or a registry:</p>
 <pre><code>./blackduck-docker-inspector.sh --docker.image={repo}:{tag}
 </code></pre>
-<p>If you omit the :{tag}, it will default to :latest.</p>
+<p>If you omit the :{tag}, it defaults to :latest.</p>
 <h3 id="inspecting-an-image-saved-to-a-tar-file">Inspecting an image saved to a .tar file</h3>
 <p>To run Black Duck Docker Inspector on a Docker image .tar file:</p>
 <pre><code>docker save -o {name}.tar {repo}:{tag}
 ./blackduck-docker-inspector.sh --docker.tar={name}.tar
 </code></pre>
 <p>If your tar file contains multiple images, Black Duck Docker Inspector can only inspect one of them.
-You can specify which image you want to inspect using --docker.image.repo and --docker.image.tag. For example, to select ubuntu:latest
-from a .tar file that contains ubuntu:latest and other images:</p>
+You can specify which image you want to inspect using <em>--docker.image.repo</em> and <em>--docker.image.tag</em>. For example, to select <em>ubuntu:latest</em>
+from a .tar file that contains <em>ubuntu:latest</em> and other images:</p>
 <pre><code>./blackduck-docker-inspector.sh --docker.tar=multipleimages.tar --docker.image.repo=ubuntu --docker.image.tag=latest
 </code></pre>
                 

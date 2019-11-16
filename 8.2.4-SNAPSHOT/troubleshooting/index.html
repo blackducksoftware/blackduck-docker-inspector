@@ -272,8 +272,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#problem-when-directly-invoking-the-jar-file-an-error-message-displays-which-reads-malformed-input-or-input-contains-unmappable-characters" class="md-nav__link">
-    Problem: When directly invoking the .jar file, an error message displays which reads "Malformed input or input contains unmappable characters."
+  <a href="#problem-when-directly-invoking-the-jar-file-an-error-message-displays-malformed-input-or-input-contains-unmappable-characters" class="md-nav__link">
+    Problem: When directly invoking the .jar file, an error message displays "Malformed input or input contains unmappable characters."
   </a>
   
 </li>
@@ -286,29 +286,29 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#problem-property-values-being-set-in-unexpected-ways" class="md-nav__link">
-    Problem: Property values being set in unexpected ways.
+  <a href="#problem-property-values-are-set-in-unexpected-ways" class="md-nav__link">
+    Problem: Property values are set in unexpected ways.
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#problem-the-image-inspector-service-cannot-write-to-the-mounted-volume-selinux-is-enabled" class="md-nav__link">
-    Problem: The image inspector service cannot write to the mounted volume; SELinux is enabled
+    Problem: The image inspector service cannot write to the mounted volume; SELinux is enabled.
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#problem-the-image-inspector-service-cannot-read-from-the-mounted-volume" class="md-nav__link">
-    Problem: The image inspector service cannot read from the mounted volume
+    Problem: The image inspector service cannot read from the mounted volume.
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#problem-black-duck-docker-inspector-cannot-perform-any-docker-operations-because-the-remote-access-port-is-not-enabled-on-the-docker-engine" class="md-nav__link">
-    Problem: Black Duck Docker Inspector cannot perform any Docker operations because the remote access port is not enabled on the Docker engine
+    Problem: Black Duck Docker Inspector cannot perform any Docker operations because the remote access port is not enabled on the Docker engine.
   </a>
   
 </li>
@@ -362,8 +362,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#problem-when-directly-invoking-the-jar-file-an-error-message-displays-which-reads-malformed-input-or-input-contains-unmappable-characters" class="md-nav__link">
-    Problem: When directly invoking the .jar file, an error message displays which reads "Malformed input or input contains unmappable characters."
+  <a href="#problem-when-directly-invoking-the-jar-file-an-error-message-displays-malformed-input-or-input-contains-unmappable-characters" class="md-nav__link">
+    Problem: When directly invoking the .jar file, an error message displays "Malformed input or input contains unmappable characters."
   </a>
   
 </li>
@@ -376,29 +376,29 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#problem-property-values-being-set-in-unexpected-ways" class="md-nav__link">
-    Problem: Property values being set in unexpected ways.
+  <a href="#problem-property-values-are-set-in-unexpected-ways" class="md-nav__link">
+    Problem: Property values are set in unexpected ways.
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#problem-the-image-inspector-service-cannot-write-to-the-mounted-volume-selinux-is-enabled" class="md-nav__link">
-    Problem: The image inspector service cannot write to the mounted volume; SELinux is enabled
+    Problem: The image inspector service cannot write to the mounted volume; SELinux is enabled.
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#problem-the-image-inspector-service-cannot-read-from-the-mounted-volume" class="md-nav__link">
-    Problem: The image inspector service cannot read from the mounted volume
+    Problem: The image inspector service cannot read from the mounted volume.
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#problem-black-duck-docker-inspector-cannot-perform-any-docker-operations-because-the-remote-access-port-is-not-enabled-on-the-docker-engine" class="md-nav__link">
-    Problem: Black Duck Docker Inspector cannot perform any Docker operations because the remote access port is not enabled on the Docker engine
+    Problem: Black Duck Docker Inspector cannot perform any Docker operations because the remote access port is not enabled on the Docker engine.
   </a>
   
 </li>
@@ -426,10 +426,10 @@
 <p>To troubleshoot issues with Black Duck Docker Inspector, run with DEBUG logging:</p>
 <pre><code>--logging.level.com.synopsys=DEBUG
 </code></pre>
-<p>Here are suggestions related to specific problems:</p>
-<h3 id="problem-when-directly-invoking-the-jar-file-an-error-message-displays-which-reads-malformed-input-or-input-contains-unmappable-characters">Problem: When directly invoking the .jar file, an error message displays which reads "Malformed input or input contains unmappable characters."</h3>
+<p>The following suggestions are related to specific problems:</p>
+<h3 id="problem-when-directly-invoking-the-jar-file-an-error-message-displays-malformed-input-or-input-contains-unmappable-characters">Problem: When directly invoking the .jar file, an error message displays "Malformed input or input contains unmappable characters."</h3>
 <p>Possible cause: Your local character encoding does not match the target container file system character encoding.</p>
-<p>Solution/workaround: Set the character encoding to UTF-8 when invoking java:</p>
+<p>Solution/workaround: Set the character encoding to UTF-8 when invoking Java:</p>
 <pre><code>java -Dfile.encoding=UTF-8 ...
 </code></pre>
 <h3 id="problem-you-must-run-black-duck-docker-inspector-on-a-non-linux-computer">Problem: You must run Black Duck Docker Inspector on a non-Linux computer.</h3>
@@ -458,36 +458,36 @@ dockerd --storage-driver=vfs 2&gt; dockerd_stderr.log &gt; dockerd_stdout.log &a
 and others, are required to give Docker running inside the inspectorhost container access to the Docker
 images that Black Duck Docker Inspector must pull. One way to reduce extra steps is to save the target
 Docker image as a .tar file on your computer,
-use docker cp to copy it into the container, and run Black Duck Docker Inspector on that .tar file.</p>
-<h3 id="problem-property-values-being-set-in-unexpected-ways">Problem: Property values being set in unexpected ways.</h3>
+use <em>docker cp</em> to copy it into the container, and run Black Duck Docker Inspector on that .tar file.</p>
+<h3 id="problem-property-values-are-set-in-unexpected-ways">Problem: Property values are set in unexpected ways.</h3>
 <p>Possible cause: Black Duck Docker Inspector is built using the Spring Boot application framework.
 Spring Boot provides a variety of ways to set property values. This can produce unexpected results if,
 for example, you have an environment variable whose name maps to a Black Duck Docker Inspector property name.
 Refer to the
 <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html">Spring Boot documentation</a>
 for more details.</p>
-<h3 id="problem-the-image-inspector-service-cannot-write-to-the-mounted-volume-selinux-is-enabled">Problem: The image inspector service cannot write to the mounted volume; SELinux is enabled</h3>
+<h3 id="problem-the-image-inspector-service-cannot-write-to-the-mounted-volume-selinux-is-enabled">Problem: The image inspector service cannot write to the mounted volume; SELinux is enabled.</h3>
 <p>When this happens, the following error may appear in the container log: </p>
 <pre><code>Exception thrown while getting image packages: Error inspecting image: /opt/blackduck/shared/run_.../output/..._containerfilesystem.tar.gz (Permission denied)
 ...
 Caused by: java.io.FileNotFoundException: /opt/blackduck/hub-imageinspector-ws/shared/run_.../output/..._containerfilesystem.tar.gz (Permission denied)
 </code></pre>
 <p>Possible cause: SELinux policy configuration.</p>
-<p>Solution/workaround: Add the svirt_sandbox_file_t label to Black Duck Docker Inspector's shared directory.
+<p>Solution/workaround: Add the <em>svirt_sandbox_file_t</em> label to Black Duck Docker Inspector's shared directory.
 This enables the Black Duck Docker Inspector services running in Docker containers to write to it:</p>
 <pre><code>sudo chcon -Rt svirt_sandbox_file_t /tmp/blackduck-docker-inspector-files/shared/
 </code></pre>
-<h3 id="problem-the-image-inspector-service-cannot-read-from-the-mounted-volume">Problem: The image inspector service cannot read from the mounted volume</h3>
+<h3 id="problem-the-image-inspector-service-cannot-read-from-the-mounted-volume">Problem: The image inspector service cannot read from the mounted volume.</h3>
 <p>When this happens, the following error may appear in the container log: </p>
 <pre><code>Error inspecting image: /opt/blackduck/shared/run_.../{image}.tar (Permission denied)
 </code></pre>
 <p>Possible cause: The Linux umask value on the machine running Black Duck Docker Inspector is too restrictive.</p>
-<p>Solution/workaround: Set umask to 022 when running Black Duck Docker Inspector. The cause could be a umask value
+<p>Solution/workaround: Set umask to 022 when running Black Duck Docker Inspector. The cause could be an umask value
 that prevents read access to the file, or read or execute access to the directory.
 Black Duck Docker Inspector requires an umask value that does not remove read permissions from files,
-and does not remove read or execute permissions from directories. For example, a umask of 022 works.</p>
-<h3 id="problem-black-duck-docker-inspector-cannot-perform-any-docker-operations-because-the-remote-access-port-is-not-enabled-on-the-docker-engine">Problem: Black Duck Docker Inspector cannot perform any Docker operations because the remote access port is not enabled on the Docker engine</h3>
-<p>When this happens, the following error may appear in the log:</p>
+and does not remove read or execute permissions from directories. For example, an umask value of 022 works.</p>
+<h3 id="problem-black-duck-docker-inspector-cannot-perform-any-docker-operations-because-the-remote-access-port-is-not-enabled-on-the-docker-engine">Problem: Black Duck Docker Inspector cannot perform any Docker operations because the remote access port is not enabled on the Docker engine.</h3>
+<p>When this happens, the following error may display in the log:</p>
 <pre><code>Error inspecting image: java.io.IOException: Couldn't load native library
 Stack trace: javax.ws.rs.ProcessingException: java.io.IOException: Couldn't load native library
 </code></pre>
@@ -495,9 +495,9 @@ Stack trace: javax.ws.rs.ProcessingException: java.io.IOException: Couldn't load
 <pre><code>Error inspecting image: Could not initialize class org.newsclub.net.unix.NativeUnixSocket
 Stack trace: java.lang.NoClassDefFoundError: Could not initialize class org.newsclub.net.unix.NativeUnixSocket
 </code></pre>
-<p>Possible cause: The tcp socket (for remote access) is not enabled on the Docker engine. For more information, refer to the <a href="https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-socket-option">Docker documentation</a>.</p>
+<p>Possible cause: The TCP socket for remote access is not enabled on the Docker engine. For more information, refer to <a href="https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-socket-option">Docker documentation</a>.</p>
 <p>Solution/workaround: Follow the instructions in the <a href="https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-socket-option">Docker documentation</a> to
-open the tcp port on the Docker engine.</p>
+open the TCP port on the Docker engine.</p>
                 
                   
                 
