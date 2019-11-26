@@ -2,10 +2,10 @@
 
 ${solution_name} can be run in either of the following modes:
 
-1. Host mode on a Linux machine or a Linux virtual machine (VM) with Docker.
-2. Container mode inside a container running on an orchestration platform such as Kubernetes, OpenShift, etc.
+1. Host mode on a Linux machine or a Linux virtual machine (VM) with Docker. The deployment approach for host mode is referred to below as "utility"; you simply execute a command, and deployment is automatic.
+2. Container mode inside a container running on an orchestration platform such as Kubernetes, OpenShift, etc. The deployment approach for container mode is referred to below as "toolkit"; you take components provided by Docker Inspector (one utility, three containerized services) and deploy them yourself.
 
-Each mode is discussed as follows.
+Most, but not all, of the deployment examples below use the toolkit approach.
 
 ### Important notes regarding deployment sample code
 
@@ -106,7 +106,7 @@ Approach: Toolkit
 
 Deployment notes: The containers communicate through localhost URLs.
 
-Download: ${source_raw_content_url_base}/${source_repo_organization}/${project_name}/master/deployment/docker/runDetectInContainer/setup.sh			
+Download: curl -O ${source_raw_content_url_base}/${source_repo_organization}/${project_name}/master/deployment/docker/runDetectInContainer/setup.sh			
 
 ### Configuring ${solution_name} for your Docker registry
 
