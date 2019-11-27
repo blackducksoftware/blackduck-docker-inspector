@@ -56,6 +56,7 @@ import com.github.dockerjava.core.command.PullImageResultCallback;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarFilename;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.exception.DisabledException;
+import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarWrapper;
 import com.synopsys.integration.blackduck.exception.BlackDuckIntegrationException;
 import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 import com.synopsys.integration.blackduck.imageinspector.api.name.ImageNameResolver;
@@ -115,7 +116,7 @@ public class DockerClientManager {
         }
     }
 
-    public File getTarFileFromDockerImageById(final String imageId, final File imageTarDirectory) throws IntegrationException, IOException {
+    public ImageTarWrapper getTarFileFromDockerImageById(final String imageId, final File imageTarDirectory) throws IntegrationException, IOException {
 
         final DockerClient dockerClient = getDockerClient();
         final InspectImageCmd inspectImageCmd = dockerClient.inspectImageCmd(imageId);
@@ -130,10 +131,10 @@ public class DockerClientManager {
         final String tagName = resolver.getNewImageTag().get();
         logger.debug(String.format("Converted image ID %s to image name:tag %s:%s", imageId, imageName, tagName));
         final File imageTarFile = saveImageToDir(imageTarDirectory, imageTarFilename.deriveImageTarFilenameFromImageTag(imageName, tagName), imageName, tagName);
-        return imageTarFile;
+        return new ImageTarWrapper(imageTarFile, imageName, tagName);
     }
 
-    public File getTarFileFromDockerImage(final String imageName, final String tagName, final File imageTarDirectory) throws IntegrationException, IOException {
+    public ImageTarWrapper getTarFileFromDockerImage(final String imageName, final String tagName, final File imageTarDirectory) throws IntegrationException, IOException {
         Optional<String> targetImageId = Optional.empty();
         try {
             targetImageId = Optional.ofNullable(pullImage(imageName, tagName));
@@ -143,6 +144,7 @@ public class DockerClientManager {
             logger.info(String.format("Unable to pull %s:%s; Proceeding anyway since the image might be in local docker image cache. Error on pull: %s", imageName, tagName, e.getMessage()));
         }
         final File imageTarFile = saveImageToDir(imageTarDirectory, imageTarFilename.deriveImageTarFilenameFromImageTag(imageName, tagName), imageName, tagName);
+        final ImageTarWrapper imageTarWrapper = new ImageTarWrapper(imageTarFile, imageName, tagName);
         if (config.isCleanupTargetImage() && targetImageId.isPresent()) {
             try {
                 removeImage(targetImageId.get());
@@ -150,7 +152,7 @@ public class DockerClientManager {
                 logger.warn(String.format("Unable to remove target image with ID %s: %s", targetImageId.get(), e.getMessage()));
             }
         }
-        return imageTarFile;
+        return imageTarWrapper;
     }
 
     public String pullImage(final String imageName, final String tagName) throws IntegrationException {

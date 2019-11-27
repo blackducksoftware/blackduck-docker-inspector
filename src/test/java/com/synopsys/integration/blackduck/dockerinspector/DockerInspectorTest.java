@@ -2,7 +2,6 @@ package com.synopsys.integration.blackduck.dockerinspector;
 
 import static org.junit.Assert.assertTrue;
 
-
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import java.io.File;
 import java.io.IOException;
@@ -114,6 +113,8 @@ public class DockerInspectorTest {
         ensureContainerRemoved("centos");
         ensureContainerRemoved("ubuntu");
     }
+
+    //TODO all tests should test the result.json file
     
     @Test
     public void testUbuntu1404LayeredIncludeRemoved() throws IOException, InterruptedException, IntegrationException {

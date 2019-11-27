@@ -22,15 +22,15 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.httpclient;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
+import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarWrapper;
 import com.synopsys.integration.exception.IntegrationException;
 
 public interface ImageInspectorClient {
 
-    File copyTarfileToSharedDir(final File givenDockerTarfile) throws IOException;
+    ImageTarWrapper copyTarfileToSharedDir(final ImageTarWrapper givenDockerTarfile) throws IOException;
 
     String getBdio(String hostPathToTarFile, String containerPathToInputDockerTarfile, String givenImageRepo, String givenImageTag,
         String containerPathToOutputFileSystemFile, String containerFileSystemExcludedPaths,

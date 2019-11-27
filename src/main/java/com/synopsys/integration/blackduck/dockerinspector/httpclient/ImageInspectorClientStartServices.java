@@ -22,6 +22,7 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.httpclient;
 
+import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarWrapper;
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.rest.client.IntHttpClient;
 import java.io.File;
@@ -91,16 +92,16 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
     }
 
     @Override
-    public File copyTarfileToSharedDir(final File givenDockerTarfile) throws IOException {
+    public ImageTarWrapper copyTarfileToSharedDir(final ImageTarWrapper givenDockerTarfile) throws IOException {
         // Copy the tarfile to the shared/target dir
-        final File finalDockerTarfile = new File(programPaths.getDockerInspectorTargetDirPath(), givenDockerTarfile.getName());
+        final File finalDockerTarfile = new File(programPaths.getDockerInspectorTargetDirPath(), givenDockerTarfile.getFile().getName());
         logger.debug(String.format("Required docker tarfile location: %s", finalDockerTarfile.getCanonicalPath()));
-        if (!finalDockerTarfile.getCanonicalPath().equals(givenDockerTarfile.getCanonicalPath())) {
-            logger.debug(String.format("Copying %s to %s", givenDockerTarfile.getCanonicalPath(), finalDockerTarfile.getCanonicalPath()));
-            FileUtils.copyFile(givenDockerTarfile, finalDockerTarfile);
+        if (!finalDockerTarfile.getCanonicalPath().equals(givenDockerTarfile.getFile().getCanonicalPath())) {
+            logger.debug(String.format("Copying %s to %s", givenDockerTarfile.getFile().getCanonicalPath(), finalDockerTarfile.getCanonicalPath()));
+            FileUtils.copyFile(givenDockerTarfile.getFile(), finalDockerTarfile);
         }
         logger.debug(String.format("Final docker tar file path: %s", finalDockerTarfile.getCanonicalPath()));
-        return finalDockerTarfile;
+        return new ImageTarWrapper(finalDockerTarfile, givenDockerTarfile.getImageRepo(), givenDockerTarfile.getImageTag());
     }
 
     @Override

@@ -31,6 +31,7 @@ import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspector
 import com.synopsys.integration.blackduck.dockerinspector.exception.HelpGenerationException;
 import com.synopsys.integration.blackduck.dockerinspector.help.HelpWriter;
 import com.synopsys.integration.blackduck.dockerinspector.httpclient.HttpClientInspector;
+import com.synopsys.integration.blackduck.dockerinspector.output.Result;
 import com.synopsys.integration.blackduck.dockerinspector.output.ResultFile;
 import com.synopsys.integration.blackduck.dockerinspector.programarguments.ArgumentParser;
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
@@ -103,12 +104,12 @@ public class DockerInspector {
 
     @PostConstruct
     public void inspectImage() {
-        int returnCode = -1;
+        Result result = null;
         try {
             if (!initAndValidate(config)) {
                 System.exit(0);
             }
-            returnCode = inspector.getBdio();
+            result = inspector.getBdio();
         } catch (final Throwable e) {
             final String msgBase;
             if (e instanceof HelpGenerationException) {
@@ -120,9 +121,10 @@ public class DockerInspector {
             logger.error(msg);
             final String trace = ExceptionUtils.getStackTrace(e);
             logger.debug(String.format("Stack trace: %s", trace));
-            resultFile.write(new Gson(), programPaths.getDockerInspectorResultPath(), false, msg, ImageInspectorOsEnum.UBUNTU, "unknown", "unknown",
-                    "unknown", "unknown");
+            result = Result.createResultFailure(msg);
         }
+        resultFile.write(new Gson(), programPaths.getDockerInspectorResultPath(), result);
+        int returnCode = result.getReturnCode();
         logger.info(String.format("Returning %d", returnCode));
         System.exit(returnCode);
     }

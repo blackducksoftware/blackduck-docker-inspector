@@ -78,9 +78,9 @@ public class SquashedImage {
         final String squashedImageId = dockerClientManager.buildImage(dockerBuildDir, tags);
 
         try {
-            final File generatedSquashedImageTarfile = dockerClientManager.getTarFileFromDockerImageById(squashedImageId, tempWorkingDir);
-            logger.info(String.format("Generated squashed tarfile: %s", generatedSquashedImageTarfile.getAbsolutePath()));
-            CompressedFile.gZipFile(generatedSquashedImageTarfile, squashedImageTarGz);
+            final ImageTarWrapper generatedSquashedImageTarfile = dockerClientManager.getTarFileFromDockerImageById(squashedImageId, tempWorkingDir);
+            logger.info(String.format("Generated squashed tarfile: %s", generatedSquashedImageTarfile.getFile().getAbsolutePath()));
+            CompressedFile.gZipFile(generatedSquashedImageTarfile.getFile(), squashedImageTarGz);
         } finally {
             logger.debug(String.format("Removing temporary squashed image: %s", imageRepoTag));
             final String[] imageRepoTagParts = imageRepoTag.split(":");
