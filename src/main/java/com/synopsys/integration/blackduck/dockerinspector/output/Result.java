@@ -22,6 +22,8 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.output;
 
+import java.io.File;
+
 import com.synopsys.integration.util.Stringable;
 
 public class Result extends Stringable {
@@ -32,22 +34,30 @@ public class Result extends Stringable {
     // these filenames are just the filename, not the full path:
     private final String dockerTarfilename;
     private final String bdioFilename;
+    private final String containerFilesystemFilename;
+    private final String squashedImageFilename;
 
     public static Result createResultFailure(final String message) {
-        return new Result(false, message, "unknown", "unknwon", "unknown","none");
+        return new Result(false, message, "unknown", "unknwon", "unknown","none", "none", "none");
     }
 
-    public static Result createResultSuccess(final String imageRepo, final String imageTag, final String dockerTarfilename, final String bdioFilename) {
-        return new Result(true, "Docker Inspector succeeded.", imageRepo, imageTag, dockerTarfilename, bdioFilename);
+    public static Result createResultSuccess(final String imageRepo, final String imageTag, final String dockerTarfilename, final File bdioFile, final File containerFilesystemFile, final File squashedImageFile) {
+        final String bdioFilename = bdioFile == null ? "" : bdioFile.getName();
+        final String containerFilesystemFilename = containerFilesystemFile == null ? "" : containerFilesystemFile.getName();
+        final String squashedImageFilename = squashedImageFile == null ? "" : squashedImageFile.getName();
+        return new Result(true, "Docker Inspector succeeded.", imageRepo, imageTag, dockerTarfilename, bdioFilename, containerFilesystemFilename, squashedImageFilename);
     }
 
-    private Result(final Boolean succeeded, final String message, final String imageRepo, final String imageTag, final String dockerTarfilename, final String bdioFilename) {
+    private Result(final Boolean succeeded, final String message, final String imageRepo, final String imageTag, final String dockerTarfilename, final String bdioFilename,
+        final String containerFilesystemFilename, final String squashedImageFilename) {
         this.succeeded = succeeded;
         this.message = message;
         this.imageRepo = imageRepo;
         this.imageTag = imageTag;
         this.dockerTarfilename = dockerTarfilename == null ? "" : dockerTarfilename;
-        this.bdioFilename = bdioFilename == null ? "" : bdioFilename;
+        this.bdioFilename = bdioFilename;
+        this.containerFilesystemFilename = containerFilesystemFilename;
+        this.squashedImageFilename = squashedImageFilename;
     }
 
     public boolean isSucceeded() {
@@ -72,6 +82,14 @@ public class Result extends Stringable {
 
     public String getBdioFilename() {
         return bdioFilename;
+    }
+
+    public String getContainerFilesystemFilename() {
+        return containerFilesystemFilename;
+    }
+
+    public String getSquashedImageFilename() {
+        return squashedImageFilename;
     }
 
     public int getReturnCode() {

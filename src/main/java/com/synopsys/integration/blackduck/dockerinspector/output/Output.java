@@ -78,7 +78,7 @@ public class Output {
         logger.debug(String.format("Output dir: %s; created: %b; successfully made writeable: %b; make executable: %b", outputDir.getAbsolutePath(), dirCreated, dirMadeWriteable, dirMadeExecutable));
     }
 
-    public File addOutputToFinalOutputDir(final SimpleBdioDocument bdioDocument) throws IOException, IntegrationException {
+    public OutputFiles addOutputToFinalOutputDir(final SimpleBdioDocument bdioDocument) throws IOException, IntegrationException {
         // if user specified an output dir, use that; else use the working output dir
         File outputDir;
         if (StringUtils.isNotBlank(config.getOutputPath())) {
@@ -96,14 +96,14 @@ public class Output {
         }
         final String containerFileSystemFilename = containerFilesystemFilename.deriveContainerFilesystemFilename();
         final File containerFileSystemFile = new File(outputDir, containerFileSystemFilename);
-        addSquashedImage(outputDir, containerFileSystemFile);
+        final File squashedImageFile = addSquashedImage(outputDir, containerFileSystemFile);
         removeContainerFileSystemIfNotRequested(containerFileSystemFile);
-        return outputBdioFile;
+        return new OutputFiles(outputBdioFile, containerFileSystemFile, squashedImageFile);
     }
 
-    private void addSquashedImage(final File outputDir, final File containerFileSystemFile) throws IntegrationException {
+    private File addSquashedImage(final File outputDir, final File containerFileSystemFile) throws IntegrationException {
         if (!config.isOutputIncludeSquashedImage()) {
-            return;
+            return null;
         }
         if (!containerFileSystemFile.exists()) {
             throw new IntegrationException(String.format("Squashed image requested, but container file system not generated, so can't generate squashed image"));
@@ -122,6 +122,7 @@ public class Output {
         } catch (IOException e) {
             throw new IntegrationException(String.format("Error generating squashed image: %s", e.getMessage()), e);
         }
+        return squashedImageFile;
     }
 
     private String deriveSquashedImageFilename(final String containerFileSystemFilename) throws IntegrationException {

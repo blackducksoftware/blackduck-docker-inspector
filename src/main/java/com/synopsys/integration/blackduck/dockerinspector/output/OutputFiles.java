@@ -22,30 +22,28 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.output;
 
-import com.google.gson.Gson;
-import com.google.gson.stream.JsonWriter;
-import java.io.Closeable;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.nio.charset.StandardCharsets;
+import java.io.File;
 
-public class ResultWriter implements Closeable {
-    private final Gson gson;
-    private final JsonWriter jsonWriter;
+public class OutputFiles {
+    private File bdioFile;
+    private File containerFileSystemFile;
+    private File squashedImageFile;
 
-    public ResultWriter(final Gson gson, final OutputStream outputStream) {
-        this.gson = gson;
-        this.jsonWriter = new JsonWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
-        jsonWriter.setIndent("  ");
+    public OutputFiles(final File bdioFile, final File containerFileSystemFile, final File squashedImageFile) {
+        this.bdioFile = bdioFile;
+        this.containerFileSystemFile = containerFileSystemFile;
+        this.squashedImageFile = squashedImageFile;
     }
 
-    public void writeResult(final Result result) {
-        gson.toJson(result, result.getClass(), jsonWriter);
+    public File getBdioFile() {
+        return bdioFile;
     }
 
-    @Override
-    public void close() throws IOException {
-        jsonWriter.close();
+    public File getContainerFileSystemFile() {
+        return containerFileSystemFile;
+    }
+
+    public File getSquashedImageFile() {
+        return squashedImageFile;
     }
 }
