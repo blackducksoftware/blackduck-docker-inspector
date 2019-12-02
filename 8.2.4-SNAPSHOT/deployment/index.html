@@ -495,10 +495,10 @@
                 <h3 id="deployment-overview">Deployment overview</h3>
 <p>Black Duck Docker Inspector can be run in either of the following modes:</p>
 <ol>
-<li>Host mode on a Linux machine or a Linux virtual machine (VM) with Docker.</li>
-<li>Container mode inside a container running on an orchestration platform such as Kubernetes, OpenShift, etc.</li>
+<li>Host mode on a Linux machine or a Linux virtual machine (VM) with Docker. The deployment approach for host mode is referred to below as "utility"; you simply execute a command, and deployment is automatic.</li>
+<li>Container mode inside a container running on an orchestration platform such as Kubernetes, OpenShift, etc. The deployment approach for container mode is referred to below as "toolkit"; you take components provided by Docker Inspector (one utility, three containerized services) and deploy them yourself.</li>
 </ol>
-<p>Each mode is discussed as follows.</p>
+<p>Most, but not all, of the deployment examples below use the toolkit approach.</p>
 <h3 id="important-notes-regarding-deployment-sample-code">Important notes regarding deployment sample code</h3>
 <p>The deployment samples provided are intended to illustrate possible approaches to the challenges
 involved in deploying Black Duck Docker Inspector. They are not intended to be used as-is in production.
@@ -561,7 +561,7 @@ The containers communicate through localhost URLs.</p>
 <h3 id="deployment-sample-for-docker-with-detect-running-in-a-container">Deployment sample for Docker with Detect running in a container</h3>
 <p>Approach: Toolkit</p>
 <p>Deployment notes: The containers communicate through localhost URLs.</p>
-<p>Download: https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/docker/runDetectInContainer/setup.sh         </p>
+<p>Download: curl -O https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/docker/runDetectInContainer/setup.sh         </p>
 <h3 id="configuring-black-duck-docker-inspector-for-your-docker-registry">Configuring Black Duck Docker Inspector for your Docker registry</h3>
 <p>If you invoke Black Duck Docker Inspector with an image reference, versus an image that has been saved to a .tar file,
 it uses the docker-java library (https://github.com/docker-java/docker-java) to access the Docker registry
