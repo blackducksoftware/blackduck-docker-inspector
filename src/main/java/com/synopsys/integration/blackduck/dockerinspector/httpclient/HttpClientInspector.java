@@ -44,7 +44,6 @@ import com.synopsys.integration.blackduck.dockerinspector.output.Output;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.output.Result;
-import com.synopsys.integration.blackduck.imageinspector.api.name.Names;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.bdio.BdioReader;
 import com.synopsys.integration.bdio.model.SimpleBdioDocument;
@@ -83,7 +82,7 @@ public class HttpClientInspector {
     public Result getBdio() throws IntegrationException {
         final ImageInspectorClient imageInspectorClient = chooseImageInspectorClient();
         try {
-            output.ensureOutputDirIsWriteable();
+            output.ensureWorkingOutputDirIsWriteable();
             final ImageTarWrapper finalDockerTarfile = prepareDockerTarfile(imageInspectorClient);
             final String containerFileSystemFilename = containerFilesystemFilename.deriveContainerFilesystemFilename();
             final String dockerTarFilePathInContainer = containerPaths.getContainerPathToTargetFile(finalDockerTarfile.getFile().getCanonicalPath());
@@ -98,7 +97,7 @@ public class HttpClientInspector {
             logger.trace(String.format("bdioString: %s", bdioString));
             final SimpleBdioDocument bdioDocument = toBdioDocument(bdioString);
             adjustBdio(bdioDocument);
-            final File bdioFile = output.addOutputToOutputDir(bdioDocument);
+            final File bdioFile = output.addOutputToFinalOutputDir(bdioDocument);
             if (config.isUploadBdio()) {
                 blackDuckClient.uploadBdio(bdioFile, bdioDocument.billOfMaterials.spdxName);
             }

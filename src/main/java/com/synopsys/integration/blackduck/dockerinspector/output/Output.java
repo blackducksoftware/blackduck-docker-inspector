@@ -39,7 +39,6 @@ import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.bdio.BdioWriter;
 import com.synopsys.integration.bdio.model.SimpleBdioDocument;
-import com.synopsys.integration.blackduck.imageinspector.api.name.Names;
 import com.synopsys.integration.exception.IntegrationException;
 
 @Component
@@ -61,22 +60,32 @@ public class Output {
     @Autowired
     private ContainerFilesystemFilename containerFilesystemFilename;
 
-    public void ensureOutputDirIsWriteable() {
-        final File outputDir = new File(programPaths.getDockerInspectorDefaultOutputPath());
+    public File getFinalOutputDir() {
+        File outputDir;
+        if (StringUtils.isNotBlank(config.getOutputPath())) {
+            outputDir = new File(config.getOutputPath());
+        } else {
+            outputDir = new File(programPaths.getDockerInspectorWorkingOutputPath());
+        }
+        return outputDir;
+    }
+
+    public void ensureWorkingOutputDirIsWriteable() {
+        final File outputDir = new File(programPaths.getDockerInspectorWorkingOutputPath());
         final boolean dirCreated = outputDir.mkdirs();
         final boolean dirMadeWriteable = outputDir.setWritable(true, false);
         final boolean dirMadeExecutable = outputDir.setExecutable(true, false);
         logger.debug(String.format("Output dir: %s; created: %b; successfully made writeable: %b; make executable: %b", outputDir.getAbsolutePath(), dirCreated, dirMadeWriteable, dirMadeExecutable));
     }
 
-    public File addOutputToOutputDir(final SimpleBdioDocument bdioDocument) throws IOException, IntegrationException {
-        // if user specified an output dir, use that; else use the temp output dir
+    public File addOutputToFinalOutputDir(final SimpleBdioDocument bdioDocument) throws IOException, IntegrationException {
+        // if user specified an output dir, use that; else use the working output dir
         File outputDir;
         if (StringUtils.isNotBlank(config.getOutputPath())) {
             outputDir = new File(config.getOutputPath());
             copyOutputToUserProvidedOutputDir();
         } else {
-            outputDir = new File(programPaths.getDockerInspectorDefaultOutputPath());
+            outputDir = new File(programPaths.getDockerInspectorWorkingOutputPath());
         }
         final String bdioFilename = new BdioFilename(bdioDocument.billOfMaterials.spdxName).getBdioFilename();
         final File outputBdioFile = new File(outputDir, bdioFilename);
@@ -138,14 +147,14 @@ public class Output {
             logger.debug("User has not specified an output path");
             return;
         }
-        final File srcDir = new File(programPaths.getDockerInspectorDefaultOutputPath());
+        final File srcDir = new File(programPaths.getDockerInspectorWorkingOutputPath());
         if (!srcDir.exists()) {
             logger.info(String.format("Output source dir %s does not exist", srcDir.getAbsolutePath()));
             return;
         }
         logger.info(String.format("Copying output from %s to %s", srcDir.getAbsolutePath(), userOutputDirPath));
         final File userOutputDir = new File(userOutputDirPath);
-        copyDirContentsToDir(programPaths.getDockerInspectorDefaultOutputPath(), userOutputDir.getAbsolutePath(), true);
+        copyDirContentsToDir(programPaths.getDockerInspectorWorkingOutputPath(), userOutputDir.getAbsolutePath(), true);
     }
 
     private void copyDirContentsToDir(final String fromDirPath, final String toDirPath, final boolean createIfNecessary) throws IOException {

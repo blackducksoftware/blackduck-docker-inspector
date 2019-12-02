@@ -31,6 +31,7 @@ import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspector
 import com.synopsys.integration.blackduck.dockerinspector.exception.HelpGenerationException;
 import com.synopsys.integration.blackduck.dockerinspector.help.HelpWriter;
 import com.synopsys.integration.blackduck.dockerinspector.httpclient.HttpClientInspector;
+import com.synopsys.integration.blackduck.dockerinspector.output.Output;
 import com.synopsys.integration.blackduck.dockerinspector.output.Result;
 import com.synopsys.integration.blackduck.dockerinspector.output.ResultFile;
 import com.synopsys.integration.blackduck.dockerinspector.programarguments.ArgumentParser;
@@ -92,6 +93,9 @@ public class DockerInspector {
     private HelpWriter helpWriter;
 
     @Autowired
+    private Output output;
+
+    @Autowired
     private DockerInspectorSystemProperties dockerInspectorSystemProperties;
 
     public static void main(final String[] args) {
@@ -123,7 +127,8 @@ public class DockerInspector {
             logger.debug(String.format("Stack trace: %s", trace));
             result = Result.createResultFailure(msg);
         }
-        resultFile.write(new Gson(), programPaths.getDockerInspectorResultPath(), result);
+        final File resultsFile = new File(output.getFinalOutputDir(), programPaths.getDockerInspectorResultsFilename());
+        resultFile.write(new Gson(), resultsFile, result);
         int returnCode = result.getReturnCode();
         logger.info(String.format("Returning %d", returnCode));
         System.exit(returnCode);
