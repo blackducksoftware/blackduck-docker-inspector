@@ -2,11 +2,13 @@ package com.synopsys.integration.blackduck.dockerinspector;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.gson.Gson;
 import com.synopsys.integration.bdio.BdioReader;
 import com.synopsys.integration.bdio.model.SimpleBdioDocument;
+import com.synopsys.integration.blackduck.dockerinspector.output.Result;
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.blackduck.imageinspector.api.name.Names;
 import com.synopsys.integration.exception.IntegrationException;
@@ -106,6 +109,31 @@ public class IntegrationTestCommon {
             final long actualContainerFileSystemFileSize = outputContainerFileSystemFile.length();
             assertTrue(actualContainerFileSystemFileSize >= testConfig.getMinContainerFileSystemFileSize());
             assertTrue(actualContainerFileSystemFileSize <= testConfig.getMaxContainerFileSystemFileSize());
+        }
+
+        final File resultsFile = new File(String.format(String.format("%s/output/output.json", TestUtils.TEST_DIR_REL_PATH)));
+        final String resultsJsonString = FileUtils.readFileToString(resultsFile, StandardCharsets.UTF_8);
+        final Gson gson = new Gson();
+        final Result result = gson.fromJson(resultsJsonString, Result.class);
+        assertTrue(result.isSucceeded());
+        System.out.printf("results: %s", result.toString());
+
+        if (testConfig.getInspectTargetImageRepoTag().contains(":")) {
+            assertEquals(testConfig.getInspectTargetImageRepoTag(), String.format("%s:%s", result.getImageRepo(), result.getImageTag()));
+        } else {
+            assertEquals(testConfig.getInspectTargetImageRepoTag(), result.getImageRepo());
+            assertEquals("latest", result.getImageTag());
+        }
+
+        assertTrue(StringUtils.isNotBlank(result.getDockerTarfilename()));
+        assertTrue(result.getDockerTarfilename().endsWith(".tar"));
+        assertEquals(0, result.getReturnCode());
+        assertTrue(result.getBdioFilename().endsWith(".jsonld"));
+        if (testConfig.getOutputContainerFileSystemFile() != null) {
+            assertTrue(result.getContainerFilesystemFilename().endsWith(".tar.gz"));
+        }
+        if (testConfig.isTestSquashedImageGeneration()) {
+            assertTrue(result.getSquashedImageFilename().endsWith(".tar.gz"));
         }
     }
 
@@ -269,6 +297,24 @@ public class IntegrationTestCommon {
             final long actualContainerFileSystemFileSize = testConfig.getOutputContainerFileSystemFile().length();
             assertTrue(actualContainerFileSystemFileSize >= testConfig.getMinContainerFileSystemFileSize());
             assertTrue(actualContainerFileSystemFileSize <= testConfig.getMaxContainerFileSystemFileSize());
+        }
+
+        final File resultsFile = new File(String.format(String.format("%s/output/output.json", TestUtils.TEST_DIR_REL_PATH)));
+        final String resultsJsonString = FileUtils.readFileToString(resultsFile, StandardCharsets.UTF_8);
+        final Gson gson = new Gson();
+        final Result result = gson.fromJson(resultsJsonString, Result.class);
+        assertTrue(result.isSucceeded());
+        System.out.printf("results: %s", result.toString());
+        assertTrue(StringUtils.isNotBlank(result.getDockerTarfilename()));
+        assertTrue(result.getDockerTarfilename().endsWith(".tar"));
+        assertEquals(0, result.getReturnCode());
+        assertTrue(result.getBdioFilename().endsWith(".jsonld"));
+        assertTrue(testConfig.getTarFilePath().endsWith(result.getDockerTarfilename()));
+        if (testConfig.getOutputContainerFileSystemFile() != null) {
+            assertTrue(result.getContainerFilesystemFilename().endsWith(".tar.gz"));
+        }
+        if (testConfig.isTestSquashedImageGeneration()) {
+            assertTrue(result.getSquashedImageFilename().endsWith(".tar.gz"));
         }
     }
 

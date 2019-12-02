@@ -36,7 +36,7 @@ public class ResultFile {
 
     public void write(final Gson gson, final File resultsOutputFile, final Result result) {
         try {
-            logger.info(String.format("*** write(): resultsOutputFile: %s; result: %s", resultsOutputFile.getAbsolutePath(), result.toString()));
+            logger.trace(String.format("Writing resultsOutputFile: %s; result: %s", resultsOutputFile.getAbsolutePath(), result.toString()));
             resultsOutputFile.getParentFile().mkdirs();
             try (FileOutputStream resultOutputStream = new FileOutputStream(resultsOutputFile)) {
                 try (ResultWriter resultWriter = new ResultWriter(gson, resultOutputStream)) {
