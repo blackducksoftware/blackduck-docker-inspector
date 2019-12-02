@@ -9,6 +9,7 @@ import com.synopsys.integration.exception.IntegrationException;
 public class TestConfigBuilder {
     private TestConfig.Mode mode = TestConfig.Mode.DEFAULT;
     private String inspectTargetImageRepoTag;
+    private String inspectTargetImageId;
     private String tarFilePath;
     private String targetRepo; // tarfile image selector
     private String targetTag;  // tarfile image selector
@@ -41,6 +42,11 @@ public class TestConfigBuilder {
 
     public TestConfigBuilder setInspectTargetImageRepoTag(final String inspectTargetImageRepoTag) {
         this.inspectTargetImageRepoTag = inspectTargetImageRepoTag;
+        return this;
+    }
+
+    public TestConfigBuilder setInspectTargetImageId(final String inspectTargetImageId) {
+        this.inspectTargetImageId = inspectTargetImageId;
         return this;
     }
 
@@ -135,10 +141,10 @@ public class TestConfigBuilder {
     }
 
     public TestConfig build() throws IntegrationException {
-        if ((inspectTargetImageRepoTag == null) && (tarFilePath == null)) {
+        if ((inspectTargetImageRepoTag == null) && (tarFilePath == null) && (inspectTargetImageId == null)) {
             throw new IntegrationException("Invalid TestConfig");
         }
-        return new TestConfig(mode, inspectTargetImageRepoTag, tarFilePath, targetRepo, targetTag, portOnHost, requireBdioMatch, minNumberOfComponentsExpected,
+        return new TestConfig(mode, inspectTargetImageRepoTag, inspectTargetImageId, tarFilePath, targetRepo, targetTag, portOnHost, requireBdioMatch, minNumberOfComponentsExpected,
             outputBomMustContainComponentPrefix, outputBomMustNotContainComponentPrefix,
             outputBomMustContainExternalSystemTypeId, codelocationName, additionalArgs, env, testSquashedImageGeneration,
             outputContainerFileSystemFile, outputSquashedImageFile, targetTarInSharedDir, minContainerFileSystemFileSize, maxContainerFileSystemFileSize,

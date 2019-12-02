@@ -251,6 +251,16 @@ public class DockerInspectorTest {
     }
 
     @Test
+    public void testImageById() throws IOException, InterruptedException, IntegrationException {
+        final TestConfig testConfig = (new TestConfigBuilder())
+                                          .setInspectTargetImageId("775349758637")
+                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU)
+                                          .build();
+
+        testImageUsingExistingContainer(testConfig);
+    }
+
+    @Test
     public void testRhel() throws IOException, InterruptedException, IntegrationException {
         final TestConfig testConfig = (new TestConfigBuilder())
                                           .setInspectTargetImageRepoTag("dnplus/rhel:6.5")
