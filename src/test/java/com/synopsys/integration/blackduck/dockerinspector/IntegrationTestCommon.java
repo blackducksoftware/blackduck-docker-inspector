@@ -352,9 +352,31 @@ public class IntegrationTestCommon {
     }
 
     private static File getOutputContainerFileSystemFileFromImageSpec(final String imageNameTag) {
-        final String path = String.format("%s/output/%s", TestUtils.TEST_DIR_REL_PATH, Names.getContainerFileSystemTarFilename(imageNameTag, null));
+        final String path = String.format("%s/output/%s", TestUtils.TEST_DIR_REL_PATH, getContainerFileSystemTarFilename(imageNameTag));
         System.out.println(String.format("Expecting output container filesystem file at: %s", path));
         return new File(path);
+    }
+
+    private static String getContainerFileSystemTarFilename(final String givenImageRepoTag) {
+        final String adjustedImageRepoTag;
+        if (givenImageRepoTag.contains(":")) {
+            adjustedImageRepoTag = givenImageRepoTag;
+        } else {
+            adjustedImageRepoTag = String.format("%s:latest", givenImageRepoTag);
+        }
+        return String.format("%s_containerfilesystem.tar.gz", cleanImageName(adjustedImageRepoTag));
+    }
+
+    private static String cleanImageName(final String imageName) {
+        return colonsToUnderscores(slashesToUnderscore(imageName));
+    }
+
+    private static String colonsToUnderscores(final String imageName) {
+        return imageName.replaceAll(":", "_");
+    }
+
+    private static String slashesToUnderscore(final String givenString) {
+        return givenString.replaceAll("/", "_");
     }
 
     private static void ensureFileDoesNotExist(final File outputContainerFileSystemFile) throws IOException {
