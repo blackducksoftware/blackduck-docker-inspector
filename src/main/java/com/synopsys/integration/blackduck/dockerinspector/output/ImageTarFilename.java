@@ -63,10 +63,11 @@ public class ImageTarFilename {
         return String.format("%s_%s.tar", cleanImageName(imageName), tagName);
     }
 
-    public File deriveDockerTarFileFromConfig() throws IOException, IntegrationException {
+    public ImageTarWrapper deriveDockerTarFileFromConfig() throws IOException, IntegrationException {
         logger.debug(String.format("programPaths.getDockerInspectorTargetDirPath(): %s", programPaths.getDockerInspectorTargetDirPath()));
         if (StringUtils.isNotBlank(config.getDockerTar())) {
-            return new File(config.getDockerTar());
+            final File dockerTarFile = new File(config.getDockerTar());
+            return new ImageTarWrapper(dockerTarFile);
         } else {
             return deriveDockerTarFileGivenImageSpec();
         }
@@ -84,8 +85,8 @@ public class ImageTarFilename {
         return givenString.replaceAll("/", "_");
     }
 
-    private File deriveDockerTarFileGivenImageSpec() throws IntegrationException, IOException {
-        File finalDockerTarfile;
+    private ImageTarWrapper deriveDockerTarFileGivenImageSpec() throws IntegrationException, IOException {
+        final ImageTarWrapper finalDockerTarfile;
         final File imageTarDirectory = new File(programPaths.getDockerInspectorTargetDirPath());
         if (StringUtils.isNotBlank(config.getDockerImageId())) {
             finalDockerTarfile = dockerClientManager.getTarFileFromDockerImageById(config.getDockerImageId(), imageTarDirectory);

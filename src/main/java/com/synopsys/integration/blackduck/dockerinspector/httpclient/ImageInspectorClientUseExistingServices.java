@@ -36,6 +36,7 @@ import org.springframework.stereotype.Component;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.httpclient.response.SimpleResponse;
+import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarWrapper;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.rest.client.IntHttpClient;
 
@@ -61,7 +62,7 @@ public class ImageInspectorClientUseExistingServices implements ImageInspectorCl
     }
 
     @Override
-    public File copyTarfileToSharedDir(final File givenDockerTarfile) throws IOException {
+    public ImageTarWrapper copyTarfileToSharedDir(final ImageTarWrapper givenDockerTarfile) throws IOException {
         return givenDockerTarfile;
     }
 

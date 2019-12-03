@@ -48,7 +48,7 @@ public class ProgramPaths {
         this.processId = processId;
     }
 
-    private static final String HOST_RESULT_JSON_FILENAME = "output.json";
+    public static final String RESULTS_JSON_FILENAME = "results.json";
     private static final String RUNDIR_BASENAME = "run";
     public static final String OUTPUT_DIR = "output";
     private static final String TARGET_DIR = "target";
@@ -69,8 +69,7 @@ public class ProgramPaths {
     private String dockerInspectorTargetDirPath;
     private String dockerInspectorSquashedImageDirPath;
     private String dockerInspectorSquashedImageTarFilePath;
-    private String dockerInspectorDefaultOutputPath;
-    private String dockerInspectorResultPath;
+    private String dockerInspectorWorkingOutputPath;
 
     private String getProgramDirPath() {
         final File workingDir = new File(config.getWorkingDirPath());
@@ -92,8 +91,7 @@ public class ProgramPaths {
         dockerInspectorSquashedImageDirPath = new File(runDir, SQUASHED_IMAGE_DIR).getAbsolutePath() + "/";
         final File dockerInspectorSquashedImageTarFileDir = new File(runDir, SQUASHED_IMAGE_TARFILE_DIR);
         dockerInspectorSquashedImageTarFilePath = new File(dockerInspectorSquashedImageTarFileDir, SQUASHED_IMAGE_TARFILE_NAME).getAbsolutePath();
-        dockerInspectorDefaultOutputPath = new File(runDir, OUTPUT_DIR).getAbsolutePath() + "/";
-        dockerInspectorResultPath = dockerInspectorDefaultOutputPath + HOST_RESULT_JSON_FILENAME;
+        dockerInspectorWorkingOutputPath = new File(runDir, OUTPUT_DIR).getAbsolutePath() + "/";
     }
 
     public String getUserOutputDirPath() {
@@ -133,11 +131,11 @@ public class ProgramPaths {
         return dockerInspectorRunDirPath;
     }
 
-    public String getDockerInspectorDefaultOutputPath() {
-        return dockerInspectorDefaultOutputPath;
+    public String getDockerInspectorWorkingOutputPath() {
+        return dockerInspectorWorkingOutputPath;
     }
 
-    public String getDockerInspectorResultPath() {
-        return dockerInspectorResultPath;
+    public String getDockerInspectorResultsFilename() {
+        return RESULTS_JSON_FILENAME;
     }
 }

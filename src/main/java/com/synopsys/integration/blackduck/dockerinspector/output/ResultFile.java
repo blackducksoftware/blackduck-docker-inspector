@@ -34,14 +34,11 @@ import org.springframework.stereotype.Component;
 public class ResultFile {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public void write(final Gson gson, final String resultFilePath, final boolean succeeded, final String msg, final ImageInspectorOsEnum targetOs, final String runOnImageName, final String runOnImageTag, final String dockerTarfilename,
-            final String bdioFilename) {
-        final String runOnOsName = targetOs == null ? "" : targetOs.name().toLowerCase();
-        final Result result = new Result(succeeded, msg, runOnOsName, runOnImageName, runOnImageTag, dockerTarfilename, bdioFilename);
+    public void write(final Gson gson, final File resultsOutputFile, final Result result) {
         try {
-            final File resultOutputFile = new File(resultFilePath);
-            resultOutputFile.getParentFile().mkdirs();
-            try (FileOutputStream resultOutputStream = new FileOutputStream(resultOutputFile)) {
+            logger.trace(String.format("Writing resultsOutputFile: %s; result: %s", resultsOutputFile.getAbsolutePath(), result.toString()));
+            resultsOutputFile.getParentFile().mkdirs();
+            try (FileOutputStream resultOutputStream = new FileOutputStream(resultsOutputFile)) {
                 try (ResultWriter resultWriter = new ResultWriter(gson, resultOutputStream)) {
                     resultWriter.writeResult(result);
                 }

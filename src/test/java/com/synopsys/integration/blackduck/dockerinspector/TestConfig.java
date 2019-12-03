@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class TestConfig {
     private String inspectTargetImageRepoTag;
+    private String inspectTargetImageId;
     private String tarFilePath;
     private String targetRepo; // tarfile image selector
     private String targetTag;  // tarfile image selector
@@ -35,7 +36,7 @@ public class TestConfig {
         DETECT
     }
 
-    public TestConfig(final Mode mode, final String inspectTargetImageRepoTag, final String tarFilePath, final String targetRepo, final String targetTag, final int portOnHost, final boolean requireBdioMatch, final int minNumberOfComponentsExpected,
+    public TestConfig(final Mode mode, final String inspectTargetImageRepoTag, final String inspectTargetImageId, final String tarFilePath, final String targetRepo, final String targetTag, final int portOnHost, final boolean requireBdioMatch, final int minNumberOfComponentsExpected,
         final String outputBomMustContainComponentPrefix,
         final String outputBomMustNotContainComponentPrefix,
         final String outputBomMustContainExternalSystemTypeId, final String codelocationName, final List<String> additionalArgs, final Map<String, String> env, final boolean testSquashedImageGeneration,
@@ -43,6 +44,7 @@ public class TestConfig {
         final long minContainerFileSystemFileSize, final long maxContainerFileSystemFileSize, final boolean appOnlyMode) {
         this.mode = mode;
         this.inspectTargetImageRepoTag = inspectTargetImageRepoTag;
+        this.inspectTargetImageId = inspectTargetImageId;
         this.tarFilePath = tarFilePath;
         this.targetRepo = targetRepo;
         this.targetTag = targetTag;
@@ -70,6 +72,10 @@ public class TestConfig {
 
     public String getInspectTargetImageRepoTag() {
         return inspectTargetImageRepoTag;
+    }
+
+    public String getInspectTargetImageId() {
+        return inspectTargetImageId;
     }
 
     public String getTarFilePath() {

@@ -39,10 +39,12 @@ import com.google.gson.Gson;
 import com.synopsys.integration.blackduck.dockerinspector.blackduckclient.BlackDuckClient;
 import com.synopsys.integration.blackduck.dockerinspector.output.ContainerFilesystemFilename;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarFilename;
+import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarWrapper;
 import com.synopsys.integration.blackduck.dockerinspector.output.Output;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
-import com.synopsys.integration.blackduck.imageinspector.api.name.Names;
+import com.synopsys.integration.blackduck.dockerinspector.output.OutputFiles;
+import com.synopsys.integration.blackduck.dockerinspector.output.Result;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.bdio.BdioReader;
 import com.synopsys.integration.bdio.model.SimpleBdioDocument;
@@ -78,30 +80,34 @@ public class HttpClientInspector {
     @Autowired
     private ContainerFilesystemFilename containerFilesystemFilename;
 
-    public int getBdio() throws IntegrationException {
+    public Result getBdio() throws IntegrationException {
         final ImageInspectorClient imageInspectorClient = chooseImageInspectorClient();
         try {
-            output.ensureOutputDirIsWriteable();
-            final File finalDockerTarfile = prepareDockerTarfile(imageInspectorClient);
-            final String containerFileSystemFilename = containerFilesystemFilename.deriveContainerFilesystemFilename();
-            final String dockerTarFilePathInContainer = containerPaths.getContainerPathToTargetFile(finalDockerTarfile.getCanonicalPath());
+            output.ensureWorkingOutputDirIsWriteable();
+            final ImageTarWrapper finalDockerTarfile = prepareDockerTarfile(imageInspectorClient);
+            final String containerFileSystemFilename = containerFilesystemFilename.deriveContainerFilesystemFilename(finalDockerTarfile.getImageRepo(), finalDockerTarfile.getImageTag());
+            final String dockerTarFilePathInContainer = containerPaths.getContainerPathToTargetFile(finalDockerTarfile.getFile().getCanonicalPath());
             String containerFileSystemPathInContainer = null;
             if (config.isOutputIncludeContainerfilesystem() || config.isOutputIncludeSquashedImage()) {
                 containerFileSystemPathInContainer = containerPaths.getContainerPathToOutputFile(containerFileSystemFilename);
             }
-            final String bdioString = imageInspectorClient.getBdio(finalDockerTarfile.getCanonicalPath(), dockerTarFilePathInContainer, config.getDockerImageRepo(), config.getDockerImageTag(),
+            final String bdioString = imageInspectorClient.getBdio(finalDockerTarfile.getFile().getCanonicalPath(), dockerTarFilePathInContainer, config.getDockerImageRepo(), config.getDockerImageTag(),
                 containerFileSystemPathInContainer, config.getContainerFileSystemExcludedPaths(),
                 config.isOrganizeComponentsByLayer(), config.isIncludeRemovedComponents(),
                 config.isCleanupWorkingDir(), config.getDockerPlatformTopLayerId());
             logger.trace(String.format("bdioString: %s", bdioString));
             final SimpleBdioDocument bdioDocument = toBdioDocument(bdioString);
             adjustBdio(bdioDocument);
-            final File bdioFile = output.addOutputToOutputDir(bdioDocument);
+            final OutputFiles outputFiles = output.addOutputToFinalOutputDir(bdioDocument, finalDockerTarfile.getImageRepo(), finalDockerTarfile.getImageTag());
             if (config.isUploadBdio()) {
-                blackDuckClient.uploadBdio(bdioFile, bdioDocument.billOfMaterials.spdxName);
+                blackDuckClient.uploadBdio(outputFiles.getBdioFile(), bdioDocument.billOfMaterials.spdxName);
             }
             cleanup();
-            return 0;
+            final Result result = Result.createResultSuccess(finalDockerTarfile.getImageRepo(), finalDockerTarfile.getImageTag(), finalDockerTarfile.getFile().getName(),
+                outputFiles.getBdioFile(),
+                outputFiles.getContainerFileSystemFile(),
+                outputFiles.getSquashedImageFile());
+            return result;
         } catch (final IOException e) {
             throw new IntegrationException(e.getMessage(), e);
         }
@@ -130,9 +136,9 @@ public class HttpClientInspector {
         }
     }
 
-    private File prepareDockerTarfile(final ImageInspectorClient imageInspectorClient) throws IOException, IntegrationException {
-        final File givenDockerTarfile = dockerTarfile.deriveDockerTarFileFromConfig();
-        final File finalDockerTarfile = imageInspectorClient.copyTarfileToSharedDir(givenDockerTarfile);
+    private ImageTarWrapper prepareDockerTarfile(final ImageInspectorClient imageInspectorClient) throws IOException, IntegrationException {
+        final ImageTarWrapper givenDockerTarfile = dockerTarfile.deriveDockerTarFileFromConfig();
+        final ImageTarWrapper finalDockerTarfile = imageInspectorClient.copyTarfileToSharedDir(givenDockerTarfile);
         return finalDockerTarfile;
     }
 

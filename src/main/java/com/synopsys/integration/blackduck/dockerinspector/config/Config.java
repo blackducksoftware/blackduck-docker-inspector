@@ -182,7 +182,7 @@ public class Config {
     @Value("${docker.tar:}")
     private String dockerTar = "";
 
-    @ValueDescription(description = "docker.image.id", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "The ID (shown in the 'IMAGE ID' column of 'docker images' output) of the target Docker image. The target image must already be local (included in the output of 'docker images').", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${docker.image.id:}")
     private String dockerImageId = "";
 

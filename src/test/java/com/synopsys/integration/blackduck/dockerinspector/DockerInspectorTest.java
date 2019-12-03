@@ -2,7 +2,6 @@ package com.synopsys.integration.blackduck.dockerinspector;
 
 import static org.junit.Assert.assertTrue;
 
-
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +18,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Disabled;
 
 import com.synopsys.integration.exception.IntegrationException;
 
@@ -244,6 +244,18 @@ public class DockerInspectorTest {
                                           .setMinNumberOfComponentsExpected(5)
                                           .setOutputBomMustContainComponentPrefix("dpkg")
                                           .setCodelocationName("tomcat_6.0.53-jre7_DPKG")
+                                          .build();
+
+        testImageUsingExistingContainer(testConfig);
+    }
+
+    // TODO: This feature requires the image is already local; this test doesn't ensure that (yet)
+    @Disabled
+    @Test
+    public void testImageById() throws IOException, InterruptedException, IntegrationException {
+        final TestConfig testConfig = (new TestConfigBuilder())
+                                          .setInspectTargetImageId("775349758637")
+                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU)
                                           .build();
 
         testImageUsingExistingContainer(testConfig);
