@@ -24,7 +24,7 @@ public class ContainerFilesystemFilenameTest {
     public void testRepoTag() {
 
         Mockito.when(config.getDockerImage()).thenReturn("ubuntu:latest");
-        assertEquals("ubuntu_latest_containerfilesystem.tar.gz", containerFilesystemFilename.deriveContainerFilesystemFilename());
+        assertEquals("ubuntu_latest_containerfilesystem.tar.gz", containerFilesystemFilename.deriveContainerFilesystemFilename("ubuntu", "latest"));
 
     }
 
@@ -32,9 +32,15 @@ public class ContainerFilesystemFilenameTest {
     public void testTarfile() {
 
         Mockito.when(config.getDockerTar()).thenReturn("test.tar");
-        assertEquals("test_containerfilesystem.tar.gz", containerFilesystemFilename.deriveContainerFilesystemFilename());
+        assertEquals("test_containerfilesystem.tar.gz", containerFilesystemFilename.deriveContainerFilesystemFilename(null, null));
 
     }
 
-    // TODO need a test for: image ID is specified
+    @Test
+    public void testId() {
+
+        Mockito.when(config.getDockerImageId()).thenReturn("123");
+        assertEquals("ubuntu_latest_containerfilesystem.tar.gz", containerFilesystemFilename.deriveContainerFilesystemFilename("ubuntu", "latest"));
+
+    }
 }

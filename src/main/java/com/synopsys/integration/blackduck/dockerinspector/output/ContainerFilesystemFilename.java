@@ -22,6 +22,8 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.output;
 
+import java.io.File;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,6 +33,9 @@ import com.synopsys.integration.blackduck.imageinspector.api.name.Names;
 
 @Component
 public class ContainerFilesystemFilename {
+    private static final String CONTAINER_FILESYSTEM_IDENTIFIER = "containerfilesystem";
+    private static final String APP_ONLY_HINT = "app";
+
     private Config config;
 
     @Autowired
@@ -38,13 +43,49 @@ public class ContainerFilesystemFilename {
         this.config = config;
     }
 
-    public String deriveContainerFilesystemFilename() {
+    public String deriveContainerFilesystemFilename(final String repo, final String tag) {
         final String containerFileSystemFilename;
         if (StringUtils.isBlank(config.getDockerPlatformTopLayerId())) {
-            containerFileSystemFilename = Names.getContainerFileSystemTarFilename(config.getDockerImage(), config.getDockerTar());
+            containerFileSystemFilename = getContainerFileSystemTarFilename(repo, tag, config.getDockerTar());
         } else {
-            containerFileSystemFilename = Names.getContainerFileSystemAppLayersTarFilename(config.getDockerImage(), config.getDockerTar());
+            containerFileSystemFilename = getContainerFileSystemAppLayersTarFilename(repo, tag, config.getDockerTar());
         }
         return containerFileSystemFilename;
+    }
+
+    private String getContainerFileSystemTarFilename(final String repo, final String tag, final String tarPath) {
+        return getContainerOutputTarFileNameUsingBase(CONTAINER_FILESYSTEM_IDENTIFIER, repo, tag, tarPath);
+    }
+
+    private String getContainerFileSystemAppLayersTarFilename(final String repo, final String tag, final String tarPath) {
+        final String contentHint = String.format("%s_%s", APP_ONLY_HINT, CONTAINER_FILESYSTEM_IDENTIFIER);
+        return getContainerOutputTarFileNameUsingBase(contentHint, repo, tag, tarPath);
+    }
+
+    private static String getContainerOutputTarFileNameUsingBase(final String contentHint, final String repo, final String tag, final String tarPath) {
+        final String containerFilesystemFilenameSuffix = String.format("%s.tar.gz", contentHint);
+        if (StringUtils.isNotBlank(repo)) {
+            return String.format("%s_%s_%s", slashesToUnderscore(repo), slashesToUnderscore(tag), containerFilesystemFilenameSuffix);
+        } else {
+            final File tarFile = new File(tarPath);
+            final String tarFilename = tarFile.getName();
+            if (tarFilename.contains(".")) {
+                final int finalPeriodIndex = tarFilename.lastIndexOf('.');
+                return String.format("%s_%s", tarFilename.substring(0, finalPeriodIndex), containerFilesystemFilenameSuffix);
+            }
+            return String.format("%s_%s", cleanImageName(tarFilename), containerFilesystemFilenameSuffix);
+        }
+    }
+
+    private static String cleanImageName(final String imageName) {
+        return colonsToUnderscores(slashesToUnderscore(imageName));
+    }
+
+    private static String colonsToUnderscores(final String imageName) {
+        return imageName.replaceAll(":", "_");
+    }
+
+    private static String slashesToUnderscore(final String givenString) {
+        return givenString.replaceAll("/", "_");
     }
 }

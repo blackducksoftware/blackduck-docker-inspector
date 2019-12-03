@@ -78,7 +78,7 @@ public class Output {
         logger.debug(String.format("Output dir: %s; created: %b; successfully made writeable: %b; make executable: %b", outputDir.getAbsolutePath(), dirCreated, dirMadeWriteable, dirMadeExecutable));
     }
 
-    public OutputFiles addOutputToFinalOutputDir(final SimpleBdioDocument bdioDocument) throws IOException, IntegrationException {
+    public OutputFiles addOutputToFinalOutputDir(final SimpleBdioDocument bdioDocument, final String repo, final String tag) throws IOException, IntegrationException {
         // if user specified an output dir, use that; else use the working output dir
         File outputDir;
         if (StringUtils.isNotBlank(config.getOutputPath())) {
@@ -94,7 +94,7 @@ public class Output {
         try (BdioWriter bdioWriter = new BdioWriter(gson, outputBdioStream)) {
             bdioWriter.writeSimpleBdioDocument(bdioDocument);
         }
-        final String containerFileSystemFilename = containerFilesystemFilename.deriveContainerFilesystemFilename();
+        final String containerFileSystemFilename = containerFilesystemFilename.deriveContainerFilesystemFilename(repo, tag);
         final File containerFileSystemFile = new File(outputDir, containerFileSystemFilename);
         final File squashedImageFile = addSquashedImage(outputDir, containerFileSystemFile);
         removeContainerFileSystemIfNotRequested(containerFileSystemFile);

@@ -85,7 +85,7 @@ public class HttpClientInspector {
         try {
             output.ensureWorkingOutputDirIsWriteable();
             final ImageTarWrapper finalDockerTarfile = prepareDockerTarfile(imageInspectorClient);
-            final String containerFileSystemFilename = containerFilesystemFilename.deriveContainerFilesystemFilename();
+            final String containerFileSystemFilename = containerFilesystemFilename.deriveContainerFilesystemFilename(finalDockerTarfile.getImageRepo(), finalDockerTarfile.getImageTag());
             final String dockerTarFilePathInContainer = containerPaths.getContainerPathToTargetFile(finalDockerTarfile.getFile().getCanonicalPath());
             String containerFileSystemPathInContainer = null;
             if (config.isOutputIncludeContainerfilesystem() || config.isOutputIncludeSquashedImage()) {
@@ -98,7 +98,7 @@ public class HttpClientInspector {
             logger.trace(String.format("bdioString: %s", bdioString));
             final SimpleBdioDocument bdioDocument = toBdioDocument(bdioString);
             adjustBdio(bdioDocument);
-            final OutputFiles outputFiles = output.addOutputToFinalOutputDir(bdioDocument);
+            final OutputFiles outputFiles = output.addOutputToFinalOutputDir(bdioDocument, finalDockerTarfile.getImageRepo(), finalDockerTarfile.getImageTag());
             if (config.isUploadBdio()) {
                 blackDuckClient.uploadBdio(outputFiles.getBdioFile(), bdioDocument.billOfMaterials.spdxName);
             }

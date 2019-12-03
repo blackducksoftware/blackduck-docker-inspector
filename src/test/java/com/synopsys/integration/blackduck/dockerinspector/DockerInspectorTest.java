@@ -114,8 +114,6 @@ public class DockerInspectorTest {
         ensureContainerRemoved("centos");
         ensureContainerRemoved("ubuntu");
     }
-
-    //TODO all tests should test the result.json file
     
     @Test
     public void testUbuntu1404LayeredIncludeRemoved() throws IOException, InterruptedException, IntegrationException {
@@ -251,7 +249,7 @@ public class DockerInspectorTest {
         testImageUsingExistingContainer(testConfig);
     }
 
-    // TODO: This feature is for images already in the Docker cache; this test doesn't ensure that (yet)
+    // TODO: This feature requires the image is already local; this test doesn't ensure that (yet)
     @Disabled
     @Test
     public void testImageById() throws IOException, InterruptedException, IntegrationException {
