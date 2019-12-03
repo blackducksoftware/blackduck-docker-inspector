@@ -67,3 +67,13 @@ You can specify which image you want to inspect using *--docker.image.repo* and 
 from a .tar file that contains *ubuntu:latest* and other images:
 
     ./${script_name} --docker.tar=multipleimages.tar --docker.image.repo=ubuntu --docker.image.tag=latest
+
+### Inspecting a local image by image ID
+
+When inspecting a local image, you have the option of specifying the image by its ID. First,
+get the image ID from the *IMAGE ID* column of the output of the *docker images* command.
+Then use the *docker.image.id* property to pass the image ID to ${solution_name}:
+
+    ./${script_name} --docker.image.id={image ID}
+    
+The method only works for local images.

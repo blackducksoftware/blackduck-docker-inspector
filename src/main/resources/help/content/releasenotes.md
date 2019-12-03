@@ -1,3 +1,7 @@
+#### Version 8.3.0
+##### New features
+* Writes a summary of results to a file named results.json in the output directory.
+
 #### Version 8.2.3
 ##### Resolved issues
 * Eliminated the Spring banner from the log to facilitate piping help output through a Markdown formatter.
