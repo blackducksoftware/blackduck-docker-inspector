@@ -48,7 +48,7 @@ public class ProgramPaths {
         this.processId = processId;
     }
 
-    private static final String HOST_RESULT_JSON_FILENAME = "output.json";
+    public static final String RESULTS_JSON_FILENAME = "results.json";
     private static final String RUNDIR_BASENAME = "run";
     public static final String OUTPUT_DIR = "output";
     private static final String TARGET_DIR = "target";
@@ -136,6 +136,6 @@ public class ProgramPaths {
     }
 
     public String getDockerInspectorResultsFilename() {
-        return HOST_RESULT_JSON_FILENAME;
+        return RESULTS_JSON_FILENAME;
     }
 }

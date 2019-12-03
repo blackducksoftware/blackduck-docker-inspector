@@ -20,6 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.gson.Gson;
 import com.synopsys.integration.bdio.BdioReader;
 import com.synopsys.integration.bdio.model.SimpleBdioDocument;
+import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.output.Result;
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.blackduck.imageinspector.api.name.Names;
@@ -123,7 +124,7 @@ public class IntegrationTestCommon {
             assertTrue(actualContainerFileSystemFileSize <= testConfig.getMaxContainerFileSystemFileSize());
         }
 
-        final File resultsFile = new File(String.format(String.format("%s/output/output.json", TestUtils.TEST_DIR_REL_PATH)));
+        final File resultsFile = new File(String.format(String.format("%s/output/%s", TestUtils.TEST_DIR_REL_PATH, ProgramPaths.RESULTS_JSON_FILENAME)));
         final String resultsJsonString = FileUtils.readFileToString(resultsFile, StandardCharsets.UTF_8);
         final Gson gson = new Gson();
         final Result result = gson.fromJson(resultsJsonString, Result.class);
@@ -316,7 +317,7 @@ public class IntegrationTestCommon {
             assertTrue(actualContainerFileSystemFileSize <= testConfig.getMaxContainerFileSystemFileSize());
         }
 
-        final File resultsFile = new File(String.format(String.format("%s/output/output.json", TestUtils.TEST_DIR_REL_PATH)));
+        final File resultsFile = new File(String.format(String.format("%s/output/%s", TestUtils.TEST_DIR_REL_PATH, ProgramPaths.RESULTS_JSON_FILENAME)));
         final String resultsJsonString = FileUtils.readFileToString(resultsFile, StandardCharsets.UTF_8);
         final Gson gson = new Gson();
         final Result result = gson.fromJson(resultsJsonString, Result.class);
