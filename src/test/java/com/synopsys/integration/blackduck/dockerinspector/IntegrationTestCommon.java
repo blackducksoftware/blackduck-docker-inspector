@@ -337,9 +337,14 @@ public class IntegrationTestCommon {
     }
 
     public static File getOutputContainerFileSystemFileFromTarFilename(final String tarFilename) {
-        final String path = String.format("%s/output/%s", TestUtils.TEST_DIR_REL_PATH, Names.getContainerFileSystemTarFilename(null, tarFilename));
+        final String path = String.format("%s/output/%s", TestUtils.TEST_DIR_REL_PATH, getContainerFileSystemTarFilenameFromTarFilename(tarFilename));
         System.out.println(String.format("Expecting output container filesystem file at: %s", path));
         return new File(path);
+    }
+
+    private static String getContainerFileSystemTarFilenameFromTarFilename(final String tarFilename) {
+        final int finalPeriodIndex = tarFilename.lastIndexOf('.');
+        return String.format("%s_containerfilesystem.tar.gz", tarFilename.substring(0, finalPeriodIndex));
     }
 
     private static SimpleBdioDocument createBdioDocumentFromFile(final File bdioFile) throws IOException {
@@ -352,12 +357,12 @@ public class IntegrationTestCommon {
     }
 
     private static File getOutputContainerFileSystemFileFromImageSpec(final String imageNameTag) {
-        final String path = String.format("%s/output/%s", TestUtils.TEST_DIR_REL_PATH, getContainerFileSystemTarFilename(imageNameTag));
+        final String path = String.format("%s/output/%s", TestUtils.TEST_DIR_REL_PATH, getContainerFileSystemTarFilenameFromImageRepoTag(imageNameTag));
         System.out.println(String.format("Expecting output container filesystem file at: %s", path));
         return new File(path);
     }
 
-    private static String getContainerFileSystemTarFilename(final String givenImageRepoTag) {
+    private static String getContainerFileSystemTarFilenameFromImageRepoTag(final String givenImageRepoTag) {
         final String adjustedImageRepoTag;
         if (givenImageRepoTag.contains(":")) {
             adjustedImageRepoTag = givenImageRepoTag;
