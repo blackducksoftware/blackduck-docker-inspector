@@ -18,6 +18,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Disabled;
 
 import com.synopsys.integration.exception.IntegrationException;
 
@@ -250,6 +251,8 @@ public class DockerInspectorTest {
         testImageUsingExistingContainer(testConfig);
     }
 
+    // TODO: This feature is for images already in the Docker cache; this test doesn't ensure that (yet)
+    @Disabled
     @Test
     public void testImageById() throws IOException, InterruptedException, IntegrationException {
         final TestConfig testConfig = (new TestConfigBuilder())
