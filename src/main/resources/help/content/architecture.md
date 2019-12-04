@@ -1,11 +1,11 @@
 ### Architecture overview
 
-${solution_name} uses up to three container-based image inspector services, 
-one for each of the supported Linux package manager database formats).
+${solution_name} uses up to three container-based image inspector services; 
+one for each of the supported Linux package manager database formats.
 
 The three image inspector services provide coverage of the three package manager database formats: DPKG, RPM, and APK.
-By default, ${solution_name} submits its request to inspect the target image to the DPKG (Ubuntu) image inspector service. Any service 
-redirects to the appropriate image inspector service if it cannot handle the request. For example,
+By default, ${solution_name} submits its request to inspect the target image to the DPKG (Ubuntu) image inspector service. All services 
+redirect to the appropriate image inspector service if it cannot handle the request. For example,
 if the target image is a Red Hat image, the Ubuntu inspector service, which cannot inspect a Red Hat image, 
 redirects to the CentOS inspector
 service, which can inspect a Red Hat image. If you know
@@ -15,7 +15,7 @@ the property *imageinspector.service.distro.default*.
 
 In host mode (the default), ${solution_name} automatically uses the Docker engine to pull as
 needed from Docker Hub
-three images: ${image_repo_organization}/${inspector_image_name_base}-alpine, 
+the following three images: ${image_repo_organization}/${inspector_image_name_base}-alpine, 
 ${image_repo_organization}/${inspector_image_name_base}-centos, and ${image_repo_organization}/${inspector_image_name_base}-ubuntu.
 ${solution_name} starts those services as needed,
 and stops and removes the containers when ${solution_name} exits. It uses a shared volume to share files, such as the target Docker image,
@@ -68,11 +68,11 @@ base URL that you have provided.
 The following steps are performed inside the image inspector container:
 
 1. Builds the container file system that a container has if you ran the target image. It does not run the target image.
-1. Determines the target image package manager database format, and redirects to a different image inspector service if necessary.
-1. Runs the image inspector's Linux package manager on the target image package manager database.
-1. Produces and returns a BDIO (.jsonld) file consisting of a list of target image packages and, optionally, the container filesystem.
+2. Determines the target image package manager database format, and redirects to a different image inspector service if necessary.
+3. Runs the image inspector's Linux package manager on the target image package manager database.
+4. Produces and returns a BDIO (.jsonld) file consisting of a list of target image packages and, optionally, the container filesystem.
 
 The following steps are performed back in the ${solution_name} container when the request to the image inspector service returns:
 
 1. Uploads the BDIO file to Black Duck. Note that this can be disabled.
-1. Copies the output files to the output directory.
+2. Copies the output files to the output directory.

@@ -43,7 +43,7 @@ version of ${solution_name}. However, sometimes it is better to run the .jar dir
 
 You can download any version of the ${solution_name} .jar from ${binary_repo_url_base}/webapp/#/artifacts/browse/tree/General/bds-integrations-release/com/synopsys/integration/${project_name}.
 
-Use this Java command to run it:
+Use the following Java command to run it:
 
     java -jar ${project_name}-{version}.jar {${solution_name} arguments}
 
@@ -63,7 +63,7 @@ To run ${solution_name} on a Docker image .tar file:
     ./${script_name} --docker.tar={name}.tar
     
 If your tar file contains multiple images, ${solution_name} can only inspect one of them.
-You can specify which image you want to inspect using *--docker.image.repo* and *--docker.image.tag*. For example, to select *ubuntu:latest*
+You can specify the image to inspect using *--docker.image.repo* and *--docker.image.tag*. For example, to select *ubuntu:latest*
 from a .tar file that contains *ubuntu:latest* and other images:
 
     ./${script_name} --docker.tar=multipleimages.tar --docker.image.repo=ubuntu --docker.image.tag=latest

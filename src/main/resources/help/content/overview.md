@@ -6,7 +6,7 @@ It utilizes the appropriate Linux package manager to provide a list of
 the packages installed by the package manager, and creates a Black Duck project with a Bill of Materials (BOM) consisting of those packages as components.
 Because it relies on the Linux package manager as its source, the discovered packages are limited to those installed and managed using the Linux package manager.
 
-${solution_name} can inspect Linux Docker images that use DPKG, RPM, or APK package manager formats.
+${solution_name} can inspect Linux Docker images that use the DPKG, RPM, or APK package manager formats.
 
 After running the ${solution_name} on an image, navigate to Black Duck to view the BOM created by 
 ${solution_name}.
@@ -16,7 +16,7 @@ ${solution_name}.
 ${solution_name} has two modes:
 
 * Host mode, for running on a Linux machine/Linux virtual machine (VM) where ${solution_name} can perform Docker operations using a Docker Engine.
-* Container mode, for running in a container, started by Docker, Kubernetes, OpenShift, and others.
+* Container mode, for running in a container started by Docker, Kubernetes, OpenShift, and others.
 
 #### Host mode
 
@@ -45,12 +45,12 @@ Requirements for ${solution_name} are:
 * Linux.
 * Access to the internet. For information on running without access to the internet, refer to [Air Gap mode](advanced.md#air-gap-mode).
 * Java (JRE) versions 8 or 11.
-* Three available ports for the image inspector services.  By default, these ports are 9000, 9001, and 9002.
+* Three available ports for the image inspector services. By default, these ports are 9000, 9001, and 9002.
 * When invoking ${solution_name} using ${script_name}:
     - curl
     - bash
-* In host mode: Access to a Docker Engine; versions 17.09 or higher.
-* In container mode: You must start the ${solution_name} container that meets the preceding requirements, and three container-based
+* In host mode: access to a Docker Engine versions 17.09 or higher.
+* In container mode: you must start the ${solution_name} container that meets the preceding requirements, and three container-based
 "image inspector" services. All four of these containers must share a mounted volume and be able to reach each other through HTTP GET operations using base URLs
 that you provide. For more information, refer to [Deploying](deployment.md).
     
@@ -73,7 +73,7 @@ An alternative is to download and run the latest ${solution_name} script:
 
 The advantage of using the ${solution_name} script is that it ensures you always run the latest version of the ${solution_name} .jar.
 
-Another alternative is to download the ${solution_name} .jar (using the script) and run the .jar directly:
+Another alternative is to download the ${solution_name} .jar (using the script) and locally run the .jar directly:
 
     bash <(curl -s ${script_hosting_scheme}://${source_repo_organization}.${script_hosting_domain}/${project_name}/${script_name}) --pulljar
     java -jar ${project_name}-{version}.jar {${solution_name} arguments}
@@ -89,8 +89,8 @@ a property assignment of the form:
 
 	--{property name}={value}
 
-Alternatively, any supported property can be set by adding to a text file named
-*application.properties* in the current directory a line of the form:
+Alternatively, any supported property is set by adding a line in the text file named
+*application.properties* located in the current directory using the form:
 
     {property name}={value}
 
