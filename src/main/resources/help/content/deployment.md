@@ -2,10 +2,10 @@
 
 ${solution_name} can be run in either of the following modes:
 
-1. Host mode on a Linux machine or a Linux virtual machine (VM) with Docker. The deployment approach for host mode is referred to below as "utility"; you simply execute a command, and deployment is automatic.
-2. Container mode inside a container running on an orchestration platform such as Kubernetes, OpenShift, etc. The deployment approach for container mode is referred to below as "toolkit"; you take components provided by Docker Inspector (one utility, three containerized services) and deploy them yourself.
+1. Host mode on a Linux machine or a Linux virtual machine (VM) with Docker. The deployment approach for host mode is referred to below as "utility;" you simply execute a command, and deployment is automatic.
+2. Container mode inside a container running on an orchestration platform such as Kubernetes, OpenShift, among others. The deployment approach for container mode is referred to below as "toolkit;" you take components provided by Docker Inspector (one utility, three containerized services) and deploy them yourself.
 
-Most, but not all, of the deployment examples below use the toolkit approach.
+Most, but not all, of the following deployment examples use the toolkit approach.
 
 ### Important notes regarding deployment sample code
 
@@ -22,7 +22,7 @@ In this scenario, ${solution_name} is a command line utility that automatically 
 and cleans them up when it's done. The Docker command, if installed on the machine, can be very useful for troubleshooting, but is not actually
 required or used by ${solution_name}.
 
-In this mode, ${solution_name} does require access to a Docker Engine, similar to the way the Docker client requires
+In this mode, ${solution_name} requires access to a Docker Engine, similar to the way the Docker client requires
 access to a Docker Engine, so it can pull and run Docker images. It uses the ${docker_java_project_url}
 library to perform Docker operations using the Docker Engine.
 
@@ -35,8 +35,8 @@ This is the default mode, and the simplest to use.
 
 In this scenario, ${solution_name} is a toolkit consisting of a command line utility that you run in one container, plus
 three container-based services which you must start. These four containers must:
-(a) share a mounted volume, either persistent or temporary, used to pass large files between containers, and
-(b) be able to reach each other through HTTP GET operations using base URLs that you provide.
+(a) Share a mounted volume, either persistent or temporary, used to pass large files between containers, and:
+(b) Be able to reach each other through HTTP GET operations using base URLs that you provide.
 
 ### Image Inspector Services
 
@@ -46,13 +46,13 @@ and three image inspector services.
 The required Docker operations, if any, are performed by the command line utility, while the image inspector services
 perform the work of unpacking the target Docker image, extracting the Linux package manager database,
 and running the Linux package manager against that database to extract installed packages
-and translate them to components which are actually externalIDs, for Black Duck. If the image inspector service
+and translate them to components which are actually externalIDs for Black Duck. If the image inspector service
 finds in the target image a package manager database that is incompatible with its own package manager utility; for example, 
 when you run ${solution_name} on an Alpine image, but the request goes to the
 Ubuntu image inspector service, the image inspector service redirects the request to the appropriate
 image inspector service. You can change the default image inspector service to reduce the likelihood
-of redirects, resulting in shorter execution times. For example, if most of your target images are Alpine
-you can set *imageinspector.service.distro.default* to alpine.
+of redirects, resulting in shorter execution times. For example, if most of your target images are Alpine,
+you can set *imageinspector.service.distro.default* to *alpine*.
 
 The image inspector service containers are downloaded from Docker Hub (${image_repo_organization}/${inspector_image_name_base}-*).
 
@@ -78,7 +78,7 @@ Download: curl -O ${source_raw_content_url_base}/${source_repo_organization}/${p
 
 Approach: Toolkit
 
-Deployment notes: Uses the Travis CI docker service.
+Deployment notes: Uses the Travis CI Docker service.
 The containers communicate through localhost URLs.
 
 Download: curl -O ${source_raw_content_url_base}/${source_repo_organization}/${project_name}/master/deployment/travisci/travis.yml
@@ -110,7 +110,7 @@ Download: curl -O ${source_raw_content_url_base}/${source_repo_organization}/${p
 
 ### Configuring ${solution_name} for your Docker registry
 
-If you invoke ${solution_name} with an image reference, versus an image that has been saved to a .tar file,
+If you invoke ${solution_name} with an image reference versus an image that is saved to a .tar file,
 it uses the docker-java library (${docker_java_project_url}) to access the Docker registry
 to pull the image. 
 
@@ -121,7 +121,7 @@ There are other ways to configure docker-java. For more information on configuri
 and ${solution_name} for your Docker registry, refer to: ${docker_java_project_url}#Configuration.
 
 ${solution_name} does not override any of the configuration settings in the code,
-so any of the other methods (properties, system properties, system environment) will work.
+so any of the other methods (properties, system properties, system environment) work.
 
 If you choose to use environment variables, and you are calling ${solution_name} from Detect,
 you must prefix the environment variable names with *DETECT_DOCKER_PASSTHROUGH_* to

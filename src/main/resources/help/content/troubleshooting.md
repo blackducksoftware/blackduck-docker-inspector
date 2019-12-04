@@ -4,7 +4,7 @@ To troubleshoot issues with ${solution_name}, run with DEBUG logging:
 
     --logging.level.com.synopsys=DEBUG
     
-The following suggestions are related to specific problems:
+The following suggestions are related to specific problems.
 
 ### Problem: When directly invoking the .jar file, an error message displays "Malformed input or input contains unmappable characters."
 
@@ -79,19 +79,19 @@ When this happens, the following error may appear in the container log:
     
 Possible cause: The Linux umask value on the machine running ${solution_name} is too restrictive.
 
-Solution/workaround: Set umask to 022 when running ${solution_name}. The cause could be an umask value
+Solution/workaround: Set the umask value to 022 when running ${solution_name}. The cause could be a umask value
 that prevents read access to the file, or read or execute access to the directory.
-${solution_name} requires an umask value that does not remove read permissions from files,
-and does not remove read or execute permissions from directories. For example, an umask value of 022 works.
+${solution_name} requires a umask value that does not remove read permissions from files 
+and does not remove read or execute permissions from directories. For example, a umask value of 022 works.
 
-### Problem: ${solution_name} cannot perform any Docker operations because the remote access port is not enabled on the Docker engine.
+### Problem: ${solution_name} cannot perform Docker operations because the remote access port is not enabled on the Docker engine.
 
 When this happens, the following error may display in the log:
 
     Error inspecting image: java.io.IOException: Couldn't load native library
     Stack trace: javax.ws.rs.ProcessingException: java.io.IOException: Couldn't load native library
 
-In older versions of ${solution_name} (prior to 8.2.0), the logged error was:
+In versions of ${solution_name} prior to 8.2.0, the logged error was:
 
     Error inspecting image: Could not initialize class org.newsclub.net.unix.NativeUnixSocket
     Stack trace: java.lang.NoClassDefFoundError: Could not initialize class org.newsclub.net.unix.NativeUnixSocket

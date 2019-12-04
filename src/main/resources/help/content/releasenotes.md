@@ -1,6 +1,6 @@
 #### Version 8.3.0
 ##### New features
-* Writes a summary of results to a file named results.json in the output directory.
+* Docker Inspector now writes a summary of results to the file results.json, located in the output directory.
 
 #### Version 8.2.3
 ##### Resolved issues
