@@ -251,6 +251,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#inspecting-a-local-image-by-image-id" class="md-nav__link">
+    Inspecting a local image by image ID
+  </a>
+  
+</li>
+      
       
       
       
@@ -375,6 +382,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#inspecting-a-local-image-by-image-id" class="md-nav__link">
+    Inspecting a local image by image ID
+  </a>
+  
+</li>
+      
       
       
       
@@ -445,6 +459,13 @@ You can specify which image you want to inspect using <em>--docker.image.repo</e
 from a .tar file that contains <em>ubuntu:latest</em> and other images:</p>
 <pre><code>./blackduck-docker-inspector.sh --docker.tar=multipleimages.tar --docker.image.repo=ubuntu --docker.image.tag=latest
 </code></pre>
+<h3 id="inspecting-a-local-image-by-image-id">Inspecting a local image by image ID</h3>
+<p>When inspecting a local image, you have the option of specifying the image by its ID. First,
+get the image ID from the <em>IMAGE ID</em> column of the output of the <em>docker images</em> command.
+Then use the <em>docker.image.id</em> property to pass the image ID to Black Duck Docker Inspector:</p>
+<pre><code>./blackduck-docker-inspector.sh --docker.image.id={image ID}
+</code></pre>
+<p>The method only works for local images.</p>
                 
                   
                 
