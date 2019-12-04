@@ -14,6 +14,7 @@ theme:
   name: 'material'
 docs_dir: 'generated'
 nav:
+     - <b>Help Topics</b>: index.md
      - Overview: overview.md
      - Architecture: architecture.md
      - Running: running.md
