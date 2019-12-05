@@ -170,6 +170,18 @@
 
 
   <li class="md-nav__item">
+    <a href=".." title="Help Topics" class="md-nav__link">
+      <b>Help Topics</b>
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../overview/" title="Overview" class="md-nav__link">
       Overview
     </a>
@@ -393,11 +405,11 @@
                   <h1>Architecture</h1>
                 
                 <h3 id="architecture-overview">Architecture overview</h3>
-<p>Black Duck Docker Inspector uses up to three container-based image inspector services, 
-one for each of the supported Linux package manager database formats).</p>
+<p>Black Duck Docker Inspector uses up to three container-based image inspector services; 
+one for each of the supported Linux package manager database formats.</p>
 <p>The three image inspector services provide coverage of the three package manager database formats: DPKG, RPM, and APK.
-By default, Black Duck Docker Inspector submits its request to inspect the target image to the DPKG (Ubuntu) image inspector service. Any service 
-redirects to the appropriate image inspector service if it cannot handle the request. For example,
+By default, Black Duck Docker Inspector submits its request to inspect the target image to the DPKG (Ubuntu) image inspector service. All services 
+redirect to the appropriate image inspector service if it cannot handle the request. For example,
 if the target image is a Red Hat image, the Ubuntu inspector service, which cannot inspect a Red Hat image, 
 redirects to the CentOS inspector
 service, which can inspect a Red Hat image. If you know
@@ -406,7 +418,7 @@ Black Duck Docker Inspector to send requests to the CentOS (RPM) or Alpine (APK)
 the property <em>imageinspector.service.distro.default</em>.</p>
 <p>In host mode (the default), Black Duck Docker Inspector automatically uses the Docker engine to pull as
 needed from Docker Hub
-three images: blackducksoftware/blackduck-imageinspector-alpine, 
+the following three images: blackducksoftware/blackduck-imageinspector-alpine, 
 blackducksoftware/blackduck-imageinspector-centos, and blackducksoftware/blackduck-imageinspector-ubuntu.
 Black Duck Docker Inspector starts those services as needed,
 and stops and removes the containers when Black Duck Docker Inspector exits. It uses a shared volume to share files, such as the target Docker image,

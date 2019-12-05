@@ -170,6 +170,18 @@
 
 
   <li class="md-nav__item">
+    <a href=".." title="Help Topics" class="md-nav__link">
+      <b>Help Topics</b>
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../overview/" title="Overview" class="md-nav__link">
       Overview
     </a>
@@ -441,7 +453,7 @@ To run a specific version of Black Duck Docker Inspector:</p>
 <p>The advantage of running blackduck-docker-inspector.sh is that it ensures that you always run the latest
 version of Black Duck Docker Inspector. However, sometimes it is better to run the .jar directly.</p>
 <p>You can download any version of the Black Duck Docker Inspector .jar from https://sig-repo.synopsys.com/webapp/#/artifacts/browse/tree/General/bds-integrations-release/com/synopsys/integration/blackduck-docker-inspector.</p>
-<p>Use this Java command to run it:</p>
+<p>Use the following Java command to run it:</p>
 <pre><code>java -jar blackduck-docker-inspector-{version}.jar {Black Duck Docker Inspector arguments}
 </code></pre>
 <h3 id="inspecting-an-image-by-image-repotag">Inspecting an image by image repo:tag</h3>
@@ -455,7 +467,7 @@ version of Black Duck Docker Inspector. However, sometimes it is better to run t
 ./blackduck-docker-inspector.sh --docker.tar={name}.tar
 </code></pre>
 <p>If your tar file contains multiple images, Black Duck Docker Inspector can only inspect one of them.
-You can specify which image you want to inspect using <em>--docker.image.repo</em> and <em>--docker.image.tag</em>. For example, to select <em>ubuntu:latest</em>
+You can specify the image to inspect using <em>--docker.image.repo</em> and <em>--docker.image.tag</em>. For example, to select <em>ubuntu:latest</em>
 from a .tar file that contains <em>ubuntu:latest</em> and other images:</p>
 <pre><code>./blackduck-docker-inspector.sh --docker.tar=multipleimages.tar --docker.image.repo=ubuntu --docker.image.tag=latest
 </code></pre>

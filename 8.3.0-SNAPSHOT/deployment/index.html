@@ -170,6 +170,18 @@
 
 
   <li class="md-nav__item">
+    <a href=".." title="Help Topics" class="md-nav__link">
+      <b>Help Topics</b>
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../overview/" title="Overview" class="md-nav__link">
       Overview
     </a>
@@ -495,10 +507,10 @@
                 <h3 id="deployment-overview">Deployment overview</h3>
 <p>Black Duck Docker Inspector can be run in either of the following modes:</p>
 <ol>
-<li>Host mode on a Linux machine or a Linux virtual machine (VM) with Docker. The deployment approach for host mode is referred to below as "utility"; you simply execute a command, and deployment is automatic.</li>
-<li>Container mode inside a container running on an orchestration platform such as Kubernetes, OpenShift, etc. The deployment approach for container mode is referred to below as "toolkit"; you take components provided by Docker Inspector (one utility, three containerized services) and deploy them yourself.</li>
+<li>Host mode on a Linux machine or a Linux virtual machine (VM) with Docker. The deployment approach for host mode is referred to below as "utility;" you simply execute a command, and deployment is automatic.</li>
+<li>Container mode inside a container running on an orchestration platform such as Kubernetes, OpenShift, among others. The deployment approach for container mode is referred to below as "toolkit;" you take components provided by Docker Inspector (one utility, three containerized services) and deploy them yourself.</li>
 </ol>
-<p>Most, but not all, of the deployment examples below use the toolkit approach.</p>
+<p>Most, but not all, of the following deployment examples use the toolkit approach.</p>
 <h3 id="important-notes-regarding-deployment-sample-code">Important notes regarding deployment sample code</h3>
 <p>The deployment samples provided are intended to illustrate possible approaches to the challenges
 involved in deploying Black Duck Docker Inspector. They are not intended to be used as-is in production.
@@ -509,7 +521,7 @@ Most of the sample deployments use Detect simply because that is the most common
 <p>In this scenario, Black Duck Docker Inspector is a command line utility that automatically pulls/runs and uses container-based services,<br />
 and cleans them up when it's done. The Docker command, if installed on the machine, can be very useful for troubleshooting, but is not actually
 required or used by Black Duck Docker Inspector.</p>
-<p>In this mode, Black Duck Docker Inspector does require access to a Docker Engine, similar to the way the Docker client requires
+<p>In this mode, Black Duck Docker Inspector requires access to a Docker Engine, similar to the way the Docker client requires
 access to a Docker Engine, so it can pull and run Docker images. It uses the https://github.com/docker-java/docker-java
 library to perform Docker operations using the Docker Engine.</p>
 <p>In this mode, Black Duck Docker Inspector automatically pulls, runs, stops, and removes the container-based image inspector services
@@ -518,21 +530,21 @@ on which it depends. It accesses the services they provide through HTTP GET oper
 <h3 id="using-container-mode-in-a-container-orchestration-platform-such-as-kubernetes-openshift-and-others">Using container mode in a container orchestration platform such as Kubernetes, OpenShift, and others</h3>
 <p>In this scenario, Black Duck Docker Inspector is a toolkit consisting of a command line utility that you run in one container, plus
 three container-based services which you must start. These four containers must:
-(a) share a mounted volume, either persistent or temporary, used to pass large files between containers, and
-(b) be able to reach each other through HTTP GET operations using base URLs that you provide.</p>
+(a) Share a mounted volume, either persistent or temporary, used to pass large files between containers, and:
+(b) Be able to reach each other through HTTP GET operations using base URLs that you provide.</p>
 <h3 id="image-inspector-services">Image Inspector Services</h3>
 <p>Black Duck Docker Inspector consists of a command line utility provided in a Java .jar, but sometimes invoked using a bash script,
 and three image inspector services.</p>
 <p>The required Docker operations, if any, are performed by the command line utility, while the image inspector services
 perform the work of unpacking the target Docker image, extracting the Linux package manager database,
 and running the Linux package manager against that database to extract installed packages
-and translate them to components which are actually externalIDs, for Black Duck. If the image inspector service
+and translate them to components which are actually externalIDs for Black Duck. If the image inspector service
 finds in the target image a package manager database that is incompatible with its own package manager utility; for example, 
 when you run Black Duck Docker Inspector on an Alpine image, but the request goes to the
 Ubuntu image inspector service, the image inspector service redirects the request to the appropriate
 image inspector service. You can change the default image inspector service to reduce the likelihood
-of redirects, resulting in shorter execution times. For example, if most of your target images are Alpine
-you can set <em>imageinspector.service.distro.default</em> to alpine.</p>
+of redirects, resulting in shorter execution times. For example, if most of your target images are Alpine,
+you can set <em>imageinspector.service.distro.default</em> to <em>alpine</em>.</p>
 <p>The image inspector service containers are downloaded from Docker Hub (blackducksoftware/blackduck-imageinspector-*).</p>
 <h3 id="deployment-sample-for-kubernetes">Deployment sample for Kubernetes</h3>
 <p>Approach: Toolkit</p>
@@ -546,7 +558,7 @@ The containers communicate through localhost URLs.</p>
 <p>Download: curl -O https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/openshift/setup.txt</p>
 <h3 id="deployment-sample-for-travis-ci">Deployment sample for Travis CI</h3>
 <p>Approach: Toolkit</p>
-<p>Deployment notes: Uses the Travis CI docker service.
+<p>Deployment notes: Uses the Travis CI Docker service.
 The containers communicate through localhost URLs.</p>
 <p>Download: curl -O https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/travisci/travis.yml</p>
 <h3 id="deployment-sample-for-gitlab-ci">Deployment sample for GitLab CI</h3>
@@ -563,7 +575,7 @@ The containers communicate through localhost URLs.</p>
 <p>Deployment notes: The containers communicate through localhost URLs.</p>
 <p>Download: curl -O https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/docker/runDetectInContainer/setup.sh         </p>
 <h3 id="configuring-black-duck-docker-inspector-for-your-docker-registry">Configuring Black Duck Docker Inspector for your Docker registry</h3>
-<p>If you invoke Black Duck Docker Inspector with an image reference, versus an image that has been saved to a .tar file,
+<p>If you invoke Black Duck Docker Inspector with an image reference versus an image that is saved to a .tar file,
 it uses the docker-java library (https://github.com/docker-java/docker-java) to access the Docker registry
 to pull the image. </p>
 <p>If <em>docker pull {targetimage}</em> works from the command line, then Black Duck Docker Inspector is also able
@@ -571,7 +583,7 @@ to pull that image, because docker-java can be configured the same way as the Do
 <p>There are other ways to configure docker-java. For more information on configuring docker-java
 and Black Duck Docker Inspector for your Docker registry, refer to: https://github.com/docker-java/docker-java#Configuration.</p>
 <p>Black Duck Docker Inspector does not override any of the configuration settings in the code,
-so any of the other methods (properties, system properties, system environment) will work.</p>
+so any of the other methods (properties, system properties, system environment) work.</p>
 <p>If you choose to use environment variables, and you are calling Black Duck Docker Inspector from Detect,
 you must prefix the environment variable names with <em>DETECT_DOCKER_PASSTHROUGH_</em> to
 instruct Detect to pass them on to Black Duck Docker Inspector.

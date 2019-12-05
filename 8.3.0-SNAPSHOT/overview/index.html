@@ -168,6 +168,18 @@
       
       
 
+
+  <li class="md-nav__item">
+    <a href=".." title="Help Topics" class="md-nav__link">
+      <b>Help Topics</b>
+    </a>
+  </li>
+
+    
+      
+      
+      
+
   
 
 
@@ -439,14 +451,14 @@
 It utilizes the appropriate Linux package manager to provide a list of
 the packages installed by the package manager, and creates a Black Duck project with a Bill of Materials (BOM) consisting of those packages as components.
 Because it relies on the Linux package manager as its source, the discovered packages are limited to those installed and managed using the Linux package manager.</p>
-<p>Black Duck Docker Inspector can inspect Linux Docker images that use DPKG, RPM, or APK package manager formats.</p>
+<p>Black Duck Docker Inspector can inspect Linux Docker images that use the DPKG, RPM, or APK package manager formats.</p>
 <p>After running the Black Duck Docker Inspector on an image, navigate to Black Duck to view the BOM created by 
 Black Duck Docker Inspector.</p>
 <h3 id="modes-of-operation">Modes of operation</h3>
 <p>Black Duck Docker Inspector has two modes:</p>
 <ul>
 <li>Host mode, for running on a Linux machine/Linux virtual machine (VM) where Black Duck Docker Inspector can perform Docker operations using a Docker Engine.</li>
-<li>Container mode, for running in a container, started by Docker, Kubernetes, OpenShift, and others.</li>
+<li>Container mode, for running in a container started by Docker, Kubernetes, OpenShift, and others.</li>
 </ul>
 <h4 id="host-mode">Host mode</h4>
 <p>Host mode (default) is for Linux machines/VMs where Black Duck Docker Inspector can perform Docker operations using a Docker Engine.</p>
@@ -468,14 +480,14 @@ refer to <a href="../deployment/">Deploying</a>.</p>
 <li>Linux.</li>
 <li>Access to the internet. For information on running without access to the internet, refer to <a href="../advanced/#air-gap-mode">Air Gap mode</a>.</li>
 <li>Java (JRE) versions 8 or 11.</li>
-<li>Three available ports for the image inspector services.  By default, these ports are 9000, 9001, and 9002.</li>
+<li>Three available ports for the image inspector services. By default, these ports are 9000, 9001, and 9002.</li>
 <li>When invoking Black Duck Docker Inspector using blackduck-docker-inspector.sh:<ul>
 <li>curl</li>
 <li>bash</li>
 </ul>
 </li>
-<li>In host mode: Access to a Docker Engine; versions 17.09 or higher.</li>
-<li>In container mode: You must start the Black Duck Docker Inspector container that meets the preceding requirements, and three container-based
+<li>In host mode: access to a Docker Engine versions 17.09 or higher.</li>
+<li>In container mode: you must start the Black Duck Docker Inspector container that meets the preceding requirements, and three container-based
 "image inspector" services. All four of these containers must share a mounted volume and be able to reach each other through HTTP GET operations using base URLs
 that you provide. For more information, refer to <a href="../deployment/">Deploying</a>.</li>
 </ul>
@@ -557,6 +569,20 @@ using tools like mdless (https://brettterpstra.com/2015/08/21/mdless-better-mark
   
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
+        
+          <a href=".." title="Help Topics" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                <b>Help Topics</b>
+              </span>
+            </div>
+          </a>
         
         
           <a href="../architecture/" title="Architecture" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
