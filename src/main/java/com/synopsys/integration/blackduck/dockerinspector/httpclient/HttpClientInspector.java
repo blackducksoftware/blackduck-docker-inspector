@@ -1,7 +1,7 @@
 /**
  * blackduck-docker-inspector
  *
- * Copyright (c) 2019 Synopsys, Inc.
+ * Copyright (c) 2020 Synopsys, Inc.
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
@@ -98,7 +98,7 @@ public class HttpClientInspector {
             adjustBdio(bdioDocument);
             final File bdioFile = output.addOutputToOutputDir(bdioDocument);
             if (config.isUploadBdio()) {
-                blackDuckClient.uploadBdio(bdioFile, bdioDocument.billOfMaterials.spdxName);
+                blackDuckClient.uploadBdio(bdioFile, bdioDocument.getBillOfMaterials().spdxName);
             }
             cleanup();
             return 0;
@@ -109,15 +109,15 @@ public class HttpClientInspector {
 
     private void adjustBdio(final SimpleBdioDocument bdioDocument) {
         if (StringUtils.isNotBlank(config.getBlackDuckProjectName())) {
-            bdioDocument.project.name = config.getBlackDuckProjectName();
+            bdioDocument.getProject().name = config.getBlackDuckProjectName();
         }
         if (StringUtils.isNotBlank(config.getBlackDuckProjectVersion())) {
-            bdioDocument.project.version = config.getBlackDuckProjectVersion();
+            bdioDocument.getProject().version = config.getBlackDuckProjectVersion();
         }
         if (StringUtils.isNotBlank(config.getBlackDuckCodelocationName())) {
-            bdioDocument.billOfMaterials.spdxName = config.getBlackDuckCodelocationName();
+            bdioDocument.getBillOfMaterials().spdxName = config.getBlackDuckCodelocationName();
         } else if (StringUtils.isNotBlank(config.getBlackDuckCodelocationPrefix())) {
-            bdioDocument.billOfMaterials.spdxName = String.format("%s_%s", config.getBlackDuckCodelocationPrefix(), bdioDocument.billOfMaterials.spdxName);
+            bdioDocument.getBillOfMaterials().spdxName = String.format("%s_%s", config.getBlackDuckCodelocationPrefix(), bdioDocument.getBillOfMaterials().spdxName);
         }
     }
 
