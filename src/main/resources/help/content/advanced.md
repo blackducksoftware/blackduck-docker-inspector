@@ -28,9 +28,30 @@ signature scanner because in this scenario, the signature scanner may be deprive
 information, such as the operating system files that enable it to determine the Linux distribution.  
 This could negatively affect its ability to accurately identify components.
 
+### Inspecting multiple images more efficiently by leaving services running
+
+By default, ${solution_name} starts, uses, and then stops and removes either one or two containerized
+image inspector services per run. This may be appropriate when scanning
+a single image, but when scanning many images it is highly inefficient,
+and it doesn't support concurrent execution of multiple ${solution_name} runs. 
+
+The scanning of many images is completed significantly faster by starting the image inspector services
+once, and running multiple instances of ${solution_name}, so that each one sends requests to the already-running
+image inspector services.
+
+The following script illustrates how this is done in a Docker environment:
+
+    curl -O ${source_raw_content_url_base}/${source_repo_organization}/${project_name}/master/deployment/docker/batchedImageInspection.sh
+
+To keep the example simple, this script only starts the Alpine image inspector service.
+In general, you must start two more services: the Ubuntu image inspector service
+for inspecting images built from dpkg-based Linux distros, and the CentOS image inspector service
+for inspecting images built from rpm-based Linux distributions. It doesn't matter which service receives
+the request; any service redirects if necessary.
+
 ### Concurrent execution
 
-You can inspect multiple images in parallel on the same computer when you directly invoke the .jar file. For example:
+You can inspect multiple images in parallel on the same computer if you (a) directly invoke the .jar file, and (b) leave the services running. For example:
 
     # Get the latest ${script_name}
     curl -O  ${script_hosting_scheme}://${source_repo_organization}.${script_hosting_domain}/${project_name}/${script_name}
@@ -43,9 +64,10 @@ You can inspect multiple images in parallel on the same computer when you direct
     ./${script_name} --pulljar
  
     # Execute multiple inspections in parallel
-    java -jar ./${project_name}-${r"${inspectorVersion}"}.jar --blackduck.url={Black Duck url} --blackduck.username={Black Duck username} --docker.image=alpine:3.5  &
-    java -jar ./${project_name}-${r"${inspectorVersion}"}.jar --blackduck.url={Black Duck url} --blackduck.username={Black Duck username} --docker.image=alpine:3.4  &
-    java -jar ./${project_name}-${r"${inspectorVersion}"}.jar --blackduck.url={Black Duck url} --blackduck.username={Black Duck username} --docker.image=alpine:3.3  &
+    java -jar ./${project_name}-${r"${inspectorVersion}"}.jar --blackduck.url={Black Duck url} --blackduck.username={Black Duck username} --docker.image=alpine:3.5 --cleanup.inspector.container=false &
+    # Allow time for the image inspector service to start before starting the rest of the runs (do this for each image inspector type that you use: alpine, centos, ubuntu)
+    java -jar ./${project_name}-${r"${inspectorVersion}"}.jar --blackduck.url={Black Duck url} --blackduck.username={Black Duck username} --docker.image=alpine:3.4 --cleanup.inspector.container=false &
+    java -jar ./${project_name}-${r"${inspectorVersion}"}.jar --blackduck.url={Black Duck url} --blackduck.username={Black Duck username} --docker.image=alpine:3.3 --cleanup.inspector.container=false &
 
 ### Alternative methods for setting property values
 
@@ -136,26 +158,6 @@ converts an OCI image directory alpine-oci to a Docker Image Specification v1.2.
 alpine-docker.tar that ${solution_name} can process when passed in with the
 --docker.tar=alpine-docker.tar command line argument.
 
-### Inspecting multiple images more efficiently
-
-By default, ${solution_name} starts, uses, and then stops and removes either one or two containerized
-image inspector services per run. This may be appropriate when scanning
-a single image, but when scanning many images, it is highly inefficient. 
-
-The scanning of many images is completed significantly faster by starting the image inspector services
-once, and running multiple instances of ${solution_name}, so that each one sends requests to the already-running
-image inspector services.
-
-The following script illustrates how this is done in a Docker environment:
-
-    curl -O ${source_raw_content_url_base}/${source_repo_organization}/${project_name}/master/deployment/docker/batchedImageInspection.sh
-
-To keep the example simple, this script only starts the Alpine image inspector service.
-In general, you must start two more services: the Ubuntu image inspector service
-for inspecting images built from dpkg-based Linux distros, and the CentOS image inspector service
-for inspecting images built from rpm-based Linux distributions. It doesn't matter which service receives
-the request; any service redirects if necessary.
-
 ### Running Detect on a project directory that exists within a Docker image
 
 When you want to run Detect on a directory that exists within a Docker image, you can use the following approach:
@@ -168,7 +170,6 @@ To see a simple example that illustrates this approach, use the following comman
 
     curl -O ${source_raw_content_url_base}/${source_repo_organization}/${project_name}/master/deployment/docker/runDetectInImageDir/runDetectInImageDir.sh
     curl -O ${source_raw_content_url_base}/${source_repo_organization}/${project_name}/master/deployment/docker/runDetectInImageDir/Dockerfile
-
 
 Review the script before running it to make sure the side effects
 (files and directories that it creates) are acceptable.
