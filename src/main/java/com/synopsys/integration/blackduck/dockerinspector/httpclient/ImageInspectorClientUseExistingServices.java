@@ -70,7 +70,8 @@ public class ImageInspectorClientUseExistingServices implements ImageInspectorCl
     public String getBdio(final String hostPathToTarfile, final String containerPathToInputDockerTarfile, final String givenImageRepo, final String givenImageTag,
         final String containerPathToOutputFileSystemFile, final String containerFileSystemExcludedPaths,
         final boolean organizeComponentsByLayer, final boolean includeRemovedComponents,
-        final boolean cleanup, final String platformTopLayerId)
+        final boolean cleanup, final String platformTopLayerId,
+        final String targetLinuxDistro)
             throws IntegrationException, MalformedURLException {
         URI imageInspectorUri;
         try {
@@ -85,7 +86,8 @@ public class ImageInspectorClientUseExistingServices implements ImageInspectorCl
                 givenImageRepo, givenImageTag,
             containerPathToOutputFileSystemFile, containerFileSystemExcludedPaths,
             organizeComponentsByLayer, includeRemovedComponents, cleanup,
-            platformTopLayerId);
+            platformTopLayerId,
+            targetLinuxDistro);
         return response.getBody();
     }
 

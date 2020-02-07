@@ -45,6 +45,7 @@ public class ImageInspectorUrlBuilder {
     private static final String IMAGE_TAG_QUERY_PARAM = "imagetag";
     private static final String TARFILE_QUERY_PARAM = "tarfile";
     private static final String PLATFORM_TOP_LAYER_ID_PARAM = "platformtoplayerid";
+    private static final String TARGET_LINUX_DISTRO_PARAM = "targetlinuxdistro";
     private static final String BASE_LOGGER_NAME = "com.synopsys";
 
     private URI imageInspectorUri = null;
@@ -52,6 +53,7 @@ public class ImageInspectorUrlBuilder {
     private String givenImageRepo = null;
     private String givenImageTag = null;
     private String platformTopLayerId = null;
+    private String targetLinuxDistro = null;
     private String containerPathToContainerFileSystemFile = null;
     private String containerFileSystemExcludedPaths = null;
     private boolean organizeComponentsByLayer = false;
@@ -80,6 +82,11 @@ public class ImageInspectorUrlBuilder {
 
     public ImageInspectorUrlBuilder platformTopLayerId(final String platformTopLayerId) {
         this.platformTopLayerId = platformTopLayerId;
+        return this;
+    }
+
+    public ImageInspectorUrlBuilder targetLinuxDistro(final String targetLinuxDistro) {
+        this.targetLinuxDistro = targetLinuxDistro;
         return this;
     }
 
@@ -139,6 +146,9 @@ public class ImageInspectorUrlBuilder {
         }
         if (StringUtils.isNotBlank(platformTopLayerId)) {
             urlSb.append(String.format("&%s=%s", PLATFORM_TOP_LAYER_ID_PARAM, platformTopLayerId));
+        }
+        if (StringUtils.isNotBlank(targetLinuxDistro)) {
+            urlSb.append(String.format("&%s=%s", TARGET_LINUX_DISTRO_PARAM, targetLinuxDistro));
         }
         final String url = urlSb.toString();
         return url;

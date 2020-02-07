@@ -118,9 +118,9 @@ public class Config {
     // If Docker Inspector cannot derive it automatically,
     // use linux.distro to specify the target image linux distribution
     // (ubuntu, debian, busybox, centos, fedora, redhat, alpine)
-    @ValueDescription(description = "Linux Distribution Name", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Target image Linux distribution name. Use this if you need to override the Linux distribution name discovered by Docker Inspector.", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${linux.distro:}")
-    private String linuxDistro = "";
+    private String targetImageLinuxDistroOverride = "";
 
     // Timeout for external command execution (to pull a docker image, etc.)
     @ValueDescription(description = "Command Timeout (Milliseconds)", defaultValue = "120000", group = Config.GROUP_PUBLIC, deprecated = false)
@@ -500,6 +500,10 @@ public class Config {
         return optionsByFieldName.get("dockerPlatformTopLayerId").getResolvedValue();
     }
 
+    public String getTargetImageLinuxDistroOverride() {
+        return optionsByFieldName.get("targetImageLinuxDistroOverride").getResolvedValue();
+    }
+
     public String getDockerImageTag() {
         return optionsByFieldName.get("dockerImageTag").getResolvedValue();
     }
@@ -674,7 +678,7 @@ public class Config {
         this.blackDuckUsername = null;
         this.blackDuckApiToken = null;
         this.jarPath = null;
-        this.linuxDistro = null;
+        this.targetImageLinuxDistroOverride = null;
         this.loggingLevel = null;
         this.outputIncludeContainerfilesystem = null;
         this.outputIncludeSquashedImage = null;

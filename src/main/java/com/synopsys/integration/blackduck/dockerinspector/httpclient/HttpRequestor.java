@@ -48,7 +48,8 @@ public class HttpRequestor {
         final boolean organizeComponentsByLayer,
         final boolean includeRemovedComponents,
         final boolean cleanup,
-        final String platformTopLayerId)
+        final String platformTopLayerId,
+        final String targetLinuxDistro)
             throws IntegrationException {
         final String url = new ImageInspectorUrlBuilder()
                 .imageInspectorUri(imageInspectorUri)
@@ -61,6 +62,7 @@ public class HttpRequestor {
                                .includeRemovedComponents(includeRemovedComponents)
                 .cleanup(cleanup)
                                .platformTopLayerId(platformTopLayerId)
+                               .targetLinuxDistro(targetLinuxDistro)
                 .build();
         logger.debug(String.format("Doing a getBdio request on %s", url));
         final Request request = new Request.Builder(url).method(HttpMethod.GET).build();

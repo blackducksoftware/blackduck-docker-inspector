@@ -108,7 +108,8 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
     public String getBdio(final String hostPathToTarfile, final String containerPathToInputDockerTarfile, final String givenImageRepo, final String givenImageTag,
         final String containerPathToOutputFileSystemFile, final String containerFileSystemExcludedPaths,
         final boolean organizeComponentsByLayer, final boolean includeRemovedComponents, final boolean cleanup,
-        final String platformTopLayerId)
+        final String platformTopLayerId,
+        final String targetLinuxDistro)
         throws IntegrationException {
         logger.info(dockerClientManager.getDockerJavaLibraryVersion());
 
@@ -122,6 +123,7 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
             containerPathToOutputFileSystemFile, containerFileSystemExcludedPaths,
             organizeComponentsByLayer,
             includeRemovedComponents, cleanup, platformTopLayerId,
+            targetLinuxDistro,
             initialRequestFailureCriteria);
         if (response.getStatusCode() == RestConstants.OK_200) {
             return response.getBody();
@@ -142,6 +144,7 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
             containerPathToOutputFileSystemFile, containerFileSystemExcludedPaths,
             organizeComponentsByLayer, includeRemovedComponents,
             cleanup, platformTopLayerId,
+            targetLinuxDistro,
             correctedRequestFailureCriteria);
         return responseFromCorrectedContainer.getBody();
     }
@@ -150,7 +153,9 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         final String containerPathToInputDockerTarfile,
         final String givenImageRepo, final String givenImageTag,
         final String containerPathToOutputFileSystemFile, final String containerFileSystemExcludedPaths,
-        final boolean organizeComponentsByLayer, final boolean includeRemovedComponents, final boolean cleanup, final String platformTopLayerId, final Predicate<Integer> failureTest)
+        final boolean organizeComponentsByLayer, final boolean includeRemovedComponents, final boolean cleanup, final String platformTopLayerId,
+        final String targetLinuxDistro,
+        final Predicate<Integer> failureTest)
         throws IntegrationException {
         SimpleResponse response = null;
         ContainerDetails serviceContainerDetails = null;
@@ -164,7 +169,8 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
                     givenImageRepo, givenImageTag,
                     containerPathToOutputFileSystemFile, containerFileSystemExcludedPaths,
                     organizeComponentsByLayer, includeRemovedComponents, cleanup,
-                    platformTopLayerId);
+                    platformTopLayerId,
+                    targetLinuxDistro);
                 logServiceLogIfDebug(serviceContainerDetails.getContainerId());
             } catch (final IntegrationException e) {
                 logServiceError(serviceContainerDetails.getContainerId());
