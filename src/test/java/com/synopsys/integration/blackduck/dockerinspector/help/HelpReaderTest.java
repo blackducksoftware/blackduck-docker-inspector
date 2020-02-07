@@ -34,8 +34,8 @@ public class HelpReaderTest {
         Mockito.when(programVersion.getProgramVersion()).thenReturn(TEST_PROGRAM_VERSION);
 
         final String helpFileContents = helpReader.getVariableSubstitutedTextFromHelpFile("overview");
-
-        assertTrue(helpFileContents.contains("The current version of Black Duck. Visit [this page](https://synopsys.atlassian.net/wiki/spaces/INTDOCS/pages/177799187/Black+Duck+Release+Compatibility) to determine the current version."));
+        
+        assertTrue(helpFileContents.contains("The current version of Black Duck. Visit [this page](https://github.com/blackducksoftware/hub/releases) to determine the current version."));
         assertTrue(helpFileContents.contains(TEST_PROGRAM_VERSION));
     }
 
