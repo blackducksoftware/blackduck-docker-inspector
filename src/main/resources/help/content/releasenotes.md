@@ -1,3 +1,8 @@
+#### Version 8.3.1
+##### Resolved issues
+* Fixed an issue that prevented the linux.distro property from working correctly.
+* Added a mapping of target image Linux distribution name "amzn" to "centos".
+
 #### Version 8.3.0
 ##### New features
 * Docker Inspector now writes a summary of results to the file results.json, located in the output directory.
