@@ -18,3 +18,5 @@
 /out/
 docs/site/
 docs/generated/
+buildSrc/.gradle
+buildSrc/build
