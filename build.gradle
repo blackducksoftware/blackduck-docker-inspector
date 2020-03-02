@@ -210,6 +210,9 @@ task buildAggTestDockerTarfile(type: Exec, dependsOn: [buildTestDockerImage, bui
 clean.dependsOn docsClean
 compileJava.dependsOn writeVersionToPropertiesFile
 build.dependsOn generateHelpMarkdown
+task updateArtifactoryProperties(type: UpdateArtifactoryPropertiesTask) {
+    dependsOn artifactoryPublish
+}
 
 task checkVersion() {
     doFirst {
@@ -229,8 +232,7 @@ task testPrep(type: Exec, dependsOn: [build, buildTestTarfiles, buildScript, cre
     commandLine 'mkdir', 'test'
 }
 
-testIntegration.dependsOn testPrep
-
+testIntegration.dependsOn testPrep 
 task all(dependsOn: [testIntegration, artifactoryPublish, publishAirGapZip]) {}
 
 publishing {

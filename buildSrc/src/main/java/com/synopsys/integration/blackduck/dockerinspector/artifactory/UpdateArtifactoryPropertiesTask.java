@@ -45,10 +45,8 @@ import com.synopsys.integration.log.IntLogger;
 import com.synopsys.integration.log.Slf4jIntLogger;
 
 public class UpdateArtifactoryPropertiesTask extends DefaultTask {
-    // DOCKER_INSPECTOR_LATEST
-    // DOCKER_INSPECTOR_LATEST_8
-    // DOCKER_INSPECTOR_AIR_GAP_LATEST_8
-    private static final String LATEST_PROPERTY_KEY = "DETECT_LATEST";
+    private static final String LATEST_PROPERTY_KEY = "DOCKER_INSPECTOR_LATEST";
+    private static final String LATEST_AIR_GAP_PROPERTY_KEY = "DOCKER_INSPECTOR_AIR_GAP_LATEST";
 
     private final IntLogger logger = new Slf4jIntLogger(getLogger());
     private final Gson gson = new Gson();
@@ -56,8 +54,8 @@ public class UpdateArtifactoryPropertiesTask extends DefaultTask {
 
     @TaskAction
     public void updateArtifactoryProperties() {
-
         final String projectVersion = project.getVersion().toString();
+
         final boolean isSnapshot = StringUtils.endsWith(projectVersion, "-SNAPSHOT");
 
         if (isSnapshot || "true".equals(project.findProperty("qa.build"))) {
@@ -74,17 +72,18 @@ public class UpdateArtifactoryPropertiesTask extends DefaultTask {
 
                 final String artifactoryCredentials = String.format("%s:%s", artifactoryDeployerUsername, artifactoryDeployerPassword);
                 final List<String> defaultCurlArgs = Arrays.asList("--silent", "--insecure", "--user", artifactoryCredentials, "--header", "Content-Type: application/json");
-
                 final Optional<ArtifactSearchResultElement> currentArtifact = findCurrentArtifact(defaultCurlArgs, artifactoryDeploymentUrl, artifactoryRepository);
 
                 if (currentArtifact.isPresent()) {
                     final String majorVersion = projectVersion.split("\\.")[0];
                     final String majorVersionPropertyKey = String.format("%s_%s", LATEST_PROPERTY_KEY, majorVersion);
+                    final String airGapVersionPropertyKey = String.format("%s_%s", LATEST_AIR_GAP_PROPERTY_KEY, majorVersion);
                     final String downloadUri = currentArtifact.get().getDownloadUri();
                     final String updatedDownloadUri = downloadUri.replace(artifactoryDeploymentUrl, artifactoryDownloadUrl);
 
                     setArtifactoryProperty(defaultCurlArgs, artifactoryDeploymentUrl, artifactoryRepository, LATEST_PROPERTY_KEY, updatedDownloadUri);
                     setArtifactoryProperty(defaultCurlArgs, artifactoryDeploymentUrl, artifactoryRepository, majorVersionPropertyKey, updatedDownloadUri);
+                    setArtifactoryProperty(defaultCurlArgs, artifactoryDeploymentUrl, artifactoryRepository, airGapVersionPropertyKey, updatedDownloadUri);
                 } else {
                     logger.alwaysLog(String.format("Artifactory properties won't be updated since %s-%s was not found.", project.getName(), projectVersion));
                 }
