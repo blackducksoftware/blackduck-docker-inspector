@@ -49,16 +49,27 @@ configurations {
 
 task writeVersionToPropertiesFile() {
 	doLast {
-		println '\tGenerating version properties file'
-		Properties versionProperties = new Properties()
-		File versionPropertiesFile = new File('src/main/resources/version.properties')
-		versionPropertiesFile.delete()
-		versionPropertiesFile.createNewFile()
-		versionProperties.setProperty('program.version', version)
-		versionProperties.setProperty('inspector.image.family', project.ext.inspectorImageFamily)
-		versionProperties.setProperty('inspector.image.version', project.ext.inspectorImageVersion)
-		versionProperties.store(versionPropertiesFile.newWriter(), null)
-	}
+        println '\tChecking version properties'
+        File versionPropertiesHashFile = new File('src/main/resources/version.hashcode')
+        String existingHash = versionPropertiesHashFile.text
+
+        Properties versionProperties = new Properties()
+        versionProperties.setProperty('program.version', version)
+        versionProperties.setProperty('inspector.image.family', project.ext.inspectorImageFamily)
+        versionProperties.setProperty('inspector.image.version', project.ext.inspectorImageVersion)
+
+        int versionPropertiesHashCode = versionProperties.hashCode()
+        if (!Integer.toString(versionPropertiesHashCode).equals(existingHash)) {
+            println '\tGenerating version properties file'
+            File versionPropertiesFile = new File('src/main/resources/version.properties')
+            versionPropertiesFile.delete()
+            versionPropertiesFile.createNewFile()
+            versionProperties.store(versionPropertiesFile.newWriter(), null)
+            versionPropertiesHashFile.delete()
+            versionPropertiesHashFile.createNewFile()
+            versionPropertiesHashFile.text = versionPropertiesHashCode
+        }
+    }
 }
 
 task produceFinalZip(type: Zip, dependsOn: [build, writeVersionToPropertiesFile]) {
