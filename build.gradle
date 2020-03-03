@@ -36,9 +36,6 @@ apply plugin: 'com.synopsys.integration.solution'
 apply plugin: 'com.bmuschko.docker-remote-api'
 
 import com.bmuschko.gradle.docker.tasks.image.Dockerfile
-import org.springframework.util.DigestUtils
-
-import java.security.MessageDigest
 
 apply from: 'airgap.gradle'
 
