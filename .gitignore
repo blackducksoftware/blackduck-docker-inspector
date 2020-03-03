@@ -12,7 +12,8 @@
 /alpine.tar
 /testing/
 /testBdio
-/test/
+/test/*
+!/test/NEEDED_FOR_TESTS
 /*.iml
 /.idea/
 /out/
