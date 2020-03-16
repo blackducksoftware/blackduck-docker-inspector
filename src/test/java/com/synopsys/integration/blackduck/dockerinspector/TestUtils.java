@@ -79,20 +79,6 @@ public class TestUtils {
         return true;
     }
 
-    public static boolean testJsonContents(File file1, File file2) throws IOException {
-        String json1 = FileUtils.readFileToString(file1, StandardCharsets.UTF_8);
-        String json2 = FileUtils.readFileToString(file2, StandardCharsets.UTF_8);
-        try {
-            final JSONArray expected = (JSONArray) JSONParser.parseJSON(json1);
-            final JSONArray actual = (JSONArray) JSONParser.parseJSON(json2);
-            JSONAssert.assertEquals(expected, actual, false);
-        } catch (JSONException e) {
-            return false;
-        }
-
-        return true;
-    }
-
     public static String execCmd(final File workingDir, final String cmd, final long timeout, final boolean logStdout, final Map<String, String> givenEnv) throws IOException, InterruptedException, IntegrationException {
         return execCmd(workingDir, cmd, timeout, givenEnv, logStdout);
     }
