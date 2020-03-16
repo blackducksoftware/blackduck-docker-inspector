@@ -15,6 +15,10 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.synopsys.integration.exception.IntegrationException;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONParser;
 
 public class TestUtils {
     public final static String TEST_DIR_REL_PATH = "test";
@@ -72,6 +76,20 @@ public class TestUtils {
             }
         }
         System.out.printf("These files match (%d lines matched; %d lines ignored)\n", matchedLineCount, ignoredLineCount);
+        return true;
+    }
+
+    public static boolean testJsonContents(File file1, File file2) throws IOException {
+        String json1 = FileUtils.readFileToString(file1, StandardCharsets.UTF_8);
+        String json2 = FileUtils.readFileToString(file2, StandardCharsets.UTF_8);
+        try {
+            final JSONArray expected = (JSONArray) JSONParser.parseJSON(json1);
+            final JSONArray actual = (JSONArray) JSONParser.parseJSON(json2);
+            JSONAssert.assertEquals(expected, actual, false);
+        } catch (JSONException e) {
+            return false;
+        }
+
         return true;
     }
 

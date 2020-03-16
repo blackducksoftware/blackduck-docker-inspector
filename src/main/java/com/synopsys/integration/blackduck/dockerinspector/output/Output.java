@@ -87,7 +87,7 @@ public class Output {
         } else {
             outputDir = new File(programPaths.getDockerInspectorWorkingOutputPath());
         }
-        final String bdioFilename = new BdioFilename(bdioDocument.billOfMaterials.spdxName).getBdioFilename();
+        final String bdioFilename = new BdioFilename(bdioDocument.getBillOfMaterials().spdxName).getBdioFilename();
         final File outputBdioFile = new File(outputDir, bdioFilename);
         final FileOutputStream outputBdioStream = new FileOutputStream(outputBdioFile);
         logger.info(String.format("Writing BDIO to %s", outputBdioFile.getAbsolutePath()));
