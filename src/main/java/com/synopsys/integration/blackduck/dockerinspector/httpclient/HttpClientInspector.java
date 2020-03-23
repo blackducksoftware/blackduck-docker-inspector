@@ -101,7 +101,7 @@ public class HttpClientInspector {
             adjustBdio(bdioDocument);
             final OutputFiles outputFiles = output.addOutputToFinalOutputDir(bdioDocument, finalDockerTarfile.getImageRepo(), finalDockerTarfile.getImageTag());
             if (config.isUploadBdio()) {
-                blackDuckClient.uploadBdio(outputFiles.getBdioFile(), bdioDocument.billOfMaterials.spdxName);
+                blackDuckClient.uploadBdio(outputFiles.getBdioFile(), bdioDocument.getBillOfMaterials().spdxName);
             }
             cleanup();
             final Result result = Result.createResultSuccess(finalDockerTarfile.getImageRepo(), finalDockerTarfile.getImageTag(), finalDockerTarfile.getFile().getName(),
@@ -116,15 +116,15 @@ public class HttpClientInspector {
 
     private void adjustBdio(final SimpleBdioDocument bdioDocument) {
         if (StringUtils.isNotBlank(config.getBlackDuckProjectName())) {
-            bdioDocument.project.name = config.getBlackDuckProjectName();
+            bdioDocument.getProject().name = config.getBlackDuckProjectName();
         }
         if (StringUtils.isNotBlank(config.getBlackDuckProjectVersion())) {
-            bdioDocument.project.version = config.getBlackDuckProjectVersion();
+            bdioDocument.getProject().version = config.getBlackDuckProjectVersion();
         }
         if (StringUtils.isNotBlank(config.getBlackDuckCodelocationName())) {
-            bdioDocument.billOfMaterials.spdxName = config.getBlackDuckCodelocationName();
+            bdioDocument.getBillOfMaterials().spdxName = config.getBlackDuckCodelocationName();
         } else if (StringUtils.isNotBlank(config.getBlackDuckCodelocationPrefix())) {
-            bdioDocument.billOfMaterials.spdxName = String.format("%s_%s", config.getBlackDuckCodelocationPrefix(), bdioDocument.billOfMaterials.spdxName);
+            bdioDocument.getBillOfMaterials().spdxName = String.format("%s_%s", config.getBlackDuckCodelocationPrefix(), bdioDocument.getBillOfMaterials().spdxName);
         }
     }
 

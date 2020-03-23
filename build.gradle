@@ -1,41 +1,27 @@
 import org.apache.tools.ant.filters.ReplaceTokens
+import com.bmuschko.gradle.docker.tasks.image.Dockerfile
 import com.synopsys.integration.blackduck.dockerinspector.artifactory.UpdateArtifactoryPropertiesTask;
 
 buildscript {
-    repositories {
-        jcenter()
-        mavenCentral()
-        maven { url 'https://plugins.gradle.org/m2/' }
-    }
+    apply from: "https://raw.githubusercontent.com/blackducksoftware/integration-resources/master/gradle_common/buildscript-repositories.gradle", to: buildscript
+    apply from: "https://raw.githubusercontent.com/blackducksoftware/integration-resources/master/gradle_common/buildscript-dependencies.gradle", to: buildscript
+
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.6.RELEASE")
         classpath 'com.bmuschko:gradle-docker-plugin:3.0.6'
         classpath 'org.freemarker:freemarker:2.3.26-incubating'
-        classpath 'com.synopsys.integration:common-gradle-plugin:1.2.3'
     }
 }
 
-repositories {
-    mavenLocal()
-    jcenter()
-    mavenCentral()
-    maven {url "https://oss.sonatype.org/content/repositories/snapshots/"}
-}
+project.ext.inspectorImageFamily = "blackduck-imageinspector"
+project.ext.inspectorImageVersion = "5.0.0-SNAPSHOT"
 
 version = '8.3.2-SNAPSHOT'
-project.ext.inspectorImageFamily = "blackduck-imageinspector"
-project.ext.inspectorImageVersion = "4.6.0"
-project.group = 'com.synopsys.integration'
 
-apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
-apply plugin: 'maven'
-apply plugin: 'maven-publish'
 apply plugin: 'io.spring.dependency-management'
-apply plugin: 'com.synopsys.integration.solution'
 apply plugin: 'com.bmuschko.docker-remote-api'
-
-import com.bmuschko.gradle.docker.tasks.image.Dockerfile
+apply plugin: 'com.synopsys.integration.solution'
 
 apply from: 'airgap.gradle'
 
@@ -221,6 +207,7 @@ task buildAggTestDockerTarfile(type: Exec, dependsOn: [buildTestDockerImage, bui
 clean.dependsOn docsClean
 compileJava.dependsOn writeVersionToPropertiesFile
 build.dependsOn generateHelpMarkdown
+
 task updateArtifactoryProperties(type: UpdateArtifactoryPropertiesTask) {
     dependsOn artifactoryPublish
 }
@@ -246,24 +233,10 @@ task testPrep(type: Exec, dependsOn: [build, buildTestTarfiles, buildScript, cre
 testIntegration.dependsOn testPrep 
 task all(dependsOn: [testIntegration, artifactoryPublish, publishAirGapZip]) {}
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            def artifactName = "${buildDir}/libs/${project.name}-${version}.jar"
-            artifact (artifactName)
-        }
-    }
-}
-
-artifactory {
-    publish {
-        defaults { publications ('mavenJava') }
-    }
-}
-
 dependencies {
     compile 'com.blackducksoftware.integration:blackduck-common:44.4.0'
-    compile 'com.blackducksoftware.integration:hub-imageinspector-lib:12.0.0'
+    compile 'com.synopsys.integration:integration-bdio:21.0.0'
+    compile 'com.synopsys.integration:hub-imageinspector-lib:13.0.0-SNAPSHOT'
     
     compile 'com.github.docker-java:docker-java:3.1.5'
 

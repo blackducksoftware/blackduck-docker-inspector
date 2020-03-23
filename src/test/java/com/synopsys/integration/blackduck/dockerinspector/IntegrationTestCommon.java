@@ -74,39 +74,27 @@ public class IntegrationTestCommon {
                 assertTrue(outputBdioMatches);
             }
             final SimpleBdioDocument doc = createBdioDocumentFromFile(actualBdio);
-            assertTrue(doc.components.size() >= testConfig.getMinNumberOfComponentsExpected());
+            assertTrue(doc.getComponents().size() >= testConfig.getMinNumberOfComponentsExpected());
             if (StringUtils.isNotBlank(testConfig.getOutputBomMustContainComponentPrefix())) {
                 System.out.printf("Looking for component name starting with: %s\n", testConfig.getOutputBomMustContainComponentPrefix());
                 boolean componentFound = false;
-                for (int i = 0; i < doc.components.size(); i++) {
-                    System.out.printf("\tComponent: %s / %s\n", doc.components.get(i).name, doc.components.get(i).version);
-                    if (doc.components.get(i).name.startsWith(testConfig.getOutputBomMustContainComponentPrefix())) {
-                        componentFound = true;
-                        break;
-                    }
-                }
+                componentFound = isComponentFound(doc, testConfig.getOutputBomMustContainComponentPrefix());
                 assertTrue(componentFound);
                 System.out.printf("Found it\n");
             }
             if (StringUtils.isNotBlank(testConfig.getOutputBomMustNotContainComponentPrefix())) {
                 System.out.printf("Making sure there is no component name starting with: %s\n", testConfig.getOutputBomMustNotContainComponentPrefix());
                 boolean componentFound = false;
-                for (int i = 0; i < doc.components.size(); i++) {
-                    System.out.printf("\tComponent: %s / %s\n", doc.components.get(i).name, doc.components.get(i).version);
-                    if (doc.components.get(i).name.startsWith(testConfig.getOutputBomMustNotContainComponentPrefix())) {
-                        componentFound = true;
-                        break;
-                    }
-                }
+                componentFound = isComponentFound(doc, testConfig.getOutputBomMustNotContainComponentPrefix());
                 assertFalse(componentFound);
                 System.out.printf("It's not there\n");
             }
             if (StringUtils.isNotBlank(testConfig.getOutputBomMustContainExternalSystemTypeId())) {
                 System.out.printf("Looking for component with externalSystemTypeId: %s\n", testConfig.getOutputBomMustContainExternalSystemTypeId());
                 boolean externalSystemTypeIdFound = false;
-                for (int i = 0; i < doc.components.size(); i++) {
-                    System.out.printf("\tComponent: %s / %s; externalSystemTypeId: %s\n", doc.components.get(i).name, doc.components.get(i).version, doc.components.get(i).bdioExternalIdentifier.forge);
-                    if (doc.components.get(i).bdioExternalIdentifier.forge.equals(testConfig.getOutputBomMustContainExternalSystemTypeId())) {
+                for (int i = 0; i < doc.getComponents().size(); i++) {
+                    System.out.printf("\tComponent: %s / %s; externalSystemTypeId: %s\n", doc.getComponents().get(i).name, doc.getComponents().get(i).version, doc.getComponents().get(i).bdioExternalIdentifier.forge);
+                    if (doc.getComponents().get(i).bdioExternalIdentifier.forge.equals(testConfig.getOutputBomMustContainExternalSystemTypeId())) {
                         externalSystemTypeIdFound = true;
                         break;
                     }
@@ -155,6 +143,17 @@ public class IntegrationTestCommon {
         }
     }
 
+    private static boolean isComponentFound(SimpleBdioDocument doc, String outputBomMustContainComponentPrefix) {
+        for (int i = 0; i < doc.getComponents().size(); i++) {
+            System.out.printf("\tComponent: %s / %s\n", doc.getComponents().get(i).name, doc.getComponents().get(i).version);
+            if (doc.getComponents().get(i).name.startsWith(outputBomMustContainComponentPrefix)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private static List<String> createCmd(final Random random, final ProgramVersion programVersion, final TestConfig.Mode mode, final String detectJarPath, final String inspectTargetArg, final String repo, final String tag,
         final String codelocationName, final List<String> additionalArgs)
         throws IOException {
@@ -198,6 +197,7 @@ public class IntegrationTestCommon {
                 cmd.add(adjustedArg);
             }
         }
+
         return cmd;
     }
 
@@ -214,7 +214,7 @@ public class IntegrationTestCommon {
 
     private static List<String> createDockerInspectorCmd(final Random random, final ProgramVersion programVersion, final TestConfig.Mode mode, final String inspectTargetArg, final String repo, final String tag,
         final String codelocationName, final List<String> additionalArgs) throws IOException {
-        final List<String> cmd = new ArrayList<>();
+        List<String> cmd = new ArrayList<>();
         if (random.nextBoolean()) {
             cmd.add("build/blackduck-docker-inspector.sh");
             cmd.add(String.format("--jar.path=build/libs/blackduck-docker-inspector-%s.jar", programVersion.getProgramVersion()));
@@ -257,6 +257,7 @@ public class IntegrationTestCommon {
         if (additionalArgs != null) {
             cmd.addAll(additionalArgs);
         }
+
         return cmd;
     }
 
