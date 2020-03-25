@@ -78,11 +78,11 @@ public class ImageTarFilename {
     }
 
     private String colonsToUnderscores(final String imageName) {
-        return imageName.replaceAll(":", "_");
+        return imageName.replace(":", "_");
     }
 
     private String slashesToUnderscore(final String givenString) {
-        return givenString.replaceAll("/", "_");
+        return givenString.replace("/", "_");
     }
 
     private ImageTarWrapper deriveDockerTarFileGivenImageSpec() throws IntegrationException, IOException {

@@ -60,6 +60,6 @@ public class ProcessId {
   }
 
   private String atSignToUnderscore(final String imageName) {
-    return imageName.replaceAll("@", "_");
+    return imageName.replace("@", "_");
   }
 }

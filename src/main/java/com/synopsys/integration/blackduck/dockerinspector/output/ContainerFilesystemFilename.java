@@ -34,6 +34,8 @@ import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 public class ContainerFilesystemFilename {
     private static final String CONTAINER_FILESYSTEM_IDENTIFIER = "containerfilesystem";
     private static final String APP_ONLY_HINT = "app";
+    private static final String TWO_PART_STRING_FORMAT = "%s_%s";
+    private static final String THREE_PART_STRING_FORMAT = "%s_%s_%s";
 
     private Config config;
 
@@ -57,22 +59,22 @@ public class ContainerFilesystemFilename {
     }
 
     private String getContainerFileSystemAppLayersTarFilename(final String repo, final String tag, final String tarPath) {
-        final String contentHint = String.format("%s_%s", APP_ONLY_HINT, CONTAINER_FILESYSTEM_IDENTIFIER);
+        final String contentHint = String.format(TWO_PART_STRING_FORMAT, APP_ONLY_HINT, CONTAINER_FILESYSTEM_IDENTIFIER);
         return getContainerOutputTarFileNameUsingBase(contentHint, repo, tag, tarPath);
     }
 
     private static String getContainerOutputTarFileNameUsingBase(final String contentHint, final String repo, final String tag, final String tarPath) {
         final String containerFilesystemFilenameSuffix = String.format("%s.tar.gz", contentHint);
         if (StringUtils.isNotBlank(repo)) {
-            return String.format("%s_%s_%s", slashesToUnderscore(repo), slashesToUnderscore(tag), containerFilesystemFilenameSuffix);
+            return String.format(THREE_PART_STRING_FORMAT, slashesToUnderscore(repo), slashesToUnderscore(tag), containerFilesystemFilenameSuffix);
         } else {
             final File tarFile = new File(tarPath);
             final String tarFilename = tarFile.getName();
             if (tarFilename.contains(".")) {
                 final int finalPeriodIndex = tarFilename.lastIndexOf('.');
-                return String.format("%s_%s", tarFilename.substring(0, finalPeriodIndex), containerFilesystemFilenameSuffix);
+                return String.format(TWO_PART_STRING_FORMAT, tarFilename.substring(0, finalPeriodIndex), containerFilesystemFilenameSuffix);
             }
-            return String.format("%s_%s", cleanImageName(tarFilename), containerFilesystemFilenameSuffix);
+            return String.format(TWO_PART_STRING_FORMAT, cleanImageName(tarFilename), containerFilesystemFilenameSuffix);
         }
     }
 
@@ -81,10 +83,10 @@ public class ContainerFilesystemFilename {
     }
 
     private static String colonsToUnderscores(final String imageName) {
-        return imageName.replaceAll(":", "_");
+        return imageName.replace(":", "_");
     }
 
     private static String slashesToUnderscore(final String givenString) {
-        return givenString.replaceAll("/", "_");
+        return givenString.replace("/", "_");
     }
 }

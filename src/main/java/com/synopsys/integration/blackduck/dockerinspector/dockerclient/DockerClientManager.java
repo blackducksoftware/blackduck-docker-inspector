@@ -331,22 +331,29 @@ public class DockerClientManager {
             final String[] repoTagList = image.getRepoTags();
             if (repoTagList == null) {
                 logger.warn("Encountered an image with a null tag list in local docker registry");
-            } else {
-                for (final String repoTag : repoTagList) {
-                    logger.trace(String.format("getLocalImage(%s, %s) examining %s", imageName, nonNullTagName, repoTag));
-                    if (repoTag == null) {
-                        continue;
-                    }
-                    final String colonTagString = String.format(":%s", nonNullTagName);
-                    logger.trace(String.format("getLocalImage(%s, %s) checking to see if %s ends with %s", imageName, nonNullTagName, repoTag, colonTagString));
-                    if (repoTag.endsWith(colonTagString)) {
-                        logger.trace(String.format("getLocalImage(%s, %s) found image id %s", imageName, nonNullTagName, image.getId()));
-                        return Optional.of(image);
-                    }
-                }
+                continue;
             }
+            if (findMatchForTargetImageAmongTheseTags(imageName, nonNullTagName, image, repoTagList))
+                return Optional.of(image);
         }
         return Optional.empty();
+    }
+
+    private boolean findMatchForTargetImageAmongTheseTags(final String targetImageName, final String targetTagName,
+        final Image candidateImage, final String[] candidateImageTagList) {
+        for (final String repoTag : candidateImageTagList) {
+            logger.trace(String.format("getLocalImage(%s, %s) examining %s", targetImageName, targetTagName, repoTag));
+            if (repoTag == null) {
+                continue;
+            }
+            final String colonTagString = String.format(":%s", targetTagName);
+            logger.trace(String.format("getLocalImage(%s, %s) checking to see if %s ends with %s", targetImageName, targetTagName, repoTag, colonTagString));
+            if (repoTag.endsWith(colonTagString)) {
+                logger.trace(String.format("getLocalImage(%s, %s) found image id %s", targetImageName, targetTagName, candidateImage.getId()));
+                return true;
+            }
+        }
+        return false;
     }
 
     private void removeContainer(final DockerClient dockerClient, final String containerId) {

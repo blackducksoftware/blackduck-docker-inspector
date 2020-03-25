@@ -27,7 +27,9 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DockerInspectorOption implements Comparable<DockerInspectorOption> {
+import com.synopsys.integration.util.Stringable;
+
+public class DockerInspectorOption extends Stringable implements Comparable<DockerInspectorOption> {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final String key;
@@ -77,11 +79,6 @@ public class DockerInspectorOption implements Comparable<DockerInspectorOption> 
 
     public boolean isDeprecated() {
         return deprecated;
-    }
-
-    @Override
-    public String toString() {
-        return ReflectionToStringBuilder.toString(this, RecursiveToStringStyle.JSON_STYLE);
     }
 
     @Override

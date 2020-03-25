@@ -347,41 +347,44 @@ public class Config {
 
     @PostConstruct
     public void init() throws IllegalArgumentException, IllegalAccessException {
-        final Object configObject = this;
         publicOptions = new TreeSet<>();
         allKeys = new TreeSet<>();
         optionsByKey = new HashMap<>();
         optionsByFieldName = new HashMap<>();
-        for (final Field field : configObject.getClass().getDeclaredFields()) {
+        for (final Field field : this.getClass().getDeclaredFields()) {
             final Annotation[] declaredAnnotations = field.getDeclaredAnnotations();
             if (declaredAnnotations.length > 0) {
                 for (final Annotation annotation : declaredAnnotations) {
                     if (annotation instanceof ValueDescription) {
-                        logger.trace(String.format("ValueDescription annotated config object field: %s", field.getName()));
-                        final String propMappingString = field.getAnnotation(Value.class).value();
-                        final String propName = SpringValueUtils.springKeyFromValueAnnotation(propMappingString);
-                        final Object fieldValueObject = field.get(configObject);
-                        if (fieldValueObject == null) {
-                            logger.warn(String.format("propName %s field is null", propName));
-                            continue;
-                        }
-                        final String value = fieldValueObject.toString();
-                        logger.trace(String.format("adding prop key %s [value: %s]", propName, value));
-                        allKeys.add(propName);
-                        final ValueDescription valueDescription = field.getAnnotation(ValueDescription.class);
-                        final DockerInspectorOption opt = new DockerInspectorOption(propName, value, valueDescription.description(), field.getType(), valueDescription.defaultValue(), valueDescription.group(),
-                                valueDescription.deprecated());
-                        optionsByKey.put(propName, opt);
-                        logger.trace(String.format("adding field name %s to optionsByFieldName", field.getName()));
-                        optionsByFieldName.put(field.getName(), opt);
-                        if (!Config.GROUP_PRIVATE.equals(valueDescription.group())) {
-                            publicOptions.add(opt);
-                        } else {
-                            logger.trace(String.format("private prop: propName: %s, fieldName: %s, group: %s, description: %s", propName, field.getName(), valueDescription.group(), valueDescription.description()));
-                        }
+                        recordOption(field);
                     }
                 }
             }
+        }
+    }
+
+    private void recordOption(final Field field) throws IllegalAccessException {
+        logger.trace(String.format("ValueDescription annotated config object field: %s", field.getName()));
+        final String propMappingString = field.getAnnotation(Value.class).value();
+        final String propName = SpringValueUtils.springKeyFromValueAnnotation(propMappingString);
+        final Object fieldValueObject = field.get(this);
+        if (fieldValueObject == null) {
+            logger.warn(String.format("propName %s field is null", propName));
+            return;
+        }
+        final String value = fieldValueObject.toString();
+        logger.trace(String.format("adding prop key %s [value: %s]", propName, value));
+        allKeys.add(propName);
+        final ValueDescription valueDescription = field.getAnnotation(ValueDescription.class);
+        final DockerInspectorOption opt = new DockerInspectorOption(propName, value, valueDescription.description(), field.getType(), valueDescription.defaultValue(), valueDescription.group(),
+                valueDescription.deprecated());
+        optionsByKey.put(propName, opt);
+        logger.trace(String.format("adding field name %s to optionsByFieldName", field.getName()));
+        optionsByFieldName.put(field.getName(), opt);
+        if (!Config.GROUP_PRIVATE.equals(valueDescription.group())) {
+            publicOptions.add(opt);
+        } else {
+            logger.trace(String.format("private prop: propName: %s, fieldName: %s, group: %s, description: %s", propName, field.getName(), valueDescription.group(), valueDescription.description()));
         }
     }
 
@@ -640,7 +643,7 @@ public class Config {
 
     private String unEscape(final String origString) {
         logger.trace(String.format("origString: %s", origString));
-        final String unEscapedString = origString.replaceAll("%20", " ");
+        final String unEscapedString = origString.replace("%20", " ");
         logger.trace(String.format("unEscapedString: %s", unEscapedString));
         return unEscapedString;
     }

@@ -33,7 +33,9 @@ import org.slf4j.LoggerFactory;
 import com.synopsys.integration.exception.IntegrationException;
 
 public class ImageInspectorUrlBuilder {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final String INITIAL_PARAMETER_FORMAT_STRING = "%s=%s";
+    private static final String SUBSEQUENT_PARAMETER_FORMAT_STRING = "&%s=%s";
+    private static final String SUBSEQUENT_PARAMETER_FORMAT_STRING_BINARY = "&%s=%b";
     private static final String GETBDIO_ENDPOINT = "getbdio";
     private static final String LOGGING_LEVEL_QUERY_PARAM = "logginglevel";
     private static final String ORGANIZE_COMPONENTS_BY_LAYER_QUERY_PARAM = "organizecomponentsbylayer";
@@ -47,6 +49,7 @@ public class ImageInspectorUrlBuilder {
     private static final String PLATFORM_TOP_LAYER_ID_PARAM = "platformtoplayerid";
     private static final String TARGET_LINUX_DISTRO_PARAM = "targetlinuxdistro";
     private static final String BASE_LOGGER_NAME = "com.synopsys";
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private URI imageInspectorUri = null;
     private String containerPathToTarfile = null;
@@ -127,28 +130,28 @@ public class ImageInspectorUrlBuilder {
         urlSb.append("/");
         urlSb.append(GETBDIO_ENDPOINT);
         urlSb.append("?");
-        urlSb.append(String.format("%s=%s", LOGGING_LEVEL_QUERY_PARAM, getLoggingLevel()));
-        urlSb.append(String.format("&%s=%s", TARFILE_QUERY_PARAM, urlEncode(containerPathToTarfile)));
-        urlSb.append(String.format("&%s=%b", ORGANIZE_COMPONENTS_BY_LAYER_QUERY_PARAM, organizeComponentsByLayer));
-        urlSb.append(String.format("&%s=%b", INCLUDE_REMOVED_COMPONENTS_QUERY_PARAM, includeRemovedComponents));
-        urlSb.append(String.format("&%s=%b", CLEANUP_QUERY_PARAM, cleanup));
+        urlSb.append(String.format(INITIAL_PARAMETER_FORMAT_STRING, LOGGING_LEVEL_QUERY_PARAM, getLoggingLevel()));
+        urlSb.append(String.format(SUBSEQUENT_PARAMETER_FORMAT_STRING, TARFILE_QUERY_PARAM, urlEncode(containerPathToTarfile)));
+        urlSb.append(String.format(SUBSEQUENT_PARAMETER_FORMAT_STRING_BINARY, ORGANIZE_COMPONENTS_BY_LAYER_QUERY_PARAM, organizeComponentsByLayer));
+        urlSb.append(String.format(SUBSEQUENT_PARAMETER_FORMAT_STRING_BINARY, INCLUDE_REMOVED_COMPONENTS_QUERY_PARAM, includeRemovedComponents));
+        urlSb.append(String.format(SUBSEQUENT_PARAMETER_FORMAT_STRING_BINARY, CLEANUP_QUERY_PARAM, cleanup));
         if (StringUtils.isNotBlank(containerPathToContainerFileSystemFile)) {
-            urlSb.append(String.format("&%s=%s", RESULTING_CONTAINER_FS_PATH_QUERY_PARAM, urlEncode(containerPathToContainerFileSystemFile)));
+            urlSb.append(String.format(SUBSEQUENT_PARAMETER_FORMAT_STRING, RESULTING_CONTAINER_FS_PATH_QUERY_PARAM, urlEncode(containerPathToContainerFileSystemFile)));
         }
         if (StringUtils.isNotBlank(containerFileSystemExcludedPaths)) {
-            urlSb.append(String.format("&%s=%s", CONTAINER_FILESYSTEM_EXCLUDED_PATHS_PARAM, urlEncode(containerFileSystemExcludedPaths)));
+            urlSb.append(String.format(SUBSEQUENT_PARAMETER_FORMAT_STRING, CONTAINER_FILESYSTEM_EXCLUDED_PATHS_PARAM, urlEncode(containerFileSystemExcludedPaths)));
         }
         if (StringUtils.isNotBlank(givenImageRepo)) {
-            urlSb.append(String.format("&%s=%s", IMAGE_REPO_QUERY_PARAM, givenImageRepo));
+            urlSb.append(String.format(SUBSEQUENT_PARAMETER_FORMAT_STRING, IMAGE_REPO_QUERY_PARAM, givenImageRepo));
         }
         if (StringUtils.isNotBlank(givenImageTag)) {
-            urlSb.append(String.format("&%s=%s", IMAGE_TAG_QUERY_PARAM, givenImageTag));
+            urlSb.append(String.format(SUBSEQUENT_PARAMETER_FORMAT_STRING, IMAGE_TAG_QUERY_PARAM, givenImageTag));
         }
         if (StringUtils.isNotBlank(platformTopLayerId)) {
-            urlSb.append(String.format("&%s=%s", PLATFORM_TOP_LAYER_ID_PARAM, platformTopLayerId));
+            urlSb.append(String.format(SUBSEQUENT_PARAMETER_FORMAT_STRING, PLATFORM_TOP_LAYER_ID_PARAM, platformTopLayerId));
         }
         if (StringUtils.isNotBlank(targetLinuxDistro)) {
-            urlSb.append(String.format("&%s=%s", TARGET_LINUX_DISTRO_PARAM, targetLinuxDistro));
+            urlSb.append(String.format(SUBSEQUENT_PARAMETER_FORMAT_STRING, TARGET_LINUX_DISTRO_PARAM, targetLinuxDistro));
         }
         final String url = urlSb.toString();
         return url;
