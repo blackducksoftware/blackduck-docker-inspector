@@ -306,6 +306,36 @@ public class IntegrationTestCommon {
             assertTrue("BDIO produced does not match expected BDIO", outputBdioMatches);
         }
 
+        final SimpleBdioDocument doc = createBdioDocumentFromFile(actualBdio);
+        assertTrue(doc.getComponents().size() >= testConfig.getMinNumberOfComponentsExpected());
+        if (StringUtils.isNotBlank(testConfig.getOutputBomMustContainComponentPrefix())) {
+            System.out.printf("Looking for component name starting with: %s\n", testConfig.getOutputBomMustContainComponentPrefix());
+            boolean componentFound = false;
+            componentFound = isComponentFound(doc, testConfig.getOutputBomMustContainComponentPrefix());
+            assertTrue(componentFound);
+            System.out.printf("Found it\n");
+        }
+        if (StringUtils.isNotBlank(testConfig.getOutputBomMustNotContainComponentPrefix())) {
+            System.out.printf("Making sure there is no component name starting with: %s\n", testConfig.getOutputBomMustNotContainComponentPrefix());
+            boolean componentFound = false;
+            componentFound = isComponentFound(doc, testConfig.getOutputBomMustNotContainComponentPrefix());
+            assertFalse(componentFound);
+            System.out.printf("It's not there\n");
+        }
+        if (StringUtils.isNotBlank(testConfig.getOutputBomMustContainExternalSystemTypeId())) {
+            System.out.printf("Looking for component with externalSystemTypeId: %s\n", testConfig.getOutputBomMustContainExternalSystemTypeId());
+            boolean externalSystemTypeIdFound = false;
+            for (int i = 0; i < doc.getComponents().size(); i++) {
+                System.out.printf("\tComponent: %s / %s; externalSystemTypeId: %s\n", doc.getComponents().get(i).name, doc.getComponents().get(i).version, doc.getComponents().get(i).bdioExternalIdentifier.forge);
+                if (doc.getComponents().get(i).bdioExternalIdentifier.forge.equals(testConfig.getOutputBomMustContainExternalSystemTypeId())) {
+                    externalSystemTypeIdFound = true;
+                    break;
+                }
+            }
+            assertTrue(externalSystemTypeIdFound);
+            System.out.printf("Found it\n");
+        }
+
         if (testConfig.getMode() != TestConfig.Mode.DETECT) {
             assertTrue(String.format("%s does not exist", testConfig.getOutputContainerFileSystemFile().getAbsolutePath()), testConfig.getOutputContainerFileSystemFile().exists());
         }

@@ -450,6 +450,23 @@ public class DockerInspectorTest {
     }
 
     @Test
+    public void testLinuxDistroOverride() throws IOException, InterruptedException, IntegrationException {
+        List<String> additionalArgs = new ArrayList<>();
+        additionalArgs.add("--linux.distro=testdistro");
+        final TestConfig testConfig = new TestConfigBuilder()
+                                          .setTarFilePath("build/images/test/alpine.tar")
+                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU)
+                                          .setRequireBdioMatch(false)
+                                          .setOutputBomMustContainExternalSystemTypeId("@testdistro")
+                                          .setAdditionalArgs(additionalArgs)
+                                          .setCodelocationName("alpine_latest_APK")
+                                          .build();
+
+
+        testTarUsingExistingContainer(testConfig);
+    }
+
+    @Test
     public void testUbuntuUsingExistingCentosContainer() throws IOException, InterruptedException, IntegrationException {
         final TestConfig testConfig = new TestConfigBuilder()
                                           .setTarFilePath("build/images/test/ubuntu1404.tar")
