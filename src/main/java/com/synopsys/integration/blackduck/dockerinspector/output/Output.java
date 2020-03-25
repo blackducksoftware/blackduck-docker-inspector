@@ -138,7 +138,10 @@ public class Output {
     private void removeContainerFileSystemIfNotRequested(final File containerFileSystemFile) {
         if (!config.isOutputIncludeContainerfilesystem()) {
             logger.debug(String.format("Target image file system file %s was generated only for generation of the squashed image; deleting it", containerFileSystemFile.getName()));
-            containerFileSystemFile.delete();
+            final boolean wasDeleted = containerFileSystemFile.delete();
+            if (!wasDeleted) {
+                logger.warn(String.format("Unable to remove temporary file %s", containerFileSystemFile.getAbsolutePath()));
+            }
         }
     }
 

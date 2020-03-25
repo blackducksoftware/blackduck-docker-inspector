@@ -214,7 +214,7 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         return response;
     }
 
-    private void logServiceError(final String correctedContainerId) {
+    private void logServiceError(final String correctedContainerId) throws InterruptedException {
         final boolean serviceLogLogged = logServiceLogIfDebug(correctedContainerId);
         if (!serviceLogLogged) {
             logger.error(String.format("Request to image inspector service failed. To see image inspector service logs, set the Docker Inspector logging level to DEBUG, or execute the following command: 'docker logs %s'",
@@ -222,7 +222,7 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         }
     }
 
-    private boolean logServiceLogIfDebug(final String correctedContainerId) {
+    private boolean logServiceLogIfDebug(final String correctedContainerId) throws InterruptedException {
         if (logger.isDebugEnabled()) {
             dockerClientManager.logServiceLogAsDebug(correctedContainerId);
             return true;

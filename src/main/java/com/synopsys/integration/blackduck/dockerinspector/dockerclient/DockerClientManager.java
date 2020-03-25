@@ -267,7 +267,7 @@ public class DockerClientManager {
         return imageId;
     }
 
-    public void logServiceLogAsDebug(final String containerId) {
+    public void logServiceLogAsDebug(final String containerId) throws InterruptedException {
         final StringBuilder stringBuilder = new StringBuilder();
         try (final StringBuilderLogReader callback = new StringBuilderLogReader(stringBuilder)) {
             final DockerClient dockerClient = getDockerClient();
@@ -279,7 +279,7 @@ public class DockerClientManager {
                 .awaitCompletion();
             final String log = callback.builder.toString();
             logger.debug(String.format("Image inspector service log:\n%s\n==================================\n", log));
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException e) {
             logger.error(String.format("Error getting log for service container %s", containerId), e);
         }
     }
@@ -295,7 +295,7 @@ public class DockerClientManager {
     }
 
     private static class StringBuilderLogReader extends LogContainerResultCallback {
-        public StringBuilder builder;
+        private final StringBuilder builder;
 
         public StringBuilderLogReader(final StringBuilder builder) {
             this.builder = builder;
@@ -311,7 +311,10 @@ public class DockerClientManager {
     private File saveImageToDir(final File imageTarDirectory, final String imageTarFilename, final String imageName, final String tagName) throws IOException, IntegrationException {
         imageTarDirectory.mkdirs();
         final File imageTarFile = new File(imageTarDirectory, imageTarFilename);
-        imageTarFile.delete();
+        final boolean deletedOk = imageTarFile.delete();
+        if (!deletedOk) {
+            logger.trace(String.format("Tried to delete %s before saving image to it, but apparently it didn't exist (which is fine)", imageTarFile.getAbsolutePath()));
+        }
         saveImageToFile(imageName, tagName, imageTarFile);
         return imageTarFile;
     }
