@@ -80,7 +80,7 @@ public class HttpClientInspector {
     @Autowired
     private ContainerFilesystemFilename containerFilesystemFilename;
 
-    public Result getBdio() throws IntegrationException {
+    public Result getBdio() throws IntegrationException, InterruptedException {
         final ImageInspectorClient imageInspectorClient = chooseImageInspectorClient();
         try {
             output.ensureWorkingOutputDirIsWriteable();

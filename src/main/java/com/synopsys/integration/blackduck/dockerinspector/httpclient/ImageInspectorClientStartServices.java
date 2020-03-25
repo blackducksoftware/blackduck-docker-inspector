@@ -110,7 +110,7 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         final boolean organizeComponentsByLayer, final boolean includeRemovedComponents, final boolean cleanup,
         final String platformTopLayerId,
         final String targetLinuxDistro)
-        throws IntegrationException {
+        throws IntegrationException, InterruptedException {
         logger.info(dockerClientManager.getDockerJavaLibraryVersion());
 
         // First, try the default inspector service (which will return either the BDIO, or a redirect)
@@ -156,7 +156,7 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         final boolean organizeComponentsByLayer, final boolean includeRemovedComponents, final boolean cleanup, final String platformTopLayerId,
         final String targetLinuxDistro,
         final Predicate<Integer> failureTest)
-        throws IntegrationException {
+        throws IntegrationException, InterruptedException {
         SimpleResponse response = null;
         ContainerDetails serviceContainerDetails = null;
         IntHttpClient restConnection = null;
@@ -265,7 +265,7 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         return restConnection;
     }
 
-    private ContainerDetails ensureServiceReady(final IntHttpClient httpClient, final URI imageInspectorUri, final ImageInspectorOsEnum inspectorOs) throws IntegrationException {
+    private ContainerDetails ensureServiceReady(final IntHttpClient httpClient, final URI imageInspectorUri, final ImageInspectorOsEnum inspectorOs) throws IntegrationException, InterruptedException {
         boolean serviceIsUp = imageInspectorServices.checkServiceHealth(httpClient, imageInspectorUri);
         if (serviceIsUp) {
             final Container container = dockerClientManager.getRunningContainerByAppName(Config.IMAGEINSPECTOR_WS_APPNAME, inspectorOs);

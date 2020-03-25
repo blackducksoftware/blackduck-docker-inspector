@@ -55,7 +55,7 @@ public class IiClientContainersStartedAsNeededTest {
     private ContainerName containerName;
 
     @Test
-    public void test() throws IntegrationException, IOException {
+    public void test() throws IntegrationException, IOException, InterruptedException {
         Mockito.when(config.isImageInspectorServiceStart()).thenReturn(true);
         Mockito.when(imageInspectorServices.getDefaultImageInspectorHostPortBasedOnDistro()).thenReturn(8080);
         Mockito.when(config.getCommandTimeout()).thenReturn(5000L);
@@ -75,7 +75,6 @@ public class IiClientContainersStartedAsNeededTest {
             httpConnectionCreator.createNonRedirectingConnection(Mockito.any(URI.class), Mockito.anyInt())).thenReturn(restConnection);
 
         Mockito.when(httpRequestor.executeSimpleGetRequest(Mockito.any(IntHttpClient.class), Mockito.any(URI.class), Mockito.anyString())).thenReturn("{\"status\":\"UP\"}");
-        // Mockito.when(restRequestor.executeSimpleGetRequest(Mockito.any(RestConnection.class), Mockito.anyString(), Mockito.anyString())).thenReturn("testResponse");
         final SimpleResponse response = new SimpleResponse(RestConstants.OK_200, null, "testResult");
         Mockito.when(httpRequestor
             .executeGetBdioRequest(Mockito.any(IntHttpClient.class), Mockito.any(URI.class), Mockito.anyString(), Mockito.isNull(),

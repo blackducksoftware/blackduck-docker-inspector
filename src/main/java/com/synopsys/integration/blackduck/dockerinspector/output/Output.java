@@ -127,7 +127,7 @@ public class Output {
 
     private String deriveSquashedImageFilename(final String containerFileSystemFilename) throws IntegrationException {
         if (!containerFileSystemFilename.contains("containerfilesystem")) {
-            logger.warn(String.format("Unable to generate squashed image filename from container file system filename %s; using the default name"));
+            logger.warn(String.format("Unable to generate squashed image filename from container file system filename %s; using the default name", containerFileSystemFilename));
             return "target_squashedimage.tar.gz";
         }
         final String squashedImageFilename = containerFileSystemFilename.replace("containerfilesystem", "squashedimage");

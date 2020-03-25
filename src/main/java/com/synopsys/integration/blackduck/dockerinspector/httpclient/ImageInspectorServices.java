@@ -22,8 +22,8 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.httpclient;
 
-import com.synopsys.integration.rest.client.IntHttpClient;
 import java.net.URI;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +33,7 @@ import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.exception.BlackDuckIntegrationException;
 import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 import com.synopsys.integration.exception.IntegrationException;
+import com.synopsys.integration.rest.client.IntHttpClient;
 
 @Component
 public class ImageInspectorServices {
@@ -85,17 +86,12 @@ public class ImageInspectorServices {
         throw new IntegrationException(String.format("Invalid value for property image.inspector.default: %s", inspectorOsName));
     }
 
-
-    public boolean startService(final IntHttpClient httpClient, final URI imageInspectorUri, final String imageInspectorRepo, final String imageInspectorTag) {
+    public boolean startService(final IntHttpClient httpClient, final URI imageInspectorUri, final String imageInspectorRepo, final String imageInspectorTag) throws InterruptedException {
         boolean serviceIsUp = false;
         final long timeoutMilliseconds = config.getServiceTimeout() / MAX_CONTAINER_START_TRY_COUNT;
         for (int tryIndex = 0; tryIndex < MAX_CONTAINER_START_TRY_COUNT && !serviceIsUp; tryIndex++) {
-            try {
-                logger.debug(String.format("Pausing %d seconds to give service time to start up", (int) (timeoutMilliseconds / 1000L)));
-                Thread.sleep(timeoutMilliseconds);
-            } catch (final InterruptedException e) {
-                logger.error(String.format("Interrupted exception thrown while pausing so image imspector container based on image %s:%s could start", imageInspectorRepo, imageInspectorTag), e);
-            }
+            logger.debug(String.format("Pausing %d seconds to give service time to start up", (int) (timeoutMilliseconds / 1000L)));
+            Thread.sleep(timeoutMilliseconds);
             logger.debug(String.format("Checking service %s to see if it is up; attempt %d of %d", imageInspectorUri.toString(), tryIndex + 1, MAX_CONTAINER_START_TRY_COUNT));
             serviceIsUp = checkServiceHealth(httpClient, imageInspectorUri);
         }
@@ -107,7 +103,7 @@ public class ImageInspectorServices {
         String healthCheckResponse;
         try {
             healthCheckResponse = httpRequestor
-                .executeSimpleGetRequest(httpClient, imageInspectorUri, "health");
+                                      .executeSimpleGetRequest(httpClient, imageInspectorUri, "health");
         } catch (final IntegrationException e) {
             logger.debug(String.format("Health check failed: %s", e.getMessage()));
             return false;
@@ -122,7 +118,7 @@ public class ImageInspectorServices {
         String serviceVersionResponse;
         try {
             serviceVersionResponse = httpRequestor
-                .executeSimpleGetRequest(httpClient, imageInspectorUri, "getversion");
+                                         .executeSimpleGetRequest(httpClient, imageInspectorUri, "getversion");
         } catch (final IntegrationException e) {
             logger.debug(String.format("Get ImageInspector service version request failed: %s", e.getMessage()));
             return "unknown";

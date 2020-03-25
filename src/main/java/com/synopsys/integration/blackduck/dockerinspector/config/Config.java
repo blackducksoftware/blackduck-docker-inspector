@@ -356,7 +356,7 @@ public class Config {
             final Annotation[] declaredAnnotations = field.getDeclaredAnnotations();
             if (declaredAnnotations.length > 0) {
                 for (final Annotation annotation : declaredAnnotations) {
-                    if (annotation.annotationType().getName().equals(ValueDescription.class.getName())) {
+                    if (annotation instanceof ValueDescription) {
                         logger.trace(String.format("ValueDescription annotated config object field: %s", field.getName()));
                         final String propMappingString = field.getAnnotation(Value.class).value();
                         final String propName = SpringValueUtils.springKeyFromValueAnnotation(propMappingString);
