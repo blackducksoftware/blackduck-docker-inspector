@@ -424,7 +424,7 @@ public class DockerInspectorTest {
                                           .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
                                           .setRequireBdioMatch(false)
                                           .setMinNumberOfComponentsExpected(5)
-                                          .setOutputBomMustContainComponentPrefix("busybox")
+                                          .setOutputBomMustContainComponentPrefix("dpkg")
                                           .setCodelocationName("blackducksoftware_whiteouttest_1.0_DPKG")
                                           .build();
 
@@ -474,7 +474,7 @@ public class DockerInspectorTest {
                                           .setTargetTag(null)
                                           .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
                                           .setRequireBdioMatch(false)
-                                          .setOutputBomMustContainComponentPrefix("libsystemd0")
+                                          .setOutputBomMustContainComponentPrefix("iputils-ping")
                                           .setMinNumberOfComponentsExpected(10)
                                           .setCodelocationName("null_null_DPKG")
                                           .build();
@@ -495,7 +495,7 @@ public class DockerInspectorTest {
                                           .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU)
                                           .setRequireBdioMatch(false)
                                           .setMinNumberOfComponentsExpected(10)
-                                          .setOutputBomMustContainComponentPrefix("openssl-libs")
+                                          .setOutputBomMustContainComponentPrefix("systemd")
                                           .setOutputBomMustNotContainComponentPrefix("vim-minimal")
                                           .setCodelocationName("blackducksoftware_centos_minus_vim_plus_bacula_1.0_app_RPM")
                                           .setAdditionalArgs(additionalArgs)
