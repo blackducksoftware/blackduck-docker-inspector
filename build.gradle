@@ -236,7 +236,7 @@ task all(dependsOn: [testIntegration, artifactoryPublish, publishAirGapZip]) {}
 dependencies {
     compile 'com.blackducksoftware.integration:blackduck-common:44.4.0'
     compile 'com.synopsys.integration:integration-bdio:21.0.0'
-    compile 'com.synopsys.integration:hub-imageinspector-lib:13.0.0-SNAPSHOT'
+    compile 'com.synopsys.integration:hub-imageinspector-lib:13.0.1'
     
     compile 'com.github.docker-java:docker-java:3.1.5'
 
