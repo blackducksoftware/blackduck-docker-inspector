@@ -25,6 +25,7 @@ package com.synopsys.integration.blackduck.dockerinspector.dockerclient;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -96,20 +97,17 @@ public class DockerClientManager {
         this.imageTarFilename = imageTarFilename;
     }
 
-    private DockerClient dockerClient;
+    private final DockerClient dockerClient;
 
-    private DockerClient getDockerClient() {
-        if (dockerClient == null) {
+    public DockerClientManager() {
             final Builder builder = DefaultDockerClientConfig.createDefaultConfigBuilder();
-            final DockerClientConfig config = builder.build();
-            dockerClient = DockerClientBuilder.getInstance(config).build();
-        }
-        return dockerClient;
+            final DockerClientConfig dockerClientConfig = builder.build();
+            dockerClient = DockerClientBuilder.getInstance(dockerClientConfig).build();
     }
 
     public String getDockerJavaLibraryVersion() {
         try {
-            final Version version = getDockerClient().versionCmd().exec();
+            final Version version = dockerClient.versionCmd().exec();
             return String.format("docker-java library version: %s; API version: %s", version.getApiVersion(), version.getVersion());
         } catch (Exception e) {
             return String.format("docker-java library version: <unknown>; Error getting version: %s", e.getMessage());
@@ -118,11 +116,10 @@ public class DockerClientManager {
 
     public ImageTarWrapper getTarFileFromDockerImageById(final String imageId, final File imageTarDirectory) throws IntegrationException, IOException {
 
-        final DockerClient dockerClient = getDockerClient();
         final InspectImageCmd inspectImageCmd = dockerClient.inspectImageCmd(imageId);
         final InspectImageResponse imageDetails = inspectImageCmd.exec();
         final List<String> repoTags = imageDetails.getRepoTags();
-        if (repoTags == null || repoTags.size() == 0) {
+        if (repoTags == null || repoTags.isEmpty()) {
             throw new BlackDuckIntegrationException(String.format("Unable to get image name:tag for image ID %s", imageId));
         }
 
@@ -146,11 +143,7 @@ public class DockerClientManager {
         final File imageTarFile = saveImageToDir(imageTarDirectory, imageTarFilename.deriveImageTarFilenameFromImageTag(imageName, tagName), imageName, tagName);
         final ImageTarWrapper imageTarWrapper = new ImageTarWrapper(imageTarFile, imageName, tagName);
         if (config.isCleanupTargetImage() && targetImageId.isPresent()) {
-            try {
-                removeImage(targetImageId.get());
-            } catch (final BlackDuckIntegrationException e) {
-                logger.warn(String.format("Unable to remove target image with ID %s: %s", targetImageId.get(), e.getMessage()));
-            }
+            removeImage(targetImageId.get());
         }
         return imageTarWrapper;
     }
@@ -160,7 +153,6 @@ public class DockerClientManager {
             throw new DisabledException("Image pulling is disabled in offline mode");
         }
         logger.info(String.format("Pulling image %s:%s", imageName, tagName));
-        final DockerClient dockerClient = getDockerClient();
         final PullImageCmd pull = dockerClient.pullImageCmd(imageName).withTag(tagName);
         try {
             pull.exec(new PullImageResultCallback()).awaitCompletion();
@@ -176,18 +168,17 @@ public class DockerClientManager {
         return justPulledImage.get().getId();
     }
 
-    public void removeImage(final String imageId) throws IntegrationException {
+    public void removeImage(final String imageId) {
         if (imageId == null) {
             logger.debug("removeImage(): given imageId is null; not doing anything");
             return;
         }
         try {
-            final DockerClient dockerClient = getDockerClient();
             final RemoveImageCmd rmCmd = dockerClient.removeImageCmd(imageId);
             logger.info(String.format("Removing image %s", imageId));
             rmCmd.exec();
             logger.debug(String.format("Image %s removed", imageId));
-        } catch (final Throwable e) {
+        } catch (final Exception e) {
             logger.warn(String.format("Unable to remove image with ID %s: %s", imageId, e.getMessage()));
         }
     }
@@ -199,7 +190,6 @@ public class DockerClientManager {
         final String imageNameTag = String.format("%s:%s", runOnImageName, runOnTagName);
         logger.info(String.format("Starting container: %s", containerName));
         logger.debug(String.format("\timageNameTag: %s", imageNameTag));
-        final DockerClient dockerClient = getDockerClient();
         stopRemoveContainerIfExists(dockerClient, containerName);
 
         logger.debug(String.format("Creating container %s from image %s", containerName, imageNameTag));
@@ -240,15 +230,12 @@ public class DockerClientManager {
         }
     }
 
-    public void stopRemoveContainer(final String containerId) throws IntegrationException {
-        final DockerClient dockerClient = getDockerClient();
+    public void stopRemoveContainer(final String containerId) {
         stopContainer(dockerClient, containerId);
         removeContainer(dockerClient, containerId);
     }
 
     public String buildImage(final File dockerBuildDir, final Set<String> tags) {
-        final DockerClient dockerClient = getDockerClient();
-
         BuildImageResultCallback callback = new BuildImageResultCallback();
         final String imageId = dockerClient.buildImageCmd(dockerBuildDir)
                                    .withTags(tags)
@@ -259,7 +246,6 @@ public class DockerClientManager {
 
     public Optional<String> lookupImageIdByRepoTag(final String repo, final String tag) {
         Optional<String> imageId = Optional.empty();
-        final DockerClient dockerClient = getDockerClient();
         Optional<Image> image = getLocalImage(dockerClient, repo, tag);
         if (image.isPresent()) {
             imageId = Optional.of(image.get().getId());
@@ -270,7 +256,6 @@ public class DockerClientManager {
     public void logServiceLogAsDebug(final String containerId) throws InterruptedException {
         final StringBuilder stringBuilder = new StringBuilder();
         try (final StringBuilderLogReader callback = new StringBuilderLogReader(stringBuilder)) {
-            final DockerClient dockerClient = getDockerClient();
             dockerClient.logContainerCmd(containerId)
                 .withStdErr(true)
                 .withStdOut(true)
@@ -278,7 +263,7 @@ public class DockerClientManager {
                 .exec(callback)
                 .awaitCompletion();
             final String log = callback.builder.toString();
-            logger.debug(String.format("Image inspector service log:\n%s\n==================================\n", log));
+            logger.debug(String.format("Image inspector service log:%n%s%n==================================%n", log));
         } catch (IOException e) {
             logger.error(String.format("Error getting log for service container %s", containerId), e);
         }
@@ -311,10 +296,7 @@ public class DockerClientManager {
     private File saveImageToDir(final File imageTarDirectory, final String imageTarFilename, final String imageName, final String tagName) throws IOException, IntegrationException {
         imageTarDirectory.mkdirs();
         final File imageTarFile = new File(imageTarDirectory, imageTarFilename);
-        final boolean deletedOk = imageTarFile.delete();
-        if (!deletedOk) {
-            logger.trace(String.format("Tried to delete %s before saving image to it, but apparently it didn't exist (which is fine)", imageTarFile.getAbsolutePath()));
-        }
+        Files.delete(imageTarFile.toPath());
         saveImageToFile(imageName, tagName, imageTarFile);
         return imageTarFile;
     }
@@ -329,12 +311,11 @@ public class DockerClientManager {
             }
             logger.trace(String.format("getLocalImage(%s, %s) examining %s", imageName, nonNullTagName, image.getId()));
             final String[] repoTagList = image.getRepoTags();
-            if (repoTagList == null) {
+            if ((repoTagList != null) && (findMatchForTargetImageAmongTheseTags(imageName, nonNullTagName, image, repoTagList))) {
+                    return Optional.of(image);
+            } else {
                 logger.warn("Encountered an image with a null tag list in local docker registry");
-                continue;
             }
-            if (findMatchForTargetImageAmongTheseTags(imageName, nonNullTagName, image, repoTagList))
-                return Optional.of(image);
         }
         return Optional.empty();
     }
@@ -375,7 +356,6 @@ public class DockerClientManager {
     public String getDockerEngineVersion() {
         logger.debug("Requesting version string from Docker engine");
         try {
-            final DockerClient dockerClient = getDockerClient();
             final Info dockerInfo = dockerClient.infoCmd().exec();
             final String engineVersion = dockerInfo.getServerVersion();
             logger.debug(String.format("Docker Engine (Server) Version: %s", engineVersion));
@@ -414,7 +394,6 @@ public class DockerClientManager {
     }
 
     public Container getRunningContainerByAppName(final String targetAppName, final ImageInspectorOsEnum targetInspectorOs) throws IntegrationException {
-        final DockerClient dockerClient = getDockerClient();
         final List<Container> containers = dockerClient.listContainersCmd().withShowAll(true).exec();
         for (final Container container : containers) {
             logger.debug(String.format("Checking container %s to see if it has labels app = %s, os = %s", container.getNames()[0], targetAppName, targetInspectorOs.name()));
@@ -451,7 +430,6 @@ public class DockerClientManager {
 
     private void saveImageToFile(final String imageName, final String tagName, final File imageTarFile) throws IOException {
         logger.info(String.format("Saving the docker image to : %s", imageTarFile.getCanonicalPath()));
-        final DockerClient dockerClient = getDockerClient();
         final String imageToSave = String.format("%s:%s", imageName, tagName);
         final SaveImageCmd saveCommand = dockerClient.saveImageCmd(imageToSave);
         try (InputStream tarInputStream = saveCommand.exec()) {

@@ -42,8 +42,8 @@ public class Config {
     public static final String IMAGEINSPECTOR_WS_APPNAME = "blackduck-imageinspector";
     public static final String CONTAINER_BLACKDUCK_DIR = "/opt/blackduck/";
     private static final String INSPECTOR_OS_UBUNTU = "ubuntu";
-    private final static String GROUP_PUBLIC = "public";
-    private final static String GROUP_PRIVATE = "private";
+    private static final String GROUP_PUBLIC = "public";
+    private static final String GROUP_PRIVATE = "private";
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -333,7 +333,7 @@ public class Config {
     private Map<String, DockerInspectorOption> optionsByFieldName;
     private TreeSet<String> allKeys;
 
-    public String get(final String key) throws IllegalArgumentException, IllegalAccessException {
+    public String get(final String key) {
         final DockerInspectorOption opt = optionsByKey.get(key);
         if (opt == null) {
             return null;
@@ -341,12 +341,12 @@ public class Config {
         return opt.getResolvedValue();
     }
 
-    public SortedSet<DockerInspectorOption> getPublicConfigOptions() throws IllegalArgumentException, IllegalAccessException {
+    public SortedSet<DockerInspectorOption> getPublicConfigOptions() {
         return publicOptions;
     }
 
     @PostConstruct
-    public void init() throws IllegalArgumentException, IllegalAccessException {
+    public void init() throws IllegalAccessException {
         publicOptions = new TreeSet<>();
         allKeys = new TreeSet<>();
         optionsByKey = new HashMap<>();
@@ -376,7 +376,7 @@ public class Config {
         logger.trace(String.format("adding prop key %s [value: %s]", propName, value));
         allKeys.add(propName);
         final ValueDescription valueDescription = field.getAnnotation(ValueDescription.class);
-        final DockerInspectorOption opt = new DockerInspectorOption(propName, value, valueDescription.description(), field.getType(), valueDescription.defaultValue(), valueDescription.group(),
+        final DockerInspectorOption opt = new DockerInspectorOption(propName, value, valueDescription.description(), field.getType(), valueDescription.defaultValue(),
                 valueDescription.deprecated());
         optionsByKey.put(propName, opt);
         logger.trace(String.format("adding field name %s to optionsByFieldName", field.getName()));

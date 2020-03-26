@@ -22,8 +22,6 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.config;
 
-import org.apache.commons.lang3.builder.RecursiveToStringStyle;
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,15 +33,13 @@ public class DockerInspectorOption extends Stringable implements Comparable<Dock
     private final String key;
     private final String description;
     private final String valueTypeString;
-    private final String group;
     private final String defaultValue;
     private String resolvedValue;
     private final boolean deprecated;
 
-    public DockerInspectorOption(final String key, final String resolvedValue, final String description, final Class<?> valueType, final String defaultValue, final String group, final boolean deprecated) {
+    public DockerInspectorOption(final String key, final String resolvedValue, final String description, final Class<?> valueType, final String defaultValue, final boolean deprecated) {
         this.key = key;
         this.description = description;
-        this.group = group;
         this.defaultValue = defaultValue;
         this.resolvedValue = resolvedValue;
         this.deprecated = deprecated;
