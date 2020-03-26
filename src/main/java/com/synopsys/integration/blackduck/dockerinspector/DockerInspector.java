@@ -36,7 +36,6 @@ import com.synopsys.integration.blackduck.dockerinspector.output.Result;
 import com.synopsys.integration.blackduck.dockerinspector.output.ResultFile;
 import com.synopsys.integration.blackduck.dockerinspector.programarguments.ArgumentParser;
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
-import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 
 import javax.annotation.PostConstruct;
 
@@ -47,7 +46,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.Banner;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.ComponentScan;
@@ -114,17 +112,15 @@ public class DockerInspector {
                 System.exit(0);
             }
             result = inspector.getBdio();
-        } catch (final Throwable e) {
-            final String msgBase;
-            if (e instanceof HelpGenerationException) {
-                msgBase = "Error generating help";
-            } else {
-                msgBase = "Error inspecting image";
-            }
-            final String msg = String.format("%s: %s", msgBase, e.getMessage());
+        } catch (final HelpGenerationException helpGenerationException) {
+            final String msg = String.format("Error generating help: %s", helpGenerationException.getMessage());
             logger.error(msg);
-            final String trace = ExceptionUtils.getStackTrace(e);
-            logger.debug(String.format("Stack trace: %s", trace));
+            logStackTraceIfDebug(helpGenerationException);
+            result = Result.createResultFailure(msg);
+        } catch (final Exception e) {
+            final String msg = String.format("Error inspecting image: %s", e.getMessage());
+            logger.error(msg);
+            logStackTraceIfDebug(e);
             result = Result.createResultFailure(msg);
         }
         final File resultsFile = new File(output.getFinalOutputDir(), programPaths.getDockerInspectorResultsFilename());
@@ -132,6 +128,11 @@ public class DockerInspector {
         int returnCode = result.getReturnCode();
         logger.info(String.format("Returning %d", returnCode));
         System.exit(returnCode);
+    }
+
+    private void logStackTraceIfDebug(final Exception e) {
+        final String trace = ExceptionUtils.getStackTrace(e);
+        logger.debug(String.format("Stack trace: %s", trace));
     }
 
     private boolean helpInvoked() {
@@ -166,7 +167,7 @@ public class DockerInspector {
         return false;
     }
 
-    private boolean initAndValidate(final Config config) throws IntegrationException, IllegalArgumentException, FileNotFoundException {
+    private boolean initAndValidate(final Config config) throws IntegrationException, FileNotFoundException {
         logger.info(String.format("Black Duck Docker Inspector %s", programVersion.getProgramVersion()));
         if (helpInvoked()) {
             provideHelp(config);

@@ -36,10 +36,7 @@ public class DockerClientManagerTest {
     public static void tearDown() {
         final Optional<String> foundImageIdInitial = dockerClientManager.lookupImageIdByRepoTag(imageRepo, imageTag);
         if (foundImageIdInitial.isPresent()) {
-            try {
-                dockerClientManager.removeImage(foundImageIdInitial.get());
-            } catch (IntegrationException e) {
-            }
+            dockerClientManager.removeImage(foundImageIdInitial.get());
         }
     }
 

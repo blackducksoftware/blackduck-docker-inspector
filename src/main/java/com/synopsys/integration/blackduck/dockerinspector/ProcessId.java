@@ -51,8 +51,8 @@ public class ProcessId {
     try {
       processId = ManagementFactory.getRuntimeMXBean().getName();
       return processId;
-    } catch (final Throwable t) {
-      logger.debug("Unable to get process ID from system");
+    } catch (final Exception e) {
+      logger.debug(String.format("Unable to get process ID from system: %s", e.getMessage()));
       final long currentMillisecond = new Date().getTime();
       processId = Long.toString(currentMillisecond);
     }

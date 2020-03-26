@@ -23,6 +23,10 @@
 package com.synopsys.integration.blackduck.dockerinspector.config;
 
 public class SpringValueUtils {
+
+    private SpringValueUtils() {
+    }
+
     public static String springKeyFromValueAnnotation(String value) {
         if (value.contains("${")) {
             value = value.substring(2);

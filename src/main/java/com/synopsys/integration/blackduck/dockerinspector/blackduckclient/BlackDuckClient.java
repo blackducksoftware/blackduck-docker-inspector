@@ -22,8 +22,6 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.blackduckclient;
 
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.synopsys.integration.blackduck.codelocation.CodeLocationCreationData;
 import com.synopsys.integration.blackduck.codelocation.bdioupload.BdioUploadCodeLocationCreationRequest;
 import com.synopsys.integration.blackduck.codelocation.bdioupload.BdioUploadService;
@@ -53,7 +51,6 @@ import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
 
-import com.synopsys.integration.blackduck.dockerinspector.DockerInspector;
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.exception.IntegrationException;
@@ -124,7 +121,7 @@ public class BlackDuckClient {
     final CodeLocationCreationData<UploadBatchOutput> bdioUploadResults = bdioUploadService
         .uploadBdio(uploadRequest);
     bdioUploadResults.getOutput().getOutputs().stream().forEach(o -> logger.debug(String
-        .format("\tUpload %s: output: %s\n", o.getCodeLocationName(),
+        .format("\tUpload %s: output: %s%n", o.getCodeLocationName(),
             o.getResponse().orElse("unknown"))));
     logger.info(
         String.format("Uploaded bdio file %s to %s", bdioFile.getName(), config.getBlackDuckUrl()));
@@ -145,14 +142,14 @@ public class BlackDuckClient {
     logger.debug("Attempting to phone home");
     try {
       phoneHomeBlackDuckConnection(dockerEngineVersion);
-    } catch (final Throwable e) {
+    } catch (final Exception e) {
       logger.debug(String.format(
           "Attempt to phone home failed. This may simply be because Black Duck credentials were not supplied. Error message: %s",
           e.getMessage()));
     }
   }
 
-  private void phoneHomeBlackDuckConnection(final String dockerEngineVersion) throws IOException {
+  private void phoneHomeBlackDuckConnection(final String dockerEngineVersion) {
 
     final BlackDuckHttpClient httpConnection = createHttpConnection(intLogger);
     final BlackDuckServicesFactory blackDuckServicesFactory = createBlackDuckServicesFactory(
@@ -186,7 +183,7 @@ public class BlackDuckClient {
     logger.trace("Attempt to phone home completed");
   }
 
-  private BlackDuckHttpClient createHttpConnection(final IntLogger intLogger) throws IllegalStateException {
+  private BlackDuckHttpClient createHttpConnection(final IntLogger intLogger) {
     final BlackDuckServerConfigBuilder blackDuckServerConfigBuilder = createBlackDuckServerConfigBuilder();
     return blackDuckServerConfigBuilder.build().createBlackDuckHttpClient(intLogger);
   }
@@ -223,7 +220,7 @@ public class BlackDuckClient {
     blackDuckServerConfigBuilder.setApiToken(blackDuckSecrets.getApiToken());
     blackDuckServerConfigBuilder.setUsername(getBlackDuckUsername());
     blackDuckServerConfigBuilder.setPassword(blackDuckSecrets.getPassword());
-    blackDuckServerConfigBuilder.setTimeout(config.getBlackDuckTimeout());
+    blackDuckServerConfigBuilder.setTimeoutInSeconds(config.getBlackDuckTimeout());
     blackDuckServerConfigBuilder.setProxyHost(blackDuckProxyHost);
     blackDuckServerConfigBuilder.setProxyPort(blackDuckProxyPort);
     blackDuckServerConfigBuilder.setProxyUsername(blackDuckProxyUsername);
