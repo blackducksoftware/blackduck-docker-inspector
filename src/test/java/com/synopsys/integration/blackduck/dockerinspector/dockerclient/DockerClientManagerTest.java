@@ -49,7 +49,7 @@ public class DockerClientManagerTest {
     }
 
     @Test
-    public void test() throws IOException, IntegrationException {
+    public void test() throws IOException {
 
         final Optional<String> foundImageIdInitial = dockerClientManager.lookupImageIdByRepoTag(imageRepo, imageTag);
         if (foundImageIdInitial.isPresent()) {
@@ -82,17 +82,16 @@ public class DockerClientManagerTest {
     public void testDeriveDockerTarfileFromConfiguredTar() throws IOException, IntegrationException {
         Mockito.when(programPaths.getDockerInspectorTargetDirPath()).thenReturn("test/containerShared/target");
         Mockito.when(config.getDockerTar()).thenReturn("build/images/test/alpine.tar");
-
         final ImageTarWrapper imageTarWrapper = dockerClientManager.deriveDockerTarFileFromConfig();
         assertEquals("alpine.tar", imageTarWrapper.getFile().getName());
     }
 
     @Test
-    public void testDeriveDockerTarfileFromConfiguredImageId() throws IOException, IntegrationException {
+    public void testDeriveDockerTarfileFromConfiguredImage() throws IOException, IntegrationException {
         Mockito.when(programPaths.getDockerInspectorTargetDirPath()).thenReturn("test/containerShared/target");
         Mockito.when(config.getDockerImageRepo()).thenReturn("alpine");
         Mockito.when(config.getDockerImageTag()).thenReturn("latest");
         final ImageTarWrapper imageTarWrapper = dockerClientManager.deriveDockerTarFileFromConfig();
-        assertEquals("alpine.tar", imageTarWrapper.getFile().getName());
+        assertEquals("alpine_latest.tar", imageTarWrapper.getFile().getName());
     }
 }
