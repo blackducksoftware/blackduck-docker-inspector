@@ -39,38 +39,9 @@ import com.synopsys.integration.exception.IntegrationException;
 
 @Component
 public class ImageTarFilename {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private Config config;
-    private DockerClientManager dockerClientManager;
-    private ProgramPaths programPaths;
-
-    @Autowired
-    public void setConfig(final Config config) {
-        this.config = config;
-    }
-
-    @Autowired
-    public void setDockerClientManager(final DockerClientManager dockerClientManager) {
-        this.dockerClientManager = dockerClientManager;
-    }
-
-    @Autowired
-    public void setProgramPaths(final ProgramPaths programPaths) {
-        this.programPaths = programPaths;
-    }
 
     public String deriveImageTarFilenameFromImageTag(final String imageName, final String tagName) {
         return String.format("%s_%s.tar", cleanImageName(imageName), tagName);
-    }
-
-    public ImageTarWrapper deriveDockerTarFileFromConfig() throws IOException, IntegrationException {
-        logger.debug(String.format("programPaths.getDockerInspectorTargetDirPath(): %s", programPaths.getDockerInspectorTargetDirPath()));
-        if (StringUtils.isNotBlank(config.getDockerTar())) {
-            final File dockerTarFile = new File(config.getDockerTar());
-            return new ImageTarWrapper(dockerTarFile);
-        } else {
-            return deriveDockerTarFileGivenImageSpec();
-        }
     }
 
     private String cleanImageName(final String imageName) {
@@ -83,18 +54,5 @@ public class ImageTarFilename {
 
     private String slashesToUnderscore(final String givenString) {
         return givenString.replace("/", "_");
-    }
-
-    private ImageTarWrapper deriveDockerTarFileGivenImageSpec() throws IntegrationException, IOException {
-        final ImageTarWrapper finalDockerTarfile;
-        final File imageTarDirectory = new File(programPaths.getDockerInspectorTargetDirPath());
-        if (StringUtils.isNotBlank(config.getDockerImageId())) {
-            finalDockerTarfile = dockerClientManager.getTarFileFromDockerImageById(config.getDockerImageId(), imageTarDirectory);
-        } else if (StringUtils.isNotBlank(config.getDockerImageRepo())) {
-            finalDockerTarfile = dockerClientManager.getTarFileFromDockerImage(config.getDockerImageRepo(), config.getDockerImageTag(), imageTarDirectory);
-        } else {
-            throw new BlackDuckIntegrationException("You must specify a docker image");
-        }
-        return finalDockerTarfile;
     }
 }

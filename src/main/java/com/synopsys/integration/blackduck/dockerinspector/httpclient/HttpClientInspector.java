@@ -37,6 +37,7 @@ import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
 import com.synopsys.integration.blackduck.dockerinspector.blackduckclient.BlackDuckClient;
+import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
 import com.synopsys.integration.blackduck.dockerinspector.output.ContainerFilesystemFilename;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarFilename;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarWrapper;
@@ -63,7 +64,7 @@ public class HttpClientInspector {
     private ProgramPaths programPaths;
 
     @Autowired
-    private ImageTarFilename dockerTarfile;
+    private DockerClientManager dockerClientManager;
 
     @Autowired
     private List<ImageInspectorClient> imageInspectorClients;
@@ -138,7 +139,7 @@ public class HttpClientInspector {
     }
 
     private ImageTarWrapper prepareDockerTarfile(final ImageInspectorClient imageInspectorClient) throws IOException, IntegrationException {
-        final ImageTarWrapper givenDockerTarfile = dockerTarfile.deriveDockerTarFileFromConfig();
+        final ImageTarWrapper givenDockerTarfile = dockerClientManager.deriveDockerTarFileFromConfig();
         final ImageTarWrapper finalDockerTarfile = imageInspectorClient.copyTarfileToSharedDir(givenDockerTarfile);
         return finalDockerTarfile;
     }

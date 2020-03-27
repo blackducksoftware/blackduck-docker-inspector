@@ -1,6 +1,7 @@
 package com.synopsys.integration.blackduck.dockerinspector.dockerclient;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
@@ -15,8 +16,12 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
+import com.synopsys.integration.blackduck.dockerinspector.config.Config;
+import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarFilename;
+import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarWrapper;
 import com.synopsys.integration.exception.IntegrationException;
 
 @Tag("integration")
@@ -25,11 +30,14 @@ public class DockerClientManagerTest {
     private final static String imageTag = "dockerclientmanagertest";
 
     private static DockerClientManager dockerClientManager;
+    private static Config config;
+    private static ProgramPaths programPaths;
 
     @BeforeAll
     public static void setUp() {
-        dockerClientManager = new DockerClientManager();
-        dockerClientManager.setImageTarFilename(new ImageTarFilename());
+        config = Mockito.mock(Config.class);
+        programPaths = Mockito.mock(ProgramPaths.class);
+        dockerClientManager = new DockerClientManager(config, new ImageTarFilename(), programPaths);
     }
 
     @AfterAll
@@ -68,5 +76,23 @@ public class DockerClientManagerTest {
         assertTrue(foundImageId.isPresent());
         System.out.printf("Found image id: %s\n", foundImageId.get());
         assertTrue(foundImageId.get().startsWith("sha256:"));
+    }
+
+    @Test
+    public void testDeriveDockerTarfileFromConfiguredTar() throws IOException, IntegrationException {
+        Mockito.when(programPaths.getDockerInspectorTargetDirPath()).thenReturn("test/containerShared/target");
+        Mockito.when(config.getDockerTar()).thenReturn("build/images/test/alpine.tar");
+
+        final ImageTarWrapper imageTarWrapper = dockerClientManager.deriveDockerTarFileFromConfig();
+        assertEquals("alpine.tar", imageTarWrapper.getFile().getName());
+    }
+
+    @Test
+    public void testDeriveDockerTarfileFromConfiguredImageId() throws IOException, IntegrationException {
+        Mockito.when(programPaths.getDockerInspectorTargetDirPath()).thenReturn("test/containerShared/target");
+        Mockito.when(config.getDockerImageRepo()).thenReturn("alpine");
+        Mockito.when(config.getDockerImageTag()).thenReturn("latest");
+        final ImageTarWrapper imageTarWrapper = dockerClientManager.deriveDockerTarFileFromConfig();
+        assertEquals("alpine.tar", imageTarWrapper.getFile().getName());
     }
 }

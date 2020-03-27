@@ -71,6 +71,7 @@ import com.github.dockerjava.core.command.BuildImageResultCallback;
 import com.github.dockerjava.core.command.LogContainerResultCallback;
 import com.github.dockerjava.core.command.PullImageResultCallback;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
+import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.exception.DisabledException;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarFilename;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarWrapper;
@@ -84,25 +85,20 @@ public class DockerClientManager {
     private static final String CONTAINER_APPNAME_LABEL_KEY = "app";
     private static final String CONTAINER_OS_LABEL_KEY = "os";
     private final Logger logger = LoggerFactory.getLogger(DockerClientManager.class);
-    private Config config;
-    private ImageTarFilename imageTarFilename;
-
-    @Autowired
-    public void setConfig(final Config config) {
-        this.config = config;
-    }
-
-    @Autowired
-    public void setImageTarFilename(final ImageTarFilename imageTarFilename) {
-        this.imageTarFilename = imageTarFilename;
-    }
-
+    private final Config config;
+    private final ImageTarFilename imageTarFilename;
+    private final ProgramPaths programPaths;
     private final DockerClient dockerClient;
 
-    public DockerClientManager() {
-            final Builder builder = DefaultDockerClientConfig.createDefaultConfigBuilder();
-            final DockerClientConfig dockerClientConfig = builder.build();
-            dockerClient = DockerClientBuilder.getInstance(dockerClientConfig).build();
+    @Autowired
+    public DockerClientManager(final Config config, final ImageTarFilename imageTarFilename,
+        final ProgramPaths programPaths) {
+        this.config = config;
+        this.imageTarFilename = imageTarFilename;
+        this.programPaths = programPaths;
+        final Builder builder = DefaultDockerClientConfig.createDefaultConfigBuilder();
+        final DockerClientConfig dockerClientConfig = builder.build();
+        dockerClient = DockerClientBuilder.getInstance(dockerClientConfig).build();
     }
 
     public String getDockerJavaLibraryVersion() {
@@ -131,21 +127,14 @@ public class DockerClientManager {
         return new ImageTarWrapper(imageTarFile, imageName, tagName);
     }
 
-    public ImageTarWrapper getTarFileFromDockerImage(final String imageName, final String tagName, final File imageTarDirectory) throws IntegrationException, IOException {
-        Optional<String> targetImageId = Optional.empty();
-        try {
-            targetImageId = Optional.ofNullable(pullImage(imageName, tagName));
-        } catch (final DisabledException disabledException) {
-            logger.info("Image pulling is disabled in offline mode");
-        } catch (final Exception e) {
-            logger.info(String.format("Unable to pull %s:%s; Proceeding anyway since the image might be in local docker image cache. Error on pull: %s", imageName, tagName, e.getMessage()));
+    public ImageTarWrapper deriveDockerTarFileFromConfig() throws IOException, IntegrationException {
+        logger.debug(String.format("programPaths.getDockerInspectorTargetDirPath(): %s", programPaths.getDockerInspectorTargetDirPath()));
+        if (StringUtils.isNotBlank(config.getDockerTar())) {
+            final File dockerTarFile = new File(config.getDockerTar());
+            return new ImageTarWrapper(dockerTarFile);
+        } else {
+            return deriveDockerTarFileGivenImageSpec();
         }
-        final File imageTarFile = saveImageToDir(imageTarDirectory, imageTarFilename.deriveImageTarFilenameFromImageTag(imageName, tagName), imageName, tagName);
-        final ImageTarWrapper imageTarWrapper = new ImageTarWrapper(imageTarFile, imageName, tagName);
-        if (config.isCleanupTargetImage() && targetImageId.isPresent()) {
-            removeImage(targetImageId.get());
-        }
-        return imageTarWrapper;
     }
 
     public String pullImage(final String imageName, final String tagName) throws IntegrationException, InterruptedException {
@@ -269,6 +258,36 @@ public class DockerClientManager {
         }
     }
 
+    private ImageTarWrapper deriveDockerTarFileGivenImageSpec() throws IntegrationException, IOException {
+        final ImageTarWrapper finalDockerTarfile;
+        final File imageTarDirectory = new File(programPaths.getDockerInspectorTargetDirPath());
+        if (StringUtils.isNotBlank(config.getDockerImageId())) {
+            finalDockerTarfile = getTarFileFromDockerImageById(config.getDockerImageId(), imageTarDirectory);
+        } else if (StringUtils.isNotBlank(config.getDockerImageRepo())) {
+            finalDockerTarfile = getTarFileFromDockerImage(config.getDockerImageRepo(), config.getDockerImageTag(), imageTarDirectory);
+        } else {
+            throw new BlackDuckIntegrationException("You must specify a docker image");
+        }
+        return finalDockerTarfile;
+    }
+
+    private ImageTarWrapper getTarFileFromDockerImage(final String imageName, final String tagName, final File imageTarDirectory) throws IntegrationException, IOException {
+        Optional<String> targetImageId = Optional.empty();
+        try {
+            targetImageId = Optional.ofNullable(pullImage(imageName, tagName));
+        } catch (final DisabledException disabledException) {
+            logger.info("Image pulling is disabled in offline mode");
+        } catch (final Exception e) {
+            logger.info(String.format("Unable to pull %s:%s; Proceeding anyway since the image might be in local docker image cache. Error on pull: %s", imageName, tagName, e.getMessage()));
+        }
+        final File imageTarFile = saveImageToDir(imageTarDirectory, imageTarFilename.deriveImageTarFilenameFromImageTag(imageName, tagName), imageName, tagName);
+        final ImageTarWrapper imageTarWrapper = new ImageTarWrapper(imageTarFile, imageName, tagName);
+        if (config.isCleanupTargetImage() && targetImageId.isPresent()) {
+            removeImage(targetImageId.get());
+        }
+        return imageTarWrapper;
+    }
+
     private String getLoggingLevelString() {
         if (logger.isTraceEnabled()) {
             return "TRACE";
@@ -296,7 +315,7 @@ public class DockerClientManager {
     private File saveImageToDir(final File imageTarDirectory, final String imageTarFilename, final String imageName, final String tagName) throws IOException, IntegrationException {
         imageTarDirectory.mkdirs();
         final File imageTarFile = new File(imageTarDirectory, imageTarFilename);
-        Files.delete(imageTarFile.toPath());
+        Files.deleteIfExists(imageTarFile.toPath());
         saveImageToFile(imageName, tagName, imageTarFile);
         return imageTarFile;
     }
@@ -312,7 +331,7 @@ public class DockerClientManager {
             logger.trace(String.format("getLocalImage(%s, %s) examining %s", imageName, nonNullTagName, image.getId()));
             final String[] repoTagList = image.getRepoTags();
             if ((repoTagList != null) && (findMatchForTargetImageAmongTheseTags(imageName, nonNullTagName, image, repoTagList))) {
-                    return Optional.of(image);
+                return Optional.of(image);
             } else {
                 logger.warn("Encountered an image with a null tag list in local docker registry");
             }
