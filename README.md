@@ -3,6 +3,7 @@ Analyze your docker images, without running them.
 
 # Build #
 [![Build Status](https://travis-ci.org/blackducksoftware/blackduck-docker-inspector.svg?branch=master)](https://travis-ci.org/blackducksoftware/blackduck-docker-inspector)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.synopsys.integration%3Ablackduck-docker-inspector&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.synopsys.integration%3Ablackduck-docker-inspector)
 [![Black Duck Security Risk](https://copilot.blackducksoftware.com/github/repos/blackducksoftware/hub-docker/branches/master/badge-risk.svg)](https://copilot.blackducksoftware.com/github/repos/blackducksoftware/hub-docker/branches/master)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
