@@ -1,6 +1,6 @@
 #### Version 9.0.0
 ##### Changed feature
-* Internal details of the produced Black Duck Input Output (BDIO) file format have changed to be compatible with Detect versions 6.3.0 and later.
+* The internal format of the Black Duck Input Output (BDIO) file that is produced is now compatible with Detect version 6.3 and later.
 
 #### Version 8.3.1
 ##### Resolved issues
