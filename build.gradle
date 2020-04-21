@@ -233,6 +233,21 @@ task testPrep(type: Exec, dependsOn: [build, buildTestTarfiles, buildScript, cre
 testIntegration.dependsOn testPrep 
 task all(dependsOn: [testIntegration, artifactoryPublish, publishAirGapZip]) {}
 
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            def artifactName = "${buildDir}/libs/${project.name}-${version}.jar"
+            artifact (artifactName)
+        }
+    }
+}
+
+artifactory {
+    publish {
+        defaults { publications ('mavenJava') }
+    }
+}
+
 dependencies {
     compile 'com.blackducksoftware.integration:blackduck-common:44.4.0'
     compile 'com.synopsys.integration:integration-bdio:21.0.0'
