@@ -1,3 +1,7 @@
+#### Version 9.0.0
+##### Changed feature
+* Internal details of the produced Black Duck Input Output (BDIO) file format have changed to be compatible with Detect versions 6.3.0 and later.
+
 #### Version 8.3.1
 ##### Resolved issues
 * Fixed an issue that prevented the *linux.distro* property from working correctly.
