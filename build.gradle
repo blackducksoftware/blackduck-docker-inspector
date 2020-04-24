@@ -16,7 +16,7 @@ buildscript {
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
 project.ext.inspectorImageVersion = "5.0.0"
 
-version = '9.0.0-SNAPSHOT'
+version = '9.0.0'
 
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
