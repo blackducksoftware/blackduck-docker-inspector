@@ -1,0 +1,600 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+    
+    
+      
+        <title>Troubleshooting - Black Duck Docker Inspector</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.30686662.css">
+      
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#troubleshooting-overview" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href=".." title="Black Duck Docker Inspector" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Black Duck Docker Inspector
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Troubleshooting
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href=".." title="Black Duck Docker Inspector" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Black Duck Docker Inspector
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Help topics" class="md-nav__link">
+      <b>Help topics</b>
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../overview/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../quickstart/" title="Quick start" class="md-nav__link">
+      Quick start
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../architecture/" title="Architecture" class="md-nav__link">
+      Architecture
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../running/" title="Running" class="md-nav__link">
+      Running
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../properties/" title="Properties" class="md-nav__link">
+      Properties
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../advanced/" title="Advanced" class="md-nav__link">
+      Advanced
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../deployment/" title="Deploying" class="md-nav__link">
+      Deploying
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Troubleshooting
+      </label>
+    
+    <a href="./" title="Troubleshooting" class="md-nav__link md-nav__link--active">
+      Troubleshooting
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting-overview" class="md-nav__link">
+    Troubleshooting overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-when-directly-invoking-the-jar-file-an-error-message-displays-malformed-input-or-input-contains-unmappable-characters" class="md-nav__link">
+    Problem: When directly invoking the .jar file, an error message displays "Malformed input or input contains unmappable characters."
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-you-must-run-black-duck-docker-inspector-on-a-non-linux-computer" class="md-nav__link">
+    Problem: You must run Black Duck Docker Inspector on a non-Linux computer.
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-property-values-are-set-in-unexpected-ways" class="md-nav__link">
+    Problem: Property values are set in unexpected ways.
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-the-image-inspector-service-cannot-write-to-the-mounted-volume-selinux-is-enabled" class="md-nav__link">
+    Problem: The image inspector service cannot write to the mounted volume; SELinux is enabled.
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-the-image-inspector-service-cannot-read-from-the-mounted-volume" class="md-nav__link">
+    Problem: The image inspector service cannot read from the mounted volume.
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-black-duck-docker-inspector-cannot-perform-docker-operations-because-the-remote-access-port-is-not-enabled-on-the-docker-engine" class="md-nav__link">
+    Problem: Black Duck Docker Inspector cannot perform Docker operations because the remote access port is not enabled on the Docker engine.
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../releasenotes/" title="Release notes" class="md-nav__link">
+      Release notes
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting-overview" class="md-nav__link">
+    Troubleshooting overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-when-directly-invoking-the-jar-file-an-error-message-displays-malformed-input-or-input-contains-unmappable-characters" class="md-nav__link">
+    Problem: When directly invoking the .jar file, an error message displays "Malformed input or input contains unmappable characters."
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-you-must-run-black-duck-docker-inspector-on-a-non-linux-computer" class="md-nav__link">
+    Problem: You must run Black Duck Docker Inspector on a non-Linux computer.
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-property-values-are-set-in-unexpected-ways" class="md-nav__link">
+    Problem: Property values are set in unexpected ways.
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-the-image-inspector-service-cannot-write-to-the-mounted-volume-selinux-is-enabled" class="md-nav__link">
+    Problem: The image inspector service cannot write to the mounted volume; SELinux is enabled.
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-the-image-inspector-service-cannot-read-from-the-mounted-volume" class="md-nav__link">
+    Problem: The image inspector service cannot read from the mounted volume.
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-black-duck-docker-inspector-cannot-perform-docker-operations-because-the-remote-access-port-is-not-enabled-on-the-docker-engine" class="md-nav__link">
+    Problem: Black Duck Docker Inspector cannot perform Docker operations because the remote access port is not enabled on the Docker engine.
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Troubleshooting</h1>
+                
+                <h3 id="troubleshooting-overview">Troubleshooting overview</h3>
+<p>To troubleshoot issues with Black Duck Docker Inspector, run with DEBUG logging:</p>
+<pre><code>--logging.level.com.synopsys=DEBUG
+</code></pre>
+<p>The following suggestions are related to specific problems.</p>
+<h3 id="problem-when-directly-invoking-the-jar-file-an-error-message-displays-malformed-input-or-input-contains-unmappable-characters">Problem: When directly invoking the .jar file, an error message displays "Malformed input or input contains unmappable characters."</h3>
+<p>Possible cause: Your local character encoding does not match the target container file system character encoding.</p>
+<p>Solution/workaround: Set the character encoding to UTF-8 when invoking Java:</p>
+<pre><code>java -Dfile.encoding=UTF-8 ...
+</code></pre>
+<h3 id="problem-you-must-run-black-duck-docker-inspector-on-a-non-linux-computer">Problem: You must run Black Duck Docker Inspector on a non-Linux computer.</h3>
+<p>Solution/workaround: You may be able to run Black Duck Docker Inspector within a Linux Docker container running on
+your non-Linux computer using the following process.</p>
+<p>Warning: This method involves running a privileged container
+which will not be acceptable in some environments.</p>
+<p>On your non-Linux computer, run:</p>
+<pre><code>docker run -it -d --name inspectorhost --privileged blackducksoftware/blackduck-imageinspector-ubuntu:3.0.0
+docker attach inspectorhost
+</code></pre>
+<p>Then, in the inspectorhost container, run:</p>
+<pre><code>mkdir -p /opt/blackduck/dockerinspector
+cd /opt/blackduck/dockerinspector
+apt-get update
+apt-get install -y apt-transport-https ca-certificates curl software-properties-common default-jre vim
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+apt-get install -y docker-ce
+dockerd --storage-driver=vfs  &amp;
+curl -O https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh; chmod +x blackduck-docker-inspector.sh
+dockerd --storage-driver=vfs 2&gt; dockerd_stderr.log &gt; dockerd_stdout.log &amp;
+./blackduck-docker-inspector.sh  ...
+</code></pre>
+<p>It's possible that additional steps such as configuration of dockerd, logging into the Docker registry,
+and others, are required to give Docker running inside the inspectorhost container access to the Docker
+images that Black Duck Docker Inspector must pull. One way to reduce extra steps is to save the target
+Docker image as a .tar file on your computer,
+use <em>docker cp</em> to copy it into the container, and run Black Duck Docker Inspector on that .tar file.</p>
+<h3 id="problem-property-values-are-set-in-unexpected-ways">Problem: Property values are set in unexpected ways.</h3>
+<p>Possible cause: Black Duck Docker Inspector is built using the Spring Boot application framework.
+Spring Boot provides a variety of ways to set property values. This can produce unexpected results if,
+for example, you have an environment variable whose name maps to a Black Duck Docker Inspector property name.
+Refer to the
+<a href="https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html">Spring Boot documentation</a>
+for more details.</p>
+<h3 id="problem-the-image-inspector-service-cannot-write-to-the-mounted-volume-selinux-is-enabled">Problem: The image inspector service cannot write to the mounted volume; SELinux is enabled.</h3>
+<p>When this happens, the following error may appear in the container log: </p>
+<pre><code>Exception thrown while getting image packages: Error inspecting image: /opt/blackduck/shared/run_.../output/..._containerfilesystem.tar.gz (Permission denied)
+...
+Caused by: java.io.FileNotFoundException: /opt/blackduck/hub-imageinspector-ws/shared/run_.../output/..._containerfilesystem.tar.gz (Permission denied)
+</code></pre>
+<p>Possible cause: SELinux policy configuration.</p>
+<p>Solution/workaround: Add the <em>svirt_sandbox_file_t</em> label to Black Duck Docker Inspector's shared directory.
+This enables the Black Duck Docker Inspector services running in Docker containers to write to it:</p>
+<pre><code>sudo chcon -Rt svirt_sandbox_file_t /tmp/blackduck-docker-inspector-files/shared/
+</code></pre>
+<h3 id="problem-the-image-inspector-service-cannot-read-from-the-mounted-volume">Problem: The image inspector service cannot read from the mounted volume.</h3>
+<p>When this happens, the following error may appear in the container log: </p>
+<pre><code>Error inspecting image: /opt/blackduck/shared/run_.../{image}.tar (Permission denied)
+</code></pre>
+<p>Possible cause: The Linux umask value on the machine running Black Duck Docker Inspector is too restrictive.</p>
+<p>Solution/workaround: Set the umask value to 022 when running Black Duck Docker Inspector. The cause could be a umask value
+that prevents read access to the file, or read or execute access to the directory.
+Black Duck Docker Inspector requires a umask value that does not remove read permissions from files 
+and does not remove read or execute permissions from directories. For example, a umask value of 022 works.</p>
+<h3 id="problem-black-duck-docker-inspector-cannot-perform-docker-operations-because-the-remote-access-port-is-not-enabled-on-the-docker-engine">Problem: Black Duck Docker Inspector cannot perform Docker operations because the remote access port is not enabled on the Docker engine.</h3>
+<p>When this happens, the following error may display in the log:</p>
+<pre><code>Error inspecting image: java.io.IOException: Couldn't load native library
+Stack trace: javax.ws.rs.ProcessingException: java.io.IOException: Couldn't load native library
+</code></pre>
+<p>In versions of Black Duck Docker Inspector prior to 8.2.0, the logged error was:</p>
+<pre><code>Error inspecting image: Could not initialize class org.newsclub.net.unix.NativeUnixSocket
+Stack trace: java.lang.NoClassDefFoundError: Could not initialize class org.newsclub.net.unix.NativeUnixSocket
+</code></pre>
+<p>Possible cause: The TCP socket for remote access is not enabled on the Docker engine. For more information, refer to <a href="https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-socket-option">Docker documentation</a>.</p>
+<p>Solution/workaround: Follow the instructions in the <a href="https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-socket-option">Docker documentation</a> to
+open the TCP port on the Docker engine.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../deployment/" title="Deploying" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Deploying
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../releasenotes/" title="Release notes" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Release notes
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.c648116f.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      
+    
+  </body>
+</html>
