@@ -18,3 +18,4 @@ You can download the latest source from GitHub: https://github.com/blackducksoft
 ## User documentation ##
 The documentation for blackduck-docker-inspector can be found [here](https://blackducksoftware.github.io/blackduck-docker-inspector/latest/overview/)
 
+
