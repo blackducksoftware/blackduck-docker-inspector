@@ -21,19 +21,21 @@ public class CompressedFileTest {
 
     @BeforeAll
     public static void setUp() throws IOException {
-        fileToCompress = new File("test/fileToCompress.txt");
-        compressedFile = new File("test/fileToCompress.txt.gz");
+        final File testDir = new File("test");
+        testDir.mkdirs();
+        fileToCompress = new File(testDir, "fileToCompress.txt");
+        compressedFile = new File(testDir, "fileToCompress.txt.gz");
         compressedFile.delete();
         fileToCompress.createNewFile();
 
-        destinationDir = new File("test/output/testTarContents");
+        destinationDir = new File(testDir, "output/testTarContents");
         FileUtils.deleteDirectory(destinationDir);
 
-        testTarGzDir = new File("test/output/testTarGzDir");
+        testTarGzDir = new File(testDir, "output/testTarGzDir");
         FileUtils.deleteDirectory(testTarGzDir);
         testTarGzDir.mkdirs();
 
-        tempTarFile = new File("test/output/testTempTar.tar");
+        tempTarFile = new File(testDir, "output/testTempTar.tar");
     }
 
     @AfterAll
