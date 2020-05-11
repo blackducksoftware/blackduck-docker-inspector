@@ -52,13 +52,17 @@ public class Output {
     private ProgramPaths programPaths;
 
     @Autowired
-    private SquashedImage squashedImage;
-
-    @Autowired
     private Gson gson;
 
     @Autowired
     private ContainerFilesystemFilename containerFilesystemFilename;
+
+    private SquashedImage squashedImage;
+
+    @Autowired
+    public void setSquashedImage(final SquashedImage squashedImage) {
+        this.squashedImage = squashedImage;
+    }
 
     public File getFinalOutputDir() {
         File outputDir;
