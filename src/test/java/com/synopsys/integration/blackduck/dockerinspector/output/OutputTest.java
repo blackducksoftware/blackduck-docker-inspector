@@ -10,8 +10,8 @@ import java.util.Collection;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.NameFileFilter;
 import org.apache.commons.io.filefilter.TrueFileFilter;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -46,26 +46,28 @@ public class OutputTest {
     @InjectMocks
     private Output output;
 
-    @BeforeAll
-    public void setup() {
+    private static File outputDir;
+    private static File workingDir;
+    private static File squashedImageTarfile;
+    private static File squashingTempDir;
 
-    }
-
-    @Test
-    public void testSquashedImageCreation() throws IOException, IntegrationException {
-
+    @BeforeClass
+    public static void setup() throws IOException {
         final File testHome = new File("test/output/squashedImageCreation");
         FileUtils.deleteDirectory(testHome);
-        final File outputDir = new File(testHome, "out");
+        outputDir = new File(testHome, "out");
         outputDir.mkdirs();
         final File containerFileSystemFrom = new File("src/test/resources/target_containerfilesystem.tar.gz");
         final File containerFileSystemTo = new File(outputDir, "target_containerfilesystem.tar.gz");
         FileUtils.copyFile(containerFileSystemFrom, containerFileSystemTo);
-        final File workingDir = new File(testHome, "working");
+        workingDir = new File(testHome, "working");
         workingDir.mkdirs();
+        squashedImageTarfile = new File(workingDir, "target_squashedimage.tar");
+        squashingTempDir = new File(workingDir, "squashing_tmp");
+    }
 
-        final File squashedImageTarfile = new File(workingDir, "target_squashedimage.tar");
-        final File squashingTempDir = new File(workingDir, "squashing_tmp");
+    @Test
+    public void testSquashedImageCreation() throws IOException, IntegrationException {
 
         Mockito.when(config.getOutputPath()).thenReturn(outputDir.getAbsolutePath());
         Mockito.when(config.isOutputIncludeSquashedImage()).thenReturn(true);
@@ -75,13 +77,11 @@ public class OutputTest {
         Mockito.when(programPaths.getDockerInspectorSquashedImageDirPath()).thenReturn(squashingTempDir.getAbsolutePath());
 
         final SimpleBdioDocument bdioDoc = Mockito.mock(SimpleBdioDocument.class);
-
         final BdioBillOfMaterials bom = new BdioBillOfMaterials();
         bom.spdxName = "registry.luciddg.com_luciddg_ldg-server-qa_2020.16.03_DPKG";
         Mockito.when(bdioDoc.getBillOfMaterials()).thenReturn(bom);
         final BdioProject project = new BdioProject();
         Mockito.when(bdioDoc.getProject()).thenReturn(project);
-
         Mockito.when(containerFilesystemFilename.deriveContainerFilesystemFilename(null, null)).thenReturn("target_containerfilesystem.tar.gz");
 
         final ImageTarFilename imageTarFilename = new ImageTarFilename();
@@ -92,8 +92,10 @@ public class OutputTest {
         squashedImage.setDockerClientManager(dockerClientManager);
         output.setSquashedImage(squashedImage);
 
+        // Test
         final OutputFiles outputFiles = output.addOutputToFinalOutputDir(bdioDoc, null, null);
 
+        // Verify
         final File generatedSquashedImageCompressedFile = outputFiles.getSquashedImageFile();
         final File generatedSquashedImageTarfile = new File(workingDir, "generatedImageTarfile");
         CompressedFile.gunZipFile(generatedSquashedImageCompressedFile, generatedSquashedImageTarfile);
