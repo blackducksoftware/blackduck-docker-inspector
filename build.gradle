@@ -225,11 +225,34 @@ task checkVersion() {
 task buildTestTarfiles(dependsOn: [buildTestDockerTarfile, buildWhTestDockerTarfile, buildAggTestDockerTarfile, \
         buildAlpineTestDockerTarfile, buildAlpine36TestDockerTarfile, buildUbuntuTestDockerTarfile]) {}
 
-task testPrep(type: Exec, dependsOn: [build, buildTestTarfiles, buildScript, createVersionedScript]) {
-    ignoreExitValue true
-    commandLine 'mkdir', 'test'
+task testPrep(dependsOn: [build, buildTestTarfiles, buildScript, createVersionedScript]) {
+    doLast {
+        exec {
+            ignoreExitValue true
+            commandLine 'mkdir', 'test'
+        }
+        exec {
+            ignoreExitValue true
+            commandLine 'mkdir', 'test/containerShared'
+        }
+        exec {
+            ignoreExitValue true
+            commandLine 'mkdir', 'test/containerShared/target'
+        }
+        exec {
+            ignoreExitValue true
+            commandLine 'mkdir', 'test/containerShared/output'
+        }
+    }
 }
 
+task cleanExtras(type: Exec, dependsOn: docsGeneratedClean) {
+    ignoreExitValue true
+    commandLine 'rm', '-rf', 'test', 'out'
+}
+
+
+clean.dependsOn cleanExtras
 testIntegration.dependsOn testPrep 
 task all(dependsOn: [testIntegration, artifactoryPublish, publishAirGapZip]) {}
 
