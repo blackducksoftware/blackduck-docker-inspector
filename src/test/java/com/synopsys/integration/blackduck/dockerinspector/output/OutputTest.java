@@ -10,13 +10,15 @@ import java.util.Collection;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.NameFileFilter;
 import org.apache.commons.io.filefilter.TrueFileFilter;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.google.gson.Gson;
 import com.synopsys.integration.bdio.model.BdioBillOfMaterials;
@@ -28,7 +30,8 @@ import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerCli
 import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
 import com.synopsys.integration.exception.IntegrationException;
 
-@RunWith(SpringRunner.class)
+@Tag("integration")
+@ExtendWith(SpringExtension.class)
 public class OutputTest {
 
     @Mock
@@ -51,7 +54,7 @@ public class OutputTest {
     private static File squashedImageTarfile;
     private static File squashingTempDir;
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() throws IOException {
         final File testHome = new File("test/output/squashedImageCreation");
         FileUtils.deleteDirectory(testHome);
