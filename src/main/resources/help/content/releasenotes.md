@@ -1,3 +1,7 @@
+#### Version 9.0.1
+##### Resolved issues
+* Resolved an issue that could cause files to be omitted from the squashed image produced by ${solution_name}. The problem occurred on images that declared a directory opaque and added files to that directory within the same layer that declared it opaque.
+
 #### Version 9.0.0
 ##### Changed feature
 * The internal format of the Black Duck Input Output (BDIO) file that is produced is now compatible with Detect version 6.3 and later.
