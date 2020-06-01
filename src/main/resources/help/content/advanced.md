@@ -235,3 +235,21 @@ could run Detect like this:
 ```
 ./detect.sh --detect.docker.image=ubuntu:latest --detect.docker.passthrough.output.containerfilesystem.excluded.paths=/etc,/usr/bin
 ```
+
+### Relocating ${solution_name}'s working directories
+
+Docker Inspector uses 3 directories:
+
+1. One that ${script_name} downloads the ${solution_name} .jar file into (controlled via environment variable DOCKER_INSPECTOR_JAR_DIR)
+1. One that ${solution_name} shares with its image inspector containers (controlled via the shared.dir.path.local property)
+1. One for other files (controlled via properety working.dir.path)
+
+By default, ${solution_name} creates a temporary directory under /tmp for each purpose, but each directory can be relocated.
+If you want to avoid /tmp, you could relocate all three by doing something similar to this:
+````
+# mkdir /opt/tmp/jar # Create a dir for the ${solution_name} .jar download
+# mkdir /opt/tmp/working # Create a dir ${solution_name} working dir
+# mkdir /opt/tmp/shared # Create a dir that ${solution_name} will share with its image inspector containers
+export DOCKER_INSPECTOR_JAR_DIR=/opt/tmp/jar
+./${script_name} --working.dir.path=/opt/tmp/working --shared.dir.path.local=/opt/tmp/shared ...
+````
