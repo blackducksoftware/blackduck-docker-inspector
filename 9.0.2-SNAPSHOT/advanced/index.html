@@ -361,6 +361,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#relocating-black-duck-docker-inspectors-working-directories" class="md-nav__link">
+    Relocating Black Duck Docker Inspector's working directories
+  </a>
+  
+</li>
+      
       
       
       
@@ -519,6 +526,13 @@
         <li class="md-nav__item">
   <a href="#excluding-filesdirectories-from-the-returned-container-file-system-which-excludes-them-from-detects-signature-scan" class="md-nav__link">
     Excluding files/directories from the returned container file system which excludes them from Detect's signature scan
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relocating-black-duck-docker-inspectors-working-directories" class="md-nav__link">
+    Relocating Black Duck Docker Inspector's working directories
   </a>
   
 </li>
@@ -730,6 +744,22 @@ specify that list of directories with the property <em>--output.containerfilesys
 to exclude the <em>/etc</em> and <em>/usr/bin</em> directories from the signature scan, you
 could run Detect like this:</p>
 <pre><code>./detect.sh --detect.docker.image=ubuntu:latest --detect.docker.passthrough.output.containerfilesystem.excluded.paths=/etc,/usr/bin
+</code></pre>
+
+<h3 id="relocating-black-duck-docker-inspectors-working-directories">Relocating Black Duck Docker Inspector's working directories</h3>
+<p>Docker Inspector uses 3 directories:</p>
+<ol>
+<li>One that blackduck-docker-inspector.sh downloads the Black Duck Docker Inspector .jar file into (controlled via environment variable DOCKER_INSPECTOR_JAR_DIR)</li>
+<li>One that Black Duck Docker Inspector shares with its image inspector containers (controlled via the shared.dir.path.local property)</li>
+<li>One for other files (controlled via properety working.dir.path)</li>
+</ol>
+<p>By default, Black Duck Docker Inspector creates a temporary directory under /tmp for each purpose, but each directory can be relocated.
+If you want to avoid /tmp, you could relocate all three by doing something similar to this:</p>
+<pre><code># mkdir /opt/tmp/jar # Create a dir for the Black Duck Docker Inspector .jar download
+# mkdir /opt/tmp/working # Create a dir Black Duck Docker Inspector working dir
+# mkdir /opt/tmp/shared # Create a dir that Black Duck Docker Inspector will share with its image inspector containers
+export DOCKER_INSPECTOR_JAR_DIR=/opt/tmp/jar
+./blackduck-docker-inspector.sh --working.dir.path=/opt/tmp/working --shared.dir.path.local=/opt/tmp/shared ...
 </code></pre>
                 
                   
