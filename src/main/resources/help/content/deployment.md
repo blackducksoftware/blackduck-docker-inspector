@@ -38,6 +38,12 @@ three container-based services which you must start. These four containers must:
 (a) Share a mounted volume, either persistent or temporary, used to pass large files between containers, and:
 (b) Be able to reach each other through HTTP GET operations using base URLs that you provide.
 
+Because in this mode you (not ${solution_name}) are deploying the image inspector services,
+you must ensure that you deploy the correct version of the image inspector images for the
+version of ${solution_name} that you run. This is easier if you explicitly control the version of
+${solution_name}, rather than letting ${script_name} or Detect auto-update ${solution_name}.
+See [Running](running.md) for details.
+ 
 ### Image Inspector Services
 
 ${solution_name} consists of a command line utility provided in a Java .jar, but sometimes invoked using a bash script,
