@@ -75,7 +75,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#isolating-application-components" tabindex="1" class="md-skip">
+      <a href="#how-black-duck-docker-inspector-discovers-dependencies" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -265,6 +265,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#how-black-duck-docker-inspector-discovers-dependencies" class="md-nav__link">
+    How Black Duck Docker Inspector discovers dependencies
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#isolating-application-components" class="md-nav__link">
     Isolating application components
   </a>
@@ -434,6 +441,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#how-black-duck-docker-inspector-discovers-dependencies" class="md-nav__link">
+    How Black Duck Docker Inspector discovers dependencies
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#isolating-application-components" class="md-nav__link">
     Isolating application components
   </a>
@@ -557,6 +571,26 @@
                   <h1>Advanced</h1>
                 
                 <p>This section covers a variety of advanced topics.</p>
+<h3 id="how-black-duck-docker-inspector-discovers-dependencies">How Black Duck Docker Inspector discovers dependencies</h3>
+<p>Black Duck Docker Inspector discovers dependencies in the target image by making a request to
+an image inspector service (running inside a container).
+The image inspector service works as follows:</p>
+<ol>
+<li>Reads the target image, and constructs the file system that the container would have at
+time zero if you were to run the image.</li>
+<li>Finds the linux package manager database in that file system.</li>
+<li>Runs its own linux package manager (invoking its "list" function: "dpkg -l", "rpm -qa --qf ...", or "apk info -v") on the package manager
+database from the target image
+to generate the list of packages installed in the target image.
+If the package manager database type of the target image does not match
+the image inspector's package manager type, the image inspector will redirect
+the request
+to the image inspector that can process the target image (which starts
+again at step 1).</li>
+<li>Translates that package list to BDIO and uploads it to Black Duck, or returns it to the the
+caller (e.g. Detect) to upload to Black Duck.</li>
+<li>Returns the constructed file system to the caller (e.g. Detect) for signature scanning.</li>
+</ol>
 <h3 id="isolating-application-components">Isolating application components</h3>
 <p>If you are interested in components from the application layers of your image, but not interested in components
 from the underlying platform layers, you can exclude components from platform layers from your results.</p>
