@@ -1,5 +1,26 @@
 This section covers a variety of advanced topics.
 
+### How ${solution_name} discovers dependencies
+
+${solution_name} discovers dependencies in the target image by making a request to
+an image inspector service (running inside a container).
+The image inspector service works as follows:
+
+1. Reads the target image, and constructs the file system that the container would have at
+time zero if you were to run the image.
+2. Finds the linux package manager database in that file system.
+3. Runs its own linux package manager (invoking its "list" function: "dpkg -l", "rpm -qa --qf ...", or "apk info -v") on the package manager
+database from the target image
+to generate the list of packages installed in the target image.
+If the package manager database type of the target image does not match
+the image inspector's package manager type, the image inspector will redirect
+the request
+to the image inspector that can process the target image (which starts
+again at step 1).
+4. Translates that package list to BDIO and uploads it to Black Duck, or returns it to the the
+caller (e.g. Detect) to upload to Black Duck.
+5. Returns the constructed file system to the caller (e.g. Detect) for signature scanning.
+
 ### Isolating application components
 
 If you are interested in components from the application layers of your image, but not interested in components
