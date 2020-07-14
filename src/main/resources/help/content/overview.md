@@ -51,7 +51,7 @@ refer to [Deploying](deployment.md).
 Requirements for ${solution_name} are:
 
 * The current version of Black Duck. Visit [this page](${blackduck_release_page}) to determine the current version. 
-* Linux.
+* Linux or MacOS.
 * Access to the internet. For information on running without access to the internet, refer to [Air Gap mode](advanced.md#air-gap-mode).
 * Java (JRE) versions 8 or 11.
 * Three available ports for the image inspector services. By default, these ports are 9000, 9001, and 9002.
