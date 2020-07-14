@@ -461,9 +461,17 @@
                 <p><em>Help version: 9.0.2-SNAPSHOT</em></p>
 <p>Black Duck Docker Inspector inspects Docker images to discover packages (components).
 It utilizes the appropriate Linux package manager to provide a list of
-the packages installed by the package manager, and creates a Black Duck project with a Bill of Materials (BOM) consisting of those packages as components.
-Because it relies on the Linux package manager as its source, the discovered packages are limited to those installed and managed using the Linux package manager.</p>
-<p>Black Duck Docker Inspector can inspect Linux Docker images that use the DPKG, RPM, or APK package manager formats.</p>
+the packages installed by the package manager, and creates a Black Duck 
+project with a Bill of Materials (BOM) consisting of those packages as components.
+Because it relies on the Linux package manager as its source,
+the discovered packages are limited to those installed and managed using the Linux package manager.</p>
+<p>Black Duck Docker Inspector can discover package manager-installed components in
+Linux Docker images that use the DPKG, RPM, or APK package manager formats.</p>
+<p>Black Duck Docker Inspector can inspect non-Linux images (for example, Windows images,
+and images that contain no operating system), but 
+will discover zero components. This can be useful if the target image
+container file system that Black Duck Docker Inspector can produce as output is needed
+for signature scanning.</p>
 <p>After running the Black Duck Docker Inspector on an image, navigate to Black Duck to view the BOM created by 
 Black Duck Docker Inspector.</p>
 <h3 id="modes-of-operation">Modes of operation</h3>

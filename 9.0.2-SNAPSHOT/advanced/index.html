@@ -299,6 +299,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#inspecting-windows-images" class="md-nav__link">
+    Inspecting Windows images
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#inspecting-multiple-images-more-efficiently-by-leaving-services-running" class="md-nav__link">
     Inspecting multiple images more efficiently by leaving services running
   </a>
@@ -475,6 +482,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#inspecting-windows-images" class="md-nav__link">
+    Inspecting Windows images
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#inspecting-multiple-images-more-efficiently-by-leaving-services-running" class="md-nav__link">
     Inspecting multiple images more efficiently by leaving services running
   </a>
@@ -641,6 +655,13 @@ application components by excluding platform components. However, there may be s
 signature scanner because in this scenario, the signature scanner may be deprived of some contextual
 information, such as the operating system files that enable it to determine the Linux distribution.<br />
 This could negatively affect its ability to accurately identify components.</p>
+<h3 id="inspecting-windows-images">Inspecting Windows images</h3>
+<p>Running on a non-Windows system, Docker can neither pull nor build a Windows image.
+Consequently, you cannot run Black Duck Docker Inspector on a Windows Docker image
+using the either the <em>docker.image</em> or <em>docker.image.id</em> property.
+Instead, you must, using a Windows system,
+pull and save the target image as a .tar file, and pass that .tar file
+to Black Duck Docker Inspector using the <em>docker.tar</em> property. </p>
 <h3 id="inspecting-multiple-images-more-efficiently-by-leaving-services-running">Inspecting multiple images more efficiently by leaving services running</h3>
 <p>By default, Black Duck Docker Inspector starts, uses, and then stops and removes either one or two containerized
 image inspector services per run. This may be appropriate when scanning
