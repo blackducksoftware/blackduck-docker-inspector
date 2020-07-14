@@ -3,10 +3,19 @@ _Help version: ${program_version}_
 
 ${solution_name} inspects Docker images to discover packages (components).
 It utilizes the appropriate Linux package manager to provide a list of
-the packages installed by the package manager, and creates a Black Duck project with a Bill of Materials (BOM) consisting of those packages as components.
-Because it relies on the Linux package manager as its source, the discovered packages are limited to those installed and managed using the Linux package manager.
+the packages installed by the package manager, and creates a Black Duck 
+project with a Bill of Materials (BOM) consisting of those packages as components.
+Because it relies on the Linux package manager as its source,
+the discovered packages are limited to those installed and managed using the Linux package manager.
 
-${solution_name} can inspect Linux Docker images that use the DPKG, RPM, or APK package manager formats.
+${solution_name} can discover package manager-installed components in
+Linux Docker images that use the DPKG, RPM, or APK package manager formats.
+
+${solution_name} can inspect non-Linux images (for example, Windows images,
+and images that contain no operating system), but 
+will discover zero components. This can be useful if the target image
+container file system that ${solution_name} can produce as output is needed
+for signature scanning.
 
 After running the ${solution_name} on an image, navigate to Black Duck to view the BOM created by 
 ${solution_name}.

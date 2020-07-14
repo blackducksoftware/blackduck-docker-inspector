@@ -82,6 +82,15 @@ signature scanner because in this scenario, the signature scanner may be deprive
 information, such as the operating system files that enable it to determine the Linux distribution.  
 This could negatively affect its ability to accurately identify components.
 
+### Inspecting Windows images
+
+Running on a non-Windows system, Docker can neither pull nor build a Windows image.
+Consequently, you cannot run ${solution_name} on a Windows Docker image
+using the either the *docker.image* or *docker.image.id* property.
+Instead, you must, using a Windows system,
+pull and save the target image as a .tar file, and pass that .tar file
+to ${solution_name} using the *docker.tar* property. 
+
 ### Inspecting multiple images more efficiently by leaving services running
 
 By default, ${solution_name} starts, uses, and then stops and removes either one or two containerized
