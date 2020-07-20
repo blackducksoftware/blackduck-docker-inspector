@@ -2,8 +2,8 @@
 
 ${solution_name} can be run in either of the following modes:
 
-1. Host mode on a Linux machine or a Linux virtual machine (VM) with Docker. The deployment approach for host mode is referred to below as "utility;" you simply execute a command, and deployment is automatic.
-2. Container mode inside a container running on an orchestration platform such as Kubernetes, OpenShift, among others. The deployment approach for container mode is referred to below as "toolkit;" you take components provided by Docker Inspector (one utility, three containerized services) and deploy them yourself.
+1. Host mode on a Linux machine or a Linux virtual machine (VM) with Docker. In this mode, ${solution_name} starts and stops the image inspector services it uses. The deployment approach for host mode is referred to below as "utility;" you simply execute a command, and deployment is automatic.
+2. Container mode utilizing either Docker or a container running on an orchestration platform such as Kubernetes, OpenShift, among others. In this mode, you start the image inspector services, and ${solution_name} just sends them requests, which complete much faster. The deployment approach for container mode is referred to below as "toolkit;" you take components provided by Docker Inspector (one utility, three containerized services) and deploy them yourself.
 
 Most, but not all, of the following deployment examples use the toolkit approach.
 
@@ -31,7 +31,7 @@ on which it depends. It accesses the services they provide through HTTP GET oper
 
 This is the default mode, and the simplest to use.
 
-### Using container mode in a container orchestration platform such as Kubernetes, OpenShift, and others
+### Using container mode with Docker or a container orchestration platform such as Kubernetes, OpenShift, and others
 
 In this scenario, ${solution_name} is a toolkit consisting of a command line utility that you run in one container, plus
 three container-based services which you must start. These four containers must:
@@ -61,6 +61,18 @@ of redirects, resulting in shorter execution times. For example, if most of your
 you can set *imageinspector.service.distro.default* to *alpine*.
 
 The image inspector service containers are downloaded from Docker Hub (${image_repo_organization}/${inspector_image_name_base}-*).
+
+### Deployment sample for Docker using persistent image inspector services
+
+Approach: Toolkit
+
+Deployment notes: 
+${solution_name} runs on a host that has Docker.
+Each image inspector service runs in a container.
+The shared volume is a directory on the host, mounted into each container.
+The containers communicate through service URLs.
+
+Download: curl -O ${source_raw_content_url_base}/${source_repo_organization}/${project_name}/master/deployment/docker/runDetectAgainstDockerServices/setup.sh
 
 ### Deployment sample for Kubernetes
 
