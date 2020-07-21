@@ -65,11 +65,15 @@ import com.github.dockerjava.api.model.Version;
 import com.github.dockerjava.api.model.Volume;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DefaultDockerClientConfig.Builder;
-import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.DockerClientConfig;
+import com.github.dockerjava.core.DockerClientImpl;
 import com.github.dockerjava.core.command.BuildImageResultCallback;
 import com.github.dockerjava.core.command.LogContainerResultCallback;
 import com.github.dockerjava.core.command.PullImageResultCallback;
+import com.github.dockerjava.httpclient5.ApacheDockerHttpClient;
+import com.github.dockerjava.transport.DockerHttpClient;
+import com.github.dockerjava.httpclient5.ApacheDockerHttpClient;
+
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.exception.DisabledException;
@@ -96,9 +100,16 @@ public class DockerClientManager {
         this.config = config;
         this.imageTarFilename = imageTarFilename;
         this.programPaths = programPaths;
+
         final Builder builder = DefaultDockerClientConfig.createDefaultConfigBuilder();
         final DockerClientConfig dockerClientConfig = builder.build();
-        dockerClient = DockerClientBuilder.getInstance(dockerClientConfig).build();
+
+        DockerHttpClient httpClient = new ApacheDockerHttpClient.Builder()
+                                          .dockerHost(dockerClientConfig.getDockerHost())
+                                          .sslConfig(dockerClientConfig.getSSLConfig())
+                                          .build();
+
+        dockerClient = DockerClientImpl.getInstance(dockerClientConfig, httpClient);
     }
 
     public String getDockerJavaLibraryVersion() {
