@@ -186,7 +186,7 @@ public class DockerClientManager {
     public String startContainerAsService(final String runOnImageName, final String runOnTagName, final String containerName, final ImageInspectorOsEnum inspectorOs, final int containerPort, final int hostPort,
         final String appNameLabelValue,
         final String jarPath,
-        final String inspectorUrlAlpine, final String inspectorUrlCentos, final String inspectorUrlUbuntu) {
+        final String inspectorUrlAlpine, final String inspectorUrlCentos, final String inspectorUrlUbuntu) throws IOException {
         final String imageNameTag = String.format("%s:%s", runOnImageName, runOnTagName);
         logger.info(String.format("Starting container: %s", containerName));
         logger.debug(String.format("\timageNameTag: %s", imageNameTag));

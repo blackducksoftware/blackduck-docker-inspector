@@ -22,6 +22,8 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.config;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -101,8 +103,8 @@ public class Config {
     private String blackDuckProjectVersion = "";
 
     // Working directory
-    @ValueDescription(description = "Working Directory Path", defaultValue = "/tmp/blackduck-docker-inspector-files", group = Config.GROUP_PUBLIC, deprecated = false)
-    @Value("${working.dir.path:/tmp/blackduck-docker-inspector-files}")
+    @ValueDescription(description = "Working Directory Path. If not set, a default of $HOME/blackduck-docker-inspector/files will be used.", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${working.dir.path:}")
     private String workingDirPath = "";
 
     // Path to additional system properties (an alternative to java -D)
@@ -246,9 +248,9 @@ public class Config {
     @Value("${bdio.include.removed.components:false}")
     private Boolean includeRemovedComponents = Boolean.FALSE;
 
-    @ValueDescription(description = "The host's path to the dir shared with the imageinspector containers. Only needed if using existing imageinspector containers", defaultValue = "/tmp/blackduck-docker-inspector-files/shared", group = Config.GROUP_PUBLIC, deprecated = false)
-    @Value("${shared.dir.path.local:/tmp/blackduck-docker-inspector-files/shared}")
-    private String sharedDirPathLocal = "/tmp/blackduck-docker-inspector-files/shared";
+    @ValueDescription(description = "The host's path to the dir shared with the imageinspector containers. Only needed if using existing imageinspector containers. If not set, $HOME/blackduck-docker-inspector/files/shared will be used", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${shared.dir.path.local:}")
+    private String sharedDirPathLocal = "";
 
     @ValueDescription(description = "The container's path to the shared directory. Only needed if using existing imageinspector containers", defaultValue = "/opt/blackduck/blackduck-imageinspector/shared", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${shared.dir.path.imageinspector:/opt/blackduck/blackduck-imageinspector/shared}")
@@ -436,11 +438,22 @@ public class Config {
         return unEscape(optionsByFieldName.get("blackDuckProjectVersion").getResolvedValue());
     }
 
-    public String getWorkingDirPath() {
-        if (StringUtils.isNotBlank(getImageInspectorUrl()) || isImageInspectorServiceStart()) {
-            return optionsByFieldName.get("sharedDirPathLocal").getResolvedValue();
+    public String getSharedDirPathLocal() throws IOException {
+        String givenSharedDirPathLocal = optionsByFieldName.get("sharedDirPathLocal").getResolvedValue();
+        if (StringUtils.isNotBlank(givenSharedDirPathLocal)) {
+            File sharedDirLocal = new File(givenSharedDirPathLocal);
+            return sharedDirLocal.getCanonicalPath();
         }
-        return optionsByFieldName.get("workingDirPath").getResolvedValue();
+        File workingDir = deriveWorkingDir();
+        File sharedDirLocal = new File(workingDir, "shared");
+        return sharedDirLocal.getCanonicalPath();
+    }
+
+    public String getWorkingDirPath() throws IOException {
+        if (StringUtils.isNotBlank(getImageInspectorUrl()) || isImageInspectorServiceStart()) {
+            return getSharedDirPathLocal();
+        }
+        return deriveWorkingDir().getCanonicalPath();
     }
 
     public String getSystemPropertiesPath() {
@@ -529,10 +542,6 @@ public class Config {
 
     public String getSharedDirPathImageInspector() {
         return optionsByFieldName.get("sharedDirPathImageInspector").getResolvedValue();
-    }
-
-    public String getSharedDirPathLocal() {
-        return optionsByFieldName.get("sharedDirPathLocal").getResolvedValue();
     }
 
     public String getImageInspectorUrl() {
@@ -646,6 +655,25 @@ public class Config {
         final String unEscapedString = origString.replace("%20", " ");
         logger.trace(String.format("unEscapedString: %s", unEscapedString));
         return unEscapedString;
+    }
+
+
+    private File deriveWorkingDir() {
+        File workingDir;
+        String givenWorkingDirPath = optionsByFieldName.get("workingDirPath").getResolvedValue();
+        if (StringUtils.isNotBlank(givenWorkingDirPath)) {
+            workingDir = new File(givenWorkingDirPath);
+        } else {
+            workingDir = deriveDefaultWorkingDir();
+        }
+        return workingDir;
+    }
+
+    private File deriveDefaultWorkingDir() {
+        String userHomePath = System.getProperty("user.home");
+        File userHomeDir = new File(userHomePath);
+        File workingDirParentDir = new File(userHomeDir, "blackduck-docker-inspector");
+        return new File(workingDirParentDir, "files");
     }
 
     // This is here to prevent eclipse from making config property members final

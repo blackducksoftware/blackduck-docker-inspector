@@ -24,6 +24,7 @@ package com.synopsys.integration.blackduck.dockerinspector.config;
 
 import com.synopsys.integration.blackduck.dockerinspector.ProcessId;
 import java.io.File;
+import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 
@@ -71,27 +72,27 @@ public class ProgramPaths {
     private String dockerInspectorSquashedImageTarFilePath;
     private String dockerInspectorWorkingOutputPath;
 
-    private String getProgramDirPath() {
+    private String getProgramDirPath() throws IOException {
         final File workingDir = new File(config.getWorkingDirPath());
         logger.debug(String.format("getProgramDirPath(): returning %s", config.getWorkingDirPath()));
         return workingDir.getAbsolutePath();
     }
-
+    // TODO: timing of the execution of this is unknown, potentially introducing errors
     @PostConstruct
-    public void init() {
+    public void init() throws IOException {
         dockerInspectorPgmDirPath = getProgramDirPath();
         logger.debug(String.format("dockerInspectorPgmDirPath: %s", dockerInspectorPgmDirPath));
         dockerInspectorRunDirName = processId.addProcessIdToName(RUNDIR_BASENAME);
         final File runDir = new File(dockerInspectorPgmDirPath, dockerInspectorRunDirName);
-        dockerInspectorRunDirPath = runDir.getAbsolutePath() + "/";
+        dockerInspectorRunDirPath = runDir.getCanonicalPath() + File.separator;
         logger.debug(String.format("dockerInspectorRunDirPath: %s", dockerInspectorRunDirPath));
-        dockerInspectorConfigDirPath = new File(runDir, CONFIG_DIR).getAbsolutePath() + "/";
+        dockerInspectorConfigDirPath = new File(runDir, CONFIG_DIR).getCanonicalPath() + File.separator;
         dockerInspectorConfigFilePath = dockerInspectorConfigDirPath + APPLICATION_PROPERTIES_FILENAME;
-        dockerInspectorTargetDirPath = new File(runDir, TARGET_DIR).getAbsolutePath() + "/";
-        dockerInspectorSquashedImageDirPath = new File(runDir, SQUASHED_IMAGE_DIR).getAbsolutePath() + "/";
+        dockerInspectorTargetDirPath = new File(runDir, TARGET_DIR).getCanonicalPath() + File.separator;
+        dockerInspectorSquashedImageDirPath = new File(runDir, SQUASHED_IMAGE_DIR).getCanonicalPath() + File.separator;
         final File dockerInspectorSquashedImageTarFileDir = new File(runDir, SQUASHED_IMAGE_TARFILE_DIR);
-        dockerInspectorSquashedImageTarFilePath = new File(dockerInspectorSquashedImageTarFileDir, SQUASHED_IMAGE_TARFILE_NAME).getAbsolutePath();
-        dockerInspectorWorkingOutputPath = new File(runDir, OUTPUT_DIR).getAbsolutePath() + "/";
+        dockerInspectorSquashedImageTarFilePath = new File(dockerInspectorSquashedImageTarFileDir, SQUASHED_IMAGE_TARFILE_NAME).getCanonicalPath();
+        dockerInspectorWorkingOutputPath = new File(runDir, OUTPUT_DIR).getCanonicalPath() + File.separator;
     }
 
     public String getUserOutputDirPath() {

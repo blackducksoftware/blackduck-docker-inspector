@@ -36,7 +36,7 @@ public interface ImageInspectorClient {
         String containerPathToOutputFileSystemFile, String containerFileSystemExcludedPaths,
         final boolean organizeComponentsByLayer, final boolean includeRemovedComponents, final boolean cleanup,
         final String platformTopLayerId, final String targetLinuxDistro)
-        throws IntegrationException, MalformedURLException, InterruptedException;
+        throws IntegrationException, IOException, InterruptedException;
 
     boolean isApplicable();
 }
