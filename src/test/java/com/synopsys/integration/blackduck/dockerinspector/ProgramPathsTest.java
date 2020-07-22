@@ -5,7 +5,9 @@ import static org.junit.Assert.assertEquals;
 import java.io.File;
 import java.io.IOException;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -17,15 +19,22 @@ import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 
 @RunWith(SpringRunner.class)
 public class ProgramPathsTest {
+    private static Config config;
+    private static ProcessId processId;
+    private static ProgramPaths programPaths;
+    private static String installDirPath;
 
-    @InjectMocks
-    private ProgramPaths programPaths;
-
-    @Mock
-    private Config config;
-
-    @Mock
-    private ProcessId processId;
+    @BeforeClass
+    public static void setup() throws IOException {
+        config = Mockito.mock(Config.class);
+        processId = Mockito.mock(ProcessId.class);
+        Mockito.when(processId.addProcessIdToName(Mockito.anyString())).thenReturn("run_1");
+        final File installDir = TestUtils.createTempDirectory();
+        installDirPath = installDir.getAbsolutePath();
+        Mockito.when(config.getWorkingDirPath()).thenReturn(installDirPath);
+        Mockito.when(processId.addProcessIdToName(Mockito.anyString())).thenReturn("test");
+        programPaths = new ProgramPaths(config, processId);
+    }
 
     @Test
     public void testReleasedVersion() throws IllegalArgumentException, IllegalAccessException, IOException {
@@ -38,10 +47,7 @@ public class ProgramPathsTest {
     }
 
     private void doTest(final String jarFileName, final boolean prefixCodeLocationName) throws IllegalArgumentException, IllegalAccessException, IOException {
-        final File installDir = TestUtils.createTempDirectory();
-        final String installDirPath = installDir.getAbsolutePath();
-        Mockito.when(config.getWorkingDirPath()).thenReturn(installDirPath);
-        Mockito.when(processId.addProcessIdToName(Mockito.anyString())).thenReturn("test");
+
 
         assertEquals(installDirPath, programPaths.getDockerInspectorPgmDirPath());
         final String runDirPath = programPaths.getDockerInspectorRunDirPath();

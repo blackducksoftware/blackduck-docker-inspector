@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -22,6 +23,7 @@ public class ContainerPathsTest {
     private static final String CONTAINER_PATH_TO_TARGET_FILE = "/opt/blackduck-docker-inspector/shared/run_1/target/alpine.tar";
     private static final String CONTAINER_PATH_TO_OUTPUT_FILE = "/opt/blackduck-docker-inspector/shared/run_1/output/test_out.tar";
 
+    @Disabled
     @Test
     public void testLinux() throws IOException {
         String sharedDirPathLocal = SHARED_DIR_PATH_LOCAL_LINUX;
@@ -31,6 +33,7 @@ public class ContainerPathsTest {
         doTest(sharedDirPathLocal, sharedDirPathContainer, targetFilePathLocal);
     }
 
+    @Disabled
     @Test
     public void testWindows() throws IOException {
         String sharedDirPathLocal = SHARED_DIR_PATH_LOCAL_WINDOWS;
