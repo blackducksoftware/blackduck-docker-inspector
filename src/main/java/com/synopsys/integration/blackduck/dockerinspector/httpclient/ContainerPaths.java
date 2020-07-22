@@ -51,8 +51,8 @@ public class ContainerPaths {
      * Translate a local path (to a file within the dir shared with the container) to the equivalent path for the container. Find path to the given localPath RELATIVE to the local shared dir. Convert that to the container's path by
      * appending that relative path to the container's path to the shared dir
      */
-    public String getContainerPathToTargetFile(final String localPathToTargetFile) throws IOException {
-
+    public String getContainerPathToTargetFile(String localPathToTargetFile) throws IOException {
+        localPathToTargetFile = toLinux(localPathToTargetFile);
         logger.debug(String.format("localPathToTargetFile: %s", localPathToTargetFile));
         final String sharedDirPathLocal = toLinux(new File(config.getSharedDirPathLocal()).getCanonicalPath());
         logger.debug(String.format("sharedDirPathLocal: %s", sharedDirPathLocal));
@@ -74,7 +74,8 @@ public class ContainerPaths {
     }
 
     private String toLinux(final String givenPath) {
-        return File.separator + FilenameUtils.separatorsToSystem(givenPath).substring(FilenameUtils.getPrefixLength(givenPath));
+        String drivelessPath = File.separator + FilenameUtils.separatorsToSystem(givenPath).substring(FilenameUtils.getPrefixLength(givenPath));
+        return drivelessPath.replace('\\', '/');
     }
 
     private File getContainerOutputDir() {

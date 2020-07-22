@@ -13,14 +13,14 @@ import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 
 public class ContainerPathsTest {
 
-    private static final String TARGET_FILE_PATH_LOCAL_WINDOWS = "C:\\Users\\Administrator\\blackduck-docker-inspector\\files\\shared\\run1\\target\\alpine.tar";
-    private static final String TARGET_FILE_PATH_LOCAL_LINUX = "/Users/Administrator/blackduck-docker-inspector/files/shared/run1/target/alpine.tar";
+    private static final String TARGET_FILE_PATH_LOCAL_WINDOWS = "C:\\Users\\Administrator\\blackduck-docker-inspector\\files\\shared\\run_1\\target\\alpine.tar";
+    private static final String TARGET_FILE_PATH_LOCAL_LINUX = "/Users/Administrator/blackduck-docker-inspector/files/shared/run_1/target/alpine.tar";
     private static final String SHARED_DIR_PATH_LOCAL_LINUX = "/Users/Administrator/blackduck-docker-inspector/files/shared";
     private static final String SHARED_DIR_PATH_LOCAL_WINDOWS = "C:\\Users\\Administrator\\blackduck-docker-inspector\\files\\shared";
     private static final String SHARED_DIR_PATH_CONTAINER_LINUX = "/opt/blackduck-docker-inspector/shared";
     private static final String SHARED_DIR_PATH_CONTAINER_WINDOWS = "C:\\opt\\blackduck-docker-inspector\\shared";
-    private static final String CONTAINER_PATH_TO_TARGET_FILE = "/opt/blackduck-docker-inspector/shared/run1/target/alpine.tar";
-    private static final String CONTAINER_PATH_TO_OUTPUT_FILE = "/opt/blackduck-docker-inspector/shared/run_null/output/test_out.tar";
+    private static final String CONTAINER_PATH_TO_TARGET_FILE = "/opt/blackduck-docker-inspector/shared/run_1/target/alpine.tar";
+    private static final String CONTAINER_PATH_TO_OUTPUT_FILE = "/opt/blackduck-docker-inspector/shared/run_1/output/test_out.tar";
 
     @Test
     public void testLinux() throws IOException {
@@ -46,7 +46,8 @@ public class ContainerPathsTest {
         Mockito.when(config.getSharedDirPathLocal()).thenReturn(sharedDirPathLocal);
         Mockito.when(config.getSharedDirPathImageInspector()).thenReturn(sharedDirPathContainer);
         Mockito.when(config.getWorkingDirPath()).thenReturn(sharedDirPathLocal);
-        ProcessId processId = new ProcessId();
+        ProcessId processId = Mockito.mock(ProcessId.class);
+        Mockito.when(processId.addProcessIdToName("run")).thenReturn("run_1");
         ProgramPaths programPaths = new ProgramPaths(config, processId);
         ContainerPaths containerPaths = new ContainerPaths(config, programPaths);
 
