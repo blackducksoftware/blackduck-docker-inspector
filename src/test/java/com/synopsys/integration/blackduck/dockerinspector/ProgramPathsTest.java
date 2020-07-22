@@ -42,7 +42,6 @@ public class ProgramPathsTest {
         final String installDirPath = installDir.getAbsolutePath();
         Mockito.when(config.getWorkingDirPath()).thenReturn(installDirPath);
         Mockito.when(processId.addProcessIdToName(Mockito.anyString())).thenReturn("test");
-        programPaths.init();
 
         assertEquals(installDirPath, programPaths.getDockerInspectorPgmDirPath());
         final String runDirPath = programPaths.getDockerInspectorRunDirPath();

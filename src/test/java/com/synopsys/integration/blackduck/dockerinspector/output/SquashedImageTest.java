@@ -27,15 +27,10 @@ public class SquashedImageTest {
     private static DockerClientManager dockerClientManager;
 
     @BeforeAll
-    public static void setUp() {
+    public static void setUp() throws IOException {
         final ImageTarFilename imageTarFilename = new ImageTarFilename();
-        final ProgramPaths programPaths = new ProgramPaths();
+        final ProgramPaths programPaths = new ProgramPaths(null, new ProcessId());
         dockerClientManager = new DockerClientManager(null, imageTarFilename, programPaths);
-        final ProcessId processId = new ProcessId();
-
-        programPaths.setConfig(null);
-        programPaths.setProcessId(processId);
-
 
         squashedImage = new SquashedImage();
         squashedImage.setDockerClientManager(dockerClientManager);

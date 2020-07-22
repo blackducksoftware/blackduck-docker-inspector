@@ -38,17 +38,6 @@ import org.springframework.stereotype.Component;
 public class ProgramPaths {
     private Config config;
     private ProcessId processId;
-
-    @Autowired
-    public void setConfig(final Config config) {
-        this.config = config;
-    }
-
-    @Autowired
-    public void setProcessId(final ProcessId processId) {
-        this.processId = processId;
-    }
-
     public static final String RESULTS_JSON_FILENAME = "results.json";
     private static final String RUNDIR_BASENAME = "run";
     public static final String OUTPUT_DIR = "output";
@@ -72,14 +61,11 @@ public class ProgramPaths {
     private String dockerInspectorSquashedImageTarFilePath;
     private String dockerInspectorWorkingOutputPath;
 
-    private String getProgramDirPath() throws IOException {
-        final File workingDir = new File(config.getWorkingDirPath());
-        logger.debug(String.format("getProgramDirPath(): returning %s", config.getWorkingDirPath()));
-        return workingDir.getAbsolutePath();
-    }
-    // TODO: timing of the execution of this is unknown, potentially introducing errors
-    @PostConstruct
-    public void init() throws IOException {
+    @Autowired
+    public ProgramPaths(Config config, ProcessId processId) throws IOException {
+        this.config = config;
+        this.processId = processId;
+
         dockerInspectorPgmDirPath = getProgramDirPath();
         logger.debug(String.format("dockerInspectorPgmDirPath: %s", dockerInspectorPgmDirPath));
         dockerInspectorRunDirName = processId.addProcessIdToName(RUNDIR_BASENAME);
@@ -93,6 +79,12 @@ public class ProgramPaths {
         final File dockerInspectorSquashedImageTarFileDir = new File(runDir, SQUASHED_IMAGE_TARFILE_DIR);
         dockerInspectorSquashedImageTarFilePath = new File(dockerInspectorSquashedImageTarFileDir, SQUASHED_IMAGE_TARFILE_NAME).getCanonicalPath();
         dockerInspectorWorkingOutputPath = new File(runDir, OUTPUT_DIR).getCanonicalPath() + File.separator;
+    }
+
+    private String getProgramDirPath() throws IOException {
+        final File workingDir = new File(config.getWorkingDirPath());
+        logger.debug(String.format("getProgramDirPath(): returning %s", config.getWorkingDirPath()));
+        return workingDir.getAbsolutePath();
     }
 
     public String getUserOutputDirPath() {

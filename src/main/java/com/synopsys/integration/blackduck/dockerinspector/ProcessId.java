@@ -34,6 +34,7 @@ public class ProcessId {
   private final Logger logger = LoggerFactory.getLogger(this.getClass());
   private String cleanedProcessId;
 
+  // TODO eliminate postConstruct
   @PostConstruct
   public void init() {
     cleanedProcessId = atSignToUnderscore(getProcessIdOrGenerateUniqueId());

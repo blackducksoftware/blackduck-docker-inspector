@@ -1,5 +1,6 @@
 package com.synopsys.integration.blackduck.dockerinspector.dockerclient;
 
+import com.synopsys.integration.blackduck.dockerinspector.ProcessId;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarFilename;
@@ -31,7 +32,7 @@ public class DockerClientIT {
         Mockito.when(config.getSharedDirPathLocal()).thenReturn(sharedDir.getCanonicalPath());
 
         final ImageTarFilename imageTarFilename = new ImageTarFilename();
-        final ProgramPaths programPaths = new ProgramPaths();
+        final ProgramPaths programPaths = new ProgramPaths(config, new ProcessId());
 
         DockerClientManager dockerClientManager = new DockerClientManager(config, imageTarFilename, programPaths);
         System.out.printf("docker engine version: %s", dockerClientManager.getDockerEngineVersion());
