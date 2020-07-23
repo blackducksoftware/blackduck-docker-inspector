@@ -272,6 +272,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#enabling-file-sharing-in-docker" class="md-nav__link">
+    Enabling file sharing in Docker
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#isolating-application-components" class="md-nav__link">
     Isolating application components
   </a>
@@ -455,6 +462,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#enabling-file-sharing-in-docker" class="md-nav__link">
+    Enabling file sharing in Docker
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#isolating-application-components" class="md-nav__link">
     Isolating application components
   </a>
@@ -605,6 +619,10 @@ again at step 1).</li>
 caller (e.g. Detect) to upload to Black Duck.</li>
 <li>Returns the constructed file system to the caller (e.g. Detect) for signature scanning.</li>
 </ol>
+<h3 id="enabling-file-sharing-in-docker">Enabling file sharing in Docker</h3>
+<p>Docker may restrict file sharing to certain directories that you've configured in
+Docker &gt; Settings &gt; Resource &gt; File Sharing. To enable Black Duck Docker Inspector to mount the volumes
+that it needs, you may need to enabling file sharing for directory $HOME/blackduck.</p>
 <h3 id="isolating-application-components">Isolating application components</h3>
 <p>If you are interested in components from the application layers of your image, but not interested in components
 from the underlying platform layers, you can exclude components from platform layers from your results.</p>
