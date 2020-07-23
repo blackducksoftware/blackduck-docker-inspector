@@ -174,7 +174,7 @@ To run in Air Gap mode, use the command:
 ### Configuring ${solution_name} for your Docker Engine and registry
 
 If you invoke ${solution_name} with an image reference; in other words, a repo:tag value versus a .tar file,
-it uses the docker-java library (${docker_java_project_url}) to access the Docker registry to pull the image.
+it uses the [docker-java library](${docker_java_project_url}) to access the Docker registry to pull the image.
 
 If *docker pull* works from the command line, then ${solution_name} is able to pull that image,
 because docker-java can be configured the same way as the Docker command line utility (*docker*).
@@ -183,13 +183,14 @@ There are also other ways to configure docker-java. For more information on conf
 (and therefore ${solution_name}) for your Docker registry, refer to:
 ${docker_java_project_url}#Configuration.
 
+If you need to override the DOCKER_HOST value, set property *use.platform.default.docker.host* to false.
+When *use.platform.default.docker.host* is set to false,
 ${solution_name} does not override any of the configuration settings in the code,
 so all other methods such as properties, system properties, and system environment, are available to you.
 
-If you use environment variables, and you are calling ${solution_name} from Detect,
-you must prefix the environment variable names with DETECT_DOCKER_PASSTHROUGH_ to
-instruct Detect to pass them on to ${solution_name}. In this scenario,
-instead of *export SOMENAME=value*, use *export DETECT_DOCKER_PASSTHROUGH_SOMENAME=value*.
+When *use.platform.default.docker.host* is set to true (the default value) *and* ${solution_name} is running
+on Windows, ${solution_name} overrides only the DOCKER_HOST value
+(setting it to "npipe:////./pipe/docker_engine").
 
 To use system properties which are normally set using java -D,
 and if you are calling ${solution_name} from Detect, you must put the properties
