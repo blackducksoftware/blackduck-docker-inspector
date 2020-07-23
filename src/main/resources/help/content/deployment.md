@@ -2,7 +2,7 @@
 
 ${solution_name} can be run in either of the following modes:
 
-1. Host mode on a Linux machine or a Linux virtual machine (VM) with Docker. In this mode, ${solution_name} starts and stops the image inspector services it uses. The deployment approach for host mode is referred to below as "utility;" you simply execute a command, and deployment is automatic.
+1. Host mode on a server or virtual machine (VM) with Docker. In this mode, ${solution_name} starts and stops the image inspector services it uses. The deployment approach for host mode is referred to below as "utility;" you simply execute a command, and deployment is automatic.
 2. Container mode utilizing either Docker or a container running on an orchestration platform such as Kubernetes, OpenShift, among others. In this mode, you start the image inspector services, and ${solution_name} just sends them requests, which complete much faster. The deployment approach for container mode is referred to below as "toolkit;" you take components provided by Docker Inspector (one utility, three containerized services) and deploy them yourself.
 
 Most, but not all, of the following deployment examples use the toolkit approach.
@@ -16,7 +16,7 @@ You should understand the code before you use it. They do not represent the only
 Your deployment approach is the same whether you are invoking ${solution_name} directly, or invoking it using Detect.
 Most of the sample deployments use Detect simply because that is the most common use case.
 
-### Using host mode on a Linux machine or Linux VM with Docker
+### Using host mode on a server or VM with Docker
 
 In this scenario, ${solution_name} is a command line utility that automatically pulls/runs and uses container-based services,  
 and cleans them up when it's done. The Docker command, if installed on the machine, can be very useful for troubleshooting, but is not actually

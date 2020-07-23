@@ -9,7 +9,7 @@ Because it relies on the Linux package manager as its source,
 the discovered packages are limited to those installed and managed using the Linux package manager.
 
 ${solution_name} can discover package manager-installed components in
-Linux Docker images that use the DPKG, RPM, or APK package manager formats.
+Linux Docker images that use the DPKG, RPM, or APK package manager database formats.
 
 ${solution_name} can inspect non-Linux images (for example, Windows images,
 and images that contain no operating system), but 
@@ -24,12 +24,12 @@ ${solution_name}.
 
 ${solution_name} has two modes:
 
-* Host mode, for running on a Linux machine/Linux virtual machine (VM) where ${solution_name} can perform Docker operations using a Docker Engine.
+* Host mode, for running on a server or virtual machine (VM) where ${solution_name} can perform Docker operations using a Docker Engine.
 * Container mode, for running in a container started by Docker, Kubernetes, OpenShift, and others.
 
 #### Host mode
 
-Host mode (default) is for Linux machines/VMs where ${solution_name} can perform Docker operations using a Docker Engine.
+Host mode (default) is for servers/VMs where ${solution_name} can perform Docker operations using a Docker Engine.
 
 In host mode, ${solution_name} is a utility that automates the process of using Black Duck to discover security, license, and operational risks
 associated with Linux-based Docker images. It discovers components using the target Docker image's package manager; therefore, the results
@@ -51,7 +51,7 @@ refer to [Deploying](deployment.md).
 Requirements for ${solution_name} are:
 
 * The current version of Black Duck. Visit [this page](${blackduck_release_page}) to determine the current version. 
-* Linux or MacOS.
+* Linux, MacOS, or Windows 10 Enterprise.
 * Access to the internet. For information on running without access to the internet, refer to [Air Gap mode](advanced.md#air-gap-mode).
 * Java (JRE) versions 8 or 11.
 * Three available ports for the image inspector services. By default, these ports are 9000, 9001, and 9002.

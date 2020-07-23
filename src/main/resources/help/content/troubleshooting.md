@@ -14,15 +14,15 @@ Solution/workaround: Set the character encoding to UTF-8 when invoking Java:
                      
     java -Dfile.encoding=UTF-8 ...
     
-### Problem: You must run ${solution_name} on a non-Linux computer.
+### Problem: You must run ${solution_name} on an unsupported operating system.
 
 Solution/workaround: You may be able to run ${solution_name} within a Linux Docker container running on
-your non-Linux computer using the following process.
+your unsupported operating system using the following process.
 
 Warning: This method involves running a privileged container
 which will not be acceptable in some environments.
 
-On your non-Linux computer, run:
+On your unsupported operating system, run:
 
     docker run -it -d --name inspectorhost --privileged ${image_repo_organization}/${inspector_image_name_base}-ubuntu:3.0.0
     docker attach inspectorhost

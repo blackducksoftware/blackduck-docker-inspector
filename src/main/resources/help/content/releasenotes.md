@@ -1,3 +1,8 @@
+#### Version 9.1.0
+##### New features
+* Added support for running on Windows 10 Enterprise Edition.
+* Added property use.platform.default.docker.host (default to true).
+
 #### Version 9.0.1
 ##### Resolved issues
 * Resolved an issue that could cause files to be omitted from the squashed image produced by ${solution_name}. The problem occurred on images that declared a directory opaque and added files to that directory within the same layer that declared it opaque.
