@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 
+import org.apache.commons.lang3.SystemUtils;
+import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -26,6 +28,7 @@ public class ContainerPathsTest {
     @Disabled
     @Test
     public void testLinux() throws IOException {
+        Assumptions.assumeFalse(SystemUtils.IS_OS_WINDOWS);
         String sharedDirPathLocal = SHARED_DIR_PATH_LOCAL_LINUX;
         String sharedDirPathContainer = SHARED_DIR_PATH_CONTAINER_LINUX;
         String targetFilePathLocal = TARGET_FILE_PATH_LOCAL_LINUX;
@@ -36,6 +39,7 @@ public class ContainerPathsTest {
     @Disabled
     @Test
     public void testWindows() throws IOException {
+        Assumptions.assumeTrue(SystemUtils.IS_OS_WINDOWS);
         String sharedDirPathLocal = SHARED_DIR_PATH_LOCAL_WINDOWS;
         String sharedDirPathContainer = SHARED_DIR_PATH_CONTAINER_WINDOWS;
         String targetFilePathLocal = TARGET_FILE_PATH_LOCAL_WINDOWS;
