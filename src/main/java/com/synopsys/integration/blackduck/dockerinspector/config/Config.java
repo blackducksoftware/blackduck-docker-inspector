@@ -103,7 +103,7 @@ public class Config {
     private String blackDuckProjectVersion = "";
 
     // Working directory
-    @ValueDescription(description = "Working Directory Path. If not set, a default of $HOME/blackduck-docker-inspector/files will be used.", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Working Directory Path. If not set, a default of $HOME/blackduck/docker-inspector will be used.", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${working.dir.path:}")
     private String workingDirPath = "";
 
@@ -252,7 +252,7 @@ public class Config {
     @Value("${bdio.include.removed.components:false}")
     private Boolean includeRemovedComponents = Boolean.FALSE;
 
-    @ValueDescription(description = "The host's path to the dir shared with the imageinspector containers. Only needed if using existing imageinspector containers. If not set, $HOME/blackduck-docker-inspector/files/shared will be used", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "The host's path to the dir shared with the imageinspector containers. Only needed if using existing imageinspector containers. If not set, $HOME/blackduck/docker-inspector/shared will be used", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${shared.dir.path.local:}")
     private String sharedDirPathLocal = "";
 
@@ -680,8 +680,8 @@ public class Config {
     private File deriveDefaultWorkingDir() {
         String userHomePath = System.getProperty("user.home");
         File userHomeDir = new File(userHomePath);
-        File workingDirParentDir = new File(userHomeDir, "blackduck-docker-inspector");
-        return new File(workingDirParentDir, "files");
+        File blackDuckDir = new File(userHomeDir, "blackduck");
+        return new File(blackDuckDir, "docker-inspector");
     }
 
     // This is here to prevent eclipse from making config property members final

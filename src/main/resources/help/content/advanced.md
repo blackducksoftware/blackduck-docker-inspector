@@ -21,6 +21,12 @@ again at step 1).
 caller (e.g. Detect) to upload to Black Duck.
 5. Returns the constructed file system to the caller (e.g. Detect) for signature scanning.
 
+### Enabling file sharing in Docker
+
+Docker may restrict file sharing to certain directories that you've configured in
+Docker > Settings > Resource > File Sharing. To enable ${solution_name} to mount the volumes
+that it needs, you may need to enabling file sharing for directory $HOME/blackduck.
+
 ### Isolating application components
 
 If you are interested in components from the application layers of your image, but not interested in components

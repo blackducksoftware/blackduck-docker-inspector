@@ -4,7 +4,7 @@
 * Added property use.platform.default.docker.host (default to true).
 
 #### Changed feature
-* Changed default working directory from /tmp to $HOME/blackduck-docker-inspector
+* Changed default working directory from /tmp to $HOME/blackduck/docker-inspector
 
 #### Version 9.0.1
 ##### Resolved issues
