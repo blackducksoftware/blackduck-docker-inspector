@@ -106,7 +106,7 @@ public class DockerClientManager {
         // The java-docker library's default docker host value is the Linux/Mac default value, so no action required
         // But for Windows, unless told not to: use the Windows default docker host value
         if (config.isUsePlatformDefaultDockerHost() &&
-                (OperatingSystemType.determineFromSystem() == OperatingSystemType.WINDOWS) {
+                (OperatingSystemType.determineFromSystem() == OperatingSystemType.WINDOWS)) {
             builder = builder
                 .withDockerHost("npipe:////./pipe/docker_engine");
         }
