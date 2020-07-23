@@ -109,7 +109,3 @@ curl -O https://detect.synopsys.com/detect.sh
 chmod +x detect.sh
 
 ./detect.sh --blackduck.offline.mode=true --detect.tools.excluded=SIGNATURE_SCAN,POLARIS --detect.docker.image=alpine:latest --detect.docker.path.required=false --detect.docker.passthrough.imageinspector.service.url=http://localhost:9002 --detect.docker.passthrough.imageinspector.service.start=false --logging.level.com.synopsys.integration=INFO --detect.docker.passthrough.shared.dir.path.local=${localSharedDirPath}
-
-./detect.sh --blackduck.offline.mode=true --detect.tools.excluded=SIGNATURE_SCAN,POLARIS --detect.docker.image=alpine:latest --detect.docker.path.required=false --detect.docker.passthrough.imageinspector.service.url=http://localhost:9002 --detect.docker.passthrough.imageinspector.service.start=false --logging.level.com.synopsys.integration=INFO --detect.docker.passthrough.shared.dir.path.local=${localSharedDirPath}
-
-./detect.sh --blackduck.offline.mode=true --detect.tools.excluded=SIGNATURE_SCAN,POLARIS --detect.docker.image=alpine:latest --detect.docker.path.required=false --detect.docker.passthrough.imageinspector.service.url=http://localhost:9002 --detect.docker.passthrough.imageinspector.service.start=false --logging.level.com.synopsys.integration=INFO --detect.docker.passthrough.shared.dir.path.local=${localSharedDirPath}
