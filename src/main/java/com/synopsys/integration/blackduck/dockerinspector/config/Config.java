@@ -175,6 +175,10 @@ public class Config {
     @Value("${jar.path:}")
     private String jarPath = "";
 
+    @ValueDescription(description = "Use platform's default DOCKER_HOST value? Set to false if you want to override DOCKER_HOST", defaultValue = "true", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${use.platform.default.docker.host:true}")
+    private Boolean usePlatformDefaultDockerHost = Boolean.TRUE;
+
     // The following properties should not normally be set/changed by the user
     @ValueDescription(description = "Docker Image name:tag", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${docker.image:}")
@@ -484,6 +488,10 @@ public class Config {
         return optionsByFieldName.get("outputIncludeSquashedImage").getResolvedValue().equals("true");
     }
 
+    public boolean isUsePlatformDefaultDockerHost() {
+        return optionsByFieldName.get("usePlatformDefaultDockerHost").getResolvedValue().equals("true");
+    }
+
     public String getBlackDuckCodelocationPrefix() {
         return optionsByFieldName.get("blackDuckCodelocationPrefix").getResolvedValue();
     }
@@ -713,6 +721,7 @@ public class Config {
         this.loggingLevel = null;
         this.outputIncludeContainerfilesystem = null;
         this.outputIncludeSquashedImage = null;
+        this.usePlatformDefaultDockerHost = null;
         this.containerFileSystemExcludedPaths = null;
         this.outputPath = null;
         this.phoneHome = null;

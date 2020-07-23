@@ -83,6 +83,7 @@ import com.synopsys.integration.blackduck.exception.BlackDuckIntegrationExceptio
 import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 import com.synopsys.integration.blackduck.imageinspector.api.name.ImageNameResolver;
 import com.synopsys.integration.exception.IntegrationException;
+import com.synopsys.integration.util.OperatingSystemType;
 
 @Component
 public class DockerClientManager {
@@ -101,7 +102,15 @@ public class DockerClientManager {
         this.imageTarFilename = imageTarFilename;
         this.programPaths = programPaths;
 
-        final Builder builder = DefaultDockerClientConfig.createDefaultConfigBuilder();
+        Builder builder = DefaultDockerClientConfig.createDefaultConfigBuilder();
+        // The java-docker library's default docker host value is the Linux/Mac default value, so no action required
+        // But for Windows, unless told not to: use the Windows default docker host value
+        if (config.isUsePlatformDefaultDockerHost() &&
+                (OperatingSystemType.determineFromSystem() == OperatingSystemType.WINDOWS) {
+            builder = builder
+                .withDockerHost("npipe:////./pipe/docker_engine");
+        }
+
         final DockerClientConfig dockerClientConfig = builder.build();
 
         DockerHttpClient httpClient = new ApacheDockerHttpClient.Builder()
