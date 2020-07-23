@@ -14,8 +14,10 @@ import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import com.synopsys.integration.blackduck.dockerinspector.ProcessId;
+import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
 import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
@@ -25,12 +27,16 @@ import com.synopsys.integration.exception.IntegrationException;
 public class SquashedImageTest {
     private static SquashedImage squashedImage;
     private static DockerClientManager dockerClientManager;
+    private static File testWorkingDir;
 
     @BeforeAll
     public static void setUp() throws IOException {
+        testWorkingDir = new File("test/output/squashingTest");
         final ImageTarFilename imageTarFilename = new ImageTarFilename();
-        final ProgramPaths programPaths = new ProgramPaths(null, new ProcessId());
-        dockerClientManager = new DockerClientManager(null, imageTarFilename, programPaths);
+        Config config = Mockito.mock(Config.class);
+        Mockito.when(config.getWorkingDirPath()).thenReturn(testWorkingDir.getCanonicalPath());
+        final ProgramPaths programPaths = new ProgramPaths(config, new ProcessId());
+        dockerClientManager = new DockerClientManager(config, imageTarFilename, programPaths);
 
         squashedImage = new SquashedImage();
         squashedImage.setDockerClientManager(dockerClientManager);
@@ -41,7 +47,7 @@ public class SquashedImageTest {
     public void testCreateSquashedImageTarGz() throws IOException, IntegrationException {
 
         final File targetImageFileSystemTarGz = new File("src/test/resources/test_containerfilesystem.tar.gz");
-        final File testWorkingDir = new File("test/output/squashingTest");
+
         FileUtils.deleteDirectory(testWorkingDir);
         final File tempTarFile = new File(testWorkingDir, "tempContainerFileSystem.tar");
         final File squashingWorkingDir = new File(testWorkingDir, "squashingCode");

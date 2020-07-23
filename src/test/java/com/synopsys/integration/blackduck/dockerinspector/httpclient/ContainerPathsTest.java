@@ -25,7 +25,6 @@ public class ContainerPathsTest {
     private static final String CONTAINER_PATH_TO_TARGET_FILE = "/opt/blackduck-docker-inspector/shared/run_1/target/alpine.tar";
     private static final String CONTAINER_PATH_TO_OUTPUT_FILE = "/opt/blackduck-docker-inspector/shared/run_1/output/test_out.tar";
 
-    @Disabled
     @Test
     public void testLinux() throws IOException {
         Assumptions.assumeFalse(SystemUtils.IS_OS_WINDOWS);
@@ -36,7 +35,6 @@ public class ContainerPathsTest {
         doTest(sharedDirPathLocal, sharedDirPathContainer, targetFilePathLocal);
     }
 
-    @Disabled
     @Test
     public void testWindows() throws IOException {
         Assumptions.assumeTrue(SystemUtils.IS_OS_WINDOWS);
