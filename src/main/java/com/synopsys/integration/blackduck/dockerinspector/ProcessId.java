@@ -32,11 +32,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProcessId {
   private final Logger logger = LoggerFactory.getLogger(this.getClass());
-  private String cleanedProcessId;
+  private final String cleanedProcessId;
 
-  // TODO eliminate postConstruct
-  @PostConstruct
-  public void init() {
+
+  public ProcessId() {
     cleanedProcessId = atSignToUnderscore(getProcessIdOrGenerateUniqueId());
     logger.debug(String.format("Process name: %s", cleanedProcessId));
   }
