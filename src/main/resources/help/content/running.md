@@ -1,4 +1,49 @@
-### Running the latest version
+### Considerations when running on Windows
+
+#### Run from Detect, or run the ${solution_name} .jar file directly
+
+The following is only a consideration if you are not running ${solution_name}
+from Detect.
+
+When executing ${solution_name} directly on Linx or Mac,
+you can use the ${solution_name} bash script (script_name) that:
+
+1. Downloads (if necessary) the latest ${solution_name} .jar file, and
+2. Executes it with the arguments you have provided.
+
+There is no equivalent script for Windows, so on Windows you must download
+the ${solution_name} .jar and execute it directly.
+
+Download the ${solution_name} .jar file from the
+[Synopsys artifactory server](${binary_repo_url_base}/webapp/#/artifacts/browse/tree/General/bds-integrations-snapshot/com/synopsys/integration/blackduck-docker-inspector).
+
+To execute the ${solution_name} .jar:
+
+````
+java -jar ${project_name}-{version}.jar {${solution_name} arguments}
+````
+
+#### Docker restrictions
+
+Docker on Windows has restrictions that impact ${solution_name}:
+
+1. Docker can be configured to pull either Linix images, or Windows images.
+You can see how your Docker installation is configured by looking
+at the *OSType* value in the output of the *docker info* command.
+If Docker is configured for Linix images, it cannot pull Windows images,
+and vice versa. The command to change Docker's *OSType* value appears
+in the Docker Desktop menu. Refer to Docker documentation for more information.
+2. When pulling Windows images, Docker requires (a) that the architecture of the
+pulled image matches the architecture of your machine, and (b) that the Windows version
+of the pulled image is a close match to the Windows version of your machine.
+
+It is a good practice to make sure you can pull the target
+image using the *docker pull* command from the command line. If Docker
+cannot pull the image, then ${solution_name} won't be able to either.
+If you cannot pull the image from the command line, consider
+both of the potential issues mentioned above.`
+
+### Running the latest version (Linux/Mac only)
 
 The following command format always fetches and runs the latest version of ${solution_name}:
 
@@ -22,7 +67,7 @@ Another alternative is to download the ${solution_name} .jar (using the script) 
     bash <(curl -s ${script_hosting_scheme}://${source_repo_organization}.${script_hosting_domain}/${project_name}/${script_name}) --pulljar
     java -jar ${project_name}-{version}.jar {${solution_name} arguments}
 
-### Running a specific version
+### Running a specific version (Linux/Mac only)
 
 By default, ${script_name} runs the latest version of
 ${solution_name} by downloading, if necessary, and running the latest ${solution_name} .jar.
@@ -45,14 +90,24 @@ You can download any version of the ${solution_name} .jar from ${binary_repo_url
 
 Use the following Java command to run it:
 
-    java -jar ${project_name}-{version}.jar {${solution_name} arguments}
+````
+java -jar ${project_name}-{version}.jar {${solution_name} arguments}
+````
 
 ### Inspecting an image by image repo:tag
 
 To run ${solution_name} on a Docker image from your local cache or a registry:
 
-    ./${script_name} --docker.image={repo}:{tag}
+````
+./${script_name} --docker.image={repo}:{tag}
+````
 
+Or:
+
+````
+java -jar ${project_name}-{version}.jar --docker.image={repo}:{tag}
+````
+    
 If you omit the :{tag}, it defaults to :latest.
 
 ### Inspecting an image saved to a .tar file
