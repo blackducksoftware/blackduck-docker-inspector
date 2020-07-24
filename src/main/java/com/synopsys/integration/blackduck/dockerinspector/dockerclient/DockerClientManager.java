@@ -134,7 +134,7 @@ public class DockerClientManager {
         InspectImageResponse imageDetails = inspectImageCmd.exec();
         List<String> repoTags = imageDetails.getRepoTags();
         if (repoTags == null || repoTags.isEmpty()) {
-            throw new BlackDuckIntegrationException(String.format("Unable to get image name:tag for image ID %s", imageId));
+            throw new IntegrationException(String.format("Unable to get image name:tag for image ID %s", imageId));
         }
 
         ImageNameResolver resolver = new ImageNameResolver(repoTags.get(0));
@@ -216,11 +216,11 @@ public class DockerClientManager {
         portBindings.bind(exposedPort, Binding.bindPort(hostPort));
         HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(portBindings).withBinds(bindMount);
         try (CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageNameTag)
-                                                               .withName(containerName)
-                                                               .withLabels(labels)
-                                                               .withExposedPorts(exposedPort)
-                                                               .withHostConfig(hostConfig)
-                                                               .withCmd(cmd.split(" "))) {
+                                                         .withName(containerName)
+                                                         .withLabels(labels)
+                                                         .withExposedPorts(exposedPort)
+                                                         .withHostConfig(hostConfig)
+                                                         .withCmd(cmd.split(" "))) {
 
             List<String> envAssignments = new ArrayList<>();
             if (StringUtils.isBlank(config.getBlackDuckProxyHost()) && !StringUtils.isBlank(config.getScanCliOptsEnvVar())) {
@@ -245,8 +245,8 @@ public class DockerClientManager {
     public String buildImage(File dockerBuildDir, Set<String> tags) {
         BuildImageResultCallback callback = new BuildImageResultCallback();
         String imageId = dockerClient.buildImageCmd(dockerBuildDir)
-                                   .withTags(tags)
-                                   .exec(callback).awaitImageId();
+                             .withTags(tags)
+                             .exec(callback).awaitImageId();
         logger.debug(String.format("Built image: %s", imageId));
         return imageId;
     }
@@ -330,7 +330,7 @@ public class DockerClientManager {
         }
     }
 
-    private File saveImageToDir(File imageTarDirectory, String imageTarFilename, String imageName, String tagName) throws IOException, IntegrationException {
+    private File saveImageToDir(File imageTarDirectory, String imageTarFilename, String imageName, String tagName) throws IOException {
         imageTarDirectory.mkdirs();
         File imageTarFile = new File(imageTarDirectory, imageTarFilename);
         Files.deleteIfExists(imageTarFile.toPath());
@@ -426,8 +426,7 @@ public class DockerClientManager {
         logger.debug(String.format("Mounting host:%s to container:%s", pathOnHost, pathOnContainer));
         File dirOnHost = new File(pathOnHost);
         Volume volume = new Volume(pathOnContainer);
-        Bind bind = new Bind(dirOnHost.getAbsolutePath(), volume, AccessMode.rw);
-        return bind;
+        return new Bind(dirOnHost.getAbsolutePath(), volume, AccessMode.rw);
     }
 
     public Container getRunningContainerByAppName(String targetAppName, ImageInspectorOsEnum targetInspectorOs) throws IntegrationException {
