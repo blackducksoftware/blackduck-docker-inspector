@@ -6,7 +6,6 @@ import java.io.IOException;
 
 import org.apache.commons.lang3.SystemUtils;
 import org.junit.jupiter.api.Assumptions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -14,7 +13,7 @@ import com.synopsys.integration.blackduck.dockerinspector.ProcessId;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 
-public class ContainerPathsTest {
+class ContainerPathsTest {
 
     private static final String TARGET_FILE_PATH_LOCAL_WINDOWS = "C:\\Users\\Administrator\\blackduck-docker-inspector\\files\\shared\\run_1\\target\\alpine.tar";
     private static final String TARGET_FILE_PATH_LOCAL_LINUX = "/Users/Administrator/blackduck-docker-inspector/files/shared/run_1/target/alpine.tar";
@@ -26,7 +25,7 @@ public class ContainerPathsTest {
     private static final String CONTAINER_PATH_TO_OUTPUT_FILE = "/opt/blackduck-docker-inspector/shared/run_1/output/test_out.tar";
 
     @Test
-    public void testLinux() throws IOException {
+    void testLinux() throws IOException {
         Assumptions.assumeFalse(SystemUtils.IS_OS_WINDOWS);
         String sharedDirPathLocal = SHARED_DIR_PATH_LOCAL_LINUX;
         String sharedDirPathContainer = SHARED_DIR_PATH_CONTAINER_LINUX;
@@ -36,7 +35,7 @@ public class ContainerPathsTest {
     }
 
     @Test
-    public void testWindows() throws IOException {
+    void testWindows() throws IOException {
         Assumptions.assumeTrue(SystemUtils.IS_OS_WINDOWS);
         String sharedDirPathLocal = SHARED_DIR_PATH_LOCAL_WINDOWS;
         String sharedDirPathContainer = SHARED_DIR_PATH_CONTAINER_WINDOWS;
@@ -45,7 +44,7 @@ public class ContainerPathsTest {
         doTest(sharedDirPathLocal, sharedDirPathContainer, targetFilePathLocal);
     }
 
-    private void doTest(final String sharedDirPathLocal, final String sharedDirPathContainer,
+    private void doTest(String sharedDirPathLocal, String sharedDirPathContainer,
         String targetFilePathLocal) throws IOException {
         Config config = Mockito.mock(Config.class);
         Mockito.when(config.getSharedDirPathLocal()).thenReturn(sharedDirPathLocal);

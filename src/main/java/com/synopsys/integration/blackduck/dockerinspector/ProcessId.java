@@ -24,7 +24,6 @@ package com.synopsys.integration.blackduck.dockerinspector;
 
 import java.lang.management.ManagementFactory;
 import java.util.Date;
-import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
