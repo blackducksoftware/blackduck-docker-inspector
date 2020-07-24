@@ -1,9 +1,9 @@
 ### Considerations when running on Windows
 
-#### Run from Detect, or run the ${solution_name} .jar file directly
+#### Run from ${detect_product_name} version 6.6.0 or later, or run the ${solution_name} .jar file directly
 
 The following is only a consideration if you are not running ${solution_name}
-from Detect.
+from ${detect_product_name}.
 
 When executing ${solution_name} directly on Linx or Mac,
 you can use the ${solution_name} bash script (script_name) that:

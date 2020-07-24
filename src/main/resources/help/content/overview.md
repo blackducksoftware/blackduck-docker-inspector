@@ -52,6 +52,7 @@ Requirements for ${solution_name} are:
 
 * The current version of Black Duck. Visit [this page](${blackduck_release_page}) to determine the current version. 
 * Linux, MacOS, or Windows 10 Enterprise.
+    - On Windows, ${solution_name} must be executed from ${detect_product_name} version 6.6.0 or later, or by executing the ${solution_name} .jar directly. There is no equivalent to ${script_name} for Windows.
 * Access to the internet. For information on running without access to the internet, refer to [Air Gap mode](advanced.md#air-gap-mode).
 * Java (JRE) versions 8 or 11.
 * Three available ports for the image inspector services. By default, these ports are 9000, 9001, and 9002.
@@ -64,6 +65,20 @@ Requirements for ${solution_name} are:
 that you provide. For more information, refer to [Deploying](deployment.md).
     
 ### Getting started
+
+#### Invoking from ${detect_product_name}
+
+For many users, invoking ${solution_name} from ${detect_product_name} will be the best option.
+${detect_product_name} provides the following benefits:
+
+1. It automatically downloads (if necessary) the latest version of ${solution_name}.
+This is the only way to get this capability on Windows.
+2. It discovers components that ${solution_name} is unable to discover by also invoking
+the ${blackduck_product_name} Signature Scanner on the target image container file system.
+
+Refer to the ${detect_product_name} documentation for more information.
+
+#### Invoking ${solution_name} directly
 
 The following command format always fetches and runs the latest version of ${solution_name}:
 

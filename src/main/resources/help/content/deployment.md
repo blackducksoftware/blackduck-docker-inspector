@@ -13,8 +13,8 @@ The deployment samples provided are intended to illustrate possible approaches t
 involved in deploying ${solution_name}. They are not intended to be used as-is in production.
 You should understand the code before you use it. They do not represent the only way to deploy in each environment.
 
-Your deployment approach is the same whether you are invoking ${solution_name} directly, or invoking it using Detect.
-Most of the sample deployments use Detect simply because that is the most common use case.
+Your deployment approach is the same whether you are invoking ${solution_name} directly, or invoking it using ${detect_product_name}.
+Most of the sample deployments use ${detect_product_name} simply because that is the most common use case.
 
 ### Using host mode on a server or VM with Docker
 
@@ -41,7 +41,7 @@ three container-based services which you must start. These four containers must:
 Because in this mode you (not ${solution_name}) are deploying the image inspector services,
 you must ensure that you deploy the correct version of the image inspector images for the
 version of ${solution_name} that you run. This is easier if you explicitly control the version of
-${solution_name}, rather than letting ${script_name} or Detect auto-update ${solution_name}.
+${solution_name}, rather than letting ${script_name} or ${detect_product_name} auto-update ${solution_name}.
 See [Running](running.md) for details.
  
 ### Image Inspector Services
@@ -118,7 +118,7 @@ Deployment notes:
 
 Download: curl -O ${source_raw_content_url_base}/${source_repo_organization}/${project_name}/master/deployment/circleci/config.yml
 
-### Deployment sample for Docker with Detect running in a container
+### Deployment sample for Docker with ${detect_product_name} running in a container
 
 Approach: Toolkit
 
@@ -141,13 +141,13 @@ and ${solution_name} for your Docker registry, refer to: ${docker_java_project_u
 ${solution_name} does not override any of the configuration settings in the code,
 so any of the other methods (properties, system properties, system environment) work.
 
-If you choose to use environment variables, and you are calling ${solution_name} from Detect,
+If you choose to use environment variables, and you are calling ${solution_name} from ${detect_product_name},
 you must prefix the environment variable names with *DETECT_DOCKER_PASSTHROUGH_* to
-instruct Detect to pass them on to ${solution_name}.
+instruct ${detect_product_name} to pass them on to ${solution_name}.
 In that scenario, instead of *export SOMENAME=value*, use *export DETECT_DOCKER_PASSTHROUGH_SOMENAME=value*.
 
 If you choose to use system properties which are normally set using *java -D*,
-and you are calling ${solution_name} from Detect, you must
+and you are calling ${solution_name} from ${detect_product_name}, you must
 put the properties in a file; for example, *mydockerproperties.properties*, and use 
 ```
 --detect.docker.passthrough.system.properties.path=mydockerproperties.properties

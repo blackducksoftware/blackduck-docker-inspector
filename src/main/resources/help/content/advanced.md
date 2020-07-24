@@ -18,8 +18,8 @@ the request
 to the image inspector that can process the target image (which starts
 again at step 1).
 4. Translates that package list to BDIO and uploads it to Black Duck, or returns it to the the
-caller (e.g. Detect) to upload to Black Duck.
-5. Returns the constructed file system to the caller (e.g. Detect) for signature scanning.
+caller (e.g. ${detect_product_name}) to upload to Black Duck.
+5. Returns the constructed file system to the caller (e.g. ${detect_product_name}) for signature scanning.
 
 ### Enabling file sharing in Docker
 
@@ -199,7 +199,7 @@ on Windows, ${solution_name} overrides only the DOCKER_HOST value
 (setting it to "npipe:////./pipe/docker_engine").
 
 To use system properties which are normally set using java -D,
-and if you are calling ${solution_name} from Detect, you must put the properties
+and if you are calling ${solution_name} from ${detect_product_name}, you must put the properties
 in a file; for example, mydockerproperties.properties, and use:
 
     --detect.docker.passthrough.system.properties.path=mydockerproperties.properties
@@ -228,13 +228,13 @@ converts an OCI image directory alpine-oci to a Docker Image Specification v1.2.
 alpine-docker.tar that ${solution_name} can process when passed in with the
 --docker.tar=alpine-docker.tar command line argument.
 
-### Running Detect on a project directory that exists within a Docker image
+### Running ${detect_product_name} on a project directory that exists within a Docker image
 
-When you want to run Detect on a directory that exists within a Docker image, you can use the following approach:
-1. Run Detect on the image to generate the container filesystem for the image.
-2. Run Detect on a directory within that container filesystem.
+When you want to run ${detect_product_name} on a directory that exists within a Docker image, you can use the following approach:
+1. Run ${detect_product_name} on the image to generate the container filesystem for the image.
+2. Run ${detect_product_name} on a directory within that container filesystem.
 
-Detect performs these actions without running the image/container.
+${detect_product_name} performs these actions without running the image/container.
 
 To see a simple example that illustrates this approach, use the following commands to download these sample files:
 
@@ -250,7 +250,7 @@ You must make the script executable before you run it.
 To use iScan to scan a specific directory within an image:
  
 1. Run ${solution_name} on the target image to get the container file system.
-You can also do this using Detect using `--detect.docker.passthrough.*` properties.
+You can also do this using ${detect_product_name} using `--detect.docker.passthrough.*` properties.
 Include the following ${solution_name} properties:
 ```
 --upload.bdio=false                        # disable BDIO upload
@@ -259,16 +259,16 @@ Include the following ${solution_name} properties:
 ```
 2. Locate the container file system in the output directory (*.tar.gz) and untar it.
 3. cd into the directory within the untared container file system that you want to scan.
-4. Invoke Detect there.
+4. Invoke ${detect_product_name} there.
 
-### Excluding files/directories from the returned container file system which excludes them from Detect's signature scan
+### Excluding files/directories from the returned container file system which excludes them from ${detect_product_name}'s signature scan
 
 To exclude certain files and/or directories from the returned file system, you can
 specify that list of directories with the property *--output.containerfilesystem.excluded.paths*.
 
-For example, if you are invoking ${solution_name} from Detect, and want Detect
+For example, if you are invoking ${solution_name} from ${detect_product_name}, and want ${detect_product_name}
 to exclude the */etc* and */usr/bin* directories from the signature scan, you
-could run Detect like this:
+could run ${detect_product_name} like this:
 ```
 ./detect.sh --detect.docker.image=ubuntu:latest --detect.docker.passthrough.output.containerfilesystem.excluded.paths=/etc,/usr/bin
 ```

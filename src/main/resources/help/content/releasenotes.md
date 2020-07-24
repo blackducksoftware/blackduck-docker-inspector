@@ -1,6 +1,6 @@
 #### Version 9.1.0
 ##### New features
-* Added support for running on Windows 10 Enterprise Edition.
+* Added support for running on Windows 10 Enterprise Edition by executing the ${solution_name} .jar file directly.
 * Added property use.platform.default.docker.host (default to true).
 
 #### Changed feature
@@ -12,7 +12,7 @@
 
 #### Version 9.0.0
 ##### Changed feature
-* The internal format of the Black Duck Input Output (BDIO) file that is produced is now compatible with Detect version 6.3 and later.
+* The internal format of the Black Duck Input Output (BDIO) file that is produced is now compatible with ${detect_product_name} version 6.3 and later.
 
 #### Version 8.3.1
 ##### Resolved issues
