@@ -75,7 +75,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#running-the-latest-version" tabindex="1" class="md-skip">
+      <a href="#considerations-when-running-on-windows" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -241,15 +241,42 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#running-the-latest-version" class="md-nav__link">
-    Running the latest version
+  <a href="#considerations-when-running-on-windows" class="md-nav__link">
+    Considerations when running on Windows
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#run-from-synopsys-detect-version-660-or-later-or-run-the-black-duck-docker-inspector-jar-file-directly" class="md-nav__link">
+    Run from Synopsys Detect version 6.6.0 or later, or run the Black Duck Docker Inspector .jar file directly
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-restrictions" class="md-nav__link">
+    Docker restrictions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-the-latest-version-linuxmac-only" class="md-nav__link">
+    Running the latest version (Linux/Mac only)
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#running-a-specific-version" class="md-nav__link">
-    Running a specific version
+  <a href="#running-a-specific-version-linuxmac-only" class="md-nav__link">
+    Running a specific version (Linux/Mac only)
   </a>
   
 </li>
@@ -372,15 +399,42 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#running-the-latest-version" class="md-nav__link">
-    Running the latest version
+  <a href="#considerations-when-running-on-windows" class="md-nav__link">
+    Considerations when running on Windows
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#run-from-synopsys-detect-version-660-or-later-or-run-the-black-duck-docker-inspector-jar-file-directly" class="md-nav__link">
+    Run from Synopsys Detect version 6.6.0 or later, or run the Black Duck Docker Inspector .jar file directly
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-restrictions" class="md-nav__link">
+    Docker restrictions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-the-latest-version-linuxmac-only" class="md-nav__link">
+    Running the latest version (Linux/Mac only)
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#running-a-specific-version" class="md-nav__link">
-    Running a specific version
+  <a href="#running-a-specific-version-linuxmac-only" class="md-nav__link">
+    Running a specific version (Linux/Mac only)
   </a>
   
 </li>
@@ -432,7 +486,43 @@
                 
                   <h1>Running</h1>
                 
-                <h3 id="running-the-latest-version">Running the latest version</h3>
+                <h3 id="considerations-when-running-on-windows">Considerations when running on Windows</h3>
+<h4 id="run-from-synopsys-detect-version-660-or-later-or-run-the-black-duck-docker-inspector-jar-file-directly">Run from Synopsys Detect version 6.6.0 or later, or run the Black Duck Docker Inspector .jar file directly</h4>
+<p>The following is only a consideration if you are not running Black Duck Docker Inspector
+from Synopsys Detect.</p>
+<p>When executing Black Duck Docker Inspector directly on Linx or Mac,
+you can use the Black Duck Docker Inspector bash script (script_name) that:</p>
+<ol>
+<li>Downloads (if necessary) the latest Black Duck Docker Inspector .jar file, and</li>
+<li>Executes it with the arguments you have provided.</li>
+</ol>
+<p>There is no equivalent script for Windows, so on Windows you must download
+the Black Duck Docker Inspector .jar and execute it directly.</p>
+<p>Download the Black Duck Docker Inspector .jar file from the
+<a href="https://sig-repo.synopsys.com/webapp/#/artifacts/browse/tree/General/bds-integrations-snapshot/com/synopsys/integration/blackduck-docker-inspector">Synopsys artifactory server</a>.</p>
+<p>To execute the Black Duck Docker Inspector .jar:</p>
+<pre><code>java -jar blackduck-docker-inspector-{version}.jar {Black Duck Docker Inspector arguments}
+</code></pre>
+
+<h4 id="docker-restrictions">Docker restrictions</h4>
+<p>Docker on Windows has restrictions that impact Black Duck Docker Inspector:</p>
+<ol>
+<li>Docker can be configured to pull either Linix images, or Windows images.
+You can see how your Docker installation is configured by looking
+at the <em>OSType</em> value in the output of the <em>docker info</em> command.
+If Docker is configured for Linix images, it cannot pull Windows images,
+and vice versa. The command to change Docker's <em>OSType</em> value appears
+in the Docker Desktop menu. Refer to Docker documentation for more information.</li>
+<li>When pulling Windows images, Docker requires (a) that the architecture of the
+pulled image matches the architecture of your machine, and (b) that the Windows version
+of the pulled image is a close match to the Windows version of your machine.</li>
+</ol>
+<p>It is a good practice to make sure you can pull the target
+image using the <em>docker pull</em> command from the command line. If Docker
+cannot pull the image, then Black Duck Docker Inspector won't be able to either.
+If you cannot pull the image from the command line, consider
+both of the potential issues mentioned above.`</p>
+<h3 id="running-the-latest-version-linuxmac-only">Running the latest version (Linux/Mac only)</h3>
 <p>The following command format always fetches and runs the latest version of Black Duck Docker Inspector:</p>
 <pre><code>bash &lt;(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) {Black Duck Docker Inspector arguments}
 </code></pre>
@@ -450,7 +540,7 @@ chmod +x blackduck-docker-inspector.sh
 <pre><code>bash &lt;(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) --pulljar
 java -jar blackduck-docker-inspector-{version}.jar {Black Duck Docker Inspector arguments}
 </code></pre>
-<h3 id="running-a-specific-version">Running a specific version</h3>
+<h3 id="running-a-specific-version-linuxmac-only">Running a specific version (Linux/Mac only)</h3>
 <p>By default, blackduck-docker-inspector.sh runs the latest version of
 Black Duck Docker Inspector by downloading, if necessary, and running the latest Black Duck Docker Inspector .jar.
 To run a specific version of Black Duck Docker Inspector:</p>
@@ -468,10 +558,16 @@ version of Black Duck Docker Inspector. However, sometimes it is better to run t
 <p>Use the following Java command to run it:</p>
 <pre><code>java -jar blackduck-docker-inspector-{version}.jar {Black Duck Docker Inspector arguments}
 </code></pre>
+
 <h3 id="inspecting-an-image-by-image-repotag">Inspecting an image by image repo:tag</h3>
 <p>To run Black Duck Docker Inspector on a Docker image from your local cache or a registry:</p>
 <pre><code>./blackduck-docker-inspector.sh --docker.image={repo}:{tag}
 </code></pre>
+
+<p>Or:</p>
+<pre><code>java -jar blackduck-docker-inspector-{version}.jar --docker.image={repo}:{tag}
+</code></pre>
+
 <p>If you omit the :{tag}, it defaults to :latest.</p>
 <h3 id="inspecting-an-image-saved-to-a-tar-file">Inspecting an image saved to a .tar file</h3>
 <p>To run Black Duck Docker Inspector on a Docker image .tar file:</p>

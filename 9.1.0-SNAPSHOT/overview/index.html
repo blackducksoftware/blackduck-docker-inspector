@@ -243,6 +243,26 @@
     Getting started
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#invoking-from-synopsys-detect" class="md-nav__link">
+    Invoking from Synopsys Detect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#invoking-black-duck-docker-inspector-directly" class="md-nav__link">
+    Invoking Black Duck Docker Inspector directly
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -423,6 +443,26 @@
     Getting started
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#invoking-from-synopsys-detect" class="md-nav__link">
+    Invoking from Synopsys Detect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#invoking-black-duck-docker-inspector-directly" class="md-nav__link">
+    Invoking Black Duck Docker Inspector directly
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -497,7 +537,10 @@ refer to <a href="../deployment/">Deploying</a>.</p>
 <p>Requirements for Black Duck Docker Inspector are:</p>
 <ul>
 <li>The current version of Black Duck. Visit <a href="https://github.com/blackducksoftware/hub/releases">this page</a> to determine the current version. </li>
-<li>Linux, MacOS, or Windows 10 Enterprise.</li>
+<li>Linux, MacOS, or Windows 10 Enterprise.<ul>
+<li>On Windows, Black Duck Docker Inspector must be executed from Synopsys Detect version 6.6.0 or later, or by executing the Black Duck Docker Inspector .jar directly. There is no equivalent to blackduck-docker-inspector.sh for Windows.</li>
+</ul>
+</li>
 <li>Access to the internet. For information on running without access to the internet, refer to <a href="../advanced/#air-gap-mode">Air Gap mode</a>.</li>
 <li>Java (JRE) versions 8 or 11.</li>
 <li>Three available ports for the image inspector services. By default, these ports are 9000, 9001, and 9002.</li>
@@ -512,6 +555,17 @@ refer to <a href="../deployment/">Deploying</a>.</p>
 that you provide. For more information, refer to <a href="../deployment/">Deploying</a>.</li>
 </ul>
 <h3 id="getting-started">Getting started</h3>
+<h4 id="invoking-from-synopsys-detect">Invoking from Synopsys Detect</h4>
+<p>For many users, invoking Black Duck Docker Inspector from Synopsys Detect will be the best option.
+Synopsys Detect provides the following benefits:</p>
+<ol>
+<li>It automatically downloads (if necessary) the latest version of Black Duck Docker Inspector.
+This is the only way to get this capability on Windows.</li>
+<li>It discovers components that Black Duck Docker Inspector is unable to discover by also invoking
+the Black Duck Signature Scanner on the target image container file system.</li>
+</ol>
+<p>Refer to the Synopsys Detect documentation for more information.</p>
+<h4 id="invoking-black-duck-docker-inspector-directly">Invoking Black Duck Docker Inspector directly</h4>
 <p>The following command format always fetches and runs the latest version of Black Duck Docker Inspector:</p>
 <pre><code>bash &lt;(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) {Black Duck Docker Inspector arguments}
 </code></pre>

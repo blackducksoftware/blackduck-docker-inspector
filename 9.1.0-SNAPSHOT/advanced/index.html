@@ -362,8 +362,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#running-detect-on-a-project-directory-that-exists-within-a-docker-image" class="md-nav__link">
-    Running Detect on a project directory that exists within a Docker image
+  <a href="#running-synopsys-detect-on-a-project-directory-that-exists-within-a-docker-image" class="md-nav__link">
+    Running Synopsys Detect on a project directory that exists within a Docker image
   </a>
   
 </li>
@@ -376,8 +376,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#excluding-filesdirectories-from-the-returned-container-file-system-which-excludes-them-from-detects-signature-scan" class="md-nav__link">
-    Excluding files/directories from the returned container file system which excludes them from Detect's signature scan
+  <a href="#excluding-filesdirectories-from-the-returned-container-file-system-which-excludes-them-from-synopsys-detects-signature-scan" class="md-nav__link">
+    Excluding files/directories from the returned container file system which excludes them from Synopsys Detect's signature scan
   </a>
   
 </li>
@@ -552,8 +552,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#running-detect-on-a-project-directory-that-exists-within-a-docker-image" class="md-nav__link">
-    Running Detect on a project directory that exists within a Docker image
+  <a href="#running-synopsys-detect-on-a-project-directory-that-exists-within-a-docker-image" class="md-nav__link">
+    Running Synopsys Detect on a project directory that exists within a Docker image
   </a>
   
 </li>
@@ -566,8 +566,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#excluding-filesdirectories-from-the-returned-container-file-system-which-excludes-them-from-detects-signature-scan" class="md-nav__link">
-    Excluding files/directories from the returned container file system which excludes them from Detect's signature scan
+  <a href="#excluding-filesdirectories-from-the-returned-container-file-system-which-excludes-them-from-synopsys-detects-signature-scan" class="md-nav__link">
+    Excluding files/directories from the returned container file system which excludes them from Synopsys Detect's signature scan
   </a>
   
 </li>
@@ -616,8 +616,8 @@ the request
 to the image inspector that can process the target image (which starts
 again at step 1).</li>
 <li>Translates that package list to BDIO and uploads it to Black Duck, or returns it to the the
-caller (e.g. Detect) to upload to Black Duck.</li>
-<li>Returns the constructed file system to the caller (e.g. Detect) for signature scanning.</li>
+caller (e.g. Synopsys Detect) to upload to Black Duck.</li>
+<li>Returns the constructed file system to the caller (e.g. Synopsys Detect) for signature scanning.</li>
 </ol>
 <h3 id="enabling-file-sharing-in-docker">Enabling file sharing in Docker</h3>
 <p>Docker may restrict file sharing to certain directories that you've configured in
@@ -759,7 +759,7 @@ so all other methods such as properties, system properties, and system environme
 on Windows, Black Duck Docker Inspector overrides only the DOCKER_HOST value
 (setting it to "npipe:////./pipe/docker_engine").</p>
 <p>To use system properties which are normally set using java -D,
-and if you are calling Black Duck Docker Inspector from Detect, you must put the properties
+and if you are calling Black Duck Docker Inspector from Synopsys Detect, you must put the properties
 in a file; for example, mydockerproperties.properties, and use:</p>
 <pre><code>--detect.docker.passthrough.system.properties.path=mydockerproperties.properties
 </code></pre>
@@ -782,11 +782,11 @@ to convert them to Docker Image Specification v1.2.0 files. For example, the com
 <p>converts an OCI image directory alpine-oci to a Docker Image Specification v1.2.0 format file
 alpine-docker.tar that Black Duck Docker Inspector can process when passed in with the
 --docker.tar=alpine-docker.tar command line argument.</p>
-<h3 id="running-detect-on-a-project-directory-that-exists-within-a-docker-image">Running Detect on a project directory that exists within a Docker image</h3>
-<p>When you want to run Detect on a directory that exists within a Docker image, you can use the following approach:
-1. Run Detect on the image to generate the container filesystem for the image.
-2. Run Detect on a directory within that container filesystem.</p>
-<p>Detect performs these actions without running the image/container.</p>
+<h3 id="running-synopsys-detect-on-a-project-directory-that-exists-within-a-docker-image">Running Synopsys Detect on a project directory that exists within a Docker image</h3>
+<p>When you want to run Synopsys Detect on a directory that exists within a Docker image, you can use the following approach:
+1. Run Synopsys Detect on the image to generate the container filesystem for the image.
+2. Run Synopsys Detect on a directory within that container filesystem.</p>
+<p>Synopsys Detect performs these actions without running the image/container.</p>
 <p>To see a simple example that illustrates this approach, use the following commands to download these sample files:</p>
 <pre><code>curl -O https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/docker/runDetectInImageDir/runDetectInImageDir.sh
 curl -O https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/docker/runDetectInImageDir/Dockerfile
@@ -798,7 +798,7 @@ You must make the script executable before you run it. </p>
 <p>To use iScan to scan a specific directory within an image:</p>
 <ol>
 <li>Run Black Duck Docker Inspector on the target image to get the container file system.
-You can also do this using Detect using <code>--detect.docker.passthrough.*</code> properties.
+You can also do this using Synopsys Detect using <code>--detect.docker.passthrough.*</code> properties.
 Include the following Black Duck Docker Inspector properties:</li>
 </ol>
 <pre><code>--upload.bdio=false                        # disable BDIO upload
@@ -809,14 +809,14 @@ Include the following Black Duck Docker Inspector properties:</li>
 <ol>
 <li>Locate the container file system in the output directory (*.tar.gz) and untar it.</li>
 <li>cd into the directory within the untared container file system that you want to scan.</li>
-<li>Invoke Detect there.</li>
+<li>Invoke Synopsys Detect there.</li>
 </ol>
-<h3 id="excluding-filesdirectories-from-the-returned-container-file-system-which-excludes-them-from-detects-signature-scan">Excluding files/directories from the returned container file system which excludes them from Detect's signature scan</h3>
+<h3 id="excluding-filesdirectories-from-the-returned-container-file-system-which-excludes-them-from-synopsys-detects-signature-scan">Excluding files/directories from the returned container file system which excludes them from Synopsys Detect's signature scan</h3>
 <p>To exclude certain files and/or directories from the returned file system, you can
 specify that list of directories with the property <em>--output.containerfilesystem.excluded.paths</em>.</p>
-<p>For example, if you are invoking Black Duck Docker Inspector from Detect, and want Detect
+<p>For example, if you are invoking Black Duck Docker Inspector from Synopsys Detect, and want Synopsys Detect
 to exclude the <em>/etc</em> and <em>/usr/bin</em> directories from the signature scan, you
-could run Detect like this:</p>
+could run Synopsys Detect like this:</p>
 <pre><code>./detect.sh --detect.docker.image=ubuntu:latest --detect.docker.passthrough.output.containerfilesystem.excluded.paths=/etc,/usr/bin
 </code></pre>
 

@@ -354,8 +354,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#deployment-sample-for-docker-with-detect-running-in-a-container" class="md-nav__link">
-    Deployment sample for Docker with Detect running in a container
+  <a href="#deployment-sample-for-docker-with-synopsys-detect-running-in-a-container" class="md-nav__link">
+    Deployment sample for Docker with Synopsys Detect running in a container
   </a>
   
 </li>
@@ -498,8 +498,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#deployment-sample-for-docker-with-detect-running-in-a-container" class="md-nav__link">
-    Deployment sample for Docker with Detect running in a container
+  <a href="#deployment-sample-for-docker-with-synopsys-detect-running-in-a-container" class="md-nav__link">
+    Deployment sample for Docker with Synopsys Detect running in a container
   </a>
   
 </li>
@@ -541,8 +541,8 @@
 <p>The deployment samples provided are intended to illustrate possible approaches to the challenges
 involved in deploying Black Duck Docker Inspector. They are not intended to be used as-is in production.
 You should understand the code before you use it. They do not represent the only way to deploy in each environment.</p>
-<p>Your deployment approach is the same whether you are invoking Black Duck Docker Inspector directly, or invoking it using Detect.
-Most of the sample deployments use Detect simply because that is the most common use case.</p>
+<p>Your deployment approach is the same whether you are invoking Black Duck Docker Inspector directly, or invoking it using Synopsys Detect.
+Most of the sample deployments use Synopsys Detect simply because that is the most common use case.</p>
 <h3 id="using-host-mode-on-a-server-or-vm-with-docker">Using host mode on a server or VM with Docker</h3>
 <p>In this scenario, Black Duck Docker Inspector is a command line utility that automatically pulls/runs and uses container-based services,<br />
 and cleans them up when it's done. The Docker command, if installed on the machine, can be very useful for troubleshooting, but is not actually
@@ -561,7 +561,7 @@ three container-based services which you must start. These four containers must:
 <p>Because in this mode you (not Black Duck Docker Inspector) are deploying the image inspector services,
 you must ensure that you deploy the correct version of the image inspector images for the
 version of Black Duck Docker Inspector that you run. This is easier if you explicitly control the version of
-Black Duck Docker Inspector, rather than letting blackduck-docker-inspector.sh or Detect auto-update Black Duck Docker Inspector.
+Black Duck Docker Inspector, rather than letting blackduck-docker-inspector.sh or Synopsys Detect auto-update Black Duck Docker Inspector.
 See <a href="../running/">Running</a> for details.</p>
 <h3 id="image-inspector-services">Image Inspector Services</h3>
 <p>Black Duck Docker Inspector consists of a command line utility provided in a Java .jar, but sometimes invoked using a bash script,
@@ -609,7 +609,7 @@ The containers communicate through localhost URLs.</p>
 <p>Approach: Utility</p>
 <p>Deployment notes: </p>
 <p>Download: curl -O https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/circleci/config.yml</p>
-<h3 id="deployment-sample-for-docker-with-detect-running-in-a-container">Deployment sample for Docker with Detect running in a container</h3>
+<h3 id="deployment-sample-for-docker-with-synopsys-detect-running-in-a-container">Deployment sample for Docker with Synopsys Detect running in a container</h3>
 <p>Approach: Toolkit</p>
 <p>Deployment notes: The containers communicate through localhost URLs.</p>
 <p>Download: curl -O https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/docker/runDetectInContainer/setup.sh         </p>
@@ -623,12 +623,12 @@ to pull that image, because docker-java can be configured the same way as the Do
 and Black Duck Docker Inspector for your Docker registry, refer to: https://github.com/docker-java/docker-java#Configuration.</p>
 <p>Black Duck Docker Inspector does not override any of the configuration settings in the code,
 so any of the other methods (properties, system properties, system environment) work.</p>
-<p>If you choose to use environment variables, and you are calling Black Duck Docker Inspector from Detect,
+<p>If you choose to use environment variables, and you are calling Black Duck Docker Inspector from Synopsys Detect,
 you must prefix the environment variable names with <em>DETECT_DOCKER_PASSTHROUGH_</em> to
-instruct Detect to pass them on to Black Duck Docker Inspector.
+instruct Synopsys Detect to pass them on to Black Duck Docker Inspector.
 In that scenario, instead of <em>export SOMENAME=value</em>, use <em>export DETECT_DOCKER_PASSTHROUGH_SOMENAME=value</em>.</p>
 <p>If you choose to use system properties which are normally set using <em>java -D</em>,
-and you are calling Black Duck Docker Inspector from Detect, you must
+and you are calling Black Duck Docker Inspector from Synopsys Detect, you must
 put the properties in a file; for example, <em>mydockerproperties.properties</em>, and use </p>
 <pre><code>--detect.docker.passthrough.system.properties.path=mydockerproperties.properties
 </code></pre>
