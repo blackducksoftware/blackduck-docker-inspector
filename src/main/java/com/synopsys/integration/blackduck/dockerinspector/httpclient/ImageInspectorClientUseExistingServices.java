@@ -22,8 +22,6 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.httpclient;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -36,12 +34,11 @@ import org.springframework.stereotype.Component;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.httpclient.response.SimpleResponse;
-import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarWrapper;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.rest.client.IntHttpClient;
 
 @Component
-public class ImageInspectorClientUseExistingServices implements ImageInspectorClient {
+public class ImageInspectorClientUseExistingServices extends ImageInspectorClient {
 
     @Autowired
     private Config config;
@@ -56,34 +53,29 @@ public class ImageInspectorClientUseExistingServices implements ImageInspectorCl
 
     @Override
     public boolean isApplicable() {
-        final boolean answer = !config.isImageInspectorServiceStart() && StringUtils.isNotBlank(config.getImageInspectorUrl());
+        boolean answer = !config.isImageInspectorServiceStart() && StringUtils.isNotBlank(config.getImageInspectorUrl());
         logger.debug(String.format("isApplicable() returning %b", answer));
         return answer;
     }
 
     @Override
-    public ImageTarWrapper copyTarfileToSharedDir(final ImageTarWrapper givenDockerTarfile) throws IOException {
-        return givenDockerTarfile;
-    }
-
-    @Override
-    public String getBdio(final String hostPathToTarfile, final String containerPathToInputDockerTarfile, final String givenImageRepo, final String givenImageTag,
-        final String containerPathToOutputFileSystemFile, final String containerFileSystemExcludedPaths,
-        final boolean organizeComponentsByLayer, final boolean includeRemovedComponents,
-        final boolean cleanup, final String platformTopLayerId,
-        final String targetLinuxDistro)
-            throws IntegrationException, MalformedURLException {
+    public String getBdio(String hostPathToTarfile, String containerPathToInputDockerTarfile, String givenImageRepo, String givenImageTag,
+        String containerPathToOutputFileSystemFile, String containerFileSystemExcludedPaths,
+        boolean organizeComponentsByLayer, boolean includeRemovedComponents,
+        boolean cleanup, String platformTopLayerId,
+        String targetLinuxDistro)
+        throws IntegrationException, MalformedURLException {
         URI imageInspectorUri;
         try {
             imageInspectorUri = new URI(config.getImageInspectorUrl());
-        } catch (final URISyntaxException e) {
+        } catch (URISyntaxException e) {
             throw new IntegrationException(String.format("Error constructing URI from %s: %s", config.getImageInspectorUrl(), e.getMessage()), e);
         }
-        final int serviceRequestTimeoutSeconds = deriveTimeoutSeconds();
-        final IntHttpClient restConnection = httpConnectionCreator
-            .createRedirectingConnection(imageInspectorUri, serviceRequestTimeoutSeconds);
-        final SimpleResponse response = restRequester.executeGetBdioRequest(restConnection, imageInspectorUri, containerPathToInputDockerTarfile,
-                givenImageRepo, givenImageTag,
+        int serviceRequestTimeoutSeconds = deriveTimeoutSeconds();
+        IntHttpClient restConnection = httpConnectionCreator
+                                           .createRedirectingConnection(imageInspectorUri, serviceRequestTimeoutSeconds);
+        SimpleResponse response = restRequester.executeGetBdioRequest(restConnection, imageInspectorUri, containerPathToInputDockerTarfile,
+            givenImageRepo, givenImageTag,
             containerPathToOutputFileSystemFile, containerFileSystemExcludedPaths,
             organizeComponentsByLayer, includeRemovedComponents, cleanup,
             platformTopLayerId,

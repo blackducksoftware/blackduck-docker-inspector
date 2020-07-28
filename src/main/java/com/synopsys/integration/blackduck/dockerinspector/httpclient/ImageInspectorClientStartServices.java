@@ -22,11 +22,6 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.httpclient;
 
-import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarWrapper;
-import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
-import com.synopsys.integration.rest.client.IntHttpClient;
-import java.io.File;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -34,7 +29,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,16 +37,17 @@ import org.springframework.stereotype.Component;
 
 import com.github.dockerjava.api.model.Container;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
-import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
 import com.synopsys.integration.blackduck.dockerinspector.httpclient.response.SimpleResponse;
+import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.rest.RestConstants;
+import com.synopsys.integration.rest.client.IntHttpClient;
 import com.synopsys.integration.rest.exception.IntegrationRestException;
 
 @Component
-public class ImageInspectorClientStartServices implements ImageInspectorClient {
+public class ImageInspectorClientStartServices extends ImageInspectorClient {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final String II_SERVICE_URI_SCHEME = "http";
     private final String II_SERVICE_HOST = "localhost";
@@ -79,45 +74,29 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
     private DockerClientManager dockerClientManager;
 
     @Autowired
-    private ProgramPaths programPaths;
-
-    @Autowired
     private ContainerName containerNameManager;
 
     @Override
     public boolean isApplicable() {
-        final boolean answer = config.isImageInspectorServiceStart();
+        boolean answer = config.isImageInspectorServiceStart();
         logger.debug(String.format("isApplicable() returning %b", answer));
         return answer;
     }
 
     @Override
-    public ImageTarWrapper copyTarfileToSharedDir(final ImageTarWrapper givenDockerTarfile) throws IOException {
-        // Copy the tarfile to the shared/target dir
-        final File finalDockerTarfile = new File(programPaths.getDockerInspectorTargetDirPath(), givenDockerTarfile.getFile().getName());
-        logger.debug(String.format("Required docker tarfile location: %s", finalDockerTarfile.getCanonicalPath()));
-        if (!finalDockerTarfile.getCanonicalPath().equals(givenDockerTarfile.getFile().getCanonicalPath())) {
-            logger.debug(String.format("Copying %s to %s", givenDockerTarfile.getFile().getCanonicalPath(), finalDockerTarfile.getCanonicalPath()));
-            FileUtils.copyFile(givenDockerTarfile.getFile(), finalDockerTarfile);
-        }
-        logger.debug(String.format("Final docker tar file path: %s", finalDockerTarfile.getCanonicalPath()));
-        return new ImageTarWrapper(finalDockerTarfile, givenDockerTarfile.getImageRepo(), givenDockerTarfile.getImageTag());
-    }
-
-    @Override
-    public String getBdio(final String hostPathToTarfile, final String containerPathToInputDockerTarfile, final String givenImageRepo, final String givenImageTag,
-        final String containerPathToOutputFileSystemFile, final String containerFileSystemExcludedPaths,
-        final boolean organizeComponentsByLayer, final boolean includeRemovedComponents, final boolean cleanup,
-        final String platformTopLayerId,
-        final String targetLinuxDistro)
+    public String getBdio(String hostPathToTarfile, String containerPathToInputDockerTarfile, String givenImageRepo, String givenImageTag,
+        String containerPathToOutputFileSystemFile, String containerFileSystemExcludedPaths,
+        boolean organizeComponentsByLayer, boolean includeRemovedComponents, boolean cleanup,
+        String platformTopLayerId,
+        String targetLinuxDistro)
         throws IntegrationException, InterruptedException {
         logger.info(dockerClientManager.getDockerJavaLibraryVersion());
 
         // First, try the default inspector service (which will return either the BDIO, or a redirect)
-        final ImageInspectorOsEnum inspectorOs = ImageInspectorOsEnum.determineOperatingSystem(config.getImageInspectorDefaultDistro());
-        final URI imageInspectorBaseUri = deriveInspectorBaseUri(imageInspectorServices.getDefaultImageInspectorHostPortBasedOnDistro());
-        final Predicate<Integer> initialRequestFailureCriteria = statusCode -> statusCode != RestConstants.OK_200 && statusCode != RestConstants.MOVED_TEMP_302 && statusCode != RestConstants.MOVED_PERM_301;
-        final SimpleResponse response = getResponseFromService(imageInspectorBaseUri, inspectorOs,
+        ImageInspectorOsEnum inspectorOs = ImageInspectorOsEnum.determineOperatingSystem(config.getImageInspectorDefaultDistro());
+        URI imageInspectorBaseUri = deriveInspectorBaseUri(imageInspectorServices.getDefaultImageInspectorHostPortBasedOnDistro());
+        Predicate<Integer> initialRequestFailureCriteria = statusCode -> statusCode != RestConstants.OK_200 && statusCode != RestConstants.MOVED_TEMP_302 && statusCode != RestConstants.MOVED_PERM_301;
+        SimpleResponse response = getResponseFromService(imageInspectorBaseUri, inspectorOs,
             containerPathToInputDockerTarfile,
             givenImageRepo, givenImageTag,
             containerPathToOutputFileSystemFile, containerFileSystemExcludedPaths,
@@ -131,15 +110,15 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         if (response.getStatusCode() >= RestConstants.BAD_REQUEST_400) {
             throw new IntegrationException(String.format("getBdio request returned status: %d: %s", response.getStatusCode(), response.getBody()));
         }
-        final String correctImageInspectorOsName = response.getBody().trim();
+        String correctImageInspectorOsName = response.getBody().trim();
         logger.info(String.format("This image needs to be inspected on %s", correctImageInspectorOsName));
         logger.info("(Image inspection may complete faster if you align the value of property imageinspector.service.distro.default with the images you inspect most frequently)");
 
         // Handle redirect
-        final ImageInspectorOsEnum correctedInspectorOs = ImageInspectorOsEnum.determineOperatingSystem(correctImageInspectorOsName);
-        final URI correctedImageInspectorBaseUri = deriveInspectorBaseUri(imageInspectorServices.getImageInspectorHostPort(correctedInspectorOs));
-        final Predicate<Integer> correctedRequestFailureCriteria = statusCode -> statusCode != RestConstants.OK_200;
-        final SimpleResponse responseFromCorrectedContainer = getResponseFromService(correctedImageInspectorBaseUri, correctedInspectorOs, containerPathToInputDockerTarfile,
+        ImageInspectorOsEnum correctedInspectorOs = ImageInspectorOsEnum.determineOperatingSystem(correctImageInspectorOsName);
+        URI correctedImageInspectorBaseUri = deriveInspectorBaseUri(imageInspectorServices.getImageInspectorHostPort(correctedInspectorOs));
+        Predicate<Integer> correctedRequestFailureCriteria = statusCode -> statusCode != RestConstants.OK_200;
+        SimpleResponse responseFromCorrectedContainer = getResponseFromService(correctedImageInspectorBaseUri, correctedInspectorOs, containerPathToInputDockerTarfile,
             givenImageRepo, givenImageTag,
             containerPathToOutputFileSystemFile, containerFileSystemExcludedPaths,
             organizeComponentsByLayer, includeRemovedComponents,
@@ -149,13 +128,13 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         return responseFromCorrectedContainer.getBody();
     }
 
-    private SimpleResponse getResponseFromService(final URI imageInspectorUri, final ImageInspectorOsEnum inspectorOs,
-        final String containerPathToInputDockerTarfile,
-        final String givenImageRepo, final String givenImageTag,
-        final String containerPathToOutputFileSystemFile, final String containerFileSystemExcludedPaths,
-        final boolean organizeComponentsByLayer, final boolean includeRemovedComponents, final boolean cleanup, final String platformTopLayerId,
-        final String targetLinuxDistro,
-        final Predicate<Integer> failureTest)
+    private SimpleResponse getResponseFromService(URI imageInspectorUri, ImageInspectorOsEnum inspectorOs,
+        String containerPathToInputDockerTarfile,
+        String givenImageRepo, String givenImageTag,
+        String containerPathToOutputFileSystemFile, String containerFileSystemExcludedPaths,
+        boolean organizeComponentsByLayer, boolean includeRemovedComponents, boolean cleanup, String platformTopLayerId,
+        String targetLinuxDistro,
+        Predicate<Integer> failureTest)
         throws IntegrationException, InterruptedException {
         SimpleResponse response = null;
         ContainerDetails serviceContainerDetails = null;
@@ -172,22 +151,22 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
                     platformTopLayerId,
                     targetLinuxDistro);
                 logServiceLogIfDebug(serviceContainerDetails.getContainerId());
-            } catch (final IntegrationException e) {
+            } catch (IntegrationException e) {
                 logServiceError(serviceContainerDetails.getContainerId());
                 throw e;
             }
-            final int statusCode = response.getStatusCode();
+            int statusCode = response.getStatusCode();
             logger.debug(String.format("Response StatusCode: %d", statusCode));
-            final Map<String, String> headers = response.getHeaders();
-            for (final String key : headers.keySet()) {
+            Map<String, String> headers = response.getHeaders();
+            for (String key : headers.keySet()) {
                 logger.debug(String.format("Header: %s=%s", key, headers.get(key)));
             }
             logger.debug(String.format("If you want the log from the image inspector service, execute this command: docker logs %s. If the container is no longer running, set cleanup.inspector.container=false and run again",
                 serviceContainerDetails.getContainerId()));
             if (failureTest.test(statusCode)) {
                 logServiceError(serviceContainerDetails.getContainerId());
-                final String warningHeaderValue = response.getWarningHeaderValue();
-                final String responseBody = response.getBody();
+                String warningHeaderValue = response.getWarningHeaderValue();
+                String responseBody = response.getBody();
                 throw new IntegrationRestException(statusCode, warningHeaderValue, responseBody,
                     String.format("There was a problem trying to getBdio. Error: %d; Warning header: '%s'; Body: '%s'", statusCode, warningHeaderValue,
                         responseBody));
@@ -214,15 +193,15 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         return response;
     }
 
-    private void logServiceError(final String correctedContainerId) throws InterruptedException {
-        final boolean serviceLogLogged = logServiceLogIfDebug(correctedContainerId);
+    private void logServiceError(String correctedContainerId) throws InterruptedException {
+        boolean serviceLogLogged = logServiceLogIfDebug(correctedContainerId);
         if (!serviceLogLogged) {
             logger.error(String.format("Request to image inspector service failed. To see image inspector service logs, set the Docker Inspector logging level to DEBUG, or execute the following command: 'docker logs %s'",
                 correctedContainerId));
         }
     }
 
-    private boolean logServiceLogIfDebug(final String correctedContainerId) throws InterruptedException {
+    private boolean logServiceLogIfDebug(String correctedContainerId) throws InterruptedException {
         if (logger.isDebugEnabled()) {
             dockerClientManager.logServiceLogAsDebug(correctedContainerId);
             return true;
@@ -234,11 +213,11 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
         return (int) (config.getServiceTimeout() / 1000L);
     }
 
-    private URI deriveInspectorBaseUri(final int inspectorPort) throws IntegrationException {
+    private URI deriveInspectorBaseUri(int inspectorPort) throws IntegrationException {
         URI imageInspectorUri;
         try {
             if (StringUtils.isNotBlank(config.getImageInspectorUrl())) {
-                final URI serviceUri = new URI(config.getImageInspectorUrl());
+                URI serviceUri = new URI(config.getImageInspectorUrl());
                 imageInspectorUri = new URI(serviceUri.getScheme(), serviceUri.getUserInfo(), serviceUri.getHost(), inspectorPort, serviceUri.getPath(), serviceUri.getQuery(), serviceUri.getFragment());
                 logger.debug(String.format("Adjusted image inspector url from %s to %s", config.getImageInspectorUrl(), imageInspectorUri.toString()));
             } else {
@@ -246,50 +225,50 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
                 imageInspectorUri = new URI(II_SERVICE_URI_SCHEME, null, II_SERVICE_HOST, inspectorPort,
                     null, null, null);
             }
-        } catch (final URISyntaxException e) {
+        } catch (URISyntaxException e) {
             throw new IntegrationException(String.format("Error deriving inspector URL: %s", e.getMessage()), e);
         }
         logger.debug(String.format("ImageInspector URL: %s", imageInspectorUri.toString()));
         return imageInspectorUri;
     }
 
-    private IntHttpClient createRestConnection(final URI imageInspectorUri, final int serviceRequestTimeoutSeconds) throws IntegrationException {
+    private IntHttpClient createRestConnection(URI imageInspectorUri, int serviceRequestTimeoutSeconds) throws IntegrationException {
         logger.debug(String.format("Creating a rest connection (%d second timeout) for URL: %s", serviceRequestTimeoutSeconds, imageInspectorUri.toString()));
         IntHttpClient restConnection;
         try {
             restConnection = httpConnectionCreator
-                .createNonRedirectingConnection(imageInspectorUri, serviceRequestTimeoutSeconds);
-        } catch (final MalformedURLException e) {
+                                 .createNonRedirectingConnection(imageInspectorUri, serviceRequestTimeoutSeconds);
+        } catch (MalformedURLException e) {
             throw new IntegrationException(String.format("Error creating connection for URL: %s, timeout: %d", imageInspectorUri.toString(), serviceRequestTimeoutSeconds), e);
         }
         return restConnection;
     }
 
-    private ContainerDetails ensureServiceReady(final IntHttpClient httpClient, final URI imageInspectorUri, final ImageInspectorOsEnum inspectorOs) throws IntegrationException, InterruptedException {
+    private ContainerDetails ensureServiceReady(IntHttpClient httpClient, URI imageInspectorUri, ImageInspectorOsEnum inspectorOs) throws IntegrationException, InterruptedException {
         boolean serviceIsUp = imageInspectorServices.checkServiceHealth(httpClient, imageInspectorUri);
         if (serviceIsUp) {
-            final Container container = dockerClientManager.getRunningContainerByAppName(Config.IMAGEINSPECTOR_WS_APPNAME, inspectorOs);
+            Container container = dockerClientManager.getRunningContainerByAppName(Config.IMAGEINSPECTOR_WS_APPNAME, inspectorOs);
             return new ContainerDetails(null, container.getId());
         }
         logger.info(String.format("Service %s (%s) is not running; starting it...", imageInspectorUri.toString(), inspectorOs.name()));
         if (config.isCleanupInspectorContainer()) {
             logger.info("(Image inspection may complete faster if you set cleanup.inspector.container=false)");
         }
-        final String imageInspectorRepo;
-        final String imageInspectorTag;
+        String imageInspectorRepo;
+        String imageInspectorTag;
         imageInspectorRepo = inspectorImages.getInspectorImageName(inspectorOs);
         imageInspectorTag = inspectorImages.getInspectorImageTag(inspectorOs);
         logger.debug(String.format("Need to pull/run image %s:%s to start the %s service", imageInspectorRepo, imageInspectorTag, imageInspectorUri.toString()));
-        final Optional<String> imageId = pullImageTolerantly(imageInspectorRepo, imageInspectorTag);
-        final int containerPort = imageInspectorServices.getImageInspectorContainerPort(inspectorOs);
-        final int hostPort = imageInspectorServices.getImageInspectorHostPort(inspectorOs);
-        final String containerName = containerNameManager.deriveContainerNameFromImageInspectorRepo(imageInspectorRepo);
-        final String containerId = dockerClientManager.startContainerAsService(imageInspectorRepo, imageInspectorTag, containerName, inspectorOs, containerPort, hostPort,
+        Optional<String> imageId = pullImageTolerantly(imageInspectorRepo, imageInspectorTag);
+        int containerPort = imageInspectorServices.getImageInspectorContainerPort(inspectorOs);
+        int hostPort = imageInspectorServices.getImageInspectorHostPort(inspectorOs);
+        String containerName = containerNameManager.deriveContainerNameFromImageInspectorRepo(imageInspectorRepo);
+        String containerId = dockerClientManager.startContainerAsService(imageInspectorRepo, imageInspectorTag, containerName, inspectorOs, containerPort, hostPort,
             Config.IMAGEINSPECTOR_WS_APPNAME,
             String.format("%s/%s/%s.jar", Config.CONTAINER_BLACKDUCK_DIR, Config.IMAGEINSPECTOR_WS_APPNAME, Config.IMAGEINSPECTOR_WS_APPNAME),
             deriveInspectorBaseUri(config.getImageInspectorHostPortAlpine()).toString(), deriveInspectorBaseUri(config.getImageInspectorHostPortCentos()).toString(),
             deriveInspectorBaseUri(config.getImageInspectorHostPortUbuntu()).toString());
-        final ContainerDetails containerDetails = new ContainerDetails(imageId.orElse(null), containerId);
+        ContainerDetails containerDetails = new ContainerDetails(imageId.orElse(null), containerId);
         serviceIsUp = imageInspectorServices.startService(httpClient, imageInspectorUri, imageInspectorRepo, imageInspectorTag);
         if (!serviceIsUp) {
             dockerClientManager.logServiceLogAsDebug(containerId);
@@ -300,19 +279,21 @@ public class ImageInspectorClientStartServices implements ImageInspectorClient {
     }
 
     private void checkServiceVersion(IntHttpClient httpClient, URI imageInspectorUri) {
-        final String serviceVersion = imageInspectorServices.getServiceVersion(httpClient, imageInspectorUri);
-        final String expectedServiceVersion = programVersion.getInspectorImageVersion();
+        String serviceVersion = imageInspectorServices.getServiceVersion(httpClient, imageInspectorUri);
+        String expectedServiceVersion = programVersion.getInspectorImageVersion();
         if (!serviceVersion.equals(expectedServiceVersion)) {
-            logger.warn(String.format("Expected image inspector service version %s, but the running image inspector service is version %s; This version of Docker Inspector is designed to work with image inspector service version %s. Please stop and remove all running image inspector containers.", expectedServiceVersion, serviceVersion, expectedServiceVersion));
+            logger.warn(String.format(
+                "Expected image inspector service version %s, but the running image inspector service is version %s; This version of Docker Inspector is designed to work with image inspector service version %s. Please stop and remove all running image inspector containers.",
+                expectedServiceVersion, serviceVersion, expectedServiceVersion));
         }
     }
 
-    private Optional<String> pullImageTolerantly(final String imageInspectorRepo, final String imageInspectorTag) {
+    private Optional<String> pullImageTolerantly(String imageInspectorRepo, String imageInspectorTag) {
         Optional<String> imageId = Optional.empty();
         try {
             imageId = Optional.ofNullable(dockerClientManager.pullImage(imageInspectorRepo, imageInspectorTag));
             logger.debug(String.format("Pulled image ID %s", imageId.orElse("<null>")));
-        } catch (final Exception e) {
+        } catch (Exception e) {
             logger.warn(String.format("Unable to pull docker image %s:%s; proceeding anyway since it may already exist locally", imageInspectorRepo, imageInspectorTag));
         }
         return imageId;

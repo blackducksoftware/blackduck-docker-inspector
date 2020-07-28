@@ -36,19 +36,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
+import com.synopsys.integration.bdio.BdioReader;
+import com.synopsys.integration.bdio.model.SimpleBdioDocument;
 import com.synopsys.integration.blackduck.dockerinspector.blackduckclient.BlackDuckClient;
-import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
-import com.synopsys.integration.blackduck.dockerinspector.output.ContainerFilesystemFilename;
-import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarFilename;
-import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarWrapper;
-import com.synopsys.integration.blackduck.dockerinspector.output.Output;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
+import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
+import com.synopsys.integration.blackduck.dockerinspector.output.ContainerFilesystemFilename;
+import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarWrapper;
+import com.synopsys.integration.blackduck.dockerinspector.output.Output;
 import com.synopsys.integration.blackduck.dockerinspector.output.OutputFiles;
 import com.synopsys.integration.blackduck.dockerinspector.output.Result;
 import com.synopsys.integration.exception.IntegrationException;
-import com.synopsys.integration.bdio.BdioReader;
-import com.synopsys.integration.bdio.model.SimpleBdioDocument;
 
 @Component
 public class HttpClientInspector {
@@ -82,40 +81,40 @@ public class HttpClientInspector {
     private ContainerFilesystemFilename containerFilesystemFilename;
 
     public Result getBdio() throws IntegrationException, InterruptedException {
-        final ImageInspectorClient imageInspectorClient = chooseImageInspectorClient();
+        ImageInspectorClient imageInspectorClient = chooseImageInspectorClient();
         try {
             output.ensureWorkingOutputDirIsWriteable();
-            final ImageTarWrapper finalDockerTarfile = prepareDockerTarfile(imageInspectorClient);
-            final String containerFileSystemFilename = containerFilesystemFilename.deriveContainerFilesystemFilename(finalDockerTarfile.getImageRepo(), finalDockerTarfile.getImageTag());
-            final String dockerTarFilePathInContainer = containerPaths.getContainerPathToTargetFile(finalDockerTarfile.getFile().getCanonicalPath());
+            ImageTarWrapper finalDockerTarfile = prepareDockerTarfile(imageInspectorClient);
+            String containerFileSystemFilename = containerFilesystemFilename.deriveContainerFilesystemFilename(finalDockerTarfile.getImageRepo(), finalDockerTarfile.getImageTag());
+            String dockerTarFilePathInContainer = containerPaths.getContainerPathToTargetFile(finalDockerTarfile.getFile().getCanonicalPath());
             String containerFileSystemPathInContainer = null;
             if (config.isOutputIncludeContainerfilesystem() || config.isOutputIncludeSquashedImage()) {
                 containerFileSystemPathInContainer = containerPaths.getContainerPathToOutputFile(containerFileSystemFilename);
             }
-            final String bdioString = imageInspectorClient.getBdio(finalDockerTarfile.getFile().getCanonicalPath(), dockerTarFilePathInContainer, config.getDockerImageRepo(), config.getDockerImageTag(),
+            String bdioString = imageInspectorClient.getBdio(finalDockerTarfile.getFile().getCanonicalPath(), dockerTarFilePathInContainer, config.getDockerImageRepo(), config.getDockerImageTag(),
                 containerFileSystemPathInContainer, config.getContainerFileSystemExcludedPaths(),
                 config.isOrganizeComponentsByLayer(), config.isIncludeRemovedComponents(),
                 config.isCleanupWorkingDir(), config.getDockerPlatformTopLayerId(),
                 config.getTargetImageLinuxDistroOverride());
             logger.trace(String.format("bdioString: %s", bdioString));
-            final SimpleBdioDocument bdioDocument = toBdioDocument(bdioString);
+            SimpleBdioDocument bdioDocument = toBdioDocument(bdioString);
             adjustBdio(bdioDocument);
-            final OutputFiles outputFiles = output.addOutputToFinalOutputDir(bdioDocument, finalDockerTarfile.getImageRepo(), finalDockerTarfile.getImageTag());
+            OutputFiles outputFiles = output.addOutputToFinalOutputDir(bdioDocument, finalDockerTarfile.getImageRepo(), finalDockerTarfile.getImageTag());
             if (config.isUploadBdio()) {
                 blackDuckClient.uploadBdio(outputFiles.getBdioFile(), bdioDocument.getBillOfMaterials().spdxName);
             }
             cleanup();
-            final Result result = Result.createResultSuccess(finalDockerTarfile.getImageRepo(), finalDockerTarfile.getImageTag(), finalDockerTarfile.getFile().getName(),
+            Result result = Result.createResultSuccess(finalDockerTarfile.getImageRepo(), finalDockerTarfile.getImageTag(), finalDockerTarfile.getFile().getName(),
                 outputFiles.getBdioFile(),
                 outputFiles.getContainerFileSystemFile(),
                 outputFiles.getSquashedImageFile());
             return result;
-        } catch (final IOException e) {
+        } catch (IOException e) {
             throw new IntegrationException(e.getMessage(), e);
         }
     }
 
-    private void adjustBdio(final SimpleBdioDocument bdioDocument) {
+    private void adjustBdio(SimpleBdioDocument bdioDocument) {
         if (StringUtils.isNotBlank(config.getBlackDuckProjectName())) {
             bdioDocument.getProject().name = config.getBlackDuckProjectName();
         }
@@ -129,8 +128,8 @@ public class HttpClientInspector {
         }
     }
 
-    private SimpleBdioDocument toBdioDocument(final String bdioString) throws IOException {
-        final Reader reader = new StringReader(bdioString);
+    private SimpleBdioDocument toBdioDocument(String bdioString) throws IOException {
+        Reader reader = new StringReader(bdioString);
         SimpleBdioDocument doc = null;
         try (BdioReader bdioReader = new BdioReader(gson, reader)) {
             doc = bdioReader.readSimpleBdioDocument();
@@ -138,9 +137,9 @@ public class HttpClientInspector {
         }
     }
 
-    private ImageTarWrapper prepareDockerTarfile(final ImageInspectorClient imageInspectorClient) throws IOException, IntegrationException {
-        final ImageTarWrapper givenDockerTarfile = dockerClientManager.deriveDockerTarFileFromConfig();
-        final ImageTarWrapper finalDockerTarfile = imageInspectorClient.copyTarfileToSharedDir(givenDockerTarfile);
+    private ImageTarWrapper prepareDockerTarfile(ImageInspectorClient imageInspectorClient) throws IOException, IntegrationException {
+        ImageTarWrapper givenDockerTarfile = dockerClientManager.deriveDockerTarFileFromConfig();
+        ImageTarWrapper finalDockerTarfile = imageInspectorClient.copyTarfileToSharedDir(config, programPaths, givenDockerTarfile);
         return finalDockerTarfile;
     }
 
@@ -151,14 +150,14 @@ public class HttpClientInspector {
         logger.debug(String.format("Removing %s", programPaths.getDockerInspectorRunDirPath()));
         try {
             removeFileOrDir(programPaths.getDockerInspectorRunDirPath());
-        } catch (final IOException e) {
+        } catch (IOException e) {
             logger.error(String.format("Error cleaning up working directories: %s", e.getMessage()));
         }
     }
 
-    private void removeFileOrDir(final String fileOrDirPath) throws IOException {
+    private void removeFileOrDir(String fileOrDirPath) throws IOException {
         logger.info(String.format("Removing file or dir: %s", fileOrDirPath));
-        final File fileOrDir = new File(fileOrDirPath);
+        File fileOrDir = new File(fileOrDirPath);
         if (fileOrDir.exists()) {
             if (fileOrDir.isDirectory()) {
                 FileUtils.deleteDirectory(fileOrDir);
@@ -169,7 +168,7 @@ public class HttpClientInspector {
     }
 
     private ImageInspectorClient chooseImageInspectorClient() throws IntegrationException {
-        for (final ImageInspectorClient client : imageInspectorClients) {
+        for (ImageInspectorClient client : imageInspectorClients) {
             if (client.isApplicable()) {
                 return client;
             }

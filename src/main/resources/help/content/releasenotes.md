@@ -1,3 +1,7 @@
+#### Version 9.0.2
+##### Resolved issues
+* Resolved an issue that could caused ${solution_name} to fail when using existing image inspector services when given a target docker .tar file that resided outside the directory shared with the image inspector container(s).
+
 #### Version 9.0.1
 ##### Resolved issues
 * Resolved an issue that could cause files to be omitted from the squashed image produced by ${solution_name}. The problem occurred on images that declared a directory opaque and added files to that directory within the same layer that declared it opaque.
