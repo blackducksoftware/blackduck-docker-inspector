@@ -544,11 +544,6 @@ on which it depends. It accesses the services they provide through HTTP GET oper
 three container-based services which you must start. These four containers must:
 (a) Share a mounted volume, either persistent or temporary, used to pass large files between containers, and:
 (b) Be able to reach each other through HTTP GET operations using base URLs that you provide.</p>
-<p>Because in this mode you (not Black Duck Docker Inspector) are deploying the image inspector services,
-you must ensure that you deploy the correct version of the image inspector images for the
-version of Black Duck Docker Inspector that you run. This is easier if you explicitly control the version of
-Black Duck Docker Inspector, rather than letting blackduck-docker-inspector.sh or Detect auto-update Black Duck Docker Inspector.
-See <a href="../running/">Running</a> for details.</p>
 <h3 id="image-inspector-services">Image Inspector Services</h3>
 <p>Black Duck Docker Inspector consists of a command line utility provided in a Java .jar, but sometimes invoked using a bash script,
 and three image inspector services.</p>

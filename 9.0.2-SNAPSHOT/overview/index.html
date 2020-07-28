@@ -461,17 +461,9 @@
                 <p><em>Help version: 9.0.2-SNAPSHOT</em></p>
 <p>Black Duck Docker Inspector inspects Docker images to discover packages (components).
 It utilizes the appropriate Linux package manager to provide a list of
-the packages installed by the package manager, and creates a Black Duck 
-project with a Bill of Materials (BOM) consisting of those packages as components.
-Because it relies on the Linux package manager as its source,
-the discovered packages are limited to those installed and managed using the Linux package manager.</p>
-<p>Black Duck Docker Inspector can discover package manager-installed components in
-Linux Docker images that use the DPKG, RPM, or APK package manager formats.</p>
-<p>Black Duck Docker Inspector can inspect non-Linux images (for example, Windows images,
-and images that contain no operating system), but 
-will discover zero components. This can be useful if the target image
-container file system that Black Duck Docker Inspector can produce as output is needed
-for signature scanning.</p>
+the packages installed by the package manager, and creates a Black Duck project with a Bill of Materials (BOM) consisting of those packages as components.
+Because it relies on the Linux package manager as its source, the discovered packages are limited to those installed and managed using the Linux package manager.</p>
+<p>Black Duck Docker Inspector can inspect Linux Docker images that use the DPKG, RPM, or APK package manager formats.</p>
 <p>After running the Black Duck Docker Inspector on an image, navigate to Black Duck to view the BOM created by 
 Black Duck Docker Inspector.</p>
 <h3 id="modes-of-operation">Modes of operation</h3>
@@ -497,7 +489,7 @@ refer to <a href="../deployment/">Deploying</a>.</p>
 <p>Requirements for Black Duck Docker Inspector are:</p>
 <ul>
 <li>The current version of Black Duck. Visit <a href="https://github.com/blackducksoftware/hub/releases">this page</a> to determine the current version. </li>
-<li>Linux or MacOS.</li>
+<li>Linux.</li>
 <li>Access to the internet. For information on running without access to the internet, refer to <a href="../advanced/#air-gap-mode">Air Gap mode</a>.</li>
 <li>Java (JRE) versions 8 or 11.</li>
 <li>Three available ports for the image inspector services. By default, these ports are 9000, 9001, and 9002.</li>

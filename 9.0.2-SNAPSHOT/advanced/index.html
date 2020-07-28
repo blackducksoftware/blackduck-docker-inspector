@@ -75,7 +75,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#how-black-duck-docker-inspector-discovers-dependencies" tabindex="1" class="md-skip">
+      <a href="#isolating-application-components" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -265,13 +265,6 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#how-black-duck-docker-inspector-discovers-dependencies" class="md-nav__link">
-    How Black Duck Docker Inspector discovers dependencies
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#isolating-application-components" class="md-nav__link">
     Isolating application components
   </a>
@@ -295,13 +288,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#inspecting-windows-images" class="md-nav__link">
-    Inspecting Windows images
-  </a>
   
 </li>
       
@@ -371,13 +357,6 @@
         <li class="md-nav__item">
   <a href="#excluding-filesdirectories-from-the-returned-container-file-system-which-excludes-them-from-detects-signature-scan" class="md-nav__link">
     Excluding files/directories from the returned container file system which excludes them from Detect's signature scan
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#relocating-black-duck-docker-inspectors-working-directories" class="md-nav__link">
-    Relocating Black Duck Docker Inspector's working directories
   </a>
   
 </li>
@@ -448,13 +427,6 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#how-black-duck-docker-inspector-discovers-dependencies" class="md-nav__link">
-    How Black Duck Docker Inspector discovers dependencies
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#isolating-application-components" class="md-nav__link">
     Isolating application components
   </a>
@@ -478,13 +450,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#inspecting-windows-images" class="md-nav__link">
-    Inspecting Windows images
-  </a>
   
 </li>
       
@@ -558,13 +523,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#relocating-black-duck-docker-inspectors-working-directories" class="md-nav__link">
-    Relocating Black Duck Docker Inspector's working directories
-  </a>
-  
-</li>
-      
       
       
       
@@ -585,26 +543,6 @@
                   <h1>Advanced</h1>
                 
                 <p>This section covers a variety of advanced topics.</p>
-<h3 id="how-black-duck-docker-inspector-discovers-dependencies">How Black Duck Docker Inspector discovers dependencies</h3>
-<p>Black Duck Docker Inspector discovers dependencies in the target image by making a request to
-an image inspector service (running inside a container).
-The image inspector service works as follows:</p>
-<ol>
-<li>Reads the target image, and constructs the file system that the container would have at
-time zero if you were to run the image.</li>
-<li>Finds the linux package manager database in that file system.</li>
-<li>Runs its own linux package manager (invoking its "list" function: "dpkg -l", "rpm -qa --qf ...", or "apk info -v") on the package manager
-database from the target image
-to generate the list of packages installed in the target image.
-If the package manager database type of the target image does not match
-the image inspector's package manager type, the image inspector will redirect
-the request
-to the image inspector that can process the target image (which starts
-again at step 1).</li>
-<li>Translates that package list to BDIO and uploads it to Black Duck, or returns it to the the
-caller (e.g. Detect) to upload to Black Duck.</li>
-<li>Returns the constructed file system to the caller (e.g. Detect) for signature scanning.</li>
-</ol>
 <h3 id="isolating-application-components">Isolating application components</h3>
 <p>If you are interested in components from the application layers of your image, but not interested in components
 from the underlying platform layers, you can exclude components from platform layers from your results.</p>
@@ -655,13 +593,6 @@ application components by excluding platform components. However, there may be s
 signature scanner because in this scenario, the signature scanner may be deprived of some contextual
 information, such as the operating system files that enable it to determine the Linux distribution.<br />
 This could negatively affect its ability to accurately identify components.</p>
-<h3 id="inspecting-windows-images">Inspecting Windows images</h3>
-<p>Running on a non-Windows system, Docker can neither pull nor build a Windows image.
-Consequently, you cannot run Black Duck Docker Inspector on a Windows Docker image
-using the either the <em>docker.image</em> or <em>docker.image.id</em> property.
-Instead, you must, using a Windows system,
-pull and save the target image as a .tar file, and pass that .tar file
-to Black Duck Docker Inspector using the <em>docker.tar</em> property. </p>
 <h3 id="inspecting-multiple-images-more-efficiently-by-leaving-services-running">Inspecting multiple images more efficiently by leaving services running</h3>
 <p>By default, Black Duck Docker Inspector starts, uses, and then stops and removes either one or two containerized
 image inspector services per run. This may be appropriate when scanning
@@ -799,22 +730,6 @@ specify that list of directories with the property <em>--output.containerfilesys
 to exclude the <em>/etc</em> and <em>/usr/bin</em> directories from the signature scan, you
 could run Detect like this:</p>
 <pre><code>./detect.sh --detect.docker.image=ubuntu:latest --detect.docker.passthrough.output.containerfilesystem.excluded.paths=/etc,/usr/bin
-</code></pre>
-
-<h3 id="relocating-black-duck-docker-inspectors-working-directories">Relocating Black Duck Docker Inspector's working directories</h3>
-<p>Docker Inspector uses 3 directories:</p>
-<ol>
-<li>One that blackduck-docker-inspector.sh downloads the Black Duck Docker Inspector .jar file into (controlled via environment variable DOCKER_INSPECTOR_JAR_DIR)</li>
-<li>One that Black Duck Docker Inspector shares with its image inspector containers (controlled via the shared.dir.path.local property)</li>
-<li>One for other files (controlled via properety working.dir.path)</li>
-</ol>
-<p>By default, Black Duck Docker Inspector creates a temporary directory under /tmp for each purpose, but each directory can be relocated.
-If you want to avoid /tmp, you could relocate all three by doing something similar to this:</p>
-<pre><code># mkdir /opt/tmp/jar # Create a dir for the Black Duck Docker Inspector .jar download
-# mkdir /opt/tmp/working # Create a dir Black Duck Docker Inspector working dir
-# mkdir /opt/tmp/shared # Create a dir that Black Duck Docker Inspector will share with its image inspector containers
-export DOCKER_INSPECTOR_JAR_DIR=/opt/tmp/jar
-./blackduck-docker-inspector.sh --working.dir.path=/opt/tmp/working --shared.dir.path.local=/opt/tmp/shared ...
 </code></pre>
                 
                   
