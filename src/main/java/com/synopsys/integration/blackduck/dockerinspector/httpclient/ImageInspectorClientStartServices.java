@@ -202,7 +202,7 @@ public class ImageInspectorClientStartServices extends ImageInspectorClient {
         }
     }
 
-    private boolean logServiceLogIfDebug(String correctedContainerId) throws InterruptedException {
+    private boolean logServiceLogIfDebug(String correctedContainerId) {
         if (logger.isDebugEnabled()) {
             dockerClientManager.logServiceLogAsDebug(correctedContainerId);
             return true;

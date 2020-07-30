@@ -299,6 +299,10 @@ public class Config {
     @Value("${imageinspector.service.distro.default:ubuntu}")
     private String imageInspectorDefaultDistro = INSPECTOR_OS_UBUNTU;
 
+    @ValueDescription(description = "The number of lines of the image inspector service log to include in the Docker Inspector log when log level is DEBUG or higher", defaultValue = "10000", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${imageinspector.service.log.length:10000}")
+    private Integer imageInspectorServiceLogLength = 10000;
+
     @ValueDescription(description = "Make no attempts to access network-based resources (the Black Duck server, docker repository)", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${offline.mode:false}")
     private Boolean offlineMode = Boolean.FALSE;
@@ -339,8 +343,8 @@ public class Config {
     private Map<String, DockerInspectorOption> optionsByFieldName;
     private TreeSet<String> allKeys;
 
-    public String get(final String key) {
-        final DockerInspectorOption opt = optionsByKey.get(key);
+    public String get(String key) {
+        DockerInspectorOption opt = optionsByKey.get(key);
         if (opt == null) {
             return null;
         }
@@ -357,10 +361,10 @@ public class Config {
         allKeys = new TreeSet<>();
         optionsByKey = new HashMap<>();
         optionsByFieldName = new HashMap<>();
-        for (final Field field : this.getClass().getDeclaredFields()) {
-            final Annotation[] declaredAnnotations = field.getDeclaredAnnotations();
+        for (Field field : this.getClass().getDeclaredFields()) {
+            Annotation[] declaredAnnotations = field.getDeclaredAnnotations();
             if (declaredAnnotations.length > 0) {
-                for (final Annotation annotation : declaredAnnotations) {
+                for (Annotation annotation : declaredAnnotations) {
                     if (annotation instanceof ValueDescription) {
                         recordOption(field);
                     }
@@ -369,21 +373,21 @@ public class Config {
         }
     }
 
-    private void recordOption(final Field field) throws IllegalAccessException {
+    private void recordOption(Field field) throws IllegalAccessException {
         logger.trace(String.format("ValueDescription annotated config object field: %s", field.getName()));
-        final String propMappingString = field.getAnnotation(Value.class).value();
-        final String propName = SpringValueUtils.springKeyFromValueAnnotation(propMappingString);
-        final Object fieldValueObject = field.get(this);
+        String propMappingString = field.getAnnotation(Value.class).value();
+        String propName = SpringValueUtils.springKeyFromValueAnnotation(propMappingString);
+        Object fieldValueObject = field.get(this);
         if (fieldValueObject == null) {
             logger.warn(String.format("propName %s field is null", propName));
             return;
         }
-        final String value = fieldValueObject.toString();
+        String value = fieldValueObject.toString();
         logger.trace(String.format("adding prop key %s [value: %s]", propName, value));
         allKeys.add(propName);
-        final ValueDescription valueDescription = field.getAnnotation(ValueDescription.class);
-        final DockerInspectorOption opt = new DockerInspectorOption(propName, value, valueDescription.description(), field.getType(), valueDescription.defaultValue(),
-                valueDescription.deprecated());
+        ValueDescription valueDescription = field.getAnnotation(ValueDescription.class);
+        DockerInspectorOption opt = new DockerInspectorOption(propName, value, valueDescription.description(), field.getType(), valueDescription.defaultValue(),
+            valueDescription.deprecated());
         optionsByKey.put(propName, opt);
         logger.trace(String.format("adding field name %s to optionsByFieldName", field.getName()));
         optionsByFieldName.put(field.getName(), opt);
@@ -400,6 +404,10 @@ public class Config {
 
     public Integer getBlackDuckTimeout() {
         return new Integer(optionsByFieldName.get("blackDuckTimeout").getResolvedValue());
+    }
+
+    public Integer getImageInspectorServiceLogLength() {
+        return new Integer(optionsByFieldName.get("imageInspectorServiceLogLength").getResolvedValue());
     }
 
     public String getBlackDuckApiToken() {
@@ -650,21 +658,20 @@ public class Config {
         return optionsByFieldName.get("offlineMode").getResolvedValue().equals("true");
     }
 
-    public void setDockerImageRepo(final String newValue) {
+    public void setDockerImageRepo(String newValue) {
         optionsByFieldName.get("dockerImageRepo").setResolvedValue(newValue);
     }
 
-    public void setDockerImageTag(final String newValue) {
+    public void setDockerImageTag(String newValue) {
         optionsByFieldName.get("dockerImageTag").setResolvedValue(newValue);
     }
 
-    private String unEscape(final String origString) {
+    private String unEscape(String origString) {
         logger.trace(String.format("origString: %s", origString));
-        final String unEscapedString = origString.replace("%20", " ");
+        String unEscapedString = origString.replace("%20", " ");
         logger.trace(String.format("unEscapedString: %s", unEscapedString));
         return unEscapedString;
     }
-
 
     private File deriveWorkingDir() {
         File workingDir;
@@ -713,6 +720,7 @@ public class Config {
         this.blackDuckProxyPort = null;
         this.blackDuckProxyUsername = null;
         this.blackDuckTimeout = null;
+        this.imageInspectorServiceLogLength = null;
         this.blackDuckUrl = null;
         this.blackDuckUsername = null;
         this.blackDuckApiToken = null;

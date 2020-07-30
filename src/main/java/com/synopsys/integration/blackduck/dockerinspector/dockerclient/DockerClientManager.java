@@ -260,19 +260,21 @@ public class DockerClientManager {
         return imageId;
     }
 
-    public void logServiceLogAsDebug(String containerId) throws InterruptedException {
+    public void logServiceLogAsDebug(String containerId) {
         StringBuilder stringBuilder = new StringBuilder();
         try (StringBuilderLogReader callback = new StringBuilderLogReader(stringBuilder)) {
             dockerClient.logContainerCmd(containerId)
                 .withStdErr(true)
                 .withStdOut(true)
-                .withTailAll()
+                .withTail(config.getImageInspectorServiceLogLength())
                 .exec(callback)
                 .awaitCompletion();
             String log = callback.builder.toString();
-            logger.debug(String.format("Image inspector service log:%n%s%n==================================%n", log));
-        } catch (IOException e) {
-            logger.error(String.format("Error getting log for service container %s", containerId), e);
+            logger.debug("Image inspector service log:");
+            logger.debug(log);
+            logger.debug("==================================");
+        } catch (Exception e) {
+            logger.warn(String.format("Error getting log for service container %s", containerId), e);
         }
     }
 

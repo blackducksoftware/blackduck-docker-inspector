@@ -2,13 +2,19 @@
 ##### New features
 * Added support for running on Windows 10 Enterprise Edition by executing the ${solution_name} .jar file directly.
 * Added property use.platform.default.docker.host (default to true).
+* Added property imageinspector.service.log.length (defaults to 10000 lines). This gives the user control over the
+number of lines of the imageinspector service log that are included in the Detect log
+when logging level is set to DEBUG or higher.
 
-#### Changed feature
+##### Changed feature
 * Changed default working directory from /tmp to $HOME/blackduck/docker-inspector
+
+##### Resolved issue
+* (IDOCKER-709) Resolved an issue that could cause ${solution_name} to fail because it ran out of memory while writing the image inspector log to the ${solution_name} log.
 
 #### Version 9.0.2
 ##### Resolved issues
-* Resolved an issue that could cause ${solution_name} to fail when using existing image inspector services when given a target docker .tar file that resided outside the directory shared with the image inspector container(s).
+* (IDOCKER-706) Resolved an issue that could cause ${solution_name} to fail when using existing image inspector services when given a target docker .tar file that resided outside the directory shared with the image inspector container(s).
 
 #### Version 9.0.1
 ##### Resolved issues
