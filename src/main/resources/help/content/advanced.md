@@ -88,7 +88,7 @@ signature scanner because in this scenario, the signature scanner may be deprive
 information, such as the operating system files that enable it to determine the Linux distribution.  
 This could negatively affect its ability to accurately identify components.
 
-### Inspecting Windows images
+### Inspecting Windows images on non-Windows systems
 
 Running on a non-Windows system, Docker can neither pull nor build a Windows image.
 Consequently, you cannot run ${solution_name} on a Windows Docker image

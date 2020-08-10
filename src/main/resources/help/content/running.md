@@ -6,7 +6,7 @@ The following is only a consideration if you are not running ${solution_name}
 from ${detect_product_name}.
 
 When executing ${solution_name} directly on Linx or Mac,
-you can use the ${solution_name} bash script (script_name) that:
+you can use the ${solution_name} bash script ${script_name} that:
 
 1. Downloads (if necessary) the latest ${solution_name} .jar file, and
 2. Executes it with the arguments you have provided.
