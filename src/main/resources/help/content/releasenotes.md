@@ -1,3 +1,8 @@
+#### Version 9.1.1
+
+##### Resolved issue
+* (IDOCKER-710) Resolved an issue that could cause ${solution_name} to fail when the target image file system contains circular symbolic links.
+
 #### Version 9.1.0
 ##### New features
 * Added support for running on Windows 10 Enterprise Edition by executing the ${solution_name} .jar file directly.

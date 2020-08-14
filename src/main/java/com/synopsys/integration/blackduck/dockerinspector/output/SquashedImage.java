@@ -51,40 +51,40 @@ public class SquashedImage {
     private FileOperations fileOperations;
 
     @Autowired
-    public void setDockerClientManager(final DockerClientManager dockerClientManager) {
+    public void setDockerClientManager(DockerClientManager dockerClientManager) {
         this.dockerClientManager = dockerClientManager;
     }
 
     @Autowired
-    public void setFileOperations(final FileOperations fileOperations) {
+    public void setFileOperations(FileOperations fileOperations) {
         this.fileOperations = fileOperations;
     }
 
-    public void createSquashedImageTarGz(final File targetImageFileSystemTarGz, final File squashedImageTarGz,
-        final File tempTarFile, final File tempWorkingDir) throws IOException, IntegrationException {
+    public void createSquashedImageTarGz(File targetImageFileSystemTarGz, File squashedImageTarGz,
+        File tempTarFile, File tempWorkingDir) throws IOException, IntegrationException {
         logger.info(String.format("Transforming container filesystem %s to squashed image %s", targetImageFileSystemTarGz, squashedImageTarGz));
-        final File dockerBuildDir = tempWorkingDir;
-        final File containerFileSystemDir = new File(dockerBuildDir, "containerFileSystem");
+        File dockerBuildDir = tempWorkingDir;
+        File containerFileSystemDir = new File(dockerBuildDir, "containerFileSystem");
         containerFileSystemDir.mkdirs();
         CompressedFile.gunZipUnTarFile(targetImageFileSystemTarGz, tempTarFile, containerFileSystemDir);
-        fileOperations.pruneDanglingSymLinksRecursively(containerFileSystemDir);
-        final File dockerfile = new File(dockerBuildDir, "Dockerfile");
-        final String dockerfileContents = String.format("FROM scratch\nCOPY %s/* .\n", containerFileSystemDir.getName());
+        fileOperations.pruneProblematicSymLinksRecursively(containerFileSystemDir);
+        File dockerfile = new File(dockerBuildDir, "Dockerfile");
+        String dockerfileContents = String.format("FROM scratch\nCOPY %s/* .\n", containerFileSystemDir.getName());
         FileUtils.writeStringToFile(dockerfile, dockerfileContents, StandardCharsets.UTF_8);
 
-        final String imageRepoTag = generateUniqueImageRepoTag();
-        final Set<String> tags = new HashSet<>();
+        String imageRepoTag = generateUniqueImageRepoTag();
+        Set<String> tags = new HashSet<>();
         tags.add(imageRepoTag);
-        final String squashedImageId = dockerClientManager.buildImage(dockerBuildDir, tags);
+        String squashedImageId = dockerClientManager.buildImage(dockerBuildDir, tags);
 
         try {
-            final ImageTarWrapper generatedSquashedImageTarfile = dockerClientManager.getTarFileFromDockerImageById(squashedImageId, tempWorkingDir);
+            ImageTarWrapper generatedSquashedImageTarfile = dockerClientManager.getTarFileFromDockerImageById(squashedImageId, tempWorkingDir);
             logger.info(String.format("Generated squashed tarfile: %s", generatedSquashedImageTarfile.getFile().getAbsolutePath()));
             CompressedFile.gZipFile(generatedSquashedImageTarfile.getFile(), squashedImageTarGz);
         } finally {
             logger.debug(String.format("Removing temporary squashed image: %s", imageRepoTag));
-            final String[] imageRepoTagParts = imageRepoTag.split(":");
-            final Optional<String> imageId = dockerClientManager.lookupImageIdByRepoTag(imageRepoTagParts[0], imageRepoTagParts[1]);
+            String[] imageRepoTagParts = imageRepoTag.split(":");
+            Optional<String> imageId = dockerClientManager.lookupImageIdByRepoTag(imageRepoTagParts[0], imageRepoTagParts[1]);
             if (imageId.isPresent()) {
                 dockerClientManager.removeImage(imageId.get());
             } else {
@@ -95,12 +95,12 @@ public class SquashedImage {
 
     String generateUniqueImageRepoTag() throws IntegrationException {
 
-        for (int i=0; i < MAX_NAME_GENERATION_ATTEMPTS; i++) {
-            int randomImageRepoIndex = (int)(Math.random() * MAX_IMAGE_REPO_INDEX);
-            final String imageRepoCandidate = String.format("%s-%d", IMAGE_REPO_PREFIX, randomImageRepoIndex);
-            final String imageRepoTagCandidate = String.format("%s:%s", imageRepoCandidate, IMAGE_TAG);
+        for (int i = 0; i < MAX_NAME_GENERATION_ATTEMPTS; i++) {
+            int randomImageRepoIndex = (int) (Math.random() * MAX_IMAGE_REPO_INDEX);
+            String imageRepoCandidate = String.format("%s-%d", IMAGE_REPO_PREFIX, randomImageRepoIndex);
+            String imageRepoTagCandidate = String.format("%s:%s", imageRepoCandidate, IMAGE_TAG);
             logger.debug(String.format("Squashed image repo:name candidate: %s", imageRepoTagCandidate));
-            final Optional<String> foundImageId = dockerClientManager.lookupImageIdByRepoTag(imageRepoCandidate, IMAGE_TAG);
+            Optional<String> foundImageId = dockerClientManager.lookupImageIdByRepoTag(imageRepoCandidate, IMAGE_TAG);
             if (!foundImageId.isPresent()) {
                 return imageRepoTagCandidate;
             } else {

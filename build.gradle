@@ -274,7 +274,7 @@ artifactory {
 dependencies {
     compile 'com.blackducksoftware.integration:blackduck-common:44.4.0'
     compile 'com.synopsys.integration:integration-bdio:21.0.0'
-    compile 'com.synopsys.integration:hub-imageinspector-lib:13.0.3'
+    compile 'com.synopsys.integration:hub-imageinspector-lib:13.0.4'
 
     compile 'com.github.docker-java:docker-java-core:3.2.5'
     compile 'com.github.docker-java:docker-java-transport-httpclient5:3.2.5'
