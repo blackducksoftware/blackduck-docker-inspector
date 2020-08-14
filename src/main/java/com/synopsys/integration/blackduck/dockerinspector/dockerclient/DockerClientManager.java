@@ -41,11 +41,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.command.BuildImageResultCallback;
 import com.github.dockerjava.api.command.CreateContainerCmd;
 import com.github.dockerjava.api.command.CreateContainerResponse;
 import com.github.dockerjava.api.command.InspectImageCmd;
 import com.github.dockerjava.api.command.InspectImageResponse;
 import com.github.dockerjava.api.command.PullImageCmd;
+import com.github.dockerjava.api.command.PullImageResultCallback;
 import com.github.dockerjava.api.command.RemoveContainerCmd;
 import com.github.dockerjava.api.command.RemoveImageCmd;
 import com.github.dockerjava.api.command.SaveImageCmd;
@@ -67,9 +69,7 @@ import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DefaultDockerClientConfig.Builder;
 import com.github.dockerjava.core.DockerClientConfig;
 import com.github.dockerjava.core.DockerClientImpl;
-import com.github.dockerjava.core.command.BuildImageResultCallback;
 import com.github.dockerjava.core.command.LogContainerResultCallback;
-import com.github.dockerjava.core.command.PullImageResultCallback;
 import com.github.dockerjava.httpclient5.ApacheDockerHttpClient;
 import com.github.dockerjava.transport.DockerHttpClient;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
@@ -105,8 +105,8 @@ public class DockerClientManager {
         // But for Windows, unless told not to: use the Windows default docker host value
         if (config.isUsePlatformDefaultDockerHost() &&
                 (OperatingSystemType.determineFromSystem() == OperatingSystemType.WINDOWS)) {
-            builder = builder
-                          .withDockerHost("npipe:////./pipe/docker_engine");
+            builder
+                .withDockerHost("npipe:////./pipe/docker_engine");
         }
 
         DockerClientConfig dockerClientConfig = builder.build();
@@ -243,6 +243,7 @@ public class DockerClientManager {
     }
 
     public String buildImage(File dockerBuildDir, Set<String> tags) {
+        logger.debug(String.format("Building image: %s", tags));
         BuildImageResultCallback callback = new BuildImageResultCallback();
         String imageId = dockerClient.buildImageCmd(dockerBuildDir)
                              .withTags(tags)
