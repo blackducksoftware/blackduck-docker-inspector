@@ -6,11 +6,6 @@ language: java
 sudo: false
 install: true
 
-addons:
-  sonarcloud:
-    token:
-      secure: "pl0E0aosbEGq5+/9LhdqcLUFYTgzzLV8OKDnr8fGlyPuCc+1+SL/1/Sd3UPh/Ef08nHE8jgTZuWqQEn8ptUwJpXeX/9YAu8c8EgTca4Q6FSuRwNlbJbul5lxRPmoXjWpbiTdj5mej/zdOoUoNX5LXrDWN8/FXSU422SNkiNJRAqe7A8/pxPQ/lKdyQtO4cADnuSTDE/pGcGvAjn9wlp+VF5RRRUnS0vFBI5ZWbDMGZ2b/hWmhq5I+H8yOHd/3w/DB7wURZz9uzDB9XUrKAKVgFMWDXFfo9/2GTYqE7MC8GWi0s26SF7JkiJQLUGCkU9g2GmCbAUfMC7KGxKsKu6RTZumLy3vvhOL6qen6qwcfI21/yzSvcAbQmmjqnAC+AYZaHty1j3tn/WgOhh1qSEP2zWjx/vkRinZtSPQ/bvlT57z6WpjzVNMnzLMho6sJ/sfGx1gXrUGcEVujoUFDFcvrD9nHihIrlTDZXw995TKF2E2OjSbz+vnbHgfDe2lpGtvd8NtdGRxlqHnAYgBg3h5p0WT6pDjlEUvBOLM0agtRGeYJvOlMo9FWawQeIRqm8Xa45/WkCUbY2Rn3/xyoJX8rwJrjJu7qPmERfRZ44lS1FyYMq2BiAF6vbGSqvxeL2Q+fboWdtSTJXAbp45R28mXHPNTjLoTexldLZJJOoPzPVk="
-
 jdk:
 - openjdk8
 
@@ -20,7 +15,7 @@ notifications:
     - starlabs@synopsys.com
 
 script:
-- "./gradlew clean build jacocoTestReport coveralls sonarqube"
+- "./gradlew clean build"
 
 env:
 - DETECT_GRADLE_INCLUDED_CONFIGURATIONS=compile
@@ -31,6 +26,5 @@ after_success:
 cache:
   directories:
   - "$HOME/.m2/repository"
-  - "$HOME/.sonar/cache"
   - "$HOME/.gradle"
   - ".gradle"
