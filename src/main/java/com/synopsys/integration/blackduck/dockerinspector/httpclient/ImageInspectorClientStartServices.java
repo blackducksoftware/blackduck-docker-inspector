@@ -275,18 +275,8 @@ public class ImageInspectorClientStartServices extends ImageInspectorClient {
             dockerClientManager.logServiceLogAsDebug(containerId);
             throw new IntegrationException(String.format("Tried to start image imspector container %s:%s, but service %s never came online", imageInspectorRepo, imageInspectorTag, imageInspectorUri.toString()));
         }
-        checkServiceVersion(httpClient, imageInspectorUri);
+        checkServiceVersion(programVersion, imageInspectorServices, httpClient, imageInspectorUri);
         return containerDetails;
-    }
-
-    private void checkServiceVersion(IntHttpClient httpClient, URI imageInspectorUri) {
-        String serviceVersion = imageInspectorServices.getServiceVersion(httpClient, imageInspectorUri);
-        String expectedServiceVersion = programVersion.getInspectorImageVersion();
-        if (!serviceVersion.equals(expectedServiceVersion)) {
-            logger.warn(String.format(
-                "Expected image inspector service version %s, but the running image inspector service is version %s; This version of Docker Inspector is designed to work with image inspector service version %s. Please stop and remove all running image inspector containers.",
-                expectedServiceVersion, serviceVersion, expectedServiceVersion));
-        }
     }
 
     private Optional<String> pullImageTolerantly(String imageInspectorRepo, String imageInspectorTag) {

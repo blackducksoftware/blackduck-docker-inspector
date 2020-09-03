@@ -24,6 +24,7 @@ package com.synopsys.integration.blackduck.dockerinspector.httpclient;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.nio.file.Path;
 
 import org.apache.commons.io.FileUtils;
@@ -33,7 +34,9 @@ import org.slf4j.LoggerFactory;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarWrapper;
+import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.exception.IntegrationException;
+import com.synopsys.integration.rest.client.IntHttpClient;
 
 public abstract class ImageInspectorClient {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -75,4 +78,15 @@ public abstract class ImageInspectorClient {
         throws IntegrationException, IOException, InterruptedException;
 
     public abstract boolean isApplicable();
+
+    protected void checkServiceVersion(ProgramVersion programVersion, ImageInspectorServices imageInspectorServices, IntHttpClient httpClient, URI imageInspectorUri) {
+        String serviceVersion = imageInspectorServices.getServiceVersion(httpClient, imageInspectorUri);
+        logger.info(String.format("Image Inspector Service version: %s", serviceVersion));
+        String expectedServiceVersion = programVersion.getInspectorImageVersion();
+        if (!serviceVersion.equals(expectedServiceVersion)) {
+            logger.warn(String.format(
+                "Expected image inspector service version %s, but the running image inspector service is version %s; This version of Docker Inspector is designed to work with image inspector service version %s. Please stop and remove all running image inspector containers.",
+                expectedServiceVersion, serviceVersion, expectedServiceVersion));
+        }
+    }
 }

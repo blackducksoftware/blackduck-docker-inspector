@@ -34,6 +34,7 @@ import org.springframework.stereotype.Component;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.httpclient.response.SimpleResponse;
+import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.rest.client.IntHttpClient;
 
@@ -48,6 +49,12 @@ public class ImageInspectorClientUseExistingServices extends ImageInspectorClien
 
     @Autowired
     private HttpConnectionCreator httpConnectionCreator;
+
+    @Autowired
+    private ImageInspectorServices imageInspectorServices;
+
+    @Autowired
+    private ProgramVersion programVersion;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -72,9 +79,10 @@ public class ImageInspectorClientUseExistingServices extends ImageInspectorClien
             throw new IntegrationException(String.format("Error constructing URI from %s: %s", config.getImageInspectorUrl(), e.getMessage()), e);
         }
         int serviceRequestTimeoutSeconds = deriveTimeoutSeconds();
-        IntHttpClient restConnection = httpConnectionCreator
-                                                 .createRedirectingConnection(imageInspectorUri, serviceRequestTimeoutSeconds);
-        SimpleResponse response = restRequester.executeGetBdioRequest(restConnection, imageInspectorUri, containerPathToInputDockerTarfile,
+        IntHttpClient httpClient = httpConnectionCreator
+                                       .createRedirectingConnection(imageInspectorUri, serviceRequestTimeoutSeconds);
+        checkServiceVersion(programVersion, imageInspectorServices, httpClient, imageInspectorUri);
+        SimpleResponse response = restRequester.executeGetBdioRequest(httpClient, imageInspectorUri, containerPathToInputDockerTarfile,
             givenImageRepo, givenImageTag,
             containerPathToOutputFileSystemFile, containerFileSystemExcludedPaths,
             organizeComponentsByLayer, includeRemovedComponents, cleanup,
