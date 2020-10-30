@@ -2,7 +2,6 @@ package com.synopsys.integration.blackduck.dockerinspector;
 
 import static org.junit.Assert.assertTrue;
 
-import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,22 +15,23 @@ import java.util.Set;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Disabled;
 
+import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.exception.IntegrationException;
 
 @Tag("integration")
 public class DockerInspectorTest {
-    private static int IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE = 8080;
-    private static int IMAGE_INSPECTOR_PORT_IN_CONTAINER_ALPINE = 8080;
-    private static int IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS = 8081;
-    private static int IMAGE_INSPECTOR_PORT_IN_CONTAINER_CENTOS = 8081;
-    private static int IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU = 8082;
-    private static int IMAGE_INSPECTOR_PORT_IN_CONTAINER_UBUNTU = 8082;
+    private static final int IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE = 8080;
+    private static final int IMAGE_INSPECTOR_PORT_IN_CONTAINER_ALPINE = 8080;
+    private static final int IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS = 8081;
+    private static final int IMAGE_INSPECTOR_PORT_IN_CONTAINER_CENTOS = 8081;
+    private static final int IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU = 8082;
+    private static final int IMAGE_INSPECTOR_PORT_IN_CONTAINER_UBUNTU = 8082;
 
-    private static String SHARED_DIR_PATH_IN_CONTAINER = "/opt/blackduck/shared";
+    private static final String SHARED_DIR_PATH_IN_CONTAINER = "/opt/blackduck/shared";
 
     private static File dirSharedWithContainer;
     private static File containerTargetDir;
@@ -76,7 +76,7 @@ public class DockerInspectorTest {
         }
         assertTrue(alpineUp && centosUp && ubuntuUp);
 
-        final File testDir = new File(TestUtils.TEST_DIR_REL_PATH);
+        File testDir = new File(TestUtils.TEST_DIR_REL_PATH);
         dirSharedWithContainer = new File(testDir, "containerShared");
         containerTargetDir = new File(dirSharedWithContainer, "target");
         containerOutputDir = new File(dirSharedWithContainer, "output");
@@ -89,7 +89,7 @@ public class DockerInspectorTest {
 
     private static String getTimestamp() {
         String timestamp = Long.toString(new Date().getTime());
-        final int len = timestamp.length();
+        int len = timestamp.length();
         if (len > 8) {
             timestamp = timestamp.substring(len - 8);
         }
@@ -114,7 +114,7 @@ public class DockerInspectorTest {
         ensureContainerRemoved("centos");
         ensureContainerRemoved("ubuntu");
     }
-    
+
     @Test
     public void testUbuntu1404LayeredIncludeRemoved() throws IOException, InterruptedException, IntegrationException {
         List<String> additionalArgs = new ArrayList<>();
@@ -123,21 +123,21 @@ public class DockerInspectorTest {
         additionalArgs.add("--blackduck.codelocation.prefix=layeredIncludeRemoved");
         final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU;
 
-        final TestConfig testConfig = new TestConfigBuilder()
-            .setTarFilePath("build/images/test/ubuntu1404.tar")
-            .setPortOnHost(portOnHost)
-            .setAdditionalArgs(additionalArgs)
-            .setRequireBdioMatch(true)
-            .setCodelocationName("testUbuntu1404LayeredIncludeRemoved")
-            .setTestSquashedImageGeneration(true)
-            .build();
+        TestConfig testConfig = new TestConfigBuilder()
+                                          .setTarFilePath("build/images/test/ubuntu1404.tar")
+                                          .setPortOnHost(portOnHost)
+                                          .setAdditionalArgs(additionalArgs)
+                                          .setRequireBdioMatch(true)
+                                          .setCodelocationName("testUbuntu1404LayeredIncludeRemoved")
+                                          .setTestSquashedImageGeneration(true)
+                                          .build();
 
         testTarUsingExistingContainer(testConfig);
     }
 
     @Test
     public void testUbuntuStartContainer() throws IOException, InterruptedException, IntegrationException {
-        final TestConfig testConfig = (new TestConfigBuilder())
+        TestConfig testConfig = (new TestConfigBuilder())
                                           .setInspectTargetImageRepoTag("ubuntu:17.04")
                                           .setTargetRepo("ubuntu")
                                           .setTargetTag("17.04")
@@ -152,7 +152,7 @@ public class DockerInspectorTest {
 
     @Test
     public void testAlpineStartContainer() throws IOException, InterruptedException, IntegrationException {
-        final TestConfig testConfig = (new TestConfigBuilder())
+        TestConfig testConfig = (new TestConfigBuilder())
                                           .setInspectTargetImageRepoTag("alpine:3.6")
                                           .setTargetRepo("alpine")
                                           .setTargetTag("3.6")
@@ -167,7 +167,7 @@ public class DockerInspectorTest {
 
     @Test
     public void testCentosStartContainer() throws IOException, InterruptedException, IntegrationException {
-        final TestConfig testConfig = (new TestConfigBuilder())
+        TestConfig testConfig = (new TestConfigBuilder())
                                           .setInspectTargetImageRepoTag("centos:7.3.1611")
                                           .setTargetRepo("centos")
                                           .setTargetTag("7.3.1611")
@@ -182,12 +182,12 @@ public class DockerInspectorTest {
 
     @Test
     public void testBusybox() throws IOException, InterruptedException, IntegrationException {
-        final TestConfig testConfig = (new TestConfigBuilder())
-            .setInspectTargetImageRepoTag("busybox:latest")
-            .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
-            .setRequireBdioMatch(true)
-            .setMinNumberOfComponentsExpected(0)
-            .setCodelocationName("busybox_latest_noPkgMgr")
+        TestConfig testConfig = (new TestConfigBuilder())
+                                          .setInspectTargetImageRepoTag("busybox:latest")
+                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
+                                          .setRequireBdioMatch(true)
+                                          .setMinNumberOfComponentsExpected(0)
+                                          .setCodelocationName("busybox_latest_noPkgMgr")
                                           .build();
 
         testImageUsingExistingContainer(testConfig);
@@ -195,7 +195,7 @@ public class DockerInspectorTest {
 
     @Test
     public void testAlpineLatest() throws IOException, InterruptedException, IntegrationException {
-        final TestConfig testConfig = (new TestConfigBuilder())
+        TestConfig testConfig = (new TestConfigBuilder())
                                           .setInspectTargetImageRepoTag("alpine")
                                           .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
                                           .setRequireBdioMatch(false)
@@ -209,7 +209,7 @@ public class DockerInspectorTest {
 
     @Test
     public void testBlackDuckWebapp() throws IOException, InterruptedException, IntegrationException {
-        final TestConfig testConfig = (new TestConfigBuilder())
+        TestConfig testConfig = (new TestConfigBuilder())
                                           .setInspectTargetImageRepoTag("blackducksoftware/hub-webapp:4.0.0")
                                           .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
                                           .setRequireBdioMatch(true)
@@ -223,7 +223,7 @@ public class DockerInspectorTest {
 
     @Test
     public void testBlackDuckZookeeper() throws IOException, InterruptedException, IntegrationException {
-        final TestConfig testConfig = (new TestConfigBuilder())
+        TestConfig testConfig = (new TestConfigBuilder())
                                           .setInspectTargetImageRepoTag("blackducksoftware/hub-zookeeper:4.0.0")
                                           .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
                                           .setRequireBdioMatch(true)
@@ -232,12 +232,12 @@ public class DockerInspectorTest {
                                           .setCodelocationName("blackducksoftware_hub-zookeeper_4.0.0_APK")
                                           .build();
 
-            testImageUsingExistingContainer(testConfig);
+        testImageUsingExistingContainer(testConfig);
     }
 
     @Test
     public void testTomcat() throws IOException, InterruptedException, IntegrationException {
-        final TestConfig testConfig = (new TestConfigBuilder())
+        TestConfig testConfig = (new TestConfigBuilder())
                                           .setInspectTargetImageRepoTag("tomcat:6.0.53-jre7")
                                           .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU)
                                           .setRequireBdioMatch(false)
@@ -253,7 +253,7 @@ public class DockerInspectorTest {
     @Disabled
     @Test
     public void testImageById() throws IOException, InterruptedException, IntegrationException {
-        final TestConfig testConfig = (new TestConfigBuilder())
+        TestConfig testConfig = (new TestConfigBuilder())
                                           .setInspectTargetImageId("775349758637")
                                           .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU)
                                           .build();
@@ -263,7 +263,7 @@ public class DockerInspectorTest {
 
     @Test
     public void testRhel() throws IOException, InterruptedException, IntegrationException {
-        final TestConfig testConfig = (new TestConfigBuilder())
+        TestConfig testConfig = (new TestConfigBuilder())
                                           .setInspectTargetImageRepoTag("dnplus/rhel:6.5")
                                           .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
                                           .setRequireBdioMatch(false)
@@ -277,8 +277,9 @@ public class DockerInspectorTest {
 
     @Test
     public void testFedora() throws IOException, InterruptedException, IntegrationException {
-        final TestConfig testConfig = (new TestConfigBuilder())
-                                          .setInspectTargetImageRepoTag("fedora:latest")
+        TestConfig testConfig = (new TestConfigBuilder())
+                                          // was fedora:latest; see IDETECT-2293
+                                          .setInspectTargetImageRepoTag("fedora:32")
                                           .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
                                           .setRequireBdioMatch(false)
                                           .setMinNumberOfComponentsExpected(10)
@@ -292,7 +293,7 @@ public class DockerInspectorTest {
 
     @Test
     public void testOpenSuseForge() throws IOException, InterruptedException, IntegrationException {
-        final TestConfig testConfig = (new TestConfigBuilder())
+        TestConfig testConfig = (new TestConfigBuilder())
                                           .setInspectTargetImageRepoTag("opensuse/portus:2.4")
                                           .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
                                           .setRequireBdioMatch(false)
@@ -306,7 +307,7 @@ public class DockerInspectorTest {
 
     @Test
     public void testNonLinux() throws IOException, InterruptedException, IntegrationException {
-        final TestConfig testConfig = new TestConfigBuilder()
+        TestConfig testConfig = new TestConfigBuilder()
                                           .setTarFilePath("src/test/resources/osless.tar")
                                           .setTargetRepo("osless")
                                           .setTargetTag("1.0")
@@ -320,7 +321,7 @@ public class DockerInspectorTest {
 
     @Test
     public void testWhiteout() throws IOException, InterruptedException, IntegrationException {
-        final TestConfig testConfig = new TestConfigBuilder()
+        TestConfig testConfig = new TestConfigBuilder()
                                           .setTarFilePath("build/images/test/whiteouttest.tar")
                                           .setTargetRepo("blackducksoftware/whiteouttest")
                                           .setTargetTag("1.0")
@@ -337,7 +338,7 @@ public class DockerInspectorTest {
 
     @Test
     public void testAggregateTarfileImageOne() throws IOException, InterruptedException, IntegrationException {
-        final TestConfig testConfig = new TestConfigBuilder()
+        TestConfig testConfig = new TestConfigBuilder()
                                           .setTarFilePath("build/images/test/aggregated.tar")
                                           .setTargetRepo("blackducksoftware/whiteouttest")
                                           .setTargetTag("1.0")
@@ -354,7 +355,7 @@ public class DockerInspectorTest {
 
     @Test
     public void testAggregateTarfileImageTwo() throws IOException, InterruptedException, IntegrationException {
-        final TestConfig testConfig = new TestConfigBuilder()
+        TestConfig testConfig = new TestConfigBuilder()
                                           .setTarFilePath("build/images/test/aggregated.tar")
                                           .setTargetRepo("blackducksoftware/centos_minus_vim_plus_bacula")
                                           .setTargetTag("1.0")
@@ -371,22 +372,22 @@ public class DockerInspectorTest {
 
     @Test
     public void testAlpineLatestTarRepoTagSpecified() throws IOException, InterruptedException, IntegrationException {
-        final TestConfig testConfig = new TestConfigBuilder()
-            .setTarFilePath("build/images/test/alpine.tar")
-            .setTargetRepo("alpine")
-            .setTargetTag("latest")
-            .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
-            .setRequireBdioMatch(false)
-            .setMinNumberOfComponentsExpected(5)
-            .setCodelocationName("alpine_latest_APK")
-            .build();
+        TestConfig testConfig = new TestConfigBuilder()
+                                          .setTarFilePath("build/images/test/alpine.tar")
+                                          .setTargetRepo("alpine")
+                                          .setTargetTag("latest")
+                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
+                                          .setRequireBdioMatch(false)
+                                          .setMinNumberOfComponentsExpected(5)
+                                          .setCodelocationName("alpine_latest_APK")
+                                          .build();
 
         testTarUsingExistingContainer(testConfig);
     }
 
     @Test
     public void testAlpineLatestTarRepoTagNotSpecified() throws IOException, InterruptedException, IntegrationException {
-        final TestConfig testConfig = new TestConfigBuilder()
+        TestConfig testConfig = new TestConfigBuilder()
                                           .setTarFilePath("build/images/test/alpine.tar")
                                           .setTargetRepo(null)
                                           .setTargetTag(null)
@@ -401,7 +402,7 @@ public class DockerInspectorTest {
 
     @Test
     public void testAlpineUsingExistingAlpineContainer() throws IOException, InterruptedException, IntegrationException {
-        final TestConfig testConfig = new TestConfigBuilder()
+        TestConfig testConfig = new TestConfigBuilder()
                                           .setTarFilePath("build/images/test/alpine36.tar")
                                           .setTargetRepo(null)
                                           .setTargetTag(null)
@@ -417,7 +418,7 @@ public class DockerInspectorTest {
 
     @Test
     public void testWhiteoutUsingExistingAlpineContainer() throws IOException, InterruptedException, IntegrationException {
-        final TestConfig testConfig = new TestConfigBuilder()
+        TestConfig testConfig = new TestConfigBuilder()
                                           .setTarFilePath("build/images/test//whiteouttest.tar")
                                           .setTargetRepo("blackducksoftware/whiteouttest")
                                           .setTargetTag("1.0")
@@ -433,7 +434,7 @@ public class DockerInspectorTest {
 
     @Test
     public void testCentosUsingExistingAlpineContainer() throws IOException, InterruptedException, IntegrationException {
-        final TestConfig testConfig = new TestConfigBuilder()
+        TestConfig testConfig = new TestConfigBuilder()
                                           .setTarFilePath("build/images/test/centos_minus_vim_plus_bacula.tar")
                                           .setTargetRepo("blackducksoftware/centos_minus_vim_plus_bacula")
                                           .setTargetTag("1.0")
@@ -445,7 +446,6 @@ public class DockerInspectorTest {
                                           .setCodelocationName("blackducksoftware_centos_minus_vim_plus_bacula_1.0_RPM")
                                           .build();
 
-
         testTarUsingExistingContainer(testConfig);
     }
 
@@ -453,7 +453,7 @@ public class DockerInspectorTest {
     public void testLinuxDistroOverride() throws IOException, InterruptedException, IntegrationException {
         List<String> additionalArgs = new ArrayList<>();
         additionalArgs.add("--linux.distro=testdistro");
-        final TestConfig testConfig = new TestConfigBuilder()
+        TestConfig testConfig = new TestConfigBuilder()
                                           .setTarFilePath("build/images/test/alpine.tar")
                                           .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU)
                                           .setRequireBdioMatch(false)
@@ -462,13 +462,12 @@ public class DockerInspectorTest {
                                           .setCodelocationName("alpine_latest_APK")
                                           .build();
 
-
         testTarUsingExistingContainer(testConfig);
     }
 
     @Test
     public void testUbuntuUsingExistingCentosContainer() throws IOException, InterruptedException, IntegrationException {
-        final TestConfig testConfig = new TestConfigBuilder()
+        TestConfig testConfig = new TestConfigBuilder()
                                           .setTarFilePath("build/images/test/ubuntu1404.tar")
                                           .setTargetRepo(null)
                                           .setTargetTag(null)
@@ -482,13 +481,12 @@ public class DockerInspectorTest {
         testTarUsingExistingContainer(testConfig);
     }
 
-
     @Test
     public void testExcludePlatformComponents() throws IOException, InterruptedException, IntegrationException {
         List<String> additionalArgs = new ArrayList<>();
         additionalArgs.add("--docker.platform.top.layer.id=sha256:1bcfbfaf95f95ea8a28711c83085dbbeceefa11576e1c889304aa5bacbaa6ac2");
 
-        final TestConfig testConfig = new TestConfigBuilder()
+        TestConfig testConfig = new TestConfigBuilder()
                                           .setTarFilePath("build/images/test/aggregated.tar")
                                           .setTargetRepo("blackducksoftware/centos_minus_vim_plus_bacula")
                                           .setTargetTag("1.0")
@@ -510,7 +508,7 @@ public class DockerInspectorTest {
         List<String> additionalArgs = new ArrayList<>();
         additionalArgs.add("--output.containerfilesystem.excluded.paths=/bin,/dev,/home,/lib,/media,/mnt,/opt,/proc,/root,/run,/sbin,/srv,/sys,/tmp,/usr,/var");
 
-        final TestConfig testConfig = new TestConfigBuilder()
+        TestConfig testConfig = new TestConfigBuilder()
                                           .setTarFilePath("build/images/test/alpine.tar")
                                           .setTargetRepo(null)
                                           .setTargetTag(null)
@@ -531,7 +529,7 @@ public class DockerInspectorTest {
         List<String> additionalArgs = new ArrayList<>();
         additionalArgs.add("--output.containerfilesystem.excluded.paths=/bin,/dev,/home,/lib,/media,/mnt,/opt,/proc,/root,/run,/sbin,/srv,/sys,/tmp,/usr,/var");
 
-        final TestConfig testConfig = new TestConfigBuilder()
+        TestConfig testConfig = new TestConfigBuilder()
                                           .setTarFilePath("build/images/test/alpine.tar")
                                           .setTargetRepo(null)
                                           .setTargetTag(null)
@@ -551,7 +549,7 @@ public class DockerInspectorTest {
     public void testExcludeDirectoriesStartContainer() throws IOException, InterruptedException, IntegrationException {
         List<String> additionalArgs = new ArrayList<>();
         additionalArgs.add("--output.containerfilesystem.excluded.paths=/bin,/dev,/home,/lib,/media,/mnt,/opt,/proc,/root,/run,/sbin,/srv,/sys,/tmp,/usr,/var");
-        final TestConfig testConfig = (new TestConfigBuilder())
+        TestConfig testConfig = (new TestConfigBuilder())
                                           .setInspectTargetImageRepoTag("alpine:latest")
                                           .setTargetRepo(null)
                                           .setTargetTag(null)
@@ -565,12 +563,12 @@ public class DockerInspectorTest {
         IntegrationTestCommon.testImage(random, programVersion, null, testConfig);
     }
 
-    private void testTarUsingExistingContainer(final TestConfig testConfig)
-            throws IOException, InterruptedException, IntegrationException {
-        final File targetTar = new File(testConfig.getTarFilePath());
-        final String tarFileName = targetTar.getName();
-        final String tarFileBaseName = tarFileName.substring(0, tarFileName.length()-".tar".length());
-        final File targetTarInSharedDir = new File(containerTargetDir, tarFileName);
+    private void testTarUsingExistingContainer(TestConfig testConfig)
+        throws IOException, InterruptedException, IntegrationException {
+        File targetTar = new File(testConfig.getTarFilePath());
+        String tarFileName = targetTar.getName();
+        String tarFileBaseName = tarFileName.substring(0, tarFileName.length() - ".tar".length());
+        File targetTarInSharedDir = new File(containerTargetDir, tarFileName);
         FileUtils.copyFile(targetTar, targetTarInSharedDir);
         targetTarInSharedDir.setReadable(true, false);
         testConfig.setTargetTarInSharedDir(targetTarInSharedDir);
@@ -583,7 +581,7 @@ public class DockerInspectorTest {
         additionalArgs.add(String.format("--imageinspector.service.url=http://localhost:%d", testConfig.getPortOnHost()));
         additionalArgs.add(String.format("--shared.dir.path.local=%s", dirSharedWithContainer.getAbsolutePath()));
         additionalArgs.add(String.format("--shared.dir.path.imageinspector=%s", SHARED_DIR_PATH_IN_CONTAINER));
-        final File outputContainerFileSystemFile;
+        File outputContainerFileSystemFile;
         if (testConfig.isAppOnlyMode()) {
             outputContainerFileSystemFile = new File(String.format("%s/output/%s_app_containerfilesystem.tar.gz", TestUtils.TEST_DIR_REL_PATH, tarFileBaseName));
         } else {
@@ -601,10 +599,10 @@ public class DockerInspectorTest {
         IntegrationTestCommon.testTar(random, programVersion, null, testConfig);
     }
 
-    private void testImageUsingExistingContainer(final TestConfig testConfig)
+    private void testImageUsingExistingContainer(TestConfig testConfig)
         throws IOException, InterruptedException, IntegrationException {
 
-        final List<String> additionalArgs = new ArrayList<>();
+        List<String> additionalArgs = new ArrayList<>();
         additionalArgs.add(String.format("--imageinspector.service.url=http://localhost:%d", testConfig.getPortOnHost()));
         additionalArgs.add(String.format("--shared.dir.path.local=%s", dirSharedWithContainer.getAbsolutePath()));
         additionalArgs.add(String.format("--shared.dir.path.imageinspector=%s", SHARED_DIR_PATH_IN_CONTAINER));
@@ -614,27 +612,27 @@ public class DockerInspectorTest {
         IntegrationTestCommon.testImage(random, programVersion, null, testConfig);
     }
 
-    private static void createWriteableDirTolerantly(final File dir) {
+    private static void createWriteableDirTolerantly(File dir) {
         System.out.printf("Creating and setting a+wx permission on: %s\n", dir.getAbsolutePath());
         createDirTolerantly(dir);
         setWriteExecutePermissionsTolerantly(dir);
         logPermissions(dir);
     }
 
-    private static void logPermissions(final File dir) {
+    private static void logPermissions(File dir) {
         Set<PosixFilePermission> perms;
         try {
             perms = Files.getPosixFilePermissions(dir.toPath());
             System.out.printf("* Dir %s now has perms: %s\n", dir.getAbsolutePath(), perms.toString());
-        } catch (final IOException e) {
+        } catch (IOException e) {
             System.out.printf("Unable to read back perms for dir %s: %s\n", dir.getAbsolutePath(), e.getMessage());
         }
     }
 
-    private static void createDirTolerantly(final File dir) {
+    private static void createDirTolerantly(File dir) {
         try {
             dir.mkdirs();
-        } catch (final Exception e) {
+        } catch (Exception e) {
             System.out.printf("Error creating directory %s: %s\n", dir.getAbsoluteFile(), e.getMessage());
         }
         if (!dir.exists()) {
@@ -642,20 +640,20 @@ public class DockerInspectorTest {
         }
     }
 
-    private static void setWriteExecutePermissionsTolerantly(final File file) {
+    private static void setWriteExecutePermissionsTolerantly(File file) {
         try {
             file.setWritable(true, false);
-        } catch (final Exception e) {
+        } catch (Exception e) {
             System.out.printf("Error making directory %s writeable: %s\n", file.getAbsolutePath(), e.getMessage());
         }
         try {
             file.setExecutable(true, false);
-        } catch (final Exception e) {
+        } catch (Exception e) {
             System.out.printf("Error making directory %s writeable: %s\n", file.getAbsolutePath(), e.getMessage());
         }
     }
 
-    private static boolean isUp(final int port) {
+    private static boolean isUp(int port) {
         String response;
         try {
             response = TestUtils.execCmd(String.format("curl -i http://localhost:%d/health", port), 30000L, true, null);
@@ -668,49 +666,49 @@ public class DockerInspectorTest {
         return false;
     }
 
-    private static void startContainer(final String imageInspectorPlatform, final int portOnHost, final int portInContainer) throws IOException, InterruptedException, IntegrationException {
-        final String containerName = getContainerName(imageInspectorPlatform);
-        final String cmd = String.format("docker run -d -t --name %s -p %d:%d -v \"$(pwd)\"/%s/containerShared:%s blackducksoftware/%s-%s:%s",
-                containerName, portOnHost,
-                portInContainer,
-                TestUtils.TEST_DIR_REL_PATH,
-                SHARED_DIR_PATH_IN_CONTAINER,
-                programVersion.getInspectorImageFamily(), imageInspectorPlatform, programVersion.getInspectorImageVersion());
+    private static void startContainer(String imageInspectorPlatform, int portOnHost, int portInContainer) throws IOException, InterruptedException, IntegrationException {
+        String containerName = getContainerName(imageInspectorPlatform);
+        String cmd = String.format("docker run -d -t --name %s -p %d:%d -v \"$(pwd)\"/%s/containerShared:%s blackducksoftware/%s-%s:%s",
+            containerName, portOnHost,
+            portInContainer,
+            TestUtils.TEST_DIR_REL_PATH,
+            SHARED_DIR_PATH_IN_CONTAINER,
+            programVersion.getInspectorImageFamily(), imageInspectorPlatform, programVersion.getInspectorImageVersion());
         TestUtils.execCmd(cmd, 120000L, true, null);
     }
 
-    private static String getContainerName(final String imageInspectorPlatform) {
+    private static String getContainerName(String imageInspectorPlatform) {
         return String.format("dockerInspectorTestImageInspector_%s_%s", imageInspectorPlatform, dateTimeStamp);
     }
 
     private static void printDockerVersion() {
         try {
             TestUtils.execCmd("docker version", 20000L, true, null);
-        } catch (final Exception e) {
+        } catch (Exception e) {
             System.out.printf("Error running docker version command: %s\n", e.getMessage());
         }
     }
 
-    private static void stopContainer(final String imageInspectorPlatform) {
-        final String containerName = getContainerName(imageInspectorPlatform);
+    private static void stopContainer(String imageInspectorPlatform) {
+        String containerName = getContainerName(imageInspectorPlatform);
         try {
             TestUtils.execCmd(String.format("docker stop %s", containerName), 120000L, true, null);
-        } catch (final Exception e) {
+        } catch (Exception e) {
             System.out.printf("Error stopping container %s: %s\n", containerName, e.getMessage());
         }
     }
 
-    private static void removeContainer(final String imageInspectorPlatform) {
-        final String containerName = getContainerName(imageInspectorPlatform);
+    private static void removeContainer(String imageInspectorPlatform) {
+        String containerName = getContainerName(imageInspectorPlatform);
         try {
             TestUtils.execCmd(String.format("docker rm -f %s", containerName), 120000L, true, null);
-        } catch (final Exception e) {
+        } catch (Exception e) {
             System.out.printf("Error removing container %s: %s\n", containerName, e.getMessage());
         }
     }
 
-    private static void ensureContainerRemoved(final String imageInspectorPlatform) {
-        final String containerName = getContainerName(imageInspectorPlatform);
+    private static void ensureContainerRemoved(String imageInspectorPlatform) {
+        String containerName = getContainerName(imageInspectorPlatform);
         String dockerPsResponse;
         boolean containerStillExists = true;
         for (int tryCount = 0; tryCount < 20; tryCount++) {
@@ -723,7 +721,7 @@ public class DockerInspectorTest {
                     break;
                 }
                 Thread.sleep(5000L);
-            } catch (final Exception e) {
+            } catch (Exception e) {
                 System.out.printf("Error stopping container %s: %s\n", containerName, e.getMessage());
             }
         }
@@ -732,25 +730,25 @@ public class DockerInspectorTest {
         }
     }
 
-    private static String getAllContainers(final boolean logStdout) throws IOException, InterruptedException, IntegrationException {
+    private static String getAllContainers(boolean logStdout) throws IOException, InterruptedException, IntegrationException {
         return TestUtils.execCmd("docker ps -a", 120000L, logStdout, null);
     }
 
-    private static String getRunningContainers(final boolean logStdout) throws IOException, InterruptedException, IntegrationException {
+    private static String getRunningContainers(boolean logStdout) throws IOException, InterruptedException, IntegrationException {
         return TestUtils.execCmd("docker ps", 120000L, logStdout, null);
     }
 
     private static void removeDockerInspectorContainers() throws IOException, InterruptedException, IntegrationException {
         System.out.println("Stopping/Removing docker inspector containers");
-        final String psAllOutput = TestUtils.execCmd("docker ps -a", 120000L, false, null);
-        final String[] lines = psAllOutput.split("\n");
-        for (final String line : lines) {
+        String psAllOutput = TestUtils.execCmd("docker ps -a", 120000L, false, null);
+        String[] lines = psAllOutput.split("\n");
+        for (String line : lines) {
             System.out.printf("Line: %s\n", line);
             if (line.startsWith("CONTAINER")) {
                 continue;
             }
-            final String[] fields = line.split("\\s+");
-            final String containerName = fields[fields.length - 1];
+            String[] fields = line.split("\\s+");
+            String containerName = fields[fields.length - 1];
             System.out.printf("Container name: %s\n", containerName);
             if (containerName.startsWith("blackduck-imageinspector-alpine_") || containerName.startsWith("blackduck-imageinspector-centos_") || containerName.startsWith("blackduck-imageinspector-ubuntu_")) {
                 TestUtils.execCmd(String.format("docker stop %s", containerName), 120000L, false, null);
