@@ -7,7 +7,7 @@ buildscript {
     apply from: "https://raw.githubusercontent.com/blackducksoftware/integration-resources/master/gradle_common/buildscript-dependencies.gradle", to: buildscript
 
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.6.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.3.4.RELEASE")
         classpath 'com.bmuschko:gradle-docker-plugin:3.0.6'
         classpath 'org.freemarker:freemarker:2.3.26-incubating'
     }
