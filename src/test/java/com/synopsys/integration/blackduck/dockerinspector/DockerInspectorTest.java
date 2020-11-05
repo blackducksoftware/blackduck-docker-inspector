@@ -124,13 +124,13 @@ public class DockerInspectorTest {
         final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU;
 
         TestConfig testConfig = new TestConfigBuilder()
-                                          .setTarFilePath("build/images/test/ubuntu1404.tar")
-                                          .setPortOnHost(portOnHost)
-                                          .setAdditionalArgs(additionalArgs)
-                                          .setRequireBdioMatch(true)
-                                          .setCodelocationName("testUbuntu1404LayeredIncludeRemoved")
-                                          .setTestSquashedImageGeneration(true)
-                                          .build();
+                                    .setTarFilePath("build/images/test/ubuntu1404.tar")
+                                    .setPortOnHost(portOnHost)
+                                    .setAdditionalArgs(additionalArgs)
+                                    .setRequireBdioMatch(true)
+                                    .setCodelocationName("testUbuntu1404LayeredIncludeRemoved")
+                                    .setTestSquashedImageGeneration(true)
+                                    .build();
 
         testTarUsingExistingContainer(testConfig);
     }
@@ -138,57 +138,57 @@ public class DockerInspectorTest {
     @Test
     public void testUbuntuStartContainer() throws IOException, InterruptedException, IntegrationException {
         TestConfig testConfig = (new TestConfigBuilder())
-                                          .setInspectTargetImageRepoTag("ubuntu:17.04")
-                                          .setTargetRepo("ubuntu")
-                                          .setTargetTag("17.04")
-                                          .setRequireBdioMatch(false)
-                                          .setMode(TestConfig.Mode.DEFAULT)
-                                          .setOutputBomMustContainComponentPrefix("dpkg")
-                                          .setMinNumberOfComponentsExpected(10)
-                                          .setCodelocationName("ubuntu_17.04_DPKG")
-                                          .build();
+                                    .setInspectTargetImageRepoTag("ubuntu:latest")
+                                    .setTargetRepo("ubuntu")
+                                    .setTargetTag("latest")
+                                    .setRequireBdioMatch(false)
+                                    .setMode(TestConfig.Mode.DEFAULT)
+                                    .setOutputBomMustContainComponentPrefix("dpkg")
+                                    .setMinNumberOfComponentsExpected(60)
+                                    .setCodelocationName("ubuntu_latest_DPKG")
+                                    .build();
         IntegrationTestCommon.testImage(random, programVersion, null, testConfig);
     }
 
     @Test
     public void testAlpineStartContainer() throws IOException, InterruptedException, IntegrationException {
         TestConfig testConfig = (new TestConfigBuilder())
-                                          .setInspectTargetImageRepoTag("alpine:3.6")
-                                          .setTargetRepo("alpine")
-                                          .setTargetTag("3.6")
-                                          .setRequireBdioMatch(false)
-                                          .setMode(TestConfig.Mode.SPECIFY_II_DETAILS)
-                                          .setOutputBomMustContainComponentPrefix("apk-")
-                                          .setMinNumberOfComponentsExpected(5)
-                                          .setCodelocationName("alpine_3.6_APK")
-                                          .build();
+                                    .setInspectTargetImageRepoTag("alpine:3.6")
+                                    .setTargetRepo("alpine")
+                                    .setTargetTag("3.6")
+                                    .setRequireBdioMatch(false)
+                                    .setMode(TestConfig.Mode.SPECIFY_II_DETAILS)
+                                    .setOutputBomMustContainComponentPrefix("apk-")
+                                    .setMinNumberOfComponentsExpected(5)
+                                    .setCodelocationName("alpine_3.6_APK")
+                                    .build();
         IntegrationTestCommon.testImage(random, programVersion, null, testConfig);
     }
 
     @Test
     public void testCentosStartContainer() throws IOException, InterruptedException, IntegrationException {
         TestConfig testConfig = (new TestConfigBuilder())
-                                          .setInspectTargetImageRepoTag("centos:7.3.1611")
-                                          .setTargetRepo("centos")
-                                          .setTargetTag("7.3.1611")
-                                          .setRequireBdioMatch(false)
-                                          .setMode(TestConfig.Mode.SPECIFY_II_DETAILS)
-                                          .setOutputBomMustContainComponentPrefix("openssl-libs")
-                                          .setMinNumberOfComponentsExpected(15)
-                                          .setCodelocationName("centos_7.3.1611_RPM")
-                                          .build();
+                                    .setInspectTargetImageRepoTag("centos:7.3.1611")
+                                    .setTargetRepo("centos")
+                                    .setTargetTag("7.3.1611")
+                                    .setRequireBdioMatch(false)
+                                    .setMode(TestConfig.Mode.SPECIFY_II_DETAILS)
+                                    .setOutputBomMustContainComponentPrefix("openssl-libs")
+                                    .setMinNumberOfComponentsExpected(15)
+                                    .setCodelocationName("centos_7.3.1611_RPM")
+                                    .build();
         IntegrationTestCommon.testImage(random, programVersion, null, testConfig);
     }
 
     @Test
     public void testBusybox() throws IOException, InterruptedException, IntegrationException {
         TestConfig testConfig = (new TestConfigBuilder())
-                                          .setInspectTargetImageRepoTag("busybox:latest")
-                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
-                                          .setRequireBdioMatch(true)
-                                          .setMinNumberOfComponentsExpected(0)
-                                          .setCodelocationName("busybox_latest_noPkgMgr")
-                                          .build();
+                                    .setInspectTargetImageRepoTag("busybox:latest")
+                                    .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
+                                    .setRequireBdioMatch(true)
+                                    .setMinNumberOfComponentsExpected(0)
+                                    .setCodelocationName("busybox_latest_noPkgMgr")
+                                    .build();
 
         testImageUsingExistingContainer(testConfig);
     }
@@ -196,13 +196,13 @@ public class DockerInspectorTest {
     @Test
     public void testAlpineLatest() throws IOException, InterruptedException, IntegrationException {
         TestConfig testConfig = (new TestConfigBuilder())
-                                          .setInspectTargetImageRepoTag("alpine")
-                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
-                                          .setRequireBdioMatch(false)
-                                          .setMinNumberOfComponentsExpected(5)
-                                          .setOutputBomMustContainComponentPrefix("apk-")
-                                          .setCodelocationName("alpine_latest_APK")
-                                          .build();
+                                    .setInspectTargetImageRepoTag("alpine")
+                                    .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
+                                    .setRequireBdioMatch(false)
+                                    .setMinNumberOfComponentsExpected(5)
+                                    .setOutputBomMustContainComponentPrefix("apk-")
+                                    .setCodelocationName("alpine_latest_APK")
+                                    .build();
 
         testImageUsingExistingContainer(testConfig);
     }
@@ -210,13 +210,13 @@ public class DockerInspectorTest {
     @Test
     public void testBlackDuckWebapp() throws IOException, InterruptedException, IntegrationException {
         TestConfig testConfig = (new TestConfigBuilder())
-                                          .setInspectTargetImageRepoTag("blackducksoftware/hub-webapp:4.0.0")
-                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
-                                          .setRequireBdioMatch(true)
-                                          .setMinNumberOfComponentsExpected(0)
-                                          .setOutputBomMustContainComponentPrefix(null)
-                                          .setCodelocationName("blackducksoftware_hub-webapp_4.0.0_APK")
-                                          .build();
+                                    .setInspectTargetImageRepoTag("blackducksoftware/hub-webapp:4.0.0")
+                                    .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
+                                    .setRequireBdioMatch(true)
+                                    .setMinNumberOfComponentsExpected(0)
+                                    .setOutputBomMustContainComponentPrefix(null)
+                                    .setCodelocationName("blackducksoftware_hub-webapp_4.0.0_APK")
+                                    .build();
 
         testImageUsingExistingContainer(testConfig);
     }
@@ -224,13 +224,13 @@ public class DockerInspectorTest {
     @Test
     public void testBlackDuckZookeeper() throws IOException, InterruptedException, IntegrationException {
         TestConfig testConfig = (new TestConfigBuilder())
-                                          .setInspectTargetImageRepoTag("blackducksoftware/hub-zookeeper:4.0.0")
-                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
-                                          .setRequireBdioMatch(true)
-                                          .setMinNumberOfComponentsExpected(0)
-                                          .setOutputBomMustContainComponentPrefix(null)
-                                          .setCodelocationName("blackducksoftware_hub-zookeeper_4.0.0_APK")
-                                          .build();
+                                    .setInspectTargetImageRepoTag("blackducksoftware/hub-zookeeper:4.0.0")
+                                    .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
+                                    .setRequireBdioMatch(true)
+                                    .setMinNumberOfComponentsExpected(0)
+                                    .setOutputBomMustContainComponentPrefix(null)
+                                    .setCodelocationName("blackducksoftware_hub-zookeeper_4.0.0_APK")
+                                    .build();
 
         testImageUsingExistingContainer(testConfig);
     }
@@ -238,13 +238,13 @@ public class DockerInspectorTest {
     @Test
     public void testTomcat() throws IOException, InterruptedException, IntegrationException {
         TestConfig testConfig = (new TestConfigBuilder())
-                                          .setInspectTargetImageRepoTag("tomcat:6.0.53-jre7")
-                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU)
-                                          .setRequireBdioMatch(false)
-                                          .setMinNumberOfComponentsExpected(5)
-                                          .setOutputBomMustContainComponentPrefix("dpkg")
-                                          .setCodelocationName("tomcat_6.0.53-jre7_DPKG")
-                                          .build();
+                                    .setInspectTargetImageRepoTag("tomcat:6.0.53-jre7")
+                                    .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU)
+                                    .setRequireBdioMatch(false)
+                                    .setMinNumberOfComponentsExpected(5)
+                                    .setOutputBomMustContainComponentPrefix("dpkg")
+                                    .setCodelocationName("tomcat_6.0.53-jre7_DPKG")
+                                    .build();
 
         testImageUsingExistingContainer(testConfig);
     }
@@ -254,9 +254,9 @@ public class DockerInspectorTest {
     @Test
     public void testImageById() throws IOException, InterruptedException, IntegrationException {
         TestConfig testConfig = (new TestConfigBuilder())
-                                          .setInspectTargetImageId("775349758637")
-                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU)
-                                          .build();
+                                    .setInspectTargetImageId("775349758637")
+                                    .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU)
+                                    .build();
 
         testImageUsingExistingContainer(testConfig);
     }
@@ -264,29 +264,28 @@ public class DockerInspectorTest {
     @Test
     public void testRhel() throws IOException, InterruptedException, IntegrationException {
         TestConfig testConfig = (new TestConfigBuilder())
-                                          .setInspectTargetImageRepoTag("dnplus/rhel:6.5")
-                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
-                                          .setRequireBdioMatch(false)
-                                          .setMinNumberOfComponentsExpected(10)
-                                          .setOutputBomMustContainComponentPrefix("rpm")
-                                          .setCodelocationName("dnplus_rhel_6.5_RPM")
-                                          .build();
+                                    .setInspectTargetImageRepoTag("dnplus/rhel:6.5")
+                                    .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
+                                    .setRequireBdioMatch(false)
+                                    .setMinNumberOfComponentsExpected(10)
+                                    .setOutputBomMustContainComponentPrefix("rpm")
+                                    .setCodelocationName("dnplus_rhel_6.5_RPM")
+                                    .build();
 
         testImageUsingExistingContainer(testConfig);
     }
 
     @Test
-    public void testFedora() throws IOException, InterruptedException, IntegrationException {
+    public void testFedoraLatest() throws IOException, InterruptedException, IntegrationException {
         TestConfig testConfig = (new TestConfigBuilder())
-                                          // was fedora:latest; see IDETECT-2293
-                                          .setInspectTargetImageRepoTag("fedora:32")
-                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
-                                          .setRequireBdioMatch(false)
-                                          .setMinNumberOfComponentsExpected(10)
-                                          .setOutputBomMustContainComponentPrefix("fedora-")
-                                          .setOutputBomMustContainExternalSystemTypeId("@fedora")
-                                          .setCodelocationName("fedora_latest_RPM")
-                                          .build();
+                                    .setInspectTargetImageRepoTag("fedora:latest")
+                                    .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
+                                    .setRequireBdioMatch(false)
+                                    .setMinNumberOfComponentsExpected(10)
+                                    .setOutputBomMustContainComponentPrefix("fedora-")
+                                    .setOutputBomMustContainExternalSystemTypeId("@fedora")
+                                    .setCodelocationName("fedora_latest_RPM")
+                                    .build();
 
         testImageUsingExistingContainer(testConfig);
     }
@@ -294,13 +293,13 @@ public class DockerInspectorTest {
     @Test
     public void testOpenSuseForge() throws IOException, InterruptedException, IntegrationException {
         TestConfig testConfig = (new TestConfigBuilder())
-                                          .setInspectTargetImageRepoTag("opensuse/portus:2.4")
-                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
-                                          .setRequireBdioMatch(false)
-                                          .setMinNumberOfComponentsExpected(10)
-                                          .setOutputBomMustContainExternalSystemTypeId("@opensuse")
-                                          .setCodelocationName("opensuse_portus_opensuse_2.4_RPM")
-                                          .build();
+                                    .setInspectTargetImageRepoTag("opensuse/portus:2.4")
+                                    .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
+                                    .setRequireBdioMatch(false)
+                                    .setMinNumberOfComponentsExpected(10)
+                                    .setOutputBomMustContainExternalSystemTypeId("@opensuse")
+                                    .setCodelocationName("opensuse_portus_opensuse_2.4_RPM")
+                                    .build();
 
         testImageUsingExistingContainer(testConfig);
     }
@@ -308,13 +307,13 @@ public class DockerInspectorTest {
     @Test
     public void testNonLinux() throws IOException, InterruptedException, IntegrationException {
         TestConfig testConfig = new TestConfigBuilder()
-                                          .setTarFilePath("src/test/resources/osless.tar")
-                                          .setTargetRepo("osless")
-                                          .setTargetTag("1.0")
-                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
-                                          .setRequireBdioMatch(true)
-                                          .setCodelocationName("osless_1.0_noPkgMgr")
-                                          .build();
+                                    .setTarFilePath("src/test/resources/osless.tar")
+                                    .setTargetRepo("osless")
+                                    .setTargetTag("1.0")
+                                    .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
+                                    .setRequireBdioMatch(true)
+                                    .setCodelocationName("osless_1.0_noPkgMgr")
+                                    .build();
 
         testTarUsingExistingContainer(testConfig);
     }
@@ -322,16 +321,16 @@ public class DockerInspectorTest {
     @Test
     public void testWhiteout() throws IOException, InterruptedException, IntegrationException {
         TestConfig testConfig = new TestConfigBuilder()
-                                          .setTarFilePath("build/images/test/whiteouttest.tar")
-                                          .setTargetRepo("blackducksoftware/whiteouttest")
-                                          .setTargetTag("1.0")
-                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
-                                          .setRequireBdioMatch(false)
-                                          .setMinNumberOfComponentsExpected(10)
-                                          .setOutputBomMustContainComponentPrefix("libc-bin")
-                                          .setOutputBomMustNotContainComponentPrefix("curl")
-                                          .setCodelocationName("blackducksoftware_whiteouttest_1.0_DPKG")
-                                          .build();
+                                    .setTarFilePath("build/images/test/whiteouttest.tar")
+                                    .setTargetRepo("blackducksoftware/whiteouttest")
+                                    .setTargetTag("1.0")
+                                    .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
+                                    .setRequireBdioMatch(false)
+                                    .setMinNumberOfComponentsExpected(10)
+                                    .setOutputBomMustContainComponentPrefix("libc-bin")
+                                    .setOutputBomMustNotContainComponentPrefix("curl")
+                                    .setCodelocationName("blackducksoftware_whiteouttest_1.0_DPKG")
+                                    .build();
 
         testTarUsingExistingContainer(testConfig);
     }
@@ -339,16 +338,16 @@ public class DockerInspectorTest {
     @Test
     public void testAggregateTarfileImageOne() throws IOException, InterruptedException, IntegrationException {
         TestConfig testConfig = new TestConfigBuilder()
-                                          .setTarFilePath("build/images/test/aggregated.tar")
-                                          .setTargetRepo("blackducksoftware/whiteouttest")
-                                          .setTargetTag("1.0")
-                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
-                                          .setRequireBdioMatch(false)
-                                          .setMinNumberOfComponentsExpected(10)
-                                          .setOutputBomMustContainComponentPrefix("libc-bin")
-                                          .setOutputBomMustNotContainComponentPrefix("curl")
-                                          .setCodelocationName("blackducksoftware_whiteouttest_1.0_DPKG")
-                                          .build();
+                                    .setTarFilePath("build/images/test/aggregated.tar")
+                                    .setTargetRepo("blackducksoftware/whiteouttest")
+                                    .setTargetTag("1.0")
+                                    .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
+                                    .setRequireBdioMatch(false)
+                                    .setMinNumberOfComponentsExpected(10)
+                                    .setOutputBomMustContainComponentPrefix("libc-bin")
+                                    .setOutputBomMustNotContainComponentPrefix("curl")
+                                    .setCodelocationName("blackducksoftware_whiteouttest_1.0_DPKG")
+                                    .build();
 
         testTarUsingExistingContainer(testConfig);
     }
@@ -356,16 +355,16 @@ public class DockerInspectorTest {
     @Test
     public void testAggregateTarfileImageTwo() throws IOException, InterruptedException, IntegrationException {
         TestConfig testConfig = new TestConfigBuilder()
-                                          .setTarFilePath("build/images/test/aggregated.tar")
-                                          .setTargetRepo("blackducksoftware/centos_minus_vim_plus_bacula")
-                                          .setTargetTag("1.0")
-                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
-                                          .setRequireBdioMatch(false)
-                                          .setMinNumberOfComponentsExpected(10)
-                                          .setOutputBomMustContainComponentPrefix("openssl-libs")
-                                          .setOutputBomMustNotContainComponentPrefix("vim-minimal")
-                                          .setCodelocationName("blackducksoftware_centos_minus_vim_plus_bacula_1.0_RPM")
-                                          .build();
+                                    .setTarFilePath("build/images/test/aggregated.tar")
+                                    .setTargetRepo("blackducksoftware/centos_minus_vim_plus_bacula")
+                                    .setTargetTag("1.0")
+                                    .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
+                                    .setRequireBdioMatch(false)
+                                    .setMinNumberOfComponentsExpected(10)
+                                    .setOutputBomMustContainComponentPrefix("openssl-libs")
+                                    .setOutputBomMustNotContainComponentPrefix("vim-minimal")
+                                    .setCodelocationName("blackducksoftware_centos_minus_vim_plus_bacula_1.0_RPM")
+                                    .build();
 
         testTarUsingExistingContainer(testConfig);
     }
@@ -373,14 +372,14 @@ public class DockerInspectorTest {
     @Test
     public void testAlpineLatestTarRepoTagSpecified() throws IOException, InterruptedException, IntegrationException {
         TestConfig testConfig = new TestConfigBuilder()
-                                          .setTarFilePath("build/images/test/alpine.tar")
-                                          .setTargetRepo("alpine")
-                                          .setTargetTag("latest")
-                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
-                                          .setRequireBdioMatch(false)
-                                          .setMinNumberOfComponentsExpected(5)
-                                          .setCodelocationName("alpine_latest_APK")
-                                          .build();
+                                    .setTarFilePath("build/images/test/alpine.tar")
+                                    .setTargetRepo("alpine")
+                                    .setTargetTag("latest")
+                                    .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
+                                    .setRequireBdioMatch(false)
+                                    .setMinNumberOfComponentsExpected(5)
+                                    .setCodelocationName("alpine_latest_APK")
+                                    .build();
 
         testTarUsingExistingContainer(testConfig);
     }
@@ -388,14 +387,14 @@ public class DockerInspectorTest {
     @Test
     public void testAlpineLatestTarRepoTagNotSpecified() throws IOException, InterruptedException, IntegrationException {
         TestConfig testConfig = new TestConfigBuilder()
-                                          .setTarFilePath("build/images/test/alpine.tar")
-                                          .setTargetRepo(null)
-                                          .setTargetTag(null)
-                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
-                                          .setRequireBdioMatch(false)
-                                          .setMinNumberOfComponentsExpected(5)
-                                          .setCodelocationName("alpine_latest_APK")
-                                          .build();
+                                    .setTarFilePath("build/images/test/alpine.tar")
+                                    .setTargetRepo(null)
+                                    .setTargetTag(null)
+                                    .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
+                                    .setRequireBdioMatch(false)
+                                    .setMinNumberOfComponentsExpected(5)
+                                    .setCodelocationName("alpine_latest_APK")
+                                    .build();
 
         testTarUsingExistingContainer(testConfig);
     }
@@ -403,15 +402,15 @@ public class DockerInspectorTest {
     @Test
     public void testAlpineUsingExistingAlpineContainer() throws IOException, InterruptedException, IntegrationException {
         TestConfig testConfig = new TestConfigBuilder()
-                                          .setTarFilePath("build/images/test/alpine36.tar")
-                                          .setTargetRepo(null)
-                                          .setTargetTag(null)
-                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
-                                          .setRequireBdioMatch(false)
-                                          .setMinNumberOfComponentsExpected(5)
-                                          .setOutputBomMustContainComponentPrefix("busybox")
-                                          .setCodelocationName("null_null_APK")
-                                          .build();
+                                    .setTarFilePath("build/images/test/alpine36.tar")
+                                    .setTargetRepo(null)
+                                    .setTargetTag(null)
+                                    .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
+                                    .setRequireBdioMatch(false)
+                                    .setMinNumberOfComponentsExpected(5)
+                                    .setOutputBomMustContainComponentPrefix("busybox")
+                                    .setCodelocationName("null_null_APK")
+                                    .build();
 
         testTarUsingExistingContainer(testConfig);
     }
@@ -419,15 +418,15 @@ public class DockerInspectorTest {
     @Test
     public void testWhiteoutUsingExistingAlpineContainer() throws IOException, InterruptedException, IntegrationException {
         TestConfig testConfig = new TestConfigBuilder()
-                                          .setTarFilePath("build/images/test//whiteouttest.tar")
-                                          .setTargetRepo("blackducksoftware/whiteouttest")
-                                          .setTargetTag("1.0")
-                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
-                                          .setRequireBdioMatch(false)
-                                          .setMinNumberOfComponentsExpected(5)
-                                          .setOutputBomMustContainComponentPrefix("dpkg")
-                                          .setCodelocationName("blackducksoftware_whiteouttest_1.0_DPKG")
-                                          .build();
+                                    .setTarFilePath("build/images/test//whiteouttest.tar")
+                                    .setTargetRepo("blackducksoftware/whiteouttest")
+                                    .setTargetTag("1.0")
+                                    .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
+                                    .setRequireBdioMatch(false)
+                                    .setMinNumberOfComponentsExpected(5)
+                                    .setOutputBomMustContainComponentPrefix("dpkg")
+                                    .setCodelocationName("blackducksoftware_whiteouttest_1.0_DPKG")
+                                    .build();
 
         testTarUsingExistingContainer(testConfig);
     }
@@ -435,16 +434,16 @@ public class DockerInspectorTest {
     @Test
     public void testCentosUsingExistingAlpineContainer() throws IOException, InterruptedException, IntegrationException {
         TestConfig testConfig = new TestConfigBuilder()
-                                          .setTarFilePath("build/images/test/centos_minus_vim_plus_bacula.tar")
-                                          .setTargetRepo("blackducksoftware/centos_minus_vim_plus_bacula")
-                                          .setTargetTag("1.0")
-                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
-                                          .setRequireBdioMatch(false)
-                                          .setMinNumberOfComponentsExpected(5)
-                                          .setOutputBomMustContainComponentPrefix("openssl-libs")
-                                          .setOutputBomMustNotContainComponentPrefix("vim-minimal")
-                                          .setCodelocationName("blackducksoftware_centos_minus_vim_plus_bacula_1.0_RPM")
-                                          .build();
+                                    .setTarFilePath("build/images/test/centos_minus_vim_plus_bacula.tar")
+                                    .setTargetRepo("blackducksoftware/centos_minus_vim_plus_bacula")
+                                    .setTargetTag("1.0")
+                                    .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
+                                    .setRequireBdioMatch(false)
+                                    .setMinNumberOfComponentsExpected(5)
+                                    .setOutputBomMustContainComponentPrefix("openssl-libs")
+                                    .setOutputBomMustNotContainComponentPrefix("vim-minimal")
+                                    .setCodelocationName("blackducksoftware_centos_minus_vim_plus_bacula_1.0_RPM")
+                                    .build();
 
         testTarUsingExistingContainer(testConfig);
     }
@@ -454,13 +453,13 @@ public class DockerInspectorTest {
         List<String> additionalArgs = new ArrayList<>();
         additionalArgs.add("--linux.distro=testdistro");
         TestConfig testConfig = new TestConfigBuilder()
-                                          .setTarFilePath("build/images/test/alpine.tar")
-                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU)
-                                          .setRequireBdioMatch(false)
-                                          .setOutputBomMustContainExternalSystemTypeId("@testdistro")
-                                          .setAdditionalArgs(additionalArgs)
-                                          .setCodelocationName("alpine_latest_APK")
-                                          .build();
+                                    .setTarFilePath("build/images/test/alpine.tar")
+                                    .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU)
+                                    .setRequireBdioMatch(false)
+                                    .setOutputBomMustContainExternalSystemTypeId("@testdistro")
+                                    .setAdditionalArgs(additionalArgs)
+                                    .setCodelocationName("alpine_latest_APK")
+                                    .build();
 
         testTarUsingExistingContainer(testConfig);
     }
@@ -468,15 +467,15 @@ public class DockerInspectorTest {
     @Test
     public void testUbuntuUsingExistingCentosContainer() throws IOException, InterruptedException, IntegrationException {
         TestConfig testConfig = new TestConfigBuilder()
-                                          .setTarFilePath("build/images/test/ubuntu1404.tar")
-                                          .setTargetRepo(null)
-                                          .setTargetTag(null)
-                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
-                                          .setRequireBdioMatch(false)
-                                          .setOutputBomMustContainComponentPrefix("iputils-ping")
-                                          .setMinNumberOfComponentsExpected(10)
-                                          .setCodelocationName("null_null_DPKG")
-                                          .build();
+                                    .setTarFilePath("build/images/test/ubuntu1404.tar")
+                                    .setTargetRepo(null)
+                                    .setTargetTag(null)
+                                    .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
+                                    .setRequireBdioMatch(false)
+                                    .setOutputBomMustContainComponentPrefix("iputils-ping")
+                                    .setMinNumberOfComponentsExpected(10)
+                                    .setCodelocationName("null_null_DPKG")
+                                    .build();
 
         testTarUsingExistingContainer(testConfig);
     }
@@ -487,18 +486,18 @@ public class DockerInspectorTest {
         additionalArgs.add("--docker.platform.top.layer.id=sha256:1bcfbfaf95f95ea8a28711c83085dbbeceefa11576e1c889304aa5bacbaa6ac2");
 
         TestConfig testConfig = new TestConfigBuilder()
-                                          .setTarFilePath("build/images/test/aggregated.tar")
-                                          .setTargetRepo("blackducksoftware/centos_minus_vim_plus_bacula")
-                                          .setTargetTag("1.0")
-                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU)
-                                          .setRequireBdioMatch(false)
-                                          .setMinNumberOfComponentsExpected(10)
-                                          .setOutputBomMustContainComponentPrefix("systemd")
-                                          .setOutputBomMustNotContainComponentPrefix("vim-minimal")
-                                          .setCodelocationName("blackducksoftware_centos_minus_vim_plus_bacula_1.0_app_RPM")
-                                          .setAdditionalArgs(additionalArgs)
-                                          .setAppOnlyMode(true)
-                                          .build();
+                                    .setTarFilePath("build/images/test/aggregated.tar")
+                                    .setTargetRepo("blackducksoftware/centos_minus_vim_plus_bacula")
+                                    .setTargetTag("1.0")
+                                    .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU)
+                                    .setRequireBdioMatch(false)
+                                    .setMinNumberOfComponentsExpected(10)
+                                    .setOutputBomMustContainComponentPrefix("systemd")
+                                    .setOutputBomMustNotContainComponentPrefix("vim-minimal")
+                                    .setCodelocationName("blackducksoftware_centos_minus_vim_plus_bacula_1.0_app_RPM")
+                                    .setAdditionalArgs(additionalArgs)
+                                    .setAppOnlyMode(true)
+                                    .build();
 
         testTarUsingExistingContainer(testConfig);
     }
@@ -509,17 +508,17 @@ public class DockerInspectorTest {
         additionalArgs.add("--output.containerfilesystem.excluded.paths=/bin,/dev,/home,/lib,/media,/mnt,/opt,/proc,/root,/run,/sbin,/srv,/sys,/tmp,/usr,/var");
 
         TestConfig testConfig = new TestConfigBuilder()
-                                          .setTarFilePath("build/images/test/alpine.tar")
-                                          .setTargetRepo(null)
-                                          .setTargetTag(null)
-                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU)
-                                          .setRequireBdioMatch(false)
-                                          .setMinNumberOfComponentsExpected(5)
-                                          .setCodelocationName("alpine_latest_APK")
-                                          .setAdditionalArgs(additionalArgs)
-                                          .setMinContainerFileSystemFileSize(100000)
-                                          .setMaxContainerFileSystemFileSize(200000)
-                                          .build();
+                                    .setTarFilePath("build/images/test/alpine.tar")
+                                    .setTargetRepo(null)
+                                    .setTargetTag(null)
+                                    .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU)
+                                    .setRequireBdioMatch(false)
+                                    .setMinNumberOfComponentsExpected(5)
+                                    .setCodelocationName("alpine_latest_APK")
+                                    .setAdditionalArgs(additionalArgs)
+                                    .setMinContainerFileSystemFileSize(100000)
+                                    .setMaxContainerFileSystemFileSize(200000)
+                                    .build();
 
         testTarUsingExistingContainer(testConfig);
     }
@@ -530,17 +529,17 @@ public class DockerInspectorTest {
         additionalArgs.add("--output.containerfilesystem.excluded.paths=/bin,/dev,/home,/lib,/media,/mnt,/opt,/proc,/root,/run,/sbin,/srv,/sys,/tmp,/usr,/var");
 
         TestConfig testConfig = new TestConfigBuilder()
-                                          .setTarFilePath("build/images/test/alpine.tar")
-                                          .setTargetRepo(null)
-                                          .setTargetTag(null)
-                                          .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
-                                          .setRequireBdioMatch(false)
-                                          .setMinNumberOfComponentsExpected(5)
-                                          .setCodelocationName("alpine_latest_APK")
-                                          .setAdditionalArgs(additionalArgs)
-                                          .setMinContainerFileSystemFileSize(100000)
-                                          .setMaxContainerFileSystemFileSize(200000)
-                                          .build();
+                                    .setTarFilePath("build/images/test/alpine.tar")
+                                    .setTargetRepo(null)
+                                    .setTargetTag(null)
+                                    .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
+                                    .setRequireBdioMatch(false)
+                                    .setMinNumberOfComponentsExpected(5)
+                                    .setCodelocationName("alpine_latest_APK")
+                                    .setAdditionalArgs(additionalArgs)
+                                    .setMinContainerFileSystemFileSize(100000)
+                                    .setMaxContainerFileSystemFileSize(200000)
+                                    .build();
 
         testTarUsingExistingContainer(testConfig);
     }
@@ -550,16 +549,16 @@ public class DockerInspectorTest {
         List<String> additionalArgs = new ArrayList<>();
         additionalArgs.add("--output.containerfilesystem.excluded.paths=/bin,/dev,/home,/lib,/media,/mnt,/opt,/proc,/root,/run,/sbin,/srv,/sys,/tmp,/usr,/var");
         TestConfig testConfig = (new TestConfigBuilder())
-                                          .setInspectTargetImageRepoTag("alpine:latest")
-                                          .setTargetRepo(null)
-                                          .setTargetTag(null)
-                                          .setRequireBdioMatch(false)
-                                          .setMinNumberOfComponentsExpected(5)
-                                          .setCodelocationName("alpine_latest_APK")
-                                          .setAdditionalArgs(additionalArgs)
-                                          .setMinContainerFileSystemFileSize(100000)
-                                          .setMaxContainerFileSystemFileSize(200000)
-                                          .build();
+                                    .setInspectTargetImageRepoTag("alpine:latest")
+                                    .setTargetRepo(null)
+                                    .setTargetTag(null)
+                                    .setRequireBdioMatch(false)
+                                    .setMinNumberOfComponentsExpected(5)
+                                    .setCodelocationName("alpine_latest_APK")
+                                    .setAdditionalArgs(additionalArgs)
+                                    .setMinContainerFileSystemFileSize(100000)
+                                    .setMaxContainerFileSystemFileSize(200000)
+                                    .build();
         IntegrationTestCommon.testImage(random, programVersion, null, testConfig);
     }
 
