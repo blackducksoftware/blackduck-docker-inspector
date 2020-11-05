@@ -1,6 +1,7 @@
 #### Version 9.1.2
 ##### Resolved issue
 * (IDOCKER-715) Resolved an issue that could cause ${solution_name} to fail on Windows during a docker pull operation with the message "java.lang.NoSuchMethodError: com.sun.jna.Native.load(Ljava/lang/String;Ljava/lang/Class;Ljava/util/Map;)Lcom/sun/jna/Library;".
+* (IDOCKER-716) Resolved an issue that caused ${solution_name} to discover no packages on fedora:33 and fedora:34 based images.
 
 #### Version 9.1.1
 ##### Resolved issue
