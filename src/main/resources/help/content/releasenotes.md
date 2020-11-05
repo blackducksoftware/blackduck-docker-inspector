@@ -1,5 +1,8 @@
-#### Version 9.1.1
+#### Version 9.1.2
+##### Resolved issue
+* (IDOCKER-715) Resolved an issue that could cause ${solution_name} to fail on Windows during a docker pull operation with the message "java.lang.NoSuchMethodError: com.sun.jna.Native.load(Ljava/lang/String;Ljava/lang/Class;Ljava/util/Map;)Lcom/sun/jna/Library;".
 
+#### Version 9.1.1
 ##### Resolved issue
 * (IDOCKER-710) Resolved an issue that could cause ${solution_name} to fail when the target image file system contains circular symbolic links.
 
