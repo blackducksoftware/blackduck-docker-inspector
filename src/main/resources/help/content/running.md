@@ -23,6 +23,17 @@ To execute the ${solution_name} .jar:
 java -jar ${project_name}-{version}.jar {${solution_name} arguments}
 ````
 
+#### Docker file sharing settings
+
+${solution_name} requires the ability to share directories with the image inspector containers.
+You will need to configure your Docker settings to enable this file sharing.
+The simplest way to do this is to add your home directory on the Docker settings
+
+It shared a directory with image inspector containers by mounting it as a volume.solution_name.
+The shared directories are created under the value of property shared.dir.local.path.
+
+
+
 #### Docker restrictions
 
 Docker on Windows has restrictions that impact ${solution_name}:
