@@ -26,13 +26,14 @@ java -jar ${project_name}-{version}.jar {${solution_name} arguments}
 #### Docker file sharing settings
 
 ${solution_name} requires the ability to share directories with the image inspector containers.
+It shares a directory with image inspector containers by mounting it as a volume.
 You will need to configure your Docker settings to enable this file sharing.
-The simplest way to do this is to add your home directory on the Docker settings
+The simplest way to do this is to add your home directory as a sharable directory
+on the Docker settings Resources > FILE SHARING screen.
 
-It shared a directory with image inspector containers by mounting it as a volume.solution_name.
-The shared directories are created under the value of property shared.dir.local.path.
-
-
+The shared directories are created under the value of property shared.dir.local.path,
+so if you change the directory that property points to, be sure your Docker file sharing settings enable
+sharing of that directory.
 
 #### Docker restrictions
 
