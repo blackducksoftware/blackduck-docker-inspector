@@ -256,6 +256,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#docker-file-sharing-settings" class="md-nav__link">
+    Docker file sharing settings
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#docker-restrictions" class="md-nav__link">
     Docker restrictions
   </a>
@@ -414,6 +421,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#docker-file-sharing-settings" class="md-nav__link">
+    Docker file sharing settings
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#docker-restrictions" class="md-nav__link">
     Docker restrictions
   </a>
@@ -504,6 +518,15 @@ the Black Duck Docker Inspector .jar and execute it directly.</p>
 <pre><code>java -jar blackduck-docker-inspector-{version}.jar {Black Duck Docker Inspector arguments}
 </code></pre>
 
+<h4 id="docker-file-sharing-settings">Docker file sharing settings</h4>
+<p>Black Duck Docker Inspector requires the ability to share directories with the image inspector containers.
+It shares a directory with image inspector containers by mounting it as a volume.
+You will need to configure your Docker settings to enable this file sharing.
+The simplest way to do this is to add your home directory as a sharable directory
+on the Docker settings Resources &gt; FILE SHARING screen.</p>
+<p>The shared directories are created under the value of property shared.dir.local.path,
+so if you change the directory that property points to, be sure your Docker file sharing settings enable
+sharing of that directory.</p>
 <h4 id="docker-restrictions">Docker restrictions</h4>
 <p>Docker on Windows has restrictions that impact Black Duck Docker Inspector:</p>
 <ol>
