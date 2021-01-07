@@ -38,6 +38,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 import com.github.dockerjava.api.DockerClient;
@@ -156,11 +157,20 @@ public class DockerClientManager {
     }
 
     public String pullImage(String imageName, String tagName) throws IntegrationException, InterruptedException {
+        return pullImage(imageName, tagName, null);
+    }
+    public String pullImage(String imageName, String tagName, @Nullable String platformName) throws IntegrationException, InterruptedException {
         if (config.isOfflineMode()) {
             throw new DisabledException("Image pulling is disabled in offline mode");
         }
         logger.info(String.format("Pulling image %s:%s", imageName, tagName));
-        PullImageCmd pull = dockerClient.pullImageCmd(imageName).withTag(tagName);
+
+        PullImageCmd pull;
+        if (platformName != null) {
+            pull = dockerClient.pullImageCmd(imageName).withTag(tagName).withPlatform(platformName);
+        } else {
+            pull = dockerClient.pullImageCmd(imageName).withTag(tagName);
+        }
         try {
             pull.exec(new PullImageResultCallback()).awaitCompletion();
         } catch (NotFoundException e) {
