@@ -157,17 +157,14 @@ public class DockerClientManager {
     }
 
     public String pullImage(String imageName, String tagName) throws IntegrationException, InterruptedException {
-        return pullImage(imageName, tagName, null);
-    }
-    public String pullImage(String imageName, String tagName, @Nullable String platformName) throws IntegrationException, InterruptedException {
         if (config.isOfflineMode()) {
             throw new DisabledException("Image pulling is disabled in offline mode");
         }
         logger.info(String.format("Pulling image %s:%s", imageName, tagName));
 
         PullImageCmd pull;
-        if (platformName != null) {
-            pull = dockerClient.pullImageCmd(imageName).withTag(tagName).withPlatform(platformName);
+        if (config.getDockerImagePlatform() != null) {
+            pull = dockerClient.pullImageCmd(imageName).withTag(tagName).withPlatform(config.getDockerImagePlatform());
         } else {
             pull = dockerClient.pullImageCmd(imageName).withTag(tagName);
         }
