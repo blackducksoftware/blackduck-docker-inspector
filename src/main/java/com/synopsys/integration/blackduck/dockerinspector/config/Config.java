@@ -188,6 +188,10 @@ public class Config {
     @Value("${docker.image.platform:}")
     private String dockerImagePlatform = "";
 
+    @ValueDescription(description = "The digest (shown as 'digest' field in 'docker manifest inspect <image>' output) of the target image.", group = Config.GROUP_PUBLIC)
+    @Value("${docker.image.digest:}")
+    private String dockerImageDigest = "";
+
     @ValueDescription(description = "Docker tarfile path", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${docker.tar:}")
     private String dockerTar = "";
@@ -529,6 +533,8 @@ public class Config {
     }
 
     public String getDockerImagePlatform() { return optionsByFieldName.get("dockerImagePlatform").getResolvedValue(); }
+
+    public String getDockerImageDigest() { return optionsByFieldName.get("dockerImageDigest").getResolvedValue(); }
 
     public String getDockerImageRepo() {
         return optionsByFieldName.get("dockerImageRepo").getResolvedValue();
