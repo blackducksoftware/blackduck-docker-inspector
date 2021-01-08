@@ -163,7 +163,7 @@ public class DockerClientManager {
         logger.info(String.format("Pulling image %s:%s", imageName, tagName));
 
         PullImageCmd pull;
-        if (config.getDockerImagePlatform() != null) {
+        if (StringUtils.isNotBlank(config.getDockerImagePlatform())) {
             pull = dockerClient.pullImageCmd(imageName).withTag(tagName).withPlatform(config.getDockerImagePlatform());
         } else {
             pull = dockerClient.pullImageCmd(imageName).withTag(tagName);
