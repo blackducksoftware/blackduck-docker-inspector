@@ -1,6 +1,7 @@
 package com.synopsys.integration.blackduck.dockerinspector.dockerclient;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -22,6 +23,7 @@ import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarFilename;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarWrapper;
+import com.synopsys.integration.blackduck.exception.BlackDuckIntegrationException;
 import com.synopsys.integration.exception.IntegrationException;
 
 @Tag("integration")
@@ -93,5 +95,17 @@ public class DockerClientManagerTest {
         Mockito.when(config.getDockerImageTag()).thenReturn("latest");
         final ImageTarWrapper imageTarWrapper = dockerClientManager.deriveDockerTarFileFromConfig();
         assertEquals("alpine_latest.tar", imageTarWrapper.getFile().getName());
+    }
+
+    @Test
+    public void testPullImageByDigest() throws InterruptedException, IntegrationException {
+        String repo = "ubuntu";
+        String tag = "20.04";
+        String digest = "sha256:be2aa2178e05b3d1930b4192ba405cb1d260f6a573abab4a6e83e0ebec626cf1";
+        try {
+            dockerClientManager.pullImageByDigest(repo, tag, digest);
+        } catch (BlackDuckIntegrationException e) {
+            fail();
+        }
     }
 }
