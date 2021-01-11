@@ -101,11 +101,19 @@ public class DockerClientManagerTest {
     public void testPullImageByPlatform() throws InterruptedException, IntegrationException {
         String repo = "ubuntu";
         String tag = "20.04";
-        String platform = "arm";
         try {
-            dockerClientManager.pullImageByPlatform(repo, tag, platform);
+            dockerClientManager.pullImageByPlatform(repo, tag, "arm");
         } catch (BlackDuckIntegrationException e) {
             fail();
         }
+
+        boolean threwExceptionOnUnknownPlatform = false;
+        try {
+            dockerClientManager.pullImageByPlatform(repo, tag, "platform");
+        } catch (BlackDuckIntegrationException e) {
+            threwExceptionOnUnknownPlatform = true;
+        }
+        assertTrue(threwExceptionOnUnknownPlatform);
     }
+
 }
