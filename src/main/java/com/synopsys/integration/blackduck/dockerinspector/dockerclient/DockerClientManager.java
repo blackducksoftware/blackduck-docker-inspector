@@ -168,13 +168,6 @@ public class DockerClientManager {
         return pullImage(imageName, tagName, pull);
     }
 
-    public String pullImageByDigest(String imageName, String tagName, String digest) throws IntegrationException, InterruptedException {
-        validateMode();
-        String imageNameWithDigest = String.format("%s@%s", imageName, digest);
-        PullImageCmd pull = dockerClient.pullImageCmd(imageNameWithDigest);
-        return pullImage(imageName, tagName, pull);
-    }
-
     public String pullImage(String imageName, String tagName, PullImageCmd pull) throws IntegrationException, InterruptedException {
         logger.info(String.format("Pulling image %s:%s", imageName, tagName));
         try {
