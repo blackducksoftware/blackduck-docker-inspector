@@ -17,9 +17,12 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.mockito.Mockito;
 
 import com.github.dockerjava.api.exception.BadRequestException;
+import com.github.dockerjava.api.exception.DockerClientException;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarFilename;
@@ -102,27 +105,22 @@ public class DockerClientManagerTest {
         assertEquals("alpine_latest.tar", imageTarWrapper.getFile().getName());
     }
 
-    @Test
-    public void testPullImageByPlatform() throws InterruptedException, IntegrationException {
+    @ParameterizedTest
+    @CsvFileSource(resources = "/dockerclient/pullImageByPlatformValuesThatThrowExceptions.txt")
+    public void testPullImageByPlatformDifferentFormats(String platform, boolean shouldThrowException) throws InterruptedException, IntegrationException {
         String repo = "ubuntu";
         String tag = "20.04";
 
         // remove image from local registry to ensure new image is pulled
         removeImage(repo, tag);
 
+        boolean threwException = false;
         try {
-            dockerClientManager.pullImageByPlatform(repo, tag, "arm");
-        } catch (BlackDuckIntegrationException e) {
-            fail();
+            dockerClientManager.pullImageByPlatform(repo, tag, platform);
+        } catch (BlackDuckIntegrationException | BadRequestException | DockerClientException e) {
+            threwException = true;
         }
-
-        boolean threwExceptionOnUnknownPlatform = false;
-        try {
-            dockerClientManager.pullImageByPlatform(repo, tag, "platform");
-        } catch (BadRequestException e) {
-            threwExceptionOnUnknownPlatform = true;
-        }
-        assertTrue(threwExceptionOnUnknownPlatform);
+        assertEquals(shouldThrowException, threwException);
     }
 
 }
