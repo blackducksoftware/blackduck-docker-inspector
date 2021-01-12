@@ -367,6 +367,11 @@ public class DockerClientManager {
             if (repoTag == null) {
                 continue;
             }
+            String repoColonString = String.format("%s:", targetImageName);
+            if (!repoTag.startsWith(repoColonString)) {
+                logger.trace(String.format("Repo value of %s doesn't match target repo %s", repoTag, targetImageName));
+                continue;
+            }
             String colonTagString = String.format(":%s", targetTagName);
             logger.trace(String.format("getLocalImage(%s, %s) checking to see if %s ends with %s", targetImageName, targetTagName, repoTag, colonTagString));
             if (repoTag.endsWith(colonTagString)) {

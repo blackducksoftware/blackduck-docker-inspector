@@ -104,7 +104,7 @@ public class SquashedImage {
             if (!foundImageId.isPresent()) {
                 return imageRepoTagCandidate;
             } else {
-                logger.debug("\tImage repo:name %s is not available", imageRepoTagCandidate);
+                logger.debug(String.format("\tImage repo:name %s is not available", imageRepoTagCandidate));
             }
         }
         throw new IntegrationException(String.format("Failed to find an available image repo:tag to use when building the squashed image"));
