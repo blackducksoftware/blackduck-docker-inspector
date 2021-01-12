@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import com.github.dockerjava.api.exception.BadRequestException;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarFilename;
@@ -44,6 +45,10 @@ public class DockerClientManagerTest {
 
     @AfterAll
     public static void tearDown() {
+        removeImage(imageRepo, imageTag);
+    }
+
+    private static void removeImage(String imageRepo, String imageTag) {
         final Optional<String> foundImageIdInitial = dockerClientManager.lookupImageIdByRepoTag(imageRepo, imageTag);
         if (foundImageIdInitial.isPresent()) {
             dockerClientManager.removeImage(foundImageIdInitial.get());
@@ -101,6 +106,10 @@ public class DockerClientManagerTest {
     public void testPullImageByPlatform() throws InterruptedException, IntegrationException {
         String repo = "ubuntu";
         String tag = "20.04";
+
+        // remove image from local registry to ensure new image is pulled
+        removeImage(repo, tag);
+
         try {
             dockerClientManager.pullImageByPlatform(repo, tag, "arm");
         } catch (BlackDuckIntegrationException e) {
@@ -110,7 +119,7 @@ public class DockerClientManagerTest {
         boolean threwExceptionOnUnknownPlatform = false;
         try {
             dockerClientManager.pullImageByPlatform(repo, tag, "platform");
-        } catch (BlackDuckIntegrationException e) {
+        } catch (BadRequestException e) {
             threwExceptionOnUnknownPlatform = true;
         }
         assertTrue(threwExceptionOnUnknownPlatform);
