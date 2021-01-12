@@ -706,6 +706,7 @@ public class Config {
         this.serviceTimeout = null;
         this.dockerImage = null;
         this.dockerImageId = null;
+        this.dockerImagePlatform = null;
         this.dockerImageRepo = null;
         this.dockerPlatformTopLayerId = null;
         this.dockerImageTag = null;

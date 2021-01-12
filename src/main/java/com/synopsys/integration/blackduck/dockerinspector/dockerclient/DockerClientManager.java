@@ -168,7 +168,7 @@ public class DockerClientManager {
         return pullImage(imageName, tagName, pull);
     }
 
-    public String pullImage(String imageName, String tagName, PullImageCmd pull) throws IntegrationException, InterruptedException {
+    private String pullImage(String imageName, String tagName, PullImageCmd pull) throws IntegrationException, InterruptedException {
         logger.info(String.format("Pulling image %s:%s", imageName, tagName));
         try {
             pull.exec(new PullImageResultCallback()).awaitCompletion();
