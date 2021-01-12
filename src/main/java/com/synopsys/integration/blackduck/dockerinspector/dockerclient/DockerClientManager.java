@@ -38,6 +38,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 import com.github.dockerjava.api.DockerClient;
@@ -156,11 +157,19 @@ public class DockerClientManager {
     }
 
     public String pullImage(String imageName, String tagName) throws IntegrationException, InterruptedException {
-        if (config.isOfflineMode()) {
-            throw new DisabledException("Image pulling is disabled in offline mode");
-        }
-        logger.info(String.format("Pulling image %s:%s", imageName, tagName));
+        validateMode();
         PullImageCmd pull = dockerClient.pullImageCmd(imageName).withTag(tagName);
+        return pullImage(imageName, tagName, pull);
+    }
+
+    public String pullImageByPlatform(String imageName, String tagName, String platform) throws IntegrationException, InterruptedException {
+        validateMode();
+        PullImageCmd pull = dockerClient.pullImageCmd(imageName).withTag(tagName).withPlatform(platform);
+        return pullImage(imageName, tagName, pull);
+    }
+
+    private String pullImage(String imageName, String tagName, PullImageCmd pull) throws IntegrationException, InterruptedException {
+        logger.info(String.format("Pulling image %s:%s", imageName, tagName));
         try {
             pull.exec(new PullImageResultCallback()).awaitCompletion();
         } catch (NotFoundException e) {
@@ -173,6 +182,12 @@ public class DockerClientManager {
             throw new BlackDuckIntegrationException(msg);
         }
         return justPulledImage.get().getId();
+    }
+
+    private void validateMode() throws DisabledException {
+        if (config.isOfflineMode()) {
+            throw new DisabledException("Image pulling is disabled in offline mode");
+        }
     }
 
     public void removeImage(String imageId) {
@@ -295,7 +310,7 @@ public class DockerClientManager {
     private ImageTarWrapper getTarFileFromDockerImage(String imageName, String tagName, File imageTarDirectory) throws IntegrationException, IOException {
         Optional<String> targetImageId = Optional.empty();
         try {
-            targetImageId = Optional.ofNullable(pullImage(imageName, tagName));
+            targetImageId = getImageId(imageName, tagName);
         } catch (DisabledException disabledException) {
             logger.info("Image pulling is disabled in offline mode");
         } catch (Exception e) {
@@ -307,6 +322,14 @@ public class DockerClientManager {
             removeImage(targetImageId.get());
         }
         return imageTarWrapper;
+    }
+
+    private Optional<String> getImageId(String imageName, String tagName) throws InterruptedException, IntegrationException {
+        if (StringUtils.isNotBlank(config.getDockerImagePlatform())) {
+            return Optional.ofNullable(pullImageByPlatform(imageName, tagName, config.getDockerImagePlatform()));
+        } else {
+            return Optional.ofNullable(pullImage(imageName, tagName));
+        }
     }
 
     private String getLoggingLevelString() {

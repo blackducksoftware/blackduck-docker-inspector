@@ -184,6 +184,10 @@ public class Config {
     @Value("${docker.image:}")
     private String dockerImage = "";
 
+    @ValueDescription(description = "The platform (shown as 'platform' field in 'docker manifest inspect <image>' output) of the target image. You must also provide the target image (via docker.image) when using this property.  Note: when providing a platform, you may provide either the target operating system (os), the target architecture, or os/architecture.", group = Config.GROUP_PUBLIC)
+    @Value("${docker.image.platform:}")
+    private String dockerImagePlatform = "";
+
     @ValueDescription(description = "Docker tarfile path", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${docker.tar:}")
     private String dockerTar = "";
@@ -524,6 +528,8 @@ public class Config {
         return optionsByFieldName.get("dockerImageId").getResolvedValue();
     }
 
+    public String getDockerImagePlatform() { return optionsByFieldName.get("dockerImagePlatform").getResolvedValue(); }
+
     public String getDockerImageRepo() {
         return optionsByFieldName.get("dockerImageRepo").getResolvedValue();
     }
@@ -700,6 +706,7 @@ public class Config {
         this.serviceTimeout = null;
         this.dockerImage = null;
         this.dockerImageId = null;
+        this.dockerImagePlatform = null;
         this.dockerImageRepo = null;
         this.dockerPlatformTopLayerId = null;
         this.dockerImageTag = null;

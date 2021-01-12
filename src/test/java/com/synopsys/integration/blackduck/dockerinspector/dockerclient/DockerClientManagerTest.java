@@ -3,6 +3,7 @@ package com.synopsys.integration.blackduck.dockerinspector.dockerclient;
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,12 +17,17 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.mockito.Mockito;
 
+import com.github.dockerjava.api.exception.BadRequestException;
+import com.github.dockerjava.api.exception.DockerClientException;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarFilename;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarWrapper;
+import com.synopsys.integration.blackduck.exception.BlackDuckIntegrationException;
 import com.synopsys.integration.exception.IntegrationException;
 
 @Tag("integration")
@@ -42,6 +48,10 @@ public class DockerClientManagerTest {
 
     @AfterAll
     public static void tearDown() {
+        removeImage(imageRepo, imageTag);
+    }
+
+    private static void removeImage(String imageRepo, String imageTag) {
         final Optional<String> foundImageIdInitial = dockerClientManager.lookupImageIdByRepoTag(imageRepo, imageTag);
         if (foundImageIdInitial.isPresent()) {
             dockerClientManager.removeImage(foundImageIdInitial.get());
@@ -94,4 +104,23 @@ public class DockerClientManagerTest {
         final ImageTarWrapper imageTarWrapper = dockerClientManager.deriveDockerTarFileFromConfig();
         assertEquals("alpine_latest.tar", imageTarWrapper.getFile().getName());
     }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/dockerclient/pullImageByPlatformValuesThatThrowExceptions.txt")
+    public void testPullImageByPlatformDifferentFormats(String platform, boolean shouldThrowException) throws InterruptedException, IntegrationException {
+        String repo = "ubuntu";
+        String tag = "20.04";
+
+        // remove image from local registry to ensure new image is pulled
+        removeImage(repo, tag);
+
+        boolean threwException = false;
+        try {
+            dockerClientManager.pullImageByPlatform(repo, tag, platform);
+        } catch (BlackDuckIntegrationException | BadRequestException | DockerClientException e) {
+            threwException = true;
+        }
+        assertEquals(shouldThrowException, threwException);
+    }
+
 }
