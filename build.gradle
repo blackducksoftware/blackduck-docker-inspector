@@ -1,6 +1,6 @@
-import org.apache.tools.ant.filters.ReplaceTokens
 import com.bmuschko.gradle.docker.tasks.image.Dockerfile
-import com.synopsys.integration.blackduck.dockerinspector.artifactory.UpdateArtifactoryPropertiesTask;
+import com.synopsys.integration.blackduck.dockerinspector.artifactory.UpdateArtifactoryPropertiesTask
+import org.apache.tools.ant.filters.ReplaceTokens
 
 buildscript {
     apply from: "https://raw.githubusercontent.com/blackducksoftware/integration-resources/master/gradle_common/buildscript-repositories.gradle", to: buildscript
@@ -16,7 +16,7 @@ buildscript {
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
 project.ext.inspectorImageVersion = "5.0.2"
 
-version = '9.1.2-SNAPSHOT'
+version = '9.2.0-SNAPSHOT'
 
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
@@ -34,7 +34,7 @@ configurations {
 }
 
 task writeVersionToPropertiesFile() {
-	doLast {
+    doLast {
         println '\tChecking version properties'
         File versionPropertiesHashFile = new File('src/main/resources/version.hashcode')
         String existingHash = versionPropertiesHashFile.text
@@ -67,9 +67,9 @@ task produceFinalZip(type: Zip, dependsOn: [build, writeVersionToPropertiesFile]
 }
 
 task buildScript(type: Copy) {
-	from "src/main/resources/${project.name}.sh"
-	into 'build'
-	filter(ReplaceTokens, tokens: [VERSION: version, INSPECTOR_IMAGE_FAMILY: project.ext.inspectorImageFamily])
+    from "src/main/resources/${project.name}.sh"
+    into 'build'
+    filter(ReplaceTokens, tokens: [VERSION: version, INSPECTOR_IMAGE_FAMILY: project.ext.inspectorImageFamily])
 }
 
 task docsGeneratedClean(type: Exec) {
@@ -125,26 +125,26 @@ task removeTestBaseImage(type: Exec) {
 }
 
 task createTestDockerfile(type: Dockerfile) {
-	destFile = project.file("${buildDir}/images/test/centos_minus_vim_plus_bacula/Dockerfile")
-	println "destFile: ${destFile}"
-	from 'centos@sha256:773bb32cbd1d171da7df52de8d7b731320748707b821bdbabb885d6eda894e87'
-	maintainer 'Black Duck Software'
-	environmentVariable('LANG', 'en_US.UTF-8')
-	
-	runCommand 'rpm -e vim-minimal && \
+    destFile = project.file("${buildDir}/images/test/centos_minus_vim_plus_bacula/Dockerfile")
+    println "destFile: ${destFile}"
+    from 'centos@sha256:773bb32cbd1d171da7df52de8d7b731320748707b821bdbabb885d6eda894e87'
+    maintainer 'Black Duck Software'
+    environmentVariable('LANG', 'en_US.UTF-8')
+
+    runCommand 'rpm -e vim-minimal && \
         yum install -y bacula-director-5.2.13-23.1.el7 bacula-storage-5.2.13-23.1.el7 bacula-client-5.2.13-23.1.el7 \
         bacula-console-5.2.13-23.1.el7'
 }
 
 task buildTestDockerImage(type: Exec, dependsOn: [removeTestBaseImage, removeTestImage, createTestDockerfile]) {
-	commandLine "docker", "build", "--no-cache", "--tag", "blackducksoftware/centos_minus_vim_plus_bacula:1.0", \
-        "${buildDir}/images/test/centos_minus_vim_plus_bacula"
+    commandLine "docker", "build", "--no-cache", "--tag", "blackducksoftware/centos_minus_vim_plus_bacula:1.0",  \
+         "${buildDir}/images/test/centos_minus_vim_plus_bacula"
 }
 
 task buildTestDockerTarfile(type: Exec, dependsOn: buildTestDockerImage) {
     outputs.files file("${buildDir}/images/test/centos_minus_vim_plus_bacula.tar")
-	commandLine "docker", "save", "-o", "${buildDir}/images/test/centos_minus_vim_plus_bacula.tar", \
-        "blackducksoftware/centos_minus_vim_plus_bacula:1.0"
+    commandLine "docker", "save", "-o", "${buildDir}/images/test/centos_minus_vim_plus_bacula.tar",  \
+         "blackducksoftware/centos_minus_vim_plus_bacula:1.0"
 }
 
 task createWhTestDockerfile(type: Dockerfile) {
@@ -153,7 +153,7 @@ task createWhTestDockerfile(type: Dockerfile) {
     from 'ubuntu@sha256:3097ac92b852f878f802c22a38f97b097b4084dbef82893ba453ba0297d76a6a'
     maintainer 'Black Duck Software'
     environmentVariable('LANG', 'en_US.UTF-8')
-    
+
     runCommand 'apt-get update && apt-get -y install curl && apt-get -y remove curl && apt-get -y clean'
 }
 
@@ -200,8 +200,8 @@ task buildAlpine36TestDockerTarfile(type: Exec, dependsOn: pullAlpine36) {
 }
 
 task buildAggTestDockerTarfile(type: Exec, dependsOn: [buildTestDockerImage, buildWhTestDockerImage]) {
-    commandLine "docker", "save", "-o", "${buildDir}/images/test/aggregated.tar", "blackducksoftware/centos_minus_vim_plus_bacula:1.0", \
-        "blackducksoftware/whiteouttest:1.0"
+    commandLine "docker", "save", "-o", "${buildDir}/images/test/aggregated.tar", "blackducksoftware/centos_minus_vim_plus_bacula:1.0",  \
+         "blackducksoftware/whiteouttest:1.0"
 }
 
 clean.dependsOn docsClean
@@ -222,8 +222,8 @@ task checkVersion() {
     }
 }
 
-task buildTestTarfiles(dependsOn: [buildTestDockerTarfile, buildWhTestDockerTarfile, buildAggTestDockerTarfile, \
-        buildAlpineTestDockerTarfile, buildAlpine36TestDockerTarfile, buildUbuntuTestDockerTarfile]) {}
+task buildTestTarfiles(dependsOn: [buildTestDockerTarfile, buildWhTestDockerTarfile, buildAggTestDockerTarfile,  \
+         buildAlpineTestDockerTarfile, buildAlpine36TestDockerTarfile, buildUbuntuTestDockerTarfile]) {}
 
 task testPrep(dependsOn: [build, buildTestTarfiles, buildScript, createVersionedScript]) {
     doLast {
@@ -253,21 +253,21 @@ task cleanExtras(type: Exec, dependsOn: docsGeneratedClean) {
 
 
 clean.dependsOn cleanExtras
-testIntegration.dependsOn testPrep 
+testIntegration.dependsOn testPrep
 task all(dependsOn: [testIntegration, artifactoryPublish, publishAirGapZip]) {}
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
             def artifactName = "${buildDir}/libs/${project.name}-${version}.jar"
-            artifact (artifactName)
+            artifact(artifactName)
         }
     }
 }
 
 artifactory {
     publish {
-        defaults { publications ('mavenJava') }
+        defaults { publications('mavenJava') }
     }
 }
 
@@ -287,7 +287,7 @@ dependencies {
     compile group: 'javax.activation', name: 'activation', version: '1.1.1'
 
     runtime 'org.springframework.boot:spring-boot-properties-migrator'
-    
+
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'io.fabric8:kubernetes-client:3.1.8'
     testCompile 'io.fabric8:kubernetes-model:2.0.8'
