@@ -23,6 +23,7 @@ import org.mockito.Mockito;
 
 import com.github.dockerjava.api.exception.BadRequestException;
 import com.github.dockerjava.api.exception.DockerClientException;
+import com.github.dockerjava.api.exception.InternalServerErrorException;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarFilename;
@@ -117,7 +118,7 @@ public class DockerClientManagerTest {
         boolean threwException = false;
         try {
             dockerClientManager.pullImageByPlatform(repo, tag, platform);
-        } catch (BlackDuckIntegrationException | BadRequestException | DockerClientException e) {
+        } catch (BlackDuckIntegrationException | BadRequestException | DockerClientException | InternalServerErrorException e) {
             threwException = true;
         }
         assertEquals(shouldThrowException, threwException);
