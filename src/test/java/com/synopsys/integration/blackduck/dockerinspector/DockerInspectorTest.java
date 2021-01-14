@@ -9,6 +9,7 @@ import java.nio.file.attribute.PosixFilePermission;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -37,16 +38,17 @@ public class DockerInspectorTest {
     private static File containerTargetDir;
     private static File containerOutputDir;
 
-    private static ProgramVersion programVersion;
     private static String dateTimeStamp;
-    private static Random random;
+    private static ProgramVersion programVersion;
+    private static IntegrationTestRunner integrationTestRunner;
 
     @BeforeAll
     public static void setUpBeforeClass() throws Exception {
-        random = new Random();
-        dateTimeStamp = getTimestamp();
         programVersion = new ProgramVersion();
         programVersion.init();
+        CommandCreator commandCreator = new CommandCreator(new Random(), programVersion, getConfiguredAlternateJavaCmd());
+        integrationTestRunner = new IntegrationTestRunner(commandCreator);
+        dateTimeStamp = getTimestamp();
         printDockerVersion();
         System.out.printf("Running containers:\n%s\n", getRunningContainers(false));
         System.out.printf("All containers:\n%s\n", getAllContainers(false));
@@ -147,7 +149,7 @@ public class DockerInspectorTest {
                                     .setMinNumberOfComponentsExpected(60)
                                     .setCodelocationName("ubuntu_latest_DPKG")
                                     .build();
-        IntegrationTestCommon.testImage(random, programVersion, null, testConfig);
+        integrationTestRunner.testImage(null, testConfig);
     }
 
     @Test
@@ -162,7 +164,7 @@ public class DockerInspectorTest {
                                     .setMinNumberOfComponentsExpected(5)
                                     .setCodelocationName("alpine_3.6_APK")
                                     .build();
-        IntegrationTestCommon.testImage(random, programVersion, null, testConfig);
+        integrationTestRunner.testImage(null, testConfig);
     }
 
     @Test
@@ -177,7 +179,7 @@ public class DockerInspectorTest {
                                     .setMinNumberOfComponentsExpected(15)
                                     .setCodelocationName("centos_7.3.1611_RPM")
                                     .build();
-        IntegrationTestCommon.testImage(random, programVersion, null, testConfig);
+        integrationTestRunner.testImage(null, testConfig);
     }
 
     @Test
@@ -559,7 +561,7 @@ public class DockerInspectorTest {
                                     .setMinContainerFileSystemFileSize(100000)
                                     .setMaxContainerFileSystemFileSize(200000)
                                     .build();
-        IntegrationTestCommon.testImage(random, programVersion, null, testConfig);
+        integrationTestRunner.testImage(null, testConfig);
     }
 
     private void testTarUsingExistingContainer(TestConfig testConfig)
@@ -595,7 +597,7 @@ public class DockerInspectorTest {
         }
         testConfig.setMode(TestConfig.Mode.NO_SERVICE_START);
 
-        IntegrationTestCommon.testTar(random, programVersion, null, testConfig);
+        integrationTestRunner.testTar(null, testConfig);
     }
 
     private void testImageUsingExistingContainer(TestConfig testConfig)
@@ -608,7 +610,7 @@ public class DockerInspectorTest {
 
         testConfig.setMode(TestConfig.Mode.NO_SERVICE_START);
         testConfig.setAdditionalArgs(additionalArgs);
-        IntegrationTestCommon.testImage(random, programVersion, null, testConfig);
+        integrationTestRunner.testImage(null, testConfig);
     }
 
     private static void createWriteableDirTolerantly(File dir) {
@@ -755,5 +757,12 @@ public class DockerInspectorTest {
                 TestUtils.execCmd(String.format("docker rm -f %s", containerName), 120000L, false, null);
             }
         }
+    }
+
+    private static String getConfiguredAlternateJavaCmd() {
+        Map<String, String> env = System.getenv();
+        String alternateJavaCmd = env.get("TEST_ALTERNATE_JAVA_CMD");
+        System.out.printf("alternateJavaCmd: %s\n", alternateJavaCmd);
+        return alternateJavaCmd;
     }
 }

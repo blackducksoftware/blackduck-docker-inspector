@@ -1,5 +1,7 @@
 package com.synopsys.integration.blackduck.dockerinspector;
 
+import static org.junit.Assert.assertFalse;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -7,6 +9,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.ProcessBuilder.Redirect;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -38,6 +41,14 @@ public class TestUtils {
         }
     }
 
+    public static void ensureFileDoesNotExist(File outputContainerFileSystemFile) throws IOException {
+        if (outputContainerFileSystemFile == null) {
+            return;
+        }
+        Files.deleteIfExists(outputContainerFileSystemFile.toPath());
+        assertFalse(outputContainerFileSystemFile.exists());
+    }
+    
     public static boolean contentEquals(final File file1, final File file2, final List<String> exceptLinesContainingThese) throws IOException {
         System.out.printf("Comparing %s %s\n", file1.getAbsolutePath(), file2.getAbsolutePath());
         int ignoredLineCount = 0;
