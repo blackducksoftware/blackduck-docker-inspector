@@ -23,63 +23,7 @@ public class CommandCreator {
         this.configuredAlternateJavaCmd = configuredAlternateJavaCmd;
     }
 
-    public List<String> createCmd(TestConfig.Mode mode, String detectJarPath, String inspectTargetArg, String repo, String tag,
-        String codelocationName, List<String> additionalArgs) {
-        if (mode == TestConfig.Mode.DETECT) {
-            return createDetectCmd(detectJarPath, inspectTargetArg, repo, tag, codelocationName, additionalArgs);
-        } else {
-            return createDockerInspectorCmd(mode, inspectTargetArg, repo, tag, codelocationName, additionalArgs);
-        }
-    }
-
-    private List<String> createDetectCmd(String detectJarPath, String inspectTargetArg, String repo, String tag,
-        String codelocationName, List<String> additionalArgs) {
-        if (StringUtils.isBlank(detectJarPath)) {
-            throw new UnsupportedOperationException("Detect jar path must be provided");
-        }
-        List<String> cmd = new ArrayList<>();
-        cmd.add("java");
-        cmd.add("-jar");
-        cmd.add(detectJarPath);
-        cmd.add(String.format("--detect.docker.inspector.path=build/libs/blackduck-docker-inspector-%s.jar", programVersion.getProgramVersion()));
-        cmd.add("--blackduck.offline.mode=true");
-        cmd.add(String.format("--detect.docker.passthrough.blackduck.codelocation.name=%s", codelocationName));
-        cmd.add("--detect.blackduck.signature.scanner.disabled=true");
-        if (repo != null) {
-            cmd.add(String.format("--detect.docker.passthrough.docker.image.repo=%s", repo));
-        }
-        if (tag != null) {
-            cmd.add(String.format("--detect.docker.passthrough.docker.image.tag=%s", tag));
-        }
-        cmd.add("--logging.level.com.blackducksoftware.integration=DEBUG");
-        cmd.add("--detect.excluded.bom.tool.types=gradle");
-        cmd.add("--detect.docker.passthrough.service.timeout=800000");
-        cmd.add("--detect.docker.passthrough.command.timeout=800000");
-        String adjustedTargetArg = inspectTargetArg.replace("--docker.", "--detect.docker.");
-        cmd.add(adjustedTargetArg);
-
-        if (additionalArgs != null) {
-            for (String additionalArg : additionalArgs) {
-                String adjustedArg = additionalArg.replace("--", "--detect.docker.passthrough.");
-                cmd.add(adjustedArg);
-            }
-        }
-
-        return cmd;
-    }
-
-    public List<String> createSimpleDockerInspectorScriptCmd(List<String> args) {
-        List<String> cmd = new ArrayList<>();
-
-        cmd.add("build/blackduck-docker-inspector.sh");
-        cmd.add(String.format("--jar.path=build/libs/blackduck-docker-inspector-%s.jar", programVersion.getProgramVersion()));
-        if (args != null) {
-            cmd.addAll(args);
-        }
-        return cmd;
-    }
-
-    private List<String> createDockerInspectorCmd(TestConfig.Mode mode, String inspectTargetArg, String repo, String tag,
+    public List<String> createCmd(TestConfig.Mode mode, String inspectTargetArg, String repo, String tag,
         String codelocationName, List<String> additionalArgs) {
         List<String> cmd = new ArrayList<>();
         if (random.nextBoolean()) {
@@ -88,17 +32,7 @@ public class CommandCreator {
             cmd.add(String.format("--jar.path=build/libs/blackduck-docker-inspector-%s.jar", programVersion.getProgramVersion()));
         } else {
             System.out.println("The coin toss chose to run the jar");
-            String javaCmd = "java";
-            if (random.nextBoolean()) {
-                System.out.println("Will use alternate java command if configured");
-                if (StringUtils.isNotBlank(configuredAlternateJavaCmd)) {
-                    System.out.printf("Will use alternate java command: %s\n", configuredAlternateJavaCmd);
-                    javaCmd = configuredAlternateJavaCmd;
-                } else {
-                    System.out.printf("No alternate java command is configured; defaulting to %s\n", javaCmd);
-                }
-            }
-            cmd.add(javaCmd);
+            cmd.add(deriveJavaCmd());
             cmd.add("-jar");
             cmd.add(String.format("build/libs/blackduck-docker-inspector-%s.jar", programVersion.getProgramVersion()));
         }
@@ -137,6 +71,31 @@ public class CommandCreator {
             cmd.addAll(additionalArgs);
         }
 
+        return cmd;
+    }
+
+    private String deriveJavaCmd() {
+        String javaCmd = "java";
+        if (random.nextBoolean()) {
+            System.out.println("Will use alternate java command if configured");
+            if (StringUtils.isNotBlank(configuredAlternateJavaCmd)) {
+                System.out.printf("Will use alternate java command: %s\n", configuredAlternateJavaCmd);
+                javaCmd = configuredAlternateJavaCmd;
+            } else {
+                System.out.printf("No alternate java command is configured; defaulting to %s\n", javaCmd);
+            }
+        }
+        return javaCmd;
+    }
+
+    public List<String> createSimpleDockerInspectorScriptCmd(List<String> args) {
+        List<String> cmd = new ArrayList<>();
+
+        cmd.add("build/blackduck-docker-inspector.sh");
+        cmd.add(String.format("--jar.path=build/libs/blackduck-docker-inspector-%s.jar", programVersion.getProgramVersion()));
+        if (args != null) {
+            cmd.addAll(args);
+        }
         return cmd;
     }
 }

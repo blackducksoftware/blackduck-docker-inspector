@@ -149,7 +149,7 @@ public class DockerInspectorTest {
                                     .setMinNumberOfComponentsExpected(60)
                                     .setCodelocationName("ubuntu_latest_DPKG")
                                     .build();
-        integrationTestRunner.testImage(null, testConfig);
+        integrationTestRunner.testImage(testConfig);
     }
 
     @Test
@@ -164,7 +164,7 @@ public class DockerInspectorTest {
                                     .setMinNumberOfComponentsExpected(5)
                                     .setCodelocationName("alpine_3.6_APK")
                                     .build();
-        integrationTestRunner.testImage(null, testConfig);
+        integrationTestRunner.testImage(testConfig);
     }
 
     @Test
@@ -179,7 +179,7 @@ public class DockerInspectorTest {
                                     .setMinNumberOfComponentsExpected(15)
                                     .setCodelocationName("centos_7.3.1611_RPM")
                                     .build();
-        integrationTestRunner.testImage(null, testConfig);
+        integrationTestRunner.testImage(testConfig);
     }
 
     @Test
@@ -561,7 +561,7 @@ public class DockerInspectorTest {
                                     .setMinContainerFileSystemFileSize(100000)
                                     .setMaxContainerFileSystemFileSize(200000)
                                     .build();
-        integrationTestRunner.testImage(null, testConfig);
+        integrationTestRunner.testImage(testConfig);
     }
 
     private void testTarUsingExistingContainer(TestConfig testConfig)
@@ -597,7 +597,7 @@ public class DockerInspectorTest {
         }
         testConfig.setMode(TestConfig.Mode.NO_SERVICE_START);
 
-        integrationTestRunner.testTar(null, testConfig);
+        integrationTestRunner.testTar(testConfig);
     }
 
     private void testImageUsingExistingContainer(TestConfig testConfig)
@@ -610,7 +610,7 @@ public class DockerInspectorTest {
 
         testConfig.setMode(TestConfig.Mode.NO_SERVICE_START);
         testConfig.setAdditionalArgs(additionalArgs);
-        integrationTestRunner.testImage(null, testConfig);
+        integrationTestRunner.testImage(testConfig);
     }
 
     private static void createWriteableDirTolerantly(File dir) {

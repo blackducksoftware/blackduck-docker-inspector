@@ -29,7 +29,7 @@ public class IntegrationTestRunner {
         this.commandCreator = commandCreator;
     }
 
-    public void testImage(String detectJarPath, TestConfig testConfig)
+    public void testImage(TestConfig testConfig)
         throws IOException, InterruptedException, IntegrationException {
         String inspectTargetArg = null;
         File outputContainerFileSystemFile = null;
@@ -51,7 +51,7 @@ public class IntegrationTestRunner {
             TestUtils.ensureFileDoesNotExist(actualBdio);
         }
 
-        List<String> cmd = commandCreator.createCmd(testConfig.getMode(), detectJarPath, inspectTargetArg, testConfig.getTargetRepo(), testConfig.getTargetTag(), testConfig.getCodelocationName(),
+        List<String> cmd = commandCreator.createCmd(testConfig.getMode(), inspectTargetArg, testConfig.getTargetRepo(), testConfig.getTargetTag(), testConfig.getCodelocationName(),
             testConfig.getAdditionalArgs());
 
         System.out.println(String.format("Running end to end test on %s with command %s", testConfig.getInspectTargetImageRepoTag(), cmd.toString()));
@@ -141,8 +141,7 @@ public class IntegrationTestRunner {
         }
     }
 
-    public void testTar(String detectJarPath,
-        TestConfig testConfig)
+    public void testTar(TestConfig testConfig)
         throws IOException, InterruptedException, IntegrationException {
 
         File targetTarFile;
@@ -166,7 +165,7 @@ public class IntegrationTestRunner {
         }
         TestUtils.ensureFileDoesNotExist(actualBdio);
 
-        List<String> cmd = commandCreator.createCmd(testConfig.getMode(), detectJarPath, inspectTargetArg, testConfig.getTargetRepo(), testConfig.getTargetTag(), testConfig.getCodelocationName(),
+        List<String> cmd = commandCreator.createCmd(testConfig.getMode(), inspectTargetArg, testConfig.getTargetRepo(), testConfig.getTargetTag(), testConfig.getCodelocationName(),
             testConfig.getAdditionalArgs());
         System.out.printf("Running end to end test on %s with command %s\n", targetTarFile, cmd.toString());
         TestUtils.execCmd(String.join(" ", cmd), 240000L, true, testConfig.getEnv());
