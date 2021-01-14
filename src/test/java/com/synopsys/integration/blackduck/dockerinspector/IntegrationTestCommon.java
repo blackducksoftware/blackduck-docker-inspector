@@ -12,6 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
@@ -52,7 +53,7 @@ public class IntegrationTestCommon {
             ensureFileDoesNotExist(actualBdio);
         }
 
-        List<String> cmd = createCmd(random, programVersion, testConfig.getMode(), detectJarPath, inspectTargetArg, testConfig.getTargetRepo(), testConfig.getTargetTag(), testConfig.getCodelocationName(),
+        List<String> cmd = createCmd(random, getConfiguredAlternateJavaCmd(), programVersion, testConfig.getMode(), detectJarPath, inspectTargetArg, testConfig.getTargetRepo(), testConfig.getTargetTag(), testConfig.getCodelocationName(),
             testConfig.getAdditionalArgs());
 
         System.out.println(String.format("Running end to end test on %s with command %s", testConfig.getInspectTargetImageRepoTag(), cmd.toString()));
@@ -153,19 +154,18 @@ public class IntegrationTestCommon {
         return false;
     }
 
-    private static List<String> createCmd(Random random, ProgramVersion programVersion, TestConfig.Mode mode, String detectJarPath, String inspectTargetArg, String repo, String tag,
+    private static List<String> createCmd(Random random, String alternateJavaCmd, ProgramVersion programVersion, TestConfig.Mode mode, String detectJarPath, String inspectTargetArg, String repo, String tag,
         String codelocationName, List<String> additionalArgs)
         throws IOException {
         if (mode == TestConfig.Mode.DETECT) {
-            return createDetectCmd(programVersion, mode, detectJarPath, inspectTargetArg, repo, tag, codelocationName, additionalArgs);
+            return createDetectCmd(programVersion, detectJarPath, inspectTargetArg, repo, tag, codelocationName, additionalArgs);
         } else {
-            return createDockerInspectorCmd(random, programVersion, mode, inspectTargetArg, repo, tag, codelocationName, additionalArgs);
+            return createDockerInspectorCmd(random, alternateJavaCmd, programVersion, mode, inspectTargetArg, repo, tag, codelocationName, additionalArgs);
         }
     }
 
-    private static List<String> createDetectCmd(ProgramVersion programVersion, TestConfig.Mode mode, String detectJarPath, String inspectTargetArg, String repo, String tag,
-        String codelocationName, List<String> additionalArgs)
-        throws IOException {
+    private static List<String> createDetectCmd(ProgramVersion programVersion, String detectJarPath, String inspectTargetArg, String repo, String tag,
+        String codelocationName, List<String> additionalArgs) {
         if (StringUtils.isBlank(detectJarPath)) {
             throw new UnsupportedOperationException("Detect jar path must be provided");
         }
@@ -211,8 +211,8 @@ public class IntegrationTestCommon {
         return cmd;
     }
 
-    private static List<String> createDockerInspectorCmd(Random random, ProgramVersion programVersion, TestConfig.Mode mode, String inspectTargetArg, String repo, String tag,
-        String codelocationName, List<String> additionalArgs) throws IOException {
+    private static List<String> createDockerInspectorCmd(Random random, String alternateJavaCmd, ProgramVersion programVersion, TestConfig.Mode mode, String inspectTargetArg, String repo, String tag,
+        String codelocationName, List<String> additionalArgs) {
         List<String> cmd = new ArrayList<>();
         if (random.nextBoolean()) {
             System.out.println("The coin toss chose to run the script");
@@ -220,7 +220,17 @@ public class IntegrationTestCommon {
             cmd.add(String.format("--jar.path=build/libs/blackduck-docker-inspector-%s.jar", programVersion.getProgramVersion()));
         } else {
             System.out.println("The coin toss chose to run the jar");
-            cmd.add("java");
+            String javaCmd = "java";
+            if (random.nextBoolean()) {
+                System.out.println("Will use alternate java command if configured");
+                if (StringUtils.isNotBlank(alternateJavaCmd)) {
+                    System.out.printf("Will use alternate java command: %s\n", alternateJavaCmd);
+                    javaCmd = alternateJavaCmd;
+                } else {
+                    System.out.printf("No alternate java command is configured; defaulting to %s\n", javaCmd);
+                }
+            }
+            cmd.add(javaCmd);
             cmd.add("-jar");
             cmd.add(String.format("build/libs/blackduck-docker-inspector-%s.jar", programVersion.getProgramVersion()));
         }
@@ -281,22 +291,22 @@ public class IntegrationTestCommon {
 
         File actualBdio;
         if (testConfig.getMode() == TestConfig.Mode.DETECT) {
-            actualBdio = new File(String.format(String.format("%s/blackduck/bdio/%s_bdio.jsonld", System.getProperty("user.home"), testConfig.getCodelocationName())));
+            actualBdio = new File(String.format("%s/blackduck/bdio/%s_bdio.jsonld", System.getProperty("user.home"), testConfig.getCodelocationName()));
         } else {
-            actualBdio = new File(String.format(String.format("%s/output/%s_bdio.jsonld", TestUtils.TEST_DIR_REL_PATH, testConfig.getCodelocationName())));
+            actualBdio = new File(String.format("%s/output/%s_bdio.jsonld", TestUtils.TEST_DIR_REL_PATH, testConfig.getCodelocationName()));
         }
         ensureFileDoesNotExist(actualBdio);
 
-        List<String> cmd = createCmd(random, programVersion, testConfig.getMode(), detectJarPath, inspectTargetArg, testConfig.getTargetRepo(), testConfig.getTargetTag(), testConfig.getCodelocationName(),
+        List<String> cmd = createCmd(random, getConfiguredAlternateJavaCmd(), programVersion, testConfig.getMode(), detectJarPath, inspectTargetArg, testConfig.getTargetRepo(), testConfig.getTargetTag(), testConfig.getCodelocationName(),
             testConfig.getAdditionalArgs());
-        System.out.println(String.format("Running end to end test on %s with command %s", targetTarFile, cmd.toString()));
+        System.out.printf("Running end to end test on %s with command %s\n", targetTarFile, cmd.toString());
         TestUtils.execCmd(String.join(" ", cmd), 240000L, true, testConfig.getEnv());
         System.out.println("blackduck-docker-inspector done; verifying results...");
         System.out.printf("Expecting output BDIO file: %s\n", actualBdio.getAbsolutePath());
         assertTrue(String.format("%s does not exist", actualBdio.getAbsolutePath()), actualBdio.exists());
         if (testConfig.isRequireBdioMatch()) {
             File expectedBdio = new File(
-                String.format(String.format("src/test/resources/bdio/%s_bdio.jsonld", testConfig.getCodelocationName())));
+                String.format("src/test/resources/bdio/%s_bdio.jsonld", testConfig.getCodelocationName()));
             List<String> exceptLinesContainingThese = new ArrayList<>();
             exceptLinesContainingThese.add("\"@id\":");
             exceptLinesContainingThese.add("spdx:name");
@@ -311,8 +321,7 @@ public class IntegrationTestCommon {
         assertTrue(doc.getComponents().size() >= testConfig.getMinNumberOfComponentsExpected());
         if (StringUtils.isNotBlank(testConfig.getOutputBomMustContainComponentPrefix())) {
             System.out.printf("Looking for component name starting with: %s\n", testConfig.getOutputBomMustContainComponentPrefix());
-            boolean componentFound = false;
-            componentFound = isComponentFound(doc, testConfig.getOutputBomMustContainComponentPrefix());
+            boolean componentFound = isComponentFound(doc, testConfig.getOutputBomMustContainComponentPrefix());
             assertTrue(componentFound);
             System.out.printf("Found it\n");
         }
@@ -386,6 +395,13 @@ public class IntegrationTestCommon {
             doc = bdioReader.readSimpleBdioDocument();
             return doc;
         }
+    }
+
+    private static String getConfiguredAlternateJavaCmd() {
+        Map<String, String> env = System.getenv();
+        String alternateJavaCmd = env.get("TEST_ALTERNATE_JAVA_CMD");
+        System.out.printf("alternateJavaCmd: %s\n", alternateJavaCmd);
+        return alternateJavaCmd;
     }
 
     private static File getOutputContainerFileSystemFileFromImageSpec(String imageNameTag) {
