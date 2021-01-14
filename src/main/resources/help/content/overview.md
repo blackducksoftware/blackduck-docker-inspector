@@ -54,7 +54,7 @@ Requirements for ${solution_name} are:
 * Linux, MacOS, or Windows 10 Enterprise.
     - On Windows, ${solution_name} must be executed from ${detect_product_name} version 6.6.0 or later, or by executing the ${solution_name} .jar directly. There is no equivalent to ${script_name} for Windows.
 * Access to the internet. For information on running without access to the internet, refer to [Air Gap mode](advanced.md#air-gap-mode).
-* Java (JRE) versions 8 or 11.
+* Java (JRE) versions 8, 11, or 15.
 * Three available ports for the image inspector services. By default, these ports are 9000, 9001, and 9002.
 * When invoking ${solution_name} using ${script_name}:
     - curl
