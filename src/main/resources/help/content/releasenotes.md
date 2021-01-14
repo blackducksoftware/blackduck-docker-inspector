@@ -1,4 +1,7 @@
-#### Version 9.1.2
+#### Version 9.2.0
+
+##### New features
+* Added the ability to pull and inspect a specified platform of a multi-platform image using the new docker.image.platform property.
 
 ##### Changed features
 * Added support for running ${solution_name} using Java 15
