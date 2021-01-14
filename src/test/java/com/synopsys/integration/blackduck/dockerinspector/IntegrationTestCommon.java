@@ -216,9 +216,11 @@ public class IntegrationTestCommon {
         final String codelocationName, final List<String> additionalArgs) throws IOException {
         List<String> cmd = new ArrayList<>();
         if (random.nextBoolean()) {
+            System.out.println("The coin toss chose to run the script");
             cmd.add("build/blackduck-docker-inspector.sh");
             cmd.add(String.format("--jar.path=build/libs/blackduck-docker-inspector-%s.jar", programVersion.getProgramVersion()));
         } else {
+            System.out.println("The coin toss chose to run the jar");
             cmd.add("java");
             cmd.add("-jar");
             cmd.add(String.format("build/libs/blackduck-docker-inspector-%s.jar", programVersion.getProgramVersion()));

@@ -169,6 +169,7 @@ public class DockerInspector {
 
     private boolean initAndValidate(final Config config) throws IntegrationException, FileNotFoundException {
         logger.info(String.format("Black Duck Docker Inspector %s", programVersion.getProgramVersion()));
+        logger.debug(String.format("Java version: %s", System.getProperty("java.version")));
         if (helpInvoked()) {
             provideHelp(config);
             return false;
