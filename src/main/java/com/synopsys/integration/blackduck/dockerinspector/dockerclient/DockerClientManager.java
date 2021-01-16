@@ -38,7 +38,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 import com.github.dockerjava.api.DockerClient;
@@ -158,18 +157,19 @@ public class DockerClientManager {
 
     public String pullImage(String imageName, String tagName) throws IntegrationException, InterruptedException {
         validateMode();
+        logger.info(String.format("Pulling image %s:%s", imageName, tagName));
         PullImageCmd pull = dockerClient.pullImageCmd(imageName).withTag(tagName);
         return pullImage(imageName, tagName, pull);
     }
 
     public String pullImageByPlatform(String imageName, String tagName, String platform) throws IntegrationException, InterruptedException {
         validateMode();
+        logger.info(String.format("Pulling image %s:%s, platform: %s", imageName, tagName, platform));
         PullImageCmd pull = dockerClient.pullImageCmd(imageName).withTag(tagName).withPlatform(platform);
         return pullImage(imageName, tagName, pull);
     }
 
     private String pullImage(String imageName, String tagName, PullImageCmd pull) throws IntegrationException, InterruptedException {
-        logger.info(String.format("Pulling image %s:%s", imageName, tagName));
         try {
             pull.exec(new PullImageResultCallback()).awaitCompletion();
         } catch (NotFoundException e) {
@@ -314,7 +314,8 @@ public class DockerClientManager {
         } catch (DisabledException disabledException) {
             logger.info("Image pulling is disabled in offline mode");
         } catch (Exception e) {
-            logger.info(String.format("Unable to pull %s:%s; Proceeding anyway since the image might be in local docker image cache. Error on pull: %s", imageName, tagName, e.getMessage()));
+            throwIfPlatformSpecified(imageName, tagName, e);
+            logger.warn(String.format("Unable to pull %s:%s; Proceeding anyway since the image might be in local docker image cache. Error on pull: %s", imageName, tagName, e.getMessage()));
         }
         File imageTarFile = saveImageToDir(imageTarDirectory, imageTarFilename.deriveImageTarFilenameFromImageTag(imageName, tagName), imageName, tagName);
         ImageTarWrapper imageTarWrapper = new ImageTarWrapper(imageTarFile, imageName, tagName);
@@ -322,6 +323,14 @@ public class DockerClientManager {
             removeImage(targetImageId.get());
         }
         return imageTarWrapper;
+    }
+
+    private void throwIfPlatformSpecified(String imageName, String tagName, Exception e) throws IntegrationException {
+        if (StringUtils.isNotBlank(config.getDockerImagePlatform())) {
+            String msg = String.format("Unable to pull %s:%s platform %s. If you want to inspect a local image, run again without specifying the platform. Error on pull: %s", imageName, tagName,
+                config.getDockerImagePlatform(), e.getMessage());
+            throw new IntegrationException(msg, e);
+        }
     }
 
     private Optional<String> getImageId(String imageName, String tagName) throws InterruptedException, IntegrationException {

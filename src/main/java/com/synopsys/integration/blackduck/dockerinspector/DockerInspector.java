@@ -26,16 +26,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
-
-import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorSystemProperties;
-import com.synopsys.integration.blackduck.dockerinspector.exception.HelpGenerationException;
-import com.synopsys.integration.blackduck.dockerinspector.help.HelpWriter;
-import com.synopsys.integration.blackduck.dockerinspector.httpclient.HttpClientInspector;
-import com.synopsys.integration.blackduck.dockerinspector.output.Output;
-import com.synopsys.integration.blackduck.dockerinspector.output.Result;
-import com.synopsys.integration.blackduck.dockerinspector.output.ResultFile;
-import com.synopsys.integration.blackduck.dockerinspector.programarguments.ArgumentParser;
-import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
+import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 
@@ -53,8 +44,17 @@ import org.springframework.context.annotation.ComponentScan;
 import com.google.gson.Gson;
 import com.synopsys.integration.blackduck.dockerinspector.blackduckclient.BlackDuckClient;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
+import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorSystemProperties;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
+import com.synopsys.integration.blackduck.dockerinspector.exception.HelpGenerationException;
+import com.synopsys.integration.blackduck.dockerinspector.help.HelpWriter;
+import com.synopsys.integration.blackduck.dockerinspector.httpclient.HttpClientInspector;
+import com.synopsys.integration.blackduck.dockerinspector.output.Output;
+import com.synopsys.integration.blackduck.dockerinspector.output.Result;
+import com.synopsys.integration.blackduck.dockerinspector.output.ResultFile;
+import com.synopsys.integration.blackduck.dockerinspector.programarguments.ArgumentParser;
+import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.blackduck.imageinspector.api.name.ImageNameResolver;
 import com.synopsys.integration.exception.IntegrationException;
 
@@ -96,8 +96,8 @@ public class DockerInspector {
     @Autowired
     private DockerInspectorSystemProperties dockerInspectorSystemProperties;
 
-    public static void main(final String[] args) {
-        final SpringApplicationBuilder appBuilder = new SpringApplicationBuilder(DockerInspector.class);
+    public static void main(String[] args) {
+        SpringApplicationBuilder appBuilder = new SpringApplicationBuilder(DockerInspector.class);
         appBuilder.logStartupInfo(false);
         appBuilder.bannerMode(Banner.Mode.OFF);
         appBuilder.run(args);
@@ -112,26 +112,26 @@ public class DockerInspector {
                 System.exit(0);
             }
             result = inspector.getBdio();
-        } catch (final HelpGenerationException helpGenerationException) {
-            final String msg = String.format("Error generating help: %s", helpGenerationException.getMessage());
+        } catch (HelpGenerationException helpGenerationException) {
+            String msg = String.format("Error generating help: %s", helpGenerationException.getMessage());
             logger.error(msg);
             logStackTraceIfDebug(helpGenerationException);
             result = Result.createResultFailure(msg);
-        } catch (final Exception e) {
-            final String msg = String.format("Error inspecting image: %s", e.getMessage());
+        } catch (Exception e) {
+            String msg = String.format("Error inspecting image: %s", e.getMessage());
             logger.error(msg);
             logStackTraceIfDebug(e);
             result = Result.createResultFailure(msg);
         }
-        final File resultsFile = new File(output.getFinalOutputDir(), programPaths.getDockerInspectorResultsFilename());
+        File resultsFile = new File(output.getFinalOutputDir(), programPaths.getDockerInspectorResultsFilename());
         resultFile.write(new Gson(), resultsFile, result);
         int returnCode = result.getReturnCode();
         logger.info(String.format("Returning %d", returnCode));
         System.exit(returnCode);
     }
 
-    private void logStackTraceIfDebug(final Exception e) {
-        final String trace = ExceptionUtils.getStackTrace(e);
+    private void logStackTraceIfDebug(Exception e) {
+        String trace = ExceptionUtils.getStackTrace(e);
         logger.debug(String.format("Stack trace: %s", trace));
     }
 
@@ -141,7 +141,7 @@ public class DockerInspector {
             logger.debug("applicationArguments is null");
             return false;
         }
-        final String[] args = applicationArguments.getSourceArgs();
+        String[] args = applicationArguments.getSourceArgs();
         if (contains(args, "-h") || contains(args, "--help") || contains(args, "--help=true")) {
             logger.debug("Help argument passed");
             return true;
@@ -150,16 +150,16 @@ public class DockerInspector {
     }
 
     private String getHelpTopics() {
-        final ArgumentParser argumentParser = new ArgumentParser(applicationArguments.getSourceArgs());
-        final String argFollowingHelpFlag = argumentParser.findValueForCommand("-h", "--help");
+        ArgumentParser argumentParser = new ArgumentParser(applicationArguments.getSourceArgs());
+        String argFollowingHelpFlag = argumentParser.findValueForCommand("-h", "--help");
         if (StringUtils.isBlank(argFollowingHelpFlag) || argFollowingHelpFlag.startsWith("-")) {
             return null;
         }
         return argFollowingHelpFlag;
     }
 
-    private boolean contains(final String[] stringsToSearch, final String targetString) {
-        for (final String stringToTest : stringsToSearch) {
+    private boolean contains(String[] stringsToSearch, String targetString) {
+        for (String stringToTest : stringsToSearch) {
             if (targetString.equals(stringToTest)) {
                 return true;
             }
@@ -167,7 +167,7 @@ public class DockerInspector {
         return false;
     }
 
-    private boolean initAndValidate(final Config config) throws IntegrationException, FileNotFoundException {
+    private boolean initAndValidate(Config config) throws IntegrationException, FileNotFoundException {
         logger.info(String.format("Black Duck Docker Inspector %s", programVersion.getProgramVersion()));
         logger.debug(String.format("Java version: %s", System.getProperty("java.version")));
         if (helpInvoked()) {
@@ -182,24 +182,26 @@ public class DockerInspector {
             logger.debug("PhoneHome enabled");
             try {
                 blackDuckClient.phoneHome(deriveDockerEngineVersion(config));
-            } catch (final Exception e) {
+            } catch (Exception e) {
                 logger.warn(String.format("Unable to phone home: %s", e.getMessage()));
             }
         }
         initImageName();
-        logger.info(String.format("Inspecting image:tag %s:%s", config.getDockerImageRepo(), config.getDockerImageTag()));
+        logger.info(String.format("Inspecting image:tag %s:%s (platform: %s)",
+            config.getDockerImageRepo(), config.getDockerImageTag(),
+            Optional.ofNullable(config.getDockerImagePlatform()).orElse("<unspecified>")));
         blackDuckClient.testBlackDuckConnection();
         return true;
     }
 
-    private void provideHelp(final Config config) throws FileNotFoundException, HelpGenerationException {
-        final String givenHelpOutputFilePath = config.getHelpOutputFilePath();
+    private void provideHelp(Config config) throws FileNotFoundException, HelpGenerationException {
+        String givenHelpOutputFilePath = config.getHelpOutputFilePath();
         if (StringUtils.isBlank(givenHelpOutputFilePath)) {
             helpWriter.concatinateContentToPrintStream(System.out, getHelpTopics());
         } else {
-            final File helpOutputFile = new File(givenHelpOutputFilePath);
+            File helpOutputFile = new File(givenHelpOutputFilePath);
             if ((!helpOutputFile.isDirectory())) {
-                try (final PrintStream helpPrintStream = new PrintStream(new FileOutputStream(helpOutputFile))) {
+                try (PrintStream helpPrintStream = new PrintStream(new FileOutputStream(helpOutputFile))) {
                     helpWriter.concatinateContentToPrintStream(helpPrintStream, getHelpTopics());
                 }
             } else {
@@ -208,7 +210,7 @@ public class DockerInspector {
         }
     }
 
-    private String deriveDockerEngineVersion(final Config config) {
+    private String deriveDockerEngineVersion(Config config) {
         String dockerEngineVersion = "None";
         if (StringUtils.isBlank(config.getImageInspectorUrl())) {
             dockerEngineVersion = dockerClientManager.getDockerEngineVersion();
@@ -218,7 +220,7 @@ public class DockerInspector {
 
     private void initImageName() {
         logger.debug(String.format("initImageName(): dockerImage: %s, dockerTar: %s", config.getDockerImage(), config.getDockerTar()));
-        final ImageNameResolver resolver = new ImageNameResolver(config.getDockerImage());
+        ImageNameResolver resolver = new ImageNameResolver(config.getDockerImage());
         resolver.getNewImageRepo().ifPresent(repoName -> config.setDockerImageRepo(repoName));
         resolver.getNewImageTag().ifPresent(tagName -> config.setDockerImageTag(tagName));
         logger.debug(String.format("initImageName(): final: dockerImage: %s; dockerImageRepo: %s; dockerImageTag: %s", config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag()));
