@@ -25,22 +25,22 @@ package com.synopsys.integration.blackduck.dockerinspector.programversion;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import java.util.Set;
 
 public class ClassPathPropertiesFile {
     private final Properties props;
 
-    public ClassPathPropertiesFile(final String propetiesFilename) throws IOException {
+    public ClassPathPropertiesFile(String propetiesFilename) throws IOException {
         props = new Properties();
-        final InputStream stream = this.getClass().getClassLoader().getResourceAsStream(propetiesFilename);
-        props.load(stream);
+        try (InputStream stream = this.getClass().getClassLoader().getResourceAsStream(propetiesFilename)) {
+            props.load(stream);
+        }
     }
 
     public Properties getProperties() {
         return props;
     }
 
-    public String getProperty(final String key) {
+    public String getProperty(String key) {
         return props.getProperty(key);
     }
 }

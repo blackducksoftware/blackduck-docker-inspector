@@ -257,12 +257,14 @@ public class DockerClientManager {
         removeContainer(dockerClient, containerId);
     }
 
-    public String buildImage(File dockerBuildDir, Set<String> tags) {
+    public String buildImage(File dockerBuildDir, Set<String> tags) throws IOException {
         logger.debug(String.format("Building image: %s", tags));
-        BuildImageResultCallback callback = new BuildImageResultCallback();
-        String imageId = dockerClient.buildImageCmd(dockerBuildDir)
-                             .withTags(tags)
-                             .exec(callback).awaitImageId();
+        String imageId;
+        try (BuildImageResultCallback callback = new BuildImageResultCallback()) {
+            imageId = dockerClient.buildImageCmd(dockerBuildDir)
+                          .withTags(tags)
+                          .exec(callback).awaitImageId();
+        }
         logger.debug(String.format("Built image: %s", imageId));
         return imageId;
     }
