@@ -261,9 +261,11 @@ public class DockerClientManager {
         logger.debug(String.format("Building image: %s", tags));
         String imageId;
         try (BuildImageResultCallback callback = new BuildImageResultCallback()) {
-            imageId = dockerClient.buildImageCmd(dockerBuildDir)
-                          .withTags(tags)
-                          .exec(callback).awaitImageId();
+            try (BuildImageResultCallback resultCallback = dockerClient.buildImageCmd(dockerBuildDir)
+                                                               .withTags(tags)
+                                                               .exec(callback)) {
+                imageId = resultCallback.awaitImageId();
+            }
         }
         logger.debug(String.format("Built image: %s", imageId));
         return imageId;
