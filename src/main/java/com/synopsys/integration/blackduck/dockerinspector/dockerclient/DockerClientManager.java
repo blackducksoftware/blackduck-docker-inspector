@@ -41,6 +41,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.command.BuildImageCmd;
 import com.github.dockerjava.api.command.BuildImageResultCallback;
 import com.github.dockerjava.api.command.CreateContainerCmd;
 import com.github.dockerjava.api.command.CreateContainerResponse;
@@ -260,10 +261,9 @@ public class DockerClientManager {
     public String buildImage(File dockerBuildDir, Set<String> tags) throws IOException {
         logger.debug(String.format("Building image: %s", tags));
         String imageId;
-        try (BuildImageResultCallback callback = new BuildImageResultCallback()) {
-            try (BuildImageResultCallback resultCallback = dockerClient.buildImageCmd(dockerBuildDir)
-                                                               .withTags(tags)
-                                                               .exec(callback)) {
+        try (BuildImageCmd buildImageCmd = dockerClient.buildImageCmd(dockerBuildDir).withTags(tags);
+            BuildImageResultCallback callback = new BuildImageResultCallback()) {
+            try (BuildImageResultCallback resultCallback = buildImageCmd.exec(callback)) {
                 imageId = resultCallback.awaitImageId();
             }
         }
