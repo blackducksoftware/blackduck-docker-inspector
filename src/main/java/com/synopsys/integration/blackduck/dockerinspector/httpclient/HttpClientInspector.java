@@ -48,6 +48,7 @@ import com.synopsys.integration.blackduck.dockerinspector.output.Output;
 import com.synopsys.integration.blackduck.dockerinspector.output.OutputFiles;
 import com.synopsys.integration.blackduck.dockerinspector.output.Result;
 import com.synopsys.integration.exception.IntegrationException;
+import com.synopsys.integration.util.NameVersion;
 
 @Component
 public class HttpClientInspector {
@@ -101,7 +102,8 @@ public class HttpClientInspector {
             adjustBdio(bdioDocument);
             OutputFiles outputFiles = output.addOutputToFinalOutputDir(bdioDocument, finalDockerTarfile.getImageRepo(), finalDockerTarfile.getImageTag());
             if (config.isUploadBdio()) {
-                blackDuckClient.uploadBdio(outputFiles.getBdioFile(), bdioDocument.getBillOfMaterials().spdxName);
+                NameVersion projectAndVersion = new NameVersion(bdioDocument.getProject().name, bdioDocument.getProject().version);
+                blackDuckClient.uploadBdio(outputFiles.getBdioFile(), bdioDocument.getBillOfMaterials().spdxName, projectAndVersion);
             }
             cleanup();
             Result result = Result.createResultSuccess(finalDockerTarfile.getImageRepo(), finalDockerTarfile.getImageTag(), finalDockerTarfile.getFile().getName(),

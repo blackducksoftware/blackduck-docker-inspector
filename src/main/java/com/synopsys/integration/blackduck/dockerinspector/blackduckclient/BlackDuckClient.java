@@ -22,21 +22,7 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.blackduckclient;
 
-import com.synopsys.integration.blackduck.codelocation.CodeLocationCreationData;
-import com.synopsys.integration.blackduck.codelocation.bdioupload.BdioUploadCodeLocationCreationRequest;
-import com.synopsys.integration.blackduck.codelocation.bdioupload.BdioUploadService;
-import com.synopsys.integration.blackduck.codelocation.bdioupload.UploadBatch;
-
-import com.synopsys.integration.blackduck.codelocation.bdioupload.UploadBatchOutput;
-import com.synopsys.integration.blackduck.codelocation.bdioupload.UploadTarget;
-import com.synopsys.integration.blackduck.configuration.BlackDuckServerConfigBuilder;
-import com.synopsys.integration.blackduck.exception.BlackDuckIntegrationException;
-import com.synopsys.integration.blackduck.phonehome.BlackDuckPhoneHomeHelper;
-import com.synopsys.integration.blackduck.rest.BlackDuckHttpClient;
-import com.synopsys.integration.blackduck.service.BlackDuckServicesFactory;
-import com.synopsys.integration.log.IntLogger;
 import java.io.File;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -50,191 +36,207 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
-
-import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
+import com.synopsys.integration.blackduck.codelocation.CodeLocationCreationData;
+import com.synopsys.integration.blackduck.codelocation.bdioupload.BdioUploadCodeLocationCreationRequest;
+import com.synopsys.integration.blackduck.codelocation.bdioupload.BdioUploadService;
+import com.synopsys.integration.blackduck.codelocation.bdioupload.UploadBatch;
+import com.synopsys.integration.blackduck.codelocation.bdioupload.UploadBatchOutput;
+import com.synopsys.integration.blackduck.codelocation.bdioupload.UploadTarget;
+import com.synopsys.integration.blackduck.configuration.BlackDuckServerConfigBuilder;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
+import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
+import com.synopsys.integration.blackduck.exception.BlackDuckIntegrationException;
+import com.synopsys.integration.blackduck.http.BlackDuckRequestFactory;
+import com.synopsys.integration.blackduck.http.client.BlackDuckHttpClient;
+import com.synopsys.integration.blackduck.phonehome.BlackDuckPhoneHomeHelper;
+import com.synopsys.integration.blackduck.service.BlackDuckServicesFactory;
 import com.synopsys.integration.exception.IntegrationException;
+import com.synopsys.integration.log.IntLogger;
 import com.synopsys.integration.log.Slf4jIntLogger;
 import com.synopsys.integration.util.IntEnvironmentVariables;
+import com.synopsys.integration.util.NameVersion;
 import com.synopsys.integration.util.NoThreadExecutorService;
 
 @Component
 public class BlackDuckClient {
 
-  private static final String PHONE_HOME_METADATA_NAME_CALLER_VERSION = "callerVersion";
-  private static final String PHONE_HOME_METADATA_NAME_CALLER_NAME = "callerName";
-  private static final String PHONE_HOME_METADATA_NAME_DOCKER_ENGINE_VERSION = "dockerEngineVersion";
-  private static final String PHONE_HOME_METADATA_NAME_BDIO_BY_LAYER = "bdioOrganizeComponentsByLayer";
-  private static final String PHONE_HOME_METADATA_NAME_BDIO_INCLUDE_REMOVED = "bdioIncludeRemovedComponents";
-  private static final String PHONE_HOME_METADATA_NAME_PLATFORM_TOP_LAYER_ID_SPECIFIED = "platformTopLayerIdSpecified";
+    private static final String PHONE_HOME_METADATA_NAME_CALLER_VERSION = "callerVersion";
+    private static final String PHONE_HOME_METADATA_NAME_CALLER_NAME = "callerName";
+    private static final String PHONE_HOME_METADATA_NAME_DOCKER_ENGINE_VERSION = "dockerEngineVersion";
+    private static final String PHONE_HOME_METADATA_NAME_BDIO_BY_LAYER = "bdioOrganizeComponentsByLayer";
+    private static final String PHONE_HOME_METADATA_NAME_BDIO_INCLUDE_REMOVED = "bdioIncludeRemovedComponents";
+    private static final String PHONE_HOME_METADATA_NAME_PLATFORM_TOP_LAYER_ID_SPECIFIED = "platformTopLayerIdSpecified";
 
-  private final Logger logger = LoggerFactory.getLogger(BlackDuckClient.class);
-  private final IntLogger intLogger = new Slf4jIntLogger(logger);
+    private final Logger logger = LoggerFactory.getLogger(BlackDuckClient.class);
+    private final IntLogger intLogger = new Slf4jIntLogger(logger);
 
-  @Autowired
-  private Config config;
+    @Autowired
+    private Config config;
 
-  @Autowired
-  private BlackDuckSecrets blackDuckSecrets;
+    @Autowired
+    private BlackDuckSecrets blackDuckSecrets;
 
-  @Autowired
-  private ProgramVersion programVersion;
+    @Autowired
+    private ProgramVersion programVersion;
 
-  public void testBlackDuckConnection() throws BlackDuckIntegrationException {
-    logger.trace(String.format("Black Duck username: %s",
-        getBlackDuckUsername())); // ArgsWithSpacesTest tests this in output
-    if (!config.isUploadBdio() || config.isOfflineMode()) {
-      logger.debug(
-          "Upload of BDIO disabled or offline mode is enabled; skipping verification of Black Duck connection");
-      return;
-    }
-    BlackDuckHttpClient httpConnection;
-    try {
-      httpConnection = createHttpConnection(intLogger);
-      httpConnection.attemptAuthentication();
-    } catch (final IntegrationException e) {
-      final String msg = String.format("Error connecting to Black Duck: %s", e.getMessage());
-      throw new BlackDuckIntegrationException(msg);
-    }
-    logger.info("Successful connection to Black Duck.");
-  }
-
-  public void uploadBdio(final File bdioFile, final String codeLocationName)
-      throws IntegrationException {
-    if (config.isOfflineMode()) {
-      logger.info("Upload of BDIO has been disabled by offline mode");
-      return;
-    }
-    logger.info("Uploading BDIO files.");
-    final BlackDuckHttpClient httpConnection = createHttpConnection(intLogger);
-    final BlackDuckServicesFactory blackDuckServicesFactory = createBlackDuckServicesFactory(
-        intLogger,
-        httpConnection);
-    final BdioUploadService bdioUploadService = blackDuckServicesFactory.createBdioUploadService();
-
-    UploadBatch uploadBatch = new UploadBatch();
-    UploadTarget uploadTarget = UploadTarget.createDefault(codeLocationName, bdioFile);
-    logger.info(String.format("uploading %s", uploadTarget.getUploadFile().getName()));
-    uploadBatch.addUploadTarget(uploadTarget);
-    BdioUploadCodeLocationCreationRequest uploadRequest = bdioUploadService
-        .createUploadRequest(uploadBatch);
-    final CodeLocationCreationData<UploadBatchOutput> bdioUploadResults = bdioUploadService
-        .uploadBdio(uploadRequest);
-    bdioUploadResults.getOutput().getOutputs().stream().forEach(o -> logger.debug(String
-        .format("\tUpload %s: output: %s%n", o.getCodeLocationName(),
-            o.getResponse().orElse("unknown"))));
-    logger.info(
-        String.format("Uploaded bdio file %s to %s", bdioFile.getName(), config.getBlackDuckUrl()));
-  }
-
-  private BlackDuckServicesFactory createBlackDuckServicesFactory(final IntLogger intLogger,
-      BlackDuckHttpClient httpConnection) {
-    final IntEnvironmentVariables intEnvironmentVariables = new IntEnvironmentVariables();
-    ExecutorService executorService = new NoThreadExecutorService();
-      return new BlackDuckServicesFactory(intEnvironmentVariables, new Gson(), BlackDuckServicesFactory.createDefaultObjectMapper(), executorService, httpConnection, intLogger);
-  }
-
-  private String getBlackDuckUsername() {
-    return config.getBlackDuckUsername();
-  }
-
-  public void phoneHome(final String dockerEngineVersion) {
-    logger.debug("Attempting to phone home");
-    try {
-      phoneHomeBlackDuckConnection(dockerEngineVersion);
-    } catch (final Exception e) {
-      logger.debug(String.format(
-          "Attempt to phone home failed. This may simply be because Black Duck credentials were not supplied. Error message: %s",
-          e.getMessage()));
-    }
-  }
-
-  private void phoneHomeBlackDuckConnection(final String dockerEngineVersion) {
-
-    final BlackDuckHttpClient httpConnection = createHttpConnection(intLogger);
-    final BlackDuckServicesFactory blackDuckServicesFactory = createBlackDuckServicesFactory(
-        intLogger,
-        httpConnection);
-
-    Map<String, String> metaDataMap = new HashMap<>();
-    if (StringUtils.isNotBlank(dockerEngineVersion)) {
-      metaDataMap
-          .put(PHONE_HOME_METADATA_NAME_DOCKER_ENGINE_VERSION, dockerEngineVersion);
-    }
-    if (StringUtils.isNotBlank(config.getCallerName())) {
-      metaDataMap
-          .put(PHONE_HOME_METADATA_NAME_CALLER_NAME, config.getCallerName());
-    }
-    if (StringUtils.isNotBlank(config.getCallerVersion())) {
-      metaDataMap
-          .put(PHONE_HOME_METADATA_NAME_CALLER_VERSION, config.getCallerVersion());
-    }
-    metaDataMap.put(PHONE_HOME_METADATA_NAME_BDIO_BY_LAYER,
-        String.valueOf(config.isOrganizeComponentsByLayer()));
-    metaDataMap.put(PHONE_HOME_METADATA_NAME_BDIO_INCLUDE_REMOVED,
-        String.valueOf(config.isIncludeRemovedComponents()));
-    if (StringUtils.isNotBlank(config.getDockerPlatformTopLayerId())) {
-        metaDataMap
-          .put(PHONE_HOME_METADATA_NAME_PLATFORM_TOP_LAYER_ID_SPECIFIED, "true");
-    }
-
-    BlackDuckPhoneHomeHelper.createPhoneHomeHelper(blackDuckServicesFactory).handlePhoneHome(
-        programVersion.getProgramId(), programVersion.getProgramVersion(), metaDataMap);
-    logger.trace("Attempt to phone home completed");
-  }
-
-  private BlackDuckHttpClient createHttpConnection(final IntLogger intLogger) {
-    final BlackDuckServerConfigBuilder blackDuckServerConfigBuilder = createBlackDuckServerConfigBuilder();
-    return blackDuckServerConfigBuilder.build().createBlackDuckHttpClient(intLogger);
-  }
-
-  private BlackDuckServerConfigBuilder createBlackDuckServerConfigBuilder() {
-    String blackDuckProxyHost = config.getBlackDuckProxyHost();
-    String blackDuckProxyPort = config.getBlackDuckProxyPort();
-    String blackDuckProxyUsername = config.getBlackDuckProxyUsername();
-    String blackDuckProxyPassword = config.getBlackDuckProxyPassword();
-    if (StringUtils.isBlank(config.getBlackDuckProxyHost()) && !StringUtils
-        .isBlank(config.getScanCliOptsEnvVar())) {
-      final List<String> scanCliOpts = Arrays.asList(config.getScanCliOptsEnvVar().split("\\s"));
-      for (String opt : scanCliOpts) {
-        opt = opt.trim();
-        if (opt.startsWith("-Dhttp.proxy.host=") || opt.startsWith("-Dhttps.proxy.host=") || opt
-            .startsWith("-Dhttp.proxyHost=") || opt.startsWith("-Dhttps.proxyHost=")) {
-          blackDuckProxyHost = getValue(opt);
-        } else if (opt.startsWith("-Dhttp.proxy.port=") || opt.startsWith("-Dhttps.proxy.port=")
-            || opt.startsWith("-Dhttp.proxyPort=") || opt.startsWith("-Dhttps.proxyPort=")) {
-          blackDuckProxyPort = getValue(opt);
-        } else if (opt.startsWith("-Dhttp.proxy.username=") || opt
-            .startsWith("-Dhttps.proxy.username=") || opt.startsWith("-Dhttp.proxyUser=") || opt
-            .startsWith("-Dhttps.proxyUser=")) {
-          blackDuckProxyUsername = getValue(opt);
-        } else if (opt.startsWith("-Dhttp.proxy.password=") || opt
-            .startsWith("-Dhttps.proxy.password=") || opt.startsWith("-Dhttp.proxyPassword=") || opt
-            .startsWith("-Dhttps.proxyPassword=")) {
-          blackDuckProxyPassword = getValue(opt);
+    public void testBlackDuckConnection() throws BlackDuckIntegrationException {
+        logger.trace(String.format("Black Duck username: %s",
+            getBlackDuckUsername())); // ArgsWithSpacesTest tests this in output
+        if (!config.isUploadBdio() || config.isOfflineMode()) {
+            logger.debug(
+                "Upload of BDIO disabled or offline mode is enabled; skipping verification of Black Duck connection");
+            return;
         }
-      }
+        BlackDuckHttpClient httpConnection;
+        try {
+            httpConnection = createHttpConnection(intLogger);
+            httpConnection.attemptAuthentication();
+        } catch (IntegrationException e) {
+            String msg = String.format("Error connecting to Black Duck: %s", e.getMessage());
+            throw new BlackDuckIntegrationException(msg);
+        }
+        logger.info("Successful connection to Black Duck.");
     }
-    final BlackDuckServerConfigBuilder blackDuckServerConfigBuilder = new BlackDuckServerConfigBuilder();
-    blackDuckServerConfigBuilder.setUrl(config.getBlackDuckUrl());
-    blackDuckServerConfigBuilder.setApiToken(blackDuckSecrets.getApiToken());
-    blackDuckServerConfigBuilder.setUsername(getBlackDuckUsername());
-    blackDuckServerConfigBuilder.setPassword(blackDuckSecrets.getPassword());
-    blackDuckServerConfigBuilder.setTimeoutInSeconds(config.getBlackDuckTimeout());
-    blackDuckServerConfigBuilder.setProxyHost(blackDuckProxyHost);
-    blackDuckServerConfigBuilder.setProxyPort(blackDuckProxyPort);
-    blackDuckServerConfigBuilder.setProxyUsername(blackDuckProxyUsername);
-    blackDuckServerConfigBuilder.setProxyPassword(blackDuckProxyPassword);
-    blackDuckServerConfigBuilder.setTrustCert(config.isBlackDuckAlwaysTrustCert());
-    return blackDuckServerConfigBuilder;
-  }
 
-  private String getValue(final String nameEqualsValue) {
-    final List<String> nameValue = Arrays.asList(nameEqualsValue.split("="));
-    String value = null;
-    if (nameValue.size() == 2) {
-      value = nameValue.get(1);
+    public void uploadBdio(File bdioFile, String codeLocationName, NameVersion projectAndVersion)
+        throws IntegrationException {
+        if (config.isOfflineMode()) {
+            logger.info("Upload of BDIO has been disabled by offline mode");
+            return;
+        }
+        logger.info("Uploading BDIO files.");
+        BlackDuckHttpClient httpConnection = createHttpConnection(intLogger);
+        BlackDuckServicesFactory blackDuckServicesFactory = createBlackDuckServicesFactory(
+            intLogger,
+            httpConnection);
+        BdioUploadService bdioUploadService = blackDuckServicesFactory.createBdioUploadService();
+
+        UploadBatch uploadBatch = new UploadBatch();
+        UploadTarget uploadTarget = UploadTarget.createDefault(projectAndVersion, codeLocationName, bdioFile);
+        logger.info(String.format("uploading %s", uploadTarget.getUploadFile().getName()));
+        uploadBatch.addUploadTarget(uploadTarget);
+        BdioUploadCodeLocationCreationRequest uploadRequest = bdioUploadService
+                                                                  .createUploadRequest(uploadBatch);
+        CodeLocationCreationData<UploadBatchOutput> bdioUploadResults = bdioUploadService
+                                                                            .uploadBdio(uploadRequest);
+        bdioUploadResults.getOutput().getOutputs().stream().forEach(o -> logger.debug(String
+                                                                                          .format("\tUpload %s: output: %s%n", o.getCodeLocationName(),
+                                                                                              o.getResponse().orElse("unknown"))));
+        logger.info(
+            String.format("Uploaded bdio file %s to %s", bdioFile.getName(), config.getBlackDuckUrl()));
     }
-    return value;
-  }
+
+    private BlackDuckServicesFactory createBlackDuckServicesFactory(IntLogger intLogger,
+        BlackDuckHttpClient httpConnection) {
+        IntEnvironmentVariables intEnvironmentVariables = IntEnvironmentVariables.empty();
+        ExecutorService executorService = new NoThreadExecutorService();
+        BlackDuckRequestFactory blackDuckRequestFactory = new BlackDuckRequestFactory();
+        return new BlackDuckServicesFactory(intEnvironmentVariables, new Gson(),
+            BlackDuckServicesFactory.createDefaultObjectMapper(), executorService, httpConnection, intLogger,
+            blackDuckRequestFactory);
+    }
+
+    private String getBlackDuckUsername() {
+        return config.getBlackDuckUsername();
+    }
+
+    public void phoneHome(String dockerEngineVersion) {
+        logger.debug("Attempting to phone home");
+        try {
+            phoneHomeBlackDuckConnection(dockerEngineVersion);
+        } catch (Exception e) {
+            logger.debug(String.format(
+                "Attempt to phone home failed. This may simply be because Black Duck credentials were not supplied. Error message: %s",
+                e.getMessage()));
+        }
+    }
+
+    private void phoneHomeBlackDuckConnection(String dockerEngineVersion) {
+
+        BlackDuckHttpClient httpConnection = createHttpConnection(intLogger);
+        BlackDuckServicesFactory blackDuckServicesFactory = createBlackDuckServicesFactory(
+            intLogger,
+            httpConnection);
+
+        Map<String, String> metaDataMap = new HashMap<>();
+        if (StringUtils.isNotBlank(dockerEngineVersion)) {
+            metaDataMap
+                .put(PHONE_HOME_METADATA_NAME_DOCKER_ENGINE_VERSION, dockerEngineVersion);
+        }
+        if (StringUtils.isNotBlank(config.getCallerName())) {
+            metaDataMap
+                .put(PHONE_HOME_METADATA_NAME_CALLER_NAME, config.getCallerName());
+        }
+        if (StringUtils.isNotBlank(config.getCallerVersion())) {
+            metaDataMap
+                .put(PHONE_HOME_METADATA_NAME_CALLER_VERSION, config.getCallerVersion());
+        }
+        metaDataMap.put(PHONE_HOME_METADATA_NAME_BDIO_BY_LAYER,
+            String.valueOf(config.isOrganizeComponentsByLayer()));
+        metaDataMap.put(PHONE_HOME_METADATA_NAME_BDIO_INCLUDE_REMOVED,
+            String.valueOf(config.isIncludeRemovedComponents()));
+        if (StringUtils.isNotBlank(config.getDockerPlatformTopLayerId())) {
+            metaDataMap
+                .put(PHONE_HOME_METADATA_NAME_PLATFORM_TOP_LAYER_ID_SPECIFIED, "true");
+        }
+
+        BlackDuckPhoneHomeHelper.createPhoneHomeHelper(blackDuckServicesFactory).handlePhoneHome(
+            programVersion.getProgramId(), programVersion.getProgramVersion(), metaDataMap);
+        logger.trace("Attempt to phone home completed");
+    }
+
+    private BlackDuckHttpClient createHttpConnection(IntLogger intLogger) {
+        BlackDuckServerConfigBuilder blackDuckServerConfigBuilder = createBlackDuckServerConfigBuilder();
+        return blackDuckServerConfigBuilder.build().createBlackDuckHttpClient(intLogger);
+    }
+
+    private BlackDuckServerConfigBuilder createBlackDuckServerConfigBuilder() {
+        String blackDuckProxyHost = config.getBlackDuckProxyHost();
+        String blackDuckProxyPort = config.getBlackDuckProxyPort();
+        String blackDuckProxyUsername = config.getBlackDuckProxyUsername();
+        String blackDuckProxyPassword = config.getBlackDuckProxyPassword();
+        if (StringUtils.isBlank(config.getBlackDuckProxyHost()) && !StringUtils
+                                                                        .isBlank(config.getScanCliOptsEnvVar())) {
+            List<String> scanCliOpts = Arrays.asList(config.getScanCliOptsEnvVar().split("\\s"));
+            for (String opt : scanCliOpts) {
+                opt = opt.trim();
+                if (opt.startsWith("-Dhttp.proxy.host=") || opt.startsWith("-Dhttps.proxy.host=") || opt
+                                                                                                         .startsWith("-Dhttp.proxyHost=") || opt.startsWith("-Dhttps.proxyHost=")) {
+                    blackDuckProxyHost = getValue(opt);
+                } else if (opt.startsWith("-Dhttp.proxy.port=") || opt.startsWith("-Dhttps.proxy.port=")
+                               || opt.startsWith("-Dhttp.proxyPort=") || opt.startsWith("-Dhttps.proxyPort=")) {
+                    blackDuckProxyPort = getValue(opt);
+                } else if (opt.startsWith("-Dhttp.proxy.username=") || opt
+                                                                           .startsWith("-Dhttps.proxy.username=") || opt.startsWith("-Dhttp.proxyUser=") || opt
+                                                                                                                                                                .startsWith("-Dhttps.proxyUser=")) {
+                    blackDuckProxyUsername = getValue(opt);
+                } else if (opt.startsWith("-Dhttp.proxy.password=") || opt
+                                                                           .startsWith("-Dhttps.proxy.password=") || opt.startsWith("-Dhttp.proxyPassword=") || opt
+                                                                                                                                                                    .startsWith("-Dhttps.proxyPassword=")) {
+                    blackDuckProxyPassword = getValue(opt);
+                }
+            }
+        }
+        BlackDuckServerConfigBuilder blackDuckServerConfigBuilder = new BlackDuckServerConfigBuilder();
+        blackDuckServerConfigBuilder.setUrl(config.getBlackDuckUrl());
+        blackDuckServerConfigBuilder.setApiToken(blackDuckSecrets.getApiToken());
+        blackDuckServerConfigBuilder.setUsername(getBlackDuckUsername());
+        blackDuckServerConfigBuilder.setPassword(blackDuckSecrets.getPassword());
+        blackDuckServerConfigBuilder.setTimeoutInSeconds(config.getBlackDuckTimeout());
+        blackDuckServerConfigBuilder.setProxyHost(blackDuckProxyHost);
+        blackDuckServerConfigBuilder.setProxyPort(blackDuckProxyPort);
+        blackDuckServerConfigBuilder.setProxyUsername(blackDuckProxyUsername);
+        blackDuckServerConfigBuilder.setProxyPassword(blackDuckProxyPassword);
+        blackDuckServerConfigBuilder.setTrustCert(config.isBlackDuckAlwaysTrustCert());
+        return blackDuckServerConfigBuilder;
+    }
+
+    private String getValue(String nameEqualsValue) {
+        List<String> nameValue = Arrays.asList(nameEqualsValue.split("="));
+        String value = null;
+        if (nameValue.size() == 2) {
+            value = nameValue.get(1);
+        }
+        return value;
+    }
 }
