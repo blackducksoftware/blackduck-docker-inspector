@@ -14,13 +14,13 @@ theme:
   name: 'material'
 docs_dir: 'generated'
 nav:
-     - <b>Help topics</b>: index.md
-     - Overview: overview.md
-     - Quick start: quickstart.md
-     - Architecture: architecture.md
-     - Running: running.md
-     - Properties: properties.md
-     - Advanced: advanced.md
-     - Deploying: deployment.md
-     - Troubleshooting: troubleshooting.md
-     - Release notes: releasenotes.md
+     - <b>Documentation</b>: index.md
+#     - Overview: overview.md
+#     - Quick start: quickstart.md
+#     - Architecture: architecture.md
+#     - Running: running.md
+#     - Properties: properties.md
+#     - Advanced: advanced.md
+#     - Deploying: deployment.md
+#     - Troubleshooting: troubleshooting.md
+#     - Release notes: releasenotes.md
