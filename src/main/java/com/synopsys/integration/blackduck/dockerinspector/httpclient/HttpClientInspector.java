@@ -47,6 +47,7 @@ import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarWrapper
 import com.synopsys.integration.blackduck.dockerinspector.output.Output;
 import com.synopsys.integration.blackduck.dockerinspector.output.OutputFiles;
 import com.synopsys.integration.blackduck.dockerinspector.output.Result;
+import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.util.NameVersion;
 
@@ -54,6 +55,9 @@ import com.synopsys.integration.util.NameVersion;
 public class HttpClientInspector {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    @Autowired
+    private FileOperations fileOperations;
+    
     @Autowired
     private Config config;
 
@@ -141,7 +145,7 @@ public class HttpClientInspector {
 
     private ImageTarWrapper prepareDockerTarfile(ImageInspectorClient imageInspectorClient) throws IOException, IntegrationException {
         ImageTarWrapper givenDockerTarfile = dockerClientManager.deriveDockerTarFileFromConfig();
-        ImageTarWrapper finalDockerTarfile = imageInspectorClient.copyTarfileToSharedDir(config, programPaths, givenDockerTarfile);
+        ImageTarWrapper finalDockerTarfile = imageInspectorClient.copyTarfileToSharedDir(fileOperations, config, programPaths, givenDockerTarfile);
         return finalDockerTarfile;
     }
 

@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Optional;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.BeforeAll;
@@ -32,11 +31,12 @@ public class SquashedImageTest {
     @BeforeAll
     public static void setUp() throws IOException {
         testWorkingDir = new File("test/output/squashingTest");
-        final ImageTarFilename imageTarFilename = new ImageTarFilename();
+        ImageTarFilename imageTarFilename = new ImageTarFilename();
+        FileOperations fileOperations = new FileOperations();
         Config config = Mockito.mock(Config.class);
         Mockito.when(config.getWorkingDirPath()).thenReturn(testWorkingDir.getCanonicalPath());
-        final ProgramPaths programPaths = new ProgramPaths(config, new ProcessId());
-        dockerClientManager = new DockerClientManager(config, imageTarFilename, programPaths);
+        ProgramPaths programPaths = new ProgramPaths(config, new ProcessId());
+        dockerClientManager = new DockerClientManager(fileOperations, config, imageTarFilename, programPaths);
 
         squashedImage = new SquashedImage();
         squashedImage.setDockerClientManager(dockerClientManager);
@@ -46,25 +46,25 @@ public class SquashedImageTest {
     @Test
     public void testCreateSquashedImageTarGz() throws IOException, IntegrationException {
 
-        final File targetImageFileSystemTarGz = new File("src/test/resources/test_containerfilesystem.tar.gz");
+        File targetImageFileSystemTarGz = new File("src/test/resources/test_containerfilesystem.tar.gz");
 
         FileUtils.deleteDirectory(testWorkingDir);
-        final File tempTarFile = new File(testWorkingDir, "tempContainerFileSystem.tar");
-        final File squashingWorkingDir = new File(testWorkingDir, "squashingCode");
+        File tempTarFile = new File(testWorkingDir, "tempContainerFileSystem.tar");
+        File squashingWorkingDir = new File(testWorkingDir, "squashingCode");
         squashingWorkingDir.mkdirs();
-        final File squashedImageTarGz = new File("test/output/squashingTest/test_squashedimage.tar.gz");
+        File squashedImageTarGz = new File("test/output/squashingTest/test_squashedimage.tar.gz");
 
         squashedImage.createSquashedImageTarGz(targetImageFileSystemTarGz, squashedImageTarGz, tempTarFile, squashingWorkingDir);
 
-        final File unpackedSquashedImageDir = new File(testWorkingDir, "squashedImageUnpacked");
+        File unpackedSquashedImageDir = new File(testWorkingDir, "squashedImageUnpacked");
         unpackedSquashedImageDir.mkdirs();
         CompressedFile.gunZipUnTarFile(squashedImageTarGz, tempTarFile, unpackedSquashedImageDir);
-        final File manifestFile = new File(unpackedSquashedImageDir, "manifest.json");
+        File manifestFile = new File(unpackedSquashedImageDir, "manifest.json");
         assertTrue(manifestFile.isFile());
 
         // Find the one layer dir in image
         File layerDir = null;
-        for (final File imageFile : unpackedSquashedImageDir.listFiles()) {
+        for (File imageFile : unpackedSquashedImageDir.listFiles()) {
             if (imageFile.isDirectory()) {
                 layerDir = imageFile;
                 break;
@@ -73,22 +73,22 @@ public class SquashedImageTest {
         assertNotNull(layerDir);
 
         // Untar the one layer.tar file in image
-        final File layerTar = layerDir.listFiles()[0];
-        final File layerUnpackedDir = new File(squashingWorkingDir, "squashedImageLayerUnpacked");
+        File layerTar = layerDir.listFiles()[0];
+        File layerUnpackedDir = new File(squashingWorkingDir, "squashedImageLayerUnpacked");
         CompressedFile.unTarFile(layerTar, layerUnpackedDir);
 
         // Verify that the symlink made it into the squashed image
-        final File symLink = new File(layerUnpackedDir, "usr/share/apk/keys/aarch64/alpine-devel@lists.alpinelinux.org-58199dcc.rsa.pub");
+        File symLink = new File(layerUnpackedDir, "usr/share/apk/keys/aarch64/alpine-devel@lists.alpinelinux.org-58199dcc.rsa.pub");
         assertTrue(symLink.exists());
-        final Path symLinkPath = symLink.toPath();
+        Path symLinkPath = symLink.toPath();
         assertTrue(Files.isSymbolicLink(symLinkPath));
-        final Path symLinkTargetPath = Files.readSymbolicLink(symLinkPath);
+        Path symLinkTargetPath = Files.readSymbolicLink(symLinkPath);
         assertEquals("../alpine-devel@lists.alpinelinux.org-58199dcc.rsa.pub", symLinkTargetPath.toString());
     }
 
     @Test
     public void testGenerateUniqueImageRepoTag() throws IntegrationException {
-        final String generatedRepTag = squashedImage.generateUniqueImageRepoTag();
+        String generatedRepTag = squashedImage.generateUniqueImageRepoTag();
 
         assertTrue(generatedRepTag.startsWith("dockerinspectorsquashed-"));
         assertTrue(generatedRepTag.endsWith(":1"));

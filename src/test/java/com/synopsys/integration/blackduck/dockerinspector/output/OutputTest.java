@@ -10,10 +10,9 @@ import java.util.Collection;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.NameFileFilter;
 import org.apache.commons.io.filefilter.TrueFileFilter;
-
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -56,12 +55,12 @@ public class OutputTest {
 
     @BeforeAll
     public static void setup() throws IOException {
-        final File testHome = new File("test/output/squashedImageCreation");
+        File testHome = new File("test/output/squashedImageCreation");
         FileUtils.deleteDirectory(testHome);
         outputDir = new File(testHome, "out");
         outputDir.mkdirs();
-        final File containerFileSystemFrom = new File("src/test/resources/target_containerfilesystem.tar.gz");
-        final File containerFileSystemTo = new File(outputDir, "target_containerfilesystem.tar.gz");
+        File containerFileSystemFrom = new File("src/test/resources/target_containerfilesystem.tar.gz");
+        File containerFileSystemTo = new File(outputDir, "target_containerfilesystem.tar.gz");
         FileUtils.copyFile(containerFileSystemFrom, containerFileSystemTo);
         workingDir = new File(testHome, "working");
         workingDir.mkdirs();
@@ -79,37 +78,37 @@ public class OutputTest {
         Mockito.when(programPaths.getDockerInspectorSquashedImageTarFilePath()).thenReturn(squashedImageTarfile.getAbsolutePath());
         Mockito.when(programPaths.getDockerInspectorSquashedImageDirPath()).thenReturn(squashingTempDir.getAbsolutePath());
 
-        final SimpleBdioDocument bdioDoc = Mockito.mock(SimpleBdioDocument.class);
-        final BdioBillOfMaterials bom = new BdioBillOfMaterials();
+        SimpleBdioDocument bdioDoc = Mockito.mock(SimpleBdioDocument.class);
+        BdioBillOfMaterials bom = new BdioBillOfMaterials();
         bom.spdxName = "registry.luciddg.com_luciddg_ldg-server-qa_2020.16.03_DPKG";
         Mockito.when(bdioDoc.getBillOfMaterials()).thenReturn(bom);
-        final BdioProject project = new BdioProject();
+        BdioProject project = new BdioProject();
         Mockito.when(bdioDoc.getProject()).thenReturn(project);
         Mockito.when(containerFilesystemFilename.deriveContainerFilesystemFilename(null, null)).thenReturn("target_containerfilesystem.tar.gz");
 
-        final ImageTarFilename imageTarFilename = new ImageTarFilename();
-        final FileOperations fileOperations = new FileOperations();
-        final DockerClientManager dockerClientManager = new DockerClientManager(config, imageTarFilename, programPaths);
+        ImageTarFilename imageTarFilename = new ImageTarFilename();
+        FileOperations fileOperations = new FileOperations();
+        DockerClientManager dockerClientManager = new DockerClientManager(fileOperations, config, imageTarFilename, programPaths);
         SquashedImage squashedImage = new SquashedImage();
         squashedImage.setFileOperations(fileOperations);
         squashedImage.setDockerClientManager(dockerClientManager);
         output.setSquashedImage(squashedImage);
 
         // Test
-        final OutputFiles outputFiles = output.addOutputToFinalOutputDir(bdioDoc, null, null);
+        OutputFiles outputFiles = output.addOutputToFinalOutputDir(bdioDoc, null, null);
 
         // Verify
-        final File generatedSquashedImageCompressedFile = outputFiles.getSquashedImageFile();
-        final File generatedSquashedImageTarfile = new File(workingDir, "generatedImageTarfile");
+        File generatedSquashedImageCompressedFile = outputFiles.getSquashedImageFile();
+        File generatedSquashedImageTarfile = new File(workingDir, "generatedImageTarfile");
         CompressedFile.gunZipFile(generatedSquashedImageCompressedFile, generatedSquashedImageTarfile);
-        final File generatedSquashedImageContents = new File(workingDir, "generatedSquashedImageContents");
+        File generatedSquashedImageContents = new File(workingDir, "generatedSquashedImageContents");
         CompressedFile.unTarFile(generatedSquashedImageTarfile, generatedSquashedImageContents);
         System.out.println(String.format("Look in: %s", generatedSquashedImageContents.getAbsolutePath()));
-        final Collection<File> layerFiles = FileUtils.listFiles(generatedSquashedImageContents, new NameFileFilter("layer.tar"), TrueFileFilter.TRUE);
+        Collection<File> layerFiles = FileUtils.listFiles(generatedSquashedImageContents, new NameFileFilter("layer.tar"), TrueFileFilter.TRUE);
         assertEquals(1, layerFiles.size());
-        final File generatedLayer = new File(workingDir, "generatedLayer");
+        File generatedLayer = new File(workingDir, "generatedLayer");
         CompressedFile.unTarFile(layerFiles.iterator().next(), generatedLayer);
-        final File expectedFile = new File(generatedLayer, "opt/luciddg-server/modules/django/bin/100_assets.csv");
+        File expectedFile = new File(generatedLayer, "opt/luciddg-server/modules/django/bin/100_assets.csv");
         assertTrue(expectedFile.exists());
     }
 }

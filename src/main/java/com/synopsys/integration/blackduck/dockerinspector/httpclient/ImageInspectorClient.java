@@ -35,13 +35,14 @@ import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarWrapper;
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
+import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.rest.client.IntHttpClient;
 
 public abstract class ImageInspectorClient {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public ImageTarWrapper copyTarfileToSharedDir(Config config, ProgramPaths programPaths, ImageTarWrapper givenDockerTarfile) throws IOException {
+    public ImageTarWrapper copyTarfileToSharedDir(FileOperations fileOperations, Config config, ProgramPaths programPaths, ImageTarWrapper givenDockerTarfile) throws IOException {
         if (fileIsInsideDir(new File(config.getSharedDirPathLocal()), givenDockerTarfile.getFile())) {
             logger.debug(String.format("File %s is already inside shared dir %s; leaving it there",
                 givenDockerTarfile.getFile().getCanonicalPath(),
@@ -57,6 +58,7 @@ public abstract class ImageInspectorClient {
         if (!finalDockerTarfile.getCanonicalPath().equals(givenDockerTarfile.getFile().getCanonicalPath())) {
             logger.debug(String.format("Copying %s to %s", givenDockerTarfile.getFile().getCanonicalPath(), finalDockerTarfile.getCanonicalPath()));
             FileUtils.copyFile(givenDockerTarfile.getFile(), finalDockerTarfile);
+            fileOperations.logFileOwnerGroupPerms(finalDockerTarfile);
         }
         logger.debug(String.format("Final docker tar file path: %s", finalDockerTarfile.getCanonicalPath()));
         return new ImageTarWrapper(finalDockerTarfile, givenDockerTarfile.getImageRepo(), givenDockerTarfile.getImageTag());

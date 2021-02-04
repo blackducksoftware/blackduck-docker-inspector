@@ -3,7 +3,6 @@ package com.synopsys.integration.blackduck.dockerinspector.dockerclient;
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,6 +28,7 @@ import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarFilename;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarWrapper;
 import com.synopsys.integration.blackduck.exception.BlackDuckIntegrationException;
+import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
 import com.synopsys.integration.exception.IntegrationException;
 
 @Tag("integration")
@@ -44,7 +44,8 @@ public class DockerClientManagerTest {
     public static void setUp() {
         config = Mockito.mock(Config.class);
         programPaths = Mockito.mock(ProgramPaths.class);
-        dockerClientManager = new DockerClientManager(config, new ImageTarFilename(), programPaths);
+        FileOperations fileOperations = new FileOperations();
+        dockerClientManager = new DockerClientManager(fileOperations, config, new ImageTarFilename(), programPaths);
     }
 
     @AfterAll
@@ -53,7 +54,7 @@ public class DockerClientManagerTest {
     }
 
     private static void removeImage(String imageRepo, String imageTag) {
-        final Optional<String> foundImageIdInitial = dockerClientManager.lookupImageIdByRepoTag(imageRepo, imageTag);
+        Optional<String> foundImageIdInitial = dockerClientManager.lookupImageIdByRepoTag(imageRepo, imageTag);
         if (foundImageIdInitial.isPresent()) {
             dockerClientManager.removeImage(foundImageIdInitial.get());
         }
@@ -62,27 +63,27 @@ public class DockerClientManagerTest {
     @Test
     public void test() throws IOException {
 
-        final Optional<String> foundImageIdInitial = dockerClientManager.lookupImageIdByRepoTag(imageRepo, imageTag);
+        Optional<String> foundImageIdInitial = dockerClientManager.lookupImageIdByRepoTag(imageRepo, imageTag);
         if (foundImageIdInitial.isPresent()) {
             dockerClientManager.removeImage(foundImageIdInitial.get());
         }
-        final Optional<String> foundImageIdShouldBeEmpty = dockerClientManager.lookupImageIdByRepoTag(imageRepo, imageTag);
+        Optional<String> foundImageIdShouldBeEmpty = dockerClientManager.lookupImageIdByRepoTag(imageRepo, imageTag);
         assertFalse(foundImageIdShouldBeEmpty.isPresent());
 
-        final File testWorkingDir = new File("test/output/dockerClientManagerTest");
+        File testWorkingDir = new File("test/output/dockerClientManagerTest");
         testWorkingDir.mkdirs();
-        final File dockerfile = new File(testWorkingDir, "Dockerfile");
-        final File imageContents = new File(testWorkingDir, "test.txt");
+        File dockerfile = new File(testWorkingDir, "Dockerfile");
+        File imageContents = new File(testWorkingDir, "test.txt");
         imageContents.createNewFile();
-        final String dockerfileContents = String.format("FROM scratch\nCOPY test.txt .\n");
+        String dockerfileContents = String.format("FROM scratch\nCOPY test.txt .\n");
         FileUtils.writeStringToFile(dockerfile, dockerfileContents, StandardCharsets.UTF_8);
 
-        final Set<String> tags = new HashSet<>();
+        Set<String> tags = new HashSet<>();
         tags.add(String.format("%s:%s", imageRepo, imageTag));
-        final String createdImageId = dockerClientManager.buildImage(testWorkingDir, tags);
+        String createdImageId = dockerClientManager.buildImage(testWorkingDir, tags);
         System.out.printf("Created image %s\n", createdImageId);
 
-        final Optional<String> foundImageId = dockerClientManager.lookupImageIdByRepoTag(imageRepo, imageTag);
+        Optional<String> foundImageId = dockerClientManager.lookupImageIdByRepoTag(imageRepo, imageTag);
 
         assertTrue(foundImageId.isPresent());
         System.out.printf("Found image id: %s\n", foundImageId.get());
@@ -93,7 +94,7 @@ public class DockerClientManagerTest {
     public void testDeriveDockerTarfileFromConfiguredTar() throws IOException, IntegrationException {
         Mockito.when(programPaths.getDockerInspectorTargetDirPath()).thenReturn("test/containerShared/target");
         Mockito.when(config.getDockerTar()).thenReturn("build/images/test/alpine.tar");
-        final ImageTarWrapper imageTarWrapper = dockerClientManager.deriveDockerTarFileFromConfig();
+        ImageTarWrapper imageTarWrapper = dockerClientManager.deriveDockerTarFileFromConfig();
         assertEquals("alpine.tar", imageTarWrapper.getFile().getName());
     }
 
@@ -102,7 +103,7 @@ public class DockerClientManagerTest {
         Mockito.when(programPaths.getDockerInspectorTargetDirPath()).thenReturn("test/containerShared/target");
         Mockito.when(config.getDockerImageRepo()).thenReturn("alpine");
         Mockito.when(config.getDockerImageTag()).thenReturn("latest");
-        final ImageTarWrapper imageTarWrapper = dockerClientManager.deriveDockerTarFileFromConfig();
+        ImageTarWrapper imageTarWrapper = dockerClientManager.deriveDockerTarFileFromConfig();
         assertEquals("alpine_latest.tar", imageTarWrapper.getFile().getName());
     }
 

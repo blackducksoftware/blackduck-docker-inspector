@@ -81,6 +81,7 @@ import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarWrapper
 import com.synopsys.integration.blackduck.exception.BlackDuckIntegrationException;
 import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 import com.synopsys.integration.blackduck.imageinspector.api.name.ImageNameResolver;
+import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.util.OperatingSystemType;
 
@@ -89,14 +90,16 @@ public class DockerClientManager {
     private static final String CONTAINER_APPNAME_LABEL_KEY = "app";
     private static final String CONTAINER_OS_LABEL_KEY = "os";
     private final Logger logger = LoggerFactory.getLogger(DockerClientManager.class);
+    private final FileOperations fileOperations;
     private final Config config;
     private final ImageTarFilename imageTarFilename;
     private final ProgramPaths programPaths;
     private final DockerClient dockerClient;
 
     @Autowired
-    public DockerClientManager(Config config, ImageTarFilename imageTarFilename,
+    public DockerClientManager(FileOperations fileOperations, Config config, ImageTarFilename imageTarFilename,
         ProgramPaths programPaths) {
+        this.fileOperations = fileOperations;
         this.config = config;
         this.imageTarFilename = imageTarFilename;
         this.programPaths = programPaths;
@@ -148,12 +151,16 @@ public class DockerClientManager {
 
     public ImageTarWrapper deriveDockerTarFileFromConfig() throws IOException, IntegrationException {
         logger.debug(String.format("programPaths.getDockerInspectorTargetDirPath(): %s", programPaths.getDockerInspectorTargetDirPath()));
+        ImageTarWrapper tarWrapper;
         if (StringUtils.isNotBlank(config.getDockerTar())) {
             File dockerTarFile = new File(config.getDockerTar());
-            return new ImageTarWrapper(dockerTarFile);
+            fileOperations.logFileOwnerGroupPerms(dockerTarFile);
+            tarWrapper = new ImageTarWrapper(dockerTarFile);
         } else {
-            return deriveDockerTarFileGivenImageSpec();
+            tarWrapper = deriveDockerTarFileGivenImageSpec();
         }
+        fileOperations.logFileOwnerGroupPerms(tarWrapper.getFile());
+        return tarWrapper;
     }
 
     public String pullImage(String imageName, String tagName) throws IntegrationException, InterruptedException {
