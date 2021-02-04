@@ -21,6 +21,13 @@ again at step 1).
 caller (e.g. ${detect_product_name}) to upload to Black Duck.
 5. Returns the constructed file system to the caller (e.g. ${detect_product_name}) for signature scanning.
 
+The user ID and group ID of the image inspector service process will (in general) be different from the user ID and
+group ID of the ${solution_name} process. Consequently, the the environment must be confugred
+so that files created by ${solution_name} are readable by all. On Linux, this means an appropriate
+umask value (for example 002 or 022). On Windows, the working directory must be readable by all.
+In addition, the permissions on a Docker tarfile passed via
+the *docker.tar* property must allow read by all.
+
 ### Enabling file sharing in Docker
 
 Docker may restrict file sharing to certain directories that you've configured in

@@ -56,6 +56,8 @@ Requirements for ${solution_name} are:
 * Access to the internet. For information on running without access to the internet, refer to [Air Gap mode](advanced.md#air-gap-mode).
 * Java (JRE) versions 8, 11, or 15.
 * Three available ports for the image inspector services. By default, these ports are 9000, 9001, and 9002.
+* The environment must be set up such that files created by ${solution_name} are readable by all. On Linux, this means an appropriate umask value (for example, 002 or 022 would work). On Windows, this means the working directory must be readable by all.
+* Files passed to ${solution_name} via the *docker.tar* property must be readable by all.
 * When invoking ${solution_name} using ${script_name}:
     - curl
     - bash
