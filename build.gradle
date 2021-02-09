@@ -14,7 +14,7 @@ buildscript {
 }
 
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
-project.ext.inspectorImageVersion = "5.0.3"
+project.ext.inspectorImageVersion = "5.0.4-SNAPSHOT"
 
 version = '9.2.1-SNAPSHOT'
 
