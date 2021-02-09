@@ -359,6 +359,12 @@ again at step 1).</li>
 caller (e.g. Synopsys Detect) to upload to Black Duck.</li>
 <li>Returns the constructed file system to the caller (e.g. Synopsys Detect) for signature scanning.</li>
 </ol>
+<p>The user ID and group ID of the image inspector service process will (in general) be different from the user ID and
+group ID of the Black Duck Docker Inspector process. Consequently, the the environment must be confugred
+so that files created by Black Duck Docker Inspector are readable by all. On Linux, this means an appropriate
+umask value (for example 002 or 022). On Windows, the working directory must be readable by all.
+In addition, the permissions on a Docker tarfile passed via
+the <em>docker.tar</em> property must allow read by all.</p>
 <h3 id="enabling-file-sharing-in-docker">Enabling file sharing in Docker</h3>
 <p>Docker may restrict file sharing to certain directories that you've configured in
 Docker &gt; Settings &gt; Resource &gt; File Sharing. To enable Black Duck Docker Inspector to mount the volumes

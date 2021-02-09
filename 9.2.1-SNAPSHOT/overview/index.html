@@ -334,6 +334,8 @@ refer to <a href="../deployment/">Deploying</a>.</p>
 <li>Access to the internet. For information on running without access to the internet, refer to <a href="../advanced/#air-gap-mode">Air Gap mode</a>.</li>
 <li>Java (JRE) versions 8, 11, or 15.</li>
 <li>Three available ports for the image inspector services. By default, these ports are 9000, 9001, and 9002.</li>
+<li>The environment must be set up such that files created by Black Duck Docker Inspector are readable by all. On Linux, this means an appropriate umask value (for example, 002 or 022 would work). On Windows, this means the working directory must be readable by all.</li>
+<li>Files passed to Black Duck Docker Inspector via the <em>docker.tar</em> property must be readable by all.</li>
 <li>When invoking Black Duck Docker Inspector using blackduck-docker-inspector.sh:<ul>
 <li>curl</li>
 <li>bash</li>
