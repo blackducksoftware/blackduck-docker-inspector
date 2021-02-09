@@ -60,7 +60,7 @@ public class IntegrationTestRunner {
         if (actualBdio != null) {
             System.out.printf("Expecting output BDIO file: %s\n", actualBdio.getAbsolutePath());
             assertTrue(actualBdio.exists());
-
+            // TODO should use a order-insensitive comparison like Detect does
             if (testConfig.isRequireBdioMatch()) {
                 File expectedBdio = new File(String.format(String.format("src/test/resources/bdio/%s_bdio.jsonld", testConfig.getCodelocationName())));
                 List<String> exceptLinesContainingThese = new ArrayList<>();
