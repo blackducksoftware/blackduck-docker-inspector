@@ -1,3 +1,8 @@
+#### Version 9.2.1
+
+##### Resolved issue
+* (IDOCKER-727) Resolved an issue that caused ${solution_name} to fail to discover packages in CentOS 7 based images due to an error upgrading the rpm database.
+
 #### Version 9.2.0
 
 ##### New features
