@@ -1,3 +1,8 @@
+#### Version 9.2.2
+
+##### Resolved issue
+* (IDOCKER-722) Resolved an issue that caused ${solution_name} to, when it found a "white out opaque directory" file, to delete files added by the current layer as supposed to only deleting files added by lower layers. 
+
 #### Version 9.2.1
 
 ##### Resolved issue
