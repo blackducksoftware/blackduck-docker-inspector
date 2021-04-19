@@ -14,7 +14,7 @@ buildscript {
 }
 
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
-project.ext.inspectorImageVersion = "5.0.4"
+project.ext.inspectorImageVersion = "5.0.5"
 
 version = '9.2.2-SNAPSHOT'
 
@@ -271,8 +271,8 @@ artifactory {
 
 dependencies {
     compile 'com.synopsys.integration:blackduck-common:51.1.0'
-    compile 'com.synopsys.integration:integration-bdio:21.0.0'
-    compile 'com.synopsys.integration:hub-imageinspector-lib:13.0.4'
+    compile 'com.synopsys.integration:integration-bdio:22.1.1'
+    compile 'com.synopsys.integration:hub-imageinspector-lib:13.0.5'
 
     compile 'com.github.docker-java:docker-java-core:3.2.7'
     compile 'com.github.docker-java:docker-java-transport-httpclient5:3.2.7'
