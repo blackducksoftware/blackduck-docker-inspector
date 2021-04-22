@@ -189,17 +189,18 @@ To run in Air Gap mode, use the command:
 If you invoke ${solution_name} with an image reference; in other words, a repo:tag value versus a .tar file,
 it uses the [docker-java library](${docker_java_project_url}) to access the Docker registry to pull the image.
 
-If *docker pull* works from the command line, then ${solution_name} is able to pull that image,
-because docker-java can be configured the same way as the Docker command line utility (*docker*).
+If you can pull an image using *docker pull* from the command line, then you will be able to configure ${solution_name} to pull that image.
+The docker-java library can often be configured the same way as the Docker command line utility (*docker*).
 
 There are also other ways to configure docker-java. For more information on configuring docker-java
-(and therefore ${solution_name}) for your Docker registry, refer to:
-${docker_java_project_url}#Configuration.
+(and therefore ${solution_name}) for your Docker registry,
+refer to the [docker-java configuration documentation](${docker_java_project_url}/blob/master/docs/getting_started.md).
 
 If you need to override the DOCKER_HOST value, set property *use.platform.default.docker.host* to false.
 When *use.platform.default.docker.host* is set to false,
 ${solution_name} does not override any of the configuration settings in the code,
-so all other methods such as properties, system properties, and system environment, are available to you.
+so all other docker-java configuration methods such as properties, system properties,
+and system environment, are available to you.
 
 When *use.platform.default.docker.host* is set to true (the default value) *and* ${solution_name} is running
 on Windows, ${solution_name} overrides only the DOCKER_HOST value
