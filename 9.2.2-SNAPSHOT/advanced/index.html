@@ -492,15 +492,16 @@ docker load -i blackduck-imageinspector-ubuntu.tar
 <h3 id="configuring-black-duck-docker-inspector-for-your-docker-engine-and-registry">Configuring Black Duck Docker Inspector for your Docker Engine and registry</h3>
 <p>If you invoke Black Duck Docker Inspector with an image reference; in other words, a repo:tag value versus a .tar file,
 it uses the <a href="https://github.com/docker-java/docker-java">docker-java library</a> to access the Docker registry to pull the image.</p>
-<p>If <em>docker pull</em> works from the command line, then Black Duck Docker Inspector is able to pull that image,
-because docker-java can be configured the same way as the Docker command line utility (<em>docker</em>).</p>
+<p>If you can pull an image using <em>docker pull</em> from the command line, then you will be able to configure Black Duck Docker Inspector to pull that image.
+The docker-java library can often be configured the same way as the Docker command line utility (<em>docker</em>).</p>
 <p>There are also other ways to configure docker-java. For more information on configuring docker-java
-(and therefore Black Duck Docker Inspector) for your Docker registry, refer to:
-https://github.com/docker-java/docker-java#Configuration.</p>
+(and therefore Black Duck Docker Inspector) for your Docker registry,
+refer to the <a href="https://github.com/docker-java/docker-java/blob/master/docs/getting_started.md">docker-java configuration documentation</a>.</p>
 <p>If you need to override the DOCKER_HOST value, set property <em>use.platform.default.docker.host</em> to false.
 When <em>use.platform.default.docker.host</em> is set to false,
 Black Duck Docker Inspector does not override any of the configuration settings in the code,
-so all other methods such as properties, system properties, and system environment, are available to you.</p>
+so all other docker-java configuration methods such as properties, system properties,
+and system environment, are available to you.</p>
 <p>When <em>use.platform.default.docker.host</em> is set to true (the default value) <em>and</em> Black Duck Docker Inspector is running
 on Windows, Black Duck Docker Inspector overrides only the DOCKER_HOST value
 (setting it to "npipe:////./pipe/docker_engine").</p>
