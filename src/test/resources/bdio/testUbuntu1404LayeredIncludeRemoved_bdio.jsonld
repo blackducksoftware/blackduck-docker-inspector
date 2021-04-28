@@ -4,11 +4,11 @@
     "spdx:name": "testUbuntu1404LayeredIncludeRemoved",
     "creationInfo": {
       "spdx:creator": [
-        "Tool: IntegrationBdio-21.0.0"
+        "Tool: IntegrationBdio-22.1.1"
       ],
-      "spdx:created": "2021-02-09T16:24:05.684Z"
+      "spdx:created": "2021-04-27T17:17:58.357Z"
     },
-    "@id": "uuid:9bb557cd-a67a-4566-b601-2456762deab2",
+    "@id": "uuid:ad8d8aea-8bf3-4e23-bede-5b75e69a9276",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -70,7 +70,7 @@
         },
         "pieces": [
           "Layer00_sha256_93da31b6a5499e9b86dcd8ea0cf6b5d0fa9ed5b9beaedceee5b58218b494e80e",
-          null
+          ""
         ]
       }
     },
@@ -5060,7 +5060,7 @@
         },
         "pieces": [
           "Layer02_sha256_2f19e981cedab782dc2ab39a6e8e9782ff714bef28c043efbdc34f2afcd057c5",
-          null
+          ""
         ]
       }
     },
@@ -5818,7 +5818,7 @@
         },
         "pieces": [
           "Layer04_sha256_73dd5183c549685de3be83f6628895d36c6244cfc21f21aad10765c9b528a90b",
-          null
+          ""
         ]
       }
     },
@@ -6576,7 +6576,7 @@
         },
         "pieces": [
           "Layer03_sha256_8f6a7ca929441c126e8faf4b0891d6b95876be80a7f8bec993e3bc56160e71ee",
-          null
+          ""
         ]
       }
     },
@@ -7334,7 +7334,7 @@
         },
         "pieces": [
           "Layer01_sha256_d196bfd70d49b469a01bd45e6070b70ea9116783112da44f61d10958dbc7de10",
-          null
+          ""
         ]
       }
     },
