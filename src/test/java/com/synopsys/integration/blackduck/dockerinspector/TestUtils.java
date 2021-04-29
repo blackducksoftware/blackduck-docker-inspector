@@ -51,8 +51,7 @@ public class TestUtils {
 
     public static boolean contentEquals(File file1, File file2, List<String> exceptLinesContainingThese) throws IOException {
         System.out.printf("Comparing %s %s\n", file1.getAbsolutePath(), file2.getAbsolutePath());
-        int ignoredLineCount = 0;
-        int matchedLineCount = 0;
+
         List<String> lines1 = FileUtils.readLines(file1, StandardCharsets.UTF_8);
         List<String> lines2 = FileUtils.readLines(file2, StandardCharsets.UTF_8);
 
@@ -60,30 +59,53 @@ public class TestUtils {
             System.out.printf("Files' line counts are different\n");
             return false;
         }
-        for (int i = 0; i < lines1.size(); i++) {
-            String line1 = lines1.get(i);
-            String line2 = lines2.get(i);
-            boolean skip = false;
-            if (exceptLinesContainingThese != null) {
-                for (String ignoreMe : exceptLinesContainingThese) {
-                    if (line1.contains(ignoreMe) || line2.contains(ignoreMe)) {
-                        skip = true;
-                        ignoredLineCount++;
-                    }
-                }
-            }
-            if (skip) {
+
+        ListComparisonData list1List2 = compareListToOtherList(lines1, lines2, exceptLinesContainingThese);
+        ListComparisonData list2List1 = compareListToOtherList(lines2, lines1, exceptLinesContainingThese);
+        ListComparisonData aggregateComparisonData = aggregateComparisonData(list1List2, list2List1);
+
+        if (!aggregateComparisonData.isEqualContent()) {
+            return false;
+        }
+
+        System.out.printf("These files match (%d lines matched; %d lines ignored)\n", aggregateComparisonData.getMatchedLines(), aggregateComparisonData.getIgnoredLines());
+        return true;
+    }
+
+    private static ListComparisonData compareListToOtherList(List<String> list1, List<String> list2, List<String> exceptLinesContainingThese) {
+        ListComparisonData listComparisonData = new ListComparisonData();
+        for (String line : list1) {
+            if (shouldSkipLineDuringComparison(line, exceptLinesContainingThese)) {
+                listComparisonData.ignoredLine();
                 continue;
             }
-            if (!line2.equals(line1)) {
-                System.out.printf("File comparison: These lines do not match:\n%s\n%s\n", lines1.get(i), lines2.get(i));
-                return false;
-            } else {
-                matchedLineCount++;
+            if (!list2.contains(line)) {
+                System.out.printf("File comparison: Line not shared by both files:\n%s\n", line);
+                listComparisonData.equalContent(false);
+                return listComparisonData;
+            }
+            listComparisonData.matchedLine();
+        }
+        listComparisonData.equalContent(true);
+        return listComparisonData;
+    }
+
+    private static boolean shouldSkipLineDuringComparison(String line, List<String> exceptLinesContainingThese) {
+        if (exceptLinesContainingThese != null) {
+            for (String ignoreMe : exceptLinesContainingThese) {
+                if (line.contains(ignoreMe)) {
+                    return true;
+                }
             }
         }
-        System.out.printf("These files match (%d lines matched; %d lines ignored)\n", matchedLineCount, ignoredLineCount);
-        return true;
+        return false;
+    }
+
+    private static ListComparisonData aggregateComparisonData(ListComparisonData data1, ListComparisonData data2) {
+        boolean equalContent = data1.isEqualContent() && data2.isEqualContent();
+        int matches = Integer.max(data1.getMatchedLines(), data2.getMatchedLines());
+        int ignored = Integer.max(data1.getIgnoredLines(), data2.getIgnoredLines());
+        return new ListComparisonData(equalContent, matches, ignored);
     }
 
     public static String execCmd(File workingDir, String cmd, long timeout, boolean logStdout, Map<String, String> givenEnv) throws IOException, InterruptedException, IntegrationException {
