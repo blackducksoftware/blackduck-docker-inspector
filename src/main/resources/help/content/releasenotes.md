@@ -1,3 +1,8 @@
+#### Version 9.2.3
+
+##### Resolved issue
+* (IDOCKER-736) Resolved an issue that could cause ${solution_name} to use the wrong component namespace in BDIO, resulting in an empty BOM, for Oracle Linux images.
+
 #### Version 9.2.2
 
 ##### Resolved issue
