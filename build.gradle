@@ -270,7 +270,7 @@ artifactory {
 }
 
 dependencies {
-    compile 'com.synopsys.integration:blackduck-common:51.1.0'
+    compile 'com.synopsys.integration:blackduck-common:54.2.3'
     compile 'com.synopsys.integration:integration-bdio:22.1.1'
     compile 'com.synopsys.integration:hub-imageinspector-lib:13.0.6'
 

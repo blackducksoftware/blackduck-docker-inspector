@@ -15,6 +15,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import com.synopsys.integration.rest.HttpMethod;
+import com.synopsys.integration.rest.HttpUrl;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -153,7 +155,7 @@ public class ImageInspectorClientStartServices extends ImageInspectorClient {
                 logServiceError(serviceContainerDetails.getContainerId());
                 String warningHeaderValue = response.getWarningHeaderValue();
                 String responseBody = response.getBody();
-                throw new IntegrationRestException(statusCode, warningHeaderValue, responseBody,
+                throw new IntegrationRestException(HttpMethod.GET, new HttpUrl(imageInspectorUri), statusCode, warningHeaderValue, responseBody,
                     String.format("There was a problem trying to getBdio. Error: %d; Warning header: '%s'; Body: '%s'", statusCode, warningHeaderValue,
                         responseBody));
             }
