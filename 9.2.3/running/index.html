@@ -36,7 +36,7 @@
     
     
       
-        <title>Overview - Black Duck Docker Inspector</title>
+        <title>Running - Black Duck Docker Inspector</title>
       
     
     
@@ -75,7 +75,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#modes-of-operation" tabindex="1" class="md-skip">
+      <a href="#considerations-when-running-on-windows" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -101,7 +101,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                Overview
+                Running
               
             </span>
           
@@ -195,23 +195,30 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#modes-of-operation" class="md-nav__link">
-    Modes of operation
+  <a href="#considerations-when-running-on-windows" class="md-nav__link">
+    Considerations when running on Windows
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#host-mode" class="md-nav__link">
-    Host mode
+  <a href="#run-from-synopsys-detect-version-660-or-later-or-run-the-black-duck-docker-inspector-jar-file-directly" class="md-nav__link">
+    Run from Synopsys Detect version 6.6.0 or later, or run the Black Duck Docker Inspector .jar file directly
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#container-mode" class="md-nav__link">
-    Container mode
+  <a href="#docker-file-sharing-settings" class="md-nav__link">
+    Docker file sharing settings
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-restrictions" class="md-nav__link">
+    Docker restrictions
   </a>
   
 </li>
@@ -222,49 +229,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
-    Requirements
+  <a href="#running-the-latest-version-linuxmac-only" class="md-nav__link">
+    Running the latest version (Linux/Mac only)
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#getting-started" class="md-nav__link">
-    Getting started
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#invoking-from-synopsys-detect" class="md-nav__link">
-    Invoking from Synopsys Detect
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#invoking-black-duck-docker-inspector-directly" class="md-nav__link">
-    Invoking Black Duck Docker Inspector directly
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#passing-arguments-to-black-duck-docker-inspector" class="md-nav__link">
-    Passing arguments to Black Duck Docker Inspector
+  <a href="#running-a-specific-version-linuxmac-only" class="md-nav__link">
+    Running a specific version (Linux/Mac only)
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#help" class="md-nav__link">
-    Help
+  <a href="#running-the-jar-file" class="md-nav__link">
+    Running the .jar file
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inspecting-an-image-by-image-repotag" class="md-nav__link">
+    Inspecting an image by image repo:tag
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inspecting-an-image-saved-to-a-tar-file" class="md-nav__link">
+    Inspecting an image saved to a .tar file
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inspecting-a-local-image-by-image-id" class="md-nav__link">
+    Inspecting a local image by image ID
   </a>
   
 </li>
@@ -286,78 +287,54 @@
               
                 
                 
-                  <h1>Overview</h1>
+                  <h1>Running</h1>
                 
-                <p><em>Help version: 9.2.3</em></p>
-<p>Black Duck Docker Inspector inspects Docker images to discover packages (components).
-It utilizes the appropriate Linux package manager to provide a list of
-the packages installed by the package manager, and creates a Black Duck 
-project with a Bill of Materials (BOM) consisting of those packages as components.
-Because it relies on the Linux package manager as its source,
-the discovered packages are limited to those installed and managed using the Linux package manager.</p>
-<p>Black Duck Docker Inspector can discover package manager-installed components in
-Linux Docker images that use the DPKG, RPM, or APK package manager database formats.</p>
-<p>Black Duck Docker Inspector can inspect non-Linux images (for example, Windows images,
-and images that contain no operating system), but 
-will discover zero components. This can be useful if the target image
-container file system that Black Duck Docker Inspector can produce as output is needed
-for signature scanning.</p>
-<p>After running the Black Duck Docker Inspector on an image, navigate to Black Duck to view the BOM created by 
-Black Duck Docker Inspector.</p>
-<h3 id="modes-of-operation">Modes of operation</h3>
-<p>Black Duck Docker Inspector has two modes:</p>
-<ul>
-<li>Host mode, for running on a server or virtual machine (VM) where Black Duck Docker Inspector can perform Docker operations using a Docker Engine.</li>
-<li>Container mode, for running in a container started by Docker, Kubernetes, OpenShift, and others.</li>
-</ul>
-<h4 id="host-mode">Host mode</h4>
-<p>Host mode (default) is for servers/VMs where Black Duck Docker Inspector can perform Docker operations using a Docker Engine.</p>
-<p>In host mode, Black Duck Docker Inspector is a utility that automates the process of using Black Duck to discover security, license, and operational risks
-associated with Linux-based Docker images. It discovers components using the target Docker image's package manager; therefore, the results
-are limited to those components (packages) of which the package manager is aware. Black Duck Docker Inspector does this without running
-the image, so it is safe to run on untrusted images.</p>
-<p>Black Duck Docker Inspector can pull the target image; in other words, the Docker image you want to inspect, from a Docker registry such
-as Docker Hub. Alternatively, you can save an image to a .tar file by using the <em>docker save</em> command. Then, run Black Duck Docker Inspector
-on the .tar file. Black Duck Docker Inspector supports Docker Image Specification v1.2.0 format .tar files.</p>
-<h4 id="container-mode">Container mode</h4>
-<p>Container mode is for container orchestration environments; for example, Kubernetes, OpenShift, and others, where Black Duck Docker Inspector runs
-inside a container where it cannot perform Docker operations. For information on running Black Duck Docker Inspector in container mode,
-refer to <a href="../deployment/">Deploying</a>.</p>
-<h3 id="requirements">Requirements</h3>
-<p>Requirements for Black Duck Docker Inspector are:</p>
-<ul>
-<li>The current version of Black Duck. Visit <a href="https://github.com/blackducksoftware/hub/releases">this page</a> to determine the current version. </li>
-<li>Linux, MacOS, or Windows 10 Enterprise.<ul>
-<li>On Windows, Black Duck Docker Inspector must be executed from Synopsys Detect version 6.6.0 or later, or by executing the Black Duck Docker Inspector .jar directly. There is no equivalent to blackduck-docker-inspector.sh for Windows.</li>
-</ul>
-</li>
-<li>Access to the internet. For information on running without access to the internet, refer to <a href="../advanced/#air-gap-mode">Air Gap mode</a>.</li>
-<li>Java (JRE) versions 8, 11, or 15.</li>
-<li>Three available ports for the image inspector services. By default, these ports are 9000, 9001, and 9002.</li>
-<li>The environment must be set up such that files created by Black Duck Docker Inspector are readable by all. On Linux, this means an appropriate umask value (for example, 002 or 022 would work). On Windows, this means the working directory must be readable by all.</li>
-<li>Files passed to Black Duck Docker Inspector via the <em>docker.tar</em> property must be readable by all.</li>
-<li>When invoking Black Duck Docker Inspector using blackduck-docker-inspector.sh:<ul>
-<li>curl</li>
-<li>bash</li>
-</ul>
-</li>
-<li>In host mode: access to a Docker Engine versions 17.09 or higher.</li>
-<li>In container mode: you must start the Black Duck Docker Inspector container that meets the preceding requirements, and three container-based
-"image inspector" services. All four of these containers must share a mounted volume and be able to reach each other through HTTP GET operations using base URLs
-that you provide. For more information, refer to <a href="../deployment/">Deploying</a>.</li>
-</ul>
-<h3 id="getting-started">Getting started</h3>
-<h4 id="invoking-from-synopsys-detect">Invoking from Synopsys Detect</h4>
-<p>For many users, invoking Black Duck Docker Inspector from Synopsys Detect will be the best option.
-Synopsys Detect provides the following benefits:</p>
+                <h3 id="considerations-when-running-on-windows">Considerations when running on Windows</h3>
+<h4 id="run-from-synopsys-detect-version-660-or-later-or-run-the-black-duck-docker-inspector-jar-file-directly">Run from Synopsys Detect version 6.6.0 or later, or run the Black Duck Docker Inspector .jar file directly</h4>
+<p>The following is only a consideration if you are not running Black Duck Docker Inspector
+from Synopsys Detect.</p>
+<p>When executing Black Duck Docker Inspector directly on Linx or Mac,
+you can use the Black Duck Docker Inspector bash script blackduck-docker-inspector.sh that:</p>
 <ol>
-<li>It automatically downloads (if necessary) the latest version of Black Duck Docker Inspector.
-This is the only way to get this capability on Windows.</li>
-<li>It discovers components that Black Duck Docker Inspector is unable to discover by also invoking
-the Black Duck Signature Scanner on the target image container file system.</li>
+<li>Downloads (if necessary) the latest Black Duck Docker Inspector .jar file, and</li>
+<li>Executes it with the arguments you have provided.</li>
 </ol>
-<p>Refer to the Synopsys Detect documentation for more information.</p>
-<h4 id="invoking-black-duck-docker-inspector-directly">Invoking Black Duck Docker Inspector directly</h4>
+<p>There is no equivalent script for Windows, so on Windows you must download
+the Black Duck Docker Inspector .jar and execute it directly.</p>
+<p>Download the Black Duck Docker Inspector .jar file from the
+<a href="https://sig-repo.synopsys.com/webapp/#/artifacts/browse/tree/General/bds-integrations-snapshot/com/synopsys/integration/blackduck-docker-inspector">Synopsys artifactory server</a>.</p>
+<p>To execute the Black Duck Docker Inspector .jar:</p>
+<pre><code>java -jar blackduck-docker-inspector-{version}.jar {Black Duck Docker Inspector arguments}
+</code></pre>
+
+<h4 id="docker-file-sharing-settings">Docker file sharing settings</h4>
+<p>Black Duck Docker Inspector requires the ability to share directories with the image inspector containers.
+It shares a directory with image inspector containers by mounting it as a volume.
+You will need to configure your Docker settings to enable this file sharing.
+The simplest way to do this is to add your home directory as a sharable directory
+on the Docker settings Resources &gt; FILE SHARING screen.</p>
+<p>The shared directories are created under the value of property shared.dir.local.path,
+so if you change the directory that property points to, be sure your Docker file sharing settings enable
+sharing of that directory.</p>
+<h4 id="docker-restrictions">Docker restrictions</h4>
+<p>Docker on Windows has restrictions that impact Black Duck Docker Inspector:</p>
+<ol>
+<li>Docker can be configured to pull either Linix images, or Windows images.
+You can see how your Docker installation is configured by looking
+at the <em>OSType</em> value in the output of the <em>docker info</em> command.
+If Docker is configured for Linix images, it cannot pull Windows images,
+and vice versa. The command to change Docker's <em>OSType</em> value appears
+in the Docker Desktop menu. Refer to Docker documentation for more information.</li>
+<li>When pulling Windows images, Docker requires (a) that the architecture of the
+pulled image matches the architecture of your machine, and (b) that the Windows version
+of the pulled image is a close match to the Windows version of your machine.</li>
+</ol>
+<p>It is a good practice to make sure you can pull the target
+image using the <em>docker pull</em> command from the command line. If Docker
+cannot pull the image, then Black Duck Docker Inspector won't be able to either.
+If you cannot pull the image from the command line, consider
+both of the potential issues mentioned above.`</p>
+<h3 id="running-the-latest-version-linuxmac-only">Running the latest version (Linux/Mac only)</h3>
 <p>The following command format always fetches and runs the latest version of Black Duck Docker Inspector:</p>
 <pre><code>bash &lt;(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) {Black Duck Docker Inspector arguments}
 </code></pre>
@@ -370,52 +347,57 @@ bash &lt;(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector
 chmod +x blackduck-docker-inspector.sh
 ./blackduck-docker-inspector.sh {Black Duck Docker Inspector arguments}
 </code></pre>
-<p>The advantage of using the Black Duck Docker Inspector script is that it ensures you always run the latest version of the Black Duck Docker Inspector .jar.</p>
+<p>The advantage of using the Black Duck Docker Inspector script is that it ensures that you are always running the latest version of the Black Duck Docker Inspector .jar.</p>
 <p>Another alternative is to download the Black Duck Docker Inspector .jar (using the script) and run the .jar directly:</p>
 <pre><code>bash &lt;(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) --pulljar
 java -jar blackduck-docker-inspector-{version}.jar {Black Duck Docker Inspector arguments}
 </code></pre>
-<h3 id="passing-arguments-to-black-duck-docker-inspector">Passing arguments to Black Duck Docker Inspector</h3>
-<p>Running Black Duck Docker Inspector typically involves invoking the script or .jar with some command line arguments:</p>
-<pre><code>blackduck-docker-inspector.sh {Black Duck Docker Inspector arguments}
+<h3 id="running-a-specific-version-linuxmac-only">Running a specific version (Linux/Mac only)</h3>
+<p>By default, blackduck-docker-inspector.sh runs the latest version of
+Black Duck Docker Inspector by downloading, if necessary, and running the latest Black Duck Docker Inspector .jar.
+To run a specific version of Black Duck Docker Inspector:</p>
+<pre><code>export DOCKER_INSPECTOR_VERSION={version}
+./blackduck-docker-inspector.sh {Black Duck Docker Inspector arguments}
 </code></pre>
-<p>Black Duck Docker Inspector command line arguments consist of property assignments. Any supported property can be set by adding to the command line
-a property assignment of the form:</p>
-<pre><code>--{property name}={value}
+<p>For example:</p>
+<pre><code>export DOCKER_INSPECTOR_VERSION=8.1.0
+./blackduck-docker-inspector.sh --upload.bdio=false --docker.image=ubuntu:latest
 </code></pre>
-<p>Alternatively, any supported property can be set by adding to a text file named
-<em>application.properties</em> in the current directory a line of the form:</p>
-<pre><code>{property name}={value}
+<h3 id="running-the-jar-file">Running the .jar file</h3>
+<p>The advantage of running blackduck-docker-inspector.sh is that it ensures that you always run the latest
+version of Black Duck Docker Inspector. However, sometimes it is better to run the .jar directly.</p>
+<p>You can download any version of the Black Duck Docker Inspector .jar from https://sig-repo.synopsys.com/webapp/#/artifacts/browse/tree/General/bds-integrations-release/com/synopsys/integration/blackduck-docker-inspector.</p>
+<p>Use the following Java command to run it:</p>
+<pre><code>java -jar blackduck-docker-inspector-{version}.jar {Black Duck Docker Inspector arguments}
 </code></pre>
-<p>An <em>application.properties</em> file can contain multiple property assignments.</p>
-<p>There are other alternative methods for setting properties. For more information, refer to <a href="../running/">Running</a>.</p>
-<h3 id="help">Help</h3>
-<p>Available help topics:</p>
-<ul>
-<li>overview (this page)</li>
-<li>architecture</li>
-<li>running</li>
-<li>properties</li>
-<li>advanced</li>
-<li>deployment</li>
-<li>troubleshooting</li>
-<li>releasenotes</li>
-<li>all</li>
-</ul>
-<p>To display a help topic, run Black Duck Docker Inspector with either <em>-h</em> or <em>--help</em> followed by a topic. For example:</p>
-<pre><code>-h properties
+
+<h3 id="inspecting-an-image-by-image-repotag">Inspecting an image by image repo:tag</h3>
+<p>To run Black Duck Docker Inspector on a Docker image from your local cache or a registry:</p>
+<pre><code>./blackduck-docker-inspector.sh --docker.image={repo}:{tag}
 </code></pre>
-<p>To display multiple help topics, use a comma-separated list of help topics. For example:</p>
-<pre><code>-h overview,properties,running
+
+<p>Or:</p>
+<pre><code>java -jar blackduck-docker-inspector-{version}.jar --docker.image={repo}:{tag}
 </code></pre>
-<p>To display all help topics, use topic <em>all</em>:</p>
-<pre><code>-h all
+
+<p>If you omit the :{tag}, it defaults to :latest.</p>
+<h3 id="inspecting-an-image-saved-to-a-tar-file">Inspecting an image saved to a .tar file</h3>
+<p>To run Black Duck Docker Inspector on a Docker image .tar file:</p>
+<pre><code>docker save -o {name}.tar {repo}:{tag}
+./blackduck-docker-inspector.sh --docker.tar={name}.tar
 </code></pre>
-<p>To write help to a file, add <em>--help.output.path={directory or file path}</em>:</p>
-<pre><code>-h all --help.output.format=html --help.output.path=.
+<p>If your tar file contains multiple images, Black Duck Docker Inspector can only inspect one of them.
+You can specify the image to inspect using <em>--docker.image.repo</em> and <em>--docker.image.tag</em>. For example, to select <em>ubuntu:latest</em>
+from a .tar file that contains <em>ubuntu:latest</em> and other images:</p>
+<pre><code>./blackduck-docker-inspector.sh --docker.tar=multipleimages.tar --docker.image.repo=ubuntu --docker.image.tag=latest
 </code></pre>
-<p>Help content is output in Markdown format, which can be formatted ("pretty printed")
-using tools like mdless (https://brettterpstra.com/2015/08/21/mdless-better-markdown-in-terminal/).</p>
+<h3 id="inspecting-a-local-image-by-image-id">Inspecting a local image by image ID</h3>
+<p>When inspecting a local image, you have the option of specifying the image by its ID. First,
+get the image ID from the <em>IMAGE ID</em> column of the output of the <em>docker images</em> command.
+Then use the <em>docker.image.id</em> property to pass the image ID to Black Duck Docker Inspector:</p>
+<pre><code>./blackduck-docker-inspector.sh --docker.image.id={image ID}
+</code></pre>
+<p>The method only works for local images.</p>
                 
                   
                 
