@@ -36,7 +36,7 @@ public class CalledFromDetectTest {
     @Test
     public void test() throws IOException, InterruptedException, IntegrationException {
 
-        final String cmdGetDetectScriptString = "curl -s https://detect.synopsys.com/detect.sh";
+        final String cmdGetDetectScriptString = "curl -s https://detect.synopsys.com/detect7.sh";
         final String detectScriptString = TestUtils.execCmd(executionDir, cmdGetDetectScriptString, ONE_MINUTE_IN_MS, true, null);
         final File detectScriptFile = File.createTempFile("latestDetect", ".sh");
         detectScriptFile.setExecutable(true);
@@ -59,6 +59,7 @@ public class CalledFromDetectTest {
         sb.append(String.format(" --logging.level.com.synopsys.integration=%s", "DEBUG"));
         sb.append(String.format(" --detect.docker.passthrough.cleanup.inspector.container=%b", true));
         sb.append(String.format(" --detect.cleanup=%b", false));
+        sb.append(" --detect.bdio2.enabled=false");
         sb.append(String.format(" > %s", detectOutputFile.getAbsolutePath()));
 
         final String detectWrapperScriptString = sb.toString();
@@ -69,7 +70,7 @@ public class CalledFromDetectTest {
         System.out.printf("script file: %s\n", detectWrapperScriptFile.getAbsolutePath());
         FileUtils.write(detectWrapperScriptFile, detectWrapperScriptString, StandardCharsets.UTF_8);
         final String wrapperScriptOutput = TestUtils.execCmd(executionDir, detectWrapperScriptFile.getAbsolutePath(), FIVE_MINUTES_IN_MS, true, null);
-        System.out.printf("Wrapper script output:\n%s\n", wrapperScriptOutput);
+        System.out.printf("Wrapper script output (normally empty):\n%s\n", wrapperScriptOutput);
         final String detectOutputString = FileUtils.readFileToString(detectOutputFile, StandardCharsets.UTF_8);
         System.out.printf("Detect output: %s", detectOutputString);
 
