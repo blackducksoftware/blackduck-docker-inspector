@@ -214,28 +214,6 @@ in a file; for example, mydockerproperties.properties, and use:
 
 to point ${solution_name} to those property settings.
 
-### Running ${solution_name} on Open Container Initiative (OCI) images
-
-When given a Docker image, (--docker.image=repo:tag), ${solution_name} uses the
-[docker-java library](${docker_java_project_url})
-equivalent of [docker save](https://docs.docker.com/engine/reference/commandline/save/)
-to save the image to a tar file. In this scenario, ${solution_name}
-can pull, save, and inspect any image that can be pulled using a *docker pull* command.
-Since ${solution_name} uses the docker-java library, the Docker client executable does not actually need
-to be installed.
-
-When given a saved Docker tarfile, (--docker.tar=image.tar), ${solution_name} requires a
-[Docker Image Specification v1.2.0](https://github.com/moby/moby/blob/master/image/spec/v1.2.md)
-format file. To inspect [Open Container Initiative (OCI)](https://www.opencontainers.org/)
-format image files, Synopsys recommends using [skopeo](https://github.com/containers/skopeo)
-to convert them to Docker Image Specification v1.2.0 files. For example, the command:
-
-    skopeo copy oci:alpine-oci docker-archive:alpine-docker.tar
-    
-converts an OCI image directory alpine-oci to a Docker Image Specification v1.2.0 format file
-alpine-docker.tar that ${solution_name} can process when passed in with the
---docker.tar=alpine-docker.tar command line argument.
-
 ### Running ${detect_product_name} on a project directory that exists within a Docker image
 
 When you want to run ${detect_product_name} on a directory that exists within a Docker image, you can use the following approach:
