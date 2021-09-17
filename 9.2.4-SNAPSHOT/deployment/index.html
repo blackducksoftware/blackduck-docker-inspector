@@ -36,7 +36,7 @@
     
     
       
-        <title>Deployment - Black Duck Docker Inspector</title>
+        <title>Deploying - Black Duck Docker Inspector</title>
       
     
     
@@ -101,7 +101,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                Deployment
+                Deploying
               
             </span>
           
@@ -172,6 +172,232 @@
   <li class="md-nav__item">
     <a href=".." title="Documentation" class="md-nav__link">
       <b>Documentation</b>
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../overview/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../quickstart/" title="Quick start" class="md-nav__link">
+      Quick start
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../architecture/" title="Architecture" class="md-nav__link">
+      Architecture
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../running/" title="Running" class="md-nav__link">
+      Running
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../properties/" title="Properties" class="md-nav__link">
+      Properties
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../advanced/" title="Advanced" class="md-nav__link">
+      Advanced
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Deploying
+      </label>
+    
+    <a href="./" title="Deploying" class="md-nav__link md-nav__link--active">
+      Deploying
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#deployment-overview" class="md-nav__link">
+    Deployment overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#important-notes-regarding-deployment-sample-code" class="md-nav__link">
+    Important notes regarding deployment sample code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-host-mode-on-a-server-or-vm-with-docker" class="md-nav__link">
+    Using host mode on a server or VM with Docker
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-container-mode-with-docker-or-a-container-orchestration-platform-such-as-kubernetes-openshift-and-others" class="md-nav__link">
+    Using container mode with Docker or a container orchestration platform such as Kubernetes, OpenShift, and others
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#image-inspector-services" class="md-nav__link">
+    Image Inspector Services
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment-sample-for-docker-using-persistent-image-inspector-services" class="md-nav__link">
+    Deployment sample for Docker using persistent image inspector services
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment-sample-for-kubernetes" class="md-nav__link">
+    Deployment sample for Kubernetes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment-sample-for-openshift" class="md-nav__link">
+    Deployment sample for OpenShift
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment-sample-for-travis-ci" class="md-nav__link">
+    Deployment sample for Travis CI
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment-sample-for-gitlab-ci" class="md-nav__link">
+    Deployment sample for GitLab CI
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment-sample-for-circle-ci" class="md-nav__link">
+    Deployment sample for Circle CI
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment-sample-for-docker-with-synopsys-detect-running-in-a-container" class="md-nav__link">
+    Deployment sample for Docker with Synopsys Detect running in a container
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-black-duck-docker-inspector-for-your-docker-registry" class="md-nav__link">
+    Configuring Black Duck Docker Inspector for your Docker registry
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../troubleshooting/" title="Troubleshooting" class="md-nav__link">
+      Troubleshooting
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../releasenotes/" title="Release notes" class="md-nav__link">
+      Release notes
     </a>
   </li>
 
@@ -302,7 +528,7 @@
               
                 
                 
-                  <h1>Deployment</h1>
+                  <h1>Deploying</h1>
                 
                 <h3 id="deployment-overview">Deployment overview</h3>
 <p>Black Duck Docker Inspector can be run in either of the following modes:</p>
@@ -424,6 +650,41 @@ put the properties in a file; for example, <em>mydockerproperties.properties</em
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../advanced/" title="Advanced" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Advanced
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../troubleshooting/" title="Troubleshooting" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Troubleshooting
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

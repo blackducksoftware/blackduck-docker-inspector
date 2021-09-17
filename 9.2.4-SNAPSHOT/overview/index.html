@@ -176,6 +176,216 @@
   </li>
 
     
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Overview
+      </label>
+    
+    <a href="./" title="Overview" class="md-nav__link md-nav__link--active">
+      Overview
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#modes-of-operation" class="md-nav__link">
+    Modes of operation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#host-mode" class="md-nav__link">
+    Host mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#container-mode" class="md-nav__link">
+    Container mode
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    Requirements
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    Getting started
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#invoking-from-synopsys-detect" class="md-nav__link">
+    Invoking from Synopsys Detect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#invoking-black-duck-docker-inspector-directly" class="md-nav__link">
+    Invoking Black Duck Docker Inspector directly
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#passing-arguments-to-black-duck-docker-inspector" class="md-nav__link">
+    Passing arguments to Black Duck Docker Inspector
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#help" class="md-nav__link">
+    Help
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../quickstart/" title="Quick start" class="md-nav__link">
+      Quick start
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../architecture/" title="Architecture" class="md-nav__link">
+      Architecture
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../running/" title="Running" class="md-nav__link">
+      Running
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../properties/" title="Properties" class="md-nav__link">
+      Properties
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../advanced/" title="Advanced" class="md-nav__link">
+      Advanced
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../deployment/" title="Deploying" class="md-nav__link">
+      Deploying
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../troubleshooting/" title="Troubleshooting" class="md-nav__link">
+      Troubleshooting
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../releasenotes/" title="Release notes" class="md-nav__link">
+      Release notes
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -336,6 +546,7 @@ refer to <a href="../deployment/">Deploying</a>.</p>
 <li>Three available ports for the image inspector services. By default, these ports are 9000, 9001, and 9002.</li>
 <li>The environment must be set up such that files created by Black Duck Docker Inspector are readable by all. On Linux, this means an appropriate umask value (for example, 002 or 022 would work). On Windows, this means the working directory must be readable by all.</li>
 <li>Files passed to Black Duck Docker Inspector via the <em>docker.tar</em> property must be readable by all.</li>
+<li>Images passed to Black Duck Docker Inspector via the <em>docker.tar</em> property must conform to <a href="https://github.com/moby/moby/blob/master/image/spec/v1.2.md">Docker Image Specification v1.2.0</a> (the format produced by the "docker save" command).</li>
 <li>When invoking Black Duck Docker Inspector using blackduck-docker-inspector.sh:<ul>
 <li>curl</li>
 <li>bash</li>
@@ -432,6 +643,41 @@ using tools like mdless (https://brettterpstra.com/2015/08/21/mdless-better-mark
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href=".." title="Documentation" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                <b>Documentation</b>
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../quickstart/" title="Quick start" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Quick start
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
