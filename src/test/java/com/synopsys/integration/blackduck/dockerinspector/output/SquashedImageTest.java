@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import com.synopsys.integration.blackduck.imageinspector.api.name.ImageNameResolver;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
@@ -36,7 +37,7 @@ public class SquashedImageTest {
         Config config = Mockito.mock(Config.class);
         Mockito.when(config.getWorkingDirPath()).thenReturn(testWorkingDir.getCanonicalPath());
         ProgramPaths programPaths = new ProgramPaths(config, new ProcessId());
-        dockerClientManager = new DockerClientManager(fileOperations, config, imageTarFilename, programPaths);
+        dockerClientManager = new DockerClientManager(fileOperations, new ImageNameResolver(), config, imageTarFilename, programPaths);
 
         squashedImage = new SquashedImage();
         squashedImage.setDockerClientManager(dockerClientManager);

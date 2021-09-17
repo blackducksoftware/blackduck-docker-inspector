@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 
+import com.synopsys.integration.blackduck.imageinspector.api.name.ImageNameResolver;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.NameFileFilter;
 import org.apache.commons.io.filefilter.TrueFileFilter;
@@ -88,7 +89,7 @@ public class OutputTest {
 
         ImageTarFilename imageTarFilename = new ImageTarFilename();
         FileOperations fileOperations = new FileOperations();
-        DockerClientManager dockerClientManager = new DockerClientManager(fileOperations, config, imageTarFilename, programPaths);
+        DockerClientManager dockerClientManager = new DockerClientManager(fileOperations, new ImageNameResolver(), config, imageTarFilename, programPaths);
         SquashedImage squashedImage = new SquashedImage();
         squashedImage.setFileOperations(fileOperations);
         squashedImage.setDockerClientManager(dockerClientManager);
