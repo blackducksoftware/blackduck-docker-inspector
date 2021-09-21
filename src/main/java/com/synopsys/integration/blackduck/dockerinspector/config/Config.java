@@ -169,7 +169,7 @@ public class Config {
     @Value("${docker.image:}")
     private String dockerImage = "";
 
-    @ValueDescription(description = "The platform (shown as 'platform' field in 'docker manifest inspect <image>' output) of the target image. You must also provide the target image (via docker.image) when using this property.  Note: when providing a platform, you may provide either the target operating system (os), the target architecture, or os/architecture.", group = Config.GROUP_PUBLIC)
+    @ValueDescription(description = "The platform (shown as 'platform' field in 'docker manifest inspect {image}' output) of the target image Docker Inspector should pull. You must also provide the target image (via docker.image) when using this property.  Note: when providing a platform, you may provide either the target operating system (os), the target architecture, or os/architecture.", group = Config.GROUP_PUBLIC)
     @Value("${docker.image.platform:}")
     private String dockerImagePlatform = "";
 

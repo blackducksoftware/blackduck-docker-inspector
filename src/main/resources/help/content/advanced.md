@@ -276,3 +276,17 @@ If you want to avoid /tmp, you could relocate all three by doing something simil
 export DOCKER_INSPECTOR_JAR_DIR=/opt/tmp/jar
 ./${script_name} --working.dir.path=/opt/tmp/working --shared.dir.path.local=/opt/tmp/shared ...
 ````
+
+### OCI Image support
+
+${solution_name} supports [OCI image](https://github.com/opencontainers/image-spec/blob/main/spec.md) archives (.tar files)
+passed to it via the docker.tar property.
+
+${solution_name} derives the image repo:tag value for each manifest in the index.json file from an
+annotation with key 'org.opencontainers.image.ref.name' if it is present.
+
+If the OCI archive contains multiple images, ${solution_name} constructs the target repo:tag from the values of properties docker.image.repo
+and docker.image.tag (if docker.image.tag is not set it defaults to "latest"), and looks for a manifest annotation with key 'org.opencontainers.image.ref.name'
+that has value matching the constructed target repo:tag. If a match is found, ${solution_name} inspects the matching image. If no match is found, or docker.image.repo
+is not set, ${solution_name} fails.
+
