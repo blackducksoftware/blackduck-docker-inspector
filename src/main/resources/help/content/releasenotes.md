@@ -1,4 +1,4 @@
-#### Version 9.2.4
+#### Version 9.3.0
 
 ##### New feature
 * Added support for OCI images provided to ${solution_name} using the *docker..tar* property.
