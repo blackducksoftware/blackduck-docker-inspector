@@ -173,7 +173,7 @@ public class Config {
     @Value("${docker.image.platform:}")
     private String dockerImagePlatform = "";
 
-    @ValueDescription(description = "Docker tarfile path", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Docker or OCI image tarfile path", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${docker.tar:}")
     private String dockerTar = "";
 

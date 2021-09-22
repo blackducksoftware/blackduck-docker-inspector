@@ -1,3 +1,11 @@
+#### Version 9.2.4
+
+##### New feature
+* Added support for OCI images provided to ${solution_name} using the *docker..tar* property.
+
+##### Resolved issue
+* (IDOCKER-742) Resolved an issue that caused ${solution_name} to fail to find the target image (requested using the *docker.image.repo* property) in a multi-image .tar file when the *docker.image.repo* value includes the registry prefix (e.g. "docker.io/").
+
 #### Version 9.2.3
 
 ##### Resolved issue
