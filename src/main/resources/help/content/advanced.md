@@ -196,6 +196,13 @@ There are also other ways to configure docker-java. For more information on conf
 (and therefore ${solution_name}) for your Docker registry,
 refer to the [docker-java configuration documentation](${docker_java_project_url}/blob/master/docs/getting_started.md).
 
+For example, one way to configure your Docker registry username and password is to create a file
+in your home directory named *.docker-java.properties* that configures username and password:
+````
+registry.username=mydockerhubusername
+registry.password=mydockerhubpassword
+````
+
 If you need to override the DOCKER_HOST value, set property *use.platform.default.docker.host* to false.
 When *use.platform.default.docker.host* is set to false,
 ${solution_name} does not override any of the configuration settings in the code,
@@ -205,14 +212,6 @@ and system environment, are available to you.
 When *use.platform.default.docker.host* is set to true (the default value) *and* ${solution_name} is running
 on Windows, ${solution_name} overrides only the DOCKER_HOST value
 (setting it to "npipe:////./pipe/docker_engine").
-
-To use system properties which are normally set using java -D,
-and if you are calling ${solution_name} from ${detect_product_name}, you must put the properties
-in a file; for example, mydockerproperties.properties, and use:
-
-    --detect.docker.passthrough.system.properties.path=mydockerproperties.properties
-
-to point ${solution_name} to those property settings.
 
 ### Running ${detect_product_name} on a project directory that exists within a Docker image
 
