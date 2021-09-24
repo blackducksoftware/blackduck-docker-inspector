@@ -757,6 +757,12 @@ The docker-java library can often be configured the same way as the Docker comma
 <p>There are also other ways to configure docker-java. For more information on configuring docker-java
 (and therefore Black Duck Docker Inspector) for your Docker registry,
 refer to the <a href="https://github.com/docker-java/docker-java/blob/master/docs/getting_started.md">docker-java configuration documentation</a>.</p>
+<p>For example, one way to configure your Docker registry username and password is to create a file
+in your home directory named <em>.docker-java.properties</em> that configures username and password:</p>
+<pre><code>registry.username=mydockerhubusername
+registry.password=mydockerhubpassword
+</code></pre>
+
 <p>If you need to override the DOCKER_HOST value, set property <em>use.platform.default.docker.host</em> to false.
 When <em>use.platform.default.docker.host</em> is set to false,
 Black Duck Docker Inspector does not override any of the configuration settings in the code,
@@ -765,12 +771,6 @@ and system environment, are available to you.</p>
 <p>When <em>use.platform.default.docker.host</em> is set to true (the default value) <em>and</em> Black Duck Docker Inspector is running
 on Windows, Black Duck Docker Inspector overrides only the DOCKER_HOST value
 (setting it to "npipe:////./pipe/docker_engine").</p>
-<p>To use system properties which are normally set using java -D,
-and if you are calling Black Duck Docker Inspector from Synopsys Detect, you must put the properties
-in a file; for example, mydockerproperties.properties, and use:</p>
-<pre><code>--detect.docker.passthrough.system.properties.path=mydockerproperties.properties
-</code></pre>
-<p>to point Black Duck Docker Inspector to those property settings.</p>
 <h3 id="running-synopsys-detect-on-a-project-directory-that-exists-within-a-docker-image">Running Synopsys Detect on a project directory that exists within a Docker image</h3>
 <p>When you want to run Synopsys Detect on a directory that exists within a Docker image, you can use the following approach:
 1. Run Synopsys Detect on the image to generate the container filesystem for the image.
