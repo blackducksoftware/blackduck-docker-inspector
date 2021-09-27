@@ -99,10 +99,22 @@ def templatePath = "docs/templates"
 def staticPath = "docs/static"
 
 task docs() {
+    dependsOn build
     doLast {
         def output = file(outputPath)
         exec {
             commandLine 'mkdocs', 'build'
+            workingDir "docs"
+        }
+    }
+}
+
+task servedocs() {
+    dependsOn docs
+
+    doLast {
+        exec {
+            commandLine 'mkdocs', 'serve'
             workingDir "docs"
         }
     }
