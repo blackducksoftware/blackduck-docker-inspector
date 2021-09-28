@@ -82,9 +82,10 @@ task docsSiteClean(type: Delete) {
 
 task docsClean(dependsOn: [docsSiteClean, docsGeneratedClean]) {}
 
-task docsPrep(type: Exec) {
-    ignoreExitValue true
-    commandLine 'mkdir', 'docs/generated'
+task docsPrep() {
+    doLast {
+	project.file('docs/generated').mkdirs()
+    }
 }
 
 task generateHelpMarkdown(type: Exec, dependsOn: docsPrep) {
@@ -235,22 +236,8 @@ task buildTestTarfiles(dependsOn: [buildTestDockerTarfile, buildWhTestDockerTarf
 
 task testPrep(dependsOn: [build, buildTestTarfiles, buildScript, createVersionedScript]) {
     doLast {
-        exec {
-            ignoreExitValue true
-            commandLine 'mkdir', 'test'
-        }
-        exec {
-            ignoreExitValue true
-            commandLine 'mkdir', 'test/containerShared'
-        }
-        exec {
-            ignoreExitValue true
-            commandLine 'mkdir', 'test/containerShared/target'
-        }
-        exec {
-            ignoreExitValue true
-            commandLine 'mkdir', 'test/containerShared/output'
-        }
+	project.file('test/containerShared/target').mkdirs()
+	project.file('test/containerShared/output').mkdirs()
     }
 }
 
