@@ -72,14 +72,12 @@ task buildScript(type: Copy) {
     filter(ReplaceTokens, tokens: [VERSION: version, INSPECTOR_IMAGE_FAMILY: project.ext.inspectorImageFamily])
 }
 
-task docsGeneratedClean(type: Exec) {
-    ignoreExitValue true
-    commandLine 'rm', '-rf', 'docs/generated'
+task docsGeneratedClean(type: Delete) {
+    delete 'docs/generated'
 }
 
-task docsSiteClean(type: Exec) {
-    ignoreExitValue true
-    commandLine 'rm', '-rf', 'docs/site'
+task docsSiteClean(type: Delete) {
+    delete 'docs/site'
 }
 
 task docsClean(dependsOn: [docsSiteClean, docsGeneratedClean]) {}
@@ -256,9 +254,8 @@ task testPrep(dependsOn: [build, buildTestTarfiles, buildScript, createVersioned
     }
 }
 
-task cleanExtras(type: Exec, dependsOn: docsGeneratedClean) {
-    ignoreExitValue true
-    commandLine 'rm', '-rf', 'test', 'out'
+task cleanExtras(type: Delete, dependsOn: docsGeneratedClean) {
+    delete 'test', 'out'
 }
 
 
