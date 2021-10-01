@@ -6,6 +6,8 @@ import com.synopsys.integration.blackduck.dockerinspector.programversion.Program
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 
@@ -36,7 +38,7 @@ public class CalledFromDetectTest {
     @Test
     public void test() throws IOException, InterruptedException, IntegrationException {
 
-        final String cmdGetDetectScriptString = "curl -s https://detect.synopsys.com/detect7.sh";
+        final String cmdGetDetectScriptString = "curl --insecure -s https://detect.synopsys.com/detect7.sh";
         final String detectScriptString = TestUtils.execCmd(executionDir, cmdGetDetectScriptString, ONE_MINUTE_IN_MS, true, null);
         final File detectScriptFile = File.createTempFile("latestDetect", ".sh");
         detectScriptFile.setExecutable(true);
@@ -69,7 +71,9 @@ public class CalledFromDetectTest {
         detectScriptFile.deleteOnExit();
         System.out.printf("script file: %s\n", detectWrapperScriptFile.getAbsolutePath());
         FileUtils.write(detectWrapperScriptFile, detectWrapperScriptString, StandardCharsets.UTF_8);
-        final String wrapperScriptOutput = TestUtils.execCmd(executionDir, detectWrapperScriptFile.getAbsolutePath(), FIVE_MINUTES_IN_MS, true, null);
+        Map<String, String> env = new HashMap<>(1);
+        env.put("DETECT_CURL_OPTS", "--insecure");
+        final String wrapperScriptOutput = TestUtils.execCmd(executionDir, detectWrapperScriptFile.getAbsolutePath(), FIVE_MINUTES_IN_MS, true, env);
         System.out.printf("Wrapper script output (normally empty):\n%s\n", wrapperScriptOutput);
         final String detectOutputString = FileUtils.readFileToString(detectOutputFile, StandardCharsets.UTF_8);
         System.out.printf("Detect output: %s", detectOutputString);
