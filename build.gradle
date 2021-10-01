@@ -16,7 +16,7 @@ buildscript {
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
 project.ext.inspectorImageVersion = "5.0.9"
 
-version = '9.3.0-SNAPSHOT'
+version = '9.3.1-SNAPSHOT'
 
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
@@ -72,21 +72,20 @@ task buildScript(type: Copy) {
     filter(ReplaceTokens, tokens: [VERSION: version, INSPECTOR_IMAGE_FAMILY: project.ext.inspectorImageFamily])
 }
 
-task docsGeneratedClean(type: Exec) {
-    ignoreExitValue true
-    commandLine 'rm', '-rf', 'docs/generated'
+task docsGeneratedClean(type: Delete) {
+    delete 'docs/generated'
 }
 
-task docsSiteClean(type: Exec) {
-    ignoreExitValue true
-    commandLine 'rm', '-rf', 'docs/site'
+task docsSiteClean(type: Delete) {
+    delete 'docs/site'
 }
 
 task docsClean(dependsOn: [docsSiteClean, docsGeneratedClean]) {}
 
-task docsPrep(type: Exec) {
-    ignoreExitValue true
-    commandLine 'mkdir', 'docs/generated'
+task docsPrep() {
+    doLast {
+	project.file('docs/generated').mkdirs()
+    }
 }
 
 task generateHelpMarkdown(type: Exec, dependsOn: docsPrep) {
@@ -99,10 +98,22 @@ def templatePath = "docs/templates"
 def staticPath = "docs/static"
 
 task docs() {
+    dependsOn build
     doLast {
         def output = file(outputPath)
         exec {
             commandLine 'mkdocs', 'build'
+            workingDir "docs"
+        }
+    }
+}
+
+task servedocs() {
+    dependsOn docs
+
+    doLast {
+        exec {
+            commandLine 'mkdocs', 'serve'
             workingDir "docs"
         }
     }
@@ -225,28 +236,13 @@ task buildTestTarfiles(dependsOn: [buildTestDockerTarfile, buildWhTestDockerTarf
 
 task testPrep(dependsOn: [build, buildTestTarfiles, buildScript, createVersionedScript]) {
     doLast {
-        exec {
-            ignoreExitValue true
-            commandLine 'mkdir', 'test'
-        }
-        exec {
-            ignoreExitValue true
-            commandLine 'mkdir', 'test/containerShared'
-        }
-        exec {
-            ignoreExitValue true
-            commandLine 'mkdir', 'test/containerShared/target'
-        }
-        exec {
-            ignoreExitValue true
-            commandLine 'mkdir', 'test/containerShared/output'
-        }
+	project.file('test/containerShared/target').mkdirs()
+	project.file('test/containerShared/output').mkdirs()
     }
 }
 
-task cleanExtras(type: Exec, dependsOn: docsGeneratedClean) {
-    ignoreExitValue true
-    commandLine 'rm', '-rf', 'test', 'out'
+task cleanExtras(type: Delete, dependsOn: docsGeneratedClean) {
+    delete 'test', 'out'
 }
 
 
