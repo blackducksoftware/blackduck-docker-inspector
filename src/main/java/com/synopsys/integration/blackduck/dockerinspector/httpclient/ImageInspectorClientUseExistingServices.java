@@ -21,6 +21,7 @@ import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.httpclient.response.SimpleResponse;
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.exception.IntegrationException;
+import com.synopsys.integration.rest.RestConstants;
 import com.synopsys.integration.rest.client.IntHttpClient;
 
 @Component
@@ -73,6 +74,11 @@ public class ImageInspectorClientUseExistingServices extends ImageInspectorClien
             organizeComponentsByLayer, includeRemovedComponents, cleanup,
             platformTopLayerId,
             targetLinuxDistro);
+
+        if (response.getStatusCode() >= RestConstants.BAD_REQUEST_400) {
+            throw new IntegrationException(String.format("getBdio request returned status: %d: %s", response.getStatusCode(), response.getBody()));
+        }
+
         return response.getBody();
     }
 
