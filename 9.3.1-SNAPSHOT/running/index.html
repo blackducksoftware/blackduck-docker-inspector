@@ -517,7 +517,6 @@ the Black Duck Docker Inspector .jar and execute it directly.</p>
 <p>To execute the Black Duck Docker Inspector .jar:</p>
 <pre><code>java -jar blackduck-docker-inspector-{version}.jar {Black Duck Docker Inspector arguments}
 </code></pre>
-
 <h4 id="docker-file-sharing-settings">Docker file sharing settings</h4>
 <p>Black Duck Docker Inspector requires the ability to share directories with the image inspector containers.
 It shares a directory with image inspector containers by mounting it as a volume.
@@ -581,16 +580,13 @@ version of Black Duck Docker Inspector. However, sometimes it is better to run t
 <p>Use the following Java command to run it:</p>
 <pre><code>java -jar blackduck-docker-inspector-{version}.jar {Black Duck Docker Inspector arguments}
 </code></pre>
-
 <h3 id="inspecting-an-image-by-image-repotag">Inspecting an image by image repo:tag</h3>
 <p>To run Black Duck Docker Inspector on a Docker image from your local cache or a registry:</p>
 <pre><code>./blackduck-docker-inspector.sh --docker.image={repo}:{tag}
 </code></pre>
-
 <p>Or:</p>
 <pre><code>java -jar blackduck-docker-inspector-{version}.jar --docker.image={repo}:{tag}
 </code></pre>
-
 <p>If you omit the :{tag}, it defaults to :latest.</p>
 <h3 id="inspecting-an-image-saved-to-a-tar-file">Inspecting an image saved to a .tar file</h3>
 <p>To run Black Duck Docker Inspector on a Docker image .tar file:</p>
