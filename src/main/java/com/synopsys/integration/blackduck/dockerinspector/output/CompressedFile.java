@@ -14,10 +14,11 @@ import java.io.IOException;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
+import com.synopsys.integration.blackduck.imageinspector.image.common.archive.ImageLayerArchiveExtractor;
+import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.synopsys.integration.blackduck.imageinspector.imageformat.docker.DockerLayerTarExtractor;
 
 public class CompressedFile {
     private static final Logger logger = LoggerFactory.getLogger(CompressedFile.class);
@@ -28,8 +29,9 @@ public class CompressedFile {
     }
 
     public static void unTarFile(final File tarFile, final File destinationDir) throws IOException {
-        final DockerLayerTarExtractor tarExtractor = new DockerLayerTarExtractor();
-        tarExtractor.extractLayerTarToDir(tarFile, destinationDir);
+        // TODO this should call a simpler method, not an image-archive-specific method
+        final ImageLayerArchiveExtractor tarExtractor = new ImageLayerArchiveExtractor();
+        tarExtractor.extractLayerTarToDir(new FileOperations(), tarFile, destinationDir);
     }
 
     public static void gZipFile(final File fileToCompress, final File compressedFile) throws IOException {

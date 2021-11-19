@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+import com.synopsys.integration.blackduck.imageinspector.image.common.RepoTag;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -76,15 +77,17 @@ public class DockerClientManager {
     private static final String CONTAINER_OS_LABEL_KEY = "os";
     private final Logger logger = LoggerFactory.getLogger(DockerClientManager.class);
     private final FileOperations fileOperations;
+    private final ImageNameResolver imageNameResolver;
     private final Config config;
     private final ImageTarFilename imageTarFilename;
     private final ProgramPaths programPaths;
     private final DockerClient dockerClient;
 
     @Autowired
-    public DockerClientManager(FileOperations fileOperations, Config config, ImageTarFilename imageTarFilename,
+    public DockerClientManager(FileOperations fileOperations, ImageNameResolver imageNameResolver, Config config, ImageTarFilename imageTarFilename,
         ProgramPaths programPaths) {
         this.fileOperations = fileOperations;
+        this.imageNameResolver = imageNameResolver;
         this.config = config;
         this.imageTarFilename = imageTarFilename;
         this.programPaths = programPaths;
@@ -125,10 +128,9 @@ public class DockerClientManager {
         if (repoTags == null || repoTags.isEmpty()) {
             throw new IntegrationException(String.format("Unable to get image name:tag for image ID %s", imageId));
         }
-
-        ImageNameResolver resolver = new ImageNameResolver(repoTags.get(0));
-        String imageName = resolver.getNewImageRepo().get();
-        String tagName = resolver.getNewImageTag().get();
+        RepoTag resolvedRepoTag = imageNameResolver.resolve(repoTags.get(0), null, null);
+        String imageName = resolvedRepoTag.getRepo().orElse("");
+        String tagName = resolvedRepoTag.getTag().orElse("");
         logger.debug(String.format("Converted image ID %s to image name:tag %s:%s", imageId, imageName, tagName));
         File imageTarFile = saveImageToDir(imageTarDirectory, imageTarFilename.deriveImageTarFilenameFromImageTag(imageName, tagName), imageName, tagName);
         return new ImageTarWrapper(imageTarFile, imageName, tagName);

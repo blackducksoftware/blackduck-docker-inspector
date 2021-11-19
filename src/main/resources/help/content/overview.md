@@ -57,7 +57,8 @@ Requirements for ${solution_name} are:
 * Java (JRE) versions 8, 11, or 15.
 * Three available ports for the image inspector services. By default, these ports are 9000, 9001, and 9002.
 * The environment must be set up such that files created by ${solution_name} are readable by all. On Linux, this means an appropriate umask value (for example, 002 or 022 would work). On Windows, this means the working directory must be readable by all.
-* Files passed to ${solution_name} via the *docker.tar* property must be readable by all.
+* Image files passed to ${solution_name} via the *docker.tar* property must be readable by all.
+* Image files passed to ${solution_name} via the *docker.tar* property must be .tar files, and the contents must conform to either of the following image format specifications: 1. [Docker Image Specification v1.2.0](https://github.com/moby/moby/blob/master/image/spec/v1.2.md) (the format produced by the "docker save" command), or 2. [Open Container Initiative Image Format Specification](https://github.com/opencontainers/image-spec/blob/main/spec.md).
 * When invoking ${solution_name} using ${script_name}:
     - curl
     - bash

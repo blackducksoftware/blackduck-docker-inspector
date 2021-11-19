@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import com.synopsys.integration.blackduck.imageinspector.api.name.ImageNameResolver;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -45,7 +46,7 @@ public class DockerClientManagerTest {
         config = Mockito.mock(Config.class);
         programPaths = Mockito.mock(ProgramPaths.class);
         FileOperations fileOperations = new FileOperations();
-        dockerClientManager = new DockerClientManager(fileOperations, config, new ImageTarFilename(), programPaths);
+        dockerClientManager = new DockerClientManager(fileOperations, new ImageNameResolver(), config, new ImageTarFilename(), programPaths);
     }
 
     @AfterAll

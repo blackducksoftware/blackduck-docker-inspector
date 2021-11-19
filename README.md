@@ -18,4 +18,9 @@ You can download the latest source from GitHub: https://github.com/blackducksoft
 ## User documentation ##
 The documentation for blackduck-docker-inspector can be found [here](https://blackducksoftware.github.io/blackduck-docker-inspector/latest/overview/)
 
+## Getting help
+
+Additional information and help is available from the
+[Synopsys Software Integrity Community](https://community.synopsys.com/s/).
+
 

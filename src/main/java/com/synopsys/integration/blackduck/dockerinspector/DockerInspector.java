@@ -15,6 +15,7 @@ import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 
+import com.synopsys.integration.blackduck.imageinspector.image.common.RepoTag;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -205,9 +206,14 @@ public class DockerInspector {
 
     private void initImageName() {
         logger.debug(String.format("initImageName(): dockerImage: %s, dockerTar: %s", config.getDockerImage(), config.getDockerTar()));
-        ImageNameResolver resolver = new ImageNameResolver(config.getDockerImage());
-        resolver.getNewImageRepo().ifPresent(repoName -> config.setDockerImageRepo(repoName));
-        resolver.getNewImageTag().ifPresent(tagName -> config.setDockerImageTag(tagName));
+        ImageNameResolver resolver = new ImageNameResolver();
+        RepoTag resolvedRepoTag = resolver.resolve(config.getDockerImage(), null, null);
+        if (resolvedRepoTag.getRepo().isPresent()) {
+            config.setDockerImageRepo(resolvedRepoTag.getRepo().get());
+        }
+        if (resolvedRepoTag.getTag().isPresent()) {
+            config.setDockerImageTag(resolvedRepoTag.getTag().get());
+        }
         logger.debug(String.format("initImageName(): final: dockerImage: %s; dockerImageRepo: %s; dockerImageTag: %s", config.getDockerImage(), config.getDockerImageRepo(), config.getDockerImageTag()));
     }
 }

@@ -196,6 +196,13 @@ There are also other ways to configure docker-java. For more information on conf
 (and therefore ${solution_name}) for your Docker registry,
 refer to the [docker-java configuration documentation](${docker_java_project_url}/blob/master/docs/getting_started.md).
 
+For example, one way to configure your Docker registry username and password is to create a file
+in your home directory named *.docker-java.properties* that configures username and password:
+````
+registry.username=mydockerhubusername
+registry.password=mydockerhubpassword
+````
+
 If you need to override the DOCKER_HOST value, set property *use.platform.default.docker.host* to false.
 When *use.platform.default.docker.host* is set to false,
 ${solution_name} does not override any of the configuration settings in the code,
@@ -205,36 +212,6 @@ and system environment, are available to you.
 When *use.platform.default.docker.host* is set to true (the default value) *and* ${solution_name} is running
 on Windows, ${solution_name} overrides only the DOCKER_HOST value
 (setting it to "npipe:////./pipe/docker_engine").
-
-To use system properties which are normally set using java -D,
-and if you are calling ${solution_name} from ${detect_product_name}, you must put the properties
-in a file; for example, mydockerproperties.properties, and use:
-
-    --detect.docker.passthrough.system.properties.path=mydockerproperties.properties
-
-to point ${solution_name} to those property settings.
-
-### Running ${solution_name} on Open Container Initiative (OCI) images
-
-When given a Docker image, (--docker.image=repo:tag), ${solution_name} uses the
-[docker-java library](${docker_java_project_url})
-equivalent of [docker save](https://docs.docker.com/engine/reference/commandline/save/)
-to save the image to a tar file. In this scenario, ${solution_name}
-can pull, save, and inspect any image that can be pulled using a *docker pull* command.
-Since ${solution_name} uses the docker-java library, the Docker client executable does not actually need
-to be installed.
-
-When given a saved Docker tarfile, (--docker.tar=image.tar), ${solution_name} requires a
-[Docker Image Specification v1.2.0](https://github.com/moby/moby/blob/master/image/spec/v1.2.md)
-format file. To inspect [Open Container Initiative (OCI)](https://www.opencontainers.org/)
-format image files, Synopsys recommends using [skopeo](https://github.com/containers/skopeo)
-to convert them to Docker Image Specification v1.2.0 files. For example, the command:
-
-    skopeo copy oci:alpine-oci docker-archive:alpine-docker.tar
-    
-converts an OCI image directory alpine-oci to a Docker Image Specification v1.2.0 format file
-alpine-docker.tar that ${solution_name} can process when passed in with the
---docker.tar=alpine-docker.tar command line argument.
 
 ### Running ${detect_product_name} on a project directory that exists within a Docker image
 
@@ -298,3 +275,17 @@ If you want to avoid /tmp, you could relocate all three by doing something simil
 export DOCKER_INSPECTOR_JAR_DIR=/opt/tmp/jar
 ./${script_name} --working.dir.path=/opt/tmp/working --shared.dir.path.local=/opt/tmp/shared ...
 ````
+
+### OCI Image support
+
+${solution_name} supports [OCI image](https://github.com/opencontainers/image-spec/blob/main/spec.md) archives (.tar files)
+passed to it via the docker.tar property.
+
+${solution_name} derives the image repo:tag value for each manifest in the index.json file from an
+annotation with key 'org.opencontainers.image.ref.name' if it is present.
+
+If the OCI archive contains multiple images, ${solution_name} constructs the target repo:tag from the values of properties docker.image.repo
+and docker.image.tag (if docker.image.tag is not set it defaults to "latest"), and looks for a manifest annotation with key 'org.opencontainers.image.ref.name'
+that has value matching the constructed target repo:tag. If a match is found, ${solution_name} inspects the matching image. If no match is found, or docker.image.repo
+is not set, ${solution_name} fails.
+

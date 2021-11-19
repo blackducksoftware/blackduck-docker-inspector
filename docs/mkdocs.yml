@@ -15,12 +15,12 @@ theme:
 docs_dir: 'generated'
 nav:
      - <b>Documentation</b>: index.md
-#     - Overview: overview.md
-#     - Quick start: quickstart.md
-#     - Architecture: architecture.md
-#     - Running: running.md
-#     - Properties: properties.md
-#     - Advanced: advanced.md
-#     - Deploying: deployment.md
-#     - Troubleshooting: troubleshooting.md
-#     - Release notes: releasenotes.md
+     - Overview: overview.md
+     - Quick start: quickstart.md
+     - Architecture: architecture.md
+     - Running: running.md
+     - Properties: properties.md
+     - Advanced: advanced.md
+     - Deploying: deployment.md
+     - Troubleshooting: troubleshooting.md
+     - Release notes: releasenotes.md
