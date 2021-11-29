@@ -1,3 +1,8 @@
+#### Version 9.3.1
+
+##### Resolved issue
+* (IDETECT-2942) Resolved issue that caused ${solution_name} to try to read the body of a bad response from image inspector services without checking the response's status code to make sure it was a successful request. ${solution_name} now throws an exception if it receives a bad response.
+
 #### Version 9.3.0
 
 ##### New feature
