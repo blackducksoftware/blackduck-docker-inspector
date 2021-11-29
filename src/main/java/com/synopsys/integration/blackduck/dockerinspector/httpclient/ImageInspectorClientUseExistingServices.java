@@ -10,7 +10,6 @@ package com.synopsys.integration.blackduck.dockerinspector.httpclient;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashMap;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -69,14 +68,12 @@ public class ImageInspectorClientUseExistingServices extends ImageInspectorClien
         IntHttpClient httpClient = httpConnectionCreator
                                        .createRedirectingConnection(imageInspectorUri, serviceRequestTimeoutSeconds);
         checkServiceVersion(programVersion, imageInspectorServices, httpClient, imageInspectorUri);
-//        SimpleResponse response = restRequester.executeGetBdioRequest(httpClient, imageInspectorUri, containerPathToInputDockerTarfile,
-        ////            givenImageRepo, givenImageTag,
-        ////            containerPathToOutputFileSystemFile, containerFileSystemExcludedPaths,
-        ////            organizeComponentsByLayer, includeRemovedComponents, cleanup,
-        ////            platformTopLayerId,
-        ////            targetLinuxDistro);
-
-        SimpleResponse response = new SimpleResponse(400, new HashMap<>(), "");
+        SimpleResponse response = restRequester.executeGetBdioRequest(httpClient, imageInspectorUri, containerPathToInputDockerTarfile,
+            givenImageRepo, givenImageTag,
+            containerPathToOutputFileSystemFile, containerFileSystemExcludedPaths,
+            organizeComponentsByLayer, includeRemovedComponents, cleanup,
+            platformTopLayerId,
+            targetLinuxDistro);
 
         if (response.getStatusCode() >= RestConstants.BAD_REQUEST_400) {
             throw new IntegrationException(String.format("getBdio request returned status: %d: %s", response.getStatusCode(), response.getBody()));
