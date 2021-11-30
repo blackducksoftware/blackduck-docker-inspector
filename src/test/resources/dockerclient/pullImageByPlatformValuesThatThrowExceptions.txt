@@ -1,5 +1,5 @@
-arm, false
+amd64, false
 linux, false
-linux/arm, false
-arm/linux, true
+linux/amd64, false
+amd64/linux, true
 platform, true
