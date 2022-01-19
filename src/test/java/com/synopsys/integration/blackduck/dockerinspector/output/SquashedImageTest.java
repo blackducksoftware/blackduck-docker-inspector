@@ -8,9 +8,12 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collection;
 
 import com.synopsys.integration.blackduck.imageinspector.api.name.ImageNameResolver;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.IOFileFilter;
+import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -77,6 +80,14 @@ public class SquashedImageTest {
         File layerTar = layerDir.listFiles()[0];
         File layerUnpackedDir = new File(squashingWorkingDir, "squashedImageLayerUnpacked");
         CompressedFile.unTarFile(layerTar, layerUnpackedDir);
+
+        // TODO TEMP
+        Collection<File> filesFound = FileUtils.listFilesAndDirs(layerUnpackedDir, TrueFileFilter.INSTANCE, TrueFileFilter.INSTANCE);
+        System.out.printf("Contents of %s:\n", layerUnpackedDir.getAbsolutePath());
+        for (File foundFile : filesFound) {
+            System.out.printf("%s (symlink: %b)\n", foundFile.getAbsolutePath(), Files.isSymbolicLink(foundFile.toPath()));
+        }
+        ////////////
 
         // Verify that the symlink made it into the squashed image
         File symLink = new File(layerUnpackedDir, "usr/share/apk/keys/aarch64/alpine-devel@lists.alpinelinux.org-58199dcc.rsa.pub");
