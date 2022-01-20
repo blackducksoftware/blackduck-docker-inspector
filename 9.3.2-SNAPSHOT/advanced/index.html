@@ -762,7 +762,6 @@ in your home directory named <em>.docker-java.properties</em> that configures us
 <pre><code>registry.username=mydockerhubusername
 registry.password=mydockerhubpassword
 </code></pre>
-
 <p>If you need to override the DOCKER_HOST value, set property <em>use.platform.default.docker.host</em> to false.
 When <em>use.platform.default.docker.host</em> is set to false,
 Black Duck Docker Inspector does not override any of the configuration settings in the code,
@@ -794,7 +793,6 @@ Include the following Black Duck Docker Inspector properties:</li>
 --output.include.containerfilesystem=true  # tell DI to output the container file system
 --output.path={your output dir}            # tell DI where to put the output
 </code></pre>
-
 <ol>
 <li>Locate the container file system in the output directory (*.tar.gz) and untar it.</li>
 <li>cd into the directory within the untared container file system that you want to scan.</li>
@@ -808,7 +806,6 @@ to exclude the <em>/etc</em> and <em>/usr/bin</em> directories from the signatur
 could run Synopsys Detect like this:</p>
 <pre><code>./detect.sh --detect.docker.image=ubuntu:latest --detect.docker.passthrough.output.containerfilesystem.excluded.paths=/etc,/usr/bin
 </code></pre>
-
 <h3 id="relocating-black-duck-docker-inspectors-working-directories">Relocating Black Duck Docker Inspector's working directories</h3>
 <p>Docker Inspector uses 3 directories:</p>
 <ol>
@@ -824,7 +821,6 @@ If you want to avoid /tmp, you could relocate all three by doing something simil
 export DOCKER_INSPECTOR_JAR_DIR=/opt/tmp/jar
 ./blackduck-docker-inspector.sh --working.dir.path=/opt/tmp/working --shared.dir.path.local=/opt/tmp/shared ...
 </code></pre>
-
 <h3 id="oci-image-support">OCI Image support</h3>
 <p>Black Duck Docker Inspector supports <a href="https://github.com/opencontainers/image-spec/blob/main/spec.md">OCI image</a> archives (.tar files)
 passed to it via the docker.tar property.</p>
