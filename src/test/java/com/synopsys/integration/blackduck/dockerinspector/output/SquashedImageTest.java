@@ -63,6 +63,16 @@ public class SquashedImageTest {
         File unpackedSquashedImageDir = new File(testWorkingDir, "squashedImageUnpacked");
         unpackedSquashedImageDir.mkdirs();
         CompressedFile.gunZipUnTarFile(squashedImageTarGz, tempTarFile, unpackedSquashedImageDir);
+
+
+        // TODO TEMP
+        Collection<File> filesFound = FileUtils.listFilesAndDirs(unpackedSquashedImageDir, TrueFileFilter.INSTANCE, TrueFileFilter.INSTANCE);
+        System.out.printf("kkk Contents of %s:\n", unpackedSquashedImageDir.getAbsolutePath());
+        for (File foundFile : filesFound) {
+            System.out.printf("%s (symlink: %b; dir: %b)\n", foundFile.getAbsolutePath(), Files.isSymbolicLink(foundFile.toPath()), foundFile.isDirectory());
+        }
+        ////////////
+
         File manifestFile = new File(unpackedSquashedImageDir, "manifest.json");
         assertTrue(manifestFile.isFile());
 
@@ -82,10 +92,10 @@ public class SquashedImageTest {
         CompressedFile.unTarFile(layerTar, layerUnpackedDir);
 
         // TODO TEMP
-        Collection<File> filesFound = FileUtils.listFilesAndDirs(layerUnpackedDir, TrueFileFilter.INSTANCE, TrueFileFilter.INSTANCE);
-        System.out.printf("Contents of %s:\n", layerUnpackedDir.getAbsolutePath());
+        filesFound = FileUtils.listFilesAndDirs(layerUnpackedDir, TrueFileFilter.INSTANCE, TrueFileFilter.INSTANCE);
+        System.out.printf("kkk Contents of %s:\n", layerUnpackedDir.getAbsolutePath());
         for (File foundFile : filesFound) {
-            System.out.printf("%s (symlink: %b)\n", foundFile.getAbsolutePath(), Files.isSymbolicLink(foundFile.toPath()));
+            System.out.printf("%s (symlink: %b; dir: %b)\n", foundFile.getAbsolutePath(), Files.isSymbolicLink(foundFile.toPath()), foundFile.isDirectory());
         }
         ////////////
 
