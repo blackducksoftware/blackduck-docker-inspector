@@ -16,6 +16,10 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import org.slf4j.LoggerFactory;
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
+
 import com.synopsys.integration.blackduck.dockerinspector.ProcessId;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
@@ -31,6 +35,11 @@ class SquashedImageTest {
 
     @BeforeAll
     static void setUp() throws IOException {
+        Logger rootLogger = (Logger)LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+        rootLogger.setLevel(Level.INFO);
+        Logger integrationLogger = (Logger)LoggerFactory.getLogger("com.synopsys.integration");
+        integrationLogger.setLevel(Level.DEBUG);
+
         testWorkingDir = new File("test/output/squashingTest");
         ImageTarFilename imageTarFilename = new ImageTarFilename();
         FileOperations fileOperations = new FileOperations();
