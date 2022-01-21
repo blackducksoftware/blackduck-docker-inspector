@@ -18,6 +18,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.slf4j.LoggerFactory;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.google.gson.Gson;
@@ -29,6 +30,9 @@ import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
 import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
 import com.synopsys.integration.exception.IntegrationException;
+
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
 
 @Tag("integration")
 @ExtendWith(SpringExtension.class)
@@ -56,6 +60,11 @@ public class OutputTest {
 
     @BeforeAll
     public static void setup() throws IOException {
+        Logger rootLogger = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+        rootLogger.setLevel(Level.INFO);
+        Logger integrationLogger = (Logger)LoggerFactory.getLogger("com.synopsys.integration");
+        integrationLogger.setLevel(Level.DEBUG);
+
         File testHome = new File("test/output/squashedImageCreation");
         FileUtils.deleteDirectory(testHome);
         outputDir = new File(testHome, "out");
