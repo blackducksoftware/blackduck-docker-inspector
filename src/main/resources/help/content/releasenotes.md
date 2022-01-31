@@ -1,5 +1,9 @@
 #### Version 9.3.2
 
+##### New features
+
+* Enhanced ${solution_name} to provide information on relationships between linux package manager components (ie. discern direct from transitive dependencies).
+
 ##### Changed features
 
 * Deprecated properties associated with connection to Black Duck. This is a consequence of the transition away from supporting the use of ${solution_name} as a standalone utility (as supposed to scanning via Detect).
