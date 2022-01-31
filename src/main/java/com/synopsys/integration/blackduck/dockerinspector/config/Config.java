@@ -375,6 +375,11 @@ public class Config {
         logger.trace(String.format("adding prop key %s [value: %s]", propName, value));
         allKeys.add(propName);
         ValueDescription valueDescription = field.getAnnotation(ValueDescription.class);
+
+        if (valueDescription.deprecated() && !value.equals(valueDescription.defaultValue())) { //TODO- better way to check option was set?
+            logger.info(String.format("*** Option %s is deprecated. ***", propName));
+        }
+
         DockerInspectorOption opt = new DockerInspectorOption(propName, value, valueDescription.description(), field.getType(), valueDescription.defaultValue(),
             valueDescription.deprecated());
         optionsByKey.put(propName, opt);
