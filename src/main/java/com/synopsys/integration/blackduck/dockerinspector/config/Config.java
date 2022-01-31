@@ -35,55 +35,55 @@ public class Config {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // Black Duck connection details
-    @ValueDescription(description = "Black Duck URL", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Black Duck URL", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true)
     @Value("${blackduck.url:}")
     private String blackDuckUrl = "";
 
-    @ValueDescription(description = "Black Duck Timeout in seconds", defaultValue = "120", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Black Duck Timeout in seconds", defaultValue = "120", group = Config.GROUP_PUBLIC, deprecated = true)
     @Value("${blackduck.timeout:120}")
     private Integer blackDuckTimeout = 120;
 
-    @ValueDescription(description = "Black Duck token", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Black Duck token", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true)
     @Value("${blackduck.api.token:}")
     private String blackDuckApiToken = "";
 
-    @ValueDescription(description = "Black Duck Username", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Black Duck Username", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true)
     @Value("${blackduck.username:}")
     private String blackDuckUsername = "";
 
-    @ValueDescription(description = "Black Duck Password", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Black Duck Password", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true)
     @Value("${blackduck.password:}")
     private String blackDuckPassword = "";
 
     // The properties in this section must be set if you must connect to the Black Duck through a proxy
-    @ValueDescription(description = "Black Duck Proxy Host", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Black Duck Proxy Host", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true)
     @Value("${blackduck.proxy.host:}")
     private String blackDuckProxyHost = "";
 
-    @ValueDescription(description = "Black Duck Proxy Port", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Black Duck Proxy Port", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true)
     @Value("${blackduck.proxy.port:}")
     private String blackDuckProxyPort = "";
 
-    @ValueDescription(description = "Black Duck Proxy Username", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Black Duck Proxy Username", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true)
     @Value("${blackduck.proxy.username:}")
     private String blackDuckProxyUsername = "";
 
-    @ValueDescription(description = "Black Duck Proxy Password", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Black Duck Proxy Password", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true)
     @Value("${blackduck.proxy.password:}")
     private String blackDuckProxyPassword = "";
 
     // If using an https Black Duck server, you can choose to always trust the server certificates
-    @ValueDescription(description = "Black Duck Always Trust Cert?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Black Duck Always Trust Cert?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = true)
     @Value("${blackduck.always.trust.cert:false}")
     private Boolean blackDuckAlwaysTrustCert = Boolean.FALSE;
 
     // The default project name will be the Docker image name
-    @ValueDescription(description = "Black Duck Project Name", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Black Duck Project Name", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true)
     @Value("${blackduck.project.name:}")
     private String blackDuckProjectName = "";
 
     // The default version name will be Docker image tag
-    @ValueDescription(description = "Black Duck Project Version", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Black Duck Project Version", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true)
     @Value("${blackduck.project.version:}")
     private String blackDuckProjectVersion = "";
 
@@ -145,12 +145,12 @@ public class Config {
     private String containerFileSystemExcludedPaths = "";
 
     // If you want to add a prefix to the code location name, specify it here
-    @ValueDescription(description = "Black Duck CodeLocation prefix", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Black Duck CodeLocation prefix", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true)
     @Value("${blackduck.codelocation.prefix:}")
     private String blackDuckCodelocationPrefix = "";
 
     // If you want to set the code location name, specify it here
-    @ValueDescription(description = "Black Duck CodeLocation name", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Black Duck CodeLocation name", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true)
     @Value("${blackduck.codelocation.name:}")
     private String blackDuckCodelocationName = "";
 
