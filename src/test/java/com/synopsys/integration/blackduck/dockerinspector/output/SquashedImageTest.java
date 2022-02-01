@@ -16,6 +16,10 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import org.slf4j.LoggerFactory;
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
+
 import com.synopsys.integration.blackduck.dockerinspector.ProcessId;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
@@ -24,13 +28,18 @@ import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
 import com.synopsys.integration.exception.IntegrationException;
 
 @Tag("integration")
-public class SquashedImageTest {
+class SquashedImageTest {
     private static SquashedImage squashedImage;
     private static DockerClientManager dockerClientManager;
     private static File testWorkingDir;
 
     @BeforeAll
-    public static void setUp() throws IOException {
+    static void setUp() throws IOException {
+        Logger rootLogger = (Logger)LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+        rootLogger.setLevel(Level.INFO);
+        Logger integrationLogger = (Logger)LoggerFactory.getLogger("com.synopsys.integration");
+        integrationLogger.setLevel(Level.DEBUG);
+
         testWorkingDir = new File("test/output/squashingTest");
         ImageTarFilename imageTarFilename = new ImageTarFilename();
         FileOperations fileOperations = new FileOperations();
@@ -45,7 +54,7 @@ public class SquashedImageTest {
     }
 
     @Test
-    public void testCreateSquashedImageTarGz() throws IOException, IntegrationException {
+    void testCreateSquashedImageTarGz() throws IOException, IntegrationException {
 
         File targetImageFileSystemTarGz = new File("src/test/resources/test_containerfilesystem.tar.gz");
 
@@ -60,6 +69,7 @@ public class SquashedImageTest {
         File unpackedSquashedImageDir = new File(testWorkingDir, "squashedImageUnpacked");
         unpackedSquashedImageDir.mkdirs();
         CompressedFile.gunZipUnTarFile(squashedImageTarGz, tempTarFile, unpackedSquashedImageDir);
+
         File manifestFile = new File(unpackedSquashedImageDir, "manifest.json");
         assertTrue(manifestFile.isFile());
 
@@ -73,8 +83,14 @@ public class SquashedImageTest {
         }
         assertNotNull(layerDir);
 
-        // Untar the one layer.tar file in image
-        File layerTar = layerDir.listFiles()[0];
+        // Find the layer.tar file
+        File layerTar = null;
+        for (File imageFile : layerDir.listFiles()) {
+            if (imageFile.getName().endsWith(".tar")) {
+                layerTar = imageFile;
+                break;
+            }
+        }
         File layerUnpackedDir = new File(squashingWorkingDir, "squashedImageLayerUnpacked");
         CompressedFile.unTarFile(layerTar, layerUnpackedDir);
 
@@ -88,7 +104,7 @@ public class SquashedImageTest {
     }
 
     @Test
-    public void testGenerateUniqueImageRepoTag() throws IntegrationException {
+    void testGenerateUniqueImageRepoTag() throws IntegrationException {
         String generatedRepTag = squashedImage.generateUniqueImageRepoTag();
 
         assertTrue(generatedRepTag.startsWith("dockerinspectorsquashed-"));
