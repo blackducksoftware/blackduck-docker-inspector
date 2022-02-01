@@ -31,6 +31,7 @@ public class Config {
     private static final String INSPECTOR_OS_UBUNTU = "ubuntu";
     private static final String GROUP_PUBLIC = "public";
     private static final String GROUP_PRIVATE = "private";
+    private static final String DETECT_CALLER_NAME = "Detect";
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -376,8 +377,8 @@ public class Config {
         allKeys.add(propName);
         ValueDescription valueDescription = field.getAnnotation(ValueDescription.class);
 
-        if (valueDescription.deprecated() && !value.equals(valueDescription.defaultValue())) { //TODO- better way to check option was set?
-            logger.info(String.format("*** Option %s is deprecated. ***", propName));
+        if (valueDescription.deprecated() && !value.equals(valueDescription.defaultValue()) && get("caller.name") != DETECT_CALLER_NAME) {
+            logger.warn(String.format("*** Option %s is deprecated. ***", propName));
         }
 
         DockerInspectorOption opt = new DockerInspectorOption(propName, value, valueDescription.description(), field.getType(), valueDescription.defaultValue(),
