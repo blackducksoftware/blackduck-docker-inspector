@@ -62,7 +62,7 @@ public class HelpTextTest {
 
         final String usageString = helpText.getMarkdownForTopic("properties");
 
-        assertTrue(usageString.contains("Property name | Type | Description | Default value\n"));
+        assertTrue(usageString.contains("Property name | Type | Description | Default value | Deprecation Status\n"));
         assertTrue(usageString.contains("-------------\n"));
         assertTrue(usageString.contains("blackduck.url | String | Black Duck URL |  |"));
     }

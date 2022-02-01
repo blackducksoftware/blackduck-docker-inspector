@@ -1,7 +1,7 @@
 /**
  * blackduck-docker-inspector
  *
- * Copyright (c) 2021 Synopsys, Inc.
+ * Copyright (c) 2022 Synopsys, Inc.
  *
  * Use subject to the terms and conditions of the Synopsys End User Software License and Maintenance Agreement. All rights reserved worldwide.
  */
@@ -64,8 +64,8 @@ public class HelpText {
                          "\n\n" +
                         "See the [Advanced](advanced.md) for other ways to set properties.\n\n" +
                         "Available properties:\n\n");
-        usage.append("Property name | Type | Description | Default value\n");
-        usage.append("------------- | ---- | ----------- | -------------\n");
+        usage.append("Property name | Type | Description | Default value | Deprecation Status\n");
+        usage.append("------------- | ---- | ----------- | ------------- | ------------------\n");
         final SortedSet<DockerInspectorOption> configOptions = config.getPublicConfigOptions();
         for (final DockerInspectorOption opt : configOptions) {
             final StringBuilder usageLine = new StringBuilder(String.format("%s | %s | %s | ", opt.getKey(), opt.getValueTypeString(), opt.getDescription()));
@@ -76,8 +76,12 @@ public class HelpText {
             }
             usageLine.append("| ");
             if (opt.isDeprecated()) {
-                throw new IntegrationException("Need to add a column in help for property deprecation status");
+                usageLine.append("Deprecated");
+                //throw new IntegrationException("Need to add a column in help for property deprecation status");
+            } else {
+                usageLine.append(" ");
             }
+            usageLine.append("| ");
             usage.append(usageLine.toString());
             usage.append("\n");
         }
