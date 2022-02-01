@@ -1,7 +1,7 @@
 /**
  * blackduck-docker-inspector
  *
- * Copyright (c) 2021 Synopsys, Inc.
+ * Copyright (c) 2022 Synopsys, Inc.
  *
  * Use subject to the terms and conditions of the Synopsys End User Software License and Maintenance Agreement. All rights reserved worldwide.
  */
@@ -384,7 +384,7 @@ public class DockerClientManager {
             if ((repoTagList != null) && (findMatchForTargetImageAmongTheseTags(imageName, nonNullTagName, image, repoTagList))) {
                 return Optional.of(image);
             } else {
-                logger.warn("Encountered an image with a null tag list in local docker registry");
+                logger.trace("Encountered an image with a null tag list in local docker registry");
             }
         }
         return Optional.empty();
