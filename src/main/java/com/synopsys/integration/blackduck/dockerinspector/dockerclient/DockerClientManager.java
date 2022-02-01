@@ -384,7 +384,7 @@ public class DockerClientManager {
             if ((repoTagList != null) && (findMatchForTargetImageAmongTheseTags(imageName, nonNullTagName, image, repoTagList))) {
                 return Optional.of(image);
             } else {
-                logger.warn("Encountered an image with a null tag list in local docker registry");
+                logger.trace("Encountered an image with a null tag list in local docker registry");
             }
         }
         return Optional.empty();

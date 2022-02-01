@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.mockito.Mockito;
+import org.slf4j.LoggerFactory;
 
 import com.github.dockerjava.api.exception.BadRequestException;
 import com.github.dockerjava.api.exception.DockerClientException;
@@ -32,6 +33,9 @@ import com.synopsys.integration.blackduck.exception.BlackDuckIntegrationExceptio
 import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
 import com.synopsys.integration.exception.IntegrationException;
 
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
+
 @Tag("integration")
 public class DockerClientManagerTest {
     private final static String imageRepo = "dockerclientmanagertest";
@@ -43,6 +47,11 @@ public class DockerClientManagerTest {
 
     @BeforeAll
     public static void setUp() {
+        Logger rootLogger = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+        rootLogger.setLevel(Level.INFO);
+        Logger integrationLogger = (Logger)LoggerFactory.getLogger("com.synopsys.integration");
+        integrationLogger.setLevel(Level.DEBUG);
+
         config = Mockito.mock(Config.class);
         programPaths = Mockito.mock(ProgramPaths.class);
         FileOperations fileOperations = new FileOperations();
