@@ -57,12 +57,12 @@ public class HelpTextTest {
         Mockito.when(helpTopicParser.translateGivenTopicNames("properties")).thenReturn("properties");
         Mockito.when(helpTopicParser.deriveHelpTopicList("properties")).thenReturn(Arrays.asList("properties"));
         final SortedSet<DockerInspectorOption> configOptions = new TreeSet<>();
-        configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", false));
+        configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", false, "deprecationMessage"));
         Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
 
         final String usageString = helpText.getMarkdownForTopic("properties");
 
-        assertTrue(usageString.contains("Property name | Type | Description | Default value\n"));
+        assertTrue(usageString.contains("Property name | Type | Description | Default value | Deprecation Status | Deprecation Message\n"));
         assertTrue(usageString.contains("-------------\n"));
         assertTrue(usageString.contains("blackduck.url | String | Black Duck URL |  |"));
     }
@@ -84,7 +84,7 @@ public class HelpTextTest {
         Mockito.when(helpTopicParser.translateGivenTopicNames("all")).thenReturn("overview,architecture,running,properties,advanced,deployment,troubleshooting,releasenotes");
         Mockito.when(helpTopicParser.deriveHelpTopicList("overview,architecture,running,properties,advanced,deployment,troubleshooting,releasenotes")).thenReturn(Arrays.asList("overview", "architecture", "running", "properties", "advanced", "deployment", "troubleshooting", "releasenotes"));
         final SortedSet<DockerInspectorOption> configOptions = new TreeSet<>();
-        configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", false));
+        configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", false, "deprecationMessage"));
         Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
         Mockito.when(programVersion.getProgramNamePretty()).thenReturn("Black Duck Docker Inspector");
         Mockito.when(programVersion.getProgramVersion()).thenReturn("1.2.3");

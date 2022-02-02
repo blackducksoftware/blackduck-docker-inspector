@@ -22,4 +22,6 @@ public @interface ValueDescription {
     String group() default "";
 
     boolean deprecated() default false;
+
+    String deprecationMessage() default "";
 }

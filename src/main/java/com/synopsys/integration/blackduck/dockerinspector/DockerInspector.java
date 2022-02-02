@@ -49,6 +49,8 @@ import com.synopsys.integration.exception.IntegrationException;
 public class DockerInspector {
     private static final Logger logger = LoggerFactory.getLogger(DockerInspector.class);
 
+    private static final String DETECT_CALLER_NAME = "Detect";
+
     @Autowired
     private BlackDuckClient blackDuckClient;
 
@@ -154,6 +156,10 @@ public class DockerInspector {
     }
 
     private boolean initAndValidate(Config config) throws IntegrationException, FileNotFoundException {
+        if (!DETECT_CALLER_NAME.equals(config.getCallerName())) {
+            logger.warn("*** Support for running Docker Inspector as a standalone utility is being dropped.  In the future, users should run Docker Inspector via Detect. ***");
+        }
+
         logger.info(String.format("Black Duck Docker Inspector %s", programVersion.getProgramVersion()));
         logger.debug(String.format("Java version: %s", System.getProperty("java.version")));
         if (helpInvoked()) {
