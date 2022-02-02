@@ -21,13 +21,15 @@ public class DockerInspectorOption extends Stringable implements Comparable<Dock
     private final String defaultValue;
     private String resolvedValue;
     private final boolean deprecated;
+    private final String deprecationMessage;
 
-    public DockerInspectorOption(final String key, final String resolvedValue, final String description, final Class<?> valueType, final String defaultValue, final boolean deprecated) {
+    public DockerInspectorOption(final String key, final String resolvedValue, final String description, final Class<?> valueType, final String defaultValue, final boolean deprecated, final String deprecationMessage) {
         this.key = key;
         this.description = description;
         this.defaultValue = defaultValue;
         this.resolvedValue = resolvedValue;
         this.deprecated = deprecated;
+        this.deprecationMessage = deprecationMessage;
 
         final String[] parts = valueType.toString().split("\\.");
         logger.trace(String.format("Split %s into %d parts", valueType.toString(), parts.length));
@@ -61,6 +63,8 @@ public class DockerInspectorOption extends Stringable implements Comparable<Dock
     public boolean isDeprecated() {
         return deprecated;
     }
+
+    public String getDeprecationMessage() { return deprecationMessage; }
 
     @Override
     public int compareTo(final DockerInspectorOption o) {

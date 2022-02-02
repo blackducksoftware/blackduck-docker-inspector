@@ -64,8 +64,8 @@ public class HelpText {
                          "\n\n" +
                         "See the [Advanced](advanced.md) for other ways to set properties.\n\n" +
                         "Available properties:\n\n");
-        usage.append("Property name | Type | Description | Default value | Deprecation Status\n");
-        usage.append("------------- | ---- | ----------- | ------------- | ------------------\n");
+        usage.append("Property name | Type | Description | Default value | Deprecation Status | Deprecation Message\n");
+        usage.append("------------- | ---- | ----------- | ------------- | ------------------ | -------------------\n");
         final SortedSet<DockerInspectorOption> configOptions = config.getPublicConfigOptions();
         for (final DockerInspectorOption opt : configOptions) {
             final StringBuilder usageLine = new StringBuilder(String.format("%s | %s | %s | ", opt.getKey(), opt.getValueTypeString(), opt.getDescription()));
@@ -77,9 +77,12 @@ public class HelpText {
             usageLine.append("| ");
             if (opt.isDeprecated()) {
                 usageLine.append("Deprecated");
-                //throw new IntegrationException("Need to add a column in help for property deprecation status");
+                usageLine.append(" | ");
+                if (StringUtils.isNotBlank(opt.getDeprecationMessage())) {
+                    usageLine.append(opt.getDeprecationMessage());
+                }
             } else {
-                usageLine.append(" ");
+                usageLine.append("  |  ");
             }
             usageLine.append("| ");
             usage.append(usageLine.toString());

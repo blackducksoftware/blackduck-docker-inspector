@@ -31,60 +31,60 @@ public class Config {
     private static final String INSPECTOR_OS_UBUNTU = "ubuntu";
     private static final String GROUP_PUBLIC = "public";
     private static final String GROUP_PRIVATE = "private";
-    private static final String DETECT_CALLER_NAME = "Detect";
+    private static final String BLACKDUCK_OPTION_DEPRECATION_MESSAGE = "Support for running Docker Inspector as a standalone utility is being dropped.  In the future, users should run Docker Inspector via Detect.";
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // Black Duck connection details
-    @ValueDescription(description = "Black Duck URL", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true)
+    @ValueDescription(description = "Black Duck URL", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true, deprecationMessage = BLACKDUCK_OPTION_DEPRECATION_MESSAGE)
     @Value("${blackduck.url:}")
     private String blackDuckUrl = "";
 
-    @ValueDescription(description = "Black Duck Timeout in seconds", defaultValue = "120", group = Config.GROUP_PUBLIC, deprecated = true)
+    @ValueDescription(description = "Black Duck Timeout in seconds", defaultValue = "120", group = Config.GROUP_PUBLIC, deprecated = true, deprecationMessage = BLACKDUCK_OPTION_DEPRECATION_MESSAGE)
     @Value("${blackduck.timeout:120}")
     private Integer blackDuckTimeout = 120;
 
-    @ValueDescription(description = "Black Duck token", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true)
+    @ValueDescription(description = "Black Duck token", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true, deprecationMessage = BLACKDUCK_OPTION_DEPRECATION_MESSAGE)
     @Value("${blackduck.api.token:}")
     private String blackDuckApiToken = "";
 
-    @ValueDescription(description = "Black Duck Username", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true)
+    @ValueDescription(description = "Black Duck Username", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true, deprecationMessage = BLACKDUCK_OPTION_DEPRECATION_MESSAGE)
     @Value("${blackduck.username:}")
     private String blackDuckUsername = "";
 
-    @ValueDescription(description = "Black Duck Password", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true)
+    @ValueDescription(description = "Black Duck Password", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true, deprecationMessage = BLACKDUCK_OPTION_DEPRECATION_MESSAGE)
     @Value("${blackduck.password:}")
     private String blackDuckPassword = "";
 
     // The properties in this section must be set if you must connect to the Black Duck through a proxy
-    @ValueDescription(description = "Black Duck Proxy Host", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true)
+    @ValueDescription(description = "Black Duck Proxy Host", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true, deprecationMessage = BLACKDUCK_OPTION_DEPRECATION_MESSAGE)
     @Value("${blackduck.proxy.host:}")
     private String blackDuckProxyHost = "";
 
-    @ValueDescription(description = "Black Duck Proxy Port", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true)
+    @ValueDescription(description = "Black Duck Proxy Port", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true, deprecationMessage = BLACKDUCK_OPTION_DEPRECATION_MESSAGE)
     @Value("${blackduck.proxy.port:}")
     private String blackDuckProxyPort = "";
 
-    @ValueDescription(description = "Black Duck Proxy Username", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true)
+    @ValueDescription(description = "Black Duck Proxy Username", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true, deprecationMessage = BLACKDUCK_OPTION_DEPRECATION_MESSAGE)
     @Value("${blackduck.proxy.username:}")
     private String blackDuckProxyUsername = "";
 
-    @ValueDescription(description = "Black Duck Proxy Password", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true)
+    @ValueDescription(description = "Black Duck Proxy Password", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true, deprecationMessage = BLACKDUCK_OPTION_DEPRECATION_MESSAGE)
     @Value("${blackduck.proxy.password:}")
     private String blackDuckProxyPassword = "";
 
     // If using an https Black Duck server, you can choose to always trust the server certificates
-    @ValueDescription(description = "Black Duck Always Trust Cert?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = true)
+    @ValueDescription(description = "Black Duck Always Trust Cert?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = true, deprecationMessage = BLACKDUCK_OPTION_DEPRECATION_MESSAGE)
     @Value("${blackduck.always.trust.cert:false}")
     private Boolean blackDuckAlwaysTrustCert = Boolean.FALSE;
 
     // The default project name will be the Docker image name
-    @ValueDescription(description = "Black Duck Project Name", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true)
+    @ValueDescription(description = "Black Duck Project Name", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true, deprecationMessage = BLACKDUCK_OPTION_DEPRECATION_MESSAGE)
     @Value("${blackduck.project.name:}")
     private String blackDuckProjectName = "";
 
     // The default version name will be Docker image tag
-    @ValueDescription(description = "Black Duck Project Version", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true)
+    @ValueDescription(description = "Black Duck Project Version", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true, deprecationMessage = BLACKDUCK_OPTION_DEPRECATION_MESSAGE)
     @Value("${blackduck.project.version:}")
     private String blackDuckProjectVersion = "";
 
@@ -146,12 +146,12 @@ public class Config {
     private String containerFileSystemExcludedPaths = "";
 
     // If you want to add a prefix to the code location name, specify it here
-    @ValueDescription(description = "Black Duck CodeLocation prefix", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true)
+    @ValueDescription(description = "Black Duck CodeLocation prefix", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true, deprecationMessage = BLACKDUCK_OPTION_DEPRECATION_MESSAGE)
     @Value("${blackduck.codelocation.prefix:}")
     private String blackDuckCodelocationPrefix = "";
 
     // If you want to set the code location name, specify it here
-    @ValueDescription(description = "Black Duck CodeLocation name", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true)
+    @ValueDescription(description = "Black Duck CodeLocation name", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true, deprecationMessage = BLACKDUCK_OPTION_DEPRECATION_MESSAGE)
     @Value("${blackduck.codelocation.name:}")
     private String blackDuckCodelocationName = "";
 
@@ -376,13 +376,8 @@ public class Config {
         logger.trace(String.format("adding prop key %s [value: %s]", propName, value));
         allKeys.add(propName);
         ValueDescription valueDescription = field.getAnnotation(ValueDescription.class);
-
-        if (valueDescription.deprecated() && !value.equals(valueDescription.defaultValue()) && get("caller.name") != DETECT_CALLER_NAME) {
-            logger.warn(String.format("*** Option %s is deprecated. ***", propName));
-        }
-
         DockerInspectorOption opt = new DockerInspectorOption(propName, value, valueDescription.description(), field.getType(), valueDescription.defaultValue(),
-            valueDescription.deprecated());
+            valueDescription.deprecated(), valueDescription.deprecationMessage());
         optionsByKey.put(propName, opt);
         logger.trace(String.format("adding field name %s to optionsByFieldName", field.getName()));
         optionsByFieldName.put(field.getName(), opt);
