@@ -4,11 +4,11 @@
     "spdx:name": "blackducksoftware_hub-webapp_4.0.0_APK",
     "creationInfo": {
       "spdx:creator": [
-        "Tool: IntegrationBdio-21.0.0"
+        "Tool: IntegrationBdio-22.1.4"
       ],
-      "spdx:created": "2021-02-09T02:17:22.829Z"
+      "spdx:created": "2022-02-03T18:41:05.254743Z"
     },
-    "@id": "uuid:6e4162c4-dd25-463c-8cf7-2f63d8b2965a",
+    "@id": "uuid:f9461dab-536a-4366-8c42-754a85376100",
     "@type": "BillOfMaterials",
     "relationship": []
   },
@@ -352,513 +352,16 @@
         "suffix": "x86_64"
       }
     },
-    "relationship": []
-  },
-  {
-    "name": "zlib",
-    "revision": "1.2.8-r2",
-    "@id": "http:alpine/zlib/1.2.8-r2/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "zlib/1.2.8-r2/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "zlib",
-          "1.2.8-r2"
-        ],
-        "suffix": "x86_64"
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/db/5.3.28-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
       }
-    },
-    "relationship": []
-  },
-  {
-    "name": "openjdk8-jre-base",
-    "revision": "8.121.13-r0",
-    "@id": "http:alpine/openjdk8-jre-base/8.121.13-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "openjdk8-jre-base/8.121.13-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "openjdk8-jre-base",
-          "8.121.13-r0"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "openjdk8-jre",
-    "revision": "8.121.13-r0",
-    "@id": "http:alpine/openjdk8-jre/8.121.13-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "openjdk8-jre/8.121.13-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "openjdk8-jre",
-          "8.121.13-r0"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "krb5-libs",
-    "revision": "1.14.3-r1",
-    "@id": "http:alpine/krb5-libs/1.14.3-r1/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "krb5-libs/1.14.3-r1/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "krb5-libs",
-          "1.14.3-r1"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "alpine-keys",
-    "revision": "1.3-r0",
-    "@id": "http:alpine/alpine-keys/1.3-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "alpine-keys/1.3-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "alpine-keys",
-          "1.3-r0"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libuuid",
-    "revision": "2.28.2-r1",
-    "@id": "http:alpine/libuuid/2.28.2-r1/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "libuuid/2.28.2-r1/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "libuuid",
-          "2.28.2-r1"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libssh2",
-    "revision": "1.7.0-r2",
-    "@id": "http:alpine/libssh2/1.7.0-r2/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "libssh2/1.7.0-r2/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "libssh2",
-          "1.7.0-r2"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "nspr",
-    "revision": "4.12-r0",
-    "@id": "http:alpine/nspr/4.12-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "nspr/4.12-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "nspr",
-          "4.12-r0"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "p11-kit-trust",
-    "revision": "0.23.2-r1",
-    "@id": "http:alpine/p11-kit-trust/0.23.2-r1/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "p11-kit-trust/0.23.2-r1/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "p11-kit-trust",
-          "0.23.2-r1"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libffi",
-    "revision": "3.2.1-r2",
-    "@id": "http:alpine/libffi/3.2.1-r2/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "libffi/3.2.1-r2/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "libffi",
-          "3.2.1-r2"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libxcomposite",
-    "revision": "0.4.4-r0",
-    "@id": "http:alpine/libxcomposite/0.4.4-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "libxcomposite/0.4.4-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "libxcomposite",
-          "0.4.4-r0"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "gnupg",
-    "revision": "2.1.15-r0",
-    "@id": "http:alpine/gnupg/2.1.15-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "gnupg/2.1.15-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "gnupg",
-          "2.1.15-r0"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "sqlite-libs",
-    "revision": "3.15.2-r0",
-    "@id": "http:alpine/sqlite-libs/3.15.2-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "sqlite-libs/3.15.2-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "sqlite-libs",
-          "3.15.2-r0"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "alpine-baselayout",
-    "revision": "3.0.4-r0",
-    "@id": "http:alpine/alpine-baselayout/3.0.4-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "alpine-baselayout/3.0.4-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "alpine-baselayout",
-          "3.0.4-r0"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "freetype",
-    "revision": "2.7-r0",
-    "@id": "http:alpine/freetype/2.7-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "freetype/2.7-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "freetype",
-          "2.7-r0"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "lcms2",
-    "revision": "2.8-r1",
-    "@id": "http:alpine/lcms2/2.8-r1/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "lcms2/2.8-r1/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "lcms2",
-          "2.8-r1"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "musl-utils",
-    "revision": "1.1.15-r6",
-    "@id": "http:alpine/musl-utils/1.1.15-r6/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "musl-utils/1.1.15-r6/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "musl-utils",
-          "1.1.15-r6"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libcrypto1.0",
-    "revision": "1.0.2k-r0",
-    "@id": "http:alpine/libcrypto1.0/1.0.2k-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "libcrypto1.0/1.0.2k-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "libcrypto1.0",
-          "1.0.2k-r0"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "giflib",
-    "revision": "5.1.4-r1",
-    "@id": "http:alpine/giflib/5.1.4-r1/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "giflib/5.1.4-r1/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "giflib",
-          "5.1.4-r1"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libxdmcp",
-    "revision": "1.1.2-r2",
-    "@id": "http:alpine/libxdmcp/1.1.2-r2/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "libxdmcp/1.1.2-r2/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "libxdmcp",
-          "1.1.2-r2"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libxcb",
-    "revision": "1.12-r0",
-    "@id": "http:alpine/libxcb/1.12-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "libxcb/1.12-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "libxcb",
-          "1.12-r0"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libxau",
-    "revision": "1.0.8-r1",
-    "@id": "http:alpine/libxau/1.0.8-r1/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "libxau/1.0.8-r1/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "libxau",
-          "1.0.8-r1"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
+    ]
   },
   {
     "name": "musl",
@@ -884,13 +387,13 @@
     "relationship": []
   },
   {
-    "name": "pcsc-lite-libs",
-    "revision": "1.8.20-r0",
-    "@id": "http:alpine/pcsc-lite-libs/1.8.20-r0/x86_64",
+    "name": "db",
+    "revision": "5.3.28-r0",
+    "@id": "http:alpine/db/5.3.28-r0/x86_64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@alpine",
-      "externalId": "pcsc-lite-libs/1.8.20-r0/x86_64",
+      "externalId": "db/5.3.28-r0/x86_64",
       "externalIdMetaData": {
         "forge": {
           "name": "alpine",
@@ -898,22 +401,27 @@
           "usePreferredNamespaceAlias": true
         },
         "pieces": [
-          "pcsc-lite-libs",
-          "1.8.20-r0"
+          "db",
+          "5.3.28-r0"
         ],
         "suffix": "x86_64"
       }
     },
-    "relationship": []
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
   },
   {
-    "name": "openssl",
-    "revision": "1.0.2k-r0",
-    "@id": "http:alpine/openssl/1.0.2k-r0/x86_64",
+    "name": "zlib",
+    "revision": "1.2.8-r2",
+    "@id": "http:alpine/zlib/1.2.8-r2/x86_64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@alpine",
-      "externalId": "openssl/1.0.2k-r0/x86_64",
+      "externalId": "zlib/1.2.8-r2/x86_64",
       "externalIdMetaData": {
         "forge": {
           "name": "alpine",
@@ -921,22 +429,27 @@
           "usePreferredNamespaceAlias": true
         },
         "pieces": [
-          "openssl",
-          "1.0.2k-r0"
+          "zlib",
+          "1.2.8-r2"
         ],
         "suffix": "x86_64"
       }
     },
-    "relationship": []
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
   },
   {
-    "name": "busybox",
-    "revision": "1.25.1-r0",
-    "@id": "http:alpine/busybox/1.25.1-r0/x86_64",
+    "name": "openjdk8-jre-base",
+    "revision": "8.121.13-r0",
+    "@id": "http:alpine/openjdk8-jre-base/8.121.13-r0/x86_64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@alpine",
-      "externalId": "busybox/1.25.1-r0/x86_64",
+      "externalId": "openjdk8-jre-base/8.121.13-r0/x86_64",
       "externalIdMetaData": {
         "forge": {
           "name": "alpine",
@@ -944,588 +457,66 @@
           "usePreferredNamespaceAlias": true
         },
         "pieces": [
-          "busybox",
-          "1.25.1-r0"
+          "openjdk8-jre-base",
+          "8.121.13-r0"
         ],
         "suffix": "x86_64"
       }
     },
-    "relationship": []
-  },
-  {
-    "name": "ncurses-terminfo-base",
-    "revision": "6.0-r7",
-    "@id": "http:alpine/ncurses-terminfo-base/6.0-r7/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "ncurses-terminfo-base/6.0-r7/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "ncurses-terminfo-base",
-          "6.0-r7"
-        ],
-        "suffix": "x86_64"
+    "relationship": [
+      {
+        "related": "http:alpine/openjdk8-jre-lib/8.121.13-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/java-cacerts/1.0-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/lcms2/2.8-r1/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/zlib/1.2.8-r2/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/java-common/0.1-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/lksctp-tools/1.0.17-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libjpeg-turbo/1.5.1-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/krb5-libs/1.14.3-r1/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/pcsc-lite-libs/1.8.20-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libstdc%2B%2B/6.2.1-r1/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/nspr/4.12-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/nss/3.27.2-r1/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
       }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libc-utils",
-    "revision": "0.7-r1",
-    "@id": "http:alpine/libc-utils/0.7-r1/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "libc-utils/0.7-r1/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "libc-utils",
-          "0.7-r1"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "nss",
-    "revision": "3.27.2-r1",
-    "@id": "http:alpine/nss/3.27.2-r1/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "nss/3.27.2-r1/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "nss",
-          "3.27.2-r1"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "apk-tools",
-    "revision": "2.6.8-r2",
-    "@id": "http:alpine/apk-tools/2.6.8-r2/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "apk-tools/2.6.8-r2/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "apk-tools",
-          "2.6.8-r2"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libxrender",
-    "revision": "0.9.10-r1",
-    "@id": "http:alpine/libxrender/0.9.10-r1/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "libxrender/0.9.10-r1/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "libxrender",
-          "0.9.10-r1"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libcurl",
-    "revision": "7.52.1-r3",
-    "@id": "http:alpine/libcurl/7.52.1-r3/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "libcurl/7.52.1-r3/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "libcurl",
-          "7.52.1-r3"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libgcc",
-    "revision": "6.2.1-r1",
-    "@id": "http:alpine/libgcc/6.2.1-r1/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "libgcc/6.2.1-r1/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "libgcc",
-          "6.2.1-r1"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libldap",
-    "revision": "2.4.44-r3",
-    "@id": "http:alpine/libldap/2.4.44-r3/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "libldap/2.4.44-r3/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "libldap",
-          "2.4.44-r3"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libassuan",
-    "revision": "2.4.3-r0",
-    "@id": "http:alpine/libassuan/2.4.3-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "libassuan/2.4.3-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "libassuan",
-          "2.4.3-r0"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libtasn1",
-    "revision": "4.9-r0",
-    "@id": "http:alpine/libtasn1/4.9-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "libtasn1/4.9-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "libtasn1",
-          "4.9-r0"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libbz2",
-    "revision": "1.0.6-r5",
-    "@id": "http:alpine/libbz2/1.0.6-r5/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "libbz2/1.0.6-r5/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "libbz2",
-          "1.0.6-r5"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libgcrypt",
-    "revision": "1.7.3-r0",
-    "@id": "http:alpine/libgcrypt/1.7.3-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "libgcrypt/1.7.3-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "libgcrypt",
-          "1.7.3-r0"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "krb5-conf",
-    "revision": "1.0-r1",
-    "@id": "http:alpine/krb5-conf/1.0-r1/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "krb5-conf/1.0-r1/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "krb5-conf",
-          "1.0-r1"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "java-common",
-    "revision": "0.1-r0",
-    "@id": "http:alpine/java-common/0.1-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "java-common/0.1-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "java-common",
-          "0.1-r0"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "alsa-lib",
-    "revision": "1.1.3-r0",
-    "@id": "http:alpine/alsa-lib/1.1.3-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "alsa-lib/1.1.3-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "alsa-lib",
-          "1.1.3-r0"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "p11-kit",
-    "revision": "0.23.2-r1",
-    "@id": "http:alpine/p11-kit/0.23.2-r1/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "p11-kit/0.23.2-r1/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "p11-kit",
-          "0.23.2-r1"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libjpeg-turbo",
-    "revision": "1.5.1-r0",
-    "@id": "http:alpine/libjpeg-turbo/1.5.1-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "libjpeg-turbo/1.5.1-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "libjpeg-turbo",
-          "1.5.1-r0"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "keyutils-libs",
-    "revision": "1.5.9-r1",
-    "@id": "http:alpine/keyutils-libs/1.5.9-r1/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "keyutils-libs/1.5.9-r1/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "keyutils-libs",
-          "1.5.9-r1"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "oniguruma",
-    "revision": "6.1.3-r0",
-    "@id": "http:alpine/oniguruma/6.1.3-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "oniguruma/6.1.3-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "oniguruma",
-          "6.1.3-r0"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libxtst",
-    "revision": "1.2.3-r0",
-    "@id": "http:alpine/libxtst/1.2.3-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "libxtst/1.2.3-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "libxtst",
-          "1.2.3-r0"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "pinentry",
-    "revision": "0.9.7-r0",
-    "@id": "http:alpine/pinentry/0.9.7-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "pinentry/0.9.7-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "pinentry",
-          "0.9.7-r0"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "apr",
-    "revision": "1.5.2-r1",
-    "@id": "http:alpine/apr/1.5.2-r1/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "apr/1.5.2-r1/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "apr",
-          "1.5.2-r1"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libgpg-error",
-    "revision": "1.24-r0",
-    "@id": "http:alpine/libgpg-error/1.24-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "libgpg-error/1.24-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "libgpg-error",
-          "1.24-r0"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libxi",
-    "revision": "1.7.7-r0",
-    "@id": "http:alpine/libxi/1.7.7-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "libxi/1.7.7-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "libxi",
-          "1.7.7-r0"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "jq",
-    "revision": "1.5-r3",
-    "@id": "http:alpine/jq/1.5-r3/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "jq/1.5-r3/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "jq",
-          "1.5-r3"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
+    ]
   },
   {
     "name": "openjdk8-jre-lib",
@@ -1571,16 +562,33 @@
         "suffix": "x86_64"
       }
     },
-    "relationship": []
+    "relationship": [
+      {
+        "related": "http:alpine/p11-kit/0.23.2-r1/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/ca-certificates/20161130-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/busybox/1.25.1-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/p11-kit-trust/0.23.2-r1/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
   },
   {
-    "name": "libxext",
-    "revision": "1.3.3-r1",
-    "@id": "http:alpine/libxext/1.3.3-r1/x86_64",
+    "name": "p11-kit",
+    "revision": "0.23.2-r1",
+    "@id": "http:alpine/p11-kit/0.23.2-r1/x86_64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@alpine",
-      "externalId": "libxext/1.3.3-r1/x86_64",
+      "externalId": "p11-kit/0.23.2-r1/x86_64",
       "externalIdMetaData": {
         "forge": {
           "name": "alpine",
@@ -1588,22 +596,35 @@
           "usePreferredNamespaceAlias": true
         },
         "pieces": [
-          "libxext",
-          "1.3.3-r1"
+          "p11-kit",
+          "0.23.2-r1"
         ],
         "suffix": "x86_64"
       }
     },
-    "relationship": []
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libtasn1/4.9-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libffi/3.2.1-r2/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
   },
   {
-    "name": "libverto",
-    "revision": "0.2.5-r0",
-    "@id": "http:alpine/libverto/0.2.5-r0/x86_64",
+    "name": "libtasn1",
+    "revision": "4.9-r0",
+    "@id": "http:alpine/libtasn1/4.9-r0/x86_64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@alpine",
-      "externalId": "libverto/0.2.5-r0/x86_64",
+      "externalId": "libtasn1/4.9-r0/x86_64",
       "externalIdMetaData": {
         "forge": {
           "name": "alpine",
@@ -1611,13 +632,46 @@
           "usePreferredNamespaceAlias": true
         },
         "pieces": [
-          "libverto",
-          "0.2.5-r0"
+          "libtasn1",
+          "4.9-r0"
         ],
         "suffix": "x86_64"
       }
     },
-    "relationship": []
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "libffi",
+    "revision": "3.2.1-r2",
+    "@id": "http:alpine/libffi/3.2.1-r2/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "libffi/3.2.1-r2/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "libffi",
+          "3.2.1-r2"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
   },
   {
     "name": "ca-certificates",
@@ -1640,145 +694,24 @@
         "suffix": "x86_64"
       }
     },
-    "relationship": []
-  },
-  {
-    "name": "db",
-    "revision": "5.3.28-r0",
-    "@id": "http:alpine/db/5.3.28-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "db/5.3.28-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "db",
-          "5.3.28-r0"
-        ],
-        "suffix": "x86_64"
+    "relationship": [
+      {
+        "related": "http:alpine/libressl2.4-libcrypto/2.4.4-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/busybox/1.25.1-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libcrypto1.0/1.0.2k-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
       }
-    },
-    "relationship": []
-  },
-  {
-    "name": "lksctp-tools",
-    "revision": "1.0.17-r0",
-    "@id": "http:alpine/lksctp-tools/1.0.17-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "lksctp-tools/1.0.17-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "lksctp-tools",
-          "1.0.17-r0"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libx11",
-    "revision": "1.6.4-r0",
-    "@id": "http:alpine/libx11/1.6.4-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "libx11/1.6.4-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "libx11",
-          "1.6.4-r0"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "ncurses-libs",
-    "revision": "6.0-r7",
-    "@id": "http:alpine/ncurses-libs/6.0-r7/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "ncurses-libs/6.0-r7/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "ncurses-libs",
-          "6.0-r7"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "scanelf",
-    "revision": "1.1.6-r0",
-    "@id": "http:alpine/scanelf/1.1.6-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "scanelf/1.1.6-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "scanelf",
-          "1.1.6-r0"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
-  },
-  {
-    "name": "npth",
-    "revision": "1.2-r0",
-    "@id": "http:alpine/npth/1.2-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "npth/1.2-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "npth",
-          "1.2-r0"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
+    ]
   },
   {
     "name": "libressl2.4-libcrypto",
@@ -1801,7 +734,52 @@
         "suffix": "x86_64"
       }
     },
-    "relationship": []
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/openssl/1.0.2k-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "openssl",
+    "revision": "1.0.2k-r0",
+    "@id": "http:alpine/openssl/1.0.2k-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "openssl/1.0.2k-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "openssl",
+          "1.0.2k-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libssl1.0/1.0.2k-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libcrypto1.0/1.0.2k-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
   },
   {
     "name": "libssl1.0",
@@ -1824,16 +802,25 @@
         "suffix": "x86_64"
       }
     },
-    "relationship": []
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libcrypto1.0/1.0.2k-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
   },
   {
-    "name": "libpng",
-    "revision": "1.6.25-r0",
-    "@id": "http:alpine/libpng/1.6.25-r0/x86_64",
+    "name": "libcrypto1.0",
+    "revision": "1.0.2k-r0",
+    "@id": "http:alpine/libcrypto1.0/1.0.2k-r0/x86_64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@alpine",
-      "externalId": "libpng/1.6.25-r0/x86_64",
+      "externalId": "libcrypto1.0/1.0.2k-r0/x86_64",
       "externalIdMetaData": {
         "forge": {
           "name": "alpine",
@@ -1841,22 +828,31 @@
           "usePreferredNamespaceAlias": true
         },
         "pieces": [
-          "libpng",
-          "1.6.25-r0"
+          "libcrypto1.0",
+          "1.0.2k-r0"
         ],
         "suffix": "x86_64"
       }
     },
-    "relationship": []
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/zlib/1.2.8-r2/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
   },
   {
-    "name": "curl",
-    "revision": "7.52.1-r3",
-    "@id": "http:alpine/curl/7.52.1-r3/x86_64",
+    "name": "busybox",
+    "revision": "1.25.1-r0",
+    "@id": "http:alpine/busybox/1.25.1-r0/x86_64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@alpine",
-      "externalId": "curl/7.52.1-r3/x86_64",
+      "externalId": "busybox/1.25.1-r0/x86_64",
       "externalIdMetaData": {
         "forge": {
           "name": "alpine",
@@ -1864,22 +860,27 @@
           "usePreferredNamespaceAlias": true
         },
         "pieces": [
-          "curl",
-          "7.52.1-r3"
+          "busybox",
+          "1.25.1-r0"
         ],
         "suffix": "x86_64"
       }
     },
-    "relationship": []
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
   },
   {
-    "name": "ncurses-terminfo",
-    "revision": "6.0-r7",
-    "@id": "http:alpine/ncurses-terminfo/6.0-r7/x86_64",
+    "name": "p11-kit-trust",
+    "revision": "0.23.2-r1",
+    "@id": "http:alpine/p11-kit-trust/0.23.2-r1/x86_64",
     "@type": "Component",
     "externalIdentifier": {
       "externalSystemTypeId": "@alpine",
-      "externalId": "ncurses-terminfo/6.0-r7/x86_64",
+      "externalId": "p11-kit-trust/0.23.2-r1/x86_64",
       "externalIdMetaData": {
         "forge": {
           "name": "alpine",
@@ -1887,13 +888,362 @@
           "usePreferredNamespaceAlias": true
         },
         "pieces": [
-          "ncurses-terminfo",
-          "6.0-r7"
+          "p11-kit-trust",
+          "0.23.2-r1"
         ],
         "suffix": "x86_64"
       }
     },
-    "relationship": []
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libtasn1/4.9-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "lcms2",
+    "revision": "2.8-r1",
+    "@id": "http:alpine/lcms2/2.8-r1/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "lcms2/2.8-r1/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "lcms2",
+          "2.8-r1"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "java-common",
+    "revision": "0.1-r0",
+    "@id": "http:alpine/java-common/0.1-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "java-common/0.1-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "java-common",
+          "0.1-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/busybox/1.25.1-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "lksctp-tools",
+    "revision": "1.0.17-r0",
+    "@id": "http:alpine/lksctp-tools/1.0.17-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "lksctp-tools/1.0.17-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "lksctp-tools",
+          "1.0.17-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "libjpeg-turbo",
+    "revision": "1.5.1-r0",
+    "@id": "http:alpine/libjpeg-turbo/1.5.1-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "libjpeg-turbo/1.5.1-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "libjpeg-turbo",
+          "1.5.1-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "krb5-libs",
+    "revision": "1.14.3-r1",
+    "@id": "http:alpine/krb5-libs/1.14.3-r1/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "krb5-libs/1.14.3-r1/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "krb5-libs",
+          "1.14.3-r1"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/libressl2.4-libcrypto/2.4.4-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/keyutils-libs/1.5.9-r1/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libverto/0.2.5-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/krb5-conf/1.0-r1/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libcom_err/1.43.3-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libressl2.4-libssl/2.4.4-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "keyutils-libs",
+    "revision": "1.5.9-r1",
+    "@id": "http:alpine/keyutils-libs/1.5.9-r1/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "keyutils-libs/1.5.9-r1/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "keyutils-libs",
+          "1.5.9-r1"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "libverto",
+    "revision": "0.2.5-r0",
+    "@id": "http:alpine/libverto/0.2.5-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "libverto/0.2.5-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "libverto",
+          "0.2.5-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "krb5-conf",
+    "revision": "1.0-r1",
+    "@id": "http:alpine/krb5-conf/1.0-r1/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "krb5-conf/1.0-r1/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "krb5-conf",
+          "1.0-r1"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/krb5-libs/1.14.3-r1/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "libcom_err",
+    "revision": "1.43.3-r0",
+    "@id": "http:alpine/libcom_err/1.43.3-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "libcom_err/1.43.3-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "libcom_err",
+          "1.43.3-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "libressl2.4-libssl",
+    "revision": "2.4.4-r0",
+    "@id": "http:alpine/libressl2.4-libssl/2.4.4-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "libressl2.4-libssl/2.4.4-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "libressl2.4-libssl",
+          "2.4.4-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/libressl2.4-libcrypto/2.4.4-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/openssl/1.0.2k-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "pcsc-lite-libs",
+    "revision": "1.8.20-r0",
+    "@id": "http:alpine/pcsc-lite-libs/1.8.20-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "pcsc-lite-libs/1.8.20-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "pcsc-lite-libs",
+          "1.8.20-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
   },
   {
     "name": "libstdc++",
@@ -1916,7 +1266,1015 @@
         "suffix": "x86_64"
       }
     },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libgcc/6.2.1-r1/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libstdc%2B%2B/6.2.1-r1/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "libgcc",
+    "revision": "6.2.1-r1",
+    "@id": "http:alpine/libgcc/6.2.1-r1/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "libgcc/6.2.1-r1/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "libgcc",
+          "6.2.1-r1"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libstdc%2B%2B/6.2.1-r1/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "nspr",
+    "revision": "4.12-r0",
+    "@id": "http:alpine/nspr/4.12-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "nspr/4.12-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "nspr",
+          "4.12-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "nss",
+    "revision": "3.27.2-r1",
+    "@id": "http:alpine/nss/3.27.2-r1/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "nss/3.27.2-r1/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "nss",
+          "3.27.2-r1"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/sqlite-libs/3.15.2-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/zlib/1.2.8-r2/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/nspr/4.12-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "sqlite-libs",
+    "revision": "3.15.2-r0",
+    "@id": "http:alpine/sqlite-libs/3.15.2-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "sqlite-libs/3.15.2-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "sqlite-libs",
+          "3.15.2-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "openjdk8-jre",
+    "revision": "8.121.13-r0",
+    "@id": "http:alpine/openjdk8-jre/8.121.13-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "openjdk8-jre/8.121.13-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "openjdk8-jre",
+          "8.121.13-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/libxcomposite/0.4.4-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libxrender/0.9.10-r1/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libxext/1.3.3-r1/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/java-cacerts/1.0-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libgcc/6.2.1-r1/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/freetype/2.7-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/giflib/5.1.4-r1/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/openjdk8-jre-base/8.121.13-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libx11/1.6.4-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/openjdk8-jre/8.121.13-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/alsa-lib/1.1.3-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libjpeg-turbo/1.5.1-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libxtst/1.2.3-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libpng/1.6.25-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libstdc%2B%2B/6.2.1-r1/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libxi/1.7.7-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "libxcomposite",
+    "revision": "0.4.4-r0",
+    "@id": "http:alpine/libxcomposite/0.4.4-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "libxcomposite/0.4.4-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "libxcomposite",
+          "0.4.4-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libx11/1.6.4-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "libx11",
+    "revision": "1.6.4-r0",
+    "@id": "http:alpine/libx11/1.6.4-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "libx11/1.6.4-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "libx11",
+          "1.6.4-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libxcb/1.12-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "libxcb",
+    "revision": "1.12-r0",
+    "@id": "http:alpine/libxcb/1.12-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "libxcb/1.12-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "libxcb",
+          "1.12-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/libxau/1.0.8-r1/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libxdmcp/1.1.2-r2/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "libxau",
+    "revision": "1.0.8-r1",
+    "@id": "http:alpine/libxau/1.0.8-r1/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "libxau/1.0.8-r1/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "libxau",
+          "1.0.8-r1"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "libxdmcp",
+    "revision": "1.1.2-r2",
+    "@id": "http:alpine/libxdmcp/1.1.2-r2/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "libxdmcp/1.1.2-r2/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "libxdmcp",
+          "1.1.2-r2"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "libxrender",
+    "revision": "0.9.10-r1",
+    "@id": "http:alpine/libxrender/0.9.10-r1/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "libxrender/0.9.10-r1/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "libxrender",
+          "0.9.10-r1"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libx11/1.6.4-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "libxext",
+    "revision": "1.3.3-r1",
+    "@id": "http:alpine/libxext/1.3.3-r1/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "libxext/1.3.3-r1/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "libxext",
+          "1.3.3-r1"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libx11/1.6.4-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "freetype",
+    "revision": "2.7-r0",
+    "@id": "http:alpine/freetype/2.7-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "freetype/2.7-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "freetype",
+          "2.7-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libpng/1.6.25-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libbz2/1.0.6-r5/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/zlib/1.2.8-r2/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "libpng",
+    "revision": "1.6.25-r0",
+    "@id": "http:alpine/libpng/1.6.25-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "libpng/1.6.25-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "libpng",
+          "1.6.25-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/zlib/1.2.8-r2/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "libbz2",
+    "revision": "1.0.6-r5",
+    "@id": "http:alpine/libbz2/1.0.6-r5/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "libbz2/1.0.6-r5/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "libbz2",
+          "1.0.6-r5"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "giflib",
+    "revision": "5.1.4-r1",
+    "@id": "http:alpine/giflib/5.1.4-r1/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "giflib/5.1.4-r1/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "giflib",
+          "5.1.4-r1"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "alsa-lib",
+    "revision": "1.1.3-r0",
+    "@id": "http:alpine/alsa-lib/1.1.3-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "alsa-lib/1.1.3-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "alsa-lib",
+          "1.1.3-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "libxtst",
+    "revision": "1.2.3-r0",
+    "@id": "http:alpine/libxtst/1.2.3-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "libxtst/1.2.3-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "libxtst",
+          "1.2.3-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/libxext/1.3.3-r1/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libx11/1.6.4-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "libxi",
+    "revision": "1.7.7-r0",
+    "@id": "http:alpine/libxi/1.7.7-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "libxi/1.7.7-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "libxi",
+          "1.7.7-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/libxext/1.3.3-r1/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libx11/1.6.4-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "alpine-keys",
+    "revision": "1.3-r0",
+    "@id": "http:alpine/alpine-keys/1.3-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "alpine-keys/1.3-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "alpine-keys",
+          "1.3-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
     "relationship": []
+  },
+  {
+    "name": "libuuid",
+    "revision": "2.28.2-r1",
+    "@id": "http:alpine/libuuid/2.28.2-r1/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "libuuid/2.28.2-r1/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "libuuid",
+          "2.28.2-r1"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "libssh2",
+    "revision": "1.7.0-r2",
+    "@id": "http:alpine/libssh2/1.7.0-r2/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "libssh2/1.7.0-r2/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "libssh2",
+          "1.7.0-r2"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/libressl2.4-libcrypto/2.4.4-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/zlib/1.2.8-r2/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "gnupg",
+    "revision": "2.1.15-r0",
+    "@id": "http:alpine/gnupg/2.1.15-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "gnupg/2.1.15-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "gnupg",
+          "2.1.15-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/npth/1.2-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libldap/2.4.44-r3/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libassuan/2.4.3-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/pinentry/0.9.7-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libksba/1.3.4-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libbz2/1.0.6-r5/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/zlib/1.2.8-r2/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libgcrypt/1.7.3-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libgpg-error/1.24-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "npth",
+    "revision": "1.2-r0",
+    "@id": "http:alpine/npth/1.2-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "npth/1.2-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "npth",
+          "1.2-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "libldap",
+    "revision": "2.4.44-r3",
+    "@id": "http:alpine/libldap/2.4.44-r3/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "libldap/2.4.44-r3/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "libldap",
+          "2.4.44-r3"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/libsasl/2.1.26-r8/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libressl2.4-libcrypto/2.4.4-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libressl2.4-libssl/2.4.4-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "libassuan",
+    "revision": "2.4.3-r0",
+    "@id": "http:alpine/libassuan/2.4.3-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "libassuan/2.4.3-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "libassuan",
+          "2.4.3-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libgpg-error/1.24-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "libgpg-error",
+    "revision": "1.24-r0",
+    "@id": "http:alpine/libgpg-error/1.24-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "libgpg-error/1.24-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "libgpg-error",
+          "1.24-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "pinentry",
+    "revision": "0.9.7-r0",
+    "@id": "http:alpine/pinentry/0.9.7-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "pinentry/0.9.7-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "pinentry",
+          "0.9.7-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libassuan/2.4.3-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libcap/2.25-r1/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/busybox/1.25.1-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libgpg-error/1.24-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/ncurses-libs/6.0-r7/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
   },
   {
     "name": "libcap",
@@ -1935,6 +2293,98 @@
         "pieces": [
           "libcap",
           "2.25-r1"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "ncurses-libs",
+    "revision": "6.0-r7",
+    "@id": "http:alpine/ncurses-libs/6.0-r7/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "ncurses-libs/6.0-r7/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "ncurses-libs",
+          "6.0-r7"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/ncurses-terminfo/6.0-r7/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/ncurses-terminfo-base/6.0-r7/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "ncurses-terminfo",
+    "revision": "6.0-r7",
+    "@id": "http:alpine/ncurses-terminfo/6.0-r7/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "ncurses-terminfo/6.0-r7/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "ncurses-terminfo",
+          "6.0-r7"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/ncurses-terminfo-base/6.0-r7/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "ncurses-terminfo-base",
+    "revision": "6.0-r7",
+    "@id": "http:alpine/ncurses-terminfo-base/6.0-r7/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "ncurses-terminfo-base/6.0-r7/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "ncurses-terminfo-base",
+          "6.0-r7"
         ],
         "suffix": "x86_64"
       }
@@ -1962,7 +2412,388 @@
         "suffix": "x86_64"
       }
     },
-    "relationship": []
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libgpg-error/1.24-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "libgcrypt",
+    "revision": "1.7.3-r0",
+    "@id": "http:alpine/libgcrypt/1.7.3-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "libgcrypt/1.7.3-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "libgcrypt",
+          "1.7.3-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libgpg-error/1.24-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "alpine-baselayout",
+    "revision": "3.0.4-r0",
+    "@id": "http:alpine/alpine-baselayout/3.0.4-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "alpine-baselayout/3.0.4-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "alpine-baselayout",
+          "3.0.4-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/busybox/1.25.1-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "musl-utils",
+    "revision": "1.1.15-r6",
+    "@id": "http:alpine/musl-utils/1.1.15-r6/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "musl-utils/1.1.15-r6/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "musl-utils",
+          "1.1.15-r6"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/scanelf/1.1.6-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "scanelf",
+    "revision": "1.1.6-r0",
+    "@id": "http:alpine/scanelf/1.1.6-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "scanelf/1.1.6-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "scanelf",
+          "1.1.6-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "libc-utils",
+    "revision": "0.7-r1",
+    "@id": "http:alpine/libc-utils/0.7-r1/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "libc-utils/0.7-r1/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "libc-utils",
+          "0.7-r1"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl-utils/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "apk-tools",
+    "revision": "2.6.8-r2",
+    "@id": "http:alpine/apk-tools/2.6.8-r2/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "apk-tools/2.6.8-r2/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "apk-tools",
+          "2.6.8-r2"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/libressl2.4-libcrypto/2.4.4-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/zlib/1.2.8-r2/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libressl2.4-libssl/2.4.4-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "libcurl",
+    "revision": "7.52.1-r3",
+    "@id": "http:alpine/libcurl/7.52.1-r3/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "libcurl/7.52.1-r3/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "libcurl",
+          "7.52.1-r3"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/libressl2.4-libcrypto/2.4.4-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/ca-certificates/20161130-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libssh2/1.7.0-r2/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/zlib/1.2.8-r2/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libressl2.4-libssl/2.4.4-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "oniguruma",
+    "revision": "6.1.3-r0",
+    "@id": "http:alpine/oniguruma/6.1.3-r0/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "oniguruma/6.1.3-r0/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "oniguruma",
+          "6.1.3-r0"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "apr",
+    "revision": "1.5.2-r1",
+    "@id": "http:alpine/apr/1.5.2-r1/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "apr/1.5.2-r1/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "apr",
+          "1.5.2-r1"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/libuuid/2.28.2-r1/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "jq",
+    "revision": "1.5-r3",
+    "@id": "http:alpine/jq/1.5-r3/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "jq/1.5-r3/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "jq",
+          "1.5-r3"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/oniguruma/6.1.3-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
+  },
+  {
+    "name": "curl",
+    "revision": "7.52.1-r3",
+    "@id": "http:alpine/curl/7.52.1-r3/x86_64",
+    "@type": "Component",
+    "externalIdentifier": {
+      "externalSystemTypeId": "@alpine",
+      "externalId": "curl/7.52.1-r3/x86_64",
+      "externalIdMetaData": {
+        "forge": {
+          "name": "alpine",
+          "separator": "/",
+          "usePreferredNamespaceAlias": true
+        },
+        "pieces": [
+          "curl",
+          "7.52.1-r3"
+        ],
+        "suffix": "x86_64"
+      }
+    },
+    "relationship": [
+      {
+        "related": "http:alpine/libcurl/7.52.1-r3/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/ca-certificates/20161130-r0/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      },
+      {
+        "related": "http:alpine/zlib/1.2.8-r2/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
+      }
+    ]
   },
   {
     "name": "su-exec",
@@ -1985,52 +2816,11 @@
         "suffix": "x86_64"
       }
     },
-    "relationship": []
-  },
-  {
-    "name": "libressl2.4-libssl",
-    "revision": "2.4.4-r0",
-    "@id": "http:alpine/libressl2.4-libssl/2.4.4-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "libressl2.4-libssl/2.4.4-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "libressl2.4-libssl",
-          "2.4.4-r0"
-        ],
-        "suffix": "x86_64"
+    "relationship": [
+      {
+        "related": "http:alpine/musl/1.1.15-r6/x86_64",
+        "relationshipType": "DYNAMIC_LINK"
       }
-    },
-    "relationship": []
-  },
-  {
-    "name": "libcom_err",
-    "revision": "1.43.3-r0",
-    "@id": "http:alpine/libcom_err/1.43.3-r0/x86_64",
-    "@type": "Component",
-    "externalIdentifier": {
-      "externalSystemTypeId": "@alpine",
-      "externalId": "libcom_err/1.43.3-r0/x86_64",
-      "externalIdMetaData": {
-        "forge": {
-          "name": "alpine",
-          "separator": "/",
-          "usePreferredNamespaceAlias": true
-        },
-        "pieces": [
-          "libcom_err",
-          "1.43.3-r0"
-        ],
-        "suffix": "x86_64"
-      }
-    },
-    "relationship": []
+    ]
   }
 ]
