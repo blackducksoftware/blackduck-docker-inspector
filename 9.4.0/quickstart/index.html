@@ -31,21 +31,21 @@
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
-      <link rel="shortcut icon" href="assets/images/favicon.png">
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
     
     
       
-        <title>Black Duck Docker Inspector</title>
+        <title>Quick start - Black Duck Docker Inspector</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/application.30686662.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.30686662.css">
       
       
     
     
-      <script src="assets/javascripts/modernizr.74668098.js"></script>
+      <script src="../assets/javascripts/modernizr.74668098.js"></script>
     
     
       
@@ -54,7 +54,7 @@
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
-    <link rel="stylesheet" href="assets/fonts/material-icons.css">
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
     
     
     
@@ -75,7 +75,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#help-topics" tabindex="1" class="md-skip">
+      <a href="#step-1-determine-the-repotag-of-the-docker-image-you-want-to-inspect" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -84,7 +84,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="." title="Black Duck Docker Inspector" class="md-header-nav__button md-logo">
+        <a href=".." title="Black Duck Docker Inspector" class="md-header-nav__button md-logo">
           
             <i class="md-icon"></i>
           
@@ -101,7 +101,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                <b>Documentation</b>
+                Quick start
               
             </span>
           
@@ -154,7 +154,7 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="." title="Black Duck Docker Inspector" class="md-nav__button md-logo">
+    <a href=".." title="Black Duck Docker Inspector" class="md-nav__button md-logo">
       
         <i class="md-icon"></i>
       
@@ -168,20 +168,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-    <a href="." title="Documentation" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href=".." title="Documentation" class="md-nav__link">
       <b>Documentation</b>
     </a>
-    
   </li>
 
     
@@ -191,7 +182,7 @@
 
 
   <li class="md-nav__item">
-    <a href="overview/" title="Overview" class="md-nav__link">
+    <a href="../overview/" title="Overview" class="md-nav__link">
       Overview
     </a>
   </li>
@@ -201,11 +192,66 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-    <a href="quickstart/" title="Quick start" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Quick start
+      </label>
+    
+    <a href="./" title="Quick start" class="md-nav__link md-nav__link--active">
       Quick start
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-determine-the-repotag-of-the-docker-image-you-want-to-inspect" class="md-nav__link">
+    Step 1: Determine the repo:tag of the Docker image you want to inspect
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-optional-determine-your-black-duck-url-and-credentials" class="md-nav__link">
+    Step 2 (optional): Determine your Black Duck URL and credentials
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-run-black-duck-docker-inspector" class="md-nav__link">
+    Step 3: Run Black Duck Docker Inspector
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-review-your-results-in-black-duck" class="md-nav__link">
+    Step 4: Review your results in Black Duck
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
     
@@ -215,7 +261,7 @@
 
 
   <li class="md-nav__item">
-    <a href="architecture/" title="Architecture" class="md-nav__link">
+    <a href="../architecture/" title="Architecture" class="md-nav__link">
       Architecture
     </a>
   </li>
@@ -227,7 +273,7 @@
 
 
   <li class="md-nav__item">
-    <a href="running/" title="Running" class="md-nav__link">
+    <a href="../running/" title="Running" class="md-nav__link">
       Running
     </a>
   </li>
@@ -239,7 +285,7 @@
 
 
   <li class="md-nav__item">
-    <a href="properties/" title="Properties" class="md-nav__link">
+    <a href="../properties/" title="Properties" class="md-nav__link">
       Properties
     </a>
   </li>
@@ -251,7 +297,7 @@
 
 
   <li class="md-nav__item">
-    <a href="advanced/" title="Advanced" class="md-nav__link">
+    <a href="../advanced/" title="Advanced" class="md-nav__link">
       Advanced
     </a>
   </li>
@@ -263,7 +309,7 @@
 
 
   <li class="md-nav__item">
-    <a href="deployment/" title="Deploying" class="md-nav__link">
+    <a href="../deployment/" title="Deploying" class="md-nav__link">
       Deploying
     </a>
   </li>
@@ -275,7 +321,7 @@
 
 
   <li class="md-nav__item">
-    <a href="troubleshooting/" title="Troubleshooting" class="md-nav__link">
+    <a href="../troubleshooting/" title="Troubleshooting" class="md-nav__link">
       Troubleshooting
     </a>
   </li>
@@ -287,7 +333,7 @@
 
 
   <li class="md-nav__item">
-    <a href="releasenotes/" title="Release notes" class="md-nav__link">
+    <a href="../releasenotes/" title="Release notes" class="md-nav__link">
       Release notes
     </a>
   </li>
@@ -307,8 +353,43 @@
 <nav class="md-nav md-nav--secondary">
   
   
-    
   
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-determine-the-repotag-of-the-docker-image-you-want-to-inspect" class="md-nav__link">
+    Step 1: Determine the repo:tag of the Docker image you want to inspect
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-optional-determine-your-black-duck-url-and-credentials" class="md-nav__link">
+    Step 2 (optional): Determine your Black Duck URL and credentials
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-run-black-duck-docker-inspector" class="md-nav__link">
+    Step 3: Run Black Duck Docker Inspector
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-review-your-results-in-black-duck" class="md-nav__link">
+    Step 4: Review your results in Black Duck
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
   
 </nav>
                   </div>
@@ -321,14 +402,36 @@
               
                 
                 
-                <h1 id="help-topics">Help Topics</h1>
-<p><em>Black Duck Docker Inspector 9.4.0</em></p>
-<p>Options for navigating this help content:</p>
-<ol>
-<li>Use the top-level topic list in the left sidebar to navigate to a topic. On each page containing multiple sections, a table of contents for the page displays on the right sidebar.</li>
-<li>Type a search term into the <em>Search</em> box on the right side of the header, then select from the list of topics that mention that term.</li>
-<li>If you are new to Black Duck Docker Inspector, reading the topics in the order presented in the left sidebar is a reasonable way to start. You can use the <em>Next</em> link at the bottom right of each page to advance to the next topic.</li>
-</ol>
+                  <h1>Quick start</h1>
+                
+                <p>To help you get started using Black Duck Docker Inspector, here's a simple example.</p>
+<h2 id="step-1-determine-the-repotag-of-the-docker-image-you-want-to-inspect">Step 1: Determine the repo:tag of the Docker image you want to inspect</h2>
+<p>To run Black Duck Docker Inspector on a Docker image from <a href="https://hub.docker.com">Docker Hub</a>, use Docker Hub to identify the repo:tag of the image you want to inspect.
+For example: <em>ubuntu:latest</em>.</p>
+<p>To run Black Duck Docker Inspector on an image that is already on your machine (perhaps because you built it), use the REPOSITORY and TAG columns
+from the output of the <em>docker images</em> command
+to identify the repo:tag of the image you want to inspect.</p>
+<p>On the Black Duck Docker Inspector command line, pass your repo:tag using this argument:</p>
+<pre><code>--docker.image={repo}:{tag}
+</code></pre>
+<h2 id="step-2-optional-determine-your-black-duck-url-and-credentials">Step 2 (optional): Determine your Black Duck URL and credentials</h2>
+<p>To enable Black Duck Docker Inspector to upload results to Black Duck, you will need a Black Duck URL, username, and password. (For
+information on using an API token to authenticate with Black Duck, refer to <a href="../properties/">Properties</a>).</p>
+<p>On the Black Duck Docker Inspector command line, pass your Black Duck connection details using the following arguments:</p>
+<pre><code>--blackduck.url={your Black Duck URL}
+--blackduck.username={your Black Duck username}
+--blackduck.password={your Black Duck password}
+</code></pre>
+<p>As an alternative, to run Black Duck Docker Inspector without connecting to Black Duck, pass this argument on the command line:</p>
+<pre><code>--upload.bdio=false
+</code></pre>
+<h2 id="step-3-run-black-duck-docker-inspector">Step 3: Run Black Duck Docker Inspector</h2>
+<p>To inspect an image and upload the results to Black Duck:</p>
+<pre><code>bash &lt;(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) --blackduck.url={your Black Duck URL} --blackduck.username={your Black Duck username} --blackduck.password={your Black Duck password} --docker.image={repo}:{tag}
+</code></pre>
+<h2 id="step-4-review-your-results-in-black-duck">Step 4: Review your results in Black Duck</h2>
+<p>To see your results, log into Black Duck, and look for a project with a name matching the docker image <em>repo</em>. The version name will
+match the docker image <em>tag</em>.</p>
                 
                   
                 
@@ -349,14 +452,28 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
+          <a href="../overview/" title="Overview" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Overview
+              </span>
+            </div>
+          </a>
         
-          <a href="overview/" title="Overview" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+        
+          <a href="../architecture/" title="Architecture" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Overview
+                Architecture
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
@@ -384,9 +501,9 @@
       
     </div>
     
-      <script src="assets/javascripts/application.c648116f.js"></script>
+      <script src="../assets/javascripts/application.c648116f.js"></script>
       
-      <script>app.initialize({version:"1.0.4",url:{base:"."}})</script>
+      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       
     
   </body>
