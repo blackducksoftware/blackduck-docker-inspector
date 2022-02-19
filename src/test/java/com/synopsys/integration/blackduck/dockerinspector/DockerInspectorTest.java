@@ -358,14 +358,14 @@ public class DockerInspectorTest {
     public void testAggregateTarfileImageTwo() throws IOException, InterruptedException, IntegrationException {
         TestConfig testConfig = new TestConfigBuilder()
                                     .setTarFilePath("build/images/test/aggregated.tar")
-                                    .setTargetRepo("blackducksoftware/centos_minus_vim_plus_bacula")
+                                    .setTargetRepo("blackducksoftware/fedora_minus_vim_plus_bacula")
                                     .setTargetTag("1.0")
                                     .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
                                     .setRequireBdioMatch(false)
                                     .setMinNumberOfComponentsExpected(10)
                                     .setOutputBomMustContainComponentPrefix("openssl-libs")
                                     .setOutputBomMustNotContainComponentPrefix("vim-minimal")
-                                    .setCodelocationName("blackducksoftware_centos_minus_vim_plus_bacula_1.0_RPM")
+                                    .setCodelocationName("blackducksoftware_fedora_minus_vim_plus_bacula_1.0_RPM")
                                     .build();
 
         testTarUsingExistingContainer(testConfig);
@@ -434,17 +434,17 @@ public class DockerInspectorTest {
     }
 
     @Test
-    public void testCentosUsingExistingAlpineContainer() throws IOException, InterruptedException, IntegrationException {
+    public void testFedoraUsingExistingAlpineContainer() throws IOException, InterruptedException, IntegrationException {
         TestConfig testConfig = new TestConfigBuilder()
-                                    .setTarFilePath("build/images/test/centos_minus_vim_plus_bacula.tar")
-                                    .setTargetRepo("blackducksoftware/centos_minus_vim_plus_bacula")
+                                    .setTarFilePath("build/images/test/fedora_minus_vim_plus_bacula.tar")
+                                    .setTargetRepo("blackducksoftware/fedora_minus_vim_plus_bacula")
                                     .setTargetTag("1.0")
                                     .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE)
                                     .setRequireBdioMatch(false)
                                     .setMinNumberOfComponentsExpected(5)
                                     .setOutputBomMustContainComponentPrefix("openssl-libs")
                                     .setOutputBomMustNotContainComponentPrefix("vim-minimal")
-                                    .setCodelocationName("blackducksoftware_centos_minus_vim_plus_bacula_1.0_RPM")
+                                    .setCodelocationName("blackducksoftware_fedora_minus_vim_plus_bacula_1.0_RPM")
                                     .build();
 
         testTarUsingExistingContainer(testConfig);
@@ -485,18 +485,18 @@ public class DockerInspectorTest {
     @Test
     public void testExcludePlatformComponents() throws IOException, InterruptedException, IntegrationException {
         List<String> additionalArgs = new ArrayList<>();
-        additionalArgs.add("--docker.platform.top.layer.id=sha256:1bcfbfaf95f95ea8a28711c83085dbbeceefa11576e1c889304aa5bacbaa6ac2");
+        additionalArgs.add("--docker.platform.top.layer.id=sha256:389adea752cd55355cae09d2b3038c0b155e992a0d32fcecb3d281abf6a8c5cf");
 
         TestConfig testConfig = new TestConfigBuilder()
                                     .setTarFilePath("build/images/test/aggregated.tar")
-                                    .setTargetRepo("blackducksoftware/centos_minus_vim_plus_bacula")
+                                    .setTargetRepo("blackducksoftware/fedora_minus_vim_plus_bacula")
                                     .setTargetTag("1.0")
                                     .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU)
                                     .setRequireBdioMatch(false)
                                     .setMinNumberOfComponentsExpected(10)
                                     .setOutputBomMustContainComponentPrefix("systemd")
                                     .setOutputBomMustNotContainComponentPrefix("vim-minimal")
-                                    .setCodelocationName("blackducksoftware_centos_minus_vim_plus_bacula_1.0_app_RPM")
+                                    .setCodelocationName("blackducksoftware_fedora_minus_vim_plus_bacula_1.0_app_RPM")
                                     .setAdditionalArgs(additionalArgs)
                                     .setAppOnlyMode(true)
                                     .build();
