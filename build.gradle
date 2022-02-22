@@ -139,10 +139,10 @@ task createTestDockerfile(type: Dockerfile) {
     destFile = project.file("${buildDir}/images/test/fedora_minus_vim_plus_bacula/Dockerfile")
     println "destFile: ${destFile}"
     from 'fedora@sha256:40ba585f0e25c096a08c30ab2f70ef3820b8ea5a4bdd16da0edbfc0a6952fa57'
-    environmentVariable('LANG', 'en_US.UTF-8')
+    environmentVariable('LANG', 'C.UTF-8')
 
-    runCommand 'rpm -e vim-minimal && \
-        yum install -y bacula-director-11.0.5-2.fc35.x86_64  bacula-storage-11.0.5-2.fc35.x86_64  bacula-client-11.0.5-2.fc35.x86_64 \
+    runCommand 'dnf update -y && dnf remove -y vim-minimal && \
+        dnf install -y bacula-director-11.0.5-2.fc35.x86_64 bacula-storage-11.0.5-2.fc35.x86_64 bacula-client-11.0.5-2.fc35.x86_64 \
         bacula-console-11.0.5-2.fc35.x86_64'
 }
 
