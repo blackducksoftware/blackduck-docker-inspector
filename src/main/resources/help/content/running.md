@@ -161,7 +161,7 @@ For example, the first layer of an image could be named:
 
 Because this feature produces BDIO in which the same component may appear at multiple points in the graph,
 only ${blackduck_product_name} versions 2021.8.0 and newer have the ability to correctly display graphs organized by layer,
-and only if *Admin > Scan > Component Dependency Duplication Sensitivity* is set high enough to avoid removal of components
+and only if *Admin > System Settings > Scan > Component Dependency Duplication Sensitivity* is set high enough to avoid removal of components
 that appear multiple times in the graph (at minimum: 2).
 
 When organizing components by layer, you must also choose whether or not to include removed (whited-out) components in the output.
