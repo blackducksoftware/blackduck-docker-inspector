@@ -153,6 +153,10 @@ Alternatively, you can direct ${solution_name} to organize components by image l
 by setting property `bdio.organize.components.by.layer=true`.
 Run this way, ${solution_name} will produce BDIO containing image layers
 at the top level of the graph, and components associated with each layer appearing as children of that layer.
+This structure is visible in from the ${blackduck_product_name} project version Source display.
+
+A side effect of this components-under-layers graph structure is
+the categorization by ${blackduck_product_name} of all components as Transitive.
 
 In the BDIO, layers are named `Layer{index}_{layer digest}`, where `{index}` is a two digit index starting at 00 to indicate layer ordering
 within the image, and `{layer digest}` is the layer digest with ":" replaced with "_".
