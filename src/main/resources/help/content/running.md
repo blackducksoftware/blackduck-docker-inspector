@@ -144,3 +144,50 @@ Then use the *docker.image.id* property to pass the image ID to ${solution_name}
     ./${script_name} --docker.image.id={image ID}
     
 The method only works for local images.
+
+### Organizing components by layer
+
+By default ${solution_name} will produce BDIO containing a component graph consisting only of components (linux packages).
+
+Alternatively, you can direct ${solution_name} to organize components by image layer
+by setting property `bdio.organize.components.by.layer=true`.
+Run this way, ${solution_name} will produce BDIO containing image layers
+at the top level of the graph, and components associated with each layer appearing as children of that layer.
+
+In the BDIO, layers are named `Layer{index}_{layer digest}`, where `{index}` is a two digit index starting at 00 to indicate layer ordering
+within the image, and `{layer digest}` is the layer digest with ":" replaced with "_".
+For example, the first layer of an image could be named:
+`Layer00_sha256_1bcfbfaf95f95ea8a28711c83085dbbeceefa11576e1c889304aa5bacbaa6ac2`.
+
+Because this feature produces BDIO in which the same component may appear at multiple points in the graph,
+only ${blackduck_product_name} versions 2021.8.0 and newer have the ability to correctly display graphs organized by layer,
+and only if *Admin > Scan > Component Dependency Duplication Sensitivity* is set high enough to avoid removal of components
+that appear multiple times in the graph (at minimum: 2).
+
+When organizing components by layer, you must also choose whether or not to include removed (whited-out) components in the output.
+
+#### Including removed components
+
+If you include removed components, ${solution_name} will produce BDIO containing a graph with image layers
+at the top level.  Under each image layer it will include all components present after the layer was
+applied to the file system (including components added by lower layers that are still present). If a component is added by a lower layer
+but later removed (whited-out) by a higher layer, it will not
+appear under the layer that removed it or any higher layer (unless/until it is re-added by another layer).
+
+The benefit of using this mode: for every component added by any layer, you can see where it was added, and where it was removed (if it was).
+
+The downside of using this mode: components added by a lower layer but removed by a higher layer will appear in the BOM, even though they are not present in the final container filesystem.
+
+To include removed components, set property `bdio.include.removed.components=true`.
+
+#### Excluding removed components
+
+If you exclude removed components (the default), ${solution_name} will behave as described in the section above
+except that components not present in the final container filesystem will not appear on any layer in the BDIO graph.
+
+The benefit of using this mode: components added by a lower layer but removed by a higher layer
+(and therefore not present in the final container filesystem) will not appear in the BOM.
+
+The downside of using this mode: if a component is added by a lower layer and removed by a higher layer, there is no evidence of that in the BDIO graph or the BOM.
+
+To exclude removed components, set property `bdio.include.removed.components=false` (the default).
