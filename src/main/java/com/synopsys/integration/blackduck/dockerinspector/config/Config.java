@@ -234,11 +234,14 @@ public class Config {
     @Value("${cleanup.inspector.image:false}")
     private Boolean cleanupInspectorImage = Boolean.FALSE;
 
-    @ValueDescription(description = "In generated BDIO, organize components by layer?", defaultValue = "false", group = Config.GROUP_PRIVATE, deprecated = false)
+    @ValueDescription(description = "In generated BDIO, organize components by layer?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${bdio.organize.components.by.layer:false}")
     private Boolean organizeComponentsByLayer = Boolean.FALSE;
 
-    @ValueDescription(description = "In generated BDIO, include removed components?", defaultValue = "false", group = Config.GROUP_PRIVATE, deprecated = false)
+    @ValueDescription(description = "In generated BDIO, include removed components? " +
+        "If false, only components present in the final container filesystem (in other words, present after the final layer is applied) will be included in the output. " +
+        "If true, a component added by any layer will be included in the output even if later removed by a higher layer.",
+        defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${bdio.include.removed.components:false}")
     private Boolean includeRemovedComponents = Boolean.FALSE;
 
@@ -298,8 +301,8 @@ public class Config {
     private Boolean offlineMode = Boolean.FALSE;
 
     @ValueDescription(description = "The path to a file or directory to which help output will be written in markdown format. " +
-                                        "If not set, help will be written to stdout. If set, the directory must exist; the file will be created if it does not exist. " +
-                                        "If the path to a directory is provided, Docker Inspector will generate the filename automatically",
+        "If not set, help will be written to stdout. If set, the directory must exist; the file will be created if it does not exist. " +
+        "If the path to a directory is provided, Docker Inspector will generate the filename automatically",
         defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${help.output.path:}")
     private String helpOutputFilePath = "";
@@ -377,7 +380,8 @@ public class Config {
         allKeys.add(propName);
         ValueDescription valueDescription = field.getAnnotation(ValueDescription.class);
         DockerInspectorOption opt = new DockerInspectorOption(propName, value, valueDescription.description(), field.getType(), valueDescription.defaultValue(),
-            valueDescription.deprecated(), valueDescription.deprecationMessage());
+            valueDescription.deprecated(), valueDescription.deprecationMessage()
+        );
         optionsByKey.put(propName, opt);
         logger.trace(String.format("adding field name %s to optionsByFieldName", field.getName()));
         optionsByFieldName.put(field.getName(), opt);
@@ -514,7 +518,7 @@ public class Config {
         return optionsByFieldName.get("dockerImageId").getResolvedValue();
     }
 
-    public String getDockerImagePlatform() { return optionsByFieldName.get("dockerImagePlatform").getResolvedValue(); }
+    public String getDockerImagePlatform() {return optionsByFieldName.get("dockerImagePlatform").getResolvedValue();}
 
     public String getDockerImageRepo() {
         return optionsByFieldName.get("dockerImageRepo").getResolvedValue();

@@ -1,3 +1,9 @@
+#### Version 9.4.1
+
+##### Documentation updates
+
+* Added to the documentation the [organize components by layer](advanced.md#organizing-components-by-layer) feature (properties bdio.organize.components.by.layer and bdio.include.removed.components).
+
 #### Version 9.4.0
 
 ##### New features
