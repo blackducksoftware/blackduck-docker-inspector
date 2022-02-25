@@ -279,6 +279,33 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#organizing-components-by-layer" class="md-nav__link">
+    Organizing components by layer
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#including-removed-components" class="md-nav__link">
+    Including removed components
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#excluding-removed-components" class="md-nav__link">
+    Excluding removed components
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#isolating-application-components" class="md-nav__link">
     Isolating application components
   </a>
@@ -469,6 +496,33 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#organizing-components-by-layer" class="md-nav__link">
+    Organizing components by layer
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#including-removed-components" class="md-nav__link">
+    Including removed components
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#excluding-removed-components" class="md-nav__link">
+    Excluding removed components
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#isolating-application-components" class="md-nav__link">
     Isolating application components
   </a>
@@ -629,6 +683,40 @@ the <em>docker.tar</em> property must allow read by all.</p>
 <p>Docker may restrict file sharing to certain directories that you've configured in
 Docker &gt; Settings &gt; Resource &gt; File Sharing. To enable Black Duck Docker Inspector to mount the volumes
 that it needs, you may need to enabling file sharing for directory $HOME/blackduck.</p>
+<h3 id="organizing-components-by-layer">Organizing components by layer</h3>
+<p>By default Black Duck Docker Inspector will produce BDIO containing a component graph consisting only of components (linux packages).</p>
+<p>Alternatively, you can direct Black Duck Docker Inspector to organize components by image layer
+by setting property <code>bdio.organize.components.by.layer=true</code>.
+Run this way, Black Duck Docker Inspector will produce BDIO containing image layers
+at the top level of the graph, and components associated with each layer appearing as children of that layer.
+This structure is visible in from the Black Duck project version Source display.</p>
+<p>A side effect of this components-under-layers graph structure is
+the categorization by Black Duck of all components as Transitive.</p>
+<p>In the BDIO, layers are named <code>Layer{index}_{layer digest}</code>, where <code>{index}</code> is a two digit index starting at 00 to indicate layer ordering
+within the image, and <code>{layer digest}</code> is the layer digest with ":" replaced with "_".
+For example, the first layer of an image could be named:
+<code>Layer00_sha256_1bcfbfaf95f95ea8a28711c83085dbbeceefa11576e1c889304aa5bacbaa6ac2</code>.</p>
+<p>Because this feature produces BDIO in which the same component may appear at multiple points in the graph,
+only Black Duck versions 2021.8.0 and newer have the ability to correctly display graphs organized by layer,
+and only if <em>Admin &gt; System Settings &gt; Scan &gt; Component Dependency Duplication Sensitivity</em> is set high enough to avoid removal of components
+that appear multiple times in the graph (at minimum: 2).</p>
+<p>When organizing components by layer, you must also choose whether or not to include removed (whited-out) components in the output.</p>
+<h4 id="including-removed-components">Including removed components</h4>
+<p>If you include removed components, Black Duck Docker Inspector will produce BDIO containing a graph with image layers
+at the top level.  Under each image layer it will include all components present after the layer was
+applied to the file system (including components added by lower layers that are still present). If a component is added by a lower layer
+but later removed (whited-out) by a higher layer, it will not
+appear under the layer that removed it or any higher layer (unless/until it is re-added by another layer).</p>
+<p>The benefit of using this mode: for every component added by any layer, you can see where it was added, and where it was removed (if it was).</p>
+<p>The downside of using this mode: components added by a lower layer but removed by a higher layer will appear in the BOM, even though they are not present in the final container filesystem.</p>
+<p>To include removed components, set property <code>bdio.include.removed.components=true</code>.</p>
+<h4 id="excluding-removed-components">Excluding removed components</h4>
+<p>If you exclude removed components (the default), Black Duck Docker Inspector will behave as described in the section above
+except that components not present in the final container filesystem will not appear on any layer in the BDIO graph.</p>
+<p>The benefit of using this mode: components added by a lower layer but removed by a higher layer
+(and therefore not present in the final container filesystem) will not appear in the BOM.</p>
+<p>The downside of using this mode: if a component is added by a lower layer and removed by a higher layer, there is no evidence of that in the BDIO graph or the BOM.</p>
+<p>To exclude removed components, set property <code>bdio.include.removed.components=false</code> (the default).</p>
 <h3 id="isolating-application-components">Isolating application components</h3>
 <p>If you are interested in components from the application layers of your image, but not interested in components
 from the underlying platform layers, you can exclude components from platform layers from your results.</p>
