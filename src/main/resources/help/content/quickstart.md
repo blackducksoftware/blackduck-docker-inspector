@@ -13,7 +13,7 @@ On the ${solution_name} command line, pass your repo:tag using this argument:
 
     --docker.image={repo}:{tag}
 
-When you specify the target image using the *docker.image* property, ${solution_name} will perform the equivalent of a `docker pull` on the image before inspecting it, in an attempt to ensure that it is inspecting the latest image. To avoid the `docker pull`, specify the image using the *docker.image.id* property instead.
+When you specify the target image using the *docker.image* property, ${solution_name} performs the equivalent of a `docker pull` on the image before inspecting it, in an attempt to ensure that it is inspecting the latest image. To avoid the `docker pull`, specify the image using the *docker.image.id* property instead.
 
 ## Step 2 (optional): Determine your ${blackduck_product_name} URL and credentials
 
