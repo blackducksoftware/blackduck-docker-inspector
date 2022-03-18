@@ -414,6 +414,7 @@ to identify the repo:tag of the image you want to inspect.</p>
 <p>On the Black Duck Docker Inspector command line, pass your repo:tag using this argument:</p>
 <pre><code>--docker.image={repo}:{tag}
 </code></pre>
+<p>When you specify the target image using the <em>docker.image</em> property, Black Duck Docker Inspector performs the equivalent of a <code>docker pull</code> on the image before inspecting it, in an attempt to ensure that it is inspecting the latest image. To avoid the <code>docker pull</code>, specify the image using the <em>docker.image.id</em> property instead.</p>
 <h2 id="step-2-optional-determine-your-black-duck-url-and-credentials">Step 2 (optional): Determine your Black Duck URL and credentials</h2>
 <p>To enable Black Duck Docker Inspector to upload results to Black Duck, you will need a Black Duck URL, username, and password. (For
 information on using an API token to authenticate with Black Duck, refer to <a href="../properties/">Properties</a>).</p>
