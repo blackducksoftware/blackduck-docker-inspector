@@ -18,7 +18,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-import com.synopsys.integration.blackduck.imageinspector.image.common.RepoTag;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -67,6 +66,7 @@ import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarWrapper
 import com.synopsys.integration.blackduck.exception.BlackDuckIntegrationException;
 import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 import com.synopsys.integration.blackduck.imageinspector.api.name.ImageNameResolver;
+import com.synopsys.integration.blackduck.imageinspector.image.common.RepoTag;
 import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
 import com.synopsys.integration.exception.IntegrationException;
 import com.synopsys.integration.util.OperatingSystemType;
@@ -84,8 +84,10 @@ public class DockerClientManager {
     private final DockerClient dockerClient;
 
     @Autowired
-    public DockerClientManager(FileOperations fileOperations, ImageNameResolver imageNameResolver, Config config, ImageTarFilename imageTarFilename,
-        ProgramPaths programPaths) {
+    public DockerClientManager(
+        FileOperations fileOperations, ImageNameResolver imageNameResolver, Config config, ImageTarFilename imageTarFilename,
+        ProgramPaths programPaths
+    ) {
         this.fileOperations = fileOperations;
         this.imageNameResolver = imageNameResolver;
         this.config = config;
@@ -96,7 +98,7 @@ public class DockerClientManager {
         // The java-docker library's default docker host value is the Linux/Mac default value, so no action required
         // But for Windows, unless told not to: use the Windows default docker host value
         if (config.isUsePlatformDefaultDockerHost() &&
-                (OperatingSystemType.determineFromSystem() == OperatingSystemType.WINDOWS)) {
+            (OperatingSystemType.determineFromSystem() == OperatingSystemType.WINDOWS)) {
             builder
                 .withDockerHost("npipe:////./pipe/docker_engine");
         }
@@ -104,9 +106,9 @@ public class DockerClientManager {
         DockerClientConfig dockerClientConfig = builder.build();
 
         DockerHttpClient httpClient = new ApacheDockerHttpClient.Builder()
-                                          .dockerHost(dockerClientConfig.getDockerHost())
-                                          .sslConfig(dockerClientConfig.getSSLConfig())
-                                          .build();
+            .dockerHost(dockerClientConfig.getDockerHost())
+            .sslConfig(dockerClientConfig.getSSLConfig())
+            .build();
 
         dockerClient = DockerClientImpl.getInstance(dockerClientConfig, httpClient);
     }
@@ -141,6 +143,7 @@ public class DockerClientManager {
         ImageTarWrapper tarWrapper;
         if (StringUtils.isNotBlank(config.getDockerTar())) {
             File dockerTarFile = new File(config.getDockerTar());
+            checkGivenTarFileExtension(dockerTarFile);
             fileOperations.logFileOwnerGroupPerms(dockerTarFile);
             tarWrapper = new ImageTarWrapper(dockerTarFile);
         } else {
@@ -162,6 +165,12 @@ public class DockerClientManager {
         logger.info(String.format("Pulling image %s:%s, platform: %s", imageName, tagName, platform));
         PullImageCmd pull = dockerClient.pullImageCmd(imageName).withTag(tagName).withPlatform(platform);
         return pullImage(imageName, tagName, pull);
+    }
+
+    private void checkGivenTarFileExtension(File givenTarFile) {
+        if (!givenTarFile.getName().endsWith(".tar")) {
+            logger.warn("The given docker tar file {} must be UNIX tar format but does not have a .tar extension; proceeding anyway", givenTarFile.getAbsolutePath());
+        }
     }
 
     private String pullImage(String imageName, String tagName, PullImageCmd pull) throws IntegrationException, InterruptedException {
@@ -200,10 +209,12 @@ public class DockerClientManager {
         }
     }
 
-    public String startContainerAsService(String runOnImageName, String runOnTagName, String containerName, ImageInspectorOsEnum inspectorOs, int containerPort, int hostPort,
+    public String startContainerAsService(
+        String runOnImageName, String runOnTagName, String containerName, ImageInspectorOsEnum inspectorOs, int containerPort, int hostPort,
         String appNameLabelValue,
         String jarPath,
-        String inspectorUrlAlpine, String inspectorUrlCentos, String inspectorUrlUbuntu) throws IOException {
+        String inspectorUrlAlpine, String inspectorUrlCentos, String inspectorUrlUbuntu
+    ) throws IOException {
         String imageNameTag = String.format("%s:%s", runOnImageName, runOnTagName);
         logger.info(String.format("Starting container: %s", containerName));
         logger.debug(String.format("\timageNameTag: %s", imageNameTag));
@@ -215,7 +226,8 @@ public class DockerClientManager {
             jarPath,
             getLoggingLevelString(),
             containerPort,
-            imageInspectorOsName, inspectorUrlAlpine, inspectorUrlCentos, inspectorUrlUbuntu);
+            imageInspectorOsName, inspectorUrlAlpine, inspectorUrlCentos, inspectorUrlUbuntu
+        );
         logger.debug(String.format("Starting service with cmd: %s", cmd));
         Map<String, String> labels = new HashMap<>(1);
         labels.put(CONTAINER_APPNAME_LABEL_KEY, appNameLabelValue);
@@ -226,11 +238,11 @@ public class DockerClientManager {
         portBindings.bind(exposedPort, Binding.bindPort(hostPort));
         HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(portBindings).withBinds(bindMount);
         try (CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageNameTag)
-                                                         .withName(containerName)
-                                                         .withLabels(labels)
-                                                         .withExposedPorts(exposedPort)
-                                                         .withHostConfig(hostConfig)
-                                                         .withCmd(cmd.split(" "))) {
+            .withName(containerName)
+            .withLabels(labels)
+            .withExposedPorts(exposedPort)
+            .withHostConfig(hostConfig)
+            .withCmd(cmd.split(" "))) {
 
             List<String> envAssignments = new ArrayList<>();
             if (StringUtils.isBlank(config.getBlackDuckProxyHost()) && !StringUtils.isBlank(config.getScanCliOptsEnvVar())) {
@@ -326,7 +338,8 @@ public class DockerClientManager {
     private void throwIfPlatformSpecified(String imageName, String tagName, Exception e) throws IntegrationException {
         if (StringUtils.isNotBlank(config.getDockerImagePlatform())) {
             String msg = String.format("Unable to pull %s:%s platform %s. If you want to inspect a local image, run again without specifying the platform. Error on pull: %s", imageName, tagName,
-                config.getDockerImagePlatform(), e.getMessage());
+                config.getDockerImagePlatform(), e.getMessage()
+            );
             throw new IntegrationException(msg, e);
         }
     }
@@ -390,8 +403,10 @@ public class DockerClientManager {
         return Optional.empty();
     }
 
-    private boolean findMatchForTargetImageAmongTheseTags(String targetImageName, String targetTagName,
-        Image candidateImage, String[] candidateImageTagList) {
+    private boolean findMatchForTargetImageAmongTheseTags(
+        String targetImageName, String targetTagName,
+        Image candidateImage, String[] candidateImageTagList
+    ) {
         for (String repoTag : candidateImageTagList) {
             logger.trace(String.format("getLocalImage(%s, %s) examining %s", targetImageName, targetTagName, repoTag));
             if (repoTag == null) {
