@@ -168,7 +168,7 @@ public class DockerClientManager {
     }
 
     private void checkGivenTarFileExtension(File givenTarFile) {
-        if (!givenTarFile.getName().endsWith(".tar")) {
+        if (!givenTarFile.getName().toLowerCase().endsWith(".tar")) {
             logger.warn("The given docker tar file {} must be UNIX tar format but does not have a .tar extension; proceeding anyway", givenTarFile.getAbsolutePath());
         }
     }
