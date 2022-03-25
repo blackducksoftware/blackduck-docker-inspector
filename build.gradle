@@ -14,7 +14,7 @@ buildscript {
 }
 
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
-project.ext.inspectorImageVersion = "5.0.11"
+project.ext.inspectorImageVersion = "5.0.12"
 
 version = '9.4.2-SNAPSHOT'
 
@@ -269,7 +269,7 @@ dependencies {
     compile 'com.synopsys.integration:blackduck-common:54.2.3'
     compile 'net.minidev:json-smart:2.4.7'
     compile 'com.synopsys.integration:integration-bdio:22.1.1'
-    compile 'com.synopsys.integration:hub-imageinspector-lib:14.1.0'
+    compile 'com.synopsys.integration:hub-imageinspector-lib:14.1.1'
     implementation 'ch.qos.logback:logback-classic:1.2.3'
 
     compile 'com.github.docker-java:docker-java-core:3.2.7'
