@@ -230,6 +230,7 @@ task buildAggTestDockerTarfile(type: Exec, dependsOn: [buildTestDockerImage, bui
           "blackducksoftware/whiteouttest:1.0"
 }
 
+build.dependsOn generateHelpMarkdown
 clean.dependsOn docsClean
 compileJava.dependsOn writeVersionToPropertiesFile
 //build.dependsOn generateHelpMarkdown
