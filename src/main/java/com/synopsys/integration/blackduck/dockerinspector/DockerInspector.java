@@ -13,14 +13,13 @@ import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.Optional;
 
-import javax.annotation.PostConstruct;
-
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -46,7 +45,7 @@ import com.synopsys.integration.exception.IntegrationException;
 
 @SpringBootApplication
 @ComponentScan(basePackages = { "com.synopsys.integration.blackduck.imageinspector", "com.synopsys.integration.blackduck.dockerinspector" })
-public class DockerInspector {
+public class DockerInspector implements ApplicationRunner {
     private static final Logger logger = LoggerFactory.getLogger(DockerInspector.class);
 
     private static final String DETECT_CALLER_NAME = "Detect";
@@ -92,8 +91,8 @@ public class DockerInspector {
         logger.warn("The program is not expected to get here.");
     }
 
-    @PostConstruct
-    public void inspectImage() {
+    @Override
+    public void run(ApplicationArguments applicationArguments) {
         Result result = null;
         try {
             System.out.println("Calling initAndValidate()");
