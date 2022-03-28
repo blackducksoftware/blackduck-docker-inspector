@@ -1,7 +1,7 @@
 package com.synopsys.integration.blackduck.dockerinspector.dockerclient;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
@@ -11,7 +11,6 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import com.synopsys.integration.blackduck.imageinspector.api.name.ImageNameResolver;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -30,6 +29,7 @@ import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarFilename;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarWrapper;
 import com.synopsys.integration.blackduck.exception.BlackDuckIntegrationException;
+import com.synopsys.integration.blackduck.imageinspector.api.name.ImageNameResolver;
 import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
 import com.synopsys.integration.exception.IntegrationException;
 
@@ -49,7 +49,7 @@ public class DockerClientManagerTest {
     public static void setUp() {
         Logger rootLogger = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
         rootLogger.setLevel(Level.INFO);
-        Logger integrationLogger = (Logger)LoggerFactory.getLogger("com.synopsys.integration");
+        Logger integrationLogger = (Logger) LoggerFactory.getLogger("com.synopsys.integration");
         integrationLogger.setLevel(Level.DEBUG);
 
         config = Mockito.mock(Config.class);

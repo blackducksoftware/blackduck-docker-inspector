@@ -1,6 +1,6 @@
 package com.synopsys.integration.blackduck.dockerinspector.help;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -8,17 +8,17 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.exception.IntegrationException;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 public class HelpWriterTest {
 
     public static final String TEST_OVERVIEW_CONTENT = "test overview content";
@@ -44,12 +44,12 @@ public class HelpWriterTest {
         Mockito.when(helpText.getMarkdownForTopic("overview")).thenReturn(TEST_OVERVIEW_CONTENT);
         Mockito.when(helpText.getMarkdownForTopic("advanced")).thenReturn(TEST_ADVANCED_CONTENT);
 
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        try (final PrintStream ps = new PrintStream(baos, true, StandardCharsets.UTF_8.name())) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try (PrintStream ps = new PrintStream(baos, true, StandardCharsets.UTF_8.name())) {
             helpWriter.concatinateContentToPrintStream(ps, "all");
         }
 
-        final String helpContent = new String(baos.toByteArray(), StandardCharsets.UTF_8);
+        String helpContent = new String(baos.toByteArray(), StandardCharsets.UTF_8);
         assertTrue(helpContent.contains(TEST_OVERVIEW_CONTENT));
         assertTrue(helpContent.contains(TEST_ADVANCED_CONTENT));
     }

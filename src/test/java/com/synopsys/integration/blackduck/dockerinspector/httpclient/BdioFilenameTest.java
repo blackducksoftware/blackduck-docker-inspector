@@ -1,27 +1,26 @@
 package com.synopsys.integration.blackduck.dockerinspector.httpclient;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import com.synopsys.integration.blackduck.dockerinspector.output.BdioFilename;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
 
-import com.synopsys.integration.exception.IntegrationException;
+class BdioFilenameTest {
 
-public class BdioFilenameTest {
-
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
+    @BeforeAll
+    public static void setUpBeforeClass() {
     }
 
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
+    @AfterAll
+    public static void tearDownAfterClass() {
     }
 
     @Test
-    public void testAlpine() throws IntegrationException {
-        final BdioFilename bdioFilename = new BdioFilename("alpine_3.6_APK");
+    public void testAlpine() {
+        BdioFilename bdioFilename = new BdioFilename("alpine_3.6_APK");
         assertEquals("alpine_3.6_APK_bdio.jsonld", bdioFilename.getBdioFilename());
     }
 }

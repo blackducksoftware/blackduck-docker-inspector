@@ -31,7 +31,6 @@ import com.synopsys.integration.blackduck.configuration.BlackDuckServerConfigBui
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.blackduck.exception.BlackDuckIntegrationException;
-import com.synopsys.integration.blackduck.http.BlackDuckRequestFactory;
 import com.synopsys.integration.blackduck.http.client.BlackDuckHttpClient;
 import com.synopsys.integration.blackduck.phonehome.BlackDuckPhoneHomeHelper;
 import com.synopsys.integration.blackduck.service.BlackDuckServicesFactory;
@@ -65,8 +64,10 @@ public class BlackDuckClient {
     private ProgramVersion programVersion;
 
     public void testBlackDuckConnection() throws BlackDuckIntegrationException {
-        logger.trace(String.format("Black Duck username: %s",
-            getBlackDuckUsername())); // ArgsWithSpacesTest tests this in output
+        logger.trace(String.format(
+            "Black Duck username: %s",
+            getBlackDuckUsername()
+        )); // ArgsWithSpacesTest tests this in output
         if (!config.isUploadBdio() || config.isOfflineMode()) {
             logger.debug(
                 "Upload of BDIO disabled or offline mode is enabled; skipping verification of Black Duck connection");
@@ -93,7 +94,8 @@ public class BlackDuckClient {
         BlackDuckHttpClient httpConnection = createHttpConnection(intLogger);
         BlackDuckServicesFactory blackDuckServicesFactory = createBlackDuckServicesFactory(
             intLogger,
-            httpConnection);
+            httpConnection
+        );
         BdioUploadService bdioUploadService = blackDuckServicesFactory.createBdioUploadService();
 
         UploadBatch uploadBatch = new UploadBatch();
@@ -101,24 +103,26 @@ public class BlackDuckClient {
         logger.info(String.format("uploading %s", uploadTarget.getUploadFile().getName()));
         uploadBatch.addUploadTarget(uploadTarget);
         BdioUploadCodeLocationCreationRequest uploadRequest = bdioUploadService
-                                                                  .createUploadRequest(uploadBatch);
+            .createUploadRequest(uploadBatch);
         CodeLocationCreationData<UploadBatchOutput> bdioUploadResults = bdioUploadService
-                                                                            .uploadBdio(uploadRequest);
+            .uploadBdio(uploadRequest);
         bdioUploadResults.getOutput().getOutputs().stream().forEach(o -> logger.debug(String
-                                                                                          .format("\tUpload %s: output: %s%n", o.getCodeLocationName(),
-                                                                                              o.getResponse().orElse("unknown"))));
+            .format("\tUpload %s: output: %s%n", o.getCodeLocationName(),
+                o.getResponse().orElse("unknown")
+            )));
         logger.info(
             String.format("Uploaded bdio file %s to %s", bdioFile.getName(), config.getBlackDuckUrl()));
     }
 
-    private BlackDuckServicesFactory createBlackDuckServicesFactory(IntLogger intLogger,
-        BlackDuckHttpClient httpConnection) {
+    private BlackDuckServicesFactory createBlackDuckServicesFactory(
+        IntLogger intLogger,
+        BlackDuckHttpClient httpConnection
+    ) {
         IntEnvironmentVariables intEnvironmentVariables = IntEnvironmentVariables.empty();
         ExecutorService executorService = new NoThreadExecutorService();
-        BlackDuckRequestFactory blackDuckRequestFactory = new BlackDuckRequestFactory();
-        return new BlackDuckServicesFactory(intEnvironmentVariables, new Gson(),
-            BlackDuckServicesFactory.createDefaultObjectMapper(), executorService, httpConnection, intLogger,
-            blackDuckRequestFactory);
+        return new BlackDuckServicesFactory(intEnvironmentVariables, executorService, intLogger, httpConnection, new Gson(),
+            BlackDuckServicesFactory.createDefaultObjectMapper()
+        );
     }
 
     private String getBlackDuckUsername() {
@@ -132,7 +136,8 @@ public class BlackDuckClient {
         } catch (Exception e) {
             logger.debug(String.format(
                 "Attempt to phone home failed. This may simply be because Black Duck credentials were not supplied. Error message: %s",
-                e.getMessage()));
+                e.getMessage()
+            ));
         }
     }
 
@@ -141,7 +146,8 @@ public class BlackDuckClient {
         BlackDuckHttpClient httpConnection = createHttpConnection(intLogger);
         BlackDuckServicesFactory blackDuckServicesFactory = createBlackDuckServicesFactory(
             intLogger,
-            httpConnection);
+            httpConnection
+        );
 
         Map<String, String> metaDataMap = new HashMap<>();
         if (StringUtils.isNotBlank(dockerEngineVersion)) {
@@ -156,10 +162,14 @@ public class BlackDuckClient {
             metaDataMap
                 .put(PHONE_HOME_METADATA_NAME_CALLER_VERSION, config.getCallerVersion());
         }
-        metaDataMap.put(PHONE_HOME_METADATA_NAME_BDIO_BY_LAYER,
-            String.valueOf(config.isOrganizeComponentsByLayer()));
-        metaDataMap.put(PHONE_HOME_METADATA_NAME_BDIO_INCLUDE_REMOVED,
-            String.valueOf(config.isIncludeRemovedComponents()));
+        metaDataMap.put(
+            PHONE_HOME_METADATA_NAME_BDIO_BY_LAYER,
+            String.valueOf(config.isOrganizeComponentsByLayer())
+        );
+        metaDataMap.put(
+            PHONE_HOME_METADATA_NAME_BDIO_INCLUDE_REMOVED,
+            String.valueOf(config.isIncludeRemovedComponents())
+        );
         if (StringUtils.isNotBlank(config.getDockerPlatformTopLayerId())) {
             metaDataMap
                 .put(PHONE_HOME_METADATA_NAME_PLATFORM_TOP_LAYER_ID_SPECIFIED, "true");
@@ -181,23 +191,23 @@ public class BlackDuckClient {
         String blackDuckProxyUsername = config.getBlackDuckProxyUsername();
         String blackDuckProxyPassword = config.getBlackDuckProxyPassword();
         if (StringUtils.isBlank(config.getBlackDuckProxyHost()) && !StringUtils
-                                                                        .isBlank(config.getScanCliOptsEnvVar())) {
+            .isBlank(config.getScanCliOptsEnvVar())) {
             List<String> scanCliOpts = Arrays.asList(config.getScanCliOptsEnvVar().split("\\s"));
             for (String opt : scanCliOpts) {
                 opt = opt.trim();
                 if (opt.startsWith("-Dhttp.proxy.host=") || opt.startsWith("-Dhttps.proxy.host=") || opt
-                                                                                                         .startsWith("-Dhttp.proxyHost=") || opt.startsWith("-Dhttps.proxyHost=")) {
+                    .startsWith("-Dhttp.proxyHost=") || opt.startsWith("-Dhttps.proxyHost=")) {
                     blackDuckProxyHost = getValue(opt);
                 } else if (opt.startsWith("-Dhttp.proxy.port=") || opt.startsWith("-Dhttps.proxy.port=")
-                               || opt.startsWith("-Dhttp.proxyPort=") || opt.startsWith("-Dhttps.proxyPort=")) {
+                    || opt.startsWith("-Dhttp.proxyPort=") || opt.startsWith("-Dhttps.proxyPort=")) {
                     blackDuckProxyPort = getValue(opt);
                 } else if (opt.startsWith("-Dhttp.proxy.username=") || opt
-                                                                           .startsWith("-Dhttps.proxy.username=") || opt.startsWith("-Dhttp.proxyUser=") || opt
-                                                                                                                                                                .startsWith("-Dhttps.proxyUser=")) {
+                    .startsWith("-Dhttps.proxy.username=") || opt.startsWith("-Dhttp.proxyUser=") || opt
+                    .startsWith("-Dhttps.proxyUser=")) {
                     blackDuckProxyUsername = getValue(opt);
                 } else if (opt.startsWith("-Dhttp.proxy.password=") || opt
-                                                                           .startsWith("-Dhttps.proxy.password=") || opt.startsWith("-Dhttp.proxyPassword=") || opt
-                                                                                                                                                                    .startsWith("-Dhttps.proxyPassword=")) {
+                    .startsWith("-Dhttps.proxy.password=") || opt.startsWith("-Dhttp.proxyPassword=") || opt
+                    .startsWith("-Dhttps.proxyPassword=")) {
                     blackDuckProxyPassword = getValue(opt);
                 }
             }

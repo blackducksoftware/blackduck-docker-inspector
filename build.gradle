@@ -1,22 +1,35 @@
 import com.bmuschko.gradle.docker.tasks.image.Dockerfile
-import com.synopsys.integration.blackduck.dockerinspector.artifactory.UpdateArtifactoryPropertiesTask
 import org.apache.tools.ant.filters.ReplaceTokens
 
 buildscript {
+    ext {
+        springBootVersion = '2.6.4'
+        blackDuckCommonVersion = '61.2.2'
+        junitPlatformCustomTestTags = 'docker, battery'
+        javaTargetCompatibility = 8
+        javaSourceCompatibility = 8
+    }
     apply from: "https://raw.githubusercontent.com/blackducksoftware/integration-resources/master/gradle_common/buildscript-repositories.gradle", to: buildscript
     apply from: "https://raw.githubusercontent.com/blackducksoftware/integration-resources/master/gradle_common/buildscript-dependencies.gradle", to: buildscript
-
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.3.4.RELEASE")
-        classpath 'com.bmuschko:gradle-docker-plugin:6.7.0'
-        classpath 'org.freemarker:freemarker:2.3.26-incubating'
+    // TODO don't seem to need this repositories
+    repositories {
+        gradlePluginPortal()
     }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.6.4")
+        classpath 'com.bmuschko:gradle-docker-plugin:6.7.0'
+        classpath 'org.freemarker:freemarker:2.3.31'
+    }
+}
+plugins {
+    id 'org.springframework.boot' version '2.6.4' apply false
 }
 
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
 project.ext.inspectorImageVersion = "5.0.12"
 
 version = '9.4.2-SNAPSHOT'
+
 
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
@@ -25,7 +38,11 @@ apply plugin: 'com.synopsys.integration.solution'
 
 apply from: 'airgap.gradle'
 
-springBoot { mainClassName = 'com.synopsys.integration.blackduck.dockerinspector.DockerInspector' }
+springBoot { mainClass = 'com.synopsys.integration.blackduck.dockerinspector.DockerInspector' }
+
+repositories {
+    maven { url "https://sig-repo.synopsys.com/bds-bdio-release" }
+}
 
 // TODO if we s/compile/implementation/, can this go?:
 configurations {
@@ -84,7 +101,7 @@ task docsClean(dependsOn: [docsSiteClean, docsGeneratedClean]) {}
 
 task docsPrep() {
     doLast {
-	project.file('docs/generated').mkdirs()
+        project.file('docs/generated').mkdirs()
     }
 }
 
@@ -147,14 +164,14 @@ task createTestDockerfile(type: Dockerfile) {
 }
 
 task buildTestDockerImage(type: Exec, dependsOn: [removeTestBaseImage, removeTestImage, createTestDockerfile]) {
-    commandLine "docker", "build", "--no-cache", "--tag", "blackducksoftware/centos_minus_vim_plus_bacula:1.0",  \
-         "${buildDir}/images/test/centos_minus_vim_plus_bacula"
+    commandLine "docker", "build", "--no-cache", "--tag", "blackducksoftware/centos_minus_vim_plus_bacula:1.0",   \
+          "${buildDir}/images/test/centos_minus_vim_plus_bacula"
 }
 
 task buildTestDockerTarfile(type: Exec, dependsOn: buildTestDockerImage) {
     outputs.files file("${buildDir}/images/test/centos_minus_vim_plus_bacula.tar")
-    commandLine "docker", "save", "-o", "${buildDir}/images/test/centos_minus_vim_plus_bacula.tar",  \
-         "blackducksoftware/centos_minus_vim_plus_bacula:1.0"
+    commandLine "docker", "save", "-o", "${buildDir}/images/test/centos_minus_vim_plus_bacula.tar",   \
+          "blackducksoftware/centos_minus_vim_plus_bacula:1.0"
 }
 
 task createWhTestDockerfile(type: Dockerfile) {
@@ -209,17 +226,13 @@ task buildAlpine36TestDockerTarfile(type: Exec, dependsOn: pullAlpine36) {
 }
 
 task buildAggTestDockerTarfile(type: Exec, dependsOn: [buildTestDockerImage, buildWhTestDockerImage]) {
-    commandLine "docker", "save", "-o", "${buildDir}/images/test/aggregated.tar", "blackducksoftware/centos_minus_vim_plus_bacula:1.0",  \
-         "blackducksoftware/whiteouttest:1.0"
+    commandLine "docker", "save", "-o", "${buildDir}/images/test/aggregated.tar", "blackducksoftware/centos_minus_vim_plus_bacula:1.0",   \
+          "blackducksoftware/whiteouttest:1.0"
 }
 
 clean.dependsOn docsClean
 compileJava.dependsOn writeVersionToPropertiesFile
-build.dependsOn generateHelpMarkdown
-
-task updateArtifactoryProperties(type: UpdateArtifactoryPropertiesTask) {
-    dependsOn artifactoryPublish
-}
+//build.dependsOn generateHelpMarkdown
 
 task checkVersion() {
     doFirst {
@@ -231,13 +244,13 @@ task checkVersion() {
     }
 }
 
-task buildTestTarfiles(dependsOn: [buildTestDockerTarfile, buildWhTestDockerTarfile, buildAggTestDockerTarfile,  \
-         buildAlpineTestDockerTarfile, buildAlpine36TestDockerTarfile, buildUbuntuTestDockerTarfile]) {}
+task buildTestTarfiles(dependsOn: [buildTestDockerTarfile, buildWhTestDockerTarfile, buildAggTestDockerTarfile,   \
+          buildAlpineTestDockerTarfile, buildAlpine36TestDockerTarfile, buildUbuntuTestDockerTarfile]) {}
 
 task testPrep(dependsOn: [build, buildTestTarfiles, buildScript, createVersionedScript]) {
     doLast {
-	project.file('test/containerShared/target').mkdirs()
-	project.file('test/containerShared/output').mkdirs()
+        project.file('test/containerShared/target').mkdirs()
+        project.file('test/containerShared/output').mkdirs()
     }
 }
 
@@ -247,8 +260,8 @@ task cleanExtras(type: Delete, dependsOn: docsGeneratedClean) {
 
 
 clean.dependsOn cleanExtras
-testIntegration.dependsOn testPrep
-task all(dependsOn: [testIntegration, artifactoryPublish, publishAirGapZip]) {}
+//testIntegration.dependsOn testPrep
+//task all(dependsOn: [testIntegration, artifactoryPublish, publishAirGapZip]) {}
 
 publishing {
     publications {
@@ -266,25 +279,25 @@ artifactory {
 }
 
 dependencies {
-    compile 'com.synopsys.integration:blackduck-common:54.2.3'
-    compile 'net.minidev:json-smart:2.4.7'
-    compile 'com.synopsys.integration:integration-bdio:22.1.1'
-    compile 'com.synopsys.integration:hub-imageinspector-lib:14.1.1'
-    implementation 'ch.qos.logback:logback-classic:1.2.3'
+    implementation "com.synopsys.integration:blackduck-common:${blackDuckCommonVersion}"
+    implementation 'net.minidev:json-smart:2.4.7'
+    implementation 'com.synopsys.integration:integration-bdio:22.1.1'
+    implementation 'com.synopsys.integration:hub-imageinspector-lib:14.1.1'
+    implementation 'ch.qos.logback:logback-classic:1.2.11'
 
-    compile 'com.github.docker-java:docker-java-core:3.2.7'
-    compile 'com.github.docker-java:docker-java-transport-httpclient5:3.2.7'
+    implementation 'com.github.docker-java:docker-java-core:3.2.7'
+    implementation 'com.github.docker-java:docker-java-transport-httpclient5:3.2.7'
 
-    compile 'org.springframework.boot:spring-boot-starter'
-    compile group: 'org.freemarker', name: 'freemarker', version: '2.3.29'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation group: 'org.freemarker', name: 'freemarker', version: '2.3.29'
 
     // Adding activation avoids this runtime error: WARNING: HK2 failure has been detected in a code that does not run in an active Jersey Error scope. ...
     // java.lang.NoClassDefFoundError: javax/activation/DataSource
-    compile group: 'javax.activation', name: 'activation', version: '1.1.1'
+    implementation group: 'javax.activation', name: 'activation', version: '1.1.1'
 
-    runtime 'org.springframework.boot:spring-boot-properties-migrator'
+    //runtime 'org.springframework.boot:spring-boot-properties-migrator'
 
-    testCompile 'org.springframework.boot:spring-boot-starter-test'
-    testCompile 'io.fabric8:kubernetes-client:3.1.8'
-    testCompile 'io.fabric8:kubernetes-model:2.0.8'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.fabric8:kubernetes-client:3.1.8'
+    testImplementation 'io.fabric8:kubernetes-model:2.0.8'
 }

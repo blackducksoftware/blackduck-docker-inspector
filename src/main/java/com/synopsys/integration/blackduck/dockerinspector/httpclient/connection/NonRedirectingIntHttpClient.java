@@ -7,15 +7,16 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.httpclient.connection;
 
-import com.synopsys.integration.rest.client.IntHttpClient;
+import com.google.gson.Gson;
 import com.synopsys.integration.log.IntLogger;
+import com.synopsys.integration.rest.client.IntHttpClient;
 import com.synopsys.integration.rest.proxy.ProxyInfo;
 
 public class NonRedirectingIntHttpClient extends
     IntHttpClient {
 
-    public NonRedirectingIntHttpClient(final IntLogger logger, final int timeout, final boolean trustCert, final ProxyInfo proxyInfo) {
-        super(logger, timeout, trustCert, proxyInfo);
+    public NonRedirectingIntHttpClient(IntLogger logger, Gson gson, int timeout, boolean trustCert, ProxyInfo proxyInfo) {
+        super(logger, gson, timeout, trustCert, proxyInfo);
         logger.debug("Disabling redirect handling on this HTTP client");
         getClientBuilder().disableRedirectHandling();
     }

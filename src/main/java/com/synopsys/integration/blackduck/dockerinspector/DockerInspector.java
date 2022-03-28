@@ -15,7 +15,6 @@ import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 
-import com.synopsys.integration.blackduck.imageinspector.image.common.RepoTag;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -42,6 +41,7 @@ import com.synopsys.integration.blackduck.dockerinspector.output.ResultFile;
 import com.synopsys.integration.blackduck.dockerinspector.programarguments.ArgumentParser;
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.blackduck.imageinspector.api.name.ImageNameResolver;
+import com.synopsys.integration.blackduck.imageinspector.image.common.RepoTag;
 import com.synopsys.integration.exception.IntegrationException;
 
 @SpringBootApplication
@@ -96,7 +96,9 @@ public class DockerInspector {
     public void inspectImage() {
         Result result = null;
         try {
+            System.out.println("Calling initAndValidate()");
             if (!initAndValidate(config)) {
+                System.out.println("Exiting w/ 0");
                 System.exit(0);
             }
             result = inspector.getBdio();
@@ -181,7 +183,8 @@ public class DockerInspector {
         initImageName();
         logger.info(String.format("Inspecting image:tag %s:%s (platform: %s)",
             config.getDockerImageRepo(), config.getDockerImageTag(),
-            Optional.ofNullable(config.getDockerImagePlatform()).orElse("<unspecified>")));
+            Optional.ofNullable(config.getDockerImagePlatform()).orElse("<unspecified>")
+        ));
         blackDuckClient.testBlackDuckConnection();
         return true;
     }
@@ -200,6 +203,7 @@ public class DockerInspector {
                 helpWriter.writeIndividualFilesToDir(new File(givenHelpOutputFilePath), getHelpTopics());
             }
         }
+        System.out.println("Finished provideHelp()");
     }
 
     private String deriveDockerEngineVersion(Config config) {

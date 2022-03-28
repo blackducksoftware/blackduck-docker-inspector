@@ -1,6 +1,6 @@
 package com.synopsys.integration.blackduck.dockerinspector;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.io.BufferedReader;
 import java.io.File;

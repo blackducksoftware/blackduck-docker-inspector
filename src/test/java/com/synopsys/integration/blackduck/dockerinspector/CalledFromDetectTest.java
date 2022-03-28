@@ -1,8 +1,7 @@
 package com.synopsys.integration.blackduck.dockerinspector;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -10,13 +9,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
-
-
-import com.google.common.io.Files;
-import com.synopsys.integration.exception.IntegrationException;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+
+import com.google.common.io.Files;
+import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
+import com.synopsys.integration.exception.IntegrationException;
 
 @Tag("integration")
 public class CalledFromDetectTest {
@@ -39,18 +38,18 @@ public class CalledFromDetectTest {
     public void test() throws IOException, InterruptedException, IntegrationException {
 
         final String cmdGetDetectScriptString = "curl --insecure -s https://detect.synopsys.com/detect7.sh";
-        final String detectScriptString = TestUtils.execCmd(executionDir, cmdGetDetectScriptString, ONE_MINUTE_IN_MS, true, null);
-        final File detectScriptFile = File.createTempFile("latestDetect", ".sh");
+        String detectScriptString = TestUtils.execCmd(executionDir, cmdGetDetectScriptString, ONE_MINUTE_IN_MS, true, null);
+        File detectScriptFile = File.createTempFile("latestDetect", ".sh");
         detectScriptFile.setExecutable(true);
         detectScriptFile.deleteOnExit();
         System.out.printf("script file: %s\n", detectScriptFile.getAbsolutePath());
         FileUtils.write(detectScriptFile, detectScriptString, StandardCharsets.UTF_8);
 
-        final File detectOutputFile = File.createTempFile("detectOutput", ".txt");
+        File detectOutputFile = File.createTempFile("detectOutput", ".txt");
         detectOutputFile.setWritable(true);
         detectScriptFile.deleteOnExit();
 
-        final StringBuffer sb = new StringBuffer();
+        StringBuffer sb = new StringBuffer();
         sb.append("#\n");
         sb.append(detectScriptFile.getAbsolutePath());
         sb.append(String.format(" --detect.docker.inspector.path=%s/build/libs/blackduck-docker-inspector-%s.jar", System.getProperty("user.dir"), programVersion.getProgramVersion()));
@@ -64,41 +63,41 @@ public class CalledFromDetectTest {
         sb.append(" --detect.bdio2.enabled=false");
         sb.append(String.format(" > %s", detectOutputFile.getAbsolutePath()));
 
-        final String detectWrapperScriptString = sb.toString();
+        String detectWrapperScriptString = sb.toString();
         System.out.printf("Detect wrapper script content:\n%s\n", detectWrapperScriptString);
-        final File detectWrapperScriptFile = File.createTempFile("detectWrapper", ".sh");
+        File detectWrapperScriptFile = File.createTempFile("detectWrapper", ".sh");
         detectWrapperScriptFile.setExecutable(true);
         detectScriptFile.deleteOnExit();
         System.out.printf("script file: %s\n", detectWrapperScriptFile.getAbsolutePath());
         FileUtils.write(detectWrapperScriptFile, detectWrapperScriptString, StandardCharsets.UTF_8);
         Map<String, String> env = new HashMap<>(1);
         env.put("DETECT_CURL_OPTS", "--insecure");
-        final String wrapperScriptOutput = TestUtils.execCmd(executionDir, detectWrapperScriptFile.getAbsolutePath(), FIVE_MINUTES_IN_MS, true, env);
+        String wrapperScriptOutput = TestUtils.execCmd(executionDir, detectWrapperScriptFile.getAbsolutePath(), FIVE_MINUTES_IN_MS, true, env);
         System.out.printf("Wrapper script output (normally empty):\n%s\n", wrapperScriptOutput);
-        final String detectOutputString = FileUtils.readFileToString(detectOutputFile, StandardCharsets.UTF_8);
+        String detectOutputString = FileUtils.readFileToString(detectOutputFile, StandardCharsets.UTF_8);
         System.out.printf("Detect output: %s", detectOutputString);
 
-        final File bdioFile = getBdioFile(detectOutputString);
+        File bdioFile = getBdioFile(detectOutputString);
         assertTrue(bdioFile.exists());
-        final String dockerInspectorBdioFileContents = FileUtils.readFileToString(bdioFile, StandardCharsets.UTF_8);
+        String dockerInspectorBdioFileContents = FileUtils.readFileToString(bdioFile, StandardCharsets.UTF_8);
         assertTrue(dockerInspectorBdioFileContents.contains("\"externalId\": \"alpine/latest\","));
 
         assertTrue(detectOutputString.contains("DOCKER: SUCCESS"));
         assertTrue(detectOutputString.contains("Overall Status: SUCCESS"));
     }
 
-    private File getBdioFile(final String detectOutputString) throws IntegrationException {
-        final String bdioFilePath = getBdioFilePath(detectOutputString);
-        final File bdioFile = new File(bdioFilePath);
+    private File getBdioFile(String detectOutputString) throws IntegrationException {
+        String bdioFilePath = getBdioFilePath(detectOutputString);
+        File bdioFile = new File(bdioFilePath);
         return bdioFile;
     }
 
-    private String getBdioFilePath(final String detectOutputString) throws IntegrationException {
-        for (final String line : detectOutputString.split("\n")) {
+    private String getBdioFilePath(String detectOutputString) throws IntegrationException {
+        for (String line : detectOutputString.split("\n")) {
             if (line.matches(String.format(".*%s.*", TEXT_PRECEDING_BDIO_FILE_DIR_PATH))) {
                 System.out.printf("found line: %s\n", line);
-                final int bdioFilePathStart = line.indexOf(TEXT_PRECEDING_BDIO_FILE_DIR_PATH) + TEXT_PRECEDING_BDIO_FILE_DIR_PATH.length();
-                final String bdioFilePath = line.substring(bdioFilePathStart);
+                int bdioFilePathStart = line.indexOf(TEXT_PRECEDING_BDIO_FILE_DIR_PATH) + TEXT_PRECEDING_BDIO_FILE_DIR_PATH.length();
+                String bdioFilePath = line.substring(bdioFilePathStart);
                 System.out.printf("BDIO file path: %s\n", bdioFilePath);
                 return bdioFilePath;
             }

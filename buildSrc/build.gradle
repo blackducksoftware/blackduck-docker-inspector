@@ -1,0 +1,38 @@
+buildscript {
+    ext {
+        springBootVersion = '2.6.4'
+        blackDuckCommonVersion = '61.1.0'
+    }
+
+    apply from: 'https://raw.githubusercontent.com/blackducksoftware/integration-resources/master/gradle_common/buildscript-repositories.gradle', to: buildscript
+    apply from: 'https://raw.githubusercontent.com/blackducksoftware/integration-resources/master/gradle_common/buildscript-cgp-version.gradle'
+
+    dependencies {
+        classpath "com.synopsys.integration:common-gradle-plugin:${managedCgpVersion}"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+    }
+}
+
+//plugins {
+//    id 'org.springframework.boot' version "${springBootVersion}" apply false
+//}
+version = "1.0.0-SNAPSHOT"
+apply plugin: 'com.synopsys.integration.simple'
+apply plugin: 'io.spring.dependency-management'
+
+//dependencyManagement {
+//    imports {
+//        mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+//    }
+//}
+
+dependencies {
+    implementation "org.freemarker:freemarker:2.3.26-incubating"
+    implementation("com.synopsys.integration:common-gradle-plugin:${managedCgpVersion}") {
+        exclude group: 'org.springframework', module: 'spring-core'
+    }
+    //implementation "com.synopsys.integration:blackduck-common:${blackDuckCommonVersion}"
+    implementation "com.synopsys.integration:integration-common:20.0.0"
+    //implementation 'org.springframework:spring-core'
+    implementation gradleApi()
+}

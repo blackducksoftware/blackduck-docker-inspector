@@ -1,8 +1,8 @@
 package com.synopsys.integration.blackduck.dockerinspector;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -52,7 +52,8 @@ public class IntegrationTestRunner {
         }
 
         List<String> cmd = commandCreator.createCmd(testConfig.getMode(), inspectTargetArg, testConfig.getTargetRepo(), testConfig.getTargetTag(), testConfig.getCodelocationName(),
-            testConfig.getAdditionalArgs());
+            testConfig.getAdditionalArgs()
+        );
 
         System.out.println(String.format("Running end to end test on %s with command %s", testConfig.getInspectTargetImageRepoTag(), cmd.toString()));
         TestUtils.execCmd(String.join(" ", cmd), 30000L, true, testConfig.getEnv());
@@ -166,12 +167,13 @@ public class IntegrationTestRunner {
         TestUtils.ensureFileDoesNotExist(actualBdio);
 
         List<String> cmd = commandCreator.createCmd(testConfig.getMode(), inspectTargetArg, testConfig.getTargetRepo(), testConfig.getTargetTag(), testConfig.getCodelocationName(),
-            testConfig.getAdditionalArgs());
+            testConfig.getAdditionalArgs()
+        );
         System.out.printf("Running end to end test on %s with command %s\n", targetTarFile, cmd.toString());
         TestUtils.execCmd(String.join(" ", cmd), 240000L, true, testConfig.getEnv());
         System.out.println("blackduck-docker-inspector done; verifying results...");
         System.out.printf("Expecting output BDIO file: %s\n", actualBdio.getAbsolutePath());
-        assertTrue(String.format("%s does not exist", actualBdio.getAbsolutePath()), actualBdio.exists());
+        assertTrue(actualBdio.exists(), String.format("%s does not exist", actualBdio.getAbsolutePath()));
         if (testConfig.isRequireBdioMatch()) {
             File expectedBdio = new File(
                 String.format("src/test/resources/bdio/%s_bdio.jsonld", testConfig.getCodelocationName()));
@@ -182,7 +184,7 @@ public class IntegrationTestRunner {
             exceptLinesContainingThese.add("Tool:");
             exceptLinesContainingThese.add("kbSeparator");
             boolean outputBdioMatches = TestUtils.contentEquals(expectedBdio, actualBdio, exceptLinesContainingThese);
-            assertTrue("BDIO produced does not match expected BDIO", outputBdioMatches);
+            assertTrue(outputBdioMatches, "BDIO produced does not match expected BDIO");
         }
 
         SimpleBdioDocument doc = createBdioDocumentFromFile(actualBdio);
@@ -215,10 +217,10 @@ public class IntegrationTestRunner {
         }
 
         if (testConfig.getMode() != TestConfig.Mode.DETECT) {
-            assertTrue(String.format("%s does not exist", testConfig.getOutputContainerFileSystemFile().getAbsolutePath()), testConfig.getOutputContainerFileSystemFile().exists());
+            assertTrue(testConfig.getOutputContainerFileSystemFile().exists(), String.format("%s does not exist", testConfig.getOutputContainerFileSystemFile().getAbsolutePath()));
         }
         if (testConfig.getOutputSquashedImageFile() != null) {
-            assertTrue(String.format("%s does not exist", testConfig.getOutputSquashedImageFile().getAbsolutePath()), testConfig.getOutputSquashedImageFile().exists());
+            assertTrue(testConfig.getOutputSquashedImageFile().exists(), String.format("%s does not exist", testConfig.getOutputSquashedImageFile().getAbsolutePath()));
         }
         if ((testConfig.getMinContainerFileSystemFileSize() > 0) || (testConfig.getMaxContainerFileSystemFileSize() > 0)) {
             long actualContainerFileSystemFileSize = testConfig.getOutputContainerFileSystemFile().length();
