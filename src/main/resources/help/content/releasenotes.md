@@ -1,3 +1,9 @@
+#### Version 9.4.2
+
+##### Resolved issue
+
+* (IDOCKER-764) Improved the clarity of the error message returned when the file provided via the *docker.tar* property does not have the supported (UNIX tar) format. 
+
 #### Version 9.4.1
 
 ##### Documentation updates
