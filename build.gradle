@@ -40,6 +40,11 @@ apply from: 'airgap.gradle'
 
 springBoot { mainClass = 'com.synopsys.integration.blackduck.dockerinspector.DockerInspector' }
 
+// By default, starting in 2.5.0, spring boot creates an extra "plain" .jar that we don't want
+jar {
+    enabled = false
+}
+
 repositories {
     maven { url "https://sig-repo.synopsys.com/bds-bdio-release" }
 }
@@ -248,7 +253,7 @@ task checkVersion() {
 task buildTestTarfiles(dependsOn: [buildTestDockerTarfile, buildWhTestDockerTarfile, buildAggTestDockerTarfile,   \
           buildAlpineTestDockerTarfile, buildAlpine36TestDockerTarfile, buildUbuntuTestDockerTarfile]) {}
 
-task testPrep(dependsOn: [build, buildTestTarfiles, buildScript, createVersionedScript]) {
+task testPrep(dependsOn: [buildTestTarfiles, buildScript, createVersionedScript]) {
     doLast {
         project.file('test/containerShared/target').mkdirs()
         project.file('test/containerShared/output').mkdirs()
@@ -259,6 +264,9 @@ task cleanExtras(type: Delete, dependsOn: docsGeneratedClean) {
     delete 'test', 'out'
 }
 
+// Having trouble finding the best way to do this since the cgp change
+// This builds the test images every time.
+jar.dependsOn testPrep
 
 clean.dependsOn cleanExtras
 //testIntegration.dependsOn testPrep
