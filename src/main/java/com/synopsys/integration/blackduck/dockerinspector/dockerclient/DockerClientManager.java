@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -294,7 +295,7 @@ public class DockerClientManager {
                 .withStdOut(true)
                 .withTail(config.getImageInspectorServiceLogLength())
                 .exec(callback)
-                .awaitCompletion();
+                .awaitCompletion(30, TimeUnit.SECONDS);
             String log = callback.builder.toString();
             logger.debug("Image inspector service log:");
             logger.debug(log);
