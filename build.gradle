@@ -234,7 +234,7 @@ task checkVersion() {
 task buildTestTarfiles(dependsOn: [buildTestDockerTarfile, buildWhTestDockerTarfile, buildAggTestDockerTarfile,  \
          buildAlpineTestDockerTarfile, buildAlpine36TestDockerTarfile, buildUbuntuTestDockerTarfile]) {}
 
-task testPrep(dependsOn: [build, buildTestTarfiles, buildScript, createVersionedScript]) {
+task testPrep(dependsOn: [buildTestTarfiles, buildScript, createVersionedScript]) {
     doLast {
 	project.file('test/containerShared/target').mkdirs()
 	project.file('test/containerShared/output').mkdirs()
@@ -247,7 +247,7 @@ task cleanExtras(type: Delete, dependsOn: docsGeneratedClean) {
 
 
 clean.dependsOn cleanExtras
-testIntegration.dependsOn testPrep
+jar.dependsOn testPrep
 task all(dependsOn: [testIntegration, artifactoryPublish, publishAirGapZip]) {}
 
 publishing {
