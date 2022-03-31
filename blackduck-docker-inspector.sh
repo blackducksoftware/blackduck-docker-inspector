@@ -77,7 +77,7 @@ fi
 latestCommitIdFileUrl="https://blackducksoftware.github.io/blackduck-docker-inspector/latest-commit-id.txt"
 localCommitIdFile="${DOCKER_INSPECTOR_JAR_DIR}/blackduck-docker-inspector-latest-commit-id.txt"
 currentVersionCommitId=""
-version="9.4.1"
+version="9.4.2"
 inspectorImageFamily="blackduck-imageinspector"
 encodingSetting="-Dfile.encoding=UTF-8"
 userSpecifiedJarPath=""
