@@ -285,7 +285,7 @@ dependencies {
     implementation "com.synopsys.integration:blackduck-common:${blackDuckCommonVersion}"
     implementation 'net.minidev:json-smart:2.4.7'
     implementation 'com.synopsys.integration:integration-bdio:22.1.1'
-    implementation 'com.synopsys.integration:hub-imageinspector-lib:14.1.2-SNAPSHOT'
+    implementation 'com.synopsys.integration:hub-imageinspector-lib:14.1.2'
     implementation 'ch.qos.logback:logback-classic:1.2.11'
 
     implementation "com.github.docker-java:docker-java-core:${dockerJavaVersion}"
