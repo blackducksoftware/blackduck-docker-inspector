@@ -16,8 +16,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvFileSource;
 import org.mockito.Mockito;
 import org.slf4j.LoggerFactory;
 
@@ -71,7 +69,7 @@ public class DockerClientManagerTest {
     }
 
     @Test
-    public void test() throws IOException {
+    public void testBuildImage() throws IOException {
 
         Optional<String> foundImageIdInitial = dockerClientManager.lookupImageIdByRepoTag(imageRepo, imageTag);
         if (foundImageIdInitial.isPresent()) {
@@ -117,9 +115,27 @@ public class DockerClientManagerTest {
         assertEquals("alpine_latest.tar", imageTarWrapper.getFile().getName());
     }
 
-    @ParameterizedTest
-    @CsvFileSource(resources = "/dockerclient/pullImageByPlatformValuesThatThrowExceptions.txt")
-    public void testPullImageByPlatformDifferentFormats(String platform, boolean shouldThrowException) throws InterruptedException, IntegrationException {
+    @Test
+    void testPullImageArch() throws IntegrationException, InterruptedException {
+        testPullImagePlatform("amd64", false);
+    }
+
+    @Test
+    void testPullImageOs() throws IntegrationException, InterruptedException {
+        testPullImagePlatform("linux", false);
+    }
+
+    @Test
+    void testPullImageOsArch() throws IntegrationException, InterruptedException {
+        testPullImagePlatform("linux/amd64", false);
+    }
+
+    @Test
+    void testPullImageNonexistentPlatform() throws IntegrationException, InterruptedException {
+        testPullImagePlatform("nonexistentplatform", true);
+    }
+
+    private void testPullImagePlatform(String platform, boolean shouldThrowException) throws IntegrationException, InterruptedException {
         String repo = "ubuntu";
         String tag = "20.04";
 

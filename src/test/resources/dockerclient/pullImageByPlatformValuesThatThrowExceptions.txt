@@ -1,5 +1,0 @@
-amd64, false
-linux, false
-linux/amd64, false
-amd64/linux, true
-platform, true
