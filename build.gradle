@@ -120,8 +120,7 @@ def outputPath = "docs/generated"
 def templatePath = "docs/templates"
 def staticPath = "docs/static"
 
-task docs() {
-    dependsOn build
+task docs(dependsOn: [docsPrep, jar]) {
     doLast {
         def output = file(outputPath)
         exec {
@@ -254,7 +253,7 @@ task checkVersion() {
 task buildTestTarfiles(dependsOn: [buildTestDockerTarfile, buildWhTestDockerTarfile, buildAggTestDockerTarfile,   \
           buildAlpineTestDockerTarfile, buildAlpine36TestDockerTarfile, buildUbuntuTestDockerTarfile]) {}
 
-task testPrep(dependsOn: [buildTestTarfiles, buildScript, createVersionedScript]) {
+task testPrep(dependsOn: [docs, buildTestTarfiles, buildScript, createVersionedScript]) {
     doLast {
         project.file('test/containerShared/target').mkdirs()
         project.file('test/containerShared/output').mkdirs()
@@ -265,12 +264,8 @@ task cleanExtras(type: Delete, dependsOn: docsGeneratedClean) {
     delete 'test', 'out'
 }
 
-// Having trouble finding the best way to do this since the cgp change
-// This builds the test images every time.
-jar.dependsOn testPrep
-
 clean.dependsOn cleanExtras
-jar.dependsOn testPrep
+test.dependsOn testPrep
 
 publishing {
     publications {
