@@ -27,7 +27,7 @@ plugins {
 }
 
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
-project.ext.inspectorImageVersion = "5.0.12"
+project.ext.inspectorImageVersion = "5.0.13-SNAPSHOT"
 
 version = '9.4.3-SNAPSHOT'
 
@@ -291,7 +291,7 @@ dependencies {
     implementation "com.synopsys.integration:blackduck-common:${blackDuckCommonVersion}"
     implementation 'net.minidev:json-smart:2.4.7'
     implementation 'com.synopsys.integration:integration-bdio:22.1.1'
-    implementation 'com.synopsys.integration:hub-imageinspector-lib:14.1.1'
+    implementation 'com.synopsys.integration:hub-imageinspector-lib:14.1.2-SNAPSHOT'
     implementation 'ch.qos.logback:logback-classic:1.2.11'
 
     implementation "com.github.docker-java:docker-java-core:${dockerJavaVersion}"
