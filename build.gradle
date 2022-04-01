@@ -111,7 +111,7 @@ task docsPrep() {
     }
 }
 
-task generateHelpMarkdown(type: Exec, dependsOn: docsPrep) {
+task generateHelpMarkdown(type: Exec, dependsOn: [docsPrep, bootJar]) {
     ignoreExitValue true
     commandLine "java", "-jar", "${buildDir}/libs/${project.name}-${version}.jar", "--help", "all", "--help.output.path=docs/generated"
 }
@@ -120,7 +120,7 @@ def outputPath = "docs/generated"
 def templatePath = "docs/templates"
 def staticPath = "docs/static"
 
-task docs(dependsOn: [docsPrep, jar]) {
+task docs(dependsOn: [generateHelpMarkdown]) {
     doLast {
         def output = file(outputPath)
         exec {
@@ -238,7 +238,6 @@ task buildAggTestDockerTarfile(type: Exec, dependsOn: [buildTestDockerImage, bui
 build.dependsOn generateHelpMarkdown
 clean.dependsOn docsClean
 compileJava.dependsOn writeVersionToPropertiesFile
-//build.dependsOn generateHelpMarkdown
 
 task checkVersion() {
     doFirst {
