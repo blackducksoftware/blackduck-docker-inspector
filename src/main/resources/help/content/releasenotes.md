@@ -1,3 +1,9 @@
+#### Version 9.4.3
+
+##### Dependency update
+
+* Upgraded to Spring Boot version 2.6.6 / Spring version 5.3.18.
+
 #### Version 9.4.2
 
 ##### Resolved issue
