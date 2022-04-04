@@ -11,9 +11,6 @@ buildscript {
         classpath "com.synopsys.integration:common-gradle-plugin:${managedCgpVersion}"
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
     }
-    repositories {
-        maven { url "https://sig-repo.synopsys.com/bds-integrations-release" }
-    }
 }
 
 //plugins {
