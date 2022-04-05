@@ -29,7 +29,7 @@ plugins {
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
 project.ext.inspectorImageVersion = "5.0.13"
 
-version = '9.4.3-SNAPSHOT'
+version = '9.4.3'
 
 
 apply plugin: 'org.springframework.boot'
