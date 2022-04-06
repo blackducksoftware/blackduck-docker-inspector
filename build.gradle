@@ -292,7 +292,7 @@ dependencies {
     implementation "com.github.docker-java:docker-java-transport-httpclient5:${dockerJavaVersion}"
 
     implementation 'org.springframework.boot:spring-boot-starter'
-    implementation group: 'org.freemarker', name: 'freemarker', version: '2.3.29'
+    implementation group: 'org.freemarker', name: 'freemarker', version: '2.3.31'
 
     // Adding activation avoids this runtime error: WARNING: HK2 failure has been detected in a code that does not run in an active Jersey Error scope. ...
     // java.lang.NoClassDefFoundError: javax/activation/DataSource
