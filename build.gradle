@@ -5,7 +5,7 @@ buildscript {
     ext {
         springBootVersion = '2.6.6'
         dockerJavaVersion = '3.2.13'
-        blackDuckCommonVersion = '61.2.2'
+        blackDuckCommonVersion = '62.0.1'
         junitPlatformCustomTestTags = 'docker, battery'
         javaTargetCompatibility = 8
         javaSourceCompatibility = 8
