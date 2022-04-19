@@ -31,62 +31,8 @@ public class Config {
     private static final String INSPECTOR_OS_UBUNTU = "ubuntu";
     private static final String GROUP_PUBLIC = "public";
     private static final String GROUP_PRIVATE = "private";
-    private static final String BLACKDUCK_OPTION_DEPRECATION_MESSAGE = "Support for running Docker Inspector as a standalone utility is being dropped.  In the future, users should run Docker Inspector via Detect.";
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    // Black Duck connection details
-    @ValueDescription(description = "Black Duck URL", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true, deprecationMessage = BLACKDUCK_OPTION_DEPRECATION_MESSAGE)
-    @Value("${blackduck.url:}")
-    private String blackDuckUrl = "";
-
-    @ValueDescription(description = "Black Duck Timeout in seconds", defaultValue = "120", group = Config.GROUP_PUBLIC, deprecated = true, deprecationMessage = BLACKDUCK_OPTION_DEPRECATION_MESSAGE)
-    @Value("${blackduck.timeout:120}")
-    private Integer blackDuckTimeout = 120;
-
-    @ValueDescription(description = "Black Duck token", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true, deprecationMessage = BLACKDUCK_OPTION_DEPRECATION_MESSAGE)
-    @Value("${blackduck.api.token:}")
-    private String blackDuckApiToken = "";
-
-    @ValueDescription(description = "Black Duck Username", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true, deprecationMessage = BLACKDUCK_OPTION_DEPRECATION_MESSAGE)
-    @Value("${blackduck.username:}")
-    private String blackDuckUsername = "";
-
-    @ValueDescription(description = "Black Duck Password", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true, deprecationMessage = BLACKDUCK_OPTION_DEPRECATION_MESSAGE)
-    @Value("${blackduck.password:}")
-    private String blackDuckPassword = "";
-
-    // The properties in this section must be set if you must connect to the Black Duck through a proxy
-    @ValueDescription(description = "Black Duck Proxy Host", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true, deprecationMessage = BLACKDUCK_OPTION_DEPRECATION_MESSAGE)
-    @Value("${blackduck.proxy.host:}")
-    private String blackDuckProxyHost = "";
-
-    @ValueDescription(description = "Black Duck Proxy Port", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true, deprecationMessage = BLACKDUCK_OPTION_DEPRECATION_MESSAGE)
-    @Value("${blackduck.proxy.port:}")
-    private String blackDuckProxyPort = "";
-
-    @ValueDescription(description = "Black Duck Proxy Username", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true, deprecationMessage = BLACKDUCK_OPTION_DEPRECATION_MESSAGE)
-    @Value("${blackduck.proxy.username:}")
-    private String blackDuckProxyUsername = "";
-
-    @ValueDescription(description = "Black Duck Proxy Password", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true, deprecationMessage = BLACKDUCK_OPTION_DEPRECATION_MESSAGE)
-    @Value("${blackduck.proxy.password:}")
-    private String blackDuckProxyPassword = "";
-
-    // If using an https Black Duck server, you can choose to always trust the server certificates
-    @ValueDescription(description = "Black Duck Always Trust Cert?", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = true, deprecationMessage = BLACKDUCK_OPTION_DEPRECATION_MESSAGE)
-    @Value("${blackduck.always.trust.cert:false}")
-    private Boolean blackDuckAlwaysTrustCert = Boolean.FALSE;
-
-    // The default project name will be the Docker image name
-    @ValueDescription(description = "Black Duck Project Name", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true, deprecationMessage = BLACKDUCK_OPTION_DEPRECATION_MESSAGE)
-    @Value("${blackduck.project.name:}")
-    private String blackDuckProjectName = "";
-
-    // The default version name will be Docker image tag
-    @ValueDescription(description = "Black Duck Project Version", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true, deprecationMessage = BLACKDUCK_OPTION_DEPRECATION_MESSAGE)
-    @Value("${blackduck.project.version:}")
-    private String blackDuckProjectVersion = "";
 
     // Working directory
     @ValueDescription(description = "Working Directory Path. If not set, a default of $HOME/blackduck/docker-inspector will be used.", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
@@ -144,16 +90,6 @@ public class Config {
     @ValueDescription(description = "Comma-separated list of directories/files/links (specified as absolute paths) to exclude from the container filesystem", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${output.containerfilesystem.excluded.paths:}")
     private String containerFileSystemExcludedPaths = "";
-
-    // If you want to add a prefix to the code location name, specify it here
-    @ValueDescription(description = "Black Duck CodeLocation prefix", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true, deprecationMessage = BLACKDUCK_OPTION_DEPRECATION_MESSAGE)
-    @Value("${blackduck.codelocation.prefix:}")
-    private String blackDuckCodelocationPrefix = "";
-
-    // If you want to set the code location name, specify it here
-    @ValueDescription(description = "Black Duck CodeLocation name", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = true, deprecationMessage = BLACKDUCK_OPTION_DEPRECATION_MESSAGE)
-    @Value("${blackduck.codelocation.name:}")
-    private String blackDuckCodelocationName = "";
 
     // Path to the blackduck-docker-inspector .jar file
     // Only used by blackduck-docker-inspector.sh
@@ -296,7 +232,7 @@ public class Config {
     @Value("${imageinspector.service.log.length:10000}")
     private Integer imageInspectorServiceLogLength = 10000;
 
-    @ValueDescription(description = "Make no attempts to access network-based resources (the Black Duck server, docker repository)", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Make no attempts to access network-based resources (the docker repository)", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${offline.mode:false}")
     private Boolean offlineMode = Boolean.FALSE;
 
@@ -311,25 +247,6 @@ public class Config {
         defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${help.input.path:}")
     private String helpInputFilePath = "";
-
-    // Environment Variables
-    @Value("${BD_HUB_PASSWORD:}")
-    private String blackDuckLegacyPasswordEnvVar = "";
-
-    @Value("${BD_HUB_TOKEN:}")
-    private String blackDuckLegacyApiTokenEnvVar = "";
-
-    @Value("${BD_PASSWORD:}")
-    private String blackDuckPasswordEnvVar = "";
-
-    @Value("${BD_TOKEN:}")
-    private String blackDuckApiTokenEnvVar = "";
-
-    @Value("${SCAN_CLI_OPTS:}")
-    private String scanCliOptsEnvVar = "";
-
-    @Value("${DOCKER_INSPECTOR_JAVA_OPTS:}")
-    private String dockerInspectorJavaOptsValue = "";
 
     private TreeSet<DockerInspectorOption> publicOptions;
     private Map<String, DockerInspectorOption> optionsByKey;
@@ -392,56 +309,8 @@ public class Config {
         }
     }
 
-    public String getBlackDuckUrl() {
-        return optionsByFieldName.get("blackDuckUrl").getResolvedValue();
-    }
-
-    public Integer getBlackDuckTimeout() {
-        return new Integer(optionsByFieldName.get("blackDuckTimeout").getResolvedValue());
-    }
-
     public Integer getImageInspectorServiceLogLength() {
         return new Integer(optionsByFieldName.get("imageInspectorServiceLogLength").getResolvedValue());
-    }
-
-    public String getBlackDuckApiToken() {
-        return optionsByFieldName.get("blackDuckApiToken").getResolvedValue();
-    }
-
-    public String getBlackDuckUsername() {
-        return unEscape(optionsByFieldName.get("blackDuckUsername").getResolvedValue());
-    }
-
-    public String getBlackDuckPassword() {
-        return optionsByFieldName.get("blackDuckPassword").getResolvedValue();
-    }
-
-    public String getBlackDuckProxyHost() {
-        return optionsByFieldName.get("blackDuckProxyHost").getResolvedValue();
-    }
-
-    public String getBlackDuckProxyPort() {
-        return optionsByFieldName.get("blackDuckProxyPort").getResolvedValue();
-    }
-
-    public String getBlackDuckProxyUsername() {
-        return optionsByFieldName.get("blackDuckProxyUsername").getResolvedValue();
-    }
-
-    public String getBlackDuckProxyPassword() {
-        return optionsByFieldName.get("blackDuckProxyPassword").getResolvedValue();
-    }
-
-    public boolean isBlackDuckAlwaysTrustCert() {
-        return optionsByFieldName.get("blackDuckAlwaysTrustCert").getResolvedValue().equals("true");
-    }
-
-    public String getBlackDuckProjectName() {
-        return unEscape(optionsByFieldName.get("blackDuckProjectName").getResolvedValue());
-    }
-
-    public String getBlackDuckProjectVersion() {
-        return unEscape(optionsByFieldName.get("blackDuckProjectVersion").getResolvedValue());
     }
 
     public String getSharedDirPathLocal() throws IOException {
@@ -494,16 +363,8 @@ public class Config {
         return optionsByFieldName.get("usePlatformDefaultDockerHost").getResolvedValue().equals("true");
     }
 
-    public String getBlackDuckCodelocationPrefix() {
-        return optionsByFieldName.get("blackDuckCodelocationPrefix").getResolvedValue();
-    }
-
     public String getContainerFileSystemExcludedPaths() {
         return optionsByFieldName.get("containerFileSystemExcludedPaths").getResolvedValue();
-    }
-
-    public String getBlackDuckCodelocationName() {
-        return optionsByFieldName.get("blackDuckCodelocationName").getResolvedValue();
     }
 
     public String getDockerImage() {
@@ -604,24 +465,6 @@ public class Config {
         return optionsByFieldName.get("phoneHome").getResolvedValue().equals("true");
     }
 
-    public String getScanCliOptsEnvVar() {
-        return scanCliOptsEnvVar;
-    }
-
-    public String getBlackDuckPasswordEnvVar() {
-        if (StringUtils.isBlank(blackDuckPasswordEnvVar)) {
-            return blackDuckLegacyPasswordEnvVar;
-        }
-        return blackDuckPasswordEnvVar;
-    }
-
-    public String getBlackDuckApiTokenEnvVar() {
-        if (StringUtils.isBlank(blackDuckApiTokenEnvVar)) {
-            return blackDuckLegacyApiTokenEnvVar;
-        }
-        return blackDuckApiTokenEnvVar;
-    }
-
     public boolean isUploadBdio() {
         return optionsByFieldName.get("uploadBdio").getResolvedValue().equals("true");
     }
@@ -700,27 +543,8 @@ public class Config {
         this.dockerImageRepo = null;
         this.dockerPlatformTopLayerId = null;
         this.dockerImageTag = null;
-        this.dockerInspectorJavaOptsValue = null;
         this.dockerTar = null;
-        this.blackDuckAlwaysTrustCert = null;
-        this.blackDuckCodelocationPrefix = null;
-        this.blackDuckCodelocationName = null;
-        this.blackDuckPassword = null;
-        this.blackDuckPasswordEnvVar = null;
-        this.blackDuckApiTokenEnvVar = null;
-        this.blackDuckLegacyApiTokenEnvVar = null;
-        this.blackDuckLegacyPasswordEnvVar = null;
-        this.blackDuckProjectName = null;
-        this.blackDuckProjectVersion = null;
-        this.blackDuckProxyHost = null;
-        this.blackDuckProxyPassword = null;
-        this.blackDuckProxyPort = null;
-        this.blackDuckProxyUsername = null;
-        this.blackDuckTimeout = null;
         this.imageInspectorServiceLogLength = null;
-        this.blackDuckUrl = null;
-        this.blackDuckUsername = null;
-        this.blackDuckApiToken = null;
         this.jarPath = null;
         this.targetImageLinuxDistroOverride = null;
         this.loggingLevel = null;
@@ -730,7 +554,6 @@ public class Config {
         this.containerFileSystemExcludedPaths = null;
         this.outputPath = null;
         this.phoneHome = null;
-        this.scanCliOptsEnvVar = null;
         this.workingDirPath = null;
         this.systemPropertiesPath = null;
         this.uploadBdio = null;

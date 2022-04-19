@@ -26,7 +26,6 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.ComponentScan;
 
 import com.google.gson.Gson;
-import com.synopsys.integration.blackduck.dockerinspector.blackduckclient.BlackDuckClient;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorSystemProperties;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
@@ -49,9 +48,6 @@ public class DockerInspector implements ApplicationRunner {
     private static final Logger logger = LoggerFactory.getLogger(DockerInspector.class);
 
     private static final String DETECT_CALLER_NAME = "Detect";
-
-    @Autowired
-    private BlackDuckClient blackDuckClient;
 
     @Autowired
     private DockerClientManager dockerClientManager;
@@ -170,21 +166,11 @@ public class DockerInspector implements ApplicationRunner {
         dockerInspectorSystemProperties.augmentSystemProperties(config.getSystemPropertiesPath());
         logger.debug(String.format("running from dir: %s", System.getProperty("user.dir")));
         logger.trace(String.format("dockerImageTag: %s", config.getDockerImageTag()));
-        logger.trace(String.format("Black Duck project: %s, version: %s;", config.getBlackDuckProjectName(), config.getBlackDuckProjectVersion()));
-        if (config.isPhoneHome() && !config.isOfflineMode()) {
-            logger.debug("PhoneHome enabled");
-            try {
-                blackDuckClient.phoneHome(deriveDockerEngineVersion(config));
-            } catch (Exception e) {
-                logger.warn(String.format("Unable to phone home: %s", e.getMessage()));
-            }
-        }
         initImageName();
         logger.info(String.format("Inspecting image:tag %s:%s (platform: %s)",
             config.getDockerImageRepo(), config.getDockerImageTag(),
             Optional.ofNullable(config.getDockerImagePlatform()).orElse("<unspecified>")
         ));
-        blackDuckClient.testBlackDuckConnection();
         return true;
     }
 

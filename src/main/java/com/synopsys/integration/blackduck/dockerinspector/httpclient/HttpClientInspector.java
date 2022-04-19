@@ -14,7 +14,6 @@ import java.io.StringReader;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,6 @@ import org.springframework.stereotype.Component;
 import com.google.gson.Gson;
 import com.synopsys.integration.bdio.BdioReader;
 import com.synopsys.integration.bdio.model.SimpleBdioDocument;
-import com.synopsys.integration.blackduck.dockerinspector.blackduckclient.BlackDuckClient;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
@@ -34,7 +32,6 @@ import com.synopsys.integration.blackduck.dockerinspector.output.OutputFiles;
 import com.synopsys.integration.blackduck.dockerinspector.output.Result;
 import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
 import com.synopsys.integration.exception.IntegrationException;
-import com.synopsys.integration.util.NameVersion;
 
 @Component
 public class HttpClientInspector {
@@ -42,12 +39,9 @@ public class HttpClientInspector {
 
     @Autowired
     private FileOperations fileOperations;
-    
-    @Autowired
-    private Config config;
 
     @Autowired
-    private BlackDuckClient blackDuckClient;
+    private Config config;
 
     @Autowired
     private ProgramPaths programPaths;
@@ -85,37 +79,20 @@ public class HttpClientInspector {
                 containerFileSystemPathInContainer, config.getContainerFileSystemExcludedPaths(),
                 config.isOrganizeComponentsByLayer(), config.isIncludeRemovedComponents(),
                 config.isCleanupWorkingDir(), config.getDockerPlatformTopLayerId(),
-                config.getTargetImageLinuxDistroOverride());
+                config.getTargetImageLinuxDistroOverride()
+            );
             logger.trace(String.format("bdioString: %s", bdioString));
             SimpleBdioDocument bdioDocument = toBdioDocument(bdioString);
-            adjustBdio(bdioDocument);
             OutputFiles outputFiles = output.addOutputToFinalOutputDir(bdioDocument, finalDockerTarfile.getImageRepo(), finalDockerTarfile.getImageTag());
-            if (config.isUploadBdio()) {
-                NameVersion projectAndVersion = new NameVersion(bdioDocument.getProject().name, bdioDocument.getProject().version);
-                blackDuckClient.uploadBdio(outputFiles.getBdioFile(), bdioDocument.getBillOfMaterials().spdxName, projectAndVersion);
-            }
             cleanup();
             Result result = Result.createResultSuccess(finalDockerTarfile.getImageRepo(), finalDockerTarfile.getImageTag(), finalDockerTarfile.getFile().getName(),
                 outputFiles.getBdioFile(),
                 outputFiles.getContainerFileSystemFile(),
-                outputFiles.getSquashedImageFile());
+                outputFiles.getSquashedImageFile()
+            );
             return result;
         } catch (IOException e) {
             throw new IntegrationException(e.getMessage(), e);
-        }
-    }
-
-    private void adjustBdio(SimpleBdioDocument bdioDocument) {
-        if (StringUtils.isNotBlank(config.getBlackDuckProjectName())) {
-            bdioDocument.getProject().name = config.getBlackDuckProjectName();
-        }
-        if (StringUtils.isNotBlank(config.getBlackDuckProjectVersion())) {
-            bdioDocument.getProject().version = config.getBlackDuckProjectVersion();
-        }
-        if (StringUtils.isNotBlank(config.getBlackDuckCodelocationName())) {
-            bdioDocument.getBillOfMaterials().spdxName = config.getBlackDuckCodelocationName();
-        } else if (StringUtils.isNotBlank(config.getBlackDuckCodelocationPrefix())) {
-            bdioDocument.getBillOfMaterials().spdxName = String.format("%s_%s", config.getBlackDuckCodelocationPrefix(), bdioDocument.getBillOfMaterials().spdxName);
         }
     }
 

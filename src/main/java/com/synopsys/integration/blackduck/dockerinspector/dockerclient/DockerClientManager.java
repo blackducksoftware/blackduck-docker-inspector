@@ -11,7 +11,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -244,12 +243,7 @@ public class DockerClientManager {
             .withExposedPorts(exposedPort)
             .withHostConfig(hostConfig)
             .withCmd(cmd.split(" "))) {
-
-            List<String> envAssignments = new ArrayList<>();
-            if (StringUtils.isBlank(config.getBlackDuckProxyHost()) && !StringUtils.isBlank(config.getScanCliOptsEnvVar())) {
-                envAssignments.add(String.format("SCAN_CLI_OPTS=%s", config.getScanCliOptsEnvVar()));
-            }
-            createContainerCmd.withEnv(envAssignments);
+            
             CreateContainerResponse containerResponse = createContainerCmd.exec();
             String containerId = containerResponse.getId();
 
