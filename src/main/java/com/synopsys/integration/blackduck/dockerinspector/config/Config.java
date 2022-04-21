@@ -35,7 +35,7 @@ public class Config {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // Working directory
-    @ValueDescription(description = "Working Directory Path. If not set, a default of $HOME/blackduck/docker-inspector will be used.", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Working Directory Path. If not set, a default of $HOME/blackduck/docker-inspector will be used.", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${working.dir.path:}")
     private String workingDirPath = "";
 
@@ -67,7 +67,7 @@ public class Config {
     private Long serviceTimeout = 600000L;
 
     // Logging level: ERROR, WARN, INFO, DEBUG, TRACE
-    @ValueDescription(description = "Logging Level (WARN, INFO, DEBUG, TRACE)", defaultValue = "INFO", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Logging Level (WARN, INFO, DEBUG, TRACE)", defaultValue = "INFO", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${logging.level.com.synopsys:INFO}")
     private String loggingLevel = "";
 
@@ -91,18 +91,12 @@ public class Config {
     @Value("${output.containerfilesystem.excluded.paths:}")
     private String containerFileSystemExcludedPaths = "";
 
-    // Path to the blackduck-docker-inspector .jar file
-    // Only used by blackduck-docker-inspector.sh
-    @ValueDescription(description = "Black Duck Docker Inspector .jar file path", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
-    @Value("${jar.path:}")
-    private String jarPath = "";
-
     @ValueDescription(description = "Use platform's default DOCKER_HOST value? Set to false if you want to override DOCKER_HOST", defaultValue = "true", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${use.platform.default.docker.host:true}")
     private Boolean usePlatformDefaultDockerHost = Boolean.TRUE;
 
     // The following properties should not normally be set/changed by the user
-    @ValueDescription(description = "Docker Image name:tag", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Docker Image name:tag", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${docker.image:}")
     private String dockerImage = "";
 
@@ -110,11 +104,11 @@ public class Config {
     @Value("${docker.image.platform:}")
     private String dockerImagePlatform = "";
 
-    @ValueDescription(description = "Docker or OCI image tarfile path", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Docker or OCI image tarfile path", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${docker.tar:}")
     private String dockerTar = "";
 
-    @ValueDescription(description = "The ID (shown in the 'IMAGE ID' column of 'docker images' output) of the target Docker image. The target image must already be local (must appear in the output of 'docker images').", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "The ID (shown in the 'IMAGE ID' column of 'docker images' output) of the target Docker image. The target image must already be local (must appear in the output of 'docker images').", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${docker.image.id:}")
     private String dockerImageId = "";
 
@@ -122,7 +116,7 @@ public class Config {
     @Value("${docker.image.repo:}")
     private String dockerImageRepo = "";
 
-    @ValueDescription(description = "To ignore components from platform layers: specify the ID (from docker inspect <image:tag>: last of RootFS.Layers) of the top layer of the platform image", defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "To ignore components from platform layers: specify the ID (from docker inspect <image:tag>: last of RootFS.Layers) of the top layer of the platform image", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${docker.platform.top.layer.id:}")
     private String dockerPlatformTopLayerId = "";
 
@@ -137,14 +131,6 @@ public class Config {
     @ValueDescription(description = "caller.version", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${caller.version:}")
     private String callerVersion = "";
-
-    @ValueDescription(description = "Phone Home?", defaultValue = "true", group = Config.GROUP_PRIVATE, deprecated = false)
-    @Value("${phone.home:true}")
-    private Boolean phoneHome = Boolean.TRUE;
-
-    @ValueDescription(description = "Upload BDIO?", defaultValue = "true", group = Config.GROUP_PUBLIC, deprecated = false)
-    @Value("${upload.bdio:true}")
-    private Boolean uploadBdio = Boolean.TRUE;
 
     @ValueDescription(description = "Repository name for the Docker Inspector images", defaultValue = "blackducksoftware", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${inspector.repository:blackducksoftware}")
@@ -239,7 +225,7 @@ public class Config {
     @ValueDescription(description = "The path to a file or directory to which help output will be written in markdown format. " +
         "If not set, help will be written to stdout. If set, the directory must exist; the file will be created if it does not exist. " +
         "If the path to a directory is provided, Docker Inspector will generate the filename automatically",
-        defaultValue = "", group = Config.GROUP_PUBLIC, deprecated = false)
+        defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${help.output.path:}")
     private String helpOutputFilePath = "";
 
@@ -461,14 +447,6 @@ public class Config {
         return optionsByFieldName.get("callerVersion").getResolvedValue();
     }
 
-    public boolean isPhoneHome() {
-        return optionsByFieldName.get("phoneHome").getResolvedValue().equals("true");
-    }
-
-    public boolean isUploadBdio() {
-        return optionsByFieldName.get("uploadBdio").getResolvedValue().equals("true");
-    }
-
     public boolean isCleanupTargetImage() {
         return optionsByFieldName.get("cleanupTargetImage").getResolvedValue().equals("true");
     }
@@ -545,7 +523,6 @@ public class Config {
         this.dockerImageTag = null;
         this.dockerTar = null;
         this.imageInspectorServiceLogLength = null;
-        this.jarPath = null;
         this.targetImageLinuxDistroOverride = null;
         this.loggingLevel = null;
         this.outputIncludeContainerfilesystem = null;
@@ -553,10 +530,8 @@ public class Config {
         this.usePlatformDefaultDockerHost = null;
         this.containerFileSystemExcludedPaths = null;
         this.outputPath = null;
-        this.phoneHome = null;
         this.workingDirPath = null;
         this.systemPropertiesPath = null;
-        this.uploadBdio = null;
         this.inspectorRepository = null;
         this.cleanupInspectorContainer = null;
         this.cleanupInspectorImage = null;
