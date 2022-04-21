@@ -11,7 +11,7 @@ redirects to the CentOS inspector
 service, which can inspect a Red Hat image. If you know
 that most of your images have either RPM or APK databases, you can improve performance by configuring
 ${solution_name} to send requests to the CentOS (RPM) or Alpine (APK) image inspector service using
-the property *imageinspector.service.distro.default*.
+the ${solution_name} property *imageinspector.service.distro.default*.
 
 In host mode (the default), ${solution_name} automatically uses the Docker engine to pull as
 needed from Docker Hub
@@ -23,7 +23,7 @@ between the ${solution_name} utility and the three service containers.
 
 In container mode, start the container running ${solution_name} and the three image inspector container-based services such that
 all four containers share a mounted volume and can communicate with each other using HTTP GET operations using base URLs that you provide.
-For more information, refer to [Deployment](deployment.md).
+For more information, refer to [Deploying](deployment.md).
 
 ### Execution phases
 
@@ -46,9 +46,8 @@ installed packages.
 
 The following steps are performed back on the host when the request to the image inspector service returns:
 
-1. Uploads the BDIO file to Black Duck.  Note that this can be disabled.
-2. Copies the output files to the output directory.
-3. Stops/removes the image inspector container.  Note that this can be disabled.
+1. Returns the output files (BDIO and signature and binary scan targets) to ${detect_product_name} by copying them to the output directory.
+1. Stops/removes the image inspector container.  Note that this can be disabled.
 
 #### Container mode
 
@@ -58,7 +57,7 @@ base URLs that you provide:
 * One container for ${solution_name}.
 * One container for each of the three image inspector services: Alpine, CentOS, and Ubuntu.
 
-In container mode, you must provide the image in a .tar file created with the *docker save* command.
+In container mode you must provide the target image in a .tar file with one of the supported formats; you cannot specify that target image by repo:tag.
 
 ${solution_name}:
 
@@ -74,5 +73,4 @@ The following steps are performed inside the image inspector container:
 
 The following steps are performed back in the ${solution_name} container when the request to the image inspector service returns:
 
-1. Uploads the BDIO file to Black Duck. Note that this can be disabled.
-1. Copies the output files to the output directory.
+1. Returns the output files (BDIO and signature and binary scan targets) to ${detect_product_name} by copying them to the output directory.
