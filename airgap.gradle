@@ -17,7 +17,6 @@ task pullSaveInspectorImages() {
 task createAirGapZip(type: Zip, dependsOn: [build, pullSaveInspectorImages]) {
     from("${buildDir}/libs") { include "${project.name}-${version}.jar" }
     from("${airGapFolder}") { include '*.tar' }
-    from("${buildDir}") { include 'blackduck-docker-inspector.sh' }
     archiveName("${airGapZipName}")
     destinationDir(file("${airGapFolder}"))
 }

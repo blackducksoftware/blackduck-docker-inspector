@@ -21,7 +21,6 @@ import com.synopsys.integration.blackduck.dockerinspector.programversion.Program
 @Tag("integration")
 public class ImageCleanupTest {
 
-    private static final String USERNAME = "You Zer";
     private static final String PROJECT_NAME = "Pro Ject";
     private static final String PROJECT_VERSION = "Ver Sion";
     private static final String TARGET_IMAGE_NAME = "alpine";
@@ -73,11 +72,12 @@ public class ImageCleanupTest {
         }
 
         String programVersion = pgmVerObj.getProgramVersion();
-        List<String> partialCmd = Arrays.asList("build/blackduck-docker-inspector.sh", "--upload.bdio=false", String.format("--blackduck.username=\"%s\"", USERNAME), String.format("--blackduck.project.name=\"%s\"", PROJECT_NAME),
-            String.format("--blackduck.project.version=\"%s\"", PROJECT_VERSION), String.format("--jar.path=build/libs/blackduck-docker-inspector-%s.jar", programVersion),
+        List<String> partialCmd = Arrays.asList("java", "-jar", String.format("build/libs/blackduck-docker-inspector-%s.jar", programVersion),
+            String.format("--bdio.project.name=\"%s\"", PROJECT_NAME),
+            String.format("--bdio.project.version=\"%s\"", PROJECT_VERSION),
             String.format("--output.path=%s/output", TestUtils.TEST_DIR_REL_PATH),
             "--output.include.dockertarfile=true",
-            "--output.include.containerfilesystem=true", "--blackduck.always.trust.cert=true", "--include.target.image=true", "--include.inspector.image=true"
+            "--output.include.containerfilesystem=true", "--include.target.image=true", "--include.inspector.image=true"
         );
         List<String> fullCmd = new ArrayList<>();
         fullCmd.addAll(partialCmd);

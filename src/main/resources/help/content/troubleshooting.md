@@ -45,39 +45,6 @@ Solution/workaround: Set the character encoding to UTF-8 when invoking Java:
                      
     java -Dfile.encoding=UTF-8 ...
     
-### Problem: You must run ${solution_name} on an unsupported operating system.
-
-Solution/workaround: You may be able to run ${solution_name} within a Linux Docker container running on
-your unsupported operating system using the following process.
-
-Warning: This method involves running a privileged container
-which will not be acceptable in some environments.
-
-On your unsupported operating system, run:
-
-    docker run -it -d --name inspectorhost --privileged ${image_repo_organization}/${inspector_image_name_base}-ubuntu:3.0.0
-    docker attach inspectorhost
-
-Then, in the inspectorhost container, run:
-
-    mkdir -p /opt/blackduck/dockerinspector
-    cd /opt/blackduck/dockerinspector
-    apt-get update
-    apt-get install -y apt-transport-https ca-certificates curl software-properties-common default-jre vim
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-    apt-get install -y docker-ce
-    dockerd --storage-driver=vfs  &
-    curl -O ${script_hosting_scheme}://${source_repo_organization}.${script_hosting_domain}/${project_name}/${script_name}; chmod +x ${script_name}
-    dockerd --storage-driver=vfs 2> dockerd_stderr.log > dockerd_stdout.log &
-    ./${script_name}  ...
-
-It's possible that additional steps such as configuration of dockerd, logging into the Docker registry,
-and others, are required to give Docker running inside the inspectorhost container access to the Docker
-images that ${solution_name} must pull. One way to reduce extra steps is to save the target
-Docker image as a .tar file on your computer,
-use *docker cp* to copy it into the container, and run ${solution_name} on that .tar file.
-
 ### Problem: Property values are set in unexpected ways.
 
 Possible cause: ${solution_name} is built using the Spring Boot application framework.

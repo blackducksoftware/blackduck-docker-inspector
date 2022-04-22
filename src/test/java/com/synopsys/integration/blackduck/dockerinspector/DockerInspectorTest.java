@@ -9,8 +9,6 @@ import java.nio.file.attribute.PosixFilePermission;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
@@ -46,7 +44,7 @@ public class DockerInspectorTest {
     public static void setUpBeforeClass() throws Exception {
         programVersion = new ProgramVersion();
         programVersion.init();
-        CommandCreator commandCreator = new CommandCreator(new Random(), programVersion, getConfiguredAlternateJavaCmd());
+        CommandCreator commandCreator = new CommandCreator(programVersion);
         integrationTestRunner = new IntegrationTestRunner(commandCreator);
         dateTimeStamp = getTimestamp();
         printDockerVersion();
@@ -300,7 +298,7 @@ public class DockerInspectorTest {
             .setRequireBdioMatch(false)
             .setMinNumberOfComponentsExpected(10)
             .setOutputBomMustContainExternalSystemTypeId("@opensuse")
-            .setCodelocationName("opensuse_portus_opensuse_2.4_RPM")
+            .setCodelocationName("opensuse_portus_2.4_RPM")
             .build();
 
         testImageUsingExistingContainer(testConfig);
@@ -758,12 +756,5 @@ public class DockerInspectorTest {
                 TestUtils.execCmd(String.format("docker rm -f %s", containerName), 120000L, false, null);
             }
         }
-    }
-
-    private static String getConfiguredAlternateJavaCmd() {
-        Map<String, String> env = System.getenv();
-        String alternateJavaCmd = env.get("TEST_ALTERNATE_JAVA_CMD");
-        System.out.printf("alternateJavaCmd: %s\n", alternateJavaCmd);
-        return alternateJavaCmd;
     }
 }

@@ -88,12 +88,6 @@ task produceFinalZip(type: Zip, dependsOn: [build, writeVersionToPropertiesFile]
     }
 }
 
-task buildScript(type: Copy) {
-    from "src/main/resources/${project.name}.sh"
-    into 'build'
-    filter(ReplaceTokens, tokens: [VERSION: version, INSPECTOR_IMAGE_FAMILY: project.ext.inspectorImageFamily])
-}
-
 task docsGeneratedClean(type: Delete) {
     delete 'docs/generated'
 }
@@ -138,12 +132,6 @@ task servedocs() {
             workingDir "docs"
         }
     }
-}
-
-task createVersionedScript(type: Copy) {
-    from "build/${project.name}.sh"
-    into 'build'
-    rename("${project.name}.sh", "${project.name}-${version}.sh")
 }
 
 task removeTestImage(type: Exec) {
@@ -251,7 +239,7 @@ task checkVersion() {
 task buildTestTarfiles(dependsOn: [buildTestDockerTarfile, buildWhTestDockerTarfile, buildAggTestDockerTarfile,   \
           buildAlpineTestDockerTarfile, buildAlpine36TestDockerTarfile, buildUbuntuTestDockerTarfile]) {}
 
-task testPrep(dependsOn: [docs, buildTestTarfiles, buildScript, createVersionedScript]) {
+task testPrep(dependsOn: [docs, buildTestTarfiles]) {
     doLast {
         project.file('test/containerShared/target').mkdirs()
         project.file('test/containerShared/output').mkdirs()
