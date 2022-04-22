@@ -14,6 +14,7 @@ import java.io.StringReader;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,6 +84,7 @@ public class HttpClientInspector {
             );
             logger.trace(String.format("bdioString: %s", bdioString));
             SimpleBdioDocument bdioDocument = toBdioDocument(bdioString);
+            adjustBdio(bdioDocument);
             OutputFiles outputFiles = output.addOutputToFinalOutputDir(bdioDocument, finalDockerTarfile.getImageRepo(), finalDockerTarfile.getImageTag());
             cleanup();
             Result result = Result.createResultSuccess(finalDockerTarfile.getImageRepo(), finalDockerTarfile.getImageTag(), finalDockerTarfile.getFile().getName(),
@@ -93,6 +95,20 @@ public class HttpClientInspector {
             return result;
         } catch (IOException e) {
             throw new IntegrationException(e.getMessage(), e);
+        }
+    }
+
+    private void adjustBdio(SimpleBdioDocument bdioDocument) {
+        if (StringUtils.isNotBlank(config.getBdioProjectName())) {
+            bdioDocument.getProject().name = config.getBdioProjectName();
+        }
+        if (StringUtils.isNotBlank(config.getBdioProjectVersion())) {
+            bdioDocument.getProject().version = config.getBdioProjectVersion();
+        }
+        if (StringUtils.isNotBlank(config.getBdioCodelocationName())) {
+            bdioDocument.getBillOfMaterials().spdxName = config.getBdioCodelocationName();
+        } else if (StringUtils.isNotBlank(config.getBdioCodelocationPrefix())) {
+            bdioDocument.getBillOfMaterials().spdxName = String.format("%s_%s", config.getBdioCodelocationPrefix(), bdioDocument.getBillOfMaterials().spdxName);
         }
     }
 

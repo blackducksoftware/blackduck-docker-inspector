@@ -34,6 +34,26 @@ public class Config {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    // The default project name will be the Docker image name
+    @ValueDescription(description = "BDIO Project Name", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
+    @Value("${bdio.project.name:}")
+    private String bdioProjectName = "";
+
+    // The default version name will be Docker image tag
+    @ValueDescription(description = "BDIO Project Version", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
+    @Value("${bdio.project.version:}")
+    private String bdioProjectVersion = "";
+
+    // If you want to add a prefix to the code location name, specify it here
+    @ValueDescription(description = "BDIO CodeLocation prefix", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
+    @Value("${bdio.codelocation.prefix:}")
+    private String bdioCodelocationPrefix = "";
+
+    // If you want to set the code location name, specify it here
+    @ValueDescription(description = "BDIO CodeLocation name", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
+    @Value("${bdio.codelocation.name:}")
+    private String bdioCodelocationName = "";
+
     // Working directory
     @ValueDescription(description = "Working Directory Path. If not set, a default of $HOME/blackduck/docker-inspector will be used.", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${working.dir.path:}")
@@ -299,6 +319,22 @@ public class Config {
         return new Integer(optionsByFieldName.get("imageInspectorServiceLogLength").getResolvedValue());
     }
 
+    public String getBdioProjectName() {
+        return unEscape(optionsByFieldName.get("bdioProjectName").getResolvedValue());
+    }
+
+    public String getBdioProjectVersion() {
+        return unEscape(optionsByFieldName.get("bdioProjectVersion").getResolvedValue());
+    }
+
+    public String getBdioCodelocationPrefix() {
+        return optionsByFieldName.get("bdioCodelocationPrefix").getResolvedValue();
+    }
+
+    public String getBdioCodelocationName() {
+        return optionsByFieldName.get("bdioCodelocationName").getResolvedValue();
+    }
+
     public String getSharedDirPathLocal() throws IOException {
         String givenSharedDirPathLocal = optionsByFieldName.get("sharedDirPathLocal").getResolvedValue();
         if (StringUtils.isNotBlank(givenSharedDirPathLocal)) {
@@ -522,6 +558,10 @@ public class Config {
         this.dockerPlatformTopLayerId = null;
         this.dockerImageTag = null;
         this.dockerTar = null;
+        this.bdioProjectName = null;
+        this.bdioProjectVersion = null;
+        this.bdioCodelocationPrefix = null;
+        this.bdioCodelocationName = null;
         this.imageInspectorServiceLogLength = null;
         this.targetImageLinuxDistroOverride = null;
         this.loggingLevel = null;
