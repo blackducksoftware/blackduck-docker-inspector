@@ -24,6 +24,7 @@ buildscript {
 }
 plugins {
     id 'org.springframework.boot' version "${springBootVersion}" apply false
+    id "com.dorongold.task-tree" version "2.1.0"
 }
 
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
