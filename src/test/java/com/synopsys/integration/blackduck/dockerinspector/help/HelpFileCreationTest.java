@@ -28,9 +28,9 @@ public class HelpFileCreationTest {
 
     @Test
     public void test() throws IOException {
-        final ProgramVersion programVersion = new ProgramVersion();
+        ProgramVersion programVersion = new ProgramVersion();
         programVersion.init();
-        final File helpFile = new File("docs/generated/overview.md");
+        File helpFile = new File("docs/generated/overview.md");
         assertTrue(helpFile.exists());
     }
 }

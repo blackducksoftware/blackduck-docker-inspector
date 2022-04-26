@@ -120,7 +120,6 @@ public class DockerInspectorTest {
         List<String> additionalArgs = new ArrayList<>();
         additionalArgs.add("--bdio.organize.components.by.layer=true");
         additionalArgs.add("--bdio.include.removed.components=true");
-        additionalArgs.add("--blackduck.codelocation.prefix=layeredIncludeRemoved");
         final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU;
 
         TestConfig testConfig = new TestConfigBuilder()

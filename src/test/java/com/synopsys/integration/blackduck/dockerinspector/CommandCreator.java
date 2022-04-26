@@ -25,7 +25,7 @@ public class CommandCreator {
         cmd.add("-jar");
         cmd.add(String.format("build/libs/blackduck-docker-inspector-%s.jar", programVersion.getProgramVersion()));
         cmd.add("--upload.bdio=false");
-        cmd.add(String.format("--blackduck.codelocation.name=%s", codelocationName));
+        cmd.add(String.format("--bdio.codelocation.name=%s", codelocationName));
         cmd.add(String.format("--output.path=%s/output", TestUtils.TEST_DIR_REL_PATH));
         cmd.add("--output.include.containerfilesystem=true");
         if (repo != null) {
