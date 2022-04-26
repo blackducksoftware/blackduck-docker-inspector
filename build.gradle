@@ -145,7 +145,15 @@ task removeTestBaseImage(type: Exec) {
     commandLine "docker", "rmi", "centos@sha256:773bb32cbd1d171da7df52de8d7b731320748707b821bdbabb885d6eda894e87"
 }
 
-task createTestDockerfile(type: Dockerfile) {
+task createTestImagesDir() {
+    doLast {
+        File imagesDir = new File("${buildDir}", "images")
+        File testImagesDir = new File("${imagesDir}", "test")
+        testImagesDir.mkdirs()
+    }
+}
+
+task createTestDockerfile(type: Dockerfile, dependsOn: createTestImagesDir) {
     destFile = project.file("${buildDir}/images/test/centos_minus_vim_plus_bacula/Dockerfile")
     println "destFile: ${destFile}"
     from 'centos@sha256:773bb32cbd1d171da7df52de8d7b731320748707b821bdbabb885d6eda894e87'
@@ -156,18 +164,18 @@ task createTestDockerfile(type: Dockerfile) {
         bacula-console-5.2.13-23.1.el7'
 }
 
-task buildTestDockerImage(type: Exec, dependsOn: [removeTestBaseImage, removeTestImage, createTestDockerfile]) {
+task buildTestDockerImage(type: Exec, dependsOn: [removeTestBaseImage, removeTestImage, createTestImagesDir, createTestDockerfile]) {
     commandLine "docker", "build", "--no-cache", "--tag", "blackducksoftware/centos_minus_vim_plus_bacula:1.0",   \
           "${buildDir}/images/test/centos_minus_vim_plus_bacula"
 }
 
-task buildTestDockerTarfile(type: Exec, dependsOn: buildTestDockerImage) {
+task buildTestDockerTarfile(type: Exec, dependsOn: [createTestImagesDir, buildTestDockerImage]) {
     outputs.files file("${buildDir}/images/test/centos_minus_vim_plus_bacula.tar")
     commandLine "docker", "save", "-o", "${buildDir}/images/test/centos_minus_vim_plus_bacula.tar",   \
           "blackducksoftware/centos_minus_vim_plus_bacula:1.0"
 }
 
-task createWhTestDockerfile(type: Dockerfile) {
+task createWhTestDockerfile(type: Dockerfile, dependsOn: createTestImagesDir) {
     destFile = project.file("${buildDir}/images/test/whiteouttest/Dockerfile")
     println "destFile: ${destFile}"
     from 'ubuntu@sha256:3097ac92b852f878f802c22a38f97b097b4084dbef82893ba453ba0297d76a6a'
@@ -186,7 +194,7 @@ task removeWhBaseImage(type: Exec) {
     commandLine "docker", "rmi", "ubuntu@sha256:3097ac92b852f878f802c22a38f97b097b4084dbef82893ba453ba0297d76a6a"
 }
 
-task buildWhTestDockerImage(type: Exec, dependsOn: [removeWhBaseImage, removeWhImage, createWhTestDockerfile]) {
+task buildWhTestDockerImage(type: Exec, dependsOn: [removeWhBaseImage, removeWhImage, createTestImagesDir, createWhTestDockerfile]) {
     commandLine "docker", "build", "--no-cache", "--tag", "blackducksoftware/whiteouttest:1.0", "${buildDir}/images/test/whiteouttest"
 }
 
@@ -206,19 +214,19 @@ task pullUbuntu1404(type: Exec) {
     commandLine "docker", "pull", "ubuntu@sha256:71529e96591eb36a4100cd0cc5353ff1a2f4ee7a85011e3d3dd07cb5eb524a3e"
 }
 
-task buildAlpineTestDockerTarfile(type: Exec, dependsOn: pullAlpineLatest) {
+task buildAlpineTestDockerTarfile(type: Exec, dependsOn: [pullAlpineLatest, createTestImagesDir]) {
     commandLine "docker", "save", "-o", "${buildDir}/images/test/alpine.tar", "alpine:latest"
 }
 
-task buildUbuntuTestDockerTarfile(type: Exec, dependsOn: pullUbuntu1404) {
+task buildUbuntuTestDockerTarfile(type: Exec, dependsOn: [pullUbuntu1404, createTestImagesDir]) {
     commandLine "docker", "save", "-o", "${buildDir}/images/test/ubuntu1404.tar", "ubuntu@sha256:71529e96591eb36a4100cd0cc5353ff1a2f4ee7a85011e3d3dd07cb5eb524a3e"
 }
 
-task buildAlpine36TestDockerTarfile(type: Exec, dependsOn: pullAlpine36) {
+task buildAlpine36TestDockerTarfile(type: Exec, dependsOn: [pullAlpine36, createTestImagesDir]) {
     commandLine "docker", "save", "-o", "${buildDir}/images/test/alpine36.tar", "alpine@sha256:de5701d6a3a36dc6a5db260d21be0422fd30dd2d158c1e048b34263e73205cb6"
 }
 
-task buildAggTestDockerTarfile(type: Exec, dependsOn: [buildTestDockerImage, buildWhTestDockerImage]) {
+task buildAggTestDockerTarfile(type: Exec, dependsOn: [createTestImagesDir, buildTestDockerImage, buildWhTestDockerImage]) {
     commandLine "docker", "save", "-o", "${buildDir}/images/test/aggregated.tar", "blackducksoftware/centos_minus_vim_plus_bacula:1.0",   \
           "blackducksoftware/whiteouttest:1.0"
 }
@@ -252,7 +260,7 @@ task cleanExtras(type: Delete, dependsOn: docsGeneratedClean) {
 }
 
 clean.dependsOn cleanExtras
-test.dependsOn testPrep
+build.dependsOn testPrep
 
 publishing {
     publications {
