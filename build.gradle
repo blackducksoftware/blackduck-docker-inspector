@@ -260,7 +260,7 @@ task cleanExtras(type: Delete, dependsOn: docsGeneratedClean) {
 }
 
 clean.dependsOn cleanExtras
-build.dependsOn testPrep
+test.dependsOn testPrep
 
 publishing {
     publications {
