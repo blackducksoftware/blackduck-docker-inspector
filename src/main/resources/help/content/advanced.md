@@ -176,65 +176,6 @@ for inspecting images built from dpkg-based Linux distros, and the CentOS image 
 for inspecting images built from rpm-based Linux distributions. It doesn't matter which service receives
 the request; any service redirects if necessary.
 
-### Concurrent execution
-
-You can inspect multiple images in parallel on the same computer if you (a) directly invoke the .jar file, and (b) leave the services running. For example:
-
-    # Get the latest ${script_name}
-    curl -O  ${script_hosting_scheme}://${source_repo_organization}.${script_hosting_domain}/${project_name}/${script_name}
-    chmod +x ./${script_name}
- 
-    # Determine the current ${solution_name} version
-    inspectorVersion=$(grep "^version=" ${script_name}|cut -d'"' -f2)
- 
-    # Download the latest ${solution_name} .jar file to the current dir
-    ./${script_name} --pulljar
- 
-    # Execute multiple inspections in parallel
-    java -jar ./${project_name}-${r"${inspectorVersion}"}.jar --blackduck.url={Black Duck url} --blackduck.username={Black Duck username} --docker.image=alpine:3.5 --cleanup.inspector.container=false &
-    # Allow time for the image inspector service to start before starting the rest of the runs (do this for each image inspector type that you use: alpine, centos, ubuntu)
-    java -jar ./${project_name}-${r"${inspectorVersion}"}.jar --blackduck.url={Black Duck url} --blackduck.username={Black Duck username} --docker.image=alpine:3.4 --cleanup.inspector.container=false &
-    java -jar ./${project_name}-${r"${inspectorVersion}"}.jar --blackduck.url={Black Duck url} --blackduck.username={Black Duck username} --docker.image=alpine:3.3 --cleanup.inspector.container=false &
-
-### Alternative methods for setting property values
-
-${solution_name} gets its property values from
-[Spring Boot's configuration mechanism](${spring_boot_config_doc_url}).
-${solution_name} users can leverage Spring Boot capabilities beyond command line arguments
-and environment variables; for example, hierarchy of property files and placeholders
-to manage properties in more sophisticated ways.
-
-### Passing passwords and other values with increased security
-
-For greater security, sensitive property values such as passwords can be set through the environment variables
-using one of the Spring Boot configuration mechanisms previously mentioned.
-
-For example, instead of passing *--blackduck.password=mypassword* on the command line, you can do the following:
-
-    export BLACKDUCK_PASSWORD=mypassword
-    ./${script_name} --blackduck.url=http://blackduck.mydomain.com:8080/ --blackduck.username=myusername --docker.image=ubuntu:latest
-
-Refer to [Spring Boot's configuration mechanism](${spring_boot_config_doc_url})
-for more information.
-
-### Air Gap mode
-
-In ${solution_name} versions 6.2.0 and higher, Black Duck provides an archive containing all files required
-to run ${solution_name} without requiring access to the internet. To download the Air Gap archive, run the command:
-
-    ./${script_name} --pullairgapzip
-    
-To create the Docker images from the Air Gap archive required by ${solution_name}, run the commands:
-
-    unzip ${project_name}-{version}-air-gap.zip
-    docker load -i ${inspector_image_name_base}-alpine.tar
-    docker load -i ${inspector_image_name_base}-centos.tar
-    docker load -i ${inspector_image_name_base}-ubuntu.tar
-    
-To run in Air Gap mode, use the command:
-
-    ./${script_name} --upload.bdio=false --jar.path=./${project_name}-{version}.jar --docker.tar={tarfile}
-
 ### Configuring ${solution_name} for your Docker Engine and registry
 
 If you invoke ${solution_name} with an image reference; in other words, a repo:tag value versus a .tar file,
@@ -309,34 +250,16 @@ could run ${detect_product_name} like this:
 ./detect.sh --detect.docker.image=ubuntu:latest --detect.docker.passthrough.output.containerfilesystem.excluded.paths=/etc,/usr/bin
 ```
 
-### Relocating ${solution_name}'s working directories
-
-Docker Inspector uses 3 directories:
-
-1. One that ${script_name} downloads the ${solution_name} .jar file into (controlled via environment variable DOCKER_INSPECTOR_JAR_DIR)
-1. One that ${solution_name} shares with its image inspector containers (controlled via the shared.dir.path.local property)
-1. One for other files (controlled via properety working.dir.path)
-
-By default, ${solution_name} creates a temporary directory under /tmp for each purpose, but each directory can be relocated.
-If you want to avoid /tmp, you could relocate all three by doing something similar to this:
-````
-# mkdir /opt/tmp/jar # Create a dir for the ${solution_name} .jar download
-# mkdir /opt/tmp/working # Create a dir ${solution_name} working dir
-# mkdir /opt/tmp/shared # Create a dir that ${solution_name} will share with its image inspector containers
-export DOCKER_INSPECTOR_JAR_DIR=/opt/tmp/jar
-./${script_name} --working.dir.path=/opt/tmp/working --shared.dir.path.local=/opt/tmp/shared ...
-````
-
 ### OCI Image support
 
 ${solution_name} supports [OCI image](https://github.com/opencontainers/image-spec/blob/main/spec.md) archives (.tar files)
-passed to it via the docker.tar property.
+passed to it via the ${detect_product_name} detect.docker.tar property.
 
 ${solution_name} derives the image repo:tag value for each manifest in the index.json file from an
 annotation with key 'org.opencontainers.image.ref.name' if it is present.
 
-If the OCI archive contains multiple images, ${solution_name} constructs the target repo:tag from the values of properties docker.image.repo
-and docker.image.tag (if docker.image.tag is not set it defaults to "latest"), and looks for a manifest annotation with key 'org.opencontainers.image.ref.name'
-that has value matching the constructed target repo:tag. If a match is found, ${solution_name} inspects the matching image. If no match is found, or docker.image.repo
+If the OCI archive contains multiple images, ${solution_name} constructs the target repo:tag from the values of ${detect_product_name} properties detect.docker.passthrough.docker.image.repo
+and detect.docker.passthrough.docker.image.tag (if detect.docker.passthrough.docker.image.tag is not set it defaults to "latest"), and looks for a manifest annotation with key 'org.opencontainers.image.ref.name'
+that has value matching the constructed target repo:tag. If a match is found, ${solution_name} inspects the matching image. If no match is found, or detect.docker.passthrough.docker.image.repo
 is not set, ${solution_name} fails.
 
