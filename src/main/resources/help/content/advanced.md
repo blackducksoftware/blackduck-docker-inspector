@@ -133,10 +133,10 @@ so you would run `docker inspect ubuntu:latest`.
 sha256:b079b3fa8d1b4b30a71a6e81763ed3da1327abaf0680ed3ed9f00ad1d5de5e7c. (Because the *latest* tag moves frequently,
 the top layer ID for ubuntu:latest changes over time.)
 
-Set the value of the ${solution_name} property *docker.platform.top.layer.id* to the platform top layer ID.
+Set the value of the ${detect_product_name} property *detect.docker.platform.top.layer.id* to the platform top layer ID.
 For example:
 
-    ./${script_name} ... --docker.platform.top.layer.id=sha256:b079b3fa8d1b4b30a71a6e81763ed3da1327abaf0680ed3ed9f00ad1d5de5e7c
+    {${detect_product_name} command} ... --docker.platform.top.layer.id=sha256:b079b3fa8d1b4b30a71a6e81763ed3da1327abaf0680ed3ed9f00ad1d5de5e7c
 
 In this mode, the container file system and/or container file system squashed image produced by ${solution_name}
  only contains files added to the image by application layers. If the Black Duck signature scanner is run on this file,
